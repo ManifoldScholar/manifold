@@ -14,5 +14,14 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+!/tmp/pids
+!/tmp/pids/.keep
 !/log/.keep
 !/tmp/.keep
+
+# Ignore developer tools and IDE files
+/.idea
+/*.iml
+/public/system
+/epubs
+config/secrets.yml

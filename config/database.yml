@@ -1,25 +1,43 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
-default: &default
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
+<%
 
-development:
-  <<: *default
-  database: db/development.sqlite3
+  def boxen?; ENV['BOXEN_HOME']; end
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: db/test.sqlite3
+  url  = ENV["BOXEN_POSTGRESQL_URL"]
+  port = ENV["BOXEN_POSTGRESQL_PORT"]
+
+  if boxen?
+    db = 'manifold-api_development'
+  else
+    user = ENV["RAILS_DB_USER"]
+    pass = ENV["RAILS_DB_PASS"]
+    db   = ENV["RAILS_DB_NAME"]
+  end
+
+%>
+
+common: &common
+  adapter: postgresql
+  host: localhost
+  encoding: unicode
+  pool: 50
+  port: <%= port %>
+  user: <%= user %>
+  database: <%= db %>
+  password: <%= pass %>
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  <<: *common
+
+demo:
+  <<: *common
+
+staging:
+  <<: *common
+
+development:
+  <<: *common
+
+test:
+  <<: *common
+  database: manifold-api_test
+
