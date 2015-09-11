@@ -18,6 +18,7 @@
 !/tmp/pids/.keep
 !/log/.keep
 !/tmp/.keep
+/npm-debug.log
 
 # Ignore developer tools and IDE files
 /.idea

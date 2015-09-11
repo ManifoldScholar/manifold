@@ -24,9 +24,17 @@ gem 'active_model_serializers', '~> 0.10.0.rc2'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+gem 'rubyzip', '>= 1.0.0'
+gem 'nokogiri'
+gem 'paperclip', '~> 4.3'
+gem 'memoist', '~> 0.12.0'
+gem 'naught', '~> 1.0.0'
+gem 'filesize', '~> 0.1.1'
+
+
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  # # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
 
 end
