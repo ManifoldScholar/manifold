@@ -123,7 +123,6 @@ module Ingestor
             section.resource = text.find_ingestion_source_by_identifier(item_inspector.idref).resource
             section
           end
-          abort
           text.text_sections.replace(text_sections.reject { |cd| cd.nil? })
         end
 

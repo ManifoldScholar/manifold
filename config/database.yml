@@ -4,6 +4,7 @@
 
   url  = ENV["BOXEN_POSTGRESQL_URL"]
   port = ENV["BOXEN_POSTGRESQL_PORT"]
+  host = ENV["RAILS_DB_HOST"] || 'localhost'
 
   if boxen?
     db = 'manifold-api_development'
@@ -17,7 +18,7 @@
 
 common: &common
   adapter: postgresql
-  host: localhost
+  host: <%= host %>
   encoding: unicode
   pool: 50
   port: <%= port %>
@@ -40,4 +41,3 @@ development:
 test:
   <<: *common
   database: manifold-api_test
-
