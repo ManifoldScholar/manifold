@@ -1,5 +1,5 @@
 require 'naught'
-require 'URI'
+require 'uri'
 
 module Ingestor
   module Strategy

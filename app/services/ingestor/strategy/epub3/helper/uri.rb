@@ -1,6 +1,6 @@
 require 'naught'
 require 'pathname'
-require 'URI'
+require 'uri'
 
 module Ingestor
   module Strategy
