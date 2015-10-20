@@ -1,19 +1,19 @@
 GIT
   remote: git://github.com/rack/rack.git
-  revision: e836fad64ba3a79f8169ef44aa97b7004fca5e86
+  revision: 6216a3f8a3560639ee1ddadc1e0d6bf9e5f31830
   specs:
     rack (2.0.0.alpha)
       json
 
 GIT
   remote: git://github.com/rails/arel.git
-  revision: 77ec13b46af2926bfcfc3073685711c874b0d272
+  revision: 3c429c5d86e9e2201c2a35d934ca6a8911c18e69
   specs:
     arel (7.0.0.alpha)
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: b455cadbfd0a272879c8703ba37375eb724aa493
+  revision: 4d8f62dcfa0a5157b3facbd71f75fc6639636347
   specs:
     actionmailer (5.0.0.alpha)
       actionpack (= 5.0.0.alpha)
@@ -45,12 +45,11 @@ GIT
       activesupport (= 5.0.0.alpha)
       arel (= 7.0.0.alpha)
     activesupport (5.0.0.alpha)
-      concurrent-ruby (~> 0.9.1)
+      concurrent-ruby (~> 1.0.0.pre3, < 2.0.0)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       method_source
       minitest (~> 5.1)
-      thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     rails (5.0.0.alpha)
       actionmailer (= 5.0.0.alpha)
@@ -82,25 +81,27 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: 600f981fe79ff2d4179baf84bd18fac5acb58b5e
+  revision: 93a45b1c463a063ec7cf4d160107b67aa3db7a1a
   specs:
-    sprockets-rails (3.0.0.beta2)
+    sprockets-rails (3.0.0.beta3)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
 
 GIT
   remote: git://github.com/rails/sprockets.git
-  revision: 658255ea632e427b7222700f0ea515e499f723f1
+  revision: 368ce3aec7857e0574ede2ac58954d75a0b20e28
   specs:
     sprockets (4.0.0)
-      rack (> 1, < 3)
+      rack (>= 1, < 3)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    active_model_serializers (0.10.0.rc2)
+    active_model_serializers (0.10.0.rc3)
+      actionpack (>= 4.0)
       activemodel (>= 4.0)
+      railties (>= 4.0)
     builder (3.2.2)
     capistrano (3.4.0)
       i18n
@@ -109,15 +110,18 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-rails (1.1.3)
+    capistrano-rails (1.1.5)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano-rbenv (2.0.3)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.7)
       climate_control (>= 0.0.3, < 1.0)
     colorize (0.7.7)
-    concurrent-ruby (0.9.1)
+    concurrent-ruby (1.0.0.pre4)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     filesize (0.1.1)
@@ -131,14 +135,14 @@ GEM
       mime-types (>= 1.16, < 3)
     memoist (0.12.0)
     method_source (0.8.2)
-    mime-types (2.6.1)
+    mime-types (2.6.2)
     mimemagic (0.3.0)
     mini_portile (0.6.2)
-    minitest (5.8.0)
+    minitest (5.8.1)
     naught (1.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.2)
+    net-ssh (3.0.1)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     paperclip (4.3.1)
@@ -148,7 +152,7 @@ GEM
       mime-types
       mimemagic (= 0.3.0)
     pg (0.18.3)
-    puma (2.13.4)
+    puma (2.14.0)
     rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -178,8 +182,8 @@ GEM
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
     rubyzip (1.1.7)
-    sass (3.4.18)
-    spring (1.3.6)
+    sass (3.4.19)
+    spring (1.4.0)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sshkit (1.7.1)
@@ -198,13 +202,14 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0.rc2)
   arel!
   capistrano-rails
+  capistrano-rbenv
   filesize (~> 0.1.1)
   memoist (~> 0.12.0)
   naught (~> 1.0.0)
   nokogiri
   paperclip (~> 4.3)
   pg
-  puma
+  puma (~> 2.14)
   rack!
   rack-cors
   rails!
