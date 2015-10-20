@@ -198,9 +198,11 @@ module Ingestor
           def read_rendition_source(relative_path)
             uri = URI(relative_path)
             if uri.absolute?
-              log(:info, "Downloading external resource: #{relative_path}")
+              log(:debug, "Downloading external resource: #{relative_path}")
+              return nil
               return open(relative_path) { |f| f.read }
             else
+              log(:debug, "Extracting local resource: #{relative_path}")
               Zip::File.open(@epub_path) do |zip_file|
                 return zip_file.glob(source_zip_path(relative_path)).first.get_input_stream.read
               end
@@ -215,8 +217,8 @@ module Ingestor
           end
 
           def rendition_source_node_by_id(source_id)
-            id = "##{source_id}"
-            manifest_item_nodes.css(id)
+            xpath = "//*[@id='#{source_id}']"
+            manifest_item_nodes.xpath(xpath)
           end
 
           def get_rendition_source_by_id(source_id)
@@ -232,7 +234,7 @@ module Ingestor
             # and rather than monkey patch String IO, we just add some methods to the instance.
             # See http://stackoverflow.com/questions/5166782/write-stream-to-paperclip
             string_contents = read_rendition_source(relative_path)
-
+            return nil if !string_contents
             file = StringIO.new(string_contents)
             filename = File.basename(relative_path)
             metaclass = class << file; self; end
