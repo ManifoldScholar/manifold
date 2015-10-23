@@ -68,6 +68,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v1.0.7, ruby-2.2.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.0.2, ruby-2.2.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v5.0.0.alpha@4d8f62, ruby-2.2.2-p95) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rake (v10.4.2, ruby-2.2.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.1.7, ruby-2.2.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v3.1.2, ruby-2.2.2-p95) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v3.1.3, ruby-2.2.2-p95) [gem]" level="application" />
