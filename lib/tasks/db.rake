@@ -1,6 +1,5 @@
 namespace :db do
-
-  task :kill => :environment do
+  task kill: :environment do
     db_name = "#{File.basename(Rails.root)}_#{Rails.env}"
     sh = <<EOF
 ps xa \
@@ -12,7 +11,4 @@ ps xa \
 EOF
     puts `#{sh}`
   end
-
 end
-
-

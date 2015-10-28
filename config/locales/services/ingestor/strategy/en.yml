@@ -1,0 +1,9 @@
+en:
+  services:
+    ingestor:
+      strategy:
+        logging:
+        failures:
+          missing_method: '%{method} is not declared in the %{strategy} strategy'
+
+

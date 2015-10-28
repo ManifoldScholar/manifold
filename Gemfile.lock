@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/rack/rack.git
-  revision: 6216a3f8a3560639ee1ddadc1e0d6bf9e5f31830
+  revision: 35599cfc2751e0ee611c0ff799924b8e7fe0c0b4
   specs:
     rack (2.0.0.alpha)
       json
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 4d8f62dcfa0a5157b3facbd71f75fc6639636347
+  revision: 09463183867f702d6ec66fce964ecb9f7ae0d98a
   specs:
     actionmailer (5.0.0.alpha)
       actionpack (= 5.0.0.alpha)
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sass-rails.git
-  revision: a3b25261a3d31ed9ff5dd6e841b777790fc86c55
+  revision: 6e4eee736bcbfa5b2962467673c7a51abf434c67
   specs:
     sass-rails (6.0.0)
       railties (>= 4.0.0, < 5.0)
@@ -90,7 +90,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets.git
-  revision: 368ce3aec7857e0574ede2ac58954d75a0b20e28
+  revision: 5a77f8b007b8ec61edd783c48baf9d971f1c684d
   specs:
     sprockets (4.0.0)
       rack (>= 1, < 3)
@@ -102,6 +102,9 @@ GEM
       actionpack (>= 4.0)
       activemodel (>= 4.0)
       railties (>= 4.0)
+    ast (2.1.0)
+    astrolabe (1.3.1)
+      parser (~> 2.2)
     builder (3.2.2)
     capistrano (3.4.0)
       i18n
@@ -124,6 +127,8 @@ GEM
     concurrent-ruby (1.0.0.pre4)
     diff-lcs (1.2.5)
     erubis (2.7.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
     filesize (0.1.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -151,7 +156,10 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    parser (2.2.3.0)
+      ast (>= 1.1, < 3.0)
     pg (0.18.3)
+    powerpack (0.1.1)
     puma (2.14.0)
     rack-cors (0.4.0)
     rack-test (0.6.3)
@@ -164,6 +172,7 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rainbow (2.0.0)
     rake (10.4.2)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
@@ -181,6 +190,13 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
+    rubocop (0.34.2)
+      astrolabe (~> 1.3)
+      parser (>= 2.2.2.5, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.4)
+    ruby-progressbar (1.7.5)
     rubyzip (1.1.7)
     sass (3.4.19)
     spring (1.4.0)
@@ -203,6 +219,7 @@ DEPENDENCIES
   arel!
   capistrano-rails
   capistrano-rbenv
+  factory_girl
   filesize (~> 0.1.1)
   memoist (~> 0.12.0)
   naught (~> 1.0.0)
@@ -214,6 +231,7 @@ DEPENDENCIES
   rack-cors
   rails!
   rspec-rails (~> 3.0)
+  rubocop
   rubyzip (>= 1.0.0)
   sass-rails!
   spring

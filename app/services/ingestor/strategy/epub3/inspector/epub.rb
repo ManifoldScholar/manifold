@@ -1,15 +1,19 @@
-require 'fileutils'
-require 'zip'
-require 'memoist'
-require 'uri'
-require 'open-uri'
+require "fileutils"
+require "zip"
+require "memoist"
+require "uri"
+require "open-uri"
 
 module Ingestor
   module Strategy
     module EPUB3
       module Inspector
+        # Inspects the EPUB3 document and provides high level information and access to
+        # document structure, nodes, etc.
+        #
+        # @author Zach Davis
+        # rubocop: disable Metrics/ClassLength
         class EPUB
-
           extend Memoist
 
           def initialize(epub_path, logger = nil)
@@ -18,9 +22,7 @@ module Ingestor
           end
 
           def log(level, msg)
-            if @logger
-              @logger.send(level, msg)
-            end
+            @logger.send(level, msg) if @logger
           end
 
           def epub_basename
@@ -29,14 +31,14 @@ module Ingestor
           memoize :epub_basename
 
           def epub_extension
-            File.extname(epub_basename).split('.').last
+            File.extname(epub_basename).split(".").last
           end
           memoize :epub_extension
 
           def container_zip_entry
             container_zip_entry = nil
             Zip::File.open(@epub_path) do |zip_file|
-              container_zip_entry = zip_file.glob('META-INF/container.xml').first
+              container_zip_entry = zip_file.glob("META-INF/container.xml").first
             end
             container_zip_entry
           end
@@ -53,7 +55,7 @@ module Ingestor
           memoize :container_xml
 
           def rendition_relative_path
-            container_xml.xpath('//xmlns:rootfile').first.attribute('full-path').value
+            container_xml.xpath("//xmlns:rootfile").first.attribute("full-path").value
           end
           memoize :rendition_relative_path
 
@@ -77,68 +79,69 @@ module Ingestor
           memoize :rendition_xml
 
           def epub_version
-            rendition_xml.xpath('//xmlns:package').first.attribute('version').value
+            rendition_xml.xpath("//xmlns:package").first.attribute("version").value
           end
           memoize :epub_version
 
           def unique_id
-            id_id = rendition_xml.xpath('//xmlns:package').attribute('unique-identifier').value
+            id_id = rendition_xml.xpath("//xmlns:package")
+                    .attribute("unique-identifier").value
             rendition_xml.css("##{id_id}").first.text
           end
           memoize :unique_id
 
           def metadata_node
-            rendition_xml.xpath('//xmlns:package/xmlns:metadata')
+            rendition_xml.xpath("//xmlns:package/xmlns:metadata")
           end
           memoize :metadata_node
 
           def manifest_node
-            rendition_xml.xpath('//xmlns:package/xmlns:manifest')
+            rendition_xml.xpath("//xmlns:package/xmlns:manifest")
           end
           memoize :manifest_node
 
           def spine_node
-            rendition_xml.xpath('//xmlns:package/xmlns:spine')
+            rendition_xml.xpath("//xmlns:package/xmlns:spine")
           end
           memoize :spine_node
 
           def title_nodes
-            metadata_node.xpath('//dc:title', 'dc' => dc)
+            metadata_node.xpath("//dc:title", "dc" => dc)
           end
           memoize :title_nodes
 
           def creator_nodes
-            metadata_node.xpath('//dc:creator', 'dc' => dc)
+            metadata_node.xpath("//dc:creator", "dc" => dc)
           end
           memoize :creator_nodes
 
           def contributor_nodes
-            metadata_node.xpath('//dc:contributor', 'dc' => dc)
+            metadata_node.xpath("//dc:contributor", "dc" => dc)
           end
           memoize :contributor_nodes
 
           def language_node
-            metadata_node.xpath('//dc:language', 'dc' => dc)
+            metadata_node.xpath("//dc:language", "dc" => dc)
           end
           memoize :language_node
 
           def date_node
-            metadata_node.xpath('//dc:date', 'dc' => dc)
+            metadata_node.xpath("//dc:date", "dc" => dc)
           end
           memoize :date_node
 
           def rights_node
-            metadata_node.xpath('//dc:rights', 'dc' => dc)
+            metadata_node.xpath("//dc:rights", "dc" => dc)
           end
           memoize :rights_node
 
           def description_node
-            metadata_node.xpath('//dc:description', 'dc' => dc)
+            metadata_node.xpath("//dc:description", "dc" => dc)
           end
           memoize :description_node
 
           def manifest_item_nodes
-            manifest_node.xpath('//xmlns:item')
+            manifest_node.xpath("//xmlns:item")
           end
           memoize :manifest_item_nodes
 
@@ -154,25 +157,21 @@ module Ingestor
 
           def manifest_cover_item_id
             node = manifest_cover_item
-            if !node
-              meta_cover_node = metadata_node.css('[name="cover"]').first
-              if meta_cover_node
-                id = meta_cover_node.attribute('content')
-                cover_node = rendition_source_node_by_id(id)
-                if cover_node
-                  attr = cover_node.attribute('id')
-                  return attr.to_str
-                end
-              end
-            end
-            return nil
+            return unless node
+            meta_cover_node = metadata_node.css('[name="cover"]').first
+            return unless meta_cover_node
+            id = meta_cover_node.attribute("content")
+            cover_node = rendition_source_node_by_id(id)
+            return unless cover_node
+            attr = cover_node.attribute("id")
+            attr.to_str
           end
           memoize :manifest_cover_item_id
 
           def nav_path
             node = manifest_nav_item
             if node
-              local_path = node.attribute('href')
+              local_path = node.attribute("href")
               return local_path
             else
               Raise "Unable to find nav document in manifest"
@@ -181,12 +180,10 @@ module Ingestor
 
           def nav_xml
             node = manifest_nav_item
-            if node
-              local_path = node.attribute('href')
-              xml = Nokogiri::XML(get_rendition_source(local_path))
-              xml.remove_namespaces!
-              return xml
-            end
+            return unless node
+            local_path = node.attribute("href")
+            xml = Nokogiri::XML(get_rendition_source(local_path))
+            xml.remove_namespaces!
           end
           memoize :nav_xml
 
@@ -200,12 +197,11 @@ module Ingestor
             if uri.absolute?
               log(:debug, "Downloading external resource: #{relative_path}")
               return nil
-              return open(relative_path) { |f| f.read }
-            else
-              log(:debug, "Extracting local resource: #{relative_path}")
-              Zip::File.open(@epub_path) do |zip_file|
-                return zip_file.glob(source_zip_path(relative_path)).first.get_input_stream.read
-              end
+            end
+            log(:debug, "Extracting local resource: #{relative_path}")
+            Zip::File.open(@epub_path) do |zip_file|
+              return zip_file
+                .glob(source_zip_path(relative_path)).first.get_input_stream.read
             end
           end
           memoize :read_rendition_source
@@ -224,45 +220,43 @@ module Ingestor
           def get_rendition_source_by_id(source_id)
             log(:debug, "Attempting to get rendition source by ID: #{source_id}")
             node = rendition_source_node_by_id(source_id)
-            path = node.attribute('href')
+            path = node.attribute("href")
             get_rendition_source(path)
           end
 
           def get_rendition_source(relative_path)
-            # This warrants explanation. We stream the file contents from the zip, then we convert it to
-            # StringIO, which mostly acts like a file. However, we need to add some additional info for paperclip,
-            # and rather than monkey patch String IO, we just add some methods to the instance.
+            # This warrants explanation. We stream the file contents from the zip, then
+            # we convert it to StringIO, which mostly acts like a file. However, we need
+            # to add some additional info for paperclip, and rather than monkey patch
+            # String IO, we just add some methods to the instance.
             # See http://stackoverflow.com/questions/5166782/write-stream-to-paperclip
             string_contents = read_rendition_source(relative_path)
-            return nil if !string_contents
+            return nil unless string_contents
             file = StringIO.new(string_contents)
             filename = File.basename(relative_path)
             metaclass = class << file; self; end
             metaclass.class_eval do
               define_method(:original_filename) { filename }
-              define_method(:content_type) { '' }
+              define_method(:content_type) { "" }
             end
             file
           end
           memoize :get_rendition_source
 
-          def toc_inspector()
-            if nav_xml
-              return TOC.new(self)
-            end
-            return Naught.build
+          def toc_inspector
+            return TOC.new(self) if nav_xml
+            Naught.build
           end
 
           private
 
           def dc
-            'http://purl.org/dc/elements/1.1/'
+            "http://purl.org/dc/elements/1.1/"
           end
 
           def source_zip_path(relative_path)
-            [File.dirname(rendition_relative_path), relative_path].join('/')
+            [File.dirname(rendition_relative_path), relative_path].join("/")
           end
-
         end
       end
     end

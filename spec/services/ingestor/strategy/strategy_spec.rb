@@ -1,14 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Ingestor::Strategy do
-
   before :all do
-
     class ValidSampleStrategy < Ingestor::Strategy::Base
       def can_ingest?; end
+
       def ingest; end
     end
-
   end
 
   it "should respond to :add" do
@@ -30,6 +28,7 @@ RSpec.describe Ingestor::Strategy do
   it "should raise an error if I add a strategy that does not extend Ingestor::Strategy::Base" do
     invalid_strategy = Class.new do
       def ingest; end
+
       def can_ingest?; end
     end
     expect do
@@ -61,5 +60,4 @@ RSpec.describe Ingestor::Strategy do
     Ingestor::Strategy.clear!
     expect(Ingestor::Strategy[:valid_strategy]).to be_nil
   end
-
 end

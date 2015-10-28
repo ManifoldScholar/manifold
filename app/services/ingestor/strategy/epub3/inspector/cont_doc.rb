@@ -1,12 +1,14 @@
-require 'memoist'
-require 'naught'
+require "memoist"
+require "naught"
 
 module Ingestor
   module Strategy
     module EPUB3
       module Inspector
+        # Provides information about a single content document in an EPUB3 package.
+        #
+        # @author Zach Davis
         class ContDoc
-
           extend Memoist
 
           def initialize(document, manifest_node, epub_inspector)
@@ -17,41 +19,39 @@ module Ingestor
           end
 
           def contdoc_resource_path
-            node = @epub_inspector.rendition_source_node_by_id(@node.attribute('idref'))
-            node.attribute('href')
+            node = @epub_inspector.rendition_source_node_by_id(@node.attribute("idref"))
+            node.attribute("href")
           end
           memoize :contdoc_resource_path
 
           def guess_name
             guess_name_from_toc.presence ||
-            guess_name_from_title.presence ||
-            guess_name_from_headers.presence
+              guess_name_from_title.presence ||
+              guess_name_from_headers.presence
           end
 
           def body
-            @document.css('body').children.to_s.strip
+            @document.css("body").children.to_s.strip
           end
 
-          def is_toc?
+          def toc?
             nav_item = @epub_inspector.manifest_nav_item
-            puts nav_item
-            puts contdoc_resource_path
             if nav_item
-              return contdoc_resource_path == nav_item.attribute('href')
+              return contdoc_resource_path == nav_item.attribute("href")
             end
             false
           end
 
           def kind
-            return TextSection::KIND_COVER_IMAGE if is_cover?
-            return TextSection::KIND_NAVIGATION if is_toc?
-            return TextSection::KIND_SECTION
+            return TextSection::KIND_COVER_IMAGE if cover?
+            return TextSection::KIND_NAVIGATION if toc?
+            TextSection::KIND_SECTION
           end
 
-          def is_cover?
+          def cover?
             cover_item = @epub_inspector.manifest_cover_item
             if cover_item
-              cover_image_resource_path = cover_item.attribute('href')
+              cover_image_resource_path = cover_item.attribute("href")
               results = @document.css("[src=\"#{cover_image_resource_path}\"]")
               return results.length > 0
             end
@@ -69,23 +69,17 @@ module Ingestor
                 break
               end
             end
-            if title_node
-              return title_node.text
-            end
-
+            return title_node.text if title_node
           end
 
           def guess_name_from_title
-            title = @document.xpath('//title')
-            if title
-              return title.text
-            end
+            title = @document.xpath("//title")
+            return title.text if title
           end
 
           def guess_name_from_toc
             @epub_inspector.toc_inspector.toc_label_for_cont_doc(contdoc_resource_path)
           end
-
         end
       end
     end

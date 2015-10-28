@@ -1,12 +1,12 @@
-require 'memoist'
-require 'naught'
+require "memoist"
+require "naught"
 
 module Ingestor
   module Strategy
     module EPUB3
       module Inspector
+        # Returns information about a metadata node in a EPUB3 package manifest.
         class Metadata
-
           extend Memoist
 
           def initialize(node, metadata_node)
@@ -24,6 +24,10 @@ module Ingestor
           end
           memoize :kind
 
+          def title_kind
+            kind if TextTitle::ALLOWED_KINDS.include?(kind.presence)
+          end
+
           def text
             @node.text
           end
@@ -35,22 +39,25 @@ module Ingestor
           memoize :file_as
 
           def file_as_metadata_node
-            @metadata_node.xpath("//xmlns:meta[@refines='##{id}' and @property='file-as']") || Naught.build
+            path = "//xmlns:meta[@refines='##{id}' and @property='file-as']"
+            @metadata_node.xpath(path) || Naught.build
           end
           memoize :file_as_metadata_node
 
           def kind_metadata_node
-            @metadata_node.xpath("//xmlns:meta[@refines='##{id}' and @property='title-type']") || Naught.build
+            path = "//xmlns:meta[@refines='##{id}' and @property='title-type']"
+            @metadata_node.xpath(path) || Naught.build
           end
           memoize :kind_metadata_node
 
           def position_metadata_node
-            @metadata_node.xpath("//xmlns:meta[@refines='##{id}' and @property='display-seq']") || Naught.build
+            path = "//xmlns:meta[@refines='##{id}' and @property='display-seq']"
+            @metadata_node.xpath(path) || Naught.build
           end
           memoize :position_metadata_node
 
           def id
-            attribute('id')
+            attribute("id")
           end
           memoize :id
 
@@ -59,7 +66,6 @@ module Ingestor
           def attribute(name)
             @node.attribute(name) || Naught.build
           end
-
         end
       end
     end

@@ -33,3 +33,7 @@
 
 ### Ignore secrets ###
 config/secrets.yml
+
+### Ignore yardoc ###
+.yardoc
+doc

@@ -1,0 +1,20 @@
+en:
+  services:
+    ingestor:
+      strategy:
+        epub3:
+          log:
+            transform_ts: 'Transforming text section "%{name}" body. [id %{id}]'
+            set_desc: 'Setting description to "%{desc}"'
+            set_rights: 'Setting rights to "%{rights}"'
+            set_date: 'Setting publication date to "%{date}"'
+            set_lang: 'Setting language to "%{lang}"'
+            new_maker: 'New %{role}: "%{name}"'
+            updated_maker: 'Setting maker "%{name}" role to "%{role}"'
+            new_title: 'Creating a title object: "%{title}"'
+            section_name: 'Found name for section %{id}: "#{name}"'
+            section_kind: 'Found kind for section %{id}: "#{kind}"'
+            attempt_save: 'Attempting to save the text'
+          fail:
+            missing_uid: 'Ingestion Failed: unable to find a unique identifier for this EPUB.'
+            save_fail: 'Unable to save text due to ingestion errors.'

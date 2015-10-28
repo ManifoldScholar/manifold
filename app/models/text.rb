@@ -1,7 +1,7 @@
-require 'memoist'
+require "memoist"
 
+# A single Text
 class Text < ActiveRecord::Base
-
   extend Memoist
 
   serialize :structure_titles, Hash
@@ -10,29 +10,32 @@ class Text < ActiveRecord::Base
   serialize :landmarks, Array
 
   has_many :collaborators
-  has_many :makers, :through => :collaborators
-  has_many :creators, -> { where '"collaborators"."role" = ?', 'creator' }, :through => :collaborators, :source => "maker"
-  has_many :contributors, -> { where '"collaborators"."role" = ?', 'contributor' }, :through => :collaborators, :source => "maker"
-  has_many :titles, class_name: 'TextTitle'
+  has_many :makers, through: :collaborators
+  has_many :creators,
+           -> { where '"collaborators"."role" = ?', "creator" },
+           through: :collaborators,
+           source: "maker"
+  has_many :contributors,
+           -> { where '"collaborators"."role" = ?', "contributor" },
+           through: :collaborators,
+           source: "maker"
+  has_many :titles, class_name: "TextTitle"
   has_many :text_subjects
-  has_many :subjects, :through => :text_subjects
+  has_many :subjects, through: :text_subjects
   has_many :ingestion_sources
-  has_many :source_resources, :through => :ingestion_sources, :source => :resource
+  has_many :source_resources, through: :ingestion_sources, source: :resource
   has_many :text_sections
 
   validates :unique_identifier, presence: true
 
-  def title()
+  def title
     if new_record?
-      title = titles.to_ary.find { |title| title.kind == TextTitle::KIND_MAIN }
-      if title
-        title.value || 'untitled'
-      else
-        'untitled'
-      end
+      main_title = titles.to_ary.find { |a_title| a_title.kind == TextTitle::KIND_MAIN }
     else
-      titles.where(:kind => TextTitle::KIND_MAIN).first().value
+      main_title = titles.find_by(kind: TextTitle::KIND_MAIN)
     end
+    return "untitled" unless main_title
+    main_title.value
   end
 
   def find_ingestion_source_by_identifier(identifier)
@@ -41,22 +44,20 @@ class Text < ActiveRecord::Base
 
   def find_text_section_by_source_path(path)
     source = ingestion_sources.to_ary.find { |is| is.source_path == path }
-    if source
-      source_id = source.source_identifier
-      text_section = text_sections.to_ary.find { |cd| cd.source_identifier == source_id }
-      return text_section
-    end
+    return unless source
+    source_id = source.source_identifier
+    text_sections.to_ary.find { |cd| cd.source_identifier == source_id }
   end
 
   def section_source_map
     map = {}
     text_sections.each do |ts|
       resource = ts.resource
-      source = ingestion_sources.where(:resource => resource).first
+      source = ingestion_sources.find_by(resource: resource)
       path = source.source_path
       map[path] = ts
     end
-    return map
+    map
   end
   memoize :section_source_map
 
@@ -69,22 +70,16 @@ class Text < ActiveRecord::Base
   end
   memoize :ingestion_resource_map
 
-  def creator_names()
-    creators.pluck(:name).join(', ')
+  def creator_names
+    creators.pluck(:name).join(", ")
   end
 
   def cover_url
-    cover_source = ingestion_sources.where(:kind => IngestionSource::KIND_COVER_IMAGE).first
-    if cover_source
-      cover_source.resource.attachment.url
-    else
-      nil
-    end
+    cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
+    cover_source.resource.attachment.url if cover_source
   end
 
   def toc_section
-    text_sections.where(:kind => TextSection::KIND_NAVIGATION).first
+    text_sections.find_by(kind: TextSection::KIND_NAVIGATION)
   end
-
-
 end
