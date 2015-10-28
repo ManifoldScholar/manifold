@@ -2,8 +2,14 @@
     <img width="150" src="http://manifold.umn.edu/logo/manifold_avatar-01.png" alt="Manifold Scholarship" />
 </a>
 
-# Manifold
+## Build Status
 
+Branch       | Passing?
+------------ | -------------
+Development  | [![Build Status](https://travis-ci.org/ManifoldScholar/manifold-api.svg?branch=development)](https://travis-ci.org/ManifoldScholar/manifold-api)
+Master       |[![Build Status](https://travis-ci.org/ManifoldScholar/manifold-api.svg?branch=master)](https://travis-ci.org/ManifoldScholar/manifold-api)
+
+# Manifold
 Manifold is an intuitive, collaborative platform for scholarly publishing. With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works.
 
 ## About the Project
@@ -16,7 +22,7 @@ Our ultimate goal is to build an open source tool that other university presses 
 
 ## Manifold API
 
-Manifold API is the server-side component of Manifold. It is currently being actively developed and should be considered pre-alpha. 
+Manifold API is the server-side component of Manifold. It is currently being actively developed and should be considered pre-alpha.
 
 While there may be parts of this API that will become stand-alone components, it is primarily intended to serve as a backend server for the Manifold frontend and admin interfaces, which are in separate repositories.
 
@@ -58,9 +64,9 @@ At Cast Iron, we tend to run Rails apps on UNIX sockets proxied by Nginx. The de
 
 ```bash
 # Ingest one text, log level debug
-rake ingest:text['relative/path/to/text','debug'] 
+rake ingest:text['relative/path/to/text','debug']
 # Ingest all texts in "epubs" folder in project root
-rake ingest:batch['debug'] 
+rake ingest:batch['debug']
 ```
 ## API Docs
 
