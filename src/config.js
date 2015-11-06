@@ -10,9 +10,9 @@ const environmentConfiguration = {
 }[process.env.NODE_ENV || 'development'];
 
 const applicationConfiguration = {
-  port: process.env.PORT,
-  apiUri: 'http://manifold-api.dev',
-  apiPort: 80,
+  clientPort: process.env.MANIFOLD_CLIENT_PORT,
+  assetPort: process.env.MANIFOLD_ASSET_PORT,
+  apiUri: process.env.MANIFOLD_API_URL,
   apiProxyPaths: ['/api', '/system/resources'],
   app: {
     title: 'Manifold Scholarship',

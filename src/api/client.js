@@ -16,10 +16,11 @@ function cleanAPIObject(obj) {
 export default function apiClient(endpoint, responseSchema) {
   let adjustedEndpoint;
   if (__SERVER__) {
-    adjustedEndpoint = `http://${(process.env.HOST || 'localhost')}:${config.port}${endpoint}`;
+    adjustedEndpoint = `http://${(process.env.HOST || 'localhost')}:${config.clientPort}${endpoint}`;
   } else {
     adjustedEndpoint = endpoint;
   }
+  console.log(adjustedEndpoint, 'ae');
   return fetch(adjustedEndpoint)
     .then(response => {
       if (!response.ok) {
