@@ -33,19 +33,7 @@ app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 app.use(morgan(logStyle));
-
-
 app.use(createApiProxy());
-console.log('');
-console.log(`--------------------------------------------------------------------------------`.white.bold);
-console.log(`${emoji.vertical_traffic_light}  ${'MANIFOLD API PROXY'.white.bold}`);
-console.log(`--------------------------------------------------------------------------------`.white.bold);
-console.log(`The Manifold API Proxy is proxying the following paths:`.green);
-console.log('');
-const maxPathLength = config.apiProxyPaths.reduce((memo, current) => { return current.length > memo ? current.length : memo; }, 0);
-config.apiProxyPaths.forEach((value) => {
-  console.log(`  ${pad(value, maxPathLength, ' ')} > ${config.apiUri}:${config.apiPort}${value}`.green );
-});
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
@@ -106,20 +94,36 @@ app.use((req, res) => {
   }));
 });
 
-if (config.port) {
-  server.listen(config.port, (err) => {
+if (config.clientPort) {
+  server.listen(config.clientPort, (err) => {
     if (err) {
       console.error(err);
     }
     console.log('');
-    console.log(`--------------------------------------------------------------------------------`.white.bold);
-    console.log(`${emoji.books}  MANIFOLD CLIENT SERVER`.white.bold);
-    console.log(`--------------------------------------------------------------------------------`.white.bold);
-    console.log(`Manifold Client is listening at http://127.0.0.1:${config.port}`.green);
     console.log('');
-    console.log(`--------------------------------------------------------------------------------`.white.bold);
-    console.log(`${emoji.page_with_curl}  LOG OUTPUT`.white.bold);
-    console.log(`--------------------------------------------------------------------------------`.white.bold);
+    if (!config.isProduction) {
+      console.log('MANIFOLD ASSET SERVER'.cyan.bold);
+      console.log('---------------------'.cyan);
+      console.log('Manifold Asset Server, a.k.a. Webpack, is listening at http://127.0.0.1:%s'.green, config.assetPort);
+      console.log('');
+      console.log('');
+    }
+
+    console.log(`${'MANIFOLD API PROXY'.cyan.bold}`);
+    console.log(`-------------------`.cyan);
+    console.log(`The Manifold API Proxy is proxying the following paths:`.green);
+    console.log('');
+    const maxPathLength = config.apiProxyPaths.reduce((memo, current) => { return current.length > memo ? current.length : memo; }, 0);
+    config.apiProxyPaths.forEach((value) => {
+      console.log(`${pad(value, maxPathLength, ' ', false)}  >  ${config.apiUri}${value}`.green );
+    });
+    console.log('');
+    console.log('');
+
+    console.log(`MANIFOLD CLIENT SERVER`.cyan.bold);
+    console.log(`----------------------`.cyan);
+    console.log(`Manifold Client is listening at http://127.0.0.1:${config.clientPort}`.green);
+    console.log('');
     console.log('');
   });
 } else {
