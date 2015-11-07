@@ -1,13 +1,13 @@
 ### Bundler Config ###
-/.bundle
+.bundle
 
 ### Logs and Temp Files ###
-/log/*
-/tmp/*
-!/tmp/pids/.keep
-!/log/.keep
-!/tmp/.keep
-/npm-debug.log
+log/*
+tmp/*
+!tmp/pids/.keep
+!log/.keep
+!tmp/.keep
+npm-debug.log
 
 ### IntelliJ ###
 
@@ -28,8 +28,8 @@
 *.iws
 
 ### Ignore user content ###
-/public/system
-/epubs
+public/system
+epubs
 
 ### Ignore secrets ###
 config/secrets.yml
@@ -37,3 +37,4 @@ config/secrets.yml
 ### Ignore yardoc ###
 .yardoc
 doc
+.rakeTasks
