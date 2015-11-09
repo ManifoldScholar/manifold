@@ -8,8 +8,7 @@
     "type": "git",
     "url": "https://github.com/manifoldScholar/manifold"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "main": "bin/server.js",
   "scripts": {
     "start-dev": "concurrent --kill-others \"npm run webpack\" \"npm run start\" ",
@@ -43,6 +42,7 @@
     "react-dom": "^0.14.1",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0-rc3",
+    "react-side-effect": "^1.0.2",
     "redux": "^3.0.4",
     "redux-actions": "^0.8.0",
     "redux-promise": "^0.5.0",
