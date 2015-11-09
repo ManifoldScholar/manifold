@@ -8,13 +8,13 @@ import createHistory from 'history/lib/createBrowserHistory';
 import createStore from './store/createStore';
 import {Provider} from 'react-redux';
 import {reduxReactRouter, ReduxRouter} from 'redux-router';
-import {DevTools} from './containers/Shared';
+import {DevTools} from './containers/shared';
 
 import getRoutes from './routes';
 import makeRouteHooksSafe from './helpers/makeRouteHooksSafe';
 
 const dest = document.getElementById('content');
-const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), createHistory, window.__data);
+const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), createHistory, window.__INITIAL_STATE__);
 
 const component = (
   <ReduxRouter routes={getRoutes(store)} />
