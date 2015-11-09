@@ -12,6 +12,15 @@ namespace :ingest do
     end
   end
 
+  desc "Ingests EPUB3 files in /spec/data/epubs/v3 into Manifold"
+  task :specpubs, [:log_level] => :environment do |_t, _args|
+    puts Ingestor::Strategy.strategies.inspect
+    epubs = Dir["spec/data/epubs/v3/*"]
+    epubs.each do |epub|
+      ingest(epub, :debug)
+    end
+  end
+
   def ingest(path, log_level)
     path ||= fail I18n.t("rake.ingest.errors.missing_path")
     log_level ||= "info"
