@@ -1,2 +1,8 @@
-export NotFound from './NotFound';
-export DevTools from './DevTools';
+import NotFound from './NotFound';
+import DevTools from './DevTools';
+
+export {
+  NotFound,
+  DevTools
+};
+

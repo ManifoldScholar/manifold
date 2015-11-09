@@ -1,1 +1,5 @@
-export Texts from './Texts';
+import Texts from './Texts';
+
+export {
+  Texts
+};

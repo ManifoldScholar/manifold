@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
+import { BodyClass } from '../../components/shared';
 
 class Frontend extends Component {
 
@@ -15,15 +16,12 @@ class Frontend extends Component {
 
   render() {
     return (
-      <div>
-        <DocumentMeta {...config.app}/>
-        This is the frontend
-
+      <BodyClass className={'frontend'}>
         <div>
-        Children:
-        {this.props.children}
+          <DocumentMeta {...config.app}/>
+          {this.props.children}
         </div>
-      </div>
+      </BodyClass>
     );
   }
 }

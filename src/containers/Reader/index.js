@@ -1,1 +1,6 @@
-export Reader from './Reader';
+import Reader from './Reader';
+
+export {
+  Reader
+};
+
