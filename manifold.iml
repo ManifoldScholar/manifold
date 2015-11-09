@@ -6,6 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/api" />
       <excludeFolder url="file://$MODULE_DIR$/client" />
     </content>
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
