@@ -1,6 +1,6 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import transitionMiddleware from './middleware/transitionMiddleware';
-import {DevTools} from '../containers/Shared';
+import {DevTools} from '../containers/shared';
 import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise';
 

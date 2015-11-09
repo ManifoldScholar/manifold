@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Texts } from '../../components/Frontend';
+import { Texts } from '../../components/frontend';
 import { fetchTexts } from '../../actions/shared/collections';
 
 class Home extends Component {
@@ -27,10 +27,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-       This is frontend/home
        <Texts texts={this.props.texts} />
-      </div>
     );
   }
 }

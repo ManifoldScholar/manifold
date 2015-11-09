@@ -1,2 +1,7 @@
-export Home from './Home';
-export Frontend from './Frontend';
+import Home from './Home';
+import Frontend from './frontend';
+
+export {
+  Home,
+  Frontend
+};

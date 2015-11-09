@@ -20,7 +20,7 @@ export default function apiClient(endpoint, responseSchema) {
   } else {
     adjustedEndpoint = endpoint;
   }
-  console.log(adjustedEndpoint, 'ae');
+
   return fetch(adjustedEndpoint)
     .then(response => {
       if (!response.ok) {

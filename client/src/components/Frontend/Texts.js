@@ -18,7 +18,7 @@ export default class extends Component {
           {Object.values(this.props.texts).map((text) => {
             return (
               <li key={text.id} >
-              <Link to={`/text/${text.id}`}>
+              <Link to={`/read/${text.id}`}>
               {(() => {
                 if (text.attributes.coverUrl) {
                   return <img style={{width: 50}} src={text.attributes.coverUrl} />;
