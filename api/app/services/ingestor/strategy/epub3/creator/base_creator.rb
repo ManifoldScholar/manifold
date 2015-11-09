@@ -13,6 +13,11 @@ module Ingestor
             @metadata_node = metadata_node
           end
 
+          def existing(existing)
+            self.existing = existing
+          end
+
+
           def defaults(defaults, attributes)
             defaults.clone.merge(attributes.compact)
           end

@@ -57,7 +57,7 @@ module Ingestor
       @logger.info I18n.t("services.ingestor.logging.ingestion_start",
                           name: basename)
       ingestion = Ingestor::Ingestion.new(path)
-      strategy = Strategy.for(ingestion)
+      strategy = Ingestor::Strategy.for(ingestion)
       @logger.info I18n.t("services.ingestor.logging.using_strategy",
                           strategy: strategy)
       [basename, ingestion, strategy]

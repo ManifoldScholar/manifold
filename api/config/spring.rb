@@ -1,0 +1,1 @@
+Spring.watch "app/services"

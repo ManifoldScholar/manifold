@@ -12,8 +12,8 @@ en:
             new_maker: 'New %{role}: "%{name}"'
             updated_maker: 'Setting maker "%{name}" role to "%{role}"'
             new_title: 'Creating a title object: "%{title}"'
-            section_name: 'Found name for section %{id}: "#{name}"'
-            section_kind: 'Found kind for section %{id}: "#{kind}"'
+            section_name: 'Found name for section %{id}: "%{name}"'
+            section_kind: 'Found kind for section %{id}: "%{kind}"'
             attempt_save: 'Attempting to save the text'
           fail:
             missing_uid: 'Ingestion Failed: unable to find a unique identifier for this EPUB.'
