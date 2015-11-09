@@ -1,0 +1,5 @@
+en:
+  rake:
+    ingest:
+      errors:
+        missing_path: "A path to an ingestable file must be provided: `rake manifold:ingest[PATH]`"

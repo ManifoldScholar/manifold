@@ -1,0 +1,14 @@
+AllCops:
+  RunRailsCops: true
+  DisplayCopNames: true
+  Exclude:
+      - 'vendor/**/*'
+      - 'spec/**/*'
+      - 'db/**/*'
+      - 'bin/**/*'
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/LineLength:
+  Max: 90
