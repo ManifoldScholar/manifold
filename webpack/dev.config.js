@@ -50,6 +50,10 @@ module.exports = {
     'main': [
       'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
       './src/client.js'
+    ],
+    'frontend': [
+      'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
+      './src/theme/theme.scss'
     ]
   },
   output: {
