@@ -3,6 +3,7 @@ import {Route, IndexRedirect, IndexRoute} from 'react-router';
 import {Reader} from './containers/reader';
 import {Frontend, Home} from './containers/frontend';
 import {NotFound} from './containers/shared';
+import {ExampleContainer} from './containers/shared';
 
 export default () => {
   return (
@@ -16,7 +17,7 @@ export default () => {
 
       <Route component={Frontend} path="/browse" >
         <IndexRoute component={Home} />
-
+        <Route component={ExampleContainer} path="example" />
       </Route>
 
       <Route component={NotFound} path="*" />
