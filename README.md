@@ -49,44 +49,47 @@ While there may be parts of this API that will become stand-alone components, it
 
 The following instructions assume that you have Ruby 2.2.2 installed, a working Bundler executable, and a Postgres database.
 
-*Before doing anything:*
+**Before doing anything:**
 
 - Ensure that /opt/boxen/config/nginx/sites/manifold-api.conf doesn't exist.
 - Ensure that you have Intellij 15 with these JetBrains plugins: Ruby, NodeJS
 - Ensure that you don't have an existing ~/src/manifold dir. Get rid of ~/src/manifold-api if you have it.
 
-*First, setup Ruby and Gems.*
+**First, setup Ruby and Gems.**
 
 ```
 boxen manifold
 cd ~/src/manifold
-# IF THIS DOESN'T RETURN A STRING THAT STARTS WITH ruby 2.2.3, YOU HAVE A RUBY BUILD PROBLEM. FIX IT.
+
+# Confirm that you're using Ruby 2.2.3
 ruby -v
 gem install bundler
-# IF THIS DOESN'T RETURN /bin/rais, YOU HAVE A PATH PROBLEM. FIX IT.
+
+# Confirm that rails is at ./bin/rails
 cd api && which rails
 bundle install
 rbenv rehash
 ```
 
-*Then setup your NPM modules*
+**Then setup your NPM modules**
 
 ```
 cd ~/src/manifold/client
 npm install
 ```
 
-*Then setup the rails DB and ingest some texts*
+**Then setup the rails DB and ingest some texts**
 
 ```
 cd ~/src/manifold/api
 rake db:migrate
 rails g manifold:install
-# THERE'S A WEIRD SPRING ISSUE, MAYBE BECAUSE WE'RE ON EDGE RAILS
+
+# There's a spring + rake issue that hasn't been fixed yet.
 spring stop && rake ingest:specpubs
 ```
 
-*Open the project in your IDE*
+**Open the project in your IDE**
 
 - Open intellij. Click "open" and open the manifold directory.
 - Start the client and API servers
