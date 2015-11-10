@@ -22,6 +22,8 @@
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea/inspectionProfiles
+.idea/libraries
 
 # File-based project format:
 *.ipr
