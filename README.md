@@ -49,16 +49,47 @@ While there may be parts of this API that will become stand-alone components, it
 
 The following instructions assume that you have Ruby 2.2.2 installed, a working Bundler executable, and a Postgres database.
 
-```bash
-git clone git@github.com:ManifoldScholar/manifold-api.git
+*Before doing anything:*
+
+- Ensure that /opt/boxen/config/nginx/sites/manifold-api.conf doesn't exist.
+- Ensure that you have Intellij 15 with these JetBrains plugins: Ruby, NodeJS
+- Ensure that you don't have an existing ~/src/manifold dir. Get rid of ~/src/manifold-api if you have it.
+
+*First, setup Ruby and Gems.*
+
+```
+boxen manifold
+cd ~/src/manifold
+# IF THIS DOESN'T RETURN A STRING THAT STARTS WITH ruby 2.2.3, YOU HAVE A RUBY BUILD PROBLEM. FIX IT.
+ruby -v
+gem install bundler
+# IF THIS DOESN'T RETURN /bin/rais, YOU HAVE A PATH PROBLEM. FIX IT.
+cd api && which rails
 bundle install
-rails g manifold:install
-rake db:create
-rake db:migrate
-./bin/puma -C config/puma/docker.rb
+rbenv rehash
 ```
 
-At Cast Iron, we tend to run Rails apps on UNIX sockets proxied by Nginx. The default development server config at config/puma/development.rb is confiugred to work with Boxen. The Docker config file will run the app on http://localhost:3001.
+*Then setup your NPM modules*
+
+```
+cd ~/src/manifold/client
+npm install
+```
+
+*Then setup the rails DB and ingest some texts*
+
+```
+cd ~/src/manifold/api
+rake db:migrate
+rails g manifold:install
+# THERE'S A WEIRD SPRING ISSUE, MAYBE BECAUSE WE'RE ON EDGE RAILS
+spring stop && rake ingest:specpubs
+```
+
+*Open the project in your IDE*
+
+- Open intellij. Click "open" and open the manifold directory.
+- Start the client and API servers
 
 ## Text Ingestion
 
