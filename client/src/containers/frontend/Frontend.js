@@ -8,7 +8,8 @@ import { Header } from '../../components/frontend';
 class Frontend extends Component {
 
   static propTypes = {
-    children: PropTypes.object
+    children: PropTypes.object,
+    collection: PropTypes.array
   };
 
   static contextTypes = {
@@ -20,7 +21,7 @@ class Frontend extends Component {
       <BodyClass className={'frontend'}>
         <div>
           <DocumentMeta {...config.app}/>
-          <Header />
+          <Header exampleCollection={this.props.collection} />
           <section className={'frontend-container'}>
             {this.props.children}
           </section>
@@ -30,7 +31,13 @@ class Frontend extends Component {
   }
 }
 
+
+function mapStateToProps(state) {
+  return {
+    collection: state.example.collection
+  };
+}
 export default connect(
-  // mapStateToProps
+  mapStateToProps
 )(Frontend);
 
