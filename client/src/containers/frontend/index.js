@@ -1,5 +1,5 @@
 import Home from './Home';
-import Frontend from './frontend';
+import Frontend from './Frontend';
 
 export {
   Home,
