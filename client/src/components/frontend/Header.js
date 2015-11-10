@@ -1,22 +1,20 @@
-import React, { Component, PropTypes } from 'react';
-// import {Link} from 'react-router';
+import React, { Component } from 'react';
 
 export default class extends Component {
 
-  static propTypes = {
-    texts: PropTypes.object
-  };
-
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
-
   render() {
+
+    const sum = () => {
+      return this.props.exampleCollection.reduce((memo, num) => {
+        return memo + num;
+      }, 0);
+    };
+
     return (
       <div className={'frontend-header'}>
         <div className={'logo'}></div>
+        <div className={'example'}>Store Sum: {sum()}</div>
       </div>
     );
   }
 }
-
