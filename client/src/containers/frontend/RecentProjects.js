@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { ProjectCovers } from '../../components/frontend';
 // import {Link} from 'react-router';
 
 export default class extends Component {
@@ -9,11 +10,9 @@ export default class extends Component {
 
   render() {
     return (
-      <div className={'frontend-header'}>
-        <div className={'logo'}></div>
-        {'Header stub'}
-      </div>
+        <div>
+          <ProjectCovers />
+        </div>
     );
   }
 }
-

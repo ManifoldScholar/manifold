@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { RecentProjects } from './';
 import { Texts } from '../../components/frontend';
 import { fetchTexts } from '../../actions/shared/collections';
 
@@ -27,7 +28,19 @@ class Home extends Component {
 
   render() {
     return (
-       <Texts texts={this.props.texts} />
+        <div>
+          <section>
+            <div className="container">
+              {"Recent Projects"}
+              <RecentProjects />
+            </div>
+          </section>
+          <section>
+            <div className="container">
+              {"Our Projects"}
+            </div>
+          </section>
+        </div>
     );
   }
 }

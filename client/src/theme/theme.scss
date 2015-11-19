@@ -1,50 +1,11 @@
-.frontend-header {
-  background-color: white;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  height: 75px;
-}
+/*!
 
-a, a:visited {
-  color: #282828;
-}
+	Styles Manifest for Manifold
+	Contains only references to partials/other file manifests
 
-.logo {
-  margin-left: 10px;
-  background-image: url('../../static/logo.jpg');
-  background-size: 40px 40px;
-  background-repeat: no-repeat;
-  background-position: 0px 15px;
-  width: 100px;
-  height: 100px;
-}
+*/
 
-.frontend-container {
-  margin-top: 75px;
-  padding: 25px;
-  background-color: #F7F7F7;
-}
-
-.clear {
-  clear: both;
-}
-
-.texts-list {
-  list-style-type: none;
-
-  li {
-    float: left;
-    width: 20%;
-    padding: 25px;
-    img {
-      height: 200px;
-
-    }
-    .title {
-      display: block;
-      margin-top: 20px;
-    }
-
-  }
-}
+@import "normalize";
+@import "variables";
+@import "stacss";
+@import "components";
