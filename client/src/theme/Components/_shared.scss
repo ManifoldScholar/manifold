@@ -1,0 +1,142 @@
+// Shared Components
+// -----------------
+
+// Shared classes that aren't part of a more specific component
+
+// Contents
+// --------------------------
+// - Imports
+// - Utilities
+// - Layout
+// - Type
+// - Images
+// - Article Lists
+// - Navigation Lists
+// - Grids
+// - Buttons/Links
+// - Browser UI
+// - Tables
+// - Form Layout
+
+// Utilities
+// --------------------------------------------------------
+.screen-reader-text {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+
+// Layout
+// --------------------------------------------------------
+section {
+  &.neutral20 {
+    background-color: $neutral20;
+  }
+}
+
+.container {
+  @include containerPrototype;
+  // Section can be abstracted to more specific section class (or body class) if necessary
+  section > & {
+    padding-top: 85px;
+    padding-bottom: 100px;
+  }
+}
+
+.section-heading-utility-right {
+  // TODO: These styles should only hold for wider than container maximum
+  position: absolute;
+  top: 6px;
+  right: 0;
+}
+
+.footer-browse {
+  @include containerPrototype;
+}
+
+
+// Type
+// --------------------------------------------------------
+.section-heading {
+  @include headingPrimary;
+  color: $neutral80;
+  .manicon:before {
+    display: inline-block;
+    color: $neutral40;
+    vertical-align: middle;
+    margin-right: 13px;
+  }
+  .manicon-books-on-shelf:before {
+    margin-right: 24px;
+  }
+  .manicon-books-with-glasses:before {
+    font-size: 38px;
+  }
+  .manicon-lamp:before {
+    font-size: 56px;
+  }
+  .manicon-new-round:before {
+    font-size: 63px;
+    color: $accentPrimary;
+  }
+}
+
+
+// Buttons/Links
+// --------------------------------------------------------
+// Reset bare button class for using icons only
+.button-bare-icon {
+  @include buttonUnstyled;
+}
+
+// Can be a <button> or an <a>
+.button-primary {
+  @include buttonUnstyled;
+  @include utilityPrimary;
+  text-decoration: none;
+  color: $neutral80;
+  padding: 13px 23px;
+  display: inline-block;
+  border: 3px solid $accentPrimary;
+}
+
+// Large transparent button with icon on the left
+.button-icon-primary {
+  @include buttonUnstyled;
+  @include utilityPrimary;
+  font-size: $type60;
+  font-weight: $bold;
+  color: $neutral80;
+  border: 3px solid $accentPrimary;
+  padding: 21px 40px 20px;
+  line-height: 44px;
+  .manicon {
+    display: inline-block;
+    vertical-align: bottom;
+    line-height: 1;
+    width: auto;
+    margin-right: 14px;
+  }
+  .manicon-books-on-shelf {
+    font-size: 44px;
+  }
+  .manicon-books-with-glasses {
+    font-size: 35px;
+  }
+}
+
+
+// Browser UI (Selects, dropdowns, inputs, etc.)
+// --------------------------------------------------------
+.select-browse {
+  @include select-styled;
+  select {
+    min-width: 310px;
+  }
+}

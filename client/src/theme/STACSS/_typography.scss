@@ -1,0 +1,72 @@
+// Component Typography
+// --------------------
+
+// Template typography mixins/prototypes that can be extended into template/content classes.
+// Typographic classes can contain some structural (not textural) design where it does not require abstraction,
+// and textural classes dealing with typography (color, text-decoration, pseudo elements that modify text, etc).
+
+// They may contain:
+// Nested classes or elements with typographic/basic structural modifications only, for instance a header
+// with <span> classes inside.
+
+// These should not contain classes/prototypes to handle icon fonts or icon appearance.
+
+// Contents
+// --------------------------
+// - Utilities
+// - Variables
+// - Copy
+// - Headings
+// - Subheadings
+// - Signage/Utility/Special
+// - Labels
+// - Lists
+// - Forms
+
+
+// Typographic Hierarchy
+// Commonly used font-sizes for template typography
+// --------------------------------------------------------
+// $type130: ;
+$type120: 35px;
+$type100: 26px;
+$type90: 25px;
+$type80: 22px;
+$type70: 20px;
+$type60: 18px;
+$type50: 16px;
+$type40: 14px;
+$type30: 13px;
+$type20: 12px;
+// $type10: ;
+
+
+// Headings
+// --------------------------------------------------------
+@mixin headingPrimary {
+  @include templateHead;
+  font-size: $type120;
+  font-weight: $regular;
+  line-height: 1.32;
+  margin-top: 0;
+  margin-bottom: 75px;
+}
+
+@mixin headingTertiary {
+  @include templateHead;
+  font-size: $type70;
+  font-weight: $semibold;
+  margin-top: 0;
+}
+
+
+// Utility (Browser UI, buttons, etc.)
+// --------------------------------------------------------
+@mixin utilityPrimary {
+  @include templateHead;
+  font-weight: $semibold;
+  text-transform: uppercase;
+  // This is the base size, there may be variation from
+  // component to component
+  font-size: $type50;
+}

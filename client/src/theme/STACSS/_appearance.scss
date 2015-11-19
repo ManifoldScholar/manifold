@@ -1,0 +1,82 @@
+// Component Appearance
+// --------------------
+
+// Appearance prototypes/mixins contain primarily texture parameters: background-color, transparency, borders, etc.
+// as well as some minor, internal structural properties where abstraction isn't required (to prevent over-abstracting)
+
+// They may contain:
+// Nested classes/elements with other structural or textural properties
+
+// Appearance blocks should not be used to for prototypes that declare only typographical styles, but
+// they may include typographical styles/modifications to base type mixins where abstraction isn't required
+
+// Contents
+// --------------------------
+// - Imports
+// - Prototypes
+// - Utilities
+// - Layout
+// - Type
+// - Images
+// - Article Lists
+// - Navigation Lists
+// - Buttons/Links
+// - Browser UI
+// - Tables
+
+
+// Buttons
+// --------------------------------------------------------
+@mixin buttonUnstyled {
+  // TODO: This should be auto-prefixed
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+
+// Browser UI
+// --------------------------------------------------------
+// Styled select
+// based on: https://github.com/mdo/wtf-forms/blob/master/wtf-forms.css
+@mixin select-styled {
+  position: relative;
+  display: inline-block;
+  color: $neutral80;
+  select {
+    @include utilityPrimary;
+    display: inline-block;
+    width: auto;
+    font-size: $type40;
+    margin: 0;
+    padding: 15px 18px 17px;
+    line-height: $baseLineHeight;
+    background-color: transparent;
+    border: 3px solid $neutral40;
+    border-radius: 0;
+    outline: 0;
+    // This should be auto-prefixed
+    -webkit-appearance: none;
+    &:focus {
+      border-color: $accentPrimary;
+    }
+  }
+  // Dropdown icon included in markup
+  .manicon-caret-down {
+    display: inline-block;
+    font-size: 7px;
+    margin-top: -3px;
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    pointer-events: none;
+  }
+  select:focus:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 $neutralBlack;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+}

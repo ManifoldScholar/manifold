@@ -1,0 +1,62 @@
+// Variables
+//----------
+
+// Colors
+// --------------------------------------------------------
+// Neutral Colors
+
+$neutralWhite: #ffffff;
+
+// Off Whites
+$neutral10: #e8ecec;
+$neutral20: #f7f7f7;
+
+$neutral40: #c6c6c6;
+$neutral50: #a09fa0;
+$neutral70: #7a797b;
+$neutral75: #707071;
+$neutral80: #676668;
+$neutral90: #414042;
+
+// Separated as this is often used for base template elements (like plain text)
+$neutralOffBlack: $neutral90;
+$neutralBlack: #000000;
+
+// Accent Colors
+$accentPrimary: #52e3ac !default;
+$accentPrimaryPale: #dcf9ee !default;
+
+$accentSecondary: #34a178 !default;
+
+
+// Measurements
+// Structural measurements used site wide that are kept in one place
+// --------------------------------------------------------
+$baseLineHeight: 1.2;
+
+$containerWidthFull: 1235px; // Maximum container width of 1135 plus maximum gutter padding
+$containerPaddingFull: 50px;
+
+
+// Font Weights
+// These are convenience variables to keep font weight declarations consistent
+// --------------------------------------------------------
+// $light: 200;
+// $book: 300;
+$regular: 400;
+$semibold: 600;
+$bold: 700;
+
+// Responsive Breakpoints
+// Maintained in one place to keep major breakpoints consistent
+// --------------------------------------------------------
+// $break100: ;
+// $break90: ;
+// $break80: ;
+// $break70: ;
+// $break60: ;
+// $break50: ;
+// $break40: ;
+// $break30: ;
+// $break20: ;
+// $break10: ;

@@ -1,0 +1,82 @@
+// <nav> around <ul>
+.grid-project-summary {
+  ul {
+    @include listHorizontal;
+    display: block;
+    width: 100%;
+    margin-right: -5.5%;
+    margin-left: -5.5%;
+    li {
+      width: 33.333%;
+      vertical-align: top;
+      // Ensures flush grid elements, requires reset for any child elements
+      font-size: 0;
+      padding-right: 5.5%;
+      padding-bottom: 26px;
+      padding-left: 5.5%;
+    }
+  }
+  a {
+    display: block;
+    text-decoration: none;
+    .figure-wrapper {
+      max-width: 195px;
+    }
+    // Figure
+    figure {
+      max-width: 100%;
+      height: 0;
+      padding-top: 144%;
+      margin-bottom: 20px;
+      position: relative;
+      img {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        border: 4px solid transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      // Follow button
+      .manicon {
+        display: block;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        color: $neutralWhite;
+        text-align: center;
+        background-color: $accentPrimary;
+        padding-top: 12px;
+        border-radius: 100%;
+        position: absolute;
+        top: 7.018%;
+        left: -18px;
+      }
+    }
+    // Meta data
+    .title {
+      @include headingTertiary;
+      color: $neutral90;
+      margin-bottom: 6px;
+    }
+    .makers {
+      @include templateCopy;
+      font-size: $type70;
+      color: $neutral80;
+      padding-bottom: 17px;
+    }
+    .date {
+      @include templateCopy;
+      font-size: $type60;
+      font-style: italic;
+      color: $neutral75;
+    }
+    .description {
+      @include templateCopy;
+      font-size: $type70;
+      font-style: italic;
+      color: $accentSecondary;
+    }
+  }
+}

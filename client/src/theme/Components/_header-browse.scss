@@ -1,0 +1,81 @@
+// <header>
+.header-browse {
+  position: relative;
+  padding: 30px 52px 30px 40px;
+  // <a> return link with logo
+  .logo {
+    display: inline-block;
+    vertical-align: middle;
+    color: $accentPrimary;
+    text-decoration: none;
+    margin-right: 33px;
+    .manicon-manifold-logo {
+      font-size: 39px;
+    }
+  }
+
+  // <nav> wrapper around <ul>
+  .text-nav {
+    display: inline-block;
+    vertical-align: middle;
+    ul {
+      @include listHorizontal;
+      li {
+        margin-right: 25px;
+        a {
+          @include templateHead;
+          position: relative;
+          font-size: $type60;
+          color: $neutral50;
+          text-decoration: none;
+          &:hover {
+            color: $accentPrimary;
+          }
+        }
+        &.active a {
+          color: $neutral90;
+          &:before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: $neutral90;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .widget-nav {
+    position: absolute;
+    top: 30px;
+    right: 52px;
+    // Currently, set of two <button>s
+    .button-magnify {
+      margin-right: 51px;
+      vertical-align: middle;
+      .manicon-magnify {
+        font-size: 17px;
+        color: $neutral80;
+      }
+    }
+    .button-avatar {
+      @include buttonUnstyled;
+      background-color: $accentPrimary;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      border-radius: 100%;
+      vertical-align: middle;
+      overflow: hidden;
+      .manicon-person {
+        color: $accentPrimaryPale;
+        font-size: 34px;
+        line-height: 43px;
+      }
+    }
+  }
+}

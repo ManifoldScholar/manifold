@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
 import { BodyClass } from '../../components/shared';
-import { Header } from '../../components/frontend';
+import { Header, Footer } from '../../components/frontend';
 
 class Frontend extends Component {
 
@@ -17,13 +17,14 @@ class Frontend extends Component {
 
   render() {
     return (
-      <BodyClass className={'frontend'}>
+      <BodyClass className={'browse'}>
         <div>
           <DocumentMeta {...config.app}/>
           <Header />
-          <section className={'frontend-container'}>
+          <main>
             {this.props.children}
-          </section>
+          </main>
+          <Footer />
         </div>
       </BodyClass>
     );

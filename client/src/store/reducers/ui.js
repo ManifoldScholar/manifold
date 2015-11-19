@@ -1,14 +1,13 @@
 import {handleActions} from 'redux-actions';
 
 const initialState = {
-  textNavOpen: false
+  projectFilters: {}
 };
 
-const toggleTextNav = (state, actionIgnored) => {
-  const navOpenState = !state.textNavOpen;
-  return Object.assign({}, state, {textNavOpen: navOpenState});
-};
+function setProjectFilters(state, action) {
+  return Object.assign({}, state, {projectFilters: action.payload});
+}
 
 export default handleActions({
-  TOGGLE_TEXT_NAV: toggleTextNav
+  SET_PROJECT_FILTERS: setProjectFilters
 }, initialState);

@@ -1,29 +1,62 @@
 import {handleActions} from 'redux-actions';
 import {timestamp} from '../../utils/time';
 import {camelize} from 'humps';
+import {actions} from '../../actions/shared/collections';
+
+const collectionActions = Object.values(actions);
+export const collectionEntities = ['texts', 'projects', 'makers'];
+
+const resultsTemplate = { entities: [], query: {}, receivedAt: null};
+
+const initialResults = {};
+collectionActions.forEach((action) => {
+  initialResults[camelize(action.toLowerCase())] = Object.assign({}, resultsTemplate);
+});
+
+const initialEntities = {};
+collectionEntities.forEach((entity) => {
+  initialEntities[entity] = {};
+});
 
 const initialState = {
-  results: {},
-  entities: {}
+  results: initialResults,
+  entities: initialEntities
 };
+
+function mergeEntities(stateEntities, payloadEntities) {
+  const entities = {};
+  Object.keys(payloadEntities).forEach((key) => {
+    entities[key] = Object.assign({}, stateEntities[key], payloadEntities[key]);
+  });
+  return entities;
+}
 
 const fetch = {
   next(state, action) {
     const time = new Date();
     const actionKey = camelize(action.type.toLowerCase());
-    const fetchResults = {
-      [actionKey]: {
-        entities: action.payload.result,
-        receivedAt: timestamp(time)
-      }
+    const results = {
+      entities: action.payload.results,
+      receivedAt: timestamp(time)
     };
-    const results = Object.assign({}, state.results, fetchResults);
-    const entities = Object.assign({}, state.entities, action.payload.entities);
-    return Object.assign({}, state, {results, entities});
+    const fetchResults = {
+      [actionKey]: Object.assign({}, resultsTemplate, results)
+    };
+
+    const newState = {
+      results: Object.assign({}, state.results, fetchResults),
+      entities: Object.assign({}, state.entities, mergeEntities(state.entities, action.payload.entities))
+    };
+    return Object.assign({}, state, newState);
+  },
+  throw(stateIgnored, actionIgnored) {
+    // This should be called if the API promise fails.
   }
 };
 
-export default handleActions({
-  FETCH_TEXTS: fetch,
-  FETCH_ONE_TEXT: fetch
-}, initialState);
+const handlers = {};
+collectionActions.forEach((action) => {
+  handlers[action] = fetch;
+});
+
+export default handleActions(handlers, initialState);

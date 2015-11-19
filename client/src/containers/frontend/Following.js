@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { ProjectCovers, ProjectGrid, ProjectFilters } from '../../components/frontend';
+import {Link} from 'react-router';
+import { ProjectGrid, ProjectSummaryGrid, ProjectFilters } from '../../components/frontend';
 import { bindActionCreators } from 'redux';
 import { fetchFilteredProjects, fetchFeaturedProjects } from '../../actions/shared/collections';
 import { setProjectFilters } from '../../actions/frontend/ui';
 
-class Home extends Component {
+class Following extends Component {
 
   static propTypes = {
     children: PropTypes.object,
@@ -41,37 +42,39 @@ class Home extends Component {
   render() {
     return (
         <div>
-          <section>
-            <div className="container">
-              <header className="rel">
-                <h4 className="section-heading">
-                  <i className="manicon manicon-new-round"></i>
-                  {'Featured Projects'}
-                </h4>
-              </header>
-              <ProjectCovers makers={this.props.makers}
-                             projects={this.props.projects}
-                             entities={this.props.featuredProjects}
-              />
-            </div>
-          </section>
           <section className="neutral20">
             <div className="container">
               <header className="rel">
                 <h4 className="section-heading">
-                  <i className="manicon manicon-books-on-shelf"></i>
-                  {'Filtered Projects'}
+                  <i className="manicon manicon-books-with-glasses"></i>
+                  {'Projects You\'re Following'}
                 </h4>
+                <div className="section-heading-utility-right">
+                  <ProjectFilters updateAction={this.props.actions.setProjectFilters} />
+                </div>
               </header>
-              {/*
-                Note that we're using a different dumb component to render this.
-                Note, too, that the parent component delivers all the data the child component needs
-                to render (which is what keeps the child dumb)'
-              */}
-              <ProjectFilters updateAction={this.props.actions.setProjectFilters} />
               <ProjectGrid makers={this.props.makers}
-                             projects={this.props.projects}
-                             entities={this.props.filteredProjects}
+                           projects={this.props.projects}
+                           entities={this.props.filteredProjects}
+              />
+            </div>
+          </section>
+          <section>
+            <div className="container">
+              <header className="rel">
+                <h4 className="section-heading">
+                  <i className="manicon manicon-lamp"></i>
+                  {'Featured Projects'}
+                </h4>
+                <div className="section-heading-utility-right">
+                  <Link to={`/browse/`} className="button-primary">
+                    See all Featured
+                  </Link>
+                </div>
+              </header>
+              <ProjectSummaryGrid makers={this.props.makers}
+                           projects={this.props.projects}
+                           entities={this.props.featuredProjects}
               />
             </div>
           </section>
@@ -111,7 +114,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
-
+    mapStateToProps,
+    mapDispatchToProps
+)(Following);

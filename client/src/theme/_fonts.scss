@@ -1,0 +1,14 @@
+// Fonts
+// -----
+
+// Do your @font-face embedding/include mixins here, in the privacy of your own partial
+
+// Mixins
+// --------------------------
+ @mixin templateCopy {
+   font-family: "freight-text-pro", serif;
+ }
+
+ @mixin templateHead {
+   font-family: "sofia-pro",sans-serif;
+ }

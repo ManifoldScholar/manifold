@@ -1,3 +1,3 @@
 import {createAction} from 'redux-actions';
 
-export const toggleTextNav = createAction('TOGGLE_TEXT_NAV');
+export const setProjectFilters = createAction('SET_PROJECT_FILTERS');
