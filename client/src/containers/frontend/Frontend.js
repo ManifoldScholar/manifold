@@ -21,6 +21,11 @@ class Frontend extends Component {
         <div>
           <DocumentMeta {...config.app}/>
           <Header />
+          <span className={'manicon manicon-check'}></span>
+          <span className={'manicon manicon-magnify'}></span>
+          <span className={'manicon manicon-new-round'}></span>
+          <span className={'manicon manicon-person'}></span>
+          <span className={'manicon manicon-plus'}></span>
           <main>
             {this.props.children}
           </main>
