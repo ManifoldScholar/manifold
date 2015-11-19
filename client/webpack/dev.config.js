@@ -11,6 +11,9 @@ var port = parseInt(process.env.PORT) + 1 || 3001;
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
+// https://github.com/jussi-kalliokoski/fonticon-loader
+var IconFontPlugin = require('iconfont-loader/IconFontPlugin');
+
 var babelrc = fs.readFileSync('./.babelrc');
 var babelrcObject = {};
 
@@ -67,6 +70,7 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']},
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.scss$/, loader: 'style!css?importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap' },
+      { test: /\.svg$/, include: path.resolve(__dirname, "../static/fonts/svg"), loader: "iconfont-loader"},
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
@@ -87,6 +91,10 @@ module.exports = {
     fs: "empty"
   },
   plugins: [
+    // Icon Font
+    new IconFontPlugin({
+      fontName: "manifold-icons"
+    }),
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),

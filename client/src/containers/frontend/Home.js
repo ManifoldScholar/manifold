@@ -5,6 +5,7 @@ import { RecentProjects } from './';
 import { Texts } from '../../components/frontend';
 import { fetchTexts } from '../../actions/shared/collections';
 
+
 class Home extends Component {
 
   static propTypes = {
