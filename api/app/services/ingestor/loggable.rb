@@ -15,5 +15,10 @@ module Ingestor
       msg = I18n.t(key, vars)
       @logger.error(msg)
     end
+
+    def warn(key, vars = {})
+      msg = I18n.t(key, vars)
+      @logger.warn(msg)
+    end
   end
 end

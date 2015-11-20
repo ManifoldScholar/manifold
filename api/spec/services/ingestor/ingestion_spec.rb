@@ -9,16 +9,13 @@ RSpec.describe Ingestor::Ingestion do
     end.to raise_error
   end
 
-  it "should allow access to the source file extension" do
-    ingestion = Ingestor::Ingestion.new(epub_source_path)
-    expect(ingestion.extension).to eq "epub"
+  describe "when instantiated" do
+    subject { Ingestor::Ingestion.new("/tmp/book.epub") }
+    it ("should have a basename accessor") { is_expected.to have_attr_accessor(:basename) }
+    it ("should have a source_path accessor") { is_expected.to have_attr_accessor(:source_path) }
+    it ("should have a logger accessor") { is_expected.to have_attr_accessor(:logger) }
+    it ("should have a extension accessor") { is_expected.to have_attr_accessor(:extension) }
+    it ("should have a text accessor") { is_expected.to have_attr_accessor(:text) }
   end
 
-  it "should allow access to the source_path" do
-    ingestion = Ingestor::Ingestion.new(epub_source_path)
-    expect(ingestion.source_path).to eq epub_source_path
-  end
-
-  it "should return the first available strategy for the source" do
-  end
 end

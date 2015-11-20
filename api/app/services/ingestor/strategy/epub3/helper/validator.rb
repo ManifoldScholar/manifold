@@ -8,7 +8,7 @@ module Ingestor
         #
         # @author Zach Davis
         # @todo: This class needs to be refactored to pass Rubocop linting.
-        # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        # rubocop:disable Metrics/AbcSize
         class Validator
           def self.validate_text_sections(text, logger)
             text.text_sections.each do |cd|

@@ -7,7 +7,6 @@ module Api
       # GET /texts
       def index
         @texts = Text.all
-        Rails.logger.info @texts
         render json: @texts, each_serializer: TextPartialSerializer
       end
 

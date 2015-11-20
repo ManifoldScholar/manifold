@@ -21,7 +21,6 @@ module Ingestor
           attempt_save!(text)
         end
 
-        # rubocop: disable Metrics/MethodLength
         def update_text!(text)
           update_unique_id!(text)
           update_titles!(text)
@@ -94,17 +93,16 @@ module Ingestor
 
         def update_text_sections!(text)
           creator = Creator::TextSections.new(@logger, @inspector.metadata_node)
-          creator.existing(text.text_sections)
-          text_sections = creator.create(@inspector.spine_item_nodes, @inspector, text)
+          text_sections = creator.create(@inspector.spine_item_nodes, @inspector,
+                                         text, text.text_sections)
           text.text_sections.replace(text_sections.reject(&:nil?))
         end
 
         def update_resources!(text)
           creator = Creator::Resources.new(@logger, @inspector.metadata_node)
-          creator.existing(text.ingestion_sources)
           path = text.title.parameterize.underscore
           ingestion_sources = creator.create(@inspector.manifest_item_nodes, path,
-                                             @inspector)
+                                             @inspector, text.ingestion_sources)
           text.ingestion_sources.replace(ingestion_sources)
         end
 
@@ -135,15 +133,14 @@ module Ingestor
 
         def update_creators!(text)
           creator = Creator::Makers.new(@logger, @inspector.metadata_node)
-          creator.existing(text.creators)
-          makers = creator.create(@inspector.creator_nodes, "creator")
+          makers = creator.create(@inspector.creator_nodes, text.creators, "creator")
           text.creators.replace(makers)
         end
 
         def update_contributors!(text)
           creator = Creator::Makers.new(@logger, @inspector.metadata_node)
-          creator.existing(text.creators)
-          makers = creator.create(@inspector.contributor_nodes, "contributor")
+          makers = creator.create(@inspector.contributor_nodes, text.contributors,
+                                  "contributor")
           text.contributors.replace(makers)
         end
 

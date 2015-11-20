@@ -29,11 +29,11 @@ module Ingestor
       validate_strategy(strategy)
       set_ingestion_text(strategy, ingestion)
       strategy.ingest(ingestion)
-      @logger.info I18n.t("services.ingestor.logging.ingestion_end",
-                          name: basename)
+      logger.info I18n.t("services.ingestor.logging.ingestion_end",
+                         name: basename)
       return ingestion.text
-    rescue IngestionFailed => e
-      @logger.error(e.message)
+    rescue Ingestor::IngestionFailed => e
+      logger.error(e.message)
     end
 
     # Resets the ingestion logger to Rails.logger
@@ -53,6 +53,10 @@ module Ingestor
     # @private
     # @return [Array] Array with [basename, ingestion, strategy]
     def start(path)
+      unless File.exist?(path)
+        fail Ingestor::IngestionFailed,
+             "Could not find ingestion source"
+      end
       basename = File.basename(path)
       @logger.info I18n.t("services.ingestor.logging.ingestion_start",
                           name: basename)

@@ -1,5 +1,4 @@
 module Ingestor
-  class IngestionFailed < StandardError; end
   # The <tt>Ingestion</tt> class represents a single text ingestion run. It stores the
   # ingestion text, source_path, basename, extension, and a logger instance. It has no
   # functionality of its own, rather it simplifies sharing information about the current
@@ -7,7 +6,7 @@ module Ingestor
   #
   # @author Zach Davis
   class Ingestion
-    attr_accessor :basename, :source_path, :logger, :basename, :extension, :text
+    attr_accessor :basename, :source_path, :logger, :extension, :text
 
     def initialize(path, _text = nil)
       @text ||= Text.create

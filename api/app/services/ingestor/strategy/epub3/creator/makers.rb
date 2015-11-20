@@ -9,11 +9,12 @@ module Ingestor
           DEFAULT_ATTRIBUTES = {
           }
 
-          def create(nodes, role)
+          def create(nodes, existing = nil, role = nil)
             makers = nodes.each_with_index.map do |node, _index|
               node_inspector = Inspector::Metadata.new(node, @metadata_node)
               attr = defaults(DEFAULT_ATTRIBUTES, attributes(node_inspector))
-              maker = @existing.find_or_initialize_by(attr)
+              existing_maker = check_for_existing(existing, name: attr[:name])
+              maker = existing_maker || Maker.create(attr)
               log_maker(maker, role)
               maker
             end
