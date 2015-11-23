@@ -45,8 +45,10 @@
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.2.5, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="factory_girl (v4.5.0, rbenv: 2.2.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faker (v1.5.0@fdbd1b, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="filesize (v0.1.1, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.3.6, rbenv: 2.2.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="httparty (v0.13.7, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.7.0, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json (v1.8.3, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.0.3, rbenv: 2.2.3) [gem]" level="application" />
@@ -57,6 +59,7 @@
     <orderEntry type="library" scope="PROVIDED" name="mimemagic (v0.3.0, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_portile (v0.6.2, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.8.1, rbenv: 2.2.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multi_xml (v0.5.5, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="naught (v1.0.0, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-scp (v1.2.1, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-ssh (v3.0.1, rbenv: 2.2.3) [gem]" level="application" />

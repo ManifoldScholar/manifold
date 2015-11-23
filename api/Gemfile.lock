@@ -95,6 +95,13 @@ GIT
     sprockets (4.0.0)
       rack (>= 1, < 3)
 
+GIT
+  remote: git://github.com/stympy/faker.git
+  revision: fdbd1bd3262b738f84f96605ec228ee593a2b87c
+  specs:
+    faker (1.5.0)
+      i18n (~> 0.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -132,6 +139,9 @@ GEM
     filesize (0.1.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
     loofah (2.0.3)
@@ -144,6 +154,7 @@ GEM
     mimemagic (0.3.0)
     mini_portile (0.6.2)
     minitest (5.8.1)
+    multi_xml (0.5.5)
     naught (1.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -220,7 +231,9 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv
   factory_girl
+  faker!
   filesize (~> 0.1.1)
+  httparty (~> 0.13.7)
   memoist (~> 0.12.0)
   naught (~> 1.0.0)
   nokogiri

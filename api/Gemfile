@@ -32,6 +32,8 @@ gem "paperclip", "~> 4.3"
 gem "memoist", "~> 0.12.0"
 gem "naught", "~> 1.0.0"
 gem "filesize", "~> 0.1.1"
+gem "faker", github: "stympy/faker"
+gem "httparty", "~> 0.13.7"
 
 group :development, :test do
   gem "rspec-rails", "~> 3.0"
