@@ -9,16 +9,8 @@ class Text < ActiveRecord::Base
   serialize :page_list, Array
   serialize :landmarks, Array
 
-  has_many :collaborators
-  has_many :makers, through: :collaborators
-  has_many :creators,
-           -> { where '"collaborators"."role" = ?', "creator" },
-           through: :collaborators,
-           source: "maker"
-  has_many :contributors,
-           -> { where '"collaborators"."role" = ?', "contributor" },
-           through: :collaborators,
-           source: "maker"
+  include Collaborative
+
   has_many :titles, class_name: "TextTitle"
   has_many :text_subjects
   has_many :subjects, through: :text_subjects
@@ -69,10 +61,6 @@ class Text < ActiveRecord::Base
     map
   end
   memoize :ingestion_resource_map
-
-  def creator_names
-    creators.pluck(:name).join(", ")
-  end
 
   def cover_url
     cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
