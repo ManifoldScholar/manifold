@@ -17,6 +17,7 @@ class Text < ActiveRecord::Base
   has_many :ingestion_sources
   has_many :source_resources, through: :ingestion_sources, source: :resource
   has_many :text_sections
+  belongs_to :project, optional: true
 
   validates :unique_identifier, presence: true
 
