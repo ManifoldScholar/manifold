@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/rack/rack.git
-  revision: 35599cfc2751e0ee611c0ff799924b8e7fe0c0b4
+  revision: c393176b0edf3e5d06cabbb6eb9d9c7a07b2afa7
   specs:
     rack (2.0.0.alpha)
       json
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 09463183867f702d6ec66fce964ecb9f7ae0d98a
+  revision: d25205241b4f8d38b8ab106ffc1c465a8a697415
   specs:
     actionmailer (5.0.0.alpha)
       actionpack (= 5.0.0.alpha)
@@ -45,7 +45,7 @@ GIT
       activesupport (= 5.0.0.alpha)
       arel (= 7.0.0.alpha)
     activesupport (5.0.0.alpha)
-      concurrent-ruby (~> 1.0.0.pre3, < 2.0.0)
+      concurrent-ruby (~> 1.0)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       method_source
@@ -81,7 +81,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: 93a45b1c463a063ec7cf4d160107b67aa3db7a1a
+  revision: 06d84e952490d7d391592124f6e3b79f9c596674
   specs:
     sprockets-rails (3.0.0.beta3)
       actionpack (>= 4.0)
@@ -90,16 +90,16 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets.git
-  revision: 5a77f8b007b8ec61edd783c48baf9d971f1c684d
+  revision: 98d0ccc42949815d959cf95fbffd52a3df650358
   specs:
     sprockets (4.0.0)
       rack (>= 1, < 3)
 
 GIT
   remote: git://github.com/stympy/faker.git
-  revision: fdbd1bd3262b738f84f96605ec228ee593a2b87c
+  revision: e8c4314a4347c6a530311b4a542c37a768ef1a59
   specs:
-    faker (1.5.0)
+    faker (1.6.1)
       i18n (~> 0.5)
 
 GEM
@@ -112,6 +112,7 @@ GEM
     ast (2.1.0)
     astrolabe (1.3.1)
       parser (~> 2.2)
+    bcrypt (3.1.10)
     builder (3.2.2)
     capistrano (3.4.0)
       i18n
@@ -128,10 +129,10 @@ GEM
       sshkit (~> 1.3)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cocaine (0.5.7)
+    cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     colorize (0.7.7)
-    concurrent-ruby (1.0.0.pre4)
+    concurrent-ruby (1.0.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     factory_girl (4.5.0)
@@ -144,24 +145,25 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
+    jwt (1.5.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     memoist (0.12.0)
     method_source (0.8.2)
-    mime-types (2.6.2)
+    mime-types (2.99)
     mimemagic (0.3.0)
     mini_portile (0.6.2)
-    minitest (5.8.1)
+    minitest (5.8.3)
     multi_xml (0.5.5)
     naught (1.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.0.1)
-    nokogiri (1.6.6.2)
+    nokogiri (1.6.6.4)
       mini_portile (~> 0.6.0)
-    paperclip (4.3.1)
+    paperclip (4.3.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       cocaine (~> 0.5.5)
@@ -169,9 +171,9 @@ GEM
       mimemagic (= 0.3.0)
     parser (2.2.3.0)
       ast (>= 1.1, < 3.0)
-    pg (0.18.3)
+    pg (0.18.4)
     powerpack (0.1.1)
-    puma (2.14.0)
+    puma (2.15.3)
     rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -201,16 +203,17 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
-    rubocop (0.34.2)
+    rubocop (0.35.1)
       astrolabe (~> 1.3)
-      parser (>= 2.2.2.5, < 3.0)
+      parser (>= 2.2.3.0, < 3.0)
       powerpack (~> 0.1)
       rainbow (>= 1.99.1, < 3.0)
-      ruby-progressbar (~> 1.4)
+      ruby-progressbar (~> 1.7)
+      tins (<= 1.6.0)
     ruby-progressbar (1.7.5)
     rubyzip (1.1.7)
     sass (3.4.19)
-    spring (1.4.0)
+    spring (1.4.4)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sshkit (1.7.1)
@@ -219,6 +222,7 @@ GEM
       net-ssh (>= 2.8.0)
     thor (0.19.1)
     thread_safe (0.3.5)
+    tins (1.6.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
 
@@ -228,12 +232,14 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.0.rc2)
   arel!
+  bcrypt (~> 3.1.7)
   capistrano-rails
   capistrano-rbenv
   factory_girl
   faker!
   filesize (~> 0.1.1)
   httparty (~> 0.13.7)
+  jwt (~> 1.5.2)
   memoist (~> 0.12.0)
   naught (~> 1.0.0)
   nokogiri
