@@ -10,6 +10,7 @@ module Manifold
 
       def install
         generate "manifold:secrets"
+        rake "install:create_user"
       end
     end
   end
