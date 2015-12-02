@@ -29,7 +29,9 @@
     "prefer-const": 1,
     "semi": 1,
     "no-unused-vars": [1, {"args": "after-used", "argsIgnorePattern": "[iI]gnored"}],
-    "no-trailing-spaces": 1
+    "no-trailing-spaces": 1,
+    "no-multiple-empty-lines": 1,
+    "spaced-comment": 1
   },
   "plugins": [
     "react", "import"
