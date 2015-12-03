@@ -10,7 +10,7 @@ export default class Header extends Component {
   render() {
     return (
       <header className={'header-browse'}>
-        <Link to="{`/browse/`}" className="logo">
+        <Link to={'/browse'} className="logo">
           <figure>
             <i className="manicon manicon-manifold-logo"></i>
             <span className="screen-reader-text">
@@ -20,12 +20,12 @@ export default class Header extends Component {
         </Link>
         <nav className="text-nav">
           <ul>
-            <li className="active">
+            <li className={this.props.location.pathname == '/browse/' ? 'active' : ''}>
               <Link to={`/browse/`}>
                 Browse
               </Link>
             </li>
-            <li>
+            <li className={this.props.location.pathname == '/browse/following/' ? 'active' : ''}>
               <Link to={`/browse/following/`}>
                 Following
               </Link>
@@ -38,10 +38,12 @@ export default class Header extends Component {
             <i className="manicon manicon-magnify"></i>
             <span className="screen-reader-text">{'Click to search Manifold library'}</span>
           </button>
-          <button className="button-avatar">
-            <i className="manicon manicon-person"></i>
-            <span className="screen-reader-text">{'Click to open user settings'}</span>
-          </button>
+          <Link to={'/browse/login'}>
+            <button className="button-avatar">
+              <i className="manicon manicon-person"></i>
+              <span className="screen-reader-text">{'Click to open user settings'}</span>
+            </button>
+          </Link>
         </nav>
       </header>
     );

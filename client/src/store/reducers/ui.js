@@ -4,9 +4,9 @@ const initialState = {
   projectFilters: {}
 };
 
-function setProjectFilters(state, action) {
+const setProjectFilters = (state, action) => {
   return Object.assign({}, state, {projectFilters: action.payload});
-}
+};
 
 export default handleActions({
   SET_PROJECT_FILTERS: setProjectFilters

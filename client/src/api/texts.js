@@ -2,13 +2,24 @@ import apiClient from './client';
 
 export default {
 
-  texts: function texts() {
-    return apiClient('/api/v1/texts.json');
+  texts(filter, page) {
+    return {
+      endpoint: '/api/v1/texts',
+      method: 'GET',
+      options: {
+        params: {filter, page}
+      }
+    };
   },
 
-  text: function text(id) {
-    return apiClient(`/api/v1/texts/${id}.json`);
-  }
+  text(id) {
+    return {
+      endpoint: `/api/v1/texts/${id}`,
+      method: 'GET',
+      options: {
+      }
+    };
+  },
 
 };
 

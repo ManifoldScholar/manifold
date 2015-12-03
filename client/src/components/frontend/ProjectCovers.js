@@ -21,10 +21,10 @@ export default class ProjectCovers extends Component {
           {this.props.entities.map((projectId) => {
             const project = this.lookupProject(projectId);
             return (
-              <li>
+              <li key={projectId}>
                 <ProjectThumb makers={this.props.makers}
                               project={project}
-                              hideMeta="{hideMeta}"
+                              hideMeta={hideMeta}
                 />
               </li>
             );

@@ -8,7 +8,6 @@ export default class Footer extends Component {
   render() {
     return (
         <section className="footer-browse">
-          {"This is a stub component for the browse area footer"}
         </section>
     );
   }

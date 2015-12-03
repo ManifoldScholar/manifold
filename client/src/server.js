@@ -10,6 +10,8 @@ import { pad } from './utils/string';
 import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
+import cookie from 'cookie';
+import { setAuthToken } from './actions/shared/authentication';
 
 import {ReduxRouter} from 'redux-router';
 import createHistory from 'history/lib/createMemoryHistory';
@@ -55,6 +57,12 @@ app.use((req, res) => {
   if (__DISABLE_SSR__) {
     hydrateOnClient();
     return;
+  }
+
+  if (req.headers.cookie) {
+    const manifoldCookie = cookie.parse(req.headers.cookie);
+    const authToken = manifoldCookie.authToken;
+    store.dispatch(setAuthToken(authToken));
   }
 
   store.dispatch(match(req.originalUrl, (error, redirectLocation, routerState) => {

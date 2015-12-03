@@ -7,7 +7,7 @@ const initialState = {
   exists: false
 };
 
-const handleAPIError = function handleAPIError(state, action) {
+const handleAPIError = (state, action) => {
   return {
     response: action.payload,
     status: action.payload.status,
@@ -17,7 +17,7 @@ const handleAPIError = function handleAPIError(state, action) {
   };
 };
 
-const handleClearError = function handleClearError() {
+const handleClearError = () => {
   return initialState;
 };
 

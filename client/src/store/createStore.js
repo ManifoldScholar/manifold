@@ -1,12 +1,13 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import transitionMiddleware from './middleware/transitionMiddleware';
+import thunkMiddleware from './middleware/thunkMiddleware';
 import {DevTools} from '../containers/shared';
 import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise';
 
 export default function createStore(reduxReactRouter, getRoutes, createHistory, data) {
 
-  const middleware = [promiseMiddleware, transitionMiddleware];
+  const middleware = [thunkMiddleware, promiseMiddleware, transitionMiddleware];
 
   if (__DEVELOPMENT__ && __CLIENT__) {
     const logger = createLogger({

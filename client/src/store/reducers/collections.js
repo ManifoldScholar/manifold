@@ -23,13 +23,13 @@ const initialState = {
   entities: initialEntities
 };
 
-function mergeEntities(stateEntities, payloadEntities) {
+const mergeEntities = (stateEntities, payloadEntities) => {
   const entities = {};
   Object.keys(payloadEntities).forEach((key) => {
     entities[key] = Object.assign({}, stateEntities[key], payloadEntities[key]);
   });
   return entities;
-}
+};
 
 const fetch = {
   next(state, action) {
@@ -49,8 +49,10 @@ const fetch = {
     };
     return Object.assign({}, state, newState);
   },
-  throw(stateIgnored, actionIgnored) {
+  throw(state, actionIgnored) {
+    // TODO: Think about how to handle failures.
     // This should be called if the API promise fails.
+    return state;
   }
 };
 
@@ -58,5 +60,11 @@ const handlers = {};
 collectionActions.forEach((action) => {
   handlers[action] = fetch;
 });
+
+handlers.START_LOGOUT = {
+  next(stateIgnored, actionIgnored) {
+    return Object.assign({}, initialState);
+  }
+};
 
 export default handleActions(handlers, initialState);

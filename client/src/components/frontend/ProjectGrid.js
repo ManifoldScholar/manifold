@@ -21,7 +21,7 @@ export default class ProjectGrid extends Component {
           {this.props.entities.map((projectId) => {
             const project = this.lookupProject(projectId);
             return (
-              <li>
+              <li key={projectId} >
                 <ProjectThumb makers={this.props.makers}
                               project={project}
                               hideDesc={hideDesc}
