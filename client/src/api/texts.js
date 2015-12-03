@@ -1,5 +1,3 @@
-import apiClient from './client';
-
 export default {
 
   texts(filter, page) {

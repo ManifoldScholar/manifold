@@ -4,10 +4,10 @@ import {Link} from 'react-router';
 export default class Header extends Component {
 
   static propTypes = {
-    texts: PropTypes.object
+    location: PropTypes.object
   };
 
-  render() {
+  render = () => {
     return (
       <header className={'header-browse'}>
         <Link to={'/browse'} className="logo">
@@ -20,12 +20,12 @@ export default class Header extends Component {
         </Link>
         <nav className="text-nav">
           <ul>
-            <li className={this.props.location.pathname == '/browse/' ? 'active' : ''}>
+            <li className={this.props.location.pathname === '/browse/' ? 'active' : ''}>
               <Link to={`/browse/`}>
                 Browse
               </Link>
             </li>
-            <li className={this.props.location.pathname == '/browse/following/' ? 'active' : ''}>
+            <li className={this.props.location.pathname === '/browse/following/' ? 'active' : ''}>
               <Link to={`/browse/following/`}>
                 Following
               </Link>
@@ -47,5 +47,5 @@ export default class Header extends Component {
         </nav>
       </header>
     );
-  }
+  };
 }

@@ -9,11 +9,11 @@ export default class ProjectGrid extends Component {
     makers: PropTypes.object
   };
 
-  lookupProject(id) {
+  lookupProject = (id) => {
     return this.props.projects[id];
-  }
+  };
 
-  render() {
+  render = () => {
     const hideDesc = true;
     return (
       <nav className="grid-project">
@@ -32,5 +32,5 @@ export default class ProjectGrid extends Component {
         </ul>
       </nav>
     );
-  }
+  };
 }

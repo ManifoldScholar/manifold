@@ -16,11 +16,11 @@ export default class ProjectGrid extends Component {
     hideDesc: false
   };
 
-  lookupMaker(id) {
+  lookupMaker = (id) => {
     return this.props.makers[id];
-  }
+  };
 
-  render() {
+  render = () => {
     const project = this.props.project;
 
     let projectDate;
@@ -82,5 +82,5 @@ export default class ProjectGrid extends Component {
         {projectMeta}
       </Link>
     );
-  }
+  };
 }

@@ -1,5 +1,5 @@
 
-import {textsAPI, projectsAPI} from '../../api';
+import {projectsAPI} from '../../api';
 import createApiAction from '../helpers/createApiAction';
 
 export const actions = {

@@ -26,10 +26,10 @@ export default class Frontend extends Component {
     store: PropTypes.object.isRequired
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     const { dispatch } = this.props;
     dispatch(whoami());
-  }
+  };
 
   render() {
     return (

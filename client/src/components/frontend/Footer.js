@@ -5,10 +5,10 @@ export default class Footer extends Component {
 
   static propTypes = {};
 
-  render() {
+  render = () => {
     return (
         <section className="footer-browse">
         </section>
     );
-  }
+  };
 }

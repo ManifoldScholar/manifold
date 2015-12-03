@@ -6,7 +6,7 @@ export default class ProjectFilters extends Component {
     updateAction: PropTypes.func
   };
 
-  filterChange(event) {
+  filterChange = (event) => {
     let filter = {};
     switch (event.target.value) {
       case 'featured':
@@ -20,9 +20,9 @@ export default class ProjectFilters extends Component {
         break;
     }
     this.props.updateAction(filter);
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <div className="select-browse" style={{marginBottom: 93}}>
         <select onChange={this.filterChange.bind(this)} >
@@ -33,5 +33,5 @@ export default class ProjectFilters extends Component {
         <i className="manicon manicon-caret-down"></i>
       </div>
     );
-  }
+  };
 }

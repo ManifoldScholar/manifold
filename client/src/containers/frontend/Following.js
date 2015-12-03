@@ -44,14 +44,14 @@ export default class Following extends Component {
     store: PropTypes.object.isRequired
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate = (prevProps) => {
     const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
       dispatch(fetchFilteredProjects(this.props.projectFilters));
     }
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <div>
         <section className="neutral20">
@@ -106,5 +106,5 @@ export default class Following extends Component {
         </section>
       </div>
     );
-  }
+  };
 }

@@ -43,14 +43,14 @@ export default class Home extends Component {
     store: PropTypes.object.isRequired
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate = (prevProps) => {
     const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
       dispatch(fetchFilteredProjects(this.props.projectFilters));
     }
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <div>
         <section>
@@ -103,5 +103,5 @@ export default class Home extends Component {
         </section>
       </div>
     );
-  }
+  };
 }

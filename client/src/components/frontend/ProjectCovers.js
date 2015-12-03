@@ -9,11 +9,11 @@ export default class ProjectCovers extends Component {
     makers: PropTypes.object
   };
 
-  lookupProject(id) {
+  lookupProject = (id) => {
     return this.props.projects[id];
-  }
+  };
 
-  render() {
+  render = () => {
     const hideMeta = true;
     return (
       <nav className="grid-project-covers">
@@ -32,5 +32,5 @@ export default class ProjectCovers extends Component {
         </ul>
       </nav>
     );
-  }
+  };
 }
