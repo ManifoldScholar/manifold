@@ -80,3 +80,18 @@
     display: none;
   }
 }
+
+// Inputs/Textareas
+@mixin input-secondary {
+  @include templateCopy;
+  width: 306px;
+  font-size: $type70;
+  background: transparent;
+  border: 3px solid $accentPrimary;
+  padding: 7px 10px;
+  color: $accentPrimary;
+  outline: none;
+  &:focus {
+    border-color: $neutralWhite;
+  }
+}

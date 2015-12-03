@@ -56,9 +56,6 @@ section {
   right: 0;
 }
 
-.footer-browse {
-  @include containerPrototype;
-}
 
 
 // Type
@@ -138,5 +135,24 @@ section {
   @include select-styled;
   select {
     min-width: 310px;
+  }
+}
+
+// Wrapper around input with absolutely positioned button
+.search-button-inline {
+  position: relative;
+  // <button>
+  .manicon-magnify {
+    @include buttonUnstyled;
+    color: $accentPrimary;
+    font-size: 17px;
+    margin-top: -9px;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+  }
+  input {
+    @include input-secondary;
+    padding-left: 40px;
   }
 }
