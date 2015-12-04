@@ -23,8 +23,6 @@ gem "httparty", "~> 0.13.7"
 gem "jwt", "~> 1.5.2"
 
 group :development, :test do
-  gem "httparty", "~> 0.13.7"
-  gem "faker", github: "stympy/faker"
   gem "rspec-rails", "~> 3.0"
   gem "factory_girl"
 end
