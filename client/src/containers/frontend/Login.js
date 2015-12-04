@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { startLogin, startLogout } from '../../actions/shared/authentication';
+import { LoginForm } from './';
+import { startLogout } from '../../actions/shared/authentication';
 
 class Login extends Component {
 
@@ -10,23 +11,6 @@ class Login extends Component {
       authToken: React.PropTypes.string,
       user: React.PropTypes.object
     })
-  };
-
-  // TODO: Remove this at some future point
-  state = {email: 'admin@manifold.dev', password: 'manifold'};
-
-  updatePassword = (event) => {
-    this.setState(Object.assign({}, this.state, {password: event.target.value}));
-  };
-
-  updateEmail = (event) => {
-    this.setState(Object.assign({}, this.state, {email: event.target.value}));
-  };
-
-  handleLogin = (event) => {
-    event.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(startLogin(this.state.email, this.state.password));
   };
 
   handleLogout = (event) => {
@@ -41,20 +25,15 @@ class Login extends Component {
         <header className="rel">
           <h4 className="section-heading">
             <i className="manicon manicon-lamp"></i>
-            {'Login'}
+            {'Logout'}
           </h4>
         </header>
-        <form method="post" onSubmit={this.handleLogin}>
-          <label htmlFor="login-email">Email</label><br />
-          <input value={this.state.email} onChange={this.updateEmail} id="login-email" type="text" /><br /><br />
-          <label htmlFor="login-password">Password</label><br />
-          <input value={this.state.password} onChange={this.updatePassword} id="login-password" type="password" /><br /><br />
-          <input type="submit" value="Login" />
-        </form>
+        <LoginForm />
       </div>
     );
   };
 
+  // TODO: Abstract logout UI into separate container for reusability as well
   logoutUI = () => {
     return (
       <div className="container">
@@ -74,11 +53,9 @@ class Login extends Component {
 
   render = () => {
     return (
-      <div>
-        <section>
-          {this.props.authentication.authToken === null ? this.loginUI() : this.logoutUI()}
-        </section>
-      </div>
+      <section>
+        {this.props.authentication.authToken === null ? this.loginUI() : this.logoutUI()}
+      </section>
     );
   }
 }

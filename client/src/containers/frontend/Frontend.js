@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
 import { BodyClass } from '../../components/shared';
-import { LoginOverlay } from './';
-import { Header, Footer } from '../../components/frontend';
+import { Header, Footer, LoginOverlay } from '../../components/frontend';
 import { whoami } from '../../actions/shared/authentication';
 
 function mapStateToProps(state) {
