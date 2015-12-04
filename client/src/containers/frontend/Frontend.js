@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
 import { BodyClass } from '../../components/shared';
+import { LoginOverlay } from './';
 import { Header, Footer } from '../../components/frontend';
 import { whoami } from '../../actions/shared/authentication';
 
@@ -36,7 +37,9 @@ export default class Frontend extends Component {
       <BodyClass className={'browse'}>
         <div>
           <DocumentMeta {...config.app}/>
-          <Header location={this.props.location} />
+          <Header location={this.props.location} authenticated={this.props.authentication.authToken === null ? false : true} />
+          {/* Add hideOverlay={false} to show overlay */}
+          <LoginOverlay />
           <main>
             {this.props.children}
           </main>

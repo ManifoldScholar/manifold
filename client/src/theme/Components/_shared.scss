@@ -128,11 +128,31 @@ section {
   }
 }
 
+// Can be an <input>, <button>, or an <a>
+.button-secondary {
+  @include buttonUnstyled;
+  @include templateHead;
+  font-size: $type40;
+  font-weight: $bold;
+  text-transform: uppercase;
+  background-color: $accentPrimary;
+  color: $neutralOffBlack;
+  // TODO: Determine default side padding
+  padding: 17px 21px 18px;
+}
+
+.button-secondary-dull {
+  @extend .button-secondary;
+  text-align: left;
+  color: $neutral40;
+  background-color: $neutral80;
+}
+
 
 // Browser UI (Selects, dropdowns, inputs, etc.)
 // --------------------------------------------------------
 .select-browse {
-  @include select-styled;
+  @include selectStyled;
   select {
     min-width: 310px;
   }

@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import { UserButton } from './';
 import {Link} from 'react-router';
 
 export default class Header extends Component {
 
   static propTypes = {
-    location: PropTypes.object
+    location: PropTypes.object,
+    authenticated: PropTypes.bool
   };
 
   render = () => {
@@ -38,12 +40,7 @@ export default class Header extends Component {
             <i className="manicon manicon-magnify"></i>
             <span className="screen-reader-text">{'Click to search Manifold library'}</span>
           </button>
-          <Link to={'/browse/login'}>
-            <button className="button-avatar">
-              <i className="manicon manicon-person"></i>
-              <span className="screen-reader-text">{'Click to open user settings'}</span>
-            </button>
-          </Link>
+          <UserButton authenticated={this.props.authenticated} />
         </nav>
       </header>
     );

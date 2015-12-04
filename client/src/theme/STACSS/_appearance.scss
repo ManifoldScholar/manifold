@@ -40,7 +40,7 @@
 // --------------------------------------------------------
 // Styled select
 // based on: https://github.com/mdo/wtf-forms/blob/master/wtf-forms.css
-@mixin select-styled {
+@mixin selectStyled {
   position: relative;
   display: inline-block;
   color: $neutral80;
@@ -81,6 +81,7 @@
   }
 }
 
+
 // Inputs/Textareas
 @mixin input-secondary {
   @include templateCopy;
@@ -93,5 +94,27 @@
   outline: none;
   &:focus {
     border-color: $neutralWhite;
+  }
+}
+
+@mixin inputLabelPrimary {
+  display: block;
+  @include templateHead;
+  font-size: $type30;
+  text-transform: uppercase;
+  color: $neutral50;
+  margin-bottom: 12px;
+}
+
+@mixin inputPrimary {
+  @include templateHead;
+  font-size: $type70;
+  color: $neutralOffBlack;
+  background-color: $neutralWhite;
+  padding: 8px 13px 12px;
+  border: 3px solid $neutralWhite;
+  outline: none;
+  &:focus {
+    border-color: $accentPrimary;
   }
 }

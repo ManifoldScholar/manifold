@@ -1,0 +1,111 @@
+.overlay-login {
+  width: 100%;
+  height: 100%;
+  background-color: transparentize($neutral90, .05);
+  position: fixed;
+  top: 0;
+  // Hidden by default
+  opacity: 0;
+  visiblity: hidden;
+  &.overlay-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  .logo {
+    @include templateHead;
+    font-size: $type70;
+    font-weight: $semibold;
+    color: $neutral50;
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    line-height: 39px;
+    .manicon-manifold-logo {
+      display: inline-block;
+      font-size: 39px;
+      color: $accentPrimary;
+      margin-right: 32px;
+      vertical-align: top;
+    }
+  }
+
+  // Button
+  .overlay-close {
+    @include buttonUnstyled;
+    @include templateHead;
+    font-size: $type60;
+    color: $neutral50;
+    position: absolute;
+    top: 36px;
+    right: 36px;
+    line-height: 31px;
+    .manicon-x {
+      display: inline-block;
+      font-size: 31px;
+      margin-left: 26px;
+      vertical-align: top;
+    }
+  }
+
+  .overlay-content {
+    max-width: 340px;
+    margin: 226px auto 0px;
+  }
+
+  .login-form {
+    .field + .field {
+      margin-top: 27px;
+    }
+    label {
+      @include inputLabelPrimary;
+    }
+    input[type="text"], input[type="password"] {
+      @include inputPrimary;
+      width: 100%;
+    }
+    .button-secondary {
+      display: block;
+      width: 100%;
+      margin-top: 30px;
+    }
+  }
+
+  .login-links {
+    @include templateCopy;
+    font-size: $type60;
+    font-style: italic;
+    color: $neutral50;
+    margin-top: 25px;
+    a {
+      color: $neutral50;
+    }
+    a + a {
+      margin-left: 14px;
+    }
+  }
+
+  .login-external {
+    margin-top: 45px;
+    .button-secondary-dull {
+      width: 100%;
+      span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .manicon {
+        width: 39px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .manicon-facebook {
+        font-size: 25px;
+      }
+      .manicon-twitter {
+        font-size: 22px;
+      }
+    }
+    .button-secondary-dull + .button-secondary-dull {
+      margin-top: 21px;
+    }
+  }
+}
