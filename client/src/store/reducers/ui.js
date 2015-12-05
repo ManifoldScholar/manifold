@@ -1,13 +1,5 @@
-import {handleActions} from 'redux-actions';
+import {combineReducers} from 'redux';
+import filters from './ui/filters';
+import visibility from './ui/visibility';
 
-const initialState = {
-  projectFilters: {}
-};
-
-const setProjectFilters = (state, action) => {
-  return Object.assign({}, state, {projectFilters: action.payload});
-};
-
-export default handleActions({
-  SET_PROJECT_FILTERS: setProjectFilters
-}, initialState);
+export default combineReducers({filters, visibility});

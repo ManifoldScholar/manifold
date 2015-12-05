@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 export default class UserButton extends Component {
 
   static propTypes = {
+    showLoginOverlay: PropTypes.func,
     authenticated: PropTypes.bool
   };
 
@@ -11,7 +12,7 @@ export default class UserButton extends Component {
   };
 
   UIShowLoginOverlay = (event) => {
-    console.log("You're not logged in, so this will trigger the login overlay:" + event);
+    this.props.showLoginOverlay();
   };
 
   render = () => {

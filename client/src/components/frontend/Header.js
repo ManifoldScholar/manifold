@@ -5,6 +5,7 @@ import {Link} from 'react-router';
 export default class Header extends Component {
 
   static propTypes = {
+    showLoginOverlay: PropTypes.func,
     location: PropTypes.object,
     authenticated: PropTypes.bool
   };
@@ -40,7 +41,7 @@ export default class Header extends Component {
             <i className="manicon manicon-magnify"></i>
             <span className="screen-reader-text">{'Click to search Manifold library'}</span>
           </button>
-          <UserButton authenticated={this.props.authenticated} />
+          <UserButton showLoginOverlay={this.props.showLoginOverlay} authenticated={this.props.authenticated} />
         </nav>
       </header>
     );

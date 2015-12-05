@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import { ProjectGrid, ProjectSummaryGrid, ProjectFilters } from '../../components/frontend';
 import { bindActionCreators } from 'redux';
 import { fetchFilteredProjects, fetchFeaturedProjects } from '../../actions/shared/collections';
-import { setProjectFilters } from '../../actions/frontend/ui';
+import { setProjectFilters } from '../../actions/frontend/ui/filters';
 import connectData from '../../decorators/connectData';
 
 function fetchData(getState, dispatch) {

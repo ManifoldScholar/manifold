@@ -5,18 +5,15 @@ import classNames from 'classnames';
 export default class LoginOverlay extends Component {
 
   static propTypes = {
-    hideOverlay: PropTypes.bool
-  };
-
-  static defaultProps = {
-    hideOverlay: true
+    visible: PropTypes.bool,
+    hideLoginOverlay: PropTypes.func
   };
 
   render = () => {
     const overlayClass = classNames({
       'overlay-login': true,
-      'overlay-hidden': this.props.hideOverlay,
-      'overlay-visible': !this.props.hideOverlay
+      'overlay-hidden': !this.props.visible,
+      'overlay-visible': this.props.visible
     });
     return (
         <div className={overlayClass}>
@@ -24,7 +21,7 @@ export default class LoginOverlay extends Component {
             <i className="manicon manicon-manifold-logo"></i>
             Manifold
           </figure>
-          <button className="overlay-close">
+          <button onClick={this.props.hideLoginOverlay} className="overlay-close">
             Cancel Log in
             <i className="manicon manicon-x"></i>
           </button>

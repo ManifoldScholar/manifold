@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ProjectCovers, ProjectGrid, ProjectFilters } from '../../components/frontend';
 import { bindActionCreators } from 'redux';
 import { fetchFilteredProjects, fetchFeaturedProjects } from '../../actions/shared/collections';
-import { setProjectFilters } from '../../actions/frontend/ui';
+import { setProjectFilters } from '../../actions/frontend/ui/filters';
 import connectData from '../../decorators/connectData';
 
 
@@ -19,7 +19,7 @@ function mapStateToProps(state) {
   return {
     filteredProjects: state.collections.results.fetchFilteredProjects.entities,
     featuredProjects: state.collections.results.fetchFeaturedProjects.entities,
-    projectFilters: state.ui.projectFilters,
+    projectFilters: state.ui.filters.project,
     projects: state.collections.entities.projects,
     makers: state.collections.entities.makers
   };
