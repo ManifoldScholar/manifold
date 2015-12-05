@@ -22,7 +22,9 @@ export default class Frontend extends Component {
   static propTypes = {
     children: PropTypes.object,
     dispatch: PropTypes.func,
-    location: PropTypes.object
+    authentication: PropTypes.object,
+    location: PropTypes.object,
+    visibility: PropTypes.object
   };
 
   static contextTypes = {

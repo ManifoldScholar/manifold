@@ -26,7 +26,11 @@ export default class LoginOverlay extends Component {
             <i className="manicon manicon-x"></i>
           </button>
           <div className="overlay-content">
-            <LoginForm />
+            {/*
+              Note that even though hideLoginOverlay is used in this component it is also passed to the login form
+              container
+             */}
+            <LoginForm hideLoginOverlay={this.props.hideLoginOverlay} />
           </div>
         </div>
     );

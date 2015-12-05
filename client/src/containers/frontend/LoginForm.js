@@ -7,6 +7,7 @@ class LoginForm extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    hideLoginOverlay: PropTypes.func,
     authentication: React.PropTypes.shape({
       authToken: React.PropTypes.string,
       user: React.PropTypes.object
@@ -28,6 +29,7 @@ class LoginForm extends Component {
     event.preventDefault();
     const { dispatch } = this.props;
     dispatch(startLogin(this.state.email, this.state.password));
+    this.props.hideLoginOverlay();
   };
 
 

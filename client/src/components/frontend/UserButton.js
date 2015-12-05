@@ -4,7 +4,13 @@ export default class UserButton extends Component {
 
   static propTypes = {
     showLoginOverlay: PropTypes.func,
-    authenticated: PropTypes.bool
+    authenticated: PropTypes.bool,
+    userAvatar: PropTypes.string
+  };
+
+  // TODO: Get this dynamically from user data
+  static defaultProps = {
+    userAvatar: '/placeholder/user-avatar-dreft01.jpg'
   };
 
   UIToggleUserMenu = (event) => {
@@ -15,11 +21,26 @@ export default class UserButton extends Component {
     this.props.showLoginOverlay();
   };
 
+  avatarImage = () => {
+    let output = '';
+    if (this.props.authenticated && this.props.userAvatar) {
+      output = (
+          <img className="avatar-image" src={this.props.userAvatar}/>
+      );
+    } else {
+      output = (
+          <i className="manicon manicon-person"></i>
+      );
+    }
+
+    return output;
+  };
+
   render = () => {
     return (
         <button className="button-avatar" onClick={this.props.authenticated ? this.UIToggleUserMenu.bind(this) : this.UIShowLoginOverlay.bind(this)}>
-          <i className="manicon manicon-person"></i>
-          <span className="screen-reader-text">{'Click to open user settings'}</span>
+          <span className="screen-reader-text">{'Click to login or open user settings'}</span>
+          {this.avatarImage()}
         </button>
     );
   };

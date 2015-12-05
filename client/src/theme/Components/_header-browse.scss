@@ -72,10 +72,13 @@
       border-radius: 100%;
       vertical-align: middle;
       overflow: hidden;
+      .avatar-image {
+        width: 100%;
+      }
       .manicon-person {
         color: $accentPrimaryPale;
         font-size: 34px;
-        line-height: 43px;
+        line-height: 46px;
       }
     }
   }
