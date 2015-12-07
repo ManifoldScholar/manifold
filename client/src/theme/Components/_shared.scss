@@ -84,6 +84,19 @@ section {
   }
 }
 
+.login-links {
+  @include templateCopy;
+  font-size: $type60;
+  font-style: italic;
+  color: $neutral50;
+  a {
+    color: $neutral50;
+  }
+  a + a {
+    margin-left: 14px;
+  }
+}
+
 
 // Buttons/Links
 // --------------------------------------------------------
@@ -146,6 +159,31 @@ section {
   text-align: left;
   color: $neutral40;
   background-color: $neutral80;
+}
+
+// STACSS: There may be a better abstraction/place for these types of button
+// declaration, but for now it's only used in a couple of specific places
+.login-external {
+  .button-secondary-dull {
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .manicon {
+      width: 39px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .manicon-facebook {
+      font-size: 25px;
+    }
+    .manicon-twitter {
+      font-size: 22px;
+    }
+  }
+  .button-secondary-dull + .button-secondary-dull {
+    margin-top: 21px;
+  }
 }
 
 

@@ -88,3 +88,22 @@
     display: inline-block;
   }
 }
+
+
+// Form Layout
+// --------------------------------------------------------
+@mixin loginFormPrimary {
+  .field + .field {
+    margin-top: 27px;
+  }
+  label {
+    @include inputLabelPrimary;
+  }
+  input[type="text"], input[type="password"] {
+    @include inputPrimary;
+  }
+  .button-secondary {
+    display: block;
+    margin-top: 30px;
+  }
+}

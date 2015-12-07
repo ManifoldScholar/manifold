@@ -54,59 +54,20 @@
   }
 
   .login-form {
-    .field + .field {
-      margin-top: 27px;
-    }
-    label {
-      @include inputLabelPrimary;
-    }
-    input[type="text"], input[type="password"] {
-      @include inputPrimary;
+    @include loginFormPrimary;
+    input[type="text"], input[type="password"], input[type="submit"] {
       width: 100%;
-    }
-    .button-secondary {
-      display: block;
-      width: 100%;
-      margin-top: 30px;
     }
   }
 
   .login-links {
-    @include templateCopy;
-    font-size: $type60;
-    font-style: italic;
-    color: $neutral50;
     margin-top: 25px;
-    a {
-      color: $neutral50;
-    }
-    a + a {
-      margin-left: 14px;
-    }
   }
 
   .login-external {
     margin-top: 45px;
     .button-secondary-dull {
       width: 100%;
-      span {
-        display: inline-block;
-        vertical-align: middle;
-      }
-      .manicon {
-        width: 39px;
-        display: inline-block;
-        vertical-align: middle;
-      }
-      .manicon-facebook {
-        font-size: 25px;
-      }
-      .manicon-twitter {
-        font-size: 22px;
-      }
-    }
-    .button-secondary-dull + .button-secondary-dull {
-      margin-top: 21px;
     }
   }
 }

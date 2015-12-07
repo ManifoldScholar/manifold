@@ -1,0 +1,31 @@
+.login-page {
+  .login-form {
+    @include loginFormPrimary;
+    input[type="text"], input[type="password"] {
+      border-color: $neutral40;
+      width: 300px;
+    }
+  }
+
+  .login-links {
+    margin-top: 25px;
+  }
+
+  .login-external {
+    margin-top: 45px;
+    .button-secondary-dull {
+      display: block;
+      width: 300px;
+    }
+  }
+
+  .login-notice {
+    @include templateHead;
+    font-size: $type60;
+    margin-bottom: 35px;
+  }
+
+  .button-secondary {
+    width: 120px;
+  }
+}

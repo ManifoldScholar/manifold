@@ -25,7 +25,7 @@ class Login extends Component {
         <header className="rel">
           <h4 className="section-heading">
             <i className="manicon manicon-lamp"></i>
-            {'Logout'}
+            {'Log In'}
           </h4>
         </header>
         <LoginForm />
@@ -40,12 +40,12 @@ class Login extends Component {
         <header className="rel">
           <h4 className="section-heading">
             <i className="manicon manicon-lamp"></i>
-            {'Logout'}
+            {'Log Out'}
           </h4>
         </header>
         <form method="post" onSubmit={this.handleLogout}>
-          { this.props.authentication.user ? <div style={{marginBottom: 20}}>{`You are logged in as ${this.props.authentication.user.email}`}</div> : ''}
-          <input type="submit" value="Logout" />
+          { this.props.authentication.user ? <p className="login-notice">{`You are logged in as ${this.props.authentication.user.email}`}</p> : ''}
+          <input type="submit" value="Log Out" className="button-secondary" />
         </form>
       </div>
     );
@@ -53,7 +53,7 @@ class Login extends Component {
 
   render = () => {
     return (
-      <section>
+      <section className="login-page">
         {this.props.authentication.authToken === null ? this.loginUI() : this.logoutUI()}
       </section>
     );
