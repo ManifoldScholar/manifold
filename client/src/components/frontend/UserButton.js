@@ -5,7 +5,8 @@ export default class UserButton extends Component {
   static propTypes = {
     showLoginOverlay: PropTypes.func,
     authenticated: PropTypes.bool,
-    userAvatar: PropTypes.string
+    userAvatar: PropTypes.string,
+    history: PropTypes.object
   };
 
   // TODO: Get this dynamically from user data
@@ -14,7 +15,7 @@ export default class UserButton extends Component {
   };
 
   UIToggleUserMenu = (event) => {
-    console.log("You're logged in, so this will trigger a menu action:" + event);
+    this.props.history.push('/browse/login')
   };
 
   UIShowLoginOverlay = (event) => {

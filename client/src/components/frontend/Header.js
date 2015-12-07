@@ -7,6 +7,7 @@ export default class Header extends Component {
   static propTypes = {
     showLoginOverlay: PropTypes.func,
     location: PropTypes.object,
+    history: PropTypes.object,
     authenticated: PropTypes.bool
   };
 
@@ -41,7 +42,9 @@ export default class Header extends Component {
             <i className="manicon manicon-magnify"></i>
             <span className="screen-reader-text">{'Click to search Manifold library'}</span>
           </button>
-          <UserButton showLoginOverlay={this.props.showLoginOverlay} authenticated={this.props.authenticated} />
+          <UserButton history={this.props.history}
+                      showLoginOverlay={this.props.showLoginOverlay}
+                      authenticated={this.props.authenticated} />
         </nav>
       </header>
     );
