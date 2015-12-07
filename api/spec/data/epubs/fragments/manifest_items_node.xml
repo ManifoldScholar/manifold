@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="en"
+         unique-identifier="pub-identifier">
+    <manifest>
+        <item id="id-id2644001" href="ch03s04.xhtml" media-type="application/xhtml+xml"/>
+        <item id="id-id2644238" href="ch03s05.xhtml" media-type="application/xhtml+xml"/>
+        <item id="id-id2645594" href="ch03s06.xhtml" media-type="application/xhtml+xml"/>
+    </manifest>
+</package>

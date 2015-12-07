@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="en"
+         unique-identifier="pub-identifier">
+    <spine>
+        <itemref idref="cover" linear="no"/>
+        <itemref idref="htmltoc" linear="yes"/>
+        <itemref idref="id-id2632344"/>
+        <itemref idref="id-id2604743"/>
+        <itemref idref="id-id2629773"/>
+    </spine>
+</package>

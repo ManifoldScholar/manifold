@@ -29,7 +29,7 @@ npm-debug.log
 
 ### Ignore user content ###
 public/system
-epubs
+./epubs
 
 ### Ignore secrets ###
 config/secrets.yml

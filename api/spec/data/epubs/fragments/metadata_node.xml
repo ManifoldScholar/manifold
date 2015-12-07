@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/" version="3.0" xml:lang="en"
+         unique-identifier="pub-identifier">
+    <metadata>
+        <dc:identifier id="pub-identifier">urn:isbn:123412341234</dc:identifier>
+
+        <dc:title id="pub-title">Manifold Scholar EPUB3 Fixture</dc:title>
+        <dc:title id="pub-title">A subtitle</dc:title>
+
+        <dc:language id="pub-language">en</dc:language>
+        <dc:date>2012-02-20</dc:date>
+        <meta property="dcterms:modified">2012-10-24T15:30:00Z</meta>
+        <dc:creator id="pub-creator1">Alfred Hitchcock</dc:creator>
+        <dc:creator id="pub-creator2">Wim Wenders</dc:creator>
+
+        <dc:contributor>Orson Welles</dc:contributor>
+        <dc:contributor>Robert Altman</dc:contributor>
+
+        <dc:publisher>Manifold Scholarship</dc:publisher>
+        <dc:rights>Copyright © 2012 Corporate Conglomerate, Inc</dc:rights>
+    </metadata>
+</package>
