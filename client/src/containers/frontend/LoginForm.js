@@ -7,11 +7,18 @@ class LoginForm extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    overlayVisible: PropTypes.bool,
     hideLoginOverlay: PropTypes.func,
     authentication: React.PropTypes.shape({
       authToken: React.PropTypes.string,
       user: React.PropTypes.object
     })
+  };
+
+  // By default, the visibility of the login overlay is false so this container can be used
+  // outside of an overlay without any knowledge of the UI state
+  static defaultProps = {
+    overlayVisible: false
   };
 
   // TODO: Remove this at some future point
@@ -29,7 +36,9 @@ class LoginForm extends Component {
     event.preventDefault();
     const { dispatch } = this.props;
     dispatch(startLogin(this.state.email, this.state.password));
-    this.props.hideLoginOverlay();
+    if (this.props.overlayVisible) {
+      this.props.hideLoginOverlay();
+    }
   };
 
 

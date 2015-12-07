@@ -30,7 +30,7 @@ export default class LoginOverlay extends Component {
               Note that even though hideLoginOverlay is used in this component it is also passed to the login form
               container
              */}
-            <LoginForm hideLoginOverlay={this.props.hideLoginOverlay} />
+            <LoginForm overlayVisible={this.props.visible} hideLoginOverlay={this.props.hideLoginOverlay} />
           </div>
         </div>
     );
