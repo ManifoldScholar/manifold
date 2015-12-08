@@ -7,7 +7,9 @@ module Api
       # GET /projects
       def index
         @projects = Project.filtered(filter_params)
-        render json: @projects, include: ["creators", "collaborators"], each_serializer: ProjectPartialSerializer
+        render json: @projects,
+               include: %w(creators collaborators),
+               each_serializer: ProjectPartialSerializer
       end
 
       # GET /projects/1

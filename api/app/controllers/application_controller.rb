@@ -1,5 +1,5 @@
-require 'exceptions'
-require 'auth_token'
+require "exceptions"
+require "auth_token"
 
 # The base application controller
 class ApplicationController < ActionController::API
@@ -12,11 +12,9 @@ class ApplicationController < ActionController::API
   protected
 
   def load_current_user
-    begin
-      @current_user = User.find(decoded_auth_token[:user_id])
-    rescue JWT::DecodeError
-      nil
-    end
+    @current_user = User.find(decoded_auth_token[:user_id])
+  rescue JWT::DecodeError
+    nil
   end
 
   # This method gets the current user based on the user_id included
@@ -54,21 +52,22 @@ class ApplicationController < ActionController::API
   # JWT's are stored in the Authorization header using this format:
   # Bearer somerandomstring.encoded-payload.anotherrandomstring
   def http_auth_token
-    @http_auth_token ||= if request.headers['Authorization'].present?
-                           request.headers['Authorization'].split(' ').last
+    @http_auth_token ||= if request.headers["Authorization"].present?
+                           request.headers["Authorization"].split(" ").last
                          end
   end
 
   # Helper Methods for responding to errors
   # ------------------------------------------------------------
   def authentication_timeout
-    render json: { errors: ['Authentication Timeout'] }, status: 419
-  end
-  def forbidden_resource
-    render json: { errors: ['Not Authorized To Access Resource'] }, status: :forbidden
-  end
-  def user_not_authenticated
-    render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+    render json: { errors: ["Authentication Timeout"] }, status: 419
   end
 
+  def forbidden_resource
+    render json: { errors: ["Not Authorized To Access Resource"] }, status: :forbidden
+  end
+
+  def user_not_authenticated
+    render json: { errors: ["Not Authenticated"] }, status: :unauthorized
+  end
 end

@@ -20,17 +20,14 @@ class Project < ActiveRecord::Base
 
   def self.filtered(filters)
     projects = Project.all
-    defaults = {featured: nil}
+    defaults = { featured: nil }
     filters = defaults.merge(filters[:filter].to_h.symbolize_keys || {})
-    projects = projects.where(:featured => true) if filters[:featured] == 'true'
-    projects = projects.where(:featured => false) if filters[:featured] == 'false'
+    projects = projects.where(featured: true) if filters[:featured] == "true"
+    projects = projects.where(featured: false) if filters[:featured] == "false"
     projects
   end
 
   def cover_url
     cover.url if cover
   end
-
-  private
-
 end

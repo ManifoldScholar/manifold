@@ -5,5 +5,4 @@ class ProjectPartialSerializer < ActiveModel::Serializer
 
   has_many :creators, serializer: MakerSerializer
   has_many :contributors, serializer: MakerSerializer
-
 end

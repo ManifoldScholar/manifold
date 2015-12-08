@@ -1,3 +1,4 @@
+# Responsible for encoding and decoding authentication tokens.
 class AuthToken
   # Encode a hash in a json web token
   def self.encode(payload, ttl_in_minutes = 60 * 24 * 30)
