@@ -43,12 +43,13 @@ module Ingestor
           end
 
           def attributes(node_inspector, section_inspector, text)
+            body = section_inspector.body
             resource = text
                        .find_ingestion_source_by_identifier(node_inspector.idref).resource
             {
               source_identifier: node_inspector.idref,
               name: section_inspector.guess_name,
-              source_body:  section_inspector.body,
+              source_body:  body,
               kind: section_inspector.kind,
               resource: resource
             }
