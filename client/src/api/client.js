@@ -42,7 +42,6 @@ export function apiClient(endpoint, method, options) {
       return {response};
     });
   }).then(({ json }) => {
-
     const cleanedData = camelizeKeys(json.data);
     const entities = {};
     let results = [];

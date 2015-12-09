@@ -12,7 +12,7 @@ export default {
 
   project(id) {
     return {
-      endpoint: `/api/v1/project/${id}`,
+      endpoint: `/api/v1/projects/${id}`,
       method: 'GET',
       options: {
       }

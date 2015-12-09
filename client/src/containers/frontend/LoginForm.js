@@ -70,11 +70,11 @@ class LoginForm extends Component {
           </p>
 
           <section className="login-external">
-            <button className="button-secondary-dull">
+            <button className="button-secondary-dark">
               <i className="manicon manicon-facebook"></i>
               <span>Log in with Facebook</span>
             </button>
-            <button className="button-secondary-dull">
+            <button className="button-secondary-dark">
               <i className="manicon manicon-twitter"></i>
               <span>Log in with Twitter</span>
             </button>
