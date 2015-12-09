@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Client Server (development)" type="js.build_tools.npm" factoryName="npm">
+    <package-json value="$PROJECT_DIR$/client/package.json" />
+    <command value="run-script" />
+    <scripts>
+      <script value="start-dev" />
+    </scripts>
+    <envs />
+    <method />
+  </configuration>
+</component>

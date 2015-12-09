@@ -1,0 +1,33 @@
+// Shared Components
+// -----------------
+
+// Shared classes that aren't part of a more specific component
+
+// Contents
+// --------------------------
+// - Imports
+// - Utilities
+// - Layout
+// - Type
+// - Images
+// - Article Lists
+// - Navigation Lists
+// - Grids
+// - Buttons/Links
+// - Tables
+// - Forms
+
+// Layout
+// --------------------------------------------------------
+.container {
+  @include containerPrototype;
+  // Section can be abstracted to more specific section class (or body class) if necessary
+  section > & {
+    padding-top: 85px;
+    padding-bottom: 100px;
+  }
+}
+
+.footer-browse {
+  @include containerPrototype;
+}

@@ -1,0 +1,61 @@
+// Component Structure
+// -------------------
+
+// Structure-only mixins, with parameters for margins, padding, position, display, etc.
+
+// Contents
+// --------------------------
+// - Imports
+// - Prototypes
+// - Utilities
+// - Layout
+// - Type
+// - Images
+// - Lists
+// - Grids
+// - Buttons/Links
+// - Tables
+// - Forms
+
+
+// Utilities
+// --------------------------------------------------------
+// Media queries
+// Respond to viewport size
+// $size -> viewport size
+// $operator -> 'min' or 'max'
+// $aspect -> 'width' or 'height'
+// --------------------------
+@mixin respond($size, $operator: max, $aspect: width) {
+  @media all and (#{$operator}-#{$aspect}: $size) {
+    @content;
+  }
+}
+
+
+// Layout
+// --------------------------------------------------------
+@mixin containerPrototype {
+  max-width: $containerWidthFull;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $containerPaddingFull;
+  padding-left: $containerPaddingFull;
+}
+
+
+// Lists
+// --------------------------------------------------------
+@mixin listUnstyled {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@mixin listHorizontal {
+  @include listUnstyled;
+  li {
+    display: inline-block;
+  }
+}

@@ -7,7 +7,7 @@
   host = ENV["RAILS_DB_HOST"] || 'localhost'
 
   if boxen?
-    db = 'manifold-api_development'
+    db = 'manifold_development'
   else
     user = ENV["RAILS_DB_USER"]
     pass = ENV["RAILS_DB_PASS"]
@@ -40,4 +40,4 @@ development:
 
 test:
   <<: *common
-  database: manifold-api_test
+  database: manifold_test

@@ -1,0 +1,19 @@
+// <ul>
+.grid-project-covers {
+  margin-right: -1.542%;
+  margin-left: -1.542%;
+  ul {
+    @include listHorizontal;
+    display: block;
+  }
+  li {
+    // Inline blocks
+    width: 16.667%;
+    vertical-align: top;
+    padding: 0px 1.542%;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

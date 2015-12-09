@@ -19,6 +19,7 @@ import qs from 'query-string';
 import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 import createApiProxy from './proxies/api';
+import createWebpackProxy from './proxies/webpack';
 
 const morgan = require('morgan');
 const pretty = new PrettyError();
@@ -34,6 +35,8 @@ app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 app.use(morgan(logStyle));
 app.use(createApiProxy());
+app.use(createWebpackProxy());
+
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
@@ -104,20 +107,31 @@ if (config.clientPort) {
     console.log('');
     console.log('');
     if (!config.isProduction) {
-      console.log('MANIFOLD ASSET SERVER'.cyan.bold);
+      console.log('MANIFOLD WEBPACK SERVER'.cyan.bold);
       console.log('---------------------'.cyan);
       console.log('Manifold Asset Server, a.k.a. Webpack, is listening at http://127.0.0.1:%s'.green, config.assetPort);
       console.log('');
       console.log('');
     }
 
+    console.log(`${'MANIFOLD ASSET PROXY'.cyan.bold}`);
+    console.log(`-------------------`.cyan);
+    console.log(`The Manifold Asset Proxy is proxying the following paths:`.green);
+    console.log('');
+    const assetPathMax = config.assetProxyPaths.reduce((memo, current) => { return current.length > memo ? current.length : memo; }, 0);
+    config.assetProxyPaths.forEach((value) => {
+      console.log(`${pad(value, assetPathMax, ' ', false)}  >  localhost:${config.assetPort}${value}`.green );
+    });
+    console.log('');
+    console.log('');
+
     console.log(`${'MANIFOLD API PROXY'.cyan.bold}`);
     console.log(`-------------------`.cyan);
     console.log(`The Manifold API Proxy is proxying the following paths:`.green);
     console.log('');
-    const maxPathLength = config.apiProxyPaths.reduce((memo, current) => { return current.length > memo ? current.length : memo; }, 0);
+    const apiPathMax = config.apiProxyPaths.reduce((memo, current) => { return current.length > memo ? current.length : memo; }, 0);
     config.apiProxyPaths.forEach((value) => {
-      console.log(`${pad(value, maxPathLength, ' ', false)}  >  ${config.apiUri}${value}`.green );
+      console.log(`${pad(value, apiPathMax, ' ', false)}  >  ${config.apiUri}${value}`.green );
     });
     console.log('');
     console.log('');
