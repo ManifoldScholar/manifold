@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router';
+import { ProjectDetailHero } from '../../components/frontend';
 import { fetchOneProject } from '../../actions/shared/collections';
 import connectData from '../../decorators/connectData';
 
@@ -38,8 +40,8 @@ export default class ProjectDetail extends Component {
     const project = this.props.project;
     const makers = [];
 
-    // Setup makers array as long as there is one
-    if (project.relationships.creators.length) {
+    // Fill makers array with available makers
+    if (project.relationships.creators.data.length) {
       project.relationships.creators.data.forEach((makerRel) => {
         makers.push(this.lookupMaker(makerRel.id));
       });
@@ -49,52 +51,24 @@ export default class ProjectDetail extends Component {
         <div>
           <section className="neutral20">
             <div className="container">
-              {/* TODO: Detail hero should be its own component */}
-               <div className="project-detail-hero">
-                 <div className="project-info">
-                   {project.relationships.creators.data.map((makerRel) => {
-                     const maker = this.lookupMaker(makerRel.id);
-                     return (
-                         <figure className="maker-avatar" key={maker.id}>
-                           {/* If avatars will not be pre-rendered as squares they will require a styled wrapper here */}
-                           <img src="/placeholder/user-avatar-nornes01.jpg"/>
-                           <figcaption>
-                             {maker.attributes.name}
-                           </figcaption>
-                         </figure>
-                     );
-                   })}
-                   <h1 className="project-title">
-                     {project.attributes.title}<span className="project-subtitle">{project.attributes.subtitle}</span>
-                   </h1>
-
-                   <section className="project-summary">
-                     <p>
-                       {project.attributes.description}
-                     </p>
-                   </section>
-
-                   <section className="project-entry">
-                     <a href="#" className="button-secondary button-reader">
-                       <i className="manicon manicon-glasses"></i>
-                       {'Start Reading'}
-                     </a>
-
-                     <a href="#" className="button-secondary-dull button-toc">
-                       <i className="manicon manicon-bullet-list"></i>
-                       {'View Table of Contents'}
-                     </a>
-
-                     <a href="#" className="button-tagged-dull">
-                         {'Buy Print Version'}
-                       <span className="price">{'$27.50'}</span>
-                     </a>
-                   </section>
-                 </div>
-                 <div className="project-image">
-                   <img src={project.attributes.coverUrl}/>
-                 </div>
-               </div>
+              <ProjectDetailHero project={project} makers={makers} />
+            </div>
+          </section>
+          <section>
+            <div className="container">
+              <header className="rel">
+                <div className="container">
+                  <h4 className="section-heading">
+                    <i className="manicon manicon-pulse"></i>
+                    {'Recent Activity'}
+                  </h4>
+                </div>
+                <div className="section-heading-utility-right">
+                  <Link to={`#`} className="button-primary">
+                    See all Activity
+                  </Link>
+                </div>
+              </header>
             </div>
           </section>
         </div>

@@ -63,6 +63,11 @@ section {
 .section-heading {
   @include headingPrimary;
   color: $neutral80;
+  // React generated wrapper
+  .manicon + span {
+    display: inline-block;
+    vertical-align: middle;
+  }
   .manicon:before {
     display: inline-block;
     color: $neutral40;
@@ -81,6 +86,9 @@ section {
   .manicon-new-round:before {
     font-size: 63px;
     color: $accentPrimary;
+  }
+  .manicon-pulse:before {
+    font-size: 29px;
   }
 }
 
