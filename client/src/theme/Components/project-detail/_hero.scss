@@ -34,18 +34,8 @@
     }
 
     .project-title {
-      @include templateHead;
-      font-size: $type120;
-      font-weight: $semibold;
-      color: $neutralOffBlack;
-      .project-subtitle {
-        @include templateCopy;
-        display: block;
-        font-size: $type90;
-        font-style: italic;
-        font-weight: $regular; // OD
-        letter-spacing: 0.031em;
-        color: $accentSecondary;
+      @include titlePrimary;
+      .subtitle {
         margin-top: 18px;
       }
     }

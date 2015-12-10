@@ -3,6 +3,8 @@ import ProjectGrid from './ProjectGrid';
 import ProjectSummaryGrid from './ProjectSummaryGrid';
 import ProjectThumb from './ProjectThumb';
 import MakerFigure from './MakerFigure';
+import ProjectActivityUpdate from './ProjectActivityUpdate';
+import ActivityList from './ActivityList';
 import ProjectDetailHero from './ProjectDetailHero';
 import UserButton from './UserButton';
 import LoginOverlay from './LoginOverlay';
@@ -17,6 +19,8 @@ export {
   ProjectSummaryGrid,
   ProjectThumb,
   MakerFigure,
+  ProjectActivityUpdate,
+  ActivityList,
   ProjectDetailHero,
   UserButton,
   LoginOverlay,

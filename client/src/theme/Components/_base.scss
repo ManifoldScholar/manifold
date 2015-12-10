@@ -31,3 +31,8 @@ body {
   line-height: $baseLineHeight;
   // color: $something;
 }
+
+// Reset margins on default paragraph
+p {
+  margin: 0;
+}
