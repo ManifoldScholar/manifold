@@ -68,31 +68,34 @@ section {
     display: inline-block;
     vertical-align: middle;
   }
-  .manicon:before {
+  .manicon {
     display: inline-block;
     color: $neutral40;
     vertical-align: middle;
     margin-right: 13px;
   }
-  .manicon-books-on-shelf:before {
+  .manicon-books-on-shelf {
     margin-right: 24px;
   }
-  .manicon-books-stack:before {
+  .manicon-books-stack {
     font-size: 61px;
     margin-right: 20px;
   }
-  .manicon-books-with-glasses:before {
+  .manicon-books-with-glasses {
     font-size: 38px;
   }
-  .manicon-lamp:before {
+  .manicon-lamp {
     font-size: 56px;
   }
-  .manicon-new-round:before {
+  .manicon-new-round {
     font-size: 63px;
     color: $accentPrimary;
   }
-  .manicon-pulse:before {
+  .manicon-pulse {
     font-size: 29px;
+  }
+  .manicon-tag {
+    font-size: 47px;
   }
 }
 

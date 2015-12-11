@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
-import { ActivityList, ProjectTexts, ProjectDetailHero } from '../../components/frontend';
+import { ActivityList, ProjectTexts, ProjectMeta, ProjectDetailHero } from '../../components/frontend';
 import { fetchOneProject } from '../../actions/shared/collections';
 import connectData from '../../decorators/connectData';
 
@@ -75,6 +75,16 @@ export default class ProjectDetail extends Component {
         type: 'init',
         date: 'November 6, 2014'
       }
+    ],
+    meta: [
+      {
+        key: 'Publisher',
+        value: 'University of Minnesota Press'
+      },
+      {
+        key: 'Editor',
+        value: 'Jason Weidemann'
+      }
     ]
   };
 
@@ -105,6 +115,24 @@ export default class ProjectDetail extends Component {
     }
   };
 
+  listMeta = () => {
+    if (this.state.meta.length > 0) {
+      return (
+        <section>
+          <div className="container">
+            <header className="rel">
+              <h4 className="section-heading">
+                <i className="manicon manicon-tag"></i>
+                  {'Metadata'}
+              </h4>
+            </header>
+            <ProjectMeta data={this.state.meta} />
+          </div>
+        </section>
+      );
+    }
+  };
+
   render = () => {
     const project = this.props.project;
     const makers = [];
@@ -124,7 +152,7 @@ export default class ProjectDetail extends Component {
             </div>
           </section>
           {/*
-            Logic to output list conditionally here is not necessarily final, but
+            Logic to output lists conditionally here is not necessarily final, but
             it simulates how this section could be made optional based on a flag and/or
             a minimum number of activity updates
           */}
@@ -140,6 +168,7 @@ export default class ProjectDetail extends Component {
               <ProjectTexts />
             </div>
           </section>
+          {this.listMeta()}
         </div>
     );
   };

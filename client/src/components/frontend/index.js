@@ -6,6 +6,7 @@ import MakerFigure from './MakerFigure';
 import ProjectActivityUpdate from './ProjectActivityUpdate';
 import ActivityList from './ActivityList';
 import ProjectTexts from './ProjectTexts';
+import ProjectMeta from './ProjectMeta';
 import ProjectDetailHero from './ProjectDetailHero';
 import UserButton from './UserButton';
 import LoginOverlay from './LoginOverlay';
@@ -23,6 +24,7 @@ export {
   ProjectActivityUpdate,
   ActivityList,
   ProjectTexts,
+  ProjectMeta,
   ProjectDetailHero,
   UserButton,
   LoginOverlay,
