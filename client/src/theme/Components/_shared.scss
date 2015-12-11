@@ -77,6 +77,10 @@ section {
   .manicon-books-on-shelf:before {
     margin-right: 24px;
   }
+  .manicon-books-stack:before {
+    font-size: 61px;
+    margin-right: 20px;
+  }
   .manicon-books-with-glasses:before {
     font-size: 38px;
   }
@@ -103,6 +107,16 @@ section {
   a + a {
     margin-left: 14px;
   }
+}
+
+.sub-section-heading {
+  @include utilityPrimary;
+  font-size: $type60;
+  color: $accentSecondary;
+  background-color: $neutral20;
+  padding: 16px 30px 19px;
+  margin-top: 0px;
+  margin-bottom: 55px;
 }
 
 

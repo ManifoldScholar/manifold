@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
-import { ActivityList, ProjectDetailHero } from '../../components/frontend';
+import { ActivityList, ProjectTexts, ProjectDetailHero } from '../../components/frontend';
 import { fetchOneProject } from '../../actions/shared/collections';
 import connectData from '../../decorators/connectData';
 
@@ -129,6 +129,17 @@ export default class ProjectDetail extends Component {
             a minimum number of activity updates
           */}
           {this.listActivity()}
+          <section>
+            <div className="container">
+              <header className="rel">
+                <h4 className="section-heading">
+                  <i className="manicon manicon-books-stack"></i>
+                  {'Texts'}
+                </h4>
+              </header>
+              <ProjectTexts />
+            </div>
+          </section>
         </div>
     );
   };
