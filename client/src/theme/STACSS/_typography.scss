@@ -29,6 +29,7 @@
 // --------------------------------------------------------
 // $type130: ;
 $type120: 35px;
+$type110: 30px;
 $type100: 26px;
 $type90: 25px;
 $type80: 22px;
@@ -64,9 +65,32 @@ $type20: 12px;
 // --------------------------------------------------------
 @mixin utilityPrimary {
   @include templateHead;
-  font-weight: $semibold;
-  text-transform: uppercase;
   // This is the base size, there may be variation from
   // component to component
   font-size: $type50;
+  font-weight: $semibold;
+  letter-spacing: 0.067em;
+  text-transform: uppercase;
+}
+
+
+// Signage
+// --------------------------------------------------------
+@mixin titlePrimary {
+  @include templateHead;
+  // This is the base size, there may be variation from
+  // component to component
+  font-size: $type120;
+  font-weight: $semibold;
+  color: $neutralOffBlack;
+  .subtitle {
+    @include templateCopy;
+    display: block;
+    font-size: $type90;
+    font-style: italic;
+    font-weight: $regular; // OD
+    letter-spacing: 0.031em;
+    color: $accentSecondary;
+    margin-top: 18px;
+  }
 }

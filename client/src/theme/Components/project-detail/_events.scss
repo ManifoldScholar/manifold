@@ -1,0 +1,117 @@
+// <ul>
+.event-list {
+  @include listUnstyled();
+  @include clearfix();
+  display: block;
+  margin-right: -30px;
+  margin-left: -30px;
+  li {
+    width: 33.333%;
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-bottom: 42px;
+    float: left;
+  }
+}
+
+.event-tile {
+  background-color: $neutral20;
+  // No vertical padding set by default as it is
+  // auto-calculated in the view
+  padding: 0px 25px 0px 52px;
+  position: relative;
+  &.file {
+    background-color: $neutral50;
+  }
+  .manicon {
+    width: 61px;
+    height: 61px;
+    text-align: center;
+    background-color: $accentPrimary;
+    border-radius: 100%;
+    margin-top: -30px;
+    position: absolute;
+    top: 50%;
+    left: -30px;
+    &:before {
+      color: $neutralWhite;
+    }
+  }
+  .manicon-book-opening {
+    font-size: 34px;
+    padding-top: 11px;
+  }
+  .manicon-cube-shine {
+    font-size: 40px;
+    padding-top: 9px;
+  }
+  .manicon-egg {
+    font-size: 29px;
+    padding-top: 15px;
+  }
+  .manicon-person-word-bubble {
+    font-size: 31px;
+    padding-top: 17px;
+  }
+  .manicon-twitter {
+    font-size: 22px;
+    padding-top: 20px;
+  }
+
+  .event-content {
+    @include templateCopy;
+    letter-spacing: 0.03em;
+    color: $neutralOffBlack;
+    margin-bottom: 17px;
+  }
+
+  &.twitter .event-content {
+    font-style: italic;
+  }
+
+  // <h5>
+  .event-title {
+    @include titlePrimary;
+    font-size: $type60;
+    margin: 0; // OD
+    .subtitle {
+      font-size: $type40;
+      margin-top: 8px;
+    }
+  }
+
+  &.text .event-title, &.init .event-title {
+    margin-bottom: 24px;
+  }
+
+  &.file .event-title {
+    color: $neutralWhite;
+    margin-bottom: 7px;
+  }
+
+  // <a> or not
+  .event-user {
+    @include templateHead;
+    color: $accentSecondary;
+    text-decoration: none;
+    display: block;
+  }
+
+  &.comment .event-user {
+    margin-bottom: 5px;
+  }
+
+  &.twitter .event-user {
+    margin-bottom: 10px;
+  }
+
+  .event-date {
+    @include utilityPrimary;
+    font-size: $type20;
+    color: $neutral50;
+  }
+
+  &.file .event-date {
+    color: $neutralWhite;
+  }
+}

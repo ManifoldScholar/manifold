@@ -1,0 +1,113 @@
+.asset-thumb {
+  .asset-link {
+    @include clearfix;
+  }
+
+  .asset-image {
+    width: 24%;
+    float: left;
+    position: relative;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    .manicon-new {
+      display: block;
+      font-size: 11px;
+      text-align: center;
+      color: $neutralWhite;
+      width: 41px;
+      height: 41px;
+      padding-top: 15px;
+      background-color: $accentPrimary;
+      border-radius: 100%;
+      position: absolute;
+      top: 10.5%;
+      left: -20px;
+    }
+  }
+
+  .asset-image-placeholder {
+    width: 100%;
+    height: 0;
+    padding-top: 136%;
+    position: relative;
+    border: 4px dotted $neutral40;
+  }
+
+  .asset-description {
+    width: 76%;
+    padding-left: 30px;
+    float: left;
+    .asset-title {
+      @include titlePrimary;
+      font-size: $type110;
+      margin-top: 0px;
+      margin-bottom: 16px;
+      .subtitle {
+        margin-top: 15px;
+      }
+    }
+    .asset-date {
+      @include utilityPrimary;
+      color: $neutral50;
+    }
+  }
+
+  .asset-status {
+    @include clearfix;
+    margin-top: 20px;
+    .asset-completion {
+      width: 24%;
+      height: 26px;
+      background-color: $neutral10;
+      float: left;
+      position: relative;
+      .complete {
+        height: 100%;
+        background-color: $accentPrimary;
+        position: absolute;
+        left: 0;
+      }
+    }
+
+    // <ul> of icons or links
+    .asset-interactions {
+      @include listHorizontal;
+      display: block;
+      padding-left: 23px;
+      margin-top: -3px;
+      float: left;
+      li {
+        @include utilityPrimary;
+        font-size: $type80;
+        color: $neutral40;
+        vertical-align: top;
+        .manicon {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        // React generated text wrapper
+        .manicon + span {
+          margin-left: 8px;
+        }
+        .manicon-highlight {
+          font-size: 30px;
+        }
+        .manicon-person-word-bubble {
+          font-size: 36px;
+        }
+        a {
+          text-decoration: none;
+          color: $neutral80;
+          .manicon {
+            color: $accentPrimary;
+          }
+        }
+      }
+      li + li {
+        margin-left: 37px;
+      }
+    }
+  }
+}

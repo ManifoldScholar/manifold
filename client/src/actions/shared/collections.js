@@ -12,6 +12,7 @@ export const actions = {
 
 };
 
+export const fetchOneProject = createApiAction(actions.FETCH_ONE_PROJECT, projectsAPI.project);
 export const fetchFeaturedProjects = createApiAction(actions.FETCH_FEATURED_PROJECTS, projectsAPI.featuredProjects);
 export const fetchFilteredProjects = createApiAction(actions.FETCH_FILTERED_PROJECTS, projectsAPI.filteredProjects);
 export const fetchOneText = createApiAction(actions.FETCH_ONE_TEXT, textsAPI.text);
