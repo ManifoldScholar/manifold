@@ -1,23 +1,4 @@
-// Key/Value list with images, descriptions, and status area
-// This namespace could be unabstracted (to texts) if it ends up being used only
-// in that area
-.asset-list {
-  @include listHorizontal;
-  font-size: 0px;
-  margin-right: -65px;
-  margin-left: -65px;
-  > li {
-    // Font base size reset
-    font-size: 16px;
-    width: 50%;
-    margin-bottom: 73px;
-    padding-right: 65px;
-    padding-left: 65px;
-    vertical-align: top;
-  }
-}
-
-.project-asset {
+.asset-thumb {
   .asset-link {
     @include clearfix;
   }

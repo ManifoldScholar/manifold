@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
-import { EventList, ProjectTexts, MetaAttributes, ProjectDetailHero } from '../../components/frontend';
+import { EventList, PublishedText, GroupedTexts, MetaAttributes, ProjectDetailHero } from '../../components/frontend';
 import { fetchOneProject } from '../../actions/shared/collections';
 import connectData from '../../decorators/connectData';
 
@@ -74,6 +74,96 @@ export default class ProjectDetail extends Component {
       {
         type: 'init',
         date: 'November 6, 2014'
+      }
+    ],
+    categories: [
+      {
+        title: 'Drafts',
+        id: 276
+      },
+      {
+        title: 'Research',
+        id: 313
+      }
+    ],
+    texts: [
+      {
+        id: '1',
+        type: 'texts',
+        attributes: {
+          title: 'Japanese Documentary Film',
+          subtitle: 'The Meiji Era through Hiroshima',
+          cover_url: '/placeholder/browse-pCover-nornes01.jpg',
+          created_at: 'September 29, 2015',
+          published: true,
+        },
+        relationships: {
+          category: {}
+        }
+      },
+      {
+        id: '2',
+        type: 'texts',
+        attributes: {
+          title: 'Healing the Watershed of the Coaster Brook Trout',
+          subtitle: 'The Meiji Era through Hiroshima',
+          cover_url: null,
+          created_at: 'October 2, 2015',
+          published: false
+        },
+        relationships: {
+          category: {
+            id: 276
+          }
+        }
+      },
+      {
+        id: '3',
+        type: 'texts',
+        attributes: {
+          title: 'The Women of Bakken',
+          subtitle: 'Lorem ipsum dolor sit amet',
+          cover_url: null,
+          created_at: 'June 30, 2014',
+          published: false
+        },
+        relationships: {
+          category: {
+            id: 276
+          }
+        }
+      },
+      {
+        id: '4',
+        type: 'texts',
+        attributes: {
+          title: 'Chapter One',
+          subtitle: 'Bodies, Subjects, and Struggles in the Bakken Oil Boom',
+          cover_url: null,
+          created_at: 'February 17, 2015',
+          published: false
+        },
+        relationships: {
+          category: {
+            id: 276
+          }
+        }
+      },
+      {
+        id: '5',
+        type: 'texts',
+        attributes: {
+          title: 'Sustainability and North Dakota\'s oil boom',
+          subtitle: null,
+          cover_url: null,
+          created_at: 'August 2, 1976',
+          published: false
+        },
+        relationships: {
+          category: {
+            id: 313
+          }
+        }
       }
     ],
     meta: [
@@ -165,7 +255,8 @@ export default class ProjectDetail extends Component {
                   {'Texts'}
                 </h4>
               </header>
-              <ProjectTexts />
+              <PublishedText texts={this.state.texts} />
+              <GroupedTexts categories={this.state.categories} texts={this.state.texts} />
             </div>
           </section>
           {this.listMeta()}

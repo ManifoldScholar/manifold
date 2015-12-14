@@ -5,7 +5,9 @@ import ProjectThumb from './ProjectThumb';
 import MakerFigure from './MakerFigure';
 import ProjectEvent from './ProjectEvent';
 import EventList from './EventList';
-import ProjectTexts from './ProjectTexts';
+import TextThumb from './TextThumb';
+import PublishedText from './PublishedText'
+import GroupedTexts from './GroupedTexts';
 import MetaAttributes from './MetaAttributes';
 import ProjectDetailHero from './ProjectDetailHero';
 import UserButton from './UserButton';
@@ -23,7 +25,9 @@ export {
   MakerFigure,
   ProjectEvent,
   EventList,
-  ProjectTexts,
+  TextThumb,
+  PublishedText,
+  GroupedTexts,
   MetaAttributes,
   ProjectDetailHero,
   UserButton,
