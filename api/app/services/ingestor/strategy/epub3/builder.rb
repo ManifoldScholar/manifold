@@ -50,6 +50,7 @@ module Ingestor
             @logger.info I18n.t(key, name: ts.name, id: ts.id)
             ts.body = transformer.convert_cont_doc_body(ts.source_body,
                                                         ts.source_path)
+            ts.body_json = transformer.convert_cont_doc_body_to_json(ts.body)
             ts.save
           end
         end
