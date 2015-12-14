@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class ProjectMeta extends Component {
+export default class MetaAttributes extends Component {
 
   static propTypes = {
     data: PropTypes.array

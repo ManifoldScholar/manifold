@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { ProjectActivityUpdate } from '../../components/frontend';
+import { ProjectEvent } from '../../components/frontend';
 
 
-export default class ActivityList extends Component {
+export default class EventList extends Component {
 
   static propTypes = {
-    activity: PropTypes.array
+    events: PropTypes.array
   };
 
-  // This is currently the only activity list, but height matching functionality could be abstracted
+  // This is currently the only event list, but height matching functionality could be abstracted
   // to an optional mixin if this component needs to be used without it
 
   // Default inline CSS class
@@ -18,7 +18,7 @@ export default class ActivityList extends Component {
 
   componentDidMount = () => {
     this.setState({matchedHeight: {
-      height: this.getMaxHeight(this.refs.activityList.childNodes, 24)
+      height: this.getMaxHeight(this.refs.eventList.childNodes, 24)
     }});
   };
 
@@ -40,12 +40,12 @@ export default class ActivityList extends Component {
 
   render = () => {
     return (
-        <ul className="project-activity-list" ref="activityList">
-          {this.props.activity.map((update) => {
+        <ul className="event-list" ref="eventList">
+          {this.props.events.map((event) => {
             return (
                 <li>
-                  <div className={'activity-update ' + update.type} style={this.state.matchedHeight}>
-                    <ProjectActivityUpdate update={update} />
+                  <div className={'event-tile ' + event.type} style={this.state.matchedHeight}>
+                    <ProjectEvent event={event} />
                   </div>
                 </li>
             );

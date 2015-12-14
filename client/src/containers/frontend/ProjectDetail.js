@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
-import { ActivityList, ProjectTexts, ProjectMeta, ProjectDetailHero } from '../../components/frontend';
+import { EventList, ProjectTexts, MetaAttributes, ProjectDetailHero } from '../../components/frontend';
 import { fetchOneProject } from '../../actions/shared/collections';
 import connectData from '../../decorators/connectData';
 
@@ -108,7 +108,7 @@ export default class ProjectDetail extends Component {
                   </Link>
                 </div>
               </header>
-              <ActivityList activity={this.state.activity} />
+              <EventList events={this.state.activity} />
             </div>
           </section>
       );
@@ -126,7 +126,7 @@ export default class ProjectDetail extends Component {
                   {'Metadata'}
               </h4>
             </header>
-            <ProjectMeta data={this.state.meta} />
+            <MetaAttributes data={this.state.meta} />
           </div>
         </section>
       );

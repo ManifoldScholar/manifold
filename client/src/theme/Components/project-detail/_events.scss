@@ -1,5 +1,5 @@
 // <ul>
-.project-activity-list {
+.event-list {
   @include listUnstyled();
   @include clearfix();
   display: block;
@@ -14,7 +14,7 @@
   }
 }
 
-.activity-update {
+.event-tile {
   background-color: $neutral20;
   // No vertical padding set by default as it is
   // auto-calculated in the view
@@ -58,19 +58,19 @@
     padding-top: 20px;
   }
 
-  .activity-content {
+  .event-content {
     @include templateCopy;
     letter-spacing: 0.03em;
     color: $neutralOffBlack;
     margin-bottom: 17px;
   }
 
-  &.twitter .activity-content {
+  &.twitter .event-content {
     font-style: italic;
   }
 
   // <h5>
-  .activity-title {
+  .event-title {
     @include titlePrimary;
     font-size: $type60;
     margin: 0; // OD
@@ -80,38 +80,38 @@
     }
   }
 
-  &.text .activity-title, &.init .activity-title {
+  &.text .event-title, &.init .event-title {
     margin-bottom: 24px;
   }
 
-  &.file .activity-title {
+  &.file .event-title {
     color: $neutralWhite;
     margin-bottom: 7px;
   }
 
   // <a> or not
-  .activity-user {
+  .event-user {
     @include templateHead;
     color: $accentSecondary;
     text-decoration: none;
     display: block;
   }
 
-  &.comment .activity-user {
+  &.comment .event-user {
     margin-bottom: 5px;
   }
 
-  &.twitter .activity-user {
+  &.twitter .event-user {
     margin-bottom: 10px;
   }
 
-  .activity-date {
+  .event-date {
     @include utilityPrimary;
     font-size: $type20;
     color: $neutral50;
   }
 
-  &.file .activity-date {
+  &.file .event-date {
     color: $neutralWhite;
   }
 }
