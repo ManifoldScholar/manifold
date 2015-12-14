@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, IndexRedirect, IndexRoute} from 'react-router';
-import {Reader} from './containers/reader';
+import {Reader, Section} from './containers/reader';
 import {Frontend, Home, Following, Login} from './containers/frontend';
 import {NotFound} from './containers/shared';
 
@@ -9,9 +9,8 @@ export default () => {
     <Route path="/" >
       <IndexRedirect to="browse" />
 
-      <Route component={Reader} path="read/:id" >
-        <Route component={Reader} path="section/:id" />
-        <Route component={Reader} path="toc" />
+      <Route component={Reader} path="read/:text_id" >
+        <Route component={Section} path="section/:section_id" />
       </Route>
 
       <Route component={Frontend} path="/browse" >
