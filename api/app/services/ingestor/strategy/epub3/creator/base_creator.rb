@@ -16,10 +16,13 @@ module Ingestor
           def check_for_existing(existing, compare_attributes)
             return nil unless !existing.nil? && existing.respond_to?(:to_a)
             existing = existing.to_a.find do |model|
+              match = true
               compare_attributes.each do |key, value|
-                return false if model.send(key) != value
-                true
+                if model.send(key) != value
+                  match = false
+                end
               end
+              match
             end
             existing
           end
