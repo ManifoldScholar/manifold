@@ -47,6 +47,7 @@ class Text < ActiveRecord::Base
     text_sections.each do |ts|
       resource = ts.resource
       source = ingestion_sources.find_by(resource: resource)
+      next if source.nil?
       path = source.source_path
       map[path] = ts
     end
