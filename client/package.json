@@ -34,6 +34,7 @@
     "humps": "^1.0.0",
     "invariant": "^2.2.0",
     "isomorphic-fetch": "^2.2.0",
+    "lodash": "^3.10.1",
     "morgan": "^1.6.1",
     "node-emoji": "^1.0.4",
     "normalizr": "^1.4.0",
