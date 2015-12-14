@@ -14,11 +14,11 @@ export default class UserButton extends Component {
     userAvatar: '/placeholder/user-avatar-dreft01.jpg'
   };
 
-  UIToggleUserMenu = (event) => {
-    this.props.history.push('/browse/login')
+  UIToggleUserMenu = () => {
+    this.props.history.push('/browse/login');
   };
 
-  UIShowLoginOverlay = (event) => {
+  UIShowLoginOverlay = () => {
     this.props.showLoginOverlay();
   };
 
