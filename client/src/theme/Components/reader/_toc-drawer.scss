@@ -1,0 +1,71 @@
+.toc-drawer {
+  position: fixed;
+  max-width: 680px;
+  height: 100%;
+  padding: 73px 100px 100px 91px;
+  background-color: $neutral20;
+  overflow-y: scroll;
+  transition: left $duration $timing;
+  &.drawer-hidden {
+    left: -680px;
+  }
+  &.drawer-visible {
+    left: 0;
+  }
+
+  // Scoped table of contents styles, some may be abstracted later
+  // <nav> around nested uls
+  .table-of-contents {
+    // TOC globalss
+    ul {
+      @include listUnstyled;
+      @include templateHead;
+      font-size: $type60;
+      a {
+        color: $neutralOffBlack;
+        text-decoration: none;
+        &:hover {
+          color: $accentPrimary;
+        }
+      }
+    }
+    // Top level
+    > ul {
+      font-weight: $semibold;
+      > li {
+        // Top level heading
+        > a {
+          display: block;
+          padding: 0px 0px 8px;
+          border-bottom: 2px solid $neutral50;
+        }
+        // Second level
+        ul {
+          font-weight: $light;
+          padding-bottom: 25px;
+          li {
+            border-top: 1px dotted $neutral50;
+            &:first-child {
+              border: none;
+            }
+            a {
+              display: block;
+              padding-top: 21px;
+              padding-bottom: 11px;
+            }
+            // Third level and beyond
+            ul {
+              li {
+                padding-left: 20px;
+                // Bring back top borders for nested list first-children
+                &:first-child {
+                  border-top: 1px dotted $neutral50;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

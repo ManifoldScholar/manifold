@@ -24,6 +24,7 @@ $neutralBlack: #000000;
 
 // Accent Colors
 $accentPrimary: #52e3ac !default;
+$accentPrimaryLight: #75e9bd !default;
 $accentPrimaryPale: #dcf9ee !default;
 
 $accentSecondary: #34a178 !default;
@@ -37,12 +38,13 @@ $baseLineHeight: 1.2;
 $containerWidthFull: 1235px; // Maximum container width of 1135 plus maximum gutter padding
 $containerPaddingFull: 50px;
 
+$containerWidthNarrow: 650px; // Narrow container width for reading
 
 // Font Weights
 // These are convenience variables to keep font weight declarations consistent
 // --------------------------------------------------------
-// $light: 200;
-// $book: 300;
+$light: 200;
+$book: 300;
 $regular: 400;
 $semibold: 600;
 $bold: 700;

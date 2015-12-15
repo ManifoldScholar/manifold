@@ -1,7 +1,8 @@
 import {handleActions} from 'redux-actions';
 
 const initialState = {
-  loginOverlay: false
+  loginOverlay: false,
+  tocDrawer: false
 };
 
 const visibilityToggle = (state, action) => {

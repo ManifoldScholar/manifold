@@ -72,6 +72,12 @@
   padding-left: $containerPaddingFull;
 }
 
+@mixin containerNarrow {
+  max-width: $containerWidthNarrow;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 
 // Lists
 // --------------------------------------------------------

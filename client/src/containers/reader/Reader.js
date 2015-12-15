@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
 import { BodyClass } from '../../components/shared';
+import { Header } from '../../components/reader';
 import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
-import {Link} from 'react-router';
+import { visibilityToggle, visibilityHide } from '../../actions/reader/ui/visibility';
 
 
 function fetchData(getState, dispatch, location, params) {
@@ -20,7 +22,8 @@ function mapStateToProps(state) {
   return {
     fetchOneText: state.collections.results.fetchOneText.entities,
     texts: state.collections.entities.texts,
-    makers: state.collections.entities.makers
+    makers: state.collections.entities.makers,
+    visibility: state.ui.visibility
   };
 }
 
@@ -32,7 +35,8 @@ class Reader extends Component {
   static propTypes = {
     children: PropTypes.object,
     texts: PropTypes.object,
-    fetchOneText: PropTypes.string
+    fetchOneText: PropTypes.string,
+    visibility: PropTypes.object
   };
 
   static contextTypes = {
@@ -48,49 +52,21 @@ class Reader extends Component {
     return this.props.texts[this.props.fetchOneText];
   };
 
-  visitNode = (node) => {
-    const text = this.getText();
-    this.counter = this.counter + 1;
-    let children = null;
-    if (node.children && node.children.length > 0) {
-      children = (
-        <ul>
-          {node.children.map(this.visitNode)}
-        </ul>
-      );
-    }
-
-    return (
-      <li key={this.counter}>
-        <Link to={`/read/${text.id}/section/${node.id}#${node.anchor}`}>
-          {node.label}
-        </Link>
-        {children}
-      </li>
-
-    );
-  };
-
   render() {
     const text = this.getText();
     return (
       <BodyClass className="reader">
         <div>
-          <div style={{width: '25%',
-          float: 'left',
-          borderRight: '1px solid black',
-          padding: '20px'}}>
-            <DocumentMeta {...config.app}/>
-            <ul>
-              {text.attributes.toc.map(this.visitNode)}
-            </ul>
-          </div>
-          <div style={{width: '70%',
-            float: 'left',
-            borderRight: '1px solid black'
-            }}>
+          <DocumentMeta {...config.app}/>
+          <Header
+              text={text}
+              tocVisible={this.props.visibility.tocDrawer }
+              toggleTocDrawer={bindActionCreators(() => visibilityToggle('tocDrawer'), this.props.dispatch)}
+              hideTocDrawer={bindActionCreators(() => visibilityHide('tocDrawer'), this.props.dispatch)}
+          />
+          <main>
             {this.props.children}
-          </div>
+          </main>
         </div>
       </BodyClass>
     );

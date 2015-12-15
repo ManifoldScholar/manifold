@@ -124,14 +124,13 @@ class Reader extends Component {
     this.reset();
     const section = this.getSection();
     return (
-        <div>
-          <h3 style={{padding: 20, marginTop: 0, backgroundColor: '#DDD'}}>
-            {section.attributes.name}
-          </h3>
-          <div style={{padding: 20}}>
-            {this.buildTextSection()}
+        <section>
+          <div className="container-focus">
+            <div className="text-section">
+              {this.buildTextSection()}
+            </div>
           </div>
-        </div>
+        </section>
     );
   }
 }

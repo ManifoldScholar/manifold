@@ -1,0 +1,30 @@
+@mixin chapterHeading {
+  @include readerHead();
+  font-size: $type180;
+  font-weight: $semibold;
+  line-height: 1.288;
+  color: $neutral80;
+  a {
+    color: $neutral80;
+    text-decoration: none;
+    &:hover {
+      color: $accentPrimary;
+    }
+  }
+}
+
+.text-section {
+  // Reader text temporary defaults
+  // TODO: Adjust scope and theming/customization once data is available
+  font-family: "freight-text-pro", serif;
+  font-size: $type80;
+  font-weight: $light;
+  line-height: 1.761;
+
+  h2 {
+    @include chapterHeading;
+    &:first-child {
+      margin-bottom: 96px;
+    }
+  }
+}
