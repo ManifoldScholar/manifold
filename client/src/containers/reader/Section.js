@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import connectData from '../../decorators/connectData';
 import { fetchOneSection } from '../../actions/shared/collections';
 import { mapKeys } from 'lodash/object';
-import { trim } from 'lodash/string';
 import { camelizeKeys } from 'humps';
 
 function fetchData(getState, dispatch, location, params) {
@@ -75,9 +74,9 @@ class Reader extends Component {
 
   styleStringToObject = (stylesString) => {
     const declarations = stylesString.split(';');
-    const object = declarations.reduce((previous, value, index) => {
+    const object = declarations.reduce((previous, value) => {
       const parts = value.split(':');
-      previous[parts[0]] = parts[1]
+      previous[parts[0]] = parts[1];
       return previous;
     }, {});
     return camelizeKeys(object);

@@ -6,7 +6,7 @@ import MakerFigure from './MakerFigure';
 import ProjectEvent from './ProjectEvent';
 import EventList from './EventList';
 import TextThumb from './TextThumb';
-import PublishedText from './PublishedText'
+import PublishedText from './PublishedText';
 import GroupedTexts from './GroupedTexts';
 import MetaAttributes from './MetaAttributes';
 import ProjectDetailHero from './ProjectDetailHero';

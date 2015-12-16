@@ -21,7 +21,7 @@ export default class ProjectEvent extends Component {
       this.setState({containerPadding: {
         paddingTop: centerPadding + 'px',
         paddingBottom: centerPadding + 'px'
-      }})
+      }});
     }
   };
 
@@ -138,6 +138,6 @@ export default class ProjectEvent extends Component {
         <div ref="eventContainer" style={this.state.containerPadding}>
           {this.renderEventByType(this.props.event)}
         </div>
-    )
+    );
   };
 }

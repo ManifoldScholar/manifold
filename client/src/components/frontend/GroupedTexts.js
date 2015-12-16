@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { TextThumb } from './';
 
 export default class GroupedTexts extends Component {

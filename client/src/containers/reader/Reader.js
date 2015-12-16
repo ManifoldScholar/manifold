@@ -36,7 +36,8 @@ class Reader extends Component {
     children: PropTypes.object,
     texts: PropTypes.object,
     fetchOneText: PropTypes.string,
-    visibility: PropTypes.object
+    visibility: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   static contextTypes = {
