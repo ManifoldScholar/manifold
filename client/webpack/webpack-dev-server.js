@@ -1,6 +1,5 @@
 var Express = require('express');
 var webpack = require('webpack');
-var colors = require('colors');
 var config = require('../src/config');
 var webpackConfig = require('./dev.config');
 var compiler = webpack(webpackConfig);

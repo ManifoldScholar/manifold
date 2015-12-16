@@ -28,7 +28,7 @@ const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
 const emoji = require('node-emoji').emoji;
-
+const colors = require('colors'); 
 const logStyle = __DEVELOPMENT__ ? 'dev' : 'combined';
 
 
@@ -107,8 +107,20 @@ app.use((req, res) => {
   }));
 });
 
-if (config.clientPort) {
-  server.listen(config.clientPort, (err) => {
+const socketLocation = process.env.NODE_SERVER_SOCKET_PATH;
+let listenOn;
+let setUmask = false;
+let oldUmask;
+if(socketLocation) {
+  listenOn = socketLocation;
+  setUmask = true;
+  oldUmask = process.umask('0000');
+} else {
+  listenOn = config.clientPort;
+} 
+
+if (listenOn) {
+  server.listen(listenOn, (err) => {
     if (err) {
       console.error(err);
     }
@@ -149,6 +161,10 @@ if (config.clientPort) {
     console.log(`Manifold Client is listening at http://127.0.0.1:${config.clientPort}`.green);
     console.log('');
     console.log('');
+
+    if(setUmask === true) {
+      process.umask(oldUmask);
+    } 
   });
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');

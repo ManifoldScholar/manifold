@@ -14,7 +14,7 @@ const applicationConfiguration = {
   assetPort: process.env.MANIFOLD_ASSET_PORT,
   apiUri: process.env.MANIFOLD_API_URL,
   assetProxyPaths: ['/dist'],
-  apiProxyPaths: ['/api', '/system/resources'],
+  apiProxyPaths: ['/api', '/system'],
   app: {
     title: 'Manifold Scholarship',
     description: 'Transforming scholarly publications into living digital works',
