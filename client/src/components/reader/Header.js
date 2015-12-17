@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { UserButton } from '../../components/shared';
 import { TocDrawer } from './';
 import { Link } from 'react-router';
 
@@ -11,6 +12,8 @@ export default class Header extends Component {
     tocVisible: PropTypes.bool,
     toggleTocDrawer: PropTypes.func,
     hideTocDrawer: PropTypes.func,
+    showLoginOverlay: PropTypes.func,
+    authenticated: PropTypes.bool
   };
 
   render = () => {
@@ -34,6 +37,10 @@ export default class Header extends Component {
           <h2 className="title">
             {this.props.text.attributes.title}
           </h2>
+          <nav className="widget-nav">
+            <UserButton showLoginOverlay={this.props.showLoginOverlay}
+                        authenticated={this.props.authenticated} />
+          </nav>
           <TocDrawer text={this.props.text} visible={this.props.tocVisible} hideTocDrawer={this.props.hideTocDrawer} />
         </header>
     );

@@ -45,7 +45,6 @@ export default class Frontend extends Component {
           <Header
               showLoginOverlay={bindActionCreators(() => visibilityShow('loginOverlay'), this.props.dispatch)}
               location={this.props.location}
-              history={this.props.history}
               authenticated={this.props.authentication.authToken === null ? false : true}
           />
           {/* Add hideOverlay={false} to show overlay */}
