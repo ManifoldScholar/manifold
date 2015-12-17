@@ -40,7 +40,9 @@ export default class UserButton extends Component {
     return (
         <button className="button-avatar" onClick={this.props.authenticated ? this.UIToggleUserMenu.bind(this) : this.UIShowLoginOverlay.bind(this)}>
           <span className="screen-reader-text">{'Click to login or open user settings'}</span>
-          {this.avatarImage()}
+          <figure className="avatar">
+            {this.avatarImage()}
+          </figure>
         </button>
     );
   };

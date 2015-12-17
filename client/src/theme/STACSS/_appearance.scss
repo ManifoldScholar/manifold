@@ -36,6 +36,26 @@
   padding: 0;
 }
 
+@mixin buttonAvatar($size: 40) {
+  @include buttonUnstyled;
+  background-color: $accentPrimary;
+  // Default size from browse view that may be
+  // changed in scope
+  width: #{$size}px;
+  height: #{$size}px;
+  text-align: center;
+  border-radius: 100%;
+  overflow: hidden;
+  .avatar-image {
+    width: 100%;
+  }
+  .manicon-person {
+    color: $accentPrimaryPale;
+    font-size: #{$size * 0.85}px;
+    line-height: #{$size * 1.2}px;
+  }
+}
+
 
 // Browser UI
 // --------------------------------------------------------

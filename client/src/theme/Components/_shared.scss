@@ -258,6 +258,14 @@ section {
   }
 }
 
+.button-avatar {
+  @include buttonUnstyled;
+  vertical-align: middle;
+  .avatar {
+    @include buttonAvatar();
+  }
+}
+
 
 // Browser UI (Selects, dropdowns, inputs, etc.)
 // --------------------------------------------------------

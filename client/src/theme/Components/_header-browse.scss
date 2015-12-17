@@ -54,32 +54,12 @@
     position: absolute;
     top: 30px;
     right: 52px;
-    // Currently, set of two <button>s
     .button-magnify {
       margin-right: 51px;
       vertical-align: middle;
       .manicon-magnify {
         font-size: 17px;
         color: $neutral80;
-      }
-    }
-
-    .button-avatar {
-      @include buttonUnstyled;
-      background-color: $accentPrimary;
-      width: 40px;
-      height: 40px;
-      text-align: center;
-      border-radius: 100%;
-      vertical-align: middle;
-      overflow: hidden;
-      .avatar-image {
-        width: 100%;
-      }
-      .manicon-person {
-        color: $accentPrimaryPale;
-        font-size: 34px;
-        line-height: 46px;
       }
     }
   }

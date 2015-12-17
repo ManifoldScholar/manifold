@@ -62,6 +62,19 @@
     font-size: $type80;
     font-weight: $regular; // OD
   }
+
+  .widget-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    .button-avatar {
+      padding: 15px 16px;
+      .avatar {
+        @include buttonAvatar(32);
+      }
+    }
+  }
 }
 
 // Header bump
