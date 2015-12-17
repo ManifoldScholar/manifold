@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
-import { BodyClass } from '../../components/shared';
-import { Header, Footer, LoginOverlay } from '../../components/frontend';
+import { BodyClass, LoginOverlay } from '../../components/shared';
+import { Header, Footer } from '../../components/frontend';
 import { visibilityShow, visibilityHide } from '../../actions/frontend/ui/visibility';
 import { whoami } from '../../actions/shared/authentication';
 
