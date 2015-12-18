@@ -59,9 +59,6 @@ module Ingestor
         def update_structures!(text)
           structure = @inspector.toc_inspector.text_structure
           structure = Transformer::TOCStructure.transform(structure, text)
-          puts structure
-
-          abort
           key = "services.ingestor.strategy.ePUB.log.update_structures"
           info key, id: text.id
           update_toc!(text, structure)
