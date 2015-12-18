@@ -5,7 +5,8 @@ import DocumentMeta from 'react-document-meta';
 import config from '../../config';
 import { BodyClass, LoginOverlay } from '../../components/shared';
 import { Header, Footer } from '../../components/frontend';
-import { visibilityShow, visibilityHide } from '../../actions/shared/ui/visibility';
+import { startLogout } from '../../actions/shared/authentication';
+import { visibilityToggle, visibilityHide, visibilityShow } from '../../actions/shared/ui/visibility';
 import { whoami } from '../../actions/shared/authentication';
 
 function mapStateToProps(state) {
@@ -43,9 +44,13 @@ export default class Frontend extends Component {
         <div>
           <DocumentMeta {...config.app}/>
           <Header
-              showLoginOverlay={bindActionCreators(() => visibilityShow('loginOverlay'), this.props.dispatch)}
+              visibility={this.props.visibility }
               location={this.props.location}
               authenticated={this.props.authentication.authToken === null ? false : true}
+              visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
+              visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}
+              visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
+              startLogout={bindActionCreators(() => startLogout(), this.props.dispatch)}
           />
           {/* Add hideOverlay={false} to show overlay */}
           <LoginOverlay

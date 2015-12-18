@@ -73,6 +73,9 @@
       padding-right: 16px;
       padding-left: 16px;
       position: relative;
+      &.button-active {
+        background-color: $neutral10;
+      }
       .avatar {
         @include buttonAvatar(32);
       }

@@ -4,9 +4,6 @@
 .button-avatar {
   @include buttonUnstyled;
   transition: background-color $duration $timing;
-  &.button-active {
-    background-color: $neutral10;
-  }
   .avatar {
     @include buttonAvatar();
   }
@@ -31,6 +28,18 @@
     &.menu-visible {
       visibility: visible;
       opacity: 1;
+    }
+    // Styled, but hidden by default
+    .tail {
+      display: none;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 15.5px 17px 15.5px;
+      border-color: transparent transparent $neutral10;
+      position: absolute;
+      top: -17px;
+      right: 28px;
     }
     ul {
       @include listUnstyled;

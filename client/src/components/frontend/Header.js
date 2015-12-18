@@ -5,9 +5,13 @@ import {Link} from 'react-router';
 export default class Header extends Component {
 
   static propTypes = {
-    showLoginOverlay: PropTypes.func,
+    visibility: PropTypes.object,
     location: PropTypes.object,
-    authenticated: PropTypes.bool
+    authenticated: PropTypes.bool,
+    visibilityToggle: PropTypes.func,
+    visibilityHide: PropTypes.func,
+    visibilityShow: PropTypes.func,
+    startLogout: PropTypes.func
   };
 
   render = () => {
@@ -25,24 +29,26 @@ export default class Header extends Component {
           <ul>
             <li className={this.props.location.pathname === '/browse/' ? 'active' : ''}>
               <Link to={`/browse/`}>
-                Browse
+                {'Projects'}
               </Link>
             </li>
             <li className={this.props.location.pathname === '/browse/following/' ? 'active' : ''}>
               <Link to={`/browse/following/`}>
-                Following
+                {'Following'}
               </Link>
             </li>
           </ul>
         </nav>
 
         <nav className="widget-nav">
-          <button className="button-bare-icon button-magnify">
-            <i className="manicon manicon-magnify"></i>
-            <span className="screen-reader-text">{'Click to search Manifold library'}</span>
-          </button>
-          <UserMenu showLoginOverlay={this.props.showLoginOverlay}
-                      authenticated={this.props.authenticated} />
+          <UserMenu
+              toggleUserMenu={() => {this.props.visibilityToggle('userMenu');}}
+              hideUserMenu={()=> {this.props.visibilityHide('userMenu');}}
+              showLoginOverlay={() => {this.props.visibilityShow('loginOverlay');}}
+              startLogout={this.props.startLogout}
+              authenticated={this.props.authenticated}
+              visible={this.props.visibility.userMenu}
+          />
         </nav>
       </header>
     );

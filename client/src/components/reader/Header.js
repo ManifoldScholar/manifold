@@ -41,6 +41,7 @@ export default class Header extends Component {
           <nav className="widget-nav">
             <UserMenu
                 toggleUserMenu={() => {this.props.visibilityToggle('userMenu');}}
+                hideUserMenu={()=> {this.props.visibilityHide('userMenu');}}
                 showLoginOverlay={() => {this.props.visibilityShow('loginOverlay');}}
                 startLogout={this.props.startLogout}
                 authenticated={this.props.authenticated}

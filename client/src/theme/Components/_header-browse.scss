@@ -1,6 +1,7 @@
 // <header>
 .header-browse {
-  position: relative;
+  position: fixed;
+  width: 100%;
   padding: 30px 52px 30px 40px;
   background-color: $neutralWhite;
   // <a> return link with logo
@@ -51,9 +52,10 @@
   }
 
   .widget-nav {
+    height: 100%;
     position: absolute;
-    top: 30px;
-    right: 52px;
+    top: 0;
+    right: 40px;
     .button-magnify {
       margin-right: 51px;
       vertical-align: middle;
@@ -62,5 +64,20 @@
         color: $neutral80;
       }
     }
+    .button-avatar {
+      height: 100%;
+      position: relative;
+    }
+    .user-menu {
+      right: -24px;
+      .tail {
+        display: block;
+      }
+    }
   }
+}
+
+// Header bump
+.browse main {
+  padding-top: 99px;
 }

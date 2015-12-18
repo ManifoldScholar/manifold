@@ -45,7 +45,7 @@ export default class UserButton extends Component {
       'button-active': this.props.menuVisible
     });
     return (
-        <button className={buttonClass} onClick={this.props.authenticated ? this.toggleUserMenu.bind(this) : this.showLoginOverlay.bind(this)}>
+        <button onClick={this.props.onClick} className={buttonClass} >
           <span className="screen-reader-text">{'Click to login or open user settings'}</span>
           <figure className="avatar">
             {this.avatarImage()}
