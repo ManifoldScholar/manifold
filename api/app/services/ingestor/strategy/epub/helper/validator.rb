@@ -2,9 +2,9 @@ require "naught"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Helper
-        # Provides EPUB3 ingestion validation related helper methods
+        # Provides EPUB ingestion validation related helper methods
         #
         # @author Zach Davis
         # @todo: This class needs to be refactored to pass Rubocop linting.

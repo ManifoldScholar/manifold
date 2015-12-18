@@ -2,9 +2,9 @@ require "naught"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Helper
-        # Logging helpers for EPUB3 ingestion strategy
+        # Logging helpers for EPUB ingestion strategy
         class Log
           def self.log_structure(s, preface, logger)
             log_structure_recursive(s, preface, logger)

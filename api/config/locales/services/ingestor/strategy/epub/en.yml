@@ -2,7 +2,7 @@ en:
   services:
     ingestor:
       strategy:
-        epub3:
+        ePUB:
           log:
             update_structures: 'Updating text structures. [id %{id}]'
             transform_ts: 'Transforming text section "%{name}" body.'

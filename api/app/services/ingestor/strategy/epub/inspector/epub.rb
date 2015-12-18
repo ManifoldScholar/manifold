@@ -6,9 +6,9 @@ require "open-uri"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Inspector
-        # Inspects the EPUB3 document and provides high level information and access to
+        # Inspects the EPUB document and provides high level information and access to
         # document structure, nodes, etc.
         #
         # @author Zach Davis
@@ -31,6 +31,14 @@ module Ingestor
             File.basename(@epub_path)
           end
           memoize :epub_basename
+
+          def is_v3?
+            epub_version.starts_with?("3")
+          end
+
+          def is_v2?
+            epub_version.starts_with?("2")
+          end
 
           def epub_extension
             File.extname(epub_basename).split(".").last
@@ -148,12 +156,13 @@ module Ingestor
           memoize :manifest_item_nodes
 
           def manifest_nav_item
-            manifest_node.xpath(('//*[contains(@properties, "nav")]')).first
+            return manifest_node.xpath('//*[@id="ncx"]').first if is_v2?
+            return manifest_node.xpath(('//*[contains(@properties, "nav")]')).first if is_v3?
           end
           memoize :manifest_nav_item
 
           def manifest_cover_item
-            manifest_node.xpath(('//*[contains(@properties, "cover-image")]')).first
+            manifest_node.xpath('//*[contains(@properties, "cover-image")]').first
           end
           memoize :manifest_cover_item
 
@@ -197,11 +206,11 @@ module Ingestor
           def read_rendition_source(relative_path)
             uri = URI(relative_path)
             if uri.absolute?
-              debug "services.ingestor.strategy.epub3.log.download_external",
+              debug "services.ingestor.strategy.ePUB.log.download_external",
                     relative_path: relative_path
               return nil
             end
-            debug "services.ingestor.strategy.epub3.log.extract_local_resource",
+            debug "services.ingestor.strategy.ePUB.log.extract_local_resource",
                   relative_path: relative_path
             Zip::File.open(@epub_path) do |zip_file|
               return zip_file
@@ -222,7 +231,7 @@ module Ingestor
           end
 
           def get_rendition_source_by_id(source_id)
-            debug "services.ingestor.strategy.epub3.log.get_rendition_source",
+            debug "services.ingestor.strategy.ePUB.log.get_rendition_source",
                   source_id: source_id
             node = rendition_source_node_by_id(source_id)
             path = node.attribute("href")

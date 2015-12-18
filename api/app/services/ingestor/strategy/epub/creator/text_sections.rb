@@ -1,8 +1,8 @@
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Creator
-        # Creates Manifold TextSections from EPUB3 documents.
+        # Creates Manifold TextSections from EPUB documents.
         #
         # @author Zach Davis
         class TextSections < BaseCreator
@@ -27,9 +27,9 @@ module Ingestor
           private
 
           def log(node_inspector, section)
-            debug "services.ingestor.strategy.epub3.log.section_name",
+            debug "services.ingestor.strategy.ePUB.log.section_name",
                  id: node_inspector.idref, name: section.name
-            debug "services.ingestor.strategy.epub3.log.section_kind",
+            debug "services.ingestor.strategy.ePUB.log.section_kind",
                  id: node_inspector.idref, kind: section.kind
           end
 

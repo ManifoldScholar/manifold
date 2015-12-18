@@ -3,9 +3,9 @@ require "naught"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Inspector
-        # Returns information about a metadata node in a EPUB3 package manifest.
+        # Returns information about a metadata node in a EPUB package manifest.
         class Metadata
           extend Memoist
 

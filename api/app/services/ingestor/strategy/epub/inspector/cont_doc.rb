@@ -3,9 +3,9 @@ require "naught"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Inspector
-        # Provides information about a single content document in an EPUB3 package.
+        # Provides information about a single content document in an EPUB package.
         #
         # @author Zach Davis
         class ContDoc

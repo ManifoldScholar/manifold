@@ -3,11 +3,11 @@ require "naught"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Inspector
         # The <tt></tt> class is responsible for parsing the navigation nodes--typically
-        # ordered lists--in an EPUB3 document and producing a hash with the correct labels
-        # and paths to internal EPUB3 source documents. This structure eventually serves
+        # ordered lists--in an EPUB document and producing a hash with the correct labels
+        # and paths to internal EPUB source documents. This structure eventually serves
         # as the input to the TOC structure transformer, which will update the urls to
         # link to Manifold text sections.
         #
@@ -17,11 +17,14 @@ module Ingestor
           extend Memoist
           include Ingestor::Loggable
 
-          SELECTOR_TOC_NODE = "//nav[@type='toc']"
+          V3_SELECTOR_TOC_NODE = "//nav[@type='toc']"
+          V2_SELECTOR_TOC_NODE = "//navMap/navPoint"
           SELECTOR_PAGE_LIST_NODE = "//nav[@type='page-list']"
           SELECTOR_LANDMARK_NODE = "//nav[@type='landmarks']"
           # rubocop: disable Metrics/LineLength
-          SELECTOR_HEADER_NODE = "//*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6]"
+          V3_SELECTOR_HEADER_NODE = "//*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6]"
+          V2_SELECTOR_HEADER_NODE = "//navLabel/text/text()"
+
 
           def initialize(epub_inspector)
             @epub_inspector = epub_inspector
@@ -59,7 +62,8 @@ module Ingestor
           end
 
           def toc_node
-            @nav_xml.xpath(SELECTOR_TOC_NODE)
+            path = @epub_inspector.is_v2? ? V2_SELECTOR_TOC_NODE : V3_SELECTOR_TOC_NODE
+            @nav_xml.xpath(path)
           end
           memoize :toc_node
 
@@ -74,26 +78,27 @@ module Ingestor
           memoize :landmarks_node
 
           def header_text_for_node(node)
-            header = node.xpath(SELECTOR_HEADER_NODE).first
+            path = @epub_inspector.is_v2? ? V2_SELECTOR_HEADER_NODE : V3_SELECTOR_HEADER_NODE
+            header = node.xpath(path).first
             text = header ? header.text : ""
             text
           end
 
           def toc_title
             text = header_text_for_node(toc_node)
-            debug "services.ingestor.strategy.epub3.log.toc_nav_title", text: text
+            debug "services.ingestor.strategy.ePUB.log.toc_nav_title", text: text
             text
           end
 
           def page_list_title
             text = header_text_for_node(page_list_node)
-            debug "services.ingestor.strategy.epub3.log.page_list_nav_title", text: text
+            debug "services.ingestor.strategy.ePUB.log.page_list_nav_title", text: text
             text
           end
 
           def landmarks_title
             text = header_text_for_node(landmarks_node)
-            debug "services.ingestor.strategy.epub3.log.landmark_nav_title", text: text
+            debug "services.ingestor.strategy.ePUB.log.landmark_nav_title", text: text
             text
           end
 

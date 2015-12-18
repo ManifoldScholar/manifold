@@ -1,8 +1,8 @@
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Creator
-        # Creates Manifold Resources from an EPUB3 document.
+        # Creates Manifold Resources from an EPUB document.
         #
         # @author Zach Davis
         class Resources < BaseCreator

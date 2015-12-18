@@ -1,8 +1,8 @@
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Creator
-        # Creates Manifold TextTitles from EPUB3 title nodes.
+        # Creates Manifold TextTitles from EPUB title nodes.
         #
         # @author Zach Davis
         class TextTitles < BaseCreator
@@ -18,7 +18,7 @@ module Ingestor
               existing_title = check_for_existing(existing, value: attr[:value])
               attr = defaults(DEFAULT_ATTRIBUTES, attr)
               title = existing_title || TextTitle.create(attr)
-              debug "services.ingestor.strategy.epub3.log.new_title", title: title.value
+              debug "services.ingestor.strategy.ePUB.log.new_title", title: title.value
               title
             end
             titles

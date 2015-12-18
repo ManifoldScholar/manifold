@@ -3,12 +3,12 @@ require "uri"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Transformer
         # The <tt>TextSection</tt> transformer transforms URIs within an
-        # imported EPUB3 content document.
+        # imported EPUB content document.
         #
-        # The EPUB3 strategy creates Manifold TextSection domain models from
+        # The EPUB strategy creates Manifold TextSection domain models from
         # EPUB content documents. When the TextSections are created, all of
         # the URIs are left as is, which generally means that they link to
         # other documents within the EPUB. These URIs all need to be updated
@@ -51,7 +51,7 @@ module Ingestor
           #
           # @param [String] body Text content, typically HTML, from the EPUB
           #   content document.
-          # @param [String] source_path EPUB3 documents often rely on relative
+          # @param [String] source_path EPUB documents often rely on relative
           #   links. To correctly resolve the URI to a content document, we
           #   need to know the path of the source document that the link comes
           #   from.
@@ -130,7 +130,7 @@ module Ingestor
           end
 
           def log_map_uri(abs_package_path, uri)
-            debug "services.ingestor.strategy.epub3.log.mapping_uri"
+            debug "services.ingestor.strategy.ePUB.log.mapping_uri"
             debug_string "  #{abs_package_path}"
             debug_string "  #{uri}"
           end

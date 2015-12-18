@@ -3,9 +3,9 @@ require "naught"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Inspector
-        # Inspector for an item in an EPUB3 manifest.
+        # Inspector for an item in an EPUB manifest.
         class SpineItem
           extend Memoist
 

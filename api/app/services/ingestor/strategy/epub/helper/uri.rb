@@ -4,7 +4,7 @@ require "uri"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Helper
         # The URI helper class is responsible for mapping internal URIs in EPUBs to
         # manifold-friendly URIs

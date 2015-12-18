@@ -1,8 +1,8 @@
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Creator
-        # Creates Manifold Makers from an EPUB3 document metadata.
+        # Creates Manifold Makers from an EPUB document metadata.
         #
         # @author Zach Davis
         class Makers < BaseCreator
@@ -25,9 +25,9 @@ module Ingestor
 
           def log_maker(maker, role)
             if maker.new_record?
-              k = "services.ingestor.strategy.epub3.log.new_maker"
+              k = "services.ingestor.strategy.ePUB.log.new_maker"
             else
-              k = "services.ingestor.strategy.epub3.log.updated_maker"
+              k = "services.ingestor.strategy.ePUB.log.updated_maker"
             end
             debug(k, name: maker.name, role: role)
           end

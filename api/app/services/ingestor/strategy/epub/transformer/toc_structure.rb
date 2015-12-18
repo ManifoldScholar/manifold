@@ -3,11 +3,11 @@ require "naught"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Transformer
         # This class is responsible for transforming the text structure returned
         # by the TOC Inspector. The TOC Inspector extracts the three supported
-        # EPUB3 navigation types: table of contents, page list, and landmarks.
+        # EPUB navigation types: table of contents, page list, and landmarks.
         # These navigation nodes typically link to internal EPUB URLs. The role
         # of the TOCStructure Transformer is to recursively crawl through these
         # navigation structures and generate navigation structures based on text
@@ -21,11 +21,11 @@ module Ingestor
           # @param [Hash] text_structure The text structure hash is a hash that
           #   has three symbol keys: <tt>:toc</tt>, <tt>:page_list</tt>, <tt>
           #   :landmarks</tt>. The easiest way to get this hash is from
-          #   Ingestor::Strategy::EPUB3::Inspector::TOC#text_structure.
+          #   Ingestor::Strategy::EPUB::Inspector::TOC#text_structure.
           # @param [Text] text A Manifold Text model with text sections already
           #   added. It's important that the ingestor has already ingested
           #   TextSections and added them to the Text model.
-          # @see Ingestor::Strategy::EPUB3::Inspector::TOC#text_structure
+          # @see Ingestor::Strategy::EPUB::Inspector::TOC#text_structure
           def self.transform(text_structure, text)
             output = {
               titles: text_structure[:titles].clone,

@@ -2,9 +2,9 @@ require "filesize"
 
 module Ingestor
   module Strategy
-    module EPUB3
-      # The <tt>Ingestor::Strategy::EPUB3</tt> class provides a strategy for ingesting
-      # EPUB3 documents into Manifold.
+    module EPUB
+      # The <tt>Ingestor::Strategy::EPUB</tt> class provides a strategy for ingesting
+      # EPUB documents into Manifold.
       #
       # @author Zach Davis
       class Strategy < Ingestor::Strategy::Base
@@ -22,7 +22,7 @@ module Ingestor
           inspector = Inspector::EPUB.new(ingestion.source_path,
                                           ingestion.logger)
           return false if inspector.epub_extension != "epub"
-          return false if inspector.epub_version != "3.0"
+          return false unless inspector.is_v2? || inspector.is_v3?
           true
         end
 

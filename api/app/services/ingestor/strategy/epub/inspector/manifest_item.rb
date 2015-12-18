@@ -3,9 +3,9 @@ require "naught"
 
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Inspector
-        # Provides metadata for a single item in an EPUB3 manifest
+        # Provides metadata for a single item in an EPUB manifest
         class ManifestItem
           NullAttribute = Naught.build do |config|
             config.define_explicit_conversions

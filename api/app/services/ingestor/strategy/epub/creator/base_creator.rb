@@ -1,8 +1,8 @@
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       module Creator
-        # Abstract base class for EPUB3 ingestion creators
+        # Abstract base class for EPUB ingestion creators
         #
         # @author Zach Davis
         class BaseCreator

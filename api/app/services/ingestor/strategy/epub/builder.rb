@@ -1,6 +1,6 @@
 module Ingestor
   module Strategy
-    module EPUB3
+    module EPUB
       # rubocop: disable Metrics/ClassLength
       class Builder
         include Ingestor::Loggable
@@ -44,10 +44,10 @@ module Ingestor
         end
 
         def transform_text_sections!(text)
-          info "services.ingestor.strategy.epub3.log.transforming_ts"
+          info "services.ingestor.strategy.ePUB.log.transforming_ts"
           transformer = Transformer::TextSection.new(text, @logger)
           text.text_sections.each do |ts|
-            key = "services.ingestor.strategy.epub3.log.transform_ts"
+            key = "services.ingestor.strategy.ePUB.log.transform_ts"
             debug key, name: ts.name, id: ts.id
             ts.body = transformer.convert_cont_doc_body(ts.source_body,
                                                         ts.source_path)
@@ -59,7 +59,10 @@ module Ingestor
         def update_structures!(text)
           structure = @inspector.toc_inspector.text_structure
           structure = Transformer::TOCStructure.transform(structure, text)
-          key = "services.ingestor.strategy.epub3.log.update_structures"
+          puts structure
+
+          abort
+          key = "services.ingestor.strategy.ePUB.log.update_structures"
           info key, id: text.id
           update_toc!(text, structure)
           update_page_list!(text, structure)
@@ -69,29 +72,29 @@ module Ingestor
 
         def update_toc!(text, structure)
           text.toc = structure[:toc]
-          debug "services.ingestor.strategy.epub3.log.find_toc_structure"
+          debug "services.ingestor.strategy.ePUB.log.find_toc_structure"
           Helper::Log.log_structure(text.toc, "  TOC: ", @logger)
         end
 
         def update_page_list!(text, structure)
           text.page_list = structure[:page_list]
-          debug "services.ingestor.strategy.epub3.log.find_page_structure"
+          debug "services.ingestor.strategy.ePUB.log.find_page_structure"
           Helper::Log.log_structure(text.page_list, "  Page List: ", @logger)
         end
 
         def update_landmarks!(text, structure)
           text.landmarks = structure[:landmarks]
-          debug "services.ingestor.strategy.epub3.log.find_landmark_structure"
+          debug "services.ingestor.strategy.ePUB.log.find_landmark_structure"
           Helper::Log.log_structure(text.landmarks, "  Landmarks: ", @logger)
         end
 
         def attempt_save!(text)
-          info "services.ingestor.strategy.epub3.log.attempt_save"
+          info "services.ingestor.strategy.ePUB.log.attempt_save"
           if text.valid?
             text.save
           else
             Helper::Log.log_text_errors(text, @logger)
-            fail IngestionFailed, "services.ingestor.strategy.epub3.fail.save_fail"
+            fail IngestionFailed, "services.ingestor.strategy.ePUB.fail.save_fail"
           end
         end
 
@@ -122,7 +125,7 @@ module Ingestor
         def update_unique_id!(text)
           id = @inspector.unique_id
           unless id
-            msg = I18n.t("services.ingestor.strategy.epub3.fail.missing_uid")
+            msg = I18n.t("services.ingestor.strategy.ePUB.fail.missing_uid")
             fail IngestionFailed, msg
           end
           text.unique_identifier = @inspector.unique_id
@@ -152,7 +155,7 @@ module Ingestor
                                       @inspector.metadata_node).text
           return unless l.present?
           text.language = l
-          info "services.ingestor.strategy.epub3.log.set_lang", lang: text.language
+          info "services.ingestor.strategy.ePUB.log.set_lang", lang: text.language
         end
 
         def update_date!(text)
@@ -160,7 +163,7 @@ module Ingestor
                                       @inspector.metadata_node).text
           return unless d.present?
           text.publication_date = d
-          debug "services.ingestor.strategy.epub3.log.set_date",
+          debug "services.ingestor.strategy.ePUB.log.set_date",
                date: text.publication_date
         end
 
@@ -169,7 +172,7 @@ module Ingestor
                                       @inspector.metadata_node).text
           return unless r.present?
           text.rights = r
-          debug "services.ingestor.strategy.epub3.log.set_rights", rights: text.rights
+          debug "services.ingestor.strategy.ePUB.log.set_rights", rights: text.rights
         end
 
         def update_description!(text)
@@ -177,7 +180,7 @@ module Ingestor
                                       @inspector.metadata_node).text
           return unless d.present?
           text.description = d
-          debug "services.ingestor.strategy.epub3.log.set_desc",
+          debug "services.ingestor.strategy.ePUB.log.set_desc",
                 desc: text.description.truncate(40)
         end
       end
