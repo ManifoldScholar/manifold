@@ -130,9 +130,9 @@ module Ingestor
           end
 
           def log_map_uri(abs_package_path, uri)
-            @logger.debug "Mapping URI"
-            @logger.debug "  #{abs_package_path}"
-            @logger.debug "  #{uri}"
+            debug "services.ingestor.strategy.epub3.log.mapping_uri"
+            debug_string "  #{abs_package_path}"
+            debug_string "  #{uri}"
           end
         end
       end

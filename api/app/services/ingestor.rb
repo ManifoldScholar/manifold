@@ -13,6 +13,9 @@
 # @author Zach Davis
 module Ingestor
   class << self
+
+    include Ingestor::Loggable
+
     attr_writer :logger
 
     # Ingests a single subject (file or directory) into Manifold
@@ -29,8 +32,7 @@ module Ingestor
       validate_strategy(strategy)
       set_ingestion_text(strategy, ingestion)
       strategy.ingest(ingestion)
-      logger.info I18n.t("services.ingestor.logging.ingestion_end",
-                         name: basename)
+      info "services.ingestor.logging.ingestion_end", name: basename
       return ingestion.text
     rescue Ingestor::IngestionFailed => e
       logger.error(e.message)
@@ -58,26 +60,29 @@ module Ingestor
              "Could not find ingestion source"
       end
       basename = File.basename(path)
-      @logger.info I18n.t("services.ingestor.logging.ingestion_start",
-                          name: basename)
+      significant "services.ingestor.logging.ingestion_start", name: basename
       ingestion = Ingestor::Ingestion.new(path)
       strategy = Ingestor::Strategy.for(ingestion)
-      @logger.info I18n.t("services.ingestor.logging.using_strategy",
-                          strategy: strategy)
+      return [basename, ingestion, nil] if !strategy
+      info "services.ingestor.logging.using_strategy", strategy: strategy
       [basename, ingestion, strategy]
     end
 
     def validate_strategy(strategy)
       return unless strategy.nil?
-      fail IngestionFailed,
-           I18n.t("services.ingestor.failures.strategy_not_found")
+      fail Ingestor::IngestionFailed,
+           I18n.t("services.ingestor.failures.strategy_not_found").red
     end
 
     def set_ingestion_text(strategy, ingestion)
       id = strategy.unique_id(ingestion)
-      @logger.info I18n.t("services.ingestor.logging.text_found", id: id)
       text = Text.where(unique_identifier: id).first
-      ingestion.text = text if text
+      if text
+        info "services.ingestor.logging.text_found", id: text.id
+        ingestion.text = text if text
+      else
+        info "services.ingestor.logging.text_not_found", id: id
+      end
     end
   end
 end

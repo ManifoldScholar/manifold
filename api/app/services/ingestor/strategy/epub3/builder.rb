@@ -44,10 +44,11 @@ module Ingestor
         end
 
         def transform_text_sections!(text)
+          info "services.ingestor.strategy.epub3.log.transforming_ts"
           transformer = Transformer::TextSection.new(text, @logger)
           text.text_sections.each do |ts|
             key = "services.ingestor.strategy.epub3.log.transform_ts"
-            @logger.info I18n.t(key, name: ts.name, id: ts.id)
+            debug key, name: ts.name, id: ts.id
             ts.body = transformer.convert_cont_doc_body(ts.source_body,
                                                         ts.source_path)
             ts.body_json = transformer.convert_cont_doc_body_to_json(ts.body)
@@ -58,6 +59,8 @@ module Ingestor
         def update_structures!(text)
           structure = @inspector.toc_inspector.text_structure
           structure = Transformer::TOCStructure.transform(structure, text)
+          key = "services.ingestor.strategy.epub3.log.update_structures"
+          info key, id: text.id
           update_toc!(text, structure)
           update_page_list!(text, structure)
           update_landmarks!(text, structure)
@@ -66,24 +69,24 @@ module Ingestor
 
         def update_toc!(text, structure)
           text.toc = structure[:toc]
-          @logger.info "Looking for TOC structure"
+          debug "services.ingestor.strategy.epub3.log.find_toc_structure"
           Helper::Log.log_structure(text.toc, "  TOC: ", @logger)
         end
 
         def update_page_list!(text, structure)
           text.page_list = structure[:page_list]
-          @logger.info "Looking for Page List structure"
+          debug "services.ingestor.strategy.epub3.log.find_page_structure"
           Helper::Log.log_structure(text.page_list, "  Page List: ", @logger)
         end
 
         def update_landmarks!(text, structure)
           text.landmarks = structure[:landmarks]
-          @logger.info "Looking for Landmark structure"
+          debug "services.ingestor.strategy.epub3.log.find_landmark_structure"
           Helper::Log.log_structure(text.landmarks, "  Landmarks: ", @logger)
         end
 
         def attempt_save!(text)
-          debug "services.ingestor.strategy.epub3.log.attempt_save"
+          info "services.ingestor.strategy.epub3.log.attempt_save"
           if text.valid?
             text.save
           else
@@ -122,7 +125,6 @@ module Ingestor
             msg = I18n.t("services.ingestor.strategy.epub3.fail.missing_uid")
             fail IngestionFailed, msg
           end
-          @logger.info("Unique identifier is \"#{id}\"")
           text.unique_identifier = @inspector.unique_id
         end
 
@@ -158,7 +160,7 @@ module Ingestor
                                       @inspector.metadata_node).text
           return unless d.present?
           text.publication_date = d
-          info "services.ingestor.strategy.epub3.log.set_date",
+          debug "services.ingestor.strategy.epub3.log.set_date",
                date: text.publication_date
         end
 
@@ -167,7 +169,7 @@ module Ingestor
                                       @inspector.metadata_node).text
           return unless r.present?
           text.rights = r
-          info "services.ingestor.strategy.epub3.log.set_rights", rights: text.rights
+          debug "services.ingestor.strategy.epub3.log.set_rights", rights: text.rights
         end
 
         def update_description!(text)
@@ -175,7 +177,8 @@ module Ingestor
                                       @inspector.metadata_node).text
           return unless d.present?
           text.description = d
-          info "services.ingestor.strategy.epub3.log.set_desc", desc: text.description
+          debug "services.ingestor.strategy.epub3.log.set_desc",
+                desc: text.description.truncate(40)
         end
       end
     end

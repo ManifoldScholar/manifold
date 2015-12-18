@@ -18,7 +18,7 @@ module Ingestor
               existing_title = check_for_existing(existing, value: attr[:value])
               attr = defaults(DEFAULT_ATTRIBUTES, attr)
               title = existing_title || TextTitle.create(attr)
-              info "services.ingestor.strategy.epub3.log.new_title", title: title.value
+              debug "services.ingestor.strategy.epub3.log.new_title", title: title.value
               title
             end
             titles

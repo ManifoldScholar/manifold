@@ -14,13 +14,11 @@ module Ingestor
             text.text_sections.each do |cd|
               verb = cd.new_record? ? "create" : "update"
               if cd.valid?
-                logger.info "#{verb.titlecase} text section \"#{cd.name}\""
-                logger.info "  [#{cd.source_identifier}]"
+                logger.debug "#{verb.titlecase} text section \"#{cd.name}\"".light_cyan
               else
-                logger.error "Unable to #{verb} text section \"#{cd.name}\""
-                logger.info "  [#{cd.source_identifier}]"
+                logger.warn "Unable to #{verb} text section \"#{cd.name}\"".orange
                 cd.errors.full_messages.each do |msg|
-                  logger.error "  #{msg}"
+                  logger.error "  #{msg}".red
                 end
                 fail IngestionFailed, "Unable to #{verb} text section"
               end
@@ -32,8 +30,8 @@ module Ingestor
               next unless source.valid?
               verb = source.new_record? ? "created" : "updated"
               msg = "#{verb.titlecase} ingestion source \"#{source.source_identifier}\""
-              logger.debug msg
-              logger.debug "  [#{source.source_path}]"
+              logger.debug msg.light_cyan
+              logger.debug "  local path: #{source.source_path}".light_cyan
             end
           end
 
@@ -42,12 +40,13 @@ module Ingestor
               if resource.valid?
                 verb = resource.new_record? ? "created" : "updated"
                 size = Filesize.from("#{resource.attachment.size} B").pretty
-                logger.debug "#{verb.titlecase} resource \"#{resource.name}\" [#{size}]"
-                logger.debug "  [#{resource.attachment.content_type}]"
+                logger.debug "#{verb.titlecase} resource \"#{resource.name}\"".light_cyan
+                logger.debug "  Resource file size: #{size}".light_cyan
+                logger.debug "  Resource content type: #{resource.attachment.content_type}".light_cyan
               else
-                logger.debug "Invalid resource \"#{resource.name}\""
+                logger.debug "Invalid resource \"#{resource.name}\"".light_cyan
                 resource.errors.full_messages.each do |message|
-                  logger.debug "    #{message}"
+                  logger.debug "    #{message}".light_cyan
                 end
               end
             end

@@ -15,6 +15,8 @@ module Ingestor
         # rubocop: disable Metrics/ClassLength
         class EPUB
           extend Memoist
+          include Ingestor::Loggable
+          attr_reader :logger
 
           def initialize(epub_path, logger = nil)
             @epub_path = epub_path
@@ -195,10 +197,12 @@ module Ingestor
           def read_rendition_source(relative_path)
             uri = URI(relative_path)
             if uri.absolute?
-              log(:debug, "Downloading external resource: #{relative_path}")
+              debug "services.ingestor.strategy.epub3.log.download_external",
+                    relative_path: relative_path
               return nil
             end
-            log(:debug, "Extracting local resource: #{relative_path}")
+            debug "services.ingestor.strategy.epub3.log.extract_local_resource",
+                  relative_path: relative_path
             Zip::File.open(@epub_path) do |zip_file|
               return zip_file
                 .glob(source_zip_path(relative_path)).first.get_input_stream.read
@@ -218,7 +222,8 @@ module Ingestor
           end
 
           def get_rendition_source_by_id(source_id)
-            log(:debug, "Attempting to get rendition source by ID: #{source_id}")
+            debug "services.ingestor.strategy.epub3.log.get_rendition_source",
+                  source_id: source_id
             node = rendition_source_node_by_id(source_id)
             path = node.attribute("href")
             get_rendition_source(path)

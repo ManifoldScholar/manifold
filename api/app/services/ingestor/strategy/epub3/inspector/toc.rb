@@ -15,6 +15,7 @@ module Ingestor
         # rubocop: disable Metrics/ClassLength
         class TOC
           extend Memoist
+          include Ingestor::Loggable
 
           SELECTOR_TOC_NODE = "//nav[@type='toc']"
           SELECTOR_PAGE_LIST_NODE = "//nav[@type='page-list']"
@@ -24,6 +25,7 @@ module Ingestor
 
           def initialize(epub_inspector)
             @epub_inspector = epub_inspector
+            @logger = epub_inspector.logger
             @nav_xml = @epub_inspector.nav_xml
             @nav_path = @epub_inspector.nav_path
           end
@@ -79,19 +81,19 @@ module Ingestor
 
           def toc_title
             text = header_text_for_node(toc_node)
-            @epub_inspector.log :debug, "TOC nav title is \"#{text}\""
+            debug "services.ingestor.strategy.epub3.log.toc_nav_title", text: text
             text
           end
 
           def page_list_title
             text = header_text_for_node(page_list_node)
-            @epub_inspector.log :debug, "Page List nav title is \"#{text}\""
+            debug "services.ingestor.strategy.epub3.log.page_list_nav_title", text: text
             text
           end
 
           def landmarks_title
             text = header_text_for_node(landmarks_node)
-            @epub_inspector.log :debug, "Landmarks nav title is \"#{text}\""
+            debug "services.ingestor.strategy.epub3.log.landmark_nav_title", text: text
             text
           end
 

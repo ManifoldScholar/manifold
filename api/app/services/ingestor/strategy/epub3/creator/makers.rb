@@ -29,7 +29,7 @@ module Ingestor
             else
               k = "services.ingestor.strategy.epub3.log.updated_maker"
             end
-            info(k, name: maker.name, role: role)
+            debug(k, name: maker.name, role: role)
           end
 
           def attributes(node_inspector)

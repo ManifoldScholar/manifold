@@ -27,9 +27,9 @@ module Ingestor
           private
 
           def log(node_inspector, section)
-            info "services.ingestor.strategy.epub3.log.section_name",
+            debug "services.ingestor.strategy.epub3.log.section_name",
                  id: node_inspector.idref, name: section.name
-            info "services.ingestor.strategy.epub3.log.section_kind",
+            debug "services.ingestor.strategy.epub3.log.section_kind",
                  id: node_inspector.idref, kind: section.kind
           end
 
