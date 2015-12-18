@@ -235,6 +235,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   capistrano-rails
   capistrano-rbenv
+  colorize
   factory_girl
   faker!
   filesize (~> 0.1.1)

@@ -21,6 +21,7 @@ gem "filesize", "~> 0.1.1"
 gem "faker", github: "stympy/faker"
 gem "httparty", "~> 0.13.7"
 gem "jwt", "~> 1.5.2"
+gem "colorize"
 
 group :development, :test do
   gem "rspec-rails", "~> 3.0"
