@@ -12,6 +12,26 @@ class DemoData
     clear_db
     make_projects(10)
     batch_ingest()
+    assign_texts_to_projects
+    create_admin_user
+  end
+
+  def create_admin_user
+    u = User.find_or_create_by(email: "admin@manifold.dev")
+    u.role = "reader"
+    u.password = "manifold"
+    u.password_confirmation = "manifold"
+    u.save
+  end
+
+  def assign_texts_to_projects
+    Text.all.each do |text|
+      project = Project.limit(1).order("RANDOM()").first
+      category = project.text_categories.limit(1).order("RANDOM()").first
+      text.project = project
+      text.category = category
+      text.save
+    end
   end
 
   def batch_ingest()
@@ -19,7 +39,7 @@ class DemoData
     epubs = Dir.entries(path)
     epubs.reject { |name| name.start_with?(".")}.each do |name|
       epub_path = path.join(name)
-      text = ingest(epub_path)
+      ingest(epub_path)
     end
   end
 
