@@ -5,7 +5,7 @@ import DocumentMeta from 'react-document-meta';
 import config from '../../config';
 import { BodyClass, LoginOverlay } from '../../components/shared';
 import { Header, Footer } from '../../components/frontend';
-import { visibilityShow, visibilityHide } from '../../actions/frontend/ui/visibility';
+import { visibilityShow, visibilityHide } from '../../actions/shared/ui/visibility';
 import { whoami } from '../../actions/shared/authentication';
 
 function mapStateToProps(state) {

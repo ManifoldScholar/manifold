@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { UserButton } from '../../components/shared';
+import { UserMenu } from '../../components/shared';
 import { TocDrawer } from './';
 import { Link } from 'react-router';
 
@@ -9,17 +9,18 @@ export default class Header extends Component {
 
   static propTypes = {
     text: PropTypes.object,
-    tocVisible: PropTypes.bool,
-    toggleTocDrawer: PropTypes.func,
-    hideTocDrawer: PropTypes.func,
-    showLoginOverlay: PropTypes.func,
+    visibility: PropTypes.object,
+    visibilityToggle: PropTypes.func,
+    visibilityHide: PropTypes.func,
+    visibilityShow: PropTypes.func,
+    startLogout: PropTypes.func,
     authenticated: PropTypes.bool
   };
 
   render = () => {
     const buttonIndexClass = classNames({
       'button-index': true,
-      'active': this.props.tocVisible,
+      'active': this.props.visibility.tocDrawer,
     });
     return (
         <header className="header-reader">
@@ -38,10 +39,15 @@ export default class Header extends Component {
             {this.props.text.attributes.title}
           </h2>
           <nav className="widget-nav">
-            <UserButton showLoginOverlay={this.props.showLoginOverlay}
-                        authenticated={this.props.authenticated} />
+            <UserMenu
+                toggleUserMenu={() => {this.props.visibilityToggle('userMenu');}}
+                showLoginOverlay={() => {this.props.visibilityShow('loginOverlay');}}
+                startLogout={this.props.startLogout}
+                authenticated={this.props.authenticated}
+                visible={this.props.visibility.userMenu}
+            />
           </nav>
-          <TocDrawer text={this.props.text} visible={this.props.tocVisible} hideTocDrawer={this.props.hideTocDrawer} />
+          <TocDrawer text={this.props.text} visible={this.props.visibility.tocDrawer} hideTocDrawer={() => {this.props.visibilityHide('tocDrawer');}} />
         </header>
     );
   };

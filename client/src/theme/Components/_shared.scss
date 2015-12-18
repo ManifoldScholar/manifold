@@ -60,8 +60,6 @@ section {
   right: 0;
 }
 
-
-
 // Type
 // --------------------------------------------------------
 .section-heading {
@@ -257,15 +255,6 @@ section {
     margin-top: 21px;
   }
 }
-
-.button-avatar {
-  @include buttonUnstyled;
-  vertical-align: middle;
-  .avatar {
-    @include buttonAvatar();
-  }
-}
-
 
 // Browser UI (Selects, dropdowns, inputs, etc.)
 // --------------------------------------------------------

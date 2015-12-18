@@ -1,0 +1,75 @@
+// User menu container
+// This may be abstracted for other button/menu dropdown combinations
+// The button itself
+.button-avatar {
+  @include buttonUnstyled;
+  transition: background-color $duration $timing;
+  &.button-active {
+    background-color: $neutral10;
+  }
+  .avatar {
+    @include buttonAvatar();
+  }
+}
+
+.container-user-menu {
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+  position: relative;
+  .user-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    white-space: nowrap;
+    background-color: $neutral10;
+    padding: 40px;
+    // Hidden by default
+    opacity: 0;
+    visibility: hidden;
+    transition: all, $duration, $timing;
+    &.menu-visible {
+      visibility: visible;
+      opacity: 1;
+    }
+    ul {
+      @include listUnstyled;
+      li {
+        @include templateHead;
+        font-size: $type100;
+      }
+      // Menu items can be buttons or links
+      li, button, a {
+        @include buttonUnstyled;
+        text-decoration: none;
+        color: $neutral80;
+        &:hover {
+          color: $accentPrimary;
+        }
+      }
+      li + li {
+        margin-top: 28px;
+      }
+    }
+    // Icons used in menu
+    .manicon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 48px;
+      text-align: right;
+      margin-right: 23px;
+    }
+    // React generated element
+    .manicon + span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .manicon-person-pencil {
+      font-size: 44px;
+    }
+    .manicon-circle-arrow-out-right {
+      font-size: 32px;
+      padding-right: 6px; // NP
+    }
+  }
+}

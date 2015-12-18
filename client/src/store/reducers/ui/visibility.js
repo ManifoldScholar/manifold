@@ -2,6 +2,7 @@ import {handleActions} from 'redux-actions';
 
 const initialState = {
   loginOverlay: false,
+  userMenu: false,
   tocDrawer: false
 };
 

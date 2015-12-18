@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
 export default class UserButton extends Component {
 
   static propTypes = {
+    toggleUserMenu: PropTypes.func,
     showLoginOverlay: PropTypes.func,
     authenticated: PropTypes.bool,
+    menuVisible: PropTypes.bool,
     userAvatar: PropTypes.string
   };
 
@@ -13,11 +16,11 @@ export default class UserButton extends Component {
     userAvatar: '/placeholder/user-avatar-dreft01.jpg'
   };
 
-  UIToggleUserMenu = () => {
-    console.log('This will open the user menu!');
+  toggleUserMenu = () => {
+    this.props.toggleUserMenu();
   };
 
-  UIShowLoginOverlay = () => {
+  showLoginOverlay = () => {
     this.props.showLoginOverlay();
   };
 
@@ -37,8 +40,12 @@ export default class UserButton extends Component {
   };
 
   render = () => {
+    const buttonClass = classNames({
+      'button-avatar': true,
+      'button-active': this.props.menuVisible
+    });
     return (
-        <button className="button-avatar" onClick={this.props.authenticated ? this.UIToggleUserMenu.bind(this) : this.UIShowLoginOverlay.bind(this)}>
+        <button className={buttonClass} onClick={this.props.authenticated ? this.toggleUserMenu.bind(this) : this.showLoginOverlay.bind(this)}>
           <span className="screen-reader-text">{'Click to login or open user settings'}</span>
           <figure className="avatar">
             {this.avatarImage()}

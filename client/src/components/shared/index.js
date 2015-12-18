@@ -1,10 +1,12 @@
 import BodyClass from './BodyClass';
-import UserButton from './UserButton';
+import UserMenuButton from './UserMenuButton';
+import UserMenu from './UserMenu';
 import LoginOverlay from './LoginOverlay';
 
 export {
   BodyClass,
-  UserButton,
+  UserMenuButton,
+  UserMenu,
   LoginOverlay
 };
 

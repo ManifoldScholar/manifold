@@ -69,7 +69,10 @@
     right: 0;
     height: 100%;
     .button-avatar {
-      padding: 15px 16px;
+      height: 100%;
+      padding-right: 16px;
+      padding-left: 16px;
+      position: relative;
       .avatar {
         @include buttonAvatar(32);
       }

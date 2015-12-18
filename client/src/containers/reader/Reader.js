@@ -8,7 +8,8 @@ import { Header } from '../../components/reader';
 import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
 import { select } from '../../utils/select';
-import { visibilityToggle, visibilityHide, visibilityShow } from '../../actions/reader/ui/visibility';
+import { startLogout } from '../../actions/shared/authentication';
+import { visibilityToggle, visibilityHide, visibilityShow } from '../../actions/shared/ui/visibility';
 
 function fetchData(getState, dispatch, location, params) {
   const promises = [];
@@ -76,10 +77,11 @@ class Reader extends Component {
           <Header
               text={text}
               authenticated={this.props.authentication.authToken === null ? false : true}
-              tocVisible={this.props.visibility.tocDrawer }
-              toggleTocDrawer={bindActionCreators(() => visibilityToggle('tocDrawer'), this.props.dispatch)}
-              hideTocDrawer={bindActionCreators(() => visibilityHide('tocDrawer'), this.props.dispatch)}
-              showLoginOverlay={bindActionCreators(() => visibilityShow('loginOverlay'), this.props.dispatch)}
+              visibility={this.props.visibility }
+              visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
+              visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}
+              visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
+              startLogout={bindActionCreators(() => startLogout(), this.props.dispatch)}
           />
           <LoginOverlay
               visible={this.props.visibility.loginOverlay}

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { UserButton } from '../../components/shared';
+import { UserMenu } from '../../components/shared';
 import {Link} from 'react-router';
 
 export default class Header extends Component {
@@ -41,7 +41,7 @@ export default class Header extends Component {
             <i className="manicon manicon-magnify"></i>
             <span className="screen-reader-text">{'Click to search Manifold library'}</span>
           </button>
-          <UserButton showLoginOverlay={this.props.showLoginOverlay}
+          <UserMenu showLoginOverlay={this.props.showLoginOverlay}
                       authenticated={this.props.authenticated} />
         </nav>
       </header>
