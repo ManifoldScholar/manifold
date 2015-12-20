@@ -115,6 +115,11 @@ module Ingestor
           end
           memoize :spine_node
 
+          # V2 only
+          def guide_node
+            rendition_xml.xpath("//xmlns:package/xmlns:guide")
+          end
+
           def title_nodes
             metadata_node.xpath("//dc:title", "dc" => dc)
           end
@@ -156,10 +161,11 @@ module Ingestor
           memoize :manifest_item_nodes
 
           def manifest_nav_item
-            v2_path = '//*[@id="ncx"]'
-            return manifest_node.xpath(v2_path).first if v2?
-            v3_path = '//*[contains(@properties, "nav")]'
-            return manifest_node.xpath((v3_path)).first if v3?
+            if v2?
+              manifest_node.at_xpath('//*[@id="ncx"]')
+            elsif v3?
+              manifest_node.at_xpath(('//*[contains(@properties, "nav")]'))
+            end
           end
           memoize :manifest_nav_item
 

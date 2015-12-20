@@ -4,6 +4,7 @@ en:
       strategy:
         ePUB:
           log:
+            version: 'EPUB version is %{version}'
             update_structures: 'Updating text structures. [id %{id}]'
             transform_ts: 'Transforming text section "%{name}" body.'
             transforming_ts: 'Transforming text sections'

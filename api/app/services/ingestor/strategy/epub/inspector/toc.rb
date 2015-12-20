@@ -12,42 +12,34 @@ module Ingestor
         # link to Manifold text sections.
         #
         # @author Zach Davis
-        # rubocop: disable Metrics/ClassLength
         class TOC
           extend Memoist
           include Ingestor::Loggable
-
-          V3_SELECTOR_TOC_NODE = "//nav[@type='toc']"
-          V2_SELECTOR_TOC_NODE = "//navMap/navPoint"
-          SELECTOR_PAGE_LIST_NODE = "//nav[@type='page-list']"
-          SELECTOR_LANDMARK_NODE = "//nav[@type='landmarks']"
-          # rubocop: disable Metrics/LineLength
-          V3_SELECTOR_HEADER_NODE = "//*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6]"
-          V2_SELECTOR_HEADER_NODE = "//navLabel/text/text()"
 
           def initialize(epub_inspector)
             @epub_inspector = epub_inspector
             @logger = epub_inspector.logger
             @nav_xml = @epub_inspector.nav_xml
             @nav_path = @epub_inspector.nav_path
+
+            extend @epub_inspector.v2? ? V2 : V3
           end
 
           # @todo: This isn't working with relative nav paths. (Eg. GhV-oeb-page epub)
           def toc_label_for_cont_doc(contdoc_resource_path)
             return unless @nav_xml
-            link = @nav_xml.xpath("//*[@href='#{contdoc_resource_path}']").first
+            link = @nav_xml.at_xpath(selector_toc_label % contdoc_resource_path)
             return link.text if link && link.element_children.length == 0
           end
           memoize :toc_label_for_cont_doc
 
           def text_structure
-            structure = {
+            {
               titles: structure_titles,
               toc: toc_structure,
               page_list: page_list_structure,
               landmarks: landmarks_structure
             }
-            structure
           end
 
           private
@@ -61,26 +53,18 @@ module Ingestor
           end
 
           def toc_node
-            path = @epub_inspector.v2? ? V2_SELECTOR_TOC_NODE : V3_SELECTOR_TOC_NODE
-            @nav_xml.xpath(path)
+            @nav_xml.xpath(selector_toc_root_node)
           end
           memoize :toc_node
 
           def page_list_node
-            @nav_xml.xpath(SELECTOR_PAGE_LIST_NODE)
+            @nav_xml.xpath(selector_page_list_root_node)
           end
           memoize :page_list_node
 
-          def landmarks_node
-            @nav_xml.xpath(SELECTOR_LANDMARK_NODE)
-          end
-          memoize :landmarks_node
-
           def header_text_for_node(node)
-            path = @epub_inspector.v2? ? V2_SELECTOR_HEADER_NODE : V3_SELECTOR_HEADER_NODE
-            header = node.xpath(path).first
-            text = header ? header.text : ""
-            text
+            header = node.at_xpath(selector_header_node)
+            header ? header.text : ""
           end
 
           def toc_title
@@ -95,53 +79,31 @@ module Ingestor
             text
           end
 
-          def landmarks_title
-            text = header_text_for_node(landmarks_node)
-            debug "services.ingestor.strategy.ePUB.log.landmark_nav_title", text: text
-            text
-          end
-
-          # rubocop: disable Metrics/MethodLength
-          # rubocop: disable Metrics/AbcSize
-          # @todo: Reduce method length, reduce complexity
-          def ol_to_structure(ol)
-            items = []
-            if ol
-              ol.element_children.each do |li|
-                item = {}
-                if li.at_xpath("a")
-                  item[:label] = li.css("a").first.text.strip
-                  href = li.css("a").first.attribute("href").value
-                  relative_source_path, item[:anchor] = href.split('#')
-                  item[:source_path] =
-                    Helper::URI.to_absolute_package_path(relative_source_path, @nav_path)
-                else
-                  if li.at_xpath("span")
-                    item[:label] = li.css("span").first.text.strip
-                  end
-                end
-                if li.at_xpath("ol")
-                  item[:children] = ol_to_structure(li.css("ol").first)
-                end
-                items.push item
-              end
-            end
-            items
-          end
-
           def toc_structure
-            ol = toc_node.xpath("ol").first
-            ol_to_structure(ol)
+            nodes = toc_node.xpath(selector_toc_node)
+            toc_nodes_to_structure(nodes)
           end
 
           def page_list_structure
-            ol = page_list_node.xpath("ol").first
-            ol_to_structure(ol)
+            nodes = page_list_node.xpath(selector_page_list_node)
+            page_list_nodes_to_structure(nodes)
           end
 
-          def landmarks_structure
-            ol = landmarks_node.xpath("ol").first
-            ol_to_structure(ol)
+          def make_structure_item(raw_label, raw_path = nil)
+            label = raw_label.strip
+
+            anchor = source_path = ""
+            unless raw_path.nil?
+              relative_source_path, anchor = raw_path.split('#')
+              source_path =
+                Helper::URI.to_absolute_package_path(relative_source_path, @nav_path)
+            end
+
+            {
+              label: label,
+              anchor: anchor,
+              source_path: source_path
+            }
           end
         end
       end
