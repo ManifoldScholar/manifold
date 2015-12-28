@@ -6,4 +6,5 @@ class ProjectSerializer < ActiveModel::Serializer
   has_many :creators, serializer: MakerSerializer
   has_many :contributors, serializer: MakerSerializer
   has_many :texts, serializer: TextPartialSerializer
+  has_many :text_categories, serializer: CategorySerializer
 end
