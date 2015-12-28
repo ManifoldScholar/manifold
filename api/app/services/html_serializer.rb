@@ -54,6 +54,7 @@ class HtmlSerializer
     end
     representation[:children] = representation[:children].reject do |child|
       child[:delete] == true
+
     end
   end
 

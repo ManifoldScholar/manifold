@@ -15,7 +15,6 @@ module Api
       def set_section
         @text_section = TextSection.find(params[:id])
       end
-
     end
   end
 end

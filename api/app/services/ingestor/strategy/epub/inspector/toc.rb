@@ -42,6 +42,16 @@ module Ingestor
             }
           end
 
+          def toc_structure
+            nodes = toc_node.xpath(selector_toc_node)
+            toc_nodes_to_structure(nodes)
+          end
+
+          def page_list_structure
+            nodes = page_list_node.xpath(selector_page_list_node)
+            page_list_nodes_to_structure(nodes)
+          end
+
           private
 
           def structure_titles
@@ -77,16 +87,6 @@ module Ingestor
             text = header_text_for_node(page_list_node)
             debug "services.ingestor.strategy.ePUB.log.page_list_nav_title", text: text
             text
-          end
-
-          def toc_structure
-            nodes = toc_node.xpath(selector_toc_node)
-            toc_nodes_to_structure(nodes)
-          end
-
-          def page_list_structure
-            nodes = page_list_node.xpath(selector_page_list_node)
-            page_list_nodes_to_structure(nodes)
           end
 
           def make_structure_item(raw_label, raw_path = nil)
