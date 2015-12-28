@@ -6,6 +6,13 @@ module Ingestor
           # This module contributes object methods to the TOC inspector for EPUB2
           # documents.
           module V2
+            def landmarks_structure
+              # rubocop: disable Metrics/LineLength
+              landmarks_nodes_to_structure(@epub_inspector.guide_node.xpath("xmlns:reference"))
+            end
+
+            private
+
             def selector_toc_root_node
               "//navMap"
             end
@@ -63,12 +70,6 @@ module Ingestor
 
             def page_list_nodes_to_structure(nodes)
               nodes_to_structure(nodes)
-            end
-
-
-            def landmarks_structure
-              # rubocop: disable Metrics/LineLength
-              landmarks_nodes_to_structure(@epub_inspector.guide_node.xpath("xmlns:reference"))
             end
 
             # Landmarks are different than the other two

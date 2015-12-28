@@ -6,6 +6,13 @@ module Ingestor
           # This module contributes object methods to the TOC inspector for EPUB3
           # documents.
           module V3
+            def landmarks_structure
+              nodes = landmarks_node.xpath(selector_landmark_node)
+              landmarks_nodes_to_structure(nodes)
+            end
+
+            private
+
             def selector_toc_root_node
               "//nav[@type='toc']/ol"
             end
@@ -42,11 +49,6 @@ module Ingestor
               text = header_text_for_node(landmarks_node)
               debug "services.ingestor.strategy.ePUB.log.landmark_nav_title", text: text
               text
-            end
-
-            def landmarks_structure
-              nodes = landmarks_node.xpath(selector_landmark_node)
-              landmarks_nodes_to_structure(nodes)
             end
 
             def landmarks_node
