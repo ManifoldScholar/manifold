@@ -8,47 +8,71 @@ export default class GroupedTexts extends Component {
     texts: PropTypes.array
   };
 
-  render = () => {
-    // Build an array of texts by category that can
-    // be easily iterated inside the view
-    const textsByCategory = [];
-
-    this.props.categories.map((category) => {
-      const categorizedTexts = this.props.texts.filter((text) => {
-        if (Object.keys(text.relationships.category).length > 0) {
-          return text.relationships.category.id === category.id;
-        }
-      });
-
-      if (categorizedTexts.length > 0) {
-        textsByCategory.push({
-          title: category.title,
-          texts: categorizedTexts
-        });
+  textsForCategory = (category) => {
+    return this.props.texts.filter((text) => {
+      if (category === null) {
+        return text.relationships.category.data === null;
       }
+      return text.relationships.category.data.id === category.id;
     });
+  };
+
+  addGroup = (collection, category) => {
+    const texts = this.textsForCategory(category);
+    if (texts.length > 0) {
+      collection.push({
+        category: category,
+        texts: texts
+      });
+    }
+  };
+
+  buildGroupedCollection = () => {
+    const collection = [];
+    this.addGroup(collection, null);
+    this.props.categories.map((category) => {
+      this.addGroup(collection, category);
+    });
+    return collection;
+  };
+
+  render = () => {
+    const textsByCategory = this.buildGroupedCollection();
+    let categoryKey;
+    let header;
 
     return (
-        <div>
-            {textsByCategory.map((category) => {
-              return (
-                  <section>
-                    <h4 className="sub-section-heading">
-                      {category.title}
-                    </h4>
-                    <ul className="texts-group">
-                      {category.texts.map((text)=>{
-                        return (
-                          <li>
-                            <TextThumb text={text}/>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </section>
-              );
-            })}
-        </div>
+      <div>
+        {textsByCategory.map((group) => {
+
+          if (group.category === null) {
+            categoryKey = 0;
+            header = null;
+          } else {
+            categoryKey = group.category.id;
+            header = (
+              <h4 className="sub-section-heading">
+                {group.category.attributes.title}
+              </h4>
+            );
+          }
+
+          return (
+            <section key={categoryKey}>
+              {header}
+              <ul className="texts-group">
+                {group.texts.map((text)=>{
+                  return (
+                    <li key={text.id}>
+                      <TextThumb text={text}/>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          );
+        })}
+      </div>
     );
   };
 }

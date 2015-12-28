@@ -12,9 +12,7 @@ import { visibilityToggle, visibilityHide } from '../../actions/reader/ui/visibi
 
 function fetchData(getState, dispatch, location, params) {
   const promises = [];
-  if (!getState().collections.results.fetchOneText.receivedAt) {
-    promises.push(fetchOneText(params.text_id)(dispatch, getState));
-  }
+  promises.push(fetchOneText(params.text_id)(dispatch, getState));
   return Promise.all(promises);
 }
 

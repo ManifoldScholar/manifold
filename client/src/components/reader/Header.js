@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { TocDrawer } from './';
+import { Link } from 'react-router';
+
 import classNames from 'classnames';
 
 export default class Header extends Component {
@@ -16,15 +18,16 @@ export default class Header extends Component {
       'button-index': true,
       'active': this.props.tocVisible,
     });
-
     return (
         <header className="header-reader">
-          <button className="button-close">
-            <i className="manicon manicon-x"></i>
-              <span className="screen-reader-text">
-                {'Click to close reader'}
-              </span>
-          </button>
+          <Link to={`/browse/project/${this.props.text.relationships.project.data.id}`} >
+            <button className="button-close" >
+              <i className="manicon manicon-x"></i>
+                <span className="screen-reader-text">
+                  {'Click to close reader'}
+                </span>
+            </button>
+          </Link>
           <button className={buttonIndexClass} onClick={this.props.toggleTocDrawer}>
             {'Contents'}<i className="manicon manicon-caret-down"></i>
           </button>

@@ -14,7 +14,7 @@ export default class ProjectDetailHero extends Component {
           <section className="project-makers">
             {this.props.makers.map((maker) => {
               return (
-                  <MakerFigure maker={maker} />
+                  <MakerFigure key={maker.id} maker={maker} />
               );
             })}
           </section>
