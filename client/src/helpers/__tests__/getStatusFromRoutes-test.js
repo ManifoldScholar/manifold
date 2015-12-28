@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import getStatusFromRoutes from '../getStatusFromRoutes';
 
-describe('getStatusFromRoutes', () => {
+describe('helpers/getStatusFromRoutes', () => {
 
   it('should return null when no routes have status code', () => {
     const status = getStatusFromRoutes([

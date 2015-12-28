@@ -4,7 +4,7 @@ import { IndexRoute, Route } from 'react-router';
 import makeRouteHooksSafe from '../makeRouteHooksSafe';
 
 
-describe('makeRouteHooksSafe', () => {
+describe('helpers/makeRouteHooksSafe', () => {
 
   it('should work with JSX routes', () => {
     const onEnter = () => {

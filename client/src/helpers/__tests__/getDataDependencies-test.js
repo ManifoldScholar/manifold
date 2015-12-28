@@ -3,7 +3,7 @@ import React from 'react';
 import { div } from 'react-dom';
 import getDataDependencies from '../getDataDependencies';
 
-describe('getDataDependencies', () => {
+describe('helpers/getDataDependencies', () => {
   let getState;
   let dispatch;
   let location;
@@ -11,8 +11,7 @@ describe('getDataDependencies', () => {
   let CompWithFetchData;
   let CompWithNoData;
   let CompWithFetchDataDeferred;
-  let ConnectedCompWithFetchData;
-  let ConnectedCompWithFetchDataDeferred;
+  const NullComponent = null;
 
   beforeEach(() => {
     getState = 'getState';
@@ -35,43 +34,30 @@ describe('getDataDependencies', () => {
     CompWithFetchDataDeferred.fetchDataDeferred = (_getState, _dispatch, _location, _params) => {
       return `fetchDataDeferred ${_getState} ${_dispatch} ${_location} ${_params}`;
     };
-
-    ConnectedCompWithFetchData = () =>
-      <div/>;
-
-    ConnectedCompWithFetchData.WrappedComponent = CompWithFetchData;
-
-    ConnectedCompWithFetchDataDeferred = () =>
-      <div/>;
-
-    ConnectedCompWithFetchDataDeferred.WrappedComponent = CompWithFetchDataDeferred;
   });
 
   it('should get fetchDatas', () => {
     const deps = getDataDependencies([
+      NullComponent,
       CompWithFetchData,
       CompWithNoData,
-      CompWithFetchDataDeferred,
-      ConnectedCompWithFetchData,
-      ConnectedCompWithFetchDataDeferred
+      CompWithFetchDataDeferred
     ], getState, dispatch, location, params);
 
     expect(deps).to.deep.equal([
-      'fetchData getState dispatch location params',
       'fetchData getState dispatch location params'
     ]);
   });
 
   it('should get fetchDataDeferreds', () => {
     const deps = getDataDependencies([
+      NullComponent,
       CompWithFetchData,
       CompWithNoData,
-      CompWithFetchDataDeferred,
-      ConnectedCompWithFetchDataDeferred
+      CompWithFetchDataDeferred
     ], getState, dispatch, location, params, true);
 
     expect(deps).to.deep.equal([
-      'fetchDataDeferred getState dispatch location params',
       'fetchDataDeferred getState dispatch location params'
     ]);
   });
