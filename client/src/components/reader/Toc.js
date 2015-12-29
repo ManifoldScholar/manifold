@@ -32,8 +32,8 @@ export default class Toc extends Component {
     }
 
     let anchor = '';
-    if(node.anchor) anchor = `#${node.anchor}`
-    const path = `/read/${this.props.text.id}/section/${node.id}${anchor}`
+    if (node.anchor) anchor = `#${node.anchor}`;
+    const path = `/read/${this.props.text.id}/section/${node.id}${anchor}`;
 
     return (
         <li key={this.counter}>
