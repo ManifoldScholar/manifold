@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
+import classNames from 'classnames';
 
 export default class Toc extends Component {
 
@@ -18,6 +19,16 @@ export default class Toc extends Component {
     if (this.props.tocDrawerVisible) {
       this.props.hideTocDrawer();
     }
+  };
+
+  hasChildren = (array) => {
+    let hasChildren = false;
+    array.forEach((object) => {
+      if (object.hasOwnProperty('children') && object.children.length > 0) {
+        hasChildren = true;
+      }
+    });
+    return hasChildren;
   };
 
   visitNode = (node) => {
@@ -47,11 +58,18 @@ export default class Toc extends Component {
   };
 
   render = () => {
+    const tocClass = classNames({
+      'table-of-contents': true,
+      'multi-level': this.hasChildren(this.props.text.attributes.toc)
+    });
     return (
-        <nav className="table-of-contents">
+        <nav className={tocClass}>
           <ul>
             {this.props.text.attributes.toc.map(this.visitNode)}
           </ul>
+          <i className="manicon manicon-manifold-logo">
+            <span className="screen-reader-text">Manifold Logo</span>
+          </i>
         </nav>
     );
   };

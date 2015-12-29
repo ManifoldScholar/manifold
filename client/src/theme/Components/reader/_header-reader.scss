@@ -1,10 +1,13 @@
 .header-reader {
-  @include clearfix;
-  height: 63px;
   width: 100%;
-  background-color: $neutralWhite;
   position: fixed;
   top: 0;
+  .container-banner {
+    @include clearfix;
+    height: 63px;
+    background-color: $neutralWhite;
+  }
+
   // <button>
   .button-close {
     @include buttonUnstyled;
@@ -37,7 +40,6 @@
     padding-right: 21px;
     padding-left: 30px;
     background-color: $neutral20;
-    margin-right: 27px;
     float: left;
     position: relative;
     transition: color $duration $timing;
@@ -61,6 +63,8 @@
     color: $neutral50;
     font-size: $type80;
     font-weight: $regular; // OD
+    margin-left: 27px;
+    float: left;
   }
 
   .widget-nav {
