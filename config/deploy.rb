@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :branch, 'zd/capistrano'
+set :branch, 'development'
 
 
 set :application, 'my_app_name'
@@ -24,7 +24,7 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 # NPM
 set :npm_target_path, -> { release_path.join('client') }
 set :npm_flags, '--production --silent --no-spin'
-set :npm_env_variables, {}   
+set :npm_env_variables, {}
 
 # Persist node_modules across deploys to increase deployment speed
 set :copy_files, ['client/node_modules']
@@ -41,7 +41,7 @@ namespace :deploy do
           execute :npm, 'run build'
         end
       end
-    end   
+    end
   end
 
   desc 'Restart API'
@@ -69,7 +69,7 @@ namespace :setup do
   task :manifold do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       execute 'cd /home/manifold/deploy/current/api && ./bin/rails g manifold:install'
-    end   
+    end
   end
 end
 
