@@ -20,7 +20,7 @@ export default class Toc extends Component {
     }
   };
 
-  visitNode = (node, text) => {
+  visitNode = (node) => {
     this.counter = this.counter + 1;
     let children = null;
     if (node.children && node.children.length > 0) {
@@ -31,9 +31,13 @@ export default class Toc extends Component {
       );
     }
 
+    let anchor = '';
+    if(node.anchor) anchor = `#${node.anchor}`
+    const path = `/read/${this.props.text.id}/section/${node.id}${anchor}`
+
     return (
         <li key={this.counter}>
-          <Link to={`/read/${text.id}/section/${node.id}#${node.anchor}`} onClick={this.UIHideTocDrawer}>
+          <Link to={path} onClick={this.UIHideTocDrawer}>
             {node.label}
           </Link>
           {children}
