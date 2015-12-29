@@ -7,11 +7,14 @@ module Ingestor
           # documents.
           module V2
             def landmarks_structure
-              # rubocop: disable Metrics/LineLength
-              landmarks_nodes_to_structure(@epub_inspector.guide_node.xpath("xmlns:reference"))
+              landmarks_nodes_to_structure(guide_node_references)
             end
 
             private
+
+            def guide_node_references
+              @epub_inspector.guide_node.xpath("xmlns:reference")
+            end
 
             def selector_toc_root_node
               "//navMap"

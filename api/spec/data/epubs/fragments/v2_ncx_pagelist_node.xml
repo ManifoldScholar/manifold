@@ -1,0 +1,17 @@
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
+    /* Borrowed from: http://www.idpf.org/epub/20/spec/OPF_2.0.1_draft.htm */
+    <pageList>
+        <pageTarget id="p1" type="normal" value="1">
+            <navLabel>
+                <text>1</text>
+            </navLabel>
+            <content src="content.html#p1"/>
+        </pageTarget>
+        <pageTarget id="p2" type="normal" value="2">
+            <navLabel>
+                <text>2</text>
+            </navLabel>
+            <content src="content.html#p2"/>
+        </pageTarget>
+    </pageList>
+</ncx>

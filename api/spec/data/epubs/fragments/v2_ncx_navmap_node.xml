@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
+    <navMap>
+        <navPoint id="cvi" playOrder="1">
+            <navLabel>
+                <text>Cover</text>
+            </navLabel>
+            <content src="ump-feeley1-0001.xhtml#cvi"/>
+        </navPoint>
+        <navPoint id="bk" playOrder="2">
+            <navLabel>
+                <text>Title Page</text>
+            </navLabel>
+            <content src="ump-feeley1-0003.xhtml#bk"/>
+        </navPoint>
+        <navPoint id="cip" playOrder="3">
+            <navLabel>
+                <text>Copyright Page</text>
+            </navLabel>
+            <content src="ump-feeley1-0004.xhtml#cip"/>
+        </navPoint>
+        <navPoint id="toc" playOrder="4">
+            <navLabel>
+                <text>Contents</text>
+            </navLabel>
+            <content src="ump-feeley1-0005.xhtml#toc"/>
+        </navPoint>
+        <navPoint id="acknow" playOrder="5">
+            <navLabel>
+                <text>Acknowledgments</text>
+            </navLabel>
+            <content src="ump-feeley1-0006.xhtml#acknow"/>
+        </navPoint>
+        <navPoint id="intro" playOrder="6">
+            <navLabel>
+                <text>Introduction</text>
+            </navLabel>
+            <content src="ump-feeley1-0007.xhtml#intro"/>
+        </navPoint>
+        <navPoint id="pt01" playOrder="7">
+            <navLabel>
+                <text>Part I. Intermediality and New Media Economies</text>
+            </navLabel>
+            <content src="ump-feeley1-0008.xhtml#pt01"/>
+            <navPoint id="ch01" playOrder="8">
+                <navLabel>
+                    <text>1. Scan Lines: How Cyborgs Feel</text>
+                </navLabel>
+                <content src="ump-feeley1-0009.xhtml#ch01"/>
+            </navPoint>
+            <navPoint id="ch02" playOrder="9">
+                <navLabel>
+                    <text>2. What Is Estranged in Science Fiction Animation?</text>
+                </navLabel>
+                <content src="ump-feeley1-0010.xhtml#ch02"/>
+            </navPoint>
+            <navPoint id="ch03" playOrder="10">
+                <navLabel>
+                    <text>3. Famous for Fifteen Minutes: Permutations of Science Fiction Short Film</text>
+                </navLabel>
+                <content src="ump-feeley1-0011.xhtml#ch03"/>
+            </navPoint>
+            <navPoint id="ch04" playOrder="11">
+                <navLabel>
+                    <text>4. Forms of Journey and Archive: Remaking Science Fiction in Contemporary Artist-Filmmakers’
+                        Projects
+                    </text>
+                </navLabel>
+                <content src="ump-feeley1-0012.xhtml#ch04"/>
+            </navPoint>
+        </navPoint>
+        <navPoint id="pt02" playOrder="12">
+            <navLabel>
+                <text>Part II. Traveling Science Fiction: Translation, Adaptation, and Interpretation</text>
+            </navLabel>
+            <content src="ump-feeley1-0013.xhtml#pt02"/>
+            <navPoint id="ch05" playOrder="13">
+                <navLabel>
+                    <text>5. Media Heterotopias and Science Fiction: Transnational Workflows and Transgalactic Spaces in
+                        Digitally Composited Ecosystems
+                    </text>
+                </navLabel>
+                <content src="ump-feeley1-0014.xhtml#ch05"/>
+            </navPoint>
+            <navPoint id="ch06" playOrder="14">
+                <navLabel>
+                    <text>6. F. P. 1 and the Language of a Global Science Fiction Cinema</text>
+                </navLabel>
+                <content src="ump-feeley1-0015.xhtml#ch06"/>
+            </navPoint>
+            <navPoint id="ch07" playOrder="15">
+                <navLabel>
+                    <text>7. Enthiran, the Robot: Sujatha, Science Fiction, and Tamil Cinema</text>
+                </navLabel>
+                <content src="ump-feeley1-0016.xhtml#ch07"/>
+            </navPoint>
+        </navPoint>
+        <navPoint id="pt03" playOrder="16">
+            <navLabel>
+                <text>Part III. Spatial and Temporal Alternative Modernities in the Global South</text>
+            </navLabel>
+            <content src="ump-feeley1-0017.xhtml#pt03"/>
+            <navPoint id="ch08" playOrder="17">
+                <navLabel>
+                    <text>8. Polytemporality in Argentine Science Fiction Film: A Critique of the Homogeneous Time of
+                        Historicism and Modernity
+                    </text>
+                </navLabel>
+                <content src="ump-feeley1-0018.xhtml#ch08"/>
+            </navPoint>
+            <navPoint id="ch09" playOrder="18">
+                <navLabel>
+                    <text>9. Virtual Immigrants: Transfigured Bodies and Transnational Spaces in Science Fiction
+                        Cinema
+                    </text>
+                </navLabel>
+                <content src="ump-feeley1-0019.xhtml#ch09"/>
+            </navPoint>
+            <navPoint id="ch10" playOrder="19">
+                <navLabel>
+                    <text>10. Walking Dead in Havana: Juan of the Dead and the Zombie Film Genre</text>
+                </navLabel>
+                <content src="ump-feeley1-0020.xhtml#ch10"/>
+            </navPoint>
+        </navPoint>
+        <navPoint id="pt04" playOrder="20">
+            <navLabel>
+                <text>Part IV. Techno-Capitalism and Techno-Desires: The Gendered Affect of Post-Cyborgs</text>
+            </navLabel>
+            <content src="ump-feeley1-0021.xhtml#pt04"/>
+            <navPoint id="ch11" playOrder="21">
+                <navLabel>
+                    <text>11. Who Does the Feeling When There’s No Body There? Critical Feminism Meets Cyborg Affect in
+                        Oshii Mamoru’s Innocence
+                    </text>
+                </navLabel>
+                <content src="ump-feeley1-0022.xhtml#ch11"/>
+            </navPoint>
+            <navPoint id="ch12" playOrder="22">
+                <navLabel>
+                    <text>12. The Invention of Romance: Park Chan-wook’s I’m a Cyborg, but That’s OK</text>
+                </navLabel>
+                <content src="ump-feeley1-0023.xhtml#ch12"/>
+            </navPoint>
+            <navPoint id="ch13" playOrder="23">
+                <navLabel>
+                    <text>13. A Disenchanted Fantastic: The Pathos of Objects in Hirokazu Kore-eda’s Air Doll</text>
+                </navLabel>
+                <content src="ump-feeley1-0024.xhtml#ch13"/>
+            </navPoint>
+        </navPoint>
+        <navPoint id="pt05" playOrder="24">
+            <navLabel>
+                <text>Part V. National, International, Intergalactic: Socialist and Postsocialist Science Fiction
+                    Cinema
+                </text>
+            </navLabel>
+            <content src="ump-feeley1-0025.xhtml#pt05"/>
+            <navPoint id="ch14" playOrder="25">
+                <navLabel>
+                    <text>14. Alien Commodities in Soviet Science Fiction Cinema: Aelita, Solaris, and Kin-dza-dza!
+                    </text>
+                </navLabel>
+                <content src="ump-feeley1-0026.xhtml#ch14"/>
+            </navPoint>
+            <navPoint id="ch15" playOrder="26">
+                <navLabel>
+                    <text>15. Parodies of Realism at the Margins of Science Fiction: Jang Jun-hwan’s Save the Green
+                        Planet and Sin Sang-ok’s Pulgasari
+                    </text>
+                </navLabel>
+                <content src="ump-feeley1-0027.xhtml#ch15"/>
+            </navPoint>
+            <navPoint id="ch16" playOrder="27">
+                <navLabel>
+                    <text>16. Media and Messages: Blurred Visions of Nation and Science in Death Ray on a Coral Island
+                    </text>
+                </navLabel>
+                <content src="ump-feeley1-0028.xhtml#ch16"/>
+            </navPoint>
+        </navPoint>
+        <navPoint id="ch17" playOrder="28">
+            <navLabel>
+                <text>Select Filmography</text>
+            </navLabel>
+            <content src="ump-feeley1-0029.xhtml#ch17"/>
+        </navPoint>
+        <navPoint id="contrib" playOrder="29">
+            <navLabel>
+                <text>Contributors</text>
+            </navLabel>
+            <content src="ump-feeley1-0030.xhtml#contrib"/>
+        </navPoint>
+        <navPoint id="index" playOrder="30">
+            <navLabel>
+                <text>Index</text>
+            </navLabel>
+            <content src="ump-feeley1-0031.xhtml#index"/>
+        </navPoint>
+    </navMap>
+</ncx>

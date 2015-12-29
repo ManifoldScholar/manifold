@@ -1,0 +1,12 @@
+<package version="2.0" unique-identifier="uid" xmlns="http://www.idpf.org/2007/opf">
+    <opf:metadata xmlns:dc="http://purl.org/dc/elements/1.1/"
+                  xmlns:dcterms="http://purl.org/dc/terms/"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:opf="http://www.idpf.org/2007/opf">
+    <guide>
+        <reference type="copyright-page" title="Copyright" href="ump-feeley1-0004.xhtml#cip"/>
+        <reference type="text" title="Title Page" href="ump-feeley1-0003.xhtml#bk"/>
+        <reference type="toc" title="Table of Contents" href="ump-feeley1-0005.xhtml#toc"/>
+        <reference type="cover" title="Cover" href="ump-feeley1-0001.xhtml#cvi"/>
+    </guide>
+</package>

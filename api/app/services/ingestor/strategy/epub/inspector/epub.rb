@@ -162,7 +162,8 @@ module Ingestor
 
           def manifest_nav_item
             if v2?
-              manifest_node.at_xpath('//*[@id="ncx"]')
+              toc_id = spine_node.attribute("toc")
+              manifest_node.at_xpath('//*[@id="' + toc_id + '"]')
             elsif v3?
               manifest_node.at_xpath(('//*[contains(@properties, "nav")]'))
             end
@@ -197,12 +198,16 @@ module Ingestor
             end
           end
 
-          def nav_xml
+          def nav_xml_with_ns
             node = manifest_nav_item
             return unless node
             local_path = node.attribute("href")
-            xml = Nokogiri::XML(get_rendition_source(local_path))
-            xml.remove_namespaces!
+            Nokogiri::XML(get_rendition_source(local_path))
+          end
+          memoize :nav_xml_with_ns
+
+          def nav_xml
+            nav_xml_with_ns.remove_namespaces!
           end
           memoize :nav_xml
 

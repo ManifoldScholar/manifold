@@ -37,7 +37,8 @@ module Ingestor
         end
 
         def ingest
-          info "services.ingestor.strategy.ePUB.log.version", version: @inspector.epub_version
+          info "services.ingestor.strategy.ePUB.log.version",
+               version: @inspector.epub_version
           text = @ingestion.text
           Builder.new(@inspector, @logger).build(text)
           text
