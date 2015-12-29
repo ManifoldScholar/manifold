@@ -75,6 +75,7 @@ export class ApiClient {
   };
 
   _cleanJson = ({json, response}) => {
+    if (json === null) return Promise.resolve({json, response});
     if (!isPlainObject(json)) return Promise.reject({json, response});
     const out = {data: [], included: []};
     out.data = camelizeKeys(json.data);
@@ -86,6 +87,7 @@ export class ApiClient {
 
   _returnResults = ({json, responseIgnored}) => {
     let out;
+    if (json === null) return out;
     if (Array.isArray(json.data)) {
       out = this._returnCollection(json);
     } else {

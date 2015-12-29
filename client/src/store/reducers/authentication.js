@@ -22,6 +22,7 @@ const setUser = (state, action) => {
 };
 
 const setUserFromWhoami = (state, action) => {
+  if (!action.payload) return state;
   const users = action.payload.entities.users;
   const id = action.payload.results;
   const user = users[id];
