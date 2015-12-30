@@ -16,7 +16,7 @@ class Text < ActiveRecord::Base
   has_many :subjects, through: :text_subjects
   has_many :ingestion_sources
   has_many :source_resources, through: :ingestion_sources, source: :resource
-  has_many :text_sections
+  has_many :text_sections, -> { order(position: :asc) }
   belongs_to :project, optional: true
   belongs_to :category, optional: true
 
