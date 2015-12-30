@@ -8,11 +8,10 @@ export function select(relationships, entities) {
       const selected = data.map((entityData) => {
         const id = entityData.id;
         const type = entityData.type;
-        if(entities[type] && entities[type][id]) {
+        if (entities[type] && entities[type][id]) {
           return entities[type][id];
-        } else {
-          return entityData;
         }
+        return entityData;
       });
       selection[key] = selected;
     }
