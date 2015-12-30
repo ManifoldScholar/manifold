@@ -7,21 +7,12 @@ export default class UserButton extends Component {
     toggleUserMenu: PropTypes.func,
     showLoginOverlay: PropTypes.func,
     authenticated: PropTypes.bool,
-    menuVisible: PropTypes.bool,
     userAvatar: PropTypes.string
   };
 
   // TODO: Get this dynamically from user data
   static defaultProps = {
     userAvatar: '/placeholder/user-avatar-dreft01.jpg'
-  };
-
-  toggleUserMenu = () => {
-    this.props.toggleUserMenu();
-  };
-
-  showLoginOverlay = () => {
-    this.props.showLoginOverlay();
   };
 
   avatarImage = () => {
@@ -45,7 +36,7 @@ export default class UserButton extends Component {
       'button-active': this.props.menuVisible
     });
     return (
-        <button onClick={this.props.onClick} className={buttonClass} >
+        <button onClick={this.props.authenticated ? this.props.toggleUserMenu : this.props.showLoginOverlay} className={buttonClass} >
           <span className="screen-reader-text">{'Click to login or open user settings'}</span>
           <figure className="avatar">
             {this.avatarImage()}

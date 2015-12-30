@@ -9,7 +9,7 @@ import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
 import { select } from '../../utils/select';
 import { startLogout } from '../../actions/shared/authentication';
-import { visibilityToggle, visibilityHide, visibilityShow } from '../../actions/shared/ui/visibility';
+import { visibilityToggle, visibilityHide, visibilityShow, panelToggle } from '../../actions/shared/ui/visibility';
 
 function fetchData(getState, dispatch, location, params) {
   const promises = [];
@@ -81,6 +81,7 @@ class Reader extends Component {
               visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
               visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}
               visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
+              panelToggle={bindActionCreators((el) => panelToggle(el), this.props.dispatch)}
               startLogout={bindActionCreators(() => startLogout(), this.props.dispatch)}
           />
           <LoginOverlay

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Dropdown } from '../../components/shared';
+import { UIPanel } from '../../components/shared';
 import { UserMenuButton } from './';
 import { UserMenuBody } from './';
 
@@ -17,10 +17,12 @@ export default class UserMenu extends Component {
   render = () => {
 
     return (
-      <Dropdown
-        triggerComponent={UserMenuButton}
-        bodyComponent={UserMenuBody}
-      />
+        <div>
+          <UserMenuButton />
+          <UIPanel
+            bodyComponent={UserMenuBody}
+          />
+        </div>
     );
   };
 }
