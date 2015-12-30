@@ -3,7 +3,6 @@ require "open-uri"
 
 # Loads demo data into the Manifold installation
 class DemoData
-
   def initialize
     @logger = Logger.new(STDOUT)
   end
@@ -11,7 +10,7 @@ class DemoData
   def load
     clear_db
     make_projects(10)
-    batch_ingest()
+    batch_ingest
     assign_texts_to_projects
     create_admin_user
   end
@@ -34,10 +33,10 @@ class DemoData
     end
   end
 
-  def batch_ingest()
+  def batch_ingest
     path = Rails.root.join("..", "texts")
     epubs = Dir.entries(path)
-    epubs.reject { |name| name.start_with?(".")}.each do |name|
+    epubs.reject { |name| name.start_with?(".") }.each do |name|
       epub_path = path.join(name)
       ingest(epub_path)
     end
@@ -49,6 +48,7 @@ class DemoData
     Ingestor.reset_logger
   end
 
+  # rubocop:disable Metrics/AbcSize
   def make_projects(count)
     count.times do
       p = Project.create(title: Faker::Book.title,
@@ -68,9 +68,9 @@ class DemoData
 
   private
 
-
   def clear_db
-    clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource Subject TextSubject TextTitle User Category)
+    clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource
+               Subject TextSubject TextTitle User Category)
     clear.each do |model_name|
       @logger.info("Truncate #{model_name} table".red)
       model_name.constantize.destroy_all

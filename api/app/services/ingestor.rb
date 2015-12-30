@@ -13,7 +13,6 @@
 # @author Zach Davis
 module Ingestor
   class << self
-
     include Ingestor::Loggable
 
     attr_writer :logger
@@ -63,7 +62,7 @@ module Ingestor
       significant "services.ingestor.logging.ingestion_start", name: basename
       ingestion = Ingestor::Ingestion.new(path)
       strategy = Ingestor::Strategy.for(ingestion)
-      return [basename, ingestion, nil] if !strategy
+      return [basename, ingestion, nil] unless strategy
       info "services.ingestor.logging.using_strategy", strategy: strategy
       [basename, ingestion, strategy]
     end

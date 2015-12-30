@@ -1,10 +1,13 @@
+# This class takes an HTML string input and validates it. In doing so, it will parse the
+# HTML and transform it into a valid HTML structure that can be consumed by the Manifold
+# frontend. This mainly involves insuring proper nesting, and making sure that the
+# structure will work with ReactDom.
 class HtmlValidator
-
   def validate(html)
     fragment = Nokogiri::HTML.fragment(html)
     fragment = ensure_one_parent_node(fragment)
     ensure_valid_parent_nodes(fragment)
-    return fragment.to_s
+    fragment.to_s
   end
 
   private
@@ -13,10 +16,8 @@ class HtmlValidator
     fragment.traverse do |node|
       tag = node.name
       parent_tag = node.parent.try(:name)
-      valid = is_tag_valid_with_parent(tag, parent_tag)
-      if !valid
-        insert_valid_parent(node)
-      end
+      valid = tag_valid_with_parent?(tag, parent_tag)
+      insert_valid_parent(node) unless valid
     end
   end
 
@@ -24,22 +25,22 @@ class HtmlValidator
     return fragment if fragment.children.length == 1
     container_fragment = Nokogiri::HTML.fragment("<div></div>")
     container_fragment.first_element_child.children = fragment
-    return container_fragment
+    container_fragment
   end
 
   def insert_valid_parent(node)
     tag = node.name
     validated = false
     case tag
-      when "tr"
-        wrap_node_and_siblings(node, "tbody")
-      when "option"
-        wrap_node_and_siblings(node, "select")
+    when "tr"
+      wrap_node_and_siblings(node, "tbody")
+    when "option"
+      wrap_node_and_siblings(node, "select")
     end
-    return validated
+    validated
   end
 
-  def wrap_node_and_siblings(node, tag)
+  def wrap_node_and_siblings(node, tag) # rubocop:disable Metrics/AbcSize
     index = node.parent.children.index(node)
     parent = node.parent
     node_and_siblings = parent.xpath("#{node.name}")
@@ -53,25 +54,26 @@ class HtmlValidator
     end
   end
 
-  def is_tag_valid_with_parent(tag, parent)
+  # rubocop:disable Metrics/PerceivedComplexity, Metrics/MethodLength, Metrics/AbcSize
+  # rubocop:disable Metrics/CyclomaticComplexity
+  def tag_valid_with_parent?(tag, parent)
     case tag
-      when "option"
-        return parent == "select" || parent == "optgroup"
-      when "optgroup"
-        return parent == "select"
-      when "tr"
-        return parent == "tbody" || parent == "thead" || parent == "tfoot"
-      when "th", "td"
-        return parent == "tr"
-      when "tbody", "thead", "tfoot"
-        return parent == "table"
-      when "col"
-        return parent == "colgroup"
-      when "h1", "h2", "h3", "h4", "h5", "h6"
-        return parent != 'h1' && parent != 'h2' && parent != 'h3' &&
-          parent != 'h4' && parent != 'h5' && parent != 'h6'
+    when "option"
+      return parent == "select" || parent == "optgroup"
+    when "optgroup"
+      return parent == "select"
+    when "tr"
+      return parent == "tbody" || parent == "thead" || parent == "tfoot"
+    when "th", "td"
+      return parent == "tr"
+    when "tbody", "thead", "tfoot"
+      return parent == "table"
+    when "col"
+      return parent == "colgroup"
+    when "h1", "h2", "h3", "h4", "h5", "h6"
+      return parent != "h1" && parent != "h2" && parent != "h3" &&
+        parent != "h4" && parent != "h5" && parent != "h6"
     end
-    return true
+    true
   end
-
 end

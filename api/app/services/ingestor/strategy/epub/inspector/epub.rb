@@ -32,11 +32,11 @@ module Ingestor
           end
           memoize :epub_basename
 
-          def is_v3?
+          def v3?
             epub_version.starts_with?("3")
           end
 
-          def is_v2?
+          def v2?
             epub_version.starts_with?("2")
           end
 
@@ -156,8 +156,10 @@ module Ingestor
           memoize :manifest_item_nodes
 
           def manifest_nav_item
-            return manifest_node.xpath('//*[@id="ncx"]').first if is_v2?
-            return manifest_node.xpath(('//*[contains(@properties, "nav")]')).first if is_v3?
+            v2_path = '//*[@id="ncx"]'
+            return manifest_node.xpath(v2_path).first if v2?
+            v3_path = '//*[contains(@properties, "nav")]'
+            return manifest_node.xpath((v3_path)).first if v3?
           end
           memoize :manifest_nav_item
 

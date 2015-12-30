@@ -67,14 +67,13 @@ module Ingestor
             doc.css("body").children.to_s.strip
           end
 
-
           def convert_cont_doc_body_to_json(body)
             json = HtmlSerializer.new.serialize(body).to_json
-            if json == nil
-              puts body
-              raise exception
+            if json.nil?
+              error_string(body)
+              fail exception
             end
-            return json
+            json
           end
 
           private

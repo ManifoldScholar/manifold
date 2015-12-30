@@ -1,7 +1,6 @@
 module Ingestor
   # Logging mixin for ingestion classes with an @logger attribute
   module Loggable
-
     def significant(key, vars = {})
       msg = I18n.t(key, vars)
       @logger.info(msg.green)
@@ -23,6 +22,10 @@ module Ingestor
 
     def error(key, vars = {})
       msg = I18n.t(key, vars)
+      @logger.error(msg.red)
+    end
+
+    def error_string(msg)
       @logger.error(msg.red)
     end
 

@@ -18,9 +18,7 @@ module Ingestor
             existing = existing.to_a.find do |model|
               match = true
               compare_attributes.each do |key, value|
-                if model.send(key) != value
-                  match = false
-                end
+                match = false if model.send(key) != value
               end
               match
             end

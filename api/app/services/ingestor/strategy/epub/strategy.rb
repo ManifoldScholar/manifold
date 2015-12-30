@@ -22,7 +22,7 @@ module Ingestor
           inspector = Inspector::EPUB.new(ingestion.source_path,
                                           ingestion.logger)
           return false if inspector.epub_extension != "epub"
-          return false unless inspector.is_v2? || inspector.is_v3?
+          return false unless inspector.v2? || inspector.v3?
           true
         end
 

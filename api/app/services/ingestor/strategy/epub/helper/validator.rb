@@ -42,6 +42,7 @@ module Ingestor
                 size = Filesize.from("#{resource.attachment.size} B").pretty
                 logger.debug "#{verb.titlecase} resource \"#{resource.name}\"".light_cyan
                 logger.debug "  Resource file size: #{size}".light_cyan
+                # rubocop:disable Metrics/LineLength
                 logger.debug "  Resource content type: #{resource.attachment.content_type}".light_cyan
               else
                 logger.debug "Invalid resource \"#{resource.name}\"".light_cyan

@@ -25,7 +25,6 @@ module Ingestor
           V3_SELECTOR_HEADER_NODE = "//*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6]"
           V2_SELECTOR_HEADER_NODE = "//navLabel/text/text()"
 
-
           def initialize(epub_inspector)
             @epub_inspector = epub_inspector
             @logger = epub_inspector.logger
@@ -62,7 +61,7 @@ module Ingestor
           end
 
           def toc_node
-            path = @epub_inspector.is_v2? ? V2_SELECTOR_TOC_NODE : V3_SELECTOR_TOC_NODE
+            path = @epub_inspector.v2? ? V2_SELECTOR_TOC_NODE : V3_SELECTOR_TOC_NODE
             @nav_xml.xpath(path)
           end
           memoize :toc_node
@@ -78,7 +77,7 @@ module Ingestor
           memoize :landmarks_node
 
           def header_text_for_node(node)
-            path = @epub_inspector.is_v2? ? V2_SELECTOR_HEADER_NODE : V3_SELECTOR_HEADER_NODE
+            path = @epub_inspector.v2? ? V2_SELECTOR_HEADER_NODE : V3_SELECTOR_HEADER_NODE
             header = node.xpath(path).first
             text = header ? header.text : ""
             text
