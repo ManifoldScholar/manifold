@@ -3,12 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
-import { BodyClass } from '../../components/shared';
+import { BodyClass, LoginOverlay } from '../../components/shared';
 import { Header } from '../../components/reader';
 import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
-import { visibilityToggle, visibilityHide } from '../../actions/reader/ui/visibility';
 import { select } from '../../utils/select';
+import { startLogout } from '../../actions/shared/authentication';
+import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide } from '../../actions/shared/ui/visibility';
 
 function fetchData(getState, dispatch, location, params) {
   const promises = [];
@@ -22,7 +23,6 @@ function mapStateToProps(state) {
   const {category, project, creators, contributors, textSections, tocSection} =
     select(text.relationships, state.collections.entities);
   return {
-    fetchOneText: fetchOneText,
     text: text,
     category: category,
     project: project,
@@ -30,6 +30,7 @@ function mapStateToProps(state) {
     contributors: contributors,
     textSections: textSections,
     tocSection: tocSection,
+    authentication: state.authentication,
     visibility: state.ui.visibility
   };
 }
@@ -43,7 +44,9 @@ class Reader extends Component {
     params: PropTypes.object,
     text: PropTypes.object,
     visibility: PropTypes.object,
-    dispatch: PropTypes.func
+    authentication: PropTypes.object,
+    dispatch: PropTypes.func,
+    history: PropTypes.object
   };
 
   static contextTypes = {
@@ -67,16 +70,25 @@ class Reader extends Component {
   };
 
   render() {
-    const text = this.props.text
+    const text = this.props.text;
     return (
       <BodyClass className="reader">
         <div>
           <DocumentMeta {...config.app}/>
           <Header
               text={text}
-              tocVisible={this.props.visibility.tocDrawer }
-              toggleTocDrawer={bindActionCreators(() => visibilityToggle('tocDrawer'), this.props.dispatch)}
-              hideTocDrawer={bindActionCreators(() => visibilityHide('tocDrawer'), this.props.dispatch)}
+              authenticated={this.props.authentication.authToken === null ? false : true}
+              visibility={this.props.visibility }
+              visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
+              visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}
+              visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
+              panelToggle={bindActionCreators((el) => panelToggle(el), this.props.dispatch)}
+              panelHide={bindActionCreators((el) => panelHide(el), this.props.dispatch)}
+              startLogout={bindActionCreators(() => startLogout(), this.props.dispatch)}
+          />
+          <LoginOverlay
+              visible={this.props.visibility.loginOverlay}
+              hideLoginOverlay={bindActionCreators(() => visibilityHide('loginOverlay'), this.props.dispatch)}
           />
           <main>
             {this.props.children}

@@ -1,10 +1,13 @@
 .header-reader {
-  @include clearfix;
-  height: 63px;
   width: 100%;
-  background-color: $neutralWhite;
   position: fixed;
   top: 0;
+  .container-banner {
+    @include clearfix;
+    height: 63px;
+    background-color: $neutralWhite;
+  }
+
   // <button>
   .button-close {
     @include buttonUnstyled;
@@ -37,7 +40,6 @@
     padding-right: 21px;
     padding-left: 30px;
     background-color: $neutral20;
-    margin-right: 27px;
     float: left;
     position: relative;
     transition: color $duration $timing;
@@ -61,6 +63,53 @@
     color: $neutral50;
     font-size: $type80;
     font-weight: $regular; // OD
+    margin-left: 27px;
+    float: left;
+  }
+
+  .menu-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    ul {
+      @include listHorizontal;
+      display: block;
+      position: relative;
+      height: 100%;
+      li {
+        position: relative;
+        height: 100%;
+      }
+    }
+    .button-avatar {
+      height: 100%;
+      padding-right: 16px;
+      padding-left: 16px;
+      position: relative;
+      &.button-active {
+        background-color: $neutral10;
+      }
+      .avatar {
+        @include buttonAvatar(32);
+      }
+    }
+  }
+
+  .menu-panels {
+    width: 100%;
+    position: absolute;
+    right: 0;
+
+    // Reader specific menu layout/transition
+    .user-menu {
+      position: absolute;
+      right: -300px;
+      transition: right $duration $timing;
+    }
+    .panel-visible .user-menu {
+      right: 0px;
+    }
   }
 }
 

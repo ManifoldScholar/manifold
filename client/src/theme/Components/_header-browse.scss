@@ -1,6 +1,7 @@
 // <header>
 .header-browse {
-  position: relative;
+  position: fixed;
+  width: 100%;
   padding: 30px 52px 30px 40px;
   background-color: $neutralWhite;
   // <a> return link with logo
@@ -50,11 +51,22 @@
     }
   }
 
-  .widget-nav {
+  .menu-dropdowns {
+    > ul {
+      @include listUnstyled;
+      display: block;
+      position: relative;
+      height: 100%;
+      > li {
+        display: inline-block;
+        position: relative;
+        height: 100%;
+      }
+    }
+    height: 100%;
     position: absolute;
-    top: 30px;
-    right: 52px;
-    // Currently, set of two <button>s
+    top: 0;
+    right: 40px;
     .button-magnify {
       margin-right: 51px;
       vertical-align: middle;
@@ -63,24 +75,35 @@
         color: $neutral80;
       }
     }
-
     .button-avatar {
-      @include buttonUnstyled;
-      background-color: $accentPrimary;
-      width: 40px;
-      height: 40px;
-      text-align: center;
-      border-radius: 100%;
-      vertical-align: middle;
-      overflow: hidden;
-      .avatar-image {
-        width: 100%;
-      }
-      .manicon-person {
-        color: $accentPrimaryPale;
-        font-size: 34px;
-        line-height: 46px;
+      height: 100%;
+      position: relative;
+    }
+
+    // Browser specific menu layout/transition
+    .user-menu {
+      position: absolute;
+      white-space: nowrap;
+      // Default state
+      margin-top: -20px;
+      opacity: 0;
+      visibility: hidden;
+      right: -24px;
+      transition: all, $duration, $timing;
+      .tail {
+        display: block;
       }
     }
+
+    .panel-visible .user-menu {
+      margin-top: 0px;
+      opacity: 1;
+      visibility: visible;
+    }
   }
+}
+
+// Header bump
+.browse main {
+  padding-top: 99px;
 }

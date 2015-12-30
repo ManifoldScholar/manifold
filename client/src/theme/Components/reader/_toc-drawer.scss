@@ -1,13 +1,13 @@
 .toc-drawer {
   position: fixed;
-  max-width: 680px;
+  max-width: 620px;
   height: 100%;
-  padding: 73px 100px 100px 91px;
-  background-color: $neutral20;
+  padding: 35px 0 100px 0;
+  background-color: $accentPrimaryOffWhite;
   overflow-y: scroll;
   transition: left $duration $timing;
   &.drawer-hidden {
-    left: -680px;
+    left: -620px;
   }
   &.drawer-visible {
     left: 0;
@@ -15,57 +15,67 @@
 
   // Scoped table of contents styles, some may be abstracted later
   // <nav> around nested uls
+  $tocBasePadding: 80px;
+  $tocNestedPadding: 30px;
+
   .table-of-contents {
-    // TOC globalss
+    // Global Styles
     ul {
       @include listUnstyled;
       @include templateHead;
-      font-size: $type60;
       a {
+        display: block;
+        width: 100%;
         color: $neutralOffBlack;
         text-decoration: none;
         &:hover {
-          color: $accentPrimary;
+          color: $accentSecondary;
+          background-color: $neutral10;
         }
       }
     }
-    // Top level
-    > ul {
-      font-weight: $semibold;
-      > li {
-        // Top level heading
+
+    // Top Level links
+    > ul > li {
         > a {
-          display: block;
-          padding: 0px 0px 8px;
-          border-bottom: 2px solid $neutral50;
+          font-size: $type80;
+          padding: 40px 90px 8px $tocBasePadding;
         }
-        // Second level
-        ul {
-          font-weight: $light;
-          padding-bottom: 25px;
-          li {
-            border-top: 1px dotted $neutral50;
-            &:first-child {
-              border: none;
+      > ul > li {
+        // Secondary level globals
+        a {
+          font-size: $type60;
+          padding: 13px 90px 7px $tocBasePadding;
+        }
+        // Third level indenting
+        > ul > li {
+          > a {
+            padding-left: $tocBasePadding + $tocNestedPadding;
+          }
+          // Fourth level indenting
+          > ul > li {
+            > a {
+              padding-left: $tocBasePadding + ($tocNestedPadding * 2);
             }
-            a {
-              display: block;
-              padding-top: 21px;
-              padding-bottom: 11px;
-            }
-            // Third level and beyond
-            ul {
-              li {
-                padding-left: 20px;
-                // Bring back top borders for nested list first-children
-                &:first-child {
-                  border-top: 1px dotted $neutral50;
-                }
-              }
+            // Fifth level (and on) indenting
+            > ul li a {
+              padding-left: $tocBasePadding + ($tocNestedPadding * 3);
             }
           }
         }
       }
     }
+
+    // Multi level lists have borders on top level links
+    &.multi-level > ul > li > a {
+      border-bottom: 1px solid $neutral40;
+    }
+  }
+
+  .manicon-manifold-logo {
+    display: block;
+    font-size: 45px;
+    padding: 75px 0px 0px $tocBasePadding;
+    color: $neutral10;
   }
 }

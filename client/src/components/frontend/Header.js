@@ -1,14 +1,19 @@
 import React, { Component, PropTypes } from 'react';
-import { UserButton } from './';
+import { UIPanel, UserMenuButton, UserMenuBody } from '../../components/shared';
 import {Link} from 'react-router';
 
 export default class Header extends Component {
 
   static propTypes = {
-    showLoginOverlay: PropTypes.func,
+    visibility: PropTypes.object,
     location: PropTypes.object,
-    history: PropTypes.object,
-    authenticated: PropTypes.bool
+    authenticated: PropTypes.bool,
+    visibilityToggle: PropTypes.func,
+    visibilityHide: PropTypes.func,
+    visibilityShow: PropTypes.func,
+    panelToggle: PropTypes.func,
+    panelHide: PropTypes.func,
+    startLogout: PropTypes.func
   };
 
   render = () => {
@@ -26,25 +31,37 @@ export default class Header extends Component {
           <ul>
             <li className={this.props.location.pathname === '/browse/' ? 'active' : ''}>
               <Link to={`/browse/`}>
-                Browse
+                {'Projects'}
               </Link>
             </li>
             <li className={this.props.location.pathname === '/browse/following/' ? 'active' : ''}>
               <Link to={`/browse/following/`}>
-                Following
+                {'Following'}
               </Link>
             </li>
           </ul>
         </nav>
 
-        <nav className="widget-nav">
-          <button className="button-bare-icon button-magnify">
-            <i className="manicon manicon-magnify"></i>
-            <span className="screen-reader-text">{'Click to search Manifold library'}</span>
-          </button>
-          <UserButton history={this.props.history}
-                      showLoginOverlay={this.props.showLoginOverlay}
-                      authenticated={this.props.authenticated} />
+        <nav className="menu-dropdowns">
+          <ul>
+            <li>
+              <UserMenuButton
+                  authenticated={this.props.authenticated}
+                  active={this.props.visibility.uiPanels.user}
+                  showLoginOverlay={() => {this.props.visibilityShow('loginOverlay');}}
+                  toggleUserMenu={() => {this.props.panelToggle('user');}}
+              />
+              <UIPanel
+                  id="user"
+                  visibility={this.props.visibility.uiPanels}
+                  bodyComponent={UserMenuBody}
+
+                  // Props required by body component
+                  startLogout={this.props.startLogout}
+                  hideUserMenu={() => {this.props.panelHide('user');}}
+              />
+            </li>
+          </ul>
         </nav>
       </header>
     );

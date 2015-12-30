@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { LoginForm } from './';
+import { LoginForm } from '../../containers/shared/';
 import { startLogout } from '../../actions/shared/authentication';
 
 class Login extends Component {

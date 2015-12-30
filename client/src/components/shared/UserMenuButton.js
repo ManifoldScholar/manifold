@@ -1,25 +1,19 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
 export default class UserButton extends Component {
 
   static propTypes = {
-    showLoginOverlay: PropTypes.func,
     authenticated: PropTypes.bool,
-    userAvatar: PropTypes.string,
-    history: PropTypes.object
+    active: PropTypes.bool,
+    toggleUserMenu: PropTypes.func,
+    showLoginOverlay: PropTypes.func,
+    userAvatar: PropTypes.string
   };
 
   // TODO: Get this dynamically from user data
   static defaultProps = {
     userAvatar: '/placeholder/user-avatar-dreft01.jpg'
-  };
-
-  UIToggleUserMenu = () => {
-    this.props.history.push('/browse/login');
-  };
-
-  UIShowLoginOverlay = () => {
-    this.props.showLoginOverlay();
   };
 
   avatarImage = () => {
@@ -37,11 +31,26 @@ export default class UserButton extends Component {
     return output;
   };
 
+  clickHandler = (event) => {
+    event.stopPropagation();
+    if (this.props.authenticated) {
+      this.props.toggleUserMenu();
+    } else {
+      this.props.showLoginOverlay();
+    }
+  };
+
   render = () => {
+    const buttonClass = classNames({
+      'button-avatar': true,
+      'button-active': this.props.active
+    });
     return (
-        <button className="button-avatar" onClick={this.props.authenticated ? this.UIToggleUserMenu.bind(this) : this.UIShowLoginOverlay.bind(this)}>
+        <button onClick={this.clickHandler} className={buttonClass} >
           <span className="screen-reader-text">{'Click to login or open user settings'}</span>
-          {this.avatarImage()}
+          <figure className="avatar">
+            {this.avatarImage()}
+          </figure>
         </button>
     );
   };

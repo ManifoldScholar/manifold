@@ -10,8 +10,6 @@ import PublishedText from './PublishedText';
 import GroupedTexts from './GroupedTexts';
 import MetaAttributes from './MetaAttributes';
 import ProjectDetailHero from './ProjectDetailHero';
-import UserButton from './UserButton';
-import LoginOverlay from './LoginOverlay';
 import Header from './Header';
 import Footer from './Footer';
 import RecentProjects from './RecentProjects';
@@ -30,8 +28,6 @@ export {
   GroupedTexts,
   MetaAttributes,
   ProjectDetailHero,
-  UserButton,
-  LoginOverlay,
   Header,
   Footer,
   RecentProjects,

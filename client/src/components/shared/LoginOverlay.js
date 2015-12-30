@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { LoginForm } from '../../containers/frontend';
+import { LoginForm } from '../../containers/shared/';
 import classNames from 'classnames';
 
 export default class LoginOverlay extends Component {
