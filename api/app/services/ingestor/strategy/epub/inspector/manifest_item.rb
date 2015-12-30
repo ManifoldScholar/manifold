@@ -35,6 +35,15 @@ module Ingestor
           end
           memoize :id
 
+          def media_type
+            attribute("media-type").value
+          end
+          memoize :media_type
+
+          def stylesheet?
+            File.extname(href) == "css" || media_type == "text/css"
+          end
+
           # cover-image == KIND_COVER_IMAGE
           # nav == KIND_NAVIGATION
           def kind

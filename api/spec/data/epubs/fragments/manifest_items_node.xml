@@ -6,5 +6,7 @@
         <item id="id-id2644001" href="ch03s04.xhtml" media-type="application/xhtml+xml"/>
         <item id="id-id2644238" href="ch03s05.xhtml" media-type="application/xhtml+xml"/>
         <item id="id-id2645594" href="ch03s06.xhtml" media-type="application/xhtml+xml"/>
+        <item id="css-002"  href="css/css_file_1.css" media-type="text/css" />
+        <item id="css-003"  href="css/css_file_2.css" media-type="text/css" />
     </manifest>
 </package>

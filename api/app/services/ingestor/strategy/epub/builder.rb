@@ -32,6 +32,7 @@ module Ingestor
           update_description!(text)
           attempt_save!(text)
           update_resources!(text)
+          update_stylesheets!(text)
           update_text_sections!(text)
           attempt_save!(text)
           update_cover_image!(text)
@@ -102,7 +103,7 @@ module Ingestor
                                          text, text.text_sections)
           text.text_sections.replace(text_sections.reject(&:nil?))
           text_sections.each do |text_section|
-            if !text_section.valid?
+            unless text_section.valid?
               Helper::Log.log_model_errors(text_section, @logger)
             end
           end
@@ -114,6 +115,15 @@ module Ingestor
           ingestion_sources = creator.create(@inspector.manifest_item_nodes, path,
                                              @inspector, text.ingestion_sources)
           text.ingestion_sources.replace(ingestion_sources)
+        end
+
+        def update_stylesheets!(text)
+          creator = Creator::Stylesheets.new(@logger, @inspector.metadata_node)
+          path = text.title.parameterize.underscore
+          stylesheets = creator.create(@inspector.manifest_item_nodes, path,
+                                       @inspector, text,
+                                       text.stylesheets)
+          text.stylesheets.replace(stylesheets)
         end
 
         def update_cover_image!(text)
@@ -167,7 +177,7 @@ module Ingestor
           return unless d.present?
           text.publication_date = d
           debug "services.ingestor.strategy.ePUB.log.set_date",
-               date: text.publication_date
+                date: text.publication_date
         end
 
         def update_rights!(text)

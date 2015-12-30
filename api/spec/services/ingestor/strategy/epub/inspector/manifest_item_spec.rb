@@ -21,7 +21,6 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::ManifestItem do
     doc.root.last_element_child
   }
 
-
   let(:inspector) { inspector_class.new(first_node) }
   let(:no_attribute_node_inspector) { inspector_class.new(last_node) }
 
@@ -31,6 +30,18 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::ManifestItem do
 
   it "returns the node href" do
     expect(inspector.href).to eq("css/css_file_2.css")
+  end
+
+  it "returns the node media type" do
+    expect(inspector.media_type).to eq("text/css")
+  end
+
+  it "can tell if a manifest node is a stylesheet node" do
+    expect(inspector.stylesheet?).to be true
+  end
+
+  it "can tell if a manifest node is not a stylesheet node" do
+    expect(no_attribute_node_inspector.stylesheet?).to be false
   end
 
   it "returns the node properties" do
