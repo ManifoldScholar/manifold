@@ -14,6 +14,7 @@ export default class Header extends Component {
     visibilityHide: PropTypes.func,
     visibilityShow: PropTypes.func,
     panelToggle: PropTypes.func,
+    panelHide: PropTypes.func,
     startLogout: PropTypes.func,
     authenticated: PropTypes.bool
   };
@@ -51,19 +52,31 @@ export default class Header extends Component {
             <h2 className="title">
               {this.props.text.attributes.title}
             </h2>
-            <nav className="widget-nav">
+            <nav className="menu-buttons">
               <ul>
                 <li>
                   <UserMenuButton
                       authenticated={this.props.authenticated}
-                      showLoginOverlay={() => {this.props.visibilityShow('loginOverlay')}}
-                      toggleUserMenu={() => {this.props.panelToggle('user')}}
+                      active={this.props.visibility.uiPanels.user}
+                      showLoginOverlay={() => {this.props.visibilityShow('loginOverlay');}}
+                      toggleUserMenu={() => {this.props.panelToggle('user');}}
                   />
                 </li>
               </ul>
             </nav>
           </nav>
           <TocDrawer text={this.props.text} visible={this.props.visibility.tocDrawer} hideTocDrawer={() => {this.props.visibilityHide('tocDrawer');}} />
+          <nav className="menu-panels">
+            <UIPanel
+                id="user"
+                visibility={this.props.visibility.uiPanels}
+                bodyComponent={UserMenuBody}
+
+                // Props required by body component
+                startLogout={this.props.startLogout}
+                hideUserMenu={() => {this.props.panelHide('user');}}
+            />
+          </nav>
         </header>
     );
   };

@@ -51,7 +51,18 @@
     }
   }
 
-  .widget-nav {
+  .menu-dropdowns {
+    > ul {
+      @include listUnstyled;
+      display: block;
+      position: relative;
+      height: 100%;
+      > li {
+        display: inline-block;
+        position: relative;
+        height: 100%;
+      }
+    }
     height: 100%;
     position: absolute;
     top: 0;
@@ -68,11 +79,26 @@
       height: 100%;
       position: relative;
     }
+
+    // Browser specific menu layout/transition
     .user-menu {
+      position: absolute;
+      white-space: nowrap;
+      // Default state
+      margin-top: -20px;
+      opacity: 0;
+      visibility: hidden;
       right: -24px;
+      transition: all, $duration, $timing;
       .tail {
         display: block;
       }
+    }
+
+    .panel-visible .user-menu {
+      margin-top: 0px;
+      opacity: 1;
+      visibility: visible;
     }
   }
 }

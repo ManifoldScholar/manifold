@@ -14,71 +14,60 @@
   vertical-align: middle;
   height: 100%;
   position: relative;
-  .user-menu {
+}
+
+// Global styles
+.user-menu {
+  background-color: $neutral10;
+  padding: 40px;
+  .tail {
+    display: none;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 15.5px 17px 15.5px;
+    border-color: transparent transparent $neutral10;
     position: absolute;
-    top: 100%;
-    right: 0;
-    white-space: nowrap;
-    background-color: $neutral10;
-    padding: 40px;
-    // Hidden by default
-    opacity: 0;
-    visibility: hidden;
-    transition: all, $duration, $timing;
-    &.menu-visible {
-      visibility: visible;
-      opacity: 1;
+    top: -17px;
+    right: 28px;
+  }
+  ul {
+    @include listUnstyled;
+    li {
+      @include templateHead;
+      font-size: $type100;
     }
-    // Styled, but hidden by default
-    .tail {
-      display: none;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 15.5px 17px 15.5px;
-      border-color: transparent transparent $neutral10;
-      position: absolute;
-      top: -17px;
-      right: 28px;
-    }
-    ul {
-      @include listUnstyled;
-      li {
-        @include templateHead;
-        font-size: $type100;
-      }
-      // Menu items can be buttons or links
-      li, button, a {
-        @include buttonUnstyled;
-        text-decoration: none;
-        color: $neutral80;
-        &:hover {
-          color: $accentPrimary;
-        }
-      }
-      li + li {
-        margin-top: 28px;
+    // Menu items can be buttons or links
+    li, button, a {
+      @include buttonUnstyled;
+      text-decoration: none;
+      color: $neutral80;
+      &:hover {
+        color: $accentPrimary;
       }
     }
-    // Icons used in menu
-    .manicon {
-      display: inline-block;
-      vertical-align: middle;
-      width: 48px;
-      text-align: right;
-      margin-right: 23px;
+    li + li {
+      margin-top: 28px;
     }
-    // React generated element
-    .manicon + span {
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .manicon-person-pencil {
-      font-size: 44px;
-    }
-    .manicon-circle-arrow-out-right {
-      font-size: 32px;
-      padding-right: 6px; // NP
-    }
+  }
+  // Icons used in menu
+  .manicon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 48px;
+    text-align: right;
+    margin-right: 23px;
+  }
+  // React generated element
+  .manicon + span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .manicon-person-pencil {
+    font-size: 44px;
+  }
+  .manicon-circle-arrow-out-right {
+    font-size: 32px;
+    padding-right: 6px; // NP
   }
 }

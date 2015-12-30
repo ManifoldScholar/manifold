@@ -67,11 +67,21 @@
     float: left;
   }
 
-  .widget-nav {
+  .menu-buttons {
     position: absolute;
     top: 0;
     right: 0;
     height: 100%;
+    ul {
+      @include listHorizontal;
+      display: block;
+      position: relative;
+      height: 100%;
+      li {
+        position: relative;
+        height: 100%;
+      }
+    }
     .button-avatar {
       height: 100%;
       padding-right: 16px;
@@ -83,6 +93,22 @@
       .avatar {
         @include buttonAvatar(32);
       }
+    }
+  }
+
+  .menu-panels {
+    width: 100%;
+    position: absolute;
+    right: 0;
+
+    // Reader specific menu layout/transition
+    .user-menu {
+      position: absolute;
+      right: -300px;
+      transition: right $duration $timing;
+    }
+    .panel-visible .user-menu {
+      right: 0px;
     }
   }
 }

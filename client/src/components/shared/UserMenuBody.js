@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import classNames from 'classnames';
 
 export default class UserButton extends Component {
 
@@ -16,13 +15,8 @@ export default class UserButton extends Component {
   };
 
   render = () => {
-    const menuClass = classNames({
-      'user-menu': true,
-      'menu-hidden': !this.props.visible,
-      'menu-visible': this.props.visible
-    });
     return (
-        <nav className={menuClass}>
+        <nav className="user-menu">
           <i className="tail"></i>
           <ul>
             <li>

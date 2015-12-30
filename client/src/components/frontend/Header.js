@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { UserMenu } from '../../components/shared';
+import { UIPanel, UserMenuButton, UserMenuBody } from '../../components/shared';
 import {Link} from 'react-router';
 
 export default class Header extends Component {
@@ -11,6 +11,8 @@ export default class Header extends Component {
     visibilityToggle: PropTypes.func,
     visibilityHide: PropTypes.func,
     visibilityShow: PropTypes.func,
+    panelToggle: PropTypes.func,
+    panelHide: PropTypes.func,
     startLogout: PropTypes.func
   };
 
@@ -40,15 +42,26 @@ export default class Header extends Component {
           </ul>
         </nav>
 
-        <nav className="widget-nav">
-          <UserMenu
-              toggleUserMenu={() => {this.props.visibilityToggle('userMenu');}}
-              hideUserMenu={()=> {this.props.visibilityHide('userMenu');}}
-              showLoginOverlay={() => {this.props.visibilityShow('loginOverlay');}}
-              startLogout={this.props.startLogout}
-              authenticated={this.props.authenticated}
-              visible={this.props.visibility.userMenu}
-          />
+        <nav className="menu-dropdowns">
+          <ul>
+            <li>
+              <UserMenuButton
+                  authenticated={this.props.authenticated}
+                  active={this.props.visibility.uiPanels.user}
+                  showLoginOverlay={() => {this.props.visibilityShow('loginOverlay');}}
+                  toggleUserMenu={() => {this.props.panelToggle('user');}}
+              />
+              <UIPanel
+                  id="user"
+                  visibility={this.props.visibility.uiPanels}
+                  bodyComponent={UserMenuBody}
+
+                  // Props required by body component
+                  startLogout={this.props.startLogout}
+                  hideUserMenu={() => {this.props.panelHide('user');}}
+              />
+            </li>
+          </ul>
         </nav>
       </header>
     );

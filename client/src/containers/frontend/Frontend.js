@@ -6,7 +6,7 @@ import config from '../../config';
 import { BodyClass, LoginOverlay } from '../../components/shared';
 import { Header, Footer } from '../../components/frontend';
 import { startLogout } from '../../actions/shared/authentication';
-import { visibilityToggle, visibilityHide, visibilityShow } from '../../actions/shared/ui/visibility';
+import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide } from '../../actions/shared/ui/visibility';
 import { whoami } from '../../actions/shared/authentication';
 
 function mapStateToProps(state) {
@@ -50,6 +50,8 @@ export default class Frontend extends Component {
               visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
               visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}
               visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
+              panelToggle={bindActionCreators((el) => panelToggle(el), this.props.dispatch)}
+              panelHide={bindActionCreators((el) => panelHide(el), this.props.dispatch)}
               startLogout={bindActionCreators(() => startLogout(), this.props.dispatch)}
           />
           {/* Add hideOverlay={false} to show overlay */}

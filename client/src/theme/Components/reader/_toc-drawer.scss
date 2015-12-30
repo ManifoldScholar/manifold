@@ -7,7 +7,7 @@
   overflow-y: scroll;
   transition: left $duration $timing;
   &.drawer-hidden {
-    left: -680px;
+    left: -620px;
   }
   &.drawer-visible {
     left: 0;
