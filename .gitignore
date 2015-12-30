@@ -40,3 +40,6 @@ config/secrets.yml
 ### Ignore yardoc ###
 .yardoc
 doc
+
+### Extracted epubs ###
+/texts/tmp
