@@ -44,6 +44,9 @@ describe('utils/select', () => {
           type: "texts"
         }
       ]
+    },
+    toc_section: {
+      data: { id: "1", type: "section" }
     }
   };
 

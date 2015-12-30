@@ -8,7 +8,7 @@ import { Header } from '../../components/reader';
 import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
 import { visibilityToggle, visibilityHide } from '../../actions/reader/ui/visibility';
-
+import { select } from '../../utils/select';
 
 function fetchData(getState, dispatch, location, params) {
   const promises = [];
@@ -17,23 +17,31 @@ function fetchData(getState, dispatch, location, params) {
 }
 
 function mapStateToProps(state) {
+  const textId = state.collections.results.fetchOneText.entities;
+  const text = state.collections.entities.texts[textId];
+  const {category, project, creators, contributors, textSections, tocSection} =
+    select(text.relationships, state.collections.entities);
   return {
-    fetchOneText: state.collections.results.fetchOneText.entities,
-    texts: state.collections.entities.texts,
-    makers: state.collections.entities.makers,
+    fetchOneText: fetchOneText,
+    text: text,
+    category: category,
+    project: project,
+    creators: creators,
+    contributors: contributors,
+    textSections: textSections,
+    tocSection: tocSection,
     visibility: state.ui.visibility
   };
 }
 
 @connectData(fetchData)
 @connect(mapStateToProps)
-
 class Reader extends Component {
 
   static propTypes = {
     children: PropTypes.object,
-    texts: PropTypes.object,
-    fetchOneText: PropTypes.string,
+    params: PropTypes.object,
+    text: PropTypes.object,
     visibility: PropTypes.object,
     dispatch: PropTypes.func
   };
@@ -47,12 +55,19 @@ class Reader extends Component {
     this.counter = 0;
   }
 
-  getText = () => {
-    return this.props.texts[this.props.fetchOneText];
+  componentWillMount = () => {
+    if (!this.props.params.hasOwnProperty('section_id')) {
+      this.transitionToFirstSection();
+    }
+  };
+
+  transitionToFirstSection = () => {
+    const firstSectionId = this.props.text.attributes.firstSectionId;
+    this.props.history.push(`/read/${this.props.text.id}/section/${firstSectionId}`);
   };
 
   render() {
-    const text = this.getText();
+    const text = this.props.text
     return (
       <BodyClass className="reader">
         <div>
