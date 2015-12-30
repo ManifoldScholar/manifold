@@ -17,6 +17,7 @@ class Text < ActiveRecord::Base
   has_many :ingestion_sources
   has_many :source_resources, through: :ingestion_sources, source: :resource
   has_many :text_sections, -> { order(position: :asc) }
+  has_many :stylesheets
   belongs_to :project, optional: true
   belongs_to :category, optional: true
 

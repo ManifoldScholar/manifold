@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218173132) do
+ActiveRecord::Schema.define(version: 20151230173806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,15 @@ ActiveRecord::Schema.define(version: 20151218173132) do
     t.datetime "attachment_updated_at"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "stylesheets", force: :cascade do |t|
+    t.string  "name"
+    t.string  "source_identifier"
+    t.text    "styles"
+    t.text    "raw_styles"
+    t.integer "text_id"
+    t.integer "ingestion_source_id"
   end
 
   create_table "subjects", force: :cascade do |t|
