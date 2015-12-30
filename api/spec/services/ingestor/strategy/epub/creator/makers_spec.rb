@@ -31,5 +31,4 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::Makers do
     expect(models.length).to be(2)
   end
 
-
 end
