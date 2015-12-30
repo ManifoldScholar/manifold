@@ -45,7 +45,8 @@ class Reader extends Component {
     text: PropTypes.object,
     visibility: PropTypes.object,
     authentication: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    history: PropTypes.object
   };
 
   static contextTypes = {
