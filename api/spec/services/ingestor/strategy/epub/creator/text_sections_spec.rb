@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe Ingestor::Strategy::EPUB3::Creator::TextSections do
+RSpec.describe Ingestor::Strategy::EPUB::Creator::TextSections do
 
-  EpubInspector = Ingestor::Strategy::EPUB3::Inspector::EPUB
-  TextSectionCreator = Ingestor::Strategy::EPUB3::Creator::TextSections
-  SpineItemInspector = Ingestor::Strategy::EPUB3::Inspector::SpineItem
+  EpubInspector = Ingestor::Strategy::EPUB::Inspector::EPUB
+  TextSectionCreator = Ingestor::Strategy::EPUB::Creator::TextSections
+  SpineItemInspector = Ingestor::Strategy::EPUB::Inspector::SpineItem
 
   before(:all) do
     path = "#{Rails.root}/spec/data/epubs/v3/trees.epub"

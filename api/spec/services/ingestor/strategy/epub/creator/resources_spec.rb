@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe Ingestor::Strategy::EPUB3::Creator::Resources do
+RSpec.describe Ingestor::Strategy::EPUB::Creator::Resources do
 
   let(:metadata_node) { File.open("#{Rails.root}/spec/data/epubs/fragments/metadata_node.xml") { |f| Nokogiri::XML(f) }}
   let(:manifest_items_node) { File.open("#{Rails.root}/spec/data/epubs/fragments/manifest_items_node.xml") { |f| Nokogiri::XML(f) }}
   let(:manifest_items) { manifest_items_node.xpath("//xmlns:item") }
-  let(:resources_creator) { Ingestor::Strategy::EPUB3::Creator::Resources.new(Rails.logger, metadata_node) }
+  let(:resources_creator) { Ingestor::Strategy::EPUB::Creator::Resources.new(Rails.logger, metadata_node) }
   let(:fake_rendition_source) do
     file = StringIO.new('<body>Test</body>')
     filename = 'a_file.html'
@@ -17,7 +17,7 @@ RSpec.describe Ingestor::Strategy::EPUB3::Creator::Resources do
     return file
   end
 
-  let(:epub_inspector) { double(Ingestor::Strategy::EPUB3::Inspector, :get_rendition_source => fake_rendition_source) }
+  let(:epub_inspector) { double(Ingestor::Strategy::EPUB::Inspector, :get_rendition_source => fake_rendition_source) }
 
   it "responds to logger methods" do
     expect(resources_creator).to respond_to(:info)
@@ -35,7 +35,7 @@ RSpec.describe Ingestor::Strategy::EPUB3::Creator::Resources do
   it "updates existing objects rather than create new ones" do
     text = Text.new(:unique_identifier => '1234')
     manifest_items.each do |item|
-      item_inspector = Ingestor::Strategy::EPUB3::Inspector::ManifestItem.new(item)
+      item_inspector = Ingestor::Strategy::EPUB::Inspector::ManifestItem.new(item)
       text.ingestion_sources.build(:source_identifier => item_inspector.id, :kind => item_inspector.kind.presence)
     end
     models = resources_creator.create(manifest_items, '/test-tmp-path', epub_inspector, text.ingestion_sources)

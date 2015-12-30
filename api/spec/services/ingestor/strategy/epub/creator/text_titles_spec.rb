@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe Ingestor::Strategy::EPUB3::Creator::TextTitles do
+RSpec.describe Ingestor::Strategy::EPUB::Creator::TextTitles do
 
-  TextTitlesCreator = Ingestor::Strategy::EPUB3::Creator::TextTitles
-  MetadataInspector = Ingestor::Strategy::EPUB3::Inspector::Metadata
+  TextTitlesCreator = Ingestor::Strategy::EPUB::Creator::TextTitles
+  MetadataInspector = Ingestor::Strategy::EPUB::Inspector::Metadata
 
   before(:all) do
     fragment_path = "#{Rails.root}/spec/data/epubs/fragments/metadata_node.xml"

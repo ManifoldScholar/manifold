@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe Ingestor::Strategy::EPUB3::Creator::Makers do
+RSpec.describe Ingestor::Strategy::EPUB::Creator::Makers do
 
   let(:metadata_node) { File.open("#{Rails.root}/spec/data/epubs/fragments/metadata_node.xml") { |f| Nokogiri::XML(f) }}
   let(:creator_nodes) { metadata_node.xpath("//dc:creator", "dc" => "http://purl.org/dc/elements/1.1/") }
-  let(:makers) { Ingestor::Strategy::EPUB3::Creator::Makers.new(Rails.logger, metadata_node) }
+  let(:makers) { Ingestor::Strategy::EPUB::Creator::Makers.new(Rails.logger, metadata_node) }
 
   it "responds to logger methods" do
     expect(makers).to respond_to(:info)
