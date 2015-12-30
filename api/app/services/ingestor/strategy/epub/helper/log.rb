@@ -23,7 +23,12 @@ module Ingestor
           end
 
           def self.log_model_errors(model, logger)
-            logger.error model.errors.full_messages unless model.valid?
+            unless model.valid?
+              model.errors.full_messages.each do |message|
+                full_message = "#{model.class.name} #{model.source_identifier if model.respond_to?(:source_identifier)}: #{message}"
+                logger.error(full_message.red)
+              end
+            end
           end
 
           # rubocop:disable Metrics/LineLength

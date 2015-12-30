@@ -10,9 +10,9 @@ module Ingestor
           }
 
           def create(nodes, epub_inspector, text, existing_text_sections = nil)
-            text_sections = nodes.each_with_index.map do |node, _index|
+            text_sections = nodes.each_with_index.map do |node, index|
               node_inspector, section_inspector = inspectors(node, epub_inspector)
-              attr = attributes(node_inspector, section_inspector, text)
+              attr = attributes(node_inspector, section_inspector, text, index)
               attr = defaults(DEFAULT_ATTRIBUTES, attr)
               existing_section = check_for_existing(
                 existing_text_sections,
@@ -42,12 +42,13 @@ module Ingestor
             [node_inspector, section_inspector]
           end
 
-          def attributes(node_inspector, section_inspector, text)
+          def attributes(node_inspector, section_inspector, text, index)
             body = section_inspector.body
             resource = text
                        .find_ingestion_source_by_identifier(node_inspector.idref).resource
             {
               source_identifier: node_inspector.idref,
+              position: index,
               name: section_inspector.guess_name,
               source_body:  body,
               kind: section_inspector.kind,

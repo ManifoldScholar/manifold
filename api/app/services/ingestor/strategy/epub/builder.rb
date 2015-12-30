@@ -30,6 +30,7 @@ module Ingestor
           update_date!(text)
           update_rights!(text)
           update_description!(text)
+          attempt_save!(text)
           update_resources!(text)
           update_text_sections!(text)
           attempt_save!(text)
@@ -100,6 +101,11 @@ module Ingestor
           text_sections = creator.create(@inspector.spine_item_nodes, @inspector,
                                          text, text.text_sections)
           text.text_sections.replace(text_sections.reject(&:nil?))
+          text_sections.each do |text_section|
+            if !text_section.valid?
+              Helper::Log.log_model_errors(text_section, @logger)
+            end
+          end
         end
 
         def update_resources!(text)
