@@ -28,7 +28,7 @@ module Ingestor
 
     def warn(key, vars = {})
       msg = I18n.t(key, vars)
-      @logger.warn(msg.orange)
+      @logger.warn(msg.light_red)
     end
   end
 end
