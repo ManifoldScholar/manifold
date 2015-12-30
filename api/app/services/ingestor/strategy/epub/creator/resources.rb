@@ -33,7 +33,9 @@ module Ingestor
             attr = defaults(DEFAULT_ATTRIBUTES, attributes(node_inspector))
             compare = { source_identifier: attr[:source_identifier] }
             existing_ingestion_source = check_for_existing(existing, compare)
-            existing_ingestion_source || IngestionSource.create(attr)
+            source = existing_ingestion_source || IngestionSource.create(attr)
+            source.update_attributes(attr)
+            source
           end
 
           def attributes(node_inspector)

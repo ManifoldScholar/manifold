@@ -18,6 +18,7 @@ module Ingestor
                 existing_text_sections,
                 source_identifier: attr[:source_identifier])
               section = existing_section || TextSection.create(attr)
+              section.update_attributes(attr)
               log(node_inspector, section)
               section
             end
@@ -28,9 +29,9 @@ module Ingestor
 
           def log(node_inspector, section)
             debug "services.ingestor.strategy.ePUB.log.section_name",
-                 id: node_inspector.idref, name: section.name
+                  id: node_inspector.idref, name: section.name
             debug "services.ingestor.strategy.ePUB.log.section_kind",
-                 id: node_inspector.idref, kind: section.kind
+                  id: node_inspector.idref, kind: section.kind
           end
 
           def inspectors(node, epub_inspector)

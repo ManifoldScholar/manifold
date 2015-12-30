@@ -15,6 +15,7 @@ module Ingestor
               attr = defaults(DEFAULT_ATTRIBUTES, attributes(node_inspector))
               existing_maker = check_for_existing(existing, name: attr[:name])
               maker = existing_maker || Maker.create(attr)
+              maker.update_attributes(attr)
               log_maker(maker, role)
               maker
             end
