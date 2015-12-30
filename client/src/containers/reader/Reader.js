@@ -69,7 +69,7 @@ class Reader extends Component {
   };
 
   render() {
-    const text = this.props.text
+    const text = this.props.text;
     return (
       <BodyClass className="reader">
         <div>

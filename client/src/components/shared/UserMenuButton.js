@@ -31,13 +31,22 @@ export default class UserButton extends Component {
     return output;
   };
 
+  clickHandler = (event) => {
+    event.stopPropagation();
+    if (this.props.authenticated) {
+      this.props.toggleUserMenu();
+    } else {
+      this.props.showLoginOverlay();
+    }
+  };
+
   render = () => {
     const buttonClass = classNames({
       'button-avatar': true,
       'button-active': this.props.active
     });
     return (
-        <button onClick={this.props.authenticated ? this.props.toggleUserMenu : this.props.showLoginOverlay} className={buttonClass} >
+        <button onClick={this.clickHandler} className={buttonClass} >
           <span className="screen-reader-text">{'Click to login or open user settings'}</span>
           <figure className="avatar">
             {this.avatarImage()}

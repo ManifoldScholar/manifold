@@ -66,6 +66,10 @@ const panelHide = (state, action) => {
   return Object.assign({}, state, {uiPanels: switchedPanels});
 };
 
+const allPanelsHide = (state) => {
+  return Object.assign({}, state, {uiPanels: initialState.uiPanels});
+};
+
 export default handleActions({
   VISIBILITY_TOGGLE: visibilityToggle,
   VISIBILITY_SHOW: visibilityShow,
@@ -73,4 +77,5 @@ export default handleActions({
   PANEL_TOGGLE: panelToggle,
   PANEL_SHOW: panelShow,
   PANEL_HIDE: panelHide,
+  '@@reduxReactRouter/routerDidChange': allPanelsHide
 }, initialState);

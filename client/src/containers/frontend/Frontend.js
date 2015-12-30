@@ -41,7 +41,7 @@ export default class Frontend extends Component {
   render() {
     return (
       <BodyClass className={'browse'}>
-        <div>
+        <div onClick={this.handleClick}>
           <DocumentMeta {...config.app}/>
           <Header
               visibility={this.props.visibility }
