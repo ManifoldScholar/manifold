@@ -125,7 +125,7 @@ class Reader extends Component {
     return (
         <section>
           <div className="container-focus">
-            <div className="text-section">
+            <div className="manifold-text-section text-section">
               {this.buildTextSection()}
             </div>
           </div>

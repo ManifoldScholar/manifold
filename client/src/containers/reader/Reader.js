@@ -10,6 +10,7 @@ import { fetchOneText } from '../../actions/shared/collections';
 import { select } from '../../utils/select';
 import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide } from '../../actions/shared/ui/visibility';
+import { values } from 'lodash/object';
 
 function fetchData(getState, dispatch, location, params) {
   const promises = [];
@@ -20,7 +21,7 @@ function fetchData(getState, dispatch, location, params) {
 function mapStateToProps(state) {
   const textId = state.collections.results.fetchOneText.entities;
   const text = state.collections.entities.texts[textId];
-  const {category, project, creators, contributors, textSections, tocSection} =
+  const {category, project, creators, contributors, textSections, tocSection, stylesheets} =
     select(text.relationships, state.collections.entities);
   return {
     text: text,
@@ -30,6 +31,7 @@ function mapStateToProps(state) {
     contributors: contributors,
     textSections: textSections,
     tocSection: tocSection,
+    stylesheets: stylesheets,
     authentication: state.authentication,
     visibility: state.ui.visibility
   };
@@ -76,11 +78,22 @@ class Reader extends Component {
     this.props.history.push(`/read/${this.props.text.id}/section/${firstSectionId}`);
   };
 
+  renderStyles = () => {
+    return values(this.props.stylesheets).map((stylesheet, index) => {
+      return (
+        <style key={index}>
+          {stylesheet.attributes.styles}
+        </style>
+      )
+    })
+  }
+
   render() {
     const text = this.props.text;
     return (
       <BodyClass className="reader">
         <div>
+          {this.renderStyles()}
           <DocumentMeta {...config.app}/>
           <Header
               text={text}
