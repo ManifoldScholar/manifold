@@ -8,5 +8,3 @@ class TextSerializer < TextPartialSerializer
   has_many :text_sections, serializer: TextSectionPartialSerializer
   has_one :toc_section, serializer: TextSectionSerializer
 end
-
-

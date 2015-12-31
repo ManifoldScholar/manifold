@@ -1,8 +1,8 @@
 # The project model is the primary unit of Manifold.
 class Project < ActiveRecord::Base
   has_many :texts
-  has_many :text_categories, -> { for_text }, :class_name => "Category"
-  has_many :resource_categories, -> { for_resource }, :class_name => "Category"
+  has_many :text_categories, -> { for_text }, class_name: "Category"
+  has_many :resource_categories, -> { for_resource }, class_name: "Category"
 
   include Collaborative
 

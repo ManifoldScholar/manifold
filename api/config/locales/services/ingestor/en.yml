@@ -4,7 +4,7 @@ en:
       logging:
         ingestion_start: 'Ingesting %{name}!'
         text_found: 'Found existing Text model with ID of %{id}'
-        text_found: 'No existing text model found for source ID %{id}'
+        text_not_found: 'No existing text model found for source ID %{id}'
         using_strategy: 'Using strategy %{strategy}'
         ingestion_end: '%{name} ingested!'
       failures:

@@ -115,6 +115,11 @@ module Ingestor
           end
           memoize :spine_node
 
+          # V2 only
+          def guide_node
+            rendition_xml.xpath("//xmlns:package/xmlns:guide")
+          end
+
           def title_nodes
             metadata_node.xpath("//dc:title", "dc" => dc)
           end
@@ -156,10 +161,12 @@ module Ingestor
           memoize :manifest_item_nodes
 
           def manifest_nav_item
-            v2_path = '//*[@id="ncx"]'
-            return manifest_node.xpath(v2_path).first if v2?
-            v3_path = '//*[contains(@properties, "nav")]'
-            return manifest_node.xpath((v3_path)).first if v3?
+            if v2?
+              toc_id = spine_node.attribute("toc")
+              manifest_node.at_xpath('//*[@id="' + toc_id + '"]')
+            elsif v3?
+              manifest_node.at_xpath(('//*[contains(@properties, "nav")]'))
+            end
           end
           memoize :manifest_nav_item
 
@@ -191,12 +198,16 @@ module Ingestor
             end
           end
 
-          def nav_xml
+          def nav_xml_with_ns
             node = manifest_nav_item
             return unless node
             local_path = node.attribute("href")
-            xml = Nokogiri::XML(get_rendition_source(local_path))
-            xml.remove_namespaces!
+            Nokogiri::XML(get_rendition_source(local_path))
+          end
+          memoize :nav_xml_with_ns
+
+          def nav_xml
+            nav_xml_with_ns.remove_namespaces!
           end
           memoize :nav_xml
 
