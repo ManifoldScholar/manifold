@@ -32,37 +32,27 @@ module.exports = {
     publicPath: '/dist/'
   },
   module: {
-    // loaders: [
-    //   { test: /\.font.js/, loaders: ['style', 'css', 'fontgen']},
-    //   { test: /\.js$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel']},
-    //   { test: /\.json$/, loader: 'json-loader' },
-    //   { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?
-    //     modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?
-    //     outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
-    //   { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
-    //   { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
-    //   { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
-    //   { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
-    //   { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
-    //   { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
-    // ]
     loaders: [
       {
         test: /\.font.js/,
         loaders: ['style', 'css', 'fontgen']
       },
       { test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: function(path) {
+          // We're using QS in the browser, and it has es2015 constructs like "const"
+          if (path.match(/node_modules\/qs/)) return false;
+          if (path.match(/node_modules/)) return true;
+        },
         loaders: [strip.loader('debug'), 'babel']
       },
       {
         test: /\.json$/,
         loaders: ['json-loader']
       },
-      { test: /\.scss$/, 
+      { test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style',
           'css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
-        ) 
+        )
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,

@@ -42,7 +42,6 @@ babelLoaderQuery.extra['react-transform'].transforms.push({
   imports: ['react'],
   locals: ['module']
 });
-
 module.exports = {
   devtool: 'inline-source-map',
   context: path.resolve(__dirname, '..'),
@@ -70,7 +69,11 @@ module.exports = {
         loaders: ['style', 'css', 'fontgen']
       },
       { test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: function(path) {
+          // We're using QS in the browser, and it has es2015 constructs like "const"
+          if (path.match(/node_modules\/qs/)) return false;
+          if (path.match(/node_modules/)) return true;
+        },
         loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']
       },
       {
