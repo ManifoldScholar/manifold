@@ -25,6 +25,7 @@
 .idea/inspectionProfiles
 .idea/libraries
 .idea/jsLibraryMappings.xml
+.idea/misc.xml
 
 # File-based project format:
 *.ipr
