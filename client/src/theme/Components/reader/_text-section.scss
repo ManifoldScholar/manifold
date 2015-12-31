@@ -38,6 +38,10 @@
     font-family: "sofia-pro",sans-serif;
   }
 
+  a {
+    color: $accentSecondary;
+  }
+
   h2 {
     @include chapterHeading;
     &:first-child {
