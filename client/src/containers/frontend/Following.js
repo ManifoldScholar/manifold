@@ -93,14 +93,12 @@ export default class Following extends Component {
         <section>
           <div className="container">
             <nav className="button-nav">
-              <button className="button-icon-primary">
-                <i className="manicon manicon-books-on-shelf"></i>
-                See more projects
-              </button>
-              <button className="button-icon-primary">
-                <i className="manicon manicon-books-with-glasses"></i>
-                Projects You're following
-              </button>
+              <Link to={'/browse'} >
+                <button className="button-icon-primary">
+                  <i className="manicon manicon-books-on-shelf"></i>
+                  See more projects
+                </button>
+              </Link>
             </nav>
           </div>
         </section>

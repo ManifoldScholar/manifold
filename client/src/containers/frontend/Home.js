@@ -4,6 +4,7 @@ import { ProjectCovers, ProjectGrid, ProjectFilters } from '../../components/fro
 import { bindActionCreators } from 'redux';
 import { fetchFilteredProjects, fetchFeaturedProjects } from '../../actions/shared/collections';
 import { setProjectFilters } from '../../actions/frontend/ui/filters';
+import { Link } from 'react-router';
 import connectData from '../../decorators/connectData';
 
 
@@ -90,14 +91,12 @@ export default class Home extends Component {
         <section>
           <div className="container">
             <nav className="button-nav">
-              <button className="button-icon-primary">
-                <i className="manicon manicon-books-on-shelf"></i>
-                See more projects
-              </button>
-              <button className="button-icon-primary">
-                <i className="manicon manicon-books-with-glasses"></i>
-                Projects You're following
-              </button>
+              <Link to={'/browse/following'}>
+                <button className="button-icon-primary">
+                  <i className="manicon manicon-books-with-glasses"></i>
+                  Projects You're following
+                </button>
+              </Link>
             </nav>
           </div>
         </section>
