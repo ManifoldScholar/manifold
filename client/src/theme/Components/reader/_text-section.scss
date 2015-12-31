@@ -13,13 +13,14 @@
   }
 }
 
-.appearance-reader {
+.reader-window {
+  padding: 60px 0px 120px;
   background-color: $neutralWhite;
   color: $neutralOffBlack;
   transition: background-color $duration $timing;
 }
 
-.appearance-reader.scheme-dark {
+.reader-window.scheme-dark {
   background-color: $neutralOffBlack;
   color: $neutralWhite;
 }

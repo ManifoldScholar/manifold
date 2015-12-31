@@ -138,7 +138,7 @@ class Reader extends Component {
     const colorScheme = this.props.appearance.colors.colorScheme;
 
     const readerAppearanceClass = classNames({
-      'appearance-reader': true,
+      'reader-window': true,
       'scheme-light': colorScheme === 'light',
       'scheme-dark': colorScheme === 'dark'
     });

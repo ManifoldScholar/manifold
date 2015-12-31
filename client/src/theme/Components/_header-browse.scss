@@ -53,6 +53,11 @@
 
 
   .menu-dropdowns {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 40px;
+
     > ul {
       @include listUnstyled;
       display: block;
@@ -65,7 +70,11 @@
       }
     }
 
-    // Browser specific menu layout/transition
+    // Browse specific menu layout/transition
+    .button-avatar {
+      height: 100%;
+    }
+
     .user-menu {
       position: absolute;
       white-space: nowrap;
