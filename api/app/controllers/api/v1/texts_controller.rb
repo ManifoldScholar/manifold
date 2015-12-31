@@ -12,7 +12,7 @@ module Api
 
       # GET /texts/1
       def show
-        render json: @text
+        render json: @text, include: %w(category creators contributors stylesheets)
       end
 
       # POST /texts

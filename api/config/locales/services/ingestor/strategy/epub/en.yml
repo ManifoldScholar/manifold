@@ -7,6 +7,8 @@ en:
             update_structures: 'Updating text structures. [id %{id}]'
             transform_ts: 'Transforming text section "%{name}" body.'
             transforming_ts: 'Transforming text sections'
+            transform_ss: 'Transforming stylesheet "%{name}" styles'
+            transforming_ss: 'Transforming stylesheets'
             set_desc: 'Setting description to "%{desc}"'
             set_rights: 'Setting rights to "%{rights}"'
             set_date: 'Setting publication date to "%{date}"'

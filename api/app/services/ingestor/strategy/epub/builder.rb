@@ -16,6 +16,7 @@ module Ingestor
             validate_text(text)
             attempt_save!(text)
           end
+          transform_stylesheets!(text)
           transform_text_sections!(text)
           validate_text(text)
           attempt_save!(text)
@@ -43,6 +44,17 @@ module Ingestor
           Helper::Validator.validate_ingestion_sources(text, @logger)
           Helper::Validator.validate_resources(text, @logger)
           Helper::Validator.validate_text_sections(text, @logger)
+        end
+
+        def transform_stylesheets!(text)
+          info "services.ingestor.strategy.ePUB.log.transforming_ss"
+          transformer = Transformer::Stylesheet.new(text, @logger)
+          text.stylesheets.each do |ss|
+            key = "services.ingestor.strategy.ePUB.log.transform_ss"
+            debug key, name: ss.name, id: ss.id
+            ss.styles = transformer.transform_styles(ss.raw_styles)
+            ss.save
+          end
         end
 
         def transform_text_sections!(text)
