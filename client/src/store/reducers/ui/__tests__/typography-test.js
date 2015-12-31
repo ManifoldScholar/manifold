@@ -7,8 +7,8 @@ describe ('store/reducers/ui/typography', () => {
     // Must mirror initial state declared in '../typography'
     expect(state).to.deep.equal({
       font: 'serif',
-      size: 1,
-      sizeMax: 10,
+      size: 3,
+      sizeMax: 5,
       sizeMin: 0
     });
   })
