@@ -38,6 +38,13 @@ export default class Frontend extends Component {
     dispatch(whoami());
   };
 
+  componentWillReceiveProps = (nextProps) => {
+    // We reload the page on logout, to ensure that all data is cleared from the store.
+    if (nextProps.authentication.authenticated === false && this.props.authentication.authenticated === true) {
+      location.reload();
+    }
+  }
+
   render() {
     return (
       <BodyClass className={'browse'}>

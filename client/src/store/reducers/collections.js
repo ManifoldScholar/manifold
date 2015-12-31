@@ -61,10 +61,5 @@ collectionActions.forEach((action) => {
   handlers[action] = fetch;
 });
 
-handlers.START_LOGOUT = {
-  next(stateIgnored, actionIgnored) {
-    return Object.assign({}, initialState);
-  }
-};
 
 export default handleActions(handlers, initialState);

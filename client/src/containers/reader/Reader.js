@@ -64,6 +64,13 @@ class Reader extends Component {
     }
   };
 
+  componentWillReceiveProps = (nextProps) => {
+    // We reload the page on logout, to ensure that all data is cleared from the store.
+    if (nextProps.authentication.authenticated === false && this.props.authentication.authenticated === true) {
+      location.reload();
+    }
+  }
+
   transitionToFirstSection = () => {
     const firstSectionId = this.props.text.attributes.firstSectionId;
     this.props.history.push(`/read/${this.props.text.id}/section/${firstSectionId}`);

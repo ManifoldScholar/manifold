@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { UIPanel, UserMenuButton, UserMenuBody } from '../../components/shared';
 import {Link} from 'react-router';
+import {startsWith} from 'lodash/string';
 
 export default class Header extends Component {
 
@@ -17,6 +18,9 @@ export default class Header extends Component {
   };
 
   render = () => {
+    const path = this.props.location.pathname;
+    const active = startsWith(path, '/browse/following') ? 'following' : 'browse';
+
     return (
       <header className={'header-browse'}>
         <Link to={'/browse'} className="logo">
@@ -29,12 +33,12 @@ export default class Header extends Component {
         </Link>
         <nav className="text-nav">
           <ul>
-            <li className={this.props.location.pathname === '/browse/' ? 'active' : ''}>
+            <li className={active === 'browse' ? 'active' : ''}>
               <Link to={`/browse/`}>
                 {'Projects'}
               </Link>
             </li>
-            <li className={this.props.location.pathname === '/browse/following/' ? 'active' : ''}>
+            <li className={active === 'following' ? 'active' : ''}>
               <Link to={`/browse/following/`}>
                 {'Following'}
               </Link>
