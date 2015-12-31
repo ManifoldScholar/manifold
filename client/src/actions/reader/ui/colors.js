@@ -1,3 +1,3 @@
 import {createAction} from 'redux-actions';
 
-export const selectColorScheme = createAction('SELECT_COLOR_SCHEME', subject => subject);
+export const setColorScheme = createAction('SET_COLOR_SCHEME', subject => subject);

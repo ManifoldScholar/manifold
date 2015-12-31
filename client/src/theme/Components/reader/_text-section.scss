@@ -4,14 +4,24 @@
   font-size: 2.682em;
   font-weight: $semibold;
   line-height: 1.288;
-  color: $neutral80;
   a {
-    color: $neutral80;
+    color: inherit;
     text-decoration: none;
     &:hover {
       color: $accentPrimary;
     }
   }
+}
+
+.appearance-reader {
+  background-color: $neutralWhite;
+  color: $neutralOffBlack;
+  transition: background-color $duration $timing;
+}
+
+.appearance-reader.scheme-dark {
+  background-color: $neutralOffBlack;
+  color: $neutralWhite;
 }
 
 .text-section {

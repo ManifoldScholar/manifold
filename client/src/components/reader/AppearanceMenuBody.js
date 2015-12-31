@@ -7,8 +7,15 @@ export default class AppearanceMenuBody extends Component {
     appearance: PropTypes.object,
     selectFont: PropTypes.func,
     incrementFontSize: PropTypes.func,
-    decrementFontSize: PropTypes.func
+    decrementFontSize: PropTypes.func,
+    setColorScheme: PropTypes.func
   };
+
+  setColorHandler = (event, scheme) => {
+    event.stopPropagation();
+    this.props.setColorScheme(scheme);
+  };
+
 
   selectFontHandler = (event, font) => {
     event.stopPropagation();
@@ -27,10 +34,14 @@ export default class AppearanceMenuBody extends Component {
 
   render = () => {
     const typography = this.props.appearance.typography;
+    const colorScheme = this.props.appearance.colors.colorScheme;
 
     // Conditional Classes
     const serifButtonClass = classNames({'font-type serif': true, 'button-active': typography.font === 'serif'});
     const sansSerifButtonClass = classNames({'font-type sans-serif': true, 'button-active': typography.font === 'sans-serif'});
+
+    const lightSchemeButtonClass = classNames({'light': true, 'button-active': colorScheme === 'light'});
+    const darkSchemeButtonClass = classNames({'dark': true, 'button-active': colorScheme === 'dark'});
 
     return (
         <nav className="appearance-menu">
@@ -88,13 +99,13 @@ export default class AppearanceMenuBody extends Component {
           </div>
 
           <div className="control-color">
-            <button className="light">
+            <button className={lightSchemeButtonClass} onClick={(event) => {this.setColorHandler(event, 'light');}}>
               <i className="manicon manicon-check"></i>
                   <span className="screen-reader-text">
                     {'Click to use light color scheme in reader'}
                   </span>
             </button>
-            <button className="dark">
+            <button className={darkSchemeButtonClass} onClick={(event) => {this.setColorHandler(event, 'dark');}}>
               <i className="manicon manicon-check"></i>
                   <span className="screen-reader-text">
                     {'Click to use dark color scheme in reader'}

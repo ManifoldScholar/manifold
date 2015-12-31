@@ -4,10 +4,10 @@ const initialState = {
   colorScheme: 'light'
 };
 
-const selectColorScheme = (state, action) => {
+const setColorScheme = (state, action) => {
   return Object.assign({}, state, {colorScheme: action.payload});
 };
 
 export default handleActions({
-  SELECT_COLOR_SCHEME: selectColorScheme
+  SET_COLOR_SCHEME: setColorScheme
 }, initialState);

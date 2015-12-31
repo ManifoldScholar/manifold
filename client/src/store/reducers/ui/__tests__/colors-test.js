@@ -11,13 +11,13 @@ describe ('store/reducers/ui/colors', () => {
   })
 });
 
-describe ('store/reducers/ui/typography/selectColorScheme', () => {
+describe ('store/reducers/ui/typography/setColorScheme', () => {
   it('should set the value as the payload', ()=> {
     const initialState = {
       colorScheme: 'light'
     };
 
-    const action = {type: 'SELECT_COLOR_SCHEME', payload: 'dark'};
+    const action = {type: 'SET_COLOR_SCHEME', payload: 'dark'};
     const state = colorsReducer(initialState, action);
     expect(state).to.deep.equal({
       colorScheme: 'dark'

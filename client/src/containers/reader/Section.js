@@ -17,7 +17,8 @@ function mapStateToProps(state) {
     fetchOneSection: state.collections.results.fetchOneSection.entities,
     sections: state.collections.entities.text_sections,
     appearance: {
-      typography: state.ui.typography
+      typography: state.ui.typography,
+      colors: state.ui.colors
     }
   };
 }
@@ -134,6 +135,13 @@ class Reader extends Component {
 
   render() {
     const typography = this.props.appearance.typography;
+    const colorScheme = this.props.appearance.colors.colorScheme;
+
+    const readerAppearanceClass = classNames({
+      'appearance-reader': true,
+      'scheme-light': colorScheme === 'light',
+      'scheme-dark': colorScheme === 'dark'
+    });
 
     // Font selection may be handled differently later, but for now, variants are based on class names
     const textSectionClass = classNames({
@@ -145,7 +153,7 @@ class Reader extends Component {
     this.reset();
     const section = this.getSection();
     return (
-        <section>
+        <section className={readerAppearanceClass}>
           <div className="container-focus">
             <div className={textSectionClass} style={this.getFontSize(typography.size)}>
               {this.buildTextSection()}

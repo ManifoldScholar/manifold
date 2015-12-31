@@ -12,6 +12,7 @@ import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide } from '../../actions/shared/ui/visibility';
 import { values } from 'lodash/object';
 import { selectFont, incrementFontSize, decrementFontSize } from '../../actions/reader/ui/typography';
+import { setColorScheme } from '../../actions/reader/ui/colors';
 
 function fetchData(getState, dispatch, location, params) {
   const promises = [];
@@ -25,7 +26,8 @@ function mapStateToProps(state) {
   const {category, project, creators, contributors, textSections, tocSection, stylesheets} =
     select(text.relationships, state.collections.entities);
   const appearance = {
-    typography: state.ui.typography
+    typography: state.ui.typography,
+    colors: state.ui.colors
   };
   return {
     text: text,
@@ -114,6 +116,7 @@ class Reader extends Component {
               selectFont={bindActionCreators((el) => selectFont(el), this.props.dispatch)}
               incrementFontSize={bindActionCreators(incrementFontSize, this.props.dispatch)}
               decrementFontSize={bindActionCreators(decrementFontSize, this.props.dispatch)}
+              setColorScheme={bindActionCreators((el) => setColorScheme(el), this.props.dispatch)}
               startLogout={bindActionCreators(startLogout, this.props.dispatch)}
           />
           <LoginOverlay
