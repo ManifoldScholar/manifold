@@ -1,0 +1,129 @@
+.button-appearance {
+  @include buttonUnstyled;
+  height: 100%;
+  color: $neutral50;
+  padding: 0px 16px;
+  transition: background-color $duration $timing;
+  &.button-active {
+    background-color: $neutral10;
+  }
+  .manicon-aa:before {
+    font-size: 21px;
+  }
+}
+
+.appearance-menu {
+  position: absolute;
+  // Off screen by default
+  right: -350px;
+  background-color: $neutral10;
+  padding: 40px;
+  transition: right $duration $timing;
+  .panel-visible & {
+    right: 0px;
+  }
+  .control-font {
+    @include clearfix;
+    padding-bottom: 40px;
+
+    // <button> that sets font type
+    .font-type {
+      @include buttonUnstyled;
+      color: $neutral70;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+      margin-top: 2px;
+      &.button-active {
+        color: $neutralOffBlack;
+        border-color: $neutralOffBlack;
+      }
+      &:hover {
+        color: $accentPrimary;
+        border-color: $accentPrimary;
+      }
+      float: left;
+      &.serif {
+        @include templateCopy;
+        font-size: 28px;
+      }
+      &.sans-serif {
+        @include templateHead;
+        font-size: 26px;
+      }
+    }
+
+    // Set of buttons for setting font-size
+    .font-size {
+      float: right;
+      button {
+        vertical-align: top;
+        @include buttonUnstyled;
+        width: 44px;
+        height: 44px;
+        background-color: $neutral05;
+        transition: all $durationFast $timing;
+        &:hover {
+          color: $neutralWhite;
+          background-color: $accentPrimary;
+        }
+        border-radius: 100%;
+        .manicon-plus {
+          font-size: 17px;
+          line-height: 44px;
+        }
+        .manicon-dash {
+          font-size: 2px;
+          line-height: 44px;
+        }
+        &:disabled {
+          color: $neutral40;
+          background-color: $neutral20;
+          &:hover {
+            background-color: $neutral20;
+          }
+        }
+      }
+      button + button {
+        margin-left: 21px;
+      }
+    }
+  }
+
+  .control-color {
+    button {
+      @include buttonUnstyled;
+      width: 120px;
+      height: 42px;
+      border: 4px solid transparent;
+      .manicon {
+        visibility: hidden;
+      }
+      &.light {
+        background-color: $neutralWhite;
+        .manicon {
+          color: $neutralOffBlack;
+        }
+      }
+      &.dark {
+        background-color: $neutral80;
+        .manicon {
+          color: $neutralWhite;
+        }
+      }
+      &.button-active {
+        .manicon {
+          visibility: visible;
+        }
+      }
+      &:hover {
+        border-color: $accentPrimary;
+        .manicon {
+          visibility: visible;
+        }
+      }
+    }
+    button + button {
+      margin-left: 20px;
+    }
+  }
+}

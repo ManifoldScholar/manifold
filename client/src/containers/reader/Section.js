@@ -4,6 +4,7 @@ import connectData from '../../decorators/connectData';
 import { fetchOneSection } from '../../actions/shared/collections';
 import { mapKeys } from 'lodash/object';
 import { camelizeKeys } from 'humps';
+import classNames from 'classnames';
 
 function fetchData(getState, dispatch, location, params) {
   return Promise.all([
@@ -14,7 +15,10 @@ function fetchData(getState, dispatch, location, params) {
 function mapStateToProps(state) {
   return {
     fetchOneSection: state.collections.results.fetchOneSection.entities,
-    sections: state.collections.entities.text_sections
+    sections: state.collections.entities.text_sections,
+    appearance: {
+      typography: state.ui.typography
+    }
   };
 }
 
@@ -27,7 +31,8 @@ class Reader extends Component {
     children: PropTypes.object,
     text: PropTypes.object,
     fetchOneSection: PropTypes.string,
-    sections: PropTypes.object
+    sections: PropTypes.object,
+    appearance: PropTypes.object
   };
 
   static contextTypes = {
@@ -42,9 +47,17 @@ class Reader extends Component {
     return this.props.sections[this.props.fetchOneSection];
   };
 
+  // Returns a CSS style object based on the font size index in the store
+  getFontSize = (sizeIndex) => {
+    const baseSizes = [13, 16, 20, 22, 26, 32];
+    return {
+      fontSize: baseSizes[sizeIndex] + 'px'
+    };
+  };
+
   reset = () => {
     this.counter = 0;
-  }
+  };
 
   visit = (node, parent = null) => {
     switch (node.nodeType) {
@@ -120,12 +133,21 @@ class Reader extends Component {
   };
 
   render() {
+    const typography = this.props.appearance.typography;
+
+    // Font selection may be handled differently later, but for now, variants are based on class names
+    const textSectionClass = classNames({
+      'manifold-text-section text-section': true,
+      'font-serif': typography.font === 'serif',
+      'font-sans-serif': typography.font === 'sans-serif'
+    });
+
     this.reset();
     const section = this.getSection();
     return (
         <section>
           <div className="container-focus">
-            <div className="manifold-text-section text-section">
+            <div className={textSectionClass} style={this.getFontSize(typography.size)}>
               {this.buildTextSection()}
             </div>
           </div>

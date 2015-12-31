@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { TocDrawer } from './';
+import { TocDrawer, AppearanceMenuButton, AppearanceMenuBody } from './';
 import { UIPanel, UserMenuButton, UserMenuBody } from '../../components/shared';
 import { Link } from 'react-router';
 
@@ -9,14 +9,18 @@ export default class Header extends Component {
 
   static propTypes = {
     text: PropTypes.object,
+    authenticated: PropTypes.bool,
     visibility: PropTypes.object,
+    appearance: PropTypes.object,
     visibilityToggle: PropTypes.func,
     visibilityHide: PropTypes.func,
     visibilityShow: PropTypes.func,
     panelToggle: PropTypes.func,
     panelHide: PropTypes.func,
-    startLogout: PropTypes.func,
-    authenticated: PropTypes.bool
+    selectFont: PropTypes.func,
+    incrementFontSize: PropTypes.func,
+    decrementFontSize: PropTypes.func,
+    startLogout: PropTypes.func
   };
 
   renderContentsButton = (contents) => {
@@ -55,6 +59,12 @@ export default class Header extends Component {
             <nav className="menu-buttons">
               <ul>
                 <li>
+                  <AppearanceMenuButton
+                    toggleAppearanceMenu={()=> {this.props.panelToggle('appearance');}}
+                    active={this.props.visibility.uiPanels.appearance}
+                  />
+                </li>
+                <li>
                   <UserMenuButton
                       authenticated={this.props.authenticated}
                       active={this.props.visibility.uiPanels.user}
@@ -68,13 +78,23 @@ export default class Header extends Component {
           <TocDrawer text={this.props.text} visible={this.props.visibility.tocDrawer} hideTocDrawer={() => {this.props.visibilityHide('tocDrawer');}} />
           <nav className="menu-panels">
             <UIPanel
+              id="appearance"
+              visibility={this.props.visibility.uiPanels}
+              bodyComponent={AppearanceMenuBody}
+
+              // Props required by body component
+              appearance={this.props.appearance}
+              selectFont={this.props.selectFont}
+              incrementFontSize={this.props.incrementFontSize}
+              decrementFontSize={this.props.decrementFontSize}
+            />
+            <UIPanel
                 id="user"
                 visibility={this.props.visibility.uiPanels}
                 bodyComponent={UserMenuBody}
 
                 // Props required by body component
                 startLogout={this.props.startLogout}
-                hideUserMenu={() => {this.props.panelHide('user');}}
             />
           </nav>
         </header>
