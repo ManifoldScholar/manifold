@@ -11,6 +11,8 @@ import { select } from '../../utils/select';
 import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide } from '../../actions/shared/ui/visibility';
 import { values } from 'lodash/object';
+import { selectFont, incrementFontSize, decrementFontSize } from '../../actions/reader/ui/typography';
+import { setColorScheme } from '../../actions/reader/ui/colors';
 
 function fetchData(getState, dispatch, location, params) {
   const promises = [];
@@ -23,6 +25,10 @@ function mapStateToProps(state) {
   const text = state.collections.entities.texts[textId];
   const {category, project, creators, contributors, textSections, tocSection, stylesheets} =
     select(text.relationships, state.collections.entities);
+  const appearance = {
+    typography: state.ui.typography,
+    colors: state.ui.colors
+  };
   return {
     text: text,
     category: category,
@@ -33,7 +39,8 @@ function mapStateToProps(state) {
     tocSection: tocSection,
     stylesheets: stylesheets,
     authentication: state.authentication,
-    visibility: state.ui.visibility
+    visibility: state.ui.visibility,
+    appearance: appearance,
   };
 }
 
@@ -46,6 +53,7 @@ class Reader extends Component {
     params: PropTypes.object,
     text: PropTypes.object,
     visibility: PropTypes.object,
+    appearance: PropTypes.object,
     authentication: PropTypes.object,
     dispatch: PropTypes.func,
     history: PropTypes.object
@@ -99,12 +107,17 @@ class Reader extends Component {
               text={text}
               authenticated={this.props.authentication.authToken === null ? false : true}
               visibility={this.props.visibility }
+              appearance={this.props.appearance}
               visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
               visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}
               visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
               panelToggle={bindActionCreators((el) => panelToggle(el), this.props.dispatch)}
               panelHide={bindActionCreators((el) => panelHide(el), this.props.dispatch)}
-              startLogout={bindActionCreators(() => startLogout(), this.props.dispatch)}
+              selectFont={bindActionCreators((el) => selectFont(el), this.props.dispatch)}
+              incrementFontSize={bindActionCreators(incrementFontSize, this.props.dispatch)}
+              decrementFontSize={bindActionCreators(decrementFontSize, this.props.dispatch)}
+              setColorScheme={bindActionCreators((el) => setColorScheme(el), this.props.dispatch)}
+              startLogout={bindActionCreators(startLogout, this.props.dispatch)}
           />
           <LoginOverlay
               visible={this.props.visibility.loginOverlay}

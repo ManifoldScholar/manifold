@@ -51,7 +51,13 @@
     }
   }
 
+
   .menu-dropdowns {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 40px;
+
     > ul {
       @include listUnstyled;
       display: block;
@@ -63,24 +69,12 @@
         height: 100%;
       }
     }
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 40px;
-    .button-magnify {
-      margin-right: 51px;
-      vertical-align: middle;
-      .manicon-magnify {
-        font-size: 17px;
-        color: $neutral80;
-      }
-    }
+
+    // Browse specific menu layout/transition
     .button-avatar {
       height: 100%;
-      position: relative;
     }
 
-    // Browser specific menu layout/transition
     .user-menu {
       position: absolute;
       white-space: nowrap;

@@ -7,7 +7,7 @@ const initialState = {
   tocDrawer: false,
   uiPanels: {
     user: false,
-    typography: false,
+    appearance: false,
     layers: false,
     search: false
   }
@@ -15,7 +15,7 @@ const initialState = {
 
 const panelSolo = {
   user: true,
-  typography: true,
+  appearance: true,
   layers: true,
   search: true
 };

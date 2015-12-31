@@ -1,16 +1,28 @@
 @mixin chapterHeading {
   @include readerHead();
-  font-size: $type180;
+  // NB: All styles within text-sections use relative font sizes
+  font-size: 2.682em;
   font-weight: $semibold;
   line-height: 1.288;
-  color: $neutral80;
   a {
-    color: $neutral80;
+    color: inherit;
     text-decoration: none;
     &:hover {
       color: $accentPrimary;
     }
   }
+}
+
+.reader-window {
+  padding: 60px 0px 120px;
+  background-color: $neutralWhite;
+  color: $neutralOffBlack;
+  transition: background-color $duration $timing;
+}
+
+.reader-window.scheme-dark {
+  background-color: $neutralOffBlack;
+  color: $neutralWhite;
 }
 
 .text-section {
@@ -20,6 +32,11 @@
   font-size: $type80;
   font-weight: $light;
   line-height: 1.761;
+  transition: font-size $durationFast $timing;
+
+  &.font-sans-serif {
+    font-family: "sofia-pro",sans-serif;
+  }
 
   h2 {
     @include chapterHeading;

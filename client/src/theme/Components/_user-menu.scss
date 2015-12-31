@@ -1,19 +1,10 @@
-// User menu container
-// This may be abstracted for other button/menu dropdown combinations
-// The button itself
+// User Menu button and panel global styles
 .button-avatar {
   @include buttonUnstyled;
   transition: background-color $duration $timing;
   .avatar {
     @include buttonAvatar();
   }
-}
-
-.container-user-menu {
-  display: inline-block;
-  vertical-align: middle;
-  height: 100%;
-  position: relative;
 }
 
 // Global styles

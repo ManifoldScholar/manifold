@@ -8,6 +8,7 @@
 $neutralWhite: #ffffff;
 
 // Off Whites
+$neutral05: #fffff7;
 $neutral10: #e8ecec;
 $neutral20: #f7f7f7;
 
@@ -54,7 +55,9 @@ $bold: 700;
 // Animation
 // --------------------------------------------------------
 // Commonly used animation variables, mainly used with transition CSS
+$durationFast: 0.1s;
 $duration: 0.2s;
+
 $timing: ease;
 
 
