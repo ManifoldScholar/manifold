@@ -13,7 +13,7 @@ set :rails_env, 'production'
 
 # Linked Files
 set :linked_files, fetch(:linked_files, []).push('client/.env', 'api/.env', 'api/tmp', 'api/config/secrets.yml')
-set :linked_dirs, fetch(:linked_dirs, []).push('api/public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('api/public/system', 'texts')
 
 # Ruby & Bundler
 set :bundle_gemfile, -> { release_path.join('api').join('Gemfile') }
@@ -63,6 +63,14 @@ namespace :deploy do
   after :published, :restart_api
   after :published, :restart_client
 
+end
+
+namespace :upload do
+  task :texts do
+    on roles(:app) do
+      upload! './user_texts', '/home/manifold/deploy/shared/texts', recursive: true
+    end
+  end
 end
 
 namespace :setup do
