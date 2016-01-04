@@ -33,7 +33,7 @@
 
 ### Ignore user content ###
 /public/system
-/epubs
+/user_texts
 
 ### Ignore secrets ###
 config/secrets.yml
