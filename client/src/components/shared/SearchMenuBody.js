@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
 
 export default class UserButton extends Component {
-
-  static propTypes = {};
 
   render = () => {
     return (
