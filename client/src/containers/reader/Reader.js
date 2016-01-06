@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
-import { BodyClass, LoginOverlay } from '../../components/shared';
+import { BodyClass, LoginOverlay, LoadingBar } from '../../components/shared';
 import { Header } from '../../components/reader';
 import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
@@ -54,6 +54,7 @@ class Reader extends Component {
     text: PropTypes.object,
     visibility: PropTypes.object,
     appearance: PropTypes.object,
+    stylesheets: PropTypes.object,
     authentication: PropTypes.object,
     dispatch: PropTypes.func,
     history: PropTypes.object
@@ -92,9 +93,9 @@ class Reader extends Component {
         <style key={index}>
           {stylesheet.attributes.styles}
         </style>
-      )
-    })
-  }
+      );
+    });
+  };
 
   render() {
     const text = this.props.text;
@@ -103,6 +104,7 @@ class Reader extends Component {
         <div>
           {this.renderStyles()}
           <DocumentMeta {...config.app}/>
+          <LoadingBar />
           <Header
               text={text}
               authenticated={this.props.authentication.authToken === null ? false : true}
