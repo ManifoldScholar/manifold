@@ -11,8 +11,8 @@ import { whoami } from '../../actions/shared/authentication';
 
 function mapStateToProps(state) {
   return {
+    routing: state.routing,
     authentication: state.authentication,
-    location: state.router.location,
     visibility: state.ui.visibility
   };
 }
@@ -22,9 +22,9 @@ export default class Frontend extends Component {
 
   static propTypes = {
     children: PropTypes.object,
+    routing: PropTypes.object,
     dispatch: PropTypes.func,
     authentication: PropTypes.object,
-    location: PropTypes.object,
     visibility: PropTypes.object,
     history: PropTypes.object.isRequired
   };
@@ -39,10 +39,11 @@ export default class Frontend extends Component {
   };
 
   componentWillReceiveProps = (nextProps) => {
+    // TODO: Restore this.
     // We reload the page on logout, to ensure that all data is cleared from the store.
-    if (nextProps.authentication.authenticated === false && this.props.authentication.authenticated === true) {
-      location.reload();
-    }
+    //if (nextProps.authentication.authenticated === false && this.props.authentication.authenticated === true) {
+    //
+    //}
   }
 
   render() {
@@ -53,7 +54,7 @@ export default class Frontend extends Component {
           <LoadingBar />
           <Header
               visibility={this.props.visibility }
-              location={this.props.location}
+              path={this.props.routing.path}
               authenticated={this.props.authentication.authToken === null ? false : true}
               visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
               visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}

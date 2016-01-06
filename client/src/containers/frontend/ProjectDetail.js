@@ -16,14 +16,14 @@ function mapStateToProps(state) {
   const fetchOneProjectResult = state.collections.results.fetchOneProject.entities;
   const projects = state.collections.entities.projects;
   const project = projects[fetchOneProjectResult];
-  const {creators, contributors, texts, textCategories} = select(project.relationships, state.collections.entities);
+  const {creators, contributors, texts, textCategories} = select(project, state.collections.entities);
 
   return {
     project: project,
-    creators: creators,
-    contributors: contributors,
-    texts: texts,
-    textCategories: textCategories
+    creators: creators || [],
+    contributors: contributors || [],
+    texts: texts || [],
+    textCategories: textCategories || []
   };
 }
 
@@ -32,6 +32,7 @@ function mapStateToProps(state) {
 export default class ProjectDetail extends Component {
 
   static propTypes = {
+    loading: PropTypes.bool,
     project: PropTypes.object,
     creators: PropTypes.array,
     contributors: PropTypes.array,
@@ -105,10 +106,19 @@ export default class ProjectDetail extends Component {
     );
   };
 
+  renderLoading = () => {
+    const styles = {
+      minHeight: '2000px'
+    };
+    return (
+      <div style={styles}></div>
+    )
+  };
+
   render = () => {
+    if (this.props.loading) return this.renderLoading();
     const project = this.props.project;
     const makers = this.props.creators.concat(this.props.contributors);
-
     return (
       <div>
         <section className="neutral20">

@@ -31,7 +31,8 @@
     "no-unused-vars": [1, {"args": "after-used", "argsIgnorePattern": "[iI]gnored"}],
     "no-trailing-spaces": 1,
     "no-multiple-empty-lines": 1,
-    "spaced-comment": 1
+    "spaced-comment": 1,
+    "react/no-multi-comp": 0
   },
   "plugins": [
     "react", "import"

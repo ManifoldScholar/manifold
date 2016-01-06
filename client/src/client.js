@@ -7,17 +7,22 @@ import ReactDOM from 'react-dom';
 import createHistory from 'history/lib/createBrowserHistory';
 import createStore from './store/createStore';
 import {Provider} from 'react-redux';
-import {reduxReactRouter, ReduxRouter} from 'redux-router';
+import {Router} from 'react-router';
+import {syncReduxAndRouter} from 'redux-simple-router';
 import {DevTools} from './containers/shared';
-
 import getRoutes from './routes';
-import makeRouteHooksSafe from './helpers/makeRouteHooksSafe';
+import ResolveDataDependencies from './helpers/ResolveDataDependencies';
 
 const dest = document.getElementById('content');
-const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), createHistory, window.__INITIAL_STATE__);
+const store = createStore(window.__INITIAL_STATE__);
+const history = createHistory();
+
+syncReduxAndRouter(history, store);
 
 const component = (
-  <ReduxRouter routes={getRoutes(store)} />
+  <Router history={history} RoutingContext={ResolveDataDependencies} >
+    {getRoutes()}
+  </Router>
 );
 
 ReactDOM.render(
@@ -26,6 +31,7 @@ ReactDOM.render(
   </Provider>,
   dest
 );
+
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
@@ -36,6 +42,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (__DEVTOOLS__) {
+  console.log('rambo');
   ReactDOM.render(
     <Provider store={store} key="provider">
       <div>
@@ -46,3 +53,4 @@ if (__DEVTOOLS__) {
     dest
   );
 }
+

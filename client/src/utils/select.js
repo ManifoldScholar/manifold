@@ -1,7 +1,9 @@
 import { isPlainObject } from 'lodash/lang';
 
-export function select(relationships, entities) {
+export function select(entity, entities) {
   const selection = {};
+  if (!entity || !entity.hasOwnProperty('relationships')) return selection;
+  const relationships = entity.relationships;
   Object.keys(relationships).forEach((key) => {
     const data = relationships[key].data;
     if (Array.isArray(data)) {

@@ -1,13 +1,12 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
-import transitionMiddleware from './middleware/transitionMiddleware';
 import thunkMiddleware from './middleware/thunkMiddleware';
 import {DevTools} from '../containers/shared';
 import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise';
 
-export default function createStore(reduxReactRouter, getRoutes, createHistory, data) {
+export default function createStore(data) {
 
-  const middleware = [thunkMiddleware, promiseMiddleware, transitionMiddleware];
+  const middleware = [thunkMiddleware, promiseMiddleware];
 
   if (__DEVELOPMENT__ && __CLIENT__) {
     const logger = createLogger({
@@ -27,8 +26,6 @@ export default function createStore(reduxReactRouter, getRoutes, createHistory, 
   } else {
     finalCreateStore = applyMiddleware(...middleware)(_createStore);
   }
-
-  finalCreateStore = reduxReactRouter({ getRoutes, createHistory })(finalCreateStore);
 
   const reducer = require('./reducers');
   const store = finalCreateStore(reducer, data);

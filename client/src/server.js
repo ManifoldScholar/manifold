@@ -13,22 +13,24 @@ import http from 'http';
 import cookie from 'cookie';
 import { setAuthToken } from './actions/shared/authentication';
 
-import {ReduxRouter} from 'redux-router';
 import createHistory from 'history/lib/createMemoryHistory';
-import {reduxReactRouter, match} from 'redux-router/server';
+import {RoutingContext, match} from 'react-router';
 import {Provider} from 'react-redux';
 import qs from 'query-string';
 import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 import createApiProxy from './proxies/api';
 import createWebpackProxy from './proxies/webpack';
+import fetchAllData from './helpers/fetchAllData';
+import ResolveDataDependencies from './helpers/ResolveDataDependencies';
+
 
 const morgan = require('morgan');
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
 const emoji = require('node-emoji').emoji;
-const colors = require('colors'); 
+const colors = require('colors');
 const logStyle = __DEVELOPMENT__ ? 'dev' : 'combined';
 
 
@@ -47,7 +49,7 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
 
-  const store = createStore(reduxReactRouter, getRoutes, createHistory);
+  const store = createStore();
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
@@ -65,46 +67,39 @@ app.use((req, res) => {
     store.dispatch(setAuthToken(authToken));
   }
 
-  store.dispatch(match(req.originalUrl, (error, redirectLocation, routerState) => {
+  match({ routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
       console.error('ROUTER ERROR:', pretty.render(error));
       res.status(500);
       hydrateOnClient();
-    } else if (!routerState) {
+    } else if (!renderProps) {
       res.status(500);
       hydrateOnClient();
     } else {
-
-      // Workaround redux-router query string issue:
-      // https://github.com/rackt/redux-router/issues/106
-      if (routerState.location.search && !routerState.location.query) {
-        routerState.location.query = qs.parse(routerState.location.search);
-      }
-
-      store.getState().router.then(() => {
+      fetchAllData(
+        renderProps.components,
+        store.getState, store.dispatch,
+        renderProps.location,
+        renderProps.params
+      ).then(() => {
+        store.dispatch({type: 'RECORD_DATA_FETCHING', payload: req.originalUrl});
+        console.log(store,'store');
         const component = (
           <Provider store={store} key="provider">
-            <ReduxRouter/>
+            <RoutingContext {...renderProps} />
           </Provider>
         );
-
-        const status = getStatusFromRoutes(routerState.routes);
+        const status = getStatusFromRoutes(renderProps.routes);
         if (status) {
-          res.status(status);
+          res.status(status)
         }
-
         res.send('<!doctype html>\n' +
           ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
-
-      }).catch((err) => {
-        console.error('DATA FETCHING ERROR:', pretty.render(err));
-        res.status(500);
-        hydrateOnClient();
       });
     }
-  }));
+  });
 });
 
 const socketLocation = process.env.NODE_SERVER_SOCKET_PATH;
@@ -117,7 +112,7 @@ if(socketLocation) {
   oldUmask = process.umask('0000');
 } else {
   listenOn = config.clientPort;
-} 
+}
 
 if (listenOn) {
   server.listen(listenOn, (err) => {
@@ -164,7 +159,7 @@ if (listenOn) {
 
     if(setUmask === true) {
       process.umask(oldUmask);
-    } 
+    }
   });
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');
