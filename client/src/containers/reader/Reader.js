@@ -24,7 +24,7 @@ function mapStateToProps(state) {
   const textId = state.collections.results.fetchOneText.entities;
   const text = state.collections.entities.texts[textId];
   const {category, project, creators, contributors, textSections, tocSection, stylesheets} =
-    select(text.relationships, state.collections.entities);
+    select(text, state.collections.entities);
   const appearance = {
     typography: state.ui.typography,
     colors: state.ui.colors
