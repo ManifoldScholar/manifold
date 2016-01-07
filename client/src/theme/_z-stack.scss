@@ -3,10 +3,15 @@
 
 // Z-Indeces for all top level components, all in one place, all in order
 
-.header-browse {
-  z-index: 200;
+.loading-bar {
+  z-index: 600;
 }
 
 .overlay-login {
   z-index: 500;
 }
+
+.header-browse {
+  z-index: 200;
+}
+

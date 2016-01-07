@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
-import { BodyClass, LoginOverlay } from '../../components/shared';
+import { BodyClass, LoginOverlay, LoadingBar } from '../../components/shared';
 import { Header, Footer } from '../../components/frontend';
 import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide } from '../../actions/shared/ui/visibility';
@@ -48,8 +48,9 @@ export default class Frontend extends Component {
   render() {
     return (
       <BodyClass className={'browse'}>
-        <div onClick={this.handleClick}>
+        <div>
           <DocumentMeta {...config.app}/>
+          <LoadingBar />
           <Header
               visibility={this.props.visibility }
               location={this.props.location}
