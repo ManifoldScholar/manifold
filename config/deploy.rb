@@ -23,7 +23,7 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 
 # NPM
 set :npm_target_path, -> { release_path.join('client') }
-set :npm_flags, '--production --silent --no-spin'
+set :npm_flags, '--silent --no-spin'
 set :npm_env_variables, {}
 
 # Persist node_modules across deploys to increase deployment speed
