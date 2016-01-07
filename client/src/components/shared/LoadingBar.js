@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class LoadingBar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = { status: 0 };
   }
 

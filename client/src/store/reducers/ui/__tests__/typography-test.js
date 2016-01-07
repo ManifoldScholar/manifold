@@ -1,7 +1,7 @@
 import typographyReducer from '../typography';
 import { expect } from 'chai';
 
-describe ('store/reducers/ui/typography', () => {
+describe('store/reducers/ui/typography', () => {
   it('should return the initial state', ()=> {
     const state = typographyReducer(undefined, {});
     // Must mirror initial state declared in '../typography'
@@ -11,10 +11,10 @@ describe ('store/reducers/ui/typography', () => {
       sizeMax: 5,
       sizeMin: 0
     });
-  })
+  });
 });
 
-describe ('store/reducers/ui/typography/selectFont', () => {
+describe('store/reducers/ui/typography/selectFont', () => {
   it('should set the value as the payload', ()=> {
     const initialState = {
       font: 'serif'
@@ -28,7 +28,7 @@ describe ('store/reducers/ui/typography/selectFont', () => {
   });
 });
 
-describe ('store/reducers/ui/typography/incrementFontSize', () => {
+describe('store/reducers/ui/typography/incrementFontSize', () => {
   it('Should increment the value by 1', () => {
     const initialState = {
       size: 1,
@@ -55,7 +55,7 @@ describe ('store/reducers/ui/typography/incrementFontSize', () => {
   });
 });
 
-describe ('store/reducers/ui/typography/decrementFontSize', () => {
+describe('store/reducers/ui/typography/decrementFontSize', () => {
   it('Should decrement the value by 1', () => {
     const initialState = {
       size: 1,

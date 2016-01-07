@@ -3,12 +3,12 @@ import { expect } from 'chai';
 
 describe('utils/select', () => {
 
-  let maker1 = {attributes: {id: "1"}};
-  let maker2 = {attributes: {id: "2"}};
-  let text1 = {attributes: {id: "1"}};
-  let text2 = {attributes: {id: "2"}};
+  const maker1 = {attributes: {id: '1'}};
+  const maker2 = {attributes: {id: '2'}};
+  const text1 = {attributes: {id: '1'}};
+  const text2 = {attributes: {id: '2'}};
 
-  let entities = {
+  const entities = {
     makers: {
       1: maker1,
       2: maker2
@@ -19,16 +19,16 @@ describe('utils/select', () => {
     }
   };
 
-  let relationships = {
+  const relationships = {
     creators: {
       data: [
         {
-          id: "1",
-          type: "makers"
+          id: '1',
+          type: 'makers'
         },
         {
-          id: "2",
-          type: "makers"
+          id: '2',
+          type: 'makers'
         }
 
       ]
@@ -36,21 +36,21 @@ describe('utils/select', () => {
     texts: {
       data: [
         {
-          id: "1",
-          type: "texts"
+          id: '1',
+          type: 'texts'
         },
         {
-          id: "2",
-          type: "texts"
+          id: '2',
+          type: 'texts'
         }
       ]
     },
     toc_section: {
-      data: { id: "1", type: "section" }
+      data: { id: '1', type: 'section' }
     }
   };
 
-  let results = select(relationships, entities);
+  const results = select(relationships, entities);
 
   it('should return an object with a corresponding key for each relationship', () => {
     expect(Object.keys(results)).to.deep.equal(Object.keys(relationships));
@@ -66,7 +66,7 @@ describe('utils/select', () => {
     });
     const resultingIds = results.texts.map((entity) => {
       return entity.attributes.id;
-    })
+    });
     expect(expectedIds).to.deep.equal(resultingIds);
   });
 

@@ -12,25 +12,19 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import cookie from 'cookie';
 import { setAuthToken } from './actions/shared/authentication';
-
-import createHistory from 'history/lib/createMemoryHistory';
 import {RoutingContext, match} from 'react-router';
 import {Provider} from 'react-redux';
-import qs from 'query-string';
 import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 import createApiProxy from './proxies/api';
 import createWebpackProxy from './proxies/webpack';
 import fetchAllData from './helpers/fetchAllData';
-import ResolveDataDependencies from './helpers/ResolveDataDependencies';
 
 
 const morgan = require('morgan');
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
-const emoji = require('node-emoji').emoji;
-const colors = require('colors');
 const logStyle = __DEVELOPMENT__ ? 'dev' : 'combined';
 
 
@@ -92,7 +86,7 @@ app.use((req, res) => {
         );
         const status = getStatusFromRoutes(renderProps.routes);
         if (status) {
-          res.status(status)
+          res.status(status);
         }
         res.send('<!doctype html>\n' +
           ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
@@ -105,7 +99,7 @@ const socketLocation = process.env.NODE_SERVER_SOCKET_PATH;
 let listenOn;
 let setUmask = false;
 let oldUmask;
-if(socketLocation) {
+if (socketLocation) {
   listenOn = socketLocation;
   setUmask = true;
   oldUmask = process.umask('0000');
@@ -156,7 +150,7 @@ if (listenOn) {
     console.log('');
     console.log('');
 
-    if(setUmask === true) {
+    if (setUmask === true) {
       process.umask(oldUmask);
     }
   });

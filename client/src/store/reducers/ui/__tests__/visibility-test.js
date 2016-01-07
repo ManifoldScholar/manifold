@@ -1,7 +1,7 @@
 import visibilityReducer from '../visibility';
 import { expect } from 'chai';
 
-describe ('store/reducers/ui/visibility', () => {
+describe('store/reducers/ui/visibility', () => {
   it('should return the initial state', () => {
     const state = visibilityReducer(undefined, {});
     // Must mirror initial state declared in '../visibility'
@@ -16,10 +16,10 @@ describe ('store/reducers/ui/visibility', () => {
         search: false
       }
     });
-  })
+  });
 });
 
-describe ('store/reducers/ui/visibility/panelToggle', () => {
+describe('store/reducers/ui/visibility/panelToggle', () => {
   it('should set a single panel to true if it is false', () => {
     const initialState = {
       uiPanels: {
@@ -46,13 +46,6 @@ describe ('store/reducers/ui/visibility/panelToggle', () => {
         layers: true
       }
     };
-
-    const panelSolo = {
-      user: true,
-      appearance: true,
-      layers: false
-    };
-
     const action = {type: 'PANEL_TOGGLE', payload: 'appearance'};
     const state = visibilityReducer(initialState, action);
     expect(state).to.deep.equal({
@@ -88,12 +81,6 @@ describe ('store/reducers/ui/visibility/panelToggle', () => {
         appearance: true
       }
     };
-
-    const panelSolo = {
-      user: false,
-      appearance: true
-    };
-
     const action = {type: 'PANEL_TOGGLE', payload: 'appearance'};
     const state = visibilityReducer(initialState, action);
     expect(state).to.deep.equal({
@@ -102,10 +89,10 @@ describe ('store/reducers/ui/visibility/panelToggle', () => {
         appearance: false
       }
     });
-  })
+  });
 });
 
-describe ('store/reducers/ui/visibility/panelShow', () => {
+describe('store/reducers/ui/visibility/panelShow', () => {
   it('should set a single panel to true', () => {
     const initialState = {
       uiPanels: {
@@ -132,13 +119,6 @@ describe ('store/reducers/ui/visibility/panelShow', () => {
         layers: true
       }
     };
-
-    const panelSolo = {
-      user: true,
-      appearance: true,
-      layers: false
-    };
-
     const action = {type: 'PANEL_SHOW', payload: 'appearance'};
     const state = visibilityReducer(initialState, action);
     expect(state).to.deep.equal({
@@ -151,7 +131,7 @@ describe ('store/reducers/ui/visibility/panelShow', () => {
   });
 });
 
-describe ('store/reducers/ui/visibility/panelHide', () => {
+describe('store/reducers/ui/visibility/panelHide', () => {
   it('should set a single panel to false', () => {
     const initialState = {
       uiPanels: {

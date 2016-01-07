@@ -1,17 +1,17 @@
 import colorsReducer from '../colors';
 import { expect } from 'chai';
 
-describe ('store/reducers/ui/colors', () => {
+describe('store/reducers/ui/colors', () => {
   it('should return the initial state', ()=> {
     const state = colorsReducer(undefined, {});
     // Must mirror initial state declared in '../typography'
     expect(state).to.deep.equal({
       colorScheme: 'light'
     });
-  })
+  });
 });
 
-describe ('store/reducers/ui/typography/setColorScheme', () => {
+describe('store/reducers/ui/typography/setColorScheme', () => {
   it('should set the value as the payload', ()=> {
     const initialState = {
       colorScheme: 'light'
