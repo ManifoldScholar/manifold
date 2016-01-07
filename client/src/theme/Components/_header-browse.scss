@@ -68,28 +68,53 @@
         position: relative;
         height: 100%;
       }
+      > li + li {
+        margin-left: 55px;
+      }
     }
 
     // Browse specific menu layout/transition
-    .button-avatar {
+    .button-search {
       height: 100%;
+      vertical-align: middle;
+      font-size: 17px;
+      color: $neutral80;
     }
 
-    .user-menu {
-      position: absolute;
+    .button-avatar {
+      height: 100%;
+      vertical-align: middle;
+    }
+
+    .search-menu {
       white-space: nowrap;
-      // Default state
-      margin-top: -20px;
-      opacity: 0;
-      visibility: hidden;
-      right: -24px;
-      transition: all, $duration, $timing;
+      position: absolute;
+      right: -36px;
       .tail {
         display: block;
       }
     }
 
-    .panel-visible .user-menu {
+    .user-menu {
+      white-space: nowrap;
+      position: absolute;
+      right: -24px;
+      .tail {
+        display: block;
+      }
+    }
+
+    // Panel default states
+    .search-menu, .user-menu {
+      // Default state
+      margin-top: -20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all, $duration, $timing;
+    }
+
+    // Panel active states
+    .panel-visible .search-menu, .panel-visible .user-menu {
       margin-top: 0px;
       opacity: 1;
       visibility: visible;
