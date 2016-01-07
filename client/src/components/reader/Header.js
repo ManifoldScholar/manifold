@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { TocDrawer, AppearanceMenuButton, AppearanceMenuBody } from './';
-import { UIPanel, UserMenuButton, UserMenuBody } from '../../components/shared';
+import { UIPanel, SearchMenuButton, SearchMenuBody, UserMenuButton, UserMenuBody } from '../../components/shared';
 import { Link } from 'react-router';
 
 import classNames from 'classnames';
@@ -60,6 +60,12 @@ export default class Header extends Component {
             <nav className="menu-buttons">
               <ul>
                 <li>
+                  <SearchMenuButton
+                    toggleSearchMenu={()=> {this.props.panelToggle('search');}}
+                    active={this.props.visibility.uiPanels.search}
+                  />
+                </li>
+                <li>
                   <AppearanceMenuButton
                     toggleAppearanceMenu={()=> {this.props.panelToggle('appearance');}}
                     active={this.props.visibility.uiPanels.appearance}
@@ -78,6 +84,11 @@ export default class Header extends Component {
           </nav>
           <TocDrawer text={this.props.text} visible={this.props.visibility.tocDrawer} hideTocDrawer={() => {this.props.visibilityHide('tocDrawer');}} />
           <nav className="menu-panels">
+            <UIPanel
+              id="search"
+              visibility={this.props.visibility.uiPanels}
+              bodyComponent={SearchMenuBody}
+            />
             <UIPanel
               id="appearance"
               visibility={this.props.visibility.uiPanels}

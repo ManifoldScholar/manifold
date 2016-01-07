@@ -25,6 +25,21 @@
 // - Tables
 
 
+// Layout
+// --------------------------------------------------------
+// Added to UI panels/dropdowns with tails
+@mixin panelTail {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15.5px 17px 15.5px;
+  border-color: transparent transparent $neutral10;
+  position: absolute;
+  top: -17px;
+  right: 28px;
+}
+
+
 // Buttons
 // --------------------------------------------------------
 @mixin buttonUnstyled {

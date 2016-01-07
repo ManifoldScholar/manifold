@@ -83,6 +83,13 @@
         height: 100%;
       }
     }
+    .button-search {
+      padding: 0px 21px;
+      &.button-active {
+        background-color: $neutral10;
+      }
+    }
+
     .button-avatar {
       height: 100%;
       padding-right: 16px;
@@ -103,6 +110,16 @@
     right: 0;
 
     // Reader specific menu layout/transition
+    .search-menu {
+      position: absolute;
+      width: 645px;
+      right: -645px;
+      transition: right $duration $timing;
+    }
+    .panel-visible .search-menu {
+      right: 0px;
+    }
+
     .user-menu {
       position: absolute;
       right: -300px;

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { UIPanel, UserMenuButton, UserMenuBody } from '../../components/shared';
+import { UIPanel, SearchMenuButton, SearchMenuBody, UserMenuButton, UserMenuBody } from '../../components/shared';
 import {Link} from 'react-router';
 import {startsWith} from 'lodash/string';
 
@@ -48,6 +48,17 @@ export default class Header extends Component {
 
         <nav className="menu-dropdowns">
           <ul>
+            <li>
+              <SearchMenuButton
+                  toggleSearchMenu={()=> {this.props.panelToggle('search');}}
+                  active={this.props.visibility.uiPanels.search}
+              />
+              <UIPanel
+                  id="search"
+                  visibility={this.props.visibility.uiPanels}
+                  bodyComponent={SearchMenuBody}
+              />
+            </li>
             <li>
               <UserMenuButton
                   authenticated={this.props.authenticated}
