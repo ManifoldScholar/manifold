@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
 export default class LoadingBar extends Component {
-  getInitialState = () => {
-    return {
-      status: 0
-    };
-  };
+  constructor(props) {
+    super(props);
+    this.state = { status: 0 };
+  }
 
   bindKey = () => {
 

@@ -85,7 +85,6 @@ app.use((req, res) => {
         renderProps.params
       ).then(() => {
         store.dispatch({type: 'RECORD_DATA_FETCHING', payload: req.originalUrl});
-        console.log(store,'store');
         const component = (
           <Provider store={store} key="provider">
             <RoutingContext {...renderProps} />

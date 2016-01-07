@@ -39,11 +39,10 @@ export default class Frontend extends Component {
   };
 
   componentWillReceiveProps = (nextProps) => {
-    // TODO: Restore this.
     // We reload the page on logout, to ensure that all data is cleared from the store.
-    //if (nextProps.authentication.authenticated === false && this.props.authentication.authenticated === true) {
-    //
-    //}
+    if (nextProps.authentication.authenticated === false && this.props.authentication.authenticated === true) {
+      location.reload();
+    }
   }
 
   render() {

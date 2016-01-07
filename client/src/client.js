@@ -32,7 +32,6 @@ ReactDOM.render(
   dest
 );
 
-
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
 
@@ -42,7 +41,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (__DEVTOOLS__) {
-  console.log('rambo');
   ReactDOM.render(
     <Provider store={store} key="provider">
       <div>

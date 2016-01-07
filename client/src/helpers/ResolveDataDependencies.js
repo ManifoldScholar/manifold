@@ -3,7 +3,7 @@ import RoutingContext from 'react-router/lib/RoutingContext';
 import {isFunction} from 'lodash/lang';
 
 class DelayContainer extends Component {
-  
+
   static propTypes = {
     store: PropTypes.object,
     routerProps: PropTypes.object,

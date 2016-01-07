@@ -112,7 +112,7 @@ export default class ProjectDetail extends Component {
     };
     return (
       <div style={styles}></div>
-    )
+    );
   };
 
   render = () => {
