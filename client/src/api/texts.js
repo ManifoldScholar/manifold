@@ -5,7 +5,7 @@ export default {
       endpoint: '/api/v1/texts',
       method: 'GET',
       options: {
-        params: {filter, page}
+        params: { filter, page }
       }
     };
   },
@@ -20,4 +20,3 @@ export default {
   },
 
 };
-

@@ -62,9 +62,10 @@ export default class Home extends Component {
                 {'Featured Projects'}
               </h4>
             </header>
-            <ProjectCovers makers={this.props.makers}
-                           projects={this.props.projects}
-                           entities={this.props.featuredProjects}
+            <ProjectCovers
+              makers={this.props.makers}
+              projects={this.props.projects}
+              entities={this.props.featuredProjects}
             />
           </div>
         </section>
@@ -81,10 +82,13 @@ export default class Home extends Component {
               Note, too, that the parent component delivers all the data the child component needs
               to render (which is what keeps the child dumb)'
             */}
-            <ProjectFilters updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)} />
-            <ProjectGrid makers={this.props.makers}
-                           projects={this.props.projects}
-                           entities={this.props.filteredProjects}
+            <ProjectFilters
+              updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
+            />
+            <ProjectGrid
+              makers={this.props.makers}
+              projects={this.props.projects}
+              entities={this.props.filteredProjects}
             />
           </div>
         </section>

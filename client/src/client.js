@@ -6,10 +6,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createHistory from 'history/lib/createBrowserHistory';
 import createStore from './store/createStore';
-import {Provider} from 'react-redux';
-import {Router} from 'react-router';
-import {syncReduxAndRouter} from 'redux-simple-router';
-import {DevTools} from './containers/shared';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router';
+import { syncReduxAndRouter } from 'redux-simple-router';
+import { DevTools } from './containers/shared';
 import getRoutes from './routes';
 import ResolveDataDependencies from './helpers/ResolveDataDependencies';
 
@@ -35,8 +35,12 @@ ReactDOM.render(
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
 
-  if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
-    console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
+  if (!dest ||
+    !dest.firstChild ||
+    !dest.firstChild.attributes ||
+    !dest.firstChild.attributes['data-react-checksum']) {
+    console.error('Server-side React render was discarded. Make sure that your initial ' +
+      'render does not contain any client-side code.');
   }
 }
 
@@ -51,4 +55,3 @@ if (__DEVTOOLS__) {
     dest
   );
 }
-

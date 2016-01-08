@@ -1,6 +1,6 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from './middleware/thunkMiddleware';
-import {DevTools} from '../containers/shared';
+import { DevTools } from '../containers/shared';
 import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise';
 

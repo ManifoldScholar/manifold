@@ -40,9 +40,9 @@ export class LowLevelApiClient {
     const options = this._adjustedOptions(rawOptions);
     const endpoint = this._endpointWithParams(this._adjustedEndpoint(rawEndpoint), options.params);
     const fetchConfig = {
-      method: method,
+      method,
       headers: {
-        'Authorization': `Bearer ${options.authToken}`
+        Authorization: `Bearer ${options.authToken}`
       }
     };
     return fetch(endpoint, fetchConfig).catch((error) => {
@@ -66,26 +66,26 @@ export class ApiClient {
 
   _responseToJson = (response) => {
     if (!response.ok) {
-      return Promise.reject({response});
+      return Promise.reject({ response });
     }
     return response.json().then(
-      (json) => { return {json, response}; },
-      () => { return Promise.reject({response}); }
+      (json) => { return { json, response }; },
+      () => { return Promise.reject({ response }); }
     );
   };
 
-  _cleanJson = ({json, response}) => {
-    if (json === null) return Promise.resolve({json, response});
-    if (!isPlainObject(json)) return Promise.reject({json, response});
-    const out = {data: [], included: []};
+  _cleanJson = ({ json, response }) => {
+    if (json === null) return Promise.resolve({ json, response });
+    if (!isPlainObject(json)) return Promise.reject({ json, response });
+    const out = { data: [], included: [] };
     out.data = camelizeKeys(json.data);
     if (json.included) {
       out.included = camelizeKeys(json.included);
     }
-    return Promise.resolve({json: out, response: response});
+    return Promise.resolve({ json: out, response });
   };
 
-  _returnResults = ({json, responseIgnored}) => {
+  _returnResults = ({ json, responseIgnored }) => {
     let out;
     if (json === null) return out;
     if (Array.isArray(json.data)) {
@@ -114,7 +114,7 @@ export class ApiClient {
       entities[entity.type][entity.id] = entity;
       results.push(entity.id);
     });
-    return {entities, results};
+    return { entities, results };
   };
 
   _returnEntity = (json) => {
@@ -125,14 +125,14 @@ export class ApiClient {
       entities[entity.type] = {};
     }
     entities[entity.type][entity.id] = entity;
-    return {entities, results};
+    return { entities, results };
   };
 
-  _responseNotOK = ({response}) => {
+  _responseNotOK = ({ response }) => {
     console.log(response, 'error caught in responseNotOK');
   };
 
-  _jsonNotOK = ({json, response}) => {
+  _jsonNotOK = ({ json, response }) => {
     console.log(json, response, 'error caught in jsonNotOK');
   };
 

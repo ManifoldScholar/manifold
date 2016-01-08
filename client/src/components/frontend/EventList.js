@@ -12,14 +12,14 @@ export default class EventList extends Component {
   // to an optional mixin if this component needs to be used without it
 
   // Default inline CSS class
-  state = {matchedHeight: {
+  state = { matchedHeight: {
     height: 'auto'
-  }};
+  } };
 
   componentDidMount = () => {
-    this.setState({matchedHeight: {
+    this.setState({ matchedHeight: {
       height: this.getMaxHeight(this.refs.eventList.childNodes, 24)
-    }});
+    } });
   };
 
   // Get the maximum height of an element in a node list

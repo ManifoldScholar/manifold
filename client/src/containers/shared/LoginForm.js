@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import { startLogin } from '../../actions/shared/authentication';
 
 class LoginForm extends Component {
@@ -22,14 +22,14 @@ class LoginForm extends Component {
   };
 
   // TODO: Remove this at some future point
-  state = {email: 'admin@manifold.dev', password: 'manifold'};
+  state = { email: 'admin@manifold.dev', password: 'manifold' };
 
   updatePassword = (event) => {
-    this.setState(Object.assign({}, this.state, {password: event.target.value}));
+    this.setState(Object.assign({}, this.state, { password: event.target.value }));
   };
 
   updateEmail = (event) => {
-    this.setState(Object.assign({}, this.state, {email: event.target.value}));
+    this.setState(Object.assign({}, this.state, { email: event.target.value }));
   };
 
   handleLogin = (event) => {
@@ -44,42 +44,53 @@ class LoginForm extends Component {
 
   render = () => {
     return (
-        <div>
-          <form method="post" onSubmit={this.handleLogin} className="login-form">
-            <div className="field">
-              <label>
-                Username
-              </label>
-              <input type="text" value={this.state.email} onChange={this.updateEmail} id="login-email" placeholder="Username" />
-            </div>
-            <div className="field">
-              <label>
-                Password
-              </label>
-              <input type="password" value={this.state.password} onChange={this.updatePassword} id="login-password" placeholder="Password" />
-            </div>
-            <input className="button-secondary" type="submit" value="Log in" />
-          </form>
-          <p className="login-links">
-            <Link to="#">
-              {'Forgot your password?'}
-            </Link>
-            <Link to="#">
-              {'Need to sign up?'}
-            </Link>
-          </p>
+      <div>
+        <form method="post" onSubmit={this.handleLogin} className="login-form">
+          <div className="field">
+            <label>
+              Username
+            </label>
+            <input type="text"
+              value={this.state.email}
+              onChange={this.updateEmail}
+              id="login-email"
+              placeholder="Username"
+            />
+          </div>
+          <div className="field">
+            <label>
+              Password
+            </label>
+            <input
+              type="password"
+              value={this.state.password}
+              onChange={this.updatePassword}
+              id="login-password"
+              placeholder="Password"
+            />
+          </div>
+          <input className="button-secondary" type="submit" value="Log in" />
+        </form>
+        <p className="login-links">
+          <Link to="#">
+            {'Forgot your password?'}
+          </Link>
+          <Link to="#">
+            {'Need to sign up?'}
+          </Link>
+        </p>
 
-          <section className="login-external">
-            <button className="button-secondary-dark">
-              <i className="manicon manicon-facebook"></i>
-              <span>Log in with Facebook</span>
-            </button>
-            <button className="button-secondary-dark">
-              <i className="manicon manicon-twitter"></i>
-              <span>Log in with Twitter</span>
-            </button>
-          </section>
-        </div>
+        <section className="login-external">
+          <button className="button-secondary-dark">
+            <i className="manicon manicon-facebook"></i>
+            <span>Log in with Facebook</span>
+          </button>
+          <button className="button-secondary-dark">
+            <i className="manicon manicon-twitter"></i>
+            <span>Log in with Twitter</span>
+          </button>
+        </section>
+      </div>
     );
   }
 }

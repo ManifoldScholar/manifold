@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {ProjectThumb} from './';
+import { ProjectThumb } from './';
 
 export default class ProjectGrid extends Component {
 
@@ -23,8 +23,8 @@ export default class ProjectGrid extends Component {
             return (
               <li key={projectId} >
                 <ProjectThumb makers={this.props.makers}
-                              project={project}
-                              hideDate={hideDate}
+                  project={project}
+                  hideDate={hideDate}
                 />
               </li>
             );

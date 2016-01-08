@@ -20,10 +20,7 @@ export default class GroupedTexts extends Component {
   addGroup = (collection, category) => {
     const texts = this.textsForCategory(category);
     if (texts.length > 0) {
-      collection.push({
-        category: category,
-        texts: texts
-      });
+      collection.push({ category, texts });
     }
   };
 
@@ -61,7 +58,7 @@ export default class GroupedTexts extends Component {
             <section key={categoryKey}>
               {header}
               <ul className="texts-group">
-                {group.texts.map((text)=>{
+                {group.texts.map((text) => {
                   return (
                     <li key={text.id}>
                       <TextThumb text={text}/>

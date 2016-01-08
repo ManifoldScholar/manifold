@@ -3,10 +3,10 @@ import { expect } from 'chai';
 
 describe('utils/select', () => {
 
-  const maker1 = {attributes: {id: '1'}};
-  const maker2 = {attributes: {id: '2'}};
-  const text1 = {attributes: {id: '1'}};
-  const text2 = {attributes: {id: '2'}};
+  const maker1 = { attributes: { id: '1' } };
+  const maker2 = { attributes: { id: '2' } };
+  const text1 = { attributes: { id: '1' } };
+  const text2 = { attributes: { id: '2' } };
 
   const entities = {
     makers: {

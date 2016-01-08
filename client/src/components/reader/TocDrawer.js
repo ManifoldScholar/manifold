@@ -20,9 +20,9 @@ export default class TocDrawer extends Component {
     return (
         <div className={drawerClass}>
           <Toc
-              text={this.props.text}
-              tocDrawerVisible={this.props.visible}
-              hideTocDrawer={this.props.hideTocDrawer}
+            text={this.props.text}
+            tocDrawerVisible={this.props.visible}
+            hideTocDrawer={this.props.hideTocDrawer}
           />
         </div>
     );

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import {connect} from 'react-redux';
-import {pushState} from 'redux-router';
+import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 import hoistStatics from 'hoist-non-react-statics';
 
 export default function requireRole(roleIgnored, behaviorIgnored) {

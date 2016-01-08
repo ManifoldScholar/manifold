@@ -10,10 +10,10 @@ export default class ProjectFilters extends Component {
     let filter = {};
     switch (event.target.value) {
       case 'featured':
-        filter = {featured: true};
+        filter = { featured: true };
         break;
       case 'notFeatured':
-        filter = {featured: false};
+        filter = { featured: false };
         break;
       default:
         filter = {};
@@ -24,8 +24,8 @@ export default class ProjectFilters extends Component {
 
   render = () => {
     return (
-      <div className="select-browse" style={{marginBottom: 93}}>
-        <select onChange={this.filterChange.bind(this)} >
+      <div className="select-browse" style={{ marginBottom: 93 }}>
+        <select onChange={ this.filterChange } >
           <option value="all">Show All</option>
           <option value="featured">Featured</option>
           <option value="notFeatured">Not Featured</option>

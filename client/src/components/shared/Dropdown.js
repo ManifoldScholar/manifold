@@ -23,12 +23,11 @@ export default class Dropdown extends Component {
 
   render = () => {
     return (
-        <div>
-          {/* Second argument as props */}
-          {React.createElement(this.props.triggerComponent, {onClick: this.clickHandler})}
-          {React.createElement(this.props.bodyComponent, {...this.props})}
-        </div>
+      <div>
+        {/* Second argument as props */}
+        {React.createElement(this.props.triggerComponent, { onClick: this.clickHandler })}
+        {React.createElement(this.props.bodyComponent, { ...this.props })}
+      </div>
     );
   };
 }
-

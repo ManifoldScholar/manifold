@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import RoutingContext from 'react-router/lib/RoutingContext';
-import {isFunction} from 'lodash/lang';
+import { isFunction } from 'lodash/lang';
 
 class DelayContainer extends Component {
 
@@ -56,7 +56,11 @@ class DelayContainer extends Component {
     if (component && isFunction(component.fetchData)) {
       const promises = [];
       this.loadingStart();
-      promises.push(component.fetchData(props.store.getState, props.store.dispatch, props.routerProps.location, props.routerProps.params));
+      promises.push(component.fetchData(props.store.getState,
+        props.store.dispatch,
+        props.routerProps.location,
+        props.routerProps.params
+      ));
       Promise.all(promises).then(() => {
         this.loadingComplete();
       });

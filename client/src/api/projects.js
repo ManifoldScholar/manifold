@@ -5,7 +5,7 @@ export default {
       endpoint: '/api/v1/projects',
       method: 'GET',
       options: {
-        params: {filter, page}
+        params: { filter, page }
       }
     };
   },
@@ -24,19 +24,19 @@ export default {
       endpoint: '/api/v1/projects',
       method: 'GET',
       options: {
-        params: {filter, page}
+        params: { filter, page }
       }
     };
   },
 
   featuredProjects(limit = 6) {
-    const filter = {featured: true};
-    const page = {limit: limit};
+    const filter = { featured: true };
+    const page = { limit };
     return {
       endpoint: '/api/v1/projects',
       method: 'GET',
       options: {
-        params: {filter, page}
+        params: { filter, page }
       }
     };
   },
@@ -46,10 +46,9 @@ export default {
       endpoint: '/api/v1/projects',
       method: 'GET',
       options: {
-        params: {filter, page}
+        params: { filter, page }
       }
     };
   }
 
 };
-

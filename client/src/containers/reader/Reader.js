@@ -9,9 +9,11 @@ import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
 import { select } from '../../utils/select';
 import { startLogout } from '../../actions/shared/authentication';
-import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide } from '../../actions/shared/ui/visibility';
+import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide }
+  from '../../actions/shared/ui/visibility';
 import { values } from 'lodash/object';
-import { selectFont, incrementFontSize, decrementFontSize } from '../../actions/reader/ui/typography';
+import { selectFont, incrementFontSize, decrementFontSize }
+  from '../../actions/reader/ui/typography';
 import { setColorScheme } from '../../actions/reader/ui/colors';
 
 function fetchData(getState, dispatch, location, params) {
@@ -23,24 +25,24 @@ function fetchData(getState, dispatch, location, params) {
 function mapStateToProps(state) {
   const textId = state.collections.results.fetchOneText.entities;
   const text = state.collections.entities.texts[textId];
-  const {category, project, creators, contributors, textSections, tocSection, stylesheets} =
+  const { category, project, creators, contributors, textSections, tocSection, stylesheets } =
     select(text, state.collections.entities);
   const appearance = {
     typography: state.ui.typography,
     colors: state.ui.colors
   };
   return {
-    text: text,
-    category: category,
-    project: project,
-    creators: creators,
-    contributors: contributors,
-    textSections: textSections,
-    tocSection: tocSection,
-    stylesheets: stylesheets,
+    text,
+    category,
+    project,
+    creators,
+    contributors,
+    textSections,
+    tocSection,
+    stylesheets,
     authentication: state.authentication,
     visibility: state.ui.visibility,
-    appearance: appearance,
+    appearance,
   };
 }
 
@@ -77,7 +79,8 @@ class Reader extends Component {
 
   componentWillReceiveProps = (nextProps) => {
     // We reload the page on logout, to ensure that all data is cleared from the store.
-    if (nextProps.authentication.authenticated === false && this.props.authentication.authenticated === true) {
+    if (nextProps.authentication.authenticated === false &&
+      this.props.authentication.authenticated === true) {
       location.reload();
     }
   }
@@ -99,6 +102,10 @@ class Reader extends Component {
 
   render() {
     const text = this.props.text;
+    const hideLoginOverlay = bindActionCreators(
+      () => visibilityHide('loginOverlay'),
+      this.props.dispatch
+    );
     return (
       <BodyClass className="reader">
         <div>
@@ -106,24 +113,24 @@ class Reader extends Component {
           <DocumentMeta {...config.app}/>
           <LoadingBar />
           <Header
-              text={text}
-              authenticated={this.props.authentication.authToken === null ? false : true}
-              visibility={this.props.visibility }
-              appearance={this.props.appearance}
-              visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
-              visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}
-              visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
-              panelToggle={bindActionCreators((el) => panelToggle(el), this.props.dispatch)}
-              panelHide={bindActionCreators((el) => panelHide(el), this.props.dispatch)}
-              selectFont={bindActionCreators((el) => selectFont(el), this.props.dispatch)}
-              incrementFontSize={bindActionCreators(incrementFontSize, this.props.dispatch)}
-              decrementFontSize={bindActionCreators(decrementFontSize, this.props.dispatch)}
-              setColorScheme={bindActionCreators((el) => setColorScheme(el), this.props.dispatch)}
-              startLogout={bindActionCreators(startLogout, this.props.dispatch)}
+            text={text}
+            authenticated={this.props.authentication.authToken === null ? false : true}
+            visibility={this.props.visibility }
+            appearance={this.props.appearance}
+            visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
+            visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}
+            visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
+            panelToggle={bindActionCreators((el) => panelToggle(el), this.props.dispatch)}
+            panelHide={bindActionCreators((el) => panelHide(el), this.props.dispatch)}
+            selectFont={bindActionCreators((el) => selectFont(el), this.props.dispatch)}
+            incrementFontSize={bindActionCreators(incrementFontSize, this.props.dispatch)}
+            decrementFontSize={bindActionCreators(decrementFontSize, this.props.dispatch)}
+            setColorScheme={bindActionCreators((el) => setColorScheme(el), this.props.dispatch)}
+            startLogout={bindActionCreators(startLogout, this.props.dispatch)}
           />
           <LoginOverlay
-              visible={this.props.visibility.loginOverlay}
-              hideLoginOverlay={bindActionCreators(() => visibilityHide('loginOverlay'), this.props.dispatch)}
+            visible={this.props.visibility.loginOverlay}
+            hideLoginOverlay={hideLoginOverlay}
           />
           <main>
             {this.props.children}
@@ -136,4 +143,3 @@ class Reader extends Component {
 
 export default connect(
 )(Reader);
-

@@ -1,4 +1,4 @@
-import {createAction} from 'redux-actions';
+import { createAction } from 'redux-actions';
 
 export const selectFont = createAction('SELECT_FONT', subject => subject);
 export const incrementFontSize = createAction('INCREMENT_FONT_SIZE');

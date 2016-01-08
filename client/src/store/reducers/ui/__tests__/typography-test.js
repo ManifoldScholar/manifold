@@ -2,7 +2,7 @@ import typographyReducer from '../typography';
 import { expect } from 'chai';
 
 describe('store/reducers/ui/typography', () => {
-  it('should return the initial state', ()=> {
+  it('should return the initial state', () => {
     const state = typographyReducer(undefined, {});
     // Must mirror initial state declared in '../typography'
     expect(state).to.deep.equal({
@@ -15,12 +15,12 @@ describe('store/reducers/ui/typography', () => {
 });
 
 describe('store/reducers/ui/typography/selectFont', () => {
-  it('should set the value as the payload', ()=> {
+  it('should set the value as the payload', () => {
     const initialState = {
       font: 'serif'
     };
 
-    const action = {type: 'SELECT_FONT', payload: 'sans-serif'};
+    const action = { type: 'SELECT_FONT', payload: 'sans-serif' };
     const state = typographyReducer(initialState, action);
     expect(state).to.deep.equal({
       font: 'sans-serif'
@@ -35,7 +35,7 @@ describe('store/reducers/ui/typography/incrementFontSize', () => {
       sizeMax: 5
     };
 
-    const action = {type: 'INCREMENT_FONT_SIZE'};
+    const action = { type: 'INCREMENT_FONT_SIZE' };
     const state = typographyReducer(initialState, action);
     expect(state).to.deep.equal({
       size: 2,
@@ -49,7 +49,7 @@ describe('store/reducers/ui/typography/incrementFontSize', () => {
       sizeMax: 5
     };
 
-    const action = {type: 'INCREMENT_FONT_SIZE'};
+    const action = { type: 'INCREMENT_FONT_SIZE' };
     const state = typographyReducer(initialState, action);
     expect(state).to.deep.equal(initialState);
   });
@@ -62,7 +62,7 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
       sizeMin: -5
     };
 
-    const action = {type: 'DECREMENT_FONT_SIZE'};
+    const action = { type: 'DECREMENT_FONT_SIZE' };
     const state = typographyReducer(initialState, action);
     expect(state).to.deep.equal({
       size: 0,
@@ -76,7 +76,7 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
       sizeMin: -5
     };
 
-    const action = {type: 'DECREMENT_FONT_SIZE'};
+    const action = { type: 'DECREMENT_FONT_SIZE' };
     const state = typographyReducer(initialState, action);
     expect(state).to.deep.equal(initialState);
   });

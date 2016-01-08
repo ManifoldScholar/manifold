@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import classNames from 'classnames';
 
 export default class Toc extends Component {

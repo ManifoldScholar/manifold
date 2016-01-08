@@ -1,4 +1,4 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
 const initialState = {
   font: 'serif',
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const selectFont = (state, action) => {
-  return Object.assign({}, state, {font: action.payload});
+  return Object.assign({}, state, { font: action.payload });
 };
 
 const incrementFontSize = (state) => {
@@ -16,7 +16,7 @@ const incrementFontSize = (state) => {
   if (value < state.sizeMax) {
     value = value + 1;
   }
-  return Object.assign({}, state, {size: value});
+  return Object.assign({}, state, { size: value });
 };
 
 const decrementFontSize = (state) => {
@@ -24,7 +24,7 @@ const decrementFontSize = (state) => {
   if (value > state.sizeMin) {
     value = value - 1;
   }
-  return Object.assign({}, state, {size: value});
+  return Object.assign({}, state, { size: value });
 };
 
 export default handleActions({

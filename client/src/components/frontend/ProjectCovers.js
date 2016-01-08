@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {ProjectThumb} from './';
+import { ProjectThumb } from './';
 
 export default class ProjectCovers extends Component {
 
@@ -23,8 +23,8 @@ export default class ProjectCovers extends Component {
             return (
               <li key={projectId}>
                 <ProjectThumb makers={this.props.makers}
-                              project={project}
-                              hideMeta={hideMeta}
+                  project={project}
+                  hideMeta={hideMeta}
                 />
               </li>
             );

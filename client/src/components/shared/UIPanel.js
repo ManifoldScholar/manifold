@@ -16,9 +16,8 @@ export default class UIPanel extends Component {
     return (
         <div className={visibilityClass}>
           {/* Second argument as props */}
-          {React.createElement(this.props.bodyComponent, {...this.props})}
+          {React.createElement(this.props.bodyComponent, { ...this.props })}
         </div>
     );
   };
 }
-

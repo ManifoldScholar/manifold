@@ -16,7 +16,8 @@ export default class TextThumb extends Component {
     );
   };
 
-  // Since we only have demo icons at this point, thumbnail can either be an image or a placeholder icon
+  // Since we only have demo icons at this point, thumbnail can either be an image or a
+  // placeholder icon
   renderThumbnail = (text) => {
     let thumbnail = '';
     if (text.attributes.cover_url) {
@@ -61,7 +62,7 @@ export default class TextThumb extends Component {
         {/* Asset status markup only stub at this point, may be abstracted to child component */}
         <div className="asset-status">
           <div className="asset-completion">
-            <div className="complete" style={{width: '28%'}}></div>
+            <div className="complete" style={{ width: '28%' }}></div>
           </div>
 
           <ul className="asset-interactions">

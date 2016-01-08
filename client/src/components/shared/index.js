@@ -17,4 +17,3 @@ export {
   LoginOverlay,
   LoadingBar
 };
-

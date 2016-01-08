@@ -7,4 +7,3 @@ export default function createApiProxy() {
     changeOrigin: true
   });
 }
-

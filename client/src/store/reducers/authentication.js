@@ -1,4 +1,4 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
 const initialState = {
   authenticated: false,
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const startLogin = (state) => {
-  return Object.assign({}, state, {authenticating: true});
+  return Object.assign({}, state, { authenticating: true });
 };
 
 const startLogout = () => {
@@ -17,7 +17,7 @@ const startLogout = () => {
 
 const setUser = (state, action) => {
   const user = action.payload;
-  const newState = {user: user};
+  const newState = { user };
   return Object.assign({}, state, newState);
 };
 
@@ -26,13 +26,13 @@ const setUserFromWhoami = (state, action) => {
   const users = action.payload.entities.users;
   const id = action.payload.results;
   const user = users[id];
-  const newState = {user: Object.assign({}, {id: user.id}, user.attributes)};
+  const newState = { user: Object.assign({}, { id: user.id }, user.attributes) };
   return Object.assign({}, state, newState);
 };
 
 const setAuthToken = (state, action) => {
   const authToken = action.payload;
-  const newState = {authenticating: false, authenticated: true, authToken: authToken};
+  const newState = { authenticating: false, authenticated: true, authToken };
   return Object.assign({}, state, newState);
 };
 

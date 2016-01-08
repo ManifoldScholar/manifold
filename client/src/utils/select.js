@@ -23,4 +23,3 @@ export function select(entity, entities) {
   });
   return selection;
 }
-

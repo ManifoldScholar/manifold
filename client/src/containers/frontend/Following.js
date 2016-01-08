@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import { ProjectGrid, ProjectSummaryGrid, ProjectFilters } from '../../components/frontend';
 import { bindActionCreators } from 'redux';
 import { fetchFilteredProjects, fetchFeaturedProjects } from '../../actions/shared/collections';
@@ -52,6 +52,7 @@ export default class Following extends Component {
   };
 
   render = () => {
+    const updateProjectFilters = bindActionCreators(setProjectFilters, this.props.dispatch);
     return (
       <div>
         <section className="neutral20">
@@ -62,12 +63,13 @@ export default class Following extends Component {
                 {'Projects You\'re Following'}
               </h4>
               <div className="section-heading-utility-right">
-                <ProjectFilters updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)} />
+                <ProjectFilters updateAction={updateProjectFilters} />
               </div>
             </header>
-            <ProjectGrid makers={this.props.makers}
-                         projects={this.props.projects}
-                         entities={this.props.filteredProjects}
+            <ProjectGrid
+              makers={this.props.makers}
+              projects={this.props.projects}
+              entities={this.props.filteredProjects}
             />
           </div>
         </section>
@@ -84,9 +86,10 @@ export default class Following extends Component {
                 </Link>
               </div>
             </header>
-            <ProjectSummaryGrid makers={this.props.makers}
-                         projects={this.props.projects}
-                         entities={this.props.featuredProjects}
+            <ProjectSummaryGrid
+              makers={this.props.makers}
+              projects={this.props.projects}
+              entities={this.props.featuredProjects}
             />
           </div>
         </section>

@@ -28,7 +28,10 @@ export default class ProjectDetailHero extends Component {
           <div className="project-info">
             {this.listMakers()}
             <h1 className="project-title">
-              {this.props.project.attributes.title}<span className="subtitle">{this.props.project.attributes.subtitle}</span>
+              {this.props.project.attributes.title}
+              <span className="subtitle">
+                {this.props.project.attributes.subtitle}
+              </span>
             </h1>
             <section className="project-summary">
               <p>

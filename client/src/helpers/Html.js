@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import DocumentMeta from 'react-document-meta';
@@ -20,7 +20,7 @@ export default class Html extends Component {
   }
 
   render() {
-    const {assets, component, store} = this.props;
+    const { assets, component, store } = this.props;
     const content = component ? ReactDOM.renderToString(component) : '';
     const bodyClass = BodyClass.rewind();
     return (
@@ -33,18 +33,27 @@ export default class Html extends Component {
 
           {/* Import fonts from webkit */}
           <script src={'https://use.typekit.net/mnj5ltf.js'}></script>
-          <script dangerouslySetInnerHTML={{__html: 'try{Typekit.load({ async: true });}catch(e){}'}} charSet="UTF-8"/>
+          <script
+            dangerouslySetInnerHTML={{ __html: 'try{Typekit.load({ async: true });}catch(e){}' }}
+            charSet="UTF-8"
+          />
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {Object.keys(assets.styles).map((style, key) =>
             <link href={assets.styles[style]} key={key} media="screen, projection"
-                  rel="stylesheet" type="text/css" charSet="UTF-8"/>
+              rel="stylesheet" type="text/css" charSet="UTF-8"
+            />
           )}
 
         </head>
         <body className={bodyClass} >
-          <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
-          <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${serialize(store.getState())};`}} charSet="UTF-8"/>
+          <div id="content" dangerouslySetInnerHTML={{ __html: content }}/>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.__INITIAL_STATE__=${serialize(store.getState())};`
+            }}
+            charSet="UTF-8"
+          />
           <script src={assets.javascript.theme} charSet="UTF-8"/>
           <script src={assets.javascript.main} charSet="UTF-8"/>
         </body>

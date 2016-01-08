@@ -12,8 +12,8 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import cookie from 'cookie';
 import { setAuthToken } from './actions/shared/authentication';
-import {RoutingContext, match} from 'react-router';
-import {Provider} from 'react-redux';
+import { RoutingContext, match } from 'react-router';
+import { Provider } from 'react-redux';
 import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 import createApiProxy from './proxies/api';
@@ -61,7 +61,10 @@ app.use((req, res) => {
     store.dispatch(setAuthToken(authToken));
   }
 
-  match({ routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
+  match({
+    routes: getRoutes(store),
+    location: req.originalUrl
+  }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
@@ -78,7 +81,7 @@ app.use((req, res) => {
         renderProps.location,
         renderProps.params
       ).then(() => {
-        store.dispatch({type: 'RECORD_DATA_FETCHING', payload: req.originalUrl});
+        store.dispatch({ type: 'RECORD_DATA_FETCHING', payload: req.originalUrl });
         const component = (
           <Provider store={store} key="provider">
             <RoutingContext {...renderProps} />
@@ -89,7 +92,14 @@ app.use((req, res) => {
           res.status(status);
         }
         res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+          ReactDOM.renderToString(
+            <Html
+              assets={webpackIsomorphicTools.assets()}
+              component={component}
+              store={store}
+            />
+          )
+        );
       });
     }
   });
@@ -126,9 +136,11 @@ if (listenOn) {
     console.log(`-------------------`.cyan);
     console.log(`The Manifold Asset Proxy is proxying the following paths:`.green);
     console.log('');
-    const assetPathMax = config.assetProxyPaths.reduce((memo, current) => { return current.length > memo ? current.length : memo; }, 0);
+    const assetPathMax = config.assetProxyPaths.reduce((memo, current) => {
+      return current.length > memo ? current.length : memo;
+    }, 0);
     config.assetProxyPaths.forEach((value) => {
-      console.log(`${pad(value, assetPathMax, ' ', false)}  >  localhost:${config.assetPort}${value}`.green );
+      console.log(`${pad(value, assetPathMax, ' ', false)}  >  localhost:${config.assetPort}${value}`.green); // eslint-disable-line max-len
     });
     console.log('');
     console.log('');
@@ -137,9 +149,11 @@ if (listenOn) {
     console.log(`-------------------`.cyan);
     console.log(`The Manifold API Proxy is proxying the following paths:`.green);
     console.log('');
-    const apiPathMax = config.apiProxyPaths.reduce((memo, current) => { return current.length > memo ? current.length : memo; }, 0);
+    const apiPathMax = config.apiProxyPaths.reduce((memo, current) => {
+      return current.length > memo ? current.length : memo;
+    }, 0);
     config.apiProxyPaths.forEach((value) => {
-      console.log(`${pad(value, apiPathMax, ' ', false)}  >  ${config.apiUri}${value}`.green );
+      console.log(`${pad(value, apiPathMax, ' ', false)}  >  ${config.apiUri}${value}`.green);
     });
     console.log('');
     console.log('');

@@ -1,5 +1,5 @@
-import {createAction} from 'redux-actions';
-import {tokensAPI, usersAPI} from '../../api';
+import { createAction } from 'redux-actions';
+import { tokensAPI, usersAPI } from '../../api';
 import createApiAction from '../helpers/createApiAction';
 
 export const actions = {

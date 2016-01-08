@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
 export default class ProjectGrid extends Component {
   static propTypes = {
@@ -75,7 +75,8 @@ export default class ProjectGrid extends Component {
         <div className="figure-wrapper">
           <figure>
             <img src={project.attributes.coverUrl}
-                 alt={`Click to view ${project.attributes.title}`} />
+              alt={`Click to view ${project.attributes.title}`}
+            />
             <i className="manicon manicon-plus"></i>
           </figure>
         </div>

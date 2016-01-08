@@ -1,12 +1,12 @@
-import {handleActions} from 'redux-actions';
-import {timestamp} from '../../utils/time';
-import {camelize} from 'humps';
-import {actions} from '../../actions/shared/collections';
+import { handleActions } from 'redux-actions';
+import { timestamp } from '../../utils/time';
+import { camelize } from 'humps';
+import { actions } from '../../actions/shared/collections';
 
 const collectionActions = Object.values(actions);
 export const collectionEntities = ['texts', 'projects', 'makers'];
 
-const resultsTemplate = { entities: [], query: {}, receivedAt: null};
+const resultsTemplate = { entities: [], query: {}, receivedAt: null };
 
 const initialResults = {};
 collectionActions.forEach((action) => {
@@ -45,7 +45,11 @@ const fetch = {
 
     const newState = {
       results: Object.assign({}, state.results, fetchResults),
-      entities: Object.assign({}, state.entities, mergeEntities(state.entities, action.payload.entities))
+      entities: Object.assign(
+        {},
+        state.entities,
+        mergeEntities(state.entities, action.payload.entities)
+      )
     };
     return Object.assign({}, state, newState);
   },

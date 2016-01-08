@@ -33,8 +33,12 @@ class Login extends Component {
     );
   };
 
-  // TODO: Abstract logout UI into separate container for reusability as well
   logoutUI = () => {
+    const loginNotice = (
+      <p className="login-notice">
+        {`You are logged in as ${this.props.authentication.user.email}`}
+      </p>
+    );
     return (
       <div className="container">
         <header className="rel">
@@ -44,7 +48,7 @@ class Login extends Component {
           </h4>
         </header>
         <form method="post" onSubmit={this.handleLogout}>
-          { this.props.authentication.user ? <p className="login-notice">{`You are logged in as ${this.props.authentication.user.email}`}</p> : ''}
+          { this.props.authentication.user ? loginNotice : ''}
           <input type="submit" value="Log Out" className="button-secondary" />
         </form>
       </div>

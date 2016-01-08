@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { select } from '../../utils/select';
-import {Link} from 'react-router';
-import { EventList, PublishedText, GroupedTexts, MetaAttributes, ProjectDetailHero } from '../../components/frontend';
+import { Link } from 'react-router';
+import { EventList, PublishedText, GroupedTexts, MetaAttributes, ProjectDetailHero }
+  from '../../components/frontend';
 import { fetchOneProject } from '../../actions/shared/collections';
 import connectData from '../../decorators/connectData';
 
@@ -16,10 +17,11 @@ function mapStateToProps(state) {
   const fetchOneProjectResult = state.collections.results.fetchOneProject.entities;
   const projects = state.collections.entities.projects;
   const project = projects[fetchOneProjectResult];
-  const {creators, contributors, texts, textCategories} = select(project, state.collections.entities);
+  const { creators, contributors, texts, textCategories } =
+    select(project, state.collections.entities);
 
   return {
-    project: project,
+    project,
     creators: creators || [],
     contributors: contributors || [],
     texts: texts || [],

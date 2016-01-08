@@ -7,5 +7,12 @@ import authentication from './authentication';
 import isomorphic from './isomorphic';
 
 const routing = routeReducer;
-const reducers = combineReducers({collections, error, ui, routing, authentication, isomorphic});
+const reducers = combineReducers({
+  collections,
+  error,
+  ui,
+  routing,
+  authentication,
+  isomorphic
+});
 export default reducers;

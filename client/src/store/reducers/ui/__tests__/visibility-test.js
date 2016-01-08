@@ -28,7 +28,7 @@ describe('store/reducers/ui/visibility/panelToggle', () => {
       }
     };
 
-    const action = {type: 'PANEL_TOGGLE', payload: 'appearance'};
+    const action = { type: 'PANEL_TOGGLE', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
     expect(state).to.deep.equal({
       uiPanels: {
@@ -38,7 +38,8 @@ describe('store/reducers/ui/visibility/panelToggle', () => {
     });
   });
 
-  it('should set a single panel in panelSolo object to true, and set all other panels to false', () => {
+  it('should set a single panel in panelSolo object to true, and set all other panels ' +
+    'to false', () => {
     const initialState = {
       uiPanels: {
         user: true,
@@ -46,7 +47,7 @@ describe('store/reducers/ui/visibility/panelToggle', () => {
         layers: true
       }
     };
-    const action = {type: 'PANEL_TOGGLE', payload: 'appearance'};
+    const action = { type: 'PANEL_TOGGLE', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
     expect(state).to.deep.equal({
       uiPanels: {
@@ -64,7 +65,7 @@ describe('store/reducers/ui/visibility/panelToggle', () => {
         appearance: true
       }
     };
-    const action = {type: 'PANEL_TOGGLE', payload: 'appearance'};
+    const action = { type: 'PANEL_TOGGLE', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
     expect(state).to.deep.equal({
       uiPanels: {
@@ -74,14 +75,14 @@ describe('store/reducers/ui/visibility/panelToggle', () => {
     });
   });
 
-  it('should set a single panel to false without affecting other panels', ()=> {
+  it('should set a single panel to false without affecting other panels', () => {
     const initialState = {
       uiPanels: {
         user: true,
         appearance: true
       }
     };
-    const action = {type: 'PANEL_TOGGLE', payload: 'appearance'};
+    const action = { type: 'PANEL_TOGGLE', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
     expect(state).to.deep.equal({
       uiPanels: {
@@ -101,7 +102,7 @@ describe('store/reducers/ui/visibility/panelShow', () => {
       }
     };
 
-    const action = {type: 'PANEL_SHOW', payload: 'appearance'};
+    const action = { type: 'PANEL_SHOW', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
     expect(state).to.deep.equal({
       uiPanels: {
@@ -111,7 +112,8 @@ describe('store/reducers/ui/visibility/panelShow', () => {
     });
   });
 
-  it('should set a single panel in panelSolo object to true, and set all other panels to false', () => {
+  it('should set a single panel in panelSolo object to true, and set all other panels ' +
+    'to false', () => {
     const initialState = {
       uiPanels: {
         user: true,
@@ -119,7 +121,7 @@ describe('store/reducers/ui/visibility/panelShow', () => {
         layers: true
       }
     };
-    const action = {type: 'PANEL_SHOW', payload: 'appearance'};
+    const action = { type: 'PANEL_SHOW', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
     expect(state).to.deep.equal({
       uiPanels: {
@@ -139,7 +141,7 @@ describe('store/reducers/ui/visibility/panelHide', () => {
         appearance: true
       }
     };
-    const action = {type: 'PANEL_HIDE', payload: 'appearance'};
+    const action = { type: 'PANEL_HIDE', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
     expect(state).to.deep.equal({
       uiPanels: {
@@ -149,4 +151,3 @@ describe('store/reducers/ui/visibility/panelHide', () => {
     });
   });
 });
-

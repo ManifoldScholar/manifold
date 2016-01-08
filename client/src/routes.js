@@ -1,8 +1,8 @@
 import React from 'react';
-import {Route, IndexRedirect, IndexRoute} from 'react-router';
-import {Reader, Section} from './containers/reader';
-import {Frontend, Home, Following, ProjectDetail, Login} from './containers/frontend';
-import {NotFound} from './containers/shared';
+import { Route, IndexRedirect, IndexRoute } from 'react-router';
+import { Reader, Section } from './containers/reader';
+import { Frontend, Home, Following, ProjectDetail, Login } from './containers/frontend';
+import { NotFound } from './containers/shared';
 
 export default () => {
   return (

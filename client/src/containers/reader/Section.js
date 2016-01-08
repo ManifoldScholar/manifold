@@ -73,9 +73,9 @@ class Reader extends Component {
 
   cleanAttributes = (attr) => {
     const map = {
-      'class': 'className',
-      'for': 'htmlFor',
-      'colspan': 'colSpan'
+      class: 'className',
+      for: 'htmlFor',
+      colspan: 'colSpan'
     };
     const mapped = mapKeys(attr, (attributeValue, attributeName) => {
       return map.hasOwnProperty(attributeName) ? map[attributeName] : attributeName;
@@ -90,7 +90,7 @@ class Reader extends Component {
     const declarations = stylesString.split(';');
     const object = declarations.reduce((previous, value) => {
       const parts = value.split(':');
-      previous[parts[0]] = parts[1];
+      previous[parts[0]] = parts[1]; // eslint-disable-line no-param-reassign
       return previous;
     }, {});
     return camelizeKeys(object);
@@ -102,10 +102,10 @@ class Reader extends Component {
       const childElements = [];
       children.forEach((child, index) => {
         const adjustedChild = Object.assign({}, child);
-        adjustedChild.attributes = Object.assign({}, adjustedChild.attributes, {key: index});
+        adjustedChild.attributes = Object.assign({}, adjustedChild.attributes, { key: index });
         const childNode = this.visit(adjustedChild, node);
-        if (childNode ) {
-          childElements.push(childNode );
+        if (childNode) {
+          childElements.push(childNode);
         }
       });
       return childElements;
@@ -113,7 +113,11 @@ class Reader extends Component {
   };
 
   visitElementNode = (node, parentIgnored) => {
-    const out = React.createElement(node.tag, this.cleanAttributes(node.attributes), this.traverse(node) );
+    const out = React.createElement(
+      node.tag,
+      this.cleanAttributes(node.attributes),
+      this.traverse(node)
+    );
     return out;
   };
 
@@ -143,7 +147,8 @@ class Reader extends Component {
       'scheme-dark': colorScheme === 'dark'
     });
 
-    // Font selection may be handled differently later, but for now, variants are based on class names
+    // Font selection may be handled differently later, but for now, variants are based
+    // on class names
     const textSectionClass = classNames({
       'manifold-text-section text-section': true,
       'font-serif': typography.font === 'serif',
@@ -166,4 +171,3 @@ class Reader extends Component {
 
 export default connect(
 )(Reader);
-

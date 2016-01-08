@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
 export default class ProjectEvent extends Component {
 
@@ -18,10 +18,10 @@ export default class ProjectEvent extends Component {
     const el = this.refs.eventContainer;
     const centerPadding = (el.parentNode.offsetHeight - el.offsetHeight) / 2;
     if (centerPadding > 0) {
-      this.setState({containerPadding: {
+      this.setState({ containerPadding: {
         paddingTop: centerPadding + 'px',
         paddingBottom: centerPadding + 'px'
-      }});
+      } });
     }
   };
 
@@ -114,7 +114,7 @@ export default class ProjectEvent extends Component {
   };
 
 
-  renderEventByType = (event)=> {
+  renderEventByType = (event) => {
     switch (event.type) {
       case 'comment':
         return this.renderEventComment(event);
