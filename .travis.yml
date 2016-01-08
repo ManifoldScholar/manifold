@@ -1,0 +1,21 @@
+language: ruby
+
+rvm:
+  - 2.2.3
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database manifold_test;' -U postgres
+
+env:
+  global:
+    - API="/home/travis/build/ManifoldScholar/manifold/api"
+    - RAILS_DB_USER=postgres
+
+gemfile: api/Gemfile
+script:
+  - cd api
+  - ./bin/rails generate manifold:secrets
+  - bundle exec rake spec
