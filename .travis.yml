@@ -19,3 +19,6 @@ script:
   - cd api
   - ./bin/rails generate manifold:secrets
   - bundle exec rake spec
+  - cd ../client
+  - npm install
+  - npm run test
