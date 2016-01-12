@@ -139,4 +139,63 @@
       margin-left: 20px;
     }
   }
+
+  .control-margins {
+    button {
+      @include buttonUnstyled();
+      width: 120px;
+      height: 60px;
+      background-color: $neutralWhite;
+      transition: all $duration $timing;
+
+      &.margin-increase .compound-icon {
+        position: relative;
+        display: inline-block;
+        width: 83px;
+        height: 23px;
+
+        i {
+          position: absolute;
+          top: 0;
+          left: 0;
+          font-size: 28px;
+        }
+      }
+
+      &.margin-decrease .compound-icon {
+        position: relative;
+        display: inline-block;
+        width: 85px;
+        height: 23px;
+
+        i {
+          position: absolute;
+          top: 0;
+          left: 0;
+          font-size: 28px;
+        }
+      }
+
+      // Icon coloring
+      .manicon-margins-narrow-text,  .manicon-margins-wide-text {
+        color: $neutral40;
+      }
+
+      .manicon-margins-narrow-arrows, .manicon-margins-wide-arrows {
+        color: $neutralOffBlack;
+      }
+
+      &:hover {
+        background-color: $accentPrimary;
+
+        i {
+          color: $neutralWhite;
+        }
+      }
+
+      + button {
+        margin-left: 20px;
+      }
+    }
+  }
 }
