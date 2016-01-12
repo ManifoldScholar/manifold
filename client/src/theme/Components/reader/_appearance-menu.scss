@@ -90,6 +90,7 @@
   }
 
   .control-color {
+    margin-bottom: 40px;
     button {
       @include buttonUnstyled;
       width: 120px;
@@ -122,6 +123,66 @@
         }
       }
     }
+    button + button {
+      margin-left: 20px;
+    }
+  }
+
+  .control-margins {
+    button {
+      @include buttonUnstyled();
+      width: 120px;
+      height: 60px;
+      background-color: $neutralWhite;
+      transition: all $duration $timing;
+
+      &.margin-increase {
+        .compound-icon {
+          display: inline-block;
+          width: 83px;
+          height: 23px;
+          position: relative;
+          i {
+            position: absolute;
+            font-size: 28px;
+            left: 0;
+            top: 0;
+          }
+        }
+      }
+
+      &.margin-decrease {
+        .compound-icon {
+          display: inline-block;
+          width: 85px;
+          height: 23px;
+          position: relative;
+          i {
+            position: absolute;
+            font-size: 28px;
+            left: 0;
+            top: 0;
+          }
+        }
+      }
+
+      // Icon coloring
+      .manicon-margins-narrow-text,  .manicon-margins-wide-text {
+        color: $neutral40;
+      }
+
+      .manicon-margins-narrow-arrows, .manicon-margins-wide-arrows {
+        color: $neutralOffBlack;
+      }
+
+      &:hover {
+        background-color: $accentPrimary;
+        i {
+          color: $neutralWhite;
+        }
+      }
+    }
+
     button + button {
       margin-left: 20px;
     }

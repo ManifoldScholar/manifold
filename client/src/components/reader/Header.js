@@ -21,6 +21,8 @@ export default class Header extends Component {
     selectFont: PropTypes.func,
     incrementFontSize: PropTypes.func,
     decrementFontSize: PropTypes.func,
+    incrementMargins: PropTypes.func,
+    decrementMargins: PropTypes.func,
     setColorScheme: PropTypes.func,
     startLogout: PropTypes.func
   };
@@ -126,9 +128,11 @@ export default class Header extends Component {
             // Props required by body component
             appearance={this.props.appearance}
             selectFont={this.props.selectFont}
+            setColorScheme={this.props.setColorScheme}
             incrementFontSize={this.props.incrementFontSize}
             decrementFontSize={this.props.decrementFontSize}
-            setColorScheme={this.props.setColorScheme}
+            incrementMargins={this.props.incrementMargins}
+            decrementMargins={this.props.decrementMargins}
           />
           <UIPanel
             id="user"

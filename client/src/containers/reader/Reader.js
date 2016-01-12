@@ -12,7 +12,7 @@ import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide }
   from '../../actions/shared/ui/visibility';
 import { values } from 'lodash/object';
-import { selectFont, incrementFontSize, decrementFontSize }
+import { selectFont, incrementFontSize, decrementFontSize, incrementMargins, decrementMargins }
   from '../../actions/reader/ui/typography';
 import { setColorScheme } from '../../actions/reader/ui/colors';
 
@@ -90,6 +90,23 @@ class Reader extends Component {
     this.props.history.push(`/read/${this.props.text.id}/section/${firstSectionId}`);
   };
 
+  headerMethods = () => {
+    return {
+      visibilityToggle: bindActionCreators((el) => visibilityToggle(el), this.props.dispatch),
+      visibilityHide: bindActionCreators((el) => visibilityHide(el), this.props.dispatch),
+      visibilityShow: bindActionCreators((el) => visibilityShow(el), this.props.dispatch),
+      panelToggle: bindActionCreators((el) => panelToggle(el), this.props.dispatch),
+      panelHide: bindActionCreators((el) => panelHide(el), this.props.dispatch),
+      selectFont: bindActionCreators((el) => selectFont(el), this.props.dispatch),
+      incrementFontSize: bindActionCreators(incrementFontSize, this.props.dispatch),
+      decrementFontSize: bindActionCreators(decrementFontSize, this.props.dispatch),
+      incrementMargins: bindActionCreators(incrementMargins, this.props.dispatch),
+      decrementMargins: bindActionCreators(decrementMargins, this.props.dispatch),
+      setColorScheme: bindActionCreators((el) => setColorScheme(el), this.props.dispatch),
+      startLogout: bindActionCreators(startLogout, this.props.dispatch)
+    };
+  };
+
   renderStyles = () => {
     return values(this.props.stylesheets).map((stylesheet, index) => {
       return (
@@ -117,16 +134,7 @@ class Reader extends Component {
             authenticated={this.props.authentication.authToken === null ? false : true}
             visibility={this.props.visibility }
             appearance={this.props.appearance}
-            visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
-            visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}
-            visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
-            panelToggle={bindActionCreators((el) => panelToggle(el), this.props.dispatch)}
-            panelHide={bindActionCreators((el) => panelHide(el), this.props.dispatch)}
-            selectFont={bindActionCreators((el) => selectFont(el), this.props.dispatch)}
-            incrementFontSize={bindActionCreators(incrementFontSize, this.props.dispatch)}
-            decrementFontSize={bindActionCreators(decrementFontSize, this.props.dispatch)}
-            setColorScheme={bindActionCreators((el) => setColorScheme(el), this.props.dispatch)}
-            startLogout={bindActionCreators(startLogout, this.props.dispatch)}
+            {...this.headerMethods()}
           />
           <LoginOverlay
             visible={this.props.visibility.loginOverlay}
