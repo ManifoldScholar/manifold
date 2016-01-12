@@ -1,17 +1,23 @@
-// <nav> wrapper around <ul>
+// <nav> wrapper around <ul>\
 .grid-project-covers {
+  // Nested variable used only in module
+  $rowPadding: 30px;
+
   margin-right: -1.542%;
   margin-left: -1.542%;
   ul {
     @include listHorizontal;
     display: block;
+    // Pull back bottom row padding
+    margin-bottom: -$rowPadding;
   }
   li {
     // Inline blocks
     width: 16.667%;
-    vertical-align: top;
-    padding: 0px 1.542%;
     font-size: 0;
+    padding: 0px 1.542%;
+    margin-bottom: $rowPadding;
+    vertical-align: top;
     // NB: Requires font-size reset if it contains typography
     img {
       width: 100%;
