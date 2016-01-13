@@ -40,7 +40,8 @@ $baseLineHeight: 1.2;
 $containerWidthFull: 1235px; // Maximum container width of 1135 plus maximum gutter padding
 $containerPaddingFull: 50px;
 
-$containerWidthNarrow: 650px; // Narrow container width for reading
+$containerWidthNarrow: 680px; // Narrow container width for reading
+$containerPaddingMin: 15px; // Minimum gutter padding
 
 // Font Weights
 // These are convenience variables to keep font weight declarations consistent

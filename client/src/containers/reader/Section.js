@@ -56,6 +56,13 @@ class Reader extends Component {
     };
   };
 
+  getMarginSize = (sizeIndex) => {
+    const baseSizes = [790, 680, 500];
+    return {
+      maxWidth: baseSizes[sizeIndex] + 'px'
+    };
+  };
+
   reset = () => {
     this.counter = 0;
   };
@@ -159,8 +166,8 @@ class Reader extends Component {
     const section = this.getSection();
     return (
         <section className={readerAppearanceClass}>
-          <div className="container-focus">
-            <div className={textSectionClass} style={this.getFontSize(typography.size)}>
+          <div className="container-focus" style={this.getMarginSize(typography.margins.current)}>
+            <div className={textSectionClass} style={this.getFontSize(typography.fontSize.current)}>
               {this.buildTextSection()}
             </div>
           </div>
