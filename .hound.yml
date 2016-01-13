@@ -1,2 +1,5 @@
 ruby:
   config_file: api/.rubocop.yml
+
+scss:
+  config_file: .scss-lint.yml
