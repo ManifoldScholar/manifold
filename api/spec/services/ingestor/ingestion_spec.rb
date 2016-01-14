@@ -6,7 +6,7 @@ RSpec.describe Ingestor::Ingestion do
   it "should raise an error if a path is not passed to the constructor" do
     expect do
       Ingestor::Ingestion.new
-    end.to raise_error
+    end.to raise_error(ArgumentError)
   end
 
   describe "when instantiated" do

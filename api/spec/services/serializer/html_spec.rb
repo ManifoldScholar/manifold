@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe HtmlSerializer do
+RSpec.describe Serializer::Html do
 
-  let(:serializer) { HtmlSerializer.new() }
+  let(:serializer) { Serializer::Html.new() }
 
   it "should wrap top level siblings in a div element" do
     node = "<p>AAA</p><p>BBB</p>"

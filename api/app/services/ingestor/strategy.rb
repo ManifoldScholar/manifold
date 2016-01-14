@@ -68,7 +68,7 @@ module Ingestor
       def validate_strategy_base_class(label, strategy)
         base = Ingestor::Strategy::Base
         return if strategy.ancestors.include?(base)
-        fail "#{label.inspect} is not a #{base}"
+        fail IngestionFailed, "#{label.inspect} is not a #{base}"
       end
     end
   end

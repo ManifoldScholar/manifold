@@ -10,7 +10,6 @@ module Ingestor
         #
         # @author Zach Davis
         class Stylesheet
-
           # @param [Text] text A Text model instance with TextSections that
           #   require transformation
           # @param [Logger] logger A logger object that implements the Ruby
@@ -21,7 +20,7 @@ module Ingestor
           end
 
           def transform_styles(raw_styles)
-            CssValidator.new.validate(raw_styles)
+            Validator::Stylesheet.new.validate(raw_styles)
           end
         end
       end
