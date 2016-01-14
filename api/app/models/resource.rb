@@ -26,6 +26,7 @@ class Resource < ActiveRecord::Base
     video/mp4
     video/webm
   )
+  validates :attachment, attachment_presence: true
   validates_attachment_file_name :attachment, matches: [
     /gif\Z/,
     /jpe?g\Z/,

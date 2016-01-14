@@ -1,5 +1,6 @@
 require "rails_helper"
 
+# rubocop:disable Metrics/LineLength
 RSpec.describe Ingestor::Strategy do
   before :all do
     class ValidSampleStrategy < Ingestor::Strategy::Base
@@ -33,7 +34,7 @@ RSpec.describe Ingestor::Strategy do
     end
     expect do
       Ingestor::Strategy.add(:invalid_strategy, invalid_strategy)
-    end.to raise_error(/is not a Ingestor::Strategy::Base/)
+    end.to raise_error(Ingestor::IngestionFailed)
   end
 
   it "should not allow a strategy that does not have an ingest method" do
@@ -42,7 +43,7 @@ RSpec.describe Ingestor::Strategy do
     end
     expect do
       Ingestor::Strategy.add(:invalid_strategy, invalid_strategy)
-    end.to raise_error
+    end.to raise_error(NoMethodError)
   end
 
   it "should not allow a strategy that does not have a can_ingest? method" do
@@ -51,7 +52,7 @@ RSpec.describe Ingestor::Strategy do
     end
     expect do
       Ingestor::Strategy.add(:invalid_strategy, invalid_strategy)
-    end.to raise_error
+    end.to raise_error(NoMethodError)
   end
 
   it "should allow me to clear the strategies" do
