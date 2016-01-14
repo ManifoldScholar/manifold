@@ -1,9 +1,11 @@
 .login-page {
+
   .login-form {
     @include loginFormPrimary;
+
     input[type="text"], input[type="password"] {
-      border-color: $neutral40;
       width: 300px;
+      border-color: $neutral40;
     }
   }
 
@@ -13,6 +15,7 @@
 
   .login-external {
     margin-top: 45px;
+
     .button-secondary-dark {
       display: block;
       width: 300px;
@@ -21,8 +24,8 @@
 
   .login-notice {
     @include templateHead;
-    font-size: $type60;
     margin-bottom: 35px;
+    font-size: $type60;
   }
 
   .button-secondary {

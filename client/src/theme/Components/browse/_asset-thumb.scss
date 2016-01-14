@@ -1,0 +1,128 @@
+.asset-thumb {
+  .asset-link {
+    @include clearfix;
+  }
+
+  .asset-image {
+    position: relative;
+    float: left;
+    width: 24%;
+
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+
+    .manicon-new {
+      position: absolute;
+      top: 10.5%;
+      left: -20px;
+      display: block;
+      width: 41px;
+      height: 41px;
+      padding-top: 15px;
+      font-size: 11px;
+      color: $neutralWhite;
+      text-align: center;
+      background-color: $accentPrimary;
+      border-radius: 100%;
+    }
+  }
+
+  .asset-image-placeholder {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 136%;
+    border: 4px dotted $neutral40;
+  }
+
+  .asset-description {
+    float: left;
+    width: 76%;
+    padding-left: 30px;
+
+    .asset-title {
+      @include titlePrimary;
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: $type110;
+
+      .subtitle {
+        margin-top: 15px;
+      }
+    }
+
+    .asset-date {
+      @include utilityPrimary;
+      color: $neutral50;
+    }
+  }
+
+  .asset-status {
+    @include clearfix;
+    margin-top: 20px;
+  }
+
+  .asset-completion {
+    position: relative;
+    float: left;
+    width: 24%;
+    height: 26px;
+    background-color: $neutral10;
+
+    .complete {
+      position: absolute;
+      left: 0;
+      height: 100%;
+      background-color: $accentPrimary;
+    }
+  }
+
+  // <ul> of icons or links
+  .asset-interactions {
+    @include listHorizontal;
+    display: block;
+    float: left;
+    padding-left: 23px;
+    margin-top: -3px;
+
+    li {
+      @include utilityPrimary;
+      font-size: $type80;
+      color: $neutral40;
+      vertical-align: top;
+
+      + li {
+        margin-left: 37px;
+      }
+    }
+
+    .manicon {
+      display: inline-block;
+      vertical-align: middle;
+
+      // React generated text wrapper
+      + span {
+        margin-left: 8px;
+      }
+    }
+
+    .manicon-highlight {
+      font-size: 30px;
+    }
+
+    .manicon-person-word-bubble {
+      font-size: 36px;
+    }
+
+    a {
+      color: $neutral80;
+      text-decoration: none;
+
+      .manicon {
+        color: $accentPrimary;
+      }
+    }
+  }
+}

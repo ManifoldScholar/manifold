@@ -1,15 +1,17 @@
 .texts-group {
+
   @include listHorizontal;
-  font-size: 0px;
   margin-right: -65px;
   margin-left: -65px;
+  font-size: 0;
+
   > li {
     // Font base size reset
-    font-size: 16px;
     width: 50%;
-    margin-bottom: 73px;
     padding-right: 65px;
     padding-left: 65px;
+    margin-bottom: 73px;
+    font-size: 16px;
     vertical-align: top;
   }
 }

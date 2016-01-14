@@ -5,13 +5,13 @@
 
 // Mixins
 // --------------------------
- @mixin templateCopy {
-   font-family: "freight-text-pro", serif;
- }
+@mixin templateCopy {
+  font-family: 'freight-text-pro', serif;
+}
 
- @mixin templateHead {
-   font-family: "sofia-pro",sans-serif;
- }
+@mixin templateHead {
+  font-family: 'sofia-pro',sans-serif;
+}
 
 // Abstracted in order to allow scoped changes
 @mixin readerHead {

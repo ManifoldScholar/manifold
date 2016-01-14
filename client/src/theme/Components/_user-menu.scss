@@ -2,6 +2,7 @@
 .button-avatar {
   @include buttonUnstyled;
   transition: background-color $duration $timing;
+
   .avatar {
     @include buttonAvatar();
   }
@@ -9,49 +10,61 @@
 
 // Global styles
 .user-menu {
-  background-color: $neutral10;
   padding: 40px;
+  background-color: $neutral10;
+
   .tail {
-    display: none;
     @include panelTail;
+    display: none;
   }
+
   ul {
     @include listUnstyled;
+
     li {
       @include templateHead;
       font-size: $type100;
     }
+
     // Menu items can be buttons or links
     li, button, a {
       @include buttonUnstyled;
-      text-decoration: none;
       color: $neutral80;
+      text-decoration: none;
+
       &:hover {
         color: $accentPrimary;
       }
+
+      + li {
+        margin-top: 28px;
+      }
     }
-    li + li {
-      margin-top: 28px;
-    }
+
   }
+
   // Icons used in menu
   .manicon {
     display: inline-block;
-    vertical-align: middle;
     width: 48px;
-    text-align: right;
     margin-right: 23px;
-  }
-  // React generated element
-  .manicon + span {
-    display: inline-block;
+    text-align: right;
     vertical-align: middle;
+
+    // React generated element
+    + span {
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
+
+
   .manicon-person-pencil {
     font-size: 44px;
   }
+
   .manicon-circle-arrow-out-right {
-    font-size: 32px;
     padding-right: 6px; // NP
+    font-size: 32px;
   }
 }

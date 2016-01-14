@@ -5,19 +5,22 @@
 
   margin-right: -1.542%;
   margin-left: -1.542%;
+
   ul {
     @include listHorizontal;
     display: block;
     // Pull back bottom row padding
     margin-bottom: -$rowPadding;
   }
+
   li {
     // Inline blocks
     width: 16.667%;
-    font-size: 0;
-    padding: 0px 1.542%;
+    padding: 0 1.542%;
     margin-bottom: $rowPadding;
+    font-size: 0;
     vertical-align: top;
+
     // NB: Requires font-size reset if it contains typography
     img {
       width: 100%;
