@@ -14,3 +14,6 @@ Metrics/LineLength:
 
 Metrics/MethodLength:
   Max: 15
+
+Style/DotPosition:
+  EnforcedStyle: leading
