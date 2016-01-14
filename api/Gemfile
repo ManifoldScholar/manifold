@@ -19,7 +19,11 @@ gem "colorize"
 gem "css_parser"
 
 group :development, :test do
-  gem "rspec-rails", "~> 3.0"
+  gem "rspec-rails", github: "rspec/rspec-rails"
+  gem "rspec-support", github: "rspec/rspec-support"
+  gem "rspec-core", github: "rspec/rspec-core"
+  gem "rspec-expectations", github: "rspec/rspec-expectations"
+  gem "rspec-mocks", github: "rspec/rspec-mocks"
   gem "factory_girl"
 end
 
