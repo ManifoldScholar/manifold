@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Ingestor::Strategy::EPUB::Creator::TextSections do
-
   EpubInspector = Ingestor::Strategy::EPUB::Inspector::EPUB
   TextSectionCreator = Ingestor::Strategy::EPUB::Creator::TextSections
   SpineItemInspector = Ingestor::Strategy::EPUB::Inspector::SpineItem
@@ -15,16 +14,16 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::TextSections do
   end
 
   let(:text) do
-    text = Text.new(:unique_identifier => '1234')
-    allow(text).to receive(:find_ingestion_source_by_identifier) { IngestionSource.new() }
+    text = Text.new(unique_identifier: "1234")
+    allow(text).to receive(:find_ingestion_source_by_identifier) { IngestionSource.new }
     return text
   end
 
   let(:created_models) do
     @text_sections_creator.create(@spine_item_nodes,
-                                 @epub_inspector,
-                                 text,
-                                 text.text_sections)
+                                  @epub_inspector,
+                                  text,
+                                  text.text_sections)
   end
 
   it "responds to logger methods" do
@@ -42,9 +41,8 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::TextSections do
   it "updates existing objects rather than create new ones" do
     @spine_item_nodes.each do |node|
       inspector = SpineItemInspector.new(node)
-      text.text_sections.build(:source_identifier => inspector.idref)
+      text.text_sections.build(source_identifier: inspector.idref)
     end
     expect(created_models.first).to eq(text.text_sections.first)
   end
-
 end
