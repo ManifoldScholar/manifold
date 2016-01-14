@@ -25,18 +25,17 @@ RSpec.describe User, :type => :model do
     end
 
     it "should be valid with no changes" do
-      puts user.inspect
-      user.should be_valid
+      expect(user).to be_valid
     end
 
     it "should not be valid with an empty password" do
       user.password = user.password_confirmation = ""
-      user.should_not be_valid
+      expect(user).to_not be_valid
     end
 
     it "should be valid with a new (valid) password" do
       user.password = user.password_confirmation = "new password"
-      user.should be_valid
+      expect(user).to be_valid
     end
 
     it "should be able to authenticate" do
