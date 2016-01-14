@@ -1,9 +1,9 @@
 require "rails_helper"
 
+# rubocop:disable Metrics/LineLength
 RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
-
   context "with an EPUB2" do
-    let(:version) { '2.0' }
+    let(:version) { "2.0" }
     let(:opf_content) do
       xml = '
       <package version="2.0" unique-identifier="uid" xmlns="http://www.idpf.org/2007/opf">
@@ -56,7 +56,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
       inspector = Ingestor::Strategy::EPUB::Inspector::EPUB.new(path, logger)
       allow(inspector).to receive(:v2?).and_return(true)
       allow(inspector).to receive(:nav_xml_with_ns).and_return(Nokogiri::XML(ncx_content))
-      allow(inspector).to receive(:nav_path).and_return('some/path')
+      allow(inspector).to receive(:nav_path).and_return("some/path")
       inspector
     end
     let(:toc_inspector) do
@@ -91,11 +91,9 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
 
     it "creates a TOC structure item with the correct values" do
       last_toc_item = toc_structure.last
-      expect(last_toc_item).to eq({
-                                    label: "Copyright Page",
-                                    anchor: "cip",
-                                    source_path: "some/ump-feeley1-0004.xhtml"
-                                  })
+      expect(last_toc_item).to eq(label: "Copyright Page",
+                                  anchor: "cip",
+                                  source_path: "some/ump-feeley1-0004.xhtml")
     end
 
     it "parses the correct number of page list items" do
@@ -104,11 +102,9 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
 
     it "creates a page list structure item with the correct values" do
       last_page_list_item = page_list_structure.last
-      expect(last_page_list_item).to eq({
-                                          label: "4",
-                                          anchor: "page4",
-                                          source_path: "some/intro.xhtml"
-                                        })
+      expect(last_page_list_item).to eq(label: "4",
+                                        anchor: "page4",
+                                        source_path: "some/intro.xhtml")
     end
 
     it "parses the correct number of guide items" do
@@ -117,12 +113,9 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
 
     it "creates a guide structure item with the correct values" do
       last_landmarks_item = landmarks_structure.last
-      expect(last_landmarks_item).to eq({
-                                          label: "Title Page",
-                                          anchor: "bk",
-                                          source_path: "some/ump-feeley1-0003.xhtml"
-                                        })
+      expect(last_landmarks_item).to eq(label: "Title Page",
+                                        anchor: "bk",
+                                        source_path: "some/ump-feeley1-0003.xhtml")
     end
   end
 end
-

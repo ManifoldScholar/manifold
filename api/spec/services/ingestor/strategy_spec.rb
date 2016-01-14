@@ -1,5 +1,6 @@
 require "rails_helper"
 
+# rubocop:disable Metrics/LineLength
 RSpec.describe Ingestor::Strategy do
   before :all do
     class ValidSampleStrategy < Ingestor::Strategy::Base

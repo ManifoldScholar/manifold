@@ -1,25 +1,25 @@
 require "rails_helper"
 
+# rubocop:disable Metrics/LineLength
 RSpec.describe Ingestor::Strategy::EPUB::Inspector::ManifestItem do
-
   inspector_class = Ingestor::Strategy::EPUB::Inspector::ManifestItem
 
-  let(:doc) {
+  let(:doc) do
     Nokogiri('
     <manifest>
       <item id="css-003" properties="rambo" href="css/css_file_2.css" media-type="text/css" />
       <item />
     </manifest>
     ')
-  }
+  end
 
-  let(:first_node) {
+  let(:first_node) do
     doc.root.first_element_child
-  }
+  end
 
-  let(:last_node) {
+  let(:last_node) do
     doc.root.last_element_child
-  }
+  end
 
   let(:inspector) { inspector_class.new(first_node) }
   let(:no_attribute_node_inspector) { inspector_class.new(last_node) }
@@ -51,5 +51,4 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::ManifestItem do
   it "returns empty string when an attribute does not exist" do
     expect(no_attribute_node_inspector.id).to eq("")
   end
-
 end

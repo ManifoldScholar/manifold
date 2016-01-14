@@ -1,16 +1,16 @@
 require "rails_helper"
 
+# rubocop:disable Metrics/LineLength
 RSpec.describe Serializer::Html do
-
-  let(:serializer) { Serializer::Html.new() }
+  let(:serializer) { Serializer::Html.new }
 
   it "should wrap top level siblings in a div element" do
     node = "<p>AAA</p><p>BBB</p>"
     object = {
       node_type: "element", tag: "div", attributes: {},
       children: [
-        {node_type: "element", tag: "p", attributes: {}, children: [{node_type: "text", content: "AAA"}]},
-        {node_type: "element", tag: "p", attributes: {}, children: [{node_type: "text", content: "BBB"}]}
+        { node_type: "element", tag: "p", attributes: {}, children: [{ node_type: "text", content: "AAA" }] },
+        { node_type: "element", tag: "p", attributes: {}, children: [{ node_type: "text", content: "BBB" }] }
       ]
     }
     expect(serializer.serialize(node)).to eq(object)
@@ -53,7 +53,7 @@ RSpec.describe Serializer::Html do
   it "should extract element attributes" do
     node = "<div class=\"AAA\"></div>"
     object = {
-      node_type: "element", tag: "div", attributes: {:class => "AAA"}
+      node_type: "element", tag: "div", attributes: { class: "AAA" }
     }
     expect(serializer.serialize(node)).to eq(object)
   end
@@ -83,5 +83,4 @@ RSpec.describe Serializer::Html do
     }
     expect(serializer.serialize(node)).to eq(object)
   end
-
 end
