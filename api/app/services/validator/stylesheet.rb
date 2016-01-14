@@ -37,8 +37,9 @@ module Validator
     end
 
     def css_property_blacklist_for_selector(selector)
-      tag = selector_tag(selector)
+      tag = rightmost_selection(selector)
       blacklist = Validator::Constants::CSS_PROPERTY_BLACKLIST
+      return blacklist if tag.include?(".") || tag.include?("#")
       tag_constant = "TAG_#{tag.upcase}_CSS_PROPERTY_BLACKLIST"
       if Validator::Constants.const_defined?(tag_constant)
         blacklist |= Validator::Constants.const_get(tag_constant)
@@ -46,12 +47,13 @@ module Validator
       blacklist
     end
 
-    def selector_tag(selector)
+    def rightmost_selection(selector)
       selector.split(/[, >\+~]/).last.split(/[\[:]/).first
     end
 
     def valid_selector?(selector)
-      !CSS_SELECTOR_BLACKLIST.include?(selector_tag(selector))
+      tag = rightmost_selection(selector)
+      !CSS_SELECTOR_BLACKLIST.include?(tag)
     end
   end
 end

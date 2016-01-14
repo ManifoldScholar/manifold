@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.configure do |c|
   c.include Helpers
 end
-
 # rubocop:disable Metrics/LineLength
+
 RSpec.describe Validator::Stylesheet do
   let(:scope_selector) { Validator::Constants::CSS_SCOPE_SELECTOR }
   let(:validator) { Validator::Stylesheet.new }
@@ -148,6 +148,18 @@ RSpec.describe Validator::Stylesheet do
     invalid = ".manifold-text-section a { color: red }"
     valid = ".manifold-text-section a { }"
     results = validator.validate(invalid)
+    expect(compact(results)).to eq compact(valid)
+  end
+
+  it "should ignore the tag specific property blacklist for class selectors" do
+    valid = ".manifold-text-section a.something { color: red; }"
+    results = validator.validate(valid)
+    expect(compact(results)).to eq compact(valid)
+  end
+
+  it "should ignore the tag specific property blacklist for ID selectors" do
+    valid = ".manifold-text-section a#something { color: red; }"
+    results = validator.validate(valid)
     expect(compact(results)).to eq compact(valid)
   end
 end
