@@ -5,7 +5,7 @@ set :branch, 'development'
 
 
 set :application, 'my_app_name'
-set :repo_url, 'git@github.com:castiron/manifold.git'
+set :repo_url, 'git@github.com:ManifoldScholar/manifold.git'
 set :deploy_to, '/home/manifold/deploy'
 set :scm, :git
 set :format, :pretty
