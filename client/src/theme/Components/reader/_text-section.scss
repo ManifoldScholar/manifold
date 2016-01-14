@@ -42,10 +42,4 @@
     color: $accentSecondary;
   }
 
-  h2 {
-    @include chapterHeading;
-    &:first-child {
-      margin-bottom: 96px;
-    }
-  }
 }
