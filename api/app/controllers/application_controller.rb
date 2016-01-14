@@ -6,6 +6,8 @@ class ApplicationController < ActionController::API
   after_action :set_content_type
   before_action :load_current_user
 
+  myvar = true
+
   rescue_from AuthenticationTimeoutError, with: :authentication_timeout
   rescue_from NotAuthenticatedError, with: :user_not_authenticated
 
