@@ -61,9 +61,7 @@
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.10.0",
-    "warning": "^2.1.0"
-  },
-  "devDependencies": {
+    "warning": "^2.1.0",
     "autoprefixer-loader": "^3.1.0",
     "babel": "^6.0.12",
     "babel-core": "^5.8.25",
@@ -110,6 +108,8 @@
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.4.1",
     "webpack-isomorphic-tools": "^2.2.4"
+  },
+  "devDependencies": {
   },
   "engines": {
     "node": "4.1.1"
