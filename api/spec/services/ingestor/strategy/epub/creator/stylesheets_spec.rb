@@ -1,8 +1,8 @@
 require "rails_helper"
 
+# rubocop:disable Metrics/LineLength
 RSpec.describe Ingestor::Strategy::EPUB::Creator::Stylesheets do
-
-  let(:metadata_node) { File.open("#{Rails.root}/spec/data/epubs/fragments/metadata_node.xml") { |f| Nokogiri::XML(f) }}
+  let(:metadata_node) { File.open("#{Rails.root}/spec/data/epubs/fragments/metadata_node.xml") { |f| Nokogiri::XML(f) } }
 
   let(:manifest_items_node) do
     xml = '
@@ -22,25 +22,25 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::Stylesheets do
 
   let(:manifest_items) { manifest_items_node.xpath("//xmlns:item") }
   let(:stylesheets_creator) { Ingestor::Strategy::EPUB::Creator::Stylesheets.new(Rails.logger, metadata_node) }
-  let(:sample_css) {
+  let(:sample_css) do
     "
       body {
         font-weight: bold;
       }
     "
-  }
-  let(:path) { '/test-tmp-path' }
-  let(:ingestion_sources) {
+  end
+  let(:path) { "/test-tmp-path" }
+  let(:ingestion_sources) do
     [
       IngestionSource.new(source_identifier: "css-002")
     ]
-  }
+  end
   let(:text) { Text.new(ingestion_sources: ingestion_sources) }
   let(:models) { stylesheets_creator.create(manifest_items, path, epub_inspector, text, text.stylesheets) }
 
   let(:fake_rendition_source) do
     file = StringIO.new(sample_css)
-    filename = 'a_file.html'
+    filename = "a_file.html"
     metaclass = class << file; self; end
     metaclass.class_eval do
       define_method(:original_filename) { filename }
@@ -49,7 +49,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::Stylesheets do
     return file
   end
 
-  let(:epub_inspector) { double(Ingestor::Strategy::EPUB::Inspector, :get_rendition_source => fake_rendition_source) }
+  let(:epub_inspector) { double(Ingestor::Strategy::EPUB::Inspector, get_rendition_source: fake_rendition_source) }
 
   it "responds to logger methods" do
     expect(stylesheets_creator).to respond_to(:info)
@@ -79,5 +79,4 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::Stylesheets do
   it "associates the stylesheet no ingestion source if the source does not exist" do
     expect(models.last.ingestion_source).to be nil
   end
-
 end

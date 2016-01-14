@@ -19,6 +19,8 @@ module Validator
       @out.split("\n").map(&:squish).join("\n").strip
     end
 
+    private
+
     def visit_selector(*args)
       selector, declarations, _specificity = *args
       return unless valid_selector?(selector)
@@ -27,16 +29,29 @@ module Validator
       ruleset = CssParser::RuleSet.new(nil, declarations)
       ruleset.expand_shorthand!
       ruleset.each_declaration do |property, value, _important|
-        unless CSS_PROPERTY_BLACKLIST.include?(property)
+        unless css_property_blacklist_for_selector(selector).include?(property)
           @out << "  #{property}: #{value}; "
         end
       end
       @out << "}\n"
     end
 
+    def css_property_blacklist_for_selector(selector)
+      tag = selector_tag(selector)
+      blacklist = Validator::Constants::CSS_PROPERTY_BLACKLIST
+      tag_constant = "TAG_#{tag.upcase}_CSS_PROPERTY_BLACKLIST"
+      if Validator::Constants.const_defined?(tag_constant)
+        blacklist |= Validator::Constants.const_get(tag_constant)
+      end
+      blacklist
+    end
+
+    def selector_tag(selector)
+      selector.split(/[, >\+~]/).last.split(/[\[:]/).first
+    end
+
     def valid_selector?(selector)
-      tag = selector.split(/[, >\+~]/).last.split(/[\[:]/).first
-      !CSS_SELECTOR_BLACKLIST.include?(tag)
+      !CSS_SELECTOR_BLACKLIST.include?(selector_tag(selector))
     end
   end
 end

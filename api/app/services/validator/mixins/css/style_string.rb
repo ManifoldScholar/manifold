@@ -15,11 +15,13 @@ module Validator
           styles.join("; ")
         end
 
+        # rubocop:disable Style/EachWithObject
         def style_string_to_hash(style_string)
           return {} if style_string.nil?
-          style_string.split(";").map(&:strip).each_with_object({}) do |out, declaration|
+          style_string.split(";").map(&:strip).inject({}) do |out, declaration|
             property, value = declaration.split(":").map(&:strip)
             out[property] = value
+            out
           end
         end
       end

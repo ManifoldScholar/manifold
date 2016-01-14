@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Ingestor::Strategy::EPUB::Creator::TextTitles do
-
   TextTitlesCreator = Ingestor::Strategy::EPUB::Creator::TextTitles
   MetadataInspector = Ingestor::Strategy::EPUB::Inspector::Metadata
 
@@ -30,12 +29,12 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::TextTitles do
   end
 
   it "updates existing objects rather than create new ones" do
-    text = Text.new(:unique_identifier => '1234')
+    text = Text.new(unique_identifier: "1234")
     @title_nodes.each do |node|
       node_inspector = MetadataInspector.new(node, @metadata_node)
-      text.titles.build(:value => node_inspector.text.presence)
+      text.titles.build(value: node_inspector.text.presence)
     end
-    expect(@titles_creator.create(@title_nodes, text.titles).first).to eq(text.titles.first)
+    expect(@titles_creator.create(@title_nodes, text.titles).first)
+      .to eq(text.titles.first)
   end
-
 end

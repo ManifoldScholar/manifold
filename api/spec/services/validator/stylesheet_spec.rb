@@ -4,10 +4,11 @@ RSpec.configure do |c|
   c.include Helpers
 end
 
+# rubocop:disable Metrics/LineLength
 RSpec.describe Validator::Stylesheet do
   let(:scope_selector) { Validator::Constants::CSS_SCOPE_SELECTOR }
-  let(:validator) { Validator::Stylesheet.new() }
-  let(:blacklisted_property) { Validator::Constants::CSS_PROPERTY_BLACKLIST.first}
+  let(:validator) { Validator::Stylesheet.new }
+  let(:blacklisted_property) { Validator::Constants::CSS_PROPERTY_BLACKLIST.first }
 
   it "should return a string" do
     valid_css = "#{scope_selector} p { font-weight: bold; }"
@@ -79,7 +80,6 @@ RSpec.describe Validator::Stylesheet do
   end
 
   describe "with complex selectors" do
-
     invalid_test_cases = [
       ["element", "* { foo: bar; }"],
       ["general sibling", "div ~ * { foo: bar; }"],
@@ -114,7 +114,7 @@ RSpec.describe Validator::Stylesheet do
       ["root psuedo-class", "*:root { foo: bar; }"],
       ["attribute selector", "*[foo=\"bar\"] { foo: bar; }"]
     ]
-    valid_test_cases = invalid_test_cases.map { |test_case| [test_case[0], test_case[1].sub("*", "div")]}
+    valid_test_cases = invalid_test_cases.map { |test_case| [test_case[0], test_case[1].sub("*", "div")] }
 
     invalid_test_cases.each do |test_case|
       it "it does not allow blacklisted selector when selector is #{test_case[0]} selector: #{test_case[1]}" do
@@ -128,10 +128,7 @@ RSpec.describe Validator::Stylesheet do
         expect(compact(validator.validate(test_case[1]))).to eq compact(valid)
       end
     end
-
   end
-
-
 
   it "should not allow a blacklisted selector when there are multiple selectors" do
     invalid = "body, p { font-weight: bold; }"
@@ -139,7 +136,6 @@ RSpec.describe Validator::Stylesheet do
     results = validator.validate(invalid)
     expect(compact(results)).to eq compact(valid)
   end
-
 
   it "should pass through allowed properties" do
     invalid = "p { #{blacklisted_property}: some_value; font-weight: bold; }"
@@ -154,6 +150,4 @@ RSpec.describe Validator::Stylesheet do
     results = validator.validate(invalid)
     expect(compact(results)).to eq compact(valid)
   end
-
-
 end
