@@ -73,6 +73,14 @@ namespace :upload do
   end
 end
 
+namespace :ingest do
+  task :texts do
+    on roles(:app) do
+      execute 'cd /home/manifold/deploy/current/api && ./bin/rake ingest:texts'
+    end
+  end
+end
+
 namespace :setup do
   task :manifold do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
