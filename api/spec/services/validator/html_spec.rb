@@ -1,7 +1,9 @@
 require "rails_helper"
 
+# rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::Html do
   let(:validator) { Validator::Html.new }
+  let(:css_value_map) { Validator::Constants::CSS_VALUE_MAP }
 
   it "should wrap top level siblings in a div element" do
     fragment = "<p>AAA</p><p>BBB</p>"
@@ -93,6 +95,18 @@ RSpec.describe Validator::Html do
   it "shouldn't allow color on an a tag" do
     fragment = "<a style=\"color: blue\">link</a>"
     valid = "<a>link</a>"
+    expect(validator.validate(fragment).delete("\n")).to eq(valid)
+  end
+
+  it "rewrites mapped css values" do
+    fragment = "<div style=\"font-size: x-small\"></div>"
+    valid = "<div style=\"font-size: #{css_value_map["x-small"]}\"></div>"
+    expect(validator.validate(fragment).delete("\n")).to eq(valid)
+  end
+
+  it "does not rewrite unmapped css values" do
+    fragment = "<div style=\"font-size: .5em\"></div>"
+    valid = "<div style=\"font-size: .5em\"></div>"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 end

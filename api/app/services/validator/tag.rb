@@ -19,6 +19,7 @@ module Validator
       convert_measured_attribute_to_style!(node, "width", "max-width")
       remove_blacklisted_attributes!(node)
       remove_blacklisted_css_properties!(node)
+      map_css_values!(node)
     end
 
     private
@@ -58,6 +59,15 @@ module Validator
         node.attributes[attr] || next
         node.attributes[attr].remove
       end
+    end
+
+    def map_css_values!(node)
+      return unless node.attributes["style"]
+      clean_hash = node_style_hash(node)
+      clean_hash.transform_values! do |value|
+        css_value_map(value)
+      end
+      node["style"] = hash_to_style_string(clean_hash)
     end
 
     def convert_attribute_to_style!(node, attr_name, property_name, value = nil)

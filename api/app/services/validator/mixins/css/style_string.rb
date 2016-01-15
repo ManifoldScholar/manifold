@@ -9,6 +9,12 @@ module Validator
           "#{value.to_i}px"
         end
 
+        def css_value_map(value)
+          map = Validator::Constants::CSS_VALUE_MAP
+          return value unless map.key?(value.downcase)
+          map[value.downcase]
+        end
+
         def hash_to_style_string(styles_hash)
           styles = []
           styles_hash.each { |key, value| styles.push("#{key}: #{value}") }

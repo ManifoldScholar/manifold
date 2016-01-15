@@ -12,5 +12,14 @@ module Validator
                                  content contenteditable defer draggable dropzone height
                                  id keytype language manifest required sandbox shape size
                                  sizes tabindex width align)
+    CSS_VALUE_MAP = {
+      "xx-small" => ".7em",
+      "x-small" => ".7em",
+      "small" => ".8em",
+      "medium" => "1em",
+      "large" => "1.2em",
+      "x-large" => "1.3em",
+      "xx-large" => "1.3em"
+    }
   end
 end

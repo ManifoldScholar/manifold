@@ -3,10 +3,12 @@ require "rails_helper"
 RSpec.configure do |c|
   c.include Helpers
 end
-# rubocop:disable Metrics/LineLength
 
+# rubocop:disable Metrics/LineLength
+# rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::Stylesheet do
   let(:scope_selector) { Validator::Constants::CSS_SCOPE_SELECTOR }
+  let(:css_value_map) { Validator::Constants::CSS_VALUE_MAP }
   let(:validator) { Validator::Stylesheet.new }
   let(:blacklisted_property) { Validator::Constants::CSS_PROPERTY_BLACKLIST.first }
 
@@ -145,20 +147,33 @@ RSpec.describe Validator::Stylesheet do
   end
 
   it "should respect the tag specific property blacklist" do
-    invalid = ".manifold-text-section a { color: red }"
-    valid = ".manifold-text-section a { }"
+    invalid = "#{scope_selector} a { color: red }"
+    valid = "#{scope_selector} a { }"
     results = validator.validate(invalid)
     expect(compact(results)).to eq compact(valid)
   end
 
   it "should ignore the tag specific property blacklist for class selectors" do
-    valid = ".manifold-text-section a.something { color: red; }"
+    valid = "#{scope_selector} a.something { color: red; }"
     results = validator.validate(valid)
     expect(compact(results)).to eq compact(valid)
   end
 
   it "should ignore the tag specific property blacklist for ID selectors" do
-    valid = ".manifold-text-section a#something { color: red; }"
+    valid = "#{scope_selector} a#something { color: red; }"
+    results = validator.validate(valid)
+    expect(compact(results)).to eq compact(valid)
+  end
+
+  it "rewrites mapped css values" do
+    invalid = ".au { font-size: medium; }"
+    valid = "#{scope_selector}  .au { font-size: #{css_value_map["medium"]}; }"
+    results = validator.validate(invalid)
+    expect(compact(results)).to eq compact(valid)
+  end
+
+  it "does not rewrite unmapped css values" do
+    valid = "#{scope_selector} h2 { font-weight: bold; }"
     results = validator.validate(valid)
     expect(compact(results)).to eq compact(valid)
   end

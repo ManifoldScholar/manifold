@@ -5,6 +5,7 @@ module Validator
   # structure will work with ReactDom.
   class Stylesheet
     include Constants
+    include Mixins::Css::StyleString
 
     def initialize
       @out = ""
@@ -30,7 +31,7 @@ module Validator
       ruleset.expand_shorthand!
       ruleset.each_declaration do |property, value, _important|
         unless css_property_blacklist_for_selector(selector).include?(property)
-          @out << "  #{property}: #{value}; "
+          @out << "  #{property}: #{css_value_map(value)}; "
         end
       end
       @out << "}\n"
