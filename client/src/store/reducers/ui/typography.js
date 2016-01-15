@@ -2,33 +2,42 @@ import { handleActions } from 'redux-actions';
 
 const initialState = {
   font: 'serif',
-  size: 3,
-  sizeMax: 5,
-  sizeMin: 0
+  fontSize: {
+    current: 3,
+    max: 5,
+    min: 0
+  },
+  margins: {
+    current: 1,
+    max: 3,
+    min: 0
+  }
 };
 
 const selectFont = (state, action) => {
   return Object.assign({}, state, { font: action.payload });
 };
 
-const incrementFontSize = (state) => {
-  let value = state.size;
-  if (value < state.sizeMax) {
-    value = value + 1;
+const incrementAttribute = (state, attribute) => {
+  const parameter = state[attribute];
+  if (parameter.current < parameter.max) {
+    parameter.current = parameter.current + 1;
   }
-  return Object.assign({}, state, { size: value });
+  return Object.assign({}, state, { [attribute]: parameter });
 };
 
-const decrementFontSize = (state) => {
-  let value = state.size;
-  if (value > state.sizeMin) {
-    value = value - 1;
+const decrementAttribute = (state, attribute) => {
+  const parameter = state[attribute];
+  if (parameter.current > parameter.min) {
+    parameter.current = parameter.current - 1;
   }
-  return Object.assign({}, state, { size: value });
+  return Object.assign({}, state, { [attribute]: parameter });
 };
 
 export default handleActions({
   SELECT_FONT: selectFont,
-  INCREMENT_FONT_SIZE: incrementFontSize,
-  DECREMENT_FONT_SIZE: decrementFontSize
+  INCREMENT_FONT_SIZE: (state) => { return incrementAttribute(state, 'fontSize'); },
+  DECREMENT_FONT_SIZE: (state) => { return decrementAttribute(state, 'fontSize'); },
+  INCREMENT_MARGINS: (state) => { return incrementAttribute(state, 'margins'); },
+  DECREMENT_MARGINS: (state) => { return decrementAttribute(state, 'margins'); }
 }, initialState);

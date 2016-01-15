@@ -6,9 +6,11 @@ export default class AppearanceMenuBody extends Component {
   static propTypes = {
     appearance: PropTypes.object,
     selectFont: PropTypes.func,
+    setColorScheme: PropTypes.func,
     incrementFontSize: PropTypes.func,
     decrementFontSize: PropTypes.func,
-    setColorScheme: PropTypes.func
+    incrementMargins: PropTypes.func,
+    decrementMargins: PropTypes.func,
   };
 
   setColorHandler = (event, scheme) => {
@@ -31,11 +33,21 @@ export default class AppearanceMenuBody extends Component {
     this.props.decrementFontSize();
   };
 
-  handleSerifButtonClick = (event) => {
+  incrementMarginsHandler = (event) => {
+    event.stopPropagation();
+    this.props.incrementMargins();
+  };
+
+  decrementMarginsHandler = (event) => {
+    event.stopPropagation();
+    this.props.decrementMargins();
+  };
+
+  serifButtonHandler = (event) => {
     this.selectFontHandler(event, 'serif');
   };
 
-  handleSansSerifButtonClick = (event) => {
+  sansSerifButtonHandler = (event) => {
     this.selectFontHandler(event, 'sans-serif');
   };
 
@@ -50,6 +62,7 @@ export default class AppearanceMenuBody extends Component {
 
   render = () => {
     const typography = this.props.appearance.typography;
+    const fontSize = this.props.appearance.typography.fontSize;
     const colorScheme = this.props.appearance.colors.colorScheme;
 
     // Conditional Classes
@@ -75,14 +88,14 @@ export default class AppearanceMenuBody extends Component {
           <div className="control-font">
             <button
               className={serifButtonClass}
-              onClick={this.handleSerifButtonClick}
+              onClick={this.serifButtonHandler}
             >
               {'Serif'}
             </button>
 
             <div className="font-size">
               <button
-                disabled={typography.size === typography.sizeMin ||
+                disabled={fontSize.current === fontSize.min ||
                   typography.font === 'sans-serif'}
                 onClick={this.decrementSizeHandler}
               >
@@ -92,7 +105,7 @@ export default class AppearanceMenuBody extends Component {
                 </span>
               </button>
               <button
-                disabled={typography.size === typography.sizeMax ||
+                disabled={fontSize.current === fontSize.max ||
                   typography.font === 'sans-serif'}
                 onClick={this.incrementSizeHandler}
               >
@@ -105,14 +118,14 @@ export default class AppearanceMenuBody extends Component {
           </div>
           <div className="control-font">
             <button className={sansSerifButtonClass}
-              onClick={this.handleSansSerifButtonClick}
+              onClick={this.sansSerifButtonHandler}
             >
               {'Sans Serif'}
             </button>
 
             <div className="font-size">
               <button
-                disabled={typography.size === typography.sizeMin ||
+                disabled={fontSize.current === fontSize.min ||
                   typography.font === 'serif'}
                 onClick={this.decrementSizeHandler}
               >
@@ -122,7 +135,7 @@ export default class AppearanceMenuBody extends Component {
                 </span>
               </button>
               <button
-                disabled={typography.size === typography.sizeMax ||
+                disabled={fontSize.current === fontSize.max ||
                   typography.font === 'serif'}
                 onClick={this.incrementSizeHandler}
               >
@@ -149,6 +162,27 @@ export default class AppearanceMenuBody extends Component {
               <i className="manicon manicon-check"></i>
               <span className="screen-reader-text">
                 {'Click to use dark color scheme in reader'}
+              </span>
+            </button>
+          </div>
+
+          <div className="control-margins">
+            <button className="margin-increase" onClick={this.incrementMarginsHandler}>
+              <i className="compound-icon">
+                <i className="manicon manicon-margins-narrow-arrows"></i>
+                <i className="manicon manicon-margins-narrow-text"></i>
+              </i>
+              <span className="screen-reader-text">
+                {'Click to increase text margins'}
+              </span>
+            </button>
+            <button className="margin-decrease" onClick={this.decrementMarginsHandler}>
+              <i className="compound-icon">
+                <i className="manicon manicon-margins-wide-arrows"></i>
+                <i className="manicon manicon-margins-wide-text"></i>
+              </i>
+              <span className="screen-reader-text">
+                {'Click to increase text margins'}
               </span>
             </button>
           </div>
