@@ -3,3 +3,6 @@ ruby:
 
 scss:
   config_file: .scss-lint.yml
+
+javascript:
+  enabled: false
