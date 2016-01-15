@@ -73,9 +73,12 @@
 }
 
 @mixin containerNarrow {
+  // Default max width
   max-width: $containerWidthNarrow;
   margin-right: auto;
   margin-left: auto;
+  padding-right: $containerPaddingMin;
+  padding-left: $containerPaddingMin;
 }
 
 
