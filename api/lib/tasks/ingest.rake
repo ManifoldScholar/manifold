@@ -4,9 +4,18 @@ namespace :ingest do
     ingest(args.path, args.log_level)
   end
 
-  desc "Ingests EPUB3 files in /epubs into Manifold"
+  desc "Ingests EPUB3 files in /texts into Manifold"
   task :texts, [:log_level] => :environment do |_t, _args|
     epubs = Dir["../texts/*"]
+    epubs.reject { |epub| epub.start_with?("../DS") }.each do |epub|
+      puts epub
+      ingest(epub, :debug)
+    end
+  end
+
+  desc "Ingests EPUB3 files in /user_texts into Manifold"
+  task :user_texts, [:log_level] => :environment do |_t, _args|
+    epubs = Dir["../user_texts/*"]
     epubs.reject { |epub| epub.start_with?("../DS") }.each do |epub|
       puts epub
       ingest(epub, :debug)
