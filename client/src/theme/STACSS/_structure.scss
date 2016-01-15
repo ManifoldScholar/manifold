@@ -45,18 +45,18 @@
   @if $mode == heavy {
     &:before,
     &:after {
-      content: " ";
       display: table;
+      content: '';
     }
+
     &:after {
       clear: both;
     }
-  }
-  @else {
+  } @else {
     &:after {
-      content: " ";
       display: block;
       clear: both;
+      content: '';
     }
   }
 }
@@ -82,14 +82,15 @@
 // Lists
 // --------------------------------------------------------
 @mixin listUnstyled {
-  list-style-type: none;
   padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
+  list-style-type: none;
 }
 
 @mixin listHorizontal {
   @include listUnstyled;
+
   li {
     display: inline-block;
   }
@@ -102,12 +103,15 @@
   .field + .field {
     margin-top: 27px;
   }
+
   label {
     @include inputLabelPrimary;
   }
+
   input[type="text"], input[type="password"] {
     @include inputPrimary;
   }
+
   .button-secondary {
     display: block;
     margin-top: 30px;

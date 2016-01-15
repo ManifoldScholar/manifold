@@ -47,18 +47,18 @@ $type20: 12px;
 // --------------------------------------------------------
 @mixin headingPrimary {
   @include templateHead;
+  margin-top: 0;
+  margin-bottom: 75px;
   font-size: $type120;
   font-weight: $regular;
   line-height: 1.32;
-  margin-top: 0;
-  margin-bottom: 75px;
 }
 
 @mixin headingTertiary {
   @include templateHead;
+  margin-top: 0;
   font-size: $type70;
   font-weight: $semibold;
-  margin-top: 0;
 }
 
 
@@ -84,14 +84,15 @@ $type20: 12px;
   font-size: $type120;
   font-weight: $semibold;
   color: $neutralOffBlack;
+
   .subtitle {
     @include templateCopy;
     display: block;
+    margin-top: 18px;
     font-size: $type90;
     font-style: italic;
     font-weight: $regular; // OD
     letter-spacing: 0.031em;
     color: $accentSecondary;
-    margin-top: 18px;
   }
 }

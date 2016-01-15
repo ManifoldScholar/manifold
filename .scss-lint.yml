@@ -2,6 +2,7 @@
 
 scss_files: "**/*.scss"
 plugin_directories: ['.scss-linters']
+exclude: 'client/src/theme/lib/*.scss'
 
 # List of gem names to load custom linters from (make sure they are already
 # installed)
@@ -115,7 +116,7 @@ linters:
 
   NestingDepth:
     enabled: true
-    max_depth: 4
+    max_depth: 5
     ignore_parent_selectors: false
 
   PlaceholderInExtend:
@@ -163,7 +164,7 @@ linters:
 
   SelectorDepth:
     enabled: true
-    max_depth: 2
+    max_depth: 8
 
   SelectorFormat:
     enabled: true

@@ -14,8 +14,8 @@ html {
   // Set the base font size here, which will correspond to 1em inside <body>
   font-size: 100%;
   // Do you want to force grayscale antialiasing globally in webkit & gecko?
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   // Do you want to enable kerning and ligatures globally in webkit & gecko?
   // Beware that this occasionally causes width:auto elements to break to multiple lines in Chrome
   // It seems that the width of the element is computed prior to kerning

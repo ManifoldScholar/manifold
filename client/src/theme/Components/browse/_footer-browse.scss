@@ -1,52 +1,58 @@
 .footer-browse {
+  padding: 67px 0 57px;
   background-color: $neutral80;
-  padding: 67px 0px 57px;
+
   .container {
     position: relative;
   }
+
   // <a>
   .logo {
-    display: block;
-    text-decoration: none;
     @include templateHead;
-    height: 45px;
-    font-size: $type90;
-    font-weight: $semibold;
-    color: $neutralWhite;
-    line-height: 45px;
     position: absolute;
     top: 0;
     right: 0;
+    display: block;
+    height: 45px;
+    font-size: $type90;
+    font-weight: $semibold;
+    line-height: 45px;
+    color: $neutralWhite;
+    text-decoration: none;
+
     .manicon-manifold-logo {
       display: inline-block;
+      margin-right: 22px;
       font-size: 45px;
       color: $accentPrimary;
-      margin-right: 22px;
       vertical-align: top;
     }
   }
+
   // <nav> wrapper around nested <ul>
   .text-nav {
-    > ul {
+    // Global styles
+    ul {
       @include listUnstyled;
+    }
+
+    a {
+      @include templateHead;
+      font-size: $type60;
+      color: $neutralWhite;
+      text-decoration: none;
+    }
+
+    > ul {
       @include clearfix;
+
       > li {
         float: left;
         margin-right: 102px;
-        // Nexted List
-        ul {
-          @include listUnstyled;
-          li {
-            a {
-              @include templateHead;
-              font-size: $type60;
-              color: $neutralWhite;
-              text-decoration: none;
-            }
-          }
-          li + li {
-            margin-top: 15px;
-          }
+
+        // Nested List
+        li + li {
+          margin-top: 15px;
         }
       }
     }
@@ -58,9 +64,10 @@
 
   .colophon {
     @include templateCopy;
+    padding-top: 16px;
     font-size: $type60;
     color: $neutral40;
-    padding-top: 16px;
+
     a {
       color: inherit;
     }

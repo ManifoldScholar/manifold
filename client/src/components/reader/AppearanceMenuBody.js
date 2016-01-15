@@ -62,10 +62,12 @@ export default class AppearanceMenuBody extends Component {
       'button-active': typography.font === 'sans-serif'
     });
     const lightSchemeButtonClass = classNames({
+      'control-color': true,
       light: true,
       'button-active': colorScheme === 'light'
     });
     const darkSchemeButtonClass = classNames({
+      'control-color': true,
       dark: true,
       'button-active': colorScheme === 'dark'
     });
@@ -134,7 +136,7 @@ export default class AppearanceMenuBody extends Component {
             </div>
           </div>
 
-          <div className="control-color">
+          <div>
             <button className={lightSchemeButtonClass}
               onClick={this.handleLightButtonClick}
             >

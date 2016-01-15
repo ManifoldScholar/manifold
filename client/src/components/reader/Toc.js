@@ -36,7 +36,7 @@ export default class Toc extends Component {
     let children = null;
     if (node.children && node.children.length > 0) {
       children = (
-          <ul>
+          <ul className="toc-nested-level">
             {node.children.map(this.visitNode)}
           </ul>
       );
@@ -64,7 +64,7 @@ export default class Toc extends Component {
     });
     return (
         <nav className={tocClass}>
-          <ul>
+          <ul className="toc-list">
             {this.props.text.attributes.toc.map(this.visitNode)}
           </ul>
           <i className="manicon manicon-manifold-logo">

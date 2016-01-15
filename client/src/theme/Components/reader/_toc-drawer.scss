@@ -1,14 +1,16 @@
 .toc-drawer {
   position: fixed;
-  max-width: 620px;
   height: 100%;
-  padding: 35px 0 100px 0;
-  background-color: $accentPrimaryOffWhite;
+  max-width: 620px;
+  padding: 35px 0 100px;
   overflow-y: scroll;
+  background-color: $accentPrimaryOffWhite;
   transition: left $duration $timing;
+
   &.drawer-hidden {
     left: -620px;
   }
+
   &.drawer-visible {
     left: 0;
   }
@@ -23,46 +25,17 @@
     ul {
       @include listUnstyled;
       @include templateHead;
-      a {
-        display: block;
-        width: 100%;
-        color: $neutralOffBlack;
-        text-decoration: none;
-        &:hover {
-          color: $accentSecondary;
-          background-color: $neutral10;
-        }
-      }
     }
 
-    // Top Level links
-    > ul > li {
-        > a {
-          font-size: $type80;
-          padding: 40px 90px 8px $tocBasePadding;
-        }
-      > ul > li {
-        // Secondary level globals
-        a {
-          font-size: $type60;
-          padding: 13px 90px 7px $tocBasePadding;
-        }
-        // Third level indenting
-        > ul > li {
-          > a {
-            padding-left: $tocBasePadding + $tocNestedPadding;
-          }
-          // Fourth level indenting
-          > ul > li {
-            > a {
-              padding-left: $tocBasePadding + ($tocNestedPadding * 2);
-            }
-            // Fifth level (and on) indenting
-            > ul li a {
-              padding-left: $tocBasePadding + ($tocNestedPadding * 3);
-            }
-          }
-        }
+    a {
+      display: block;
+      width: 100%;
+      color: $neutralOffBlack;
+      text-decoration: none;
+
+      &:hover {
+        color: $accentSecondary;
+        background-color: $neutral10;
       }
     }
 
@@ -70,12 +43,44 @@
     &.multi-level > ul > li > a {
       border-bottom: 1px solid $neutral40;
     }
+
+    // Top Level links
+    > ul > li {
+      > a {
+        padding: 40px 90px 8px $tocBasePadding;
+        font-size: $type80;
+      }
+
+      > ul > li {
+        // Secondary level globals
+        a {
+          padding: 13px 90px 7px $tocBasePadding;
+          font-size: $type60;
+        }
+      }
+
+      // Third level indenting
+      > ul > ul > a {
+        padding-left: $tocBasePadding + $tocNestedPadding;
+      }
+
+      // Fourth level indenting
+      > ul > ul > ul > a {
+        padding-left: $tocBasePadding + ($tocNestedPadding * 2);
+      }
+
+      // Fifth level (and on) indenting
+      // scss-lint:disable SelectorDepth
+      > ul > ul > ul > ul a {
+        padding-left: $tocBasePadding + ($tocNestedPadding * 3);
+      }
+    }
   }
 
   .manicon-manifold-logo {
     display: block;
+    padding: 75px 0 0 $tocBasePadding;
     font-size: 45px;
-    padding: 75px 0px 0px $tocBasePadding;
     color: $neutral10;
   }
 }

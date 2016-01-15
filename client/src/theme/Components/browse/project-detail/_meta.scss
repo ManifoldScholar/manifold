@@ -3,20 +3,23 @@
   @include listHorizontal;
   margin-right: -63px;
   margin-left: -63px;
+
   li {
     width: 50%;
-    vertical-align: top;
     padding-right: 63px;
     padding-left: 63px;
+    vertical-align: top;
   }
+
   .meta-label {
     @include utilityPrimary;
     color: $neutral40;
   }
+
   .meta-value {
     @include templateHead;
+    margin-top: 19px;
     font-size: $type100;
     color: $neutral80;
-    margin-top: 19px;
   }
 }

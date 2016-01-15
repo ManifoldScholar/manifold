@@ -29,45 +29,47 @@
 // --------------------------------------------------------
 // Added to UI panels/dropdowns with tails
 @mixin panelTail {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 15.5px 17px 15.5px;
-  border-color: transparent transparent $neutral10;
   position: absolute;
   top: -17px;
   right: 28px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15.5px 17px;
+  border-color: transparent transparent $neutral10;
 }
 
 
 // Buttons
 // --------------------------------------------------------
 @mixin buttonUnstyled {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
   // TODO: This should be auto-prefixed
   -webkit-appearance: none;
-  background: transparent;
-  border: none;
-  outline: none;
-  padding: 0;
 }
 
 @mixin buttonAvatar($size: 40) {
   @include buttonUnstyled;
-  background-color: $accentPrimary;
   // Default size from browse view that may be
   // changed in scope
   width: #{$size}px;
   height: #{$size}px;
   text-align: center;
-  border-radius: 100%;
   overflow: hidden;
+  background-color: $accentPrimary;
+  border-radius: 100%;
+
   .avatar-image {
     width: 100%;
   }
+
   .manicon-person {
-    color: $accentPrimaryPale;
     font-size: #{$size * 0.85}px;
     line-height: #{$size * 1.2}px;
+    color: $accentPrimaryPale;
   }
 }
 
@@ -80,13 +82,14 @@
   position: relative;
   display: inline-block;
   color: $neutral80;
+
   select {
     @include utilityPrimary;
     display: inline-block;
     width: auto;
-    font-size: $type40;
-    margin: 0;
     padding: 15px 18px 17px;
+    margin: 0;
+    font-size: $type40;
     line-height: $baseLineHeight;
     background-color: transparent;
     border: 3px solid $neutral40;
@@ -94,24 +97,28 @@
     outline: 0;
     // This should be auto-prefixed
     -webkit-appearance: none;
+
     &:focus {
       border-color: $accentPrimary;
     }
   }
+
   // Dropdown icon included in markup
   .manicon-caret-down {
-    display: inline-block;
-    font-size: 7px;
-    margin-top: -3px;
     position: absolute;
     top: 50%;
     right: 24px;
+    display: inline-block;
+    margin-top: -3px;
+    font-size: 7px;
     pointer-events: none;
   }
+
   select:focus:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 $neutralBlack;
   }
+
   select::-ms-expand {
     display: none;
   }
@@ -119,37 +126,39 @@
 
 
 // Inputs/Textareas
-@mixin input-secondary {
+@mixin inputSecondary {
   @include templateCopy;
   width: 306px;
+  padding: 7px 10px;
   font-size: $type70;
+  color: $accentPrimary;
   background: transparent;
   border: 3px solid $accentPrimary;
-  padding: 7px 10px;
-  color: $accentPrimary;
   outline: none;
+
   &:focus {
     border-color: $neutralWhite;
   }
 }
 
 @mixin inputLabelPrimary {
-  display: block;
   @include templateHead;
-  font-size: $type30;
-  text-transform: uppercase;
-  color: $neutral50;
+  display: block;
   margin-bottom: 12px;
+  font-size: $type30;
+  color: $neutral50;
+  text-transform: uppercase;
 }
 
 @mixin inputPrimary {
   @include templateHead;
   font-size: $type70;
   color: $neutralOffBlack;
-  background-color: $neutralWhite;
   padding: 8px 13px 12px;
+  background-color: $neutralWhite;
   border: 3px solid $neutralWhite;
   outline: none;
+
   &:focus {
     border-color: $accentPrimary;
   }

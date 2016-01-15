@@ -1,40 +1,36 @@
 .project-detail-hero {
   @include clearfix;
-  // Structure of main elements declared separately so they can be easily accessed without
-  // sifting past granular properties
-  .project-info {
-    float: left;
-    width: 65%;
-    padding-right: 12%;
-  }
-  .project-image {
-    float: left;
-    width: 35%;
-  }
 
   // Project Info
   // --------------------------------------------------------
   .project-info {
+    float: left;
+    width: 65%;
+    padding-right: 12%;
+
     // Note that there is only one here, but structural styles will need to be
     // added if there are more, and potentially list markup
     // <figure>
     .maker-avatar {
+
       // NB: This needs to be browser tested heavily before settling on this rounding method
       img {
         width: 70px;
         height: auto;
         border-radius: 100%;
       }
+
       figcaption {
         @include templateCopy;
+        margin-top: 2px;
         font-size: $type90;
         color: $neutral80;
-        margin-top: 2px;
       }
     }
 
     .project-title {
       @include titlePrimary;
+
       .subtitle {
         margin-top: 18px;
       }
@@ -49,11 +45,13 @@
     }
 
     .project-entry {
-      margin-top: 72px;
       width: 300px;
+      margin-top: 72px;
+
       .button-reader {
         margin-bottom: 40px;
       }
+
       .button-toc {
         margin-bottom: 20px;
       }
@@ -66,8 +64,13 @@
 
   // Project Image
   // --------------------------------------------------------
-  .project-image img {
-    max-width: 100%;
-    height: auto;
+  .project-image {
+    float: left;
+    width: 35%;
+
+    img {
+      height: auto;
+      max-width: 100%;
+    }
   }
 }

@@ -1,46 +1,52 @@
 // Search Menu button and panel global styles (see header styles for context specific styles)
 .button-search {
   @include buttonUnstyled;
-  transition: background-color $duration $timing;
   height: 100%;
-  color: $neutral50;
   font-size: 20px;
+  color: $neutral50;
+  transition: background-color $duration $timing;
 }
 
 .search-menu {
   padding: 44px 39px;
   background-color: $neutral10;
+
   .tail {
-    display: none;
     @include panelTail;
+    display: none;
   }
+
   // Input defaults
   input[type="text"] {
     @include templateHead;
     width: 100%;
-    color: $neutralOffBlack;
-    font-size: $type70;
     padding: 13px 25px 14px;
+    font-size: $type70;
+    color: $neutralOffBlack;
     background-color: $neutralWhite;
     border: 3px solid transparent;
-    appearance: none;
     outline: none;
+    appearance: none;
   }
+
   // Can be abstracted to shared if used elsewhere
   .input-magnify {
     position: relative;
+
     input {
       padding-left: 54px;
     }
+
     // Can be button or a simple icon
     .manicon-magnify {
       @include buttonUnstyled;
-      font-size: 18px;
-      color: $neutral50;
       position: absolute;
       top: 20px;
       left: 23px;
+      font-size: 18px;
+      color: $neutral50;
     }
+
     input:focus + .manicon-magnify {
       color: $accentPrimary;
     }
@@ -48,47 +54,54 @@
 
   .filters {
     padding-top: 38px;
+
     label {
       @include utilityPrimary;
       font-size: $type40;
       font-weight: $semibold;
+      color: $neutral70;
       text-transform: uppercase;
-      color: #7a797b;
     }
+
     .checkbox {
       position: relative;
       display: inline-block;
       padding-left: 36px;
       cursor: pointer;
+
+      + .checkbox {
+        margin-left: 20px;
+      }
+
       .control-indicator {
         display: inline-block;
         width: 24px;
         height: 24px;
-        text-align: center;
         padding-top: 6px;
-        background-color: $neutralWhite;
         margin-right: 12px;
+        text-align: center;
         vertical-align: middle;
-        // Styled, but hidden unitl checked
+        background-color: $neutralWhite;
+
+        // Styled, but hidden until checked
         .manicon-check {
-          color: $neutralOffBlack;
           font-size: 11px;
+          color: $neutralOffBlack;
           visibility: hidden;
         }
       }
+
       input {
         position: absolute;
-        opacity: 0;
         z-index: -1;
+        opacity: 0;
       }
+
       input:checked ~ .control-indicator {
         .manicon-check {
           visibility: visible;
         }
       }
-    }
-    .checkbox + .checkbox {
-      margin-left: 20px;
     }
   }
 }

@@ -1,7 +1,8 @@
 .header-reader {
-  width: 100%;
   position: fixed;
   top: 0;
+  width: 100%;
+
   .container-banner {
     @include clearfix;
     height: 63px;
@@ -11,60 +12,66 @@
   // <button>
   .button-close {
     @include buttonUnstyled;
-    height: 100%;
-    color: $neutral50;
-    background-color: $neutral10;
-    padding-right: 16px;
-    padding-left: 16px;
     position: relative;
     float: left;
-    transition: color $duration $timing;
-    transition: background-color $duration $timing;
+    height: 100%;
+    padding-right: 16px;
+    padding-left: 16px;
+    color: $neutral50;
+    background-color: $neutral10;
+    transition: color $duration $timing, background-color $duration $timing;
+
     &:hover {
       background-color: $accentPrimary;
+
       .manicon-x {
         color: $neutral80;
       }
     }
+
     .manicon-x {
       font-size: 31px;
     }
   }
+
   .button-index {
     @include buttonUnstyled;
     @include utilityPrimary;
+    position: relative;
+    float: left;
     height: 100%;
+    padding-right: 21px;
+    padding-left: 30px;
     font-size: $type40;
     font-weight: $semibold;
     color: $neutral50;
-    padding-right: 21px;
-    padding-left: 30px;
     background-color: $neutral20;
-    float: left;
-    position: relative;
-    transition: color $duration $timing;
-    transition: background-color $duration $timing;
+    transition: color $duration $timing background-color $duration $timing;
+
     &.active, &:hover {
-      background-color: $accentPrimaryLight;
       color: $neutralWhite;
+      background-color: $accentPrimaryLight;
     }
+
     .manicon {
       display: inline-block;
       vertical-align: baseline;
     }
+
     .manicon-caret-down {
-      font-size: 8px;
       margin-left: 22px;
+      font-size: 8px;
     }
   }
+
   // <h2>
   .title {
     @include templateHead();
-    color: $neutral50;
+    float: left;
+    margin-left: 27px;
     font-size: $type80;
     font-weight: $regular; // OD
-    margin-left: 27px;
-    float: left;
+    color: $neutral50;
   }
 
   .menu-buttons {
@@ -72,32 +79,38 @@
     top: 0;
     right: 0;
     height: 100%;
+
     ul {
       @include listHorizontal;
-      display: block;
       position: relative;
+      display: block;
       height: 100%;
+
       li {
-        vertical-align: middle;
         position: relative;
         height: 100%;
+        vertical-align: middle;
       }
     }
+
     .button-search {
-      padding: 0px 21px;
+      padding: 0 21px;
+
       &.button-active {
         background-color: $neutral10;
       }
     }
 
     .button-avatar {
+      position: relative;
       height: 100%;
       padding-right: 16px;
       padding-left: 16px;
-      position: relative;
+
       &.button-active {
         background-color: $neutral10;
       }
+
       .avatar {
         @include buttonAvatar(32);
       }
@@ -105,19 +118,20 @@
   }
 
   .menu-panels {
-    width: 100%;
     position: absolute;
     right: 0;
+    width: 100%;
 
     // Reader specific menu layout/transition
     .search-menu {
       position: absolute;
-      width: 645px;
       right: -645px;
+      width: 645px;
       transition: right $duration $timing;
     }
+
     .panel-visible .search-menu {
-      right: 0px;
+      right: 0;
     }
 
     .user-menu {
@@ -125,8 +139,9 @@
       right: -300px;
       transition: right $duration $timing;
     }
+
     .panel-visible .user-menu {
-      right: 0px;
+      right: 0;
     }
   }
 }
