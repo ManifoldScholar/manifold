@@ -52,6 +52,7 @@ section {
 
 .container-focus {
   @include containerNarrow;
+  transition: max-width $duration $timing;
 }
 
 .section-heading-utility-right {
