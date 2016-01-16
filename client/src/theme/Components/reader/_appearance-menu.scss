@@ -100,8 +100,11 @@
     }
   }
 
+  .control-colors {
+    margin-bottom: 40px;
+  }
 
-  .control-color {
+  .color-scheme {
     @include buttonUnstyled;
     width: 120px;
     height: 42px;
