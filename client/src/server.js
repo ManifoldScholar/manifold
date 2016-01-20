@@ -27,7 +27,6 @@ const app = new Express();
 const server = new http.Server(app);
 const logStyle = __DEVELOPMENT__ ? 'dev' : 'combined';
 
-
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
