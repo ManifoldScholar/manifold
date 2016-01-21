@@ -8,17 +8,17 @@ import createHistory from 'history/lib/createBrowserHistory';
 import createStore from './store/createStore';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import { syncReduxAndRouter } from 'redux-simple-router';
+import { syncHistory } from 'redux-simple-router';
 import { DevTools } from './containers/shared';
 import getRoutes from './routes';
 import ResolveDataDependencies from './helpers/ResolveDataDependencies';
 import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 const dest = document.getElementById('content');
-const store = createStore(window.__INITIAL_STATE__);
 const history = useScroll(createHistory)();
+const reduxRouterMiddleware = syncHistory(history);
+const store = createStore(window.__INITIAL_STATE__, reduxRouterMiddleware);
 
-syncReduxAndRouter(history, store);
 
 const component = (
   <Router history={history} RoutingContext={ResolveDataDependencies} >

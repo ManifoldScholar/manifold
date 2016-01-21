@@ -12,7 +12,6 @@ import { whoami } from '../../actions/shared/authentication';
 
 function mapStateToProps(state) {
   return {
-    routing: state.routing,
     authentication: state.authentication,
     visibility: state.ui.visibility
   };
@@ -23,7 +22,7 @@ export default class Frontend extends Component {
 
   static propTypes = {
     children: PropTypes.object,
-    routing: PropTypes.object,
+    location: PropTypes.object,
     dispatch: PropTypes.func,
     authentication: PropTypes.object,
     visibility: PropTypes.object,
@@ -58,7 +57,7 @@ export default class Frontend extends Component {
           <LoadingBar />
           <Header
             visibility={this.props.visibility }
-            path={this.props.routing.path}
+            location={this.props.location}
             authenticated={this.props.authentication.authToken === null ? false : true}
             visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
             visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}

@@ -33,6 +33,7 @@ app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 app.use(morgan(logStyle));
 app.use(createApiProxy());
 app.use(createWebpackProxy());
+app.use(createWebpackProxy());
 
 
 app.use((req, res) => {

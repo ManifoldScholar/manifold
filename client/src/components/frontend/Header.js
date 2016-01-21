@@ -8,7 +8,7 @@ export default class Header extends Component {
 
   static propTypes = {
     visibility: PropTypes.object,
-    path: PropTypes.string,
+    location: PropTypes.object,
     authenticated: PropTypes.bool,
     visibilityToggle: PropTypes.func,
     visibilityHide: PropTypes.func,
@@ -31,7 +31,7 @@ export default class Header extends Component {
   };
 
   render = () => {
-    const path = this.props.path;
+    const path = this.props.location.pathname;
     const active = startsWith(path, '/browse/following') ? 'following' : 'browse';
 
     return (
