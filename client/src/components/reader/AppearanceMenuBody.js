@@ -149,7 +149,7 @@ export default class AppearanceMenuBody extends Component {
             </div>
           </div>
 
-          <div className="control-color">
+          <div className="control-colors">
             <button className={lightSchemeButtonClass}
               onClick={this.handleLightButtonClick}
             >
