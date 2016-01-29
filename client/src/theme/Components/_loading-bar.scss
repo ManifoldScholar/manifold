@@ -23,12 +23,12 @@
     opacity: 1;
     // Escape linter to use CSS built-in function
     // scss-lint:disable NameFormat
-    transition: width 200s cubic-bezier(0.06, 0.95, 0.40, 0.93);
+    transition: width 100s cubic-bezier(0.06, 0.95, 0.40, 0.93);
   }
 
   &.complete .progress {
     width: 100%;
     opacity: 0;
-    transition: width 0.7s ease-out, opacity 1.2s ease;
+    transition: width 0.5s ease-out, opacity 0.8s ease;
   }
 }

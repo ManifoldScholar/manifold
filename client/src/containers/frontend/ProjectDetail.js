@@ -34,7 +34,6 @@ function mapStateToProps(state) {
 export default class ProjectDetail extends Component {
 
   static propTypes = {
-    loading: PropTypes.bool,
     project: PropTypes.object,
     creators: PropTypes.array,
     contributors: PropTypes.array,
@@ -108,17 +107,7 @@ export default class ProjectDetail extends Component {
     );
   };
 
-  renderLoading = () => {
-    const styles = {
-      minHeight: '2000px'
-    };
-    return (
-      <div style={styles}></div>
-    );
-  };
-
   render() {
-    if (this.props.loading) return this.renderLoading();
     const project = this.props.project;
     const makers = this.props.creators.concat(this.props.contributors);
     return (

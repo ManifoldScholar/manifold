@@ -45,6 +45,7 @@ function mapStateToProps(state) {
     stylesheets,
     authentication: state.authentication,
     visibility: state.ui.visibility,
+    loading: state.ui.loading.active,
     appearance
   };
 }
@@ -65,7 +66,8 @@ class Reader extends Component {
     stylesheets: PropTypes.array,
     authentication: PropTypes.object,
     dispatch: PropTypes.func,
-    history: PropTypes.object
+    history: PropTypes.object,
+    loading: PropTypes.bool
   };
 
   static contextTypes = {
@@ -134,10 +136,9 @@ class Reader extends Component {
         <div>
           {this.renderStyles()}
           <DocumentMeta {...config.app}/>
-          <LoadingBar />
+          <LoadingBar loading={this.props.loading} />
           {/* Header inside scroll-aware HOC */}
           <Header
-
             // Props required by body component
             text={text}
             authenticated={this.props.authentication.authToken === null ? false : true}

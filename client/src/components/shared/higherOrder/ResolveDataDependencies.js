@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import RoutingContext from 'react-router/lib/RoutingContext';
-import { isFunction } from 'lodash/lang';
+import RoutingContext from '../../../../node_modules/react-router/lib/RoutingContext';
+import { isFunction } from '../../../../node_modules/lodash/lang';
 
 class DelayContainer extends Component {
 
@@ -14,7 +14,6 @@ class DelayContainer extends Component {
     super(props, context);
     this.state = {
       loaded: false,
-      loading: false
     };
   }
 
@@ -40,14 +39,13 @@ class DelayContainer extends Component {
 
   loadingComplete = () => {
     this.setState({
-      loading: false,
       loaded: true
     });
   };
 
   loadingStart = () => {
     this.setState(Object.assign({}, {
-      loading: true,
+      loaded: false
     }));
   };
 
@@ -73,7 +71,7 @@ class DelayContainer extends Component {
     const ComponentClass = this.props.component;
     if (this.state.loaded === true) {
       return (
-        <ComponentClass loading={this.state.loading} {... this.props.routerProps} />
+        <ComponentClass routeDataLoaded={this.state.loaded} {... this.props.routerProps} />
       );
     }
     return null;
