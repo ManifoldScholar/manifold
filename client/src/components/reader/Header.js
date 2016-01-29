@@ -76,8 +76,6 @@ export default class Header extends Component {
       'scheme-dark': colorScheme === 'dark'
     });
 
-    console.log(this.props.appearance);
-
     return (
       <ScrollAware>
         <header className="header-reader">

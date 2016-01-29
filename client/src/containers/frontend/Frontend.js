@@ -13,7 +13,8 @@ import { whoami } from '../../actions/shared/authentication';
 function mapStateToProps(state) {
   return {
     authentication: state.authentication,
-    visibility: state.ui.visibility
+    visibility: state.ui.visibility,
+    loading: state.ui.loading.active
   };
 }
 
@@ -21,11 +22,13 @@ function mapStateToProps(state) {
 export default class Frontend extends Component {
 
   static propTypes = {
+    routeDataLoaded: PropTypes.bool,
     children: PropTypes.object,
     location: PropTypes.object,
     dispatch: PropTypes.func,
     authentication: PropTypes.object,
     visibility: PropTypes.object,
+    loading: PropTypes.bool,
     history: PropTypes.object.isRequired
   };
 
@@ -35,6 +38,7 @@ export default class Frontend extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    this.setMinHeight();
     dispatch(whoami());
   }
 
@@ -44,6 +48,13 @@ export default class Frontend extends Component {
       this.props.authentication.authenticated === true) {
       location.reload();
     }
+    this.setMinHeight();
+  }
+
+  setMinHeight() {
+    const windowHeight = window.innerHeight;
+    this.refs.mainContainer.style.minHeight = `${windowHeight}px`;
+    console.log(this.refs.mainContainer);
   }
 
   render() {
@@ -54,7 +65,7 @@ export default class Frontend extends Component {
       <BodyClass className={'browse'}>
         <div>
           <DocumentMeta {...config.app}/>
-          <LoadingBar />
+          <LoadingBar loading={this.props.loading} />
           <Header
             visibility={this.props.visibility }
             location={this.props.location}
@@ -71,7 +82,7 @@ export default class Frontend extends Component {
             visible={this.props.visibility.loginOverlay}
             hideLoginOverlay={hideLoginOverlay}
           />
-          <main>
+          <main ref="mainContainer">
             {this.props.children}
           </main>
           <Footer />

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 export default class SectionPagination extends Component {
 
@@ -29,10 +30,10 @@ export default class SectionPagination extends Component {
     if (previousNode) {
       const previousPath = this.getSectionPath(previousNode);
       previousLink = (
-        <a href={previousPath} className="pagination-previous">
+        <Link to={previousPath} className="pagination-previous" >
           <i className="manicon manicon-arrow-round-left"></i>
           {'Previous'}
-        </a>
+        </Link>
       );
     }
     return previousLink;
@@ -44,10 +45,10 @@ export default class SectionPagination extends Component {
     if (nextNode) {
       const nextPath = this.getSectionPath(nextNode);
       nextLink = (
-        <a href={nextPath} className="pagination-next">
+        <Link to={nextPath} className="pagination-next" >
           {'Next'}
           <i className="manicon manicon-arrow-round-right"></i>
-        </a>
+        </Link>
       );
     }
     return nextLink;
