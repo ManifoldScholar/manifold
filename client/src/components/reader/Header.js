@@ -68,7 +68,7 @@ export default class Header extends Component {
     );
   };
 
-  render = () => {
+  render() {
     return (
       <header className="header-reader">
         <nav className="container-banner">
@@ -145,5 +145,5 @@ export default class Header extends Component {
         </nav>
       </header>
     );
-  };
+  }
 }

@@ -21,7 +21,7 @@ export default class Dropdown extends Component {
     alert('clicked');
   }
 
-  render = () => {
+  render() {
     return (
       <div>
         {/* Second argument as props */}
@@ -29,5 +29,5 @@ export default class Dropdown extends Component {
         {React.createElement(this.props.bodyComponent, { ...this.props })}
       </div>
     );
-  };
+  }
 }

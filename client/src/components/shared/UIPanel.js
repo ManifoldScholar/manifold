@@ -8,7 +8,7 @@ export default class UIPanel extends Component {
     bodyComponent: PropTypes.func
   };
 
-  render = () => {
+  render() {
     const visibilityClass = classNames({
       'panel-hidden': !this.props.visibility[this.props.id],
       'panel-visible': this.props.visibility[this.props.id]
@@ -19,5 +19,5 @@ export default class UIPanel extends Component {
           {React.createElement(this.props.bodyComponent, { ...this.props })}
         </div>
     );
-  };
+  }
 }

@@ -20,7 +20,7 @@ export default class ProjectGrid extends Component {
     return this.props.makers[id];
   };
 
-  render = () => {
+  render() {
     const project = this.props.project;
 
     let projectDate;
@@ -83,5 +83,5 @@ export default class ProjectGrid extends Component {
         {projectMeta}
       </Link>
     );
-  };
+  }
 }

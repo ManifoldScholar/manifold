@@ -15,30 +15,30 @@ export default class UserButton extends Component {
     this.props.hideUserMenu();
   };
 
-  render = () => {
+  render() {
     const menuClass = classNames({
       'user-menu': true,
       'menu-hidden': !this.props.visible,
       'menu-visible': this.props.visible
     });
     return (
-        <nav className={menuClass}>
-          <i className="tail"></i>
-          <ul>
-            <li>
-              <Link to="#">
-                <i className="manicon manicon-person-pencil"></i>
-                {'Edit Profile'}
-              </Link>
-            </li>
-            <li>
-              <button onClick={this.logout}>
-                <i className="manicon manicon-circle-arrow-out-right"></i>
-                {'Logout'}
-              </button>
-            </li>
-          </ul>
-        </nav>
+      <nav className={menuClass}>
+        <i className="tail"></i>
+        <ul>
+          <li>
+            <Link to="#">
+              <i className="manicon manicon-person-pencil"></i>
+              {'Edit Profile'}
+            </Link>
+          </li>
+          <li>
+            <button onClick={this.logout}>
+              <i className="manicon manicon-circle-arrow-out-right"></i>
+              {'Logout'}
+            </button>
+          </li>
+        </ul>
+      </nav>
     );
-  };
+  }
 }

@@ -13,7 +13,7 @@ export default class ProjectGrid extends Component {
     return this.props.projects[id];
   };
 
-  render = () => {
+  render() {
     const hideDate = true;
     return (
       <nav className="grid-project-summary">
@@ -32,5 +32,5 @@ export default class ProjectGrid extends Component {
         </ul>
       </nav>
     );
-  };
+  }
 }

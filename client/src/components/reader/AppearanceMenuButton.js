@@ -13,7 +13,7 @@ export default class AppearanceMenuButton extends Component {
     this.props.toggleAppearanceMenu();
   };
 
-  render = () => {
+  render() {
     const buttonClass = classNames({
       'button-appearance': true,
       'button-active': this.props.active
@@ -24,5 +24,5 @@ export default class AppearanceMenuButton extends Component {
           <span className="screen-reader-text">{'Click to open reader appearance menu'}</span>
         </button>
     );
-  };
+  }
 }

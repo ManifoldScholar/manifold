@@ -42,7 +42,7 @@ class LoginForm extends Component {
   };
 
 
-  render = () => {
+  render() {
     return (
       <div>
         <form method="post" onSubmit={this.handleLogin} className="login-form">

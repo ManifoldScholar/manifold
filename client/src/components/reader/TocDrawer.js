@@ -11,20 +11,20 @@ export default class TocDrawer extends Component {
     hideTocDrawer: PropTypes.func,
   };
 
-  render = () => {
+  render() {
     const drawerClass = classNames({
       'toc-drawer': true,
       'drawer-hidden': !this.props.visible,
       'drawer-visible': this.props.visible
     });
     return (
-        <div className={drawerClass}>
-          <Toc
-            text={this.props.text}
-            tocDrawerVisible={this.props.visible}
-            hideTocDrawer={this.props.hideTocDrawer}
-          />
-        </div>
+      <div className={drawerClass}>
+        <Toc
+          text={this.props.text}
+          tocDrawerVisible={this.props.visible}
+          hideTocDrawer={this.props.hideTocDrawer}
+        />
+      </div>
     );
-  };
+  }
 }

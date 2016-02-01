@@ -30,7 +30,7 @@ export default class Header extends Component {
     this.props.visibilityShow('loginOverlay');
   };
 
-  render = () => {
+  render() {
     const path = this.props.location.pathname;
     const active = startsWith(path, '/browse/following') ? 'following' : 'browse';
 
@@ -93,5 +93,5 @@ export default class Header extends Component {
         </nav>
       </header>
     );
-  };
+  }
 }

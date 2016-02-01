@@ -10,13 +10,12 @@ export default class LoadingBar extends Component {
 
   };
 
-  render = () => {
+  render() {
     this.bindKey();
-
     return (
         <div className="loading-bar">
           <div className="progress"></div>
         </div>
     );
-  };
+  }
 }

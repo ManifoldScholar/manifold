@@ -33,7 +33,7 @@ export default class GroupedTexts extends Component {
     return collection;
   };
 
-  render = () => {
+  render() {
     const textsByCategory = this.buildGroupedCollection();
     let categoryKey;
     let header;
@@ -71,5 +71,5 @@ export default class GroupedTexts extends Component {
         })}
       </div>
     );
-  };
+  }
 }

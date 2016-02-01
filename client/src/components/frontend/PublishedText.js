@@ -14,7 +14,7 @@ export default class PublishedText extends Component {
     });
   };
 
-  render = () => {
+  render() {
     const publishedText = this.findPublishedText();
     if (!publishedText) return null;
 
@@ -32,5 +32,5 @@ export default class PublishedText extends Component {
         </section>
       </div>
     );
-  };
+  }
 }

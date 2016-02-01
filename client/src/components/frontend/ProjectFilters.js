@@ -22,7 +22,7 @@ export default class ProjectFilters extends Component {
     this.props.updateAction(filter);
   };
 
-  render = () => {
+  render() {
     return (
       <div className="select-browse" style={{ marginBottom: 93 }}>
         <select onChange={ this.filterChange } >
@@ -33,5 +33,5 @@ export default class ProjectFilters extends Component {
         <i className="manicon manicon-caret-down"></i>
       </div>
     );
-  };
+  }
 }

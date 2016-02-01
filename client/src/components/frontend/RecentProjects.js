@@ -8,11 +8,11 @@ export default class RecentProjects extends Component {
     texts: PropTypes.object
   };
 
-  render = () => {
+  render() {
     return (
         <div>
           <ProjectCovers />
         </div>
     );
-  };
+  }
 }

@@ -34,7 +34,7 @@ export default class TextThumb extends Component {
     return thumbnail;
   };
 
-  render = () => {
+  render() {
     const text = this.props.text;
 
     return (
@@ -82,5 +82,5 @@ export default class TextThumb extends Component {
         </div>
       </div>
     );
-  };
+  }
 }

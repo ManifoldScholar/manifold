@@ -13,7 +13,7 @@ export default class SearchMenuButton extends Component {
     this.props.toggleSearchMenu();
   };
 
-  render = () => {
+  render() {
     const buttonClass = classNames({
       'button-search': true,
       'button-active': this.props.active
@@ -24,5 +24,5 @@ export default class SearchMenuButton extends Component {
           <span className="screen-reader-text">{'Click to open search'}</span>
         </button>
     );
-  };
+  }
 }

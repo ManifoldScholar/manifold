@@ -9,7 +9,7 @@ export default class LoginOverlay extends Component {
     hideLoginOverlay: PropTypes.func
   };
 
-  render = () => {
+  render() {
     const overlayClass = classNames({
       'overlay-login': true,
       'overlay-hidden': !this.props.visible,
@@ -35,5 +35,5 @@ export default class LoginOverlay extends Component {
           </div>
         </div>
     );
-  };
+  }
 }

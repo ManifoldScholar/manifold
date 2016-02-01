@@ -40,7 +40,7 @@ export default class UserButton extends Component {
     }
   };
 
-  render = () => {
+  render() {
     const buttonClass = classNames({
       'button-avatar': true,
       'button-active': this.props.active
@@ -53,5 +53,5 @@ export default class UserButton extends Component {
           </figure>
         </button>
     );
-  };
+  }
 }

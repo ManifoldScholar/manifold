@@ -14,13 +14,12 @@ export default class UserMenu extends Component {
     visible: PropTypes.bool
   };
 
-  render = () => {
-
+  render() {
     return (
       <Dropdown
         triggerComponent={UserMenuButton}
         bodyComponent={UserMenuBody}
       />
     );
-  };
+  }
 }

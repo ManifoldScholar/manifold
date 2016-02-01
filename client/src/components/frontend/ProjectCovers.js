@@ -13,7 +13,7 @@ export default class ProjectCovers extends Component {
     return this.props.projects[id];
   };
 
-  render = () => {
+  render() {
     const hideMeta = true;
     return (
       <nav className="grid-project-covers">
@@ -32,5 +32,5 @@ export default class ProjectCovers extends Component {
         </ul>
       </nav>
     );
-  };
+  }
 }

@@ -36,9 +36,9 @@ export default class Toc extends Component {
     let children = null;
     if (node.children && node.children.length > 0) {
       children = (
-          <ul className="toc-nested-level">
-            {node.children.map(this.visitNode)}
-          </ul>
+        <ul className="toc-nested-level">
+          {node.children.map(this.visitNode)}
+        </ul>
       );
     }
 
@@ -47,30 +47,29 @@ export default class Toc extends Component {
     const path = `/read/${this.props.text.id}/section/${node.id}${anchor}`;
 
     return (
-        <li key={this.counter}>
-          <Link to={path} onClick={this.UIHideTocDrawer}>
-            {node.label}
-          </Link>
-          {children}
-        </li>
-
+      <li key={this.counter}>
+        <Link to={path} onClick={this.UIHideTocDrawer}>
+          {node.label}
+        </Link>
+        {children}
+      </li>
     );
   };
 
-  render = () => {
+  render() {
     const tocClass = classNames({
       'table-of-contents': true,
       'multi-level': this.hasChildren(this.props.text.attributes.toc)
     });
     return (
-        <nav className={tocClass}>
-          <ul className="toc-list">
-            {this.props.text.attributes.toc.map(this.visitNode)}
-          </ul>
-          <i className="manicon manicon-manifold-logo">
-            <span className="screen-reader-text">Manifold Logo</span>
-          </i>
-        </nav>
+      <nav className={tocClass}>
+        <ul className="toc-list">
+          {this.props.text.attributes.toc.map(this.visitNode)}
+        </ul>
+        <i className="manicon manicon-manifold-logo">
+          <span className="screen-reader-text">Manifold Logo</span>
+        </i>
+      </nav>
     );
-  };
+  }
 }

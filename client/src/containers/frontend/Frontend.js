@@ -33,12 +33,12 @@ export default class Frontend extends Component {
     store: PropTypes.object.isRequired
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     const { dispatch } = this.props;
     dispatch(whoami());
-  };
+  }
 
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps(nextProps) {
     // We reload the page on logout, to ensure that all data is cleared from the store.
     if (nextProps.authentication.authenticated === false &&
       this.props.authentication.authenticated === true) {

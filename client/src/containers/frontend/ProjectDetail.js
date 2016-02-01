@@ -117,7 +117,7 @@ export default class ProjectDetail extends Component {
     );
   };
 
-  render = () => {
+  render() {
     if (this.props.loading) return this.renderLoading();
     const project = this.props.project;
     const makers = this.props.creators.concat(this.props.contributors);
@@ -133,5 +133,5 @@ export default class ProjectDetail extends Component {
         {this.renderMeta()}
       </div>
     );
-  };
+  }
 }

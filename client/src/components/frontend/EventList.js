@@ -16,11 +16,13 @@ export default class EventList extends Component {
     height: 'auto'
   } };
 
-  componentDidMount = () => {
+  /* eslint-disable react/no-did-mount-set-state */
+  componentDidMount() {
     this.setState({ matchedHeight: {
       height: this.getMaxHeight(this.refs.eventList.childNodes, 24)
     } });
-  };
+  }
+  /* eslint-enable react/no-did-mount-set-state */
 
   // Get the maximum height of an element in a node list
   getMaxHeight = (group, verticalPadding = 0) => {
@@ -38,19 +40,19 @@ export default class EventList extends Component {
     return maxHeight + (verticalPadding * 2) + 'px';
   };
 
-  render = () => {
+  render() {
     return (
-        <ul className="event-list" ref="eventList">
-          {this.props.events.map((event) => {
-            return (
-                <li>
-                  <div className={'event-tile ' + event.type} style={this.state.matchedHeight}>
-                    <ProjectEvent event={event} />
-                  </div>
-                </li>
-            );
-          })}
-        </ul>
+      <ul className="event-list" ref="eventList">
+        {this.props.events.map((event) => {
+          return (
+              <li>
+                <div className={'event-tile ' + event.type} style={this.state.matchedHeight}>
+                  <ProjectEvent event={event} />
+                </div>
+              </li>
+          );
+        })}
+      </ul>
     );
-  };
+  }
 }

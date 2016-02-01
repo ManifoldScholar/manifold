@@ -6,22 +6,22 @@ export default class MetaAttributes extends Component {
     data: PropTypes.array
   };
 
-  render = () => {
+  render() {
     return (
-        <ul className="meta-list">
-          {this.props.data.map((pair) => {
-            return (
-              <li>
-                <span className="meta-label">
-                  {pair.key}
-                </span>
-                <div className="meta-value">
-                  {pair.value}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+      <ul className="meta-list">
+        {this.props.data.map((pair) => {
+          return (
+            <li>
+              <span className="meta-label">
+                {pair.key}
+              </span>
+              <div className="meta-value">
+                {pair.value}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     );
-  };
+  }
 }

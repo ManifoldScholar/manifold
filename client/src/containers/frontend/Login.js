@@ -55,7 +55,7 @@ class Login extends Component {
     );
   };
 
-  render = () => {
+  render() {
     return (
       <section className="login-page">
         {this.props.authentication.authToken === null ? this.loginUI() : this.logoutUI()}

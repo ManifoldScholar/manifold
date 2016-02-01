@@ -13,7 +13,7 @@ export default class ProjectGrid extends Component {
     return this.props.projects[id];
   };
 
-  render = () => {
+  render() {
     const hideDesc = true;
     return (
       <nav className="grid-project">
@@ -32,5 +32,5 @@ export default class ProjectGrid extends Component {
         </ul>
       </nav>
     );
-  };
+  }
 }

@@ -14,7 +14,8 @@ export default class ProjectEvent extends Component {
     }
   };
 
-  componentDidUpdate = () => {
+  /* eslint-disable react/no-did-update-set-state */
+  componentDidUpdate() {
     const el = this.refs.eventContainer;
     const centerPadding = (el.parentNode.offsetHeight - el.offsetHeight) / 2;
     if (centerPadding > 0) {
@@ -23,7 +24,8 @@ export default class ProjectEvent extends Component {
         paddingBottom: centerPadding + 'px'
       } });
     }
-  };
+  }
+  /* eslint-enable react/no-did-update-set-state */
 
   renderEventComment = (event) => {
     return (
@@ -133,11 +135,11 @@ export default class ProjectEvent extends Component {
     }
   };
 
-  render = () => {
+  render() {
     return (
         <div ref="eventContainer" style={this.state.containerPadding}>
           {this.renderEventByType(this.props.event)}
         </div>
     );
-  };
+  }
 }
