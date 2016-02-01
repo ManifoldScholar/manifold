@@ -43,7 +43,7 @@ babelLoaderQuery.extra['react-transform'].transforms.push({
   locals: ['module']
 });
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: 'eval',
   context: path.resolve(__dirname, '..'),
   entry: {
     'main': [
@@ -66,19 +66,17 @@ module.exports = {
     loaders: [
       {
         test: /\.font.js/,
-        loaders: ['style', 'css', 'fontgen']
+        loaders: ['style', 'css', 'fontgen'],
+        include: path.resolve('./src')
       },
       { test: /\.js$/,
-        exclude: function(path) {
-          // We're using QS in the browser, and it has es2015 constructs like "const"
-          if (path.match(/node_modules\/qs/)) return false;
-          if (path.match(/node_modules/)) return true;
-        },
-        loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']
+        loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader'],
+        include: path.resolve('./src')
       },
       {
         test: /\.json$/,
-        loaders: ['json-loader']
+        loaders: ['json-loader'],
+        include: path.resolve('./src')
       },
       { test: /\.scss$/,
         loaders: [
@@ -86,31 +84,38 @@ module.exports = {
           'css?importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]',
           'autoprefixer?browsers=last 2 version',
           'sass?outputStyle=expanded&sourceMap'
-        ]
+        ],
+        include: path.resolve('./src')
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=application/font-woff"
+        loader: "url?limit=10000&mimetype=application/font-woff",
+        include: path.resolve('./src')
       },
       {
         test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=application/font-woff"
+        loader: "url?limit=10000&mimetype=application/font-woff",
+        include: path.resolve('./src')
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=application/octet-stream"
+        loader: "url?limit=10000&mimetype=application/octet-stream",
+        include: path.resolve('./src')
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file"
+        loader: "file",
+        include: path.resolve('./src')
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=10000&mimetype=image/svg+xml"
+        loader: "url?limit=10000&mimetype=image/svg+xml",
+        include: path.resolve('./src')
       },
       {
         test: webpackIsomorphicToolsPlugin.regular_expression('images'),
-        loader: 'url-loader?limit=10240'
+        loader: 'url-loader?limit=10240',
+        include: path.resolve('./src')
       }
     ]
   },
