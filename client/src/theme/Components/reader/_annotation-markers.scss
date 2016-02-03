@@ -1,0 +1,36 @@
+// Annotation Marker Components
+// ----------------------------
+
+// A grouping of components used to mark/signal annotations
+
+.annotation-comment {
+  border-bottom: 2px solid $sp20Primary;
+
+  .annotation-marker {
+    @include buttonUnstyled;
+    @include templateHead;
+    position: absolute;
+    right: 10%;
+    padding: 0 8px 3px;
+    font-size: $type70;
+    letter-spacing: 0.075em;
+    color: $neutralWhite;
+    background-color: $sp20Primary;
+
+    &::before {
+      position: absolute;
+      top: 100%;
+      left: 8px;
+      width: 0;
+      height: 0;
+      border-color: $sp20Primary transparent transparent;
+      border-style: solid;
+      border-width: 8px 9px 0 0;
+      content: '';
+    }
+  }
+}
+
+.annotation-highlight {
+  background-color: $sp20PrimaryPale;
+}

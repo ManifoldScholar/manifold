@@ -12,9 +12,11 @@ export default class EventList extends Component {
   // to an optional mixin if this component needs to be used without it
 
   // Default inline CSS class
-  state = { matchedHeight: {
-    height: 'auto'
-  } };
+  state = {
+    matchedHeight: {
+      height: 'auto'
+    }
+  };
 
   /* eslint-disable react/no-did-mount-set-state */
   componentDidMount() {

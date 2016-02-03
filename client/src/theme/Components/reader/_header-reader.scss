@@ -5,6 +5,7 @@
 
   .container-banner {
     @include clearfix;
+    @include bannerGlow;
     height: 63px;
     background-color: $neutralWhite;
   }
