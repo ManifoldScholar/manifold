@@ -13,6 +13,7 @@ export default class GroupedTexts extends Component {
       if (category === null) {
         return text.relationships.category.data === null;
       }
+      if (!text.relationships.category.data) return false;
       return text.relationships.category.data.id === category.id;
     });
   };
@@ -35,6 +36,7 @@ export default class GroupedTexts extends Component {
 
   render() {
     const textsByCategory = this.buildGroupedCollection();
+    console.log(textsByCategory);
     let categoryKey;
     let header;
 

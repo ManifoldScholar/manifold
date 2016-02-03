@@ -8,19 +8,19 @@ export default class ProjectDetailHero extends Component {
     makers: PropTypes.array
   };
 
-  listMakers = () => {
+  listMakers() {
     if (this.props.makers.length > 0) {
       return (
-          <section className="project-makers">
-            {this.props.makers.map((maker) => {
-              return (
-                  <MakerFigure key={maker.id} maker={maker} />
-              );
-            })}
-          </section>
+        <section className="project-makers">
+          {this.props.makers.map((maker) => {
+            return (
+              <MakerFigure key={maker.id} maker={maker} />
+            );
+          })}
+        </section>
       );
     }
-  };
+  }
 
   render() {
     return (

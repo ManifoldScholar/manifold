@@ -66,6 +66,10 @@ class Text < ActiveRecord::Base
   end
   memoize :ingestion_resource_map
 
+  def cover
+    ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
+  end
+
   def cover_url
     cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
     cover_source.resource.attachment.url if cover_source
