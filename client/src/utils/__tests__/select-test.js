@@ -50,7 +50,7 @@ describe('utils/select', () => {
     }
   };
 
-  const results = select({relationships}, entities);
+  const results = select({ relationships }, entities);
 
   it('should return an object with a corresponding key for each relationship', () => {
     expect(Object.keys(results)).to.deep.equal(Object.keys(relationships));

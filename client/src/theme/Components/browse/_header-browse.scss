@@ -1,5 +1,6 @@
 // <header>
 .header-browse {
+  @include bannerGlow;
   position: fixed;
   width: 100%;
   padding: 30px 52px 30px 40px;

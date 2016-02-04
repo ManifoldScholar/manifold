@@ -36,7 +36,6 @@ export default class GroupedTexts extends Component {
 
   render() {
     const textsByCategory = this.buildGroupedCollection();
-    console.log(textsByCategory);
     let categoryKey;
     let header;
 

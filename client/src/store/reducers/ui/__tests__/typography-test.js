@@ -7,7 +7,7 @@ describe('store/reducers/ui/typography', () => {
     // Must mirror initial state declared in '../typography'
     expect(state).to.deep.equal({
       font: 'serif',
-      fontSize:{
+      fontSize: {
         current: 3,
         max: 5,
         min: 0
@@ -38,7 +38,7 @@ describe('store/reducers/ui/typography/selectFont', () => {
 describe('store/reducers/ui/typography/incrementFontSize', () => {
   it('Should increment the value by 1', () => {
     const initialState = {
-      fontSize:{
+      fontSize: {
         current: 1,
         max: 5
       }
@@ -47,7 +47,7 @@ describe('store/reducers/ui/typography/incrementFontSize', () => {
     const action = { type: 'INCREMENT_FONT_SIZE' };
     const state = typographyReducer(initialState, action);
     expect(state).to.deep.equal({
-      fontSize:{
+      fontSize: {
         current: 2,
         max: 5
       }
@@ -56,7 +56,7 @@ describe('store/reducers/ui/typography/incrementFontSize', () => {
 
   it('Should return the same value if it is at maximum', () => {
     const initialState = {
-      fontSize:{
+      fontSize: {
         current: 5,
         max: 5
       }
@@ -71,7 +71,7 @@ describe('store/reducers/ui/typography/incrementFontSize', () => {
 describe('store/reducers/ui/typography/decrementFontSize', () => {
   it('Should decrement the value by 1', () => {
     const initialState = {
-      fontSize:{
+      fontSize: {
         current: 1,
         min: -5
       }
@@ -80,7 +80,7 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
     const action = { type: 'DECREMENT_FONT_SIZE' };
     const state = typographyReducer(initialState, action);
     expect(state).to.deep.equal({
-      fontSize:{
+      fontSize: {
         current: 0,
         min: -5
       }
@@ -89,7 +89,7 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
 
   it('Should return the same value if it is at minimum', () => {
     const initialState = {
-      fontSize:{
+      fontSize: {
         current: -5,
         min: -5
       }
@@ -104,7 +104,7 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
 describe('store/reducers/ui/typography/incrementMargins', () => {
   it('Should increment the value by 1', () => {
     const initialState = {
-      margins:{
+      margins: {
         current: 1,
         max: 2
       }
@@ -113,7 +113,7 @@ describe('store/reducers/ui/typography/incrementMargins', () => {
     const action = { type: 'INCREMENT_MARGINS' };
     const state = typographyReducer(initialState, action);
     expect(state).to.deep.equal({
-      margins:{
+      margins: {
         current: 2,
         max: 2
       }
@@ -122,7 +122,7 @@ describe('store/reducers/ui/typography/incrementMargins', () => {
 
   it('Should return the same value if it is at maximum', () => {
     const initialState = {
-      margins:{
+      margins: {
         current: 2,
         max: 2
       }
@@ -137,7 +137,7 @@ describe('store/reducers/ui/typography/incrementMargins', () => {
 describe('store/reducers/ui/typography/decrementFontSize', () => {
   it('Should decrement the value by 1', () => {
     const initialState = {
-      margins:{
+      margins: {
         current: 1,
         min: 0
       }
@@ -146,7 +146,7 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
     const action = { type: 'DECREMENT_MARGINS' };
     const state = typographyReducer(initialState, action);
     expect(state).to.deep.equal({
-      margins:{
+      margins: {
         current: 0,
         min: 0
       }
@@ -155,7 +155,7 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
 
   it('Should return the same value if it is at minimum', () => {
     const initialState = {
-      margins:{
+      margins: {
         current: 0,
         min: 0
       }
