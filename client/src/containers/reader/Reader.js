@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
 import { BodyClass, LoginOverlay, LoadingBar } from '../../components/shared';
-import { Header } from '../../components/reader';
+import { Header, SectionPagination } from '../../components/reader';
 import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
 import { select } from '../../utils/select';
@@ -42,7 +42,7 @@ function mapStateToProps(state) {
     stylesheets,
     authentication: state.authentication,
     visibility: state.ui.visibility,
-    appearance,
+    appearance
   };
 }
 
@@ -145,6 +145,7 @@ class Reader extends Component {
           />
           <main>
             {this.props.children}
+            <SectionPagination />
           </main>
         </div>
       </BodyClass>
