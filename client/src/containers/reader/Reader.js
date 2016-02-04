@@ -56,7 +56,7 @@ class Reader extends Component {
     text: PropTypes.object,
     visibility: PropTypes.object,
     appearance: PropTypes.object,
-    stylesheets: PropTypes.object,
+    stylesheets: PropTypes.array,
     authentication: PropTypes.object,
     dispatch: PropTypes.func,
     history: PropTypes.object
