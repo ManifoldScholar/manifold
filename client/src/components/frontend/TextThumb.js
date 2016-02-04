@@ -7,22 +7,28 @@ export default class TextThumb extends Component {
     text: PropTypes.object
   };
 
-  renderSubtitle = (text) => {
+  constructor(props) {
+    super(props);
+    this.renderThumbnail = this.renderThumbnail.bind(this);
+    this.renderSubtitle = this.renderSubtitle.bind(this);
+  }
+
+  renderSubtitle(text) {
     if (!text.attributes.subtitle) return null;
     return (
       <span className="subtitle">
         {text.attributes.subtitle}
       </span>
     );
-  };
+  }
 
   // Since we only have demo icons at this point, thumbnail can either be an image or a
   // placeholder icon
-  renderThumbnail = (text) => {
+  renderThumbnail(text) {
     let thumbnail = '';
-    if (text.attributes.cover_url) {
+    if (text.attributes.coverUrl) {
       thumbnail = (
-        <img src={text.attributes.cover_url} alt={'Thumbnail image for ' + text.attributes.title} />
+        <img src={text.attributes.coverUrl} alt={'Thumbnail image for ' + text.attributes.title} />
       );
     } else {
       thumbnail = (
@@ -32,7 +38,7 @@ export default class TextThumb extends Component {
       );
     }
     return thumbnail;
-  };
+  }
 
   render() {
     const text = this.props.text;
