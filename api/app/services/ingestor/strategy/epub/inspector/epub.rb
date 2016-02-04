@@ -177,7 +177,7 @@ module Ingestor
 
           def manifest_cover_item_id
             node = manifest_cover_item
-            return unless node
+            return node.attribute("id").to_str if node
             meta_cover_node = metadata_node.css('[name="cover"]').first
             return unless meta_cover_node
             id = meta_cover_node.attribute("content")

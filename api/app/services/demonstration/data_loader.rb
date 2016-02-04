@@ -10,9 +10,8 @@ module Demonstration
 
     def load
       clear_db
-      make_projects(10)
       batch_ingest
-      assign_texts_to_projects
+      make_projects
       create_admin_user
     end
 
@@ -51,20 +50,20 @@ module Demonstration
     end
 
     # rubocop:disable Metrics/AbcSize
-    def make_projects(count)
-      count.times do
-        p = Project.create(title: Faker::Book.title,
-                           description: Faker::Hipster.paragraph,
-                           cover: File.open(random_cover_image),
-                           featured: [true, false].sample
-                          )
-        p.collaborators.create(
-          maker: Maker.create(name: Faker::Book.author),
-          role: :creator
+    def make_projects
+      Text.all.each do |text|
+        project = Project.create(
+          title: text.title,
+          description: text.description,
+          cover: text.cover.resource.attachment,
+          featured: [true, false, false, false].sample
         )
-        @logger.info("Creating project: #{p.title}".green)
-        p.text_categories = random_categories(rand(0..5), Category::ROLE_TEXT)
-        p.save
+        project.collaborators = text.collaborators
+        @logger.info("Creating project: #{project.title}".green)
+        project.text_categories = random_categories(rand(0..5), Category::ROLE_TEXT)
+        project.save
+        text.project = project
+        text.save
       end
     end
 
