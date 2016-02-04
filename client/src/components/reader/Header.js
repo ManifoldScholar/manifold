@@ -57,7 +57,7 @@ export default class Header extends Component {
 
     const buttonIndexClass = classNames({
       'button-index': true,
-      active: this.props.visibility.tocDrawer,
+      active: this.props.visibility.tocDrawer
     });
 
     return (

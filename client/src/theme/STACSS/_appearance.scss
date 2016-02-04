@@ -52,6 +52,12 @@
     // scss-lint:disable NameFormat
     background: linear-gradient(to bottom, $neutralWhite 0%, transparentize($neutralWhite, 1) 100%);
     content: '';
+    opacity: 0;
+    transition: opacity $duration $timing;
+    // Only visible when not at top of the page
+    .not-top & {
+      opacity: 1;
+    }
   }
 }
 

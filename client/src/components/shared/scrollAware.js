@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 export default class ScrollAware extends Component {
   static propTypes = {
-    children: PropTypes.element,
+    children: PropTypes.object,
     threshold: PropTypes.number,
     throttle: PropTypes.number
   };
@@ -16,19 +16,18 @@ export default class ScrollAware extends Component {
 
   constructor() {
     super();
-    this.state = {top: true};
+    this.state = {
+      top: true
+    };
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
   }
 
-  componentDidUpdate() {
-    console.log('ima update now');
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.top != nextState.top;
+    if (nextProps !== this.props) return true;
+    return this.state.top !== nextState.top;
   }
 
   componentWillUnmount() {
@@ -45,14 +44,20 @@ export default class ScrollAware extends Component {
     return scrollTop;
   }
 
-  handleScroll = () => {
+  handleScroll = throttle(() => {
     const isTop = this.getScrollTop() < this.props.threshold;
     this.setState({ top: isTop });
-  };
+  }, 500);
 
   render() {
+    const scrollClass = classNames({
+      'scroll-aware': true,
+      top: this.state.top,
+      'not-top': !this.state.top
+    });
+
     return (
-        <div className="stub">
+        <div className={scrollClass}>
           {this.props.children}
         </div>
     );

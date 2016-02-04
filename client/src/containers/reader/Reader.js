@@ -129,7 +129,10 @@ class Reader extends Component {
           {this.renderStyles()}
           <DocumentMeta {...config.app}/>
           <LoadingBar />
+          {/* Header inside scroll-aware HOC */}
           <Header
+
+            // Props required by body component
             text={text}
             authenticated={this.props.authentication.authToken === null ? false : true}
             visibility={this.props.visibility }
