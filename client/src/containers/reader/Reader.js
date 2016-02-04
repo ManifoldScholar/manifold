@@ -16,6 +16,7 @@ import { selectFont, incrementFontSize, decrementFontSize, incrementMargins, dec
   from '../../actions/reader/ui/typography';
 import { setColorScheme } from '../../actions/reader/ui/colors';
 import { browserHistory } from 'react-router';
+import { DevTools } from '../shared';
 
 function fetchData(getState, dispatch, location, params) {
   const promises = [];
@@ -116,6 +117,14 @@ class Reader extends Component {
     };
   };
 
+  renderDevTools() {
+    const useDevTools = __DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__;
+    if (useDevTools) {
+      return <DevTools />;
+    }
+    return null;
+  }
+
   renderStyles = () => {
     return values(this.props.stylesheets).map((stylesheet, index) => {
       return (
@@ -163,6 +172,7 @@ class Reader extends Component {
               textSections={this.props.textSections}
             />
           </main>
+          {this.renderDevTools()}
         </div>
       </BodyClass>
     );

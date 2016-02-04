@@ -61,7 +61,8 @@ export class ApiClient {
     return this.client.call(endpoint, method, options)
       .then(this._responseToJson, this._fetchNotOK)
       .then(this._cleanJson, this._responseNotOK)
-      .then(this._returnResults, this._jsonNotOK);
+      .then(this._returnResults, this._jsonNotOK)
+      .catch(this._handleFailure);
   };
 
   _responseToJson = (response) => {
@@ -128,16 +129,28 @@ export class ApiClient {
     return { entities, results };
   };
 
-  _responseNotOK = ({ response }) => {
-    console.log(response, 'error caught in responseNotOK');
+  _responseNotOK = (response) => {
+    return Promise.reject(response);
   };
 
-  _jsonNotOK = ({ json, response }) => {
-    console.log(json, response, 'error caught in jsonNotOK');
+  _jsonNotOK = (response) => {
+    return Promise.reject(response);
   };
 
   _fetchNotOK = (response) => {
-    console.log(response, 'error caught in fetchNotOK');
+    return Promise.reject(response);
+  };
+
+  _handleFailure = (reason) => {
+    const notificationPayload = {
+      id: 'API_CLIENT_ERROR',
+      level: 2,
+      heading: `Manifold API Error - ${reason.response.status} ${reason.response.statusText}`,
+      body: 'Manifold was unable to send or receive data from the server. This could be the ' +
+      'result of your machine being offline, or the backend server could be experiencing ' +
+      'difficulties.'
+    };
+    return Promise.reject(notificationPayload);
   };
 
 }

@@ -11,8 +11,9 @@ const getLoadingState = (activeLoaders) => {
 
 const maybeAddLoader = (activeLoaders, loader) => {
   if (activeLoaders.indexOf(loader) === -1) {
-    activeLoaders.push(loader);
-    return activeLoaders;
+    const newActiveLoaders = activeLoaders.slice(0);
+    newActiveLoaders .push(loader);
+    return newActiveLoaders;
   }
   return activeLoaders;
 };

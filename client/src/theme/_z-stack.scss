@@ -13,6 +13,14 @@
 
 .header-browse {
   z-index: 200;
+
+  .header-container {
+    z-index: 200;
+  }
+
+  .header-notifications-container {
+    z-index: 600;
+  }
 }
 
 .header-reader {
