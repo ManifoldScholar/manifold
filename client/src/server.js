@@ -20,7 +20,7 @@ import createApiProxy from './proxies/api';
 import createWebpackProxy from './proxies/webpack';
 import fetchAllData from './helpers/fetchAllData';
 
-const colors = require('colors');
+require('colors');
 const morgan = require('morgan');
 const pretty = new PrettyError();
 const app = new Express();
