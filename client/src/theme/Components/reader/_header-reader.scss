@@ -90,14 +90,31 @@
     }
   }
 
-  // <h2>
+  // <header>
   .title {
     @include templateHead();
-    float: left;
-    margin-left: 27px;
-    font-size: $type80;
-    font-weight: $regular; // OD
-    color: $neutral50;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+
+    .text-title, .section-title {
+      @include templateHead();
+      position: relative;
+      height: 100%;
+      padding: 19px 190px 0 27px;
+      margin: 0;
+      overflow: hidden;
+      font-size: $type80;
+      font-weight: $regular; // OD
+      color: $neutral50;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      transition: transform 0.4s $timing;
+
+      .not-top & {
+        transform: translateY(-100%);
+      }
+    }
   }
 
   .menu-buttons {

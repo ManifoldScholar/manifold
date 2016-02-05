@@ -9,6 +9,7 @@ export default class Header extends Component {
 
   static propTypes = {
     text: PropTypes.object,
+    sectionId: PropTypes.string,
     authenticated: PropTypes.bool,
     visibility: PropTypes.object,
     appearance: PropTypes.object,
@@ -25,6 +26,17 @@ export default class Header extends Component {
     setColorScheme: PropTypes.func,
     startLogout: PropTypes.func
   };
+
+  getSectionTitle(id) {
+    let title = '';
+    this.props.text.attributes.toc.forEach((section) => {
+      if (section.id === id) {
+        title = section.label;
+      }
+    });
+
+    return title;
+  }
 
   handleContentsButtonClick = () => {
     this.props.visibilityToggle('tocDrawer');
@@ -89,9 +101,12 @@ export default class Header extends Component {
               </button>
             </Link>
             { this.renderContentsButton(this.props.text.attributes.toc) }
-            <h2 className="title">
-              {this.props.text.attributes.title}
-            </h2>
+            <header className="title">
+              <h3 className="text-title">{this.props.text.attributes.title}</h3>
+              <h2 className="section-title">
+                {this.getSectionTitle(Number(this.props.sectionId))}
+              </h2>
+            </header>
             <nav className="menu-buttons">
               <ul>
                 <li>

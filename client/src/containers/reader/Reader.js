@@ -141,6 +141,7 @@ class Reader extends Component {
           <Header
             // Props required by body component
             text={text}
+            sectionId={this.props.sectionId}
             authenticated={this.props.authentication.authToken === null ? false : true}
             visibility={this.props.visibility }
             appearance={this.props.appearance}
