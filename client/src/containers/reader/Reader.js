@@ -27,6 +27,7 @@ function mapStateToProps(state) {
   const text = state.collections.entities.texts[textId];
   const { category, project, creators, contributors, textSections, tocSection, stylesheets } =
     select(text, state.collections.entities);
+  const sectionId = state.collections.results.fetchOneSection.entities;
   const appearance = {
     typography: state.ui.typography,
     colors: state.ui.colors
@@ -39,6 +40,8 @@ function mapStateToProps(state) {
     contributors,
     textSections,
     tocSection,
+    textId,
+    sectionId,
     stylesheets,
     authentication: state.authentication,
     visibility: state.ui.visibility,
@@ -54,6 +57,8 @@ class Reader extends Component {
     children: PropTypes.object,
     params: PropTypes.object,
     text: PropTypes.object,
+    textId: PropTypes.string,
+    sectionId: PropTypes.string,
     visibility: PropTypes.object,
     appearance: PropTypes.object,
     stylesheets: PropTypes.array,
@@ -145,7 +150,7 @@ class Reader extends Component {
           />
           <main>
             {this.props.children}
-            <SectionPagination />
+            <SectionPagination textId={this.props.textId} sectionId={this.props.sectionId} />
           </main>
         </div>
       </BodyClass>
