@@ -150,7 +150,11 @@ class Reader extends Component {
           />
           <main>
             {this.props.children}
-            <SectionPagination textId={this.props.textId} sectionId={this.props.sectionId} />
+            <SectionPagination
+              text={this.props.text}
+              textId={this.props.textId}
+              sectionId={this.props.sectionId}
+            />
           </main>
         </div>
       </BodyClass>

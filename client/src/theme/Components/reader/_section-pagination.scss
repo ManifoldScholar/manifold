@@ -1,4 +1,5 @@
 .section-pagination {
+  @include clearfix;
   padding: 42px 0 25px;
   background-color: $neutral20;
 
