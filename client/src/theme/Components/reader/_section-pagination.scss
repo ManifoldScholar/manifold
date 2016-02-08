@@ -1,0 +1,40 @@
+.section-pagination {
+  @include clearfix;
+  padding: 42px 0 25px;
+  background-color: $neutral20;
+
+  // Global button styles
+  // <a>
+  .pagination-previous, .pagination-next {
+    @include utilityPrimary;
+    display: inline-block;
+    font-size: $type60;
+    color: $neutral40;
+    text-decoration: none;
+    vertical-align: middle;
+
+    &:hover {
+      color: $accentPrimary;
+    }
+
+    .manicon {
+      display: inline-block;
+      font-size: 66px;
+      vertical-align: middle;
+    }
+  }
+
+  .pagination-previous {
+    .manicon {
+      margin-right: 30px;
+    }
+  }
+
+  .pagination-next {
+    float: right;
+
+    .manicon {
+      margin-left: 30px;
+    }
+  }
+}
