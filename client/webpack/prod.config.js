@@ -5,6 +5,7 @@ var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
+var autoprefixer = require('autoprefixer');
 
 var relativeAssetsPath = '../static/dist';
 var assetsPath = path.join(__dirname, relativeAssetsPath);
@@ -51,7 +52,7 @@ module.exports = {
       },
       { test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style',
-          'css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
+          'css?importLoaders=2&sourceMap!postcss?syntax=postcss-scss!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
         )
       },
       {
@@ -122,5 +123,8 @@ module.exports = {
      }),
 
     webpackIsomorphicToolsPlugin
-  ]
+  ],
+  postcss: function() {
+    return [ autoprefixer({ browsers: ['last 2 versions'] }) ];
+  }
 };
