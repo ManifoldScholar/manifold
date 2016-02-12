@@ -113,12 +113,12 @@
     margin: 0;
     font-size: $type40;
     line-height: $baseLineHeight;
+    cursor: pointer;
     background-color: transparent;
     border: 3px solid $neutral40;
     border-radius: 0;
     outline: 0;
-    // This should be auto-prefixed
-    -webkit-appearance: none;
+    appearance: none;
 
     &:focus {
       border-color: $accentPrimary;
