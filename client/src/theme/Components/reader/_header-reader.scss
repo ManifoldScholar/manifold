@@ -5,9 +5,34 @@
 
   .container-banner {
     @include clearfix;
-    @include bannerGlow;
     height: 63px;
     background-color: $neutralWhite;
+  }
+
+  .banner-gradient {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    // Relative z-index to container
+    z-index: -1;
+    width: 100%;
+    height: 60px;
+    // Escape linter to use CSS native function
+    // scss-lint:disable NameFormat
+    background: linear-gradient(to bottom, $neutralWhite 0%, transparentize($neutralWhite, 1) 100%);
+    content: '';
+    opacity: 0;
+    transition: opacity $duration $timing, background $duration $timing;
+
+    // Dark variant
+    &.scheme-dark {
+      background: linear-gradient(to bottom, $neutral90 0%, transparentize($neutral90, 1) 100%);
+    }
+
+    // Only visible when not at top of the page
+    .not-top & {
+      opacity: 1;
+    }
   }
 
   // <button>
