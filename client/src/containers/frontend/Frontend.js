@@ -54,7 +54,6 @@ export default class Frontend extends Component {
   setMinHeight() {
     const windowHeight = window.innerHeight;
     this.refs.mainContainer.style.minHeight = `${windowHeight}px`;
-    console.log(this.refs.mainContainer);
   }
 
   render() {
