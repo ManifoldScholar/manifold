@@ -112,7 +112,9 @@
     "webpack-hot-middleware": "^2.4.1",
     "webpack-isomorphic-tools": "^2.2.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-polyfill": "^6.5.0"
+  },
   "engines": {
     "node": "4.1.1"
   }
