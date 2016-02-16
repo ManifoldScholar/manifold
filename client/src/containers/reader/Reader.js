@@ -59,6 +59,7 @@ class Reader extends Component {
     text: PropTypes.object,
     textId: PropTypes.string,
     sectionId: PropTypes.string,
+    textSections: PropTypes.array,
     visibility: PropTypes.object,
     appearance: PropTypes.object,
     stylesheets: PropTypes.array,
@@ -151,9 +152,9 @@ class Reader extends Component {
           <main>
             {this.props.children}
             <SectionPagination
-              text={this.props.text}
               textId={this.props.textId}
               sectionId={this.props.sectionId}
+              textSections={this.props.textSections}
             />
           </main>
         </div>

@@ -3,16 +3,16 @@ import React, { Component, PropTypes } from 'react';
 export default class SectionPagination extends Component {
 
   static propTypes = {
-    text: PropTypes.object,
     textId: PropTypes.string,
-    sectionId: PropTypes.string
+    sectionId: PropTypes.string,
+    textSections: PropTypes.array
   };
 
   getSiblingSection(id, shift) {
     let siblingSection = false;
-    this.props.text.attributes.toc.forEach((section, i) => {
-      if (section.id === id && this.props.text.attributes.toc[i + shift]) {
-        siblingSection = this.props.text.attributes.toc[i + shift];
+    this.props.textSections.forEach((section, i) => {
+      if (section.id === id && this.props.textSections[i + shift]) {
+        siblingSection = this.props.textSections[i + shift];
       }
     });
 
@@ -20,16 +20,12 @@ export default class SectionPagination extends Component {
   }
 
   getSectionPath(section) {
-    let path = '';
-    let anchor = '';
-    if (section.anchor) anchor = `#${section.anchor}`;
-    path = `/read/${this.props.text.id}/section/${section.id}${anchor}`;
-    return path;
+    return `/read/${this.props.textId}/section/${section.id}`;
   }
 
   getPreviousLink() {
     let previousLink = '';
-    const previousNode = this.getSiblingSection(Number(this.props.sectionId), - 1);
+    const previousNode = this.getSiblingSection(this.props.sectionId, - 1);
     if (previousNode) {
       const previousPath = this.getSectionPath(previousNode);
       previousLink = (
@@ -44,7 +40,7 @@ export default class SectionPagination extends Component {
 
   getNextLink() {
     let nextLink = '';
-    const nextNode = this.getSiblingSection(Number(this.props.sectionId), 1);
+    const nextNode = this.getSiblingSection(this.props.sectionId, 1);
     if (nextNode) {
       const nextPath = this.getSectionPath(nextNode);
       nextLink = (
