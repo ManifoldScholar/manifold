@@ -68,6 +68,16 @@ export default class Header extends Component {
   };
 
   render() {
+    const colorScheme = this.props.appearance.colors.colorScheme;
+
+    const bannerGradientClass = classNames({
+      'banner-gradient': true,
+      'scheme-light': colorScheme === 'light',
+      'scheme-dark': colorScheme === 'dark'
+    });
+
+    console.log(this.props.appearance);
+
     return (
       <ScrollAware>
         <header className="header-reader">
@@ -108,6 +118,7 @@ export default class Header extends Component {
                 </li>
               </ul>
             </nav>
+            <div className={bannerGradientClass}></div>
           </nav>
           <TocDrawer
             text={this.props.text}
