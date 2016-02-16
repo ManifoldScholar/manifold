@@ -1,35 +1,37 @@
 import loadingReducer from '../loading';
 import { expect } from 'chai';
 
+/* eslint-disable no-unused-expressions */
 describe('store/reducers/ui/loading', () => {
+
   it('should return the initial state', () => {
     const state = loadingReducer(undefined, {});
     expect(state).to.deep.equal({
-      state: 'default'
+      active: false,
+      activeLoaders: []
     });
   });
 
-  it('set the correct state in response to a LOAD_STATE_DEFAULT action', () => {
-    const initialState = { state: 'loading' };
-    const action = { type: 'LOAD_STATE_DEFAULT' };
+  it('set the correct state in response to a START_LOADING action', () => {
+    const initialState = { active: false, activeLoaders: [] };
+    const promise = new Promise(() => {});
+    const action = { type: 'START_LOADING', payload: promise };
     const state = loadingReducer(initialState, action);
-    expect(state).to.deep.equal({ state: 'default'});
+    expect(state.active).to.be.true;
   });
 
-  it('set the correct state in response to a LOAD_STATE_LOADING action', () => {
-    const initialState = { state: 'default' };
-    const action = { type: 'LOAD_STATE_LOADING' };
-    const state = loadingReducer(initialState, action);
-    expect(state).to.deep.equal({ state: 'loading'});
+  it('sets the active state to false when a START_LOADING promise is resolved', (done) => {
+    const initialState = { active: false, activeLoaders: [] };
+    const promise = new Promise((resolve) => { resolve(true); });
+    const startAction = { type: 'START_LOADING', payload: promise };
+    const startState = loadingReducer(initialState, startAction);
+    promise.then(() => {
+      const stopAction = { type: 'STOP_LOADING', payload: promise };
+      const stopState = loadingReducer(startState, stopAction);
+      expect(stopState.active).to.be.false;
+      done();
+    });
   });
-
-
-  it('set the correct state in response to a LOAD_STATE_COMPLETE action', () => {
-    const initialState = { state: 'default' };
-    const action = { type: 'LOAD_STATE_COMPLETE' };
-    const state = loadingReducer(initialState, action);
-    expect(state).to.deep.equal({ state: 'complete'});
-  });
-
 
 });
+/* eslint-enable no-unused-expressions */
