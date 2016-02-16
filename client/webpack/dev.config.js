@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
+var autoprefixer = require('autoprefixer');
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = 'localhost';
 var port = parseInt(process.env.PORT) + 1 || 3001;
@@ -82,7 +83,7 @@ module.exports = {
         loaders: [
           'style',
           'css?importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]',
-          'autoprefixer?browsers=last 2 version',
+          'postcss?syntax=postcss-scss',
           'sass?outputStyle=expanded&sourceMap'
         ],
         include: path.resolve('./src')
@@ -141,5 +142,8 @@ module.exports = {
       __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
     }),
     webpackIsomorphicToolsPlugin.development()
-  ]
+  ],
+  postcss: function() {
+    return [ autoprefixer({ browsers: ['last 2 versions'] }) ];
+  }
 };
