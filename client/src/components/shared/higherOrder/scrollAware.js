@@ -6,12 +6,16 @@ export default class ScrollAware extends Component {
   static propTypes = {
     children: PropTypes.object,
     threshold: PropTypes.number,
-    throttle: PropTypes.number
+    throttle: PropTypes.number,
+    topClass: PropTypes.string,
+    notTopClass: PropTypes.string
   };
 
   static defaultProps = {
     threshold: 200,
-    throttle: 500
+    throttle: 500,
+    topClass: 'top',
+    notTopClass: 'not-top'
   };
 
   constructor() {
@@ -49,16 +53,34 @@ export default class ScrollAware extends Component {
     this.setState({ top: isTop });
   }, 500);
 
-  render() {
-    const scrollClass = classNames({
-      'scroll-aware': true,
-      top: this.state.top,
-      'not-top': !this.state.top
+  renderChildren() {
+    let firstChild = false;
+    if (React.Children.count(this.props.children) > 1) {
+      firstChild = this.props.children[0];
+    } else {
+      firstChild = this.props.children;
+    }
+    return React.cloneElement(firstChild, {
+      scrollAware: {
+        top: this.state.top
+      }
     });
+  }
+
+  render() {
+    // Dynaimcally assign scroller classes based on props
+    const scrollClasses = {
+      'scroll-aware': true
+    };
+
+    scrollClasses[this.props.topClass] = this.state.top;
+    scrollClasses[this.props.notTopClass] = !this.state.top;
+
+    const scrollClass = classNames(scrollClasses);
 
     return (
         <div className={scrollClass}>
-          {this.props.children}
+          {this.renderChildren()}
         </div>
     );
   }

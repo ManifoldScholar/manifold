@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
-import { BodyClass, LoginOverlay, LoadingBar } from '../../components/shared';
+import { BodyClass, LoginOverlay, LoadingBar, ScrollAware } from '../../components/shared';
 import { Header, SectionPagination } from '../../components/reader';
 import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
@@ -137,16 +137,19 @@ class Reader extends Component {
           {this.renderStyles()}
           <DocumentMeta {...config.app}/>
           <LoadingBar loading={this.props.loading} />
-          {/* Header inside scroll-aware HOC */}
-          <Header
-            // Props required by body component
-            text={text}
-            sectionId={this.props.sectionId}
-            authenticated={this.props.authentication.authToken === null ? false : true}
-            visibility={this.props.visibility }
-            appearance={this.props.appearance}
-            {...this.headerMethods()}
-          />
+          <ScrollAware>
+            {/* Header inside scroll-aware HOC */}
+            <Header
+
+              // Props required by body component
+              text={text}
+              sectionId={this.props.sectionId}
+              authenticated={this.props.authentication.authToken === null ? false : true}
+              visibility={this.props.visibility }
+              appearance={this.props.appearance}
+              {...this.headerMethods()}
+            />
+          </ScrollAware>
           <LoginOverlay
             visible={this.props.visibility.loginOverlay}
             hideLoginOverlay={hideLoginOverlay}

@@ -96,6 +96,7 @@
     position: relative;
     height: 100%;
     overflow: hidden;
+    cursor: pointer;
 
     .text-title, .section-title {
       @include templateHead();
@@ -107,13 +108,13 @@
       font-size: $type80;
       font-weight: $regular; // OD
       color: $neutral50;
-      white-space: nowrap;
       text-overflow: ellipsis;
+      white-space: nowrap;
       transition: transform 0.4s $timing;
+    }
 
-      .not-top & {
-        transform: translateY(-100%);
-      }
+    &.show-section .text-title, &.show-section .section-title {
+      transform: translateY(-100%);
     }
   }
 
