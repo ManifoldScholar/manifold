@@ -15,7 +15,7 @@
     "start": "node -r dotenv/config bin/server.js",
     "webpack": "node -r dotenv/config webpack/webpack-dev-server.js",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
-    "lint": "eslint -c .eslintrc src",
+    "lint": "eslint -c .eslintrc src && scss-lint src/theme/ -c ../.scss-lint.yml",
     "test": "karma start"
   },
   "dependencies": {
