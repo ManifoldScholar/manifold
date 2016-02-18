@@ -90,14 +90,32 @@
     }
   }
 
-  // <h2>
+  // <header>
   .title {
     @include templateHead();
-    float: left;
-    margin-left: 27px;
-    font-size: $type80;
-    font-weight: $regular; // OD
-    color: $neutral50;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+
+    .text-title, .section-title {
+      @include templateHead();
+      position: relative;
+      height: 100%;
+      padding: 19px 190px 0 27px;
+      margin: 0;
+      overflow: hidden;
+      font-size: $type80;
+      font-weight: $regular; // OD
+      color: $neutral50;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: transform 0.4s $timing;
+    }
+
+    &.show-section .text-title, &.show-section .section-title {
+      transform: translateY(-100%);
+    }
   }
 
   .menu-buttons {
