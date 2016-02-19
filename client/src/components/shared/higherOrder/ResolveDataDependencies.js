@@ -29,7 +29,10 @@ class DelayContainer extends Component {
 
   componentWillReceiveProps = (nextProps) => {
     const state = nextProps.store.getState();
-    const routeChanged = state.isomorphic.fetchedRoute !== state.routing.path;
+    const routeChanged = state.isomorphic.fetchedRoute !== state.routing.location.pathname;
+    console.log(state.isomorphic.fetchedRoute, 'a');
+    console.log(state.routing.location.pathname, 'b');
+    console.log(routeChanged, 'route changed');
     if (!routeChanged) {
       this.loadingComplete();
       return;
@@ -76,7 +79,6 @@ class DelayContainer extends Component {
     }
     return null;
   }
-
 }
 
 export default class ResolveDataDependencies extends Component {
