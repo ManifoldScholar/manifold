@@ -10,7 +10,7 @@ module Validator
     TAG_ATTRIBUTE_BLACKLIST = %w(accept accept-charset accesskey async autofocus border
                                  bgcolor challenge charset code codebase color cols
                                  content contenteditable defer draggable dropzone height
-                                 id keytype language manifest required sandbox shape size
+                                 keytype language manifest required sandbox shape size
                                  sizes tabindex width align)
     CSS_VALUE_MAP = {
       "xx-small" => ".7em",
