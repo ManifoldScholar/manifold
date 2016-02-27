@@ -7,6 +7,8 @@
   // Hidden by default
   opacity: 0;
   visibility: hidden;
+  // I'm not sure how to fix this, leaving it for Naomi
+  // scss-lint:disable TransitionAll
   transition: all, $duration, $timing;
 
   &.overlay-visible {

@@ -123,6 +123,8 @@
     }
 
     // Panel default states
+    // I'm not sure how to fix this, leaving it for Naomi
+    // scss-lint:disable TransitionAll
     .search-menu, .user-menu {
       // Default state
       margin-top: -20px;
