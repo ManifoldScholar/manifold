@@ -4,6 +4,7 @@ import connectData from '../../decorators/connectData';
 import { fetchOneSection } from '../../actions/shared/collections';
 import classNames from 'classnames';
 import { SectionBody } from '../../components/reader';
+import scrollToElement from 'scroll-to-element';
 
 function fetchData(getState, dispatch, location, params) {
   return Promise.all([
@@ -18,7 +19,8 @@ function mapStateToProps(state) {
     appearance: {
       typography: state.ui.typography,
       colors: state.ui.colors
-    }
+    },
+    hash: state.routing.locationBeforeTransitions.hash
   };
 }
 
@@ -32,7 +34,8 @@ class Reader extends Component {
     text: PropTypes.object,
     fetchOneSection: PropTypes.string,
     sections: PropTypes.object,
-    appearance: PropTypes.object
+    appearance: PropTypes.object,
+    hash: PropTypes.string
   };
 
   static contextTypes = {
@@ -41,6 +44,14 @@ class Reader extends Component {
 
   constructor() {
     super();
+  }
+
+  componentDidMount() {
+    this.maybeScrollToAnchor(null, this.props.hash);
+  }
+
+  componentDidUpdate(prevProps) {
+    this.maybeScrollToAnchor(prevProps.hash, this.props.hash);
   }
 
   getSection() {
@@ -60,6 +71,16 @@ class Reader extends Component {
     return {
       maxWidth: baseSizes[sizeIndex] + 'px'
     };
+  }
+
+  maybeScrollToAnchor(previousHash, currentHash) {
+    if (currentHash && previousHash !== currentHash) {
+      scrollToElement(currentHash, {
+        offset: -125,
+        ease: 'in-quad',
+        duration: 500
+      });
+    }
   }
 
   render() {

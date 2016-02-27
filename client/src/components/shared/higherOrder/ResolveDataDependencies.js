@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import RoutingContext from '../../../../node_modules/react-router/lib/RoutingContext';
+import { RouterContext } from 'react-router';
 import { isFunction } from '../../../../node_modules/lodash/lang';
 
 class DelayContainer extends Component {
@@ -12,47 +12,59 @@ class DelayContainer extends Component {
 
   constructor(props, context) {
     super(props, context);
+    this._isMounted = false;
     this.state = {
       loaded: false,
     };
   }
 
-  componentWillMount = () => {
-    const state = this.props.store.getState();
-    const routeChanged = state.isomorphic.fetchedRoute !== this.props.routerProps.location.pathname;
-    if (!routeChanged) {
+  componentWillMount() {
+    if (!this.shouldFetchData(null, this.props)) {
       this.loadingComplete();
       return;
     }
     this.doFetchData(this.props);
-  };
+  }
 
-  componentWillReceiveProps = (nextProps) => {
-    const state = nextProps.store.getState();
-    const routeChanged = state.isomorphic.fetchedRoute !== state.routing.location.pathname;
-    console.log(state.isomorphic.fetchedRoute, 'a');
-    console.log(state.routing.location.pathname, 'b');
-    console.log(routeChanged, 'route changed');
-    if (!routeChanged) {
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.shouldFetchData(this.props, nextProps)) {
       this.loadingComplete();
       return;
     }
     this.doFetchData(nextProps);
-  };
+  }
 
-  loadingComplete = () => {
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  shouldFetchData(props, nextProps) {
+    const isChangeAction = nextProps.routerProps.location.action === 'PUSH' ||
+      nextProps.routerProps.location.action === 'POP';
+    const pathChanged = !props ||
+      props.routerProps.location.pathname !== nextProps.routerProps.location.pathname;
+    return isChangeAction && pathChanged;
+  }
+
+  loadingComplete() {
+    if (!this._isMounted) return;
     this.setState({
       loaded: true
     });
-  };
+  }
 
-  loadingStart = () => {
+  loadingStart() {
+    if (!this._isMounted) return;
     this.setState(Object.assign({}, {
       loaded: false
     }));
-  };
+  }
 
-  doFetchData = (props) => {
+  doFetchData(props) {
     const component = props.component;
     if (component && isFunction(component.fetchData)) {
       const promises = [];
@@ -68,7 +80,7 @@ class DelayContainer extends Component {
     } else {
       this.loadingComplete();
     }
-  };
+  }
 
   render() {
     const ComponentClass = this.props.component;
@@ -104,8 +116,10 @@ export default class ResolveDataDependencies extends Component {
   };
 
   render() {
+    const createElement = this.createElement;
+    const newProps = { ...this.props, createElement };
     return (
-      <RoutingContext {...this.props} createElement={this.createElement}/>
+      <RouterContext {...newProps} />
     );
   }
 }

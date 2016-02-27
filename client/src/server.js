@@ -12,7 +12,7 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import cookie from 'cookie';
 import { setAuthToken } from './actions/shared/authentication';
-import { RoutingContext, match } from 'react-router';
+import { RouterContext, match } from 'react-router';
 import { Provider } from 'react-redux';
 import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
@@ -65,6 +65,14 @@ app.use((req, res) => {
     routes: getRoutes(store),
     location: req.originalUrl
   }, (error, redirectLocation, renderProps) => {
+    // We want the full location to be available to components even during server-side render.
+    // Not sure this is the best way to accomplish this.
+    if (renderProps) {
+      store.dispatch({
+        type: '@@router/UPDATE_LOCATION',
+        payload: renderProps.location
+      });
+    }
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
@@ -84,7 +92,7 @@ app.use((req, res) => {
         store.dispatch({ type: 'RECORD_DATA_FETCHING', payload: req.originalUrl });
         const component = (
           <Provider store={store} key="provider">
-            <RoutingContext {...renderProps} />
+            <RouterContext {...renderProps} />
           </Provider>
         );
         const status = getStatusFromRoutes(renderProps.routes);

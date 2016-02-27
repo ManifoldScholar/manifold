@@ -15,6 +15,7 @@ import { values } from 'lodash/object';
 import { selectFont, incrementFontSize, decrementFontSize, incrementMargins, decrementMargins }
   from '../../actions/reader/ui/typography';
 import { setColorScheme } from '../../actions/reader/ui/colors';
+import { browserHistory } from 'react-router';
 
 function fetchData(getState, dispatch, location, params) {
   const promises = [];
@@ -94,8 +95,9 @@ class Reader extends Component {
   }
 
   transitionToFirstSection = () => {
+    console.log(this.context,'c');
     const firstSectionId = this.props.text.attributes.firstSectionId;
-    this.props.history.push(`/read/${this.props.text.id}/section/${firstSectionId}`);
+    browserHistory.push(`/read/${this.props.text.id}/section/${firstSectionId}`);
   };
 
   headerMethods = () => {

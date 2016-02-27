@@ -5,12 +5,11 @@ import { DevTools } from '../containers/shared';
 import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise';
 
-export default function createStore(data, routerMiddleware) {
+export default function createStore(data) {
 
   const useDevTools = __DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__;
 
   const middleware = [];
-  if (routerMiddleware) middleware.push(routerMiddleware);
   middleware.push(thunkMiddleware);
   middleware.push(loadingMiddleware);
   middleware.push(promiseMiddleware);
@@ -37,10 +36,6 @@ export default function createStore(data, routerMiddleware) {
 
   const reducer = require('./reducers');
   const store = finalCreateStore(reducer, data);
-
-  if (useDevTools && routerMiddleware) {
-    routerMiddleware.listenForReplays(store);
-  }
 
   if (__DEVELOPMENT__ && module.hot) {
     module.hot.accept('./reducers', () => {

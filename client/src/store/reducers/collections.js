@@ -2,15 +2,20 @@ import { handleActions } from 'redux-actions';
 import { timestamp } from '../../utils/time';
 import { camelize } from 'humps';
 import { actions } from '../../actions/shared/collections';
+import { startsWith } from 'lodash/string';
 
 const collectionActions = Object.values(actions);
 export const collectionEntities = ['texts', 'projects', 'makers'];
 
-const resultsTemplate = { entities: [], query: {}, receivedAt: null };
+const collectionResultsTemplate = { entities: [], query: {}, receivedAt: null };
+const entityResultsTemplate = { entities: null, query: {}, receivedAt: null };
 
 const initialResults = {};
 collectionActions.forEach((action) => {
-  initialResults[camelize(action.toLowerCase())] = Object.assign({}, resultsTemplate);
+  const actionName = camelize(action.toLowerCase());
+  const template = startsWith(actionName, 'fetchOne') ?
+    entityResultsTemplate : collectionResultsTemplate;
+  initialResults[actionName] = Object.assign({}, template);
 });
 
 const initialEntities = {};
@@ -35,6 +40,8 @@ const fetch = {
   next(state, action) {
     const time = new Date();
     const actionKey = camelize(action.type.toLowerCase());
+    const resultsTemplate = startsWith(actionKey, 'fetchOne') ?
+      entityResultsTemplate : collectionResultsTemplate;
     const results = {
       entities: action.payload.results,
       receivedAt: timestamp(time)
@@ -42,7 +49,6 @@ const fetch = {
     const fetchResults = {
       [actionKey]: Object.assign({}, resultsTemplate, results)
     };
-
     const newState = {
       results: Object.assign({}, state.results, fetchResults),
       entities: Object.assign(

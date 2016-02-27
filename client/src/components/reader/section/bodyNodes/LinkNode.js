@@ -24,7 +24,10 @@ class LinkNode extends Component {
 
   adjustedAttributes() {
     const parsedURI = URI.parse(this.props.attributes.href);
-    const adjustedAttributes = { to: parsedURI.path, hash: `#${parsedURI.fragment}` };
+    const pathname = parsedURI.path;
+    const query = parsedURI.query;
+    const hash = `#${parsedURI.fragment}`;
+    const adjustedAttributes = { to: { pathname, query, hash } };
     delete Object.assign(adjustedAttributes, this.props.attributes).href;
     return adjustedAttributes;
   }

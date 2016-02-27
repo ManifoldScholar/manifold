@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
-import { routeReducer } from 'redux-simple-router';
+import { routerReducer } from 'react-router-redux';
+
 import collections from './collections';
 import error from './error';
 import ui from './ui';
 import authentication from './authentication';
 import isomorphic from './isomorphic';
 
-const routing = routeReducer;
+const routing = routerReducer;
 const reducers = combineReducers({
   collections,
   error,
