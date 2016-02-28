@@ -4,7 +4,7 @@ import connectData from '../../decorators/connectData';
 import { fetchOneSection } from '../../actions/shared/collections';
 import classNames from 'classnames';
 import { SectionBody } from '../../components/reader';
-import scrollToElement from 'scroll-to-element';
+import smoothScroll from 'smoothscroll';
 
 function fetchData(getState, dispatch, location, params) {
   return Promise.all([
@@ -19,8 +19,7 @@ function mapStateToProps(state) {
     appearance: {
       typography: state.ui.typography,
       colors: state.ui.colors
-    },
-    hash: state.routing.locationBeforeTransitions.hash
+    }
   };
 }
 
@@ -35,7 +34,7 @@ class Reader extends Component {
     fetchOneSection: PropTypes.string,
     sections: PropTypes.object,
     appearance: PropTypes.object,
-    hash: PropTypes.string
+    location: PropTypes.object
   };
 
   static contextTypes = {
@@ -47,11 +46,11 @@ class Reader extends Component {
   }
 
   componentDidMount() {
-    this.maybeScrollToAnchor(null, this.props.hash);
+    this.maybeScrollToAnchor(null, this.props.location.hash);
   }
 
   componentDidUpdate(prevProps) {
-    this.maybeScrollToAnchor(prevProps.hash, this.props.hash);
+    this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
 
   getSection() {
@@ -75,11 +74,11 @@ class Reader extends Component {
 
   maybeScrollToAnchor(previousHash, currentHash) {
     if (currentHash && previousHash !== currentHash) {
-      scrollToElement(currentHash, {
-        offset: -125,
-        ease: 'in-quad',
-        duration: 500
-      });
+      const scrollTarget = document.querySelector(currentHash);
+      const position = scrollTarget.getBoundingClientRect().top + window.pageYOffset;
+      setTimeout(() => {
+        smoothScroll(position - 125);
+      }, 0);
     }
   }
 

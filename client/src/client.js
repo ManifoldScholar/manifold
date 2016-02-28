@@ -23,7 +23,7 @@ const store = createStore(window.__INITIAL_STATE__);
 // Setup history and wrap it with our scrolling helper
 let history;
 history = browserHistory;
-history = useScroll(() => history)();
+// history = useScroll(() => history)();
 
 // Ensure that the history in our story stays in sync with react-router's history
 history = syncHistoryWithStore(history, store);

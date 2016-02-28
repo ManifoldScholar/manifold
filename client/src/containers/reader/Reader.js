@@ -95,7 +95,6 @@ class Reader extends Component {
   }
 
   transitionToFirstSection = () => {
-    console.log(this.context,'c');
     const firstSectionId = this.props.text.attributes.firstSectionId;
     browserHistory.push(`/read/${this.props.text.id}/section/${firstSectionId}`);
   };
