@@ -47,7 +47,7 @@ export default class Home extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-  
+
   componentDidUpdate(prevProps) {
     const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
