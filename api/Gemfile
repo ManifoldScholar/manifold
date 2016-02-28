@@ -33,6 +33,4 @@ group :development do
   gem "spring"
   gem "spring-commands-rspec"
   gem "rubocop"
-  gem "capistrano-rails", group: :development
-  gem "capistrano-rbenv", group: :development
 end
