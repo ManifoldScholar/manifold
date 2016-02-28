@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import hoistStatics from 'hoist-non-react-statics';
-
+import hoistNonReactStatic from 'hoist-non-react-statics';
 /*
  Note:
  When this decorator is used, it MUST be the first (outermost) decorator.
@@ -17,6 +16,6 @@ export default function connectData(fetchData, fetchDataDeferred) {
 
     ConnectData.fetchData = fetchData;
     ConnectData.fetchDataDeferred = fetchDataDeferred;
-    return hoistStatics(ConnectData, WrappedComponent);
+    return hoistNonReactStatic(ConnectData, WrappedComponent);
   };
 }

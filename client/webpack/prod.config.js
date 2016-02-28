@@ -2,7 +2,6 @@
 require('babel-core/polyfill');
 var path = require('path');
 var webpack = require('webpack');
-var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
 var autoprefixer = require('autoprefixer');
@@ -91,7 +90,6 @@ module.exports = {
     extensions: ['', '.json', '.js']
   },
   plugins: [
-    new CleanPlugin([relativeAssetsPath]),
 
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
