@@ -49,6 +49,9 @@ export default class ProjectDetail extends Component {
     meta: []
   };
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
   renderActivity = () => {
     if (!this.state.activity.length > 0) return null;

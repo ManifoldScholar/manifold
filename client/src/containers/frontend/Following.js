@@ -44,6 +44,10 @@ export default class Following extends Component {
     store: PropTypes.object.isRequired
   };
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   componentDidUpdate(prevProps) {
     const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {

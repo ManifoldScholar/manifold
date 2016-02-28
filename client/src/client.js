@@ -11,7 +11,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { DevTools } from './containers/shared';
 import getRoutes from './routes';
 import { ResolveDataDependencies } from './components/shared';
-import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 // The DOM element into which we're rendering the client-side SPA
 const dest = document.getElementById('content');
@@ -23,7 +22,6 @@ const store = createStore(window.__INITIAL_STATE__);
 // Setup history and wrap it with our scrolling helper
 let history;
 history = browserHistory;
-// history = useScroll(() => history)();
 
 // Ensure that the history in our story stays in sync with react-router's history
 history = syncHistoryWithStore(history, store);
