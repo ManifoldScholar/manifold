@@ -5,6 +5,7 @@ module Ingestor
   module Strategy
     module EPUB
       module Inspector
+        # TODO: We no longer call this a conent document; rename to "Inspector::Section"
         # Provides information about a single content document in an EPUB package.
         #
         # @author Zach Davis

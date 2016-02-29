@@ -15,6 +15,14 @@ module Demonstration
       create_admin_user
     end
 
+    def publish_project_texts
+      Project.all.each do |project|
+        project.published_text = project.texts.first
+        project.published_datetime = Date.today
+        project.save
+      end
+    end
+
     def create_admin_user
       u = User.find_or_create_by(email: "admin@manifold.dev")
       u.role = "reader"
@@ -56,7 +64,7 @@ module Demonstration
           title: text.title,
           description: text.description,
           cover: text.cover.resource.attachment,
-          featured: [true, false, false, false].sample
+          featured: [true, false, false, false].sample,
         )
         project.collaborators = text.collaborators
         @logger.info("Creating project: #{project.title}".green)
