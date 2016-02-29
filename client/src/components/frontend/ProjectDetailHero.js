@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { MakerFigure } from './';
+import { Link } from 'react-router';
 
 export default class ProjectDetailHero extends Component {
 
   static propTypes = {
     project: PropTypes.object,
-    makers: PropTypes.array
+    makers: PropTypes.array,
+    publishedText: PropTypes.object,
   };
 
   listMakers() {
@@ -20,6 +22,35 @@ export default class ProjectDetailHero extends Component {
         </section>
       );
     }
+  }
+
+  renderPublishedText() {
+    if (!this.props.publishedText) return null;
+    return (
+      <section className="project-entry">
+        <Link
+          to={`/read/${this.props.publishedText.id}`}
+          className="button-secondary button-reader"
+        >
+          <i className="manicon manicon-glasses"></i>
+          {'Start Reading'}
+        </Link>
+
+        <Link
+          to={`/read/${this.props.publishedText.id}`}
+          className="button-secondary button-reader"
+        >
+          <i className="manicon manicon-bullet-list"></i>
+          {'View Table of Contents'}
+        </Link>
+
+        <a href="#" className="button-tagged-dull">
+          {'Buy Print Version'}
+          <span className="price">{'$27.50'}</span>
+        </a>
+      </section>
+
+    );
   }
 
   render() {
@@ -38,23 +69,7 @@ export default class ProjectDetailHero extends Component {
               {this.props.project.attributes.description}
             </p>
           </section>
-
-          <section className="project-entry">
-            <a href="#" className="button-secondary button-reader">
-              <i className="manicon manicon-glasses"></i>
-              {'Start Reading'}
-            </a>
-
-            <a href="#" className="button-secondary-dull button-toc">
-              <i className="manicon manicon-bullet-list"></i>
-              {'View Table of Contents'}
-            </a>
-
-            <a href="#" className="button-tagged-dull">
-              {'Buy Print Version'}
-              <span className="price">{'$27.50'}</span>
-            </a>
-          </section>
+          {this.renderPublishedText()}
         </div>
         <div className="project-image">
           <img src={this.props.project.attributes.coverUrl}/>

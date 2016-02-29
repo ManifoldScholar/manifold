@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { select } from '../../utils/select';
 import { Link } from 'react-router';
 import { EventList, PublishedText, GroupedTexts, MetaAttributes, ProjectDetailHero }
   from '../../components/frontend';
+import { visibilityShow }
+  from '../../actions/shared/ui/visibility';
 import { fetchOneProject } from '../../actions/shared/collections';
 import connectData from '../../decorators/connectData';
 
@@ -17,14 +20,14 @@ function mapStateToProps(state) {
   const fetchOneProjectResult = state.collections.results.fetchOneProject.entities;
   const projects = state.collections.entities.projects;
   const project = projects[fetchOneProjectResult];
-  const { creators, contributors, texts, textCategories } =
+  const { creators, contributors, texts, publishedText, textCategories } =
     select(project, state.collections.entities);
-
   return {
     project,
     creators: creators || [],
     contributors: contributors || [],
     texts: texts || [],
+    publishedText: publishedText || null,
     textCategories: textCategories || []
   };
 }
@@ -38,6 +41,7 @@ export default class ProjectDetail extends Component {
     creators: PropTypes.array,
     contributors: PropTypes.array,
     texts: PropTypes.array,
+    publishedText: PropTypes.object,
     textCategories: PropTypes.array,
     dispatch: PropTypes.func.isRequired
   };
@@ -111,13 +115,16 @@ export default class ProjectDetail extends Component {
   };
 
   render() {
-    const project = this.props.project;
-    const makers = this.props.creators.concat(this.props.contributors);
     return (
       <div>
         <section className="neutral20">
           <div className="container">
-            <ProjectDetailHero project={project} makers={makers} />
+            <ProjectDetailHero
+              project={this.props.project}
+              publishedText={this.props.publishedText}
+              makers={this.props.creators.concat(this.props.contributors)}
+              visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
+            />
           </div>
         </section>
         {this.renderActivity()}

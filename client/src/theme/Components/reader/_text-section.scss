@@ -44,11 +44,40 @@
     color: $accentSecondary;
   }
 
-  h2 {
-    @include chapterHeading;
-
-    &:first-child {
-      margin-bottom: 96px;
-    }
+  // Temporary, until Lael and Naomi work out default header styles --ZD
+  .cn {
+    font-size: 1.2em;
   }
+
+  h1 {
+    font-size: 1.6em;
+    font-weight: $semibold;
+    line-height: 1.288;
+  }
+
+  h2 {
+    font-size: 1.3em;
+    font-weight: $semibold;
+    line-height: 1.288;
+  }
+
+  h3 {
+    font-size: 1.1em;
+    font-weight: $semibold;
+    line-height: 1.288;
+  }
+
+  h4 {
+    font-size: 1em;
+    font-weight: $semibold;
+    line-height: 1.288;
+  }
+
+  //h2 {
+  //  @include chapterHeading;
+  //
+  //  &:first-child {
+  //    margin-bottom: 96px;
+  //  }
+  //}
 }
