@@ -18,7 +18,13 @@ export function select(entity, entities) {
       selection[key] = selected;
     }
     if (isPlainObject(data)) {
-      selection[key] = data;
+      const id = data.id;
+      const type = data.type;
+      if (entities[type] && entities[type][id]) {
+        selection[key] = entities[type][id];
+      } else {
+        selection[key] = data;
+      }
     }
   });
   return selection;

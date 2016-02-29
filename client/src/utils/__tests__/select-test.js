@@ -45,6 +45,12 @@ describe('utils/select', () => {
         }
       ]
     },
+    publishedText: {
+      data: {
+        id: '1',
+        type: 'texts'
+      }
+    },
     toc_section: {
       data: { id: '1', type: 'section' }
     }
@@ -58,6 +64,10 @@ describe('utils/select', () => {
 
   it('should return relationships with the same number of entities', () => {
     expect(results.texts.length).to.equal(relationships.texts.data.length);
+  });
+
+  it('should return an object when the relationship is an object rather than an array', () => {
+    expect(results.publishedText).to.deep.equal(text1);
   });
 
   it('should return a collection of entities with the correct IDs', () => {
