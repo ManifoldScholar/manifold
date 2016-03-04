@@ -42,7 +42,7 @@ class Text < ActiveRecord::Base
   end
 
   def section_at(position)
-    text_sections.where("position = ?", position)
+    text_sections.where("position = ?", position).first
   end
 
   def find_ingestion_source_by_identifier(identifier)

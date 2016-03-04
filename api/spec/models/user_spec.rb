@@ -28,7 +28,7 @@ RSpec.describe User, type: :model do
     end
 
     it "should not be valid with an empty password" do
-      user.password = user.password_confirmation = ""
+      user.password = user.password_confirmation = " "
       expect(user).to_not be_valid
     end
 
