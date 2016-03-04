@@ -24,7 +24,7 @@ group :development, :test do
   gem "rspec-core", github: "rspec/rspec-core"
   gem "rspec-expectations", github: "rspec/rspec-expectations"
   gem "rspec-mocks", github: "rspec/rspec-mocks"
-  gem "factory_girl"
+  gem "factory_girl_rails", "~> 4.0"
 end
 
 group :development do

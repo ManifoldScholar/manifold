@@ -108,6 +108,9 @@ GEM
     erubis (2.7.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
+    factory_girl_rails (4.6.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     filesize (0.1.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -211,7 +214,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   colorize
   css_parser
-  factory_girl
+  factory_girl_rails (~> 4.0)
   faker!
   filesize (~> 0.1.1)
   httparty (~> 0.13.7)
