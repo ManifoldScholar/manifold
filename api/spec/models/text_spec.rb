@@ -2,6 +2,24 @@ require "rails_helper"
 
 RSpec.describe Text, type: :model do
   let(:new_text) { Text.new }
+  let(:text_with_sections) {
+    text = FactoryGirl.create(:text);
+    text.text_sections << FactoryGirl.create(:text_section, position: 1)
+    text.text_sections << FactoryGirl.create(:text_section, position: 2)
+    text.text_sections << FactoryGirl.create(:text_section, position: 3)
+    text.text_sections << FactoryGirl.create(:text_section, position: 4)
+    text.text_sections << FactoryGirl.create(:text_section, position: 5)
+    text
+  }
+  it "has a valid factory" do
+    expect(FactoryGirl.build(:text)).to be_valid
+  end
+
+  it "correctly returns the section at a certain position" do
+    text = text_with_sections
+    sections = text.text_sections
+    expect(text.section_at(2)).to eq sections.second
+  end
 
   it "has many titles" do
     text = new_text
@@ -46,4 +64,12 @@ RSpec.describe Text, type: :model do
     text.category = category
     expect(text.category).to be category
   end
+
+  it "returns the section after a given position" do
+    text = new_text
+    text.text_sections = [
+
+    ]
+  end
+
 end

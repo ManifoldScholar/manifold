@@ -33,6 +33,18 @@ class Text < ActiveRecord::Base
     main_title.value
   end
 
+  def section_before(position)
+    # text_sections.where("position > ?", position)
+  end
+
+  def section_after(position)
+
+  end
+
+  def section_at(position)
+    text_sections.where(:position => position).first
+  end
+
   def find_ingestion_source_by_identifier(identifier)
     ingestion_sources.to_ary.find { |is| is.source_identifier == identifier }
   end
