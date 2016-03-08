@@ -61,14 +61,14 @@ module Ingestor
           next if strategy.respond_to?(method)
           msg = I18n.t("services.ingestor.strategy.failures.missing_method",
                        method: method.to_s.inspect, strategy: label.inspect)
-          fail NoMethodError, msg
+          raise NoMethodError, msg
         end
       end
 
       def validate_strategy_base_class(label, strategy)
         base = Ingestor::Strategy::Base
         return if strategy.ancestors.include?(base)
-        fail IngestionFailed, "#{label.inspect} is not a #{base}"
+        raise IngestionFailed, "#{label.inspect} is not a #{base}"
       end
     end
   end

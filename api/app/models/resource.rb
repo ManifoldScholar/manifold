@@ -27,11 +27,6 @@ class Resource < ActiveRecord::Base
     video/webm
   )
 
-
-
-
-
-
   validates_attachment_file_name :attachment, matches: [
     /gif\Z/,
     /jpe?g\Z/,
@@ -52,5 +47,4 @@ class Resource < ActiveRecord::Base
     /js\Z/,
     /webm\Z/
   ]
-
 end

@@ -9,7 +9,7 @@ module Ingestor
           DEFAULT_ATTRIBUTES = {
             value: "Untitled",
             kind: TextTitle::KIND_MAIN
-          }
+          }.freeze
 
           def create(title_nodes, existing = nil)
             titles = title_nodes.each_with_index.map do |title_node, index|

@@ -54,7 +54,7 @@ module Ingestor
             if cover_item
               cover_image_resource_path = cover_item.attribute("href")
               results = @document.css("[src=\"#{cover_image_resource_path}\"]")
-              return results.length > 0
+              return !results.empty?
             end
             false
           end

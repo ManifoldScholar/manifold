@@ -1,6 +1,6 @@
 require "faker"
 require "open-uri"
-
+# rubocop:disable Metrics/ClassLength
 module Demonstration
   # Loads demo data into the Manifold installation
   class DataLoader
@@ -15,8 +15,7 @@ module Demonstration
       create_admin_user
     end
 
-
-    def load_text(path, log_level = "debug")
+    def load_text(path, _log_level = "debug")
       text = ingest(path)
       make_project_for_text(text)
     end
@@ -24,7 +23,7 @@ module Demonstration
     def publish_project_texts
       Project.all.each do |project|
         project.published_text = project.texts.first
-        project.published_datetime = Date.today
+        project.published_datetime = Time.zone.today
         project.save
       end
     end
@@ -63,7 +62,7 @@ module Demonstration
       Ingestor.logger = @logger
       text = Ingestor.ingest(path)
       Ingestor.reset_logger
-      return text
+      text
     end
 
     def make_projects
@@ -73,18 +72,19 @@ module Demonstration
     end
 
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def make_project_for_text(text)
       project = Project.create(
         title: text.title,
         description: text.description,
         cover: text.cover.try(:resource).try(:attachment),
-        featured: [true, false, false, false].sample,
+        featured: [true, false, false, false].sample
       )
       project.collaborators = text.collaborators
       @logger.info("Creating project: #{project.title}".green)
       project.text_categories = random_categories(rand(0..5), Category::ROLE_TEXT)
       if !project.valid?
-        @logger.error(project.errors.full_messages);
+        @logger.error(project.errors.full_messages)
       else
         project.save
         text.project = project

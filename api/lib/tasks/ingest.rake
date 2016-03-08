@@ -32,7 +32,7 @@ namespace :ingest do
   end
 
   def ingest(path, log_level)
-    path ||= fail I18n.t("rake.ingest.errors.missing_path")
+    path ||= raise I18n.t("rake.ingest.errors.missing_path")
     log_level ||= "info"
     Ingestor.logger = Logger.new(STDOUT)
     Ingestor.logger.level = Logger.const_get(log_level.upcase.to_sym)

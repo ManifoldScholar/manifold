@@ -35,7 +35,7 @@ module Ingestor
             %w(source src),
             %w(video poster),
             %w(video src)
-          ]
+          ].freeze
 
           # @param [Text] text A Text model instance with TextSections that
           #   require transformation
@@ -71,7 +71,7 @@ module Ingestor
             json = Serializer::Html.new.serialize(body).to_json
             if json.nil?
               error_string(body)
-              fail exception
+              raise exception
             end
             json
           end
@@ -105,10 +105,8 @@ module Ingestor
               new_path = epub_uri_to_app_uri(new_uri, cd_source_path,
                                              resource_map, section_source_map)
               new_uri.path = new_path
-              new_uri.to_s
-            else
-              new_uri.to_s
             end
+            new_uri.to_s
           end
 
           def epub_uri_to_app_uri(epub_uri, source_path,

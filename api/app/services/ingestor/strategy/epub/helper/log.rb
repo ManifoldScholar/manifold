@@ -32,10 +32,8 @@ module Ingestor
             end
           end
 
-          # rubocop:disable Metrics/LineLength
           def self.log_structure_recursive(branch, preface, logger, indent = 0)
             branch.each do |leaf|
-              # rubocop:disable Metrics/LineLength
               logger.debug "#{preface} #{' ' * indent}#{leaf[:label] || 'NULL'} #{"[#{leaf[:source_identifier]}]".light_cyan if leaf[:source_identifier]}"
               if leaf[:children]
                 log_structure_recursive(leaf[:children], preface, logger, indent + 2)

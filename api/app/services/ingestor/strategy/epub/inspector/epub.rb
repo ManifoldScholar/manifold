@@ -95,7 +95,7 @@ module Ingestor
 
           def unique_id
             id_id = rendition_xml.xpath("//xmlns:package")
-                    .attribute("unique-identifier").value
+                                 .attribute("unique-identifier").value
             rendition_xml.css("##{id_id}").first.text
           end
           memoize :unique_id
@@ -165,7 +165,7 @@ module Ingestor
               toc_id = spine_node.attribute("toc")
               manifest_node.at_xpath('//*[@id="' + toc_id + '"]')
             elsif v3?
-              manifest_node.at_xpath(('//*[contains(@properties, "nav")]'))
+              manifest_node.at_xpath('//*[contains(@properties, "nav")]')
             end
           end
           memoize :manifest_nav_item
@@ -227,7 +227,7 @@ module Ingestor
                   relative_path: relative_path
             Zip::File.open(@epub_path) do |zip_file|
               return zip_file
-                .glob(source_zip_path(relative_path)).first.get_input_stream.read
+                     .glob(source_zip_path(relative_path)).first.get_input_stream.read
             end
           end
           memoize :read_rendition_source

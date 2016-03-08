@@ -41,7 +41,7 @@ module Validator
     def remove_blacklisted_css_properties!(node)
       return unless node.attributes["style"]
       clean_hash = node_style_hash(node).except!(*css_property_blacklist_for_node(node))
-      if clean_hash.keys.length == 0
+      if clean_hash.keys.empty?
         node.attributes["style"].try(:remove)
         return
       end

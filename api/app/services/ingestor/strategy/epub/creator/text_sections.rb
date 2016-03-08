@@ -7,7 +7,7 @@ module Ingestor
         # @author Zach Davis
         class TextSections < BaseCreator
           DEFAULT_ATTRIBUTES = {
-          }
+          }.freeze
 
           def create(nodes, epub_inspector, text, existing_text_sections = nil)
             text_sections = nodes.each_with_index.map do |node, index|

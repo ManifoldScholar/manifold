@@ -55,8 +55,8 @@ module Ingestor
     # @return [Array] Array with [basename, ingestion, strategy]
     def start(path)
       unless File.exist?(path)
-        fail Ingestor::IngestionFailed,
-             "Could not find ingestion source"
+        raise Ingestor::IngestionFailed,
+              "Could not find ingestion source"
       end
       basename = File.basename(path)
       significant "services.ingestor.logging.ingestion_start", name: basename
@@ -69,8 +69,8 @@ module Ingestor
 
     def validate_strategy(strategy)
       return unless strategy.nil?
-      fail Ingestor::IngestionFailed,
-           I18n.t("services.ingestor.failures.strategy_not_found").red
+      raise Ingestor::IngestionFailed,
+            I18n.t("services.ingestor.failures.strategy_not_found").red
     end
 
     def set_ingestion_text(strategy, ingestion)

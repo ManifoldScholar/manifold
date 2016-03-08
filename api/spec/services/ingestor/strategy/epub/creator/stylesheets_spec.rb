@@ -59,7 +59,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::Stylesheets do
   end
 
   it "creates a stylesheet for each manifest item with a css extension" do
-    expect(manifest_items.length > 0).to be true
+    expect(!manifest_items.empty?).to be true
     expect(models.length).to eq 2 # One of the nodes above is not a CSS node
   end
 

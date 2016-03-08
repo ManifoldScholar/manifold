@@ -28,7 +28,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::Resources do
 
   it "creates an ingestion source for each manifest item" do
     models = resources_creator.create(manifest_items, "/test-tmp-path", epub_inspector)
-    expect(manifest_items.length > 0).to be true
+    expect(!manifest_items.empty?).to be true
     expect(models.length).to eq manifest_items.length
   end
 

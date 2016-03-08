@@ -1,5 +1,4 @@
 namespace :demo do
-
   desc "Loads demo data into Manifold"
   task load: :environment do
     Demonstration::DataLoader.new.load
@@ -14,5 +13,4 @@ namespace :demo do
   task publish_project_texts: :environment do
     Demonstration::DataLoader.new.publish_project_texts
   end
-
 end

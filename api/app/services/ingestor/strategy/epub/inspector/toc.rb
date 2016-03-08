@@ -29,7 +29,7 @@ module Ingestor
           def toc_label_for_cont_doc(contdoc_resource_path)
             return unless @nav_xml
             link = @nav_xml.at_xpath(selector_toc_label % contdoc_resource_path)
-            return link.text if link && link.element_children.length == 0
+            return link.text if link && link.element_children.empty?
           end
           memoize :toc_label_for_cont_doc
 

@@ -7,7 +7,7 @@ module Ingestor
         # @author Zach Davis
         class Makers < BaseCreator
           DEFAULT_ATTRIBUTES = {
-          }
+          }.freeze
 
           def create(nodes, existing = nil, role = nil)
             makers = nodes.each_with_index.map do |node, _index|
@@ -25,11 +25,11 @@ module Ingestor
           private
 
           def log_maker(maker, role)
-            if maker.new_record?
-              k = "services.ingestor.strategy.ePUB.log.new_maker"
-            else
-              k = "services.ingestor.strategy.ePUB.log.updated_maker"
-            end
+            k = if maker.new_record?
+                  "services.ingestor.strategy.ePUB.log.new_maker"
+                else
+                  "services.ingestor.strategy.ePUB.log.updated_maker"
+                end
             debug(k, name: maker.name, role: role)
           end
 

@@ -7,7 +7,7 @@ module Ingestor
         # @author Zach Davis
         class Stylesheets < BaseCreator
           DEFAULT_ATTRIBUTES = {
-          }
+          }.freeze
 
           def create(nodes, path, epub_inspector, text, existing = nil)
             style_nodes = nodes.select do |node|

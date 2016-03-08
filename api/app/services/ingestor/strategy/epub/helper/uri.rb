@@ -17,13 +17,8 @@ module Ingestor
           # Source_doc is the path of the document that the relative link appears in
           def self.to_absolute_package_path(path, source_doc_path)
             uri = URI(path)
-            if uri.absolute?
-              return path[1..-1]
-            else
-              abs_package_path = File.expand_path("/" + File.dirname(source_doc_path) +
-                                                    "/" + uri.path)[1..-1]
-              return abs_package_path
-            end
+            return path[1..-1] if uri.absolute?
+            File.expand_path("/" + File.dirname(source_doc_path) + "/" + uri.path)[1..-1]
           end
 
           def self.map_uri(target_uri, map, relative_to = nil)

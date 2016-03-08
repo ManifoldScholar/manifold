@@ -23,7 +23,7 @@ class ApplicationController < ActionController::API
   # Call this from child controllers in a before_action or from
   # within the action method itself
   def authenticate_request!
-    fail NotAuthenticatedError unless user_id_included_in_auth_token?
+    raise NotAuthenticatedError unless user_id_included_in_auth_token?
     @current_user = User.find(decoded_auth_token[:user_id])
   rescue JWT::ExpiredSignature
     raise AuthenticationTimeoutError
