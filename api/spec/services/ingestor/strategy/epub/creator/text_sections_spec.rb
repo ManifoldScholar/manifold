@@ -34,7 +34,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::TextSections do
   end
 
   it "creates a text section for each spine item" do
-    expect(@spine_item_nodes.length > 0).to be true
+    expect(!@spine_item_nodes.empty?).to be true
     expect(created_models.length).to eq @spine_item_nodes.length
   end
 

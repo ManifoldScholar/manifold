@@ -1,5 +1,4 @@
 AllCops:
-  RunRailsCops: true
   DisplayCopNames: true
   Exclude:
       - 'vendor/**/*'
@@ -17,3 +16,6 @@ Metrics/MethodLength:
 
 Style/DotPosition:
   EnforcedStyle: leading
+
+Rails:
+  Enabled: true

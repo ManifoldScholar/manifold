@@ -24,11 +24,11 @@ class Text < ActiveRecord::Base
   validates :unique_identifier, presence: true
 
   def title
-    if new_record?
-      main_title = titles.to_ary.find { |a_title| a_title.kind == TextTitle::KIND_MAIN }
-    else
-      main_title = titles.find_by(kind: TextTitle::KIND_MAIN)
-    end
+    main_title = if new_record?
+                   titles.to_ary.find { |a_title| a_title.kind == TextTitle::KIND_MAIN }
+                 else
+                   titles.find_by(kind: TextTitle::KIND_MAIN)
+                 end
     return "untitled" unless main_title
     main_title.value
   end
@@ -38,11 +38,10 @@ class Text < ActiveRecord::Base
   end
 
   def section_after(position)
-
   end
 
   def section_at(position)
-    text_sections.where(:position => position).first
+    text_sections.find_by(position: position)
   end
 
   def find_ingestion_source_by_identifier(identifier)

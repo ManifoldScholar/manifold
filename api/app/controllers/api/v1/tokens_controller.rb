@@ -6,7 +6,7 @@ module Api
     class TokensController < ApplicationController
       def create
         authenticated_user = User.find_by(email: token_params[:email])
-                             .try(:authenticate, token_params[:password])
+                                 .try(:authenticate, token_params[:password])
         if authenticated_user
           render json: authentication_payload(authenticated_user)
         else

@@ -105,7 +105,7 @@ module Ingestor
             text.save
           else
             Helper::Log.log_text_errors(text, @logger)
-            fail IngestionFailed, "services.ingestor.strategy.ePUB.fail.save_fail"
+            raise IngestionFailed, "services.ingestor.strategy.ePUB.fail.save_fail"
           end
         end
 
@@ -151,7 +151,7 @@ module Ingestor
           id = @inspector.unique_id
           unless id
             msg = I18n.t("services.ingestor.strategy.ePUB.fail.missing_uid")
-            fail IngestionFailed, msg
+            raise IngestionFailed, msg
           end
           text.unique_identifier = @inspector.unique_id
         end

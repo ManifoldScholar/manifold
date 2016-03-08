@@ -52,7 +52,7 @@ module Validator
     def wrap_node_and_siblings(node, tag) # rubocop:disable Metrics/AbcSize
       index = node.parent.children.index(node)
       parent = node.parent
-      node_and_siblings = parent.xpath("#{node.name}")
+      node_and_siblings = parent.xpath(node.name.to_s)
       node_and_siblings.unlink
       if index == 0
         wrapper = parent.add_child("<#{tag}></#{tag}>").first

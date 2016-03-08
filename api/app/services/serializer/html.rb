@@ -3,10 +3,10 @@ module Serializer
   # which will likely then be transformed into JSON. The Manifold React frontend can then
   # traverse this structure and create React components on the fly.
   class Html
-    ELEMENT_BLACK_LIST = %w(script)
+    ELEMENT_BLACK_LIST = %w(script).freeze
     INLINE_ELEMENTS = %w(b big i small tt abbr acronym cite code dfn em kbd strong samp
                          time var a bdo br img map object q script span sub sup button
-                         input label select textarea)
+                         input label select textarea).freeze
 
     def serialize(html)
       reset
@@ -39,7 +39,7 @@ module Serializer
     def clean_empty_text_nodes!(representation)
       return unless representation[:node_type] == "element"
       return unless block_level_element?(representation)
-      return if !representation[:children] || representation[:children].length == 0
+      return if !representation[:children] || representation[:children].empty?
       # Node is a block level element with children
       representation[:children].each_with_index do |child, index|
         next if child[:node_type] != "text"
@@ -80,8 +80,8 @@ module Serializer
       representation[:node_type] = "element"
       representation[:tag] = node.name
       representation[:attributes] = node.attributes
-                                    .transform_keys(&:to_sym)
-                                    .transform_values(&:content)
+                                        .transform_keys(&:to_sym)
+                                        .transform_values(&:content)
       true
     end
 

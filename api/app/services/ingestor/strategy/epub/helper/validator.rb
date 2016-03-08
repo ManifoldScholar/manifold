@@ -20,7 +20,7 @@ module Ingestor
                 cd.errors.full_messages.each do |msg|
                   logger.error "  #{msg}".red
                 end
-                fail IngestionFailed, "Unable to #{verb} text section"
+                raise IngestionFailed, "Unable to #{verb} text section"
               end
             end
           end

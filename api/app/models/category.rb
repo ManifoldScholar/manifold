@@ -1,7 +1,7 @@
 # Used to group texts and resources in a project
 class Category < ActiveRecord::Base
-  ROLE_TEXT = "text"
-  ROLE_RESOURCE = "resource"
+  ROLE_TEXT = "text".freeze
+  ROLE_RESOURCE = "resource".freeze
 
   belongs_to :project
   has_many :texts

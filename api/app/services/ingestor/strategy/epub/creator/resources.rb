@@ -8,7 +8,7 @@ module Ingestor
         class Resources < BaseCreator
           DEFAULT_ATTRIBUTES = {
             kind: IngestionSource::KIND_PUBLICATION_RESOURCE
-          }
+          }.freeze
 
           def create(nodes, path, epub_inspector, existing = nil)
             ingestion_sources = nodes.each_with_index.map do |node, _index|

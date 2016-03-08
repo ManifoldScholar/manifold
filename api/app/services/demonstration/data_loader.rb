@@ -1,6 +1,6 @@
 require "faker"
 require "open-uri"
-
+# rubocop:disable Metrics/ClassLength
 module Demonstration
   # Loads demo data into the Manifold installation
   class DataLoader
@@ -15,13 +15,20 @@ module Demonstration
       create_admin_user
     end
 
+    def load_text(path, _log_level = "debug")
+      text = ingest(path)
+      make_project_for_text(text)
+    end
+
     def publish_project_texts
       Project.all.each do |project|
         project.published_text = project.texts.first
-        project.published_datetime = Date.today
+        project.published_datetime = Time.zone.today
         project.save
       end
     end
+
+    private
 
     def create_admin_user
       u = User.find_or_create_by(email: "admin@manifold.dev")
@@ -47,35 +54,43 @@ module Demonstration
       epubs = Dir.entries(path)
       epubs.reject { |name| name.start_with?(".") }.each do |name|
         epub_path = path.join(name)
-        ingest(epub_path)
+        load_text(epub_path)
       end
     end
 
     def ingest(path)
       Ingestor.logger = @logger
-      Ingestor.ingest(path)
+      text = Ingestor.ingest(path)
       Ingestor.reset_logger
+      text
+    end
+
+    def make_projects
+      Text.all.each do |text|
+        make_project_for_text(text)
+      end
     end
 
     # rubocop:disable Metrics/AbcSize
-    def make_projects
-      Text.all.each do |text|
-        project = Project.create(
-          title: text.title,
-          description: text.description,
-          cover: text.cover.resource.attachment,
-          featured: [true, false, false, false].sample,
-        )
-        project.collaborators = text.collaborators
-        @logger.info("Creating project: #{project.title}".green)
-        project.text_categories = random_categories(rand(0..5), Category::ROLE_TEXT)
+    # rubocop:disable Metrics/MethodLength
+    def make_project_for_text(text)
+      project = Project.create(
+        title: text.title,
+        description: text.description,
+        cover: text.cover.try(:resource).try(:attachment),
+        featured: [true, false, false, false].sample
+      )
+      project.collaborators = text.collaborators
+      @logger.info("Creating project: #{project.title}".green)
+      project.text_categories = random_categories(rand(0..5), Category::ROLE_TEXT)
+      if !project.valid?
+        @logger.error(project.errors.full_messages)
+      else
         project.save
         text.project = project
         text.save
       end
     end
-
-    private
 
     def clear_db
       clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource

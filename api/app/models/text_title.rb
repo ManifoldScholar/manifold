@@ -1,11 +1,16 @@
 # A value object representing a text's title.
 class TextTitle < ActiveRecord::Base
-  KIND_MAIN = "main"
-  KIND_SUBTITLE = "subtitle"
-  KIND_SHORT = "short"
-  KIND_COLLECTION = "collection"
-  KIND_EDITION = "edition"
-  ALLOWED_KINDS = [KIND_MAIN, KIND_SUBTITLE, KIND_SHORT, KIND_COLLECTION, KIND_EDITION]
+  KIND_MAIN = "main".freeze
+  KIND_SUBTITLE = "subtitle".freeze
+  KIND_SHORT = "short".freeze
+  KIND_COLLECTION = "collection".freeze
+  KIND_EDITION = "edition".freeze
+  ALLOWED_KINDS = [KIND_MAIN,
+                   KIND_SUBTITLE,
+                   KIND_SHORT,
+                   KIND_COLLECTION,
+                   KIND_EDITION
+  ].freeze
 
   belongs_to :text
 
