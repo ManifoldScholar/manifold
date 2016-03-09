@@ -1,0 +1,58 @@
+.header-notifications-list {
+  // React Animation classes
+  &.updating {
+    transition: transform $duration ease-out;
+  }
+}
+
+.header-notification-container {
+  // React Animation classes
+  &.notification-leave {
+    max-height: 200px;
+    transition: transform 0.3s ease-in-out, max-height 0.2s ease-out 0.3s;
+  }
+
+  &.notification-leave-active {
+    max-height: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.header-notification {
+  position: relative;
+  padding: 23px 165px 25px 40px;
+  color: $neutralOffBlack;
+
+  .notification-heading {
+    @include headingTertiary;
+    margin: 0;
+    font-weight: $regular;
+  }
+
+  .notification-body {
+    @include templateCopy;
+    margin-top: 10px;
+    font-size: $type70;
+  }
+
+  .notification-close {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 50%;
+    right: 115px;
+    margin-top: -14px;
+    font-size: 28px;
+  }
+
+  &.notice {
+    background-color: $sp30Primary;
+  }
+
+  &.warning {
+    background-color: $sp30Secondary;
+  }
+
+  &.error {
+    background-color: $sp30Tertiary;
+  }
+}

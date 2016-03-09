@@ -8,7 +8,6 @@ import createStore from './store/createStore';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { DevTools } from './containers/shared';
 import getRoutes from './routes';
 import { ResolveDataDependencies } from './components/shared';
 
@@ -63,19 +62,4 @@ if (process.env.NODE_ENV !== 'production') {
     console.error('Server-side React render was discarded. Make sure that your initial ' +
       'render does not contain any client-side code.');
   }
-}
-
-// Finally, if devtools are enabled, we render it a second time, with devtools included.
-// This is a bit messy. There was a good reason for this (see react isomorphic starter
-// package), but we should try to avoid the second render if we can.
-if (__DEVTOOLS__) {
-  ReactDOM.render(
-    <Provider store={store} key="provider">
-      <div>
-        {component}
-        <DevTools />
-      </div>
-    </Provider>,
-    dest
-  );
 }

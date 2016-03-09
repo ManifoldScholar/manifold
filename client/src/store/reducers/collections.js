@@ -60,8 +60,6 @@ const fetch = {
     return Object.assign({}, state, newState);
   },
   throw(state, actionIgnored) {
-    // TODO: Think about how to handle failures.
-    // This should be called if the API promise fails.
     return state;
   }
 };

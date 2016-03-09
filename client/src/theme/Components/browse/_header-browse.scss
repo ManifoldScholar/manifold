@@ -2,13 +2,17 @@
 .header-browse {
   position: fixed;
   width: 100%;
-  padding: 30px 52px 30px 40px;
-  background-color: $neutralWhite;
   border-bottom: 1px solid transparent;
   transition: border-color $duration $timing;
 
   .not-top & {
     border-bottom: 1px solid $neutral40;
+  }
+
+  .header-container {
+    position: relative;
+    padding: 30px 52px 30px 40px;
+    background-color: $neutralWhite;
   }
 
   // <a> return link with logo

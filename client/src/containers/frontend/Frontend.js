@@ -8,13 +8,17 @@ import { Header, Footer } from '../../components/frontend';
 import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide }
   from '../../actions/shared/ui/visibility';
+import { addNotification, removeNotification, removeAllNotifications }
+  from '../../actions/shared/notifications';
 import { whoami } from '../../actions/shared/authentication';
+import { DevTools } from '../shared';
 
 function mapStateToProps(state) {
   return {
     authentication: state.authentication,
     visibility: state.ui.visibility,
-    loading: state.ui.loading.active
+    loading: state.ui.loading.active,
+    notifications: state.notifications
   };
 }
 
@@ -29,6 +33,7 @@ export default class Frontend extends Component {
     authentication: PropTypes.object,
     visibility: PropTypes.object,
     loading: PropTypes.bool,
+    notifications: PropTypes.object,
     history: PropTypes.object.isRequired
   };
 
@@ -56,6 +61,29 @@ export default class Frontend extends Component {
     this.refs.mainContainer.style.minHeight = `${windowHeight}px`;
   }
 
+  headerMethods() {
+    return {
+      visibilityToggle: bindActionCreators((el) => visibilityToggle(el), this.props.dispatch),
+      visibilityHide: bindActionCreators((el) => visibilityHide(el), this.props.dispatch),
+      visibilityShow: bindActionCreators((el) => visibilityShow(el), this.props.dispatch),
+      panelToggle: bindActionCreators((el) => panelToggle(el), this.props.dispatch),
+      addNotification: bindActionCreators((el) => addNotification(el), this.props.dispatch),
+      removeNotification: bindActionCreators((el) => removeNotification(el), this.props.dispatch),
+      removeAllNotifications: bindActionCreators(() =>
+          removeAllNotifications(), this.props.dispatch),
+      panelHide: bindActionCreators((el) => panelHide(el), this.props.dispatch),
+      startLogout: bindActionCreators(() => startLogout(), this.props.dispatch)
+    };
+  }
+
+  renderDevTools() {
+    const useDevTools = __DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__;
+    if (useDevTools) {
+      return <DevTools />;
+    }
+    return null;
+  }
+
   render() {
     const hideLoginOverlay = bindActionCreators(
       () => visibilityHide('loginOverlay'), this.props.dispatch
@@ -69,12 +97,8 @@ export default class Frontend extends Component {
             visibility={this.props.visibility }
             location={this.props.location}
             authenticated={this.props.authentication.authToken === null ? false : true}
-            visibilityToggle={bindActionCreators((el) => visibilityToggle(el), this.props.dispatch)}
-            visibilityHide={bindActionCreators((el) => visibilityHide(el), this.props.dispatch)}
-            visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
-            panelToggle={bindActionCreators((el) => panelToggle(el), this.props.dispatch)}
-            panelHide={bindActionCreators((el) => panelHide(el), this.props.dispatch)}
-            startLogout={bindActionCreators(() => startLogout(), this.props.dispatch)}
+            notifications={this.props.notifications}
+            {...this.headerMethods()}
           />
           {/* Add hideOverlay={false} to show overlay */}
           <LoginOverlay
@@ -85,6 +109,7 @@ export default class Frontend extends Component {
             {this.props.children}
           </main>
           <Footer />
+          {this.renderDevTools()}
         </div>
       </BodyClass>
     );
