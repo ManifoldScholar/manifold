@@ -58,12 +58,12 @@ export default class Frontend extends Component {
       this.props.authentication.authenticated === true) {
       location.reload();
     }
-    this.setMinHeight();
   }
 
   setMinHeight() {
-    const windowHeight = window.innerHeight;
-    this.refs.mainContainer.style.minHeight = `${windowHeight}px`;
+    const mainHeight = this.refs.mainContainer.offsetHeight;
+    const offsetHeight = this.refs.mainContainer.parentNode.offsetHeight - mainHeight;
+    this.refs.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
   }
 
   headerMethods() {
