@@ -12,7 +12,7 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import cookie from 'cookie';
 import { setAuthToken } from './actions/shared/authentication';
-import { RouterContext, match } from 'react-router';
+import { match } from 'react-router';
 import { Provider } from 'react-redux';
 import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';

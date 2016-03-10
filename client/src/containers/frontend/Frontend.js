@@ -35,7 +35,8 @@ export default class Frontend extends Component {
     visibility: PropTypes.object,
     loading: PropTypes.bool,
     notifications: PropTypes.object,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    renderDevTools: PropTypes.bool
   };
 
   static contextTypes = {
@@ -46,7 +47,7 @@ export default class Frontend extends Component {
     const { dispatch } = this.props;
     this.setMinHeight();
     if (__DEVTOOLS__) {
-      this.props.dispatch({ type: 'RENDER_DEV_TOOLS' })
+      this.props.dispatch({ type: 'RENDER_DEV_TOOLS' });
     }
     dispatch(whoami());
   }

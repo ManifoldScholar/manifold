@@ -74,7 +74,8 @@ class Reader extends Component {
     dispatch: PropTypes.func,
     history: PropTypes.object,
     loading: PropTypes.bool,
-    notifications: PropTypes.object
+    notifications: PropTypes.object,
+    renderDevTools: PropTypes.bool
   };
 
   static contextTypes = {
@@ -86,15 +87,15 @@ class Reader extends Component {
     this.counter = 0;
   }
 
-  componentDidMount() {
-    if (__DEVTOOLS__) {
-      this.props.dispatch({ type: 'RENDER_DEV_TOOLS' });
-    }
-  }
-
   componentWillMount() {
     if (!this.props.params.hasOwnProperty('section_id')) {
       this.transitionToFirstSection();
+    }
+  }
+
+  componentDidMount() {
+    if (__DEVTOOLS__) {
+      this.props.dispatch({ type: 'RENDER_DEV_TOOLS' });
     }
   }
 

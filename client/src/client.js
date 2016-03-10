@@ -54,7 +54,7 @@ ReactDOM.render(
 // fetched and added to the store during the server-side render. To that end, the
 // ResolveDataDependency higher order component won't fetch data on the client until
 // after the initial client render has taken place, signaled by the following dispatch.
-store.dispatch({type: 'CLIENT_LOADED', payload: {}});
+store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
 
 // If we're in development mode, we want ot check for the server-side render being
 // different from the first client-side render.
