@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import classNames from 'classnames';
 import { ProjectThumbPlaceholder } from './';
 
 export default class ProjectThumb extends Component {
@@ -38,10 +37,6 @@ export default class ProjectThumb extends Component {
 
   render() {
     const project = this.props.project;
-    const figureWrapperClass = classNames({
-      'figure-wrapper': true,
-      placeholder: !project.attributes.coverUrl
-    });
 
     let projectDate;
     if (this.props.hideDate) {
@@ -103,7 +98,7 @@ export default class ProjectThumb extends Component {
     return (
       <Link to={`/browse/project/${project.id}`}>
         {/* Figure wrapper, controls maximum width of figure */}
-        <div className={figureWrapperClass}>
+        <div className="figure-wrapper">
           <figure>
             {cover}
             <i className="manicon manicon-plus"></i>

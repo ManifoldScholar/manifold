@@ -22,7 +22,7 @@
     vertical-align: top;
 
     // NB: Requires font-size reset if it contains typography
-    img {
+    img, svg {
       width: 100%;
       height: auto;
     }
