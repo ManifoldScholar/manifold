@@ -5,6 +5,7 @@
 
   .container-banner {
     @include clearfix;
+    position: relative;
     height: 63px;
     background-color: $neutralWhite;
   }
