@@ -7,6 +7,7 @@ import ui from './ui';
 import notifications from './notifications';
 import authentication from './authentication';
 import isomorphic from './isomorphic';
+import developer from './developer';
 
 const routing = routerReducer;
 const reducers = combineReducers({
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   notifications,
   routing,
   authentication,
-  isomorphic
+  isomorphic,
+  developer
 });
 export default reducers;

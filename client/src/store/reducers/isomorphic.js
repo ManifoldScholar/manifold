@@ -1,15 +1,22 @@
 import { handleActions } from 'redux-actions';
 
 const initialState = {
-  fetchedRoute: null
+  loadState: 'NOT_LOADED'
 };
 
-const recordDataFetching = (state, action) => {
+const serverLoaded = () => {
   return {
-    fetchedRoute: action.payload
+    loadState: 'SERVER_LOADED'
+  };
+};
+
+const clientLoaded = () => {
+  return {
+    loadState: 'CLIENT_LOADED'
   };
 };
 
 export default handleActions({
-  RECORD_DATA_FETCHING: recordDataFetching
+  SERVER_LOADED: serverLoaded,
+  CLIENT_LOADED: clientLoaded
 }, initialState);

@@ -25,7 +25,7 @@ history = browserHistory;
 // Ensure that the history in our story stays in sync with react-router's history
 history = syncHistoryWithStore(history, store);
 
-// We want to wrap all of our containers wiht the higher order ResolveDataDependencies
+// We want to wrap all of our containers with the higher order ResolveDataDependencies
 // component. That component is responsible for detecting route changes and calling the
 // fetchData methods in the containers, to ensure that data is loaded when the route
 // changes.
@@ -49,6 +49,12 @@ ReactDOM.render(
   </Provider>,
   dest
 );
+
+// We really don't want the client-side application to load data that has already been
+// fetched and added to the store during the server-side render. To that end, the
+// ResolveDataDependency higher order component won't fetch data on the client until
+// after the initial client render has taken place, signaled by the following dispatch.
+store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
 
 // If we're in development mode, we want ot check for the server-side render being
 // different from the first client-side render.

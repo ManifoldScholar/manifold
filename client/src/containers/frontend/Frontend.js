@@ -18,7 +18,8 @@ function mapStateToProps(state) {
     authentication: state.authentication,
     visibility: state.ui.visibility,
     loading: state.ui.loading.active,
-    notifications: state.notifications
+    notifications: state.notifications,
+    renderDevTools: state.developer.renderDevTools
   };
 }
 
@@ -34,7 +35,8 @@ export default class Frontend extends Component {
     visibility: PropTypes.object,
     loading: PropTypes.bool,
     notifications: PropTypes.object,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    renderDevTools: PropTypes.bool
   };
 
   static contextTypes = {
@@ -44,6 +46,9 @@ export default class Frontend extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     this.setMinHeight();
+    if (__DEVTOOLS__) {
+      this.props.dispatch({ type: 'RENDER_DEV_TOOLS' });
+    }
     dispatch(whoami());
   }
 
@@ -76,18 +81,15 @@ export default class Frontend extends Component {
     };
   }
 
-  renderDevTools() {
-    const useDevTools = __DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__;
-    if (useDevTools) {
-      return <DevTools />;
-    }
-    return null;
-  }
-
   render() {
     const hideLoginOverlay = bindActionCreators(
       () => visibilityHide('loginOverlay'), this.props.dispatch
     );
+    let devTools = null;
+    if (this.props.renderDevTools) {
+      devTools = <DevTools />;
+    }
+
     return (
       <BodyClass className={'browse'}>
         <div>
@@ -109,7 +111,7 @@ export default class Frontend extends Component {
             {this.props.children}
           </main>
           <Footer />
-          {this.renderDevTools()}
+          {devTools}
         </div>
       </BodyClass>
     );

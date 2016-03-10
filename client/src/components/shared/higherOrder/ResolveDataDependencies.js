@@ -14,7 +14,7 @@ class DelayContainer extends Component {
     super(props, context);
     this._isMounted = false;
     this.state = {
-      loaded: false,
+      loaded: false
     };
   }
 
@@ -42,23 +42,24 @@ class DelayContainer extends Component {
     this._isMounted = false;
   }
 
+  clientLoaded(store) {
+    return store.getState().isomorphic.loadState === 'CLIENT_LOADED';
+  }
+
   shouldFetchData(props, nextProps) {
-    const isChangeAction = nextProps.routerProps.location.action === 'PUSH' ||
-      nextProps.routerProps.location.action === 'POP';
-    const pathChanged = !props ||
-      props.routerProps.location.pathname !== nextProps.routerProps.location.pathname;
-    return isChangeAction && pathChanged;
+    if (__CLIENT__ && !this.clientLoaded(nextProps.store)) return false;
+    return true;
   }
 
   loadingComplete() {
-    if (!this._isMounted) return;
+    if (!this._isMounted && this.clientLoaded(this.props.store)) return;
     this.setState({
       loaded: true
     });
   }
 
   loadingStart() {
-    if (!this._isMounted) return;
+    if (!this._isMounted && this.clientLoaded(this.props.store)) return;
     this.setState(Object.assign({}, {
       loaded: false
     }));
@@ -84,7 +85,7 @@ class DelayContainer extends Component {
 
   render() {
     const ComponentClass = this.props.component;
-    if (this.state.loaded === true) {
+    if (this.state.loaded === true || __SERVER__) {
       return (
         <ComponentClass routeDataLoaded={this.state.loaded} {... this.props.routerProps} />
       );
