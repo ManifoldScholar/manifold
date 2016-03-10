@@ -4,8 +4,8 @@
 // Colors
 // --------------------------------------------------------
 // Neutral Colors
-
 $neutralWhite: #ffffff;
+$neutralBlack: #000000;
 
 // Off Whites
 $neutral05: #f7f7f7;
@@ -20,8 +20,8 @@ $neutral80: #555555;
 $neutral90: #363636;
 
 // Separated as this is often used for base template elements (like plain text)
+$neutralOffWhite: $neutral05;
 $neutralOffBlack: $neutral90;
-$neutralBlack: #000000;
 
 // Accent Colors
 $accentPrimary: #52e3ac !default;

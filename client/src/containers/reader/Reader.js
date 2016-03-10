@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
 import { BodyClass, LoginOverlay, LoadingBar, ScrollAware } from '../../components/shared';
-import { Header, SectionPagination } from '../../components/reader';
+import { Header, Footer, SectionPagination } from '../../components/reader';
 import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
 import { select } from '../../utils/select';
@@ -194,6 +194,7 @@ class Reader extends Component {
               textSections={this.props.textSections}
             />
           </main>
+          <Footer />
           {devTools}
         </div>
       </BodyClass>
