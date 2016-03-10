@@ -117,7 +117,7 @@ export default class ProjectDetail extends Component {
   render() {
     return (
       <div>
-        <section className="neutral20">
+        <section className="neutral05">
           <div className="container">
             <ProjectDetailHero
               project={this.props.project}

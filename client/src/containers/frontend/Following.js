@@ -59,7 +59,7 @@ export default class Following extends Component {
     const updateProjectFilters = bindActionCreators(setProjectFilters, this.props.dispatch);
     return (
       <div>
-        <section className="neutral20">
+        <section className="neutral05">
           <div className="container">
             <header className="rel">
               <h4 className="section-heading">
