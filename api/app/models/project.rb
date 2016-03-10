@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
 
   include Collaborative
 
-  has_attached_file :cover, include_updated_timestamp: false
+  has_attached_file :cover, include_updated_timestamp: false, default_url: ""
   validates_attachment_content_type :cover, content_type: %w(
     image/gif
     image/jpeg
