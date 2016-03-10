@@ -17,7 +17,10 @@ module Demonstration
 
     def load_text(path, _log_level = "debug")
       text = ingest(path)
-      make_project_for_text(text)
+      project = make_project_for_text(text)
+      project.published_text = text
+      project.published_datetime = Time.zone.today
+      project.save
     end
 
     def publish_project_texts
@@ -84,6 +87,7 @@ module Demonstration
         text.project = project
         text.save
       end
+      project
     end
 
     def clear_db
