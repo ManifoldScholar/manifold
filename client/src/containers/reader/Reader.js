@@ -51,6 +51,7 @@ function mapStateToProps(state) {
     visibility: state.ui.visibility,
     loading: state.ui.loading.active,
     notifications: state.notifications,
+    renderDevTools: state.developer.renderDevTools,
     appearance
   };
 }
@@ -83,6 +84,12 @@ class Reader extends Component {
   constructor() {
     super();
     this.counter = 0;
+  }
+
+  componentDidMount() {
+    if (__DEVTOOLS__) {
+      this.props.dispatch({ type: 'RENDER_DEV_TOOLS' });
+    }
   }
 
   componentWillMount() {
@@ -149,6 +156,11 @@ class Reader extends Component {
       () => visibilityHide('loginOverlay'),
       this.props.dispatch
     );
+    let devTools = null;
+    if (this.props.renderDevTools) {
+      devTools = <DevTools />;
+    }
+
     return (
       <BodyClass className="reader">
         <div>
@@ -181,7 +193,7 @@ class Reader extends Component {
               textSections={this.props.textSections}
             />
           </main>
-          {this.renderDevTools()}
+          {devTools}
         </div>
       </BodyClass>
     );
