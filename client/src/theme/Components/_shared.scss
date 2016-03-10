@@ -35,8 +35,8 @@
 // Layout
 // --------------------------------------------------------
 section {
-  &.neutral20 {
-    background-color: $neutral20;
+  &.neutral05 {
+    background-color: $neutral05;
   }
 }
 
@@ -132,7 +132,7 @@ section {
   margin-top: 0;
   margin-bottom: 55px;
   font-size: $type60;
-  color: $accentSecondary;
+  color: $accentPrimaryDark;
   background-color: $neutral20;
 }
 

@@ -73,7 +73,7 @@ export default class Home extends Component {
             />
           </div>
         </section>
-        <section className="neutral20">
+        <section className="neutral05">
           <div className="container">
             <header className="rel">
               <h4 className="section-heading">
