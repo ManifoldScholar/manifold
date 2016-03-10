@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import classNames from 'classnames';
+import { ProjectThumbPlaceholder } from './';
 
-export default class ProjectGrid extends Component {
+export default class ProjectThumb extends Component {
   static propTypes = {
     project: PropTypes.object,
     makers: PropTypes.object,
@@ -20,8 +22,26 @@ export default class ProjectGrid extends Component {
     return this.props.makers[id];
   };
 
+  renderCover() {
+    let cover = (<ProjectThumbPlaceholder />);
+
+    if (this.props.project.attributes.coverUrl) {
+      cover = (
+        <img src={this.props.project.attributes.coverUrl}
+          alt={`Click to view ${this.props.project.attributes.title}`}
+        />
+      );
+    }
+
+    return cover;
+  }
+
   render() {
     const project = this.props.project;
+    const figureWrapperClass = classNames({
+      'figure-wrapper': true,
+      placeholder: !project.attributes.coverUrl
+    });
 
     let projectDate;
     if (this.props.hideDate) {
@@ -72,8 +92,9 @@ export default class ProjectGrid extends Component {
     return (
       <Link to={`/browse/project/${project.id}`}>
         {/* Figure wrapper, controls maximum width of figure */}
-        <div className="figure-wrapper">
+        <div className={figureWrapperClass}>
           <figure>
+            <ProjectThumbPlaceholder />
             <img src={project.attributes.coverUrl}
               alt={`Click to view ${project.attributes.title}`}
             />
