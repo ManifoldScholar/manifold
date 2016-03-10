@@ -19,6 +19,7 @@ import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 import createApiProxy from './proxies/api';
 import createWebpackProxy from './proxies/webpack';
 import fetchAllData from './helpers/fetchAllData';
+import { ResolveDataDependencies } from './components/shared';
 
 require('colors');
 const morgan = require('morgan');
@@ -63,14 +64,14 @@ app.use((req, res) => {
 
   match({
     routes: getRoutes(store),
-    location: req.originalUrl
-  }, (error, redirectLocation, renderProps) => {
+    location: req.url
+  }, (error, redirectLocation, props) => {
     // We want the full location to be available to components even during server-side render.
     // Not sure this is the best way to accomplish this.
-    if (renderProps) {
+    if (props) {
       store.dispatch({
         type: '@@router/UPDATE_LOCATION',
-        payload: renderProps.location
+        payload: props.location
       });
     }
     if (redirectLocation) {
@@ -79,23 +80,23 @@ app.use((req, res) => {
       console.error('ROUTER ERROR:', pretty.render(error));
       res.status(500);
       hydrateOnClient();
-    } else if (!renderProps) {
+    } else if (!props) {
       res.status(500);
       hydrateOnClient();
     } else {
       fetchAllData(
-        renderProps.components,
+        props.components,
         store.getState, store.dispatch,
-        renderProps.location,
-        renderProps.params
+        props.location,
+        props.params
       ).then(() => {
-        store.dispatch({ type: 'RECORD_DATA_FETCHING', payload: req.originalUrl });
+        store.dispatch({ type: 'SERVER_LOADED', payload: req.originalUrl });
         const component = (
           <Provider store={store} key="provider">
-            <RouterContext {...renderProps} />
+            <ResolveDataDependencies {...props}/>
           </Provider>
         );
-        const status = getStatusFromRoutes(renderProps.routes);
+        const status = getStatusFromRoutes(props.routes);
         if (status) {
           res.status(status);
         }
