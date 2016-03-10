@@ -11,8 +11,8 @@ module Demonstration
     def load
       clear_db
       batch_ingest
-      make_projects
       create_admin_user
+      publish_project_texts
     end
 
     def load_text(path, _log_level = "debug")
@@ -63,12 +63,6 @@ module Demonstration
       text = Ingestor.ingest(path)
       Ingestor.reset_logger
       text
-    end
-
-    def make_projects
-      Text.all.each do |text|
-        make_project_for_text(text)
-      end
     end
 
     # rubocop:disable Metrics/AbcSize
