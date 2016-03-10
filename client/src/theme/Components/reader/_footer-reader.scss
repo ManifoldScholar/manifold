@@ -1,0 +1,23 @@
+.footer-reader {
+  padding: 100px 0;
+  color: $neutral05;
+  background-color: $neutral80;
+
+  .colophon {
+    @include templateCopy;
+    font-size: $type60;
+    line-height: 1.556;
+
+    .manicon-manifold-logo {
+      padding-right: 33px;
+      font-size: 62px;
+      color: $accentPrimary;
+      vertical-align: middle;
+    }
+
+    p {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+}
