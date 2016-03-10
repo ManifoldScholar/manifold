@@ -1,7 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { AppearanceMenuButton, AppearanceMenuBody, TextTitles, TocDrawer } from './';
-import { SearchMenuButton, SearchMenuBody, UIPanel, UserMenuButton, UserMenuBody }
-  from '../../components/shared';
+import {
+  HeaderNotifications,
+  SearchMenuButton,
+  SearchMenuBody,
+  UIPanel,
+  UserMenuButton,
+  UserMenuBody
+} from '../../components/shared';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 
@@ -13,6 +19,7 @@ export default class Header extends Component {
     authenticated: PropTypes.bool,
     visibility: PropTypes.object,
     appearance: PropTypes.object,
+    notifications: PropTypes.object,
     visibilityToggle: PropTypes.func,
     visibilityHide: PropTypes.func,
     visibilityShow: PropTypes.func,
@@ -25,7 +32,10 @@ export default class Header extends Component {
     decrementMargins: PropTypes.func,
     setColorScheme: PropTypes.func,
     scrollAware: PropTypes.object,
-    startLogout: PropTypes.func
+    startLogout: PropTypes.func,
+    addNotification: PropTypes.func,
+    removeNotification: PropTypes.func,
+    removeAllNotifications: PropTypes.func
   };
 
   getSectionTitle(id) {
@@ -166,6 +176,12 @@ export default class Header extends Component {
             startLogout={this.props.startLogout}
           />
         </nav>
+        <HeaderNotifications
+          notifications={this.props.notifications}
+          addNotification={this.props.addNotification}
+          removeNotification={this.props.removeNotification}
+          removeAllNotifications={this.props.removeAllNotifications}
+        />
       </header>
     );
   }

@@ -14,6 +14,8 @@ import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHid
 import { values } from 'lodash/object';
 import { selectFont, incrementFontSize, decrementFontSize, incrementMargins, decrementMargins }
   from '../../actions/reader/ui/typography';
+import { addNotification, removeNotification, removeAllNotifications }
+  from '../../actions/shared/notifications';
 import { setColorScheme } from '../../actions/reader/ui/colors';
 import { browserHistory } from 'react-router';
 import { DevTools } from '../shared';
@@ -48,6 +50,7 @@ function mapStateToProps(state) {
     authentication: state.authentication,
     visibility: state.ui.visibility,
     loading: state.ui.loading.active,
+    notifications: state.notifications,
     appearance
   };
 }
@@ -69,7 +72,8 @@ class Reader extends Component {
     authentication: PropTypes.object,
     dispatch: PropTypes.func,
     history: PropTypes.object,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    notifications: PropTypes.object
   };
 
   static contextTypes = {
@@ -105,6 +109,10 @@ class Reader extends Component {
       visibilityToggle: bindActionCreators((el) => visibilityToggle(el), this.props.dispatch),
       visibilityHide: bindActionCreators((el) => visibilityHide(el), this.props.dispatch),
       visibilityShow: bindActionCreators((el) => visibilityShow(el), this.props.dispatch),
+      addNotification: bindActionCreators((el) => addNotification(el), this.props.dispatch),
+      removeNotification: bindActionCreators((el) => removeNotification(el), this.props.dispatch),
+      removeAllNotifications: bindActionCreators(() =>
+        removeAllNotifications(), this.props.dispatch),
       panelToggle: bindActionCreators((el) => panelToggle(el), this.props.dispatch),
       panelHide: bindActionCreators((el) => panelHide(el), this.props.dispatch),
       selectFont: bindActionCreators((el) => selectFont(el), this.props.dispatch),
@@ -157,6 +165,7 @@ class Reader extends Component {
               authenticated={this.props.authentication.authToken === null ? false : true}
               visibility={this.props.visibility }
               appearance={this.props.appearance}
+              notifications={this.props.notifications}
               {...this.headerMethods()}
             />
           </ScrollAware>
