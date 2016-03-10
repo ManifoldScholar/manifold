@@ -89,15 +89,23 @@ export default class ProjectThumb extends Component {
       );
     }
 
+    let cover;
+    if (project.attributes.coverUrl) {
+      cover = (
+        <img src={project.attributes.coverUrl}
+          alt={`Click to view ${project.attributes.title}`}
+        />
+      );
+    } else {
+      cover = <ProjectThumbPlaceholder />;
+    }
+
     return (
       <Link to={`/browse/project/${project.id}`}>
         {/* Figure wrapper, controls maximum width of figure */}
         <div className={figureWrapperClass}>
           <figure>
-            <ProjectThumbPlaceholder />
-            <img src={project.attributes.coverUrl}
-              alt={`Click to view ${project.attributes.title}`}
-            />
+            {cover}
             <i className="manicon manicon-plus"></i>
           </figure>
         </div>
