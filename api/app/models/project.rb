@@ -7,7 +7,11 @@ class Project < ActiveRecord::Base
 
   include Collaborative
 
-  has_attached_file :cover, include_updated_timestamp: false, default_url: ""
+  has_attached_file :cover,
+                    include_updated_timestamp: false,
+                    default_url: "",
+                    styles: { thumb: ["x246", :png] }
+
   validates_attachment_content_type :cover, content_type: %w(
     image/gif
     image/jpeg
@@ -29,6 +33,11 @@ class Project < ActiveRecord::Base
     projects = projects.where(featured: true) if filters[:featured] == "true"
     projects = projects.where(featured: false) if filters[:featured] == "false"
     projects
+  end
+
+  def thumbnail_url
+    return cover.url(:thumb) if cover
+    cover_url
   end
 
   def cover_url
