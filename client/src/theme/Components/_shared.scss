@@ -165,6 +165,12 @@ section {
   line-height: 44px;
   color: $neutral80;
   border: 3px solid $accentPrimary;
+  transition: color $duration $timing, background-color $duration $timing;
+
+  &:hover {
+    color: $neutralWhite;
+    background-color: $accentPrimary;
+  }
 
   .manicon {
     display: inline-block;
