@@ -85,9 +85,9 @@ export default class ProjectThumb extends Component {
     }
 
     let cover;
-    if (project.attributes.coverUrl) {
+    if (project.attributes.thumbnailUrl) {
       cover = (
-        <img src={project.attributes.coverUrl}
+        <img src={project.attributes.thumbnailUrl}
           alt={`Click to view ${project.attributes.title}`}
         />
       );
