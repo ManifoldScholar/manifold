@@ -4,32 +4,33 @@
 // Colors
 // --------------------------------------------------------
 // Neutral Colors
-
 $neutralWhite: #ffffff;
+$neutralBlack: #000000;
 
 // Off Whites
-$neutral05: #fffff7;
-$neutral10: #e8ecec;
-$neutral20: #f7f7f7;
-
-$neutral40: #c6c6c6;
-$neutral50: #a09fa0;
-$neutral70: #7a797b;
-$neutral75: #707071;
-$neutral80: #676668;
+$neutral05: #f7f7f7;
+$neutral10: #ececec;
+$neutral20: #e6e6e6;
+$neutral30: #d6d6d6;
+$neutral40: #c3c3c3;
+$neutral50: #9a9a9a;
+$neutral70: #828282;
+$neutral75: #696969;
+$neutral80: #555555;
 $neutral90: #363636;
 
 // Separated as this is often used for base template elements (like plain text)
+$neutralOffWhite: $neutral05;
 $neutralOffBlack: $neutral90;
-$neutralBlack: #000000;
 
 // Accent Colors
 $accentPrimary: #52e3ac !default;
+$accentPrimaryDark: #34a178 !default;
+$accentPrimaryMedium: #3dbd8c !default;
 $accentPrimaryLight: #75e9bd !default;
-$accentPrimaryPale: #dcf9ee !default;
-$accentPrimaryOffWhite: #f2f7f7 !default;
+$accentPrimaryPale: #c1f7e4 !default;
+$accentPrimaryOffWhite: #f0faf7 !default;
 
-$accentSecondary: #34a178 !default;
 
 // Spectra
 // Color spectra are number by group and then given ordinal names, attributes
