@@ -7,6 +7,30 @@ module Validator
                                 z-index).freeze
     CSS_SELECTOR_BLACKLIST = %w(* html body @font-face ).freeze
     TAG_A_CSS_PROPERTY_BLACKLIST = %w(color).freeze
+    TAG_H1_CSS_PROPERTY_BLACKLIST = %w(font-family font-weight size line-height margin
+                                       margin-top margin-bottom margin-left margin-right
+                                       padding padding-top padding-bottom padding-left
+                                       padding-right color).freeze
+    TAG_H2_CSS_PROPERTY_BLACKLIST = %w(font-family font-weight size line-height margin
+                                       margin-top margin-bottom margin-left margin-right
+                                       padding padding-top padding-bottom padding-left
+                                       padding-right color).freeze
+    TAG_H3_CSS_PROPERTY_BLACKLIST = %w(font-family font-weight size line-height margin
+                                       margin-top margin-bottom margin-left margin-right
+                                       padding padding-top padding-bottom padding-left
+                                       padding-right color).freeze
+    TAG_H4_CSS_PROPERTY_BLACKLIST = %w(font-family font-weight size line-height margin
+                                       margin-top margin-bottom margin-left margin-right
+                                       padding padding-top padding-bottom padding-left
+                                       padding-right color).freeze
+    TAG_H5_CSS_PROPERTY_BLACKLIST = %w(font-family font-weight size line-height margin
+                                       margin-top margin-bottom margin-left margin-right
+                                       padding padding-top padding-bottom padding-left
+                                       padding-right color).freeze
+    TAG_H6_CSS_PROPERTY_BLACKLIST = %w(font-family font-weight size line-height margin
+                                       margin-top margin-bottom margin-left margin-right
+                                       padding padding-top padding-bottom padding-left
+                                       padding-right color).freeze
     TAG_ATTRIBUTE_BLACKLIST = %w(accept accept-charset accesskey async autofocus border
                                  bgcolor challenge charset code codebase color cols
                                  content contenteditable defer draggable dropzone height
