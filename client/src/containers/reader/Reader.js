@@ -88,7 +88,7 @@ class Reader extends Component {
   }
 
   componentWillMount() {
-    if (!this.props.params.hasOwnProperty('section_id')) {
+    if (!this.props.params.hasOwnProperty('section_id') && __CLIENT__) {
       this.transitionToFirstSection();
     }
   }

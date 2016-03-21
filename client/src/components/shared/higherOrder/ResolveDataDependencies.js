@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { RouterContext } from 'react-router';
 import { isFunction } from '../../../../node_modules/lodash/lang';
+import { matches } from '../../../../node_modules/lodash/utility';
 
 class DelayContainer extends Component {
 
@@ -47,7 +48,16 @@ class DelayContainer extends Component {
   }
 
   shouldFetchData(props, nextProps) {
+    // Don't fetch data if we're in the client, but the client hasn't fully rendered,
+    // since the data is already present from the server-side load.
     if (__CLIENT__ && !this.clientLoaded(nextProps.store)) return false;
+    // Do fetch data if we're receiving new props, but have no current props.
+    if (!props) return true;
+    // Don't fetch data if all that changed is the hash
+    if (
+      props.routerProps.location.pathname === nextProps.routerProps.location.pathname &&
+      matches(props.routerProps.location.query, nextProps.routerProps.location.query)
+    ) return false;
     return true;
   }
 
