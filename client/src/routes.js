@@ -20,7 +20,9 @@ export default () => {
         <Route component={ProjectDetail} path="project/:id" />
       </Route>
 
-      <Route component={NotFound} path="*" />
+      <Route component={Frontend} path="*">
+        <IndexRoute component={NotFound} />
+      </Route>
     </Route>
   );
 };
