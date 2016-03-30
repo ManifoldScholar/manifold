@@ -43,6 +43,14 @@ $type20: 12px;
 // $type10: ;
 
 
+// Copy
+// --------------------------------------------------------
+@mixin formInputPrimary {
+  @include templateHead;
+  font-size: $type70;
+  letter-spacing: 0.32px;
+}
+
 // Headings
 // --------------------------------------------------------
 @mixin headingPrimary {
@@ -95,4 +103,13 @@ $type20: 12px;
     letter-spacing: 0.031em;
     color: $accentPrimaryDark;
   }
+}
+
+// Labels
+// --------------------------------------------------------
+@mixin formLabelPrimary {
+  @include templateHead;
+  font-size: $type40;
+  letter-spacing: 1.05px;
+  text-transform: uppercase;
 }

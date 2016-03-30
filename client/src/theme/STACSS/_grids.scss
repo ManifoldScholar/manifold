@@ -1,0 +1,30 @@
+// Grid Structure
+// --------------
+
+// This is, for all intents and purposes, part of its parent
+// Structure partial, just separated out for smaller files
+
+// A floated row with 3 equal width columns and padding
+// These rows have fixed responsive padding so that they
+// can be nested
+.row-3-p {
+  @include clearfix;
+  margin-right: -30px;
+  margin-left: -30px;
+
+  %column-prototype {
+    float: left;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  .col-33 {
+    @extend %column-prototype;
+    width: 33%;
+  }
+
+  .col-66 {
+    @extend %column-prototype;
+    width: 66%;
+  }
+}

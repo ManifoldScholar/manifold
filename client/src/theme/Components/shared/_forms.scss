@@ -1,0 +1,52 @@
+// Shared Form Components
+// ----------------------
+// <div> wrapper around
+.form-input {
+  label {
+    @include formLabelPrimary;
+    display: block;
+    color: $neutral50;
+
+    + input {
+      margin-top: 20px;
+    }
+  }
+
+  input {
+    @include formInputPrimary;
+    width: 100%;
+    // Declared in em as it should change with font size
+    padding: 0.7em 1em;
+    border: 0;
+    outline: 0;
+  }
+}
+
+.select-browse {
+  @include selectStyled;
+
+  select {
+    min-width: 310px;
+  }
+}
+
+// Wrapper around input with absolutely positioned button
+.search-button-inline {
+  position: relative;
+
+  // <button>
+  .manicon-magnify {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    margin-top: -9px;
+    font-size: 17px;
+    color: $accentPrimary;
+  }
+
+  input {
+    @include inputSecondary;
+    padding-left: 40px;
+  }
+}

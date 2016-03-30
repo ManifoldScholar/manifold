@@ -65,7 +65,7 @@ class HomeContainer extends Component {
             />
           </div>
         </section>
-        <section className="neutral05">
+        <section className="bg-neutral05">
           <div className="container">
             <header className="rel">
               <h4 className="section-heading">
