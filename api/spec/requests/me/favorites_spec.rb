@@ -50,8 +50,7 @@ RSpec.describe "Favorites", type: :request do
 
       it "creates a favorite with the correct favoritable" do
         api_response = JSON.parse(@response.body)
-        puts "body: #{@response.body}"
-        expect(api_response["data"]["relationships"]["favoritable"]["data"]["id"]).to be(@project.id)
+        expect(api_response["data"]["relationships"]["favoritable"]["data"]["id"]).to eq(@project.id.to_s)
       end
 
     end
