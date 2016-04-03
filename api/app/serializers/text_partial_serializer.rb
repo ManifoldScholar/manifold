@@ -5,7 +5,7 @@ class TextPartialSerializer < ActiveModel::Serializer
              :first_section_id
 
   def first_section_id
-    object.text_sections.first.id
+    object.text_sections.first.try(:id)
   end
 
   belongs_to :project

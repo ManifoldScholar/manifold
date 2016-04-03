@@ -18,6 +18,7 @@ class Text < ActiveRecord::Base
   has_many :source_resources, through: :ingestion_sources, source: :resource
   has_many :text_sections, -> { order(position: :asc) }
   has_many :stylesheets
+  has_many :favorites, as: :favoritable
   belongs_to :project, optional: true
   belongs_to :category, optional: true
 

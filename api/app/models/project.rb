@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
   belongs_to :published_text, class_name: "Text", optional: true
   has_many :text_categories, -> { for_text }, class_name: "Category"
   has_many :resource_categories, -> { for_resource }, class_name: "Category"
-
+  has_many :favorites, as: :favoritable
   include Collaborative
 
   has_attached_file :cover,

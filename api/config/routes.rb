@@ -11,7 +11,16 @@ Rails.application.routes.draw do
           get "whoami"
         end
       end
-      get "development/whoami", to: "development#whoami"
+
+      resource :me, only: [:show], controller: "me"
+      namespace :me do
+        resources :favorites, only: [:index, :create, :show]
+        namespace :favorites do
+          resources :projects, only: [:index, :create, :destroy]
+          resources :texts, only: [:index, :create, :destroy]
+        end
+      end
     end
   end
+
 end

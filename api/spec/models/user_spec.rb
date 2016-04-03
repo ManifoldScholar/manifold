@@ -2,8 +2,24 @@ require "rails_helper"
 
 # rubocop:disable Metrics/LineLength
 RSpec.describe User, type: :model do
+
   it "has a valid factory" do
     expect(FactoryGirl.build(:user)).to be_valid
+  end
+
+  it "has many favorites" do
+    user = User.new
+    2.times { user.favorites.build }
+    expect(user.favorites.length).to be 2
+  end
+
+  it "distinguishes favorite projects from all favorites" do
+    user = FactoryGirl.create(:user)
+    project = FactoryGirl.create(:project)
+    text = FactoryGirl.create(:text)
+    user.favorites.create(favoritable: project)
+    user.favorites.create(favoritable: text)
+    expect(user.favorite_projects.length).to be(1)
   end
 
   it "should not be valid without a password" do

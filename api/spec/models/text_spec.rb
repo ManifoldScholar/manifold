@@ -11,6 +11,7 @@ RSpec.describe Text, type: :model do
     text.text_sections << FactoryGirl.create(:text_section, position: 5)
     text
   end
+
   it "has a valid factory" do
     expect(FactoryGirl.build(:text)).to be_valid
   end
