@@ -2,11 +2,14 @@ module Api
   module V1
     # Me controller
     class MeController < ApplicationController
+
+      before_action :authenticate_request!
+
       def show
         if @current_user
           render json: @current_user
         else
-          render status: :unprocessable_entity
+          render status: :unauthorized
         end
       end
 
@@ -36,6 +39,7 @@ module Api
           :remove_avatar
         )
       end
+
     end
   end
 end
