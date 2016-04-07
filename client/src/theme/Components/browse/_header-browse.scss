@@ -5,14 +5,24 @@
   border-bottom: 1px solid transparent;
   transition: border-color $duration $timing;
 
-  .not-top & {
-    border-bottom: 1px solid $neutral40;
-  }
-
   .header-container {
     position: relative;
     padding: 30px 52px 30px 40px;
     background-color: $neutralWhite;
+  }
+
+  .header-border {
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid $neutral40;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $duration $timing, visibility $duration $timing;
+
+    .not-top & {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
   // <a> return link with logo
