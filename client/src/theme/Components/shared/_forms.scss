@@ -138,6 +138,7 @@
 }
 
 .form-toggle {
+  @include formLabelPrimary;
   position: relative;
   display: block;
   padding-left: 40px;
@@ -160,6 +161,12 @@
       margin-top: 0;
       margin-left: 38px;
     }
+  }
+
+  &.annotated {
+    @include formInputPrimary;
+    color: $neutralOffBlack;
+    text-transform: none;
   }
 
   input {
@@ -192,7 +199,7 @@
     transition: background-color $duration $timing;
     user-select: none;
 
-    .bg-neutral90 & {
+    .bg-neutral90 &, .form-callout & {
       background-color: $neutralWhite;
     }
   }
@@ -240,8 +247,37 @@
     }
   }
 
-  span {
+  .toggle-note {
+    @include templateCopy;
+    display: block;
+    margin-top: 13px;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.375;
+  }
+}
+
+// Form Callout
+// --------------------------
+.form-callout {
+  padding: 54px 30px;
+  background-color: $neutral10;
+
+  header {
     @include formLabelPrimary;
+    padding-bottom: 53px;
+    text-align: center;
+
+    .manicon {
+      display: block;
+      padding-bottom: 26px;
+      font-size: 33px;
+      color: $neutral50;
+    }
+  }
+
+  + .form-input {
+    margin-top: 40px;
   }
 }
 

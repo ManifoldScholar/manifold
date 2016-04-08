@@ -9,7 +9,11 @@
 // can be nested
 .row-3-p {
   @include clearfix;
-  margin-left: -60px;
+  margin-left: -30px;
+
+  @include respond($break100) {
+    margin-left: -60px;
+  }
 
   + .row-3-p {
     margin-top: 40px;
@@ -17,7 +21,11 @@
 
   %column-prototype {
     float: left;
-    padding-left: 60px;
+    padding-left: 30px;
+
+    @include respond($break100) {
+      padding-left: 60px;
+    }
   }
 
   .col-33 {

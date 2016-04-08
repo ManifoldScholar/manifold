@@ -24,7 +24,7 @@
 // $operator -> 'min' or 'max'
 // $aspect -> 'width' or 'height'
 // --------------------------
-@mixin respond($size, $operator: max, $aspect: width) {
+@mixin respond($size, $operator: min, $aspect: width) {
   @media all and (#{$operator}-#{$aspect}: $size) {
     @content;
   }

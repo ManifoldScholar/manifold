@@ -11,7 +11,7 @@ export default class FormsStatic extends Component {
             bg-neutral05 (light gray)
             bg-neutral90 (off black)
           */}
-          <section className="bg-neutral90">
+          <section className="bg-neutral05">
             <div className="container">
               <h4 className="section-heading">
                 Assorted form elements
@@ -56,6 +56,36 @@ export default class FormsStatic extends Component {
                 </div>
 
                 <div className="col-33">
+                  <div className="form-callout">
+                    <header>
+                      <i className="manicon manicon-bugle"></i>
+                      Notifications
+                    </header>
+
+                    <div className="form-input">
+                      <label className="form-toggle radio annotated">
+                        <input type="radio" name="notifications"/>
+                      <span className="toggle-indicator"></span>
+                        Please Opt Me In
+                        <span className="toggle-note">
+                          I have always been very upset when I am left out of the group.
+                          This goes double for newsletters,  promotional offers,
+                          and targeted advertising.
+                        </span>
+                      </label>
+
+                      <label className="form-toggle radio annotated">
+                        <input type="radio" name="notifications"/>
+                      <span className="toggle-indicator"></span>
+                        None of your bee's wax
+                        <span className="toggle-note">
+                          I have several suggestions for where I would most like to see
+                          your newsletter delivered, none of which include my email address.
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+
                   <div className="form-input">
                     <label>Checkboxes Vertical</label>
                     {/* Radio buttons and checkboxes get wrapped in a toggle class */}
