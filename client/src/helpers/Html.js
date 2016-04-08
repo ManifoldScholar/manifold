@@ -25,6 +25,7 @@ export default class Html extends Component {
     const bodyClass = BodyClass.rewind();
     return (
       <html lang="en-us">
+        <!--[if IE 9 ]><html lang="en-us" class="ie9"><![endif]-->
         <head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           {DocumentMeta.renderAsReact()}

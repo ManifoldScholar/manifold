@@ -44,6 +44,10 @@
   background-color: $neutral05;
 }
 
+.bg-neutral90 {
+  background-color: $neutral90;
+}
+
 
 // Buttons
 // --------------------------------------------------------
@@ -117,11 +121,15 @@
     margin-top: -3px;
     font-size: 7px;
     pointer-events: none;
+
+    // Use native dropdown arrow in IE9
+    .ie9 & {
+      display: none;
+    }
   }
 
   select:focus:-moz-focusring {
     color: transparent;
-    text-shadow: 0 0 0 $neutralBlack;
   }
 
   select::-ms-expand {

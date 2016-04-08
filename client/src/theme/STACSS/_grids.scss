@@ -9,22 +9,24 @@
 // can be nested
 .row-3-p {
   @include clearfix;
-  margin-right: -30px;
-  margin-left: -30px;
+  margin-left: -60px;
+
+  + .row-3-p {
+    margin-top: 40px;
+  }
 
   %column-prototype {
     float: left;
-    padding-right: 30px;
-    padding-left: 30px;
+    padding-left: 60px;
   }
 
   .col-33 {
     @extend %column-prototype;
-    width: 33%;
+    width: 33.333%;
   }
 
   .col-66 {
     @extend %column-prototype;
-    width: 66%;
+    width: 66.666%;
   }
 }

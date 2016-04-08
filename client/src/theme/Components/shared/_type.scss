@@ -2,6 +2,10 @@
   @include headingPrimary;
   color: $neutral80;
 
+  .bg-neutral90 & {
+    color: $neutral30;
+  }
+
   .manicon {
     display: inline-block;
     margin-right: 13px;
