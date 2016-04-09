@@ -22,6 +22,16 @@
     display: block;
     text-decoration: none;
 
+    &:hover {
+      img {
+        border-color: $accentPrimary;
+      }
+
+      svg .highlight {
+        fill: $accentPrimary;
+      }
+    }
+
     .figure-wrapper {
       max-width: 195px;
     }
@@ -38,6 +48,8 @@
         position: absolute;
         top: 0;
         left: 0;
+        // Relative z-index
+        z-index: 0;
         width: 100%;
         height: auto;
         max-height: 100%;
@@ -45,19 +57,14 @@
       }
 
       // Follow button
-      .manicon {
-        position: absolute;
+      .manicon-plus-bold {
         top: 7.018%;
-        left: -18px;
-        display: block;
-        width: 45px;
-        height: 45px;
-        padding-top: 12px;
-        font-size: 20px;
-        color: $neutralWhite;
-        text-align: center;
-        background-color: $accentPrimary;
-        border-radius: 100%;
+        z-index: 1;
+      }
+
+      .manicon-plus-bold:hover ~ .thumbnail-follow-overlay {
+        opacity: 1;
+        visibility: visible;
       }
     }
 
