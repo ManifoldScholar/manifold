@@ -100,11 +100,11 @@ export default class ProjectThumb extends Component {
         {/* Figure wrapper, controls maximum width of figure */}
         <div className="figure-wrapper">
           <figure>
-            <i className="manicon manicon-plus-bold"></i>
-            {cover}
-            <div className="thumbnail-follow-overlay">
-              <p>{'Follow this project'}</p>
+            <div className="follow-button">
+              <i className="manicon manicon-plus-bold"></i>
+              {'Follow'}
             </div>
+            {cover}
           </figure>
         </div>
         {projectMeta}

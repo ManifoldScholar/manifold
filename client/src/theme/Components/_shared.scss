@@ -293,25 +293,44 @@ section {
 
 // Thumbnail Shared Elements
 // --------------------------
-.manicon-plus-bold {
+.follow-button {
+  @include templateHead;
   position: absolute;
   top: 7.018%;
   left: -18px;
   display: block;
-  width: 45px;
   height: 45px;
-  padding-top: 12px;
-  font-size: 20px;
+  max-width: 45px;
+  padding: 0 13px 0 12.5px;
+  overflow: hidden;
+  font-size: 22px;
+  line-height: 45px;
+  text-align: left;
   color: $neutralWhite;
-  text-align: center;
   background-color: $accentPrimary;
-  border-radius: 100%;
-  transition: background-color $duration $timing;
+  border-radius: 22.5px;
+  transition: max-width $duration $timing, background-color $duration $timing;
+  white-space: nowrap;
+
+  .manicon-plus-bold {
+    display: inline-block;
+    font-size: 20px;
+    text-align: center;
+    margin-right: 13px;
+    transition: transform $duration $timing;
+  }
 
   &:hover {
-    background-color: $neutral75;
+    background-color: $sp20Primary;
+    max-width: 200px;
+    transition: max-width $durationSlow ease-out;
+
+    .manicon-plus-bold {
+      transform: rotate(-90deg);
+    }
   }
 }
+
 
 .thumbnail-follow-overlay {
   position: absolute;
