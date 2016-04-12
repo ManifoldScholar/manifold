@@ -296,7 +296,7 @@ section {
 .follow-button {
   @include templateHead;
   position: absolute;
-  top: 7.018%;
+  top: 10.526%;
   left: -18px;
   display: block;
   height: 45px;
@@ -305,24 +305,24 @@ section {
   overflow: hidden;
   font-size: 22px;
   line-height: 45px;
-  text-align: left;
   color: $neutralWhite;
+  text-align: left;
+  white-space: nowrap;
   background-color: $accentPrimary;
   border-radius: 22.5px;
   transition: max-width $duration $timing, background-color $duration $timing;
-  white-space: nowrap;
 
   .manicon-plus-bold {
     display: inline-block;
+    margin-right: 13px;
     font-size: 20px;
     text-align: center;
-    margin-right: 13px;
     transition: transform $duration $timing;
   }
 
   &:hover {
-    background-color: $sp20Primary;
     max-width: 200px;
+    background-color: $sp20Primary;
     transition: max-width $durationSlow ease-out;
 
     .manicon-plus-bold {
@@ -331,37 +331,69 @@ section {
   }
 }
 
-
-.thumbnail-follow-overlay {
+.followed-button {
+  @include templateHead;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  text-align: center;
+  top: 10.526%;
+  left: -18px;
+  display: block;
+  height: 45px;
+  max-width: 45px;
+  padding: 0 13px;
+  overflow: hidden;
+  font-size: 22px;
+  line-height: 45px;
+  color: $neutralWhite;
+  text-align: left;
   background-color: $sp20Primary;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity $duration $timing, visibility $duration $timing;
+  border-radius: 22.5px;
+  transition: max-width $duration $timing, background-color $duration $timing;
 
-  &::before {
-    display: inline-block;
-    width: 1px;
-    height: 100%;
-    vertical-align: middle;
-    background-color: $sp20Primary;
-    content: '';
+  &:hover {
+    max-width: 200px;
+    background-color: $neutral75;
+    transition: max-width $durationSlow ease-out 0.15s;
+
+    .manicon-minus-bold {
+      opacity: 1;
+      transform: translateX(0);
+      transition: transform $duration $timing;
+    }
+
+    .manicon-check-bold {
+      opacity: 0;
+      transform: translateX(45px);
+      transition: opacity 0s $timing $duration, transform $duration $timing;
+    }
   }
 
-  p {
-    @include templateHead;
-    display: inline-block;
-    width: 62.5%;
-    padding: 17px 0 21px;
-    font-size: $type100;
-    color: $neutralWhite;
-    vertical-align: middle;
-    border: 3px solid $neutralWhite;
+  .manicon-minus-bold, .manicon-check-bold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+  }
+
+  .manicon-minus-bold {
+    padding-top: 11px;
+    opacity: 0;
+    transform: translateX(-45px);
+    transition: opacity $durationSlow $timing, transform $duration $timing;
+  }
+
+  .manicon-check-bold {
+    padding-top: 13px;
+    font-size: 18px;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity $durationFast, $timing, transform $duration $timing;
+  }
+
+  .follow-text {
+    padding-left: 46px;
   }
 }
 
