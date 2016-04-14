@@ -8,18 +8,18 @@ import { HigherOrder, LoginOverlay, LoadingBar } from '../../components/shared';
 import { Header, Footer, Section } from '../../components/reader';
 import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide }
-  from '../../actions/shared/ui/visibility';
+    from '../../actions/shared/ui/visibility';
 import {
-  selectFont,
-  incrementFontSize,
-  decrementFontSize,
-  incrementMargins,
-  decrementMargins
+    selectFont,
+    incrementFontSize,
+    decrementFontSize,
+    incrementMargins,
+    decrementMargins
 } from '../../actions/reader/ui/typography';
 import {
-  addNotification,
-  removeNotification,
-  removeAllNotifications
+    addNotification,
+    removeNotification,
+    removeAllNotifications
 } from '../../actions/shared/notifications';
 import { setColorScheme } from '../../actions/reader/ui/colors';
 import { request, requests, flush } from '../../actions/shared/entityStore';
@@ -38,7 +38,7 @@ class ReaderContainer extends Component {
     if (params.sectionId) {
       const sectionCall = sectionsAPI.show(params.sectionId);
       const { promise: two } =
-        dispatch(request(sectionCall, requests.readerCurrentSection));
+          dispatch(request(sectionCall, requests.readerCurrentSection));
       promises.push(one);
     }
     return Promise.all(promises);
@@ -130,9 +130,9 @@ class ReaderContainer extends Component {
   renderStyles = () => {
     return values(this.props.text.relationships.stylesheets).map((stylesheet, index) => {
       return (
-        <style key={index}>
-          {stylesheet.attributes.styles}
-        </style>
+          <style key={index}>
+            {stylesheet.attributes.styles}
+          </style>
       );
     });
   };
@@ -141,45 +141,45 @@ class ReaderContainer extends Component {
     if (!this.props.text || !this.props.section) return null;
 
     const hideLoginOverlay = bindActionCreators(
-      () => visibilityHide('loginOverlay'),
-      this.props.dispatch
+        () => visibilityHide('loginOverlay'),
+        this.props.dispatch
     );
 
     const section = this.props.children &&
-      React.cloneElement(this.props.children, { ...this.props });
+        React.cloneElement(this.props.children, { ...this.props });
 
     return (
-      <HigherOrder.BodyClass className="reader">
-        <div>
-          {this.renderStyles()}
-          <HigherOrder.ScrollAware>
-            {/* Header inside scroll-aware HOC */}
-            <Header
-              // Props required by body component
-              text={this.props.text}
-              section={this.props.section}
-              authentication={this.props.authentication}
-              visibility={this.props.visibility }
-              appearance={this.props.appearance}
-              notifications={this.props.notifications}
-              {...this.headerMethods()}
-            />
-          </HigherOrder.ScrollAware>
-          <main>
-            {section}
-            <Section.Pagination
-              textId={this.props.text.id}
-              sectionId={this.props.section.id}
-              textSections={this.props.text.relationships.textSections}
-            />
-          </main>
-          <Footer />
-        </div>
-      </HigherOrder.BodyClass>
+        <HigherOrder.BodyClass className="reader">
+          <div>
+            {this.renderStyles()}
+            <HigherOrder.ScrollAware>
+              {/* Header inside scroll-aware HOC */}
+              <Header
+                  // Props required by body component
+                  text={this.props.text}
+                  section={this.props.section}
+                  authentication={this.props.authentication}
+                  visibility={this.props.visibility }
+                  appearance={this.props.appearance}
+                  notifications={this.props.notifications}
+                  {...this.headerMethods()}
+              />
+            </HigherOrder.ScrollAware>
+            <main>
+              {section}
+              <Section.Pagination
+                  textId={this.props.text.id}
+                  sectionId={this.props.section.id}
+                  textSections={this.props.text.relationships.textSections}
+              />
+            </main>
+            <Footer />
+          </div>
+        </HigherOrder.BodyClass>
     );
   }
 }
 
 export default connect(
-  ReaderContainer.mapStateToProps
+    ReaderContainer.mapStateToProps
 )(ReaderContainer);
