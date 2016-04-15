@@ -17,10 +17,10 @@
 
 .reader-window {
   padding: 60px 0 120px;
+  overflow: hidden;
   color: $neutralOffBlack;
   background-color: $neutralWhite;
   transition: background-color $duration $timing;
-  overflow: hidden;
 
   &.scheme-dark {
     color: $neutralWhite;
