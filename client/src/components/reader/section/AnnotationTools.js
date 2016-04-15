@@ -4,6 +4,22 @@ export default class AnnotationTools extends Component {
   render() {
     return (
       <section className="reader-window scheme-light">
+        {/*
+          Annotation popup is placed absolutely with Javascript based on the location
+          of an .annotation-selection (which there can be only one)
+        */}
+        <div className="annotation-popup" style={{ top: '1523px', left: '430px' }}>
+          <button>
+            Annotate
+          </button>
+          <button>
+            Highlight
+          </button>
+          <button>
+            Share
+          </button>
+          <div className="tail"></div>
+        </div>
         <div className="container-focus" style={{ maxWidth: '680px' }}>
           <div
             className="manifold-text-section text-section font-sans-serif"
@@ -34,6 +50,11 @@ export default class AnnotationTools extends Component {
 
             <p className="pf">
               <span>
+                {/*
+                  Annotations from either the current user or another user have separate span
+                  tags, and another nested tag to indicate multiple annotations on the same
+                  text.
+                */}
                 The events surrounding the unearthing of the Kensington Rune Stone and its
                 immediate aftermath are contradictory and hotly debated. As the story is
                 traditionally told by area residents, a Swedish immigrant farmer named Olof Ohman
@@ -51,12 +72,15 @@ export default class AnnotationTools extends Component {
                 <span>1</span>
               </a>
               <span>
+                {/*
+                  When two annotations meet, the primary annotation (current user) takes presidence
+                 */}
                 Ohman’s ten-year-old son Edward noticed strange chiseled markings on two sides of
                 the stone after he had brushed <span className="annotation-underline secondary">off
                 some of the dirt with his cap. Ohman called his neighbor, </span>
-                <span className="annotation-underline mixed">Nils Flaaten, a Norwegian-American
-                  farmer who was working nearby, to come and view the curiosity</span>
-                <span className="annotation-underline primary">. In signed affidavits from 1909,
+                <span className="annotation-underline primary">Nils Flaaten, a Norwegian-American
+                  farmer who was working nearby, to come and view the curiosity . In signed
+                  affidavits from 1909,
                   Flaaten and Ohman testified that the inscription had an ancient and weathered
                   appearance</span>.
               </span>
@@ -100,8 +124,7 @@ export default class AnnotationTools extends Component {
             <p >
               <span >
                 In February 1899, <span className="annotation-highlight primary">a local newspaper
-                reported that Professor Breda concluded that </span>
-                <span className="annotation-highlight mixed">there were “internal evidences in the
+                reported that Professor Breda concluded that there were “internal evidences in the
                   inscription that it is not authentic.”</span>
                 <span className="annotation-highlight secondary"> The chief of these, he says, is
                 that “the inscriptions seem to be a jumble</span> of Swedish
@@ -111,24 +134,93 @@ export default class AnnotationTools extends Component {
               <a id="en52r" className="enref" href="/read/47/section/780#en52" >
                 <span >5</span>
               </a>
+              {/*
+                In REACT, every text element will have spans around it, and so spans for
+                highlighting text may need to be duplicated inside multiple spans to create the
+                correct appearance.
+
+                Alternatively, we could use Javascript to highlight the entire block behind
+                selected text.
+              */}
               <span >
                 Professor Curme was also skeptical of the runic inscription for similar linguistic
                 reasons. Additionally, copies of the inscription were analyzed by scholars in
                 Oslo, Norway. The conclusions of Christiana University professors Gustav Storm,
-                Sophus Bugge, and Oluf Rugh were published in the
+                Sophus Bugge, and <span className="annotation-selection">Oluf Rugh were published
+                in the</span>
               </span>
               <i >
-                <span >Minneapolis Tribune</span></i>
+                <span ><span className="annotation-selection">Minneapolis Tribune</span></span></i>
               <span >
-                in April 1899: “The so-called rune stone is a crude fraud, perpetrated by a Swede
-                with the aid of a chisel and a meager knowledge of runic letters and English.”
+                <span className="annotation-selection">in April 1899: “The so-called rune stone is a
+                crude fraud, perpetrated by a Swede with the aid</span> of a chisel and a meager
+                knowledge of runic letters and English.”
               </span>
               <a id="en53r" className="enref" href="/read/47/section/780#en53" >
                 <span >6</span></a>
               <span >
                 Following the initial scientific assessments and the negative publicity that
                 followed, public opinion of the stone as an authentic medieval artifact quickly
-                faded. To the disappointment of many, it was returned to Ohman’s farm, where it
+                faded. To the disappointment of many,
+              </span>
+            </p>
+              {/*
+                Including an annotation block will likely require that all non-block level
+                parent elements of interrupted elements are closed and reopened after the
+                annotation.
+
+                If this is not possible, it will need to be absolutely positioned regularly by
+                Javascript, and also leave behind a block level element that creates spacing
+              */}
+              <div className="annotation-form" style={{ width: 'calc(100vw - (100vw - 650px)/2)' }}>
+                <header>
+                  <span className="title" style={{ left: 'calc((650px - 100vw)/2)' }}>
+                    <i className="manicon manicon-pencil"></i>
+                    {'Add Annotation'}
+                  </span>
+                  <button className="button-close">
+                    <i className="manicon manicon manicon-x"></i>
+                    <span className="screen-reader-text">
+                      {'Click to close annotation form'}
+                    </span>
+                  </button>
+                </header>
+                {/*
+                  The form container should be passed the same max width as the text section
+                  from the margin UI controls
+                */}
+                <div className="form-container" style={{ maxWidth: '650px' }}>
+                  <form>
+                    <div className="form-input">
+                      <textarea></textarea>
+                      <button className="button-add">
+                        <i className="manicon manicon-plus"></i>
+                        Add Attachment
+                      </button>
+                    </div>
+
+                    <div className="form-controls">
+                      <label className="checkbox">
+                        <input type="checkbox"/>
+                        <span className="toggle-indicator">
+                          <i className="manicon manicon-check"></i>
+                        </span>
+                        {'This annotation is private'}
+                      </label>
+                      <button className="button-cancel">
+                        Cancel
+                      </button>
+                      <button className="button-submit">
+                        <i className="manicon manicon-word-bubble-lines"></i>
+                        Publish
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            <p>
+              <span>
+                it was returned to Ohman’s farm, where it
                 sat in obscurity for more than eight years. As one enthusiast described it, the
                 rune stone served as a stepping stone for Ohman’s granary and provided “a
                 tolerable place to straighten nails and rivet harness straps.”

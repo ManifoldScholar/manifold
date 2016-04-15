@@ -1,0 +1,49 @@
+// Annotation Popup Components
+// ---------------------------
+
+// Just for components that deal with selecting an action to create an annotation
+
+.annotation-selection {
+  background-color: $sp20Quaternary;
+}
+
+.annotation-popup {
+  position: absolute;
+  white-space: nowrap;
+
+  button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    padding: 24px 30px 22px;
+    font-size: $type60;
+    color: $neutralWhite;
+    background-color: $neutral80;
+    transition: color $duration $timing, background-color $duration $timing;
+
+    &:hover {
+      color: $neutralOffBlack;
+      background-color: $accentPrimary;
+    }
+
+    + button {
+      border-left: 3px $neutralWhite solid;
+    }
+  }
+
+  .tail {
+    position: absolute;
+    top: 100%;
+    left: 12%;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: $neutral80 transparent transparent;
+    border-style: solid;
+    border-width: 22px 23.5px 0;
+    transition: border-color $duration $timing;
+  }
+
+  button:first-child:hover ~ .tail {
+    border-color: $accentPrimary transparent transparent;
+  }
+}

@@ -20,6 +20,7 @@
   color: $neutralOffBlack;
   background-color: $neutralWhite;
   transition: background-color $duration $timing;
+  overflow: hidden;
 
   &.scheme-dark {
     color: $neutralWhite;

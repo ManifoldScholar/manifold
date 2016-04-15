@@ -141,6 +141,22 @@
   }
 }
 
+// Styled Checkbox (also from wtf forms)
+// Should be applied to a label with an input type="checkbox" inside
+@mixin checkboxStyled {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  // Hide actual input
+  input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+    // Relative negative z-index
+  }
+}
+
 
 // Inputs/Textareas
 @mixin inputSecondary {
