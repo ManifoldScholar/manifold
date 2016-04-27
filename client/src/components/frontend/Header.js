@@ -106,6 +106,8 @@ export default class Header extends Component {
             </nav>
           </div>
 
+          <div className="header-border"></div>
+
           <HeaderNotifications
             notifications={this.props.notifications}
             addNotification={this.props.addNotification}

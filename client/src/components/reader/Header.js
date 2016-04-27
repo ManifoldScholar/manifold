@@ -140,8 +140,8 @@ export default class Header extends Component {
               </li>
             </ul>
           </nav>
-          <div className={bannerGradientClass}></div>
         </nav>
+        <div className={bannerGradientClass}></div>
         <TocDrawer
           text={this.props.text}
           visible={this.props.visibility.tocDrawer}
