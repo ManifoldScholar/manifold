@@ -216,7 +216,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (~> 0.10.0.rc3)
+  active_model_serializers (~> 0.10.0.rc5)
   bcrypt (~> 3.1.7)
   colorize
   css_parser

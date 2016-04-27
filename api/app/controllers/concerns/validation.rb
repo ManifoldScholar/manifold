@@ -4,7 +4,6 @@ module Validation
   def favorite_params
     params.require(:data).require(:relationships).require(:favoritable).require(:data)
     param_config = build_params_structure(relationships: [ favoritable: favoritable_params])
-    puts param_config
     params.permit(param_config)
   end
 

@@ -39,4 +39,14 @@ class User < ActiveRecord::Base
     return nil unless avatar.present?
     ENV["API_DOMAIN"] + avatar.url
   end
+
+  def favorite(favoritable)
+    favorites.create(favoritable: favoritable)
+  end
+
+  def favorite_projects
+    p = []
+    favorites.only_projects.includes(:favoritable).map { |f| f.favoritable }
+  end
+
 end

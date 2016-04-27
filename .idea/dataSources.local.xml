@@ -2,7 +2,10 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="PostgreSQL - manifold_development@localhost" uuid="ec28013c-b39d-4fc4-932d-43e13ea4c33c">
-      <secret-storage>memory</secret-storage>
+      <secret-storage>master_key</secret-storage>
+      <user-name>zdavis</user-name>
+      <schema-pattern>postgres.*</schema-pattern>
+      <default-schemas>postgres.*</default-schemas>
     </data-source>
   </component>
 </project>

@@ -14,10 +14,8 @@ Rails.application.routes.draw do
 
       resource :me, only: [:show], controller: "me"
       namespace :me do
-        resources :favorites, only: [:index, :create, :show]
-        namespace :favorites do
-          resources :projects, only: [:index, :create, :destroy]
-          resources :texts, only: [:index, :create, :destroy]
+        namespace :relationships do
+          resources :favorites
         end
       end
     end

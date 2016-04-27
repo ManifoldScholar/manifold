@@ -22,4 +22,13 @@ RSpec.describe Favorite, type: :model do
     expect(favorite).to be_valid
   end
 
+  it "should be unique" do
+    user = FactoryGirl.create(:user)
+    project = FactoryGirl.create(:project)
+    FactoryGirl.create(:favorite, favoritable: project, user: user)
+    duplicate_favorite = FactoryGirl.build(:favorite,
+                                           favoritable: project, user: user)
+    expect(duplicate_favorite).to_not be_valid
+  end
+
 end
