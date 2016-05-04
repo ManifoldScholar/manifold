@@ -22,18 +22,11 @@ import createApiProxy from './proxies/api';
 import fetchAllData from './helpers/fetchAllData';
 import App from './App';import getRoutes from './routes';
 
-
 const morgan = require('morgan');
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
 const logStyle = __DEVELOPMENT__ ? 'dev' : 'combined';
-
-
-
-// require('colors');
-// import chalk from 'chalk';
-
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
@@ -141,9 +134,8 @@ if (socketLocation) {
   listenOn = config.clientPort;
 }
 
-
-const header = (str) => { return chalk.bold.green.bold(pad(str, 80, ' ', false)) };
-const info = (str) => { return chalk.bold.cyan(str) };
+const header = (str) => { return chalk.bold.green.bold(pad(str, 80, ' ', false)); };
+const info = (str) => { return chalk.bold.cyan(str); };
 
 
 if (listenOn) {

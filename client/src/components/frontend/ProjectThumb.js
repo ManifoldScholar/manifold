@@ -42,7 +42,7 @@ export default class ProjectThumb extends Component {
     // clicking the follow button will change its state (and trigger an action)
     // but not actually swap the buttons until the user has hovered out of
     // the element.
-    let following = false;
+    const following = false;
     let widget = (
       <div className="follow-button">
         <i className="manicon manicon-plus-bold"></i>
