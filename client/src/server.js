@@ -1,41 +1,45 @@
 import Express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
 import path from 'path';
-import createStore from './store/createStore';
 import { pad } from './utils/string';
-import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import cookie from 'cookie';
-import { setAuthToken } from './actions/shared/authentication';
 import { match } from 'react-router';
-import { Provider } from 'react-redux';
-import getRoutes from './routes';
+import RedBox from 'redbox-react';
+import emoji from 'node-emoji';
+import chalk from 'chalk';
+
+import config from './config';
+import Html from './helpers/Html';
+import createStore from './store/createStore';
+import { setAuthToken } from './actions/shared/authentication';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 import createApiProxy from './proxies/api';
-import createWebpackProxy from './proxies/webpack';
 import fetchAllData from './helpers/fetchAllData';
-import { ResolveDataDependencies } from './components/shared';
+import App from './App';import getRoutes from './routes';
 
-require('colors');
+
 const morgan = require('morgan');
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
 const logStyle = __DEVELOPMENT__ ? 'dev' : 'combined';
 
+
+
+// require('colors');
+// import chalk from 'chalk';
+
+
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 app.use(morgan(logStyle));
 app.use(createApiProxy());
-app.use(createWebpackProxy());
-app.use(createWebpackProxy());
-
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
@@ -91,24 +95,35 @@ app.use((req, res) => {
         props.params
       ).then(() => {
         store.dispatch({ type: 'SERVER_LOADED', payload: req.originalUrl });
-        const component = (
-          <Provider store={store} key="provider">
-            <ResolveDataDependencies {...props}/>
-          </Provider>
+        const appComponent = (
+          <App {...props} store={store} />
         );
+
         const status = getStatusFromRoutes(props.routes);
         if (status) {
           res.status(status);
         }
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(
+
+        let renderString = '';
+        try {
+          renderString = ReactDOM.renderToString(
             <Html
               assets={webpackIsomorphicTools.assets()}
-              component={component}
+              component={appComponent}
               store={store}
             />
-          )
-        );
+          );
+        } catch (renderError) {
+          console.log(`SERVER RENDER ERROR`);
+          console.log('---------------------');
+          console.log(pretty.render(renderError));
+          renderString = ReactDOM.renderToString(
+            <RedBox error={renderError} />
+          );
+        } finally {
+          res.send('<!doctype html>\n' + renderString);
+        }
+
       });
     }
   });
@@ -126,6 +141,11 @@ if (socketLocation) {
   listenOn = config.clientPort;
 }
 
+
+const header = (str) => { return chalk.bold.green.bold(pad(str, 80, ' ', false)) };
+const info = (str) => { return chalk.bold.cyan(str) };
+
+
 if (listenOn) {
   server.listen(listenOn, (err) => {
     if (err) {
@@ -134,45 +154,31 @@ if (listenOn) {
     console.log('');
     console.log('');
     if (!config.isProduction) {
-      console.log('MANIFOLD WEBPACK SERVER'.cyan.bold);
-      console.log('---------------------'.cyan);
-      console.log('Manifold Asset Server, a.k.a. Webpack, is listening at http://127.0.0.1:%s'.green, config.assetPort);
+      console.log(header(emoji.get('tada') + '  MANIFOLD WEBPACK SERVER'));
+      console.log(info(pad('', 79, '-')));
+      console.log(info('Manifold Asset Server, a.k.a. Webpack, is listening at http://127.0.0.1:%s'), config.assetPort);
       console.log('');
       console.log('');
     }
 
-    console.log(`${'MANIFOLD ASSET PROXY'.cyan.bold}`);
-    console.log(`-------------------`.cyan);
-    console.log(`The Manifold Asset Proxy is proxying the following paths:`.green);
-    console.log('');
-    const assetPathMax = config.assetProxyPaths.reduce((memo, current) => {
-      return current.length > memo ? current.length : memo;
-    }, 0);
-    config.assetProxyPaths.forEach((value) => {
-      console.log(`${pad(value, assetPathMax, ' ', false)}  >  localhost:${config.assetPort}${value}`.green); // eslint-disable-line max-len
-    });
-    console.log('');
-    console.log('');
-
-    console.log(`${'MANIFOLD API PROXY'.cyan.bold}`);
-    console.log(`-------------------`.cyan);
-    console.log(`The Manifold API Proxy is proxying the following paths:`.green);
+    console.log(header(emoji.get('earth_americas') + '  MANIFOLD REST API'));
+    console.log(info(pad('', 79, '-')));
+    console.log(info('The Manifold API Proxy is proxying the following paths:'));
     console.log('');
     const apiPathMax = config.apiProxyPaths.reduce((memo, current) => {
       return current.length > memo ? current.length : memo;
     }, 0);
     config.apiProxyPaths.forEach((value) => {
-      console.log(`${pad(value, apiPathMax, ' ', false)}  >  ${config.apiUri}${value}`.green);
+      console.log(info(`${pad(value, apiPathMax, ' ', false)}  >  ${config.apiUri}${value}`));
     });
     console.log('');
     console.log('');
 
-    console.log(`MANIFOLD CLIENT SERVER`.cyan.bold);
-    console.log(`----------------------`.cyan);
-    console.log(`Manifold Client is listening at http://127.0.0.1:${config.clientPort}`.green);
+    console.log(header(emoji.get('books') + '  UNIVERSAL CLIENT SERVER'));
+    console.log(info(pad('', 79, '-')));
+    console.log(info(`Manifold Client is listening at http://127.0.0.1:${config.clientPort}`));
     console.log('');
     console.log('');
-
     if (setUmask === true) {
       process.umask(oldUmask);
     }

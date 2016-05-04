@@ -25,7 +25,7 @@ export default class SectionPagination extends Component {
   }
 
   getPreviousLink() {
-    let previousLink = '';
+    let previousLink = null;
     const previousNode = this.getSiblingSection(this.props.sectionId, - 1);
     if (previousNode) {
       const previousPath = this.getSectionPath(previousNode);
@@ -40,7 +40,7 @@ export default class SectionPagination extends Component {
   }
 
   getNextLink() {
-    let nextLink = '';
+    let nextLink = null;
     const nextNode = this.getSiblingSection(this.props.sectionId, 1);
     if (nextNode) {
       const nextPath = this.getSectionPath(nextNode);

@@ -16,8 +16,14 @@ export default class UserButton extends Component {
     userAvatar: '/placeholder/user-avatar-dreft01.jpg'
   };
 
-  avatarImage = () => {
-    let output = '';
+  constructor() {
+    super();
+    this.avatarImage = this.avatarImage.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+
+  avatarImage() {
+    let output = null;
     if (this.props.authenticated && this.props.userAvatar) {
       output = (
           <img className="avatar-image" src={this.props.userAvatar}/>
@@ -27,18 +33,17 @@ export default class UserButton extends Component {
           <i className="manicon manicon-person"></i>
       );
     }
-
     return output;
-  };
+  }
 
-  clickHandler = (event) => {
+  clickHandler(event) {
     event.stopPropagation();
     if (this.props.authenticated) {
       this.props.toggleUserMenu();
     } else {
       this.props.showLoginOverlay();
     }
-  };
+  }
 
   render() {
     const buttonClass = classNames({

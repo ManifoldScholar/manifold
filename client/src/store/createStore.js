@@ -3,6 +3,7 @@ import thunkMiddleware from './middleware/thunkMiddleware';
 import loadingMiddleware from './middleware/loadingMiddleware';
 import { DevTools } from '../containers/shared';
 import promiseMiddleware from 'redux-promise';
+import reducers from './reducers';
 
 export default function createStore(data) {
 
@@ -14,24 +15,14 @@ export default function createStore(data) {
 
   let finalCreateStore;
   if (useDevTools) {
-    const { persistState } = require('redux-devtools');
     finalCreateStore = compose(
       applyMiddleware(...middleware),
-      DevTools.instrument(),
-      persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+      DevTools.instrument()
     )(_createStore);
   } else {
     finalCreateStore = applyMiddleware(...middleware)(_createStore);
   }
 
-  const reducer = require('./reducers');
-  const store = finalCreateStore(reducer, data);
-
-  if (__DEVELOPMENT__ && module.hot) {
-    module.hot.accept('./reducers', () => {
-      store.replaceReducer(require('./reducers'));
-    });
-  }
-
+  const store = finalCreateStore(reducers, data);
   return store;
 }

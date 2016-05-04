@@ -4,7 +4,7 @@ export default class LoadingBar extends Component {
 
   static propTypes = {
     loading: PropTypes.bool
-  }
+  };
 
   constructor(props) {
     super(props);

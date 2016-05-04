@@ -10,10 +10,15 @@ export default class UserButton extends Component {
     visible: PropTypes.bool
   };
 
-  logout = () => {
+  constructor() {
+    super();
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
     this.props.startLogout();
     this.props.hideUserMenu();
-  };
+  }
 
   render() {
     const menuClass = classNames({

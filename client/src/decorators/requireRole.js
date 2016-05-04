@@ -7,13 +7,6 @@ export default function requireRole(roleIgnored, behaviorIgnored) {
 
   return function wrapWithRequireRole(WrappedComponent) {
 
-    function mapStateToProps(state) {
-      return {
-        authentication: state.authentication
-      };
-    }
-
-    @connect(mapStateToProps)
     class RequiredRoleComponent extends Component {
 
       static propTypes = {
@@ -48,6 +41,17 @@ export default function requireRole(roleIgnored, behaviorIgnored) {
         );
       }
     }
-    return hoistStatics(RequiredRoleComponent, WrappedComponent);
+
+    function mapStateToProps(state) {
+      return {
+        authentication: state.authentication
+      };
+    }
+
+    const RequiredRole = connect(
+      mapStateToProps
+    )(RequiredRoleComponent);
+
+    return hoistStatics(RequiredRole, WrappedComponent);
   };
 }

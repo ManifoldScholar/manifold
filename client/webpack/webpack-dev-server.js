@@ -1,16 +1,10 @@
-var Express = require('express');
 var webpack = require('webpack');
 var config = require('../src/config');
 var webpackConfig = require('./dev.config');
 var compiler = webpack(webpackConfig);
-
-var host = process.env.HOST || 'localhost';
-var port = parseInt(config.assetPort) || 3001;
-
-var emoji = require('node-emoji').emoji;
-
+var WebpackDevServer = require('webpack-dev-server');
 var serverOptions = {
-  contentBase: 'http://' + host + ':' + port,
+  contentBase: 'http://manifold.dev:' + config.assetPort,
   quiet: true,
   noInfo: true,
   hot: true,
@@ -20,14 +14,5 @@ var serverOptions = {
   headers: {'Access-Control-Allow-Origin': '*'},
   stats: {colors: true}
 };
-
-var app = new Express();
-
-app.use(require('webpack-dev-middleware')(compiler, serverOptions));
-app.use(require('webpack-hot-middleware')(compiler));
-
-app.listen(port, function onAppListening(err) {
-  if (err) {
-    console.error(err);
-  }
-});
+var server = new WebpackDevServer(compiler, serverOptions);
+server.listen(config.assetPort);

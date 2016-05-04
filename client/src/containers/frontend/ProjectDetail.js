@@ -8,33 +8,15 @@ import { EventList, PublishedText, GroupedTexts, MetaAttributes, ProjectDetailHe
 import { visibilityShow }
   from '../../actions/shared/ui/visibility';
 import { fetchOneProject } from '../../actions/shared/collections';
-import connectData from '../../decorators/connectData';
 
-function fetchData(getState, dispatch, location, params) {
-  return Promise.all([
-    fetchOneProject(params.id)(dispatch, getState)
-  ]);
-}
 
-function mapStateToProps(state) {
-  const fetchOneProjectResult = state.collections.results.fetchOneProject.entities;
-  const projects = state.collections.entities.projects;
-  const project = projects[fetchOneProjectResult];
-  const { creators, contributors, texts, publishedText, textCategories } =
-    select(project, state.collections.entities);
-  return {
-    project,
-    creators: creators || [],
-    contributors: contributors || [],
-    texts: texts || [],
-    publishedText: publishedText || null,
-    textCategories: textCategories || []
-  };
-}
+class ProjectDetailContainer extends Component {
 
-@connectData(fetchData)
-@connect(mapStateToProps)
-export default class ProjectDetail extends Component {
+  static fetchData(getState, dispatch, location, params) {
+    return Promise.all([
+      fetchOneProject(params.id)(dispatch, getState)
+    ]);
+  }
 
   static propTypes = {
     project: PropTypes.object,
@@ -134,3 +116,25 @@ export default class ProjectDetail extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const fetchOneProjectResult = state.collections.results.fetchOneProject.entities;
+  const projects = state.collections.entities.projects;
+  const project = projects[fetchOneProjectResult];
+  const { creators, contributors, texts, publishedText, textCategories } =
+    select(project, state.collections.entities);
+  return {
+    project,
+    creators: creators || [],
+    contributors: contributors || [],
+    texts: texts || [],
+    publishedText: publishedText || null,
+    textCategories: textCategories || []
+  };
+}
+
+const ProjectDetail = connect(
+  mapStateToProps
+)(ProjectDetailContainer);
+
+export default ProjectDetail;

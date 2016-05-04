@@ -29,17 +29,24 @@ export default class Header extends Component {
     startLogout: PropTypes.func
   };
 
-  toggleSearchPanel = () => {
+  constructor() {
+    super();
+    this.toggleSearchPanel = this.toggleSearchPanel.bind(this);
+    this.toggleUserPanel = this.toggleUserPanel.bind(this);
+    this.showLoginOverlay = this.showLoginOverlay.bind(this);
+  }
+
+  toggleSearchPanel() {
     this.props.panelToggle('search');
-  };
+  }
 
-  toggleUserPanel = () => {
+  toggleUserPanel() {
     this.props.panelToggle('user');
-  };
+  }
 
-  showLoginOverlay = () => {
+  showLoginOverlay() {
     this.props.visibilityShow('loginOverlay');
-  };
+  }
 
   render() {
     const path = this.props.location.pathname;

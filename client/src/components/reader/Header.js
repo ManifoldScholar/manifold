@@ -38,8 +38,20 @@ export default class Header extends Component {
     removeAllNotifications: PropTypes.func
   };
 
+  constructor() {
+    super();
+    this.getSectionTitle = this.getSectionTitle.bind(this);
+    this.handleContentsButtonClick = this.handleContentsButtonClick.bind(this);
+    this.handleSearchMenuButtonClick = this.handleSearchMenuButtonClick.bind(this);
+    this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(this);
+    this.triggerShowLoginOverlay = this.triggerShowLoginOverlay.bind(this);
+    this.triggerToggleUserMenu = this.triggerToggleUserMenu.bind(this);
+    this.triggerHideToc = this.triggerHideToc.bind(this);
+    this.renderContentsButton = this.renderContentsButton.bind(this);
+  }
+
   getSectionTitle(id) {
-    let title = '';
+    let title = null;
     this.props.text.attributes.toc.forEach((section) => {
       if (section.id === id) {
         title = section.label;
@@ -49,29 +61,29 @@ export default class Header extends Component {
     return title;
   }
 
-  handleContentsButtonClick = () => {
+  handleContentsButtonClick() {
     this.props.visibilityToggle('tocDrawer');
-  };
+  }
 
-  handleSearchMenuButtonClick = () => {
+  handleSearchMenuButtonClick() {
     this.props.panelToggle('search');
-  };
+  }
 
-  handleAppearanceMenuButtonClick = () => {
+  handleAppearanceMenuButtonClick() {
     this.props.panelToggle('appearance');
-  };
+  }
 
-  triggerShowLoginOverlay = () => {
+  triggerShowLoginOverlay() {
     this.props.visibilityShow('loginOverlay');
-  };
+  }
 
-  triggerToggleUserMenu = () => {
+  triggerToggleUserMenu() {
     this.props.panelToggle('user');
-  };
+  }
 
-  triggerHideToc = () => {
+  triggerHideToc() {
     this.props.visibilityHide('tocDrawer');
-  };
+  }
 
   renderContentsButton = (contents) => {
     if (contents.length <= 0) {
@@ -88,7 +100,7 @@ export default class Header extends Component {
         {'Contents'}<i className="manicon manicon-caret-down"></i>
       </button>
     );
-  };
+  }
 
   render() {
     const colorScheme = this.props.appearance.colors.colorScheme;

@@ -2,12 +2,14 @@ import React from 'react';
 import { Route, IndexRedirect, IndexRoute } from 'react-router';
 import { Reader, Section } from './containers/reader';
 import { Frontend, Home, Following, ProjectDetail, Login } from './containers/frontend';
+import { Developer } from './containers/developer';
 import { NotFound } from './containers/shared';
 
 export default () => {
   return (
     <Route path="/" >
       <IndexRedirect to="browse" />
+      <Route component={Developer} path="dev" />
 
       <Route component={Reader} path="read/:text_id" >
         <Route component={Section} path="section/:section_id" />

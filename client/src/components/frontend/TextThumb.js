@@ -25,7 +25,7 @@ export default class TextThumb extends Component {
   // Since we only have demo icons at this point, thumbnail can either be an image or a
   // placeholder icon
   renderThumbnail(text) {
-    let thumbnail = '';
+    let thumbnail = null;
     if (text.attributes.coverUrl) {
       thumbnail = (
         <img src={text.attributes.coverUrl} alt={'Thumbnail image for ' + text.attributes.title} />

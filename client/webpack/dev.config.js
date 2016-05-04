@@ -1,4 +1,4 @@
-require('babel-core/polyfill');
+require("babel-polyfill");
 var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
@@ -26,34 +26,18 @@ var babelrcObjectDevelopment = babelrcObject.env && babelrcObject.env.developmen
 var babelLoaderQuery = Object.assign({}, babelrcObject, babelrcObjectDevelopment);
 delete babelLoaderQuery.env;
 
-babelLoaderQuery.plugins = babelLoaderQuery.plugins || [];
-if (babelLoaderQuery.plugins.indexOf('react-transform') < 0) {
-  babelLoaderQuery.plugins.push('react-transform');
-}
-
-babelLoaderQuery.extra = babelLoaderQuery.extra || {};
-if (!babelLoaderQuery.extra['react-transform']) {
-  babelLoaderQuery.extra['react-transform'] = {};
-}
-if (!babelLoaderQuery.extra['react-transform'].transforms) {
-  babelLoaderQuery.extra['react-transform'].transforms = [];
-}
-babelLoaderQuery.extra['react-transform'].transforms.push({
-  transform: 'react-transform-hmr',
-  imports: ['react'],
-  locals: ['module']
-});
 module.exports = {
   devtool: 'eval',
   context: path.resolve(__dirname, '..'),
   entry: {
     'main': [
-      'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://0.0.0.0:3001',
+      'webpack/hot/only-dev-server',
       './src/client.js'
     ]
     ,
     'theme': [
-      'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
       './src/theme/theme.js'
     ]
   },
@@ -61,7 +45,12 @@ module.exports = {
     path: assetsPath,
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: '/dist/'
+    publicPath: 'http://manifold.dev:3001/dist/'
+  },
+  resolveLoader: {
+    alias: {
+      "fontgen": path.join(__dirname, "./loaders/fontgen")
+    }
   },
   module: {
     loaders: [

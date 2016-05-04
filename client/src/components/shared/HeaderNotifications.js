@@ -85,8 +85,7 @@ export default class HeaderNotifications extends Component {
   }
 
   renderNotifications() {
-    let notificationList = '';
-
+    let notificationList = null;
     if (this.props.notifications.notifications.length > 0) {
       notificationList = this.props.notifications.notifications.map((notification) => {
         return (

@@ -5,7 +5,6 @@ import DocumentMeta from 'react-document-meta';
 import config from '../../config';
 import { BodyClass, LoginOverlay, LoadingBar, ScrollAware } from '../../components/shared';
 import { Header, Footer, SectionPagination } from '../../components/reader';
-import connectData from '../../decorators/connectData';
 import { fetchOneText } from '../../actions/shared/collections';
 import { select } from '../../utils/select';
 import { startLogout } from '../../actions/shared/authentication';
@@ -20,45 +19,13 @@ import { setColorScheme } from '../../actions/reader/ui/colors';
 import { browserHistory } from 'react-router';
 import { DevTools } from '../shared';
 
-function fetchData(getState, dispatch, location, params) {
-  const promises = [];
-  promises.push(fetchOneText(params.text_id)(dispatch, getState));
-  return Promise.all(promises);
-}
+class ReaderContainer extends Component {
 
-function mapStateToProps(state) {
-  const textId = state.collections.results.fetchOneText.entities;
-  const text = state.collections.entities.texts[textId];
-  const { category, project, creators, contributors, textSections, tocSection, stylesheets } =
-    select(text, state.collections.entities);
-  const sectionId = state.collections.results.fetchOneSection.entities;
-  const appearance = {
-    typography: state.ui.typography,
-    colors: state.ui.colors
-  };
-  return {
-    text,
-    category,
-    project,
-    creators,
-    contributors,
-    textSections,
-    tocSection,
-    textId,
-    sectionId,
-    stylesheets,
-    authentication: state.authentication,
-    visibility: state.ui.visibility,
-    loading: state.ui.loading.active,
-    notifications: state.notifications,
-    renderDevTools: state.developer.renderDevTools,
-    appearance
-  };
-}
-
-@connectData(fetchData)
-@connect(mapStateToProps)
-class Reader extends Component {
+  static fetchData(getState, dispatch, location, params) {
+    const promises = [];
+    promises.push(fetchOneText(params.text_id)(dispatch, getState));
+    return Promise.all(promises);
+  }
 
   static propTypes = {
     children: PropTypes.object,
@@ -202,5 +169,36 @@ class Reader extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  const textId = state.collections.results.fetchOneText.entities;
+  const text = state.collections.entities.texts[textId];
+  const { category, project, creators, contributors, textSections, tocSection, stylesheets } =
+    select(text, state.collections.entities);
+  const sectionId = state.collections.results.fetchOneSection.entities;
+  const appearance = {
+    typography: state.ui.typography,
+    colors: state.ui.colors
+  };
+  return {
+    text,
+    category,
+    project,
+    creators,
+    contributors,
+    textSections,
+    tocSection,
+    textId,
+    sectionId,
+    stylesheets,
+    authentication: state.authentication,
+    visibility: state.ui.visibility,
+    loading: state.ui.loading.active,
+    notifications: state.notifications,
+    renderDevTools: state.developer.renderDevTools,
+    appearance
+  };
+}
+
 export default connect(
-)(Reader);
+  mapStateToProps
+)(ReaderContainer);

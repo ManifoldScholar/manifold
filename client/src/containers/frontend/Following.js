@@ -1,34 +1,20 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { ProjectGrid, ProjectSummaryGrid, ProjectFilters } from '../../components/frontend';
 import { bindActionCreators } from 'redux';
 import { fetchFilteredProjects, fetchFeaturedProjects } from '../../actions/shared/collections';
 import { setProjectFilters } from '../../actions/frontend/ui/filters';
-import connectData from '../../decorators/connectData';
+import { connect } from 'react-redux';
 
-function fetchData(getState, dispatch) {
-  const state = getState();
-  return Promise.all([
-    fetchFilteredProjects(state.ui.projectFilters)(dispatch, getState),
-    fetchFeaturedProjects()(dispatch, getState)
-  ]);
-}
+class FollowingContainer extends Component {
 
-function mapStateToProps(state) {
-  return {
-    filteredProjects: state.collections.results.fetchFilteredProjects.entities,
-    featuredProjects: state.collections.results.fetchFeaturedProjects.entities,
-    projectFilters: state.ui.projectFilters,
-    projects: state.collections.entities.projects,
-    makers: state.collections.entities.makers,
-    authentication: state.authentication
-  };
-}
-
-@connectData(fetchData)
-@connect(mapStateToProps)
-export default class Following extends Component {
+  static fetchData(getState, dispatch) {
+    const state = getState();
+    return Promise.all([
+      fetchFilteredProjects(state.ui.projectFilters)(dispatch, getState),
+      fetchFeaturedProjects()(dispatch, getState)
+    ]);
+  }
 
   static propTypes = {
     children: PropTypes.object,
@@ -113,3 +99,20 @@ export default class Following extends Component {
     );
   };
 }
+
+function mapStateToProps(state) {
+  return {
+    filteredProjects: state.collections.results.fetchFilteredProjects.entities,
+    featuredProjects: state.collections.results.fetchFeaturedProjects.entities,
+    projectFilters: state.ui.projectFilters,
+    projects: state.collections.entities.projects,
+    makers: state.collections.entities.makers,
+    authentication: state.authentication
+  };
+}
+
+const Following = connect(
+  mapStateToProps
+)(FollowingContainer);
+
+export default Following;

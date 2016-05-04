@@ -13,18 +13,7 @@ import { addNotification, removeNotification, removeAllNotifications }
 import { whoami } from '../../actions/shared/authentication';
 import { DevTools } from '../shared';
 
-function mapStateToProps(state) {
-  return {
-    authentication: state.authentication,
-    visibility: state.ui.visibility,
-    loading: state.ui.loading.active,
-    notifications: state.notifications,
-    renderDevTools: state.developer.renderDevTools
-  };
-}
-
-@connect(mapStateToProps)
-export default class Frontend extends Component {
+class FrontendContainer extends Component {
 
   static propTypes = {
     routeDataLoaded: PropTypes.bool,
@@ -117,3 +106,20 @@ export default class Frontend extends Component {
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    authentication: state.authentication,
+    visibility: state.ui.visibility,
+    loading: state.ui.loading.active,
+    notifications: state.notifications,
+    renderDevTools: state.developer.renderDevTools
+  };
+}
+
+const Frontend = connect(
+  mapStateToProps
+)(FrontendContainer);
+
+export default Frontend;

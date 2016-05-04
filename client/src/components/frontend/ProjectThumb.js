@@ -38,10 +38,8 @@ export default class ProjectThumb extends Component {
   render() {
     const project = this.props.project;
 
-    let projectDate;
-    if (this.props.hideDate) {
-      projectDate = '';
-    } else {
+    let projectDate = null;
+    if (!this.props.hideDate) {
       projectDate = (
         <div className="date">
           {'Published June, 2016'}
@@ -49,10 +47,8 @@ export default class ProjectThumb extends Component {
       );
     }
 
-    let projectDesc;
-    if (this.props.hideDesc) {
-      projectDesc = '';
-    } else {
+    let projectDesc = null;
+    if (!this.props.hideDesc) {
       projectDesc = (
         <p className="description">
           {project.attributes.description}
@@ -60,10 +56,8 @@ export default class ProjectThumb extends Component {
       );
     }
 
-    let projectMeta;
-    if (this.props.hideMeta) {
-      projectMeta = '';
-    } else {
+    let projectMeta = null;
+    if (!this.props.hideMeta) {
       projectMeta = (
         <div className="meta">
           <h3 className="title">{project.attributes.title}</h3>

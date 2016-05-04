@@ -8,7 +8,14 @@ export default class GroupedTexts extends Component {
     texts: PropTypes.array
   };
 
-  textsForCategory = (category) => {
+  constructor() {
+    super();
+    this.textsForCategory = this.textsForCategory.bind(this);
+    this.addGroup = this.addGroup.bind(this);
+    this.buildGroupedCollection = this.buildGroupedCollection.bind(this);
+  }
+
+  textsForCategory(category) {
     return this.props.texts.filter((text) => {
       if (category === null) {
         return text.relationships.category.data === null;
@@ -16,23 +23,23 @@ export default class GroupedTexts extends Component {
       if (!text.relationships.category.data) return false;
       return text.relationships.category.data.id === category.id;
     });
-  };
+  }
 
-  addGroup = (collection, category) => {
+  addGroup(collection, category) {
     const texts = this.textsForCategory(category);
     if (texts.length > 0) {
       collection.push({ category, texts });
     }
-  };
+  }
 
-  buildGroupedCollection = () => {
+  buildGroupedCollection() {
     const collection = [];
     this.addGroup(collection, null);
     this.props.categories.map((category) => {
       this.addGroup(collection, category);
     });
     return collection;
-  };
+  }
 
   render() {
     const textsByCategory = this.buildGroupedCollection();

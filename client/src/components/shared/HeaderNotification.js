@@ -21,8 +21,7 @@ export default class HeaderNotification extends Component {
   }
 
   bodyCopy() {
-    let output = '';
-
+    let output = null;
     if (this.props.body) {
       output = (
         <p className="notification-body">

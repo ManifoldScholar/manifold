@@ -17,8 +17,7 @@ export default class Dropdown extends Component {
     // Add logic here to show/hide menu
   }
 
-  clickHandler = () => {
-    alert('clicked');
+  clickHandler() {
   }
 
   render() {

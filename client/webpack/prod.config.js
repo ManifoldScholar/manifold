@@ -1,5 +1,5 @@
 // Webpack config for creating the production bundle.
-require('babel-core/polyfill');
+require("babel-polyfill");
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');

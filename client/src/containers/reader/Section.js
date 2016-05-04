@@ -1,32 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import connectData from '../../decorators/connectData';
 import { fetchOneSection } from '../../actions/shared/collections';
 import classNames from 'classnames';
 import { SectionBody } from '../../components/reader';
 import smoothScroll from 'smoothscroll';
 
-function fetchData(getState, dispatch, location, params) {
-  return Promise.all([
-    fetchOneSection(params.section_id)(dispatch, getState)
-  ]);
-}
+class SectionContainer extends Component {
 
-function mapStateToProps(state) {
-  return {
-    fetchOneSection: state.collections.results.fetchOneSection.entities,
-    sections: state.collections.entities.text_sections,
-    appearance: {
-      typography: state.ui.typography,
-      colors: state.ui.colors
-    }
-  };
-}
-
-@connectData(fetchData)
-@connect(mapStateToProps)
-
-class Reader extends Component {
+  static fetchData(getState, dispatch, location, params) {
+    return Promise.all([
+      fetchOneSection(params.section_id)(dispatch, getState)
+    ]);
+  }
 
   static propTypes = {
     children: PropTypes.object,
@@ -113,5 +98,17 @@ class Reader extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    fetchOneSection: state.collections.results.fetchOneSection.entities,
+    sections: state.collections.entities.text_sections,
+    appearance: {
+      typography: state.ui.typography,
+      colors: state.ui.colors
+    }
+  };
+}
+
 export default connect(
-)(Reader);
+  mapStateToProps
+)(SectionContainer);

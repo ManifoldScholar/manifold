@@ -26,6 +26,7 @@ export default class ProjectGrid extends Component {
                   project={project}
                   hideDesc={hideDesc}
                 />
+                {'raddog'}
               </li>
             );
           })}

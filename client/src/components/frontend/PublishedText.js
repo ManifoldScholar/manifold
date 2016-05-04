@@ -8,11 +8,16 @@ export default class PublishedText extends Component {
     texts: PropTypes.array
   };
 
-  findPublishedText = () => {
+  constructor() {
+    super();
+    this.findPublishedText = this.findPublishedText.bind(this);
+  }
+
+  findPublishedText() {
     return find(this.props.texts, (text) => {
       return text.attributes.published === true;
     });
-  };
+  }
 
   render() {
     const publishedText = this.findPublishedText();

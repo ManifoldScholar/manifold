@@ -5,30 +5,16 @@ import { bindActionCreators } from 'redux';
 import { fetchFilteredProjects, fetchFeaturedProjects } from '../../actions/shared/collections';
 import { setProjectFilters } from '../../actions/frontend/ui/filters';
 import { Link } from 'react-router';
-import connectData from '../../decorators/connectData';
 
+class HomeContainer extends Component {
 
-function fetchData(getState, dispatch) {
-  const state = getState();
-  return Promise.all([
-    fetchFilteredProjects(state.ui.projectFilters)(dispatch, getState),
-    fetchFeaturedProjects()(dispatch, getState)
-  ]);
-}
-
-function mapStateToProps(state) {
-  return {
-    filteredProjects: state.collections.results.fetchFilteredProjects.entities,
-    featuredProjects: state.collections.results.fetchFeaturedProjects.entities,
-    projectFilters: state.ui.filters.project,
-    projects: state.collections.entities.projects,
-    makers: state.collections.entities.makers
-  };
-}
-
-@connectData(fetchData)
-@connect(mapStateToProps)
-export default class Home extends Component {
+  static fetchData(getState, dispatch) {
+    const state = getState();
+    return Promise.all([
+      fetchFilteredProjects(state.ui.projectFilters)(dispatch, getState),
+      fetchFeaturedProjects()(dispatch, getState)
+    ]);
+  }
 
   static propTypes = {
     children: PropTypes.object,
@@ -37,7 +23,7 @@ export default class Home extends Component {
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
     projectFilters: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func
   };
 
   static contextTypes = {
@@ -112,3 +98,20 @@ export default class Home extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    filteredProjects: state.collections.results.fetchFilteredProjects.entities,
+    featuredProjects: state.collections.results.fetchFeaturedProjects.entities,
+    projectFilters: state.ui.filters.project,
+    projects: state.collections.entities.projects,
+    makers: state.collections.entities.makers
+  };
+}
+
+
+const Home = connect(
+  mapStateToProps
+)(HomeContainer);
+
+export default Home;
