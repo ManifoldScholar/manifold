@@ -3,6 +3,7 @@ import { Route, IndexRedirect, IndexRoute } from 'react-router';
 import { Reader, Section } from './containers/reader';
 import { Frontend, Home, Following, ProjectDetail, Login } from './containers/frontend';
 import { Developer } from './containers/developer';
+import { FormsStatic } from './components/frontend';
 import { NotFound } from './containers/shared';
 
 export default () => {
@@ -20,6 +21,7 @@ export default () => {
         <Route component={Login} path="login" />
         <Route component={Following} path="following" />
         <Route component={ProjectDetail} path="project/:id" />
+        <Route component={FormsStatic} path="forms" />
       </Route>
 
       <Route component={Frontend} path="*">

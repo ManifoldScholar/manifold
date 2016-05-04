@@ -96,3 +96,28 @@ $type20: 12px;
     color: $accentPrimaryDark;
   }
 }
+
+// Labels
+// --------------------------------------------------------
+@mixin formLabelPrimary {
+  @include templateHead;
+  font-size: $type40;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+
+// Forms
+// --------------------------------------------------------
+@mixin formInputPrimary {
+  @include templateHead;
+  font-size: $type70;
+  letter-spacing: 0.32px;
+}
+
+@mixin formInputSecondary {
+  @include templateHead;
+  font-size: $type40;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}

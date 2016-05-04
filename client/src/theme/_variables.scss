@@ -84,7 +84,9 @@ $timing: ease;
 // Responsive Breakpoints
 // Maintained in one place to keep major breakpoints consistent
 // --------------------------------------------------------
-// $break100: ;
+// $break130: ;
+// $break120: ;
+$break100: $containerWidthFull;
 // $break90: ;
 // $break80: ;
 // $break70: ;
@@ -93,4 +95,5 @@ $timing: ease;
 // $break40: ;
 // $break30: ;
 // $break20: ;
-// $break10: ;
+// Minimum site width
+$break10: 320px;

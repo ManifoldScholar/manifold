@@ -99,7 +99,7 @@ class ProjectDetailContainer extends Component {
   render() {
     return (
       <div>
-        <section className="neutral05">
+        <section className="bg-neutral05">
           <div className="container">
             <ProjectDetailHero
               project={this.props.project}

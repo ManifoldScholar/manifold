@@ -1,22 +1,20 @@
 // Component Structure
 // -------------------
 
-// Structure-only mixins, with parameters for margins, padding, position, display, etc.
+// Structure-only mixins/utility classes, with parameters for margins, padding, position, display, etc.
 
 // Contents
 // --------------------------
-// - Imports
 // - Prototypes
 // - Utilities
 // - Layout
 // - Type
 // - Images
 // - Lists
-// - Grids
 // - Buttons/Links
 // - Tables
 // - Forms
-
+// - Imports
 
 // Utilities
 // --------------------------------------------------------
@@ -26,7 +24,7 @@
 // $operator -> 'min' or 'max'
 // $aspect -> 'width' or 'height'
 // --------------------------
-@mixin respond($size, $operator: max, $aspect: width) {
+@mixin respond($size, $operator: min, $aspect: width) {
   @media all and (#{$operator}-#{$aspect}: $size) {
     @content;
   }
@@ -81,6 +79,28 @@
   padding-left: $containerPaddingMin;
 }
 
+.container {
+  @include containerPrototype;
+
+  // Section can be abstracted to more specific section class (or body class) if necessary
+  section > & {
+    padding-top: 85px;
+    padding-bottom: 100px;
+  }
+}
+
+.container-focus {
+  @include containerNarrow;
+  transition: max-width $duration $timing;
+}
+
+.section-heading-utility-right {
+  // TODO: These styles should only hold for wider than container maximum
+  position: absolute;
+  top: 6px;
+  right: 0;
+}
+
 
 // Lists
 // --------------------------------------------------------
@@ -102,6 +122,7 @@
 
 // Form Layout
 // --------------------------------------------------------
+// TODO: This combines appearance mixins and should be a shared class or mixin
 @mixin loginFormPrimary {
   .field + .field {
     margin-top: 27px;
@@ -120,3 +141,8 @@
     margin-top: 30px;
   }
 }
+
+
+// Imports
+// --------------------------------------------------------
+@import 'grids';

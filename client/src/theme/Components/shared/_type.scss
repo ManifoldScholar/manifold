@@ -1,0 +1,75 @@
+.section-heading {
+  @include headingPrimary;
+  color: $neutral80;
+
+  .bg-neutral90 & {
+    color: $neutral30;
+  }
+
+  .manicon {
+    display: inline-block;
+    margin-right: 13px;
+    color: $neutral40;
+    vertical-align: middle;
+    // React generated wrapper
+    + span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .manicon-books-on-shelf {
+    margin-right: 24px;
+  }
+
+  .manicon-books-stack {
+    margin-right: 20px;
+    font-size: 61px;
+  }
+
+  .manicon-books-with-glasses {
+    font-size: 38px;
+  }
+
+  .manicon-lamp {
+    font-size: 56px;
+  }
+
+  .manicon-new-round {
+    font-size: 63px;
+    color: $accentPrimary;
+  }
+
+  .manicon-pulse {
+    font-size: 29px;
+  }
+
+  .manicon-tag {
+    font-size: 47px;
+  }
+}
+
+.login-links {
+  @include templateCopy;
+  font-size: $type60;
+  font-style: italic;
+  color: $neutral50;
+
+  a {
+    color: $neutral50;
+
+    + a {
+      margin-left: 14px;
+    }
+  }
+}
+
+.sub-section-heading {
+  @include utilityPrimary;
+  padding: 16px 30px 19px;
+  margin-top: 0;
+  margin-bottom: 55px;
+  font-size: $type60;
+  color: $accentPrimaryDark;
+  background-color: $neutral20;
+}
