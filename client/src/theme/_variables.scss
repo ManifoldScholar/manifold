@@ -34,7 +34,7 @@ $accentPrimaryOffWhite: #f0faf7 !default;
 
 // Spectra
 // Color spectra are number by group and then given ordinal names, attributes
-$sp20Primary: #00bae6;
+$sp20Primary: #2bd1fa;
 $sp20PrimaryLight: #99e3f5;
 $sp20PrimaryPale: #d9f5fb;
 
@@ -76,6 +76,7 @@ $bold: 700;
 // Commonly used animation variables, mainly used with transition CSS
 $durationFast: 0.1s;
 $duration: 0.2s;
+$durationSlow: 0.4s;
 
 $timing: ease;
 

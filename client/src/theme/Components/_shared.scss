@@ -291,6 +291,112 @@ section {
   }
 }
 
+// Thumbnail Shared Elements
+// --------------------------
+.follow-button {
+  @include templateHead;
+  position: absolute;
+  top: 10.526%;
+  left: -18px;
+  display: block;
+  height: 45px;
+  max-width: 45px;
+  padding: 0 13px 0 12.5px;
+  overflow: hidden;
+  font-size: 22px;
+  line-height: 45px;
+  color: $neutralWhite;
+  text-align: left;
+  white-space: nowrap;
+  background-color: $accentPrimary;
+  border-radius: 22.5px;
+  transition: max-width $duration $timing, background-color $duration $timing;
+
+  .manicon-plus-bold {
+    display: inline-block;
+    margin-right: 13px;
+    font-size: 20px;
+    text-align: center;
+    transition: transform $duration $timing;
+  }
+
+  &:hover {
+    max-width: 200px;
+    background-color: $sp20Primary;
+    transition: max-width $durationSlow ease-out;
+
+    .manicon-plus-bold {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.followed-button {
+  @include templateHead;
+  position: absolute;
+  top: 10.526%;
+  left: -18px;
+  display: block;
+  height: 45px;
+  max-width: 45px;
+  padding: 0 13px;
+  overflow: hidden;
+  font-size: 22px;
+  line-height: 45px;
+  color: $neutralWhite;
+  text-align: left;
+  background-color: $sp20Primary;
+  border-radius: 22.5px;
+  transition: max-width $duration $timing, background-color $duration $timing;
+
+  &:hover {
+    max-width: 200px;
+    background-color: $neutral75;
+    transition: max-width $durationSlow ease-out 0.15s;
+
+    .manicon-minus-bold {
+      opacity: 1;
+      transform: translateX(0);
+      transition: transform $duration $timing;
+    }
+
+    .manicon-check-bold {
+      opacity: 0;
+      transform: translateX(45px);
+      transition: opacity 0s $timing $duration, transform $duration $timing;
+    }
+  }
+
+  .manicon-minus-bold, .manicon-check-bold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+  }
+
+  .manicon-minus-bold {
+    padding-top: 11px;
+    opacity: 0;
+    transform: translateX(-45px);
+    transition: opacity $durationSlow $timing, transform $duration $timing;
+  }
+
+  .manicon-check-bold {
+    padding-top: 13px;
+    font-size: 18px;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity $durationFast, $timing, transform $duration $timing;
+  }
+
+  .follow-text {
+    padding-left: 46px;
+  }
+}
+
 // Browser UI (Selects, dropdowns, inputs, etc.)
 // --------------------------------------------------------
 .select-browse {

@@ -35,6 +35,34 @@ export default class ProjectThumb extends Component {
     return cover;
   }
 
+  // Renders a follow widget (currently shows either "Follow" or "Following")
+  renderFollow() {
+    // Set following to true to see "Following/Unfollow" widget
+    // NB: This behavior will need to be more complex in the future, such that
+    // clicking the follow button will change its state (and trigger an action)
+    // but not actually swap the buttons until the user has hovered out of
+    // the element.
+    let following = false;
+    let widget = (
+      <div className="follow-button">
+        <i className="manicon manicon-plus-bold"></i>
+        <span className="follow-text">{'Follow'}</span>
+      </div>
+    );
+
+    if (following) {
+      widget = (
+        <div className="followed-button">
+          <i className="manicon manicon-minus-bold"></i>
+          <i className="manicon manicon-check-bold"></i>
+          <span className="follow-text">{'Unfollow'}</span>
+        </div>
+      );
+    }
+
+    return widget;
+  }
+
   render() {
     const project = this.props.project;
 
@@ -95,7 +123,7 @@ export default class ProjectThumb extends Component {
         <div className="figure-wrapper">
           <figure>
             {cover}
-            <i className="manicon manicon-plus"></i>
+            {this.renderFollow()}
           </figure>
         </div>
         {projectMeta}

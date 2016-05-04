@@ -44,12 +44,18 @@ class HomeContainer extends Component {
   render() {
     return (
       <div>
+        {/*
+          Note that this section will be used for "Recent Projects"
+          once that list is available, this is currently using the
+          "featured projects" set of entities instead so as to
+          showcase/debug the markup for this type of list.
+        */}
         <section>
           <div className="container">
             <header className="rel">
               <h4 className="section-heading">
                 <i className="manicon manicon-new-round"></i>
-                {'Featured Projects'}
+                {'Recent Projects'}
               </h4>
             </header>
             <ProjectCovers
