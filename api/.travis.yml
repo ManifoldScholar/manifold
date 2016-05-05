@@ -1,9 +1,0 @@
-language: ruby
-cache: bundler
-rvm:
-  - 2.2.3
-before_script:
-  - ./bin/rails g manifold:install
-  - psql -c 'create database "manifold-api_test";' -U postgres
-env:
-  - RAILS_DB_USER=postgres
