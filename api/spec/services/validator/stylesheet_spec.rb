@@ -173,7 +173,7 @@ RSpec.describe Validator::Stylesheet do
   end
 
   it "does not rewrite unmapped css values" do
-    valid = "#{scope_selector} h2 { font-weight: bold; }"
+    valid = "#{scope_selector} h2 { this_will_never_be_blacklisted: value; }"
     results = validator.validate(valid)
     expect(compact(results)).to eq compact(valid)
   end
