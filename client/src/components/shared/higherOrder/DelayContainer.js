@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { isFunction } from '../../../../node_modules/lodash/lang';
-import { matches } from '../../../../node_modules/lodash/utility';
+import isFunction from 'lodash/isFunction';
+import matches from 'lodash/matches';
 
 
 export default class DelayContainer extends Component {

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { mapKeys } from 'lodash/object';
+import mapKeys from 'lodash/mapKeys';
 import { camelizeKeys } from 'humps';
 
 export default (RenderComponent) => {

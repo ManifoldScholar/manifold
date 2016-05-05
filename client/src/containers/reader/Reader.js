@@ -10,7 +10,7 @@ import { select } from '../../utils/select';
 import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide }
   from '../../actions/shared/ui/visibility';
-import { values } from 'lodash/object';
+import values from 'lodash/values';
 import { selectFont, incrementFontSize, decrementFontSize, incrementMargins, decrementMargins }
   from '../../actions/reader/ui/typography';
 import { addNotification, removeNotification, removeAllNotifications }

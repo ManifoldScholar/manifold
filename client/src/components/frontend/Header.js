@@ -9,7 +9,7 @@ import {
     UserMenuButton
 } from '../../components/shared';
 import { Link } from 'react-router';
-import { startsWith } from 'lodash/string';
+import startsWith from 'lodash/startsWith';
 
 export default class Header extends Component {
 

@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import { timestamp } from '../../utils/time';
 import { camelize } from 'humps';
 import { actions } from '../../actions/shared/collections';
-import { startsWith } from 'lodash/string';
+import startsWith from 'lodash/startsWith';
 
 const collectionActions = Object.values(actions);
 export const collectionEntities = ['texts', 'projects', 'makers'];

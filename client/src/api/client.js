@@ -1,7 +1,7 @@
 import { camelizeKeys } from 'humps';
 import config from '../config';
 import qs from 'qs';
-import { isPlainObject } from 'lodash/lang';
+import isPlainObject from 'lodash/isPlainObject';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');

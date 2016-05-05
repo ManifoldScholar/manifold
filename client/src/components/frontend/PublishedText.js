@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { TextThumb } from './';
-import { find } from 'lodash/collection';
+import find from 'lodash/find';
 
 export default class PublishedText extends Component {
 

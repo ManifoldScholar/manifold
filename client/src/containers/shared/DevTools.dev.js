@@ -2,7 +2,7 @@ import React from 'react';
 import { createDevTools } from 'redux-devtools';
 import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
-import { get } from 'lodash/object';
+import get from 'lodash/get';
 
 const select = (state) => {
   const newState = Object.assign({}, state);
