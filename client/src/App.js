@@ -5,6 +5,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { ResolveDataDependencies } from './components/shared';
 import { Provider } from 'react-redux';
 import getRoutes from './routes';
+import { DevTools } from './containers/shared';
 
 export default class App extends Component {
 
@@ -47,6 +48,10 @@ export default class App extends Component {
 
   componentDidMount() {
     this.store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
+    if (__DEVTOOLS__) {
+      this.store.dispatch({ type: 'RENDER_DEV_TOOLS' });
+    }
+    this.forceUpdate();
   }
 
   serverRouter() {
@@ -69,9 +74,18 @@ export default class App extends Component {
   }
 
   render() {
+    const state = this.store.getState();
+    let devTools = null;
+    if (state.developer.renderDevTools) {
+      devTools = <DevTools />;
+    }
+
     return (
       <Provider store={this.store} key="provider">
-        {this.router()}
+        <div>
+          {this.router()}
+          {devTools}
+        </div>
       </Provider>
     );
   }

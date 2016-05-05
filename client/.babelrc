@@ -7,6 +7,12 @@
         "transform-class-properties",
         "transform-decorators-legacy"
       ]
+    },
+    "production": {
+      "plugins": [
+        "transform-class-properties"
+      ]
     }
+
   }
 }

@@ -1,20 +1,31 @@
-// Webpack config for creating the production bundle.
 require("babel-polyfill");
+var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
 var autoprefixer = require('autoprefixer');
-
 var relativeAssetsPath = '../static/dist';
 var assetsPath = path.join(__dirname, relativeAssetsPath);
-
-// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
+var babelrc = fs.readFileSync('./.babelrc');
+var babelrcObject = {};
+var CleanWebpackPlugin = require('clean-webpack-plugin');
+
+try {
+  babelrcObject = JSON.parse(babelrc);
+} catch (err) {
+  console.error('==>     ERROR: Error parsing your .babelrc.');
+  console.error(err);
+}
+
+var babelrcObjectProduction = babelrcObject.env && babelrcObject.env.production || {};
+var babelLoaderQuery = Object.assign({}, babelrcObject, babelrcObjectProduction);
+delete babelLoaderQuery.env;
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
     'main': [
@@ -31,11 +42,17 @@ module.exports = {
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: '/dist/'
   },
+  resolveLoader: {
+    alias: {
+      "fontgen": path.join(__dirname, "./loaders/fontgen")
+    }
+  },
   module: {
     loaders: [
       {
         test: /\.font.js/,
-        loaders: ['style', 'css', 'fontgen']
+        loaders: ['style', 'css', 'fontgen'],
+        include: path.resolve('./src')
       },
       { test: /\.js$/,
         exclude: function(path) {
@@ -43,7 +60,7 @@ module.exports = {
           if (path.match(/node_modules\/qs/)) return false;
           if (path.match(/node_modules/)) return true;
         },
-        loaders: [strip.loader('debug'), 'babel']
+        loaders: [strip.loader('debug'), 'babel?' + JSON.stringify(babelLoaderQuery)],
       },
       {
         test: /\.json$/,
@@ -111,12 +128,19 @@ module.exports = {
       }
     }),
 
+    new CleanWebpackPlugin(['static/dist'], {
+      root: path.join(__dirname, '../'),
+      verbose: true,
+      dry: false
+    }),
+
     // optimizations
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
      new webpack.optimize.UglifyJsPlugin({
        compress: {
-           warnings: false
+           warnings: false,
+           dead_code: true
          }
      }),
 

@@ -11,7 +11,6 @@ import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHid
 import { addNotification, removeNotification, removeAllNotifications }
   from '../../actions/shared/notifications';
 import { whoami } from '../../actions/shared/authentication';
-import { DevTools } from '../shared';
 
 class FrontendContainer extends Component {
 
@@ -35,9 +34,6 @@ class FrontendContainer extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     this.setMinHeight();
-    if (__DEVTOOLS__) {
-      this.props.dispatch({ type: 'RENDER_DEV_TOOLS' });
-    }
     dispatch(whoami());
   }
 
@@ -74,10 +70,6 @@ class FrontendContainer extends Component {
     const hideLoginOverlay = bindActionCreators(
       () => visibilityHide('loginOverlay'), this.props.dispatch
     );
-    let devTools = null;
-    if (this.props.renderDevTools) {
-      devTools = <DevTools />;
-    }
 
     return (
       <BodyClass className={'browse'}>
@@ -100,7 +92,6 @@ class FrontendContainer extends Component {
             {this.props.children}
           </main>
           <Footer />
-          {devTools}
         </div>
       </BodyClass>
     );
@@ -113,8 +104,7 @@ function mapStateToProps(state) {
     authentication: state.authentication,
     visibility: state.ui.visibility,
     loading: state.ui.loading.active,
-    notifications: state.notifications,
-    renderDevTools: state.developer.renderDevTools
+    notifications: state.notifications
   };
 }
 

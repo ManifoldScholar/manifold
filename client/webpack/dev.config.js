@@ -2,16 +2,10 @@ require("babel-polyfill");
 var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
-var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 var autoprefixer = require('autoprefixer');
 var assetsPath = path.resolve(__dirname, '../static/dist');
-var host = 'localhost';
-var port = parseInt(process.env.PORT) + 1 || 3001;
-
-// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
-
 var babelrc = fs.readFileSync('./.babelrc');
 var babelrcObject = {};
 

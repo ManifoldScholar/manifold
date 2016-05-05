@@ -17,7 +17,6 @@ import { addNotification, removeNotification, removeAllNotifications }
   from '../../actions/shared/notifications';
 import { setColorScheme } from '../../actions/reader/ui/colors';
 import { browserHistory } from 'react-router';
-import { DevTools } from '../shared';
 
 class ReaderContainer extends Component {
 
@@ -41,8 +40,7 @@ class ReaderContainer extends Component {
     dispatch: PropTypes.func,
     history: PropTypes.object,
     loading: PropTypes.bool,
-    notifications: PropTypes.object,
-    renderDevTools: PropTypes.bool
+    notifications: PropTypes.object
   };
 
   static contextTypes = {
@@ -57,12 +55,6 @@ class ReaderContainer extends Component {
   componentWillMount() {
     if (!this.props.params.hasOwnProperty('section_id') && __CLIENT__) {
       this.transitionToFirstSection();
-    }
-  }
-
-  componentDidMount() {
-    if (__DEVTOOLS__) {
-      this.props.dispatch({ type: 'RENDER_DEV_TOOLS' });
     }
   }
 
@@ -100,14 +92,6 @@ class ReaderContainer extends Component {
     };
   };
 
-  renderDevTools() {
-    const useDevTools = __DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__;
-    if (useDevTools) {
-      return <DevTools />;
-    }
-    return null;
-  }
-
   renderStyles = () => {
     return values(this.props.stylesheets).map((stylesheet, index) => {
       return (
@@ -124,10 +108,6 @@ class ReaderContainer extends Component {
       () => visibilityHide('loginOverlay'),
       this.props.dispatch
     );
-    let devTools = null;
-    if (this.props.renderDevTools) {
-      devTools = <DevTools />;
-    }
 
     return (
       <BodyClass className="reader">
@@ -162,7 +142,6 @@ class ReaderContainer extends Component {
             />
           </main>
           <Footer />
-          {devTools}
         </div>
       </BodyClass>
     );
