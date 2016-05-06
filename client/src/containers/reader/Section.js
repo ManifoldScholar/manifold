@@ -101,7 +101,7 @@ class SectionContainer extends Component {
 function mapStateToProps(state) {
   return {
     fetchOneSection: state.collections.results.fetchOneSection.entities,
-    sections: state.collections.entities.text_sections,
+    sections: state.collections.entities.textSections,
     appearance: {
       typography: state.ui.typography,
       colors: state.ui.colors

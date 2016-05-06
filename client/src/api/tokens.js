@@ -1,5 +1,4 @@
 import { LowLevelApiClient } from './client';
-import { camelizeKeys } from 'humps';
 
 export default {
 
@@ -18,7 +17,7 @@ export default {
         return { response };
       });
     }).then(({ json }) => {
-      return camelizeKeys(json);
+      return json;
     });
     return results;
   }

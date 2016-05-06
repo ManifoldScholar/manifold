@@ -1,4 +1,3 @@
-import { camelizeKeys } from 'humps';
 import config from '../config';
 import qs from 'qs';
 import isPlainObject from 'lodash/isPlainObject';
@@ -79,9 +78,9 @@ export class ApiClient {
     if (json === null) return Promise.resolve({ json, response });
     if (!isPlainObject(json)) return Promise.reject({ json, response });
     const out = { data: [], included: [] };
-    out.data = camelizeKeys(json.data);
+    out.data = json.data;
     if (json.included) {
-      out.included = camelizeKeys(json.included);
+      out.included = json.included;
     }
     return Promise.resolve({ json: out, response });
   };

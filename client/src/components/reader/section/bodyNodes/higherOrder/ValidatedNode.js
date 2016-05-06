@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import mapKeys from 'lodash/mapKeys';
-import { camelizeKeys } from 'humps';
 
 export default (RenderComponent) => {
 
@@ -19,7 +18,7 @@ export default (RenderComponent) => {
         previous[parts[0]] = parts[1]; // eslint-disable-line no-param-reassign
         return previous;
       }, {});
-      return camelizeKeys(object);
+      return object;
     }
 
     cleanAttributes(attr) {

@@ -10,8 +10,8 @@ const select = (state) => {
   const entities = Object.assign({}, state.collections.entities);
   newState.collections = collections;
   newState.collections.entities = entities;
-  if (get(entities, 'text_sections')) {
-    entities.text_sections = 'REDACTED';
+  if (get(entities, 'textSections')) {
+    entities.textSections = 'REDACTED';
   }
   return newState;
 };
