@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import mapKeys from 'lodash/mapKeys';
+import humps from 'humps';
 
 export default (RenderComponent) => {
 
@@ -15,7 +16,8 @@ export default (RenderComponent) => {
       const declarations = stylesString.split(';');
       const object = declarations.reduce((previous, value) => {
         const parts = value.split(':');
-        previous[parts[0]] = parts[1]; // eslint-disable-line no-param-reassign
+        const styleProp = humps.camelize(parts[0]);
+        previous[styleProp] = parts[1]; // eslint-disable-line no-param-reassign
         return previous;
       }, {});
       return object;
