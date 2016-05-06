@@ -1,13 +1,8 @@
-import Home from './Home';
-import Frontend from './Frontend';
-import Following from './Following';
-import ProjectDetail from './ProjectDetail';
-import Login from './Login';
+'create index';
 
-export {
-  Home,
-  Frontend,
-  Following,
-  ProjectDetail,
-  Login
-};
+export Following from './Following.js';
+export Frontend from './Frontend.js';
+export Home from './Home.js';
+export Login from './Login.js';
+export ProjectDetail from './ProjectDetail.js';
+

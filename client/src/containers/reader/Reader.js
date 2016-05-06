@@ -1,22 +1,36 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import DocumentMeta from 'react-document-meta';
 import config from '../../config';
-import { BodyClass, LoginOverlay, LoadingBar, ScrollAware } from '../../components/shared';
-import { Header, Footer, SectionPagination } from '../../components/reader';
+import { browserHistory } from 'react-router';
+
+// Components
+import DocumentMeta from 'react-document-meta';
+import { HigherOrder, LoginOverlay, LoadingBar } from '../../components/shared';
+import { Header, Footer, Section } from '../../components/reader';
+
+// Actions
 import { fetchOneText } from '../../actions/shared/collections';
-import { select } from '../../utils/select';
 import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide }
   from '../../actions/shared/ui/visibility';
 import values from 'lodash/values';
-import { selectFont, incrementFontSize, decrementFontSize, incrementMargins, decrementMargins }
-  from '../../actions/reader/ui/typography';
-import { addNotification, removeNotification, removeAllNotifications }
-  from '../../actions/shared/notifications';
+import {
+  selectFont,
+  incrementFontSize,
+  decrementFontSize,
+  incrementMargins,
+  decrementMargins
+} from '../../actions/reader/ui/typography';
+import {
+  addNotification,
+  removeNotification,
+  removeAllNotifications
+} from '../../actions/shared/notifications';
 import { setColorScheme } from '../../actions/reader/ui/colors';
-import { browserHistory } from 'react-router';
+
+// Utils
+import { select } from '../../utils/select';
 
 class ReaderContainer extends Component {
 
@@ -110,12 +124,12 @@ class ReaderContainer extends Component {
     );
 
     return (
-      <BodyClass className="reader">
+      <HigherOrder.BodyClass className="reader">
         <div>
           {this.renderStyles()}
           <DocumentMeta {...config.app}/>
           <LoadingBar loading={this.props.loading} />
-          <ScrollAware>
+          <HigherOrder.ScrollAware>
             {/* Header inside scroll-aware HOC */}
             <Header
 
@@ -128,14 +142,14 @@ class ReaderContainer extends Component {
               notifications={this.props.notifications}
               {...this.headerMethods()}
             />
-          </ScrollAware>
+          </HigherOrder.ScrollAware>
           <LoginOverlay
             visible={this.props.visibility.loginOverlay}
             hideLoginOverlay={hideLoginOverlay}
           />
           <main>
             {this.props.children}
-            <SectionPagination
+            <Section.Pagination
               textId={this.props.textId}
               sectionId={this.props.sectionId}
               textSections={this.props.textSections}
@@ -143,7 +157,7 @@ class ReaderContainer extends Component {
           </main>
           <Footer />
         </div>
-      </BodyClass>
+      </HigherOrder.BodyClass>
     );
   }
 }

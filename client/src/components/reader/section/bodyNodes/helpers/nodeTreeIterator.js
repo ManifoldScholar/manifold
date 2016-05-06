@@ -1,7 +1,9 @@
 import React from 'react';
-import { DefaultNode, LinkNode, TextNode } from '../';
+import TextNode from '../TextNode';
+import DefaultNode from '../DefaultNode';
+import LinkNode from '../LinkNode';
 
-class NodeTreeIterator {
+export default class NodeTreeIterator {
 
   visitChildren(node) {
     const children = node.children;
@@ -53,5 +55,3 @@ class NodeTreeIterator {
     }
   }
 }
-
-export default new NodeTreeIterator;

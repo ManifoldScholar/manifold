@@ -5,12 +5,13 @@
       "plugins": [
         "react-hot-loader/babel",
         "transform-class-properties",
-        "transform-decorators-legacy"
+        "transform-export-extensions"
       ]
     },
     "production": {
       "plugins": [
-        "transform-class-properties"
+        "transform-class-properties",
+        "transform-export-extensions"
       ]
     }
 

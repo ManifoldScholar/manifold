@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-export default class SectionPagination extends Component {
+export default class Pagination extends Component {
 
   static propTypes = {
     textId: PropTypes.string,

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {
     HeaderNotifications,
-    ScrollAware,
+    HigherOrder,
     SearchMenuBody,
     SearchMenuButton,
     UIPanel,
@@ -53,7 +53,7 @@ export default class Header extends Component {
     const active = startsWith(path, '/browse/following') ? 'following' : 'browse';
 
     return (
-      <ScrollAware>
+      <HigherOrder.ScrollAware>
         <header className={'header-browse'}>
           <div className="header-container">
             <Link to={'/browse'} className="logo">
@@ -122,7 +122,7 @@ export default class Header extends Component {
             removeAllNotifications={this.props.removeAllNotifications}
           />
         </header>
-      </ScrollAware>
+      </HigherOrder.ScrollAware>
     );
   }
 }

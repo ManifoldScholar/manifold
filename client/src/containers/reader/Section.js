@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchOneSection } from '../../actions/shared/collections';
 import classNames from 'classnames';
-import { SectionBody } from '../../components/reader';
+import { Section } from '../../components/reader';
 import smoothScroll from 'smoothscroll';
 
 class SectionContainer extends Component {
@@ -90,7 +90,7 @@ class SectionContainer extends Component {
         <section className={readerAppearanceClass}>
           <div className="container-focus" style={this.getMarginSize(typography.margins.current)}>
             <div className={textSectionClass} style={this.getFontSize(typography.fontSize.current)}>
-              <SectionBody section={this.getSection()} />
+              <Section.Body section={this.getSection()} />
             </div>
           </div>
         </section>

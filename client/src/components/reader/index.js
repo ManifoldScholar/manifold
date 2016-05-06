@@ -1,21 +1,9 @@
-import AppearanceMenuBody from './AppearanceMenuBody';
-import AppearanceMenuButton from './AppearanceMenuButton';
-import Header from './Header';
-import Footer from './Footer';
-import SectionPagination from './section/SectionPagination';
-import SectionBody from './section/SectionBody';
-import TextTitles from './TextTitles';
-import Toc from './Toc';
-import TocDrawer from './TocDrawer';
-
-export {
-    AppearanceMenuBody,
-    AppearanceMenuButton,
-    Header,
-    Footer,
-    SectionPagination,
-    SectionBody,
-    TextTitles,
-    Toc,
-    TocDrawer,
-};
+export AppearanceMenuBody from './AppearanceMenuBody.js';
+export AppearanceMenuButton from './AppearanceMenuButton.js';
+export Footer from './Footer.js';
+export Header from './Header.js';
+export StaticTextSample from './StaticTextSample.js';
+export TextTitles from './TextTitles.js';
+export Toc from './Toc.js';
+export TocDrawer from './TocDrawer.js';
+export Section from './Section';

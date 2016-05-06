@@ -1,9 +1,6 @@
-import NotFound from './NotFound';
-import DevTools from './DevTools';
-import LoginForm from './LoginForm';
+'create index';
 
-export {
-  NotFound,
-  DevTools,
-  LoginForm
-};
+export DevTools from './DevTools.js';
+export LoginForm from './LoginForm.js';
+export NotFound from './NotFound.js';
+

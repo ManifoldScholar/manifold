@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import validatedNode from './higherOrder/ValidatedNode';
+import validatedNode from './HigherOrder/ValidatedNode';
 
 class DefaultNode extends Component {
 

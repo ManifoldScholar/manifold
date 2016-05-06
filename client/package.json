@@ -16,6 +16,7 @@
     "webpack": "node -r dotenv/config webpack/webpack-dev-server.js",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "lint": "eslint -c .eslintrc src && scss-lint src/theme/ -c ../.scss-lint.yml",
+    "lint-fix": "eslint --fix -c .eslintrc src && scss-lint src/theme/ -c ../.scss-lint.yml",
     "test": "karma start"
   },
   "dependencies": {
@@ -25,6 +26,7 @@
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-class-properties": "^6.6.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-export-extensions": "^6.8.0",
     "babel-polyfill": "^6.5.0",
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-react": "^6.0.0",
