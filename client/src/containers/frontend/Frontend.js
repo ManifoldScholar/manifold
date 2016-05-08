@@ -11,6 +11,7 @@ import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHid
 import { addNotification, removeNotification, removeAllNotifications }
   from '../../actions/shared/notifications';
 import { whoami } from '../../actions/shared/authentication';
+import get from 'lodash/get';
 
 import BodyClass from '../../components/shared';
 
@@ -69,8 +70,8 @@ class FrontendContainer extends Component {
   }
 
   render() {
-    const hideLoginOverlay = bindActionCreators(
-      () => visibilityHide('loginOverlay'), this.props.dispatch
+    const hideSignInUpOverlay = bindActionCreators(
+      () => visibilityHide('signInUpOverlay'), this.props.dispatch
     );
 
     return (
@@ -86,7 +87,13 @@ class FrontendContainer extends Component {
             {...this.headerMethods()}
           />
           {/* Add hideOverlay={false} to show overlay */}
-          <SignInUp.Modal />
+          <SignInUp.Overlay
+            visible={this.props.visibility.signInUpOverlay}
+            hideSignInUpOverlay={hideSignInUpOverlay}
+            authentication={this.props.authentication}
+            dispatch={this.props.dispatch}
+            hash={get(this, 'props.routing.locationBeforeTransitions.hash')}
+          />
           <main ref="mainContainer">
             {this.props.children}
           </main>
@@ -103,7 +110,8 @@ function mapStateToProps(state) {
     authentication: state.authentication,
     visibility: state.ui.visibility,
     loading: state.ui.loading.active,
-    notifications: state.notifications
+    notifications: state.notifications,
+    routing: state.routing
   };
 }
 

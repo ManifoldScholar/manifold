@@ -5,13 +5,15 @@
       "plugins": [
         "react-hot-loader/babel",
         "transform-class-properties",
-        "transform-export-extensions"
+        "transform-export-extensions",
+        "babel-plugin-transform-es2015-destructuring"
       ]
     },
     "production": {
       "plugins": [
         "transform-class-properties",
-        "transform-export-extensions"
+        "transform-export-extensions",
+        "babel-plugin-transform-es2015-destructuring"
       ]
     }
 

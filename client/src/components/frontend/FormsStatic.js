@@ -19,9 +19,12 @@ export default class FormsStatic extends Component {
 
               <div className="row-3-p">
                 <div className="col-33">
-                  <div className="form-input">
+
+                  <div className="form-input form-error">
                     <label>Text Entry Field</label>
                     <input type="text" placeholder="Text Entry Field" />
+                    <i className="manicon manicon-stop"></i>
+                    <span className="form-error-message">something happened</span>
                   </div>
                 </div>
 

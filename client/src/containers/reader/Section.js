@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchOneSection } from '../../actions/shared/collections';
 import classNames from 'classnames';
 import { Section } from '../../components/reader';
-import smoothScroll from 'smoothscroll';
+import smoothScroll from '../../utils/smoothscroll';
 
 class SectionContainer extends Component {
 

@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class Modal extends Component {
+export default class Update extends Component {
 
   static propTypes = {};
 
   render() {
     return (
-      <div>Modal</div>
+      <div>Update</div>
     );
   }
 }

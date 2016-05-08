@@ -5,7 +5,6 @@ import { ProjectThumbPlaceholder } from './';
 export default class ProjectThumb extends Component {
   static propTypes = {
     project: PropTypes.object,
-    makers: PropTypes.object,
     hideMeta: PropTypes.bool,
     hideDate: PropTypes.bool,
     hideDesc: PropTypes.bool
@@ -15,10 +14,6 @@ export default class ProjectThumb extends Component {
     hideMeta: false,
     hideDate: false,
     hideDesc: false
-  };
-
-  lookupMaker = (id) => {
-    return this.props.makers[id];
   };
 
   renderCover() {
@@ -90,8 +85,7 @@ export default class ProjectThumb extends Component {
         <div className="meta">
           <h3 className="title">{project.attributes.title}</h3>
           <div className="makers">
-            {project.relationships.creators.data.map((makerRel) => {
-              const maker = this.lookupMaker(makerRel.id);
+            {project.relationships.creators.map((maker) => {
               return (
                   <span key={maker.id}>
                 {maker.attributes.name}
@@ -99,7 +93,6 @@ export default class ProjectThumb extends Component {
               );
             })}
           </div>
-
           {projectDate}
           {projectDesc}
         </div>

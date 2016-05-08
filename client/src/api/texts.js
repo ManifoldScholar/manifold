@@ -1,6 +1,6 @@
 export default {
 
-  texts(filter, page) {
+  index(filter, page) {
     return {
       endpoint: '/api/v1/texts',
       method: 'GET',
@@ -10,7 +10,7 @@ export default {
     };
   },
 
-  text(id) {
+  show(id) {
     return {
       endpoint: `/api/v1/texts/${id}`,
       method: 'GET',

@@ -1,15 +1,15 @@
-import ForgotPassword from './ForgotPassword.js';
-import Modal from './Modal.js';
-import ResetPassword from './ResetPassword.js';
-import SignIn from './SignIn.js';
-import SignUp from './SignUp.js';
-import SignUpSuccess from './SignUpSuccess.js';
+import PasswordForgot from './PasswordForgot.js';
+import Overlay from './Overlay.js';
+import PasswordReset from './PasswordReset.js';
+import Login from './Login.js';
+import Create from './Create.js';
+import Update from './Update.js';
 
 export default {
-  ForgotPassword,
-  Modal,
-  ResetPassword,
-  SignIn,
-  SignUp,
-  SignUpSuccess
+  PasswordForgot,
+  Overlay,
+  PasswordReset,
+  Login,
+  Create,
+  Update
 };

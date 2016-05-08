@@ -1,6 +1,6 @@
 export default {
 
-  projects(filter = {}, page = {}) {
+  index(filter = {}, page = {}) {
     return {
       endpoint: '/api/v1/projects',
       method: 'GET',
@@ -10,7 +10,7 @@ export default {
     };
   },
 
-  project(id) {
+  show(id) {
     return {
       endpoint: `/api/v1/projects/${id}`,
       method: 'GET',
@@ -19,17 +19,8 @@ export default {
     };
   },
 
-  filteredProjects(filter = {}, page = {}) {
-    return {
-      endpoint: '/api/v1/projects',
-      method: 'GET',
-      options: {
-        params: { filter, page }
-      }
-    };
-  },
-
-  featuredProjects(limit = 6) {
+  featured(limit = 6) {
+    console.log(limit, 'limit');
     const filter = { featured: true };
     const page = { limit };
     return {
@@ -40,15 +31,5 @@ export default {
       }
     };
   },
-
-  testProjects(filter = {}, page = {}) {
-    return {
-      endpoint: '/api/v1/projects',
-      method: 'GET',
-      options: {
-        params: { filter, page }
-      }
-    };
-  }
 
 };

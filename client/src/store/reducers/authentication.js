@@ -4,7 +4,8 @@ const initialState = {
   authenticated: false,
   authenticating: false,
   authToken: null,
-  user: null
+  user: null,
+  error: null
 };
 
 const startLogin = (state) => {
@@ -36,10 +37,16 @@ const setAuthToken = (state, action) => {
   return Object.assign({}, state, newState);
 };
 
+const setAuthError = (state, action) => {
+  const error = action.payload;
+  return Object.assign({}, state, { error });
+};
+
 export default handleActions({
   START_LOGIN: startLogin,
   START_LOGOUT: startLogout,
   SET_AUTH_TOKEN: setAuthToken,
   SET_USER: setUser,
-  WHOAMI: setUserFromWhoami
+  WHOAMI: setUserFromWhoami,
+  SET_AUTH_ERROR: setAuthError
 }, initialState);

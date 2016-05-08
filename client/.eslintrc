@@ -11,6 +11,7 @@
     "react/react-in-jsx-scope": 2,
     "react/jsx-quotes": 0,
 
+    // Need to deal with this block. Added to make things pass after eslint update.
     "react/jsx-first-prop-new-line": 0,
     "react/jsx-space-before-closing": 0,
     "global-require": 0,
@@ -55,6 +56,7 @@
     "spaced-comment": 1,
     "react/no-multi-comp": 0,
     "no-underscore-dangle": 0,
+    "max-len": 1
   },
   "plugins": [
     "react", "import"

@@ -2,18 +2,37 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { ProjectCovers, ProjectGrid, ProjectFilters } from '../../components/frontend';
 import { bindActionCreators } from 'redux';
-import { fetchFilteredProjects, fetchFeaturedProjects } from '../../actions/shared/collections';
 import { setProjectFilters } from '../../actions/frontend/ui/filters';
 import { Link } from 'react-router';
+import { request, flush } from '../../actions/shared/entityStore';
+import { select } from '../../utils/entityUtils';
+import projectsAPI from '../../api/projects';
 
 class HomeContainer extends Component {
 
+  static requests = Object.freeze({
+    filteredProjects: 'home-filtered-projects',
+    featuredProjects: 'home-featured-projects'
+  });
+
   static fetchData(getState, dispatch) {
     const state = getState();
-    return Promise.all([
-      fetchFilteredProjects(state.ui.projectFilters)(dispatch, getState),
-      fetchFeaturedProjects()(dispatch, getState)
-    ]);
+    const r = HomeContainer.requests;
+    let action;
+    action = request(projectsAPI.index(state.ui.projectFilters), r.filteredProjects);
+    const { promise: one } = dispatch(action);
+    action = request(projectsAPI.featured(), r.featuredProjects);
+    const { promise: two } = dispatch(action);
+    return Promise.all([one, two]);
+  }
+
+  static mapStateToProps(state) {
+    const r = HomeContainer.requests;
+    return {
+      projectFilters: state.ui.filters.project,
+      filteredProjects: select(r.filteredProjects, state.entityStore),
+      featuredProjects: select(r.featuredProjects, state.entityStore)
+    };
   }
 
   static propTypes = {
@@ -37,8 +56,13 @@ class HomeContainer extends Component {
   componentDidUpdate(prevProps) {
     const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
-      dispatch(fetchFilteredProjects(this.props.projectFilters));
+      const api = projectsAPI.index(this.props.projectFilters);
+      dispatch(request(api, HomeContainer.requests.filteredProjects));
     }
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(flush(HomeContainer.requests));
   }
 
   render() {
@@ -58,11 +82,7 @@ class HomeContainer extends Component {
                 {'Recent Projects'}
               </h4>
             </header>
-            <ProjectCovers
-              makers={this.props.makers}
-              projects={this.props.projects}
-              entities={this.props.featuredProjects}
-            />
+            <ProjectCovers projects={this.props.featuredProjects} />
           </div>
         </section>
         <section className="bg-neutral05">
@@ -81,11 +101,7 @@ class HomeContainer extends Component {
             <ProjectFilters
               updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
             />
-            <ProjectGrid
-              makers={this.props.makers}
-              projects={this.props.projects}
-              entities={this.props.filteredProjects}
-            />
+            <ProjectGrid projects={this.props.filteredProjects} />
           </div>
         </section>
         <section>
@@ -105,19 +121,8 @@ class HomeContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    filteredProjects: state.collections.results.fetchFilteredProjects.entities,
-    featuredProjects: state.collections.results.fetchFeaturedProjects.entities,
-    projectFilters: state.ui.filters.project,
-    projects: state.collections.entities.projects,
-    makers: state.collections.entities.makers
-  };
-}
-
-
 const Home = connect(
-  mapStateToProps
+  HomeContainer.mapStateToProps
 )(HomeContainer);
 
 export default Home;

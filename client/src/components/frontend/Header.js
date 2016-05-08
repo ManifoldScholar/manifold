@@ -33,7 +33,7 @@ export default class Header extends Component {
     super();
     this.toggleSearchPanel = this.toggleSearchPanel.bind(this);
     this.toggleUserPanel = this.toggleUserPanel.bind(this);
-    this.showLoginOverlay = this.showLoginOverlay.bind(this);
+    this.showSignInUpOverlay = this.showSignInUpOverlay.bind(this);
   }
 
   toggleSearchPanel() {
@@ -44,8 +44,8 @@ export default class Header extends Component {
     this.props.panelToggle('user');
   }
 
-  showLoginOverlay() {
-    this.props.visibilityShow('loginOverlay');
+  showSignInUpOverlay() {
+    this.props.visibilityShow('signInUpOverlay');
   }
 
   render() {
@@ -76,6 +76,11 @@ export default class Header extends Component {
                     {'Following'}
                   </Link>
                 </li>
+                <li className={active === 'dev' ? 'active' : ''}>
+                  <Link to={`/dev`}>
+                    {'Dev'}
+                  </Link>
+                </li>
               </ul>
             </nav>
 
@@ -96,7 +101,7 @@ export default class Header extends Component {
                   <UserMenuButton
                     authenticated={this.props.authenticated}
                     active={this.props.visibility.uiPanels.user}
-                    showLoginOverlay={this.showLoginOverlay}
+                    showLoginOverlay={this.showSignInUpOverlay}
                     toggleUserMenu={this.toggleUserPanel}
                   />
                   <UIPanel
