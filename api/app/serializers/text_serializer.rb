@@ -1,7 +1,7 @@
 # Serializes a Text model
 class TextSerializer < TextPartialSerializer
   attributes :toc
-  has_one :project
+  belongs_to :project
   has_many :stylesheets
   has_many :creators
   has_many :contributors

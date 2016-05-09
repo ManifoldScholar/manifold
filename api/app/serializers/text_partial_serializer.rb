@@ -7,5 +7,6 @@ class TextPartialSerializer < ActiveModel::Serializer
     object.text_sections.first.id
   end
 
+  belongs_to :project
   belongs_to :category
 end
