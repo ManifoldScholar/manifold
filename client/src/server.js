@@ -18,7 +18,6 @@ import Html from './helpers/Html';
 import createStore from './store/createStore';
 import { setAuthToken } from './actions/shared/authentication';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
-import createApiProxy from './proxies/api';
 import fetchAllData from './helpers/fetchAllData';
 import App from './App';import getRoutes from './routes';
 
@@ -41,7 +40,6 @@ app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 app.use(morgan(logStyle));
-app.use(createApiProxy());
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
@@ -162,13 +160,13 @@ if (listenOn) {
 
     console.log(header(emoji.get('earth_americas') + '  MANIFOLD REST API'));
     console.log(info(pad('', 79, '-')));
-    console.log(info('The Manifold API Proxy is proxying the following paths:'));
+    console.log(info('The Manifold client expects to find the API at the following paths:'));
     console.log('');
     const apiPathMax = config.apiProxyPaths.reduce((memo, current) => {
       return current.length > memo ? current.length : memo;
     }, 0);
     config.apiProxyPaths.forEach((value) => {
-      console.log(info(`${pad(value, apiPathMax, ' ', false)}  >  ${config.apiUri}${value}`));
+      console.log(info(`${config.apiUri}${value}`));
     });
     console.log('');
     console.log('');

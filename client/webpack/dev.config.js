@@ -119,6 +119,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
     new webpack.DefinePlugin({
+      __MANIFOLD_API_URL__: '"' +  process.env.MANIFOLD_API_URL + '"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,

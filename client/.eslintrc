@@ -73,6 +73,7 @@
     "__SERVER__": true,
     "__DISABLE_SSR__": true,
     "__DEVTOOLS__": true,
+    "__MANIFOLD_API_URL__": true,
     "socket": true,
     "webpackIsomorphicTools": true
   }

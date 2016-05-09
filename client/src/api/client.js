@@ -24,10 +24,8 @@ export class LowLevelApiClient {
   }
 
   _adjustedEndpoint(endpoint) {
-    if (!__SERVER__) {
-      return endpoint;
-    }
-    return `http://${(process.env.HOST || 'localhost')}:${config.clientPort}${endpoint}`;
+    const out = __MANIFOLD_API_URL__ + endpoint;
+    return out;
   }
 
   _endpointWithParams(endpoint, params) {

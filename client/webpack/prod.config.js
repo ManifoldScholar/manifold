@@ -111,6 +111,7 @@ module.exports = {
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
     new webpack.DefinePlugin({
+      __MANIFOLD_API_URL__: '"' +  process.env.MANIFOLD_API_URL + '"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: false,
