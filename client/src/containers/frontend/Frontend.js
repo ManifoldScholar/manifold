@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import config from '../../config';
-import { BodyClass, LoginOverlay, LoadingBar } from '../../components/shared';
+import { SignInUp, HigherOrder, LoadingBar } from '../../components/shared';
 import { Header, Footer } from '../../components/frontend';
 import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide }
@@ -11,6 +11,9 @@ import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHid
 import { addNotification, removeNotification, removeAllNotifications }
   from '../../actions/shared/notifications';
 import { whoami } from '../../actions/shared/authentication';
+import get from 'lodash/get';
+
+import BodyClass from '../../components/shared';
 
 class FrontendContainer extends Component {
 
@@ -67,12 +70,12 @@ class FrontendContainer extends Component {
   }
 
   render() {
-    const hideLoginOverlay = bindActionCreators(
-      () => visibilityHide('loginOverlay'), this.props.dispatch
+    const hideSignInUpOverlay = bindActionCreators(
+      () => visibilityHide('signInUpOverlay'), this.props.dispatch
     );
 
     return (
-      <BodyClass className={'browse'}>
+      <HigherOrder.BodyClass className={'browse'}>
         <div>
           <DocumentMeta {...config.app}/>
           <LoadingBar loading={this.props.loading} />
@@ -84,16 +87,19 @@ class FrontendContainer extends Component {
             {...this.headerMethods()}
           />
           {/* Add hideOverlay={false} to show overlay */}
-          <LoginOverlay
-            visible={this.props.visibility.loginOverlay}
-            hideLoginOverlay={hideLoginOverlay}
+          <SignInUp.Overlay
+            visible={this.props.visibility.signInUpOverlay}
+            hideSignInUpOverlay={hideSignInUpOverlay}
+            authentication={this.props.authentication}
+            dispatch={this.props.dispatch}
+            hash={get(this, 'props.routing.locationBeforeTransitions.hash')}
           />
           <main ref="mainContainer">
             {this.props.children}
           </main>
           <Footer />
         </div>
-      </BodyClass>
+      </HigherOrder.BodyClass>
     );
   }
 }
@@ -104,7 +110,8 @@ function mapStateToProps(state) {
     authentication: state.authentication,
     visibility: state.ui.visibility,
     loading: state.ui.loading.active,
-    notifications: state.notifications
+    notifications: state.notifications,
+    routing: state.routing
   };
 }
 

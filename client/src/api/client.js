@@ -112,7 +112,7 @@ export class ApiClient {
         entities[entity.type] = {};
       }
       entities[entity.type][entity.id] = entity;
-      results.push(entity.id);
+      results.push({ id: entity.id, type: entity.type });
     });
     return { entities, results };
   };
@@ -120,7 +120,7 @@ export class ApiClient {
   _returnEntity = (json) => {
     const entities = {};
     const entity = json.data;
-    const results = entity.id;
+    const results = { id: entity.id, type: entity.type };
     if (!entities.hasOwnProperty(entity.type)) {
       entities[entity.type] = {};
     }

@@ -28,6 +28,15 @@ const app = new Express();
 const server = new http.Server(app);
 const logStyle = __DEVELOPMENT__ ? 'dev' : 'combined';
 
+function handleError(error) {
+  console.log(`SERVER RENDER ERROR`);
+  console.log('---------------------');
+  console.log(pretty.render(error));
+  return ReactDOM.renderToString(
+    <RedBox error={error} />
+  );
+}
+
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
@@ -107,16 +116,13 @@ app.use((req, res) => {
             />
           );
         } catch (renderError) {
-          console.log(`SERVER RENDER ERROR`);
-          console.log('---------------------');
-          console.log(pretty.render(renderError));
-          renderString = ReactDOM.renderToString(
-            <RedBox error={renderError} />
-          );
+          renderString = handleError(renderError);
         } finally {
           res.send('<!doctype html>\n' + renderString);
         }
-
+      }, (dataFetchError) => {
+        const renderString = handleError(dataFetchError);
+        res.send('<!doctype html>\n' + renderString);
       });
     }
   });

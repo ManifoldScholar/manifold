@@ -1,5 +1,4 @@
-import Developer from './Developer';
+'create index';
 
-export {
-  Developer
-};
+export Developer from './Developer.js';
+

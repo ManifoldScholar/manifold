@@ -1,21 +1,9 @@
-import AppearanceMenuBody from './AppearanceMenuBody';
-import AppearanceMenuButton from './AppearanceMenuButton';
-import Header from './Header';
-import Footer from './Footer';
-import SectionPagination from './section/SectionPagination';
-import SectionBody from './section/SectionBody';
-import TextTitles from './TextTitles';
-import Toc from './Toc';
-import TocDrawer from './TocDrawer';
-
-export {
-    AppearanceMenuBody,
-    AppearanceMenuButton,
-    Header,
-    Footer,
-    SectionPagination,
-    SectionBody,
-    TextTitles,
-    Toc,
-    TocDrawer,
-};
+export AppearanceMenuBody from './AppearanceMenuBody';
+export AppearanceMenuButton from './AppearanceMenuButton';
+export Footer from './Footer';
+export Header from './Header';
+export StaticTextSample from './StaticTextSample';
+export TextTitles from './TextTitles';
+export Toc from './Toc';
+export TocDrawer from './TocDrawer';
+export Section from './Section';

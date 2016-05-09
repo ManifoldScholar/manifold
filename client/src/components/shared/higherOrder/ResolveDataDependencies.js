@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { RouterContext } from 'react-router';
 import { isFunction } from '../../../../node_modules/lodash/lang';
-import DelayContainer from './DelayContainer';
 
 export default class ResolveDataDependencies extends Component {
 
@@ -19,11 +18,16 @@ export default class ResolveDataDependencies extends Component {
   }
 
   createElement(ComponentClass, props) {
-    if (isFunction(ComponentClass.fetchData) || isFunction(ComponentClass.fetchDataDeferred)) {
-      return (
-        <DelayContainer store={this.context.store} component={ComponentClass} routerProps={props} />
-      );
-    }
+    setTimeout(() => {
+      if (isFunction(ComponentClass.fetchData)) {
+        ComponentClass.fetchData(
+          this.context.store.getState,
+          this.context.store.dispatch,
+          props.location,
+          props.params
+        );
+      }
+    });
     return <ComponentClass {...props}/>;
   }
 

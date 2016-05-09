@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import HeaderNotification from './HeaderNotification';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
+import get from 'lodash/get';
 
 export default class HeaderNotifications extends Component {
   static propTypes = {
@@ -18,6 +19,7 @@ export default class HeaderNotifications extends Component {
       updating: false
     };
     this.handleNotifications = this.handleNotifications.bind(this);
+    this.globalNotifications = this.globalNotifications.bind(this);
   }
 
   // Only necessary for debugging/testing notifications before they exist.
@@ -61,6 +63,16 @@ export default class HeaderNotifications extends Component {
     }
   }
 
+  globalNotifications() {
+    const notifications = this.props.notifications.notifications;
+    return notifications.filter((notification) => {
+      if (!get(notification, 'scope') || notification.scope === 'global') {
+        return true;
+      }
+      return false;
+    });
+  }
+
   // Debug wrapper method to pass random notification in.
   // NB: Do not use to produce actual notifications.
   handleNotifications() {
@@ -87,7 +99,7 @@ export default class HeaderNotifications extends Component {
   renderNotifications() {
     let notificationList = null;
     if (this.props.notifications.notifications.length > 0) {
-      notificationList = this.props.notifications.notifications.map((notification) => {
+      notificationList = this.globalNotifications().map((notification) => {
         return (
           <div key={notification.id} className="header-notification-container">
             <HeaderNotification

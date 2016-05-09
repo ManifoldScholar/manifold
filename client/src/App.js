@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import createStore from './store/createStore';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { ResolveDataDependencies } from './components/shared';
+import { HigherOrder } from './components/shared';
 import { Provider } from 'react-redux';
 import getRoutes from './routes';
 import { DevTools } from './containers/shared';
@@ -41,7 +41,7 @@ export default class App extends Component {
       // fetchData methods in the containers, to ensure that data is loaded when the route
       // changes.
       this.routeRenderMethod = (props) => {
-        return <ResolveDataDependencies {...props}/>;
+        return <HigherOrder.ResolveDataDependencies {...props} />;
       };
     }
   }
@@ -55,7 +55,7 @@ export default class App extends Component {
   }
 
   serverRouter() {
-    return <ResolveDataDependencies {...this.props} />;
+    return <HigherOrder.ResolveDataDependencies {...this.props} />;
   }
 
   clientRouter() {

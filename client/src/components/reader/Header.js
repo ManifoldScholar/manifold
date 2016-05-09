@@ -15,7 +15,7 @@ export default class Header extends Component {
 
   static propTypes = {
     text: PropTypes.object,
-    sectionId: PropTypes.string,
+    section: PropTypes.object,
     authenticated: PropTypes.bool,
     visibility: PropTypes.object,
     appearance: PropTypes.object,
@@ -40,7 +40,6 @@ export default class Header extends Component {
 
   constructor() {
     super();
-    this.getSectionTitle = this.getSectionTitle.bind(this);
     this.handleContentsButtonClick = this.handleContentsButtonClick.bind(this);
     this.handleSearchMenuButtonClick = this.handleSearchMenuButtonClick.bind(this);
     this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(this);
@@ -48,17 +47,6 @@ export default class Header extends Component {
     this.triggerToggleUserMenu = this.triggerToggleUserMenu.bind(this);
     this.triggerHideToc = this.triggerHideToc.bind(this);
     this.renderContentsButton = this.renderContentsButton.bind(this);
-  }
-
-  getSectionTitle(id) {
-    let title = null;
-    this.props.text.attributes.toc.forEach((section) => {
-      if (section.id === id) {
-        title = section.label;
-      }
-    });
-
-    return title;
   }
 
   handleContentsButtonClick() {
@@ -114,7 +102,7 @@ export default class Header extends Component {
     return (
       <header className="header-reader">
         <nav className="container-banner">
-          <Link to={`/browse/project/${this.props.text.relationships.project.data.id}`} >
+          <Link to={`/browse/project/${this.props.text.relationships.project.id}`} >
             <button className="button-close" >
               <i className="manicon manicon-x"></i>
                 <span className="screen-reader-text">
@@ -123,11 +111,13 @@ export default class Header extends Component {
             </button>
           </Link>
           { this.renderContentsButton(this.props.text.attributes.toc) }
-          <TextTitles
-            textTitle={this.props.text.attributes.title}
-            sectionTitle={this.getSectionTitle(Number(this.props.sectionId))}
-            showSection={!this.props.scrollAware.top}
-          />
+          { this.props.section ?
+            <TextTitles
+              textTitle={this.props.text.attributes.title}
+              sectionTitle={this.props.section.attributes.name}
+              showSection={!this.props.scrollAware.top}
+            />
+          : null }
           <nav className="menu-buttons">
             <ul>
               <li>

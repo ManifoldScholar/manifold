@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, IndexRedirect, IndexRoute } from 'react-router';
-import { Reader, Section } from './containers/reader';
+import { Reader } from './containers/reader';
+import Section from './components/reader/Section';
+
 import { Frontend, Home, Following, ProjectDetail, Login } from './containers/frontend';
 import { Developer } from './containers/developer';
 import { FormsStatic } from './components/frontend';
@@ -12,8 +14,8 @@ export default () => {
       <IndexRedirect to="browse" />
       <Route component={Developer} path="dev" />
 
-      <Route component={Reader} path="read/:text_id" >
-        <Route component={Section} path="section/:section_id" />
+      <Route component={Reader} path="read/:textId">
+        <Route component={Section} path="section/:sectionId" />
       </Route>
 
       <Route component={Frontend} path="/browse" >

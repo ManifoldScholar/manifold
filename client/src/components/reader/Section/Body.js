@@ -1,15 +1,15 @@
 import { Component, PropTypes } from 'react';
-import nodeTreeIterator from './bodyNodes/helpers/nodeTreeIterator';
-
-export default class SectionBody extends Component {
+import BodyNodes from './BodyNodes';
+export default class Body extends Component {
 
   static propTypes = {
     section: PropTypes.object,
   };
 
   render() {
+    const iterator = new BodyNodes.Helpers.NodeTreeIterator;
     const node = this.props.section.attributes.bodyJson;
-    const elements = nodeTreeIterator.visit(node);
+    const elements = iterator.visit(node);
     return elements;
   }
 }

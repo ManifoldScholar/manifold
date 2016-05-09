@@ -1,7 +1,4 @@
-import Reader from './Reader';
-import Section from './Section';
+'create index';
 
-export {
-  Reader,
-  Section
-};
+export Reader from './Reader.js';
+

@@ -1,30 +1,45 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { select } from '../../utils/select';
 import { Link } from 'react-router';
-import { EventList, PublishedText, GroupedTexts, MetaAttributes, ProjectDetailHero }
-  from '../../components/frontend';
-import { visibilityShow }
-  from '../../actions/shared/ui/visibility';
-import { fetchOneProject } from '../../actions/shared/collections';
+import get from 'lodash/get';
+import {
+  EventList,
+  PublishedText,
+  GroupedTexts,
+  MetaAttributes,
+  ProjectDetailHero
+} from '../../components/frontend';
+import {
+  visibilityShow
+} from '../../actions/shared/ui/visibility';
+import { request, flush } from '../../actions/shared/entityStore';
+import { select } from '../../utils/entityUtils';
+import projectsAPI from '../../api/projects';
 
 
 class ProjectDetailContainer extends Component {
 
+  static requests = Object.freeze({
+    project: 'project-detail-projects'
+  });
+
   static fetchData(getState, dispatch, location, params) {
-    return Promise.all([
-      fetchOneProject(params.id)(dispatch, getState)
-    ]);
+    const r = ProjectDetailContainer.requests; // a little shorter, a little more legible.
+    const projectCall = projectsAPI.show(params.id);
+    const { promise: one } = dispatch(request(projectCall, r.project));
+    return Promise.all([one]);
+  }
+
+  static mapStateToProps(state) {
+    const r = ProjectDetailContainer.requests;
+    return {
+      project: select(r.project, state.entityStore)
+    };
   }
 
   static propTypes = {
     project: PropTypes.object,
-    creators: PropTypes.array,
-    contributors: PropTypes.array,
-    texts: PropTypes.array,
-    publishedText: PropTypes.object,
-    textCategories: PropTypes.array,
     dispatch: PropTypes.func.isRequired
   };
 
@@ -37,6 +52,10 @@ class ProjectDetailContainer extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(flush(ProjectDetailContainer.requests));
   }
 
   renderActivity = () => {
@@ -79,7 +98,9 @@ class ProjectDetailContainer extends Component {
   };
 
   renderTexts = () => {
-    if (!this.props.texts.length > 0) return null;
+    const project = this.props.project;
+    const texts = get(this.props, 'project.relationships.texts');
+    if (!texts || texts.length === 0) return null;
     return (
       <section>
         <div className="container">
@@ -89,22 +110,24 @@ class ProjectDetailContainer extends Component {
               {'Texts'}
             </h4>
           </header>
-          <PublishedText texts={this.props.texts} />
-          <GroupedTexts categories={this.props.textCategories} texts={this.props.texts} />
+          <PublishedText text={project.relationships.publishedText} />
+          <GroupedTexts
+            categories={project.relationships.textCategories}
+            texts={project.relationships.texts}
+          />
         </div>
       </section>
     );
   };
 
   render() {
+    if (!this.props.project) return null;
     return (
       <div>
         <section className="bg-neutral05">
           <div className="container">
             <ProjectDetailHero
               project={this.props.project}
-              publishedText={this.props.publishedText}
-              makers={this.props.creators.concat(this.props.contributors)}
               visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
             />
           </div>
@@ -117,24 +140,8 @@ class ProjectDetailContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const fetchOneProjectResult = state.collections.results.fetchOneProject.entities;
-  const projects = state.collections.entities.projects;
-  const project = projects[fetchOneProjectResult];
-  const { creators, contributors, texts, publishedText, textCategories } =
-    select(project, state.collections.entities);
-  return {
-    project,
-    creators: creators || [],
-    contributors: contributors || [],
-    texts: texts || [],
-    publishedText: publishedText || null,
-    textCategories: textCategories || []
-  };
-}
-
 const ProjectDetail = connect(
-  mapStateToProps
+  ProjectDetailContainer.mapStateToProps
 )(ProjectDetailContainer);
 
 export default ProjectDetail;
