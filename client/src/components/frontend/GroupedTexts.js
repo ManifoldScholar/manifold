@@ -18,10 +18,10 @@ export default class GroupedTexts extends Component {
   textsForCategory(category) {
     return this.props.texts.filter((text) => {
       if (category === null) {
-        return text.relationships.category.data === null;
+        return text.relationships.category === null;
       }
-      if (!text.relationships.category.data) return false;
-      return text.relationships.category.data.id === category.id;
+      if (!text.relationships.category) return false;
+      return text.relationships.category.id === category.id;
     });
   }
 

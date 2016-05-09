@@ -20,7 +20,6 @@ export default {
   },
 
   featured(limit = 6) {
-    console.log(limit, 'limit');
     const filter = { featured: true };
     const page = { limit };
     return {

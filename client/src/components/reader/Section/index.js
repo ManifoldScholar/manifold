@@ -1,9 +1,3 @@
-import Body from './Body.js';
-import Pagination from './Pagination.js';
-import BodyNodes from './BodyNodes';
+import Section from './Section';
+export default Section;
 
-export default {
-  Body,
-  Pagination,
-  BodyNodes
-};

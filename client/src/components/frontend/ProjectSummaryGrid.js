@@ -1,16 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { ProjectThumb } from './';
 
-export default class ProjectGrid extends Component {
+export default class ProjectSummaryGrid extends Component {
 
   static propTypes = {
-    entities: PropTypes.array,
-    projects: PropTypes.object,
-    makers: PropTypes.object
-  };
-
-  lookupProject = (id) => {
-    return this.props.projects[id];
+    projects: PropTypes.array
   };
 
   render() {
@@ -18,14 +12,10 @@ export default class ProjectGrid extends Component {
     return (
       <nav className="grid-project-summary">
         <ul>
-          {this.props.entities.map((projectId) => {
-            const project = this.lookupProject(projectId);
+          {this.props.projects.map((project) => {
             return (
-              <li key={projectId} >
-                <ProjectThumb makers={this.props.makers}
-                  project={project}
-                  hideDate={hideDate}
-                />
+              <li key={project.id} >
+                <ProjectThumb project={project} hideDate={hideDate} />
               </li>
             );
           })}

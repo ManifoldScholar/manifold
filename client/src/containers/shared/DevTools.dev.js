@@ -6,10 +6,10 @@ import get from 'lodash/get';
 
 const select = (state) => {
   const newState = Object.assign({}, state);
-  const collections = Object.assign({}, state.collections);
-  const entities = Object.assign({}, state.collections.entities);
-  newState.collections = collections;
-  newState.collections.entities = entities;
+  const collections = Object.assign({}, state.entityStore);
+  const entities = Object.assign({}, state.entityStore.entities);
+  newState.entityStore = collections;
+  newState.entityStore.entities = entities;
   if (get(entities, 'textSections')) {
     entities.textSections = 'REDACTED';
   }

@@ -6,17 +6,15 @@ export default class ProjectDetailHero extends Component {
 
   static propTypes = {
     project: PropTypes.object,
-    makers: PropTypes.array,
-    publishedText: PropTypes.object,
   };
 
   listMakers() {
-    if (this.props.makers.length > 0) {
+    if (this.props.project.relationships.creators > 0) {
       return (
         <section className="project-makers">
-          {this.props.makers.map((maker) => {
+          {this.props.project.relationships.creators.map((creator) => {
             return (
-              <MakerFigure key={maker.id} maker={maker} />
+              <MakerFigure key={creator.id} maker={creator} />
             );
           })}
         </section>
@@ -25,11 +23,12 @@ export default class ProjectDetailHero extends Component {
   }
 
   renderPublishedText() {
-    if (!this.props.publishedText) return null;
+    const publishedText = this.props.project.relationships.publishedText;
+    if (!publishedText) return null;
     return (
       <section className="project-entry">
         <Link
-          to={`/read/${this.props.publishedText.id}`}
+          to={`/read/${publishedText.id}`}
           className="button-secondary button-reader"
         >
           <i className="manicon manicon-glasses"></i>
@@ -37,7 +36,7 @@ export default class ProjectDetailHero extends Component {
         </Link>
 
         <Link
-          to={`/read/${this.props.publishedText.id}`}
+          to={`/read/${publishedText.id}`}
           className="button-secondary button-reader"
         >
           <i className="manicon manicon-bullet-list"></i>

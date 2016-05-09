@@ -1,23 +1,15 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { fetchOneSection } from '../../actions/shared/collections';
 import classNames from 'classnames';
-import { Section } from '../../components/reader';
-import smoothScroll from '../../utils/smoothscroll';
+import smoothScroll from '../../../utils/smoothScroll';
+import Body from './Body';
+import Pagination from './Pagination';
+import BodyNodes from './BodyNodes';
 
-class SectionContainer extends Component {
-
-  static fetchData(getState, dispatch, location, params) {
-    return Promise.all([
-      fetchOneSection(params.section_id)(dispatch, getState)
-    ]);
-  }
+class Section extends Component {
 
   static propTypes = {
-    children: PropTypes.object,
     text: PropTypes.object,
-    fetchOneSection: PropTypes.string,
-    sections: PropTypes.object,
+    section: PropTypes.object,
     appearance: PropTypes.object,
     location: PropTypes.object
   };
@@ -38,10 +30,6 @@ class SectionContainer extends Component {
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
 
-  getSection() {
-    return this.props.sections[this.props.fetchOneSection];
-  }
-
   // Returns a CSS style object based on the font size index in the store
   getFontSize(sizeIndex) {
     const baseSizes = [13, 16, 20, 22, 26, 32];
@@ -60,6 +48,7 @@ class SectionContainer extends Component {
   maybeScrollToAnchor(previousHash, currentHash) {
     if (currentHash && previousHash !== currentHash) {
       const scrollTarget = document.querySelector(currentHash);
+      if (!scrollTarget) return false;
       const position = scrollTarget.getBoundingClientRect().top + window.pageYOffset;
       setTimeout(() => {
         smoothScroll(position - 125);
@@ -85,12 +74,12 @@ class SectionContainer extends Component {
       'font-sans-serif': typography.font === 'sans-serif'
     });
 
-    const section = this.getSection();
+    const section = this.props.section;
     return (
         <section className={readerAppearanceClass}>
           <div className="container-focus" style={this.getMarginSize(typography.margins.current)}>
             <div className={textSectionClass} style={this.getFontSize(typography.fontSize.current)}>
-              <Section.Body section={this.getSection()} />
+              <Body section={this.props.section} />
             </div>
           </div>
         </section>
@@ -98,17 +87,7 @@ class SectionContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    fetchOneSection: state.collections.results.fetchOneSection.entities,
-    sections: state.collections.entities.textSections,
-    appearance: {
-      typography: state.ui.typography,
-      colors: state.ui.colors
-    }
-  };
-}
-
-export default connect(
-  mapStateToProps
-)(SectionContainer);
+Section.Body = Body;
+Section.BodyNodes = BodyNodes;
+Section.Pagination = Pagination;
+export default Section;

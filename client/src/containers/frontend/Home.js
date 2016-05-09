@@ -17,12 +17,11 @@ class HomeContainer extends Component {
 
   static fetchData(getState, dispatch) {
     const state = getState();
-    const r = HomeContainer.requests;
-    let action;
-    action = request(projectsAPI.index(state.ui.projectFilters), r.filteredProjects);
-    const { promise: one } = dispatch(action);
-    action = request(projectsAPI.featured(), r.featuredProjects);
-    const { promise: two } = dispatch(action);
+    const r = HomeContainer.requests; // a little shorter, a little more legible.
+    const filteredProjectsCall = projectsAPI.index(state.ui.projectFilters);
+    const featuredProjectsCall = projectsAPI.featured();
+    const { promise: one } = dispatch(request(filteredProjectsCall, r.filteredProjects));
+    const { promise: two } = dispatch(request(featuredProjectsCall, r.featuredProjects));
     return Promise.all([one, two]);
   }
 
@@ -37,8 +36,6 @@ class HomeContainer extends Component {
 
   static propTypes = {
     children: PropTypes.object,
-    makers: PropTypes.object,
-    projects: PropTypes.object,
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
     projectFilters: PropTypes.object,
@@ -82,7 +79,9 @@ class HomeContainer extends Component {
                 {'Recent Projects'}
               </h4>
             </header>
-            <ProjectCovers projects={this.props.featuredProjects} />
+            { this.props.featuredProjects ?
+              <ProjectCovers projects={this.props.featuredProjects} /> : null
+            }
           </div>
         </section>
         <section className="bg-neutral05">
@@ -95,13 +94,15 @@ class HomeContainer extends Component {
             </header>
             {/*
               Note that we're using a different dumb component to render this.
-              Note, too, that the parent component delivers all the data the child component needs
-              to render (which is what keeps the child dumb)'
+              Note, too, that the parent component delivers all the data the child
+              component needs to render (which is what keeps the child dumb)'
             */}
             <ProjectFilters
               updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
             />
-            <ProjectGrid projects={this.props.filteredProjects} />
+            { this.props.filteredProjects ?
+              <ProjectGrid projects={this.props.filteredProjects} /> : null
+            }
           </div>
         </section>
         <section>
