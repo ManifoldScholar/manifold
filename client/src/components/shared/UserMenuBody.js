@@ -2,22 +2,30 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 
-export default class UserButton extends Component {
+export default class UserMenuBody extends Component {
 
   static propTypes = {
     hideUserMenu: PropTypes.func,
     startLogout: PropTypes.func,
+    showLoginOverlay: PropTypes.func,
     visible: PropTypes.bool
   };
 
   constructor() {
     super();
     this.logout = this.logout.bind(this);
+    this.handleProfileClick = this.handleProfileClick.bind(this);
   }
 
   logout() {
     this.props.startLogout();
     this.props.hideUserMenu();
+  }
+
+  handleProfileClick(event) {
+    event.preventDefault();
+    this.props.hideUserMenu();
+    this.props.showLoginOverlay();
   }
 
   render() {
@@ -26,15 +34,16 @@ export default class UserButton extends Component {
       'menu-hidden': !this.props.visible,
       'menu-visible': this.props.visible
     });
+
     return (
       <nav className={menuClass}>
         <i className="tail"></i>
         <ul>
           <li>
-            <Link to="#">
+            <a href="#" onClick={this.handleProfileClick} >
               <i className="manicon manicon-person-pencil"></i>
               {'Edit Profile'}
-            </Link>
+            </a>
           </li>
           <li>
             <button onClick={this.logout}>

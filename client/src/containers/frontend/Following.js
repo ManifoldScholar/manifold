@@ -4,24 +4,20 @@ import { ProjectGrid, ProjectSummaryGrid, ProjectFilters } from '../../component
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setProjectFilters } from '../../actions/frontend/ui/filters';
-import { request, flush } from '../../actions/shared/entityStore';
+import { request, requests } from '../../actions/shared/entityStore';
 import { select } from '../../utils/entityUtils';
 import projectsAPI from '../../api/projects';
 
 class FollowingContainer extends Component {
 
-  static requests = Object.freeze({
-    filteredProjects: 'following-filtered-projects',
-    featuredProjects: 'following-featured-projects'
-  });
-
   static fetchData(getState, dispatch) {
     const state = getState();
-    const r = FollowingContainer.requests; // a little shorter, a little more legible.
-    const filteredProjectsCall = projectsAPI.index(state.ui.projectFilters);
-    const featuredProjectsCall = projectsAPI.featured();
-    const { promise: one } = dispatch(request(filteredProjectsCall, r.filteredProjects));
-    const { promise: two } = dispatch(request(featuredProjectsCall, r.featuredProjects));
+    const filteredRequest =
+      request(projectsAPI.index(state.ui.projectFilters), requests.browseFilteredProjects);
+    const featuredRequest =
+      request(projectsAPI.featured(), requests.browseFeaturedProjects);
+    const { promise: one } = dispatch(filteredRequest);
+    const { promise: two } = dispatch(featuredRequest);
     return Promise.all([one, two]);
   }
 
@@ -38,11 +34,10 @@ class FollowingContainer extends Component {
   };
 
   static mapStateToProps(state) {
-    const r = FollowingContainer.requests;
     return {
       projectFilters: state.ui.filters.project,
-      filteredProjects: select(r.filteredProjects, state.entityStore),
-      featuredProjects: select(r.featuredProjects, state.entityStore),
+      filteredProjects: select(requests.browseFilteredProjects, state.entityStore),
+      featuredProjects: select(requests.browseFeaturedProjects, state.entityStore),
       authentication: state.authentication
     };
   }
@@ -54,8 +49,10 @@ class FollowingContainer extends Component {
   componentDidUpdate(prevProps) {
     const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
-      const api = projectsAPI.index(this.props.projectFilters);
-      dispatch(request(api, FollowingContainer.requests.filteredProjects));
+      const apiCall = projectsAPI.index(this.props.projectFilters);
+      const filteredRequest =
+        request(apiCall, requests.browseFilteredProjects);
+      dispatch(filteredRequest);
     }
   }
 

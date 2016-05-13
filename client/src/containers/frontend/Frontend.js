@@ -1,19 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import DocumentMeta from 'react-document-meta';
-import config from '../../config';
-import { SignInUp, HigherOrder, LoadingBar } from '../../components/shared';
+import { HigherOrder } from '../../components/shared';
 import { Header, Footer } from '../../components/frontend';
 import { startLogout } from '../../actions/shared/authentication';
 import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide }
   from '../../actions/shared/ui/visibility';
 import { addNotification, removeNotification, removeAllNotifications }
   from '../../actions/shared/notifications';
-import { whoami } from '../../actions/shared/authentication';
-import get from 'lodash/get';
-
-import BodyClass from '../../components/shared';
 
 class FrontendContainer extends Component {
 
@@ -35,17 +29,7 @@ class FrontendContainer extends Component {
   };
 
   componentDidMount() {
-    const { dispatch } = this.props;
     this.setMinHeight();
-    dispatch(whoami());
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // We reload the page on logout, to ensure that all data is cleared from the store.
-    if (nextProps.authentication.authenticated === false &&
-      this.props.authentication.authenticated === true) {
-      location.reload();
-    }
   }
 
   setMinHeight() {
@@ -70,29 +54,15 @@ class FrontendContainer extends Component {
   }
 
   render() {
-    const hideSignInUpOverlay = bindActionCreators(
-      () => visibilityHide('signInUpOverlay'), this.props.dispatch
-    );
-
     return (
       <HigherOrder.BodyClass className={'browse'}>
         <div>
-          <DocumentMeta {...config.app}/>
-          <LoadingBar loading={this.props.loading} />
           <Header
             visibility={this.props.visibility }
             location={this.props.location}
-            authenticated={this.props.authentication.authToken === null ? false : true}
+            authentication={this.props.authentication}
             notifications={this.props.notifications}
             {...this.headerMethods()}
-          />
-          {/* Add hideOverlay={false} to show overlay */}
-          <SignInUp.Overlay
-            visible={this.props.visibility.signInUpOverlay}
-            hideSignInUpOverlay={hideSignInUpOverlay}
-            authentication={this.props.authentication}
-            dispatch={this.props.dispatch}
-            hash={get(this, 'props.routing.locationBeforeTransitions.hash')}
           />
           <main ref="mainContainer">
             {this.props.children}
@@ -103,7 +73,6 @@ class FrontendContainer extends Component {
     );
   }
 }
-
 
 function mapStateToProps(state) {
   return {

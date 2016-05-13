@@ -1,22 +1,29 @@
 import { createAction } from 'redux-actions';
-import { tokensAPI, usersAPI } from '../../api';
+import { tokensAPI, meAPI } from '../../api';
 import createApiAction from '../helpers/createApiAction';
-import { addNotification, removeNotification } from './notifications';
+import humps from 'humps';
+import { ApiClient } from '../../api/client';
 
-export const actions = {
+const notificationId = 'LOGIN_NOTIFICATION';
+const actions = {
   START_LOGIN: 'START_LOGIN',
   START_LOGOUT: 'START_LOGOUT',
+  GET_CURRENT_USER: 'GET_CURRENT_USER',
   SET_AUTH_TOKEN: 'SET_AUTH_TOKEN',
-  SET_USER: 'SET_USER',
-  WHOAMI: 'WHOAMI',
+  SET_CURRENT_USER: 'SET_CURRENT_USER',
   SET_LOGIN_ERROR: 'SET_AUTH_ERROR'
 };
 
 const logout = createAction(actions.START_LOGOUT);
-const notificationId = 'LOGIN_NOTIFICATION';
 
-export const setAuthToken = createAction(actions.SET_AUTH_TOKEN);
-export const whoami = createApiAction(actions.WHOAMI, usersAPI.whoami);
+export const getCurrentUser = createAction(actions.GET_CURRENT_USER, (dispatch, getState) => {
+  const client = new ApiClient;
+  const token = getState().authentication.authToken;
+  const { endpoint, method, options } = meAPI.show();
+  options.authToken = token;
+  const promise = client.call(endpoint, method, options);
+  dispatch(createAction(actions.GET_CURRENT_USER)(promise));
+});
 
 // I have some doubts about whether this is the best spot for this logic. Could be easier
 // to trace if we had some authentication middleware that saw the token get set, then
@@ -25,14 +32,14 @@ export function startLogin(email, password, scope = "signInUp") {
   return (dispatch, getStateIgnored) => {
     dispatch(createAction(actions.START_LOGIN)());
     const promise = tokensAPI.createToken(email, password);
-    promise.then((response) => {
+    promise.then((rawResponse) => {
+      const response = humps.camelizeKeys(rawResponse);
       const authToken = response.authToken;
       const user = response.user;
       const expireDate = new Date();
       expireDate.setDate(expireDate.getDate() + 90);
       document.cookie = `authToken=${authToken};path=/;expires=${expireDate.toUTCString()}`;
-      dispatch(removeNotification(notificationId));
-      dispatch(createAction(actions.SET_USER)(user));
+      dispatch(createAction(actions.SET_CURRENT_USER)(user));
       dispatch(createAction(actions.SET_AUTH_TOKEN)(authToken));
     }, (response) => {
       const heading = 'Login Failed';
@@ -62,3 +69,12 @@ export function startLogout() {
     dispatch(logout());
   };
 }
+
+export const setAuthToken = createAction(actions.SET_AUTH_TOKEN);
+
+export default {
+  startLogout,
+  startLogin,
+  getCurrentUser,
+  setAuthToken
+};

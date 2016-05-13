@@ -17,20 +17,14 @@ class BodyClass extends Component {
 }
 
 function reducePropsToState(propsList) {
-  const innermostProps = propsList[propsList.length - 1];
-  if (innermostProps) {
-    return innermostProps.className;
-  }
+  const classes = propsList.map((prop) => {
+    return prop.className;
+  });
+  return classes;
 }
 
-function handleStateChangeOnClient(bodyClass) {
-  const exploded = document.body.className.split(' ').map((string) => { return string.trim(); });
-  const bodyClasses = new Set();
-  bodyClasses.add(bodyClass);
-  exploded.forEach((className) => {
-    bodyClasses.add(className);
-  });
-  document.body.className = Array.from(bodyClasses).join(' ').trim();
+function handleStateChangeOnClient(bodyClasses) {
+  document.body.className = bodyClasses.join(' ').trim();
 }
 
 export default withSideEffect(

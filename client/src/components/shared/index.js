@@ -10,6 +10,6 @@ export SearchMenuBody from './SearchMenuBody.js';
 export SearchMenuButton from './SearchMenuButton.js';
 export SignInUp from './SignInUp';
 export UIPanel from './UIPanel.js';
-export UserMenu from './UserMenu.js';
 export UserMenuBody from './UserMenuBody.js';
 export UserMenuButton from './UserMenuButton.js';
+export Avatar from './Avatar.js';

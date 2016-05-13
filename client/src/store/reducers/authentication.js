@@ -1,10 +1,11 @@
 import { handleActions } from 'redux-actions';
+import { requests } from '../../actions/shared/entityStore';
 
 const initialState = {
   authenticated: false,
   authenticating: false,
   authToken: null,
-  user: null,
+  currentUser: null,
   error: null
 };
 
@@ -16,18 +17,22 @@ const startLogout = () => {
   return Object.assign({}, initialState);
 };
 
-const setUser = (state, action) => {
-  const user = action.payload;
-  const newState = { user };
+const setCurrentUser = (state, action) => {
+  const currentUser = action.payload;
+  const newState = { currentUser };
   return Object.assign({}, state, newState);
 };
 
-const setUserFromWhoami = (state, action) => {
-  if (!action.payload || !action.payload.entities) return state;
-  const users = action.payload.entities.users;
-  const id = action.payload.results;
-  const user = users[id];
-  const newState = { user: Object.assign({}, { id: user.id }, user.attributes) };
+const getCurrentUser = (state, action) => {
+  if (!action.payload || !action.payload.data) return state;
+  const currentUser = action.payload.data;
+  const newState = {
+    currentUser: Object.assign(
+      {},
+      { id: currentUser .id },
+      currentUser .attributes
+    )
+  };
   return Object.assign({}, state, newState);
 };
 
@@ -42,11 +47,27 @@ const setAuthError = (state, action) => {
   return Object.assign({}, state, { error });
 };
 
+const syncCurrentUser = (state, action) => {
+  if (action.meta === requests.updateCurrentUser) {
+    const currentUser = action.payload.data;
+    const newState = {
+      currentUser: Object.assign(
+        {},
+        { id: currentUser .id },
+        currentUser .attributes
+      )
+    };
+    return Object.assign({}, state, newState);
+  }
+  return state;
+};
+
 export default handleActions({
+  ENTITY_STORE_RESPONSE: syncCurrentUser,
   START_LOGIN: startLogin,
   START_LOGOUT: startLogout,
   SET_AUTH_TOKEN: setAuthToken,
-  SET_USER: setUser,
-  WHOAMI: setUserFromWhoami,
+  SET_CURRENT_USER: setCurrentUser,
+  GET_CURRENT_USER: getCurrentUser,
   SET_AUTH_ERROR: setAuthError
 }, initialState);

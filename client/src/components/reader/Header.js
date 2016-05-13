@@ -16,7 +16,7 @@ export default class Header extends Component {
   static propTypes = {
     text: PropTypes.object,
     section: PropTypes.object,
-    authenticated: PropTypes.bool,
+    authentication: PropTypes.object,
     visibility: PropTypes.object,
     appearance: PropTypes.object,
     notifications: PropTypes.object,
@@ -43,7 +43,7 @@ export default class Header extends Component {
     this.handleContentsButtonClick = this.handleContentsButtonClick.bind(this);
     this.handleSearchMenuButtonClick = this.handleSearchMenuButtonClick.bind(this);
     this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(this);
-    this.triggerShowLoginOverlay = this.triggerShowLoginOverlay.bind(this);
+    this.triggerShowSignInUpOverlay = this.triggerShowSignInUpOverlay.bind(this);
     this.triggerToggleUserMenu = this.triggerToggleUserMenu.bind(this);
     this.triggerHideToc = this.triggerHideToc.bind(this);
     this.renderContentsButton = this.renderContentsButton.bind(this);
@@ -61,8 +61,8 @@ export default class Header extends Component {
     this.props.panelToggle('appearance');
   }
 
-  triggerShowLoginOverlay() {
-    this.props.visibilityShow('loginOverlay');
+  triggerShowSignInUpOverlay() {
+    this.props.visibilityShow('signInUpOverlay');
   }
 
   triggerToggleUserMenu() {
@@ -134,9 +134,9 @@ export default class Header extends Component {
               </li>
               <li>
                 <UserMenuButton
-                  authenticated={this.props.authenticated}
+                  authentication={this.props.authentication}
                   active={this.props.visibility.uiPanels.user}
-                  showLoginOverlay={this.triggerShowLoginOverlay}
+                  showLoginOverlay={this.triggerShowSignInUpOverlay}
                   toggleUserMenu={this.triggerToggleUserMenu}
                 />
               </li>
@@ -173,6 +173,8 @@ export default class Header extends Component {
             id="user"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={UserMenuBody}
+            showLoginOverlay={this.triggerShowSignInUpOverlay}
+            hideUserMenu={this.triggerToggleUserMenu}
 
             // Props required by body component
             startLogout={this.props.startLogout}

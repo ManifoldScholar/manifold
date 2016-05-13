@@ -3,17 +3,24 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: transparentize($neutral90, 0.05);
-  // Hidden by default
-  opacity: 0;
-  visibility: hidden;
-  // I'm not sure how to fix this, leaving it for Naomi
-  // scss-lint:disable TransitionAll
-  transition: all, $duration, $timing;
+  padding-bottom: 100px;
+  overflow: scroll;
+  background-color: transparentize($neutral90, 0.025);
+  opacity: 1;
+  transition: opacity, 0s, linear;
 
-  &.overlay-visible {
+  &.overlay-login-enter {
+    opacity: 0;
+  }
+
+  &.overlay-login-enter-active {
     opacity: 1;
-    visibility: visible;
+    transition: opacity, $duration, $timing;
+  }
+
+  &.overlay-login-leave {
+    opacity: 0;
+    transition: opacity, $duration, $timing;
   }
 
   .logo {
@@ -56,7 +63,7 @@
 
   .overlay-content {
     max-width: 340px;
-    margin: 226px auto 0;
+    margin: 126px auto 0;
   }
 
   .login-form {
@@ -69,6 +76,17 @@
 
   .login-links {
     margin-top: 25px;
+
+    a {
+      display: block;
+
+      + a {
+        margin-top: 14px;
+        margin-left: 0;
+      }
+
+    }
+
   }
 
   .login-external {

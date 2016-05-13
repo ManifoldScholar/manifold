@@ -19,3 +19,14 @@ export const request = createAction('ENTITY_STORE_REQUEST', (requestConfig, meta
 }, (apiConfig, meta = null) => {
   return meta || uuid.v1();
 });
+
+export const requests = {
+  browseFilteredProjects: 'browse-filtered-projects',
+  browseFeaturedProjects: 'browse-featured-projects',
+  showProjectDetail: 'show-project-detail',
+  readerCurrentText: 'current-text',
+  readerCurrentSection: 'current-section',
+  developerTexts: 'developer-texts',
+  developerProjects: 'developer-projects',
+  updateCurrentUser: 'update-current-user'
+};

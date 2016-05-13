@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import HigherOrder from '../HigherOrder';
 import PasswordForgot from './PasswordForgot';
 import PasswordReset from './PasswordReset';
 import Login from './Login';
-import Update from './Update';
+import CreateUpdate from './CreateUpdate';
 import Create from './Create';
-import { browserHistory } from 'react-router';
 
 export default class Overlay extends Component {
 
@@ -14,32 +13,32 @@ export default class Overlay extends Component {
     hideSignInUpOverlay: PropTypes.func,
     authentication: PropTypes.object,
     dispatch: PropTypes.func,
-    hash: PropTypes.string
   };
 
   constructor() {
     super();
-    this.updateHash = this.updateHash.bind(this);
+    this.state = {
+      view: 'account-login'
+    };
+    this.updateView = this.updateView.bind(this);
     this.childProps = this.childProps.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.authentication.authenticated === true &&
-      prevProps.authentication.authenticated === false) {
-      this.props.hideSignInUpOverlay();
-    }
-  }
-
-  updateHash(hash) {
-    return () => {
-      browserHistory.push({ ...location, hash: `#${hash}` });
-    };
+  updateView(view, event = null) {
+    if (event) event.preventDefault();
+    this.setState({ view });
   }
 
   childProps() {
     return {
-      updateHash: this.updateHash,
+      updateView: this.updateView,
+      showLogin: (e) => { this.updateView('account-login', e); },
+      showCreate: (e) => { this.updateView('account-create', e); },
+      showForgot: (e) => { this.updateView('account-password-forgot', e); },
+      showReset: (e) => { this.updateView('account-password-reset', e); },
+      showCreateUpdate: (e) => { this.updateView('account-create-update', e); },
       dispatch: this.props.dispatch,
+      hideSignInUpOverlay: this.props.hideSignInUpOverlay,
       authentication: this.props.authentication
     };
   }
@@ -47,20 +46,24 @@ export default class Overlay extends Component {
   renderChild() {
     let child = null;
     const childProps = this.childProps();
-    switch (this.props.hash) {
-      case '#account-create':
+    if (this.props.authentication.authenticated) {
+      child = <CreateUpdate {...childProps} />;
+      return child;
+    }
+    switch (this.state.view) {
+      case 'account-create':
         child = <Create {...childProps} />;
         break;
-      case '#account-update':
-        child = <Update {...childProps} />;
+      case 'account-create-update':
+        child = <CreateUpdate {...childProps} />;
         break;
-      case '#account-password-forgot':
+      case 'account-password-forgot':
         child = <PasswordForgot {...childProps} />;
         break;
-      case '#account-password-reset':
+      case 'account-password-reset':
         child = <PasswordReset {...childProps} />;
         break;
-      case '#account-login':
+      case 'account-login':
       default:
         child = <Login {...childProps} />;
         break;
@@ -69,25 +72,22 @@ export default class Overlay extends Component {
   }
 
   render() {
-    const overlayClass = classNames({
-      'overlay-login': true,
-      'overlay-hidden': !this.props.visible,
-      'overlay-visible': this.props.visible
-    });
     return (
-      <div className={overlayClass}>
-        <figure className="logo">
-          <i className="manicon manicon-manifold-logo"></i>
-          Manifold
-        </figure>
-        <button onClick={this.props.hideSignInUpOverlay} className="overlay-close">
-          Cancel Log in
-          <i className="manicon manicon-x"></i>
-        </button>
-        <div className="overlay-content">
-          {this.renderChild()}
+      <HigherOrder.BodyClass className={'no-scroll'}>
+        <div className="overlay-login">
+          <figure className="logo">
+            <i className="manicon manicon-manifold-logo"></i>
+            Manifold
+          </figure>
+          <button onClick={this.props.hideSignInUpOverlay} className="overlay-close">
+            Cancel
+            <i className="manicon manicon-x"></i>
+          </button>
+          <div className="overlay-content">
+            {this.renderChild()}
+          </div>
         </div>
-      </div>
+      </HigherOrder.BodyClass>
     );
   }
 }

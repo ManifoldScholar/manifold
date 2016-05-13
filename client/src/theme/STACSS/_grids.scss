@@ -16,7 +16,7 @@
   }
 
   + .row-3-p {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   %column-prototype {
@@ -38,3 +38,11 @@
     width: 66.666%;
   }
 }
+
+.row-1-p {
+  @include clearfix;
+  + .row-1-p {
+    margin-top: 30px;
+  }
+}
+

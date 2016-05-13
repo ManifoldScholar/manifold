@@ -24,10 +24,8 @@ export class LowLevelApiClient {
   }
 
   _adjustedEndpoint(endpoint) {
-    if (!__SERVER__) {
-      return endpoint;
-    }
-    return `http://${(process.env.HOST || 'localhost')}:${config.clientPort}${endpoint}`;
+    const out = __MANIFOLD_API_URL__ + endpoint;
+    return out;
   }
 
   _endpointWithParams(endpoint, params) {
@@ -40,7 +38,9 @@ export class LowLevelApiClient {
     const endpoint = this._endpointWithParams(this._adjustedEndpoint(rawEndpoint), options.params);
     const fetchConfig = {
       method,
+      body: options.body,
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${options.authToken}`
       }
     };
@@ -86,46 +86,7 @@ export class ApiClient {
   };
 
   _returnResults = ({ json, responseIgnored }) => {
-    let out;
-    if (json === null) return out;
-    if (Array.isArray(json.data)) {
-      out = this._returnCollection(json);
-    } else {
-      out = this._returnEntity(json);
-    }
-    json.included.forEach((entity) => {
-      if (entity) {
-        if (!out.entities.hasOwnProperty(entity.type)) {
-          out.entities[entity.type] = {};
-        }
-        out.entities[entity.type][entity.id] = entity;
-      }
-    });
-    return out;
-  };
-
-  _returnCollection = (json) => {
-    const entities = {};
-    const results = [];
-    json.data.forEach((entity) => {
-      if (!entities.hasOwnProperty(entity.type)) {
-        entities[entity.type] = {};
-      }
-      entities[entity.type][entity.id] = entity;
-      results.push({ id: entity.id, type: entity.type });
-    });
-    return { entities, results };
-  };
-
-  _returnEntity = (json) => {
-    const entities = {};
-    const entity = json.data;
-    const results = { id: entity.id, type: entity.type };
-    if (!entities.hasOwnProperty(entity.type)) {
-      entities[entity.type] = {};
-    }
-    entities[entity.type][entity.id] = entity;
-    return { entities, results };
+    return json;
   };
 
   _responseNotOK = (response) => {
@@ -141,15 +102,28 @@ export class ApiClient {
   };
 
   _handleFailure = (reason) => {
-    const notificationPayload = {
-      id: 'API_CLIENT_ERROR',
-      level: 2,
-      heading: `Manifold API Error - ${reason.response.status} ${reason.response.statusText}`,
-      body: 'Manifold was unable to send or receive data from the server. This could be the ' +
-      'result of your machine being offline, or the backend server could be experiencing ' +
-      'difficulties.'
-    };
-    return Promise.reject(notificationPayload);
+    return new Promise((resolve, reject) => {
+      const notificationPayload = {
+        id: 'API_CLIENT_ERROR',
+        level: 2,
+        heading: `Manifold API Error - ${reason.response.status} ${reason.response.statusText}`,
+        body: 'Manifold was unable to send or receive data from the server. This could be the ' +
+        'result of your machine being offline, or the backend server could be experiencing ' +
+        'difficulties.'
+      };
+      reason.response.json().then(
+        (json) => {
+          reject(Object.assign(notificationPayload, { body: json }));
+        },
+        () => {
+          reject(Object.assign(notificationPayload, {
+            body: 'Manifold was unable to send or receive data from the server. This ' +
+            'could be the result of your machine being offline, or the backend server ' +
+            'could be experiencing difficulties.'
+          }));
+        }
+      );
+    });
   };
 
 }

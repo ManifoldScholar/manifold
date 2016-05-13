@@ -23,6 +23,9 @@ export default () => {
         <Route component={Login} path="login" />
         <Route component={Following} path="following" />
         <Route component={ProjectDetail} path="project/:id" />
+      </Route>
+
+      <Route component={Frontend} path="/static" >
         <Route component={FormsStatic} path="forms" />
       </Route>
 
