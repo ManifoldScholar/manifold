@@ -8,7 +8,7 @@ export default class Errorable extends Component {
     errors: PropTypes.object,
     className: PropTypes.string,
     field: React.PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    children: React.PropTypes.array
+    children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
 
   constructor() {
