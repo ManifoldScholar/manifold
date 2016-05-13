@@ -1,5 +1,6 @@
 # Provides a partial serialization of a text model.
 class TextPartialSerializer < ActiveModel::Serializer
+  cache key: "text_partial", expires_in: 3.hours
   attributes :id, :title, :creator_names, :unique_identifier, :cover_url, :created_at,
              :first_section_id
 
