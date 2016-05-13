@@ -120,9 +120,8 @@ app.use((req, res) => {
         } finally {
           res.send('<!doctype html>\n' + renderString);
         }
-      }, (error) => {
-        renderString = handleError(error);
-        console.log('test return error!!!');
+      }, (dataFetchError) => {
+        const renderString = handleError(dataFetchError);
         res.send('<!doctype html>\n' + renderString);
       });
     }
