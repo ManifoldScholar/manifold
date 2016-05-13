@@ -4,6 +4,7 @@ import PasswordForgot from './PasswordForgot';
 import PasswordReset from './PasswordReset';
 import Login from './Login';
 import CreateUpdate from './CreateUpdate';
+import Update from './Update';
 import Create from './Create';
 
 export default class Overlay extends Component {
@@ -46,13 +47,13 @@ export default class Overlay extends Component {
   renderChild() {
     let child = null;
     const childProps = this.childProps();
-    if (this.props.authentication.authenticated) {
-      child = <CreateUpdate {...childProps} />;
-      return child;
-    }
+
     switch (this.state.view) {
       case 'account-create':
         child = <Create {...childProps} />;
+        break;
+      case 'account-update':
+        child = <Update {...childProps} />;
         break;
       case 'account-create-update':
         child = <CreateUpdate {...childProps} />;
@@ -65,7 +66,11 @@ export default class Overlay extends Component {
         break;
       case 'account-login':
       default:
-        child = <Login {...childProps} />;
+        if (this.props.authentication.authenticated) {
+          child = <Update {...childProps} />;
+        } else {
+          child = <Login {...childProps} />;
+        }
         break;
     }
     return child;

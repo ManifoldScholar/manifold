@@ -15,7 +15,7 @@ class Create extends Component {
     user: PropTypes.object,
     showForgot: PropTypes.func.isRequired,
     showLogin: PropTypes.func.isRequired,
-    showUpdate: PropTypes.func.isRequired
+    showCreateUpdate: PropTypes.func.isRequired
   };
 
   static requests = {
@@ -52,7 +52,7 @@ class Create extends Component {
       this.authenticateUser();
     }
     if (nextProps.authentication.authenticated) {
-      this.props.showUpdate();
+      this.props.showCreateUpdate();
     }
   }
 

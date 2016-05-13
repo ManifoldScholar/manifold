@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { startLogin } from '../../../actions/shared/authentication';
-
+import get from 'lodash/get';
+import classNames from 'classnames';
 
 export default class Login extends Component {
 
@@ -9,9 +10,9 @@ export default class Login extends Component {
     showForgot: PropTypes.func.isRequired,
     showCreate: PropTypes.func.isRequired,
     authentication: React.PropTypes.shape({
-      authToken: React.PropTypes.string,
-      user: React.PropTypes.object
-    })
+      currentUser: React.PropTypes.object
+    }),
+    hideSignInUpOverlay: PropTypes.func
   };
 
   constructor() {
@@ -20,32 +21,44 @@ export default class Login extends Component {
     this.updateEmail = this.updateEmail.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.authenticationError = this.authenticationError.bind(this);
+    this.state = { email: '', password: '' };
   }
 
-  // TODO: Remove this at some future point
-  state = { email: 'admin@manifold.dev', password: 'manifold' };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.authentication.currentUser && !this.props.authentication.currentUser) {
+      this.props.hideSignInUpOverlay();
+    }
+  }
 
-  updatePassword = (event) => {
+  updatePassword(event) {
     this.setState(Object.assign({}, this.state, { password: event.target.value }));
-  };
+  }
 
-  updateEmail = (event) => {
+  updateEmail(event) {
     this.setState(Object.assign({}, this.state, { email: event.target.value }));
-  };
+  }
 
-  handleLogin = (event) => {
+  handleLogin(event) {
     event.preventDefault();
     const { dispatch } = this.props;
-    dispatch(startLogin(this.state.email, this.state.password));
-  };
+    const promise = dispatch(startLogin(this.state.email, this.state.password));
+    console.log(promise, 'prom');
+  }
 
   authenticationError() {
+    const error = get(this.props.authentication, 'error.body');
+    return error;
   }
 
   render() {
+
+    const submitClass = classNames({
+      'form-input': true,
+      'form-error': this.authenticationError()
+    });
+
     return (
       <div>
-        {this.authenticationError()}
         <form method="post" onSubmit={this.handleLogin} >
           <div className="row-1-p">
             <div className="form-input form-error">
@@ -72,7 +85,12 @@ export default class Login extends Component {
             </div>
           </div>
           <div className="row-1-p">
-            <div className="form-input form-error">
+            <div className={submitClass}>
+              { this.authenticationError() ?
+                <span style={{ marginTop: 0 }} className="error">
+                  {this.authenticationError()}
+                </span>
+              : null }
               <input
                 className="button-secondary button-with-room"
                 type="submit"
