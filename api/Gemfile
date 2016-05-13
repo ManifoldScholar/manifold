@@ -17,6 +17,7 @@ gem "httparty", "~> 0.13.7"
 gem "jwt", "~> 1.5.2"
 gem "colorize"
 gem "css_parser"
+gem "dotenv-rails"
 
 group :development, :test do
   gem "rspec-rails", github: "rspec/rspec-rails"
