@@ -3,7 +3,11 @@ module Api
     # Me controller
     class MeController < ApplicationController
       def show
-        render json: @current_user
+        if @current_user
+          render json: @current_user
+        else
+          render status: :unprocessable_entity
+        end
       end
 
       def update
