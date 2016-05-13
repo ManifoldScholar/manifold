@@ -24,7 +24,10 @@ const setCurrentUser = (state, action) => {
 };
 
 const getCurrentUser = (state, action) => {
-  if (!action.payload || !action.payload.data) return state;
+  // if we can't get the current user, we invalidate the token, etc.
+  if (!action.payload || !action.payload.data) {
+    return initialState;
+  }
   const currentUser = action.payload.data;
   const newState = {
     currentUser: Object.assign(

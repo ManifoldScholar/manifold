@@ -16,7 +16,7 @@ import chalk from 'chalk';
 import config from './config';
 import Html from './helpers/Html';
 import createStore from './store/createStore';
-import { setAuthToken } from './actions/shared/authentication';
+import { setAuthToken, getCurrentUser } from './actions/shared/authentication';
 
 
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
@@ -66,6 +66,7 @@ app.use((req, res) => {
     const manifoldCookie = cookie.parse(req.headers.cookie);
     const authToken = manifoldCookie.authToken;
     store.dispatch(setAuthToken(authToken));
+    store.dispatch(getCurrentUser);
   }
 
   match({
