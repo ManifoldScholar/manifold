@@ -36,11 +36,11 @@ class Project < ActiveRecord::Base
   end
 
   def thumbnail_url
-    return cover.url(:thumb) if cover
+    return ENV["API_DOMAIN"] + cover.url(:thumb) if cover
     cover_url
   end
 
   def cover_url
-    cover.url if cover
+    ENV["API_DOMAIN"] + cover.url if cover
   end
 end
