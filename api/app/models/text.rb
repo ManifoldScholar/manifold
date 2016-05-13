@@ -83,7 +83,7 @@ class Text < ActiveRecord::Base
 
   def cover_url
     cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
-    cover_source.resource.attachment.url if cover_source
+    ENV["API_DOMAIN"] + cover_source.resource.attachment.url if cover_source
   end
 
   def toc_section
