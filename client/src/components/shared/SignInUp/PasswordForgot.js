@@ -2,33 +2,40 @@ import React, { Component, PropTypes } from 'react';
 
 export default class PasswordForgot extends Component {
 
-  static propTypes = {};
+  static propTypes = {
+    showLogin: PropTypes.func.isRequired,
+    showCreate: PropTypes.func.isRequired
+  };
 
   render() {
     return (
       <div>
-        <form method="post" className="login-form">
-          <div className="field">
-            <label>
-              Email
-            </label>
-            <input
-              type="text"
-              id="password-forgot-email"
-              placeholder="Email"
-            />
+        <form method="post">
+          <div className="row-1-p">
+            <div className="form-input form-error">
+              <label>Email</label>
+              <input
+                type="text"
+                id="password-forgot-email"
+                placeholder="Email"
+              />
+            </div>
           </div>
-          <input
-            className="button-secondary"
-            type="submit"
-            value="Send Password Reset Email"
-          />
+          <div className="row-1-p">
+            <div className="form-input form-error">
+              <input
+                className="button-secondary button-with-room"
+                type="submit"
+                value="Send Password Reset Email"
+              />
+            </div>
+          </div>
         </form>
         <p className="login-links">
-          <a href="#account-login">
+          <a href="#" onClick={this.props.showLogin}>
             {'Remember your password?'}
           </a>
-          <a href="#account-create">
+          <a href="#" onClick={this.props.showCreate}>
             {'Need to sign up?'}
           </a>
         </p>

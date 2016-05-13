@@ -3,7 +3,7 @@ import Overlay from './Overlay.js';
 import PasswordReset from './PasswordReset.js';
 import Login from './Login.js';
 import Create from './Create.js';
-import Update from './Update.js';
+import CreateUpdate from './CreateUpdate.js';
 
 export default {
   PasswordForgot,
@@ -11,5 +11,5 @@ export default {
   PasswordReset,
   Login,
   Create,
-  Update
+  CreateUpdate
 };

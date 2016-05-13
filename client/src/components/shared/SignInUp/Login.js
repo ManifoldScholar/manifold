@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import { startLogin } from '../../../actions/shared/authentication';
+
 
 export default class Login extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    showForgot: PropTypes.func.isRequired,
+    showCreate: PropTypes.func.isRequired,
     authentication: React.PropTypes.shape({
       authToken: React.PropTypes.string,
       user: React.PropTypes.object
@@ -44,41 +45,47 @@ export default class Login extends Component {
   render() {
     return (
       <div>
+        {this.authenticationError()}
         <form method="post" onSubmit={this.handleLogin} >
-          <div className="field">
-            <label>
-              Username
-            </label>
-            <input
-              type="text"
-              value={this.state.email}
-              onChange={this.updateEmail}
-              id="login-email"
-              placeholder="Username"
-            />
+          <div className="row-1-p">
+            <div className="form-input form-error">
+              <label>Email</label>
+              <input
+                type="text"
+                value={this.state.email}
+                onChange={this.updateEmail}
+                id="login-email"
+                placeholder="Username"
+              />
+            </div>
           </div>
-          <div className="field">
-            <label>
-              Password
-            </label>
-            <input
-              type="password"
-              value={this.state.password}
-              onChange={this.updatePassword}
-              id="login-password"
-              placeholder="Password"
-            />
+          <div className="row-1-p">
+            <div className="form-input">
+              <label>Password</label>
+              <input
+                type="password"
+                value={this.state.password}
+                onChange={this.updatePassword}
+                id="login-password"
+                placeholder="Password"
+              />
+            </div>
           </div>
-
-
-          {this.authenticationError()}
-          <input className="button-secondary" type="submit" value="Log in" />
+          <div className="row-1-p">
+            <div className="form-input form-error">
+              <input
+                className="button-secondary button-with-room"
+                type="submit"
+                value="Log in"
+              />
+            </div>
+          </div>
         </form>
         <p className="login-links">
-          <a href="#account-password-forgot">
+          <a href="#" onClick={this.props.showForgot}>
             {'Forgot your password?'}
           </a>
-          <a href="#account-create">
+          <a href="#" onClick={this.props.showCreate}>
             {'Need to sign up?'}
           </a>
         </p>

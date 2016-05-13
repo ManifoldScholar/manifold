@@ -1,5 +1,4 @@
 import { ApiClient } from '../../api/client';
-import { createAction } from 'redux-actions';
 
 function sendRequest(request, authToken) {
   const client = new ApiClient;
@@ -15,6 +14,7 @@ function buildResponseAction(payload, meta, error) {
 
 export default function entityStoreMiddleware({ dispatch, getState }) {
   return (next) => (action) => {
+
     // Guards
     if (action.type !== 'ENTITY_STORE_REQUEST') {
       return next(action);
@@ -26,6 +26,16 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     // Inject headers, etc. from state
     const requestPromise =
       sendRequest(action.payload.request, state.authentication.authToken);
+
+    // Start and stop loading indication based on this promise.
+    dispatch({ type: 'START_LOADING', payload: action.meta });
+    requestPromise.then(() => {
+      dispatch({ type: 'STOP_LOADING', payload: action.meta });
+    }, () => {
+      dispatch({ type: 'STOP_LOADING', payload: action.meta });
+    }).catch(() => {
+      dispatch({ type: 'STOP_LOADING', payload: action.meta });
+    });
 
     // Pass through the request action with updated state
     // We add the promise to the payload so that it can be used in fetch data to delay

@@ -16,7 +16,7 @@ export default class Header extends Component {
   static propTypes = {
     visibility: PropTypes.object,
     location: PropTypes.object,
-    authenticated: PropTypes.bool,
+    authentication: PropTypes.object,
     notifications: PropTypes.object,
     visibilityToggle: PropTypes.func,
     visibilityHide: PropTypes.func,
@@ -51,7 +51,6 @@ export default class Header extends Component {
   render() {
     const path = this.props.location.pathname;
     const active = startsWith(path, '/browse/following') ? 'following' : 'browse';
-
     return (
       <HigherOrder.ScrollAware>
         <header className={'header-browse'}>
@@ -99,7 +98,7 @@ export default class Header extends Component {
                 </li>
                 <li>
                   <UserMenuButton
-                    authenticated={this.props.authenticated}
+                    authentication={this.props.authentication}
                     active={this.props.visibility.uiPanels.user}
                     showLoginOverlay={this.showSignInUpOverlay}
                     toggleUserMenu={this.toggleUserPanel}
@@ -108,8 +107,7 @@ export default class Header extends Component {
                     id="user"
                     visibility={this.props.visibility.uiPanels}
                     bodyComponent={UserMenuBody}
-
-                    // Props required by body component
+                    showLoginOverlay={this.showSignInUpOverlay}
                     startLogout={this.props.startLogout}
                     hideUserMenu={this.toggleUserPanel}
                   />

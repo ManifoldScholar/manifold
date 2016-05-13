@@ -11,7 +11,7 @@
   label:not(.checkbox):not(.radio) {
     @include formLabelPrimary;
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: $neutral50;
 
     .bg-neutral90 & {
@@ -66,9 +66,23 @@
     display: block;
     width: 100%;
 
+    &.button-with-room {
+      margin-top: 40px;
+    }
+
     + .button-secondary, .button-secondary-dull {
       margin-top: 21px;
     }
+  }
+
+}
+
+.form-error {
+  .error {
+    @include formInputMessage;
+    display: inline-block;
+    margin-top: 15px;
+    color: $sp40Tertiary;
   }
 }
 
@@ -299,5 +313,35 @@
   input {
     @include inputSecondary;
     padding-left: 40px;
+  }
+}
+
+.form-dropzone {
+  cursor: pointer;
+
+  .dropzone-button {
+    @include buttonUnstyled;
+    @include buttonRounded;
+    @include formLabelPrimary;
+    padding: 25px 15px;
+    font-weight: $regular;
+    line-height: 1.761;
+    color: $neutral50;
+    text-align: center;
+    border: 2px solid $neutral50;
+
+    .dropzone-button-text {
+      display: block;
+      padding-left: 95px;
+      text-align: left;
+    }
+
+    + .dropzone-button {
+      margin-top: 25px;
+    }
+  }
+
+  .dropzone-button-dotted {
+    border: 3px dotted $neutral50;
   }
 }

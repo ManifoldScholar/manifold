@@ -6,6 +6,8 @@ import { HigherOrder } from './components/shared';
 import { Provider } from 'react-redux';
 import getRoutes from './routes';
 import { DevTools } from './containers/shared';
+import { getCurrentUser } from './actions/shared/authentication';
+import Global from './containers/Global';
 
 export default class App extends Component {
 
@@ -48,6 +50,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
+    this.store.dispatch(getCurrentUser);
     if (__DEVTOOLS__) {
       this.store.dispatch({ type: 'RENDER_DEV_TOOLS' });
     }
@@ -82,10 +85,10 @@ export default class App extends Component {
 
     return (
       <Provider store={this.store} key="provider">
-        <div>
+        <Global>
           {this.router()}
           {devTools}
-        </div>
+        </Global>
       </Provider>
     );
   }

@@ -22,7 +22,7 @@ import {
   removeAllNotifications
 } from '../../actions/shared/notifications';
 import { setColorScheme } from '../../actions/reader/ui/colors';
-import { request, flush } from '../../actions/shared/entityStore';
+import { request, requests, flush } from '../../actions/shared/entityStore';
 import textsAPI from '../../api/texts';
 import sectionsAPI from '../../api/sections';
 import { select } from '../../utils/entityUtils';
@@ -30,34 +30,28 @@ import values from 'lodash/values';
 
 class ReaderContainer extends Component {
 
-  static requests = Object.freeze({
-    text: 'reader-current-text',
-    section: 'reader-current-section'
-  });
-
   static fetchData(getState, dispatch, location, params) {
     const promises = [];
-    const r = ReaderContainer.requests; // a little shorter, a little more legible.
     const textCall = textsAPI.show(params.textId);
-    const { promise: one } = dispatch(request(textCall, r.text));
+    const { promise: one } = dispatch(request(textCall, requests.readerCurrentText));
     promises.push(one);
     if (params.sectionId) {
       const sectionCall = sectionsAPI.show(params.sectionId);
-      const { promise: two } = dispatch(request(sectionCall, r.section));
+      const { promise: two } =
+        dispatch(request(sectionCall, requests.readerCurrentSection));
       promises.push(one);
     }
     return Promise.all(promises);
   }
 
   static mapStateToProps(state) {
-    const r = ReaderContainer.requests;
     const appearance = {
       typography: state.ui.typography,
       colors: state.ui.colors
     };
     return {
-      section: select(r.section, state.entityStore),
-      text: select(r.text, state.entityStore),
+      section: select(requests.readerCurrentSection, state.entityStore),
+      text: select(requests.readerCurrentText, state.entityStore),
       authentication: state.authentication,
       visibility: state.ui.visibility,
       loading: state.ui.loading.active,
@@ -101,7 +95,8 @@ class ReaderContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(ReaderContainer.requests));
+    this.props.dispatch(flush(requests.readerCurrentSection));
+    this.props.dispatch(flush(requests.readerCurrentText));
   }
 
   maybeRedirect(props) {
@@ -157,25 +152,19 @@ class ReaderContainer extends Component {
       <HigherOrder.BodyClass className="reader">
         <div>
           {this.renderStyles()}
-          <DocumentMeta {...config.app}/>
-          <LoadingBar loading={this.props.loading} />
           <HigherOrder.ScrollAware>
             {/* Header inside scroll-aware HOC */}
             <Header
               // Props required by body component
               text={this.props.text}
               section={this.props.section}
-              authenticated={this.props.authentication.authToken ? true : false}
+              authentication={this.props.authentication}
               visibility={this.props.visibility }
               appearance={this.props.appearance}
               notifications={this.props.notifications}
               {...this.headerMethods()}
             />
           </HigherOrder.ScrollAware>
-          <LoginOverlay
-            visible={this.props.visibility.loginOverlay}
-            hideLoginOverlay={hideLoginOverlay}
-          />
           <main>
             {section}
             <Section.Pagination

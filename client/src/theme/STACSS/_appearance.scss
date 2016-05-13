@@ -60,6 +60,10 @@
   -webkit-appearance: none;
 }
 
+@mixin buttonRounded {
+  border-radius: 7px;
+}
+
 @mixin buttonAvatar($size: 40) {
   @include buttonUnstyled;
   // Default size from browse view that may be

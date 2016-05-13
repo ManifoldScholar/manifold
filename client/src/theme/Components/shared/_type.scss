@@ -49,11 +49,13 @@
   }
 }
 
+.overlay-copy {
+  @include overlayCopy;
+}
+
 .login-links {
-  @include templateCopy;
-  font-size: $type60;
+  @include overlayCopy;
   font-style: italic;
-  color: $neutral50;
 
   a {
     color: $neutral50;
@@ -73,3 +75,10 @@
   color: $accentPrimaryDark;
   background-color: $neutral20;
 }
+
+.form-heading {
+  @include headingPrimary;
+  margin-bottom: 25px;
+  color: $neutral50;
+}
+

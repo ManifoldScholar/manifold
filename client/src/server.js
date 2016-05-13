@@ -17,6 +17,8 @@ import config from './config';
 import Html from './helpers/Html';
 import createStore from './store/createStore';
 import { setAuthToken } from './actions/shared/authentication';
+
+
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 import fetchAllData from './helpers/fetchAllData';
 import App from './App';import getRoutes from './routes';

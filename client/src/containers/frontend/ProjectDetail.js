@@ -13,28 +13,23 @@ import {
 import {
   visibilityShow
 } from '../../actions/shared/ui/visibility';
-import { request, flush } from '../../actions/shared/entityStore';
+import { request, flush, requests } from '../../actions/shared/entityStore';
 import { select } from '../../utils/entityUtils';
 import projectsAPI from '../../api/projects';
 
 
 class ProjectDetailContainer extends Component {
 
-  static requests = Object.freeze({
-    project: 'project-detail-projects'
-  });
-
   static fetchData(getState, dispatch, location, params) {
-    const r = ProjectDetailContainer.requests; // a little shorter, a little more legible.
-    const projectCall = projectsAPI.show(params.id);
-    const { promise: one } = dispatch(request(projectCall, r.project));
+    const projectRequest =
+      request(projectsAPI.show(params.id), requests.showProjectDetail);
+    const { promise: one } = dispatch(projectRequest);
     return Promise.all([one]);
   }
 
   static mapStateToProps(state) {
-    const r = ProjectDetailContainer.requests;
     return {
-      project: select(r.project, state.entityStore)
+      project: select(requests.showProjectDetail, state.entityStore)
     };
   }
 
@@ -43,19 +38,18 @@ class ProjectDetailContainer extends Component {
     dispatch: PropTypes.func.isRequired
   };
 
-  state = {
-    activity: [],
-    categories: [],
-    texts: [],
-    meta: []
-  };
+  constructor() {
+    super();
+    this.state = {
+      activity: [],
+      categories: [],
+      texts: [],
+      meta: []
+    };
+  }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-  }
-
-  componentWillUnmount() {
-    this.props.dispatch(flush(ProjectDetailContainer.requests));
   }
 
   renderActivity = () => {

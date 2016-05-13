@@ -102,6 +102,7 @@ $type20: 12px;
 @mixin formLabelPrimary {
   @include templateHead;
   font-size: $type40;
+  font-weight: $semibold;
   letter-spacing: 0.075em;
   text-transform: uppercase;
 }
@@ -120,4 +121,23 @@ $type20: 12px;
   font-size: $type40;
   letter-spacing: 0.075em;
   text-transform: uppercase;
+}
+
+@mixin formInputMessage {
+  @include templateHead;
+  font-size: $type50;
+  font-weight: $semibold;
+  letter-spacing: 0.075em;
+}
+
+// Overlay
+// --------------------------------------------------------
+@mixin overlayCopy {
+  @include templateCopy;
+  font-size: $type60;
+  color: $neutral30;
+
+  a {
+    color: $neutral30;
+  }
 }

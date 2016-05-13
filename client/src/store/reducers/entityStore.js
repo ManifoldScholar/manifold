@@ -5,6 +5,49 @@ const initialState = {
   entities: {}
 };
 
+
+function normalizeCollection(payload) {
+  const entities = {};
+  const results = [];
+  payload.data.forEach((entity) => {
+    if (!entities.hasOwnProperty(entity.type)) {
+      entities[entity.type] = {};
+    }
+    entities[entity.type][entity.id] = entity;
+    results.push({ id: entity.id, type: entity.type });
+  });
+  return { entities, results };
+}
+
+function normalizeEntity(payload) {
+  const entity = payload.data;
+  const entities = {
+    [entity.type]: {}
+  };
+  const results = { id: entity.id, type: entity.type };
+  entities[entity.type][entity.id] = entity;
+  return { entities, results };
+}
+
+function normalizePayload(payload) {
+  let out;
+  if (payload === null) return out;
+  if (Array.isArray(payload.data)) {
+    out = normalizeCollection(payload);
+  } else {
+    out = normalizeEntity(payload);
+  }
+  payload.included.forEach((entity) => {
+    if (entity) {
+      if (!out.entities.hasOwnProperty(entity.type)) {
+        out.entities[entity.type] = {};
+      }
+      out.entities[entity.type][entity.id] = entity;
+    }
+  });
+  return out;
+}
+
 const mergeEntities = (stateEntities, payloadEntities) => {
   const mergedEntities = {};
   Object.keys(payloadEntities).forEach((key) => {
@@ -14,20 +57,35 @@ const mergeEntities = (stateEntities, payloadEntities) => {
 };
 
 function errorResponse(state, action) {
-  // TODO: Handle errors, damnit!
-}
-
-function successResponse(state, action) {
   const meta = action.meta;
-  const isCollection = Array.isArray(action.payload.results);
   const responses = Object.assign({}, state.responses, {
     [meta]: {
-      entity: !isCollection ? action.payload.results : null,
-      collection: isCollection ? action.payload.results : null,
+      error_desc: action.payload.heading,
+      error_code: action.payload.id,
+      errors: action.payload.body,
       loaded: true
     }
   });
-  const entities = mergeEntities(state.entities, action.payload.entities);
+  return Object.assign({}, state, { responses });
+}
+
+function successResponse(state, action) {
+  const payload = normalizePayload(action.payload);
+  const meta = action.meta;
+  const isNull = !payload;
+  const isCollection = !isNull && Array.isArray(payload.results);
+  const isEntity = !isNull && !isCollection;
+  const responses = Object.assign({}, state.responses, {
+    [meta]: {
+      entity: isEntity ? payload.results : null,
+      collection: isCollection ? payload.results : null,
+      loaded: true
+    }
+  });
+  if (isNull) {
+    return Object.assign({}, state, { responses });
+  }
+  const entities = mergeEntities(state.entities, payload.entities);
   return Object.assign({}, state, { responses, entities });
 }
 
@@ -60,7 +118,6 @@ function handleFlush(state, action) {
   }
   return Object.assign({}, state, { responses, entities });
 }
-
 
 export default handleActions({
   ENTITY_STORE_REQUEST: handleRequest,

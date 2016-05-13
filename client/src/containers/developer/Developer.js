@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { request, flush } from '../../actions/shared/entityStore';
+import { request, requests, flush } from '../../actions/shared/entityStore';
 import projectsAPI from '../../api/projects';
 import textsAPI from '../../api/texts';
 import { select } from '../../utils/entityUtils';
@@ -9,26 +9,16 @@ import { Link } from 'react-router';
 
 class DeveloperContainer extends Component {
 
-  static requests = Object.freeze({
-    featured: 'developer-container-featured-projects',
-    projects: 'developer-container-projects',
-    project: 'developer-container-project',
-    texts: 'developer-container-texts'
-  });
-
   static mapStateToProps(state) {
-    const r = DeveloperContainer.requests;
     return {
-      texts: select(r.texts, state.entityStore),
-      project: select(r.project, state.entityStore),
-      projects: select(r.projects, state.entityStore),
-      featured: select(r.featured, state.entityStore)
+      texts: select(requests.developerTexts, state.entityStore),
+      projects: select(requests.developerProjects, state.entityStore)
     };
   }
 
   static fetchData(getState, dispatch) {
-    const r = DeveloperContainer.requests;
-    const { promise: projects } = dispatch(request(projectsAPI.index(), r.projects));
+    const dataRequest = request(projectsAPI.index(), requests.developerProjects);
+    const { promise: projects } = dispatch(dataRequest);
     return Promise.all([
       projects
     ]);
@@ -37,8 +27,6 @@ class DeveloperContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     projects: PropTypes.array,
-    project: PropTypes.object,
-    featured: PropTypes.array,
     texts: PropTypes.array
   };
 
@@ -47,14 +35,13 @@ class DeveloperContainer extends Component {
   }
 
   componentDidMount() {
-    const r = DeveloperContainer.requests;
-    this.props.dispatch(request(projectsAPI.featured(3), r.featured));
-    this.props.dispatch(request(projectsAPI.show(1), r.project));
-    this.props.dispatch(request(textsAPI.index(), r.texts));
+    const textsRequest = request(textsAPI.index(), requests.developerTexts);
+    this.props.dispatch(textsRequest);
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(DeveloperContainer.requests));
+    this.props.dispatch(flush(requests.developerProjects));
+    this.props.dispatch(flush(requests.developerTexts));
   }
 
   render() {
@@ -62,16 +49,8 @@ class DeveloperContainer extends Component {
       <div>
         <Link to="/browse/">Home</Link>
         <div>
-          <h4>Project</h4>
-          <JSONTree data={this.props.project || {}} />
-        </div>
-        <div>
           <h4>Projects</h4>
           <JSONTree data={this.props.projects || {}} />
-        </div>
-        <div>
-          <h4>Featured</h4>
-          <JSONTree data={this.props.featured || {}} />
         </div>
         <div>
           <h4>Texts</h4>

@@ -1,6 +1,5 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from './middleware/thunkMiddleware';
-import loadingMiddleware from './middleware/loadingMiddleware';
 import entityStoreMiddleware from './middleware/entityStoreMiddleware';
 import { DevTools } from '../containers/shared';
 import promiseMiddleware from 'redux-promise';
@@ -12,14 +11,13 @@ export default function createStore(data) {
   const middleware = [];
   middleware.push(entityStoreMiddleware);
   middleware.push(thunkMiddleware);
-  middleware.push(loadingMiddleware);
   middleware.push(promiseMiddleware);
 
   let finalCreateStore;
   if (useDevTools) {
     finalCreateStore = compose(
       applyMiddleware(...middleware),
-      DevTools.instrument()
+      DevTools.instrument({ maxAge: 20 })
     )(_createStore);
   } else {
     finalCreateStore = applyMiddleware(...middleware)(_createStore);
