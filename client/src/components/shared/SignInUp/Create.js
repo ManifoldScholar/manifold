@@ -39,10 +39,10 @@ class Create extends Component {
     this.state = {
       authenticating: false,
       user: {
-        email: `zach+${new Date().getMilliseconds()}@castironcoding.com`,
-        name: 'Zach Davis',
-        password: 'testtest123',
-        passwordConfirmation: 'testtest123'
+        email: '',
+        name: '',
+        password: '',
+        passwordConfirmation: ''
       }
     };
   }
