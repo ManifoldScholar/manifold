@@ -2,24 +2,49 @@ require "rails_helper"
 
 # rubocop:disable Metrics/LineLength
 RSpec.describe User, type: :model do
+  it "has a valid factory" do
+    expect(FactoryGirl.build(:user)).to be_valid
+  end
+
   it "should not be valid without a password" do
-    user = User.new password: nil, password_confirmation: nil
+    user = FactoryGirl.build(:user, password: nil, password_confirmation: nil)
     expect(user).to_not be_valid
   end
 
   it "should be not be valid with a short password" do
-    user = User.new password: "short", password_confirmation: "short"
+    user = FactoryGirl.build(:user, password: "short", password_confirmation: "short")
     expect(user).to_not be_valid
   end
 
   it "should not be valid with a confirmation mismatch" do
-    user = User.new password: "short", password_confirmation: "long"
+    user = FactoryGirl.build(:user, password: "short", password_confirmation: "long")
     expect(user).to_not be_valid
+  end
+
+  it "should not be valid without email" do
+    user = FactoryGirl.build(:user, email: nil)
+    expect(user).to_not be_valid
+  end
+
+  it "should not be valid without first_name" do
+    user = FactoryGirl.build(:user, first_name: nil)
+    expect(user).to_not be_valid
+  end
+
+  it "should not be valid without last_name" do
+    user = FactoryGirl.build(:user, last_name: nil)
+    expect(user).to_not be_valid
+  end
+
+  it "should split split name and assign to first and last name" do
+    user = FactoryGirl.build(:user, name: "John Rambo")
+    expect(user.first_name).to eq("John")
+    expect(user.last_name).to eq("Rambo")
   end
 
   context "already exists" do
     let(:user) do
-      u = User.create email: "test@test.com", password: "password", password_confirmation: "password"
+      u = FactoryGirl.create(:user, password: "password", password_confirmation: "password")
       User.find u.id
     end
 
@@ -39,7 +64,7 @@ RSpec.describe User, type: :model do
 
     it "should be able to authenticate" do
       the_user = user
-      u = User.find_by(email: "test@test.com").try(:authenticate, "password")
+      u = User.find_by(email: the_user.email).try(:authenticate, "password")
       expect(u).to eq(the_user)
     end
 
