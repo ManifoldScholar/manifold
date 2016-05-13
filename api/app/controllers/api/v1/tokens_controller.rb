@@ -18,15 +18,10 @@ module Api
 
       def authentication_payload(user)
         return nil unless user && user.id
+        serializable = ActiveModelSerializers::SerializableResource.new(user, {})
         {
           auth_token: AuthToken.encode(user_id: user.id),
-          user: {
-            id: user.id,
-            email: user.email,
-            first_name: user.first_name,
-            last_name: user.last_name,
-            role: user.role
-          }
+          user: serializable.as_json[:data][:attributes]
         }
       end
 
