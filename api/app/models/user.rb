@@ -45,7 +45,6 @@ class User < ActiveRecord::Base
   end
 
   def favorite_projects
-    p = []
     favorites.only_projects.includes(:favoritable).map { |f| f.favoritable }
   end
 

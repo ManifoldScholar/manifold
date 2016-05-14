@@ -14,7 +14,7 @@ RSpec.describe "Favorites", type: :request do
     @favorite_text = FactoryGirl.create(:text)
     @favorite = @user.favorite(@favorite_project)
     @another_favorite = @user.favorite(@favorite_text)
-    @params = {halstar
+    @params = {
       data: {
         type: "favorites",
         attributes: {},
