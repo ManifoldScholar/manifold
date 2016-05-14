@@ -1,6 +1,6 @@
 class CreateProjects < ActiveRecord::Migration
   def change
-    create_table :projects do |t|
+    create_table :projects, id: :uuid do |t|
       t.string :title
       t.string :subtitle
       t.boolean :published, :null => false, :default => false
@@ -13,8 +13,8 @@ class CreateProjects < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_column :collaborators, :project_id, :integer
-    add_column :texts, :project_id, :integer
+    add_column :collaborators, :project_id, :uuid
+    add_column :texts, :project_id, :uuid
 
   end
 end
