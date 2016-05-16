@@ -41,8 +41,7 @@ export default class Login extends Component {
   handleLogin(event) {
     event.preventDefault();
     const { dispatch } = this.props;
-    const promise = dispatch(startLogin(this.state.email, this.state.password));
-    console.log(promise, 'prom');
+    dispatch(startLogin(this.state.email, this.state.password));
   }
 
   authenticationError() {

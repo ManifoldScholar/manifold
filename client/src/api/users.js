@@ -13,7 +13,7 @@ export default {
       endpoint: '/api/v1/users',
       method: 'POST',
       options: {
-        body: JSON.stringify({ user })
+        body: JSON.stringify({ type: "user", data: { attributes: user } })
       }
     };
   }

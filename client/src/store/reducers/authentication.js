@@ -17,10 +17,18 @@ const startLogout = () => {
   return Object.assign({}, initialState);
 };
 
-const setCurrentUser = (state, action) => {
-  const currentUser = action.payload;
-  const newState = { currentUser };
+const updateStateFromUser = (state, user) => {
+  const newState = {
+    currentUser: user
+  };
   return Object.assign({}, state, newState);
+};
+
+const syncCurrentUser = (state, action) => {
+  if (action.meta === requests.updateCurrentUser) {
+    return updateStateFromUser(state, action.payload.data);
+  }
+  return state;
 };
 
 const getCurrentUser = (state, action) => {
@@ -28,19 +36,12 @@ const getCurrentUser = (state, action) => {
   if (!action.payload || !action.payload.data) {
     return initialState;
   }
-  const currentUser = action.payload.data;
-  const newState = {
-    currentUser: Object.assign(
-      {},
-      { id: currentUser .id },
-      currentUser .attributes
-    )
-  };
-  return Object.assign({}, state, newState);
+  return updateStateFromUser(state, action.payload.data);
 };
 
 const setAuthToken = (state, action) => {
   const authToken = action.payload;
+  if (!authToken) return state;
   const newState = { authenticating: false, authenticated: true, authToken };
   return Object.assign({}, state, newState);
 };
@@ -50,27 +51,12 @@ const setAuthError = (state, action) => {
   return Object.assign({}, state, { error });
 };
 
-const syncCurrentUser = (state, action) => {
-  if (action.meta === requests.updateCurrentUser) {
-    const currentUser = action.payload.data;
-    const newState = {
-      currentUser: Object.assign(
-        {},
-        { id: currentUser .id },
-        currentUser .attributes
-      )
-    };
-    return Object.assign({}, state, newState);
-  }
-  return state;
-};
-
 export default handleActions({
   ENTITY_STORE_RESPONSE: syncCurrentUser,
   START_LOGIN: startLogin,
   START_LOGOUT: startLogout,
   SET_AUTH_TOKEN: setAuthToken,
-  SET_CURRENT_USER: setCurrentUser,
+  SET_CURRENT_USER: getCurrentUser,
   GET_CURRENT_USER: getCurrentUser,
   SET_AUTH_ERROR: setAuthError
 }, initialState);
