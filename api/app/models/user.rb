@@ -1,15 +1,14 @@
 # The User model
 class User < ActiveRecord::Base
-
   has_secure_password
   has_attached_file :avatar,
                     styles: { medium: "300x300>", thumb: "100x100>" }
 
   has_many :favorites
   has_many :favorite_projects, through: :favorites, source: :favoritable,
-           source_type: "Project"
+                               source_type: "Project"
   has_many :favorite_texts, through: :favorites, source: :favoritable,
-           source_type: "Text"
+                            source_type: "Text"
 
   validates :password, length: { minimum: 8 }, allow_nil: true
   validates :password, confirmation: true,
@@ -45,7 +44,6 @@ class User < ActiveRecord::Base
   end
 
   def favorite_projects
-    favorites.only_projects.includes(:favoritable).map { |f| f.favoritable }
+    favorites.only_projects.includes(:favoritable).map(&:favoritable)
   end
-
 end

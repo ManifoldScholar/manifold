@@ -4,7 +4,6 @@ module Api
       module Relationships
         # Favorites controller
         class FavoritesController < ApplicationController
-
           before_action :authenticate_request!
           before_action :set_favorite, only: [:show, :update, :destroy]
 
@@ -20,7 +19,9 @@ module Api
             attributes = polymorphic_relationship_from(favorite_params, "favoritable")
             @favorite = @current_user.favorites.create(attributes)
             if @favorite.save
-              render json: @favorite, status: :created, location: [:api, :v1, :me, :relationships, @favorite]
+              render json: @favorite,
+                     status: :created,
+                     location: [:api, :v1, :me, :relationships, @favorite]
             else
               render json: @favorite.errors, status: :unprocessable_entity
             end
@@ -33,7 +34,6 @@ module Api
 
           # Destroy a favorite by ID
           def destroy
-
           end
 
           private
@@ -41,7 +41,6 @@ module Api
           def set_favorite
             @favorite = @current_user.favorites.find(params[:id])
           end
-
         end
       end
     end
