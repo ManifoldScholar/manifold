@@ -20,8 +20,8 @@ module Api
         return nil unless user && user.id
         serializable = ActiveModelSerializers::SerializableResource.new(user, {})
         {
-          auth_token: AuthToken.encode(user_id: user.id),
-          user: serializable.as_json[:data][:attributes]
+          authToken: AuthToken.encode(user_id: user.id),
+          user: serializable.as_json
         }
       end
 
