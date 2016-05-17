@@ -5,7 +5,6 @@ RSpec.configure do |c|
 end
 
 RSpec.describe "Favorites", type: :request do
-
   def build_authenticated_user_with_favorites
     @user, @headers = create_user_and_authenticate.values_at(:user, :headers)
     @user.save
@@ -32,13 +31,11 @@ RSpec.describe "Favorites", type: :request do
 
   # Index action
   describe "GET /api/v1/me/relationships/favorites" do
-
     context "when there is not an authenticated user" do
       it "responds with a 401 status code" do
         get api_v1_me_relationships_favorites_path
         expect(response).to have_http_status(401)
       end
-
     end
 
     context "when there is an authenticated user" do
@@ -57,12 +54,10 @@ RSpec.describe "Favorites", type: :request do
         expect(@response).to have_http_status(200)
       end
     end
-
   end
 
   # Create action
   describe "POST /api/v1/me/relationships/favorites" do
-
     context "when there is not an authenticated user" do
       it "responds with a 401 status code" do
         post api_v1_me_relationships_favorites_path
@@ -81,22 +76,20 @@ RSpec.describe "Favorites", type: :request do
         expect(@response).to have_http_status(201)
       end
 
-      it "responds with a new favorite" do
+      it "responds with the current user" do
         api_response = JSON.parse(@response.body)
         expect(api_response["data"]["id"].blank?).not_to be_nil
+        expect(api_response["data"]["type"]).to eq "users"
       end
 
-      it "creates a favorite with the correct favoritable" do
-        api_response = JSON.parse(@response.body)
-        expect(api_response["data"]["relationships"]["favoritable"]["data"]["id"]).to eq(@not_favorite_project.id.to_s)
+      it "adds the favorite to the user's favorites" do
+        expect(@user.favorite?(@not_favorite_project)).to be true
       end
     end
-
   end
 
   # Show action
   describe "GET /api/v1/me/relationships/favorites/:id" do
-
     before :each do
       build_authenticated_user_with_favorites
     end
@@ -118,16 +111,13 @@ RSpec.describe "Favorites", type: :request do
         expect(@response).to have_http_status(204)
       end
     end
-
   end
 
   # Destroy action
   describe "DELETE /api/v1/me/relationships/favorites/:id" do
-
     before :each do
       build_authenticated_user_with_favorites
     end
-
 
     context "when there is not an authenticated user" do
       it "responds with a 401 status code" do
@@ -139,17 +129,18 @@ RSpec.describe "Favorites", type: :request do
     context "when there is an authenticated user" do
       before :each do
         build_authenticated_user_with_favorites
-        get api_v1_me_relationships_favorite_path(@favorite), headers: @headers, params: @params
+        delete api_v1_me_relationships_favorite_path(@favorite), headers: @headers, params: @params
         @response = response
       end
 
-      it "responds with a 201 status code" do
-        expect(@response).to have_http_status(200)
+      it "responds with a 204 no content status code" do
+        expect(@response).to have_http_status(204)
+      end
+
+      it "destroys the favorite" do
+        expect(@user.favorite?(@favorite_project)).to be false
       end
 
     end
-
   end
-
-
 end

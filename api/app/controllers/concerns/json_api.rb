@@ -1,3 +1,4 @@
+# Includes JSON API related functionality
 module JsonApi
   extend ActiveSupport::Concern
 
@@ -10,5 +11,4 @@ module JsonApi
   def set_content_type
     response.headers["Content-Type"] = "application/vnd.api+json"
   end
-
 end

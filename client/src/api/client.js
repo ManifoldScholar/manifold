@@ -68,9 +68,12 @@ export class ApiClient {
     if (!response.ok) {
       return Promise.reject({ response });
     }
+    if (response.status === 204) {
+      return { json: null, response };
+    }
     return response.json().then(
       (json) => { return { json, response }; },
-      () => { return Promise.reject({ response }); }
+      () => { console.log('in here zd#2'); return Promise.reject({ response }); }
     );
   };
 

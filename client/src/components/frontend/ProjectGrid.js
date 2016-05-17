@@ -4,7 +4,10 @@ import { ProjectThumb } from './';
 export default class ProjectGrid extends Component {
 
   static propTypes = {
-    projects: PropTypes.array
+    projects: PropTypes.array,
+    authenticated: PropTypes.bool,
+    favorites: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   render() {
@@ -15,7 +18,13 @@ export default class ProjectGrid extends Component {
           {this.props.projects.map((project) => {
             return (
               <li key={project.id} >
-                <ProjectThumb project={project} hideDesc={hideDesc} />
+                <ProjectThumb
+                  authenticated={this.props.authenticated}
+                  favorites={this.props.favorites}
+                  dispatch={this.props.dispatch}
+                  project={project}
+                  hideDesc={hideDesc}
+                />
               </li>
             );
           })}

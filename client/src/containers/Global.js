@@ -36,7 +36,6 @@ class GlobalContainer extends Component {
     }
   }
 
-
   render() {
     const hideSignInUpOverlay = bindActionCreators(
       () => visibilityHide('signInUpOverlay'), this.props.dispatch

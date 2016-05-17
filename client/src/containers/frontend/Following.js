@@ -7,6 +7,7 @@ import { setProjectFilters } from '../../actions/frontend/ui/filters';
 import { request, requests } from '../../actions/shared/entityStore';
 import { select } from '../../utils/entityUtils';
 import projectsAPI from '../../api/projects';
+import get from 'lodash/get';
 
 class FollowingContainer extends Component {
 
@@ -26,7 +27,8 @@ class FollowingContainer extends Component {
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
     projectFilters: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    authentication: PropTypes.object
   };
 
   static contextTypes = {
@@ -74,7 +76,12 @@ class FollowingContainer extends Component {
               </div>
             </header>
             { this.props.filteredProjects ?
-              <ProjectGrid projects={this.props.filteredProjects} /> : null
+              <ProjectGrid
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(this.props.authentication, 'currentUser.favorites')}
+                dispatch={this.props.dispatch}
+                projects={this.props.filteredProjects}
+              /> : null
             }
           </div>
         </section>

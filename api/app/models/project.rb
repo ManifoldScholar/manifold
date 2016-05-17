@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
   belongs_to :published_text, class_name: "Text", optional: true
   has_many :text_categories, -> { for_text }, class_name: "Category"
   has_many :resource_categories, -> { for_resource }, class_name: "Category"
-  has_many :favorites, as: :favoritable
+  has_many :favorites, as: :favoritable, dependent: :destroy
   include Collaborative
 
   has_attached_file :cover,
@@ -36,11 +36,12 @@ class Project < ActiveRecord::Base
   end
 
   def thumbnail_url
-    return ENV["API_DOMAIN"] + cover.url(:thumb) if cover
-    cover_url
+    return nil if cover.url(:thumb).blank?
+    ENV["API_DOMAIN"] + cover.url(:thumb)
   end
 
   def cover_url
-    ENV["API_DOMAIN"] + cover.url if cover
+    return nil if cover.url.blank?
+    ENV["API_DOMAIN"] + cover.url
   end
 end

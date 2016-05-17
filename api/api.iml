@@ -35,6 +35,7 @@
     <orderEntry type="library" scope="PROVIDED" name="ast (v2.2.0, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.11, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.2, rbenv: 2.2.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v1.11.2, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="climate_control (v0.0.3, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cocaine (v0.5.8, rbenv: 2.2.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="colorize (v0.7.7, rbenv: 2.2.3) [gem]" level="application" />

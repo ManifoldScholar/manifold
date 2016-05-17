@@ -2,7 +2,6 @@ require "rails_helper"
 
 # rubocop:disable Metrics/LineLength
 RSpec.describe User, type: :model do
-
   it "has a valid factory" do
     expect(FactoryGirl.build(:user)).to be_valid
   end
@@ -11,6 +10,13 @@ RSpec.describe User, type: :model do
     user = User.new
     2.times { user.favorites.build }
     expect(user.favorites.length).to be 2
+  end
+
+  it "reports whether or not a favoritable is among its favorites" do
+    user = FactoryGirl.create(:user)
+    project = FactoryGirl.create(:project)
+    user.favorite(project)
+    expect(user.favorite?(project)).to be true
   end
 
   it "distinguishes favorite projects from all favorites" do

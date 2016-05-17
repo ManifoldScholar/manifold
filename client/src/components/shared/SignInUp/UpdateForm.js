@@ -87,9 +87,7 @@ class UpdateForm extends Component {
   }
 
   hasAvatar() {
-    if (this.state.removeAvatar === true) return false;
-    if (!this.state.avatar) return false;
-    return true;
+    return this.displayAvatar() ? true : false;
   }
 
   handleRemoveAvatar(event) {
@@ -105,26 +103,26 @@ class UpdateForm extends Component {
   displayAvatar() {
     if (this.state.removeAvatar) return null;
     if (hasIn(this.state, 'avatar.preview')) return this.state.avatar.preview;
-    if (hasIn(this.props, 'authentication.currentUser.avatarUrl')) {
-      return this.props.authentication.currentUser.avatarUrl;
+    if (hasIn(this.props, 'authentication.currentUser.attributes.avatarUrl')) {
+      return this.props.authentication.currentUser.attributes.avatarUrl;
     }
     return null;
   }
 
   displayNickname() {
     if (this.state.nickname) return this.state.nickname;
-    if (hasIn(this.props.authentication, 'currentUser.nickname')) {
-      return this.props.authentication.currentUser.nickname;
+    if (hasIn(this.props.authentication, 'currentUser.attributes.nickname')) {
+      return this.props.authentication.currentUser.attributes.nickname;
     }
-    if (hasIn(this.props.authentication, 'currentUser.firstName')) {
-      return this.props.authentication.currentUser.firstName;
+    if (hasIn(this.props.authentication, 'currentUser.attributes.firstName')) {
+      return this.props.authentication.currentUser.attributes.firstName;
     }
   }
 
   placeholderNickname() {
     if (this.state.nickname) return this.state.nickname;
-    if (hasIn(this.props.authentication, 'currentUser.nickname')) {
-      return this.props.authentication.currentUser.nickname;
+    if (hasIn(this.props.authentication, 'currentUser.attributes.nickname')) {
+      return this.props.authentication.currentUser.attributes.nickname;
     }
     return 'Nickname';
   }
@@ -218,7 +216,6 @@ class UpdateForm extends Component {
         </div>
 
       </form>
-
     );
   }
 }

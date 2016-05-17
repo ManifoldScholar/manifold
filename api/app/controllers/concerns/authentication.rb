@@ -1,6 +1,7 @@
 require "exceptions"
 require "auth_token"
 
+# Includes authentication related functionality
 module Authentication
   extend ActiveSupport::Concern
 
@@ -67,5 +68,4 @@ module Authentication
   def user_not_authenticated
     render json: { errors: ["Not Authenticated"] }, status: :unauthorized
   end
-
 end

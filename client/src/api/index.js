@@ -4,6 +4,7 @@ import tokensAPI from './tokens';
 import usersAPI from './users';
 import sectionsAPI from './sections';
 import meAPI from './me';
+import favoritesAPI from './favorites';
 
 export {
   projectsAPI,
@@ -11,5 +12,6 @@ export {
   tokensAPI,
   usersAPI,
   sectionsAPI,
-  meAPI
+  meAPI,
+  favoritesAPI
 };

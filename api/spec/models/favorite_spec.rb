@@ -1,7 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Favorite, type: :model do
-
   it "has a valid factory" do
     favorite = FactoryGirl.build(:favorite)
     expect(favorite).to be_valid
@@ -30,5 +29,4 @@ RSpec.describe Favorite, type: :model do
                                            favoritable: project, user: user)
     expect(duplicate_favorite).to_not be_valid
   end
-
 end
