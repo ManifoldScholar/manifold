@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import { tokensAPI, meAPI } from '../../api';
+import { tokensAPI, meAPI, favoritesAPI } from '../../api';
 import createApiAction from '../helpers/createApiAction';
 import humps from 'humps';
 import { ApiClient } from '../../api/client';
@@ -46,7 +46,8 @@ export function startLogin(email, password, scope = "signInUp") {
     dispatch(createAction(actions.START_LOGIN)());
     const promise = tokensAPI.createToken(email, password);
     promise.then((response) => {
-      const { authToken, user } = response;
+      const authToken = response.meta.authToken;
+      const user = response.data;
       if (!authToken) {
         dispatch({ type: 'SET_AUTH_ERROR', payload: generateErrorPayload(500) });
         return;
@@ -78,8 +79,38 @@ export function startLogout() {
   };
 }
 
-export const follow = createAction(actions.FOLLOW);
-export const unfollow = createAction(actions.UNFOLLOW);
+export const follow = (target) => {
+  return createAction(actions.FOLLOW, (dispatch, getState) => {
+    const client = new ApiClient;
+    const token = getState().authentication.authToken;
+    const { endpoint, method, options } = favoritesAPI.create(target);
+    options.authToken = token;
+    const promise = client.call(endpoint, method, options);
+    dispatch(createAction(actions.FOLLOW)(promise));
+  });
+};
+
+export const unfollow = (favoritableId, favoriteId) => {
+  return createAction(actions.UNFOLLOW, (dispatch, getState) => {
+    const client = new ApiClient;
+    const token = getState().authentication.authToken;
+    const { endpoint, method, options } = favoritesAPI.destroy(favoriteId);
+    options.authToken = token;
+    const promise = new Promise((resolve, reject) => {
+      client.call(endpoint, method, options).then(
+        () => {
+          resolve(favoritableId);
+        },
+        (response) => {
+          reject(response);
+        }
+      );
+
+    });
+    dispatch(createAction(actions.UNFOLLOW)(promise));
+  });
+};
+
 export const setAuthToken = createAction(actions.SET_AUTH_TOKEN);
 
 export default {

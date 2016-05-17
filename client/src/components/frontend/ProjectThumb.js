@@ -1,13 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { ProjectThumbPlaceholder } from './';
+import { ProjectThumbPlaceholder, Follow } from './';
 
 export default class ProjectThumb extends Component {
   static propTypes = {
     project: PropTypes.object,
     hideMeta: PropTypes.bool,
     hideDate: PropTypes.bool,
-    hideDesc: PropTypes.bool
+    hideDesc: PropTypes.bool,
+    authenticated: PropTypes.bool,
+    favorites: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   static defaultProps = {
@@ -28,34 +31,6 @@ export default class ProjectThumb extends Component {
     }
 
     return cover;
-  }
-
-  // Renders a follow widget (currently shows either "Follow" or "Following")
-  renderFollow() {
-    // Set following to true to see "Following/Unfollow" widget
-    // NB: This behavior will need to be more complex in the future, such that
-    // clicking the follow button will change its state (and trigger an action)
-    // but not actually swap the buttons until the user has hovered out of
-    // the element.
-    const following = false;
-    let widget = (
-      <div className="follow-button">
-        <i className="manicon manicon-plus-bold"></i>
-        <span className="follow-text">{'Follow'}</span>
-      </div>
-    );
-
-    if (following) {
-      widget = (
-        <div className="followed-button">
-          <i className="manicon manicon-minus-bold"></i>
-          <i className="manicon manicon-check-bold"></i>
-          <span className="follow-text">{'Unfollow'}</span>
-        </div>
-      );
-    }
-
-    return widget;
   }
 
   render() {
@@ -116,7 +91,12 @@ export default class ProjectThumb extends Component {
         <div className="figure-wrapper">
           <figure>
             {cover}
-            {this.renderFollow()}
+            <Follow
+              project={project}
+              authenticated={this.props.authenticated}
+              favorites={this.props.favorites}
+              dispatch={this.props.dispatch}
+            />
           </figure>
         </div>
         {projectMeta}

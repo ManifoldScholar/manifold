@@ -14,7 +14,7 @@ export default {
       endpoint: '/api/v1/me',
       method: 'PUT',
       options: {
-        body: JSON.stringify({ type: "user", data: { attributes: me } })
+        body: JSON.stringify({ data: { type: "user", attributes: me } })
       }
     };
   }

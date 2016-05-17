@@ -87,9 +87,7 @@ class UpdateForm extends Component {
   }
 
   hasAvatar() {
-    if (this.state.removeAvatar === true) return false;
-    if (!this.state.avatar) return false;
-    return true;
+    return this.displayAvatar() ? true : false;
   }
 
   handleRemoveAvatar(event) {
@@ -218,7 +216,6 @@ class UpdateForm extends Component {
         </div>
 
       </form>
-
     );
   }
 }

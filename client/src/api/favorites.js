@@ -1,22 +1,32 @@
 export default {
 
-  create() {
+  // favoritable arg is { type: 'type', id: 1 }
+  create(favoritable) {
     return {
-      endpoint: '/api/v1/me',
-      method: 'GET',
+      endpoint: '/api/v1/me/relationships/favorites',
+      method: 'POST',
       options: {
+        params: {
+          data: {
+            type: "favorites",
+            relationships: {
+              favoritable: {
+                data: favoritable
+              }
+            }
+          }
+        }
       }
     };
   },
 
-  update(me) {
+  destroy(favoriteId) {
     return {
-      endpoint: '/api/v1/me',
-      method: 'PUT',
-      options: {
-        body: JSON.stringify({ type: "user", data: { attributes: me } })
-      }
+      endpoint: `/api/v1/me/relationships/favorites/${favoriteId}`,
+      method: 'DELETE',
+      options: {}
     };
   }
+
 
 };

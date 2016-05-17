@@ -7,6 +7,7 @@ import { Link } from 'react-router';
 import { request, flush, requests } from '../../actions/shared/entityStore';
 import { select } from '../../utils/entityUtils';
 import projectsAPI from '../../api/projects';
+import get from 'lodash/get';
 
 class HomeContainer extends Component {
 
@@ -25,20 +26,18 @@ class HomeContainer extends Component {
     return {
       projectFilters: state.ui.filters.project,
       filteredProjects: select(requests.browseFilteredProjects, state.entityStore),
-      featuredProjects: select(requests.browseFeaturedProjects, state.entityStore)
+      featuredProjects: select(requests.browseFeaturedProjects, state.entityStore),
+      authentication: state.authentication
     };
   }
 
   static propTypes = {
+    authentication: PropTypes.object,
     children: PropTypes.object,
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
     projectFilters: PropTypes.object,
     dispatch: PropTypes.func
-  };
-
-  static contextTypes = {
-    store: PropTypes.object.isRequired
   };
 
   componentDidMount() {
@@ -73,7 +72,13 @@ class HomeContainer extends Component {
               </h4>
             </header>
             { this.props.featuredProjects ?
-              <ProjectCovers projects={this.props.featuredProjects} /> : null
+              <ProjectCovers
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(this.props.authentication, 'currentUser.favorites')}
+                dispatch={this.props.dispatch}
+                projects={this.props.featuredProjects}
+                dispatch={this.props.dispatch}
+              /> : null
             }
           </div>
         </section>
@@ -94,7 +99,12 @@ class HomeContainer extends Component {
               updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
             />
             { this.props.filteredProjects ?
-              <ProjectGrid projects={this.props.filteredProjects} /> : null
+              <ProjectGrid
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(this.props.authentication, 'currentUser.favorites')}
+                dispatch={this.props.dispatch}
+                projects={this.props.filteredProjects}
+              /> : null
             }
           </div>
         </section>

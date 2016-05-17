@@ -4,7 +4,10 @@ import { ProjectThumb } from './';
 export default class ProjectCovers extends Component {
 
   static propTypes = {
-    projects: PropTypes.array
+    authenticated: PropTypes.bool,
+    favorites: PropTypes.object,
+    projects: PropTypes.array,
+    dispatch: PropTypes.func
   };
 
   render() {
@@ -16,8 +19,11 @@ export default class ProjectCovers extends Component {
             return (
               <li key={project.id}>
                 <ProjectThumb
+                  authenticated={this.props.authenticated}
+                  favorites={this.props.favorites}
                   project={project}
                   hideMeta={hideMeta}
+                  dispatch={this.props.dispatch}
                 />
               </li>
             );
