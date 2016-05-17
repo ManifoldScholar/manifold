@@ -12,6 +12,13 @@ RSpec.describe User, type: :model do
     expect(user.favorites.length).to be 2
   end
 
+  it "reports whether or not a favoritable is among its favorites" do
+    user = FactoryGirl.create(:user)
+    project = FactoryGirl.create(:project)
+    user.favorite(project)
+    expect(user.favorite?(project)).to be true
+  end
+
   it "distinguishes favorite projects from all favorites" do
     user = FactoryGirl.create(:user)
     project = FactoryGirl.create(:project)

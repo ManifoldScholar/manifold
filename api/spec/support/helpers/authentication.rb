@@ -5,7 +5,7 @@ module Helpers
     token = ""
     if response.success?
       parsed = JSON.parse(response.body)
-      token = parsed["authToken"]
+      token = parsed["meta"]["authToken"]
     end
     headers = {
       "Authorization": "Bearer #{token}"
