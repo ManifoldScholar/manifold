@@ -19,9 +19,10 @@ module Api
             attributes = polymorphic_relationship_from(favorite_params, "favoritable")
             @favorite = @current_user.favorites.create(attributes)
             if @favorite.save
-              render json: @favorite,
+              render json: @current_user,
+                     include: %w(favorites),
                      status: :created,
-                     location: [:api, :v1, :me, :relationships, @favorite]
+                     location: [:api, :v1, :me]
             else
               render json: @favorite.errors, status: :unprocessable_entity
             end
@@ -34,6 +35,7 @@ module Api
 
           # Destroy a favorite by ID
           def destroy
+            @favorite.destroy
           end
 
           private

@@ -6,7 +6,7 @@ module Api
 
       def show
         if @current_user
-          render json: @current_user
+          render json: @current_user, include: %w(favorites)
         else
           render status: :unauthorized
         end

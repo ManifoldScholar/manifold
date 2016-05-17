@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
     favorites.create(favoritable: favoritable)
   end
 
+  def favorite?(favoritable)
+    favorites.where(favoritable_id: favoritable.id).count > 0
+  end
+
   def favorite_projects
     favorites.only_projects.includes(:favoritable).map(&:favoritable)
   end

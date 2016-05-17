@@ -8,22 +8,15 @@ module Api
         authenticated_user = User.find_by(email: token_params[:email])
                                  .try(:authenticate, token_params[:password])
         if authenticated_user
-          render json: authentication_payload(authenticated_user)
+          render json: authenticated_user,
+                 meta: { authToken: AuthToken.encode(user_id: authenticated_user.id) },
+                 include: %w(favorites)
         else
           render json: { errors: ["Invalid username or password"] }, status: :unauthorized
         end
       end
 
       private
-
-      def authentication_payload(user)
-        return nil unless user && user.id
-        serializable = ActiveModelSerializers::SerializableResource.new(user, {})
-        {
-          authToken: AuthToken.encode(user_id: user.id),
-          user: serializable.as_json
-        }
-      end
 
       def token_params
         params.permit(:email, :password)
