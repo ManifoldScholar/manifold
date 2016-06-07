@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Tokens", type: :request do
+RSpec.describe "api/v1/tokens", type: :request do
   describe "POST /api/v1/tokens" do
 
     def create_token

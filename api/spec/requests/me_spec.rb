@@ -4,7 +4,7 @@ RSpec.configure do |c|
   c.include Helpers
 end
 
-RSpec.describe "Me", type: :request do
+RSpec.describe "api/v1/me", type: :request do
   def build_authenticated_user
     @user, @headers = create_user_and_authenticate.values_at(:user, :headers)
     @user.save

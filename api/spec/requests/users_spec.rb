@@ -4,7 +4,7 @@ RSpec.configure do |c|
   c.include Helpers
 end
 
-RSpec.describe "User", type: :request do
+RSpec.describe "api/v1/users", type: :request do
   describe "POST /api/v1/users" do
     it "creates a new user" do
       params = {
