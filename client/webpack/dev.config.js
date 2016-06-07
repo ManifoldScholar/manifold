@@ -21,7 +21,7 @@ var babelLoaderQuery = Object.assign({}, babelrcObject, babelrcObjectDevelopment
 delete babelLoaderQuery.env;
 
 module.exports = {
-  devtool: 'eval',
+  devtool: "source-map",
   context: path.resolve(__dirname, '..'),
   entry: {
     'main': [
