@@ -76,10 +76,6 @@ class ReaderContainer extends Component {
     notifications: PropTypes.object
   };
 
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
-
   constructor() {
     super();
     this.counter = 0;
