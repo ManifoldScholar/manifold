@@ -87,11 +87,17 @@ export default class Footer extends Component {
               </div>
             </form>
             <p className="colophon">
-              {'Search © 2016 Manifold. Vestibulum id ligula porta felis '}
-              <Link to="{#}">
-                {'euismod semper'}
-              </Link>
-              {'. Vivamus sagittis lacus vel.Twitter'}
+              {'© 2015-2016 University of Minnesota Press.'}
+              <br />
+              {`Manifold is released under the `}
+              <a href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md">
+                GNU General Public License v3
+              </a>
+              { `. Download and contribute to `}
+              <a href="https://github.com/ManifoldScholar/manifold">Manifold</a>
+              {
+                ` on github.`
+              }
             </p>
           </section>
         </div>
