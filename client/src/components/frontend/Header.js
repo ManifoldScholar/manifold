@@ -70,11 +70,13 @@ export default class Header extends Component {
                     {'Projects'}
                   </Link>
                 </li>
-                <li className={active === 'following' ? 'active' : ''}>
-                  <Link to={`/browse/following/`}>
-                    {'Following'}
-                  </Link>
-                </li>
+                { this.props.authentication.authenticated ?
+                  <li className={active === 'following' ? 'active' : ''}>
+                    <Link to={`/browse/following/`}>
+                      {'Following'}
+                    </Link>
+                  </li> : null
+                }
                 <li className={active === 'dev' ? 'active' : ''}>
                   <Link to={`/dev`}>
                     {'Dev'}
