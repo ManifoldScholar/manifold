@@ -126,9 +126,9 @@ class ReaderContainer extends Component {
   renderStyles = () => {
     return values(this.props.text.relationships.stylesheets).map((stylesheet, index) => {
       return (
-          <style key={index}>
-            {stylesheet.attributes.styles}
-          </style>
+        <style key={index}>
+          {stylesheet.attributes.styles}
+        </style>
       );
     });
   };
@@ -137,41 +137,41 @@ class ReaderContainer extends Component {
     if (!this.props.text || !this.props.section) return null;
 
     const hideLoginOverlay = bindActionCreators(
-        () => visibilityHide('loginOverlay'),
-        this.props.dispatch
+      () => visibilityHide('loginOverlay'),
+      this.props.dispatch
     );
 
     const section = this.props.children &&
-        React.cloneElement(this.props.children, { ...this.props });
+      React.cloneElement(this.props.children, { ...this.props });
 
     return (
-        <HigherOrder.BodyClass className="reader">
-          <div>
-            {this.renderStyles()}
-            <HigherOrder.ScrollAware>
-              {/* Header inside scroll-aware HOC */}
-              <Header
-                  // Props required by body component
-                  text={this.props.text}
-                  section={this.props.section}
-                  authentication={this.props.authentication}
-                  visibility={this.props.visibility }
-                  appearance={this.props.appearance}
-                  notifications={this.props.notifications}
-                  {...this.headerMethods()}
-              />
-            </HigherOrder.ScrollAware>
-            <main>
-              {section}
-              <Section.Pagination
-                  textId={this.props.text.id}
-                  sectionId={this.props.section.id}
-                  textSections={this.props.text.relationships.textSections}
-              />
-            </main>
-            <Footer />
-          </div>
-        </HigherOrder.BodyClass>
+      <HigherOrder.BodyClass className="reader">
+        <div>
+          {this.renderStyles()}
+          <HigherOrder.ScrollAware>
+            {/* Header inside scroll-aware HOC */}
+            <Header
+              // Props required by body component
+              text={this.props.text}
+              section={this.props.section}
+              authentication={this.props.authentication}
+              visibility={this.props.visibility }
+              appearance={this.props.appearance}
+              notifications={this.props.notifications}
+              {...this.headerMethods()}
+            />
+          </HigherOrder.ScrollAware>
+          <main>
+            {section}
+            <Section.Pagination
+              textId={this.props.text.id}
+              sectionId={this.props.section.id}
+              textSections={this.props.text.relationships.textSections}
+            />
+          </main>
+          <Footer />
+        </div>
+      </HigherOrder.BodyClass>
     );
   }
 }
