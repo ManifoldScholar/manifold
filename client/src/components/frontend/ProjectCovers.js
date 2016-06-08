@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ProjectThumb } from './';
+import { ProjectThumb } from 'components/frontend';
 
 export default class ProjectCovers extends Component {
 

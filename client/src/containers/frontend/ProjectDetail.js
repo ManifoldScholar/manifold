@@ -9,14 +9,14 @@ import {
   GroupedTexts,
   MetaAttributes,
   ProjectDetailHero
-} from '../../components/frontend';
-import {
-  visibilityShow
-} from '../../actions/shared/ui/visibility';
-import { request, flush, requests } from '../../actions/shared/entityStore';
-import { select } from '../../utils/entityUtils';
-import projectsAPI from '../../api/projects';
+} from 'components/frontend';
+import { uiVisibilityActions, entityStoreActions } from 'actions';
+import { entityUtils } from 'utils';
+import { projectsAPI } from 'api';
 
+const { select } = entityUtils;
+const { visibilityShow } = uiVisibilityActions;
+const { request, flush, requests } = entityStoreActions;
 
 class ProjectDetailContainer extends Component {
 

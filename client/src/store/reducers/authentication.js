@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
-import { requests } from '../../actions/shared/entityStore';
+import { entityStoreActions } from 'actions';
 
+const { requests } = entityStoreActions;
 const initialState = {
   authenticated: false,
   authenticating: false,

@@ -1,7 +1,6 @@
-'create index';
-
-export developer from './developer';
-export frontend from './frontend';
-export reader from './reader';
-export shared from './shared';
+export Developer from './Developer';
+export Global from './Global';
+export Frontend from './Frontend';
+export Reader from './Reader';
+export Shared from './Shared';
 

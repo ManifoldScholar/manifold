@@ -1,13 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { ProjectCovers, ProjectGrid, ProjectFilters } from '../../components/frontend';
+import { ProjectCovers, ProjectGrid, ProjectFilters } from 'components/frontend';
 import { bindActionCreators } from 'redux';
-import { setProjectFilters } from '../../actions/frontend/ui/filters';
 import { Link } from 'react-router';
-import { request, flush, requests } from '../../actions/shared/entityStore';
-import { select } from '../../utils/entityUtils';
-import projectsAPI from '../../api/projects';
+import { uiFilterActions, entityStoreActions } from 'actions';
+import { entityUtils } from 'utils';
+import { projectsAPI } from 'api';
 import get from 'lodash/get';
+
+const { select } = entityUtils;
+const { setProjectFilters } = uiFilterActions;
+const { request, flush, requests } = entityStoreActions;
 
 class HomeContainer extends Component {
 

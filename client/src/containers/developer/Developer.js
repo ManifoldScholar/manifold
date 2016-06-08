@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { request, requests, flush } from '../../actions/shared/entityStore';
-import projectsAPI from '../../api/projects';
-import textsAPI from '../../api/texts';
-import { select } from '../../utils/entityUtils';
+import { entityStoreActions } from 'actions';
+import { projectsAPI, textsAPI } from 'api';
+import { entityUtils } from 'utils';
 import JSONTree from 'react-json-tree';
 import { Link } from 'react-router';
+
+const { request, requests, flush } = entityStoreActions;
+const { select } = entityUtils;
 
 class DeveloperContainer extends Component {
 
