@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Toc } from 'components/reader';
+import { Toc } from './';
 import classNames from 'classnames';
 
 export default class TocDrawer extends Component {

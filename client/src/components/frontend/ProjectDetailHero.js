@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { MakerFigure } from 'components/frontend';
+import { MakerFigure } from './';
 import { Link } from 'react-router';
 
 export default class ProjectDetailHero extends Component {

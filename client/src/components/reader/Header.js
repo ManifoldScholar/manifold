@@ -1,10 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {
-  AppearanceMenuButton,
-  AppearanceMenuBody,
-  TextTitles,
-  TocDrawer
-} from 'components/reader';
+import { AppearanceMenuButton, AppearanceMenuBody, TextTitles, TocDrawer } from './';
 import {
   HeaderNotifications,
   SearchMenuButton,
@@ -12,7 +7,7 @@ import {
   UIPanel,
   UserMenuButton,
   UserMenuBody
-} from 'components/global';
+} from '../../components/shared';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 

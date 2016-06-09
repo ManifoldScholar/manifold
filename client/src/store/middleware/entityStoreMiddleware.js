@@ -1,4 +1,4 @@
-import { ApiClient } from 'api';
+import { ApiClient } from '../../api/client';
 
 function sendRequest(request, authToken) {
   const client = new ApiClient;

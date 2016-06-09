@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { ProjectCovers } from 'components/frontend';
+import { ProjectCovers } from './';
+// import {Link} from 'react-router';
 
 export default class RecentProjects extends Component {
 

@@ -49,21 +49,26 @@ export default class Footer extends Component {
                     </a>
                   </li>
                   <li>
-                    <Link to={`/contact`}>
+                    <a href="#">
                       {'Contact'}
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </li>
               <li>
                 <ul>
                   <li>
-                    <a target="_blank" href="http://twitter.com/manifoldscholar">
+                    <a href="#">
                       {'Twitter'}
                     </a>
                   </li>
                   <li>
-                    <a mailto="webbook@umn.edu">
+                    <a href="#">
+                      {'Facebook'}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
                       {'Email'}
                     </a>
                   </li>

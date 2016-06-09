@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { ProjectThumbPlaceholder, Follow } from 'components/frontend';
+import { ProjectThumbPlaceholder, Follow } from './';
 
 export default class ProjectThumb extends Component {
   static propTypes = {

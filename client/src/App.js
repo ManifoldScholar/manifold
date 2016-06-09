@@ -1,15 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import createStore from 'store/createStore';
+import createStore from './store/createStore';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { HigherOrder } from 'components/global';
+import { HigherOrder } from './components/shared';
 import { Provider } from 'react-redux';
-import getRoutes from 'routes';
-import { DevTools } from 'containers/Developer';
-import { authActions } from 'actions';
-import { Manifold } from 'containers/Global';
-
-const { getCurrentUser } = authActions;
+import getRoutes from './routes';
+import { DevTools } from './containers/shared';
+import { getCurrentUser } from './actions/shared/authentication';
+import Global from './containers/Global';
 
 export default class App extends Component {
 
@@ -87,10 +85,10 @@ export default class App extends Component {
 
     return (
       <Provider store={this.store} key="provider">
-        <Manifold>
+        <Global>
           {this.router()}
           {devTools}
-        </Manifold>
+        </Global>
       </Provider>
     );
   }

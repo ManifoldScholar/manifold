@@ -1,5 +1,4 @@
-// export AnnotationTools from './section/AnnotationTools';
-export Section from './Section';
+export AnnotationTools from './section/AnnotationTools';
 export AppearanceMenuBody from './AppearanceMenuBody';
 export AppearanceMenuButton from './AppearanceMenuButton';
 export Footer from './Footer';
@@ -8,3 +7,4 @@ export StaticTextSample from './StaticTextSample';
 export TextTitles from './TextTitles';
 export Toc from './Toc';
 export TocDrawer from './TocDrawer';
+export Section from './Section';

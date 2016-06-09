@@ -1,11 +1,13 @@
 import React from 'react';
 import { Route, IndexRedirect, IndexRoute } from 'react-router';
-import { Frontend, Home, Login, Following, ProjectDetail } from 'containers/Frontend';
-import { Developer } from 'containers/Developer';
-import { Reader } from 'containers/Reader';
-import { NotFound } from './containers/Global';
-import { Section, AnnotationTools } from 'components/reader';
+import { Reader } from './containers/reader';
+import Section from './components/reader/Section';
+import AnnotationTools from './components/reader';
+
+import { Frontend, Home, Following, ProjectDetail, Login } from './containers/frontend';
+import { Developer } from './containers/developer';
 import { FormsStatic } from './components/frontend';
+import { NotFound } from './containers/shared';
 
 export default () => {
   return (

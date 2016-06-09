@@ -7,7 +7,7 @@ import {
     UIPanel,
     UserMenuBody,
     UserMenuButton
-} from 'components/global';
+} from '../../components/shared';
 import { Link } from 'react-router';
 import startsWith from 'lodash/startsWith';
 

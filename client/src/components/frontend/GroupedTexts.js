@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { TextThumb } from 'components/frontend';
+import { TextThumb } from './';
 
 export default class GroupedTexts extends Component {
 

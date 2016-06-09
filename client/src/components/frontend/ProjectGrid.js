@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ProjectThumb } from 'components/frontend';
+import { ProjectThumb } from './';
 
 export default class ProjectGrid extends Component {
 
