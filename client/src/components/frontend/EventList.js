@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ProjectEvent } from '../../components/frontend';
-
+import { ProjectEvent } from 'components/frontend';
 
 export default class EventList extends Component {
 

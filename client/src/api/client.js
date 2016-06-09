@@ -1,4 +1,3 @@
-import config from '../config';
 import qs from 'qs';
 import isPlainObject from 'lodash/isPlainObject';
 
@@ -50,7 +49,7 @@ export class LowLevelApiClient {
   }
 }
 
-export class ApiClient {
+export default class ApiClient {
 
   constructor() {
     this.client = new LowLevelApiClient();

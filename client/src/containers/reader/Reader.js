@@ -1,28 +1,29 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import config from '../../config';
 import { browserHistory } from 'react-router';
-import DocumentMeta from 'react-document-meta';
-import { HigherOrder, LoginOverlay, LoadingBar } from '../../components/shared';
-import { Header, Footer, Section } from '../../components/reader';
-import { startLogout } from '../../actions/shared/authentication';
-import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide }
-    from '../../actions/shared/ui/visibility';
+import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
+import { Header, Footer, Section } from 'components/reader';
 import {
-    selectFont,
-    incrementFontSize,
-    decrementFontSize,
-    incrementMargins,
-    decrementMargins
-} from '../../actions/reader/ui/typography';
-import {
-    addNotification,
-    removeNotification,
-    removeAllNotifications
-} from '../../actions/shared/notifications';
-import { setColorScheme } from '../../actions/reader/ui/colors';
-import { request, requests, flush } from '../../actions/shared/entityStore';
+  authActions,
+  uiColorActions,
+  uiVisibilityActions,
+  uiTypographyActions,
+  notificationActions,
+  entityStoreActions
+} from 'actions';
+
+const { startLogout } = authActions;
+const { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide } =
+  uiVisibilityActions;
+const { selectFont, incrementFontSize, decrementFontSize, incrementMargins,
+  decrementMargins } = uiTypographyActions;
+const { addNotification, removeNotification, removeAllNotifications } =
+  notificationActions;
+const { setColorScheme } = uiColorActions;
+const { request, requests, flush } = entityStoreActions;
+
+
 import textsAPI from '../../api/texts';
 import sectionsAPI from '../../api/sections';
 import { select } from '../../utils/entityUtils';

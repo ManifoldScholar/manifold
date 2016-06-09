@@ -12,14 +12,14 @@ global.__DISABLE_SSR__ = false;  // <----- DISABLES SERVER SIDE RENDERING FOR ER
 global.__DEVELOPMENT__ = process.env.NODE_ENV !== 'production';
 global.__MANIFOLD_API_URL__ = process.env.MANIFOLD_API_URL;
 
-if (__DEVELOPMENT__) {
- if (!require('piping')({
-     hook: true,
-     ignore: /(\/\.|~$|\.json|\.scss$)/i
-   })) {
-   return;
- }
-}
+// if (__DEVELOPMENT__) {
+//  if (!require('piping')({
+//      hook: true,
+//      ignore: /(\/\.|~$|\.json|\.scss$)/i
+//    })) {
+//    return;
+//  }
+// }
 
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../webpack/webpack-isomorphic-tools'))

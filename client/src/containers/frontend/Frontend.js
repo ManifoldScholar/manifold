@@ -1,13 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { HigherOrder } from '../../components/shared';
-import { Header, Footer } from '../../components/frontend';
-import { startLogout } from '../../actions/shared/authentication';
-import { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide }
-  from '../../actions/shared/ui/visibility';
-import { addNotification, removeNotification, removeAllNotifications }
-  from '../../actions/shared/notifications';
+import { HigherOrder } from 'components/global';
+import { Header, Footer } from 'components/frontend';
+import { authActions, uiVisibilityActions, notificationActions } from 'actions';
+
+const { startLogout } = authActions;
+const {
+  visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide
+} = uiVisibilityActions;
+const {
+  addNotification, removeNotification, removeAllNotifications
+} = notificationActions;
 
 class FrontendContainer extends Component {
 
