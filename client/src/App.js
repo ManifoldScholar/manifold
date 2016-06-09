@@ -5,9 +5,9 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { HigherOrder } from 'components/global';
 import { Provider } from 'react-redux';
 import getRoutes from 'routes';
-import { DevTools } from 'containers/Developer';
+import { DevTools } from 'containers/developer';
 import { authActions } from 'actions';
-import { Manifold } from 'containers/Global';
+import { Manifold } from 'containers/global';
 
 const { getCurrentUser } = authActions;
 

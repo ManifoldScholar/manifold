@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { LoginForm } from 'containers/Global';
+import { LoginForm } from 'containers/global';
 import { authActions } from 'actions';
 
 const { startLogout } = authActions;

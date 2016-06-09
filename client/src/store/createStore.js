@@ -1,7 +1,7 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from './middleware/thunkMiddleware';
 import entityStoreMiddleware from './middleware/entityStoreMiddleware';
-import { DevTools } from 'containers/Developer';
+import { DevTools } from 'containers/developer';
 import promiseMiddleware from 'redux-promise';
 import reducers from './reducers';
 
