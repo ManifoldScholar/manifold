@@ -25,7 +25,7 @@ module.exports = function (config) {
       'tests.webpack.js'
     ],
     browsers: ['PhantomJS'],
-    singleRun: false,
+    singleRun: true,
     preprocessors: {
       'tests.webpack.js': [ 'webpack', 'sourcemap' ]
     },
