@@ -37,7 +37,7 @@ export default class ProjectEvent extends Component {
             </p>
           </div>
           <Link to="#" className="event-user">
-            {event.user.display_name}
+            {event.user.displayName}
           </Link>
           {/* TODO: Include machine readable date-time */}
           <datetime className="event-date">
