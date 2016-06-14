@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { RouterContext } from 'react-router';
 import { isFunction } from 'lodash';
+import { connect } from 'react-redux';
 
-export default class ResolveDataDependencies extends Component {
+class ResolveDataDependenciesComponent extends Component {
 
   static propTypes = {
-    components: PropTypes.array
+    components: PropTypes.array,
+    authentication: PropTypes.object
   };
 
   static contextTypes = {
@@ -15,6 +17,12 @@ export default class ResolveDataDependencies extends Component {
   constructor(props, context) {
     super(props, context);
     this.createElement = this.createElement.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (this.props.components !== nextProps.components) return true;
+    if (this.props.authenticated !== nextProps.authenticated) return true;
+    return false;
   }
 
   createElement(ComponentClass, props) {
@@ -43,3 +51,15 @@ export default class ResolveDataDependencies extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.authentication.authenticated
+  };
+}
+
+const ResolveDataDependencies = connect(
+  mapStateToProps
+)(ResolveDataDependenciesComponent);
+
+export default ResolveDataDependencies;

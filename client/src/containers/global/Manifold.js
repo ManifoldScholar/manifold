@@ -6,7 +6,7 @@ import { SignInUp, LoadingBar } from 'components/global';
 import config from '../../config';
 import get from 'lodash/get';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { uiVisibilityActions } from 'actions';
+import { notificationActions, uiVisibilityActions } from 'actions';
 
 const { visibilityHide } = uiVisibilityActions;
 
@@ -34,10 +34,29 @@ class ManifoldContainer extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    // We reload the page on logout, to ensure that all data is cleared from the store.
-    if (nextProps.authentication.authenticated === false &&
-      this.props.authentication.authenticated === true) {
-      location.reload();
+    this.createLoginNotificationIfNeeded(this.props.authentication, nextProps.authentication);
+  }
+
+  createLoginNotificationIfNeeded(auth, nextAuth) {
+    if (auth.authenticated !== nextAuth.authenticated) {
+      let notification;
+      if (nextAuth.authenticated === true) {
+        notification = {
+          level: 0,
+          id: 'AUTHENTICATION_STATE_CHANGE',
+          heading: "You have logged in successfully"
+        };
+      } else {
+        notification = {
+          level: 0,
+          id: 'AUTHENTICATION_STATE_CHANGE',
+          heading: "You have logged out successfully"
+        };
+      }
+      this.props.dispatch(notificationActions.addNotification(notification));
+      setTimeout(() => {
+        this.props.dispatch(notificationActions.removeNotification(notification.id));
+      }, 5000);
     }
   }
 
