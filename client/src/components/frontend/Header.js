@@ -18,35 +18,8 @@ export default class Header extends Component {
     location: PropTypes.object,
     authentication: PropTypes.object,
     notifications: PropTypes.object,
-    visibilityToggle: PropTypes.func,
-    visibilityHide: PropTypes.func,
-    visibilityShow: PropTypes.func,
-    panelToggle: PropTypes.func,
-    panelHide: PropTypes.func,
-    addNotification: PropTypes.func,
-    removeNotification: PropTypes.func,
-    removeAllNotifications: PropTypes.func,
-    startLogout: PropTypes.func
+    commonActions: PropTypes.object
   };
-
-  constructor() {
-    super();
-    this.toggleSearchPanel = this.toggleSearchPanel.bind(this);
-    this.toggleUserPanel = this.toggleUserPanel.bind(this);
-    this.showSignInUpOverlay = this.showSignInUpOverlay.bind(this);
-  }
-
-  toggleSearchPanel() {
-    this.props.panelToggle('search');
-  }
-
-  toggleUserPanel() {
-    this.props.panelToggle('user');
-  }
-
-  showSignInUpOverlay() {
-    this.props.visibilityShow('signInUpOverlay');
-  }
 
   render() {
     const path = this.props.location.pathname;
@@ -89,7 +62,7 @@ export default class Header extends Component {
               <ul>
                 <li>
                   <SearchMenuButton
-                    toggleSearchMenu={this.toggleSearchPanel}
+                    toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
                     active={this.props.visibility.uiPanels.search}
                   />
                   <UIPanel
@@ -102,16 +75,16 @@ export default class Header extends Component {
                   <UserMenuButton
                     authentication={this.props.authentication}
                     active={this.props.visibility.uiPanels.user}
-                    showLoginOverlay={this.showSignInUpOverlay}
-                    toggleUserMenu={this.toggleUserPanel}
+                    showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
+                    toggleUserMenu={this.props.commonActions.toggleUserPanel}
                   />
                   <UIPanel
                     id="user"
                     visibility={this.props.visibility.uiPanels}
                     bodyComponent={UserMenuBody}
-                    showLoginOverlay={this.showSignInUpOverlay}
-                    startLogout={this.props.startLogout}
-                    hideUserMenu={this.toggleUserPanel}
+                    showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
+                    startLogout={this.props.commonActions.logout}
+                    hideUserMenu={this.props.commonActions.toggleUserPanel}
                   />
                 </li>
               </ul>
@@ -122,9 +95,9 @@ export default class Header extends Component {
 
           <HeaderNotifications
             notifications={this.props.notifications}
-            addNotification={this.props.addNotification}
-            removeNotification={this.props.removeNotification}
-            removeAllNotifications={this.props.removeAllNotifications}
+            addNotification={this.props.commonActions.addNotification}
+            removeNotification={this.props.commonActions.removeNotification}
+            removeAllNotifications={this.props.commonActions.clearNotifications}
           />
         </header>
       </HigherOrder.ScrollAware>

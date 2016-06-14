@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
 import { Header, Footer, Section } from 'components/reader';
+import { commonActions } from 'actions/helpers';
+import textsAPI from '../../api/texts';
+import sectionsAPI from '../../api/sections';
+import { select } from '../../utils/entityUtils';
+import values from 'lodash/values';
 import {
   authActions,
   uiColorActions,
@@ -13,21 +18,17 @@ import {
   entityStoreActions
 } from 'actions';
 
-const { startLogout } = authActions;
-const { visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide } =
-  uiVisibilityActions;
-const { selectFont, incrementFontSize, decrementFontSize, incrementMargins,
-  decrementMargins } = uiTypographyActions;
-const { addNotification, removeNotification, removeAllNotifications } =
-  notificationActions;
+const { visibilityHide } = uiVisibilityActions;
+const {
+  selectFont,
+  incrementFontSize,
+  decrementFontSize,
+  incrementMargins,
+  decrementMargins
+} = uiTypographyActions;
 const { setColorScheme } = uiColorActions;
 const { request, requests, flush } = entityStoreActions;
 
-
-import textsAPI from '../../api/texts';
-import sectionsAPI from '../../api/sections';
-import { select } from '../../utils/entityUtils';
-import values from 'lodash/values';
 
 class ReaderContainer extends Component {
 
@@ -85,6 +86,8 @@ class ReaderContainer extends Component {
 
   componentWillMount() {
     this.maybeRedirect(this.props);
+    this.readerActions = this.makeReaderActions(this.props.dispatch);
+    this.commonActions = commonActions(this.props.dispatch);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -103,24 +106,15 @@ class ReaderContainer extends Component {
     }
   }
 
-  headerMethods = () => {
-    const bac = bindActionCreators;
+  makeReaderActions = (dispatch) => {
+    const b = bindActionCreators;
     return {
-      visibilityToggle: bac((el) => visibilityToggle(el), this.props.dispatch),
-      visibilityHide: bac((el) => visibilityHide(el), this.props.dispatch),
-      visibilityShow: bac((el) => visibilityShow(el), this.props.dispatch),
-      addNotification: bac((el) => addNotification(el), this.props.dispatch),
-      removeNotification: bac((el) => removeNotification(el), this.props.dispatch),
-      removeAllNotifications: bac(() => removeAllNotifications(), this.props.dispatch),
-      panelToggle: bac((el) => panelToggle(el), this.props.dispatch),
-      panelHide: bac((el) => panelHide(el), this.props.dispatch),
-      selectFont: bac((el) => selectFont(el), this.props.dispatch),
-      incrementFontSize: bac(incrementFontSize, this.props.dispatch),
-      decrementFontSize: bac(decrementFontSize, this.props.dispatch),
-      incrementMargins: bac(incrementMargins, this.props.dispatch),
-      decrementMargins: bac(decrementMargins, this.props.dispatch),
-      setColorScheme: bac((el) => setColorScheme(el), this.props.dispatch),
-      startLogout: bac(startLogout, this.props.dispatch)
+      selectFont: b((el) => selectFont(el), dispatch),
+      incrementFontSize: b(incrementFontSize, dispatch),
+      decrementFontSize: b(decrementFontSize, dispatch),
+      incrementMargins: b(incrementMargins, dispatch),
+      decrementMargins: b(decrementMargins, dispatch),
+      setColorScheme: b((el) => setColorScheme(el), dispatch)
     };
   };
 
@@ -159,7 +153,8 @@ class ReaderContainer extends Component {
               visibility={this.props.visibility }
               appearance={this.props.appearance}
               notifications={this.props.notifications}
-              {...this.headerMethods()}
+              {...this.readerActions}
+              {...this.commonActions}
             />
           </HigherOrder.ScrollAware>
           <main>

@@ -1,17 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { HigherOrder } from 'components/global';
 import { Header, Footer } from 'components/frontend';
-import { authActions, uiVisibilityActions, notificationActions } from 'actions';
-
-const { startLogout } = authActions;
-const {
-  visibilityToggle, visibilityHide, visibilityShow, panelToggle, panelHide
-} = uiVisibilityActions;
-const {
-  addNotification, removeNotification, removeAllNotifications
-} = notificationActions;
+import { commonActions } from 'actions/helpers';
 
 class FrontendContainer extends Component {
 
@@ -32,6 +23,10 @@ class FrontendContainer extends Component {
     store: PropTypes.object.isRequired
   };
 
+  componentWillMount() {
+    this.commonActions = commonActions(this.props.dispatch);
+  }
+
   componentDidMount() {
     this.setMinHeight();
   }
@@ -40,21 +35,6 @@ class FrontendContainer extends Component {
     const mainHeight = this.refs.mainContainer.offsetHeight;
     const offsetHeight = this.refs.mainContainer.parentNode.offsetHeight - mainHeight;
     this.refs.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
-  }
-
-  headerMethods() {
-    return {
-      visibilityToggle: bindActionCreators((el) => visibilityToggle(el), this.props.dispatch),
-      visibilityHide: bindActionCreators((el) => visibilityHide(el), this.props.dispatch),
-      visibilityShow: bindActionCreators((el) => visibilityShow(el), this.props.dispatch),
-      panelToggle: bindActionCreators((el) => panelToggle(el), this.props.dispatch),
-      addNotification: bindActionCreators((el) => addNotification(el), this.props.dispatch),
-      removeNotification: bindActionCreators((el) => removeNotification(el), this.props.dispatch),
-      removeAllNotifications: bindActionCreators(() =>
-          removeAllNotifications(), this.props.dispatch),
-      panelHide: bindActionCreators((el) => panelHide(el), this.props.dispatch),
-      startLogout: bindActionCreators(() => startLogout(), this.props.dispatch)
-    };
   }
 
   render() {
@@ -66,12 +46,12 @@ class FrontendContainer extends Component {
             location={this.props.location}
             authentication={this.props.authentication}
             notifications={this.props.notifications}
-            {...this.headerMethods()}
+            commonActions={this.commonActions}
           />
           <main ref="mainContainer">
             {this.props.children}
           </main>
-          <Footer />
+          <Footer commonActions={this.commonActions} />
         </div>
       </HigherOrder.BodyClass>
     );

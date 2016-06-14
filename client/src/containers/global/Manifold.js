@@ -27,7 +27,10 @@ class ManifoldContainer extends Component {
     loading: PropTypes.bool,
     visibility: PropTypes.object,
     authentication: PropTypes.object,
-    children: PropTypes.array
+    children: PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.element
+    ])
   };
 
   componentWillReceiveProps(nextProps) {
@@ -39,6 +42,7 @@ class ManifoldContainer extends Component {
   }
 
   render() {
+
     const hideSignInUpOverlay = bindActionCreators(
       () => visibilityHide('signInUpOverlay'), this.props.dispatch
     );
