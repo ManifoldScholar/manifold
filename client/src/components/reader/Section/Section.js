@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
 import Body from './Body';
 import Pagination from './Pagination';
+import AnnotationPopup from './AnnotationPopup';
 import BodyNodes from './BodyNodes';
 
 class Section extends Component {
@@ -20,6 +21,12 @@ class Section extends Component {
 
   constructor() {
     super();
+
+    this.state = {
+      selection: {}
+    };
+
+    this.handleSelection = this.handleSelection.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +36,7 @@ class Section extends Component {
   componentDidUpdate(prevProps) {
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
+
 
   // Returns a CSS style object based on the font size index in the store
   getFontSize(sizeIndex) {
@@ -43,6 +51,12 @@ class Section extends Component {
     return {
       maxWidth: baseSizes[sizeIndex] + 'px'
     };
+  }
+
+  handleSelection(event) {
+    this.setState({
+      selection: window.getSelection()
+    });
   }
 
   maybeScrollToAnchor(previousHash, currentHash) {
@@ -77,8 +91,12 @@ class Section extends Component {
     const section = this.props.section;
     return (
         <section className={readerAppearanceClass}>
-          <div className="container-focus" style={this.getMarginSize(typography.margins.current)}>
+          <div className="container-focus"
+            style={this.getMarginSize(typography.margins.current)}
+            onClick={this.handleSelection}
+          >
             <div className={textSectionClass} style={this.getFontSize(typography.fontSize.current)}>
+              <AnnotationPopup selection={this.state.selection} />
               <Body section={this.props.section} />
             </div>
           </div>
