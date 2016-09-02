@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { throttle } from 'lodash';
 import classNames from 'classnames';
 
 export default class AnnotationPopup extends Component {
@@ -18,6 +19,12 @@ export default class AnnotationPopup extends Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', throttle(() => {
+      this.positionPopup(this.props.selection);
+    }, 400));
+  }
+
   componentWillReceiveProps(nextProps) {
     this.maybeShowPopup(this.props, nextProps);
   }
@@ -30,16 +37,28 @@ export default class AnnotationPopup extends Component {
         this.setState({ visible: false });
       } else {
         // Calculate the position for the popup
-        const range = nextProps.selection.getRangeAt(0);
-        const rect = range.getBoundingClientRect();
-        const popupHeight = this.refs.popup.offsetHeight;
-        this.setState({ top: window.pageYOffset + rect.top - popupHeight });
-        this.setState({ left: range.getBoundingClientRect().left });
+        this.positionPopup(nextProps.selection);
 
         // Otherwise show the popup and set it's (new) position
         this.setState({ visible: true });
       }
     }
+  }
+
+  positionPopup(selection) {
+    const range = selection.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+
+    const popupHeight = this.refs.popup.offsetHeight;
+    const popupWidth = this.refs.popup.offsetWidth;
+
+    let leftPos = rect.left;
+    if (rect.left + popupWidth > document.body.clientWidth) {
+      leftPos = document.body.clientWidth - popupWidth - 15;
+    }
+    console.log(document.body.clientWidth, 'document width?');
+    this.setState({ top: window.pageYOffset + rect.top - popupHeight });
+    this.setState({ left: leftPos });
   }
 
   render() {
