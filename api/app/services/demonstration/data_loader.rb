@@ -13,6 +13,18 @@ module Demonstration
       batch_ingest
       create_admin_user
       publish_project_texts
+      create_pages
+    end
+
+    def create_pages
+      %w(about publishers terms).each do |title|
+        page = Page.create(
+          title: title.capitalize,
+          nav_title: title.capitalize,
+          body: "This is the #{title.capitalize} page"
+        )
+        @logger.info("Creating page: #{page.title}".green)
+      end
     end
 
     def load_text(path, _log_level = "debug")
@@ -92,7 +104,7 @@ module Demonstration
 
     def clear_db
       clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource
-                 Subject TextSubject TextTitle User Category)
+                 Subject TextSubject TextTitle User Category Page)
       clear.each do |model_name|
         @logger.info("Truncate #{model_name} table".red)
         model_name.constantize.destroy_all

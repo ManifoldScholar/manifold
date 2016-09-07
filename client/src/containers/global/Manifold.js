@@ -44,13 +44,13 @@ class ManifoldContainer extends Component {
         notification = {
           level: 0,
           id: 'AUTHENTICATION_STATE_CHANGE',
-          heading: "You have logged in successfully"
+          heading: "You have logged in successfully."
         };
       } else {
         notification = {
           level: 0,
           id: 'AUTHENTICATION_STATE_CHANGE',
-          heading: "You have logged out successfully"
+          heading: "You have logged out successfully."
         };
       }
       this.props.dispatch(notificationActions.addNotification(notification));

@@ -1,4 +1,5 @@
 import { ApiClient } from 'api';
+import get from 'lodash/get';
 
 function sendRequest(request, authToken) {
   const client = new ApiClient;
@@ -22,6 +23,12 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     if (action.payload.state !== 0) return next(action);
 
     const state = getState();
+
+    // If it's a one time request, we treat it as a noop and do not send it again.
+    if (action.payload.oneTime === true
+      && get(state, `entityStore.responses.${action.meta}.loaded`) === true) {
+      return next(action);
+    }
 
     // Inject headers, etc. from state
     const requestPromise =

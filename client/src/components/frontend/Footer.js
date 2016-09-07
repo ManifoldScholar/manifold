@@ -1,11 +1,73 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import chunk from 'lodash/chunk';
 
 export default class Footer extends Component {
 
-  static propTypes = {};
+  static propTypes = {
+    commonActions: PropTypes.object,
+    authentication: PropTypes.object,
+    pages: PropTypes.array
+  };
+
+  constructor() {
+    super();
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.buildPagesArray = this.buildPagesArray.bind(this);
+    this.buildAuthLink = this.buildAuthLink.bind(this);
+    this.buildContentPages = this.buildContentPages.bind(this);
+  }
+
+  handleLogoutClick(event) {
+    event.preventDefault();
+    this.props.commonActions.logout();
+  }
+
+  handleLoginClick(event) {
+    event.preventDefault();
+    this.props.commonActions.toggleSignInUpOverlay();
+  }
+
+  buildContentPages() {
+    const pages = this.props.pages.map((page) => {
+      return (
+        <Link to={`/browse/page/${page.attributes.slug}`}>
+          {page.attributes.navTitle}
+        </Link>
+      );
+    });
+    return pages;
+  }
+
+  buildAuthLink() {
+    if (this.props.authentication.authenticated) {
+      return (
+        <a onClick={this.handleLogoutClick} href="#">
+          {'Log Out'}
+        </a>
+      );
+    }
+    return (
+      <a onClick={this.handleLoginClick} href="#">
+        {'Log In'}
+      </a>
+    );
+  }
+
+  buildPagesArray() {
+    const pages = [];
+    pages.push(this.buildAuthLink());
+    pages.push(<Link to={'/browse'}>{'Projects'}</Link>);
+    pages.push(...this.buildContentPages());
+    pages.push(<Link to={`/contact`}>{'Contact'}</Link>);
+    pages.push(<a target="_blank" href="http://twitter.com/manifoldscholar">{'Twitter'}</a>);
+    pages.push(<a href="mailto:webbook@umn.edu">{'Email'}</a>);
+    return pages;
+  }
 
   render() {
+    const chunkedPages = chunk(this.buildPagesArray(), 3);
     return (
       <footer className="footer-browse">
         <div className="container">
@@ -17,58 +79,13 @@ export default class Footer extends Component {
           </div>
           <nav className="text-nav">
             <ul>
-              <li>
-                <ul>
-                  <li>
-                    <a href="#">
-                      {'Log In'}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      {'Projects'}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      {'About'}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <ul>
-                  <li>
-                    <a href="#">
-                      {'Publishers'}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      {'Terms'}
-                    </a>
-                  </li>
-                  <li>
-                    <Link to={`/contact`}>
-                      {'Contact'}
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <ul>
-                  <li>
-                    <a target="_blank" href="http://twitter.com/manifoldscholar">
-                      {'Twitter'}
-                    </a>
-                  </li>
-                  <li>
-                    <a mailto="webbook@umn.edu">
-                      {'Email'}
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              {chunkedPages.map((pageGroup, pageGroupIndex) => (
+                <li key={pageGroupIndex}><ul>
+                  {pageGroup.map((page, pageIndex) => (
+                    <li key={pageIndex}>{page}</li>
+                  ))}
+                </ul></li>
+              ))}
             </ul>
           </nav>
 

@@ -11,14 +11,16 @@ export const flush = createAction('ENTITY_STORE_FLUSH', (passedMetas) => {
   return metas;
 });
 
-export const request = createAction('ENTITY_STORE_REQUEST', (requestConfig, meta = null) => {
-  return {
-    request: requestConfig,
-    state: 0
-  };
-}, (apiConfig, meta = null) => {
-  return meta || uuid.v1();
-});
+export const request =
+  createAction('ENTITY_STORE_REQUEST', (requestConfig, meta = null, oneTime = false) => {
+    return {
+      request: requestConfig,
+      oneTime,
+      state: 0
+    };
+  }, (apiConfig, meta = null) => {
+    return meta || uuid.v1();
+  });
 
 export const requests = {
   browseFilteredProjects: 'browse-filtered-projects',
@@ -28,5 +30,7 @@ export const requests = {
   readerCurrentSection: 'current-section',
   developerTexts: 'developer-texts',
   developerProjects: 'developer-projects',
-  updateCurrentUser: 'update-current-user'
+  updateCurrentUser: 'update-current-user',
+  allPages: 'all-pages',
+  showPage: 'show-page'
 };

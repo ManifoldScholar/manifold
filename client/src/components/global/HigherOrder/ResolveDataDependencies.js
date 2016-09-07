@@ -7,7 +7,7 @@ class ResolveDataDependenciesComponent extends Component {
 
   static propTypes = {
     components: PropTypes.array,
-    authentication: PropTypes.object
+    authenticated: PropTypes.bool
   };
 
   static contextTypes = {

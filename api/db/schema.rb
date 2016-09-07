@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511233642) do
+ActiveRecord::Schema.define(version: 20160615005354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,22 @@ ActiveRecord::Schema.define(version: 20160511233642) do
     t.string   "sort_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "title"
+    t.string   "nav_title"
+    t.boolean  "show_in_footer",   default: false
+    t.boolean  "show_in_header",   default: false
+    t.string   "slug"
+    t.boolean  "hidden",           default: false
+    t.text     "body"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "is_external_link", default: false
+    t.text     "external_link"
+    t.boolean  "open_in_new_tab",  default: false
+    t.index ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
   end
 
   create_table "projects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
