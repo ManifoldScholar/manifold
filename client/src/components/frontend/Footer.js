@@ -30,13 +30,16 @@ export default class Footer extends Component {
   }
 
   buildContentPages() {
-    const pages = this.props.pages.map((page) => {
-      return (
-        <Link to={`/browse/page/${page.attributes.slug}`}>
-          {page.attributes.navTitle}
-        </Link>
-      );
-    });
+    let pages = [];
+    if (this.props.pages) {
+      pages = this.props.pages.map((page) => {
+        return (
+          <Link to={`/browse/page/${page.attributes.slug}`}>
+            {page.attributes.navTitle}
+          </Link>
+        );
+      });
+    }
     return pages;
   }
 
