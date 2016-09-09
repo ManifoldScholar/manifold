@@ -3,31 +3,25 @@ import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
 import Body from './Body';
 import Pagination from './Pagination';
-import AnnotationPopup from './AnnotationPopup';
+import Annotatable from '../Annotatable';
 import BodyNodes from './BodyNodes';
+import has from 'lodash/has';
 
 class Section extends Component {
 
   static propTypes = {
     text: PropTypes.object,
     section: PropTypes.object,
+    annotations: PropTypes.array,
     appearance: PropTypes.object,
-    location: PropTypes.object
+    location: PropTypes.object,
+    createAnnotation: PropTypes.func,
+    params: PropTypes.object
   };
 
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-
-  constructor() {
-    super();
-
-    this.state = {
-      selection: {}
-    };
-
-    this.handleSelection = this.handleSelection.bind(this);
-  }
 
   componentDidMount() {
     this.maybeScrollToAnchor(null, this.props.location.hash);
@@ -36,7 +30,6 @@ class Section extends Component {
   componentDidUpdate(prevProps) {
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
-
 
   // Returns a CSS style object based on the font size index in the store
   getFontSize(sizeIndex) {
@@ -48,17 +41,12 @@ class Section extends Component {
 
   getMarginSize(sizeIndex) {
     const baseSizes = [790, 680, 500];
-    return {
-      maxWidth: baseSizes[sizeIndex] + 'px'
-    };
+    const maxWidth = baseSizes[sizeIndex] + 'px';
+    return { maxWidth };
   }
 
-  handleSelection(event) {
-    this.setState({
-      selection: window.getSelection()
-    });
-  }
-
+  // TODO: My sense is that this method is not working very well. It may need to be
+  // revisited.
   maybeScrollToAnchor(previousHash, currentHash) {
     if (currentHash && previousHash !== currentHash) {
       const scrollTarget = document.querySelector(currentHash);
@@ -93,11 +81,14 @@ class Section extends Component {
         <section className={readerAppearanceClass}>
           <div className="container-focus"
             style={this.getMarginSize(typography.margins.current)}
-            onClick={this.handleSelection}
           >
             <div className={textSectionClass} style={this.getFontSize(typography.fontSize.current)}>
-              <AnnotationPopup selection={this.state.selection} />
-              <Body section={this.props.section} />
+              <Annotatable
+                sectionId={this.props.params.sectionId}
+                createAnnotation={this.props.createAnnotation}
+              >
+                <Body annotations={this.props.annotations} section={this.props.section} />
+              </Annotatable>
             </div>
           </div>
         </section>

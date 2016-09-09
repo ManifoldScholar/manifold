@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
       resources :pages
       resources :texts
-      resources :text_sections, only: [:show]
+      resources :text_sections, only: [:show] do
+        resources :annotations, shallow: true
+      end
       resources :projects
       resources :tokens, only: [:create]
 

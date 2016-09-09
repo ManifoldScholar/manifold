@@ -7,6 +7,7 @@ import { Header, Footer, Section } from 'components/reader';
 import { commonActions } from 'actions/helpers';
 import textsAPI from '../../api/texts';
 import sectionsAPI from '../../api/sections';
+import annotationsAPI from '../../api/annotations';
 import { select } from '../../utils/entityUtils';
 import values from 'lodash/values';
 import {
@@ -39,9 +40,14 @@ class ReaderContainer extends Component {
     promises.push(one);
     if (params.sectionId) {
       const sectionCall = sectionsAPI.show(params.sectionId);
-      const { promise: two } =
-          dispatch(request(sectionCall, requests.readerCurrentSection));
-      promises.push(one);
+      const { promise: two } = dispatch(request(sectionCall,
+        requests.readerCurrentSection));
+      promises.push(two);
+
+      const annotationsCall = annotationsAPI.forSection(params.sectionId);
+      const { promise: three } = dispatch(request(annotationsCall,
+        requests.sectionAnnotations));
+      promises.push(three);
     }
     return Promise.all(promises);
   }
@@ -52,6 +58,7 @@ class ReaderContainer extends Component {
       colors: state.ui.colors
     };
     return {
+      annotations: select(requests.sectionAnnotations, state.entityStore),
       section: select(requests.readerCurrentSection, state.entityStore),
       text: select(requests.readerCurrentText, state.entityStore),
       authentication: state.authentication,
@@ -114,7 +121,16 @@ class ReaderContainer extends Component {
       decrementFontSize: b(decrementFontSize, dispatch),
       incrementMargins: b(incrementMargins, dispatch),
       decrementMargins: b(decrementMargins, dispatch),
-      setColorScheme: b((el) => setColorScheme(el), dispatch)
+      setColorScheme: b((el) => setColorScheme(el), dispatch),
+      createAnnotation: b(
+        (sectionId, annotation) => {
+          return request(
+            annotationsAPI.create(sectionId, annotation),
+            requests.createAnnotation
+          );
+        },
+        dispatch
+      )
     };
   };
 
@@ -137,7 +153,7 @@ class ReaderContainer extends Component {
     );
 
     const section = this.props.children &&
-      React.cloneElement(this.props.children, { ...this.props });
+      React.cloneElement(this.props.children, { ...this.props, ...this.readerActions });
 
     return (
       <HigherOrder.BodyClass className="reader">

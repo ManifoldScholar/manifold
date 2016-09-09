@@ -11,7 +11,9 @@ const select = (state) => {
   newState.entityStore = collections;
   newState.entityStore.entities = entities;
   if (get(entities, 'textSections')) {
-    entities.textSections = 'REDACTED';
+    entities.textSections = {
+      redacted: true
+    };
   }
   return newState;
 };
