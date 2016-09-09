@@ -7,6 +7,7 @@ class TextSection < ActiveRecord::Base
 
   belongs_to :text
   belongs_to :resource
+  has_many :annotations
 
   validates :position, numericality: { only_integer: true }
   validates :kind, inclusion: { in: ALLOWED_KINDS }
