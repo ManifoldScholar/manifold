@@ -8,12 +8,17 @@
 }
 
 .search-menu {
-  padding: 44px 39px;
+  width: 100vw;
+  padding: 28px 22px;
   background-color: $neutral10;
 
-  .tail {
-    @include panelTail;
-    display: none;
+  @include respond($break40) {
+    width: auto;
+    padding: 32px 35px;
+  }
+
+  @include respond($break70) {
+    padding: 44px 39px;
   }
 
   // Input defaults
@@ -21,17 +26,26 @@
     @include templateHead;
     width: 100%;
     padding: 13px 25px 14px;
-    font-size: $type70;
+    font-size: $type50;
     color: $neutralOffBlack;
     background-color: $neutralWhite;
     border: 3px solid transparent;
     outline: none;
     appearance: none;
+
+    @include respond($break70) {
+      font-size: $type70;
+    }
   }
 
   // Can be abstracted to shared if used elsewhere
   .input-magnify {
     position: relative;
+    width: 100%;
+
+    @include respond($break40) {
+      min-width: 300px;
+    }
 
     input {
       padding-left: 54px;
@@ -53,7 +67,11 @@
   }
 
   .filters {
-    padding-top: 38px;
+    padding-top: 25px;
+
+    @include respond($break70) {
+      padding-top: 38px;
+    }
 
     label {
       @include utilityPrimary;
@@ -63,14 +81,27 @@
       text-transform: uppercase;
     }
 
+    .checkbox-group {
+      display: block;
+      padding-top: 8px;
+      white-space: normal;
+
+      @include respond($break70) {
+        display: inline-block;
+        padding-left: 32px;
+        white-space: nowrap;
+      }
+    }
+
     .checkbox {
       position: relative;
       display: inline-block;
-      padding-left: 36px;
+      margin-right: 20px;
+      margin-bottom: 10px;
       cursor: pointer;
 
-      + .checkbox {
-        margin-left: 20px;
+      @include respond($break70) {
+        margin-right: 32px;
       }
 
       .control-indicator {

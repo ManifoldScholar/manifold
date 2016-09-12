@@ -172,9 +172,16 @@
     // Reader specific menu layout/transition
     .search-menu {
       position: absolute;
-      right: -645px;
-      width: 645px;
+      right: -100%;
       transition: right $duration $timing;
+
+      @include respond($break40) {
+        right: -410px;
+      }
+
+      @include respond($break70) {
+        right: -610px;
+      }
     }
 
     .panel-visible .search-menu {

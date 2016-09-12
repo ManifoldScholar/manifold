@@ -79,11 +79,13 @@
     }
   }
 
+  // Local Variable for menu padding
+  $menuPadding: 40px;
 
   .menu-dropdowns {
     position: absolute;
     top: 0;
-    right: 40px;
+    right: $menuPadding;
     height: 100%;
 
     > ul {
@@ -93,9 +95,12 @@
       height: 100%;
 
       > li {
-        position: relative;
         display: inline-block;
         height: 100%;
+
+        @include respond($break80) {
+          position: relative;
+        }
 
         + li {
           margin-left: 55px;
@@ -105,10 +110,29 @@
 
     // Browse specific menu layout/transition
     .button-search {
+      position: relative;
       height: 100%;
       font-size: 17px;
       color: $neutral80;
       vertical-align: middle;
+
+      &::after {
+        @include tailUp();
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        display: block;
+        margin-top: -20px;
+        margin-left: -15px;
+        content: '';
+        opacity: 0;
+        transition: margin $duration $timing, opacity $duration $timing;
+      }
+
+      &.button-active::after {
+        margin-top: 0;
+        opacity: 1;
+      }
     }
 
     .button-avatar {
@@ -118,11 +142,12 @@
 
     .search-menu {
       position: absolute;
-      right: -36px;
+      right: -$menuPadding;
+      max-width: 100vw;
       white-space: nowrap;
 
-      .tail {
-        display: block;
+      @include respond($break80) {
+        right: -36px;
       }
     }
 
