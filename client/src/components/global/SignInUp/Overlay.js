@@ -88,8 +88,10 @@ export default class Overlay extends Component {
             Cancel
             <i className="manicon manicon-x"></i>
           </button>
-          <div className="overlay-content">
-            {this.renderChild()}
+          <div className="container">
+            <div className="overlay-content">
+              {this.renderChild()}
+            </div>
           </div>
         </div>
       </HigherOrder.BodyClass>

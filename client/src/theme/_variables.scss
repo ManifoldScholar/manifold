@@ -60,8 +60,11 @@ $baseLineHeight: 1.2;
 
 $containerWidthFull: 1235px; // Maximum container width of 1135 plus maximum gutter padding
 $containerPaddingFull: 50px;
+$containerPaddingResp: 4.5%;
+$containerWidthMin: 320px; // Minimum container width
 
-$containerWidthNarrow: 680px; // Narrow container width for reading
+
+$containerWidthFocus: 680px; // Narrow container width for reading
 $containerPaddingMin: 15px; // Minimum gutter padding
 
 // Font Weights
@@ -99,4 +102,4 @@ $break40: 480px;
 // $break30: ;
 // $break20: ;
 // Minimum site width
-$break10: 320px;
+$break10: $containerWidthMin;

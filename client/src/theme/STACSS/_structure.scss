@@ -64,15 +64,20 @@
 // --------------------------------------------------------
 @mixin containerPrototype {
   max-width: $containerWidthFull;
+  padding-right: $containerPaddingResp;
+  padding-left: $containerPaddingResp;
   margin-right: auto;
   margin-left: auto;
-  padding-right: $containerPaddingFull;
-  padding-left: $containerPaddingFull;
+
+  @include respond($break100) {
+    padding-right: $containerPaddingFull;
+    padding-left: $containerPaddingFull;
+  }
 }
 
-@mixin containerNarrow {
+@mixin containerFocus {
   // Default max width
-  max-width: $containerWidthNarrow;
+  max-width: $containerWidthFocus;
   margin-right: auto;
   margin-left: auto;
   padding-right: $containerPaddingMin;
@@ -90,7 +95,7 @@
 }
 
 .container-focus {
-  @include containerNarrow;
+  @include containerFocus;
   transition: max-width $duration $timing;
 }
 
