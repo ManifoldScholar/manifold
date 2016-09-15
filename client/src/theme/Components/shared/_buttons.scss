@@ -278,24 +278,3 @@
     min-width: 310px;
   }
 }
-
-// Wrapper around input with absolutely positioned button
-.search-button-inline {
-  position: relative;
-
-  // <button>
-  .manicon-magnify {
-    @include buttonUnstyled;
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    margin-top: -9px;
-    font-size: 17px;
-    color: $accentPrimary;
-  }
-
-  input {
-    @include inputSecondary;
-    padding-left: 40px;
-  }
-}

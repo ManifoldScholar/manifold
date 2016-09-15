@@ -1,6 +1,6 @@
 // <nav> around <ul>
 .grid-project {
-  margin: 0 -12px 0;
+  margin: 0 -12px;
 
   @include respond($break60) {
     margin: -2.105vw -2.105vw 0;

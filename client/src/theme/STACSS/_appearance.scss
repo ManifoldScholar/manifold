@@ -167,7 +167,6 @@
 // Inputs/Textareas
 @mixin inputSecondary {
   @include templateCopy;
-  width: 306px;
   padding: 7px 10px;
   font-size: $type70;
   color: $accentPrimary;

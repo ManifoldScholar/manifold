@@ -1,24 +1,27 @@
 .footer-browse {
-  padding: 67px 0 57px;
+  padding: 40px 0 57px;
   background-color: $neutral80;
 
-  .container {
-    position: relative;
+  @include respond($break65) {
+    padding: 67px 0 57px;
   }
 
   // <a>
   .logo {
     @include templateHead;
-    position: absolute;
-    top: 0;
-    right: 0;
     display: block;
-    height: 45px;
+    padding-bottom: 28px;
     font-size: $type90;
     font-weight: $semibold;
     line-height: 45px;
     color: $neutralWhite;
     text-decoration: none;
+
+    @include respond($break65) {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
 
     .manicon-manifold-logo {
       display: inline-block;
@@ -48,7 +51,11 @@
 
       > li {
         float: left;
-        margin-right: 102px;
+        margin-right: 60px;
+
+        @include respond($break40) {
+          margin-right: 102px;
+        }
 
         // Nested List
         li + li {
@@ -59,14 +66,27 @@
   }
 
   .footer-secondary {
-    padding-top: 90px;
+    padding-top: 60px;
+
+    @include respond($break65) {
+      padding-top: 90px;
+    }
+
+    .search-button-inline {
+      width: 306px;
+      max-width: 100%;
+    }
   }
 
   .colophon {
     @include templateCopy;
     padding-top: 16px;
-    font-size: $type60;
+    font-size: 16px;
     color: $neutral40;
+
+    @include respond($break40) {
+      font-size: 18px;
+    }
 
     a {
       color: inherit;

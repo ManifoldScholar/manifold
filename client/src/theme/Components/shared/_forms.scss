@@ -303,6 +303,8 @@
 
   input {
     @include inputSecondary;
+    // Width can be controlled in wrapper
+    width: 100%;
     padding-left: 40px;
   }
 }
