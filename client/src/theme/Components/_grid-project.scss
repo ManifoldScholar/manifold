@@ -102,7 +102,7 @@
     // Meta data
     .title {
       @include titlePrimary;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       font-size: $type60;
 
       @include respond($break70) {
@@ -112,16 +112,21 @@
 
     .makers {
       @include templateCopy;
-      padding-bottom: 17px;
+      // Hide until we actually show these
+      //padding-bottom: 17px;
       font-size: $type70;
       color: $neutral80;
     }
 
     .date {
       @include templateCopy;
-      font-size: $type60;
+      font-size: $type50;
       font-style: italic;
       color: $neutral75;
+
+      @include respond($break70) {
+        font-size: $type60;
+      }
     }
   }
 }
