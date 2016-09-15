@@ -1,6 +1,6 @@
 // <nav> around <ul>
 .grid-project {
-  margin: -12px -12px 0;
+  margin: 0 -12px 0;
 
   @include respond($break60) {
     margin: -2.105vw -2.105vw 0;
@@ -8,6 +8,18 @@
 
   @include respond($break100) {
     margin: -26px -26px 0;
+  }
+
+  .select-browse + & {
+    margin-top: 26px;
+
+    @include respond($break60) {
+      margin-top: 40px;
+    }
+
+    @include respond($break85) {
+      margin-top: 52px;
+    }
   }
 
   ul {

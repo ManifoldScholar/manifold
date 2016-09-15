@@ -260,8 +260,10 @@
 // --------------------------------------------------------
 .select-browse {
   @include selectStyled;
+  width: 100%;
 
-  select {
+  @include respond($break30) {
+    width: auto;
     min-width: 310px;
   }
 }

@@ -142,15 +142,6 @@
   }
 }
 
-// Select used in browse
-.select-browse {
-  @include selectStyled;
-
-  select {
-    min-width: 310px;
-  }
-}
-
 .form-toggle {
   @include formLabelPrimary;
   position: relative;

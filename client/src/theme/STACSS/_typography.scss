@@ -48,10 +48,14 @@ $type20: 12px;
 @mixin headingPrimary {
   @include templateHead;
   margin-top: 0;
-  margin-bottom: 75px;
+  margin-bottom: 50px;
   font-size: $type120;
   font-weight: $regular;
   line-height: 1.32;
+
+  @include respond($break65) {
+    margin-bottom: 75px;
+  }
 }
 
 @mixin headingTertiary {

@@ -105,7 +105,7 @@
   select {
     @include utilityPrimary;
     display: inline-block;
-    width: auto;
+    width: 100%;
     padding: 15px 18px 17px;
     margin: 0;
     font-size: $type40;

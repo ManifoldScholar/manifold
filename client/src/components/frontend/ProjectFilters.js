@@ -24,7 +24,7 @@ export default class ProjectFilters extends Component {
 
   render() {
     return (
-      <div className="select-browse" style={{ marginBottom: 93 }}>
+      <div className="select-browse">
         <select onChange={ this.filterChange } >
           <option value="all">Show All</option>
           <option value="featured">Featured</option>
