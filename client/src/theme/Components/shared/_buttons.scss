@@ -18,13 +18,17 @@
 .button-icon-primary {
   @include buttonUnstyled;
   @include utilityPrimary;
-  padding: 21px 40px 20px;
+  padding: 16px 30px 18px;
   font-size: $type60;
   font-weight: $bold;
-  line-height: 44px;
+  line-height: 1.6;
   color: $neutral80;
   border: 3px solid $accentPrimary;
   transition: color $duration $timing, background-color $duration $timing;
+
+  @include respond($break60) {
+    padding: 27px 40px 20px;
+  }
 
   &:hover {
     color: $neutralWhite;
@@ -32,11 +36,18 @@
   }
 
   .manicon {
-    display: inline-block;
-    width: auto;
-    margin-right: 14px;
-    line-height: 1;
-    vertical-align: bottom;
+    display: block;
+    padding-bottom: 12px;
+
+    @include respond($break60) {
+      display: inline-block;
+      width: auto;
+      padding-bottom: 0;
+      margin-top: -6px;
+      margin-right: 14px;
+      line-height: 1;
+      vertical-align: middle;
+    }
   }
 
   .manicon-books-on-shelf {
