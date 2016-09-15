@@ -1,17 +1,25 @@
 .section-pagination {
   @include clearfix;
-  padding: 42px 0 25px;
+  padding: 28px 0 20px;
   background-color: $neutral20;
+
+  @include respond($break40) {
+    padding: 42px 0 25px;
+  }
 
   // Global button styles
   // <a>
   .pagination-previous, .pagination-next {
     @include utilityPrimary;
     display: inline-block;
-    font-size: $type60;
+    font-size: 14px;
     color: $neutral40;
     text-decoration: none;
     vertical-align: middle;
+
+    @include respond($break40) {
+      font-size: 18px;
+    }
 
     &:hover {
       color: $accentPrimary;
@@ -19,14 +27,26 @@
 
     .manicon {
       display: inline-block;
-      font-size: 66px;
+      font-size: 38px;
       vertical-align: middle;
+
+      @include respond($break40) {
+        font-size: 48px;
+      }
+
+      @include respond($break75) {
+        font-size: 66px;
+      }
     }
   }
 
   .pagination-previous {
     .manicon {
-      margin-right: 30px;
+      margin-right: 10px;
+
+      @include respond($break40) {
+        margin-right: 30px;
+      }
     }
   }
 
@@ -34,7 +54,11 @@
     float: right;
 
     .manicon {
-      margin-left: 30px;
+      margin-left: 10px;
+
+      @include respond($break40) {
+        margin-left: 30px;
+      }
     }
   }
 }

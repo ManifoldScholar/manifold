@@ -32,7 +32,9 @@ export default class Pagination extends Component {
       previousLink = (
         <Link to={previousPath} className="pagination-previous" >
           <i className="manicon manicon-arrow-round-left"></i>
-          {'Previous'}
+          <span className="text">
+            {'Previous'}
+          </span>
         </Link>
       );
     }
@@ -46,7 +48,9 @@ export default class Pagination extends Component {
       const nextPath = this.getSectionPath(nextNode);
       nextLink = (
         <Link to={nextPath} className="pagination-next" >
-          {'Next'}
+          <span className="text">
+            {'Next'}
+          </span>
           <i className="manicon manicon-arrow-round-right"></i>
         </Link>
       );
