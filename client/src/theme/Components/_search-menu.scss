@@ -9,15 +9,15 @@
 
 .search-menu {
   width: 100vw;
-  padding: 28px 22px;
+  padding: 28px 22px 22px;
   background-color: $neutral10;
 
   @include respond($break40) {
-    width: auto;
     padding: 32px 35px;
   }
 
   @include respond($break70) {
+    width: auto;
     padding: 44px 39px;
   }
 
@@ -75,10 +75,14 @@
 
     label {
       @include utilityPrimary;
-      font-size: $type40;
+      font-size: 13px;
       font-weight: $semibold;
       color: $neutral70;
       text-transform: uppercase;
+
+      @include respond($break40) {
+        font-size: 14px;
+      }
     }
 
     .checkbox-group {
@@ -95,10 +99,14 @@
 
     .checkbox {
       position: relative;
-      display: inline-block;
+      display: block;
       margin-right: 20px;
       margin-bottom: 10px;
       cursor: pointer;
+
+      @include respond($break20) {
+        display: inline-block;
+      }
 
       @include respond($break70) {
         margin-right: 32px;
