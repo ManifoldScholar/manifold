@@ -19,7 +19,7 @@
   @include buttonUnstyled;
   @include utilityPrimary;
   padding: 16px 30px 18px;
-  font-size: $type60;
+  font-size: 15px;
   font-weight: $bold;
   line-height: 1.6;
   color: $neutral80;
@@ -27,7 +27,8 @@
   transition: color $duration $timing, background-color $duration $timing;
 
   @include respond($break60) {
-    padding: 27px 40px 20px;
+    padding: 22px 30px 18px;
+    font-size: 17px;
   }
 
   &:hover {
@@ -37,7 +38,7 @@
 
   .manicon {
     display: block;
-    padding-bottom: 12px;
+    padding-bottom: 10px;
 
     @include respond($break60) {
       display: inline-block;
@@ -50,12 +51,13 @@
     }
   }
 
+  // Font sizes in EM to be relative to text
   .manicon-books-on-shelf {
-    font-size: 44px;
+    font-size: 1.889em;
   }
 
   .manicon-books-with-glasses {
-    font-size: 35px;
+    font-size: 1.389em;
   }
 }
 
