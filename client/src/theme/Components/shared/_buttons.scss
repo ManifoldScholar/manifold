@@ -8,7 +8,7 @@
   @include buttonUnstyled;
   @include utilityPrimary;
   display: inline-block;
-  padding: 13px 23px;
+  padding: 9px 23px 10px;
   color: $neutral80;
   text-decoration: none;
   border: 3px solid $accentPrimary;
@@ -264,17 +264,5 @@
 
   .follow-text {
     padding-left: 46px;
-  }
-}
-
-// Browser UI (Selects, dropdowns, inputs, etc.)
-// --------------------------------------------------------
-.select-browse {
-  @include selectStyled;
-  width: 100%;
-
-  @include respond($break30) {
-    width: auto;
-    min-width: 310px;
   }
 }

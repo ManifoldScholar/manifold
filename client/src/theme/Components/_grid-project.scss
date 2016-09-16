@@ -3,11 +3,11 @@
   margin: 0 -12px;
 
   @include respond($break60) {
-    margin: -2.105vw -2.105vw 0;
+    margin: 0 -2.105vw;
   }
 
   @include respond($break100) {
-    margin: -26px -26px 0;
+    margin: 0 -26px;
   }
 
   .select-browse + & {

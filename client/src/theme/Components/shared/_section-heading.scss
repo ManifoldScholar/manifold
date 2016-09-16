@@ -1,5 +1,7 @@
 .section-heading {
   @include headingPrimary;
+  // em based margin for simple resizing
+  margin-bottom: 1.769em;
   color: $neutral80;
 
   .bg-neutral90 & {
@@ -8,7 +10,7 @@
 
   .manicon {
     display: inline-block;
-    margin-right: 13px;
+    margin-right: 10px;
     color: $neutral40;
     vertical-align: middle;
     // React generated wrapper
@@ -18,25 +20,27 @@
     }
   }
 
+  // Manicons are em sized to resize
+  // in tandem with headline
+
   .manicon-books-on-shelf {
-    margin-right: 24px;
+    font-size: 1.231em;
   }
 
   .manicon-books-stack {
-    margin-right: 20px;
     font-size: 61px;
   }
 
   .manicon-books-with-glasses {
-    font-size: 38px;
+    font-size: 1.1em;
   }
 
   .manicon-lamp {
-    font-size: 56px;
+    font-size: 1.577em;
   }
 
   .manicon-new-round {
-    font-size: 63px;
+    font-size: 1.769em;
     color: $accentPrimary;
   }
 

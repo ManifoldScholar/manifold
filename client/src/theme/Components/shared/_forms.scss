@@ -338,3 +338,14 @@
     border: 3px dotted $neutral50;
   }
 }
+
+// Browse specific form select
+.select-browse {
+  @include selectStyled;
+  width: 100%;
+
+  @include respond($break30) {
+    width: auto;
+    min-width: 310px;
+  }
+}

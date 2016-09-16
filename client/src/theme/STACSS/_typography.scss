@@ -29,13 +29,14 @@
 @mixin headingPrimary {
   @include templateHead;
   margin-top: 0;
-  margin-bottom: 50px;
-  font-size: $type120;
+  // Default margin
+  margin-bottom: 1.2em;
+  font-size: 22px;
   font-weight: $regular;
   line-height: 1.32;
 
-  @include respond($break65) {
-    margin-bottom: 75px;
+  @include respond($break60) {
+    font-size: 26px;
   }
 }
 
