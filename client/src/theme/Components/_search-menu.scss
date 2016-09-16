@@ -13,12 +13,11 @@
   background-color: $neutral10;
 
   @include respond($break40) {
-    padding: 32px 35px;
+    padding: 32px 30px 19px;
   }
 
   @include respond($break70) {
     width: auto;
-    padding: 44px 39px;
   }
 
   // Input defaults
@@ -67,11 +66,7 @@
   }
 
   .filters {
-    padding-top: 25px;
-
-    @include respond($break70) {
-      padding-top: 38px;
-    }
+    padding-top: 20px;
 
     label {
       @include utilityPrimary;

@@ -7,7 +7,7 @@
 
   .header-container {
     position: relative;
-    padding: 30px 52px 30px 40px;
+    padding: 20px 52px 20px 40px;
     background-color: $neutralWhite;
   }
 
@@ -53,7 +53,7 @@
       a {
         @include templateHead;
         position: relative;
-        font-size: $type60;
+        font-size: 16px;
         color: $neutral50;
         text-decoration: none;
 
@@ -183,5 +183,5 @@
 
 // Header bump
 .browse main {
-  padding-top: 99px;
+  padding-top: 79px;
 }

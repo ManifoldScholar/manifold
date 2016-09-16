@@ -70,7 +70,7 @@
   border-radius: 7px;
 }
 
-@mixin buttonAvatar($size: 40) {
+@mixin buttonAvatar($size: 36) {
   @include buttonUnstyled;
   // Default size from browse view that may be
   // changed in scope

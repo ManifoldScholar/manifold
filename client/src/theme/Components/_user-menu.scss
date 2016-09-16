@@ -10,7 +10,7 @@
 
 // Global styles
 .user-menu {
-  padding: 40px;
+  padding: 30px;
   background-color: $neutral10;
 
   .tail {
@@ -23,7 +23,7 @@
 
     li {
       @include templateHead;
-      font-size: $type100;
+      font-size: 20px;
     }
 
     // Menu items can be buttons or links
@@ -37,7 +37,7 @@
       }
 
       + li {
-        margin-top: 28px;
+        margin-top: 20px;
       }
     }
 
@@ -46,8 +46,8 @@
   // Icons used in menu
   .manicon {
     display: inline-block;
-    width: 48px;
-    margin-right: 23px;
+    width: 35px;
+    margin-right: 18px;
     text-align: right;
     vertical-align: middle;
 
@@ -60,11 +60,11 @@
 
 
   .manicon-person-pencil {
-    font-size: 44px;
+    font-size: 32px;
   }
 
   .manicon-circle-arrow-out-right {
     padding-right: 6px; // NP
-    font-size: 32px;
+    font-size: 28px;
   }
 }
