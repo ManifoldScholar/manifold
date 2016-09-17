@@ -1,71 +1,98 @@
 .section-heading {
-  @include headingPrimary;
-  // em based margin for simple resizing
-  margin-bottom: 1.769em;
-  color: $neutral80;
+  position: relative;
 
-  .bg-neutral90 & {
-    color: $neutral30;
-  }
+  &.utility-right {
+    margin-bottom: 37px;
 
-  .manicon {
-    display: inline-block;
-    margin-right: 10px;
-    color: $neutral40;
-    vertical-align: middle;
-    // React generated wrapper
-    + span {
-      display: inline-block;
-      vertical-align: middle;
+    @include respond($break90) {
+      padding-right: 350px;
+      margin-bottom: 0;
     }
   }
 
-  // Manicons are em sized to resize
-  // in tandem with headline
+  .title {
+    @include headingPrimary;
+    color: $neutral80;
 
-  .manicon-books-on-shelf {
-    font-size: 1.231em;
+    .bg-neutral90 & {
+      color: $neutral30;
+    }
+
+    .manicon {
+      display: inline-block;
+      margin-right: 10px;
+      color: $neutral40;
+      vertical-align: middle;
+      // React generated wrapper
+      + span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+
+    // Manicons are em sized to resize
+    // in tandem with headline
+
+    .manicon-books-on-shelf {
+      font-size: 1.231em;
+    }
+
+    .manicon-books-stack {
+      font-size: 61px;
+    }
+
+    .manicon-books-with-glasses {
+      font-size: 1.1em;
+    }
+
+    .manicon-lamp {
+      font-size: 1.577em;
+    }
+
+    .manicon-new-round {
+      font-size: 1.769em;
+      color: $accentPrimary;
+    }
+
+    .manicon-pulse {
+      font-size: 29px;
+    }
+
+    .manicon-tag {
+      font-size: 47px;
+    }
   }
 
-  .manicon-books-stack {
-    font-size: 61px;
+  .overlay-copy {
+    @include overlayCopy;
   }
 
-  .manicon-books-with-glasses {
-    font-size: 1.1em;
+  .login-links {
+    @include overlayCopy;
+    font-style: italic;
+
+    a {
+      color: $neutral50;
+
+      + a {
+        margin-left: 14px;
+      }
+    }
   }
 
-  .manicon-lamp {
-    font-size: 1.577em;
-  }
+  .section-heading-utility-right {
+    @include respond($break90) {
+      position: absolute;
+      top: 6px;
+      right: 0;
+    }
 
-  .manicon-new-round {
-    font-size: 1.769em;
-    color: $accentPrimary;
-  }
+    .button-primary {
+      margin-bottom: 20px;
 
-  .manicon-pulse {
-    font-size: 29px;
-  }
-
-  .manicon-tag {
-    font-size: 47px;
-  }
-}
-
-.overlay-copy {
-  @include overlayCopy;
-}
-
-.login-links {
-  @include overlayCopy;
-  font-style: italic;
-
-  a {
-    color: $neutral50;
-
-    + a {
-      margin-left: 14px;
+      @include respond($break90) {
+        margin-bottom: 0;
+      }
     }
   }
 }

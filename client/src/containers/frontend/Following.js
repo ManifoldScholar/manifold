@@ -67,8 +67,8 @@ class FollowingContainer extends Component {
       <div>
         <section className="bg-neutral05">
           <div className="container">
-            <header className="rel">
-              <h4 className="section-heading">
+            <header className="section-heading utility-right">
+              <h4 className="title">
                 <i className="manicon manicon-books-with-glasses"></i>
                 {'Projects You\'re Following'}
               </h4>
@@ -90,8 +90,8 @@ class FollowingContainer extends Component {
         </section>
         <section>
           <div className="container">
-            <header className="rel">
-              <h4 className="section-heading">
+            <header className="section-heading utility-right">
+              <h4 className="title">
                 <i className="manicon manicon-lamp"></i>
                 {'Featured Projects'}
               </h4>
