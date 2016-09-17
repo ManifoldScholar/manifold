@@ -1,6 +1,6 @@
 // <nav> around <ul>
 .grid-project {
-  margin: 0 -12px;
+  margin: 0;
 
   @include respond($break60) {
     margin: 0 -2.105vw;
@@ -66,7 +66,7 @@
       position: relative;
       height: 0;
       max-width: 100%;
-      padding-top: 108%;
+      padding-top: 94%;
       margin-bottom: 20px;
 
       img, svg {
@@ -115,10 +115,10 @@
     .title {
       @include titlePrimary;
       margin-bottom: 8px;
-      font-size: $type60;
+      font-size: 16px;
 
       @include respond($break70) {
-        font-size: $type70;
+        font-size: 18px;
       }
     }
 
@@ -132,12 +132,13 @@
 
     .date {
       @include templateCopy;
-      font-size: $type50;
+      font-size: 14px;
       font-style: italic;
       color: $neutral75;
 
+
       @include respond($break70) {
-        font-size: $type60;
+        font-size: 16px;
       }
     }
   }
