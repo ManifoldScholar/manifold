@@ -41,7 +41,7 @@
       position: relative;
       height: 0;
       max-width: 100%;
-      padding-top: 144%;
+      padding-top: 113%;
       margin-bottom: 20px;
 
       img, svg {
@@ -50,8 +50,7 @@
         left: 0;
         // Relative z-index
         z-index: 0;
-        width: 100%;
-        height: auto;
+        width: auto;
         max-height: 100%;
         border: 4px solid transparent;
       }
@@ -69,23 +68,21 @@
 
     // Meta data
     .title {
-      @include titlePrimary;
-      margin-bottom: 6px;
-      font-size: $type70;
+      @include gridProjectTitle;
+      margin-bottom: 8px;
+      font-size: 16px;
     }
 
     .makers {
       @include templateCopy;
-      padding-bottom: 17px;
+      // Hide until we actually show these
+      //padding-bottom: 17px;
       font-size: $type70;
       color: $neutral80;
     }
 
     .date {
-      @include templateCopy;
-      font-size: $type60;
-      font-style: italic;
-      color: $neutral75;
+      @include gridProjectDate;
     }
 
     .description {

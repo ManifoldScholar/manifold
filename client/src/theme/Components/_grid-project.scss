@@ -113,13 +113,9 @@
 
     // Meta data
     .title {
-      @include titlePrimary;
+      @include gridProjectTitle;
       margin-bottom: 8px;
       font-size: 16px;
-
-      @include respond($break70) {
-        font-size: 18px;
-      }
     }
 
     .makers {
@@ -131,15 +127,7 @@
     }
 
     .date {
-      @include templateCopy;
-      font-size: 14px;
-      font-style: italic;
-      color: $neutral75;
-
-
-      @include respond($break70) {
-        font-size: 16px;
-      }
+      @include gridProjectDate;
     }
   }
 }

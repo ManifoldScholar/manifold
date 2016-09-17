@@ -75,7 +75,7 @@ class HomeContainer extends Component {
               </h4>
             </header>
             { this.props.featuredProjects ?
-              <ProjectCovers
+              <ProjectGrid
                 authenticated={this.props.authentication.authenticated}
                 favorites={get(this.props.authentication, 'currentUser.favorites')}
                 dispatch={this.props.dispatch}

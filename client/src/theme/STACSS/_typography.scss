@@ -85,6 +85,27 @@
 
 // Labels
 // --------------------------------------------------------
+@mixin gridProjectTitle {
+  @include titlePrimary;
+  font-size: 16px;
+
+  @include respond($break70) {
+    font-size: 18px;
+  }
+}
+
+@mixin gridProjectDate {
+  @include templateCopy;
+  font-size: 14px;
+  font-style: italic;
+  color: $neutral75;
+
+
+  @include respond($break70) {
+    font-size: 16px;
+  }
+}
+
 @mixin formLabelPrimary {
   @include templateHead;
   font-size: $type40;
