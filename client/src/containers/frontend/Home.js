@@ -68,8 +68,8 @@ class HomeContainer extends Component {
         */}
         <section>
           <div className="container">
-            <header className="rel">
-              <h4 className="section-heading">
+            <header className="section-heading">
+              <h4 className="title">
                 <i className="manicon manicon-new-round"></i>
                 {'Recent Projects'}
               </h4>
@@ -87,8 +87,8 @@ class HomeContainer extends Component {
         </section>
         <section className="bg-neutral05">
           <div className="container">
-            <header className="rel">
-              <h4 className="section-heading">
+            <header className="section-heading">
+              <h4 className="title">
                 <i className="manicon manicon-books-on-shelf"></i>
                 {'Filtered Projects'}
               </h4>
