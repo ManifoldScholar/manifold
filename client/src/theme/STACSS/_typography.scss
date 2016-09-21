@@ -43,7 +43,7 @@
 @mixin headingTertiary {
   @include templateHead;
   margin-top: 0;
-  font-size: $type70;
+  font-size: 16px;
   font-weight: $semibold;
 }
 
@@ -67,15 +67,24 @@
   @include templateHead;
   // This is the base size, there may be variation from
   // component to component
-  font-size: $type120;
+  font-size: 20px;
   font-weight: $semibold;
   color: $neutralOffBlack;
+
+  @include respond($break40) {
+    font-size: 24px;
+  }
+
+  @include respond($break60) {
+    font-size: 28px;
+  }
 
   .subtitle {
     @include templateCopy;
     display: block;
-    margin-top: 18px;
-    font-size: $type90;
+    // Size relative to font
+    margin-top: 0.682em;
+    font-size: 22px;
     font-style: italic;
     font-weight: $regular; // OD
     letter-spacing: 0.031em;

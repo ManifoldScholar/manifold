@@ -57,8 +57,8 @@ class ProjectDetailContainer extends Component {
     return (
         <section>
           <div className="container">
-            <header className="rel">
-              <h4 className="section-heading">
+            <header className="section-heading">
+              <h4 className="title">
                 <i className="manicon manicon-pulse"></i>
                 {'Recent Activity'}
               </h4>
@@ -79,8 +79,8 @@ class ProjectDetailContainer extends Component {
     return (
       <section>
         <div className="container">
-          <header className="rel">
-            <h4 className="section-heading">
+          <header className="section-heading">
+            <h4 className="title">
               <i className="manicon manicon-tag"></i>
                 {'Metadata'}
             </h4>
@@ -98,8 +98,8 @@ class ProjectDetailContainer extends Component {
     return (
       <section>
         <div className="container">
-          <header className="rel">
-            <h4 className="section-heading">
+          <header className="section-heading">
+            <h4 className="title">
               <i className="manicon manicon-books-stack"></i>
               {'Texts'}
             </h4>
@@ -118,7 +118,13 @@ class ProjectDetailContainer extends Component {
     if (!this.props.project) return null;
     return (
       <div>
-        <section className="bg-neutral05">
+        {/*
+          NB: To use a hero, include the
+          class name hero-image in addition to the background image required
+        */}
+        <section className="project-detail-hero hero-image"
+          style={{ backgroundImage: 'url(/placeholder/background-waterfall.jpg)' }}
+        >
           <div className="container">
             <ProjectDetailHero
               project={this.props.project}

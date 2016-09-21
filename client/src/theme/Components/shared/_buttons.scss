@@ -67,8 +67,8 @@
   @include templateHead;
   display: inline-block;
   // TODO: Determine default side padding
-  padding: 17px 21px 18px;
-  font-size: $type40;
+  padding: 1.214em 16px 1.286em;
+  font-size: 12px;
   font-weight: $bold;
   letter-spacing: 0.075em;
   color: $neutral80;
@@ -76,6 +76,14 @@
   text-decoration: none;
   text-transform: uppercase;
   background-color: $accentPrimary;
+
+  @include respond($break60) {
+    font-size: 14px;
+  }
+
+  &.dull {
+    background-color: $neutral10;
+  }
 
   .manicon {
     display: inline-block;
@@ -88,24 +96,25 @@
     }
   }
 
+  // Size relative to button font-size
   .manicon-glasses {
-    margin-right: 15px;
-    font-size: 26px;
+    margin-right: 10px;
+    font-size: 1.5em;
   }
 
   .manicon-bullet-list {
-    margin-right: 16px;
-    font-size: 17px;
+    margin-right: 12px;
+    font-size: 1.214em;
   }
 
   .manicon-facebook {
-    width: 39px;
-    font-size: 25px;
+    width: 38px;
+    font-size: 1.786em;
   }
 
   .manicon-twitter {
-    width: 39px;
-    font-size: 22px;
+    width: 38px;
+    font-size: 1.571em;
   }
 }
 
@@ -128,25 +137,41 @@
 }
 
 // Button with price-tag
-.button-tagged-dull {
+.button-tagged {
   @extend %button-secondary-prototype;
-  position: relative;
-  padding-right: 32%;
+  display: table;
+  padding: 0;
+  font-size: 14px;
   color: $neutral50;
   background-color: $neutral10;
 
+  &.outline {
+    color: $neutral75;
+    background: none;
+    border: 1px solid $neutral75;
+
+    .tag {
+      background: none;
+      border-left: 1px solid $neutral75;
+    }
+  }
+
   // Note that this can be abstracted with class names for multiple label types
-  .price {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 32%;
-    height: 100%;
-    padding-top: 13px;
-    font-size: $type60;
-    font-weight: $regular; // OD
+  .text, .tag {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .text {
+    padding: 10px 18px 12px;
+  }
+
+  .tag {
+    padding: 10px 12px 12px;
+    font-size: 15px;
     letter-spacing: 0; // OD
     color: $neutralWhite;
+    vertical-align: middle;
     background-color: $neutral40;
     transition: background-color $duration $timing;
   }
