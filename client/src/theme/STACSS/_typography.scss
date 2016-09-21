@@ -61,45 +61,34 @@
 }
 
 
-// Signage
+// Labels
 // --------------------------------------------------------
-@mixin titlePrimary {
+@mixin subtitlePrimary {
+  @include templateCopy;
+  font-style: italic;
+  font-weight: $regular; // OD
+  letter-spacing: 0.031em;
+}
+
+@mixin gridProjectTitle {
   @include templateHead;
   // This is the base size, there may be variation from
   // component to component
-  font-size: 20px;
+  font-size: 16px;
   font-weight: $semibold;
   color: $neutralOffBlack;
 
-  @include respond($break40) {
-    font-size: 24px;
-  }
-
-  @include respond($break60) {
-    font-size: 28px;
+  @include respond($break70) {
+    font-size: 18px;
   }
 
   .subtitle {
-    @include templateCopy;
+    @include subtitlePrimary;
     display: block;
     // Size relative to font
     margin-top: 0.682em;
     font-size: 22px;
-    font-style: italic;
-    font-weight: $regular; // OD
-    letter-spacing: 0.031em;
     color: $accentPrimaryDark;
-  }
-}
-
-// Labels
-// --------------------------------------------------------
-@mixin gridProjectTitle {
-  @include titlePrimary;
-  font-size: 16px;
-
-  @include respond($break70) {
-    font-size: 18px;
   }
 }
 

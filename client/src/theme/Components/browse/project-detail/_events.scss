@@ -80,11 +80,15 @@
 
   // <h5>
   .event-title {
-    @include titlePrimary;
-    margin: 0; // OD
-    font-size: $type60;
+    @include templateHead;
+    // This is the base size, there may be variation from
+    // component to component
+    margin: 0;
+    font-size: 18px;
+    font-weight: $semibold;
 
     .subtitle {
+      @include subtitlePrimary;
       margin-top: 8px;
       font-size: $type40;
     }

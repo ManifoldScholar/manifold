@@ -1,15 +1,30 @@
 .texts-group {
 
   @include listHorizontal;
-  margin-left: -65px;
   font-size: 0;
 
+  @include respond($break75) {
+    margin-left: -45px;
+  }
+
+  @include respond($break80) {
+    margin-left: -65px;
+  }
+
   > li {
+    width: 100%;
     // Font base size reset
-    width: 50%;
-    padding-left: 65px;
     margin-bottom: 73px;
     font-size: 16px;
     vertical-align: top;
+
+    @include respond($break75) {
+      width: 50%;
+      padding-left: 45px;
+    }
+
+    @include respond($break80) {
+      padding-left: 65px;
+    }
   }
 }

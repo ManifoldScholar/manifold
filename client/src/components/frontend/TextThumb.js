@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { TextThumbPlaceholder } from 'components/frontend';
 
 export default class TextThumb extends Component {
 
@@ -14,7 +15,7 @@ export default class TextThumb extends Component {
   }
 
   renderSubtitle(text) {
-    if (!text.attributes.subtitle) return null;
+    // if (!text.attributes.subtitle) return null;
     return (
       <span className="subtitle">
         {text.attributes.subtitle}
@@ -33,7 +34,7 @@ export default class TextThumb extends Component {
     } else {
       thumbnail = (
         <div className="asset-image-placeholder">
-          {/* Placeholder will go in here */}
+          <TextThumbPlaceholder />
         </div>
       );
     }
@@ -67,20 +68,22 @@ export default class TextThumb extends Component {
 
         {/* Asset status markup only stub at this point, may be abstracted to child component */}
         <div className="asset-status">
-          <div className="asset-completion">
-            <div className="complete" style={{ width: '28%' }}></div>
-          </div>
-
           <ul className="asset-interactions">
             <li>
               <Link to="/">
-                <i className="manicon manicon-highlight"></i>
+                <i className="manicon manicon-pencil-simple"></i>
                 12
               </Link>
             </li>
             <li>
               <Link to="/">
-                <i className="manicon manicon-person-word-bubble"></i>
+                <i className="manicon manicon-word-bubble"></i>
+                12
+              </Link>
+            </li>
+            <li>
+              <Link to="/">
+                <i className="manicon manicon-bookmark-outline"></i>
                 31
               </Link>
             </li>

@@ -18,4 +18,5 @@ export ProjectThumbPlaceholder from './ProjectThumbPlaceholder';
 export PublishedText from './PublishedText';
 export RecentProjects from './RecentProjects';
 export TextThumb from './TextThumb';
+export TextThumbPlaceholder from './TextThumbPlaceholder';
 export Follow from './Follow';

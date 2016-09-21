@@ -113,11 +113,13 @@
     }
 
     .project-title {
-      @include titlePrimary;
+      @include templateHead;
       float: left;
       width: calc(100% - 80px);
       padding-left: 18px;
       margin-top: 0;
+      font-size: 20px;
+      font-weight: $semibold;
       color: $neutral75;
 
       @include respond($break40) {
@@ -126,6 +128,7 @@
       }
 
       .subtitle {
+        @include subtitlePrimary;
         color: $neutral75;
       }
     }
@@ -163,16 +166,31 @@
     }
 
     .project-title {
-      @include titlePrimary;
+      @include templateHead;
       display: none;
       margin-top: 0;
+      font-size: 20px;
+      font-weight: $semibold;
       color: $neutral75;
+
+      @include respond($break40) {
+        font-size: 24px;
+      }
+
+      @include respond($break60) {
+        font-size: 28px;
+      }
 
       @include respond($break75) {
         display: block;
       }
 
       .subtitle {
+        @include subtitlePrimary;
+        display: block;
+        // Size relative to font
+        margin-top: 0.682em;
+        font-size: 22px;
         color: $neutral75;
       }
     }
