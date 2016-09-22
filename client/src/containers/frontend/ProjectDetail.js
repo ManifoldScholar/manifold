@@ -8,7 +8,9 @@ import {
   PublishedText,
   GroupedTexts,
   MetaAttributes,
-  ProjectDetailHero
+  ProjectDetailHero,
+  ResourceCollections,
+  ResourceTotals,
 } from 'components/frontend';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
@@ -46,13 +48,18 @@ class ProjectDetailContainer extends Component {
       texts: [],
       meta: []
     };
+
+    this.renderActivity = this.renderActivity.bind(this);
+    this.renderTexts = this.renderTexts.bind(this);
+    this.renderResources = this.renderResources.bind(this);
+    this.renderMeta = this.renderMeta.bind(this);
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
-  renderActivity = () => {
+  renderActivity() {
     if (!this.state.activity.length > 0) return null;
     return (
         <section>
@@ -72,9 +79,9 @@ class ProjectDetailContainer extends Component {
           </div>
         </section>
     );
-  };
+  }
 
-  renderMeta = () => {
+  renderMeta() {
     if (!this.state.meta.length > 0) return null;
     return (
       <section>
@@ -89,9 +96,9 @@ class ProjectDetailContainer extends Component {
         </div>
       </section>
     );
-  };
+  }
 
-  renderTexts = () => {
+  renderTexts() {
     const project = this.props.project;
     const texts = get(this.props, 'project.relationships.texts');
     if (!texts || texts.length === 0) return null;
@@ -112,7 +119,42 @@ class ProjectDetailContainer extends Component {
         </div>
       </section>
     );
-  };
+  }
+
+  renderResources() {
+    // Currently returns static resource section
+    // Logic to check for existing resources should be here
+
+    // Note that this returns a div with two sections, but in production
+    // Should return either a groupd of collections or a group of resources,
+    // and not both
+    return (
+      <div>
+        <section className="bg-neutral05">
+          <div className="container">
+            <header className="section-heading">
+              <h4 className="title">
+                <i className="manicon manicon-cube-shine"></i>
+                {'Resources'}
+              </h4>
+            </header>
+            <ResourceCollections />
+            <ResourceTotals count={2028} />
+          </div>
+        </section>
+        <section className="bg-neutral05">
+          <div className="container">
+            <header className="section-heading">
+              <h4 className="title">
+                <i className="manicon manicon-cube-shine"></i>
+                {'Resources'}
+              </h4>
+            </header>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   render() {
     if (!this.props.project) return null;
@@ -134,6 +176,7 @@ class ProjectDetailContainer extends Component {
         </section>
         {this.renderActivity()}
         {this.renderTexts()}
+        {this.renderResources()}
         {this.renderMeta()}
       </div>
     );

@@ -1,0 +1,119 @@
+// Nav wrapping a ul
+.resource-collections-list {
+  ul {
+    @include listUnstyled;
+
+    @include respond($break60) {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -25px;
+    }
+
+    @include respond($break85) {
+      margin-left: -4.858vw;
+    }
+  }
+
+  li {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+
+    @include respond($break60) {
+      width: 50%;
+      padding-left: 25px;
+      margin-bottom: 30px;
+    }
+
+    @include respond($break85) {
+      padding-left: 4.858vw;
+    }
+  }
+
+  a {
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @include respond($break80) {
+      padding-top: 14vw;
+    }
+
+    @include respond($break100) {
+      padding-top: 160px;
+    };
+
+    &:hover {
+      .collection-title {
+        color: $accentPrimaryDark;
+      }
+
+      .title-overlay {
+        //background-color: transparentize($neutralBlack, 0.4);
+      }
+    }
+  }
+
+  .title-overlay {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    background-color: transparentize($neutralBlack, 0.8);
+    transition: background-color $duration $timing;
+
+    @include respond($break80) {
+      flex-direction: row;
+      background-color: transparentize($neutralBlack, 0.5);
+    }
+  }
+
+  .collection-title, .icon {
+    margin: 0;
+    color: $neutralWhite;
+  }
+
+  .collection-title {
+    @include templateHead;
+    width: 100%;
+    height: 100%;
+    padding: 18px 21px;
+    font-size: 18px;
+    background-color: transparentize($neutralBlack, 0.7);
+    transition: color $duration $timing;
+
+    @include respond($break85) {
+      width: auto;
+      height: auto;
+      font-size: 20px;
+      background: none;
+    }
+
+    @include respond($break90) {
+      padding: 22px 21px;
+    }
+  }
+
+  .icon {
+    @include templateHead;
+    order: -1;
+    padding: 23px 0 20px;
+    font-size: 12px;
+    text-align: center;
+
+    @include respond($break80) {
+      order: 2;
+      padding: 18px 16px 18px 0;
+    }
+
+    .manicon {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 25px;
+    }
+  }
+}
