@@ -1,5 +1,5 @@
-require 'digest/md5'
-require 'securerandom'
+require "digest/md5"
+require "securerandom"
 
 module Serializer
   # This class takes HTML input and serializes it into a serializable data structure,
@@ -47,7 +47,7 @@ module Serializer
       representation[:children].each_with_index do |child, index|
         next if child[:node_type] != "text"
         next unless child[:content].blank?
-        child[:delete] = true if index == 0
+        child[:delete] = true if index.zero?
         child[:delete] = true if (index + 1) == representation[:children].length
         # Between two block level elements
         next unless representation[:children][index - 1] &&
