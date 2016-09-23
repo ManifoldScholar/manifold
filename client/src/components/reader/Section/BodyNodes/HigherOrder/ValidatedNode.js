@@ -9,7 +9,10 @@ export default (RenderComponent) => {
     static propTypes = {
       children: PropTypes.array,
       attributes: PropTypes.object,
-      tag: PropTypes.string
+      tag: PropTypes.string,
+      textDigest: PropTypes.string,
+      nodeUuid: PropTypes.string,
+      openAnnotations: PropTypes.object
     };
 
     styleStringToObject(stylesString) {
@@ -44,6 +47,9 @@ export default (RenderComponent) => {
           children={this.props.children}
           attributes={this.cleanAttributes(this.props.attributes)}
           tag={this.props.tag}
+          textDigest={this.props.textDigest}
+          nodeUuid={this.props.nodeUuid}
+          openAnnotations={this.props.openAnnotations}
           {...this.state}
         />
       );

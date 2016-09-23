@@ -54,7 +54,7 @@ module Validator
       parent = node.parent
       node_and_siblings = parent.xpath(node.name.to_s)
       node_and_siblings.unlink
-      if index == 0
+      if index.zero?
         wrapper = parent.add_child("<#{tag}></#{tag}>").first
         wrapper.children = node_and_siblings
       else

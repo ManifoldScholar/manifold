@@ -5,7 +5,7 @@ module Validator
     CSS_SCOPE_SELECTOR = ".manifold-text-section".freeze
     CSS_PROPERTY_BLACKLIST = %w(position font-family overflow overflow-x overflow-y
                                 z-index).freeze
-    CSS_SELECTOR_BLACKLIST = %w(* html body @font-face ).freeze
+    CSS_SELECTOR_BLACKLIST = %w(* html body @font-face).freeze
     TAG_A_CSS_PROPERTY_BLACKLIST = %w(color).freeze
     TAG_H1_CSS_PROPERTY_BLACKLIST = %w(font-family font-weight size line-height margin
                                        margin-top margin-bottom margin-left margin-right

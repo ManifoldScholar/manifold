@@ -32,5 +32,7 @@ export const requests = {
   developerProjects: 'developer-projects',
   updateCurrentUser: 'update-current-user',
   allPages: 'all-pages',
-  showPage: 'show-page'
+  showPage: 'show-page',
+  sectionAnnotations: 'section-annotations',
+  createAnnotation: 'create-annotation'
 };

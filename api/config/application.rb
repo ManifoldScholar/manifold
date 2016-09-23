@@ -41,6 +41,5 @@ module ManifoldApi
     config.api_only = true
 
     config.x.client = config_for(:client)
-
   end
 end

@@ -59,6 +59,9 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     // Execute the API call and when it is complete, dispatch a response action.
     requestPromise.then((response) => {
       dispatch(buildResponseAction(response, action.meta, false));
+      // We fire off a post action if we need additional reducer methods to further change
+      // the state.
+      dispatch({ type: `REQUEST_COMPLETE_${action.meta.toUpperCase().replace(/-/g, '_')}` });
     }, (response) => {
       dispatch(buildResponseAction(response, action.meta, true));
     });

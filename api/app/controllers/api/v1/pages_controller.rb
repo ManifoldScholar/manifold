@@ -49,7 +49,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def page_params
-        params.require(:page).permit()
+        params.require(:page).permit
       end
     end
   end

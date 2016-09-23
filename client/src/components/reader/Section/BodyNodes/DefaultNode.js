@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import validatedNode from './HigherOrder/ValidatedNode';
+import isEmpty from 'lodash/isEmpty';
 
 class DefaultNode extends Component {
 
