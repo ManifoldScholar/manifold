@@ -16,7 +16,8 @@ module Ingestor
               attr = defaults(DEFAULT_ATTRIBUTES, attr)
               existing_section = check_for_existing(
                 existing_text_sections,
-                source_identifier: attr[:source_identifier])
+                source_identifier: attr[:source_identifier]
+              )
               section = existing_section || TextSection.create(attr)
               section.update_attributes(attr)
               log(node_inspector, section)
