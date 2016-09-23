@@ -9,6 +9,9 @@ AllCops:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+  
 Metrics/LineLength:
   Max: 90
 
