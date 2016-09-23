@@ -11,6 +11,15 @@ module Validation
     params.permit(param_config)
   end
 
+  def annotation_params
+    params.require(:data)
+    attributes = [
+      :start_node, :end_node, :start_char, :end_char, :section_id, :format, :subject
+    ]
+    param_config = build_params_structure(attributes: attributes)
+    params.permit(param_config)
+  end
+
   def favorite_params
     params.require(:data).require(:relationships).require(:favoritable).require(:data)
     param_config =

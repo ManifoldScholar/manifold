@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-
       resources :pages
       resources :texts
-      resources :text_sections, only: [:show]
+      resources :text_sections, only: [:show] do
+        resources :annotations, shallow: true
+      end
       resources :projects
       resources :tokens, only: [:create]
 

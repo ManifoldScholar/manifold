@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar,
                     styles: { medium: "300x300>", thumb: "100x100>" }
 
+  has_many :annotations
   has_many :favorites
   has_many :favorite_projects, through: :favorites, source: :favoritable,
                                source_type: "Project"

@@ -1,3 +1,6 @@
+require "digest/md5"
+require "securerandom"
+
 module Serializer
   # This class takes HTML input and serializes it into a serializable data structure,
   # which will likely then be transformed into JSON. The Manifold React frontend can then
@@ -44,7 +47,7 @@ module Serializer
       representation[:children].each_with_index do |child, index|
         next if child[:node_type] != "text"
         next unless child[:content].blank?
-        child[:delete] = true if index == 0
+        child[:delete] = true if index.zero?
         child[:delete] = true if (index + 1) == representation[:children].length
         # Between two block level elements
         next unless representation[:children][index - 1] &&
@@ -94,6 +97,8 @@ module Serializer
     def begin_visit_text(node, representation)
       representation[:node_type] = "text"
       representation[:content] = node.content
+      representation[:text_digest] = Digest::MD5.hexdigest(node.text)
+      representation[:node_uuid] = SecureRandom.uuid
       true
     end
 

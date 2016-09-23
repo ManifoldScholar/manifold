@@ -11,11 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615005354) do
+ActiveRecord::Schema.define(version: 20160915191239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "annotations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "start_node"
+    t.string   "end_node"
+    t.integer  "start_char"
+    t.integer  "end_char"
+    t.text     "subject"
+    t.uuid     "user_id"
+    t.uuid     "text_section_id"
+    t.string   "format"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid   "project_id"

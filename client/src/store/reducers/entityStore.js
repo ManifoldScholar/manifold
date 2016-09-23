@@ -119,8 +119,19 @@ function handleFlush(state, action) {
   return Object.assign({}, state, { responses, entities });
 }
 
+function updateAnnotationCollection(state, action) {
+  const created = state.responses['create-annotation'].entity;
+  const collection = state.responses['section-annotations'].collection.slice(0);
+  collection.push({ id: created.id, type: created.type });
+  const response = Object.assign({}, state.responses['section-annotations'], { collection });
+  const responses = Object.assign({}, state.responses, { "section-annotations": response });
+  return Object.assign({}, state, { responses });
+}
+
 export default handleActions({
   ENTITY_STORE_REQUEST: handleRequest,
   ENTITY_STORE_RESPONSE: handleResponse,
-  ENTITY_STORE_FLUSH: handleFlush
+  ENTITY_STORE_FLUSH: handleFlush,
+  REQUEST_COMPLETE_CREATE_ANNOTATION: updateAnnotationCollection
+
 }, initialState);
