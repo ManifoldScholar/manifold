@@ -4,7 +4,7 @@
   &.utility-right {
     margin-bottom: 37px;
 
-    @include respond($break90) {
+    @include respond($break95) {
       padding-right: 350px;
       margin-bottom: 0;
     }
@@ -86,7 +86,7 @@
   }
 
   .section-heading-utility-right {
-    @include respond($break90) {
+    @include respond($break95) {
       position: absolute;
       top: 6px;
       right: 0;
@@ -95,7 +95,7 @@
     .button-primary {
       margin-bottom: 20px;
 
-      @include respond($break90) {
+      @include respond($break95) {
         margin-bottom: 0;
       }
     }

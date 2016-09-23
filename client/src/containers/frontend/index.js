@@ -4,5 +4,6 @@ export Frontend from './Frontend';
 export Home from './Home';
 export Login from './Login';
 export ProjectDetail from './ProjectDetail';
+export ProjectResources from './ProjectResources';
 export Page from './Page';
-
+export ResourceDetail from './ResourceDetail';

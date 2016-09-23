@@ -86,14 +86,17 @@
     background-color: transparentize($neutralBlack, 0.7);
     transition: color $duration $timing;
 
-    @include respond($break85) {
+    @include respond($break80) {
       width: auto;
       height: auto;
-      font-size: 20px;
       background: none;
     }
 
-    @include respond($break90) {
+    @include respond($break85) {
+      font-size: 20px;
+    }
+
+    @include respond($break95) {
       padding: 22px 21px;
     }
   }

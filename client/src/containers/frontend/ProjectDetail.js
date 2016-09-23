@@ -10,6 +10,7 @@ import {
   MetaAttributes,
   ProjectDetailHero,
   ResourceCollections,
+  ResourceThumbs,
   ResourceTotals,
 } from 'components/frontend';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
@@ -128,6 +129,7 @@ class ProjectDetailContainer extends Component {
     // Note that this returns a div with two sections, but in production
     // Should return either a groupd of collections or a group of resources,
     // and not both
+    const project = this.props.project;
     return (
       <div>
         <section className="bg-neutral05">
@@ -138,8 +140,8 @@ class ProjectDetailContainer extends Component {
                 {'Resources'}
               </h4>
             </header>
-            <ResourceCollections />
-            <ResourceTotals count={2028} />
+            <ResourceCollections projectId={project.id} />
+            <ResourceTotals count={2028} projectId={project.id} />
           </div>
         </section>
         <section className="bg-neutral05">
@@ -150,6 +152,8 @@ class ProjectDetailContainer extends Component {
                 {'Resources'}
               </h4>
             </header>
+            <ResourceThumbs projectId={project.id} />
+            <ResourceTotals count={2028} projectId={project.id} />
           </div>
         </section>
       </div>

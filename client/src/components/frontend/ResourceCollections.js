@@ -3,9 +3,9 @@ import { Link } from 'react-router';
 
 export default class ResourceCollections extends Component {
 
-  // static propTypes = {
-  //   text: PropTypes.object
-  // };
+  static propTypes = {
+    projectId: PropTypes.string
+  };
 
   render() {
     const stubCollections = [
@@ -20,7 +20,7 @@ export default class ResourceCollections extends Component {
       },
       {
         id: Math.random() * 100,
-        image: '/placeholder/background-waterfall.jpg',
+        image: '/placeholder/background-coniferous.jpg',
         title: 'Untitled'
       }
     ];
@@ -34,7 +34,10 @@ export default class ResourceCollections extends Component {
             const bgImage = collection.image ? collection.image : collectionsBackground;
             return (
               <li key={collection.id}>
-                <a href="#" style={ { backgroundImage: 'url(' + bgImage + ')' } }>
+                <Link
+                  to={`/browse/project/${this.props.projectId}/resources`}
+                  style={ { backgroundImage: 'url(' + bgImage + ')' } }
+                >
                   <div className="title-overlay">
                     <h4 className="collection-title">
                       {collection.title}
@@ -44,7 +47,7 @@ export default class ResourceCollections extends Component {
                       {'Collection'}
                     </div>
                   </div>
-                </a>
+                </Link>
               </li>
             );
           })}

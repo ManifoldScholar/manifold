@@ -4,7 +4,8 @@ import { Link } from 'react-router';
 export default class ResourceTotals extends Component {
 
   static propTypes = {
-    count: PropTypes.number
+    count: PropTypes.number,
+    projectId: PropTypes.string
   };
 
   render() {
@@ -17,7 +18,9 @@ export default class ResourceTotals extends Component {
           </span>
           {' total resources'}
         </div>
-        <a href="#">View All Resources <i className="manicon manicon-arrow-right"></i></a>
+        <Link to={`/browse/project/${this.props.projectId}/resources`}>
+          View All Resources <i className="manicon manicon-arrow-right"></i>
+        </Link>
       </div>
     );
   }

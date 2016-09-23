@@ -1,6 +1,15 @@
 import React from 'react';
 import { Route, IndexRedirect, IndexRoute } from 'react-router';
-import { Frontend, Home, Login, Following, ProjectDetail, Page } from 'containers/frontend';
+import {
+    Frontend,
+    Home,
+    Login,
+    Following,
+    ProjectDetail,
+    ProjectResources,
+    Page,
+    ResourceDetail
+} from 'containers/frontend';
 import { Developer } from 'containers/developer';
 import { Reader } from 'containers/reader';
 import { NotFound } from './containers/global';
@@ -23,6 +32,8 @@ export default () => {
           <Route component={Login} path="login" />
           <Route component={Following} path="following" />
           <Route component={ProjectDetail} path="project/:id" />
+          <Route component={ProjectResources} path="project/:id/resources" />
+          <Route component={ResourceDetail} path="project/:id/resources/:resourceId" />
           <Route component={Page} path="page/:slug" />
 
         </Route>
