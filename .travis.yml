@@ -26,7 +26,7 @@ cache: bundler
 
 script:
   - cd client
-  - npm install -g npm
+  - npm install -g npm@3.10.7
   - npm version
   - npm install
   - npm run test
