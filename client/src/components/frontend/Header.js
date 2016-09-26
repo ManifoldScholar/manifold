@@ -25,8 +25,7 @@ export default class Header extends Component {
     const path = this.props.location.pathname;
     const active = startsWith(path, '/browse/following') ? 'following' : 'browse';
     return (
-      <HigherOrder.ScrollAware>
-        <header className={'header-browse'}>
+       <header className={'header-browse'}>
           <div className="header-container">
             <Link to={'/browse'} className="logo">
               <figure>
@@ -100,7 +99,6 @@ export default class Header extends Component {
             removeAllNotifications={this.props.commonActions.clearNotifications}
           />
         </header>
-      </HigherOrder.ScrollAware>
     );
   }
 }

@@ -59,13 +59,15 @@ class FrontendContainer extends Component {
     return (
       <HigherOrder.BodyClass className={'browse'}>
         <div>
-          <Header
-            visibility={this.props.visibility }
-            location={this.props.location}
-            authentication={this.props.authentication}
-            notifications={this.props.notifications}
-            commonActions={this.commonActions}
-          />
+          <HigherOrder.ScrollAware>
+            <Header
+              visibility={this.props.visibility }
+              location={this.props.location}
+              authentication={this.props.authentication}
+              notifications={this.props.notifications}
+              commonActions={this.commonActions}
+            />
+          </HigherOrder.ScrollAware>
           <main ref="mainContainer">
             {this.props.children}
           </main>

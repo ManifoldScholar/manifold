@@ -4,7 +4,7 @@ rvm:
   - 2.2.3
 
 node_js:
-  - "4.2"
+  - "4.5.0"
 
 services:
   - postgresql
