@@ -30,6 +30,13 @@ export default class AnnotationPopup extends Component {
     this.maybeShowPopup(this.props, nextProps);
   }
 
+  hasSelection(selection) {
+    if (!selection) return false;
+    if (selection && selection.range) {
+      return true;
+    }
+  }
+
   maybeShowPopup(prevProps, nextProps) {
     if (nextProps && prevProps !== nextProps) {
       // Update popup
@@ -47,15 +54,17 @@ export default class AnnotationPopup extends Component {
   }
 
   positionPopup(selection) {
-    const rect = selection.range.getBoundingClientRect();
-    const popupHeight = this.refs.popup.offsetHeight;
-    const popupWidth = this.refs.popup.offsetWidth;
-    let left = rect.left;
-    if (rect.left + popupWidth > document.body.clientWidth) {
-      left = document.body.clientWidth - popupWidth - 15;
+    if (this.hasSelection()) {
+      const rect = selection.range.getBoundingClientRect();
+      const popupHeight = this.refs.popup.offsetHeight;
+      const popupWidth = this.refs.popup.offsetWidth;
+      let left = rect.left;
+      if (rect.left + popupWidth > document.body.clientWidth) {
+        left = document.body.clientWidth - popupWidth - 15;
+      }
+      const top = window.pageYOffset + rect.top - popupHeight;
+      this.setState(Object.assign(this.state, { top, left }));
     }
-    const top = window.pageYOffset + rect.top - popupHeight;
-    this.setState(Object.assign(this.state, { top, left }));
   }
 
   render() {
