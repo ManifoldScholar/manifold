@@ -4,7 +4,7 @@ module Validator
     MAX_WIDTH = 650
     CSS_SCOPE_SELECTOR = ".manifold-text-section".freeze
     CSS_PROPERTY_BLACKLIST = %w(position font-family overflow overflow-x overflow-y
-                                z-index).freeze
+                                z-index max-width).freeze
     CSS_SELECTOR_BLACKLIST = %w(* html body @font-face).freeze
     TAG_A_CSS_PROPERTY_BLACKLIST = %w(color).freeze
     TAG_H1_CSS_PROPERTY_BLACKLIST = %w(font-family font-weight size line-height margin
@@ -31,6 +31,8 @@ module Validator
                                        margin-top margin-bottom margin-left margin-right
                                        padding padding-top padding-bottom padding-left
                                        padding-right color).freeze
+    TAG_IMG_CSS_PROPERTY_BLACKLIST = %w(max-width).freeze
+    TAG_FIGURE_CSS_PROPERTY_BLACKLIST = %w(max-width).freeze
     TAG_ATTRIBUTE_BLACKLIST = %w(accept accept-charset accesskey async autofocus border
                                  bgcolor challenge charset code codebase color cols
                                  content contenteditable defer draggable dropzone height

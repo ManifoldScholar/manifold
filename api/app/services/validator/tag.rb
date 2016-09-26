@@ -16,7 +16,7 @@ module Validator
       convert_attribute_to_style!(node, "bgcolor", "background-color")
       convert_attribute_to_style!(node, "align", "text-align")
       convert_measured_attribute_to_style!(node, "border", "border")
-      convert_measured_attribute_to_style!(node, "width", "max-width")
+      convert_measured_attribute_to_style!(node, "width", "width")
       remove_blacklisted_attributes!(node)
       remove_blacklisted_css_properties!(node)
       map_css_values!(node)
