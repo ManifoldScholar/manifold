@@ -1,0 +1,41 @@
+.resource-list {
+  .resource-count {
+    @include utilityPrimary;
+    font-size: 13px;
+    color: $neutral50;
+    margin-bottom: 24px;
+
+    span {
+      color: $neutral75;
+    }
+  }
+
+  > ul {
+    @include listUnstyled;
+
+    @include respond($break75) {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -30px;
+    }
+
+    @include respond($break85) {
+      margin-left: -4.858vw;
+    }
+
+    > li {
+      width: 100%;
+      margin-bottom: 18px;
+
+      @include respond($break75) {
+        width: 50%;
+        padding-left: 30px;
+        margin-bottom: 30px;
+      }
+
+      @include respond($break85) {
+        padding-left: 4.858vw;
+      }
+    }
+  }
+}

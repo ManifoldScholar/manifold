@@ -17,6 +17,8 @@ export ProjectThumb from './ProjectThumb';
 export ProjectThumbPlaceholder from './ProjectThumbPlaceholder';
 export PublishedText from './PublishedText';
 export ResourceCollections from './ResourceCollections';
+export ResourceList from './ResourceList';
+export ResourceListing from './ResourceListing';
 export ResourceThumbs from './ResourceThumbs';
 export ResourceTotals from './ResourceTotals';
 export RecentProjects from './RecentProjects';

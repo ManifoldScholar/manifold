@@ -292,3 +292,28 @@
     padding-left: 32px;
   }
 }
+
+.back-link-section {
+  @include utilityPrimary;
+  display: inline-block;
+  padding: 20px 0 18px;
+  font-size: 14px;
+  color: $neutral80;
+  text-decoration: none;
+
+  .manicon {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 13px;
+    vertical-align: middle;
+  }
+
+  span {
+    margin-left: 0.733em;
+    font-size: 15px;
+    font-weight: $regular;
+    letter-spacing: 0.01em;
+    color: $neutral50;
+    text-transform: none;
+  }
+}

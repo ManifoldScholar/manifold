@@ -1,0 +1,263 @@
+.resource-listing {
+  display: flex;
+
+  .thumbnail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 37.8%;
+    text-align: center;
+    text-decoration: none;
+    background-color: $neutral10;
+
+    @include respond($break40) {
+      width: 155px;
+    }
+
+    @include respond($break75) {
+      width: 135px;
+    }
+
+    @include respond($break85) {
+      width: 155px;
+    }
+
+    &:hover {
+      .preview-text {
+        color: $neutralWhite;
+        background-color: $accentPrimary;
+      }
+    }
+
+    &.bg-image {
+      .resource-type figcaption, .resource-type i {
+        color: $neutralWhite;
+      }
+    }
+
+    .resource-type {
+      @include utilityPrimary;
+      padding-top: 18px;
+      padding-bottom: 18px;
+      font-size: 13px;
+
+      @include respond($break85) {
+        padding-top: 32px;
+        padding-bottom: 15px;
+        font-size: 16px;
+      }
+
+      figcaption {
+        font-size: 13px;
+        color: $neutral50;
+
+        @include respond($break75) {
+          display: block;
+        }
+
+        @include respond($break85) {
+          font-size: 15px;
+        }
+      }
+
+      i {
+        display: flex;
+        height: auto;
+        margin-top: 16px;
+        color: $neutral70;
+
+        @include respond($break75) {
+          height: 70px;
+        }
+
+        @include respond($break85) {
+          height: 85px;
+        }
+
+        &::before {
+          margin: auto;
+        }
+      }
+    }
+
+    // Sized relative to parent size for bulk resizing
+    .manicon-resource-audio {
+      font-size: 2.25em;
+    }
+
+    .manicon-resource-document {
+      font-size: 3.313em;
+    }
+
+    .manicon-resource-file {
+      font-size: 3.563em;
+    }
+
+    .manicon-resource-image {
+      font-size: 2.5em;
+    }
+
+    .manicon-resource-interactive {
+      font-size: 3.375em;
+    }
+
+    .manicon-resource-link {
+      font-size: 3.063em;
+    }
+
+    .manicon-resource-pdf {
+      font-size: 3.313em;
+    }
+
+    .manicon-resource-presentation {
+      font-size: 2.875em;
+    }
+
+    .manicon-resource-spreadsheet {
+      font-size: 2.5em;
+    }
+
+    .manicon-resource-video {
+      font-size: 2.813em;
+    }
+
+    .preview-text {
+      @include utilityPrimary;
+      // Padded relative to font-size
+      padding: 1em 10px 1.2em;
+      font-size: 12px;
+      color: $neutral50;
+      background-color: $neutral20;
+
+      @include respond($break85) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .resource-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 62.2%;
+    padding: 12px 15px;
+    background-color: $neutral05;
+
+    @include respond($break40) {
+      width: calc(100% - 155px);
+    }
+
+    @include respond($break75) {
+      width: calc(100% - 135px);
+    }
+
+    @include respond($break85) {
+      width: calc(100% - 155px);
+    }
+
+    .resource-type {
+      @include templateHead;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: $neutral50;
+
+      @include respond($break75) {
+        display: none;
+      }
+    }
+
+    .arrow-link {
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      display: block;
+      width: 26px;
+      height: 26px;
+      padding-top: 6px;
+      margin-top: -13px;
+      font-size: 13px;
+      color: $neutral75;
+      text-align: center;
+      text-decoration: none;
+      background-color: $neutral20;
+      border-radius: 100%;
+
+      @include respond($break40) {
+        right: -17.5px;
+        width: 35px;
+        height: 35px;
+        padding-top: 9px;
+        margin-top: -17.5px;
+        font-size: 15px;
+      }
+
+      &:hover {
+        color: $neutralWhite;
+        background-color: $accentPrimary;
+      }
+    }
+  }
+
+  .resource-title {
+    text-decoration: none;
+
+    &:hover ~ .arrow-link {
+      color: $neutralWhite;
+      background-color: $accentPrimary;
+    }
+
+    h4 {
+      @include templateHead;
+      margin: 0;
+      margin-bottom: 6px;
+      font-size: 16px;
+      font-weight: $regular;
+      color: $neutral75;
+
+      @include respond($break85) {
+        font-size: 17px;
+      }
+    }
+  }
+
+  .resource-date {
+    @include subtitlePrimary;
+    font-size: 12px;
+    color: $neutral70;
+
+    @include respond($break85) {
+      font-size: 14px;
+    }
+  }
+
+  .resource-tags {
+    padding-top: 18px;
+
+    @include respond($break75) {
+      padding-top: 11px;
+    }
+
+    ul {
+      @include listUnstyled;
+      @include utilityPrimary;
+      font-size: 12px;
+      line-height: 1.2;
+
+      @include respond($break85) {
+        font-size: 13px;
+      }
+    }
+
+    li {
+      display: inline;
+      color: $neutral40;
+    }
+
+    a {
+      color: $neutral40;
+      text-decoration: none;
+    }
+  }
+}

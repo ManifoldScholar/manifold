@@ -2,7 +2,6 @@
 // ----------------------
 // <div> wrapper around form fields
 .form-input {
-
   + .form-input {
     margin-top: 40px;
   }
@@ -341,7 +340,7 @@
 
 // Browse specific form select
 .select-browse {
-  @include selectStyled;
+  @include selectPrimary;
   width: 100%;
 
   @include respond($break30) {
