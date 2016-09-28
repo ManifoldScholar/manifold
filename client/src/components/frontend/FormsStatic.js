@@ -11,7 +11,7 @@ export default class FormsStatic extends Component {
             bg-neutral05 (light gray)
             bg-neutral90 (off black)
           */}
-          <section className="bg-neutral05">
+          <section>
             <div className="container">
               <h4 className="section-heading">
                 Assorted form elements

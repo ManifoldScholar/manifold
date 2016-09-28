@@ -1,9 +1,9 @@
 .resource-list {
   .resource-count {
     @include utilityPrimary;
+    margin-bottom: 24px;
     font-size: 13px;
     color: $neutral50;
-    margin-bottom: 24px;
 
     span {
       color: $neutral75;

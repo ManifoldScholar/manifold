@@ -126,11 +126,18 @@
       // Padded relative to font-size
       padding: 1em 10px 1.2em;
       font-size: 12px;
+      line-height: 13px;
       color: $neutral50;
       background-color: $neutral20;
 
       @include respond($break85) {
         font-size: 14px;
+      }
+
+      .manicon {
+        margin-left: 11px;
+        font-size: 13px;
+        vertical-align: middle;
       }
     }
   }
@@ -154,18 +161,6 @@
 
     @include respond($break85) {
       width: calc(100% - 155px);
-    }
-
-    .resource-type {
-      @include templateHead;
-      display: block;
-      margin-bottom: 6px;
-      font-size: 14px;
-      color: $neutral50;
-
-      @include respond($break75) {
-        display: none;
-      }
     }
 
     .arrow-link {
