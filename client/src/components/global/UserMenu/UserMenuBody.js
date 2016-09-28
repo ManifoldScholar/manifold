@@ -4,9 +4,9 @@ import classNames from 'classnames';
 export default class UserMenuBody extends Component {
 
   static propTypes = {
-    hideUserMenu: PropTypes.func,
-    startLogout: PropTypes.func,
-    showLoginOverlay: PropTypes.func,
+    hideUserMenu: PropTypes.func.isRequired,
+    startLogout: PropTypes.func.isRequired,
+    showLoginOverlay: PropTypes.func.isRequired,
     visible: PropTypes.bool
   };
 

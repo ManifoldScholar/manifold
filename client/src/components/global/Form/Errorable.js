@@ -41,7 +41,7 @@ export default class Errorable extends Component {
       [this.props.className]: this.props.className
     });
     return (
-      <div {...this.props} className={wrapperClass} >
+      <div className={wrapperClass} >
         {this.props.children}
         <Form.InputError errors={this.errorsArray()} />
       </div>

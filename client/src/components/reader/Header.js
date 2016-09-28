@@ -25,11 +25,6 @@ export default class Header extends Component {
     visibility: PropTypes.object,
     appearance: PropTypes.object,
     notifications: PropTypes.object,
-    visibilityToggle: PropTypes.func,
-    visibilityHide: PropTypes.func,
-    visibilityShow: PropTypes.func,
-    panelToggle: PropTypes.func,
-    panelHide: PropTypes.func,
     selectFont: PropTypes.func,
     incrementFontSize: PropTypes.func,
     decrementFontSize: PropTypes.func,
@@ -37,10 +32,7 @@ export default class Header extends Component {
     decrementMargins: PropTypes.func,
     setColorScheme: PropTypes.func,
     scrollAware: PropTypes.object,
-    startLogout: PropTypes.func,
-    addNotification: PropTypes.func,
-    removeNotification: PropTypes.func,
-    removeAllNotifications: PropTypes.func
+    commonActions: PropTypes.object
   };
 
   constructor() {
@@ -55,27 +47,27 @@ export default class Header extends Component {
   }
 
   handleContentsButtonClick() {
-    this.props.visibilityToggle('tocDrawer');
+    this.props.commonActions.visibilityToggle('tocDrawer');
   }
 
   handleSearchMenuButtonClick() {
-    this.props.panelToggle('search');
+    this.props.commonActions.panelToggle('search');
   }
 
   handleAppearanceMenuButtonClick() {
-    this.props.panelToggle('appearance');
+    this.props.commonActions.panelToggle('appearance');
   }
 
   triggerShowSignInUpOverlay() {
-    this.props.visibilityShow('signInUpOverlay');
+    this.props.commonActions.visibilityShow('signInUpOverlay');
   }
 
   triggerToggleUserMenu() {
-    this.props.panelToggle('user');
+    this.props.commonActions.panelToggle('user');
   }
 
   triggerHideToc() {
-    this.props.visibilityHide('tocDrawer');
+    this.props.commonActions.visibilityHide('tocDrawer');
   }
 
   renderContentsButton = (contents) => {
@@ -178,18 +170,16 @@ export default class Header extends Component {
             id="user"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={UserMenuBody}
-            showLoginOverlay={this.triggerShowSignInUpOverlay}
-            hideUserMenu={this.triggerToggleUserMenu}
-
-            // Props required by body component
-            startLogout={this.props.startLogout}
+            showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
+            startLogout={this.props.commonActions.logout}
+            hideUserMenu={this.props.commonActions.toggleUserPanel}
           />
         </nav>
         <HeaderNotifications
           notifications={this.props.notifications}
-          addNotification={this.props.addNotification}
-          removeNotification={this.props.removeNotification}
-          removeAllNotifications={this.props.removeAllNotifications}
+          addNotification={this.props.commonActions.addNotification}
+          removeNotification={this.props.commonActions.removeNotification}
+          removeAllNotifications={this.props.commonActions.clearNotifications}
         />
       </header>
     );

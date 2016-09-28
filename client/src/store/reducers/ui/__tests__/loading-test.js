@@ -1,12 +1,11 @@
 import loadingReducer from '../loading';
-import { expect } from 'chai';
 
 /* eslint-disable no-unused-expressions */
 describe('store/reducers/ui/loading', () => {
 
   it('should return the initial state', () => {
     const state = loadingReducer(undefined, {});
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       active: false,
       activeLoaders: []
     });
@@ -17,7 +16,7 @@ describe('store/reducers/ui/loading', () => {
     const promise = new Promise(() => {});
     const action = { type: 'START_LOADING', payload: promise };
     const state = loadingReducer(initialState, action);
-    expect(state.active).to.be.true;
+    expect(state.active).toBe(true);
   });
 
   it('sets the active state to false when a START_LOADING promise is resolved', (done) => {
@@ -28,7 +27,7 @@ describe('store/reducers/ui/loading', () => {
     promise.then(() => {
       const stopAction = { type: 'STOP_LOADING', payload: promise };
       const stopState = loadingReducer(startState, stopAction);
-      expect(stopState.active).to.be.false;
+      expect(stopState.active).toBe(false);
       done();
     });
   });

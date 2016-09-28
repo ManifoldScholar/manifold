@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
@@ -41,7 +40,7 @@ describe('components', () => {
     it('should not render scoped notifications', () => {
       const { output } = setup();
       let listDOM = ReactDOM.findDOMNode(output.refs.notificationList);
-      expect(listDOM.querySelectorAll('.header-notification-container').length).to.equal(1);
+      expect(listDOM.querySelectorAll('.header-notification-container').length).toBe(1);
     });
   });
 });

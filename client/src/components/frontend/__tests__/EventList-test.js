@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow, mount, render } from 'enzyme';
 import { EventList } from 'components/frontend';
 
@@ -23,13 +22,13 @@ function mockEvents() {
 describe("EventList Component", () => {
 
   it("has the event-list class", () => {
-    expect(shallow(<EventList events={[]} />).is('.event-list')).to.be.true
+    expect(shallow(<EventList events={[]} />).is('.event-list')).toBe(true)
   });
 
   it("renders a ProjectEvent for each event", () => {
     const events = mockEvents();
     const wrapper = shallow(<EventList events={events} />);
-    expect(wrapper.find('ProjectEvent')).to.have.length(events.length);
+    expect(wrapper.find('ProjectEvent').length).toBe(events.length);
   });
 
 });

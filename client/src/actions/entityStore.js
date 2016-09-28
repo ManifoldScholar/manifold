@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 import isString from 'lodash/isString';
 import isObject from 'lodash/isObject';
-import uuid from 'node-uuid';
+import uuid from 'uuid';
 
 export const flush = createAction('ENTITY_STORE_FLUSH', (passedMetas) => {
   let metas;

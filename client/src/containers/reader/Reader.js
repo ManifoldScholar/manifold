@@ -169,8 +169,8 @@ class ReaderContainer extends Component {
               visibility={this.props.visibility }
               appearance={this.props.appearance}
               notifications={this.props.notifications}
+              commonActions={this.commonActions}
               {...this.readerActions}
-              {...this.commonActions}
             />
           </HigherOrder.ScrollAware>
           <main>

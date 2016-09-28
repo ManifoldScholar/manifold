@@ -8,6 +8,6 @@ export LoadingBar from './LoadingBar';
 export SearchMenuBody from './SearchMenuBody';
 export SearchMenuButton from './SearchMenuButton';
 export UIPanel from './UIPanel';
-export UserMenuBody from './UserMenuBody';
-export UserMenuButton from './UserMenuButton';
+export UserMenuBody from './UserMenu/UserMenuBody';
+export UserMenuButton from './UserMenu/UserMenuButton';
 export Avatar from './Avatar';

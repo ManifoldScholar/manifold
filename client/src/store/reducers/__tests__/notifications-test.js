@@ -1,11 +1,10 @@
 import notificationsReducer from '../notifications';
-import { expect } from 'chai';
 
 describe('store/reducers/notifications', () => {
   it('should return the initial state', () => {
     const state = notificationsReducer(undefined, {});
     // Must mirror initial state declared in '../norifications'
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       notifications: []
     });
   });
@@ -24,7 +23,7 @@ describe('store/reducers/notifications', () => {
       copy: 'The milk has expired'
     } };
     const state = notificationsReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       notifications: [
         {
           id: 1,
@@ -56,7 +55,7 @@ describe('store/reducers/notifications', () => {
       heading: 'Registration Complete'
     } };
     const state = notificationsReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       notifications: [
         {
           id: 2,
@@ -94,7 +93,7 @@ describe('store/reducers/notifications', () => {
 
     const action = { type: 'REMOVE_NOTIFICATION', payload: 1 };
     const state = notificationsReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       notifications: [
         {
           id: 2,
@@ -126,7 +125,7 @@ describe('store/reducers/notifications', () => {
 
     const action = { type: 'REMOVE_NOTIFICATION', payload: 7 };
     const state = notificationsReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       notifications: [
         {
           id: 1,
@@ -164,7 +163,7 @@ describe('store/reducers/notifications', () => {
 
     const action = { type: 'REMOVE_ALL_NOTIFICATIONS' };
     const state = notificationsReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       notifications: []
     });
   });

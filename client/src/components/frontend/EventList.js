@@ -44,9 +44,9 @@ export default class EventList extends Component {
   render() {
     return (
       <ul className="event-list" ref="eventList">
-        {this.props.events.map((event) => {
+        {this.props.events.map((event, index) => {
           return (
-              <li>
+              <li key={index}>
                 <div className={'event-tile ' + event.type} style={this.state.matchedHeight}>
                   <ProjectEvent event={event} />
                 </div>

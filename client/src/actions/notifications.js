@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import uuid from 'node-uuid';
+import uuid from 'uuid';
 
 // Add notification that will assign a random ID if one does not exist already
 export const addNotification = createAction('ADD_NOTIFICATION', subject => {
