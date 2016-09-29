@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { ResourceList } from 'components/frontend';
+import { BackLinkPrimary, BackLinkSecondary, ResourceList } from 'components/frontend';
 
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
@@ -34,15 +34,10 @@ class ProjectResourcesContainer extends Component {
     return (
       <div>
         <section className="bg-neutral05">
-          <div className="container flush">
-            <Link to={`/browse/project/${project.id}`} className="back-link-section">
-              <i className="manicon manicon-arrow-left"></i>
-              Back to Project
-              <span>
-                {project.attributes.title}
-              </span>
-            </Link>
-          </div>
+          <BackLinkPrimary
+            link={`/browse/project/${project.id}`}
+            title={project.attributes.title}
+          />
         </section>
         <section>
           <div className="container">
@@ -112,6 +107,13 @@ class ProjectResourcesContainer extends Component {
 
             <ResourceList/>
           </div>
+        </section>
+
+        <section className="bg-neutral05">
+          <BackLinkSecondary
+            link={`/browse/project/${project.id}`}
+            title={project.attributes.title}
+          />
         </section>
       </div>
     );

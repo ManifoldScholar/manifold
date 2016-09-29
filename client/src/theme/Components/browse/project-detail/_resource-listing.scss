@@ -129,6 +129,7 @@
       line-height: 13px;
       color: $neutral50;
       background-color: $neutral20;
+      transition: background-color $duration $timing;
 
       @include respond($break85) {
         font-size: 14px;
@@ -178,6 +179,7 @@
       text-decoration: none;
       background-color: $neutral20;
       border-radius: 100%;
+      transition: background-color $duration $timing;
 
       @include respond($break40) {
         right: -17.5px;
