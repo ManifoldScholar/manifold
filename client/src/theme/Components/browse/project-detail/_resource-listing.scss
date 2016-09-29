@@ -126,11 +126,19 @@
       // Padded relative to font-size
       padding: 1em 10px 1.2em;
       font-size: 12px;
+      line-height: 13px;
       color: $neutral50;
       background-color: $neutral20;
+      transition: background-color $duration $timing;
 
       @include respond($break85) {
         font-size: 14px;
+      }
+
+      .manicon {
+        margin-left: 11px;
+        font-size: 13px;
+        vertical-align: middle;
       }
     }
   }
@@ -156,18 +164,6 @@
       width: calc(100% - 155px);
     }
 
-    .resource-type {
-      @include templateHead;
-      display: block;
-      margin-bottom: 6px;
-      font-size: 14px;
-      color: $neutral50;
-
-      @include respond($break75) {
-        display: none;
-      }
-    }
-
     .arrow-link {
       position: absolute;
       top: 50%;
@@ -183,6 +179,7 @@
       text-decoration: none;
       background-color: $neutral20;
       border-radius: 100%;
+      transition: background-color $duration $timing;
 
       @include respond($break40) {
         right: -17.5px;

@@ -118,6 +118,7 @@ export default class ResourceThumbs extends Component {
     ];
 
     return (
+      <div>
         <nav className="resource-list">
           <div className="resource-count">
             <span>
@@ -136,6 +137,39 @@ export default class ResourceThumbs extends Component {
             })}
           </ul>
         </nav>
+
+        <nav className="list-pagination">
+          <ul>
+            <li className="pagination-previous">
+              <Link to="#">
+                <i className="manicon manicon-arrow-long-left"></i>
+                Prev
+              </Link>
+            </li>
+            <li>
+              <Link to="#">1</Link>
+            </li>
+            <li className="active">
+              <Link to="#">2</Link>
+            </li>
+            <li>
+              <Link to="#">3</Link>
+            </li>
+            <li>
+              <Link to="#">4</Link>
+            </li>
+            <li>
+              <Link to="#">5</Link>
+            </li>
+            <li className="pagination-next">
+              <Link to="#">
+                Next
+                <i className="manicon manicon-arrow-long-right"></i>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     );
   }
 }

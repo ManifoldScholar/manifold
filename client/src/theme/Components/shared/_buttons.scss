@@ -293,7 +293,7 @@
   }
 }
 
-.back-link-section {
+.back-link-primary {
   @include utilityPrimary;
   display: inline-block;
   padding: 20px 0 18px;
@@ -315,5 +315,40 @@
     letter-spacing: 0.01em;
     color: $neutral50;
     text-transform: none;
+  }
+}
+
+.back-link-secondary {
+  @include clearfix;
+  display: table;
+  padding: 34px 0 25px;
+  text-decoration: none;
+
+  .manicon {
+    display: table-cell;
+    padding-right: 22px;
+    font-size: 42px;
+    color: $neutral40;
+    vertical-align: top;
+
+    + div {
+      display: table-cell;
+      width: 100%;
+      vertical-align: top;
+    }
+  }
+
+  .back-text {
+    @include utilityPrimary;
+    font-size: 14px;
+    color: $neutral70;
+  }
+
+  .project-title {
+    @include templateHead;
+    display: block;
+    font-size: 17px;
+    line-height: 1.556;
+    color: $neutral50;
   }
 }

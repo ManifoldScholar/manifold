@@ -1,5 +1,7 @@
 'create index';
 
+export BackLinkPrimary from './BackLinkPrimary';
+export BackLinkSecondary from './BackLinkSecondary';
 export EventList from './EventList';
 export Footer from './Footer';
 export FormsStatic from './FormsStatic';
