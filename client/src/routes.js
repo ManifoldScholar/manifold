@@ -1,18 +1,18 @@
 import React from 'react';
 import { Route, IndexRedirect, IndexRoute } from 'react-router';
 import {
+    Following,
     Frontend,
     Home,
     Login,
-    Following,
+    NotFound,
+    Page,
     ProjectDetail,
     ProjectResources,
-    Page,
     ResourceDetail
 } from 'containers/frontend';
 import { Developer } from 'containers/developer';
 import { Reader } from 'containers/reader';
-import { NotFound } from './containers/global';
 import { Section, AnnotationTools } from 'components/reader';
 import { FormsStatic } from './components/frontend';
 
