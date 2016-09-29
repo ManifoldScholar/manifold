@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, IndexRedirect, IndexRoute } from 'react-router';
 import {
+    CollectionDetail,
     Following,
     Frontend,
     Home,
@@ -32,10 +33,10 @@ export default () => {
           <Route component={Login} path="login" />
           <Route component={Following} path="following" />
           <Route component={ProjectDetail} path="project/:id" />
+          <Route component={CollectionDetail} path="project/:id/collection/:collectionId" />
           <Route component={ProjectResources} path="project/:id/resources" />
           <Route component={ResourceDetail} path="project/:id/resources/:resourceId" />
           <Route component={Page} path="page/:slug" />
-
         </Route>
 
         <Route component={Frontend} path="/static" >

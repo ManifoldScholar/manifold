@@ -12,3 +12,4 @@ export Layout from './Layout';
 export ProjectList from './ProjectList';
 export Maker from './Maker';
 export Utility from './Utility';
+export ShareNavPrimary from './ShareNavPrimary';

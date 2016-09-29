@@ -17,7 +17,7 @@ export default class ResourceCollectionThumbnail extends Component {
     return (
       <li>
         <Link
-          to={`/browse/project/${this.props.projectId}/resources`}
+          to={`/browse/project/${this.props.projectId}/collection/${collection.id}`}
           style={ { backgroundImage: 'url(' + bgImage + ')' } }
         >
           <div className="title-overlay">
