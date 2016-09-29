@@ -1,0 +1,82 @@
+.error-page {
+  display: table;
+  width: 100%;
+  min-height: inherit;
+  border: 20px solid $sp40Tertiary;
+
+  .error-wrapper {
+    display: table-cell;
+    padding: 10vh 0;
+    vertical-align: middle;
+  }
+
+  .container {
+    max-width: $containerWidthFocus;
+    text-align: center;
+  }
+
+  .stop-sign {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 26px;
+
+    .manicon-octagon {
+      font-size: 48px;
+      color: $sp40Tertiary;
+    }
+
+    .manicon-bang {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      font-size: 26px;
+      line-height: 48px;
+      color: $neutralWhite;
+      text-align: center;
+    }
+  }
+
+  header {
+    // Relative to font-size
+    margin-bottom: 1.375em;
+    font-size: 24px;
+
+    @include respond($break60) {
+      font-size: 32px;
+    }
+
+    h3 {
+      @include templateHead;
+      margin: 0;
+      // Relative to font-size declared in parent
+      font-size: 1em;
+      font-weight: $regular;
+      line-height: 1.333;
+      color: $neutral50;
+    }
+  }
+
+  .error-description {
+    h1 {
+      @include templateHead;
+      font-size: 20px;
+      font-weight: $regular;
+      color: $neutralOffBlack;
+
+      @include respond($break60) {
+        font-size: 24px;
+      }
+    }
+
+    p {
+      @include subtitlePrimary;
+      font-size: 14px;
+      line-height: 1.421;
+      color: $neutral75;
+    }
+  }
+
+}
+
+
