@@ -7,16 +7,9 @@
         "transform-class-properties",
         "transform-export-extensions",
         "babel-plugin-transform-es2015-destructuring",
-        ["module-alias", [
-          { "src": "./src/actions", "expose": "actions" },
-          { "src": "./src/api", "expose": "api" },
-          { "src": "./src/components", "expose": "components" },
-          { "src": "./src/containers", "expose": "containers" },
-          { "src": "./src/helpers", "expose": "helpers" },
-          { "src": "./src/store", "expose": "store" },
-          { "src": "./src/utils", "expose": "utils" },
-          { "src": "./src/routes", "expose": "routes" }
-        ]]
+        ["module-resolver", {
+          "root": ["./src"]
+        }]
       ]
     },
     "test": {
@@ -24,16 +17,9 @@
         "transform-class-properties",
         "transform-export-extensions",
         "babel-plugin-transform-es2015-destructuring",
-        ["module-alias", [
-          { "src": "./src/actions", "expose": "actions" },
-          { "src": "./src/api", "expose": "api" },
-          { "src": "./src/components", "expose": "components" },
-          { "src": "./src/containers", "expose": "containers" },
-          { "src": "./src/helpers", "expose": "helpers" },
-          { "src": "./src/store", "expose": "store" },
-          { "src": "./src/utils", "expose": "utils" },
-          { "src": "./src/routes", "expose": "routes" }
-        ]]
+        ["module-resolver", {
+          "root": ["./src"]
+        }]
       ]
     },
     "production": {
@@ -41,16 +27,9 @@
         "transform-class-properties",
         "transform-export-extensions",
         "babel-plugin-transform-es2015-destructuring",
-        ["module-alias", [
-          { "src": "./src/actions", "expose": "actions" },
-          { "src": "./src/api", "expose": "api" },
-          { "src": "./src/components", "expose": "components" },
-          { "src": "./src/containers", "expose": "containers" },
-          { "src": "./src/helpers", "expose": "helpers" },
-          { "src": "./src/store", "expose": "store" },
-          { "src": "./src/utils", "expose": "utils" },
-          { "src": "./src/routes", "expose": "routes" }
-        ]]
+        ["module-resolver", {
+          "root": ["./src"]
+        }]
       ]
     }
 
