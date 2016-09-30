@@ -2,7 +2,7 @@ import colorsReducer from '../colors';
 
 describe('store/reducers/ui/colors', () => {
   it('should return the initial state', () => {
-    const state = colorsReducer(undefined, {});
+    const state = colorsReducer(undefined, { type: 'SOME_ACTION'});
     // Must mirror initial state declared in '../typography'
     expect(state).toEqual({
       colorScheme: 'light'

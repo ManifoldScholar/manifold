@@ -4,7 +4,7 @@ import loadingReducer from '../loading';
 describe('store/reducers/ui/loading', () => {
 
   it('should return the initial state', () => {
-    const state = loadingReducer(undefined, {});
+    const state = loadingReducer(undefined, { type: 'SOME_ACTION'});
     expect(state).toEqual({
       active: false,
       activeLoaders: []

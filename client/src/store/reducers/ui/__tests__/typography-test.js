@@ -2,7 +2,7 @@ import typographyReducer from '../typography';
 
 describe('store/reducers/ui/typography', () => {
   it('should return the initial state', () => {
-    const state = typographyReducer(undefined, {});
+    const state = typographyReducer(undefined, { type: 'SOME_ACTION'});
     // Must mirror initial state declared in '../typography'
     expect(state).toEqual({
       font: 'serif',

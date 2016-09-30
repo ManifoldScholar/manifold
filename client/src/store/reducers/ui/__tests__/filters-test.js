@@ -3,7 +3,7 @@ import filterReducer from '../filters';
 describe('store/reducers/ui/filters', () => {
 
   it('should return the initial state', () => {
-    const state = filterReducer(undefined, {});
+    const state = filterReducer(undefined, { type: 'SOME_ACTION'});
     expect(state).toEqual({ project: {} });
   });
 

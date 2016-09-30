@@ -2,7 +2,7 @@ import visibilityReducer from '../visibility';
 
 describe('store/reducers/ui/visibility', () => {
   it('should return the initial state', () => {
-    const state = visibilityReducer(undefined, {});
+    const state = visibilityReducer(undefined, { type: 'SOME_ACTION'} );
     // Must mirror initial state declared in '../visibility'
     expect(state).toEqual({
       loginOverlay: false,
