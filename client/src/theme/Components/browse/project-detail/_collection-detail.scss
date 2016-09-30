@@ -1,4 +1,6 @@
 .collection-detail {
+  padding-bottom: 12px;
+
   header {
     display: table;
     width: 100%;
@@ -37,7 +39,7 @@
 
   .collection-description {
     @include templateCopy;
-    max-width: 890px;
+    max-width: $containerWidthFocus;
     font-size: 15px;
     color: $neutral70;
   }

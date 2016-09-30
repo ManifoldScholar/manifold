@@ -6,6 +6,7 @@ import {
   BackLinkPrimary,
   BackLinkSecondary,
   ResourceList,
+  ResourceSlideshow,
   ResourceTotals,
   ShareNavPrimary
 } from 'components/frontend';
@@ -68,11 +69,11 @@ class CollectionDetailContainer extends Component {
               </div>
               <ShareNavPrimary/>
             </div>
+
+            <ResourceSlideshow/>
+
             <ResourceTotals count={2028} projectId={project.id} />
-          </div>
-        </section>
-        <section>
-          <div className="container">
+
             <form className="form-list-filter">
               <div className="search-input">
                 <button className="search-button" type="submit">
