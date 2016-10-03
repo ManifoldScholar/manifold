@@ -19,7 +19,8 @@
     "build-server-web": "webpack --config ./webpack/entries/web-server.config.entry.js --colors --display-error-details",
     "build-universal-dll": "webpack --config ./webpack/webpack.dll.js",
     "build-client": "webpack --config ./webpack/entries/client.config.entry.js",
-    "clean-builds": "node ./script/clean-builds-entry.js"
+    "clean-builds": "node ./script/clean-builds-entry.js",
+    "lint": "eslint ."
   },
   "jest": {
     "moduleFileExtensions": [
