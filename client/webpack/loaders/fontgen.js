@@ -173,11 +173,10 @@ module.exports = function (content) {
         filename = filename
           .replace("[fontname]", fontconf.fontName)
           .replace("[ext]", "." + format);
-        console.log(this, 'this');
-        var url = loaderUtils.interpolateName(this,
+        var url = loaderUtils.interpolateName(process,
           filename,
           {
-            context: self.options.context || this.context,
+            context: self.options.context || process.context,
             content: res[format]
           }
         );
