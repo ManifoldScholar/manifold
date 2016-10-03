@@ -41,7 +41,7 @@ module.exports = {
     path: assetsPath,
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: '/build/client'
+    publicPath: '/build/client/'
   },
   resolveLoader: {
     alias: {
