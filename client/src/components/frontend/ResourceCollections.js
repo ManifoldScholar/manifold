@@ -11,7 +11,7 @@ export default class ResourceCollections extends Component {
     const stubCollections = [
       {
         id: Math.random() * 100,
-        image: '/placeholder/background-waterfall.jpg',
+        image: '/static/placeholder/background-waterfall.jpg',
         title: 'Recorded conversations with author; Pre-translated'
       },
       {
@@ -20,12 +20,12 @@ export default class ResourceCollections extends Component {
       },
       {
         id: Math.random() * 100,
-        image: '/placeholder/background-coniferous.jpg',
+        image: '/static/placeholder/background-coniferous.jpg',
         title: 'Untitled'
       }
     ];
 
-    const collectionsBackground = '/images/resource-collection.jpg';
+    const collectionsBackground = '/static/images/resource-collection.jpg';
 
     return (
       <nav className="resource-collections-list">

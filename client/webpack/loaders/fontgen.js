@@ -173,6 +173,7 @@ module.exports = function (content) {
         filename = filename
           .replace("[fontname]", fontconf.fontName)
           .replace("[ext]", "." + format);
+        console.log(this, 'this');
         var url = loaderUtils.interpolateName(this,
           filename,
           {

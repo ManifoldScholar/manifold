@@ -169,7 +169,7 @@ class ProjectDetailContainer extends Component {
           class name hero-image in addition to the background image required
         */}
         <section className="project-detail-hero hero-image"
-          style={{ backgroundImage: 'url(/placeholder/background-waterfall.jpg)' }}
+          style={{ backgroundImage: 'url(/static/placeholder/background-waterfall.jpg)' }}
         >
           <div className="container">
             <ProjectDetailHero

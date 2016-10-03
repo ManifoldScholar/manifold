@@ -11,6 +11,8 @@ const environmentConfiguration = {
 
 const applicationConfiguration = {
   clientPort: process.env.MANIFOLD_CLIENT_PORT,
+  webServerPort: process.env.MANIFOLD_WEB_SERVER_PORT,
+  reactServerPort: process.env.MANIFOLD_REACT_SERVER_PORT,
   assetPort: process.env.MANIFOLD_ASSET_PORT,
   apiUri: process.env.MANIFOLD_API_URL,
   assetProxyPaths: ['/dist'],

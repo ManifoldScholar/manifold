@@ -26,7 +26,7 @@ export default class ResourceThumbs extends Component {
       {
         id: Math.random() * 100,
         type: 'video',
-        image: '/placeholder/background-coniferous.jpg',
+        image: '/static/placeholder/background-coniferous.jpg',
         title: 'Vestibulum id ligula porta felis euismod semper.',
         tags: [
           'Japan',
@@ -55,7 +55,7 @@ export default class ResourceThumbs extends Component {
       {
         id: Math.random() * 100,
         type: 'image',
-        image: '/placeholder/background-waterfall.jpg',
+        image: '/static/placeholder/background-waterfall.jpg',
         title: 'Nullam quis risus eget urna mollis ornare',
         tags: [
           'Japan',

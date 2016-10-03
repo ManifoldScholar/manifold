@@ -30,7 +30,7 @@ export default class Html extends Component {
           <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
           {DocumentMeta.renderAsReact()}
 
-          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="shortcut icon" href="/static/favicon.ico" />
 
           {/* Import fonts from webkit */}
           <script src={'https://use.typekit.net/mnj5ltf.js'}></script>
@@ -55,6 +55,7 @@ export default class Html extends Component {
             }}
             charSet="UTF-8"
           />
+          <script src="/build/universal/dll/dll.vendor.js"></script>
           <script src={assets.javascript.theme} charSet="UTF-8"/>
           <script src={assets.javascript.main} charSet="UTF-8"/>
         </body>

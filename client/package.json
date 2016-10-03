@@ -11,13 +11,14 @@
   "keywords": [],
   "main": "bin/server.js",
   "scripts": {
-    "start": "node $NODE_DEBUG_OPTION -r dotenv/config bin/start.js",
-    "server": "node -r dotenv/config bin/server.js",
-    "webpack": "node -r dotenv/config webpack/webpack-dev-server.js",
-    "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
-    "lint": "eslint -c .eslintrc src && scss-lint src/theme/ -c ../.scss-lint.yml",
-    "lint-fix": "eslint --fix -c .eslintrc src && scss-lint src/theme/ -c ../.scss-lint.yml",
-    "test": "jest --verbose"
+    "start": "npm-run-all --parallel build-server-react build-server-web server-react server-assets server-web",
+    "server-react": "nodemon ./script/react-server-entry --watch ./dist/build/server/react-server",
+    "server-assets": "node ./webpack/entries/client.server.entry.js",
+    "server-web": "node ./script/web-server-entry",
+    "build-server-react": "webpack --config ./webpack/entries/react-server.config.entry.js --watch --colors --display-error-details",
+    "build-server-web": "webpack --config ./webpack/entries/web-server.config.entry.js --colors --display-error-details",
+    "build-universal-dll": "webpack --config ./webpack/webpack.dll.js",
+    "build-client": "webpack --config ./webpack/entries/client.config.entry.js"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -55,6 +56,7 @@
     "babel-preset-react": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
     "babel-register": "^6.8.0",
+    "babel-runtime": "^6.11.6",
     "chalk": "^1.1.3",
     "classnames": "^2.2.1",
     "clean-webpack-plugin": "^0.1.9",
@@ -81,6 +83,7 @@
     "json-loader": "^0.5.3",
     "loader-utils": "^0.2.10",
     "lodash": "^4.11.2",
+    "minimist": "^1.2.0",
     "morgan": "^1.6.1",
     "node-emoji": "^1.3.0",
     "node-sass": "^3.3.3",
@@ -119,14 +122,14 @@
     "serve-static": "^1.10.0",
     "strip-loader": "^0.1.0",
     "style-loader": "^0.13.0",
+    "universal-webpack": "^0.1.40",
     "uri-js": "^2.1.1",
     "url-loader": "^0.5.6",
     "uuid": "https://registry.npmjs.org/uuid/-/uuid-2.0.2.tgz",
     "webfonts-generator": "^0.3.2",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.4.1",
-    "webpack-isomorphic-tools": "^2.2.4"
+    "webpack-hot-middleware": "^2.4.1"
   },
   "devDependencies": {
     "babel-jest": "^15.0.0",

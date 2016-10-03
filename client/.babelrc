@@ -10,7 +10,8 @@
         ["module-resolver", {
           "root": ["./src"]
         }]
-      ]
+      ],
+      "compact": true
     },
     "test": {
       "plugins": [
@@ -20,7 +21,8 @@
         ["module-resolver", {
           "root": ["./src"]
         }]
-      ]
+      ],
+      "compact": true
     },
     "production": {
       "plugins": [
@@ -30,7 +32,8 @@
         ["module-resolver", {
           "root": ["./src"]
         }]
-      ]
+      ],
+      "compact": true
     }
 
   }
