@@ -11,14 +11,15 @@
   "keywords": [],
   "main": "bin/server.js",
   "scripts": {
-    "start": "npm-run-all build-universal-dll --parallel build-server-react build-server-web server-react server-assets server-web",
+    "start": "npm-run-all clean-builds build-universal-dll --parallel build-server-react build-server-web server-react server-assets server-web",
     "server-react": "nodemon ./script/react-server-entry --watch ./dist/build/server/react-server",
     "server-assets": "node ./webpack/entries/client.server.entry.js",
     "server-web": "node ./script/web-server-entry",
     "build-server-react": "webpack --config ./webpack/entries/react-server.config.entry.js --watch --colors --display-error-details",
     "build-server-web": "webpack --config ./webpack/entries/web-server.config.entry.js --colors --display-error-details",
     "build-universal-dll": "webpack --config ./webpack/webpack.dll.js",
-    "build-client": "webpack --config ./webpack/entries/client.config.entry.js"
+    "build-client": "webpack --config ./webpack/entries/client.config.entry.js",
+    "clean-builds": "node ./script/clean-builds-entry.js"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -116,6 +117,7 @@
     "redux-logger": "^2.0.4",
     "redux-promise": "^0.5.0",
     "redux-thunk": "^2.0.1",
+    "rimraf": "^2.5.4",
     "sass-loader": "^3.0.0",
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
