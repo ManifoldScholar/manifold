@@ -8,4 +8,6 @@ require("react-redux");
 require("react-dom");
 reqiure("react-dropzone");
 require("react-document-meta");
+require("redux-actions");
+require("redux-thunk");
 
