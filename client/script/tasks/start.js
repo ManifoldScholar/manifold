@@ -23,17 +23,10 @@ if (__DEVELOPMENT__) {
       console.log(e, 'One of the development NPM tasks in ./script/tasks/start.js failed');
     });
 } else {
-  const runList = [
-    "build-dist"
+  console.log('STARTING IN PRODUCTION');
+  const parallelRunList = [
+    "server-react",
+    "server-web"
   ];
-  runAll(runList, { parallel: false, stdout: process.stdout })
-    .then(() => {
-      const parallelRunList = [
-        "server-react",
-        "server-web"
-      ];
-      runAll(parallelRunList, { parallel: true, stdout: process.stdout });
-    }, (e) => {
-      console.log(e, 'One of the production NPM tasks in ./script/tasks/start.js failed');
-    });
+  runAll(parallelRunList, { parallel: true, stdout: process.stdout });
 }
