@@ -24,14 +24,11 @@ if (__DEVELOPMENT__) {
     });
 } else {
   const runList = [
-    "clean-builds",
-    "build-prod-client"
+    "build-dist"
   ];
   runAll(runList, { parallel: false, stdout: process.stdout })
     .then(() => {
       const parallelRunList = [
-        "build-server-react",
-        "build-server-web",
         "server-react",
         "server-web"
       ];

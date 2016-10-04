@@ -12,9 +12,11 @@
   "main": "bin/server.js",
   "scripts": {
     "start": "node ./script/start-entry",
+    "start-prod": "NODE_ENV=production node ./script/start-entry",
     "server-react": "nodemon ./script/react-server-entry --watch ./dist/build/server/react-server",
     "server-assets": "node ./webpack/entries/client.server.entry.js",
     "server-web": "node ./script/web-server-entry",
+    "build-prod-server-react": "webpack --config ./webpack/entries/react-server.config.entry.js --colors --display-error-details",
     "build-server-react": "webpack --config ./webpack/entries/react-server.config.entry.js --watch --colors --display-error-details",
     "build-server-web": "webpack --config ./webpack/entries/web-server.config.entry.js --colors --display-error-details",
     "build-universal-dll": "webpack --config ./webpack/webpack.dll.js",
@@ -22,7 +24,9 @@
     "build-prod-client": "webpack --minimize --config ./webpack/entries/client.config.entry.js",
     "clean-builds": "node ./script/clean-builds-entry.js",
     "clean-client-build": "node ./script/clean-client-build-entry.js",
-    "lint": "eslint ."
+    "build-dist": "NODE_ENV=production npm-run-all clean-builds --parallel build-prod-server-react build-server-web build-prod-client",
+    "lint": "eslint .",
+    "test": "jest --verbose"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -138,9 +142,9 @@
     "webpack-hot-middleware": "^2.4.1"
   },
   "devDependencies": {
-    "babel-jest": "^15.0.0",
+    "babel-jest": "^16.0.0",
     "enzyme": "^2.3.0",
-    "jest": "^15.1.1"
+    "jest": "^16.0.0"
   },
   "engines": {
     "node": "4.1.1"
