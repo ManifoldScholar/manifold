@@ -62,7 +62,18 @@ export default function (parameters) {
   });
   app.use('/', reactServerProxy);
 
-  const listenOn = config.webServerPort;
+  const socketLocation = process.env.NODE_SERVER_SOCKET_PATH;
+  let listenOn;
+  let setUmask = false;
+  let oldUmask;
+  if (socketLocation) {
+    listenOn = socketLocation;
+    setUmask = true;
+    oldUmask = process.umask('0000');
+  } else {
+    listenOn = config.webServerPort;
+  }
+
   server.listen(listenOn, (err) => {
     if (err) {
       console.error(err);

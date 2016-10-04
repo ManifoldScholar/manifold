@@ -132,18 +132,6 @@ export default function (parameters) {
     });
   });
 
-  // const socketLocation = process.env.NODE_SERVER_SOCKET_PATH;
-  // let listenOn;
-  // let setUmask = false;
-  // let oldUmask;
-  // if (socketLocation) {
-  //   listenOn = socketLocation;
-  //   setUmask = true;
-  //   oldUmask = process.umask('0000');
-  // } else {
-  //   listenOn = config.clientPort;
-  // }
-
   const listenOn = config.reactServerPort;
   const header = (str) => { return chalk.bold.green.bold(pad(str, 80, ' ', false)); };
   const info = (str) => { return chalk.bold.cyan(str); };
