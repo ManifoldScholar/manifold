@@ -55,7 +55,10 @@ export default class Html extends Component {
             }}
             charSet="UTF-8"
           />
-          <script src="/build/universal/dll/dll.vendor.js"></script>
+          {__DEVELOPMENT__ ?
+            <script src="/build/universal/dll/dll.vendor.js"></script>
+            : null
+          }
           <script src={assets.javascript.theme} charSet="UTF-8"/>
           <script src={assets.javascript.main} charSet="UTF-8"/>
         </body>

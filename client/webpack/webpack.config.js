@@ -1,47 +1,115 @@
 require("babel-polyfill");
+
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
-var assetsPath = path.resolve(__dirname, '../dist/build/client');
+var assetsPath = path.resolve(__dirname, '../dist/build/client/build/');
 var babelrc = fs.readFileSync('./.babelrc');
-var babelrcObject = {};
 
+// Grab the babelrc config.
 try {
-  babelrcObject = JSON.parse(babelrc);
+  var babelrcTotal = JSON.parse(babelrc);
 } catch (err) {
   console.error('==>     ERROR: Error parsing your .babelrc.');
   console.error(err);
 }
 
-// TODO: Handle babelrc env switching
-var babelrcObjectDevelopment = babelrcObject.env && babelrcObject.env.development || {};
-var babelLoaderQuery = Object.assign({}, babelrcObject, babelrcObjectDevelopment);
+// Select the correct babel environment to build the loader query.
+var environment = __ENVIRONMENT__;
+var babelRcEnv= babelrcTotal.env && babelrcTotal.env[environment]|| {};
+var babelLoaderQuery = Object.assign({}, babelrcTotal, babelRcEnv);
 delete babelLoaderQuery.env;
 Object.assign(babelLoaderQuery, {cacheDirectory: true});
 
+
+// Create the entries. If we're in dev, we want hot loading
+var mainEntry = ['./src/client.js'];
+var themeEntry = ['./src/theme/theme.js'];
+if (__DEVELOPMENT__) {
+  mainEntry.unshift('webpack/hot/only-dev-server');
+  mainEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
+  mainEntry.unshift('react-hot-loader/patch');
+  themeEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
+  themeEntry.unshift('react-hot-loader/patch');
+}
+
+// Determine the public path
+var publicPath;
+if (__DEVELOPMENT__) {
+  publicPath = '/build/client/build/';
+} else {
+  publicPath = '/';
+}
+
+// Set the plugins.
+var plugins;
+if (__DEVELOPMENT__) {
+  plugins = [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.IgnorePlugin(/webpack-stats\.json$/),
+    new webpack.DllReferencePlugin({
+      context: path.join(__dirname, "..", "src"),
+      manifest: require("../dist/build/universal/dll/vendor-manifest.json")
+    })
+  ];
+} else {
+  plugins = [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new CopyWebpackPlugin([{
+      from: path.join(__dirname, "..", "static"),
+      to: "static"
+    }]),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
+      compress: {
+        warnings: false,
+        dead_code: true
+      }
+    })
+  ];
+}
+
+if (__CLIENT__ && __PRODUCTION__) {
+  plugins.push(new webpack.DefinePlugin({
+    "process.env": {
+      NODE_ENV: JSON.stringify("production")
+    }
+  }));
+}
+
+// Push those globals, yo.
+plugins.push(new webpack.DefinePlugin({
+    __MANIFOLD_API_URL__: '"' +  global.__MANIFOLD_API_URL__ + '"',
+    __CLIENT__: global.__CLIENT__,
+    __SERVER__: global.__SERVER__,
+    __DEVELOPMENT__: global.__DEVELOPMENT__,
+    __DEVTOOLS__: global.__DEVELOPMENT__
+  })
+);
+
+let devtool;
+if (__DEVELOPMENT__) {
+  devtool = "cheap-module-eval-source-map";
+} else {
+  devtool = "cheap-module-source-map";
+}
+
 module.exports = {
-  devtool: "eval",
+  devtool: devtool,
   context: path.resolve(__dirname, '..'),
   entry: {
-    'main': [
-      'react-hot-loader/patch',
-      'webpack-dev-server/client?http://0.0.0.0:3001',
-      'webpack/hot/only-dev-server',
-      './src/client.js'
-    ]
+    'main': mainEntry
     ,
-    'theme': [
-      'webpack-dev-server/client?http://0.0.0.0:3001',
-      'webpack/hot/only-dev-server',
-      './src/theme/theme.js'
-    ]
+    'theme': themeEntry
   },
   output: {
     path: assetsPath,
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: '/build/client/'
+    publicPath: publicPath
   },
   resolveLoader: {
     alias: {
@@ -109,25 +177,7 @@ module.exports = {
     ],
     extensions: ['', '.json', '.js']
   },
-  node: {
-    fs: "empty"
-  },
-  plugins: [
-    // hot reload
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(/webpack-stats\.json$/),
-    new webpack.DllReferencePlugin({
-      context: path.join(__dirname, "..", "src"),
-      manifest: require("../dist/build/universal/dll/vendor-manifest.json")
-    }),
-    new webpack.DefinePlugin({
-      __MANIFOLD_API_URL__: '"' +  global.__MANIFOLD_API_URL__ + '"',
-      __CLIENT__: global.__CLIENT__,
-      __SERVER__: global.__SERVER__,
-      __DEVELOPMENT__: global.__DEVELOPMENT__,
-      __DEVTOOLS__: global.__DEVELOPMENT__
-    })
-  ],
+  plugins: plugins,
   postcss: function() {
     return [ autoprefixer({ browsers: ['last 2 versions'] }) ];
   }

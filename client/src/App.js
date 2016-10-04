@@ -48,12 +48,13 @@ export default class App extends Component {
         return <HigherOrder.ResolveDataDependencies {...props} />;
       };
     }
+    this.finalRouter = this.router();
   }
 
   componentDidMount() {
     this.store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
     this.store.dispatch(getCurrentUser);
-    if (__DEVTOOLS__) {
+    if (__DEVELOPMENT__) {
       this.store.dispatch({ type: 'RENDER_DEV_TOOLS' });
     }
     this.forceUpdate();
@@ -81,14 +82,14 @@ export default class App extends Component {
   render() {
     const state = this.store.getState();
     let devTools = null;
-    if (state.developer.renderDevTools) {
+    if (state.developer.renderDevTools && __DEVELOPMENT__) {
       devTools = <DevTools />;
     }
 
     return (
       <Provider store={this.store} key="provider">
         <Manifold>
-          {this.router()}
+          {this.finalRouter}
           {devTools}
         </Manifold>
       </Provider>

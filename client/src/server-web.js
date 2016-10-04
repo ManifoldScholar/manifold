@@ -26,9 +26,15 @@ export default function (parameters) {
   app.use(compression());
   app.use(morgan(logStyle));
 
-  const assetProxy = proxy({
-    target: `http://localhost:${config.assetPort}`,
-  });
+  if (__DEVELOPMENT__) {
+    const assetProxy = proxy({
+      target: `http://localhost:${config.assetPort}`,
+    });
+    app.use(['/build'], assetProxy);
+    const staticPath = path.join(__dirname, '..', '..', '..', '..', 'static');
+    console.log(staticPath);
+    app.use('/static', Express.static(staticPath));
+  }
 
   const reactServerProxy = proxy({
     target: `http://localhost:${config.reactServerPort}`,
@@ -54,12 +60,9 @@ export default function (parameters) {
         />));
     }
   });
-
-  app.use(['/build', '/static'], assetProxy);
   app.use('/', reactServerProxy);
 
   const listenOn = config.webServerPort;
-
   server.listen(listenOn, (err) => {
     if (err) {
       console.error(err);

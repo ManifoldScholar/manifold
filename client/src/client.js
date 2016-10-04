@@ -9,6 +9,7 @@ import App from './App';
 
 // The DOM element into which we're rendering the client-side SPA
 const rootElement = document.getElementById('content');
+
 ReactDOM.render(<AppContainer><App /></AppContainer>, rootElement);
 
 if (module.hot) {
@@ -25,11 +26,10 @@ if (module.hot) {
   });
 }
 
-// If we're in development mode, we want to check for the server-side render being
-// different from the first client-side render.
-if (process.env.NODE_ENV !== 'production') {
+if (__DEVELOPMENT__) {
+  // If we're in development mode, we want to check for the server-side render being
+  // different from the first client-side render.
   window.React = React; // enable debugger
-
   if (!rootElement ||
     !rootElement.firstChild ||
     !rootElement.firstChild.attributes ||

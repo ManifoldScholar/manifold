@@ -11,7 +11,7 @@
   "keywords": [],
   "main": "bin/server.js",
   "scripts": {
-    "start": "npm-run-all clean-builds build-universal-dll --parallel build-server-react build-server-web server-react server-assets server-web",
+    "start": "node ./script/start-entry",
     "server-react": "nodemon ./script/react-server-entry --watch ./dist/build/server/react-server",
     "server-assets": "node ./webpack/entries/client.server.entry.js",
     "server-web": "node ./script/web-server-entry",
@@ -19,7 +19,9 @@
     "build-server-web": "webpack --config ./webpack/entries/web-server.config.entry.js --colors --display-error-details",
     "build-universal-dll": "webpack --config ./webpack/webpack.dll.js",
     "build-client": "webpack --config ./webpack/entries/client.config.entry.js",
+    "build-prod-client": "webpack --minimize --config ./webpack/entries/client.config.entry.js",
     "clean-builds": "node ./script/clean-builds-entry.js",
+    "clean-client-build": "node ./script/clean-client-build-entry.js",
     "lint": "eslint ."
   },
   "jest": {
@@ -64,6 +66,7 @@
     "clean-webpack-plugin": "^0.1.9",
     "compression": "^1.6.0",
     "cookie": "^0.3.1",
+    "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
     "dotenv": "^2.0.0",
     "es6-promise": "^3.0.2",
