@@ -31,6 +31,7 @@ if (__DEVELOPMENT__) {
   mainEntry.unshift('webpack/hot/only-dev-server');
   mainEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
   mainEntry.unshift('react-hot-loader/patch');
+  themeEntry.unshift('webpack/hot/only-dev-server');
   themeEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
   themeEntry.unshift('react-hot-loader/patch');
 }
