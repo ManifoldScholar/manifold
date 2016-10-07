@@ -12,6 +12,7 @@
   "main": "bin/server.js",
   "scripts": {
     "start": "node ./script/start-entry",
+    "build-and-start-prod": "NODE_ENV=production npm-run-all build-dist start-prod",
     "start-prod": "NODE_ENV=production node ./script/start-entry",
     "server-react": "nodemon ./script/react-server-entry --watch ./dist/build/server/react-server",
     "server-assets": "node ./webpack/entries/client.server.entry.js",
@@ -21,7 +22,7 @@
     "build-server-web": "webpack --config ./webpack/entries/web-server.config.entry.js --colors --display-error-details",
     "build-universal-dll": "webpack --config ./webpack/webpack.dll.js",
     "build-client": "webpack --config ./webpack/entries/client.config.entry.js",
-    "build-prod-client": "webpack --minimize --config ./webpack/entries/client.config.entry.js",
+    "build-prod-client": "NODE_ENV=production webpack --minimize --config ./webpack/entries/client.config.entry.js",
     "clean-builds": "node ./script/clean-builds-entry.js",
     "clean-client-build": "node ./script/clean-client-build-entry.js",
     "build-dist": "NODE_ENV=production npm-run-all clean-builds --parallel build-prod-server-react build-server-web build-prod-client",
