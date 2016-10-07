@@ -26,24 +26,26 @@ export default class Html extends Component {
   }
 
   stylesheets() {
-    if(!this.props.assets && !this.props.assets.styles) return null;
+    if (!this.props.assets && !this.props.assets.styles) return null;
     return Object.keys(this.props.assets.styles).map((style, key) =>
-      <link href={this.props.assets.styles[style]}
-            key={key}
-            media="screen, projection"
-            rel="stylesheet"
-            type="text/css"
-            charSet="UTF-8"
+      <link
+        href={this.props.assets.styles[style]}
+        key={key}
+        media="screen, projection"
+        rel="stylesheet"
+        type="text/css"
+        charSet="UTF-8"
       />
     );
   }
 
   javascripts() {
-    if(!this.props.assets && !this.props.assets.javascript) return null;
+    if (!this.props.assets && !this.props.assets.javascript) return null;
     return Object.keys(this.props.assets.javascript).map((js, key) =>
-      <script src={this.props.assets.javascript[js]}
-              key={key}
-              charSet="UTF-8"
+      <script
+        src={this.props.assets.javascript[js]}
+        key={key}
+        charSet="UTF-8"
       />
     );
   }
