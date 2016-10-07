@@ -19,6 +19,35 @@ export default class Html extends Component {
     store: PropTypes.object
   }
 
+  constructor(props) {
+    super(props);
+    this.javascripts = this.javascripts.bind(this);
+    this.stylesheets = this.stylesheets.bind(this);
+  }
+
+  stylesheets() {
+    if(!this.props.assets && !this.props.assets.styles) return null;
+    return Object.keys(this.props.assets.styles).map((style, key) =>
+      <link href={this.props.assets.styles[style]}
+            key={key}
+            media="screen, projection"
+            rel="stylesheet"
+            type="text/css"
+            charSet="UTF-8"
+      />
+    );
+  }
+
+  javascripts() {
+    if(!this.props.assets && !this.props.assets.javascript) return null;
+    return Object.keys(this.props.assets.javascript).map((js, key) =>
+      <script src={this.props.assets.javascript[js]}
+              key={key}
+              charSet="UTF-8"
+      />
+    );
+  }
+
   render() {
     const { assets, component, store } = this.props;
     const content = component ? ReactDOM.renderToString(component) : '';
@@ -32,6 +61,8 @@ export default class Html extends Component {
 
           <link rel="shortcut icon" href="/static/favicon.ico" />
 
+          {this.stylesheets()}
+
           {/* Import fonts from webkit */}
           <script src={'https://use.typekit.net/mnj5ltf.js'}></script>
           <script
@@ -40,11 +71,7 @@ export default class Html extends Component {
           />
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
-          {Object.keys(assets.styles).map((style, key) =>
-            <link href={assets.styles[style]} key={key} media="screen, projection"
-              rel="stylesheet" type="text/css" charSet="UTF-8"
-            />
-          )}
+
 
         </head>
         <body className={bodyClass} >
@@ -59,8 +86,7 @@ export default class Html extends Component {
             <script src="/build/universal/dll/dll.vendor.js"></script>
             : null
           }
-          <script src={assets.javascript.theme} charSet="UTF-8"/>
-          <script src={assets.javascript.main} charSet="UTF-8"/>
+          {this.javascripts()}
         </body>
       </html>
     );

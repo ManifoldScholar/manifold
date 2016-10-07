@@ -7,6 +7,7 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var assetsPath = path.resolve(__dirname, '../dist/build/client/build/');
 var babelrc = fs.readFileSync('./.babelrc');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // Grab the babelrc config.
 try {
@@ -59,10 +60,6 @@ if (__DEVELOPMENT__) {
   plugins = [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new CopyWebpackPlugin([{
-      from: path.join(__dirname, "..", "static"),
-      to: "static"
-    }]),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: false,
       compress: {
@@ -71,6 +68,13 @@ if (__DEVELOPMENT__) {
       }
     })
   ];
+  if (__CLIENT__ && __PRODUCTION__) {
+    plugins.push(new ExtractTextPlugin("[name]-[hash].css"));
+    plugins.push(new CopyWebpackPlugin([{
+      from: path.join(__dirname, "..", "static"),
+      to: "static"
+    }]));
+  }
 }
 
 if (__CLIENT__ && __PRODUCTION__) {
@@ -91,6 +95,7 @@ plugins.push(new webpack.DefinePlugin({
   })
 );
 
+// Use small sourcemaps in production
 let devtool;
 if (__DEVELOPMENT__) {
   devtool = "cheap-module-eval-source-map";
@@ -98,6 +103,37 @@ if (__DEVELOPMENT__) {
   devtool = "cheap-module-source-map";
 }
 
+// In dev we load CSS as javascript so we can hot reload it. In production, we extract
+// it to a separate file using the ExtractTextPlugin
+let scssLoader;
+if (__CLIENT__ && __PRODUCTION__) {
+  scssLoader = {
+    test: /\.scss$/,
+    loader: ExtractTextPlugin.extract(
+      "style",
+      [
+        "css?importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]",
+        "postcss?syntax=postcss-scss",
+        "sass?outputStyle=expanded&sourceMap"
+      ]
+    ),
+    include: path.resolve('./src')
+  };
+} else {
+  scssLoader = {
+    test: /\.scss$/,
+    loaders: [
+      'style',
+      'css?importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]',
+      'postcss?syntax=postcss-scss',
+      'sass?outputStyle=expanded&sourceMap'
+    ],
+    include: path.resolve('./src')
+  };
+}
+
+
+// Build the configuration
 module.exports = {
   devtool: devtool,
   context: path.resolve(__dirname, '..'),
@@ -134,15 +170,7 @@ module.exports = {
         loaders: ['json-loader'],
         include: path.resolve('./src')
       },
-      { test: /\.scss$/,
-        loaders: [
-          'style',
-          'css?importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]',
-          'postcss?syntax=postcss-scss',
-          'sass?outputStyle=expanded&sourceMap'
-        ],
-        include: path.resolve('./src')
-      },
+      scssLoader,
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
         loader: "url?limit=10000&mimetype=application/font-woff",
