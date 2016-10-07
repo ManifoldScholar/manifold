@@ -38,7 +38,7 @@ namespace :deploy do
      on roles(:app), in: :groups, limit: 3, wait: 10 do
       with path: 'node_modules/.bin:$PATH' do
         within "#{release_path}/client" do
-          execute :npm, 'run build'
+          execute :npm, 'run build-dist'
         end
       end
     end
