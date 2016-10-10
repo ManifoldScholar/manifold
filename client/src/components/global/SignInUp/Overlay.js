@@ -79,7 +79,7 @@ export default class Overlay extends Component {
   render() {
     return (
       <HigherOrder.BodyClass className={'no-scroll'}>
-        <div className="overlay-login">
+        <div className="overlay-full">
           <figure className="logo">
             <i className="manicon manicon-manifold-logo"></i>
             Manifold
@@ -89,7 +89,7 @@ export default class Overlay extends Component {
             <i className="manicon manicon-x"></i>
           </button>
           <div className="container">
-            <div className="overlay-content">
+            <div className="overlay-content-focus">
               {this.renderChild()}
             </div>
           </div>
