@@ -19,19 +19,18 @@ export default class Overlay extends Component {
   constructor() {
     super();
     this.state = {
-      view: 'account-login'
+      view: null
     };
     this.updateView = this.updateView.bind(this);
     this.childProps = this.childProps.bind(this);
-    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.authentication.authenticated === false &&
-      nextProps.authentication.authenticated === true) {
-      this.props.hideSignInUpOverlay();
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (this.props.authentication.authenticated === false &&
+  //     nextProps.authentication.authenticated === true) {
+  //     this.props.hideSignInUpOverlay();
+  //   }
+  // }
 
   updateView(view, event = null) {
     if (event) event.preventDefault();
@@ -55,7 +54,6 @@ export default class Overlay extends Component {
   renderChild() {
     let child = null;
     const childProps = this.childProps();
-
     switch (this.state.view) {
       case 'account-create':
         child = <Create {...childProps} />;
