@@ -78,7 +78,7 @@
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": ">=0.23.1",
     "dotenv": "^2.0.0",
-    "es6-promise": "^3.0.2",
+    "es6-promise": "^4.0.5",
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "8.0.0",
     "eslint-loader": "^1.0.0",
