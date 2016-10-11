@@ -35,7 +35,7 @@ export default class Overlay extends Component {
 
   updateView(view, event = null) {
     if (event) event.preventDefault();
-    this.setState(Object.assign(this.state, {}, { view }))
+    this.setState(Object.assign(this.state, {}, { view }));
   }
 
   childProps() {
@@ -74,6 +74,7 @@ export default class Overlay extends Component {
         break;
       case 'account-login':
         child = <Login {...childProps} />;
+        break;
       default:
         if (this.props.authentication.authenticated) {
           child = <Update {...childProps} />;
