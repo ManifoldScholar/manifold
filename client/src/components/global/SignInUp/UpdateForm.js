@@ -13,7 +13,6 @@ class UpdateForm extends Component {
 
   static mapStateToProps(state) {
     return {
-      user: state.authentication.currentUser,
       response: state.entityStore.responses[requests.updateCurrentUser]
     };
   }
@@ -21,7 +20,6 @@ class UpdateForm extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     response: PropTypes.object,
-    user: PropTypes.object,
     authentication: PropTypes.object,
     hideSignInUpOverlay: PropTypes.func,
     mode: PropTypes.string
@@ -44,10 +42,6 @@ class UpdateForm extends Component {
       removeAvatar: false,
       avatar: null
     };
-  }
-
-  componentDidMount() {
-    this.props.dispatch(request(meAPI.show(), requests.updateCurrentUser));
   }
 
   handleInputChange(event) {
@@ -130,7 +124,7 @@ class UpdateForm extends Component {
 
   render() {
     let errors = get(this.props.response, 'errors') || {};
-    if (!this.props.user) return null;
+    if (!this.props.authentication.currentUser) return null;
     return (
       <form
         autoComplete="off"

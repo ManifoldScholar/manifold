@@ -17,7 +17,7 @@ export default function createStore(data) {
   if (useDevTools) {
     finalCreateStore = compose(
       applyMiddleware(...middleware),
-      DevTools.instrument({ maxAge: 10 })
+      DevTools.instrument({ maxAge: 40 })
     )(_createStore);
   } else {
     finalCreateStore = applyMiddleware(...middleware)(_createStore);

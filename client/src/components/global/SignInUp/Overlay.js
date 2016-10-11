@@ -23,11 +23,19 @@ export default class Overlay extends Component {
     };
     this.updateView = this.updateView.bind(this);
     this.childProps = this.childProps.bind(this);
+    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.authentication.authenticated === false &&
+      nextProps.authentication.authenticated === true) {
+      this.props.hideSignInUpOverlay();
+    }
   }
 
   updateView(view, event = null) {
     if (event) event.preventDefault();
-    this.setState({ view });
+    this.setState(Object.assign(this.state, {}, { view }))
   }
 
   childProps() {
@@ -65,6 +73,7 @@ export default class Overlay extends Component {
         child = <PasswordReset {...childProps} />;
         break;
       case 'account-login':
+        child = <Login {...childProps} />;
       default:
         if (this.props.authentication.authenticated) {
           child = <Update {...childProps} />;

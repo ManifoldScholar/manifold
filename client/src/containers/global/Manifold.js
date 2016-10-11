@@ -7,7 +7,10 @@ import config from '../../config';
 import get from 'lodash/get';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { notificationActions, uiVisibilityActions } from 'actions';
+import { meAPI } from 'api';
+import { entityStoreActions } from 'actions';
 
+const { request, requests } = entityStoreActions;
 const { visibilityHide } = uiVisibilityActions;
 
 class ManifoldContainer extends Component {
@@ -34,30 +37,56 @@ class ManifoldContainer extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    this.createLoginNotificationIfNeeded(this.props.authentication, nextProps.authentication);
+    if (this.userJustLoggedIn(this.props.authentication, nextProps.authentication)) {
+      this.doPostLogin(nextProps);
+    }
+    if (this.userJustLoggedOut(this.props.authentication, nextProps.authentication)) {
+      this.doPostLogin(nextProps);
+    }
   }
 
-  createLoginNotificationIfNeeded(auth, nextAuth) {
-    if (auth.authenticated !== nextAuth.authenticated) {
-      let notification;
-      if (nextAuth.authenticated === true) {
-        notification = {
-          level: 0,
-          id: 'AUTHENTICATION_STATE_CHANGE',
-          heading: "You have logged in successfully."
-        };
-      } else {
-        notification = {
-          level: 0,
-          id: 'AUTHENTICATION_STATE_CHANGE',
-          heading: "You have logged out successfully."
-        };
-      }
-      this.props.dispatch(notificationActions.addNotification(notification));
-      setTimeout(() => {
-        this.props.dispatch(notificationActions.removeNotification(notification.id));
-      }, 5000);
-    }
+  userJustLoggedIn(auth, nextAuth) {
+    return nextAuth.authenticated === true && auth.authenticated === false;
+  }
+
+  userJustLoggedOut(auth, nextAuth) {
+    return nextAuth.authenticated === false && auth.authenticated === true;
+  }
+
+  doPostLogin(props) {
+    this.notifyLogin(props);
+  }
+
+  doPostLogout(props) {
+    this.notifyLogout(props);
+  }
+
+  updateCurrentUser() {
+    this.props.dispatch(request(meAPI.show(), requests.updateCurrentUser));
+  }
+
+  notifyLogin() {
+    const notification = {
+      level: 0,
+      id: 'AUTHENTICATION_STATE_CHANGE',
+      heading: "You have logged in successfully."
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+    setTimeout(() => {
+      this.props.dispatch(notificationActions.removeNotification(notification.id));
+    }, 5000);
+  }
+
+  notifyLogout() {
+    const notification = {
+      level: 0,
+      id: 'AUTHENTICATION_STATE_CHANGE',
+      heading: "You have logged out successfully."
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+    setTimeout(() => {
+      this.props.dispatch(notificationActions.removeNotification(notification.id));
+    }, 5000);
   }
 
   render() {
