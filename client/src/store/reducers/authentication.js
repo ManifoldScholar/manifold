@@ -83,6 +83,7 @@ export default handleActions({
   START_LOGOUT: startLogout,
   SET_AUTH_TOKEN: setAuthToken,
   SET_CURRENT_USER: setCurrentUser,
+  CLEAR_CURRENT_USER: startLogout,
   SET_AUTH_ERROR: setAuthError,
   FOLLOW: follow,
   UNFOLLOW: unfollow

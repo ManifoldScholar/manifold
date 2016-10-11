@@ -8,6 +8,7 @@ const actions = {
   GET_CURRENT_USER: 'GET_CURRENT_USER',
   SET_AUTH_TOKEN: 'SET_AUTH_TOKEN',
   SET_CURRENT_USER: 'SET_CURRENT_USER',
+  CLEAR_CURRENT_USER: 'CLEAR_CURRENT_USER',
   SET_LOGIN_ERROR: 'SET_AUTH_ERROR',
   FOLLOW: 'FOLLOW',
   UNFOLLOW: 'UNFOLLOW'
@@ -62,11 +63,22 @@ export function startLogin(email, password, scope = "signInUp") {
 export const getCurrentUser = createAction(actions.GET_CURRENT_USER, (dispatch, getState) => {
   const client = new ApiClient;
   const token = getState().authentication.authToken;
-  const { endpoint, method, options } = meAPI.show();
-  options.authToken = token;
-  const promise = client.call(endpoint, method, options);
+
+  // Query API for current user from token
+  let promise;
+  if (token) {
+    const { endpoint, method, options } = meAPI.show();
+    options.authToken = token;
+    promise = client.call(endpoint, method, options);
+  } else {
+    promise = new Promise((resolve, reject) => reject());
+  }
+
+
   promise.then((response) => {
     dispatch(createAction(actions.SET_CURRENT_USER)(response));
+  }, (response) => {
+    dispatch(createAction(actions.CLEAR_CURRENT_USER)());
   });
 });
 
