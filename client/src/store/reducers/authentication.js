@@ -26,7 +26,6 @@ const updateStateFromUser = (state, payload) => {
       return inc.type === 'favorites';
     }).forEach((fave) => {
       const id = fave.attributes.favoritableId;
-      console.log(fave, 'idzd');
       favorites[id] = fave;
     });
   }
