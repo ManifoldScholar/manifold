@@ -24,69 +24,69 @@ export default class ResourceThumbs extends Component {
   render() {
     const stubResources = [
       {
-        id: Math.random() * 100,
+        id: 1,
         type: 'audio',
         title: 'Consectetur Ullamcorper'
       },
       {
-        id: Math.random() * 100,
+        id: 2,
         type: 'video',
         image: '/static/placeholder/background-coniferous.jpg',
         title: 'Vestibulum id ligula porta felis euismod semper.'
       },
       {
-        id: Math.random() * 100,
+        id: 3,
         type: 'pdf',
         title: 'Consectetur Amet Vestibulum Ultricies'
       },
       {
-        id: Math.random() * 100,
+        id: 4,
         type: 'interactive',
         title: 'Ridiculus'
       },
       {
-        id: Math.random() * 100,
+        id: 5,
         type: 'spreadsheet',
         title: 'Commodo Mattis Malesuada'
       },
       {
-        id: Math.random() * 100,
+        id: 6,
         type: 'image',
         image: '/static/placeholder/background-waterfall.jpg',
         title: 'Nullam quis risus eget urna mollis ornare'
       },
       {
-        id: Math.random() * 100,
+        id: 7,
         type: 'presentation',
         title: 'Etiam Dolor Ipsum'
       },
       {
-        id: Math.random() * 100,
+        id: 8,
         type: 'link',
         title: 'Lorem ipsum dolor sit, adipiscing elit.'
       },
       {
-        id: Math.random() * 100,
+        id: 9,
         type: 'file',
         title: 'Venenatis Vehicula'
       },
       {
-        id: Math.random() * 100,
+        id: 10,
         type: 'document',
         title: 'Dapibus Magna Elit Justo'
       },
       {
-        id: Math.random() * 100,
+        id: 11,
         type: 'pdf',
         title: 'Vestibulum id ligula porta felis euismod semper.'
       },
       {
-        id: Math.random() * 100,
+        id: 12,
         type: 'document',
         title: 'Dolor Sollicitudin Ultricies'
       },
       {
-        id: Math.random() * 100,
+        id: 13,
         type: 'audio',
         title: 'Parturient Dolor Ultricies Adipiscing'
       }

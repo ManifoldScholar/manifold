@@ -10,16 +10,16 @@ export default class ResourceCollections extends Component {
   render() {
     const stubCollections = [
       {
-        id: Math.random() * 100,
+        id: 1,
         image: '/static/placeholder/background-waterfall.jpg',
         title: 'Recorded conversations with author; Pre-translated'
       },
       {
-        id: Math.random() * 100,
+        id: 2,
         title: 'Slideshow: photos of original manuscript with handwritten notes'
       },
       {
-        id: Math.random() * 100,
+        id: 3,
         image: '/static/placeholder/background-coniferous.jpg',
         title: 'Untitled'
       }

@@ -127,7 +127,7 @@ class ProjectDetailContainer extends Component {
     // Logic to check for existing resources should be here
 
     // Note that this returns a div with two sections, but in production
-    // Should return either a groupd of collections or a group of resources,
+    // Should return either a group of collections or a group of resources,
     // and not both
     const project = this.props.project;
     return (

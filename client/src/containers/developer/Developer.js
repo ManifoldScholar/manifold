@@ -12,10 +12,7 @@ const { select } = entityUtils;
 class DeveloperContainer extends Component {
 
   static mapStateToProps(state) {
-    return {
-      texts: select(requests.developerTexts, state.entityStore),
-      projects: select(requests.developerProjects, state.entityStore)
-    };
+    return { state };
   }
 
   static fetchData(getState, dispatch) {
@@ -49,15 +46,7 @@ class DeveloperContainer extends Component {
   render() {
     return (
       <div>
-        <Link to="/browse/">Home</Link>
-        <div>
-          <h4>Projects</h4>
-          <JSONTree data={this.props.projects || {}} />
-        </div>
-        <div>
-          <h4>Texts</h4>
-          <JSONTree data={this.props.texts || {}} />
-        </div>
+        <JSONTree data={this.props.state || {}} />
       </div>
     );
   }
