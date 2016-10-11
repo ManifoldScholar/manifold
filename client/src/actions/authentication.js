@@ -42,8 +42,8 @@ export function startLogin(email, password, scope = "signInUp") {
     dispatch(createAction(actions.START_LOGIN)());
     const promise = tokensAPI.createToken(email, password);
     promise.then((response) => {
+      console.log(response, 'resp');
       const authToken = response.meta.authToken;
-      const user = response.data;
       if (!authToken) {
         dispatch({ type: 'SET_AUTH_ERROR', payload: generateErrorPayload(500) });
         return;
@@ -51,7 +51,7 @@ export function startLogin(email, password, scope = "signInUp") {
       const expireDate = new Date();
       expireDate.setDate(expireDate.getDate() + 90);
       document.cookie = `authToken=${authToken};path=/;expires=${expireDate.toUTCString()}`;
-      dispatch(createAction(actions.SET_CURRENT_USER)(user));
+      dispatch(createAction(actions.SET_CURRENT_USER)(response));
       dispatch(createAction(actions.SET_AUTH_TOKEN)(authToken));
     }, (response) => {
       dispatch({ type: 'SET_AUTH_ERROR', payload: generateErrorPayload(response.status) });
@@ -65,7 +65,9 @@ export const getCurrentUser = createAction(actions.GET_CURRENT_USER, (dispatch, 
   const { endpoint, method, options } = meAPI.show();
   options.authToken = token;
   const promise = client.call(endpoint, method, options);
-  dispatch(createAction(actions.GET_CURRENT_USER)(promise));
+  promise.then((response) => {
+    dispatch(createAction(actions.SET_CURRENT_USER)(response));
+  });
 });
 
 export function startLogout() {

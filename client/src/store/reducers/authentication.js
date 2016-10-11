@@ -11,7 +11,7 @@ const initialState = {
 };
 
 const startLogin = (state) => {
-  return Object.assign({}, state, { authenticating: true });
+  return Object.assign({}, initialState, { authenticating: true });
 };
 
 const startLogout = () => {
@@ -21,12 +21,15 @@ const startLogout = () => {
 const updateStateFromUser = (state, payload) => {
   const adjustedUser = Object.assign({}, payload.data);
   const favorites = {};
-  payload.included.filter((inc) => {
-    return inc.type === 'favorites';
-  }).forEach((fave) => {
-    const id = fave.attributes.favoritableId;
-    favorites[id] = fave;
-  });
+  if (payload.included) {
+    payload.included.filter((inc) => {
+      return inc.type === 'favorites';
+    }).forEach((fave) => {
+      const id = fave.attributes.favoritableId;
+      console.log(fave, 'idzd');
+      favorites[id] = fave;
+    });
+  }
   delete adjustedUser.relationships;
   adjustedUser.favorites = favorites;
   const newState = {
@@ -42,9 +45,9 @@ const syncCurrentUser = (state, action) => {
   return state;
 };
 
-const getCurrentUser = (state, action) => {
+const setCurrentUser = (state, action) => {
   // if we can't get the current user, we invalidate the token, etc.
-  if (!action.payload || !action.payload.data) {
+  if (!action.payload) {
     return initialState;
   }
   return updateStateFromUser(state, action.payload);
@@ -80,8 +83,7 @@ export default handleActions({
   START_LOGIN: startLogin,
   START_LOGOUT: startLogout,
   SET_AUTH_TOKEN: setAuthToken,
-  SET_CURRENT_USER: getCurrentUser,
-  GET_CURRENT_USER: getCurrentUser,
+  SET_CURRENT_USER: setCurrentUser,
   SET_AUTH_ERROR: setAuthError,
   FOLLOW: follow,
   UNFOLLOW: unfollow
