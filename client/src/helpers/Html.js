@@ -41,7 +41,12 @@ export default class Html extends Component {
 
   javascripts() {
     if (!this.props.assets && !this.props.assets.javascript) return null;
-    return Object.keys(this.props.assets.javascript).map((js, key) =>
+    const keys = Object.keys(this.props.assets.javascript);
+    keys.splice(keys.indexOf("main"), 1);
+    keys.splice(keys.indexOf("theme"), 1);
+    keys.unshift("main");
+    keys.unshift("theme");
+    return keys.map((js, key) =>
       <script
         src={this.props.assets.javascript[js]}
         key={key}

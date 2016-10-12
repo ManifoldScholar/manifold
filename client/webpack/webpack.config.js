@@ -138,9 +138,8 @@ module.exports = {
   devtool: devtool,
   context: path.resolve(__dirname, '..'),
   entry: {
+    'theme': themeEntry,
     'main': mainEntry
-    ,
-    'theme': themeEntry
   },
   output: {
     path: assetsPath,

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { HigherOrder } from 'components/global';
-import { Header, Footer } from 'components/frontend';
+import { Layout } from 'components/frontend';
 import { commonActions } from 'actions/helpers';
 import { pagesAPI } from 'api';
 import { entityStoreActions } from 'actions';
@@ -60,7 +60,7 @@ class FrontendContainer extends Component {
       <HigherOrder.BodyClass className={'browse'}>
         <div>
           <HigherOrder.ScrollAware>
-            <Header
+            <Layout.Header
               visibility={this.props.visibility }
               location={this.props.location}
               authentication={this.props.authentication}
@@ -71,7 +71,7 @@ class FrontendContainer extends Component {
           <main ref="mainContainer">
             {this.props.children}
           </main>
-          <Footer
+          <Layout.Footer
             pages={this.props.pages}
             authentication={this.props.authentication}
             commonActions={this.commonActions}

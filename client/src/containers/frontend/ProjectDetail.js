@@ -1,18 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Link } from 'react-router';
-import get from 'lodash/get';
-import {
-  EventList,
-  PublishedText,
-  GroupedTexts,
-  MetaAttributes,
-  ProjectDetailHero,
-  ResourceCollections,
-  ResourceThumbs,
-  ResourceTotals,
-} from 'components/frontend';
+import { Project } from 'components/frontend';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI } from 'api';
@@ -41,150 +29,11 @@ class ProjectDetailContainer extends Component {
     dispatch: PropTypes.func.isRequired
   };
 
-  constructor() {
-    super();
-    this.state = {
-      activity: [],
-      categories: [],
-      texts: [],
-      meta: []
-    };
-
-    this.renderActivity = this.renderActivity.bind(this);
-    this.renderTexts = this.renderTexts.bind(this);
-    this.renderResources = this.renderResources.bind(this);
-    this.renderMeta = this.renderMeta.bind(this);
-  }
-
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-
-  renderActivity() {
-    if (!this.state.activity.length > 0) return null;
-    return (
-        <section>
-          <div className="container">
-            <header className="section-heading">
-              <h4 className="title">
-                <i className="manicon manicon-pulse"></i>
-                {'Recent Activity'}
-              </h4>
-              <div className="section-heading-utility-right">
-                <Link to={`#`} className="button-primary">
-                  See all Activity
-                </Link>
-              </div>
-            </header>
-            <EventList events={this.state.activity} />
-          </div>
-        </section>
-    );
-  }
-
-  renderMeta() {
-    if (!this.state.meta.length > 0) return null;
-    return (
-      <section>
-        <div className="container">
-          <header className="section-heading">
-            <h4 className="title">
-              <i className="manicon manicon-tag"></i>
-                {'Metadata'}
-            </h4>
-          </header>
-          <MetaAttributes data={this.state.meta} />
-        </div>
-      </section>
-    );
-  }
-
-  renderTexts() {
-    const project = this.props.project;
-    const texts = get(this.props, 'project.relationships.texts');
-    if (!texts || texts.length === 0) return null;
-    return (
-      <section>
-        <div className="container">
-          <header className="section-heading">
-            <h4 className="title">
-              <i className="manicon manicon-books-stack"></i>
-              {'Texts'}
-            </h4>
-          </header>
-          <PublishedText text={project.relationships.publishedText} />
-          <GroupedTexts
-            categories={project.relationships.textCategories}
-            texts={project.relationships.texts}
-          />
-        </div>
-      </section>
-    );
-  }
-
-  renderResources() {
-    // Currently returns static resource section
-    // Logic to check for existing resources should be here
-
-    // Note that this returns a div with two sections, but in production
-    // Should return either a group of collections or a group of resources,
-    // and not both
-    const project = this.props.project;
-    return (
-      <div>
-        <section className="bg-neutral05">
-          <div className="container">
-            <header className="section-heading">
-              <h4 className="title">
-                <i className="manicon manicon-cube-shine"></i>
-                {'Resources'}
-              </h4>
-            </header>
-            <ResourceCollections projectId={project.id} />
-            <ResourceTotals count={2028} projectId={project.id} />
-          </div>
-        </section>
-        <section className="bg-neutral05">
-          <div className="container">
-            <header className="section-heading">
-              <h4 className="title">
-                <i className="manicon manicon-cube-shine"></i>
-                {'Resources'}
-              </h4>
-            </header>
-            <ResourceThumbs projectId={project.id} />
-            <ResourceTotals count={2028} projectId={project.id} />
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   render() {
-    if (!this.props.project) return null;
-    return (
-      <div>
-        {/*
-          NB: To use a hero, include the
-          class name hero-image in addition to the background image required
-        */}
-        <section className="project-detail-hero hero-image"
-          style={{ backgroundImage: 'url(/static/placeholder/background-waterfall.jpg)' }}
-        >
-          <div className="container">
-            <ProjectDetailHero
-              project={this.props.project}
-              visibilityShow={bindActionCreators((el) => visibilityShow(el), this.props.dispatch)}
-            />
-          </div>
-        </section>
-        {this.renderActivity()}
-        {this.renderTexts()}
-        {this.renderResources()}
-        {this.renderMeta()}
-      </div>
-    );
+    return <Project.Detail project={this.props.project} dispatch={this.props.dispatch} />;
   }
+
+
 }
 
 const ProjectDetail = connect(

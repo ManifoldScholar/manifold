@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { BackLinkPrimary, BackLinkSecondary, ResourceList } from 'components/frontend';
-
+import { Utility, ResourceList } from 'components/frontend';
+import fakeData from 'helpers/fakeData';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI } from 'api';
@@ -29,12 +29,19 @@ class ProjectResourcesContainer extends Component {
     project: PropTypes.object
   };
 
+  constructor() {
+    super();
+    this.state = {
+      resources: fakeData.resources
+    };
+  }
+
   render() {
     const project = this.props.project;
     return (
       <div>
         <section className="bg-neutral05">
-          <BackLinkPrimary
+          <Utility.BackLinkPrimary
             link={`/browse/project/${project.id}`}
             title={project.attributes.title}
           />
@@ -48,69 +55,13 @@ class ProjectResourcesContainer extends Component {
               </h2>
             </header>
 
-            <form className="form-list-filter">
-              <div className="search-input">
-                <button className="search-button" type="submit">
-                  <i className="manicon manicon-magnify"></i>
-                </button>
-                <input type="text" placeholder="Search"/>
-              </div>
-              <div className="select-group">
-                <div className="select">
-                  <select defaultValue="default">
-                    <option
-                      value="default"
-                      disabled="disabled"
-                    >
-                      Type:
-                    </option>
-                    <option>Document</option>
-                    <option>Image</option>
-                    <option>PDF</option>
-                  </select>
-                  <i className="manicon manicon-caret-down"></i>
-                </div>
-                <div className="select">
-                  <select defaultValue="default">
-                    <option
-                      value="default"
-                      disabled="disabled"
-                    >
-                      Tag:
-                    </option>
-                    <option>Japan</option>
-                    <option>Photography</option>
-                    <option>Second Interview</option>
-                  </select>
-                  <i className="manicon manicon-caret-down"></i>
-                </div>
-                <div className="select">
-                  <select defaultValue="default">
-                    <option
-                      value="default"
-                      disabled="disabled"
-                    >
-                      Sort By:
-                    </option>
-                    <option>A-Z</option>
-                    <option>A-Z</option>
-                    <option>Z-A</option>
-                    <option>Upload Date</option>
-                  </select>
-                  <i className="manicon manicon-caret-down"></i>
-                </div>
-              </div>
-              <button className="reset-button">
-                {'Reset Search + Filters'}
-              </button>
-            </form>
-
-            <ResourceList/>
+            <ResourceList.Filters />
+            <ResourceList.Cards resources={this.state.resources} />
           </div>
         </section>
 
         <section className="bg-neutral05">
-          <BackLinkSecondary
+          <Utility.BackLinkSecondary
             link={`/browse/project/${project.id}`}
             title={project.attributes.title}
           />

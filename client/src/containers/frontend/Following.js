@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { ProjectGrid, ProjectSummaryGrid, ProjectFilters } from 'components/frontend';
+import { ProjectList } from 'components/frontend';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { uiFilterActions, entityStoreActions } from 'actions';
@@ -73,13 +73,13 @@ class FollowingContainer extends Component {
                 {'Projects You\'re Following'}
               </h4>
               <div className="section-heading-utility-right">
-                <ProjectFilters
+                <ProjectList.Filters
                   updateAction={boundSetFilters}
                 />
               </div>
             </header>
             { this.props.filteredProjects ?
-              <ProjectGrid
+              <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}
                 favorites={get(this.props.authentication, 'currentUser.favorites')}
                 dispatch={this.props.dispatch}
@@ -102,7 +102,7 @@ class FollowingContainer extends Component {
               </div>
             </header>
             { this.props.featuredProjects ?
-              <ProjectSummaryGrid
+              <ProjectList.SummaryGrid
                 authenticated={this.props.authentication.authenticated}
                 favorites={get(this.props.authentication, 'currentUser.favorites')}
                 dispatch={this.props.dispatch}
