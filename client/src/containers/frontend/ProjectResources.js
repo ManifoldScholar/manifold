@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { Utility, ResourceList } from 'components/frontend';
+import { Utility, Project, ResourceList } from 'components/frontend';
 import fakeData from 'helpers/fakeData';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
@@ -29,13 +29,6 @@ class ProjectResourcesContainer extends Component {
     project: PropTypes.object
   };
 
-  constructor() {
-    super();
-    this.state = {
-      resources: fakeData.resources
-    };
-  }
-
   render() {
     const project = this.props.project;
     return (
@@ -46,20 +39,7 @@ class ProjectResourcesContainer extends Component {
             title={project.attributes.title}
           />
         </section>
-        <section>
-          <div className="container">
-            <header className="section-heading">
-              <h2 className="title">
-                <i className="manicon manicon-cube-shine"></i>
-                All Project Resources
-              </h2>
-            </header>
-
-            <ResourceList.Filters />
-            <ResourceList.Cards resources={this.state.resources} />
-          </div>
-        </section>
-
+        <Project.Resources project={project} resources={fakeData.resources} />
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
             link={`/browse/project/${project.id}`}

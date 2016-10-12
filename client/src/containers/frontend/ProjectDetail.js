@@ -33,7 +33,6 @@ class ProjectDetailContainer extends Component {
     return <Project.Detail project={this.props.project} dispatch={this.props.dispatch} />;
   }
 
-
 }
 
 const ProjectDetail = connect(

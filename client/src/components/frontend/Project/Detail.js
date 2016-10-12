@@ -123,7 +123,10 @@ class Detail extends Component {
                 {'Resources'}
               </h4>
             </header>
-            <ResourceCollectionList.Grid projectId={project.id} />
+            <ResourceCollectionList.Grid
+              resourceCollections={fakeData.resourceCollections}
+              projectId={project.id}
+            />
             <ResourceList.Totals count={2028} projectId={project.id} />
           </div>
         </section>

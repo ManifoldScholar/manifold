@@ -7,61 +7,101 @@ const resources = [
       title: 'Consectetur Ullamcorper',
       tags: [
         'Japan'
-      ]
+      ],
+      position: 0
     },
   },
   {
     id: 2,
     type: "resources",
     attributes: {
+      title: 'Cras justo odio, dapibus ac facilisis',
       type: 'video',
-      image: '/static/placeholder/background-coniferous.jpg',
-      title: 'Vestibulum id ligula porta felis euismod semper.',
-      tags: [
-        'Japan',
-        'Photography',
-        'Second Interview'
-      ]
+      externalHost: 'vimeo',
+      externalIdentifier: '89700651',
+      description:
+      'Praesent commodo cursus magna, vel scelerisque nisl consectetur et. ' +
+      'Donec id elit non mi porta gravida at eget metus. Morbi leo risus, ' +
+      'porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget ' +
+      'risus varius blandit sit amet non magna. Integer posuere erat a ante ' +
+      'venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna ' +
+      'mollis ornare vel eu leo. Praesent commodo cursus magna, ' +
+      'vel scelerisque nisl consectetur et.',
+      link: 'https://vimeo.com/89700651',
+      position: 1
     }
   },
   {
     id: 3,
     type: "resources",
     attributes: {
-      type: 'pdf',
-      title: 'Consectetur Amet Vestibulum Ultricies',
-      tags: [
-        'Second Interview'
-      ]
+      title: 'Cras justo odio, dapibus ac facilisis',
+      type: 'video',
+      externalHost: 'youTube',
+      externalIdentifier: 'YbcxU1IK7s4',
+      description:
+      'Praesent commodo cursus magna, vel scelerisque nisl consectetur et. ' +
+      'Donec id elit non mi porta gravida at eget metus. Morbi leo risus, ' +
+      'porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget ' +
+      'risus varius blandit sit amet non magna. Integer posuere erat a ante ' +
+      'venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna ' +
+      'mollis ornare vel eu leo. Praesent commodo cursus magna, ' +
+      'vel scelerisque nisl consectetur et.',
+      link: 'https://youtu.be/YbcxU1IK7s4',
+      position: 2
     }
   },
   {
     id: 4,
     type: "resources",
     attributes: {
-      type: 'interactive',
-      title: 'Ridiculus'
+      title: 'Cras justo odio, dapibus ac facilisis',
+      type: 'image',
+      image: '/static/placeholder/portrait-ndt01.jpg',
+      description:
+      'Maecenas sed diam eget risus varius blandit sit amet non magna. ' +
+      'Cras mattis consectetur purus sit amet fermentum. Donec id elit non' +
+      ' mi porta gravida at eget metus. Curabitur blandit tempus porttitor.',
+      link: '/static/placeholder/portrait-ndt01.jpg',
+      position: 3
     }
   },
   {
     id: 5,
     type: "resources",
     attributes: {
-      type: 'spreadsheet',
-      title: 'Commodo Mattis Malesuada'
+      title: 'Nulla vitae elit libero',
+      type: 'image',
+      image: '/static/placeholder/portrait-unsplash01.jpg',
+      description:
+      'Praesent commodo cursus magna, vel scelerisque nisl consectetur et. ' +
+      'Donec id elit non mi porta gravida at eget metus. Morbi leo risus, ' +
+      'porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget ' +
+      'risus varius blandit sit amet non magna. Integer posuere erat a ante ' +
+      'venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna ' +
+      'mollis ornare vel eu leo. Praesent commodo cursus magna, ' +
+      'vel scelerisque nisl consectetur et.',
+      link: '/static/placeholder/portrait-unsplash01.jpg',
+      position: 4
     }
   },
   {
     id: 6,
     type: "resources",
     attributes: {
-      type: 'image',
-      image: '/static/placeholder/background-waterfall.jpg',
-      title: 'Nullam quis risus eget urna mollis ornare',
+      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      type: 'file',
+      image: '/static/placeholder/background-coniferous.jpg',
+      description:
+      'Maecenas sed diam eget risus varius blandit sit amet non magna. ' +
+      'Cras mattis consectetur purus sit amet fermentum. Donec id elit non' +
+      ' mi porta gravida at eget metus. Curabitur blandit tempus porttitor.',
+      link: '#',
       tags: [
         'Japan',
         'Photography'
-      ]
+      ],
+      position: 5
     }
   },
   {
@@ -72,7 +112,8 @@ const resources = [
       title: 'Etiam Dolor Ipsum',
       tags: [
         'Second Interview'
-      ]
+      ],
+      position: 6
     }
   },
   {
@@ -80,7 +121,8 @@ const resources = [
     type: "resources",
     attributes: {
       type: 'link',
-      title: 'Lorem ipsum dolor sit, adipiscing elit.'
+      title: 'Lorem ipsum dolor sit, adipiscing elit.',
+      position: 7
     }
   },
   {
@@ -92,7 +134,8 @@ const resources = [
       tags: [
         'Photography',
         'Second Interview'
-      ]
+      ],
+      position: 8
     }
   },
   {
@@ -104,7 +147,8 @@ const resources = [
       tags: [
         'Japan',
         'Photography'
-      ]
+      ],
+      position: 9
     }
   },
   {
@@ -115,7 +159,8 @@ const resources = [
       title: 'Vestibulum id ligula porta felis euismod semper.',
       tags: [
         'Second Interview'
-      ]
+      ],
+      position: 10
     }
   },
   {
@@ -123,7 +168,8 @@ const resources = [
     type: "resources",
     attributes: {
       type: 'document',
-      title: 'Dolor Sollicitudin Ultricies'
+      title: 'Dolor Sollicitudin Ultricies',
+      position: 11
     }
   },
   {
@@ -135,9 +181,46 @@ const resources = [
       tags: [
         'Japan',
         'Second Interview'
-      ]
+      ],
+      position: 12
     }
   }
+];
+
+const resourceCollection = {
+  id: "1234",
+  attributes: { },
+  links: { },
+  relationships: { resources }
+};
+
+const resourceCollections = [
+  {
+    id: 1,
+    type: "resourceCollections",
+    attributes: {
+      image: "/static/placeholder/background-waterfall.jpg",
+      title: "Recorded conversations with author; Pre-translated"
+    }
+  },
+  {
+    id: 2,
+    type: "resourceCollections",
+    attributes: {
+      image: null,
+      title: "Slideshow: photos of original manuscript with handwritten notes"
+    }
+  },
+  {
+    id: 3,
+    type: "resourceCollections",
+    attributes: {
+      image: "/static/placeholder/background-coniferous.jpg",
+      title: "Untitled"
+    }
+  }
+
+
 ];
 
 const events = [
@@ -182,5 +265,7 @@ const events = [
 
 export default {
   resources,
-  events
+  events,
+  resourceCollections,
+  resourceCollection
 };

@@ -12,9 +12,3 @@ export Layout from './Layout';
 export ProjectList from './ProjectList';
 export Maker from './Maker';
 export Utility from './Utility';
-
-export ResourceSlideshow from './ResourceSlideshow';
-export ResourceSlideFigure from './ResourceSlideFigure';
-export ResourceSlideFigureImage from './ResourceSlideFigureImage';
-export ResourceSlideFigureVideo from './ResourceSlideFigureVideo';
-export ShareNavPrimary from './ShareNavPrimary';

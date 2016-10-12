@@ -2,25 +2,13 @@
   $slideCopyFocus: 570px;
   padding-bottom: 38px;
 
-  .slide {
-    figure {
-      width: 100%;
-      height: 0;
-      padding-top: 56.25%;
-      background-color: $neutralBlack;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
-  }
-
-  .slide-caption {
+  .slide-footer {
     display: table;
     width: 100%;
     background-color: $neutral90;
   }
 
-  .resource-info {
+  .slide-caption {
     position: relative;
     display: table-cell;
     width: 100%;

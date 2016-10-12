@@ -6,14 +6,15 @@ export default class ResourceCollectionThumbnail extends Component {
   static displayName = "ResourceCollection.Thumbnail";
 
   static propTypes = {
-    collection: PropTypes.object,
+    resourceCollection: PropTypes.object,
     projectId: PropTypes.string
   };
 
   render() {
     const collectionsBackground = '/static/images/resource-collection.jpg';
-    const collection = this.props.collection;
-    const bgImage = collection.image ? collection.image : collectionsBackground;
+    const collection = this.props.resourceCollection;
+    const attr = collection.attributes;
+    const bgImage = attr.image ? attr.image : collectionsBackground;
     return (
       <li>
         <Link
@@ -22,7 +23,7 @@ export default class ResourceCollectionThumbnail extends Component {
         >
           <div className="title-overlay">
             <h4 className="collection-title">
-              {collection.title}
+              {attr.title}
             </h4>
             <div className="icon">
               <i className="manicon manicon-file-box"></i>
