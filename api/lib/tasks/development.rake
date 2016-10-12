@@ -1,4 +1,4 @@
-namespace :demo do
+namespace :development do
   desc "Loads demo data into Manifold"
   task load: :environment do
     Demonstration::DataLoader.new.load
