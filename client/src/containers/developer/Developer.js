@@ -25,8 +25,7 @@ class DeveloperContainer extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    projects: PropTypes.array,
-    texts: PropTypes.array
+    state: PropTypes.object
   };
 
   constructor() {

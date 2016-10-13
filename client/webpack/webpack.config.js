@@ -98,7 +98,7 @@ plugins.push(new webpack.DefinePlugin({
 // Use small sourcemaps in production
 let devtool;
 if (__DEVELOPMENT__) {
-  devtool = "cheap-module-eval-source-map";
+  devtool = "eval";
 } else {
   devtool = "cheap-module-source-map";
 }
@@ -138,9 +138,8 @@ module.exports = {
   devtool: devtool,
   context: path.resolve(__dirname, '..'),
   entry: {
+    'theme': themeEntry,
     'main': mainEntry
-    ,
-    'theme': themeEntry
   },
   output: {
     path: assetsPath,

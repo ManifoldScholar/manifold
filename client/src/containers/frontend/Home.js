@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { ProjectCovers, ProjectGrid, ProjectFilters } from 'components/frontend';
+import { ProjectList } from 'components/frontend';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import { uiFilterActions, entityStoreActions } from 'actions';
@@ -75,7 +75,7 @@ class HomeContainer extends Component {
               </h4>
             </header>
             { this.props.featuredProjects ?
-              <ProjectGrid
+              <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}
                 favorites={get(this.props.authentication, 'currentUser.favorites')}
                 dispatch={this.props.dispatch}
@@ -98,11 +98,11 @@ class HomeContainer extends Component {
               Note, too, that the parent component delivers all the data the child
               component needs to render (which is what keeps the child dumb)'
             */}
-            <ProjectFilters
+            <ProjectList.Filters
               updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
             />
             { this.props.filteredProjects ?
-              <ProjectGrid
+              <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}
                 favorites={get(this.props.authentication, 'currentUser.favorites')}
                 dispatch={this.props.dispatch}

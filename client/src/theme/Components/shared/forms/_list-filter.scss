@@ -7,6 +7,9 @@
   padding-bottom: 26px;
   font-size: 0;
 
+  .resource-totals + & {
+    padding-top: 40px;
+  }
 
   input[type="text"] {
     @include templateHead;

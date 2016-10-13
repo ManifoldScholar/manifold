@@ -1,3 +1,4 @@
+export CollectionDetail from './CollectionDetail';
 export NotFound from './NotFound';
 export Following from './Following';
 export Frontend from './Frontend';

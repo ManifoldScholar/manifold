@@ -2,10 +2,14 @@
 class TextPartialSerializer < ActiveModel::Serializer
   cache key: "text_partial", expires_in: 3.hours
   attributes :id, :title, :creator_names, :unique_identifier, :cover_url, :created_at,
-             :first_section_id
+             :first_section_id, :published
 
   def first_section_id
     object.text_sections.first.try(:id)
+  end
+
+  def published
+    object.published?
   end
 
   belongs_to :project

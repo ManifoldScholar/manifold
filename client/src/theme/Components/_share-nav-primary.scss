@@ -1,0 +1,45 @@
+.share-nav-primary {
+  > span {
+    @include utilityPrimary;
+    font-size: 14px;
+    line-height: 15px;
+    color: $neutral50;
+  }
+
+  ul {
+    @include listUnstyled;
+    display: inline-block;
+
+    li {
+      display: inline-block;
+      margin-left: 18px;
+      vertical-align: middle;
+    }
+
+    a {
+      color: $neutral40;
+      text-decoration: none;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $accentPrimary;
+      }
+    }
+
+    .manicon {
+      line-height: 15px;
+    }
+
+    .manicon-twitter {
+      font-size: 14px;
+    }
+
+    .manicon-facebook {
+      font-size: 15px;
+    }
+
+    .manicon-envelope {
+      font-size: 12px;
+    }
+  }
+}

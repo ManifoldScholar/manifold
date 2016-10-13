@@ -91,4 +91,8 @@ class Text < ActiveRecord::Base
   def toc_section
     text_sections.find_by(kind: TextSection::KIND_NAVIGATION)
   end
+
+  def published?
+    project && project.published_text == self
+  end
 end
