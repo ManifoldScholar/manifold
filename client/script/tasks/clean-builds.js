@@ -1,9 +1,13 @@
 import rimraf from 'rimraf';
 import path from 'path';
 
-const buildPath = path.join(__dirname, "..", "..", "dist", "build");
-rimraf(buildPath, () => {
-  console.log(`${buildPath} has been cleaned`);
-  process.exit();
-});
+const buildPaths = [
+  path.join(__dirname, "..", "..", "dist", "build", "server", "react-server", "*"),
+  path.join(__dirname, "..", "..", "dist", "build", "server", "web-server", "*"),
+  path.join(__dirname, "..", "..", "dist", "build", "client", "**")
+]
+
+buildPaths.forEach((path) => {
+  rimraf.sync(path);
+})
 

@@ -13,10 +13,12 @@
   "scripts": {
     "start": "NODE_ENV=production npm-run-all prod",
     "start-prod": "NODE_ENV=production npm-run-all prebuild dist prod",
-    "start-dev": "npm-run-all prebuild dev",
+
+    "start-dev": "npm-run-all prebuild dist:universal --parallel dev",
+
     "prebuild": "npm-run-all prebuild:**",
     "prebuild:clean": "node ./script/clean-builds-entry.js",
-    "prebuild:dll": "webpack --config ./webpack/webpack.dll.js",
+
     "dev": "npm-run-all --parallel dev:**",
     "dev:build:universal": "webpack --config ./webpack/entries/react-server.config.entry.js --watch --colors --display-error-details",
     "dev:build:web": "webpack --config ./webpack/entries/web-server.config.entry.js --colors --display-error-details",
