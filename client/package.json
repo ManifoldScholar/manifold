@@ -13,12 +13,9 @@
   "scripts": {
     "start": "NODE_ENV=production npm-run-all prod",
     "start-prod": "NODE_ENV=production npm-run-all prebuild dist prod",
-
     "start-dev": "npm-run-all prebuild dist:universal --parallel dev",
-
     "prebuild": "npm-run-all prebuild:**",
     "prebuild:clean": "node ./script/clean-builds-entry.js",
-
     "dev": "npm-run-all --parallel dev:**",
     "dev:build:universal": "webpack --config ./webpack/entries/react-server.config.entry.js --watch --colors --display-error-details",
     "dev:build:web": "webpack --config ./webpack/entries/web-server.config.entry.js --colors --display-error-details",
@@ -124,7 +121,7 @@
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.0",
     "react-side-effect": "^1.0.2",
-    "redbox-react": "^1.1.1",
+    "redbox-react": "^1.3.2",
     "redux": "^3.1.7",
     "redux-actions": "^0.12.0",
     "redux-devtools": "^3.0.0-beta-3",
