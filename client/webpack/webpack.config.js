@@ -50,18 +50,13 @@ var plugins;
 if (__DEVELOPMENT__) {
   plugins = [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(/webpack-stats\.json$/),
-    new webpack.DllReferencePlugin({
-      context: path.join(__dirname, "..", "src"),
-      manifest: require("../dist/build/universal/dll/vendor-manifest.json")
-    })
+    new webpack.IgnorePlugin(/webpack-stats\.json$/)
   ];
 } else {
   plugins = [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
       compress: {
         warnings: false,
         dead_code: true
@@ -98,7 +93,8 @@ plugins.push(new webpack.DefinePlugin({
 // Use small sourcemaps in production
 let devtool;
 if (__DEVELOPMENT__) {
-  devtool = "eval";
+  devtool = "cheap-module-eval-source-map";
+  devtool = "source-map";
 } else {
   devtool = "cheap-module-source-map";
 }
