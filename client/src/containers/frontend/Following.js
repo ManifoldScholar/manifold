@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { ProjectList } from 'components/frontend';
+import { ProjectList, Layout } from 'components/frontend';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { uiFilterActions, entityStoreActions } from 'actions';
@@ -111,18 +111,7 @@ class FollowingContainer extends Component {
             }
           </div>
         </section>
-        <section>
-          <div className="container">
-            <nav className="button-nav">
-              <Link to={'/browse'} >
-                <button className="button-icon-primary">
-                  <i className="manicon manicon-books-on-shelf"></i>
-                  See more projects
-                </button>
-              </Link>
-            </nav>
-          </div>
-        </section>
+        <Layout.ButtonNavigation grayBg={true} showFollowing={false} />
       </div>
     );
   };

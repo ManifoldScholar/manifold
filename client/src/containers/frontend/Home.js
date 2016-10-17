@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { ProjectList } from 'components/frontend';
+import { ProjectList, Layout } from 'components/frontend';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import { uiFilterActions, entityStoreActions } from 'actions';
@@ -86,6 +86,7 @@ class HomeContainer extends Component {
           </div>
         </section>
         <section className="bg-neutral05">
+          {Math.random()}
           <div className="container">
             <header className="section-heading">
               <h4 className="title">
@@ -111,18 +112,7 @@ class HomeContainer extends Component {
             }
           </div>
         </section>
-        <section>
-          <div className="container">
-            <nav className="button-nav">
-              <Link to={'/browse/following'}>
-                <button className="button-icon-primary">
-                  <i className="manicon manicon-books-with-glasses"></i>
-                  Projects You're following
-                </button>
-              </Link>
-            </nav>
-          </div>
-        </section>
+        <Layout.ButtonNavigation grayBg={false} showBrowse={false} />
       </div>
     );
   }

@@ -9,7 +9,8 @@ import {
   Project,
   TextList,
   ResourceList,
-  ResourceCollectionList
+  ResourceCollectionList,
+  Layout
 } from 'components/frontend';
 
 
@@ -65,7 +66,6 @@ class Detail extends Component {
   }
 
   renderMeta() {
-    if (!this.state.meta.length > 0) return null;
     return (
       <section>
         <div className="container">
@@ -165,7 +165,7 @@ class Detail extends Component {
   }
 
   renderNavButtons() {
-    return (<div>some nav buttons</div>);
+    return (<Layout.ButtonNavigation />);
   }
 
   render() {
@@ -176,6 +176,7 @@ class Detail extends Component {
         {this.renderActivity()}
         {this.renderTexts()}
         {this.renderResources()}
+        {this.renderMeta()}
         {this.renderNavButtons()}
       </div>
     );

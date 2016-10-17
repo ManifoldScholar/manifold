@@ -1,0 +1,100 @@
+exports[`Footer component renders correctly 1`] = `
+<footer
+  className="footer-browse">
+  <div
+    className="container">
+    <div
+      className="rel">
+      <a
+        className="logo"
+        onClick={[Function]}
+        style={Object {}}>
+        <i
+          className="manicon manicon-manifold-logo" />
+        Manifold
+      </a>
+    </div>
+    <nav
+      className="text-nav">
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <a
+                href="#"
+                onClick={[Function]}>
+                Log In
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={[Function]}
+                style={Object {}}>
+                Projects
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={[Function]}
+                style={Object {}}>
+                Contact
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a
+                href="http://twitter.com/manifoldscholar"
+                target="_blank">
+                Twitter
+              </a>
+            </li>
+            <li>
+              <a
+                href="mailto:webbook@umn.edu">
+                Email
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section
+      className="footer-secondary">
+      <form>
+        <div
+          className="search-button-inline">
+          <input
+            placeholder="Search"
+            type="text" />
+          <button
+            className="manicon manicon-magnify">
+            <span
+              className="screen-reader-text">
+              Click to submit search query
+            </span>
+          </button>
+        </div>
+      </form>
+      <p
+        className="colophon">
+        © 2015-2016 6 University of Minnesota Press.
+        <br />
+        Manifold is released under the 
+        <a
+          href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md">
+          GNU General Public License v3
+        </a>
+        . Download and contribute to 
+        <a
+          href="https://github.com/ManifoldScholar/manifold">
+          Manifold
+        </a>
+         on github.
+      </p>
+    </section>
+  </div>
+</footer>
+`;
