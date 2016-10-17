@@ -1,49 +1,29 @@
 import Express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import favicon from 'serve-favicon';
-import compression from 'compression';
-import path from 'path';
-import { pad } from './utils/string';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import cookie from 'cookie';
 import { match } from 'react-router';
-import RedBox from 'redbox-react';
-import emoji from 'node-emoji';
-import chalk from 'chalk';
 import config from './config';
 import Html from './helpers/Html';
+import ch from './helpers/consoleHelpers';
 import createStore from './store/createStore';
 import { authActions } from 'actions';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 import fetchAllData from './helpers/fetchAllData';
+import exceptionRenderer from './helpers/exceptionRenderer';
 import App from './App';
 import getRoutes from './routes';
 
-const pretty = new PrettyError();
-
-function handleError(error) {
-  console.log(`SERVER RENDER ERROR`);
-  console.log('---------------------');
-  console.log(pretty.render(error));
-  return ReactDOM.renderToString(
-    <RedBox error={error} />
-  );
-}
-
 export default function (parameters) {
 
+  const pretty = new PrettyError();
   const morgan = require('morgan');
   const app = new Express();
   const server = new http.Server(app);
-  const logStyle = __DEVELOPMENT__ ? 'dev' : 'combined';
-
-  app.use(compression());
-
-  // TODO: Deal with favicon
-  // app.use(favicon(path.join(__dirname, '..', 'dist', 'static', 'favicon.ico')));
-  // app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
+  const devLogFormat = "[UNV] :method :url :status :response-time ms - :res[content-length]";
+  const logStyle = __DEVELOPMENT__ ? devLogFormat : 'combined';
 
   app.use(morgan(logStyle));
 
@@ -59,11 +39,10 @@ export default function (parameters) {
         />));
     };
 
-    //
-    // if (__DISABLE_SSR__) {
-    //   hydrateOnClient();
-    //   return;
-    // }
+    if (__DISABLE_SSR__) {
+      hydrateOnClient();
+      return;
+    }
 
     if (req.headers.cookie) {
       const manifoldCookie = cookie.parse(req.headers.cookie);
@@ -87,6 +66,7 @@ export default function (parameters) {
       if (redirectLocation) {
         res.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (error) {
+        ch.error("The server-side render experienced a routing error.");
         console.error('ROUTER ERROR:', pretty.render(error));
         res.status(500);
         hydrateOnClient();
@@ -100,6 +80,7 @@ export default function (parameters) {
           props.location,
           props.params
         ).then(() => {
+          ch.info("Server-side data fetch completed successfully");
           store.dispatch({ type: 'SERVER_LOADED', payload: req.originalUrl });
           const appComponent = (
             <App {...props} store={store} />
@@ -111,6 +92,7 @@ export default function (parameters) {
           }
 
           let renderString = '';
+          let isError = false;
           try {
             renderString = ReactDOM.renderToString(
               <Html
@@ -120,62 +102,47 @@ export default function (parameters) {
               />
             );
           } catch (renderError) {
-            renderString = handleError(renderError);
+            isError = true;
+            ch.error("Server-side render failed in server-react.js");
+            renderString = exceptionRenderer(
+              renderError,
+              "ERROR: Server-side render failed in server-react.js"
+            );
           } finally {
-            res.send('<!doctype html>\n' + renderString);
+            if (isError) {
+              res.status(500);
+              res.send(renderString);
+            } else {
+              res.send('<!doctype html>\n' + renderString);
+            }
           }
         }, (dataFetchError) => {
-          const renderString = handleError(dataFetchError);
-          res.send('<!doctype html>\n' + renderString);
+          ch.error("fetchAllData failed in server-react.js");
+          const renderString = exceptionRenderer(dataFetchError,
+            "ERROR: fetchAllData failed in server-react.js");
+          res.status(500);
+          res.send(renderString);
         });
       }
     });
   });
 
   const listenOn = config.reactServerPort;
-  const header = (str) => { return chalk.bold.green.bold(pad(str, 80, ' ', false)); };
-  const info = (str) => { return chalk.bold.cyan(str); };
-
   if (listenOn) {
     server.listen(listenOn, (err) => {
       if (err) {
-        console.error(err);
+        ch.error("Universal server encountered an error.");
+        console.error('SERVER ERROR:', pretty.render(error));
       }
-      console.log('');
-      console.log('');
-      if (!config.isProduction) {
-        console.log(header(emoji.get('tada') + '  MANIFOLD WEBPACK SERVER'));
-        console.log(info(pad('', 79, '-')));
-        console.log(info('Manifold Asset Server, a.k.a. Webpack, is listening at http://127.0.0.1:%s'), config.assetPort);
-        console.log('');
-        console.log('');
-      }
-
-      console.log(header(emoji.get('earth_americas') + '  MANIFOLD REST API'));
-      console.log(info(pad('', 79, '-')));
-      console.log(info('The Manifold client expects to find the API at the following paths:'));
-      console.log('');
-      const apiPathMax = config.apiProxyPaths.reduce((memo, current) => {
-        return current.length > memo ? current.length : memo;
-      }, 0);
-      config.apiProxyPaths.forEach((value) => {
-        console.log(info(`${config.apiUri}${value}`));
-      });
-      console.log('');
-      console.log('');
-
-      console.log(header(emoji.get('books') + '  UNIVERSAL CLIENT SERVER'));
-      console.log(info(pad('', 79, '-')));
-      console.log(info(`Manifold Client is listening at http://127.0.0.1:${listenOn}`));
-      console.log('');
-      console.log('');
-      // if (setUmask === true) {
-      //   process.umask(oldUmask);
-      // }
+      ch.header(`Manifold Universal Server engaged on port ${config.reactServerPort}`);
     });
   } else {
-    console.error('==>     ERROR: No PORT environment variable has been specified');
+    ch.error(`No MANIFOLD_REACT_SERVER_PORT environment variable has been specified`)
   }
 
+  process.once('SIGUSR2',() => {
+    ch.info("The Universal Server has received a restart signal. Hang tight!");
+    ch.info("   While it's being restarted, there will be no server-side rendering.", null);
+  });
 
 }

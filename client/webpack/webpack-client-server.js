@@ -2,8 +2,19 @@ import webpack from 'webpack';
 import appConfig from '../src/config';
 import webpackConfig from './webpack.config.client';
 import WebpackDevServer from 'webpack-dev-server';
+import ch from '../src/helpers/consoleHelpers';
 
 const compiler = webpack(webpackConfig);
+
+compiler.plugin('done', (stats) => {
+  ch.header('Client-side assets have finished building');
+});
+
+compiler.plugin('compile', (params) => {
+  ch.info('Client-side assets are being built');
+});
+
+
 const serverOptions = {
   contentBase: ['dist'],
   quiet: true,

@@ -30,11 +30,20 @@ if (__DEVELOPMENT__) {
   // If we're in development mode, we want to check for the server-side render being
   // different from the first client-side render.
   window.React = React; // enable debugger
-  if (!rootElement ||
-    !rootElement.firstChild ||
-    !rootElement.firstChild.attributes ||
-    !rootElement.firstChild.attributes['data-react-checksum']) {
-    console.error('Server-side React render was discarded. Make sure that your initial ' +
-      'render does not contain any client-side code.');
+  if (rootElement && (rootElement.hasAttribute('data-ssr-render') === true)) {
+    console.log("%c✊  Manifold's server-side, universal rendering is present ", 'background: #222; width: 100%; padding: 5px; color: #60F86F');
+    if (!rootElement ||
+      !rootElement.firstChild ||
+      !rootElement.firstChild.attributes ||
+      !rootElement.firstChild.attributes['data-react-checksum']) {
+        console.log("%c⚠️  However, the server-side render was discarded because  ", 'background: #222; width: 100%; padding: 5px; color: #60F86F');
+        console.log("%c⚠️  it differed from the client-side render. This can      ", 'background: #222; width: 100%; padding: 5px; color: #60F86F');
+        console.log("%c⚠️  happen when components render random content, or when  ", 'background: #222; width: 100%; padding: 5px; color: #60F86F');
+        console.log("%c⚠️  client-side code is executed on the server.            ", 'background: #222; width: 100%; padding: 5px; color: #60F86F');
+    } else {
+      console.log("%c✊  and matches the client-side render.                    ", 'background: #222; width: 100%; padding: 5px; color: #60F86F');
+    }
+  } else {
+    console.log("%c⚠️  The server-side render is not present. Perhaps the universal server is reloading.", 'background: #222; width: 100%; padding: 5px; color: #60F86F');
   }
 }

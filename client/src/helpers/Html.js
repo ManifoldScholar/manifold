@@ -57,8 +57,15 @@ export default class Html extends Component {
 
   render() {
     const { assets, component, store } = this.props;
-    const content = component ? ReactDOM.renderToString(component) : '';
+    const content = component ? ReactDOM.renderToString(component) : null;
     const bodyClass = HigherOrder.BodyClass.rewind();
+
+    const contentProps = {}
+    if(content) {
+      contentProps.dangerouslySetInnerHTML = { __html: content };
+      contentProps["data-ssr-render"] = true;
+    }
+
     return (
       <html lang="en-us">
         <head>
@@ -79,10 +86,12 @@ export default class Html extends Component {
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
 
-
         </head>
-        <body className={bodyClass} >
-          <div id="content" dangerouslySetInnerHTML={{ __html: content }}/>
+        <body className={bodyClass}>
+          <div
+            id="content"
+            {...contentProps}
+          />
           <script
             dangerouslySetInnerHTML={{
               __html: `window.__INITIAL_STATE__=${serialize(store.getState())};`
