@@ -6,7 +6,6 @@ export default class ResourceSlideFigureImage extends Component {
   };
 
   render() {
-    console.log(this.props.resource);
     return (
       <figure className="figure-image"
         style={ { backgroundImage: 'url(' + this.props.resource.attributes.image + ')' } }
