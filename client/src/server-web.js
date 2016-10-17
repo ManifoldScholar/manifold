@@ -4,7 +4,6 @@ import Html from './helpers/Html';
 import exceptionRenderer from './helpers/exceptionRenderer';
 import Express from 'express';
 import favicon from 'serve-favicon';
-import compression from 'compression';
 import path from 'path';
 import PrettyError from 'pretty-error';
 import http from 'http';
@@ -26,8 +25,8 @@ export default function (parameters) {
 
   const pretty = new PrettyError();
 
-  app.use(compression());
   app.use(morgan(logStyle));
+  app.use(favicon(__dirname + '../../../../../static/favicon.ico'));
 
   if (__DEVELOPMENT__) {
 
