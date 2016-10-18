@@ -49,7 +49,7 @@ export default class ResourceCollectionDetail extends Component {
           <ResourceList.Totals count={2028} projectId={project.id} />
           <ResourceList.Filters />
           <ResourceList.Thumbnails resources={resources} />
-        </div>W
+        </div>
       </section>
 
     );
