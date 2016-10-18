@@ -112,7 +112,7 @@
     "react": "^15.4.0-rc.4",
     "react-addons-css-transition-group": "^15.4.0-rc.4",
     "react-addons-test-utils": "^15.4.0-rc.4",
-    "react-document-meta": "^2.0.0",
+    "react-document-meta": "git+https://github.com/ManifoldScholar/react-document-meta.git",
     "react-dom": "^15.4.0-rc.4",
     "react-dropzone": "^3.4.0",
     "react-hot-loader": "^3.0.0-beta.1",

@@ -5038,25 +5038,21 @@ react-dock@^0.2.1:
     lodash.debounce "^3.1.1"
     object-assign "^4.0.1"
 
-react-document-meta@^2.0.0:
+"react-document-meta@git+https://github.com/ManifoldScholar/react-document-meta.git":
   version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-document-meta/-/react-document-meta-2.0.3.tgz#35052d205a822d2780555ee73df58e600459519c"
+  resolved "git+https://github.com/ManifoldScholar/react-document-meta.git#8201c27f27e20d972c17650f3b3c1666e73ba716"
   dependencies:
     exenv "^1.2.0"
     react-dom ">=0.14.0"
     react-side-effect "^1.0.1"
 
-react-dom@^15.4.0-rc.4:
+react-dom@^15.4.0-rc.4, react-dom@>=15.4.0-rc.4:
   version "15.4.0-rc.4"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.0-rc.4.tgz#e95bbe99d47aeefd60bad9a0502ca926283d960a"
   dependencies:
     fbjs "^0.8.1"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
-
-react-dom@>=0.14.0:
-  version "15.3.2"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.3.2.tgz#c46b0aa5380d7b838e7a59c4a7beff2ed315531f"
 
 react-dropzone@^3.4.0:
   version "3.6.0"
