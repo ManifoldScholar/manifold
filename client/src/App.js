@@ -5,7 +5,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { HigherOrder } from 'components/global';
 import { Provider } from 'react-redux';
 import getRoutes from 'routes';
-import { DevTools } from 'containers/developer';
 import { authActions } from 'actions';
 import { Manifold } from 'containers/global';
 
@@ -54,9 +53,6 @@ export default class App extends Component {
   componentDidMount() {
     this.store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
     this.store.dispatch(getCurrentUser);
-    if (__DEVELOPMENT__) {
-      this.store.dispatch({ type: 'RENDER_DEV_TOOLS' });
-    }
     this.forceUpdate();
   }
 
@@ -81,16 +77,11 @@ export default class App extends Component {
 
   render() {
     const state = this.store.getState();
-    let devTools = null;
-    if (state.developer.renderDevTools && __DEVELOPMENT__) {
-      devTools = <DevTools />;
-    }
 
     return (
       <Provider store={this.store} key="provider">
         <Manifold>
           {this.finalRouter}
-          {devTools}
         </Manifold>
       </Provider>
     );
