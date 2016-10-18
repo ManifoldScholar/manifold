@@ -86,7 +86,6 @@ class HomeContainer extends Component {
           </div>
         </section>
         <section className="bg-neutral05">
-          {Math.random()}
           <div className="container">
             <header className="section-heading">
               <h4 className="title">
