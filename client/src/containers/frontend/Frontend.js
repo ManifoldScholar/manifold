@@ -6,14 +6,17 @@ import { commonActions } from 'actions/helpers';
 import { pagesAPI } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
+import get from 'lodash/get';
 const { request, requests } = entityStoreActions;
 
 class FrontendContainer extends Component {
 
-  static fetchData(getStateIgnored, dispatch) {
-    const pages = request(pagesAPI.index(), requests.allPages, true);
-    const { promise: one } = dispatch(pages);
-    return Promise.all([one]);
+  static fetchData(getState, dispatch) {
+    if (!entityUtils.isLoaded(requests.allPages, getState())) {
+      const pages = request(pagesAPI.index(), requests.allPages, true);
+      const { promise: one } = dispatch(pages);
+      return Promise.all([one]);
+    }
   }
 
   static propTypes = {

@@ -62,6 +62,11 @@ function selectEntity(response, entities) {
   return hydrateEntity(response.entity, entities);
 }
 
+export function isLoaded(request, state) {
+  const loaded = get(state, `entityStore.responses.${request}.loaded`);
+  return loaded === true;
+}
+
 export function select(requestMeta, entityStore) {
   const response = get(entityStore, `responses.${requestMeta}`);
   if (!response) return null;
