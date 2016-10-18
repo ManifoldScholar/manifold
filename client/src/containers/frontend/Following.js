@@ -111,7 +111,7 @@ class FollowingContainer extends Component {
             }
           </div>
         </section>
-        <Layout.ButtonNavigation grayBg={true} showFollowing={false} />
+        <Layout.ButtonNavigation grayBg showFollowing={false} />
       </div>
     );
   };

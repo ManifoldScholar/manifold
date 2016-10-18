@@ -12,6 +12,12 @@ export default class LayoutButtonNavigation extends Component {
     showFollowing: true
   }
 
+  static propTypes = {
+    grayBg: PropTypes.bool,
+    showBrowse: PropTypes.bool,
+    showFollowing: PropTypes.bool
+  };
+
   constructor() {
     super();
     this._browseButtonEl = null;
@@ -23,20 +29,20 @@ export default class LayoutButtonNavigation extends Component {
   }
 
   componentDidMount() {
-    this.matchButtonWidths()
+    this.matchButtonWidths();
   }
 
   matchButtonWidths() {
-    if(!this._browseButtonEl || !this._followingButtonEl) return;
+    if (!this._browseButtonEl || !this._followingButtonEl) return;
     const target = this._followingButtonEl.offsetWidth;
     this._browseButtonEl.style.width = `${target}px`;
   }
 
   renderBrowseButton() {
-    if (this.props.showBrowse !== true) return null
+    if (this.props.showBrowse !== true) return null;
     return (
       <Link to={'/browse'}>
-        <button ref={(node) => this._browseButtonEl = node} className="button-icon-primary">
+        <button ref={(node) => { this._browseButtonEl = node; }} className="button-icon-primary">
           <i className="manicon manicon-books-on-shelf"></i>See more projects
         </button>
       </Link>
@@ -44,10 +50,10 @@ export default class LayoutButtonNavigation extends Component {
   }
 
   renderFollowingButton() {
-    if (this.props.showFollowing !== true) return null
+    if (this.props.showFollowing !== true) return null;
     return (
       <Link to={'/browse/following'}>
-        <button ref={(node) => this._followingButtonEl = node} className="button-icon-primary">
+        <button ref={(node) => { this._followingButtonEl = node; }} className="button-icon-primary">
           <i className="manicon manicon-books-with-glasses"></i>Projects You're Following
         </button>
       </Link>
@@ -56,7 +62,7 @@ export default class LayoutButtonNavigation extends Component {
 
   render() {
     const sectionClass = classNames({
-      'bg-neutral05': this.props.grayBg == true
+      'bg-neutral05': this.props.grayBg === true
     });
 
     return (

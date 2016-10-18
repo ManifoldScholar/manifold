@@ -71,9 +71,10 @@ export default function (parameters) {
             assets={parameters.chunks()}
             store={store}
           />));
-      } catch(error) {
-        if(error.code === "MODULE_NOT_FOUND") {
-          let msg = "Waiting for initial Webpack build to complete. Wait a few seconds and reload.";
+      } catch (error) {
+        if (error.code === "MODULE_NOT_FOUND") {
+          const msg = "Waiting for initial Webpack build to complete. Wait a few seconds " +
+            "and reload.";
           ch.error(msg);
           res.send(msg);
         } else {
@@ -84,7 +85,7 @@ export default function (parameters) {
     }
   });
   app.use('/', reactServerProxy);
-  ch.info(`Proxying all other requests to the Universal rendering service at  ${universalTarget}`);
+  ch.info(`Proxying all other requests to the Universal rendering service at ${universalTarget}`);
 
   const socketLocation = process.env.NODE_SERVER_SOCKET_PATH;
   let listenOn;
@@ -101,7 +102,7 @@ export default function (parameters) {
   server.listen(listenOn, (err) => {
     if (err) {
       ch.error("Web server encountered an error.");
-      console.error('SERVER ERROR:', pretty.render(error));
+      console.error('SERVER ERROR:', pretty.render(err));
     }
     ch.header(`Manifold Web server listening at ${listenOn}`);
   });

@@ -60,8 +60,8 @@ export default class Html extends Component {
     const content = component ? ReactDOM.renderToString(component) : null;
     const bodyClass = HigherOrder.BodyClass.rewind();
 
-    const contentProps = {}
-    if(content) {
+    const contentProps = {};
+    if (content) {
       contentProps.dangerouslySetInnerHTML = { __html: content };
       contentProps["data-ssr-render"] = true;
     }

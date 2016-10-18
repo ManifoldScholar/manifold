@@ -39,7 +39,7 @@ const redBoxStyles = {
 function template(redboxString, preface = null) {
 
   let prefaceString;
-  if(preface) {
+  if (preface) {
     prefaceString = `
       <div class="preface">
         ${preface}
@@ -127,7 +127,7 @@ export default function renderException(error, preface) {
     redboxString = ReactDOM.renderToString(
       <RedBoxError style={redBoxStyles} error={error} />
     );
-  } catch(exception) {
+  } catch (exception) {
     console.log(exception);
   }
   const out = template(redboxString, preface);

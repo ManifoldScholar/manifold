@@ -7,7 +7,7 @@ function baseString(emojiKey) {
   if (emojiKey) {
     out = out + `${emoji.get(emojiKey)}  `;
   }
-  return out
+  return out;
 }
 
 function header(string, emojiKey = 'fist') {
@@ -32,4 +32,4 @@ export default {
   header,
   info,
   error
-}
+};

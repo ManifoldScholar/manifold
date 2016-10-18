@@ -132,15 +132,15 @@ export default function (parameters) {
     server.listen(listenOn, (err) => {
       if (err) {
         ch.error("Universal server encountered an error.");
-        console.error('SERVER ERROR:', pretty.render(error));
+        console.error('SERVER ERROR:', pretty.render(err));
       }
       ch.header(`Manifold Universal Server engaged on port ${config.reactServerPort}`);
     });
   } else {
-    ch.error(`No MANIFOLD_REACT_SERVER_PORT environment variable has been specified`)
+    ch.error(`No MANIFOLD_REACT_SERVER_PORT environment variable has been specified`);
   }
 
-  process.once('SIGUSR2',() => {
+  process.once('SIGUSR2', () => {
     ch.info("The Universal Server has received a restart signal. Hang tight!");
     ch.info("   While it's being restarted, there will be no server-side rendering.", null);
   });
