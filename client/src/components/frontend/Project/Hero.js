@@ -28,6 +28,26 @@ export default class ProjectHero extends Component {
     }
   }
 
+  socialUrl(service, id) {
+    let out;
+    switch (service) {
+      case 'twitter':
+        out = `http://twitter.com/${id}`;
+        break;
+      case 'instagram':
+        out = `http://instagram.com/${id}`;
+        break;
+      case 'facebook':
+        out = `http://facebook.com/${id}`;
+        break;
+      default:
+        out = null;
+        break;
+    }
+    return out;
+  }
+
+
   renderDescription() {
     if (this.props.project.attributes.description) {
       return (
@@ -36,22 +56,6 @@ export default class ProjectHero extends Component {
         </section>
       );
     }
-  }
-
-  socialUrl(service, id) {
-    let out = ""
-    switch(service) {
-      case 'twitter':
-        out = `http://twitter.com/${id}`
-        break;
-      case 'instagram':
-        out = `http://instagram.com/${id}`
-        break;
-      case 'facebook':
-        out = `http://facebook.com/${id}`
-        break;
-    }
-    return out;
   }
 
   renderSocial() {
@@ -65,7 +69,7 @@ export default class ProjectHero extends Component {
           <ul>
             {services.map((service) => {
               const key = `${service}Id`;
-              if(!has(attr, key) || !attr[key]) return null;
+              if (!has(attr, key) || !attr[key]) return null;
               return (
                 <li key={service}>
                   <a target="_blank" href={this.socialUrl(service, attr[key])} className={service}>
@@ -73,7 +77,7 @@ export default class ProjectHero extends Component {
                     <span className="screen-reader-text">{`View this project on ${service}`}</span>
                   </a>
                 </li>
-              )
+              );
             })}
           </ul>
         </nav>

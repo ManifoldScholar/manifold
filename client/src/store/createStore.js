@@ -24,7 +24,8 @@ export default function createStore(data) {
 
   let devtoolsExtension = null;
   if (__CLIENT__) {
-    devtoolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+    devtoolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__();
   }
 
   const store = finalCreateStore(

@@ -39,15 +39,15 @@ export default class ProjectThumbnail extends Component {
 
   renderPublishedDate(project) {
     const attr = project.attributes;
-    const monthInt = attr.publicationMonth ? parseInt(attr.publicationMonth) : null
-    const yearInt = attr.publicationYear ? parseInt(attr.publicationYear) : null
+    const monthInt = attr.publicationMonth ? parseInt(attr.publicationMonth, 10) : null;
+    const yearInt = attr.publicationYear ? parseInt(attr.publicationYear, 10) : null;
     let publishedString;
-    if(monthInt && yearInt) {
+    if (monthInt && yearInt) {
       publishedString = `Published ${moment().month(monthInt).format("MMMM")}, ${yearInt}`;
     } else if (yearInt) {
       publishedString = `Published ${yearInt}`;
     }
-    if(!publishedString) return null;
+    if (!publishedString) return null;
     if (!this.props.hideDate) {
       return (
         <div className="date">
@@ -68,12 +68,12 @@ export default class ProjectThumbnail extends Component {
 
   renderProjectMakers(project) {
     const creators = project.relationships.creators;
-    if (!creators || creators.length == 0) return null;
+    if (!creators || creators.length === 0) return null;
     return (
       <div className="makers">
         <span>{creators.map((maker) => maker.attributes.fullName).join(", ")}</span>
       </div>
-    )
+    );
   }
 
   render() {

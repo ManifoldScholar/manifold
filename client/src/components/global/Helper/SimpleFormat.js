@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, createElement } from 'react'
+import React, { Component, PropTypes, createElement } from 'react';
 
 export default class SimpleFormat extends Component {
 
@@ -17,20 +17,17 @@ export default class SimpleFormat extends Component {
     wrapperTagProps: {}
   }
 
-  paragraphs () {
-    const pattern = /([^\n]\n)(?=[^\n])/g
-    const text = this.props.text
+  paragraphs() {
+    const pattern = /([^\n]\n)(?=[^\n])/g;
+    const text = this.props.text;
     return text.replace(/\r\n?/g, '\n').split(/\n\n+/).map((t) => {
-      if (t.match(pattern)) {
-        return t.replace(pattern, '$1<br />')
-      } else {
-        return t
-      }
-    })
+      if (t.match(pattern)) return t.replace(pattern, '$1<br />');
+      return t;
+    });
   }
 
-  render () {
-    const { wrapperTag, wrapperTagProps, postfix } = this.props
+  render() {
+    const { wrapperTag, wrapperTagProps, postfix } = this.props;
     return createElement(wrapperTag, wrapperTagProps, this.paragraphs().map((paragraph, index) => (
       (postfix && index === this.paragraphs().length - 1)
         ? <p key={ index }>
@@ -38,6 +35,6 @@ export default class SimpleFormat extends Component {
         { postfix }
       </p>
         : <p key={ index } dangerouslySetInnerHTML={{ __html: paragraph }} />
-    )))
+    )));
   }
 }

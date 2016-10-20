@@ -34,13 +34,11 @@ export default (RenderComponent) => {
         colspan: 'colSpan',
       };
       const mapped = mapKeys(attr, (attributeValue, attributeName) => {
-        if (map.hasOwnProperty(attributeName)) {
-          return map[attributeName];
-        } else if (startsWith(attributeName, 'data')) {
+        if (map.hasOwnProperty(attributeName)) return map[attributeName];
+        if (startsWith(attributeName, 'data')) {
           return humps.decamelize(attributeName, { separator: '-' });
-        } else {
-          return attributeName
         }
+        return attributeName;
       });
       if (mapped.hasOwnProperty('style')) {
         mapped.style = this.styleStringToObject(mapped.style);
