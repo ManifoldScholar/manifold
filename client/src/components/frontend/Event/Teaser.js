@@ -1,127 +1,90 @@
 import React, { Component, PropTypes } from 'react';
+import BodyAttributable from './Body/Attributable';
+import BodyModelCreation from './Body/ModelCreation';
+import BodyQuoted from './Body/ModelCreation';
 import { Link } from 'react-router';
 
 export default class Teaser extends Component {
 
-  static displayName = "Event.Teaser"
+  static displayName = "Event.Teaser";
 
   static propTypes = {
     event: PropTypes.object,
   };
 
-  renderEventComment(event) {
-    return (
-        <div>
-          <i className="manicon manicon-person-word-bubble"></i>
-          <div className="event-content">
-            <p>
-              {event.content}
-            </p>
-          </div>
-          <Link to="#" className="event-user">
-            {event.user.displayName}
-          </Link>
-          {/* TODO: Include machine readable date-time */}
-          <datetime className="event-date">
-            {event.date}
-          </datetime>
-        </div>
-    );
-  }
+  getPromptByType(type) {
+    let output = '';
 
-  renderEventFile(event) {
-    return (
-        <div>
-          <i className="manicon manicon-cube-shine"></i>
-          <h5 className="event-title">
-            {event.title}
-          </h5>
-          <datetime className="event-date">
-            {event.date}
-          </datetime>
-        </div>
-    );
-  }
-
-  renderEventInit(event) {
-    return (
-        <div>
-          <i className="manicon manicon-egg"></i>
-          <h5 className="event-title">
-            {'Project Kickoff'}
-              <span className="subtitle">
-                {'A new Manifold project is born.'}
-              </span>
-          </h5>
-          <datetime className="event-date">
-            {event.date}
-          </datetime>
-        </div>
-    );
-  }
-
-  renderEventText(event) {
-    return (
-        <div>
-          <i className="manicon manicon-book-opening"></i>
-          <h5 className="event-title">
-            {event.title}
-              <span className="subtitle">
-                {event.subtitle}
-              </span>
-          </h5>
-          <datetime className="event-date">
-            {'Text added ' + event.date}
-          </datetime>
-        </div>
-    );
-  }
-
-  renderEventTwitter(event) {
-    return (
-        <div>
-          <i className="manicon manicon-twitter"></i>
-          <Link to={'http://www.twitter.com/' + event.user} target="_blank" className="event-user">
-            {'@' + event.user}
-          </Link>
-          <div className="event-content">
-            <p>
-              {event.content}
-            </p>
-          </div>
-          {/* TODO: Include machine readable date-time */}
-          <datetime className="event-date">
-            {event.date}
-          </datetime>
-        </div>
-    );
-  }
-
-
-  renderEventByType(event) {
-    switch (event.type) {
-      case 'comment':
-        return this.renderEventComment(event);
-      case 'file':
-        return this.renderEventFile(event);
-      case 'init':
-        return this.renderEventInit(event);
-      case 'text':
-        return this.renderEventText(event);
-      case 'twitter':
-        return this.renderEventTwitter(event);
+    switch(type) {
+      case 'ANNOTATION_CREATED':
+        output = 'Keep Reading';
+        break;
+      case 'TWEET':
+        output = 'Visit Site';
+        break;
       default:
-        return (
-          ''
-        );
+        output = 'View More';
     }
+
+    return output;
   }
 
   render() {
+    // Map event types to Event Body types
+    const EventBodyMap = {
+      'ANNOTATION_CREATED': {
+          component: BodyQuoted,
+          icon: 'person-word-bubble'
+      },
+      'PROJECT_CREATED': {
+        component: BodyModelCreation,
+        icon: 'egg'
+      },
+      'RESOURCE_CREATED': {
+        component: BodyModelCreation,
+        icon: 'cube-shine'
+      },
+      'TEXT_CREATED': {
+        component: BodyModelCreation,
+        icon: 'book-opening'
+      },
+      'TWEET': {
+        component: BodyAttributable,
+        icon: 'twitter'
+      }
+    };
+
+    const eventType = this.props.event.attributes.event_type;
+
+    const EventBody = EventBodyMap[eventType].component;
+
+    const eventLinked = this.props.event.attributes.event_url ? true : false;
+    let eventWrapperProps = {
+      className: 'event-tile'
+    };
+    let eventPrompt = false;
+    const EventWrapper =  eventLinked ? 'a' : 'div';
+
+    if (eventLinked) {
+      eventWrapperProps.href = this.props.event.attributes.event_url;
+      eventPrompt = (
+        <span>
+          {this.getPromptByType(eventType)}
+          <i className="manicon manicon-arrow-long-right"></i>
+        </span>
+      );
+    }
+
     return (
-        <div className="zach-test" ref="eventContainer">
-          {this.renderEventByType(this.props.event)}
+      <EventWrapper {...eventWrapperProps}>
+        <EventBody
+          icon={EventBodyMap[eventType].icon}
+          event={this.props.event}
+        />
+        <div className="event-prompt">
+          {eventPrompt}
         </div>
-    );
+      </EventWrapper>
+    )
   }
 }
