@@ -42,7 +42,7 @@ module Serializer
     def clean_empty_text_nodes!(representation)
       return unless representation[:node_type] == "element"
       return unless block_level_element?(representation)
-      return if !representation[:children] || representation[:children].empty?
+      return if representation[:children].nil? || representation[:children]&.empty?
       # Node is a block level element with children
       representation[:children].each_with_index do |child, index|
         next if child[:node_type] != "text"

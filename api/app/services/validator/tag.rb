@@ -65,7 +65,7 @@ module Validator
       return unless node.attributes["style"]
       clean_hash = node_style_hash(node)
       clean_hash.transform_values! do |value|
-        css_value_map(value)
+        css_value_map(value) if value
       end
       node["style"] = hash_to_style_string(clean_hash)
     end

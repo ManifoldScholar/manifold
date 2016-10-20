@@ -6,7 +6,7 @@ class TextSectionPartialSerializer < ActiveModel::Serializer
   def body_json
     find = "/system/resources/attachments"
     replace = ENV["API_DOMAIN"] + find
-    JSON.parse object.body_json.sub(find, replace)
+    JSON.parse object.body_json.gsub(find, replace)
   end
 
   belongs_to :text

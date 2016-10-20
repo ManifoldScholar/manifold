@@ -78,8 +78,7 @@ module Ingestor
 
           private
 
-          def transform_doc_uris(doc, resource_map, source_map,
-                                 source_path)
+          def transform_doc_uris(doc, resource_map, source_map, source_path)
             URI_ATTRIBUTES.each do |set|
               tag_name, attr_name = set
               doc.css(tag_name).each do |node|

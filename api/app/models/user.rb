@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   end
 
   def favorite?(favoritable)
-    favorites.where(favoritable_id: favoritable.id).count > 0
+    favorites.where(favoritable_id: favoritable.id).count.positive?
   end
 
   def favorite_projects

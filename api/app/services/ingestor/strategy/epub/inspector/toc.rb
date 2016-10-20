@@ -74,7 +74,7 @@ module Ingestor
 
           def header_text_for_node(node)
             header = node.at_xpath(selector_header_node)
-            header ? header.text : ""
+            header ? header&.text : "  "
           end
 
           def toc_title
