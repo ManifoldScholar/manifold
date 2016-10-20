@@ -71,13 +71,7 @@ export default class ProjectThumbnail extends Component {
     if (!creators || creators.length == 0) return null;
     return (
       <div className="makers">
-        {creators.map((maker) => {
-          return (
-            <span key={maker.id}>
-                {maker.attributes.name}
-              </span>
-          );
-        })}
+        <span>{creators.map((maker) => maker.attributes.fullName).join(", ")}</span>
       </div>
     )
   }
