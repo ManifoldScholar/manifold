@@ -98,6 +98,9 @@ GEM
     mimemagic (0.3.2)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
+    money (6.7.1)
+      i18n (>= 0.6.4, <= 0.7.0)
+      sixarm_ruby_unaccent (>= 1.1.1, < 2)
     multi_xml (0.5.5)
     naught (1.1.0)
     nio4r (1.2.1)
@@ -170,6 +173,7 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
     rubyzip (1.2.0)
+    sixarm_ruby_unaccent (1.1.1)
     spring (1.7.2)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -185,6 +189,9 @@ GEM
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unicode-display_width (1.1.1)
+    validate_url (1.0.2)
+      activemodel (>= 3.0.0)
+      addressable
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -205,6 +212,7 @@ DEPENDENCIES
   httparty (~> 0.14.0)
   jwt (~> 1.5.6)
   memoist (~> 0.15.0)
+  money
   naught (~> 1.1.0)
   nokogiri
   paperclip (~> 5.1.0)
@@ -221,6 +229,7 @@ DEPENDENCIES
   rubyzip (>= 1.2.0)
   spring
   spring-commands-rspec
+  validate_url
 
 BUNDLED WITH
    1.11.2

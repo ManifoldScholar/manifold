@@ -147,7 +147,7 @@
 
     @include respond($break75) {
       float: left;
-      width: 65%;
+      width: 70%;
       padding-top: 0;
       padding-right: 12%;
     }
@@ -201,9 +201,15 @@
       // Relative to font-size
       line-height: 1.611;
 
+      p {
+        margin-bottom: 0.682em;
+      }
+
       @include respond($break75) {
         margin-top: 30px;
       }
+
+
     }
 
     .project-entry {
@@ -285,7 +291,7 @@
     position: relative;
     display: none;
     float: left;
-    width: 35%;
+    width: 25%;
 
     @include respond($break75) {
       display: block;

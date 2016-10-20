@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import mapKeys from 'lodash/mapKeys';
 import humps from 'humps';
+import startsWith from 'lodash/startsWith';
 
 export default (RenderComponent) => {
 
@@ -33,7 +34,11 @@ export default (RenderComponent) => {
         colspan: 'colSpan',
       };
       const mapped = mapKeys(attr, (attributeValue, attributeName) => {
-        return map.hasOwnProperty(attributeName) ? map[attributeName] : attributeName;
+        if (map.hasOwnProperty(attributeName)) return map[attributeName];
+        if (startsWith(attributeName, 'data')) {
+          return humps.decamelize(attributeName, { separator: '-' });
+        }
+        return attributeName;
       });
       if (mapped.hasOwnProperty('style')) {
         mapped.style = this.styleStringToObject(mapped.style);

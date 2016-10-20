@@ -36,6 +36,7 @@
 ### Ignore user content ###
 /public/system
 /user_texts
+/import
 
 ### Ignore secrets ###
 config/secrets.yml

@@ -11,3 +11,4 @@ export UIPanel from './UIPanel';
 export UserMenuBody from './UserMenu/UserMenuBody';
 export UserMenuButton from './UserMenu/UserMenuButton';
 export Avatar from './Avatar';
+export Helper from './Helper';

@@ -19,6 +19,8 @@ gem "colorize"
 gem "css_parser"
 gem "dotenv-rails"
 gem "friendly_id"
+gem "validate_url"
+gem "money"
 
 group :development, :test do
   gem "rspec-rails", "~> 3.5.0"
