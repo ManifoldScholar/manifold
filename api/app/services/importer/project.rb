@@ -36,13 +36,13 @@ module Importer
       return unless makers_json
       touched_collaborator_ids = []
       makers_json.each do |maker_json|
-        collaborator = upsert_maker(maker_json)
+        collaborator = upsert_maker(maker_json, project)
         touched_collaborator_ids << collaborator.id
         project.collaborators.where.not(id: touched_collaborator_ids).destroy_all
       end
     end
 
-    def upsert_maker(maker_json)
+    def upsert_maker(maker_json, project)
       maker_attr = maker_json[:attributes].clone
       role = maker_attr[:role]
       maker_attr.delete(:role)
