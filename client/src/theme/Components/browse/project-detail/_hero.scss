@@ -201,15 +201,13 @@
       // Relative to font-size
       line-height: 1.611;
 
-      p {
-        margin-bottom: 0.682em;
-      }
-
       @include respond($break75) {
         margin-top: 30px;
       }
 
-
+      p {
+        margin-bottom: 0.682em;
+      }
     }
 
     .project-entry {

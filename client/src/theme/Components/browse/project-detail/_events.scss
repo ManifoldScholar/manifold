@@ -3,6 +3,7 @@
   @include listUnstyled();
   display: flex;
   flex-wrap: wrap;
+  padding-top: 39px;
   margin-left: -3.482vw;
 
   @include respond($break100) {
@@ -13,6 +14,7 @@
     display: flex;
     width: 33.333%;
     padding-left: 3.482vw;
+    margin-bottom: 40px;
 
     @include respond($break100) {
       padding-left: 40px;
@@ -20,12 +22,17 @@
   }
 }
 
+// Can be a link or a div
 .event-tile {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  color: $neutralOffBlack;
+  text-decoration: none;
   background-color: $neutral05;
+  transition: color $duration $timing,
+    background-color $duration $timing;
 
   &.tweet .event-content {
     font-style: italic;
@@ -123,9 +130,14 @@
     font-size: 13px;
     color: $accentPrimaryDark;
     text-decoration: none;
+    transition: color $duration $timing;
 
     + .event-date {
       margin-top: 3px;
+    }
+
+    + .event-content {
+      padding-top: 7px;
     }
   }
 
@@ -138,6 +150,10 @@
     + .event-date {
       margin-top: 12px;
     }
+
+    + .event-user {
+      padding-top: 8px;
+    }
   }
 
   .event-date {
@@ -145,11 +161,50 @@
     display: block;
     font-size: 10px;
     color: $neutral50;
+    transition: color $duration $timing;
   }
 
   .event-prompt {
+    @include utilityPrimary;
+    display: flex;
     width: 100%;
     min-height: 43px;
+    font-size: 12px;
+    color: $neutral50;
     background-color: $neutral10;
+    transition: color $duration $timing,
+      background-color $duration $timing;
+
+    span {
+      width: 100%;
+      padding-left: 36px;
+      margin: auto;
+      line-height: 11px;
+    }
+
+    .manicon {
+      margin-left: 13px;
+      font-size: 11px;
+    }
+  }
+}
+
+// Required to add hover states to links only
+// scss-lint:disable QualifyingElement
+a.event-tile:hover {
+  color: $neutralWhite;
+  background-color: $neutral50;
+
+  .event-date {
+    color: $neutralWhite;
+  }
+
+  .event-user {
+    color: $accentPrimaryPale;
+  }
+
+  .event-prompt {
+    color: $neutralWhite;
+    background-color: $accentPrimary;
   }
 }

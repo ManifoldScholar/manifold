@@ -1,5 +1,4 @@
 .overlay-full {
-
   @include templateCopy;
   position: fixed;
   top: 0;
@@ -89,6 +88,7 @@
 
   .login-links {
     margin-top: 25px;
+
     a {
       display: block;
       font-style: italic;
