@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Maker } from 'components/frontend';
+import { Helper } from 'components/global';
 import { Link } from 'react-router';
+import has from 'lodash/has';
+import get from 'lodash/get';
 
 export default class ProjectHero extends Component {
 
@@ -11,7 +14,8 @@ export default class ProjectHero extends Component {
   };
 
   listMakers() {
-    if (this.props.project.relationships.creators > 0) {
+    const creators = get(this.props.project, 'relationships.creators');
+    if (creators && creators.length > 0) {
       return (
         <section className="project-makers">
           {this.props.project.relationships.creators.map((creator) => {
@@ -28,39 +32,49 @@ export default class ProjectHero extends Component {
     if (this.props.project.attributes.description) {
       return (
         <section className="project-summary">
-          <p>
-            {this.props.project.attributes.description}
-          </p>
+          <Helper.SimpleFormat text={this.props.project.attributes.description} />
         </section>
       );
     }
   }
 
+  socialUrl(service, id) {
+    let out = ""
+    switch(service) {
+      case 'twitter':
+        out = `http://twitter.com/${id}`
+        break;
+      case 'instagram':
+        out = `http://instagram.com/${id}`
+        break;
+      case 'facebook':
+        out = `http://facebook.com/${id}`
+        break;
+    }
+    return out;
+  }
+
   renderSocial() {
-    // Currently outputs placeholder markup
+    const attr = this.props.project.attributes;
+    const services = ["twitter", "facebook", "instagram"];
+
     return (
       <section className="project-social">
-        <span className="hashtag">{'#ProjectHashtag, #MoreThanOne'}</span>
+        <span className="hashtag">#{attr.hashtag}</span>
         <nav className="networks">
           <ul>
-            <li>
-              <a href="#" className="twitter">
-                <i className="manicon manicon-twitter"></i>
-                <span className="screen-reader-text">{'View this project on Twitter'}</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="facebook">
-                <i className="manicon manicon-facebook"></i>
-                <span className="screen-reader-text">{'View this project on Facebook'}</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="instagram">
-                <i className="manicon manicon-instagram"></i>
-                <span className="screen-reader-text">{'View this project on Instagram'}</span>
-              </a>
-            </li>
+            {services.map((service) => {
+              const key = `${service}Id`;
+              if(!has(attr, key) || !attr[key]) return null;
+              return (
+                <li key={service}>
+                  <a target="_blank" href={this.socialUrl(service, attr[key])} className={service}>
+                    <i className={`manicon manicon-${service}`}></i>
+                    <span className="screen-reader-text">{`View this project on ${service}`}</span>
+                  </a>
+                </li>
+              )
+            })}
           </ul>
         </nav>
       </section>
@@ -92,46 +106,63 @@ export default class ProjectHero extends Component {
     );
   }
 
-  render() {
+  renderPurchaseLink() {
+    const attr = this.props.project.attributes;
+    if (!attr.purchaseUrl) return null;
     return (
-      <div>
-        <div className="project-figure">
-          {this.listMakers(true)}
-          <div className="image">
-            <img src={this.props.project.attributes.coverUrl}/>
+      <a target="_blank" href={attr.purchaseUrl} className="button-tagged outline">
+        <span className="text">{'Buy '} {attr.purchaseVersionLabel}</span>
+        <span className="tag">{attr.purchasePriceMoney}</span>
+      </a>
+    );
+  }
+
+  render() {
+
+    const attr = this.props.project.attributes;
+    const heroStyle = {};
+    if (attr.heroUrl) {
+      heroStyle.backgroundImage = `url(${attr.heroUrl})`;
+    }
+
+    return (
+      <section
+        className="project-detail-hero hero-image"
+        style={heroStyle}
+      >
+        <div className="container">
+          <div className="project-figure">
+            {this.listMakers()}
+            <div className="image">
+              <img src={attr.coverUrl}/>
+            </div>
+            <h1 className="project-title">
+              {attr.title}
+              <span className="subtitle">
+                {attr.subtitle}
+              </span>
+            </h1>
           </div>
-          <h1 className="project-title">
-            {this.props.project.attributes.title}
-            <span className="subtitle">
-              {this.props.project.attributes.subtitle}
-            </span>
-          </h1>
+          <div className="project-info">
+            {this.renderPublishedText('top')}
+            {this.listMakers()}
+            <h1 className="project-title">
+              {attr.title}
+              <span className="subtitle">
+                {attr.subtitle}
+              </span>
+            </h1>
+            {this.renderDescription()}
+            {this.renderSocial()}
+            {this.renderPublishedText('bottom')}
+            {this.renderPurchaseLink()}
+          </div>
+          <div className="project-image">
+            <img src={attr.coverUrl}/>
+            {this.renderPurchaseLink()}
+          </div>
         </div>
-        <div className="project-info">
-          {this.renderPublishedText('top')}
-          {this.listMakers(true)}
-          <h1 className="project-title">
-            {this.props.project.attributes.title}
-            <span className="subtitle">
-              {this.props.project.attributes.subtitle}
-            </span>
-          </h1>
-          {this.renderDescription(true)}
-          {this.renderSocial(true)}
-          {this.renderPublishedText('bottom')}
-          <a href="#" className="button-tagged outline">
-            <span className="text">{'Buy '} {'Print Version'}</span>
-            <span className="tag">{'$27.50'}</span>
-          </a>
-        </div>
-        <div className="project-image">
-          <img src={this.props.project.attributes.coverUrl}/>
-          <a href="#" className="button-tagged outline">
-            <span className="text">{'Buy '} {'Print Version'}</span>
-            <span className="tag">{'$27.50'}</span>
-          </a>
-        </div>
-      </div>
+      </section>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Project } from 'components/frontend';
+import moment from 'moment';
 
 export default class ProjectThumbnail extends Component {
 
@@ -36,23 +37,58 @@ export default class ProjectThumbnail extends Component {
     return cover;
   }
 
-  render() {
-    const project = this.props.project;
-
-    let projectDate = null;
+  renderPublishedDate(project) {
+    const attr = project.attributes;
+    const monthInt = attr.publicationMonth ? parseInt(attr.publicationMonth) : null
+    const yearInt = attr.publicationYear ? parseInt(attr.publicationYear) : null
+    let publishedString;
+    if(monthInt && yearInt) {
+      publishedString = `Published ${moment().month(monthInt).format("MMMM")}, ${yearInt}`;
+    } else if (yearInt) {
+      publishedString = `Published ${yearInt}`;
+    }
+    if(!publishedString) return null;
     if (!this.props.hideDate) {
-      projectDate = (
+      return (
         <div className="date">
-          {'Published June, 2016'}
+          {publishedString}
         </div>
       );
     }
+  }
 
+  renderProjectDesc(project) {
+    if (this.props.hideDesc || !project.attributes.subtitle) return null;
+    return (
+      <p className="description">
+        {project.attributes.subtitle}
+      </p>
+    );
+  }
+
+  renderProjectMakers(project) {
+    const creators = project.relationships.creators;
+    if (!creators || creators.length == 0) return null;
+    return (
+      <div className="makers">
+        {creators.map((maker) => {
+          return (
+            <span key={maker.id}>
+                {maker.attributes.name}
+              </span>
+          );
+        })}
+      </div>
+    )
+  }
+
+  render() {
+    const project = this.props.project;
     let projectDesc = null;
     if (!this.props.hideDesc) {
       projectDesc = (
         <p className="description">
-          {project.attributes.description}
+          {project.attributes.subtitle}
         </p>
       );
     }
@@ -62,25 +98,17 @@ export default class ProjectThumbnail extends Component {
       projectMeta = (
         <div className="meta">
           <h3 className="title">{project.attributes.title}</h3>
-          <div className="makers">
-            {project.relationships.creators.map((maker) => {
-              return (
-                  <span key={maker.id}>
-                {maker.attributes.name}
-              </span>
-              );
-            })}
-          </div>
-          {projectDate}
-          {projectDesc}
+          {this.renderProjectMakers(project)}
+          {this.renderPublishedDate(project)}
+          {this.renderProjectDesc(project)}
         </div>
       );
     }
 
     let cover;
-    if (project.attributes.thumbnailUrl) {
+    if (project.attributes.avatarUrl) {
       cover = (
-        <img src={project.attributes.thumbnailUrl}
+        <img src={project.attributes.avatarUrl}
           alt={`Click to view ${project.attributes.title}`}
         />
       );

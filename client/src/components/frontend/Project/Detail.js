@@ -36,7 +36,6 @@ class Detail extends Component {
     this.renderTexts = this.renderTexts.bind(this);
     this.renderResources = this.renderResources.bind(this);
     this.renderMeta = this.renderMeta.bind(this);
-    this.renderHero = this.renderHero.bind(this);
   }
 
   componentDidMount() {
@@ -146,24 +145,6 @@ class Detail extends Component {
     );
   }
 
-  renderHero() {
-    /*
-     NB: To use a hero, include the
-     class name hero-image in addition to the background image required
-     */
-    return (
-      <section className="project-detail-hero hero-image"
-        style={{ backgroundImage: 'url(/static/placeholder/background-waterfall.jpg)' }}
-      >
-        <div className="container">
-          <Project.Hero
-            project={this.props.project}
-          />
-        </div>
-      </section>
-    );
-  }
-
   renderNavButtons() {
     return (<Layout.ButtonNavigation />);
   }
@@ -172,7 +153,7 @@ class Detail extends Component {
     if (!this.props.project) return null;
     return (
       <div>
-        {this.renderHero()}
+        <Project.Hero project={this.props.project} />
         {this.renderActivity()}
         {this.renderTexts()}
         {this.renderResources()}
