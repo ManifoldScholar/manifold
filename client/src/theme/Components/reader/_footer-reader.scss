@@ -1,0 +1,46 @@
+.footer-reader {
+  padding: 40px 0 80px;
+  color: $neutral05;
+  background-color: $neutral80;
+
+  @include respond($break75) {
+    padding: 70px 0 80px;
+  }
+
+  @include respond($break95) {
+    padding: 100px 0;
+  }
+
+  .colophon {
+    @include templateCopy;
+    font-size: 16px;
+    line-height: 1.556;
+
+    @include respond($break40) {
+      font-size: 18px;
+    }
+
+    .manicon-manifold-logo {
+      display: block;
+      padding-bottom: 18px;
+      font-size: 48px;
+      color: $accentPrimary;
+
+      @include respond($break75) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 62px;
+        height: 62px;
+        font-size: 62px;
+      }
+    }
+
+    p {
+      @include respond($break75) {
+        padding-top: 2px;
+        padding-left: 93px;
+      }
+    }
+  }
+}

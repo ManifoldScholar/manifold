@@ -1,0 +1,350 @@
+// Shared Form Components
+// ----------------------
+// <div> wrapper around form fields
+.form-input {
+  + .form-input {
+    margin-top: 40px;
+  }
+
+  // Avoid styling checkbox/radio labels
+  label:not(.checkbox):not(.radio) {
+    @include formLabelPrimary;
+    display: block;
+    margin-bottom: 15px;
+    color: $neutral50;
+
+    .bg-neutral90 & {
+      color: $neutral30;
+    }
+  }
+
+  input[type="text"], input[type="password"] {
+    @include formInputPrimary;
+    width: 100%;
+    // Explicit height so that elements can line up
+    height: 3em;
+    // Declared in em as it should change with font size
+    padding: 0.7em 1em;
+    background-color: $neutral05;
+    border: 1px solid transparent;
+    outline: 0;
+    transition: border-color $duration $timing;
+
+    &:focus {
+      border-color: $accentPrimary;
+    }
+
+    .bg-neutral05 & {
+      background-color: $neutralWhite;
+    }
+  }
+
+  textarea {
+    @include formInputPrimary;
+    width: 100%;
+    min-height: 215px;
+    padding: 1.2em 1.5em;
+    color: $neutral70;
+    background-color: $neutral05;
+    border: 1px solid transparent;
+    outline: none;
+    transition: border-color $duration $timing;
+    resize: vertical;
+
+    &:focus {
+      border-color: $accentPrimary;
+    }
+
+    .bg-neutral05 & {
+      background-color: $neutralWhite;
+    }
+  }
+
+  // Default button appearance
+  .button-secondary, .button-secondary-dull {
+    display: block;
+    width: 100%;
+
+    &.button-with-room {
+      margin-top: 40px;
+    }
+
+    + .button-secondary, .button-secondary-dull {
+      margin-top: 21px;
+    }
+  }
+
+}
+
+.form-error {
+  .error {
+    @include formInputMessage;
+    display: inline-block;
+    margin-top: 15px;
+    color: $sp40Tertiary;
+  }
+}
+
+.form-select {
+  position: relative;
+  display: inline-block;
+  // Default width
+  width: 100%;
+
+  .manicon-caret-down {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    margin-top: -7px;
+    font-size: $type40;
+    color: $neutral70;
+    pointer-events: none;
+
+    // Use native dropdown arrow in IE9
+    .ie9 & {
+      display: none;
+    }
+  }
+
+  select {
+    @include formInputSecondary;
+    display: inline-block;
+    width: 100%;
+    height: 4.286em;
+    padding: 1.286em 55px 1.286em 2.214em;
+    margin: 0;
+    color: $neutral70;
+    cursor: pointer;
+    background-color: $neutral05;
+    border: 1px solid transparent;
+    border-radius: 0;
+    outline: none;
+    transition: border-color $duration $timing;
+    appearance: none;
+
+    .bg-neutral05 & {
+      background-color: $neutralWhite;
+    }
+
+    &:focus {
+      border-color: $accentPrimary;
+    }
+
+    /* Undo the Firefox inner focus ring */
+    &:focus:-moz-focusring {
+      color: transparent;
+    }
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+}
+
+.form-toggle {
+  @include formLabelPrimary;
+  position: relative;
+  display: block;
+  padding-left: 40px;
+  margin-bottom: 0; // OD
+  color: $neutral70;
+  cursor: pointer;
+
+  .bg-neutral90 & {
+    color: $neutral50;
+  }
+
+  + .form-toggle {
+    margin-top: 18px;
+  }
+
+  &.horizontal {
+    display: inline-block;
+
+    + .form-toggle {
+      margin-top: 0;
+      margin-left: 38px;
+    }
+  }
+
+  &.annotated {
+    @include formInputPrimary;
+    color: $neutralOffBlack;
+    text-transform: none;
+  }
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:focus ~ .toggle-indicator {
+      background-color: $accentPrimaryLight;
+    }
+
+    &:checked ~ .toggle-indicator {
+      // For checkboxes
+      .manicon-check {
+        opacity: 1;
+      }
+
+      // For radio buttons
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+
+  .toggle-indicator {
+    position: absolute;
+    left: 0;
+    display: block;
+    background-color: $neutral30;
+    transition: background-color $duration $timing;
+    user-select: none;
+
+    .bg-neutral90 &, .form-callout & {
+      background-color: $neutralWhite;
+    }
+  }
+
+  &.checkbox {
+    // To match indicator
+    line-height: 25px;
+
+    .toggle-indicator {
+      width: 25px;
+      height: 25px;
+      padding: 7px 6px;
+
+      // If check icon exists, hide it until selected
+      .manicon-check {
+        font-size: 11px;
+        color: $neutralOffBlack;
+        opacity: 0;
+        transition: opacity $duration $timing;
+      }
+    }
+  }
+
+  &.radio {
+    line-height: 20px;
+
+    .toggle-indicator {
+      width: 20px;
+      height: 20px;
+      padding-top: 5px;
+      text-align: center;
+      border-radius: 100%;
+
+      &::before {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        vertical-align: top;
+        background-color: $neutralOffBlack;
+        border-radius: 100%;
+        content: '';
+        opacity: 0;
+        transition: opacity $duration $timing;
+      }
+    }
+  }
+
+  .toggle-note {
+    @include templateCopy;
+    display: block;
+    margin-top: 13px;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.375;
+  }
+}
+
+// Form Callout
+// --------------------------
+.form-callout {
+  padding: 54px 30px;
+  background-color: $neutral10;
+
+  header {
+    @include formLabelPrimary;
+    padding-bottom: 53px;
+    text-align: center;
+
+    .manicon {
+      display: block;
+      padding-bottom: 26px;
+      font-size: 33px;
+      color: $neutral50;
+    }
+  }
+
+  + .form-input {
+    margin-top: 40px;
+  }
+}
+
+// Wrapper around input with absolutely positioned button
+.search-button-inline {
+  position: relative;
+
+  // <button>
+  .manicon-magnify {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    margin-top: -9px;
+    font-size: 17px;
+    color: $accentPrimary;
+  }
+
+  input {
+    @include inputSecondary;
+    // Width can be controlled in wrapper
+    width: 100%;
+    padding-left: 40px;
+  }
+}
+
+.form-dropzone {
+  cursor: pointer;
+
+  .dropzone-button {
+    @include buttonUnstyled;
+    @include buttonRounded;
+    @include formLabelPrimary;
+    padding: 25px 15px;
+    font-weight: $regular;
+    line-height: 1.761;
+    color: $neutral50;
+    text-align: center;
+    border: 2px solid $neutral50;
+
+    .dropzone-button-text {
+      display: block;
+      padding-left: 95px;
+      text-align: left;
+    }
+
+    + .dropzone-button {
+      margin-top: 25px;
+    }
+  }
+
+  .dropzone-button-dotted {
+    border: 3px dotted $neutral50;
+  }
+}
+
+// Browse specific form select
+.select-browse {
+  @include selectPrimary;
+  width: 100%;
+
+  @include respond($break30) {
+    width: auto;
+    min-width: 310px;
+  }
+}

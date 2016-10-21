@@ -1,7 +1,10 @@
 language: ruby
 
 rvm:
-  - 2.2.3
+  - 2.3.1
+
+node_js:
+  - "4.5.0"
 
 services:
   - postgresql
@@ -13,12 +16,21 @@ env:
   global:
     - API="/home/travis/build/ManifoldScholar/manifold/api"
     - RAILS_DB_USER=postgres
+    - TRAVIS_NODE_VERSION="4"
+
+install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
 
 gemfile: api/Gemfile
+cache: bundler
+
 script:
-  - cd api
-  - ./bin/rails generate manifold:secrets
-  - bundle exec rake spec
-  - cd ../client
+  - cd client
+  - npm install -g npm@3.10.7
+  - npm version
   - npm install
   - npm run test
+  - cd ../api
+  - bundle install
+  - ./bin/rails generate manifold:secrets
+  - bundle exec rspec spec -fd

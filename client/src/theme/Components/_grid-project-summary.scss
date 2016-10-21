@@ -4,23 +4,36 @@
     @include listHorizontal;
     display: block;
     width: 100%;
-    margin-right: -5.5%;
-    margin-left: -5.5%;
+    margin-left: -11%;
 
     li {
-      width: 33.333%;
-      padding-right: 5.5%;
+      width: 50%;
       padding-bottom: 26px;
-      padding-left: 5.5%;
+      padding-left: calc(11% + 15px);
       // Ensures flush grid elements, requires reset for any child elements
       font-size: 0;
       vertical-align: top;
+
+      @include respond($break60) {
+        width: 33.333%;
+        padding-left: 11%;
+      }
     }
   }
 
   a {
     display: block;
     text-decoration: none;
+
+    &:hover {
+      img {
+        border-color: $accentPrimary;
+      }
+
+      svg .highlight {
+        fill: $accentPrimary;
+      }
+    }
 
     .figure-wrapper {
       max-width: 195px;
@@ -31,62 +44,55 @@
       position: relative;
       height: 0;
       max-width: 100%;
-      padding-top: 144%;
+      padding-top: 113%;
       margin-bottom: 20px;
 
       img, svg {
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: auto;
+        // Relative z-index
+        z-index: 0;
+        width: auto;
         max-height: 100%;
         border: 4px solid transparent;
       }
 
       // Follow button
-      .manicon {
-        position: absolute;
-        top: 7.018%;
-        left: -18px;
-        display: block;
-        width: 45px;
-        height: 45px;
-        padding-top: 12px;
-        font-size: 20px;
-        color: $neutralWhite;
-        text-align: center;
-        background-color: $accentPrimary;
-        border-radius: 100%;
+      .follow-button {
+        z-index: 1;
+      }
+
+      .manicon-plus-bold:hover ~ .thumbnail-follow-overlay {
+        opacity: 1;
+        visibility: visible;
       }
     }
 
     // Meta data
     .title {
-      @include titlePrimary;
-      margin-bottom: 6px;
-      font-size: $type70;
+      @include gridProjectTitle;
+      margin-bottom: 8px;
+      font-size: 16px;
     }
 
     .makers {
       @include templateCopy;
-      padding-bottom: 17px;
+      // Hide until we actually show these
+      //padding-bottom: 17px;
       font-size: $type70;
       color: $neutral80;
     }
 
     .date {
-      @include templateCopy;
-      font-size: $type60;
-      font-style: italic;
-      color: $neutral75;
+      @include gridProjectDate;
     }
 
     .description {
       @include templateCopy;
       font-size: $type70;
       font-style: italic;
-      color: $accentSecondary;
+      color: $accentPrimaryDark;
     }
   }
 }

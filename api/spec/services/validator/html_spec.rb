@@ -57,26 +57,32 @@ RSpec.describe Validator::Html do
   end
 
   it "should remove a blacklisted CSS property while keeping a valid property" do
-    fragment = "<div style=\"max-width: 50px; position: absolute\"></div>"
-    valid = "<div style=\"max-width: 50px\"></div>"
+    fragment = "<div style=\"width: 50px; position: absolute\"></div>"
+    valid = "<div style=\"width: 50px\"></div>"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
-  it "should rewrite width attribute to max-width style" do
+  it "should remove max-width style attributes" do
+    fragment = "<img style=\"max-width: 650px\">"
+    valid = "<img>"
+    expect(validator.validate(fragment).delete("\n")).to eq(valid)
+  end
+
+  it "should rewrite width attribute to width style" do
     fragment = "<img width=\"650px\">"
-    valid = "<img style=\"max-width: 650px\">"
+    valid = "<img style=\"width: 650px\">"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
   it "should maintain units when rewriting measured attribute" do
     fragment = "<img width=\"50%\">"
-    valid = "<img style=\"max-width: 50%\">"
+    valid = "<img style=\"width: 50%\">"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
-  it "should default to pixels when rewriting measuted attributes that have no unit" do
+  it "should default to pixels when rewriting measured attributes that have no unit" do
     fragment = "<img width=\"50\">"
-    valid = "<img style=\"max-width: 50px\">"
+    valid = "<img style=\"width: 50px\">"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 

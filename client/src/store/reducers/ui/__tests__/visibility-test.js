@@ -1,11 +1,10 @@
 import visibilityReducer from '../visibility';
-import { expect } from 'chai';
 
 describe('store/reducers/ui/visibility', () => {
   it('should return the initial state', () => {
-    const state = visibilityReducer(undefined, {});
+    const state = visibilityReducer(undefined, { type: 'SOME_ACTION'} );
     // Must mirror initial state declared in '../visibility'
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       loginOverlay: false,
       userMenu: false,
       tocDrawer: false,
@@ -30,7 +29,7 @@ describe('store/reducers/ui/visibility/panelToggle', () => {
 
     const action = { type: 'PANEL_TOGGLE', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       uiPanels: {
         user: false,
         appearance: true
@@ -49,7 +48,7 @@ describe('store/reducers/ui/visibility/panelToggle', () => {
     };
     const action = { type: 'PANEL_TOGGLE', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       uiPanels: {
         user: false,
         appearance: true,
@@ -67,7 +66,7 @@ describe('store/reducers/ui/visibility/panelToggle', () => {
     };
     const action = { type: 'PANEL_TOGGLE', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       uiPanels: {
         user: false,
         appearance: false
@@ -84,7 +83,7 @@ describe('store/reducers/ui/visibility/panelToggle', () => {
     };
     const action = { type: 'PANEL_TOGGLE', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       uiPanels: {
         user: true,
         appearance: false
@@ -104,7 +103,7 @@ describe('store/reducers/ui/visibility/panelShow', () => {
 
     const action = { type: 'PANEL_SHOW', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       uiPanels: {
         user: false,
         appearance: true
@@ -123,7 +122,7 @@ describe('store/reducers/ui/visibility/panelShow', () => {
     };
     const action = { type: 'PANEL_SHOW', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       uiPanels: {
         user: false,
         appearance: true,
@@ -143,7 +142,7 @@ describe('store/reducers/ui/visibility/panelHide', () => {
     };
     const action = { type: 'PANEL_HIDE', payload: 'appearance' };
     const state = visibilityReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       uiPanels: {
         user: false,
         appearance: false

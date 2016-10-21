@@ -1,4 +1,4 @@
-import { ApiClient } from '../../api/client';
+import { ApiClient } from 'api/client';
 import { createAction } from 'redux-actions';
 
 const createApiAction = (type, apiMethod) => {

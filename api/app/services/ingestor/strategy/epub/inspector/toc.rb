@@ -74,7 +74,7 @@ module Ingestor
 
           def header_text_for_node(node)
             header = node.at_xpath(selector_header_node)
-            header ? header.text : ""
+            header ? header&.text : "  "
           end
 
           def toc_title
@@ -94,7 +94,7 @@ module Ingestor
 
             anchor = source_path = ""
             unless raw_path.nil?
-              relative_source_path, anchor = raw_path.split('#')
+              relative_source_path, anchor = raw_path.split("#")
               source_path =
                 Helper::URI.to_absolute_package_path(relative_source_path, @nav_path)
             end

@@ -1,71 +1,51 @@
 /**
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
-import 'babel-core/polyfill';
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createStore from './store/createStore';
-import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import getRoutes from './routes';
-import { ResolveDataDependencies } from './components/shared';
+import { AppContainer } from 'react-hot-loader';
+import App from './App';
 
 // The DOM element into which we're rendering the client-side SPA
-const dest = document.getElementById('content');
+const rootElement = document.getElementById('content');
 
-// Create the Redux store using our store creator function. Note that we're passing the
-// store state, which was dumped by the server-side render.
-const store = createStore(window.__INITIAL_STATE__);
+ReactDOM.render(<AppContainer><App /></AppContainer>, rootElement);
 
-// Setup history and wrap it with our scrolling helper
-let history;
-history = browserHistory;
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    // If you use Webpack 2 in ES modules mode, you can
+    // use <App /> here rather than require() a <NextApp />.
+    const NextApp = require('./App').default;
+    ReactDOM.render(
+      <AppContainer>
+        <NextApp />
+      </AppContainer>,
+      rootElement
+    );
+  });
+}
 
-// Ensure that the history in our story stays in sync with react-router's history
-history = syncHistoryWithStore(history, store);
-
-// We want to wrap all of our containers with the higher order ResolveDataDependencies
-// component. That component is responsible for detecting route changes and calling the
-// fetchData methods in the containers, to ensure that data is loaded when the route
-// changes.
-const routeRenderMethod = (props) => {
-  return <ResolveDataDependencies {...props}/>;
-};
-
-// Finally, setup the component that will be rendered
-const component = (
-  <Router history={history} render={routeRenderMethod} >
-    {getRoutes()}
-  </Router>
-);
-
-
-// The Provider is the react-redux component that knows about the store and can pass
-// state down to our application.
-ReactDOM.render(
-  <Provider store={store} key="provider">
-    {component}
-  </Provider>,
-  dest
-);
-
-// We really don't want the client-side application to load data that has already been
-// fetched and added to the store during the server-side render. To that end, the
-// ResolveDataDependency higher order component won't fetch data on the client until
-// after the initial client render has taken place, signaled by the following dispatch.
-store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
-
-// If we're in development mode, we want ot check for the server-side render being
-// different from the first client-side render.
-if (process.env.NODE_ENV !== 'production') {
+if (__DEVELOPMENT__) {
+  // If we're in development mode, we want to check for the server-side render being
+  // different from the first client-side render.
   window.React = React; // enable debugger
-
-  if (!dest ||
-    !dest.firstChild ||
-    !dest.firstChild.attributes ||
-    !dest.firstChild.attributes['data-react-checksum']) {
-    console.error('Server-side React render was discarded. Make sure that your initial ' +
-      'render does not contain any client-side code.');
+  const style = 'background: #222; width: 100%; padding: 5px; color: #60F86F';
+  if (rootElement && (rootElement.hasAttribute('data-ssr-render') === true)) {
+    console.log("%c✊  Manifold's server-side, universal rendering is present ", style);
+    if (!rootElement ||
+      !rootElement.firstChild ||
+      !rootElement.firstChild.attributes ||
+      !rootElement.firstChild.attributes['data-react-checksum']) {
+      console.log("%c⚠️  However, the server-side render was discarded because  ", style);
+      console.log("%c⚠️  it differed from the client-side render. This can      ", style);
+      console.log("%c⚠️  happen when components render random content, or when  ", style);
+      console.log("%c⚠️  client-side code is executed on the server.            ", style);
+    } else {
+      console.log("%c✊  and matches the client-side render.                    ", style);
+    }
+  } else {
+    console.log("%c⚠️  The server-side render is not present. Perhaps the ", style);
+    console.log("%c⚠️  universal server is reloading.                     ", style);
   }
 }

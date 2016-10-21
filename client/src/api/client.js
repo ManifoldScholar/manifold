@@ -1,7 +1,5 @@
-import { camelizeKeys } from 'humps';
-import config from '../config';
 import qs from 'qs';
-import { isPlainObject } from 'lodash/lang';
+import isPlainObject from 'lodash/isPlainObject';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -25,10 +23,8 @@ export class LowLevelApiClient {
   }
 
   _adjustedEndpoint(endpoint) {
-    if (!__SERVER__) {
-      return endpoint;
-    }
-    return `http://${(process.env.HOST || 'localhost')}:${config.clientPort}${endpoint}`;
+    const out = __MANIFOLD_API_URL__ + endpoint;
+    return out;
   }
 
   _endpointWithParams(endpoint, params) {
@@ -41,7 +37,9 @@ export class LowLevelApiClient {
     const endpoint = this._endpointWithParams(this._adjustedEndpoint(rawEndpoint), options.params);
     const fetchConfig = {
       method,
+      body: options.body,
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${options.authToken}`
       }
     };
@@ -51,7 +49,7 @@ export class LowLevelApiClient {
   }
 }
 
-export class ApiClient {
+export default class ApiClient {
 
   constructor() {
     this.client = new LowLevelApiClient();
@@ -69,9 +67,12 @@ export class ApiClient {
     if (!response.ok) {
       return Promise.reject({ response });
     }
+    if (response.status === 204) {
+      return { json: null, response };
+    }
     return response.json().then(
       (json) => { return { json, response }; },
-      () => { return Promise.reject({ response }); }
+      () => { console.log('in here zd#2'); return Promise.reject({ response }); }
     );
   };
 
@@ -79,54 +80,15 @@ export class ApiClient {
     if (json === null) return Promise.resolve({ json, response });
     if (!isPlainObject(json)) return Promise.reject({ json, response });
     const out = { data: [], included: [] };
-    out.data = camelizeKeys(json.data);
+    out.data = json.data;
     if (json.included) {
-      out.included = camelizeKeys(json.included);
+      out.included = json.included;
     }
     return Promise.resolve({ json: out, response });
   };
 
   _returnResults = ({ json, responseIgnored }) => {
-    let out;
-    if (json === null) return out;
-    if (Array.isArray(json.data)) {
-      out = this._returnCollection(json);
-    } else {
-      out = this._returnEntity(json);
-    }
-    json.included.forEach((entity) => {
-      if (entity) {
-        if (!out.entities.hasOwnProperty(entity.type)) {
-          out.entities[entity.type] = {};
-        }
-        out.entities[entity.type][entity.id] = entity;
-      }
-    });
-    return out;
-  };
-
-  _returnCollection = (json) => {
-    const entities = {};
-    const results = [];
-    json.data.forEach((entity) => {
-      if (!entities.hasOwnProperty(entity.type)) {
-        entities[entity.type] = {};
-      }
-      entities[entity.type][entity.id] = entity;
-      results.push(entity.id);
-    });
-    return { entities, results };
-  };
-
-  _returnEntity = (json) => {
-    const entities = {};
-    const entity = json.data;
-    const results = entity.id;
-    if (!entities.hasOwnProperty(entity.type)) {
-      entities[entity.type] = {};
-    }
-    entities[entity.type][entity.id] = entity;
-    return { entities, results };
+    return json;
   };
 
   _responseNotOK = (response) => {
@@ -142,15 +104,28 @@ export class ApiClient {
   };
 
   _handleFailure = (reason) => {
-    const notificationPayload = {
-      id: 'API_CLIENT_ERROR',
-      level: 2,
-      heading: `Manifold API Error - ${reason.response.status} ${reason.response.statusText}`,
-      body: 'Manifold was unable to send or receive data from the server. This could be the ' +
-      'result of your machine being offline, or the backend server could be experiencing ' +
-      'difficulties.'
-    };
-    return Promise.reject(notificationPayload);
+    return new Promise((resolve, reject) => {
+      const notificationPayload = {
+        id: 'API_CLIENT_ERROR',
+        level: 2,
+        heading: `Manifold API Error - ${reason.response.status} ${reason.response.statusText}`,
+        body: 'Manifold was unable to send or receive data from the server. This could be the ' +
+        'result of your machine being offline, or the backend server could be experiencing ' +
+        'difficulties.'
+      };
+      reason.response.json().then(
+        (json) => {
+          reject(Object.assign(notificationPayload, { body: json }));
+        },
+        () => {
+          reject(Object.assign(notificationPayload, {
+            body: 'Manifold was unable to send or receive data from the server. This ' +
+            'could be the result of your machine being offline, or the backend server ' +
+            'could be experiencing difficulties.'
+          }));
+        }
+      );
+    });
   };
 
 }

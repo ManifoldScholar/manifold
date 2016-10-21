@@ -1,10 +1,48 @@
 .project-thumb-placeholder {
+  &.primary {
+    .tile {
+      fill: $sp50Primary;
+    }
+  }
+
+  &.secondary {
+    .tile {
+      fill: $sp50Secondary;
+    }
+  }
+
+  &.tertiary {
+    .tile {
+      fill: $sp50Tertiary;
+    }
+  }
+
+  &.quaternary {
+    .tile {
+      fill: $sp50Quaternary;
+    }
+  }
+
+  &.quinary {
+    .tile {
+      fill: $sp50Quinary;
+    }
+  }
+
   .background {
     fill: $neutralWhite;
   }
 
   .outline {
     fill: $neutral90;
+  }
+
+  .tile {
+    fill: $neutralWhite;
+  }
+
+  .icon {
+    fill: $neutral75;
   }
 
   .highlight {

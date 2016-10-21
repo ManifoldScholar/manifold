@@ -24,40 +24,26 @@
 // - Forms
 
 
-// Typographic Hierarchy
-// Commonly used font-sizes for template typography
-// --------------------------------------------------------
-$type180: 59px;
-// $type130: ;
-$type120: 35px;
-$type110: 30px;
-$type100: 26px;
-$type90: 25px;
-$type80: 22px;
-$type70: 20px;
-$type60: 18px;
-$type50: 16px;
-$type40: 14px;
-$type30: 13px;
-$type20: 12px;
-// $type10: ;
-
-
 // Headings
 // --------------------------------------------------------
 @mixin headingPrimary {
   @include templateHead;
   margin-top: 0;
-  margin-bottom: 75px;
-  font-size: $type120;
+  // Default margin
+  margin-bottom: 1.2em;
+  font-size: 22px;
   font-weight: $regular;
   line-height: 1.32;
+
+  @include respond($break60) {
+    font-size: 26px;
+  }
 }
 
 @mixin headingTertiary {
   @include templateHead;
   margin-top: 0;
-  font-size: $type70;
+  font-size: 16px;
   font-weight: $semibold;
 }
 
@@ -68,31 +54,95 @@ $type20: 12px;
   @include templateHead;
   // This is the base size, there may be variation from
   // component to component
-  font-size: $type50;
+  font-size: 16px;
   font-weight: $semibold;
   letter-spacing: 0.067em;
   text-transform: uppercase;
 }
 
 
-// Signage
+// Labels
 // --------------------------------------------------------
-@mixin titlePrimary {
+@mixin subtitlePrimary {
+  @include templateCopy;
+  font-style: italic;
+  font-weight: $regular; // OD
+  letter-spacing: 0.031em;
+}
+
+@mixin gridProjectTitle {
   @include templateHead;
   // This is the base size, there may be variation from
   // component to component
-  font-size: $type120;
+  font-size: 16px;
   font-weight: $semibold;
   color: $neutralOffBlack;
 
+  @include respond($break70) {
+    font-size: 18px;
+  }
+
   .subtitle {
-    @include templateCopy;
+    @include subtitlePrimary;
     display: block;
-    margin-top: 18px;
-    font-size: $type90;
-    font-style: italic;
-    font-weight: $regular; // OD
-    letter-spacing: 0.031em;
-    color: $accentSecondary;
+    // Size relative to font
+    margin-top: 0.682em;
+    font-size: 22px;
+    color: $accentPrimaryDark;
+  }
+}
+
+@mixin gridProjectDate {
+  @include templateCopy;
+  font-size: 14px;
+  font-style: italic;
+  color: $neutral75;
+
+
+  @include respond($break70) {
+    font-size: 16px;
+  }
+}
+
+@mixin formLabelPrimary {
+  @include templateHead;
+  font-size: $type40;
+  font-weight: $semibold;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+
+// Forms
+// --------------------------------------------------------
+@mixin formInputPrimary {
+  @include templateHead;
+  font-size: $type70;
+  letter-spacing: 0.32px;
+}
+
+@mixin formInputSecondary {
+  @include templateHead;
+  font-size: $type40;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+@mixin formInputMessage {
+  @include templateHead;
+  font-size: $type50;
+  font-weight: $semibold;
+  letter-spacing: 0.075em;
+}
+
+// Overlay
+// --------------------------------------------------------
+@mixin overlayCopy {
+  @include templateCopy;
+  font-size: $type60;
+  color: $neutral30;
+
+  a {
+    color: $neutral30;
   }
 }

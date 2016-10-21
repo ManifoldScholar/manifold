@@ -1,31 +1,40 @@
 .footer-browse {
-  padding: 67px 0 57px;
+  padding: 40px 0 57px;
   background-color: $neutral80;
 
-  .container {
-    position: relative;
+  @include respond($break65) {
+    padding: 67px 0 57px;
   }
 
   // <a>
   .logo {
     @include templateHead;
-    position: absolute;
-    top: 0;
-    right: 0;
     display: block;
-    height: 45px;
-    font-size: $type90;
+    padding-bottom: 28px;
+    font-size: 20px;
     font-weight: $semibold;
-    line-height: 45px;
+    line-height: 33px;
     color: $neutralWhite;
     text-decoration: none;
+
+    @include respond($break65) {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 22px;
+      line-height: 45px;
+    }
 
     .manicon-manifold-logo {
       display: inline-block;
       margin-right: 22px;
-      font-size: 45px;
+      font-size: 33px;
       color: $accentPrimary;
       vertical-align: top;
+
+      @include respond($break65) {
+        font-size: 45px;
+      }
     }
   }
 
@@ -38,7 +47,6 @@
 
     a {
       @include templateHead;
-      font-size: $type60;
       color: $neutralWhite;
       text-decoration: none;
     }
@@ -48,25 +56,50 @@
 
       > li {
         float: left;
-        margin-right: 102px;
+        margin-right: 60px;
+        margin-bottom: 1em;
+        font-size: 16px;
+
+        @include respond($break65) {
+          margin-bottom: 0;
+        }
+
+        @include respond($break40) {
+          margin-right: 102px;
+        }
 
         // Nested List
+        // Declared in em units to size
+        // relatively
         li + li {
-          margin-top: 15px;
+          margin-top: 0.8em;
         }
       }
     }
   }
 
   .footer-secondary {
-    padding-top: 90px;
+    padding-top: 60px;
+
+    @include respond($break65) {
+      padding-top: 90px;
+    }
+
+    .search-button-inline {
+      width: 306px;
+      max-width: 100%;
+    }
   }
 
   .colophon {
     @include templateCopy;
     padding-top: 16px;
-    font-size: $type60;
+    font-size: 16px;
     color: $neutral40;
+
+    @include respond($break40) {
+      font-size: 18px;
+    }
 
     a {
       color: inherit;

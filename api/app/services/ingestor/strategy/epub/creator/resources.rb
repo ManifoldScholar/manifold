@@ -26,7 +26,8 @@ module Ingestor
             resource = ingestion_source.resource || ingestion_source.build_resource
             resource.name = "source/#{path}/#{node_inspector.id}"
             resource.attachment = epub_inspector.get_rendition_source(
-              node_inspector.href)
+              node_inspector.href
+            )
           end
 
           def create_ingestion_source(node_inspector, existing)

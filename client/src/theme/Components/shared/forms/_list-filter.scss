@@ -1,0 +1,109 @@
+// NB: There may be more than one of these in the future,
+// but for the time being, this is specific to the inline
+// Search + dropdown filters on the frontend
+.form-list-filter {
+  // Height Defined in em units to be responsive to type size
+  $inputHeight: 2.857em;
+  padding-bottom: 26px;
+  font-size: 0;
+
+  .resource-totals + & {
+    padding-top: 40px;
+  }
+
+  input[type="text"] {
+    @include templateHead;
+    width: 100%;
+    height: $inputHeight;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    color: $neutral75;
+    background-color: $neutral05;
+    border: 0;
+  }
+
+  .search-input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+    @include respond($break75) {
+      width: 40%;
+    }
+
+    .search-button {
+      @include buttonUnstyled;
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      font-size: 13px;
+      color: $neutral75;
+    }
+
+    input[type="text"] {
+      padding-left: 40px;
+    }
+  }
+
+  .select-group {
+    display: block;
+    margin-top: 12px;
+    margin-left: -11px;
+
+    @include respond($break40) {
+      margin-top: 14px;
+    }
+
+    @include respond($break75) {
+      display: inline-block;
+      width: calc(60% + 11px);
+      padding-left: 12px;
+      margin-top: 0;
+    }
+
+    .select {
+      position: relative;
+      display: inline-block;
+      width: 33.333%;
+      padding-left: 11px;
+
+      select {
+        @include unstyledSelect;
+        @include utilityPrimary;
+        width: 100%;
+        height: $inputHeight;
+        padding-right: 16px;
+        padding-left: 13px;
+        font-size: 14px;
+        color: $neutral50;
+        border: 2px solid $neutral30;
+      }
+    }
+
+    // Dropdown icon included in markup
+    .manicon-caret-down {
+      position: absolute;
+      top: 50%;
+      right: 9px;
+      margin-top: -4px;
+      font-size: 8px;
+      color: $neutral50;
+      pointer-events: none;
+
+      // Use native dropdown arrow in IE9
+      .ie9 & {
+        display: none;
+      }
+    }
+  }
+
+  .reset-button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    margin-top: 8px;
+    font-size: 14px;
+    color: $neutral40;
+  }
+}

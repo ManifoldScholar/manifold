@@ -1,0 +1,107 @@
+exports[`ButtonNavigation component renders correctly 1`] = `
+<section
+  className="bg-neutral05">
+  <div
+    className="container">
+    <nav
+      className="button-nav">
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        <button
+          className="button-icon-primary">
+          <i
+            className="manicon manicon-books-on-shelf" />
+          See more projects
+        </button>
+      </a>
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        <button
+          className="button-icon-primary">
+          <i
+            className="manicon manicon-books-with-glasses" />
+          Projects You\'re Following
+        </button>
+      </a>
+    </nav>
+  </div>
+</section>
+`;
+
+exports[`ButtonNavigation component respects the grayBg prop 1`] = `
+<section
+  className="">
+  <div
+    className="container">
+    <nav
+      className="button-nav">
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        <button
+          className="button-icon-primary">
+          <i
+            className="manicon manicon-books-on-shelf" />
+          See more projects
+        </button>
+      </a>
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        <button
+          className="button-icon-primary">
+          <i
+            className="manicon manicon-books-with-glasses" />
+          Projects You\'re Following
+        </button>
+      </a>
+    </nav>
+  </div>
+</section>
+`;
+
+exports[`ButtonNavigation component respects the showBrowse prop 1`] = `
+<section
+  className="bg-neutral05">
+  <div
+    className="container">
+    <nav
+      className="button-nav">
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        <button
+          className="button-icon-primary">
+          <i
+            className="manicon manicon-books-with-glasses" />
+          Projects You\'re Following
+        </button>
+      </a>
+    </nav>
+  </div>
+</section>
+`;
+
+exports[`ButtonNavigation component respects the showFollowing prop 1`] = `
+<section
+  className="bg-neutral05">
+  <div
+    className="container">
+    <nav
+      className="button-nav">
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        <button
+          className="button-icon-primary">
+          <i
+            className="manicon manicon-books-on-shelf" />
+          See more projects
+        </button>
+      </a>
+    </nav>
+  </div>
+</section>
+`;

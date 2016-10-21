@@ -4,9 +4,17 @@ AllCops:
       - 'vendor/**/*'
       - 'db/**/*'
       - 'bin/**/*'
+      - 'spec/**/*'
+      - 'api/vendor/**/*'
+      - 'api/db/**/*'
+      - 'api/bin/**/*'
+      - 'api/spec/**/*'
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
 
 Metrics/LineLength:
   Max: 90
@@ -19,3 +27,6 @@ Style/DotPosition:
 
 Rails:
   Enabled: true
+
+Lint/UnneededDisable:
+  Enabled: false

@@ -17,6 +17,7 @@
 
 .reader-window {
   padding: 60px 0 120px;
+  overflow: hidden;
   color: $neutralOffBlack;
   background-color: $neutralWhite;
   transition: background-color $duration $timing;
@@ -41,7 +42,7 @@
   }
 
   a {
-    color: $accentSecondary;
+    color: $accentPrimaryDark;
   }
 
   // Temporary, until Lael and Naomi work out default header styles --ZD
@@ -71,6 +72,10 @@
     font-size: 1em;
     font-weight: $semibold;
     line-height: 1.288;
+  }
+
+  img {
+    max-width: 100%;
   }
 
   //h2 {

@@ -13,15 +13,18 @@ export default class Toc extends Component {
   constructor() {
     super();
     this.counter = 0;
+    this.UIHideTocDrawer = this.UIHideTocDrawer.bind(this);
+    this.hasChildren = this.hasChildren.bind(this);
+    this.visitNode = this.visitNode.bind(this);
   }
 
-  UIHideTocDrawer = () => {
+  UIHideTocDrawer() {
     if (this.props.tocDrawerVisible) {
       this.props.hideTocDrawer();
     }
-  };
+  }
 
-  hasChildren = (array) => {
+  hasChildren(array) {
     let hasChildren = false;
     array.forEach((object) => {
       if (object.hasOwnProperty('children') && object.children.length > 0) {
@@ -29,9 +32,9 @@ export default class Toc extends Component {
       }
     });
     return hasChildren;
-  };
+  }
 
-  visitNode = (node) => {
+  visitNode(node) {
     this.counter = this.counter + 1;
     let children = null;
     if (node.children && node.children.length > 0) {
@@ -42,7 +45,7 @@ export default class Toc extends Component {
       );
     }
 
-    let anchor = '';
+    let anchor = null;
     if (node.anchor) anchor = `#${node.anchor}`;
     const path = `/read/${this.props.text.id}/section/${node.id}${anchor}`;
 
@@ -54,7 +57,7 @@ export default class Toc extends Component {
         {children}
       </li>
     );
-  };
+  }
 
   render() {
     const tocClass = classNames({

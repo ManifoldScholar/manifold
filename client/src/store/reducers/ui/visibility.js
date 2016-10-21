@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { mapValues } from 'lodash/object';
+import mapValues from 'lodash/mapValues';
 
 const initialState = {
   loginOverlay: false,

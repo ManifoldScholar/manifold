@@ -1,0 +1,173 @@
+.annotation-form {
+  position: relative;
+  // Default mobile width, will be overridden by Javascript
+  width: 100%;
+  background-color: $neutral05;
+
+  // Expanding background
+  &::before {
+    position: absolute;
+    left: -100vw;
+    width: 100vw;
+    height: 100%;
+    background-color: $neutral05;
+    content: '';
+  }
+
+  header {
+    position: relative;
+    min-height: 63px;
+    background-color: $neutral20;
+
+    &::before {
+      position: absolute;
+      left: -100vw;
+      width: 100vw;
+      height: 100%;
+      background-color: $neutral20;
+      content: '';
+    }
+
+    .title {
+      @include utilityPrimary;
+      position: relative;
+      display: block;
+      width: 360px;
+      padding-top: 13px;
+      padding-left: 25px;
+      line-height: 34px;
+      color: $neutral80;
+
+      .manicon-pencil {
+        display: inline-block;
+        margin-right: 19px;
+        font-size: 34px;
+        color: $neutral40;
+        vertical-align: top;
+      }
+    }
+
+    .button-close {
+      @include buttonUnstyled;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 63px;
+      height: 63px;
+      padding-top: 6px;
+      color: $neutral75;
+      background-color: $neutral30;
+
+      .manicon {
+        font-size: 31px;
+      }
+    }
+  }
+
+  .form-input {
+    position: relative;
+  }
+
+  textarea {
+    @include inputPrimary;
+    display: block;
+    width: 100%;
+    max-height: 150px;
+    border: 0;
+    outline: none;
+    resize: none;
+  }
+
+  .button-add {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    display: block;
+    width: 100%;
+    padding: 10px 40px 40px;
+    color: $neutral30;
+    text-align: left;
+    background-color: $neutralWhite;
+    transition: color $duration $timing;
+
+    &:hover {
+      color: $accentPrimary;
+
+      .manicon {
+        background-color: $accentPrimary;
+      }
+    }
+
+    .manicon {
+      display: inline-block;
+      width: 38px;
+      height: 38px;
+      padding-top: 11px;
+      margin-right: 15px;
+      font-size: 15px;
+      color: $neutralWhite;
+      text-align: center;
+      background-color: $neutral20;
+      border-radius: 8px;
+      transition: background-color $duration $timing;
+    }
+  }
+
+  .form-controls {
+    text-align: right;
+    background-color: $neutral10;
+
+    .checkbox {
+      @include checkboxStyled;
+      float: left;
+      padding: 19px 0 0 19px;
+      font-size: 16px;
+      line-height: 28px;
+
+      .toggle-indicator {
+        position: relative;
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        padding-top: 8px;
+        margin-right: 14px;
+        color: $neutral70;
+        text-align: center;
+        vertical-align: top;
+        background-color: $neutralWhite;
+
+        .manicon {
+          font-size: 11px;
+          opacity: 0;
+          transition: opacity $duration $timing;
+        }
+      }
+
+      input:checked ~ .toggle-indicator .manicon {
+        opacity: 1;
+      }
+    }
+
+    button {
+      @include buttonUnstyled;
+      @include utilityPrimary;
+      padding: 19px 32px 17px;
+      line-height: 28px;
+      color: $neutral80;
+    }
+
+    .button-cancel {
+      background-color: $neutral40;
+    }
+
+    .button-submit {
+      background-color: $accentPrimary;
+
+      .manicon {
+        display: inline-block;
+        margin-right: 18px;
+        font-size: 28px;
+        vertical-align: top;
+      }
+    }
+  }
+}

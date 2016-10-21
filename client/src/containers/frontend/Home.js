@@ -1,47 +1,46 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { ProjectCovers, ProjectGrid, ProjectFilters } from '../../components/frontend';
+import { ProjectList, Layout } from 'components/frontend';
 import { bindActionCreators } from 'redux';
-import { fetchFilteredProjects, fetchFeaturedProjects } from '../../actions/shared/collections';
-import { setProjectFilters } from '../../actions/frontend/ui/filters';
 import { Link } from 'react-router';
-import connectData from '../../decorators/connectData';
+import { uiFilterActions, entityStoreActions } from 'actions';
+import { entityUtils } from 'utils';
+import { projectsAPI } from 'api';
+import get from 'lodash/get';
 
+const { select } = entityUtils;
+const { setProjectFilters } = uiFilterActions;
+const { request, flush, requests } = entityStoreActions;
 
-function fetchData(getState, dispatch) {
-  const state = getState();
-  return Promise.all([
-    fetchFilteredProjects(state.ui.projectFilters)(dispatch, getState),
-    fetchFeaturedProjects()(dispatch, getState)
-  ]);
-}
+class HomeContainer extends Component {
 
-function mapStateToProps(state) {
-  return {
-    filteredProjects: state.collections.results.fetchFilteredProjects.entities,
-    featuredProjects: state.collections.results.fetchFeaturedProjects.entities,
-    projectFilters: state.ui.filters.project,
-    projects: state.collections.entities.projects,
-    makers: state.collections.entities.makers
-  };
-}
+  static fetchData(getState, dispatch) {
+    const state = getState();
+    const filteredRequest =
+      request(projectsAPI.index(state.ui.projectFilters), requests.browseFilteredProjects);
+    const featuredRequest =
+      request(projectsAPI.featured(), requests.browseFeaturedProjects);
+    const { promise: one } = dispatch(filteredRequest);
+    const { promise: two } = dispatch(featuredRequest);
+    return Promise.all([one, two]);
+  }
 
-@connectData(fetchData)
-@connect(mapStateToProps)
-export default class Home extends Component {
+  static mapStateToProps(state) {
+    return {
+      projectFilters: state.ui.filters.project,
+      filteredProjects: select(requests.browseFilteredProjects, state.entityStore),
+      featuredProjects: select(requests.browseFeaturedProjects, state.entityStore),
+      authentication: state.authentication
+    };
+  }
 
   static propTypes = {
+    authentication: PropTypes.object,
     children: PropTypes.object,
-    makers: PropTypes.object,
-    projects: PropTypes.object,
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
     projectFilters: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
-  };
-
-  static contextTypes = {
-    store: PropTypes.object.isRequired
+    dispatch: PropTypes.func
   };
 
   componentDidMount() {
@@ -51,64 +50,75 @@ export default class Home extends Component {
   componentDidUpdate(prevProps) {
     const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
-      dispatch(fetchFilteredProjects(this.props.projectFilters));
+      const apiCall = projectsAPI.index(this.props.projectFilters);
+      const filteredRequest =
+        request(apiCall, requests.browseFilteredProjects);
+      dispatch(filteredRequest);
     }
   }
 
   render() {
     return (
       <div>
+        {/*
+          Note that this section will be used for "Recent Projects"
+          once that list is available, this is currently using the
+          "featured projects" set of entities instead so as to
+          showcase/debug the markup for this type of list.
+        */}
         <section>
           <div className="container">
-            <header className="rel">
-              <h4 className="section-heading">
+            <header className="section-heading">
+              <h4 className="title">
                 <i className="manicon manicon-new-round"></i>
-                {'Featured Projects'}
+                {'Recent Projects'}
               </h4>
             </header>
-            <ProjectCovers
-              makers={this.props.makers}
-              projects={this.props.projects}
-              entities={this.props.featuredProjects}
-            />
+            { this.props.featuredProjects ?
+              <ProjectList.Grid
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(this.props.authentication, 'currentUser.favorites')}
+                dispatch={this.props.dispatch}
+                projects={this.props.featuredProjects}
+                dispatch={this.props.dispatch}
+              /> : null
+            }
           </div>
         </section>
-        <section className="neutral20">
+        <section className="bg-neutral05">
           <div className="container">
-            <header className="rel">
-              <h4 className="section-heading">
+            <header className="section-heading">
+              <h4 className="title">
                 <i className="manicon manicon-books-on-shelf"></i>
                 {'Filtered Projects'}
               </h4>
             </header>
             {/*
               Note that we're using a different dumb component to render this.
-              Note, too, that the parent component delivers all the data the child component needs
-              to render (which is what keeps the child dumb)'
+              Note, too, that the parent component delivers all the data the child
+              component needs to render (which is what keeps the child dumb)'
             */}
-            <ProjectFilters
+            <ProjectList.Filters
               updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
             />
-            <ProjectGrid
-              makers={this.props.makers}
-              projects={this.props.projects}
-              entities={this.props.filteredProjects}
-            />
+            { this.props.filteredProjects ?
+              <ProjectList.Grid
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(this.props.authentication, 'currentUser.favorites')}
+                dispatch={this.props.dispatch}
+                projects={this.props.filteredProjects}
+              /> : null
+            }
           </div>
         </section>
-        <section>
-          <div className="container">
-            <nav className="button-nav">
-              <Link to={'/browse/following'}>
-                <button className="button-icon-primary">
-                  <i className="manicon manicon-books-with-glasses"></i>
-                  Projects You're following
-                </button>
-              </Link>
-            </nav>
-          </div>
-        </section>
+        <Layout.ButtonNavigation grayBg={false} showBrowse={false} />
       </div>
     );
   }
 }
+
+const Home = connect(
+  HomeContainer.mapStateToProps
+)(HomeContainer);
+
+export default Home;

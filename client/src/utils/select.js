@@ -1,4 +1,4 @@
-import { isPlainObject } from 'lodash/lang';
+import isPlainObject from 'lodash/isPlainObject';
 
 export function select(entity, entities) {
   const selection = {};

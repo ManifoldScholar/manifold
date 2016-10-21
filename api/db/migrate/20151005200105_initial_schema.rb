@@ -1,29 +1,32 @@
 class InitialSchema < ActiveRecord::Migration
   def change
-    create_table "collaborators", force: :cascade do |t|
-      t.integer "text_id"
-      t.integer "maker_id"
+
+    enable_extension "uuid-ossp"
+
+    create_table "collaborators", id: :uuid, force: :cascade do |t|
+      t.uuid "text_id"
+      t.uuid "maker_id"
       t.string "role"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
       t.integer "position"
     end
 
-    create_table "text_sections", force: :cascade do |t|
+    create_table "text_sections", id: :uuid, force: :cascade do |t|
       t.string "name"
-      t.integer "resource_id"
+      t.uuid "resource_id"
       t.text "source_body"
       t.text "body"
       t.string "source_identifier"
-      t.integer "text_id"
+      t.uuid "text_id"
       t.integer "position"
       t.datetime "created_at",        null: false
       t.datetime "updated_at",        null: false
     end
 
-    create_table "ingestion_sources", force: :cascade do |t|
-      t.integer "text_id"
-      t.integer "resource_id"
+    create_table "ingestion_sources", id: :uuid, force: :cascade do |t|
+      t.uuid "text_id"
+      t.uuid "resource_id"
       t.string "source_identifier"
       t.datetime "created_at",        null: false
       t.datetime "updated_at",        null: false
@@ -31,14 +34,14 @@ class InitialSchema < ActiveRecord::Migration
       t.text "source_path"
     end
 
-    create_table "makers", force: :cascade do |t|
+    create_table "makers", id: :uuid, force: :cascade do |t|
       t.string "name"
       t.string "sort_name"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
 
-    create_table "resources", force: :cascade do |t|
+    create_table "resources", id: :uuid, force: :cascade do |t|
       t.string "name"
       t.string "type"
       t.string "attachment_file_name"
@@ -49,29 +52,29 @@ class InitialSchema < ActiveRecord::Migration
       t.datetime "updated_at",              null: false
     end
 
-    create_table "subjects", force: :cascade do |t|
+    create_table "subjects", id: :uuid, force: :cascade do |t|
       t.string "name"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
 
-    create_table "text_subjects", force: :cascade do |t|
-      t.integer "text_id"
-      t.integer "subject_id"
+    create_table "text_subjects", id: :uuid, force: :cascade do |t|
+      t.uuid "text_id"
+      t.uuid "subject_id"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
 
-    create_table "text_titles", force: :cascade do |t|
+    create_table "text_titles", id: :uuid, force: :cascade do |t|
       t.string "value"
       t.string "kind"
       t.integer "position"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.integer "text_id"
+      t.uuid "text_id"
     end
 
-    create_table "texts", force: :cascade do |t|
+    create_table "texts", id: :uuid, force: :cascade do |t|
       t.string "title"
       t.datetime "created_at",        null: false
       t.datetime "updated_at",        null: false

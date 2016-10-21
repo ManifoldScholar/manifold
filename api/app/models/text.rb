@@ -18,6 +18,7 @@ class Text < ActiveRecord::Base
   has_many :source_resources, through: :ingestion_sources, source: :resource
   has_many :text_sections, -> { order(position: :asc) }
   has_many :stylesheets
+  has_many :favorites, as: :favoritable
   belongs_to :project, optional: true
   belongs_to :category, optional: true
 
@@ -83,10 +84,15 @@ class Text < ActiveRecord::Base
 
   def cover_url
     cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
-    cover_source.resource.attachment.url if cover_source
+    return nil unless cover_source.try(:resource).try(:attachment_url)
+    ENV["API_DOMAIN"] + cover_source.resource.attachment.url if cover_source
   end
 
   def toc_section
     text_sections.find_by(kind: TextSection::KIND_NAVIGATION)
+  end
+
+  def published?
+    project && project.published_text == self
   end
 end

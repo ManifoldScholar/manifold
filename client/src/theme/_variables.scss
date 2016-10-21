@@ -4,36 +4,38 @@
 // Colors
 // --------------------------------------------------------
 // Neutral Colors
-
 $neutralWhite: #ffffff;
+$neutralBlack: #000000;
 
 // Off Whites
-$neutral05: #fffff7;
-$neutral10: #e8ecec;
-$neutral20: #f7f7f7;
-
-$neutral40: #c6c6c6;
-$neutral50: #a09fa0;
-$neutral70: #7a797b;
-$neutral75: #707071;
-$neutral80: #676668;
+$neutral05: #f7f7f7;
+$neutral10: #ececec;
+$neutral20: #e6e6e6;
+$neutral30: #d6d6d6;
+$neutral40: #c3c3c3;
+$neutral50: #9a9a9a;
+$neutral70: #828282;
+$neutral75: #696969;
+$neutral80: #555555;
 $neutral90: #363636;
+$neutral100: #231f20;
 
 // Separated as this is often used for base template elements (like plain text)
+$neutralOffWhite: $neutral05;
 $neutralOffBlack: $neutral90;
-$neutralBlack: #000000;
 
 // Accent Colors
 $accentPrimary: #52e3ac !default;
+$accentPrimaryDark: #34a178 !default;
+$accentPrimaryMedium: #3dbd8c !default;
 $accentPrimaryLight: #75e9bd !default;
-$accentPrimaryPale: #dcf9ee !default;
-$accentPrimaryOffWhite: #f2f7f7 !default;
+$accentPrimaryPale: #c1f7e4 !default;
+$accentPrimaryOffWhite: #f0faf7 !default;
 
-$accentSecondary: #34a178 !default;
 
 // Spectra
 // Color spectra are number by group and then given ordinal names, attributes
-$sp20Primary: #00bae6;
+$sp20Primary: #2bd1fa;
 $sp20PrimaryLight: #99e3f5;
 $sp20PrimaryPale: #d9f5fb;
 
@@ -43,10 +45,42 @@ $sp20SecondaryPale: #eaf7e0;
 
 $sp20Tertiary: #ff12ff;
 
+$sp20Quaternary: #fffd73;
+
 $sp30Primary: #d4f2ff;
 $sp30Secondary: #fff799;
 $sp30Tertiary: #ffbdbd;
 
+$sp40Tertiary: #f75884;
+
+// Spectrum 50 used for project placholder tiles
+$sp50Primary: #cbf7e6;
+$sp50Secondary: #ebebeb;
+$sp50Tertiary: #deecf9;
+$sp50Quaternary: #ffebce;
+$sp50Quinary: #f5e4f4;
+
+
+
+// Typographic Hierarchy
+// Commonly used font-sizes for template typography
+// TODO: Swap variables for hard-coded values, to refactor towards
+// larger abstractions, like broader typography settings
+// --------------------------------------------------------
+$type180: 59px;
+// $type130: ;
+$type120: 35px;
+$type110: 30px;
+$type100: 26px;
+$type90: 25px;
+$type80: 22px;
+$type70: 20px;
+$type60: 18px;
+$type50: 16px;
+$type40: 14px;
+$type30: 13px;
+$type20: 12px;
+// $type10: ;
 
 
 // Measurements
@@ -56,8 +90,11 @@ $baseLineHeight: 1.2;
 
 $containerWidthFull: 1235px; // Maximum container width of 1135 plus maximum gutter padding
 $containerPaddingFull: 50px;
+$containerPaddingResp: 4.5%;
+$containerWidthMin: 320px; // Minimum container width
 
-$containerWidthNarrow: 680px; // Narrow container width for reading
+
+$containerWidthFocus: 680px; // Narrow container width for reading
 $containerPaddingMin: 15px; // Minimum gutter padding
 
 // Font Weights
@@ -75,6 +112,7 @@ $bold: 700;
 // Commonly used animation variables, mainly used with transition CSS
 $durationFast: 0.1s;
 $duration: 0.2s;
+$durationSlow: 0.4s;
 
 $timing: ease;
 
@@ -82,13 +120,19 @@ $timing: ease;
 // Responsive Breakpoints
 // Maintained in one place to keep major breakpoints consistent
 // --------------------------------------------------------
-// $break100: ;
-// $break90: ;
-// $break80: ;
-// $break70: ;
-// $break60: ;
-// $break50: ;
-// $break40: ;
-// $break30: ;
-// $break20: ;
-// $break10: ;
+// $break130: ;
+// $break120: ;
+$break100: $containerWidthFull;
+$break95: 1024px;
+$break90: 960px;
+$break85: 880px;
+$break80: 800px;
+$break75: 760px;
+$break70: 700px;
+$break65: 690px;
+$break60: 620px;
+$break40: 480px;
+$break30: 400px;
+$break20: 350px;
+// Minimum site width
+$break10: $containerWidthMin;

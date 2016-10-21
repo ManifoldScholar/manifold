@@ -1,11 +1,10 @@
 import typographyReducer from '../typography';
-import { expect } from 'chai';
 
 describe('store/reducers/ui/typography', () => {
   it('should return the initial state', () => {
-    const state = typographyReducer(undefined, {});
+    const state = typographyReducer(undefined, { type: 'SOME_ACTION'});
     // Must mirror initial state declared in '../typography'
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       font: 'serif',
       fontSize: {
         current: 3,
@@ -29,7 +28,7 @@ describe('store/reducers/ui/typography/selectFont', () => {
 
     const action = { type: 'SELECT_FONT', payload: 'sans-serif' };
     const state = typographyReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       font: 'sans-serif'
     });
   });
@@ -46,7 +45,7 @@ describe('store/reducers/ui/typography/incrementFontSize', () => {
 
     const action = { type: 'INCREMENT_FONT_SIZE' };
     const state = typographyReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       fontSize: {
         current: 2,
         max: 5
@@ -64,7 +63,7 @@ describe('store/reducers/ui/typography/incrementFontSize', () => {
 
     const action = { type: 'INCREMENT_FONT_SIZE' };
     const state = typographyReducer(initialState, action);
-    expect(state).to.deep.equal(initialState);
+    expect(state).toEqual(initialState);
   });
 });
 
@@ -79,7 +78,7 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
 
     const action = { type: 'DECREMENT_FONT_SIZE' };
     const state = typographyReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       fontSize: {
         current: 0,
         min: -5
@@ -97,7 +96,7 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
 
     const action = { type: 'DECREMENT_FONT_SIZE' };
     const state = typographyReducer(initialState, action);
-    expect(state).to.deep.equal(initialState);
+    expect(state).toEqual(initialState);
   });
 });
 
@@ -112,7 +111,7 @@ describe('store/reducers/ui/typography/incrementMargins', () => {
 
     const action = { type: 'INCREMENT_MARGINS' };
     const state = typographyReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       margins: {
         current: 2,
         max: 2
@@ -130,7 +129,7 @@ describe('store/reducers/ui/typography/incrementMargins', () => {
 
     const action = { type: 'INCREMENT_MARGINS' };
     const state = typographyReducer(initialState, action);
-    expect(state).to.deep.equal(initialState);
+    expect(state).toEqual(initialState);
   });
 });
 
@@ -145,7 +144,7 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
 
     const action = { type: 'DECREMENT_MARGINS' };
     const state = typographyReducer(initialState, action);
-    expect(state).to.deep.equal({
+    expect(state).toEqual({
       margins: {
         current: 0,
         min: 0
@@ -163,6 +162,6 @@ describe('store/reducers/ui/typography/decrementFontSize', () => {
 
     const action = { type: 'DECREMENT_MARGINS' };
     const state = typographyReducer(initialState, action);
-    expect(state).to.deep.equal(initialState);
+    expect(state).toEqual(initialState);
   });
 });

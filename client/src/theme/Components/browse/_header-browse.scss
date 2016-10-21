@@ -5,14 +5,24 @@
   border-bottom: 1px solid transparent;
   transition: border-color $duration $timing;
 
-  .not-top & {
-    border-bottom: 1px solid $neutral40;
-  }
-
   .header-container {
     position: relative;
-    padding: 30px 52px 30px 40px;
+    padding: 20px 52px 20px 40px;
     background-color: $neutralWhite;
+  }
+
+  .header-border {
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid $neutral40;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $duration $timing, visibility $duration $timing;
+
+    .not-top & {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
   // <a> return link with logo
@@ -43,7 +53,7 @@
       a {
         @include templateHead;
         position: relative;
-        font-size: $type60;
+        font-size: 16px;
         color: $neutral50;
         text-decoration: none;
 
@@ -69,11 +79,13 @@
     }
   }
 
+  // Local Variable for menu padding
+  $menuPadding: 40px;
 
   .menu-dropdowns {
     position: absolute;
     top: 0;
-    right: 40px;
+    right: $menuPadding;
     height: 100%;
 
     > ul {
@@ -83,9 +95,12 @@
       height: 100%;
 
       > li {
-        position: relative;
         display: inline-block;
         height: 100%;
+
+        @include respond($break80) {
+          position: relative;
+        }
 
         + li {
           margin-left: 55px;
@@ -95,10 +110,29 @@
 
     // Browse specific menu layout/transition
     .button-search {
+      position: relative;
       height: 100%;
       font-size: 17px;
       color: $neutral80;
       vertical-align: middle;
+
+      &::after {
+        @include tailUp();
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        display: block;
+        margin-top: -20px;
+        margin-left: -15px;
+        content: '';
+        opacity: 0;
+        transition: margin $duration $timing, opacity $duration $timing;
+      }
+
+      &.button-active::after {
+        margin-top: 0;
+        opacity: 1;
+      }
     }
 
     .button-avatar {
@@ -108,11 +142,12 @@
 
     .search-menu {
       position: absolute;
-      right: -36px;
+      right: -$menuPadding;
+      max-width: 100vw;
       white-space: nowrap;
 
-      .tail {
-        display: block;
+      @include respond($break80) {
+        right: -36px;
       }
     }
 
@@ -148,5 +183,5 @@
 
 // Header bump
 .browse main {
-  padding-top: 99px;
+  padding-top: 79px;
 }

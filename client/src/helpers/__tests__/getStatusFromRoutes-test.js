@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import getStatusFromRoutes from '../getStatusFromRoutes';
 
 describe('helpers/getStatusFromRoutes', () => {
@@ -8,7 +7,7 @@ describe('helpers/getStatusFromRoutes', () => {
         {}, {}
     ]);
 
-    expect(status).to.equal(null);
+    expect(status).toEqual(null);
   });
 
   it('should return the only status code', () => {
@@ -16,7 +15,7 @@ describe('helpers/getStatusFromRoutes', () => {
         { status: 404 }
     ]);
 
-    expect(status).to.equal(404);
+    expect(status).toEqual(404);
   });
 
   it('should return the only status code when other routes have none', () => {
@@ -24,7 +23,7 @@ describe('helpers/getStatusFromRoutes', () => {
         { status: 404 }, {}, {}
     ]);
 
-    expect(status).to.equal(404);
+    expect(status).toEqual(404);
   });
 
   it('should return the last status code when later routes have none', () => {
@@ -32,7 +31,7 @@ describe('helpers/getStatusFromRoutes', () => {
         { status: 200 }, { status: 404 }, {}
     ]);
 
-    expect(status).to.equal(404);
+    expect(status).toEqual(404);
   });
 
   it('should return the last status code when previous routes have one', () => {
@@ -40,7 +39,7 @@ describe('helpers/getStatusFromRoutes', () => {
         { status: 200 }, {}, { status: 404 }
     ]);
 
-    expect(status).to.equal(404);
+    expect(status).toEqual(404);
   });
 
   it('should return the last status code', () => {
@@ -48,6 +47,6 @@ describe('helpers/getStatusFromRoutes', () => {
         {}, {}, { status: 404 }
     ]);
 
-    expect(status).to.equal(404);
+    expect(status).toEqual(404);
   });
 });

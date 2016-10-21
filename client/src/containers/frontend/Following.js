@@ -1,48 +1,51 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { ProjectGrid, ProjectSummaryGrid, ProjectFilters } from '../../components/frontend';
+import { ProjectList, Layout } from 'components/frontend';
 import { bindActionCreators } from 'redux';
-import { fetchFilteredProjects, fetchFeaturedProjects } from '../../actions/shared/collections';
-import { setProjectFilters } from '../../actions/frontend/ui/filters';
-import connectData from '../../decorators/connectData';
+import { connect } from 'react-redux';
+import { uiFilterActions, entityStoreActions } from 'actions';
+import { entityUtils } from 'utils';
+import projectsAPI from 'api/projects';
+import get from 'lodash/get';
 
-function fetchData(getState, dispatch) {
-  const state = getState();
-  return Promise.all([
-    fetchFilteredProjects(state.ui.projectFilters)(dispatch, getState),
-    fetchFeaturedProjects()(dispatch, getState)
-  ]);
-}
+const { select } = entityUtils;
+const { setProjectFilters } = uiFilterActions;
+const { request, requests } = entityStoreActions;
 
-function mapStateToProps(state) {
-  return {
-    filteredProjects: state.collections.results.fetchFilteredProjects.entities,
-    featuredProjects: state.collections.results.fetchFeaturedProjects.entities,
-    projectFilters: state.ui.projectFilters,
-    projects: state.collections.entities.projects,
-    makers: state.collections.entities.makers,
-    authentication: state.authentication
-  };
-}
+class FollowingContainer extends Component {
 
-@connectData(fetchData)
-@connect(mapStateToProps)
-export default class Following extends Component {
+  static fetchData(getState, dispatch) {
+    const state = getState();
+    const filteredRequest =
+      request(projectsAPI.index(state.ui.projectFilters), requests.browseFilteredProjects);
+    const featuredRequest =
+      request(projectsAPI.featured(), requests.browseFeaturedProjects);
+    const { promise: one } = dispatch(filteredRequest);
+    const { promise: two } = dispatch(featuredRequest);
+    return Promise.all([one, two]);
+  }
 
   static propTypes = {
     children: PropTypes.object,
-    makers: PropTypes.object,
-    projects: PropTypes.object,
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
     projectFilters: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    authentication: PropTypes.object
   };
 
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+
+  static mapStateToProps(state) {
+    return {
+      projectFilters: state.ui.filters.project,
+      filteredProjects: select(requests.browseFilteredProjects, state.entityStore),
+      featuredProjects: select(requests.browseFeaturedProjects, state.entityStore),
+      authentication: state.authentication
+    };
+  }
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -51,36 +54,44 @@ export default class Following extends Component {
   componentDidUpdate(prevProps) {
     const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
-      dispatch(fetchFilteredProjects(this.props.projectFilters));
+      const apiCall = projectsAPI.index(this.props.projectFilters);
+      const filteredRequest =
+        request(apiCall, requests.browseFilteredProjects);
+      dispatch(filteredRequest);
     }
   }
 
   render = () => {
-    const updateProjectFilters = bindActionCreators(setProjectFilters, this.props.dispatch);
+    const boundSetFilters = bindActionCreators(setProjectFilters, this.props.dispatch);
     return (
       <div>
-        <section className="neutral20">
+        <section className="bg-neutral05">
           <div className="container">
-            <header className="rel">
-              <h4 className="section-heading">
+            <header className="section-heading utility-right">
+              <h4 className="title">
                 <i className="manicon manicon-books-with-glasses"></i>
                 {'Projects You\'re Following'}
               </h4>
               <div className="section-heading-utility-right">
-                <ProjectFilters updateAction={updateProjectFilters} />
+                <ProjectList.Filters
+                  updateAction={boundSetFilters}
+                />
               </div>
             </header>
-            <ProjectGrid
-              makers={this.props.makers}
-              projects={this.props.projects}
-              entities={this.props.filteredProjects}
-            />
+            { this.props.filteredProjects ?
+              <ProjectList.Grid
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(this.props.authentication, 'currentUser.favorites')}
+                dispatch={this.props.dispatch}
+                projects={this.props.filteredProjects}
+              /> : null
+            }
           </div>
         </section>
         <section>
           <div className="container">
-            <header className="rel">
-              <h4 className="section-heading">
+            <header className="section-heading utility-right">
+              <h4 className="title">
                 <i className="manicon manicon-lamp"></i>
                 {'Featured Projects'}
               </h4>
@@ -90,26 +101,24 @@ export default class Following extends Component {
                 </Link>
               </div>
             </header>
-            <ProjectSummaryGrid
-              makers={this.props.makers}
-              projects={this.props.projects}
-              entities={this.props.featuredProjects}
-            />
+            { this.props.featuredProjects ?
+              <ProjectList.SummaryGrid
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(this.props.authentication, 'currentUser.favorites')}
+                dispatch={this.props.dispatch}
+                projects={this.props.featuredProjects}
+              /> : null
+            }
           </div>
         </section>
-        <section>
-          <div className="container">
-            <nav className="button-nav">
-              <Link to={'/browse'} >
-                <button className="button-icon-primary">
-                  <i className="manicon manicon-books-on-shelf"></i>
-                  See more projects
-                </button>
-              </Link>
-            </nav>
-          </div>
-        </section>
+        <Layout.ButtonNavigation grayBg showFollowing={false} />
       </div>
     );
   };
 }
+
+const Following = connect(
+  FollowingContainer.mapStateToProps
+)(FollowingContainer);
+
+export default Following;

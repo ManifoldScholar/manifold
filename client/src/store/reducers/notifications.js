@@ -37,9 +37,9 @@ const handleErrorAction = (state, action) => {
 };
 
 const notificationReducer = (state = initialState, action) => {
-  if (action.error) {
-    return handleErrorAction(state, action);
-  }
+  // if (action.error) {
+  //   return handleErrorAction(state, action);
+  // }
   switch (action.type) {
     case 'ADD_NOTIFICATION':
       return addNotification(state, action);

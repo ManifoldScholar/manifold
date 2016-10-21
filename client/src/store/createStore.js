@@ -1,37 +1,36 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from './middleware/thunkMiddleware';
-import loadingMiddleware from './middleware/loadingMiddleware';
-import { DevTools } from '../containers/shared';
+import entityStoreMiddleware from './middleware/entityStoreMiddleware';
 import promiseMiddleware from 'redux-promise';
+import reducers from './reducers';
 
 export default function createStore(data) {
 
   const useDevTools = __DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__;
   const middleware = [];
+  middleware.push(entityStoreMiddleware);
   middleware.push(thunkMiddleware);
-  middleware.push(loadingMiddleware);
   middleware.push(promiseMiddleware);
 
   let finalCreateStore;
   if (useDevTools) {
-    const { persistState } = require('redux-devtools');
-    finalCreateStore = compose(
-      applyMiddleware(...middleware),
-      DevTools.instrument(),
-      persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    finalCreateStore = composeEnhancers(
+      applyMiddleware(...middleware)
     )(_createStore);
   } else {
     finalCreateStore = applyMiddleware(...middleware)(_createStore);
   }
 
-  const reducer = require('./reducers');
-  const store = finalCreateStore(reducer, data);
-
-  if (__DEVELOPMENT__ && module.hot) {
-    module.hot.accept('./reducers', () => {
-      store.replaceReducer(require('./reducers'));
-    });
+  let devtoolsExtension = null;
+  if (__CLIENT__) {
+    devtoolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__();
   }
 
+  const store = finalCreateStore(
+    reducers,
+    data
+  );
   return store;
 }

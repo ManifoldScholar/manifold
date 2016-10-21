@@ -13,7 +13,7 @@ RSpec.describe Serializer::Html do
         { node_type: "element", tag: "p", attributes: {}, children: [{ node_type: "text", content: "BBB" }] }
       ]
     }
-    expect(serializer.serialize(node)).to eq(object)
+    expect(serializer.serialize(node)).to match_serialized_html_node(object)
   end
 
   it "should skip a node it cant handle" do
@@ -24,7 +24,7 @@ RSpec.describe Serializer::Html do
         { node_type: "text", content: "AAA" }
       ]
     }
-    expect(serializer.serialize(node)).to eq(object)
+    expect(serializer.serialize(node)).to match_serialized_html_node(object)
   end
 
   it "should skip a blacklisted element" do
@@ -36,7 +36,7 @@ RSpec.describe Serializer::Html do
         { node_type: "text", content: "BBB" }
       ]
     }
-    expect(serializer.serialize(node)).to eq(object)
+    expect(serializer.serialize(node)).to match_serialized_html_node(object)
   end
 
   it "should convert a simple HTML node into a JSON object" do
@@ -47,7 +47,7 @@ RSpec.describe Serializer::Html do
         { node_type: "text", content: "AAA" }
       ]
     }
-    expect(serializer.serialize(node)).to eq(object)
+    expect(serializer.serialize(node)).to match_serialized_html_node(object)
   end
 
   it "should extract element attributes" do
@@ -55,7 +55,7 @@ RSpec.describe Serializer::Html do
     object = {
       node_type: "element", tag: "div", attributes: { class: "AAA" }
     }
-    expect(serializer.serialize(node)).to eq(object)
+    expect(serializer.serialize(node)).to match_serialized_html_node(object)
   end
 
   it "should extract comment node content" do
@@ -67,7 +67,7 @@ RSpec.describe Serializer::Html do
         { node_type: "text", content: "CCC" }
       ]
     }
-    expect(serializer.serialize(node)).to eq(object)
+    expect(serializer.serialize(node)).to match_serialized_html_node(object)
   end
 
   it "should correctly handle an element inside a text node" do
@@ -81,6 +81,6 @@ RSpec.describe Serializer::Html do
         { node_type: "text", content: "CCC" }
       ]
     }
-    expect(serializer.serialize(node)).to eq(object)
+    expect(serializer.serialize(node)).to match_serialized_html_node(object)
   end
 end

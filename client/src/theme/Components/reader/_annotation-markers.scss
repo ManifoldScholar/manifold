@@ -1,36 +1,94 @@
 // Annotation Marker Components
 // ----------------------------
 
-// A grouping of components used to mark/signal annotations
+// A grouping of components used to mark/signal existing annotations
 
-.annotation-comment {
-  border-bottom: 2px solid $sp20Primary;
+//.annotation-comment {
+//  border-bottom: 2px solid $sp20Primary;
+//
+//  .annotation-marker {
+//    @include buttonUnstyled;
+//    @include templateHead;
+//    position: absolute;
+//    right: 10%;
+//    padding: 0 8px 3px;
+//    font-size: $type70;
+//    letter-spacing: 0.075em;
+//    color: $neutralWhite;
+//    background-color: $sp20Primary;
+//
+//    &::before {
+//      position: absolute;
+//      top: 100%;
+//      left: 8px;
+//      width: 0;
+//      height: 0;
+//      border-color: $sp20Primary transparent transparent;
+//      border-style: solid;
+//      border-width: 8px 9px 0 0;
+//      content: '';
+//    }
+//  }
+//}
+//
+//.annotation-highlight {
+//  background-color: $sp20PrimaryPale;
+//}
 
-  .annotation-marker {
-    @include buttonUnstyled;
-    @include templateHead;
-    position: absolute;
-    right: 10%;
-    padding: 0 8px 3px;
-    font-size: $type70;
-    letter-spacing: 0.075em;
-    color: $neutralWhite;
-    background-color: $sp20Primary;
+.annotation-underline {
+  background-position: 0% 100%;
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
 
-    &::before {
-      position: absolute;
-      top: 100%;
-      left: 8px;
-      width: 0;
-      height: 0;
-      border-color: $sp20Primary transparent transparent;
-      border-style: solid;
-      border-width: 8px 9px 0 0;
-      content: '';
+  &.primary {
+    // Built in css function
+    // scss-lint:disable NameFormat
+    background-image: linear-gradient($sp20PrimaryLight, $sp20PrimaryLight);
+
+    .multiple {
+      // Adds an additional background image
+      background-image: linear-gradient($sp20Primary, $sp20Primary);
+      background-position: 0% 100%;
+      background-repeat: repeat-x;
+      background-size: 2px 2px;
+    }
+  }
+
+  &.secondary {
+    // Built in css function
+    // scss-lint:disable NameFormat
+    background-image: linear-gradient($sp20SecondaryLight, $sp20SecondaryLight);
+
+    .multiple {
+      // Adds an additional background image
+      // Built in css function
+      // scss-lint:disable NameFormat
+      background-image: linear-gradient($sp20Secondary, $sp20Secondary);
+      background-position: 0% 100%;
+      background-repeat: repeat-x;
+      background-size: 2px 2px;
     }
   }
 }
 
 .annotation-highlight {
-  background-color: $sp20PrimaryPale;
+  &.primary {
+    background-color: $sp20PrimaryPale;
+
+    .multiple {
+      background-color: $sp20PrimaryLight;
+    }
+  }
+
+  &.secondary {
+    background-color: $sp20SecondaryPale;
+
+    .multiple {
+      background-color: $sp20SecondaryLight;
+    }
+  }
+
+  &.mixed {
+    background-color: darken(mix($sp20PrimaryPale, $sp20SecondaryPale), 20%);
+  }
 }

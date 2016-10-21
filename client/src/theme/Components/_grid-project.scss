@@ -1,6 +1,26 @@
 // <nav> around <ul>
 .grid-project {
-  margin: -26px -26px 0;
+  margin: 0;
+
+  @include respond($break60) {
+    margin: 0 -2.105vw;
+  }
+
+  @include respond($break100) {
+    margin: 0 -26px;
+  }
+
+  .select-browse + & {
+    margin-top: 26px;
+
+    @include respond($break60) {
+      margin-top: 40px;
+    }
+
+    @include respond($break85) {
+      margin-top: 52px;
+    }
+  }
 
   ul {
     @include listHorizontal;
@@ -8,17 +28,34 @@
     width: 100%;
 
     li {
-      width: 25%;
+      display: inline-block;
+      width: 50%;
       // Ensures flush grid elements, requires reset for any child elements
       font-size: 0;
       vertical-align: top;
+
+      @include respond($break60) {
+        width: 33.333%;
+      }
+
+      @include respond($break85) {
+        width: 25%;
+      }
     }
   }
 
   a {
     display: block;
-    padding: 26px;
+    padding: 12px;
     text-decoration: none;
+
+    @include respond($break60) {
+      padding: 2.105vw;
+    }
+
+    @include respond($break100) {
+      padding: 26px;
+    }
 
     .figure-wrapper {
       max-width: 180px;
@@ -29,13 +66,15 @@
       position: relative;
       height: 0;
       max-width: 100%;
-      padding-top: 108%;
+      padding-top: 94%;
       margin-bottom: 20px;
 
       img, svg {
         position: absolute;
         top: 0;
         left: 0;
+        // Relative z-index
+        z-index: 0;
         width: auto;
         height: 100%;
         max-height: 100%;
@@ -50,19 +89,13 @@
       }
 
       // Follow button
-      .manicon {
-        position: absolute;
-        top: 10.769%;
-        left: -18px;
-        display: block;
-        width: 45px;
-        height: 45px;
-        padding-top: 12px;
-        font-size: 20px;
-        color: $neutralWhite;
-        text-align: center;
-        background-color: $accentPrimary;
-        border-radius: 100%;
+      .follow-button {
+        z-index: 1;
+      }
+
+      .manicon-plus-bold:hover ~ .thumbnail-follow-overlay {
+        opacity: 1;
+        visibility: visible;
       }
     }
 
@@ -80,23 +113,21 @@
 
     // Meta data
     .title {
-      @include titlePrimary;
-      margin-bottom: 6px;
-      font-size: $type70;
+      @include gridProjectTitle;
+      margin-bottom: 8px;
+      font-size: 16px;
     }
 
     .makers {
       @include templateCopy;
-      padding-bottom: 17px;
+      // Hide until we actually show these
+      //padding-bottom: 17px;
       font-size: $type70;
       color: $neutral80;
     }
 
     .date {
-      @include templateCopy;
-      font-size: $type60;
-      font-style: italic;
-      color: $neutral75;
+      @include gridProjectDate;
     }
   }
 }

@@ -7,7 +7,9 @@ module Api
       # GET /texts
       def index
         @texts = Text.all
-        render json: @texts, each_serializer: TextPartialSerializer
+        render json: @texts,
+               include: %w(project),
+               each_serializer: TextPartialSerializer
       end
 
       # GET /texts/1

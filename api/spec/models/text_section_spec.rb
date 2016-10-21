@@ -18,4 +18,5 @@ RSpec.describe TextSection, type: :model do
     text_section.resource = resource
     expect(text_section.resource).to be resource
   end
+
 end

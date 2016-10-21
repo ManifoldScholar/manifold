@@ -14,11 +14,13 @@
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
+.idea/codeStyleSettings.xml
 .idea/dictionaries
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
 .idea/dataSources.xml
+.idea/dataSources.local.xml
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
@@ -34,6 +36,7 @@
 ### Ignore user content ###
 /public/system
 /user_texts
+/import
 
 ### Ignore secrets ###
 config/secrets.yml

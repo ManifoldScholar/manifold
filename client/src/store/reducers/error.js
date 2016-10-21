@@ -8,13 +8,14 @@ const initialState = {
 };
 
 const handleAPIError = (state, action) => {
-  return {
-    response: action.payload,
-    status: action.payload.status,
-    statusText: action.payload.statusText,
-    action: action.meta.action,
-    exists: true
-  };
+  return state;
+  // return {
+  //   response: action.payload,
+  //   status: action.payload.status,
+  //   statusText: action.payload.statusText,
+  //   action: action.meta.action,
+  //   exists: true
+  // };
 };
 
 const handleClearError = () => {

@@ -1,0 +1,111 @@
+.resource-slideshow {
+  $slideCopyFocus: 570px;
+  padding-bottom: 38px;
+
+  .slide-footer {
+    display: table;
+    width: 100%;
+    background-color: $neutral90;
+  }
+
+  .slide-caption {
+    position: relative;
+    display: table-cell;
+    width: 100%;
+    padding: 17px 23px;
+    vertical-align: top;
+  }
+
+  .resource-title {
+    @include templateHead;
+    margin-top: 0;
+    margin-bottom: 0.364em;
+    font-size: 22px;
+    font-weight: $regular;
+    color: $neutral05;
+  }
+
+  .resource-description {
+    @include templateCopy;
+    max-width: $slideCopyFocus;
+    max-height: 5em; // Sized relative to font-size
+    overflow: hidden;
+    font-size: 15px;
+    color: $neutral40;
+  }
+
+  .slide-pagination {
+    width: 160px;
+    padding: 19px 23px;
+    text-align: right;
+
+    .slide-ordinal {
+      @include utilityPrimary;
+      display: inline-block;
+      font-weight: $regular;
+      letter-spacing: 0.05em;
+      color: $neutral50;
+    }
+
+    .slide-previous, .slide-next {
+      @include buttonUnstyled;
+      margin-top: 16px;
+      color: $neutral40;
+
+      .manicon {
+        font-size: 42px;
+      }
+    }
+
+    .slide-next {
+      margin-left: 14px;
+    }
+  }
+
+  .resource-utility {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+
+    &::before {
+      display: block;
+      width: 120%;
+      height: 33px;
+      content: '';
+      box-shadow: inset -10px -10px 18px 0 $neutral90;
+    }
+
+    > div {
+      padding: 9px 23px 15px;
+    }
+
+    .more-link, .download-link {
+      @include utilityPrimary;
+      @include buttonUnstyled;
+      font-size: 13px;
+      color: $neutral40;
+      text-decoration: none;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $accentPrimary;
+      }
+
+      + .download-link {
+        margin-left: 22px;
+      }
+    }
+
+    .download-link {
+      color: $neutral50;
+
+      .manicon-arrow-down::before {
+        margin-left: 6px;
+        font-size: 11px;
+        vertical-align: middle;
+      }
+    }
+  }
+}

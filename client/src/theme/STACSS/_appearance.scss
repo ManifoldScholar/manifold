@@ -27,16 +27,31 @@
 
 // Layout
 // --------------------------------------------------------
-// Added to UI panels/dropdowns with tails
-@mixin panelTail {
-  position: absolute;
-  top: -17px;
-  right: 28px;
+
+// Apply to a pseudo element to get a tail/triangle pointing up
+@mixin tailUp($color: $neutral10) {
   width: 0;
   height: 0;
   border-style: solid;
   border-width: 0 15.5px 17px;
   border-color: transparent transparent $neutral10;
+}
+
+// Added to UI panels/dropdowns with tails
+@mixin panelTail {
+  position: absolute;
+  top: -17px;
+  right: 28px;
+  @include tailUp();
+}
+
+// Background color utility classes
+.bg-neutral05 {
+  background-color: $neutral05;
+}
+
+.bg-neutral90 {
+  background-color: $neutral90;
 }
 
 
@@ -51,7 +66,11 @@
   -webkit-appearance: none;
 }
 
-@mixin buttonAvatar($size: 40) {
+@mixin buttonRounded {
+  border-radius: 7px;
+}
+
+@mixin buttonAvatar($size: 36) {
   @include buttonUnstyled;
   // Default size from browse view that may be
   // changed in scope
@@ -78,25 +97,41 @@
 // --------------------------------------------------------
 // Styled select
 // based on: https://github.com/mdo/wtf-forms/blob/master/wtf-forms.css
-@mixin selectStyled {
+@mixin unstyledSelect {
+  // Styled select prototype,
+  // Ready for restyling
+
+  // Must be applied to a <select>
+  background: transparent;
+  border-radius: 0;
+  cursor: pointer;
+  outline: 0;
+  appearance: none;
+
+  &:focus:-moz-focusring {
+    color: transparent;
+  }
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+@mixin selectPrimary {
   position: relative;
   display: inline-block;
   color: $neutral80;
 
   select {
     @include utilityPrimary;
+    @include unstyledSelect;
     display: inline-block;
-    width: auto;
-    padding: 15px 18px 17px;
+    width: 100%;
+    padding: 9px 13px 11px;
     margin: 0;
     font-size: $type40;
     line-height: $baseLineHeight;
-    cursor: pointer;
-    background-color: transparent;
     border: 3px solid $neutral40;
-    border-radius: 0;
-    outline: 0;
-    appearance: none;
 
     &:focus {
       border-color: $accentPrimary;
@@ -112,15 +147,27 @@
     margin-top: -3px;
     font-size: 7px;
     pointer-events: none;
-  }
 
-  select:focus:-moz-focusring {
-    color: transparent;
-    text-shadow: 0 0 0 $neutralBlack;
+    // Use native dropdown arrow in IE9
+    .ie9 & {
+      display: none;
+    }
   }
+}
 
-  select::-ms-expand {
-    display: none;
+// Styled Checkbox (also from wtf forms)
+// Should be applied to a label with an input type="checkbox" inside
+@mixin checkboxStyled {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  // Hide actual input
+  input {
+    position: absolute;
+    // Relative negative z-index
+    z-index: -1;
+    opacity: 0;
   }
 }
 
@@ -128,7 +175,6 @@
 // Inputs/Textareas
 @mixin inputSecondary {
   @include templateCopy;
-  width: 306px;
   padding: 7px 10px;
   font-size: $type70;
   color: $accentPrimary;

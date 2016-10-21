@@ -9,8 +9,7 @@ class TextTitle < ActiveRecord::Base
                    KIND_SUBTITLE,
                    KIND_SHORT,
                    KIND_COLLECTION,
-                   KIND_EDITION
-  ].freeze
+                   KIND_EDITION].freeze
 
   belongs_to :text
 

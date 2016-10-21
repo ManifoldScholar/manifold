@@ -25,6 +25,21 @@
     img, svg {
       width: 100%;
       height: auto;
+      border: 4px solid transparent;
+    }
+  }
+
+  figure {
+    position: relative;
+
+    &:hover {
+      img {
+        border-color: $accentPrimary;
+      }
+
+      svg .highlight {
+        fill: $accentPrimary;
+      }
     }
   }
 }

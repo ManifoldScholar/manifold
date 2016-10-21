@@ -14,7 +14,8 @@ module Ingestor
               node_inspector = Inspector::Metadata.new(node, @metadata_node)
               attr = defaults(DEFAULT_ATTRIBUTES, attributes(node_inspector))
               existing_maker = check_for_existing(existing, name: attr[:name])
-              maker = existing_maker || Maker.create(attr)
+              existing_maker = Maker.find_by(name: attr[:name]) unless existing_maker
+              maker = existing_maker ? existing_maker : Maker.create(attr)
               maker.update_attributes(attr)
               log_maker(maker, role)
               maker

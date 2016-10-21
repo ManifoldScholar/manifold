@@ -30,6 +30,9 @@ body {
   font-weight: $regular;
   line-height: $baseLineHeight;
   // color: $something;
+  &.no-scroll {
+    overflow: hidden;
+  }
 }
 
 // Reset margins on default paragraph

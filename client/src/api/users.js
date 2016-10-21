@@ -6,6 +6,16 @@ export default {
       method: 'GET',
       options: {}
     };
+  },
+
+  create(user) {
+    return {
+      endpoint: '/api/v1/users',
+      method: 'POST',
+      options: {
+        body: JSON.stringify({ type: "user", data: { attributes: user } })
+      }
+    };
   }
 
 };

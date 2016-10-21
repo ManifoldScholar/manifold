@@ -1,5 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { AppearanceMenuButton, AppearanceMenuBody, TextTitles, TocDrawer } from './';
+import {
+  AppearanceMenuButton,
+  AppearanceMenuBody,
+  TextTitles,
+  TocDrawer
+} from 'components/reader';
 import {
   HeaderNotifications,
   SearchMenuButton,
@@ -7,7 +12,7 @@ import {
   UIPanel,
   UserMenuButton,
   UserMenuBody
-} from '../../components/shared';
+} from 'components/global';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 
@@ -15,16 +20,11 @@ export default class Header extends Component {
 
   static propTypes = {
     text: PropTypes.object,
-    sectionId: PropTypes.string,
-    authenticated: PropTypes.bool,
+    section: PropTypes.object,
+    authentication: PropTypes.object,
     visibility: PropTypes.object,
     appearance: PropTypes.object,
     notifications: PropTypes.object,
-    visibilityToggle: PropTypes.func,
-    visibilityHide: PropTypes.func,
-    visibilityShow: PropTypes.func,
-    panelToggle: PropTypes.func,
-    panelHide: PropTypes.func,
     selectFont: PropTypes.func,
     incrementFontSize: PropTypes.func,
     decrementFontSize: PropTypes.func,
@@ -32,46 +32,43 @@ export default class Header extends Component {
     decrementMargins: PropTypes.func,
     setColorScheme: PropTypes.func,
     scrollAware: PropTypes.object,
-    startLogout: PropTypes.func,
-    addNotification: PropTypes.func,
-    removeNotification: PropTypes.func,
-    removeAllNotifications: PropTypes.func
+    commonActions: PropTypes.object
   };
 
-  getSectionTitle(id) {
-    let title = '';
-    this.props.text.attributes.toc.forEach((section) => {
-      if (section.id === id) {
-        title = section.label;
-      }
-    });
-
-    return title;
+  constructor() {
+    super();
+    this.handleContentsButtonClick = this.handleContentsButtonClick.bind(this);
+    this.handleSearchMenuButtonClick = this.handleSearchMenuButtonClick.bind(this);
+    this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(this);
+    this.triggerShowSignInUpOverlay = this.triggerShowSignInUpOverlay.bind(this);
+    this.triggerToggleUserMenu = this.triggerToggleUserMenu.bind(this);
+    this.triggerHideToc = this.triggerHideToc.bind(this);
+    this.renderContentsButton = this.renderContentsButton.bind(this);
   }
 
-  handleContentsButtonClick = () => {
-    this.props.visibilityToggle('tocDrawer');
-  };
+  handleContentsButtonClick() {
+    this.props.commonActions.visibilityToggle('tocDrawer');
+  }
 
-  handleSearchMenuButtonClick = () => {
-    this.props.panelToggle('search');
-  };
+  handleSearchMenuButtonClick() {
+    this.props.commonActions.panelToggle('search');
+  }
 
-  handleAppearanceMenuButtonClick = () => {
-    this.props.panelToggle('appearance');
-  };
+  handleAppearanceMenuButtonClick() {
+    this.props.commonActions.panelToggle('appearance');
+  }
 
-  triggerShowLoginOverlay = () => {
-    this.props.visibilityShow('loginOverlay');
-  };
+  triggerShowSignInUpOverlay() {
+    this.props.commonActions.visibilityShow('signInUpOverlay');
+  }
 
-  triggerToggleUserMenu = () => {
-    this.props.panelToggle('user');
-  };
+  triggerToggleUserMenu() {
+    this.props.commonActions.panelToggle('user');
+  }
 
-  triggerHideToc = () => {
-    this.props.visibilityHide('tocDrawer');
-  };
+  triggerHideToc() {
+    this.props.commonActions.visibilityHide('tocDrawer');
+  }
 
   renderContentsButton = (contents) => {
     if (contents.length <= 0) {
@@ -88,7 +85,7 @@ export default class Header extends Component {
         {'Contents'}<i className="manicon manicon-caret-down"></i>
       </button>
     );
-  };
+  }
 
   render() {
     const colorScheme = this.props.appearance.colors.colorScheme;
@@ -102,7 +99,7 @@ export default class Header extends Component {
     return (
       <header className="header-reader">
         <nav className="container-banner">
-          <Link to={`/browse/project/${this.props.text.relationships.project.data.id}`} >
+          <Link to={`/browse/project/${this.props.text.relationships.project.id}`} >
             <button className="button-close" >
               <i className="manicon manicon-x"></i>
                 <span className="screen-reader-text">
@@ -111,11 +108,13 @@ export default class Header extends Component {
             </button>
           </Link>
           { this.renderContentsButton(this.props.text.attributes.toc) }
-          <TextTitles
-            textTitle={this.props.text.attributes.title}
-            sectionTitle={this.getSectionTitle(Number(this.props.sectionId))}
-            showSection={!this.props.scrollAware.top}
-          />
+          { this.props.section ?
+            <TextTitles
+              textTitle={this.props.text.attributes.title}
+              sectionTitle={this.props.section.attributes.name}
+              showSection={!this.props.scrollAware.top}
+            />
+          : null }
           <nav className="menu-buttons">
             <ul>
               <li>
@@ -132,16 +131,16 @@ export default class Header extends Component {
               </li>
               <li>
                 <UserMenuButton
-                  authenticated={this.props.authenticated}
+                  authentication={this.props.authentication}
                   active={this.props.visibility.uiPanels.user}
-                  showLoginOverlay={this.triggerShowLoginOverlay}
+                  showLoginOverlay={this.triggerShowSignInUpOverlay}
                   toggleUserMenu={this.triggerToggleUserMenu}
                 />
               </li>
             </ul>
           </nav>
-          <div className={bannerGradientClass}></div>
         </nav>
+        <div className={bannerGradientClass}></div>
         <TocDrawer
           text={this.props.text}
           visible={this.props.visibility.tocDrawer}
@@ -171,16 +170,16 @@ export default class Header extends Component {
             id="user"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={UserMenuBody}
-
-            // Props required by body component
-            startLogout={this.props.startLogout}
+            showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
+            startLogout={this.props.commonActions.logout}
+            hideUserMenu={this.props.commonActions.toggleUserPanel}
           />
         </nav>
         <HeaderNotifications
           notifications={this.props.notifications}
-          addNotification={this.props.addNotification}
-          removeNotification={this.props.removeNotification}
-          removeAllNotifications={this.props.removeAllNotifications}
+          addNotification={this.props.commonActions.addNotification}
+          removeNotification={this.props.commonActions.removeNotification}
+          removeAllNotifications={this.props.commonActions.clearNotifications}
         />
       </header>
     );

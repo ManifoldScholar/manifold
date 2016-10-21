@@ -1,13 +1,11 @@
-import Home from './Home';
-import Frontend from './Frontend';
-import Following from './Following';
-import ProjectDetail from './ProjectDetail';
-import Login from './Login';
-
-export {
-  Home,
-  Frontend,
-  Following,
-  ProjectDetail,
-  Login
-};
+export CollectionDetail from './CollectionDetail';
+export NotFound from './NotFound';
+export Following from './Following';
+export Frontend from './Frontend';
+export Home from './Home';
+export Login from './Login';
+export ProjectDetail from './ProjectDetail';
+export ProjectResources from './ProjectResources';
+export Page from './Page';
+export ResourceDetail from './ResourceDetail';
+export EventList from './EventList';

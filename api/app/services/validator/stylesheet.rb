@@ -30,7 +30,7 @@ module Validator
       ruleset = CssParser::RuleSet.new(nil, declarations)
       ruleset.expand_shorthand!
       ruleset.each_declaration do |property, value, _important|
-        unless css_property_blacklist_for_selector(selector).include?(property)
+        unless css_property_blacklist_for_selector(selector).include?(property) || !value
           @out << "  #{property}: #{css_value_map(value)}; "
         end
       end
@@ -40,7 +40,7 @@ module Validator
     def css_property_blacklist_for_selector(selector)
       tag = rightmost_selection(selector)
       blacklist = Validator::Constants::CSS_PROPERTY_BLACKLIST
-      return blacklist if tag.include?(".") || tag.include?("#")
+      return blacklist if tag.include?(".") || tag.include?("#") || tag.include?("@")
       tag_constant = "TAG_#{tag.upcase}_CSS_PROPERTY_BLACKLIST"
       if Validator::Constants.const_defined?(tag_constant)
         blacklist |= Validator::Constants.const_get(tag_constant)

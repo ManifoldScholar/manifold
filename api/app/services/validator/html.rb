@@ -54,7 +54,7 @@ module Validator
       parent = node.parent
       node_and_siblings = parent.xpath(node.name.to_s)
       node_and_siblings.unlink
-      if index == 0
+      if index.zero?
         wrapper = parent.add_child("<#{tag}></#{tag}>").first
         wrapper.children = node_and_siblings
       else
@@ -81,7 +81,7 @@ module Validator
         return parent == "colgroup"
       when "h1", "h2", "h3", "h4", "h5", "h6"
         return parent != "h1" && parent != "h2" && parent != "h3" &&
-          parent != "h4" && parent != "h5" && parent != "h6"
+               parent != "h4" && parent != "h5" && parent != "h6"
       end
       true
     end

@@ -1,55 +1,234 @@
 .project-detail-hero {
-  @include clearfix;
+  position: relative;
+  background-color: $neutral05;
 
-  // Project Info
+  .container {
+    @include clearfix;
+    padding-top: 61px;
+    padding-bottom: 66px;
+  }
+
+  // When a hero image is present, set background properties and an overlay
+  &.hero-image {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: transparentize($neutral100, 0.3);
+      content: '';
+    }
+
+    .project-info {
+      color: $neutralWhite;
+
+      .maker-avatar figcaption, .project-title, .project-title .subtitle, .project-summary {
+        color: $neutralWhite;
+      }
+    }
+
+    .project-figure {
+      .maker-avatar figcaption, .project-title, .project-title .subtitle {
+        color: $neutralWhite;
+      }
+    }
+
+    .button-tagged, .button-tagged .tag {
+      color: $neutralWhite;
+      border-color: $neutralWhite;
+    }
+  }
+
+  // Project Makers
   // --------------------------------------------------------
-  .project-info {
-    float: left;
-    width: 65%;
-    padding-right: 12%;
+  // Note that there is only one here, but structural styles will need to be
+  // added if there are more, and potentially list markup
+  // <figure>
+  .maker-avatar {
+    // NB: This needs to be browser tested heavily before settling on this rounding method
+    img {
+      display: inline-block;
+      width: 42px;
+      height: auto;
+      margin-right: 12px;
+      vertical-align: middle;
+      border: 2px solid $neutralWhite;
+      border-radius: 100%;
 
-    // Note that there is only one here, but structural styles will need to be
-    // added if there are more, and potentially list markup
-    // <figure>
-    .maker-avatar {
+      @include respond($break60) {
+        width: 50px;
+      }
+    }
 
-      // NB: This needs to be browser tested heavily before settling on this rounding method
-      img {
-        width: 70px;
-        height: auto;
-        border-radius: 100%;
+    figcaption {
+      @include templateCopy;
+      display: inline-block;
+      margin-top: 2px;
+      font-size: 18px;
+      vertical-align: middle;
+
+      @include respond($break60) {
+        font-size: 20px;
       }
 
-      figcaption {
-        @include templateCopy;
-        margin-top: 2px;
-        font-size: $type90;
-        color: $neutral80;
+      @include respond($break75) {
+        display: block;
+      }
+    }
+  }
+
+  // Project Figure (Image and Title) showed only on mobile
+  // --------------------------------------------------------
+  .project-figure {
+    @include clearfix;
+    position: relative;
+
+
+    @include respond($break75) {
+      display: none;
+    }
+
+    .project-makers {
+      margin-bottom: 14px;
+    }
+
+    .image {
+      float: left;
+      width: 80px;
+
+      @include respond($break40) {
+        width: 25%;
+      }
+
+      img {
+        height: auto;
+        max-width: 100%;
       }
     }
 
     .project-title {
-      @include titlePrimary;
+      @include templateHead;
+      float: left;
+      width: calc(100% - 80px);
+      padding-left: 18px;
+      margin-top: 0;
+      font-size: 20px;
+      font-weight: $semibold;
+      color: $neutral75;
+
+      @include respond($break40) {
+        width: 75%;
+        padding-left: 25px;
+      }
 
       .subtitle {
-        margin-top: 18px;
+        @include subtitlePrimary;
+        color: $neutral75;
+      }
+    }
+  }
+
+  // Project Info
+  // --------------------------------------------------------
+  .project-info {
+    position: relative;
+    padding-top: 20px;
+    color: $neutral75;
+
+    @include respond($break60) {
+      padding-top: 26px;
+    }
+
+    @include respond($break75) {
+      float: left;
+      width: 70%;
+      padding-top: 0;
+      padding-right: 12%;
+    }
+
+    .project-makers {
+      display: none;
+
+      @include respond($break75) {
+        display: block;
+      }
+
+      + .project-title {
+        // Size relative to project title
+        margin-top: 1.143em;
+      }
+    }
+
+    .project-title {
+      @include templateHead;
+      display: none;
+      margin-top: 0;
+      font-size: 20px;
+      font-weight: $semibold;
+      color: $neutral75;
+
+      @include respond($break40) {
+        font-size: 24px;
+      }
+
+      @include respond($break60) {
+        font-size: 28px;
+      }
+
+      @include respond($break75) {
+        display: block;
+      }
+
+      .subtitle {
+        @include subtitlePrimary;
+        display: block;
+        // Size relative to font
+        margin-top: 0.682em;
+        font-size: 22px;
+        color: $neutral75;
       }
     }
 
     // Summary content defaults
     .project-summary {
       @include templateCopy;
-      font-size: $type60;
+      // Relative to font-size
       line-height: 1.611;
-      color: $neutralOffBlack;
+
+      @include respond($break75) {
+        margin-top: 30px;
+      }
+
+      p {
+        margin-bottom: 0.682em;
+      }
     }
 
     .project-entry {
-      width: 300px;
-      margin-top: 72px;
+      max-width: 210px;
+      margin-top: 34px;
 
-      .button-reader {
-        margin-bottom: 40px;
+      &.top {
+        margin-top: 0;
+        margin-bottom: 23px;
+
+        @include respond($break75) {
+          display: none;
+        }
+      }
+
+      &.bottom {
+        display: none;
+
+        @include respond($break75) {
+          display: block;
+        }
       }
 
       .button-toc {
@@ -59,18 +238,70 @@
 
     .button-secondary {
       width: 100%;
+
+      + .button-secondary {
+        margin-top: 14px;
+      }
+    }
+
+    .button-tagged {
+      margin-top: 21px;
+
+      @include respond($break75) {
+        display: none;
+      }
+    }
+  }
+
+  // Project Social
+  // --------------------------
+  .project-social {
+    margin-top: 20px;
+
+    .hashtag {
+      @include templateHead;
+      font-size: 17px;
+      font-weight: $semibold;
+
+      + .networks {
+        margin-top: 17px;
+      }
+    }
+
+    .networks ul {
+      @include listHorizontal;
+
+      li + li {
+        margin-left: 20px;
+      }
+
+      a {
+        font-size: 17px;
+        color: inherit;
+        text-decoration: none;
+      }
     }
   }
 
   // Project Image
   // --------------------------------------------------------
   .project-image {
+    position: relative;
+    display: none;
     float: left;
-    width: 35%;
+    width: 25%;
+
+    @include respond($break75) {
+      display: block;
+    }
 
     img {
       height: auto;
       max-width: 100%;
+    }
+
+    .button-tagged {
+      margin-top: 8px;
     }
   }
 }
