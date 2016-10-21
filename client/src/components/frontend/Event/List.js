@@ -1,26 +1,38 @@
 import React, { Component, PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
 import Teaser from './Teaser';
-import max from 'lodash/max';
-import map from 'lodash/map';
+import classNames from 'classnames';
 
 export default class EventList extends Component {
 
   static displayName = "Event.List";
 
   static propTypes = {
-    events: PropTypes.array
+    events: PropTypes.array,
+    columns: PropTypes.number,
+    limit: PropTypes.numer,
+  };
+
+  static defaultProps = {
+    columns: 2,
+    limit: 10
   };
 
   render() {
+    const listClass = classNames({
+      'event-list-primary': this.props.columns === 2,
+      'event-list-secondary': this.props.columns === 3
+    });
+
     return (
-      <ul className="event-list-primary" ref="eventList">
+      <ul className={listClass} ref="eventList">
         {this.props.events.map((event, index) => {
-          return (
-            <li key={index}>
-              <Teaser event={event} />
-            </li>
-          );
+          if (index < this.props.limit) {
+            return (
+              <li key={index}>
+                <Teaser event={event} />
+              </li>
+            );
+          }
         })}
       </ul>
     );

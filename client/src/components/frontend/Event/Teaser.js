@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import BodyAttributable from './Body/Attributable';
-import BodyModelCreation from './Body/ModelCreation';
-import BodyQuoted from './Body/ModelCreation';
+import Body from './Body/';
 import { Link } from 'react-router';
 
 export default class Teaser extends Component {
@@ -15,7 +13,7 @@ export default class Teaser extends Component {
   getPromptByType(type) {
     let output = '';
 
-    switch(type) {
+    switch (type) {
       case 'ANNOTATION_CREATED':
         output = 'Keep Reading';
         break;
@@ -29,47 +27,53 @@ export default class Teaser extends Component {
     return output;
   }
 
-  render() {
-    // Map event types to Event Body types
-    const EventBodyMap = {
-      'ANNOTATION_CREATED': {
-          component: BodyQuoted,
-          icon: 'person-word-bubble'
-      },
-      'PROJECT_CREATED': {
-        component: BodyModelCreation,
-        icon: 'egg'
-      },
-      'RESOURCE_CREATED': {
-        component: BodyModelCreation,
-        icon: 'cube-shine'
-      },
-      'TEXT_CREATED': {
-        component: BodyModelCreation,
-        icon: 'book-opening'
-      },
-      'TWEET': {
-        component: BodyAttributable,
-        icon: 'twitter'
-      }
+  getEventIcon(type) {
+    const eventIconMap = {
+      ANNOTATION_CREATED: 'person-word-bubble',
+      PROJECT_CREATED: 'egg',
+      RESOURCE_CREATED: 'cube-shine',
+      TEXT_CREATED: 'book-opening',
+      TWEET: 'twitter'
     };
 
-    const eventType = this.props.event.attributes.event_type;
+    return eventIconMap[type];
+  }
 
-    const EventBody = EventBodyMap[eventType].component;
+  getEventBody(type) {
+    let component = false;
+    switch (type) {
+      case 'ANNOTATION_CREATED':
+        component = Body.Quoted;
+        break;
+      case 'TWEET':
+        component = Body.Attributable;
+        break;
+      default:
+        component = Body.ModelCreation;
+    }
 
-    const eventLinked = this.props.event.attributes.event_url ? true : false;
-    let eventWrapperProps = {
+    return component;
+  }
+
+  render() {
+    const attr = this.props.event.attributes;
+
+    const EventBody = this.getEventBody(attr.event_type);
+    const eventLinked = attr.event_url ? true : false;
+
+    const eventWrapperProps = {
       className: 'event-tile'
     };
+
     let eventPrompt = false;
-    const EventWrapper =  eventLinked ? 'a' : 'div';
+
+    const EventWrapper = eventLinked ? 'a' : 'div';
 
     if (eventLinked) {
       eventWrapperProps.href = this.props.event.attributes.event_url;
       eventPrompt = (
         <span>
-          {this.getPromptByType(eventType)}
+          {this.getPromptByType(attr.event_type)}
           <i className="manicon manicon-arrow-long-right"></i>
         </span>
       );
@@ -77,14 +81,11 @@ export default class Teaser extends Component {
 
     return (
       <EventWrapper {...eventWrapperProps}>
-        <EventBody
-          icon={EventBodyMap[eventType].icon}
-          event={this.props.event}
-        />
+        <EventBody event={this.props.event} icon={this.getEventIcon(attr.event_type)} />
         <div className="event-prompt">
           {eventPrompt}
         </div>
       </EventWrapper>
-    )
+    );
   }
 }

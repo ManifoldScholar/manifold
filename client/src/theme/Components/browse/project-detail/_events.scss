@@ -3,29 +3,70 @@
   @include listUnstyled();
   display: flex;
   flex-wrap: wrap;
-  margin-left: -3.482vw;
+  padding-top: 20px;
 
-  @include respond($break100) {
+  @include respond($break60) {
+    padding-top: 39px;
+  }
+
+  @include respond($break60) {
     margin-left: -40px;
   }
 
   li {
     display: flex;
-    width: 33.333%;
-    padding-left: 3.482vw;
+    width: 100%;
+    margin-bottom: 28px;
 
-    @include respond($break100) {
+    @include respond($break60) {
+      width: 50%;
       padding-left: 40px;
     }
   }
 }
 
+.event-list-secondary {
+  @include listUnstyled();
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
+
+  @include respond($break60) {
+    padding-top: 39px;
+  }
+
+  @include respond($break60) {
+    margin-left: -40px;
+  }
+
+  li {
+    display: flex;
+    width: 100%;
+    margin-bottom: 28px;
+
+    @include respond($break60) {
+      width: 50%;
+      padding-left: 40px;
+    }
+
+    @include respond($break85) {
+      width: 33.333%;
+      margin-bottom: 40px;
+    }
+  }
+}
+
+// Can be a link or a div
 .event-tile {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  color: $neutralOffBlack;
+  text-decoration: none;
   background-color: $neutral05;
+  transition: color $duration $timing,
+    background-color $duration $timing;
 
   &.tweet .event-content {
     font-style: italic;
@@ -37,20 +78,35 @@
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 15px 17px 19px 36px;
+    padding: 15px 17px 19px 50px;
+
+    @include respond($break60) {
+      padding-left: 36px;
+    }
 
     .manicon {
       position: absolute;
       top: 50%;
-      left: -24px;
-      width: 48px;
-      height: 48px;
-      margin-top: -24px;
+      left: -8px;
+      width: 44px;
+      height: 44px;
+      margin-top: -22px;
+      font-size: 44px;
       // Used to hack relatively sized icons
-      font-size: 48px;
       text-align: center;
       background-color: $accentPrimary;
       border-radius: 100%;
+
+      @include respond($break60) {
+        left: -18px;
+      }
+
+      @include respond($break75) {
+        left: -24px;
+        width: 48px;
+        height: 48px;
+        font-size: 48px;
+      }
 
       // All icon sizes and padding relative to .manicon circle
       // font size
@@ -123,9 +179,14 @@
     font-size: 13px;
     color: $accentPrimaryDark;
     text-decoration: none;
+    transition: color $duration $timing;
 
     + .event-date {
       margin-top: 3px;
+    }
+
+    + .event-content {
+      padding-top: 7px;
     }
   }
 
@@ -138,6 +199,10 @@
     + .event-date {
       margin-top: 12px;
     }
+
+    + .event-user {
+      padding-top: 8px;
+    }
   }
 
   .event-date {
@@ -145,11 +210,58 @@
     display: block;
     font-size: 10px;
     color: $neutral50;
+    transition: color $duration $timing;
   }
 
   .event-prompt {
+    @include utilityPrimary;
     width: 100%;
-    min-height: 43px;
+    font-size: 12px;
+    color: $neutral50;
     background-color: $neutral10;
+    transition: color $duration $timing,
+      background-color $duration $timing;
+
+    @include respond($break60) {
+      display: flex;
+      min-height: 43px;
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      padding: 12px 17px 12px 50px;
+      margin: auto;
+      line-height: 11px;
+
+      @include respond($break60) {
+        padding: 0 17px 0 36px;
+      }
+    }
+
+    .manicon {
+      margin-left: 13px;
+      font-size: 11px;
+    }
+  }
+}
+
+// Required to add hover states to links only
+// scss-lint:disable QualifyingElement
+a.event-tile:hover {
+  color: $neutralWhite;
+  background-color: $neutral50;
+
+  .event-date {
+    color: $neutralWhite;
+  }
+
+  .event-user {
+    color: $accentPrimaryPale;
+  }
+
+  .event-prompt {
+    color: $neutralWhite;
+    background-color: $accentPrimary;
   }
 }

@@ -5,6 +5,7 @@ import {
     Following,
     Frontend,
     Home,
+    EventList,
     Login,
     NotFound,
     Page,
@@ -36,6 +37,7 @@ export default () => {
           <Route component={CollectionDetail} path="project/:id/collection/:collectionId" />
           <Route component={ProjectResources} path="project/:id/resources" />
           <Route component={ResourceDetail} path="project/:id/resources/:resourceId" />
+          <Route component={EventList} path="project/:id/events" />
           <Route component={Page} path="page/:slug" />
         </Route>
 

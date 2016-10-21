@@ -43,6 +43,8 @@ class Detail extends Component {
   }
 
   renderActivity() {
+    const project = this.props.project;
+
     if (!this.state.activity.length > 0) return null;
     return (
       <section>
@@ -52,13 +54,9 @@ class Detail extends Component {
               <i className="manicon manicon-pulse"></i>
               {'Recent Activity'}
             </h4>
-            <div className="section-heading-utility-right">
-              <Link to={`#`} className="button-primary">
-                See all Activity
-              </Link>
-            </div>
+            <Event.AllLink count={this.state.activity.length} projectId={project.id} />
           </header>
-          <Event.List events={this.state.activity} />
+          <Event.List events={this.state.activity} limit={6} columns={3} />
         </div>
       </section>
     );
