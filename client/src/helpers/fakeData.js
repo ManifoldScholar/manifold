@@ -219,8 +219,6 @@ const resourceCollections = [
       title: "Untitled"
     }
   }
-
-
 ];
 
 const events = [
@@ -230,7 +228,7 @@ const events = [
       event_type: "PROJECT_CREATED",
       event_url: undefined,
       created_at: "2016-06-18 13:55:30",
-      subject_id: 1234-1234-1234-1234,
+      subject_id: "1234-1234-1234-1234",
       subject_type: "Project",
       subject_title: "Japanese Documentary Film",
       subject_subtitle: "The Meiji Era through Hiroshima",
@@ -248,9 +246,11 @@ const events = [
       event_type: "RESOURCE_CREATED",
       event_url: "/browse/resource/1",
       created_at: "2016-7-21 13:55:30",
-      subject_id: 1234-1234-1234-1234,
+      subject_id: "1234-1234-1234-1234",
       subject_type: "Resource",
       subject_title: "Image Name Goes Here",
+      event_title: "Image Name Goes Here",
+      event_subtitle: undefined,
       subject_subtitle: undefined,
       attribution: undefined,
       attribution_url: undefined,
@@ -264,10 +264,12 @@ const events = [
       event_type: "TEXT_CREATED",
       event_url: undefined,
       created_at: "2016-8-20 13:55:30",
-      subject_id: 1234-1234-1234-1234,
+      subject_id: "1234-1234-1234-1234",
       subject_type: "Text",
       subject_title: "Japanese Documentary Film",
       subject_subtitle: "The Meiji Era through Hiroshima",
+      event_title: "Japanese Documentary Film",
+      event_subtitle: "The Meiji Era through Hiroshima",
       attribution: undefined,
       attribution_url: undefined,
       excerpt: undefined,
@@ -281,13 +283,14 @@ const events = [
       event_url: "#",
       type: "annotation_created",
       created_at: "2016-10-17 13:55:30",
-      subject_id: 1234-1234-1234-1234,
+      subject_id: "1234-1234-1234-1234",
       subject_type: "Text",
       subject_title: "Japanese Documentary Film",
       subject_subtitle: "The Meiji Era through Hiroshima",
       attribution: "Zach Davis",
       attribution_url: undefined,
-      excerpt: "Maecenas sed diam eget risus varius blandit sit amet non magna. Aenean lacinia bibendum nulla sed consectetur.",
+      excerpt: "Maecenas sed diam eget risus varius blandit sit amet non magna. " +
+        "Aenean lacinia bibendum nulla sed consectetur.",
       project_id: "AAA-BBB"
     }
   },
@@ -298,13 +301,14 @@ const events = [
       event_url: "#",
       type: "annotation_created",
       created_at: "2016-10-20 13:55:30",
-      subject_id: 1234-1234-1234-1234,
+      subject_id: "1234-1234-1234-1234",
       subject_type: "Text",
       subject_title: "Japanese Documentary Film",
       subject_subtitle: "The Meiji Era through Hiroshima",
       attribution: "Susan Doerr",
       attribution_url: undefined,
-      excerpt: "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vestibulum id ligula porta felis euismod semper.",
+      excerpt: "Praesent commodo cursus magna, vel scelerisque nisl consectetur et." +
+        " Vestibulum id ligula porta felis euismod semper.",
       project_id: "AAA-BBB"
     }
   },
@@ -314,14 +318,33 @@ const events = [
       event_type: "TWEET",
       event_url: "https://twitter.com/noctambulate/status/786361503586758656",
       created_at: "2016-10-23 13:55:30",
-      subject_id: 1234-1234-1234-1234,
+      subject_id: "1234-1234-1234-1234",
       subject_type: "Project",
       subject_title: "Japanese Documentary Film",
       subject_subtitle: "The Meiji Era through Hiroshima",
       attribution_name: "Doug Armato",
       attribution_id: "noctambulate",
       attribution_url: "https://twitter.com/noctambulate/",
-      excerpt: "The lowdown on lefse (must be russet potatoes!) from Beatrice Ojakangas at the @AmSwedInstitute @UMinnPress",
+      excerpt: "The lowdown on lefse (must be russet potatoes!) from Beatrice Ojakanga" +
+        "s at the @AmSwedInstitute @UMinnPress",
+      project_id: "AAA-BBB"
+    }
+  },
+  {
+    id: 5,
+    attributes: {
+      event_type: "ANNOTATION_CREATED",
+      event_url: "#",
+      type: "annotation_created",
+      created_at: "2016-10-20 13:55:30",
+      subject_id: "1234-1234-1234-1234",
+      subject_type: "Text",
+      subject_title: "Japanese Documentary Film",
+      subject_subtitle: "The Meiji Era through Hiroshima",
+      attribution: "Gabriel Hale Thomas Chud Marcela Masterson Blair",
+      attribution_url: undefined,
+      excerpt: "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. " +
+        "Morbi leo risus, porta ac consectetur ac, vestibulum at eros.",
       project_id: "AAA-BBB"
     }
   }
