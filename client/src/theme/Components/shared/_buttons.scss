@@ -18,22 +18,33 @@
 .button-icon-primary {
   @include buttonUnstyled;
   @include utilityPrimary;
-  padding: 16px 30px 18px;
+  display: block;
+  padding: 14px 20px 16px;
   font-size: 15px;
   font-weight: $bold;
-  line-height: 1.6;
-  color: $neutral80;
+  color: $neutral75;
+  text-align: center;
+  text-decoration: none;
   border: 3px solid $accentPrimary;
   transition: color $duration $timing, background-color $duration $timing;
 
   @include respond($break60) {
-    padding: 22px 30px 18px;
-    font-size: 17px;
+    display: inline-block;
+    height: 71px;
+    padding: 22px 30px 0;
   }
 
   &:hover {
     color: $neutralWhite;
     background-color: $accentPrimary;
+  }
+
+  span {
+    display: inline;
+
+    @include respond($break60) {
+      display: inline-block;
+    }
   }
 
   .manicon {
@@ -42,22 +53,26 @@
 
     @include respond($break60) {
       display: inline-block;
-      width: auto;
-      padding-bottom: 0;
-      margin-top: -6px;
       margin-right: 14px;
-      line-height: 1;
-      vertical-align: middle;
+      vertical-align: top;
     }
   }
 
   // Font sizes in EM to be relative to text
   .manicon-books-on-shelf {
-    font-size: 1.889em;
+    font-size: 2.4em;
+
+    @include respond($break60) {
+      margin-top: -9px;
+    }
   }
 
   .manicon-books-with-glasses {
-    font-size: 1.389em;
+    font-size: 1.933em;
+
+    @include respond($break60) {
+      margin-top: -3px;
+    }
   }
 }
 
