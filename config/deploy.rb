@@ -13,7 +13,7 @@ set :rails_env, 'production'
 
 # Linked Files
 set :linked_files, fetch(:linked_files, []).push('client/.env', 'api/.env', 'api/tmp', 'api/config/secrets.yml')
-set :linked_dirs, fetch(:linked_dirs, []).push('api/public/system', 'texts')
+set :linked_dirs, fetch(:linked_dirs, []).push('api/public/system', 'client/node_modules', 'import')
 
 # Ruby & Bundler
 set :bundle_gemfile, -> { release_path.join('api').join('Gemfile') }
@@ -21,24 +21,17 @@ set :rbenv_type, :user
 set :rbenv_ruby, File.read('api/.ruby-version').strip
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 
-# NPM
-set :npm_target_path, -> { release_path.join('client') }
-set :npm_flags, '--silent --no-spin'
-set :npm_env_variables, {}
-
-# Persist node_modules across deploys to increase deployment speed
-set :copy_files, ['client/node_modules']
-set :copy_file_flags, ""
-set :copy_dir_flags, "-R"
-before "npm:install", "deploy:copy_files"
+# Yarn
+set :yarn_target_path, -> { release_path.join('client') }
+set :yarn_flags, '--production'
 
 namespace :deploy do
 
-  after :updated, :build_client_assets do
+  after :updated, :build_client_dist do
      on roles(:app), in: :groups, limit: 3, wait: 10 do
       with path: 'node_modules/.bin:$PATH' do
         within "#{release_path}/client" do
-          execute :npm, 'run dist'
+          execute :yarn, 'run dist'
         end
       end
     end
@@ -66,17 +59,30 @@ namespace :deploy do
 end
 
 namespace :upload do
-  task :texts do
+  task :projects do
     on roles(:app) do
-      upload! './user_texts', '/home/manifold/deploy/shared/texts', recursive: true
+      upload! './import', '/home/manifold/deploy/shared/import', recursive: true
     end
   end
 end
 
-namespace :ingest do
-  task :texts do
+namespace :import do
+  task :projects do
     on roles(:app) do
-      execute 'cd /home/manifold/deploy/current/api && ./bin/rake ingest:texts'
+      with path: './bin:$PATH' do
+        within "#{current_path}/api" do
+          execute "pwd"
+          execute :which, :rails
+          execute :rails, 'import:projects["../import"]'
+        end
+        #
+
+        #   # execute "ls"
+        #   execute "echo $PATH"
+        #   execute "which rails"
+        # end
+      end
+      # execute 'cd /home/manifold/deploy/current/api && bundle exec ./bin/rails import:projects["../import"]'
     end
   end
 end

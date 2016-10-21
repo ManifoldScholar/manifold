@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/ManifoldScholar/capistrano-yarn.git
+  revision: bf87641c1118afa1db6366ffbe72af06a47141cb
+  specs:
+    capistrano-yarn (1.0.0)
+      capistrano (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -9,8 +16,6 @@ GEM
       capistrano (~> 3.1)
       sshkit (~> 1.2)
     capistrano-copy-files (0.0.1)
-      capistrano (>= 3.0.0)
-    capistrano-npm (1.0.1)
       capistrano (>= 3.0.0)
     capistrano-rails (1.1.5)
       capistrano (~> 3.1)
@@ -40,11 +45,11 @@ DEPENDENCIES
   capistrano (~> 3.4.1)
   capistrano-bundler (~> 1.1.2)
   capistrano-copy-files
-  capistrano-npm
   capistrano-rails (~> 1.1)
   capistrano-rbenv (~> 2.0)
   capistrano-touch-linked-files
+  capistrano-yarn!
   scss_lint
 
 BUNDLED WITH
-   1.11.2
+   1.13.0.rc.2

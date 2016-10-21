@@ -4,7 +4,8 @@ require 'capistrano/deploy'
 require 'capistrano/touch-linked-files'
 require 'capistrano/rbenv'
 require 'capistrano/bundler'
-require 'capistrano/npm'
+# require 'capistrano/npm'
+require 'capistrano/yarn'
 require 'capistrano/copy_files'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
