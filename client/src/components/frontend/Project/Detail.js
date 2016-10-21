@@ -56,7 +56,7 @@ class Detail extends Component {
             </h4>
             <Event.AllLink count={this.state.activity.length} projectId={project.id} />
           </header>
-          <Event.List events={this.state.activity} />
+          <Event.List events={this.state.activity} limit={6} columns={3} />
         </div>
       </section>
     );

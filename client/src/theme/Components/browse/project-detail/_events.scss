@@ -22,6 +22,32 @@
       width: 50%;
       padding-left: 40px;
     }
+  }
+}
+
+.event-list-secondary {
+  @include listUnstyled();
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
+
+  @include respond($break60) {
+    padding-top: 39px;
+  }
+
+  @include respond($break60) {
+    margin-left: -40px;
+  }
+
+  li {
+    display: flex;
+    width: 100%;
+    margin-bottom: 28px;
+
+    @include respond($break60) {
+      width: 50%;
+      padding-left: 40px;
+    }
 
     @include respond($break85) {
       width: 33.333%;
