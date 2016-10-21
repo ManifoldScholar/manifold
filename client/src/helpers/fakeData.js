@@ -329,6 +329,24 @@ const events = [
         "s at the @AmSwedInstitute @UMinnPress",
       project_id: "AAA-BBB"
     }
+  },
+  {
+    id: 5,
+    attributes: {
+      event_type: "ANNOTATION_CREATED",
+      event_url: "#",
+      type: "annotation_created",
+      created_at: "2016-10-20 13:55:30",
+      subject_id: "1234-1234-1234-1234",
+      subject_type: "Text",
+      subject_title: "Japanese Documentary Film",
+      subject_subtitle: "The Meiji Era through Hiroshima",
+      attribution: "Gabriel Hale Thomas Chud Marcela Masterson Blair",
+      attribution_url: undefined,
+      excerpt: "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. " +
+        "Morbi leo risus, porta ac consectetur ac, vestibulum at eros.",
+      project_id: "AAA-BBB"
+    }
   }
 ];
 

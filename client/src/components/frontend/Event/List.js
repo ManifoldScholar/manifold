@@ -1,8 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
 import Teaser from './Teaser';
-import max from 'lodash/max';
-import map from 'lodash/map';
 
 export default class EventList extends Component {
 
