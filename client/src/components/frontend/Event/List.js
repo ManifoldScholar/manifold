@@ -9,7 +9,7 @@ export default class EventList extends Component {
   static propTypes = {
     events: PropTypes.array,
     columns: PropTypes.number,
-    limit: PropTypes.numer,
+    limit: PropTypes.number,
   };
 
   static defaultProps = {
