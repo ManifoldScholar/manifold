@@ -1,5 +1,6 @@
 # The project model is the primary unit of Manifold.
 class Project < ActiveRecord::Base
+  
   has_many :texts
   belongs_to :published_text, class_name: "Text", optional: true
   has_many :text_categories, -> { for_text }, class_name: "Category"
@@ -8,6 +9,7 @@ class Project < ActiveRecord::Base
   include Collaborative
   include MoneyAttributes
   money_attributes :purchase_price
+
 
   has_attached_file :avatar,
                     include_updated_timestamp: false,
