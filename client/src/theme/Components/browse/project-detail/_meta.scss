@@ -18,7 +18,8 @@
 
   .meta-value {
     @include templateHead;
-    margin-top: 19px;
+    margin-top: 4px;
+    margin-bottom: 19px;
     font-size: $type100;
     color: $neutral80;
   }
