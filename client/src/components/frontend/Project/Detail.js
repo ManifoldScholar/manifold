@@ -63,6 +63,8 @@ class Detail extends Component {
   }
 
   renderMeta() {
+    const project = this.props.project;
+    if (!project.attributes.metadata) return null;
     return (
       <section>
         <div className="container">
@@ -72,7 +74,7 @@ class Detail extends Component {
               {'Metadata'}
             </h4>
           </header>
-          <Project.Meta data={this.state.meta} />
+          <Project.Meta metadata={project.attributes.metadata} />
         </div>
       </section>
     );
