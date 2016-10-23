@@ -1,10 +1,11 @@
 language: ruby
+dist: trusty
 
 rvm:
   - 2.3.1
 
-node_js:
-  - "4.5.0"
+nvm:
+  - "4.6.1"
 
 services:
   - postgresql
@@ -15,24 +16,31 @@ addons:
 before_script:
   - psql -c 'create database manifold_test;' -U postgres
 
+before_install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - sudo apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3
+  - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  - sudo apt-get update -qq
+  - sudo apt-get install -y -qq yarn
+
 env:
   global:
     - API="/home/travis/build/ManifoldScholar/manifold/api"
     - RAILS_DB_USER=postgres
     - TRAVIS_NODE_VERSION="4"
 
-install:
-  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
-
 gemfile: api/Gemfile
-cache: bundler
+
+cache:
+  bundler: true
+  directories:
+  - $HOME/.yarn-cache
 
 script:
   - cd client
-  - npm install -g npm@3.10.7
-  - npm version
-  - npm install
-  - npm run test
+  - node -v
+  - yarn install
+  - yarn run test
   - cd ../api
   - bundle install
   - ./bin/rails generate manifold:secrets
