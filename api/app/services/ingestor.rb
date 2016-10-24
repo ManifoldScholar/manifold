@@ -61,7 +61,7 @@ module Ingestor
       end
       basename = File.basename(path)
       significant "services.ingestor.logging.ingestion_start", name: basename
-      ingestion = Ingestor::Ingestion.new(path, nil, creator)
+      ingestion = Ingestor::Ingestion.new(path, creator)
       strategy = Ingestor::Strategy.for(ingestion)
       return [basename, ingestion, nil] unless strategy
       info "services.ingestor.logging.using_strategy", strategy: strategy

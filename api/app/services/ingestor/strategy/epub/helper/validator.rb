@@ -34,7 +34,6 @@ module Ingestor
               logger.debug "  local path: #{source.source_path}".light_cyan
             end
           end
-
         end
       end
     end

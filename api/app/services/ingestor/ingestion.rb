@@ -8,7 +8,7 @@ module Ingestor
   class Ingestion
     attr_accessor :basename, :source_path, :logger, :extension, :text
 
-    def initialize(path, _text = nil, creator)
+    def initialize(path, creator)
       @text ||= Text.create(creator: creator)
       @source_path = path
       @basename = File.basename(path)

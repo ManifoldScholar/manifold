@@ -22,7 +22,7 @@ module Ingestor
 
           private
 
-          def set_resource(ingestion_source, path, node_inspector, epub_inspector)
+          def set_resource(ingestion_source, _path, node_inspector, epub_inspector)
             # resource = ingestion_source.resource || ingestion_source.build_resource
             # resource.name = "source/#{path}/#{node_inspector.id}"
             ingestion_source.attachment = epub_inspector.get_rendition_source(

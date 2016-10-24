@@ -47,7 +47,7 @@ module Ingestor
           def attributes(node_inspector, section_inspector, text, index)
             body = section_inspector.body
             ingestion_source = text
-                                 .find_ingestion_source_by_identifier(node_inspector.idref)
+                               .find_ingestion_source_by_identifier(node_inspector.idref)
             {
               source_identifier: node_inspector.idref,
               position: index,
