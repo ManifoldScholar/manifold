@@ -5,7 +5,7 @@ module Ingestor
         # Creates Manifold Resources from an EPUB document.
         #
         # @author Zach Davis
-        class Resources < BaseCreator
+        class IngestionSources < BaseCreator
           DEFAULT_ATTRIBUTES = {
             kind: IngestionSource::KIND_PUBLICATION_RESOURCE
           }.freeze
@@ -14,7 +14,7 @@ module Ingestor
             ingestion_sources = nodes.each_with_index.map do |node, _index|
               node_inspector = Inspector::ManifestItem.new(node)
               ingestion_source = create_ingestion_source(node_inspector, existing)
-              create_resource(ingestion_source, path, node_inspector, epub_inspector)
+              set_resource(ingestion_source, path, node_inspector, epub_inspector)
               ingestion_source
             end
             ingestion_sources
@@ -22,10 +22,10 @@ module Ingestor
 
           private
 
-          def create_resource(ingestion_source, path, node_inspector, epub_inspector)
-            resource = ingestion_source.resource || ingestion_source.build_resource
-            resource.name = "source/#{path}/#{node_inspector.id}"
-            resource.attachment = epub_inspector.get_rendition_source(
+          def set_resource(ingestion_source, _path, node_inspector, epub_inspector)
+            # resource = ingestion_source.resource || ingestion_source.build_resource
+            # resource.name = "source/#{path}/#{node_inspector.id}"
+            ingestion_source.attachment = epub_inspector.get_rendition_source(
               node_inspector.href
             )
           end

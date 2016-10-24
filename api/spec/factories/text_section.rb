@@ -3,6 +3,6 @@ FactoryGirl.define do
     sequence(:position)
     kind TextSection::KIND_SECTION
     text
-    resource
+    ingestion_source
   end
 end

@@ -10,6 +10,7 @@ class Text < ActiveRecord::Base
   serialize :landmarks, Array
 
   include Collaborative
+  include TrackedCreator
 
   has_many :titles, class_name: "TextTitle"
   has_many :text_subjects
@@ -59,24 +60,22 @@ class Text < ActiveRecord::Base
   def section_source_map
     map = {}
     text_sections.each do |ts|
-      resource = ts.resource
-      source = ingestion_sources.find_by(resource: resource)
-      next if source.nil?
-      path = source.source_path
+      next if ts.ingestion_source.nil?
+      path = ts.ingestion_source.source_path
       map[path] = ts
     end
     map
   end
   memoize :section_source_map
 
-  def ingestion_resource_map
+  def source_path_map
     map = {}
     ingestion_sources.each do |s|
-      map[s.source_path] = s.resource.attachment.url
+      map[s.source_path] = s.attachment.url
     end
     map
   end
-  memoize :ingestion_resource_map
+  memoize :source_path_map
 
   def cover
     ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)

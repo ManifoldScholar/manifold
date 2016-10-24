@@ -26,8 +26,9 @@ module Ingestor
     # @raise [IngestionFailed] Strategies can trigger an ingestion failure by
     #   raising an IngestionFailed exception, which will be caught and logged by
     #   the ingestor.
-    def ingest(path)
-      basename, ingestion, strategy = start(path)
+    def ingest(path, creator)
+      creator ||= User.find_by(is_cli_user: true)
+      basename, ingestion, strategy = start(path, creator)
       validate_strategy(strategy)
       set_ingestion_text(strategy, ingestion)
       strategy.ingest(ingestion)
@@ -53,14 +54,14 @@ module Ingestor
 
     # @private
     # @return [Array] Array with [basename, ingestion, strategy]
-    def start(path)
+    def start(path, creator)
       unless File.exist?(path)
         raise Ingestor::IngestionFailed,
               "Could not find ingestion source"
       end
       basename = File.basename(path)
       significant "services.ingestor.logging.ingestion_start", name: basename
-      ingestion = Ingestor::Ingestion.new(path)
+      ingestion = Ingestor::Ingestion.new(path, creator)
       strategy = Ingestor::Strategy.for(ingestion)
       return [basename, ingestion, nil] unless strategy
       info "services.ingestor.logging.using_strategy", strategy: strategy

@@ -1,11 +1,11 @@
 require "rails_helper"
 
 # rubocop:disable Metrics/LineLength
-RSpec.describe Ingestor::Strategy::EPUB::Creator::Resources do
+RSpec.describe Ingestor::Strategy::EPUB::Creator::IngestionSources do
   let(:metadata_node) { File.open("#{Rails.root}/spec/data/epubs/fragments/metadata_node.xml") { |f| Nokogiri::XML(f) } }
   let(:manifest_items_node) { File.open("#{Rails.root}/spec/data/epubs/fragments/manifest_items_node.xml") { |f| Nokogiri::XML(f) } }
   let(:manifest_items) { manifest_items_node.xpath("//xmlns:item") }
-  let(:resources_creator) { Ingestor::Strategy::EPUB::Creator::Resources.new(Rails.logger, metadata_node) }
+  let(:ingestion_sources_creator) { Ingestor::Strategy::EPUB::Creator::IngestionSources.new(Rails.logger, metadata_node) }
   let(:fake_rendition_source) do
     file = StringIO.new("<body>Test</body>")
     filename = "a_file.html"
@@ -20,14 +20,14 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::Resources do
   let(:epub_inspector) { double(Ingestor::Strategy::EPUB::Inspector, get_rendition_source: fake_rendition_source) }
 
   it "responds to logger methods" do
-    expect(resources_creator).to respond_to(:info)
-    expect(resources_creator).to respond_to(:debug)
-    expect(resources_creator).to respond_to(:error)
-    expect(resources_creator).to respond_to(:warn)
+    expect(ingestion_sources_creator).to respond_to(:info)
+    expect(ingestion_sources_creator).to respond_to(:debug)
+    expect(ingestion_sources_creator).to respond_to(:error)
+    expect(ingestion_sources_creator).to respond_to(:warn)
   end
 
   it "creates an ingestion source for each manifest item" do
-    models = resources_creator.create(manifest_items, "/test-tmp-path", epub_inspector)
+    models = ingestion_sources_creator.create(manifest_items, "/test-tmp-path", epub_inspector)
     expect(!manifest_items.empty?).to be true
     expect(models.length).to eq manifest_items.length
   end
@@ -38,12 +38,12 @@ RSpec.describe Ingestor::Strategy::EPUB::Creator::Resources do
       item_inspector = Ingestor::Strategy::EPUB::Inspector::ManifestItem.new(item)
       text.ingestion_sources.build(source_identifier: item_inspector.id, kind: item_inspector.kind.presence)
     end
-    models = resources_creator.create(manifest_items, "/test-tmp-path", epub_inspector, text.ingestion_sources)
+    models = ingestion_sources_creator.create(manifest_items, "/test-tmp-path", epub_inspector, text.ingestion_sources)
     expect(models.first).to eq(text.ingestion_sources.first)
   end
 
   it "creates new ingestion sources if none exist" do
-    models = resources_creator.create(manifest_items, "/test-tmp-path", epub_inspector, [])
+    models = ingestion_sources_creator.create(manifest_items, "/test-tmp-path", epub_inspector, [])
     expect(models.length).to eq manifest_items.length
   end
 end
