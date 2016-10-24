@@ -32,7 +32,7 @@ module Ingestor
           update_rights!(text)
           update_description!(text)
           attempt_save!(text)
-          update_resources!(text)
+          update_ingestion_sources!(text)
           update_stylesheets!(text)
           update_text_sections!(text)
           attempt_save!(text)
@@ -42,7 +42,6 @@ module Ingestor
 
         def validate_text(text)
           Helper::Validator.validate_ingestion_sources(text, @logger)
-          Helper::Validator.validate_resources(text, @logger)
           Helper::Validator.validate_text_sections(text, @logger)
         end
 
@@ -121,8 +120,8 @@ module Ingestor
           end
         end
 
-        def update_resources!(text)
-          creator = Creator::Resources.new(@logger, @inspector.metadata_node)
+        def update_ingestion_sources!(text)
+          creator = Creator::IngestionSources.new(@logger, @inspector.metadata_node)
           path = text.title.parameterize.underscore
           ingestion_sources = creator.create(@inspector.manifest_item_nodes, path,
                                              @inspector, text.ingestion_sources)

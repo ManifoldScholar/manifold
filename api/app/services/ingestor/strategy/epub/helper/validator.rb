@@ -35,23 +35,6 @@ module Ingestor
             end
           end
 
-          def self.validate_resources(text, logger)
-            text.source_resources.each do |resource|
-              if resource.valid?
-                verb = resource.new_record? ? "created" : "updated"
-                size = Filesize.from("#{resource.attachment.size} B").pretty
-                logger.debug "#{verb.titlecase} resource \"#{resource.name}\"".light_cyan
-                logger.debug "  Resource file size: #{size}".light_cyan
-                # rubocop:disable Metrics/LineLength
-                logger.debug "  Resource content type: #{resource.attachment.content_type}".light_cyan
-              else
-                logger.debug "Invalid resource \"#{resource.name}\"".light_cyan
-                resource.errors.full_messages.each do |message|
-                  logger.debug "    #{message}".light_cyan
-                end
-              end
-            end
-          end
         end
       end
     end

@@ -58,11 +58,11 @@ module Ingestor
           # @return [String] the updated section body, with rewritten internal
           #   links.
           def convert_cont_doc_body(body, source_path)
-            resource_map = @text.ingestion_resource_map
+            source_path_map = @text.source_path_map
             source_map = @text.section_source_map
             body = Validator::Html.new.validate(body)
             doc = Nokogiri::HTML(body)
-            transform_doc_uris(doc, resource_map,
+            transform_doc_uris(doc, source_path_map,
                                source_map, source_path)
             doc.css("body").children.to_s.strip
           end
@@ -78,44 +78,44 @@ module Ingestor
 
           private
 
-          def transform_doc_uris(doc, resource_map, source_map, source_path)
+          def transform_doc_uris(doc, source_path_map, source_map, source_path)
             URI_ATTRIBUTES.each do |set|
               tag_name, attr_name = set
               doc.css(tag_name).each do |node|
                 next unless node.attributes[attr_name]
-                transform_node_uri(node, attr_name, resource_map,
+                transform_node_uri(node, attr_name, source_path_map,
                                    source_map, source_path)
               end
             end
           end
 
-          def transform_node_uri(node, attr_name, resource_map,
+          def transform_node_uri(node, attr_name, source_path_map,
                                  source_map, source_path)
             node.attributes[attr_name].value = map_uri(
               node.attributes[attr_name].value,
-              source_path, resource_map, source_map
+              source_path, source_path_map, source_map
             )
           end
 
           def map_uri(input_uri, cd_source_path,
-                      resource_map, section_source_map)
+                      source_path_map, section_source_map)
             new_uri = URI(input_uri)
             if !new_uri.path.blank? && !new_uri.scheme
               new_path = epub_uri_to_app_uri(new_uri, cd_source_path,
-                                             resource_map, section_source_map)
+                                             source_path_map, section_source_map)
               new_uri.path = new_path
             end
             new_uri.to_s
           end
 
           def epub_uri_to_app_uri(epub_uri, source_path,
-                                  resource_map, section_source_map)
+                                  source_path_map, section_source_map)
             abs_package_path = abs_package_path(epub_uri, source_path)
             if section_source_map.key? abs_package_path
               section_id = section_source_map[abs_package_path].id
               new_path = "/read/#{@text.id}/section/#{section_id}"
-            elsif resource_map.key? abs_package_path
-              new_path = URI(resource_map[abs_package_path]).path
+            elsif source_path_map.key? abs_package_path
+              new_path = URI(source_path_map[abs_package_path]).path
             end
             log_map_uri(abs_package_path, new_path.to_s)
             new_path
