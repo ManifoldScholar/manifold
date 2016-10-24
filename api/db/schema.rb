@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024193936) do
+ActiveRecord::Schema.define(version: 20161024193939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,23 @@ ActiveRecord::Schema.define(version: 20161024193936) do
     t.datetime "updated_at", null: false
     t.integer  "position"
     t.uuid     "project_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "event_type"
+    t.string   "event_url"
+    t.uuid     "subject_id"
+    t.string   "subject_type"
+    t.string   "subject_title"
+    t.string   "subject_subtitle"
+    t.string   "attribution_name"
+    t.string   "attribution_url"
+    t.string   "attribution_identifier"
+    t.text     "excerpt"
+    t.uuid     "project_id"
+    t.string   "event_title"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -94,6 +111,7 @@ ActiveRecord::Schema.define(version: 20161024193936) do
     t.boolean  "is_external_link", default: false
     t.text     "external_link"
     t.boolean  "open_in_new_tab",  default: false
+    t.uuid     "creator_id"
     t.index ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
   end
 
@@ -129,6 +147,7 @@ ActiveRecord::Schema.define(version: 20161024193936) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.jsonb    "metadata",                 default: {}
+    t.uuid     "creator_id"
   end
 
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -140,6 +159,7 @@ ActiveRecord::Schema.define(version: 20161024193936) do
     t.datetime "attachment_updated_at"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.uuid     "creator_id"
   end
 
   create_table "stylesheets", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -202,6 +222,7 @@ ActiveRecord::Schema.define(version: 20161024193936) do
     t.text     "structure_titles"
     t.uuid     "project_id"
     t.uuid     "category_id"
+    t.uuid     "creator_id"
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -219,6 +240,7 @@ ActiveRecord::Schema.define(version: 20161024193936) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean  "is_cli_user",           default: false
   end
 
 end

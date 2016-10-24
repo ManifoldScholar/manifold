@@ -10,6 +10,7 @@ class Text < ActiveRecord::Base
   serialize :landmarks, Array
 
   include Collaborative
+  include TrackedCreator
 
   has_many :titles, class_name: "TextTitle"
   has_many :text_subjects
@@ -72,7 +73,6 @@ class Text < ActiveRecord::Base
     ingestion_sources.each do |s|
       map[s.source_path] = s.attachment.url
     end
-    puts map
     map
   end
   memoize :source_path_map

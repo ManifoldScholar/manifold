@@ -4,12 +4,17 @@ class User < ActiveRecord::Base
   has_attached_file :avatar,
                     styles: { medium: "300x300>", thumb: "100x100>" }
 
-  has_many :annotations
-  has_many :favorites
+  has_many :annotations # TODO: refactor to use "creator_id"
+  has_many :favorites # Todo: refactor to use "creator_id"
   has_many :favorite_projects, through: :favorites, source: :favoritable,
                                source_type: "Project"
   has_many :favorite_texts, through: :favorites, source: :favoritable,
                             source_type: "Text"
+
+  has_many :created_texts, class_name: "Text", foreign_key: "creator_id"
+  has_many :created_projects, class_name: "Project", foreign_key: "creator_id"
+  has_many :created_resources, class_name: "Resource", foreign_key: "creator_id"
+  has_many :created_pages, class_name: "Page", foreign_key: "creator_id"
 
   validates :password, length: { minimum: 8 }, allow_nil: true
   validates :password, confirmation: true,

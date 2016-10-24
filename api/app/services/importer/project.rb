@@ -3,7 +3,8 @@ require "json"
 module Importer
   # This class imports a project.json file into Manifold
   class Project
-    def initialize(path)
+    def initialize(path, creator)
+      @creator = creator
       @path = path
       @project_json = read_json("project.json")
     end
@@ -16,7 +17,11 @@ module Importer
 
     # rubocop:disable Metrics/AbcSize
     def upsert_project(include_texts)
-      project = ::Project.find_or_create_by(hashtag: @project_json[:attributes][:hashtag])
+      project = ::Project.find_or_initialize_by(
+        hashtag: @project_json[:attributes][:hashtag]
+      )
+      project.creator = @creator if project.new_record?
+
       project.update(@project_json[:attributes])
       set_attachment(project, :cover, @project_json[:cover])
       set_attachment(project, :hero, @project_json[:hero])
@@ -25,7 +30,6 @@ module Importer
       excludes << "published_text_id" unless include_texts
       unset_untouched(project, @project_json[:attributes], excludes)
       project.save
-
       import_collaborators(project)
       import_published_text(project, @project_json[:published_text]) if include_texts
     end
@@ -62,7 +66,8 @@ module Importer
     def import_published_text(project, text_file_name)
       text_path = "#{@path}/texts/#{text_file_name}"
       Ingestor.logger = Logger.new(STDOUT)
-      text = Ingestor.ingest(text_path)
+      Ingestor.logger.level = Logger.const_get(:DEBUG)
+      text = Ingestor.ingest(text_path, @creator)
       Ingestor.reset_logger
       text.project = project
       project.published_text = text
@@ -74,6 +79,7 @@ module Importer
       exclude << "id"
       exclude << "created_at"
       exclude << "updated_at"
+      exclude << "creator_id"
       fields = model.class.column_names.map(&:to_sym)
       touched = attributes.keys
       unset = (fields - touched).reject do |key|

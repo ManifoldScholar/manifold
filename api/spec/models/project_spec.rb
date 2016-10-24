@@ -36,4 +36,16 @@ RSpec.describe Project, type: :model do
       .allowing("image/png", "image/gif", "image/jpg", "image/jpeg", "image/svg+xml")
       .rejecting("text/plain", "text/xml")
   end
+
+  it "is valid with a creator" do
+    creator = FactoryGirl.create(:user)
+    project = FactoryGirl.create(:project, creator: creator)
+    expect(project).to be_valid
+  end
+
+  it "is invalid without a creator" do
+    project = FactoryGirl.build(:project, creator: nil)
+    expect(project).to_not be_valid
+  end
+
 end

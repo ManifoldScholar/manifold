@@ -20,5 +20,4 @@ class TextSection < ActiveRecord::Base
   def next_section
     text.section_after(position)
   end
-
 end

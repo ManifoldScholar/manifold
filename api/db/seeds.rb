@@ -1,8 +1,16 @@
-# This file should contain all the record creation needed to seed the database
-# with its default values. The data can then be loaded with the rake db:seed
-# (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'securerandom'
+
+admin_user = User.find_or_initialize_by(
+  email: "cli@manifold",
+  first_name: "CLI",
+  last_name: "User",
+  is_cli_user: true,
+)
+
+if admin_user.new_record?
+  pw = SecureRandom.hex
+  admin_user.password = pw
+  admin_user.password_confirmation = pw
+  puts admin_user.valid?
+  admin_user.save
+end
