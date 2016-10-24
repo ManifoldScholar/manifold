@@ -22,6 +22,8 @@ gem "friendly_id"
 gem "validate_url"
 gem "money"
 gem "bundler", "~>1.13.6"
+gem "sidekiq", "4.2.3"
+gem "foreman", "0.82.0"
 
 group :development, :test do
   gem "rspec-rails", "~> 3.5.0"
@@ -37,3 +39,5 @@ group :development do
   gem "spring-commands-rspec"
   gem "rubocop"
 end
+
+

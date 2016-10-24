@@ -1,0 +1,3 @@
+web: ./bin/puma
+worker: ./bin/sidekiq
+log: tail -f -n0 log/development.log

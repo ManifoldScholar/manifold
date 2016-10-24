@@ -61,6 +61,7 @@ GEM
       climate_control (>= 0.0.3, < 1.0)
     colorize (0.8.1)
     concurrent-ruby (1.0.2)
+    connection_pool (2.2.0)
     css_parser (1.4.5)
       addressable
     diff-lcs (1.2.5)
@@ -75,6 +76,8 @@ GEM
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
     filesize (0.1.1)
+    foreman (0.82.0)
+      thor (~> 0.19.1)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
     globalid (0.3.7)
@@ -121,6 +124,8 @@ GEM
     puma (3.6.0)
     rack (2.0.1)
     rack-cors (0.4.0)
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0.1)
@@ -148,6 +153,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (11.3.0)
+    redis (3.3.1)
     rspec-core (3.5.3)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -173,6 +179,11 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
     rubyzip (1.2.0)
+    sidekiq (4.2.3)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (>= 1.5.0)
+      redis (~> 3.2, >= 3.2.1)
     sixarm_ruby_unaccent (1.1.1)
     spring (1.7.2)
     spring-commands-rspec (1.0.4)
@@ -209,6 +220,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.7)
   faker!
   filesize (~> 0.1.1)
+  foreman (= 0.82.0)
   friendly_id
   httparty (~> 0.14.0)
   jwt (~> 1.5.6)
@@ -228,6 +240,7 @@ DEPENDENCIES
   rspec-support (~> 3.5.0)
   rubocop
   rubyzip (>= 1.2.0)
+  sidekiq (= 4.2.3)
   spring
   spring-commands-rspec
   validate_url
