@@ -20,7 +20,7 @@
 
     .manicon {
       display: inline-block;
-      margin-right: 10px;
+      margin-right: 14px;
       color: $neutral40;
       vertical-align: middle;
       // React generated wrapper
@@ -34,7 +34,7 @@
     // in tandem with headline
 
     .manicon-books-on-shelf {
-      font-size: 1.231em;
+      font-size: 1.385em;
     }
 
     .manicon-books-stack {
@@ -42,29 +42,35 @@
     }
 
     .manicon-books-with-glasses {
-      font-size: 1.1em;
+      margin-top: -0.125em;
+      font-size: 1.231em;
     }
 
     .manicon-cube-shine {
-      margin-right: 0.289em;
-      font-size: 1.731em;
+      margin-top: -0.294em;
+      margin-right: 14px;
+      font-size: 1.962em;
     }
 
     .manicon-lamp {
-      font-size: 1.577em;
+      margin-top: -0.156em;
+      font-size: 1.731em;
     }
 
     .manicon-new-round {
-      font-size: 1.769em;
+      margin-top: -0.061em;
+      margin-right: 13px;
+      font-size: 1.885em;
       color: $accentPrimary;
     }
 
     .manicon-pulse {
-      font-size: 29px;
+      margin-top: -0.261em;
+      font-size: 0.885em;
     }
 
     .manicon-tag {
-      font-size: 47px;
+      font-size: 1.385em;
     }
   }
 
