@@ -202,6 +202,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.2)
   bcrypt (~> 3.1.11)
+  bundler (~> 1.13.6)
   colorize
   css_parser
   dotenv-rails
@@ -232,4 +233,4 @@ DEPENDENCIES
   validate_url
 
 BUNDLED WITH
-   1.11.2
+   1.13.6

@@ -42,6 +42,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler (~> 1.13.6)
   capistrano (~> 3.4.1)
   capistrano-bundler (~> 1.1.2)
   capistrano-copy-files
@@ -52,4 +53,4 @@ DEPENDENCIES
   scss_lint
 
 BUNDLED WITH
-   1.13.0.rc.2
+   1.13.6

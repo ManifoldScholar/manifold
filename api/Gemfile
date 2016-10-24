@@ -21,6 +21,7 @@ gem "dotenv-rails"
 gem "friendly_id"
 gem "validate_url"
 gem "money"
+gem "bundler", "~>1.13.6"
 
 group :development, :test do
   gem "rspec-rails", "~> 3.5.0"
