@@ -5,12 +5,14 @@ class Project < ActiveRecord::Base
   has_many :text_categories, -> { for_text }, class_name: "Category"
   has_many :resource_categories, -> { for_resource }, class_name: "Category"
   has_many :favorites, as: :favoritable, dependent: :destroy
+  has_many :events, -> { order "events.created_at DESC" }
 
   include TrackedCreator
   include Collaborative
   include MoneyAttributes
   money_attributes :purchase_price
 
+  after_commit :trigger_creation_event, on: [:create, :update]
 
   has_attached_file :avatar,
                     include_updated_timestamp: false,
@@ -71,5 +73,11 @@ class Project < ActiveRecord::Base
   def hero_url
     return nil if hero.url(:background).blank?
     ENV["API_DOMAIN"] + hero.url(:background)
+  end
+
+  private
+
+  def trigger_creation_event
+    Event.trigger(Event::PROJECT_CREATED, self)
   end
 end

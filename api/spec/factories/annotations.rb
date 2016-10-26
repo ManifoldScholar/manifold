@@ -5,7 +5,7 @@ FactoryGirl.define do
     start_char 1
     end_char 1
     subject "MyText"
-    user_id 1
-    section_id ""
+    text_section
+    association :creator, factory: :user
   end
 end

@@ -6,7 +6,9 @@ module Api
 
       # GET /projects
       def index
-        @projects = Project.includes(:makers, :creators, :contributors).filtered(filter_params)
+        @projects = Project
+                    .includes(:makers, :creators, :contributors)
+                    .filtered(filter_params)
         render json: @projects,
                include: %w(creators collaborators),
                each_serializer: ProjectPartialSerializer
@@ -15,7 +17,7 @@ module Api
       # GET /projects/1
       def show
         render json: @project,
-               include: %w(creators collaborators texts text_categories)
+               include: %w(creators collaborators texts text_categories events)
       end
 
       # POST /projects

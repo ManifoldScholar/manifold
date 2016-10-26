@@ -9,6 +9,7 @@ class TextSection < ActiveRecord::Base
   belongs_to :ingestion_source
   has_many :annotations
   delegate :source_path, to: :ingestion_source
+  delegate :project, to: :text
 
   validates :position, numericality: { only_integer: true }
   validates :kind, inclusion: { in: ALLOWED_KINDS }

@@ -5,6 +5,10 @@ class Annotation < ApplicationRecord
   TYPE_ANNOTATION = "annotation".freeze
   TYPE_HIGHLIGHT = "highlight".freeze
 
+  include TrackedCreator
+
   belongs_to :text_section
-  belongs_to :user
+
+  delegate :text, to: :text_section
+  delegate :project, to: :text
 end

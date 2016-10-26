@@ -48,4 +48,16 @@ RSpec.describe Project, type: :model do
     expect(project).to_not be_valid
   end
 
+  it "triggers an event on create" do
+    expect {
+      project = FactoryGirl.create(:project)
+    }.to have_enqueued_job(CreateEventJob)
+  end
+
+  it "does not trigger an event on new" do
+    expect {
+      project = FactoryGirl.build(:project)
+    }.to_not have_enqueued_job(CreateEventJob)
+  end
+
 end

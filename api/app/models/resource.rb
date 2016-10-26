@@ -2,6 +2,8 @@
 class Resource < ActiveRecord::Base
   include TrackedCreator
 
+  belongs_to :project
+
   has_attached_file :attachment, include_updated_timestamp: false
   validates_attachment_content_type :attachment, content_type: %w(
     image/gif

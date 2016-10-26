@@ -12,6 +12,7 @@ class IngestionSource < ActiveRecord::Base
   ].freeze
 
   belongs_to :text
+  delegate :project, to: :text
 
   has_attached_file :attachment, include_updated_timestamp: false
   validates_attachment_content_type :attachment, content_type: %w(

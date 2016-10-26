@@ -1,6 +1,6 @@
 class CreateEvents < ActiveRecord::Migration[5.0]
   def change
-    create_table :events do |t|
+    create_table :events, id: :uuid do |t|
       t.string :event_type
       t.string :event_url
       t.uuid :subject_id, foreign_key: true

@@ -11,4 +11,10 @@ RSpec.describe IngestionSource, type: :model do
     ingestion_source.text = text
     expect(ingestion_source.text).to be text
   end
+
+  it "belongs to a project" do
+    ingestion_source = FactoryGirl.create(:ingestion_source)
+    expect(ingestion_source.project).to be_a Project
+  end
+
 end
