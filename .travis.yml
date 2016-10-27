@@ -45,3 +45,6 @@ script:
   - bundle install
   - ./bin/rails generate manifold:secrets
   - bundle exec rspec spec -fd
+
+notifications:
+  slack: manifold-scholarship:zDJbq4uqW2B9puU6l8fhwuMa
