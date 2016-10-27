@@ -108,8 +108,6 @@ class Annotatable extends Component {
 
   // Maps the browser selection to a range object.
   mapSelectionToRange(selection) {
-    console.log(selection, 'selection');
-    console.log(selection.getRangeAt(0), 'range');
     return selection.getRangeAt(0);
   }
 
@@ -178,8 +176,6 @@ class Annotatable extends Component {
   annotateSelection(event) {
     event.stopPropagation();
     const annotation = this.mapSelectionToAnnotation(this.state.selection, 'annotation');
-    console.log(this.state.selection, 'selection');
-    console.log(annotation, 'annotation');
     this.props.createAnnotation(this.props.sectionId, annotation);
     setTimeout(() => {
       this.updateStateSelection(null);
@@ -198,7 +194,7 @@ class Annotatable extends Component {
   }
 
   shareSelection() {
-    console.log(this.state.selection.text);
+    // console.log(this.state.selection.text);
   }
 
   render() {

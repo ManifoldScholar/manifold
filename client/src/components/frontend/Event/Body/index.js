@@ -1,9 +1,11 @@
-import Attributable from './Attributable.js';
-import ModelCreation from './ModelCreation.js';
-import Quoted from './Quoted.js';
+import Attributable from './Attributable';
+import Created from './Created';
+import Quoted from './Quoted';
+import Added from './Added';
 
 export default {
   Attributable,
-  ModelCreation,
+  Created,
+  Added,
   Quoted
 };

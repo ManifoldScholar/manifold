@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import moment from 'moment';
 
-export default class EventBodyAttributable extends Component {
+export default class EventBodyCreated extends Component {
 
-  static displayName = "Event.Body.Attributable";
+  static displayName = "Event.Body.Created";
 
   static propTypes = {
     event: PropTypes.object,
@@ -19,16 +20,16 @@ export default class EventBodyAttributable extends Component {
         {/* Event-data requires a classless empty div for vertical alignment */}
         <div>
           <i className={iconClass}></i>
-          <div className="event-user">
-            {'@' + attr.attributionId}
-          </div>
-          <div className="event-content">
-            <p>
-              {attr.excerpt}
-            </p>
-          </div>
+          <h5 className="event-title">
+            {attr.eventTitle}
+          </h5>
+      <span className="event-subtitle">
+        {attr.eventSubtitle}
+      </span>
           <datetime className="event-date">
-            {attr.createdAt}
+            {attr.subjectType === "Project" ?
+              `Started ${moment(attr.createdAt).format("MMMM Do, YYYY")}`
+            : null}
           </datetime>
         </div>
       </div>
