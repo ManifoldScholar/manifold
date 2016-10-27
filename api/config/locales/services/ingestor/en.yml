@@ -9,3 +9,10 @@ en:
         ingestion_end: '%{name} ingested!'
       failures:
         strategy_not_found: 'Could not find strategy'
+    factory:
+      event:
+        event_title:
+          project_created: "Project Kickoff"
+          text_added: "Text Added"
+        event_subtitle:
+          project_created: "A Manifold project is born!"

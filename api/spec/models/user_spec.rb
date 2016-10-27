@@ -64,6 +64,11 @@ RSpec.describe User, type: :model do
     expect(user.last_name).to eq("Rambo")
   end
 
+  it "returns the user's name" do
+    user = FactoryGirl.build(:user, name: "John Rambo")
+    expect(user.name).to eq("John Rambo")
+  end
+
   context "already exists" do
     let(:user) do
       u = FactoryGirl.create(:user, password: "password", password_confirmation: "password")

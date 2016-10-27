@@ -35,7 +35,7 @@ export default class LayoutButtonNavigation extends Component {
   matchButtonWidths() {
     if (!this._browseButtonEl || !this._followingButtonEl) return;
     // This currently gets the wrong measurement most of the time
-    console.log(this._followingButtonEl.offsetWidth, 'offset width');
+    // console.log(this._followingButtonEl.offsetWidth, 'offset width');
     const target = this._followingButtonEl.offsetWidth;
     this._browseButtonEl.style.width = `${target}px`;
   }

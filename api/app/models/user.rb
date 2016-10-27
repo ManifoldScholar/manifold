@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     self.last_name = last
   end
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def avatar_url
     return nil unless avatar.present?
     ENV["API_DOMAIN"] + avatar.url

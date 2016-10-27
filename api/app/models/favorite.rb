@@ -7,4 +7,10 @@ class Favorite < ActiveRecord::Base
 
   scope :only_projects, -> { where(favoritable_type: "Project") }
   scope :only_texts, -> { where(favoritable_type: "Text") }
+
+  def project
+    return favoritable if favoritable.instance_of?(Project)
+    return favoritable.project if favoritable.respond_to?(:project)
+    nil
+  end
 end

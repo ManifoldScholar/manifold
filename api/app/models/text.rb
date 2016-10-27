@@ -12,6 +12,8 @@ class Text < ActiveRecord::Base
   include Collaborative
   include TrackedCreator
 
+  default_scope { includes(:titles, :text_subjects, :category) }
+
   has_many :titles, class_name: "TextTitle"
   has_many :text_subjects
   has_many :subjects, through: :text_subjects
@@ -24,6 +26,8 @@ class Text < ActiveRecord::Base
   belongs_to :category, optional: true
 
   validates :unique_identifier, presence: true
+
+  after_commit :trigger_text_added_event, on: [:create, :update]
 
   def title
     main_title = if new_record?
@@ -93,5 +97,11 @@ class Text < ActiveRecord::Base
 
   def published?
     project && project.published_text == self
+  end
+
+  private
+
+  def trigger_text_added_event
+    Event.trigger(Event::TEXT_ADDED, self) if project
   end
 end

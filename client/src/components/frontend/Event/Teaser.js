@@ -29,10 +29,10 @@ export default class Teaser extends Component {
 
   getEventIcon(type) {
     const eventIconMap = {
-      ANNOTATION_CREATED: 'person-word-bubble',
+      ANNOTATION_ADDED: 'person-word-bubble',
       PROJECT_CREATED: 'egg',
-      RESOURCE_CREATED: 'cube-shine',
-      TEXT_CREATED: 'book-opening',
+      RESOURCE_ADDED: 'cube-shine',
+      TEXT_ADDED: 'book-opening',
       TWEET: 'twitter'
     };
 
@@ -48,8 +48,11 @@ export default class Teaser extends Component {
       case 'TWEET':
         component = Body.Attributable;
         break;
+      case 'TEXT_ADDED':
+        component = Body.Added;
+        break;
       default:
-        component = Body.ModelCreation;
+        component = Body.Created;
     }
 
     return component;
@@ -58,7 +61,7 @@ export default class Teaser extends Component {
   render() {
     const attr = this.props.event.attributes;
 
-    const EventBody = this.getEventBody(attr.event_type);
+    const EventBody = this.getEventBody(attr.eventType);
     const eventLinked = attr.event_url ? true : false;
 
     const eventWrapperProps = {
@@ -70,10 +73,10 @@ export default class Teaser extends Component {
     const EventWrapper = eventLinked ? 'a' : 'div';
 
     if (eventLinked) {
-      eventWrapperProps.href = this.props.event.attributes.event_url;
+      eventWrapperProps.href = this.props.event.attributes.eventUrl;
       eventPrompt = (
         <span>
-          {this.getPromptByType(attr.event_type)}
+          {this.getPromptByType(attr.eventType)}
           <i className="manicon manicon-arrow-long-right"></i>
         </span>
       );
@@ -81,7 +84,7 @@ export default class Teaser extends Component {
 
     return (
       <EventWrapper {...eventWrapperProps}>
-        <EventBody event={this.props.event} icon={this.getEventIcon(attr.event_type)} />
+        <EventBody event={this.props.event} icon={this.getEventIcon(attr.eventType)} />
         <div className="event-prompt">
           {eventPrompt}
         </div>

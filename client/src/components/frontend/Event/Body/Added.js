@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import moment from 'moment';
 
-export default class EventBodyModelCreation extends Component {
+export default class EventBodyAdded extends Component {
 
-  static displayName = "Event.Body.ModelCreation";
+  static displayName = "Event.Body.Added";
 
   static propTypes = {
     event: PropTypes.object,
@@ -20,13 +21,13 @@ export default class EventBodyModelCreation extends Component {
         <div>
           <i className={iconClass}></i>
           <h5 className="event-title">
-            {attr.event_title}
+            {attr.subjectTitle}
           </h5>
-      <span className="event-subtitle">
-        {attr.event_subtitle}
+          <span className="event-subtitle">
+        {attr.subjectSubtitle}
       </span>
           <datetime className="event-date">
-            {'Text added ' + attr.created_at}
+            {`Text Added ${moment(attr.createdAt).format("MMMM Do, YYYY")}`}
           </datetime>
         </div>
       </div>

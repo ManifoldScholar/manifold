@@ -72,7 +72,7 @@ export default class ApiClient {
     }
     return response.json().then(
       (json) => { return { json, response }; },
-      () => { console.log('in here zd#2'); return Promise.reject({ response }); }
+      () => { console.log('API response error #4'); return Promise.reject({ response }); }
     );
   };
 

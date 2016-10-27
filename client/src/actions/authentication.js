@@ -43,7 +43,6 @@ export function startLogin(email, password, scope = "signInUp") {
     dispatch(createAction(actions.START_LOGIN)());
     const promise = tokensAPI.createToken(email, password);
     promise.then((response) => {
-      console.log(response, 'resp');
       const authToken = response.meta.authToken;
       if (!authToken) {
         dispatch({ type: 'SET_AUTH_ERROR', payload: generateErrorPayload(500) });

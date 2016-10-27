@@ -11,6 +11,5 @@ if admin_user.new_record?
   pw = SecureRandom.hex
   admin_user.password = pw
   admin_user.password_confirmation = pw
-  puts admin_user.valid?
   admin_user.save
 end

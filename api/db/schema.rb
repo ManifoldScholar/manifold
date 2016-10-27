@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024193939) do
+ActiveRecord::Schema.define(version: 20161026163434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,11 +22,11 @@ ActiveRecord::Schema.define(version: 20161024193939) do
     t.integer  "start_char"
     t.integer  "end_char"
     t.text     "subject"
-    t.uuid     "user_id"
     t.uuid     "text_section_id"
     t.string   "format"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.uuid     "creator_id"
   end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20161024193939) do
     t.uuid     "project_id"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "event_type"
     t.string   "event_url"
     t.uuid     "subject_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20161024193939) do
     t.string   "event_title"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "event_subtitle"
   end
 
   create_table "favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -160,6 +161,8 @@ ActiveRecord::Schema.define(version: 20161024193939) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.uuid     "creator_id"
+    t.integer  "project_id"
+    t.index ["project_id"], name: "index_resources_on_project_id", using: :btree
   end
 
   create_table "stylesheets", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

@@ -43,5 +43,7 @@ module ManifoldApi
     config.api_only = true
 
     config.x.client = config_for(:client)
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
