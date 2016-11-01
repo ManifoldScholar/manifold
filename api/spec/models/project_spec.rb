@@ -29,9 +29,15 @@ RSpec.describe Project, type: :model do
     expect(project.contributors.length).to be 2
   end
 
-  it { is_expected.to have_attached_file(:cover) }
-  it { is_expected.to_not validate_attachment_presence(:cover) }
-  it do
+  it "has a cover attachment" do
+    is_expected.to have_attached_file(:cover)
+  end
+
+  it "does not require a cover" do
+    is_expected.to_not validate_attachment_presence(:cover)
+  end
+
+  it "validates the cover attachment type" do
     is_expected.to validate_attachment_content_type(:cover)
       .allowing("image/png", "image/gif", "image/jpg", "image/jpeg", "image/svg+xml")
       .rejecting("text/plain", "text/xml")
@@ -58,6 +64,35 @@ RSpec.describe Project, type: :model do
     expect {
       project = FactoryGirl.build(:project)
     }.to_not have_enqueued_job(CreateEventJob)
+  end
+
+  it "returns an array when tweet_fetch_config is not configured" do
+    project = FactoryGirl.build(:project, tweet_fetch_config: {})
+    expect(project.twitter_following).to be_a Array
+  end
+
+  it "transforms twitter_following to HashWIthIndifferentAccess" do
+    project = FactoryGirl.build(:project, tweet_fetch_config: {
+      following: [
+        {user: "someUser", hashtag: "SomeHashTag"}
+      ]
+    })
+    following = project.twitter_following
+    expect(following[0][:user]).to be_a String
+  end
+
+  it "reports that it's not following twitter accounts if none are configured" do
+    project = FactoryGirl.build(:project, tweet_fetch_config: {
+      following: [
+        {user: "someUser", hashtag: "SomeHashTag"}
+      ]
+    })
+    expect(project.following_twitter_accounts?).to be true
+  end
+
+  it "reports that it's not following twitter accounts if at least one isconfigured" do
+    project = FactoryGirl.build(:project, tweet_fetch_config: {})
+    expect(project.following_twitter_accounts?).to be false
   end
 
 end

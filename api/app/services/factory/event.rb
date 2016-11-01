@@ -4,9 +4,11 @@ module Factory
     def create(event_type, subject_id: nil, subject_type: nil, subject: nil)
       subject = resolve_subject(subject_id, subject_type, subject)
       raise_no_subject unless subject
-      event = ::Event.find_or_create_by(subject: subject,
-                                        event_type: event_type,
-                                        project: subject_project(subject))
+      event = ::Event.find_or_create_by(
+        subject: subject,
+        event_type: event_type,
+        project: subject_project(subject)
+      )
       event.update(event_title: event_title(event_type),
                    event_subtitle: event_subtitle(event_type),
                    subject_title: subject_title(event_type, subject),
@@ -15,6 +17,35 @@ module Factory
       log_event_errors(event)
       event
     end
+
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
+    def create_from_tweet(tweet, project)
+      subject = project
+      raise_no_subject unless subject
+      event = ::Event.find_or_create_by(
+        event_type: ::Event::TWEET,
+        project: project,
+        subject: project,
+        external_subject_id: tweet.id,
+        external_subject_type: "Tweet"
+      )
+      event.update(
+        event_title: "Tweet Created",
+        event_subtitle: nil,
+        subject_title: "@#{tweet.user.screen_name}",
+        excerpt: tweet.text,
+        created_at: tweet.created_at,
+        attribution_name: tweet.user.name,
+        attribution_url: tweet.user.uri,
+        attribution_identifier: tweet.user.screen_name,
+        event_url: tweet.uri
+      )
+      log_event_errors(event)
+      event
+    end
+    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     private
 

@@ -24,6 +24,9 @@ gem "money"
 gem "bundler", "~>1.13.6"
 gem "sidekiq", "4.2.3"
 gem "foreman", "0.82.0"
+gem "clockwork", "2.0.0"
+gem "twitter", "5.16.0"
+gem "kaminari", "0.17.0"
 
 group :development, :test do
   gem "rspec-rails", "~> 3.5.0"
