@@ -19,6 +19,17 @@ export default {
     };
   },
 
+  events(id, page = {}) {
+    return {
+      endpoint: `/api/v1/projects/${id}/events`,
+      method: 'GET',
+      options: {
+        params: { page }
+      }
+    };
+  },
+
+
   featured(limit = 6) {
     const filter = { featured: true };
     const page = { limit };

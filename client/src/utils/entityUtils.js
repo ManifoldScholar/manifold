@@ -75,3 +75,9 @@ export function select(requestMeta, entityStore) {
   }
   return selectEntity(response, entityStore.entities);
 }
+
+export function meta(requestMeta, entityStore) {
+  const response = get(entityStore, `responses.${requestMeta}`);
+  if (!response) return {};
+  return response.meta;
+}

@@ -72,7 +72,7 @@ export default class ProjectHero extends Component {
           <div className={wrapperClass}>
             {output}
           </div>
-        )
+        );
       }
     }
 

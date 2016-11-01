@@ -174,7 +174,7 @@
     font-size: 12px;
   }
 
-  .event-user {
+  .event-user, .event-user a {
     @include templateHead;
     font-size: 13px;
     color: $accentPrimaryDark;
@@ -195,6 +195,11 @@
     font-size: 13px;
     line-height: 1.313em;
     letter-spacing: 0.03em;
+
+    a {
+      color: $accentPrimaryDark;
+      text-decoration: none;
+    }
 
     + .event-date {
       margin-top: 12px;
@@ -221,6 +226,11 @@
     background-color: $neutral10;
     transition: color $duration $timing,
       background-color $duration $timing;
+
+    a {
+      color: $neutral50;
+      text-decoration: none;
+    }
 
     @include respond($break60) {
       display: flex;

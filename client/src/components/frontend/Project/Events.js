@@ -3,11 +3,12 @@ import { Utility, Event, Layout } from 'components/frontend';
 
 export default class ProjectEvents extends Component {
 
-  static displayName = "Project.Resources"
+  static displayName = "Project.Events"
 
   static propTypes = {
     project: PropTypes.object,
-    events: PropTypes.array
+    events: PropTypes.array,
+    pagination: PropTypes.object
   };
 
   render() {
@@ -30,7 +31,11 @@ export default class ProjectEvents extends Component {
               </h4>
             </header>
 
-            <Event.List events={this.props.events} />
+            <Event.List
+              project={this.props.project}
+              events={this.props.events}
+              pagination={this.props.pagination}
+            />
           </div>
         </section>
         <Layout.ButtonNavigation />

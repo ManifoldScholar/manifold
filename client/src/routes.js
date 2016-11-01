@@ -37,7 +37,7 @@ export default () => {
           <Route component={CollectionDetail} path="project/:id/collection/:collectionId" />
           <Route component={ProjectResources} path="project/:id/resources" />
           <Route component={ResourceDetail} path="project/:id/resources/:resourceId" />
-          <Route component={EventList} path="project/:id/events" />
+          <Route component={EventList} path="project/:id/events(/:page)" />
           <Route component={Page} path="page/:slug" />
         </Route>
 
