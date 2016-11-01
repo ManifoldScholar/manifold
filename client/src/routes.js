@@ -16,6 +16,8 @@ import {
 } from 'containers/frontend';
 import { Developer } from 'containers/developer';
 import { Reader } from 'containers/reader';
+import { Backend, Dashboard } from 'containers/backend';
+
 import { Section, AnnotationTools } from 'components/reader';
 import { FormsStatic } from './components/frontend';
 
@@ -30,6 +32,27 @@ export default () => {
           <Route component={Section} path="section/:sectionId" />
           <Route component={AnnotationTools} path="annotation-tools" />
         </Route>
+
+        <Route component={Backend} path="/backend" >
+          <IndexRoute component={Dashboard} />
+          <Route component={ProjectDetail.Wrapper} path="project/:id" >
+            <IndexRoute component={ProjectDetail.General} />
+            <Route component={ProjectDetail.Texts} path="texts" />
+            <Route component={ProjectDetail.Resources} path="resources" />
+            <Route component={ProjectDetail.Metadata} path="metadata" />
+          </Route>
+          <Route component={TextDetail.Wrapper} path="text/:id" >
+            <IndexRoute component={TextDetail.General} />
+            <Route component={TextDetail.Ingestion} path="ingestion" />
+            <Route component={TextDetail.Sections} path="sections" />
+            <Route component={TextDetail.Metadata} path="metadata" />
+          </Route>
+          <Route component={Users.Wrapper} path="users" >
+            <IndexRoute component={Users.List} />
+
+          </Route>
+        </Route>
+
 
         <Route component={Frontend} path="/browse" >
           <IndexRoute component={Home} />
