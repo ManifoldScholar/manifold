@@ -62,17 +62,17 @@ class Project < ActiveRecord::Base
 
   def avatar_url
     return nil if avatar.url(:thumb).blank?
-    ENV["API_DOMAIN"] + avatar.url(:thumb)
+    ENV["API_URL"] + avatar.url(:thumb)
   end
 
   def cover_url
     return nil if cover.url(:hero).blank?
-    ENV["API_DOMAIN"] + cover.url(:hero)
+    ENV["API_URL"] + cover.url(:hero)
   end
 
   def hero_url
     return nil if hero.url(:background).blank?
-    ENV["API_DOMAIN"] + hero.url(:background)
+    ENV["API_URL"] + hero.url(:background)
   end
 
   private

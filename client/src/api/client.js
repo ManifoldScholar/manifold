@@ -23,7 +23,7 @@ export class LowLevelApiClient {
   }
 
   _adjustedEndpoint(endpoint) {
-    const out = __MANIFOLD_API_URL__ + endpoint;
+    const out = __API_URL__ + endpoint;
     return out;
   }
 

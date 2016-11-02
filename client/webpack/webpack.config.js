@@ -82,7 +82,7 @@ if (__CLIENT__ && __PRODUCTION__) {
 
 // Push those globals, yo.
 plugins.push(new webpack.DefinePlugin({
-    __MANIFOLD_API_URL__: '"' +  global.__MANIFOLD_API_URL__ + '"',
+    __API_URL__: '"' +  global.__API_URL__ + '"',
     __CLIENT__: global.__CLIENT__,
     __SERVER__: global.__SERVER__,
     __DEVELOPMENT__: global.__DEVELOPMENT__,

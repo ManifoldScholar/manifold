@@ -43,7 +43,7 @@
       "src"
     ],
     "globals": {
-      "__MANIFOLD_API_URL__": "http://manifold-api.dev:80",
+      "__API_URL__": "http://manifold-api.dev:80",
       "__CLIENT__": true,
       "__SERVER__": false,
       "__DEVELOPMENT__": true,

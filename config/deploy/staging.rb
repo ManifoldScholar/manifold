@@ -1,1 +1,1 @@
-server 'manifold.cic-stg.com', user: 'manifold', roles: %w{app db web}
+server "manifold-stg.cicnode.com", user: "manifold", roles: %w{app db web}

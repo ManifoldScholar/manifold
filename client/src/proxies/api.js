@@ -3,7 +3,7 @@ import config from '../config';
 
 export default function createApiProxy() {
   return proxy(config.apiProxyPaths, {
-    target: config.apiUri,
+    target: config.apiUrl,
     changeOrigin: true
   });
 }

@@ -37,13 +37,13 @@ cache:
   - $HOME/.yarn-cache
 
 script:
+  - cp .env.sample .env
   - cd client
   - node -v
   - yarn install
   - yarn run test
   - cd ../api
   - bundle install
-  - ./bin/rails generate manifold:secrets
   - bundle exec rspec spec -fd
 
 notifications:

@@ -10,11 +10,12 @@ const environmentConfiguration = {
 }[process.env.NODE_ENV || 'development'];
 
 const applicationConfiguration = {
-  clientPort: process.env.MANIFOLD_CLIENT_PORT,
-  webServerPort: process.env.MANIFOLD_WEB_SERVER_PORT,
-  reactServerPort: process.env.MANIFOLD_REACT_SERVER_PORT,
-  assetPort: process.env.MANIFOLD_ASSET_PORT,
-  apiUri: process.env.MANIFOLD_API_URL,
+  webServerPort: process.env.CLIENT_WEB_SERVER_PORT,
+  webServerSocket: process.env.CLIENT_WEB_SERVER_SOCKET,
+  universalServerPort: process.env.CLIENT_UNIVERSAL_SERVER_PORT,
+  universalServerSocket: process.env.CLIENT_UNIVERSAL_SERVER_SOCKET,
+  assetPort: process.env.CLIENT_ASSET_PORT,
+  apiUrl: process.env.API_URL,
   assetProxyPaths: ['/dist'],
   apiProxyPaths: ['/api', '/system'],
   app: {

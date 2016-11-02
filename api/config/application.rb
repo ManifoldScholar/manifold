@@ -8,12 +8,27 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
-# require "sprockets/railtie"
 require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+# We're monkey patching dotenv's load method to load the .env file from the parent
+# directory.
+module Dotenv
+  # Monkey Patch
+  class Railtie < Rails::Railtie
+    def load
+      Dotenv.load(
+        root.join("../.env.local"),
+        root.join("../.env.#{Rails.env}"),
+        root.join("../.env")
+      )
+    end
+  end
+end
+Dotenv::Railtie.load
 
 module ManifoldApi
   # Manifold main application

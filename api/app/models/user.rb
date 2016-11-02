@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 
   def avatar_url
     return nil unless avatar.present?
-    ENV["API_DOMAIN"] + avatar.url
+    ENV["API_URL"] + avatar.url
   end
 
   def favorite(favoritable)
