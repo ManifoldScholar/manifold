@@ -58,6 +58,27 @@ export default class ProjectHero extends Component {
     }
   }
 
+  renderProjectImage(wrapperClass) {
+    let output = '';
+    const attr = this.props.project.attributes;
+
+    if (attr.coverUrl) {
+      output = (
+        <img src={attr.coverUrl} />
+      );
+
+      if (wrapperClass) {
+        output = (
+          <div className={wrapperClass}>
+            {output}
+          </div>
+        )
+      }
+    }
+
+    return output;
+  }
+
   renderSocial() {
     const attr = this.props.project.attributes;
     const services = ["twitter", "facebook", "instagram"];
@@ -137,9 +158,7 @@ export default class ProjectHero extends Component {
         <div className="container">
           <div className="project-figure">
             {this.listMakers()}
-            <div className="image">
-              <img src={attr.coverUrl}/>
-            </div>
+            {this.renderProjectImage('image')}
             <h1 className="project-title">
               {attr.title}
               <span className="subtitle">
@@ -161,8 +180,8 @@ export default class ProjectHero extends Component {
             {this.renderPublishedText('bottom')}
             {this.renderPurchaseLink()}
           </div>
-          <div className="project-image">
-            <img src={attr.coverUrl}/>
+          <div className="project-aside">
+            {this.renderProjectImage()}
             {this.renderPurchaseLink()}
           </div>
         </div>
