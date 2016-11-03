@@ -39,27 +39,13 @@ namespace :deploy do
     end
   end
 
-  desc "Restart API"
-  task :restart_api do
+  desc "Restart Services"
+  task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "sudo systemctl stop manifold || true"
-      execute "sudo systemctl start manifold"
-    end
-  end
-
-  desc "Restart Workers"
-  task :restart_workers do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute "sudo systemctl stop manifold_sidekiq_workers|| true"
-      execute "sudo systemctl start manifold_sidekiq_workers"
-    end
-  end
-
-  desc "Restart Client"
-  task :restart_client do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute "sudo systemctl stop manifold_client || true"
-      execute "sudo systemctl start manifold_client"
+      execute "sudo systemctl restart manifold_client"
+      execute "sudo systemctl restart manifold"
+      execute "sudo systemctl restart manifold_scheduler"
+      execute "sudo systemctl restart manifold_sidekiq_workers"
     end
   end
 
@@ -75,9 +61,7 @@ namespace :deploy do
   end
 
   after :published, :reseed
-  after :published, :restart_api
-  after :published, :restart_workers
-  after :published, :restart_client
+after :published, :restart
 
 end
 

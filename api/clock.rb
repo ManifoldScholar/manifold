@@ -7,7 +7,7 @@ module Clockwork
   handler do |job|
     case job
     when "queue_fetch_project_tweets"
-      QueueFetchProjectTweets.perform_later
+      ::QueueFetchProjectTweets.perform_later
     end
   end
 
