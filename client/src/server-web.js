@@ -41,10 +41,9 @@ export default function (parameters) {
     const staticPath = path.join(__dirname, '..', '..', '..', '..', 'static');
     app.use('/static', Express.static(staticPath));
     ch.info(`Proxying /static requests to ${staticPath}`);
-
   }
 
-  const universalTarget = `http://localhost:${config.reactServerPort}`;
+  const universalTarget = `http://localhost:${config.universalServerPort}`;
   const reactServerProxy = proxy({
     target: universalTarget,
     changeOrigin: true,
@@ -87,7 +86,7 @@ export default function (parameters) {
   app.use('/', reactServerProxy);
   ch.info(`Proxying all other requests to the Universal rendering service at ${universalTarget}`);
 
-  const socketLocation = process.env.NODE_SERVER_SOCKET_PATH;
+  const socketLocation = config.webServerSocket;
   let listenOn;
   let setUmask = false;
   let oldUmask;

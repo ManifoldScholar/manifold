@@ -27,7 +27,7 @@ class Maker < ActiveRecord::Base
 
   def avatar_url
     return nil if avatar.url(:square).blank?
-    ENV["API_DOMAIN"] + avatar.url(:square)
+    ENV["API_URL"] + avatar.url(:square)
   end
 
   def full_name

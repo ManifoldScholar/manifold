@@ -127,14 +127,14 @@ export default function (parameters) {
     });
   });
 
-  const listenOn = config.reactServerPort;
+  const listenOn = config.universalServerPort;
   if (listenOn) {
     server.listen(listenOn, (err) => {
       if (err) {
         ch.error("Universal server encountered an error.");
         console.error('SERVER ERROR:', pretty.render(err));
       }
-      ch.header(`Manifold Universal Server engaged on port ${config.reactServerPort}`);
+      ch.header(`Manifold Universal Server engaged on port ${config.universalServerPort}`);
     });
   } else {
     ch.error(`No MANIFOLD_REACT_SERVER_PORT environment variable has been specified`);

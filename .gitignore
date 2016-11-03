@@ -48,3 +48,6 @@ doc
 
 ### Extracted epubs ###
 /texts/tmp
+
+### Environments ###
+/.env

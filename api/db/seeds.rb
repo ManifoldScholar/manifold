@@ -1,3 +1,6 @@
+# Please ensure that seeding the databas is always an idempotent operation. Seeds are
+# run on every deployment.
+
 require 'securerandom'
 
 admin_user = User.find_or_initialize_by(

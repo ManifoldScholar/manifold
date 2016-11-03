@@ -24,5 +24,4 @@ elsif ENV["RAILS_SERVER_SOCKET_DIR"] && ENV["RAILS_SERVER_SOCKET_PATH"]
 end
 
 bind socket_path if socket_dir && socket_path
-activate_control_app "#{socket_dir}/#{name}-control" if socket_dir
 bind "tcp://127.0.0.1:#{port}" if port
