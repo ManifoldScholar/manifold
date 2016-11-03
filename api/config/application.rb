@@ -57,6 +57,12 @@ module ManifoldApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.eager_load_paths += [
+      "#{config.root}/app/jobs",
+      "#{config.root}/app/services",
+      "#{config.root}/app/presenters"
+    ]
+
     config.x.client = config_for(:client)
 
     config.active_job.queue_adapter = :sidekiq
