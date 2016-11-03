@@ -56,6 +56,14 @@ export default class LayoutHeader extends Component {
 
           <nav className="menu-dropdowns">
             <ul>
+              {
+                this.props.authentication.authenticated ?
+                  <li>
+                    <Link className="button-mode" to={`/backend`}>
+                      Admin Mode
+                    </Link>
+                  </li> : null
+              }
               <li>
                 <SearchMenuButton
                   toggleSearchMenu={this.props.commonActions.toggleSearchPanel}

@@ -1,0 +1,19 @@
+.backend-dashboard {
+  @include clearfix;
+  padding-top: 160px;
+  margin-left: -7.6vw;
+
+  @include respond($containerWidthFull) {
+    margin-left: -95px;
+  }
+
+  .left, .right {
+    float: left;
+    width: 50%;
+    padding-left: 7.6vw;
+
+    @include respond($containerWidthFull) {
+      padding-left: 95px;
+    }
+  }
+}
