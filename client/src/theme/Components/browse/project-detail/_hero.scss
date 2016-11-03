@@ -114,6 +114,14 @@
         width: 25%;
       }
 
+      + .project-title {
+        padding-left: 18px;
+
+        @include respond($break40) {
+          padding-left: 25px;
+        }
+      }
+
       img {
         height: auto;
         max-width: 100%;
@@ -124,7 +132,6 @@
       @include templateHead;
       float: left;
       width: calc(100% - 80px);
-      padding-left: 18px;
       margin-top: 0;
       font-size: 20px;
       font-weight: $semibold;
@@ -132,7 +139,6 @@
 
       @include respond($break40) {
         width: 75%;
-        padding-left: 25px;
       }
 
       .subtitle {
@@ -299,11 +305,11 @@
 
   // Project Image
   // --------------------------------------------------------
-  .project-image {
+  .project-aside {
     position: relative;
     display: none;
     float: left;
-    width: 25%;
+    width: 30%;
 
     @include respond($break75) {
       display: block;
