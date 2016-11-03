@@ -233,6 +233,10 @@ attr-accept@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/attr-accept/-/attr-accept-1.0.3.tgz#c132575a360013e21c4bc964510b87bf78255261"
 
+autolinker:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/autolinker/-/autolinker-1.2.1.tgz#1e7f4af9d14ca8c5b3d32d90d2ae911b2792ae27"
+
 autoprefixer@^6.3.1, autoprefixer@^6.3.2:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-6.5.1.tgz#ae759a5221e709f3da17c2d656230e67c43cbb75"

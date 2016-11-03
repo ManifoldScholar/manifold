@@ -34,5 +34,6 @@ export const requests = {
   allPages: 'all-pages',
   showPage: 'show-page',
   sectionAnnotations: 'section-annotations',
-  createAnnotation: 'create-annotation'
+  createAnnotation: 'create-annotation',
+  showProjectEvents: 'show-project-events'
 };

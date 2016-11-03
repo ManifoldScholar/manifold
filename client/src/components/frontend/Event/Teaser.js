@@ -18,7 +18,7 @@ export default class Teaser extends Component {
         output = 'Keep Reading';
         break;
       case 'TWEET':
-        output = 'Visit Site';
+        output = 'View Tweet';
         break;
       default:
         output = 'View More';
@@ -62,7 +62,6 @@ export default class Teaser extends Component {
     const attr = this.props.event.attributes;
 
     const EventBody = this.getEventBody(attr.eventType);
-    const eventLinked = attr.event_url ? true : false;
 
     const eventWrapperProps = {
       className: 'event-tile'
@@ -70,25 +69,25 @@ export default class Teaser extends Component {
 
     let eventPrompt = false;
 
-    const EventWrapper = eventLinked ? 'a' : 'div';
-
+    const eventLinked = attr.eventUrl ? true : false;
     if (eventLinked) {
-      eventWrapperProps.href = this.props.event.attributes.eventUrl;
       eventPrompt = (
         <span>
-          {this.getPromptByType(attr.eventType)}
-          <i className="manicon manicon-arrow-long-right"></i>
+          <a target="_blank" href={this.props.event.attributes.eventUrl}>
+            {this.getPromptByType(attr.eventType)}
+            <i className="manicon manicon-arrow-long-right"></i>
+          </a>
         </span>
       );
     }
 
     return (
-      <EventWrapper {...eventWrapperProps}>
+      <div {...eventWrapperProps}>
         <EventBody event={this.props.event} icon={this.getEventIcon(attr.eventType)} />
         <div className="event-prompt">
           {eventPrompt}
         </div>
-      </EventWrapper>
+      </div>
     );
   }
 }

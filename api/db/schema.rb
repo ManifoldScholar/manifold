@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026163434) do
+ActiveRecord::Schema.define(version: 20161027175554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 20161026163434) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "event_subtitle"
+    t.string   "external_subject_id"
+    t.string   "external_subject_type"
   end
 
   create_table "favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -149,6 +151,7 @@ ActiveRecord::Schema.define(version: 20161026163434) do
     t.datetime "avatar_updated_at"
     t.jsonb    "metadata",                 default: {}
     t.uuid     "creator_id"
+    t.jsonb    "tweet_fetch_config",       default: {}
   end
 
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

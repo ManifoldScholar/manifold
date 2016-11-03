@@ -60,6 +60,17 @@ class Project < ActiveRecord::Base
     projects
   end
 
+  def twitter_following
+    return [] unless tweet_fetch_config && tweet_fetch_config["following"].is_a?(Array)
+    tweet_fetch_config["following"].map do |h|
+      ActiveSupport::HashWithIndifferentAccess.new(h)
+    end
+  end
+
+  def following_twitter_accounts?
+    twitter_following.length.positive?
+  end
+
   def avatar_url
     return nil if avatar.url(:thumb).blank?
     ENV["API_URL"] + avatar.url(:thumb)

@@ -84,6 +84,12 @@ export default class ApiClient {
     if (json.included) {
       out.included = json.included;
     }
+    if (json.links) {
+      out.links = json.links;
+    }
+    if (json.meta) {
+      out.meta = json.meta;
+    }
     return Promise.resolve({ json: out, response });
   };
 

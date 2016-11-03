@@ -21,6 +21,7 @@ class FrontendContainer extends Component {
 
   static propTypes = {
     routeDataLoaded: PropTypes.bool,
+    routing: PropTypes.object,
     children: PropTypes.object,
     location: PropTypes.object,
     dispatch: PropTypes.func,
@@ -50,6 +51,13 @@ class FrontendContainer extends Component {
 
   componentDidMount() {
     this.setMinHeight();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.routing.locationBeforeTransitions.key !==
+      nextProps.routing.locationBeforeTransitions.key) {
+      window.scrollTo(0, 0);
+    }
   }
 
   setMinHeight() {

@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+import get from 'lodash/get';
 
 const initialState = {
   responses: {},
@@ -79,6 +80,8 @@ function successResponse(state, action) {
     [meta]: {
       entity: isEntity ? payload.results : null,
       collection: isCollection ? payload.results : null,
+      meta: get(action.payload, 'meta'),
+      links: get(action.payload, 'links'),
       loaded: true
     }
   });

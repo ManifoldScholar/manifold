@@ -4,11 +4,13 @@ class Event < ApplicationRecord
   PROJECT_CREATED = "PROJECT_CREATED".freeze
   TEXT_ADDED = "TEXT_ADDED".freeze
   TEXT_ANNOTATED = "TEXT_ANNOTATED".freeze
+  TWEET = "TWEET".freeze
 
   EVENT_TYPES = [
     PROJECT_CREATED,
     TEXT_ADDED,
-    TEXT_ANNOTATED
+    TEXT_ANNOTATED,
+    TWEET
   ].freeze
 
   belongs_to :subject, polymorphic: true

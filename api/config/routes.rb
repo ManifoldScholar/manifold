@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       resources :text_sections, only: [:show] do
         resources :annotations, shallow: true
       end
-      resources :projects
+      resources :projects do
+        resources :events, only: [:index]
+      end
       resources :tokens, only: [:create]
 
       resources :users, only: [:create, :show] do
