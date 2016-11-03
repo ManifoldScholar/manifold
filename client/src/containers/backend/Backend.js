@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { HigherOrder } from 'components/global';
 import { Layout } from 'components/frontend';
+import { LayoutBackend } from 'components/backend';
 import { commonActions } from 'actions/helpers';
 import { pagesAPI } from 'api';
 import { entityStoreActions } from 'actions';
@@ -59,11 +60,11 @@ class BackendContainer extends Component {
 
   render() {
     return (
-      <HigherOrder.BodyClass className={'backend'}>
+      <HigherOrder.BodyClass className={'backend bg-neutral90'}>
         <div>
           <HigherOrder.ScrollAware>
-            <Layout.Header
-              visibility={this.props.visibility }
+            <LayoutBackend.Header
+              visibility={this.props.visibility}
               location={this.props.location}
               authentication={this.props.authentication}
               notifications={this.props.notifications}
