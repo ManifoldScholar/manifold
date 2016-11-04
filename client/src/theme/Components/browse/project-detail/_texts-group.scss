@@ -1,7 +1,8 @@
 .texts-group {
-
   @include listHorizontal;
+  margin-bottom: -73px;
   font-size: 0;
+
 
   @include respond($break75) {
     margin-left: -45px;
