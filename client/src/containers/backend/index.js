@@ -10,4 +10,4 @@ export {
   BackendProjectDetail,
   TextDetail,
   Users
-}
+};
