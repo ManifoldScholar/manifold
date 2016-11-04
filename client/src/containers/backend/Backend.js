@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { HigherOrder } from 'components/global';
-import { Layout } from 'components/frontend';
-import { LayoutBackend } from 'components/backend';
+import { Layout as LayoutFrontend } from 'components/frontend';
+import { Layout as LayoutBackend } from 'components/backend';
 import { commonActions } from 'actions/helpers';
 import { pagesAPI } from 'api';
 import { entityStoreActions } from 'actions';
@@ -74,7 +74,7 @@ class BackendContainer extends Component {
           <main ref="mainContainer">
             {this.props.children}
           </main>
-          <Layout.Footer
+          <LayoutFrontend.Footer
             pages={this.props.pages}
             authentication={this.props.authentication}
             commonActions={this.commonActions}

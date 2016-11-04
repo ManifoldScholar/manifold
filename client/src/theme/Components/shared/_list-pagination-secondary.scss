@@ -1,46 +1,33 @@
 // NB: This can be abstracted (I.E. As 'list-pagination-primary')
 // if there are more pagination styles
 // Element wrapping a <ul>
-.list-pagination {
-  ul {
-    @include listUnstyled;
+.list-pagination-secondary {
+  @include utilityPrimary;
+  display: table;
+  width: 100%;
+  font-size: 14px;
+
+  .pagination-previous, .pagination-ordinals, .pagination-next {
+    display: table-cell;
+  }
+
+  .pagination-ordinals {
+    width: 100%;
+    color: $neutral50;
     text-align: center;
+  }
 
-    li {
-      display: none;
-
-      @include respond($break60) {
-        display: inline-block;
-      }
-
-      + li {
-        margin-left: 25px;
-      }
-
-      &.active a {
-        color: $neutral75;
-      }
-    }
+  .pagination-previous, .pagination-next {
+    line-height: 14px;
 
     a {
-      @include utilityPrimary;
-      font-size: 14px;
-      color: $neutral50;
+      color: $neutral75;
       text-decoration: none;
       transition: color $duration $timing;
 
       &:hover {
         color: $accentPrimary;
       }
-    }
-  }
-
-  .pagination-previous, .pagination-next {
-    display: inline-block;
-    line-height: 14px;
-
-    a {
-      color: $neutral75;
     }
 
     .manicon {

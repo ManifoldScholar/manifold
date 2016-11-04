@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { ProjectList } from 'components/backend';
 
 class DashboardContainer extends Component {
 
@@ -8,19 +9,25 @@ class DashboardContainer extends Component {
 
 
   render() {
-    return (
-      <div className="container">
-        <section className="backend-dashboard">
-          <div className="left">
-            {'ProjectsList'}
-          </div>
+    console.log(ProjectList, 'project list!');
 
-          <div className="right">
-            {'Notifications'}
+    return (
+      <div>
+        <section>
+          <div className="container">
+            <section className="backend-dashboard">
+              <div className="left">
+                <ProjectList.SearchableList />
+              </div>
+
+              <div className="right">
+                {'Notifications'}
+              </div>
+            </section>
           </div>
         </section>
       </div>
-    )
+    );
   }
 }
 

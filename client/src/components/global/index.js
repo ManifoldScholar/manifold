@@ -5,6 +5,7 @@ export Dropdown from './Dropdown';
 export HeaderNotification from './HeaderNotification';
 export HeaderNotifications from './HeaderNotifications';
 export LoadingBar from './LoadingBar';
+export Project from './Project';
 export SearchMenuBody from './SearchMenuBody';
 export SearchMenuButton from './SearchMenuButton';
 export UIPanel from './UIPanel';

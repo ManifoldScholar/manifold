@@ -118,7 +118,7 @@ export default class UtilityPagination extends PureComponent {
     if (pagination.totalPages === 1) return null;
 
     return (
-      <nav className="list-pagination">
+      <nav className="list-pagination-primary">
         <ul>
           {this.previous(pagination)}
           {pages.map((page) => {
