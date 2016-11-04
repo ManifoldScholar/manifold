@@ -1,0 +1,31 @@
+.section-heading-secondary {
+  h1, h2, h3, h4, h5, h6 {
+    @include templateHead;
+    font-size: 16px;
+    letter-spacing: 0.075em;
+    color: $neutral30;
+    text-transform: uppercase;
+  }
+
+  .manicon {
+    display: inline-block;
+    margin-left: 9px;
+    color: $accentPrimary;
+    vertical-align: middle;
+
+    &.manicon-stack {
+      margin-top: -2px;
+      font-size: 23px;
+    }
+
+    &.manicon-bugle-small {
+      font-size: 14px;
+      vertical-align: top;
+    }
+
+    &.manicon-pulse-small {
+      margin-top: -6px;
+      font-size: 19px;
+    }
+  }
+}
