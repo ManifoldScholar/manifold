@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { ProjectList } from 'components/backend';
+import { ProjectList, Dashboard as DashboardComponents } from 'components/backend';
+import { Link } from 'react-router';
 
 class DashboardContainer extends Component {
 
@@ -9,8 +10,6 @@ class DashboardContainer extends Component {
 
 
   render() {
-    console.log(ProjectList, 'project list!');
-
     return (
       <div>
         <section>
@@ -31,6 +30,7 @@ class DashboardContainer extends Component {
                     {'Notifications'} <i className="manicon manicon-bugle-small"></i>
                   </h3>
                 </header>
+                <DashboardComponents.Notifications />
 
                 <header className="section-heading-secondary">
                   <h3>

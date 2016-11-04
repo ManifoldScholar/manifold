@@ -26,18 +26,8 @@
     }
   }
 
-  .filter-toggle, .reset {
-    @include buttonUnstyled;
-    @include utilityPrimary;
-    font-size: 12px;
-  }
-
-  .filter-toggle {
-    color: $neutral50;
-
-    + .reset {
-      margin-left: 20px;
-    }
+  .button-bare-primary + .button-bare-primary {
+    margin-left: 20px;
   }
 
   .reset {

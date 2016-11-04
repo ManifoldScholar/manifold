@@ -20,8 +20,8 @@ export default class SearchableList extends Component {
             </button>
             <input type="text" placeholder="Search..." />
           </div>
-          <button className="filter-toggle">{'More Search Options'}</button>
-          <button className="reset">{'Reset Search'}</button>
+          <button className="button-bare-primary">{'More Search Options'}</button>
+          <button className="button-bare-primary reset">{'Reset Search'}</button>
         </form>
         <nav className="projects-vertical-primary">
           <p className="list-total">
