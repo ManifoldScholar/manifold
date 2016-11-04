@@ -87,7 +87,7 @@ class Detail extends Component {
     if (!texts || texts.length === 0) return null;
     return (
       <section>
-        <div className="container">
+        <div className="container flush-top">
           <header className="section-heading">
             <h4 className="title">
               <i className="manicon manicon-books-stack"></i>
