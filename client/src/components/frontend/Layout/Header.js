@@ -51,11 +51,6 @@ export default class LayoutHeader extends Component {
                     </Link>
                   </li> : null
                 }
-                <li className={active === 'dev' ? 'active' : ''}>
-                  <Link to={`/dev`}>
-                    {'Dev'}
-                  </Link>
-                </li>
               </ul>
             </nav>
 
