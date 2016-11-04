@@ -25,18 +25,23 @@ class DashboardContainer extends Component {
               </div>
 
               <div className="right">
-                <header className="section-heading-secondary">
-                  <h3>
-                    {'Notifications'} <i className="manicon manicon-bugle-small"></i>
-                  </h3>
-                </header>
-                <DashboardComponents.Notifications />
+                <section>
+                  <header className="section-heading-secondary">
+                    <h3>
+                      {'Notifications'} <i className="manicon manicon-bugle-small"></i>
+                    </h3>
+                  </header>
+                  <DashboardComponents.Notifications />
+                </section>
 
-                <header className="section-heading-secondary">
-                  <h3>
-                    {'Activity'} <i className="manicon manicon-pulse-small"></i>
-                  </h3>
-                </header>
+                <section>
+                  <header className="section-heading-secondary">
+                    <h3>
+                      {'Activity'} <i className="manicon manicon-pulse-small"></i>
+                    </h3>
+                  </header>
+                  <DashboardComponents.Activity />
+                </section>
               </div>
             </section>
           </div>
