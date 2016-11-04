@@ -12,9 +12,9 @@ set :format, :pretty
 set :rails_env, "production"
 
 # Linked Files
-set :linked_files, fetch(:linked_files, []).push(".env", "api/tmp")
+set :linked_files, fetch(:linked_files, []).push(".env")
 set :linked_dirs, fetch(:linked_dirs, []).push(
-  "api/public/system", "client/node_modules", "import"
+  "api/public/system", "client/node_modules", "import", "api/tmp"
 )
 
 # Ruby & Bundler
@@ -39,15 +39,37 @@ namespace :deploy do
     end
   end
 
+  desc "Stop Services"
+  task :start do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "sudo systemctl start manifold_client"
+      execute "sudo systemctl start manifold_api"
+      execute "sudo systemctl start manifold_scheduler"
+      execute "sudo systemctl start manifold_workers"
+    end
+  end
+
+  desc "Stop Services"
+  task :stop do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "sudo systemctl stop manifold_client"
+      execute "sudo systemctl stop manifold_api"
+      execute "sudo systemctl stop manifold_scheduler"
+      execute "sudo systemctl stop manifold_workers"
+    end
+  end
+
   desc "Restart Services"
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       execute "sudo systemctl restart manifold_client"
-      execute "sudo systemctl restart manifold"
+      execute "sudo systemctl restart manifold_api"
       execute "sudo systemctl restart manifold_scheduler"
-      execute "sudo systemctl restart manifold_sidekiq_workers"
+      execute "sudo systemctl restart manifold_workers"
     end
   end
+
+
 
   desc "Reseed the database"
   task :reseed do
@@ -61,7 +83,7 @@ namespace :deploy do
   end
 
   after :published, :reseed
-after :published, :restart
+  after :published, :restart
 
 end
 
