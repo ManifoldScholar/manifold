@@ -1,0 +1,27 @@
+.table-single-value {
+  width: 100%;
+
+  tr {
+    &:first-child {
+      td {
+        padding-top: 0;
+      }
+    }
+
+    td {
+      @include templateHead;
+      padding: 11px 20px 6px 0;
+      font-size: 18px;
+      letter-spacing: 0.015em;
+      color: $neutral50;
+      border-bottom: 1px solid $neutral80;
+
+      + td {
+        padding-right: 0;
+        font-size: 27px;
+        color: $accentPrimary;
+        text-align: right;
+      }
+    }
+  }
+}

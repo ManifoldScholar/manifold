@@ -15,5 +15,10 @@
     @include respond($containerWidthFull) {
       padding-left: 95px;
     }
+
+    // Pad dashboard sections
+    section + section {
+      padding-top: 55px;
+    }
   }
 }

@@ -1,7 +1,11 @@
 .section-heading-secondary {
+  padding-bottom: 1.375em;
+  font-size: 16px;
+
   h1, h2, h3, h4, h5, h6 {
     @include templateHead;
-    font-size: 16px;
+    // Sized relative to parent so padding can follow suit
+    font-size: 1em;
     letter-spacing: 0.075em;
     color: $neutral30;
     text-transform: uppercase;
