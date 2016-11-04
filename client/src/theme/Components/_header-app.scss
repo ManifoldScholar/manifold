@@ -19,7 +19,7 @@
     .text-nav .active a {
       color: $neutralWhite;
 
-      &:before {
+      &::before {
         background-color: $neutralWhite;
       }
     }

@@ -17,11 +17,26 @@ class DashboardContainer extends Component {
           <div className="container">
             <section className="backend-dashboard">
               <div className="left">
+                <header className="section-heading-secondary">
+                  <h3>
+                    {'Projects'} <i className="manicon manicon-stack"></i>
+                  </h3>
+                </header>
                 <ProjectList.SearchableList />
               </div>
 
               <div className="right">
-                {'Notifications'}
+                <header className="section-heading-secondary">
+                  <h3>
+                    {'Notifications'} <i className="manicon manicon-bugle-small"></i>
+                  </h3>
+                </header>
+
+                <header className="section-heading-secondary">
+                  <h3>
+                    {'Activity'} <i className="manicon manicon-pulse-small"></i>
+                  </h3>
+                </header>
               </div>
             </section>
           </div>

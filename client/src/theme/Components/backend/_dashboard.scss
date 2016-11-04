@@ -1,6 +1,6 @@
 .backend-dashboard {
   @include clearfix;
-  padding-top: 160px;
+  padding-top: 75px;
   margin-left: -7.6vw;
 
   @include respond($containerWidthFull) {
