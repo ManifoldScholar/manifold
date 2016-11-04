@@ -1,16 +1,22 @@
 # A section in a text
 class TextSection < ActiveRecord::Base
+
+  # Constants
   KIND_COVER_IMAGE = "cover_image".freeze
   KIND_NAVIGATION = "navigation".freeze
   KIND_SECTION = "section".freeze
   ALLOWED_KINDS = [KIND_COVER_IMAGE, KIND_NAVIGATION, KIND_SECTION].freeze
 
+  # Associations
   belongs_to :text
   belongs_to :ingestion_source
   has_many :annotations
+
+  # Delegation
   delegate :source_path, to: :ingestion_source
   delegate :project, to: :text
 
+  # Validation
   validates :position, numericality: { only_integer: true }
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 

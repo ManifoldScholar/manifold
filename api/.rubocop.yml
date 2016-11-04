@@ -30,3 +30,6 @@ Rails:
 
 Lint/UnneededDisable:
   Enabled: false
+
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
