@@ -6,9 +6,9 @@
 .button-bare-primary {
   @include buttonUnstyled;
   @include utilityPrimary;
+  display: inline-block;
   font-size: 13px;
-  color: $accentPrimary;
-  text-decoration: none;
+  color: $neutral50;
 }
 
 // Can be a <button> or an <a>
