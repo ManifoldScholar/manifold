@@ -30,6 +30,7 @@
   display: flex;
   flex-wrap: wrap;
   padding-top: 20px;
+  margin-bottom: -28px;
 
   @include respond($break60) {
     padding-top: 39px;
@@ -145,7 +146,8 @@
       }
 
       &.manicon-twitter {
-        padding-top: 0.32em;
+        padding-top: 0.354em;
+        padding-left: 1px;
 
         &::before {
           font-size: 0.354em;
@@ -227,14 +229,14 @@
     transition: color $duration $timing,
       background-color $duration $timing;
 
-    a {
-      color: $neutral50;
-      text-decoration: none;
-    }
-
     @include respond($break60) {
       display: flex;
       min-height: 43px;
+    }
+
+    a {
+      color: $neutral50;
+      text-decoration: none;
     }
 
     span {
