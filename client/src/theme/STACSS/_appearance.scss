@@ -46,6 +46,10 @@
 }
 
 // Background color utility classes
+.bg-accent-primary {
+  background-color: $accentPrimary;
+}
+
 .bg-neutral05 {
   background-color: $neutral05;
 }
@@ -54,8 +58,8 @@
   background-color: $neutral90;
 }
 
-.bg-accent-primary {
-  background-color: $accentPrimary;
+.bg-neutral95 {
+  background-color: $neutral95;
 }
 
 
@@ -177,7 +181,6 @@
 
 
 // Inputs/Textareas
-<<<<<<< HEAD
 @mixin inputSecondary {
   @include templateCopy;
   padding: 7px 10px;
