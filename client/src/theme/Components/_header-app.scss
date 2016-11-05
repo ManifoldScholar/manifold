@@ -226,7 +226,7 @@
 }
 
 // Header bump
-.browse main {
+.browse main .backend main {
   padding-top: 60px;
 
   @include respond($break40) {
