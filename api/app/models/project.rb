@@ -88,6 +88,14 @@ class Project < ActiveRecord::Base
     ENV["API_URL"] + hero.url(:background)
   end
 
+  def collections_count
+    collections.count
+  end
+
+  def resources_count
+    resources.count
+  end
+
   private
 
   def trigger_creation_event
