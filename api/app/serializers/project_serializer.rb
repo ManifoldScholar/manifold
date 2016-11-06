@@ -11,6 +11,7 @@ class ProjectSerializer < ProjectPartialSerializer
   has_one :published_text
   has_many :text_categories, serializer: CategorySerializer
   has_many :events
+  has_many :collections
 
   def event_count
     object.events.count

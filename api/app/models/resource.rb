@@ -6,6 +6,8 @@ class Resource < ActiveRecord::Base
 
   # Associations
   belongs_to :project
+  has_many :collection_resources, dependent: :destroy
+  has_many :collections, through: :collection_resources
 
   # Attachment Validation
   has_attached_file :attachment,

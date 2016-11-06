@@ -13,13 +13,25 @@ module Importer
       upsert_project(include_texts)
     end
 
+    def resource_import_options
+      return {
+        project_id: project.id,
+        drive_sheet: @project_json[:resource_drive_sheet],
+        drive_dir: @project_json[:resource_drive_dir]
+      }
+    end
+
     private
 
-    # rubocop:disable Metrics/AbcSize
-    def upsert_project(include_texts)
+    def project
       project = ::Project.find_or_initialize_by(
         hashtag: @project_json[:attributes][:hashtag]
       )
+    end
+
+    # rubocop:disable Metrics/AbcSize
+    def upsert_project(include_texts)
+      project = project
       project.creator = @creator if project.new_record?
 
       project.update(@project_json[:attributes])

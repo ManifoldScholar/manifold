@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027175554) do
+ActiveRecord::Schema.define(version: 20161105231153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,24 @@ ActiveRecord::Schema.define(version: 20161027175554) do
     t.datetime "updated_at", null: false
     t.integer  "position"
     t.uuid     "project_id"
+  end
+
+  create_table "collection_resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid    "resource_id"
+    t.uuid    "collection_id"
+    t.integer "position",      default: 0
+  end
+
+  create_table "collections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.uuid     "project_id"
+    t.string   "thumbnail_file_name"
+    t.string   "thumbnail_content_type"
+    t.integer  "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
+    t.string   "thumbnail_checksum"
+    t.string   "fingerprint"
   end
 
   create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -155,17 +173,48 @@ ActiveRecord::Schema.define(version: 20161027175554) do
   end
 
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name"
+    t.string   "title"
     t.string   "type"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.uuid     "creator_id"
-    t.integer  "project_id"
-    t.index ["project_id"], name: "index_resources_on_project_id", using: :btree
+    t.uuid     "project_id"
+    t.text     "caption"
+    t.text     "description"
+    t.string   "fingerprint"
+    t.text     "keywords"
+    t.string   "alt_text"
+    t.string   "copyright_status"
+    t.string   "copyright_holder"
+    t.string   "credit"
+    t.string   "external_url"
+    t.string   "external_id"
+    t.string   "external_type"
+    t.boolean  "allow_high_res",           default: true
+    t.boolean  "allow_download",           default: true
+    t.boolean  "doi_requested",            default: false
+    t.datetime "doi_added"
+    t.string   "doi",                      default: "f"
+    t.string   "high_res_file_name"
+    t.string   "high_res_content_type"
+    t.integer  "high_res_file_size"
+    t.datetime "high_res_updated_at"
+    t.string   "transcript_file_name"
+    t.string   "transcript_content_type"
+    t.integer  "transcript_file_size"
+    t.datetime "transcript_updated_at"
+    t.string   "translation_file_name"
+    t.string   "translation_content_type"
+    t.integer  "translation_file_size"
+    t.datetime "translation_updated_at"
+    t.string   "high_res_checksum"
+    t.string   "transcript_checksum"
+    t.string   "translation_checksum"
+    t.string   "attachment_checksum"
   end
 
   create_table "stylesheets", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

@@ -17,6 +17,7 @@ common: &1
         :allowed_mime:
           - "image/gif"
           - "image/jpeg"
+          - "image/jpg"
           - "image/png"
           - "image/svg+xml"
           - "application/xhtml+xml"
@@ -26,8 +27,11 @@ common: &1
           - "application/smil+xml"
           - "application/pls+xml"
           - "application/xml"
+          - "application/pdf"
+          - "application/vnd.ms-powerpoint"
           - "audio/mpeg"
           - "audio/mp4"
+          - "audio/mp3"
           - "text/css"
           - "text/x-c"
           - "text/javascript"
@@ -38,6 +42,10 @@ common: &1
           - "application/x-font-otf"
           - "video/mp4"
           - "video/webm"
+          - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+          - "application/zip"
         :allowed_ext:
           - !ruby/regexp '/gif\Z/'
           - !ruby/regexp '/jpe?g\Z/'
@@ -57,6 +65,11 @@ common: &1
           - !ruby/regexp '/ncx\Z/'
           - !ruby/regexp '/js\Z/'
           - !ruby/regexp '/webm\Z/'
+          - !ruby/regexp '/pdf\Z/'
+          - !ruby/regexp '/zip\Z/'
+          - !ruby/regexp '/docx\Z/'
+          - !ruby/regexp '/xlsx\Z/'
+          - !ruby/regexp '/ppt?x\Z/'
 
 production: *1
 development: *1
