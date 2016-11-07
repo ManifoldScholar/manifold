@@ -1,7 +1,7 @@
 import Header from './Header.js';
-import PanelNav from './PanelNav';
+import Panel from './Panel';
 
 export default {
   Header,
-  PanelNav
+  Panel
 };
