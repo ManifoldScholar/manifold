@@ -46,5 +46,4 @@ export default class ProjectHeader extends Component {
       </section>
     );
   }
-
 }
