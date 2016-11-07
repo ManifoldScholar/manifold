@@ -18,7 +18,7 @@ import { Developer } from 'containers/developer';
 import { Reader } from 'containers/reader';
 import { Backend, Dashboard, BackendProjectDetail, TextDetail, Users } from 'containers/backend';
 import { Section, AnnotationTools } from 'components/reader';
-import { FormsStatic } from './components/frontend';
+import { Static } from './components/frontend';
 
 /* eslint-disable max-len */
 export default () => {

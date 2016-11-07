@@ -10,7 +10,9 @@ export default class BackendWrapper extends Component {
   //   };
   // }
 
-  static propTypes = {};
+  static propTypes = {
+    children: PropTypes.object
+  };
 
   render() {
     return (
@@ -26,7 +28,7 @@ export default class BackendWrapper extends Component {
                 <Layout.PanelNav/>
               </aside>
               <div className="panel">
-                {'PANEL'}
+                {this.props.children}
               </div>
             </section>
           </div>

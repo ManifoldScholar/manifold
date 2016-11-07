@@ -350,6 +350,37 @@ const events = [
   }
 ];
 
+const backendAuthors = [];
+
+const backendEditors = [
+  {
+    id: 1,
+    attributes: {
+      name: "Matt Garrish",
+      first_name: "Matt",
+      middle_name: "",
+      last_name: "Garrish",
+      sort_name: "Garrish, Matt",
+      display_name: "",
+      role: "creator"
+    },
+    avatar: "garrish.jpg"
+  },
+  {
+    id: 2,
+    attributes: {
+      name: "Markus Gylling",
+      first_name: "Markus",
+      middle_name: "",
+      last_name: "Gylling",
+      sort_name: "Gylling, Markus",
+      display_name: "",
+      role: "creator"
+    },
+    avatar: "gylling.jpg"
+  }
+];
+
 export default {
   resources,
   events,
