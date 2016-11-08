@@ -14,5 +14,4 @@ class CollectionSerializer < ActiveModel::Serializer
     object.created_at.strftime("%-Y")
   end
 
-
 end
