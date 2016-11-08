@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :pages
       resources :texts
+      resources :collections
       resources :text_sections, only: [:show] do
         resources :annotations, shallow: true
       end
