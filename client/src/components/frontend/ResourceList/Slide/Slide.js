@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
+import moment from 'moment';
 export default class ResourceSlideFigure extends Component {
   static propTypes = {
     resource: PropTypes.object
@@ -12,6 +12,7 @@ export default class ResourceSlideFigure extends Component {
 
   render() {
     const resource = this.props.resource;
+    const attr = resource.attributes;
 
     return (
       <figure>
@@ -23,12 +24,16 @@ export default class ResourceSlideFigure extends Component {
           style={ { backgroundImage: 'url(/static/images/resource-splash.png)' } }
         >
           <div className="resource-info">
-            <i className={`manicon manicon-resource-${resource.attributes.type}`}></i>
+            <i className={`manicon manicon-resource-${attr.kind}`}></i>
             <span className="resource-type">
-              {resource.attributes.type}
+              {attr.kind}
             </span>
             <span className="resource-date">
-              {'Uploaded January 2017'}
+              {
+                `Uploaded
+                ${moment().month(attr.createdMonth - 1).format("MMMM")},
+                ${attr.createdYear}`
+              }
             </span>
           </div>
         </div>

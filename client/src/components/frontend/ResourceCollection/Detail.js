@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import moment from 'moment';
 
 import {
   Utility,
@@ -17,9 +18,11 @@ export default class ResourceCollectionDetail extends Component {
 
   render() {
     const project = this.props.project;
-    const resourceCollection = this.props.resourceCollection;
-    const resources = resourceCollection.relationships.resources;
+    const collection = this.props.resourceCollection;
+    if (!project || !collection) return null;
 
+    const attr = collection.attributes;
+    const resources = collection.relationships.resources;
     return (
       <section>
         <div className="container">
@@ -28,26 +31,27 @@ export default class ResourceCollectionDetail extends Component {
               <i className="manicon manicon-file-box"></i>
               <div className="collection-title">
                 <h1>
-                  {'Collection Title'}
+                  {attr.title}
                 </h1>
                 <span className="collection-date">
-                    {'Collection created January 2016'}
-                  </span>
+                  {
+                    `Collection created
+                    ${moment().month(attr.createdMonth - 1).format("MMMM")},
+                    ${attr.createdYear}`
+                  }
+                </span>
               </div>
             </header>
             <div className="collection-description">
               <p>
-                Maecenas sed diam eget risus varius blandit sit amet non magna.
-                Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                Donec sed odio dui.
+                {attr.description}
               </p>
             </div>
             <Utility.ShareBar/>
           </div>
-
           <ResourceList.Slideshow resources={resources} />
-          <ResourceList.Totals count={2028} projectId={project.id} />
-          <ResourceList.Filters />
+          <ResourceList.Totals count={project.attributes.resourcesCount} projectId={project.id} />
+          <ResourceList.Filters kinds={collection.attributes.resourceKinds} />
           <ResourceList.Thumbnails resources={resources} />
         </div>
       </section>

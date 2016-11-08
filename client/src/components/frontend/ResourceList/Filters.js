@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import capitalize from 'lodash/capitalize';
 
 export default class ResourceListFilters extends Component {
 
   static displayName = "ResourceList.Filters";
 
   static propTypes = {
+    kinds: PropTypes.array
   };
 
   constructor() {
@@ -30,9 +32,11 @@ export default class ResourceListFilters extends Component {
               >
                 Type:
               </option>
-              <option>Document</option>
-              <option>Image</option>
-              <option>PDF</option>
+              {this.props.kinds.map((kind) => {
+                return (
+                  <option key={kind} value={kind}>{capitalize(kind)}</option>
+                );
+              })}
             </select>
             <i className="manicon manicon-caret-down"></i>
           </div>

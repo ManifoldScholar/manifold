@@ -43,7 +43,7 @@ export default class ProjectThumbnail extends Component {
     const yearInt = attr.publicationYear ? parseInt(attr.publicationYear, 10) : null;
     let publishedString;
     if (monthInt && yearInt) {
-      publishedString = `Published ${moment().month(monthInt).format("MMMM")}, ${yearInt}`;
+      publishedString = `Published ${moment().month(monthInt - 1).format("MMMM")}, ${yearInt}`;
     } else if (yearInt) {
       publishedString = `Published ${yearInt}`;
     }

@@ -7,7 +7,7 @@ export default class ResourceSlideFigureVideo extends Component {
 
   renderVideoByService(service, id) {
     let output = false;
-    if (service === 'vimeo') {
+    if (service === 'VIMEO') {
       output = (
         <iframe src={`//player.vimeo.com/video/${id}`}
           frameBorder="0"
@@ -16,7 +16,7 @@ export default class ResourceSlideFigureVideo extends Component {
         </iframe>
       );
     }
-    if (service === 'youTube') {
+    if (service === 'YOUTUBE') {
       output = (
         <iframe id="ytplayer" type="text/html"
           src={`https://www.youtube.com/embed/${id}`}
@@ -37,8 +37,8 @@ export default class ResourceSlideFigureVideo extends Component {
         className="figure-video"
       >
         {this.renderVideoByService(
-          resource.attributes.externalHost,
-          resource.attributes.externalIdentifier
+          resource.attributes.externalType,
+          resource.attributes.externalId
         )}
       </figure>
     );
