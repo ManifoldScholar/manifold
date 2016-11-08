@@ -1,54 +1,47 @@
 # A resource is any asset our source document that is associated with a text.
 class Resource < ActiveRecord::Base
+
+  # Concerns
   include TrackedCreator
 
+  # Associations
   belongs_to :project
+  has_many :collection_resources, dependent: :destroy
+  has_many :collections, through: :collection_resources
 
-  has_attached_file :attachment, include_updated_timestamp: false
-  validates_attachment_content_type :attachment, content_type: %w(
-    image/gif
-    image/jpeg
-    image/png
-    image/svg+xml
-    application/xhtml+xml
-    application/x-dtbncx+xml
-    application/vnd.ms-opentype
-    application/font-woff
-    application/smil+xml
-    application/pls+xml
-    application/xml
-    audio/mpeg
-    audio/mp4
-    text/css
-    text/x-c
-    text/javascript
-    text/html
-    text/plain
-    application/x-font-ttf
-    application/x-font-truetype
-    application/x-font-otf
-    video/mp4
-    video/webm
-  )
+  # Attachment Validation
+  has_attached_file :attachment,
+                    include_updated_timestamp: false,
+                    default_url: "",
+                    url: "/system/resource/:uuid_partition/:id/:style_:filename",
+                    styles: {
+                      thumbnail: ["200x150#"]
+                    }
+  validation = Rails.application.config.x.api[:attachments][:validations][:resource]
+  validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
+  validates_attachment_file_name :attachment, matches: validation[:allowed_ext]
 
-  validates_attachment_file_name :attachment, matches: [
-    /gif\Z/,
-    /jpe?g\Z/,
-    /png\Z/,
-    /svg\Z/,
-    /x?html\Z/,
-    /ttf\Z/,
-    /otf\Z/,
-    /woff\Z/,
-    /mp3\Z/,
-    /pls\Z/,
-    /smil\Z/,
-    /xml\Z/,
-    /mp3\Z/,
-    /mp4\Z/,
-    /css\Z/,
-    /ncx\Z/,
-    /js\Z/,
-    /webm\Z/
-  ]
+  before_attachment_post_process :resize_images
+
+  def attachment_is_image?
+    config = Rails.application.config.x.api
+    allowed = config[:attachments][:validations][:image][:allowed_mime]
+    allowed.include?(attachment_content_type)
+  end
+
+  def attachment_url
+    return nil unless attachment.present?
+    ENV["API_URL"] + attachment.url
+  end
+
+  def attachment_thumbnail_url
+    return nil unless attachment.present? && attachment.exists?(:thumbnail)
+    ENV["API_URL"] + attachment.url(:thumbnail)
+  end
+
+  def resize_images
+    res = attachment_is_image?
+    res
+  end
+
 end

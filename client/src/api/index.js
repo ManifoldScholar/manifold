@@ -6,4 +6,5 @@ export sectionsAPI from 'api/sections';
 export meAPI from 'api/me';
 export favoritesAPI from 'api/favorites';
 export pagesAPI from 'api/pages';
+export collectionsAPI from 'api/collections';
 export ApiClient from 'api/client';

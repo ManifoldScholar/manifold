@@ -28,6 +28,9 @@ gem "clockwork", "2.0.0"
 gem "twitter", "5.16.0"
 gem "kaminari", "0.17.0"
 
+gem "google_drive"
+gem "rainbow"
+
 group :development, :test do
   gem "rspec-rails", "~> 3.5.0"
   gem "rspec-support", "~> 3.5.0"

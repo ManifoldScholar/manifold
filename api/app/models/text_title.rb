@@ -1,5 +1,7 @@
 # A value object representing a text's title.
 class TextTitle < ActiveRecord::Base
+
+  # Constants
   KIND_MAIN = "main".freeze
   KIND_SUBTITLE = "subtitle".freeze
   KIND_SHORT = "short".freeze
@@ -11,8 +13,11 @@ class TextTitle < ActiveRecord::Base
                    KIND_COLLECTION,
                    KIND_EDITION].freeze
 
+  # Associations
   belongs_to :text
 
+  # Validation
   validates :value, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }
+
 end

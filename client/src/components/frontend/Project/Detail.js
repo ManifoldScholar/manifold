@@ -105,6 +105,37 @@ class Detail extends Component {
     );
   }
 
+  renderCollectionsOrResources() {
+    const project = this.props.project;
+    if (project.attributes.collectionsCount > 0) return this.renderCollections();
+    if (project.attributes.resourcesCount > 0) return this.renderResources();
+    return null;
+  }
+
+  renderCollections() {
+    const project = this.props.project;
+    return (
+      <section className="bg-neutral05">
+        <div className="container">
+          <header className="section-heading">
+            <h4 className="title">
+              <i className="manicon manicon-cube-shine"></i>
+              {'Resources'}
+            </h4>
+          </header>
+          <ResourceCollectionList.Grid
+            resourceCollections={project.relationships.collections}
+            projectId={project.id}
+          />
+          <ResourceList.Totals
+            count={project.attributes.resourcesCount}
+            projectId={project.id}
+          />
+        </div>
+      </section>
+    );
+  }
+
   renderResources() {
     // Currently returns static resource section
     // Logic to check for existing resources should be here
@@ -114,35 +145,18 @@ class Detail extends Component {
     // and not both
     const project = this.props.project;
     return (
-      <div>
-        <section className="bg-neutral05">
-          <div className="container">
-            <header className="section-heading">
-              <h4 className="title">
-                <i className="manicon manicon-cube-shine"></i>
-                {'Resources'}
-              </h4>
-            </header>
-            <ResourceCollectionList.Grid
-              resourceCollections={fakeData.resourceCollections}
-              projectId={project.id}
-            />
-            <ResourceList.Totals count={2028} projectId={project.id} />
-          </div>
-        </section>
-        <section className="bg-neutral05">
-          <div className="container">
-            <header className="section-heading">
-              <h4 className="title">
-                <i className="manicon manicon-cube-shine"></i>
-                {'Resources'}
-              </h4>
-            </header>
-            <ResourceList.Thumbnails resources={fakeData.resources} projectId={project.id} />
-            <ResourceList.Totals count={2028} projectId={project.id} />
-          </div>
-        </section>
-      </div>
+      <section className="bg-neutral05">
+        <div className="container">
+          <header className="section-heading">
+            <h4 className="title">
+              <i className="manicon manicon-cube-shine"></i>
+              {'Resources'}
+            </h4>
+          </header>
+          <ResourceList.Thumbnails resources={fakeData.resources} projectId={project.id} />
+          <ResourceList.Totals count={2028} projectId={project.id} />
+        </div>
+      </section>
     );
   }
 
@@ -157,7 +171,7 @@ class Detail extends Component {
         <Project.Hero project={this.props.project} />
         {this.renderActivity()}
         {this.renderTexts()}
-        {this.renderResources()}
+        {this.renderCollectionsOrResources()}
         {this.renderMeta()}
         {this.renderNavButtons()}
       </div>

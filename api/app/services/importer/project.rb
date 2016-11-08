@@ -2,6 +2,7 @@ require "json"
 
 module Importer
   # This class imports a project.json file into Manifold
+  # rubocop:disable ClassLength
   class Project
     def initialize(path, creator)
       @creator = creator
@@ -13,27 +14,44 @@ module Importer
       upsert_project(include_texts)
     end
 
+    def resource_import_options
+      {
+        project_id: find_project.id,
+        drive_sheet: @project_json[:resource_drive_sheet],
+        drive_dir: @project_json[:resource_drive_dir]
+      }
+    end
+
     private
+
+    def find_project
+      ::Project.find_or_initialize_by(
+        hashtag: @project_json[:attributes][:hashtag]
+      )
+    end
 
     # rubocop:disable Metrics/AbcSize
     def upsert_project(include_texts)
-      project = ::Project.find_or_initialize_by(
-        hashtag: @project_json[:attributes][:hashtag]
-      )
+      project = find_project
       project.creator = @creator if project.new_record?
-
+      project.save if project.new_record?
       project.update(@project_json[:attributes])
-      set_attachment(project, :cover, @project_json[:cover])
-      set_attachment(project, :hero, @project_json[:hero])
-      set_attachment(project, :avatar, @project_json[:avatar])
+      assign_project_attachments(project)
       excludes = %w(cover_ avatar_ hero_)
       excludes << "published_text_id" unless include_texts
       unset_untouched(project, @project_json[:attributes], excludes)
+      raise "Invalid project: #{project.errors.full_messages}" unless project.valid?
       project.save
       import_collaborators(project)
       import_published_text(project, @project_json[:published_text]) if include_texts
     end
     # rubocop:enable Metrics/AbcSize
+
+    def assign_project_attachments(project)
+      set_attachment(project, :cover, @project_json[:cover])
+      set_attachment(project, :hero, @project_json[:hero])
+      set_attachment(project, :avatar, @project_json[:avatar])
+    end
 
     def import_collaborators(project)
       makers_json = @project_json.dig(:relationships, :makers)
@@ -114,4 +132,5 @@ module Importer
       JSON.parse(read_file(file)).deep_symbolize_keys
     end
   end
+  # rubocop:enable ClassLength
 end

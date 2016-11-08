@@ -8,17 +8,18 @@ export default class ResourceSlideCaption extends Component {
 
   render() {
     const resource = this.props.resource;
+    const attr = resource.attributes;
 
     return (
       <div className="slide-caption">
         <header>
           <h2 className="resource-title">
-            {resource.title}
+            {attr.title}
           </h2>
         </header>
         <div className="resource-description">
           <p>
-            {resource.description}
+            {attr.description}
           </p>
         </div>
         <div className="resource-utility">
@@ -26,9 +27,9 @@ export default class ResourceSlideCaption extends Component {
             <button className="more-link">
               {'Read More'}
             </button>
-            <Link to={resource.link} className="download-link">
+            <a href={attr.attachmentUrl} className="download-link">
               {'Download'} <i className="manicon manicon-arrow-down"></i>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

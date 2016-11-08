@@ -1,19 +1,34 @@
 # The project model is the primary unit of Manifold.
 class Project < ActiveRecord::Base
-  has_many :texts
-  belongs_to :published_text, class_name: "Text", optional: true
-  has_many :text_categories, -> { for_text }, class_name: "Category"
-  has_many :resource_categories, -> { for_resource }, class_name: "Category"
-  has_many :favorites, as: :favoritable, dependent: :destroy
-  has_many :events, -> { order "events.created_at DESC" }
 
+  # Concerns
   include TrackedCreator
   include Collaborative
   include MoneyAttributes
-  money_attributes :purchase_price
 
+  # Associations
+  belongs_to :published_text, class_name: "Text", optional: true
+  has_many :texts, dependent: :destroy
+  has_many :text_categories, -> { for_text }, class_name: "Category", dependent: :destroy
+  has_many :resource_categories,
+           -> { for_resource },
+           class_name: "Category",
+           dependent: :destroy
+  has_many :favorites, as: :favoritable, dependent: :destroy
+  has_many :events, -> { order "events.created_at DESC" }, dependent: :destroy
+  has_many :resources, dependent: :destroy
+  has_many :collections, dependent: :destroy
+
+  # Callbacks
   after_commit :trigger_creation_event, on: [:create, :update]
 
+  # Misc
+  money_attributes :purchase_price
+
+  # Validation
+  validates :purchase_url, url: { allow_nil: true }
+
+  # Attachments
   has_attached_file :avatar,
                     include_updated_timestamp: false,
                     default_url: "",
@@ -21,7 +36,6 @@ class Project < ActiveRecord::Base
                     styles: {
                       thumb: ["x246", :png]
                     }
-
   has_attached_file :cover,
                     include_updated_timestamp: false,
                     default_url: "",
@@ -29,27 +43,18 @@ class Project < ActiveRecord::Base
                     styles: {
                       hero: ["800", :png]
                     }
-
   has_attached_file :hero,
                     include_updated_timestamp: false,
                     url: "/system/:class/:uuid_partition/:id/:style_:filename",
                     default_url: "",
                     styles: { background: ["1800", :jpg] }
-
-  validates_attachment_content_type :cover, :hero, :avatar, content_type: %w(
-    image/gif
-    image/jpeg
-    image/jpg
-    image/png
-    image/svg+xml
-  )
-  validates_attachment_file_name :cover, :hero, :avatar, matches: [
-    /gif\Z/,
-    /jpe?g\Z/,
-    /png\Z/,
-    /svg\Z/
-  ]
-  validates :purchase_url, url: { allow_nil: true }
+  validation = Rails.application.config.x.api[:attachments][:validations][:image]
+  validates_attachment_content_type :cover, content_type: validation[:allowed_mime]
+  validates_attachment_content_type :hero, content_type: validation[:allowed_mime]
+  validates_attachment_content_type :avatar, content_type: validation[:allowed_mime]
+  validates_attachment_file_name :cover, matches: validation[:allowed_ext]
+  validates_attachment_file_name :hero, matches: validation[:allowed_ext]
+  validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
 
   def self.filtered(filters)
     projects = Project.all
@@ -85,6 +90,10 @@ class Project < ActiveRecord::Base
     return nil if hero.url(:background).blank?
     ENV["API_URL"] + hero.url(:background)
   end
+
+  delegate :count, to: :collections, prefix: true
+
+  delegate :count, to: :resources, prefix: true
 
   private
 

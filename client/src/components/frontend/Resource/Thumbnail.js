@@ -15,8 +15,8 @@ export default class ResourceThumbnail extends Component {
     isList: true
   };
 
-  getResourceType(type) {
-    return type.toLowerCase().charAt(0).toUpperCase() + type.slice(1);
+  getResourceKind(kind) {
+    return kind.toLowerCase().charAt(0).toUpperCase() + kind.slice(1);
   }
 
   render() {
@@ -28,9 +28,9 @@ export default class ResourceThumbnail extends Component {
     });
 
     let linkStyle = {};
-    if (resource.attributes.image) {
+    if (resource.attributes.attachmentUrl) {
       linkStyle = {
-        backgroundImage: `url('${resource.attributes.image}')`
+        backgroundImage: `url('${resource.attributes.attachmentThumbnailUrl}')`
       };
     }
 
@@ -43,9 +43,9 @@ export default class ResourceThumbnail extends Component {
         >
           <figure className="resource-type">
             <figcaption>
-              {this.getResourceType(resource.attributes.type)}
+              {this.getResourceKind(resource.attributes.kind)}
             </figcaption>
-            <i className={`manicon manicon-resource-${resource.attributes.type}`}></i>
+            <i className={`manicon manicon-resource-${resource.attributes.kind}`}></i>
           </figure>
           <h4 className="resource-title">
             {resource.attributes.title}

@@ -26,7 +26,7 @@ export default class ResourceListSlideshow extends Component {
 
   getFigureByType(resource) {
     let output = false;
-    switch (resource.attributes.type) {
+    switch (resource.attributes.kind) {
       case 'image':
         output = (<ResourceList.Slide.SlideImage
           resource={resource}
@@ -71,15 +71,8 @@ export default class ResourceListSlideshow extends Component {
   }
 
   render() {
-    // Order component resources by "order" property
-    const resources = this.props.resources.sort((a, b) => {
-      if (a.attributes.position < b.attributes.position) return -1;
-      if (a.attributes.position > b.attributes.position) return 1;
-      return 0;
-    });
-
+    const resources = this.props.resources;
     const currentResource = resources[this.state.currentResource];
-
     return (
       <div className="resource-slideshow">
         {/*
@@ -104,7 +97,7 @@ export default class ResourceListSlideshow extends Component {
             />
             <div className="slide-pagination">
               <span className="slide-ordinal">
-                {'178 / 185'}
+                {this.state.currentResource + 1} {'/'} {resources.length}
               </span>
               <div>
                 <button className="slide-previous" onClick={this.handleSlidePrev}>

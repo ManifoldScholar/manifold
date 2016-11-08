@@ -2,13 +2,19 @@
 # a likely candidate for refactoring into a "range" model that can be used by various
 # other manifold records.
 class Annotation < ApplicationRecord
+
+  # Concerns
+  include TrackedCreator
+
+  # Constants
   TYPE_ANNOTATION = "annotation".freeze
   TYPE_HIGHLIGHT = "highlight".freeze
 
-  include TrackedCreator
-
+  # Associations
   belongs_to :text_section
 
+  # Delegations
   delegate :text, to: :text_section
   delegate :project, to: :text
+
 end

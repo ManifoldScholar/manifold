@@ -2,18 +2,24 @@ require "memoist"
 
 # A single Text
 class Text < ActiveRecord::Base
-  extend Memoist
 
+  # Default Scope
+  default_scope { includes(:titles, :text_subjects, :category) }
+
+  # Concerns
+  extend Memoist
+  include Collaborative
+  include TrackedCreator
+
+  # Fields
   serialize :structure_titles, Hash
   serialize :toc, Array
   serialize :page_list, Array
   serialize :landmarks, Array
 
-  include Collaborative
-  include TrackedCreator
-
-  default_scope { includes(:titles, :text_subjects, :category) }
-
+  # Associations
+  belongs_to :project, optional: true
+  belongs_to :category, optional: true
   has_many :titles, class_name: "TextTitle"
   has_many :text_subjects
   has_many :subjects, through: :text_subjects
@@ -22,11 +28,11 @@ class Text < ActiveRecord::Base
   has_many :text_sections, -> { order(position: :asc) }
   has_many :stylesheets
   has_many :favorites, as: :favoritable
-  belongs_to :project, optional: true
-  belongs_to :category, optional: true
 
+  # Validation
   validates :unique_identifier, presence: true
 
+  # Callbacks
   after_commit :trigger_text_added_event, on: [:create, :update]
 
   def title

@@ -1,6 +1,8 @@
 # Events are things that happen in relation to a project. Events populate the project
 # activity feed.
 class Event < ApplicationRecord
+
+  # Constants
   PROJECT_CREATED = "PROJECT_CREATED".freeze
   TEXT_ADDED = "TEXT_ADDED".freeze
   TEXT_ANNOTATED = "TEXT_ANNOTATED".freeze
@@ -13,9 +15,11 @@ class Event < ApplicationRecord
     TWEET
   ].freeze
 
+  # Associations
   belongs_to :subject, polymorphic: true
   belongs_to :project
 
+  # Validation
   validates :event_type, presence: true, inclusion: { in: self::EVENT_TYPES }
 
   def self.trigger(type, subject)
