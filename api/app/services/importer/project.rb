@@ -14,8 +14,8 @@ module Importer
     end
 
     def resource_import_options
-      return {
-        project_id: project.id,
+      {
+        project_id: find_project.id,
         drive_sheet: @project_json[:resource_drive_sheet],
         drive_dir: @project_json[:resource_drive_dir]
       }
@@ -23,7 +23,7 @@ module Importer
 
     private
 
-    def project
+    def find_project
       project = ::Project.find_or_initialize_by(
         hashtag: @project_json[:attributes][:hashtag]
       )
@@ -31,9 +31,9 @@ module Importer
 
     # rubocop:disable Metrics/AbcSize
     def upsert_project(include_texts)
-      project = project
+      project = find_project
       project.creator = @creator if project.new_record?
-
+      project.save if project.new_record?
       project.update(@project_json[:attributes])
       set_attachment(project, :cover, @project_json[:cover])
       set_attachment(project, :hero, @project_json[:hero])
@@ -41,9 +41,13 @@ module Importer
       excludes = %w(cover_ avatar_ hero_)
       excludes << "published_text_id" unless include_texts
       unset_untouched(project, @project_json[:attributes], excludes)
-      project.save
-      import_collaborators(project)
-      import_published_text(project, @project_json[:published_text]) if include_texts
+      if project.valid?
+        project.save
+        import_collaborators(project)
+        import_published_text(project, @project_json[:published_text]) if include_texts
+      else
+        raise "Invalid project: #{project.errors.full_messages}"
+      end
     end
     # rubocop:enable Metrics/AbcSize
 
