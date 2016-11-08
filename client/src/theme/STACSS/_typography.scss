@@ -122,6 +122,7 @@
 @mixin formInputPrimary {
   @include templateHead;
   font-size: 20px;
+  font-weight: $regular;
   letter-spacing: 0.015em;
 }
 

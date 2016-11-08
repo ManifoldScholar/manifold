@@ -364,7 +364,7 @@ const backendEditors = [
       display_name: "",
       role: "creator"
     },
-    avatar: "garrish.jpg"
+    avatar: "/static/placeholder/user-avatar-dreft01.jpg"
   },
   {
     id: 2,
@@ -377,7 +377,19 @@ const backendEditors = [
       display_name: "",
       role: "creator"
     },
-    avatar: "gylling.jpg"
+    avatar: "/static/placeholder/user-avatar-nornes01.jpg"
+  },
+  {
+    attributes: {
+      name: "Liza Weinstein",
+      first_name: "Liza",
+      middle_name: "",
+      last_name: "Weinstein",
+      sort_name: "Weinstein, Liza",
+      display_name: "",
+      role: "creator"
+    },
+    avatar: "/static/placeholder/user-avatar-rowan01.jpg"
   }
 ];
 
@@ -385,5 +397,7 @@ export default {
   resources,
   events,
   resourceCollections,
-  resourceCollection
+  resourceCollection,
+  backendAuthors,
+  backendEditors
 };
