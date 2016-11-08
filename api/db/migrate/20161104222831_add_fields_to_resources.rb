@@ -1,6 +1,7 @@
 class AddFieldsToResources < ActiveRecord::Migration[5.0]
   def change
     rename_column :resources, :name, :title
+    rename_column :resources, :type, :kind
     remove_column :resources, :project_id, :integer
     add_column :resources, :project_id, :uuid
     add_column :resources, :caption, :text
@@ -19,12 +20,12 @@ class AddFieldsToResources < ActiveRecord::Migration[5.0]
     add_column :resources, :doi_requested, :boolean, default: false
     add_column :resources, :doi_added, :datetime
     add_column :resources, :doi, :string, default: false
-    add_attachment :resources, :high_res
-    add_attachment :resources, :transcript
-    add_attachment :resources, :translation
     add_column :resources, :high_res_checksum, :string
     add_column :resources, :transcript_checksum, :string
     add_column :resources, :translation_checksum, :string
     add_column :resources, :attachment_checksum, :string
+    add_attachment :resources, :high_res
+    add_attachment :resources, :transcript
+    add_attachment :resources, :translation
   end
 end

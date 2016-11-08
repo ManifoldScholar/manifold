@@ -46,9 +46,11 @@ ActiveRecord::Schema.define(version: 20161105231153) do
   end
 
   create_table "collection_resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid    "resource_id"
-    t.uuid    "collection_id"
-    t.integer "position",      default: 0
+    t.uuid     "resource_id"
+    t.uuid     "collection_id"
+    t.integer  "position",      default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "collections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -61,6 +63,8 @@ ActiveRecord::Schema.define(version: 20161105231153) do
     t.datetime "thumbnail_updated_at"
     t.string   "thumbnail_checksum"
     t.string   "fingerprint"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -174,7 +178,7 @@ ActiveRecord::Schema.define(version: 20161105231153) do
 
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "title"
-    t.string   "type"
+    t.string   "kind"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -199,6 +203,10 @@ ActiveRecord::Schema.define(version: 20161105231153) do
     t.boolean  "doi_requested",            default: false
     t.datetime "doi_added"
     t.string   "doi",                      default: "f"
+    t.string   "high_res_checksum"
+    t.string   "transcript_checksum"
+    t.string   "translation_checksum"
+    t.string   "attachment_checksum"
     t.string   "high_res_file_name"
     t.string   "high_res_content_type"
     t.integer  "high_res_file_size"
@@ -211,10 +219,6 @@ ActiveRecord::Schema.define(version: 20161105231153) do
     t.string   "translation_content_type"
     t.integer  "translation_file_size"
     t.datetime "translation_updated_at"
-    t.string   "high_res_checksum"
-    t.string   "transcript_checksum"
-    t.string   "translation_checksum"
-    t.string   "attachment_checksum"
   end
 
   create_table "stylesheets", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
