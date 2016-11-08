@@ -10,7 +10,10 @@ class Project < ActiveRecord::Base
   belongs_to :published_text, class_name: "Text", optional: true
   has_many :texts, dependent: :destroy
   has_many :text_categories, -> { for_text }, class_name: "Category", dependent: :destroy
-  has_many :resource_categories, -> { for_resource }, class_name: "Category", dependent: :destroy
+  has_many :resource_categories,
+           -> { for_resource },
+           class_name: "Category",
+           dependent: :destroy
   has_many :favorites, as: :favoritable, dependent: :destroy
   has_many :events, -> { order "events.created_at DESC" }, dependent: :destroy
   has_many :resources, dependent: :destroy
@@ -88,13 +91,9 @@ class Project < ActiveRecord::Base
     ENV["API_URL"] + hero.url(:background)
   end
 
-  def collections_count
-    collections.count
-  end
+  delegate :count, to: :collections, prefix: true
 
-  def resources_count
-    resources.count
-  end
+  delegate :count, to: :resources, prefix: true
 
   private
 

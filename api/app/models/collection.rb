@@ -3,7 +3,9 @@ class Collection < ActiveRecord::Base
 
   # Associations
   belongs_to :project
-  has_many :collection_resources, -> { order "collection_resources.position" }, dependent: :destroy
+  has_many :collection_resources,
+           -> { order "collection_resources.position" },
+           dependent: :destroy
   has_many :resources, through: :collection_resources
 
   # Attachments

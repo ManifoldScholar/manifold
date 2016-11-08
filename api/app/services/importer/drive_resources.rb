@@ -1,7 +1,6 @@
 require "json"
 
 module Importer
-
   class ImportDriveResourcesError < StandardError
   end
 
@@ -15,11 +14,11 @@ module Importer
     COLLECTION_BOOLEAN_ATTRIBUTES = %w().freeze
     COLLECTION_ATTACHMENT_ATTRIBUTES = %w(thumbnail).freeze
     RESOURCE_SIMPLE_ATTRIBUTES = %w(
-      title caption description keywords alt_text copyright_status copyright_holder
+      title kind caption description keywords alt_text copyright_status copyright_holder
       credit external_url external_type external_id
     ).freeze
     RESOURCE_BOOLEAN_ATTRIBUTES = %w(allow_high_res allow_download).freeze
-    RESOURCE_ATTACHMENT_ATTRIBUTES= %w(attachment high_res transcript).freeze
+    RESOURCE_ATTACHMENT_ATTRIBUTES = %w(attachment high_res transcript).freeze
     TRUTHY_VALUES = %w(true TRUE True 1 y yes Yes YES T).freeze
 
     def initialize(project_id, sheet_id, drive_folder_id, creator, logger = Rails.logger)
@@ -66,7 +65,11 @@ module Importer
       resource.creator = @creator
       update_simple_attributes(resource, row, RESOURCE_SIMPLE_ATTRIBUTES)
       update_boolean_attributes(resource, row, RESOURCE_BOOLEAN_ATTRIBUTES)
-      update_attachment_attributes(resource, row, RESOURCE_ATTACHMENT_ATTRIBUTES)
+      begin
+        update_attachment_attributes(resource, row, RESOURCE_ATTACHMENT_ATTRIBUTES)
+      rescue Google::Apis::TransmissionError
+        update_attachment_attributes(resource, row, RESOURCE_ATTACHMENT_ATTRIBUTES)
+      end
       if resource.valid?
         resource.save
         add_resource_to_collection(resource, row[:collection], count)
@@ -99,7 +102,7 @@ module Importer
         position: position
       )
       return log_model_errors(cr) unless cr.valid?
-      return cr
+      cr
     end
 
     def update_simple_attributes(model, row, simple_attributes)
@@ -129,7 +132,7 @@ module Importer
       log_found_file(file)
 
       log_start_download(file)
-      contents = file.download_to_string()
+      contents = file.download_to_string
       io = StringIO.new(contents)
       log_download(file, io)
       io.class.class_eval { attr_accessor :original_filename, :content_type }
@@ -137,24 +140,22 @@ module Importer
       io.original_filename = file.title
 
       model.send("#{key}=", io)
-      tmp_path = model.send("#{key}").queued_for_write[:original].path
-      saved_file_checksum = Digest::MD5.hexdigest(File.read(tmp_path));
+      tmp_path = model.send(key.to_s).queued_for_write[:original].path
+      saved_file_checksum = Digest::MD5.hexdigest(File.read(tmp_path))
       @logger.info "            Content type: #{file.mime_type}"
       @logger.info "            Saved file checksum is #{saved_file_checksum}"
-      if saved_file_checksum != file.md5_checksum
-        raise_attachment_save_error
-      end
+      raise_attachment_save_error if saved_file_checksum != file.md5_checksum
       model.send("#{key}_checksum=", saved_file_checksum)
     end
 
     def simple_attributes_from_row(row, attr_list)
-      row.select do |col, val|
+      row.select do |col, _val|
         attr_list.include?(col)
       end
     end
 
     def fingerprint(row)
-      candidates = %w(attachment external_url title)
+      candidates = %w(local_id attachment external_url title)
       field = candidates.find { |candidate| row.key?(candidate) && !row[candidate].blank? }
       fingerprint = Digest::MD5.hexdigest(row[field])
       log_fingerprint(fingerprint)
@@ -205,7 +206,7 @@ module Importer
 
     def raise_missing_column_error(ws)
       # rubocop:disable LineLength
-      msg = "\"#{ws.title}\" sheet in \"#{ws.spreadsheet.title}\" is missing required column(s): #{(REQUIRED_RESOURCE_COLUMNS - ws.list.keys).join(", ")}"
+      msg = "\"#{ws.title}\" sheet in \"#{ws.spreadsheet.title}\" is missing required column(s): #{(REQUIRED_RESOURCE_COLUMNS - ws.list.keys).join(', ')}"
       # rubocop:enable LineLength
       @logger.error(Rainbow(msg).red)
       raise ImportDriveResourcesError
@@ -247,7 +248,7 @@ module Importer
       nil
     end
 
-    def log_missing_file(filename)
+    def log_missing_file(_filename)
       @logger.error(Rainbow("    Unable to locate drive file: #{value}").red)
       nil
     end
@@ -266,12 +267,12 @@ module Importer
       nil
     end
 
-    def log_start_download(file)
+    def log_start_download(_file)
       @logger.info("        Starting download from drive.")
       nil
     end
 
-    def log_download(file, io)
+    def log_download(_file, io)
       @logger.info("        Downloaded file.")
       @logger.info("            Local Size: #{io.size}")
       nil
@@ -294,5 +295,4 @@ module Importer
     end
 
   end
-
 end

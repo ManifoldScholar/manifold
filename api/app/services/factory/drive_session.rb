@@ -17,6 +17,5 @@ module Factory
       GoogleDrive::Session.from_service_account_key(StringIO.new(config.to_json))
     end
 
-
   end
 end

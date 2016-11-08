@@ -8,9 +8,8 @@ class CollectionResource < ActiveRecord::Base
   validate :collection_and_resource_must_belong_to_same_project
 
   def collection_and_resource_must_belong_to_same_project
-    if collection.project != resource.project
-      errors.add(:resource, "can't belong to a different project")
-    end
+    return unless collection.project != resource.project
+    errors.add(:resource, "can't belong to a different project")
   end
 
 end

@@ -15,7 +15,7 @@ namespace :import do
     project_id, drive_sheet, drive_dir =
       p_importer.resource_import_options.values_at(:project_id, :drive_sheet, :drive_dir)
     logger = Logger.new(STDOUT)
-    logger.formatter = proc { |severity, datetime, progname, msg|
+    logger.formatter = proc { |severity, _datetime, _progname, msg|
       "#{severity.rjust(8)}: #{msg}\n"
     }
     Importer::DriveResources.new(project_id, drive_sheet, drive_dir, cli_user, logger).import
