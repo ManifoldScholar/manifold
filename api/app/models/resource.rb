@@ -13,10 +13,35 @@ class Resource < ActiveRecord::Base
   has_attached_file :attachment,
                     include_updated_timestamp: false,
                     default_url: "",
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
-                    styles: {}
+                    url: "/system/resource/:uuid_partition/:id/:style_:filename",
+                    styles: {
+                      thumbnail: ["200x150#"]
+                    }
   validation = Rails.application.config.x.api[:attachments][:validations][:resource]
   validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
   validates_attachment_file_name :attachment, matches: validation[:allowed_ext]
+
+  before_attachment_post_process :resize_images
+
+  def attachment_is_image?
+    config = Rails.application.config.x.api
+    allowed = config[:attachments][:validations][:image][:allowed_mime]
+    allowed.include?(attachment_content_type)
+  end
+
+  def attachment_url
+    return nil unless attachment.present?
+    ENV["API_URL"] + attachment.url
+  end
+
+  def attachment_thumbnail_url
+    return nil unless attachment.present? && attachment.exists?(:thumbnail)
+    ENV["API_URL"] + attachment.url(:thumbnail)
+  end
+
+  def resize_images
+    res = attachment_is_image?
+    res
+  end
 
 end
