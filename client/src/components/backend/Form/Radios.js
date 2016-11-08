@@ -17,21 +17,21 @@ export default class Radios extends Component {
           <input type="radio" name="selection"/>
             <span className="toggle-indicator">
             </span>
-            <span className="toggle-label">Checkbox item</span>
+            <span className="toggle-label">Radio item</span>
         </label>
 
         <label className="form-toggle radio horizontal">
           <input type="radio" name="selection"/>
             <span className="toggle-indicator">
             </span>
-            <span className="toggle-label">Checkbox item</span>
+            <span className="toggle-label">Radio item</span>
         </label>
 
         <label className="form-toggle radio horizontal">
           <input type="radio" name="selection"/>
             <span className="toggle-indicator">
             </span>
-            <span className="toggle-label">Checkbox item</span>
+            <span className="toggle-label">Radio item</span>
         </label>
       </div>
     );

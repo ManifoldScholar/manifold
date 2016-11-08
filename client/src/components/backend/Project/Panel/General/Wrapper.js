@@ -16,7 +16,9 @@ export default class ProjcetPanelGeneral extends Component {
           <Form.TextInput label="Title"/>
           <Form.TextInput label="Subtitle"/>
           <Form.Radios label="Radio Buttons"/>
-          <Form.Makers label="Authors" />
+          <Form.Makers label="Authors" makers={fakeData.backendAuthors} />
+          <Form.Makers label="Authors" makers={fakeData.backendEditors} />
+          <Form.TextArea label="Synopses"/>
         </form>
       </section>
     );
