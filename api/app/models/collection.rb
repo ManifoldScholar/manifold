@@ -3,7 +3,7 @@ class Collection < ActiveRecord::Base
 
   # Associations
   belongs_to :project
-  has_many :collection_resources, dependent: :destroy
+  has_many :collection_resources, -> { order "collection_resources.position" }, dependent: :destroy
   has_many :resources, through: :collection_resources
 
   # Attachments
@@ -21,6 +21,13 @@ class Collection < ActiveRecord::Base
   def thumbnail_url
     return nil unless thumbnail.present?
     ENV["API_URL"] + thumbnail.url
+  end
+
+  def resource_kinds
+    resources
+      .select("resources.kind, collection_resources.position")
+      .distinct
+      .to_a.pluck(:kind)
   end
 
 end
