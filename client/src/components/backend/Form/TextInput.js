@@ -16,5 +16,4 @@ export default class TextInput extends Component {
       </div>
     );
   }
-
 }

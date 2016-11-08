@@ -19,6 +19,7 @@ export default class ProjcetPanelGeneral extends Component {
           <Form.Makers label="Authors" makers={fakeData.backendAuthors} />
           <Form.Makers label="Authors" makers={fakeData.backendEditors} />
           <Form.TextArea label="Synopses"/>
+          <Form.Upload label="Upload a File"/>
         </form>
       </section>
     );

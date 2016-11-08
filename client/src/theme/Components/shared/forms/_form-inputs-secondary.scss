@@ -57,4 +57,24 @@
       }
     }
   }
+
+  .form-dropzone {
+    padding: 36px 30px 38px;
+    border: 1px solid $neutral80;
+
+    .manicon-cloud-up {
+      display: block;
+      padding-bottom: 26px;
+      font-size: 36px;
+      color: $neutralWhite;
+      text-align: center;
+    }
+
+    p {
+      @include utilityPrimary;
+      font-size: 14px;
+      color: $neutral50;
+      text-align: center;
+    }
+  }
 }
