@@ -4,8 +4,9 @@ module Importer
   # This class imports a project.json file into Manifold
   # rubocop:disable ClassLength
   class Project
-    def initialize(path, creator)
+    def initialize(path, creator, logger = Rails.logger)
       @creator = creator
+      @logger = logger
       @path = path
       @project_json = read_json("project.json")
     end
@@ -44,8 +45,18 @@ module Importer
       project.save
       import_collaborators(project)
       import_published_text(project, @project_json[:published_text]) if include_texts
+      import_resources(project)
     end
     # rubocop:enable Metrics/AbcSize
+
+    def import_resources(project)
+      drive_sheet = @project_json[:resource_drive_sheet]
+      drive_dir = @project_json[:resource_drive_dir]
+      return unless !drive_sheet.blank? && !drive_dir.blank?
+      importer = Importer::DriveResources.new(project.id, drive_sheet, drive_dir,
+                                              @creator, @logger)
+      importer.import
+    end
 
     def assign_project_attachments(project)
       set_attachment(project, :cover, @project_json[:cover])
@@ -83,8 +94,7 @@ module Importer
 
     def import_published_text(project, text_file_name)
       text_path = "#{@path}/texts/#{text_file_name}"
-      Ingestor.logger = Logger.new(STDOUT)
-      Ingestor.logger.level = Logger.const_get(:DEBUG)
+      Ingestor.logger = @logger
       text = Ingestor.ingest(text_path, @creator)
       Ingestor.reset_logger
       text.project = project

@@ -5,7 +5,11 @@ namespace :import do
   task :project, [:path, :include_texts, :log_level] => :environment do |_t, args|
     cli_user = User.find_by(is_cli_user: true)
     include_texts = args[:include_texts] == "no" ? false : true
-    Importer::Project.new(args[:path], cli_user).import(include_texts)
+    logger = Logger.new(STDOUT)
+    logger.formatter = proc { |severity, _datetime, _progname, msg|
+      "#{severity.rjust(8)}: #{msg}\n"
+    }
+    Importer::Project.new(args[:path], cli_user, logger).import(include_texts)
   end
 
   desc "Imports a projects resource into Manifold from Google Drive"
@@ -28,8 +32,12 @@ namespace :import do
     include_texts = args[:include_texts] == "no" ? false : true
     cli_user = User.find_by(is_cli_user: true)
     children = Pathname.new(args[:path]).children.select(&:directory?)
+    logger = Logger.new(STDOUT)
+    logger.formatter = proc { |severity, _datetime, _progname, msg|
+      "#{severity.rjust(8)}: #{msg}\n"
+    }
     children.each do |child|
-      Importer::Project.new(child, cli_user).import(include_texts)
+      Importer::Project.new(child, cli_user, logger).import(include_texts)
     end
   end
 end
