@@ -18,7 +18,9 @@ namespace :import do
     logger.formatter = proc { |severity, _datetime, _progname, msg|
       "#{severity.rjust(8)}: #{msg}\n"
     }
-    Importer::DriveResources.new(project_id, drive_sheet, drive_dir, cli_user, logger).import
+    importer = Importer::DriveResources.new(project_id, drive_sheet, drive_dir,
+                                            cli_user, logger)
+    importer.import
   end
 
   desc "Imports all projects in a directory into Manifold"

@@ -18,7 +18,7 @@ module Api
       def show
         render json: @project,
                include: %w(creators collaborators texts text_categories events
-                        collections)
+                           collections)
       end
 
       # POST /projects

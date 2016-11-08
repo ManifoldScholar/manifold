@@ -1,6 +1,8 @@
 module Factory
+  # Returns a drive session object; used by the drive_resource importer
   class DriveSession
 
+    # rubocop:disable LineLength
     def self.create_service_account_session
       config = {
         "type": "service_account",
@@ -14,6 +16,7 @@ module Factory
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/manifold-service%40appspot.gserviceaccount.com"
       }
+      # rubocop:enable LineLength
       GoogleDrive::Session.from_service_account_key(StringIO.new(config.to_json))
     end
 

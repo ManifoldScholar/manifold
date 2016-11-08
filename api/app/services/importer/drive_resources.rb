@@ -6,6 +6,7 @@ module Importer
 
   # This class imports an existing project's resources into Manifold from a Google drive
   # sheet and a google drive directory
+  # rubocop:disable ClassLength
   class DriveResources
 
     REQUIRED_RESOURCE_COLUMNS = %w(title attachment).freeze
@@ -26,16 +27,14 @@ module Importer
       @creator = creator
       @sheet_id = sheet_id
       @drive_folder_id = drive_folder_id
-      @logger = logger
+      @logger = Helpers::Logger.new(logger)
       @touched = Set.new
     end
 
     def import
       @logger.info "Importing resources for project: #{@project.title}"
       begin
-        validate_spreadsheet
-        validate_resources_sheet
-        validate_collections_sheet
+        pre_import_validation
         collections_sheet.list.each do |row|
           import_collection(row)
         end
@@ -49,6 +48,12 @@ module Importer
 
     private
 
+    def pre_import_validation
+      validate_spreadsheet
+      validate_resources_sheet
+      validate_collections_sheet
+    end
+
     def import_collection(row)
       @logger.info "Importing collection: \"#{row[:title]}\""
       collection = find_or_initialize_collection(fingerprint(row))
@@ -56,7 +61,7 @@ module Importer
       update_boolean_attributes(collection, row, COLLECTION_BOOLEAN_ATTRIBUTES)
       update_attachment_attributes(collection, row, COLLECTION_ATTACHMENT_ATTRIBUTES)
       return collection.save if collection.valid?
-      log_model_errors(collection)
+      @logger.log_model_errors(collection)
     end
 
     def import_resource(row, count)
@@ -65,24 +70,21 @@ module Importer
       resource.creator = @creator
       update_simple_attributes(resource, row, RESOURCE_SIMPLE_ATTRIBUTES)
       update_boolean_attributes(resource, row, RESOURCE_BOOLEAN_ATTRIBUTES)
-      begin
-        update_attachment_attributes(resource, row, RESOURCE_ATTACHMENT_ATTRIBUTES)
-      rescue Google::Apis::TransmissionError
-        update_attachment_attributes(resource, row, RESOURCE_ATTACHMENT_ATTRIBUTES)
-      end
+      update_attachment_attributes(resource, row, RESOURCE_ATTACHMENT_ATTRIBUTES)
       if resource.valid?
         resource.save
         add_resource_to_collection(resource, row[:collection], count)
         return
       end
-      log_model_errors(resource)
+      @logger.log_model_errors(resource)
     end
 
     def add_resource_to_collection(resource, collection_title, count)
       @logger.info "    Attempting to add resource to collection \"#{collection_title}\""
       collection = @project.collections.find_by(title: collection_title)
-      return log_missing_collection unless collection
-      return log_already_in_collection if resource.collections.include?(collection)
+      return @logger.log_missing_collection unless collection
+      return @logger.log_already_in_collection if
+        resource.collections.include?(collection)
       remove_resource_from_all_collections(resource)
       @logger.info "        Resource does not belong to collection. Adding."
       create_collection_resource(collection, resource, count)
@@ -101,7 +103,7 @@ module Importer
         resource: resource,
         position: position
       )
-      return log_model_errors(cr) unless cr.valid?
+      return @logger.log_model_errors(cr) unless cr.valid?
       cr
     end
 
@@ -112,7 +114,12 @@ module Importer
 
     def update_attachment_attributes(model, row, attachment_attributes)
       attachment_attributes.each do |attr|
-        import_model_attachment(model, attr, row[attr])
+        begin
+          import_model_attachment(model, attr, row[attr])
+        rescue Google::Apis::TransmissionError
+          @logger.warn "    Caught Google::Apis::TransmissinoError. Trying again"
+          import_model_attachment(model, attr, row[attr])
+        end
       end
     end
 
@@ -127,25 +134,47 @@ module Importer
       return if value.blank?
       @logger.info "    Importing #{key}: #{value}"
       file = drive_folder.file_by_title(value)
-      return log_missing_file if file.nil?
-      return log_unchanged_file(file) if file.md5_checksum == model.send("#{key}_checksum")
-      log_found_file(file)
+      return unless file_ok?(file)
+      return if already_downloaded?(file, model, key)
+      @logger.log_found_file(file)
+      io = io_from_drive_file(file)
+      set_file_attribute(file, model, key, io)
+    end
 
-      log_start_download(file)
-      contents = file.download_to_string
-      io = StringIO.new(contents)
-      log_download(file, io)
-      io.class.class_eval { attr_accessor :original_filename, :content_type }
-      io.content_type = file.mime_type
-      io.original_filename = file.title
-
+    def set_file_attribute(file, model, key, io)
       model.send("#{key}=", io)
-      tmp_path = model.send(key.to_s).queued_for_write[:original].path
-      saved_file_checksum = Digest::MD5.hexdigest(File.read(tmp_path))
+      saved_file_checksum = checksum_for_pending_attachment(model, key)
       @logger.info "            Content type: #{file.mime_type}"
       @logger.info "            Saved file checksum is #{saved_file_checksum}"
       raise_attachment_save_error if saved_file_checksum != file.md5_checksum
       model.send("#{key}_checksum=", saved_file_checksum)
+    end
+
+    def checksum_for_pending_attachment(model, key)
+      tmp_path = model.send(key.to_s).queued_for_write[:original].path
+      Digest::MD5.hexdigest(File.read(tmp_path))
+    end
+
+    def io_from_drive_file(file)
+      @logger.log_start_download(file)
+      io = StringIO.new(file.download_to_string)
+      @logger.log_download(file, io)
+      io.class.class_eval { attr_accessor :original_filename, :content_type }
+      io.content_type = file.mime_type
+      io.original_filename = file.title
+      io
+    end
+
+    def file_ok?(file)
+      return true unless file.nil?
+      @logger.log_missing_file
+      false
+    end
+
+    def already_downloaded?(file, model, key)
+      return false if file.md5_checksum != model.send("#{key}_checksum")
+      @logger.log_unchanged_file(file)
+      true
     end
 
     def simple_attributes_from_row(row, attr_list)
@@ -156,9 +185,11 @@ module Importer
 
     def fingerprint(row)
       candidates = %w(local_id attachment external_url title)
-      field = candidates.find { |candidate| row.key?(candidate) && !row[candidate].blank? }
+      field = candidates.detect do |candidate|
+        row.key?(candidate) && !row[candidate].blank?
+      end
       fingerprint = Digest::MD5.hexdigest(row[field])
-      log_fingerprint(fingerprint)
+      @logger.log_fingerprint(fingerprint)
       fingerprint
     end
 
@@ -180,15 +211,19 @@ module Importer
 
     def find_or_initialize_resource(fingerprint)
       resource = @project.resources.find_or_initialize_by fingerprint: fingerprint
+      # rubocop:disable LineLength
       @logger.info "    Found existing resource with id #{resource.id}" unless resource.new_record?
       @logger.info "    No resource exists for fingerprint. Creating new resource" if resource.new_record?
+      # rubocop:enable LineLength
       resource
     end
 
     def find_or_initialize_collection(fingerprint)
       collection = @project.collections.find_or_initialize_by fingerprint: fingerprint
+      # rubocop:disable LineLength
       @logger.info "    Found existing collection with id #{collection.id}" unless collection.new_record?
       @logger.info "    No collection exists for fingerprint. Creating new collection" if collection.new_record?
+      # rubocop:enable LineLength
       collection
     end
 
@@ -237,62 +272,6 @@ module Importer
     def session
       @session ||= ::Factory::DriveSession.create_service_account_session
     end
-
-    def log_model_errors(model)
-      model.errors.full_messages.each do |error|
-        @logger.error Rainbow("    #{model.class.name} model validation error: #{error}").red
-      end
-      if model.class.name == "Resource"
-        @logger.error Rainbow("        Attachment content type: #{model.attachment.content_type}").red
-      end
-      nil
-    end
-
-    def log_missing_file(_filename)
-      @logger.error(Rainbow("    Unable to locate drive file: #{value}").red)
-      nil
-    end
-
-    def log_found_file(file)
-      @logger.info "    Found drive file."
-      @logger.info "        Name: #{file.title}"
-      @logger.info "        Type: #{file.mime_type}"
-      @logger.info "        Checksum: #{file.md5_checksum}"
-      @logger.info "        Remote Size: #{file.size}"
-      nil
-    end
-
-    def log_unchanged_file(file)
-      @logger.info "        File \"#{file.title}\" Checksum is unchanged. Skipping download."
-      nil
-    end
-
-    def log_start_download(_file)
-      @logger.info("        Starting download from drive.")
-      nil
-    end
-
-    def log_download(_file, io)
-      @logger.info("        Downloaded file.")
-      @logger.info("            Local Size: #{io.size}")
-      nil
-    end
-
-    def log_fingerprint(fingerprint)
-      @logger.info "    Generated fingerprint: #{fingerprint}"
-      nil
-    end
-
-    def log_already_in_collection
-      @logger.info "        Resource alreeady belongs to collection. Skipping."
-      nil
-    end
-
-    def log_missing_collection
-      @logger.error Rainbow("        Unable to locate collection.").red
-      @logger.error Rainbow("        Unable to add resource collection.").red
-      nil
-    end
-
   end
+  # rubocop:enable ClassLength
 end
