@@ -13,12 +13,12 @@ export default class PanelNav extends Component {
       <nav className="panel-nav">
         <ul>
           <li>
-            <Link to="#">
+            <Link to="/backend/project/2/">
               {'General'}
             </Link>
           </li>
           <li>
-            <Link to="#">
+            <Link to="/backend/project/2/texts">
               {'Texts'}
             </Link>
           </li>
