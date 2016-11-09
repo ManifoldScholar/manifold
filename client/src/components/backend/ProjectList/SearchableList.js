@@ -7,7 +7,82 @@ export default class SearchableList extends Component {
 
   static displayName = "ProjectList.SearchableList";
 
-  static propTypes = {};
+  static propTypes = {
+    projects: PropTypes.array
+  };
+
+  constructor() {
+    super();
+    this.renderProjectsList = this.renderProjectsList.bind(this);
+    this.renderProject = this.renderProject.bind(this);
+    this.renderProjectMakers = this.renderProjectMakers.bind(this);
+  }
+
+  renderProjectMakers(makers) {
+    let output = null;
+    if (makers && makers.length > 0) {
+      output = (
+        <div className="project-makers">
+          {makers.map((maker, i) => {
+            let output = maker.attributes.fullName;
+            if (i > 0) output = ', ' + output;
+            return output;
+          })}
+        </div>
+      );
+    }
+
+    return output;
+  }
+
+  renderProject(project) {
+    const attr = project.attributes;
+    console.log(attr.coverUrl, 'cover');
+
+    return(
+      <li>
+        <Link to={`backend/project/${project.id}`}>
+          <figure>
+            {attr.coverUrl? (<img src={attr.coverUrl} />) : <globalProject.Placeholder/>}
+          </figure>
+          <div className="meta">
+            <h3 className="project-title">
+              {attr.title}
+                <span className="subtitle">
+                  {attr.subtitle}
+                </span>
+            </h3>
+            {this.renderProjectMakers(project.relationships.creators)}
+          </div>
+          <span className="label">
+            Edit
+          </span>
+        </Link>
+      </li>
+    );
+  }
+
+  renderProjectsList(){
+    const projects = this.props.projects;
+    let output = null;
+
+    if (projects.length > 0) {
+      output = (
+        <div>
+          <p className="list-total">
+            {`Showing X-X ${projects.length} projects:`}
+          </p>
+          <ul>
+            {projects.map((project) => {
+              return this.renderProject(project)
+            })}
+          </ul>
+        </div>
+      );
+    }
+
+    return output;
+  }
 
   render() {
     return (
@@ -24,50 +99,7 @@ export default class SearchableList extends Component {
           <button className="button-bare-primary reset">{'Reset Search'}</button>
         </form>
         <nav className="projects-vertical-primary">
-          <p className="list-total">
-            {'Showing 1-10 of 32 total projects:'}
-          </p>
-          <ul>
-            <li>
-              <Link to="#">
-                <figure>
-                  <img src="/static/placeholder/cover_rune-stone.png" />
-                </figure>
-                <div className="meta">
-                  <h3 className="project-title">
-                    Cultures of Insecurity
-                    <span className="subtitle">
-                      The Project’s Subtitle Goes Here
-                    </span>
-                  </h3>
-                </div>
-                <span className="label">
-                  Edit
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                <figure>
-                  <globalProject.Placeholder />
-                </figure>
-                <div className="meta">
-                  <h3 className="project-title">
-                    Cultures of Insecurity
-                    <span className="subtitle">
-                      The Project’s Subtitle Goes Here
-                    </span>
-                  </h3>
-                  <div className="project-makers">
-                    Jennifer L Feeley, Sarah Ann Wells
-                  </div>
-                </div>
-                <span className="label">
-                  Edit
-                </span>
-              </Link>
-            </li>
-          </ul>
+          {this.renderProjectsList()}
         </nav>
         <Utility.Pagination />
       </div>
