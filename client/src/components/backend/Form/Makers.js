@@ -29,7 +29,7 @@ export default class Makers extends Component {
       output = (
         <button className={buttonClass}>
           <span className="screen-reader-text">
-            Click to move {maker.attributes.name} up in the order of makers.
+            Click to move {maker.attributes.fullName} up in the order of makers.
           </span>
         </button>
       );
@@ -53,11 +53,11 @@ export default class Makers extends Component {
                 <li>
                   <div className="maker">
                     <figure>
-                      <img src={maker.avatar} />
+                      <img src={maker.attributes.avatarUrl} />
                     </figure>
 
                     <h4 className="maker-name">
-                      {maker.attributes.name}
+                      {maker.attributes.fullName}
                     </h4>
                   </div>
 
@@ -66,7 +66,7 @@ export default class Makers extends Component {
                     {this.renderOrderButton('down', index, maker)}
                     <button className="manicon manicon-x">
                       <span className="screen-reader-text">
-                        Click to remove {maker.attributes.name} from the makers list.
+                        Click to remove {maker.attributes.fullName} from the makers list.
                       </span>
                     </button>
                   </div>
@@ -88,19 +88,7 @@ export default class Makers extends Component {
             <nav className="autofill-list">
               <ul>
                 <li>
-                  {'Catherine E. Smithwick'}
-                </li>
-                <li>
-                  {'Catherine Mooney'}
-                </li>
-                <li>
-                  {'Catherie Glisan Flavel'}
-                </li>
-                <li>
-                  {'Catherine Lafayette Kenilworth'}
-                </li>
-                <li>
-                  {'Catherine Ankeny'}
+                  {'Autofill name goes here'}
                 </li>
               </ul>
             </nav>

@@ -6,15 +6,16 @@ export default class ProjectHeader extends Component {
   static displayName = "Project.Header";
 
   static propTypes = {
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
+    project: PropTypes.object
   };
 
   render() {
+    const project = this.props.project;
+    const attr = project.attributes;
     return (
       <section className="bg-neutral95">
         <div className="container flush">
-          <Link to={'/backend/dashboard'} className="back-link-primary">
+          <Link to={'/backend/'} className="back-link-primary">
             <i className="manicon manicon-arrow-left"></i>
             Back to: <span>ALL PROJECTS</span>
           </Link>
@@ -24,9 +25,9 @@ export default class ProjectHeader extends Component {
             </figure>
             <div className="project-title">
               <h1>
-                {this.props.title}
+                {attr.title}
                 <span className="subtitle">
-                  {this.props.subtitle}
+                  {attr.subtitle}
                 </span>
               </h1>
               <div className="project-utility">

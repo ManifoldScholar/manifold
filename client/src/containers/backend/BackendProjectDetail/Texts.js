@@ -6,6 +6,10 @@ export default class BackendProjectPanelTexts extends Component {
 
   static displayName = "BackendProjectPanel.Texts";
 
+  // Used to hoist active state back up to parent container with navigation
+  static activeNavItem = "texts";
+
+
   static propTypes = {};
 
   render() {
