@@ -31,14 +31,6 @@ class Section extends Component {
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
 
-  // Returns a CSS style object based on the font size index in the store
-  getFontSize(sizeIndex) {
-    const baseSizes = [13, 16, 20, 22, 26, 32];
-    return {
-      fontSize: baseSizes[sizeIndex] + 'px'
-    };
-  }
-
   getMarginSize(sizeIndex) {
     const baseSizes = [790, 680, 500];
     const maxWidth = baseSizes[sizeIndex] + 'px';
@@ -70,11 +62,17 @@ class Section extends Component {
 
     // Font selection may be handled differently later, but for now, variants are based
     // on class names
-    const textSectionClass = classNames({
+    let textSectionClass = classNames({
       'manifold-text-section text-section': true,
       'font-serif': typography.font === 'serif',
       'font-sans-serif': typography.font === 'sans-serif'
     });
+
+    // Apply a font-size class to the text-section
+    // This maps to a numbered class with responsive font declarations
+    textSectionClass = textSectionClass + ` font-size-${typography.fontSize.current}`;
+
+    console.log(textSectionClass);
 
     const section = this.props.section;
     return (
@@ -82,7 +80,7 @@ class Section extends Component {
           <div className="container-focus"
             style={this.getMarginSize(typography.margins.current)}
           >
-            <div className={textSectionClass} style={this.getFontSize(typography.fontSize.current)}>
+            <div className={textSectionClass}>
               <Annotatable
                 sectionId={this.props.params.sectionId}
                 createAnnotation={this.props.createAnnotation}
