@@ -17,6 +17,7 @@
 .idea/codeStyleSettings.xml
 .idea/dictionaries
 .idea/dataSources
+.idea/jsLinters
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
