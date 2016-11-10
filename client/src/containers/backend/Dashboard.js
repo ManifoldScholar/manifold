@@ -42,7 +42,7 @@ class DashboardContainer extends Component {
                 </header>
                 { this.props.projects ?
                   <ProjectList.SearchableList
-                      projects={this.props.projects}
+                    projects={this.props.projects}
                   /> : null
                 }
               </div>

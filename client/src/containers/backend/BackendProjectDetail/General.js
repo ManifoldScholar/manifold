@@ -30,7 +30,9 @@ class BackendProjectPanelGeneralContainer extends Component {
     };
   }
 
-  static propTypes = {};
+  static propTypes = {
+    project: PropTypes.object
+  };
 
   render() {
     const General = Project.Panel.General;
