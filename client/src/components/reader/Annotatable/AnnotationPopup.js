@@ -54,7 +54,7 @@ export default class AnnotationPopup extends Component {
   }
 
   positionPopup(selection) {
-    if (this.hasSelection()) {
+    if (this.hasSelection(selection)) {
       const rect = selection.range.getBoundingClientRect();
       const popupHeight = this.refs.popup.offsetHeight;
       const popupWidth = this.refs.popup.offsetWidth;
