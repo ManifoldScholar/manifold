@@ -18,12 +18,12 @@ export default class ProjcetPanelGeneral extends Component {
         <form className="form-secondary">
           <Form.TextInput
             label="Title"
-            placeholder='Enter Project Title'
+            placeholder="Enter Project Title"
             value={project.attributes.title}
           />
           <Form.TextInput
             label="Subtitle"
-            placeholder='Enter Project Subtitle'
+            placeholder="Enter Project Subtitle"
             value={project.attributes.subtitle}
           />
           <Form.Radios label="Radio Buttons"/>

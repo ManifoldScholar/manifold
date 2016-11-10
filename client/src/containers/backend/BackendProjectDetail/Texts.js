@@ -30,15 +30,17 @@ class BackendProjectPanelTextsContainer extends Component {
     };
   }
 
-  static propTypes = {};
+  static propTypes = {
+    project: PropTypes.object
+  };
 
   render() {
     const Texts = Project.Panel.Texts;
     if (!this.props.project) return null;
     return (
-        <Texts.Wrapper
-            project={this.props.project}
-        />
+      <Texts.Wrapper
+        project={this.props.project}
+      />
     );
   }
 }

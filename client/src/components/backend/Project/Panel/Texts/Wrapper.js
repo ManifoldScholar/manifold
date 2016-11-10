@@ -33,7 +33,7 @@ export default class ProjcetPanelTexts extends Component {
                 but eventually it should loop through categories and
                 then texts
               */}
-              {texts.map((text)=> {
+              {texts.map((text) => {
                 return (
                   <li>
                     <Text.ListItem text={text} />

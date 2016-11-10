@@ -24,9 +24,9 @@ export default class SearchableList extends Component {
       output = (
         <div className="project-makers">
           {makers.map((maker, i) => {
-            let output = maker.attributes.fullName;
-            if (i > 0) output = ', ' + output;
-            return output;
+            let nameList = maker.attributes.fullName;
+            if (i > 0) nameList = ', ' + nameList;
+            return nameList;
           })}
         </div>
       );
@@ -39,11 +39,11 @@ export default class SearchableList extends Component {
     const attr = project.attributes;
     console.log(attr.coverUrl, 'cover');
 
-    return(
+    return (
       <li>
         <Link to={`backend/project/${project.id}`}>
           <figure>
-            {attr.coverUrl? (<img src={attr.coverUrl} />) : <globalProject.Placeholder/>}
+            {attr.coverUrl ? (<img src={attr.coverUrl} />) : <globalProject.Placeholder/>}
           </figure>
           <div className="meta">
             <h3 className="project-title">
@@ -62,7 +62,7 @@ export default class SearchableList extends Component {
     );
   }
 
-  renderProjectsList(){
+  renderProjectsList() {
     const projects = this.props.projects;
     let output = null;
 
@@ -74,7 +74,7 @@ export default class SearchableList extends Component {
           </p>
           <ul>
             {projects.map((project) => {
-              return this.renderProject(project)
+              return this.renderProject(project);
             })}
           </ul>
         </div>

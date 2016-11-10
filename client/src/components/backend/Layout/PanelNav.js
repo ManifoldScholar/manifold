@@ -20,7 +20,7 @@ export default class PanelNav extends Component {
           <li>
             <Link
               to={`/backend/project/${project.id}/`}
-              className={active == 'general' ? 'active' : ''}
+              className={active === 'general' ? 'active' : ''}
             >
               {'General'}
             </Link>
@@ -28,7 +28,7 @@ export default class PanelNav extends Component {
           <li>
             <Link
               to={`/backend/project/${project.id}/texts`}
-              className={active == 'texts' ? 'active' : ''}
+              className={active === 'texts' ? 'active' : ''}
             >
               {'Texts'}
             </Link>
@@ -36,7 +36,7 @@ export default class PanelNav extends Component {
           <li>
             <Link
               to={`/backend/project/${project.id}/resources`}
-              className={active == 'resources' ? 'active' : ''}
+              className={active === 'resources' ? 'active' : ''}
             >
               {'Resources'}
             </Link>
@@ -44,7 +44,7 @@ export default class PanelNav extends Component {
           <li>
             <Link
               to={`/backend/project/${project.id}/metadata`}
-              className={active == 'metadata' ? 'active' : ''}
+              className={active === 'metadata' ? 'active' : ''}
             >
               {'Metadata'}
             </Link>
