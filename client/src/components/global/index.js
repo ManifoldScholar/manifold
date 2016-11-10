@@ -8,6 +8,7 @@ export LoadingBar from './LoadingBar';
 export Project from './Project';
 export SearchMenuBody from './SearchMenuBody';
 export SearchMenuButton from './SearchMenuButton';
+export Text from './Text';
 export UIPanel from './UIPanel';
 export UserMenuBody from './UserMenu/UserMenuBody';
 export UserMenuButton from './UserMenu/UserMenuButton';
