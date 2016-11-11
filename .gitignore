@@ -10,6 +10,7 @@
 /npm-debug.log
 
 ### IntelliJ ###
+*.iml
 
 # User-specific stuff:
 .idea/workspace.xml
