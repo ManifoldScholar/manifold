@@ -82,6 +82,7 @@ module Ingestor
         ingestion.text = text if text
       else
         info "services.ingestor.logging.text_not_found", id: id
+        ingestion.text.unique_identifier = id
       end
     end
   end

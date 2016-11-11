@@ -28,6 +28,7 @@ class Section extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    this.maybeScrollToTop(prevProps.section, this.props.section);
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
 
@@ -35,6 +36,11 @@ class Section extends Component {
     const baseSizes = [790, 680, 500];
     const maxWidth = baseSizes[sizeIndex] + 'px';
     return { maxWidth };
+  }
+
+  maybeScrollToTop(previousSection, thisSection) {
+    if (previousSection.id == thisSection.id) return;
+    window.scrollTo(0, 0);
   }
 
   // TODO: My sense is that this method is not working very well. It may need to be
@@ -71,8 +77,6 @@ class Section extends Component {
     // Apply a font-size class to the text-section
     // This maps to a numbered class with responsive font declarations
     textSectionClass = textSectionClass + ` font-size-${typography.fontSize.current}`;
-
-    console.log(textSectionClass);
 
     const section = this.props.section;
     return (

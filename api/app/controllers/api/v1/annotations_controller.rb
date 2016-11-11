@@ -11,7 +11,7 @@ module Api
 
       def create
         @annotation = @text_section.annotations.new(attributes_from(annotation_params))
-        @annotation.user = @current_user
+        @annotation.creator = @current_user
         if @annotation.save
           render json: @annotation, status: :created, location: [:api, :v1, @annotation]
         else
