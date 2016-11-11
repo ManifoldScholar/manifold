@@ -2,8 +2,8 @@
 .header-browse {
   position: fixed;
   width: 100%;
-  border-bottom: 1px solid transparent;
   background-color: $neutralWhite;
+  border-bottom: 1px solid transparent;
   transition: border-color $duration $timing;
 
   .header-container {

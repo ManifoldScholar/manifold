@@ -77,15 +77,15 @@
     }
   }
 
-  &.notice {
+  &.notice .container {
     background-color: $sp30Primary;
   }
 
-  &.warning {
+  &.warning .container {
     background-color: $sp30Secondary;
   }
 
-  &.error {
+  &.error .container {
     background-color: $sp30Tertiary;
   }
 }

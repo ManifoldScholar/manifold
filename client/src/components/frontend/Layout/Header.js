@@ -89,25 +89,6 @@ export default class LayoutHeader extends Component {
 
         <div className="header-border"></div>
 
-          <div className='header-notification'>
-            <div className="container">
-              <header>
-                <h5 className="notification-heading">
-                  {'You have been successfully logged out of Manifold.'}
-                </h5>
-              </header>
-              <p className="notification-body">
-                {'It was nice while it lasted, I guess. I mean, what do you think?' +
-                ' Look, there are some pretty cute dogs out the window.'}
-              </p>
-
-              <button className="notification-close">
-                <i className="manicon manicon-x"></i>
-                <span className="screen-reader-text">{'Click to close this notification'}</span>
-              </button>
-            </div>
-          </div>
-
         <HeaderNotifications
           notifications={this.props.notifications}
           addNotification={this.props.commonActions.addNotification}
