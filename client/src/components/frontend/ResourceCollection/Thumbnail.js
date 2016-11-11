@@ -27,7 +27,7 @@ export default class ResourceCollectionThumbnail extends Component {
             </h4>
             <div className="icon">
               <i className="manicon manicon-file-box"></i>
-              {'Collection'}
+              <span>{'Collection'}</span>
             </div>
           </div>
         </Link>
