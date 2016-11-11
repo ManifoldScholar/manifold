@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { authActions } from 'actions';
+// import { authActions } from 'actions';
+import { currentUserActions } from 'actions';
 
 class LoginForm extends Component {
 
@@ -22,7 +23,7 @@ class LoginForm extends Component {
   };
 
   // TODO: Remove this at some future point
-  state = { email: 'admin@manifold.dev', password: 'manifold' };
+  // state = { email: 'admin@manifold.dev', password: 'manifold' };
 
   updatePassword = (event) => {
     this.setState(Object.assign({}, this.state, { password: event.target.value }));
@@ -35,7 +36,10 @@ class LoginForm extends Component {
   handleLogin = (event) => {
     event.preventDefault();
     const { dispatch } = this.props;
-    dispatch(authActions.startLogin(this.state.email, this.state.password));
+    dispatch(currentUserActions.login({
+      email: this.state.email,
+      password: this.state.password
+    }));
     if (this.props.overlayVisible) {
       this.props.hideLoginOverlay();
     }

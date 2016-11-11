@@ -12,7 +12,7 @@ export const flush = createAction('ENTITY_STORE_FLUSH', (passedMetas) => {
 });
 
 export const request =
-  createAction('ENTITY_STORE_REQUEST', (requestConfig, meta = null, oneTime = false) => {
+  createAction('API_REQUEST', (requestConfig, meta = null, oneTime = false) => {
     return {
       request: requestConfig,
       oneTime,

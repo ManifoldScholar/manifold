@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { authActions } from 'actions';
+// import { authActions } from 'actions';
+import { currentUserActions } from 'actions';
 import { get } from 'lodash';
 import classNames from 'classnames';
 
-const { startLogin } = authActions;
+// const { startLogin } = authActions;
 
 export default class Login extends Component {
 
@@ -43,7 +44,11 @@ export default class Login extends Component {
   handleLogin(event) {
     event.preventDefault();
     const { dispatch } = this.props;
-    dispatch(startLogin(this.state.email, this.state.password));
+    const action = currentUserActions.login({
+      email: this.state.email,
+      password: this.state.password
+    });
+    dispatch(action);
   }
 
   authenticationError() {

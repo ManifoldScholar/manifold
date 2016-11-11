@@ -1,4 +1,4 @@
-export * as authActions from './authentication';
+export * as currentUserActions from './currentUser';
 export * as entityStoreActions from './entityStore';
 export * as errorActions from './error';
 export * as notificationActions from './notifications';
