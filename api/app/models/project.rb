@@ -20,7 +20,7 @@ class Project < ActiveRecord::Base
   has_many :collections, dependent: :destroy
 
   # Callbacks
-  after_commit :trigger_creation_event, on: [:create, :update]
+  after_commit :trigger_creation_event, on: [:create]
 
   # Misc
   money_attributes :purchase_price
