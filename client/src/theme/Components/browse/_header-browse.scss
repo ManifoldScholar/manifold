@@ -173,7 +173,7 @@
 
     .user-menu {
       position: absolute;
-      right: -27px;
+      right: -20px;
       white-space: nowrap;
 
       @include respond($break40) {
@@ -181,7 +181,12 @@
       }
 
       .tail {
+        right: 21px;
         display: block;
+
+        @include respond($break40) {
+          right: 28px;
+        }
       }
     }
 
