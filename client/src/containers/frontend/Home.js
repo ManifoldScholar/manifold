@@ -90,7 +90,7 @@ class HomeContainer extends Component {
             <header className="section-heading">
               <h4 className="title">
                 <i className="manicon manicon-books-on-shelf"></i>
-                {'Filtered Projects'}
+                {'Our Projects'}
               </h4>
             </header>
             {/*
