@@ -125,6 +125,10 @@ module Ingestor
           path = text.title.parameterize.underscore
           ingestion_sources = creator.create(@inspector.manifest_item_nodes, path,
                                              @inspector, text.ingestion_sources)
+
+          ingestion_sources.each do |is|
+            is.text = text
+          end
           text.ingestion_sources.replace(ingestion_sources)
         end
 
