@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { LoginForm } from 'containers/global';
-import { authActions } from 'actions';
+// import { authActions } from 'actions';
+import { currentUserActions } from 'actions';
 
-const { startLogout } = authActions;
+// const { startLogout } = authActions;
 
 class Login extends Component {
 
@@ -18,7 +19,7 @@ class Login extends Component {
   handleLogout = (event) => {
     event.preventDefault();
     const { dispatch } = this.props;
-    dispatch(startLogout());
+    dispatch(currentUserActions.logout());
   };
 
   loginUI = () => {

@@ -10,14 +10,15 @@ function sendRequest(request, authToken) {
 }
 
 function buildResponseAction(payload, meta, error) {
-  return { type: 'ENTITY_STORE_RESPONSE', error, payload, meta };
+  const type = `API_RESPONSE/${meta.toUpperCase().replace(/-/g, '_')}`;
+  return { type, error, payload, meta };
 }
 
 export default function entityStoreMiddleware({ dispatch, getState }) {
   return (next) => (action) => {
 
     // Guards
-    if (action.type !== 'ENTITY_STORE_REQUEST') {
+    if (action.type !== 'API_REQUEST') {
       return next(action);
     }
     if (action.payload.state !== 0) return next(action);
@@ -49,8 +50,9 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     // loading.
     const withState = { state: 1, promise: requestPromise };
     const newPayload = Object.assign({}, action.payload, withState);
+    const type = `API_REQUEST/${action.meta.toUpperCase().replace(/-/g, '_')}`;
     const adjustedRequestAction = {
-      type: 'ENTITY_STORE_REQUEST',
+      type,
       payload: newPayload,
       meta: action.meta
     };
@@ -59,9 +61,6 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     // Execute the API call and when it is complete, dispatch a response action.
     requestPromise.then((response) => {
       dispatch(buildResponseAction(response, action.meta, false));
-      // We fire off a post action if we need additional reducer methods to further change
-      // the state.
-      dispatch({ type: `REQUEST_COMPLETE_${action.meta.toUpperCase().replace(/-/g, '_')}` });
     }, (response) => {
       dispatch(buildResponseAction(response, action.meta, true));
     });

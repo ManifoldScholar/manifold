@@ -41,7 +41,7 @@ class ManifoldContainer extends Component {
       this.doPostLogin(nextProps);
     }
     if (this.userJustLoggedOut(this.props.authentication, nextProps.authentication)) {
-      this.doPostLogin(nextProps);
+      this.doPostLogout(nextProps);
     }
   }
 

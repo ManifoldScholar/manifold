@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import get from 'lodash/get';
-import { authActions } from 'actions';
+import { currentUserActions } from 'actions';
 
 export default class ProjectFollow extends Component {
 
@@ -29,7 +29,7 @@ export default class ProjectFollow extends Component {
     event.preventDefault();
     event.stopPropagation();
     const { id, type } = this.props.project;
-    this.props.dispatch(authActions.follow({ id, type }));
+    this.props.dispatch(currentUserActions.follow({ id, type }));
   }
 
   handleUnfollow(event) {
@@ -37,7 +37,7 @@ export default class ProjectFollow extends Component {
     event.stopPropagation();
     const followed = this.getFollowed();
     if (followed) {
-      this.props.dispatch(authActions.unfollow(this.props.project.id, followed.id));
+      this.props.dispatch(currentUserActions.unfollow(this.props.project.id, followed.id));
     }
   }
 

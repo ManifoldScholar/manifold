@@ -5,10 +5,11 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { HigherOrder } from 'components/global';
 import { Provider } from 'react-redux';
 import getRoutes from 'routes';
-import { authActions } from 'actions';
-import { Manifold } from 'containers/global';
+// import { authActions } from 'actions';
+import { currentUserActions } from 'actions';
 
-const { getCurrentUser } = authActions;
+
+import { Manifold } from 'containers/global';
 
 export default class App extends Component {
 
@@ -52,7 +53,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
-    this.store.dispatch(getCurrentUser);
+    this.store.dispatch(currentUserActions.login);
     this.forceUpdate();
   }
 

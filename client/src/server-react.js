@@ -9,16 +9,98 @@ import config from './config';
 import Html from './helpers/Html';
 import ch from './helpers/consoleHelpers';
 import createStore from './store/createStore';
-import { authActions } from 'actions';
+import { currentUserActions } from 'actions';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 import fetchAllData from './helpers/fetchAllData';
 import exceptionRenderer from './helpers/exceptionRenderer';
 import App from './App';
 import getRoutes from './routes';
+import { authenticateWithToken } from 'store/middleware/currentUserMiddleware';
+
+const pretty = new PrettyError();
+
+function respondWithRouterError(res, error) {
+  ch.error("The server-side render experienced a routing error.");
+  console.error('ROUTER ERROR:', pretty.render(error));
+  res.status(500);
+  res.send("Internal Server Error");
+}
+
+function respondWithRedirect(res, redirectLocation) {
+  res.redirect(redirectLocation.pathname + redirectLocation.search);
+  return;
+}
+
+function respondWithInternalServerError(res) {
+  res.status(500);
+  res.send("Internal Server Error");
+  return;
+}
+
+function respondWithSSRDisabledError(res) {
+  res.status(500);
+  res.send("Server side rendering is disabled");
+  return;
+}
+
+function fetchComponentData(props, store) {
+  return fetchAllData(
+    props.components,
+    store.getState, store.dispatch,
+    props.location,
+    props.params
+  );
+}
+
+function authenticateUser(req, store) {
+  if (req.headers.cookie) {
+    const manifoldCookie = cookie.parse(req.headers.cookie);
+    const authToken = manifoldCookie.authToken;
+    if (authToken) return authenticateWithToken(authToken, store.dispatch);
+  }
+  return null;
+}
+
+function render(req, res, store, props, parameters) {
+  ch.info("Server-side data fetch completed successfully");
+  store.dispatch({ type: 'SERVER_LOADED', payload: req.originalUrl });
+  const appComponent = (
+    <App {...props} store={store} />
+  );
+  const status = getStatusFromRoutes(props.routes);
+  if (status) {
+    res.status(status);
+  }
+
+  let renderString = '';
+  let isError = false;
+  try {
+    renderString = ReactDOM.renderToString(
+      <Html
+        component={appComponent}
+        assets={parameters.chunks()}
+        store={store}
+      />
+    );
+  } catch (renderError) {
+    isError = true;
+    ch.error("Server-side render failed in server-react.js");
+    renderString = exceptionRenderer(
+      renderError,
+      "ERROR: Server-side render failed in server-react.js"
+    );
+  } finally {
+    if (isError) {
+      res.status(500);
+      res.send(renderString);
+    } else {
+      res.send('<!doctype html>\n' + renderString);
+    }
+  }
+}
 
 export default function (parameters) {
 
-  const pretty = new PrettyError();
   const morgan = require('morgan');
   const app = new Express();
   const server = new http.Server(app);
@@ -31,30 +113,19 @@ export default function (parameters) {
 
     const store = createStore();
 
-    const hydrateOnClient = () => {
-      res.send('<!doctype html>\n' +
-        ReactDOM.renderToString(<Html
-          assets={parameters.chunks()}
-          store={store}
-        />));
-    };
-
-    if (__DISABLE_SSR__) {
-      hydrateOnClient();
-      return;
-    }
+    if (__DISABLE_SSR__) return respondWithSSRDisabledError(res);
 
     if (req.headers.cookie) {
       const manifoldCookie = cookie.parse(req.headers.cookie);
       const authToken = manifoldCookie.authToken;
-      store.dispatch(authActions.setAuthToken(authToken));
-      store.dispatch(authActions.getCurrentUser);
+      store.dispatch(currentUserActions.login({ authToken }));
     }
 
     match({
       routes: getRoutes(store),
       location: req.url
     }, (error, redirectLocation, props) => {
+
       // We want the full location to be available to components even during server-side render.
       // Not sure this is the best way to accomplish this.
       if (props) {
@@ -63,67 +134,27 @@ export default function (parameters) {
           payload: props.location
         });
       }
-      if (redirectLocation) {
-        res.redirect(redirectLocation.pathname + redirectLocation.search);
-      } else if (error) {
-        ch.error("The server-side render experienced a routing error.");
-        console.error('ROUTER ERROR:', pretty.render(error));
-        res.status(500);
-        hydrateOnClient();
-      } else if (!props) {
-        res.status(500);
-        hydrateOnClient();
-      } else {
-        fetchAllData(
-          props.components,
-          store.getState, store.dispatch,
-          props.location,
-          props.params
-        ).then(() => {
-          ch.info("Server-side data fetch completed successfully");
-          store.dispatch({ type: 'SERVER_LOADED', payload: req.originalUrl });
-          const appComponent = (
-            <App {...props} store={store} />
-          );
 
-          const status = getStatusFromRoutes(props.routes);
-          if (status) {
-            res.status(status);
-          }
+      if (redirectLocation) return respondWithRedirect(res, redirectLocation);
+      if (error) return respondWithRouterError(res, error);
+      if (!props) return respondWithInternalServerError(res);
 
-          let renderString = '';
-          let isError = false;
-          try {
-            renderString = ReactDOM.renderToString(
-              <Html
-                component={appComponent}
-                assets={parameters.chunks()}
-                store={store}
-              />
-            );
-          } catch (renderError) {
-            isError = true;
-            ch.error("Server-side render failed in server-react.js");
-            renderString = exceptionRenderer(
-              renderError,
-              "ERROR: Server-side render failed in server-react.js"
-            );
-          } finally {
-            if (isError) {
-              res.status(500);
-              res.send(renderString);
-            } else {
-              res.send('<!doctype html>\n' + renderString);
-            }
-          }
-        }, (dataFetchError) => {
-          ch.error("fetchAllData failed in server-react.js");
-          const renderString = exceptionRenderer(dataFetchError,
-            "ERROR: fetchAllData failed in server-react.js");
-          res.status(500);
-          res.send(renderString);
-        });
-      }
+      const delays = [];
+      const fetchComponentDataPromise = fetchComponentData(props, store);
+      const authenticationPromise = authenticateUser(req, store);
+      if (authenticationPromise) delays.push(authenticationPromise);
+      if (fetchComponentDataPromise) delays.push(fetchComponentDataPromise);
+
+      const onResolve = () => {
+        render(req, res, store, props, parameters);
+      };
+
+      const onReject = () => {
+        render(req, res, store, props, parameters);
+      };
+
+      Promise.all(delays).then(onResolve, onReject);
+
     });
   });
 

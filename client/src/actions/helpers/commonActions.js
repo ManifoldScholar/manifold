@@ -1,7 +1,6 @@
-import { authActions, uiVisibilityActions, notificationActions } from 'actions';
+import { currentUserActions, uiVisibilityActions, notificationActions } from 'actions';
 import { bindActionCreators } from 'redux';
 
-const { startLogout } = authActions;
 const {
   visibilityToggle,
   visibilityHide,
@@ -24,7 +23,7 @@ const commonActions = (dispatch) => {
     addNotification: b((opts) => addNotification(opts), dispatch),
     removeNotification: b((opts) => removeNotification(opts), dispatch),
     clearNotifications: b(removeAllNotifications, dispatch),
-    logout: b(startLogout, dispatch),
+    logout: b(currentUserActions.logout, dispatch),
     visibilityToggle: b((el) => visibilityToggle(el), dispatch),
     visibilityHide: b((el) => visibilityHide(el), dispatch),
     visibilityShow: b((el) => visibilityShow(el), dispatch),

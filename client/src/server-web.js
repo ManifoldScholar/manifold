@@ -12,7 +12,8 @@ import { match } from 'react-router';
 import config from './config';
 import proxy from 'http-proxy-middleware';
 import createStore from './store/createStore';
-import { authActions } from 'actions';
+import { currentUserActions } from 'actions';
+import { authenticateWithToken } from 'store/middleware/currentUserMiddleware';
 import ch from './helpers/consoleHelpers';
 
 const morgan = require('morgan');
@@ -57,30 +58,35 @@ export default function (parameters) {
 
       const store = createStore();
 
+      let authToken = null;
       if (req.headers.cookie) {
         const manifoldCookie = cookie.parse(req.headers.cookie);
-        const authToken = manifoldCookie.authToken;
-        store.dispatch(authActions.setAuthToken(authToken));
-        store.dispatch(authActions.getCurrentUser);
+        authToken = manifoldCookie.authToken;
       }
 
-      try {
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html
-            assets={parameters.chunks()}
-            store={store}
-          />));
-      } catch (error) {
-        if (error.code === "MODULE_NOT_FOUND") {
-          const msg = "Waiting for initial Webpack build to complete. Wait a few seconds " +
-            "and reload.";
-          ch.error(msg);
-          res.send(msg);
-        } else {
-          ch.error(`Universal render fallback failed to render in server-web.js`);
-          res.send(exceptionRenderer(error));
+      const render = () => {
+        try {
+          res.send('<!doctype html>\n' +
+            ReactDOM.renderToString(<Html
+              assets={parameters.chunks()}
+              store={store}
+            />));
+        } catch (error) {
+          if (error.code === "MODULE_NOT_FOUND") {
+            const msg = "Waiting for initial Webpack build to complete. Wait a few seconds " +
+              "and reload.";
+            ch.error(msg);
+            res.send(msg);
+          } else {
+            ch.error(`Universal render fallback failed to render in server-web.js`);
+            res.send(exceptionRenderer(error));
+          }
         }
-      }
+      };
+
+      const promise = authenticateWithToken(authToken, store.dispatch);
+      promise.then(render, render);
+
     }
   });
   app.use('/', reactServerProxy);

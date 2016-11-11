@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { usersAPI } from 'api';
-import { entityStoreActions, authActions } from 'actions';
+import { entityStoreActions, currentUserActions } from 'actions';
 import { select } from 'utils/entityUtils';
 import { Form } from 'components/global';
 
@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 
 const { request, flush } = entityStoreActions;
-const { startLogin } = authActions;
+
+// const { startLogin } = authActions;
 
 class Create extends Component {
 
@@ -66,7 +67,10 @@ class Create extends Component {
   authenticateUser() {
     this.setState({ authenticating: true });
     const { dispatch } = this.props;
-    dispatch(startLogin(this.state.user.email, this.state.user.password));
+    dispatch(currentUserActions.login({
+      email: this.state.user.email,
+      password: this.state.user.password
+    }));
   }
 
   createUser(event) {

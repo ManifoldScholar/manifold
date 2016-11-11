@@ -131,10 +131,16 @@ function updateAnnotationCollection(state, action) {
   return Object.assign({}, state, { responses });
 }
 
-export default handleActions({
-  ENTITY_STORE_REQUEST: handleRequest,
-  ENTITY_STORE_RESPONSE: handleResponse,
-  ENTITY_STORE_FLUSH: handleFlush,
-  REQUEST_COMPLETE_CREATE_ANNOTATION: updateAnnotationCollection
+export default (state = initialState, action) => {
+  const type = action.type;
+  let newState = state;
 
-}, initialState);
+  if (type === "ENTITY_STORE_FLUSH") newState = handleFlush(newState, action);
+  if (type.startsWith("API_REQUEST")) newState = handleRequest(newState, action);
+  if (type.startsWith("API_RESPONSE")) newState = handleResponse(newState, action);
+  if (type === "API_RESPONSE/CREATE_ANNOTATION") {
+    newState = updateAnnotationCollection(newState, action);
+  }
+
+  return newState;
+};

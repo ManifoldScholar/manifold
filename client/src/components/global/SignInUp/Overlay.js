@@ -25,12 +25,12 @@ export default class Overlay extends Component {
     this.childProps = this.childProps.bind(this);
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.props.authentication.authenticated === false &&
-  //     nextProps.authentication.authenticated === true) {
-  //     this.props.hideSignInUpOverlay();
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.authentication.authenticated === false &&
+      nextProps.authentication.authenticated === true) {
+      this.props.hideSignInUpOverlay();
+    }
+  }
 
   updateView(view, event = null) {
     if (event) event.preventDefault();
