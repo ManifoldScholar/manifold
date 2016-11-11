@@ -80,7 +80,7 @@ const syncCurrentUser = (state, action) => {
 };
 
 export default handleActions({
-  API_RESPONSE: syncCurrentUser,
+  "API_RESPONSE/UPDATE_CURRENT_USER": syncCurrentUser,
   LOGIN: startLogin,
   LOGIN_SET_CURRENT_USER: setCurrentUser,
   UPDATE_CURRENT_USER: setCurrentUser,
