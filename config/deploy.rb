@@ -69,8 +69,6 @@ namespace :deploy do
     end
   end
 
-
-
   desc "Reseed the database"
   task :reseed do
     on roles(:app), in: :sequence, wait: 5 do
