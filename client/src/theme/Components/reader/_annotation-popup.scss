@@ -13,7 +13,8 @@
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
-  transition: margin $duration $timing, opacity $duration $timing;
+  transition: top $duration $timing, left $duration $timing,
+    opacity $duration $timing;
 
   &.visible {
     opacity: 1;

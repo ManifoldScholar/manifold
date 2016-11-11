@@ -30,9 +30,7 @@
 
 .text-section {
   // Reader text temporary defaults
-  // TODO: Adjust scope and theming/customization once data is available
   font-family: "freight-text-pro", serif;
-  font-size: $type80;
   font-weight: $light;
   line-height: 1.761;
   transition: font-size $durationFast $timing;

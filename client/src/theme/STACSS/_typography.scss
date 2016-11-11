@@ -146,3 +146,28 @@
     color: $neutral30;
   }
 }
+
+// Reader Font Size classes
+// These classes apply responsive font-sizes to reader
+// --------------------------------------------------------
+// These are generated from this nested list (of lists)
+// To add another, simply ensure that react can increment by another value
+// and then add anohter nexted list here.
+$readerFontSizes: (
+  (12px, 13px),
+  (14px, 16px),
+  (16px, 20px),
+  (18px, 22px),
+  (20px, 26px),
+  (24px, 32px),
+);
+
+@for $i from 1 through length($readerFontSizes) {
+  .font-size-#{$i - 1} {
+    font-size: nth(nth($readerFontSizes, $i), 1);
+
+    @include respond($break40) {
+      font-size: nth(nth($readerFontSizes, $i), 2);
+    }
+  }
+}
