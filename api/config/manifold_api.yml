@@ -34,6 +34,7 @@ common: &1
           - "audio/mp3"
           - "text/css"
           - "text/x-c"
+          - "text/x-csrc"
           - "text/javascript"
           - "text/html"
           - "text/plain"
