@@ -3,15 +3,14 @@
   position: fixed;
   width: 100%;
   border-bottom: 1px solid transparent;
+  background-color: $neutralWhite;
   transition: border-color $duration $timing;
 
   .header-container {
     @include containerPrototype;
-    @include containerPrototype;
     position: relative;
     padding-top: 14px;
     padding-bottom: 14px;
-    background-color: $neutralWhite;
 
     @include respond($break40) {
       padding-top: 20px;
