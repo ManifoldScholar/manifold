@@ -4,14 +4,22 @@
   transition: background-color $duration $timing;
 
   .avatar {
-    @include buttonAvatar();
+    @include buttonAvatar(32);
+
+    @include respond($break40) {
+      @include buttonAvatar();
+    }
   }
 }
 
 // Global styles
 .user-menu {
-  padding: 30px;
+  padding: 23px;
   background-color: $neutral10;
+
+  @include respond($break40) {
+    padding: 30px;
+  }
 
   .tail {
     @include panelTail;
@@ -23,7 +31,11 @@
 
     li {
       @include templateHead;
-      font-size: 20px;
+      font-size: 18px;
+
+      @include respond($break40) {
+        font-size: 20px;
+      }
     }
 
     // Menu items can be buttons or links
@@ -46,10 +58,14 @@
   // Icons used in menu
   .manicon {
     display: inline-block;
-    width: 35px;
+    width: 25px;
     margin-right: 18px;
     text-align: right;
     vertical-align: middle;
+
+    @include respond($break40) {
+      width: 35px;
+    }
 
     // React generated element
     + span {
@@ -60,11 +76,19 @@
 
 
   .manicon-person-pencil {
-    font-size: 32px;
+    font-size: 29px;
+
+    @include respond($break40) {
+      font-size: 32px;
+    }
   }
 
   .manicon-circle-arrow-out-right {
     padding-right: 6px; // NP
-    font-size: 28px;
+    font-size: 25px;
+
+    @include respond($break40) {
+      font-size: 28px;
+    }
   }
 }

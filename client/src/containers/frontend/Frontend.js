@@ -79,6 +79,7 @@ class FrontendContainer extends Component {
               commonActions={this.commonActions}
             />
           </HigherOrder.ScrollAware>
+          <Layout.MobileNav location={this.props.location} />
           <main ref="mainContainer">
             {this.props.children}
           </main>
