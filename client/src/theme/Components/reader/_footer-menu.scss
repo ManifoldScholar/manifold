@@ -1,0 +1,48 @@
+.reader-footer-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  background-color: $neutralWhite;
+  border-top: 1px solid $neutral40;
+
+  @include respond($break50) {
+    display: none;
+  }
+
+  // Nav wrapped around ul
+  .menu-buttons {
+    > ul {
+      @include listUnstyled;
+      display: flex;
+      justify-content: space-between;
+
+      > li {
+        > button {
+          @include buttonUnstyled;
+          align-items: center;
+          height: 100%;
+          padding: 10px 16px;
+          color: $neutral50;
+        }
+      }
+    }
+
+    .button-bookmarks {
+      padding-top: 12px;
+      margin-bottom: -2px;
+      font-size: 27px;
+    }
+
+    .button-eye-outline {
+      font-size: 19px;
+    }
+
+    .button-appearance {
+      &.button-active {
+        background-color: $neutral10;
+      }
+    }
+  }
+}

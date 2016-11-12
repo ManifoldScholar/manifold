@@ -4,6 +4,7 @@ export Annotatable from './Annotatable';
 export AppearanceMenuBody from './AppearanceMenuBody';
 export AppearanceMenuButton from './AppearanceMenuButton';
 export Footer from './Footer';
+export FooterMenu from './FooterMenu';
 export Header from './Header';
 export StaticTextSample from './StaticTextSample';
 export TextTitles from './TextTitles';

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
-import { Header, Footer, Section } from 'components/reader';
+import { Header, Footer, FooterMenu, Section } from 'components/reader';
 import { commonActions } from 'actions/helpers';
 import textsAPI from '../../api/texts';
 import sectionsAPI from '../../api/sections';
@@ -182,6 +182,11 @@ class ReaderContainer extends Component {
             />
           </main>
           <Footer />
+          <FooterMenu
+            visibility={this.props.visibility}
+            commonActions={this.commonActions}
+            {...this.readerActions}
+          />
         </div>
       </HigherOrder.BodyClass>
     );
