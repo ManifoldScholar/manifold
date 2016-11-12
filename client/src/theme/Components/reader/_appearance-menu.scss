@@ -1,9 +1,13 @@
 .button-appearance {
   @include buttonUnstyled;
   height: 100%;
-  padding: 0 16px;
+  padding: 0 10px;
   color: $neutral50;
   transition: background-color $duration $timing;
+
+  @include respond($break70) {
+    padding: 0 16px;
+  }
 
   &.button-active {
     background-color: $neutral10;
