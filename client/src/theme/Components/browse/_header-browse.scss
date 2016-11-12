@@ -2,13 +2,20 @@
 .header-browse {
   position: fixed;
   width: 100%;
+  background-color: $neutralWhite;
   border-bottom: 1px solid transparent;
   transition: border-color $duration $timing;
 
   .header-container {
+    @include containerPrototype;
     position: relative;
-    padding: 20px 52px 20px 40px;
-    background-color: $neutralWhite;
+    padding-top: 14px;
+    padding-bottom: 14px;
+
+    @include respond($break40) {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
   }
 
   .header-border {
@@ -34,14 +41,22 @@
     vertical-align: middle;
 
     .manicon-manifold-logo {
-      font-size: 39px;
+      font-size: 32px;
+
+      @include respond($break40) {
+        font-size: 39px;
+      }
     }
   }
 
   // <nav> wrapper around <ul>
   .text-nav {
-    display: inline-block;
+    display: none;
     vertical-align: middle;
+
+    @include respond($break50) {
+      display: inline-block;
+    }
 
     ul {
       @include listHorizontal;
@@ -79,14 +94,15 @@
     }
   }
 
-  // Local Variable for menu padding
-  $menuPadding: 40px;
-
   .menu-dropdowns {
     position: absolute;
     top: 0;
-    right: $menuPadding;
+    right: $containerPaddingResp;
     height: 100%;
+
+    @include respond($break100) {
+      right: $containerPaddingFull;
+    }
 
     > ul {
       @include listUnstyled;
@@ -103,7 +119,11 @@
         }
 
         + li {
-          margin-left: 55px;
+          margin-left: 28px;
+
+          @include respond($break60) {
+            margin-left: 55px;
+          }
         }
       }
     }
@@ -112,7 +132,7 @@
     .button-search {
       position: relative;
       height: 100%;
-      font-size: 17px;
+      font-size: 19px;
       color: $neutral80;
       vertical-align: middle;
 
@@ -142,22 +162,31 @@
 
     .search-menu {
       position: absolute;
-      right: -$menuPadding;
+      right: -$containerPaddingRespGlobal;
       max-width: 100vw;
       white-space: nowrap;
 
-      @include respond($break80) {
-        right: -36px;
+      @include respond($break100) {
+        right: -$containerPaddingFull;
       }
     }
 
     .user-menu {
       position: absolute;
-      right: -24px;
+      right: -20px;
       white-space: nowrap;
 
+      @include respond($break40) {
+        right: -24px;
+      }
+
       .tail {
+        right: 21px;
         display: block;
+
+        @include respond($break40) {
+          right: 28px;
+        }
       }
     }
 
@@ -183,5 +212,9 @@
 
 // Header bump
 .browse main {
-  padding-top: 79px;
+  padding-top: 60px;
+
+  @include respond($break40) {
+    padding-top: 79px;
+  }
 }

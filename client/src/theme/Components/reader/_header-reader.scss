@@ -6,8 +6,12 @@
   .container-banner {
     @include clearfix;
     position: relative;
-    height: 63px;
+    height: 55px;
     background-color: $neutralWhite;
+
+    @include respond($break50) {
+      height: 63px;
+    }
   }
 
   .banner-gradient {
@@ -44,11 +48,16 @@
     position: relative;
     float: left;
     height: 100%;
-    padding-right: 16px;
-    padding-left: 16px;
+    padding-right: 12px;
+    padding-left: 12px;
     color: $neutral50;
     background-color: $neutral10;
     transition: color $duration $timing, background-color $duration $timing;
+
+    @include respond($break50) {
+      padding-right: 16px;
+      padding-left: 16px;
+    }
 
     &:hover {
       background-color: $accentPrimary;
@@ -59,7 +68,11 @@
     }
 
     .manicon-x {
-      font-size: 31px;
+      font-size: 26px;
+
+      @include respond($break50) {
+        font-size: 31px;
+      }
     }
   }
 
@@ -69,13 +82,19 @@
     position: relative;
     float: left;
     height: 100%;
-    padding-right: 21px;
-    padding-left: 30px;
+    padding-right: 16px;
+    padding-bottom: 5px;
+    padding-left: 20px;
     font-size: $type40;
     font-weight: $semibold;
     color: $neutral50;
     background-color: $neutral20;
     transition: color $duration $timing background-color $duration $timing;
+
+    @include respond($break50) {
+      padding-right: 21px;
+      padding-left: 30px;
+    }
 
     &.active, &:hover {
       color: $neutralWhite;
@@ -97,9 +116,14 @@
   .title {
     @include templateHead();
     position: relative;
+    display: none;
     height: 100%;
     overflow: hidden;
     cursor: pointer;
+
+    @include respond($break70) {
+      display: block;
+    }
 
     .text-title, .section-title {
       @include templateHead();
@@ -141,10 +165,28 @@
     }
 
     .button-search {
-      padding: 0 21px;
+      padding: 0 10px;
+      font-size: 19px;
+
+      @include respond($break70) {
+        padding: 0 18px;
+      }
 
       &.button-active {
         background-color: $neutral10;
+      }
+    }
+
+    .button-appearance {
+      display: none;
+      padding: 0 10px;
+
+      @include respond($break50) {
+        display: inline-block;
+      }
+
+      @include respond($break70) {
+        padding: 0 16px;
       }
     }
 
@@ -152,7 +194,12 @@
       position: relative;
       height: 100%;
       padding-right: 16px;
-      padding-left: 16px;
+      padding-left: 10px;
+
+      @include respond($break70) {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
 
       &.button-active {
         background-color: $neutral10;
@@ -172,12 +219,8 @@
     // Reader specific menu layout/transition
     .search-menu {
       position: absolute;
-      right: -100%;
+      right: -100vw;
       transition: right $duration $timing;
-
-      @include respond($break40) {
-        right: -410px;
-      }
 
       @include respond($break70) {
         right: -610px;
@@ -202,5 +245,9 @@
 
 // Header bump
 .reader main {
-  padding-top: 63px;
+  padding-top: 55px;
+
+  @include respond($break50) {
+    padding-top: 63px;
+  }
 }

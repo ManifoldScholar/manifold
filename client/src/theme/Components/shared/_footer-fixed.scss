@@ -1,0 +1,38 @@
+.footer-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: $neutralWhite;
+  border-top: 1px solid $neutral40;
+
+  @include respond($break50) {
+    display: none;
+  }
+
+  .text-nav {
+    @include listUnstyled;
+    display: table;
+    width: 100%;
+
+    li {
+      display: table-cell;
+      width: 50%;
+    }
+
+    a {
+      @include templateHead;
+      display: block;
+      padding: 0.6em 0 0.7em;
+      font-size: 14px;
+      color: $neutral50;
+      text-align: center;
+      text-decoration: none;
+
+      &.active {
+        color: $neutralOffBlack;
+        background-color: $accentPrimaryLight;
+      }
+    }
+  }
+}

@@ -209,7 +209,7 @@
   @include templateHead;
   position: absolute;
   top: 10.526%;
-  left: -18px;
+  left: -12px;
   display: block;
   height: 33px;
   max-width: 33px;
@@ -222,6 +222,10 @@
   background-color: $accentPrimary;
   border-radius: 22.5px;
   transition: max-width $duration $timing, background-color $duration $timing;
+
+  @include respond($break60) {
+    left: -18px;
+  }
 
   .manicon-plus-bold {
     display: inline-block;
@@ -246,7 +250,7 @@
   @include templateHead;
   position: absolute;
   top: 10.526%;
-  left: -18px;
+  left: -12px;
   display: block;
   height: 33px;
   max-width: 33px;
@@ -258,6 +262,10 @@
   background-color: $sp20Primary;
   border-radius: 22.5px;
   transition: max-width $duration $timing, background-color $duration $timing;
+
+  @include respond($break60) {
+    left: -18px;
+  }
 
   &:hover {
     max-width: 200px;

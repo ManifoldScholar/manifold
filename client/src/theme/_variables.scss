@@ -91,6 +91,7 @@ $baseLineHeight: 1.2;
 $containerWidthFull: 1235px; // Maximum container width of 1135 plus maximum gutter padding
 $containerPaddingFull: 50px;
 $containerPaddingResp: 4.5%;
+$containerPaddingRespGlobal: 4.5vw;
 $containerWidthMin: 320px; // Minimum container width
 
 
@@ -132,6 +133,7 @@ $break75: 760px;
 $break70: 700px;
 $break65: 690px;
 $break60: 620px;
+$break50: 560px;
 $break40: 480px;
 $break30: 400px;
 $break20: 350px;
