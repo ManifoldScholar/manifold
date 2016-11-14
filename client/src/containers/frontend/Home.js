@@ -30,6 +30,7 @@ class HomeContainer extends Component {
       projectFilters: state.ui.filters.project,
       filteredProjects: select(requests.browseFilteredProjects, state.entityStore),
       featuredProjects: select(requests.browseFeaturedProjects, state.entityStore),
+      subjects: select(requests.allUsedSubjects, state.entityStore),
       authentication: state.authentication
     };
   }
@@ -40,7 +41,8 @@ class HomeContainer extends Component {
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
     projectFilters: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    subjects: PropTypes.array
   };
 
   componentDidMount() {
@@ -100,6 +102,7 @@ class HomeContainer extends Component {
             */}
             <ProjectList.Filters
               updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
+              subjects={this.props.subjects}
             />
             { this.props.filteredProjects ?
               <ProjectList.Grid

@@ -29,10 +29,12 @@
 
     li {
       display: inline-block;
+      opacity: 1;
       width: 50%;
       // Ensures flush grid elements, requires reset for any child elements
       font-size: 0;
       vertical-align: top;
+      transition: opacity $duration $timing;
 
       @include respond($break60) {
         width: 33.333%;
@@ -41,6 +43,13 @@
       @include respond($break85) {
         width: 25%;
       }
+    }
+
+    .grid-project-leave {
+      opacity: 0;
+    }
+    .grid-project-enter {
+      opacity: 0;
     }
   }
 
@@ -86,6 +95,10 @@
           stroke-width: 5px;
           stroke-linecap: square;
         }
+      }
+
+      svg {
+        border: 0;
       }
 
       // Follow button

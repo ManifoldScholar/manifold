@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Project } from 'components/frontend';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class ProjectListGrid extends Component {
 
@@ -16,7 +17,12 @@ export default class ProjectListGrid extends Component {
     const hideDesc = true;
     return (
       <nav className="grid-project">
-        <ul>
+        <ReactCSSTransitionGroup
+          transitionName="grid-project"
+          transitionEnterTimeout={250}
+          transitionLeaveTimeout={250}
+          component="ul"
+        >
           {this.props.projects.map((project) => {
             return (
               <li key={project.id} >
@@ -30,7 +36,7 @@ export default class ProjectListGrid extends Component {
               </li>
             );
           })}
-        </ul>
+        </ReactCSSTransitionGroup>
       </nav>
     );
   }

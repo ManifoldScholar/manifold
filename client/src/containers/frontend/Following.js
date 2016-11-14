@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { uiFilterActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import projectsAPI from 'api/projects';
+import { projectsAPI, favoriteProjectsAPI } from 'api';
 import get from 'lodash/get';
 
 const { select } = entityUtils;
@@ -16,11 +16,11 @@ class FollowingContainer extends Component {
 
   static fetchData(getState, dispatch) {
     const state = getState();
-    const filteredRequest =
-      request(projectsAPI.index(state.ui.projectFilters), requests.browseFilteredProjects);
+    const followedProjectsRequest =
+      request(favoriteProjectsAPI.index(state.ui.projectFilters), requests.followedProjects);
     const featuredRequest =
       request(projectsAPI.featured(), requests.browseFeaturedProjects);
-    const { promise: one } = dispatch(filteredRequest);
+    const { promise: one } = dispatch(followedProjectsRequest);
     const { promise: two } = dispatch(featuredRequest);
     return Promise.all([one, two]);
   }
@@ -28,10 +28,11 @@ class FollowingContainer extends Component {
   static propTypes = {
     children: PropTypes.object,
     featuredProjects: PropTypes.array,
-    filteredProjects: PropTypes.array,
+    followedProjects: PropTypes.array,
     projectFilters: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    authentication: PropTypes.object
+    authentication: PropTypes.object,
+    subjects: PropTypes.array
   };
 
   static contextTypes = {
@@ -41,8 +42,9 @@ class FollowingContainer extends Component {
   static mapStateToProps(state) {
     return {
       projectFilters: state.ui.filters.project,
-      filteredProjects: select(requests.browseFilteredProjects, state.entityStore),
+      followedProjects: select(requests.followedProjects, state.entityStore),
       featuredProjects: select(requests.browseFeaturedProjects, state.entityStore),
+      subjects: select(requests.allUsedSubjects, state.entityStore),
       authentication: state.authentication
     };
   }
@@ -52,13 +54,21 @@ class FollowingContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { dispatch } = this.props;
+    // Favorite projects filters changed?
     if (prevProps.projectFilters !== this.props.projectFilters) {
-      const apiCall = projectsAPI.index(this.props.projectFilters);
-      const filteredRequest =
-        request(apiCall, requests.browseFilteredProjects);
-      dispatch(filteredRequest);
+      this.updateFavorites();
     }
+    // Favorites changed?
+    if (prevProps.authentication.currentUser.favorites !==
+      this.props.authentication.currentUser.favorites) {
+      this.updateFavorites();
+    }
+  }
+
+  updateFavorites() {
+    const apiCall = favoriteProjectsAPI.index(this.props.projectFilters);
+    const followedRequest = request(apiCall, requests.followedProjects);
+    this.props.dispatch(followedRequest);
   }
 
   render = () => {
@@ -75,15 +85,16 @@ class FollowingContainer extends Component {
               <div className="section-heading-utility-right">
                 <ProjectList.Filters
                   updateAction={boundSetFilters}
+                  subjects={this.props.subjects}
                 />
               </div>
             </header>
-            { this.props.filteredProjects ?
+            { this.props.followedProjects ?
               <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}
                 favorites={get(this.props.authentication, 'currentUser.favorites')}
                 dispatch={this.props.dispatch}
-                projects={this.props.filteredProjects}
+                projects={this.props.followedProjects}
               /> : null
             }
           </div>

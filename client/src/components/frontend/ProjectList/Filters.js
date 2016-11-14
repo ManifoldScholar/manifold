@@ -5,32 +5,51 @@ export default class ProjectListFilters extends Component {
   static displayName = "ProjectList.Filters";
 
   static propTypes = {
-    updateAction: PropTypes.func
+    updateAction: PropTypes.func,
+    subjects: PropTypes.array
   };
 
   filterChange = (event) => {
     let filter = {};
-    switch (event.target.value) {
-      case 'featured':
-        filter = { featured: true };
-        break;
-      case 'notFeatured':
-        filter = { featured: false };
-        break;
-      default:
-        filter = {};
-        break;
+    const value = event.target.value;
+    if (value) {
+      switch (value) {
+        case 'featured':
+          filter = { featured: true };
+          break;
+        case 'notFeatured':
+          filter = { featured: false };
+          break;
+        default:
+          filter = { subject: value };
+          break;
+      }
     }
     this.props.updateAction(filter);
   };
+
+  subjectOptions() {
+    if (!this.props.subjects) return null;
+    return this.props.subjects.map((subject) => {
+      return (
+        <option key={subject.id} value={subject.id}>{subject.attributes.name}</option>
+      );
+    });
+  }
+
+  featuredOptions() {
+    return (
+      <option value="featured">Featured Projects</option>
+    );
+  }
 
   render() {
     return (
       <div className="select-browse">
         <select onChange={ this.filterChange } >
-          <option value="all">Show All</option>
-          <option value="featured">Featured</option>
-          <option value="notFeatured">Not Featured</option>
+          <option value="">Show All</option>
+          {this.featuredOptions()}
+          {this.subjectOptions()}
         </select>
         <i className="manicon manicon-caret-down"></i>
       </div>
