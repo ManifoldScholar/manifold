@@ -240,12 +240,12 @@
     padding-left: 32px;
   }
 
-  .following-enter {
+  .following-enter, .following-leave.follow-text-hide-immediately {
     display: none;
   }
 
-  .following-leave.follow-text-hide-immediately, .following-enter.follow-text-show-immediately {
-    display: none;
+  .following-enter.follow-text-show-immediately {
+    display: inline;
   }
 
   .follow-active &, .unfollow-active &, .unfollow-confirm-active & {
