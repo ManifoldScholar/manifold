@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { HigherOrder } from 'components/global';
 import { Layout } from 'components/frontend';
 import { commonActions } from 'actions/helpers';
-import { pagesAPI } from 'api';
+import { pagesAPI, subjectsAPI } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import get from 'lodash/get';
@@ -14,8 +14,10 @@ class FrontendContainer extends Component {
   static fetchData(getState, dispatch) {
     if (!entityUtils.isLoaded(requests.allPages, getState())) {
       const pages = request(pagesAPI.index(), requests.allPages, true);
+      const subjects = request(subjectsAPI.index({ used: true }), requests.allUsedSubjects, true);
       const { promise: one } = dispatch(pages);
-      return Promise.all([one]);
+      const { promise: two } = dispatch(subjects);
+      return Promise.all([one, two]);
     }
   }
 

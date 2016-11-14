@@ -23,6 +23,12 @@ RSpec.describe Project, type: :model do
     expect(project.texts.length).to be 3
   end
 
+  it "has many project_subjects" do
+    project = Project.new
+    3.times { project.project_subjects.build }
+    expect(project.project_subjects.length).to be 3
+  end
+
   it "has many contributors" do
     project = Project.new
     2.times { project.contributors.build }
@@ -94,5 +100,57 @@ RSpec.describe Project, type: :model do
     project = FactoryGirl.build(:project, tweet_fetch_config: {})
     expect(project.following_twitter_accounts?).to be false
   end
+
+  context "can be filtered" do
+
+    before(:each) do
+      @subject_a = FactoryGirl.create(:subject, name: "subject_a")
+      @subject_b = FactoryGirl.create(:subject, name: "subject_b")
+      @project_a = FactoryGirl.create(:project, title: "project_a", featured: true)
+      @project_b = FactoryGirl.create(:project, title: "project_b", featured: false)
+      @project_a.subjects = [@subject_a]
+      @project_b.subjects = [@subject_b]
+      @project_a.save
+      @project_b.save
+    end
+
+    it "to only include featured" do
+      results = Project.filtered({featured: true})
+      expect(results.length).to be 1
+    end
+
+    it "to only include not featured" do
+      results = Project.filtered({featured: false})
+      expect(results.length).to be 1
+    end
+
+    it "to only include projects of a specific subject" do
+      results = Project.filtered({subject: @subject_a})
+      expect(results.first).to eq @project_a
+      results = Project.filtered({subject: @subject_b})
+      expect(results.first).to eq @project_b
+    end
+
+    it "by both subject and featured" do
+      results = Project.filtered({subject: @subject_a, featured: false})
+      expect(results.length).to be 0
+      results = Project.filtered({subject: @subject_a, featured: true})
+      expect(results.length).to be 1
+    end
+
+    it "allows boolean and string featured values" do
+      results = Project.filtered({featured: "true"})
+      expect(results.length).to be 1
+    end
+
+    it "allows treats 1 as true when filtering" do
+      results = Project.filtered({featured: "1"})
+      expect(results.length).to be 1
+      results = Project.filtered({featured: 1})
+      expect(results.length).to be 1
+    end
+
+  end
+
 
 end

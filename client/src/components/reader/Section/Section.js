@@ -39,7 +39,7 @@ class Section extends Component {
   }
 
   maybeScrollToTop(previousSection, thisSection) {
-    if (previousSection.id == thisSection.id) return;
+    if (previousSection.id === thisSection.id) return;
     window.scrollTo(0, 0);
   }
 

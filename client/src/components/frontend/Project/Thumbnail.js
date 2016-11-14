@@ -100,20 +100,23 @@ export default class ProjectThumbnail extends Component {
     }
 
     let cover;
+    let className;
     if (project.attributes.avatarUrl) {
+      className = "figure-wrapper";
       cover = (
         <img src={project.attributes.avatarUrl}
           alt={`Click to view ${project.attributes.title}`}
         />
       );
     } else {
+      className = "figure-wrapper figure-wrapper-placeholder";
       cover = <Project.Placeholder />;
     }
 
     return (
       <Link to={`/browse/project/${project.id}`}>
         {/* Figure wrapper, controls maximum width of figure */}
-        <div className="figure-wrapper">
+        <div className={className} >
           <figure>
             {cover}
             <Project.Follow

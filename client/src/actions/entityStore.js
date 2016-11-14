@@ -36,5 +36,7 @@ export const requests = {
   sectionAnnotations: 'section-annotations',
   createAnnotation: 'create-annotation',
   showProjectEvents: 'show-project-events',
-  showCollectionDetail: 'show-collection-detail'
+  showCollectionDetail: 'show-collection-detail',
+  allUsedSubjects: 'all-used-subjects',
+  followedProjects: 'followed-projects'
 };

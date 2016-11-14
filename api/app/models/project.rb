@@ -18,15 +18,22 @@ class Project < ActiveRecord::Base
   has_many :events, -> { order "events.created_at DESC" }, dependent: :destroy
   has_many :resources, dependent: :destroy
   has_many :collections, dependent: :destroy
+  has_many :project_subjects
+  has_many :subjects, through: :project_subjects
 
   # Callbacks
   after_commit :trigger_creation_event, on: [:create]
+
+  # Delegations
+  delegate :count, to: :collections, prefix: true
+  delegate :count, to: :resources, prefix: true
 
   # Misc
   money_attributes :purchase_price
 
   # Validation
   validates :purchase_url, url: { allow_nil: true }
+  validates :title, presence: true
 
   # Attachments
   has_attached_file :avatar,
@@ -58,10 +65,16 @@ class Project < ActiveRecord::Base
 
   def self.filtered(filters)
     projects = Project.all
-    defaults = { featured: nil }
-    filters = defaults.merge(filters[:filter].to_h.symbolize_keys || {})
-    projects = projects.where(featured: true) if filters[:featured] == "true"
-    projects = projects.where(featured: false) if filters[:featured] == "false"
+    return projects unless filters
+    if filters.key? :featured
+      projects = projects.where(featured: true) if truthy?(filters[:featured])
+      projects = projects.where(featured: false) if falsey?(filters[:featured])
+    end
+    if filters[:subject]
+      projects = projects
+                 .joins(:project_subjects)
+                 .where(project_subjects: { subject: filters[:subject] })
+    end
     projects
   end
 
@@ -91,9 +104,16 @@ class Project < ActiveRecord::Base
     ENV["API_URL"] + hero.url(:background)
   end
 
-  delegate :count, to: :collections, prefix: true
+  def self.truthy?(value)
+    return false if [false, "", nil].include? value
+    return true if [true, 1, "1"].include? value
+    return true if value.casecmp("true").zero?
+    false
+  end
 
-  delegate :count, to: :resources, prefix: true
+  def self.falsey?(value)
+    !truthy?(value)
+  end
 
   private
 

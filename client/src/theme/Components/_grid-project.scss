@@ -33,6 +33,8 @@
       // Ensures flush grid elements, requires reset for any child elements
       font-size: 0;
       vertical-align: top;
+      opacity: 1;
+      transition: opacity $duration $timing;
 
       @include respond($break60) {
         width: 33.333%;
@@ -42,6 +44,15 @@
         width: 25%;
       }
     }
+
+    .grid-project-leave {
+      opacity: 0;
+    }
+
+    .grid-project-enter {
+      opacity: 0;
+    }
+
   }
 
   a {
@@ -86,6 +97,10 @@
           stroke-width: 5px;
           stroke-linecap: square;
         }
+      }
+
+      svg {
+        border: 0;
       }
 
       // Follow button

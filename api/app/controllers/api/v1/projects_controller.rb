@@ -8,7 +8,7 @@ module Api
       def index
         @projects = Project
                     .includes(:makers, :creators, :contributors)
-                    .filtered(filter_params)
+                    .filtered(filter_params[:filter])
         render json: @projects,
                include: %w(creators collaborators),
                each_serializer: ProjectPartialSerializer
@@ -52,7 +52,7 @@ module Api
       end
 
       def filter_params
-        params.permit(filter: [:featured])
+        params.permit(filter: [:featured, :subject])
       end
 
       # Only allow a trusted parameter "white list" through.

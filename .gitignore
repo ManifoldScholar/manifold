@@ -11,6 +11,8 @@
 
 ### IntelliJ ###
 *.iml
+.idea
+
 
 # User-specific stuff:
 .idea/workspace.xml
