@@ -29,11 +29,11 @@
 
     li {
       display: inline-block;
-      opacity: 1;
       width: 50%;
       // Ensures flush grid elements, requires reset for any child elements
       font-size: 0;
       vertical-align: top;
+      opacity: 1;
       transition: opacity $duration $timing;
 
       @include respond($break60) {
@@ -48,9 +48,11 @@
     .grid-project-leave {
       opacity: 0;
     }
+
     .grid-project-enter {
       opacity: 0;
     }
+
   }
 
   a {
