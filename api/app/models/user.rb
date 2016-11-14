@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
     favorites.where(favoritable_id: favoritable.id).count.positive?
   end
 
-  def favorite_projects
-    favorites.only_projects.includes(:favoritable).map(&:favoritable)
-  end
+  # def favorite_projects
+  #   favorites.only_projects.includes(:favoritable).map(&:favoritable)
+  # end
 end

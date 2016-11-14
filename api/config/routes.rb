@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       namespace :me do
         namespace :relationships do
           resources :favorites
+          resources :favorite_projects, only: [:index]
         end
       end
     end
