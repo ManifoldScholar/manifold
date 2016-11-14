@@ -54,7 +54,6 @@ export function authenticateWithToken(token, dispatch) {
   if (token) {
     const { endpoint, method, options } = meAPI.show();
     options.authToken = token;
-    console.log('fetch start');
     promise = client.call(endpoint, method, options);
   } else {
     promise = new Promise((resolve, reject) => reject());
