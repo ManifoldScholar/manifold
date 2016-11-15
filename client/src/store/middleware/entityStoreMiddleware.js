@@ -50,19 +50,29 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     // loading.
     const withState = { state: 1, promise: requestPromise };
     const newPayload = Object.assign({}, action.payload, withState);
-    const type = `API_REQUEST/${action.meta.toUpperCase().replace(/-/g, '_')}`;
-    const adjustedRequestAction = {
-      type,
-      payload: newPayload,
-      meta: action.meta
-    };
-    next(adjustedRequestAction);
+
+    let newMeta = action.meta;
+    if (!Array.isArray(newMeta)) newMeta = [action.meta];
+
+    newMeta.forEach((meta) => {
+      const type = `API_REQUEST/${meta.toUpperCase().replace(/-/g, '_')}`;
+      const adjustedRequestAction = {
+        type,
+        payload: newPayload,
+        meta
+      };
+      next(adjustedRequestAction);
+    });
 
     // Execute the API call and when it is complete, dispatch a response action.
     requestPromise.then((response) => {
-      dispatch(buildResponseAction(response, action.meta, false));
+      newMeta.forEach((meta) => {
+        dispatch(buildResponseAction(response, meta, false));
+      });
     }, (response) => {
-      dispatch(buildResponseAction(response, action.meta, true));
+      newMeta.forEach((meta) => {
+        dispatch(buildResponseAction(response, meta, false));
+      });
     });
 
     return { meta: action.meta, promise: requestPromise };
