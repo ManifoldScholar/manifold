@@ -5,11 +5,21 @@ export default class ResourceSlideFigureImage extends Component {
     resource: PropTypes.object
   };
 
+  componentDidMount() {
+    const parentWidth = this._figure.parentNode.offsetWidth;
+    this._figure.style.width = parentWidth + 'px';
+  }
+
   render() {
     return (
-      <figure className="figure-image"
-        style={ { backgroundImage: 'url(' + this.props.resource.attributes.attachmentUrl + ')' } }
-      >
+      <figure>
+        <div className="figure-image"
+                ref={ (c) => {
+          this._figure = c;
+        } }
+                style={ { backgroundImage: 'url(' + this.props.resource.attributes.attachmentUrl + ')' } }
+        >
+        </div>
       </figure>
     );
   }

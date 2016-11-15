@@ -5,6 +5,11 @@ export default class ResourceSlideFigureVideo extends Component {
     resource: PropTypes.object
   };
 
+  componentDidMount() {
+    const parentWidth = this._figure.parentNode.offsetWidth;
+    this._figure.style.width = parentWidth + 'px';
+  }
+
   renderVideoByService(service, id) {
     let output = false;
     if (service === 'VIMEO') {
@@ -33,13 +38,18 @@ export default class ResourceSlideFigureVideo extends Component {
     const resource = this.props.resource;
 
     return (
-      <figure
-        className="figure-video"
-      >
-        {this.renderVideoByService(
-          resource.attributes.externalType,
-          resource.attributes.externalId
-        )}
+      <figure>
+        <div
+            className="figure-video"
+            ref={ (c) => {
+          this._figure = c;
+        } }
+        >
+          {this.renderVideoByService(
+              resource.attributes.externalType,
+              resource.attributes.externalId
+          )}
+        </div>
       </figure>
     );
   }
