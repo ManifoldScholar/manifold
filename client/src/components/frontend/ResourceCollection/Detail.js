@@ -60,7 +60,7 @@ export default class ResourceCollectionDetail extends Component {
             pagination={this.props.slideshowPagination}
           />
           <a id="pagination-target" name="pagination-target"></a>
-          <ResourceList.Totals count={project.attributes.resourcesCount} projectId={project.id} />
+          <ResourceList.Totals belongsTo="collection" count={project.attributes.resourcesCount} projectId={project.id} />
           <ResourceList.Filters kinds={collection.attributes.resourceKinds} />
           <ResourceList.Cards
             count={project.attributes.resourcesCount}

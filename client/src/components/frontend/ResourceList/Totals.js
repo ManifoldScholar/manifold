@@ -10,18 +10,22 @@ export default class ResourceListTotals extends Component {
     projectId: PropTypes.string
   };
 
+  static defaultProps = {
+    belongsTo: "project"
+  }
+
   render() {
     return (
       <div className="resource-totals">
         <div className="total-count">
-          {'This project has '}
+          {`This ${this.props.belongsTo} features `}
           <span>
             { this.props.count.toLocaleString() }
           </span>
           {' total resources'}
         </div>
         <Link to={`/browse/project/${this.props.projectId}/resources`}>
-          View All Resources <i className="manicon manicon-arrow-right"></i>
+          View All Project Resources <i className="manicon manicon-arrow-right"></i>
         </Link>
       </div>
     );
