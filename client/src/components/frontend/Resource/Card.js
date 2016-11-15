@@ -14,6 +14,7 @@ export default class ResourceCard extends Component {
 
   constructor() {
     super();
+    this.handlePreviewClick = this.handlePreviewClick.bind(this);
   }
 
   getResourceType(type) {
@@ -32,7 +33,7 @@ export default class ResourceCard extends Component {
       case 'image':
       case 'interactive':
         text = (
-            <span>
+          <span>
             {'Preview'}
               <i className="manicon manicon-eye-outline"></i>
           </span>
@@ -62,8 +63,20 @@ export default class ResourceCard extends Component {
           </span>
         );
     }
-
     return text;
+  }
+
+  handlePreviewClick(event) {
+    event.preventDefault();
+    const attr = this.props.resource.attributes;
+    switch (attr.kind.toLowerCase()) {
+      case "link":
+        window.open(attr.externalUrl);
+        break;
+      default:
+        window.open(attr.attachmentUrl);
+        break;
+    }
   }
 
   renderTags(resource) {
@@ -123,7 +136,7 @@ export default class ResourceCard extends Component {
             </figcaption>
             <i className={`manicon manicon-resource-${attr.kind}`}></i>
           </figure>
-          <div className="preview-text">
+          <div onClick={this.handlePreviewClick} className="preview-text">
             {this.getPreviewText(attr.kind)}
           </div>
         </Link>

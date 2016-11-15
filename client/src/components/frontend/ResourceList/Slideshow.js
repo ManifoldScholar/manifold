@@ -9,7 +9,9 @@ export default class ResourceListSlideshow extends Component {
   static displayName = "ResourceList.Slideshow";
 
   static propTypes = {
-    resources: PropTypes.array
+    resources: PropTypes.array,
+    count: PropTypes.number,
+    pagination: PropTypes.object
   };
 
   constructor() {
@@ -97,7 +99,7 @@ export default class ResourceListSlideshow extends Component {
             />
             <div className="slide-pagination">
               <span className="slide-ordinal">
-                {this.state.currentResource + 1} {'/'} {resources.length}
+                {this.state.currentResource + 1} {'/'} {this.props.count}
               </span>
               <div>
                 <button className="slide-previous" onClick={this.handleSlidePrev}>

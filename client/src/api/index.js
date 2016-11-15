@@ -1,4 +1,5 @@
 export projectsAPI from 'api/projects';
+export resourcesAPI from 'api/resources';
 export subjectsAPI from 'api/subjects';
 export textsAPI from 'api/texts';
 export tokensAPI from 'api/tokens';

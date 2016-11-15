@@ -1,14 +1,16 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Resource, Utility } from 'components/frontend';
 
-export default class ResourceListCards extends Component {
+export default class ResourceListCards extends PureComponent {
 
   static displayName = "ResourceList.Cards";
 
   static propTypes = {
     projectId: PropTypes.string,
-    resources: PropTypes.array
+    resources: PropTypes.array,
+    pagination: PropTypes.object,
+    paginationClickHandler: PropTypes.func
   };
 
   constructor() {
@@ -16,6 +18,8 @@ export default class ResourceListCards extends Component {
   }
 
   render() {
+    if (!this.props.resources) return null;
+
     return (
       <div>
         <nav className="resource-list">
@@ -36,6 +40,14 @@ export default class ResourceListCards extends Component {
               );
             })}
           </ul>
+          {
+            this.props.pagination ?
+              <Utility.Pagination
+                paginationClickHandler={this.props.paginationClickHandler}
+                pagination={this.props.pagination}
+              />
+              : null
+          }
         </nav>
       </div>
     );

@@ -8,25 +8,34 @@ import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI } from 'api';
 
-const { select } = entityUtils;
+const { select, meta } = entityUtils;
 const { request, flush, requests } = entityStoreActions;
 
 class ProjectResourcesContainer extends Component {
+
   static fetchData(getState, dispatch, location, params) {
+    const page = params.page ? params.page : 1;
     const projectRequest =
         request(projectsAPI.show(params.id), requests.showProjectDetail);
+    const resourcesRequest =
+        request(projectsAPI.resources(params.id, { }, { number: page }), requests.projectResources);
     const { promise: one } = dispatch(projectRequest);
-    return Promise.all([one]);
+    const { promise: two } = dispatch(resourcesRequest);
+    return Promise.all([one, two]);
   }
 
   static mapStateToProps(state) {
     return {
-      project: select(requests.showProjectDetail, state.entityStore)
+      project: select(requests.showProjectDetail, state.entityStore),
+      resources: select(requests.projectResources, state.entityStore),
+      meta: meta(requests.projectResources, state.entityStore)
     };
   }
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    resources: PropTypes.array,
+    meta: PropTypes.object
   };
 
   render() {
@@ -39,7 +48,13 @@ class ProjectResourcesContainer extends Component {
             title={project.attributes.title}
           />
         </section>
-        <Project.Resources project={project} resources={fakeData.resources} />
+        { this.props.resources ?
+          <Project.Resources
+            project={project}
+            resources={this.props.resources}
+            pagination={this.props.meta.pagination}
+          />
+        : null }
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
             link={`/browse/project/${project.id}`}

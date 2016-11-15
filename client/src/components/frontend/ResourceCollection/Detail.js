@@ -13,7 +13,12 @@ export default class ResourceCollectionDetail extends Component {
 
   static propTypes = {
     resourceCollection: PropTypes.object,
-    project: PropTypes.object
+    project: PropTypes.object,
+    slideshowResources: PropTypes.array,
+    slideshowPagination: PropTypes.object,
+    collectionResources: PropTypes.array,
+    collectionPagination: PropTypes.object,
+    collectionPaginationHandler: PropTypes.func
   };
 
   render() {
@@ -49,10 +54,20 @@ export default class ResourceCollectionDetail extends Component {
             </div>
             <Utility.ShareBar/>
           </div>
-          <ResourceList.Slideshow resources={resources} />
+          <ResourceList.Slideshow
+            resources={this.props.slideshowResources}
+            count={project.attributes.resourcesCount}
+            pagination={this.props.slideshowPagination}
+          />
+          <a id="pagination-target" name="pagination-target"></a>
           <ResourceList.Totals count={project.attributes.resourcesCount} projectId={project.id} />
           <ResourceList.Filters kinds={collection.attributes.resourceKinds} />
-          <ResourceList.Cards resources={resources} />
+          <ResourceList.Cards
+            count={project.attributes.resourcesCount}
+            resources={this.props.collectionResources}
+            pagination={this.props.collectionPagination}
+            paginationClickHandler={this.props.collectionPaginationHandler}
+          />
         </div>
       </section>
 

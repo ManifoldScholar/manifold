@@ -38,5 +38,8 @@ export const requests = {
   showProjectEvents: 'show-project-events',
   showCollectionDetail: 'show-collection-detail',
   allUsedSubjects: 'all-used-subjects',
-  followedProjects: 'followed-projects'
+  followedProjects: 'followed-projects',
+  projectResources: 'project-resources',
+  collectionResources: 'collection-all-resources',
+  slideshowResources: 'collection-slideshow-resources'
 };

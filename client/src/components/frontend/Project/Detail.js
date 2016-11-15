@@ -159,8 +159,14 @@ class Detail extends Component {
               {'Resources'}
             </h4>
           </header>
-          <ResourceList.Thumbnails resources={project.relationships.uncollectedResources} projectId={project.id} />
-          <ResourceList.Totals count={project.attributes.uncollectedResourcesCount} projectId={project.id} />
+          <ResourceList.Thumbnails
+            resources={project.relationships.uncollectedResources}
+            projectId={project.id}
+          />
+          <ResourceList.Totals
+            count={project.attributes.uncollectedResourcesCount}
+            projectId={project.id}
+          />
         </div>
       </section>
     );

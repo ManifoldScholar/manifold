@@ -35,7 +35,7 @@ export default () => {
           <Route component={Following} path="following" />
           <Route component={ProjectDetail} path="project/:id" />
           <Route component={CollectionDetail} path="project/:id/collection/:collectionId" />
-          <Route component={ProjectResources} path="project/:id/resources" />
+          <Route component={ProjectResources} path="project/:id/resources(/:page)" />
           <Route component={ResourceDetail} path="resource/:id" />
           <Route component={EventList} path="project/:id/events(/:page)" />
           <Route component={Page} path="page/:slug" />
