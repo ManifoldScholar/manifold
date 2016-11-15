@@ -2,7 +2,7 @@
 class ProjectSerializer < ProjectPartialSerializer
   cache key: "project", expires_in: 3.hours
   attributes :event_count, :metadata, :collections_count, :resources_count,
-             :uncollected_resources_count
+             :uncollected_resources_count, :resource_kinds
 
   link :self do
     "https://manifold-api.dev/api/v1/projects/#{object.id}"
