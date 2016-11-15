@@ -7,7 +7,7 @@ module Api
       # GET /collections
       def index
         @collections = Collection
-                       .filtered(filter_params)
+                       .filtered(collection_filter_params)
         render json: @collections,
                each_serializer: CollectionSerializer
       end
@@ -46,10 +46,6 @@ module Api
 
       def set_collection
         @collection = Collection.includes(:resources).find(params[:id])
-      end
-
-      def filter_params
-        params.permit(filter: [:featured])
       end
 
       # Only allow a trusted parameter "white list" through.

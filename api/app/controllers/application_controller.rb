@@ -24,4 +24,17 @@ class ApplicationController < ActionController::API
       total_count: object.total_count
     }
   end
+
+  def collection_filter_params
+    params.permit(filter: [])
+  end
+
+  def resource_filter_params
+    params.permit(filter: [])
+  end
+
+  def project_filter_params
+    params.permit(filter: [:featured, :subject])
+  end
+
 end
