@@ -26,6 +26,7 @@ html {
 body {
   // Set base font-family here
   // @include font-body;
+  min-width: $containerWidthMin;
   font-size: 1em;
   font-weight: $regular;
   line-height: $baseLineHeight;

@@ -111,12 +111,12 @@
 
 .sub-section-heading {
   @include utilityPrimary;
-  padding: 16px 30px 19px;
+  padding: 1.143em 2.143em 1.357em;
   margin-top: 0;
-  margin-bottom: 55px;
-  font-size: $type60;
+  margin-bottom: 2.929em;
+  font-size: 14px;
   color: $accentPrimaryDark;
-  background-color: $neutral20;
+  background-color: $neutral05;
 }
 
 .form-heading {
