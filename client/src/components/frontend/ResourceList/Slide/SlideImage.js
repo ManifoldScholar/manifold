@@ -14,10 +14,12 @@ export default class ResourceSlideFigureImage extends Component {
     return (
       <figure>
         <div className="figure-image"
-                ref={ (c) => {
-          this._figure = c;
-        } }
-                style={ { backgroundImage: 'url(' + this.props.resource.attributes.attachmentUrl + ')' } }
+          ref={ (c) => {
+            this._figure = c;
+          } }
+          style={ {
+            backgroundImage: 'url(' + this.props.resource.attributes.attachmentUrl + ')'
+          } }
         >
         </div>
       </figure>

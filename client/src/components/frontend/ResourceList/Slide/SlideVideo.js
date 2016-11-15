@@ -40,10 +40,10 @@ export default class ResourceSlideFigureVideo extends Component {
     return (
       <figure>
         <div
-            className="figure-video"
-            ref={ (c) => {
-          this._figure = c;
-        } }
+          className="figure-video"
+          ref={ (c) => {
+            this._figure = c;
+          } }
         >
           {this.renderVideoByService(
               resource.attributes.externalType,
