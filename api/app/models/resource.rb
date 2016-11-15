@@ -23,6 +23,15 @@ class Resource < ActiveRecord::Base
 
   before_attachment_post_process :resize_images
 
+  def self.filtered(filters)
+    resources = Resource.all
+    return resources unless filters
+    if filters.key? :project
+      resources = resources.where(project: filters[:project])
+    end
+    resources
+  end
+
   def attachment_is_image?
     config = Rails.application.config.x.api
     allowed = config[:attachments][:validations][:image][:allowed_mime]

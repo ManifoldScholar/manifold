@@ -7,10 +7,21 @@ export default class ProjectResources extends Component {
 
   static propTypes = {
     project: PropTypes.object,
-    resources: PropTypes.array
+    resources: PropTypes.array,
+    pagination: PropTypes.object
   };
 
+  constructor() {
+    super();
+    this.paginationClickHandler = this.paginationClickHandler.bind(this);
+  }
+
+  paginationClickHandler(page) {
+    return `/browse/project/${this.props.project.id}/resources/${page}`;
+  }
+
   render() {
+    const project = this.props.project;
     return (
       <section>
         <div className="container">
@@ -20,8 +31,13 @@ export default class ProjectResources extends Component {
               All Project Resources
             </h2>
           </header>
-          <ResourceList.Filters />
-          <ResourceList.Cards resources={this.props.resources} projectId={this.props.project.id} />
+          <ResourceList.Filters kinds={project.attributes.resourceKinds} />
+          <ResourceList.Cards
+            pagination={this.props.pagination}
+            resources={this.props.resources}
+            projectId={project.id}
+            paginationClickHandler={this.paginationClickHandler}
+          />
         </div>
       </section>
     );

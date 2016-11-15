@@ -21,10 +21,10 @@ export default class EventList extends Component {
 
   constructor(props) {
     super(props);
-    this.urlBuilder = this.urlBuilder.bind(this);
+    this.paginationClickHandler = this.paginationClickHandler.bind(this);
   }
 
-  urlBuilder(page) {
+  paginationClickHandler(page) {
     return `/browse/project/${this.props.project.id}/events/${page}`;
   }
 
@@ -50,7 +50,7 @@ export default class EventList extends Component {
         {
           this.props.pagination ?
             <Utility.Pagination
-              urlBuilder={this.urlBuilder}
+              paginationClickHandler={this.paginationClickHandler}
               pagination={this.props.pagination}
             />
           : null

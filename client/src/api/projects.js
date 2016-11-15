@@ -21,10 +21,30 @@ export default {
 
   events(id, page = {}) {
     return {
-      endpoint: `/api/v1/projects/${id}/events`,
+      endpoint: `/api/v1/projects/${id}/relationships/events`,
       method: 'GET',
       options: {
         params: { page }
+      }
+    };
+  },
+
+  resources(id, filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/projects/${id}/relationships/resources`,
+      method: 'GET',
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
+  uncollected_resources(id, filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/projects/${id}/relationships/uncollected_resources`,
+      method: 'GET',
+      options: {
+        params: { filter, page }
       }
     };
   },

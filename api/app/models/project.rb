@@ -85,6 +85,13 @@ class Project < ActiveRecord::Base
     projects
   end
 
+  def resource_kinds
+    resources
+      .select("resources.kind")
+      .distinct
+      .to_a.pluck(:kind)
+  end
+
   def twitter_following
     return [] unless tweet_fetch_config && tweet_fetch_config["following"].is_a?(Array)
     tweet_fetch_config["following"].map do |h|

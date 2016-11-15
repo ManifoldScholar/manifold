@@ -6,14 +6,35 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :pages
       resources :subjects
+      resources :resources
       resources :texts
-      resources :collections
+
+      resources :collections do
+        scope module: :collections do
+          namespace :relationships do
+            resources :resources, only: [:index]
+          end
+        end
+      end
+
       resources :text_sections, only: [:show] do
-        resources :annotations, shallow: true
+        scope module: :text_sections do
+          namespace :relationships do
+            resources :annotations, only: [:index, :create]
+          end
+        end
       end
+
       resources :projects do
-        resources :events, only: [:index]
+        scope module: :projects do
+          namespace :relationships do
+            resources :uncollected_resources, only: [:index]
+            resources :resources, only: [:index]
+            resources :events, only: [:index]
+          end
+        end
       end
+
       resources :tokens, only: [:create]
 
       resources :users, only: [:create, :show] do

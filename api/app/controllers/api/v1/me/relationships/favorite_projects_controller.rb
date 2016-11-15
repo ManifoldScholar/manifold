@@ -11,17 +11,13 @@ module Api
             @projects = @current_user
                         .favorite_projects
                         .includes(:makers, :creators, :contributors)
-                        .filtered(filter_params[:filter])
+                        .filtered(project_filter_params[:filter])
             render json: @projects,
                    include: %w(creators collaborators),
                    each_serializer: ProjectPartialSerializer
           end
 
           private
-
-          def filter_params
-            params.permit(filter: [:featured, :subject])
-          end
 
           # Only allow a trusted parameter "white list" through.
           def project_params
