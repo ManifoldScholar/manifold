@@ -24,7 +24,7 @@ export default class ResourceThumbnail extends Component {
     const resource = this.props.resource;
 
     const linkClass = classNames({
-      'bg-image': resource.attributes.image
+      'bg-image': resource.attributes.attachmentThumbnailUrl
     });
 
     let linkStyle = {};

@@ -35,10 +35,13 @@
     text-align: center;
     text-decoration: none;
     background-color: $neutral10;
+    transition: background-color $duration $timing;
 
     &:hover {
+      background-color: $neutral20;
+
       .resource-title {
-        color: $accentPrimaryDark;
+        color: $neutral75;
       }
     }
 
@@ -46,6 +49,12 @@
       color: $neutralWhite;
       background-position: 50% 50%;
       background-size: cover;
+
+      &:hover {
+        .resource-title {
+          color: $accentPrimaryDark;
+        }
+      }
 
       &::before {
         position: absolute;
