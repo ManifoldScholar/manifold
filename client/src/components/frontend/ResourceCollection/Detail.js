@@ -52,7 +52,7 @@ export default class ResourceCollectionDetail extends Component {
           <ResourceList.Slideshow resources={resources} />
           <ResourceList.Totals count={project.attributes.resourcesCount} projectId={project.id} />
           <ResourceList.Filters kinds={collection.attributes.resourceKinds} />
-          <ResourceList.Thumbnails resources={resources} />
+          <ResourceList.Cards resources={resources} />
         </div>
       </section>
 

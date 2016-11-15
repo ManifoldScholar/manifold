@@ -37,7 +37,6 @@ export default class ResourceListCards extends Component {
             })}
           </ul>
         </nav>
-        <Utility.Pagination />
       </div>
     );
   }

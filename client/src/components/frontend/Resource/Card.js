@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import moment from 'moment';
 
 export default class ResourceCard extends Component {
 
@@ -66,12 +67,12 @@ export default class ResourceCard extends Component {
   }
 
   renderTags(resource) {
-    if (!resource.tags) {
+    if (!resource.attributes.tags) {
       return false;
     }
 
     function commaSeparate(index) {
-      if (index >= resource.tags.length - 1) return false;
+      if (index >= resource.attributes.tags.length - 1) return false;
       return (
         <span>
           {', '}
@@ -82,7 +83,7 @@ export default class ResourceCard extends Component {
     return (
       <nav className="resource-tags">
         <ul>
-          {resource.tags.map((tag, index) => {
+          {resource.attributes.tags.map((tag, index) => {
             return (
               <li key={index}>
                 <Link to="#">{tag}</Link>{commaSeparate(index)}
@@ -96,50 +97,55 @@ export default class ResourceCard extends Component {
 
   render() {
     const resource = this.props.resource;
+    const attr = resource.attributes;
 
     const linkClass = classNames({
       thumbnail: true,
-      'bg-image': resource.image
+      'bg-image': attr.attachmentThumbnailUrl
     });
 
     let linkStyle = {};
-    if (resource.image) {
+    if (attr.attachmentThumbnailUrl) {
       linkStyle = {
-        backgroundImage: `url('${resource.image}')`
+        backgroundImage: `url('${attr.attachmentThumbnailUrl}')`
       };
     }
 
     return (
       <li className="resource-listing">
         <Link
-          to={`/browse/project/${this.props.projectId}/resources/${resource.id}`}
+          to={`/browse/resource/${resource.id}`}
           className={linkClass} style={linkStyle}
         >
           <figure className="resource-type">
             <figcaption>
-              {this.getResourceType(resource.attributes.type)}
+              {this.getResourceType(attr.kind)}
             </figcaption>
-            <i className={`manicon manicon-resource-${resource.attributes.type}`}></i>
+            <i className={`manicon manicon-resource-${attr.kind}`}></i>
           </figure>
           <div className="preview-text">
-            {this.getPreviewText(resource.attributes.type)}
+            {this.getPreviewText(attr.kind)}
           </div>
         </Link>
         <div className="resource-info">
           <div>
             <Link
-              to={`/browse/project/${this.props.projectId}/resources/${resource.id}`}
+              to={`/browse/resource/${resource.id}`}
               className="resource-title"
             >
               <h4>
-                {resource.title}
+                {attr.title}
               </h4>
             </Link>
             <span className="resource-date">
-              {'Uploaded September, 2016'}
+              {
+                `Uploaded
+                ${moment().month(attr.createdMonth - 1).format("MMMM")},
+                ${attr.createdYear}`
+              }
             </span>
             <Link
-              to={`/browse/project/${this.props.projectId}/resources/${resource.id}`}
+              to={`/browse/resource/${resource.id}`}
               className="arrow-link"
             >
               <i className="manicon manicon-arrow-right"></i>

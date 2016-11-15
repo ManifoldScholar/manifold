@@ -16,6 +16,7 @@ export default class ResourceThumbnail extends Component {
   };
 
   getResourceKind(kind) {
+    if (!kind) return "file";
     return kind.toLowerCase().charAt(0).toUpperCase() + kind.slice(1);
   }
 
