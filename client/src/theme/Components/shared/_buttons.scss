@@ -218,9 +218,9 @@
 .following-button {
   @include templateHead;
   position: absolute;
+  left: 0;
   display: block;
   height: 33px;
-  left: 0;
   max-width: 33px;
   padding: 5px 13px 0 8px;
   overflow: hidden;

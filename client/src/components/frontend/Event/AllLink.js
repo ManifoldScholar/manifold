@@ -7,14 +7,14 @@ export default class EventAllLink extends Component {
 
   static propTypes = {
     count: PropTypes.number,
-    projectId: PropTypes.string,
+    threshold: PropTypes.number,
+    projectId: PropTypes.string
   };
 
   getAllLink() {
-    const allThreshold = 6;
     let allLink = null;
 
-    if (this.props.count > allThreshold) {
+    if (this.props.count > this.props.threshold) {
       allLink = (
         <div className="section-heading-utility-right">
           <Link to={`/browse/project/${this.props.projectId}/events`} className="button-primary">

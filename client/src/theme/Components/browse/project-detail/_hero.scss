@@ -143,6 +143,7 @@
 
       .subtitle {
         @include subtitlePrimary;
+        display: block;
         color: $neutral75;
       }
     }

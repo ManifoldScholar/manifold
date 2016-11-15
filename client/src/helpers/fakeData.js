@@ -225,7 +225,7 @@ const events = [
   {
     id: 1,
     attributes: {
-      event_type: "PROJECT_CREATED",
+      eventType: "PROJECT_CREATED",
       event_url: undefined,
       created_at: "2016-06-18 13:55:30",
       subject_id: "1234-1234-1234-1234",
@@ -243,7 +243,7 @@ const events = [
   {
     id: 2,
     attributes: {
-      event_type: "RESOURCE_CREATED",
+      eventType: "RESOURCE_CREATED",
       event_url: "/browse/resource/1",
       created_at: "2016-7-21 13:55:30",
       subject_id: "1234-1234-1234-1234",
@@ -261,7 +261,7 @@ const events = [
   {
     id: 3,
     attributes: {
-      event_type: "TEXT_CREATED",
+      eventType: "TEXT_ADDED",
       event_url: undefined,
       created_at: "2016-8-20 13:55:30",
       subject_id: "1234-1234-1234-1234",
@@ -279,7 +279,7 @@ const events = [
   {
     id: 4,
     attributes: {
-      event_type: "ANNOTATION_CREATED",
+      eventType: "ANNOTATION_CREATED",
       event_url: "#",
       type: "annotation_created",
       created_at: "2016-10-17 13:55:30",
@@ -297,7 +297,7 @@ const events = [
   {
     id: 5,
     attributes: {
-      event_type: "ANNOTATION_CREATED",
+      eventType: "ANNOTATION_CREATED",
       event_url: "#",
       type: "annotation_created",
       created_at: "2016-10-20 13:55:30",
@@ -315,7 +315,7 @@ const events = [
   {
     id: 6,
     attributes: {
-      event_type: "TWEET",
+      eventType: "TWEET",
       event_url: "https://twitter.com/noctambulate/status/786361503586758656",
       created_at: "2016-10-23 13:55:30",
       subject_id: "1234-1234-1234-1234",
@@ -333,7 +333,7 @@ const events = [
   {
     id: 5,
     attributes: {
-      event_type: "ANNOTATION_CREATED",
+      eventType: "ANNOTATION_CREATED",
       event_url: "#",
       type: "annotation_created",
       created_at: "2016-10-20 13:55:30",

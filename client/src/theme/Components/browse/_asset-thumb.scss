@@ -67,16 +67,13 @@
     .asset-title {
       @include templateHead;
       margin-top: 0;
-      margin-bottom: 16px;
-      font-size: 18px;
+      margin-bottom: 0.697em;
+      font-size: 20px;
+      font-weight: $semibold;
       color: $neutralOffBlack;
 
-      @include respond($break60) {
-        font-size: 20px;
-      }
-
       @include respond($break85) {
-        font-size: 22px;
+        font-size: 23px;
       }
 
       .subtitle {
@@ -120,8 +117,12 @@
     .manicon {
       display: inline-block;
       margin-right: 8px;
-      font-size: 22px;
+      font-size: 20px;
       vertical-align: middle;
+
+      @include respond($break60) {
+        font-size: 22px;
+      }
     }
 
     a {

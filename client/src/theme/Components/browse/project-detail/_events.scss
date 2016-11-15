@@ -54,6 +54,14 @@
       width: 33.333%;
       margin-bottom: 40px;
     }
+
+    &:nth-child(n+3) {
+      display: none;
+
+      @include respond($break60) {
+        display: flex;
+      }
+    }
   }
 }
 
