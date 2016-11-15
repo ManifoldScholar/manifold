@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   include TrackedCreator
   include Collaborative
   include MoneyAttributes
+  include TruthyChecks
 
   # Associations
   belongs_to :published_text, class_name: "Text", optional: true
@@ -18,8 +19,14 @@ class Project < ActiveRecord::Base
   has_many :events, -> { order "events.created_at DESC" }, dependent: :destroy
   has_many :resources, dependent: :destroy
   has_many :collections, dependent: :destroy
+  has_many :collection_resources, through: :collections
   has_many :project_subjects
   has_many :subjects, through: :project_subjects
+  # rubocop:disable Style/Lambda
+  has_many :uncollected_resources, -> (object) {
+    where.not(id: object.collection_resources.select(:resource_id))
+  }, class_name: "Resource"
+  # rubocop:end Style/Lambda
 
   # Callbacks
   after_commit :trigger_creation_event, on: [:create]
@@ -102,17 +109,6 @@ class Project < ActiveRecord::Base
   def hero_url
     return nil if hero.url(:background).blank?
     ENV["API_URL"] + hero.url(:background)
-  end
-
-  def self.truthy?(value)
-    return false if [false, "", nil].include? value
-    return true if [true, 1, "1"].include? value
-    return true if value.casecmp("true").zero?
-    false
-  end
-
-  def self.falsey?(value)
-    !truthy?(value)
   end
 
   private

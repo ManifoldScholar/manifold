@@ -101,6 +101,20 @@ RSpec.describe Project, type: :model do
     expect(project.following_twitter_accounts?).to be false
   end
 
+  it "correctly returns the uncollected resource count" do
+    project = FactoryGirl.create(:project)
+    collection = FactoryGirl.create(:collection, project: project)
+    resource_1 = FactoryGirl.create(:resource, project: project)
+    resource_2 = FactoryGirl.create(:resource, project: project)
+    resource_3 = FactoryGirl.create(:resource, project: project)
+    collection_resource = FactoryGirl.create(
+      :collection_resource,
+      resource: resource_1,
+      collection: collection
+    )
+    expect(project.uncollected_resources.count).to be 2
+  end
+
   context "can be filtered" do
 
     before(:each) do

@@ -80,6 +80,7 @@ module Importer
     end
 
     def add_resource_to_collection(resource, collection_title, count)
+      return if collection_title.blank?
       @logger.info "    Attempting to add resource to collection \"#{collection_title}\""
       collection = @project.collections.find_by(title: collection_title)
       return @logger.log_missing_collection unless collection
