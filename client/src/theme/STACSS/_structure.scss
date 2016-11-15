@@ -30,6 +30,22 @@
   }
 }
 
+// Media show/hide classes, media-query variable dependent
+// --------------------------
+.hide-60 {
+  @include respond($break60) {
+    display: none;
+  }
+}
+
+.show-60 {
+  display: none;
+
+  @include respond($break60) {
+    display: inherit;
+  }
+}
+
 .rel {
   position: relative;
 }

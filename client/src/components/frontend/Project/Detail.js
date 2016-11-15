@@ -55,8 +55,14 @@ class Detail extends Component {
               <i className="manicon manicon-pulse"></i>
               {'Recent Activity'}
             </h4>
-            <Event.AllLink count={attr.eventCount} projectId={project.id} />
+            <div className="hide-60">
+              <Event.AllLink count={attr.eventCount} threshold={2} projectId={project.id} />
+            </div>
+            <div className="show-60">
+              <Event.AllLink count={attr.eventCount} threshold={6} projectId={project.id} />
+            </div>
           </header>
+          {/* NB: CSS limits the event list from showing more than 2 events on mobile */}
           <Event.List events={events} limit={6} columns={3} />
         </div>
       </section>
