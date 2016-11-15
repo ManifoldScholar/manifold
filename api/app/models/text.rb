@@ -28,6 +28,7 @@ class Text < ActiveRecord::Base
   has_many :text_sections, -> { order(position: :asc) }
   has_many :stylesheets
   has_many :favorites, as: :favoritable
+  has_many :annotations, through: :text_sections
 
   # Validation
   validates :unique_identifier, presence: true
@@ -109,5 +110,13 @@ class Text < ActiveRecord::Base
 
   def trigger_text_added_event
     Event.trigger(Event::TEXT_ADDED, self) if project
+  end
+
+  def annotations_count
+    annotations.only_annotations.count
+  end
+
+  def highlights_count
+    annotations.only_highlights.count
   end
 end

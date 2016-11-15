@@ -6,6 +6,11 @@ class Annotation < ApplicationRecord
   # Concerns
   include TrackedCreator
 
+  # Scopes
+  scope :only_annotations, -> { where(format: "annotation") }
+  scope :only_highlights, -> { where(format: "highlight") }
+  scope :created_by, ->(user) { where(creator: user) }
+
   # Constants
   TYPE_ANNOTATION = "annotation".freeze
   TYPE_HIGHLIGHT = "highlight".freeze

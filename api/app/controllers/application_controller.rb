@@ -5,6 +5,8 @@ class ApplicationController < ActionController::API
   include Validation
   include JsonApi
 
+  serialization_scope :current_user
+
   protected
 
   def page_size

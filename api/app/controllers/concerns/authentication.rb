@@ -19,6 +19,10 @@ module Authentication
     nil
   end
 
+  def current_user
+    @current_user
+  end
+
   # This method gets the current user based on the user_id included
   # in the Authorization header (json web token).
   #
