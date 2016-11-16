@@ -5,6 +5,10 @@ class CollectionResource < ActiveRecord::Base
   belongs_to :collection
   belongs_to :resource
 
+  # Concerns
+  acts_as_list scope: :collection_id
+
+  # Validations
   validate :collection_and_resource_must_belong_to_same_project
 
   def collection_and_resource_must_belong_to_same_project
