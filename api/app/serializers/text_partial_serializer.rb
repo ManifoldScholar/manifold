@@ -30,7 +30,7 @@ class TextPartialSerializer < ActiveModel::Serializer
   end
 
   def age
-    (Date.today - object.created_at.to_date).to_i
+    (Time.zone.today - object.created_at.to_date).to_i
   end
 
   def created_month
