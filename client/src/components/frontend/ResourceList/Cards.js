@@ -30,7 +30,13 @@ export default class ResourceListCards extends PureComponent {
               {' Resources Shown'}
           </div>
           <ul>
-            {this.props.resources.map((resource) => {
+            {this.props.resources.map((resourceLike) => {
+              let resource;
+              if (resourceLike.type === "collectionResources") {
+                resource = resourceLike.relationships.resource;
+              } else {
+                resource = resourceLike;
+              }
               return (
                 <Resource.Card
                   key={resource.id}

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
 
@@ -7,7 +7,7 @@ import {
   ResourceList
 } from 'components/frontend';
 
-export default class ResourceCollectionDetail extends Component {
+export default class ResourceCollectionDetail extends PureComponent {
 
   static displayName = "ResourceCollection.Detail";
 
@@ -18,7 +18,8 @@ export default class ResourceCollectionDetail extends Component {
     slideshowPagination: PropTypes.object,
     collectionResources: PropTypes.array,
     collectionPagination: PropTypes.object,
-    collectionPaginationHandler: PropTypes.func
+    collectionPaginationHandler: PropTypes.func,
+    dispatch: PropTypes.func
   };
 
   render() {
@@ -55,12 +56,18 @@ export default class ResourceCollectionDetail extends Component {
             <Utility.ShareBar/>
           </div>
           <ResourceList.Slideshow
-            resources={this.props.slideshowResources}
+            collectionId={this.props.resourceCollection.id}
+            collectionResources={this.props.slideshowResources}
             count={project.attributes.resourcesCount}
             pagination={this.props.slideshowPagination}
+            dispatch={this.props.dispatch}
           />
           <a id="pagination-target" name="pagination-target"></a>
-          <ResourceList.Totals count={project.attributes.resourcesCount} projectId={project.id} />
+          <ResourceList.Totals
+            belongsTo="collection"
+            count={project.attributes.resourcesCount}
+            projectId={project.id}
+          />
           <ResourceList.Filters kinds={collection.attributes.resourceKinds} />
           <ResourceList.Cards
             count={project.attributes.resourcesCount}

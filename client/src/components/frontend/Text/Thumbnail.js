@@ -70,19 +70,19 @@ export default class TextThumbnail extends Component {
             <li>
               <Link to="/">
                 <i className="manicon manicon-pencil-simple"></i>
-                12
+                {text.attributes.annotationsCount}
               </Link>
             </li>
             <li>
               <Link to="/">
-                <i className="manicon manicon-word-bubble"></i>
-                12
+                <i className="manicon manicon-highlight"></i>
+                {text.attributes.highlightsCount}
               </Link>
             </li>
             <li>
               <Link to="/">
                 <i className="manicon manicon-bookmark-outline"></i>
-                31
+                {text.attributes.bookmarksCount}
               </Link>
             </li>
           </ul>

@@ -5,6 +5,8 @@ class ApplicationController < ActionController::API
   include Validation
   include JsonApi
 
+  serialization_scope :current_user
+
   protected
 
   def page_size
@@ -17,6 +19,7 @@ class ApplicationController < ActionController::API
 
   def pagination_dict(object)
     {
+      per_page: page_size,
       current_page: object.current_page,
       next_page: object.next_page,
       prev_page: object.prev_page, # use object.previous_page when using will_paginate
