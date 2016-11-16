@@ -89,21 +89,23 @@ class HomeContainer extends Component {
         </section>
         <section className="bg-neutral05">
           <div className="container">
-            <header className="section-heading">
+            <header className="section-heading utility-right">
               <h4 className="title">
                 <i className="manicon manicon-books-on-shelf"></i>
                 {'Our Projects'}
               </h4>
+              <div className="section-heading-utility-right">
+                {/*
+                 Note that we're using a different dumb component to render this.
+                 Note, too, that the parent component delivers all the data the child
+                 component needs to render (which is what keeps the child dumb)'
+                 */}
+                <ProjectList.Filters
+                  updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
+                  subjects={this.props.subjects}
+                />
+              </div>
             </header>
-            {/*
-              Note that we're using a different dumb component to render this.
-              Note, too, that the parent component delivers all the data the child
-              component needs to render (which is what keeps the child dumb)'
-            */}
-            <ProjectList.Filters
-              updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
-              subjects={this.props.subjects}
-            />
             { this.props.filteredProjects ?
               <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}

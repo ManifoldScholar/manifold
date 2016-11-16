@@ -131,7 +131,7 @@
     margin: 0;
     font-size: $type40;
     line-height: $baseLineHeight;
-    border: 3px solid $neutral40;
+    border: 2px solid $neutral40;
 
     &:focus {
       border-color: $accentPrimary;
@@ -144,7 +144,7 @@
     top: 50%;
     right: 24px;
     display: inline-block;
-    margin-top: -3px;
+    margin-top: -2px;
     font-size: 7px;
     pointer-events: none;
 
@@ -179,7 +179,7 @@
   font-size: $type70;
   color: $accentPrimary;
   background: transparent;
-  border: 3px solid $accentPrimary;
+  border: 2px solid $accentPrimary;
   outline: none;
 
   &:focus {

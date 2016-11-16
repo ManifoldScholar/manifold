@@ -113,7 +113,7 @@ class FollowingContainer extends Component {
               </div>
             </header>
             { this.props.featuredProjects ?
-              <ProjectList.SummaryGrid
+              <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}
                 favorites={get(this.props.authentication, 'currentUser.favorites')}
                 dispatch={this.props.dispatch}

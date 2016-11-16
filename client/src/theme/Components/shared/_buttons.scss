@@ -11,7 +11,7 @@
   padding: 9px 23px 10px;
   color: $neutral80;
   text-decoration: none;
-  border: 3px solid $accentPrimary;
+  border: 2px solid $accentPrimary;
 }
 
 // Large transparent button with icon on the left
@@ -25,7 +25,7 @@
   color: $neutral75;
   text-align: center;
   text-decoration: none;
-  border: 3px solid $accentPrimary;
+  border: 2px solid $accentPrimary;
   transition: color $duration $timing, background-color $duration $timing;
 
   @include respond($break60) {

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Text } from 'components/frontend';
+import moment from 'moment';
 
 export default class TextThumbnail extends Component {
 
@@ -44,49 +45,57 @@ export default class TextThumbnail extends Component {
 
     return (
       <div className="asset-thumb">
-        <Link to={`/read/${this.props.text.id}`} className="asset-link">
-          <figure className="asset-image">
-            {/*
-              Manicon-new can be added for texts that are "new"
-              <i className="manicon manicon-new"></i>
-            */}
-            {this.renderThumbnail(text)}
-          </figure>
+        <div className="asset-link">
+          <Link to={`/read/${this.props.text.id}`}>
+            <figure className="asset-image">
+              { text.attributes.age <= 30 ?
+                <i className="manicon manicon-new"></i>
+              :
+                null
+              }
+              {this.renderThumbnail(text)}
+            </figure>
+          </Link>
 
           <div className="asset-description">
-            <h3 className="asset-title">
-              {text.attributes.title}
-              {this.renderSubtitle(text)}
-            </h3>
+            <Link to={`/read/${this.props.text.id}`}>
+              <h3 className="asset-title">
+                {text.attributes.title}
+                {this.renderSubtitle(text)}
+              </h3>
+            </Link>
             <datetime className="asset-date">
-              {'Added ' + text.attributes.createdAt}
+              {`Added ${moment(text.attributes.createdAt).format("MMMM YYYY")}`}
             </datetime>
+
+            <div className="asset-status">
+              <ul className="asset-interactions">
+                <li>
+                  <Link to={`/read/${this.props.text.id}`}>
+                    <i className="manicon manicon-pencil-simple"></i>
+                    {text.attributes.annotationsCount}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`/read/${this.props.text.id}`}>
+                    <i className="manicon manicon-highlight"></i>
+                    {text.attributes.highlightsCount}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={`/read/${this.props.text.id}`}>
+                    <i className="manicon manicon-bookmark-outline"></i>
+                    {text.attributes.bookmarksCount}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+
           </div>
-        </Link>
+        </div>
 
         {/* Asset status markup only stub at this point, may be abstracted to child component */}
-        <div className="asset-status">
-          <ul className="asset-interactions">
-            <li>
-              <Link to="/">
-                <i className="manicon manicon-pencil-simple"></i>
-                {text.attributes.annotationsCount}
-              </Link>
-            </li>
-            <li>
-              <Link to="/">
-                <i className="manicon manicon-highlight"></i>
-                {text.attributes.highlightsCount}
-              </Link>
-            </li>
-            <li>
-              <Link to="/">
-                <i className="manicon manicon-bookmark-outline"></i>
-                {text.attributes.bookmarksCount}
-              </Link>
-            </li>
-          </ul>
-        </div>
       </div>
     );
   }
