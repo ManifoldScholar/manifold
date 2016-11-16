@@ -1,5 +1,28 @@
-// Can be abstracted as "meta-list-primary" and/or moved if used elsewhere
-.meta-list {
+.meta-list-secondary {
+  @include listUnstyled;
+
+  li {
+    @include utilityPrimary;
+    display: block;
+    width: 100%;
+    font-size: 13px;
+
+    + li {
+      margin-top: 4px;
+    }
+
+    .meta-label {
+      color: $neutral40;
+
+      &::after {
+        display: inline;
+        content: ':';
+      }
+    }
+  }
+}
+
+.meta-list-primary {
   @include listHorizontal;
 
   @include respond($break40) {
@@ -27,6 +50,7 @@
 
   .meta-label {
     @include utilityPrimary;
+    display: block;
     font-size: 12px;
     color: $neutral40;
 

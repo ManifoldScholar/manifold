@@ -1,8 +1,9 @@
 .resource-slide-figure {
   position: relative;
   width: 100%;
-  height: 0;
-  padding-top: 56.25%;
+  height: 52vw;
+  max-height: 52vh;
+  min-height: 350px;
   background-color: $neutralBlack;
 
   figure {

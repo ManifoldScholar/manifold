@@ -127,7 +127,7 @@ export default class ResourceCard extends Component {
     return (
       <li className="resource-card">
         <Link
-          to={`/browse/resource/${resource.id}`}
+          to={`/browse/project/${this.props.projectId}/resource/${resource.id}`}
           className={linkClass} style={linkStyle}
         >
           <figure className="resource-type">

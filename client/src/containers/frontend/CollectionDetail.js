@@ -78,13 +78,11 @@ class CollectionDetailContainer extends PureComponent {
     if (!project && !collection) return null;
     return (
       <div>
-        <section className="bg-neutral05">
-          <Utility.BackLinkPrimary
-            link={`/browse/project/${project.id}`}
-            title={project.attributes.title}
-          />
-        </section>
-        { this.props.slideshowResources && this.props.resources ?
+        <Utility.BackLinkPrimary
+          link={`/browse/project/${project.id}`}
+          title={project.attributes.title}
+        />
+        { this.props.slideshowResources && this.props.collectionResources ?
           <ResourceCollection.Detail
             dispatch={this.props.dispatch}
             project={this.props.project}

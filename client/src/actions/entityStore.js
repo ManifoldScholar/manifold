@@ -41,5 +41,6 @@ export const requests = {
   followedProjects: 'followed-projects',
   projectResources: 'project-resources',
   collectionResources: 'collection-all-resources',
-  slideshowResources: 'collection-slideshow-resources'
+  slideshowResources: 'collection-slideshow-resources',
+  showResourceDetail: 'show-resource-detail'
 };

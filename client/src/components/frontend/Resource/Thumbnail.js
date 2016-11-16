@@ -7,6 +7,7 @@ export default class ResourceThumbnail extends Component {
   static displayName = "Resource.Thumbnail";
 
   static propTypes = {
+    projectId: PropTypes.string,
     resource: PropTypes.object,
     isList: PropTypes.bool
   };
@@ -39,7 +40,7 @@ export default class ResourceThumbnail extends Component {
     return (
       <li>
         <Link
-          to={`/browse/resource/${resource.id}`}
+          to={`/browse/project/${this.props.projectId}/resource/${resource.id}`}
           className={linkClass} style={linkStyle}
         >
           <figure className="resource-type">

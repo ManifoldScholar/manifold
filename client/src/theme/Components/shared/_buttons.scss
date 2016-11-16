@@ -12,6 +12,13 @@
   color: $neutral80;
   text-decoration: none;
   border: 2px solid $accentPrimary;
+  transition: background-color $duration $timing,
+    color $duration $timing;
+
+  &:hover {
+    color: $neutralWhite;
+    background-color: $accentPrimary;
+  }
 }
 
 // Large transparent button with icon on the left
@@ -317,11 +324,19 @@
 
 .back-link-primary {
   @include utilityPrimary;
-  display: inline-block;
+  display: block;
   padding: 20px 0 18px;
   font-size: 14px;
-  color: $neutral80;
+  color: $neutral70;
   text-decoration: none;
+  background-color: $neutral05;
+  transition: color $duration $timing,
+    background-color $duration $timing;
+
+  &:hover {
+    color: $neutral80;
+    background-color: $neutral10;
+  }
 
   .manicon {
     display: inline-block;
@@ -356,7 +371,7 @@
     + div {
       display: table-cell;
       width: 100%;
-      vertical-align: top;
+      vertical-align: middle;
     }
   }
 

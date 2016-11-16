@@ -70,6 +70,7 @@ export default class ResourceCollectionDetail extends PureComponent {
           />
           <ResourceList.Filters kinds={collection.attributes.resourceKinds} />
           <ResourceList.Cards
+            projectId={project.id}
             count={project.attributes.resourcesCount}
             resources={this.props.collectionResources}
             pagination={this.props.collectionPagination}

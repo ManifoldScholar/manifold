@@ -10,8 +10,8 @@
     text-decoration: none;
     background-color: $neutral10;
     background-position: 50% 50%;
-    background-size: cover;
     background-repeat: no-repeat;
+    background-size: cover;
 
     @include respond($break40) {
       width: 155px;

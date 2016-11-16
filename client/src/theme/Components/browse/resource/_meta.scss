@@ -1,0 +1,49 @@
+.resource-meta {
+  .resource-type {
+    margin-bottom: 14px;
+    font-size: 40px;
+    color: $neutral75;
+
+    @include respond($break65) {
+      margin-bottom: 2px;
+    }
+  }
+
+  // <ul>
+  .meta-list-secondary {
+    margin-bottom: 22px;
+  }
+
+  // Only shown on mobile
+  .meta-list-primary {
+    margin-bottom: 22px;
+  }
+
+  // <nav> around <ul>
+  .tag-list {
+    ul {
+      @include listUnstyled;
+    }
+
+    li {
+      @include utilityPrimary;
+      display: inline;
+      font-size: 13px;
+      color: $neutral40;
+
+      + li::before {
+        content: ', ';
+      }
+    }
+
+    a {
+      color: $neutral40;
+      text-decoration: none;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $accentPrimary;
+      }
+    }
+  }
+}
