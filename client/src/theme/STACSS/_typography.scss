@@ -40,6 +40,10 @@
   }
 }
 
+.heading-primary {
+  @include headingPrimary;
+}
+
 @mixin headingTertiary {
   @include templateHead;
   margin-top: 0;

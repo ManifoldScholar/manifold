@@ -61,7 +61,45 @@ class HomeContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div style={ {
+        'overflow-x': 'hidden'
+      } }>
+        <section className="bg-accent-primary">
+          <div className="container rel">
+            <div className="splash-40">
+              <div className="left">
+                <h2 className="heading-primary">
+                  {'Welcome to Manifold. An Intuitive, collaborative, ' +
+                  'open-source platform for scholarly publishing'}
+                </h2>
+                <p>
+                  {'With iterative texts, powerful annotation tools, ' +
+                  'rich media support, and robust community dialogue, ' +
+                  'Manifold transforms scholarly publications into ' +
+                  'living digital works.'}
+                </p>
+                <nav className="buttons">
+                  <Link to="http://manifold.umn.edu/"
+                    target="blank"
+                    className="button-bare-primary"
+                  >
+                    {'Learn More'}
+                  </Link>
+                  <Link
+                    to="#"
+                    target="blank"
+                    className="button-bare-primary"
+                  >
+                    {'Sign Up'}
+                  </Link>
+                </nav>
+              </div>
+              <figure className="right">
+                <img src="/static/images/browse-splash_manifold-devices.png" />
+              </figure>
+            </div>
+          </div>
+        </section>
         {/*
           Note that this section will be used for "Recent Projects"
           once that list is available, this is currently using the

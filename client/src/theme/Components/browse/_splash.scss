@@ -1,0 +1,37 @@
+%splash-prototype {
+  .bg-accent-primary & {
+    .heading-primary {
+      color: $neutralWhite;
+    }
+
+    .button-bare-primary {
+      color: $neutralWhite;
+    }
+  }
+
+  p {
+    @include templateCopy;
+    font-size: 17px;
+    line-height: 1.353;
+  }
+}
+
+.splash-40 {
+  @extend %splash-prototype;
+  @include clearfix;
+
+  .left {
+    float: left;
+    width: 40%;
+  }
+
+  .right {
+    img {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 778px;
+      opacity: 0.2;
+    }
+  }
+}

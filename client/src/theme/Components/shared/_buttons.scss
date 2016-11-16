@@ -3,6 +3,14 @@
   @include buttonUnstyled;
 }
 
+.button-bare-primary {
+  @include buttonUnstyled;
+  @include utilityPrimary;
+  font-size: 13px;
+  color: $accentPrimary;
+  text-decoration: none;
+}
+
 // Can be a <button> or an <a>
 .button-primary {
   @include buttonUnstyled;
