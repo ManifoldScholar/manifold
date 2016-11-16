@@ -56,6 +56,10 @@
     width: 78%;
     padding-left: 6%;
 
+    a {
+      text-decoration: none;
+    }
+
     @include respond($break40) {
       width: calc(100% - 90px);
     }
