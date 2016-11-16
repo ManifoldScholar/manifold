@@ -11,7 +11,7 @@ export default class ProjectMeta extends Component {
   render() {
     const keys = Object.keys(this.props.metadata);
     return (
-      <ul className="meta-list">
+      <ul className="meta-list-primary">
         {keys.map((key) => {
           return (
             <li key={key} >

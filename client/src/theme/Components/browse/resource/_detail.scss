@@ -1,0 +1,84 @@
+.resource-detail {
+  @include clearfix;
+
+  .resource-content {
+    // Default font-treatment
+    @include templateCopy;
+    font-size: 16px;
+    line-height: 1.4;
+    color: $neutral75;
+
+    @include respond($break65) {
+      float: right;
+      width: 68%;
+      padding-right: 8.45%;
+    }
+
+    .attribute-header {
+      @include utilityPrimary;
+      margin-top: 2em;
+      font-size: 12px;
+      color: $neutral40;
+    }
+  }
+
+  aside {
+    @include respond($break65) {
+      float: right;
+      width: 32%;
+    }
+
+    .button-primary {
+      width: calc(50% - 7px);
+      padding: 0.813em 0.8em;
+      margin-bottom: 0.929em;
+      font-size: 12px;
+      line-height: 13px; // OD
+      text-align: center;
+
+      @include respond($break50) {
+        width: 180px;
+        padding: 0.813em 1.438em;
+        font-size: 14px;
+      }
+
+      @include respond($break65) {
+        display: block;
+        max-width: 100%;
+      }
+
+      + .button-primary {
+        margin-left: 14px;
+
+        @include respond($break65) {
+          margin-left: 0;
+        }
+      }
+
+      .manicon {
+        margin-left: 8px;
+        font-size: 13px;
+      }
+    }
+
+    .share-nav-primary {
+      margin: 21px 0 29px;
+    }
+
+    .resource-meta {
+      display: none;
+
+      @include respond($break65) {
+        display: block;
+      }
+    }
+  }
+
+  .resource-meta-mobile {
+    padding-top: 28px;
+
+    @include respond($break65) {
+      display: none;
+    }
+  }
+}

@@ -21,7 +21,11 @@ export default class ResourceListThumbnails extends Component {
         <ul>
           {this.props.resources.map((resource) => {
             return (
-              <Resource.Thumbnail key={resource.id} resource={resource} />
+              <Resource.Thumbnail
+                key={resource.id}
+                projectId={this.props.projectId}
+                resource={resource}
+              />
             );
           })}
         </ul>
