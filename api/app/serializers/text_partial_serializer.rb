@@ -3,7 +3,7 @@ class TextPartialSerializer < ActiveModel::Serializer
   # cache key: "text_partial", expires_in: 3.hours
   attributes :id, :title, :creator_names, :unique_identifier, :cover_url, :created_at,
              :first_section_id, :published, :annotations_count, :highlights_count,
-             :bookmarks_count, :created_month, :created_year, :created_day
+             :bookmarks_count, :created_month, :created_year, :created_day, :age
 
   belongs_to :project
   belongs_to :category
@@ -27,6 +27,10 @@ class TextPartialSerializer < ActiveModel::Serializer
 
   def published
     object.published?
+  end
+
+  def age
+    (Date.today - object.created_at.to_date).to_i
   end
 
   def created_month
