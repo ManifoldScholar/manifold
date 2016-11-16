@@ -7,7 +7,8 @@ export default class ResourceListTotals extends Component {
 
   static propTypes = {
     count: PropTypes.number,
-    projectId: PropTypes.string
+    projectId: PropTypes.string,
+    belongsTo: PropTypes.string
   };
 
   static defaultProps = {

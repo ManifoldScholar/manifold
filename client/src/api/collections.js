@@ -9,14 +9,14 @@ export default {
     };
   },
 
-  resources(id, filter = {}, page = {}) {
+  collectionResources(id, filter = {}, page = {}) {
     return {
-      endpoint: `/api/v1/collections/${id}/relationships/resources`,
+      endpoint: `/api/v1/collections/${id}/relationships/collection_resources`,
       method: 'GET',
       options: {
         params: { filter, page }
       }
     };
-  },
+  }
 
 };

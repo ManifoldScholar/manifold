@@ -32,9 +32,9 @@ export default class ResourceListFilters extends Component {
               >
                 Type:
               </option>
-              {this.props.kinds.map((kind) => {
+              {this.props.kinds.map((kind, index) => {
                 return (
-                  <option key={kind} value={kind}>{capitalize(kind)}</option>
+                  <option key={index} value={kind}>{capitalize(kind)}</option>
                 );
               })}
             </select>
