@@ -20,14 +20,22 @@ export default class ResourceHero extends Component {
     let output = null;
     switch (resource.attributes.kind) {
       case 'image':
-        output = (<ResourceList.Slide.SlideImage
-          resource={resource}
-        />);
+        output = (
+          <div className="resource-slide-figure">
+            <ResourceList.Slide.SlideImage
+              resource={resource}
+            />
+          </div>
+        );
         break;
       case 'video':
-        output = (<ResourceList.Slide.SlideVideo
-          resource={resource}
-        />);
+        output = (
+          <div className="resource-slide-figure">
+            <ResourceList.Slide.SlideVideo
+              resource={resource}
+            />
+          </div>
+        );
         break;
       default:
     }
@@ -53,9 +61,7 @@ export default class ResourceHero extends Component {
             }
           </span>
         </header>
-        <div className="resource-slide-figure">
-          {this.getFigureByType(this.props.resource)}
-        </div>
+        {this.getFigureByType(this.props.resource)}
       </section>
     );
   }
