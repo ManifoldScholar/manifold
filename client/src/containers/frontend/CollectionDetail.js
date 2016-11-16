@@ -82,7 +82,7 @@ class CollectionDetailContainer extends PureComponent {
           link={`/browse/project/${project.id}`}
           title={project.attributes.title}
         />
-        { this.props.slideshowResources && this.props.collectionResources ?
+        { this.props.slideshowResources && this.props.resources ?
           <ResourceCollection.Detail
             dispatch={this.props.dispatch}
             project={this.props.project}
