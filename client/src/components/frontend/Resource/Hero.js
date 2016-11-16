@@ -14,7 +14,6 @@ export default class ResourceHero extends Component {
   constructor() {
     super();
     this.getFigureByType = this.getFigureByType.bind(this);
-    this.heroImage = this.heroImage.bind(this);
   }
 
   getFigureByType(resource) {

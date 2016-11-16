@@ -143,7 +143,7 @@ export default class ResourceCard extends Component {
         <div className="resource-info">
           <div>
             <Link
-              to={`/browse/resource/${resource.id}`}
+              to={`/browse/project/${this.props.projectId}/resource/${resource.id}`}
               className="resource-title"
             >
               <h4>
@@ -158,7 +158,7 @@ export default class ResourceCard extends Component {
               }
             </span>
             <Link
-              to={`/browse/resource/${resource.id}`}
+              to={`/browse/project/${this.props.projectId}/resource/${resource.id}`}
               className="arrow-link"
             >
               <i className="manicon manicon-arrow-right"></i>
