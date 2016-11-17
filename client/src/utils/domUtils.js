@@ -1,10 +1,15 @@
 export function closest(el, selector) {
-  const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
-  while (el) {
-    if (matchesSelector.call(el, selector)) {
+  let output = el;
+  const matchesSelector =
+      output.matches ||
+      output.webkitMatchesSelector ||
+      output.mozMatchesSelector ||
+      output.msMatchesSelector;
+  while (output) {
+    if (matchesSelector.call(output, selector)) {
       break;
     }
-    el = el.parentElement;
+    output = output.parentElement;
   }
-  return el;
+  return output;
 }
