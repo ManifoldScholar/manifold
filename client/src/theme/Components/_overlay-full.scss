@@ -34,43 +34,45 @@
     transition: opacity, $duration, $timing;
   }
 
-  .logo {
-    @include templateHead;
-    position: absolute;
-    top: 30px;
-    left: 40px;
-    font-size: $type70;
-    font-weight: $semibold;
-    line-height: 39px;
-    color: $neutral50;
+  .overlay-header {
+    .container {
+      @include headerContainerPrimary;
+    }
 
-    .manicon-manifold-logo {
-      display: inline-block;
-      margin-right: 32px;
-      font-size: 39px;
-      color: $accentPrimary;
-      vertical-align: top;
+    .logo {
+      @include headerLogoPrimary;
+    }
+
+    // Button
+    .overlay-close {
+      @include buttonUnstyled;
+      @include templateHead;
+      position: absolute;
+      right: 0;
+      font-size: 18px;
+      line-height: 28px;
+      color: $neutral50;
+
+      @include respond($break40) {
+        line-height: 31px;
+      }
+
+      .manicon-x {
+        display: inline-block;
+        margin-left: 14px;
+        font-size: 28px;
+        vertical-align: top;
+
+        @include respond($break40) {
+          margin-left: 26px;
+          font-size: 31px;
+          line-height: 31px;
+        }
+      }
     }
   }
 
-  // Button
-  .overlay-close {
-    @include buttonUnstyled;
-    @include templateHead;
-    position: absolute;
-    top: 36px;
-    right: 36px;
-    font-size: $type60;
-    line-height: 31px;
-    color: $neutral50;
 
-    .manicon-x {
-      display: inline-block;
-      margin-left: 26px;
-      font-size: 31px;
-      vertical-align: top;
-    }
-  }
 
   .overlay-content-focus {
     width: 340px;
