@@ -9,3 +9,4 @@ export ProjectResources from './ProjectResources';
 export Page from './Page';
 export ResourceDetail from './ResourceDetail';
 export EventList from './EventList';
+export CollectionResourceDetail from './CollectionResourceDetail';

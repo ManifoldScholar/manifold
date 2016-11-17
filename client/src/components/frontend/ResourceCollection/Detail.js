@@ -12,7 +12,7 @@ export default class ResourceCollectionDetail extends PureComponent {
   static displayName = "ResourceCollection.Detail";
 
   static propTypes = {
-    resourceCollection: PropTypes.object,
+    collection: PropTypes.object,
     project: PropTypes.object,
     slideshowResources: PropTypes.array,
     slideshowPagination: PropTypes.object,
@@ -24,7 +24,7 @@ export default class ResourceCollectionDetail extends PureComponent {
 
   render() {
     const project = this.props.project;
-    const collection = this.props.resourceCollection;
+    const collection = this.props.collection;
     if (!project || !collection) return null;
 
     const attr = collection.attributes;
@@ -56,7 +56,7 @@ export default class ResourceCollectionDetail extends PureComponent {
             <Utility.ShareBar/>
           </div>
           <ResourceList.Slideshow
-            collectionId={this.props.resourceCollection.id}
+            collectionId={this.props.collection.id}
             collectionResources={this.props.slideshowResources}
             count={project.attributes.resourcesCount}
             pagination={this.props.slideshowPagination}
@@ -70,8 +70,7 @@ export default class ResourceCollectionDetail extends PureComponent {
           />
           <ResourceList.Filters kinds={collection.attributes.resourceKinds} />
           <ResourceList.Cards
-            projectId={project.id}
-            count={project.attributes.resourcesCount}
+            context={this.props.collection}
             resources={this.props.collectionResources}
             pagination={this.props.collectionPagination}
             paginationClickHandler={this.props.collectionPaginationHandler}

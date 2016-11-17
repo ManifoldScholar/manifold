@@ -91,8 +91,7 @@ class CollectionDetailContainer extends PureComponent {
             collectionResources={this.props.resources}
             collectionPagination={this.props.resourcesMeta.pagination}
             collectionPaginationHandler={this.pageChangeHandlerCreator}
-            resourceCollection={this.props.collection}
-
+            collection={this.props.collection}
           />
         : null }
         <section className="bg-neutral05">

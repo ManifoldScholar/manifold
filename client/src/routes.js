@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, IndexRedirect, IndexRoute } from 'react-router';
 import {
     CollectionDetail,
+    CollectionResourceDetail,
     Following,
     Frontend,
     Home,
@@ -18,6 +19,7 @@ import { Reader } from 'containers/reader';
 import { Section, AnnotationTools } from 'components/reader';
 import { FormsStatic } from './components/frontend';
 
+/* eslint-disable max-len */
 export default () => {
   return (
       <Route path="/" >
@@ -35,6 +37,7 @@ export default () => {
           <Route component={Following} path="following" />
           <Route component={ProjectDetail} path="project/:id" />
           <Route component={CollectionDetail} path="project/:id/collection/:collectionId" />
+          <Route component={CollectionResourceDetail} path="project/:id/collection/:collectionId/collection_resource/:collectionResourceId" />
           <Route component={ProjectResources} path="project/:id/resources(/:page)" />
           <Route component={ResourceDetail} path="project/:id/resource/:resourceId" />
           <Route component={EventList} path="project/:id/events(/:page)" />
@@ -51,3 +54,4 @@ export default () => {
       </Route>
   );
 };
+/* eslint-enable max-len */
