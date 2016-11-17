@@ -51,13 +51,27 @@
   // added if there are more, and potentially list markup
   // <figure>
   .maker-avatar {
+    .no-image, img {
+      display: inline-block;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+
+    .no-image {
+      @include buttonAvatar(42, $neutral40, $neutral20);
+      border: 2px solid $neutralWhite;
+
+      @include respond($break60) {
+        @include buttonAvatar(50, $neutral40, $neutral20);
+        border: 2px solid $neutralWhite;
+      }
+    }
+
     // NB: This needs to be browser tested heavily before settling on this rounding method
     img {
       display: inline-block;
       width: 42px;
       height: auto;
-      margin-right: 12px;
-      vertical-align: middle;
       border: 2px solid $neutralWhite;
       border-radius: 100%;
 

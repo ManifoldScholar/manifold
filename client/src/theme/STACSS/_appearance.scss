@@ -74,7 +74,7 @@
   border-radius: 7px;
 }
 
-@mixin buttonAvatar($size: 36) {
+@mixin buttonAvatar($size: 36, $backColor: $accentPrimary, $iconColor: $accentPrimaryPale) {
   @include buttonUnstyled;
   // Default size from browse view that may be
   // changed in scope
@@ -82,7 +82,7 @@
   height: #{$size}px;
   text-align: center;
   overflow: hidden;
-  background-color: $accentPrimary;
+  background-color: $backColor;
   border-radius: 100%;
 
   .avatar-image {
@@ -92,7 +92,7 @@
   .manicon-person {
     font-size: #{$size * 0.85}px;
     line-height: #{$size * 1.2}px;
-    color: $accentPrimaryPale;
+    color: $iconColor;
   }
 }
 
