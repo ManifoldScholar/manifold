@@ -115,21 +115,21 @@
     }
 
     &:hover {
-      //background-color: $neutral10;
+      background-color: $neutral10;
 
       img {
         border-color: $accentPrimary;
       }
 
       svg .highlight {
-        //fill: $accentPrimary;
+        fill: $accentPrimary;
       }
     }
 
     // Meta data
-    .meta {
-      display: none;
-    }
+    //.meta {
+    //  display: none;
+    //}
 
     .title {
       @include gridProjectTitle;

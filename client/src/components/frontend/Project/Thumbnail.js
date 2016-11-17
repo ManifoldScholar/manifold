@@ -78,6 +78,7 @@ export default class ProjectThumbnail extends Component {
 
   render() {
     const project = this.props.project;
+
     let projectDesc = null;
     if (!this.props.hideDesc) {
       projectDesc = (
