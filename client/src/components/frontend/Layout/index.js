@@ -2,6 +2,7 @@ import ButtonNavigation from './ButtonNavigation';
 import Footer from './Footer';
 import Header from './Header';
 import MobileNav from './MobileNav';
+import NoFollow from './NoFollow';
 import Splash from './Splash';
 
 export default {
@@ -9,5 +10,6 @@ export default {
   Footer,
   Header,
   MobileNav,
-  Splash
+  Splash,
+  NoFollow
 };
