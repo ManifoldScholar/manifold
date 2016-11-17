@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { ProjectList, Layout } from 'components/frontend';
+import { commonActions } from 'actions/helpers';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import { uiFilterActions, entityStoreActions } from 'actions';
@@ -45,6 +46,10 @@ class HomeContainer extends Component {
     subjects: PropTypes.array
   };
 
+  componentWillMount() {
+    this.commonActions = commonActions(this.props.dispatch);
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -61,7 +66,13 @@ class HomeContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div style={ {
+        overflowX: 'hidden'
+      } }>
+        <Layout.Splash
+          authenticated={this.props.authentication.authenticated}
+          toggleSignInUpOverlay={this.commonActions.toggleSignInUpOverlay}
+        />
         {/*
           Note that this section will be used for "Recent Projects"
           once that list is available, this is currently using the
