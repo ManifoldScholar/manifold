@@ -1,4 +1,10 @@
 %splash-prototype {
+  padding-bottom: 10px;
+
+  @include respond($break95) {
+    padding-top: 20px;
+  }
+
   .bg-accent-primary & {
     .heading-primary {
       color: $neutralWhite;
@@ -14,24 +20,42 @@
     font-size: 17px;
     line-height: 1.353;
   }
+
+  .buttons {
+    margin-top: 23px;
+
+    .button-bare-primary + .button-bare-primary {
+      margin-left: 2.308em;
+    }
+  }
 }
 
-.splash-40 {
+.splash-50 {
   @extend %splash-prototype;
-  @include clearfix;
+  display: table;
 
   .left {
-    float: left;
-    width: 40%;
+    display: table-cell;
+    width: 100%;
+
+    @include respond($break75) {
+      width: 50%;
+    }
   }
 
   .right {
+    position: relative;
+    display: none;
+
+    @include respond($break75) {
+      display: table-cell;
+    }
+
     img {
       position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 778px;
-      opacity: 0.2;
+      bottom: -186px;
+      left: 10px;
+      width: 661px;
     }
   }
 }
