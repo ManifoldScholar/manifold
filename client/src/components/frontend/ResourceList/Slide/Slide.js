@@ -13,11 +13,17 @@ export default class ResourceSlideFigure extends Component {
   }
 
   componentDidMount() {
-    this._figure.style.width = this.getParentWidth(this._figure);
-    const throttledWidth = throttle(() => {
+    if (this._figure) {
       this._figure.style.width = this.getParentWidth(this._figure);
-    }, 200);
-    window.addEventListener('resize', throttledWidth);
+      this.throttledWidth = throttle(() => {
+        this._figure.style.width = this.getParentWidth(this._figure);
+      }, 200);
+      window.addEventListener('resize', this.throttledWidth);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.throttledWidth);
   }
 
   getParentWidth(figure) {
