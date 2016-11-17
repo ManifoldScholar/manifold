@@ -39,6 +39,7 @@ class FollowingContainer extends Component {
     store: PropTypes.object.isRequired
   };
 
+
   static mapStateToProps(state) {
     return {
       projectFilters: state.ui.filters.project,
@@ -47,6 +48,11 @@ class FollowingContainer extends Component {
       subjects: select(requests.allUsedSubjects, state.entityStore),
       authentication: state.authentication
     };
+  }
+
+  constructor() {
+    super();
+    this.renderFollowedProjects = this.renderFollowedProjects.bind(this);
   }
 
   componentDidMount() {
@@ -71,34 +77,44 @@ class FollowingContainer extends Component {
     this.props.dispatch(followedRequest);
   }
 
-  render = () => {
+  renderFollowedProjects() {
     const boundSetFilters = bindActionCreators(setProjectFilters, this.props.dispatch);
+
+    return (
+      <section className="bg-neutral05">
+        <div className="container">
+          <header className="section-heading utility-right">
+            <h4 className="title">
+              <i className="manicon manicon-books-with-glasses"></i>
+              {'Projects You\'re Following'}
+            </h4>
+            <div className="section-heading-utility-right">
+              <ProjectList.Filters
+                updateAction={boundSetFilters}
+                subjects={this.props.subjects}
+              />
+            </div>
+          </header>
+          { this.props.followedProjects ?
+            <ProjectList.Grid
+              authenticated={this.props.authentication.authenticated}
+              favorites={get(this.props.authentication, 'currentUser.favorites')}
+              dispatch={this.props.dispatch}
+              projects={this.props.followedProjects}
+            /> : null
+          }
+        </div>
+      </section>
+    );
+  }
+
+  render() {
+    console.log(this.props.followedProjects, 'followedProjectes');
     return (
       <div>
-        <section className="bg-neutral05">
-          <div className="container">
-            <header className="section-heading utility-right">
-              <h4 className="title">
-                <i className="manicon manicon-books-with-glasses"></i>
-                {'Projects You\'re Following'}
-              </h4>
-              <div className="section-heading-utility-right">
-                <ProjectList.Filters
-                  updateAction={boundSetFilters}
-                  subjects={this.props.subjects}
-                />
-              </div>
-            </header>
-            { this.props.followedProjects ?
-              <ProjectList.Grid
-                authenticated={this.props.authentication.authenticated}
-                favorites={get(this.props.authentication, 'currentUser.favorites')}
-                dispatch={this.props.dispatch}
-                projects={this.props.followedProjects}
-              /> : null
-            }
-          </div>
-        </section>
+        {this.props.followedProjects && this.props.followedProjects.length > 0 ?
+            this.renderFollowedProjects() : <Layout.NoFollow />
+        }
         <section>
           <div className="container">
             <header className="section-heading utility-right">
@@ -125,7 +141,7 @@ class FollowingContainer extends Component {
         <Layout.ButtonNavigation grayBg showFollowing={false} />
       </div>
     );
-  };
+  }
 }
 
 const Following = connect(
