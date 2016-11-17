@@ -88,14 +88,19 @@ export default class Overlay extends Component {
     return (
       <HigherOrder.BodyClass className={'no-scroll'}>
         <div className="overlay-full">
-          <figure className="logo">
-            <i className="manicon manicon-manifold-logo"></i>
-            Manifold
-          </figure>
-          <button onClick={this.props.hideSignInUpOverlay} className="overlay-close">
-            Cancel
-            <i className="manicon manicon-x"></i>
-          </button>
+          <header className="overlay-header">
+            <div className="container">
+              <div className="rel">
+                <figure className="logo">
+                  <i className="manicon manicon-manifold-logo"></i>
+                </figure>
+                <button onClick={this.props.hideSignInUpOverlay} className="overlay-close">
+                  Cancel
+                  <i className="manicon manicon-x"></i>
+                </button>
+              </div>
+            </div>
+          </header>
           <div className="container">
             <div className="overlay-content-focus">
               {this.renderChild()}

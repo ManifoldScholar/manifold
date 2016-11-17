@@ -146,6 +146,34 @@
   transition: max-width $duration $timing;
 }
 
+@mixin headerContainerPrimary {
+  @include containerPrototype;
+  position: relative;
+  padding-top: 14px;
+  padding-bottom: 14px;
+
+  @include respond($break40) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+@mixin headerLogoPrimary {
+  display: inline-block;
+  margin-right: 33px;
+  color: $accentPrimary;
+  text-decoration: none;
+  vertical-align: middle;
+
+  .manicon-manifold-logo {
+    font-size: 32px;
+
+    @include respond($break40) {
+      font-size: 39px;
+    }
+  }
+}
+
 
 // Lists
 // --------------------------------------------------------
