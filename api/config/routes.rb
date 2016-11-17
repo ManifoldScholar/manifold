@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       resources :collections do
         scope module: :collections do
           namespace :relationships do
-            resources :collection_resources, only: [:index]
+            resources :collection_resources, only: [:index, :show]
             resources :resources, only: [:index]
           end
         end

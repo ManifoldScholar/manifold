@@ -5,6 +5,7 @@ class CollectionSerializer < ActiveModel::Serializer
              :resource_kinds
 
   has_many :resources
+  belongs_to :project
 
   def created_month
     object.created_at.strftime("%-m")

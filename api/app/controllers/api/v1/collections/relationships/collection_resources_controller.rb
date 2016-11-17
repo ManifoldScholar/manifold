@@ -4,9 +4,8 @@ module Api
       module Relationships
         # Responds with resources in a collection
         class CollectionResourcesController < ApplicationController
-          before_action :set_collection, only: [:index]
+          before_action :set_collection, only: [:index, :show]
 
-          # GET /resources
           def index
             @collection_resources = @collection.collection_resources
                                                .page(page_number)
@@ -15,6 +14,11 @@ module Api
                    include: %w(resource),
                    each_serializer: CollectionResourceSerializer,
                    meta: { pagination: pagination_dict(@collection_resources) }
+          end
+
+          def show
+            render json: @collection.collection_resources.find(params[:id]),
+                   include: %w(resource)
           end
 
           private
