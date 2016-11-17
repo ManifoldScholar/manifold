@@ -9,6 +9,15 @@ export default {
     };
   },
 
+  collectionResource(cid, crid) {
+    return {
+      endpoint: `/api/v1/collections/${cid}/relationships/collection_resources/${crid}`,
+      method: 'GET',
+      options: {
+      }
+    };
+  },
+
   collectionResources(id, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/collections/${id}/relationships/collection_resources`,

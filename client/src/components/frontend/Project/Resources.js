@@ -33,6 +33,7 @@ export default class ProjectResources extends Component {
           </header>
           <ResourceList.Filters kinds={project.attributes.resourceKinds} />
           <ResourceList.Cards
+            context={project}
             pagination={this.props.pagination}
             resources={this.props.resources}
             projectId={project.id}

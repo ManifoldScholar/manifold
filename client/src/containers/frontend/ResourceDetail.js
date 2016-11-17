@@ -1,10 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import fakeData from 'helpers/fakeData';
-import {
-    Resource
-} from 'components/frontend';
+import { Resource, Utility } from 'components/frontend';
 
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
@@ -16,28 +13,21 @@ const { request, flush, requests } = entityStoreActions;
 class ResourceDetailContainer extends PureComponent {
   static fetchData(getState, dispatch, location, params) {
     const page = params.page ? params.page : 1;
-    const {
-        showProjectDetail,
-        showResourceDetail,
-        } = requests;
-    const projectRequest =
-        request(projectsAPI.show(params.id), showProjectDetail);
-    const resourceRequest =
-        request(resourcesAPI.show(params.resourceId), showResourceDetail);
-
-    const { promise: one } = dispatch(projectRequest);
-    const { promise: two } = dispatch(resourceRequest);
+    const projectFetch = projectsAPI.show(params.id);
+    const resourceFetch = resourcesAPI.show(params.resourceId);
+    const projectAction = request(projectFetch, 'show-project-detail');
+    const resourceAction = request(resourceFetch, 'show-resource-detail');
+    const { promise: one } = dispatch(projectAction);
+    const { promise: two } = dispatch(resourceAction);
     return Promise.all([one, two]);
   }
 
   static mapStateToProps(state) {
     const props = {
-      project: select(requests.showProjectDetail, state.entityStore),
-      resource: select(requests.showResourceDetail, state.entityStore)
+      project: select('show-project-detail', state.entityStore),
+      resource: select('show-resource-detail', state.entityStore)
     };
-
     return props;
-
   }
 
   static propTypes = {
@@ -45,16 +35,35 @@ class ResourceDetailContainer extends PureComponent {
     resource: PropTypes.object
   };
 
+  projectUrl() {
+    const pid = this.props.project.id;
+    return `/browse/project/${pid}/resources`;
+  }
 
   render() {
     const projectId = this.props.project ? this.props.project.id : null;
     return (
       <div>
+        {this.props.project ?
+          <Utility.BackLinkPrimary
+            backText="Back to Project Resources"
+            link={this.projectUrl()}
+            title={this.props.project.attributes.title}
+          /> : null
+        }
         {this.props.resource ?
           <Resource.Detail
             projectId={projectId}
             resource={this.props.resource}
           /> : null
+        }
+        {this.props.project ?
+          <section className="bg-neutral05">
+            <Utility.BackLinkSecondary
+              backText="Back to Project Resources"
+              link={this.projectUrl()}
+            />
+          </section> : null
         }
       </div>
     );

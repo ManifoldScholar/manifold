@@ -18,11 +18,6 @@ export default class ResourceDetail extends Component {
 
     return (
       <div>
-        {this.props.projectId ?
-          <Utility.BackLinkPrimary
-            link={`/browse/project/${this.props.projectId}`}
-          /> : null
-        }
         <section>
           <div className="container flush-top">
             <Resource.Hero resource={resource} />
@@ -56,14 +51,6 @@ export default class ResourceDetail extends Component {
             </section>
           </div>
         </section>
-
-        {this.props.projectId ?
-          <section className="bg-neutral05">
-            <Utility.BackLinkSecondary
-              link={`/browse/project/${this.props.projectId}`}
-            />
-          </section> : null
-        }
       </div>
     );
   }

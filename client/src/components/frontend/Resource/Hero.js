@@ -45,7 +45,6 @@ export default class ResourceHero extends Component {
 
   render() {
     const attr = this.props.resource.attributes;
-    console.log(attr, 'attributes');
 
     return (
       <section className="resource-hero">

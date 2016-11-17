@@ -9,7 +9,7 @@ export default class ResourceCard extends Component {
 
   static propTypes = {
     resource: PropTypes.object,
-    projectId: PropTypes.string
+    context: PropTypes.object
   };
 
   constructor() {
@@ -22,7 +22,6 @@ export default class ResourceCard extends Component {
     if (type.toLowerCase() === 'pdf') {
       formattedType = 'PDF';
     }
-
     return formattedType;
   }
 
@@ -66,9 +65,25 @@ export default class ResourceCard extends Component {
     return text;
   }
 
+  detailUrl() {
+    const context = this.props.context;
+    if (context.type === "collections") {
+      const crid = this.props.resource.id;
+      const pid = context.relationships.project.id;
+      const cid = context.id;
+      return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+    }
+    if (context.type === "projects") {
+      const resource = this.resource();
+      const pid = context.id;
+      const rid = resource.id;
+      return `/browse/project/${pid}/resource/${rid}`;
+    }
+  }
+
   handlePreviewClick(event) {
     event.preventDefault();
-    const attr = this.props.resource.attributes;
+    const attr = this.resource().attributes;
     switch (attr.kind.toLowerCase()) {
       case "link":
         window.open(attr.externalUrl);
@@ -77,6 +92,13 @@ export default class ResourceCard extends Component {
         window.open(attr.attachmentUrl);
         break;
     }
+  }
+
+  resource() {
+    if (this.props.resource.type === "collectionResources") {
+      return this.props.resource.relationships.resource;
+    }
+    return this.props.resource;
   }
 
   renderTags(resource) {
@@ -109,7 +131,7 @@ export default class ResourceCard extends Component {
   }
 
   render() {
-    const resource = this.props.resource;
+    const resource = this.resource();
     const attr = resource.attributes;
 
     const linkClass = classNames({
@@ -127,7 +149,7 @@ export default class ResourceCard extends Component {
     return (
       <li className="resource-card">
         <Link
-          to={`/browse/project/${this.props.projectId}/resource/${resource.id}`}
+          to={this.detailUrl()}
           className={linkClass} style={linkStyle}
         >
           <figure className="resource-type">
@@ -143,7 +165,7 @@ export default class ResourceCard extends Component {
         <div className="resource-info">
           <div>
             <Link
-              to={`/browse/project/${this.props.projectId}/resource/${resource.id}`}
+              to={this.detailUrl()}
               className="resource-title"
             >
               <h4>
@@ -158,7 +180,7 @@ export default class ResourceCard extends Component {
               }
             </span>
             <Link
-              to={`/browse/project/${this.props.projectId}/resource/${resource.id}`}
+              to={this.detailUrl()}
               className="arrow-link"
             >
               <i className="manicon manicon-arrow-right"></i>

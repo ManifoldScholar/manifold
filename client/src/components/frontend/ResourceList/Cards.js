@@ -7,7 +7,7 @@ export default class ResourceListCards extends PureComponent {
   static displayName = "ResourceList.Cards";
 
   static propTypes = {
-    projectId: PropTypes.string,
+    context: PropTypes.object,
     resources: PropTypes.array,
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func
@@ -31,17 +31,11 @@ export default class ResourceListCards extends PureComponent {
           </div>
           <ul>
             {this.props.resources.map((resourceLike) => {
-              let resource;
-              if (resourceLike.type === "collectionResources") {
-                resource = resourceLike.relationships.resource;
-              } else {
-                resource = resourceLike;
-              }
               return (
                 <Resource.Card
-                  key={resource.id}
-                  resource={resource}
-                  projectId={this.props.projectId}
+                  context={this.props.context}
+                  key={resourceLike.id}
+                  resource={resourceLike}
                 />
               );
             })}
