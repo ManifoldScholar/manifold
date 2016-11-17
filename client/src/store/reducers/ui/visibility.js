@@ -77,5 +77,6 @@ export default handleActions({
   PANEL_TOGGLE: panelToggle,
   PANEL_SHOW: panelShow,
   PANEL_HIDE: panelHide,
+  PANEL_HIDE_ALL: allPanelsHide,
   '@@reduxReactRouter/routerDidChange': allPanelsHide
 }, initialState);

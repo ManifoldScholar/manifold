@@ -109,7 +109,6 @@ class FollowingContainer extends Component {
   }
 
   render() {
-    console.log(this.props.followedProjects, 'followedProjectes');
     return (
       <div>
         {this.props.followedProjects && this.props.followedProjects.length > 0 ?

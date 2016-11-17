@@ -9,6 +9,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { notificationActions, uiVisibilityActions } from 'actions';
 import { meAPI } from 'api';
 import { entityStoreActions } from 'actions';
+import { closest } from 'utils/domUtils';
 
 const { request, requests } = entityStoreActions;
 const { visibilityHide } = uiVisibilityActions;
@@ -35,6 +36,11 @@ class ManifoldContainer extends Component {
       React.PropTypes.element
     ])
   };
+
+  constructor() {
+    super();
+    this.handleGlobalClick = this.handleGlobalClick.bind(this);
+  }
 
   componentWillReceiveProps(nextProps) {
     if (this.userJustLoggedIn(this.props.authentication, nextProps.authentication)) {
@@ -89,6 +95,12 @@ class ManifoldContainer extends Component {
     }, 5000);
   }
 
+  handleGlobalClick(event) {
+    if (!closest(event.target, '.panel-visible')) {
+      this.props.dispatch(uiVisibilityActions.panelHideAll());
+    }
+  }
+
   render() {
 
     const hideSignInUpOverlay = bindActionCreators(
@@ -96,7 +108,7 @@ class ManifoldContainer extends Component {
     );
 
     return (
-      <div className="global-container">
+      <div onClick={this.handleGlobalClick} className="global-container">
         <DocumentMeta {...config.app}/>
         <LoadingBar loading={this.props.loading} />
         <ReactCSSTransitionGroup
