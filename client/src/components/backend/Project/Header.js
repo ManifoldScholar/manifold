@@ -14,11 +14,13 @@ export default class ProjectHeader extends Component {
     const attr = project.attributes;
     return (
       <section className="bg-neutral95">
-        <div className="container flush">
-          <Link to={'/backend/'} className="back-link-primary">
+        <Link to={'/backend/'} className="back-link-primary">
+          <div className="container flush">
             <i className="manicon manicon-arrow-left"></i>
             Back to: <span>ALL PROJECTS</span>
-          </Link>
+          </div>
+        </Link>
+        <div className="container flush">
           <header className="project-header">
             <figure>
               <i className="manicon manicon-project-placeholder"></i>

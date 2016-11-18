@@ -19,6 +19,7 @@ import { Reader } from 'containers/reader';
 import { Backend, Dashboard, BackendProjectDetail, TextDetail, Users } from 'containers/backend';
 import { Section, AnnotationTools } from 'components/reader';
 import { Static } from './components/frontend';
+console.log(Dashboard, 'dashboard');
 
 /* eslint-disable max-len */
 export default () => {
@@ -49,10 +50,6 @@ export default () => {
         <Route component={Static.Form} path="forms" />
       </Route>
 
-      <Route component={Frontend} path="*">
-        <IndexRoute component={NotFound} />
-      </Route>
-
       <Route component={Backend} path="/backend" >
         <IndexRoute component={Dashboard} />
 
@@ -73,6 +70,10 @@ export default () => {
         <Route component={Users.Wrapper} path="users" >
           <IndexRoute component={Users.List} />
         </Route>
+      </Route>
+
+      <Route component={Frontend} path="*">
+        <IndexRoute component={NotFound} />
       </Route>
     </Route>
   );

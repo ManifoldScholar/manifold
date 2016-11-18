@@ -8,9 +8,7 @@
 
   // Dark Variety overrides
   &.dark {
-    .header-container {
-      background-color: $neutral85;
-    }
+    background-color: $neutral85;
 
     .logo {
       color: $neutral50;
@@ -226,7 +224,7 @@
 }
 
 // Header bump
-.browse main .backend main {
+.browse main, .backend main {
   padding-top: 60px;
 
   @include respond($break40) {
