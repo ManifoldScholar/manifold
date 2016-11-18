@@ -161,7 +161,7 @@ export default class ResourceListSlideshow extends PureComponent {
           <div className="resource-slide-figure">
             <ReactCSSTransitionGroup
               transitionName="figure"
-              transitionEnterTimeout={1}
+              transitionEnterTimeout={500}
               transitionLeaveTimeout={500}
             >
               <div key={position}>

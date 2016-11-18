@@ -13,12 +13,18 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    transition: width 0.3s $timing;
+    opacity: 1;
+    transition: width 0.4s $timing,
+      opacity 0.2s $timing 0.23s;
   }
 
   .figure-leave figure {
     width: 0;
   }
+
+  //.figure-enter figure {
+  //  opacity: 0;
+  //}
 
   .figure-image {
     position: absolute;
