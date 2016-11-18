@@ -1,0 +1,137 @@
+.resource-thumbnail-list {
+  ul {
+    @include listUnstyled;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -20px;
+  }
+
+  li {
+    display: flex;
+    width: 50%;
+    padding-left: 20px;
+    margin-bottom: 20px;
+
+    @include respond($break60) {
+      width: 33.333%;
+    };
+
+    @include respond($break75) {
+      width: 25%;
+    }
+
+    @include respond($break90) {
+      width: 20%;
+    }
+  }
+
+  a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 23px 15px;
+    color: $neutral70;
+    text-align: center;
+    text-decoration: none;
+    background-color: $neutral10;
+    transition: background-color $duration $timing;
+
+    &:hover {
+      background-color: $neutral20;
+
+      .resource-title {
+        color: $neutral75;
+      }
+    }
+
+    &.bg-image {
+      color: $neutralWhite;
+      background-position: 50% 50%;
+      background-size: cover;
+
+      &:hover {
+        .resource-title {
+          color: $accentPrimaryDark;
+        }
+      }
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparentize($neutralBlack, 0.5);
+        content: '';
+      }
+    }
+  }
+
+  .resource-type {
+    @include templateHead;
+    position: relative;
+    font-size: 13px;
+
+    i {
+      display: flex;
+      height: 68px;
+
+      &::before {
+        margin: auto;
+      }
+    }
+
+    .manicon-resource-audio {
+      font-size: 31px;
+    }
+
+    .manicon-resource-document {
+      font-size: 45px;
+    }
+
+    .manicon-resource-file {
+      font-size: 48px;
+    }
+
+    .manicon-resource-image {
+      font-size: 33px;
+    }
+
+    .manicon-resource-interactive {
+      font-size: 45px;
+    }
+
+    .manicon-resource-link {
+      font-size: 42px;
+    }
+
+    .manicon-resource-pdf {
+      font-size: 44px;
+    }
+
+    .manicon-resource-presentation {
+      font-size: 39px;
+    }
+
+    .manicon-resource-spreadsheet {
+      font-size: 34px;
+    }
+
+    .manicon-resource-video {
+      font-size: 38px;
+    }
+  }
+
+  .resource-title {
+    @include templateHead;
+    position: relative;
+    margin: 0;
+    font-size: 12px;
+    transition: color $duration $timing;
+
+    @include respond($break40) {
+      font-size: 14px;
+    }
+  }
+}

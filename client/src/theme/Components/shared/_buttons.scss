@@ -9,6 +9,7 @@
   display: inline-block;
   font-size: 13px;
   color: $neutral50;
+  text-decoration: none;
 }
 
 // Can be a <button> or an <a>
@@ -340,6 +341,15 @@
   background-color: $neutral05;
   transition: color $duration $timing,
     background-color $duration $timing;
+
+  .bg-neutral95 & {
+    background-color: $neutral95;
+
+    &:hover {
+      color: $accentPrimary;
+      background-color: $neutral95;
+    }
+  }
 
   &:hover {
     color: $neutral80;
