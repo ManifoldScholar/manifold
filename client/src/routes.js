@@ -12,7 +12,7 @@ import {
     Page,
     ProjectDetail,
     ProjectResources,
-    ResourceDetail
+    ResourceDetail,
 } from 'containers/frontend';
 import { Developer } from 'containers/developer';
 import { Reader } from 'containers/reader';
@@ -46,7 +46,7 @@ export default () => {
       </Route>
 
       <Route component={Frontend} path="/static" >
-        <Route component={FormsStatic} path="forms" />
+        <Route component={Static.Form} path="forms" />
       </Route>
 
       <Route component={Frontend} path="*">

@@ -112,7 +112,7 @@ export default class ProjectThumbnail extends Component {
       );
     } else {
       className = "figure-wrapper figure-wrapper-placeholder";
-      cover = <Project.Placeholder />;
+      cover = <GlobalProject.Placeholder />;
     }
 
     return (
@@ -121,7 +121,7 @@ export default class ProjectThumbnail extends Component {
         <div className={className} >
           <figure>
             {cover}
-            <Project.Follow
+            <FrontEndProject.Follow
               project={project}
               authenticated={this.props.authenticated}
               favorites={this.props.favorites}
