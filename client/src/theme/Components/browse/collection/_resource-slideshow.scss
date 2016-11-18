@@ -27,11 +27,15 @@
 
   .resource-description {
     @include templateCopy;
+    height: 5em; // Sized relative to font-size
     max-width: $slideCopyFocus;
-    max-height: 5em; // Sized relative to font-size
     overflow: hidden;
     font-size: 15px;
     color: $neutral40;
+    transition: height $duration $timing;
+
+    &.transition-height {
+    }
   }
 
   .slide-pagination {
