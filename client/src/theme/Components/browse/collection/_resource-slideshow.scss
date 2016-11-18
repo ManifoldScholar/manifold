@@ -29,12 +29,13 @@
     @include templateCopy;
     height: 5em; // Sized relative to font-size
     max-width: $slideCopyFocus;
+    padding-bottom: 2.5em;
     overflow: hidden;
     font-size: 15px;
     color: $neutral40;
-    transition: height $duration $timing;
 
     &.transition-height {
+      transition: height $duration $timing;
     }
   }
 
@@ -99,6 +100,20 @@
 
       + .download-link {
         margin-left: 22px;
+      }
+    }
+
+    .more-link .close-text {
+      display: none;
+    }
+
+    .more-link.open {
+      .open-text {
+        display: none;
+      }
+
+      .close-text {
+        display: inline;
       }
     }
 
