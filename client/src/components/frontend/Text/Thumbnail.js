@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Text } from 'components/frontend';
 import moment from 'moment';
+import { Text } from 'components/global';
 
 export default class TextThumbnail extends Component {
 

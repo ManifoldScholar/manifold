@@ -1,0 +1,46 @@
+.backend-panel {
+  @include clearfix;
+
+  aside {
+    float: left;
+    width: 200px;
+  }
+
+  .panel {
+    float: left;
+    width: calc(100% - 200px);
+  }
+
+  // This navigation isn't used elsewhere, but it
+  // can be abstracted if necessary
+  .panel-nav {
+    ul {
+      @include listUnstyled;
+
+      li {
+
+        + li {
+          margin-top: 2.375em;
+          font-size: 16px;
+        }
+      }
+
+      a {
+        @include utilityPrimary;
+        padding-bottom: 3px;
+        color: $neutral50;
+        text-decoration: none;
+        transition: color $duration $timing;
+
+        &:hover {
+          color: $neutral20;
+        }
+
+        &.active {
+          color: $neutral20;
+          border-bottom: 2px solid $neutral20;
+        }
+      }
+    }
+  }
+}

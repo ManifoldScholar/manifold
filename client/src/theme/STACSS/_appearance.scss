@@ -46,6 +46,10 @@
 }
 
 // Background color utility classes
+.bg-accent-primary {
+  background-color: $accentPrimary;
+}
+
 .bg-neutral05 {
   background-color: $neutral05;
 }
@@ -54,8 +58,8 @@
   background-color: $neutral90;
 }
 
-.bg-accent-primary {
-  background-color: $accentPrimary;
+.bg-neutral95 {
+  background-color: $neutral95;
 }
 
 
@@ -211,5 +215,38 @@
 
   &:focus {
     border-color: $accentPrimary;
+  }
+}
+
+@mixin inputSecondary {
+  @include templateCopy;
+  padding: 7px 10px;
+  font-size: $type70;
+  color: $accentPrimary;
+  background: transparent;
+  border: 3px solid $accentPrimary;
+  outline: none;
+
+  &:focus {
+    border-color: $neutralWhite;
+  }
+}
+
+// Dark input with border
+@mixin inputQuaternary {
+  @include templateHead;
+  padding: 0.438em 1.125em 0.563em;
+  background: transparent;
+  color: $neutral40;
+  border: 1px solid $neutral80;
+  outline: none;
+  transition: border-color $duration $timing;
+
+  &:focus {
+    border-color: $accentPrimary;
+  }
+
+  &::placeholder {
+    color: $accentPrimary;
   }
 }

@@ -60,7 +60,7 @@
   // component to component
   font-size: 16px;
   font-weight: $semibold;
-  letter-spacing: 0.067em;
+  letter-spacing: 0.075em;
   text-transform: uppercase;
 }
 
@@ -110,7 +110,7 @@
 
 @mixin formLabelPrimary {
   @include templateHead;
-  font-size: $type40;
+  font-size: 12px;
   font-weight: $semibold;
   letter-spacing: 0.075em;
   text-transform: uppercase;
@@ -121,8 +121,9 @@
 // --------------------------------------------------------
 @mixin formInputPrimary {
   @include templateHead;
-  font-size: $type70;
-  letter-spacing: 0.32px;
+  font-size: 20px;
+  font-weight: $regular;
+  letter-spacing: 0.015em;
 }
 
 @mixin formInputSecondary {

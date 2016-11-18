@@ -27,7 +27,7 @@ export default class LayoutHeader extends Component {
     const path = this.props.location.pathname;
     const active = startsWith(path, '/browse/following') ? 'following' : 'browse';
     return (
-      <header className={'header-browse'}>
+      <header className={'header-app'}>
         <div className="header-container">
           <Link to={'/browse'} className="logo">
             <figure>
@@ -56,6 +56,14 @@ export default class LayoutHeader extends Component {
 
           <nav className="menu-dropdowns">
             <ul>
+              {
+                this.props.authentication.authenticated ?
+                  <li>
+                    <Link className="button-mode" to={`/backend`}>
+                      Admin Mode
+                    </Link>
+                  </li> : null
+              }
               <li>
                 <SearchMenuButton
                   toggleSearchMenu={this.props.commonActions.toggleSearchPanel}

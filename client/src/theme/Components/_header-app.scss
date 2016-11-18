@@ -1,10 +1,27 @@
 // <header>
-.header-browse {
+.header-app {
   position: fixed;
   width: 100%;
   background-color: $neutralWhite;
   border-bottom: 1px solid transparent;
   transition: border-color $duration $timing;
+
+  // Dark Variety overrides
+  &.dark {
+    background-color: $neutral85;
+
+    .logo {
+      color: $neutral50;
+    }
+
+    .text-nav .active a {
+      color: $neutralWhite;
+
+      &::before {
+        background-color: $neutralWhite;
+      }
+    }
+  }
 
   .header-container {
     @include headerContainerPrimary;
@@ -108,6 +125,22 @@
       }
     }
 
+    .button-mode {
+      @include utilityPrimary;
+      padding: 3px 11px;
+      font-size: 12px;
+      color: $accentPrimary;
+      text-decoration: none;
+      border: 1px solid $accentPrimary;
+      transition: color $duration $timing,
+        background-color $duration $timing;
+
+      &:hover {
+        color: $neutralWhite;
+        background-color: $accentPrimary;
+      }
+    }
+
     // Browse specific menu layout/transition
     .button-search {
       position: relative;
@@ -191,7 +224,7 @@
 }
 
 // Header bump
-.browse main {
+.browse main, .backend main {
   padding-top: 60px;
 
   @include respond($break40) {

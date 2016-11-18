@@ -350,9 +350,54 @@ const events = [
   }
 ];
 
+const backendAuthors = [];
+
+const backendEditors = [
+  {
+    id: 1,
+    attributes: {
+      name: "Matt Garrish",
+      first_name: "Matt",
+      middle_name: "",
+      last_name: "Garrish",
+      sort_name: "Garrish, Matt",
+      display_name: "",
+      role: "creator"
+    },
+    avatar: "/static/placeholder/user-avatar-dreft01.jpg"
+  },
+  {
+    id: 2,
+    attributes: {
+      name: "Markus Gylling",
+      first_name: "Markus",
+      middle_name: "",
+      last_name: "Gylling",
+      sort_name: "Gylling, Markus",
+      display_name: "",
+      role: "creator"
+    },
+    avatar: "/static/placeholder/user-avatar-nornes01.jpg"
+  },
+  {
+    attributes: {
+      name: "Liza Weinstein",
+      first_name: "Liza",
+      middle_name: "",
+      last_name: "Weinstein",
+      sort_name: "Weinstein, Liza",
+      display_name: "",
+      role: "creator"
+    },
+    avatar: "/static/placeholder/user-avatar-rowan01.jpg"
+  }
+];
+
 export default {
   resources,
   events,
   resourceCollections,
-  resourceCollection
+  resourceCollection,
+  backendAuthors,
+  backendEditors
 };

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Project } from 'components/frontend';
+import { Project as FrontEndProject } from 'components/frontend';
+import { Project as GlobalProject } from 'components/global';
 import moment from 'moment';
 
 export default class ProjectThumbnail extends Component {
@@ -24,7 +25,7 @@ export default class ProjectThumbnail extends Component {
   };
 
   renderCover() {
-    let cover = (<Project.Placeholder />);
+    let cover = (<GlobalProject.Placeholder />);
 
     if (this.props.project.attributes.coverUrl) {
       cover = (
@@ -111,7 +112,7 @@ export default class ProjectThumbnail extends Component {
       );
     } else {
       className = "figure-wrapper figure-wrapper-placeholder";
-      cover = <Project.Placeholder />;
+      cover = <GlobalProject.Placeholder />;
     }
 
     return (
@@ -120,7 +121,7 @@ export default class ProjectThumbnail extends Component {
         <div className={className} >
           <figure>
             {cover}
-            <Project.Follow
+            <FrontEndProject.Follow
               project={project}
               authenticated={this.props.authenticated}
               favorites={this.props.favorites}

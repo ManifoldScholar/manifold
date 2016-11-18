@@ -23,6 +23,7 @@ export const request =
   });
 
 export const requests = {
+  backendDashboardProjects: 'backend-dashboard-projects',
   browseFilteredProjects: 'browse-filtered-projects',
   browseFeaturedProjects: 'browse-featured-projects',
   showProjectDetail: 'show-project-detail',

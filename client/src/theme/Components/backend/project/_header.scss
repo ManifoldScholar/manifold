@@ -1,0 +1,68 @@
+.project-header {
+  display: table;
+  padding-bottom: 39px;
+
+  figure {
+    display: table-cell;
+    padding-right: 36px;
+    vertical-align: top;
+
+    .manicon {
+      font-size: 64px;
+      color: $neutral50;
+    }
+  }
+
+  .project-title {
+    display: table-cell;
+    vertical-align: top;
+
+    h1, h2, h3, h4, h5, h6 {
+      @include templateHead;
+      margin-top: 0;
+      font-size: 28px;
+      font-weight: $medium;
+      color: $neutral20;
+
+      span {
+        @include templateCopy;
+        margin-left: 0.433em;
+        font-size: 30px;
+        color: $neutral50;
+      }
+    }
+  }
+
+  .project-utility {
+    button {
+      font-size: 16px;
+
+      + button {
+        margin-left: 2.813em;
+      }
+
+      .manicon {
+        display: inline-block;
+        margin-left: 11px;
+        color: $accentPrimary;
+        vertical-align: middle;
+      }
+
+      .manicon-check-double {
+        margin-top: -8px; // NP
+        font-size: 15px;
+      }
+
+      .manicon-eye-outline {
+        margin-top: -6px;
+        font-size: 14px;
+      }
+
+      .manicon-trashcan {
+        margin-top: -8px;
+        font-size: 17px;
+        color: $sp40Tertiary;
+      }
+    }
+  }
+}
