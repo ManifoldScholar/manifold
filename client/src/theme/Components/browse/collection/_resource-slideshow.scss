@@ -27,7 +27,7 @@
 
   .resource-description {
     @include templateCopy;
-    height: 5em; // Sized relative to font-size
+    height: 5em;
     max-width: $slideCopyFocus;
     padding-bottom: 2.5em;
     overflow: hidden;
