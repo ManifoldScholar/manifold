@@ -3,8 +3,6 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import { VelocityComponent } from 'velocity-react';
 
-console.log(VelocityComponent, 'velocity');
-
 export default class ResourceSlideCaption extends Component {
   static propTypes = {
     resource: PropTypes.object
