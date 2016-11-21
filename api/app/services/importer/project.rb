@@ -116,6 +116,10 @@ module Importer
       @logger.info "  Importing project text at #{text_path}"
       Ingestor.logger = @logger
       text = Ingestor.ingest(text_path, @creator)
+      unless text.is_a? Text
+        @logger.error"Unable to import project text at #{text_path}"
+        return
+      end
       Ingestor.reset_logger
       text.project = project
       project.published_text = text
