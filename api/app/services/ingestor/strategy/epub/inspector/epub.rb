@@ -170,6 +170,14 @@ module Ingestor
           end
           memoize :manifest_nav_item
 
+          def stylesheet_nodes
+            manifest_item_nodes.select do |node|
+              href = node.attribute("href").try(:value)
+              media_type = node.attribute("media-type").try(:value)
+              File.extname(href) == "css" || media_type == "text/css"
+            end
+          end
+
           def manifest_cover_item
             manifest_node.xpath('//*[contains(@properties, "cover-image")]').first
           end

@@ -30,6 +30,7 @@ gem "kaminari", "0.17.0"
 gem "acts_as_list"
 gem "google_drive"
 gem "rainbow"
+gem "redcarpet"
 
 group :development, :test do
   gem "rspec-rails", "~> 3.5.0"
