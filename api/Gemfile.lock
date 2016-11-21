@@ -208,6 +208,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (11.3.0)
+    redcarpet (3.3.4)
     redis (3.3.1)
     representable (2.3.0)
       uber (~> 0.0.7)
@@ -317,6 +318,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.0.0.1)
   rainbow
+  redcarpet
   rspec-core (~> 3.5.0)
   rspec-expectations (~> 3.5.0)
   rspec-mocks (~> 3.5.0)
