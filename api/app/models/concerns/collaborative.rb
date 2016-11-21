@@ -7,11 +7,11 @@ module Collaborative
     has_many :collaborators
     has_many :makers, through: :collaborators
     has_many :creators,
-             -> { where '"collaborators"."role" = ?', "creator" },
+             -> { where '"collaborators"."role" = ?', Collaborator::ROLE_CREATOR },
              through: :collaborators,
              source: "maker"
     has_many :contributors,
-             -> { where '"collaborators"."role" = ?', "contributor" },
+             -> { where '"collaborators"."role" = ?', Collaborator::ROLE_CONTRIBUTOR },
              through: :collaborators,
              source: "maker"
   end

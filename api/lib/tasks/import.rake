@@ -37,6 +37,7 @@ namespace :import do
       "#{severity.rjust(8)}: #{msg}\n"
     }
     children.each do |child|
+      next if File.file?(File.join(child, ".skip"))
       Importer::Project.new(child, cli_user, logger).import(include_texts)
     end
   end

@@ -2,215 +2,72 @@ module Ingestor
   module Strategy
     module EPUB
       # rubocop: disable Metrics/ClassLength
-      class Builder
-        include Ingestor::Loggable
+      class Builder < ::Ingestor::Strategy::AbstractBuilder
 
-        def initialize(inspector, logger = nil)
-          @inspector = inspector
-          @logger = logger || Naught.build { |config| config.mimic Logger }
-        end
-
-        def build(text)
-          ActiveRecord::Base.transaction do
-            update_text!(text)
-            validate_text(text)
-            attempt_save!(text)
-          end
-          transform_stylesheets!(text)
-          transform_text_sections!(text)
-          validate_text(text)
-          attempt_save!(text)
-        end
-
-        def update_text!(text)
-          update_unique_id!(text)
-          update_titles!(text)
-          update_creators!(text)
-          update_contributors!(text)
-          update_language!(text)
-          update_date!(text)
-          update_rights!(text)
-          update_description!(text)
-          attempt_save!(text)
-          update_ingestion_sources!(text)
-          update_stylesheets!(text)
-          update_text_sections!(text)
-          attempt_save!(text)
-          update_cover_image!(text)
-          update_structures!(text)
-        end
-
-        def validate_text(text)
-          Helper::Validator.validate_ingestion_sources(text, @logger)
-          Helper::Validator.validate_text_sections(text, @logger)
-        end
-
-        def transform_stylesheets!(text)
-          info "services.ingestor.strategy.ePUB.log.transforming_ss"
-          transformer = Transformer::Stylesheet.new(text, @logger)
-          text.stylesheets.each do |ss|
-            key = "services.ingestor.strategy.ePUB.log.transform_ss"
-            debug key, name: ss.name, id: ss.id
-            ss.styles = transformer.transform_styles(ss.raw_styles)
-            ss.save
+        def title_inspectors
+          @inspector.title_nodes.map do |node|
+            Inspector::Title.new(node, @inspector)
           end
         end
 
-        def transform_text_sections!(text)
-          info "services.ingestor.strategy.ePUB.log.transforming_ts"
-          transformer = Transformer::TextSection.new(text, @logger)
-          text.text_sections.each do |ts|
-            key = "services.ingestor.strategy.ePUB.log.transform_ts"
-            debug key, name: ts.name, id: ts.id
-            ts.body = transformer.convert_cont_doc_body(ts.source_body,
-                                                        ts.source_path)
-            ts.body_json = transformer.convert_cont_doc_body_to_json(ts.body)
-            ts.save
+        def creator_inspectors
+          @inspector.creator_nodes.map do |node|
+            Inspector::Creator.new(node, @inspector)
           end
         end
 
-        def update_structures!(text)
-          structure = @inspector.toc_inspector.text_structure
-          structure = Transformer::TOCStructure.transform(structure, text)
-          key = "services.ingestor.strategy.ePUB.log.update_structures"
-          info key, id: text.id
-          update_toc!(text, structure)
-          update_page_list!(text, structure)
-          update_landmarks!(text, structure)
-          text.structure_titles = structure[:titles]
-        end
-
-        def update_toc!(text, structure)
-          text.toc = structure[:toc]
-          debug "services.ingestor.strategy.ePUB.log.find_toc_structure"
-          Helper::Log.log_structure(text.toc, "  TOC: ", @logger)
-        end
-
-        def update_page_list!(text, structure)
-          text.page_list = structure[:page_list]
-          debug "services.ingestor.strategy.ePUB.log.find_page_structure"
-          Helper::Log.log_structure(text.page_list, "  Page List: ", @logger)
-        end
-
-        def update_landmarks!(text, structure)
-          text.landmarks = structure[:landmarks]
-          debug "services.ingestor.strategy.ePUB.log.find_landmark_structure"
-          Helper::Log.log_structure(text.landmarks, "  Landmarks: ", @logger)
-        end
-
-        def attempt_save!(text)
-          info "services.ingestor.strategy.ePUB.log.attempt_save"
-          if text.valid?
-            text.save
-          else
-            Helper::Log.log_text_errors(text, @logger)
-            raise IngestionFailed, "services.ingestor.strategy.ePUB.fail.save_fail"
+        def contributor_inspectors
+          @inspector.contributor_nodes.map do |node|
+            Inspector::Creator.new(node, @inspector)
           end
         end
 
-        def update_text_sections!(text)
-          creator = Creator::TextSections.new(@logger, @inspector.metadata_node)
-          text_sections = creator.create(@inspector.spine_item_nodes, @inspector,
-                                         text, text.text_sections)
-          text.text_sections.replace(text_sections.reject(&:nil?))
-          text_sections.each do |text_section|
-            unless text_section.valid?
-              Helper::Log.log_model_errors(text_section, @logger)
-            end
+        def language_inspector
+          Inspector::Language.new(@inspector)
+        end
+
+        def date_inspector
+          Inspector::Date.new(@inspector)
+        end
+
+        def unique_id_inspector
+          @inspector
+        end
+
+        def rights_inspector
+          Inspector::Rights.new(@inspector)
+        end
+
+        def description_inspector
+          Inspector::Description.new(@inspector)
+        end
+
+        def ingestion_source_inspectors
+          @inspector.manifest_item_nodes.map do |node|
+            Inspector::IngestionSource.new(node, @inspector)
           end
         end
 
-        def update_ingestion_sources!(text)
-          creator = Creator::IngestionSources.new(@logger, @inspector.metadata_node)
-          path = text.title.parameterize.underscore
-          ingestion_sources = creator.create(@inspector.manifest_item_nodes, path,
-                                             @inspector, text.ingestion_sources)
-
-          ingestion_sources.each do |is|
-            is.text = text
+        def stylesheet_inspectors
+          @inspector.stylesheet_nodes.map do |node|
+            Inspector::Stylesheet.new(node, @inspector)
           end
-          text.ingestion_sources.replace(ingestion_sources)
         end
 
-        def update_stylesheets!(text)
-          creator = Creator::Stylesheets.new(@logger, @inspector.metadata_node)
-          path = text.title.parameterize.underscore
-          stylesheets = creator.create(@inspector.manifest_item_nodes, path,
-                                       @inspector, text,
-                                       text.stylesheets)
-          text.stylesheets.replace(stylesheets)
-        end
-
-        def update_cover_image!(text)
-          node_id = @inspector.manifest_cover_item_id
-          return unless node_id
-          source = text.ingestion_sources.where(source_identifier: node_id).first
-          return unless source
-          source.kind = IngestionSource::KIND_COVER_IMAGE
-          source.save
-        end
-
-        def update_unique_id!(text)
-          id = @inspector.unique_id
-          unless id
-            msg = I18n.t("services.ingestor.strategy.ePUB.fail.missing_uid")
-            raise IngestionFailed, msg
+        def text_section_inspectors
+          @inspector.spine_item_nodes.map do |node|
+            Inspector::TextSection.new(node, @inspector)
           end
-          text.unique_identifier = @inspector.unique_id
         end
 
-        def update_titles!(text)
-          creator = Creator::TextTitles.new(@logger, @inspector.metadata_node)
-          titles = creator.create(@inspector.title_nodes)
-          text.titles.replace(titles)
+        def cover_inspector
+          Inspector::Cover.new(@inspector)
         end
 
-        def update_creators!(text)
-          creator = Creator::Makers.new(@logger, @inspector.metadata_node)
-          makers = creator.create(@inspector.creator_nodes, text.creators, "creator")
-          text.creators.replace(makers)
+        def structure_inspector
+          Inspector::Structure.new(@inspector)
         end
 
-        def update_contributors!(text)
-          creator = Creator::Makers.new(@logger, @inspector.metadata_node)
-          makers = creator.create(@inspector.contributor_nodes, text.contributors,
-                                  "contributor")
-          text.contributors.replace(makers)
-        end
-
-        def update_language!(text)
-          l = Inspector::Metadata.new(@inspector.language_node,
-                                      @inspector.metadata_node).text
-          return unless l.present?
-          text.language = l
-          info "services.ingestor.strategy.ePUB.log.set_lang", lang: text.language
-        end
-
-        def update_date!(text)
-          d = Inspector::Metadata.new(@inspector.date_node,
-                                      @inspector.metadata_node).text
-          return unless d.present?
-          text.publication_date = d
-          debug "services.ingestor.strategy.ePUB.log.set_date",
-                date: text.publication_date
-        end
-
-        def update_rights!(text)
-          r = Inspector::Metadata.new(@inspector.rights_node,
-                                      @inspector.metadata_node).text
-          return unless r.present?
-          text.rights = r
-          debug "services.ingestor.strategy.ePUB.log.set_rights", rights: text.rights
-        end
-
-        def update_description!(text)
-          d = Inspector::Metadata.new(@inspector.description_node,
-                                      @inspector.metadata_node).text
-          return unless d.present?
-          text.description = d
-          debug "services.ingestor.strategy.ePUB.log.set_desc",
-                desc: text.description.truncate(40)
-        end
       end
     end
   end

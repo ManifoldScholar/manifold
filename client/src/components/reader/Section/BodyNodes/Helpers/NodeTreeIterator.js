@@ -2,6 +2,7 @@ import React from 'react';
 import TextNode from '../TextNode';
 import DefaultNode from '../DefaultNode';
 import LinkNode from '../LinkNode';
+import CodeNode from '../CodeNode';
 import isEmpty from 'lodash/isEmpty';
 
 export default class NodeTreeIterator {
@@ -49,6 +50,9 @@ export default class NodeTreeIterator {
     switch (node.tag) {
       case 'a':
         ComponentClass = LinkNode;
+        break;
+      case 'code':
+        ComponentClass = CodeNode;
         break;
       default:
         ComponentClass = DefaultNode;

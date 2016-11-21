@@ -37,7 +37,7 @@ module Validator
                                  bgcolor challenge charset code codebase color cols
                                  content contenteditable defer draggable dropzone height
                                  keytype language manifest required sandbox shape size
-                                 sizes tabindex width align).freeze
+                                 sizes tabindex width align rev).freeze
     CSS_VALUE_MAP = {
       "xx-small" => ".7em",
       "x-small" => ".7em",
