@@ -38,6 +38,7 @@ common: &1
           - "text/javascript"
           - "text/html"
           - "text/plain"
+          - "text/markdown"
           - "application/x-font-ttf"
           - "application/x-font-truetype"
           - "application/x-font-otf"
@@ -71,6 +72,7 @@ common: &1
           - !ruby/regexp '/docx\Z/'
           - !ruby/regexp '/xlsx\Z/'
           - !ruby/regexp '/ppt?x\Z/'
+          - !ruby/regexp '/md\Z/'
 
 production: *1
 development: *1

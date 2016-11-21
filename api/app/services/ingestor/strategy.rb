@@ -59,7 +59,7 @@ module Ingestor
         required_methods = [:ingest, :can_ingest?]
         required_methods.each do |method|
           next if strategy.respond_to?(method)
-          msg = I18n.t("services.ingestor.strategy.failures.missing_method",
+          msg = I18n.t("services.ingestor.strategy.fail.missing_method",
                        method: method.to_s.inspect, strategy: label.inspect)
           raise NoMethodError, msg
         end
