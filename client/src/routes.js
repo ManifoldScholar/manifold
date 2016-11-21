@@ -19,7 +19,6 @@ import { Reader } from 'containers/reader';
 import { Backend, Dashboard, BackendProjectDetail, TextDetail, Users } from 'containers/backend';
 import { Section, AnnotationTools } from 'components/reader';
 import { Static } from './components/frontend';
-console.log(Dashboard, 'dashboard');
 
 /* eslint-disable max-len */
 export default () => {
@@ -52,23 +51,9 @@ export default () => {
 
       <Route component={Backend} path="/backend" >
         <IndexRoute component={Dashboard} />
-
         <Route component={BackendProjectDetail.Wrapper} path="project/:id" >
           <IndexRoute component={BackendProjectDetail.General} />
           <Route component={BackendProjectDetail.Texts} path="texts" />
-          <Route component={BackendProjectDetail.Resources} path="resources" />
-          <Route component={BackendProjectDetail.Metadata} path="metadata" />
-        </Route>
-
-        <Route component={TextDetail.Wrapper} path="text/:id" >
-          <IndexRoute component={TextDetail.General} />
-          <Route component={TextDetail.Ingestion} path="ingestion" />
-          <Route component={TextDetail.Sections} path="sections" />
-          <Route component={TextDetail.Metadata} path="metadata" />
-        </Route>
-
-        <Route component={Users.Wrapper} path="users" >
-          <IndexRoute component={Users.List} />
         </Route>
       </Route>
 
