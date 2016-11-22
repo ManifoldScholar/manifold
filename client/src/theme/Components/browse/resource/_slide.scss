@@ -73,8 +73,16 @@
     .manicon {
       display: block;
       margin-bottom: 18px;
-      font-size: 145px;
+      font-size: 80px;
       color: $neutral40;
+
+      @include respond($break50) {
+        font-size: 12.75vw;
+      }
+
+      @include respond($break100) {
+        font-size: 145px;
+      }
     }
 
     .resource-type {
