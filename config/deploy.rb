@@ -85,6 +85,22 @@ namespace :deploy do
 
 end
 
+# See https://github.com/yarnpkg/yarn/issues/761
+# When this issue is resolved, we can likely remove this hack.
+namespace :yarn do
+  desc "Remove dev dependencies from package.json"
+  task :remove_dev_deps do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      with path: "node_modules/.bin:$PATH" do
+        within "#{release_path}/client" do
+          execute "cd #{release_path}/client && jq 'del(.devDependencies)' package.json > tmp.json && mv tmp.json package.json"
+        end
+      end
+    end
+  end
+  before :install, :remove_dev_deps
+end
+
 namespace :upload do
   task :projects do
     on roles(:app) do
