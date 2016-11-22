@@ -37,6 +37,8 @@ $accentPrimaryOffWhite: #f0faf7 !default;
 
 // Spectra
 // Color spectra are number by group and then given ordinal names, attributes
+
+// SP 20 Reader Annotations, Highlighting, Labels
 $sp20Primary: #2bd1fa;
 $sp20PrimaryLight: #99e3f5;
 $sp20PrimaryPale: #d9f5fb;
@@ -49,13 +51,17 @@ $sp20Tertiary: #ff12ff;
 
 $sp20Quaternary: #fffd73;
 
+$sp20Quinary: #faffdb;
+
+// SP 30 Header Notifications
 $sp30Primary: #d4f2ff;
 $sp30Secondary: #fff799;
 $sp30Tertiary: #ffbdbd;
 
+// SP 40 Template Notices, Warnings, Acceptance, Errata
 $sp40Tertiary: #f75884;
 
-// Spectrum 50 used for project placholder tiles
+// SP 50 Project Placeholder tile backgrounds
 $sp50Primary: #cbf7e6;
 $sp50Secondary: #ebebeb;
 $sp50Tertiary: #deecf9;

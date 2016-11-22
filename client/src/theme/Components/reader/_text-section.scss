@@ -35,6 +35,10 @@
   line-height: 1.761;
   transition: font-size $durationFast $timing;
 
+  *::selection {
+    background: $sp20Quaternary;
+  }
+
   &.font-sans-serif {
     font-family: "sofia-pro",sans-serif;
   }
