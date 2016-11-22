@@ -276,7 +276,6 @@ module Ingestor
             end
             file
           end
-          memoize :get_rendition_source
 
           def toc_inspector
             return TOC.new(self) if nav_xml
@@ -290,7 +289,11 @@ module Ingestor
           end
 
           def source_zip_path(relative_path)
-            [File.dirname(rendition_relative_path), relative_path].join("/")
+            paths = []
+            base = File.dirname(rendition_relative_path)
+            paths << base unless base == '.'
+            paths << relative_path
+            paths.join("/")
           end
         end
       end
