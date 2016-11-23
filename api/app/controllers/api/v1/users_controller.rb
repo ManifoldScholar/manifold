@@ -2,6 +2,9 @@ module Api
   module V1
     # User controller
     class UsersController < ApplicationController
+
+      authorize_actions_for User, except: [:create, :whoami]
+
       def whoami
         render json: @current_user
       end

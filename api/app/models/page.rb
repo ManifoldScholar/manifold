@@ -1,6 +1,9 @@
 # Model representing a page of content
 class Page < ApplicationRecord
 
+  # Authority
+  include Authority::Abilities
+
   # Concerns
   include FriendlyId
   include TrackedCreator

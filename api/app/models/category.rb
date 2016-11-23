@@ -1,6 +1,9 @@
 # Used to group texts and resources in a project
 class Category < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Constants
   ROLE_TEXT = "text".freeze
   ROLE_RESOURCE = "resource".freeze

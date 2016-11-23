@@ -2,6 +2,8 @@ module Api
   module V1
     # Pages controller
     class PagesController < ApplicationController
+
+      authorize_actions_for Page, except: [:index, :show]
       before_action :set_page, only: [:show, :update, :destroy]
 
       # GET /pages

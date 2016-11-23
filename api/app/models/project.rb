@@ -1,6 +1,9 @@
 # The project model is the primary unit of Manifold.
 class Project < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Concerns
   include TrackedCreator
   include Collaborative

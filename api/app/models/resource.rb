@@ -1,6 +1,9 @@
 # A resource is any asset our source document that is associated with a text.
 class Resource < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Concerns
   include TrackedCreator
 

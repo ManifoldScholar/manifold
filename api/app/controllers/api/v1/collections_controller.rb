@@ -2,6 +2,8 @@ module Api
   module V1
     # Collections controller
     class CollectionsController < ApplicationController
+
+      authorize_actions_for Collection, except: [:index, :show]
       before_action :set_collection, only: [:show, :update, :destroy]
 
       # GET /collections

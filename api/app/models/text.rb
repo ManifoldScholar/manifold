@@ -3,6 +3,9 @@ require "memoist"
 # A single Text
 class Text < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Default Scope
   default_scope { includes(:titles, :text_subjects, :category) }
 

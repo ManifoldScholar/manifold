@@ -4,6 +4,9 @@ class Collaborator < ActiveRecord::Base
   ROLE_CREATOR = "creator".freeze
   ROLE_CONTRIBUTOR = "contributor".freeze
 
+  # Authority
+  include Authority::Abilities
+
   # Associations
   belongs_to :text, optional: true
   belongs_to :maker

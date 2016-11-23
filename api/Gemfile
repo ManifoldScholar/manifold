@@ -31,6 +31,7 @@ gem "acts_as_list"
 gem "google_drive"
 gem "rainbow"
 gem "redcarpet"
+gem "authority", "~>3.2.0"
 
 group :development, :test do
   gem "rspec-rails", "~> 3.5.0"

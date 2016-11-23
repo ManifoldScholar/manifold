@@ -1,6 +1,9 @@
 # A favorite represents a user's decision to favorite an object, generally a project.
 class Favorite < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Associations
   belongs_to :user
   belongs_to :favoritable, polymorphic: true

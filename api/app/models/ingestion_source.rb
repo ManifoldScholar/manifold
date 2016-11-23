@@ -1,6 +1,9 @@
 # Connects texts to resources that were sources for text sections during ingestion
 class IngestionSource < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Constants
   KIND_COVER_IMAGE = "cover_image".freeze
   KIND_NAVIGATION = "navigation".freeze

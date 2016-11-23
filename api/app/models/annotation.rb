@@ -3,6 +3,9 @@
 # other manifold records.
 class Annotation < ApplicationRecord
 
+  # Authority
+  include Authority::Abilities
+
   # Concerns
   include TrackedCreator
 

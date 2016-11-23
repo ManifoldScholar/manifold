@@ -4,6 +4,7 @@ module Api
       module Relationships
         # Responds with resources in a collection
         class ResourcesController < ApplicationController
+
           before_action :set_collection, only: [:index]
 
           # GET /resources

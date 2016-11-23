@@ -2,6 +2,8 @@ module Api
   module V1
     # resources controller
     class ResourcesController < ApplicationController
+
+      authorize_actions_for Resource, except: [:index, :show]
       before_action :set_resource, only: [:show, :update, :destroy]
 
       # GET /resources

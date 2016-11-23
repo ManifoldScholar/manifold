@@ -1,6 +1,9 @@
 # A collection of resources
 class Collection < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Associations
   belongs_to :project
   has_many :collection_resources,

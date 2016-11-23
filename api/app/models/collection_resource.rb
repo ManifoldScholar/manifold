@@ -1,6 +1,9 @@
 # Tracks the relationship between collections and resources
 class CollectionResource < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Associations
   belongs_to :collection
   belongs_to :resource

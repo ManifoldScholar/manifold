@@ -2,6 +2,8 @@ module Api
   module V1
     # Texts controller
     class TextsController < ApplicationController
+
+      authorize_actions_for Text, except: [:index, :show]
       before_action :set_text, only: [:show, :update, :destroy]
 
       # GET /texts

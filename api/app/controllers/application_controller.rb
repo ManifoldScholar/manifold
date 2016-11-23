@@ -4,6 +4,7 @@ class ApplicationController < ActionController::API
   include Authentication
   include Validation
   include JsonApi
+  include Authority::Controller
 
   serialization_scope :current_user
 

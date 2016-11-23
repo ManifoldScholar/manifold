@@ -1,6 +1,9 @@
 # The User model
 class User < ActiveRecord::Base
 
+  # Authority
+  include Authority::UserAbilities
+
   # Associations
   has_many :annotations # TODO: refactor to use "creator_id"
   has_many :favorites # Todo: refactor to use "creator_id"

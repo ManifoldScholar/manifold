@@ -29,6 +29,9 @@ class TextTitle < ActiveRecord::Base
                    KIND_COLLECTION,
                    KIND_EDITION].freeze
 
+  # Authority
+  include Authority::Abilities
+
   # Associations
   belongs_to :text
 

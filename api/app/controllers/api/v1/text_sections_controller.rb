@@ -2,6 +2,8 @@ module Api
   module V1
     # Sections controller
     class TextSectionsController < ApplicationController
+
+      authorize_actions_for TextSection, except: [:index, :show]
       before_action :set_section, only: [:show, :update, :destroy]
 
       # GET /text_sections/1
