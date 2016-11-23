@@ -57,8 +57,8 @@ RSpec.describe Validator::Html do
   end
 
   it "should remove a blacklisted CSS property while keeping a valid property" do
-    fragment = "<div style=\"width: 50px; position: absolute\"></div>"
-    valid = "<div style=\"width: 50px\"></div>"
+    fragment = "<div style=\"font-weight: bold; position: absolute\"></div>"
+    valid = "<div style=\"font-weight: bold\"></div>"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
