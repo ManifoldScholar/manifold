@@ -1,0 +1,15 @@
+.section-category-label {
+  padding: 20px 0 18px;
+  text-align: center;
+  background-color: $sp20Quinary;
+
+  .label {
+    @include utilityPrimary;
+    display: inline-block;
+    padding: 0.786em 0.8em;
+    font-size: 14px;
+    font-weight: $light;
+    color: $neutral80;
+    border: 1px solid $neutral80;
+  }
+}

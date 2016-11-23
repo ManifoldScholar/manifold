@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
 import Body from './Body';
+import Label from './Label';
 import Pagination from './Pagination';
 import Annotatable from '../Annotatable';
 import BodyNodes from './BodyNodes';
@@ -100,5 +101,6 @@ class Section extends Component {
 
 Section.Body = Body;
 Section.BodyNodes = BodyNodes;
+Section.Label = Label;
 Section.Pagination = Pagination;
 export default Section;
