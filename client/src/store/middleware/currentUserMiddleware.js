@@ -29,7 +29,7 @@ function authenticateWithPassword(email, password, dispatch) {
     const authToken = response.meta.authToken;
     if (!authToken) {
       dispatch(actions.loginSetError(generateErrorPayload(500)));
-      return;
+      return Promise.resolve();
     }
     const expireDate = new Date();
     expireDate.setDate(expireDate.getDate() + 90);

@@ -89,7 +89,7 @@ module Ingestor
             text
           end
 
-          def make_structure_item(raw_label, raw_path = nil)
+          def make_structure_item(raw_label, raw_path = nil, type = nil)
             label = raw_label.strip
 
             anchor = source_path = ""
@@ -102,7 +102,8 @@ module Ingestor
             {
               label: label,
               anchor: anchor,
-              source_path: source_path
+              source_path: source_path,
+              type: type
             }
           end
         end

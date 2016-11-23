@@ -108,8 +108,13 @@ class ReaderContainer extends Component {
 
   maybeRedirect(props) {
     if (props.text && !props.params.sectionId && __CLIENT__) {
-      const firstSectionId = props.text.attributes.firstSectionId;
-      browserHistory.push(`/read/${props.text.id}/section/${firstSectionId}`);
+      const startSectionId = props.text.attributes.startSectionId;
+      if (startSectionId) {
+        browserHistory.push(`/read/${props.text.id}/section/${startSectionId}`);
+      } else {
+        const firstSectionId = props.text.attributes.firstSectionId;
+        browserHistory.push(`/read/${props.text.id}/section/${firstSectionId}`);
+      }
     }
   }
 

@@ -36,6 +36,10 @@ module Ingestor
             true
           end
 
+          def start_section_identifier
+            nil
+          end
+
           def date
             book_json["manifold"]["date"]
           end
