@@ -3,11 +3,7 @@ common: &1
     :validations:
       :image:
         :allowed_mime:
-          - "image/gif"
-          - "image/jpeg"
-          - "image/jpg"
-          - "image/png"
-          - "image/svg+xml"
+          - !ruby/regexp '/image\/.*/'
         :allowed_ext:
           - !ruby/regexp '/gif\Z/'
           - !ruby/regexp '/jpe?g\Z/'
@@ -15,11 +11,6 @@ common: &1
           - !ruby/regexp '/svg\Z/'
       :resource:
         :allowed_mime:
-          - "image/gif"
-          - "image/jpeg"
-          - "image/jpg"
-          - "image/png"
-          - "image/svg+xml"
           - "application/xhtml+xml"
           - "application/x-dtbncx+xml"
           - "application/vnd.ms-opentype"
@@ -29,25 +20,17 @@ common: &1
           - "application/xml"
           - "application/pdf"
           - "application/vnd.ms-powerpoint"
-          - "audio/mpeg"
-          - "audio/mp4"
-          - "audio/mp3"
-          - "text/css"
-          - "text/x-c"
-          - "text/x-csrc"
-          - "text/javascript"
-          - "text/html"
-          - "text/plain"
-          - "text/markdown"
           - "application/x-font-ttf"
           - "application/x-font-truetype"
           - "application/x-font-otf"
-          - "video/mp4"
-          - "video/webm"
           - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
           - "application/zip"
+          - !ruby/regexp '/text\/.*/'
+          - !ruby/regexp '/audio\/.*/'
+          - !ruby/regexp '/video\/.*/'
+          - !ruby/regexp '/image\/.*/'
         :allowed_ext:
           - !ruby/regexp '/gif\Z/'
           - !ruby/regexp '/jpe?g\Z/'
