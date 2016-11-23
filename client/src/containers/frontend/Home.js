@@ -84,7 +84,7 @@ class HomeContainer extends Component {
             <header className="section-heading">
               <h4 className="title">
                 <i className="manicon manicon-new-round"></i>
-                {'Recent Projects'}
+                {'Featured Projects'}
               </h4>
             </header>
             { this.props.featuredProjects ?
