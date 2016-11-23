@@ -120,6 +120,34 @@ module Ingestor
             rendition_xml.xpath("//xmlns:package/xmlns:guide")
           end
 
+          def start_section_identifier
+            return v2_start_section_identifier if v2?
+            return v3_start_section_identifier if v3?
+          end
+
+          def v2_guide_node_item(type)
+            guide_node.presence.css("[type=\"#{type}\"]").first
+          end
+
+          def v3_start_section_identifier
+            landmarks = toc_inspector.landmarks_structure
+            return unless landmarks
+            start = landmarks.detect { |l| l[:type] == "bodymatter" }
+            return unless start
+            href = start[:source_path]
+            node = manifest_item_nodes.detect { |n| n.attribute("href").value == href }
+            node.attribute("id").value
+          end
+
+          def v2_start_section_identifier
+            start = v2_guide_node_item("text") || v2_guide_node_item("start")
+            return unless start
+            href = start.attribute("href").value.split("#").first
+            node = manifest_item_nodes.detect { |n| n.attribute("href").value == href }
+            return unless node
+            node.attribute("id").value
+          end
+
           def title_nodes
             metadata_node.xpath("//dc:title", "dc" => dc)
           end
@@ -291,7 +319,7 @@ module Ingestor
           def source_zip_path(relative_path)
             paths = []
             base = File.dirname(rendition_relative_path)
-            paths << base unless base == '.'
+            paths << base unless base == "."
             paths << relative_path
             paths.join("/")
           end

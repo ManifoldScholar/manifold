@@ -20,6 +20,7 @@ class Text < ActiveRecord::Base
   # Associations
   belongs_to :project, optional: true
   belongs_to :category, optional: true
+  belongs_to :start_text_section, optional: true, class_name: "TextSection"
   has_many :titles, class_name: "TextTitle"
   has_many :text_subjects
   has_many :subjects, through: :text_subjects

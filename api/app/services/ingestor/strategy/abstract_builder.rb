@@ -38,6 +38,7 @@ module Ingestor
         update_text_sections!(text)
         attempt_save!(text)
         update_cover_image!(text)
+        update_start_section!(text)
         update_toc!(text)
         update_page_list!(text)
         update_landmarks!(text)
@@ -74,30 +75,6 @@ module Ingestor
         end
       end
 
-      # def update_structures!(text)
-      #   structure = @inspector.toc_inspector.text_structure
-      #   structure = Transformer::TOCStructure.transform(structure, text)
-      #   key = "services.ingestor.strategy.ePUB.log.update_structures"
-      #   info key, id: text.id
-      #   update_toc!(text, structure)
-      #   update_page_list!(text, structure)
-      #   update_landmarks!(text, structure)
-      #   text.structure_titles = structure[:titles]
-      # end
-      #
-      #
-      # def update_page_list!(text, structure)
-      #   text.page_list = structure[:page_list]
-      #   debug "services.ingestor.strategy.ePUB.log.find_page_structure"
-      #   Helper::Log.log_structure(text.page_list, "  Page List: ", @logger)
-      # end
-      #
-      # def update_landmarks!(text, structure)
-      #   text.landmarks = structure[:landmarks]
-      #   debug "services.ingestor.strategy.ePUB.log.find_landmark_structure"
-      #   Helper::Log.log_structure(text.landmarks, "  Landmarks: ", @logger)
-      # end
-      #
       def attempt_save!(text)
         info "services.ingestor.strategy.log.attempt_save"
         if text.valid?
@@ -161,8 +138,24 @@ module Ingestor
         raise_missing_inspector("structure_inspector")
       end
 
+      def start_section_inspector
+        raise_missing_inspector("start_section")
+      end
+
       def raise_missing_inspector(name)
         raise NotImplementedError, "Builder should implement '#{name}'"
+      end
+
+      def update_start_section!(text)
+        start_section_identifier = start_section_inspector.start_section_identifier
+        return unless start_section_identifier
+        text_section = text.text_sections.find_by(
+          source_identifier: start_section_identifier
+        )
+        return unless text_section
+        debug "services.ingestor.strategy.log.find_start_section",
+              text_section.source_identifier
+        text.start_text_section = text_section
       end
 
       def update_landmarks!(text)

@@ -20,6 +20,7 @@ en:
           set_date: 'Setting publication date to "%{date}"'
           set_rights: 'Setting rights to "%{rights}"'
           set_desc: 'Setting description to "%{desc}"'
+          find_start_section: 'Found text starting section: "%{source_identifier}"'
         fail:
           missing_uid: 'Ingestion Failed: unable to find a unique identifier for this Gitbook.'
           missing_method: '%{method} is not declared in the %{strategy} strategy'
