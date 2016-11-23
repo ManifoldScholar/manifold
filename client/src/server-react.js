@@ -57,8 +57,9 @@ function authenticateUser(req, store) {
     const manifoldCookie = cookie.parse(req.headers.cookie);
     const authToken = manifoldCookie.authToken;
     if (authToken) return authenticateWithToken(authToken, store.dispatch);
+    return Promise.resolve();
   }
-  return null;
+  return Promise.resolve();
 }
 
 function render(req, res, store, props, parameters) {
@@ -139,22 +140,16 @@ export default function (parameters) {
       if (error) return respondWithRouterError(res, error);
       if (!props) return respondWithInternalServerError(res);
 
-      const delays = [];
-      const fetchComponentDataPromise = fetchComponentData(props, store);
-      const authenticationPromise = authenticateUser(req, store);
-      if (authenticationPromise) delays.push(authenticationPromise);
-      if (fetchComponentDataPromise) delays.push(fetchComponentDataPromise);
-
-      const onResolve = () => {
-        render(req, res, store, props, parameters);
-      };
-
-      const onReject = () => {
-        render(req, res, store, props, parameters);
-      };
-
-      Promise.all(delays).then(onResolve, onReject);
-
+      // 1. Authenticate user
+      // 2. Fetch any data, as the user
+      // 3. Send the response to the user
+      authenticateUser(req, store).then(
+        () => { return fetchComponentData(props, store); },
+        () => { return fetchComponentData(props, store); }
+      ).then(
+        () => { render(req, res, store, props, parameters); },
+        () => { render(req, res, store, props, parameters); }
+      );
     });
   });
 
