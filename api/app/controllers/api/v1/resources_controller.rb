@@ -3,60 +3,41 @@ module Api
     # resources controller
     class ResourcesController < ApplicationController
 
-      authorize_actions_for Resource, except: [:index, :show]
-      before_action :set_resource, only: [:show, :update, :destroy]
+      resourceful! Resource, authorize_options: { except: [:index, :show] } do
+        Resource
+          .filtered(resource_filter_params[:filter])
+          .page(page_number)
+          .per(page_size)
+      end
 
-      # GET /resources
       def index
-        @resources = Resource
-                     .filtered(resource_filter_params[:filter])
-                     .page(page_number)
-                     .per(page_size)
-        render json: @resources,
-               each_serializer: ResourceSerializer,
-               meta: { pagination: pagination_dict(@resources) }
+        @resources = load_zresources
+        render_multiple_resources(
+          @resources,
+          each_serializer: ResourceSerializer
+        )
       end
 
-      # GET /resource/1
       def show
-        render json: @resource
+        @resource = load_zresource
+        render_single_resource(@resource)
       end
 
-      # POST /resources
       def create
-        @resource = resource.new(resource_params)
-        if @resource.save
-          render json: @resource, status: :created, location: [:api, :v1, @resource]
-        else
-          render json: @resource.errors, status: :unprocessable_entity
-        end
+        @resource = authorize_and_create_zresource(resource_params)
+        render_single_resource @resource
       end
 
-      # PATCH/PUT /resources/1
       def update
-        if @resource.update(resource_params)
-          render json: @resource
-        else
-          render json: @resource.errors, status: :unprocessable_entity
-        end
+        @resource = load_and_authorize_zresource
+        ::ProjectPresenter.new(resource_params).update(@resource)
+        render_single_resource(@resource)
       end
 
-      # DELETE /resources/1
       def destroy
         @resource.destroy
       end
 
-      private
-
-      # Use callbacks to share common setup or constraints between actions.
-      def set_resource
-        @resource = Resource.find(params[:id])
-      end
-
-      # Only allow a trusted parameter "white list" through.
-      def resource_params
-        params.require(:resource).permit
-      end
     end
   end
 end

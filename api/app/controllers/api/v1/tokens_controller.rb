@@ -3,7 +3,6 @@ require "auth_token"
 module Api
   module V1
     # Authentication token controller
-
     class TokensController < ApplicationController
       def create
         authenticated_user = User.find_by(email: token_params[:email])

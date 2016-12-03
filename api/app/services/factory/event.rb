@@ -97,7 +97,7 @@ module Factory
       if type && id
         klass = Module.const_get(type)
         return nil unless klass.is_a?(Class)
-        subject = klass.find_by_id(id)
+        subject = klass.find_by(id: id)
         return subject
       end
       nil

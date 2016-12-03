@@ -20,6 +20,16 @@ class Maker < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: validation[:allowed_mime]
   validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
+  def self.filtered(filters)
+    makers = Maker.all
+    return makers unless filters && filters.key?(:name)
+    name_query = "(makers.first_name || ' ' || makers.last_name) ILIKE ?"
+    makers.where(name_query, "#{filters[:name]}%")
+  end
+
   def avatar_url
     return nil if avatar.url(:square).blank?
     ENV["API_URL"] + avatar.url(:square)

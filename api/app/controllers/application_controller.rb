@@ -1,6 +1,7 @@
 
 # The base application controller
 class ApplicationController < ActionController::API
+
   include Authentication
   include Validation
   include JsonApi
@@ -39,6 +40,38 @@ class ApplicationController < ActionController::API
 
   def project_filter_params
     params.permit(filter: [:featured, :subject])
+  end
+
+  def maker_filter_params
+    params.permit(filter: [:name])
+  end
+
+  def respond_with_errors(resource)
+    render json: resource.errors, status: :unprocessable_entity
+  end
+
+  def respond_with_resource(resource)
+    render json: resource
+  end
+
+  class << self
+    # Define the calling controller as a resource, adding several methods
+    # to simplify rendering and accepting JSONAPI resources.
+    #
+    # @param [ActiveRecord::Base] model
+    # @param [Boolean] authorize
+    # @yieldreturn [ActiveRecord::Relation]
+    # @return [void]
+    # rubocop:disable Lint/UnusedMethodArgument
+    def resourceful!(model, authorize: true, **other_options, &model_scope)
+      include Api::V1::Resourceful
+
+      other_options[:authorize] = true
+      other_options[:model] = model
+
+      setup_resources!(**other_options, &model_scope)
+    end
+    # rubocop:enable Lint/UnusedMethodArgument
   end
 
 end

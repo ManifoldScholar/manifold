@@ -116,6 +116,9 @@ GEM
       multi_json (~> 1.11)
       os (~> 0.9)
       signet (~> 0.7)
+    has_scope (0.7.0)
+      actionpack (>= 4.1, < 5.1)
+      activesupport (>= 4.1, < 5.1)
     http (1.0.4)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -308,6 +311,7 @@ DEPENDENCIES
   foreman (= 0.82.0)
   friendly_id
   google_drive
+  has_scope
   httparty (~> 0.14.0)
   jwt (~> 1.5.6)
   kaminari (= 0.17.0)
@@ -333,6 +337,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   twitter (= 5.16.0)
+  uber
   validate_url
 
 BUNDLED WITH

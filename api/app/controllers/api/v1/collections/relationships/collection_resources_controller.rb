@@ -5,21 +5,34 @@ module Api
         # Responds with resources in a collection
         class CollectionResourcesController < ApplicationController
 
+          LOCATION = [:api, :v1, :collection_relationships, :collection_resources].freeze
+
           before_action :set_collection, only: [:index, :show]
 
+          resourceful! CollectionResource,
+                       authorize_options: { except: [:index, :show] } do
+            @collection.collection_resources
+                       .page(page_number)
+                       .per(page_size)
+          end
+
           def index
-            @collection_resources = @collection.collection_resources
-                                               .page(page_number)
-                                               .per(page_size)
-            render json: @collection_resources,
-                   include: %w(resource),
-                   each_serializer: CollectionResourceSerializer,
-                   meta: { pagination: pagination_dict(@collection_resources) }
+            @collection_resources = load_collection_resources
+            render_multiple_resources(
+              @collection_resources,
+              include: %w(resource),
+              each_serializer: CollectionResourceSerializer,
+              meta: { pagination: pagination_dict(@collection_resources) },
+              location: LOCATION
+            )
           end
 
           def show
-            render json: @collection.collection_resources.find(params[:id]),
-                   include: %w(resource)
+            @collection_resource = load_collection_resource
+            render_single_resource(
+              @collection_resource,
+              include: %w(resource)
+            )
           end
 
           private

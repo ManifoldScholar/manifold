@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import sharedPropsValidation from './propTypes';
 import Dropzone from 'react-dropzone';
 
 export default class Upload extends Component {
 
-  static displayName = "From.Upload";
+  static displayName = "Form.Upload";
 
   static propTypes = {
     label: PropTypes.string

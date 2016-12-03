@@ -6,6 +6,7 @@ class TextSectionPartialSerializer < ActiveModel::Serializer
   def body_json
     find = "/system/ingestion_sources/attachments"
     replace = ENV["API_URL"] + find
+    return "{}" if object.body_json.blank?
     JSON.parse object.body_json.gsub(find, replace)
   end
 

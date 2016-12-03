@@ -32,6 +32,8 @@ gem "google_drive"
 gem "rainbow"
 gem "redcarpet"
 gem "authority", "~>3.2.0"
+gem "uber"
+gem "has_scope"
 
 group :development, :test do
   gem "rspec-rails", "~> 3.5.0"

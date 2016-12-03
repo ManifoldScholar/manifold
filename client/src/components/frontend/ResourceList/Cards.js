@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { Resource, Utility } from 'components/frontend';
+import { Resource } from 'components/frontend';
+import { Utility } from 'components/global';
 
 export default class ResourceListCards extends PureComponent {
 

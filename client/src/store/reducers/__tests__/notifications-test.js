@@ -3,7 +3,7 @@ import notificationsReducer from '../notifications';
 describe('store/reducers/notifications', () => {
   it('should return the initial state', () => {
     const state = notificationsReducer(undefined, {});
-    // Must mirror initial state declared in '../norifications'
+    // Must mirror initial state declared in '../notifications'
     expect(state).toEqual({
       notifications: []
     });

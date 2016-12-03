@@ -88,5 +88,5 @@ export default handleActions({
   LOGIN_SET_AUTH_TOKEN: setAuthToken,
   LOGIN_COMPLETE: endLogin,
   LOGIN_SET_ERROR: setError,
-  LOGOUT: logout,
+  LOGOUT: logout
 }, initialState);

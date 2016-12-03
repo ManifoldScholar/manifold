@@ -1,7 +1,7 @@
 import Header from './Header.js';
-import Panel from './Panel';
+import Navigation from './Navigation';
 
 export default {
   Header,
-  Panel
+  Navigation
 };

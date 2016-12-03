@@ -18,6 +18,21 @@
       white-space: nowrap;
       vertical-align: middle;
 
+      .no-image, img {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .no-image {
+        @include buttonAvatar(29, $neutral40, $neutral20);
+        border: 2px solid $neutralWhite;
+
+        @include respond($break60) {
+          @include buttonAvatar(29, $neutral40, $neutral20);
+          border: 2px solid $neutralWhite;
+        }
+      }
+
       img {
         width: 100%;
         height: auto;

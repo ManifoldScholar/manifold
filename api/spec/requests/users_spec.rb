@@ -1,62 +1,89 @@
 require "rails_helper"
 
-RSpec.configure do |c|
-  c.include Helpers
-end
+RSpec.describe "Users API", type: :request do
 
-RSpec.describe "api/v1/users", type: :request do
-  describe "POST /api/v1/users" do
-    it "creates a new user" do
-      params = {
-        data: {
-          type: "user",
-          attributes: {
-            first_name: "John",
-            last_name: "Higgins",
-            password: "testtest123",
-            email: "jon@higgins.com",
-            password_confirmation: "testtest123"
-          }
-        }
-      }
-      post api_v1_users_path, params: params
-      api_response = JSON.parse(response.body)
-      expect(api_response["data"]["attributes"]["firstName"]).to eq("John")
+  include_context("authenticated request")
+  include_context("param helpers")
+
+  let(:first_name) { "John" }
+  let(:attributes) {
+    {
+      first_name: first_name,
+      last_name: "Higgins",
+      password: "testtest123",
+      email: "jon@higgins.com",
+      password_confirmation: "testtest123",
+      avatar: image_params
+    }
+  }
+  let(:valid_params) {
+    json_payload(attributes: attributes)
+  }
+
+  describe "creates a user" do
+    let(:path) { api_v1_users_path }
+    let(:api_response) { JSON.parse(response.body) }
+    before(:each) { post path, headers: anonymous_headers, params: valid_params }
+
+    it "sets the first name correctly" do
+      expect(api_response["data"]["attributes"]["firstName"]).to eq(first_name)
     end
 
     it "accepts an avatar file upload and adds it to the user" do
+      url = api_response["data"]["attributes"]["avatarUrl"]
+      expect(url.start_with?("http")).to be true
     end
 
-    it "removes the user's avatar if remove_avatar param is true" do
+  end
+
+  describe "sends a user" do
+
+    let(:path) { api_v1_user_path(reader) }
+    let(:api_response) { JSON.parse(response.body) }
+
+    context "when the user is the user being requested" do
+      before(:each) { get path, headers: reader_headers }
+      describe "the response" do
+        it "has a 200 status code" do
+          expect(@response).to have_http_status(200)
+        end
+      end
+    end
+
+    context "when the user is somebody else" do
+      before(:each) { get path, headers: author_headers }
+      describe "the response" do
+        it "has a 403 status code" do
+          expect(@response).to have_http_status(403)
+        end
+      end
+    end
+
+    context "when the user is an admin" do
+      before(:each) { get path, headers: admin_headers }
+      describe "the response" do
+        it "has a 200 status code" do
+          expect(@response).to have_http_status(200)
+        end
+      end
     end
   end
 
-  describe "GET /api/v1/me" do
-    context "when there is an authenticated user" do
-      before :each do
-        @user, @headers = create_user_and_authenticate.values_at(:user, :headers)
-        get api_v1_me_path, headers: @headers
-        @response = response
-        @api_response = JSON.parse(@response.body)
-      end
+  describe "sends the current user" do
 
-      it "responds with a 200 status code" do
-        expect(@response).to have_http_status(200)
-      end
+    let(:path) { whoami_api_v1_users_path() }
+    let(:api_response) { JSON.parse(response.body) }
 
-      it "responds with the currently logged in user" do
-        expect(@api_response["data"]["id"]).to eq @user.id.to_s
-      end
-    end
+    context "when the user is a reader" do
+      before(:each) { get path, headers: reader_headers }
+      describe "the response" do
+        it "has a 200 status code" do
+          expect(@response).to have_http_status(200)
+        end
 
-    context "when there is not an authenticated user" do
-      before :each do
-        get api_v1_me_path
-        @response = response
-      end
-
-      it "responds with a 401 status code" do
-        expect(@response).to have_http_status(401)
+        it "contains the correct user" do
+          expect(api_response["data"]["id"]).to eq(reader.id)
+        end
       end
     end
   end

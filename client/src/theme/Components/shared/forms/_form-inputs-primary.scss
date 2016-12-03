@@ -182,18 +182,6 @@
     &:focus ~ .toggle-indicator {
       background-color: $accentPrimaryLight;
     }
-
-    &:checked ~ .toggle-indicator {
-      // For checkboxes
-      .manicon-check {
-        opacity: 1;
-      }
-
-      // For radio buttons
-      &::before {
-        opacity: 1;
-      }
-    }
   }
 
   .toggle-indicator {
@@ -259,6 +247,18 @@
     font-size: 16px;
     font-style: italic;
     line-height: 1.375;
+  }
+
+  .checked + .toggle-indicator {
+    // For checkboxes
+    .manicon-check {
+      opacity: 1;
+    }
+
+    // For radio buttons
+    &::before {
+      opacity: 1;
+    }
   }
 }
 

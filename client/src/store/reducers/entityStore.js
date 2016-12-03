@@ -63,7 +63,7 @@ function errorResponse(state, action) {
     [meta]: {
       error_desc: action.payload.heading,
       error_code: action.payload.id,
-      errors: action.payload.body,
+      errors: action.payload.body.errors,
       loaded: true
     }
   });

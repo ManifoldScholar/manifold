@@ -1,20 +1,25 @@
 import React, { Component, PropTypes } from 'react';
+import { Form } from 'components/backend';
+import sharedPropsValidation from './propTypes';
 
 export default class TextArea extends Component {
 
-  static displayName = "From.TextArea";
+  static displayName = "Form.TextArea";
 
   static propTypes = {
-    label: PropTypes.string,
-    placeholder: PropTypes.string,
-    value: PropTypes.string
+    ...sharedPropsValidation,
+    placeholder: PropTypes.string
   };
 
   render() {
     return (
       <div className="form-input">
         <label>{this.props.label}</label>
-        <textarea placeholder={this.props.placeholder} value={this.props.value} />
+        <Form.Connect.Set {...this.props} >
+          <textarea
+            placeholder={this.props.placeholder}
+          />
+        </Form.Connect.Set>
       </div>
     );
   }

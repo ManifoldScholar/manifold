@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { HigherOrder } from 'components/global';
 import { Layout as LayoutFrontend } from 'components/frontend';
@@ -7,10 +7,9 @@ import { commonActions } from 'actions/helpers';
 import { pagesAPI } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import get from 'lodash/get';
 const { request, requests } = entityStoreActions;
 
-class BackendContainer extends Component {
+class BackendContainer extends PureComponent {
 
   static fetchData(getState, dispatch) {
     if (!entityUtils.isLoaded(requests.allPages, getState())) {

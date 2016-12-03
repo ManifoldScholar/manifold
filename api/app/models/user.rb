@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   # Authority
   include Authority::UserAbilities
+  include Authority::Abilities
 
   # Associations
   has_many :annotations # TODO: refactor to use "creator_id"
@@ -71,6 +72,10 @@ class User < ActiveRecord::Base
 
   def favorite?(favoritable)
     favorites.where(favoritable_id: favoritable.id).count.positive?
+  end
+
+  def admin?
+    role == "admin"
   end
 
   # def favorite_projects

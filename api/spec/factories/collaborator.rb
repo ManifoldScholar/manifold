@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :collaborator do
     role Collaborator::ROLE_CREATOR
-    text
+    association :collaboratable, factory: :project
     maker
   end
 end

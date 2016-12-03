@@ -3,55 +3,33 @@ module Api
     # Pages controller
     class PagesController < ApplicationController
 
-      authorize_actions_for Page, except: [:index, :show]
-      before_action :set_page, only: [:show, :update, :destroy]
+      resourceful! Page, authorize_options: { except: [:index, :show] } do
+        Page.all
+      end
 
-      # GET /pages
       def index
-        @pages = Page.all
-        render json: @pages,
-               each_serializer: PagePartialSerializer
+        @pages = load_pages
+        render_multiple_resources(@pages, each_serializer: PagePartialSerializer)
       end
 
-      # GET /pages/1
       def show
-        render json: @page, include: %w(category creators contributors stylesheets)
+        @page = load_page
+        render_single_resource(@page)
       end
 
-      # POST /pages
       def create
-        @page = Page.new(page_params)
-        if @page.save
-          render json: @page, status: :created, location: [:api, :v1, @page]
-        else
-          render json: @page.errors, status: :unprocessable_entity
-        end
+        @page = authorize_and_create_project(page_params)
+        render_single_resource(@page)
       end
 
-      # PATCH/PUT /pages/1
       def update
-        if @page.update(page_params)
-          render json: @page
-        else
-          render json: @page.errors, status: :unprocessable_entity
-        end
+        @page = load_and_authorize_page
+        @page.update(page_params)
+        render_single_resource(@page)
       end
 
-      # DELETE /pages/1
       def destroy
         @page.destroy
-      end
-
-      private
-
-      # Use callbacks to share common setup or constraints between actions.
-      def set_page
-        @page = Page.friendly.find(params[:id])
-      end
-
-      # Only allow a trusted parameter "white list" through.
-      def page_params
-        params.require(:page).permit
       end
     end
   end

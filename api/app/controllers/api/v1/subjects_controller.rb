@@ -3,56 +3,38 @@ module Api
     # subjects controller
     class SubjectsController < ApplicationController
 
-      authorize_actions_for Subject, except: [:index, :show]
-      before_action :set_subject, only: [:show, :update, :destroy]
+      resourceful! Subject, authorize_options: { except: [:index, :show] } do
+        Subject.all
+      end
 
-      # GET /subjects
       def index
-        @subjects = Subject.all
-        render json: @subjects,
-               each_serializer: SubjectSerializer
+        @subjects = load_subjects
+        render_multiple_resources(
+          @subjects,
+          each_serializer: SubjectSerializer
+        )
       end
 
-      # GET /subject/1
       def show
-        render json: @subject
+        @subject = load_subject
+        render_single_resource(@subject)
       end
 
-      # POST /subjects
       def create
-        @subject = subject.new(subject_params)
-        if @subject.save
-          render json: @subject, status: :created, location: [:api, :v1, @subject]
-        else
-          render json: @subject.errors, status: :unprocessable_entity
-        end
+        @subject = authorize_and_create_subject(subject_params)
+        render_single_resource @subject
       end
 
-      # PATCH/PUT /subjects/1
       def update
-        if @subject.update(subject_params)
-          render json: @subject
-        else
-          render json: @subject.errors, status: :unprocessable_entity
-        end
+        @subject = load_and_authorize_subject
+        @subject.update(subject_params)
+        render_single_resource(@subject)
       end
 
-      # DELETE /subjects/1
       def destroy
         @subject.destroy
       end
 
-      private
-
-      # Use callbacks to share common setup or constraints between actions.
-      def set_subject
-        @subject = subject.find(params[:id])
-      end
-
-      # Only allow a trusted parameter "white list" through.
-      def subject_params
-        params.require(:subject).permit
-      end
     end
   end
 end

@@ -1,49 +1,69 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { Form } from 'components/global';
 import classNames from 'classnames';
+import brackets2dots from 'brackets2dots';
+import humps from 'humps';
 
-export default class Errorable extends Component {
+export default class Errorable extends PureComponent {
 
+  // If name = "*" this component will show all errors, rather than a specific
+  // field error.
   static propTypes = {
-    errors: PropTypes.object,
+    errors: PropTypes.array,
     className: PropTypes.string,
-    field: React.PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+    name: React.PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
 
   constructor() {
     super();
-    this.errorsArray = this.errorsArray.bind(this);
-    this.hasErrors = this.hasErrors.bind(this);
+    this.fieldErrors = this.fieldErrors.bind(this);
   }
 
-  errorsArray() {
-    if (Array.isArray(this.props.field)) {
-      let errors = [];
-      this.props.field.forEach((field) => {
-        if (this.props.errors.hasOwnProperty(field)) {
-          errors = errors.concat(this.props.errors[field]);
-        }
-      });
-      return errors;
+  allErrors() {
+    if (!this.props.errors) return [];
+    return this.props.errors;
+  }
+
+  fieldErrors() {
+    if (!this.props.errors) return [];
+    if (this.props.name === "*") return this.allErrors();
+    let names = this.props.name;
+    let errors = [];
+    if (!Array.isArray(names)) {
+      names = [this.props.name];
     }
-    return this.props.errors[this.props.field] || [];
+    names.forEach((name) => {
+      const pointer = this.pointerFor(name);
+      const pointerErrors = this.props.errors.filter((error) => {
+        return error.source.pointer === pointer;
+      });
+      errors = [...errors, ...pointerErrors];
+    });
+    return errors;
   }
 
-  hasErrors() {
-    const errors = this.errorsArray();
-    return errors && errors.length > 0;
+  pointerFor(name) {
+    const dotNotation = brackets2dots(name);
+    const jsonPointer = dotNotation.replace(".", "/");
+    return `/data/${jsonPointer}`;
   }
 
   render() {
+    const { className, children, errors, label } = this.props;
+    const fieldErrors = this.fieldErrors();
+    const hasErrors = fieldErrors.length > 0;
     const wrapperClass = classNames({
-      'form-error': this.hasErrors(),
-      [this.props.className]: this.props.className
+      'form-error': hasErrors,
+      [className]: className
     });
+
     return (
       <div className={wrapperClass} >
-        {this.props.children}
-        <Form.InputError errors={this.errorsArray()} />
+        {children}
+        {hasErrors ?
+          <Form.InputError errors={fieldErrors} />
+        : null}
       </div>
     );
   }

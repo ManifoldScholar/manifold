@@ -128,6 +128,7 @@ RSpec.describe Project, type: :model do
       @project_b.save
     end
 
+
     it "to only include featured" do
       results = Project.filtered({featured: true})
       expect(results.length).to be 1

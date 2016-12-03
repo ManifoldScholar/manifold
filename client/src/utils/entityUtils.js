@@ -1,6 +1,7 @@
 import get from 'lodash/get';
 import has from 'lodash/has';
 import setWith from 'lodash/setWith';
+import memoize from 'lodash/memoize';
 
 function hydrateEntity({ id, type }, entities, hydrationMap = {}) {
   const entityPath = `${type}.${id}`;
@@ -49,18 +50,37 @@ function hydrateRelationships(entity, entities, hydrationMap) {
   return relationships;
 }
 
-function selectCollection(response, entities) {
+const selectCollection = memoize((response, entities) => {
   if (!Array.isArray(response.collection)) return [];
   return response.collection.map((entity) => {
     return hydrateEntity(entity, entities);
   });
-}
+}, (response, entities) => {
+  // for collections, if the response object has changed in anyway, then we will go ahead
+  // and rehydrate the collection. See comment below for why this is more complicated for
+  // single models, which we can cache longer.
+  return response;
+});
 
-function selectEntity(response, entities) {
+const selectEntity = memoize((response, entities) => {
   if (!has(response.entity, 'id')) return null;
   if (!has(response.entity, 'type')) return null;
   return hydrateEntity(response.entity, entities);
-}
+}, (response, entities) => {
+  // Let's discuss what's happening here. This second function is LoDash's resolver
+  // function for memoize. The resolver function returns a value, which is used to
+  // determine whether to refresh the memoized value. If the resolver returns a new value
+  // since the last time it was called, it will reselect the entity from the store. We
+  // don't want to go selecting a new entity every single time the entity store changes,
+  // which is why we memoize above. However, if the base entity hasn't changed, we don't
+  // don't want to re-select its associations, etc, which is why check if the main entity
+  // is unchanged in the resolver.
+  if (!has(response.entity, 'id')) return response;
+  if (!has(response.entity, 'type')) return response;
+  const entityPath = `${response.entity.type}.${response.entity.id}`;
+  const entity = get(entities, entityPath);
+  return entity;
+});
 
 export function isLoaded(request, state) {
   const loaded = get(state, `entityStore.responses.${request}.loaded`);

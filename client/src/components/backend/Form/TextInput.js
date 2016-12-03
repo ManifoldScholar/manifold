@@ -1,21 +1,38 @@
 import React, { Component, PropTypes } from 'react';
+import { Form } from 'components/backend';
+import { Form as GlobalForm } from 'components/global';
+import sharedPropsValidation from './propTypes';
 
 export default class TextInput extends Component {
 
-  static displayName = "From.TextInput";
+  static displayName = "Form.TextInput";
 
   static propTypes = {
-    label: PropTypes.string,
-    placeholder: PropTypes.string,
-    value: PropTypes.string
+    ...sharedPropsValidation,
+    placeholder: PropTypes.string
   };
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    const { label, errors, name, placeholder } = this.props;
     return (
-      <div className="form-input">
-        <label>{this.props.label}</label>
-        <input type="text" placeholder={this.props.placeholder} value={this.props.value} />
-      </div>
+      <GlobalForm.Errorable
+        className="form-input"
+        name={name}
+        errors={errors}
+        label={label}
+      >
+        <label>{label}</label>
+        <Form.Connect.Set {...this.props} >
+          <input
+            type="text"
+            placeholder={placeholder}
+          />
+        </Form.Connect.Set>
+      </GlobalForm.Errorable>
     );
   }
 }

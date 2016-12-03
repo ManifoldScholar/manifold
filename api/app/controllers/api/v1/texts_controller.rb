@@ -3,57 +3,43 @@ module Api
     # Texts controller
     class TextsController < ApplicationController
 
-      authorize_actions_for Text, except: [:index, :show]
-      before_action :set_text, only: [:show, :update, :destroy]
+      INCLUDES = %w(project).freeze
+
+      resourceful! Text, authorize_options: { except: [:index, :show] } do
+        Text.all
+      end
 
       # GET /texts
       def index
-        @texts = Text.all
-        render json: @texts,
-               include: %w(project),
-               each_serializer: TextPartialSerializer
+        @texts = load_texts
+        render_multiple_resources(
+          @texts,
+          include: INCLUDES,
+          each_serializer: TextPartialSerializer
+        )
       end
 
       # GET /texts/1
       def show
-        render json: @text, include: %w(category creators contributors stylesheets)
+        @text = load_text
+        render_single_resource(@text, include: INCLUDES)
       end
 
-      # POST /texts
       def create
-        @text = Text.new(text_params)
-        if @text.save
-          render json: @text, status: :created, location: [:api, :v1, @text]
-        else
-          render json: @text.errors, status: :unprocessable_entity
-        end
+        @text = authorize_and_create_text(text_params)
+        render_single_resource @text
       end
 
-      # PATCH/PUT /texts/1
       def update
-        if @text.update(text_params)
-          render json: @text
-        else
-          render json: @text.errors, status: :unprocessable_entity
-        end
+        @text = load_and_authorize_text
+        @text.update(text_params)
+        render_single_resource(@text, include: INCLUDES)
       end
 
-      # DELETE /texts/1
       def destroy
-        @text.destroy
+        @project.destroy
       end
 
-      private
-
-      # Use callbacks to share common setup or constraints between actions.
-      def set_text
-        @text = Text.find(params[:id])
-      end
-
-      # Only allow a trusted parameter "white list" through.
-      def text_params
-        params.require(:text).permit(:unique_identifier)
-      end
     end
   end
 end

@@ -1,11 +1,13 @@
 require "sidekiq/web"
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
   namespace :api do
     namespace :v1 do
       resources :pages
       resources :subjects
+      resources :makers
       resources :resources
       resources :texts
 
@@ -26,12 +28,18 @@ Rails.application.routes.draw do
         end
       end
 
+      # TODO: Implement
+      resources :collaborators, only: [:show]
+      resources :collection_resources, only: [:show]
+      # END TODO
+
       resources :projects do
         scope module: :projects do
           namespace :relationships do
             resources :uncollected_resources, only: [:index]
             resources :resources, only: [:index]
             resources :events, only: [:index]
+            resources :collaborators
           end
         end
       end
@@ -58,3 +66,4 @@ Rails.application.routes.draw do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

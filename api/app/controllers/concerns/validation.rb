@@ -4,39 +4,54 @@ module Validation
 
   def user_params
     params.require(:data)
-    avatar = { avatar: [:data, :filename, :content_type] }
     attributes = [:first_name, :last_name, :nickname, :name, :email, :password,
-                  :password_confirmation, :remove_avatar, avatar]
-    param_config = build_params_structure(attributes: attributes)
+                  :password_confirmation, :remove_avatar, attachment(:avatar)]
+    param_config = structure_params(attributes: attributes)
+    params.permit(param_config)
+  end
+
+  def project_params
+    params.require(:data)
+    attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,
+                  :purchase_price_money, :purchase_price_currency, :twitter_id,
+                  :instagram_id]
+    relationships = [:collaborators, :creators, :contributors]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def collaborator_params
+    params.require(:data)
+    attributes = [:role]
+    relationships = [:maker, :collaboratable]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
 
   def annotation_params
     params.require(:data)
-    attributes = [
-      :start_node, :end_node, :start_char, :end_char, :section_id, :format, :subject
-    ]
-    param_config = build_params_structure(attributes: attributes)
+    attributes = [:start_node, :end_node, :start_char, :end_char, :section_id, :format,
+                  :subject]
+    param_config = structure_params(attributes: attributes)
     params.permit(param_config)
   end
 
   def favorite_params
     params.require(:data).require(:relationships).require(:favoritable).require(:data)
-    param_config =
-      build_params_structure(relationships: [favoritable: favoritable_params])
+    attributes = []
+    relationships = [:favoritable]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def maker_params
+    attributes = [:first_name, :last_name]
+    param_config = structure_params(attributes: attributes)
     params.permit(param_config)
   end
 
   def favoritable_params
-    build_params_structure
-  end
-
-  def polymorphic_relationship_from(valid_params, entity)
-    {
-      "#{entity}_type" =>
-        entity_to_class(valid_params["data"]["relationships"][entity]["data"]["type"]),
-      "#{entity}_id" => valid_params["data"]["relationships"][entity]["data"]["id"]
-    }
+    structure_params
   end
 
   def attributes_from(valid_params)
@@ -48,41 +63,20 @@ module Validation
 
   private
 
-  def class_to_entity(klass)
-    klass.underscore.pluralize
+  def attachment(name)
+    { name => [:data, :filename, :content_type] }
   end
 
-  def entity_to_class(entity)
-    entity.camelize.singularize
-  end
-
-  def build_data_structure(attributes = nil)
-    out = [:type, :id]
-    out << { attributes: attributes } unless attributes.nil?
-    out
-  end
-
-  def build_relationships_structure(relationships = nil)
-    return [] if relationships.nil?
-    relationships.each do |relationship|
-      relationship.each_pair do |relationship_name, relationship_hash|
-        if relationship_hash.is_a?(Hash)
-          relationship_hash.each_pair do |key, value|
-            arrayified || [] << { key => value }
-          end
-          built || [] << { relationship_name => arrayified }
-        else
-          built || [] << { relationship_name => relationship_hash }
-        end
-      end
-    end
-    built
-  end
-
-  def build_params_structure(attributes: nil, relationships: nil)
+  def structure_params(attributes: nil, relationships: nil)
     data = [:type, :id]
     data << { attributes: attributes } unless attributes.nil?
-    data << { relationships: relationships } unless relationships.nil?
+    unless relationships.nil?
+      relationships_config = {}
+      relationships.each do |relationship|
+        relationships_config[relationship] = { data: [:type, :id] }
+      end
+      data << { relationships: relationships_config }
+    end
     {
       data: data
     }
