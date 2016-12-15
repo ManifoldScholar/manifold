@@ -65,6 +65,7 @@ class FormContainer extends PureComponent {
   }
 
   setRouterLeaveHook(props) {
+    if (!props.route) return;
     props.router.setRouteLeaveHook(props.route, this.routerWillLeave);
   }
 

@@ -5,7 +5,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { HigherOrder } from 'components/global';
 import { Provider } from 'react-redux';
 import getRoutes from 'routes';
-// import { authActions } from 'actions';
 import { currentUserActions } from 'actions';
 
 

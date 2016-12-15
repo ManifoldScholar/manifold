@@ -10,10 +10,13 @@ export default class Makers extends PureComponent {
 
   static propTypes = {
     label: PropTypes.string.isRequired,
-    entities: PropTypes.array.isRequired,
-    onChange: PropTypes.func.isRequired,
     onNew: PropTypes.func.isRequired,
-    entityLabelAttribute: PropTypes.string.isRequired
+    onChange: PropTypes.func.isRequired,
+    optionsFetch: PropTypes.func.isRequired,
+    entities: PropTypes.array.isRequired,
+    entityLabelAttribute: PropTypes.string.isRequired,
+    entityAvatarAttribute: PropTypes.string,
+    errors: PropTypes.array
   };
 
   constructor() {

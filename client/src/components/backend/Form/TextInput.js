@@ -30,6 +30,8 @@ export default class TextInput extends Component {
           <input
             type="text"
             placeholder={placeholder}
+            onChange={this.props.onChange}
+            value={this.props.value}
           />
         </Form.Connect.Set>
       </GlobalForm.Errorable>

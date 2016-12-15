@@ -1,0 +1,99 @@
+exports[`Form.HasMany component renders correctly 1`] = `
+<div
+  className="form-input">
+  <label>
+    A form label
+  </label>
+  <nav
+    className="maker-utility-list">
+    <ul>
+      <li>
+        <div
+          className="maker">
+          <h4
+            className="maker-name">
+            John
+          </h4>
+        </div>
+        <div
+          className="utility">
+          <button
+            className="manicon manicon-arrow-down"
+            onClick={[Function]}>
+            <span
+              className="screen-reader-text">
+              Click to move 
+              John
+               up in the order of makers.
+            </span>
+          </button>
+          <button
+            className="manicon manicon-x"
+            onClick={[Function]}>
+            <span
+              className="screen-reader-text">
+              Click to remove 
+              John
+              from the makers list.
+            </span>
+          </button>
+        </div>
+      </li>
+      <li>
+        <div
+          className="maker">
+          <h4
+            className="maker-name">
+            Jane
+          </h4>
+        </div>
+        <div
+          className="utility">
+          <button
+            className="manicon manicon-arrow-up"
+            onClick={[Function]}>
+            <span
+              className="screen-reader-text">
+              Click to move 
+              Jane
+               up in the order of makers.
+            </span>
+          </button>
+          <button
+            className="manicon manicon-x"
+            onClick={[Function]}>
+            <span
+              className="screen-reader-text">
+              Click to remove 
+              Jane
+              from the makers list.
+            </span>
+          </button>
+        </div>
+      </li>
+    </ul>
+    <div
+      className="maker-add">
+      <button
+        className="manicon manicon-plus" />
+      <input
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Add an Author"
+        type="text"
+        value="" />
+      <button
+        className="new"
+        onClick={[Function]}>
+        Create New
+      </button>
+      <nav
+        className="autofill-list">
+        <ul />
+      </nav>
+    </div>
+  </nav>
+</div>
+`;

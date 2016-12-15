@@ -11,7 +11,7 @@ export default class Set extends PureComponent {
   static displayName = "Form.Connect.Set";
 
   static propTypes = {
-    dirtyModel: PropTypes.object.isRequired,
+    dirtyModel: PropTypes.object,
     name: PropTypes.string.isRequired,
     actions: PropTypes.shape({
       set: PropTypes.func.isRequired
@@ -20,7 +20,6 @@ export default class Set extends PureComponent {
   };
 
   static defaultProps = {
-    dirtyModel: {},
     actions: { set: () => {} }
   }
 
@@ -81,7 +80,6 @@ export default class Set extends PureComponent {
       value: this.value(),
       onChange: this.handleChange
     };
-
     if (this.hasFixedValue()) {
       childProps.checked = this.isChecked(this.value());
     }
@@ -93,9 +91,15 @@ export default class Set extends PureComponent {
     const classes = classNames({
       checked: this.hasFixedValue() && this.isChecked(this.value())
     });
+    let children;
+    if (this.props.dirtyModel) {
+      children = React.cloneElement(this.props.children, this.childProps());
+    } else {
+      children = this.props.children;
+    }
     return (
       <div className={classes} ref={(wrapper) => { this.wrapper = wrapper; }}>
-        {React.cloneElement(this.props.children, this.childProps())}
+        {children}
       </div>
     );
   }
