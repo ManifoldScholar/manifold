@@ -3,6 +3,9 @@ import sharedPropsValidation from './propTypes';
 import { Form } from 'components/backend';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask.js';
+import fill from 'lodash/fill';
+import startsWith from 'lodash/startsWith';
+import replace from 'lodash/replace';
 
 export default class MaskedTextInput extends Component {
 
@@ -17,15 +20,33 @@ export default class MaskedTextInput extends Component {
     super(props);
   }
 
+  currencyMask() {
+    return createNumberMask({
+      prefix: '$',
+      allowDecimal: true
+    });
+  }
+
+  hashTagMask() {
+    return (raw) => {
+      const wordChar = /^[A-Za-z0-9\-]$/;
+      const notWordChar = /[^A-Za-z0-9\-]/g;
+      const adjusted = raw.replace(notWordChar, '').replace('_', '');
+      const length = adjusted.length;
+      let mask = Array(length);
+      mask.unshift("#");
+      fill(mask, wordChar, 1);
+      if (mask.length === 1) mask = [/#/];
+      return mask;
+    };
+  }
+
   mask() {
     if (this.props.mask === "currency") {
-      return createNumberMask({
-        prefix: '$',
-        allowDecimal: true
-      });
+      return this.currencyMask();
     }
     if (this.props.mask === "hashtag") {
-      return ['#', /^\w+$/, /^\w+$/, /^\w+$/, /^\w+$/, /^\w+$/, /^\w+$/, /^\w+$/];
+      return this.hashTagMask();
     }
     return this.props.mask;
   }
