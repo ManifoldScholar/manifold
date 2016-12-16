@@ -54,6 +54,22 @@ module Validation
     structure_params
   end
 
+  def collection_filter_params
+    params.permit(filter: [])
+  end
+
+  def resource_filter_params
+    params.permit(filter: [])
+  end
+
+  def project_filter_params
+    params.permit(filter: [:featured, :subject])
+  end
+
+  def maker_filter_params
+    params.permit(filter: [:name])
+  end
+
   def attributes_from(valid_params)
     attr = valid_params["data"]["attributes"]
     attr[:id] = valid_params["data"]["id"] if

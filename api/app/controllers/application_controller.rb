@@ -30,22 +30,6 @@ class ApplicationController < ActionController::API
     }
   end
 
-  def collection_filter_params
-    params.permit(filter: [])
-  end
-
-  def resource_filter_params
-    params.permit(filter: [])
-  end
-
-  def project_filter_params
-    params.permit(filter: [:featured, :subject])
-  end
-
-  def maker_filter_params
-    params.permit(filter: [:name])
-  end
-
   def respond_with_errors(resource)
     render json: resource.errors, status: :unprocessable_entity
   end
