@@ -39,4 +39,8 @@ class TextTitle < ActiveRecord::Base
   validates :value, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 
+  def to_s
+    value
+  end
+
 end

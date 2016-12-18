@@ -30,4 +30,9 @@ class TextSection < ActiveRecord::Base
   def next_section
     text.section_after(position)
   end
+
+  def to_s
+    name
+  end
+
 end

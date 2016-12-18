@@ -15,4 +15,8 @@ class Page < ApplicationRecord
   # Misc
   friendly_id :nav_title, use: :slugged
 
+  def to_s
+    title
+  end
+
 end

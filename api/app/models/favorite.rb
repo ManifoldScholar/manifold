@@ -19,4 +19,9 @@ class Favorite < ActiveRecord::Base
     return favoritable.project if favoritable.respond_to?(:project)
     nil
   end
+
+  def to_s
+    "favorite #{id}"
+  end
+
 end

@@ -38,4 +38,9 @@ class Maker < ActiveRecord::Base
   def full_name
     [first_name, middle_name, last_name].reject(&:blank?).join(" ")
   end
+
+  def to_s
+    full_name
+  end
+
 end

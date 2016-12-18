@@ -13,4 +13,8 @@ class Collaborator < ActiveRecord::Base
   belongs_to :collaboratable, polymorphic: true
   belongs_to :maker
 
+  def to_s
+    "#{role} #{maker}"
+  end
+
 end

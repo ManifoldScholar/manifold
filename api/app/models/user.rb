@@ -78,6 +78,10 @@ class User < ActiveRecord::Base
     role == "admin"
   end
 
+  def to_s
+    name
+  end
+
   # def favorite_projects
   #   favorites.only_projects.includes(:favoritable).map(&:favoritable)
   # end

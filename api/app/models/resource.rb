@@ -56,4 +56,8 @@ class Resource < ActiveRecord::Base
     res
   end
 
+  def to_s
+    title
+  end
+
 end

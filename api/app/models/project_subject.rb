@@ -8,4 +8,8 @@ class ProjectSubject < ActiveRecord::Base
   belongs_to :project
   belongs_to :subject
 
+  def to_s
+    subject.title
+  end
+
 end

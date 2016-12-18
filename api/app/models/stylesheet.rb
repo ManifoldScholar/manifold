@@ -8,4 +8,8 @@ class Stylesheet < ActiveRecord::Base
   belongs_to :text
   belongs_to :ingestion_source, optional: true
 
+  def to_s
+    "stylesheet #{id}"
+  end
+
 end

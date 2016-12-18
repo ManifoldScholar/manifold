@@ -8,4 +8,8 @@ class TextSubject < ActiveRecord::Base
   belongs_to :text
   belongs_to :subject
 
+  def to_s
+    subject.title
+  end
+
 end

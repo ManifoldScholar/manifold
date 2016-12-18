@@ -19,4 +19,8 @@ class CollectionResource < ActiveRecord::Base
     errors.add(:resource, "can't belong to a different project")
   end
 
+  def to_s
+    "#{collection} #{resource}"
+  end
+
 end

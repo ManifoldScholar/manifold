@@ -25,4 +25,8 @@ class Annotation < ApplicationRecord
   delegate :text, to: :text_section
   delegate :project, to: :text
 
+  def to_s
+    "annotation #{id}"
+  end
+
 end

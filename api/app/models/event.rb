@@ -47,4 +47,9 @@ class Event < ApplicationRecord
       subject: project
     ).nil?
   end
+
+  def to_s
+    "event #{id}"
+  end
+
 end

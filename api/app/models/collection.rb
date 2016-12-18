@@ -35,4 +35,8 @@ class Collection < ActiveRecord::Base
       .to_a.pluck(:kind)
   end
 
+  def to_s
+    title
+  end
+
 end

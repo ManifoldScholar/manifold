@@ -128,6 +128,10 @@ class Project < ActiveRecord::Base
     ENV["API_URL"] + hero.url(:background)
   end
 
+  def to_s
+    title
+  end
+
   private
 
   def trigger_creation_event

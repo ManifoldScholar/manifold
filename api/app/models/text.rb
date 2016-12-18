@@ -110,6 +110,10 @@ class Text < ActiveRecord::Base
     project && project.published_text == self
   end
 
+  def to_s
+    title
+  end
+
   private
 
   def trigger_text_added_event

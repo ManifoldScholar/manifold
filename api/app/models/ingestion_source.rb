@@ -32,4 +32,8 @@ class IngestionSource < ActiveRecord::Base
   validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
   validates_attachment_file_name :attachment, matches: validation[:allowed_ext]
 
+  def to_s
+    "ingestion source #{id}"
+  end
+
 end

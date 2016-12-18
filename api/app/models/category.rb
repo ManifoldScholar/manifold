@@ -21,4 +21,8 @@ class Category < ActiveRecord::Base
             inclusion: { in: [ROLE_TEXT, ROLE_RESOURCE],
                          message: "%{value} is not a valid category role" }
 
+  def to_s
+    title
+  end
+
 end
