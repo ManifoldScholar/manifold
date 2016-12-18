@@ -74,7 +74,6 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
         dispatch(buildResponseAction(response, meta, true));
       });
     });
-
     return { meta: action.meta, promise: requestPromise };
   };
 }

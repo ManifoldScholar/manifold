@@ -36,6 +36,7 @@ export default class Errorable extends PureComponent {
     names.forEach((name) => {
       const pointer = this.pointerFor(name);
       const pointerErrors = this.props.errors.filter((error) => {
+        if(!error.hasOwnProperty('source')) return false
         return error.source.pointer === pointer;
       });
       errors = [...errors, ...pointerErrors];

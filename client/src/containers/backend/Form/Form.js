@@ -29,6 +29,7 @@ class FormContainer extends PureComponent {
     return {
       routing: state.routing,
       session: get(state.entityEditor.sessions, ownProps.name),
+      response: get(state.entityStore.responses, `editor-${ownProps.name}`),
       errors: get(state.entityStore.responses, `editor-${ownProps.name}.errors`)
     };
   }

@@ -18,25 +18,6 @@ export default class ProjectPanelGeneral extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      project: props.project
-    };
-    this.updateAttribute = this.updateAttribute.bind(this);
-  }
-
-  updateAttribute(path) {
-    return (event) => {
-      const value = event.target.value;
-      const updatePath = set({}, path, value);
-      const newState = update(this.state, updatePath);
-      this.setState(newState);
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.project !== this.props.project) {
-      this.setState({ project: nextProps.project });
-    }
   }
 
   render() {

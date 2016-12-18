@@ -61,9 +61,9 @@ function errorResponse(state, action) {
   const meta = action.meta;
   const responses = Object.assign({}, state.responses, {
     [meta]: {
-      error_desc: action.payload.heading,
-      error_code: action.payload.id,
-      errors: action.payload.body.errors,
+      status: action.payload.status,
+      statusText: action.payload.statusText,
+      errors: get(action.payload, 'body.errors'),
       loaded: true
     }
   });

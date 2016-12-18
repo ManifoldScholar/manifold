@@ -76,8 +76,6 @@ export default class App extends Component {
   }
 
   render() {
-    const state = this.store.getState();
-
     return (
       <Provider store={this.store} key="provider">
         <Manifold>

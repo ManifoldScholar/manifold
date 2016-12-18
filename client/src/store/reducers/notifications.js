@@ -1,5 +1,6 @@
 const initialState = {
-  notifications: []
+  notifications: [],
+  fatalError: null
 };
 
 const addNotification = (state, action) => {
@@ -11,6 +12,14 @@ const addNotification = (state, action) => {
   }
   return Object.assign({}, state, state.notifications.unshift(action.payload));
 };
+
+const setFatalError = (state, action) => {
+  return Object.assign({}, state, { fatalError: action.payload });
+}
+
+const clearFatalError = (state, action) => {
+  return Object.assign({}, state, { fatalError: null });
+}
 
 const removeNotification = (state, action) => {
   let found = false;
@@ -37,9 +46,11 @@ const handleErrorAction = (state, action) => {
 };
 
 const notificationReducer = (state = initialState, action) => {
-  // if (action.error) {
-  //   return handleErrorAction(state, action);
-  // }
+
+  if (action.type.startsWith("API_REQUEST")) {
+    return clearFatalError(state, action);
+  }
+
   switch (action.type) {
     case 'ADD_NOTIFICATION':
       return addNotification(state, action);
@@ -47,6 +58,8 @@ const notificationReducer = (state = initialState, action) => {
       return removeNotification(state, action);
     case 'REMOVE_ALL_NOTIFICATIONS':
       return removeAllNotifications(state, action);
+    case 'FATAL_ERROR_NOTIFICATION':
+      return setFatalError(state, action);
     default:
       return state;
   }

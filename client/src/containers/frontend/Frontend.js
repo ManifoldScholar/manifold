@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { HigherOrder } from 'components/global';
+import { HigherOrder, FatalError } from 'components/global';
 import { Layout } from 'components/frontend';
 import { commonActions } from 'actions/helpers';
 import { pagesAPI, subjectsAPI } from 'api';
@@ -69,6 +69,8 @@ class FrontendContainer extends Component {
   }
 
   render() {
+    const fatalError = this.props.notifications.fatalError;
+
     return (
       <HigherOrder.BodyClass className={'browse'}>
         <div>
@@ -83,7 +85,13 @@ class FrontendContainer extends Component {
           </HigherOrder.ScrollAware>
           <Layout.MobileNav location={this.props.location} />
           <main ref="mainContainer">
-            {this.props.children}
+            { (fatalError) ?
+              <div className="global-container">
+                <FatalError error={fatalError} />
+              </div>
+              :
+              this.props.children
+            }
           </main>
           <Layout.Footer
             pages={this.props.pages}

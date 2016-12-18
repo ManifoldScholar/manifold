@@ -7,8 +7,8 @@ export const addNotification = createAction('ADD_NOTIFICATION', subject => {
   if (!notification.id) {
     notification.id = uuid.v1();
   }
-
   return notification;
 });
 export const removeNotification = createAction('REMOVE_NOTIFICATION', subject => subject);
 export const removeAllNotifications = createAction('REMOVE_ALL_NOTIFICATIONS');
+export const fatalError = createAction('FATAL_ERROR_NOTIFICATION', error => error);
