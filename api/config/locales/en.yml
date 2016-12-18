@@ -20,3 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  controllers:
+    errors:
+      forbidden:
+        class:
+          title: "%{action} failed"
+          detail: "You are not authorized to %{action} %{resource}."
+        instance:
+          title: "%{action} failed"
+          detail: "You are not authorized to %{action} %{resource}."

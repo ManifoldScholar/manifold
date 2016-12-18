@@ -38,6 +38,41 @@ class ApplicationController < ActionController::API
     render json: resource
   end
 
+  def build_api_error(title: nil, detail: nil, status: nil)
+    [{
+      id: "API_ERROR",
+      status: status,
+      title: title,
+      detail: detail
+    }]
+  end
+
+  def authority_forbidden_resource_class(error)
+    vars = { resource: error.resource.to_s.downcase.pluralize, action: error.action }
+    options = {
+      status: 403,
+      title: I18n.t("controllers.errors.forbidden.class.title", vars).titlecase,
+      detail: I18n.t("controllers.errors.forbidden.class.detail", vars)
+    }
+    render json: { errors: build_api_error(options) }, status: 403
+  end
+
+  def authority_forbidden_resource_instance(error)
+    vars = { resource: error.resource.to_s, action: error.action }
+    options = {
+      status: 403,
+      title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
+      detail: I18n.t("controllers.errors.forbidden.instance.detail", vars)
+    }
+    render json: { errors: build_api_error(options) }, status: 403
+  end
+
+  def authority_forbidden(error)
+    Authority.logger.warn(error.message)
+    return authority_forbidden_resource_class(error) if error.resource.is_a?(Class)
+    authority_forbidden_resource_instance(error)
+  end
+
   class << self
     # Define the calling controller as a resource, adding several methods
     # to simplify rendering and accepting JSONAPI resources.
