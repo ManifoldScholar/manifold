@@ -22,7 +22,8 @@ module Api
       # GET /texts/1
       def show
         @text = load_text
-        render_single_resource(@text, include: INCLUDES)
+        includes = %w(category creators contributors stylesheets)
+        render_single_resource(@text, include: includes)
       end
 
       def create
