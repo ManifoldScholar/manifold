@@ -22,6 +22,9 @@
 en:
   controllers:
     errors:
+      not_found:
+        title: "Resource not found"
+        detail: "Manifold attempted to access an API endpoint that does not exist."
       forbidden:
         class:
           title: "%{action} failed"

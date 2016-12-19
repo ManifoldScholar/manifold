@@ -63,6 +63,8 @@ Rails.application.routes.draw do
           resources :favorite_projects, only: [:index]
         end
       end
+
+      get "*path", to: "errors#error_404", via: :all
     end
   end
 end

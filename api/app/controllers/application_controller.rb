@@ -67,6 +67,15 @@ class ApplicationController < ActionController::API
     render json: { errors: build_api_error(options) }, status: 403
   end
 
+  def resource_not_found
+    options = {
+      status: 404,
+      title: I18n.t("controllers.errors.not_found.title").titlecase,
+      detail: I18n.t("controllers.errors.not_found.detail")
+    }
+    render json: { errors: build_api_error(options) }, status: :not_found
+  end
+
   def authority_forbidden(error)
     Authority.logger.warn(error.message)
     return authority_forbidden_resource_class(error) if error.resource.is_a?(Class)
