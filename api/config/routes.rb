@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
       resources :tokens, only: [:create]
 
-      resources :users, only: [:create, :show] do
+      resources :users do
         collection do
           get "whoami"
         end

@@ -44,6 +44,12 @@ class User < ActiveRecord::Base
   has_secure_password
 
   # Methods
+  def self.filtered(filters)
+    users = User.all
+    return users unless filters
+    users
+  end
+
   def ensure_nickname
     self.nickname = first_name if nickname.blank?
   end

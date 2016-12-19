@@ -20,6 +20,25 @@ RSpec.describe "Users API", type: :request do
     json_payload(attributes: attributes)
   }
 
+  describe "sends a list of users" do
+    let(:path) { api_v1_users_path }
+    context "when the user is an reader" do
+      before(:each) { get path, headers: reader_headers }
+      describe "the response" do
+        it "has a 403 status code" do
+          expect(@response).to have_http_status(403)
+        end
+      end
+    end
+
+    context "when the user is an admin" do
+      before(:each) { get path, headers: admin_headers}
+      it "has a 200 status code" do
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
+
   describe "creates a user" do
     let(:path) { api_v1_users_path }
     let(:api_response) { JSON.parse(response.body) }

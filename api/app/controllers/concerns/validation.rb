@@ -62,6 +62,10 @@ module Validation
     params.permit(filter: [])
   end
 
+  def user_filter_params
+    params.permit(filter: [])
+  end
+
   def project_filter_params
     params.permit(filter: [:featured, :subject])
   end

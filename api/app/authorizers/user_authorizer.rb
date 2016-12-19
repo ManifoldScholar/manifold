@@ -4,16 +4,16 @@ class UserAuthorizer < ApplicationAuthorizer
     true
   end
 
-  def self.updatable_by?(_user)
-    true
+  def self.updatable_by?(user)
+    user.admin?
   end
 
-  def self.readable_by?(_user)
-    true
+  def self.readable_by?(user)
+    user.admin?
   end
 
-  def self.deletable_by?(_user)
-    true
+  def self.deletable_by?(user)
+    user.admin?
   end
 
   def creatable_by?(user)
