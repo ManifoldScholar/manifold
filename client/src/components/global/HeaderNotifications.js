@@ -42,15 +42,15 @@ export default class HeaderNotifications extends Component {
     if (this.refs.notificationList) {
       const listHeight = this.refs.notificationList.offsetHeight;
       // This causes problems for HMR. We'll need to revisit.
-      // setTimeout(() => {
-      //   if (!this.state.updating) {
-      //     this.setState({
-      //       updating: true
-      //     });
-      //   }
-      //   this.refs.notificationList.setAttribute('style', 'transform: translate3d(0, 0px, 0);' +
-      //       'height: auto;');
-      // }, 200);
+      setTimeout(() => {
+        if (!this.state.updating) {
+          this.setState({
+            updating: true
+          });
+        }
+        this.refs.notificationList.setAttribute('style', 'transform: translate3d(0, 0px, 0);' +
+            'height: auto;');
+      }, 200);
       this.refs.notificationList.setAttribute('style',
           'transform: ' + 'translate3d(0, ' + (this.state.height - listHeight) + 'px, 0);' +
           'height:' + this.state.height + 'px;');
@@ -118,8 +118,8 @@ export default class HeaderNotifications extends Component {
     return (
       <ReactCSSTransitionGroup
         transitionName="notification"
-        transitionEnterTimeout={4000}
-        transitionLeaveTimeout={2000}
+        transitionEnterTimeout={250}
+        transitionLeaveTimeout={250}
       >
         {notificationList}
       </ReactCSSTransitionGroup>

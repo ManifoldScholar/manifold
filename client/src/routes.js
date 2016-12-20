@@ -63,8 +63,8 @@ export default () => {
         <Route component={Backend.Settings.Wrapper} path="settings" >
           <IndexRoute component={Backend.Settings.General} />
         </Route>
+        <Route component={NotFound} path="*" />
       </Route>
-
       <Route component={Frontend} path="*">
         <IndexRoute component={NotFound} />
       </Route>
