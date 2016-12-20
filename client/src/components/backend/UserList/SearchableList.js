@@ -9,13 +9,27 @@ export default class SearchableList extends Component {
   static propTypes = {
     users: PropTypes.array,
     pagination: PropTypes.object,
-    paginationClickHandler: PropTypes.func
+    paginationClickHandler: PropTypes.func,
+    currentUserId: PropTypes.string
   };
 
   constructor() {
     super();
     this.renderUserList = this.renderUserList.bind(this);
     this.renderUser = this.renderUser.bind(this);
+    this.isCurrentUser = this.isCurrentUser.bind(this);
+  }
+
+  isCurrentUser(id) {
+    let output = '';
+    if (this.props.currentUserId === id) {
+      output = (
+        <span className="specifier">
+          {'You'}
+        </span>
+      );
+    }
+    return output;
   }
 
   renderUser(user) {
@@ -23,12 +37,10 @@ export default class SearchableList extends Component {
 
     return (
       <li key={user.id}>
-        <Link className="maker" to={`/backend/users/${user.id}`}>
-          <figure>
+        <Link to={`/backend/users/${user.id}`}>
+          <figure className="avatar">
             {attr.avatarUrl ?
-              <img
-                src={attr.avatarUrl}
-              />
+              <div className="image" style={ { backgroundImage: `url(${attr.avatarUrl})` } }/>
               :
               <div className="no-image">
                 <i className="manicon manicon-person"></i>
@@ -36,11 +48,12 @@ export default class SearchableList extends Component {
             }
           </figure>
           <div className="meta">
-            <h3 className="project-title">
+            <h3 className="name large">
               {attr.firstName} {attr.lastName}
             </h3>
           </div>
           <span className="label">
+            {this.isCurrentUser(user.id)}
             {attr.role}
           </span>
         </Link>
@@ -59,13 +72,11 @@ export default class SearchableList extends Component {
             singularUnit="user"
             pluralUnit="users"
           />
-          <nav className="maker-utility-list">
-            <ul>
-              {users.map((user) => {
-                return this.renderUser(user);
-              })}
-            </ul>
-          </nav>
+          <ul>
+            {users.map((user) => {
+              return this.renderUser(user);
+            })}
+          </ul>
         </div>
       );
     }
@@ -87,7 +98,7 @@ export default class SearchableList extends Component {
           <button className="button-bare-primary">{'More Search Options'}</button>
           <button className="button-bare-primary reset">{'Reset Search'}</button>
         </form>
-        <nav className="projects-vertical-primary">
+        <nav className="vertical-list-primary">
           {this.renderUserList()}
         </nav>
         <Utility.Pagination

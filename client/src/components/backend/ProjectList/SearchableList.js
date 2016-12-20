@@ -23,7 +23,7 @@ export default class SearchableList extends Component {
     let output = null;
     if (makers && makers.length > 0) {
       output = (
-        <div className="project-makers">
+        <div className="relations-list">
           {makers.map((maker, i) => {
             let nameList = maker.attributes.fullName;
             if (i > 0) nameList = ', ' + nameList;
@@ -42,11 +42,11 @@ export default class SearchableList extends Component {
     return (
       <li key={project.id}>
         <Link to={`/backend/project/${project.id}`}>
-          <figure>
+          <figure className="cover">
             {attr.coverUrl ? (<img src={attr.coverUrl} />) : <globalProject.Placeholder/>}
           </figure>
           <div className="meta">
-            <h3 className="project-title">
+            <h3 className="name">
               {attr.title}
                 <span className="subtitle">
                   {attr.subtitle}
@@ -100,7 +100,7 @@ export default class SearchableList extends Component {
           <button className="button-bare-primary">{'More Search Options'}</button>
           <button className="button-bare-primary reset">{'Reset Search'}</button>
         </form>
-        <nav className="projects-vertical-primary">
+        <nav className="vertical-list-primary">
           {this.renderProjectsList()}
         </nav>
         <Utility.Pagination

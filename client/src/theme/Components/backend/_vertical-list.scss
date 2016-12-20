@@ -1,0 +1,150 @@
+// Nav wrapping totals and a <ul>
+.vertical-list-primary {
+  padding-top: 49px;
+  padding-bottom: 36px;
+
+  .list-total {
+    @include utilityPrimary;
+    padding-bottom: 15px;
+    font-size: 15px;
+    color: $neutral70;
+
+    span {
+      color: $neutral30;
+    }
+  }
+
+  ul {
+    @include listUnstyled;
+    border-top: 1px solid $neutral80;
+
+    li {
+      padding: 20px 0 17px;
+      border-bottom: 1px solid $neutral80;
+    }
+
+    a {
+      display: table;
+      color: $neutral30;
+      text-decoration: none;
+
+      &:hover {
+        figure img {
+          background-color: $accentPrimary;
+          border-color: $accentPrimary;
+        }
+
+        figure svg .highlight {
+          fill: $accentPrimary;
+        }
+
+        .project-title {
+          color: $neutral20;
+        }
+
+        .subtitle {
+          color: $neutral20;
+        }
+
+        .project-makers {
+          color: $neutral20;
+        }
+
+        .label {
+          color: $accentPrimary;
+        }
+      }
+    }
+
+    figure {
+      display: table-cell;
+      vertical-align: top;
+
+      &.cover {
+        min-width: 50px;
+
+        img {
+          border: 1px solid transparent;
+          transition: border $duration $timing,
+            background-color $duration $timing;
+        }
+
+        svg .highlight {
+          transition: fill $duration $timing;
+        }
+      }
+
+      &.avatar {
+        .image {
+          width: 30px;
+          height: 30px;
+          background-position: 50% 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          border-radius: 100%;
+        }
+
+        .no-image {
+          @include buttonAvatar(30);
+        }
+      }
+
+      img, svg {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .meta {
+      display: table-cell;
+      width: 100%;
+      padding-right: 20px;
+      padding-left: 15px;
+      vertical-align: top;
+    }
+
+    .label {
+      @include utilityPrimary;
+      display: table-cell;
+      font-size: 14px;
+      color: $neutral75;
+      white-space: nowrap;
+      vertical-align: top;
+      transition: color $duration $timing;
+
+      .specifier {
+        display: inline-block;
+        padding-right: 19px;
+        color: $accentPrimary;
+      }
+    }
+
+    .name {
+      @include templateHead;
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.015em;
+      transition: color $duration $timing;
+
+      &.large {
+        font-size: 22px;
+      }
+    }
+
+    .subtitle {
+      @include subtitlePrimary;
+      display: block;
+      padding-top: 0.389em;
+      color: $neutral50;
+      transition: color $duration $timing;
+    }
+
+    .relations-list {
+      @include templateCopy;
+      padding-top: 6px;
+      font-size: 17px;
+      color: $neutral50;
+      transition: color $duration $timing;
+    }
+  }
+}
