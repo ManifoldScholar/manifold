@@ -5,13 +5,13 @@ exports[`Form.HasMany component renders correctly 1`] = `
     A form label
   </label>
   <nav
-    className="maker-utility-list">
+    className="has-many-list">
     <ul>
       <li>
         <div
-          className="maker">
+          className="association">
           <h4
-            className="maker-name">
+            className="association-name">
             John
           </h4>
         </div>
@@ -41,9 +41,9 @@ exports[`Form.HasMany component renders correctly 1`] = `
       </li>
       <li>
         <div
-          className="maker">
+          className="association">
           <h4
-            className="maker-name">
+            className="association-name">
             Jane
           </h4>
         </div>
@@ -73,24 +73,28 @@ exports[`Form.HasMany component renders correctly 1`] = `
       </li>
     </ul>
     <div
-      className="maker-add">
-      <button
-        className="manicon manicon-plus" />
-      <input
-        onBlur={[Function]}
-        onChange={[Function]}
-        onFocus={[Function]}
-        onKeyPress={[Function]}
-        placeholder="Add an Author"
-        type="text"
-        value="" />
-      <button
-        className="new"
-        onClick={[Function]}>
-        Create New
-      </button>
+      className="input-predictive">
+      <div
+        className="input">
+        <button
+          className="manicon manicon-plus" />
+        <input
+          className="text-input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyPress={[Function]}
+          placeholder="Add an Author"
+          type="text"
+          value="" />
+        <button
+          className="submit"
+          onClick={[Function]}>
+          Create New
+        </button>
+      </div>
       <nav
-        className="autofill-list">
+        className="predictive-list">
         <ul />
       </nav>
     </div>

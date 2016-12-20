@@ -1,0 +1,87 @@
+.input-predictive {
+  position: relative;
+
+  .input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid $accentPrimary;
+  }
+
+  .manicon {
+    @include buttonUnstyled;
+    min-width: 50px;
+    font-size: 13px;
+    color: $accentPrimary;
+  }
+
+  // Required for override
+  .form-secondary .form-input & {
+    input[type="text"] {
+      height: auto;
+      padding: 8px 0 13px;
+
+      &:focus {
+        border: 0;
+      }
+
+      &::placeholder {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  .submit {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    padding: 0.667em 15px;
+    font-size: 12px;
+    color: $accentPrimary;
+    white-space: nowrap;
+  }
+}
+
+.predictive-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 210px;
+  overflow: scroll;
+  background-color: $neutral90;
+  border-color: $neutral80;
+  border-style: solid;
+  border-width: 0 1px 1px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $durationFast $timing
+  visibility $durationFast $timing;
+
+  ul {
+    @include listUnstyled;
+    padding: 12px 0;
+
+    li {
+      @include templateHead;
+      padding: 0.425em 1.3em;
+      font-size: 20px;
+      color: $neutral70;
+      cursor: pointer;
+
+      + li {
+        border: 0; // OD
+      }
+
+      &:hover {
+        color: $neutral40;
+      }
+    }
+  }
+}
+
+.predictive-open {
+  .predictive-list {
+    opacity: 1;
+    visibility: visible;
+  }
+}

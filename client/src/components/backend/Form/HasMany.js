@@ -106,12 +106,12 @@ export default class Makers extends PureComponent {
         label={this.props.label}
       >
         <label>{this.props.label}</label>
-        <nav className="maker-utility-list">
+        <nav className="has-many-list">
           <ul>
             {entities.map((entity, index) => {
               return (
                 <li key={index} >
-                  <div className="maker">
+                  <div className="association">
                     { this.props.entityAvatarAttribute ?
                       <figure>
                         { entity.attributes[this.props.entityAvatarAttribute] ?
@@ -124,7 +124,7 @@ export default class Makers extends PureComponent {
                         }
                       </figure>
                     : null}
-                    <h4 className="maker-name">
+                    <h4 className="association-name">
                       {this.label(entity, this.props)}
                     </h4>
                   </div>
@@ -146,9 +146,9 @@ export default class Makers extends PureComponent {
               );
             })}
           </ul>
-          {/* Add .autofill-open to .maker-add in order to show autofill list  */}
+          {/* Add .autofill-open to .input-autofill in order to show autofill list  */}
           <FormContainer.PredictiveInput
-            className="maker-add"
+            className="input-predictive"
             placeholder="Add an Author"
             label={
               (option) => {
