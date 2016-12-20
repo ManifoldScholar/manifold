@@ -11,6 +11,7 @@ const { request, flush, requests } = entityStoreActions;
 class ProjectDetailCollaborators extends Component {
 
   static displayName = "ProjectDetail.Collaborators";
+  static activeNavItem = "collaborators";
 
   static mapStateToProps(state) {
     return {
