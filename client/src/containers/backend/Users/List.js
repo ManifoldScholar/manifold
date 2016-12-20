@@ -13,12 +13,6 @@ class UsersListContainer extends PureComponent {
 
   static displayName = "Users.List"
 
-  static fetchData(getState, dispatch) {
-    const usersRequest =
-      request(usersAPI.index({}, { size: perPage }), "backend-users-list");
-    return dispatch(usersRequest);
-  }
-
   static mapStateToProps(state) {
     return {
       users: select("backend-users-list", state.entityStore),
@@ -33,9 +27,14 @@ class UsersListContainer extends PureComponent {
   constructor() {
     super();
     this.usersPageChangeHandlerCreator = this.usersPageChangeHandlerCreator.bind(this);
+    this.fetchUsers = this.fetchUsers.bind(this);
   }
 
-  handleUsersPageChange(event, page) {
+  componentDidMount() {
+    this.fetchUsers(1);
+  }
+
+  fetchUsers(page) {
     const pagination = { number: page, size: perPage };
     const filter = { };
     const action = request(
@@ -43,6 +42,10 @@ class UsersListContainer extends PureComponent {
       'backend-users-list'
     );
     this.props.dispatch(action);
+  }
+
+  handleUsersPageChange(event, page) {
+    this.fetchUsers(page);
   }
 
   usersPageChangeHandlerCreator(page) {
