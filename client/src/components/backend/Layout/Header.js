@@ -42,16 +42,14 @@ export default class LayoutHeader extends Component {
                     {'Projects'}
                   </Link>
                 </li>
-                { this.props.authentication.authenticated ?
-                  <li className={active === 'users' ? 'active' : ''}>
-                    <Link to={`/backend/users/`}>
-                      {'Following'}
-                    </Link>
-                  </li> : null
-                }
-                <li className={active === 'dev' ? 'active' : ''}>
-                  <Link to={`/dev`}>
-                    {'Dev'}
+                <li className={active === 'users' ? 'active' : ''}>
+                  <Link to={`/backend/users/`}>
+                    {'Users'}
+                  </Link>
+                </li>
+                <li className={active === 'settings' ? 'active' : ''}>
+                  <Link to={`/backend/settings/`}>
+                    {'Settings'}
                   </Link>
                 </li>
               </ul>

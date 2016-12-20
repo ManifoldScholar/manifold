@@ -3,9 +3,11 @@ import React, { Component, PropTypes } from 'react';
 export default class FatalError extends Component {
 
   static propTypes = {
-    title: PropTypes.string,
-    detail: PropTypes.string,
-    status: PropTypes.any
+    error: PropTypes.shape({
+      detail: PropTypes.string.isRequired,
+      status: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired
+    }).isRequired
   }
 
   render() {

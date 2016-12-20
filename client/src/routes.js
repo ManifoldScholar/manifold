@@ -20,7 +20,6 @@ import * as Backend from 'containers/backend';
 import { Project } from 'components/backend';
 import { Section, AnnotationTools } from 'components/reader';
 import { Static } from './components/frontend';
-
 /* eslint-disable max-len */
 export default () => {
 
@@ -57,6 +56,12 @@ export default () => {
           <IndexRoute component={Backend.ProjectDetail.General} />
           <Route component={Backend.ProjectDetail.Texts} path="texts" />
           <Route component={Backend.ProjectDetail.Collaborators} path="collaborators" />
+        </Route>
+        <Route component={Backend.Users.Wrapper} path="users" >
+          <IndexRoute component={Backend.Users.List} />
+        </Route>
+        <Route component={Backend.Settings.Wrapper} path="settings" >
+          <IndexRoute component={Backend.Settings.General} />
         </Route>
       </Route>
 

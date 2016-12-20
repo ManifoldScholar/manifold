@@ -4,81 +4,68 @@ import { Link } from 'react-router';
 
 export default class SearchableList extends Component {
 
-  static displayName = "ProjectList.SearchableList";
+  static displayName = "UserList.SearchableList";
 
   static propTypes = {
-    projects: PropTypes.array,
+    users: PropTypes.array,
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func
   };
 
   constructor() {
     super();
-    this.renderProjectsList = this.renderProjectsList.bind(this);
-    this.renderProject = this.renderProject.bind(this);
-    this.renderProjectMakers = this.renderProjectMakers.bind(this);
+    this.renderUserList = this.renderUserList.bind(this);
+    this.renderUser = this.renderUser.bind(this);
   }
 
-  renderProjectMakers(makers) {
-    let output = null;
-    if (makers && makers.length > 0) {
-      output = (
-        <div className="project-makers">
-          {makers.map((maker, i) => {
-            let nameList = maker.attributes.fullName;
-            if (i > 0) nameList = ', ' + nameList;
-            return nameList;
-          })}
-        </div>
-      );
-    }
-
-    return output;
-  }
-
-  renderProject(project) {
-    const attr = project.attributes;
+  renderUser(user) {
+    const attr = user.attributes;
 
     return (
-      <li key={project.id}>
-        <Link to={`/backend/project/${project.id}`}>
+      <li key={user.id}>
+        <Link className="maker" to={`/backend/users/${user.id}`}>
           <figure>
-            {attr.coverUrl ? (<img src={attr.coverUrl} />) : <globalProject.Placeholder/>}
+            {attr.avatarUrl ?
+              <img
+                src={attr.avatarUrl}
+              />
+              :
+              <div className="no-image">
+                <i className="manicon manicon-person"></i>
+              </div>
+            }
           </figure>
           <div className="meta">
             <h3 className="project-title">
-              {attr.title}
-                <span className="subtitle">
-                  {attr.subtitle}
-                </span>
+              {attr.firstName} {attr.lastName}
             </h3>
-            {this.renderProjectMakers(project.relationships.creators)}
           </div>
           <span className="label">
-            Edit
+            {attr.role}
           </span>
         </Link>
       </li>
     );
   }
 
-  renderProjectsList() {
-    const projects = this.props.projects;
+  renderUserList() {
+    const users = this.props.users;
     let output = null;
-
-    if (projects.length > 0) {
+    if (users.length > 0) {
       output = (
         <div>
           <Utility.EntityCount
             pagination={this.props.pagination}
-            singularUnit="project"
-            pluralUnit="projects"
+            singularUnit="user"
+            pluralUnit="users"
           />
-          <ul>
-            {projects.map((project) => {
-              return this.renderProject(project);
-            })}
-          </ul>
+          <nav className="maker-utility-list">
+            <ul>
+              {users.map((user) => {
+                return this.renderUser(user);
+              })}
+            </ul>
+          </nav>
         </div>
       );
     }
@@ -101,7 +88,7 @@ export default class SearchableList extends Component {
           <button className="button-bare-primary reset">{'Reset Search'}</button>
         </form>
         <nav className="projects-vertical-primary">
-          {this.renderProjectsList()}
+          {this.renderUserList()}
         </nav>
         <Utility.Pagination
           pagination={this.props.pagination}

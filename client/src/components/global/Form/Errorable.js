@@ -3,6 +3,7 @@ import { Form } from 'components/global';
 import classNames from 'classnames';
 import brackets2dots from 'brackets2dots';
 import humps from 'humps';
+import has from 'lodash/has';
 
 export default class Errorable extends PureComponent {
 
@@ -22,7 +23,9 @@ export default class Errorable extends PureComponent {
 
   allErrors() {
     if (!this.props.errors) return [];
-    return this.props.errors;
+    return this.props.errors.filter((error) => {
+      return has(error, "source");
+    });
   }
 
   fieldErrors() {
@@ -36,7 +39,7 @@ export default class Errorable extends PureComponent {
     names.forEach((name) => {
       const pointer = this.pointerFor(name);
       const pointerErrors = this.props.errors.filter((error) => {
-        if(!error.hasOwnProperty('source')) return false
+        if (!error.hasOwnProperty('source')) return false;
         return error.source.pointer === pointer;
       });
       errors = [...errors, ...pointerErrors];

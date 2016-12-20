@@ -3,6 +3,7 @@ import Dashboard from './Dashboard';
 import ProjectDetail from './ProjectDetail';
 import TextDetail from './TextDetail';
 import Users from './Users';
+import Settings from './Settings';
 import Form from './Form';
 
 export {
@@ -11,5 +12,6 @@ export {
   ProjectDetail,
   TextDetail,
   Users,
+  Settings,
   Form
 };

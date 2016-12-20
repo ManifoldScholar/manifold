@@ -2,6 +2,14 @@ import get from 'lodash/get';
 import startsWith from 'lodash/startsWith';
 import { notificationActions } from 'actions';
 
+function isApiError(error) {
+  return error.id === "API_ERROR";
+}
+
+function isFatal(error) {
+  return [503, 404].includes(error.status);
+}
+
 function isApiResponse(action) {
   return startsWith(action.type, 'API_RESPONSE');
 }
@@ -10,7 +18,7 @@ function apiErrors(action) {
   const errors = get(action, 'payload.body.errors');
   if (!errors) return [];
   return errors.filter((error) => {
-    return isApiError(error) && !isFatal(error)
+    return isApiError(error) && !isFatal(error);
   });
 }
 
@@ -31,17 +39,8 @@ function notifyApiErrors(dispatch, action, next) {
       level: 2,
       heading: error.title,
       body: error.detail
-    }))
+    }));
   });
-}
-
-function isApiError(error) {
-  console.log(error, 'err');
-  return error.id === "API_ERROR"
-}
-
-function isFatal(error) {
-  return [503].includes(error.status);
 }
 
 function checkForFatalErrors(dispatch, action, next) {
@@ -55,5 +54,5 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     notifyApiErrors(dispatch, action, next);
     checkForFatalErrors(dispatch, action, next);
     return next(action);
-  }
-};
+  };
+}

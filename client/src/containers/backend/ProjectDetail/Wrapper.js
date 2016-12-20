@@ -9,7 +9,7 @@ import get from 'lodash/get';
 const { select } = entityUtils;
 const { request, flush, requests } = entityStoreActions;
 
-class ProjectPanelsContainer extends PureComponent {
+class ProjectDetailWrapperContainer extends PureComponent {
 
   static displayName = "ProjectDetail.Wrapper";
 
@@ -71,9 +71,7 @@ class ProjectPanelsContainer extends PureComponent {
   }
 }
 
-const ProjectPanels = connect(
-  ProjectPanelsContainer.mapStateToProps
-)(ProjectPanelsContainer);
-
-export default ProjectPanels;
+export default connect(
+  ProjectDetailWrapperContainer.mapStateToProps
+)(ProjectDetailWrapperContainer);
 

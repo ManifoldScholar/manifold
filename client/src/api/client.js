@@ -65,7 +65,7 @@ export default class ApiClient {
 
   _responseToJson = (response) => {
     if (!response) {
-      const response = new Response(
+      const returnResponse = new Response(
         JSON.stringify({
           errors: [
             {
@@ -77,9 +77,9 @@ export default class ApiClient {
             }
           ]
         }),
-        { status: 503, statusText: "serviceUnavailable"}
+        { status: 503, statusText: "serviceUnavailable" }
       );
-      return Promise.reject({ response });
+      return Promise.reject({ returnResponse });
     }
     if (!response.ok) {
       return Promise.reject({ response });
@@ -123,12 +123,10 @@ export default class ApiClient {
   };
 
   _fetchNotOK = (response) => {
-    console.log('what even');
     return Promise.reject(response);
   };
 
   _handleFailure = (reason) => {
-    console.log(reason, 'reason');
     return new Promise((resolve, reject) => {
       const payload = {
         status: reason.response.status,

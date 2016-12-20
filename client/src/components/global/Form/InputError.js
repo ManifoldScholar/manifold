@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import get from 'lodash/get';
+import isString from 'lodash/isString';
 import capitalize from 'lodash/capitalize';
 import humps from 'humps';
 

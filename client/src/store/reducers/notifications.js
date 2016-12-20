@@ -15,11 +15,11 @@ const addNotification = (state, action) => {
 
 const setFatalError = (state, action) => {
   return Object.assign({}, state, { fatalError: action.payload });
-}
+};
 
 const clearFatalError = (state, action) => {
   return Object.assign({}, state, { fatalError: null });
-}
+};
 
 const removeNotification = (state, action) => {
   let found = false;
@@ -47,7 +47,7 @@ const handleErrorAction = (state, action) => {
 
 const notificationReducer = (state = initialState, action) => {
 
-  if (action.type.startsWith("API_REQUEST")) {
+  if (action.type && action.type.startsWith("API_REQUEST")) {
     return clearFatalError(state, action);
   }
 
