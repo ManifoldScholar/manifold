@@ -333,7 +333,7 @@
 
 .back-link-primary {
   @include utilityPrimary;
-  display: block;
+  display: inline-block;
   padding: 20px 0 18px;
   font-size: 14px;
   color: $neutral70;
@@ -341,6 +341,10 @@
   background-color: $neutral05;
   transition: color $duration $timing,
     background-color $duration $timing;
+
+  &.full {
+    display: block;
+  }
 
   .bg-neutral95 & {
     background-color: $neutral95;
