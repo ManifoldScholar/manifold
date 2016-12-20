@@ -6,6 +6,7 @@ import { entityUtils } from 'utils';
 import usersAPI from 'api/users';
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
+import get from 'lodash/get';
 
 const perPage = 20;
 
@@ -16,7 +17,8 @@ class UsersListContainer extends PureComponent {
   static mapStateToProps(state) {
     return {
       users: select("backend-users-list", state.entityStore),
-      usersMeta: meta("backend-users-list", state.entityStore)
+      usersMeta: meta("backend-users-list", state.entityStore),
+      currentUserId: get(state, 'authentication.currentUser.id')
     };
   }
 
@@ -68,6 +70,7 @@ class UsersListContainer extends PureComponent {
             users={this.props.users}
             paginationClickHandler={this.usersPageChangeHandlerCreator}
             pagination={this.props.usersMeta.pagination}
+            currentUserId={this.props.currentUserId}
           /> : null
         }
       </div>
