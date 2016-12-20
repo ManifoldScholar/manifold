@@ -128,12 +128,13 @@ export default class ApiClient {
 
   _handleFailure = (reason) => {
     return new Promise((resolve, reject) => {
+      const response = reason.returnResponse || reason.response;
       const payload = {
-        status: reason.response.status,
-        statusText: reason.response.statusText,
+        status: response.status,
+        statusText: response.statusText,
         body: null
       };
-      reason.response.json().then(
+      response.json().then(
         (json) => {
           reject(Object.assign(payload, { body: json }));
         },
