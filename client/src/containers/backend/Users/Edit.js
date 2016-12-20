@@ -35,8 +35,13 @@ class UserEditContainer extends PureComponent {
 
   render() {
     if (!this.props.user) return null;
+    const attr = this.props.user.attributes;
+    console.log(attr);
     return (
-      <Drawer.Wrapper closeUrl="/backend/users" >
+      <Drawer.Wrapper
+        closeUrl="/backend/users"
+        title={`${attr.firstName} ${attr.lastName}`}
+      >
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.user}

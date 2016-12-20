@@ -1,0 +1,26 @@
+.drawer-primary {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  bottom: 0;
+  width: 555px;
+  padding: 33px 70px;
+  background-color: $neutral95;
+
+  .drawer-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 15px;
+    color: $neutral50;
+    text-decoration: none;
+  }
+
+  .title {
+    @include templateHead;
+    padding: 37px 0 33px;
+    margin: 0;
+    font-size: 30px;
+    color: $neutralWhite;
+  }
+}
