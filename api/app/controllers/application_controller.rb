@@ -38,15 +38,6 @@ class ApplicationController < ActionController::API
     render json: resource
   end
 
-  def build_api_error(title: nil, detail: nil, status: nil)
-    [{
-      id: "API_ERROR",
-      status: status,
-      title: title,
-      detail: detail
-    }]
-  end
-
   def authority_forbidden_resource_class(error)
     vars = { resource: error.resource.to_s.downcase.pluralize, action: error.action }
     options = {

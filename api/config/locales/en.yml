@@ -22,9 +22,18 @@
 en:
   controllers:
     errors:
+      auth_timeout:
+        title: "Authentication expired"
+        detail: "Your login session has expired. Please reauthenticate."
+      unauthorized:
+        title: "Authentication required"
+        detail: "You must be logged in to access this resource."
       not_found:
         title: "Resource not found"
         detail: "Manifold attempted to access an API endpoint that does not exist."
+      forbidden_generic:
+        title: "Access denied"
+        detail: "You are not authorized to access this resource."
       forbidden:
         class:
           title: "%{action} failed"

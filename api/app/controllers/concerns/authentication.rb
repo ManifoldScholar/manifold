@@ -63,15 +63,41 @@ module Authentication
 
   # Helper Methods for responding to errors
   # ------------------------------------------------------------
+  def build_api_error(title: nil, detail: nil, status: nil)
+    [
+      {
+        id: "API_ERROR",
+        status: status,
+        title: title,
+        detail: detail
+      }
+    ]
+  end
+
   def authentication_timeout
-    render json: { errors: ["Authentication Timeout"] }, status: 419
+    options = {
+      status: 419,
+      title: I18n.t("controllers.errors.auth_timeout.title").titlecase,
+      detail: I18n.t("controllers.errors.auth_timeout.detail")
+    }
+    render json: { errors: build_api_error(options) }, status: 419
   end
 
   def forbidden_resource
-    render json: { errors: ["Not Authorized To Access Resource"] }, status: :forbidden
+    options = {
+      status: 403,
+      title: I18n.t("controllers.errors.forbidden_generic.title").titlecase,
+      detail: I18n.t("controllers.errors.forbidden_generic.detail")
+    }
+    render json: { errors: build_api_error(options) }, status: 403
   end
 
   def user_not_authenticated
-    render json: { errors: ["Not Authenticated"] }, status: :unauthorized
+    options = {
+      status: 401,
+      title: I18n.t("controllers.errors.unauthorized.title").titlecase,
+      detail: I18n.t("controllers.errors.unauthorized.detail")
+    }
+    render json: { errors: build_api_error(options) }, status: :unauthorized
   end
 end
