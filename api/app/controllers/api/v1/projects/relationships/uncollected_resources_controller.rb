@@ -6,15 +6,20 @@ module Api
         class UncollectedResourcesController < ApplicationController
           before_action :set_project, only: [:index]
 
+          resourceful! Resource, authorize_options: { except: [:index] } do
+            @project.uncollected_resources
+                    .filtered(resource_filter_params[:filter])
+                    .page(page_number)
+                    .per(page_size)
+          end
+
           # GET /resources
           def index
-            @resources = @project.uncollected_resources
-                                 .filtered(resource_filter_params[:filter])
-                                 .page(page_number)
-                                 .per(page_size)
-            render json: @resources,
-                   each_serializer: ResourceSerializer,
-                   meta: { pagination: pagination_dict(@resources) }
+            @resources = load_resources
+            render_multiple_resources(
+              @resources,
+              each_serializer: ResourceSerializer
+            )
           end
 
           private

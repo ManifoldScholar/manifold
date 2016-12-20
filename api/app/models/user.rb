@@ -1,6 +1,10 @@
 # The User model
 class User < ActiveRecord::Base
 
+  # Authority
+  include Authority::UserAbilities
+  include Authority::Abilities
+
   # Associations
   has_many :annotations # TODO: refactor to use "creator_id"
   has_many :favorites # Todo: refactor to use "creator_id"
@@ -40,6 +44,12 @@ class User < ActiveRecord::Base
   has_secure_password
 
   # Methods
+  def self.filtered(filters)
+    users = User.all
+    return users unless filters
+    users
+  end
+
   def ensure_nickname
     self.nickname = first_name if nickname.blank?
   end
@@ -68,6 +78,14 @@ class User < ActiveRecord::Base
 
   def favorite?(favoritable)
     favorites.where(favoritable_id: favoritable.id).count.positive?
+  end
+
+  def admin?
+    role == "admin"
+  end
+
+  def to_s
+    name
   end
 
   # def favorite_projects

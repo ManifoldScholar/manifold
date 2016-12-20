@@ -22,6 +22,9 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 15
 
+Metrics/ClassLength:
+  Enabled: false
+
 Style/DotPosition:
   EnforcedStyle: leading
 
@@ -32,4 +35,7 @@ Lint/UnneededDisable:
   Enabled: false
 
 Style/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Style/Documentation:
   Enabled: false

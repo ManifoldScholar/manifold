@@ -1,0 +1,39 @@
+exports[`Dashboard.Notification component renders correctly 1`] = `
+<nav
+  className="notification-list-block">
+  <ul>
+    <li>
+      <p>
+        You have 
+        <a
+          onClick={[Function]}
+          style={Object {}}>
+          36 flagged comments
+        </a>
+         awaiting moderation
+      </p>
+      <button
+        className="manicon manicon-x" />
+    </li>
+    <li>
+      <p>
+        You have 
+        <a
+          onClick={[Function]}
+          style={Object {}}>
+          417 flagged comments
+        </a>
+         awaiting moderation
+      </p>
+      <button
+        className="manicon manicon-x" />
+    </li>
+  </ul>
+  <a
+    className="button-bare-primary"
+    onClick={[Function]}
+    style={Object {}}>
+    Notification History
+  </a>
+</nav>
+`;

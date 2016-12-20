@@ -85,13 +85,17 @@ class Create extends Component {
   }
 
   render() {
-    let errors = get(this.props.response, 'errors') || {};
+    let errors = get(this.props.response, 'errors') || [];
     return (
       <div>
         <form method="post" onSubmit={this.createUser} >
           <h4 className="form-heading">Create Account</h4>
           <div className="row-1-p">
-            <Form.Errorable className="form-input" field="email" errors={errors} >
+            <Form.Errorable
+              className="form-input"
+              name="attributes[email]"
+              errors={errors}
+            >
              <label>Email</label>
               <input
                 value={this.state.user.email}
@@ -106,7 +110,7 @@ class Create extends Component {
           <div className="row-1-p">
             <Form.Errorable
               className="form-input"
-              field={['first_name', 'last_name']}
+              name={['attributes[firstName]', 'attributes[lastName]']}
               errors={errors}
             >
               <label>
@@ -123,7 +127,11 @@ class Create extends Component {
             </Form.Errorable>
           </div>
           <div className="row-1-p">
-            <Form.Errorable className="form-input" field="password" errors={errors} >
+            <Form.Errorable
+              className="form-input"
+              name="attributes[password]"
+              errors={errors}
+            >
               <label>
                 Password
               </label>

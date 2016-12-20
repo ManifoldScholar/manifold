@@ -1,16 +1,15 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { HigherOrder } from 'components/global';
+import { HigherOrder, FatalError } from 'components/global';
 import { Layout as LayoutFrontend } from 'components/frontend';
 import { Layout as LayoutBackend } from 'components/backend';
 import { commonActions } from 'actions/helpers';
 import { pagesAPI } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import get from 'lodash/get';
 const { request, requests } = entityStoreActions;
 
-class BackendContainer extends Component {
+class BackendContainer extends PureComponent {
 
   static fetchData(getState, dispatch) {
     if (!entityUtils.isLoaded(requests.allPages, getState())) {
@@ -59,6 +58,8 @@ class BackendContainer extends Component {
   }
 
   render() {
+    const fatalError = this.props.notifications.fatalError;
+
     return (
       <HigherOrder.BodyClass className={'backend bg-neutral90'}>
         <div>
@@ -72,7 +73,13 @@ class BackendContainer extends Component {
             />
           </HigherOrder.ScrollAware>
           <main ref="mainContainer">
-            {this.props.children}
+            { (fatalError) ?
+              <div className="global-container">
+                <FatalError error={fatalError} />
+              </div>
+              :
+              this.props.children
+            }
           </main>
           <LayoutFrontend.Footer
             pages={this.props.pages}

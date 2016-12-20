@@ -22,18 +22,18 @@ module Ingestor
       end
 
       def self.log_model_errors(model, logger)
-        unless model.valid?
-          model.errors.full_messages.each do |message|
-            # rubocop:disable Metrics/LineLength
-            msg = "#{model.class.name} #{model.try(:source_identifier)}: #{message}"
-            logger.error(msg.red)
-          end
+        return if model.valid?
+        model.errors.full_messages.each do |message|
+          msg = "#{model.class.name} #{model.try(:source_identifier)}: #{message}"
+          logger.error(msg.red)
         end
       end
 
       def self.log_structure_recursive(branch, preface, logger, indent = 0)
         branch.each do |leaf|
+          # rubocop:disable Metrics/LineLength
           logger.debug "#{preface} #{' ' * indent}#{leaf[:label] || 'NULL'} #{"[#{leaf[:source_identifier]}]".light_cyan if leaf[:source_identifier]}"
+          # rubocop:enable Metrics/LineLength
           if leaf[:children]
             log_structure_recursive(leaf[:children], preface, logger, indent + 2)
           end

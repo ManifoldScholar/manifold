@@ -1062,6 +1062,10 @@ braces@^1.8.2:
     preserve "^0.2.0"
     repeat-element "^1.1.2"
 
+brackets2dots:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/brackets2dots/-/brackets2dots-1.1.0.tgz#3f3d40375fc660ce0fd004fa27d67b34f9469ac3"
+
 browser-resolve@^1.11.2:
   version "1.11.2"
   resolved "https://registry.yarnpkg.com/browser-resolve/-/browser-resolve-1.11.2.tgz#8ff09b0a2c421718a1051c260b32e48f442938ce"
@@ -2859,6 +2863,12 @@ ignore-by-default@^1.0.0:
 ignore@^3.1.2:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.0.tgz#8d88f03c3002a0ac52114db25d2c673b0bf1e435"
+
+immutability-helper:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.0.0.tgz#371657666eacf96f731f9f97e5cccd920b13a5d4"
+  dependencies:
+    invariant "^2.2.0"
 
 imurmurhash@^0.1.4:
   version "0.1.4"
@@ -5106,6 +5116,10 @@ react-test-renderer@^15.4.0:
   version "15.4.0"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.4.0.tgz#80138338e40903821847c3e4edd87d0d74c77cc8"
 
+react-text-mask:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/react-text-mask/-/react-text-mask-0.19.0.tgz#ed7d67adf2821870f1e3f30ed6fe39ce4ca6ccf6"
+
 react@^15.4.0:
   version "15.4.0"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.0.tgz#736c1c7c542e8088127106e1f450b010f86d172b"
@@ -5903,6 +5917,10 @@ test-exclude@^2.1.1:
 testcheck@^0.1.0:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/testcheck/-/testcheck-0.1.4.tgz#90056edd48d11997702616ce6716f197d8190164"
+
+text-mask-addons:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/text-mask-addons/-/text-mask-addons-2.0.0.tgz#692ec1f9b715fa50dc91d29ff47ab96136c2a988"
 
 text-table@~0.2.0:
   version "0.2.0"

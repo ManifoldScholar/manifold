@@ -16,12 +16,13 @@ import {
 } from 'containers/frontend';
 import { Developer } from 'containers/developer';
 import { Reader } from 'containers/reader';
-import { Backend, Dashboard, BackendProjectDetail, TextDetail, Users } from 'containers/backend';
+import * as Backend from 'containers/backend';
+import { Project } from 'components/backend';
 import { Section, AnnotationTools } from 'components/reader';
 import { Static } from './components/frontend';
-
 /* eslint-disable max-len */
 export default () => {
+
   return (
     <Route path="/" >
       <IndexRedirect to="browse" />
@@ -49,11 +50,18 @@ export default () => {
         <Route component={Static.Form} path="forms" />
       </Route>
 
-      <Route component={Backend} path="/backend" >
-        <IndexRoute component={Dashboard} />
-        <Route component={BackendProjectDetail.Wrapper} path="project/:id" >
-          <IndexRoute component={BackendProjectDetail.General} />
-          <Route component={BackendProjectDetail.Texts} path="texts" />
+      <Route component={Backend.Backend} path="/backend" >
+        <IndexRoute component={Backend.Dashboard} />
+        <Route component={Backend.ProjectDetail.Wrapper} path="project/:id" >
+          <IndexRoute component={Backend.ProjectDetail.General} />
+          <Route component={Backend.ProjectDetail.Texts} path="texts" />
+          <Route component={Backend.ProjectDetail.Collaborators} path="collaborators" />
+        </Route>
+        <Route component={Backend.Users.Wrapper} path="users" >
+          <IndexRoute component={Backend.Users.List} />
+        </Route>
+        <Route component={Backend.Settings.Wrapper} path="settings" >
+          <IndexRoute component={Backend.Settings.General} />
         </Route>
       </Route>
 

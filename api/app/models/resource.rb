@@ -1,6 +1,9 @@
 # A resource is any asset our source document that is associated with a text.
 class Resource < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Concerns
   include TrackedCreator
 
@@ -51,6 +54,10 @@ class Resource < ActiveRecord::Base
   def resize_images
     res = attachment_is_image?
     res
+  end
+
+  def to_s
+    title
   end
 
 end

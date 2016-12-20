@@ -123,7 +123,7 @@ class UpdateForm extends Component {
   }
 
   render() {
-    let errors = get(this.props.response, 'errors') || {};
+    let errors = get(this.props.response, 'errors') || [];
     if (!this.props.authentication.currentUser) return null;
     return (
       <form
@@ -155,7 +155,11 @@ class UpdateForm extends Component {
           </div>
         }
         <div className="row-1-p">
-          <Form.Errorable className="form-input" field="nickname" errors={errors} >
+          <Form.Errorable
+            className="form-input"
+            name="attribuets[nickname]"
+            errors={errors}
+          >
             <input
               value={this.state.nickname}
               type="text"

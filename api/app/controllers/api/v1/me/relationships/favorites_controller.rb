@@ -2,46 +2,43 @@ module Api
   module V1
     module Me
       module Relationships
-        # Favorites controller
+        # Favorites Controller
         class FavoritesController < ApplicationController
-          before_action :authenticate_request!
-          before_action :set_favorite, only: [:show, :update, :destroy]
 
-          # Returns all favorites for a user
-          def index
-            render json: @current_user.favorites,
-                   include: %w(favoritable),
-                   each_serializer: FavoriteSerializer
+          INCLUDES = %w(favorites).freeze
+          LOCATION = [:api, :v1, :me].freeze
+
+          resourceful! Favorite do
+            @current_user.favorites
           end
 
-          # Create a new favorite for the current user
+          def index
+            @favorites = load_favorites
+            render_multiple_resources(
+              @favorites,
+              each_serializer: FavoriteSerializer,
+              location: LOCATION
+            )
+          end
+
           def create
-            attributes = polymorphic_relationship_from(favorite_params, "favoritable")
-            @favorite = @current_user.favorites.create(attributes)
-            if @favorite.save
-              render json: @current_user,
-                     include: %w(favorites),
-                     status: :created,
-                     location: [:api, :v1, :me]
+            updater = ::Updaters::Default.new(favorite_params)
+            @favorite = updater.update(@current_user.favorites.build)
+            if @favorite.valid?
+              render_single_resource(@current_user, include: INCLUDES, location: LOCATION)
             else
-              render json: @favorite.errors, status: :unprocessable_entity
+              render_single_resource(@favorite, location: LOCATION)
             end
           end
 
           def show
-            render json: @favorite,
-                   include: %w(favoritable)
+            @favorite = load_and_authorize_favorite
+            render_single_resource(@favorite, include: INCLUDES, location: LOCATION)
           end
 
-          # Destroy a favorite by ID
           def destroy
+            @favorite = load_and_authorize_favorite
             @favorite.destroy
-          end
-
-          private
-
-          def set_favorite
-            @favorite = @current_user.favorites.find(params[:id])
           end
         end
       end

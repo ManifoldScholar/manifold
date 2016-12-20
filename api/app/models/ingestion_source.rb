@@ -1,6 +1,9 @@
 # Connects texts to resources that were sources for text sections during ingestion
 class IngestionSource < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Constants
   KIND_COVER_IMAGE = "cover_image".freeze
   KIND_NAVIGATION = "navigation".freeze
@@ -28,5 +31,9 @@ class IngestionSource < ActiveRecord::Base
   validation = Rails.application.config.x.api[:attachments][:validations][:resource]
   validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
   validates_attachment_file_name :attachment, matches: validation[:allowed_ext]
+
+  def to_s
+    "ingestion source #{id}"
+  end
 
 end

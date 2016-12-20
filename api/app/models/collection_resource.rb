@@ -1,6 +1,9 @@
 # Tracks the relationship between collections and resources
 class CollectionResource < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Associations
   belongs_to :collection
   belongs_to :resource
@@ -14,6 +17,10 @@ class CollectionResource < ActiveRecord::Base
   def collection_and_resource_must_belong_to_same_project
     return unless collection.project != resource.project
     errors.add(:resource, "can't belong to a different project")
+  end
+
+  def to_s
+    "#{collection} #{resource}"
   end
 
 end

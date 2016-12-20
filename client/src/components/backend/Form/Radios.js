@@ -1,38 +1,45 @@
 import React, { Component, PropTypes } from 'react';
+import sharedPropsValidation from './propTypes';
+import { Form } from 'components/backend';
+import classNames from 'classnames';
 
 export default class Radios extends Component {
 
-  static displayName = "From.Radios";
+  static displayName = "Form.Radios";
 
   static propTypes = {
-    label: PropTypes.string
+    ...sharedPropsValidation,
+    options: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.any.isRequired,
+      label: PropTypes.string.isRequired
+    })).isRequired
+  };
+
+  static defaultProps = {
+    dirtyModel: {},
+    actions: { set: () => {} },
+    layout: "horizontal"
   };
 
   render() {
+
+    const inputClassNames = classNames('form-toggle', 'radio', this.props.layout);
+
     return (
       <div className="form-input">
         <label>{this.props.label}</label>
+        {this.props.options.map((option) => {
+          return (
+            <label htmlFor={option.value} className={inputClassNames} key={option.value} >
+              <Form.Connect.Set {...this.props} value={option.value} >
+                <input id={option.value} type="radio" />
+              </Form.Connect.Set>
+              <span className="toggle-indicator"></span>
+              <span className="toggle-label">{option.label} {option.value}</span>
+            </label>
+          );
+        })}
 
-        <label className="form-toggle radio horizontal">
-          <input type="radio" name="selection"/>
-            <span className="toggle-indicator">
-            </span>
-            <span className="toggle-label">Radio item</span>
-        </label>
-
-        <label className="form-toggle radio horizontal">
-          <input type="radio" name="selection"/>
-            <span className="toggle-indicator">
-            </span>
-            <span className="toggle-label">Radio item</span>
-        </label>
-
-        <label className="form-toggle radio horizontal">
-          <input type="radio" name="selection"/>
-            <span className="toggle-indicator">
-            </span>
-            <span className="toggle-label">Radio item</span>
-        </label>
       </div>
     );
   }

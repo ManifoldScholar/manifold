@@ -1,13 +1,21 @@
-import Makers from './Makers.js';
-import Radios from './Radios.js';
-import TextArea from './TextArea.js';
-import TextInput from './TextInput.js';
-import Upload from './Upload.js';
+import HasMany from './HasMany';
+import Radios from './Radios';
+import TextArea from './TextArea';
+import TextInput from './TextInput';
+import MaskedTextInput from './MaskedTextInput';
+import Upload from './Upload';
+import Connect from './Connect';
+import Select from './Select';
+import Save from './Save';
 
 export default {
-  Makers,
+  Connect,
+  HasMany,
   Radios,
   TextArea,
   TextInput,
-  Upload
+  MaskedTextInput,
+  Upload,
+  Select,
+  Save
 };

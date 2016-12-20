@@ -67,6 +67,10 @@
       @include respond($break60) {
         font-size: 24px;
       }
+
+      .backend & {
+        color: $neutralOffWhite;
+      }
     }
 
     p {
@@ -74,6 +78,10 @@
       font-size: 14px;
       line-height: 1.421;
       color: $neutral75;
+
+      .backend & {
+        color: $neutral20;
+      }
     }
   }
 

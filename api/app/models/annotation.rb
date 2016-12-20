@@ -3,6 +3,9 @@
 # other manifold records.
 class Annotation < ApplicationRecord
 
+  # Authority
+  include Authority::Abilities
+
   # Concerns
   include TrackedCreator
 
@@ -21,5 +24,9 @@ class Annotation < ApplicationRecord
   # Delegations
   delegate :text, to: :text_section
   delegate :project, to: :text
+
+  def to_s
+    "annotation #{id}"
+  end
 
 end

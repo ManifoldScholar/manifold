@@ -1,6 +1,9 @@
 # A subject
 class Subject < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Associations
   has_many :text_subjects
   has_many :project_subjects
@@ -9,5 +12,9 @@ class Subject < ActiveRecord::Base
 
   # Validations
   validates :name, presence: true
+
+  def to_s
+    title
+  end
 
 end

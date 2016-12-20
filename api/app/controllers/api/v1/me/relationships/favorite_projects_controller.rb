@@ -4,24 +4,18 @@ module Api
       module Relationships
         # Favorite Projects controller
         class FavoriteProjectsController < ApplicationController
-          before_action :authenticate_request!
+
+          resourceful! Project do
+            @current_user.favorite_projects.includes(:creators, :collaborators)
+          end
 
           # GET /projects
           def index
-            @projects = @current_user
-                        .favorite_projects
-                        .includes(:makers, :creators, :contributors)
-                        .filtered(project_filter_params[:filter])
-            render json: @projects,
-                   include: %w(creators collaborators),
-                   each_serializer: ProjectPartialSerializer
-          end
-
-          private
-
-          # Only allow a trusted parameter "white list" through.
-          def project_params
-            params.require(:project)
+            @projects = load_projects
+            render_multiple_resources(
+              @projects, include: %w(creators collaborators),
+                         each_serializer: ProjectPartialSerializer
+            )
           end
 
         end

@@ -8,6 +8,16 @@ export default {
     };
   },
 
+  index(filter = {}, page = {}) {
+    return {
+      endpoint: '/api/v1/users',
+      method: 'GET',
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   create(user) {
     return {
       endpoint: '/api/v1/users',

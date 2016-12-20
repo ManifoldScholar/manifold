@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
 import { ProjectList, Dashboard as DashboardComponents } from 'components/backend';
@@ -6,20 +6,23 @@ import { Link } from 'react-router';
 import { entityUtils } from 'utils';
 import projectsAPI from 'api/projects';
 
-const { select } = entityUtils;
+const { select, meta } = entityUtils;
 const { request, requests } = entityStoreActions;
 
-class DashboardContainer extends Component {
+const perPage = 5;
+
+class DashboardContainer extends PureComponent {
 
   static fetchData(getState, dispatch) {
     const projectsRequest =
-      request(projectsAPI.index(), requests.backendDashboardProjects);
+      request(projectsAPI.index({}, { size: perPage }), requests.backendDashboardProjects);
     return dispatch(projectsRequest);
   }
 
   static mapStateToProps(state) {
     return {
-      projects: select(requests.backendDashboardProjects, state.entityStore)
+      projects: select(requests.backendDashboardProjects, state.entityStore),
+      projectsMeta: meta(requests.backendDashboardProjects, state.entityStore)
     };
   }
 
@@ -27,6 +30,26 @@ class DashboardContainer extends Component {
     projects: PropTypes.array
   };
 
+  constructor() {
+    super();
+    this.projectPageChangeHandlerCreator = this.projectPageChangeHandlerCreator.bind(this);
+  }
+
+  handleProjectPageChange(event, page) {
+    const pagination = { number: page, size: perPage };
+    const filter = { };
+    const action = request(
+      projectsAPI.index(filter, pagination),
+      requests.backendDashboardProjects
+    );
+    this.props.dispatch(action);
+  }
+
+  projectPageChangeHandlerCreator(page) {
+    return (event) => {
+      this.handleProjectPageChange(event, page);
+    };
+  }
 
   render() {
     return (
@@ -43,6 +66,8 @@ class DashboardContainer extends Component {
                 { this.props.projects ?
                   <ProjectList.SearchableList
                     projects={this.props.projects}
+                    paginationClickHandler={this.projectPageChangeHandlerCreator}
+                    pagination={this.props.projectsMeta.pagination}
                   /> : null
                 }
               </div>

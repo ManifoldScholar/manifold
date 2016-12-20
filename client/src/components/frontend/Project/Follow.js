@@ -112,9 +112,7 @@ export default class ProjectFollow extends Component {
     let index = views.indexOf(this.state.view) + 1;
     if (index > 3) index = 0;
     const nextView = views[index];
-    console.log(nextView, 'nextView');
     this.setState(Object.assign({}, this.state, { view: nextView }));
-
   }
 
   render() {

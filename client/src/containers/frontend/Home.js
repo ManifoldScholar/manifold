@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { ProjectList, Layout } from 'components/frontend';
 import { commonActions } from 'actions/helpers';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router';
 import { uiFilterActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI } from 'api';
@@ -91,7 +90,6 @@ class HomeContainer extends Component {
               <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}
                 favorites={get(this.props.authentication, 'currentUser.favorites')}
-                dispatch={this.props.dispatch}
                 projects={this.props.featuredProjects}
                 dispatch={this.props.dispatch}
               /> : null

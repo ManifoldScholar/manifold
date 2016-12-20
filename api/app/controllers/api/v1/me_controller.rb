@@ -2,6 +2,7 @@ module Api
   module V1
     # Me controller
     class MeController < ApplicationController
+
       before_action :authenticate_request!
 
       def show
@@ -13,8 +14,7 @@ module Api
       end
 
       def update
-        presenter = ::CurrentUserUpdatePresenter.new(user_params)
-        updated = presenter.update(@current_user)
+        updated = ::Updaters::User.new(user_params).update(@current_user)
         if updated
           render json: @current_user
         else

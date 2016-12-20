@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Project as globalProject } from 'components/global';
-import { Utility } from 'components/backend';
+import { Utility, Project as globalProject } from 'components/global';
 import { Link } from 'react-router';
 
 export default class SearchableList extends Component {
@@ -8,7 +7,9 @@ export default class SearchableList extends Component {
   static displayName = "ProjectList.SearchableList";
 
   static propTypes = {
-    projects: PropTypes.array
+    projects: PropTypes.array,
+    pagination: PropTypes.object,
+    paginationClickHandler: PropTypes.func
   };
 
   constructor() {
@@ -37,11 +38,10 @@ export default class SearchableList extends Component {
 
   renderProject(project) {
     const attr = project.attributes;
-    console.log(attr.coverUrl, 'cover');
 
     return (
-      <li>
-        <Link to={`backend/project/${project.id}`}>
+      <li key={project.id}>
+        <Link to={`/backend/project/${project.id}`}>
           <figure>
             {attr.coverUrl ? (<img src={attr.coverUrl} />) : <globalProject.Placeholder/>}
           </figure>
@@ -69,9 +69,11 @@ export default class SearchableList extends Component {
     if (projects.length > 0) {
       output = (
         <div>
-          <p className="list-total">
-            {`Showing X-X ${projects.length} projects:`}
-          </p>
+          <Utility.EntityCount
+            pagination={this.props.pagination}
+            singularUnit="project"
+            pluralUnit="projects"
+          />
           <ul>
             {projects.map((project) => {
               return this.renderProject(project);
@@ -101,7 +103,10 @@ export default class SearchableList extends Component {
         <nav className="projects-vertical-primary">
           {this.renderProjectsList()}
         </nav>
-        <Utility.Pagination />
+        <Utility.Pagination
+          pagination={this.props.pagination}
+          paginationClickHandler={this.props.paginationClickHandler}
+        />
       </div>
     );
   }

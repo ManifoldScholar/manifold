@@ -7,8 +7,10 @@ module Authentication
 
   included do
     before_action :load_current_user
+    rescue_from ActionController::RoutingError, with: :resource_not_found
     rescue_from AuthenticationTimeoutError, with: :authentication_timeout
     rescue_from NotAuthenticatedError, with: :user_not_authenticated
+    rescue_from Authority::MissingUser, with: :user_not_authenticated
   end
 
   protected

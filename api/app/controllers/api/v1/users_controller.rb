@@ -2,20 +2,36 @@ module Api
   module V1
     # User controller
     class UsersController < ApplicationController
-      def whoami
-        render json: @current_user
+
+      resourceful! User, authorize_options: { except: [:create, :show, :whoami] } do
+        User
+          .filtered(user_filter_params[:filter])
+          .page(page_number)
+          .per(page_size)
       end
 
-      # POST /users
-      def create
-        @user = User.new(attributes_from(user_params))
-        if @user.save
-          render json: @user, status: :created, location: [:api, :v1, @user]
-        else
-          render json: @user.errors.as_json(full_messages: true),
-                 status: :unprocessable_entity
-        end
+      def whoami
+        render_single_resource(@current_user)
       end
+
+      def index
+        @users = load_users
+        render_multiple_resources(
+          @users,
+          each_serializer: UserSerializer
+        )
+      end
+
+      def show
+        @user = load_and_authorize_user
+        render_single_resource(@user)
+      end
+
+      def create
+        @user = ::Updaters::User.new(user_params).update(User.new)
+        render_single_resource @user
+      end
+
     end
   end
 end

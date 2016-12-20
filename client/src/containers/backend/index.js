@@ -1,13 +1,17 @@
 import Backend from './Backend';
 import Dashboard from './Dashboard';
-import BackendProjectDetail from './BackendProjectDetail';
+import ProjectDetail from './ProjectDetail';
 import TextDetail from './TextDetail';
 import Users from './Users';
+import Settings from './Settings';
+import Form from './Form';
 
 export {
   Backend,
   Dashboard,
-  BackendProjectDetail,
+  ProjectDetail,
   TextDetail,
-  Users
+  Users,
+  Settings,
+  Form
 };

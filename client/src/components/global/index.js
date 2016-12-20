@@ -14,3 +14,6 @@ export UserMenuBody from './UserMenu/UserMenuBody';
 export UserMenuButton from './UserMenu/UserMenuButton';
 export Avatar from './Avatar';
 export Helper from './Helper';
+export Utility from './Utility';
+export Modal from './Modal';
+export FatalError from './FatalError';

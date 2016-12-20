@@ -1,6 +1,9 @@
 # The project model is the primary unit of Manifold.
 class Project < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Concerns
   include TrackedCreator
   include Collaborative
@@ -23,7 +26,7 @@ class Project < ActiveRecord::Base
   has_many :project_subjects
   has_many :subjects, through: :project_subjects
   # rubocop:disable Style/Lambda
-  has_many :uncollected_resources, -> (object) {
+  has_many :uncollected_resources, ->(object) {
     where.not(id: object.collection_resources.select(:resource_id))
   }, class_name: "Resource"
   # rubocop:end Style/Lambda
@@ -41,6 +44,9 @@ class Project < ActiveRecord::Base
   # Validation
   validates :purchase_url, url: { allow_nil: true }
   validates :title, presence: true
+  validates :purchase_price_currency,
+            inclusion: { in: Money::Currency.all.map(&:iso_code) },
+            allow_nil: true
 
   # Attachments
   has_attached_file :avatar,
@@ -69,6 +75,10 @@ class Project < ActiveRecord::Base
   validates_attachment_file_name :cover, matches: validation[:allowed_ext]
   validates_attachment_file_name :hero, matches: validation[:allowed_ext]
   validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
+
+  def self.call
+    all
+  end
 
   def self.filtered(filters)
     projects = Project.all
@@ -116,6 +126,10 @@ class Project < ActiveRecord::Base
   def hero_url
     return nil if hero.url(:background).blank?
     ENV["API_URL"] + hero.url(:background)
+  end
+
+  def to_s
+    title
   end
 
   private

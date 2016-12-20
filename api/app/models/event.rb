@@ -7,13 +7,15 @@ class Event < ApplicationRecord
   TEXT_ADDED = "TEXT_ADDED".freeze
   TEXT_ANNOTATED = "TEXT_ANNOTATED".freeze
   TWEET = "TWEET".freeze
-
   EVENT_TYPES = [
     PROJECT_CREATED,
     TEXT_ADDED,
     TEXT_ANNOTATED,
     TWEET
   ].freeze
+
+  # Authority
+  include Authority::Abilities
 
   # Associations
   belongs_to :subject, polymorphic: true
@@ -45,4 +47,9 @@ class Event < ApplicationRecord
       subject: project
     ).nil?
   end
+
+  def to_s
+    "event #{id}"
+  end
+
 end

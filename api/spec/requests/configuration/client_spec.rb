@@ -1,19 +1,21 @@
 require "rails_helper"
 
-RSpec.describe "api/v1/configuration/client", type: :request do
+RSpec.describe "Client Configuration API", type: :request do
 
-  describe "GET /api/v1/configuration/client" do
+  describe "sends the configuration" do
 
-    it "returns 200 response header" do
-      get api_v1_configuration_client_path
-      expect(response).to have_http_status(200)
+    describe "the response" do
+      before(:each) { get api_v1_configuration_client_path }
+      let(:api_response) { JSON.parse(response.body) }
+
+      it "has a 200 status code" do
+        expect(response).to have_http_status(200)
+      end
+
+      it "contains the configuration object" do
+        expect(api_response).to be_a Hash
+      end
+
     end
-
-    it "returns a configuration object" do
-      get api_v1_configuration_client_path
-      api_response = JSON.parse(response.body)
-      expect(api_response).to be_a Hash
-    end
-
   end
 end

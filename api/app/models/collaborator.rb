@@ -4,9 +4,17 @@ class Collaborator < ActiveRecord::Base
   ROLE_CREATOR = "creator".freeze
   ROLE_CONTRIBUTOR = "contributor".freeze
 
+  acts_as_list scope: [:collaboratable_id, :collaboratable_type]
+
+  # Authority
+  include Authority::Abilities
+
   # Associations
-  belongs_to :text, optional: true
+  belongs_to :collaboratable, polymorphic: true
   belongs_to :maker
-  belongs_to :project, optional: true
+
+  def to_s
+    "#{role} #{maker}"
+  end
 
 end

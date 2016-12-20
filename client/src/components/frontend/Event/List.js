@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Teaser from './Teaser';
 import classNames from 'classnames';
-import { Utility } from 'components/frontend';
+import { Utility } from 'components/global';
 
 export default class EventList extends Component {
 

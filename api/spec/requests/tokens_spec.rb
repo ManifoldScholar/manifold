@@ -1,50 +1,53 @@
 require "rails_helper"
 
-RSpec.describe "api/v1/tokens", type: :request do
-  describe "POST /api/v1/tokens" do
+RSpec.describe "Tokens API", type: :request do
 
-    def create_token
-      email = "john@rambo.com"
-      password = "testtest123"
-      user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
-      post api_v1_tokens_path, params: {email: email, password: password}
-      return user
+  include_context("authenticated request")
+  include_context("param helpers")
+
+  describe "creates a token" do
+
+    let(:path) { api_v1_tokens_path }
+    let(:params) { { email: reader.email, password: password } }
+    let(:invalid_params) { { email: reader.email, password: "boogers" } }
+    let(:nonexistent_user_params) { { email: "123", password: "123" } }
+    let(:api_response) { JSON.parse(response.body) }
+
+    describe "the response" do
+      before(:each) { post path, params: params }
+      it "has a 200 status code" do
+        expect(response).to have_http_status(200)
+      end
+
+      it "returns the token as part of the response meta" do
+        token = api_response["meta"]["authToken"]
+        expect(token.blank?).to be false
+      end
+
+      it "contains the user" do
+        type = api_response["data"]["type"]
+        id = api_response["data"]["id"]
+        expect(type).to eq ("users")
+        expect(id).to eq(reader.id)
+      end
     end
 
-    it "responds with a 200 status code" do
-      create_token
-      expect(response).to have_http_status(200)
+    context "when the username or password are incorrect" do
+      before(:each) { post path, params: invalid_params }
+      describe "the response" do
+        it "has a 401 status code" do
+          expect(response).to have_http_status(401)
+        end
+      end
     end
 
-    it "returns the token as part of the response meta" do
-      create_token
-      parsed = JSON.parse(response.body)
-      token = parsed["meta"]["authToken"]
-      expect(token.blank?).to be false
-    end
-
-    it "returns the user as part of the response data" do
-      user = create_token
-      parsed = JSON.parse(response.body)
-      type = parsed["data"]["type"]
-      id = parsed["data"]["id"]
-      expect(type).to eq ("users")
-      expect(id).to eq(user.id)
-    end
-
-    it "responds with a 401 status code if the username and password are incorrect" do
-      email = "john@rambo.com"
-      password = "testtest123"
-      FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
-      post api_v1_tokens_path, params: {email: email, password: "wrongpassword"}
-      expect(response).to have_http_status(401)
-    end
-
-    it "responds with a 401 status code if no user exists" do
-      email = "123"
-      password = "123"
-      post api_v1_tokens_path, params: {email: email, password: password}
-      expect(response).to have_http_status(401)
+    context "when the username or password are incorrect" do
+      before(:each) { post path, params: nonexistent_user_params }
+      describe "the response" do
+        it "has a 401 status code" do
+          expect(response).to have_http_status(401)
+        end
+      end
     end
 
   end

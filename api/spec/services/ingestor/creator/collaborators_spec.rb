@@ -27,8 +27,8 @@ RSpec.describe Ingestor::Creator::Collaborators do
     alfred = FactoryGirl.create(:maker, name: "Alfred Hitchcock")
     wim = FactoryGirl.create(:maker, name: "Wim Wenders")
 
-    FactoryGirl.create(:collaborator, maker: wim, text: text)
-    FactoryGirl.create(:collaborator, maker: alfred, text: text)
+    FactoryGirl.create(:collaborator, maker: wim, collaboratable: text)
+    FactoryGirl.create(:collaborator, maker: alfred, collaboratable: text)
 
     inspectors = [
       double("Inspector", name: "Alfred Hitchcock", sort_name: "", role: "creator"),

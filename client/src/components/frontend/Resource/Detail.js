@@ -16,7 +16,6 @@ export default class ResourceDetail extends Component {
     let button;
     const resource = this.props.resource;
     const attr = resource.attributes;
-    console.log(attr);
     switch (attr.kind.toLowerCase()) {
       case "link":
         button = (

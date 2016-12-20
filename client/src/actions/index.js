@@ -6,3 +6,4 @@ export * as uiColorActions from './ui/color';
 export * as uiFilterActions from './ui/filter';
 export * as uiTypographyActions from './ui/typography';
 export * as uiVisibilityActions from './ui/visibility';
+export * as entityEditorActions from './entityEditor';

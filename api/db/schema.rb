@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123014447) do
+ActiveRecord::Schema.define(version: 20161211201312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,13 +36,13 @@ ActiveRecord::Schema.define(version: 20161123014447) do
   end
 
   create_table "collaborators", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "text_id"
     t.uuid     "maker_id"
     t.string   "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "position"
-    t.uuid     "project_id"
+    t.string   "collaboratable_type"
+    t.uuid     "collaboratable_id"
   end
 
   create_table "collection_resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 20161123014447) do
     t.integer  "publication_month"
     t.integer  "publication_day_of_month"
     t.string   "purchase_url"
-    t.integer  "purchase_price_in_cents"
+    t.bigint   "purchase_price_in_cents"
     t.string   "purchase_price_currency"
     t.string   "purchase_version_label"
     t.string   "instagram_id"

@@ -7,6 +7,9 @@ class TextSection < ActiveRecord::Base
   KIND_SECTION = "section".freeze
   ALLOWED_KINDS = [KIND_COVER_IMAGE, KIND_NAVIGATION, KIND_SECTION].freeze
 
+  # Authority
+  include Authority::Abilities
+
   # Associations
   belongs_to :text
   belongs_to :ingestion_source
@@ -27,4 +30,9 @@ class TextSection < ActiveRecord::Base
   def next_section
     text.section_after(position)
   end
+
+  def to_s
+    name
+  end
+
 end

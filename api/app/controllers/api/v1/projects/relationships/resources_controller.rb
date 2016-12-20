@@ -4,17 +4,19 @@ module Api
       module Relationships
         # Responds with resources in a project
         class ResourcesController < ApplicationController
+
           before_action :set_project, only: [:index]
 
-          # GET /resources
+          resourceful! Resource, authorize_options: { except: [:index] } do
+            @project.resources
+                    .filtered(resource_filter_params[:filter])
+                    .page(page_number)
+                    .per(page_size)
+          end
+
           def index
-            @resources = @project.resources
-                                 .filtered(resource_filter_params[:filter])
-                                 .page(page_number)
-                                 .per(page_size)
-            render json: @resources,
-                   each_serializer: ResourceSerializer,
-                   meta: { pagination: pagination_dict(@resources) }
+            @resources = load_resources
+            render_multiple_resources(@resources, each_serializer: ResourceSerializer)
           end
 
           private

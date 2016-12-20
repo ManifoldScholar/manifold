@@ -1,6 +1,9 @@
 # A collection of resources
 class Collection < ActiveRecord::Base
 
+  # Authority
+  include Authority::Abilities
+
   # Associations
   belongs_to :project
   has_many :collection_resources,
@@ -30,6 +33,10 @@ class Collection < ActiveRecord::Base
       .select("resources.kind, collection_resources.position")
       .distinct
       .to_a.pluck(:kind)
+  end
+
+  def to_s
+    title
   end
 
 end

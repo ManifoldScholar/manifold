@@ -10,6 +10,26 @@ export default {
     };
   },
 
+  create(project) {
+    return {
+      endpoint: '/api/v1/projects',
+      method: 'POST',
+      options: {
+        body: JSON.stringify({ type: "project", data: project })
+      }
+    };
+  },
+
+  update(id, project) {
+    return {
+      endpoint: `/api/v1/projects/${id}`,
+      method: 'PUT',
+      options: {
+        body: JSON.stringify({ type: "project", data: project })
+      }
+    };
+  },
+
   show(id) {
     return {
       endpoint: `/api/v1/projects/${id}`,
