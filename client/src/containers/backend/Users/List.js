@@ -65,6 +65,7 @@ class UsersListContainer extends PureComponent {
             {'Users'} <i className="manicon manicon-users"></i>
           </h3>
         </header>
+        { this.props.children }
         { this.props.users ?
           <UserList.SearchableList
             users={this.props.users}
