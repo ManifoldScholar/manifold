@@ -1,4 +1,4 @@
-.maker-utility-list {
+.has-many-list {
   > ul {
     @include listUnstyled;
 
@@ -9,6 +9,10 @@
 
       + li {
         border-top: 1px solid $neutral80;
+      }
+
+      &:last-child {
+        padding-bottom: 24px;
       }
     }
 
@@ -40,7 +44,7 @@
       }
     }
 
-    .maker-name {
+    .association-name {
       @include formInputPrimary;
       display: table-cell;
       width: 100%;
