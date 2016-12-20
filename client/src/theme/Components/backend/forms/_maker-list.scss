@@ -1,5 +1,5 @@
 .maker-utility-list {
-  ul {
+  > ul {
     @include listUnstyled;
 
     li {
@@ -77,90 +77,6 @@
           color: $sp40Tertiary;
         }
       }
-    }
-  }
-
-  .maker-add {
-    position: relative;
-
-    .manicon-plus {
-      @include buttonUnstyled;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 16px;
-      height: 100%;
-      font-size: 13px;
-      color: $accentPrimary;
-    }
-
-    // Required for override
-    .form-input & {
-      input[type="text"] {
-        height: auto;
-        padding: 8px 110px 13px 50px;
-        border: 1px solid $accentPrimary;
-
-        &::placeholder {
-          color: $accentPrimary;
-        }
-      }
-    }
-
-    .new {
-      @include buttonUnstyled;
-      @include utilityPrimary;
-      position: absolute;
-      top: 0;
-      right: 17px;
-      bottom: 0;
-      height: 100%;
-      font-size: 12px;
-      color: $accentPrimary;
-    }
-  }
-
-  .autofill-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    max-height: 210px;
-    overflow: scroll;
-    background-color: $neutral90;
-    border-color: $neutral80;
-    border-style: solid;
-    border-width: 0 1px 1px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity $durationFast $timing
-      visibility $durationFast $timing;
-
-    ul {
-      padding: 12px 0;
-
-      li {
-        @include templateHead;
-        padding: 0.425em 1.3em;
-        font-size: 20px;
-        color: $neutral70;
-        cursor: pointer;
-
-        + li {
-          border: 0; // OD
-        }
-
-        &:hover {
-          color: $neutral40;
-        }
-      }
-    }
-  }
-
-  .autofill-open {
-    .autofill-list {
-      opacity: 1;
-      visibility: visible;
     }
   }
 }

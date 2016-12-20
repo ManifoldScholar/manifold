@@ -146,9 +146,9 @@ export default class Makers extends PureComponent {
               );
             })}
           </ul>
-          {/* Add .autofill-open to .maker-add in order to show autofill list  */}
+          {/* Add .autofill-open to .input-autofill in order to show autofill list  */}
           <FormContainer.PredictiveInput
-            className="maker-add"
+            className="input-predictive"
             placeholder="Add an Author"
             label={
               (option) => {

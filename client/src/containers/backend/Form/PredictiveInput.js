@@ -135,26 +135,28 @@ class PredictiveInput extends PureComponent {
   render() {
 
     const classes = classNames(this.props.className, {
-      'autofill-open': this.state.open === true && this.hasOptions(this.state.options)
+      'predictive-open': this.state.open === true && this.hasOptions(this.state.options)
     });
 
     return (
       <div className={classes}>
-
-        <button className="manicon manicon-plus"></button>
-        <input
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.value}
-          placeholder={this.props.placeholder}
-          onBlur={this.handleBlur}
-          onFocus={this.handleFocus}
-          onKeyPress={this.handleKeyPress}
-        />
-        <button className="new" onClick={this.handleNew} >
-          {'Create New'}
-        </button>
-        <nav className="autofill-list">
+        <div className="input">
+          <button className="manicon manicon-plus"></button>
+          <input
+            className="text-input"
+            type="text"
+            onChange={this.handleChange}
+            value={this.state.value}
+            placeholder={this.props.placeholder}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+            onKeyPress={this.handleKeyPress}
+          />
+          <button className="submit" onClick={this.handleNew} >
+            {'Create New'}
+          </button>
+        </div>
+        <nav className="predictive-list">
           <ul>
             {this.state.options.map((option) => {
               return (

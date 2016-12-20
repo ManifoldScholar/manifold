@@ -30,6 +30,7 @@
 
       &:hover {
         img {
+          background-color: $accentPrimary;
           border-color: $accentPrimary;
         }
 
@@ -61,7 +62,8 @@
 
         img {
           border: 1px solid transparent;
-          transition: border $duration $timing;
+          transition: border $duration $timing,
+            background-color $duration $timing;
         }
 
         svg .highlight {
