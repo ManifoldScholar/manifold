@@ -21,12 +21,12 @@ class ApplicationController < ActionController::API
 
   def pagination_dict(object)
     {
-      per_page: page_size,
-      current_page: object.current_page,
-      next_page: object.next_page,
-      prev_page: object.prev_page, # use object.previous_page when using will_paginate
-      total_pages: object.total_pages,
-      total_count: object.total_count
+      per_page: page_size.to_i,
+      current_page: object.current_page.to_i,
+      next_page: object.next_page.to_i,
+      prev_page: object.prev_page.to_i, # use object.previous_page when using will_paginate
+      total_pages: object.total_pages.to_i,
+      total_count: object.total_count.to_i
     }
   end
 
