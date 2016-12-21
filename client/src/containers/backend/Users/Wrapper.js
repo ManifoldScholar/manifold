@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Project } from 'components/backend';
+import { UserList } from 'components/backend';
 import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
@@ -33,6 +33,7 @@ class UsersWraperContainer extends PureComponent {
           <div className="container">
             <section className="backend-panel">
               <aside>
+                <UserList.Navigation />
               </aside>
               <div className="panel">
                 {this.props.children}

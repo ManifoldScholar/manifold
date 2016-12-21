@@ -7,8 +7,8 @@
   padding: 33px 70px;
   background-color: $neutral95;
   transition: right $duration $timing;
-  
-  @include respond($break100 + 555) {
+
+  @include respond($break100 + (500 * 2)) {
     width: calc((100vw - #{$containerWidthInner})/2);
   }
 
