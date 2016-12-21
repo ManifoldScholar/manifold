@@ -116,6 +116,12 @@
     background-color: $neutral10;
   }
 
+  &.outlined {
+    color: $accentPrimary;
+    background: none;
+    border: 1px solid $accentPrimary;
+  }
+
   .manicon {
     display: inline-block;
     vertical-align: middle;

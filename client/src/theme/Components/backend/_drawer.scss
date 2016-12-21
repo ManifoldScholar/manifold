@@ -6,6 +6,15 @@
   width: 555px;
   padding: 33px 70px;
   background-color: $neutral95;
+  transition: right $duration $timing;
+  
+  @include respond($break100 + 555) {
+    width: calc((100vw - #{$containerWidthInner})/2);
+  }
+
+  &.drawer-appear, &.drawer-leave {
+    right: -555px;
+  }
 
   .drawer-close {
     position: absolute;
@@ -14,6 +23,11 @@
     font-size: 15px;
     color: $neutral50;
     text-decoration: none;
+    cursor: pointer;
+  }
+
+  header {
+    padding-bottom: 60px;
   }
 
   .title {
@@ -22,5 +36,28 @@
     margin: 0;
     font-size: 30px;
     color: $neutralWhite;
+  }
+
+  .utility {
+    .button-bare-primary {
+      margin-bottom: 11px;
+      font-size: 16px;
+    }
+
+    .manicon {
+      margin-left: 13px;
+      line-height: 16px;
+      color: $accentPrimary;
+      vertical-align: middle;
+    }
+
+    .manicon-key {
+      font-size: 11px;
+    }
+
+    .manicon-trashcan {
+      font-size: 16px;
+      color: $sp40Tertiary;
+    }
   }
 }

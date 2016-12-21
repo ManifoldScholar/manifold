@@ -5,7 +5,12 @@ export default class Save extends Component {
 
   static displayName = "Form.Save";
 
+  static defaultProps = {
+    text: 'Save'
+  };
+
   static propTypes = {
+    text: PropTypes.string
   };
 
   constructor(props) {
@@ -15,7 +20,7 @@ export default class Save extends Component {
   render() {
     return (
       <div className="form-input">
-        <input className="button-secondary" type="submit" value="Save" />
+        <input className="button-secondary outlined" type="submit" value={this.props.text} />
       </div>
     );
   }

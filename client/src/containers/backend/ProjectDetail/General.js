@@ -84,7 +84,9 @@ export default class ProjectPanelGeneral extends PureComponent {
             name="attributes[instagramId]"
             placeholder="Enter Instagram username"
           />
-          <Form.Save />
+          <Form.Save
+            text="Save Project"
+          />
         </FormContainer.Form>
       </section>
     );

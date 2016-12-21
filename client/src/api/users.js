@@ -20,7 +20,7 @@ export default {
 
   update(id, user) {
     return {
-      endpoint: `/api/v1/user/${id}`,
+      endpoint: `/api/v1/users/${id}`,
       method: 'PUT',
       options: {
         body: JSON.stringify({ type: "user", data: user})

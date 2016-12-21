@@ -36,12 +36,27 @@ class UserEditContainer extends PureComponent {
   render() {
     if (!this.props.user) return null;
     const attr = this.props.user.attributes;
-    console.log(attr);
+
     return (
       <Drawer.Wrapper
         closeUrl="/backend/users"
-        title={`${attr.firstName} ${attr.lastName}`}
       >
+        <header>
+          <h2 className="title">
+            {`${attr.firstName} ${attr.lastName}`}
+          </h2>
+          <div className="utility">
+            <button className="button-bare-primary">
+              {'Reset Password'}
+              <i className="manicon manicon-key"></i>
+            </button><br/>
+            <button className="button-bare-primary">
+              {'Delete User'}
+              <i className="manicon manicon-trashcan"></i>
+            </button>
+          </div>
+        </header>
+
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.user}
@@ -59,6 +74,9 @@ class UserEditContainer extends PureComponent {
             label="Last Name"
             name="attributes[lastName]"
             placeholder="Last Name"
+          />
+          <Form.Save
+            text="Save User"
           />
         </FormContainer.Form>
       </Drawer.Wrapper>
