@@ -48,11 +48,11 @@
 
   // <nav> wrapper around <ul>
   .text-nav {
-    display: none;
+    display: inline-block;
     vertical-align: middle;
 
-    @include respond($break50) {
-      display: inline-block;
+    &.show-50 {
+      @include show($break50, inline-block);
     }
 
     ul {
@@ -60,14 +60,22 @@
     }
 
     li {
-      margin-right: 25px;
+      margin-right: 18px;
+
+      @include respond($break40) {
+        margin-right: 25px;
+      }
 
       a {
         @include templateHead;
         position: relative;
-        font-size: 16px;
+        font-size: 14px;
         color: $neutral50;
         text-decoration: none;
+
+        @include respond($break40) {
+          font-size: 16px;
+        }
 
         &:hover {
           color: $accentPrimary;
@@ -113,6 +121,10 @@
 
         @include respond($break80) {
           position: relative;
+        }
+
+        &.show-60 {
+          @include show($break60, inline-block);
         }
 
         + li {

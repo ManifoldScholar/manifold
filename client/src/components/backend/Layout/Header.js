@@ -70,7 +70,7 @@ export default class LayoutHeader extends Component {
 
             <nav className="menu-dropdowns">
               <ul>
-                <li>
+                <li className="show-60">
                   <Link className="button-mode" to={`/browse`}>
                     Exit Admin Mode
                   </Link>

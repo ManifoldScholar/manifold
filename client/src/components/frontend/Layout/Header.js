@@ -37,7 +37,8 @@ export default class LayoutHeader extends Component {
               </span>
             </figure>
           </Link>
-          <nav className="text-nav">
+          {/* Use show-50 utility class to hide text-nav on mobile */}
+          <nav className="text-nav show-50">
             <ul>
               <li className={active === 'browse' ? 'active' : ''}>
                 <Link to={`/browse/`}>
