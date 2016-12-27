@@ -10,17 +10,26 @@
 
     td {
       @include templateHead;
-      padding: 11px 20px 6px 0;
-      font-size: 18px;
+      padding: 6px 20px 8px 0;
+      font-size: 15px;
       letter-spacing: 0.015em;
       color: $neutral50;
       border-bottom: 1px solid $neutral80;
 
+      @include respond($break40) {
+        padding: 11px 20px 6px 0;
+        font-size: 18px;
+      }
+
       + td {
         padding-right: 0;
-        font-size: 27px;
+        font-size: 24px;
         color: $accentPrimary;
         text-align: right;
+
+        @include respond($break40) {
+          font-size: 27px;
+        }
       }
     }
   }

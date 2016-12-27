@@ -122,9 +122,13 @@
     .name {
       @include templateHead;
       margin: 0;
-      font-size: 18px;
+      font-size: 16px;
       letter-spacing: 0.015em;
       transition: color $duration $timing;
+
+      @include respond($break80) {
+        font-size: 18px;
+      }
 
       &.large {
         font-size: 22px;
@@ -142,9 +146,13 @@
     .relations-list {
       @include templateCopy;
       padding-top: 6px;
-      font-size: 17px;
+      font-size: 15px;
       color: $neutral50;
       transition: color $duration $timing;
+
+      @include respond($break80) {
+        font-size: 17px;
+      }
     }
   }
 }
