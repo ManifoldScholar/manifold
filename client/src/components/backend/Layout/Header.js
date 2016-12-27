@@ -8,6 +8,7 @@ import {
 } from 'components/global';
 import { Link } from 'react-router';
 import startsWith from 'lodash/startsWith';
+import classNames from 'classnames';
 
 export default class LayoutHeader extends Component {
 
@@ -21,9 +22,21 @@ export default class LayoutHeader extends Component {
     commonActions: PropTypes.object
   };
 
-  render() {
+  isPath(segment) {
     const path = this.props.location.pathname;
-    const active = startsWith(path, '/backend/users') ? 'users' : 'projects';
+    if (segment === "projects" && path === "/backend/") return true;
+    return startsWith(path, `/backend/${segment}`);
+  }
+
+  classesFor(segment) {
+    let active = false;
+    const path = this.props.location.pathname;
+    if (segment === "project" && path === "/backend/") active = true;
+    if (startsWith(path, `/backend/${segment}`)) active = true;
+    return classNames({ active });
+  }
+
+  render() {
     return (
        <header className={'header-app dark'}>
           <div className="header-container">
@@ -37,17 +50,17 @@ export default class LayoutHeader extends Component {
             </Link>
             <nav className="text-nav">
               <ul>
-                <li className={active === 'projects' ? 'active' : ''}>
+                <li className={this.classesFor('project')} >
                   <Link to={`/backend/`}>
                     {'Projects'}
                   </Link>
                 </li>
-                <li className={active === 'users' ? 'active' : ''}>
+                <li className={this.classesFor('users')} >
                   <Link to={`/backend/users/`}>
                     {'Users'}
                   </Link>
                 </li>
-                <li className={active === 'settings' ? 'active' : ''}>
+                <li className={this.classesFor('settings')} >
                   <Link to={`/backend/settings/`}>
                     {'Settings'}
                   </Link>
