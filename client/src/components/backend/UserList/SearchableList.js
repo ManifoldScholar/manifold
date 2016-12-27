@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Utility, Project as globalProject } from 'components/global';
 import { Link } from 'react-router';
+import classnames from 'classnames';
 
 export default class SearchableList extends Component {
 
@@ -10,7 +11,8 @@ export default class SearchableList extends Component {
     users: PropTypes.array,
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func,
-    currentUserId: PropTypes.string
+    currentUserId: PropTypes.string,
+    active: PropTypes.string // the ID of the selected user
   };
 
   constructor() {
@@ -34,9 +36,9 @@ export default class SearchableList extends Component {
 
   renderUser(user) {
     const attr = user.attributes;
-
+    const rowClasses = classnames({ active: this.props.active === user.id });
     return (
-      <li key={user.id}>
+      <li key={user.id} className={rowClasses} >
         <Link to={`/backend/users/${user.id}`}>
           <figure className="avatar">
             {attr.avatarUrl ?

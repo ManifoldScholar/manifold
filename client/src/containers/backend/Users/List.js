@@ -69,6 +69,7 @@ class UsersListContainer extends PureComponent {
         { this.props.users ?
           <UserList.SearchableList
             users={this.props.users}
+            active={this.props.params.id}
             paginationClickHandler={this.usersPageChangeHandlerCreator}
             pagination={this.props.usersMeta.pagination}
             currentUserId={this.props.currentUserId}
