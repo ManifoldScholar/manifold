@@ -27,14 +27,17 @@ export default class DrawerWrapper extends PureComponent {
 
     setTimeout(() => {
       browserHistory.push(this.props.closeUrl);
-    }, 200)
+    }, 200);
   }
 
   render() {
     return (
       <ReactCSSTransitionGroup
         transitionName="drawer"
+        // True value required to enable transform
+        /* eslint-disable */
         transitionAppear={true}
+        /* eslint-enable */
         transitionEnter={false}
         transitionAppearTimeout={1}
         transitionLeaveTimeout={200}

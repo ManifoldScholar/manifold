@@ -23,7 +23,7 @@ export default {
       endpoint: `/api/v1/users/${id}`,
       method: 'PUT',
       options: {
-        body: JSON.stringify({ type: "user", data: user})
+        body: JSON.stringify({ type: "user", data: user })
       }
     };
   },

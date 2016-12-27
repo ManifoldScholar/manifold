@@ -17,16 +17,16 @@ export default class UserListNavigation extends Component {
         <ul>
           <li>
             <Link
-                to='#'
-                className={active === 'users' ? 'active' : ''}
+              to="#"
+              className={active === 'users' ? 'active' : ''}
             >
               {'Users'}
             </Link>
           </li>
           <li>
             <Link
-                to='#'
-                className={active === 'roles' ? 'active' : ''}
+              to="#"
+              className={active === 'roles' ? 'active' : ''}
             >
               {'Roles'}
             </Link>

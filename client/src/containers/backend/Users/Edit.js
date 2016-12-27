@@ -80,7 +80,7 @@ class UserEditContainer extends PureComponent {
           />
         </FormContainer.Form>
       </Drawer.Wrapper>
-    )
+    );
   }
 
 }
