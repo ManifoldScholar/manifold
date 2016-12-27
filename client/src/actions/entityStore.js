@@ -43,5 +43,6 @@ export const requests = {
   projectResources: 'project-resources',
   collectionResources: 'collection-all-resources',
   slideshowResources: 'collection-slideshow-resources',
-  showResourceDetail: 'show-resource-detail'
+  showResourceDetail: 'show-resource-detail',
+  showTextDetail: 'show-text-detail'
 };

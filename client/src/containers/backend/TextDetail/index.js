@@ -1,11 +1,11 @@
-// import General from './General';
+import General from './General';
 import Ingestion from './Ingestion';
 import Metadata from './Metadata';
 import Sections from './Sections';
 import Wrapper from './Wrapper';
 
 export default {
-  // General,
+  General,
   Ingestion,
   Metadata,
   Sections,

@@ -1,8 +1,9 @@
 .text-category-list-utility {
-  button {
+  button, .button {
     @include buttonUnstyled;
     @include utilityPrimary;
     font-size: 14px;
+    text-decoration: none;
     color: $neutral75;
     transition: color $duration $timing;
 

@@ -1,0 +1,28 @@
+exports[`Navigation.Breadcrumb component renders correctly 1`] = `
+<div
+  className="container flush">
+  <a
+    className="back-link-primary"
+    onClick={[Function]}
+    style={Object {}}>
+    <i
+      className="manicon manicon-arrow-left" />
+    Back to: 
+    <span>
+      Link One
+    </span>
+  </a>
+  <span>
+    <span
+      className="back-link-primary-delimiter">
+      /
+    </span>
+    <a
+      className="back-link-primary-segment"
+      onClick={[Function]}
+      style={Object {}}>
+      Link Two
+    </a>
+  </span>
+</div>
+`;

@@ -1,0 +1,48 @@
+import React, { PureComponent, PropTypes } from 'react';
+import { Navigation } from 'components/backend';
+
+export default class DetailHeader extends PureComponent {
+
+  static displayName = "Navigation.DetailHeader";
+
+  static propTypes = {
+    breadcrumb: PropTypes.array,
+    type: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string
+  };
+
+  render() {
+    return (
+      <section className="bg-neutral95">
+        <Navigation.Breadcrumb breadcrumb={this.props.breadcrumb} />
+        <div className="container flush">
+          <header className="project-header">
+            <figure>
+              <i className={`manicon manicon-${this.props.type}-placeholder`}></i>
+            </figure>
+            <div className="project-title">
+              <h1>
+                {this.props.title}
+                <span className="subtitle">
+                  {this.props.subtitle}
+                </span>
+              </h1>
+              <div className="project-utility">
+                <button className="button-bare-primary">
+                  Preview <i className="manicon manicon-eye-outline"></i>
+                </button>
+                <button className="button-bare-primary">
+                  Duplicate <i className="manicon manicon-check-double"></i>
+                </button>
+                <button className="button-bare-primary">
+                  Delete <i className="manicon manicon-trashcan"></i>
+                </button>
+              </div>
+            </div>
+          </header>
+        </div>
+      </section>
+    );
+  }
+}

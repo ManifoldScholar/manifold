@@ -375,12 +375,28 @@
 
   span {
     margin-left: 0.733em;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: $regular;
     letter-spacing: 0.01em;
     color: $neutral50;
-    text-transform: none;
+    text-transform: uppercase;
   }
+}
+
+.back-link-primary-delimiter {
+  display: inline-block;
+  color: $neutral50;
+  margin: 0 7px;
+  font-size: 14px;
+}
+.back-link-primary-segment {
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 14px;
+  color: $neutral50;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color $duration $timing,
 }
 
 .back-link-secondary {

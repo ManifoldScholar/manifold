@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Project } from 'components/backend';
+import { Project, Navigation } from 'components/backend';
 import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
@@ -48,8 +48,13 @@ class ProjectDetailWrapperContainer extends PureComponent {
 
     return (
       <div>
-        <Project.Header
-          project={project}
+        <Navigation.DetailHeader
+          type="project"
+          breadcrumb={[
+            { path: "/backend", label: "ALL PROJECTS" }
+          ]}
+          title={project.attributes.title}
+          subtitle={project.attributes.subtitle}
         />
         <section>
           <div className="container">
