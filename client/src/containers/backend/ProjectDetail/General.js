@@ -8,6 +8,7 @@ import { projectsAPI } from 'api';
 export default class ProjectPanelGeneral extends PureComponent {
 
   static displayName = "ProjectDetail.General";
+  static activeNavItem = "general";
 
   static propTypes = {
     route: PropTypes.object,

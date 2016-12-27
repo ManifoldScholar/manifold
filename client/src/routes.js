@@ -65,6 +65,9 @@ export default () => {
         </Route>
         <Route component={Backend.Settings.Wrapper} path="settings" >
           <IndexRoute component={Backend.Settings.General} />
+          <Route component={Backend.Settings.Theme} path="theme" />
+          <Route component={Backend.Settings.OAuth} path="oauth" />
+          <Route component={Backend.Settings.Features} path="features" />
         </Route>
         <Route component={NotFound} path="*" />
       </Route>

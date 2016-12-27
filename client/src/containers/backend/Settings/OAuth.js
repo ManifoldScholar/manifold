@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { Form } from 'components/backend';
 import Placeholder from './Placeholder';
 
-class SettingsGeneralContainer extends PureComponent {
+class SettingsOAuthContainer extends PureComponent {
 
-  static activeNavItem = "general";
+  static activeNavItem = "oauth";
 
   render() {
     return (
       <section>
-        <Placeholder label="general" />
+        <Placeholder label="OAuth" />
       </section>
     );
   }
@@ -18,6 +18,6 @@ class SettingsGeneralContainer extends PureComponent {
 }
 
 export default connect(
-  SettingsGeneralContainer.mapStateToProps
-)(SettingsGeneralContainer);
+  SettingsOAuthContainer.mapStateToProps
+)(SettingsOAuthContainer);
 

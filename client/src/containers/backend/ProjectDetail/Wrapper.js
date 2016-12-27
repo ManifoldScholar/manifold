@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Project, Layout } from 'components/backend';
+import { Project } from 'components/backend';
 import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';

@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 export default class ProjectPanelTexts extends Component {
 
   static displayName = "ProjectDetail.Texts";
+  static activeNavItem = "texts";
 
   static propTypes = {
     project: PropTypes.object

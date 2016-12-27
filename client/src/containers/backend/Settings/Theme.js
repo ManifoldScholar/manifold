@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { Form } from 'components/backend';
 import Placeholder from './Placeholder';
 
-class SettingsGeneralContainer extends PureComponent {
+class SettingsThemeContainer extends PureComponent {
 
-  static activeNavItem = "general";
+  static activeNavItem = "theme";
 
   render() {
     return (
       <section>
-        <Placeholder label="general" />
+        <Placeholder label="theme" />
       </section>
     );
   }
@@ -18,6 +18,6 @@ class SettingsGeneralContainer extends PureComponent {
 }
 
 export default connect(
-  SettingsGeneralContainer.mapStateToProps
-)(SettingsGeneralContainer);
+  SettingsThemeContainer.mapStateToProps
+)(SettingsThemeContainer);
 
