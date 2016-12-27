@@ -1,0 +1,41 @@
+.breadcrumb-primary {
+  @include utilityPrimary;
+  display: inline-block;
+  padding: 20px 0 18px;
+  font-size: 14px;
+  color: $neutral70;
+  text-decoration: none;
+
+  // Breadcrumb list
+  ul {
+    @include listHorizontal;
+    display: inline-block;
+    padding-left: 8px;
+
+    li + li {
+      &::before {
+        display: inline-block;
+        padding: 0 11px;
+        color: $neutral50;
+        content: '/';
+      }
+    }
+
+    a {
+      color: $neutral50;
+      text-decoration: none;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  .manicon {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 13px;
+    vertical-align: middle;
+  }
+}

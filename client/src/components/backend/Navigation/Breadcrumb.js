@@ -12,26 +12,22 @@ export default class Breadcrumb extends PureComponent {
   render() {
     return (
       <div className="container flush">
-        {this.props.breadcrumb.map((item, index) => {
-          if (index === 0) {
-            return (
-              <Link key={index} to={item.path} className="back-link-primary">
-                <i className="manicon manicon-arrow-left"></i>
-                Back to: <span>{item.label}</span>
-              </Link>
-            );
-          }
-          return (
-            <span key={index}>
-                <span className="back-link-primary-delimiter">/</span>
-                <Link to={item.path} className="back-link-primary-segment">
-                  {item.label}
-                </Link>
-              </span>
-          );
-        })}
+        <nav className="breadcrumb-primary">
+          <i className="manicon manicon-arrow-left"></i>
+          {'Back to:'}
+          <ul>
+            {this.props.breadcrumb.map((item, index) => {
+              return (
+                <li>
+                  <Link to={item.path} className="back-link-primary-segment">
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
       </div>
     );
   }
-
 }

@@ -383,22 +383,6 @@
   }
 }
 
-.back-link-primary-delimiter {
-  display: inline-block;
-  color: $neutral50;
-  margin: 0 7px;
-  font-size: 14px;
-}
-.back-link-primary-segment {
-  text-transform: uppercase;
-  display: inline-block;
-  font-size: 14px;
-  color: $neutral50;
-  text-decoration: none;
-  letter-spacing: 0.01em;
-  transition: color $duration $timing,
-}
-
 .back-link-secondary {
   @include clearfix;
   display: table;

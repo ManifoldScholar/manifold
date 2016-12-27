@@ -3,8 +3,8 @@
     @include buttonUnstyled;
     @include utilityPrimary;
     font-size: 14px;
-    text-decoration: none;
     color: $neutral75;
+    text-decoration: none;
     transition: color $duration $timing;
 
     &:hover {
