@@ -15,7 +15,7 @@ export default class ListItem extends Component {
 
     return (
       <div>
-        <a className="asset-thumb" href="#">
+        <Link to={`/backend/texts/${this.props.text.id}`} className="asset-thumb">
           <figure className="asset-image">
             <Text.Placeholder/>
           </figure>
@@ -34,10 +34,15 @@ export default class ListItem extends Component {
                 Hidden
               </span>
           </div>
-        </a>
+        </Link>
 
         <div className="text-category-list-utility">
-          <button>{'Edit'}</button>
+          <Link
+            className="button"
+            to={`/backend/texts/${this.props.text.id}`}
+          >
+            {'Edit'}
+          </Link>
           <button><i className="manicon manicon-arrow-up"></i></button>
           <button><i className="manicon manicon-arrow-down"></i></button>
           <button><i className="manicon manicon-x"></i></button>

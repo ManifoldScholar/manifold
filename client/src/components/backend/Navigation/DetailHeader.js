@@ -1,35 +1,35 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import React, { PureComponent, PropTypes } from 'react';
+import { Navigation } from 'components/backend';
 
-export default class ProjectHeader extends Component {
+export default class DetailHeader extends PureComponent {
 
-  static displayName = "Project.Header";
+  static displayName = "Navigation.DetailHeader";
 
   static propTypes = {
-    project: PropTypes.object
+    breadcrumb: PropTypes.array,
+    type: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string
   };
 
   render() {
-    const project = this.props.project;
-    const attr = project.attributes;
+    const breadcrumb = this.props.breadcrumb;
     return (
       <section className="bg-neutral95">
-        <div className="container flush">
-          <Link to={'/backend/'} className="back-link-primary">
-            <i className="manicon manicon-arrow-left"></i>
-            Back to: <span>ALL PROJECTS</span>
-          </Link>
-        </div>
+        {breadcrumb && breadcrumb.length > 0 ?
+          <Navigation.Breadcrumb breadcrumb={this.props.breadcrumb} />
+          : null
+        }
         <div className="container flush">
           <header className="project-header">
             <figure>
-              <i className="manicon manicon-project-placeholder"></i>
+              <i className={`manicon manicon-${this.props.type}-placeholder`}></i>
             </figure>
             <div className="project-title">
               <h1>
-                {attr.title}
+                {this.props.title}
                 <span className="subtitle">
-                  {attr.subtitle}
+                  {this.props.subtitle}
                 </span>
               </h1>
               <div className="project-utility">
