@@ -18,7 +18,7 @@ export default class Breadcrumb extends PureComponent {
           <ul>
             {this.props.breadcrumb.map((item, index) => {
               return (
-                <li>
+                <li key={index}>
                   <Link to={item.path} className="back-link-primary-segment">
                     {item.label}
                   </Link>
