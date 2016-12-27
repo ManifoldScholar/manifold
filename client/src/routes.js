@@ -59,6 +59,9 @@ export default () => {
         </Route>
         <Route component={Backend.Users.Wrapper} path="users" >
           <IndexRoute component={Backend.Users.List} />
+          <Route component={Backend.Users.List} >
+            <Route component={Backend.Users.Edit} path=":id" />
+          </Route>
         </Route>
         <Route component={Backend.Settings.Wrapper} path="settings" >
           <IndexRoute component={Backend.Settings.General} />

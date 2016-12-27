@@ -56,6 +56,11 @@
         color: $accentPrimary;
       }
     }
+
+    .button-secondary {
+      display: inline-block;
+      width: auto;
+    }
   }
 
   .form-dropzone {

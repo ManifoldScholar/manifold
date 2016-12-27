@@ -18,6 +18,26 @@ export default {
     };
   },
 
+  update(id, user) {
+    return {
+      endpoint: `/api/v1/users/${id}`,
+      method: 'PUT',
+      options: {
+        body: JSON.stringify({ type: "user", data: user })
+      }
+    };
+  },
+
+  show(id) {
+    return {
+      endpoint: `/api/v1/users/${id}`,
+      method: 'GET',
+      options: {
+      }
+    };
+  },
+
+
   create(user) {
     return {
       endpoint: '/api/v1/users',
