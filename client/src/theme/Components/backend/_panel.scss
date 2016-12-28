@@ -1,6 +1,10 @@
 .backend-panel {
   @include clearfix;
 
+  .container {
+    @include clearfix;
+  }
+
   .aside {
     display: none;
     float: left;
