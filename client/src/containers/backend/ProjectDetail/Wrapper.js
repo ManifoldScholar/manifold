@@ -60,8 +60,8 @@ class ProjectDetailWrapperContainer extends PureComponent {
           <aside className="scrollable">
             <div className="wrapper">
               <Project.Navigation
-                  project={project}
-                  active={this.activeChild()}
+                project={project}
+                active={this.activeChild()}
               />
             </div>
           </aside>
