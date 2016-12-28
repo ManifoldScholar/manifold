@@ -1,11 +1,13 @@
-import Wrapper from './Wrapper.js';
-import General from './General.js';
-import Collaborators from './Collaborators.js';
-import Texts from './Texts.js';
+import Wrapper from './Wrapper';
+import General from './General';
+import Collaborators from './Collaborators';
+import Texts from './Texts';
+import Category from './Category';
 
 export default {
   Wrapper,
   General,
   Collaborators,
-  Texts
+  Texts,
+  Category
 };

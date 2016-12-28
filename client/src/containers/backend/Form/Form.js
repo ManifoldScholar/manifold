@@ -25,6 +25,12 @@ class FormContainer extends PureComponent {
     name: PropTypes.string.isRequired
   };
 
+  static defaultProps = {
+    model: {
+      attributes: {}
+    }
+  }
+
   static mapStateToProps(state, ownProps) {
     return {
       routing: state.routing,
@@ -105,12 +111,24 @@ class FormContainer extends PureComponent {
     const dirty = this.props.session.dirty;
     const call = this.props.update(dirty.id, { attributes: dirty.attributes });
     const action = request(call, this.requestName(this.props));
-    this.props.dispatch(action);
+    const res = this.props.dispatch(action);
+    if (res.hasOwnProperty('promise') && this.props.onSuccess) {
+      res.promise.then(() => {
+        this.props.onSuccess();
+      });
+    }
   }
 
   create() {
-    console.log("create mechanism not yet implemented on <Form> component");
-    // TODO: Create
+    const dirty = this.props.session.dirty;
+    const call = this.props.create({ attributes: dirty.attributes });
+    const action = request(call, this.requestName(this.props));
+    const res = this.props.dispatch(action);
+    if (res.hasOwnProperty('promise') && this.props.onSuccess) {
+      res.promise.then(() => {
+        this.props.onSuccess();
+      });
+    }
   }
 
   renderChildren(props) {

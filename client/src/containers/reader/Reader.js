@@ -180,7 +180,7 @@ class ReaderContainer extends Component {
           </HigherOrder.ScrollAware>
           <main>
             {section}
-            <Section.Label category="Forerunners Edition"/>
+            <Section.Label text={this.props.text} />
             <Section.Pagination
               textId={this.props.text.id}
               sectionId={this.props.section.id}

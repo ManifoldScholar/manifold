@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227224627) do
+ActiveRecord::Schema.define(version: 20161229205954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(version: 20161227224627) do
   end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid   "project_id"
-    t.string "title"
-    t.string "role"
+    t.uuid    "project_id"
+    t.string  "title"
+    t.string  "role"
+    t.integer "position"
   end
 
   create_table "collaborators", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -287,6 +288,7 @@ ActiveRecord::Schema.define(version: 20161227224627) do
     t.uuid     "category_id"
     t.uuid     "creator_id"
     t.uuid     "start_text_section_id"
+    t.integer  "position"
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

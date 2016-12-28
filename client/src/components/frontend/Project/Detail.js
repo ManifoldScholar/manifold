@@ -90,22 +90,36 @@ class Detail extends Component {
   renderTexts() {
     const project = this.props.project;
     const texts = get(this.props, 'project.relationships.texts');
-    if (!texts || texts.length === 0) return null;
+    const events = project.relationships.events;
+    const containerClass = classNames({
+      container: true,
+      'flush-top': this.shouldShowActivity()
+    });
+    let excludes = []
+    if (project.relationships.publishedText) {
+      excludes.push(project.relationships.publishedText.id);
+    }
     return (
       <section>
-        <div className="container flush-top">
-          <header className="section-heading">
-            <h4 className="title">
-              <i className="manicon manicon-books-stack"></i>
-              {'Texts'}
-            </h4>
-          </header>
-          <TextList.Published text={project.relationships.publishedText} />
-          <TextList.Grouped
-            excludeIds={[project.relationships.publishedText.id]}
-            categories={project.relationships.textCategories}
-            texts={project.relationships.texts}
-          />
+        <div className={containerClass}>
+          <div className="text-category-list-primary">
+            <header className="section-heading">
+              <h4 className="title">
+                <i className="manicon manicon-books-stack"></i>
+                {'Texts'}
+              </h4>
+            </header>
+            {
+              project.relationships.publishedText ?
+              <TextList.Published text={project.relationships.publishedText} />
+              : null
+            }
+            <TextList.Grouped
+              excludeIds={excludes}
+              categories={project.relationships.textCategories}
+              texts={project.relationships.texts}
+            />
+          </div>
         </div>
       </section>
     );

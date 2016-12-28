@@ -27,7 +27,7 @@ module Api
 
       def update
         @subject = load_and_authorize_subject
-        @subject.update(subject_params)
+        ::Updaters::Default.new(subject_params).update(@subject)
         render_single_resource(@subject)
       end
 

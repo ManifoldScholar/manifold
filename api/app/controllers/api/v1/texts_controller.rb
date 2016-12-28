@@ -33,12 +33,13 @@ module Api
 
       def update
         @text = load_and_authorize_text
-        @text.update(text_params)
+        ::Updaters::Text.new(text_params).update(@text)
         render_single_resource(@text, include: INCLUDES)
       end
 
       def destroy
-        @project.destroy
+        @text = load_and_authorize_text
+        @text.destroy
       end
 
     end
