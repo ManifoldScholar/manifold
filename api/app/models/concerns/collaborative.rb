@@ -52,6 +52,9 @@ module Collaborative
   # rubocop:enable Metrics/BlockLength
 
   def creator_names
-    creators.pluck(:name).join(", ")
+    creators
+      .pluck(:first_name, :last_name)
+      .map { |parts| "#{parts[0]} #{parts[1]}" }
+      .join(", ")
   end
 end

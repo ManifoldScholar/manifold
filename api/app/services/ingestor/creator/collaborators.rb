@@ -29,8 +29,8 @@ module Ingestor
         extant_collaborator || collaborators.new
       end
 
-      def find_maker(makers, inspector)
-        extant_maker = find_in_set(makers, compare_attr(inspector))
+      def find_maker(_makers, inspector)
+        extant_maker = find_in_set(Maker.all, compare_attr(inspector))
         extant_maker || Maker.new
       end
 
@@ -47,9 +47,7 @@ module Ingestor
       end
 
       def compare_attr(inspector)
-        {
-          name: inspector.name
-        }
+        Maker.parse_name(inspector.name)
       end
 
       def maker_attributes(inspector)

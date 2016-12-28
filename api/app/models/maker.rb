@@ -30,6 +30,27 @@ class Maker < ActiveRecord::Base
     makers.where(name_query, "#{filters[:name]}%")
   end
 
+  def self.parse_name(name)
+    parts = {}
+    parts[:first_name] = if name.split.count > 1
+                           name.split[0..-2].join(" ")
+                         else
+                           name
+                         end
+    parts[:last_name] = name.split.last if name.split.count > 1
+    parts
+  end
+
+  def name=(name)
+    parts = Maker.parse_name(name)
+    self.first_name = parts[:first_name]
+    self.last_name = parts[:last_name]
+  end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def avatar_url
     return nil if avatar.url(:square).blank?
     ENV["API_URL"] + avatar.url(:square)

@@ -98,9 +98,7 @@ module Importer
       maker_attr = maker_json[:attributes].clone
       role = maker_attr[:role]
       maker_attr.delete(:role)
-      maker = Maker.find_or_create_by(
-        name: maker_attr[:name]
-      )
+      maker = Maker.find_or_create_by(Maker.parse_name(maker_attr[:name]))
       maker.update(maker_attr)
       set_attachment(maker, :avatar, maker_json[:avatar])
       maker.save
