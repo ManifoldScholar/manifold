@@ -29,16 +29,19 @@ class UsersWraperContainer extends PureComponent {
 
     return (
       <div>
-        <section>
+        <section className="backend-panel">
+          <aside className="scrollable">
+            <div className="wrapper">
+              <UserList.Navigation />
+            </div>
+          </aside>
           <div className="container">
-            <section className="backend-panel">
-              <aside>
-                <UserList.Navigation />
-              </aside>
-              <div className="panel">
-                {this.props.children}
-              </div>
-            </section>
+            <aside className="aside">
+              <UserList.Navigation />
+            </aside>
+            <div className="panel">
+              {this.props.children}
+            </div>
           </div>
         </section>
       </div>

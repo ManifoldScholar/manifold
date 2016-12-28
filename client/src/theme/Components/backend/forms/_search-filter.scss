@@ -20,14 +20,15 @@
       width: 100%;
       padding-left: 3.188em;
     }
-
-    ~ .filter-toggle, ~ .reset {
-      margin-top: 16px;
-    }
   }
 
-  .button-bare-primary + .button-bare-primary {
-    margin-left: 20px;
+  .button-bare-primary {
+    margin-top: 16px;
+    margin-right: 20px;
+
+    + .button-bare-primary {
+      margin-top: 10px;
+    }
   }
 
   .reset {

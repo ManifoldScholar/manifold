@@ -32,18 +32,26 @@
 
 // Media show/hide classes, media-query variable dependent
 // --------------------------
-.hide-60 {
-  @include respond($break60) {
+@mixin hide($breakpoint) {
+  @include respond($breakpoint) {
     display: none;
   }
 }
 
-.show-60 {
+@mixin show($breakpoint, $default: inherit) {
   display: none;
 
-  @include respond($break60) {
-    display: inherit;
+  @include respond($breakpoint) {
+    display: $default;
   }
+}
+
+.hide-60 {
+  @include hide($break60);
+}
+
+.show-60 {
+  @include show($break60);
 }
 
 .rel {
@@ -160,10 +168,14 @@
 
 @mixin headerLogoPrimary {
   display: inline-block;
-  margin-right: 33px;
+  margin-right: 22px;
   color: $accentPrimary;
   text-decoration: none;
   vertical-align: middle;
+
+  @include respond($break40) {
+    margin-right: 33px;
+  }
 
   .manicon-manifold-logo {
     font-size: 32px;

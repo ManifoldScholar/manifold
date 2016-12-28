@@ -13,9 +13,21 @@
 
       p {
         @include templateHead;
-        font-size: 18px;
+        font-size: 16px;
         letter-spacing: 0.015em;
         color: $neutral40;
+
+        @include respond($break30) {
+          font-size: 18px;
+        }
+
+        @include respond($break75) {
+          font-size: 16px;
+        }
+
+        @include respond($break85) {
+          font-size: 18px;
+        }
 
         a {
           color: $accentPrimary;

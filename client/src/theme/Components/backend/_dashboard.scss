@@ -1,16 +1,21 @@
 .backend-dashboard {
   @include clearfix;
   padding-top: 0;
-  margin-left: -7.6vw;
+
+  @include respond($break75) {
+    margin-left: -7.6vw;
+  }
 
   @include respond($containerWidthFull) {
     margin-left: -95px;
   }
 
   .left, .right {
-    float: left;
-    width: 50%;
-    padding-left: 7.6vw;
+    @include respond($break75) {
+      float: left;
+      width: 50%;
+      padding-left: 7.6vw;
+    }
 
     @include respond($containerWidthFull) {
       padding-left: 95px;
@@ -19,6 +24,14 @@
     // Pad dashboard sections
     section + section {
       padding-top: 55px;
+    }
+  }
+
+  .right {
+    margin-top: 42px;
+
+    @include respond($break50) {
+      margin-top: 60px;
     }
   }
 }
