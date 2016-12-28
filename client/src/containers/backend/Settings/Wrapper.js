@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Settings } from 'components/backend';
+import { Settings, Navigation } from 'components/backend';
 import get from 'lodash/get';
 
 class SettingsWrapperContainer extends PureComponent {
@@ -9,24 +9,38 @@ class SettingsWrapperContainer extends PureComponent {
     return get(this.props, 'children.type.activeNavItem');
   }
 
+  secondaryNavigationLinks() {
+    return [
+      { path: "backend/settings", label: "General", key: "general" },
+      { path: "backend/settings/theme", label: "Theme", key: "theme" },
+      { path: "backend/settings/oauth", label: "OAuth", key: "oauth" },
+      { path: "backend/settings/features", label: "Features", key: "features" }
+    ];
+  }
+
   render() {
     return (
-      <div>
-        <section>
-          <div className="container">
-            <section className="backend-panel">
-              <aside>
-                <Settings.Navigation
-                  active={this.activeChild()}
-                />
-              </aside>
-              <div className="panel">
-                {this.props.children}
-              </div>
-            </section>
+      <section className="backend-panel">
+        <aside className="scrollable">
+          <div className="wrapper">
+            <Navigation.Secondary
+              links={this.secondaryNavigationLinks()}
+              active={this.activeChild()}
+            />
           </div>
-        </section>
-      </div>
+        </aside>
+        <div className="container">
+          <aside className="aside">
+            <Navigation.Secondary
+              links={this.secondaryNavigationLinks()}
+              active={this.activeChild()}
+            />
+          </aside>
+          <div className="panel">
+            {this.props.children}
+          </div>
+        </div>
+      </section>
     );
   }
 
