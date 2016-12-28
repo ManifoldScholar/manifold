@@ -13,14 +13,14 @@
   "scripts": {
     "start": "NODE_ENV=production npm-run-all prod",
     "start-prod": "NODE_ENV=production npm-run-all prebuild dist prod",
-    "start-dev": "npm-run-all --silent prebuild dist:universal --parallel dev",
+    "start-dev": "npm-run-all --silent prebuild --parallel dev",
     "prebuild": "npm-run-all prebuild:**",
     "prebuild:clean": "node ./script/clean-builds-entry.js",
     "dev": "npm-run-all --parallel dev:**",
     "dev:build:universal": "webpack --config ./webpack/entries/react-server.config.entry.js --watch --colors --display-error-details",
     "dev:build:web": "webpack --config ./webpack/entries/web-server.config.entry.js --colors --display-error-details",
     "dev:serve:bundle": "node ./webpack/entries/client.server.entry.js",
-    "dev:serve:universal": "nodemon -q ./script/react-server-entry --watch ./dist/build/server/react-server",
+    "dev:serve:universal": "nodemon -q ./script/react-server-entry --watch dist/build/server/react-server",
     "dev:serve:web": "node ./script/web-server-entry",
     "dist": "npm-run-all --parallel dist:**",
     "dist:client": "webpack --config ./webpack/entries/client.config.entry.js --colors --display-error-details",
@@ -98,7 +98,6 @@
     "humps": "^1.0.0",
     "immutability-helper": "^2.0.0",
     "isomorphic-fetch": "^2.2.0",
-    "jest": "^18.0.0",
     "json-loader": "^0.5.3",
     "loader-utils": "^0.2.10",
     "lodash": "^4.11.2",
@@ -107,7 +106,7 @@
     "morgan": "^1.6.1",
     "node-emoji": "^1.3.0",
     "node-sass": "^4.1.1",
-    "nodemon": "^1.10.2",
+    "nodemon": "^1.11",
     "normalizr": "^2.0.1",
     "npm-run-all": "^3.1.0",
     "piping": "^1.0.0-rc.1",
@@ -154,9 +153,9 @@
     "webpack-hot-middleware": "^2.4.1"
   },
   "devDependencies": {
-    "babel-jest": "^16.0.0",
     "enzyme": "^2.3.0",
-    "jest": "^16.0.0"
+    "babel-jest": "^18.0.0",
+    "jest": "^18.0.0"
   },
   "engines": {
     "node": "4.1.1"

@@ -169,6 +169,7 @@ export default function (parameters) {
   process.once('SIGUSR2', () => {
     ch.info("The Universal Server has received a restart signal. Hang tight!");
     ch.info("   While it's being restarted, there will be no server-side rendering.", null);
+    process.kill(process.pid, 'SIGUSR2');
   });
 
 }

@@ -28,6 +28,7 @@ Object.assign(babelLoaderQuery, {cacheDirectory: true});
 // Create the entries. If we're in dev, we want hot loading
 var mainEntry = ['./src/client.js'];
 var themeEntry = ['./src/theme/theme.js'];
+var hotEntry = []
 if (__DEVELOPMENT__) {
   mainEntry.unshift('webpack/hot/only-dev-server');
   mainEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
