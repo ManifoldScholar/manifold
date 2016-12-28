@@ -33,8 +33,8 @@ if (__DEVELOPMENT__) {
   mainEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
   mainEntry.unshift('react-hot-loader/patch');
   themeEntry.unshift('webpack/hot/only-dev-server');
-  themeEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
-  themeEntry.unshift('react-hot-loader/patch');
+  // themeEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
+  // themeEntry.unshift('react-hot-loader/patch');
 }
 
 // Determine the public path
@@ -90,13 +90,12 @@ plugins.push(new webpack.DefinePlugin({
   })
 );
 
-// Use small sourcemaps in production
+// Use full source maps in production and fast source maps in dev.
 let devtool;
 if (__DEVELOPMENT__) {
-  devtool = "cheap-module-eval-source-map";
-  devtool = "source-map";
+  devtool = "eval-cheap-module-source-map";
 } else {
-  devtool = "cheap-module-source-map";
+  devtool = "source-map";
 }
 
 // In dev we load CSS as javascript so we can hot reload it. In production, we extract
@@ -108,9 +107,9 @@ if (__CLIENT__ && __PRODUCTION__) {
     loader: ExtractTextPlugin.extract(
       "style",
       [
-        "css?importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]",
+        "css?importLoaders=2",
         "postcss?syntax=postcss-scss",
-        "sass?outputStyle=expanded&sourceMap"
+        "sass?outputStyle=compact"
       ]
     ),
     include: path.resolve('./src')
@@ -120,9 +119,9 @@ if (__CLIENT__ && __PRODUCTION__) {
     test: /\.scss$/,
     loaders: [
       'style',
-      'css?importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]',
+      'css?importLoaders=2',
       'postcss?syntax=postcss-scss',
-      'sass?outputStyle=expanded&sourceMap'
+      'sass?outputStyle=expanded'
     ],
     include: path.resolve('./src')
   };
@@ -147,6 +146,9 @@ module.exports = {
     alias: {
       "fontgen": path.join(__dirname, "./loaders/fontgen")
     }
+  },
+  sassLoader: {
+    includePaths: [path.join(__dirname, "./src/theme")]
   },
   module: {
     loaders: [
