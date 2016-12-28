@@ -64,6 +64,10 @@ class TexDetailWrapperContainer extends PureComponent {
           <div className="container">
             <section className="backend-panel">
               <aside>
+                <Text.Navigation
+                  text={text}
+                  active={this.activeChild()}
+                />
               </aside>
               <div className="panel">
                 {React.cloneElement(this.props.children, { text })}

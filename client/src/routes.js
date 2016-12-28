@@ -63,8 +63,9 @@ export default () => {
             <Route component={Backend.Users.Edit} path=":id" />
           </Route>
         </Route>
-        <Route component={Backend.TextDetail.Wrapper} path="texts/:id" >
+        <Route component={Backend.TextDetail.Wrapper} path="text/:id" >
           <IndexRoute component={Backend.TextDetail.General} />
+          <Route component={Backend.TextDetail.Collaborators} path="collaborators" />
         </Route>
         <Route component={Backend.Settings.Wrapper} path="settings" >
           <IndexRoute component={Backend.Settings.General} />

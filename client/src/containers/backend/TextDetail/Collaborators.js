@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Form, Text } from 'components/backend';
-import { projectsAPI } from 'api';
+import { textsAPI } from 'api';
 import { Form as FormContainer } from 'containers/backend';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
@@ -9,25 +9,25 @@ import get from 'lodash/get';
 
 const { request, flush, requests } = entityStoreActions;
 
-class ProjectDetailCollaborators extends Component {
+class TextDetailCollaborators extends Component {
 
-  static displayName = "ProjectDetail.Collaborators";
+  static displayName = "TextDetail.Collaborators";
   static activeNavItem = "collaborators";
 
   static propTypes = {
-    project: PropTypes.object
+    text: PropTypes.object
   };
 
   render() {
-    const project = this.props.project;
+    const text = this.props.text;
 
     return (
-      <FormContainer.Collaborators entity={project} api={projectsAPI} />
+      <FormContainer.Collaborators entity={text} api={textsAPI } />
     );
   }
 }
 
 export default connect(
-  ProjectDetailCollaborators.mapStateToProps
-)(ProjectDetailCollaborators);
+  TextDetailCollaborators.mapStateToProps
+)(TextDetailCollaborators);
 

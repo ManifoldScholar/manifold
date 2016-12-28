@@ -36,7 +36,12 @@ export default class TextDetailGeneralContainer extends PureComponent {
           <Form.TextInput
             label="Title"
             name="attributes[title]"
-            placeholder="Enter Project Title"
+            placeholder="Enter Text Title"
+          />
+          <Form.TextInput
+            label="Unique Identifier"
+            name="attributes[uniqueIdentifier]"
+            placeholder="Enter the Unique Identifier"
           />
           <Form.Save text="Save Text" />
         </FormContainer.Form>

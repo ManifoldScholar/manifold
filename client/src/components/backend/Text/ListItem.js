@@ -15,7 +15,7 @@ export default class ListItem extends Component {
 
     return (
       <div>
-        <Link to={`/backend/texts/${this.props.text.id}`} className="asset-thumb">
+        <Link to={`/backend/text/${this.props.text.id}`} className="asset-thumb">
           <figure className="asset-image">
             <Text.Placeholder/>
           </figure>
@@ -39,7 +39,7 @@ export default class ListItem extends Component {
         <div className="text-category-list-utility">
           <Link
             className="button"
-            to={`/backend/texts/${this.props.text.id}`}
+            to={`/backend/text/${this.props.text.id}`}
           >
             {'Edit'}
           </Link>

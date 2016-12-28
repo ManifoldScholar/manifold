@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-export default class PanelNav extends Component {
+export default class ProjectNavigation extends Component {
 
-  static displayName = "Project.Panel.Navigation";
+  static displayName = "Project.Navigation";
 
   static propTypes = {
     active: PropTypes.string,
