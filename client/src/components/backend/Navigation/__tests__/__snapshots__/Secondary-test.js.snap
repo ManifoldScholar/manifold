@@ -1,0 +1,23 @@
+exports[`Navigation.Secondary component renders correctly 1`] = `
+<nav
+  className="panel-nav">
+  <ul>
+    <li>
+      <a
+        className=""
+        onClick={[Function]}
+        style={Object {}}>
+        Link One
+      </a>
+    </li>
+    <li>
+      <a
+        className=""
+        onClick={[Function]}
+        style={Object {}}>
+        Link Two
+      </a>
+    </li>
+  </ul>
+</nav>
+`;

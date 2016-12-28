@@ -6,5 +6,5 @@ export ProjectList from './ProjectList';
 export UserList from './UserList';
 export Text from './Text';
 export Drawer from './Drawer';
-export Settings from './Settings';
 export Navigation from './Navigation';
+export Settings from './Settings';

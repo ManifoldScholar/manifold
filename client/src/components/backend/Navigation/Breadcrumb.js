@@ -6,7 +6,7 @@ export default class Breadcrumb extends PureComponent {
   static displayName = "Navigation.Breadcrumb";
 
   static propTypes = {
-    breadcrumb: PropTypes.array
+    links: PropTypes.array
   };
 
   render() {
@@ -16,7 +16,7 @@ export default class Breadcrumb extends PureComponent {
           <i className="manicon manicon-arrow-left"></i>
           {'Back to:'}
           <ul>
-            {this.props.breadcrumb.map((item, index) => {
+            {this.props.links.map((item, index) => {
               return (
                 <li key={index}>
                   <Link to={item.path} className="back-link-primary-segment">

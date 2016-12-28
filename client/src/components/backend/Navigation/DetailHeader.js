@@ -17,7 +17,7 @@ export default class DetailHeader extends PureComponent {
     return (
       <section className="bg-neutral95">
         {breadcrumb && breadcrumb.length > 0 ?
-          <Navigation.Breadcrumb breadcrumb={this.props.breadcrumb} />
+          <Navigation.Breadcrumb links={this.props.breadcrumb} />
           : null
         }
         <div className="container flush">

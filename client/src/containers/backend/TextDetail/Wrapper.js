@@ -42,6 +42,36 @@ class TexDetailWrapperContainer extends PureComponent {
     return get(this.props, 'children.type.activeNavItem');
   }
 
+  secondaryNavigationLinks(text) {
+    return [
+      {
+        path: `/backend/text/${text.id}/`,
+        label: "General",
+        key: "general"
+      },
+      {
+        path: `/backend/text/${text.id}/collaborators`,
+        label: "People",
+        key: "collaborators"
+      },
+      {
+        path: `/backend/text/${text.id}/ingestion`,
+        label: "Ingestion",
+        key: "ingestion"
+      },
+      {
+        path: `/backend/text/${text.id}/sections`,
+        label: "Sections",
+        key: "sections"
+      },
+      {
+        path: `/backend/text/${text.id}/metadata`,
+        label: "Metadata",
+        key: "metadata"
+      }
+    ];
+  }
+
   render() {
     if (!this.props.text) return null;
     const { text } = this.props;
@@ -60,19 +90,25 @@ class TexDetailWrapperContainer extends PureComponent {
           title={text.attributes.title}
           subtitle={text.attributes.subtitle}
         />
-        <section>
+        <section className="backend-panel">
+          <aside className="scrollable">
+            <div className="wrapper">
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks(text)}
+                active={this.activeChild()}
+              />
+            </div>
+          </aside>
           <div className="container">
-            <section className="backend-panel">
-              <aside>
-                <Text.Navigation
-                  text={text}
-                  active={this.activeChild()}
-                />
-              </aside>
-              <div className="panel">
-                {React.cloneElement(this.props.children, { text })}
-              </div>
-            </section>
+            <aside className="aside">
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks(text)}
+                active={this.activeChild()}
+              />
+            </aside>
+            <div className="panel">
+              {React.cloneElement(this.props.children, { text })}
+            </div>
           </div>
         </section>
       </div>

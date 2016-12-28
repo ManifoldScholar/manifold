@@ -42,6 +42,26 @@ class ProjectDetailWrapperContainer extends PureComponent {
     return get(this.props, 'children.type.activeNavItem');
   }
 
+  secondaryNavigationLinks(project) {
+    return [
+      {
+        path: `/backend/project/${project.id}/`,
+        label: "General",
+        key: "general"
+      },
+      {
+        path: `/backend/project/${project.id}/collaborators`,
+        label: "People",
+        key: "collaborators"
+      },
+      {
+        path: `/backend/project/${project.id}/texts`,
+        label: "Texts",
+        key: "texts"
+      }
+    ];
+  }
+
   render() {
     if (!this.props.project) return null;
     const { project } = this.props;
@@ -59,16 +79,16 @@ class ProjectDetailWrapperContainer extends PureComponent {
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">
-              <Project.Navigation
-                project={project}
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks(project)}
                 active={this.activeChild()}
               />
             </div>
           </aside>
           <div className="container">
             <aside className="aside">
-              <Project.Navigation
-                project={project}
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks(project)}
                 active={this.activeChild()}
               />
             </aside>

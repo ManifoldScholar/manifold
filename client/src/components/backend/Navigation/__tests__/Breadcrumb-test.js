@@ -1,10 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Navigation } from 'components/backend';
+import Breadcrumb from '../Breadcrumb';
 
 describe("Navigation.Breadcrumb component", () => {
 
-  const items = [
+  const links = [
     {
       path: '/link-1',
       label: 'Link One'
@@ -17,7 +17,7 @@ describe("Navigation.Breadcrumb component", () => {
 
   it('renders correctly', () => {
     const component = renderer.create(
-      <Navigation.Breadcrumb breadcrumb={items} />
+      <Breadcrumb links={links} />
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
