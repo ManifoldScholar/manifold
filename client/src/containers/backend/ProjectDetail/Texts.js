@@ -279,7 +279,11 @@ class ProjectDetailTexts extends PureComponent {
   renderTexts(texts) {
     let renderedTexts;
     if (texts.length === 0) {
-      renderedTexts = <li key="0"></li>
+      renderedTexts = <li key="0">
+        <p className="group-empty">
+          {'No texts have been added to this category'}
+        </p>
+      </li>
     } else {
       renderedTexts = texts.map((text) => {
         return (
@@ -381,7 +385,7 @@ class ProjectDetailTexts extends PureComponent {
         <section className="text-category-list-secondary">
           <div className="text-category">
             <header>
-              <h4 className="category-title">Published</h4>
+              <h4 className="category-title highlight">Published</h4>
             </header>
             {this.renderTexts(this.publishedTexts())}
           </div>
@@ -429,7 +433,7 @@ class ProjectDetailTexts extends PureComponent {
           })}
           <div className="text-category">
             <header>
-              <h4 className="category-title">Uncategorized</h4>
+              <h4 className="category-title notice">Uncategorized</h4>
             </header>
             {this.renderTexts(this.uncategorizedTexts())}
           </div>
