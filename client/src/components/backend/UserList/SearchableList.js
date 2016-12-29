@@ -39,20 +39,27 @@ export default class SearchableList extends Component {
     const rowClasses = classnames({ active: this.props.active === user.id });
     return (
       <li key={user.id} className={rowClasses} >
+        <div className="checkbox-primary">
+          <div className="toggle-indicator">
+            <i className="manicon manicon-check"></i>
+          </div>
+        </div>
         <Link to={`/backend/users/${user.id}`}>
-          <figure className="avatar">
-            {attr.avatarUrl ?
-              <div className="image" style={ { backgroundImage: `url(${attr.avatarUrl})` } }/>
-              :
-              <div className="no-image">
-                <i className="manicon manicon-person"></i>
-              </div>
-            }
-          </figure>
-          <div className="meta">
-            <h3 className="name large">
-              {attr.firstName} {attr.lastName}
-            </h3>
+          <div>
+            <figure className="avatar">
+              {attr.avatarUrl ?
+                <div className="image" style={ { backgroundImage: `url(${attr.avatarUrl})` } }/>
+                :
+                <div className="no-image">
+                  <i className="manicon manicon-person"></i>
+                </div>
+              }
+            </figure>
+            <div className="meta">
+              <h3 className="name large">
+                {attr.firstName} {attr.lastName}
+              </h3>
+            </div>
           </div>
           <span className="label">
             {this.isCurrentUser(user.id)}
