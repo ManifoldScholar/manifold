@@ -16,17 +16,36 @@
 
   ul {
     @include listUnstyled;
-    border-top: 1px solid $neutral80;
 
     li {
-      padding: 20px 0 17px;
-      border-bottom: 1px solid $neutral80;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid $neutral80;
+      transition: background-color $duration ease-out,
+        box-shadow $duration ease-out;
+
+      &.active {
+        background-color: $neutral95;
+        border-color: $neutral95;
+        box-shadow: -21px 0 0 $neutral95;
+
+        a {
+          color: $accentPrimary;
+        }
+
+        + li {
+          border-color: $neutral95;
+        }
+      }
     }
 
     a {
-      display: table;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0 17px;
       color: $neutral30;
       text-decoration: none;
+      transition: color $duration ease-out;
 
       &:hover {
         figure img {
@@ -61,7 +80,7 @@
       vertical-align: top;
 
       &.cover {
-        min-width: 50px;
+        width: 50px;
 
         img {
           border: 1px solid transparent;
@@ -152,6 +171,21 @@
 
       @include respond($break80) {
         font-size: 17px;
+      }
+    }
+
+    // Optional items
+    .checkbox-primary {
+      margin-right: 18px;
+
+      .toggle-indicator {
+        width: 15px;
+        height: 15px;
+        padding: 3px 2px;
+      }
+
+      .manicon-check {
+        font-size: 8px;
       }
     }
   }

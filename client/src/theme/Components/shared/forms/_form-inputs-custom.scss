@@ -1,0 +1,50 @@
+// Form Inputs that live outside a form element
+// These are just as abstract as form elements, but don't require a wrapper
+
+.checkbox-primary {
+  @include formLabelPrimary;
+  line-height: 25px;
+  cursor: pointer;
+
+  .bg-neutral90 & {
+    .toggle-indicator {
+      background-color: transparent;
+      border: 1px solid $neutral80;
+    }
+
+    &.checked {
+      .toggle-indicator {
+        background-color: $neutral30;
+      }
+    }
+  }
+
+  &.checked {
+    .manicon-check {
+      opacity: 1;
+    }
+  }
+
+  .toggle-indicator {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding: 7px 6px;
+    vertical-align: middle;
+    background-color: $neutral30;
+  }
+
+  .label {
+    display: inline-block;
+    margin-left: 9px;
+    vertical-align: middle;
+  }
+
+  // If check icon exists, hide it until selected
+  .manicon-check {
+    font-size: 11px;
+    color: $neutralOffBlack;
+    opacity: 0;
+    transition: opacity $duration $timing;
+  }
+}
