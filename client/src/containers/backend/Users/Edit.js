@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Drawer } from 'components/backend';
+import { Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import usersAPI from 'api/users';
@@ -38,7 +39,7 @@ class UserEditContainer extends PureComponent {
     const attr = this.props.user.attributes;
 
     return (
-      <Drawer.Wrapper
+      <Dialog.Wrapper
         closeUrl="/backend/users"
       >
         <header>
@@ -79,7 +80,7 @@ class UserEditContainer extends PureComponent {
             text="Save User"
           />
         </FormContainer.Form>
-      </Drawer.Wrapper>
+      </Dialog.Wrapper>
     );
   }
 
