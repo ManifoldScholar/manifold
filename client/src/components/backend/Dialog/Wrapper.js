@@ -3,9 +3,9 @@ import { browserHistory } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Link } from 'react-router';
 
-export default class DrawerWrapper extends PureComponent {
+export default class DialogWrapper extends PureComponent {
 
-  static displayName = "Drawer.Wrapper";
+  static displayName = "Dialog.Wrapper";
 
   static propTypes = {
     closeUrl: PropTypes.string.isRequired,
@@ -33,7 +33,7 @@ export default class DrawerWrapper extends PureComponent {
   render() {
     return (
       <ReactCSSTransitionGroup
-        transitionName="drawer"
+        transitionName="dialog"
         // True value required to enable transform
         /* eslint-disable */
         transitionAppear={true}
@@ -45,12 +45,13 @@ export default class DrawerWrapper extends PureComponent {
         {this.state.leaving ?
           null
           :
-          <div key="drawer" className="drawer-primary drawer-appear">
-            <div className="rel">
+          <div key="dialog" className="dialog-primary dialog-appear">
+            <div className="dialog-overlay" onClick={this.handleLeaveClick}></div>
+            <div className="dialog-box">
               <div onClick={this.handleLeaveClick} className="close-button-primary">
                 <i className="manicon manicon-x"></i>
                 <span className="screen-reader-text">
-                  Close Drawer
+                  Close Dialog
                 </span>
               </div>
 

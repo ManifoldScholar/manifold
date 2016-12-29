@@ -39,6 +39,7 @@ export default class SearchableList extends Component {
     const rowClasses = classnames({ active: this.props.active === user.id });
     return (
       <li key={user.id} className={rowClasses} >
+        {/* Add .checked to .checkbox-primary to display checked state */}
         <div className="checkbox-primary">
           <div className="toggle-indicator">
             <i className="manicon manicon-check"></i>

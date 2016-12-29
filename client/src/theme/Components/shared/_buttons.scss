@@ -12,6 +12,34 @@
   text-decoration: none;
 }
 
+// Vertical arrangement for bare buttons.
+.buttons-bare-vertical {
+  .button-bare-primary {
+    margin-bottom: 11px;
+    font-size: 14px;
+
+    @include respond($break65) {
+      font-size: 16px;
+    }
+  }
+
+  .manicon {
+    margin-left: 13px;
+    line-height: 16px;
+    color: $accentPrimary;
+    vertical-align: middle;
+  }
+
+  .manicon-key {
+    font-size: 11px;
+  }
+
+  .manicon-trashcan {
+    font-size: 16px;
+    color: $sp40Tertiary;
+  }
+}
+
 // Can be a <button> or an <a>
 .button-primary {
   @include buttonUnstyled;
@@ -416,4 +444,11 @@
     line-height: 1.556;
     color: $neutral50;
   }
+}
+
+.close-button-primary {
+  font-size: 15px;
+  color: $neutral50;
+  text-decoration: none;
+  cursor: pointer;
 }
