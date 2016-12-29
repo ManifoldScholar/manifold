@@ -48,3 +48,41 @@
     transition: opacity $duration $timing;
   }
 }
+
+@mixin booleanPrimary($height) {
+  position: relative;
+  width: $height * 2;
+  height: $height;
+  background-blend-mode: multiply;
+  // Disabled to use built-in function
+  // scss-lint:disable NameFormat
+  background: $neutral50 linear-gradient(90deg, transparentize($neutral90, 0.5), transparentize($neutral90, 1));
+  border-radius: $height;
+  transition: background $durationSlow $timing;
+
+  &.checked {
+    // Disabled to use built-in function
+    // scss-lint:disable NameFormat
+    background: $accentPrimary linear-gradient(270deg, transparentize($neutral90, 0.5), transparentize($neutral90, 1));
+
+    &::before {
+      left: calc(100% - #{$height});
+    }
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $height;
+    height: $height;
+    background-color: $neutral20;
+    border-radius: $height;
+    content: '';
+    transition: left $duration $timing;
+  }
+}
+
+.boolean-primary {
+  @include booleanPrimary(30px);
+}
