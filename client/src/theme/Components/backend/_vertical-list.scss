@@ -42,6 +42,7 @@
     a {
       display: flex;
       justify-content: space-between;
+      width: 100%;
       padding: 20px 0 17px;
       color: $neutral30;
       text-decoration: none;
@@ -75,10 +76,11 @@
       }
     }
 
-    figure {
-      display: table-cell;
-      vertical-align: top;
+    header {
+      display: flex;
+    }
 
+    figure {
       &.cover {
         width: 50px;
 
@@ -150,7 +152,11 @@
       }
 
       &.large {
-        font-size: 22px;
+        font-size: 18px;
+
+        @include respond($break80) {
+          font-size: 22px;
+        }
       }
     }
 

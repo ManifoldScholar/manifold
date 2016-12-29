@@ -45,7 +45,7 @@ export default class SearchableList extends Component {
           </div>
         </div>
         <Link to={`/backend/users/${user.id}`}>
-          <div>
+          <header>
             <figure className="avatar">
               {attr.avatarUrl ?
                 <div className="image" style={ { backgroundImage: `url(${attr.avatarUrl})` } }/>
@@ -60,7 +60,7 @@ export default class SearchableList extends Component {
                 {attr.firstName} {attr.lastName}
               </h3>
             </div>
-          </div>
+          </header>
           <span className="label">
             {this.isCurrentUser(user.id)}
             {attr.role}

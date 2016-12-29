@@ -42,7 +42,7 @@ export default class SearchableList extends Component {
     return (
       <li key={project.id}>
         <Link to={`/backend/project/${project.id}`}>
-          <div>
+          <header>
             <figure className="cover">
               {attr.coverUrl ? (<img src={attr.coverUrl} />) : <globalProject.Placeholder/>}
             </figure>
@@ -55,7 +55,7 @@ export default class SearchableList extends Component {
               </h3>
               {this.renderProjectMakers(project.relationships.creators)}
             </div>
-          </div>
+          </header>
           <span className="label">
             Edit
           </span>
