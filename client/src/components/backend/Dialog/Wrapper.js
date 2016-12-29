@@ -33,30 +33,29 @@ export default class DialogWrapper extends PureComponent {
   render() {
     return (
       <ReactCSSTransitionGroup
-          transitionName="dialog"
-          // True value required to enable transform
-          /* eslint-disable */
-          transitionAppear={true}
-          /* eslint-enable */
-          transitionEnter={false}
-          transitionAppearTimeout={1}
-          transitionLeaveTimeout={200}
+        transitionName="dialog"
+        // True value required to enable transform
+        /* eslint-disable */
+        transitionAppear={true}
+        /* eslint-enable */
+        transitionEnter={false}
+        transitionAppearTimeout={1}
+        transitionLeaveTimeout={200}
       >
         {this.state.leaving ?
           null
           :
           <div key="dialog" className="dialog-primary dialog-appear">
+            <div className="dialog-overlay" onClick={this.handleLeaveClick}></div>
             <div className="dialog-box">
-              <div className="rel">
-                <div onClick={this.handleLeaveClick} className="dialog-close">
-                  <i className="manicon manicon-x"></i>
-                  <span className="screen-reader-text">
-                    Close Dialog
-                  </span>
-                </div>
-
-                {this.props.children}
+              <div onClick={this.handleLeaveClick} className="close-button-primary">
+                <i className="manicon manicon-x"></i>
+                <span className="screen-reader-text">
+                  Close Dialog
+                </span>
               </div>
+
+              {this.props.children}
             </div>
           </div>
         }

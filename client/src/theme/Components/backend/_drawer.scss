@@ -30,14 +30,10 @@
     right: -555px;
   }
 
-  .drawer-close {
+  .close-button-primary {
     position: absolute;
     top: 0;
     right: 0;
-    font-size: 15px;
-    color: $neutral50;
-    text-decoration: none;
-    cursor: pointer;
   }
 
   header {
@@ -48,43 +44,16 @@
     }
   }
 
-  .title {
-    @include templateHead;
+  .heading-quaternary {
     padding: 32px 0 1.1em;
-    margin: 0;
-    font-size: 28px;
     color: $neutralWhite;
 
     @include respond($break90) {
       padding-top: 37px;
-      font-size: 30px;
     }
   }
 
-  .utility {
-    .button-bare-primary {
-      margin-bottom: 11px;
-      font-size: 14px;
-
-      @include respond($break65) {
-        font-size: 16px;
-      }
-    }
-
-    .manicon {
-      margin-left: 13px;
-      line-height: 16px;
-      color: $accentPrimary;
-      vertical-align: middle;
-    }
-
-    .manicon-key {
-      font-size: 11px;
-    }
-
-    .manicon-trashcan {
-      font-size: 16px;
-      color: $sp40Tertiary;
-    }
+  .utility-primary {
+    color: $neutralWhite;
   }
 }

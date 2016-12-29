@@ -47,7 +47,7 @@ export default class DrawerWrapper extends PureComponent {
           :
           <div key="drawer" className="drawer-primary drawer-appear">
             <div className="rel">
-              <div onClick={this.handleLeaveClick} className="drawer-close">
+              <div onClick={this.handleLeaveClick} className="close-button-primary">
                 <i className="manicon manicon-x"></i>
                 <span className="screen-reader-text">
                   Close Drawer

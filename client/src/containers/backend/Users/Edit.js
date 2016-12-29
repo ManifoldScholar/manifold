@@ -1,7 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Drawer } from 'components/backend';
-import { Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import usersAPI from 'api/users';
@@ -38,15 +37,33 @@ class UserEditContainer extends PureComponent {
     if (!this.props.user) return null;
     const attr = this.props.user.attributes;
 
+    /*
+      Edit dialog(s) can be wrapped in either
+      <Drawer.Wrapper>: Right-hand pop-in panel
+      <Dialog.Wrapper> Overlay with dialog box
+    */
     return (
-      <Dialog.Wrapper
+      <Drawer.Wrapper
         closeUrl="/backend/users"
       >
         <header>
-          <h2 className="title">
+          {/*
+            Dialog/Drawers can use p.utility-primary or h*.heading-quaternary
+            shared elements for headers
+
+            Example:
+           <p className="utility-primary">
+             STEP 1 of 8 – basic information
+           </p>
+
+           <h2 className="heading-quaternary">
+             {`${attr.firstName} ${attr.lastName}`}
+           </h2>
+          */}
+          <h2 className="heading-quaternary">
             {`${attr.firstName} ${attr.lastName}`}
           </h2>
-          <div className="utility">
+          <div className="buttons-bare-vertical">
             <button className="button-bare-primary">
               {'Reset Password'}
               <i className="manicon manicon-key"></i>
@@ -80,7 +97,7 @@ class UserEditContainer extends PureComponent {
             text="Save User"
           />
         </FormContainer.Form>
-      </Dialog.Wrapper>
+      </Drawer.Wrapper>
     );
   }
 

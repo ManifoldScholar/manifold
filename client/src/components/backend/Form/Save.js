@@ -19,7 +19,7 @@ export default class Save extends Component {
 
   render() {
     return (
-      <div className="form-input">
+      <div className="form-input submit">
         <input className="button-secondary outlined" type="submit" value={this.props.text} />
       </div>
     );
