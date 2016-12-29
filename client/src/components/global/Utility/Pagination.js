@@ -83,7 +83,7 @@ export default class UtilityPagination extends PureComponent {
 
   number(page, handler) {
     return (
-      <li key={page.key}>
+      <li key={page.key} className="ordinal">
         { isString(handler) ?
           <Link to={handler}>
             {page.number}
@@ -98,7 +98,7 @@ export default class UtilityPagination extends PureComponent {
 
   current(page, handler) {
     return (
-      <li className="active" key={page.key}>
+      <li className="active ordinal" key={page.key}>
         { isString(handler) ?
           <Link to={handler}>
             {page.number}

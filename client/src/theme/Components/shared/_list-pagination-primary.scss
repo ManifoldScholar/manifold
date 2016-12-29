@@ -13,7 +13,7 @@
         display: inline-block;
       }
 
-      + li {
+      &.ordinal + .ordinal {
         margin-left: 25px;
       }
 
@@ -39,10 +39,6 @@
     display: inline-block;
     line-height: 14px;
 
-    a {
-      color: $neutral75;
-    }
-
     .manicon {
       font-size: 14px;
       vertical-align: middle;
@@ -50,7 +46,7 @@
   }
 
   .pagination-previous {
-    margin-right: 25px;
+    margin-right: 50px;
 
     .manicon {
       margin-right: 12px;
