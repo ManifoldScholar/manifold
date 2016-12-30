@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 import fakeData from 'helpers/fakeData';
 import get from 'lodash/get';
 
@@ -71,10 +72,16 @@ class Detail extends Component {
 
   renderMeta() {
     const project = this.props.project;
+    const collectionCount = project.attributes.collectionsCount;
+    const resourcesCount = project.attributes.resourcesCount;
     if (!project.attributes.metadata) return null;
+    const containerClass = classNames({
+      container: true,
+      'flush-top': collectionCount <= 0 && resourcesCount <= 0
+    });
     return (
       <section>
-        <div className="container">
+        <div className={containerClass}>
           <header className="section-heading">
             <h4 className="title">
               <i className="manicon manicon-tag"></i>

@@ -1,31 +1,39 @@
-.texts-group {
-  @include listHorizontal;
-  margin-bottom: -73px;
-  font-size: 0;
+.text-category-list-primary {
 
-
-  @include respond($break75) {
-    margin-left: -45px;
+  .text-category {
+    + .text-category, + div {
+      padding-top: 73px;
+    }
   }
 
-  @include respond($break80) {
-    margin-left: -65px;
-  }
-
-  > li {
-    width: 100%;
-    // Font base size reset
-    margin-bottom: 73px;
-    font-size: 16px;
-    vertical-align: top;
+  .texts-group {
+    @include listHorizontal;
+    margin-bottom: -73px;
+    font-size: 0;
 
     @include respond($break75) {
-      width: 50%;
-      padding-left: 45px;
+      margin-left: -45px;
     }
 
     @include respond($break80) {
-      padding-left: 65px;
+      margin-left: -65px;
+    }
+
+    > li {
+      width: 100%;
+      // Font base size reset
+      padding-bottom: 73px;
+      font-size: 16px;
+      vertical-align: top;
+
+      @include respond($break75) {
+        width: 50%;
+        padding-left: 45px;
+      }
+
+      @include respond($break80) {
+        padding-left: 65px;
+      }
     }
   }
 }

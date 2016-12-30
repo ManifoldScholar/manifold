@@ -71,7 +71,7 @@ export default class TextListGrouped extends Component {
           }
 
           return (
-            <section key={categoryKey}>
+            <nav key={categoryKey} className="text-category">
               {header}
               <ul className="texts-group">
                 {group.texts.map((text) => {
@@ -82,7 +82,7 @@ export default class TextListGrouped extends Component {
                   );
                 })}
               </ul>
-            </section>
+            </nav>
           );
         })}
       </div>
