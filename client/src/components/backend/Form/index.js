@@ -7,6 +7,7 @@ import Upload from './Upload';
 import Connect from './Connect';
 import Select from './Select';
 import Save from './Save';
+import Switch from './Switch';
 
 export default {
   Connect,
@@ -17,5 +18,6 @@ export default {
   MaskedTextInput,
   Upload,
   Select,
-  Save
+  Save,
+  Switch
 };

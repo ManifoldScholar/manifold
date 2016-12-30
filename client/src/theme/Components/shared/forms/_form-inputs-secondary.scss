@@ -1,5 +1,21 @@
 // Secondary form inputs. These include all of the form inputs (and more)
 // Outlined in 'form-inputs-primary', but change visually with this wrapper.
+@mixin formInputSecondary {
+  @include formInputPrimary;
+  width: 100%;
+  // Explicit height so that elements can line up
+  height: 33px;
+  // Declared in em as it should change with font size
+  padding: 0 0 0.65em;
+  color: $neutral40;
+  background-color: transparent;
+  // Override border
+  border: 0;
+  border-bottom: 1px solid $neutral80;
+  outline: 0;
+  transition: border-color $duration $timing;
+}
+
 .form-secondary {
   .form-input {
     label:not(.checkbox):not(.radio) {
@@ -14,18 +30,7 @@
     }
 
     input[type="text"], input[type="password"] {
-      @include formInputPrimary;
-      width: 100%;
-      // Explicit height so that elements can line up
-      height: 33px;
-      // Declared in em as it should change with font size
-      padding: 0 0 0.65em;
-      color: $neutral40;
-      background-color: transparent;
-      // Override border
-      border: 0;
-      border-bottom: 1px solid $neutral80;
-      outline: 0;
+      @include formInputSecondary;
       transition: border-color $duration $timing;
 
       &:focus {
@@ -80,6 +85,23 @@
       font-size: 14px;
       color: $neutral50;
       text-align: center;
+    }
+  }
+
+  .boolean-labeled {
+    display: table;
+
+    span {
+      @include formInputSecondary;
+      display: table-cell;
+      padding-bottom: 0.5em;
+      vertical-align: middle;
+    }
+
+    .toggle-indicator {
+      display: table-cell;
+      padding-left: 10px;
+      vertical-align: middle;
     }
   }
 }
