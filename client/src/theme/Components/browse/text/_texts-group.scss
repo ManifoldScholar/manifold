@@ -8,10 +8,11 @@
 
   .texts-group {
     @include listHorizontal;
-    margin-bottom: -73px;
     font-size: 0;
+    margin-bottom: -45px;
 
     @include respond($break75) {
+      margin-bottom: -73px;
       margin-left: -45px;
     }
 
@@ -21,13 +22,14 @@
 
     > li {
       width: 100%;
+      padding-bottom: 45px;
       // Font base size reset
-      padding-bottom: 73px;
       font-size: 16px;
       vertical-align: top;
 
       @include respond($break75) {
         width: 50%;
+        padding-bottom: 73px;
         padding-left: 45px;
       }
 
