@@ -68,6 +68,33 @@
     }
   }
 
+  // Dropdown
+  .form-select {
+    // Default width
+    width: auto;
+
+    .manicon-caret-down {
+      position: absolute;
+      top: 40%;
+      right: 6px;
+      font-size: 12px;
+      color: $accentPrimary;
+      pointer-events: none;
+
+      // Use native dropdown arrow in IE9
+      .ie9 & {
+        display: none;
+      }
+    }
+
+    select {
+      @include formInputSecondary;
+      height: auto;
+      padding: 0 42px 0.55em 0; // OD
+      text-transform: none; // OD
+    }
+  }
+
   .form-dropzone {
     padding: 36px 30px 38px;
     border: 1px solid $neutral80;
