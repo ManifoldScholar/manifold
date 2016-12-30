@@ -368,13 +368,13 @@ class ProjectDetailTexts extends PureComponent {
           : null
         }
 
-        <div style={{marginBottom: 15}}>
-          <button className="button-primary">Add a new text</button><br /><br />
+        <div className="buttons-icon-horizontal">
+          <button className="button-icon-secondary"><i className="manicon manicon-plus"></i>Add a new text</button>
           <Link
             to={`/backend/project/${project.id}/texts/category/new`}
-            className="button-primary"
+            className="button-icon-secondary"
           >
-            Create a new category
+            <i className="manicon manicon-plus"></i>Create a new category
           </Link>
         </div>
 
