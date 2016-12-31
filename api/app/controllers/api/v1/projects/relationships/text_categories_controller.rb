@@ -23,7 +23,7 @@ module Api
           end
 
           def create
-            @category= authorize_and_create_category(category_params)
+            @category = authorize_and_create_category(category_params)
             render_single_resource(@category, location: LOCATION)
           end
 

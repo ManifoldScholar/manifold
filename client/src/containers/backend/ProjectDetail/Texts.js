@@ -33,7 +33,7 @@ class ProjectDetailTexts extends PureComponent {
     super(props);
     this.state = {
       confirmation: null
-    }
+    };
   }
 
   publishedTexts() {
@@ -43,19 +43,16 @@ class ProjectDetailTexts extends PureComponent {
   }
 
   categoryTexts(category) {
-    const texts = this.props.project.relationships.texts;
-    return texts.filter((text) => {
-      return text.relationships.category === category && text.id != this.publishedTextId(this.props);
-    })
-    return texts;
+    return this.texts().filter((text) => {
+      return text.relationships.category === category
+        && text.id !== this.publishedTextId(this.props);
+    });
   }
 
   uncategorizedTexts() {
-    const texts = this.props.project.relationships.texts;
-    return texts.filter((text) => {
-      return !text.relationships.category && text.id != this.publishedTextId(this.props);
-    })
-    return texts;
+    return this.texts().filter((text) => {
+      return !text.relationships.category && text.id !== this.publishedTextId(this.props);
+    });
   }
 
   publishedTextId(props) {
@@ -75,13 +72,13 @@ class ProjectDetailTexts extends PureComponent {
     if (category) {
       catPayload = { id: category.id, type: "categories" };
     } else {
-      catPayload = null
+      catPayload = null;
     }
     const changes = {
       relationships: { category: { data: catPayload } },
       attributes: { position: newPos }
     };
-    const call = textsAPI.update(text.id, changes );
+    const call = textsAPI.update(text.id, changes);
     const categoryRequest = request(call, 'move-text');
     this.props.dispatch(categoryRequest).promise.then(() => {
       this.props.refresh();
@@ -92,7 +89,7 @@ class ProjectDetailTexts extends PureComponent {
     const changes = {
       attributes: { position: newPos }
     };
-    const call = textCategoriesAPI.update(category.id, changes );
+    const call = textCategoriesAPI.update(category.id, changes);
     const categoryRequest = request(call, 'move-category');
     this.props.dispatch(categoryRequest).promise.then(() => {
       this.props.refresh();
@@ -119,7 +116,7 @@ class ProjectDetailTexts extends PureComponent {
     const changes = {
       relationships: { publishedText: { data: { id: text.id, type: "texts" } } },
     };
-    const call = projectsAPI.update(this.props.project.id, changes );
+    const call = projectsAPI.update(this.props.project.id, changes);
     const projectRequest = request(call, 'update-project');
     this.props.dispatch(projectRequest).promise.then(() => {
       this.props.refresh();
@@ -130,7 +127,7 @@ class ProjectDetailTexts extends PureComponent {
     const changes = {
       relationships: { publishedText: { data: null } },
     };
-    const call = projectsAPI.update(this.props.project.id, changes );
+    const call = projectsAPI.update(this.props.project.id, changes);
     const projectRequest = request(call, 'update-project');
     this.props.dispatch(projectRequest).promise.then(() => {
       this.props.refresh();
@@ -147,7 +144,7 @@ class ProjectDetailTexts extends PureComponent {
     }
     const index = this.uncategorizedTexts().findIndex((compare) => {
       return compare.id === text.id;
-    })
+    });
     return index + 1;
   }
 
@@ -155,14 +152,19 @@ class ProjectDetailTexts extends PureComponent {
     return this.props.project.relationships.textCategories;
   }
 
+  texts() {
+    return this.props.project.relationships.texts;
+  }
+
   canShowTextUp(text) {
-    if(this.isPublishedText(text)) return false;
+    if (this.isPublishedText(text)) return false;
     return true;
   }
 
   canShowTextDown(text) {
-    if(!this.isUncategorizedText(text)) return true;
-    return !this.isLastInCategory(text)
+    if (this.isPublishedText(text)) return true;
+    if (!this.isUncategorizedText(text)) return true;
+    return !this.isLastInCategory(text);
   }
 
   canShowCategoryUp(category) {
@@ -195,8 +197,9 @@ class ProjectDetailTexts extends PureComponent {
 
   previousCategory(text) {
     const category = text.relationships.category;
-    if (this.isUncategorizedText(text))
+    if (this.isUncategorizedText(text)) {
       return this.categories()[this.categories().length - 1];
+    }
     if (this.isPublishedText(text)) return null;
     if (this.categoryIndex(category, this.categories()) === 0) return "published";
     return this.categories()[this.categoryIndex(category, this.categories()) - 1];
@@ -213,9 +216,9 @@ class ProjectDetailTexts extends PureComponent {
     const position = this.positionInCategory(text);
     let targetCategory = text.relationships.category;
     let move = "up";
-    if (position == 1) {
+    if (position === 1) {
       targetCategory = this.previousCategory(text);
-      if(targetCategory === "published") return this.handleTextPublish(text);
+      if (targetCategory === "published") return this.handleTextPublish(text);
       move = "bottom";
     }
     this.updateTextCategoryAndPosition(text, targetCategory, move);
@@ -224,9 +227,9 @@ class ProjectDetailTexts extends PureComponent {
   handleTextDown(event, text) {
     const position = this.positionInCategory(text);
     let targetCategory = text.relationships.category;
-    let move = "down"
-    if(this.isPublishedText(text)) return this.handleTextUnpublish(text);
-    if(this.isUncategorizedText(text)) targetCategory = null;
+    let move = "down";
+    if (this.isPublishedText(text)) return this.handleTextUnpublish(text);
+    if (this.isUncategorizedText(text)) targetCategory = null;
     if (this.isLastInCategory(text)) {
       targetCategory = this.nextCategory(text);
       move = "top";
@@ -237,53 +240,54 @@ class ProjectDetailTexts extends PureComponent {
   handleCategoryUp(event, category) {
     const categoryIndex = this.categoryIndex(category, this.categories());
     if (categoryIndex === 0) return;
-    this.updateCategoryPosition(category, "up")
+    this.updateCategoryPosition(category, "up");
   }
 
   handleCategoryDown(event, category) {
     const categoryIndex = this.categoryIndex(category, this.categories());
     if (categoryIndex + 1 === this.categories().length) return;
-    this.updateCategoryPosition(category, "down")
+    this.updateCategoryPosition(category, "down");
   }
 
   handleCategoryDestroy(event, category) {
-    const heading = "Are you sure you want to delete this category?"
-    const message = "Any texts belonging to this category will become uncategorized."
+    const heading = "Are you sure you want to delete this category?";
+    const message = "Any texts belonging to this category will become uncategorized.";
     new Promise((resolve, reject) => {
       this.setState({
         confirmation: { resolve, reject, heading, message }
-      })
+      });
     }).then(() => {
       this.destroyCategory(category);
       this.closeDialog();
-    }, () => { this.closeDialog() });
+    }, () => { this.closeDialog(); });
   }
 
   handleTextDestroy(event, text) {
-    const heading = "Are you sure you want to delete this text?"
-    const message = "All annotations and highlights of this text will also be deleted. This action cannot be undone."
+    const heading = "Are you sure you want to delete this text?";
+    const message = "All annotations and highlights of this text will also be deleted. " +
+      "This action cannot be undone.";
     new Promise((resolve, reject) => {
       this.setState({
         confirmation: { resolve, reject, heading, message }
-      })
+      });
     }).then(() => {
       this.destroyText(text);
       this.closeDialog();
-    }, () => { this.closeDialog() });
+    }, () => { this.closeDialog(); });
   }
 
   closeDialog() {
-    this.setState({confirmation: null});
+    this.setState({ confirmation: null });
   }
 
   renderTexts(texts) {
     let renderedTexts;
     if (texts.length === 0) {
-      renderedTexts = <li key="0">
+      renderedTexts = (<li key="0">
         <p className="group-empty">
           {'No texts have been added to this category'}
         </p>
-      </li>
+      </li>);
     } else {
       renderedTexts = texts.map((text) => {
         return (
@@ -317,25 +321,25 @@ class ProjectDetailTexts extends PureComponent {
                 </Link>
                 {
                  this.canShowTextUp(text) ?
-                   <button onClick={(event) => {this.handleTextUp(event, text)}}>
+                   <button onClick={(event) => { this.handleTextUp(event, text); }}>
                      <i className="manicon manicon-arrow-up"></i>
                    </button>
                    :
-                   <button style={{visibility: "hidden"}} >
+                   <button style={{ visibility: "hidden" }} >
                      <i className="manicon manicon-arrow-up"></i>
                    </button>
                 }
                 {
                   this.canShowTextDown(text) ?
-                    <button onClick={(event) => {this.handleTextDown(event, text)}}>
+                    <button onClick={(event) => { this.handleTextDown(event, text); }}>
                       <i className="manicon manicon-arrow-down"></i>
                     </button>
                   :
-                    <button style={{visibility: "hidden"}} >
+                    <button style={{ visibility: "hidden" }} >
                       <i className="manicon manicon-arrow-down"></i>
                     </button>
                 }
-                <button onClick={(event) => {this.handleTextDestroy(event, text)}}>
+                <button onClick={(event) => { this.handleTextDestroy(event, text); }}>
                   <i className="manicon manicon-x"></i>
                 </button>
               </div>
@@ -355,7 +359,7 @@ class ProjectDetailTexts extends PureComponent {
     const categories = this.categories();
     const project = this.props.project;
     const refresh = this.props.refresh;
-    if(!project) return null;
+    if (!project) return null;
 
     return (
       <section>
@@ -363,7 +367,7 @@ class ProjectDetailTexts extends PureComponent {
         {
           this.state.confirmation ?
             <Dialog.Confirm {...this.state.confirmation} />
-          :null
+          : null
         }
 
         {
@@ -373,7 +377,9 @@ class ProjectDetailTexts extends PureComponent {
         }
 
         <div className="buttons-icon-horizontal">
-          <button className="button-icon-secondary"><i className="manicon manicon-plus"></i>Add a new text</button>
+          <button className="button-icon-secondary">
+            <i className="manicon manicon-plus"></i>Add a new text
+          </button>
           <Link
             to={`/backend/project/${project.id}/texts/category/new`}
             className="button-icon-secondary"
@@ -404,25 +410,25 @@ class ProjectDetailTexts extends PureComponent {
                     >{'edit'}</Link>
                     {
                       this.canShowCategoryUp(category) ?
-                        <button onClick={(event) => {this.handleCategoryUp(event, category)}}>
+                        <button onClick={(event) => { this.handleCategoryUp(event, category); }}>
                           <i className="manicon manicon-arrow-up"></i>
                         </button>
                       :
-                        <button style={{visibility: "hidden"}} >
+                        <button style={{ visibility: "hidden" }} >
                           <i className="manicon manicon-arrow-up"></i>
                         </button>
                     }
                     {
                       this.canShowCategoryDown(category) ?
-                        <button onClick={(event) => {this.handleCategoryDown(event, category)}}>
+                        <button onClick={(event) => { this.handleCategoryDown(event, category); }}>
                           <i className="manicon manicon-arrow-down"></i>
                         </button>
                       :
-                        <button style={{visibility: "hidden"}} >
+                        <button style={{ visibility: "hidden" }} >
                           <i className="manicon manicon-arrow-down"></i>
                         </button>
                     }
-                    <button onClick={(event) => {this.handleCategoryDestroy(event, category)}}>
+                    <button onClick={(event) => { this.handleCategoryDestroy(event, category); }}>
                       <i className="manicon manicon-x"></i>
                     </button>
                   </div>
@@ -446,5 +452,4 @@ class ProjectDetailTexts extends PureComponent {
 export default connect(
   ProjectDetailTexts.mapStateToProps
 )(ProjectDetailTexts);
-
 

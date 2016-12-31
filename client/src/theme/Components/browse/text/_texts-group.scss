@@ -8,8 +8,8 @@
 
   .texts-group {
     @include listHorizontal;
-    font-size: 0;
     margin-bottom: -45px;
+    font-size: 0;
 
     @include respond($break75) {
       margin-bottom: -73px;

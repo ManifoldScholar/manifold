@@ -58,8 +58,7 @@ class Text < ActiveRecord::Base
     # text_sections.where("position > ?", position)
   end
 
-  def section_after(position)
-  end
+  def section_after(position); end
 
   def section_at(position)
     text_sections.find_by(position: position)

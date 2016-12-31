@@ -119,7 +119,7 @@ module Api
           method_names[:load_resource]                = :"load_#{the_name}"
           method_names[:load_and_authorize_resource]  = :"load_and_authorize_#{the_name}"
           method_names[:authorize_and_create_resource] = :"authorize_and_create_#{the_name}"
-            method_names[:resource_scope] = :"scope_for_#{the_collection_name}"
+          method_names[:resource_scope] = :"scope_for_#{the_collection_name}"
         end
       end
       # rubocop:enable Metrics/LineLength

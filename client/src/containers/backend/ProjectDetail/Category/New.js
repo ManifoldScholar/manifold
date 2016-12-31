@@ -9,7 +9,9 @@ export default class ProjectDetailCategoryNew extends Component {
   static activeNavItem = "texts";
 
   static propTypes = {
-    params: PropTypes.shape({ id: React.PropTypes.string }).isRequired
+    params: PropTypes.shape({ id: React.PropTypes.string }).isRequired,
+    refresh: PropTypes.func.isRequired,
+    routes: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -17,13 +19,13 @@ export default class ProjectDetailCategoryNew extends Component {
     this.onSuccess = this.onSuccess.bind(this);
   }
 
-  closeUrl() {
-    return `/backend/project/${this.props.params.id}/texts`;
-  }
-
   onSuccess() {
     this.props.refresh();
     browserHistory.push(this.closeUrl());
+  }
+
+  closeUrl() {
+    return `/backend/project/${this.props.params.id}/texts`;
   }
 
   render() {

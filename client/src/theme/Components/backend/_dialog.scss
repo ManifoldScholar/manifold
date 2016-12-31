@@ -72,21 +72,22 @@
     }
 
     .heading-quaternary {
-      font-size: 22px;
       padding-bottom: 0;
+      font-size: 22px;
     }
 
     p {
       @include utilityPrimary;
-      text-transform: none;
-      color: $neutral50;
       padding-bottom: 34px;
+      color: $neutral50;
+      text-transform: none;
     }
 
     .manicon {
       margin-right: 16px;
       font-size: 12px;
-      &:before {
+
+      &::before {
         position: relative;
         top: 6px;
       }

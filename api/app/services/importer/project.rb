@@ -119,7 +119,9 @@ module Importer
         text = Ingestor.ingest(text_path, @creator)
         unless text.is_a? Text
           @logger.error"Unable to import project text at #{text_path}"
+          # rubocop:disable Lint/NonLocalExitFromIterator
           return
+          # rubocop:enable Lint/NonLocalExitFromIterator
         end
         text.project = project
         text.save

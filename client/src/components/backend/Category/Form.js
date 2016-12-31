@@ -28,7 +28,7 @@ export default class CategoryForm extends PureComponent {
           text={this.props.model ? "Update Category" : "Create Category" }
         />
       </FormContainer.Form>
-    )
+    );
   }
 
 }

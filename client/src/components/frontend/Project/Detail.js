@@ -43,32 +43,29 @@ class Detail extends Component {
     window.scrollTo(0, 0);
   }
 
-  renderActivity() {
-    if (!this.shouldShowActivity()) return null
+  onlyShowingMeta() {
+    const texts = this.shouldShowTexts();
+    const resources = this.shouldShowResources();
+    const activity = this.shouldShowActivity();
+    const result = !texts && !resources && !activity;
+    return result;
+  }
+
+  shouldShowResources() {
     const project = this.props.project;
-    const attr = project.attributes;
-    const events = project.relationships.events;
-    if (events && events.length === 0) return null;
-    return (
-      <section>
-        <div className="container">
-          <header className="section-heading">
-            <h4 className="title">
-              <i className="manicon manicon-pulse"></i>
-              {'Recent Activity'}
-            </h4>
-            <div className="hide-60">
-              <Event.AllLink count={attr.eventCount} threshold={2} projectId={project.id} />
-            </div>
-            <div className="show-60">
-              <Event.AllLink count={attr.eventCount} threshold={6} projectId={project.id} />
-            </div>
-          </header>
-          {/* NB: CSS limits the event list from showing more than 2 events on mobile */}
-          <Event.List events={events} limit={6} columns={3} />
-        </div>
-      </section>
-    );
+    const collectionCount = project.attributes.collectionsCount;
+    const resourcesCount = project.attributes.resourcesCount;
+    return collectionCount > 0 || resourcesCount > 0;
+  }
+
+  shouldShowTexts() {
+    const texts = this.props.project.relationships.texts;
+    return texts && texts.length > 0;
+  }
+
+  shouldShowActivity() {
+    const events = this.props.project.relationships.events;
+    return events && events.length > 0;
   }
 
   renderMeta() {
@@ -95,29 +92,32 @@ class Detail extends Component {
     );
   }
 
-  onlyShowingMeta() {
-    const texts = this.shouldShowTexts();
-    const resources = this.shouldShowResources();
-    const activity = this.shouldShowActivity();
-    const result = !texts && !resources && !activity;
-    return result;
-  }
-
-  shouldShowResources() {
+  renderActivity() {
+    if (!this.shouldShowActivity()) return null;
     const project = this.props.project;
-    const collectionCount = project.attributes.collectionsCount;
-    const resourcesCount = project.attributes.resourcesCount;
-    return collectionCount > 0 || resourcesCount > 0;
-  }
-
-  shouldShowTexts() {
-    const texts = this.props.project.relationships.texts;
-    return texts && texts.length > 0;
-  }
-
-  shouldShowActivity() {
-    const events = this.props.project.relationships.events;
-    return events && events.length > 0;
+    const attr = project.attributes;
+    const events = project.relationships.events;
+    if (events && events.length === 0) return null;
+    return (
+      <section>
+        <div className="container">
+          <header className="section-heading">
+            <h4 className="title">
+              <i className="manicon manicon-pulse"></i>
+              {'Recent Activity'}
+            </h4>
+            <div className="hide-60">
+              <Event.AllLink count={attr.eventCount} threshold={2} projectId={project.id} />
+            </div>
+            <div className="show-60">
+              <Event.AllLink count={attr.eventCount} threshold={6} projectId={project.id} />
+            </div>
+          </header>
+          {/* NB: CSS limits the event list from showing more than 2 events on mobile */}
+          <Event.List events={events} limit={6} columns={3} />
+        </div>
+      </section>
+    );
   }
 
   renderTexts() {
@@ -129,7 +129,7 @@ class Detail extends Component {
       container: true,
       'flush-top': this.shouldShowActivity()
     });
-    let excludes = []
+    let excludes = [];
     if (project.relationships.publishedText) {
       excludes.push(project.relationships.publishedText.id);
     }
@@ -160,7 +160,7 @@ class Detail extends Component {
   }
 
   renderCollectionsOrResources() {
-    if(!this.shouldShowResources()) return null;
+    if (!this.shouldShowResources()) return null;
     const project = this.props.project;
     if (project.attributes.collectionsCount > 0) return this.renderCollections();
     if (project.attributes.resourcesCount > 0) return this.renderResources();
