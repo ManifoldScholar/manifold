@@ -24,6 +24,11 @@ class ProjectDetailWrapperContainer extends PureComponent {
     project: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+    this.fetchProject = this.fetchProject.bind(this);
+  }
+
   componentDidMount() {
     this.fetchProject();
   }
@@ -93,7 +98,12 @@ class ProjectDetailWrapperContainer extends PureComponent {
               />
             </aside>
             <div className="panel">
-              {React.cloneElement(this.props.children, { project })}
+              {
+                React.cloneElement(
+                  this.props.children,
+                  { project, refresh: this.fetchProject }
+                )
+              }
             </div>
           </div>
         </section>

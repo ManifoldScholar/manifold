@@ -15,7 +15,7 @@ module Validation
     attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,
                   :purchase_price_money, :purchase_price_currency, :twitter_id,
                   :instagram_id]
-    relationships = [:collaborators, :creators, :contributors]
+    relationships = [:collaborators, :creators, :contributors, :published_text]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
@@ -36,10 +36,26 @@ module Validation
     params.permit(param_config)
   end
 
+  def category_params
+    params.require(:data)
+    attributes = [:title, :role, :position]
+    relationships = [:project]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def favorite_params
     params.require(:data).require(:relationships).require(:favoritable).require(:data)
     attributes = []
     relationships = [:favoritable]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def text_params
+    params.require(:data)
+    attributes = [:title, :position]
+    relationships = [:category]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end

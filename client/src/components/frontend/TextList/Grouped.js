@@ -51,6 +51,7 @@ export default class TextListGrouped extends Component {
 
   render() {
     const textsByCategory = this.buildGroupedCollection();
+    if (textsByCategory.length === 0) return null;
     let categoryKey;
     let header;
 
@@ -71,7 +72,7 @@ export default class TextListGrouped extends Component {
           }
 
           return (
-            <section key={categoryKey}>
+            <nav key={categoryKey} className="text-category">
               {header}
               <ul className="texts-group">
                 {group.texts.map((text) => {
@@ -82,7 +83,7 @@ export default class TextListGrouped extends Component {
                   );
                 })}
               </ul>
-            </section>
+            </nav>
           );
         })}
       </div>

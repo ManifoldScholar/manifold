@@ -18,7 +18,7 @@
           color: $accentPrimary;
         }
 
-        &.warning {
+        &.notice {
           color: $sp40Tertiary;
         }
 
@@ -38,7 +38,7 @@
   .texts-group {
     @include listUnstyled;
     display: block;
-    margin: 0; // OD
+    margin: 0 0 30px; // OD
 
     li {
       display: table;
@@ -49,6 +49,17 @@
       + li {
         border-top: 1px solid $neutral80;
       }
+    }
+
+    .group-empty {
+      @include utilityPrimary;
+      width: 100%;
+      padding: 2em 0 2.214em;
+      margin-bottom: 31px;
+      font-size: 14px;
+      color: $neutral80;
+      text-align: center;
+      border: 1px solid $neutral80;
     }
 
     .asset-thumb {

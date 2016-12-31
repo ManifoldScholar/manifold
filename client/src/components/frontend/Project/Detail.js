@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 import fakeData from 'helpers/fakeData';
 import get from 'lodash/get';
 
@@ -42,7 +43,57 @@ class Detail extends Component {
     window.scrollTo(0, 0);
   }
 
+  onlyShowingMeta() {
+    const texts = this.shouldShowTexts();
+    const resources = this.shouldShowResources();
+    const activity = this.shouldShowActivity();
+    const result = !texts && !resources && !activity;
+    return result;
+  }
+
+  shouldShowResources() {
+    const project = this.props.project;
+    const collectionCount = project.attributes.collectionsCount;
+    const resourcesCount = project.attributes.resourcesCount;
+    return collectionCount > 0 || resourcesCount > 0;
+  }
+
+  shouldShowTexts() {
+    const texts = this.props.project.relationships.texts;
+    return texts && texts.length > 0;
+  }
+
+  shouldShowActivity() {
+    const events = this.props.project.relationships.events;
+    return events && events.length > 0;
+  }
+
+  renderMeta() {
+    const project = this.props.project;
+    const collectionCount = project.attributes.collectionsCount;
+    const resourcesCount = project.attributes.resourcesCount;
+    if (!project.attributes.metadata) return null;
+    const containerClass = classNames({
+      container: true,
+      'flush-top': !this.shouldShowResources() || !this.shouldShowResources()
+    });
+    return (
+      <section>
+        <div className={containerClass}>
+          <header className="section-heading">
+            <h4 className="title">
+              <i className="manicon manicon-tag"></i>
+              {'Metadata'}
+            </h4>
+          </header>
+          <Project.Meta metadata={project.attributes.metadata} />
+        </div>
+      </section>
+    );
+  }
+
   renderActivity() {
+    if (!this.shouldShowActivity()) return null;
     const project = this.props.project;
     const attr = project.attributes;
     const events = project.relationships.events;
@@ -69,49 +120,47 @@ class Detail extends Component {
     );
   }
 
-  renderMeta() {
-    const project = this.props.project;
-    if (!project.attributes.metadata) return null;
-    return (
-      <section>
-        <div className="container">
-          <header className="section-heading">
-            <h4 className="title">
-              <i className="manicon manicon-tag"></i>
-              {'Metadata'}
-            </h4>
-          </header>
-          <Project.Meta metadata={project.attributes.metadata} />
-        </div>
-      </section>
-    );
-  }
-
   renderTexts() {
+    if (!this.shouldShowTexts()) return null;
     const project = this.props.project;
     const texts = get(this.props, 'project.relationships.texts');
-    if (!texts || texts.length === 0) return null;
+    const events = project.relationships.events;
+    const containerClass = classNames({
+      container: true,
+      'flush-top': this.shouldShowActivity()
+    });
+    let excludes = [];
+    if (project.relationships.publishedText) {
+      excludes.push(project.relationships.publishedText.id);
+    }
     return (
       <section>
-        <div className="container flush-top">
-          <header className="section-heading">
-            <h4 className="title">
-              <i className="manicon manicon-books-stack"></i>
-              {'Texts'}
-            </h4>
-          </header>
-          <TextList.Published text={project.relationships.publishedText} />
-          <TextList.Grouped
-            excludeIds={[project.relationships.publishedText.id]}
-            categories={project.relationships.textCategories}
-            texts={project.relationships.texts}
-          />
+        <div className={containerClass}>
+          <div className="text-category-list-primary">
+            <header className="section-heading">
+              <h4 className="title">
+                <i className="manicon manicon-books-stack"></i>
+                {'Texts'}
+              </h4>
+            </header>
+            {
+              project.relationships.publishedText ?
+              <TextList.Published text={project.relationships.publishedText} />
+              : null
+            }
+            <TextList.Grouped
+              excludeIds={excludes}
+              categories={project.relationships.textCategories}
+              texts={project.relationships.texts}
+            />
+          </div>
         </div>
       </section>
     );
   }
 
   renderCollectionsOrResources() {
+    if (!this.shouldShowResources()) return null;
     const project = this.props.project;
     if (project.attributes.collectionsCount > 0) return this.renderCollections();
     if (project.attributes.resourcesCount > 0) return this.renderResources();

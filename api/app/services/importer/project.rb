@@ -51,6 +51,7 @@ module Importer
       import_collaborators(project)
       import_subject(project)
       import_published_text(project, @project_json[:published_text]) if include_texts
+      import_other_texts(project, @project_json[:texts]) if include_texts
       import_resources(project)
     end
     # rubocop:enable all
@@ -107,6 +108,25 @@ module Importer
         role: role
       )
       collaborator
+    end
+
+    def import_other_texts(project, texts)
+      return unless texts
+      texts.each do |text_file_name|
+        text_path = "#{@path}/texts/#{text_file_name}"
+        @logger.info "  Importing project text at #{text_path}"
+        Ingestor.logger = @logger
+        text = Ingestor.ingest(text_path, @creator)
+        unless text.is_a? Text
+          @logger.error"Unable to import project text at #{text_path}"
+          # rubocop:disable Lint/NonLocalExitFromIterator
+          return
+          # rubocop:enable Lint/NonLocalExitFromIterator
+        end
+        text.project = project
+        text.save
+        project.save
+      end
     end
 
     def import_published_text(project, text_file_name)

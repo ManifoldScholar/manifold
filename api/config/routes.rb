@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :pages
       resources :subjects
+      resources :categories, except: [:create, :index]
       resources :makers
       resources :resources
       resources :texts
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
             resources :resources, only: [:index]
             resources :events, only: [:index]
             resources :collaborators
+            resources :text_categories, only: [:index, :create]
           end
         end
       end

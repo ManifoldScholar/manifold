@@ -7,7 +7,7 @@
   height: 100%;
   padding-right: $containerPaddingResp;
   padding-left: $containerPaddingResp;
-  background-color: transparentize($neutralWhite, 0.5);
+  background-color: transparentize($neutralWhite, 0.4);
   opacity: 1;
   visibility: visible;
   transition: opacity $duration $timing,
@@ -64,4 +64,41 @@
   .form-input.submit {
     text-align: center;
   }
+
+  .dialog-confirm {
+
+    header {
+      padding: 11px 0 22px;
+    }
+
+    .heading-quaternary {
+      padding-bottom: 0;
+      font-size: 22px;
+    }
+
+    p {
+      @include utilityPrimary;
+      padding-bottom: 34px;
+      color: $neutral50;
+      text-transform: none;
+    }
+
+    .manicon {
+      margin-right: 16px;
+      font-size: 12px;
+
+      &::before {
+        position: relative;
+        top: 6px;
+      }
+    }
+
+    .buttons-icon-horizontal {
+      margin-bottom: 0;
+    }
+
+  }
+
+
 }
+

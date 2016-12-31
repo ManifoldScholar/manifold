@@ -1,17 +1,28 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 
-export default class Label extends Component {
+export default class Label extends PureComponent {
 
   static propTypes = {
-    category: PropTypes.string
+    text: PropTypes.object.isRequired
   };
 
+  isPublished() {
+    return this.props.text.attributes.published;
+  }
+
+  category() {
+    return this.props.text.relationships.category;
+  }
+
   render() {
+    if (this.isPublished()) return null;
+    if (!this.category()) return null;
+
     return (
       <div className="section-category-label">
         <div className="container">
           <div className="label">
-            {this.props.category}
+            {this.category().attributes.title}
           </div>
         </div>
       </div>

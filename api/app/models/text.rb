@@ -7,7 +7,7 @@ class Text < ActiveRecord::Base
   include Authority::Abilities
 
   # Default Scope
-  default_scope { includes(:titles, :text_subjects, :category) }
+  default_scope { order(position: :asc).includes(:titles, :text_subjects, :category) }
 
   # Concerns
   extend Memoist
@@ -20,9 +20,13 @@ class Text < ActiveRecord::Base
   serialize :page_list, Array
   serialize :landmarks, Array
 
+  # Acts as List
+  acts_as_list scope: [:project_id, :category_id]
+
   # Associations
   belongs_to :project, optional: true
   belongs_to :category, optional: true
+  has_one :publishing_project, class_name: "Project", foreign_key: "published_text_id"
   belongs_to :start_text_section, optional: true, class_name: "TextSection"
   has_many :titles, class_name: "TextTitle"
   has_many :text_subjects
@@ -54,8 +58,7 @@ class Text < ActiveRecord::Base
     # text_sections.where("position > ?", position)
   end
 
-  def section_after(position)
-  end
+  def section_after(position); end
 
   def section_at(position)
     text_sections.find_by(position: position)
@@ -115,6 +118,10 @@ class Text < ActiveRecord::Base
   end
 
   private
+
+  def category_list_scope
+    category_id || 0
+  end
 
   def trigger_text_added_event
     Event.trigger(Event::TEXT_ADDED, self) if project

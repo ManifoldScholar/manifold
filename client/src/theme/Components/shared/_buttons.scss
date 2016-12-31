@@ -120,6 +120,48 @@
   }
 }
 
+// Used in backend for "add" buttons
+// Can be an <a> or a <button>
+.button-icon-secondary {
+  @include templateHead;
+  @include buttonUnstyled;
+  padding: 12px 17px 14px;
+  font-size: 18px;
+  letter-spacing: 0.015em;
+  color: $accentPrimary;
+  text-align: left;
+  text-decoration: none;
+  border: 1px solid $accentPrimary;
+
+  .manicon-plus {
+    display: inline-block;
+    margin-right: 1.286em;
+    font-size: 0.778em;
+  }
+}
+
+.buttons-icon-horizontal {
+  margin-bottom: 45px;
+
+  @include respond($break85) {
+    margin-bottom: 45px;
+    margin-left: -17px;
+    font-size: 0;
+  }
+
+  .button-icon-secondary {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+
+    @include respond($break85) {
+      display: inline-block;
+      width: calc(50% - 17px);
+      margin-left: 17px;
+    }
+  }
+}
+
 // Can be an <input>, <button>, or an <a>
 %button-secondary-prototype {
   @include buttonUnstyled;

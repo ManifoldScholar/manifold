@@ -37,6 +37,14 @@ export default {
         body: JSON.stringify({ type: "texts", data: text })
       }
     };
+  },
+
+  destroy(id) {
+    return {
+      endpoint: `/api/v1/texts/${id}`,
+      method: 'DELETE',
+      options: {}
+    };
   }
 
 };

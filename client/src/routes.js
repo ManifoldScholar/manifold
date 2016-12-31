@@ -54,7 +54,10 @@ export default () => {
         <IndexRoute component={Backend.Dashboard} />
         <Route component={Backend.ProjectDetail.Wrapper} path="project/:id" >
           <IndexRoute component={Backend.ProjectDetail.General} />
-          <Route component={Backend.ProjectDetail.Texts} path="texts" />
+          <Route component={Backend.ProjectDetail.Texts} path="texts" >
+            <Route component={Backend.ProjectDetail.Category.New} path="category/new" />
+            <Route component={Backend.ProjectDetail.Category.Edit} path="category/:catId/edit" />
+          </Route>
           <Route component={Backend.ProjectDetail.Collaborators} path="collaborators" />
         </Route>
         <Route component={Backend.Users.Wrapper} path="users" >

@@ -15,8 +15,13 @@ class Category < ActiveRecord::Base
   # Scopes
   scope :for_text, -> { where(role: ROLE_TEXT) }
   scope :for_resource, -> { where(role: ROLE_RESOURCE) }
+  default_scope { order(position: :asc) }
+
+  # Acts as List
+  acts_as_list scope: [:project_id, :role]
 
   # Validation
+  validates :title, presence: true
   validates :role,
             inclusion: { in: [ROLE_TEXT, ROLE_RESOURCE],
                          message: "%{value} is not a valid category role" }
