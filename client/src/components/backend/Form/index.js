@@ -1,3 +1,4 @@
+import Dropdown from './Dropdown';
 import HasMany from './HasMany';
 import Radios from './Radios';
 import TextArea from './TextArea';
@@ -11,6 +12,7 @@ import Switch from './Switch';
 
 export default {
   Connect,
+  Dropdown,
   HasMany,
   Radios,
   TextArea,
