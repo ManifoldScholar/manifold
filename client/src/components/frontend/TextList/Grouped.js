@@ -51,6 +51,7 @@ export default class TextListGrouped extends Component {
 
   render() {
     const textsByCategory = this.buildGroupedCollection();
+    if (textsByCategory.length === 0) return null;
     let categoryKey;
     let header;
 
