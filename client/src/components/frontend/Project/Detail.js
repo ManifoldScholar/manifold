@@ -44,6 +44,7 @@ class Detail extends Component {
   }
 
   renderActivity() {
+    if (!this.shouldShowActivity()) return null
     const project = this.props.project;
     const attr = project.attributes;
     const events = project.relationships.events;
@@ -77,7 +78,7 @@ class Detail extends Component {
     if (!project.attributes.metadata) return null;
     const containerClass = classNames({
       container: true,
-      'flush-top': collectionCount <= 0 && resourcesCount <= 0
+      'flush-top': !this.shouldShowResources() || !this.shouldShowResources()
     });
     return (
       <section>
@@ -94,7 +95,33 @@ class Detail extends Component {
     );
   }
 
+  onlyShowingMeta() {
+    const texts = this.shouldShowTexts();
+    const resources = this.shouldShowResources();
+    const activity = this.shouldShowActivity();
+    const result = !texts && !resources && !activity;
+    return result;
+  }
+
+  shouldShowResources() {
+    const project = this.props.project;
+    const collectionCount = project.attributes.collectionsCount;
+    const resourcesCount = project.attributes.resourcesCount;
+    return collectionCount > 0 || resourcesCount > 0;
+  }
+
+  shouldShowTexts() {
+    const texts = this.props.project.relationships.texts;
+    return texts && texts.length > 0;
+  }
+
+  shouldShowActivity() {
+    const events = this.props.project.relationships.events;
+    return events && events.length > 0;
+  }
+
   renderTexts() {
+    if (!this.shouldShowTexts()) return null;
     const project = this.props.project;
     const texts = get(this.props, 'project.relationships.texts');
     const events = project.relationships.events;
@@ -133,6 +160,7 @@ class Detail extends Component {
   }
 
   renderCollectionsOrResources() {
+    if(!this.shouldShowResources()) return null;
     const project = this.props.project;
     if (project.attributes.collectionsCount > 0) return this.renderCollections();
     if (project.attributes.resourcesCount > 0) return this.renderResources();
