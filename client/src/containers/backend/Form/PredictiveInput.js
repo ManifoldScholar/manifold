@@ -29,7 +29,9 @@ class PredictiveInput extends PureComponent {
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.clearHighlighted = this.clearHighlighted.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleNew = this.handleNew.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
     this.debouncedUpdateOptions = debounce(this.updateOptions, 500);
@@ -37,7 +39,8 @@ class PredictiveInput extends PureComponent {
     this.state = {
       value: "",
       open: false,
-      options: []
+      options: [],
+      highlighted: false
     };
   }
 
@@ -51,6 +54,7 @@ class PredictiveInput extends PureComponent {
     if (value === "") {
       const state = update(this.state, {
         options: { $set: [] },
+        highlighted: { $set: false },
         open: { $set: false }
       });
       this.setState(state);
@@ -62,9 +66,12 @@ class PredictiveInput extends PureComponent {
     client.call(endpoint, method, options).then((results) => {
       const items = results.data;
       const open = results.data.length > 0 ? true : false;
+      // Check to see if key-selected option is still available
+      const selected = this.getHighlightedOption(items, this.state.highlighted);
       const state = update(this.state, {
         open: { $set: open },
-        options: { $set: items }
+        options: { $set: items },
+        highlighted: { $set: selected ? selected : false }
       });
       this.setState(state);
     });
@@ -72,7 +79,10 @@ class PredictiveInput extends PureComponent {
 
   handleChange(event) {
     const value = event.target.value;
-    const set = { value: { $set: value } };
+    const set = {
+      value: { $set: value },
+      highlighted: { $set: false }
+    };
     if (value === "") set.open = { $set: false };
     const state = update(this.state, set);
     this.setState(state);
@@ -111,7 +121,68 @@ class PredictiveInput extends PureComponent {
   handleKeyPress(event) {
     if (event.key === 'Enter') {
       event.preventDefault();
-      this.submit();
+      // Otherwise, submit a new one
+      if (this.state.highlighted) {
+        const selected = this.getHighlightedOption(this.state.options, this.state.highlighted);
+        this.select(selected);
+      } else {
+        this.submit();
+      }
+    }
+  }
+
+  getOptionOrdinal(list, id) {
+    return list.map((item) => { return item.id; }).indexOf(id);
+  }
+
+  getHighlightedOption(list, id) {
+    return list.filter((item) => { return item.id === id; })[0];
+  }
+
+  clearHighlighted(event) {
+    this.setState({
+      highlighted: false
+    });
+  }
+
+  handleKeyDown(event) {
+    const highlighted = this.state.highlighted;
+    const options = this.state.options;
+    // Only track keystate if there are options
+    // to be highlighted
+
+    if (options.length > 0) {
+      // If the down key is pressed...
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        // If nothing has been highlighted, select
+        // the first option
+        if (!highlighted) {
+          this.setState({
+            highlighted: options[0].id
+          });
+        } else {
+          const nextOrdinal = this.getOptionOrdinal(options, highlighted) + 1;
+          if (nextOrdinal < options.length) {
+            this.setState({
+              highlighted: options[nextOrdinal].id
+            });
+          }
+        }
+      } else if (event.key === 'ArrowUp' && highlighted) {
+        // If the up key is pressed... (highlighted only)
+        event.preventDefault();
+        const prevOrdinal = this.getOptionOrdinal(options, highlighted) - 1;
+        if (prevOrdinal >= 0) {
+          this.setState({
+            highlighted: options[prevOrdinal].id
+          });
+        } else if (prevOrdinal === -1) {
+          this.setState({
+            highlighted: false
+          });
+        }
+      }
     }
   }
 
@@ -126,10 +197,14 @@ class PredictiveInput extends PureComponent {
     this.clear();
   }
 
-  handleSelect(event, option) {
+  select(option) {
     this.close();
     this.clear();
     this.props.onSelect(option);
+  }
+
+  handleSelect(event, option) {
+    this.select(option);
   }
 
   render() {
@@ -151,6 +226,7 @@ class PredictiveInput extends PureComponent {
             onBlur={this.handleBlur}
             onFocus={this.handleFocus}
             onKeyPress={this.handleKeyPress}
+            onKeyDown={this.handleKeyDown}
           />
           <button className="submit" onClick={this.handleNew} >
             {'Create New'}
@@ -159,10 +235,15 @@ class PredictiveInput extends PureComponent {
         <nav className="predictive-list">
           <ul>
             {this.state.options.map((option) => {
+              const listingClass = classNames({
+                highlighted: option.id === this.state.highlighted
+              });
               return (
                 <li
                   key={option.id}
+                  className={listingClass}
                   onClick={(event) => { this.handleSelect(event, option); }}
+                  onMouseOver={(event) => { this.clearHighlighted(event); }}
                 >
                   {this.props.label(option)}
                 </li>

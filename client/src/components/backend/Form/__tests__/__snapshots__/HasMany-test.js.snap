@@ -83,6 +83,7 @@ exports[`Form.HasMany component renders correctly 1`] = `
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
+          onKeyDown={[Function]}
           onKeyPress={[Function]}
           placeholder="Add an Author"
           type="text"

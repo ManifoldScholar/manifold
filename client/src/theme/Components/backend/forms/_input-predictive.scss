@@ -20,6 +20,7 @@
     input[type="text"] {
       height: auto;
       padding: 8px 0 13px;
+      border: 0;
 
       &:focus {
         border: 0;
@@ -72,7 +73,7 @@
         border: 0; // OD
       }
 
-      &:hover {
+      &:hover, &.highlighted {
         color: $neutral40;
       }
     }
