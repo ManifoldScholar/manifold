@@ -16,11 +16,19 @@
   li {
     display: flex;
     width: 100%;
-    margin-bottom: 28px;
 
     @include respond($break60) {
       width: 50%;
       padding-left: 40px;
+      margin-bottom: 28px;
+    }
+
+    + li {
+      border-top: 2px solid $neutral20;
+
+      @include respond($break60) {
+        border: 0;
+      }
     }
   }
 }
@@ -38,16 +46,24 @@
   li {
     display: flex;
     width: 100%;
-    margin-bottom: 28px;
 
     @include respond($break60) {
       width: 50%;
       padding-left: 40px;
+      margin-bottom: 28px;
     }
 
     @include respond($break85) {
       width: 33.333%;
       margin-bottom: 40px;
+    }
+
+    + li {
+      border-top: 2px solid $neutral20;
+
+      @include respond($break60) {
+        border: 0;
+      }
     }
 
     &:nth-child(n+3) {
@@ -60,6 +76,15 @@
   }
 }
 
+// List styles that apply to either type of list
+.event-list-primary li, .event-list-secondary li {
+  padding-bottom: 8px;
+
+  @include respond($break60) {
+    padding-bottom: 0;
+  }
+}
+
 // Can be a link or a div
 .event-tile {
   display: flex;
@@ -68,9 +93,12 @@
   width: 100%;
   color: $neutralOffBlack;
   text-decoration: none;
-  background-color: $neutral05;
   transition: color $duration $timing,
     background-color $duration $timing;
+
+  @include respond($break60) {
+    background-color: $neutral05;
+  }
 
   &.tweet .event-content {
     font-style: italic;
@@ -88,21 +116,41 @@
       padding-left: 36px;
     }
 
+    li:first-child & {
+      padding-top: 0;
+
+      @include respond($break60) {
+        padding-top: 15px;
+      }
+
+      .manicon {
+        top: 0;
+
+        @include respond($break60) {
+          top: 50%;
+        }
+      }
+    }
+
     .manicon {
       position: absolute;
-      top: 50%;
-      left: -8px;
-      width: 44px;
-      height: 44px;
-      margin-top: -22px;
-      font-size: 44px;
+      top: 15px;
+      left: 0;
+      width: 35px;
+      height: 35px;
+      font-size: 35px;
       // Used to hack relatively sized icons
       text-align: center;
       background-color: $accentPrimary;
       border-radius: 100%;
 
       @include respond($break60) {
+        top: 50%;
         left: -18px;
+        width: 44px;
+        height: 44px;
+        margin-top: -22px;
+        font-size: 44px;
       }
 
       @include respond($break75) {
@@ -176,7 +224,7 @@
     @include subtitlePrimary;
     display: block;
     padding-bottom: 17px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .event-user, .event-user a {
@@ -218,7 +266,7 @@
   .event-date {
     @include utilityPrimary;
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     color: $neutral50;
     transition: color $duration $timing;
   }
