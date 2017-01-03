@@ -67,7 +67,7 @@
     }
 
     &:nth-child(n+3) {
-      display: none;
+      //display: none;
 
       @include respond($break60) {
         display: flex;
@@ -87,18 +87,26 @@
 
 // Can be a link or a div
 .event-tile {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  padding: 15px 17px 19px 0;
   color: $neutralOffBlack;
   text-decoration: none;
   transition: color $duration $timing,
     background-color $duration $timing;
 
   @include respond($break60) {
+    padding: 0;
     background-color: $neutral05;
   }
+
+  li:first-child & {
+    padding-top: 0;
+  }
+
 
   &.tweet .event-content {
     font-style: italic;
@@ -110,31 +118,16 @@
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 15px 17px 19px 50px;
+    padding-left: 50px;
 
     @include respond($break60) {
+      padding: 15px 17px 19px 50px;
       padding-left: 36px;
-    }
-
-    li:first-child & {
-      padding-top: 0;
-
-      @include respond($break60) {
-        padding-top: 15px;
-      }
-
-      .manicon {
-        top: 0;
-
-        @include respond($break60) {
-          top: 50%;
-        }
-      }
     }
 
     .manicon {
       position: absolute;
-      top: 15px;
+      top: 0;
       left: 0;
       width: 35px;
       height: 35px;
@@ -215,9 +208,14 @@
   .event-title {
     @include templateHead;
     margin-top: 0;
-    margin-bottom: 0.533em;
+    margin-bottom: 0.467em;
     font-size: 15px;
     font-weight: $semibold;
+
+    // No event subtitle
+    + .event-date {
+      margin-top: 15px;
+    }
   }
 
   .event-subtitle, .event.content {
@@ -274,37 +272,49 @@
   .event-prompt {
     @include utilityPrimary;
     width: 100%;
-    font-size: 12px;
+    font-size: 11px;
     color: $neutral50;
-    background-color: $neutral10;
-    transition: color $duration $timing,
-      background-color $duration $timing;
 
     @include respond($break60) {
-      display: flex;
       min-height: 43px;
+      font-size: 12px;
+      background-color: $neutral10;
     }
 
     a {
-      color: $neutral50;
-      text-decoration: none;
-    }
-
-    span {
       display: block;
       width: 100%;
-      padding: 12px 17px 12px 50px;
+      min-height: 43px;
+      padding: 14px 17px 0 50px;
       margin: auto;
-      line-height: 11px;
+      line-height: 9px;
+      color: $neutral50;
+      text-decoration: none;
+      transition: color $duration $timing,
+        background-color $duration $timing;
 
       @include respond($break60) {
-        padding: 0 17px 0 36px;
+        padding: 16px 17px 0 36px;
+        line-height: 11px;
+      }
+
+      &:hover {
+        color: $accentPrimary;
+
+        @include respond($break60) {
+          color: $neutral75;
+          background-color: $accentPrimary;
+        }
       }
     }
 
     .manicon {
       margin-left: 13px;
-      font-size: 11px;
+      font-size: 10px;
+
+      @include respond($break60) {
+        font-size: 11px;
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Body from './Body/';
+import classNames from 'classnames';
 import { Link } from 'react-router';
 
 export default class Teaser extends Component {
@@ -63,8 +64,13 @@ export default class Teaser extends Component {
 
     const EventBody = this.getEventBody(attr.eventType);
 
+    const eventWrapperClass = classNames({
+      'event-tile': true,
+      tweet: attr.eventType === 'TWEET'
+    });
+
     const eventWrapperProps = {
-      className: 'event-tile'
+      className: eventWrapperClass
     };
 
     let eventPrompt = false;
@@ -72,12 +78,10 @@ export default class Teaser extends Component {
     const eventLinked = attr.eventUrl ? true : false;
     if (eventLinked) {
       eventPrompt = (
-        <span>
-          <a target="_blank" href={this.props.event.attributes.eventUrl}>
-            {this.getPromptByType(attr.eventType)}
-            <i className="manicon manicon-arrow-long-right"></i>
-          </a>
-        </span>
+        <a target="_blank" href={this.props.event.attributes.eventUrl}>
+          {this.getPromptByType(attr.eventType)}
+          <i className="manicon manicon-arrow-long-right"></i>
+        </a>
       );
     }
 
