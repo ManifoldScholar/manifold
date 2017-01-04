@@ -35,7 +35,8 @@ export default class Set extends PureComponent {
   value() {
     if (this.props.value !== undefined) return this.props.value;
     let value = this.dirtyModelValue();
-    if (value === null) value = ""; // treat null values as empty strings for HTML forms
+    // treat null values as empty strings for HTML forms
+    if (value === null || value === undefined) value = "";
     return value;
   }
 

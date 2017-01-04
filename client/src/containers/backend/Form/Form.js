@@ -58,7 +58,7 @@ class FormContainer extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.maybeOpenSession(prevProps);
+    this.maybeOpenSession(this.props);
   }
 
   componentWillUnmount() {

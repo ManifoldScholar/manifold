@@ -10,8 +10,8 @@ export default class ProjectDetailCategoryNew extends Component {
 
   static propTypes = {
     params: PropTypes.shape({ id: React.PropTypes.string }).isRequired,
-    refresh: PropTypes.func.isRequired,
-    routes: PropTypes.object.isRequired
+    refresh: PropTypes.func,
+    routes: PropTypes.array.isRequired
   };
 
   constructor(props) {
