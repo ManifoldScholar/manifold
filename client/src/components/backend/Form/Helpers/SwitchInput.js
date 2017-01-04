@@ -8,7 +8,7 @@ export default class FormSwitchInput extends Component {
 
   static propTypes = {
     value: PropTypes.any,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func
   };
 
   static defaultProps = {
