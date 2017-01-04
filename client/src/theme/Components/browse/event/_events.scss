@@ -16,11 +16,19 @@
   li {
     display: flex;
     width: 100%;
-    margin-bottom: 28px;
 
     @include respond($break60) {
       width: 50%;
       padding-left: 40px;
+      margin-bottom: 28px;
+    }
+
+    + li {
+      border-top: 2px solid $neutral20;
+
+      @include respond($break60) {
+        border: 0;
+      }
     }
   }
 }
@@ -38,11 +46,11 @@
   li {
     display: flex;
     width: 100%;
-    margin-bottom: 28px;
 
     @include respond($break60) {
       width: 50%;
       padding-left: 40px;
+      margin-bottom: 28px;
     }
 
     @include respond($break85) {
@@ -50,8 +58,16 @@
       margin-bottom: 40px;
     }
 
+    + li {
+      border-top: 2px solid $neutral20;
+
+      @include respond($break60) {
+        border: 0;
+      }
+    }
+
     &:nth-child(n+3) {
-      display: none;
+      //display: none;
 
       @include respond($break60) {
         display: flex;
@@ -60,17 +76,37 @@
   }
 }
 
+// List styles that apply to either type of list
+.event-list-primary li, .event-list-secondary li {
+  padding-bottom: 8px;
+
+  @include respond($break60) {
+    padding-bottom: 0;
+  }
+}
+
 // Can be a link or a div
 .event-tile {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  padding: 15px 17px 19px 0;
   color: $neutralOffBlack;
   text-decoration: none;
-  background-color: $neutral05;
   transition: color $duration $timing,
     background-color $duration $timing;
+
+  @include respond($break60) {
+    padding: 0;
+    background-color: $neutral05;
+  }
+
+  li:first-child & {
+    padding-top: 0;
+  }
+
 
   &.tweet .event-content {
     font-style: italic;
@@ -82,27 +118,32 @@
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 15px 17px 19px 50px;
+    padding-left: 50px;
 
     @include respond($break60) {
+      padding: 15px 17px 19px 50px;
       padding-left: 36px;
     }
 
     .manicon {
       position: absolute;
-      top: 50%;
-      left: -8px;
-      width: 44px;
-      height: 44px;
-      margin-top: -22px;
-      font-size: 44px;
+      top: 0;
+      left: 0;
+      width: 35px;
+      height: 35px;
+      font-size: 35px;
       // Used to hack relatively sized icons
       text-align: center;
       background-color: $accentPrimary;
       border-radius: 100%;
 
       @include respond($break60) {
+        top: 50%;
         left: -18px;
+        width: 44px;
+        height: 44px;
+        margin-top: -22px;
+        font-size: 44px;
       }
 
       @include respond($break75) {
@@ -167,16 +208,21 @@
   .event-title {
     @include templateHead;
     margin-top: 0;
-    margin-bottom: 0.533em;
+    margin-bottom: 0.467em;
     font-size: 15px;
     font-weight: $semibold;
+
+    // No event subtitle
+    + .event-date {
+      margin-top: 15px;
+    }
   }
 
   .event-subtitle, .event.content {
     @include subtitlePrimary;
     display: block;
     padding-bottom: 17px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .event-user, .event-user a {
@@ -218,7 +264,7 @@
   .event-date {
     @include utilityPrimary;
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     color: $neutral50;
     transition: color $duration $timing;
   }
@@ -226,37 +272,49 @@
   .event-prompt {
     @include utilityPrimary;
     width: 100%;
-    font-size: 12px;
+    font-size: 11px;
     color: $neutral50;
-    background-color: $neutral10;
-    transition: color $duration $timing,
-      background-color $duration $timing;
 
     @include respond($break60) {
-      display: flex;
       min-height: 43px;
+      font-size: 12px;
+      background-color: $neutral10;
     }
 
     a {
-      color: $neutral50;
-      text-decoration: none;
-    }
-
-    span {
       display: block;
       width: 100%;
-      padding: 12px 17px 12px 50px;
+      min-height: 43px;
+      padding: 14px 17px 0 50px;
       margin: auto;
-      line-height: 11px;
+      line-height: 9px;
+      color: $neutral50;
+      text-decoration: none;
+      transition: color $duration $timing,
+        background-color $duration $timing;
 
       @include respond($break60) {
-        padding: 0 17px 0 36px;
+        padding: 16px 17px 0 36px;
+        line-height: 11px;
+      }
+
+      &:hover {
+        color: $accentPrimary;
+
+        @include respond($break60) {
+          color: $neutral75;
+          background-color: $accentPrimary;
+        }
       }
     }
 
     .manicon {
       margin-left: 13px;
-      font-size: 11px;
+      font-size: 10px;
+
+      @include respond($break60) {
+        font-size: 11px;
+      }
     }
   }
 }

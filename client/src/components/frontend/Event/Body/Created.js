@@ -23,9 +23,12 @@ export default class EventBodyCreated extends Component {
           <h5 className="event-title">
             {attr.eventTitle}
           </h5>
-      <span className="event-subtitle">
-        {attr.eventSubtitle}
-      </span>
+          {/* Only show the subtitle (and its wrapper) if it exists */}
+          {attr.subjectSubtitle ?
+              <span className="event-subtitle">
+              {attr.subjectSubtitle}
+            </span> : null
+          }
           <datetime className="event-date">
             {attr.subjectType === "Project" ?
               `Started ${moment(attr.createdAt).format("MMMM Do, YYYY")}`

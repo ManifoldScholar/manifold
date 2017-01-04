@@ -23,9 +23,12 @@ export default class EventBodyAdded extends Component {
           <h5 className="event-title">
             {attr.subjectTitle}
           </h5>
-          <span className="event-subtitle">
-        {attr.subjectSubtitle}
-      </span>
+          {/* Only show the subtitle (and its wrapper) if it exists */}
+          {attr.subjectSubtitle ?
+            <span className="event-subtitle">
+              {attr.subjectSubtitle}
+            </span> : null
+          }
           <datetime className="event-date">
             {`Text Added ${moment(attr.createdAt).format("MMMM Do, YYYY")}`}
           </datetime>
