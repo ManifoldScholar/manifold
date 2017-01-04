@@ -3,7 +3,7 @@ import { Form } from 'components/backend';
 import sharedPropsValidation from './propTypes';
 import classNames from 'classnames';
 
-export default class Select extends Component {
+export default class FormSelect extends Component {
 
   static displayName = "Form.Select";
 

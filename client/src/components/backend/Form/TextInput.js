@@ -3,7 +3,7 @@ import { Form } from 'components/backend';
 import { Form as GlobalForm } from 'components/global';
 import sharedPropsValidation from './propTypes';
 
-export default class TextInput extends Component {
+export default class FormTextInput extends Component {
 
   static displayName = "Form.TextInput";
 

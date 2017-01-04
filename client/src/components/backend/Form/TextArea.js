@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Form } from 'components/backend';
 import sharedPropsValidation from './propTypes';
 
-export default class TextArea extends Component {
+export default class FormTextArea extends Component {
 
   static displayName = "Form.TextArea";
 

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Form } from 'components/backend';
 
-export default class Save extends Component {
+export default class FormSave extends Component {
 
   static displayName = "Form.Save";
 

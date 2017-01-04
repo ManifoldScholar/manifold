@@ -4,7 +4,7 @@ import { Form as FormContainer } from 'containers/backend';
 import { Form as GlobalForm } from 'components/global';
 import indexOf from 'lodash/indexOf';
 
-export default class Makers extends PureComponent {
+export default class FormMakers extends PureComponent {
 
   static displayName = "Form.HasMany";
 
