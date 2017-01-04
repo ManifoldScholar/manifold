@@ -5,9 +5,10 @@ import { Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { textCategoriesAPI } from 'api';
+import { withRouter } from 'react-router';
+
 const { select } = entityUtils;
 const { request, flush, requests } = entityStoreActions;
-import { browserHistory } from 'react-router';
 
 class ProjectDetailCategoryEdit extends Component {
 
@@ -26,9 +27,9 @@ class ProjectDetailCategoryEdit extends Component {
       catId: React.PropTypes.string
     }).isRequired,
     dispatch: PropTypes.func.isRequired,
+    router: PropTypes.object.isRequired,
     refresh: PropTypes.func.isRequired,
-    category: PropTypes.object.isRequired,
-    routes: PropTypes.object.isRequired
+    category: PropTypes.object
   };
 
   constructor(props) {
@@ -42,7 +43,7 @@ class ProjectDetailCategoryEdit extends Component {
 
   onSuccess() {
     this.props.refresh();
-    browserHistory.push(this.closeUrl());
+    this.props.router.push(this.closeUrl());
   }
 
   closeUrl() {
@@ -67,7 +68,6 @@ class ProjectDetailCategoryEdit extends Component {
         </header>
         <Category.Form
           model={this.props.category}
-          route={this.props.routes[this.props.routes.length - 1]}
           onSuccess={this.onSuccess}
         />
       </Dialog.Wrapper>
@@ -75,7 +75,7 @@ class ProjectDetailCategoryEdit extends Component {
   }
 }
 
-export default connect(
+const component = connect(
   ProjectDetailCategoryEdit.mapStateToProps
 )(ProjectDetailCategoryEdit);
-
+export default withRouter(component);

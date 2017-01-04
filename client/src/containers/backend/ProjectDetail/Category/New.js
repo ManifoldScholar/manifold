@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Category } from 'components/backend';
 import { Dialog } from 'components/backend';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
 
-export default class ProjectDetailCategoryNew extends Component {
+class ProjectDetailCategoryNew extends Component {
 
   static displayName = "ProjectDetail.Category.New";
   static activeNavItem = "texts";
@@ -11,6 +11,7 @@ export default class ProjectDetailCategoryNew extends Component {
   static propTypes = {
     params: PropTypes.shape({ id: React.PropTypes.string }).isRequired,
     refresh: PropTypes.func,
+    router: PropTypes.object.isRequired,
     routes: PropTypes.array.isRequired
   };
 
@@ -21,7 +22,7 @@ export default class ProjectDetailCategoryNew extends Component {
 
   onSuccess() {
     this.props.refresh();
-    browserHistory.push(this.closeUrl());
+    this.props.router.push(this.closeUrl());
   }
 
   closeUrl() {
@@ -39,10 +40,11 @@ export default class ProjectDetailCategoryNew extends Component {
         </header>
         <Category.Form
           projectId={this.props.params.id}
-          route={this.props.routes[this.props.routes.length - 1]}
           onSuccess={this.onSuccess}
         />
       </Dialog.Wrapper>
     );
   }
 }
+
+export default withRouter(ProjectDetailCategoryNew);
