@@ -9,6 +9,7 @@ import Connect from './Connect';
 import Select from './Select';
 import Save from './Save';
 import Switch from './Switch';
+import Helpers from './Helpers';
 
 export default {
   Connect,
@@ -21,5 +22,6 @@ export default {
   Upload,
   Select,
   Save,
-  Switch
+  Switch,
+  Helpers
 };

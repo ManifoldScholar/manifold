@@ -58,6 +58,7 @@
   // scss-lint:disable NameFormat
   background: $neutral50 linear-gradient(90deg, transparentize($neutral90, 0.5), transparentize($neutral90, 1));
   border-radius: $height;
+  cursor: pointer;
   transition: background $durationSlow $timing;
 
   &.checked {

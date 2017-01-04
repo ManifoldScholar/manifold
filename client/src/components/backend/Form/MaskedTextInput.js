@@ -7,7 +7,7 @@ import fill from 'lodash/fill';
 import startsWith from 'lodash/startsWith';
 import replace from 'lodash/replace';
 
-export default class MaskedTextInput extends Component {
+export default class FormMaskedTextInput extends Component {
 
   static displayName = "Form.MaskedTextInput";
 

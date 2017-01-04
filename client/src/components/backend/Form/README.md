@@ -1,30 +1,6 @@
-import React, { PureComponent, PropTypes } from 'react';
-import { Form } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import update from 'immutability-helper';
-import set from 'lodash/set';
-import { projectsAPI } from 'api';
+Example Form:
 
-export default class ProjectPanelGeneral extends PureComponent {
-
-  static displayName = "ProjectDetail.General";
-  static activeNavItem = "general";
-
-  static propTypes = {
-    route: PropTypes.object,
-    project: PropTypes.object,
-    dispatch: PropTypes.func,
-    editSession: PropTypes.object
-  };
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    // See https://github.com/ReactTraining/react-router/issues/3753
-    return (
-      <section>
+```
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.project}
@@ -93,7 +69,4 @@ export default class ProjectPanelGeneral extends PureComponent {
             text="Save Project"
           />
         </FormContainer.Form>
-      </section>
-    );
-  }
-}
+```

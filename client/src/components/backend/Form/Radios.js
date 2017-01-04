@@ -3,7 +3,7 @@ import sharedPropsValidation from './propTypes';
 import { Form } from 'components/backend';
 import classNames from 'classnames';
 
-export default class Radios extends Component {
+export default class FormRadios extends Component {
 
   static displayName = "Form.Radios";
 
