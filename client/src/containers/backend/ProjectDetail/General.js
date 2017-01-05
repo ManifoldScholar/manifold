@@ -22,6 +22,9 @@ export default class ProjectPanelGeneral extends PureComponent {
   }
 
   render() {
+
+    console.log(this.props.project);
+
     // See https://github.com/ReactTraining/react-router/issues/3753
     return (
       <section>
@@ -43,17 +46,23 @@ export default class ProjectPanelGeneral extends PureComponent {
             name="attributes[subtitle]"
             placeholder="Enter Project Subtitle"
           />
+          <Form.Upload
+            style="cover"
+            label="Avatar"
+            current={this.props.project.attributes.avatarUrl}
+            name="attributes[avatar]"
+            remove="attributes[removeAvatar]"
+          />
+          <Form.Upload
+            style="hero"
+            label="Hero Image"
+            current={this.props.project.attributes.heroUrl}
+            name="attributes[hero]"
+            remove="attributes[removeHero]"
+          />
           <Form.Switch
             label="Featured"
             name="attributes[featured]"
-          />
-          <Form.Radios
-            label="Featured"
-            name="attributes[featured]"
-            options={[
-              { label: "Yes", value: true },
-              { label: "No", value: false }
-            ]}
           />
           <Form.MaskedTextInput
             label="Hashtag"

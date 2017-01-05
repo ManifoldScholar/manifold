@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import get from 'lodash/get';
 import isBoolean from 'lodash/isBoolean';
 import isString from 'lodash/isString';
+import { Form } from 'components/backend';
 import startsWith from 'lodash/startsWith';
 import brackets2dots from 'brackets2dots';
 import classNames from 'classnames';
@@ -16,20 +17,23 @@ export default class Set extends PureComponent {
     actions: PropTypes.shape({
       set: PropTypes.func.isRequired
     }).isRequired,
-    value: PropTypes.any
+    value: PropTypes.any,
+    manualSet: PropTypes.bool
   };
 
   static defaultProps = {
-    actions: { set: () => {} }
+    actions: { set: () => {} },
+    manualSet: false
   }
 
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.setValue = this.setValue.bind(this);
   }
 
   dirtyModelValue() {
-    return get(this.props.dirtyModel, this.path());
+    return get(this.props.dirtyModel, this.path(this.props.name));
   }
 
   value() {
@@ -40,18 +44,24 @@ export default class Set extends PureComponent {
     return value;
   }
 
-  setPath() {
-    return `${this.path()}.$set`;
+  setPath(name) {
+    return `${this.path(name)}.$set`;
   }
 
-  path() {
-    return brackets2dots(this.props.name);
+  path(name) {
+    return brackets2dots(name);
   }
 
   handleChange(event) {
     const value = this.valueFor(event.target);
     if (value === undefined) return;
-    this.props.actions.set(this.props.sessionKey, this.setPath(), value);
+    this.props.actions.set(this.props.sessionKey, this.setPath(this.props.name), value);
+  }
+
+  setValue(value, nameArg = null) {
+    console.log(nameArg, 'name arg');
+    const name = nameArg === null ? this.props.name : nameArg;
+    this.props.actions.set(this.props.sessionKey, this.setPath(name), value);
   }
 
   valueFor(element) {
@@ -75,17 +85,18 @@ export default class Set extends PureComponent {
     return compare === value;
   }
 
-  childProps() {
-    const childProps = {
+  childProps(child) {
+    const props = {
       name: this.props.name,
       value: this.value(),
       onChange: this.handleChange
     };
-    if (this.hasFixedValue()) {
-      childProps.checked = this.isChecked(this.value());
+
+    if (this.hasFixedValue()) props.checked = this.isChecked(this.value());
+    if (this.props.manualSet === true) {
+      props.setValue = this.setValue;
     }
-    const out = Object.assign({}, this.props.children.props, childProps);
-    return out;
+    return Object.assign({}, child.props, props);
   }
 
   render() {
@@ -94,7 +105,7 @@ export default class Set extends PureComponent {
     });
     let children;
     if (this.props.dirtyModel) {
-      children = React.cloneElement(this.props.children, this.childProps());
+      children = React.cloneElement(this.props.children, this.childProps(this.props.children));
     } else {
       children = this.props.children;
     }
