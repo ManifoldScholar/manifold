@@ -41,7 +41,15 @@ RSpec.describe "Projects API", type: :request do
   describe "updates a project" do
 
     let(:path) { api_v1_project_path(project) }
-
+    let(:metadata) {
+      {
+        "isbn" => "1234",
+        "publisher" => "Someone",
+        "placeOfPublication" => "Somewhere",
+        "doi" => "1234",
+        "series" => "The Hardy Boys"
+      }
+    }
     context "when the user is an admin" do
 
       let(:headers) { admin_headers }

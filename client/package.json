@@ -153,8 +153,8 @@
     "webpack-hot-middleware": "^2.4.1"
   },
   "devDependencies": {
-    "enzyme": "^2.3.0",
     "babel-jest": "^18.0.0",
+    "enzyme": "^2.3.0",
     "jest": "^18.0.0"
   },
   "engines": {
