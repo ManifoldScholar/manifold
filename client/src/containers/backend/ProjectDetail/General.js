@@ -46,6 +46,10 @@ export default class ProjectPanelGeneral extends PureComponent {
             name="attributes[subtitle]"
             placeholder="Enter Project Subtitle"
           />
+          <Form.Date
+            label="Publication Date"
+            name="attributes[publicationDate]"
+          />
           <Form.Upload
             style="cover"
             label="Avatar"
