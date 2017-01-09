@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import moment from 'moment';
 import filesize from 'filesize';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 
 export default class ResourceMeta extends Component {
 
@@ -18,6 +19,8 @@ export default class ResourceMeta extends Component {
 
   render() {
     const attr = this.props.resource.attributes;
+    const tmp = `${attr.createdMonth}/${attr.createdDay}/${attr.createdYear}`;
+    const createdDate = format(parse(tmp), 'MMMM DDD, YYYY');
 
     return (
       <section className="resource-meta">
@@ -56,11 +59,7 @@ export default class ResourceMeta extends Component {
           <li>
             <span className="meta-label">{'Created On'}</span>
             <span className="meta-value">
-              {
-                ` ${moment().month(attr.createdMonth - 1).format("MMMM")}
-                ${attr.createdDay},
-                ${attr.createdYear}`
-              }
+              {createdDate}
             </span>
           </li>
         </ul>

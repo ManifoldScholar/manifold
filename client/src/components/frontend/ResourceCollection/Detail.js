@@ -1,7 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
-import moment from 'moment';
-
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 import {
   Utility,
   ResourceList
@@ -29,6 +29,10 @@ export default class ResourceCollectionDetail extends PureComponent {
 
     const attr = collection.attributes;
     const resources = collection.relationships.resources;
+
+    const tmp = `${attr.createdMonth}/1/${attr.createdYear}`;
+    const createdDate = format(parse(tmp), 'MMMM, YYYY');
+
     return (
       <section>
         <div className="container">
@@ -40,11 +44,7 @@ export default class ResourceCollectionDetail extends PureComponent {
                   {attr.title}
                 </h1>
                 <span className="collection-date">
-                  {
-                    `Collection created
-                    ${moment().month(attr.createdMonth - 1).format("MMMM")},
-                    ${attr.createdYear}`
-                  }
+                  {`Collection created ${createdDate}`}
                 </span>
               </div>
             </header>
