@@ -8,7 +8,9 @@ import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI, textsAPI, textCategoriesAPI } from 'api';
-import moment from 'moment';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
+
 
 const { select } = entityUtils;
 const { request, flush, requests } = entityStoreActions;
@@ -306,7 +308,7 @@ class ProjectDetailTexts extends PureComponent {
                     </span>
                   </h3>
                   <datetime className="asset-date">
-                    {`Added ${moment(text.attributes.createdAt).format("MMMM YYYY")}`}
+                    {`Added ${format(parse(text.attributes.createdAt), "MMMM YYYY")}`}
                   </datetime>
                   <span className="asset-state">Hidden</span>
                 </div>

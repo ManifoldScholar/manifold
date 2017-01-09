@@ -43,6 +43,21 @@ export default class TextDetailGeneralContainer extends PureComponent {
             name="attributes[uniqueIdentifier]"
             placeholder="Enter the Unique Identifier"
           />
+          <Form.TextInput
+            label="Language"
+            name="attributes[language]"
+            placeholder="Enter the Language"
+          />
+          <Form.TextInput
+            label="Rights"
+            name="attributes[rights]"
+            placeholder="Enter Text Rights"
+          />
+          <Form.TextArea
+            label="Description"
+            name="attributes[description]"
+            placeholder="Enter a Brief Description"
+          />
           <Form.Save text="Save Text" />
         </FormContainer.Form>
       </section>

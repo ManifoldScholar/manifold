@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Project as FrontEndProject } from 'components/frontend';
 import { Project as GlobalProject } from 'components/global';
-import moment from 'moment';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 
 export default class ProjectThumbnail extends Component {
 
@@ -40,13 +41,9 @@ export default class ProjectThumbnail extends Component {
 
   renderPublishedDate(project) {
     const attr = project.attributes;
-    const monthInt = attr.publicationMonth ? parseInt(attr.publicationMonth, 10) : null;
-    const yearInt = attr.publicationYear ? parseInt(attr.publicationYear, 10) : null;
     let publishedString;
-    if (monthInt && yearInt) {
-      publishedString = `Published ${moment().month(monthInt - 1).format("MMMM")}, ${yearInt}`;
-    } else if (yearInt) {
-      publishedString = `Published ${yearInt}`;
+    if (attr.publicationDate) {
+      publishedString = `Published ${format(parse(attr.publicationDate), 'MMMM, YYYY')}`;
     }
     if (!publishedString) return null;
     if (!this.props.hideDate) {

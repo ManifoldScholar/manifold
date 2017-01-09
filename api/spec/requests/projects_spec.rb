@@ -41,7 +41,15 @@ RSpec.describe "Projects API", type: :request do
   describe "updates a project" do
 
     let(:path) { api_v1_project_path(project) }
-
+    let(:metadata) {
+      {
+        "isbn" => "1234",
+        "publisher" => "Someone",
+        "placeOfPublication" => "Somewhere",
+        "doi" => "1234",
+        "series" => "The Hardy Boys"
+      }
+    }
     context "when the user is an admin" do
 
       let(:headers) { admin_headers }
@@ -66,6 +74,7 @@ RSpec.describe "Projects API", type: :request do
       describe "the response" do
         context "body" do
           it("contains the updated title") { expect_updated_param("title", "a title") }
+          it("contains the updated title") { expect_updated_param("metadata", metadata) }
           it("contains the updated subtitle") { expect_updated_param("subtitle", "a subtitle") }
           it("contains the updated featured boolean value") { expect_updated_param("featured", "true", true ) }
           it("contains the updated hashtag") { expect_updated_param("hashtag", "the_hashtag" ) }

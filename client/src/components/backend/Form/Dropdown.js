@@ -21,20 +21,26 @@ export default class FormDropdown extends Component {
     layout: "horizontal"
   };
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
 
-    const inputClassNames = classNames('form-toggle', 'radio', this.props.layout);
+    const selectClassNames = classNames('form-select');
 
     return (
       <div className="form-input">
         <label>{this.props.label}</label>
-        <div className="form-select">
+        <div className={selectClassNames} >
           <i className="manicon manicon-caret-down"></i>
             <Form.Connect.Set {...this.props}>
               <select>
                 {this.props.options.map((option) => {
                   return (
-                      <option id={option.value}>{option.label}</option>
+                      <option key={option.value} id={option.value}>
+                        {option.label}
+                      </option>
                   );
                 })}
               </select>

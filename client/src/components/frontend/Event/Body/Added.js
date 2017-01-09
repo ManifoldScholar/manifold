@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import moment from 'moment';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 
 export default class EventBodyAdded extends Component {
 
@@ -30,7 +31,7 @@ export default class EventBodyAdded extends Component {
             </span> : null
           }
           <datetime className="event-date">
-            {`Text Added ${moment(attr.createdAt).format("MMMM Do, YYYY")}`}
+            {`Text Added ${format(parse(attr.createdAt), "MMMM Do, YYYY")}`}
           </datetime>
         </div>
       </div>

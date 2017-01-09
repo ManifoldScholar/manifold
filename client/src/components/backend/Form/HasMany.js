@@ -149,7 +149,7 @@ export default class FormMakers extends PureComponent {
           {/* Add .autofill-open to .input-autofill in order to show autofill list  */}
           <FormContainer.PredictiveInput
             className="input-predictive"
-            placeholder="Add an Author"
+            placeholder={this.props.placeholder}
             label={
               (option) => {
                 return `${option.attributes.firstName} ${option.attributes.lastName}`;

@@ -22,6 +22,7 @@ export default class ProjectPanelGeneral extends PureComponent {
   }
 
   render() {
+
     // See https://github.com/ReactTraining/react-router/issues/3753
     return (
       <section>
@@ -34,6 +35,8 @@ export default class ProjectPanelGeneral extends PureComponent {
           className="form-secondary"
         >
           <Form.TextInput
+            validation={["required"]}
+            focusOnMount
             label="Title"
             name="attributes[title]"
             placeholder="Enter Project Title"
@@ -43,17 +46,27 @@ export default class ProjectPanelGeneral extends PureComponent {
             name="attributes[subtitle]"
             placeholder="Enter Project Subtitle"
           />
+          <Form.Date
+            label="Publication Date"
+            name="attributes[publicationDate]"
+          />
+          <Form.Upload
+            style="cover"
+            label="Avatar"
+            current={this.props.project.attributes.avatarUrl}
+            name="attributes[avatar]"
+            remove="attributes[removeAvatar]"
+          />
+          <Form.Upload
+            style="hero"
+            label="Hero Image"
+            current={this.props.project.attributes.heroUrl}
+            name="attributes[hero]"
+            remove="attributes[removeHero]"
+          />
           <Form.Switch
             label="Featured"
             name="attributes[featured]"
-          />
-          <Form.Radios
-            label="Featured"
-            name="attributes[featured]"
-            options={[
-              { label: "Yes", value: true },
-              { label: "No", value: false }
-            ]}
           />
           <Form.MaskedTextInput
             label="Hashtag"

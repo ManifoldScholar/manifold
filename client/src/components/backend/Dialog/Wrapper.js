@@ -30,6 +30,21 @@ export default class DialogWrapper extends PureComponent {
 
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.handleEscape = this.handleEscape.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('keyup', this.handleEscape);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.handleEscape);
+  }
+
+  handleEscape(event) {
+    if (event.keyCode === 27 && this.props.showCloseButton === true) {
+      this.doClose();
+    }
   }
 
   leave(callback) {

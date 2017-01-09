@@ -1,14 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import sharedPropsValidation from './propTypes';
 import Dropzone from 'react-dropzone';
+import { Form } from 'components/backend';
+import { Form as GlobalForm } from 'components/global';
 
 export default class FormUpload extends Component {
 
   static displayName = "Form.Upload";
 
   static propTypes = {
-    label: PropTypes.string
+    ...sharedPropsValidation,
+    label: PropTypes.string,
+    background: PropTypes.string
   };
+
+  static defaultProps = {
+    style: "thumbnail"
+  }
 
   constructor() {
     super();
@@ -23,18 +31,13 @@ export default class FormUpload extends Component {
     return (
       <div className="form-input">
         <label>{this.props.label}</label>
-        <Dropzone
-          className="form-dropzone"
-          style={{}}
-          activeStyle={{}}
-          accept="image/*, application/pdf, .doc, .docx, .txt, .md, .pages"
-          multiple={false}
-          ref="dropzone"
-          onDrop={this.handleFileDrop}
-        >
-          <i className="manicon manicon-cloud-up"></i>
-          <p>{'Upload a file or'}<br/>{'drag and drop here'}</p>
-        </Dropzone>
+        <Form.Connect.Set manualSet {...this.props} >
+          <Form.Helpers.UploadInput
+            style={this.props.style}
+            current={this.props.current}
+            remove={this.props.remove}
+          />
+        </Form.Connect.Set>
       </div>
     );
   }

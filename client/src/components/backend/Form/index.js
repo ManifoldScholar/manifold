@@ -10,6 +10,8 @@ import Select from './Select';
 import Save from './Save';
 import Switch from './Switch';
 import Helpers from './Helpers';
+import Date from './Date';
+import HigherOrder from './HigherOrder';
 
 export default {
   Connect,
@@ -23,5 +25,7 @@ export default {
   Select,
   Save,
   Switch,
-  Helpers
+  Date,
+  Helpers,
+  HigherOrder
 };
