@@ -21,6 +21,7 @@ export default class CategoryForm extends PureComponent {
       >
         <Form.TextInput
           label="Title"
+          focusOnMount
           name="attributes[title]"
           placeholder="What would you like to call this category?"
         />

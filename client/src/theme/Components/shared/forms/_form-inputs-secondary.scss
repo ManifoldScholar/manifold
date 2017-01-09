@@ -92,6 +92,11 @@
       height: auto;
       padding: 0 42px 0.55em 0; // OD
       text-transform: none; // OD
+
+      &:focus {
+        border-color: $accentPrimaryLight;
+      }
+
     }
   }
 

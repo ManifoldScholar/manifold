@@ -37,6 +37,7 @@ export default class ProjectPanelGeneral extends PureComponent {
           className="form-secondary"
         >
           <Form.TextInput
+            focusOnMount
             label="Title"
             name="attributes[title]"
             placeholder="Enter Project Title"
