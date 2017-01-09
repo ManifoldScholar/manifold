@@ -84,7 +84,8 @@ class FormCollaborators extends Component {
         <section>
           <form className="form-secondary">
             <Form.HasMany
-              label="Creators"
+              label="Authors"
+              placeholder="Add an Author"
               onNew={(value) => { return this.newMaker(value, "creator"); }}
               onChange={(makers, changeType) => {
                 this.updateMakers(makers, changeType, "creators");
@@ -98,6 +99,7 @@ class FormCollaborators extends Component {
             />
             <Form.HasMany
               label="Contributors"
+              placeholder="Add a Contributor"
               onNew={(value) => { return this.newMaker(value, "contributor"); }}
               onChange={(makers, changeType) => {
                 this.updateMakers(makers, changeType, "contributors");
