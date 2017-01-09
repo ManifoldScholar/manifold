@@ -100,7 +100,7 @@ class FormContainer extends PureComponent {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.props.session.dirty.id) {
+    if (this.props.session.source.id) {
       this.update();
     } else {
       this.create();
@@ -109,7 +109,8 @@ class FormContainer extends PureComponent {
 
   update() {
     const dirty = this.props.session.dirty;
-    const call = this.props.update(dirty.id, { attributes: dirty.attributes });
+    const source = this.props.session.source;
+    const call = this.props.update(source.id, { attributes: dirty.attributes });
     const action = request(call, this.requestName(this.props));
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty('promise') && this.props.onSuccess) {
@@ -144,6 +145,7 @@ class FormContainer extends PureComponent {
         set: bindActionCreators(entityEditorActions.set, props.dispatch),
       },
       dirtyModel: props.session.dirty,
+      sourceModel: props.session.source,
       sessionKey: props.name,
       errors: props.errors || []
     };

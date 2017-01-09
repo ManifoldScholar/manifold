@@ -1,5 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import get from 'lodash/get';
+import has from 'lodash/has';
 import isBoolean from 'lodash/isBoolean';
 import isString from 'lodash/isString';
 import { Form } from 'components/backend';
@@ -13,6 +14,7 @@ export default class Set extends PureComponent {
 
   static propTypes = {
     dirtyModel: PropTypes.object,
+    sourceModel: PropTypes.object,
     name: PropTypes.string.isRequired,
     actions: PropTypes.shape({
       set: PropTypes.func.isRequired
@@ -32,13 +34,26 @@ export default class Set extends PureComponent {
     this.setValue = this.setValue.bind(this);
   }
 
+  modelValue(model, name) {
+    return get(model, this.path(name));
+  }
+
   dirtyModelValue() {
-    return get(this.props.dirtyModel, this.path(this.props.name));
+    return this.modelValue(this.props.dirtyModel, this.props.name);
+  }
+
+  isChanged(model, name) {
+    return has(model, this.path(name));
   }
 
   value() {
     if (this.props.value !== undefined) return this.props.value;
-    let value = this.dirtyModelValue();
+    let value;
+    if (this.isChanged(this.props.dirtyModel, this.props.name)) {
+      value = this.modelValue(this.props.dirtyModel, this.props.name);
+    } else {
+      value = this.modelValue(this.props.sourceModel, this.props.name);
+    }
     // treat null values as empty strings for HTML forms
     if (value === null || value === undefined) value = "";
     return value;
@@ -59,7 +74,6 @@ export default class Set extends PureComponent {
   }
 
   setValue(value, nameArg = null) {
-    console.log(nameArg, 'name arg');
     const name = nameArg === null ? this.props.name : nameArg;
     this.props.actions.set(this.props.sessionKey, this.setPath(name), value);
   }
