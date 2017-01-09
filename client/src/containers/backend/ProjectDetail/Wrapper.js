@@ -63,6 +63,11 @@ class ProjectDetailWrapperContainer extends PureComponent {
         path: `/backend/project/${project.id}/texts`,
         label: "Texts",
         key: "texts"
+      },
+      {
+        path: `/backend/project/${project.id}/metadata`,
+        label: "Metadata",
+        key: "metadata"
       }
     ];
   }

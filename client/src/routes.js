@@ -59,6 +59,7 @@ export default () => {
             <Route component={Backend.ProjectDetail.Category.Edit} path="category/:catId/edit" />
           </Route>
           <Route component={Backend.ProjectDetail.Collaborators} path="collaborators" />
+          <Route component={Backend.ProjectDetail.Metadata} path="metadata" />
         </Route>
         <Route component={Backend.Users.Wrapper} path="users" >
           <IndexRoute component={Backend.Users.List} />
@@ -69,6 +70,7 @@ export default () => {
         <Route component={Backend.TextDetail.Wrapper} path="text/:id" >
           <IndexRoute component={Backend.TextDetail.General} />
           <Route component={Backend.TextDetail.Collaborators} path="collaborators" />
+          <Route component={Backend.TextDetail.Metadata} path="metadata" />
         </Route>
         <Route component={Backend.Settings.Wrapper} path="settings" >
           <IndexRoute component={Backend.Settings.General} />

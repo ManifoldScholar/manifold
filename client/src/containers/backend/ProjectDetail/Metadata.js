@@ -3,11 +3,11 @@ import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import update from 'immutability-helper';
 import set from 'lodash/set';
-import { textsAPI } from 'api';
+import { projectsAPI } from 'api';
 
-export default class TextDetailMetadata extends PureComponent {
+export default class ProjectDetailMetadata extends PureComponent {
 
-  static displayName = "TextDetail.Metadata";
+  static displayName = "ProjectDetail.Metadata";
   static activeNavItem = "metadata";
 
   static propTypes = {
@@ -22,14 +22,17 @@ export default class TextDetailMetadata extends PureComponent {
   }
 
   render() {
+
+
+    // See https://github.com/ReactTraining/react-router/issues/3753
     return (
       <section>
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
-          model={this.props.text}
+          model={this.props.project}
           name="backend-project-general"
-          update={textsAPI.update}
-          create={textsAPI.create}
+          update={projectsAPI.update}
+          create={projectsAPI.create}
           className="form-secondary"
         >
           <Form.TextInput
@@ -49,10 +52,6 @@ export default class TextDetailMetadata extends PureComponent {
             label="Publisher"
             name="attributes[metadata][placeOfPublication]"
             placeholder="Enter Place of Publication"
-          />
-          <Form.Date
-            label="Publication Date"
-            name="attributes[publicationDate]"
           />
           <Form.TextInput
             focusOnMount

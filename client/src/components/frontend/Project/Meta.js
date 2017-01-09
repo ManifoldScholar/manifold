@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import humps from 'humps';
 
 export default class ProjectMeta extends Component {
 
@@ -16,7 +17,7 @@ export default class ProjectMeta extends Component {
           return (
             <li key={key} >
               <span className="meta-label">
-                {key}
+                {humps.decamelize(key, { separator: ' ' })}
               </span>
               <div className="meta-value">
                 {this.props.metadata[key]}
