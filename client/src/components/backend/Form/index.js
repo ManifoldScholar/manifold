@@ -23,5 +23,6 @@ export default {
   Select,
   Save,
   Switch,
-  Helpers
+  Helpers,
+  HigherOrder
 };

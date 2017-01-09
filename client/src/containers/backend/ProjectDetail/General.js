@@ -23,8 +23,6 @@ export default class ProjectPanelGeneral extends PureComponent {
 
   render() {
 
-    console.log(this.props.project);
-
     // See https://github.com/ReactTraining/react-router/issues/3753
     return (
       <section>
@@ -37,6 +35,7 @@ export default class ProjectPanelGeneral extends PureComponent {
           className="form-secondary"
         >
           <Form.TextInput
+            validation={["required"]}
             focusOnMount
             label="Title"
             name="attributes[title]"
