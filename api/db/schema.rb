@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229205954) do
+ActiveRecord::Schema.define(version: 20170106171648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,12 +155,9 @@ ActiveRecord::Schema.define(version: 20161229205954) do
     t.datetime "cover_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "featured",                 default: false
+    t.boolean  "featured",                default: false
     t.uuid     "published_text_id"
     t.string   "hashtag"
-    t.integer  "publication_year"
-    t.integer  "publication_month"
-    t.integer  "publication_day_of_month"
     t.string   "purchase_url"
     t.bigint   "purchase_price_in_cents"
     t.string   "purchase_price_currency"
@@ -176,9 +173,10 @@ ActiveRecord::Schema.define(version: 20161229205954) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.jsonb    "metadata",                 default: {}
+    t.jsonb    "metadata",                default: {}
     t.uuid     "creator_id"
-    t.jsonb    "tweet_fetch_config",       default: {}
+    t.jsonb    "tweet_fetch_config",      default: {}
+    t.date     "publication_date"
   end
 
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

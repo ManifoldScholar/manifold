@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import moment from 'moment';
 import { Text } from 'components/global';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 
 export default class TextThumbnail extends Component {
 
@@ -65,7 +66,7 @@ export default class TextThumbnail extends Component {
               </h3>
             </Link>
             <datetime className="asset-date">
-              {`Added ${moment(text.attributes.createdAt).format("MMMM YYYY")}`}
+              {`Added ${format(parse(text.attributes.createdAt), "MMMM YYYY")}`}
             </datetime>
 
             <div className="asset-status">

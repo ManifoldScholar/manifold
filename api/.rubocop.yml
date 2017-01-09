@@ -22,6 +22,9 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 15
 
+Metrics/ModuleLength:
+  Enabled: false
+
 Metrics/ClassLength:
   Enabled: false
 

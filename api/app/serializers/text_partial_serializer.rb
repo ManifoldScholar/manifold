@@ -4,7 +4,7 @@ class TextPartialSerializer < ActiveModel::Serializer
   attributes :id, :title, :creator_names, :unique_identifier, :cover_url, :created_at,
              :first_section_id, :start_section_id, :published, :annotations_count,
              :highlights_count, :bookmarks_count, :created_month, :created_year,
-             :created_day, :age, :position
+             :created_day, :age, :position, :publication_date
 
   belongs_to :project
   belongs_to :category

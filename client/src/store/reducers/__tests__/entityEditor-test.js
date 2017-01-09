@@ -12,7 +12,7 @@ describe('store/reducers/entityEditor', () => {
 
   const session = {
     changed: false,
-    dirty: model,
+    dirty: { attributes: {}, relationships: {} },
     source: model
   }
 

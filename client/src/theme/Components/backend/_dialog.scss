@@ -40,6 +40,10 @@
     margin: auto;
     background-color: $neutral95;
 
+    @include respond($break90) {
+      padding: 29px 40px 50px;
+    }
+
     header {
       padding: 11px 0 45px;
     }

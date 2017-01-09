@@ -3,6 +3,10 @@ module Updaters
   class Project
     include ::Updaters
 
+    def attachment_fields
+      [:avatar, :hero]
+    end
+
     def adjusted_attributes
       return {} unless attributes
       clone = attributes.clone

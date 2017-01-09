@@ -19,7 +19,11 @@ module Updaters
   end
 
   def update(model)
-    model.assign_attributes(adjusted_attributes) if attributes
+    if attributes
+      attr = adjusted_attributes
+      attachmentize_attributes!(attr)
+      model.assign_attributes(attr)
+    end
     update_relationships(model)
     saved = model.save
     try(:post_update, model) if saved
@@ -32,6 +36,28 @@ module Updaters
   end
 
   protected
+
+  def attachment_fields
+    []
+  end
+
+  # rubocop:disable Metrics/AbcSize
+  def attachmentize_attributes!(attr)
+    return unless attachment_fields.count.positive?
+    attachment_fields.each do |field|
+      attachment_params = attr.extract!(field)[field]
+      next if attachment_params.nil?
+      attachment = Paperclip.io_adapters.for(attachment_params[:data])
+      attachment.original_filename = attachment_params[:filename]
+      attr[field] = attachment
+    end
+    attachment_fields.each do |field|
+      key = "remove_#{field}".to_sym
+      remove_param = attr.extract!(key)[key]
+      attr[field] = nil if remove_param
+    end
+  end
+  # rubocop:enable Metrics/AbcSize
 
   # rubocop:disable Metrics/CyclomaticComplexity
   def update_relationships(model)

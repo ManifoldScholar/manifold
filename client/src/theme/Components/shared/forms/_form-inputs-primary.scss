@@ -262,6 +262,31 @@
   }
 }
 
+// Form Date Input
+// --------------------------
+.form-date {
+
+  .input-day {
+    margin-left: 15px;
+  }
+
+  .form-input {
+
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    margin-left: 15px;
+
+    .input-year {
+
+      .form-secondary &, .form-primary & {
+        display: inline;
+        width: 100px;
+      }
+    }
+  }
+}
+
 // Form Callout
 // --------------------------
 .form-callout {
