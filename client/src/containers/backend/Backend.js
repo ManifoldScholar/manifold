@@ -57,9 +57,35 @@ class BackendContainer extends PureComponent {
     this.refs.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
   }
 
+  renderError(error) {
+    return (
+      <div className="global-container">
+        <FatalError error={error} />
+      </div>
+    );
+  }
+
+  renderChildren() {
+    if (this.props.notifications.fatalError) {
+      return this.renderError(this.props.notifications.fatalError);
+    }
+    if (!this.props.authentication.authenticated) {
+      return this.renderError({
+        status: null,
+        detail: "Please login to access the backend.",
+        title: "Login Required"
+      });
+    }
+    return this.props.children;
+  }
+
   render() {
     const fatalError = this.props.notifications.fatalError;
-
+    const loginError = {
+      status: null,
+      detail: "Please login to access the backend.",
+      title: "Login Required"
+    };
     return (
       <HigherOrder.BodyClass className={'backend bg-neutral90'}>
         <div>
@@ -73,13 +99,7 @@ class BackendContainer extends PureComponent {
             />
           </HigherOrder.ScrollAware>
           <main ref="mainContainer">
-            { (fatalError) ?
-              <div className="global-container">
-                <FatalError error={fatalError} />
-              </div>
-              :
-              this.props.children
-            }
+            {this.renderChildren()}
           </main>
           <LayoutFrontend.Footer
             pages={this.props.pages}
