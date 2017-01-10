@@ -26,33 +26,34 @@ export default class FormDateInput extends PureComponent {
     this.months = [
       "January", "February", "March", "April", "May", "June", "July", "August",
       "September", "October", "November", "December"
-    ]
+    ];
 
     const parts = this.dateToUserInput(this.parse(props.value));
 
     this.state = {
       input: parts,
       validated: this.validate(parts)
-    }
+    };
     this.setInputMonth = this.setInputMonth.bind(this);
     this.setInputDay = this.setInputDay.bind(this);
     this.setInputYear = this.setInputYear.bind(this);
   }
 
+  /* eslint-disable react/no-did-update-set-state */
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.validated !== this.state.validated) {
+    if (prevState.validated !== this.state.validated) {
       this.broadcastValue();
     }
-    if(prevState.input !== this.state.input) {
-      this.setState({validated: this.validate(this.state.input)});
+    if (prevState.input !== this.state.input) {
+      this.setState({ validated: this.validate(this.state.input) });
     }
   }
+  /* eslint-enable react/no-did-update-set-state */
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.props.value && nextProps.value !== "" && nextProps.value !== null) {
-      console.log(nextProps.value, 'value');
+    if (nextProps.value !== this.props.value &&
+      nextProps.value !== "" && nextProps.value !== null) {
       const parts = this.dateToUserInput(this.parse(nextProps.value));
-      console.log(parts, 'parts');
       const newState = {
         input: parts,
         validated: this.validate(parts)
@@ -73,15 +74,15 @@ export default class FormDateInput extends PureComponent {
       month: parts.month.toString(),
       day: parts.day.toString(),
       year: parts.year.toString()
-    }
+    };
   }
 
   validate(parts) {
-    let month = parseInt(parts.month);
-    let day = parseInt(parts.day);
+    let month = parseInt(parts.month, 10);
+    let day = parseInt(parts.day, 10);
     let year = parts.year;
     month = (month >= 0 && month <= 11) ? month : null;
-    year = (year && year.match(/^\d{4}$/)) ? parseInt(year) : null;
+    year = (year && year.match(/^\d{4}$/)) ? parseInt(year, 10) : null;
     day = (day >= 0 && day <= 31) ? day : null;
     if (month === null || day === null || year === null) return null;
     return { month, year, day };
@@ -105,7 +106,7 @@ export default class FormDateInput extends PureComponent {
   }
 
   maxDayForMonthAndYear(month, year) {
-    if (!parseInt(month) || !parseInt(year)) return 31;
+    if (!parseInt(month, 10) || !parseInt(year, 10)) return 31;
     const date = new Date(year, month, 1);
     const max = getDaysInMonth(date);
     return max;
