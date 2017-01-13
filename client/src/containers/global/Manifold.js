@@ -7,8 +7,9 @@ import config from '../../config';
 import get from 'lodash/get';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { notificationActions, uiVisibilityActions } from 'actions';
-import { meAPI } from 'api';
+import { meAPI, settingsAPI } from 'api';
 import { entityStoreActions } from 'actions';
+import { entityUtils } from 'utils';
 import { closest } from 'utils/domUtils';
 
 const { request, requests } = entityStoreActions;
@@ -22,7 +23,8 @@ class ManifoldContainer extends PureComponent {
       visibility: state.ui.visibility,
       loading: state.ui.loading.active,
       notifications: state.notifications,
-      routing: state.routing
+      routing: state.routing,
+      settings: entityUtils.select(requests.settings, state.entityStore)
     };
   }
 
@@ -37,8 +39,14 @@ class ManifoldContainer extends PureComponent {
     ])
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    if (!props.settings) {
+      const settings = request(settingsAPI.show(), requests.settings, true);
+      const { promise: one } = props.dispatch(settings);
+    }
+
     this.handleGlobalClick = this.handleGlobalClick.bind(this);
   }
 
@@ -127,7 +135,6 @@ class ManifoldContainer extends PureComponent {
             : null}
         </ReactCSSTransitionGroup>
         {this.props.children}
-
       </div>
     );
   }
