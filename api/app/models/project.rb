@@ -10,6 +10,9 @@ class Project < ApplicationRecord
   include MoneyAttributes
   include TruthyChecks
 
+  # Magic
+  merge_hash_attributes! :metadata
+
   # Associations
   belongs_to :published_text, class_name: "Text", optional: true
   has_many :texts, dependent: :destroy
