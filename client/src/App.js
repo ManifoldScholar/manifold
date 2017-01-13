@@ -6,8 +6,6 @@ import { HigherOrder } from 'components/global';
 import { Provider } from 'react-redux';
 import getRoutes from 'routes';
 import { currentUserActions } from 'actions';
-
-
 import { Manifold } from 'containers/global';
 
 export default class App extends Component {
