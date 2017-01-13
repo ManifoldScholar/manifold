@@ -54,10 +54,6 @@ Rails.application.routes.draw do
         end
       end
 
-      namespace :configuration do
-        resource :client, only: [:show], controller: "client"
-      end
-
       resource :me, only: [:show, :update], controller: "me"
       namespace :me do
         namespace :relationships do
