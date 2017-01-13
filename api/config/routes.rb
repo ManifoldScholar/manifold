@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       resources :resources
       resources :texts
 
+      resource :settings, except: [:destroy, :create]
+
       resources :collections do
         scope module: :collections do
           namespace :relationships do
