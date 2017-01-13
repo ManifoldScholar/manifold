@@ -61,6 +61,13 @@ module Validation
     params.permit(param_config)
   end
 
+  def settings_params
+    params.require(:data)
+    attributes = [{ general: [:default_publisher, :default_place_of_publication] }]
+    param_config = structure_params(attributes: attributes)
+    params.permit(param_config)
+  end
+
   def maker_params
     attributes = [:first_name, :last_name]
     param_config = structure_params(attributes: attributes)
