@@ -10,3 +10,5 @@ gem 'capistrano-yarn', :git => 'https://github.com/ManifoldScholar/capistrano-ya
 gem 'capistrano-copy-files'
 gem 'scss_lint'
 gem 'bundler', '~>1.13.6'
+gem 'clamp'
+gem 'foreman'
