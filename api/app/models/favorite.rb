@@ -1,5 +1,5 @@
 # A favorite represents a user's decision to favorite an object, generally a project.
-class Favorite < ActiveRecord::Base
+class Favorite < ApplicationRecord
 
   # Authority
   include Authority::Abilities

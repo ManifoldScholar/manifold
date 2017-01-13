@@ -1,5 +1,5 @@
 # Tracks the relationship between projects and subjects
-class ProjectSubject < ActiveRecord::Base
+class ProjectSubject < ApplicationRecord
 
   # Authority
   include Authority::Abilities

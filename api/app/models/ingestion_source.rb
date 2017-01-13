@@ -1,5 +1,5 @@
 # Connects texts to resources that were sources for text sections during ingestion
-class IngestionSource < ActiveRecord::Base
+class IngestionSource < ApplicationRecord
 
   # Authority
   include Authority::Abilities

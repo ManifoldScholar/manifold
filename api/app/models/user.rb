@@ -1,5 +1,5 @@
 # The User model
-class User < ActiveRecord::Base
+class User < ApplicationRecord
 
   # Authority
   include Authority::UserAbilities

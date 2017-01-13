@@ -1,5 +1,5 @@
 # A collection of resources
-class Collection < ActiveRecord::Base
+class Collection < ApplicationRecord
 
   # Authority
   include Authority::Abilities
