@@ -1,16 +1,50 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'components/backend';
-import Placeholder from './Placeholder';
+import { Form as FormContainer } from 'containers/backend';
+import { settingsAPI } from 'api';
+import { entityStoreActions } from 'actions';
+import { entityUtils } from 'utils';
+const { request, requests } = entityStoreActions;
 
 class SettingsGeneralContainer extends PureComponent {
+
+
+  static mapStateToProps(state) {
+    return {
+      settings: entityUtils.select(requests.settings, state.entityStore)
+    };
+  }
 
   static activeNavItem = "general";
 
   render() {
     return (
       <section>
-        <Placeholder label="general" />
+        <FormContainer.Form
+          route={this.props.routes[this.props.routes.length - 1]}
+          model={this.props.settings}
+          name="backend-project-general"
+          update={settingsAPI.update}
+          create={settingsAPI.update}
+          className="form-secondary"
+        >
+          <Form.TextInput
+            focusOnMount
+            label="Default Publisher"
+            name="attributes[general][defaultPublisher]"
+            placeholder="Enter Default Publisher"
+          />
+          <Form.TextInput
+            focusOnMount
+            label="Default Place of Publication"
+            name="attributes[general][defaultPlaceOfPublication]"
+            placeholder="Enter Default Place of Publication"
+          />
+          <Form.Save
+            text="Save Project"
+          />
+        </FormContainer.Form>
       </section>
     );
   }
