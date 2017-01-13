@@ -1,5 +1,5 @@
 # The project model is the primary unit of Manifold.
-class Project < ActiveRecord::Base
+class Project < ApplicationRecord
 
   # Authority
   include Authority::Abilities

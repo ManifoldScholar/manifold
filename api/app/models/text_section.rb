@@ -1,5 +1,5 @@
 # A section in a text
-class TextSection < ActiveRecord::Base
+class TextSection < ApplicationRecord
 
   # Constants
   KIND_COVER_IMAGE = "cover_image".freeze

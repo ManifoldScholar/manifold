@@ -1,5 +1,5 @@
 # Tracks the relationship between collections and resources
-class CollectionResource < ActiveRecord::Base
+class CollectionResource < ApplicationRecord
 
   # Authority
   include Authority::Abilities

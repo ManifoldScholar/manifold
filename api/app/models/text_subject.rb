@@ -1,5 +1,5 @@
 # Tracks the relationship between texts and subjects
-class TextSubject < ActiveRecord::Base
+class TextSubject < ApplicationRecord
 
   # Authority
   include Authority::Abilities

@@ -1,5 +1,5 @@
 # A value object representing a text's title.
-class TextTitle < ActiveRecord::Base
+class TextTitle < ApplicationRecord
 
   # Constants
   KIND_MAIN = "main".freeze
