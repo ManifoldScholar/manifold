@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
+import FormattedDate from 'components/global/FormattedDate';
 
 export default class ResourceCard extends Component {
 
@@ -147,9 +146,6 @@ export default class ResourceCard extends Component {
       };
     }
 
-    const tmp = `${attr.createdMonth}/1/${attr.createdYear}`;
-    const uploadedDate = format(parse(tmp), 'MMMM, YYYY');
-
     return (
       <li className="resource-card">
         <Link
@@ -177,7 +173,10 @@ export default class ResourceCard extends Component {
               </h4>
             </Link>
             <span className="resource-date">
-              {uploadedDate}
+              <FormattedDate
+                format="MMMM, YYYY"
+                date={attr.createdAt}
+              />
             </span>
             <Link
               to={this.detailUrl()}

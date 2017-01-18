@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { ResourceList } from 'components/frontend';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
+import FormattedDate from 'components/global/FormattedDate';
 
 export default class ResourceHero extends Component {
 
@@ -47,9 +46,6 @@ export default class ResourceHero extends Component {
   render() {
     const attr = this.props.resource.attributes;
 
-    const tmp = `${attr.createdMonth}/1/${attr.createdYear}`;
-    const uploadedDate = format(parse(tmp), 'MMMM, YYYY');
-
     return (
       <section className="resource-hero">
         <header>
@@ -57,7 +53,10 @@ export default class ResourceHero extends Component {
             {attr.title}
           </h1>
           <span className="resource-date">
-            {`Uploaded ${uploadedDate}`}
+            <FormattedDate
+              format="MMMM, YYYY"
+              date={attr.createdAt}
+            />
           </span>
         </header>
         {this.getFigureByType(this.props.resource)}

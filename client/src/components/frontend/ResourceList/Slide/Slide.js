@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import throttle from 'lodash/throttle';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
+import FormattedDate from 'components/global/FormattedDate';
 
 export default class ResourceSlideFigure extends Component {
   static propTypes = {
@@ -35,9 +34,6 @@ export default class ResourceSlideFigure extends Component {
     const resource = this.props.resource;
     const attr = resource.attributes;
 
-    const tmp = `${attr.createdMonth}/1/${attr.createdYear}`;
-    const createdDate = format(parse(tmp), 'MMMM, YYYY');
-
     return (
       <figure>
         <div
@@ -53,7 +49,11 @@ export default class ResourceSlideFigure extends Component {
               {attr.kind}
             </span>
             <span className="resource-date">
-              {`Uploaded ${createdDate}`}
+              <FormattedDate
+                prefix="Uploaded"
+                format="MMMM, YYYY"
+                date={attr.createdAt}
+              />
             </span>
           </div>
         </div>
