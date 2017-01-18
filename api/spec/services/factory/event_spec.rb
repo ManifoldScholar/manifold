@@ -25,7 +25,8 @@ RSpec.describe Factory::Event do
   end
 
   it "raises an exception when it's not given a subject" do
-    expect{factory.create(Event::PROJECT_CREATED)}.to raise_error(RuntimeError)
+    expect{factory.create(Event::PROJECT_CREATED)}
+      .to raise_error(Factory::Errors::NoEventSubject)
   end
 
   it "creates a valid event" do
@@ -77,7 +78,7 @@ RSpec.describe Factory::Event do
     user = FactoryGirl.create(:user)
     expect{
       factory.create(Event::TEXT_ADDED, subject: user)
-    }.to raise_error(RuntimeError)
+    }.to raise_error(Factory::Errors::NoEventProject)
   end
 
   it "correctly reports whether an i18n key is set" do

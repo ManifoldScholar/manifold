@@ -1,5 +1,5 @@
 # A stylesheet
-class Stylesheet < ActiveRecord::Base
+class Stylesheet < ApplicationRecord
 
   # Authority
   include Authority::Abilities

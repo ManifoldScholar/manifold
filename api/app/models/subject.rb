@@ -1,5 +1,5 @@
 # A subject
-class Subject < ActiveRecord::Base
+class Subject < ApplicationRecord
 
   # Authority
   include Authority::Abilities

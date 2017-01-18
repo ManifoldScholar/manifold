@@ -1,7 +1,7 @@
 require "memoist"
 
 # A single Text
-class Text < ActiveRecord::Base
+class Text < ApplicationRecord
 
   # Authority
   include Authority::Abilities

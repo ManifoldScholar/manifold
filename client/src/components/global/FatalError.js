@@ -5,13 +5,15 @@ export default class FatalError extends Component {
   static propTypes = {
     error: PropTypes.shape({
       detail: PropTypes.string.isRequired,
-      status: PropTypes.number.isRequired,
+      status: PropTypes.number,
       title: PropTypes.string.isRequired
     }).isRequired
   }
 
   render() {
     const error = this.props.error;
+    let statusMessage = "";
+    if (error.status) statusMessage = `${error.status} error.`;
     return (
       <section className="error-page" ref="fillHeight">
         <div className="error-wrapper">
@@ -29,7 +31,7 @@ export default class FatalError extends Component {
 
             <div className="error-description">
               <h1>
-                {error.status} error. {error.title}
+                {statusMessage} {error.title}
               </h1>
               <p>
                 {error.detail}

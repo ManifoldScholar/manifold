@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       resources :resources
       resources :texts
 
+      resource :settings, except: [:destroy, :create]
+
       resources :collections do
         scope module: :collections do
           namespace :relationships do
@@ -52,10 +54,6 @@ Rails.application.routes.draw do
         collection do
           get "whoami"
         end
-      end
-
-      namespace :configuration do
-        resource :client, only: [:show], controller: "client"
       end
 
       resource :me, only: [:show, :update], controller: "me"

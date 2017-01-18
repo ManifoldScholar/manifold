@@ -9,6 +9,11 @@ export default class FormHigherOrderValidation extends Component {
   static displayName = "Form.HigherOrder.Validation";
 
   static propTypes = {
+    validation: PropTypes.array,
+    name: PropTypes.string,
+    children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+    onChange: React.PropTypes.func,
+    setValue: React.PropTypes.func
   };
 
   static defaultProps = {
@@ -23,8 +28,8 @@ export default class FormHigherOrderValidation extends Component {
 
   validate(value) {
     this.props.validation.forEach((validation) => {
-      if (validation === 'required') this.validateRequired(value)
-    })
+      if (validation === 'required') this.validateRequired(value);
+    });
   }
 
   validateRequired(value) {
@@ -54,7 +59,7 @@ export default class FormHigherOrderValidation extends Component {
       source: {
         pointer: this.pointerFor(this.props.name)
       }
-    }
+    };
     const errors = Object.assign({}, this.state.errors, { [key]: error });
     this.setState({ errors });
   }
@@ -97,8 +102,7 @@ export default class FormHigherOrderValidation extends Component {
           <GlobalForm.InputError errors={Object.values(this.state.errors)} />
         </div>
       </div>
-    )
+    );
   }
-
 
 }

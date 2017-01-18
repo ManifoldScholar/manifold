@@ -125,7 +125,10 @@ export default class Set extends PureComponent {
     }
     return (
       <div className={classes} ref={(wrapper) => { this.wrapper = wrapper; }}>
-        <Form.HigherOrder.Validation {...this.childProps(this.props.children)} validation={this.props.validation} >
+        <Form.HigherOrder.Validation
+          {...this.childProps(this.props.children)}
+          validation={this.props.validation}
+        >
           {this.props.children}
         </Form.HigherOrder.Validation>
       </div>

@@ -1,5 +1,5 @@
 # Tracks the relationship between texts and makers
-class Collaborator < ActiveRecord::Base
+class Collaborator < ApplicationRecord
 
   ROLE_CREATOR = "creator".freeze
   ROLE_CONTRIBUTOR = "contributor".freeze

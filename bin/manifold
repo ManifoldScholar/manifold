@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require 'clamp'
+
+Clamp do
+   option "--noapi", :flag, "do not start API"
+   option "--noworker", :flag, "do not start background worker"
+   option "--noclockwork", :flag, "do not start clockwork"
+   option "--noclient", :flag, "do not start client"
+
+   def execute
+     api_num = noapi? ? 0 : 1
+     worker_num = noclient? ? 0 : 1
+     clockwork_num = noclockwork? ? 0 : 1
+     client_num = noclient? ? 0 : 1
+     cmd = "foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num}"
+     exec cmd
+   end
+end

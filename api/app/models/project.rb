@@ -1,5 +1,5 @@
 # The project model is the primary unit of Manifold.
-class Project < ActiveRecord::Base
+class Project < ApplicationRecord
 
   # Authority
   include Authority::Abilities
@@ -9,6 +9,9 @@ class Project < ActiveRecord::Base
   include Collaborative
   include MoneyAttributes
   include TruthyChecks
+
+  # Magic
+  merge_hash_attributes! :metadata
 
   # Associations
   belongs_to :published_text, class_name: "Text", optional: true
