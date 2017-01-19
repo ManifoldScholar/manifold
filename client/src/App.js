@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import getRoutes from 'routes';
 import { currentUserActions } from 'actions';
 import { Manifold } from 'containers/global';
+import ReactGA from 'react-ga';
 
 export default class App extends Component {
 
@@ -20,6 +21,7 @@ export default class App extends Component {
     this.serverRouter = this.serverRouter.bind(this);
     this.clientRouter = this.clientRouter.bind(this);
     this.componentWillMount = this.componentWillMount.bind(this);
+    this.onRouteUpdate = this.onRouteUpdate.bind(this);
   }
 
   componentWillMount() {
@@ -52,6 +54,15 @@ export default class App extends Component {
     this.store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
     this.store.dispatch(currentUserActions.login);
     this.forceUpdate();
+    ReactGA.initialize('UA-90773269-1'); // Google Analytics Tracking ID
+  }
+
+  onRouteUpdate() {
+    this.trackRouteUpdate();
+  }
+
+  trackRouteUpdate() {
+    ReactGA.ga('send', 'pageview', window.location.pathname);
   }
 
   serverRouter() {
@@ -60,7 +71,7 @@ export default class App extends Component {
 
   clientRouter() {
     return (
-      <Router history={this.history} render={this.routeRenderMethod} >
+      <Router onUpdate={this.onRouteUpdate} history={this.history} render={this.routeRenderMethod} >
         {getRoutes()}
       </Router>
     );

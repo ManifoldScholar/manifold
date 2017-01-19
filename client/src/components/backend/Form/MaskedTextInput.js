@@ -13,7 +13,11 @@ export default class FormMaskedTextInput extends Component {
 
   static propTypes = {
     ...sharedPropsValidation,
-    mask: PropTypes.string.isRequired
+    mask: PropTypes.oneOfType(
+      PropTypes.string.isRequired,
+      PropTypes.array.isRequired
+    ),
+    placeholder: PropTypes.string
   };
 
   constructor(props) {
@@ -61,6 +65,7 @@ export default class FormMaskedTextInput extends Component {
           <MaskedInput
             type="text"
             mask={mask}
+            placeholder={this.props.placeholder}
           />
         </Form.Connect.Set>
       </div>
