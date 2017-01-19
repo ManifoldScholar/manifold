@@ -7,23 +7,23 @@ exports[`Dashboard.Activity component renders correctly 1`] = `
         Texts added this week
       </td>
       <td>
+        5
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Readers this week
+      </td>
+      <td>
         2
       </td>
     </tr>
     <tr>
       <td>
-        Readers this weeks
+        Change from last week
       </td>
       <td>
-        2349
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Increase from last week
-      </td>
-      <td>
-        17%+
+        + 50%
       </td>
     </tr>
     <tr>
@@ -31,7 +31,7 @@ exports[`Dashboard.Activity component renders correctly 1`] = `
         Highlights in the past week
       </td>
       <td>
-        2914
+        4
       </td>
     </tr>
     <tr>
@@ -39,15 +39,7 @@ exports[`Dashboard.Activity component renders correctly 1`] = `
         Annotations in the past week
       </td>
       <td>
-        455
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Comments in the past week
-      </td>
-      <td>
-        650
+        3
       </td>
     </tr>
   </tbody>

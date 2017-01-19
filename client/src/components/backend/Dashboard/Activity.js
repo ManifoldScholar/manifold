@@ -5,35 +5,61 @@ export default class Activity extends Component {
 
   static displayName = "Dashboard.Activity";
 
-  static propTypes = {};
+  static propTypes = {
+    statistics: PropTypes.shape({
+      attributes: PropTypes.shape({
+        newTextsCount: PropTypes.number,
+        readersThisWeek: PropTypes.oneOfType([
+          PropTypes.bool,
+          PropTypes.number
+        ]),
+        readerIncrease: PropTypes.number,
+        newHighlightsCount: PropTypes.number,
+        newAnnotationsCount: PropTypes.number
+      })
+    })
+  };
+
+  formatReaderIncrease(stats) {
+    const increase = stats.readerIncrease;
+
+    if (increase === null) return "";
+    if (increase > 0) return "+ " + increase.toString() + "%";
+    if (increase < 0) return "- " + Math.abs(increase).toString() + "%";
+    return "0" + "%";
+  }
+
 
   render() {
+    if (!this.props.statistics) return null;
+    const stats = this.props.statistics.attributes;
+
     return (
       <table className="table-single-value">
         <tbody>
           <tr>
             <td>Texts added this week</td>
-            <td>2</td>
+            <td>{stats.newTextsCount}</td>
           </tr>
-          <tr>
-            <td>Readers this weeks</td>
-            <td>2349</td>
-          </tr>
-          <tr>
-            <td>Increase from last week</td>
-            <td>17%+</td>
-          </tr>
+          { stats.readersThisWeek ?
+            <tr>
+              <td>Readers this week</td>
+              <td>{stats.readersThisWeek}</td>
+            </tr>
+          : null }
+          { stats.readerIncrease ?
+            <tr>
+              <td>Change from last week</td>
+              <td>{this.formatReaderIncrease(stats)}</td>
+            </tr>
+          : null }
           <tr>
             <td>Highlights in the past week</td>
-            <td>2914</td>
+            <td>{stats.newHighlightsCount}</td>
           </tr>
           <tr>
             <td>Annotations in the past week</td>
-            <td>455</td>
-          </tr>
-          <tr>
-            <td>Comments in the past week</td>
-            <td>650</td>
+            <td>{stats.newAnnotationsCount}</td>
           </tr>
         </tbody>
       </table>

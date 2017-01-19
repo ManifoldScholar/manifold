@@ -5,6 +5,7 @@ import { ProjectList, Dashboard as DashboardComponents } from 'components/backen
 import { Link } from 'react-router';
 import { entityUtils } from 'utils';
 import projectsAPI from 'api/projects';
+import statsAPI from 'api/statistics';
 
 const { select, meta } = entityUtils;
 const { request, requests } = entityStoreActions;
@@ -14,20 +15,27 @@ const perPage = 5;
 class DashboardContainer extends PureComponent {
 
   static fetchData(getState, dispatch) {
+    const state = getState();
     const projectsRequest =
       request(projectsAPI.index({}, { size: perPage }), requests.backendDashboardProjects);
-    return dispatch(projectsRequest);
+    const statsRequest =
+      request(statsAPI.show(), requests.backendDashboardStats);
+    const { promise: one } = dispatch(projectsRequest);
+    const { promise: two } = dispatch(statsRequest);
+    return Promise.all([one, two]);
   }
 
   static mapStateToProps(state) {
     return {
+      statistics: select(requests.backendDashboardStats, state.entityStore),
       projects: select(requests.backendDashboardProjects, state.entityStore),
       projectsMeta: meta(requests.backendDashboardProjects, state.entityStore)
     };
   }
 
   static propTypes = {
-    projects: PropTypes.array
+    projects: PropTypes.array,
+    statistics: PropTypes.object
   };
 
   constructor() {
@@ -88,7 +96,9 @@ class DashboardContainer extends PureComponent {
                       {'Activity'} <i className="manicon manicon-pulse-small"></i>
                     </h3>
                   </header>
-                  <DashboardComponents.Activity />
+                  <DashboardComponents.Activity
+                    statistics={this.props.statistics}
+                  />
                 </section>
               </div>
             </section>

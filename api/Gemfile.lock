@@ -310,6 +310,7 @@ DEPENDENCIES
   filesize (~> 0.1.1)
   foreman (= 0.82.0)
   friendly_id
+  google-api-client
   google_drive
   has_scope
   httparty (~> 0.14.0)
@@ -334,6 +335,7 @@ DEPENDENCIES
   rubocop
   rubyzip (>= 1.2.0)
   sidekiq (= 4.2.3)
+  signet
   spring
   spring-commands-rspec
   twitter (= 5.16.0)
@@ -341,4 +343,4 @@ DEPENDENCIES
   validate_url
 
 BUNDLED WITH
-   1.13.6
+   1.13.7
