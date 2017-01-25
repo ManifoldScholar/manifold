@@ -41,14 +41,11 @@ class SettingsGeneralContainer extends PureComponent {
             name="attributes[general][defaultPlaceOfPublication]"
             placeholder="Enter Default Place of Publication"
           />
-          <Form.MaskedTextInput
+          <Form.TextInput
             focusOnMount
             label="Google Analytics Tracking ID"
             name="attributes[general][gaTrackingId]"
-            placeholder="UA-000000-01"
-            mask={
-              ['U', 'A', '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/]
-            }
+            placeholder="UA-000000-00"
           />
           <Form.MaskedTextInput
             focusOnMount
