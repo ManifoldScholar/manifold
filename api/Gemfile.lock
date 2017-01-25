@@ -72,6 +72,7 @@ GEM
     connection_pool (2.2.1)
     css_parser (1.4.7)
       addressable
+    database_cleaner (1.5.3)
     diff-lcs (1.2.5)
     domain_name (0.5.20161129)
       unf (>= 0.0.5, < 1.0.0)
@@ -304,6 +305,7 @@ DEPENDENCIES
   clockwork (= 2.0.0)
   colorize
   css_parser
+  database_cleaner
   dotenv-rails
   factory_girl_rails (~> 4.7)
   faker!

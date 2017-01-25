@@ -61,4 +61,9 @@ RSpec.configure do |config|
     clear_enqueued_jobs
   end
 
+  # Truncate all test database tables before running tests.
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
 end
