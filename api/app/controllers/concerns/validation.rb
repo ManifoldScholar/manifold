@@ -63,7 +63,14 @@ module Validation
 
   def settings_params
     params.require(:data)
-    attributes = [{ general: [:default_publisher, :default_place_of_publication] }]
+    attributes = [{
+      general: [
+        :default_publisher,
+        :default_place_of_publication,
+        :ga_tracking_id,
+        :ga_profile_id
+      ]
+    }]
     param_config = structure_params(attributes: attributes)
     params.permit(param_config)
   end

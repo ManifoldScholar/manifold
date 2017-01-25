@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :makers
       resources :resources
       resources :texts
+      resource :statistics, only: [:show]
 
       resource :settings, except: [:destroy, :create]
 
