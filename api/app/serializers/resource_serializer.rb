@@ -3,7 +3,7 @@ class ResourceSerializer < ActiveModel::Serializer
   cache key: "resource", expires_in: 3.hours
   attributes :title, :kind, :attachment_url, :attachment_file_name,
              :attachment_content_type, :attachment_file_size, :attachment_updated_at,
-             :created_month, :created_day, :created_year, :updated_at, :project_id,
+             :created_at, :updated_at, :project_id,
              :caption, :description, :fingerprint, :keywords, :alt_text,
              :copyright_status, :copyright_holder, :credit, :external_url, :external_id,
              :external_type, :allow_high_res, :allow_download, :doi, :high_res_file_name,
@@ -14,17 +14,5 @@ class ResourceSerializer < ActiveModel::Serializer
 
   has_many :collections
   belongs_to :project
-
-  def created_month
-    object.created_at.strftime("%-m")
-  end
-
-  def created_year
-    object.created_at.strftime("%-Y")
-  end
-
-  def created_day
-    object.created_at.strftime("%-d")
-  end
 
 end

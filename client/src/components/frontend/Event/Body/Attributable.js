@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Autolinker from 'autolinker';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
+import FormattedDate from 'components/global/FormattedDate';
 
 export default class EventBodyAttributable extends Component {
 
@@ -41,7 +40,10 @@ export default class EventBodyAttributable extends Component {
             <p dangerouslySetInnerHTML={this.autoLink(attr.excerpt)} />
           </div>
           <datetime className="event-date">
-            {format(parse(attr.createdAt), "MMMM Do, YYYY")}
+            <FormattedDate
+              format="MMMM Do, YYYY"
+              date={attr.createdAt}
+            />
           </datetime>
         </div>
       </div>

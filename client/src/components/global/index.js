@@ -4,6 +4,7 @@ export SignInUp from './SignInUp';
 export Dropdown from './Dropdown';
 export HeaderNotification from './HeaderNotification';
 export HeaderNotifications from './HeaderNotifications';
+export FormattedDate from './FormattedDate';
 export LoadingBar from './LoadingBar';
 export Project from './Project';
 export SearchMenuBody from './SearchMenuBody';

@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Text } from 'components/global';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
+import FormattedDate from 'components/global/FormattedDate';
 
 export default class TextThumbnail extends Component {
 
@@ -66,7 +65,11 @@ export default class TextThumbnail extends Component {
               </h3>
             </Link>
             <datetime className="asset-date">
-              {`Added ${format(parse(text.attributes.createdAt), "MMMM YYYY")}`}
+              <FormattedDate
+                prefix="Added"
+                format="MMMM, YYYY"
+                date={text.attributes.createdAt}
+              />
             </datetime>
 
             <div className="asset-status">

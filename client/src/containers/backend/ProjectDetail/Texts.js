@@ -8,9 +8,7 @@ import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI, textsAPI, textCategoriesAPI } from 'api';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
-
+import FormattedDate from 'components/global/FormattedDate';
 
 const { select } = entityUtils;
 const { request, flush, requests } = entityStoreActions;
@@ -308,7 +306,11 @@ class ProjectDetailTexts extends PureComponent {
                     </span>
                   </h3>
                   <datetime className="asset-date">
-                    {`Added ${format(parse(text.attributes.createdAt), "MMMM YYYY")}`}
+                    <FormattedDate
+                      prefix="Added"
+                      format="MMMM, YYYY"
+                      date={text.attributes.createdAt}
+                    />
                   </datetime>
                   <span className="asset-state">Hidden</span>
                 </div>

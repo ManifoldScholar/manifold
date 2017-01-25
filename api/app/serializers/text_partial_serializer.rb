@@ -3,8 +3,7 @@ class TextPartialSerializer < ActiveModel::Serializer
   # cache key: "text_partial", expires_in: 3.hours
   attributes :id, :title, :creator_names, :unique_identifier, :cover_url, :created_at,
              :first_section_id, :start_section_id, :published, :annotations_count,
-             :highlights_count, :bookmarks_count, :created_month, :created_year,
-             :created_day, :age, :position, :publication_date
+             :highlights_count, :bookmarks_count, :age, :position, :publication_date
 
   belongs_to :project
   belongs_to :category
@@ -36,18 +35,6 @@ class TextPartialSerializer < ActiveModel::Serializer
 
   def age
     (Time.zone.today - object.created_at.to_date).to_i
-  end
-
-  def created_month
-    object.created_at.strftime("%-m")
-  end
-
-  def created_year
-    object.created_at.strftime("%-Y")
-  end
-
-  def created_day
-    object.created_at.strftime("%-d")
   end
 
 end

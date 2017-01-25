@@ -2,8 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Project as FrontEndProject } from 'components/frontend';
 import { Project as GlobalProject } from 'components/global';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
+import FormattedDate from 'components/global/FormattedDate';
 
 export default class ProjectThumbnail extends Component {
 
@@ -41,18 +40,19 @@ export default class ProjectThumbnail extends Component {
 
   renderPublishedDate(project) {
     const attr = project.attributes;
-    let publishedString;
-    if (attr.publicationDate) {
-      publishedString = `Published ${format(parse(attr.publicationDate), 'MMMM, YYYY')}`;
-    }
-    if (!publishedString) return null;
-    if (!this.props.hideDate) {
+    if (attr.publicationDate && !this.props.hideDate) {
       return (
         <div className="date">
-          {publishedString}
+          <FormattedDate
+            prefix="Published"
+            format="MMMM, YYYY"
+            date={attr.publicationDate}
+          />
         </div>
       );
     }
+    return null;
+
   }
 
   renderProjectDesc(project) {
