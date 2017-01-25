@@ -44,7 +44,7 @@ script:
   - yarn run test
   - cd ../api
   - bundle install
-  - bundle exec rspec spec -fd
+  - bundle exec rspec spec -fd --tag ~@integration
 
 notifications:
   slack: manifold-scholarship:zDJbq4uqW2B9puU6l8fhwuMa
