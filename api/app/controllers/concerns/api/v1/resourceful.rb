@@ -101,8 +101,6 @@ module Api
           [:api, :v1, model.first.model_name.route_key]
         when ActiveRecord::Base
           [:api, :v1, model]
-        else
-          [:api, :v1]
         end
       end
 
