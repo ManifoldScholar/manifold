@@ -47,7 +47,7 @@ class SettingsGeneralContainer extends PureComponent {
             name="attributes[general][gaTrackingId]"
             placeholder="UA-000000-01"
             mask={
-              ['UA-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/]
+              ['U', 'A', '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/]
             }
           />
           <Form.MaskedTextInput
@@ -56,7 +56,7 @@ class SettingsGeneralContainer extends PureComponent {
             name="attributes[general][gaProfileId]"
             placeholder="ga:123456789"
             mask={
-              ['ga:', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]
+              ['g', 'a', ':', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]
             }
           />
           <Form.Save
