@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import DocumentMeta from 'react-document-meta';
 import { SignInUp, LoadingBar } from 'components/global';
 import config from '../../config';
+import has from 'lodash/has';
 import get from 'lodash/get';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { notificationActions, uiVisibilityActions } from 'actions';
@@ -11,11 +12,25 @@ import { meAPI, settingsAPI } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { closest } from 'utils/domUtils';
+import ReactGA from 'react-ga';
 
 const { request, requests } = entityStoreActions;
 const { visibilityHide } = uiVisibilityActions;
 
 class ManifoldContainer extends PureComponent {
+
+
+  // This method will bootstrap data into manifold. Nothing else is loaded into the
+  // store at this point, including params and the authenticated user.
+  static bootstrap(getState, dispatch) {
+    const promises = [];
+    const loaded = has(getState(), 'entityStore.entities.settings.0');
+    if (loaded) return Promise.all(promises);
+
+    const settingsRequest = request(settingsAPI.show(), requests.settings, true);
+    promises.push(dispatch(settingsRequest));
+    return Promise.all(promises);
+  }
 
   static mapStateToProps(state) {
     return {
@@ -41,12 +56,7 @@ class ManifoldContainer extends PureComponent {
 
   constructor(props) {
     super(props);
-
-    if (!props.settings) {
-      const settings = request(settingsAPI.show(), requests.settings, true);
-      const { promise: one } = props.dispatch(settings);
-    }
-
+    this.gaInitialized = false;
     this.handleGlobalClick = this.handleGlobalClick.bind(this);
   }
 
@@ -57,6 +67,17 @@ class ManifoldContainer extends PureComponent {
     if (this.userJustLoggedOut(this.props.authentication, nextProps.authentication)) {
       this.doPostLogout(nextProps);
     }
+    if (this.receivedGaTrackingId(nextProps.settings) && !this.gaInitialized) {
+      const debug = __DEVELOPMENT__;
+      ReactGA.initialize(nextProps.settings.attributes.general.gaTrackingId, { debug });
+      this.gaInitialized = true;
+      nextProps.gaInitCallback();
+    }
+  }
+
+  receivedGaTrackingId(nextSettings) {
+    const path = 'attributes.general.gaTrackingId';
+    return has(nextSettings, path) && get(nextSettings, path) !== "";
   }
 
   userJustLoggedIn(auth, nextAuth) {

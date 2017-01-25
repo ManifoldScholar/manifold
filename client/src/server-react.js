@@ -16,6 +16,7 @@ import exceptionRenderer from './helpers/exceptionRenderer';
 import App from './App';
 import getRoutes from './routes';
 import { authenticateWithToken } from 'store/middleware/currentUserMiddleware';
+import { Manifold } from 'containers/global';
 
 const pretty = new PrettyError();
 
@@ -44,12 +45,14 @@ function respondWithSSRDisabledError(res) {
 }
 
 function fetchComponentData(props, store) {
-  return fetchAllData(
+  const bootstrap = Manifold.bootstrap(store.getState, store.dispatch);
+  const fetch = fetchAllData(
     props.components,
     store.getState, store.dispatch,
     props.location,
     props.params
   );
+  return Promise.all([bootstrap, fetch]);
 }
 
 function authenticateUser(req, store) {

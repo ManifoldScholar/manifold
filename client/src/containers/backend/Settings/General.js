@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Form } from 'components/backend';
+import { Form, MaskedTextInput } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import { settingsAPI } from 'api';
 import { entityStoreActions } from 'actions';
@@ -40,6 +40,21 @@ class SettingsGeneralContainer extends PureComponent {
             label="Default Place of Publication"
             name="attributes[general][defaultPlaceOfPublication]"
             placeholder="Enter Default Place of Publication"
+          />
+          <Form.TextInput
+            focusOnMount
+            label="Google Analytics Tracking ID"
+            name="attributes[general][gaTrackingId]"
+            placeholder="UA-000000-00"
+          />
+          <Form.MaskedTextInput
+            focusOnMount
+            label="Google Analytics Profile ID"
+            name="attributes[general][gaProfileId]"
+            placeholder="ga:123456789"
+            mask={
+              ['g', 'a', ':', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]
+            }
           />
           <Form.Save
             text="Save Project"
