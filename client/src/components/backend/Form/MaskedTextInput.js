@@ -13,10 +13,10 @@ export default class FormMaskedTextInput extends Component {
 
   static propTypes = {
     ...sharedPropsValidation,
-    mask: PropTypes.oneOfType(
+    mask: PropTypes.oneOfType([
       PropTypes.string.isRequired,
       PropTypes.array.isRequired
-    ),
+    ]),
     placeholder: PropTypes.string
   };
 

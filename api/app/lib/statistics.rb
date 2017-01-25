@@ -8,7 +8,7 @@ class Statistics
   extend ActiveModel::Naming
 
   def id
-    "statistics-set"
+    0
   end
 
   def initialize(_range = nil)
