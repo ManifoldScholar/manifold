@@ -106,4 +106,28 @@ RSpec.describe "Users API", type: :request do
       end
     end
   end
+
+  describe "destroys a user" do
+
+    let(:path) { api_v1_user_path(reader) }
+    let(:api_response) { JSON.parse(response.body) }
+
+    context "when the user is an admin" do
+      before(:each) { delete path, headers: admin_headers }
+      describe "the response" do
+        it "has a 204 status code" do
+          expect(@response).to have_http_status(204)
+        end
+      end
+    end
+
+    context "when the user is a reader" do
+      before(:each) { delete path, headers: reader_headers }
+      describe "the response" do
+        it "has a 403 status code" do
+          expect(@response).to have_http_status(403)
+        end
+      end
+    end
+  end
 end
