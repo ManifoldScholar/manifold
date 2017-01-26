@@ -84,6 +84,11 @@ class UserEditContainer extends PureComponent {
           className="form-secondary"
         >
           <Form.TextInput
+            label="Email"
+            name="attributes[email]"
+            placeholder="Email"
+          />
+          <Form.TextInput
             label="First Name"
             name="attributes[firstName]"
             placeholder="First Name"
