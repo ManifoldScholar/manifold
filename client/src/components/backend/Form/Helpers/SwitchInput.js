@@ -17,12 +17,14 @@ export default class FormSwitchInput extends Component {
 
   constructor(props) {
     super(props);
+    this.switchValue = this.props.value;
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(event) {
     const adjustedEvent = event;
-    this.trackingInput.value = !this.props.value;
+    this.switchValue = !this.switchValue;
+    this.trackingInput.value = this.switchValue;
     adjustedEvent.target = this.trackingInput;
     this.props.onChange(adjustedEvent);
   }
@@ -30,7 +32,7 @@ export default class FormSwitchInput extends Component {
   render() {
     const classes = classnames({
       "boolean-primary": true,
-      checked: this.props.value === true
+      checked: this.switchValue === true
     });
 
     return (
