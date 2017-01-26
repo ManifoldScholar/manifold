@@ -8,7 +8,7 @@ module Api
       extend ActiveSupport::Concern
 
       ARRAY_OF_MODELS = lambda do |object|
-        object.is_a?(Array) && object.first.is_a?(ActiveRecord::Base)
+        object.respond_to?(:first) && object.first.is_a?(ActiveRecord::Base)
       end
 
       included do
@@ -101,8 +101,6 @@ module Api
           [:api, :v1, model.first.model_name.route_key]
         when ActiveRecord::Base
           [:api, :v1, model]
-        else
-          [:api, :v1]
         end
       end
 

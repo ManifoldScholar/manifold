@@ -19,6 +19,13 @@ class ApplicationController < ActionController::API
     params.dig(:page, :number) || 1
   end
 
+  def with_pagination!(filter_params)
+    filter_params ||= {}
+    filter_params[:page] = page_number
+    filter_params[:per_page] = page_size
+    filter_params
+  end
+
   def pagination_dict(object)
     {
       per_page: page_size.to_i,

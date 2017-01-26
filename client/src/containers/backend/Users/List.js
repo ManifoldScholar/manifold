@@ -4,10 +4,11 @@ import { UserList } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import usersAPI from 'api/users';
-const { select, meta } = entityUtils;
-const { request } = entityStoreActions;
+import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 
+const { select, meta } = entityUtils;
+const { request } = entityStoreActions;
 const perPage = 20;
 
 class UsersListContainer extends PureComponent {
@@ -28,8 +29,12 @@ class UsersListContainer extends PureComponent {
 
   constructor() {
     super();
+    this.state = { filter: {} };
     this.usersPageChangeHandlerCreator = this.usersPageChangeHandlerCreator.bind(this);
-    this.fetchUsers = this.fetchUsers.bind(this);
+    this.fetchUsers = debounce(
+      this.fetchUsers.bind(this), 250, { leading: false, trailing: true }
+      );
+    this.filterChangeHandler = this.filterChangeHandler.bind(this);
   }
 
   componentDidMount() {
@@ -38,12 +43,17 @@ class UsersListContainer extends PureComponent {
 
   fetchUsers(page) {
     const pagination = { number: page, size: perPage };
-    const filter = { };
     const action = request(
-      usersAPI.index(filter, pagination),
+      usersAPI.index(this.state.filter, pagination),
       'backend-users-list'
     );
     this.props.dispatch(action);
+  }
+
+  filterChangeHandler(filter) {
+    this.setState({ filter }, () => {
+      this.fetchUsers(1);
+    });
   }
 
   handleUsersPageChange(event, page) {
@@ -70,6 +80,7 @@ class UsersListContainer extends PureComponent {
           <UserList.SearchableList
             users={this.props.users}
             active={this.props.params.id}
+            filterChangeHandler={this.filterChangeHandler}
             paginationClickHandler={this.usersPageChangeHandlerCreator}
             pagination={this.props.usersMeta.pagination}
             currentUserId={this.props.currentUserId}

@@ -1,6 +1,9 @@
 # The project model is the primary unit of Manifold.
 class Project < ApplicationRecord
 
+  # Constants
+  TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
+
   # Authority
   include Authority::Abilities
 
@@ -9,9 +12,13 @@ class Project < ApplicationRecord
   include Collaborative
   include MoneyAttributes
   include TruthyChecks
+  include Paginated
 
   # Magic
   merge_hash_attributes! :metadata
+
+  # Search
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES
 
   # Associations
   belongs_to :published_text, class_name: "Text", optional: true
@@ -79,23 +86,50 @@ class Project < ApplicationRecord
   validates_attachment_file_name :hero, matches: validation[:allowed_ext]
   validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
 
+  # Scopes
+  scope :by_featured, lambda { |featured|
+    return all if featured.nil?
+    where(featured: to_boolean(featured))
+  }
+
+  scope :by_subject, lambda { |subject|
+    return all unless subject.present?
+    joins(:project_subjects).where(project_subjects: { subject: subject })
+  }
+
+  # Why is this here? --ZD
   def self.call
     all
   end
 
-  def self.filtered(filters)
-    projects = Project.all
-    return projects unless filters
-    if filters.key? :featured
-      projects = projects.where(featured: true) if truthy?(filters[:featured])
-      projects = projects.where(featured: false) if falsey?(filters[:featured])
-    end
-    if filters[:subject]
-      projects = projects
-                 .joins(:project_subjects)
-                 .where(project_subjects: { subject: filters[:subject] })
-    end
-    projects
+  def self.filter(params)
+    return search(params) if params.key? :keyword
+    query(params)
+  end
+
+  # Used to filter records using DB fields
+  def self.query(params)
+    Project.all
+           .by_featured(params[:featured])
+           .by_subject(params[:subject])
+           .by_pagination(params[:page], params[:per_page])
+  end
+
+  # Used to filter records using elastic search index
+  def self.search(params)
+    query = params.dig(:keyword) || "*"
+    filter = Search::FilterScope.new
+                                .typeahead(params[:typeahead], TYPEAHEAD_ATTRIBUTES)
+                                .paginate(params[:page], params[:per_page])
+    Project.lookup(query, filter)
+  end
+
+  def search_data
+    {
+      title: title,
+      description: description,
+      makers: makers.map(&:name)
+    }
   end
 
   def resource_kinds

@@ -10,6 +10,11 @@ module TruthyChecks
       false
     end
 
+    def to_boolean(value)
+      return true if truthy?(value)
+      false
+    end
+
     def falsey?(value)
       !truthy?(value)
     end
