@@ -5,9 +5,7 @@ module Api
 
       resourceful! User, authorize_options: { except: [:create, :show, :whoami] } do
         User
-          .filtered(user_filter_params[:filter])
-          .page(page_number)
-          .per(page_size)
+          .filter(with_pagination!(user_filter_params))
       end
 
       def whoami

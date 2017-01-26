@@ -4,10 +4,11 @@ require "spec_helper"
 Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |f| require f }
 
 require File.expand_path("../../config/environment", __FILE__)
-require "rspec/rails"
 
-# Add additional requires below this line. Rails is not loaded until this point!
+require "rspec/rails"
 require "paperclip/matchers"
+require "webmock/rspec"
+require "database_cleaner"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -57,6 +58,7 @@ RSpec.configure do |config|
 
   config.include ActiveJob::TestHelper
 
+  # Clean up any jobs before each run.
   config.before(:each) do
     clear_enqueued_jobs
   end
@@ -66,4 +68,16 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
+
+  # Allow elastic search for tests tagged with elasticsearch
+  config.around(:all) do |example|
+    if (example.metadata[:elasticsearch])
+      WebMock.disable_net_connect!(allow: /.*127.0.0.1:19200\.*/)
+      example.run
+    else
+      stub_request(:any, /.*127.0.0.1:19200\.*/)
+      example.run
+    end
+  end
+
 end

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Utility, Project as globalProject } from 'components/global';
 import { Link } from 'react-router';
 import classnames from 'classnames';
+import get from 'lodash/get';
 
 export default class SearchableList extends Component {
 
@@ -10,6 +11,7 @@ export default class SearchableList extends Component {
   static propTypes = {
     users: PropTypes.array,
     pagination: PropTypes.object,
+    filterChangeHandler: PropTypes.func,
     paginationClickHandler: PropTypes.func,
     currentUserId: PropTypes.string,
     active: PropTypes.string // the ID of the selected user
@@ -17,9 +19,45 @@ export default class SearchableList extends Component {
 
   constructor() {
     super();
+
+    this.state = this.initialState();
+
     this.renderUserList = this.renderUserList.bind(this);
     this.renderUser = this.renderUser.bind(this);
+    this.resetSearch = this.resetSearch.bind(this);
+    this.setKeyword = this.setKeyword.bind(this);
     this.isCurrentUser = this.isCurrentUser.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (get(prevState, 'filter.keyword') !== get(this.state, 'filter.keyword')) {
+      this.props.filterChangeHandler(this.state.filter);
+    }
+  }
+
+  setKeyword(event) {
+    const keyword = event.target.value;
+    const filter = Object.assign({}, this.state.filter);
+    if (keyword === "") {
+      delete filter.keyword;
+      delete filter.typeahead;
+    } else {
+      filter.keyword = keyword;
+      filter.typeahead = true;
+    }
+    this.setState({ inputs: { keyword }, filter });
+  }
+
+  resetSearch(event) {
+    event.preventDefault();
+    this.setState(this.initialState());
+  }
+
+  initialState() {
+    return {
+      inputs: { keyword: "" },
+      filter: { }
+    };
   }
 
   isCurrentUser(id) {
@@ -89,6 +127,10 @@ export default class SearchableList extends Component {
           </ul>
         </div>
       );
+    } else {
+      output = (
+        <p className="list-total">Sorry, no results were found.</p>
+      );
     }
 
     return output;
@@ -103,10 +145,19 @@ export default class SearchableList extends Component {
               <i className="manicon manicon-magnify"></i>
               <span className="screen-reader-text">Click to search</span>
             </button>
-            <input type="text" placeholder="Search..." />
+            <input
+              value={this.state.inputs.keyword}
+              type="text"
+              placeholder="Search..."
+              onChange={this.setKeyword}
+            />
           </div>
-          <button className="button-bare-primary">{'More Search Options'}</button>
-          <button className="button-bare-primary reset">{'Reset Search'}</button>
+          <button
+            onClick={this.resetSearch}
+            className="button-bare-primary reset"
+          >
+            {'Reset Search'}
+            </button>
         </form>
         <nav className="vertical-list-primary">
           {this.renderUserList()}

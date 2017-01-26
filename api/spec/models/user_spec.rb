@@ -69,6 +69,35 @@ RSpec.describe User, type: :model do
     expect(user.name).to eq("John Rambo")
   end
 
+  context "can be searched", :integration, :elasticsearch do
+
+    let(:first) { "189274891457612" }
+    let(:last) { "HIOUFHAOASJDFIO" }
+    let(:email) { "#{first}@#{last}.com"}
+
+    before(:each) do
+      user = FactoryGirl.create(:user, first_name: first, last_name: last, email: email)
+      User.reindex
+      User.searchkick_index.refresh
+    end
+
+    it "by last name" do
+      results = User.filter({keyword: first, typeahead: true})
+      expect(results.length).to be 1
+    end
+
+    it "by last name" do
+      results = User.filter({keyword: last, typeahead: true})
+      expect(results.length).to be 1
+    end
+
+    it "by email" do
+      results = User.filter({keyword: email, typeahead: true})
+      expect(results.length).to be 1
+    end
+
+  end
+
   context "already exists" do
     let(:user) do
       u = FactoryGirl.create(:user, password: "password", password_confirmation: "password")

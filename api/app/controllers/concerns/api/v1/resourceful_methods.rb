@@ -70,7 +70,9 @@ module Api
 
         class_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{method_names[:load_resources]}
-          apply_scopes(resource_configuration.load_resources_for(self)).all
+          scope = apply_scopes(resource_configuration.load_resources_for(self))
+          return scope.all if scope.respond_to? :all
+          return scope
         end
 
         def #{method_names[:resource_scope]}

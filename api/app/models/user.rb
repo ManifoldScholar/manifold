@@ -1,9 +1,18 @@
 # The User model
 class User < ApplicationRecord
 
+  # Constants
+  TYPEAHEAD_ATTRIBUTES = [:email, :first_name, :last_name].freeze
+
+  # Concerns
+  include Paginated
+
   # Authority
   include Authority::UserAbilities
   include Authority::Abilities
+
+  # Search
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES
 
   # Associations
   has_many :annotations # TODO: refactor to use "creator_id"
@@ -43,11 +52,30 @@ class User < ApplicationRecord
   # Misc
   has_secure_password
 
+  # Scopes
+  scope :by_email, lambda { |email|
+    return all unless email.present?
+    where("email ILIKE ?", "#{email}%")
+  }
+
   # Methods
-  def self.filtered(filters)
-    users = User.all
-    return users unless filters
-    users
+  def self.filter(params)
+    return search(params) if params.key? :keyword
+    query(params)
+  end
+
+  def self.query(params)
+    User.all
+        .by_email(params[:email])
+        .by_pagination(params[:page], params[:per_page])
+  end
+
+  def self.search(params)
+    query = params.dig(:keyword) || "*"
+    filter = Search::FilterScope.new
+                                .typeahead(params[:typeahead], TYPEAHEAD_ATTRIBUTES)
+                                .paginate(params[:page], params[:per_page])
+    User.lookup(query, filter)
   end
 
   def ensure_nickname
@@ -88,7 +116,4 @@ class User < ApplicationRecord
     name
   end
 
-  # def favorite_projects
-  #   favorites.only_projects.includes(:favoritable).map(&:favoritable)
-  # end
 end

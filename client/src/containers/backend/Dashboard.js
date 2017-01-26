@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import { entityUtils } from 'utils';
 import projectsAPI from 'api/projects';
 import statsAPI from 'api/statistics';
+import debounce from 'lodash/debounce';
 
 const { select, meta } = entityUtils;
 const { request, requests } = entityStoreActions;
@@ -40,22 +41,30 @@ class DashboardContainer extends PureComponent {
 
   constructor() {
     super();
-    this.projectPageChangeHandlerCreator = this.projectPageChangeHandlerCreator.bind(this);
+    this.state = { filter: {} };
+    this.filterChangeHandler = this.filterChangeHandler.bind(this);
+    this.updateHandlerCreator = this.updateHandlerCreator.bind(this);
+    this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
-  handleProjectPageChange(event, page) {
+  updateResults(event = null, page = 1) {
     const pagination = { number: page, size: perPage };
-    const filter = { };
     const action = request(
-      projectsAPI.index(filter, pagination),
+      projectsAPI.index(this.state.filter, pagination),
       requests.backendDashboardProjects
     );
     this.props.dispatch(action);
   }
 
-  projectPageChangeHandlerCreator(page) {
+  filterChangeHandler(filter) {
+    this.setState({ filter }, () => {
+      this.updateResults();
+    });
+  }
+
+  updateHandlerCreator(page) {
     return (event) => {
-      this.handleProjectPageChange(event, page);
+      this.updateResults(event, page);
     };
   }
 
@@ -71,10 +80,11 @@ class DashboardContainer extends PureComponent {
                     {'Projects'} <i className="manicon manicon-stack"></i>
                   </h3>
                 </header>
-                { this.props.projects ?
+                { this.props.projects && this.props.projectsMeta ?
                   <ProjectList.SearchableList
                     projects={this.props.projects}
-                    paginationClickHandler={this.projectPageChangeHandlerCreator}
+                    filterChangeHandler={this.filterChangeHandler}
+                    paginationClickHandler={this.updateHandlerCreator}
                     pagination={this.props.projectsMeta.pagination}
                   /> : null
                 }

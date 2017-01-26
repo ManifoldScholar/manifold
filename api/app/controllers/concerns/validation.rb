@@ -94,11 +94,11 @@ module Validation
   end
 
   def user_filter_params
-    params.permit(filter: [])
+    params.permit(filter: [:keyword, :typeahead])[:filter]
   end
 
   def project_filter_params
-    params.permit(filter: [:featured, :subject])
+    params.permit(filter: [:featured, :subject, :keyword, :typeahead])[:filter]
   end
 
   def maker_filter_params

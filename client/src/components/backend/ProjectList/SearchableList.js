@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { Utility, Project as globalProject } from 'components/global';
 import { Link } from 'react-router';
+import get from 'lodash/get';
 
-export default class SearchableList extends Component {
+export default class SearchableList extends PureComponent {
 
   static displayName = "ProjectList.SearchableList";
 
@@ -14,9 +15,45 @@ export default class SearchableList extends Component {
 
   constructor() {
     super();
+
+    this.state = this.initialState();
+
+    this.setKeyword = this.setKeyword.bind(this);
+    this.resetSearch = this.resetSearch.bind(this);
     this.renderProjectsList = this.renderProjectsList.bind(this);
     this.renderProject = this.renderProject.bind(this);
     this.renderProjectMakers = this.renderProjectMakers.bind(this);
+  }
+
+  initialState() {
+    return {
+      inputs: { keyword: "" },
+      filter: { }
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (get(prevState, 'filter.keyword') !== get(this.state, 'filter.keyword')) {
+      this.props.filterChangeHandler(this.state.filter);
+    }
+  }
+
+  resetSearch(event) {
+    event.preventDefault();
+    this.setState(this.initialState());
+  }
+
+  setKeyword(event) {
+    const keyword = event.target.value;
+    const filter = Object.assign({}, this.state.filter);
+    if (keyword === "") {
+      delete filter.keyword;
+      delete filter.typeahead;
+    } else {
+      filter.keyword = keyword;
+      filter.typeahead = true;
+    }
+    this.setState({ inputs: { keyword }, filter });
   }
 
   renderProjectMakers(makers) {
@@ -83,6 +120,10 @@ export default class SearchableList extends Component {
           </ul>
         </div>
       );
+    } else {
+      output = (
+        <p className="list-total">Sorry, no results were found.</p>
+      );
     }
 
     return output;
@@ -97,10 +138,19 @@ export default class SearchableList extends Component {
               <i className="manicon manicon-magnify"></i>
               <span className="screen-reader-text">Click to search</span>
             </button>
-            <input type="text" placeholder="Search..." />
+            <input
+              value={this.state.inputs.keyword}
+              type="text"
+              placeholder="Search..."
+              onChange={this.setKeyword}
+            />
           </div>
-          <button className="button-bare-primary">{'More Search Options'}</button>
-          <button className="button-bare-primary reset">{'Reset Search'}</button>
+          <button
+            onClick={this.resetSearch}
+            className="button-bare-primary reset"
+          >
+            {'Reset Search'}
+          </button>
         </form>
         <nav className="vertical-list-primary">
           {this.renderProjectsList()}

@@ -31,6 +31,7 @@ gem "rails", "~> 5.0.1"
 gem "rainbow"
 gem "redcarpet"
 gem "rubyzip", ">= 1.2.0"
+gem "searchkick"
 gem "sidekiq", "4.2.3"
 gem "signet"
 gem "twitter", "5.16.0"
@@ -50,6 +51,7 @@ group :development do
   gem "rubocop"
   gem "spring"
   gem "spring-commands-rspec"
+  gem "webmock"
 end
 
 group :test do

@@ -11,9 +11,7 @@ module Api
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project
           .includes(:makers, :creators, :contributors)
-          .filtered(project_filter_params[:filter])
-          .page(page_number)
-          .per(page_size)
+          .filter(with_pagination!(project_filter_params))
       end
 
       def index
