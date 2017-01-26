@@ -20,9 +20,13 @@ export default class FormSwitchInput extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  truthy(value) {
+    return value === true || value === "true";
+  }
+
   handleClick(event) {
     const adjustedEvent = event;
-    this.trackingInput.value = !this.props.value;
+    this.trackingInput.value = !this.truthy(this.props.value);
     adjustedEvent.target = this.trackingInput;
     this.props.onChange(adjustedEvent);
   }
@@ -30,7 +34,7 @@ export default class FormSwitchInput extends Component {
   render() {
     const classes = classnames({
       "boolean-primary": true,
-      checked: this.props.value === true
+      checked: this.truthy(this.props.value)
     });
 
     return (
