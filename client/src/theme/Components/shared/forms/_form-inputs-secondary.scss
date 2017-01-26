@@ -14,6 +14,15 @@
   border-bottom: 1px solid $neutral80;
   outline: 0;
   transition: border-color $duration $timing;
+
+  .bg-neutral90 & {
+    &:-webkit-autofill {
+      box-shadow: 0 0 0 1000px $neutral90 inset;
+      // Important required to override chrome default
+      // scss-lint:disable ImportantRule
+      -webkit-text-fill-color: $sp20Quaternary !important;
+    }
+  }
 }
 
 .form-secondary {
@@ -101,9 +110,9 @@
   }
 
   .form-dropzone {
+    position: relative;
     padding: 36px 30px 38px;
     border: 1px solid $neutral80;
-    position: relative;
 
     &.style-cover {
       max-width: 150px;
