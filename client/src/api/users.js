@@ -46,6 +46,14 @@ export default {
         body: JSON.stringify({ type: "user", data: { attributes: user } })
       }
     };
+  },
+
+  destroy(id) {
+    return {
+      endpoint: `/api/v1/users/${id}`,
+      method: 'DELETE',
+      options: {}
+    };
   }
 
 };
