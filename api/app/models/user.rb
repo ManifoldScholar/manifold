@@ -66,6 +66,7 @@ class User < ApplicationRecord
 
   def self.query(params)
     User.all
+        .order(:first_name, :last_name)
         .by_email(params[:email])
         .by_pagination(params[:page], params[:per_page])
   end
