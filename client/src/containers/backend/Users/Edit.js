@@ -56,7 +56,8 @@ class UserEditContainer extends PureComponent {
 
   destroyUser(user) {
     const call = usersAPI.destroy(user.id);
-    const userRequest = request(call, 'backend-destroy-user');
+    const options = { removes: user };
+    const userRequest = request(call, 'backend-destroy-user', options);
     this.props.dispatch(userRequest).promise.then(() => {
       browserHistory.push('/backend/users');
     });

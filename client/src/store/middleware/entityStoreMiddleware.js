@@ -4,14 +4,23 @@ import get from 'lodash/get';
 function sendRequest(request, authToken) {
   const client = new ApiClient;
   const token = authToken;
-  const { endpoint, method, options } = request;
-  options.authToken = token;
+  const { endpoint, method } = request;
+  const options = Object.assign({}, request.options, { authToken: token });
   return client.call(endpoint, method, options);
 }
 
+function constantizeMeta(meta) {
+  return `${meta.toUpperCase().replace(/-/g, '_')}`;
+}
+
 function buildResponseAction(payload, meta, error) {
-  const type = `API_RESPONSE/${meta.toUpperCase().replace(/-/g, '_')}`;
+  const type = `API_RESPONSE/${constantizeMeta(meta)}`;
   return { type, error, payload, meta };
+}
+
+function buildRemovesAction(entity) {
+  const type = `ENTITY_STORE_REMOVE`;
+  return { type, payload: { entity } };
 }
 
 export default function entityStoreMiddleware({ dispatch, getState }) {
@@ -35,8 +44,11 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     const requestPromise =
       sendRequest(action.payload.request, state.authentication.authToken);
 
-    // Start and stop loading indication based on this promise.
-    dispatch({ type: 'START_LOADING', payload: action.meta });
+    setTimeout(() => {
+      // Start and stop loading indication based on this promise.
+      dispatch({ type: 'START_LOADING', payload: action.meta });
+    }, 0);
+
     requestPromise.then(() => {
       dispatch({ type: 'STOP_LOADING', payload: action.meta });
     }, () => {
@@ -49,7 +61,7 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     // We add the promise to the payload so that it can be used in fetch data to delay
     // loading.
     const withState = { state: 1, promise: requestPromise };
-    const newPayload = Object.assign({}, action.payload, withState);
+    const requestPayload = Object.assign({}, action.payload, withState);
 
     let newMeta = action.meta;
     if (!Array.isArray(newMeta)) newMeta = [action.meta];
@@ -58,7 +70,7 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
       const type = `API_REQUEST/${meta.toUpperCase().replace(/-/g, '_')}`;
       const adjustedRequestAction = {
         type,
-        payload: newPayload,
+        payload: requestPayload,
         meta
       };
       next(adjustedRequestAction);
@@ -67,13 +79,27 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     // Execute the API call and when it is complete, dispatch a response action.
     requestPromise.then((response) => {
       newMeta.forEach((meta) => {
+        const payload = response || {};
+        payload.request = action.payload.request;
         dispatch(buildResponseAction(response, meta, false));
       });
     }, (response) => {
       newMeta.forEach((meta) => {
+        const payload = response || {};
+        payload.request = action.payload.request;
         dispatch(buildResponseAction(response, meta, true));
       });
     });
+
+    // Remove object if requested on success.
+    if (requestPayload.removes) {
+      requestPromise.then(() => {
+        dispatch(buildRemovesAction(requestPayload.removes));
+      }, () => {
+        // noop
+      });
+    }
+
     return { meta: action.meta, promise: requestPromise };
   };
 }

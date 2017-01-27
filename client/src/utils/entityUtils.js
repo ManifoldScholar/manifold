@@ -56,7 +56,7 @@ const selectCollection = memoize((response, entities) => {
     return hydrateEntity(entity, entities);
   });
 }, (response, entities) => {
-  // for collections, if the response object has changed in anyway, then we will go ahead
+  // for collections, if the response object has changed in any way, then we will go ahead
   // and rehydrate the collection. See comment below for why this is more complicated for
   // single models, which we can cache longer.
   return response;
@@ -73,7 +73,7 @@ const selectEntity = memoize((response, entities) => {
   // since the last time it was called, it will reselect the entity from the store. We
   // don't want to go selecting a new entity every single time the entity store changes,
   // which is why we memoize above. However, if the base entity hasn't changed, we don't
-  // don't want to re-select its associations, etc, which is why check if the main entity
+  // want to re-select its associations, etc, which is why check if the main entity
   // is unchanged in the resolver.
   if (!has(response.entity, 'id')) return response;
   if (!has(response.entity, 'type')) return response;
