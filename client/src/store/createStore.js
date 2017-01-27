@@ -17,7 +17,7 @@ export default function createStore(data) {
   middleware.push(promiseMiddleware);
 
   let finalCreateStore;
-  if (useDevTools) {
+  if (__CLIENT__) {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     finalCreateStore = composeEnhancers(
       applyMiddleware(...middleware)
