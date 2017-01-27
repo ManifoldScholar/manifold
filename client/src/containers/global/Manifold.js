@@ -27,7 +27,7 @@ class ManifoldContainer extends PureComponent {
     const loaded = has(getState(), 'entityStore.entities.settings.0');
     if (loaded) return Promise.all(promises);
 
-    const settingsRequest = request(settingsAPI.show(), requests.settings, true);
+    const settingsRequest = request(settingsAPI.show(), requests.settings, { oneTime: true });
     promises.push(dispatch(settingsRequest));
     return Promise.all(promises);
   }

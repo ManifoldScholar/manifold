@@ -13,7 +13,7 @@ class BackendContainer extends PureComponent {
 
   static fetchData(getState, dispatch) {
     if (!entityUtils.isLoaded(requests.allPages, getState())) {
-      const pages = request(pagesAPI.index(), requests.allPages, true);
+      const pages = request(pagesAPI.index(), requests.allPages, { oneTime: true });
       const { promise: one } = dispatch(pages);
       return Promise.all([one]);
     }

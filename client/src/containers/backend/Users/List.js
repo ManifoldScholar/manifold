@@ -30,6 +30,7 @@ class UsersListContainer extends PureComponent {
   constructor() {
     super();
     this.state = { filter: {} };
+    this.lastFetchedPage = null;
     this.usersPageChangeHandlerCreator = this.usersPageChangeHandlerCreator.bind(this);
     this.fetchUsers = debounce(
       this.fetchUsers.bind(this), 250, { leading: false, trailing: true }
@@ -41,7 +42,20 @@ class UsersListContainer extends PureComponent {
     this.fetchUsers(1);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.maybeReload(nextProps.usersMeta);
+  }
+
+  maybeReload(nextUsersMeta) {
+    const currentModified = get(this.props, 'usersMeta.modified');
+    const nextModified = get(nextUsersMeta, 'modified');
+    if (!nextModified) return;
+    if (currentModified && nextModified) return;
+    this.fetchUsers(this.lastFetchedPage);
+  }
+
   fetchUsers(page) {
+    this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
       usersAPI.index(this.state.filter, pagination),

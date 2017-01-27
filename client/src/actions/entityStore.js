@@ -12,12 +12,11 @@ export const flush = createAction('ENTITY_STORE_FLUSH', (passedMetas) => {
 });
 
 export const request =
-  createAction('API_REQUEST', (requestConfig, meta = null, oneTime = false) => {
-    return {
+  createAction('API_REQUEST', (requestConfig, meta = null, options = {}) => {
+    return Object.assign({}, options, {
       request: requestConfig,
-      oneTime,
       state: 0
-    };
+    });
   }, (apiConfig, meta = null) => {
     return meta || uuid.v1();
   });

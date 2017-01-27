@@ -13,8 +13,12 @@ class FrontendContainer extends Component {
 
   static fetchData(getState, dispatch) {
     if (!entityUtils.isLoaded(requests.allPages, getState())) {
-      const pages = request(pagesAPI.index(), requests.allPages, true);
-      const subjects = request(subjectsAPI.index({ used: true }), requests.allUsedSubjects, true);
+      const pages = request(pagesAPI.index(), requests.allPages, { oneTime: true });
+      const subjects = request(
+        subjectsAPI.index({ used: true }),
+        requests.allUsedSubjects,
+        { oneTime: true }
+      );
       const { promise: one } = dispatch(pages);
       const { promise: two } = dispatch(subjects);
       return Promise.all([one, two]);
