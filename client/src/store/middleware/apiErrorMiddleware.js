@@ -30,9 +30,9 @@ function firstFatalError(action) {
   });
 }
 
-function notifyApiErrors(dispatch, action, next) {
+function notifyApiErrors(dispatch, action) {
   const errors = apiErrors(action);
-  if (errors.length === 0) return next(action);
+  if (errors.length === 0) return;
   errors.forEach((error) => {
     dispatch(notificationActions.addNotification({
       id: error.id,
@@ -43,16 +43,17 @@ function notifyApiErrors(dispatch, action, next) {
   });
 }
 
-function checkForFatalErrors(dispatch, action, next) {
+function checkForFatalErrors(dispatch, action) {
   const fatalError = firstFatalError(action);
   if (!fatalError) return false;
   dispatch(notificationActions.fatalError(fatalError));
 }
+
 export default function entityStoreMiddleware({ dispatch, getState }) {
   return (next) => (action) => {
     if (!isApiResponse(action)) return next(action);
-    notifyApiErrors(dispatch, action, next);
-    checkForFatalErrors(dispatch, action, next);
+    notifyApiErrors(dispatch, action);
+    checkForFatalErrors(dispatch, action);
     return next(action);
   };
 }
