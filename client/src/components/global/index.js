@@ -7,6 +7,7 @@ export HeaderNotifications from './HeaderNotifications';
 export FormattedDate from './FormattedDate';
 export LoadingBar from './LoadingBar';
 export Project from './Project';
+export PressLogo from './PressLogo';
 export SearchMenuBody from './SearchMenuBody';
 export SearchMenuButton from './SearchMenuButton';
 export Text from './Text';

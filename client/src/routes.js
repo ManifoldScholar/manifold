@@ -77,6 +77,7 @@ export default () => {
           <Route component={Backend.Settings.Theme} path="theme" />
           <Route component={Backend.Settings.OAuth} path="oauth" />
           <Route component={Backend.Settings.Features} path="features" />
+          <Route component={Backend.Settings.PressLogo} path="press_logo" />
         </Route>
         <Route component={NotFound} path="*" />
       </Route>
