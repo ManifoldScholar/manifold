@@ -177,11 +177,28 @@
     margin-right: 33px;
   }
 
+  // Icon Handling
   .manicon-manifold-logo {
     font-size: 32px;
 
     @include respond($break40) {
       font-size: 39px;
+    }
+  }
+
+  // Image handling
+  .logo-square {
+    .image {
+      width: 32px;
+      height: 32px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      @include respond($break40) {
+        width: 39px;
+        height: 39px;
+      }
     }
   }
 }

@@ -1,34 +1,37 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 import { entityUtils } from 'utils';
 
 export default class PressLogo extends Component {
   static propTypes = {
     url: PropTypes.string,
-    style: PropTypes.object
   };
 
-  render() {
-    if (this.props.url) {
-      const style = {
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: '50% 50%',
-        backgroundImage: `url(${this.props.url})`,
-        width: '39px',
-        height: '39px'
-      };
-      return (
-        <figure style={this.props.style} className="" >
-          <div style={style} />
-        </figure>
-      );
-    }
+  getDefaultIcon() {
     return (
-      <figure>
+      <div>
         <i className="manicon manicon-manifold-logo"></i>
         <span className="screen-reader-text">
-                {'Manifold Logo: Click to return to the browse page'}
-              </span>
+          {'Manifold Logo: Click to return to the browse page'}
+        </span>
+      </div>
+    );
+  }
+
+  getPressImage() {
+    return (
+      <div className="image" style={{ backgroundImage: `url(${this.props.url})` }} />
+    );
+  }
+
+  render() {
+    const figureClass = classNames({
+      'logo-square': this.props.url
+    });
+
+    return (
+      <figure className={figureClass}>
+        {this.props.url ? this.getPressImage() : this.getDefaultIcon()}
       </figure>
     );
   }
