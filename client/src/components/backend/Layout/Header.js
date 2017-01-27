@@ -4,11 +4,13 @@ import {
     HigherOrder,
     UIPanel,
     UserMenuBody,
-    UserMenuButton
+    UserMenuButton,
+    PressLogo
 } from 'components/global';
 import { Link } from 'react-router';
 import startsWith from 'lodash/startsWith';
 import classNames from 'classnames';
+import get from 'lodash/get';
 
 export default class LayoutHeader extends Component {
 
@@ -19,7 +21,8 @@ export default class LayoutHeader extends Component {
     location: PropTypes.object,
     authentication: PropTypes.object,
     notifications: PropTypes.object,
-    commonActions: PropTypes.object
+    commonActions: PropTypes.object,
+    settings: PropTypes.object
   };
 
   isPath(segment) {
@@ -41,12 +44,7 @@ export default class LayoutHeader extends Component {
        <header className={'header-app dark'}>
           <div className="header-container">
             <Link to={'/browse'} className="logo">
-              <figure>
-                <i className="manicon manicon-manifold-logo"></i>
-                <span className="screen-reader-text">
-                  {'Manifold Logo: Click to return to the browse page'}
-                </span>
-              </figure>
+              <PressLogo url={get(this.props.settings, 'attributes.pressLogoUrl')}/>
             </Link>
             <nav className="text-nav">
               <ul>

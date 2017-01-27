@@ -33,6 +33,14 @@ export default class PanelNav extends Component {
           </li>
           <li>
             <Link
+              to={`/backend/settings/press_logo`}
+              className={active === 'press_logo' ? 'active' : ''}
+            >
+              {'press_logo'}
+            </Link>
+          </li>
+          <li>
+            <Link
               to={`/backend/settings/oauth`}
               className={active === 'oauth' ? 'active' : ''}
             >

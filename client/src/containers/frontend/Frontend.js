@@ -33,7 +33,8 @@ class FrontendContainer extends Component {
     notifications: PropTypes.object,
     history: PropTypes.object.isRequired,
     renderDevTools: PropTypes.bool,
-    pages: PropTypes.array
+    pages: PropTypes.array,
+    settings: PropTypes.object
   };
 
   static mapStateToProps(state) {
@@ -43,7 +44,8 @@ class FrontendContainer extends Component {
       loading: state.ui.loading.active,
       notifications: state.notifications,
       routing: state.routing,
-      pages: entityUtils.select(requests.allPages, state.entityStore)
+      pages: entityUtils.select(requests.allPages, state.entityStore),
+      settings: entityUtils.select(requests.settings, state.entityStore)
     };
   }
 
@@ -81,6 +83,7 @@ class FrontendContainer extends Component {
               authentication={this.props.authentication}
               notifications={this.props.notifications}
               commonActions={this.commonActions}
+              settings={this.props.settings}
             />
           </HigherOrder.ScrollAware>
           <Layout.MobileNav location={this.props.location} />

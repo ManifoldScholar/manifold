@@ -6,10 +6,12 @@ import {
     SearchMenuButton,
     UIPanel,
     UserMenuBody,
-    UserMenuButton
+    UserMenuButton,
+    PressLogo
 } from 'components/global';
 import { Link } from 'react-router';
 import startsWith from 'lodash/startsWith';
+import get from 'lodash/get';
 
 export default class LayoutHeader extends Component {
 
@@ -20,7 +22,8 @@ export default class LayoutHeader extends Component {
     location: PropTypes.object,
     authentication: PropTypes.object,
     notifications: PropTypes.object,
-    commonActions: PropTypes.object
+    commonActions: PropTypes.object,
+    settings: PropTypes.object
   };
 
   render() {
@@ -30,12 +33,7 @@ export default class LayoutHeader extends Component {
       <header className={'header-app'}>
         <div className="header-container">
           <Link to={'/browse'} className="logo">
-            <figure>
-              <i className="manicon manicon-manifold-logo"></i>
-              <span className="screen-reader-text">
-                {'Manifold Logo: Click to return to the browse page'}
-              </span>
-            </figure>
+            <PressLogo url={get(this.props.settings, 'attributes.pressLogoUrl')}/>
           </Link>
           {/* Use show-50 utility class to hide text-nav on mobile */}
           <nav className="text-nav show-50">

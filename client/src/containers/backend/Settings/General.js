@@ -24,7 +24,7 @@ class SettingsGeneralContainer extends PureComponent {
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.settings}
-          name="backend-project-general"
+          name="backend-settings-general"
           update={settingsAPI.update}
           create={settingsAPI.update}
           className="form-secondary"
@@ -57,7 +57,7 @@ class SettingsGeneralContainer extends PureComponent {
             }
           />
           <Form.Save
-            text="Save Project"
+            text="Save Settings"
           />
         </FormContainer.Form>
       </section>

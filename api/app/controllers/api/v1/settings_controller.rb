@@ -13,7 +13,7 @@ module Api
 
       def update
         @settings = Settings.instance
-        ::Updaters::Default.new(settings_params).update(@settings)
+        ::Updaters::Settings.new(settings_params).update(@settings)
         render_single_resource(Settings.instance, location: "")
       end
 

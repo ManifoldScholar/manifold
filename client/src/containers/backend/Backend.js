@@ -39,7 +39,8 @@ class BackendContainer extends PureComponent {
       loading: state.ui.loading.active,
       notifications: state.notifications,
       routing: state.routing,
-      pages: entityUtils.select(requests.allPages, state.entityStore)
+      pages: entityUtils.select(requests.allPages, state.entityStore),
+      settings: entityUtils.select(requests.settings, state.entityStore)
     };
   }
 
@@ -96,6 +97,7 @@ class BackendContainer extends PureComponent {
               authentication={this.props.authentication}
               notifications={this.props.notifications}
               commonActions={this.commonActions}
+              settings={this.props.settings}
             />
           </HigherOrder.ScrollAware>
           <main ref="mainContainer">
