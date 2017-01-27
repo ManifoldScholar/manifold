@@ -35,6 +35,11 @@ module Api
         ::Updaters::User.new(user_params).update(@user)
         render_single_resource @user
       end
+
+      def destroy
+        @user = load_and_authorize_user
+        @user.destroy
+      end
     end
   end
 end

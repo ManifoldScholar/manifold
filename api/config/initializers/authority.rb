@@ -41,7 +41,8 @@ Authority.configure do |config|
     create: "creatable",
     read: "readable",
     update: "updatable",
-    delete: "deletable"
+    delete: "deletable",
+    destroy: "deleteable"
   }
 
   # LOGGER

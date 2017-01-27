@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Drawer } from 'components/backend';
+import { Drawer, Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import usersAPI from 'api/users';
@@ -8,6 +8,7 @@ const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
+import { browserHistory } from 'react-router';
 
 class UserEditContainer extends PureComponent {
 
@@ -16,6 +17,13 @@ class UserEditContainer extends PureComponent {
   static mapStateToProps(state, ownProps) {
     return {
       user: select('backend-edit-user', state.entityStore)
+    };
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      confirmation: null
     };
   }
 
@@ -33,6 +41,31 @@ class UserEditContainer extends PureComponent {
     this.props.dispatch(userRequest);
   }
 
+  handleUserDestroy(event, user) {
+    const heading = "Are you sure you want to delete this user?";
+    const message = "This action cannot be undone.";
+    new Promise((resolve, reject) => {
+      this.setState({
+        confirmation: { resolve, reject, heading, message }
+      });
+    }).then(() => {
+      this.destroyUser(user);
+      this.closeDialog();
+    }, () => { this.closeDialog(); });
+  }
+
+  destroyUser(user) {
+    const call = usersAPI.destroy(user.id);
+    const userRequest = request(call, 'backend-destroy-user');
+    this.props.dispatch(userRequest).promise.then(() => {
+      browserHistory.push('/backend/users');
+    });
+  }
+
+  closeDialog() {
+    this.setState({ confirmation: null });
+  }
+
   render() {
     if (!this.props.user) return null;
     const attr = this.props.user.attributes;
@@ -46,6 +79,11 @@ class UserEditContainer extends PureComponent {
       <Drawer.Wrapper
         closeUrl="/backend/users"
       >
+        {
+          this.state.confirmation ?
+            <Dialog.Confirm {...this.state.confirmation} />
+            : null
+        }
         <header>
           {/*
             Dialog/Drawers can use p.utility-primary or h*.heading-quaternary
@@ -68,7 +106,10 @@ class UserEditContainer extends PureComponent {
               {'Reset Password'}
               <i className="manicon manicon-key"></i>
             </button><br/>
-            <button className="button-bare-primary">
+            <button
+              className="button-bare-primary"
+              onClick={(event) => { this.handleUserDestroy(event, this.props.user); }}
+            >
               {'Delete User'}
               <i className="manicon manicon-trashcan"></i>
             </button>
