@@ -65,14 +65,6 @@ export default class App extends Component {
     this.trackRouteUpdate();
   }
 
-  trackRouteUpdate() {
-    ReactGA.ga('send', 'pageview', window.location.pathname);
-  }
-
-  onRouteUpdate() {
-    this.trackRouteUpdate();
-  }
-
   gaInitCallback() {
     this.gaInitialized = true;
     this.trackRouteUpdate();
