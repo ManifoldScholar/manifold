@@ -60,8 +60,12 @@ class User < ApplicationRecord
 
   # Methods
   def self.filter(params)
-    return search(params) if params.key? :keyword
-    query(params)
+    results = params.key?(:keyword) ? search(params) : query(params)
+    if exceeds_total_pages?(results)
+      params[:page] = results.total_pages
+      return filter(params)
+    end
+    results
   end
 
   def self.query(params)
