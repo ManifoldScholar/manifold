@@ -33,7 +33,7 @@ module Ingestor
 
           def gitbook?
             # TODO: True if book.json exists
-            true
+            File.file?(book_json_path)
           end
 
           def start_section_identifier
