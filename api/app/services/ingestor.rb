@@ -55,7 +55,7 @@ module Ingestor
     # @private
     # @return [Array] Array with [basename, ingestion, strategy]
     def start(path, creator)
-      unless File.exist?(path)
+      unless File.exist?(path) || path.start_with?("https") || path.start_with?("http")
         raise Ingestor::IngestionFailed,
               "Could not find ingestion source"
       end
