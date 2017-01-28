@@ -63,7 +63,7 @@ class ProjectDetailCategoryEdit extends Component {
       <Dialog.Wrapper
         closeUrl={this.closeUrl()}
       >
-        <header>
+        <header className="dialog-header-large">
           <h2 className="heading-quaternary">Edit Category</h2>
         </header>
         <Category.Form

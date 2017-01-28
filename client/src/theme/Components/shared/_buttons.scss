@@ -138,6 +138,16 @@
     margin-right: 1.286em;
     font-size: 0.778em;
   }
+
+  .manicon-check.small, .manicon-x.small {
+    margin-right: 16px;
+    font-size: 12px;
+
+    &::before {
+      position: relative;
+      top: 6px;
+    }
+  }
 }
 
 .buttons-icon-horizontal {

@@ -35,8 +35,8 @@ class ProjectDetailCategoryNew extends Component {
       <Dialog.Wrapper
         closeUrl={`/backend/project/${this.props.params.id}/texts`}
       >
-        <header>
-          <h2 className="heading-quaternary">{'Create Category'}</h2>
+        <header className="dialog-header-large">
+          <h2>{'Create Category'}</h2>
         </header>
         <Category.Form
           projectId={this.props.params.id}

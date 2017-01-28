@@ -44,17 +44,42 @@
       padding: 29px 40px 50px;
     }
 
-    header {
+    // Default header, pre-abstracted with a classname
+    header, .dialog-header-large {
       padding: 11px 0 45px;
+
+      h1, h2, h3, h4, h5, h6 {
+        @include headingQuaternary;
+        padding: 11px 0 1.1em;
+        color: $neutralWhite;
+      }
     }
 
-    .heading-quaternary {
-      padding: 11px 0 1.1em;
-      color: $neutralWhite;
+    .dialog-header-small {
+      padding: 11px 0 22px;
+
+      h1, h2, h3, h4, h5, h6 {
+        @include templateHead;
+        padding: 11px 0;
+        margin: 0;
+        font-size: 22px;
+        color: $neutralWhite;
+      }
     }
 
     .utility-primary {
       color: $neutralWhite;
+    }
+
+    p {
+      @include utilityPrimary;
+      padding-bottom: 34px;
+      color: $neutral50;
+      text-transform: none;
+    }
+
+    .buttons-icon-horizontal {
+      margin-bottom: 0;
     }
   }
 
@@ -68,41 +93,5 @@
   .form-input.submit {
     text-align: center;
   }
-
-  .dialog-confirm {
-
-    header {
-      padding: 11px 0 22px;
-    }
-
-    .heading-quaternary {
-      padding-bottom: 0;
-      font-size: 22px;
-    }
-
-    p {
-      @include utilityPrimary;
-      padding-bottom: 34px;
-      color: $neutral50;
-      text-transform: none;
-    }
-
-    .manicon {
-      margin-right: 16px;
-      font-size: 12px;
-
-      &::before {
-        position: relative;
-        top: 6px;
-      }
-    }
-
-    .buttons-icon-horizontal {
-      margin-bottom: 0;
-    }
-
-  }
-
-
 }
 

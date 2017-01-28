@@ -40,8 +40,8 @@ export default class DialogWrapper extends PureComponent {
         showCloseButton={false}
         closeOnOverlayClick={false}
       >
-        <header>
-          <h2 className="heading-quaternary">{this.props.heading}</h2>
+        <header className="dialog-header-small">
+          <h2>{this.props.heading}</h2>
         </header>
 
         { this.props.message ?
@@ -56,14 +56,14 @@ export default class DialogWrapper extends PureComponent {
             onClick={this.handleResolveClick}
             className="button-icon-secondary"
           >
-            <i className="manicon manicon-check"></i>
+            <i className="manicon manicon-check small"></i>
             Yes
           </button>
           <button
             className="button-icon-secondary"
             onClick={this.handleRejectClick}
           >
-            <i className="manicon manicon-x"></i>
+            <i className="manicon manicon-x small"></i>
             No
           </button>
         </div>
