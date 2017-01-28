@@ -1,3 +1,6 @@
+require 'google/apis/analytics_v3'
+require 'signet'
+
 module Factory
   # Returns an analytics session object; used by the statistics model
   class AnalyticsSession
