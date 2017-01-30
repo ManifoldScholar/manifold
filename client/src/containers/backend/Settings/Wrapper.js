@@ -13,7 +13,6 @@ class SettingsWrapperContainer extends PureComponent {
     return [
       { path: "/backend/settings", label: "General", key: "general" },
       { path: "/backend/settings/theme", label: "Theme", key: "theme" },
-      { path: "/backend/settings/press_logo", label: "Press Logo", key: "press_logo" },
       { path: "/backend/settings/oauth", label: "OAuth", key: "oauth" },
       { path: "/backend/settings/features", label: "Features", key: "features" }
     ];

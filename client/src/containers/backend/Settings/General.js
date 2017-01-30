@@ -19,6 +19,7 @@ class SettingsGeneralContainer extends PureComponent {
   static activeNavItem = "general";
 
   render() {
+    if (!this.props.settings) return null;
     return (
       <section>
         <FormContainer.Form
