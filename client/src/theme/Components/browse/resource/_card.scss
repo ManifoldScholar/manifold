@@ -167,6 +167,7 @@
     justify-content: space-between;
     width: 62.2%;
     padding: 12px 15px;
+    text-decoration: none;
     background-color: $neutral05;
 
     @include respond($break40) {
@@ -179,6 +180,15 @@
 
     @include respond($break85) {
       width: calc(100% - 155px);
+    }
+
+    &.hover {
+      cursor: pointer;
+
+      .arrow-link {
+        color: $neutralWhite;
+        background-color: $accentPrimary;
+      }
     }
 
     .arrow-link {
@@ -215,13 +225,6 @@
   }
 
   .resource-title {
-    text-decoration: none;
-
-    &:hover ~ .arrow-link {
-      color: $neutralWhite;
-      background-color: $accentPrimary;
-    }
-
     h4 {
       @include templateHead;
       margin: 0;
@@ -269,9 +272,16 @@
       color: $neutral40;
     }
 
-    a {
+    .tag-link {
+      display: inline;
       color: $neutral40;
       text-decoration: none;
+      cursor: pointer;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $accentPrimary;
+      }
     }
   }
 }

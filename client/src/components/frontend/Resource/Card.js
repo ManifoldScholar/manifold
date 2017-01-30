@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import classNames from 'classnames';
 import FormattedDate from 'components/global/FormattedDate';
 
@@ -14,7 +15,14 @@ export default class ResourceCard extends Component {
 
   constructor() {
     super();
+    this.state = {
+      infoHover: false
+    };
     this.handlePreviewClick = this.handlePreviewClick.bind(this);
+    this.handleInfoMouseOver = this.handleInfoMouseOver.bind(this);
+    this.handleInfoMouseOut = this.handleInfoMouseOut.bind(this);
+    this.handleInfoClick = this.handleInfoClick.bind(this);
+    this.handleTagHover = this.handleTagHover.bind(this);
   }
 
   getResourceType(type) {
@@ -94,6 +102,40 @@ export default class ResourceCard extends Component {
     }
   }
 
+  handleInfoMouseOver() {
+    this.setState({
+      infoHover: true
+    });
+  }
+
+  handleInfoMouseOut() {
+    this.setState({
+      infoHover: false
+    });
+  }
+
+  handleInfoClick() {
+    browserHistory.push(this.detailUrl());
+  }
+
+  handleTagHover(event) {
+    event.stopPropagation();
+    this.setState({
+      infoHover: false
+    });
+  }
+
+  handleTagClick(event) {
+    // Placeholder method, ultimately this will link
+    // to the tag detail
+
+    // Event handler, has access to react synthetic click event
+    // Will need to be bound to the component in the constructor to use any component
+    // state or props
+    event.stopPropagation();
+    browserHistory.push('/sample');
+  }
+
   resource() {
     if (this.props.resource.type === "collectionResources") {
       return this.props.resource.relationships.resource;
@@ -109,7 +151,7 @@ export default class ResourceCard extends Component {
     function commaSeparate(index) {
       if (index >= resource.attributes.tags.length - 1) return false;
       return (
-        <span>
+          <span>
           {', '}
         </span>
       );
@@ -120,9 +162,14 @@ export default class ResourceCard extends Component {
         <ul>
           {resource.attributes.tags.map((tag, index) => {
             return (
-              <li key={index}>
-                <Link to="#">{tag}</Link>{commaSeparate(index)}
-              </li>
+                <div
+                  key={index}
+                  className="tag-link"
+                  onMouseOver={this.handleTagHover}
+                  onClick={this.handleTagClick}
+                >
+                  {tag}{commaSeparate(index)}
+                </div>
             );
           })}
         </ul>
@@ -137,6 +184,11 @@ export default class ResourceCard extends Component {
     const linkClass = classNames({
       thumbnail: true,
       'bg-image': attr.attachmentThumbnailUrl
+    });
+
+    const infoClass = classNames({
+      'resource-info': true,
+      hover: this.state.infoHover
     });
 
     let linkStyle = {};
@@ -162,32 +214,36 @@ export default class ResourceCard extends Component {
             {this.getPreviewText(attr.kind)}
           </div>
         </Link>
-        <div className="resource-info">
+        <section
+          className={infoClass}
+          onMouseOver={this.handleInfoMouseOver}
+          onMouseOut={this.handleInfoMouseOut}
+          onClick={this.handleInfoClick}
+        >
           <div>
-            <Link
-              to={this.detailUrl()}
+            <header
               className="resource-title"
             >
               <h4>
                 {attr.title}
               </h4>
-            </Link>
+            </header>
             <span className="resource-date">
               <FormattedDate
                 format="MMMM, YYYY"
                 date={attr.createdAt}
               />
             </span>
-            <Link
+            <div
               to={this.detailUrl()}
               className="arrow-link"
             >
               <i className="manicon manicon-arrow-right"></i>
-            </Link>
+            </div>
           </div>
 
           {this.renderTags(resource)}
-        </div>
+        </section>
       </li>
     );
   }
