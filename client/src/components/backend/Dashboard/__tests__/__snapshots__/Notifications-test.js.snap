@@ -18,9 +18,8 @@ exports[`Dashboard.Notification component renders correctly 1`] = `
         For now, these are just 
         <a
           href="https://en.wikipedia.org/wiki/Placeholder">
-          placeholders.
+          placeholders
         </a>
-        .
       </p>
       <button
         className="manicon manicon-x" />
