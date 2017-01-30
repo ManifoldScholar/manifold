@@ -10,6 +10,10 @@
   &.dark {
     background-color: $neutral85;
 
+    .header-container {
+      background-color: $neutral85;
+    }
+
     .logo {
       color: $neutral50;
     }
