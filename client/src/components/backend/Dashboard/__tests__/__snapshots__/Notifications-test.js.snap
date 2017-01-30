@@ -4,26 +4,23 @@ exports[`Dashboard.Notification component renders correctly 1`] = `
   <ul>
     <li>
       <p>
-        You have 
+         Notifications are still a 
         <a
-          onClick={[Function]}
-          style={Object {}}>
-          36 flagged comments
+          href="https://en.wikipedia.org/wiki/Democracy_in_America">
+          work in progress!
         </a>
-         awaiting moderation
       </p>
       <button
         className="manicon manicon-x" />
     </li>
     <li>
       <p>
-        You have 
+        For now, these are just 
         <a
-          onClick={[Function]}
-          style={Object {}}>
-          417 flagged comments
+          href="https://en.wikipedia.org/wiki/Placeholder">
+          placeholders.
         </a>
-         awaiting moderation
+        .
       </p>
       <button
         className="manicon manicon-x" />

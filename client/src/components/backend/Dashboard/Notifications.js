@@ -13,13 +13,19 @@ export default class Notifications extends Component {
         <ul>
           <li>
             <p>
-              You have <Link to="#">36 flagged comments</Link> awaiting moderation
+              {' Notifications are still a '}
+              <a href="https://en.wikipedia.org/wiki/Democracy_in_America">
+                {'work in progress!'}
+              </a>
             </p>
             <button className="manicon manicon-x"></button>
           </li>
           <li>
             <p>
-              You have <Link to="#">417 flagged comments</Link> awaiting moderation
+              {'For now, these are just '}
+              <a href="https://en.wikipedia.org/wiki/Placeholder">
+                {'placeholders.'}
+              </a>.
             </p>
             <button className="manicon manicon-x"></button>
           </li>
