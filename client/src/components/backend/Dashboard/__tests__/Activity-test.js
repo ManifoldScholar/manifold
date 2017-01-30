@@ -20,7 +20,9 @@ describe("Dashboard.Activity component", () => {
     attributes: {
       newTextsCount: 5,
       newHighlightsCount: 4,
-      newAnnotationsCount: 3
+      newAnnotationsCount: 3,
+      readersThisWeek: null,
+      readerIncrease: null
     }
   };
 
