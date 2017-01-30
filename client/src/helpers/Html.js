@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import DocumentMeta from 'react-document-meta';
 import { HigherOrder } from 'components/global';
+import get from 'lodash/get';
+
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
  * Used in server-side code only to wrap the string output of the
@@ -59,6 +61,8 @@ export default class Html extends Component {
     const { assets, component, store } = this.props;
     const content = component ? ReactDOM.renderToString(component) : null;
     const bodyClass = HigherOrder.BodyClass.rewind();
+    const settings = get(store.getState(), "entityStore.entities.settings.0.attributes");
+    const tkEnabled = !!settings.theme.typekitId;
 
     const contentProps = {};
     if (content) {
@@ -78,11 +82,13 @@ export default class Html extends Component {
           {this.stylesheets()}
 
           {/* Import fonts from webkit */}
-          <script src={'https://use.typekit.net/mnj5ltf.js'}></script>
-          <script
-            dangerouslySetInnerHTML={{ __html: 'try{Typekit.load({ async: true });}catch(e){}' }}
-            charSet="UTF-8"
-          />
+          {tkEnabled ? <script src={`https://use.typekit.net/${settings.theme.typekitId}.js`}></script> : null}
+          {tkEnabled ?
+            <script
+              dangerouslySetInnerHTML={{ __html: 'try{Typekit.load({ async: true });}catch(e){}' }}
+              charSet="UTF-8"
+            /> : null
+          }
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
 

@@ -61,6 +61,7 @@ module Validation
     params.permit(param_config)
   end
 
+  # rubocop:disable MethodLength
   def settings_params
     params.require(:data)
     attributes = [
@@ -71,11 +72,18 @@ module Validation
           :ga_tracking_id,
           :ga_profile_id
         ]
-      }, :remove_press_logo, attachment(:press_logo)
+      },
+      {
+        theme: [
+          :typekit_id
+        ]
+      },
+      :remove_press_logo, attachment(:press_logo)
     ]
     param_config = structure_params(attributes: attributes)
     params.permit(param_config)
   end
+  # rubocop:enable MethodLength
 
   def maker_params
     attributes = [:first_name, :last_name]
