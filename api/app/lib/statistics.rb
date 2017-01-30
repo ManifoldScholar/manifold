@@ -33,6 +33,7 @@ class Statistics
     get_reader_count(start_date - 7.days, end_date - 7.days)
   end
 
+
   def reader_increase
     this_week = readers_this_week
     last_week = readers_last_week
@@ -41,7 +42,7 @@ class Statistics
     if last_week.zero?
       result = this_week.positive? ? (this_week * 100).to_i : 0
     else
-      diff = last_week - this_week
+      diff = this_week - last_week
       result = diff.zero? ? 0 : ((diff / last_week) * 100).to_i
     end
     result
@@ -85,7 +86,7 @@ class Statistics
   protected
 
   def get_reader_count(start_date, end_date)
-    return false unless @client
+    return nil unless @client
     begin
       @client.get_ga_data(
         @settings["ga_profile_id"], # analytics profile ID
@@ -97,7 +98,7 @@ class Statistics
       ).totals_for_all_results["ga:pageviews"].to_f
     rescue Google::Apis::ClientError => e
       Rails.logger.error("Google API Client Error: #{e}")
-      false
+      nil
     end
   end
 

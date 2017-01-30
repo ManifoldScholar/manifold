@@ -41,13 +41,13 @@ export default class Activity extends Component {
             <td>Texts added this week</td>
             <td>{stats.newTextsCount}</td>
           </tr>
-          { stats.readersThisWeek ?
+          { stats.readersThisWeek !== null ?
             <tr>
               <td>Readers this week</td>
               <td>{stats.readersThisWeek}</td>
             </tr>
           : null }
-          { stats.readerIncrease ?
+          { stats.readerIncrease != null ?
             <tr>
               <td>Change from last week</td>
               <td>{this.formatReaderIncrease(stats)}</td>
