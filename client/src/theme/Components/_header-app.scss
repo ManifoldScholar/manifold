@@ -25,6 +25,7 @@
 
   .header-container {
     @include headerContainerPrimary;
+    background-color: $neutralWhite;
   }
 
   .header-border {
