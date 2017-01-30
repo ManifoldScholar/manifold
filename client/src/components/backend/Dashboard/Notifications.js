@@ -24,8 +24,8 @@ export default class Notifications extends Component {
             <p>
               {'For now, these are just '}
               <a href="https://en.wikipedia.org/wiki/Placeholder">
-                {'placeholders.'}
-              </a>.
+                {'placeholders'}.
+              </a>
             </p>
             <button className="manicon manicon-x"></button>
           </li>
