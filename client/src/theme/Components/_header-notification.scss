@@ -1,5 +1,9 @@
 .header-notifications-list {
+  position: absolute;
+  top: auto;
+  width: 100%;
   // React Animation classes
+
   &.updating {
     transition: transform $duration ease-out;
   }
@@ -9,18 +13,22 @@
   // React Animation classes
   &.notification-leave {
     max-height: 200px;
-    transition: transform 0.3s ease-in-out, max-height 0.2s ease-out 0.3s;
+    transition: transform 0.3s ease-in-out, max-height 0.2s ease-out 0.15s;
   }
 
   &.notification-leave-active {
     max-height: 0;
     transform: translate3d(-100%, 0, 0);
   }
+
+  + .header-notification-container {
+    .header-notification .container {
+      border-top: 1px solid $neutral50;
+    }
+  }
 }
 
 .header-notification {
-  position: absolute;
-  top: 100%;
   width: 100%;
   color: $neutralOffBlack;
 

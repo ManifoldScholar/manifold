@@ -118,8 +118,8 @@ export default class HeaderNotifications extends Component {
     return (
       <ReactCSSTransitionGroup
         transitionName="notification"
-        transitionEnterTimeout={250}
-        transitionLeaveTimeout={250}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
       >
         {notificationList}
       </ReactCSSTransitionGroup>
