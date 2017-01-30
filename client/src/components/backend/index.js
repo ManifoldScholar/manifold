@@ -8,5 +8,4 @@ export Text from './Text';
 export Drawer from './Drawer';
 export Dialog from './Dialog';
 export Navigation from './Navigation';
-export Settings from './Settings';
 export Category from './Category';
