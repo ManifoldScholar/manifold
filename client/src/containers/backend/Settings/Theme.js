@@ -29,7 +29,7 @@ class SettingsThemeContainer extends PureComponent {
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.settings}
-          name="backend-settings-press-logo"
+          name="backend-settings-theme"
           update={settingsAPI.update}
           create={settingsAPI.update}
           className="form-secondary"
@@ -40,6 +40,12 @@ class SettingsThemeContainer extends PureComponent {
             current={this.props.settings.attributes.pressLogoUrl}
             name="attributes[press_logo]"
             remove="attributes[removePressLogo]"
+          />
+          <Form.TextInput
+            focusOnMount
+            label="Typekit ID"
+            name="attributes[theme][typekitId]"
+            placeholder="Enter Typekit ID"
           />
           <Form.Save
             text="Save Settings"
