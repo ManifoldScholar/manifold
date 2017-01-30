@@ -54,16 +54,16 @@ class TexDetailWrapperContainer extends PureComponent {
         label: "People",
         key: "collaborators"
       },
-      {
-        path: `/backend/text/${text.id}/ingestion`,
-        label: "Ingestion",
-        key: "ingestion"
-      },
-      {
-        path: `/backend/text/${text.id}/sections`,
-        label: "Sections",
-        key: "sections"
-      },
+      // {
+      //   path: `/backend/text/${text.id}/ingestion`,
+      //   label: "Ingestion",
+      //   key: "ingestion"
+      // },
+      // {
+      //   path: `/backend/text/${text.id}/sections`,
+      //   label: "Sections",
+      //   key: "sections"
+      // },
       {
         path: `/backend/text/${text.id}/metadata`,
         label: "Metadata",

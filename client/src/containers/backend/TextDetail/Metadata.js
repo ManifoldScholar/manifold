@@ -33,19 +33,16 @@ export default class TextDetailMetadata extends PureComponent {
           className="form-secondary"
         >
           <Form.TextInput
-            focusOnMount
             label="ISBN"
             name="attributes[metadata][isbn]"
             placeholder="Enter ISBN Number"
           />
           <Form.TextInput
-            focusOnMount
             label="Publisher"
             name="attributes[metadata][publisher]"
             placeholder="Enter Publisher Name"
           />
           <Form.TextInput
-            focusOnMount
             label="Publisher"
             name="attributes[metadata][placeOfPublication]"
             placeholder="Enter Place of Publication"
@@ -55,13 +52,11 @@ export default class TextDetailMetadata extends PureComponent {
             name="attributes[publicationDate]"
           />
           <Form.TextInput
-            focusOnMount
             label="Digital Object Identifier (DOI)"
             name="attributes[metadata][doi]"
             placeholder="Enter DOI"
           />
           <Form.TextInput
-            focusOnMount
             label="Series"
             name="attributes[metadata][series]"
             placeholder="Enter Series Name"

@@ -33,13 +33,22 @@ export default class DetailHeader extends PureComponent {
                 </span>
               </h1>
               <div className="project-utility">
-                <button className="button-bare-primary">
+                <button
+                  onClick={() => { alert("Under construction"); }}
+                  className="button-bare-primary"
+                >
                   Preview <i className="manicon manicon-eye-outline"></i>
                 </button>
-                <button className="button-bare-primary">
+                <button
+                  onClick={() => { alert("Under construction"); }}
+                  className="button-bare-primary"
+                >
                   Duplicate <i className="manicon manicon-check-double"></i>
                 </button>
-                <button className="button-bare-primary">
+                <button
+                  onClick={() => { alert("Under construction"); }}
+                  className="button-bare-primary"
+                >
                   Delete <i className="manicon manicon-trashcan"></i>
                 </button>
               </div>
