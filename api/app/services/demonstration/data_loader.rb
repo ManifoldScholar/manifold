@@ -5,6 +5,11 @@ module Demonstration
   # Loads demo data into the Manifold installation
   class DataLoader
 
+    ENV_SETTINGS = {
+      general: %w(ga_profile_id ga_tracking_id).freeze,
+      theme: %w(typekit_id).freeze
+    }.freeze
+
     def initialize
       @logger = Logger.new(STDOUT)
       @logger.formatter = proc { |severity, _datetime, _progname, msg|
@@ -19,6 +24,8 @@ module Demonstration
       create_fake_users
       create_pages
       import_projects
+      ensure_settings
+      reindex_records
     end
 
     def import_projects
@@ -68,6 +75,24 @@ module Demonstration
         )
         @logger.info("Creating page: #{page.title}".green)
       end
+    end
+
+    def ensure_settings
+      settings = Settings.instance
+      ENV_SETTINGS.each do |key, values|
+        values.each do |value|
+          env_setting = "MANIFOLD_SETTING_#{key}_#{value}".upcase
+          settings[key][value] ||= ENV[env_setting]
+        end
+      end
+      settings.save
+    end
+
+    def reindex_records
+      Project.reindex
+      @logger.info("Projects reindexed".green)
+      User.reindex
+      @logger.info("Users reindexed".green)
     end
 
     private
