@@ -2,6 +2,7 @@
 require 'clamp'
 
 Clamp do
+   option "--lint", :flag, "lint the frontend, do not start api or client"
    option "--noapi", :flag, "do not start API"
    option "--noworker", :flag, "do not start background worker"
    option "--noclockwork", :flag, "do not start clockwork"
@@ -13,6 +14,8 @@ Clamp do
      clockwork_num = noclockwork? ? 0 : 1
      client_num = noclient? ? 0 : 1
      cmd = "foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num}"
+     # Bypass default command for linter
+     cmd = lint? ? "scss-lint -c .scss-lint.yml && cd client && yarn lint && jest" : cmd
      exec cmd
    end
 end
