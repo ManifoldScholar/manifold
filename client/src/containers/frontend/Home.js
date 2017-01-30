@@ -82,7 +82,7 @@ class HomeContainer extends Component {
           <div className="container">
             <header className="section-heading">
               <h4 className="title">
-                <i className="manicon manicon-new-round"></i>
+                <i className="manicon manicon-lamp"></i>
                 {'Featured Projects'}
               </h4>
             </header>
