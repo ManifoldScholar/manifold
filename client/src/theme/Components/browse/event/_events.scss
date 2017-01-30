@@ -90,7 +90,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   padding: 15px 17px 19px 0;
   color: $neutralOffBlack;
@@ -117,7 +116,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    height: 100%;
+    flex-grow: 2;
     padding-left: 50px;
 
     @include respond($break60) {
