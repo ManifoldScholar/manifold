@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/stympy/faker.git
-  revision: deb032253cfb602c77bf611ae4de1c5090708237
+  revision: 613b5c5b4cf157fe083eb87971bacee04d8516c4
   specs:
-    faker (1.7.1)
+    faker (1.7.2)
       i18n (~> 0.5)
 
 GEM
@@ -31,10 +31,11 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    active_model_serializers (0.10.3)
+    active_model_serializers (0.10.4)
       actionpack (>= 4.1, < 6)
       activemodel (>= 4.1, < 6)
-      jsonapi (= 0.1.1.beta2)
+      case_transform (>= 0.2)
+      jsonapi (= 0.1.1.beta6)
     activejob (5.0.1)
       activesupport (= 5.0.1)
       globalid (>= 0.3.6)
@@ -49,7 +50,7 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    acts_as_list (0.8.2)
+    acts_as_list (0.9.1)
       activerecord (>= 3.0)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
@@ -59,9 +60,10 @@ GEM
       activesupport (>= 3.0.0)
     bcrypt (3.1.11)
     buftok (0.2.0)
-    builder (3.2.2)
-    climate_control (0.0.3)
-      activesupport (>= 3.0)
+    builder (3.2.3)
+    case_transform (0.2)
+      activesupport
+    climate_control (0.1.0)
     clockwork (2.0.0)
       activesupport
       tzinfo
@@ -75,19 +77,19 @@ GEM
     css_parser (1.4.7)
       addressable
     database_cleaner (1.5.3)
-    diff-lcs (1.2.5)
+    diff-lcs (1.3)
     domain_name (0.5.20161129)
       unf (>= 0.0.5, < 1.0.0)
-    dotenv (2.1.1)
-    dotenv-rails (2.1.1)
-      dotenv (= 2.1.1)
-      railties (>= 4.0, < 5.1)
-    elasticsearch (5.0.0)
-      elasticsearch-api (= 5.0.0)
-      elasticsearch-transport (= 5.0.0)
-    elasticsearch-api (5.0.0)
+    dotenv (2.2.0)
+    dotenv-rails (2.2.0)
+      dotenv (= 2.2.0)
+      railties (>= 3.2, < 5.1)
+    elasticsearch (5.0.1)
+      elasticsearch-api (= 5.0.1)
+      elasticsearch-transport (= 5.0.1)
+    elasticsearch-api (5.0.1)
       multi_json
-    elasticsearch-transport (5.0.0)
+    elasticsearch-transport (5.0.1)
       faraday
       multi_json
     equalizer (0.0.10)
@@ -106,7 +108,7 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    google-api-client (0.9.20)
+    google-api-client (0.9.26)
       addressable (~> 2.3)
       googleauth (~> 0.5)
       httpclient (~> 2.7)
@@ -146,9 +148,12 @@ GEM
     httpclient (2.8.3)
     hurley (0.2)
     i18n (0.7.0)
-    json (1.8.3)
-    jsonapi (0.1.1.beta2)
-      json (~> 1.8)
+    json (1.8.6)
+    jsonapi (0.1.1.beta6)
+      jsonapi-parser (= 0.1.1.beta3)
+      jsonapi-renderer (= 0.1.1.beta1)
+    jsonapi-parser (0.1.1.beta3)
+    jsonapi-renderer (0.1.1.beta1)
     jwt (1.5.6)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
@@ -171,7 +176,7 @@ GEM
     mimemagic (0.3.2)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
-    money (6.7.1)
+    money (6.8.1)
       i18n (>= 0.6.4, <= 0.7.0)
       sixarm_ruby_unaccent (>= 1.1.1, < 2)
     multi_json (1.12.1)
@@ -179,7 +184,7 @@ GEM
     multipart-post (2.0.0)
     naught (1.1.0)
     nio4r (1.2.1)
-    nokogiri (1.7.0)
+    nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     os (0.9.6)
     paperclip (5.1.0)
@@ -192,7 +197,7 @@ GEM
       ast (~> 2.2)
     pg (0.19.0)
     powerpack (0.1.1)
-    public_suffix (2.0.4)
+    public_suffix (2.0.5)
     puma (3.6.2)
     rack (2.0.1)
     rack-cors (0.4.0)
@@ -223,10 +228,10 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbow (2.1.0)
+    rainbow (2.2.1)
     rake (12.0.0)
     redcarpet (3.4.0)
-    redis (3.3.2)
+    redis (3.3.3)
     representable (2.3.0)
       uber (~> 0.0.7)
     retriable (2.1.0)
@@ -247,8 +252,8 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rubocop (0.46.0)
-      parser (>= 2.3.1.1, < 3.0)
+    rubocop (0.47.1)
+      parser (>= 2.3.3.1, < 3.0)
       powerpack (~> 0.1)
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.7)
@@ -272,7 +277,7 @@ GEM
       multi_json (~> 1.10)
     simple_oauth (0.3.1)
     sixarm_ruby_unaccent (1.1.1)
-    spring (2.0.0)
+    spring (2.0.1)
       activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -302,7 +307,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
-    unicode-display_width (1.1.2)
+    unicode-display_width (1.1.3)
     validate_url (1.0.2)
       activemodel (>= 3.0.0)
       addressable
@@ -310,7 +315,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
-    websocket-driver (0.6.4)
+    websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
 
@@ -322,7 +327,6 @@ DEPENDENCIES
   acts_as_list
   authority (~> 3.2.0)
   bcrypt (~> 3.1.11)
-  bundler (~> 1.13.6)
   clockwork (= 2.0.0)
   colorize
   css_parser
