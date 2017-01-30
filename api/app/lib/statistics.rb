@@ -33,7 +33,6 @@ class Statistics
     get_reader_count(start_date - 7.days, end_date - 7.days)
   end
 
-
   def reader_increase
     this_week = readers_this_week
     last_week = readers_last_week
