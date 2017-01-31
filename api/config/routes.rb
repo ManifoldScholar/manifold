@@ -28,6 +28,7 @@ Rails.application.routes.draw do
         scope module: :text_sections do
           namespace :relationships do
             resources :annotations, only: [:index, :create]
+            resources :resources, only: [:index]
           end
         end
       end

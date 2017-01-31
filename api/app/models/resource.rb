@@ -46,11 +46,6 @@ class Resource < ApplicationRecord
     ENV["API_URL"] + attachment.url
   end
 
-  def attachment_thumbnail_url
-    return nil unless attachment.present? && attachment.exists?(:thumbnail)
-    ENV["API_URL"] + attachment.url(:thumbnail)
-  end
-
   def resize_images
     res = attachment_is_image?
     res

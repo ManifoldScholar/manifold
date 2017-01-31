@@ -19,4 +19,13 @@ export default {
     };
   },
 
+  forSection(sectionId) {
+    return {
+      endpoint: `/api/v1/text_sections/${sectionId}/relationships/resources`,
+      method: 'GET',
+      options: {
+      }
+    };
+  }
+
 };

@@ -6,6 +6,7 @@ import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
 import { Header, Footer, FooterMenu, Section } from 'components/reader';
 import { commonActions } from 'actions/helpers';
 import textsAPI from '../../api/texts';
+import resourcesAPI from '../../api/resources';
 import sectionsAPI from '../../api/sections';
 import annotationsAPI from '../../api/annotations';
 import { select } from '../../utils/entityUtils';
@@ -43,11 +44,6 @@ class ReaderContainer extends Component {
       const { promise: two } = dispatch(request(sectionCall,
         requests.readerCurrentSection));
       promises.push(two);
-
-      const annotationsCall = annotationsAPI.forSection(params.sectionId);
-      const { promise: three } = dispatch(request(annotationsCall,
-        requests.sectionAnnotations));
-      promises.push(three);
     }
     return Promise.all(promises);
   }
@@ -60,6 +56,7 @@ class ReaderContainer extends Component {
     return {
       annotations: select(requests.sectionAnnotations, state.entityStore),
       section: select(requests.readerCurrentSection, state.entityStore),
+      resources: select(requests.sectionResources, state.entityStore),
       text: select(requests.readerCurrentText, state.entityStore),
       authentication: state.authentication,
       visibility: state.ui.visibility,
@@ -95,6 +92,14 @@ class ReaderContainer extends Component {
     this.maybeRedirect(this.props);
     this.readerActions = this.makeReaderActions(this.props.dispatch);
     this.commonActions = commonActions(this.props.dispatch);
+
+    if (this.props.params.sectionId) {
+      const annotationsCall = annotationsAPI.forSection(this.props.params.sectionId);
+      this.props.dispatch(request(annotationsCall, requests.sectionAnnotations));
+      const resourcesCall = resourcesAPI.forSection(this.props.params.sectionId);
+      this.props.dispatch(request(resourcesCall, requests.sectionResources));
+    }
+
   }
 
   componentWillReceiveProps(nextProps) {
