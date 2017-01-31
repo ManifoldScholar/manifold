@@ -16,7 +16,8 @@ export default class AnnotationPopup extends Component {
     this.state = {
       visible: false,
       top: 0,
-      left: 0
+      left: 0,
+      direction: 'up'
     };
   }
 
@@ -58,12 +59,23 @@ export default class AnnotationPopup extends Component {
       const rect = selection.range.getBoundingClientRect();
       const popupHeight = this.refs.popup.offsetHeight;
       const popupWidth = this.refs.popup.offsetWidth;
+      let direction = 'up';
       let left = rect.left;
       if (rect.left + popupWidth > document.body.clientWidth) {
         left = document.body.clientWidth - popupWidth - 15;
       }
-      const top = window.pageYOffset + rect.top - popupHeight;
-      this.setState(Object.assign(this.state, { top, left }));
+      // Check if popup needs to be positioned from the top or the bottom
+      let top = 0;
+      // Check if the top of the popup might collide with the top of the window
+      if ((window.pageYOffset + rect.top - popupHeight) > document.body.scrollTop + 100) {
+        top = window.pageYOffset + rect.top - popupHeight;
+        direction = 'up';
+      } else {
+        // Position the popup from below
+        top = window.pageYOffset + rect.top + 80;
+        direction = 'down';
+      }
+      this.setState(Object.assign(this.state, { top, left, direction }));
     }
   }
 
@@ -74,6 +86,12 @@ export default class AnnotationPopup extends Component {
       visible: this.state.visible
     });
 
+    const tailClass = classNames({
+      tail: true,
+      'tail-down': this.state.direction === 'up',
+      'tail-up': this.state.direction === 'down',
+    });
+
     return (
       <div className={popupClass}
         ref="popup"
@@ -82,16 +100,28 @@ export default class AnnotationPopup extends Component {
           left: this.state.left
         }}
       >
-        <button onClick={this.props.annotate}>
-          Annotate
+        {/* Provisional button for creating resources */}
+        <button>
+          <i className="manicon manicon-cube-shine"></i>
+          Resource
         </button>
         <button onClick={this.props.highlight}>
+          <i className="manicon manicon-pencil-simple"></i>
+          Highlight
+        </button>
+        <button onClick={this.props.annotate}>
+          <i className="manicon manicon-word-bubble"></i>
+          Annotate
+        </button>
+        <button>
+          <i className="manicon manicon-bookmark-outline"></i>
           Highlight
         </button>
         <button onClick={this.props.share}>
+          <i className="manicon manicon-nodes"></i>
           Share
         </button>
-        <div className="tail"></div>
+        <div className={tailClass}></div>
       </div>
     );
   }
