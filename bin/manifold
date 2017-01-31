@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'gettext'
 require 'clamp'
+require 'paint'
 
 Clamp.messages = {
   :usage_heading => '
@@ -35,20 +36,90 @@ Clamp.messages = {
 }
 
 Clamp do
-   option "--lint", :flag, "lint the frontend, do not start api or client"
-   option "--noapi", :flag, "do not start API"
-   option "--noworker", :flag, "do not start background worker"
-   option "--noclockwork", :flag, "do not start clockwork"
-   option "--noclient", :flag, "do not start client"
 
-   def execute
+  self.default_subcommand = "start"
+
+  subcommand "start", "Start services" do
+
+    option "--noapi", :flag, "do not start API"
+    option "--noworker", :flag, "do not start background worker"
+    option "--noclockwork", :flag, "do not start clockwork"
+    option "--noclient", :flag, "do not start client"
+
+    def execute
      api_num = noapi? ? 0 : 1
      worker_num = noclient? ? 0 : 1
      clockwork_num = noclockwork? ? 0 : 1
      client_num = noclient? ? 0 : 1
-     cmd = "foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num}"
-     # Bypass default command for linter
-     cmd = lint? ? "scss-lint -c .scss-lint.yml && cd client && yarn lint && jest" : cmd
-     exec cmd
+     exec "foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num}"
    end
+
+  end
+
+  subcommand "lint", "Lint code" do
+
+    option "--autofix", :flag, "autofix when linting"
+    parameter "SUBJECT", "api or client"
+
+    def execute
+      if subject == "api"
+        autofix = autofix? ? "-a" : ""
+        exec "cd api && rubocop #{autofix}"
+      end
+      if subject == "client"
+        autofix = autofix? ? "--fix" : ""
+        puts Paint["$ scss-lint -c .scss-lint.yml", :faint]
+        system "scss-lint -c .scss-lint.yml"
+        puts Paint["$ eslint . #{autofix}", :faint]
+        system "cd client && eslint . #{autofix}"
+      end
+    end
+
+  end
+
+  subcommand "test", "Run tests" do
+
+    option "--update-snapshots", :flag, "update snapshots"
+    option "--integration", :flag, "include integration"
+    parameter "SUBJECT", "api or client"
+
+    def execute
+      if subject == "api"
+        integration = integration? ? " --tag integration" : ""
+        puts Paint["rspec -fd #{integration}", :faint]
+        system "cd api && rspec -fd #{integration}"
+      end
+      if subject == "client"
+        update = update_snapshots? ? " -u" : ""
+        puts Paint["jest#{update}", :faint]
+        system "cd client && jest#{update}"
+      end
+    end
+  end
+
+  subcommand "check", "Lint and test prior to commiting" do
+
+    parameter "[SUBJECT]", "api or client"
+
+    def check_client
+      puts Paint["mainfold lint client", :faint]
+      raise "Client lint failed" unless system "manifold lint client"
+      puts Paint["mainfold test client", :faint]
+      raise "Client test failed" unless system "manifold test client"
+    end
+
+    def check_api
+      puts Paint["mainfold lint api", :faint]
+      raise "API lint failed" unless system "manifold lint api"
+      puts Paint["mainfold test api", :faint]
+      raise "API test failed" unless system "manifold test api"
+    end
+
+    def execute
+      check_api if subject == "api" || subject.nil?
+      check_client if subject == "client" || subject.nil?
+    end
+
+  end
+
 end
