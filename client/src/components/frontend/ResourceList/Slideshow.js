@@ -42,6 +42,15 @@ export default class ResourceListSlideshow extends PureComponent {
     this.handleUnloadedSlide = this.handleUnloadedSlide.bind(this);
     this.addLoadedPage = this.addLoadedPage.bind(this);
     this.updateTotalCount = this.updateTotalCount.bind(this);
+    this.bindKeyboard = this.bindKeyboard.bind(this);
+  }
+
+  componentWillMount() {
+    document.addEventListener('keyup', this.bindKeyboard, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keyup', this.bindKeyboard, false);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -122,6 +131,14 @@ export default class ResourceListSlideshow extends PureComponent {
     let newPosition = this.state.position + 1;
     if (newPosition > this.state.totalCount) newPosition = this.state.totalCount;
     this.updatePosition(newPosition);
+  }
+
+  bindKeyboard(event) {
+    if (event.keyCode === 39) {
+      this.handleSlideNext();
+    } else if (event.keyCode === 37) {
+      this.handleSlidePrev();
+    }
   }
 
   getFigureByType(resource) {
