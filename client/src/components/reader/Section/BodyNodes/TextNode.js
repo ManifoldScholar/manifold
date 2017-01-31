@@ -4,6 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import values from 'lodash/values';
 import union from 'lodash/union';
 import find from 'lodash/find';
+import ResourceMarker from '../ResourceMarker';
 
 export default class TextNode extends Component {
 
@@ -110,11 +111,10 @@ export default class TextNode extends Component {
         >
           {chunk}
           { endingResources.length > 0 ?
-            <span
-              className="manicon manicon-cube-shine"
-              data-resources={resourceIds}
-              onClick={() => { this.handleResourceClick(resourceIds); }}
-            ></span>
+            <ResourceMarker
+              ids={resourceIds}
+              handleClick={() => { this.handleResourceClick(resourceIds); }}
+            />
           : null}
         </span>
       );
