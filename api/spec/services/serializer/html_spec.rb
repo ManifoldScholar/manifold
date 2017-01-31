@@ -83,4 +83,23 @@ RSpec.describe Serializer::Html do
     }
     expect(serializer.serialize(node)).to match_serialized_html_node(object)
   end
+
+  it "should not add a node_uuid to element nodes" do
+    html = "<div><span>AAA</span></div>"
+    serialized = serializer.serialize(html)
+    span_node = serialized[:children].first
+    expect(span_node).to_not include(:node_uuid)
+  end
+
+  it "should add a node_uuid to text nodes" do
+    html = "<div><span>AAA</span></div>"
+    serialized = serializer.serialize(html)
+    span_node = serialized[:children].first
+    text_node = span_node[:children].first
+    expect(text_node).to include(:node_uuid)
+  end
+
+
+
+
 end
