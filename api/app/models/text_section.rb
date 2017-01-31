@@ -14,6 +14,7 @@ class TextSection < ApplicationRecord
   belongs_to :text
   belongs_to :ingestion_source
   has_many :annotations
+  has_many :resources, through: :annotations
 
   # Delegation
   delegate :source_path, to: :ingestion_source
