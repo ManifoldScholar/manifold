@@ -23,6 +23,19 @@ class Annotation < ApplicationRecord
   belongs_to :text_section
   belongs_to :resource, optional: true
 
+  # Validations
+  validates :text_section, presence: true
+  validates :resource, presence: true, if: :resource?
+  validates :start_node, :end_node, presence: true
+  validates :start_char,
+            :end_char,
+            presence: true,
+            numericality: :only_integer, length: { minimum: 0 }
+  validates :format,
+            presence: true,
+            inclusion: { in: %W(#{TYPE_ANNOTATION} #{TYPE_HIGHLIGHT} #{TYPE_RESOURCE}) }
+  validate :valid_subject?
+
   # Delegations
   delegate :text, to: :text_section
   delegate :project, to: :text
@@ -41,6 +54,12 @@ class Annotation < ApplicationRecord
 
   def highlight?
     format == TYPE_HIGHLIGHT
+  end
+
+  def valid_subject?
+    return errors.add(:subject, "can't be nil value") if subject.nil?
+    return errors.add(:subject, "can't be blank") if subject.empty?
+    true
   end
 
 end
