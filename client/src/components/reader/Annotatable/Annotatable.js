@@ -24,12 +24,12 @@ class Annotatable extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('mousedown', this.startSelection, false);
+    this.annotatable.addEventListener('mousedown', this.startSelection, false);
     document.addEventListener('keydown', this.handleKeyDown, false);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.startSelection, false);
+    this.annotatable.removeEventListener('mousedown', this.startSelection, false);
     document.removeEventListener('mouseup', this.updateSelection, false);
     document.removeEventListener('keydown', this.handleKeyDown, false);
   }
@@ -199,7 +199,7 @@ class Annotatable extends Component {
 
   render() {
     return (
-      <div className="annotatable" >
+      <div className="annotatable" ref={(a) => { this.annotatable = a; }}>
         <AnnotationPopup
           share={this.shareSelection}
           highlight={this.highlightSelection}
