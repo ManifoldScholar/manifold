@@ -27,10 +27,12 @@ module Collaborative
       def sort(makers)
         makers.each_with_index do |maker, index|
           role = Collaborator::ROLE_CREATOR
+          # rubocop:disable Rails/SkipsModelValidations
           @association.owner
                       .collaborators
                       .find_by(maker: maker, role: role)
                       .update_attribute(:position, index + 1)
+          # rubocop:enable Rails/SkipsModelValidations
         end
       end
     end
@@ -41,10 +43,12 @@ module Collaborative
                def sort(makers)
                  makers.each_with_index do |maker, index|
                    role = Collaborator::ROLE_CONTRIBUTOR
+                   # rubocop:disable Rails/SkipsModelValidations
                    @association.owner
                                .collaborators
                                .find_by(maker: maker, role: role)
                                .update_attribute(:position, index + 1)
+                   # rubocop:enable Rails/SkipsModelValidations
                  end
                end
              end
