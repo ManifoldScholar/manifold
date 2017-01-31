@@ -70,6 +70,8 @@ class ReaderContainer extends Component {
   static propTypes = {
     children: PropTypes.object,
     params: PropTypes.object,
+    annotations: PropTypes.array,
+    resources: PropTypes.array,
     location: PropTypes.object,
     text: PropTypes.object,
     section: PropTypes.object,
@@ -94,21 +96,31 @@ class ReaderContainer extends Component {
     this.commonActions = commonActions(this.props.dispatch);
 
     if (this.props.params.sectionId) {
-      const annotationsCall = annotationsAPI.forSection(this.props.params.sectionId);
-      this.props.dispatch(request(annotationsCall, requests.sectionAnnotations));
-      const resourcesCall = resourcesAPI.forSection(this.props.params.sectionId);
-      this.props.dispatch(request(resourcesCall, requests.sectionResources));
+      this.fetchAnnotations();
+      this.fetchResources();
     }
-
   }
 
   componentWillReceiveProps(nextProps) {
     this.maybeRedirect(nextProps);
+    if (nextProps.annotations !== this.props.annotations) {
+      this.fetchResources();
+    }
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.readerCurrentSection));
     this.props.dispatch(flush(requests.readerCurrentText));
+  }
+
+  fetchAnnotations() {
+    const annotationsCall = annotationsAPI.forSection(this.props.params.sectionId);
+    this.props.dispatch(request(annotationsCall, requests.sectionAnnotations));
+  }
+
+  fetchResources() {
+    const resourcesCall = resourcesAPI.forSection(this.props.params.sectionId);
+    this.props.dispatch(request(resourcesCall, requests.sectionResources));
   }
 
   maybeRedirect(props) {
