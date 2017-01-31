@@ -11,9 +11,17 @@ module Api
             render json: @text_section.annotations
           end
 
+          # rubocop:disable Metrics/AbcSize
           def create
             attributes = attributes_from(annotation_params)
             @annotation = @text_section.annotations.new(attributes)
+
+            # TODO: remove this. It's only here for stubbing resource annotations.
+            if @annotation.resource?
+              @annotation.resource =
+                @annotation.project.resources.order("RANDOM()").limit(1).first
+            end
+
             @annotation.creator = @current_user
             if @annotation.save
               location = api_v1_text_section_relationships_annotations_url(@annotation)
@@ -24,6 +32,7 @@ module Api
                      status: :unprocessable_entity
             end
           end
+          # rubocop:enableMetrics/AbcSize
 
           private
 

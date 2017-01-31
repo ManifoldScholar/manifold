@@ -17,9 +17,11 @@ class Annotation < ApplicationRecord
   # Constants
   TYPE_ANNOTATION = "annotation".freeze
   TYPE_HIGHLIGHT = "highlight".freeze
+  TYPE_RESOURCE = "resource".freeze
 
   # Associations
   belongs_to :text_section
+  belongs_to :resource, optional: true
 
   # Delegations
   delegate :text, to: :text_section
@@ -27,6 +29,18 @@ class Annotation < ApplicationRecord
 
   def to_s
     "annotation #{id}"
+  end
+
+  def resource?
+    format == TYPE_RESOURCE
+  end
+
+  def annotation?
+    format == TYPE_ANNOTATION
+  end
+
+  def highlight?
+    format == TYPE_HIGHLIGHT
   end
 
 end
