@@ -39,7 +39,7 @@ Clamp do
 
   self.default_subcommand = "start"
 
-  subcommand "start", "Start services" do
+  subcommand ["start", "s"], "Start services" do
 
     option "--noapi", :flag, "do not start API"
     option "--noworker", :flag, "do not start background worker"
@@ -56,48 +56,57 @@ Clamp do
 
   end
 
-  subcommand "lint", "Lint code" do
+  subcommand ["lint", "l"], "Lint code" do
 
     option "--autofix", :flag, "autofix when linting"
-    parameter "SUBJECT", "api or client"
+    parameter "[SUBJECT]", "api or client"
+
+    def lint_api
+      autofix = autofix? ? "-a" : ""
+      puts Paint["$ rubocop . #{autofix}", :faint]
+      raise "API lint failed" unless system "cd api && rubocop #{autofix}"
+    end
+
+    def lint_client
+      autofix = autofix? ? "--fix" : ""
+      puts Paint["$ scss-lint -c .scss-lint.yml", :faint]
+      system "scss-lint -c .scss-lint.yml"
+      puts Paint["$ eslint . #{autofix}", :faint]
+      raise "Client lint failed" unless system "cd client && eslint . #{autofix}"
+    end
 
     def execute
-      if subject == "api"
-        autofix = autofix? ? "-a" : ""
-        exec "cd api && rubocop #{autofix}"
-      end
-      if subject == "client"
-        autofix = autofix? ? "--fix" : ""
-        puts Paint["$ scss-lint -c .scss-lint.yml", :faint]
-        system "scss-lint -c .scss-lint.yml"
-        puts Paint["$ eslint . #{autofix}", :faint]
-        system "cd client && eslint . #{autofix}"
-      end
+      lint_api if subject == "api" || subject.nil?
+      lint_client if subject == "client" || subject.nil?
     end
 
   end
 
-  subcommand "test", "Run tests" do
+  subcommand ["test", "t"], "Run tests" do
 
     option "--update-snapshots", :flag, "update snapshots"
     option "--integration", :flag, "include integration"
-    parameter "SUBJECT", "api or client"
+    parameter "[SUBJECT]", "api or client"
+
+    def test_api
+      integration = integration? ? " --tag integration" : ""
+      puts Paint["rspec -fd #{integration}", :faint]
+      raise "API test failed" unless system "cd api && rspec -fd #{integration}"
+    end
+
+    def test_client
+      update = update_snapshots? ? " -u" : ""
+      puts Paint["jest#{update}", :faint]
+      raise "Client test failed" unless system "cd client && jest#{update}"
+    end
 
     def execute
-      if subject == "api"
-        integration = integration? ? " --tag integration" : ""
-        puts Paint["rspec -fd #{integration}", :faint]
-        system "cd api && rspec -fd #{integration}"
-      end
-      if subject == "client"
-        update = update_snapshots? ? " -u" : ""
-        puts Paint["jest#{update}", :faint]
-        system "cd client && jest#{update}"
-      end
+      test_api if subject == "api" || subject.nil?
+      test_client if subject == "client" || subject.nil?
     end
   end
 
-  subcommand "check", "Lint and test prior to commiting" do
+  subcommand ["check", "c"], "Lint and test prior to commiting" do
 
     parameter "[SUBJECT]", "api or client"
 
