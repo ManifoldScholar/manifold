@@ -18,6 +18,7 @@ class Annotatable extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.highlightSelection = this.highlightSelection.bind(this);
     this.annotateSelection = this.annotateSelection.bind(this);
+    this.attachResourceToSelection = this.attachResourceToSelection.bind(this);
     this.shareSelection = this.shareSelection.bind(this);
     this.closestTextNode = this.closestTextNode.bind(this);
     this.setDefaultState();
@@ -193,6 +194,17 @@ class Annotatable extends Component {
     }, 0);
   }
 
+  attachResourceToSelection(event) {
+    event.stopPropagation();
+    const annotation = this.mapSelectionToAnnotation(this.state.selection, 'resource');
+    console.log(annotation, 'a');
+    this.props.createAnnotation(this.props.sectionId, annotation);
+    setTimeout(() => {
+      this.updateStateSelection(null);
+      window.getSelection().removeAllRanges();
+    }, 0);
+  }
+
   shareSelection() {
     // console.log(this.state.selection.text);
   }
@@ -204,6 +216,7 @@ class Annotatable extends Component {
           share={this.shareSelection}
           highlight={this.highlightSelection}
           annotate={this.annotateSelection}
+          attachResource={this.attachResourceToSelection}
           selection={this.state.selection}
         />
         { this.props.children ? Children.only(this.props.children) : null }
