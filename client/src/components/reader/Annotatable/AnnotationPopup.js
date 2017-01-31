@@ -8,7 +8,9 @@ export default class AnnotationPopup extends Component {
     selection: PropTypes.object,
     share: PropTypes.func,
     highlight: PropTypes.func,
-    annotate: PropTypes.func
+    annotate: PropTypes.func,
+    attachResource: PropTypes.func,
+    bookmark: PropTypes.func
   };
 
   constructor() {
@@ -101,7 +103,7 @@ export default class AnnotationPopup extends Component {
         }}
       >
         {/* Provisional button for creating resources */}
-        <button>
+        <button onClick={this.props.attachResource}>
           <i className="manicon manicon-cube-shine"></i>
           Resource
         </button>
@@ -113,9 +115,9 @@ export default class AnnotationPopup extends Component {
           <i className="manicon manicon-word-bubble"></i>
           Annotate
         </button>
-        <button>
+        <button onClick={this.props.bookmark}>
           <i className="manicon manicon-bookmark-outline"></i>
-          Highlight
+          Bookmark
         </button>
         <button onClick={this.props.share}>
           <i className="manicon manicon-nodes"></i>
