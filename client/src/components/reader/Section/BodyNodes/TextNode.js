@@ -81,6 +81,11 @@ export default class TextNode extends Component {
       return content.substring(substringStart, substringEnd);
     });
 
+    // console.log(map, 'map');
+    // console.log(chunks, 'chunks');
+    // console.log(ends, 'ends');
+    // console.log(starts, 'starts');
+
     // map the chunks to outputs.
     return chunks.map((chunk, index) => {
       const highlighted = map[index].find(a => a.type === "highlight");
@@ -89,8 +94,10 @@ export default class TextNode extends Component {
       let endingResources = [];
       let startingResources = [];
       if (resources.length > 0) {
-        endingResources = resources.filter(a => ends[a.id] === index);
-        startingResources = resources.filter(a => starts[a.id] === index);
+        endingResources =
+          resources.filter(a => ends[a.id] === index && a.endNode === this.props.nodeUuid);
+        startingResources =
+          resources.filter(a => starts[a.id] === index && a.startNode === this.props.nodeUuid);
       }
       const classes = classNames({
         'annotation-underline primary': underlined,
