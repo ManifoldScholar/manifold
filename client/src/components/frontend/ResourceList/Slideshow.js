@@ -45,7 +45,7 @@ export default class ResourceListSlideshow extends PureComponent {
     this.bindKeyboard = this.bindKeyboard.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     document.addEventListener('keyup', this.bindKeyboard, false);
   }
 
