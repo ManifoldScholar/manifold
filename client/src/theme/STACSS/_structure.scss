@@ -149,9 +149,17 @@
   }
 }
 
+$readerContainerWidths: (790px, 680px, 500px);
+
 .container-focus {
   @include containerFocus;
   transition: max-width $duration $timing;
+
+  @for $i from 1 through length($readerContainerWidths) {
+    &.container-width-#{$i - 1} {
+      max-width: nth($readerContainerWidths, $i);
+    }
+  }
 }
 
 @mixin headerContainerPrimary {
