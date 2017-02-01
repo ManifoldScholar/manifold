@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 namespace :ingest do
   desc "Ingests a single text into Manifold"
   task :text, [:path, :log_level] => :environment do |_t, args|
@@ -40,3 +41,4 @@ namespace :ingest do
     Ingestor.reset_logger
   end
 end
+# rubocop:enable Metrics/BlockLength

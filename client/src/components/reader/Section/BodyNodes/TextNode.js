@@ -4,6 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import values from 'lodash/values';
 import union from 'lodash/union';
 import find from 'lodash/find';
+import ResourceMarker from '../ResourceMarker';
 
 export default class TextNode extends Component {
 
@@ -26,8 +27,13 @@ export default class TextNode extends Component {
       const end = a.attributes.endNode === this.props.nodeUuid ? a.attributes.endChar : null;
       const startNode = a.attributes.startNode;
       const endNode = a.attributes.endNode;
-      return { id, type, start, end, startNode, endNode };
+      const resourceId = a.attributes.resourceId;
+      return { id, type, start, end, startNode, endNode, resourceId };
     });
+  }
+
+  handleResourceClick(ids) {
+    console.log(ids, "You clicked on an icon that represents these resource IDs");
   }
 
   annotatedContent() {
@@ -52,6 +58,22 @@ export default class TextNode extends Component {
       });
     });
 
+    // ends
+    const ends = {};
+    map.forEach((chunk, index) => {
+      chunk.forEach((annotation) => {
+        ends[annotation.id] = index;
+      });
+    });
+
+    // starts
+    const starts = {};
+    map.slice().reverse().forEach((chunk, index) => {
+      chunk.forEach((annotation) => {
+        starts[annotation.id] = index;
+      });
+    });
+
     // split the string into chunks for each difference and intersection between the ranges
     const chunks = splits.map((split, index) => {
       const substringStart = index === 0 ? 0 : splits[index - 1] - 1;
@@ -63,13 +85,37 @@ export default class TextNode extends Component {
     return chunks.map((chunk, index) => {
       const highlighted = map[index].find(a => a.type === "highlight");
       const underlined = map[index].find(a => a.type === "annotation");
+      const resources = map[index].filter(a => a.type === "resource");
+      let endingResources = [];
+      let startingResources = [];
+      if (resources.length > 0) {
+        endingResources = resources.filter(a => ends[a.id] === index);
+        startingResources = resources.filter(a => starts[a.id] === index);
+      }
       const classes = classNames({
         'annotation-underline primary': underlined,
-        'annotation-highlight primary': highlighted
+        'annotation-highlight primary': highlighted,
+        'annotation-resource primary': resources.length > 0,
+        'annotation-resource-start': resources && startingResources.length > 0,
+        'annotation-resource-end': resources && endingResources.length > 0
       });
+
+
+      const resourceIds = endingResources.map((a) => a.resourceId);
+
       return (
-        <span key={index} className={classes} data-annotation-ids={map[index].map((a) => a.id)}>
+        <span
+          key={index}
+          className={classes}
+          data-annotation-ids={map[index].map((a) => a.id)}
+        >
           {chunk}
+          { endingResources.length > 0 ?
+            <ResourceMarker
+              ids={resourceIds}
+              handleClick={() => { this.handleResourceClick(resourceIds); }}
+            />
+          : null}
         </span>
       );
     });
