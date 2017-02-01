@@ -23,6 +23,7 @@ class ManifoldContainer extends PureComponent {
   // This method will bootstrap data into manifold. Nothing else is loaded into the
   // store at this point, including params and the authenticated user.
   static bootstrap(getState, dispatch) {
+    if (__CLIENT__) return;
     const promises = [];
     const loaded = has(getState(), 'entityStore.entities.settings.0');
     if (loaded) return Promise.all(promises);

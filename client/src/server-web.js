@@ -15,6 +15,8 @@ import createStore from './store/createStore';
 import { currentUserActions } from 'actions';
 import { authenticateWithToken } from 'store/middleware/currentUserMiddleware';
 import ch from './helpers/consoleHelpers';
+import has from 'lodash/has';
+import { Manifold } from 'containers/global';
 
 const morgan = require('morgan');
 const app = new Express();
@@ -84,9 +86,13 @@ export default function (parameters) {
         }
       };
 
-      const promise = authenticateWithToken(authToken, store.dispatch);
-      promise.then(render, render);
+      const promises = [];
+      if (!has(store.getState(), "entityStore.entities.settings.0")) {
+        promises.push(Manifold.bootstrap(store.getState, store.dispatch));
+      }
 
+      promises.push(authenticateWithToken(authToken, store.dispatch));
+      Promise.all(promises).then(render, render);
     }
   });
   app.use('/', reactServerProxy);

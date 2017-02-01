@@ -4,6 +4,7 @@ import serialize from 'serialize-javascript';
 import DocumentMeta from 'react-document-meta';
 import { HigherOrder } from 'components/global';
 import get from 'lodash/get';
+import has from 'lodash/has';
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -61,8 +62,9 @@ export default class Html extends Component {
     const { assets, component, store } = this.props;
     const content = component ? ReactDOM.renderToString(component) : null;
     const bodyClass = HigherOrder.BodyClass.rewind();
-    const settings = get(store.getState(), "entityStore.entities.settings.0.attributes");
-    const tkEnabled = !!settings.theme.typekitId;
+    const tkId = get(store.getState(),
+      "entityStore.entities.settings.0.attributes.theme.typekitId");
+    const tkEnabled = !!tkId;
 
     const contentProps = {};
     if (content) {
@@ -82,7 +84,7 @@ export default class Html extends Component {
           {this.stylesheets()}
 
           {/* Import fonts from webkit */}
-          {tkEnabled ? <script src={`https://use.typekit.net/${settings.theme.typekitId}.js`}></script> : null}
+          {tkEnabled ? <script src={`https://use.typekit.net/${tkId}.js`}></script> : null}
           {tkEnabled ?
             <script
               dangerouslySetInnerHTML={{ __html: 'try{Typekit.load({ async: true });}catch(e){}' }}
