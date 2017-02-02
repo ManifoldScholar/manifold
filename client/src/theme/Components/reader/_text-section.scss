@@ -35,7 +35,7 @@
   line-height: 1.761;
   transition: font-size $durationFast $timing;
 
-  *::selection {
+  *::selection, .annotation-locked-selected {
     background: $sp20Quaternary;
   }
 

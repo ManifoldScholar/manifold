@@ -36,7 +36,7 @@
     right: 0;
   }
 
-  header {
+  .drawer-header {
     padding-bottom: 48px;
 
     @include respond($break90) {

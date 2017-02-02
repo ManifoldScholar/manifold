@@ -12,7 +12,8 @@ export default class ListSearchable extends PureComponent {
     singularLabel: PropTypes.string,
     pluralLabel: PropTypes.string,
     pagination: PropTypes.object,
-    paginationClickHandler: PropTypes.func
+    paginationClickHandler: PropTypes.func,
+    entityComponentProps: PropTypes.object
   };
 
   static defaultProps = {
