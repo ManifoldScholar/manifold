@@ -9,9 +9,7 @@ module Api
 
           resourceful! Resource, authorize_options: { except: [:index, :show] } do
             @collection.resources
-                       .filtered(resource_filter_params[:filter])
-                       .page(page_number)
-                       .per(page_size)
+                       .query(with_pagination!(resource_filter_params))
           end
 
           # GET /resources

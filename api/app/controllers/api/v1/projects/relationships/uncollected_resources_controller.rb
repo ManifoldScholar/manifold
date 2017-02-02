@@ -8,9 +8,7 @@ module Api
 
           resourceful! Resource, authorize_options: { except: [:index] } do
             @project.uncollected_resources
-                    .filtered(resource_filter_params[:filter])
-                    .page(page_number)
-                    .per(page_size)
+                    .query(with_pagination!(resource_filter_params))
           end
 
           # GET /resources

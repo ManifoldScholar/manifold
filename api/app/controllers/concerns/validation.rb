@@ -29,6 +29,14 @@ module Validation
     params.permit(param_config)
   end
 
+  def resource_params
+    params.require(:data)
+    attributes = [:title, attachment(:attachment), :caption, :description, :keywords,
+                  :alt_text, :copyright_status, :copyright_holder, :credit]
+    param_config = structure_params(attributes: attributes)
+    params.permit(param_config)
+  end
+
   def annotation_params
     params.require(:data)
     attributes = [:start_node, :end_node, :start_char, :end_char, :section_id, :format,
@@ -86,8 +94,10 @@ module Validation
   # rubocop:enable MethodLength
 
   def maker_params
-    attributes = [:first_name, :last_name]
-    param_config = structure_params(attributes: attributes)
+    params.require(:data)
+    attributes = [:first_name, :last_name, attachment(:avatar)]
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
 
@@ -100,7 +110,7 @@ module Validation
   end
 
   def resource_filter_params
-    params.permit(filter: [])
+    params.permit(filter: [:keyword, :typeahead, :project])[:filter]
   end
 
   def user_filter_params
@@ -112,7 +122,7 @@ module Validation
   end
 
   def maker_filter_params
-    params.permit(filter: [:name])
+    params.permit(filter: [:keyword, :typeahead])[:filter]
   end
 
   def attributes_from(valid_params)

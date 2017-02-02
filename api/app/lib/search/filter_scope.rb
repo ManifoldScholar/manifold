@@ -18,6 +18,13 @@ module Search
       self
     end
 
+    def where(field, value, only_if_present = true)
+      return if !value.present? && only_if_present == true
+      @filter[:where] ||= {}
+      @filter[:where][field] = value
+      self
+    end
+
     def to_hash
       @filter
     end
