@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # Concerns
   include Paginated
+  include Filterable
 
   # Authority
   include Authority::UserAbilities
@@ -59,15 +60,6 @@ class User < ApplicationRecord
   }
 
   # Methods
-  def self.filter(params)
-    results = params.key?(:keyword) ? search(params) : query(params)
-    if exceeds_total_pages?(results)
-      params[:page] = results.total_pages
-      return filter(params)
-    end
-    results
-  end
-
   def self.query(params)
     User.all
         .order(:first_name, :last_name)
