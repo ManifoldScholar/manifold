@@ -9,12 +9,16 @@ export default {
     };
   },
 
-  create(sectionId, annotation) {
+  create(sectionId, annotation, resource = null) {
+    const data = { attributes: annotation };
+    if (resource) {
+      data.relationships = { resource: { data: { id: resource.id, type: "resources" } } }
+    }
     return {
       endpoint: `/api/v1/text_sections/${sectionId}/relationships/annotations`,
       method: 'POST',
       options: {
-        body: JSON.stringify({ type: "annotation", data: { attributes: annotation } })
+        body: JSON.stringify({ type: "annotation", data })
       }
     };
   }

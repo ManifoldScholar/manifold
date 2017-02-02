@@ -26,6 +26,14 @@ class Section extends Component {
     store: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      lockedSelection: null
+    }
+    this.lockSelection = this.lockSelection.bind(this);
+  }
+
   componentDidMount() {
     this.maybeScrollToAnchor(null, this.props.location.hash);
   }
@@ -34,13 +42,6 @@ class Section extends Component {
     this.maybeScrollToTop(prevProps.section, this.props.section);
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
-
-  // Deprecated, margins are controlled in CSS
-  // getMarginSize(sizeIndex) {
-  //   const baseSizes = [790, 680, 500];
-  //   const maxWidth = baseSizes[sizeIndex] + 'px';
-  //   return { maxWidth };
-  // }
 
   maybeScrollToTop(previousSection, thisSection) {
     if (previousSection.id === thisSection.id) return;
@@ -58,6 +59,16 @@ class Section extends Component {
         smoothScroll(position - 125);
       }, 0);
     }
+  }
+
+  lockSelection(raw) {
+    if (!raw) return this.setState({ lockedSelection: null });
+    const lockedSelection = {
+      id: "selection",
+      attributes: raw,
+      type: "annotations"
+    }
+    this.setState({ lockedSelection })
   }
 
   render() {
@@ -101,11 +112,14 @@ class Section extends Component {
         <div className={containerClass}>
           <div className={textSectionClass} >
             <Annotatable
+              projectId={this.props.text.relationships.project.id}
               sectionId={this.props.params.sectionId}
               createAnnotation={this.props.createAnnotation}
+              lockSelection={this.lockSelection}
             >
               <div ref={(b) => { this.body = b; }}>
                 <Body
+                  lockedSelection={this.state.lockedSelection}
                   annotations={this.props.annotations}
                   section={this.props.section}
                 />
