@@ -8,7 +8,8 @@ export default class DrawerWrapper extends PureComponent {
   static displayName = "Drawer.Wrapper";
 
   static propTypes = {
-    closeUrl: PropTypes.string.isRequired,
+    closeUrl: PropTypes.string,
+    closeCallback: PropTypes.func
   };
 
   constructor(props) {
@@ -25,9 +26,15 @@ export default class DrawerWrapper extends PureComponent {
       leaving: true
     });
 
-    setTimeout(() => {
-      browserHistory.push(this.props.closeUrl);
-    }, 200);
+    if (this.props.closeCallback) {
+      this.props.closeCallback(event)
+    }
+
+    if (this.props.closeUrl) {
+      setTimeout(() => {
+        browserHistory.push(this.props.closeUrl);
+      }, 200);
+    }
   }
 
   render() {

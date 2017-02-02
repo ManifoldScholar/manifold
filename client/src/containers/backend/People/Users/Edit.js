@@ -85,20 +85,7 @@ class UsersEditContainer extends PureComponent {
             <Dialog.Confirm {...this.state.confirmation} />
             : null
         }
-        <header>
-          {/*
-            Dialog/Drawers can use p.utility-primary or h*.heading-quaternary
-            shared elements for headers
-
-            Example:
-           <p className="utility-primary">
-             STEP 1 of 8 – basic information
-           </p>
-
-           <h2 className="heading-quaternary">
-             {`${attr.firstName} ${attr.lastName}`}
-           </h2>
-          */}
+        <header className="drawer-header">
           <h2 className="heading-quaternary">
             {`${attr.firstName} ${attr.lastName}`}
           </h2>

@@ -1,13 +1,17 @@
 import React, { Children, Component, PropTypes } from 'react';
 import has from 'lodash/has';
 import AnnotationPopup from './AnnotationPopup';
+import { Drawer, Dialog } from 'components/backend';
+import { Resource } from 'containers/reader';
 
 class Annotatable extends Component {
 
   static propTypes = {
     children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     createAnnotation: React.PropTypes.func,
-    sectionId: React.PropTypes.string
+    lockSelection: React.PropTypes.func,
+    sectionId: React.PropTypes.string,
+    projectId: React.PropTypes.string
   }
 
   constructor() {
@@ -18,26 +22,33 @@ class Annotatable extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.highlightSelection = this.highlightSelection.bind(this);
     this.annotateSelection = this.annotateSelection.bind(this);
+    this.startResourceSelection = this.startResourceSelection.bind(this);
+    this.endResourceSelection = this.endResourceSelection.bind(this);
     this.attachResourceToSelection = this.attachResourceToSelection.bind(this);
     this.shareSelection = this.shareSelection.bind(this);
     this.closestTextNode = this.closestTextNode.bind(this);
-    this.setDefaultState();
+
+    this.state = this.defaultState();
   }
 
   componentDidMount() {
-    this.annotatable.addEventListener('mousedown', this.startSelection, false);
+    document.addEventListener('mousedown', this.startSelection, false);
     document.addEventListener('keydown', this.handleKeyDown, false);
   }
 
   componentWillUnmount() {
-    this.annotatable.removeEventListener('mousedown', this.startSelection, false);
+    document.removeEventListener('mousedown', this.startSelection, false);
     document.removeEventListener('mouseup', this.updateSelection, false);
     document.removeEventListener('keydown', this.handleKeyDown, false);
   }
 
-  setDefaultState() {
-    this.state = {
-      selection: null
+  defaultState() {
+    return {
+      selection: null,
+      pseudoSelection: null,
+      resourceSelection: false,
+      selectionLocked: false,
+      selectionClickEvent: null
     };
   }
 
@@ -52,29 +63,49 @@ class Annotatable extends Component {
 
   // The native selection is read only, so we'll map it to a similar selection object
   // that we have more control over.
-  updateStateSelection(nativeSelection) {
-    let selection = null;
-    if (nativeSelection) {
-      selection = this.mapSelectionToState(nativeSelection);
-    }
-    if (this.compareSelections(selection, this.state.selection) === true) return;
-    this.setState({ selection });
+  updateStateSelection(nativeSelection, selectionClickEvent = null) {
+    // if there is no native selection and we're not in a locked start, clear it.
+    if (!nativeSelection && !this.state.selectionLocked) return this.clearSelection();
+    // if there's no native selection, return
+    if (!nativeSelection) return;
+    // does the native selection start and end in our document?
+    if (!this.annotatable.contains(nativeSelection.anchorNode)) return;
+    if (!this.annotatable.contains(nativeSelection.focusNode)) return;
+    // normalize the native selection
+    const selection = this.mapNativeSelectionToState(nativeSelection);
+    // if it changed, return
+    if (this.didSelectionChange(selection)) return;
+    // update the state
+    this.setState({ selection, selectionClickEvent });
+  }
+
+  didSelectionChange(selection) {
+    return this.compareSelections(selection, this.state.selection) === true
+  }
+
+  clearSelection() {
+    this.setState(this.defaultState());
   }
 
   // Maps the browser selection object to component state
-  mapSelectionToState(selection) {
+  mapNativeSelectionToState(nativeSelection) {
     return {
-      anchorNode: selection.anchorNode,
-      anchorOffset: selection.anchorOffset,
-      focusNode: selection.focusNode,
-      focusOffset: selection.focusOffset,
-      text: selection.toString(),
-      range: this.mapSelectionToRange(selection)
+      anchorNode: nativeSelection.anchorNode,
+      anchorOffset: nativeSelection.anchorOffset,
+      focusNode: nativeSelection.focusNode,
+      focusOffset: nativeSelection.focusOffset,
+      text: nativeSelection.toString(),
+      range: this.mapNativeSelectionToRange(nativeSelection)
     };
   }
 
+  // Maps the browser selection to a range object.
+  mapNativeSelectionToRange(selection) {
+    return selection.getRangeAt(0);
+  }
+
   // Maps selection to an annotation data structure
-  mapSelectionToAnnotation(selection, format) {
+  mapStateToAnnotation(selection, format) {
 
     const range = selection.range;
 
@@ -90,10 +121,23 @@ class Annotatable extends Component {
     const startChar = startRange.toString().length;
 
     // 4. Do the same for the end node
-    const endNode = this.closestTextNode(range.endContainer);
+    let endNode = this.closestTextNode(range.endContainer);
     const endRange = document.createRange();
-    endRange.setStart(endNode, 0);
-    endRange.setEnd(range.endContainer, range.endOffset);
+
+    // This bit of logic is to deal with shift-right selection that captures the beginning
+    // of the next node. When the end of the range is the next node, it won't be a text
+    // node or have a parent text node. Consequently, we'll need to descend into it to
+    // capture its first text node and end the range there.
+    if (endNode === null) {
+      endNode = startNode;
+      endRange.setStart(endNode, 0);
+      const endContainer = [...endNode.childNodes].find((node) => node.nodeType === 3);
+      endRange.setEnd(endContainer, endNode.textContent.length);
+    } else {
+      endRange.setStart(endNode, 0);
+      console.log(range.endContainer, range.endOffset);
+      endRange.setEnd(range.endContainer, range.endOffset);
+    }
     const endChar = endRange.toString().length;
 
     const annotation = {
@@ -105,11 +149,6 @@ class Annotatable extends Component {
       format
     };
     return annotation;
-  }
-
-  // Maps the browser selection to a range object.
-  mapSelectionToRange(selection) {
-    return selection.getRangeAt(0);
   }
 
   // Find the closest element tagged as a text node.
@@ -165,7 +204,7 @@ class Annotatable extends Component {
     // default handlers for the mouseup event have fired, and and selected text has been
     // deselected.
     setTimeout(() => {
-      this.updateStateSelection(this.validateSelection(window.getSelection()));
+      this.updateStateSelection(this.validateSelection(window.getSelection()), event);
     }, 0);
   }
 
@@ -174,50 +213,87 @@ class Annotatable extends Component {
     document.addEventListener('mouseup', this.updateSelection, false);
   }
 
-  annotateSelection(event) {
-    event.stopPropagation();
-    const annotation = this.mapSelectionToAnnotation(this.state.selection, 'annotation');
-    this.props.createAnnotation(this.props.sectionId, annotation);
+  clearNativeSelection() {
+    console.log('clearing native selection');
+    window.getSelection().removeAllRanges();
+  }
+
+  createAnnotation(type, resource = null) {
+    const annotation = this.mapStateToAnnotation(this.state.selection, type);
+    this.props.createAnnotation(this.props.sectionId, annotation, resource);
     setTimeout(() => {
       this.updateStateSelection(null);
-      window.getSelection().removeAllRanges();
+      this.clearNativeSelection();
     }, 0);
+  }
+
+  annotateSelection(event) {
+    event.stopPropagation();
+    this.createAnnotation('annotation');
   }
 
   highlightSelection(event) {
     event.stopPropagation();
-    const annotation = this.mapSelectionToAnnotation(this.state.selection, 'highlight');
-    this.props.createAnnotation(this.props.sectionId, annotation);
-    setTimeout(() => {
-      this.updateStateSelection(null);
-      window.getSelection().removeAllRanges();
-    }, 0);
+    this.createAnnotation('highlight');
   }
 
-  attachResourceToSelection(event) {
-    event.stopPropagation();
-    const annotation = this.mapSelectionToAnnotation(this.state.selection, 'resource');
-    console.log(annotation, 'a');
-    this.props.createAnnotation(this.props.sectionId, annotation);
-    setTimeout(() => {
-      this.updateStateSelection(null);
-      window.getSelection().removeAllRanges();
-    }, 0);
+  attachResourceToSelection(resource) {
+    console.log(resource, 'resource');
+    this.createAnnotation('resource', resource);
+    this.endResourceSelection();
+  }
+
+  lockSelection() {
+    this.setState({ selectionLocked: true }, () => {
+      this.clearNativeSelection();
+      this.props.lockSelection(this.mapStateToAnnotation(this.state.selection, 'selection'));
+    });
+  }
+
+  unlockSelection() {
+    this.setState({ selectionLocked: false }, () => {
+      this.props.lockSelection(null);
+    });
+  }
+
+  startResourceSelection(event) {
+    this.setState({ resourceSelection: true });
+    this.lockSelection();
+  }
+
+  endResourceSelection(event) {
+    this.setState({ resourceSelection: false });
+    this.unlockSelection()
   }
 
   shareSelection() {
-    // console.log(this.state.selection.text);
+    // TBD
   }
 
   render() {
     return (
       <div className="annotatable" ref={(a) => { this.annotatable = a; }}>
+        {this.state.resourceSelection ?
+          <Drawer.Wrapper
+            closeCallback={this.endResourceSelection}
+          >
+            <div style={{paddingTop: 50}}>
+                <Resource.Picker
+                  projectId={this.props.projectId}
+                  selectionHandler={this.attachResourceToSelection}
+                />
+            </div>
+          </Drawer.Wrapper>
+        : null}
+
         <AnnotationPopup
           share={this.shareSelection}
           highlight={this.highlightSelection}
           annotate={this.annotateSelection}
-          attachResource={this.attachResourceToSelection}
+          attachResource={this.startResourceSelection}
           selection={this.state.selection}
+          selectionClickEvent={this.state.selectionClickEvent}
+          selectionLocked={this.state.selectionLocked}
         />
         { this.props.children ? Children.only(this.props.children) : null }
       </div>

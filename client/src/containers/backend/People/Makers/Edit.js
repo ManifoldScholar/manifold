@@ -85,7 +85,7 @@ class MakersEditContainer extends PureComponent {
             <Dialog.Confirm {...this.state.confirmation} />
             : null
         }
-        <header>
+        <header className="drawer-header">
           <h2 className="heading-quaternary">
             {`${attr.firstName} ${attr.lastName}`}
           </h2>
