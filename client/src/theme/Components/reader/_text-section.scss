@@ -84,6 +84,19 @@
     font-size: 0.7em;
   }
 
+  // Link with resource marker cube
+  .resource-marker {
+    font-size: 0.85em;
+    color: $accentPrimary;
+    text-decoration: none;
+
+    i {
+      display: inline-block;
+      margin: -0.1em 0.15em 0;
+      vertical-align: middle;
+    }
+  }
+
   //h2 {
   //  @include chapterHeading;
   //

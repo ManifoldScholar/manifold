@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 export default class ResourceMarker extends Component {
 
@@ -9,11 +10,24 @@ export default class ResourceMarker extends Component {
 
   render() {
     return (
-      <span
-        className="manicon manicon-cube-shine"
-        data-resources={this.props.ids}
-        onClick={this.props.handleClick}
-      ></span>
+      <span>
+        {this.props.ids.map((id) => {
+          return (
+            <Link
+              key={id}
+              title={id}
+              data-resource={id}
+              to="#"
+              className="resource-marker"
+              onClick={this.props.handleClick}
+            >
+              <i
+                className="manicon manicon-cube"
+              ></i>
+            </Link>
+          )
+        })}
+      </span>
     );
   }
 }

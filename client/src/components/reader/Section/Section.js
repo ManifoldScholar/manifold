@@ -6,6 +6,7 @@ import Label from './Label';
 import Pagination from './Pagination';
 import Annotatable from '../Annotatable';
 import BodyNodes from './BodyNodes';
+import ResourceViewer from './ResourceViewer';
 import has from 'lodash/has';
 
 class Section extends Component {
@@ -13,6 +14,7 @@ class Section extends Component {
   static propTypes = {
     text: PropTypes.object,
     section: PropTypes.object,
+    resources: PropTypes.array,
     annotations: PropTypes.array,
     appearance: PropTypes.object,
     location: PropTypes.object,
@@ -33,11 +35,12 @@ class Section extends Component {
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
 
-  getMarginSize(sizeIndex) {
-    const baseSizes = [790, 680, 500];
-    const maxWidth = baseSizes[sizeIndex] + 'px';
-    return { maxWidth };
-  }
+  // Deprecated, margins are controlled in CSS
+  // getMarginSize(sizeIndex) {
+  //   const baseSizes = [790, 680, 500];
+  //   const maxWidth = baseSizes[sizeIndex] + 'px';
+  //   return { maxWidth };
+  // }
 
   maybeScrollToTop(previousSection, thisSection) {
     if (previousSection.id === thisSection.id) return;
@@ -79,22 +82,38 @@ class Section extends Component {
     // This maps to a numbered class with responsive font declarations
     textSectionClass = textSectionClass + ` font-size-${typography.fontSize.current}`;
 
+    // Apply a conditional container class that maps to a size in CSS
+    const containerClass = `container-focus container-width-${typography.margins.current}`;
+
     const section = this.props.section;
+
     return (
-        <section className={readerAppearanceClass}>
-          <div className="container-focus"
-            style={this.getMarginSize(typography.margins.current)}
-          >
-            <div className={textSectionClass}>
-              <Annotatable
-                sectionId={this.props.params.sectionId}
-                createAnnotation={this.props.createAnnotation}
-              >
-                <Body annotations={this.props.annotations} section={this.props.section} />
-              </Annotatable>
-            </div>
+      <section className={readerAppearanceClass}>
+        {this.props.resources ?
+          <ResourceViewer.Wrapper
+            resources={this.props.resources}
+            annotations={this.props.annotations}
+            containerSize={typography.margins.current}
+            body={this.body}
+          /> : null
+        }
+
+        <div className={containerClass}>
+          <div className={textSectionClass} >
+            <Annotatable
+              sectionId={this.props.params.sectionId}
+              createAnnotation={this.props.createAnnotation}
+            >
+              <div ref={(b) => { this.body = b; }}>
+                <Body
+                  annotations={this.props.annotations}
+                  section={this.props.section}
+                />
+              </div>
+            </Annotatable>
           </div>
-        </section>
+        </div>
+      </section>
     );
   }
 }

@@ -245,9 +245,9 @@
 
 // Header bump
 .reader main {
-  padding-top: 55px;
+  padding-top: $readerHeaderHeightMin;
 
   @include respond($break50) {
-    padding-top: 63px;
+    padding-top: $readerHeaderHeightMax;
   }
 }

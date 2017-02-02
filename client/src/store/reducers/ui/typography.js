@@ -9,7 +9,7 @@ export const initialState = {
   },
   margins: {
     current: 1,
-    max: 3,
+    max: 2,
     min: 0
   }
 };
