@@ -1,11 +1,18 @@
 # A resource is any asset our source document that is associated with a text.
 class Resource < ApplicationRecord
 
+  # Constants
+  TYPEAHEAD_ATTRIBUTES = [:title].freeze
+
+  # Search
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES
+
   # Authority
   include Authority::Abilities
 
   # Concerns
   include TrackedCreator
+  include Paginated
 
   # Associations
   belongs_to :project
@@ -26,16 +33,54 @@ class Resource < ApplicationRecord
 
   before_attachment_post_process :resize_images
 
-  def self.filtered(filters)
-    resources = Resource.all
-    return resources unless filters
-    if filters.key? :project
-      resources = resources.where(project: filters[:project])
+  # Scopes
+  scope :by_project, lambda { |project|
+    return all unless project.present?
+    where(project: project)
+  }
+
+  # Why is this here? --ZD
+  def self.call
+    all
+  end
+
+  def self.filter(params)
+    results = params.key?(:keyword) ? search(params) : query(params)
+    if exceeds_total_pages?(results)
+      params[:page] = results.total_pages
+      return filter(params)
     end
-    resources
+    results
   end
 
   def attachment_is_image?
+  # Used to filter records using DB fields
+  def self.query(params)
+    Resource.all
+            .order(:created_at, :title)
+            .by_project(params[:project])
+            .by_pagination(params[:page], params[:per_page])
+  end
+
+  # Used to filter records using elastic search index
+  def self.search(params)
+    query = params.dig(:keyword) || "*"
+    filter = Search::FilterScope.new
+                                .typeahead(params[:typeahead], TYPEAHEAD_ATTRIBUTES)
+                                .paginate(params[:page], params[:per_page])
+    Resource.lookup(query, filter)
+  end
+
+  def search_data
+    {
+      title: title,
+      project_id: project_id,
+      kind: kind,
+      caption: caption,
+      attachment_file_name: attachment_file_name
+    }
+  end
+
     config = Rails.application.config.x.api
     allowed = config[:attachments][:validations][:image][:allowed_mime]
     allowed.include?(attachment_content_type)
