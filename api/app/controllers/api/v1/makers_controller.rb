@@ -4,7 +4,8 @@ module Api
     class MakersController < ApplicationController
 
       resourceful! Maker, authorize_options: { except: [:index, :show] } do
-        Maker.filtered(maker_filter_params[:filter])
+        Maker
+          .filter(with_pagination!(maker_filter_params))
       end
 
       def index
@@ -21,13 +22,13 @@ module Api
       end
 
       def create
-        @maker = authorize_and_create_maker(maker_params)
+        @maker = ::Updaters::Maker.new(maker_params).update(Maker.new)
         render_single_resource @maker
       end
 
       def update
         @maker = load_and_authorize_maker
-        @maker.update(maker_params)
+        ::Updaters::Maker.new(maker_params).update(@maker)
         render_single_resource(@maker)
       end
 

@@ -38,6 +38,28 @@ RSpec.describe "Makers API", type: :request do
     end
   end
 
+  describe "updates a maker" do
+
+    let(:path) { api_v1_maker_path(maker) }
+
+    context "when the user is an admin" do
+
+      let(:headers) { admin_headers }
+
+      describe "the response" do
+        context "body" do
+          it("contains the updated first_name") { expect_updated_param("firstName", "john") }
+          it("contains the updated last_name") { expect_updated_param("lastName", "smith") }
+        end
+
+        it "has a 200 OK status code" do
+          patch path, headers: headers, params: json_payload()
+          expect(response).to have_http_status(200)
+        end
+      end
+    end
+  end
+
   describe "creates a maker" do
     let(:path) { api_v1_makers_path }
     let(:params) {

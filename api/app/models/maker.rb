@@ -1,8 +1,18 @@
 # A person or organization involved with the creation of a text
 class Maker < ApplicationRecord
 
+  # Constants
+  TYPEAHEAD_ATTRIBUTES = [:first_name, :last_name].freeze
+
   # Authority
   include Authority::Abilities
+
+  # Concerns
+  include Paginated
+  include Filterable
+
+  # Search
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES
 
   # Associations
   has_many :collaborators
@@ -23,11 +33,19 @@ class Maker < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  def self.filtered(filters)
-    makers = Maker.all
-    return makers unless filters && filters.key?(:name)
-    name_query = "(makers.first_name || ' ' || makers.last_name) ILIKE ?"
-    makers.where(name_query, "#{filters[:name]}%")
+  # Used to filter records using DB fields
+  def self.query(params)
+    Maker.all
+         .by_pagination(params[:page], params[:per_page])
+  end
+
+  # Used to filter records using elastic search index
+  def self.search(params)
+    query = params.dig(:keyword) || "*"
+    filter = Search::FilterScope.new
+                                .typeahead(params[:typeahead], TYPEAHEAD_ATTRIBUTES)
+                                .paginate(params[:page], params[:per_page])
+    Maker.lookup(query, filter)
   end
 
   def self.parse_name(name)
