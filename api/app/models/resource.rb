@@ -19,14 +19,22 @@ class Resource < ApplicationRecord
   has_many :collection_resources, dependent: :destroy
   has_many :collections, through: :collection_resources
 
+  # Constants
+  ATTACHMENT_STYLES = {
+    small: ["205x198"],
+    small_landscape: ["205x198#"],
+    small_portrait: ["205x215#"],
+    medium: ["410x396"],
+    medium_landscape: ["410x396#"],
+    medium_portrait: ["410x430#"]
+  }.freeze
+
   # Attachment Validation
   has_attached_file :attachment,
                     include_updated_timestamp: false,
                     default_url: "",
                     url: "/system/resource/:uuid_partition/:id/:style_:filename",
-                    styles: {
-                      thumbnail: ["200x150#"]
-                    }
+                    styles: ATTACHMENT_STYLES
   validation = Rails.application.config.x.api[:attachments][:validations][:resource]
   validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
   validates_attachment_file_name :attachment, matches: validation[:allowed_ext]
@@ -53,7 +61,6 @@ class Resource < ApplicationRecord
     results
   end
 
-  def attachment_is_image?
   # Used to filter records using DB fields
   def self.query(params)
     Resource.all
@@ -81,14 +88,35 @@ class Resource < ApplicationRecord
     }
   end
 
+  def patterns
     config = Rails.application.config.x.api
     allowed = config[:attachments][:validations][:image][:allowed_mime]
-    allowed.include?(attachment_content_type)
+    patterns = Regexp.union(allowed)
+    patterns
+  end
+
+  def attachment_is_image?
+    return false unless attachment.present?
+    !attachment_content_type.match(allowed_mimes_for(:image)).nil?
+  end
+
+  def allowed_mimes_for(type)
+    config = Rails.application.config.x.api
+    Regexp.union(config[:attachments][:validations][type][:allowed_mime])
   end
 
   def attachment_url
     return nil unless attachment.present?
     ENV["API_URL"] + attachment.url
+  end
+
+  def attachment_thumbnails
+    is_image = attachment_is_image?
+    styles = ATTACHMENT_STYLES.keys.map do |style|
+      value = is_image ? "#{ENV['API_URL']}#{attachment.url(style)}" : nil
+      [style, value]
+    end
+    Hash[styles]
   end
 
   def resize_images
