@@ -33,7 +33,7 @@ export default class TextNode extends Component {
   }
 
   handleResourceClick(ids) {
-    console.log(ids, "You clicked on an icon that represents these resource IDs");
+    console.log(ids, "You clicked on an icon that represents this ID");
   }
 
   annotatedContent() {
@@ -120,7 +120,7 @@ export default class TextNode extends Component {
           { endingResources.length > 0 ?
             <ResourceMarker
               ids={resourceIds}
-              handleClick={() => { this.handleResourceClick(resourceIds); }}
+              handleClick={(event) => { event.preventDefault(); this.handleResourceClick(resourceIds); }}
             />
           : null}
         </span>
