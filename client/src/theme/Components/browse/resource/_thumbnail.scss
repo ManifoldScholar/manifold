@@ -82,6 +82,55 @@
     }
   }
 
+  &.minimal {
+    background: transparent;
+
+    &:hover {
+      .resource-icon svg {
+        fill: $accentPrimary;
+      }
+
+      .resource-title {
+        color: $accentPrimary;
+      }
+    }
+
+    .resource-image {
+      width: auto;
+      max-height: 45px;
+    }
+
+    .resource-icon {
+      max-width: 45px;
+      padding: 0 0 8px;
+      color: $neutral50;
+
+      &.document, &.interactive, &.link, &.pdf {
+        max-width: 30px;
+      }
+    }
+
+    .wrapper {
+      padding: 0;
+    }
+
+    .resource-title {
+      @include templateHead;
+      font-size: 16px;
+      font-weight: $light;
+      line-height: 1.1875;
+      color: $neutral50;
+    }
+  }
+
+  &.right {
+    text-align: right;
+
+    .resource-icon {
+      display: inline-block;
+    }
+  }
+
   .wrapper {
     position: relative;
     display: flex;
@@ -116,6 +165,7 @@
       width: 100%;
       height: auto;
       fill: $neutral70;
+      transition: fill $duration $timing;
     }
   }
 }
