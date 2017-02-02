@@ -12,6 +12,12 @@ export default class DetailHeader extends PureComponent {
     subtitle: PropTypes.string
   };
 
+  typeToManiconClass(type) {
+    let segment = `${type}-placeholder`;
+    if (type === "resource") segment = 'cube-shine';
+    return `manicon-${segment}`;
+  }
+
   render() {
     const breadcrumb = this.props.breadcrumb;
     return (
@@ -23,7 +29,7 @@ export default class DetailHeader extends PureComponent {
         <div className="container flush">
           <header className="project-header">
             <figure>
-              <i className={`manicon manicon-${this.props.type}-placeholder`}></i>
+              <i className={`manicon ${this.typeToManiconClass(this.props.type)}`}></i>
             </figure>
             <div className="project-title">
               <h1>

@@ -6,10 +6,11 @@ import { entityUtils } from 'utils';
 import usersAPI from 'api/users';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
+import { User, List } from 'components/backend';
 
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
-const perPage = 20;
+const perPage = 10;
 
 class UsersListContainer extends PureComponent {
 
@@ -82,6 +83,9 @@ class UsersListContainer extends PureComponent {
 
   render() {
     if (!this.props.users) return null;
+    const { children, users, usersMeta, currentUserId } = this.props;
+    const active = this.props.params.id;
+
     return (
       <div>
         <header className="section-heading-secondary">
@@ -89,16 +93,19 @@ class UsersListContainer extends PureComponent {
             {'Users'} <i className="manicon manicon-users"></i>
           </h3>
         </header>
-        { this.props.children }
-        { this.props.users ?
-          <UserList.SearchableList
-            users={this.props.users}
-            active={this.props.params.id}
-            filterChangeHandler={this.filterChangeHandler}
+        { children }
+        { users ?
+          <List.Searchable
+            entities={users}
+            singularUnit="user"
+            pluralUnit="users"
+            pagination={usersMeta.pagination}
             paginationClickHandler={this.usersPageChangeHandlerCreator}
-            pagination={this.props.usersMeta.pagination}
-            currentUserId={this.props.currentUserId}
-          /> : null
+            entityComponent={User.ListItem}
+            entityComponentProps={{ currentUserId, active }}
+            filterChangeHandler={this.filterChangeHandler}
+          />
+          : null
         }
       </div>
     );

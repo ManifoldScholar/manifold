@@ -58,19 +58,27 @@ export default () => {
             <Route component={Backend.ProjectDetail.Category.New} path="category/new" />
             <Route component={Backend.ProjectDetail.Category.Edit} path="category/:catId/edit" />
           </Route>
+          <Route component={Backend.ProjectDetail.Resources} path="resources" />
+
           <Route component={Backend.ProjectDetail.Collaborators} path="collaborators" />
           <Route component={Backend.ProjectDetail.Metadata} path="metadata" />
         </Route>
-        <Route component={Backend.Users.Wrapper} path="users" >
-          <IndexRoute component={Backend.Users.List} />
-          <Route component={Backend.Users.List} >
-            <Route component={Backend.Users.Edit} path=":id" />
+        <Route component={Backend.People.Wrapper} path="people" >
+          <IndexRoute component={Backend.People.Users.List} />
+          <Route component={Backend.People.Users.List} path="users" >
+            <Route component={Backend.People.Users.Edit} path=":id" />
+          </Route>
+          <Route component={Backend.People.Makers.List} path="makers" >
+            <Route component={Backend.People.Makers.Edit} path=":id" />
           </Route>
         </Route>
         <Route component={Backend.TextDetail.Wrapper} path="text/:id" >
           <IndexRoute component={Backend.TextDetail.General} />
           <Route component={Backend.TextDetail.Collaborators} path="collaborators" />
           <Route component={Backend.TextDetail.Metadata} path="metadata" />
+        </Route>
+        <Route component={Backend.ResourceDetail.Wrapper} path="resource/:id" >
+          <IndexRoute component={Backend.ResourceDetail.General} />
         </Route>
         <Route component={Backend.Settings.Wrapper} path="settings" >
           <IndexRoute component={Backend.Settings.General} />

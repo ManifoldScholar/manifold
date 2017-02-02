@@ -74,7 +74,7 @@ RSpec.describe "Projects API", type: :request do
       describe "the response" do
         context "body" do
           it("contains the updated title") { expect_updated_param("title", "a title") }
-          it("contains the updated title") { expect_updated_param("metadata", metadata) }
+          it("contains the updated metadata") { expect_updated_param("metadata", metadata) }
           it("contains the updated subtitle") { expect_updated_param("subtitle", "a subtitle") }
           it("contains the updated featured boolean value") { expect_updated_param("featured", "true", true ) }
           it("contains the updated hashtag") { expect_updated_param("hashtag", "the_hashtag" ) }

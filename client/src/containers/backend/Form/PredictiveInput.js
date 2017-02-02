@@ -60,7 +60,7 @@ class PredictiveInput extends PureComponent {
       this.setState(state);
       return;
     }
-    const { endpoint, method, options } = fetch({ name: value });
+    const { endpoint, method, options } = fetch({ keyword: value, typeahead: true });
     options.authToken = this.props.authToken;
     const client = new ApiClient;
     client.call(endpoint, method, options).then((results) => {

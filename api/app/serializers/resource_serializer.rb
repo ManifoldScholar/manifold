@@ -13,6 +13,6 @@ class ResourceSerializer < ResourcePartialSerializer
              :translation_file_size, :translation_updated_at
 
   has_many :collections
-  belongs_to :project
+  belongs_to :project, serializer: ProjectPartialSerializer
 
 end

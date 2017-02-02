@@ -10,9 +10,9 @@ import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import { browserHistory } from 'react-router';
 
-class UserEditContainer extends PureComponent {
+class UsersEditContainer extends PureComponent {
 
-  static displayName = "User.Edit"
+  static displayName = "Users.Edit"
 
   static mapStateToProps(state, ownProps) {
     return {
@@ -59,7 +59,7 @@ class UserEditContainer extends PureComponent {
     const options = { removes: user };
     const userRequest = request(call, 'backend-destroy-user', options);
     this.props.dispatch(userRequest).promise.then(() => {
-      browserHistory.push('/backend/users');
+      browserHistory.push('/backend/people/users');
     });
   }
 
@@ -78,7 +78,7 @@ class UserEditContainer extends PureComponent {
     */
     return (
       <Drawer.Wrapper
-        closeUrl="/backend/users"
+        closeUrl="/backend/people/users"
       >
         {
           this.state.confirmation ?
@@ -151,5 +151,5 @@ class UserEditContainer extends PureComponent {
 }
 
 export default connect(
-  UserEditContainer.mapStateToProps
-)(UserEditContainer);
+  UsersEditContainer.mapStateToProps
+)(UsersEditContainer);
