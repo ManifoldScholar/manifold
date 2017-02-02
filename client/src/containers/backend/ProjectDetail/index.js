@@ -4,6 +4,7 @@ import Collaborators from './Collaborators';
 import Texts from './Texts';
 import Category from './Category';
 import Metadata from './Metadata';
+import Resources from './Resources';
 
 export default {
   Wrapper,
@@ -11,5 +12,6 @@ export default {
   Collaborators,
   Texts,
   Category,
-  Metadata
+  Metadata,
+  Resources
 };

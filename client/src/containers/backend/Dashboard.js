@@ -1,7 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
-import { ProjectList, Dashboard as DashboardComponents } from 'components/backend';
+import { List, Project, Dashboard as DashboardComponents } from 'components/backend';
 import { Link } from 'react-router';
 import { entityUtils } from 'utils';
 import projectsAPI from 'api/projects';
@@ -81,13 +81,18 @@ class DashboardContainer extends PureComponent {
                   </h3>
                 </header>
                 { this.props.projects && this.props.projectsMeta ?
-                  <ProjectList.SearchableList
-                    projects={this.props.projects}
-                    filterChangeHandler={this.filterChangeHandler}
-                    paginationClickHandler={this.updateHandlerCreator}
+                  <List.Searchable
+                    entities={this.props.projects}
+                    singularUnit="project"
+                    pluralUnit="projects"
                     pagination={this.props.projectsMeta.pagination}
-                  /> : null
+                    paginationClickHandler={this.updateHandlerCreator}
+                    entityComponent={Project.ListItem}
+                    filterChangeHandler={this.filterChangeHandler}
+                  />
+                  : null
                 }
+
               </div>
 
               <div className="right">

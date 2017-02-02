@@ -3,26 +3,30 @@ import { Utility, Project as globalProject } from 'components/global';
 import { Link } from 'react-router';
 import get from 'lodash/get';
 
-export default class SearchableList extends PureComponent {
+export default class ListSearchable extends PureComponent {
 
-  static displayName = "ProjectList.SearchableList";
+  static displayName = "List.Searchable";
 
   static propTypes = {
-    projects: PropTypes.array,
+    entities: PropTypes.array,
+    singularLabel: PropTypes.string,
+    pluralLabel: PropTypes.string,
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func
   };
+
+  static defaultProps = {
+    entityComponentProps: {}
+  }
 
   constructor() {
     super();
 
     this.state = this.initialState();
-
     this.setKeyword = this.setKeyword.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
-    this.renderProjectsList = this.renderProjectsList.bind(this);
-    this.renderProject = this.renderProject.bind(this);
-    this.renderProjectMakers = this.renderProjectMakers.bind(this);
+    this.renderEntityList = this.renderEntityList.bind(this);
+    this.renderEntity = this.renderEntity.bind(this);
   }
 
   initialState() {
@@ -56,66 +60,30 @@ export default class SearchableList extends PureComponent {
     this.setState({ inputs: { keyword }, filter });
   }
 
-  renderProjectMakers(makers) {
-    let output = null;
-    if (makers && makers.length > 0) {
-      output = (
-        <div className="relations-list">
-          {makers.map((maker, i) => {
-            let nameList = maker.attributes.fullName;
-            if (i > 0) nameList = ', ' + nameList;
-            return nameList;
-          })}
-        </div>
-      );
-    }
-
-    return output;
+  renderEntity(entity) {
+    const props = Object.assign({}, this.props.entityComponentProps);
+    props.key = entity.id;
+    props.entity = entity;
+    return React.createElement(this.props.entityComponent, props);
   }
 
-  renderProject(project) {
-    const attr = project.attributes;
+  renderEntityList() {
+    const entities = this.props.entities;
+    if (!entities) return;
 
-    return (
-      <li key={project.id}>
-        <Link to={`/backend/project/${project.id}`}>
-          <header>
-            <figure className="cover">
-              {attr.coverUrl ? (<img src={attr.coverUrl} />) : <globalProject.Placeholder/>}
-            </figure>
-            <div className="meta">
-              <h3 className="name">
-                {attr.title}
-                  <span className="subtitle">
-                    {attr.subtitle}
-                  </span>
-              </h3>
-              {this.renderProjectMakers(project.relationships.creators)}
-            </div>
-          </header>
-          <span className="label">
-            Edit
-          </span>
-        </Link>
-      </li>
-    );
-  }
-
-  renderProjectsList() {
-    const projects = this.props.projects;
     let output = null;
 
-    if (projects.length > 0) {
+    if (entities.length > 0) {
       output = (
         <div>
           <Utility.EntityCount
             pagination={this.props.pagination}
-            singularUnit="project"
-            pluralUnit="projects"
+            singularUnit={this.props.singularUnit}
+            pluralUnit={this.props.pluralUnit}
           />
           <ul>
-            {projects.map((project) => {
-              return this.renderProject(project);
+            {entities.map((entity) => {
+              return this.renderEntity(entity);
             })}
           </ul>
         </div>
@@ -153,7 +121,7 @@ export default class SearchableList extends PureComponent {
           </button>
         </form>
         <nav className="vertical-list-primary">
-          {this.renderProjectsList()}
+          {this.renderEntityList()}
         </nav>
         <Utility.Pagination
           pagination={this.props.pagination}

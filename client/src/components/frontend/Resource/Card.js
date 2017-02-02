@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
 import classNames from 'classnames';
 import FormattedDate from 'components/global/FormattedDate';
+import { Resource } from 'components/frontend';
 
 export default class ResourceCard extends Component {
 
@@ -191,25 +192,16 @@ export default class ResourceCard extends Component {
       hover: this.state.infoHover
     });
 
-    let linkStyle = {};
-    if (attr.attachmentThumbnailUrl) {
-      linkStyle = {
-        backgroundImage: `url('${attr.attachmentThumbnailUrl}')`
-      };
-    }
 
     return (
       <li className="resource-card">
         <Link
           to={this.detailUrl()}
-          className={linkClass} style={linkStyle}
+          className="resource-link"
         >
-          <figure className="resource-type">
-            <figcaption>
-              {this.getResourceType(attr.kind)}
-            </figcaption>
-            <i className={`manicon manicon-resource-${attr.kind}`}></i>
-          </figure>
+          <Resource.Thumbnail
+            resource={resource}
+          />
           <div onClick={this.handlePreviewClick} className="preview-text">
             {this.getPreviewText(attr.kind)}
           </div>

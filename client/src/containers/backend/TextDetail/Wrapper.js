@@ -9,7 +9,7 @@ import get from 'lodash/get';
 const { select } = entityUtils;
 const { request, flush, requests } = entityStoreActions;
 
-class TexDetailWrapperContainer extends PureComponent {
+class TextDetailWrapperContainer extends PureComponent {
 
   static displayName = "TextDetail.Wrapper";
 
@@ -117,6 +117,6 @@ class TexDetailWrapperContainer extends PureComponent {
 }
 
 export default connect(
-  TexDetailWrapperContainer.mapStateToProps
-)(TexDetailWrapperContainer);
+  TextDetailWrapperContainer.mapStateToProps
+)(TextDetailWrapperContainer);
 

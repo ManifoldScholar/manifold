@@ -1,22 +1,11 @@
 import typographyReducer from '../typography';
+import { initialState } from '../typography';
 
 describe('store/reducers/ui/typography', () => {
   it('should return the initial state', () => {
-    const state = typographyReducer(undefined, { type: 'SOME_ACTION'});
+    const state = typographyReducer(undefined, {type: 'SOME_ACTION'});
     // Must mirror initial state declared in '../typography'
-    expect(state).toEqual({
-      font: 'serif',
-      fontSize: {
-        current: 3,
-        max: 5,
-        min: 0
-      },
-      margins: {
-        current: 1,
-        max: 3,
-        min: 0
-      }
-    });
+    expect(state).toEqual(initialState);
   });
 });
 

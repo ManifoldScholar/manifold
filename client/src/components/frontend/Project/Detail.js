@@ -227,12 +227,17 @@ class Detail extends Component {
 
   render() {
     if (!this.props.project) return null;
+
+    // {this.renderCollectionsOrResources()}
+
     return (
       <div>
         <Project.Hero project={this.props.project} />
         {this.renderActivity()}
         {this.renderTexts()}
-        {this.renderCollectionsOrResources()}
+
+        {this.renderCollections()}
+        {this.renderResources()}
         {this.renderMeta()}
         {this.renderNavButtons()}
       </div>
