@@ -19,6 +19,7 @@ module Ingestor
         transform_text_sections!(text)
         validate_text(text)
         attempt_save!(text)
+        destroy_tmp
       end
 
       # rubocop:disable Metrics/AbcSize
@@ -254,6 +255,13 @@ module Ingestor
         text.description = description_inspector.description
         debug "services.ingestor.strategy.log.set_desc",
               desc: text.description.truncate(40)
+      end
+
+      def destroy_tmp
+        false unless @inspector
+        false unless @inspector.respond_to? :remove_tmp
+        @inspector.remove_tmp
+        @logger.debug("Removed temporary directory")
       end
 
     end
