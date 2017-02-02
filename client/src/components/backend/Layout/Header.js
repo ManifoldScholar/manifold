@@ -53,9 +53,9 @@ export default class LayoutHeader extends Component {
                     {'Projects'}
                   </Link>
                 </li>
-                <li className={this.classesFor('users')} >
-                  <Link to={`/backend/users/`}>
-                    {'Users'}
+                <li className={this.classesFor('people')} >
+                  <Link to={`/backend/people/`}>
+                    {'People'}
                   </Link>
                 </li>
                 <li className={this.classesFor('settings')} >

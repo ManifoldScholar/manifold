@@ -1,7 +1,7 @@
 .resource-card {
   display: flex;
 
-  .thumbnail {
+  .resource-link {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -30,111 +30,6 @@
         color: $neutralWhite;
         background-color: $accentPrimary;
       }
-    }
-
-    &.bg-image {
-      position: relative;
-
-      &::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: transparentize($neutralBlack, 0.5);
-        content: '';
-      }
-
-      .resource-type figcaption, .resource-type i {
-        color: $neutralWhite;
-      }
-    }
-
-    .resource-type {
-      @include utilityPrimary;
-      position: relative; // Required to rise above overlay
-      padding-top: 18px;
-      padding-bottom: 18px;
-      font-size: 13px;
-
-      @include respond($break85) {
-        padding-top: 32px;
-        padding-bottom: 15px;
-        font-size: 16px;
-      }
-
-      figcaption {
-        font-size: 13px;
-        color: $neutral50;
-
-        @include respond($break75) {
-          display: block;
-        }
-
-        @include respond($break85) {
-          font-size: 15px;
-        }
-      }
-
-      i {
-        display: flex;
-        height: auto;
-        margin-top: 16px;
-        color: $neutral70;
-
-        @include respond($break75) {
-          height: 70px;
-        }
-
-        @include respond($break85) {
-          height: 85px;
-        }
-
-        &::before {
-          margin: auto;
-        }
-      }
-    }
-
-    // Sized relative to parent size for bulk resizing
-    .manicon-resource-audio {
-      font-size: 2.25em;
-    }
-
-    .manicon-resource-document {
-      font-size: 3.313em;
-    }
-
-    .manicon-resource-file {
-      font-size: 3.563em;
-    }
-
-    .manicon-resource-image {
-      font-size: 2.5em;
-    }
-
-    .manicon-resource-interactive {
-      font-size: 3.375em;
-    }
-
-    .manicon-resource-link {
-      font-size: 3.063em;
-    }
-
-    .manicon-resource-pdf {
-      font-size: 3.313em;
-    }
-
-    .manicon-resource-presentation {
-      font-size: 2.875em;
-    }
-
-    .manicon-resource-spreadsheet {
-      font-size: 2.5em;
-    }
-
-    .manicon-resource-video {
-      font-size: 2.813em;
     }
 
     .preview-text {
