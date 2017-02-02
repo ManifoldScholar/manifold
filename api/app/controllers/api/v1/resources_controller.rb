@@ -3,11 +3,11 @@ module Api
     # resources controller
     class ResourcesController < ApplicationController
 
+      INCLUDES = [:project].freeze
+
       resourceful! Resource, authorize_options: { except: [:index, :show] } do
         Resource
-          .filtered(resource_filter_params[:filter])
-          .page(page_number)
-          .per(page_size)
+          .filter(with_pagination!(resource_filter_params))
       end
 
       def index
@@ -20,7 +20,7 @@ module Api
 
       def show
         @resource = load_zresource
-        render_single_resource(@resource)
+        render_single_resource(@resource, include: INCLUDES)
       end
 
       def create
@@ -30,8 +30,8 @@ module Api
 
       def update
         @resource = load_and_authorize_zresource
-        ::ProjectPresenter.new(resource_params).update(@resource)
-        render_single_resource(@resource)
+        ::Updaters::Resource.new(resource_params).update(@resource)
+        render_single_resource(@resource, include: INCLUDES)
       end
 
       def destroy

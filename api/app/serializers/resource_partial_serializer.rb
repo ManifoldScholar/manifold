@@ -1,4 +1,5 @@
 # Provides a serialization of a resource model.
 class ResourcePartialSerializer < ActiveModel::Serializer
-  attributes :title, :kind, :caption, :alt_text, :attachment_url
+  attributes :title, :kind, :caption, :alt_text, :attachment_url,
+             :attachment_thumbnails
 end
