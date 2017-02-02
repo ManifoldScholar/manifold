@@ -13,6 +13,7 @@ class Project < ApplicationRecord
   include MoneyAttributes
   include TruthyChecks
   include Paginated
+  include Filterable
 
   # Magic
   merge_hash_attributes! :metadata
@@ -100,15 +101,6 @@ class Project < ApplicationRecord
   # Why is this here? --ZD
   def self.call
     all
-  end
-
-  def self.filter(params)
-    results = params.key?(:keyword) ? search(params) : query(params)
-    if exceeds_total_pages?(results)
-      params[:page] = results.total_pages
-      return filter(params)
-    end
-    results
   end
 
   # Used to filter records using DB fields
