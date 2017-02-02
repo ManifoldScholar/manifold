@@ -1,0 +1,121 @@
+// Any kind of resource thumbnail can use this component class
+// Use wrapper list classes to affect external position, width, etc, but not appearance.
+.resource-thumbnail {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: $neutral70;
+  text-align: center;
+  background-color: $neutral10;
+
+  &:hover {
+    .resource-title {
+      color: $accentPrimary;
+    }
+  }
+
+  &.bg-image {
+    color: $neutralWhite;
+    background-position: 0 0;
+    background-size: cover;
+
+    &::before {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: transparentize($neutralOffBlack, 0.3);
+      content: '';
+    }
+
+    .resource-icon {
+      svg {
+        fill: $neutralWhite;
+      }
+    }
+  }
+
+  &.title {
+    .wrapper {
+      padding: 11% 7.6%;
+    }
+
+    .resource-type {
+      font-size: 12px;
+    }
+
+    .resource-icon {
+      width: 27%;
+      padding: 14px 0 17px;
+
+      &.document, &.interactive, &.link, &.pdf {
+        max-width: 19%;
+      }
+    }
+  }
+
+  &.icon-only {
+    background-color: transparent;
+
+    &.bg-image {
+      &::before {
+        display: none;
+      }
+
+      .resource-icon {
+        display: none;
+      }
+
+      .wrapper {
+        padding: 0;
+        padding-top: 105%;
+      }
+    }
+
+    .resource-icon {
+      width: 100%;
+      padding: 0;
+
+      &.document, &.interactive, &.link, &.pdf {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 22% 0 27.75%;
+  }
+
+  .resource-type {
+    @include templateHead;
+    font-size: 14px;
+  }
+
+  .resource-title {
+    @include templateHead;
+    margin: 0;
+    font-size: 14px;
+    transition: color $duration $timing;
+  }
+
+  .resource-icon {
+    display: block;
+    width: 36%;
+    padding: 18px 0 0;
+    margin: 0 auto;
+
+    &.document, &.interactive, &.link, &.pdf {
+      max-width: 25%;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      fill: $neutral70;
+    }
+  }
+}

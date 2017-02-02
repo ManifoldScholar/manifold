@@ -113,6 +113,8 @@ export default class UtilityPagination extends PureComponent {
   }
 
   render() {
+    if (!this.props.pagination) return null;
+
     const pages = this.visiblePageArray(this.props.pagination);
     const pagination = this.props.pagination;
     if (pagination.totalPages === 1) return null;

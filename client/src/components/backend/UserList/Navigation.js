@@ -17,7 +17,7 @@ export default class UserListNavigation extends Component {
         <ul>
           <li>
             <Link
-              to="#"
+              to="/backend/people"
               className={active === 'users' ? 'active' : ''}
             >
               {'Users'}
@@ -25,10 +25,10 @@ export default class UserListNavigation extends Component {
           </li>
           <li>
             <Link
-              to="#"
-              className={active === 'roles' ? 'active' : ''}
+              to="/backend/people/makers"
+              className={active === 'makers' ? 'active' : ''}
             >
-              {'Roles'}
+              {'Makers'}
             </Link>
           </li>
         </ul>

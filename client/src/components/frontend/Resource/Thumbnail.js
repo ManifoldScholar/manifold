@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import get from 'lodash/get';
+import Icon from './Icon';
 
 export default class ResourceThumbnail extends Component {
 
@@ -9,51 +11,88 @@ export default class ResourceThumbnail extends Component {
   static propTypes = {
     projectId: PropTypes.string,
     resource: PropTypes.object,
-    isList: PropTypes.bool
+    isList: PropTypes.bool,
+    showKind: PropTypes.bool,
+    showTitle: PropTypes.bool,
+    variant: PropTypes.string,
+    additionalClasses: PropTypes.string,
   };
 
   static defaultProps = {
-    isList: true
+    showKind: true,
+    showTitle: false,
+    isList: true,
+    variant: "smallPortrait",
+    additionalClasses: ""
   };
+
+  constructor() {
+    super();
+    this.icons = {
+      audio: Icon.Audio,
+      document: Icon.Document,
+      file: Icon.File,
+      image: Icon.Image,
+      interactive: Icon.Interactive,
+      link: Icon.Link,
+      pdf: Icon.Pdf,
+      presentation: Icon.Presentation,
+      spreadsheet: Icon.Spreadsheet,
+      video: Icon.Video
+    };
+  }
 
   getResourceKind(kind) {
     if (!kind) return "file";
     return kind.toLowerCase().charAt(0).toUpperCase() + kind.slice(1);
   }
 
+  getImage(resource) {
+    return get(resource, `attributes.attachmentThumbnails.${this.props.variant}`);
+  }
+
+  hasImage(resource) {
+    return !!this.getImage(resource);
+  }
+
   render() {
 
-    const resource = this.props.resource;
+    const { resource } = this.props;
+    const hasImage = this.hasImage(resource);
 
-    const linkClass = classNames({
-      'bg-image': resource.attributes.attachmentThumbnailUrl
+    const wrapperClass = classNames({
+      'resource-thumbnail': true,
+      'bg-image': hasImage,
+      title: this.props.showTitle
     });
 
-    let linkStyle = {};
-    if (resource.attributes.attachmentUrl) {
-      linkStyle = {
-        backgroundImage: `url('${resource.attributes.attachmentThumbnailUrl}')`
-      };
-    }
+    const backgroundImage = hasImage ? `url(${this.getImage(resource)})` : null;
+    const ResourceIcon = this.icons[resource.attributes.kind];
 
-    const ContainerTag = this.props.isList ? 'li' : 'div';
     return (
-      <li>
-        <Link
-          to={`/browse/project/${this.props.projectId}/resource/${resource.id}`}
-          className={linkClass} style={linkStyle}
-        >
+      <div
+        className={`${wrapperClass} ${this.props.additionalClasses}`}
+        style={{ backgroundImage }}
+      >
+        <div className="wrapper">
           <figure className="resource-type">
-            <figcaption>
-              {this.getResourceKind(resource.attributes.kind)}
-            </figcaption>
-            <i className={`manicon manicon-resource-${resource.attributes.kind}`}></i>
+            { this.props.showKind ?
+              <figcaption>
+                {this.getResourceKind(resource.attributes.kind)}
+              </figcaption>
+              : null }
+            <i className={`resource-icon + ${resource.attributes.kind}`}>
+              {ResourceIcon ? <ResourceIcon/> : null}
+            </i>
           </figure>
-          <h4 className="resource-title">
-            {resource.attributes.title}
-          </h4>
-        </Link>
-      </li>
+          { this.props.showTitle ?
+            <h4 className="resource-title">
+              {resource.attributes.title}
+            </h4>
+          : null }
+        </div>
+      </div>
+
     );
 
   }

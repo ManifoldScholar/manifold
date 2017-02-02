@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import mapValues from 'lodash/mapValues';
 
-const initialState = {
+export const initialState = {
   loginOverlay: false,
   userMenu: false,
   tocDrawer: false,
