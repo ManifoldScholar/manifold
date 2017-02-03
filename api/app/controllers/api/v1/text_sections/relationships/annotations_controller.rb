@@ -7,32 +7,44 @@ module Api
           before_action :set_annotation, only: [:show, :update, :destroy]
           before_action :set_text_section, only: [:create, :index]
 
+          resourceful! Annotation do
+            @text_section.annotations
+          end
+
           def index
             render json: @text_section.annotations
           end
 
-          # rubocop:disable Metrics/AbcSize
           def create
-            attributes = attributes_from(annotation_params)
-            @annotation = @text_section.annotations.new(attributes)
-
-            # TODO: remove this. It's only here for stubbing resource annotations.
-            if @annotation.resource?
-              @annotation.resource =
-                @annotation.project.resources.order("RANDOM()").limit(1).first
-            end
-
+            adjusted_params = annotation_params
+            @annotation = ::Updaters::Default
+                            .new(annotation_params)
+                            .update_without_save(@text_section.annotations.new)
             @annotation.creator = @current_user
-            if @annotation.save
-              location = api_v1_text_section_relationships_annotations_url(@annotation)
-              render json: @annotation, status: :created,
-                     location: location
-            else
-              render json: @annotation.errors.as_json(full_messages: true),
-                     status: :unprocessable_entity
-            end
+            @annotation.save
+            location = api_v1_text_section_relationships_annotations_url(@annotation)
+            render_single_resource @annotation, location: location
           end
-          # rubocop:enableMetrics/AbcSize
+
+
+          # # rubocop:disable Metrics/AbcSize
+          # def create
+          #
+          #
+          #   attributes = attributes_from(annotation_params)
+          #   @annotation = @text_section.annotations.new(attributes)
+          #   authorize_action_for @annotation
+          #   @annotation.creator = @current_user
+          #   if @annotation.save
+          #     location = api_v1_text_section_relationships_annotations_url(@annotation)
+          #     render json: @annotation, status: :created,
+          #            location: location
+          #   else
+          #     render json: @annotation.errors.as_json(full_messages: true),
+          #            status: :unprocessable_entity
+          #   end
+          # end
+          # # rubocop:enableMetrics/AbcSize
 
           private
 

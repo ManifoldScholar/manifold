@@ -18,6 +18,16 @@ module Updaters
     @relationships
   end
 
+  def update_without_save(model)
+    if attributes
+      attr = adjusted_attributes
+      attachmentize_attributes!(attr)
+      model.assign_attributes(attr)
+    end
+    update_relationships(model)
+    model
+  end
+
   def update(model)
     if attributes
       attr = adjusted_attributes

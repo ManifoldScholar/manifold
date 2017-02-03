@@ -5,8 +5,13 @@ FactoryGirl.define do
     start_char 1
     end_char 1
     subject "MyText"
-    format "annotation"
-    text_section
+    format Annotation::TYPE_ANNOTATION
+    association :text_section, factory: :text_section
     association :creator, factory: :user
+  end
+
+  factory :resource_annotation, parent: :annotation do
+    format Annotation::TYPE_RESOURCE
+    association :resource, factory: :resource
   end
 end
