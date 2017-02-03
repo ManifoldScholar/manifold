@@ -6,6 +6,14 @@ RSpec.describe Annotation, type: :model do
     @annotation = FactoryGirl.build(:annotation)
   end
 
+  it "has a valid annotation factory" do
+    expect(FactoryGirl.build(:annotation)).to be_valid
+  end
+
+  it "has a valid resource annotation factory" do
+    expect(FactoryGirl.build(:resource_annotation)).to be_valid
+  end
+
   it "knows what project it belongs to" do
     @annotation.save
     expect(@annotation.project).to eq @annotation.text_section.text.project

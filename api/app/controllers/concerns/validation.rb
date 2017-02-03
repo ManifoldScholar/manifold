@@ -41,7 +41,8 @@ module Validation
     params.require(:data)
     attributes = [:start_node, :end_node, :start_char, :end_char, :section_id, :format,
                   :subject]
-    param_config = structure_params(attributes: attributes)
+    relationships = [:resource]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
 
