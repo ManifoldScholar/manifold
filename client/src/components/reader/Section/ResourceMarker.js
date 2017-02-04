@@ -13,18 +13,17 @@ export default class ResourceMarker extends Component {
       <span>
         {this.props.ids.map((id) => {
           return (
-            <Link
+            <span
               key={id}
               title={id}
               data-resource={id}
-              to="#"
               className="resource-marker"
               onClick={this.props.handleClick}
             >
               <i
                 className="manicon manicon-cube"
               ></i>
-            </Link>
+            </span>
           )
         })}
       </span>
