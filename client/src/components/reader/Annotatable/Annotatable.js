@@ -10,6 +10,8 @@ class Annotatable extends Component {
     children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     createAnnotation: React.PropTypes.func,
     lockSelection: React.PropTypes.func,
+    selectionLockedAnnotation: React.PropTypes.object,
+    selectionLocked: React.PropTypes.bool,
     sectionId: React.PropTypes.string,
     projectId: React.PropTypes.string
   }
@@ -132,13 +134,23 @@ class Annotatable extends Component {
       endNode = startNode;
       endRange.setStart(endNode, 0);
       const endContainer = [...endNode.childNodes].find((node) => node.nodeType === 3);
+      console.log(endNode.textContent, 'endNode.textContent');
       endRange.setEnd(endContainer, endNode.textContent.length);
     } else {
+
+      // In the case of a locked selection, this range is wrong because the locking of the
+      // selection changed the dom and invalidate the selection range.
+      console.log(range, 'range');
       endRange.setStart(endNode, 0);
-      console.log(range.endContainer, range.endOffset);
       endRange.setEnd(range.endContainer, range.endOffset);
     }
     const endChar = endRange.toString().length;
+
+    console.log(startNode, 'startNode');
+    console.log(startChar, 'startChar');
+    console.log(endNode, 'endNode');
+    console.log(endChar, 'endChar');
+
 
     const annotation = {
       startNode: startNode.dataset.nodeUuid,
@@ -214,12 +226,10 @@ class Annotatable extends Component {
   }
 
   clearNativeSelection() {
-    console.log('clearing native selection');
     window.getSelection().removeAllRanges();
   }
 
-  createAnnotation(type, resource = null) {
-    const annotation = this.mapStateToAnnotation(this.state.selection, type);
+  createAnnotation(annotation, resource = null) {
     this.props.createAnnotation(this.props.sectionId, annotation, resource);
     setTimeout(() => {
       this.updateStateSelection(null);
@@ -229,24 +239,32 @@ class Annotatable extends Component {
 
   annotateSelection(event) {
     event.stopPropagation();
-    this.createAnnotation('annotation');
+    const annotation = this.mapStateToAnnotation(this.state.selection, 'annotation');
+    this.createAnnotation(annotation);
   }
 
   highlightSelection(event) {
     event.stopPropagation();
-    this.createAnnotation('highlight');
+    const annotation = this.mapStateToAnnotation(this.state.selection, 'highlight');
+    this.createAnnotation(annotation);
   }
 
   attachResourceToSelection(resource) {
-    console.log(resource, 'resource');
-    this.createAnnotation('resource', resource);
+    const annotation = this.state.selectionLockedAnnotation;
+    annotation.format = "resource";
+    this.createAnnotation(annotation, resource);
     this.endResourceSelection();
   }
 
   lockSelection() {
-    this.setState({ selectionLocked: true }, () => {
+    const selectionLockedAnnotation =
+      this.mapStateToAnnotation(this.state.selection, 'selection');
+    this.setState({
+      selectionLocked: true,
+      selectionLockedAnnotation
+    }, () => {
       this.clearNativeSelection();
-      this.props.lockSelection(this.mapStateToAnnotation(this.state.selection, 'selection'));
+      this.props.lockSelection(selectionLockedAnnotation);
     });
   }
 
@@ -263,7 +281,7 @@ class Annotatable extends Component {
 
   endResourceSelection(event) {
     this.setState({ resourceSelection: false });
-    this.unlockSelection()
+    this.unlockSelection();
   }
 
   shareSelection() {
@@ -277,7 +295,7 @@ class Annotatable extends Component {
           <Drawer.Wrapper
             closeCallback={this.endResourceSelection}
           >
-            <div style={{paddingTop: 50}}>
+            <div style={{ paddingTop: 50 }}>
                 <Resource.Picker
                   projectId={this.props.projectId}
                   selectionHandler={this.attachResourceToSelection}

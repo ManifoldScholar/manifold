@@ -32,13 +32,15 @@ export default class ResourceViewerViewer extends PureComponent {
       filteredResources = filteredResources.concat(this.props.resources.filter((resource) => {
         return marker.id === resource.id;
       }).map((resource) => {
-        resource.location = this.getResourceLocation(marker.rect);
-        resource.height = this.resourceHeight;
-        return resource;
+        return {
+          resource,
+          location: this.getResourceLocation(marker.rect),
+          height: this.resourceHeight
+        };
       }));
     });
 
-    return filteredResources.sort((a, b)=> {
+    return filteredResources.sort((a, b) => {
       return a.location - b.location;
     });
   }
@@ -80,21 +82,21 @@ export default class ResourceViewerViewer extends PureComponent {
             <li key={index}>
               {item.group ?
                 <Group
-                  resources={item.items}
+                  items={item.items}
                   location={item.location}
                   height={this.groupHeight}
-                  highlightResourceId={item.items[0].id}
+                  highlightResourceId={item.items[0].resource.id}
                 /> :
-                <Link to="#" title={item.id}>
+                <Link to="#" title={item.resource.id}>
                   <Single
-                    resource={item}
+                    resource={item.resource}
                     location={item.location}
                     height={this.resourceHeight}
                   />
                 </Link>
               }
             </li>
-          )
+          );
         })}
       </ul>
     );
@@ -102,8 +104,8 @@ export default class ResourceViewerViewer extends PureComponent {
 
   render() {
     const viewerClass = `resource-viewer container-width-${this.props.containerSize}`;
-    const grouped = this.getGroupedResources(this.getFilteredResources().slice(0), 0);
-
+    const grouped = this.getGroupedResources(this.getFilteredResources(), 0);
+    console.log(grouped, 'grouped');
     return (
         <nav className={viewerClass}>
           {grouped ? this.renderResourceList(grouped) : null }
