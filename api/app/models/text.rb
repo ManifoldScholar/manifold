@@ -40,6 +40,8 @@ class Text < ApplicationRecord
 
   # Validation
   validates :unique_identifier, presence: true
+  validates :spine,
+            presence: true, unless: proc { |x| x.spine.is_a?(Array) && x.spine.empty? }
 
   # Callbacks
   after_commit :trigger_text_added_event, on: [:create, :update]

@@ -26,7 +26,7 @@ RSpec.describe Ingestor::Creator::Stylesheets do
     expect(creator).to respond_to(:warn)
   end
 
-  it "creates an stylesheet for each inspector" do
+  it "creates a stylesheet for each inspector" do
     models = creator.create(inspectors)
     expect(models.length).to eq(inspectors.length)
   end

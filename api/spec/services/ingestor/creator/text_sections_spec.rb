@@ -27,7 +27,7 @@ RSpec.describe Ingestor::Creator::TextSections do
     expect(creator).to respond_to(:warn)
   end
 
-  it "creates an stylesheet for each inspector" do
+  it "creates a text section for each inspector" do
     models = creator.create(inspectors)
     expect(models.length).to eq(inspectors.length)
   end

@@ -81,7 +81,7 @@ RSpec.describe User, type: :model do
       User.searchkick_index.refresh
     end
 
-    it "by last name" do
+    it "by first name" do
       results = User.filter({keyword: first, typeahead: true})
       expect(results.length).to be 1
     end

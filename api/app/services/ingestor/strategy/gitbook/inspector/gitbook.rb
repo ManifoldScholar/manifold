@@ -84,6 +84,29 @@ module Ingestor
             "#{@gitbook_path}/SUMMARY.md"
           end
 
+          def spine_list
+            list = []
+            File.readlines(summary_path).each do |line|
+              next unless line.strip.start_with?("*")
+              path = File.join(@gitbook_path, clean_line(line))
+              next unless File.file?(path)
+              list << path
+            end
+            list
+          end
+          memoize :spine_list
+
+          def clean_line(line)
+            line.delete("*").gsub(/\[.*\]/, "").delete("()").strip
+          end
+
+          def spine_source_ids
+            spine_list.map do |item|
+              ::Ingestor::Strategy::Gitbook::Inspector::TextSection.new(item, self)
+                                                                   .source_identifier
+            end
+          end
+
           def book_json
             book_json = File.read(book_json_path)
             JSON.parse(book_json)

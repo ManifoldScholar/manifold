@@ -36,6 +36,10 @@ module Ingestor
           @inspector
         end
 
+        def spine_inspector
+          @inspector
+        end
+
         def ingestion_source_inspectors
           @inspector.ingestion_source_inspectors
         end

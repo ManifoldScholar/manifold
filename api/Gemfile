@@ -1,7 +1,9 @@
 source "https://rubygems.org"
 
 gem "active_model_serializers", "~> 0.10.2"
-gem "acts_as_list"
+# Locked until this is resolved:
+# https://github.com/swanandp/acts_as_list/issues/253
+gem "acts_as_list", "~>0.8.2"
 gem "authority", "~>3.2.0"
 gem "bcrypt", "~> 3.1.11"
 gem "clockwork", "2.0.0"

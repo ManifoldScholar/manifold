@@ -38,6 +38,10 @@ module Ingestor
           Inspector::Rights.new(@inspector)
         end
 
+        def spine_inspector
+          @inspector
+        end
+
         def description_inspector
           Inspector::Description.new(@inspector)
         end

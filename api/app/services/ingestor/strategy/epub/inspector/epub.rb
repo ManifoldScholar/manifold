@@ -252,6 +252,17 @@ module Ingestor
           end
           memoize :spine_item_nodes
 
+          def spine_source_ids
+            spine_item_nodes.map do |node|
+              ::Ingestor::Strategy::EPUB::Inspector::TextSection.new(node, self)
+                                                                .source_identifier
+            end
+          end
+
+          def position_in_spine(node)
+            spine_item_nodes.index(node)
+          end
+
           def read_rendition_source(relative_path)
             uri = URI(relative_path)
             if uri.absolute?
