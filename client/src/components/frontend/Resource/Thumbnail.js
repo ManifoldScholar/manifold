@@ -66,7 +66,8 @@ export default class ResourceThumbnail extends Component {
       title: this.props.showTitle
     });
 
-    const backgroundImage = hasImage && !this.props.noCrop ? `url(${this.getImage(resource)})` : null;
+    const backgroundImage =
+      hasImage && !this.props.noCrop ? `url(${this.getImage(resource)})` : null;
     const ResourceIcon = this.icons[resource.attributes.kind];
 
     return (

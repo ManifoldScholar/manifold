@@ -146,7 +146,6 @@ class ReaderContainer extends Component {
       setColorScheme: b((el) => setColorScheme(el), dispatch),
       createAnnotation: b(
         (sectionId, annotation, resource = null) => {
-          console.log(annotation, 'annotation');
           return request(
             annotationsAPI.create(sectionId, annotation, resource),
             requests.createAnnotation

@@ -72,7 +72,7 @@ class ResourcePickerContainer extends PureComponent {
   }
 
   handleMouseDown(event) {
-    event.stopPropagation()
+    event.stopPropagation();
   }
 
   render() {
