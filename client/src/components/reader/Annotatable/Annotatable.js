@@ -80,7 +80,7 @@ class Annotatable extends Component {
   }
 
   didSelectionChange(selection) {
-    return this.compareSelections(selection, this.state.selection) === true
+    return this.compareSelections(selection, this.state.selection) === true;
   }
 
   clearSelection() {

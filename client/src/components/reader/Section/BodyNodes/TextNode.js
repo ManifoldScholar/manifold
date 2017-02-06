@@ -122,7 +122,9 @@ export default class TextNode extends Component {
           { endingResources.length > 0 ?
             <ResourceMarker
               ids={resourceIds}
-              handleClick={(event) => { event.preventDefault(); this.handleResourceClick(resourceIds); }}
+              handleClick={(event) => {
+                event.preventDefault(); this.handleResourceClick(resourceIds);
+              }}
             />
           : null}
         </span>

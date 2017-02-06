@@ -20,11 +20,8 @@ export default class ResourceViewerViewer extends PureComponent {
   }
 
   getResourceLocation(rect) {
-    if (rect.top <= 120) {
-      return 0;
-    } else {
-      return rect.top - 10;
-    }
+    if (rect.top <= 120) return 0;
+    return rect.top - 10;
   }
 
   getFilteredResources() {

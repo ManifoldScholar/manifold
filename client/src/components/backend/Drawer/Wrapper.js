@@ -27,7 +27,7 @@ export default class DrawerWrapper extends PureComponent {
     });
 
     if (this.props.closeCallback) {
-      this.props.closeCallback(event)
+      this.props.closeCallback(event);
     }
 
     if (this.props.closeUrl) {

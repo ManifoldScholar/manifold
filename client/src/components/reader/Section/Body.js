@@ -17,7 +17,10 @@ export default class Body extends Component {
   }
 
   render() {
-    const iterator = new BodyNodes.Helpers.NodeTreeIterator(this.props.annotations, this.props.lockedSelection);
+    const iterator =
+      new BodyNodes.Helpers.NodeTreeIterator(
+        this.props.annotations, this.props.lockedSelection
+      );
     const node = this.props.section.attributes.bodyJson;
     const elements = iterator.visit(node);
     return elements;
