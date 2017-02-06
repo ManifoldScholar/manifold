@@ -107,7 +107,7 @@ export default class ListSearchable extends PureComponent {
     const listClassName = classnames("vertical-list-primary", this.props.listClassName);
 
     return (
-      <div className={this.props.listClassName} >
+      <div>
         <form className="form-search-filter">
           <div className="search">
             <button>
