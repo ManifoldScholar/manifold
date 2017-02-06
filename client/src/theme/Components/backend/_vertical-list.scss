@@ -196,3 +196,37 @@
     }
   }
 }
+
+
+.compact {
+  .form-search-filter .button-bare-primary {
+    margin-top: 5px;
+  }
+}
+
+.vertical-list-primary.compact {
+  padding-top: 20px;
+  padding-bottom: 0px;
+
+  .list-total {
+    text-indent: 0;
+    padding-bottom: 0;
+  }
+
+  ul {
+    margin-top: .5em;
+    margin-bottom: .5em;
+    a {
+      padding: 10px 0 17px;
+    }
+  }
+
+  .cover {
+    margin-top: 6px;
+  }
+
+  .resource-thumbnail .wrapper {
+    padding: 0;
+  }
+
+}

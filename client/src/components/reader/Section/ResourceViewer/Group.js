@@ -10,7 +10,7 @@ export default class ResourceViewerSingle extends PureComponent {
   static displayName = "ResourceViewer.Single";
 
   static propTypes = {
-    resources: PropTypes.array,
+    items: PropTypes.array,
     location: PropTypes.number,
     height: PropTypes.number,
     highlightResourceId: PropTypes.string,
@@ -52,23 +52,23 @@ export default class ResourceViewerSingle extends PureComponent {
     });
   }
 
-  getHighlightedResource() {
-    const highlighted = this.props.resources.filter((resource) => {
-      return this.props.highlightResourceId === resource.id
+  getHighlightedItem() {
+    const highlighted = this.props.items.filter((item) => {
+      return this.props.highlightResourceId === item.resource.id;
     });
 
     return highlighted[0];
   }
 
   render() {
-    const highlightedResource = this.getHighlightedResource();
+    const highlightedItem = this.getHighlightedItem();
     const groupClass = classNames({
       'resource-preview-group': true,
       'transition-out': this.props.fadeIn && !this.state.visible,
       'transition-in': this.props.fadeIn && this.state.visible
     });
 
-    return(
+    return (
       <div className={groupClass}
         style={{
           top: this.props.location + 'px',
@@ -77,23 +77,27 @@ export default class ResourceViewerSingle extends PureComponent {
         ref={(r) => { this.group = r; }}
       >
         <ul className="group-thumbnails">
-          {this.props.resources.map((resource, index) => {
+          {this.props.items.map((item, index) => {
 
-            return(
+            return (
               <li key={index}>
-                <Link to="#" title={resource.id}>
+                <Link to="#" title={item.resource.id}>
                   <Single
-                    resource={resource}
+                    resource={item.resource}
                     fadeIn={false}
                   />
                 </Link>
               </li>
-            )
+            );
           })}
         </ul>
-        <Link to="#" className="group-highlighted-resource" title={highlightedResource.id}>
+        <Link
+          to="#"
+          className="group-highlighted-resource"
+          title={highlightedItem.resource.id}
+        >
           <Single
-            resource={highlightedResource}
+            resource={highlightedItem.resource}
             fadeIn={false}
           />
         </Link>

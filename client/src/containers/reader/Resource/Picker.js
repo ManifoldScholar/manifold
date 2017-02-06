@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
-const perPage = 5;
+const perPage = 4;
 
 class ResourcePickerContainer extends PureComponent {
 
@@ -84,11 +84,13 @@ class ResourcePickerContainer extends PureComponent {
           entities={this.props.resources}
           singularUnit="resource"
           pluralUnit="resources"
+          listClassName="compact"
           pagination={this.props.resourcesMeta.pagination}
           paginationClickHandler={this.pageChangeHandlerCreator}
           entityComponent={Resource.PickerListItem}
           filterChangeHandler={this.filterChangeHandler}
-          entityComponentProps={{ selectionHandler: this.props.selectionHandler}}
+          paginationPadding={2}
+          entityComponentProps={{ selectionHandler: this.props.selectionHandler }}
         />
       </section>
     );
