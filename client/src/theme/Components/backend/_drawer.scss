@@ -5,6 +5,7 @@
   bottom: 0;
   width: 100%;
   padding: 20px $containerPaddingResp 33px;
+  overflow: scroll;
   background-color: $neutral95;
   transition: right $duration $timing;
 
