@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { throttle } from 'lodash';
 import classNames from 'classnames';
 import get from 'lodash/get';
+import { closest } from 'utils/domUtils';
 
 export default class AnnotationPopup extends Component {
 
@@ -36,11 +37,8 @@ export default class AnnotationPopup extends Component {
     this.maybeShowPopup(this.props, nextProps);
   }
 
-  hasSelection(selection) {
-    if (!selection) return false;
-    if (selection && selection.range) {
-      return true;
-    }
+  getLockedSelectionRect() {
+    return document.querySelector('.annotation-locked-selected').getBoundingClientRect();
   }
 
   maybeShowPopup(prevProps, nextProps) {
@@ -63,77 +61,73 @@ export default class AnnotationPopup extends Component {
     }
   }
 
-  detectViewportCollision(left) {
-    console.log(left, 'left');
-  }
-
-  // Utility method should probably be put elsewhere.
-  closest(el, selector) {
-    let element = el;
-    const matchesSelector = element.matches || element.webkitMatchesSelector ||
-      element.mozMatchesSelector || element.msMatchesSelector;
-    while (element) {
-      if (matchesSelector.call(element, selector)) {
-        break;
-      }
-      element = element.parentElement;
+  hasSelection(selection) {
+    if (!selection) return false;
+    if (selection && selection.range) {
+      return true;
     }
-    return element;
   }
 
   positionPopup(selection, selectionClickEvent = null) {
-    if (this.hasSelection(selection)) {
-      const rect = selection.range.getBoundingClientRect();
-      const rectCenter = rect.width / 2;
-      const popupHeight = this.popupEl.offsetHeight;
-      const popupWidth = this.popupEl.offsetWidth;
-      const halfPopupWidth = popupWidth / 2;
-
-      let clientX = get(selectionClickEvent, 'clientX');
-      let clientY = get(selectionClickEvent, 'clientY');
-
-      let up = 'up';
-      let down = 'down';
-      let left;
-      let top;
-      let preferBottom = false;
-      let annotatable = this.closest(this.popupEl, '.annotatable') // not ideal to grab this by class..
-      let annotatableRect = annotatable.getBoundingClientRect();
-      let topVisiblePosition = document.body.scrollTop + 100;
-      let bottomVisiblePosition = topVisiblePosition + window.innerHeight;
-      let popupTopEdgeIfUp = window.scrollY + rect.top - popupHeight;
-      let popupBottomEdgeIfDown = window.scrollY + rect.bottom + popupHeight;
-      let topCollisionPossible = popupTopEdgeIfUp < topVisiblePosition;
-      let bottomCollisionPossible = popupBottomEdgeIfDown > bottomVisiblePosition;
-      let margin = annotatableRect.left;
-      let minLeft = Math.max(((margin * -1) + 25), (rect.left - halfPopupWidth));
-      let maxLeft = (popupWidth * -1) + annotatableRect.width + annotatableRect.left + margin + -25;
-
-
-      if (clientX !== null && clientX !== undefined && clientY !== null && clientY !== undefined) {
-        preferBottom = (Math.abs(rect.bottom - clientY) < Math.abs(clientY - rect.top));
-        left = clientX - halfPopupWidth;
-      }
-
-      // Resizing
-      if (!selectionClickEvent) {
-        left = this.popupEl.getBoundingClientRect().left;
-      }
-
-      if (left === NaN) left = minLeft;
-      if (left < minLeft) left = minLeft;
-      if (left > maxLeft) left = maxLeft;
-
-      let direction = up;
-      if (topCollisionPossible) direction = down;
-      if (preferBottom && !bottomCollisionPossible) direction = down;
-      const naturalTopPosition = window.pageYOffset + rect.top - popupHeight;
-      const naturalBottomPosition = window.pageYOffset + rect.bottom + 60;
-      if (direction == up) top = naturalTopPosition;
-      if (direction == down) top = naturalBottomPosition;
-
-      this.setState(Object.assign(this.state, { top, left, direction }));
+    let rect;
+    // If it's locked, we no longer want to position relative to the actual selection,
+    // since the text nodes in it likely no long exist.
+    if (this.props.selectionLocked) {
+      rect = this.getLockedSelectionRect();
+    } else if (this.hasSelection(selection)) {
+      rect = selection.range.getBoundingClientRect();
+    } else {
+      return;
     }
+    const rectCenter = rect.width / 2;
+    const popupHeight = this.popupEl.offsetHeight;
+    const popupWidth = this.popupEl.offsetWidth;
+    const halfPopupWidth = popupWidth / 2;
+    const clientX = get(selectionClickEvent, 'clientX');
+    const clientY = get(selectionClickEvent, 'clientY');
+    const up = 'up';
+    const down = 'down';
+    // not ideal to grab this by class, but not sure how else to handle it
+    const annotatable = closest(this.popupEl, '.annotatable');
+    const annotatableRect = annotatable.getBoundingClientRect();
+    const topVisiblePosition = document.body.scrollTop + 100;
+    const bottomVisiblePosition = topVisiblePosition + window.innerHeight;
+    const popupTopEdgeIfUp = window.scrollY + rect.top - popupHeight;
+    const popupBottomEdgeIfDown = window.scrollY + rect.bottom + popupHeight;
+    const topCollisionPossible = popupTopEdgeIfUp < topVisiblePosition;
+    const bottomCollisionPossible = popupBottomEdgeIfDown > bottomVisiblePosition;
+    const margin = annotatableRect.left;
+    const minLeft = Math.max(((margin * -1) + 25), (rect.left - halfPopupWidth));
+    const maxLeft = (popupWidth * -1) + annotatableRect.width + annotatableRect.left + margin + -25;
+
+    let left;
+    let top;
+    let preferBottom = false;
+
+    if (clientX !== null && clientX !== undefined && clientY !== null && clientY !== undefined) {
+      preferBottom = (Math.abs(rect.bottom - clientY) < Math.abs(clientY - rect.top));
+      left = clientX - halfPopupWidth;
+    }
+
+    // If there's no click event, we're probably responding to a window resizing, in which
+    // case we can try to keep the left position as is.
+    if (!selectionClickEvent) {
+      left = this.popupEl.getBoundingClientRect().left;
+    }
+
+    if (isNaN(left)) left = minLeft;
+    if (left < minLeft) left = minLeft;
+    if (left > maxLeft) left = maxLeft;
+
+    let direction = up;
+    if (topCollisionPossible) direction = down;
+    if (preferBottom && !bottomCollisionPossible) direction = down;
+    const naturalTopPosition = window.pageYOffset + rect.top - popupHeight;
+    const naturalBottomPosition = window.pageYOffset + rect.bottom + 60;
+    if (direction === up) top = naturalTopPosition;
+    if (direction === down) top = naturalBottomPosition;
+
+    this.setState(Object.assign(this.state, { top, left, direction }));
   }
 
   render() {
