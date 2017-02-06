@@ -83,7 +83,7 @@ export default class ResourceThumbnail extends Component {
               : null }
             { this.props.noCrop ?
               <img className="resource-image" src={this.getImage(resource)}/> :
-              <i className={`resource-icon + ${resource.attributes.kind}`}>
+              <i className={`resource-icon ${resource.attributes.kind}`}>
                 {ResourceIcon ? <ResourceIcon/> : null}
               </i>
             }
