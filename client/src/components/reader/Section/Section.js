@@ -99,35 +99,36 @@ class Section extends Component {
     const section = this.props.section;
 
     return (
-      <section className={readerAppearanceClass}>
-        {this.props.resources ?
-          <ResourceViewer.Wrapper
-            resources={this.props.resources}
-            annotations={this.props.annotations}
-            containerSize={typography.margins.current}
-            body={this.body}
-          /> : null
-        }
-
-        <div className={containerClass}>
-          <div className={textSectionClass} >
-            <Annotatable
-              projectId={this.props.text.relationships.project.id}
-              sectionId={this.props.params.sectionId}
-              createAnnotation={this.props.createAnnotation}
-              lockSelection={this.lockSelection}
-            >
-              <div ref={(b) => { this.body = b; }}>
-                <Body
-                  lockedSelection={this.state.lockedSelection}
-                  annotations={this.props.annotations}
-                  section={this.props.section}
-                />
+      <div>
+        <section className={readerAppearanceClass}>
+          {this.props.resources ?
+            <ResourceViewer.Wrapper
+              resources={this.props.resources}
+              annotations={this.props.annotations}
+              containerSize={typography.margins.current}
+              body={this.body}
+            /> : null
+          }
+          <Annotatable
+            projectId={this.props.text.relationships.project.id}
+            sectionId={this.props.params.sectionId}
+            createAnnotation={this.props.createAnnotation}
+            lockSelection={this.lockSelection}
+          >
+            <div className={containerClass}>
+              <div className={textSectionClass} >
+                <div ref={(b) => { this.body = b; }}>
+                  <Body
+                    lockedSelection={this.state.lockedSelection}
+                    annotations={this.props.annotations}
+                    section={this.props.section}
+                  />
+                </div>
               </div>
-            </Annotatable>
-          </div>
-        </div>
-      </section>
+            </div>
+          </Annotatable>
+        </section>
+      </div>
     );
   }
 }
