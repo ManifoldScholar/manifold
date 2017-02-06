@@ -87,7 +87,7 @@ module Ingestor
           def spine_list
             list = []
             File.readlines(summary_path).each do |line|
-              next unless line.strip.start_with?("*")
+              next unless line.strip.start_with?("*", "-")
               path = File.join(@gitbook_path, clean_line(line))
               next unless File.file?(path)
               list << path
@@ -97,7 +97,7 @@ module Ingestor
           memoize :spine_list
 
           def clean_line(line)
-            line.delete("*").gsub(/\[.*\]/, "").delete("()").strip
+            line[1..-1].gsub(/\[.*\]/, "").delete("()").strip
           end
 
           def spine_source_ids
