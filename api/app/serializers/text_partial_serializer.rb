@@ -2,14 +2,14 @@
 class TextPartialSerializer < ActiveModel::Serializer
   # cache key: "text_partial", expires_in: 3.hours
   attributes :id, :title, :creator_names, :unique_identifier, :cover_url, :created_at,
-             :first_section_id, :start_section_id, :published, :annotations_count,
-             :highlights_count, :bookmarks_count, :age, :position, :publication_date
+             :start_text_section_id, :published, :annotations_count, :highlights_count,
+             :bookmarks_count, :age, :position, :publication_date, :spine
 
   belongs_to :project
   belongs_to :category
 
-  def start_section_id
-    object.start_text_section_id
+  def start_text_section_id
+    object.start_text_section_id ||= object.spine[0]
   end
 
   def annotations_count
@@ -23,10 +23,6 @@ class TextPartialSerializer < ActiveModel::Serializer
   # TODO: Implement bookmarks
   def bookmarks_count
     0
-  end
-
-  def first_section_id
-    object.text_sections.first.try(:id)
   end
 
   def published

@@ -42,6 +42,8 @@ en:
           updated_collaborator: 'Updated %{role}: "%{name}"'
           new_section: 'New text_section: "%{name}"'
           updated_section: 'Updated text_section: "%{name}"'
+          spine_populated: 'Spine has %{number} items'
+          spine_empty: 'Spine did not find any items'
     factory:
       event:
         event_title:

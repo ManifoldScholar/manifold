@@ -60,19 +60,26 @@ module Ingestor
           end
 
           def ingestion_source
-            [ingestion_source_path]
+            ingestion_source_path
+          end
+
+          def spine_source_ids
+            [ingestion_source].map do |item|
+              ::Ingestor::Strategy::Gitbook::Inspector::TextSection.new(item, self)
+                                                                   .source_identifier
+            end
           end
 
           # rubocop:disable Metrics/LineLength
           def ingestion_source_inspectors
-            ingestion_source.map do |source|
+            [ingestion_source].map do |source|
               ::Ingestor::Strategy::GoogleDoc::Inspector::IngestionSource.new(source, self)
             end
           end
           # rubocop:enable Metrics/LineLength
 
           def text_section_inspectors
-            ingestion_source.map do |path|
+            [ingestion_source].map do |path|
               ::Ingestor::Strategy::GoogleDoc::Inspector::TextSection.new(path, self)
             end
           end

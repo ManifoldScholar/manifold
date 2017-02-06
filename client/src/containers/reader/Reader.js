@@ -148,12 +148,9 @@ class ReaderContainer extends Component {
 
   maybeRedirect(props) {
     if (props.text && !props.params.sectionId && __CLIENT__) {
-      const startSectionId = props.text.attributes.startSectionId;
-      if (startSectionId) {
-        browserHistory.push(`/read/${props.text.id}/section/${startSectionId}`);
-      } else {
-        const firstSectionId = props.text.attributes.firstSectionId;
-        browserHistory.push(`/read/${props.text.id}/section/${firstSectionId}`);
+      const startTextSectionId = props.text.attributes.startTextSectionId;
+      if (startTextSectionId) {
+        browserHistory.push(`/read/${props.text.id}/section/${startTextSectionId}`);
       }
     }
   }
@@ -224,7 +221,7 @@ class ReaderContainer extends Component {
             <Section.Pagination
               textId={this.props.text.id}
               sectionId={this.props.section.id}
-              textSections={this.props.text.relationships.textSections}
+              spine={this.props.text.attributes.spine}
             />
           </main>
           <Footer />

@@ -16,6 +16,7 @@ module Ingestor
           include Ingestor::Loggable
           include Ingestor::Inspector::Helpers
           include Ingestor::Inspector::HTML::HTML
+          extend Memoist
 
           def initialize(path, logger = nil)
             @word_path = File.expand_path(path)
@@ -110,9 +111,15 @@ module Ingestor
             get_contents_from_path(html_file).at("//style").to_html
           end
 
+          def spine_source_ids
+            [html_file].map do |item|
+              ::Ingestor::Strategy::Gitbook::Inspector::TextSection.new(item, self)
+                                                                   .source_identifier
+            end
+          end
+
           def text_section_inspectors
-            name = "#{basename}.html"
-            ingestion_source_paths.reject { |p| File.basename(p) != name }.map do |path|
+            [html_file].map do |path|
               ::Ingestor::Strategy::Word::Inspector::TextSection.new(path, self)
             end
           end

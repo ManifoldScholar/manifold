@@ -38,6 +38,7 @@ module Ingestor
         update_stylesheets!(text)
         update_text_sections!(text)
         attempt_save!(text)
+        update_spine!(text)
         update_cover_image!(text)
         update_start_section!(text)
         update_toc!(text)
@@ -133,6 +134,10 @@ module Ingestor
 
       def cover_inspector
         raise_missing_inspector("cover_inspector")
+      end
+
+      def spine_inspector
+        raise_missing_inspector("spine_inpsector")
       end
 
       def structure_inspector
@@ -232,6 +237,11 @@ module Ingestor
         creator = ::Ingestor::Creator::Collaborators.new(@logger, text)
         creators = creator.create(contributor_inspectors)
         creators.each(&:save)
+      end
+
+      def update_spine!(text)
+        creator = ::Ingestor::Creator::Spine.new(@logger, text)
+        text.spine = creator.create(spine_inspector)
       end
 
       def update_language!(text)

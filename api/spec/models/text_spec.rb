@@ -66,10 +66,4 @@ RSpec.describe Text, type: :model do
     expect(text.category).to be category
   end
 
-  it "returns the section after a given position" do
-    text = new_text
-    text.text_sections = [
-
-    ]
-  end
 end
