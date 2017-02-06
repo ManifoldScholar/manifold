@@ -24,7 +24,7 @@ export default class ResourceMarker extends Component {
                 className="manicon manicon-cube"
               ></i>
             </span>
-          )
+          );
         })}
       </span>
     );

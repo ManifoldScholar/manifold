@@ -30,7 +30,7 @@ class Section extends Component {
     super(props);
     this.state = {
       lockedSelection: null
-    }
+    };
     this.lockSelection = this.lockSelection.bind(this);
   }
 
@@ -67,8 +67,8 @@ class Section extends Component {
       id: "selection",
       attributes: raw,
       type: "annotations"
-    }
-    this.setState({ lockedSelection })
+    };
+    this.setState({ lockedSelection });
   }
 
   render() {

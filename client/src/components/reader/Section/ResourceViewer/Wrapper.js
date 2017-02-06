@@ -27,9 +27,12 @@ export default class ResourceViewerWrapper extends PureComponent {
     this.updateAvailableResourceMarkers();
   }
 
-  componentDidUpdate(prevProps) {
-    // Update available resource markers if we have new props or state
-    if (prevProps.annotations !== this.props.annotations || prevProps.containerSize !== this.props.containerSize) {
+  componentWillReceiveProps(nextProps) {
+    if (
+      (this.props.annotations !== nextProps.annotations) ||
+      (this.props.resources !== nextProps.resources) ||
+      (this.props.containerSize !== nextProps.containerSize)
+    ) {
       this.updateAvailableResourceMarkers();
     }
   }

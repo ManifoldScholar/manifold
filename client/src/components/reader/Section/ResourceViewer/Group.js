@@ -41,14 +41,14 @@ export default class ResourceViewerSingle extends PureComponent {
 
   componentWillUnmount() {
     if (this.props.fadeIn) {
-      window.removeEventListener('scroll', this.throttledFade)
+      window.removeEventListener('scroll', this.throttledFade);
     }
   }
 
   handleFade(event) {
     const rect = this.group.getBoundingClientRect();
     this.setState({
-      visible: rect.top > 120 && (rect.top + rect.height/2) < window.innerHeight
+      visible: rect.top > 120 && (rect.top + rect.height / 2) < window.innerHeight
     });
   }
 
@@ -74,7 +74,7 @@ export default class ResourceViewerSingle extends PureComponent {
           top: this.props.location + 'px',
           height: this.props.height + 'px'
         }}
-       ref={(r) => { this.group = r; }}
+        ref={(r) => { this.group = r; }}
       >
         <ul className="group-thumbnails">
           {this.props.resources.map((resource, index) => {
