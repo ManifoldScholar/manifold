@@ -134,23 +134,15 @@ class Annotatable extends Component {
       endNode = startNode;
       endRange.setStart(endNode, 0);
       const endContainer = [...endNode.childNodes].find((node) => node.nodeType === 3);
-      console.log(endNode.textContent, 'endNode.textContent');
       endRange.setEnd(endContainer, endNode.textContent.length);
     } else {
 
       // In the case of a locked selection, this range is wrong because the locking of the
       // selection changed the dom and invalidate the selection range.
-      console.log(range, 'range');
       endRange.setStart(endNode, 0);
       endRange.setEnd(range.endContainer, range.endOffset);
     }
     const endChar = endRange.toString().length;
-
-    console.log(startNode, 'startNode');
-    console.log(startChar, 'startChar');
-    console.log(endNode, 'endNode');
-    console.log(endChar, 'endChar');
-
 
     const annotation = {
       startNode: startNode.dataset.nodeUuid,

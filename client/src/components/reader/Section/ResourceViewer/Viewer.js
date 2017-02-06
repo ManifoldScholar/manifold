@@ -105,7 +105,6 @@ export default class ResourceViewerViewer extends PureComponent {
   render() {
     const viewerClass = `resource-viewer container-width-${this.props.containerSize}`;
     const grouped = this.getGroupedResources(this.getFilteredResources(), 0);
-    console.log(grouped, 'grouped');
     return (
         <nav className={viewerClass}>
           {grouped ? this.renderResourceList(grouped) : null }
