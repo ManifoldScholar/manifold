@@ -21,7 +21,7 @@ export default class ResourceMarker extends Component {
               onClick={this.props.handleClick}
             >
               <i
-                className="manicon manicon-cube"
+                className="manicon manicon-cube-fill"
               ></i>
             </span>
           );
