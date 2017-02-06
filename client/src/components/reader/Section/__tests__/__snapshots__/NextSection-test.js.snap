@@ -1,0 +1,18 @@
+exports[`NextSection component renders correctly 1`] = `
+<section
+  className="section-next-section">
+  <div
+    className="container-focus">
+    <header>
+      <h3>
+        Next Chapter
+      </h3>
+    </header>
+    <span>
+      <div>
+        Second Section
+      </div>
+    </span>
+  </div>
+</section>
+`;

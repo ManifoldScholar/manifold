@@ -3,13 +3,19 @@ class TextPartialSerializer < ActiveModel::Serializer
   # cache key: "text_partial", expires_in: 3.hours
   attributes :id, :title, :creator_names, :unique_identifier, :cover_url, :created_at,
              :start_text_section_id, :published, :annotations_count, :highlights_count,
-             :bookmarks_count, :age, :position, :publication_date, :spine, :rights
+             :bookmarks_count, :age, :position, :publication_date, :spine, :rights,
+             :sections_map
 
   belongs_to :project
   belongs_to :category
 
   def start_text_section_id
     object.start_text_section_id ||= object.spine[0]
+  end
+
+  def sections_map
+    sections_ids = object.spine & object.text_sections.pluck(:id)
+    sections_ids.map { |id| Hash[id: id.to_s, name: object.text_sections.find(id).name] }
   end
 
   def annotations_count

@@ -220,6 +220,10 @@ class ReaderContainer extends Component {
           <main>
             {section}
             <Section.Label text={this.props.text} />
+            <Section.NextSection
+              sectionsMap={this.props.text.attributes.sectionsMap}
+              sectionId={this.props.section.id}
+            />
             <Section.Pagination
               textId={this.props.text.id}
               sectionId={this.props.section.id}

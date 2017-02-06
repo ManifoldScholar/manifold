@@ -1,0 +1,28 @@
+.section-next-section {
+  @include clearfix;
+  padding: 85px 0 135px;
+
+  h3 {
+    @include templateHead();
+    display: inline-block;
+    padding-bottom: 3px;
+    font-size: $type80;
+    font-weight: $semibold;
+    color: $neutral40;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-bottom: 2px solid $neutral40;
+  }
+
+  span {
+    @include templateHead();
+    font-size: 28px;
+    font-weight: $semibold;
+    color: $neutral70;
+    text-transform: capitalize;
+
+    @include respond($break70) {
+      font-size: 32px;
+    }
+  }
+}
