@@ -40,7 +40,7 @@ export default class ResourceViewerWrapper extends PureComponent {
   updateAvailableResourceMarkers() {
     if (!this.props.body) return;
     const markerNodes = this.props.body.querySelectorAll('[data-resource]');
-    let markers = [];
+    const markers = [];
     [...markerNodes].forEach((markerNode) => {
       const id = markerNode.getAttribute('data-resource');
       const rect = markerNode.getBoundingClientRect();
