@@ -84,7 +84,6 @@ class ResourcePickerContainer extends PureComponent {
           entities={this.props.resources}
           singularUnit="resource"
           pluralUnit="resources"
-          listClassName="compact"
           pagination={this.props.resourcesMeta.pagination}
           paginationClickHandler={this.pageChangeHandlerCreator}
           entityComponent={Resource.PickerListItem}
