@@ -275,7 +275,7 @@ class Annotatable extends Component {
     this.setState({ resourceSelection: false });
     // Keyboard event doesn't hide the popup by default,
     // so manually remove the selection
-    if (event.type === 'keyup') {
+    if (event && event.type === 'keyup') {
       this.setState({ selection: null });
     }
     this.unlockSelection();
