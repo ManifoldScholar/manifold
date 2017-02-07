@@ -8,6 +8,7 @@ export default class AnnotationPopup extends Component {
 
   static propTypes = {
     selection: PropTypes.object,
+    currentUser: PropTypes.object,
     selectionLocked: PropTypes.bool,
     share: PropTypes.func,
     highlight: PropTypes.func,
@@ -143,6 +144,8 @@ export default class AnnotationPopup extends Component {
       'tail-up': this.state.direction === 'down',
     });
 
+    const isAdmin = get(this.props.currentUser, "attributes.role") === "admin";
+
     return (
       <div className={popupClass}
         ref={(a) => { this.popupEl = a; }}
@@ -151,11 +154,12 @@ export default class AnnotationPopup extends Component {
           left: this.state.left
         }}
       >
-        {/* Provisional button for creating resources */}
-        <button onClick={this.props.attachResource}>
-          <i className="manicon manicon-cube-shine"></i>
-          Resource
-        </button>
+        { isAdmin ?
+          <button onClick={this.props.attachResource}>
+            <i className="manicon manicon-cube-shine"></i>
+            Resource
+          </button>
+        : null }
         <button onClick={this.props.highlight}>
           <i className="manicon manicon-pencil-simple"></i>
           Highlight
