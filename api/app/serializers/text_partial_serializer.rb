@@ -3,7 +3,7 @@ class TextPartialSerializer < ActiveModel::Serializer
   # cache key: "text_partial", expires_in: 3.hours
   attributes :id, :title, :creator_names, :unique_identifier, :cover_url, :created_at,
              :start_text_section_id, :published, :annotations_count, :highlights_count,
-             :bookmarks_count, :age, :position, :publication_date, :spine
+             :bookmarks_count, :age, :position, :publication_date, :spine, :rights
 
   belongs_to :project
   belongs_to :category

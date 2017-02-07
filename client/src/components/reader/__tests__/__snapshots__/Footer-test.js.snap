@@ -1,0 +1,25 @@
+exports[`Footer component renders correctly 1`] = `
+<footer
+  className="footer-reader">
+  <div
+    className="container">
+    <div
+      className="rel">
+      <section
+        className="colophon">
+        <i
+          className="manicon manicon-manifold-logo" />
+        <div>
+          <p
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "All rights reserved",
+              }
+            } />
+        </div>
+        <br />
+      </section>
+    </div>
+  </div>
+</footer>
+`;

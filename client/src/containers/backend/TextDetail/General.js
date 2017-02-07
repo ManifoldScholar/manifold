@@ -48,7 +48,7 @@ export default class TextDetailGeneralContainer extends PureComponent {
             name="attributes[language]"
             placeholder="Enter the Language"
           />
-          <Form.TextInput
+          <Form.TextArea
             label="Rights"
             name="attributes[rights]"
             placeholder="Enter Text Rights"
