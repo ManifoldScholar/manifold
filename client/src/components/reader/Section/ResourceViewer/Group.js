@@ -72,7 +72,7 @@ export default class ResourceViewerSingle extends PureComponent {
 
     const thumbnailsClass = classNames({
       'group-thumbnails': true,
-      'overflow': this.props.items.length > 8
+      overflow: this.props.items.length > 8
     });
 
     return (
@@ -102,7 +102,7 @@ export default class ResourceViewerSingle extends PureComponent {
               <li key={index}>
                 <Link to="#" title={item.resource.id}>
                   <GroupThumbnail
-                      resource={item.resource}
+                    resource={item.resource}
                   />
                 </Link>
               </li>
