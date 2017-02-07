@@ -11,6 +11,9 @@ import sectionsAPI from '../../api/sections';
 import annotationsAPI from '../../api/annotations';
 import { select } from '../../utils/entityUtils';
 import values from 'lodash/values';
+import uniq from 'lodash/uniq';
+import difference from 'lodash/difference';
+
 import {
   authActions,
   uiColorActions,
@@ -102,15 +105,35 @@ class ReaderContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.maybeRedirect(nextProps);
-    if (nextProps.annotations !== this.props.annotations) {
+    // Fetch resources and annotations on section change.
+    if (nextProps.section !== this.props.section) {
+      this.fetchAnnotations();
       this.fetchResources();
     }
+    // Check if we need to fetch more resources when annotations change
+    if (nextProps.annotations !== this.props.annotations) {
+      if (this.hasMissingResources(nextProps.annotations, nextProps.resources)) {
+        this.fetchResources();
+      }
+    }
+    this.maybeRedirect(nextProps);
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.readerCurrentSection));
     this.props.dispatch(flush(requests.readerCurrentText));
+  }
+
+  hasMissingResources(annotations, resourcesIn) {
+    if (!annotations) return;
+    const resources = resourcesIn ? resourcesIn : [];
+    const needed = uniq(annotations
+      .map((a) => a.attributes.resourceId)
+      .filter((id) => id !== null));
+    const has = resources.map((r) => r.id);
+    const diff = difference(needed, has);
+    if (diff.length > 0) return true;
+    return false;
   }
 
   fetchAnnotations() {
@@ -119,6 +142,7 @@ class ReaderContainer extends Component {
   }
 
   fetchResources() {
+    console.log('fetching resources');
     const resourcesCall = resourcesAPI.forSection(this.props.params.sectionId);
     this.props.dispatch(request(resourcesCall, requests.sectionResources));
   }
