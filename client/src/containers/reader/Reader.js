@@ -142,7 +142,6 @@ class ReaderContainer extends Component {
   }
 
   fetchResources() {
-    console.log('fetching resources');
     const resourcesCall = resourcesAPI.forSection(this.props.params.sectionId);
     this.props.dispatch(request(resourcesCall, requests.sectionResources));
   }
