@@ -9,6 +9,7 @@ class Annotatable extends Component {
   static propTypes = {
     children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     createAnnotation: React.PropTypes.func,
+    currentUser: React.PropTypes.object,
     lockSelection: React.PropTypes.func,
     selectionLockedAnnotation: React.PropTypes.object,
     selectionLocked: React.PropTypes.bool,
@@ -302,15 +303,19 @@ class Annotatable extends Component {
           </Drawer.Wrapper>
         : null}
 
-        <AnnotationPopup
-          share={this.shareSelection}
-          highlight={this.highlightSelection}
-          annotate={this.annotateSelection}
-          attachResource={this.startResourceSelection}
-          selection={this.state.selection}
-          selectionClickEvent={this.state.selectionClickEvent}
-          selectionLocked={this.state.selectionLocked}
-        />
+        { this.props.currentUser ?
+          <AnnotationPopup
+            currentUser={this.props.currentUser}
+            share={this.shareSelection}
+            highlight={this.highlightSelection}
+            annotate={this.annotateSelection}
+            attachResource={this.startResourceSelection}
+            selection={this.state.selection}
+            selectionClickEvent={this.state.selectionClickEvent}
+            selectionLocked={this.state.selectionLocked}
+          />
+        : null }
+
         { this.props.children ? Children.only(this.props.children) : null }
       </div>
     );

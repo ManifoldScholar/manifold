@@ -19,6 +19,7 @@ class Section extends Component {
     appearance: PropTypes.object,
     location: PropTypes.object,
     createAnnotation: PropTypes.func,
+    authentication: PropTypes.object,
     params: PropTypes.object
   };
 
@@ -129,6 +130,7 @@ class Section extends Component {
             /> : null
           }
           <Annotatable
+            currentUser={this.props.authentication.currentUser}
             projectId={this.props.text.relationships.project.id}
             sectionId={this.props.params.sectionId}
             createAnnotation={this.props.createAnnotation}
