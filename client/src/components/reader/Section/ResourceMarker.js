@@ -11,10 +11,10 @@ export default class ResourceMarker extends Component {
   render() {
     return (
       <span>
-        {this.props.ids.map((id) => {
+        {this.props.ids.map((id, index) => {
           return (
             <span
-              key={id}
+              key={index}
               title={id}
               data-resource={id}
               className="resource-marker"
