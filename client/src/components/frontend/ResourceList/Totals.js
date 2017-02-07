@@ -16,6 +16,7 @@ export default class ResourceListTotals extends Component {
   }
 
   render() {
+    if (!this.props.count) return null;
     return (
       <div className="resource-totals">
         <div className="total-count">

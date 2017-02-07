@@ -12,6 +12,7 @@ export default class ResourceCollectionGrid extends Component {
   };
 
   render() {
+    if (!this.props.resourceCollections) return null;
     return (
       <nav className="resource-collections-list">
         <ul>
