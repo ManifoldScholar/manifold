@@ -5,8 +5,13 @@ export default class Body extends Component {
   static propTypes = {
     section: PropTypes.object,
     annotations: PropTypes.array,
-    lockedSelection: PropTypes.object
+    lockedSelection: PropTypes.object,
+    didUpdateCallback: PropTypes.func
   };
+
+  componentDidMount() {
+    this.props.didUpdateCallback();
+  }
 
   shouldComponentUpdate(nextProps, nextState) {
     const same =
@@ -14,6 +19,10 @@ export default class Body extends Component {
       (this.props.annotations === nextProps.annotations) &&
       (this.props.lockedSelection === nextProps.lockedSelection);
     return !same;
+  }
+
+  componentDidUpdate() {
+    this.props.didUpdateCallback();
   }
 
   render() {

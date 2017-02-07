@@ -8,39 +8,29 @@ export default class ResourceViewerWrapper extends PureComponent {
 
   static propTypes = {
     resources: PropTypes.array,
+    annotations: PropTypes.array,
     containerSize: PropTypes.number,
-    currentResources: PropTypes.array,
     body: PropTypes.object
   };
 
   constructor() {
     super();
-    this.state = {
-      availableResourceMarkers: []
-    };
-
-    this.updateAvailableResourceMarkers = this.updateAvailableResourceMarkers.bind(this);
+    this.resourceMarkers = this.resourceMarkers.bind(this);
   }
 
-  componentDidMount() {
-    // Run once on mount ?
-    this.updateAvailableResourceMarkers();
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.updates !== nextProps.updates) return true;
+    if (this.props.annotations !== nextProps.annotations) return true;
+    if (this.props.resources !== nextProps.resources) return true;
+    if (this.props.body !== nextProps.body) return true;
+    if (this.props.containerSize !== nextProps.containerSize) return true;
+    return false;
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (
-      (this.props.annotations !== nextProps.annotations) ||
-      (this.props.resources !== nextProps.resources) ||
-      (this.props.containerSize !== nextProps.containerSize)
-    ) {
-      this.updateAvailableResourceMarkers();
-    }
-  }
-
-  updateAvailableResourceMarkers() {
-    if (!this.props.body) return;
-    const markerNodes = this.props.body.querySelectorAll('[data-resource]');
+  resourceMarkers() {
     const markers = [];
+    if (!this.props.body) return markers;
+    const markerNodes = this.props.body.querySelectorAll('[data-resource]');
     [...markerNodes].forEach((markerNode) => {
       const id = markerNode.getAttribute('data-resource');
       const rect = markerNode.getBoundingClientRect();
@@ -51,17 +41,15 @@ export default class ResourceViewerWrapper extends PureComponent {
         }
       });
     });
-
-    this.setState({
-      availableResourceMarkers: markers
-    });
+    return markers;
   }
 
   render() {
+    if (!this.props.resources) return null;
     return (
       <Viewer
         resources={this.props.resources}
-        resourceMarkers={this.state.availableResourceMarkers}
+        resourceMarkers={this.resourceMarkers()}
         containerSize={this.props.containerSize}
       />
     );

@@ -29,13 +29,16 @@ class Section extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lockedSelection: null
+      lockedSelection: null,
+      updates: 0
     };
     this.lockSelection = this.lockSelection.bind(this);
+    this.recordBodyDomUpdate = this.recordBodyDomUpdate.bind(this);
   }
 
   componentDidMount() {
     this.maybeScrollToAnchor(null, this.props.location.hash);
+    this.recordBodyDomUpdate();
   }
 
   componentDidUpdate(prevProps) {
@@ -61,6 +64,21 @@ class Section extends Component {
     }
   }
 
+  // We need a callback from the body to let us know when it updates. We can then pass
+  // that information down to the Resource viewer, which absolutely has to look at the
+  // body's rendered DOM in order to determine the position of each marker.
+  //
+  // At some future point, we may want to refactor this a bit. It might make sense, for
+  // example, to have the section pass a callback down to the markers, which can trigger
+  // it and report their position when they are rendered. That would help avoid the
+  // cross cutting inspection that the resource viewer wrapper is currently doing.
+  recordBodyDomUpdate() {
+    this.setState({ updates: this.state.updates + 1 });
+  }
+
+  // Store the current locked selection in the section, which wrapps the annotator and
+  // the body. This locked selectino is then passed down to the body, which needs to
+  // render it in the text.
   lockSelection(raw) {
     if (!raw) return this.setState({ lockedSelection: null });
     const lockedSelection = {
@@ -103,6 +121,7 @@ class Section extends Component {
         <section className={readerAppearanceClass}>
           {this.props.resources ?
             <ResourceViewer.Wrapper
+              updates={this.state.updates}
               resources={this.props.resources}
               annotations={this.props.annotations}
               containerSize={typography.margins.current}
@@ -119,6 +138,7 @@ class Section extends Component {
               <div className={textSectionClass} >
                 <div ref={(b) => { this.body = b; }}>
                   <Body
+                    didUpdateCallback={this.recordBodyDomUpdate}
                     lockedSelection={this.state.lockedSelection}
                     annotations={this.props.annotations}
                     section={this.props.section}
