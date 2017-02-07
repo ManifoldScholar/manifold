@@ -145,9 +145,9 @@ class ReaderContainer extends Component {
       decrementMargins: b(decrementMargins, dispatch),
       setColorScheme: b((el) => setColorScheme(el), dispatch),
       createAnnotation: b(
-        (sectionId, annotation) => {
+        (sectionId, annotation, resource = null) => {
           return request(
-            annotationsAPI.create(sectionId, annotation),
+            annotationsAPI.create(sectionId, annotation, resource),
             requests.createAnnotation
           );
         },

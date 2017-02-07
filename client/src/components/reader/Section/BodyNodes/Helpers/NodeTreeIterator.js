@@ -7,8 +7,9 @@ import isEmpty from 'lodash/isEmpty';
 
 export default class NodeTreeIterator {
 
-  constructor(annotations) {
-    this.annotations = annotations || [];
+  constructor(annotations, lockedSelection) {
+    this.annotations = annotations ? annotations.slice(0) : [];
+    if (lockedSelection) this.annotations.push(lockedSelection);
     this.annotationsMap = {};
     this.annotationStartMap = {};
     this.annotationEndMap = {};

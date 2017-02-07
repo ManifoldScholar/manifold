@@ -33,7 +33,7 @@ export default class TextNode extends Component {
   }
 
   handleResourceClick(ids) {
-    console.log(ids, "You clicked on an icon that represents these resource IDs");
+    console.log(ids, "You clicked on an icon that represents this ID");
   }
 
   annotatedContent() {
@@ -90,6 +90,7 @@ export default class TextNode extends Component {
     return chunks.map((chunk, index) => {
       const highlighted = map[index].find(a => a.type === "highlight");
       const underlined = map[index].find(a => a.type === "annotation");
+      const lockedSelection = map[index].find(a => a.type === "selection");
       const resources = map[index].filter(a => a.type === "resource");
       let endingResources = [];
       let startingResources = [];
@@ -100,6 +101,7 @@ export default class TextNode extends Component {
           resources.filter(a => starts[a.id] === index && a.startNode === this.props.nodeUuid);
       }
       const classes = classNames({
+        'annotation-locked-selected primary': lockedSelection,
         'annotation-underline primary': underlined,
         'annotation-highlight primary': highlighted,
         'annotation-resource primary': resources.length > 0,
@@ -120,7 +122,9 @@ export default class TextNode extends Component {
           { endingResources.length > 0 ?
             <ResourceMarker
               ids={resourceIds}
-              handleClick={() => { this.handleResourceClick(resourceIds); }}
+              handleClick={(event) => {
+                event.preventDefault(); this.handleResourceClick(resourceIds);
+              }}
             />
           : null}
         </span>

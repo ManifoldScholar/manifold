@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import { Utility, Project as globalProject } from 'components/global';
 import { Link } from 'react-router';
 import get from 'lodash/get';
+import classnames from 'classnames';
 
 export default class ListSearchable extends PureComponent {
 
@@ -9,14 +10,18 @@ export default class ListSearchable extends PureComponent {
 
   static propTypes = {
     entities: PropTypes.array,
+    listClassName: PropTypes.string,
     singularLabel: PropTypes.string,
     pluralLabel: PropTypes.string,
     pagination: PropTypes.object,
-    paginationClickHandler: PropTypes.func
+    paginationClickHandler: PropTypes.func,
+    entityComponentProps: PropTypes.object,
+    paginationPadding: PropTypes.number
   };
 
   static defaultProps = {
-    entityComponentProps: {}
+    entityComponentProps: {},
+    paginationPadding: 3
   }
 
   constructor() {
@@ -98,6 +103,9 @@ export default class ListSearchable extends PureComponent {
   }
 
   render() {
+
+    const listClassName = classnames("vertical-list-primary", this.props.listClassName);
+
     return (
       <div>
         <form className="form-search-filter">
@@ -120,11 +128,12 @@ export default class ListSearchable extends PureComponent {
             {'Reset Search'}
           </button>
         </form>
-        <nav className="vertical-list-primary">
+        <nav className={listClassName} >
           {this.renderEntityList()}
         </nav>
         <Utility.Pagination
           pagination={this.props.pagination}
+          padding={this.props.paginationPadding}
           paginationClickHandler={this.props.paginationClickHandler}
         />
       </div>

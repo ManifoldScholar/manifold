@@ -6,6 +6,7 @@ import Label from './Label';
 import Pagination from './Pagination';
 import Annotatable from '../Annotatable';
 import BodyNodes from './BodyNodes';
+import ResourceViewer from './ResourceViewer';
 import has from 'lodash/has';
 
 class Section extends Component {
@@ -13,6 +14,7 @@ class Section extends Component {
   static propTypes = {
     text: PropTypes.object,
     section: PropTypes.object,
+    resources: PropTypes.array,
     annotations: PropTypes.array,
     appearance: PropTypes.object,
     location: PropTypes.object,
@@ -24,6 +26,14 @@ class Section extends Component {
     store: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      lockedSelection: null
+    };
+    this.lockSelection = this.lockSelection.bind(this);
+  }
+
   componentDidMount() {
     this.maybeScrollToAnchor(null, this.props.location.hash);
   }
@@ -31,12 +41,6 @@ class Section extends Component {
   componentDidUpdate(prevProps) {
     this.maybeScrollToTop(prevProps.section, this.props.section);
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
-  }
-
-  getMarginSize(sizeIndex) {
-    const baseSizes = [790, 680, 500];
-    const maxWidth = baseSizes[sizeIndex] + 'px';
-    return { maxWidth };
   }
 
   maybeScrollToTop(previousSection, thisSection) {
@@ -55,6 +59,16 @@ class Section extends Component {
         smoothScroll(position - 125);
       }, 0);
     }
+  }
+
+  lockSelection(raw) {
+    if (!raw) return this.setState({ lockedSelection: null });
+    const lockedSelection = {
+      id: "selection",
+      attributes: raw,
+      type: "annotations"
+    };
+    this.setState({ lockedSelection });
   }
 
   render() {
@@ -79,22 +93,42 @@ class Section extends Component {
     // This maps to a numbered class with responsive font declarations
     textSectionClass = textSectionClass + ` font-size-${typography.fontSize.current}`;
 
+    // Apply a conditional container class that maps to a size in CSS
+    const containerClass = `container-focus container-width-${typography.margins.current}`;
+
     const section = this.props.section;
+
     return (
+      <div>
         <section className={readerAppearanceClass}>
-          <div className="container-focus"
-            style={this.getMarginSize(typography.margins.current)}
+          {this.props.resources ?
+            <ResourceViewer.Wrapper
+              resources={this.props.resources}
+              annotations={this.props.annotations}
+              containerSize={typography.margins.current}
+              body={this.body}
+            /> : null
+          }
+          <Annotatable
+            projectId={this.props.text.relationships.project.id}
+            sectionId={this.props.params.sectionId}
+            createAnnotation={this.props.createAnnotation}
+            lockSelection={this.lockSelection}
           >
-            <div className={textSectionClass}>
-              <Annotatable
-                sectionId={this.props.params.sectionId}
-                createAnnotation={this.props.createAnnotation}
-              >
-                <Body annotations={this.props.annotations} section={this.props.section} />
-              </Annotatable>
+            <div className={containerClass}>
+              <div className={textSectionClass} >
+                <div ref={(b) => { this.body = b; }}>
+                  <Body
+                    lockedSelection={this.state.lockedSelection}
+                    annotations={this.props.annotations}
+                    section={this.props.section}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
+          </Annotatable>
         </section>
+      </div>
     );
   }
 }

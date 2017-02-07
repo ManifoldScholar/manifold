@@ -3,6 +3,19 @@
   padding-top: 49px;
   padding-bottom: 36px;
 
+  .drawer-primary & {
+    padding-top: 20px;
+    padding-bottom: 0;
+
+    .list-total {
+      padding-bottom: 8px;
+    }
+
+    a {
+      padding: 10px 0 17px;
+    }
+  }
+
   .list-total {
     @include utilityPrimary;
     padding-bottom: 15px;

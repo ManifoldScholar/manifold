@@ -35,7 +35,7 @@
   line-height: 1.761;
   transition: font-size $durationFast $timing;
 
-  *::selection {
+  *::selection, .annotation-locked-selected {
     background: $sp20Quaternary;
   }
 
@@ -82,6 +82,23 @@
 
   pre {
     font-size: 0.7em;
+  }
+
+  // Link with resource marker cube
+  .resource-marker {
+    font-size: 0.85em;
+    color: $accentPrimary;
+    text-decoration: none;
+
+    i {
+      position: relative;
+      top: 0.15em;
+      margin: -0.1em 0.15em 0;
+
+      &::before {
+        vertical-align: baseline;
+      }
+    }
   }
 
   //h2 {

@@ -15,13 +15,13 @@ export default class ResourceThumbnail extends Component {
     showKind: PropTypes.bool,
     showTitle: PropTypes.bool,
     variant: PropTypes.string,
+    noCrop: PropTypes.bool,
     additionalClasses: PropTypes.string,
   };
 
   static defaultProps = {
     showKind: true,
     showTitle: false,
-    isList: true,
     variant: "smallPortrait",
     additionalClasses: ""
   };
@@ -62,11 +62,12 @@ export default class ResourceThumbnail extends Component {
 
     const wrapperClass = classNames({
       'resource-thumbnail': true,
-      'bg-image': hasImage,
+      'bg-image': hasImage && !this.props.noCrop,
       title: this.props.showTitle
     });
 
-    const backgroundImage = hasImage ? `url(${this.getImage(resource)})` : null;
+    const backgroundImage =
+      hasImage && !this.props.noCrop ? `url(${this.getImage(resource)})` : null;
     const ResourceIcon = this.icons[resource.attributes.kind];
 
     return (
@@ -81,9 +82,12 @@ export default class ResourceThumbnail extends Component {
                 {this.getResourceKind(resource.attributes.kind)}
               </figcaption>
               : null }
-            <i className={`resource-icon + ${resource.attributes.kind}`}>
-              {ResourceIcon ? <ResourceIcon/> : null}
-            </i>
+            { this.props.noCrop ?
+              <img className="resource-image" src={this.getImage(resource)}/> :
+              <i className={`resource-icon ${resource.attributes.kind}`}>
+                {ResourceIcon ? <ResourceIcon/> : null}
+              </i>
+            }
           </figure>
           { this.props.showTitle ?
             <h4 className="resource-title">

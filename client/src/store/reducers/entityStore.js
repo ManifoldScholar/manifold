@@ -179,7 +179,6 @@ function handleRemove(state, action) {
     responsesOverlay[key] = newResponse;
   });
   const responses = Object.assign({}, state.responses, responsesOverlay);
-  console.log(responsesOverlay, 'responsesOverlay');
   return Object.assign({}, state, { responses });
 }
 

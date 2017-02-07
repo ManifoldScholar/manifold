@@ -1,4 +1,4 @@
 'create index';
 
-export Reader from './Reader.js';
-
+export Reader from './Reader';
+export Resource from './Resource';
