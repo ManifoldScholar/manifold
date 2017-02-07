@@ -74,6 +74,11 @@ class ProjectDetailResources extends PureComponent {
 
     return (
       <section>
+        <header className="section-heading-secondary">
+          <h3>
+            {'Resources'} <i className="manicon manicon-cube-shine"></i>
+          </h3>
+        </header>
         <List.Searchable
           entities={this.props.resources}
           singularUnit="resource"
