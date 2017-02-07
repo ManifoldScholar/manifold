@@ -16,35 +16,17 @@ module Api
           end
 
           def create
-            adjusted_params = annotation_params
             @annotation = ::Updaters::Default
-                            .new(annotation_params)
-                            .update_without_save(@text_section.annotations.new)
+                          .new(annotation_params)
+                          .update_without_save(@text_section.annotations.new)
             @annotation.creator = @current_user
-            @annotation.save
-            location = api_v1_text_section_relationships_annotations_url(@annotation)
+            authorize_action_for @annotation
+            location = api_v1_text_section_relationships_annotations_url(
+              @annotation,
+              text_section_id: @text_section.id
+            )
             render_single_resource @annotation, location: location
           end
-
-
-          # # rubocop:disable Metrics/AbcSize
-          # def create
-          #
-          #
-          #   attributes = attributes_from(annotation_params)
-          #   @annotation = @text_section.annotations.new(attributes)
-          #   authorize_action_for @annotation
-          #   @annotation.creator = @current_user
-          #   if @annotation.save
-          #     location = api_v1_text_section_relationships_annotations_url(@annotation)
-          #     render json: @annotation, status: :created,
-          #            location: location
-          #   else
-          #     render json: @annotation.errors.as_json(full_messages: true),
-          #            status: :unprocessable_entity
-          #   end
-          # end
-          # # rubocop:enableMetrics/AbcSize
 
           private
 
