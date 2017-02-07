@@ -18,7 +18,7 @@ export default class ResourceViewerSingle extends PureComponent {
 
     return (
         <div
-            className="group-thumbnail"
+          className="group-thumbnail"
         >
           <Resource.Thumbnail
             resource={resource}
