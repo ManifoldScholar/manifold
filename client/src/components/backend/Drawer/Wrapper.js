@@ -18,10 +18,25 @@ export default class DrawerWrapper extends PureComponent {
       leaving: false
     };
 
-    this.handleLeaveClick = this.handleLeaveClick.bind(this);
+    this.handleLeaveEvent = this.handleLeaveEvent.bind(this);
+    this.handleLeaveKey = this.handleLeaveKey.bind(this);
   }
 
-  handleLeaveClick(event) {
+  componentDidMount() {
+    document.addEventListener('keyup', this.handleLeaveKey);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keyup', this.handleLeaveKey);
+  }
+
+  handleLeaveKey(event) {
+    if (event.keyCode === 27) {
+      this.handleLeaveEvent(event);
+    }
+  }
+
+  handleLeaveEvent(event) {
     this.setState({
       leaving: true
     });
@@ -54,7 +69,7 @@ export default class DrawerWrapper extends PureComponent {
           :
           <div key="drawer" className="drawer-primary drawer-appear">
             <div className="rel">
-              <div onClick={this.handleLeaveClick} className="close-button-primary">
+              <div onClick={this.handleLeaveEvent} className="close-button-primary">
                 <i className="manicon manicon-x"></i>
                 <span className="screen-reader-text">
                   Close Drawer
