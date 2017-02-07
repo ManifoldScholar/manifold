@@ -69,8 +69,7 @@ class ManifoldContainer extends PureComponent {
       this.doPostLogout(nextProps);
     }
     if (this.receivedGaTrackingId(nextProps.settings) && !this.gaInitialized) {
-      const debug = __DEVELOPMENT__;
-      ReactGA.initialize(nextProps.settings.attributes.general.gaTrackingId, { debug });
+      ReactGA.initialize(nextProps.settings.attributes.general.gaTrackingId);
       this.gaInitialized = true;
       nextProps.gaInitCallback();
     }
