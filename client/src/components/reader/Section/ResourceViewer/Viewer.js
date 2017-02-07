@@ -16,7 +16,7 @@ export default class ResourceViewerViewer extends PureComponent {
   constructor() {
     super();
     this.resourceHeight = 110;
-    this.groupHeight = 160;
+    this.groupHeight = 200;
   }
 
   getResourceLocation(rect) {
@@ -85,6 +85,7 @@ export default class ResourceViewerViewer extends PureComponent {
                   items={item.items}
                   location={item.location}
                   height={this.groupHeight}
+                  singleHeight={this.resourceHeight}
                   highlightResourceId={item.items[0].resource.id}
                 /> :
                 <Link to="#" title={item.resource.id}>

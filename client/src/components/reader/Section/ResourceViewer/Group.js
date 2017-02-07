@@ -3,6 +3,7 @@ import throttle from 'lodash/throttle';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 import Single from './Single';
+import GroupThumbnail from './GroupThumbnail';
 import { Resource } from 'components/frontend';
 
 export default class ResourceViewerSingle extends PureComponent {
@@ -13,6 +14,7 @@ export default class ResourceViewerSingle extends PureComponent {
     items: PropTypes.array,
     location: PropTypes.number,
     height: PropTypes.number,
+    singleHeight: PropTypes.number,
     highlightResourceId: PropTypes.string,
     fadeIn: PropTypes.bool
   };
@@ -68,6 +70,11 @@ export default class ResourceViewerSingle extends PureComponent {
       'transition-in': this.props.fadeIn && this.state.visible
     });
 
+    const thumbnailsClass = classNames({
+      'group-thumbnails': true,
+      'overflow': this.props.items.length > 8
+    });
+
     return (
       <div className={groupClass}
         style={{
@@ -76,21 +83,6 @@ export default class ResourceViewerSingle extends PureComponent {
         }}
         ref={(r) => { this.group = r; }}
       >
-        <ul className="group-thumbnails">
-          {this.props.items.map((item, index) => {
-
-            return (
-              <li key={index}>
-                <Link to="#" title={item.resource.id}>
-                  <Single
-                    resource={item.resource}
-                    fadeIn={false}
-                  />
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
         <Link
           to="#"
           className="group-highlighted-resource"
@@ -98,9 +90,25 @@ export default class ResourceViewerSingle extends PureComponent {
         >
           <Single
             resource={highlightedItem.resource}
+            height={this.props.singleHeight}
             fadeIn={false}
           />
         </Link>
+
+        <ul className={thumbnailsClass}>
+          {this.props.items.map((item, index) => {
+
+            return (
+              <li key={index}>
+                <Link to="#" title={item.resource.id}>
+                  <GroupThumbnail
+                      resource={item.resource}
+                  />
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
