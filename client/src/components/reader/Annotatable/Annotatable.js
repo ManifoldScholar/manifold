@@ -39,6 +39,7 @@ class Annotatable extends Component {
   }
 
   componentWillUnmount() {
+    if (this.timer) clearTimeout(this.timer);
     document.removeEventListener('mousedown', this.startSelection, false);
     document.removeEventListener('mouseup', this.updateSelection, false);
     document.removeEventListener('keydown', this.handleKeyDown, false);
@@ -207,7 +208,7 @@ class Annotatable extends Component {
     // selection has been cleared. We need to delay grabbing the selection until the
     // default handlers for the mouseup event have fired, and and selected text has been
     // deselected.
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.updateStateSelection(this.validateSelection(window.getSelection()), event);
     }, 0);
   }
