@@ -7,7 +7,7 @@ module Api
           before_action :set_annotation, only: [:show, :update, :destroy]
           before_action :set_text_section, only: [:create, :index]
 
-          resourceful! Annotation do
+          resourceful! Annotation, authorize_options: { except: [:index] } do
             @text_section.annotations
           end
 
