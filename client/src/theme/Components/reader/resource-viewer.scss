@@ -13,17 +13,32 @@
 
   .viewer-list {
     @include listUnstyled;
-  }
-
-  > ul {
     position: absolute;
     top: 0;
     right: 68px;
     height: 100%;
+
+    a {
+      display: block;
+    }
+  }
+}
+
+@mixin resourceOverflowFade {
+  &::before {
+    position: absolute;
+    // Local z-index
+    z-index: 5;
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: '';
+    box-shadow: inset 0 -14px 10px -2px $neutralWhite;
   }
 }
 
 .resource-preview-single {
+  @include resourceOverflowFade;
   position: absolute;
   right: 0;
   width: 160px;
@@ -41,22 +56,12 @@
     right: 0;
     opacity: 1;
   }
-
-  &::before {
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    content: '';
-    box-shadow: inset 0 -14px 10px -2px $neutralWhite;
-  }
 }
 
 .resource-preview-group {
   position: absolute;
   right: 0;
   overflow: hidden;
-  text-align: right;
   transition: right 0.5s $timing 0.1s,
   opacity 0.5s $timing;
 
@@ -74,69 +79,26 @@
   // ul
   .group-thumbnails {
     @include listUnstyled;
-    width: 100vw;
-    padding-bottom: 6px;
+    position: relative;
+    max-height: 80px;
+    margin-left: -4px;
+    overflow: hidden;
+
+    &.overflow {
+      @include resourceOverflowFade;
+    }
 
     li {
       display: inline-block;
+      padding-left: 4px;
+      margin-bottom: 4px;
       vertical-align: top;
-      background-color: $neutral40;
-
-      + li {
-        margin-left: 4px;
-      }
-
-      .resource-preview-single {
-        position: static;
-        width: 35px;
-        opacity: 0.6;
-
-        .resource-image {
-          max-height: 35px;
-        }
-
-        img {
-          width: auto;
-          height: 100%;
-        }
-
-        &::before {
-          display: none;
-        }
-      }
-
-      .resource-thumbnail {
-        .resource-title {
-          display: none;
-        }
-
-        .resource-image {
-          display: block;
-        }
-
-        .resource-icon {
-          display: flex;
-          width: 100%;
-          height: 35px;
-          padding: 8px 0;
-          text-align: center;
-        }
-
-        svg {
-          width: auto;
-          height: 100%;
-          margin: auto;
-          fill: $neutralWhite;
-        }
-      }
     }
   }
 
   .group-highlighted-resource {
-    display: inline-block;
-
     .resource-preview-single {
-      position: static;
+      position: relative;
       display: inline-block;
       width: 160px;
     }

@@ -66,7 +66,7 @@ export default class ResourceViewerSingle extends PureComponent {
         className={singleClass}
         style={{
           top: this.props.location + 'px',
-          height
+          maxHeight: height
         }}
         ref={(r) => { this.single = r; }}
       >
