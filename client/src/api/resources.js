@@ -40,7 +40,7 @@ export default {
   },
 
 
-  forSection(sectionId) {
+  forSection(sectionId, filter = {}) {
     return {
       endpoint: `/api/v1/text_sections/${sectionId}/relationships/resources`,
       method: 'GET',
