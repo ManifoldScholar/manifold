@@ -16,6 +16,7 @@ export default class ResourceListThumbnails extends Component {
   }
 
   render() {
+    if (!this.props.resources) return null;
     return (
       <nav className="resource-thumbnail-list">
         <ul>
