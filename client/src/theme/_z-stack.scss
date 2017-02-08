@@ -7,7 +7,12 @@
   z-index: 600;
 }
 
-.overlay-full {
+
+.backend .header-app {
+  z-index: 600;
+}
+
+.overlay-full-primary, .overlay-full-secondary {
   z-index: 500;
 }
 
