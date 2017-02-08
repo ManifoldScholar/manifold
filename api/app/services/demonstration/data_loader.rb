@@ -92,6 +92,10 @@ module Demonstration
       @logger.info("Projects reindexed".green)
       User.reindex
       @logger.info("Users reindexed".green)
+      Maker.reindex
+      @logger.info("Makers reindexed".green)
+      Resource.reindex
+      @logger.info("Resources reindexed".green)
     end
 
     private
