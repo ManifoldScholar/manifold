@@ -10,7 +10,7 @@ set :rails_env, "production"
 # Linked Files
 set :linked_files, fetch(:linked_files, []).push(".env")
 set :linked_dirs, fetch(:linked_dirs, []).push(
-  "api/public/system", "client/node_modules", "import", "api/tmp", "keys"
+  "api/public/system", "client/node_modules", "import", "api/tmp", "config/keys"
 )
 
 # Ruby & Bundler
