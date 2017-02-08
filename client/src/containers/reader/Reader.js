@@ -224,7 +224,9 @@ class ReaderContainer extends Component {
               spine={this.props.text.attributes.spine}
             />
           </main>
-          <Footer />
+          <Footer
+            text={this.props.text}
+          />
           <FooterMenu
             visibility={this.props.visibility}
             commonActions={this.commonActions}

@@ -64,7 +64,7 @@ module Validation
 
   def text_params
     params.require(:data)
-    attributes = [:title, :position, :publication_date, metadata]
+    attributes = [:title, :position, :publication_date, metadata, :rights]
     relationships = [:category]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
