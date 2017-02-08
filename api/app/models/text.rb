@@ -101,8 +101,8 @@ class Text < ApplicationRecord
 
   def cover_url
     cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
-    return nil unless cover_source&.resource&.attachment_url
-    Rails.configuration.manifold.api_url + cover_source.resource.attachment.url
+    return nil unless cover_source
+    cover_source.try(:attachment_url)
   end
 
   def toc_section

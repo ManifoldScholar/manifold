@@ -36,4 +36,9 @@ class IngestionSource < ApplicationRecord
     "ingestion source #{id}"
   end
 
+  def attachment_url
+    return nil if attachment.url.blank?
+    Rails.configuration.manifold.api_url + attachment.url
+  end
+
 end
