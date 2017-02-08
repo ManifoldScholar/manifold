@@ -19,7 +19,7 @@ class Project < ApplicationRecord
   merge_hash_attributes! :metadata
 
   # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   # Associations
   belongs_to :published_text, class_name: "Text", optional: true

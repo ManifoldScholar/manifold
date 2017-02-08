@@ -12,7 +12,7 @@ class Maker < ApplicationRecord
   include Filterable
 
   # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   # Associations
   has_many :collaborators

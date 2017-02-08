@@ -5,7 +5,7 @@ class Resource < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
   # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   # Authority
   include Authority::Abilities

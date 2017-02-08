@@ -13,7 +13,7 @@ class User < ApplicationRecord
   include Authority::Abilities
 
   # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   # Associations
   has_many :annotations # TODO: refactor to use "creator_id"
