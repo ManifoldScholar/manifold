@@ -79,7 +79,7 @@ class Project < ApplicationRecord
                     url: "/system/:class/:uuid_partition/:id/:style_:filename",
                     default_url: "",
                     styles: { background: ["1800", :jpg] }
-  validation = Rails.application.config.x.api[:attachments][:validations][:image]
+  validation = Rails.configuration.manifold.attachments.validations.image
   validates_attachment_content_type :cover, content_type: validation[:allowed_mime]
   validates_attachment_content_type :hero, content_type: validation[:allowed_mime]
   validates_attachment_content_type :avatar, content_type: validation[:allowed_mime]
@@ -148,17 +148,17 @@ class Project < ApplicationRecord
 
   def avatar_url
     return nil if avatar.url(:thumb).blank?
-    ENV["API_URL"] + avatar.url(:thumb)
+    Rails.configuration.manifold.api_url + avatar.url(:thumb)
   end
 
   def cover_url
     return nil if cover.url(:hero).blank?
-    ENV["API_URL"] + cover.url(:hero)
+    Rails.configuration.manifold.api_url + cover.url(:hero)
   end
 
   def hero_url
     return nil if hero.url(:background).blank?
-    ENV["API_URL"] + hero.url(:background)
+    Rails.configuration.manifold.api_url + hero.url(:background)
   end
 
   def to_s

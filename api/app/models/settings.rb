@@ -13,7 +13,7 @@ class Settings < ApplicationRecord
                     styles: {
                       default: ["x246", :png]
                     }
-  validation = Rails.application.config.x.api[:attachments][:validations][:image]
+  validation = Rails.configuration.manifold.attachments.validations.image
   validates_attachment_content_type :press_logo, content_type: validation[:allowed_mime]
   validates_attachment_file_name :press_logo, matches: validation[:allowed_ext]
 
@@ -31,11 +31,7 @@ class Settings < ApplicationRecord
 
   def press_logo_url
     return nil if press_logo.url(:default).blank?
-    ENV["API_URL"] + press_logo.url(:default)
-  end
-
-  def client
-    Rails.application.config.x.client
+    Rails.configuration.manifold.api_url + press_logo.url(:default)
   end
 
 end

@@ -32,9 +32,7 @@ module Ingestor
         end
 
         def allowed_file_types
-          # rubocop:disable Metrics/LineLength
-          Rails.application.config.x.api[:attachments][:validations][:resource][:allowed_ext]
-          # rubocop:enable Metrics/LineLength
+          Rails.configuration.manifold.attachments.validations.resource.allowed_ext
         end
 
         def relative_path(path)

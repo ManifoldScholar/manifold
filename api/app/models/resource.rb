@@ -35,7 +35,7 @@ class Resource < ApplicationRecord
                     default_url: "",
                     url: "/system/resource/:uuid_partition/:id/:style_:filename",
                     styles: ATTACHMENT_STYLES
-  validation = Rails.application.config.x.api[:attachments][:validations][:resource]
+  validation = Rails.configuration.manifold.attachments.validations.resource
   validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
   validates_attachment_file_name :attachment, matches: validation[:allowed_ext]
 
@@ -89,8 +89,7 @@ class Resource < ApplicationRecord
   end
 
   def patterns
-    config = Rails.application.config.x.api
-    allowed = config[:attachments][:validations][:image][:allowed_mime]
+    allowed = Rails.configuration.manifold.attachments.validations.image.allowed_mime
     patterns = Regexp.union(allowed)
     patterns
   end
@@ -101,19 +100,22 @@ class Resource < ApplicationRecord
   end
 
   def allowed_mimes_for(type)
-    config = Rails.application.config.x.api
-    Regexp.union(config[:attachments][:validations][type][:allowed_mime])
+    config = Rails.configuration.manifold.attachments.validations
+    Regexp.union(config[type][:allowed_mime])
   end
 
   def attachment_url
     return nil unless attachment.present?
-    ENV["API_URL"] + attachment.url
+    Rails.configuration.manifold.api_url + attachment.url
   end
 
   def attachment_thumbnails
     is_image = attachment_is_image?
     styles = ATTACHMENT_STYLES.keys.map do |style|
-      value = is_image ? "#{ENV['API_URL']}#{attachment.url(style)}" : nil
+      value = nil
+      if is_image
+        value = "#{Rails.configuration.manifold.api_url}#{attachment.url(style)}"
+      end
       [style, value]
     end
     Hash[styles]

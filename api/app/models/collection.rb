@@ -19,13 +19,13 @@ class Collection < ApplicationRecord
                     styles: {
                       thumb: ["x500", :jpg]
                     }
-  validation = Rails.application.config.x.api[:attachments][:validations][:image]
+  validation = Rails.configuration.manifold.attachments.validations.image
   validates_attachment_content_type :thumbnail, content_type: validation[:allowed_mime]
   validates_attachment_file_name :thumbnail, matches: validation[:allowed_ext]
 
   def thumbnail_url
     return nil unless thumbnail.present?
-    ENV["API_URL"] + thumbnail.url
+    Rails.configuration.manifold.api_url + thumbnail.url
   end
 
   def resource_kinds

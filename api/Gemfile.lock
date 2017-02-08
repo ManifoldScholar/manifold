@@ -340,6 +340,7 @@ DEPENDENCIES
   google-api-client
   google_drive
   has_scope
+  hashie
   httparty (~> 0.14.0)
   jwt (~> 1.5.6)
   kaminari (= 0.17.0)
