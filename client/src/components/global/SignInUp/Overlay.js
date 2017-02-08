@@ -87,7 +87,7 @@ export default class Overlay extends Component {
   render() {
     return (
       <HigherOrder.BodyClass className={'no-scroll'}>
-        <div className="overlay-full">
+        <div className="overlay-full-primary">
           <header className="overlay-header">
             <div className="container">
               <div className="rel">

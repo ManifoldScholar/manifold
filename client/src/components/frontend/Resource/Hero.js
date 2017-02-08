@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { ResourceList } from 'components/frontend';
-import FormattedDate from 'components/global/FormattedDate';
 
 export default class ResourceHero extends Component {
 
@@ -48,17 +46,6 @@ export default class ResourceHero extends Component {
 
     return (
       <section className="resource-hero">
-        <header>
-          <h1 className="resource-title">
-            {attr.title}
-          </h1>
-          <span className="resource-date">
-            <FormattedDate
-              format="MMMM, YYYY"
-              date={attr.createdAt}
-            />
-          </span>
-        </header>
         {this.getFigureByType(this.props.resource)}
       </section>
     );

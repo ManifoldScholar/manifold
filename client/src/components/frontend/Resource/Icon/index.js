@@ -1,4 +1,5 @@
 import Audio from './Audio';
+import Composer from './Composer';
 import Document from './Document';
 import File from './File';
 import Image from './Image';
@@ -11,6 +12,7 @@ import Video from './Video';
 
 export default {
   Audio,
+  Composer,
   Document,
   File,
   Image,

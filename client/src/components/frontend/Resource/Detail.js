@@ -44,9 +44,11 @@ export default class ResourceDetail extends Component {
       <div>
         <section>
           <div className="container flush-top">
-            <Resource.Hero resource={resource} />
-
             <section className="resource-detail">
+              <Resource.Title resource={resource}/>
+
+              <Resource.Hero resource={resource} />
+
               <aside>
                 {this.renderButton()}
                 <Link to="#" className="button-primary">
@@ -55,7 +57,7 @@ export default class ResourceDetail extends Component {
                 <Utility.ShareBar/>
                 <Resource.Meta resource={resource} style={'secondary'}/>
               </aside>
-              <div className="resource-content">
+              <div className="resource-content left">
                 <p>
                   {attr.caption}
                 </p>

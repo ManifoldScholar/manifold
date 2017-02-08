@@ -19,6 +19,12 @@
         content: ':';
       }
     }
+
+    .meta-value {
+      .bg-neutral90 & {
+        color: $neutral50;
+      }
+    }
   }
 }
 

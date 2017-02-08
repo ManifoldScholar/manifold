@@ -7,6 +7,8 @@ import Pagination from './Pagination';
 import Annotatable from '../Annotatable';
 import BodyNodes from './BodyNodes';
 import ResourceViewer from './ResourceViewer';
+import ResourceOverlay from './ResourceOverlay/';
+
 import has from 'lodash/has';
 
 class Section extends Component {
@@ -150,6 +152,16 @@ class Section extends Component {
             </div>
           </Annotatable>
         </section>
+        {/*
+          To Make a resource overlay active, create a ResourceOverlay.Overlay
+          component and pass it a resource.
+          NB: The resource overlay is already setup to use react transition group CSS
+          with the transition name 'overlay-full'
+          this.props.resources && this.props.resources.length > 0 ?
+          <ResourceOverlay.Overlay
+            resource={this.props.resources[0]}
+          /> : null
+        */}
       </div>
     );
   }
