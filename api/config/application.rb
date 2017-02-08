@@ -63,8 +63,7 @@ module ManifoldApi
       "#{config.root}/app/presenters"
     ]
 
-    config.x.client = config_for(:manifold_client)
-    config.x.api = config_for(:manifold_api)
     config.active_job.queue_adapter = :sidekiq
+
   end
 end

@@ -26,7 +26,7 @@ class Maker < ApplicationRecord
                       thumb: ["x246", :png],
                       square: ["246x246#"]
                     }
-  validation = Rails.application.config.x.api[:attachments][:validations][:image]
+  validation = Rails.configuration.manifold.attachments.validations.image
   validates_attachment_content_type :avatar, content_type: validation[:allowed_mime]
   validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
 
@@ -71,7 +71,7 @@ class Maker < ApplicationRecord
 
   def avatar_url
     return nil if avatar.url(:square).blank?
-    ENV["API_URL"] + avatar.url(:square)
+    Rails.configuration.manifold.api_url + avatar.url(:square)
   end
 
   def full_name

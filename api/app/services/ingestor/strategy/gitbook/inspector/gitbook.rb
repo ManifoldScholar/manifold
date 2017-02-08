@@ -91,9 +91,7 @@ module Ingestor
           memoize :book_json
 
           def allowed_file_types
-            # rubocop:disable Metrics/LineLength
-            Rails.application.config.x.api[:attachments][:validations][:resource][:allowed_ext]
-            # rubocop:enable Metrics/LineLength
+            Rails.configuration.manifold.attachments.validations.resource.allowed_ext
           end
           memoize :allowed_file_types
 

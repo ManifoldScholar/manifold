@@ -79,10 +79,9 @@ module Demonstration
 
     def ensure_settings
       settings = Settings.instance
-      ENV_SETTINGS.each do |key, values|
-        values.each do |value|
-          env_setting = "MANIFOLD_SETTING_#{key}_#{value}".upcase
-          settings[key][value] ||= ENV[env_setting]
+      ENV_SETTINGS.each do |category, keys|
+        keys.each do |key|
+          settings[category][key] ||= Rails.configuration.manifold.settings[category][key]
         end
       end
       settings.save

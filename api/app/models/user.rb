@@ -41,7 +41,7 @@ class User < ApplicationRecord
                     default_url: "",
                     url: "/system/:class/:uuid_partition/:id/:style_:filename",
                     styles: { medium: "300x300>", thumb: "100x100>" }
-  validation = Rails.application.config.x.api[:attachments][:validations][:image]
+  validation = Rails.configuration.manifold.attachments.validations.image
   validates_attachment_content_type :avatar,
                                     content_type: validation[:allowed_mime],
                                     unless: proc { |record| record[:image].nil? }
@@ -94,7 +94,7 @@ class User < ApplicationRecord
 
   def avatar_url
     return nil unless avatar.present?
-    ENV["API_URL"] + avatar.url
+    Rails.configuration.manifold.api_url + avatar.url
   end
 
   def favorite(favoritable)

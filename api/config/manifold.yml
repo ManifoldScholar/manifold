@@ -1,4 +1,33 @@
 common: &1
+  :twitter:
+    # env
+    :consumer_key:
+    :consumer_secret:
+    :access_token:
+    :access_token_secret:
+    # /env <-- these can be set from the environment
+  :google:
+    # env
+    :service_project_id:
+    :service_private_key_id:
+    :service_private_key:
+    :client_email:
+    :service_client_id:
+    # /env <-- these can be set from the environment
+    :analytics_oauth_scope: "https://www.googleapis.com/auth/analytics.readonly"
+    :auth_uri: "https://accounts.google.com/o/oauth2/auth"
+    :token_uri: "https://accounts.google.com/o/oauth2/token"
+    :auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+    :client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/manifold-service%40appspot.gserviceaccount.com"
+  # These are default settings values that can override database values when the
+  # development:load task is executed. Anything in "settings" may be exposed to the client
+  # so it is not a good place to store secrets.
+  :settings:
+    :general:
+      :ga_tracking_id: 'UA-90773269-1'
+      :ga_profile_id: 'ga:138727289'
+    :theme:
+      :typekit_id: 'mnj5ltf'
   :attachments:
     :validations:
       :image:

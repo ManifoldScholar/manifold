@@ -43,6 +43,10 @@
 /user_texts
 /import
 
+### Ignore keys ###
+/config/keys/*
+!/config/keys/.keep
+
 ### Ignore secrets ###
 config/secrets.yml
 

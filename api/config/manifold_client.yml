@@ -1,7 +1,0 @@
-common: &1
-  installation:
-    - private: true
-
-production: *1
-development: *1
-test: *1
