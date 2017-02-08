@@ -1,3 +1,32 @@
+exports[`Footer component adds a line break between lines 1`] = `
+<footer
+  className="footer-reader">
+  <div
+    className="container">
+    <div
+      className="rel">
+      <section
+        className="colophon">
+        <i
+          className="manicon manicon-manifold-logo" />
+        <div>
+          <p>
+            <span>
+              line one
+              <br />
+            </span>
+            <span>
+              line two
+            </span>
+          </p>
+        </div>
+        <br />
+      </section>
+    </div>
+  </div>
+</footer>
+`;
+
 exports[`Footer component renders correctly 1`] = `
 <footer
   className="footer-reader">
@@ -10,12 +39,11 @@ exports[`Footer component renders correctly 1`] = `
         <i
           className="manicon manicon-manifold-logo" />
         <div>
-          <p
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "All rights reserved",
-              }
-            } />
+          <p>
+            <span>
+              All rights reserved
+            </span>
+          </p>
         </div>
         <br />
       </section>

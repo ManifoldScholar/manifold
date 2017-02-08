@@ -10,6 +10,13 @@ describe("Footer component", () => {
     }
   };
 
+  const text_multiline = {
+    attributes: {
+      rights: `line one
+line two`
+    }
+  };
+
   it('renders correctly', () => {
     const component = renderer.create(
       <Footer text={text} />
@@ -17,5 +24,16 @@ describe("Footer component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it('adds a line break between lines', () => {
+    const component = renderer.create(
+      <Footer text={text_multiline} />
+    );
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+
+
 });
 
