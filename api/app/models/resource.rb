@@ -21,12 +21,14 @@ class Resource < ApplicationRecord
 
   # Constants
   ATTACHMENT_STYLES = {
-    small: ["205x198"],
-    small_landscape: ["205x198#"],
-    small_portrait: ["205x215#"],
-    medium: ["410x396"],
-    medium_landscape: ["410x396#"],
-    medium_portrait: ["410x430#"]
+    small: ["320x320"],
+    small_square:["320x320#"],
+    small_landscape: ["320x200#"],
+    small_portrait: ["320x246#"],
+    medium: ["480x480"],
+    medium_square: ["480x480#"],
+    medium_landscape: ["480x300#"],
+    medium_portrait: ["480x369#"]
   }.freeze
 
   # Attachment Validation
