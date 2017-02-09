@@ -28,6 +28,7 @@ export default class ResourceOverlay extends PureComponent {
         </div>
         <Resource.Detail
           resource={this.props.resource}
+          handleClose={this.handleClose}
         />
       </div>
     );

@@ -10,6 +10,26 @@
     }
   }
 
+  //.resource-default .figure-default {
+  //  padding: 5vh 40px;
+  //  margin: 32px 0 18px;
+  //  text-align: center;
+  //  background-size: cover;
+  //
+  //  .manicon {
+  //    display: block;
+  //    font-size: 7vw;
+  //    color: $neutral40;
+  //  }
+  //
+  //  .resource-type {
+  //    @include utilityPrimary;
+  //    display: block;
+  //    padding-top: 18px;
+  //    color: $neutral40;
+  //  }
+  //}
+
   .resource-kind {
     display: flex;
     align-items: center;
