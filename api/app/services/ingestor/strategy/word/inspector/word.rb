@@ -113,8 +113,8 @@ module Ingestor
 
           def spine_source_ids
             [html_file].map do |item|
-              ::Ingestor::Strategy::Gitbook::Inspector::TextSection.new(item, self)
-                                                                   .source_identifier
+              ::Ingestor::Strategy::Word::Inspector::TextSection.new(item, self)
+                                                                .source_identifier
             end
           end
 

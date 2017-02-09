@@ -65,8 +65,8 @@ module Ingestor
 
           def spine_source_ids
             [ingestion_source].map do |item|
-              ::Ingestor::Strategy::Gitbook::Inspector::TextSection.new(item, self)
-                                                                   .source_identifier
+              ::Ingestor::Strategy::GoogleDoc::Inspector::TextSection.new(item, self)
+                                                                     .source_identifier
             end
           end
 

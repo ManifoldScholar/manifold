@@ -32,7 +32,6 @@ module Ingestor
           end
 
           def gitbook?
-            # TODO: True if book.json exists
             File.file?(book_json_path)
           end
 
@@ -97,12 +96,14 @@ module Ingestor
           memoize :spine_list
 
           def clean_line(line)
-            line[1..-1].gsub(/\[.*\]/, "").delete("()").strip
+            line.gsub(/\s+/, "")[1..-1].gsub(/\[.*\]/, "").delete("()")
           end
 
           def spine_source_ids
             spine_list.map do |item|
-              ::Ingestor::Strategy::Gitbook::Inspector::TextSection.new(item, self)
+              ::Ingestor::Strategy::Gitbook::Inspector::TextSection.new(item,
+                                                                        self,
+                                                                        summary_path)
                                                                    .source_identifier
             end
           end
@@ -153,7 +154,9 @@ module Ingestor
 
           def text_section_inspectors
             ingestion_source_paths.reject { |p| File.extname(p) != ".md" }.map do |path|
-              ::Ingestor::Strategy::Gitbook::Inspector::TextSection.new(path, self)
+              ::Ingestor::Strategy::Gitbook::Inspector::TextSection.new(path,
+                                                                        self,
+                                                                        summary_path)
             end
           end
 
