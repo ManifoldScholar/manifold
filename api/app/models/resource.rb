@@ -22,13 +22,21 @@ class Resource < ApplicationRecord
   # Constants
   ATTACHMENT_STYLES = {
     small: ["320x320"],
-    small_square: ["320x320#"],
-    small_landscape: ["320x200#"],
-    small_portrait: ["320x246#"],
+    small_square: "",
+    small_landscape: "",
+    small_portrait: "",
     medium: ["480x480"],
-    medium_square: ["480x480#"],
-    medium_landscape: ["480x300#"],
-    medium_portrait: ["480x369#"]
+    medium_square: "",
+    medium_landscape: "",
+    medium_portrait: ""
+  }.freeze
+  CONVERT_OPTIONS = {
+    small_square: "-gravity north -thumbnail 320x320^ -extent 320x320",
+    small_landscape: "-gravity north -thumbnail 320x200^ -extent 320x200",
+    small_portrait: "-gravity north -thumbnail 320x246^ -extent 320x246",
+    medium_square: "-gravity north -thumbnail 480x480^ -extent 480x480",
+    medium_landscape: "-gravity north -thumbnail 480x300^ -extent 480x300",
+    medium_portrait: "-gravity north -thumbnail 480x369^ -extent 480x369"
   }.freeze
 
   # Attachment Validation
@@ -36,7 +44,8 @@ class Resource < ApplicationRecord
                     include_updated_timestamp: false,
                     default_url: "",
                     url: "/system/resource/:uuid_partition/:id/:style_:filename",
-                    styles: ATTACHMENT_STYLES
+                    styles: ATTACHMENT_STYLES,
+                    convert_options: CONVERT_OPTIONS
   validation = Rails.configuration.manifold.attachments.validations.resource
   validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
   validates_attachment_file_name :attachment, matches: validation[:allowed_ext]
