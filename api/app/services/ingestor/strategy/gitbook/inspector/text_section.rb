@@ -1,5 +1,6 @@
 require "digest"
 require "redcarpet"
+require "metadown"
 
 module Ingestor
   module Strategy
@@ -8,7 +9,8 @@ module Ingestor
         # Inspects Gitbook text sections
         class TextSection < ::Ingestor::Inspector::TextSectionInspector
 
-          def initialize(section_path, gitbook_inspector)
+          def initialize(section_path, gitbook_inspector, summary_path)
+            @summary_path = summary_path
             @section_path = section_path
             @gitbook_inspector = gitbook_inspector
           end
@@ -17,9 +19,9 @@ module Ingestor
             Digest::MD5.hexdigest(@section_path)
           end
 
-          # TODO: Determine better name from TOC
           def name
-            basename
+            title = metadata_title || navigation_title || basename
+            title.strip.delete("\\").delete("*")
           end
 
           def basename
@@ -53,6 +55,19 @@ module Ingestor
           end
 
           protected
+
+          def navigation_title
+            File.readlines(@summary_path).each do |line|
+              return line[/\[(.*?)\]/, 1] if line[/\((.*?)\)/, 1] == source_path.to_s
+            end
+            false
+          end
+
+          def metadata_title
+            markdown = File.read(@section_path)
+            data = Metadown.render(markdown)
+            data.metadata["title"] ||= false
+          end
 
           def remove_yaml_header(markdown)
             markdown.gsub(/\A---(.|\n)*?---/, "")
