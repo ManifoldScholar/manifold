@@ -1,5 +1,6 @@
 # Provides a serialization of a category model.
 class CategorySerializer < ActiveModel::Serializer
-  cache key: "category", expires_in: 3.hours
+  meta(partial: false)
+
   attributes :id, :title, :position
 end

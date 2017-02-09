@@ -1,6 +1,7 @@
 # Provides a serialization of a resource model.
 class ResourceSerializer < ResourcePartialSerializer
-  cache key: "resource", expires_in: 3.hours
+  meta(partial: false)
+
   attributes :title, :kind, :attachment_url, :attachment_file_name,
              :attachment_content_type, :attachment_file_size, :attachment_updated_at,
              :created_at, :updated_at, :project_id,

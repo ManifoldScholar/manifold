@@ -1,6 +1,7 @@
 # Provides a partial serialization of a project model.
 class ProjectSerializer < ProjectPartialSerializer
-  cache key: "project", expires_in: 3.hours
+  meta(partial: false)
+
   attributes :event_count, :metadata, :collections_count, :resources_count,
              :uncollected_resources_count, :resource_kinds
 

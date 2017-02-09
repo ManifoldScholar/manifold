@@ -1,16 +1,16 @@
 import { handleActions } from 'redux-actions';
 import get from 'lodash/get';
 import has from 'lodash/has';
+import pickBy from 'lodash/pickBy';
 import isArray from 'lodash/isArray';
 import forEach from 'lodash/forEach';
 import findIndex from 'lodash/findIndex';
 import intersection from 'lodash/intersection';
 
-const initialState = {
+export const initialState = {
   responses: {},
   entities: {}
 };
-
 
 function normalizeCollection(payload) {
   const entities = {};
@@ -43,6 +43,7 @@ function normalizePayload(payload) {
   } else {
     out = normalizeEntity(payload);
   }
+  if (!payload.included) return out;
   payload.included.forEach((entity) => {
     if (entity) {
       if (!out.entities.hasOwnProperty(entity.type)) {
@@ -56,8 +57,14 @@ function normalizePayload(payload) {
 
 function mergeEntities(stateEntities, payloadEntities) {
   const mergedEntities = {};
-  Object.keys(payloadEntities).forEach((key) => {
-    mergedEntities[key] = Object.assign({}, stateEntities[key], payloadEntities[key]);
+  Object.keys(payloadEntities).forEach((type) => {
+    const adjusted = pickBy(payloadEntities[type], (e, uuid) => {
+      const stateEntity = get(stateEntities, `${type}.${uuid}`);
+      if (!stateEntity) return true; // pick it if there's no existing entity
+      if (e.meta.partial === false) return true; // pick it if new entity is not partial
+      return stateEntity.meta.partial === true; // pick it if the state entity is partial
+    });
+    mergedEntities[type] = Object.assign({}, stateEntities[type], adjusted);
   });
   return Object.assign({}, stateEntities, mergedEntities);
 }
