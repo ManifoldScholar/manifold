@@ -1,4 +1,7 @@
-'create index';
+import Reader from './Reader';
+import Resource from './Resource';
 
-export Reader from './Reader';
-export Resource from './Resource';
+export {
+    Reader,
+    Resource
+};

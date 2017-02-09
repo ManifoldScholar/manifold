@@ -1,6 +1,6 @@
 import React, { Children, Component, PropTypes } from 'react';
 import has from 'lodash/has';
-import AnnotationPopup from './AnnotationPopup';
+import { Annotation } from 'components/reader';
 import { Drawer, Dialog } from 'components/backend';
 import { Resource } from 'containers/reader';
 
@@ -304,7 +304,7 @@ class Annotatable extends Component {
         : null}
 
         { this.props.currentUser ?
-          <AnnotationPopup
+          <Annotation.Popup
             currentUser={this.props.currentUser}
             share={this.shareSelection}
             highlight={this.highlightSelection}

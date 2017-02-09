@@ -1,6 +1,8 @@
 import Picker from './Picker';
+import Detail from './Detail';
 
 export default {
-  Picker
+  Picker,
+  Detail
 };
 

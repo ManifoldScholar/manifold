@@ -1,5 +1,5 @@
 import { Component, PropTypes } from 'react';
-import BodyNodes from './BodyNodes';
+import { Section } from 'components/reader';
 export default class Body extends Component {
 
   static propTypes = {
@@ -27,7 +27,7 @@ export default class Body extends Component {
 
   render() {
     const iterator =
-      new BodyNodes.Helpers.NodeTreeIterator(
+      new Section.BodyNodes.Helpers.NodeTreeIterator(
         this.props.annotations, this.props.lockedSelection
       );
     const node = this.props.section.attributes.bodyJson;

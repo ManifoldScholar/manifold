@@ -1,21 +1,10 @@
 .resource-hero {
-  padding-top: 22px;
+  .resource-content + & {
+    margin-top: 17px;
 
-  header {
-    padding-bottom: 21px;
-  }
-
-  .resource-title {
-    @include templateHead;
-    margin-bottom: 0.2em;
-    font-size: 26px;
-    font-weight: $medium;
-    color: $neutral75;
-  }
-
-  .resource-date {
-    @include subtitlePrimary;
-    font-size: 16px;
+    @include respond($break60) {
+      margin-top: 40px;
+    }
   }
 
   .resource-slide-figure {
@@ -23,6 +12,10 @@
 
     @include respond($break50) {
       margin-bottom: 40px;
+    }
+
+    .overlay-full-secondary & {
+      margin-bottom: 19px;
     }
   }
 }

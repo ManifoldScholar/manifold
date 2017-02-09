@@ -28,18 +28,6 @@ export default class ResourceThumbnail extends Component {
 
   constructor() {
     super();
-    this.icons = {
-      audio: Icon.Audio,
-      document: Icon.Document,
-      file: Icon.File,
-      image: Icon.Image,
-      interactive: Icon.Interactive,
-      link: Icon.Link,
-      pdf: Icon.Pdf,
-      presentation: Icon.Presentation,
-      spreadsheet: Icon.Spreadsheet,
-      video: Icon.Video
-    };
   }
 
   getResourceKind(kind) {
@@ -68,7 +56,6 @@ export default class ResourceThumbnail extends Component {
 
     const backgroundImage =
       hasImage && !this.props.noCrop ? `url(${this.getImage(resource)})` : null;
-    const ResourceIcon = this.icons[resource.attributes.kind];
 
     return (
       <div
@@ -85,7 +72,8 @@ export default class ResourceThumbnail extends Component {
             { this.props.noCrop ?
               <img className="resource-image" src={this.getImage(resource)}/> :
               <i className={`resource-icon ${resource.attributes.kind}`}>
-                {ResourceIcon ? <ResourceIcon/> : null}
+                {resource.attributes.kind ?
+                    <Icon.Composer kind={resource.attributes.kind}/> : null}
               </i>
             }
           </figure>

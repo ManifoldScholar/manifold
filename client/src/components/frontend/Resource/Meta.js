@@ -9,7 +9,14 @@ export default class ResourceMeta extends Component {
 
   static propTypes = {
     resource: PropTypes.object,
-    style: PropTypes.string
+    style: PropTypes.string,
+    showIcon: PropTypes.bool,
+    showTags: PropTypes.bool
+  };
+
+  static defaultProps = {
+    showIcon: true,
+    showTags: true
   };
 
   constructor() {
@@ -21,12 +28,14 @@ export default class ResourceMeta extends Component {
 
     return (
       <section className="resource-meta">
-        <figure className="resource-type">
-          <i
-            className={`manicon manicon-resource-${attr.kind}`}
-          >
-          </i>
-        </figure>
+        {this.props.showIcon ?
+          <figure className="resource-type">
+            <i
+              className={`manicon manicon-resource-${attr.kind}`}
+            >
+            </i>
+          </figure> : null
+        }
         <ul className={`meta-list-${this.props.style}`}>
           <li>
             <span className="meta-label">{'Type'}</span>
@@ -64,30 +73,32 @@ export default class ResourceMeta extends Component {
           </li>
         </ul>
 
-        <nav className="tag-list">
-          <ul>
-            <li>
-              <Link to="#">
-                Japan
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                Brucebraun
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                Culture
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                Word
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        {this.props.showTags ?
+          <nav className="tag-list">
+            <ul>
+              <li>
+                <Link to="#">
+                  Japan
+                </Link>
+              </li>
+              <li>
+                <Link to="#">
+                  Brucebraun
+                </Link>
+              </li>
+              <li>
+                <Link to="#">
+                  Culture
+                </Link>
+              </li>
+              <li>
+                <Link to="#">
+                  Word
+                </Link>
+              </li>
+            </ul>
+          </nav> : null
+        }
       </section>
     );
   }

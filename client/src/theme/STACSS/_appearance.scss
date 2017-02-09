@@ -100,6 +100,31 @@
   }
 }
 
+@mixin buttonClose {
+  @include buttonUnstyled;
+  @include templateHead;
+  font-size: 15px;
+  line-height: 21px;
+
+  @include respond($break65) {
+    font-size: 18px;
+    line-height: 31px;
+  }
+
+  .manicon-x {
+    display: inline-block;
+    margin-left: 14px;
+    font-size: 21px;
+    vertical-align: top;
+
+    @include respond($break65) {
+      margin-left: 26px;
+      font-size: 31px;
+      line-height: 31px;
+    }
+  }
+}
+
 
 // Browser UI
 // --------------------------------------------------------
