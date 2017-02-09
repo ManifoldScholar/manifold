@@ -44,7 +44,10 @@ class ResourceDetailContainer extends PureComponent {
     if (!this.props.resource) return null;
 
     return (
-       <Resource.Overlay resource={this.props.resource} />
+       <Resource.Overlay
+         params={this.props.params}
+         resource={this.props.resource}
+       />
     );
   }
 }

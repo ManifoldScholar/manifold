@@ -3,9 +3,9 @@ import { Link } from 'react-router';
 import Single from './Single';
 import Group from './Group';
 
-export default class ResourceViewerViewer extends PureComponent {
+export default class ResourceViewerList extends PureComponent {
 
-  static displayName = "ResourceViewer.Viewer";
+  static displayName = "ResourceViewer.List";
 
   static propTypes = {
     resources: PropTypes.array,
@@ -75,6 +75,7 @@ export default class ResourceViewerViewer extends PureComponent {
   }
 
   renderResourceList(resources) {
+    const { textId, sectionId } = this.props;
     return (
       <ul className="viewer-list">
         {resources.map((item, index) => {
@@ -88,7 +89,9 @@ export default class ResourceViewerViewer extends PureComponent {
                   singleHeight={this.resourceHeight}
                   highlightResourceId={item.items[0].resource.id}
                 /> :
-                <Link to="#" title={item.resource.id}>
+                <Link
+                  to={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
+                >
                   <Single
                     resource={item.resource}
                     location={item.location}

@@ -118,6 +118,8 @@ export default class Text extends Component {
         <section className={readerAppearanceClass}>
           {this.props.resources ?
             <Resource.Viewer.Wrapper
+              sectionId={this.props.params.sectionId}
+              textId={this.props.params.textId}
               updates={this.state.updates}
               resources={this.props.resources}
               annotations={this.props.annotations}

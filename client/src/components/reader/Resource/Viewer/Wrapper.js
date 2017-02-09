@@ -10,7 +10,9 @@ export default class ResourceViewerWrapper extends PureComponent {
     resources: PropTypes.array,
     annotations: PropTypes.array,
     containerSize: PropTypes.number,
-    body: PropTypes.object
+    body: PropTypes.object,
+    sectionId: PropTypes.string,
+    textId: PropTypes.string
   };
 
   constructor() {
@@ -48,6 +50,8 @@ export default class ResourceViewerWrapper extends PureComponent {
     if (!this.props.resources) return null;
     return (
       <Resource.Viewer.List
+        textId={this.props.textId}
+        sectionId={this.props.sectionId}
         resources={this.props.resources}
         resourceMarkers={this.resourceMarkers()}
         containerSize={this.props.containerSize}
