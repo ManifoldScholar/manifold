@@ -38,7 +38,7 @@ export default class ResourceOverlayDetail extends PureComponent {
           <Resource.Hero resource={resource} />
           <Resource.Meta
             resource={resource}
-            style={'secondary'}
+            style={'secondary columnar'}
             showIcon={false}
             showTags={false}
           />
