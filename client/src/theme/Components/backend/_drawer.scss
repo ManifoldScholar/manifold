@@ -31,6 +31,10 @@
     right: -555px;
   }
 
+  .reader & {
+    top: 0;
+  }
+
   .close-button-primary {
     position: absolute;
     top: 0;
