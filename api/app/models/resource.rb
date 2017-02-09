@@ -22,7 +22,7 @@ class Resource < ApplicationRecord
   # Constants
   ATTACHMENT_STYLES = {
     small: ["320x320"],
-    small_square:["320x320#"],
+    small_square: ["320x320#"],
     small_landscape: ["320x200#"],
     small_portrait: ["320x246#"],
     medium: ["480x480"],
