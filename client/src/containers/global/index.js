@@ -1,3 +1,7 @@
-export Manifold from './Manifold.js';
-export LoginForm from './LoginForm.js';
+import Manifold from './Manifold';
+import LoginForm from './LoginForm';
 
+export {
+    Manifold,
+    LoginForm
+};

@@ -94,7 +94,7 @@ plugins.push(new webpack.DefinePlugin({
 // Use full source maps in production and fast source maps in dev.
 let devtool;
 if (__DEVELOPMENT__) {
-  devtool = "eval-cheap-module-source-map";
+  devtool = "eval-source-map";
 } else {
   devtool = "source-map";
 }

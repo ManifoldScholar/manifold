@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
-import Viewer from './Viewer';
 import throttle from 'lodash/throttle';
+import { Resource } from 'components/reader';
 
 export default class ResourceViewerWrapper extends PureComponent {
 
@@ -47,7 +47,7 @@ export default class ResourceViewerWrapper extends PureComponent {
   render() {
     if (!this.props.resources) return null;
     return (
-      <Viewer
+      <Resource.Viewer.List
         resources={this.props.resources}
         resourceMarkers={this.resourceMarkers()}
         containerSize={this.props.containerSize}

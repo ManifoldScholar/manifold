@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+
 import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
 import { Header, Footer, FooterMenu, Section } from 'components/reader';
+
 import { commonActions } from 'actions/helpers';
 import textsAPI from '../../api/texts';
 import resourcesAPI from '../../api/resources';
@@ -193,9 +195,9 @@ class ReaderContainer extends Component {
       () => visibilityHide('loginOverlay'),
       this.props.dispatch
     );
-
+    const { children, ...sectionProps } = this.props;
     const section = this.props.children &&
-      React.cloneElement(this.props.children, { ...this.props, ...this.readerActions });
+      React.cloneElement(this.props.children, { ...sectionProps, ...this.readerActions });
 
     return (
       <HigherOrder.BodyClass className="reader">

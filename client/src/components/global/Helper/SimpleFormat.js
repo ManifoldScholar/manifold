@@ -28,8 +28,8 @@ export default class SimpleFormat extends PureComponent {
     const children = (
       <p>
         {lines.map((line, index) => {
-          const last = index === lines.length - 1 ? true : false
-          const after = last ? null : <br />
+          const last = index === lines.length - 1 ? true : false;
+          const after = last ? null : <br />;
           return (
             <span key={index}>{line}{after}</span>
           );

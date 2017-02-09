@@ -10,7 +10,8 @@ export default class ResourceMeta extends Component {
   static propTypes = {
     resource: PropTypes.object,
     style: PropTypes.string,
-    showIcon: PropTypes.bool
+    showIcon: PropTypes.bool,
+    showTags: PropTypes.bool
   };
 
   static defaultProps = {

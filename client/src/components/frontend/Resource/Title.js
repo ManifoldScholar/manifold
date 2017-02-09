@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import FormattedDate from 'components/global/FormattedDate';
-import Icon from './Icon'
+import Icon from './Icon';
 
 export default class ResourceTitle extends Component {
 
@@ -10,6 +10,7 @@ export default class ResourceTitle extends Component {
   static propTypes = {
     resource: PropTypes.object,
     showIcon: PropTypes.bool,
+    showDate: PropTypes.bool
   };
 
   static defaultProps = {
@@ -33,8 +34,8 @@ export default class ResourceTitle extends Component {
         {this.props.showDate ?
           <span className="resource-date">
             <FormattedDate
-                format="MMMM, YYYY"
-                date={attr.createdAt}
+              format="MMMM, YYYY"
+              date={attr.createdAt}
             />
           </span> : null
         }

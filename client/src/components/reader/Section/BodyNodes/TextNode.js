@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import values from 'lodash/values';
 import union from 'lodash/union';
 import find from 'lodash/find';
-import ResourceMarker from '../ResourceMarker';
+import { Resource } from 'components/reader';
 
 export default class TextNode extends Component {
 
@@ -120,7 +120,7 @@ export default class TextNode extends Component {
         >
           {chunk}
           { endingResources.length > 0 ?
-            <ResourceMarker
+            <Resource.Marker
               ids={resourceIds}
               handleClick={(event) => {
                 event.preventDefault(); this.handleResourceClick(resourceIds);

@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import ResourceDetail from './ResourceDetail';
+import { Resource } from 'components/reader';
 
 export default class ResourceOverlay extends PureComponent {
 
@@ -14,8 +14,8 @@ export default class ResourceOverlay extends PureComponent {
           Close
           <i className="manicon manicon-x"></i>
         </div>
-        <ResourceDetail
-            resource={this.props.resource}
+        <Resource.Detail
+          resource={this.props.resource}
         />
       </div>
     );

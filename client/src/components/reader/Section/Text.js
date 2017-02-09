@@ -1,17 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
-import Body from './Body';
-import Label from './Label';
-import Pagination from './Pagination';
-import Annotatable from '../Annotatable';
-import BodyNodes from './BodyNodes';
-import ResourceViewer from './ResourceViewer';
-import ResourceOverlay from './ResourceOverlay/';
-
+import { Resource, Annotation, Section } from 'components/reader';
 import has from 'lodash/has';
 
-class Section extends Component {
+export default class Text extends Component {
 
   static propTypes = {
     text: PropTypes.object,
@@ -22,7 +15,8 @@ class Section extends Component {
     location: PropTypes.object,
     createAnnotation: PropTypes.func,
     authentication: PropTypes.object,
-    params: PropTypes.object
+    params: PropTypes.object,
+    children: PropTypes.object
   };
 
   static contextTypes = {
@@ -123,7 +117,7 @@ class Section extends Component {
       <div>
         <section className={readerAppearanceClass}>
           {this.props.resources ?
-            <ResourceViewer.Wrapper
+            <Resource.Viewer.Wrapper
               updates={this.state.updates}
               resources={this.props.resources}
               annotations={this.props.annotations}
@@ -131,7 +125,7 @@ class Section extends Component {
               body={this.body}
             /> : null
           }
-          <Annotatable
+          <Annotation.Annotatable
             currentUser={this.props.authentication.currentUser}
             projectId={this.props.text.relationships.project.id}
             sectionId={this.props.params.sectionId}
@@ -141,7 +135,7 @@ class Section extends Component {
             <div className={containerClass}>
               <div className={textSectionClass} >
                 <div ref={(b) => { this.body = b; }}>
-                  <Body
+                  <Section.Body
                     didUpdateCallback={this.recordBodyDomUpdate}
                     lockedSelection={this.state.lockedSelection}
                     annotations={this.props.annotations}
@@ -150,25 +144,10 @@ class Section extends Component {
                 </div>
               </div>
             </div>
-          </Annotatable>
+          </Annotation.Annotatable>
         </section>
-        {/*
-          To Make a resource overlay active, create a ResourceOverlay.Overlay
-          component and pass it a resource.
-          NB: The resource overlay is already setup to use react transition group CSS
-          with the transition name 'overlay-full'
-          this.props.resources && this.props.resources.length > 0 ?
-          <ResourceOverlay.Overlay
-            resource={this.props.resources[0]}
-          /> : null
-        */}
+        {this.props.children}
       </div>
     );
   }
 }
-
-Section.Body = Body;
-Section.BodyNodes = BodyNodes;
-Section.Label = Label;
-Section.Pagination = Pagination;
-export default Section;

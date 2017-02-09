@@ -73,8 +73,7 @@ export default class ResourceThumbnail extends Component {
               <img className="resource-image" src={this.getImage(resource)}/> :
               <i className={`resource-icon ${resource.attributes.kind}`}>
                 {resource.attributes.kind ?
-                    <Icon.Composer kind={resource.attributes.kind}
-                  /> : null}
+                    <Icon.Composer kind={resource.attributes.kind}/> : null}
               </i>
             }
           </figure>

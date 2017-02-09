@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-
 import { Utility, Project, ResourceList } from 'components/frontend';
-import fakeData from 'helpers/fakeData';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI } from 'api';
