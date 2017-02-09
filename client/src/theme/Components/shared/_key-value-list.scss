@@ -1,6 +1,13 @@
 .meta-list-secondary {
   @include listUnstyled;
 
+  &.columnar {
+    @include respond($break60) {
+      max-width: 810px;
+      column-count: 2;
+    }
+  }
+
   li {
     @include utilityPrimary;
     display: block;
@@ -8,7 +15,7 @@
     font-size: 13px;
 
     + li {
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     .meta-label {
@@ -16,7 +23,7 @@
 
       &::after {
         display: inline;
-        content: ':';
+        content: ': ';
       }
     }
 
