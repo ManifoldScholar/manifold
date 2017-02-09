@@ -12,30 +12,6 @@ export default class ResourceDetail extends Component {
     resource: PropTypes.object
   };
 
-  renderButton() {
-    let button;
-    const resource = this.props.resource;
-    const attr = resource.attributes;
-    switch (attr.kind.toLowerCase()) {
-      case "link":
-        button = (
-          <Link to={attr.externalUrl} className="button-primary" target="_blank">
-            Visit Page <i className="manicon manicon-arrow-right"></i>
-          </Link>
-        );
-        break;
-      default:
-        button = (
-          <Link to={attr.attachmentUrl} className="button-primary" target="_blank">
-            Download <i className="manicon manicon-arrow-right"></i>
-          </Link>
-        );
-        break;
-    }
-
-    return button;
-  }
-
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
@@ -45,12 +21,12 @@ export default class ResourceDetail extends Component {
         <section>
           <div className="container flush-top">
             <section className="resource-detail">
-              <Resource.Title resource={resource}/>
+              <Resource.Title resource={resource} showIcon={false} />
 
               <Resource.Hero resource={resource} />
 
               <aside>
-                {this.renderButton()}
+                <Resource.Link attributes={attr}/>
                 <Link to="#" className="button-primary">
                   View in Text <i className="manicon manicon-arrow-right"></i>
                 </Link>
