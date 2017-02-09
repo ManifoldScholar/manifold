@@ -16,7 +16,9 @@ export default class ResourceViewerSingle extends PureComponent {
     height: PropTypes.number,
     singleHeight: PropTypes.number,
     highlightResourceId: PropTypes.string,
-    fadeIn: PropTypes.bool
+    fadeIn: PropTypes.bool,
+    textId: PropTypes.string,
+    sectionId: PropTypes.string
   };
 
   static defaultProps = {
@@ -63,6 +65,7 @@ export default class ResourceViewerSingle extends PureComponent {
   }
 
   render() {
+    const { textId, sectionId } = this.props;
     const highlightedItem = this.getHighlightedItem();
     const groupClass = classNames({
       'resource-preview-group': true,
@@ -76,6 +79,7 @@ export default class ResourceViewerSingle extends PureComponent {
     });
 
     return (
+
       <div className={groupClass}
         style={{
           top: this.props.location + 'px',
@@ -84,7 +88,7 @@ export default class ResourceViewerSingle extends PureComponent {
         ref={(r) => { this.group = r; }}
       >
         <Link
-          to="#"
+          to={`/read/${textId}/section/${sectionId}/resource/${highlightedItem.resource.id}`}
           className="group-highlighted-resource"
           title={highlightedItem.resource.id}
         >
@@ -100,7 +104,10 @@ export default class ResourceViewerSingle extends PureComponent {
 
             return (
               <li key={index}>
-                <Link to="#" title={item.resource.id}>
+                <Link
+                  to={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
+                  title={item.resource.id}
+                >
                   <GroupThumbnail
                     resource={item.resource}
                   />

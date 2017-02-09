@@ -88,6 +88,8 @@ export default class ResourceViewerList extends PureComponent {
                   height={this.groupHeight}
                   singleHeight={this.resourceHeight}
                   highlightResourceId={item.items[0].resource.id}
+                  textId={textId}
+                  sectionId={sectionId}
                 /> :
                 <Link
                   to={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
