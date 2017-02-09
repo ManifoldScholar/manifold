@@ -9,12 +9,18 @@ describe("NextSection component", () => {
       {id: "1234-5678-9000", name: "First Section"},
       {id: "2345-5678-1111", name: "Second Section"}
     ];
+  const textId = "2345-5678-1111";
+  const typography = {
+    margins: [0, 1, 2]
+  };
 
   it('renders correctly', () => {
     const component = renderer.create(
       <Section.NextSection
         sectionId={sectionId}
         sectionsMap={sectionsMap}
+        textId={textId}
+        typography={typography}
       />
     );
     let tree = component.toJSON();

@@ -1,25 +1,41 @@
 .section-next-section {
-  @include clearfix;
-  padding: 85px 0 135px;
+  padding: 0 0 50px;
 
-  h3 {
-    @include templateHead();
+  @include respond($break65) {
+    padding: 5.46vw 0 8.9vw;
+  }
+
+  @include respond($break100) {
+    padding: 64px 0 101px;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      h3 {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  header {
+    @include utilityPrimary;
     display: inline-block;
-    padding-bottom: 3px;
-    font-size: $type80;
+    padding-bottom: 4px;
+    font-size: 14px;
     font-weight: $semibold;
     color: $neutral40;
     text-transform: uppercase;
-    white-space: nowrap;
     border-bottom: 2px solid $neutral40;
   }
 
-  span {
+  h3 {
     @include templateHead();
-    font-size: 28px;
+    font-size: 24px;
     font-weight: $semibold;
     color: $neutral70;
-    text-transform: capitalize;
+    transition: color $duration $timing;
 
     @include respond($break70) {
       font-size: 32px;
