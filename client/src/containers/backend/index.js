@@ -1,6 +1,7 @@
 import Backend from './Backend';
 import Dashboard from './Dashboard';
 import NewProject from './NewProject';
+import NewResource from './NewResource';
 import ProjectDetail from './ProjectDetail';
 import ResourceDetail from './ResourceDetail';
 import TextDetail from './TextDetail';
@@ -12,6 +13,7 @@ export {
   Backend,
   Dashboard,
   NewProject,
+  NewResource,
   ProjectDetail,
   ResourceDetail,
   TextDetail,

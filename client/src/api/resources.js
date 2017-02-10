@@ -19,9 +19,9 @@ export default {
     };
   },
 
-  create(resource) {
+  create(pId, resource) {
     return {
-      endpoint: '/api/v1/resources',
+      endpoint: `/api/v1/projects/${pId}/relationships/resources`,
       method: 'POST',
       options: {
         body: JSON.stringify({ type: "resources", data: resource })
@@ -36,6 +36,14 @@ export default {
       options: {
         body: JSON.stringify({ type: "resources", data: resource })
       }
+    };
+  },
+
+  destroy(id) {
+    return {
+      endpoint: `/api/v1/resources/${id}`,
+      method: 'DELETE',
+      options: {}
     };
   },
 

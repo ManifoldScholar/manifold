@@ -1,24 +1,37 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
-import update from 'immutability-helper';
-import set from 'lodash/set';
+import { Resource } from 'components/backend';
 import { resourcesAPI } from 'api';
+import { notificationActions } from 'actions';
+import { connect } from 'react-redux';
 
-export default class ResourceDetailGeneralContainer extends PureComponent {
+class ResourceDetailGeneralContainer extends PureComponent {
 
   static displayName = "ResourceDetail.General";
   static activeNavItem = "general";
 
   static propTypes = {
-    route: PropTypes.object,
-    text: PropTypes.object,
-    dispatch: PropTypes.func,
-    editSession: PropTypes.object
   };
 
   constructor(props) {
     super(props);
+    this.handleSuccess = this.handleSuccess.bind(this);
+  }
+
+  createSuccessNotification() {
+    const notification = {
+      level: 0,
+      id: 'RESOURCE_UPDATED',
+      heading: "Your resource has been updated.",
+      body: "The resource matures.",
+      expiration: 5000
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+  }
+
+  handleSuccess() {
+    this.createSuccessNotification();
   }
 
   render() {
@@ -27,19 +40,45 @@ export default class ResourceDetailGeneralContainer extends PureComponent {
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.resource}
-          name="backend-text-general"
+          name="backend-edit-resource"
           update={resourcesAPI.update}
-          create={resourcesAPI.create}
+          create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
+          onSuccess={this.handleSuccess}
           className="form-secondary"
         >
           <Form.TextInput
             label="Title"
+            focusOnMount
             name="attributes[title]"
-            placeholder="Enter Text Title"
+            placeholder="Enter a resource title"
           />
-          <Form.Save text="Save Resource" />
+          <Form.TextArea
+            label="Description"
+            focusOnMount
+            name="attributes[description]"
+            placeholder="Enter a description"
+          />
+          <Form.TextInput
+            label="Caption"
+            focusOnMount
+            name="attributes[caption]"
+            placeholder="Enter a caption"
+          />
+          <Form.TextInput
+            label="Keywords"
+            focusOnMount
+            name="attributes[keywords]"
+            placeholder='Enter some keywords separate by ";"'
+          />
+          <Form.Save
+            text="Update Resource"
+          />
         </FormContainer.Form>
       </section>
     );
   }
 }
+
+export default connect(
+  ResourceDetailGeneralContainer.mapStateToProps
+)(ResourceDetailGeneralContainer);

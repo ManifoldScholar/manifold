@@ -14,7 +14,7 @@ export default class FormTextArea extends Component {
 
   static defaultProps = {
     height: 100
-  }
+  };
 
   render() {
     return (

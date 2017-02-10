@@ -41,6 +41,7 @@ export default () => {
 
       <Route component={Backend.Backend} path="/backend" >
         <IndexRoute component={Backend.Dashboard} />
+        <Route component={Backend.NewResource.Wrapper} path="project/:projectId/resources/new" />
         <Route component={Backend.NewProject.Wrapper} path="project/new" />
         <Route component={Backend.ProjectDetail.Wrapper} path="project/:id" >
           <IndexRoute component={Backend.ProjectDetail.General} />

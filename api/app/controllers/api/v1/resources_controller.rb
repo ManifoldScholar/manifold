@@ -35,9 +35,9 @@ module Api
       end
 
       def destroy
+        @resource = load_and_authorize_zresource
         @resource.destroy
       end
-
     end
   end
 end
