@@ -16,7 +16,7 @@ export default class ResourceMarker extends Component {
             <span
               key={index}
               title={id}
-              data-resource={id}
+              data-annotation-resource={id}
               className="resource-marker"
               onClick={this.props.handleClick}
             >

@@ -28,9 +28,11 @@ export default class Text extends Component {
     super(props);
     this.state = {
       lockedSelection: null,
-      updates: 0
+      updates: 0,
+      activeAnnotation: null
     };
     this.lockSelection = this.lockSelection.bind(this);
+    this.setActiveAnnotation = this.setActiveAnnotation.bind(this);
     this.recordBodyDomUpdate = this.recordBodyDomUpdate.bind(this);
   }
 
@@ -44,22 +46,10 @@ export default class Text extends Component {
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
 
-  maybeScrollToTop(previousSection, thisSection) {
-    if (previousSection.id === thisSection.id) return;
-    window.scrollTo(0, 0);
-  }
-
-  // TODO: My sense is that this method is not working very well. It may need to be
-  // revisited.
-  maybeScrollToAnchor(previousHash, currentHash) {
-    if (currentHash && previousHash !== currentHash) {
-      const scrollTarget = document.querySelector(currentHash);
-      if (!scrollTarget) return false;
-      const position = scrollTarget.getBoundingClientRect().top + window.pageYOffset;
-      setTimeout(() => {
-        smoothScroll(position - 125);
-      }, 0);
-    }
+  setActiveAnnotation(annotationId) {
+    this.setState({
+      activeAnnotation: annotationId
+    });
   }
 
   // We need a callback from the body to let us know when it updates. We can then pass
@@ -85,6 +75,24 @@ export default class Text extends Component {
       type: "annotations"
     };
     this.setState({ lockedSelection });
+  }
+
+  maybeScrollToTop(previousSection, thisSection) {
+    if (previousSection.id === thisSection.id) return;
+    window.scrollTo(0, 0);
+  }
+
+  // TODO: My sense is that this method is not working very well. It may need to be
+  // revisited.
+  maybeScrollToAnchor(previousHash, currentHash) {
+    if (currentHash && previousHash !== currentHash) {
+      const scrollTarget = document.querySelector(currentHash);
+      if (!scrollTarget) return false;
+      const position = scrollTarget.getBoundingClientRect().top + window.pageYOffset;
+      setTimeout(() => {
+        smoothScroll(position - 125);
+      }, 0);
+    }
   }
 
   render() {
@@ -127,6 +135,8 @@ export default class Text extends Component {
               updates={this.state.updates}
               resources={this.props.resources}
               annotations={this.props.annotations}
+              setActiveAnnotation={this.setActiveAnnotation}
+              activeAnnotation={this.state.activeAnnotation}
               containerSize={typography.margins.current}
               body={this.body}
             /> : null

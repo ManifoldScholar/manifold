@@ -1,24 +1,27 @@
 import React, { PureComponent, PropTypes } from 'react';
-import get from 'lodash/get';
-import throttle from 'lodash/throttle';
 import classNames from 'classnames';
 import { Resource } from 'components/frontend';
 
-export default class ResourceViewerSingle extends PureComponent {
+export default class ResourceViewerGroupThumbnail extends PureComponent {
 
-  static displayName = "ResourceViewer.Single";
+  static displayName = "ResourceViewer.GroupThumbnail";
 
   static propTypes = {
     resource: PropTypes.object,
+    active: PropTypes.bool
   };
 
   render() {
     const resource = this.props.resource;
-    const variant = "smallLandscape";
+    const variant = "smallPortrait";
+    const thumbnailClass = classNames({
+      'group-thumbnail': true,
+      highlighted: this.props.active
+    });
 
     return (
         <div
-          className="group-thumbnail"
+          className={thumbnailClass}
         >
           <Resource.Thumbnail
             resource={resource}

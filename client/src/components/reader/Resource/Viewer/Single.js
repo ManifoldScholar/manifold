@@ -58,7 +58,7 @@ export default class ResourceViewerSingle extends PureComponent {
     const singleClass = classNames({
       'resource-preview-single': true,
       'transition-out': this.props.fadeIn && !this.state.visible,
-      'transition-in': this.props.fadeIn && this.state.visible
+      'transition-in': this.props.fadeIn && this.state.visible,
     });
 
     return (

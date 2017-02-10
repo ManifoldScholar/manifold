@@ -10,6 +10,8 @@ export default class ResourceViewerList extends PureComponent {
   static propTypes = {
     resources: PropTypes.array,
     resourceMarkers: PropTypes.array,
+    setActiveAnnotation: PropTypes.func,
+    activeAnnotation: PropTypes.string,
     containerSize: PropTypes.number
   };
 
@@ -30,10 +32,11 @@ export default class ResourceViewerList extends PureComponent {
     let filteredResources = [];
     this.props.resourceMarkers.forEach((marker) => {
       filteredResources = filteredResources.concat(this.props.resources.filter((resource) => {
-        return marker.id === resource.id;
+        return marker.resourceId === resource.id;
       }).map((resource) => {
         return {
           resource,
+          annotationId: marker.annotationId,
           location: this.getResourceLocation(marker.rect),
           height: this.resourceHeight
         };
@@ -84,10 +87,11 @@ export default class ResourceViewerList extends PureComponent {
               {item.group ?
                 <Group
                   items={item.items}
+                  setActiveAnnotation={this.props.setActiveAnnotation}
+                  activeAnnotation={this.props.activeAnnotation}
                   location={item.location}
                   height={this.groupHeight}
                   singleHeight={this.resourceHeight}
-                  highlightResourceId={item.items[0].resource.id}
                   textId={textId}
                   sectionId={sectionId}
                 /> :

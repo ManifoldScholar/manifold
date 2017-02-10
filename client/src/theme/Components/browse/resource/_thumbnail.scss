@@ -113,8 +113,10 @@
     }
 
     .resource-image {
+      display: block;
       width: auto;
-      max-height: 45px;
+      height: 50px;
+      margin: 0 0 0 auto;
     }
 
     .resource-icon {
