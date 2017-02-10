@@ -26,6 +26,11 @@
     span {
       color: $neutral30;
     }
+
+    &.empty {
+      padding-top: 20px;
+      border-bottom: 0;
+    }
   }
 
   .buttons-icon-horizontal {
