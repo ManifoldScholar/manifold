@@ -92,6 +92,7 @@ module Api
         def #{method_names[:authorize_and_create_resource]}(params, updater = ::Updaters::Default)
           #{method_names[:resource_scope]}.build().tap do |resource|
             authorize_action_for resource
+            resource.creator = current_user if resource.respond_to?(:creator=)
             updater.new(params).update(resource)
           end
         end

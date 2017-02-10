@@ -16,11 +16,16 @@ export default class ListSearchable extends PureComponent {
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func,
     entityComponentProps: PropTypes.object,
-    paginationPadding: PropTypes.number
+    paginationPadding: PropTypes.number,
+    newButtonText: PropTypes.string,
+    newButtonVisible: PropTypes.bool,
+    newButtonPath: PropTypes.string
   };
 
   static defaultProps = {
     entityComponentProps: {},
+    newButtonText: "Add new",
+    newButtonVisible: false,
     paginationPadding: 3
   }
 
@@ -86,6 +91,15 @@ export default class ListSearchable extends PureComponent {
             singularUnit={this.props.singularUnit}
             pluralUnit={this.props.pluralUnit}
           />
+          { this.props.newButtonVisible ?
+            <div className="buttons-icon-horizontal">
+              <Link to={this.props.newButtonPath} className="button-icon-secondary">
+                <i className="manicon manicon-plus"></i>
+                {this.props.newButtonText}
+              </Link>
+            </div>
+            : null
+          }
           <ul>
             {entities.map((entity) => {
               return this.renderEntity(entity);

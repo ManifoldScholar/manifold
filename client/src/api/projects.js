@@ -39,6 +39,14 @@ export default {
     };
   },
 
+  destroy(id) {
+    return {
+      endpoint: `/api/v1/projects/${id}`,
+      method: 'DELETE',
+      options: {}
+    };
+  },
+
   events(id, page = {}) {
     return {
       endpoint: `/api/v1/projects/${id}/relationships/events`,

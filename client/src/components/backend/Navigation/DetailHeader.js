@@ -12,6 +12,9 @@ export default class DetailHeader extends PureComponent {
     subtitle: PropTypes.string
   };
 
+  static defaultProps = {
+  }
+
   typeToManiconClass(type) {
     let segment = `${type}-placeholder`;
     if (type === "resource") segment = 'cube-shine';
@@ -38,26 +41,14 @@ export default class DetailHeader extends PureComponent {
                   {this.props.subtitle}
                 </span>
               </h1>
-              <div className="project-utility">
-                <button
-                  onClick={() => { alert("Under construction"); }}
-                  className="button-bare-primary"
-                >
-                  Preview <i className="manicon manicon-eye-outline"></i>
-                </button>
-                <button
-                  onClick={() => { alert("Under construction"); }}
-                  className="button-bare-primary"
-                >
-                  Duplicate <i className="manicon manicon-check-double"></i>
-                </button>
-                <button
-                  onClick={() => { alert("Under construction"); }}
-                  className="button-bare-primary"
-                >
-                  Delete <i className="manicon manicon-trashcan"></i>
-                </button>
-              </div>
+                <div className="project-utility">
+                  { this.props.utility ? this.props.utility : null }
+                  { this.props.note ?
+                    <span className="notes">
+                      {this.props.note}
+                    </span>
+                  : null}
+                </div>
             </div>
           </header>
         </div>

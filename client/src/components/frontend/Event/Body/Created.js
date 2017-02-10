@@ -14,7 +14,6 @@ export default class EventBodyCreated extends Component {
   render() {
     const attr = this.props.event.attributes;
     const iconClass = 'manicon manicon-' + this.props.icon;
-
     return (
       <div className="event-data">
         {/* Event-data requires a classless empty div for vertical alignment */}
@@ -24,10 +23,12 @@ export default class EventBodyCreated extends Component {
             {attr.eventTitle}
           </h5>
           {/* Only show the subtitle (and its wrapper) if it exists */}
-          {attr.subjectSubtitle ?
+          {
+            attr.eventSubtitle ?
               <span className="event-subtitle">
-              {attr.subjectSubtitle}
-            </span> : null
+                {attr.eventSubtitle}
+              </span>
+            : null
           }
           <datetime className="event-date">
             {attr.subjectType === "Project" ?

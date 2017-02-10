@@ -22,7 +22,8 @@ class FormContainer extends PureComponent {
     model: PropTypes.object,
     update: PropTypes.func.isRequired,
     create: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    onSuccess: PropTypes.func
   };
 
   static defaultProps = {
@@ -127,7 +128,7 @@ class FormContainer extends PureComponent {
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty('promise') && this.props.onSuccess) {
       res.promise.then(() => {
-        this.props.onSuccess();
+        this.props.onSuccess(this.props.response.entity);
       });
     }
   }
