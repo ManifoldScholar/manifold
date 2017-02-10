@@ -42,7 +42,7 @@ Rails.application.routes.draw do
         scope module: :projects do
           namespace :relationships do
             resources :uncollected_resources, only: [:index]
-            resources :resources, only: [:index]
+            resources :resources, only: [:index, :create]
             resources :events, only: [:index]
             resources :collaborators
             resources :text_categories, only: [:index, :create]

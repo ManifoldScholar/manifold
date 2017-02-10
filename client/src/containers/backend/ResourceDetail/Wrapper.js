@@ -1,7 +1,8 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Text, Navigation } from 'components/backend';
+import { Text, Navigation, Dialog } from 'components/backend';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { uiVisibilityActions, entityStoreActions } from 'actions';
+import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
 import { entityUtils } from 'utils';
 import { resourcesAPI } from 'api';
 import get from 'lodash/get';
@@ -24,6 +25,17 @@ class ResourceDetailWrapperContainer extends PureComponent {
     resource: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      confirmation: null
+    };
+    this.fetchResource = this.fetchResource.bind(this);
+    this.doPreview = this.doPreview.bind(this);
+    this.doDestroy = this.doDestroy.bind(this);
+    this.handleResourceDestroy = this.handleResourceDestroy.bind(this);
+  }
+
   componentDidMount() {
     this.fetchResource();
   }
@@ -42,19 +54,75 @@ class ResourceDetailWrapperContainer extends PureComponent {
     return get(this.props, 'children.type.activeNavItem');
   }
 
-  secondaryNavigationLinks(resource) {
-    return [
-      {
-        path: `/backend/resources/${resource.id}/`,
-        label: "General",
-        key: "general"
-      },
-      {
-        path: `/backend/text/${resource.id}/tbd`,
-        label: "TBD",
-        key: "tbd"
-      }
-    ];
+  closeDialog() {
+    this.setState({ confirmation: null });
+  }
+
+  doPreview(event) {
+    event.preventDefault();
+    const projectId = this.props.resource.relationships.project.id;
+    const previewUrl = `/browse/project/${projectId}/resource/${this.props.resource.id}`;
+    const win = window.open(previewUrl, '_blank');
+    win.focus();
+  }
+
+  doDestroy() {
+    const call = resourcesAPI.destroy(this.props.resource.id);
+    const options = { removes: this.props.resource };
+    const resourceRequest = request(call, 'backend-destroy-resource', options);
+    this.props.dispatch(resourceRequest).promise.then(() => {
+      this.notifyDestroy();
+      this.redirectToProjectResources();
+    });
+  }
+
+  redirectToProjectResources() {
+    const projectId = this.props.resource.relationships.project.id;
+    const redirectURL = `/backend/project/${projectId}/resources`;
+    browserHistory.push(redirectURL);
+  }
+
+  notifyDestroy() {
+    const notification = {
+      level: 0,
+      id: `RESOURCE_DESTROYED_${this.props.resource.id}`,
+      heading: "The resource has been destroyed.",
+      body: `${this.props.resource.attributes.title} has passed into the endless night.`,
+      expiration: 5000
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+  }
+
+  handleResourceDestroy(event) {
+    const heading = "Are you sure you want to delete this resource?";
+    const message = "This action cannot be undone.";
+    new Promise((resolve, reject) => {
+      this.setState({
+        confirmation: { resolve, reject, heading, message }
+      });
+    }).then(() => {
+      this.doDestroy(event);
+      this.closeDialog();
+    }, () => { this.closeDialog(); });
+  }
+
+  renderUtility() {
+    return (
+      <div>
+        <button
+          onClick={this.doPreview}
+          className="button-bare-primary"
+        >
+          Preview <i className="manicon manicon-eye-outline"></i>
+        </button>
+        <button
+          onClick={this.handleResourceDestroy}
+          className="button-bare-primary"
+        >
+          Delete <i className="manicon manicon-trashcan"></i>
+        </button>
+      </div>
+    );
   }
 
   render() {
@@ -63,6 +131,11 @@ class ResourceDetailWrapperContainer extends PureComponent {
 
     return (
       <div>
+        {
+          this.state.confirmation ?
+            <Dialog.Confirm {...this.state.confirmation} />
+            : null
+        }
         <Navigation.DetailHeader
           type="resource"
           breadcrumb={[
@@ -72,25 +145,12 @@ class ResourceDetailWrapperContainer extends PureComponent {
               label: resource.relationships.project.attributes.title
             }
           ]}
+          utility={this.renderUtility()}
           title={resource.attributes.title}
           subtitle={resource.attributes.subtitle}
         />
         <section className="backend-panel">
-          <aside className="scrollable">
-            <div className="wrapper">
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(resource)}
-                active={this.activeChild()}
-              />
-            </div>
-          </aside>
           <div className="container">
-            <aside className="aside">
-              <Navigation.Secondary
-                links={this.secondaryNavigationLinks(resource)}
-                active={this.activeChild()}
-              />
-            </aside>
             <div className="panel">
               {React.cloneElement(this.props.children, { resource })}
             </div>
