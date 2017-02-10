@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
 import { Resource, Annotation, Section } from 'components/reader';
@@ -113,6 +114,9 @@ export default class Text extends Component {
 
     const section = this.props.section;
 
+    // Page used to generate key for transitions
+    const page = this.props.location.pathname.substr(1);
+
     return (
       <div>
         <section className={readerAppearanceClass}>
@@ -148,7 +152,13 @@ export default class Text extends Component {
             </div>
           </Annotation.Annotatable>
         </section>
-        {this.props.children}
+          <ReactCSSTransitionGroup
+            transitionName="text-child"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
+          >
+            {this.props.children ? React.cloneElement(this.props.children, { key: page }) : null}
+          </ReactCSSTransitionGroup>
       </div>
     );
   }

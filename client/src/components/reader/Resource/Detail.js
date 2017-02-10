@@ -24,7 +24,7 @@ export default class ResourceOverlayDetail extends PureComponent {
             </figure>
             <h3>{attr.kind}</h3>
           </div>
-          <Resource.Title resource={resource} showDate={false}  />
+          <Resource.Title resource={resource} showDate={false} />
           <div className="resource-content">
             <p>
               {/*
