@@ -5,20 +5,22 @@
   height: 100%;
   padding-bottom: 100px;
   overflow: scroll;
-  opacity: 1;
-  transition: opacity, 0s, linear;
 
-  &.overlay-full-enter {
-    opacity: 0;
+  &.text-child-enter {
+    opacity: 0.01;
   }
 
-  &.overlay-full-enter-active {
+  &.text-child-enter-active {
     opacity: 1;
-    transition: opacity, $duration, $timing;
+    transition: opacity, $duration, $timing, 0.3s;
   }
 
-  &.overlay-full-leave {
-    opacity: 0;
+  &.text-child-leave {
+    opacity: 1;
+  }
+
+  &.text-child-leave-active {
+    opacity: 0.01;
     transition: opacity, $duration, $timing;
   }
 

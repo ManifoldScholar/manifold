@@ -21,9 +21,9 @@ export default class ResourceDetail extends Component {
         <section>
           <div className="container flush-top">
             <section className="resource-detail">
-              <Resource.Title resource={resource} showIcon={false} />
+              <Resource.Title resource={resource} showIcon={false}/>
 
-              <Resource.Hero resource={resource} />
+              <Resource.Hero resource={resource}/>
 
               <aside>
                 <Resource.Link attributes={attr}/>
