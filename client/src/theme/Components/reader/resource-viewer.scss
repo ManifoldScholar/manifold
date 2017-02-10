@@ -98,11 +98,57 @@
       margin-bottom: 4px;
       vertical-align: top;
     }
+
+    .group-thumbnail {
+      position: relative;
+
+      &.highlighted::before {
+        opacity: 0.5;
+      }
+
+      &::before {
+        position: absolute;
+        // Local z-index
+        z-index: 2;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: $accentPrimary;
+        content: '';
+        opacity: 0;
+      }
+    }
+  }
+
+  .group-highlighted-resource-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 160px;
   }
 
   .group-highlighted-resource {
+    position: absolute;
+
+    &.highlight-enter {
+      opacity: 0.01;
+    }
+
+    &.highlight-enter-active {
+      opacity: 1;
+      transition: opacity $duration $timing;
+    }
+
+    &.highlight-leave {
+      opacity: 1;
+    }
+
+    &.highlight-leave-active {
+      opacity: 0.01;
+      transition: opacity $duration $timing;
+    }
+
     .resource-preview-single {
-      position: relative;
+      position: static;
       display: inline-block;
       width: 160px;
     }

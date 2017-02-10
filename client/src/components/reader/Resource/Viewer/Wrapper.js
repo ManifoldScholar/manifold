@@ -9,10 +9,12 @@ export default class ResourceViewerWrapper extends PureComponent {
   static propTypes = {
     resources: PropTypes.array,
     annotations: PropTypes.array,
+    setActiveAnnotation: PropTypes.func,
+    activeAnnotation: PropTypes.string,
     containerSize: PropTypes.number,
     body: PropTypes.object,
     sectionId: PropTypes.string,
-    textId: PropTypes.string
+    textId: PropTypes.string,
   };
 
   constructor() {
@@ -23,6 +25,7 @@ export default class ResourceViewerWrapper extends PureComponent {
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.updates !== nextProps.updates) return true;
     if (this.props.annotations !== nextProps.annotations) return true;
+    if (this.props.activeAnnotation !== nextProps.activeAnnotation) return true;
     if (this.props.resources !== nextProps.resources) return true;
     if (this.props.body !== nextProps.body) return true;
     if (this.props.containerSize !== nextProps.containerSize) return true;
@@ -32,12 +35,15 @@ export default class ResourceViewerWrapper extends PureComponent {
   resourceMarkers() {
     const markers = [];
     if (!this.props.body) return markers;
-    const markerNodes = this.props.body.querySelectorAll('[data-resource]');
+    const markerNodes = this.props.body.querySelectorAll('[data-annotation-resource]');
     [...markerNodes].forEach((markerNode) => {
-      const id = markerNode.getAttribute('data-resource');
+      const annotationId = markerNode.getAttribute('data-annotation-resource');
+      const annotation = this.props.annotations.find((a) => a.id === annotationId);
+      const resourceId = annotation.attributes.resourceId;
       const rect = markerNode.getBoundingClientRect();
       markers.push({
-        id,
+        annotationId,
+        resourceId,
         rect: {
           top: rect.top + document.body.scrollTop
         }
@@ -54,6 +60,8 @@ export default class ResourceViewerWrapper extends PureComponent {
         sectionId={this.props.sectionId}
         resources={this.props.resources}
         resourceMarkers={this.resourceMarkers()}
+        setActiveAnnotation={this.props.setActiveAnnotation}
+        activeAnnotation={this.props.activeAnnotation}
         containerSize={this.props.containerSize}
       />
     );

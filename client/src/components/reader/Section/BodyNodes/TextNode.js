@@ -110,7 +110,7 @@ export default class TextNode extends Component {
       });
 
 
-      const resourceIds = endingResources.map((a) => a.resourceId);
+      const annotationIds = endingResources.map((a) => a.id);
 
       return (
         <span
@@ -121,9 +121,9 @@ export default class TextNode extends Component {
           {chunk}
           { endingResources.length > 0 ?
             <Resource.Marker
-              ids={resourceIds}
+              ids={annotationIds}
               handleClick={(event) => {
-                event.preventDefault(); this.handleResourceClick(resourceIds);
+                event.preventDefault(); this.handleResourceClick(annotationIds);
               }}
             />
           : null}
