@@ -83,35 +83,32 @@ export default class ListSearchable extends PureComponent {
 
     let output = null;
 
-    if (entities.length > 0) {
-      output = (
-        <div>
-          <Utility.EntityCount
-            pagination={this.props.pagination}
-            singularUnit={this.props.singularUnit}
-            pluralUnit={this.props.pluralUnit}
-          />
-          { this.props.newButtonVisible ?
-            <div className="buttons-icon-horizontal">
-              <Link to={this.props.newButtonPath} className="button-icon-secondary">
-                <i className="manicon manicon-plus"></i>
-                {this.props.newButtonText}
-              </Link>
-            </div>
-            : null
-          }
+    output = (
+      <div>
+        <Utility.EntityCount
+          pagination={this.props.pagination}
+          singularUnit={this.props.singularUnit}
+          pluralUnit={this.props.pluralUnit}
+        />
+        { this.props.newButtonVisible ?
+          <div className="buttons-icon-horizontal">
+            <Link to={this.props.newButtonPath} className="button-icon-secondary">
+              <i className="manicon manicon-plus"></i>
+              {this.props.newButtonText}
+            </Link>
+          </div>
+          : null
+        }
+        { entities.length > 0 ?
           <ul>
             {entities.map((entity) => {
               return this.renderEntity(entity);
             })}
           </ul>
-        </div>
-      );
-    } else {
-      output = (
-        <p className="list-total">Sorry, no results were found.</p>
-      );
-    }
+        : <p className="list-total">Sorry, no results were found.</p>
+        }
+      </div>
+    );
 
     return output;
   }
