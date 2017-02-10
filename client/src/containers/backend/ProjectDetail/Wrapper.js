@@ -1,10 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Project, Navigation } from 'components/backend';
+import { Dialog, Project, Navigation } from 'components/backend';
 import { connect } from 'react-redux';
-import { uiVisibilityActions, entityStoreActions } from 'actions';
+import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI } from 'api';
 import get from 'lodash/get';
+import { browserHistory } from 'react-router';
 
 const { select } = entityUtils;
 const { request, flush, requests } = entityStoreActions;
@@ -26,7 +27,13 @@ class ProjectDetailWrapperContainer extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.state = {
+      confirmation: null
+    };
     this.fetchProject = this.fetchProject.bind(this);
+    this.doPreview = this.doPreview.bind(this);
+    this.doDestroy = this.doDestroy.bind(this);
+    this.handleProjectDestroy = this.handleProjectDestroy.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +52,10 @@ class ProjectDetailWrapperContainer extends PureComponent {
 
   activeChild() {
     return get(this.props, 'children.type.activeNavItem');
+  }
+
+  closeDialog() {
+    this.setState({ confirmation: null });
   }
 
   secondaryNavigationLinks(project) {
@@ -77,12 +88,80 @@ class ProjectDetailWrapperContainer extends PureComponent {
     ];
   }
 
+  doPreview(event) {
+    event.preventDefault();
+    const win = window.open(`/browse/project/${this.props.project.id}`, '_blank');
+    win.focus();
+  }
+
+  doDestroy() {
+    const call = projectsAPI.destroy(this.props.project.id);
+    const options = { removes: this.props.project };
+    const projectRequest = request(call, 'backend-destroy-project', options);
+    this.props.dispatch(projectRequest).promise.then(() => {
+      this.notifyDestroy();
+      this.redirectToDashboard();
+    });
+  }
+
+  redirectToDashboard() {
+    browserHistory.push("/backend");
+  }
+
+  notifyDestroy() {
+    const notification = {
+      level: 0,
+      id: `PROJECT_DESTROYED_${this.props.project.id}`,
+      heading: "The project has been destroyed.",
+      body: `${this.props.project.attributes.title} has passed into the endless night.`,
+      expiration: 5000
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+  }
+
+  handleProjectDestroy(event) {
+    const heading = "Are you sure you want to delete this project?";
+    const message = "This action cannot be undone.";
+    new Promise((resolve, reject) => {
+      this.setState({
+        confirmation: { resolve, reject, heading, message }
+      });
+    }).then(() => {
+      this.doDestroy(event);
+      this.closeDialog();
+    }, () => { this.closeDialog(); });
+  }
+
+  renderUtility() {
+    return (
+      <div>
+        <button
+          onClick={this.doPreview}
+          className="button-bare-primary"
+        >
+          Preview <i className="manicon manicon-eye-outline"></i>
+        </button>
+        <button
+          onClick={this.handleProjectDestroy}
+          className="button-bare-primary"
+        >
+          Delete <i className="manicon manicon-trashcan"></i>
+        </button>
+      </div>
+    );
+  }
+
   render() {
     if (!this.props.project) return null;
     const { project } = this.props;
 
     return (
       <div>
+        {
+          this.state.confirmation ?
+            <Dialog.Confirm {...this.state.confirmation} />
+            : null
+        }
         <Navigation.DetailHeader
           type="project"
           breadcrumb={[
@@ -90,6 +169,8 @@ class ProjectDetailWrapperContainer extends PureComponent {
           ]}
           title={project.attributes.title}
           subtitle={project.attributes.subtitle}
+          utility={this.renderUtility()}
+
         />
         <section className="backend-panel">
           <aside className="scrollable">

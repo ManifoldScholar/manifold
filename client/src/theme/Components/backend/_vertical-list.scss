@@ -21,14 +21,31 @@
     padding-bottom: 15px;
     font-size: 15px;
     color: $neutral70;
+    border-bottom: 1px solid $neutral80;
 
     span {
       color: $neutral30;
     }
   }
 
+  .buttons-icon-horizontal {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 0;
+    border-top: 1px solid $neutral80;
+
+    .button-icon-secondary {
+      width: 100%;
+      margin: 0;
+    }
+  }
+
   ul {
     @include listUnstyled;
+
+    li:first-of-type {
+      border-top: 0;
+    }
 
     li {
       display: flex;

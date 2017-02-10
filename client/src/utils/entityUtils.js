@@ -83,8 +83,8 @@ const selectEntity = memoize((response, entities) => {
 });
 
 export function isLoaded(request, state) {
-  const loaded = get(state, `entityStore.responses.${request}.loaded`);
-  return loaded === true;
+  const l = get(state, `entityStore.responses.${request}.loaded`);
+  return l === true;
 }
 
 export function select(requestMeta, entityStore) {
@@ -94,6 +94,12 @@ export function select(requestMeta, entityStore) {
     return selectCollection(response, entityStore.entities);
   }
   return selectEntity(response, entityStore.entities);
+}
+
+export function loaded(requestMeta, entityStore) {
+  const response = get(entityStore, `responses.${requestMeta}`);
+  if (!response) return false;
+  return response.loaded;
 }
 
 export function meta(requestMeta, entityStore) {

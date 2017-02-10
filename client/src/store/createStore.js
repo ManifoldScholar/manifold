@@ -2,6 +2,7 @@ import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from './middleware/thunkMiddleware';
 import entityStoreMiddleware from './middleware/entityStoreMiddleware';
 import currentUserMiddleware from './middleware/currentUserMiddleware';
+import notificationMiddleware from './middleware/notificationMiddleware';
 import apiErrorMiddleware from './middleware/apiErrorMiddleware';
 import promiseMiddleware from 'redux-promise';
 import reducers from './reducers';
@@ -15,6 +16,7 @@ export default function createStore(data) {
   middleware.push(entityStoreMiddleware);
   middleware.push(thunkMiddleware);
   middleware.push(promiseMiddleware);
+  middleware.push(notificationMiddleware);
 
   let finalCreateStore;
   if (__CLIENT__) {

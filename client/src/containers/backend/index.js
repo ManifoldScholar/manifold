@@ -1,5 +1,6 @@
 import Backend from './Backend';
 import Dashboard from './Dashboard';
+import NewProject from './NewProject';
 import ProjectDetail from './ProjectDetail';
 import ResourceDetail from './ResourceDetail';
 import TextDetail from './TextDetail';
@@ -10,6 +11,7 @@ import Form from './Form';
 export {
   Backend,
   Dashboard,
+  NewProject,
   ProjectDetail,
   ResourceDetail,
   TextDetail,

@@ -82,6 +82,9 @@ class DashboardContainer extends PureComponent {
                 </header>
                 { this.props.projects && this.props.projectsMeta ?
                   <List.Searchable
+                    newButtonVisible
+                    newButtonPath="/backend/project/new"
+                    newButtonText="Add a New Project"
                     entities={this.props.projects}
                     singularUnit="project"
                     pluralUnit="projects"

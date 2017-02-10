@@ -76,6 +76,12 @@
   .project-utility {
     clear: both;
 
+    .notes {
+      @include templateCopy;
+      font-size: 1.071em;
+      color: $neutral50;
+    }
+
     button {
       font-size: 0;
 

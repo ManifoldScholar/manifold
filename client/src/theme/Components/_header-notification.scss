@@ -49,11 +49,11 @@
     @include headingTertiary;
     padding-right: 67px;
     margin: 0;
-    font-size: 16px;
-    font-weight: $regular;
+    font-size: 18px;
+    font-weight: $semibold;
 
     @include respond($break70) {
-      font-size: 18px;
+      font-size: 20px;
     }
   }
 
