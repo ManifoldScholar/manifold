@@ -105,7 +105,7 @@ export default class ListSearchable extends PureComponent {
               return this.renderEntity(entity);
             })}
           </ul>
-        : <p className="list-total">Sorry, no results were found.</p>
+        : <p className="list-total empty">Sorry, no results were found.</p>
         }
       </div>
     );
