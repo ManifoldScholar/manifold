@@ -27,7 +27,7 @@ export default class ListSearchable extends PureComponent {
     newButtonText: "Add new",
     newButtonVisible: false,
     paginationPadding: 3
-  }
+  };
 
   constructor() {
     super();

@@ -1,12 +1,10 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form, List, Resource } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import update from 'immutability-helper';
-import set from 'lodash/set';
 import { projectsAPI } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
@@ -71,7 +69,9 @@ class ProjectDetailResources extends PureComponent {
 
   render() {
     if (!this.props.resources) return null;
+    const project = this.props.project;
 
+    if (!project) return null;
     return (
       <section>
         <header className="section-heading-secondary">
@@ -80,6 +80,9 @@ class ProjectDetailResources extends PureComponent {
           </h3>
         </header>
         <List.Searchable
+          newButtonVisible
+          newButtonPath={`/backend/project/${project.id}/resources/new`}
+          newButtonText="Add a New Resource"
           entities={this.props.resources}
           singularUnit="resource"
           pluralUnit="resources"
