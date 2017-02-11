@@ -2,6 +2,10 @@
   @include clearfix;
   padding-top: 22px;
 
+  .container {
+    @include clearfix;
+  }
+
   .overlay-full-secondary & {
     padding-top: 70px;
 

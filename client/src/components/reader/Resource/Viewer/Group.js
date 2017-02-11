@@ -32,9 +32,11 @@ export default class ResourceViewerGroup extends PureComponent {
     super();
     this.state = {
       visible: true,
+      groupActiveAnnotationId: null,
     };
 
     this.handleFade = this.handleFade.bind(this);
+    this.setGroupActive = this.setGroupActive.bind(this);
     this.throttledFade = throttle(this.handleFade, 200).bind(this);
   }
 
@@ -58,16 +60,34 @@ export default class ResourceViewerGroup extends PureComponent {
     });
   }
 
-  getHighlightedItem() {
-    if (!this.props.activeAnnotation) return this.props.items[0];
-    // Set the highlighted item base on annotation ID
+  setGroupActive(annotationId) {
+    this.setState({
+      groupActiveAnnotationId: annotationId
+    });
+  }
+
+  matchHighlightItemById(id) {
+    // Match highlighted items based on props activeAnnotation
     const highlighted = this.props.items.filter((item) => {
-      return this.props.activeAnnotation === item.annotationId;
+      return id === item.annotationId;
     });
 
-    // If there are
+    // If there are any results, return them
+    // otherwise return null
     if (highlighted.length > 0) return highlighted[0];
 
+    return null;
+  }
+
+  getHighlightedItem() {
+    const propsActive = this.props.activeAnnotation;
+    const stateActive = this.state.groupActiveAnnotationId;
+    if (!propsActive && !stateActive) {
+      return this.props.items[0];
+    }
+
+    if (this.matchHighlightItemById(propsActive)) return this.matchHighlightItemById(propsActive);
+    if (this.matchHighlightItemById(stateActive)) return this.matchHighlightItemById(stateActive);
     return this.props.items[0];
   }
 
@@ -80,13 +100,18 @@ export default class ResourceViewerGroup extends PureComponent {
       'transition-in': this.props.fadeIn && this.state.visible
     });
 
+    const highlightedLinkClass = classNames({
+      'group-highlighted-resource': true,
+      'resource-single-link': true,
+      highlighted: highlightedItem.annotationId === this.props.activeAnnotation
+    });
+
     const thumbnailsClass = classNames({
       'group-thumbnails': true,
       overflow: this.props.items.length > 8
     });
 
     return (
-
       <div className={groupClass}
         style={{
           top: this.props.location + 'px',
@@ -105,7 +130,7 @@ export default class ResourceViewerGroup extends PureComponent {
           >
             <Link
               to={`/read/${textId}/section/${sectionId}/resource/${highlightedItem.resource.id}`}
-              className="group-highlighted-resource resource-single-link"
+              className={highlightedLinkClass}
               title={highlightedItem.resource.id}
               key={highlightedItem.resource.id}
             >
@@ -123,7 +148,11 @@ export default class ResourceViewerGroup extends PureComponent {
             return (
               <li key={index}>
                 <Link
-                  onMouseOver={() => { this.props.setActiveAnnotation(item.annotationId); }}
+                  onMouseOver={() => {
+                    this.props.setActiveAnnotation(item.annotationId);
+                    this.setGroupActive(item.annotationId);
+                  }}
+                  onMouseLeave={() => { this.props.setActiveAnnotation(null); }}
                   to={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
                   title={item.resource.id}
                 >
