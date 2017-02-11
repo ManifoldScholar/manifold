@@ -45,8 +45,10 @@ export default class ResourceHero extends Component {
     const attr = this.props.resource.attributes;
 
     return (
-      <section className="resource-hero">
-        {this.getFigureByType(this.props.resource)}
+      <section className="resource-hero-container">
+        <div className="resource-hero">
+          {this.getFigureByType(this.props.resource)}
+        </div>
       </section>
     );
   }

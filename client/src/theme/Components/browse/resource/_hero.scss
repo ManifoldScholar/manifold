@@ -1,12 +1,18 @@
-.resource-hero {
-  .resource-content + & {
+.resource-hero-container {
+  @include respond($break60) {
+    @include containerPrototype;
+  }
+
+  .overlay-full-secondary & {
     margin-top: 17px;
 
     @include respond($break60) {
       margin-top: 40px;
     }
   }
+}
 
+.resource-hero {
   .resource-slide-figure {
     margin-bottom: 32px;
 
