@@ -32,7 +32,6 @@ export default class ResourceViewerGroup extends PureComponent {
     super();
     this.state = {
       visible: true,
-      highlightedResourceId: null
     };
 
     this.handleFade = this.handleFade.bind(this);
@@ -66,7 +65,10 @@ export default class ResourceViewerGroup extends PureComponent {
       return this.props.activeAnnotation === item.annotationId;
     });
 
-    return highlighted[0];
+    // If there are
+    if (highlighted.length > 0) return highlighted[0];
+
+    return this.props.items[0];
   }
 
   render() {
@@ -118,7 +120,6 @@ export default class ResourceViewerGroup extends PureComponent {
 
         <ul className={thumbnailsClass}>
           {this.props.items.map((item, index) => {
-
             return (
               <li key={index}>
                 <Link
