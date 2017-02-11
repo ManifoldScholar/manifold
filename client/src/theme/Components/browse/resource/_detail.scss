@@ -99,6 +99,7 @@
 
     a {
       text-decoration: none;
+
       &:hover {
         h1, h2, h3, h4, h5, h6 {
           color: $accentPrimary;
@@ -110,10 +111,10 @@
       @include templateHead;
       width: 100%;
       margin: 0;
+      margin-bottom: 5px;
       font-size: 26px;
       font-weight: $medium;
       color: $neutral75;
-      margin-bottom: 5px;
 
       @include respond($break60) {
         width: auto;

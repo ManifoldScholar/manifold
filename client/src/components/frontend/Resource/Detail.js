@@ -19,12 +19,14 @@ export default class ResourceDetail extends Component {
     return (
       <div>
         <section>
-          <div className="container flush-top">
-            <section className="resource-detail">
+          <section className="resource-detail">
+            <div className="container flush-top flush-bottom">
               <Resource.Title resource={resource} showIcon={false}/>
+            </div>
 
               <Resource.Hero resource={resource}/>
 
+            <div className="container flush-top">
               <aside>
                 <Resource.Link attributes={attr}/>
                 <Link to="#" className="button-primary">
@@ -48,8 +50,8 @@ export default class ResourceDetail extends Component {
               <div className="resource-meta-mobile">
                 <Resource.Meta resource={resource} style={'primary'}/>
               </div>
-            </section>
-          </div>
+            </div>
+          </section>
         </section>
       </div>
     );
