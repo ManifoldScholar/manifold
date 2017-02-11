@@ -28,7 +28,7 @@ export default class ResourceDetail extends Component {
       default:
         button = (
             <Link to={attr.attachmentUrl} className={this.props.buttonClass} target="_blank">
-              Download <i className="manicon manicon-arrow-right"></i>
+              Download <i className="manicon manicon-arrow-down"></i>
             </Link>
         );
         break;

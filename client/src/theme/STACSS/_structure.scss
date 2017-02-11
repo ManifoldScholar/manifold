@@ -134,6 +134,18 @@
         padding-bottom: 70px;
       }
     }
+
+    &.flush-bottom {
+      section > & {
+        padding-top: 0;
+        padding-bottom: 0;
+
+        @include respond($break75) {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
   }
 
   &.flush-bottom {
