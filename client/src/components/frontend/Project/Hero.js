@@ -82,10 +82,11 @@ export default class ProjectHero extends Component {
   renderSocial() {
     const attr = this.props.project.attributes;
     const services = ["twitter", "facebook", "instagram"];
+    const hashtag = attr.hashtag ? `#${attr.hashtag}` : null;
 
     return (
       <section className="project-social">
-        <span className="hashtag">#{attr.hashtag}</span>
+        <span className="hashtag">{hashtag}</span>
         <nav className="networks">
           <ul>
             {services.map((service) => {
