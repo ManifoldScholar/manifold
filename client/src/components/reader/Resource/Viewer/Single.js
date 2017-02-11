@@ -12,6 +12,7 @@ export default class ResourceViewerSingle extends PureComponent {
     resource: PropTypes.object,
     location: PropTypes.number,
     height: PropTypes.number,
+    active: PropTypes.bool,
     fadeIn: PropTypes.bool
   };
 
