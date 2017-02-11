@@ -11,6 +11,11 @@ RSpec.describe Resource, type: :model do
     expect(resource.project).to be_a Project
   end
 
+  it "is invalid without a title" do
+    resource = FactoryGirl.build(:resource, title: "")
+    expect(resource).to_not be_valid
+  end
+
   it { is_expected.to have_attached_file(:attachment) }
 
 end

@@ -52,6 +52,9 @@ class Resource < ApplicationRecord
 
   before_attachment_post_process :resize_images
 
+  # Validation
+  validates :title, presence: true
+
   # Scopes
   scope :by_project, lambda { |project|
     return all unless project.present?
