@@ -2,6 +2,7 @@
   position: absolute;
   // Reader header height + gradient
   top: 0;
+  display: none;
   height: 100%;
   background-color: $accentPrimaryPale;
 
@@ -11,15 +12,46 @@
     }
   }
 
+  @include respond($break80) {
+    display: block;
+  }
+
   .viewer-list {
     @include listUnstyled;
     position: absolute;
     top: 0;
-    right: 68px;
+    right: 3vw;
     height: 100%;
 
-    a {
+    @include respond($break100) {
+      right: 45px;
+    }
+
+    .resource-single-link {
       display: block;
+
+      .image-overlay {
+        background-color: $accentPrimary;
+        opacity: 0;
+      }
+
+      &:hover {
+        .resource-title {
+          color: $accentPrimary;
+        }
+
+        .image-overlay {
+          opacity: 0.5;
+        }
+
+        .resource-icon {
+          background-color: $accentPrimary;
+        }
+
+        svg {
+          fill: $neutralWhite;
+        }
+      }
     }
   }
 }
@@ -102,20 +134,18 @@
     .group-thumbnail {
       position: relative;
 
-      &.highlighted::before {
-        opacity: 0.5;
-      }
+      &.highlighted {
+        .resource-thumbnail::before {
+          opacity: 0.5;
+        }
 
-      &::before {
-        position: absolute;
-        // Local z-index
-        z-index: 2;
-        display: block;
-        width: 100%;
-        height: 100%;
-        background-color: $accentPrimary;
-        content: '';
-        opacity: 0;
+        .resource-icon {
+          background-color: $accentPrimary;
+        }
+
+        svg {
+          fill: $neutralWhite;
+        }
       }
     }
   }

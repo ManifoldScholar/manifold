@@ -105,7 +105,7 @@ export default class ResourceViewerGroup extends PureComponent {
           >
             <Link
               to={`/read/${textId}/section/${sectionId}/resource/${highlightedItem.resource.id}`}
-              className="group-highlighted-resource"
+              className="group-highlighted-resource resource-single-link"
               title={highlightedItem.resource.id}
               key={highlightedItem.resource.id}
             >
