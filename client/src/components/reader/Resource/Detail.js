@@ -11,6 +11,25 @@ export default class ResourceOverlayDetail extends PureComponent {
     handleClose: PropTypes.func
   };
 
+  constructor(props) {
+    super(props);
+    this.handleEscape = this.handleEscape.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('keyup', this.handleEscape);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.handleEscape);
+  }
+
+  handleEscape(event) {
+    if (event.keyCode === 27) {
+      this.props.handleClose(event);
+    }
+  }
+
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;

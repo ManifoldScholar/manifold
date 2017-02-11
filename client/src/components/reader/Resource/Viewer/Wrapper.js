@@ -9,8 +9,6 @@ export default class ResourceViewerWrapper extends PureComponent {
   static propTypes = {
     resources: PropTypes.array,
     annotations: PropTypes.array,
-    setActiveAnnotation: PropTypes.func,
-    activeAnnotation: PropTypes.string,
     containerSize: PropTypes.number,
     body: PropTypes.object,
     sectionId: PropTypes.string,
@@ -60,8 +58,6 @@ export default class ResourceViewerWrapper extends PureComponent {
         sectionId={this.props.sectionId}
         resources={this.props.resources}
         resourceMarkers={this.resourceMarkers()}
-        setActiveAnnotation={this.props.setActiveAnnotation}
-        activeAnnotation={this.props.activeAnnotation}
         containerSize={this.props.containerSize}
       />
     );

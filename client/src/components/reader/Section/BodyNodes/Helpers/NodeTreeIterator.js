@@ -7,7 +7,8 @@ import isEmpty from 'lodash/isEmpty';
 
 export default class NodeTreeIterator {
 
-  constructor(annotations, lockedSelection) {
+  constructor(bodyProps) {
+    const { annotations, lockedSelection } = bodyProps;
     this.annotations = annotations ? annotations.slice(0) : [];
     if (lockedSelection) this.annotations.push(lockedSelection);
     this.annotationsMap = {};
@@ -66,6 +67,7 @@ export default class NodeTreeIterator {
     const noTextNodes = ['area', 'audio', 'map', 'track', 'video', 'embed', 'object',
       'param', 'source', 'canvas', 'noscript', 'script', 'col', 'colgroup', 'table',
       'tbody', 'tfoot', 'thead', 'tr'];
+
     if (!parent || parent.nodeType !== 'element' || !noTextNodes.includes(parent.tag)) {
       return React.createElement(TextNode, node);
     }

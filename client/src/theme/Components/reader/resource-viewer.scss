@@ -35,7 +35,7 @@
         opacity: 0;
       }
 
-      &:hover, &.highlighted {
+      &:hover, &.highlighted, .highlighted {
         .resource-title {
           color: $accentPrimary;
         }
@@ -88,6 +88,16 @@
     right: 0;
     opacity: 1;
   }
+
+  .resource-viewer .viewer-list &.highlighted {
+    .resource-title {
+      color: $accentPrimary;
+    }
+
+    .image-overlay {
+      opacity: 0.5;
+    }
+  }
 }
 
 .resource-preview-group {
@@ -98,7 +108,6 @@
   transition: right 0.5s $timing 0.1s,
   opacity 0.5s $timing;
 
-
   &.transition-out {
     right: 20px;
     opacity: 0;
@@ -108,7 +117,6 @@
     right: 0;
     opacity: 1;
   }
-
 
   // ul
   .group-thumbnails {

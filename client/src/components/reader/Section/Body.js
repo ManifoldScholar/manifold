@@ -6,7 +6,9 @@ export default class Body extends Component {
     section: PropTypes.object,
     annotations: PropTypes.array,
     lockedSelection: PropTypes.object,
-    didUpdateCallback: PropTypes.func
+    didUpdateCallback: PropTypes.func,
+    setActiveAnnotation: PropTypes.func,
+    activeAnnotation: PropTypes.string
   };
 
   componentDidMount() {
@@ -26,10 +28,7 @@ export default class Body extends Component {
   }
 
   render() {
-    const iterator =
-      new Section.BodyNodes.Helpers.NodeTreeIterator(
-        this.props.annotations, this.props.lockedSelection
-      );
+    const iterator = new Section.BodyNodes.Helpers.NodeTreeIterator(this.props);
     const node = this.props.section.attributes.bodyJson;
     const elements = iterator.visit(node);
     return elements;

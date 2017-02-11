@@ -90,6 +90,10 @@
     color: $neutral40;
     text-decoration: none;
 
+    &.active {
+      color: $accentPrimary;
+    }
+
     i {
       position: relative;
       top: 0.15em;
