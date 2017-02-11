@@ -3,13 +3,23 @@ import get from 'lodash/get';
 import throttle from 'lodash/throttle';
 import classNames from 'classnames';
 import { Resource } from 'components/frontend';
+import { connect } from 'react-redux';
+import { uiReaderActions } from 'actions';
 
-export default class ResourceViewerSingle extends PureComponent {
+class ResourceViewerSingle extends PureComponent {
 
   static displayName = "ResourceViewer.Single";
 
+  static mapStateToProps(state, ownProps) {
+    const newState = {
+      activeAnnotation: state.ui.reader.activeAnnotation
+    };
+    return Object.assign({}, newState, ownProps);
+  }
+
   static propTypes = {
     resource: PropTypes.object,
+    annotationId: PropTypes.string,
     location: PropTypes.number,
     height: PropTypes.number,
     active: PropTypes.bool,
@@ -51,6 +61,10 @@ export default class ResourceViewerSingle extends PureComponent {
     });
   }
 
+  setActiveAnnotation(annotationId) {
+    this.props.dispatch(uiReaderActions.setActiveAnnotation(annotationId));
+  }
+
   render() {
     const resource = this.props.resource;
     const variant = "smallLandscape";
@@ -60,6 +74,7 @@ export default class ResourceViewerSingle extends PureComponent {
       'resource-preview-single': true,
       'transition-out': this.props.fadeIn && !this.state.visible,
       'transition-in': this.props.fadeIn && this.state.visible,
+      highlighted: this.props.activeAnnotation === this.props.annotationId
     });
 
     return (
@@ -70,6 +85,8 @@ export default class ResourceViewerSingle extends PureComponent {
           maxHeight: height
         }}
         ref={(r) => { this.single = r; }}
+        onMouseOver={() => { this.setActiveAnnotation(this.props.annotationId); }}
+        onMouseLeave={() => { this.setActiveAnnotation(null); }}
       >
         <Resource.Thumbnail
           key={resource.id}
@@ -84,3 +101,7 @@ export default class ResourceViewerSingle extends PureComponent {
     );
   }
 }
+
+export default connect(
+  ResourceViewerSingle.mapStateToProps
+)(ResourceViewerSingle);

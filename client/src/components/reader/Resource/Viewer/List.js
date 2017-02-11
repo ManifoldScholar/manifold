@@ -10,8 +10,6 @@ export default class ResourceViewerList extends PureComponent {
   static propTypes = {
     resources: PropTypes.array,
     resourceMarkers: PropTypes.array,
-    setActiveAnnotation: PropTypes.func,
-    activeAnnotation: PropTypes.string,
     containerSize: PropTypes.number
   };
 
@@ -87,8 +85,6 @@ export default class ResourceViewerList extends PureComponent {
               {item.group ?
                 <Group
                   items={item.items}
-                  setActiveAnnotation={this.props.setActiveAnnotation}
-                  activeAnnotation={this.props.activeAnnotation}
                   location={item.location}
                   height={this.groupHeight}
                   singleHeight={this.resourceHeight}
@@ -100,6 +96,7 @@ export default class ResourceViewerList extends PureComponent {
                   to={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
                 >
                   <Single
+                    annotationId={item.annotationId}
                     resource={item.resource}
                     location={item.location}
                     height={this.resourceHeight}

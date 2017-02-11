@@ -17,7 +17,8 @@ export default class Text extends Component {
     createAnnotation: PropTypes.func,
     authentication: PropTypes.object,
     params: PropTypes.object,
-    children: PropTypes.object
+    children: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   static contextTypes = {
@@ -28,11 +29,9 @@ export default class Text extends Component {
     super(props);
     this.state = {
       lockedSelection: null,
-      updates: 0,
-      activeAnnotation: null
+      updates: 0
     };
     this.lockSelection = this.lockSelection.bind(this);
-    this.setActiveAnnotation = this.setActiveAnnotation.bind(this);
     this.recordBodyDomUpdate = this.recordBodyDomUpdate.bind(this);
   }
 
@@ -44,12 +43,6 @@ export default class Text extends Component {
   componentDidUpdate(prevProps) {
     this.maybeScrollToTop(prevProps.section, this.props.section);
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
-  }
-
-  setActiveAnnotation(annotationId) {
-    this.setState({
-      activeAnnotation: annotationId
-    });
   }
 
   // We need a callback from the body to let us know when it updates. We can then pass
@@ -135,8 +128,6 @@ export default class Text extends Component {
               updates={this.state.updates}
               resources={this.props.resources}
               annotations={this.props.annotations}
-              setActiveAnnotation={this.setActiveAnnotation}
-              activeAnnotation={this.state.activeAnnotation}
               containerSize={typography.margins.current}
               body={this.body}
             /> : null

@@ -6,14 +6,15 @@ import throttle from 'lodash/throttle';
 import Single from './Single';
 import GroupThumbnail from './GroupThumbnail';
 import { Resource } from 'components/frontend';
+import { connect } from 'react-redux';
+import { uiReaderActions } from 'actions';
 
-export default class ResourceViewerGroup extends PureComponent {
+export class ResourceViewerGroup extends PureComponent {
 
   static displayName = "ResourceViewer.Group";
 
   static propTypes = {
     items: PropTypes.array,
-    setActiveAnnotation: PropTypes.func,
     activeAnnotation: PropTypes.string,
     location: PropTypes.number,
     height: PropTypes.number,
@@ -22,6 +23,13 @@ export default class ResourceViewerGroup extends PureComponent {
     textId: PropTypes.string,
     sectionId: PropTypes.string
   };
+
+  static mapStateToProps(state, ownProps) {
+    const newState = {
+      activeAnnotation: state.ui.reader.activeAnnotation
+    };
+    return Object.assign({}, newState, ownProps);
+  }
 
   static defaultProps = {
     location: 0,
@@ -64,6 +72,10 @@ export default class ResourceViewerGroup extends PureComponent {
     this.setState({
       groupActiveAnnotationId: annotationId
     });
+  }
+
+  setActiveAnnotation(annotationId) {
+    this.props.dispatch(uiReaderActions.setActiveAnnotation(annotationId));
   }
 
   matchHighlightItemById(id) {
@@ -136,6 +148,7 @@ export default class ResourceViewerGroup extends PureComponent {
             >
               <Single
                 resource={highlightedItem.resource}
+                annotationId={highlightedItem.annotationId}
                 height={this.props.singleHeight}
                 fadeIn={false}
               />
@@ -149,10 +162,10 @@ export default class ResourceViewerGroup extends PureComponent {
               <li key={index}>
                 <Link
                   onMouseOver={() => {
-                    this.props.setActiveAnnotation(item.annotationId);
+                    this.setActiveAnnotation(item.annotationId);
                     this.setGroupActive(item.annotationId);
                   }}
-                  onMouseLeave={() => { this.props.setActiveAnnotation(null); }}
+                  onMouseLeave={() => { this.setActiveAnnotation(null); }}
                   to={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
                   title={item.resource.id}
                 >
@@ -169,3 +182,7 @@ export default class ResourceViewerGroup extends PureComponent {
     );
   }
 }
+
+export default connect(
+  ResourceViewerGroup.mapStateToProps
+)(ResourceViewerGroup);

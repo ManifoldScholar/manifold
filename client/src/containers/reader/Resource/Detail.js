@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Section, Resource } from 'components/reader';
 
 const { select, meta } = entityUtils;
-const { request } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class ResourceDetailContainer extends PureComponent {
 
@@ -38,6 +38,10 @@ class ResourceDetailContainer extends PureComponent {
 
   constructor(props) {
     super(props);
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(flush("reader-resource"));
   }
 
   render() {

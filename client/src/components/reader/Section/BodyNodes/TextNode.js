@@ -32,10 +32,6 @@ export default class TextNode extends Component {
     });
   }
 
-  handleResourceClick(ids) {
-    console.log(ids, "You clicked on an icon that represents this ID");
-  }
-
   annotatedContent() {
     const annotations = this.propsToLocalAnnotationsArray(this.props.openAnnotations);
     const content = this.props.content;
@@ -110,7 +106,7 @@ export default class TextNode extends Component {
       });
 
 
-      const annotationIds = endingResources.map((a) => a.id);
+      // const annotationIds = endingResources.map((a) => a.id);
 
       return (
         <span
@@ -119,14 +115,11 @@ export default class TextNode extends Component {
           data-annotation-ids={map[index].map((a) => a.id)}
         >
           {chunk}
-          { endingResources.length > 0 ?
-            <Resource.Marker
-              ids={annotationIds}
-              handleClick={(event) => {
-                event.preventDefault(); this.handleResourceClick(annotationIds);
-              }}
-            />
-          : null}
+          {
+            endingResources.length > 0 ?
+            <Resource.Marker annotations={endingResources} />
+            : null
+          }
         </span>
       );
     });
