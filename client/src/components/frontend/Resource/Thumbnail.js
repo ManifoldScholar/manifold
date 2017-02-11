@@ -70,7 +70,10 @@ export default class ResourceThumbnail extends Component {
               </figcaption>
               : null }
             { this.props.noCrop ?
-              <img className="resource-image" src={this.getImage(resource)}/> :
+              <div className="resource-image">
+                <img src={this.getImage(resource)}/>
+                <div className="image-overlay"></div>
+              </div> :
               <i className={`resource-icon ${resource.attributes.kind}`}>
                 {resource.attributes.kind ?
                     <Icon.Composer kind={resource.attributes.kind}/> : null}

@@ -96,6 +96,7 @@ export default class ResourceViewerList extends PureComponent {
                   sectionId={sectionId}
                 /> :
                 <Link
+                  className="resource-single-link"
                   to={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
                 >
                   <Single

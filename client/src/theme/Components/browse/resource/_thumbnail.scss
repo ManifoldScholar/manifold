@@ -108,15 +108,30 @@
       }
 
       &::before {
-        display: none;
+        background-color: $accentPrimary;
+        opacity: 0;
       }
     }
 
     .resource-image {
-      display: block;
-      width: auto;
-      height: 50px;
-      margin: 0 0 0 auto;
+      position: relative;
+      display: inline-block;
+
+      .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: '';
+        transition: opacity $duration $timing;
+      }
+
+      img {
+        display: block;
+        width: auto;
+        height: 50px;
+      }
     }
 
     .resource-icon {
