@@ -22,24 +22,27 @@ export default class ResourceTitle extends Component {
     const attr = this.props.resource.attributes;
 
     return (
-      <header className="resource-title">
+      <div className="resource-title">
         {this.props.showIcon ?
           <figure className={`resource-icon ${attr.kind}`}>
             <Icon.Composer kind={attr.kind}/>
           </figure> : null
         }
-        <h1>
-          {attr.title}
-        </h1>
-        {this.props.showDate ?
-          <span className="resource-date">
-            <FormattedDate
-              format="MMMM, YYYY"
-              date={attr.createdAt}
-            />
-          </span> : null
-        }
-      </header>
+        <div>
+          <h1>
+            {attr.title}
+          </h1>
+          {this.props.showDate ?
+            <span className="resource-date">
+              {'Resource added '}
+              <FormattedDate
+                format="MMMM, YYYY"
+                date={attr.createdAt}
+              />
+            </span> : null
+          }
+        </div>
+      </div>
     );
   }
 }

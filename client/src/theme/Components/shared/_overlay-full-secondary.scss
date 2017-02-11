@@ -31,6 +31,8 @@
     top: 17px;
     right: 17px;
     color: $neutral50;
+    cursor: pointer;
+    transition: color $duration $timing;
 
     @include respond($break70) {
       top: 6.11vh;
@@ -40,6 +42,11 @@
         top: 55px;
       }
     }
+
+    &:hover {
+      color: $accentPrimary;
+    }
+
 
   }
 }

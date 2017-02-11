@@ -16,15 +16,14 @@ export default class ResourceOverlayDetail extends PureComponent {
     const attr = resource.attributes;
 
     return (
-      <div className="container">
-        <div className="resource-detail">
+      <div className="resource-detail">
+        <div className="container">
           <div className="resource-kind">
             <figure className={`resource-icon ${attr.kind}`}>
               <Icon.Composer kind={attr.kind}/>
             </figure>
-            <h3>{attr.kind}</h3>
           </div>
-          <Resource.Title resource={resource} showDate={false} />
+          <Resource.Title resource={resource} />
           <div className="resource-content">
             <p>
               {/*
@@ -42,7 +41,9 @@ export default class ResourceOverlayDetail extends PureComponent {
               />
             </div>
           */}
-          <Resource.Hero resource={resource} />
+        </div>
+        <Resource.Hero resource={resource} />
+        <div className="container">
           <Resource.Meta
             resource={resource}
             style={'secondary columnar'}
@@ -50,15 +51,15 @@ export default class ResourceOverlayDetail extends PureComponent {
             showTags={false}
           />
 
-        <nav className="button-nav">
-          <Resource.Link attributes={attr} buttonClass="button-secondary outlined" /><br/>
-          <Link to="#" className="button-secondary outlined">
-            Visit Resource Page<i className="manicon manicon-arrow-right"></i>
-          </Link><br/>
-          <button onClick={this.props.handleClose} className="button-secondary outlined dull">
-            <i className="manicon manicon-arrow-left"></i>Return to Reader
-          </button>
-        </nav>
+          <nav className="button-nav">
+            <Resource.Link attributes={attr} buttonClass="button-secondary outlined" /><br/>
+            <Link to="#" className="button-secondary outlined">
+              Visit Resource Page<i className="manicon manicon-arrow-right"></i>
+            </Link><br/>
+            <button onClick={this.props.handleClose} className="button-secondary outlined dull">
+              <i className="manicon manicon-arrow-left"></i>Return to Reader
+            </button>
+          </nav>
         </div>
       </div>
     );

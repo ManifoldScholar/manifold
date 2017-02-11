@@ -39,11 +39,7 @@
     }
 
     + .resource-title {
-      padding-top: 13px;
-
-      @include respond($break60) {
-        padding-top: 16px;
-      }
+      padding-top: 7px;
     }
 
     h3 {
@@ -79,10 +75,11 @@
     flex-wrap: wrap;
     padding-top: 23px;
     padding-bottom: 26px;
+    text-decoration: none;
 
     .resource-icon {
       display: none;
-      max-width: 68px;
+      max-width: 73px;
       padding-right: 18px;
 
       @include respond($break60) {
@@ -98,9 +95,14 @@
         height: auto;
         fill: $neutral50;
       }
+    }
 
-      + h1, + h2, + h3, + h4, + h5, + h6 {
-        margin-top: -5px;
+    a {
+      text-decoration: none;
+      &:hover {
+        h1, h2, h3, h4, h5, h6 {
+          color: $accentPrimary;
+        }
       }
     }
 
@@ -111,6 +113,7 @@
       font-size: 26px;
       font-weight: $medium;
       color: $neutral75;
+      margin-bottom: 5px;
 
       @include respond($break60) {
         width: auto;
@@ -130,6 +133,10 @@
     @include subtitlePrimary;
     width: 100%;
     font-size: 16px;
+
+    .bg-neutral90 & {
+      color: $neutral40;
+    }
   }
 
   .resource-content {
