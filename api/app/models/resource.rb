@@ -7,6 +7,9 @@ class Resource < ApplicationRecord
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
+  # Tags
+  acts_as_ordered_taggable
+
   # Authority
   include Authority::Abilities
 
@@ -60,6 +63,14 @@ class Resource < ApplicationRecord
     return all unless project.present?
     where(project: project)
   }
+
+  # Callbacks
+  before_save :update_tags
+
+  def update_tags
+    return unless keywords
+    self.tag_list = keywords
+  end
 
   # Why is this here? --ZD
   def self.call

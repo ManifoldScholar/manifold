@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem "active_model_serializers", "~> 0.10.2"
 # Locked until this is resolved:
 # https://github.com/swanandp/acts_as_list/issues/253
+gem "acts-as-taggable-on", "~> 4.0"
 gem "acts_as_list", "~>0.8.2"
 gem "authority", "~>3.2.0"
 gem "bcrypt", "~> 3.1.11"

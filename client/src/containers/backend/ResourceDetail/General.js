@@ -68,7 +68,7 @@ class ResourceDetailGeneralContainer extends PureComponent {
             label="Keywords"
             focusOnMount
             name="attributes[keywords]"
-            placeholder='Enter some keywords separate by ";"'
+            placeholder="Enter some keywords separated by , or ;"
           />
           <Form.Save
             text="Update Resource"

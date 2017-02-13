@@ -23,6 +23,27 @@ export default class ResourceMeta extends Component {
     super();
   }
 
+  mapTagsToLinks(attr) {
+    if (!attr.tagList) return null;
+    const tags = attr.tagList;
+    const out = [];
+    tags.map((tag, index) => {
+      out.push(this.createTagLink(tag, index));
+    });
+    return out;
+  }
+
+  createTagLink(tag, index) {
+    if (!tag) return null;
+    return (
+      <li key={index}>
+        <Link to="#"> {/* Will be route to view resources by tags */}
+          {tag}
+        </Link>
+      </li>
+    );
+  }
+
   render() {
     const attr = this.props.resource.attributes;
 
@@ -76,26 +97,7 @@ export default class ResourceMeta extends Component {
         {this.props.showTags ?
           <nav className="tag-list">
             <ul>
-              <li>
-                <Link to="#">
-                  Japan
-                </Link>
-              </li>
-              <li>
-                <Link to="#">
-                  Brucebraun
-                </Link>
-              </li>
-              <li>
-                <Link to="#">
-                  Culture
-                </Link>
-              </li>
-              <li>
-                <Link to="#">
-                  Word
-                </Link>
-              </li>
+              {this.mapTagsToLinks(attr)}
             </ul>
           </nav> : null
         }
