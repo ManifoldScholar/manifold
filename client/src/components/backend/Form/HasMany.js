@@ -10,7 +10,9 @@ export default class FormMakers extends PureComponent {
 
   static propTypes = {
     label: PropTypes.string.isRequired,
-    onNew: PropTypes.func.isRequired,
+    labelHeader: PropTypes.bool,
+    onNew: PropTypes.func,
+    orderable: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
     optionsFetch: PropTypes.func.isRequired,
     entities: PropTypes.array.isRequired,
@@ -41,6 +43,7 @@ export default class FormMakers extends PureComponent {
   }
 
   onNew(value) {
+    if (!this.props.onNew) return null;
     this.props.onNew(value).then((newEntity) => {
       const newEntities = this.props.entities.slice(0);
       const newRelationship = {
@@ -71,6 +74,7 @@ export default class FormMakers extends PureComponent {
   }
 
   renderOrderButton(direction, ordinal, entity) {
+    if (!this.props.orderable) return null;
     let output = null;
 
     const buttonClass = classNames({
@@ -95,6 +99,25 @@ export default class FormMakers extends PureComponent {
     return output;
   }
 
+  renderHeader() {
+    if (!this.props.label) return null;
+    let out = null;
+    if (this.props.labelHeader) {
+      out = (
+        <header className="section-heading-secondary">
+          <h3>
+            {this.props.label}
+          </h3>
+        </header>
+        );
+    } else {
+      out = (
+        <label>{this.props.label}</label>
+      );
+    }
+    return out;
+  }
+
   render() {
     const entities = this.props.entities;
 
@@ -105,7 +128,7 @@ export default class FormMakers extends PureComponent {
         errors={this.props.errors}
         label={this.props.label}
       >
-        <label>{this.props.label}</label>
+        {this.renderHeader()}
         <nav className="has-many-list">
           <ul>
             {entities.map((entity, index) => {
@@ -155,7 +178,7 @@ export default class FormMakers extends PureComponent {
                 return `${option.attributes.firstName} ${option.attributes.lastName}`;
               }
             }
-            onNew={this.onNew}
+            onNew={this.props.onNew ? this.onNew : null}
             onSelect={this.onSelect}
             fetch={this.props.optionsFetch}
           />

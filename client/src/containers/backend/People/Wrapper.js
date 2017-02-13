@@ -9,7 +9,7 @@ import get from 'lodash/get';
 const { select } = entityUtils;
 const { request, flush, requests } = entityStoreActions;
 
-class UsersWraperContainer extends PureComponent {
+class UsersWrapperContainer extends PureComponent {
 
   static displayName = "Users.Wrapper";
 
@@ -50,6 +50,6 @@ class UsersWraperContainer extends PureComponent {
 }
 
 export default connect(
-  UsersWraperContainer.mapStateToProps
-)(UsersWraperContainer);
+  UsersWrapperContainer.mapStateToProps
+)(UsersWrapperContainer);
 

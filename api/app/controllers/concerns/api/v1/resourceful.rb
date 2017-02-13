@@ -12,8 +12,6 @@ module Api
       end
 
       included do
-        serialization_scope :serial_scope
-
         authority_actions relationships: "read"
 
         extend Uber::InheritableAttr
@@ -112,12 +110,6 @@ module Api
         else
           :ok
         end
-      end
-
-      # @api private
-      # @return [Api::V1::SerializationContext]
-      def serial_scope
-        @serial_scope ||= SerializationContext.new controller: self
       end
 
       # rubocop:disable Metrics/BlockLength

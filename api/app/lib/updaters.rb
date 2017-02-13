@@ -102,7 +102,7 @@ module Updaters
   def update_has_many(model, name, to_add)
     value = relationship_map(model, name, to_add)
     model.send("#{name}=", value)
-    model.send(name.to_s).try(:sort, value)
+    model.send(name.to_s).try(:association_sort, value)
   end
 
   def relationship_map(model, name, models)

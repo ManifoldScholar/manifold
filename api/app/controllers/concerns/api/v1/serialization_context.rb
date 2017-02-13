@@ -4,12 +4,13 @@ module Api
     class SerializationContext
       delegate :[], :fetch, :[]=, to: :@data
 
-      attr_reader :controller, :view_context, :url_options
+      attr_reader :controller, :view_context, :url_options, :authenticated_as
 
-      def initialize(controller:)
+      def initialize(controller:, current_user:)
         @data = {}
-        @data[:controller]    = @controller   = controller
-        @data[:url_options]   = @url_options  = controller.url_options
+        @data[:authenticated_as] = @authenticated_as = current_user
+        @data[:controller]       = @controller   = controller
+        @data[:url_options]      = @url_options  = controller.url_options
       end
     end
   end

@@ -22,6 +22,7 @@ describe("Form.HasMany component", () => {
           optionsFetch={() => {}}
           onNew={() => {}}
           entityLabelAttribute="name"
+          orderable
         />
       </Provider>
     );

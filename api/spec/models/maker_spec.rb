@@ -24,4 +24,10 @@ RSpec.describe Maker, type: :model do
     expect(maker.name).to eq "Stubblin Champflin"
   end
 
+  it "has a collection of associated makers" do
+    maker = FactoryGirl.create(:maker)
+    2.times { maker.users << FactoryGirl.create(:user) }
+    expect(maker.users.count).to eq(2)
+  end
+
 end

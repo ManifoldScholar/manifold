@@ -7,9 +7,14 @@ class ApplicationController < ActionController::API
   include JsonApi
   include Authority::Controller
 
-  serialization_scope :current_user
+  serialization_scope :serial_scope
 
   protected
+
+  def serial_scope
+    @serial_scope ||=
+      Api::V1::SerializationContext.new controller: self, current_user: current_user
+  end
 
   def page_size
     params.dig(:page, :size) || 20
