@@ -96,6 +96,7 @@ class FormCollaborators extends Component {
               entityLabelAttribute="fullName"
               entityAvatarAttribute="avatarUrl"
               errors={get(this.props, 'createCreator.errors')}
+              orderable
             />
             <Form.HasMany
               label="Contributors"
@@ -109,6 +110,7 @@ class FormCollaborators extends Component {
               entityLabelAttribute="fullName"
               entityAvatarAttribute="avatarUrl"
               errors={get(this.props, 'createContributor.errors')}
+              orderable
             />
           </form>
         </section>

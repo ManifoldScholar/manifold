@@ -17,12 +17,12 @@ class PredictiveInput extends PureComponent {
 
   static propTypes = {
     className: PropTypes.string,
-    onNew: PropTypes.func.isRequired,
+    onNew: PropTypes.func,
     onSelect: PropTypes.func.isRequired,
     label: PropTypes.func.isRequired,
     fetch: PropTypes.func.isRequired,
     placeholder: PropTypes.string
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -228,9 +228,12 @@ class PredictiveInput extends PureComponent {
             onKeyPress={this.handleKeyPress}
             onKeyDown={this.handleKeyDown}
           />
-          <button className="submit" onClick={this.handleNew} >
-            {'Create New'}
-          </button>
+          { this.props.onNew ?
+            <button className="submit" onClick={this.handleNew} >
+              {'Create New'}
+            </button>
+            : null
+          }
         </div>
         <nav className="predictive-list">
           <ul>

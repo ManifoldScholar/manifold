@@ -3,20 +3,24 @@ import { connect } from 'react-redux';
 import { Drawer, Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import usersAPI from 'api/users';
-const { select, meta } = entityUtils;
-const { request } = entityStoreActions;
+import { usersAPI, makersAPI } from 'api';
+const { select } = entityUtils;
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import { browserHistory } from 'react-router';
+import get from 'lodash/get';
+
+const { request, flush } = entityStoreActions;
 
 class UsersEditContainer extends PureComponent {
 
-  static displayName = "Users.Edit"
+  static displayName = "Users.Edit";
 
   static mapStateToProps(state, ownProps) {
     return {
-      user: select('backend-edit-user', state.entityStore)
+      user: select('backend-edit-user', state.entityStore),
+      updateMakers: get(state.entityStore.responses, 'update-makers'),
+      createMaker: get(state.entityStore.responses, 'create-maker')
     };
   }
 
@@ -25,10 +29,18 @@ class UsersEditContainer extends PureComponent {
     this.state = {
       confirmation: null
     };
+    this.newMaker = this.newMaker.bind(this);
+    this.updateMakers = this.updateMakers.bind(this);
   }
 
   componentDidMount() {
     this.fetchUser(this.props.params.id);
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(flush([
+      'update-makers', 'create-maker'
+    ]));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -67,10 +79,43 @@ class UsersEditContainer extends PureComponent {
     this.setState({ confirmation: null });
   }
 
+  updateMakers(makers, changeType) {
+    const adjustedMakers = makers.map((e) => {
+      return {
+        id: e.id,
+        type: e.type
+      };
+    });
+    const user = {
+      type: this.props.user.type,
+      id: this.props.user.id,
+      relationships: { makers: { data: adjustedMakers } }
+    };
+    const call = usersAPI.update(user.id, user);
+    const makerRequest = request(call, 'update-makers');
+    this.props.dispatch(makerRequest);
+  }
+
+  /* Makers only need names, so users can create a new one */
+  newMaker(value) {
+    const parts = value.split(' ');
+    const maker = {
+      type: "makers",
+      attributes: {
+        firstName: parts[0],
+        lastName: parts[1]
+      }
+    };
+    const call = makersAPI.create(maker);
+    const makerRequest = request(call, 'create-maker');
+    const { promise } = this.props.dispatch(makerRequest);
+    return promise;
+  }
+
   render() {
     if (!this.props.user) return null;
     const attr = this.props.user.attributes;
-
+    const user = this.props.user;
     /*
       Edit dialog(s) can be wrapped in either
       <Drawer.Wrapper>: Right-hand pop-in panel
@@ -131,6 +176,17 @@ class UsersEditContainer extends PureComponent {
             text="Save User"
           />
         </FormContainer.Form>
+        <form className="form-secondary">
+          <FormContainer.UserClaims
+            label="Makers"
+            placeholder="Add or create a maker"
+            onNew={this.newMaker}
+            onChange={this.updateMakers}
+            api={usersAPI}
+            entity={user}
+            errors={get(this.props, "createMaker.errors")}
+          />
+        </form>
       </Drawer.Wrapper>
     );
   }

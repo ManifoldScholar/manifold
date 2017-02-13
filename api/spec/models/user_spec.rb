@@ -69,6 +69,12 @@ RSpec.describe User, type: :model do
     expect(user.name).to eq("John Rambo")
   end
 
+  it "has a collection of associated makers" do
+    user = FactoryGirl.create(:user)
+    2.times { user.makers << FactoryGirl.create(:maker) }
+    expect(user.makers.count).to eq(2)
+  end
+
   context "can be searched", :integration, :elasticsearch do
 
     let(:first) { "189274891457612" }

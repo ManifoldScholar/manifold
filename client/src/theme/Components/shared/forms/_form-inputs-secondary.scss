@@ -26,6 +26,10 @@
 }
 
 .form-secondary {
+  .drawer-primary & {
+    margin-bottom: 80px;
+  }
+
   .form-input {
     label:not(.checkbox):not(.radio) {
       @include formLabelPrimary;

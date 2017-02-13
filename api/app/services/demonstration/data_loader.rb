@@ -43,7 +43,7 @@ module Demonstration
 
     def clear_db
       clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource
-                 Subject TextSubject TextTitle User Category Page)
+                 Subject TextSubject TextTitle User Category Page UserClaim)
       clear.each do |model_name|
         @logger.info("Truncate #{model_name} table".red)
         model_name.constantize.destroy_all

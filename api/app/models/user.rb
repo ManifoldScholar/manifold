@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :created_projects, class_name: "Project", foreign_key: "creator_id"
   has_many :created_resources, class_name: "Resource", foreign_key: "creator_id"
   has_many :created_pages, class_name: "Page", foreign_key: "creator_id"
+  has_many :user_claims
+  has_many :makers, through: :user_claims
 
   # Validation
   validates :password, length: { minimum: 8 }, allow_nil: true
@@ -111,6 +113,10 @@ class User < ApplicationRecord
 
   def to_s
     name
+  end
+
+  def full_name
+    [first_name, last_name].reject(&:blank?).join(" ")
   end
 
 end

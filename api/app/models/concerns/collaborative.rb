@@ -24,7 +24,7 @@ module Collaborative
     has_many :creators,
              through: :creator_collaborators,
              source: "maker" do
-      def sort(makers)
+      def association_sort(makers)
         makers.each_with_index do |maker, index|
           role = Collaborator::ROLE_CREATOR
           # rubocop:disable Rails/SkipsModelValidations
@@ -40,7 +40,7 @@ module Collaborative
     has_many :contributors,
              through: :contributor_collaborators,
              source: "maker" do
-               def sort(makers)
+               def association_sort(makers)
                  makers.each_with_index do |maker, index|
                    role = Collaborator::ROLE_CONTRIBUTOR
                    # rubocop:disable Rails/SkipsModelValidations

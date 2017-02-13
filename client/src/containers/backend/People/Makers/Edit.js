@@ -3,20 +3,23 @@ import { connect } from 'react-redux';
 import { Drawer, Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import makersAPI from 'api/makers';
-const { select, meta } = entityUtils;
-const { request } = entityStoreActions;
+import { makersAPI } from 'api';
+const { select } = entityUtils;
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import { browserHistory } from 'react-router';
+import get from 'lodash/get';
+
+const { request, flush, requests } = entityStoreActions;
 
 class MakersEditContainer extends PureComponent {
 
-  static displayName = "Makers.Edit"
+  static displayName = "Makers.Edit";
 
   static mapStateToProps(state, ownProps) {
     return {
-      maker: select('backend-edit-maker', state.entityStore)
+      maker: select('backend-edit-maker', state.entityStore),
+      updateMakers: get(state.entityStore.responses, 'update-users')
     };
   }
 
@@ -25,10 +28,17 @@ class MakersEditContainer extends PureComponent {
     this.state = {
       confirmation: null
     };
+    this.updateUsers = this.updateUsers.bind(this);
   }
 
   componentDidMount() {
     this.fetchMaker(this.props.params.id);
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(flush([
+      'update-users'
+    ]));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,6 +73,23 @@ class MakersEditContainer extends PureComponent {
     });
   }
 
+  updateUsers(users, changeType) {
+    const adjustedUsers = users.map((e) => {
+      return {
+        id: e.id,
+        type: e.type
+      };
+    });
+    const maker = {
+      type: this.props.maker.type,
+      id: this.props.maker.id,
+      relationships: { users: { data: adjustedUsers } }
+    };
+    const call = makersAPI.update(maker.id, maker);
+    const userRequest = request(call, 'update-users');
+    this.props.dispatch(userRequest);
+  }
+
   closeDialog() {
     this.setState({ confirmation: null });
   }
@@ -70,6 +97,7 @@ class MakersEditContainer extends PureComponent {
   render() {
     if (!this.props.maker) return null;
     const attr = this.props.maker.attributes;
+    const maker = this.props.maker;
 
     /*
      Edit dialog(s) can be wrapped in either
@@ -133,6 +161,15 @@ class MakersEditContainer extends PureComponent {
             text="Save Maker"
           />
         </FormContainer.Form>
+        <form className="form-secondary">
+          <FormContainer.UserClaims
+            label="Users"
+            placeholder="Add an associated user"
+            api={makersAPI}
+            entity={maker}
+            onChange={this.updateUsers}
+          />
+        </form>
       </Drawer.Wrapper>
     );
   }
