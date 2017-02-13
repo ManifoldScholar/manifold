@@ -16,6 +16,13 @@ RSpec.describe Resource, type: :model do
     expect(resource).to_not be_valid
   end
 
+  it "has a list of tags" do
+    resource = FactoryGirl.create(:resource)
+    resource.keywords = "one, two; three"
+    resource.save
+    expect(resource.tag_list.count).to eq(3)
+  end
+
   it { is_expected.to have_attached_file(:attachment) }
 
 end

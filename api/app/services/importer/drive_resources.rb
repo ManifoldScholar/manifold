@@ -15,7 +15,7 @@ module Importer
     COLLECTION_BOOLEAN_ATTRIBUTES = %w().freeze
     COLLECTION_ATTACHMENT_ATTRIBUTES = %w(thumbnail).freeze
     RESOURCE_SIMPLE_ATTRIBUTES = %w(
-      title kind caption description keywords alt_text copyright_status copyright_holder
+      title kind caption description alt_text keywords copyright_status copyright_holder
       credit external_url external_type external_id
     ).freeze
     RESOURCE_BOOLEAN_ATTRIBUTES = %w(allow_high_res allow_download).freeze
@@ -71,12 +71,18 @@ module Importer
       update_simple_attributes(resource, row, RESOURCE_SIMPLE_ATTRIBUTES)
       update_boolean_attributes(resource, row, RESOURCE_BOOLEAN_ATTRIBUTES)
       update_attachment_attributes(resource, row, RESOURCE_ATTACHMENT_ATTRIBUTES)
+      create_tag_list(resource, row)
       if resource.valid?
         resource.save
         add_resource_to_collection(resource, row[:collection], count)
         return
       end
       @logger.log_model_errors(resource)
+    end
+
+    def create_tag_list(resource, row)
+      return unless row["keywords"]
+      resource.tag_list.add(row["keywords"], parse: true)
     end
 
     def add_resource_to_collection(resource, collection_title, count)
