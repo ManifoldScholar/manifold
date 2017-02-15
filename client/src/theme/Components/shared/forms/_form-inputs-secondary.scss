@@ -20,7 +20,7 @@
       box-shadow: 0 0 0 1000px $neutral90 inset;
       // Important required to override chrome default
       // scss-lint:disable ImportantRule
-      -webkit-text-fill-color: $sp20Quaternary !important;
+      -webkit-text-fill-color: $accentPrimaryPale !important;
     }
   }
 }
