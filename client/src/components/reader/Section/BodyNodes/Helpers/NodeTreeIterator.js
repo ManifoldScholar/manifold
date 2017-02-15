@@ -53,9 +53,9 @@ export default class NodeTreeIterator {
       case 'a':
         ComponentClass = LinkNode;
         break;
-      case 'code':
-        ComponentClass = CodeNode;
-        break;
+      // case 'code':
+      //   ComponentClass = CodeNode;
+      //   break;
       default:
         ComponentClass = DefaultNode;
         break;
