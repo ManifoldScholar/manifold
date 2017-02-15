@@ -63,6 +63,18 @@ class Resource < ApplicationRecord
     return all unless project.present?
     where(project: project)
   }
+  scope :by_tag, lambda { |tag|
+    return all unless tag.present?
+    tagged_with(tag)
+  }
+  scope :by_kind, lambda { |kind|
+    return all unless kind.present?
+    where(kind: kind)
+  }
+  scope :by_collection, lambda { |collection|
+    return all unless collection.present?
+    where(collection: collection)
+  }
 
   # Callbacks
   before_save :update_tags
@@ -77,30 +89,35 @@ class Resource < ApplicationRecord
     all
   end
 
+  # rubocop:disable Metrics/LineLength
   def self.filter(params)
-    results = params.key?(:keyword) ? search(params) : query(params)
+    results = params.key?(:keyword) ? search(params) : query(params).by_pagination(params[:page], params[:per_page])
     if exceeds_total_pages?(results)
       params[:page] = results.total_pages
       return filter(params)
     end
     results
   end
+  # rubocop:enable Metrics/LineLength
 
   # Used to filter records using DB fields
   def self.query(params)
     Resource.all
-            .order(:created_at, :title)
+            .order(params[:order] || :created_at, :title)
             .by_project(params[:project])
-            .by_pagination(params[:page], params[:per_page])
+            .by_tag(params[:tag])
+            .by_kind(params[:kind])
   end
 
   # Used to filter records using elastic search index
   def self.search(params)
-    query = params.dig(:keyword) || "*"
+    record_ids = query(params).pluck(:id)
+    search_query = params.dig(:keyword) || "*"
     filter = Search::FilterScope.new
+                                .where(:id, record_ids)
                                 .typeahead(params[:typeahead], TYPEAHEAD_ATTRIBUTES)
                                 .paginate(params[:page], params[:per_page])
-    Resource.lookup(query, filter)
+    Resource.lookup(search_query, filter)
   end
 
   def search_data

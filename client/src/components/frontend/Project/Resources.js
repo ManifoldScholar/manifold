@@ -3,12 +3,13 @@ import { ResourceList } from 'components/frontend';
 
 export default class ProjectResources extends Component {
 
-  static displayName = "Project.Resources"
+  static displayName = "Project.Resources";
 
   static propTypes = {
     project: PropTypes.object,
     resources: PropTypes.array,
-    pagination: PropTypes.object
+    pagination: PropTypes.object,
+    filterChange: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -31,7 +32,11 @@ export default class ProjectResources extends Component {
               All Project Resources
             </h2>
           </header>
-          <ResourceList.Filters kinds={project.attributes.resourceKinds} />
+          <ResourceList.Filters
+            kinds={project.attributes.resourceKinds}
+            tags={project.attributes.resourceTags}
+            filterChangeHandler={this.props.filterChange}
+          />
           <ResourceList.Cards
             context={project}
             pagination={this.props.pagination}

@@ -16,7 +16,7 @@ RSpec.describe "Project Resources API", type: :request do
     end
   end
 
-  describe "creates a new project text category" do
+  describe "creates a new project resource" do
 
     let(:path) { api_v1_project_relationships_resources_path(project) }
     let(:resource) { { attributes: { title: "A new hope" }, relationships: { project: { data: { type: "projects", id: project.id } } } } }
