@@ -31,8 +31,9 @@
 .text-section {
   // Reader text temporary defaults
   font-family: "freight-text-pro", serif;
-  font-weight: $light;
+  font-weight: $regular;
   line-height: 1.761;
+  letter-spacing: 0.01em;
   transition: font-size $durationFast $timing;
 
   *::selection, .annotation-locked-selected {
@@ -41,6 +42,7 @@
 
   &.font-sans-serif {
     font-family: "sofia-pro",sans-serif;
+    font-weight: $light;
   }
 
   a {
