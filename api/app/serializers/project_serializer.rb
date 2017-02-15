@@ -3,7 +3,7 @@ class ProjectSerializer < ProjectPartialSerializer
   meta(partial: false)
 
   attributes :event_count, :metadata, :collections_count, :resources_count,
-             :uncollected_resources_count, :resource_kinds
+             :uncollected_resources_count, :resource_kinds, :resource_tags
 
   link :self do
     "https://manifold-api.dev/api/v1/projects/#{object.id}"

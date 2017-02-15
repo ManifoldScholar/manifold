@@ -120,7 +120,8 @@ module Validation
   end
 
   def resource_filter_params
-    params.permit(filter: [:keyword, :typeahead, :project])[:filter]
+    params.permit(filter: [:keyword, :kind, :tag, :order, :typeahead,
+                           :project, :collection])[:filter]
   end
 
   def user_filter_params

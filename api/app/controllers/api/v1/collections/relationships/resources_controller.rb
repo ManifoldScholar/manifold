@@ -8,8 +8,9 @@ module Api
           before_action :set_collection, only: [:index]
 
           resourceful! Resource, authorize_options: { except: [:index, :show] } do
-            @collection.resources
-                       .query(with_pagination!(resource_filter_params))
+            filter_params =
+              with_pagination!(resource_filter_params).merge(collection: @collection.id)
+            Resource.filter(with_pagination!(filter_params))
           end
 
           # GET /resources

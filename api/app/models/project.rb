@@ -135,6 +135,12 @@ class Project < ApplicationRecord
       .to_a.pluck(:kind)
   end
 
+  def resource_tags
+    resources
+      .tag_counts
+      .pluck(:name)
+  end
+
   def twitter_following
     return [] unless tweet_fetch_config && tweet_fetch_config["following"].is_a?(Array)
     tweet_fetch_config["following"].map do |h|
