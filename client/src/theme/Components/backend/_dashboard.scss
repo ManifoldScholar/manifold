@@ -33,5 +33,9 @@
     @include respond($break50) {
       margin-top: 60px;
     }
+
+    @include respond($break75) {
+      margin-top: 0;
+    }
   }
 }
