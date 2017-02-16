@@ -10,6 +10,9 @@ en:
       failures:
         strategy_not_found: 'Could not find strategy'
       strategy:
+        gitbook:
+          log:
+            skipping_source: 'Skipping source: "%{path}"'
         log:
           attempt_save: 'Attempting to save the text'
           find_toc_structure: 'Looking for TOC structure'
