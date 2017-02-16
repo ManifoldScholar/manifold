@@ -100,17 +100,22 @@ end
 namespace :upload do
   task :projects do
     on roles(:app) do
-      upload! "./import", "/home/manifold/deploy/shared/", recursive: true
+      system("rsync -azv --progress ./import/ #{host.username}@#{host.hostname}:/home/manifold/deploy/shared/import/")
     end
   end
 end
 
 namespace :import do
-  task :projects do
+  task :projects, :project do |t, args|
+    project = args[:project]
+    path = "../import"
+    task = project ? "import:project" : "import:project"
+    path << "/#{project}" if project
     on roles(:app) do
       with path: "./bin:$PATH" do
         within "#{current_path}/api" do
-          execute :rails, 'import:projects["../import"]'
+          cmd = "#{task}[\"#{path}\"]"
+          execute :rails, cmd
         end
       end
     end
