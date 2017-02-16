@@ -43,7 +43,8 @@ module Ingestor
             redcarpet = Redcarpet::Markdown.new(
               renderer,
               fenced_code_blocks: true,
-              footnotes: true
+              footnotes: true,
+              tables: true
             )
             markup = redcarpet.render(markdown)
             markup
