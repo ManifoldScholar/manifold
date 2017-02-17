@@ -13,5 +13,6 @@ export collectionsAPI from 'api/collections';
 export makersAPI from 'api/makers';
 export settingsAPI from 'api/settings';
 export textCategoriesAPI from 'api/textCategories';
+export passwordsAPI from 'api/passwords';
 export ApiClient from 'api/client';
 

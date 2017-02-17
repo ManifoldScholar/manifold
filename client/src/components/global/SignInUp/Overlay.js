@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { HigherOrder } from 'components/global';
 import PasswordForgot from './PasswordForgot';
-import PasswordReset from './PasswordReset';
 import Login from './Login';
 import CreateUpdate from './CreateUpdate';
 import Update from './Update';
@@ -66,9 +65,6 @@ export default class Overlay extends Component {
         break;
       case 'account-password-forgot':
         child = <PasswordForgot {...childProps} />;
-        break;
-      case 'account-password-reset':
-        child = <PasswordReset {...childProps} />;
         break;
       case 'account-login':
         child = <Login {...childProps} />;

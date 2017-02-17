@@ -25,6 +25,7 @@ export default () => {
       <Route component={Frontend.Frontend} path="/browse" >
         <IndexRoute component={Frontend.Home} />
         <Route component={Frontend.Login} path="login" />
+        <Route component={Frontend.PasswordReset} path="reset-password/:resetToken" />
         <Route component={Frontend.Following} path="following" />
         <Route component={Frontend.ProjectDetail} path="project/:id" />
         <Route component={Frontend.CollectionDetail} path="project/:id/collection/:collectionId" />

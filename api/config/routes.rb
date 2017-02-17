@@ -66,6 +66,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :passwords, only: [:create, :update]
+
       get "*path", to: "errors#error_404", via: :all
     end
   end
