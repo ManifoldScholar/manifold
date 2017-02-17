@@ -19,41 +19,10 @@ module Collaborative
              -> { where(role: Collaborator::ROLE_CONTRIBUTOR).order(:position) },
              as: :collaboratable,
              class_name: "Collaborator"
-
     has_many :makers, through: :collaborators
-    has_many :creators,
-             through: :creator_collaborators,
-             source: "maker" do
-      def association_sort(makers)
-        makers.each_with_index do |maker, index|
-          role = Collaborator::ROLE_CREATOR
-          # rubocop:disable Rails/SkipsModelValidations
-          @association.owner
-                      .collaborators
-                      .find_by(maker: maker, role: role)
-                      .update_attribute(:position, index + 1)
-          # rubocop:enable Rails/SkipsModelValidations
-        end
-      end
-    end
-
-    has_many :contributors,
-             through: :contributor_collaborators,
-             source: "maker" do
-               def association_sort(makers)
-                 makers.each_with_index do |maker, index|
-                   role = Collaborator::ROLE_CONTRIBUTOR
-                   # rubocop:disable Rails/SkipsModelValidations
-                   @association.owner
-                               .collaborators
-                               .find_by(maker: maker, role: role)
-                               .update_attribute(:position, index + 1)
-                   # rubocop:enable Rails/SkipsModelValidations
-                 end
-               end
-             end
+    has_many :creators, through: :creator_collaborators, source: "maker"
+    has_many :contributors, through: :contributor_collaborators, source: "maker"
   end
-  # rubocop:enable Metrics/BlockLength
 
   def creator_names
     creators

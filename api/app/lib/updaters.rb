@@ -1,54 +1,66 @@
 require "active_support/core_ext/string"
+require "active_support/concern"
+require "active_support/callbacks"
 
 # Updaters are responsible for mapping JSON-API structured params to model updates.
 # This module acts as a base mix-in for model-specific updaters.
 module Updaters
-  attr_accessor :id, :type, :data
+  extend ActiveSupport::Concern
+
+  included do
+    include ActiveSupport::Callbacks
+    attr_accessor :id, :type, :data, :attributes, :relationships
+    define_callbacks :update_attributes, :update_relationships, :update, :save
+  end
 
   def initialize(params)
     @attributes = params[:data][:attributes] || {}
     @relationships = params[:data][:relationships]
   end
 
-  def attributes
-    @attributes
-  end
-
-  def relationships
-    @relationships
-  end
-
   def update_without_save(model)
-    if attributes
-      attr = adjusted_attributes
-      attachmentize_attributes!(attr)
-      model.assign_attributes(attr)
+    @model = model
+    run_callbacks "update" do
+      assign_attributes!(model)
+      update_relationships!(model)
     end
-    update_relationships(model)
     model
   end
 
   def update(model)
-    if attributes
-      attr = adjusted_attributes
-      attachmentize_attributes!(attr)
-      model.assign_attributes(attr)
-    end
-    update_relationships(model)
-    saved = model.save
-    try(:post_update, model) if saved
-    model.reload if model.id && saved
+    @model = model
+    update_without_save(model)
+    save_model(model)
     model
   end
 
   def post_update(model)
+    @model = model
     update_position(model)
   end
 
   protected
 
+  def save_model(model)
+    @saved = false
+    run_callbacks "save" do
+      @saved = model.save
+    end
+    model.reload if model.id && @saved
+    @saved = false
+  end
+
   def attachment_fields
     []
+  end
+
+  def assign_attributes!(model)
+    return unless attributes
+    run_callbacks "update_attributes" do
+      attr = adjusted_attributes
+      attachmentize_attributes!(attr)
+      model.assign_attributes(attr)
+    end
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -70,14 +82,16 @@ module Updaters
   # rubocop:enable Metrics/AbcSize
 
   # rubocop:disable Metrics/CyclomaticComplexity
-  def update_relationships(model)
+  def update_relationships!(model)
     return unless relationships
-    relationships.to_h.each do |name, relationship|
-      models = relationship[:data]
-      if models.respond_to?(:has_key?) || models.nil?
-        update_belongs_to(model, name, models) && next
+    run_callbacks "update_relationships" do
+      relationships.to_h.each do |name, relationship|
+        models = relationship[:data]
+        if models.respond_to?(:has_key?) || models.nil?
+          update_belongs_to(model, name, models) && next
+        end
+        update_has_many(model, name, models) && next if models.respond_to?(:each)
       end
-      update_has_many(model, name, models) && next if models.respond_to?(:each)
     end
   end
   # rubocop:enable Metrics/CyclomaticComplexity
@@ -102,7 +116,6 @@ module Updaters
   def update_has_many(model, name, to_add)
     value = relationship_map(model, name, to_add)
     model.send("#{name}=", value)
-    model.send(name.to_s).try(:association_sort, value)
   end
 
   def relationship_map(model, name, models)
@@ -124,6 +137,18 @@ module Updaters
   def remove_relative_position!(attributes)
     return unless %w(up down top bottom).include?(attributes[:position])
     attributes.delete(:position)
+  end
+
+  # This method is a utility method, used to sort creator and contributor
+  # collaborators after saving the model.
+  def sort_collaborators(type)
+    makers = relationships.to_h.dig "#{type}s", :data
+    return unless makers && !makers.empty?
+    @model.send("#{type}_collaborators").each do |collaborator|
+      index = makers.find_index { |c| c[:id] == collaborator.maker_id }
+      position = index + 1
+      collaborator.set_list_position(position)
+    end
   end
 
   def update_position(model)
