@@ -54,11 +54,11 @@ RSpec.describe "Projects API", type: :request do
 
       let(:headers) { admin_headers }
 
-      describe "its creator association" do
+      let(:john) { FactoryGirl.create(:maker, first_name: "John") }
+      let(:jim) { FactoryGirl.create(:maker, first_name: "Jim") }
+      let(:jenny) { FactoryGirl.create(:maker, first_name: "Jenny") }
 
-        let(:john) { FactoryGirl.create(:maker, first_name: "John") }
-        let(:jim) { FactoryGirl.create(:maker, first_name: "Jim") }
-        let(:jenny) { FactoryGirl.create(:maker, first_name: "Jenny") }
+      describe "its creator association" do
 
         it("can be replaced") do
           project.creators << jenny
@@ -69,6 +69,20 @@ RSpec.describe "Projects API", type: :request do
           patch path, headers: headers, params: params
           expect(project.creators.pluck(:id)).to contain_exactly(jim.id, john.id)
         end
+      end
+
+      describe "its contributors" do
+
+        it("can be replaced") do
+          project.contributors << jenny
+          params = json_payload(relationships: { contributors: { data: [
+            { type: "makers", id: john.id },
+            { type: "makers", id: jim.id }
+          ]}})
+          patch path, headers: headers, params: params
+          expect(project.contributors.pluck(:id)).to contain_exactly(jim.id, john.id)
+        end
+
       end
 
       describe "the response" do
