@@ -7,6 +7,7 @@ class User < ApplicationRecord
   # Concerns
   include Paginated
   include Filterable
+  include Recoverable
 
   # Authority
   include Authority::UserAbilities

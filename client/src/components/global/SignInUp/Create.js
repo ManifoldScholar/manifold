@@ -141,7 +141,7 @@ class Create extends Component {
                 name="password"
                 id="create-password"
                 onChange={this.handleInputChange}
-                placeholder="password"
+                placeholder="Password"
               />
             </Form.Errorable>
           </div>

@@ -104,6 +104,13 @@ module Validation
     params.permit(param_config)
   end
 
+  def password_params
+    params.require(:data)
+    attributes = [:password, :password_confirmation, :reset_token, :email]
+    param_config = structure_params(attributes: attributes)
+    params.permit(param_config)
+  end
+
   def favoritable_params
     structure_params
   end

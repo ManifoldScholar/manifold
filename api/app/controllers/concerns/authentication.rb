@@ -61,6 +61,17 @@ module Authentication
                          end
   end
 
+  # Returns user with auth token
+  def render_authenticated_user(user)
+    if user
+      render json: user,
+             meta: { authToken: AuthToken.encode(user_id: user.id) },
+             include: %w(favorites)
+    else
+      render json: { errors: ["Invalid username or password"] }, status: :unauthorized
+    end
+  end
+
   # Helper Methods for responding to errors
   # ------------------------------------------------------------
   def build_api_error(title: nil, detail: nil, status: nil)

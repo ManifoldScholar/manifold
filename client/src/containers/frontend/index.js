@@ -4,6 +4,7 @@ import Following from './Following';
 import Frontend from './Frontend';
 import Home from './Home';
 import Login from './Login';
+import PasswordReset from './PasswordReset';
 import ProjectDetail from './ProjectDetail';
 import ProjectResources from './ProjectResources';
 import Page from './Page';
@@ -18,6 +19,7 @@ export {
     Frontend,
     Home,
     Login,
+    PasswordReset,
     ProjectDetail,
     ProjectResources,
     Page,
