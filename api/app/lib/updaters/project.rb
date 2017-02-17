@@ -1,7 +1,15 @@
 module Updaters
   # Updates a Project model from JSON-API style params
   class Project
+
     include ::Updaters
+
+    set_callback :save, :after, :sort_relationships
+
+    def sort_relationships
+      sort_collaborators(:contributor)
+      sort_collaborators(:creator)
+    end
 
     def attachment_fields
       [:avatar, :hero]

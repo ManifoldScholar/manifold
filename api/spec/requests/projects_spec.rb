@@ -83,6 +83,46 @@ RSpec.describe "Projects API", type: :request do
           expect(project.contributors.pluck(:id)).to contain_exactly(jim.id, john.id)
         end
 
+        it("are sorted correctly after being set") do
+          project.contributors << jenny
+          project.contributors << john
+          project.save
+          expect(project.contributors.pluck(:id)).to eq([jenny.id, john.id])
+          params = json_payload(relationships: { contributors: { data: [
+            { type: "makers", id: john.id },
+            { type: "makers", id: jenny.id }
+          ]}})
+          patch path, headers: headers, params: params
+          expect(project.contributors.pluck(:id)).to eq([john.id, jenny.id])
+        end
+
+      end
+
+      describe "its creators" do
+
+        it("can be replaced") do
+          project.creators << jenny
+          params = json_payload(relationships: { creators: { data: [
+            { type: "makers", id: john.id },
+            { type: "makers", id: jim.id }
+          ]}})
+          patch path, headers: headers, params: params
+          expect(project.creators.pluck(:id)).to contain_exactly(jim.id, john.id)
+        end
+
+        it("are sorted correctly after being set") do
+          project.creators << jenny
+          project.creators << john
+          project.save
+          expect(project.creators.pluck(:id)).to eq([jenny.id, john.id])
+          params = json_payload(relationships: { creators: { data: [
+            { type: "makers", id: john.id },
+            { type: "makers", id: jenny.id }
+          ]}})
+          patch path, headers: headers, params: params
+          expect(project.creators.pluck(:id)).to eq([john.id, jenny.id])
+        end
+
       end
 
       describe "the response" do

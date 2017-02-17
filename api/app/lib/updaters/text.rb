@@ -3,13 +3,5 @@ module Updaters
   class Text
     include ::Updaters
 
-    def adjusted_attributes
-      super
-    end
-
-    def post_update(model)
-      super(model)
-    end
-
   end
 end
