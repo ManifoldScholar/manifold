@@ -149,7 +149,8 @@ class MakersEditContainer extends PureComponent {
             placeholder="Last Name"
           />
           <Form.Upload
-            style="Avatar"
+            style="square"
+            accepts="images"
             label="Avatar Image"
             current={this.props.maker.attributes.avatarUrl}
             name="attributes[avatar]"

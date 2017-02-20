@@ -31,7 +31,8 @@ class SettingsThemeContainer extends PureComponent {
           className="form-secondary"
         >
           <Form.Upload
-            style="logo"
+            style="square"
+            accepts="images"
             label="Press Logo"
             current={this.props.settings.attributes.pressLogoUrl}
             name="attributes[press_logo]"
