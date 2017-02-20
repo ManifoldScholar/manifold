@@ -14,7 +14,8 @@ const perPage = 10;
 
 class MakersListContainer extends PureComponent {
 
-  static displayName = "Makers.List"
+  static displayName = "Makers.List";
+  static activeNavItem = "makers";
 
   static mapStateToProps(state) {
     return {

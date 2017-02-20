@@ -4,7 +4,6 @@ export Layout from './Layout';
 export Project from './Project';
 export List from './List';
 export Resource from './Resource';
-export UserList from './UserList';
 export User from './User';
 export Text from './Text';
 export Drawer from './Drawer';

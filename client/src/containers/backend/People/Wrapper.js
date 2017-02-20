@@ -1,13 +1,10 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { UserList } from 'components/backend';
+import { Navigation } from 'components/backend';
 import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { usersAPI } from 'api';
 import get from 'lodash/get';
-
-const { select } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
 
 class UsersWrapperContainer extends PureComponent {
 
@@ -22,7 +19,15 @@ class UsersWrapperContainer extends PureComponent {
     children: PropTypes.object
   };
 
-  componentDidMount() {
+  secondaryNavigationLinks() {
+    return [
+      { path: "/backend/people", label: "Users", key: "users" },
+      { path: "/backend/people/makers", label: "Makers", key: "makers" }
+    ];
+  }
+
+  activeChild() {
+    return get(this.props, 'children.type.activeNavItem');
   }
 
   render() {
@@ -32,12 +37,18 @@ class UsersWrapperContainer extends PureComponent {
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">
-              <UserList.Navigation />
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks()}
+                active={this.activeChild()}
+              />
             </div>
           </aside>
           <div className="container">
             <aside className="aside">
-              <UserList.Navigation />
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks()}
+                active={this.activeChild()}
+              />
             </aside>
             <div className="panel">
               {this.props.children}
