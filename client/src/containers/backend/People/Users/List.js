@@ -14,7 +14,8 @@ const perPage = 10;
 
 class UsersListContainer extends PureComponent {
 
-  static displayName = "Users.List"
+  static displayName = "Users.List";
+  static activeNavItem = "users";
 
   static mapStateToProps(state) {
     return {
