@@ -11,11 +11,13 @@ export default class FormUpload extends Component {
   static propTypes = {
     ...sharedPropsValidation,
     label: PropTypes.string,
-    background: PropTypes.string
+    background: PropTypes.string,
+    accepts: PropTypes.string,
   };
 
   static defaultProps = {
-    style: "thumbnail"
+    style: "thumbnail",
+    accepts: "image"
   }
 
   constructor() {
@@ -24,7 +26,6 @@ export default class FormUpload extends Component {
   }
 
   handleFileDrop(file) {
-    console.log(file[0] + ' Dropped!');
   }
 
   render() {
@@ -36,6 +37,7 @@ export default class FormUpload extends Component {
             style={this.props.style}
             current={this.props.current}
             remove={this.props.remove}
+            accepts={this.props.accepts}
           />
         </Form.Connect.Set>
       </div>

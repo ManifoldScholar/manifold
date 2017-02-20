@@ -51,14 +51,16 @@ export default class ProjectPanelGeneral extends PureComponent {
             name="attributes[publicationDate]"
           />
           <Form.Upload
-            style="cover"
+            style="portrait"
             label="Avatar"
+            accepts="images"
             current={this.props.project.attributes.avatarUrl}
             name="attributes[avatar]"
             remove="attributes[removeAvatar]"
           />
           <Form.Upload
-            style="hero"
+            style="landscape"
+            accepts="images"
             label="Hero Image"
             current={this.props.project.attributes.heroUrl}
             name="attributes[hero]"
