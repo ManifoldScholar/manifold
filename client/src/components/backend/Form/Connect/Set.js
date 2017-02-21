@@ -17,14 +17,13 @@ export default class Set extends PureComponent {
     sourceModel: PropTypes.object,
     name: PropTypes.string.isRequired,
     actions: PropTypes.shape({
-      set: PropTypes.func.isRequired
-    }).isRequired,
+      set: PropTypes.func
+    }),
     value: PropTypes.any,
     manualSet: PropTypes.bool
   };
 
   static defaultProps = {
-    actions: { set: () => {} },
     manualSet: false
   }
 
@@ -113,7 +112,12 @@ export default class Set extends PureComponent {
     return Object.assign({}, child.props, props);
   }
 
-  render() {
+  passthroughRender() {
+    const { onChange, name, value } = this.props;
+    return React.cloneElement(this.props.children, { onChange, name, value });
+  }
+
+  connectedRender() {
     const classes = classNames({
       checked: this.hasFixedValue() && this.isChecked(this.value())
     });
@@ -133,6 +137,11 @@ export default class Set extends PureComponent {
         </Form.HigherOrder.Validation>
       </div>
     );
+  }
+
+  render() {
+    if (!this.props.actions) return this.passthroughRender();
+    return this.connectedRender();
   }
 
 }
