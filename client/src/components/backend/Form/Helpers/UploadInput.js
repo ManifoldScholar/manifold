@@ -13,6 +13,7 @@ export default class FormUploadInput extends Component {
   static propTypes = {
     background: PropTypes.string,
     setValue: PropTypes.func,
+    onChange: PropTypes.func,
     remove: PropTypes.string,
     value: PropTypes.any,
     current: PropTypes.string,
@@ -72,7 +73,8 @@ export default class FormUploadInput extends Component {
         content_type: this.state.attachment.type,
         filename: this.state.attachment.name
       };
-      this.props.setValue(attachment);
+      if (this.props.setValue) this.props.setValue(attachment);
+      if (this.props.onChange) this.props.onChange(attachment);
     };
     reader.readAsDataURL(this.state.attachment);
   }
@@ -85,8 +87,9 @@ export default class FormUploadInput extends Component {
     event.preventDefault();
     event.stopPropagation();
     this.setState({ attachment: null, removed: true });
-    this.props.setValue(null);
-    this.props.setValue(true, this.props.remove);
+    if (this.props.setValue) this.props.setValue(null);
+    if (this.props.setValue) this.props.setValue(true, this.props.remove);
+    if (this.props.onChange) this.props.onChange(null);
   }
 
   isFile(object) {
