@@ -71,6 +71,10 @@ class Resource < ApplicationRecord
     return all unless kind.present?
     where(kind: kind)
   }
+  scope :with_collection_order, lambda { |collection_id|
+    joins(:collection_resources).where("collection_resources.collection_id = ?", collection_id)
+    .order("collection_resources.position ASC")
+  }
   scope :with_order, lambda { |by|
     return order(:created_at, :title) unless by.present?
     order(by)
