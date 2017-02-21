@@ -71,10 +71,6 @@ class Resource < ApplicationRecord
     return all unless kind.present?
     where(kind: kind)
   }
-  scope :by_collection, lambda { |collection|
-    return all unless collection.present?
-    where(collection: collection)
-  }
   scope :with_order, lambda { |by|
     return order(:created_at, :title) unless by.present?
     order(by)

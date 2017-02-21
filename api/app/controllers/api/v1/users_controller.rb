@@ -8,8 +8,7 @@ module Api
       ).freeze
 
       resourceful! User, authorize_options: { except: [:create, :show, :whoami] } do
-        User
-          .filter(with_pagination!(user_filter_params))
+        User.filter(with_pagination!(user_filter_params))
       end
 
       def whoami

@@ -9,9 +9,10 @@ module Api
       ).freeze
 
       resourceful! Project, authorize_options: { except: [:index, :show] } do
-        Project
-          .includes(:makers, :creators, :contributors)
-          .filter(with_pagination!(project_filter_params))
+        Project.filter(
+          with_pagination!(project_filter_params),
+          scope: Project.includes(:makers, :creators, :contributors)
+        )
       end
 
       def index

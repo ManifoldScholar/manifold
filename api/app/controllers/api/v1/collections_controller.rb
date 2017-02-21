@@ -8,8 +8,7 @@ module Api
 
       # GET /collections
       def index
-        @collections = Collection
-                       .filtered(collection_filter_params)
+        @collections = Collection.filtered(collection_filter_params)
         render json: @collections,
                each_serializer: CollectionSerializer
       end

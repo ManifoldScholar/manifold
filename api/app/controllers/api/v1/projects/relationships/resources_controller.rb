@@ -8,9 +8,10 @@ module Api
           before_action :set_project, only: [:index, :create]
 
           resourceful! Resource, authorize_options: { except: [:index] } do
-            filter_params =
-              with_pagination!(resource_filter_params).merge(project: @project.id)
-            Resource.filter(with_pagination!(filter_params))
+            Resource.filter(
+              with_pagination!(resource_filter_params),
+              scope: @project.resources
+            )
           end
 
           def index
