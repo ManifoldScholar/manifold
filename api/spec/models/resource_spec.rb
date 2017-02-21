@@ -30,9 +30,18 @@ RSpec.describe Resource, type: :model do
     before(:each) do
       @project_a = FactoryGirl.create(:project, title: "project_a")
       @project_b = FactoryGirl.create(:project, title: "project_b")
-      @resource_a = FactoryGirl.create(:resource, title: "resource_a", project: @project_a)
+      @resource_c = FactoryGirl.create(:resource, title: "resource_c", project: @project_b)
       @resource_b = FactoryGirl.create(:resource, title: "resource_b", project: @project_a)
-      @resource_c = FactoryGirl.create(:resource, title: "resource_c", project: @project_b, kind: "audio", keywords: "test")
+      @resource_a = FactoryGirl.create(:resource, title: "resource_a", project: @project_a)
+    end
+
+    it "and ordered by collection order" do
+      collection = FactoryGirl.create(:collection, project: @project_a);
+      collection.resources << @resource_a
+      collection.resources << @resource_b
+      collection.save
+      results = Resource.filter({collection_order: collection.id})
+      expect(results.first.id).to eq @resource_a.id
     end
 
     it "to only include those belonging to a project" do
