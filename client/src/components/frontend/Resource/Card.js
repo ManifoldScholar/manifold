@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import classNames from 'classnames';
 import FormattedDate from 'components/global/FormattedDate';
 import { Resource } from 'components/frontend';
+import { find } from 'lodash';
 
 export default class ResourceCard extends Component {
 
@@ -74,12 +75,21 @@ export default class ResourceCard extends Component {
     return text;
   }
 
+  getCollectionResourceId(resource) {
+    if (!resource) return null;
+    const collectionResources = resource.relationships.collectionResources;
+    const out = find(collectionResources, (obj) => {
+      return obj.attributes.collectionId === this.props.context.id;
+    });
+    return out.id;
+  }
+
   detailUrl() {
     const context = this.props.context;
     if (context.type === "collections") {
-      const crid = this.props.resource.id;
       const pid = context.relationships.project.id;
       const cid = context.id;
+      const crid = this.getCollectionResourceId(this.props.resource);
       return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
     }
     if (context.type === "projects") {

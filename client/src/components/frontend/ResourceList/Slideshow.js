@@ -23,10 +23,10 @@ export default class ResourceListSlideshow extends PureComponent {
   constructor(props) {
     super();
 
-    // Note that currentResource is matching to resource order
-    // property, not order in array
+    // Using resource order in array now that array is
+    // ordered by collection_resource position
     this.state = {
-      position: 1,
+      position: 0,
       loadedPages: [1],
       map: {},
       totalCount: 0
@@ -69,8 +69,8 @@ export default class ResourceListSlideshow extends PureComponent {
 
   buildNewMap(collectionResources) {
     const updates = {};
-    collectionResources.forEach((collectionResource) => {
-      updates[collectionResource.attributes.position] = collectionResource;
+    collectionResources.forEach((collectionResource, index) => {
+      updates[index] = collectionResource;
     });
     const map = Object.assign({}, this.state.map, updates);
     return map;
@@ -183,7 +183,7 @@ export default class ResourceListSlideshow extends PureComponent {
             >
               <div key={position}>
                 { this.isLoaded(position) ?
-                  this.getFigureByType(collectionResource.relationships.resource)
+                  this.getFigureByType(collectionResource)
                   :
                   <ResourceList.Slide.SlideLoading />
                 }
@@ -194,7 +194,7 @@ export default class ResourceListSlideshow extends PureComponent {
 
             { this.isLoaded(position) ?
               <ResourceList.Slide.Caption
-                resource={collectionResource.relationships.resource}
+                resource={collectionResource}
               />
             :
               <ResourceList.Slide.LoadingCaption />

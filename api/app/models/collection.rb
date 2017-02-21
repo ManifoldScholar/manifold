@@ -31,8 +31,14 @@ class Collection < ApplicationRecord
   def resource_kinds
     resources
       .select("resources.kind, collection_resources.position")
-      .distinct
       .to_a.pluck(:kind)
+      .uniq
+  end
+
+  def resource_tags
+    resources
+      .tag_counts
+      .pluck(:name)
   end
 
   def to_s

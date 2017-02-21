@@ -18,7 +18,8 @@ export default class ResourceCollectionDetail extends PureComponent {
     collectionResources: PropTypes.array,
     collectionPagination: PropTypes.object,
     collectionPaginationHandler: PropTypes.func,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    filterChange: PropTypes.func.isRequired
   };
 
   render() {
@@ -68,7 +69,11 @@ export default class ResourceCollectionDetail extends PureComponent {
             count={project.attributes.resourcesCount}
             projectId={project.id}
           />
-          <ResourceList.Filters kinds={collection.attributes.resourceKinds} />
+          <ResourceList.Filters
+            kinds={collection.attributes.resourceKinds}
+            tags={collection.attributes.resourceTags}
+            filterChangeHandler={this.props.filterChange}
+          />
           <ResourceList.Cards
             context={this.props.collection}
             resources={this.props.collectionResources}

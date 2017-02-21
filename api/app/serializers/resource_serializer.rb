@@ -14,6 +14,7 @@ class ResourceSerializer < ResourcePartialSerializer
              :translation_file_size, :translation_updated_at, :tag_list
 
   has_many :collections
+  has_many :collection_resources
   belongs_to :project, serializer: ProjectPartialSerializer
 
 end
