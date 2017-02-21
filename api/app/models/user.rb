@@ -5,7 +5,6 @@ class User < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:email, :first_name, :last_name].freeze
 
   # Concerns
-  include Paginated
   include Filterable
 
   # Authority
@@ -60,22 +59,10 @@ class User < ApplicationRecord
     return all unless email.present?
     where("email ILIKE ?", "#{email}%")
   }
-
-  # Methods
-  def self.query(params)
-    User.all
-        .order(:first_name, :last_name)
-        .by_email(params[:email])
-        .by_pagination(params[:page], params[:per_page])
-  end
-
-  def self.search(params)
-    query = params.dig(:keyword) || "*"
-    filter = Search::FilterScope.new
-                                .typeahead(params[:typeahead], TYPEAHEAD_ATTRIBUTES)
-                                .paginate(params[:page], params[:per_page])
-    User.lookup(query, filter)
-  end
+  scope :with_order, lambda { |by|
+    return order(:first_name, :last_name) unless by.present?
+    order(by)
+  }
 
   def ensure_nickname
     self.nickname = first_name if nickname.blank?
