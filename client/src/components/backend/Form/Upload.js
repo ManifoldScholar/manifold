@@ -3,6 +3,8 @@ import sharedPropsValidation from './propTypes';
 import Dropzone from 'react-dropzone';
 import { Form } from 'components/backend';
 import { Form as GlobalForm } from 'components/global';
+import classnames from 'classnames';
+import isString from 'lodash/isString';
 
 export default class FormUpload extends Component {
 
@@ -11,6 +13,7 @@ export default class FormUpload extends Component {
   static propTypes = {
     ...sharedPropsValidation,
     label: PropTypes.string,
+    instructions: PropTypes.string,
     background: PropTypes.string,
     accepts: PropTypes.string,
   };
@@ -29,9 +32,17 @@ export default class FormUpload extends Component {
   }
 
   render() {
+    const labelClass = classnames({
+      "has-instructions": isString(this.props.instructions)
+    });
     return (
       <div className="form-input">
-        <label>{this.props.label}</label>
+        <label className={labelClass}>{this.props.label}</label>
+        {
+          isString(this.props.instructions) ?
+            <span className="instructions">{this.props.instructions}</span>
+          : null
+        }
         <Form.Connect.Set manualSet {...this.props} >
           <Form.Helpers.UploadInput
             style={this.props.style}
