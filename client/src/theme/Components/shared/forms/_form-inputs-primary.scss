@@ -17,6 +17,20 @@
     .bg-neutral90 & {
       color: $neutral30;
     }
+
+    &.has-instructions {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  .instructions {
+    @include templateCopy;
+    display: block;
+    margin-bottom: 1em;
+    font-size: 17px;
+    font-style: italic;
+    color: $neutral50;
+    text-transform: none;
   }
 
   input[type="text"], input[type="password"] {
