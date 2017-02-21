@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { passwordsAPI } from 'api';
 import { entityStoreActions, notificationActions } from 'actions';
 import classNames from 'classnames';
-import { get } from 'lodash';
+import get from 'lodash/get';
+import pull from 'lodash/pull';
 import { connect } from 'react-redux';
+import { Form } from 'components/backend';
 const { request, flush } = entityStoreActions;
 
 class PasswordForgot extends Component {
@@ -22,7 +24,12 @@ class PasswordForgot extends Component {
 
   constructor(props) {
     super();
-    this.state = { email: '' };
+    this.state = {
+      submitted: false,
+      email: '',
+      errors: []
+    };
+    this.clientErrorHandler = this.clientErrorHandler.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.submissionError = this.submissionError.bind(this);
@@ -34,9 +41,14 @@ class PasswordForgot extends Component {
 
   handleSubmit(event) {
     event.preventDefault(event.target);
-    this.props.dispatch(request(passwordsAPI.create(this.state.email), 'request-reset-password')).promise.then(() => {
-      this.postSubmit();
-      });
+    this.setState({ submitted: true }, () => {
+      if (!this.hasErrors()) {
+        this.props.dispatch(request(passwordsAPI.create(this.state.email), 'request-reset-password')).promise.then(() => {
+          this.postSubmit();
+        });
+      }
+      this.setState({ submitted: false });
+    })
   }
 
   postSubmit() {
@@ -69,6 +81,23 @@ class PasswordForgot extends Component {
     return error;
   }
 
+  hasErrors() {
+    return this.state.errors.length > 0;
+  }
+
+  clientErrorHandler(fieldName, hasError) {
+    const alreadyIncluded = this.state.errors.includes(fieldName);
+    if (alreadyIncluded && hasError === false) {
+      const errors = pull(this.state.errors.slice(0), fieldName);
+      this.setState({ errors });
+    }
+    if (!alreadyIncluded && hasError === true) {
+      const errors = this.state.errors.slice(0);
+      errors.push(fieldName);
+      this.setState({ errors });
+    }
+  }
+
   render() {
     const submitClass = classNames({
       'form-input': true,
@@ -80,14 +109,22 @@ class PasswordForgot extends Component {
           <div className="row-1-p">
             <div className="form-input form-error">
               <label>Email</label>
-              <input
+              <Form.HigherOrder.Validation
+                submitted={this.state.submitted}
                 value={this.state.email}
+                errorHandler={this.clientErrorHandler}
+                validation={["required"]}
                 name="email"
-                type="text"
-                id="password-forgot-email"
-                placeholder="Email"
                 onChange={(event) => this.handleInputChange(event)}
-              />
+              >
+                <input
+                  value={this.state.email}
+                  name="email"
+                  type="text"
+                  id="password-forgot-email"
+                  placeholder="Email"
+                />
+              </Form.HigherOrder.Validation>
             </div>
           </div>
           <div className="row-1-p">
