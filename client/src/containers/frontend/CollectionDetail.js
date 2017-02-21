@@ -10,20 +10,23 @@ import {
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI, collectionsAPI } from 'api';
+import debounce from 'lodash/debounce';
 
 const { select, meta } = entityUtils;
 const { request, flush, requests } = entityStoreActions;
+const page = 1;
+const perPage = 10;
 
 class CollectionDetailContainer extends PureComponent {
 
   static fetchData(getState, dispatch, location, params) {
-    const page = params.page ? params.page : 1;
+    const pageParam = params.page ? params.page : page;
     const collectionId = params.collectionId;
     const projectId = params.id;
     const projects = projectsAPI.show(params.id);
     const collection = collectionsAPI.show(params.collectionId);
     const collectionResources = collectionsAPI.collectionResources(
-      collectionId, { }, { number: page }
+      collectionId, { }, { number: pageParam, size: perPage }
     );
     const { promise: one } = dispatch(request(projects, 'project-detail'));
     const { promise: two } = dispatch(request(collection, 'collection-detail'));
@@ -53,11 +56,13 @@ class CollectionDetailContainer extends PureComponent {
     super();
     this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.filterChange = this.filterChange.bind(this);
+    this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
-  handlePageChange(event, page) {
+  handlePageChange(event, pageParam) {
     const cId = this.props.collection.id;
-    const pagination = { number: page };
+    const pagination = { number: pageParam, size: perPage };
     const filter = { };
     const action = request(
       collectionsAPI.collectionResources(cId, filter, pagination),
@@ -66,10 +71,26 @@ class CollectionDetailContainer extends PureComponent {
     this.props.dispatch(action);
   }
 
-  pageChangeHandlerCreator(page) {
+  pageChangeHandlerCreator(pageParam) {
     return (event) => {
-      this.handlePageChange(event, page);
+      this.handlePageChange(event, pageParam);
     };
+  }
+
+  filterChange(filter) {
+    this.setState({ filter }, () => {
+      this.updateResults();
+    });
+  }
+
+  updateResults() {
+    const cId = this.props.collection.id;
+    const pagination = { number: page, size: perPage };
+    const action = request(
+      collectionsAPI.collectionResources(cId, this.state.filter, pagination),
+      'collection-resources'
+    );
+    this.props.dispatch(action);
   }
 
   render() {
@@ -92,6 +113,7 @@ class CollectionDetailContainer extends PureComponent {
             collectionPagination={this.props.resourcesMeta.pagination}
             collectionPaginationHandler={this.pageChangeHandlerCreator}
             collection={this.props.collection}
+            filterChange={this.filterChange}
           />
         : null }
         <section className="bg-neutral05">

@@ -30,9 +30,9 @@ RSpec.describe Resource, type: :model do
     before(:each) do
       @project_a = FactoryGirl.create(:project, title: "project_a")
       @project_b = FactoryGirl.create(:project, title: "project_b")
-      @resource_c = FactoryGirl.create(:resource, title: "resource_c", project: @project_b)
-      @resource_b = FactoryGirl.create(:resource, title: "resource_b", project: @project_a)
       @resource_a = FactoryGirl.create(:resource, title: "resource_a", project: @project_a)
+      @resource_b = FactoryGirl.create(:resource, title: "resource_b", project: @project_a)
+      @resource_c = FactoryGirl.create(:resource, title: "resource_c", project: @project_b, kind: "audio", keywords: "test")
     end
 
     it "and ordered by collection order" do
