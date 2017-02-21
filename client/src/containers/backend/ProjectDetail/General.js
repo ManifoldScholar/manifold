@@ -51,7 +51,7 @@ export default class ProjectPanelGeneral extends PureComponent {
             name="attributes[publicationDate]"
           />
           <Form.Upload
-            style="portrait"
+            style="square"
             label="Avatar"
             accepts="images"
             current={this.props.project.attributes.avatarUrl}
