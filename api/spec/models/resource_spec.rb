@@ -32,7 +32,7 @@ RSpec.describe Resource, type: :model do
       @project_b = FactoryGirl.create(:project, title: "project_b")
       @resource_a = FactoryGirl.create(:resource, title: "resource_a", project: @project_a)
       @resource_b = FactoryGirl.create(:resource, title: "resource_b", project: @project_a)
-      @resource_c = FactoryGirl.create(:resource, title: "alt_resource", project: @project_b, kind: "audio", keywords: "test")
+      @resource_c = FactoryGirl.create(:resource, title: "resource_c", project: @project_b, kind: "audio", keywords: "test")
     end
 
     it "to only include those belonging to a project" do

@@ -12,7 +12,6 @@ class Project < ApplicationRecord
   include Collaborative
   include MoneyAttributes
   include TruthyChecks
-  include Paginated
   include Filterable
 
   # Magic
@@ -101,23 +100,6 @@ class Project < ApplicationRecord
   # Why is this here? --ZD
   def self.call
     all
-  end
-
-  # Used to filter records using DB fields
-  def self.query(params)
-    Project.all
-           .by_featured(params[:featured])
-           .by_subject(params[:subject])
-           .by_pagination(params[:page], params[:per_page])
-  end
-
-  # Used to filter records using elastic search index
-  def self.search(params)
-    query = params.dig(:keyword) || "*"
-    filter = Search::FilterScope.new
-                                .typeahead(params[:typeahead], TYPEAHEAD_ATTRIBUTES)
-                                .paginate(params[:page], params[:per_page])
-    Project.lookup(query, filter)
   end
 
   def search_data

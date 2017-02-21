@@ -8,7 +8,6 @@ class Maker < ApplicationRecord
   include Authority::Abilities
 
   # Concerns
-  include Paginated
   include Filterable
 
   # Search
@@ -34,21 +33,6 @@ class Maker < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-
-  # Used to filter records using DB fields
-  def self.query(params)
-    Maker.all
-         .by_pagination(params[:page], params[:per_page])
-  end
-
-  # Used to filter records using elastic search index
-  def self.search(params)
-    query = params.dig(:keyword) || "*"
-    filter = Search::FilterScope.new
-                                .typeahead(params[:typeahead], TYPEAHEAD_ATTRIBUTES)
-                                .paginate(params[:page], params[:per_page])
-    Maker.lookup(query, filter)
-  end
 
   def self.parse_name(name)
     parts = {}
