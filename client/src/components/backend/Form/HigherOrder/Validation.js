@@ -10,6 +10,9 @@ export default class FormHigherOrderValidation extends Component {
 
   static propTypes = {
     validation: PropTypes.array,
+    submitted: PropTypes.bool,
+    errorHandler: PropTypes.func,
+
     name: PropTypes.string,
     children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
     onChange: React.PropTypes.func,
@@ -26,10 +29,32 @@ export default class FormHigherOrderValidation extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.submitted === true && this.props.submitted === false) {
+      this.validateValue();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.errors !== this.state.errors) {
+      this.reportErrorStateChange();
+    }
+  }
+
+  reportErrorStateChange() {
+    if (!this.props.errorHandler) return;
+    const hasErrors = Object.keys(this.state.errors).length > 0;
+    this.props.errorHandler(this.props.name, hasErrors);
+  }
+
   validate(value) {
     this.props.validation.forEach((validation) => {
       if (validation === 'required') this.validateRequired(value);
     });
+  }
+
+  validateValue() {
+    this.validate(this.props.value);
   }
 
   validateRequired(value) {
@@ -79,13 +104,11 @@ export default class FormHigherOrderValidation extends Component {
   }
 
   render() {
+    const { validation, children, errorHandler, submitted, ...transfer } = this.props;
 
     if (!this.props.validation) {
-      const { validation, children, ...transfer } = this.props;
       return React.cloneElement(children, transfer);
     }
-
-    const { validation, children, ...transfer } = this.props;
     if (transfer.hasOwnProperty('onChange')) {
       transfer.onChange = this.proxyOnChange(this.props.onChange);
     }
