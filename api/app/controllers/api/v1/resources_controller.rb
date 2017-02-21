@@ -6,8 +6,7 @@ module Api
       INCLUDES = [:project].freeze
 
       resourceful! Resource, authorize_options: { except: [:index, :show] } do
-        Resource
-          .filter(with_pagination!(resource_filter_params))
+        Resource.filter(with_pagination!(resource_filter_params))
       end
 
       def index

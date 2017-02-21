@@ -8,8 +8,7 @@ module Api
       ).freeze
 
       resourceful! Maker, authorize_options: { except: [:index, :show] } do
-        Maker
-          .filter(with_pagination!(maker_filter_params))
+        Maker.filter(with_pagination!(maker_filter_params))
       end
 
       def index
