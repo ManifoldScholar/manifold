@@ -16,8 +16,6 @@ export default class FormRadios extends Component {
   };
 
   static defaultProps = {
-    dirtyModel: {},
-    actions: { set: () => {} },
     layout: "horizontal"
   };
 
@@ -35,7 +33,7 @@ export default class FormRadios extends Component {
                 <input id={option.value} type="radio" />
               </Form.Connect.Set>
               <span className="toggle-indicator"></span>
-              <span className="toggle-label">{option.label} {option.value}</span>
+              <span className="toggle-label">{option.label}</span>
             </label>
           );
         })}
