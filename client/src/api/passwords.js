@@ -10,14 +10,18 @@ export default {
     };
   },
 
-  update(password, password_confirmation, reset_token) {
+  update(password, passwordConfirmation, resetToken) {
     return {
       endpoint: `/api/v1/passwords/update`,
       method: 'PUT',
       options: {
-        params: { password, password_confirmation, reset_token }
+        params: {
+          password,
+          password_confirmation: passwordConfirmation,
+          reset_token: resetToken
+        }
       }
-    }
+    };
   }
 
 };
