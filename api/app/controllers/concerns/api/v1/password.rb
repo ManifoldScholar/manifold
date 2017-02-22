@@ -3,8 +3,14 @@ module Api
     # Includes password resetting methods
     module Password
       def invalid_token_error
-        render json: { errors: ["Invalid or expired token"] },
-               status: :unprocessable_entity
+        render json: {
+          errors: [
+            {
+              source: { pointer: "/data/attributes/resetToken" },
+              detail: "Invalid or expired"
+            }
+          ]
+        }, status: :unprocessable_entity
       end
     end
   end

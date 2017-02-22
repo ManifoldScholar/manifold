@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { passwordsAPI } from 'api';
 import { entityStoreActions, notificationActions } from 'actions';
-import classNames from 'classnames';
 import get from 'lodash/get';
 import pull from 'lodash/pull';
 import { connect } from 'react-redux';
@@ -13,7 +12,9 @@ class PasswordForgot extends Component {
   static propTypes = {
     showLogin: PropTypes.func.isRequired,
     showCreate: PropTypes.func.isRequired,
-    hideSignInUpOverlay: PropTypes.func
+    hideSignInUpOverlay: PropTypes.func,
+    dispatch: PropTypes.func,
+    response: PropTypes.object
   };
 
   static mapStateToProps(state, ownProps) {
@@ -32,7 +33,6 @@ class PasswordForgot extends Component {
     this.clientErrorHandler = this.clientErrorHandler.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.submissionError = this.submissionError.bind(this);
   }
 
   componentWillUnmount() {
@@ -41,14 +41,16 @@ class PasswordForgot extends Component {
 
   handleSubmit(event) {
     event.preventDefault(event.target);
+    const action = passwordsAPI.create(this.state.email);
+    const resetRequest = request(action, 'request-reset-password');
     this.setState({ submitted: true }, () => {
       if (!this.hasErrors()) {
-        this.props.dispatch(request(passwordsAPI.create(this.state.email), 'request-reset-password')).promise.then(() => {
+        this.props.dispatch(resetRequest).promise.then(() => {
           this.postSubmit();
         });
       }
       this.setState({ submitted: false });
-    })
+    });
   }
 
   postSubmit() {
@@ -73,12 +75,7 @@ class PasswordForgot extends Component {
   }
 
   handleInputChange(event) {
-    this.setState({ email: event.target.value  });
-  }
-
-  submissionError() {
-    const error = get(this.props.response, 'errors');
-    return error;
+    this.setState({ email: event.target.value });
   }
 
   hasErrors() {
@@ -99,10 +96,6 @@ class PasswordForgot extends Component {
   }
 
   render() {
-    const submitClass = classNames({
-      'form-input': true,
-      'form-error': this.submissionError()
-    });
     return (
       <div>
         <form method="" onSubmit={(event) => this.handleSubmit(event)}>
@@ -128,12 +121,7 @@ class PasswordForgot extends Component {
             </div>
           </div>
           <div className="row-1-p">
-            <div className={submitClass}>
-              { this.submissionError() ?
-                <span style={{ marginTop: 0 }} className="error">
-                  {this.submissionError()}
-                </span>
-                : null }
+            <div className="form-input">
               <input
                 className="button-secondary button-with-room"
                 type="submit"

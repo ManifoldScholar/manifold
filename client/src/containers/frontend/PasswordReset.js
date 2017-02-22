@@ -10,7 +10,19 @@ const { request, flush } = entityStoreActions;
 
 class PasswordReset extends Component {
 
-  static propTypes = {};
+  static propTypes = {
+    dispatch: PropTypes.func,
+    params: PropTypes.shape({
+      resetToken: PropTypes.string
+    }).isRequired,
+    response: PropTypes.object
+  };
+
+  static mapStateToProps(state, ownProps) {
+    return {
+      response: get(state.entityStore.responses, 'reset-password')
+    };
+  }
 
   constructor() {
     super();
@@ -22,19 +34,19 @@ class PasswordReset extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  static mapStateToProps(state, ownProps) {
-    return {
-      response: get(state.entityStore.responses, 'reset-password')
-    };
-  }
-
   componentWillUnmount() {
     this.props.dispatch(flush(['reset-password']));
   }
 
   handleSubmit(event) {
     event.preventDefault(event.target);
-    this.props.dispatch(request(passwordsAPI.update(this.state.password, this.state.passwordConfirmation, this.props.params.resetToken), 'reset-password')).promise.then((response) => {
+    const action = passwordsAPI.update(
+      this.state.password,
+      this.state.passwordConfirmation,
+      this.props.params.resetToken
+    );
+    const changeRequest = request(action, 'reset-password');
+    this.props.dispatch(changeRequest).promise.then((response) => {
       this.postUpdate(response.data);
     });
   }
@@ -65,11 +77,11 @@ class PasswordReset extends Component {
   }
 
   redirectToHome() {
-    browserHistory.push('/')
+    browserHistory.push('/');
   }
 
   handleInputChange(event) {
-    this.setState({ [event.target.name]: event.target.value  });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
@@ -120,13 +132,17 @@ class PasswordReset extends Component {
               </Form.Errorable>
             </div>
             <div className="row-1-p">
-              <div className="form-input">
+              <Form.Errorable
+                className="form-input"
+                name="attributes[resetToken]"
+                errors={errors}
+              >
                 <input
                   className="button-secondary button-with-room"
                   type="submit"
                   value="Reset Password"
                 />
-              </div>
+              </Form.Errorable>
             </div>
           </form>
         </div>
