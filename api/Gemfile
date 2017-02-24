@@ -49,6 +49,7 @@ group :development, :test do
   gem "rspec-mocks", "~> 3.5.0"
   gem "rspec-rails", "~> 3.5.0"
   gem "rspec-support", "~> 3.5.0"
+  gem "timecop"
 end
 
 group :development do
