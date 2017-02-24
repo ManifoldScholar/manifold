@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { ProjectList, Layout } from 'components/frontend';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -55,11 +55,19 @@ class FollowingContainer extends Component {
     this.renderFollowedProjects = this.renderFollowedProjects.bind(this);
   }
 
+  componentWillMount() {
+    this.maybeRedirect();
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   componentDidUpdate(prevProps) {
+    // Did the user log out?
+    if (this.props.authentication.authenticated === false) {
+      return this.maybeRedirect();
+    }
     // Favorite projects filters changed?
     if (prevProps.projectFilters !== this.props.projectFilters) {
       this.updateFavorites();
@@ -69,6 +77,11 @@ class FollowingContainer extends Component {
       this.props.authentication.currentUser.favorites) {
       this.updateFavorites();
     }
+  }
+
+  maybeRedirect() {
+    if (this.props.authentication.authenticated === true) return null;
+    browserHistory.push('/browse');
   }
 
   updateFavorites() {

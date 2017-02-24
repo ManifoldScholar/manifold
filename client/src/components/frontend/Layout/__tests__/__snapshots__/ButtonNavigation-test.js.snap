@@ -1,3 +1,5 @@
+exports[`ButtonNavigation component doesn't render anything when not logged in on home 1`] = `null`;
+
 exports[`ButtonNavigation component renders correctly 1`] = `
 <section
   className="bg-neutral05">
