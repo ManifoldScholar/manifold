@@ -9,13 +9,15 @@ export default class LayoutButtonNavigation extends Component {
   static defaultProps = {
     grayBg: true,
     showBrowse: true,
-    showFollowing: true
+    showFollowing: true,
+    authenticated: false
   };
 
   static propTypes = {
     grayBg: PropTypes.bool,
     showBrowse: PropTypes.bool,
-    showFollowing: PropTypes.bool
+    showFollowing: PropTypes.bool,
+    authenticated: PropTypes.bool
   };
 
   constructor() {
@@ -52,6 +54,7 @@ export default class LayoutButtonNavigation extends Component {
   }
 
   renderFollowingButton() {
+    if (this.props.authenticated !== true) return null;
     if (this.props.showFollowing !== true) return null;
     return (
       <Link to={'/browse/following'} className="button-icon-primary">
@@ -67,6 +70,7 @@ export default class LayoutButtonNavigation extends Component {
       'bg-neutral05': this.props.grayBg === true
     });
 
+    if (!this.renderBrowseButton() && !this.renderFollowingButton()) return null;
     return (
       <section className={sectionClass}>
         <div className="container">

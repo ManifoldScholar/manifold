@@ -125,7 +125,11 @@ class HomeContainer extends Component {
             }
           </div>
         </section>
-        <Layout.ButtonNavigation grayBg={false} showBrowse={false} />
+        <Layout.ButtonNavigation
+          grayBg={false}
+          showBrowse={false}
+          authenticated={this.props.authentication.authenticated}
+        />
       </div>
     );
   }
