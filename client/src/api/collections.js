@@ -18,7 +18,9 @@ export default {
     };
   },
 
-  collectionResources(id, filter = {}, page = {}) {
+  collectionResources(id, filterParams = {}, page = {}) {
+    const filter = filterParams;
+    filter.collection_order = id;
     return {
       endpoint: `/api/v1/collections/${id}/relationships/resources`,
       method: 'GET',
