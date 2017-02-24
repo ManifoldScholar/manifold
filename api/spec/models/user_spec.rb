@@ -104,6 +104,35 @@ RSpec.describe User, type: :model do
 
   end
 
+  context "when resetting password" do
+
+    let(:user) do
+      u = FactoryGirl.create(:user, password: "password", password_confirmation: "password")
+      User.find u.id
+    end
+
+    it "generates a reset password token" do
+      user.generate_reset_token
+      expect(user.reset_password_token).to_not be_nil
+    end
+
+    it "expires the reset password token after one hour" do
+      user.generate_reset_token
+      Timecop.travel(DateTime.now + 1.hour) do
+        expect(user.valid_token?).to be false
+      end
+    end
+
+    it "is valid after 59 minutes have elapsed" do
+      user.generate_reset_token
+      Timecop.travel(DateTime.now + 59.minutes) do
+        expect(user.valid_token?).to be true
+      end
+    end
+
+
+  end
+
   context "already exists" do
     let(:user) do
       u = FactoryGirl.create(:user, password: "password", password_confirmation: "password")
