@@ -81,6 +81,10 @@
   &.primary {
     background-color: $sp20PrimaryPale;
 
+    .scheme-dark & {
+      background-color: $sp20PrimaryPaleLowContrast;
+    }
+
     .multiple {
       background-color: $sp20PrimaryLight;
     }
