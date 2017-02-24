@@ -34,7 +34,6 @@
   font-weight: $regular;
   line-height: 1.761;
   letter-spacing: 0.01em;
-  transition: font-size $durationFast $timing;
 
   *::selection, .annotation-locked-selected {
     background: $sp20Quaternary;
