@@ -129,6 +129,7 @@ export default class Text extends Component {
               resources={this.props.resources}
               annotations={this.props.annotations}
               containerSize={typography.margins.current}
+              fontSize={typography.fontSize.current}
               body={this.body}
             /> : null
           }

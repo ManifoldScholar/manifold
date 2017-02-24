@@ -10,6 +10,7 @@ export default class ResourceViewerWrapper extends PureComponent {
     resources: PropTypes.array,
     annotations: PropTypes.array,
     containerSize: PropTypes.number,
+    fontSize: PropTypes.number,
     body: PropTypes.object,
     sectionId: PropTypes.string,
     textId: PropTypes.string,
@@ -27,6 +28,7 @@ export default class ResourceViewerWrapper extends PureComponent {
     if (this.props.resources !== nextProps.resources) return true;
     if (this.props.body !== nextProps.body) return true;
     if (this.props.containerSize !== nextProps.containerSize) return true;
+    if (this.props.fontSize !== nextProps.fontSize) return true;
     return false;
   }
 
