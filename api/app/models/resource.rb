@@ -146,4 +146,11 @@ class Resource < ApplicationRecord
     title
   end
 
+  def downloadable_kind?
+    attachment.exists?
+  end
+
+  def downloadable?
+    downloadable_kind? && allow_download
+  end
 end

@@ -70,6 +70,10 @@ class ResourceDetailGeneralContainer extends PureComponent {
             name="attributes[keywords]"
             placeholder="Enter some keywords separated by , or ;"
           />
+          <Form.Switch
+            label="Allow Download?"
+            name="attributes[allowDownload]"
+          />
           <Form.Save
             text="Update Resource"
           />
