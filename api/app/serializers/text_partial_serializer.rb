@@ -20,11 +20,13 @@ class TextPartialSerializer < ActiveModel::Serializer
   end
 
   def annotations_count
-    object.annotations.only_annotations.created_by(scope).count
+    return object.annotations.only_annotations.count unless scope.authenticated_as
+    object.annotations.only_annotations.created_by(scope.authenticated_as).count
   end
 
   def highlights_count
-    object.annotations.only_highlights.created_by(scope).count
+    return object.annotations.only_highlights.count unless scope.authenticated_as
+    object.annotations.only_highlights.created_by(scope.authenticated_as).count
   end
 
   # TODO: Implement bookmarks

@@ -43,6 +43,11 @@ export default class TextThumbnail extends Component {
   render() {
     const text = this.props.text;
 
+    // Temporary while icons are not getting link styling
+    const styles = {
+      color: "#52e3ac"
+    };
+
     return (
       <div className="asset-thumb">
         <div className="asset-link">
@@ -75,23 +80,23 @@ export default class TextThumbnail extends Component {
             <div className="asset-status">
               <ul className="asset-interactions">
                 <li>
-                  <Link to={`/read/${this.props.text.id}`}>
-                    <i className="manicon manicon-pencil-simple"></i>
+                  <div >
+                    <i className="manicon manicon-pencil-simple" style={styles}></i>
                     {text.attributes.annotationsCount}
-                  </Link>
+                  </div>
                 </li>
                 <li>
-                  <Link to={`/read/${this.props.text.id}`}>
-                    <i className="manicon manicon-highlight"></i>
+                  <div>
+                    <i className="manicon manicon-highlight" style={styles}></i>
                     {text.attributes.highlightsCount}
-                  </Link>
+                  </div>
                 </li>
-                <li>
-                  <Link to={`/read/${this.props.text.id}`}>
-                    <i className="manicon manicon-bookmark-outline"></i>
+                {/* <li>
+                  <div>
+                    <i className="manicon manicon-bookmark-outline" style={styles}></i>
                     {text.attributes.bookmarksCount}
-                  </Link>
-                </li>
+                  </div>
+                </li> */}
               </ul>
             </div>
 
