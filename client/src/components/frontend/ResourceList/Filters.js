@@ -26,24 +26,38 @@ export default class ResourceListFilters extends Component {
   }
 
   setFilters(event, label) {
-    const value = event.target.value;
+    event.preventDefault();
+    const value = (label === "keyword")
+      ? event.target.querySelector(".search-input input").value
+      : event.target.value;
     const filter = Object.assign({}, this.state.filter);
     const inputs = Object.assign({}, this.state.inputs);
     if (value && label) {
       switch (value) {
-        case (value === ""):
+        case "default":
           delete filter[label];
-          inputs[label] = "";
-          if (label === "keyword") delete filter.typeahead;
+          inputs[label] = "default";
           break;
         default:
           filter[label] = value;
           inputs[label] = value;
-          if (label === "keyword") filter.typeahead = true;
           break;
       }
       this.setState({ inputs, filter }, this.updateResults);
     }
+  }
+
+  setKeywordInput(event) {
+    const value = event.target.value;
+    const inputs = Object.assign({}, this.state.inputs);
+    const filter = Object.assign({}, this.state.filter);
+    if (value === "") {
+      inputs.keyword = "";
+      delete filter.keyword;
+    } else {
+      inputs.keyword = value;
+    }
+    this.setState({ inputs, filter });
   }
 
   initialState() {
@@ -52,9 +66,9 @@ export default class ResourceListFilters extends Component {
       },
       inputs: {
         keyword: "",
-        kind: "",
-        tag: "",
-        order: ""
+        kind: "default",
+        tag: "default",
+        order: "default"
       }
     };
   }
@@ -66,7 +80,10 @@ export default class ResourceListFilters extends Component {
 
   render() {
     return (
-      <form className="form-list-filter">
+      <form
+        className="form-list-filter"
+        onSubmit={event => this.setFilters(event, "keyword")}
+      >
         <div className="search-input">
           <button className="search-button" type="submit">
             <i className="manicon manicon-magnify"></i>
@@ -74,7 +91,7 @@ export default class ResourceListFilters extends Component {
           <input
             value={this.state.inputs.keyword}
             type="text"
-            onChange={event => this.setFilters(event, "keyword")}
+            onChange={event => this.setKeywordInput(event)}
             placeholder="Search"
           />
         </div>
@@ -84,9 +101,7 @@ export default class ResourceListFilters extends Component {
               onChange={event => this.setFilters(event, "kind")}
               value={this.state.inputs.kind}
             >
-              <option
-                value=""
-              >
+              <option value="default">
                 Type:
               </option>
               {this.props.kinds ?
@@ -104,9 +119,7 @@ export default class ResourceListFilters extends Component {
               onChange={event => this.setFilters(event, "tag")}
               value={this.state.inputs.tag}
             >
-              <option
-                value=""
-              >
+              <option value="default">
                 Tag:
               </option>
               {this.props.tags ?
@@ -124,9 +137,7 @@ export default class ResourceListFilters extends Component {
               onChange={event => this.setFilters(event, "order")}
               value={this.state.inputs.order}
             >
-              <option
-                value=""
-              >
+              <option value="default">
                 Order By:
               </option>
               <option value="title ASC">A-Z</option>

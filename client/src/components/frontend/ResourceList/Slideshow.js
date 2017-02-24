@@ -26,7 +26,7 @@ export default class ResourceListSlideshow extends PureComponent {
     // Using resource order in array now that array is
     // ordered by collection_resource position
     this.state = {
-      position: 0,
+      position: 1,
       loadedPages: [1],
       map: {},
       totalCount: 0
@@ -70,7 +70,7 @@ export default class ResourceListSlideshow extends PureComponent {
   buildNewMap(collectionResources) {
     const updates = {};
     collectionResources.forEach((collectionResource, index) => {
-      updates[index] = collectionResource;
+      updates[index + 1] = collectionResource;
     });
     const map = Object.assign({}, this.state.map, updates);
     return map;
