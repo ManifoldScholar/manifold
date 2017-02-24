@@ -87,7 +87,7 @@ export default class ResourceMeta extends Component {
             <span className="meta-label">{'Created On'}</span>
             <span className="meta-value">
               <FormattedDate
-                format="MMMM DDD, YYYY"
+                format="MMMM DD, YYYY"
                 date={attr.createdAt}
               />
             </span>
