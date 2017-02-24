@@ -35,43 +35,15 @@ export default class ResourceCard extends Component {
     return formattedType;
   }
 
-  getPreviewText(type) {
-    let text = false;
-
-    switch (type.toLowerCase()) {
-      case 'image':
-      case 'interactive':
-        text = (
-          <span>
-            {'Preview'}
-              <i className="manicon manicon-eye-outline"></i>
-          </span>
-        );
-        break;
-      case 'link':
-        text = (
-          <span>
-            {'Visit'}
-            <i className="manicon manicon-arrow-right"></i>
-          </span>
-        );
-        break;
-      case 'video':
-        text = (
-          <span>
-            {'Play'}
-            <i className="manicon manicon-triangle-right"></i>
-          </span>
-        );
-        break;
-      default:
-        text = (
-          <span>
-            {'Download'}
-            <i className="manicon manicon-arrow-down"></i>
-          </span>
-        );
-    }
+  getPreviewText(attr) {
+    const type = attr.kind;
+    const text = (attr.downloadable ?
+      this.renderDownloadablePreview(type)
+      : <span>
+          {'View'}
+          <i className="manicon manicon-arrow-right"></i>
+        </span>
+    );
     return text;
   }
 
@@ -103,14 +75,18 @@ export default class ResourceCard extends Component {
   handlePreviewClick(event) {
     event.preventDefault();
     const attr = this.resource().attributes;
+    let action = null;
     switch (attr.kind.toLowerCase()) {
       case "link":
-        window.open(attr.externalUrl);
+        action = window.open(attr.externalUrl);
         break;
       default:
-        window.open(attr.attachmentUrl);
+        action = attr.downloadable ?
+          window.open(attr.attachmentUrl)
+          : this.handleInfoClick();
         break;
     }
+    return action;
   }
 
   handleInfoMouseOver() {
@@ -152,6 +128,46 @@ export default class ResourceCard extends Component {
       return this.props.resource.relationships.resource;
     }
     return this.props.resource;
+  }
+
+  renderDownloadablePreview(type) {
+    if (!type) return null;
+    let out = null;
+    switch (type.toLowerCase()) {
+      case 'image':
+      case 'interactive':
+        out = (
+          <span>
+            {'Preview'}
+            <i className="manicon manicon-eye-outline"></i>
+          </span>
+        );
+        break;
+      case 'link':
+        out = (
+          <span>
+            {'Visit'}
+            <i className="manicon manicon-arrow-right"></i>
+          </span>
+        );
+        break;
+      case 'video':
+        out = (
+          <span>
+            {'Play'}
+            <i className="manicon manicon-triangle-right"></i>
+          </span>
+        );
+        break;
+      default:
+        out = (
+          <span>
+            {'Download'}
+            <i className="manicon manicon-arrow-down"></i>
+          </span>
+        );
+    }
+    return out;
   }
 
   renderTags(resource) {
@@ -213,7 +229,7 @@ export default class ResourceCard extends Component {
             resource={resource}
           />
           <div onClick={this.handlePreviewClick} className="preview-text">
-            {this.getPreviewText(attr.kind)}
+            {this.getPreviewText(attr)}
           </div>
         </Link>
         <section
