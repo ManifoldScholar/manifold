@@ -114,7 +114,8 @@ export default class Login extends Component {
           </a>
         </p>
 
-        <section className="login-external">
+        {/* Functionality not implemented yet */}
+        {/* <section className="login-external">
           <button className="button-secondary-dark">
             <i className="manicon manicon-facebook"></i>
             <span>Log in with Facebook</span>
@@ -123,7 +124,7 @@ export default class Login extends Component {
             <i className="manicon manicon-twitter"></i>
             <span>Log in with Twitter</span>
           </button>
-        </section>
+        </section> */}
       </div>
     );
   }
