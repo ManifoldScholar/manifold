@@ -109,6 +109,7 @@ export default class ProjectHero extends Component {
 
   renderPublishedText(position) {
     const publishedText = this.props.project.relationships.publishedText;
+    const publishedTextTocId = this.props.project.attributes.publishedTextTocId;
     if (!publishedText) return null;
     return (
       <section className={'project-entry ' + position}>
@@ -119,14 +120,16 @@ export default class ProjectHero extends Component {
           <i className="manicon manicon-glasses"></i>
           {'Start Reading'}
         </Link>
-
-        <Link
-          to={`/read/${publishedText.id}`}
-          className="button-secondary dull"
-        >
-          <i className="manicon manicon-bullet-list"></i>
-          {'View Contents'}
-        </Link>
+        {publishedTextTocId ?
+          <Link
+            to={`/read/${publishedText.id}/section/${publishedTextTocId}`}
+            className="button-secondary dull"
+          >
+            <i className="manicon manicon-bullet-list"></i>
+            {'View Contents'}
+          </Link>
+          : null
+        }
       </section>
 
     );
