@@ -46,6 +46,14 @@ export default class Header extends Component {
     this.renderContentsButton = this.renderContentsButton.bind(this);
   }
 
+  componentWillUnmount() {
+    this.resetHeaderState();
+  }
+
+  resetHeaderState() {
+    this.triggerHideToc();
+  }
+
   handleContentsButtonClick() {
     this.props.commonActions.visibilityToggle('tocDrawer');
   }
