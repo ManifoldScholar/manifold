@@ -5,18 +5,21 @@ import { Form as FormContainer } from 'containers/backend';
 import { settingsAPI } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-const { request, requests } = entityStoreActions;
+const { requests } = entityStoreActions;
 
 class SettingsGeneralContainer extends PureComponent {
 
+  static propTypes = {
+    handleSuccess: PropTypes.func.isRequired
+  };
+
+  static activeNavItem = "general";
 
   static mapStateToProps(state) {
     return {
       settings: entityUtils.select(requests.settings, state.entityStore)
     };
   }
-
-  static activeNavItem = "general";
 
   render() {
     if (!this.props.settings) return null;
@@ -28,6 +31,7 @@ class SettingsGeneralContainer extends PureComponent {
           name="backend-settings-general"
           update={settingsAPI.update}
           create={settingsAPI.update}
+          onSuccess={this.props.handleSuccess}
           className="form-secondary"
         >
           <Form.TextInput
@@ -56,6 +60,12 @@ class SettingsGeneralContainer extends PureComponent {
             mask={
               ['g', 'a', ':', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]
             }
+          />
+          <Form.TextInput
+            focusOnMount
+            label="Contact Link URL"
+            name="attributes[general][contactUrl]"
+            placeholder="Enter a URL"
           />
           <Form.Save
             text="Save Settings"
