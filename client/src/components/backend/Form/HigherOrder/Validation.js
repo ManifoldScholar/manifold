@@ -12,7 +12,7 @@ export default class FormHigherOrderValidation extends Component {
     validation: PropTypes.array,
     submitted: PropTypes.bool,
     errorHandler: PropTypes.func,
-    value: PropTypes.string,
+    value: PropTypes.any,
     name: PropTypes.string,
     children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
     onChange: React.PropTypes.func,
