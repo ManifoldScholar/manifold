@@ -1,5 +1,7 @@
 import LoginForm from './LoginForm';
+import HigherOrder from './HigherOrder';
 
-export {
-    LoginForm
+export default {
+  LoginForm,
+  HigherOrder
 };
