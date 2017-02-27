@@ -6,7 +6,7 @@ import { HigherOrder } from 'components/global';
 import { Provider } from 'react-redux';
 import getRoutes from 'routes';
 import { currentUserActions } from 'actions';
-import { Manifold } from 'containers/global';
+import Manifold from 'containers/Manifold';
 import ReactGA from 'react-ga';
 import get from 'lodash/get';
 
