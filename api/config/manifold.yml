@@ -26,6 +26,7 @@ common: &1
     :general:
       :ga_tracking_id: 'UA-90773269-1'
       :ga_profile_id: 'ga:138727289'
+      :contact_url: 'http://manifold.umn.edu/contact/'
     :theme:
       :typekit_id: 'mnj5ltf'
   :attachments:

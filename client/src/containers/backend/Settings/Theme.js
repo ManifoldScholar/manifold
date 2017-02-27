@@ -18,10 +18,6 @@ class SettingsThemeContainer extends PureComponent {
     };
   }
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     if (!this.props.settings) return null;
     return (
@@ -32,6 +28,7 @@ class SettingsThemeContainer extends PureComponent {
           name="backend-settings-theme"
           update={settingsAPI.update}
           create={settingsAPI.update}
+          onSuccess={this.props.handleSuccess}
           className="form-secondary"
         >
           <Form.Upload

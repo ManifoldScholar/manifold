@@ -35,8 +35,8 @@ exports[`Footer component renders correctly 1`] = `
             </li>
             <li>
               <a
-                onClick={[Function]}
-                style={Object {}}>
+                href="http://www.test.com"
+                target="_blank">
                 Contact
               </a>
             </li>

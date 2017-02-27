@@ -6,7 +6,7 @@ module Demonstration
   class DataLoader
 
     ENV_SETTINGS = {
-      general: %w(ga_profile_id ga_tracking_id).freeze,
+      general: %w(ga_profile_id ga_tracking_id contact_url).freeze,
       theme: %w(typekit_id).freeze
     }.freeze
 

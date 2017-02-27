@@ -82,7 +82,8 @@ module Validation
           :default_publisher,
           :default_place_of_publication,
           :ga_tracking_id,
-          :ga_profile_id
+          :ga_profile_id,
+          :contact_url
         ]
       },
       {

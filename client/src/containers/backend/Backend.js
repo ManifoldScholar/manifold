@@ -107,6 +107,7 @@ class BackendContainer extends PureComponent {
             pages={this.props.pages}
             authentication={this.props.authentication}
             commonActions={this.commonActions}
+            settings={this.props.settings}
           />
         </div>
       </HigherOrder.BodyClass>
