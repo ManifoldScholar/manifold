@@ -16,7 +16,7 @@ import exceptionRenderer from './helpers/exceptionRenderer';
 import App from './App';
 import getRoutes from './routes';
 import { authenticateWithToken } from 'store/middleware/currentUserMiddleware';
-import { Manifold } from 'containers/global';
+import Manifold from 'containers/Manifold';
 
 const pretty = new PrettyError();
 

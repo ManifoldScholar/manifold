@@ -16,7 +16,7 @@ import { currentUserActions } from 'actions';
 import { authenticateWithToken } from 'store/middleware/currentUserMiddleware';
 import ch from './helpers/consoleHelpers';
 import has from 'lodash/has';
-import { Manifold } from 'containers/global';
+import Manifold from 'containers/Manifold';
 
 const morgan = require('morgan');
 const app = new Express();

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import DocumentMeta from 'react-document-meta';
 import { SignInUp, LoadingBar } from 'components/global';
-import config from '../../config';
+import config from '../config';
 import has from 'lodash/has';
 import get from 'lodash/get';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
