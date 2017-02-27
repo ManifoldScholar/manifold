@@ -21,8 +21,8 @@ module Ingestor
           def initialize(path, logger = nil)
             @doc_path = path
             @session = ::Factory::DriveSession.create_service_account_session
-            @html_path = "tmp/#{title}.html"
             @logger = logger
+            @html_path = "tmp/#{title}.html" if can_ingest_doc?
           end
 
           # returns md5 hash of file contents
@@ -30,12 +30,13 @@ module Ingestor
             Digest::MD5.hexdigest(fetch_file.id)
           end
 
-          def google_doc?
-            @logger.debug(@doc_path)
-            @doc_path.include?("docs.google") ? start_ingestion : false
+          def can_ingest_doc?
+            @doc_path.include?("docs.google")
           end
 
-          def start_ingestion
+          def google_doc?
+            @logger.debug(@doc_path)
+            return false unless can_ingest_doc?
             fetch_file
             create_temp_html
           end
