@@ -24,7 +24,6 @@ const setError = (state, action) => {
 };
 
 const logout = () => {
-  const a = 1;
   return Object.assign({}, initialState);
 };
 
