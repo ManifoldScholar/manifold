@@ -126,11 +126,12 @@ class FollowingContainer extends Component {
                   <i className="manicon manicon-lamp"></i>
                   {'Featured Projects'}
                 </h4>
+                {/* Commented out until functional
                 <div className="section-heading-utility-right">
                   <Link to={`/browse/`} className="button-primary">
                     See all Featured
                   </Link>
-                </div>
+                </div> */}
               </header>
               { this.props.featuredProjects ?
                 <ProjectList.Grid
