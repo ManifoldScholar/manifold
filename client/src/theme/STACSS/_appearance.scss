@@ -143,6 +143,8 @@
 
   &:focus:-moz-focusring {
     color: transparent;
+    // Add color back to text
+    text-shadow: 0 0 0 $neutral80;
   }
 
   &::-ms-expand {
