@@ -6,7 +6,10 @@ module Api
         class FavoriteProjectsController < ApplicationController
 
           resourceful! Project do
-            @current_user.favorite_projects.includes(:creators, :collaborators)
+            Project.filter(
+              with_pagination!(project_filter_params),
+              scope: @current_user.favorite_projects.includes(:creators, :collaborators)
+            )
           end
 
           # GET /projects
