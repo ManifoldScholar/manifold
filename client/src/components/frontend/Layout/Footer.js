@@ -69,6 +69,7 @@ export default class LayoutFooter extends Component {
   }
 
   buildContactLink() {
+    if (!this.props.settings) return null;
     if (!this.props.settings.attributes.general.contactUrl) return null;
     const url = this.props.settings.attributes.general.contactUrl;
     return (
