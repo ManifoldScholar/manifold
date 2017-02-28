@@ -6,6 +6,11 @@ import isArray from 'lodash/isArray';
 import forEach from 'lodash/forEach';
 import findIndex from 'lodash/findIndex';
 import intersection from 'lodash/intersection';
+import { entityStoreActions } from 'actions';
+import { entityUtils } from 'utils';
+
+const { requests } = entityStoreActions;
+const { constantizeMeta } = entityUtils;
 
 export const initialState = {
   responses: {},
@@ -190,11 +195,11 @@ function handleRemove(state, action) {
 }
 
 function updateAnnotationCollection(state, action) {
-  const created = state.responses['create-annotation'].entity;
-  const collection = state.responses['section-annotations'].collection.slice(0);
+  const created = state.responses[requests.rAnnotationCreate].entity;
+  const collection = state.responses[requests.rAnnotations].collection.slice(0);
   collection.push({ id: created.id, type: created.type });
-  const response = Object.assign({}, state.responses['section-annotations'], { collection });
-  const responses = Object.assign({}, state.responses, { "section-annotations": response });
+  const response = Object.assign({}, state.responses[requests.rAnnotations], { collection });
+  const responses = Object.assign({}, state.responses, { [requests.rAnnotations]: response });
   return Object.assign({}, state, { responses });
 }
 
@@ -207,7 +212,8 @@ export default (state = initialState, action) => {
   if (type.startsWith("API_REQUEST")) return handleRequest(newState, action);
 
   if (type.startsWith("API_RESPONSE")) newState = handleResponse(newState, action);
-  if (type === "API_RESPONSE/CREATE_ANNOTATION") {
+
+  if (type === `API_RESPONSE/${constantizeMeta(requests.rAnnotationCreate)}`) {
     newState = updateAnnotationCollection(newState, action);
   }
   return newState;

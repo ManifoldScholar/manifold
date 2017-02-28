@@ -18,9 +18,9 @@ class DashboardContainer extends PureComponent {
   static fetchData(getState, dispatch) {
     const state = getState();
     const projectsRequest =
-      request(projectsAPI.index({}, { size: perPage }), requests.backendDashboardProjects);
+      request(projectsAPI.index({}, { size: perPage }), requests.beProjects);
     const statsRequest =
-      request(statsAPI.show(), requests.backendDashboardStats);
+      request(statsAPI.show(), requests.beStats);
     const { promise: one } = dispatch(projectsRequest);
     const { promise: two } = dispatch(statsRequest);
     return Promise.all([one, two]);
@@ -28,9 +28,9 @@ class DashboardContainer extends PureComponent {
 
   static mapStateToProps(state) {
     return {
-      statistics: select(requests.backendDashboardStats, state.entityStore),
-      projects: select(requests.backendDashboardProjects, state.entityStore),
-      projectsMeta: meta(requests.backendDashboardProjects, state.entityStore)
+      statistics: select(requests.beStats, state.entityStore),
+      projects: select(requests.beProjects, state.entityStore),
+      projectsMeta: meta(requests.beProjects, state.entityStore)
     };
   }
 
@@ -51,7 +51,7 @@ class DashboardContainer extends PureComponent {
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.index(this.state.filter, pagination),
-      requests.backendDashboardProjects
+      requests.beProjects
     );
     this.props.dispatch(action);
   }

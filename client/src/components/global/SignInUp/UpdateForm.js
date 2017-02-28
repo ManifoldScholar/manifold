@@ -13,7 +13,7 @@ class UpdateForm extends Component {
 
   static mapStateToProps(state) {
     return {
-      response: state.entityStore.responses[requests.updateCurrentUser]
+      response: state.entityStore.responses[requests.gAuthenticatedUserUpdate]
     };
   }
 
@@ -61,7 +61,7 @@ class UpdateForm extends Component {
       };
     }
     const { promise } =
-      this.props.dispatch(request(meAPI.update(params), requests.updateCurrentUser));
+      this.props.dispatch(request(meAPI.update(params), requests.gAuthenticatedUserUpdate));
     promise.then(() => {
       this.props.hideSignInUpOverlay();
     });

@@ -17,9 +17,9 @@ class HomeContainer extends Component {
   static fetchData(getState, dispatch) {
     const state = getState();
     const filteredRequest =
-      request(projectsAPI.index(state.ui.projectFilters), requests.browseFilteredProjects);
+      request(projectsAPI.index(state.ui.projectFilters), requests.feProjectsFiltered);
     const featuredRequest =
-      request(projectsAPI.featured(), requests.browseFeaturedProjects);
+      request(projectsAPI.featured(), requests.feProjectsFeatured);
     const { promise: one } = dispatch(filteredRequest);
     const { promise: two } = dispatch(featuredRequest);
     return Promise.all([one, two]);
@@ -28,9 +28,9 @@ class HomeContainer extends Component {
   static mapStateToProps(state) {
     return {
       projectFilters: state.ui.filters.project,
-      filteredProjects: select(requests.browseFilteredProjects, state.entityStore),
-      featuredProjects: select(requests.browseFeaturedProjects, state.entityStore),
-      subjects: select(requests.allUsedSubjects, state.entityStore),
+      filteredProjects: select(requests.feProjectsFiltered, state.entityStore),
+      featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
+      subjects: select(requests.feSubjects, state.entityStore),
       authentication: state.authentication
     };
   }
@@ -58,7 +58,7 @@ class HomeContainer extends Component {
     if (prevProps.projectFilters !== this.props.projectFilters) {
       const apiCall = projectsAPI.index(this.props.projectFilters);
       const filteredRequest =
-        request(apiCall, requests.browseFilteredProjects);
+        request(apiCall, requests.feProjectsFiltered);
       dispatch(filteredRequest);
     }
   }

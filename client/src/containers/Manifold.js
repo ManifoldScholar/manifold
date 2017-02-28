@@ -97,7 +97,7 @@ class ManifoldContainer extends PureComponent {
   }
 
   updateCurrentUser() {
-    this.props.dispatch(request(meAPI.show(), requests.updateCurrentUser));
+    this.props.dispatch(request(meAPI.show(), requests.gAuthenticatedUserUpdate));
   }
 
   notifyLogin() {

@@ -8,7 +8,7 @@ const { request, flush, requests } = entityStoreActions;
 class PageContainer extends Component {
 
   static fetchData(getState, dispatch, location, params) {
-    const page = request(pagesAPI.show(params.slug), requests.showPage);
+    const page = request(pagesAPI.show(params.slug), requests.gPage);
     const { promise: one } = dispatch(page);
     return Promise.all([one]);
   }
@@ -16,7 +16,7 @@ class PageContainer extends Component {
   static mapStateToProps(state) {
     return {
       loading: state.ui.loading.active,
-      page: entityUtils.select(requests.showPage, state.entityStore)
+      page: entityUtils.select(requests.gPage, state.entityStore)
     };
   }
 
@@ -26,7 +26,7 @@ class PageContainer extends Component {
   };
 
   componentWillUnmount() {
-    this.props.dispatch(flush(requests.showPage));
+    this.props.dispatch(flush(requests.gPage));
   }
 
   render() {

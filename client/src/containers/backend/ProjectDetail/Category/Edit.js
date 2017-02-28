@@ -17,7 +17,7 @@ class ProjectDetailCategoryEdit extends Component {
 
   static mapStateToProps(state, ownProps) {
     return {
-      category: select('edit-category', state.entityStore)
+      category: select(requests.beTextCategory, state.entityStore)
     };
   }
 
@@ -52,7 +52,7 @@ class ProjectDetailCategoryEdit extends Component {
 
   fetchCategory() {
     const call = textCategoriesAPI.show(this.props.params.catId);
-    const categoryRequest = request(call, 'edit-category');
+    const categoryRequest = request(call, requests.beTextCategory);
     this.props.dispatch(categoryRequest);
   }
 

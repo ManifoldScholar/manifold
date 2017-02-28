@@ -42,12 +42,12 @@ class ReaderContainer extends Component {
   static fetchData(getState, dispatch, location, params) {
     const promises = [];
     const textCall = textsAPI.show(params.textId);
-    const { promise: one } = dispatch(request(textCall, requests.readerCurrentText));
+    const { promise: one } = dispatch(request(textCall, requests.rText));
     promises.push(one);
     if (params.sectionId) {
       const sectionCall = sectionsAPI.show(params.sectionId);
       const { promise: two } = dispatch(request(sectionCall,
-        requests.readerCurrentSection));
+        requests.rSection));
       promises.push(two);
     }
     return Promise.all(promises);
@@ -59,10 +59,10 @@ class ReaderContainer extends Component {
       colors: state.ui.colors
     };
     return {
-      annotations: select(requests.sectionAnnotations, state.entityStore),
-      section: select(requests.readerCurrentSection, state.entityStore),
-      resources: select(requests.sectionResources, state.entityStore),
-      text: select(requests.readerCurrentText, state.entityStore),
+      annotations: select(requests.rAnnotations, state.entityStore),
+      section: select(requests.rSection, state.entityStore),
+      resources: select(requests.rResources, state.entityStore),
+      text: select(requests.rText, state.entityStore),
       authentication: state.authentication,
       visibility: state.ui.visibility,
       loading: state.ui.loading.active,
@@ -122,8 +122,8 @@ class ReaderContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(requests.readerCurrentSection));
-    this.props.dispatch(flush(requests.readerCurrentText));
+    this.props.dispatch(flush(requests.rSection));
+    this.props.dispatch(flush(requests.rText));
   }
 
   hasMissingResources(annotations, resourcesIn) {
@@ -140,12 +140,12 @@ class ReaderContainer extends Component {
 
   fetchAnnotations() {
     const annotationsCall = annotationsAPI.forSection(this.props.params.sectionId);
-    this.props.dispatch(request(annotationsCall, requests.sectionAnnotations));
+    this.props.dispatch(request(annotationsCall, requests.rAnnotations));
   }
 
   fetchResources() {
     const resourcesCall = resourcesAPI.forSection(this.props.params.sectionId);
-    this.props.dispatch(request(resourcesCall, requests.sectionResources));
+    this.props.dispatch(request(resourcesCall, requests.rResources));
   }
 
   maybeRedirect(props) {
@@ -170,7 +170,7 @@ class ReaderContainer extends Component {
         (sectionId, annotation, resource = null) => {
           return request(
             annotationsAPI.create(sectionId, annotation, resource),
-            requests.createAnnotation
+            requests.rAnnotationCreate
           );
         },
         dispatch

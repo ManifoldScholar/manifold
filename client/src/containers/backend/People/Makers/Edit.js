@@ -18,8 +18,8 @@ class MakersEditContainer extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     return {
-      maker: select('backend-edit-maker', state.entityStore),
-      updateMakers: get(state.entityStore.responses, 'update-users')
+      maker: select(requests.beMaker, state.entityStore),
+      updateMakers: get(state.entityStore.responses, requests.beMakerUpdate)
     };
   }
 
@@ -36,9 +36,7 @@ class MakersEditContainer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush([
-      'update-users'
-    ]));
+    this.props.dispatch(flush([requests.beMakerUpdate]));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -47,7 +45,7 @@ class MakersEditContainer extends PureComponent {
 
   fetchMaker(id) {
     const call = makersAPI.show(id);
-    const makerRequest = request(call, 'backend-edit-maker');
+    const makerRequest = request(call, requests.beMaker);
     this.props.dispatch(makerRequest);
   }
 
@@ -67,7 +65,7 @@ class MakersEditContainer extends PureComponent {
   destroyMaker(maker) {
     const call = makersAPI.destroy(maker.id);
     const options = { removes: maker };
-    const makerRequest = request(call, 'backend-destroy-maker', options);
+    const makerRequest = request(call, requests.beMakerDestroy, options);
     this.props.dispatch(makerRequest).promise.then(() => {
       browserHistory.push('/backend/people/makers');
     });
@@ -86,7 +84,7 @@ class MakersEditContainer extends PureComponent {
       relationships: { users: { data: adjustedUsers } }
     };
     const call = makersAPI.update(maker.id, maker);
-    const userRequest = request(call, 'update-users');
+    const userRequest = request(call, requests.beMakerUpdate);
     this.props.dispatch(userRequest);
   }
 

@@ -18,8 +18,11 @@ class CollectionResourceDetailContainer extends PureComponent {
       params.collectionId,
       params.collectionResourceId
     );
-    const collectionAction = request(collectionFetch, 'show-collection');
-    const collectionResourceAction = request(collectionResourceFetch, 'show-collection-resource');
+    const collectionAction = request(collectionFetch, requests.feCollection);
+    const collectionResourceAction = request(
+      collectionResourceFetch,
+      requests.feCollectionResources
+    );
     const { promise: one } = dispatch(collectionAction);
     const { promise: two } = dispatch(collectionResourceAction);
     return Promise.all([one, two]);
@@ -27,8 +30,8 @@ class CollectionResourceDetailContainer extends PureComponent {
 
   static mapStateToProps(state) {
     const props = {
-      collection: select('show-collection', state.entityStore),
-      collectionResource: select('show-collection-resource', state.entityStore)
+      collection: select(requests.feCollection, state.entityStore),
+      collectionResource: select(requests.feCollectionResources, state.entityStore)
     };
     return props;
   }

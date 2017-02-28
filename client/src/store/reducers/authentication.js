@@ -1,7 +1,10 @@
 import { handleActions } from 'redux-actions';
 import { entityStoreActions } from 'actions';
+import { entityUtils } from 'utils';
 
+const { constantizeMeta } = entityUtils;
 const { requests } = entityStoreActions;
+
 const initialState = {
   authenticated: false,
   authenticating: false,
@@ -72,14 +75,14 @@ const setCurrentUser = (state, action) => {
 };
 
 const syncCurrentUser = (state, action) => {
-  if (action.meta === requests.updateCurrentUser) {
+  if (action.meta === requests.gAuthenticatedUserUpdate) {
     return updateStateFromUser(state, action.payload);
   }
   return state;
 };
 
 export default handleActions({
-  "API_RESPONSE/UPDATE_CURRENT_USER": syncCurrentUser,
+  [`API_RESPONSE/${constantizeMeta(requests.gAuthenticatedUserUpdate)}`]: syncCurrentUser,
   LOGIN: startLogin,
   LOGIN_SET_CURRENT_USER: setCurrentUser,
   UPDATE_CURRENT_USER: setCurrentUser,

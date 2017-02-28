@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 const { select, meta } = entityUtils;
-const { request } = entityStoreActions;
+const { request, requests } = entityStoreActions;
 const perPage = 5;
 
 class ProjectDetailResources extends PureComponent {
@@ -17,8 +17,8 @@ class ProjectDetailResources extends PureComponent {
 
   static mapStateToProps(state) {
     return {
-      resources: select("project-resources", state.entityStore),
-      resourcesMeta: meta("project-resources", state.entityStore),
+      resources: select(requests.beResources, state.entityStore),
+      resourcesMeta: meta(requests.beResources, state.entityStore),
     };
   }
 
@@ -46,7 +46,7 @@ class ProjectDetailResources extends PureComponent {
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.resources(this.props.params.id, this.state.filter, pagination),
-      'project-resources'
+      requests.beResources
     );
     this.props.dispatch(action);
   }

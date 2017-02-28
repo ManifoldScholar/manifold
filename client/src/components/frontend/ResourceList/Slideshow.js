@@ -6,7 +6,7 @@ import { ResourceList } from 'components/frontend';
 import { collectionsAPI } from 'api';
 import { entityStoreActions } from 'actions';
 
-const { request } = entityStoreActions;
+const { request, requests } = entityStoreActions;
 
 export default class ResourceListSlideshow extends PureComponent {
 
@@ -117,7 +117,7 @@ export default class ResourceListSlideshow extends PureComponent {
       const fetch = collectionsAPI.collectionResources(
         this.props.collectionId, { }, { number: page }
       );
-      this.props.dispatch(request(fetch, 'slideshow-resources'));
+      this.props.dispatch(request(fetch, requests.feSlideshow));
     }
   }
 

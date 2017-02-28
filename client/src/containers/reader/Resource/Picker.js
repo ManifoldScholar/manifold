@@ -10,7 +10,7 @@ import { entityUtils } from 'utils';
 import { connect } from 'react-redux';
 
 const { select, meta } = entityUtils;
-const { request } = entityStoreActions;
+const { request, requests } = entityStoreActions;
 const perPage = 4;
 
 class ResourcePickerContainer extends PureComponent {
@@ -20,8 +20,8 @@ class ResourcePickerContainer extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     const newState = {
-      resources: select("project-resources", state.entityStore),
-      resourcesMeta: meta("project-resources", state.entityStore),
+      resources: select(requests.beResources, state.entityStore),
+      resourcesMeta: meta(requests.beResources, state.entityStore),
     };
     return Object.assign({}, newState, ownProps);
   }
@@ -50,7 +50,7 @@ class ResourcePickerContainer extends PureComponent {
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.resources(this.props.projectId, this.state.filter, pagination),
-      'project-resources'
+      requests.beResources
     );
     this.props.dispatch(action);
   }
