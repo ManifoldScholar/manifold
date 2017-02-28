@@ -221,17 +221,17 @@ export default class ResourceCard extends Component {
 
     return (
       <li className="resource-card">
-        <Link
-          to={this.detailUrl()}
+        <div
           className="resource-link"
+          onClick={this.handlePreviewClick}
         >
           <Resource.Thumbnail
             resource={resource}
           />
-          <div onClick={this.handlePreviewClick} className="preview-text">
+          <div className="preview-text">
             {this.getPreviewText(attr)}
           </div>
-        </Link>
+        </div>
         <section
           className={infoClass}
           onMouseOver={this.handleInfoMouseOver}
