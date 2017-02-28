@@ -30,18 +30,18 @@ export default class DetailHeader extends PureComponent {
           : null
         }
         <div className="container flush">
-          <header className="project-header">
+          <header className="entity-header-primary">
             <figure>
               <i className={`manicon ${this.typeToManiconClass(this.props.type)}`}></i>
             </figure>
-            <div className="project-title">
+            <div className="title">
               <h1>
                 {this.props.title}
                 <span className="subtitle">
                   {this.props.subtitle}
                 </span>
               </h1>
-                <div className="project-utility">
+                <div className="utility">
                   { this.props.utility ? this.props.utility : null }
                   { this.props.note ?
                     <span className="notes">
