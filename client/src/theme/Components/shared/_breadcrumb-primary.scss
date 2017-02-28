@@ -6,6 +6,11 @@
   color: $neutral70;
   text-decoration: none;
 
+  .initial {
+    color: $neutral70;
+    text-decoration: none;
+  }
+
   // Breadcrumb list
   ul {
     @include listHorizontal;
