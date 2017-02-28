@@ -183,7 +183,15 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 22% 0 27.75%;
+    padding: 24px 0 30px;
+    
+    @include respond($break40) {
+      padding: 30px 0 37px;
+    }
+
+    @include respond($break85) {
+      padding: 35px 0 43px;
+    }
   }
 
   .resource-type {
