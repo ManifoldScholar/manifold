@@ -8,11 +8,11 @@
     width: 37.8%;
     text-align: center;
     text-decoration: none;
+    cursor: pointer;
     background-color: $neutral10;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
-    cursor: pointer;
 
     @include respond($break40) {
       width: 155px;
