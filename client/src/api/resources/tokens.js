@@ -1,4 +1,4 @@
-import { LowLevelApiClient } from './client';
+import { LowLevelApiClient } from '../client';
 
 export default {
 
