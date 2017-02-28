@@ -1,4 +1,4 @@
-.project-header {
+.entity-header-primary {
   padding-bottom: 30px;
 
   @include respond($break60) {
@@ -34,7 +34,7 @@
     }
   }
 
-  .project-title {
+  .title {
     @include respond($break65) {
       display: table-cell;
       vertical-align: top;
@@ -73,7 +73,7 @@
     }
   }
 
-  .project-utility {
+  .utility {
     clear: both;
 
     .notes {
