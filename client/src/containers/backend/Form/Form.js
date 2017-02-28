@@ -7,7 +7,7 @@ import { entityUtils } from 'utils';
 import get from 'lodash/get';
 
 const { select } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class FormContainer extends PureComponent {
 

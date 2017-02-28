@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { meAPI } from 'api';
+import { meAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { Avatar, Form } from 'components/global';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import get from 'lodash/get';
 import hasIn from 'lodash/hasIn';
 import Dropzone from 'react-dropzone';
 
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 
 class UpdateForm extends Component {
 

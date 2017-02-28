@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { Form, Text } from 'components/backend';
-import { textsAPI } from 'api';
+import { textsAPI, requests } from 'api';
 import { Form as FormContainer } from 'containers/backend';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import get from 'lodash/get';
 
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class TextDetailCollaborators extends Component {
 

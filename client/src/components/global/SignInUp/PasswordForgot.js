@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { passwordsAPI } from 'api';
+import { passwordsAPI, requests } from 'api';
 import { entityStoreActions, notificationActions } from 'actions';
 import get from 'lodash/get';
 import pull from 'lodash/pull';
 import { connect } from 'react-redux';
 import { Form } from 'components/backend';
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class PasswordForgot extends Component {
 

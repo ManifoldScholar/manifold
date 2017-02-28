@@ -4,11 +4,11 @@ import { Link } from 'react-router';
 import { Utility, Project, ResourceList } from 'components/frontend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { projectsAPI } from 'api';
+import { projectsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 
 const { select, meta } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 

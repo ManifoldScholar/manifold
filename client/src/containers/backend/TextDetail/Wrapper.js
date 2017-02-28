@@ -3,11 +3,11 @@ import { Text, Navigation } from 'components/backend';
 import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { textsAPI } from 'api';
+import { textsAPI, requests } from 'api';
 import get from 'lodash/get';
 
 const { select } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class TextDetailWrapperContainer extends PureComponent {
 

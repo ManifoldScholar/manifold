@@ -7,11 +7,11 @@ import get from 'lodash/get';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { projectsAPI, textsAPI, textCategoriesAPI } from 'api';
+import { projectsAPI, textsAPI, textCategoriesAPI, requests } from 'api';
 import FormattedDate from 'components/global/FormattedDate';
 
 const { select } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class ProjectDetailTexts extends PureComponent {
 

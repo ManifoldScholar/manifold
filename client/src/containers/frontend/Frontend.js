@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { HigherOrder, FatalError } from 'components/global';
 import { Layout } from 'components/frontend';
 import { commonActions } from 'actions/helpers';
-import { pagesAPI, subjectsAPI } from 'api';
+import { pagesAPI, subjectsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import get from 'lodash/get';
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 
 class FrontendContainer extends Component {
 

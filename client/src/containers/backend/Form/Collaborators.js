@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { Form, Text } from 'components/backend';
-import { makersAPI } from 'api';
+import { makersAPI, requests } from 'api';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import get from 'lodash/get';
 
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class FormCollaborators extends Component {
 

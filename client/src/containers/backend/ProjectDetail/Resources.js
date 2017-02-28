@@ -1,13 +1,13 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form, List, Resource } from 'components/backend';
-import { projectsAPI } from 'api';
+import { projectsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 const { select, meta } = entityUtils;
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 const perPage = 5;
 
 class ProjectDetailResources extends PureComponent {

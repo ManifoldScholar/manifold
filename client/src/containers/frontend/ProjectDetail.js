@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Project } from 'components/frontend';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { projectsAPI } from 'api';
+import { projectsAPI, requests } from 'api';
 
 const { select } = entityUtils;
 const { visibilityShow } = uiVisibilityActions;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class ProjectDetailContainer extends Component {
 

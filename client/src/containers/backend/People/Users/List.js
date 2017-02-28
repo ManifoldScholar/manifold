@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { UserList } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import usersAPI from 'api/users';
+import { usersAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import { User, List } from 'components/backend';
 
 const { select, meta } = entityUtils;
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 const perPage = 10;
 
 class UsersListContainer extends PureComponent {

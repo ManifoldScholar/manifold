@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { pagesAPI } from 'api';
+import { pagesAPI, requests } from 'api';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class PageContainer extends Component {
 

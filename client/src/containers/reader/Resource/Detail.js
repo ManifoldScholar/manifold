@@ -1,13 +1,13 @@
 import React, { PureComponent, PropTypes } from 'react';
 import update from 'immutability-helper';
-import { resourcesAPI } from 'api';
+import { resourcesAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { connect } from 'react-redux';
 import { Section, Resource } from 'components/reader';
 
 const { select, meta } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class ResourceDetailContainer extends PureComponent {
 

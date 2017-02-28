@@ -3,12 +3,12 @@ import { Dialog, Project, Navigation } from 'components/backend';
 import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
 import { entityUtils } from 'utils';
-import { projectsAPI } from 'api';
+import { projectsAPI, requests } from 'api';
 import get from 'lodash/get';
 import { browserHistory } from 'react-router';
 
 const { select } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class ProjectDetailWrapperContainer extends PureComponent {
 

@@ -4,11 +4,11 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
 import { entityUtils } from 'utils';
-import { resourcesAPI } from 'api';
+import { resourcesAPI, requests } from 'api';
 import get from 'lodash/get';
 
 const { select } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class ResourceDetailWrapperContainer extends PureComponent {
 

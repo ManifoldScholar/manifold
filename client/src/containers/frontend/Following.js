@@ -5,14 +5,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { uiFilterActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { projectsAPI, favoriteProjectsAPI } from 'api';
+import { projectsAPI, favoriteProjectsAPI, requests } from 'api';
 import HigherOrder from 'containers/global/HigherOrder';
 import get from 'lodash/get';
 import union from 'lodash/union';
 
 const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 
 class FollowingContainer extends Component {
 

@@ -5,10 +5,10 @@ import { Resource, Utility } from 'components/frontend';
 
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { projectsAPI, resourcesAPI } from 'api';
+import { projectsAPI, resourcesAPI, requests } from 'api';
 
 const { select } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class ResourceDetailContainer extends PureComponent {
   static fetchData(getState, dispatch, location, params) {

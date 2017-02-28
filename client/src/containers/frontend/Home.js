@@ -5,12 +5,12 @@ import { commonActions } from 'actions/helpers';
 import { bindActionCreators } from 'redux';
 import { uiFilterActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { projectsAPI } from 'api';
+import { projectsAPI, requests } from 'api';
 import get from 'lodash/get';
 
 const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class HomeContainer extends Component {
 
