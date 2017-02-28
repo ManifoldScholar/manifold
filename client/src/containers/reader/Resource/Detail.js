@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Section, Resource } from 'components/reader';
 
 const { select, meta } = entityUtils;
-const { request, flush } = entityStoreActions;
+const { request, flush, requests } = entityStoreActions;
 
 class ResourceDetailContainer extends PureComponent {
 
@@ -16,15 +16,15 @@ class ResourceDetailContainer extends PureComponent {
   static fetchData(getState, dispatch, location, params) {
     const promises = [];
     const resourceCall = resourcesAPI.show(params.resourceId);
-    const { promise: one } = dispatch(request(resourceCall, 'reader-resource'));
+    const { promise: one } = dispatch(request(resourceCall, requests.rResource));
     promises.push(one);
     return Promise.all(promises);
   }
 
   static mapStateToProps(state, ownProps) {
     const newState = {
-      resource: select("reader-resource", state.entityStore),
-      resourceMeta: meta("reader-resource", state.entityStore),
+      resource: select(requests.rResource, state.entityStore),
+      resourceMeta: meta(requests.rResource, state.entityStore),
     };
     return Object.assign({}, newState, ownProps);
   }
@@ -41,7 +41,7 @@ class ResourceDetailContainer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush("reader-resource"));
+    this.props.dispatch(flush(requests.rResource));
   }
 
   render() {

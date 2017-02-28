@@ -12,8 +12,8 @@ const { request, requests } = entityStoreActions;
 class BackendContainer extends PureComponent {
 
   static fetchData(getState, dispatch) {
-    if (!entityUtils.isLoaded(requests.allPages, getState())) {
-      const pages = request(pagesAPI.index(), requests.allPages, { oneTime: true });
+    if (!entityUtils.isLoaded(requests.gPages, getState())) {
+      const pages = request(pagesAPI.index(), requests.gPages, { oneTime: true });
       const { promise: one } = dispatch(pages);
       return Promise.all([one]);
     }
@@ -39,7 +39,7 @@ class BackendContainer extends PureComponent {
       loading: state.ui.loading.active,
       notifications: state.notifications,
       routing: state.routing,
-      pages: entityUtils.select(requests.allPages, state.entityStore),
+      pages: entityUtils.select(requests.gPages, state.entityStore),
       settings: entityUtils.select(requests.settings, state.entityStore)
     };
   }

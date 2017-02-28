@@ -20,8 +20,8 @@ class ProjectDetailTexts extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     return {
-      moveTextResponse: get(state.entityStore.responses, `move-text`),
-      moveCategoryResponse: get(state.entityStore.responses, `move-category`)
+      moveTextResponse: get(state.entityStore.responses, requests.beTextUpdate),
+      moveCategoryResponse: get(state.entityStore.responses, requests.beTextCategoryUpdate)
     };
   }
 
@@ -79,7 +79,7 @@ class ProjectDetailTexts extends PureComponent {
       attributes: { position: newPos }
     };
     const call = textsAPI.update(text.id, changes);
-    const categoryRequest = request(call, 'move-text');
+    const categoryRequest = request(call, requests.beTextUpdate);
     this.props.dispatch(categoryRequest).promise.then(() => {
       this.props.refresh();
     });
@@ -90,7 +90,7 @@ class ProjectDetailTexts extends PureComponent {
       attributes: { position: newPos }
     };
     const call = textCategoriesAPI.update(category.id, changes);
-    const categoryRequest = request(call, 'move-category');
+    const categoryRequest = request(call, requests.beTextCategoryUpdate);
     this.props.dispatch(categoryRequest).promise.then(() => {
       this.props.refresh();
     });
@@ -98,7 +98,7 @@ class ProjectDetailTexts extends PureComponent {
 
   destroyCategory(category) {
     const call = textCategoriesAPI.destroy(category.id);
-    const categoryRequest = request(call, 'destroy-category');
+    const categoryRequest = request(call, requests.beTextCategoryDestroy);
     this.props.dispatch(categoryRequest).promise.then(() => {
       this.props.refresh();
     });
@@ -106,7 +106,7 @@ class ProjectDetailTexts extends PureComponent {
 
   destroyText(text) {
     const call = textsAPI.destroy(text.id);
-    const textRequest = request(call, 'destroy-text');
+    const textRequest = request(call, requests.beTextDestroy);
     this.props.dispatch(textRequest).promise.then(() => {
       this.props.refresh();
     });
@@ -117,7 +117,7 @@ class ProjectDetailTexts extends PureComponent {
       relationships: { publishedText: { data: { id: text.id, type: "texts" } } },
     };
     const call = projectsAPI.update(this.props.project.id, changes);
-    const projectRequest = request(call, 'update-project');
+    const projectRequest = request(call, requests.beProjectUpdate);
     this.props.dispatch(projectRequest).promise.then(() => {
       this.props.refresh();
     });
@@ -128,7 +128,7 @@ class ProjectDetailTexts extends PureComponent {
       relationships: { publishedText: { data: null } },
     };
     const call = projectsAPI.update(this.props.project.id, changes);
-    const projectRequest = request(call, 'update-project');
+    const projectRequest = request(call, requests.beProjectUpdate);
     this.props.dispatch(projectRequest).promise.then(() => {
       this.props.refresh();
     });

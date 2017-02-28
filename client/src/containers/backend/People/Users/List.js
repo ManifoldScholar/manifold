@@ -9,7 +9,7 @@ import get from 'lodash/get';
 import { User, List } from 'components/backend';
 
 const { select, meta } = entityUtils;
-const { request } = entityStoreActions;
+const { request, requests } = entityStoreActions;
 const perPage = 10;
 
 class UsersListContainer extends PureComponent {
@@ -19,8 +19,8 @@ class UsersListContainer extends PureComponent {
 
   static mapStateToProps(state) {
     return {
-      users: select("backend-users-list", state.entityStore),
-      usersMeta: meta("backend-users-list", state.entityStore),
+      users: select(requests.beUsers, state.entityStore),
+      usersMeta: meta(requests.beUsers, state.entityStore),
       currentUserId: get(state, 'authentication.currentUser.id')
     };
   }
@@ -61,7 +61,7 @@ class UsersListContainer extends PureComponent {
     const pagination = { number: page, size: perPage };
     const action = request(
       usersAPI.index(this.state.filter, pagination),
-      'backend-users-list'
+      requests.beUsers
     );
     this.props.dispatch(action);
   }

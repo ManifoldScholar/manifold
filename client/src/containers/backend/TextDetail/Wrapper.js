@@ -15,7 +15,7 @@ class TextDetailWrapperContainer extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     return {
-      text: select(requests.showTextDetail, state.entityStore)
+      text: select(requests.beText, state.entityStore)
     };
   }
 
@@ -29,12 +29,12 @@ class TextDetailWrapperContainer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(entityStoreActions.flush(requests.showTextDetail));
+    this.props.dispatch(entityStoreActions.flush(requests.beText));
   }
 
   fetchText() {
     const call = textsAPI.show(this.props.params.id);
-    const textRequest = request(call, requests.showTextDetail);
+    const textRequest = request(call, requests.beText);
     this.props.dispatch(textRequest);
   }
 

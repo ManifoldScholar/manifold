@@ -15,8 +15,8 @@ class ResourceDetailContainer extends PureComponent {
     const page = params.page ? params.page : 1;
     const projectFetch = projectsAPI.show(params.id);
     const resourceFetch = resourcesAPI.show(params.resourceId);
-    const projectAction = request(projectFetch, 'show-project-detail');
-    const resourceAction = request(resourceFetch, 'show-resource-detail');
+    const projectAction = request(projectFetch, requests.feProject);
+    const resourceAction = request(resourceFetch, requests.feResource);
     const { promise: one } = dispatch(projectAction);
     const { promise: two } = dispatch(resourceAction);
     return Promise.all([one, two]);
@@ -24,8 +24,8 @@ class ResourceDetailContainer extends PureComponent {
 
   static mapStateToProps(state) {
     const props = {
-      project: select('show-project-detail', state.entityStore),
-      resource: select('show-resource-detail', state.entityStore)
+      project: select(requests.feProject, state.entityStore),
+      resource: select(requests.feResource, state.entityStore)
     };
     return props;
   }

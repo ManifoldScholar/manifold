@@ -17,13 +17,13 @@ class ProjectResourcesContainer extends Component {
   static fetchData(getState, dispatch, location, params) {
     const pageParam = params.page ? params.page : page;
     const projectRequest =
-        request(projectsAPI.show(params.id), requests.showProjectDetail);
+        request(projectsAPI.show(params.id), requests.feProject);
     const resourcesRequest =
         request(projectsAPI.resources(
           params.id,
           { },
           { number: pageParam, size: perPage }),
-          requests.projectResources
+          requests.feResources
         );
     const { promise: one } = dispatch(projectRequest);
     const { promise: two } = dispatch(resourcesRequest);
@@ -39,9 +39,9 @@ class ProjectResourcesContainer extends Component {
 
   static mapStateToProps(state) {
     return {
-      project: select(requests.showProjectDetail, state.entityStore),
-      resources: select(requests.projectResources, state.entityStore),
-      meta: meta(requests.projectResources, state.entityStore)
+      project: select(requests.feProject, state.entityStore),
+      resources: select(requests.feResources, state.entityStore),
+      meta: meta(requests.feResources, state.entityStore)
     };
   }
 
@@ -55,7 +55,7 @@ class ProjectResourcesContainer extends Component {
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.resources(this.props.project.id, this.state.filter, pagination),
-      requests.projectResources
+      requests.feResources
     );
     this.props.dispatch(action);
   }

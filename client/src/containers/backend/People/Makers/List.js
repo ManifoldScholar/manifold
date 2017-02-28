@@ -9,7 +9,7 @@ import get from 'lodash/get';
 import { Maker, List } from 'components/backend';
 
 const { select, meta } = entityUtils;
-const { request } = entityStoreActions;
+const { request, requests } = entityStoreActions;
 const perPage = 10;
 
 class MakersListContainer extends PureComponent {
@@ -19,8 +19,8 @@ class MakersListContainer extends PureComponent {
 
   static mapStateToProps(state) {
     return {
-      makers: select("backend-makers-list", state.entityStore),
-      makersMeta: meta("backend-makers-list", state.entityStore)
+      makers: select(requests.beMakers, state.entityStore),
+      makersMeta: meta(requests.beMakers, state.entityStore)
     };
   }
 
@@ -60,7 +60,7 @@ class MakersListContainer extends PureComponent {
     const pagination = { number: page, size: perPage };
     const action = request(
       makersAPI.index(this.state.filter, pagination),
-      'backend-makers-list'
+      requests.requests.beMakers
     );
     this.props.dispatch(action);
   }

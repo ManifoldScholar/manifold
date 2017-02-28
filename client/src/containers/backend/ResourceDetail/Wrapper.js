@@ -16,7 +16,7 @@ class ResourceDetailWrapperContainer extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     return {
-      resource: select(requests.showResourceDetail, state.entityStore)
+      resource: select(requests.beResource, state.entityStore)
     };
   }
 
@@ -41,12 +41,12 @@ class ResourceDetailWrapperContainer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(entityStoreActions.flush(requests.showResourceDetail));
+    this.props.dispatch(entityStoreActions.flush(requests.beResource));
   }
 
   fetchResource() {
     const call = resourcesAPI.show(this.props.params.id);
-    const resourceRequest = request(call, requests.showResourceDetail);
+    const resourceRequest = request(call, requests.beResource);
     this.props.dispatch(resourceRequest);
   }
 
@@ -69,7 +69,7 @@ class ResourceDetailWrapperContainer extends PureComponent {
   doDestroy() {
     const call = resourcesAPI.destroy(this.props.resource.id);
     const options = { removes: this.props.resource };
-    const resourceRequest = request(call, 'backend-destroy-resource', options);
+    const resourceRequest = request(call, requests.beResourceDestroy, options);
     this.props.dispatch(resourceRequest).promise.then(() => {
       this.notifyDestroy();
       this.redirectToProjectResources();

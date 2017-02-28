@@ -1,4 +1,6 @@
 import { ApiClient } from 'api';
+import { entityUtils } from 'utils';
+const { constantizeMeta } = entityUtils;
 import get from 'lodash/get';
 
 function sendRequest(request, authToken) {
@@ -7,10 +9,6 @@ function sendRequest(request, authToken) {
   const { endpoint, method } = request;
   const options = Object.assign({}, request.options, { authToken: token });
   return client.call(endpoint, method, options);
-}
-
-function constantizeMeta(meta) {
-  return `${meta.toUpperCase().replace(/-/g, '_')}`;
 }
 
 function buildResponseAction(payload, meta, error) {

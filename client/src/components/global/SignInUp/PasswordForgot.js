@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import pull from 'lodash/pull';
 import { connect } from 'react-redux';
 import { Form } from 'components/backend';
-const { request, flush } = entityStoreActions;
+const { request, flush, requests } = entityStoreActions;
 
 class PasswordForgot extends Component {
 
@@ -36,13 +36,13 @@ class PasswordForgot extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(['request-reset-password']));
+    this.props.dispatch(flush([requests.gPasswordRequest]));
   }
 
   handleSubmit(event) {
     event.preventDefault(event.target);
     const action = passwordsAPI.create(this.state.email);
-    const resetRequest = request(action, 'request-reset-password');
+    const resetRequest = request(action, requests.gPasswordRequest);
     this.setState({ submitted: true }, () => {
       if (!this.hasErrors()) {
         this.props.dispatch(resetRequest).promise.then(() => {

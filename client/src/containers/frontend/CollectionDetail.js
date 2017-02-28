@@ -28,21 +28,21 @@ class CollectionDetailContainer extends PureComponent {
     const collectionResources = collectionsAPI.collectionResources(
       collectionId, { }, { number: pageParam, size: perPage }
     );
-    const { promise: one } = dispatch(request(projects, 'project-detail'));
-    const { promise: two } = dispatch(request(collection, 'collection-detail'));
-    const lookups = ['slideshow-resources', 'collection-resources'];
+    const { promise: one } = dispatch(request(projects, requests.tmpProject));
+    const { promise: two } = dispatch(request(collection, requests.feCollection));
+    const lookups = [requests.feSlideshow, requests.feCollectionResources];
     const { promise: three } = dispatch(request(collectionResources, lookups));
     return Promise.all([one, two, three]);
   }
 
   static mapStateToProps(state) {
     const props = {
-      project: select('project-detail', state.entityStore),
-      collection: select('collection-detail', state.entityStore),
-      resources: select('collection-resources', state.entityStore),
-      resourcesMeta: meta('collection-resources', state.entityStore),
-      slideshowResources: select('slideshow-resources', state.entityStore),
-      slideshowResourcesMeta: meta('slideshow-resources', state.entityStore)
+      project: select(requests.tmpProject, state.entityStore),
+      collection: select(requests.feCollection, state.entityStore),
+      resources: select(requests.feCollectionResources, state.entityStore),
+      resourcesMeta: meta(requests.feCollectionResources, state.entityStore),
+      slideshowResources: select(requests.feSlideshow, state.entityStore),
+      slideshowResourcesMeta: meta(requests.feSlideshow, state.entityStore)
     };
     return props;
   }

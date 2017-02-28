@@ -107,3 +107,7 @@ export function meta(requestMeta, entityStore) {
   if (!response) return {};
   return response.meta;
 }
+
+export function constantizeMeta(metaKey) {
+  return `${metaKey.toUpperCase().replace(/-/g, '_')}`;
+}

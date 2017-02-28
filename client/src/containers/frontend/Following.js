@@ -20,9 +20,9 @@ class FollowingContainer extends Component {
     const state = getState();
     if (state.authentication.authenticated) {
       const followedProjectsRequest =
-        request(favoriteProjectsAPI.index(state.ui.projectFilters), requests.followedProjects);
+        request(favoriteProjectsAPI.index(state.ui.projectFilters), requests.feProjectsFollowed);
       const featuredRequest =
-        request(projectsAPI.featured(), requests.browseFeaturedProjects);
+        request(projectsAPI.featured(), requests.feProjectsFeatured);
       const { promise: one } = dispatch(followedProjectsRequest);
       const { promise: two } = dispatch(featuredRequest);
       return Promise.all([one, two]);
@@ -47,9 +47,9 @@ class FollowingContainer extends Component {
   static mapStateToProps(state) {
     return {
       projectFilters: state.ui.filters.project,
-      followedProjects: select(requests.followedProjects, state.entityStore),
-      featuredProjects: select(requests.browseFeaturedProjects, state.entityStore),
-      subjects: select(requests.allUsedSubjects, state.entityStore),
+      followedProjects: select(requests.feProjectsFollowed, state.entityStore),
+      featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
+      subjects: select(requests.feSubjects, state.entityStore),
       authentication: state.authentication
     };
   }
@@ -78,7 +78,7 @@ class FollowingContainer extends Component {
 
   updateFavorites() {
     const apiCall = favoriteProjectsAPI.index(this.props.projectFilters);
-    const followedRequest = request(apiCall, requests.followedProjects);
+    const followedRequest = request(apiCall, requests.feProjectsFollowed);
     this.props.dispatch(followedRequest);
   }
 

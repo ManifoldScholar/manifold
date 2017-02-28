@@ -16,7 +16,7 @@ class ProjectDetailWrapperContainer extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     return {
-      project: select(requests.showProjectDetail, state.entityStore)
+      project: select(requests.feProject, state.entityStore)
     };
   }
 
@@ -41,12 +41,12 @@ class ProjectDetailWrapperContainer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(entityStoreActions.flush(requests.showProjectDetail));
+    this.props.dispatch(entityStoreActions.flush(requests.feProject));
   }
 
   fetchProject() {
     const call = projectsAPI.show(this.props.params.id);
-    const projectRequest = request(call, requests.showProjectDetail);
+    const projectRequest = request(call, requests.feProject);
     this.props.dispatch(projectRequest);
   }
 
@@ -97,7 +97,7 @@ class ProjectDetailWrapperContainer extends PureComponent {
   doDestroy() {
     const call = projectsAPI.destroy(this.props.project.id);
     const options = { removes: this.props.project };
-    const projectRequest = request(call, 'backend-destroy-project', options);
+    const projectRequest = request(call, requests.beProjectDestroy, options);
     this.props.dispatch(projectRequest).promise.then(() => {
       this.notifyDestroy();
       this.redirectToDashboard();

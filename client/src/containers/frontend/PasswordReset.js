@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
 import { get } from 'lodash';
 import { select } from 'utils/entityUtils';
 import { connect } from 'react-redux';
-const { request, flush } = entityStoreActions;
+const { request, flush, requests } = entityStoreActions;
 
 class PasswordReset extends Component {
 
@@ -20,7 +20,7 @@ class PasswordReset extends Component {
 
   static mapStateToProps(state, ownProps) {
     return {
-      response: get(state.entityStore.responses, 'reset-password')
+      response: get(state.entityStore.responses, requests.gPasswordReset)
     };
   }
 
@@ -35,7 +35,7 @@ class PasswordReset extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(['reset-password']));
+    this.props.dispatch(flush([requests.gPasswordReset]));
   }
 
   handleSubmit(event) {
@@ -45,7 +45,7 @@ class PasswordReset extends Component {
       this.state.passwordConfirmation,
       this.props.params.resetToken
     );
-    const changeRequest = request(action, 'reset-password');
+    const changeRequest = request(action, requests.gPasswordReset);
     this.props.dispatch(changeRequest).promise.then((response) => {
       this.postUpdate(response.data);
     });

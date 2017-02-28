@@ -10,7 +10,7 @@ import { Form as FormContainer } from 'containers/backend';
 import { browserHistory } from 'react-router';
 import get from 'lodash/get';
 
-const { request, flush } = entityStoreActions;
+const { request, flush, requests } = entityStoreActions;
 
 class UsersEditContainer extends PureComponent {
 
@@ -18,9 +18,8 @@ class UsersEditContainer extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     return {
-      user: select('backend-edit-user', state.entityStore),
-      updateMakers: get(state.entityStore.responses, 'update-makers'),
-      createMaker: get(state.entityStore.responses, 'create-maker')
+      user: select(requests.beUser, state.entityStore),
+      createMakerResponse: get(state.entityStore.responses, requests.beMakerCreate)
     };
   }
 
@@ -39,7 +38,7 @@ class UsersEditContainer extends PureComponent {
 
   componentWillUnmount() {
     this.props.dispatch(flush([
-      'update-makers', 'create-maker'
+      requests.beUserUpdate, requests.beMakerCreate
     ]));
   }
 
@@ -49,7 +48,7 @@ class UsersEditContainer extends PureComponent {
 
   fetchUser(id) {
     const call = usersAPI.show(id);
-    const userRequest = request(call, 'backend-edit-user');
+    const userRequest = request(call, requests.beUser);
     this.props.dispatch(userRequest);
   }
 
@@ -69,7 +68,7 @@ class UsersEditContainer extends PureComponent {
   destroyUser(user) {
     const call = usersAPI.destroy(user.id);
     const options = { removes: user };
-    const userRequest = request(call, 'backend-destroy-user', options);
+    const userRequest = request(call, requests.beUserDestroy, options);
     this.props.dispatch(userRequest).promise.then(() => {
       browserHistory.push('/backend/people/users');
     });
@@ -92,7 +91,7 @@ class UsersEditContainer extends PureComponent {
       relationships: { makers: { data: adjustedMakers } }
     };
     const call = usersAPI.update(user.id, user);
-    const makerRequest = request(call, 'update-makers');
+    const makerRequest = request(call, requests.beUserUpdate);
     this.props.dispatch(makerRequest);
   }
 
@@ -107,7 +106,7 @@ class UsersEditContainer extends PureComponent {
       }
     };
     const call = makersAPI.create(maker);
-    const makerRequest = request(call, 'create-maker');
+    const makerRequest = request(call, requests.beMakerCreate);
     const { promise } = this.props.dispatch(makerRequest);
     return promise;
   }
@@ -184,7 +183,7 @@ class UsersEditContainer extends PureComponent {
             onChange={this.updateMakers}
             api={usersAPI}
             entity={user}
-            errors={get(this.props, "createMaker.errors")}
+            errors={get(this.props, "createMakerResponse.errors")}
           />
         </form>
       </Drawer.Wrapper>

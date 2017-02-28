@@ -13,14 +13,14 @@ class ProjectDetailContainer extends Component {
 
   static fetchData(getState, dispatch, location, params) {
     const projectRequest =
-      request(projectsAPI.show(params.id), requests.showProjectDetail);
+      request(projectsAPI.show(params.id), requests.feProject);
     const { promise: one } = dispatch(projectRequest);
     return Promise.all([one]);
   }
 
   static mapStateToProps(state) {
     return {
-      project: select(requests.showProjectDetail, state.entityStore)
+      project: select(requests.feProject, state.entityStore)
     };
   }
 
