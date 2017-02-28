@@ -4,13 +4,13 @@ import { Resource } from 'components/reader';
 import { Form as FormContainer } from 'containers/backend';
 import update from 'immutability-helper';
 import set from 'lodash/set';
-import { projectsAPI } from 'api';
+import { projectsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { connect } from 'react-redux';
 
 const { select, meta } = entityUtils;
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 const perPage = 4;
 
 class ResourcePickerContainer extends PureComponent {

@@ -1,9 +1,7 @@
 import { handleActions } from 'redux-actions';
-import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-
+import { requests } from 'api';
 const { constantizeMeta } = entityUtils;
-const { requests } = entityStoreActions;
 
 const initialState = {
   authenticated: false,

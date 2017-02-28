@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import { Drawer, Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { usersAPI, makersAPI } from 'api';
+import { usersAPI, makersAPI, requests } from 'api';
 const { select } = entityUtils;
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import { browserHistory } from 'react-router';
 import get from 'lodash/get';
-
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class UsersEditContainer extends PureComponent {
 

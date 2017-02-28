@@ -7,10 +7,7 @@ import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
 import { Header, Footer, FooterMenu, Section } from 'components/reader';
 
 import { commonActions } from 'actions/helpers';
-import textsAPI from '../../api/texts';
-import resourcesAPI from '../../api/resources';
-import sectionsAPI from '../../api/sections';
-import annotationsAPI from '../../api/annotations';
+import { textsAPI, resourcesAPI, sectionsAPI, annotationsAPI, requests } from 'api';
 import { select } from '../../utils/entityUtils';
 import values from 'lodash/values';
 import uniq from 'lodash/uniq';
@@ -34,7 +31,7 @@ const {
   decrementMargins
 } = uiTypographyActions;
 const { setColorScheme } = uiColorActions;
-const { request, requests, flush } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 
 class ReaderContainer extends Component {

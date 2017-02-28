@@ -4,10 +4,10 @@ import { HigherOrder, FatalError } from 'components/global';
 import { Layout as LayoutFrontend } from 'components/frontend';
 import { Layout as LayoutBackend } from 'components/backend';
 import { commonActions } from 'actions/helpers';
-import { pagesAPI } from 'api';
+import { pagesAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 
 class BackendContainer extends PureComponent {
 

@@ -7,10 +7,10 @@ import { Project, ResourceList } from 'components/frontend';
 import fakeData from 'helpers/fakeData';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { projectsAPI } from 'api';
+import { projectsAPI, requests } from 'api';
 
 const { select, meta } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class ProjectEventsContainer extends Component {
 

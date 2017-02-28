@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { textCategoriesAPI } from 'api';
+import { textCategoriesAPI, requests } from 'api';
 import { withRouter } from 'react-router';
 
 const { select } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class ProjectDetailCategoryEdit extends Component {
 

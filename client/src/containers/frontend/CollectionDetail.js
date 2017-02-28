@@ -9,11 +9,11 @@ import {
 
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { projectsAPI, collectionsAPI } from 'api';
+import { projectsAPI, collectionsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 
 const { select, meta } = entityUtils;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 

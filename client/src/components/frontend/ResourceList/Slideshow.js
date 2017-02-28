@@ -3,10 +3,10 @@ import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import includes from 'lodash/includes';
 import { ResourceList } from 'components/frontend';
-import { collectionsAPI } from 'api';
+import { collectionsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 
 export default class ResourceListSlideshow extends PureComponent {
 

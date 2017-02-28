@@ -4,12 +4,11 @@ import { entityStoreActions } from 'actions';
 import { List, Project, Dashboard as DashboardComponents } from 'components/backend';
 import { Link } from 'react-router';
 import { entityUtils } from 'utils';
-import projectsAPI from 'api/projects';
-import statsAPI from 'api/statistics';
+import { projectsAPI, statisticsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 
 const { select, meta } = entityUtils;
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 
 const perPage = 5;
 
@@ -20,7 +19,7 @@ class DashboardContainer extends PureComponent {
     const projectsRequest =
       request(projectsAPI.index({}, { size: perPage }), requests.beProjects);
     const statsRequest =
-      request(statsAPI.show(), requests.beStats);
+      request(statisticsAPI.show(), requests.beStats);
     const { promise: one } = dispatch(projectsRequest);
     const { promise: two } = dispatch(statsRequest);
     return Promise.all([one, two]);

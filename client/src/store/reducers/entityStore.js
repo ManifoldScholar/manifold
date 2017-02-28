@@ -8,8 +8,7 @@ import findIndex from 'lodash/findIndex';
 import intersection from 'lodash/intersection';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-
-const { requests } = entityStoreActions;
+import { requests } from 'api';
 const { constantizeMeta } = entityUtils;
 
 export const initialState = {
@@ -206,13 +205,10 @@ function updateAnnotationCollection(state, action) {
 export default (state = initialState, action) => {
   const type = action.type;
   let newState = state;
-
   if (type === "ENTITY_STORE_REMOVE") return handleRemove(newState, action);
   if (type === "ENTITY_STORE_FLUSH") return handleFlush(newState, action);
   if (type.startsWith("API_REQUEST")) return handleRequest(newState, action);
-
   if (type.startsWith("API_RESPONSE")) newState = handleResponse(newState, action);
-
   if (type === `API_RESPONSE/${constantizeMeta(requests.rAnnotationCreate)}`) {
     newState = updateAnnotationCollection(newState, action);
   }

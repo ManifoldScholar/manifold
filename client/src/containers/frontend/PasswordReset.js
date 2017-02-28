@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { passwordsAPI } from 'api';
+import { passwordsAPI, requests } from 'api';
 import { Form } from 'components/global';
 import { entityStoreActions, notificationActions, currentUserActions } from 'actions';
 import { browserHistory } from 'react-router';
 import { get } from 'lodash';
 import { select } from 'utils/entityUtils';
 import { connect } from 'react-redux';
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class PasswordReset extends Component {
 

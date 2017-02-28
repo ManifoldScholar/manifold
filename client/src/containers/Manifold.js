@@ -8,13 +8,13 @@ import has from 'lodash/has';
 import get from 'lodash/get';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { notificationActions, uiVisibilityActions } from 'actions';
-import { meAPI, settingsAPI } from 'api';
+import { meAPI, settingsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { closest } from 'utils/domUtils';
 import ReactGA from 'react-ga';
 
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 const { visibilityHide } = uiVisibilityActions;
 
 class ManifoldContainer extends PureComponent {

@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { UserList } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import makersAPI from 'api/makers';
+import { makersAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import { Maker, List } from 'components/backend';
 
 const { select, meta } = entityUtils;
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 const perPage = 10;
 
 class MakersListContainer extends PureComponent {
@@ -60,7 +60,7 @@ class MakersListContainer extends PureComponent {
     const pagination = { number: page, size: perPage };
     const action = request(
       makersAPI.index(this.state.filter, pagination),
-      requests.requests.beMakers
+      requests.beMakers
     );
     this.props.dispatch(action);
   }

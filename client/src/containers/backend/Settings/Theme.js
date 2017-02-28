@@ -2,10 +2,10 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
-import { settingsAPI } from 'api';
+import { settingsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 
 class SettingsThemeContainer extends PureComponent {
 
