@@ -4,7 +4,6 @@
   top: 0;
   width: 100%;
   height: 100%;
-  padding-bottom: 100px;
   overflow: scroll;
   font-size: 18px;
   color: $neutral50;
@@ -34,7 +33,16 @@
     transition: opacity, $duration, $timing;
   }
 
+  // Firefox won't obey padding on the parent overlay
+  // so put it on the container instead.
+  .container {
+    padding-bottom: 100px;
+  }
+
   .overlay-header {
+    position: fixed;
+    width: 100%;
+
     .container {
       @include headerContainerPrimary;
     }
