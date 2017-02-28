@@ -24,4 +24,12 @@ class Favorite < ApplicationRecord
     "favorite #{id}"
   end
 
+  def favorite_subjects
+    user.favorites
+        .where(favoritable_type: "Project")
+        .joins("JOIN projects ON favorites.favoritable_id = projects.id")
+        .joins("JOIN project_subjects ON project_subjects.project_id = projects.id")
+        .pluck(:subject_id, :favoritable_id)
+  end
+
 end

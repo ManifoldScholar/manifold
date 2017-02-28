@@ -8,6 +8,7 @@ import { entityUtils } from 'utils';
 import { projectsAPI, favoriteProjectsAPI } from 'api';
 import HigherOrder from 'containers/global/HigherOrder';
 import get from 'lodash/get';
+import union from 'lodash/union';
 
 const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
@@ -81,8 +82,23 @@ class FollowingContainer extends Component {
     this.props.dispatch(followedRequest);
   }
 
+  mapFavoritesToSubjects() {
+    const subjects = this.props.subjects;
+    const favorites = this.props.authentication.currentUser.favorites;
+    if (!subjects || !favorites) return null;
+
+    const subjectIds = Object.values(favorites).reduce((memo, favorite) => {
+      return union(memo, favorite.attributes.subjectIds);
+    }, []);
+
+    return subjects.filter((subject) => {
+      return subjectIds.indexOf(subject.id) > -1;
+    });
+  }
+
   renderFollowedProjects() {
     const boundSetFilters = bindActionCreators(setProjectFilters, this.props.dispatch);
+    const subjects = this.mapFavoritesToSubjects();
 
     return (
       <section className="bg-neutral05">
@@ -95,7 +111,7 @@ class FollowingContainer extends Component {
             <div className="section-heading-utility-right">
               <ProjectList.Filters
                 updateAction={boundSetFilters}
-                subjects={this.props.subjects}
+                subjects={subjects}
               />
             </div>
           </header>
