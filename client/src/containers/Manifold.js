@@ -1,6 +1,7 @@
 import React, { Children, PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import DocumentMeta from 'react-document-meta';
 import { SignInUp, LoadingBar } from 'components/global';
 import config from '../config';
@@ -94,6 +95,11 @@ class ManifoldContainer extends PureComponent {
 
   doPostLogout(props) {
     this.notifyLogout(props);
+    this.redirectToHome();
+  }
+
+  redirectToHome() {
+    browserHistory.push('/');
   }
 
   updateCurrentUser() {
