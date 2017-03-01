@@ -33,6 +33,7 @@ export default {
   feSlideshow: 'frontend-slideshow',
   feCollection: 'frontend-collection',
   feCollectionResources: 'frontend-collection-resources',
+  feCollectionResource: 'frontend-collection-resource',
   rText: 'reader-text',
   rSection: 'reader-section',
   rAnnotations: 'reader-annotations',
