@@ -35,6 +35,11 @@ class ResourceDetailContainer extends PureComponent {
     resource: PropTypes.object
   };
 
+  componentWillUnmount() {
+    this.props.dispatch(flush(requests.feProject));
+    this.props.dispatch(flush(requests.feResource));
+  }
+
   projectUrl() {
     const pid = this.props.project.id;
     return `/browse/project/${pid}/resources`;
@@ -42,6 +47,7 @@ class ResourceDetailContainer extends PureComponent {
 
   render() {
     const projectId = this.props.project ? this.props.project.id : null;
+    if (!projectId) return null;
     return (
       <div>
         {this.props.project ?

@@ -22,7 +22,6 @@ class CollectionDetailContainer extends PureComponent {
   static fetchData(getState, dispatch, location, params) {
     const pageParam = params.page ? params.page : page;
     const collectionId = params.collectionId;
-    const projectId = params.id;
     const projects = projectsAPI.show(params.id);
     const collection = collectionsAPI.show(params.collectionId);
     const collectionResources = collectionsAPI.collectionResources(
@@ -57,7 +56,19 @@ class CollectionDetailContainer extends PureComponent {
     this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.filterChange = this.filterChange.bind(this);
+    this.flushStoreRequests = this.flushStoreRequests.bind(this);
     this.updateResults = debounce(this.updateResults.bind(this), 250);
+  }
+
+  componentWillUnmount() {
+    this.flushStoreRequests();
+  }
+
+  flushStoreRequests() {
+    this.props.dispatch(flush(requests.tmpProject));
+    this.props.dispatch(flush(requests.feSlideshow));
+    this.props.dispatch(flush(requests.feCollection));
+    this.props.dispatch(flush(requests.feCollectionResources));
   }
 
   handlePageChange(event, pageParam) {
