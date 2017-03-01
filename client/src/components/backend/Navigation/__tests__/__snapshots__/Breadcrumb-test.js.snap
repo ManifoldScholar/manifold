@@ -3,9 +3,14 @@ exports[`Navigation.Breadcrumb component renders correctly 1`] = `
   className="container flush">
   <nav
     className="breadcrumb-primary">
-    <i
-      className="manicon manicon-arrow-left" />
-    Back to:
+    <a
+      className="initial"
+      onClick={[Function]}
+      style={Object {}}>
+      <i
+        className="manicon manicon-arrow-left" />
+      Back to:
+    </a>
     <ul>
       <li>
         <a

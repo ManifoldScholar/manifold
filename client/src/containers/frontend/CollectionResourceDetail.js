@@ -21,7 +21,7 @@ class CollectionResourceDetailContainer extends PureComponent {
     const collectionAction = request(collectionFetch, requests.feCollection);
     const collectionResourceAction = request(
       collectionResourceFetch,
-      requests.feCollectionResources
+      requests.feCollectionResource
     );
     const { promise: one } = dispatch(collectionAction);
     const { promise: two } = dispatch(collectionResourceAction);
@@ -31,7 +31,7 @@ class CollectionResourceDetailContainer extends PureComponent {
   static mapStateToProps(state) {
     const props = {
       collection: select(requests.feCollection, state.entityStore),
-      collectionResource: select(requests.feCollectionResources, state.entityStore)
+      collectionResource: select(requests.feCollectionResource, state.entityStore)
     };
     return props;
   }
