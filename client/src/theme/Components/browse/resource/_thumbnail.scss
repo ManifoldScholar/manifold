@@ -67,9 +67,13 @@
       }
 
       .wrapper {
-        padding: 0;
         padding-top: 105%;
       }
+    }
+
+    // Override padding for standard thumbnail
+    .wrapper {
+      padding: 0;
     }
 
     .resource-icon {
