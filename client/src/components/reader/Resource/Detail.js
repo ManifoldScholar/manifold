@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { ResourceList } from 'components/frontend';
 import { Utility, Resource } from 'components/frontend';
 import Icon from 'components/frontend/Resource/Icon';
@@ -30,9 +30,18 @@ export default class ResourceOverlayDetail extends PureComponent {
     }
   }
 
+  buildRedirectUrl(resource) {
+    if (!resource) return null;
+    const pId = resource.relationships.project.id;
+    return (
+      `/browse/project/${pId}/resource/${resource.id}`
+    );
+  }
+
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
+    const resourceUrl = this.buildRedirectUrl(resource);
 
     return (
       <div className="resource-detail">
@@ -72,7 +81,7 @@ export default class ResourceOverlayDetail extends PureComponent {
 
           <nav className="button-nav">
             <Resource.Link attributes={attr} buttonClass="button-secondary outlined" /><br/>
-            <Link to="#" className="button-secondary outlined">
+            <Link to={resourceUrl} target="_blank" className="button-secondary outlined">
               Visit Resource Page<i className="manicon manicon-arrow-right"></i>
             </Link><br/>
             <button onClick={this.props.handleClose} className="button-secondary outlined dull">
