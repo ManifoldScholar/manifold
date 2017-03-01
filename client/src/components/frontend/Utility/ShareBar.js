@@ -6,7 +6,7 @@ export default class ShareBar extends Component {
   static displayName = "Utility.ShareBar";
 
   static propTypes = {
-    link: PropTypes.string
+    url: PropTypes.string
   };
 
   render() {
