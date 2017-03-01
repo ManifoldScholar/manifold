@@ -1,3 +1,5 @@
+import isString from 'lodash/isString';
+
 export function repeat(str, times) {
   return new Array(times + 1).join(str);
 }
@@ -9,4 +11,13 @@ export function pad(aString, maxLength, padWith = '0', padLeft = true) {
     return padding + toPad;
   }
   return toPad + padding;
+}
+
+export function possessivize(str) {
+  let out;
+  if (isString(str)) {
+    out = str.trim();
+    out = (out.toLowerCase().slice(-1) === 's') ? out + "'" : out + "'s";
+  }
+  return out;
 }

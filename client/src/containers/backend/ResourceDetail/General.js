@@ -16,22 +16,6 @@ class ResourceDetailGeneralContainer extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.handleSuccess = this.handleSuccess.bind(this);
-  }
-
-  createSuccessNotification() {
-    const notification = {
-      level: 0,
-      id: 'RESOURCE_UPDATED',
-      heading: "Your resource has been updated.",
-      body: "The resource matures.",
-      expiration: 5000
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-  }
-
-  handleSuccess() {
-    this.createSuccessNotification();
   }
 
   render() {
@@ -40,10 +24,9 @@ class ResourceDetailGeneralContainer extends PureComponent {
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.resource}
-          name="backend-edit-resource"
+          name="backend-resource-update"
           update={resourcesAPI.update}
           create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
-          onSuccess={this.handleSuccess}
           className="form-secondary"
         >
           <Form.TextInput

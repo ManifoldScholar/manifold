@@ -29,7 +29,7 @@ export default class ProjectPanelGeneral extends PureComponent {
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.project}
-          name="backend-project-general"
+          name="backend-project-update"
           update={projectsAPI.update}
           create={projectsAPI.create}
           className="form-secondary"

@@ -1,24 +1,43 @@
 import { notificationActions } from 'actions';
+import startsWith from 'lodash/startsWith';
+import { notifications } from 'api';
+
+function isAddNotificationAction(action) {
+  if (!__CLIENT__) return false;
+  return action.type === "ADD_NOTIFICATION" && action.payload;
+}
+
+function isApiResponseAction(action) {
+  if (!__CLIENT__) return false;
+  return startsWith(action.type, 'API_RESPONSE');
+}
+
+function handleAddNotificationAction(dispatch, action) {
+  const notification = action.payload;
+  if (notification.expiration && notification.id) {
+    let expire = parseInt(notification.expiration, 10);
+    if (isNaN(expire)) expire = 5000;
+    setTimeout(() => {
+      dispatch(notificationActions.removeNotification(notification.id));
+    }, expire);
+  }
+}
+
+function handleApiResponseAction(dispatch, action) {
+  if (!action.meta) return;
+  if (!notifications.hasOwnProperty(action.meta)) return;
+  const notification = Object.assign(
+    {},
+    notifications[action.meta](action.payload),
+    { id: action.meta }
+  );
+  dispatch(notificationActions.addNotification(notification));
+}
 
 export default function notificationMiddleware({ dispatch, getState }) {
   return (next) => (action) => {
-
-    // Guards
-    if (!__CLIENT__) return next(action);
-    if (action.type !== 'ADD_NOTIFICATION') return next(action);
-    const notification = action.payload;
-    if (!notification) return next(action);
-
-    // Handle notification expiration
-    if (notification.expiration && notification.id) {
-      let expire = parseInt(notification.expiration, 10);
-      if (isNaN(expire)) expire = 5000;
-      setTimeout(() => {
-        dispatch(notificationActions.removeNotification(notification.id));
-      }, expire);
-    }
-
+    if (isAddNotificationAction(action)) handleAddNotificationAction(dispatch, action);
+    if (isApiResponseAction(action)) handleApiResponseAction(dispatch, action);
     return next(action);
-
   };
 }

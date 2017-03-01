@@ -53,7 +53,6 @@ class PasswordReset extends Component {
 
   postUpdate(data) {
     this.loginUser(data);
-    this.createSuccessNotification();
     this.redirectToHome();
   }
 
@@ -62,18 +61,6 @@ class PasswordReset extends Component {
       email: user.attributes.email,
       password: this.state.password
     }));
-  }
-
-  createSuccessNotification() {
-    const notification = {
-      level: 0,
-      id: 'PASSWORD_RESET_SENT',
-      heading: `Password updated.`
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-    setTimeout(() => {
-      this.props.dispatch(notificationActions.removeNotification(notification.id));
-    }, 5000);
   }
 
   redirectToHome() {

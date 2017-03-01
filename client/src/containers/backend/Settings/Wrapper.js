@@ -12,22 +12,6 @@ class SettingsWrapperContainer extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.handleSuccess = this.handleSuccess.bind(this);
-  }
-
-  createSuccessNotification() {
-    const notification = {
-      level: 0,
-      id: 'SETTINGS_UPDATED',
-      heading: "Manifold settings updated",
-      body: "Your Manifold settings changes have been applied.",
-      expiration: 5000
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-  }
-
-  handleSuccess() {
-    this.createSuccessNotification();
   }
 
   secondaryNavigationLinks() {
@@ -58,7 +42,7 @@ class SettingsWrapperContainer extends PureComponent {
             />
           </aside>
           <div className="panel">
-            {React.cloneElement(this.props.children, { handleSuccess: this.handleSuccess })}
+            {React.cloneElement(this.props.children)}
           </div>
         </div>
       </section>

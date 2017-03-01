@@ -14,7 +14,7 @@ export default class CategoryForm extends PureComponent {
     return (
       <FormContainer.Form
         {...this.props}
-        name="backend-edit-category"
+        name="backend-category-update"
         update={textCategoriesAPI.update}
         create={(model) => textCategoriesAPI.create(this.props.projectId, model) }
         className="form-secondary"
