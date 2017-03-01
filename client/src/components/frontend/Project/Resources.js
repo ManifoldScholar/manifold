@@ -9,7 +9,8 @@ export default class ProjectResources extends Component {
     project: PropTypes.object,
     resources: PropTypes.array,
     pagination: PropTypes.object,
-    filterChange: PropTypes.func.isRequired
+    filterChange: PropTypes.func.isRequired,
+    initialFilterState: PropTypes.object
   };
 
   constructor() {
@@ -36,6 +37,7 @@ export default class ProjectResources extends Component {
             kinds={project.attributes.resourceKinds}
             tags={project.attributes.resourceTags}
             filterChangeHandler={this.props.filterChange}
+            initialFilterState={this.props.initialFilterState}
           />
           <ResourceList.Cards
             context={project}

@@ -6,6 +6,7 @@ import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
+import get from 'lodash/get';
 
 const { select, meta } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -18,10 +19,14 @@ class ProjectResourcesContainer extends Component {
     const pageParam = params.page ? params.page : page;
     const projectRequest =
         request(projectsAPI.show(params.id), requests.feProject);
+    // This can be made more robust with other types if need be.
+    const filter = location.query.tag ? {
+      tag: location.query.tag
+    } : {};
     const resourcesRequest =
         request(projectsAPI.resources(
           params.id,
-          { },
+          filter,
           { number: pageParam, size: perPage }),
           requests.feResources
         );
@@ -34,7 +39,8 @@ class ProjectResourcesContainer extends Component {
     project: PropTypes.object,
     resources: PropTypes.array,
     meta: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    location: PropTypes.object
   };
 
   static mapStateToProps(state) {
@@ -74,6 +80,10 @@ class ProjectResourcesContainer extends Component {
   render() {
     const project = this.props.project;
     if (!project) return null;
+
+    const tag = get(this.props, 'location.query.tag');
+    const initialFilter = tag ? { tag } : null;
+
     return (
       <div>
         <section className="bg-neutral05">
@@ -88,6 +98,7 @@ class ProjectResourcesContainer extends Component {
             resources={this.props.resources}
             pagination={this.props.meta.pagination}
             filterChange={this.filterChange}
+            initialFilterState={initialFilter}
           />
         : null }
         <section className="bg-neutral05">
