@@ -114,7 +114,6 @@ export default function (parameters) {
   app.use(morgan(logStyle));
 
   app.use((req, res) => {
-
     const store = createStore();
 
     if (__DISABLE_SSR__) return respondWithSSRDisabledError(res);
@@ -122,7 +121,7 @@ export default function (parameters) {
     if (req.headers.cookie) {
       const manifoldCookie = cookie.parse(req.headers.cookie);
       const authToken = manifoldCookie.authToken;
-      store.dispatch(currentUserActions.login({ authToken }));
+      if (authToken) store.dispatch(currentUserActions.login({ authToken }));
     }
 
     match({
