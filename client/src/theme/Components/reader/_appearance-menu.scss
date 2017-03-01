@@ -33,7 +33,9 @@
   }
 
   .panel-visible & {
-    bottom: 52px;
+    // NB: This will be '52' when there is
+    // a full set of functional icons
+    bottom: 42px;
 
     @include respond($break50) {
       right: 0;
