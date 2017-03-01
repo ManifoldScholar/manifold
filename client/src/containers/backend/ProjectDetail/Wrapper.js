@@ -99,24 +99,12 @@ class ProjectDetailWrapperContainer extends PureComponent {
     const options = { removes: this.props.project };
     const projectRequest = request(call, requests.beProjectDestroy, options);
     this.props.dispatch(projectRequest).promise.then(() => {
-      this.notifyDestroy();
       this.redirectToDashboard();
     });
   }
 
   redirectToDashboard() {
     browserHistory.push("/backend");
-  }
-
-  notifyDestroy() {
-    const notification = {
-      level: 0,
-      id: `PROJECT_DESTROYED_${this.props.project.id}`,
-      heading: "The project has been destroyed.",
-      body: `${this.props.project.attributes.title} has passed into the endless night.`,
-      expiration: 5000
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
   }
 
   handleProjectDestroy(event) {

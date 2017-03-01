@@ -25,10 +25,9 @@ class SettingsThemeContainer extends PureComponent {
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.settings}
-          name="backend-settings-theme"
+          name="backend-settings"
           update={settingsAPI.update}
           create={settingsAPI.update}
-          onSuccess={this.props.handleSuccess}
           className="form-secondary"
         >
           <Form.Upload

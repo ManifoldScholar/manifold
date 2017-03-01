@@ -20,23 +20,11 @@ class NewProjectWrapperContainer extends PureComponent {
     this.handleSuccess = this.handleSuccess.bind(this);
   }
 
-  createSuccessNotification() {
-    const notification = {
-      level: 0,
-      id: 'PROJECT_CREATED',
-      heading: "Your project has been created.",
-      body: "A new manifold project is born.",
-      expiration: 5000
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-  }
-
   redirectToProject(project) {
     browserHistory.push(`/backend/project/${project.id}`);
   }
 
   handleSuccess(project) {
-    this.createSuccessNotification();
     this.redirectToProject(project);
   }
 

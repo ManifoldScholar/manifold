@@ -48,6 +48,7 @@ class CollectionResourceDetailContainer extends PureComponent {
   }
 
   render() {
+    if (!this.props.collectionResource) return null;
     return (
       <div>
         {this.props.collection ?

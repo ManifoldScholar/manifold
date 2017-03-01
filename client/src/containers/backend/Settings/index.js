@@ -3,7 +3,6 @@ import Theme from './Theme';
 import OAuth from './OAuth';
 import Wrapper from './Wrapper';
 import Features from './Features';
-import PressLogo from './PressLogo';
 import Placeholder from './Placeholder';
 
 export default {
@@ -12,6 +11,5 @@ export default {
   Theme,
   OAuth,
   Features,
-  Placeholder,
-  PressLogo
+  Placeholder
 };

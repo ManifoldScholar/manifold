@@ -36,6 +36,7 @@ module Api
       end
 
       def destroy
+        @maker = load_and_authorize_maker
         @maker.destroy
       end
 

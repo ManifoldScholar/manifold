@@ -20,23 +20,11 @@ class NewResourceWrapperContainer extends PureComponent {
     this.handleSuccess = this.handleSuccess.bind(this);
   }
 
-  createSuccessNotification() {
-    const notification = {
-      level: 0,
-      id: 'RESOURCE_CREATED',
-      heading: "Your resource has been created.",
-      body: "A new manifold project resource is born.",
-      expiration: 5000
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-  }
-
   redirectToResource(resource) {
     browserHistory.push(`/backend/resource/${resource.id}`);
   }
 
   handleSuccess(resource) {
-    this.createSuccessNotification();
     this.redirectToResource(resource);
   }
 
@@ -58,7 +46,7 @@ class NewResourceWrapperContainer extends PureComponent {
               <FormContainer.Form
                 route={this.props.routes[this.props.routes.length - 1]}
                 model={this.props.resource}
-                name="backend-create-resource"
+                name="backend-resource-create"
                 update={resourcesAPI.update}
                 create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
                 onSuccess={this.handleSuccess}

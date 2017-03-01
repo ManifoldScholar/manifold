@@ -39,4 +39,12 @@ export default {
     };
   },
 
+  destroy(id) {
+    return {
+      endpoint: `/api/v1/makers/${id}`,
+      method: 'DELETE',
+      options: {}
+    };
+  }
+
 };

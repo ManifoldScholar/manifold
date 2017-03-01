@@ -133,7 +133,7 @@ class MakersEditContainer extends PureComponent {
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.maker}
-          name="backend-edit-maker"
+          name="backend-maker-update"
           update={makersAPI.update}
           create={makersAPI.create}
           className="form-secondary"
