@@ -41,6 +41,11 @@ class CollectionResourceDetailContainer extends PureComponent {
     resource: PropTypes.object
   };
 
+  componentWillUnmount() {
+    this.props.dispatch(flush(requests.feCollection));
+    this.props.dispatch(flush(requests.feCollectionResource));
+  }
+
   collectionUrl() {
     const cid = this.props.collection.id;
     const pid = this.props.collection.relationships.project.id;

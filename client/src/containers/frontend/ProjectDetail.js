@@ -29,6 +29,10 @@ class ProjectDetailContainer extends Component {
     dispatch: PropTypes.func.isRequired
   };
 
+  componentWillUnmount() {
+    this.props.dispatch(flush(requests.feProject));
+  }
+
   render() {
     return <Project.Detail project={this.props.project} dispatch={this.props.dispatch} />;
   }

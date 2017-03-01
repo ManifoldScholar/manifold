@@ -51,6 +51,11 @@ class ProjectResourcesContainer extends Component {
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
+  componentWillUnmount() {
+    this.props.dispatch(flush(requests.feProject));
+    this.props.dispatch(flush(requests.feResources));
+  }
+
   updateResults() {
     const pagination = { number: page, size: perPage };
     const action = request(
@@ -68,6 +73,7 @@ class ProjectResourcesContainer extends Component {
 
   render() {
     const project = this.props.project;
+    if (!project) return null;
     return (
       <div>
         <section className="bg-neutral05">
