@@ -41,6 +41,11 @@ export default class DrawerWrapper extends PureComponent {
       leaving: true
     });
 
+    /*
+      NB: Running this callback without a timeout causes the drawer
+      to close without a transition. However, running a timeout causes
+      an error as well.
+    */
     if (this.props.closeCallback) {
       this.props.closeCallback(event);
     }
