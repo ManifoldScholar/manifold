@@ -146,7 +146,11 @@ class Create extends Component {
             </Form.Errorable>
           </div>
           <div className="row-1-p">
-            <div className="form-input">
+            <Form.Errorable
+              className="form-input"
+              name="attributes[passwordConfirmation]"
+              errors={errors}
+            >
               <label>
                 Confirm Password
               </label>
@@ -158,7 +162,7 @@ class Create extends Component {
                 onChange={this.handleInputChange}
                 placeholder="Confirm Password"
               />
-            </div>
+            </Form.Errorable>
           </div>
           <div className="row-1-p">
             <div className="form-input">
