@@ -66,7 +66,7 @@ class CollectionDetailContainer extends PureComponent {
     const filter = { };
     const action = request(
       collectionsAPI.collectionResources(cId, filter, pagination),
-      'collection-resources'
+      requests.feCollectionResources
     );
     this.props.dispatch(action);
   }
@@ -88,7 +88,7 @@ class CollectionDetailContainer extends PureComponent {
     const pagination = { number: page, size: perPage };
     const action = request(
       collectionsAPI.collectionResources(cId, this.state.filter, pagination),
-      'collection-resources'
+      requests.feCollectionResources
     );
     this.props.dispatch(action);
   }
