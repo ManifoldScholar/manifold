@@ -9,6 +9,7 @@ export default class ResourceDetail extends Component {
 
   static propTypes = {
     projectId: PropTypes.string,
+    projectUrl: PropTypes.string,
     resource: PropTypes.object
   };
 
@@ -38,7 +39,11 @@ export default class ResourceDetail extends Component {
                   resource url.
                 */}
                 {/* <Utility.ShareBar url={url}/> */}
-                <Resource.Meta resource={resource} style={'secondary'}/>
+                <Resource.Meta
+                  resource={resource}
+                  style={'secondary'}
+                  projectUrl={this.props.projectUrl}
+                />
               </aside>
               <div className="resource-content left">
                 <p>
@@ -53,7 +58,11 @@ export default class ResourceDetail extends Component {
                 </p>
               </div>
               <div className="resource-meta-mobile">
-                <Resource.Meta resource={resource} style={'primary'}/>
+                <Resource.Meta
+                  resource={resource}
+                  style={'primary'}
+                  projectUrl={this.props.projectUrl}
+                />
               </div>
             </div>
           </section>

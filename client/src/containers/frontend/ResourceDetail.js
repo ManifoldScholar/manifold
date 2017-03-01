@@ -60,6 +60,7 @@ class ResourceDetailContainer extends PureComponent {
         {this.props.resource ?
           <Resource.Detail
             projectId={projectId}
+            projectUrl={this.projectUrl()}
             resource={this.props.resource}
           /> : null
         }

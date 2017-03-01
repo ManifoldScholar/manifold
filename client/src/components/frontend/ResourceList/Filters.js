@@ -9,12 +9,13 @@ export default class ResourceListFilters extends Component {
   static propTypes = {
     kinds: PropTypes.array,
     tags: PropTypes.array,
-    filterChangeHandler: PropTypes.func.isRequired
+    filterChangeHandler: PropTypes.func.isRequired,
+    initialFilterState: PropTypes.object
   };
 
   constructor(props) {
     super(props);
-    this.state = this.initialState();
+    this.state = this.initialState(props.initialFilterState);
     this.setFilters = this.setFilters.bind(this);
     this.resetFilters = this.resetFilters.bind(this);
   }
@@ -60,11 +61,11 @@ export default class ResourceListFilters extends Component {
     this.setState({ inputs, filter });
   }
 
-  initialState() {
+  initialState(init) {
     return {
       filter: {
       },
-      inputs: {
+      inputs: init ? init : {
         keyword: "",
         kind: "default",
         tag: "default",

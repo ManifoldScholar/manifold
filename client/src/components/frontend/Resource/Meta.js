@@ -11,7 +11,8 @@ export default class ResourceMeta extends Component {
     resource: PropTypes.object,
     style: PropTypes.string,
     showIcon: PropTypes.bool,
-    showTags: PropTypes.bool
+    showTags: PropTypes.bool,
+    projectUrl: PropTypes.string
   };
 
   static defaultProps = {
@@ -19,12 +20,12 @@ export default class ResourceMeta extends Component {
     showTags: true
   };
 
-  constructor() {
+  constructor(props) {
     super();
   }
 
   mapTagsToLinks(attr) {
-    if (!attr.tagList) return null;
+    if (!attr.tagList || !this.props.projectUrl) return null;
     const tags = attr.tagList;
     const out = [];
     tags.map((tag, index) => {
@@ -37,7 +38,8 @@ export default class ResourceMeta extends Component {
     if (!tag) return null;
     return (
       <li key={index}>
-        <Link to="#"> {/* Will be route to view resources by tags */}
+        {/* Will be route to view resources by tags */}
+        <Link to={`${this.props.projectUrl}?tag=${tag.toLowerCase()}`}>
           {tag}
         </Link>
       </li>
