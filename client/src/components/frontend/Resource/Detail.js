@@ -32,7 +32,12 @@ export default class ResourceDetail extends Component {
                 <Link to="#" className="button-primary">
                   View in Text <i className="manicon manicon-arrow-right"></i>
                 </Link>
-                <Utility.ShareBar/>
+                {/*
+                  Todo: shareBar should be passed a url string that
+                  contains the current url, composed of the projcet and
+                  resource url.
+                */}
+                {/* <Utility.ShareBar url={url}/> */}
                 <Resource.Meta resource={resource} style={'secondary'}/>
               </aside>
               <div className="resource-content left">
