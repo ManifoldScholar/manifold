@@ -58,7 +58,7 @@ export default class LayoutHeader extends Component {
               {
                 this.props.authentication.authenticated ?
                   <li>
-                    <Link className="button-mode" to={`/backend`}>
+                    <Link className="button-mode" to={`/backend/`}>
                       Admin Mode
                     </Link>
                   </li> : null
