@@ -119,7 +119,6 @@
     display: none;
     height: 100%;
     overflow: hidden;
-    cursor: pointer;
 
     @include respond($break70) {
       display: block;
