@@ -63,17 +63,20 @@ export default class LayoutHeader extends Component {
                     </Link>
                   </li> : null
               }
-              <li>
-                <SearchMenuButton
-                  toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
-                  active={this.props.visibility.uiPanels.search}
-                />
-                <UIPanel
-                  id="search"
-                  visibility={this.props.visibility.uiPanels}
-                  bodyComponent={SearchMenuBody}
-                />
-              </li>
+              {/*
+                Hiding search markup until functionality is available
+                <li>
+                  <SearchMenuButton
+                    toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
+                    active={this.props.visibility.uiPanels.search}
+                  />
+                  <UIPanel
+                    id="search"
+                    visibility={this.props.visibility.uiPanels}
+                    bodyComponent={SearchMenuBody}
+                  />
+                </li>
+              */}
               <li>
                 <UserMenuButton
                   authentication={this.props.authentication}

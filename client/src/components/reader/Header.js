@@ -125,12 +125,15 @@ export default class Header extends Component {
           : null }
           <nav className="menu-buttons">
             <ul>
-              <li>
-                <SearchMenuButton
-                  toggleSearchMenu={this.handleSearchMenuButtonClick}
-                  active={this.props.visibility.uiPanels.search}
-                />
-              </li>
+              {/*
+               Hiding search markup until functionality is available
+                <li>
+                  <SearchMenuButton
+                    toggleSearchMenu={this.handleSearchMenuButtonClick}
+                    active={this.props.visibility.uiPanels.search}
+                  />
+                </li>
+              */}
               <li>
                 <AppearanceMenuButton
                   toggleAppearanceMenu={this.handleAppearanceMenuButtonClick}

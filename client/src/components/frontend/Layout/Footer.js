@@ -112,14 +112,17 @@ export default class LayoutFooter extends Component {
           </nav>
 
           <section className="footer-secondary">
-            <form>
-              <div className="search-button-inline">
-                <input type="text" placeholder="Search"/>
-                <button className="manicon manicon-magnify">
-                  <span className="screen-reader-text">Click to submit search query</span>
-                </button>
-              </div>
-            </form>
+            {/*
+              Hiding search markup until basic search functionality is implemented
+              <form>
+                <div className="search-button-inline">
+                  <input type="text" placeholder="Search"/>
+                  <button className="manicon manicon-magnify">
+                    <span className="screen-reader-text">Click to submit search query</span>
+                  </button>
+                </div>
+              </form>
+            */}
             <p className="colophon">
               {'© 2015-2016 6 University of Minnesota Press.'}
               <br />
