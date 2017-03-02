@@ -18,7 +18,7 @@ The [University of Minnesota Press](https://www.upress.umn.edu) in partnership w
 
 ## Open Development
 
-Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us on our [Building Manifold Development Blog](http://manifold.umn.edu). As we proceed with this project, we'll be using a [Pivotal Tracker project](https://www.pivotaltracker.com/n/projects/1457560) to plan our sprints.
+Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us on our [Building Manifold Development Blog](http://manifold.umn.edu). As we proceed with this project, we'll be using a [Pivotal Tracker project](https://www.pivotaltracker.com/n/projects/1457566) to plan our sprints.
 
 ## Manifold API
 
