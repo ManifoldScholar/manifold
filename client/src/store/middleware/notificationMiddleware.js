@@ -26,9 +26,11 @@ function handleAddNotificationAction(dispatch, action) {
 function handleApiResponseAction(dispatch, action) {
   if (!action.meta) return;
   if (!notifications.hasOwnProperty(action.meta)) return;
+  const key = action.error === true ? `${action.meta}-error` : action.meta;
+  if (!notifications[key]) return;
   const notification = Object.assign(
     {},
-    notifications[action.meta](action.payload),
+    notifications[key](action.payload),
     { id: action.meta }
   );
   dispatch(notificationActions.addNotification(notification));
