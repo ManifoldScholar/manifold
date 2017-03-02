@@ -34,7 +34,7 @@ class FormTextArea extends Component {
             style={{ height: this.props.height }}
             placeholder={this.props.placeholder}
             onChange={this.props.onChange}
-            value={this.props.value}
+            value={this.props.value || ""}
           />
         </GlobalForm.Errorable>
       </div>

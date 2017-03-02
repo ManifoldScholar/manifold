@@ -7,17 +7,51 @@ class ResourceSerializer < ResourcePartialSerializer
              :created_at, :updated_at, :project_id, :description_formatted,
              :caption, :description, :downloadable, :fingerprint, :alt_text, :keywords,
              :copyright_status, :copyright_holder, :credit, :external_url, :external_id,
-             :external_type, :allow_high_res, :allow_download, :doi, :high_res_file_name,
-             :high_res_content_type, :high_res_file_size, :high_res_updated_at,
-             :transcript_file_name, :transcript_content_type, :transcript_file_size,
-             :transcript_updated_at, :translation_file_name, :translation_content_type,
-             :translation_file_size, :translation_updated_at, :tag_list
+             :external_type, :allow_high_res, :allow_download, :doi, :high_res_url,
+             :high_res_file_name, :high_res_content_type, :high_res_file_size,
+             :high_res_updated_at, :variant_format_one_file_name,
+             :variant_format_one_content_type, :variant_format_one_file_size,
+             :variant_format_one_updated_at, :variant_format_two_file_name,
+             :variant_format_two_content_type, :variant_format_two_file_size,
+             :variant_format_two_updated_at, :variant_thumbnail_styles,
+             :variant_thumbnail_file_name, :variant_thumbnail_content_type,
+             :variant_thumbnail_file_size, :variant_thumbnail_updated_at,
+             :variant_poster_styles, :variant_poster_file_name,
+             :variant_poster_content_type, :variant_poster_file_size,
+             :variant_poster_updated_at, :transcript_file_name,
+             :transcript_content_type, :transcript_file_size, :transcript_updated_at,
+             :translation_file_name, :translation_content_type,
+             :translation_file_size, :translation_updated_at, :tag_list,
+             :is_external_video, :is_iframe, :embed_code, :iframe_dimensions,
+             :iframe_length, :iframe_width, :downloadable_kind
 
   has_many :collections
   has_many :collection_resources
   belongs_to :project, serializer: ProjectPartialSerializer
 
+  def external_video
+    object.external_video?
+  end
+
+  def iframe
+    object.iframe?
+  end
+
+  def iframe_length
+    return nil unless object.iframe_dimensions
+    object.split_iframe_dimensions[0]
+  end
+
+  def iframe_width
+    return nil unless object.iframe_dimensions
+    object.split_iframe_dimensions[1]
+  end
+
   def downloadable
     object.downloadable?
+  end
+
+  def downloadable_kind
+    object.downloadable_kind?
   end
 end

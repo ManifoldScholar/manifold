@@ -29,17 +29,17 @@ RSpec.describe Resource, type: :model do
 
     it "has a formatted title after save" do
       resource = FactoryGirl.create(:resource, title: raw)
-      expect(resource.title_formatted).to eq (formatted)
+      expect(resource.title_formatted).to eq(formatted)
     end
 
     it "has a formatted caption after save" do
       resource = FactoryGirl.create(:resource, caption: raw)
-      expect(resource.caption_formatted).to eq (formatted)
+      expect(resource.caption_formatted).to eq(formatted)
     end
 
     it "has a formatted description after save" do
       resource = FactoryGirl.create(:resource, description: raw)
-      expect(resource.description_formatted).to eq (formatted)
+      expect(resource.description_formatted).to eq(formatted)
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe Resource, type: :model do
     end
 
     it "and ordered by collection order" do
-      collection = FactoryGirl.create(:collection, project: @project_a);
+      collection = FactoryGirl.create(:collection, project: @project_a)
       collection.resources << @resource_a
       collection.resources << @resource_b
       collection.save
@@ -72,9 +72,9 @@ RSpec.describe Resource, type: :model do
     end
 
     it "by kind" do
-      # TBD: Expand this test. Right now all factory resources are videos to avoid dealing
+      # TBD: Expand this test. Right now all factory resources are links to avoid dealing
       # with attachments.
-      results = Resource.filter({kind: "video"})
+      results = Resource.filter({kind: "link"})
       expect(results.length).to be 3
     end
 
@@ -83,6 +83,58 @@ RSpec.describe Resource, type: :model do
       expect(results.length).to be 2
       results = Resource.filter({tag: "test"})
       expect(results.length).to be 1
+    end
+  end
+
+  describe "kind validations" do
+    KINDS = %w(image audio video spreadsheet document file presentation).freeze
+
+    KINDS.each do |kind|
+      context "when resource is a #{kind} upload" do
+        it "is invalid without an attachment" do
+          resource = FactoryGirl.build(:resource, kind: kind)
+          expect(resource).to_not be_valid
+        end
+      end
+    end
+
+    context "when resource is an iframe" do
+      it "is invalid without dimensions" do
+        resource = FactoryGirl.build(:resource, kind: "interactive", is_iframe: true)
+        expect(resource).to_not be_valid
+      end
+
+      it "is invalid without an external url" do
+        resource = FactoryGirl.build(:resource, kind: "interactive", is_iframe: true,
+                                     iframe_dimensions: "640x480", external_url: nil)
+        expect(resource).to_not be_valid
+      end
+    end
+
+    context "when resource is an embed" do
+      it "is invalid without the embed code" do
+        resource = FactoryGirl.build(:resource, kind: "interactive")
+        expect(resource).to_not be_valid
+      end
+    end
+
+    context "when resource is an external video" do
+      it "is invalid without an external id" do
+        resource = FactoryGirl.build(:resource, kind: "video", is_external_video: true, external_type: "youtube")
+        expect(resource).to_not be_valid
+      end
+
+      it "is invalid without an external type" do
+        resource = FactoryGirl.build(:resource, kind: "video", is_external_video: true, external_id: "abcd1234")
+        expect(resource).to_not be_valid
+      end
+    end
+
+    context "when resource is a link" do
+      it "is invalid without an external url" do
+        resource = FactoryGirl.build(:resource, kind: "link", external_url: nil)
+        expect(resource).to_not be_valid
+      end
     end
   end
 end

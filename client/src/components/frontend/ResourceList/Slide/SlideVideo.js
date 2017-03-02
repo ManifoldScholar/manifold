@@ -31,7 +31,7 @@ export default class ResourceSlideFigureVideo extends Component {
 
   renderVideoByService(service, id) {
     let output = false;
-    if (service === 'VIMEO') {
+    if (service === 'vimeo') {
       output = (
         <iframe src={`//player.vimeo.com/video/${id}`}
           frameBorder="0"
@@ -40,7 +40,7 @@ export default class ResourceSlideFigureVideo extends Component {
         </iframe>
       );
     }
-    if (service === 'YOUTUBE') {
+    if (service === 'youtube') {
       output = (
         <iframe id="ytplayer" type="text/html"
           src={`https://www.youtube.com/embed/${id}`}
