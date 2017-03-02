@@ -43,6 +43,7 @@ class FormContainer extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.preventDirtyWarning = false;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.routerWillLeave = this.routerWillLeave.bind(this);
   }
@@ -69,6 +70,7 @@ class FormContainer extends PureComponent {
 
   routerWillLeave(event) {
     if (this.props.session.changed !== true) return;
+    if (this.preventDirtyWarning === true) return;
     return window.confirm("Changes you made may not be saved.");
   }
 
@@ -116,6 +118,7 @@ class FormContainer extends PureComponent {
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty('promise') && this.props.onSuccess) {
       res.promise.then(() => {
+        this.preventDirtyWarning = true;
         this.props.onSuccess();
       });
     }
@@ -128,6 +131,7 @@ class FormContainer extends PureComponent {
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty('promise') && this.props.onSuccess) {
       res.promise.then(() => {
+        this.preventDirtyWarning = true;
         this.props.onSuccess(this.props.response.entity);
       });
     }
