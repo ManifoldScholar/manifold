@@ -31,9 +31,12 @@ export default class FormSelect extends Component {
       <div className="form-input">
         <label>{this.props.label}</label>
         <Form.Connect.Set {...this.props} >
-          <select>
-            {options}
-          </select>
+          <div className="form-select">
+            <i className="manicon manicon-caret-down"></i>
+            <select>
+              {options}
+            </select>
+          </div>
         </Form.Connect.Set>
       </div>
     );
