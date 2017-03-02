@@ -30,6 +30,13 @@
     margin-bottom: 80px;
   }
 
+  .form-input + .form-input,
+  .form-input + .form-section,
+  .form-section + .form-section,
+  .form-section + .form-input {
+    margin-top: 40px;
+  }
+
   .form-input {
     label:not(.checkbox):not(.radio) {
       @include formLabelPrimary;
@@ -40,10 +47,6 @@
       &.has-instructions {
         margin-bottom: 1em;
       }
-    }
-
-    + .form-input {
-      margin-top: 40px;
     }
 
     input[type="text"], input[type="password"] {

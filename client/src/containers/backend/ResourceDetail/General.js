@@ -26,37 +26,20 @@ class ResourceDetailGeneralContainer extends PureComponent {
           model={this.props.resource}
           name="backend-resource-update"
           update={resourcesAPI.update}
+          debug={true}
           create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
           className="form-secondary"
         >
-          <Form.TextInput
-            label="Title"
+          <Form.Select
+            label="kind"
+            name="attributes[kind]"
             focusOnMount
-            name="attributes[title]"
-            placeholder="Enter a resource title"
+            options={[
+              {label: "Image", value: "image"},
+              {label: "Video", value: "video"},
+            ]}
           />
-          <Form.TextArea
-            label="Description"
-            focusOnMount
-            name="attributes[description]"
-            placeholder="Enter a description"
-          />
-          <Form.TextInput
-            label="Caption"
-            focusOnMount
-            name="attributes[caption]"
-            placeholder="Enter a caption"
-          />
-          <Form.TextInput
-            label="Keywords"
-            focusOnMount
-            name="attributes[keywords]"
-            placeholder="Enter some keywords separated by , or ;"
-          />
-          <Form.Switch
-            label="Allow Download?"
-            name="attributes[allowDownload]"
-          />
+          <Resource.Form.KindAttributes />
           <Form.Save
             text="Update Resource"
           />
