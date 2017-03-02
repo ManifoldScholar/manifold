@@ -144,38 +144,39 @@ module Attachments
         end
 
         def #{field}_is_video?
+          return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
           !#{field}_content_type.match(Regexp.union(config[:video][:allowed_mime])).nil?  
         end
       
         def #{field}_is_audio?
+          return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
           !#{field}_content_type.match(Regexp.union(config[:audio][:allowed_mime])).nil?  
         end
       
-        def #{field}_is_plain_text?
-          types = Rails.configuration.manifold.attachments.validations.plain_text.allowed_ext
-          types.include? #{field}_extension
-        end
-      
         def #{field}_is_excel?
-          types = Rails.configuration.manifold.attachments.validations.excel.allowed_ext
-          types.include? #{field}_extension
+          return false unless #{field}.present?
+          config = Rails.configuration.manifold.attachments.validations
+          !#{field}_content_type.match(Regexp.union(config[:excel][:allowed_mime])).nil?  
         end
       
-        def #{field}_is_word_document?
-          types = Rails.configuration.manifold.attachments.validations.word.allowed_ext
-          types.include? #{field}_extension
+        def #{field}_is_text_document?
+          return false unless #{field}.present?
+          config = Rails.configuration.manifold.attachments.validations
+          !#{field}_content_type.match(Regexp.union(config[:text_document][:allowed_mime])).nil?  
         end
       
         def #{field}_is_powerpoint?
-          types = Rails.configuration.manifold.attachments.validations.powerpoint.allowed_ext
-          types.include? #{field}_extension
+          return false unless #{field}.present?
+          config = Rails.configuration.manifold.attachments.validations
+          !#{field}_content_type.match(Regexp.union(config[:powerpoint][:allowed_mime])).nil?  
         end
       
         def #{field}_is_pdf?
-          types = Rails.configuration.manifold.attachments.validations.pdf.allowed_ext
-          types.include? #{field}_extension
+          return false unless #{field}.present?
+          config = Rails.configuration.manifold.attachments.validations
+          !#{field}_content_type.match(Regexp.union(config[:pdf][:allowed_mime])).nil?  
         end
   
         def can_process_#{field}_styles?

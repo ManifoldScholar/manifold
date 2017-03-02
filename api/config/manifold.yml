@@ -59,11 +59,6 @@ common: &1
           - !ruby/regexp '/wav\Z/'
           - !ruby/regexp '/mid\Z/'
           - !ruby/regexp '/ogg\Z/'
-      :plain_text:
-        :allowed_mime:
-          - !ruby/regexp '/text\/.*/'
-        :allowed_ext:
-          - !ruby/regexp '/txt\Z/'
       :excel:
         :allowed_mime:
           - "application/vnd.ms-excel"
@@ -75,6 +70,7 @@ common: &1
           - "application/xls"
           - "application/x-xls"
           - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          - "application/zip"
         :allowed_ext:
           - !ruby/regexp '/xls\Z/'
           - !ruby/regexp '/xlt\Z/'
@@ -86,13 +82,14 @@ common: &1
           - !ruby/regexp '/xlsb\Z/'
           - !ruby/regexp '/xla\Z/'
           - !ruby/regexp '/xlw\Z/'
-      :word:
+      :text_document:
         :allowed_mime:
           - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           - "application/vnd.openxmlformats-officedocument.wordprocessingml.template"
           - "application/msword"
           - "application/vnd.ms-word.document.macroEnabled.12"
           - "application/vnd.ms-word.template.macroEnabled.12"
+          - !ruby/regexp '/text\/.*/'
         :allowed_ext:
           - !ruby/regexp '/doc\Z/'
           - !ruby/regexp '/docx\Z/'
@@ -100,6 +97,7 @@ common: &1
           - !ruby/regexp '/dotx\Z/'
           - !ruby/regexp '/dotm\Z/'
           - !ruby/regexp '/docb\Z/'
+          - !ruby/regexp '/txt\Z/'
       :powerpoint:
         :allowed_mime:
           - "application/vnd.ms-powerpoint"
@@ -108,6 +106,7 @@ common: &1
           - "application/vnd.openxmlformats-officedocument.presentationml.slideshow"
         :allowed_ext:
           - !ruby/regexp '/ppt\Z/'
+          - !ruby/regexp '/pptx\Z/'
           - !ruby/regexp '/pptm\Z/'
           - !ruby/regexp '/potx\Z/'
           - !ruby/regexp '/potm\Z/'

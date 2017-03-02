@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { entityUtils } from 'utils';
 import get from 'lodash/get';
 import isString from 'lodash/isString';
+import JSONTree from 'react-json-tree';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -144,6 +145,7 @@ class FormContainer extends PureComponent {
   renderChildren(props) {
     const childProps = this.childProps(props);
     return React.Children.map(props.children, child => {
+      if (!child) return null;
       if (isString(child.type)) {
         return child;
       }

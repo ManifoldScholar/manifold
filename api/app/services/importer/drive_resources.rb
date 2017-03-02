@@ -32,7 +32,9 @@ module Importer
       "Alt-Text" => :alt_text,
       "URL" => :external_url,
       "Host Name" => :external_type,
-      "File ID" => :external_id
+      "File ID" => :external_id,
+      "Type" => :kind,
+      "External Video" => :is_external_video
     }.freeze
     RESOURCE_BOOLEAN_ATTRIBUTES = {
       "Allow High-Res Download" => :allow_high_res
@@ -142,7 +144,7 @@ module Importer
 
     def update_simple_attributes(model, row, simple_attributes)
       attr = simple_attributes_from_row(row, simple_attributes)
-      model.update_attributes(attr)
+      model.assign_attributes(attr)
     end
 
     def update_attachment_attributes(model, row, attachment_attributes)

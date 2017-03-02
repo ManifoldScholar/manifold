@@ -14,6 +14,7 @@ import setter from './setter';
 
 export default {
   HasMany,
+  Hidden,
   Radios,
   TextArea,
   TextInput,

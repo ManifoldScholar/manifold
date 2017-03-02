@@ -20,8 +20,16 @@ module Api
           end
 
           def create
-            @resource = authorize_and_create_zresource(resource_params)
-            render_single_resource @resource
+            @resource = ::Updaters::Resource.new(resource_params)
+                                            .update(@project.resources.new)
+            @resource.creator = @current_user
+            @resource.save
+            authorize_action_for @resource
+            location = api_v1_project_relationships_resources_url(
+              @resource,
+              project_id: @project.id
+            )
+            render_single_resource @resource, location: location
           end
 
           private
