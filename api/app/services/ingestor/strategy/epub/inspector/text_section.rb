@@ -78,9 +78,9 @@ module Ingestor
           end
 
           def toc?
-            nav_item = @epub_inspector.manifest_nav_item
-            if nav_item
-              return text_section_resource_path == nav_item.attribute("href")
+            toc_page = guess_toc_page_from_landmarks
+            if toc_page
+              return text_section_resource_path == toc_page[:source_path]
             end
             false
           end
@@ -93,6 +93,15 @@ module Ingestor
               return !results.empty?
             end
             false
+          end
+
+          def guess_toc_page_from_landmarks
+            landmarks = @epub_inspector.toc_inspector.text_structure[:landmarks]
+            landmarks.detect do |key|
+              key[:type] == "toc" ||
+                key[:anchor] == "toc" ||
+                key[:label].include?("Contents")
+            end
           end
 
         end

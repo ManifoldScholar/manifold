@@ -168,7 +168,7 @@ module Ingestor
         landmarks = structure_inspector.landmarks
         text.landmarks = ::Ingestor::Transformer::TOCStructure.transform(landmarks, text)
         debug "services.ingestor.strategy.log.find_landmark_structure"
-        Helper::Log.log_structure(text.landmarks, "  Lanmarks: ", @logger)
+        Helper::Log.log_structure(text.landmarks, "  Landmarks: ", @logger)
       end
 
       def update_page_list!(text)
