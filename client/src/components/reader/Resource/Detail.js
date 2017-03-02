@@ -81,7 +81,7 @@ export default class ResourceOverlayDetail extends PureComponent {
 
           <nav className="button-nav">
             <Resource.Link attributes={attr} buttonClass="button-secondary outlined" /><br/>
-            <Link to={resourceUrl} target="_blank" className="button-secondary outlined">
+            <Link to={resourceUrl} className="button-secondary outlined">
               Visit Resource Page<i className="manicon manicon-arrow-right"></i>
             </Link><br/>
             <button onClick={this.props.handleClose} className="button-secondary outlined dull">
