@@ -21,6 +21,14 @@ export default {
         body: JSON.stringify({ type: "annotation", data })
       }
     };
-  }
+  },
+
+  destroy(annotationId) {
+    return {
+      endpoint: `/api/v1/annotations/${annotationId}`,
+      method: 'DELETE',
+      options: {}
+    };
+  },
 
 };

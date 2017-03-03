@@ -39,15 +39,17 @@ export default class ResourceViewerWrapper extends PureComponent {
     [...markerNodes].forEach((markerNode) => {
       const annotationId = markerNode.getAttribute('data-annotation-resource');
       const annotation = this.props.annotations.find((a) => a.id === annotationId);
-      const resourceId = annotation.attributes.resourceId;
-      const rect = markerNode.getBoundingClientRect();
-      markers.push({
-        annotationId,
-        resourceId,
-        rect: {
-          top: rect.top + document.body.scrollTop
-        }
-      });
+      if (annotation) {
+        const resourceId = annotation.attributes.resourceId;
+        const rect = markerNode.getBoundingClientRect();
+        markers.push({
+          annotationId,
+          resourceId,
+          rect: {
+            top: rect.top + document.body.scrollTop
+          }
+        });
+      }
     });
     return markers;
   }

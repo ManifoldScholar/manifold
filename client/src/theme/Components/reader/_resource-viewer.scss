@@ -29,13 +29,14 @@
 
     .resource-single-link {
       display: block;
+      text-decoration: none;
 
       .image-overlay {
         background-color: $accentPrimary;
         opacity: 0;
       }
 
-      &:hover, &.highlighted, .highlighted {
+      &:hover, &.highlighted, .highlighted & {
         .resource-title {
           color: $accentPrimary;
         }
@@ -64,6 +65,7 @@
     display: block;
     width: 100%;
     height: 100%;
+    pointer-events: none;
     content: '';
     box-shadow: inset 0 -14px 10px -2px $neutralWhite;
     transition: box-shadow $duration $timing;
@@ -75,11 +77,9 @@
 }
 
 .resource-preview-single {
-  @include resourceOverflowFade;
   position: absolute;
   right: 0;
   width: 160px;
-  overflow: hidden;
   text-decoration: none;
   transition: right 0.5s $timing 0.1s,
     opacity 0.5s $timing;
@@ -94,6 +94,24 @@
     opacity: 1;
   }
 
+  &.highlight-enter {
+    opacity: 0.01;
+  }
+
+  &.highlight-enter-active {
+    opacity: 1;
+    transition: opacity $duration $timing;
+  }
+
+  &.highlight-leave {
+    opacity: 1;
+  }
+
+  &.highlight-leave-active {
+    opacity: 0.01;
+    transition: opacity $duration $timing;
+  }
+
   .resource-viewer .viewer-list &.highlighted {
     .resource-title {
       color: $accentPrimary;
@@ -101,6 +119,33 @@
 
     .image-overlay {
       opacity: 0.5;
+    }
+  }
+
+  .resource-preview-overflow {
+    @include resourceOverflowFade;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .resource-delete {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 0;
+    right: 0;
+    // Local z-index
+    z-index: 10;
+    width: 17px;
+    height: 17px;
+    padding-top: 2px;
+    font-size: 11px;
+    color: $neutralOffBlack;
+    cursor: pointer;
+    background-color: $neutral40;
+    transition: background-color $duration $timing;
+
+    &:hover {
+      background-color: $sp30Tertiary;
     }
   }
 }
@@ -146,9 +191,10 @@
 
     .group-thumbnail {
       position: relative;
+      cursor: pointer;
 
       &.highlighted {
-        .resource-thumbnail::before {
+        .resource-thumbnail-primary::before {
           opacity: 0.5;
         }
 
@@ -172,28 +218,12 @@
   .group-highlighted-resource {
     position: absolute;
 
-    &.highlight-enter {
-      opacity: 0.01;
-    }
-
-    &.highlight-enter-active {
-      opacity: 1;
-      transition: opacity $duration $timing;
-    }
-
-    &.highlight-leave {
-      opacity: 1;
-    }
-
-    &.highlight-leave-active {
-      opacity: 0.01;
-      transition: opacity $duration $timing;
-    }
-
     .resource-preview-single {
       position: static;
       display: inline-block;
       width: 160px;
+
+
     }
   }
 }
