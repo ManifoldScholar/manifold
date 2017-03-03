@@ -3,6 +3,7 @@ import { throttle } from 'lodash';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import { closest } from 'utils/domUtils';
+import HigherOrder from 'containers/global/HigherOrder';
 
 export default class AnnotationPopup extends Component {
 
@@ -144,8 +145,6 @@ export default class AnnotationPopup extends Component {
       'tail-up': this.state.direction === 'down',
     });
 
-    const isAdmin = get(this.props.currentUser, "attributes.role") === "admin";
-
     return (
       <div className={popupClass}
         ref={(a) => { this.popupEl = a; }}
@@ -154,12 +153,12 @@ export default class AnnotationPopup extends Component {
           left: this.state.left
         }}
       >
-        { isAdmin ?
+        <HigherOrder.RequireRole requiredRole="admin">
           <button onClick={this.props.attachResource}>
             <i className="manicon manicon-cube-shine"></i>
             Resource
           </button>
-        : null }
+        </HigherOrder.RequireRole>
         <button onClick={this.props.highlight}>
           <i className="manicon manicon-pencil-simple"></i>
           Highlight
