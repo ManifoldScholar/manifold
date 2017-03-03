@@ -40,6 +40,7 @@ export default {
   rResources: 'reader-resources',
   rResource: 'reader-resource',
   rAnnotationCreate: 'reader-annotation-create',
+  feResourceAnnotationDestroy: 'reader-resource-annotation-destroy',
   gAuthenticatedUserUpdate: 'global-authenticated-user-update',
   gPages: 'global-pages',
   gPage: 'global-page',

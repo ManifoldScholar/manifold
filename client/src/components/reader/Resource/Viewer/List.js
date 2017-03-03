@@ -1,5 +1,4 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
 import Single from './Single';
 import Group from './Group';
 
@@ -91,17 +90,13 @@ export default class ResourceViewerList extends PureComponent {
                   textId={textId}
                   sectionId={sectionId}
                 /> :
-                <Link
-                  className="resource-single-link"
-                  to={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
-                >
-                  <Single
-                    annotationId={item.annotationId}
-                    resource={item.resource}
-                    location={item.location}
-                    height={this.resourceHeight}
-                  />
-                </Link>
+                <Single
+                  annotationId={item.annotationId}
+                  resource={item.resource}
+                  location={item.location}
+                  height={this.resourceHeight}
+                  link={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
+                />
               }
             </li>
           );

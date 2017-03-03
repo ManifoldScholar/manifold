@@ -49,7 +49,7 @@ export default class ResourceThumbnail extends Component {
     const hasImage = this.hasImage(resource);
 
     const wrapperClass = classNames({
-      'resource-thumbnail': true,
+      'resource-thumbnail-primary': true,
       'bg-image': hasImage && !this.props.noCrop,
       title: this.props.showTitle
     });

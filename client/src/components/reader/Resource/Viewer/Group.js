@@ -140,19 +140,14 @@ export class ResourceViewerGroup extends PureComponent {
             transitionEnterTimeout={200}
             transitionLeaveTimeout={200}
           >
-            <Link
-              to={`/read/${textId}/section/${sectionId}/resource/${highlightedItem.resource.id}`}
-              className={highlightedLinkClass}
-              title={highlightedItem.resource.id}
+            <Single
+              annotationId={highlightedItem.annotationId}
+              resource={highlightedItem.resource}
+              height={this.props.singleHeight}
+              fadeIn={false}
+              link={`/read/${textId}/section/${sectionId}/resource/${highlightedItem.resource.id}`}
               key={highlightedItem.resource.id}
-            >
-              <Single
-                resource={highlightedItem.resource}
-                annotationId={highlightedItem.annotationId}
-                height={this.props.singleHeight}
-                fadeIn={false}
-              />
-            </Link>
+            />
           </ReactCSSTransitionGroup>
         </div>
 
