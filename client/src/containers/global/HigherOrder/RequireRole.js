@@ -14,7 +14,10 @@ class RequireRole extends PureComponent {
   static propTypes = {
     requiredRole: PropTypes.string.isRequired,
     redirect: PropTypes.string,
-    children: PropTypes.object
+    children: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array
+    ]),
   };
 
   isAuthenticated(props) {
@@ -31,7 +34,7 @@ class RequireRole extends PureComponent {
   }
 
   user(props) {
-    return props.authentication.currentUser();
+    return props.authentication.currentUser;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,7 +48,7 @@ class RequireRole extends PureComponent {
   roleMatch(props) {
     if (!this.isAuthenticated(props)) return false;
     if (props.requiredRole === "any" && this.isAuthenticated(props)) return true;
-    return (props.requiredRole === this.user().attributes.role);
+    return (props.requiredRole === this.user(props).attributes.role);
   }
 
   render() {
