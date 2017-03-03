@@ -10,12 +10,14 @@ export default class ResourceDetail extends Component {
   static propTypes = {
     projectId: PropTypes.string,
     projectUrl: PropTypes.string,
+    resourceUrl: PropTypes.string.required,
     resource: PropTypes.object
   };
 
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
+    const resourceUrl = `${this.props.resourceUrl}/${resource.id}`
 
     return (
       <div>
@@ -35,14 +37,7 @@ export default class ResourceDetail extends Component {
                   View in Text <i className="manicon manicon-arrow-right"></i>
                 </Link>
                 */}
-                {/*
-                  Todo: shareBar should be passed a url string that
-                  contains the current url, composed of the projcet and
-                  resource url.
-                */}
-                {/* remove these break tags when the share bare is restored */}
-                <br /><br />
-                {/* <Utility.ShareBar url={url}/> */}
+                 <Utility.ShareBar url={resourceUrl}/>
                 <Resource.Meta
                   resource={resource}
                   style={'secondary'}

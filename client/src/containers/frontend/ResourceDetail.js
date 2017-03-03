@@ -45,6 +45,11 @@ class ResourceDetailContainer extends PureComponent {
     return `/browse/project/${pid}/resources`;
   }
 
+  resourceUrl() {
+    const pid = this.props.project.id;
+    return `/browse/project/${pid}/resource`;
+  }
+
   render() {
     const projectId = this.props.project ? this.props.project.id : null;
     if (!projectId) return null;
@@ -61,6 +66,7 @@ class ResourceDetailContainer extends PureComponent {
           <Resource.Detail
             projectId={projectId}
             projectUrl={this.projectUrl()}
+            resourceUrl={this.resourceUrl()}
             resource={this.props.resource}
           /> : null
         }

@@ -107,7 +107,11 @@ class CollectionDetailContainer extends PureComponent {
   render() {
     const project = this.props.project;
     const collection = this.props.collection;
-    if (!project && !collection) return null;
+
+    if (!project || !collection) return null;
+
+    const collectionUrl = `/browse/project/${project.id}/collection/${collection.id}`;
+
     return (
       <div>
         <Utility.BackLinkPrimary
@@ -124,6 +128,7 @@ class CollectionDetailContainer extends PureComponent {
             collectionPagination={this.props.resourcesMeta.pagination}
             collectionPaginationHandler={this.pageChangeHandlerCreator}
             collection={this.props.collection}
+            collectionUrl={collectionUrl}
             filterChange={this.filterChange}
           />
         : null }
