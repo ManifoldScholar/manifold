@@ -5,7 +5,7 @@
   max-width: 90vw;
   padding: 20px 0 100px;
   overflow-y: scroll;
-  background-color: $accentPrimaryOffWhite;
+  background-color: $neutral05;
   transition: left $duration $timing;
 
   @include respond($break50) {
@@ -23,9 +23,13 @@
   // Scoped table of contents styles, some may be abstracted later
   // <nav> around nested uls
   @mixin tocBasePadding($nested: 0) {
-    padding-left: 48px + $nested;
+    padding-left: 30px + $nested;
 
-    @include respond($break50) {
+    @include respond($break30) {
+      padding-left: calc(7.813vw + #{$nested}px);
+    }
+
+    @include respond($break95) {
       padding-left: 80px + $nested;
     }
   }
@@ -46,23 +50,32 @@
       text-decoration: none;
 
       &:hover {
-        color: $accentPrimaryDark;
+        color: $accentPrimaryMedium;
         background-color: $neutral10;
       }
     }
 
     // Multi level lists have borders on top level links
     &.multi-level > ul > li > a {
+      padding-top: 1.5em;
       border-bottom: 1px solid $neutral40;
+
+      // Except on hover
+      &:hover {
+        margin-top: -1px;
+        // Pop above the border above it as well
+        border-top: 1px solid $neutral10;
+        border-color: $neutral10;
+      }
     }
 
     // Top Level links
     > ul > li {
       > a {
         @include tocBasePadding();
-        padding-top: 1.363em;
+        padding-top: 0.6em;
         padding-right: 3.068em;
-        padding-bottom: 0.363em;
+        padding-bottom: 0.556em;
         font-size: 18px;
 
         @include respond($break50) {
@@ -74,9 +87,9 @@
         // Secondary level globals
         a {
           @include tocBasePadding();
-          padding-top: 0.813em;
+          padding-top: 0.8em;
           padding-right: 3.068em;
-          padding-bottom: 0.438em;
+          padding-bottom: 0.7em;
           font-size: 14px;
 
           @include respond($break50) {
@@ -103,15 +116,31 @@
     }
   }
 
-  .manicon-manifold-logo {
+  .toc-footer {
     @include tocBasePadding();
     display: block;
-    padding-top: 65px;
-    font-size: 45px;
-    color: $neutral10;
+    padding-top: 35px;
 
     @include respond($break50) {
-      padding-top: 75px;
+      padding-top: 56.25px;
+    }
+
+    a:hover {
+      background-color: transparent; // OD
+    }
+
+    h4 {
+      @include templateHead;
+      font-size: 19px;
+      font-weight: $regular;
+
+      i {
+        display: inline-block;
+        margin-top: -3px;
+        margin-right: 16px;
+        font-size: 26px;
+        vertical-align: middle;
+      }
     }
   }
 }
