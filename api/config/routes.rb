@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       resources :pages
       resources :subjects
       resources :categories, except: [:create, :index]
+      resources :annotations,
+                only: [:show, :destroy],
+                controller: "text_sections/relationships/annotations"
       resources :makers
       resources :resources
       resources :texts
@@ -27,8 +30,8 @@ Rails.application.routes.draw do
       resources :text_sections, only: [:show] do
         scope module: :text_sections do
           namespace :relationships do
-            resources :annotations, only: [:index, :create]
-            resources :resources, only: [:index]
+            resources :annotations, only: [:index, :create, :update]
+            resources :resources, only: [:index, :create, :update]
           end
         end
       end
