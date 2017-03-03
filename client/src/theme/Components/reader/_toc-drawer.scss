@@ -5,6 +5,7 @@
   max-width: 90vw;
   padding: 20px 0 100px;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: auto;
   background-color: $neutral05;
   transition: left $duration $timing;
 
