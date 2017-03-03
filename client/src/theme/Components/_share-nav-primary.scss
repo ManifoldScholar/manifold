@@ -16,7 +16,8 @@
       vertical-align: middle;
     }
 
-    a {
+    a, button {
+      @include buttonUnstyled;
       color: $neutral40;
       text-decoration: none;
       transition: color $duration $timing;
