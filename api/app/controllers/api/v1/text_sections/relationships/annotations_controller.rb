@@ -8,7 +8,7 @@ module Api
           before_action :set_text_section, only: [:create, :index]
 
           resourceful! Annotation, authorize_options: { except: [:index] } do
-            @text_section.annotations
+            @text_section.nil? ? Annotation : @text_section.annotations
           end
 
           def index
@@ -27,6 +27,11 @@ module Api
               text_section_id: @text_section.id
             )
             render_single_resource @annotation, location: location
+          end
+
+          def destroy
+            @annotation = load_and_authorize_annotation
+            @annotation.destroy
           end
 
           private
