@@ -27,8 +27,23 @@
     padding: 33px 70px;
   }
 
-  &.drawer-appear, &.drawer-leave {
+  // Can handle nested appear state, or secondary class state
+  .drawer-enter & {
     right: -555px;
+  }
+
+  .drawer-enter.drawer-enter-active & {
+    right: 0;
+    transition: right $duration $timing;
+  }
+
+  .drawer-leave & {
+    right: 0;
+  }
+
+  .drawer-leave.drawer-leave-active & {
+    right: -555px;
+    transition: right $duration $timing;
   }
 
   .reader & {

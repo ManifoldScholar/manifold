@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Link } from 'react-router';
+import Utility from 'components/global/Utility';
 
 export default class DrawerWrapper extends PureComponent {
 
@@ -9,7 +10,12 @@ export default class DrawerWrapper extends PureComponent {
 
   static propTypes = {
     closeUrl: PropTypes.string,
-    closeCallback: PropTypes.func
+    closeCallback: PropTypes.func,
+    lockScroll: PropTypes.bool
+  };
+
+  static defaultProps = {
+    lockScroll: true
   };
 
   constructor(props) {
@@ -57,36 +63,40 @@ export default class DrawerWrapper extends PureComponent {
     }
   }
 
+  renderDrawer() {
+    return (
+      <div key="drawer" className="drawer-primary">
+        <div className="rel">
+          <div onClick={this.handleLeaveEvent} className="close-button-primary">
+            <i className="manicon manicon-x"></i>
+            <span className="screen-reader-text">
+              Close Drawer
+            </span>
+          </div>
+          {this.props.children}
+        </div>
+      </div>
+    );
+  }
+
+  renderDrawerWrapper() {
+    return this.props.lockScroll ? (
+      <Utility.ScrollLock>
+        {this.renderDrawer()}
+      </Utility.ScrollLock>
+    ) : this.renderDrawer();
+  }
+
   render() {
     return (
       <ReactCSSTransitionGroup
         transitionName="drawer"
         // True value required to enable transform
-        /* eslint-disable */
-        transitionAppear={true}
-        /* eslint-enable */
-        transitionEnter={false}
-        transitionAppearTimeout={1}
+        transitionEnterTimeout={5000}
         transitionLeaveTimeout={200}
       >
-        {this.state.leaving ?
-          null
-          :
-          <div key="drawer" className="drawer-primary drawer-appear">
-            <div className="rel">
-              <div onClick={this.handleLeaveEvent} className="close-button-primary">
-                <i className="manicon manicon-x"></i>
-                <span className="screen-reader-text">
-                  Close Drawer
-                </span>
-              </div>
-
-              {this.props.children}
-            </div>
-          </div>
-        }
+        { this.state.leaving ? null : this.renderDrawerWrapper() }
       </ReactCSSTransitionGroup>
     );
   }
-
 }
