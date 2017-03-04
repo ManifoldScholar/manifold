@@ -14,6 +14,9 @@ class Text < ApplicationRecord
   include Collaborative
   include TrackedCreator
 
+  # Magic
+  merge_hash_attributes! :metadata
+
   # Fields
   serialize :structure_titles, Hash
   serialize :toc, Array
