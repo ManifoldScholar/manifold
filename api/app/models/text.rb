@@ -13,6 +13,10 @@ class Text < ApplicationRecord
   extend Memoist
   include Collaborative
   include TrackedCreator
+  include HashAttributes
+
+  # Magic
+  merge_hash_attributes! :metadata
 
   # Fields
   serialize :structure_titles, Hash

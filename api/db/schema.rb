@@ -332,6 +332,7 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.uuid     "start_text_section_id"
     t.integer  "position"
     t.string   "spine",                 default: [],              array: true
+    t.jsonb    "metadata",              default: {}
   end
 
   create_table "user_claims", force: :cascade do |t|
