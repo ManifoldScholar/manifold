@@ -85,6 +85,7 @@ module Importer
     end
 
     def import_resource(row, count)
+      return if TRUTHY_VALUES.include?(row["Skip"])
       @logger.info "Importing row: \"#{row['Title']}\""
       resource = find_or_initialize_resource(fingerprint(row))
       resource.creator = @creator
