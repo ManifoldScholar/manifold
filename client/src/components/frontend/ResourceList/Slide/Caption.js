@@ -61,9 +61,10 @@ export default class ResourceSlideCaption extends Component {
     return (
       <div className="slide-caption">
         <header>
-          <h2 className="resource-title">
-            {attr.title}
-          </h2>
+          <h2
+            className="resource-title"
+            dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
+          />
         </header>
         <VelocityComponent {...animation}>
           <div className="resource-description" ref={ (c) => {

@@ -18,6 +18,7 @@ class Resource < ApplicationRecord
   # Concerns
   include TrackedCreator
   include Filterable
+  include WithMarkdown
 
   # Associations
   belongs_to :project
@@ -87,8 +88,24 @@ class Resource < ApplicationRecord
   # Callbacks
   before_validation :update_kind
   before_save :update_tags
+  before_save :update_title_formatted
+  before_save :update_caption_formatted
+  before_save :update_description_formatted
+
   def update_kind
     self.kind = determine_kind if kind.blank?
+  end
+
+  def update_title_formatted
+    self.title_formatted = render_simple_markdown(title)
+  end
+
+  def update_caption_formatted
+    self.caption_formatted = render_simple_markdown(caption)
+  end
+
+  def update_description_formatted
+    self.description_formatted = render_simple_markdown(description)
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity

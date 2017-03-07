@@ -23,6 +23,26 @@ RSpec.describe Resource, type: :model do
     expect(resource.tag_list.count).to eq(3)
   end
 
+  describe "formats some fields with a markdown subset" do
+    let(:raw) { "_italic_ a **bold**"}
+    let(:formatted) { "<em>italic</em> a <strong>bold</strong>"}
+
+    it "has a formatted title after save" do
+      resource = FactoryGirl.create(:resource, title: raw)
+      expect(resource.title_formatted).to eq (formatted)
+    end
+
+    it "has a formatted caption after save" do
+      resource = FactoryGirl.create(:resource, caption: raw)
+      expect(resource.caption_formatted).to eq (formatted)
+    end
+
+    it "has a formatted description after save" do
+      resource = FactoryGirl.create(:resource, description: raw)
+      expect(resource.description_formatted).to eq (formatted)
+    end
+  end
+
   it { is_expected.to have_attached_file(:attachment) }
 
   context "can be filtered" do

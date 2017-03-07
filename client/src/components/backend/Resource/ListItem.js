@@ -30,7 +30,9 @@ export default class ResourceListItem extends PureComponent {
             </figure>
             <div className="meta">
               <h3 className="name">
-                {attr.title}
+                <span
+                  dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
+                />
                 <span className="subtitle">
                   <FormattedDate
                     format="MMMM DD, YYYY"

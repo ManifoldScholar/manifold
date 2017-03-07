@@ -81,9 +81,10 @@ export default class ResourceThumbnail extends Component {
             }
           </figure>
           { this.props.showTitle ?
-            <h4 className="resource-title">
-              {resource.attributes.title}
-            </h4>
+            <h4
+              className="resource-title"
+              dangerouslySetInnerHTML={{ __html: resource.attributes.titleFormatted }}
+            />
           : null }
         </div>
       </div>
