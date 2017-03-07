@@ -30,9 +30,11 @@ export default class ResourceDetail extends Component {
             <div className="container flush-top">
               <aside>
                 <Resource.Link attributes={attr}/>
+                {/*
                 <Link to="#" className="button-primary">
                   View in Text <i className="manicon manicon-arrow-right"></i>
                 </Link>
+                */}
                 {/*
                   Todo: shareBar should be passed a url string that
                   contains the current url, composed of the projcet and
