@@ -54,7 +54,9 @@ export default class ResourceCollectionDetail extends PureComponent {
                 {attr.description}
               </p>
             </div>
-            <Utility.ShareBar/>
+            {/*
+             <Utility.ShareBar/>
+            */}
           </div>
           <ResourceList.Slideshow
             collectionId={this.props.collection.id}
