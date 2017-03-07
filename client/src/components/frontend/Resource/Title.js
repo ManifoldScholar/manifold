@@ -29,9 +29,7 @@ export default class ResourceTitle extends Component {
           </figure> : null
         }
         <div>
-          <h1>
-            {attr.title}
-          </h1>
+          <h1 dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />
           {this.props.showDate ?
             <span className="resource-date">
               {'Resource added '}

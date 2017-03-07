@@ -4,7 +4,7 @@ class ResourceSerializer < ResourcePartialSerializer
 
   attributes :title, :kind, :attachment_url, :attachment_file_name, :attachment_extension,
              :attachment_content_type, :attachment_file_size, :attachment_updated_at,
-             :created_at, :updated_at, :project_id,
+             :created_at, :updated_at, :project_id, :description_formatted,
              :caption, :description, :downloadable, :fingerprint, :alt_text, :keywords,
              :copyright_status, :copyright_holder, :credit, :external_url, :external_id,
              :external_type, :allow_high_res, :allow_download, :doi, :high_res_file_name,

@@ -242,9 +242,7 @@ export default class ResourceCard extends Component {
             <header
               className="resource-title"
             >
-              <h4>
-                {attr.title}
-              </h4>
+              <h4 dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />
             </header>
             <span className="resource-date">
               <FormattedDate
