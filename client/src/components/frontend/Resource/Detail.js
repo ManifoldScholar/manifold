@@ -40,6 +40,8 @@ export default class ResourceDetail extends Component {
                   contains the current url, composed of the projcet and
                   resource url.
                 */}
+                {/* remove these break tags when the share bare is restored */}
+                <br /><br />
                 {/* <Utility.ShareBar url={url}/> */}
                 <Resource.Meta
                   resource={resource}
@@ -56,7 +58,9 @@ export default class ResourceDetail extends Component {
                   Full Description
                 </h3>
                 <p>
-                  {attr.description}
+                  {attr.descriptionFormatted ?
+                    attr.descriptionFormatted
+                  : "No description provided."}
                 </p>
               </div>
               <div className="resource-meta-mobile">
