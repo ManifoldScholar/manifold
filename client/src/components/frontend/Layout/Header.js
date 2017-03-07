@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {
     HeaderNotifications,
-    HigherOrder,
     SearchMenuBody,
     SearchMenuButton,
     UIPanel,
@@ -12,6 +11,7 @@ import {
 import { Link } from 'react-router';
 import startsWith from 'lodash/startsWith';
 import get from 'lodash/get';
+import HigherOrder from 'containers/global/HigherOrder';
 
 export default class LayoutHeader extends Component {
 
@@ -55,14 +55,14 @@ export default class LayoutHeader extends Component {
 
           <nav className="menu-dropdowns">
             <ul>
-              {
-                this.props.authentication.authenticated ?
-                  <li>
-                    <Link className="button-mode" to={`/backend/`}>
-                      Admin Mode
-                    </Link>
-                  </li> : null
-              }
+              <HigherOrder.RequireRole requiredRole="admin">
+                <li>
+                  <Link className="button-mode" to={`/backend/`}>
+                    Admin Mode
+                  </Link>
+                </li>
+              </HigherOrder.RequireRole>
+
               {/*
                 Hiding search markup until functionality is available
                 <li>
