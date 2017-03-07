@@ -125,6 +125,10 @@ class Resource < ApplicationRecord
     Rails.configuration.manifold.api_url + attachment.url
   end
 
+  def attachment_extension
+    File.extname(attachment_file_name).delete(".") if attachment.present?
+  end
+
   def attachment_thumbnails
     is_image = attachment_is_image?
     styles = ATTACHMENT_STYLES.keys.map do |style|
