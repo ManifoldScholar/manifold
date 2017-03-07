@@ -3,6 +3,8 @@ class Resource < ApplicationRecord
 
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
+  ALLOWED_KINDS = %w(image video audio link pdf document file spreadsheet presentation
+                     interactive).freeze
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
@@ -57,6 +59,7 @@ class Resource < ApplicationRecord
 
   # Validation
   validates :title, presence: true
+  validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
 
   # Scopes
   scope :by_project, lambda { |project|
@@ -82,7 +85,29 @@ class Resource < ApplicationRecord
   }
 
   # Callbacks
+  before_validation :update_kind
   before_save :update_tags
+  def update_kind
+    self.kind = determine_kind if kind.blank?
+  end
+
+  # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/CyclomaticComplexity
+  def determine_kind
+    ext = attachment_extension
+    return :image if attachment_is_image?
+    return :pdf if ext == "pdf"
+    return :document if %w(doc docx text).include?(ext)
+    return :spreadsheet if %w(xls xlsx).include?(ext)
+    return :presentation if %w(ppt pptx).include?(ext)
+    return :video if %w(mp4 webm).include?(ext)
+    return :video if %w(youtube vimeo).include?(external_type)
+    return :audio if ["mp3"].include?(ext)
+    return :link if !attachment.present? && !external_url.blank?
+    :file
+  end
+  # rubocop:enable Metrics/AbcSize, Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   def update_tags
     return unless keywords
@@ -126,7 +151,7 @@ class Resource < ApplicationRecord
   end
 
   def attachment_extension
-    File.extname(attachment_file_name).delete(".") if attachment.present?
+    File.extname(attachment_file_name).delete(".").downcase if attachment.present?
   end
 
   def attachment_thumbnails
