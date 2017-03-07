@@ -9,17 +9,37 @@ module Importer
   # rubocop:disable ClassLength
   class DriveResources
 
-    REQUIRED_RESOURCE_COLUMNS = %w(title attachment).freeze
-    REQUIRED_COLLECTION_COLUMNS = %w(title thumbnail).freeze
-    COLLECTION_SIMPLE_ATTRIBUTES = %w(title description).freeze
-    COLLECTION_BOOLEAN_ATTRIBUTES = %w().freeze
-    COLLECTION_ATTACHMENT_ATTRIBUTES = %w(thumbnail).freeze
-    RESOURCE_SIMPLE_ATTRIBUTES = %w(
-      title kind caption description alt_text keywords copyright_status copyright_holder
-      credit external_url external_type external_id
-    ).freeze
-    RESOURCE_BOOLEAN_ATTRIBUTES = %w(allow_high_res allow_download).freeze
-    RESOURCE_ATTACHMENT_ATTRIBUTES = %w(attachment high_res transcript).freeze
+    REQUIRED_RESOURCE_COLUMNS = %w(Title Filename).freeze
+    REQUIRED_COLLECTION_COLUMNS = %w(Title Thumbnail).freeze
+    COLLECTION_SIMPLE_ATTRIBUTES = {
+      "Title" => :title,
+      "Description" => :description
+    }.freeze
+
+    COLLECTION_BOOLEAN_ATTRIBUTES = {}.freeze
+    COLLECTION_ATTACHMENT_ATTRIBUTES = %w(Thumbnail).freeze
+    RESOURCE_SIMPLE_ATTRIBUTES = {
+      "Title" => :title,
+      "Copyright Status" => :copyright_status,
+      "Copyright Holder" => :copyright_holder,
+      "Credit Line" => :credit,
+      "Keywords" => :keywords,
+      "Caption" => :caption,
+      "Description" => :description,
+      "Alt-Text" => :alt_text,
+      "URL" => :external_url,
+      "Host Name" => :external_type,
+      "File ID" => :external_id
+    }.freeze
+    RESOURCE_BOOLEAN_ATTRIBUTES = {
+      "Allow High-Res Download" => :allow_high_res
+    }.freeze
+    RESOURCE_ATTACHMENT_ATTRIBUTES = {
+      "Filename" => :attachment,
+      "High Res" => :high_res,
+      "Transcript" => :transcript
+    }.freeze
+
     TRUTHY_VALUES = %w(true TRUE True 1 y yes Yes YES T).freeze
 
     def initialize(project_id, sheet_id, drive_folder_id, creator, logger = Rails.logger)
@@ -35,14 +55,14 @@ module Importer
       @logger.info "Importing resources for project: #{@project.title}"
       begin
         pre_import_validation
-        collections_sheet.list.each do |row|
+        Helpers::List.new(collections_sheet).each do |row|
           import_collection(row)
         end
-        resources_sheet.list.each do |row, count|
+        Helpers::List.new(resources_sheet).each do |row, count|
           import_resource(row, count)
         end
       rescue ImportDriveResourcesError
-        @logger.fatal("Failed to import resources for #{@project.title} [#{@project.id}]")
+        @logger.error("Failed to import resources for #{@project.title} [#{@project.id}]")
       end
     end
 
@@ -55,7 +75,7 @@ module Importer
     end
 
     def import_collection(row)
-      @logger.info "Importing collection: \"#{row[:title]}\""
+      @logger.info "Importing collection: \"#{row['Title']}\""
       collection = find_or_initialize_collection(fingerprint(row))
       update_simple_attributes(collection, row, COLLECTION_SIMPLE_ATTRIBUTES)
       update_boolean_attributes(collection, row, COLLECTION_BOOLEAN_ATTRIBUTES)
@@ -65,7 +85,7 @@ module Importer
     end
 
     def import_resource(row, count)
-      @logger.info "Importing row: \"#{row[:title]}\""
+      @logger.info "Importing row: \"#{row['Title']}\""
       resource = find_or_initialize_resource(fingerprint(row))
       resource.creator = @creator
       update_simple_attributes(resource, row, RESOURCE_SIMPLE_ATTRIBUTES)
@@ -74,15 +94,15 @@ module Importer
       create_tag_list(resource, row)
       if resource.valid?
         resource.save
-        add_resource_to_collection(resource, row[:collection], count)
+        add_resource_to_collection(resource, row["Collection"], count)
         return
       end
       @logger.log_model_errors(resource)
     end
 
     def create_tag_list(resource, row)
-      return unless row["keywords"]
-      resource.tag_list.add(row["keywords"], parse: true)
+      return unless row["Keywords"]
+      resource.tag_list.add(row["Keywords"], parse: true)
     end
 
     def add_resource_to_collection(resource, collection_title, count)
@@ -120,20 +140,20 @@ module Importer
     end
 
     def update_attachment_attributes(model, row, attachment_attributes)
-      attachment_attributes.each do |attr|
+      attachment_attributes.each do |sheet_attr, model_attr|
         begin
-          import_model_attachment(model, attr, row[attr])
+          import_model_attachment(model, model_attr, row[sheet_attr])
         rescue Google::Apis::TransmissionError
-          @logger.warn "    Caught Google::Apis::TransmissinoError. Trying again"
-          import_model_attachment(model, attr, row[attr])
+          @logger.warn "    Caught Google::Apis::TransmissionError. Trying again"
+          import_model_attachment(model, model_attr, row[sheet_attr])
         end
       end
     end
 
     def update_boolean_attributes(model, row, boolean_attributes)
-      boolean_attributes.each do |boolean_attr|
-        value = TRUTHY_VALUES.include?(row[boolean_attr]) ? true : false
-        model.send("#{boolean_attr}=", value)
+      boolean_attributes.each do |sheet_attr, model_attr|
+        value = TRUTHY_VALUES.include?(row[sheet_attr]) ? true : false
+        model.send("#{model_attr}=", value)
       end
     end
 
@@ -185,13 +205,13 @@ module Importer
     end
 
     def simple_attributes_from_row(row, attr_list)
-      row.select do |col, _val|
-        attr_list.include?(col)
+      attr_list.each_with_object({}) do |pair, out|
+        out[pair[1]] = row[pair[0]]
       end
     end
 
     def fingerprint(row)
-      candidates = %w(local_id attachment external_url title)
+      candidates = ["Local ID", "Filename", "URL", "Title"]
       field = candidates.detect do |candidate|
         row.key?(candidate) && !row[candidate].blank?
       end
@@ -203,7 +223,7 @@ module Importer
     def validate_resources_sheet
       raise_missing_sheet_error("resources") if resources_sheet.nil?
       raise_missing_column_error(resources_sheet) unless
-        (REQUIRED_RESOURCE_COLUMNS - resources_sheet.list.keys).blank?
+        (REQUIRED_RESOURCE_COLUMNS - Helpers::List.new(resources_sheet).keys).blank?
     end
 
     def validate_spreadsheet
@@ -213,7 +233,7 @@ module Importer
     def validate_collections_sheet
       raise_missing_sheet_error("collections") if collections_sheet.nil?
       raise_missing_column_error(collections_sheet) unless
-        (REQUIRED_COLLECTION_COLUMNS - collections_sheet.list.keys).blank?
+        (REQUIRED_COLLECTION_COLUMNS - Helpers::List.new(collections_sheet).keys).blank?
     end
 
     def find_or_initialize_resource(fingerprint)
@@ -248,7 +268,7 @@ module Importer
 
     def raise_missing_column_error(ws)
       # rubocop:disable LineLength
-      msg = "\"#{ws.title}\" sheet in \"#{ws.spreadsheet.title}\" is missing required column(s): #{(REQUIRED_RESOURCE_COLUMNS - ws.list.keys).join(', ')}"
+      msg = "\"#{ws.title}\" sheet in \"#{ws.spreadsheet.title}\" is missing required column(s): #{(REQUIRED_RESOURCE_COLUMNS - Helpers::List.new(ws).keys).join(', ')}"
       # rubocop:enable LineLength
       @logger.error(Rainbow(msg).red)
       raise ImportDriveResourcesError
@@ -269,11 +289,11 @@ module Importer
     end
 
     def resources_sheet
-      @resources_sheet ||= spreadsheet.worksheet_by_title("resources")
+      @resources_sheet ||= spreadsheet.worksheet_by_title("Resource Metadata")
     end
 
     def collections_sheet
-      @collections_sheet ||= spreadsheet.worksheet_by_title("collections")
+      @collections_sheet ||= spreadsheet.worksheet_by_title("Collection Metadata")
     end
 
     def session
