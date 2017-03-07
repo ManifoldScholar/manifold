@@ -33,8 +33,8 @@ module Importer
         # rubocop:enable LineLength
       end
 
-      def log_missing_file(_filename)
-        @logger.error(Rainbow("    Unable to locate drive file: #{value}").red)
+      def log_missing_file(filename)
+        @logger.error(Rainbow("    Unable to locate drive file: #{filename}").red)
         nil
       end
 

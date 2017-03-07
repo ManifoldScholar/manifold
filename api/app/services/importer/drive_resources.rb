@@ -17,7 +17,10 @@ module Importer
     }.freeze
 
     COLLECTION_BOOLEAN_ATTRIBUTES = {}.freeze
-    COLLECTION_ATTACHMENT_ATTRIBUTES = %w(Thumbnail).freeze
+    COLLECTION_ATTACHMENT_ATTRIBUTES = {
+      "Thumbnail" => :thumbnail,
+    }.freeze
+
     RESOURCE_SIMPLE_ATTRIBUTES = {
       "Title" => :title,
       "Copyright Status" => :copyright_status,
@@ -195,12 +198,14 @@ module Importer
 
     def file_ok?(file)
       return true unless file.nil?
-      @logger.log_missing_file
+      @logger.log_missing_file(file)
       false
     end
 
     def already_downloaded?(file, model, key)
-      return false if file.md5_checksum != model.send("#{key}_checksum")
+      method = "#{key}_checksum"
+      return false unless model.respond_to? method
+      return false if file.md5_checksum != model.send(method)
       @logger.log_unchanged_file(file)
       true
     end
