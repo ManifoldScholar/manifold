@@ -16,8 +16,8 @@ module Ingestor
 
           def name
             name = guess_name_from_toc.presence ||
-                   guess_name_from_title.presence ||
-                   guess_name_from_headers.presence
+                   guess_name_from_headers.presence ||
+                   guess_name_from_title.presence
             name
           end
 
