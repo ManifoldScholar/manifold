@@ -1,0 +1,60 @@
+.drawer-frontend {
+  position: fixed;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: scroll;
+  background-color: $neutral05;
+  transition: right $duration $timing;
+
+  @include respond($break40) {
+    top: 80px;
+  }
+
+  @include respond($break75) {
+    width: 70vw;
+  }
+
+  @include respond($break100) {
+    width: 850px;
+  }
+
+  @include respond($break100 + (500 * 2)) {
+    width: calc((100vw - #{$containerWidthInner})/2);
+    padding: 33px 70px;
+  }
+
+
+  &.drawer-appear, &.drawer-leave {
+    right: -555px;
+  }
+
+  .reader & {
+    top: 0;
+  }
+
+  .rel {
+    padding-top: 91px;
+  }
+
+  .close-button-primary {
+    @include templateHead;
+    @include drawerPadding(right, 'heavy');
+    position: absolute;
+    top: 31px;
+    font-size: 17px;
+    letter-spacing: 0.015em;
+    transition: color $duration $timing;
+
+    &:hover {
+      color: $neutral75;
+    }
+
+    .manicon {
+      margin-left: 25px;
+      font-size: 31px;
+      vertical-align: middle;
+    }
+  }
+}

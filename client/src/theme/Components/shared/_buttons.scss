@@ -47,10 +47,21 @@
   display: inline-block;
   padding: 9px 23px 10px;
   color: $neutral80;
+  text-align: center;
   text-decoration: none;
   border: 2px solid $accentPrimary;
   transition: background-color $duration $timing,
     color $duration $timing;
+
+  &.dull {
+    color: $neutral50;
+    border-color: $neutral50;
+
+    &:hover {
+      color: $neutralWhite;
+      background-color: $neutral50;
+    }
+  }
 
   &:hover {
     color: $neutralWhite;
@@ -192,6 +203,10 @@
 
   @include respond($break60) {
     font-size: 14px;
+  }
+
+  &:hover {
+    background-color: $accentPrimaryMedium;
   }
 
   &.dull {
@@ -347,6 +362,26 @@
 
   &:hover .price {
     background-color: $accentPrimary;
+  }
+}
+
+// Text only button with full width bottom border
+.button-trim-primary {
+  @include buttonUnstyled;
+  @include utilityPrimary;
+  display: block;
+  width: 100%;
+  padding-bottom: 13px;
+  font-size: 14px;
+  color: $accentPrimaryDark;
+  text-align: left;
+  border-bottom: 1px solid $neutral40;
+
+  &.trim-top {
+    padding-top: 11px;
+    padding-bottom: 0;
+    border: 0; // OD
+    border-top: 1px solid $neutral90;
   }
 }
 

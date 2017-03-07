@@ -1,0 +1,78 @@
+.annotation-editor {
+  padding-top: 35px;
+  padding-bottom: 30px;
+
+  @include respond($break90) {
+    padding-top: 52px;
+  }
+
+  textarea {
+    @include templateHead;
+    padding: 34px 43px;
+    font-size: 16px;
+    background-color: $neutralWhite;
+    border: 0;
+    outline: 0;
+
+    @include respond($break60) {
+      font-size: 18px;
+    }
+
+    @include respond($break90) {
+      font-size: 20px;
+    }
+  }
+
+  .utility {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    @include respond($break90) {
+      margin-top: 20px;
+    }
+
+    .form-input {
+      width: 100%;
+
+      @include respond($break95) {
+        width: auto;
+      }
+    }
+
+    .checkbox {
+      padding-left: 39px;
+      font-size: 14px;
+      color: $neutral50;
+
+      .toggle-indicator {
+        background-color: $neutralWhite;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-top: 18px;
+
+      @include respond($break95) {
+        width: auto;
+        margin-top: 0;
+      }
+
+      .button-primary, .button-secondary {
+        min-width: 100px;
+        padding: 12px 0 13px;
+        margin-left: 15px;
+        font-size: 14px;
+      }
+
+      .button-secondary[disabled=disabled], .button-secondary:disabled {
+        background-color: $accentPrimaryDull;
+      }
+    }
+  }
+}

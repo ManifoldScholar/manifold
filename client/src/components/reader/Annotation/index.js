@@ -1,9 +1,13 @@
 import Annotatable from './Annotatable';
+import Create from './Create';
+import List from './List';
 import Popup from './Popup';
-import Tools from './Tools';
+import Selection from './Selection/index';
 
 export default {
-  Popup,
   Annotatable,
-  Tools
+  Create,
+  List,
+  Popup,
+  Selection
 };

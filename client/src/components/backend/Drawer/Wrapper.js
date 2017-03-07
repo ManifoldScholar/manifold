@@ -1,7 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { Link } from 'react-router';
+import classNames from 'classnames';
 import Utility from 'components/global/Utility';
 
 export default class DrawerWrapper extends PureComponent {
@@ -11,11 +11,13 @@ export default class DrawerWrapper extends PureComponent {
   static propTypes = {
     closeUrl: PropTypes.string,
     closeCallback: PropTypes.func,
-    lockScroll: PropTypes.bool
+    lockScroll: PropTypes.bool,
+    style: PropTypes.string,
   };
 
   static defaultProps = {
-    lockScroll: true
+    lockScroll: true,
+    style: 'backend'
   };
 
   constructor(props) {
@@ -64,16 +66,24 @@ export default class DrawerWrapper extends PureComponent {
   }
 
   renderDrawer() {
+    const drawerStyleClass = classNames({
+      'drawer-backend': this.props.style === 'backend',
+      'drawer-frontend': this.props.style === 'frontend'
+    });
+
     return (
-      <div key="drawer" className="drawer-primary">
+      <div key="drawer" className={drawerStyleClass}>
         <div className="rel">
           <div onClick={this.handleLeaveEvent} className="close-button-primary">
+            <span className="close-text">
+              Close
+            </span>
             <i className="manicon manicon-x"></i>
             <span className="screen-reader-text">
               Close Drawer
             </span>
           </div>
-          {this.props.children}
+          {React.cloneElement(this.props.children, { closeDrawer: this.handleLeaveEvent })}
         </div>
       </div>
     );

@@ -236,6 +236,38 @@ $readerContainerWidths: (790px, 680px, 500px);
   text-align: right;
 }
 
+@mixin drawerPadding($parameter, $weight: 'regular') {
+  #{$parameter}: 20px;
+
+  @include respond($break75) {
+    @if ($weight == 'heavy') {
+      #{$parameter}: 50px;
+    } @else {
+      #{$parameter}: 30px;
+    }
+  }
+
+  @include respond($break95) {
+    @if ($weight == 'heavy') {
+      #{$parameter}: 9.45vw;
+    } @else {
+      #{$parameter}: 5vw;
+    }
+  }
+
+  @include respond($break100) {
+    @if ($weight == 'heavy') {
+      #{$parameter}: 117px;
+    } @else {
+      #{$parameter}: 63px;
+    }
+  }
+}
+
+@mixin drawerIndent($parameter, $dimension: 1) {
+  #{$parameter}: (43px * $dimension);
+}
+
 
 // Lists
 // --------------------------------------------------------

@@ -3,6 +3,7 @@ import has from 'lodash/has';
 import { Annotation } from 'components/reader';
 import { Drawer, Dialog } from 'components/backend';
 import { Resource } from 'containers/reader';
+import fakeData from 'helpers/fakeData';
 
 class Annotatable extends Component {
 
@@ -25,8 +26,9 @@ class Annotatable extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.highlightSelection = this.highlightSelection.bind(this);
     this.annotateSelection = this.annotateSelection.bind(this);
+    this.startAnnotateSelection = this.startAnnotateSelection.bind(this);
     this.startResourceSelection = this.startResourceSelection.bind(this);
-    this.endResourceSelection = this.endResourceSelection.bind(this);
+    this.closeDrawer = this.closeDrawer.bind(this);
     this.attachResourceToSelection = this.attachResourceToSelection.bind(this);
     this.shareSelection = this.shareSelection.bind(this);
     this.closestTextNode = this.closestTextNode.bind(this);
@@ -50,7 +52,7 @@ class Annotatable extends Component {
     return {
       selection: null,
       pseudoSelection: null,
-      resourceSelection: false,
+      drawerContents: null,
       selectionLocked: false,
       selectionClickEvent: null
     };
@@ -237,6 +239,11 @@ class Annotatable extends Component {
     this.createAnnotation(annotation);
   }
 
+  startAnnotateSelection(event) {
+    this.setState({ drawerContents: "annotate" });
+    this.lockSelection();
+  }
+
   highlightSelection(event) {
     event.stopPropagation();
     const annotation = this.mapStateToAnnotation(this.state.selection, 'highlight');
@@ -269,12 +276,12 @@ class Annotatable extends Component {
   }
 
   startResourceSelection(event) {
-    this.setState({ resourceSelection: true });
+    this.setState({ drawerContents: "resources" });
     this.lockSelection();
   }
 
-  endResourceSelection(event) {
-    this.setState({ resourceSelection: false });
+  closeDrawer(event) {
+    this.setState({ drawerContents: null });
     // Keyboard event doesn't hide the popup by default,
     // so manually remove the selection
     if (event && event.type === 'keyup') {
@@ -287,28 +294,83 @@ class Annotatable extends Component {
     // TBD
   }
 
+  createAnnotationFromSelection() {
+    // TBD
+  }
+
+  renderDrawer() {
+    let out;
+    switch (this.state.drawerContents) {
+      case "resources":
+        out = (
+          <Drawer.Wrapper
+            closeCallback={this.closeDrawer}
+          >
+            {this.renderDrawerResources()}
+          </Drawer.Wrapper>
+        );
+        break;
+      case "annotate":
+        out = (
+          <Drawer.Wrapper
+            closeCallback={this.closeDrawer}
+            style="frontend"
+            lockScroll={false}
+          >
+            {this.renderDrawerAnnotate()}
+          </Drawer.Wrapper>
+        );
+        break;
+      default:
+        out = null;
+        break;
+    }
+    return out;
+  }
+
+  renderDrawerResources() {
+    return (
+      <Resource.Picker
+        projectId={this.props.projectId}
+        selectionHandler={this.attachResourceToSelection}
+      />
+    );
+  }
+
+  renderDrawerAnnotate() {
+    return (
+      <Annotation.Create
+        annotation={this.state.selectionLockedAnnotation}
+        selection={this.state.selection}
+      />
+    );
+  }
+
+  renderDrawerAnnotation() {
+    return (
+      <Annotation.List />
+    );
+  }
+
   render() {
     return (
       <div className="annotatable" ref={(a) => { this.annotatable = a; }}>
-        {this.state.resourceSelection ?
-          <Drawer.Wrapper
-            closeCallback={this.endResourceSelection}
-          >
-            <div style={{ paddingTop: 50 }}>
-                <Resource.Picker
-                  projectId={this.props.projectId}
-                  selectionHandler={this.attachResourceToSelection}
-                />
-            </div>
-          </Drawer.Wrapper>
+        <Drawer.Wrapper
+          closeCallback={this.closeDrawer}
+          style="frontend"
+          lockScroll={false}
+        >
+          {this.renderDrawerAnnotation()}
+        </Drawer.Wrapper>
+        {this.state.drawerContents ?
+          this.renderDrawer()
         : null}
-
         { this.props.currentUser ?
           <Annotation.Popup
             currentUser={this.props.currentUser}
             share={this.shareSelection}
             highlight={this.highlightSelection}
-            annotate={this.annotateSelection}
+            annotate={this.startAnnotateSelection}
             attachResource={this.startResourceSelection}
             selection={this.state.selection}
             selectionClickEvent={this.state.selectionClickEvent}
