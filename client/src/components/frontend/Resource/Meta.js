@@ -77,11 +77,11 @@ export default class ResourceMeta extends Component {
               </span>
             </li> : null
           }
-          {attr.attachmentContentType ?
+          {attr.attachmentExtension ?
             <li>
               <span className="meta-label">{'File Format'}</span>
               <span className="meta-value">
-                {attr.attachmentContentType}
+                {attr.attachmentExtension}
               </span>
             </li> : null
           }
