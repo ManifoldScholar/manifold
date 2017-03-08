@@ -25,6 +25,7 @@ class ResolveDataDependenciesComponent extends Component {
     // we don't trigger fetching data unless the route has changed in some way. Without
     // this, changes to the anchor in the URL will refetch data.
     if (this.props.authenticated !== nextProps.authenticated) return true;
+    if (this.props.location.hash !== nextProps.location.hash) return true;
     if (this.props.location.pathname === nextProps.location.pathname) return false;
     if (this.props.components !== nextProps.components) return true;
     return false;
