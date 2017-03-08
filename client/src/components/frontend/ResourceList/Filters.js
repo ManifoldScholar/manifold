@@ -20,10 +20,8 @@ export default class ResourceListFilters extends Component {
     this.resetFilters = this.resetFilters.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (get(prevState, 'filter') !== get(this.state, 'filter')) {
-      this.props.filterChangeHandler(this.state.filter);
-    }
+  updateResults() {
+    this.props.filterChangeHandler(this.state.filter);
   }
 
   setFilters(event, label) {
@@ -49,6 +47,7 @@ export default class ResourceListFilters extends Component {
   }
 
   setKeywordInput(event) {
+    event.preventDefault();
     const value = event.target.value;
     const inputs = Object.assign({}, this.state.inputs);
     const filter = Object.assign({}, this.state.filter);
@@ -76,7 +75,7 @@ export default class ResourceListFilters extends Component {
 
   resetFilters(event) {
     event.preventDefault();
-    this.setState(this.initialState());
+    this.setState(this.initialState(), this.updateResults);
   }
 
   render() {
