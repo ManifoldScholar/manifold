@@ -19,7 +19,10 @@ RSpec.describe "Project Resources API", type: :request do
   describe "creates a new project resource" do
 
     let(:path) { api_v1_project_relationships_resources_path(project) }
-    let(:resource) { { attributes: { title: "A new hope" }, relationships: { project: { data: { type: "projects", id: project.id } } } } }
+    let(:resource) { { attributes: {
+      title: "A new hope",
+      externalType: "vimeo"
+    }, relationships: { project: { data: { type: "projects", id: project.id } } } } }
 
     context "when the user is an admin" do
       let(:headers) { admin_headers }

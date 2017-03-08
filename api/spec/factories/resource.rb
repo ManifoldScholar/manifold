@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :resource do
     title "Rowan"
-    kind "image"
+    external_type "youtube"
     keywords "dog, puppy"
     association :creator, factory: :user
     project
