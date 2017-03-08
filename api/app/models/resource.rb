@@ -93,7 +93,11 @@ class Resource < ApplicationRecord
   before_save :update_description_formatted
 
   def update_kind
-    self.kind = determine_kind if kind.blank?
+    self.kind = determine_kind
+  end
+
+  def force_update_kind
+    self.kind = determine_kind
   end
 
   def update_title_formatted
@@ -121,7 +125,8 @@ class Resource < ApplicationRecord
     return :video if %w(youtube vimeo).include?(external_type)
     return :audio if ["mp3"].include?(ext)
     return :link if !attachment.present? && !external_url.blank?
-    :file
+    return :file if attachment.present?
+    nil
   end
   # rubocop:enable Metrics/AbcSize, Metrics/PerceivedComplexity
   # rubocop:enable Metrics/CyclomaticComplexity
@@ -184,8 +189,7 @@ class Resource < ApplicationRecord
   end
 
   def resize_images
-    res = attachment_is_image?
-    res
+    attachment_is_image?
   end
 
   def to_s

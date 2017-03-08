@@ -18,7 +18,7 @@ module Importer
 
     COLLECTION_BOOLEAN_ATTRIBUTES = {}.freeze
     COLLECTION_ATTACHMENT_ATTRIBUTES = {
-      "Thumbnail" => :thumbnail,
+      "Thumbnail" => :thumbnail
     }.freeze
 
     RESOURCE_SIMPLE_ATTRIBUTES = {
@@ -87,6 +87,7 @@ module Importer
       @logger.log_model_errors(collection)
     end
 
+    # rubocop:disable Metrics/AbcSize
     def import_resource(row, count)
       return if TRUTHY_VALUES.include?(row["Skip"])
       @logger.info "Importing row: \"#{row['Title']}\""
@@ -103,6 +104,7 @@ module Importer
       end
       @logger.log_model_errors(resource)
     end
+    # rubocop:enable Metrics/AbcSize
 
     def create_tag_list(resource, row)
       return unless row["Keywords"]
