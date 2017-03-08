@@ -6,6 +6,7 @@ export const initialState = {
   userMenu: false,
   tocDrawer: false,
   uiPanels: {
+    readerReturn: false,
     user: false,
     appearance: false,
     layers: false,
@@ -14,6 +15,7 @@ export const initialState = {
 };
 
 const panelSolo = {
+  readerReturn: true,
   user: true,
   appearance: true,
   layers: true,

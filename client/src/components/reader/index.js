@@ -6,6 +6,7 @@ export AppearanceMenuButton from './AppearanceMenuButton';
 export Footer from './Footer';
 export FooterMenu from './FooterMenu';
 export Header from './Header';
+export ReturnMenuBody from './ReturnMenuBody';
 export StaticTextSample from './StaticTextSample';
 export TextTitles from './TextTitles';
 export Toc from './Toc';

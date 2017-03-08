@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {
   AppearanceMenuButton,
   AppearanceMenuBody,
+  ReturnMenuBody,
   TextTitles,
   TocDrawer
 } from 'components/reader';
@@ -11,9 +12,8 @@ import {
   SearchMenuBody,
   UIPanel,
   UserMenuButton,
-  UserMenuBody
+  UserMenuBody,
 } from 'components/global';
-import { Link } from 'react-router';
 import classNames from 'classnames';
 
 export default class Header extends Component {
@@ -38,6 +38,7 @@ export default class Header extends Component {
   constructor() {
     super();
     this.handleContentsButtonClick = this.handleContentsButtonClick.bind(this);
+    this.handleReturnMenuButtonClick = this.handleReturnMenuButtonClick.bind(this);
     this.handleSearchMenuButtonClick = this.handleSearchMenuButtonClick.bind(this);
     this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(this);
     this.triggerShowSignInUpOverlay = this.triggerShowSignInUpOverlay.bind(this);
@@ -56,6 +57,11 @@ export default class Header extends Component {
 
   handleContentsButtonClick() {
     this.props.commonActions.visibilityToggle('tocDrawer');
+  }
+
+  handleReturnMenuButtonClick(event) {
+    event.stopPropagation();
+    this.props.commonActions.panelToggle('readerReturn');
   }
 
   handleSearchMenuButtonClick() {
@@ -107,14 +113,9 @@ export default class Header extends Component {
     return (
       <header className="header-reader">
         <nav className="container-banner">
-          <Link to={`/browse/project/${this.props.text.relationships.project.id}`} >
-            <button className="button-close" >
-              <i className="manicon manicon-x"></i>
-                <span className="screen-reader-text">
-                  {'Click to close reader'}
-                </span>
-            </button>
-          </Link>
+          <button className="button-menu" onClick={this.handleReturnMenuButtonClick}>
+            Menu
+          </button>
           { this.renderContentsButton(this.props.text.attributes.toc) }
           { this.props.section ?
             <TextTitles
@@ -157,7 +158,21 @@ export default class Header extends Component {
           visible={this.props.visibility.tocDrawer}
           hideTocDrawer={this.triggerHideToc}
         />
-        <nav className="menu-panels">
+        <nav className="menu-panels-left">
+          <UIPanel
+            id="readerReturn"
+            visibility={this.props.visibility.uiPanels}
+            bodyComponent={ReturnMenuBody}
+
+            // Props required by body component
+            projectId={this.props.text.relationships.project.id}
+            projectTitle="The Project Title"
+            toggleSignInUpOverlay={this.props.commonActions.toggleSignInUpOverlay}
+            moreLink="http://manifold.umn.edu/about/"
+          />
+        </nav>
+
+        <nav className="menu-panels-right">
           <UIPanel
             id="search"
             visibility={this.props.visibility.uiPanels}
@@ -181,6 +196,8 @@ export default class Header extends Component {
             id="user"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={UserMenuBody}
+
+            // Props required by body component
             showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
             startLogout={this.props.commonActions.logout}
             hideUserMenu={this.props.commonActions.toggleUserPanel}
