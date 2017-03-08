@@ -42,6 +42,25 @@
     }
   }
 
+  // Navigation-Dropdown
+  .button-menu {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    float: left;
+    height: 100%;
+    padding-right: 24px;
+    padding-left: 24px;
+    font-size: 14px;
+    color: $neutral50;
+    background-color: $neutral10;
+    transition: color $duration $timing, background-color $duration $timing;
+
+    &:hover {
+      color: $neutralWhite;
+      background-color: $accentPrimary;
+    }
+  }
+
   // <button>
   .button-close {
     @include buttonUnstyled;
@@ -83,12 +102,11 @@
     float: left;
     height: 100%;
     padding-right: 16px;
-    padding-bottom: 5px;
     padding-left: 20px;
-    font-size: $type40;
+    font-size: 14px;
     font-weight: $semibold;
     color: $neutral50;
-    background-color: $neutral20;
+    background-color: $neutral05;
     transition: color $duration $timing background-color $duration $timing;
 
     @include respond($break50) {
@@ -103,7 +121,7 @@
 
     .manicon {
       display: inline-block;
-      vertical-align: baseline;
+      vertical-align: middle;
     }
 
     .manicon-caret-down {
@@ -210,7 +228,25 @@
     }
   }
 
-  .menu-panels {
+  .menu-panels-left {
+    position: absolute;
+    left: 0;
+    width: 100%;
+
+    .reader-return-menu {
+      position: absolute;
+      left: -390px;
+      transition: left $duration $timing;
+    }
+
+    .panel-visible {
+      .reader-return-menu {
+        left: 0;
+      }
+    }
+  }
+
+  .menu-panels-right {
     position: absolute;
     right: 0;
     width: 100%;
