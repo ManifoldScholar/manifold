@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {
   AppearanceMenuButton,
   AppearanceMenuBody,
-  ReturnMenuBody,
+  ReturnMenu,
   TextTitles,
   TocDrawer
 } from 'components/reader';
@@ -12,7 +12,7 @@ import {
   SearchMenuBody,
   UIPanel,
   UserMenuButton,
-  UserMenuBody,
+  UserMenuBody
 } from 'components/global';
 import classNames from 'classnames';
 
@@ -59,8 +59,7 @@ export default class Header extends Component {
     this.props.commonActions.visibilityToggle('tocDrawer');
   }
 
-  handleReturnMenuButtonClick(event) {
-    event.stopPropagation();
+  handleReturnMenuButtonClick() {
     this.props.commonActions.panelToggle('readerReturn');
   }
 
@@ -113,9 +112,9 @@ export default class Header extends Component {
     return (
       <header className="header-reader">
         <nav className="container-banner">
-          <button className="button-menu" onClick={this.handleReturnMenuButtonClick}>
-            Menu
-          </button>
+          <ReturnMenu.Button
+            toggleReaderMenu={this.handleReturnMenuButtonClick}
+          />
           { this.renderContentsButton(this.props.text.attributes.toc) }
           { this.props.section ?
             <TextTitles
@@ -162,12 +161,13 @@ export default class Header extends Component {
           <UIPanel
             id="readerReturn"
             visibility={this.props.visibility.uiPanels}
-            bodyComponent={ReturnMenuBody}
+            bodyComponent={ReturnMenu.Body}
 
             // Props required by body component
             projectId={this.props.text.relationships.project.id}
-            projectTitle="The Project Title"
+            projectTitle={this.props.text.relationships.project.attributes.title}
             toggleSignInUpOverlay={this.props.commonActions.toggleSignInUpOverlay}
+            // TODO: More link (and eventually, the link text) should be pulled from settings
             moreLink="http://manifold.umn.edu/about/"
           />
         </nav>
