@@ -1,13 +1,15 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
 import HigherOrder from 'containers/global/HigherOrder';
 
-export default class ReturnMenuBody extends Component {
+export default class ReturnMenuBody extends PureComponent {
+
+  static displayName = 'ReturnMenuBody';
 
   static propTypes = {
     projectId: PropTypes.string,
-    projectTitle: PropTypes.string,
-    toggleSignInUpOverlay: PropTypes.func,
+    projectTitle: PropTypes.string.isRequired,
+    toggleSignInUpOverlay: PropTypes.func.isRequired,
     moreLink: PropTypes.string,
   };
 
@@ -20,11 +22,6 @@ export default class ReturnMenuBody extends Component {
               <i className="manicon manicon-arrow-round-left"></i>
               {'Project Home'}
               <span>
-                  {/*
-                   Note that this should be the project title, which isn't
-                   available to this component yet. Testing with this as it should
-                   be similar.
-                   */}
                 {this.props.projectTitle}
               </span>
             </Link>
@@ -47,9 +44,11 @@ export default class ReturnMenuBody extends Component {
                 <i className="manicon manicon-manifold-logo"></i>
                 Sign-in
               </button>
-              <Link to={this.props.moreLink} target="_blank" className="note">
-                Learn More About <span>Manifold</span>
-              </Link>
+              {this.props.moreLink ?
+                <Link to={this.props.moreLink} target="_blank" className="note">
+                  Learn More About <span>Manifold</span>
+                </Link> : null
+              }
             </li>
           </HigherOrder.RequireRole>
         </ul>
