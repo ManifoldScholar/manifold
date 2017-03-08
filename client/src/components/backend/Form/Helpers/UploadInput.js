@@ -17,6 +17,7 @@ export default class FormUploadInput extends Component {
     remove: PropTypes.string,
     value: PropTypes.any,
     current: PropTypes.string,
+    inlineStyle: PropTypes.object,
     style: React.PropTypes.oneOf(['square', 'portrait', 'landscape']),
     accepts: PropTypes.string
   };
@@ -212,6 +213,7 @@ export default class FormUploadInput extends Component {
 
     return (
       <Dropzone
+        style={this.props.inlineStyle}
         className={`form-dropzone style-${this.props.style}`}
         activeStyle={{}}
         multiple={false}

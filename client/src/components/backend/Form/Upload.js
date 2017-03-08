@@ -45,6 +45,7 @@ export default class FormUpload extends Component {
         }
         <Form.Connect.Set manualSet {...this.props} >
           <Form.Helpers.UploadInput
+            inlineStyle={this.props.inlineStyle}
             style={this.props.style}
             current={this.props.current}
             remove={this.props.remove}

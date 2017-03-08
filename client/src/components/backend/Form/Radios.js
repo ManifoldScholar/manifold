@@ -30,7 +30,7 @@ export default class FormRadios extends Component {
           return (
             <label htmlFor={option.value} className={inputClassNames} key={option.value} >
               <Form.Connect.Set {...this.props} value={option.value} >
-                <input id={option.value} type="radio" />
+                <input id={option.value} checked={this.props.value === option.value} type="radio" />
               </Form.Connect.Set>
               <span className="toggle-indicator"></span>
               <span className="toggle-label">{option.label}</span>
