@@ -11,16 +11,11 @@ class Collection < ApplicationRecord
   has_many :resources, through: :collection_resources
 
   # Attachments
-  has_attached_file :thumbnail,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
-                    styles: {
-                      thumb: ["x500", :jpg]
-                    }
+  has_attached_file :thumbnail
   validation = Rails.configuration.manifold.attachments.validations.image
   validates_attachment_content_type :thumbnail, content_type: validation[:allowed_mime]
   validates_attachment_file_name :thumbnail, matches: validation[:allowed_ext]
+  before_thumbnail_post_process :resize_images
 
   def thumbnail_url
     return nil unless thumbnail.present?

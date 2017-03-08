@@ -47,11 +47,8 @@ class Resource < ApplicationRecord
 
   # Attachment Validation
   has_attached_file :attachment,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/resource/:uuid_partition/:id/:style_:filename",
-                    styles: ATTACHMENT_STYLES,
-                    convert_options: CONVERT_OPTIONS
+                    styles: IMAGE_STYLES,
+                    convert_options: IMAGE_CONVERT_OPTIONS
   validation = Rails.configuration.manifold.attachments.validations.resource
   validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
   validates_attachment_file_name :attachment, matches: validation[:allowed_ext]

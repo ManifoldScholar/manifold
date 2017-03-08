@@ -60,23 +60,14 @@ class Project < ApplicationRecord
 
   # Attachments
   has_attached_file :avatar,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
                     styles: {
                       thumb: ["x246", :png]
                     }
   has_attached_file :cover,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
                     styles: {
                       hero: ["800", :png]
                     }
   has_attached_file :hero,
-                    include_updated_timestamp: false,
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
-                    default_url: "",
                     styles: { background: ["1800", :jpg] }
   validation = Rails.configuration.manifold.attachments.validations.image
   validates_attachment_content_type :cover, content_type: validation[:allowed_mime]

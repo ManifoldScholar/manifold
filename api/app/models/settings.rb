@@ -7,9 +7,6 @@ class Settings < ApplicationRecord
 
   # Attachments
   has_attached_file :press_logo,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/:class/:id/:style_:filename",
                     styles: {
                       default: ["x246", :png]
                     }

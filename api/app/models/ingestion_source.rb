@@ -27,7 +27,7 @@ class IngestionSource < ApplicationRecord
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 
   # Attachments
-  has_attached_file :attachment, include_updated_timestamp: false
+  has_attached_file :attachment
   validation = Rails.configuration.manifold.attachments.validations.resource
   validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
   validates_attachment_file_name :attachment, matches: validation[:allowed_ext]
