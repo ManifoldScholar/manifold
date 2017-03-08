@@ -43,13 +43,13 @@ export default class LayoutHeader extends Component {
                   {'Projects'}
                 </Link>
               </li>
-              { this.props.authentication.authenticated ?
+              <HigherOrder.RequireRole requiredRole="any">
                 <li className={active === 'following' ? 'active' : ''}>
                   <Link to={`/browse/following/`}>
                     {'Following'}
                   </Link>
-                </li> : null
-              }
+                </li>
+              </HigherOrder.RequireRole>
             </ul>
           </nav>
 
