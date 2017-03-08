@@ -67,11 +67,8 @@ module Updaters
   def attachmentize_attributes!(attr)
     return unless attachment_fields.count.positive?
     attachment_fields.each do |field|
-      attachment_params = attr.extract!(field)[field]
-      next if attachment_params.nil?
-      attachment = Paperclip.io_adapters.for(attachment_params[:data])
-      attachment.original_filename = attachment_params[:filename]
-      attr[field] = attachment
+      attachment = attachment_from_params!(attr, field)
+      attr[field] = attachment unless attachment.nil?
     end
     attachment_fields.each do |field|
       key = "remove_#{field}".to_sym
@@ -80,6 +77,15 @@ module Updaters
     end
   end
   # rubocop:enable Metrics/AbcSize
+
+  def attachment_from_params!(attributes, key)
+    params = attributes.extract!(key)[key]
+    return nil if params.nil?
+    data, filename = params.values_at(:data, :filename)
+    attachment = Paperclip.io_adapters.for(data)
+    attachment.original_filename = filename
+    attachment
+  end
 
   # rubocop:disable Metrics/CyclomaticComplexity
   def update_relationships!(model)

@@ -11,6 +11,11 @@ Paperclip.interpolates :uuid_partition do |attachment, _style|
   id[0..2].scan(/\w/).join("/".freeze)
 end
 
+path =
+  ":rails_root/public/system/:class/:attachment/:uuid_partition/:style/:hash.:extension"
+secret = ENV["RAILS_SECRET_KEY"]
+Paperclip::Attachment.default_options.update(path: path, hash_secret: secret)
+
 require "paperclip/media_type_spoof_detector"
 module Paperclip
   # Monkey patches paper clip to disable spoofed file detection, which breaks on UAT.

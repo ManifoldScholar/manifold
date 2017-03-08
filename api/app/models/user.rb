@@ -41,7 +41,6 @@ class User < ApplicationRecord
   has_attached_file :avatar,
                     include_updated_timestamp: false,
                     default_url: "",
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
                     styles: { medium: "300x300>", thumb: "100x100>" }
   validation = Rails.configuration.manifold.attachments.validations.image
   validates_attachment_content_type :avatar,
