@@ -22,11 +22,7 @@ class Maker < ApplicationRecord
   has_attached_file :avatar,
                     include_updated_timestamp: false,
                     default_url: "",
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
-                    styles: {
-                      thumb: ["x246", :png],
-                      square: ["246x246#"]
-                    }
+                    styles: { square: "300x300>", thumb: "100x100>" }
   validation = Rails.configuration.manifold.attachments.validations.image
   validates_attachment_content_type :avatar, content_type: validation[:allowed_mime]
   validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
