@@ -20,10 +20,6 @@ export default class ResourceListFilters extends Component {
     this.resetFilters = this.resetFilters.bind(this);
   }
 
-  updateResults() {
-    this.props.filterChangeHandler(this.state.filter);
-  }
-
   setFilters(event, label) {
     event.preventDefault();
     const value = (label === "keyword")
@@ -58,6 +54,10 @@ export default class ResourceListFilters extends Component {
       inputs.keyword = value;
     }
     this.setState({ inputs, filter });
+  }
+
+  updateResults() {
+    this.props.filterChangeHandler(this.state.filter);
   }
 
   initialState(init) {
