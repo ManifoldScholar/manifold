@@ -2,13 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-
 import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
 import { Header, Footer, FooterMenu, Section } from 'components/reader';
-
+import { entityUtils } from 'utils';
 import { commonActions } from 'actions/helpers';
 import { textsAPI, resourcesAPI, sectionsAPI, annotationsAPI, requests } from 'api';
-import { select } from '../../utils/entityUtils';
 import values from 'lodash/values';
 import uniq from 'lodash/uniq';
 import difference from 'lodash/difference';
@@ -23,6 +21,7 @@ import {
 } from 'actions';
 
 const { visibilityHide } = uiVisibilityActions;
+const { select, grab, isEntityLoaded } = entityUtils;
 const {
   selectFont,
   incrementFontSize,
@@ -38,28 +37,35 @@ class ReaderContainer extends Component {
 
   static fetchData(getState, dispatch, location, params) {
     const promises = [];
-    const textCall = textsAPI.show(params.textId);
-    const { promise: one } = dispatch(request(textCall, requests.rText));
-    promises.push(one);
-    if (params.sectionId) {
+    const state = getState();
+    const { sectionId, textId } = params;
+    const sectionLoaded = sectionId ? isEntityLoaded('textSections', sectionId, state) : false;
+    const textLoaded = textId ? isEntityLoaded('texts', textId, state) : false;
+
+    if (textId && !textLoaded) {
+      const textCall = textsAPI.show(params.textId);
+      const { promise: one } = dispatch(request(textCall, requests.rText));
+      promises.push(one);
+    }
+
+    if (sectionId && !sectionLoaded) {
       const sectionCall = sectionsAPI.show(params.sectionId);
-      const { promise: two } = dispatch(request(sectionCall,
-        requests.rSection));
+      const { promise: two } = dispatch(request(sectionCall, requests.rSection));
       promises.push(two);
     }
     return Promise.all(promises);
   }
 
-  static mapStateToProps(state) {
+  static mapStateToProps(state, ownProps) {
     const appearance = {
       typography: state.ui.typography,
       colors: state.ui.colors
     };
     return {
       annotations: select(requests.rAnnotations, state.entityStore),
-      section: select(requests.rSection, state.entityStore),
+      section: grab("textSections", ownProps.params.sectionId, state.entityStore),
+      text: grab("texts", ownProps.params.textId, state.entityStore),
       resources: select(requests.rResources, state.entityStore),
-      text: select(requests.rText, state.entityStore),
       authentication: state.authentication,
       visibility: state.ui.visibility,
       loading: state.ui.loading.active,

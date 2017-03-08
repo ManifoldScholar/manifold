@@ -78,14 +78,14 @@ export default class Text extends Component {
   // TODO: My sense is that this method is not working very well. It may need to be
   // revisited.
   maybeScrollToAnchor(previousHash, currentHash) {
-    if (currentHash && previousHash !== currentHash) {
-      const scrollTarget = document.querySelector(currentHash);
-      if (!scrollTarget) return false;
-      const position = scrollTarget.getBoundingClientRect().top + window.pageYOffset;
-      setTimeout(() => {
-        smoothScroll(position - 125);
-      }, 0);
-    }
+    if (!currentHash) return;
+    if (previousHash === currentHash) return;
+    const scrollTarget = document.querySelector(currentHash);
+    if (!scrollTarget) return false;
+    const position = scrollTarget.getBoundingClientRect().top + window.pageYOffset;
+    setTimeout(() => {
+      smoothScroll(position - 125);
+    }, 0);
   }
 
   render() {

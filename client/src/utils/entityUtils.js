@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import isObject from 'lodash/isObject';
 import has from 'lodash/has';
 import setWith from 'lodash/setWith';
 import memoize from 'lodash/memoize';
@@ -7,7 +8,7 @@ function hydrateEntity({ id, type }, entities, hydrationMap = {}) {
   const entityPath = `${type}.${id}`;
   const source = get(entities, entityPath);
   let entity;
-  if (!source) return { id, type };
+  if (!source) return null;
   // We need to keep track of which entities we've hydrated to ensure that we don't end
   // up with infinite recursion. For example, a project has many texts, and a text belongs
   // to a project. When we hydrate a text for the project, we'll pick up the text's
@@ -82,9 +83,18 @@ const selectEntity = memoize((response, entities) => {
   return entity;
 });
 
+// TODO: Refactor this to isRequestLoaded and remove duplicate at line 113 below.
 export function isLoaded(request, state) {
   const l = get(state, `entityStore.responses.${request}.loaded`);
   return l === true;
+}
+
+export function isEntityLoaded(type, id, state) {
+  const path = `entityStore.entities.${type}.${id}`;
+  const entity = get(state, path);
+  if (!isObject(entity)) return false;
+  if (get(entity, 'meta.partial') === true) return false;
+  return true;
 }
 
 export function select(requestMeta, entityStore) {
@@ -94,6 +104,14 @@ export function select(requestMeta, entityStore) {
     return selectCollection(response, entityStore.entities);
   }
   return selectEntity(response, entityStore.entities);
+}
+
+export function grab(type, id, entityStore) {
+  const entityPath = `${type}.${id}`;
+  const source = get(entityStore.entities, entityPath);
+  if (!source) return null;
+  if (get(source, 'meta.partial') === true) return null;
+  return selectEntity({ entity: { type, id } }, entityStore.entities);
 }
 
 export function loaded(requestMeta, entityStore) {
