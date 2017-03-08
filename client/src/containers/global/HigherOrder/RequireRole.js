@@ -13,6 +13,7 @@ class RequireRole extends PureComponent {
 
   static propTypes = {
     requiredRole: PropTypes.string.isRequired,
+    roleMatchBehavior: PropTypes.oneOf(['hide', 'show']).isRequired,
     redirect: PropTypes.string,
     children: PropTypes.oneOfType([
       PropTypes.object,
@@ -20,17 +21,16 @@ class RequireRole extends PureComponent {
     ]),
   };
 
+  static defaultProps = {
+    roleMatchBehavior: 'show'
+  }
+
   isAuthenticated(props) {
     return props.authentication.authenticated;
   }
 
   canRedirect(props) {
     return isString(props.redirect);
-  }
-
-  canRenderChildren(props) {
-    if (!props.children) return false;
-    return this.roleMatch(props);
   }
 
   user(props) {
@@ -46,14 +46,32 @@ class RequireRole extends PureComponent {
   }
 
   roleMatch(props) {
+    if (props.requiredRole === "none" && !this.isAuthenticated(props)) return true;
     if (!this.isAuthenticated(props)) return false;
     if (props.requiredRole === "any" && this.isAuthenticated(props)) return true;
     return (props.requiredRole === this.user(props).attributes.role);
   }
 
+  behavior(props) {
+    return props.roleMatchBehavior;
+  }
+
+  renderHide(props) {
+    if (!this.roleMatch(props)) return Children.only(this.props.children);
+    return null;
+  }
+
+  renderShow(props) {
+    if (this.roleMatch(props)) return Children.only(this.props.children);
+    return null;
+  }
+
   render() {
-    if (!this.canRenderChildren(this.props)) return null;
-    return Children.only(this.props.children);
+    if (!this.props.children) return false;
+    const behavior = this.behavior(this.props);
+    if (behavior === 'hide') return this.renderHide(this.props);
+    if (behavior === 'show') return this.renderShow(this.props);
+    return null;
   }
 }
 
