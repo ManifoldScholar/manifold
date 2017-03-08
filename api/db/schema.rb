@@ -110,19 +110,6 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.datetime "attachment_updated_at"
   end
 
-  create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "source_file_name"
-    t.string   "source_content_type"
-    t.integer  "source_file_size"
-    t.datetime "source_updated_at"
-    t.uuid     "creator_id"
-    t.text     "log"
-    t.integer  "state",               default: 0
-    t.string   "strategy"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-  end
-
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "sort_name"
     t.datetime "created_at",          null: false
