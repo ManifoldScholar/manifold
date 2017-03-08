@@ -1,7 +1,24 @@
 # A person or organization involved with the creation of a text
-class Maker < ActiveRecord::Base
-  has_many :collaborators
+class Maker < ApplicationRecord
 
+  # Constants
+  TYPEAHEAD_ATTRIBUTES = [:first_name, :last_name].freeze
+
+  # Authority
+  include Authority::Abilities
+
+  # Concerns
+  include Filterable
+
+  # Search
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
+
+  # Associations
+  has_many :collaborators
+  has_many :user_claims
+  has_many :users, through: :user_claims
+
+  # Attachments
   has_attached_file :avatar,
                     include_updated_timestamp: false,
                     default_url: "",
@@ -10,27 +27,45 @@ class Maker < ActiveRecord::Base
                       thumb: ["x246", :png],
                       square: ["246x246#"]
                     }
+  validation = Rails.configuration.manifold.attachments.validations.image
+  validates_attachment_content_type :avatar, content_type: validation[:allowed_mime]
+  validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
 
-  validates_attachment_content_type :avatar, content_type: %w(
-    image/gif
-    image/jpeg
-    image/jpg
-    image/png
-    image/svg+xml
-  )
-  validates_attachment_file_name :avatar, matches: [
-    /gif\Z/,
-    /jpe?g\Z/,
-    /png\Z/,
-    /svg\Z/
-  ]
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
+  def self.parse_name(name)
+    parts = {}
+    parts[:first_name] = if name.split.count > 1
+                           name.split[0..-2].join(" ")
+                         else
+                           name
+                         end
+    parts[:last_name] = name.split.last if name.split.count > 1
+    parts
+  end
+
+  def name=(name)
+    parts = Maker.parse_name(name)
+    self.first_name = parts[:first_name]
+    self.last_name = parts[:last_name]
+  end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 
   def avatar_url
     return nil if avatar.url(:square).blank?
-    ENV["API_DOMAIN"] + avatar.url(:square)
+    Rails.configuration.manifold.api_url + avatar.url(:square)
   end
 
   def full_name
     [first_name, middle_name, last_name].reject(&:blank?).join(" ")
   end
+
+  def to_s
+    full_name
+  end
+
 end

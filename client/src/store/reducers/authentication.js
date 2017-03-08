@@ -1,7 +1,8 @@
 import { handleActions } from 'redux-actions';
-import { entityStoreActions } from 'actions';
+import { entityUtils } from 'utils';
+import { requests } from 'api';
+const { constantizeMeta } = entityUtils;
 
-const { requests } = entityStoreActions;
 const initialState = {
   authenticated: false,
   authenticating: false,
@@ -10,12 +11,36 @@ const initialState = {
   error: null
 };
 
-const startLogin = (state) => {
-  return Object.assign({}, initialState, { authenticating: true });
+const deleteFavorite = (state, action) => {
+  if (action.error === true) return state;
+  const favorites = Object.assign({}, state.currentUser.favorites);
+  delete favorites[action.payload];
+  const currentUser = Object.assign({}, state.currentUser, { favorites });
+  return Object.assign({}, state, { currentUser });
 };
 
-const startLogout = () => {
+const setError = (state, action) => {
+  const error = action.payload;
+  return Object.assign({}, state, { error });
+};
+
+const logout = () => {
   return Object.assign({}, initialState);
+};
+
+const setAuthToken = (state, action) => {
+  const authToken = action.payload;
+  if (!authToken) return state;
+  const newState = { authToken };
+  return Object.assign({}, state, newState);
+};
+
+const endLogin = (state) => {
+  return Object.assign({}, state, { authenticating: false });
+};
+
+const startLogin = (state) => {
+  return Object.assign({}, state, { authenticating: true });
 };
 
 const updateStateFromUser = (state, payload) => {
@@ -32,16 +57,11 @@ const updateStateFromUser = (state, payload) => {
   delete adjustedUser.relationships;
   adjustedUser.favorites = favorites;
   const newState = {
-    currentUser: adjustedUser
+    currentUser: adjustedUser,
+    authenticated: true,
+    error: null
   };
   return Object.assign({}, state, newState);
-};
-
-const syncCurrentUser = (state, action) => {
-  if (action.meta === requests.updateCurrentUser) {
-    return updateStateFromUser(state, action.payload);
-  }
-  return state;
 };
 
 const setCurrentUser = (state, action) => {
@@ -52,39 +72,21 @@ const setCurrentUser = (state, action) => {
   return updateStateFromUser(state, action.payload);
 };
 
-const setAuthToken = (state, action) => {
-  const authToken = action.payload;
-  if (!authToken) return state;
-  const newState = { authenticating: false, authenticated: true, authToken };
-  return Object.assign({}, state, newState);
-};
-
-const setAuthError = (state, action) => {
-  const error = action.payload;
-  return Object.assign({}, state, { error });
-};
-
-const follow = (state, action) => {
-  if (action.error === true) return state;
-  return updateStateFromUser(state, action.payload);
-};
-
-const unfollow = (state, action) => {
-  if (action.error === true) return state;
-  const favorites = Object.assign({}, state.currentUser.favorites);
-  delete favorites[action.payload];
-  const currentUser = Object.assign({}, state.currentUser, { favorites });
-  return Object.assign({}, state, { currentUser });
+const syncCurrentUser = (state, action) => {
+  if (action.meta === requests.gAuthenticatedUserUpdate) {
+    return updateStateFromUser(state, action.payload);
+  }
+  return state;
 };
 
 export default handleActions({
-  ENTITY_STORE_RESPONSE: syncCurrentUser,
-  START_LOGIN: startLogin,
-  START_LOGOUT: startLogout,
-  SET_AUTH_TOKEN: setAuthToken,
-  SET_CURRENT_USER: setCurrentUser,
-  CLEAR_CURRENT_USER: startLogout,
-  SET_AUTH_ERROR: setAuthError,
-  FOLLOW: follow,
-  UNFOLLOW: unfollow
+  [`API_RESPONSE/${constantizeMeta(requests.gAuthenticatedUserUpdate)}`]: syncCurrentUser,
+  LOGIN: startLogin,
+  LOGIN_SET_CURRENT_USER: setCurrentUser,
+  UPDATE_CURRENT_USER: setCurrentUser,
+  DELETE_CURRENT_USER_FAVORITE: deleteFavorite,
+  LOGIN_SET_AUTH_TOKEN: setAuthToken,
+  LOGIN_COMPLETE: endLogin,
+  LOGIN_SET_ERROR: setError,
+  LOGOUT: logout
 }, initialState);

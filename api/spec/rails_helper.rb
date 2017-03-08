@@ -2,11 +2,13 @@
 ENV["RAILS_ENV"] ||= "test"
 require "spec_helper"
 Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |f| require f }
-require File.expand_path("../../config/environment", __FILE__)
-require "rspec/rails"
 
-# Add additional requires below this line. Rails is not loaded until this point!
+require File.expand_path("../../config/environment", __FILE__)
+
+require "rspec/rails"
 require "paperclip/matchers"
+require "webmock/rspec"
+require "database_cleaner"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -29,6 +31,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include Paperclip::Shoulda::Matchers
+  config.include Helpers
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -52,4 +55,29 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  config.include ActiveJob::TestHelper
+
+  # Clean up any jobs before each run.
+  config.before(:each) do
+    clear_enqueued_jobs
+  end
+
+  # Truncate all test database tables before running tests.
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  # Allow elastic search for tests tagged with elasticsearch
+  config.around(:all) do |example|
+    if (example.metadata[:elasticsearch])
+      WebMock.disable_net_connect!(allow: /127\.0\.0\.1:1?9200/)
+      example.run
+    else
+      stub_request(:any, /127\.0\.0\.1:1?9200/)
+      example.run
+    end
+  end
+
 end

@@ -4,16 +4,66 @@ require "open-uri"
 module Demonstration
   # Loads demo data into the Manifold installation
   class DataLoader
+
+    ENV_SETTINGS = {
+      general: %w(ga_profile_id ga_tracking_id contact_url).freeze,
+      theme: %w(typekit_id).freeze
+    }.freeze
+
     def initialize
       @logger = Logger.new(STDOUT)
+      @logger.formatter = proc { |severity, _datetime, _progname, msg|
+        "#{severity.rjust(8)}: #{msg}\n"
+      }
     end
 
     def load
       clear_db
-      batch_ingest
+      seed_db
       create_admin_user
-      publish_project_texts
+      create_fake_users
       create_pages
+      import_projects
+      ensure_settings
+      reindex_records
+    end
+
+    def import_projects
+      cli_user = User.find_by(is_cli_user: true)
+      children = Pathname.new("../import").children.select(&:directory?)
+      children.each do |child|
+        next if File.file?(File.join(child, ".skip"))
+        Importer::Project.new(child, cli_user, @logger).import(true)
+      end
+    end
+
+    def seed_db
+      Seed.execute(@logger)
+    end
+
+    def clear_db
+      clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource
+                 Subject TextSubject TextTitle User Category Page UserClaim)
+      clear.each do |model_name|
+        @logger.info("Truncate #{model_name} table".red)
+        model_name.constantize.destroy_all
+      end
+    end
+
+    def create_fake_users
+      40.times do
+        first_name = Faker::Name.first_name
+        last_name = Faker::Name.last_name
+        email = Faker::Internet.safe_email("#{first_name}_#{last_name}")
+        u = User.find_or_create_by(email: email)
+        u.role = "reader"
+        u.first_name = first_name
+        u.last_name = last_name
+        u.password = "manifold"
+        u.password_confirmation = "manifold"
+        u.save
+        @logger.info("Creating reader user: #{u.email}".green)
+      end
     end
 
     def create_pages
@@ -27,118 +77,38 @@ module Demonstration
       end
     end
 
-    def load_text(path, _log_level = "debug")
-      text = ingest(path)
-      project = make_project_for_text(text)
-      project.published_text = text
-      project.published_datetime = Time.zone.today
-      project.save
+    def ensure_settings
+      settings = Settings.instance
+      ENV_SETTINGS.each do |category, keys|
+        keys.each do |key|
+          settings[category][key] ||= Rails.configuration.manifold.settings[category][key]
+        end
+      end
+      settings.save
     end
 
-    def publish_project_texts
-      Project.all.each do |project|
-        project.published_text = project.texts.first
-        project.published_datetime = Time.zone.today
-        project.save
-      end
+    def reindex_records
+      Project.reindex
+      @logger.info("Projects reindexed".green)
+      User.reindex
+      @logger.info("Users reindexed".green)
+      Maker.reindex
+      @logger.info("Makers reindexed".green)
+      Resource.reindex
+      @logger.info("Resources reindexed".green)
     end
 
     private
 
     def create_admin_user
-      u = User.find_or_create_by(email: "admin@manifold.dev")
-      u.role = "reader"
+      u = User.find_or_create_by(email: "admin@manifold.app")
+      u.role = "admin"
+      u.first_name = "Admin"
+      u.last_name = "User"
       u.password = "manifold"
       u.password_confirmation = "manifold"
       u.save
-    end
-
-    def assign_texts_to_projects
-      Text.all.each do |text|
-        project = Project.limit(1).order("RANDOM()").first
-        category = project.text_categories.limit(1).order("RANDOM()").first
-        text.project = project
-        text.category = category
-        text.save
-      end
-    end
-
-    def batch_ingest
-      path = Rails.root.join("..", "user_texts")
-      path = Rails.root.join("..", "texts") unless File.directory?(path)
-      epubs = Dir.entries(path)
-      epubs.reject { |name| name.start_with?(".") }.each do |name|
-        epub_path = path.join(name)
-        load_text(epub_path)
-      end
-    end
-
-    def ingest(path)
-      Ingestor.logger = @logger
-      text = Ingestor.ingest(path)
-      Ingestor.reset_logger
-      text
-    end
-
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/MethodLength
-    def make_project_for_text(text)
-      project = Project.create(
-        title: text.title,
-        description: text.description,
-        cover: text.cover.try(:resource).try(:attachment),
-        featured: [true, false, false, false].sample
-      )
-      project.collaborators = text.collaborators
-      @logger.info("Creating project: #{project.title}".green)
-      project.text_categories = random_categories(rand(0..5), Category::ROLE_TEXT)
-      if !project.valid?
-        @logger.error(project.errors.full_messages)
-      else
-        project.save
-        text.project = project
-        text.save
-      end
-      project
-    end
-
-    def clear_db
-      clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource
-                 Subject TextSubject TextTitle User Category Page)
-      clear.each do |model_name|
-        @logger.info("Truncate #{model_name} table".red)
-        model_name.constantize.destroy_all
-      end
-    end
-
-    def random_categories(count, role)
-      categories = []
-      count.times do |i|
-        title = "#{Faker::Hacker.adjective.titlecase} Category ##{i + 1}"
-        categories.push Category.create(title: title, role: role)
-        @logger.info("  Creating category: #{title}".light_yellow)
-      end
-      categories
-    end
-
-    def random_cover_image
-      w, h = random_cover_ratio
-      url_params = "txtsize=19&bg=000000&txt=#{w}%C3%97#{h}&w=#{w}&h=#{h}&fm=png"
-      url = "https://placeholdit.imgix.net/~text?#{url_params}"
-      path = "/tmp/#{Faker::Lorem.characters(10)}.png"
-      File.open(path, "wb") do |f|
-        f.binmode
-        f.write HTTParty.get(url).parsed_response
-      end
-      path
-    end
-
-    def random_cover_ratio
-      ratios = [[5, 8], [6, 9], [8, 10], [7, 7], [10, 8], [13, 11]]
-      ratio = ratios.sample
-      h = 200
-      w = ((ratio[0].to_f / ratio[1].to_f) * h).round
-      [w, h]
+      @logger.info("Creating admin user: #{u.email}".green)
     end
   end
 end

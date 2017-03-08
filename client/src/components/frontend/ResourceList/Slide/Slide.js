@@ -1,17 +1,38 @@
 import React, { Component, PropTypes } from 'react';
+import throttle from 'lodash/throttle';
+import FormattedDate from 'components/global/FormattedDate';
 
 export default class ResourceSlideFigure extends Component {
   static propTypes = {
     resource: PropTypes.object
   };
 
+  constructor() {
+    super();
+    this.getParentWidth = this.getParentWidth.bind(this);
+  }
+
   componentDidMount() {
-    const parentWidth = this._figure.parentNode.offsetWidth;
-    this._figure.style.width = parentWidth + 'px';
+    if (this._figure) {
+      this._figure.style.width = this.getParentWidth(this._figure);
+      this.throttledWidth = throttle(() => {
+        this._figure.style.width = this.getParentWidth(this._figure);
+      }, 200);
+      window.addEventListener('resize', this.throttledWidth);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.throttledWidth);
+  }
+
+  getParentWidth(figure) {
+    return figure.parentNode.offsetWidth + 'px';
   }
 
   render() {
     const resource = this.props.resource;
+    const attr = resource.attributes;
 
     return (
       <figure>
@@ -23,12 +44,16 @@ export default class ResourceSlideFigure extends Component {
           style={ { backgroundImage: 'url(/static/images/resource-splash.png)' } }
         >
           <div className="resource-info">
-            <i className={`manicon manicon-resource-${resource.attributes.type}`}></i>
+            <i className={`manicon manicon-resource-${attr.kind}`}></i>
             <span className="resource-type">
-              {resource.attributes.type}
+              {attr.kind}
             </span>
             <span className="resource-date">
-              {'Uploaded January 2017'}
+              <FormattedDate
+                prefix="Uploaded"
+                format="MMMM, YYYY"
+                date={attr.createdAt}
+              />
             </span>
           </div>
         </div>

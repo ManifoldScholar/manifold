@@ -1,9 +1,15 @@
-import Footer from './Footer.js';
-import Header from './Header.js';
-import ButtonNavigation from './ButtonNavigation.js';
+import ButtonNavigation from './ButtonNavigation';
+import Footer from './Footer';
+import Header from './Header';
+import MobileNav from './MobileNav';
+import NoFollow from './NoFollow';
+import Splash from './Splash';
 
 export default {
+  ButtonNavigation,
   Footer,
   Header,
-  ButtonNavigation
+  MobileNav,
+  Splash,
+  NoFollow
 };

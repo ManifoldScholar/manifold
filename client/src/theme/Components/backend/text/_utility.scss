@@ -1,0 +1,39 @@
+.text-category-list-utility {
+  button, .button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    font-size: 14px;
+    color: $neutral75;
+    text-decoration: none;
+    transition: color $duration $timing;
+
+    &:hover {
+      color: $accentPrimary;
+    }
+  }
+
+  .manicon-arrow-up, .manicon-arrow-down, .manicon-x {
+    font-size: 15px;
+    color: $neutral70;
+
+    &:hover {
+      color: $accentPrimary;
+    }
+  }
+
+  .manicon-arrow-up {
+    margin-left: 28px;
+  }
+
+  .manicon-arrow-down {
+    margin-left: 8px;
+  }
+
+  .manicon-x {
+    margin-left: 17px;
+
+    &:hover {
+      color: $sp40Tertiary;
+    }
+  }
+}

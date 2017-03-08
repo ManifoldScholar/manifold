@@ -1,0 +1,61 @@
+%splash-prototype {
+  padding-bottom: 10px;
+
+  @include respond($break95) {
+    padding-top: 20px;
+  }
+
+  .bg-accent-primary & {
+    .heading-primary {
+      color: $neutralWhite;
+    }
+
+    .button-bare-primary {
+      color: $neutralWhite;
+    }
+  }
+
+  p {
+    @include templateCopy;
+    font-size: 17px;
+    line-height: 1.353;
+  }
+
+  .buttons {
+    margin-top: 23px;
+
+    .button-bare-primary + .button-bare-primary {
+      margin-left: 2.308em;
+    }
+  }
+}
+
+.splash-50 {
+  @extend %splash-prototype;
+  display: table;
+
+  .left {
+    display: table-cell;
+    width: 100%;
+
+    @include respond($break75) {
+      width: 50%;
+    }
+  }
+
+  .right {
+    position: relative;
+    display: none;
+
+    @include respond($break75) {
+      display: table-cell;
+    }
+
+    img {
+      position: absolute;
+      bottom: -186px;
+      left: 10px;
+      width: 661px;
+    }
+  }
+}

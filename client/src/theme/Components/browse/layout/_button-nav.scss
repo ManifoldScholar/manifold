@@ -1,0 +1,9 @@
+// <nav> wrapping some buttons
+.button-nav {
+  text-align: center;
+
+  .button-icon-primary {
+    margin: 0 20px 20px;
+    vertical-align: top;
+  }
+}

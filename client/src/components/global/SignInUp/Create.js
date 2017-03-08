@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { usersAPI } from 'api';
-import { entityStoreActions, authActions } from 'actions';
+import { entityStoreActions, currentUserActions } from 'actions';
 import { select } from 'utils/entityUtils';
 import { Form } from 'components/global';
 
@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import get from 'lodash/get';
 
 const { request, flush } = entityStoreActions;
-const { startLogin } = authActions;
+
+// const { startLogin } = authActions;
 
 class Create extends Component {
 
@@ -66,7 +67,10 @@ class Create extends Component {
   authenticateUser() {
     this.setState({ authenticating: true });
     const { dispatch } = this.props;
-    dispatch(startLogin(this.state.user.email, this.state.user.password));
+    dispatch(currentUserActions.login({
+      email: this.state.user.email,
+      password: this.state.user.password
+    }));
   }
 
   createUser(event) {
@@ -81,13 +85,17 @@ class Create extends Component {
   }
 
   render() {
-    let errors = get(this.props.response, 'errors') || {};
+    let errors = get(this.props.response, 'errors') || [];
     return (
       <div>
         <form method="post" onSubmit={this.createUser} >
           <h4 className="form-heading">Create Account</h4>
           <div className="row-1-p">
-            <Form.Errorable className="form-input" field="email" errors={errors} >
+            <Form.Errorable
+              className="form-input"
+              name="attributes[email]"
+              errors={errors}
+            >
              <label>Email</label>
               <input
                 value={this.state.user.email}
@@ -102,7 +110,7 @@ class Create extends Component {
           <div className="row-1-p">
             <Form.Errorable
               className="form-input"
-              field={['first_name', 'last_name']}
+              name={['attributes[firstName]', 'attributes[lastName]']}
               errors={errors}
             >
               <label>
@@ -119,7 +127,11 @@ class Create extends Component {
             </Form.Errorable>
           </div>
           <div className="row-1-p">
-            <Form.Errorable className="form-input" field="password" errors={errors} >
+            <Form.Errorable
+              className="form-input"
+              name="attributes[password]"
+              errors={errors}
+            >
               <label>
                 Password
               </label>
@@ -129,12 +141,16 @@ class Create extends Component {
                 name="password"
                 id="create-password"
                 onChange={this.handleInputChange}
-                placeholder="password"
+                placeholder="Password"
               />
             </Form.Errorable>
           </div>
           <div className="row-1-p">
-            <div className="form-input">
+            <Form.Errorable
+              className="form-input"
+              name="attributes[passwordConfirmation]"
+              errors={errors}
+            >
               <label>
                 Confirm Password
               </label>
@@ -146,7 +162,7 @@ class Create extends Component {
                 onChange={this.handleInputChange}
                 placeholder="Confirm Password"
               />
-            </div>
+            </Form.Errorable>
           </div>
           <div className="row-1-p">
             <div className="form-input">

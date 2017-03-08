@@ -1,0 +1,35 @@
+.no-follow {
+  text-align: center;
+
+  .heading-primary {
+    color: $neutral75;
+  }
+
+  p {
+    @include templateCopy;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: $neutral80;
+
+    @include respond($break60) {
+      font-size: 19px;
+    }
+  }
+
+  .demo-animation {
+    width: 150px;
+    padding-top: 50px;
+    margin: 0 auto;
+
+    @include respond($break80) {
+      width: 180px;
+      padding-top: 77px;
+    }
+
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+  }
+}

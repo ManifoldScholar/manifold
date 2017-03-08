@@ -32,7 +32,7 @@
   // Default margin
   margin-bottom: 1.2em;
   font-size: 22px;
-  font-weight: $regular;
+  font-weight: $medium;
   line-height: 1.32;
 
   @include respond($break60) {
@@ -40,11 +40,29 @@
   }
 }
 
+.heading-primary {
+  @include headingPrimary;
+}
+
 @mixin headingTertiary {
   @include templateHead;
   margin-top: 0;
   font-size: 16px;
   font-weight: $semibold;
+}
+
+@mixin headingQuaternary {
+  @include templateHead;
+  margin: 0;
+  font-size: 28px;
+
+  @include respond($break90) {
+    font-size: 30px;
+  }
+}
+
+.heading-quaternary {
+  @include headingQuaternary;
 }
 
 
@@ -56,8 +74,12 @@
   // component to component
   font-size: 16px;
   font-weight: $semibold;
-  letter-spacing: 0.067em;
+  letter-spacing: 0.075em;
   text-transform: uppercase;
+}
+
+.utility-primary {
+  @include utilityPrimary;
 }
 
 
@@ -106,7 +128,7 @@
 
 @mixin formLabelPrimary {
   @include templateHead;
-  font-size: $type40;
+  font-size: 12px;
   font-weight: $semibold;
   letter-spacing: 0.075em;
   text-transform: uppercase;
@@ -117,8 +139,9 @@
 // --------------------------------------------------------
 @mixin formInputPrimary {
   @include templateHead;
-  font-size: $type70;
-  letter-spacing: 0.32px;
+  font-size: 20px;
+  font-weight: $regular;
+  letter-spacing: 0.015em;
 }
 
 @mixin formInputSecondary {
@@ -144,5 +167,30 @@
 
   a {
     color: $neutral30;
+  }
+}
+
+// Reader Font Size classes
+// These classes apply responsive font-sizes to reader
+// --------------------------------------------------------
+// These are generated from this nested list (of lists)
+// To add another, simply ensure that react can increment by another value
+// and then add anohter nexted list here.
+$readerFontSizes: (
+  (12px, 13px),
+  (14px, 16px),
+  (16px, 20px),
+  (18px, 22px),
+  (20px, 26px),
+  (24px, 32px),
+);
+
+@for $i from 1 through length($readerFontSizes) {
+  .font-size-#{$i - 1} {
+    font-size: nth(nth($readerFontSizes, $i), 1);
+
+    @include respond($break40) {
+      font-size: nth(nth($readerFontSizes, $i), 2);
+    }
   }
 }

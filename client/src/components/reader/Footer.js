@@ -1,6 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { Helper } from 'components/global';
 
 export default class Footer extends Component {
+
+  static propTypes = {
+    text: PropTypes.object
+  };
+
+  getFooterText(text) {
+    if (!text.attributes.rights) return null;
+    return (
+      <Helper.SimpleFormat text={text.attributes.rights} />
+    );
+  }
+
   render() {
     return (
       <footer className="footer-reader">
@@ -8,10 +21,7 @@ export default class Footer extends Component {
           <div className="rel">
             <section className="colophon">
               <i className="manicon manicon-manifold-logo"></i>
-              <p>
-                {'© Gary Hall and contributors. All rights reserved.'}<br/>
-                {'Published with permission by the University of Minnesota Press.'}
-              </p>
+              {this.getFooterText(this.props.text)}<br/>
             </section>
           </div>
         </div>

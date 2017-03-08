@@ -10,12 +10,17 @@
 /npm-debug.log
 
 ### IntelliJ ###
+*.iml
+.idea
+
 
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/codeStyleSettings.xml
 .idea/dictionaries
+.idea/dataSources
+.idea/jsLinters
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -38,6 +43,10 @@
 /user_texts
 /import
 
+### Ignore keys ###
+/config/keys/*
+!/config/keys/.keep
+
 ### Ignore secrets ###
 config/secrets.yml
 
@@ -47,3 +56,6 @@ doc
 
 ### Extracted epubs ###
 /texts/tmp
+
+### Environments ###
+/.env

@@ -1,3 +1,5 @@
+exports[`ButtonNavigation component doesn't render anything when not logged in on home 1`] = `null`;
+
 exports[`ButtonNavigation component renders correctly 1`] = `
 <section
   className="bg-neutral05">
@@ -6,24 +8,24 @@ exports[`ButtonNavigation component renders correctly 1`] = `
     <nav
       className="button-nav">
       <a
+        className="button-icon-primary"
         onClick={[Function]}
         style={Object {}}>
-        <button
-          className="button-icon-primary">
+        <span>
           <i
             className="manicon manicon-books-on-shelf" />
           See more projects
-        </button>
+        </span>
       </a>
       <a
+        className="button-icon-primary"
         onClick={[Function]}
         style={Object {}}>
-        <button
-          className="button-icon-primary">
+        <span>
           <i
             className="manicon manicon-books-with-glasses" />
           Projects You\'re Following
-        </button>
+        </span>
       </a>
     </nav>
   </div>
@@ -38,24 +40,24 @@ exports[`ButtonNavigation component respects the grayBg prop 1`] = `
     <nav
       className="button-nav">
       <a
+        className="button-icon-primary"
         onClick={[Function]}
         style={Object {}}>
-        <button
-          className="button-icon-primary">
+        <span>
           <i
             className="manicon manicon-books-on-shelf" />
           See more projects
-        </button>
+        </span>
       </a>
       <a
+        className="button-icon-primary"
         onClick={[Function]}
         style={Object {}}>
-        <button
-          className="button-icon-primary">
+        <span>
           <i
             className="manicon manicon-books-with-glasses" />
           Projects You\'re Following
-        </button>
+        </span>
       </a>
     </nav>
   </div>
@@ -70,14 +72,14 @@ exports[`ButtonNavigation component respects the showBrowse prop 1`] = `
     <nav
       className="button-nav">
       <a
+        className="button-icon-primary"
         onClick={[Function]}
         style={Object {}}>
-        <button
-          className="button-icon-primary">
+        <span>
           <i
             className="manicon manicon-books-with-glasses" />
           Projects You\'re Following
-        </button>
+        </span>
       </a>
     </nav>
   </div>
@@ -92,14 +94,14 @@ exports[`ButtonNavigation component respects the showFollowing prop 1`] = `
     <nav
       className="button-nav">
       <a
+        className="button-icon-primary"
         onClick={[Function]}
         style={Object {}}>
-        <button
-          className="button-icon-primary">
+        <span>
           <i
             className="manicon manicon-books-on-shelf" />
           See more projects
-        </button>
+        </span>
       </a>
     </nav>
   </div>

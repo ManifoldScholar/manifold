@@ -73,7 +73,7 @@
     "__SERVER__": false,
     "__DISABLE_SSR__": true,
     "__DEVTOOLS__": true,
-    "__MANIFOLD_API_URL__": true,
+    "__API_URL__": true,
     "socket": true
   }
 }

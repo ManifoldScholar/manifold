@@ -12,8 +12,11 @@ import { match } from 'react-router';
 import config from './config';
 import proxy from 'http-proxy-middleware';
 import createStore from './store/createStore';
-import { authActions } from 'actions';
+import { currentUserActions } from 'actions';
+import { authenticateWithToken } from 'store/middleware/currentUserMiddleware';
 import ch from './helpers/consoleHelpers';
+import has from 'lodash/has';
+import Manifold from 'containers/Manifold';
 
 const morgan = require('morgan');
 const app = new Express();
@@ -41,10 +44,9 @@ export default function (parameters) {
     const staticPath = path.join(__dirname, '..', '..', '..', '..', 'static');
     app.use('/static', Express.static(staticPath));
     ch.info(`Proxying /static requests to ${staticPath}`);
-
   }
 
-  const universalTarget = `http://localhost:${config.reactServerPort}`;
+  const universalTarget = `http://localhost:${config.universalServerPort}`;
   const reactServerProxy = proxy({
     target: universalTarget,
     changeOrigin: true,
@@ -58,36 +60,45 @@ export default function (parameters) {
 
       const store = createStore();
 
+      let authToken = null;
       if (req.headers.cookie) {
         const manifoldCookie = cookie.parse(req.headers.cookie);
-        const authToken = manifoldCookie.authToken;
-        store.dispatch(authActions.setAuthToken(authToken));
-        store.dispatch(authActions.getCurrentUser);
+        authToken = manifoldCookie.authToken;
       }
 
-      try {
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html
-            assets={parameters.chunks()}
-            store={store}
-          />));
-      } catch (error) {
-        if (error.code === "MODULE_NOT_FOUND") {
-          const msg = "Waiting for initial Webpack build to complete. Wait a few seconds " +
-            "and reload.";
-          ch.error(msg);
-          res.send(msg);
-        } else {
-          ch.error(`Universal render fallback failed to render in server-web.js`);
-          res.send(exceptionRenderer(error));
+      const render = () => {
+        try {
+          res.send('<!doctype html>\n' +
+            ReactDOM.renderToString(<Html
+              assets={parameters.chunks()}
+              store={store}
+            />));
+        } catch (error) {
+          if (error.code === "MODULE_NOT_FOUND") {
+            const msg = "Waiting for initial Webpack build to complete. Wait a few seconds " +
+              "and reload.";
+            ch.error(msg);
+            res.send(msg);
+          } else {
+            ch.error(`Universal render fallback failed to render in server-web.js`);
+            res.send(exceptionRenderer(error));
+          }
         }
+      };
+
+      const promises = [];
+      if (!has(store.getState(), "entityStore.entities.settings.0")) {
+        promises.push(Manifold.bootstrap(store.getState, store.dispatch));
       }
+
+      promises.push(authenticateWithToken(authToken, store.dispatch));
+      Promise.all(promises).then(render, render);
     }
   });
   app.use('/', reactServerProxy);
   ch.info(`Proxying all other requests to the Universal rendering service at ${universalTarget}`);
 
-  const socketLocation = process.env.NODE_SERVER_SOCKET_PATH;
+  const socketLocation = config.webServerSocket;
   let listenOn;
   let setUmask = false;
   let oldUmask;

@@ -1,0 +1,103 @@
+.backend-panel {
+  @include clearfix;
+
+  .container {
+    @include clearfix;
+  }
+
+  .aside {
+    display: none;
+    float: left;
+    width: 130px;
+    padding-right: 20px;
+
+    @include respond($break40) {
+      display: block;
+    }
+
+    @include respond($break75) {
+      width: 200px;
+      padding-right: 24px;
+    }
+  }
+
+  .panel {
+    width: 100%;
+
+    @include respond($break40) {
+      float: left;
+      width: calc(100% - 130px);
+    }
+
+    @include respond($break75) {
+      width: calc(100% - 200px);
+    }
+  }
+
+  // This navigation isn't used elsewhere, but it
+  // can be abstracted if necessary
+  .panel-nav {
+    ul {
+      @include listUnstyled;
+    }
+
+    li {
+
+      + li {
+        margin-top: 2.375em;
+        font-size: 16px;
+      }
+    }
+
+    a {
+      @include utilityPrimary;
+      padding-bottom: 3px;
+      color: $neutral50;
+      text-decoration: none;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $neutral20;
+      }
+
+      &.active {
+        color: $neutral20;
+        border-bottom: 2px solid $neutral20;
+      }
+    }
+  }
+
+  // Scrollable top version of aside nav
+  // Scopes and modifies panel nav
+  .scrollable {
+    overflow: hidden;
+    background-color: $neutral80;
+
+    @include respond($break40) {
+      display: none;
+    }
+
+    .wrapper {
+      white-space: nowrap;
+    }
+
+    .panel-nav {
+      padding-left: $containerPaddingResp;
+
+      li {
+        display: inline-block;
+
+        + li {
+          margin-top: 0; // OD
+          margin-left: 20px;
+        }
+      }
+
+      a {
+        display: block;
+        padding: 12px 0 14px;
+        font-size: 14px;
+      }
+    }
+  }
+}

@@ -1,5 +1,9 @@
 .header-notifications-list {
+  position: absolute;
+  top: auto;
+  width: 100%;
   // React Animation classes
+
   &.updating {
     transition: transform $duration ease-out;
   }
@@ -9,50 +13,87 @@
   // React Animation classes
   &.notification-leave {
     max-height: 200px;
-    transition: transform 0.3s ease-in-out, max-height 0.2s ease-out 0.3s;
+    transition: transform 0.3s ease-in-out, max-height 0.2s ease-out 0.15s;
   }
 
   &.notification-leave-active {
     max-height: 0;
     transform: translate3d(-100%, 0, 0);
   }
+
+  + .header-notification-container {
+    .header-notification .container {
+      border-top: 1px solid $neutral50;
+    }
+  }
 }
 
 .header-notification {
-  position: relative;
-  padding: 23px 165px 25px 40px;
+  width: 100%;
   color: $neutralOffBlack;
+
+  .container {
+    position: relative;
+    // Adjusted container size
+    padding-top: 23px;
+    padding-bottom: 25px;
+    background-color: $sp30Primary;
+
+    @include respond($break100) {
+      max-width: $containerWidthFull - 50px;
+      padding: 23px 26px 25px;
+    }
+  }
 
   .notification-heading {
     @include headingTertiary;
+    padding-right: 67px;
     margin: 0;
-    font-weight: $regular;
+    font-size: 18px;
+    font-weight: $semibold;
+
+    @include respond($break70) {
+      font-size: 20px;
+    }
   }
 
   .notification-body {
     @include templateCopy;
+    padding-right: 67px;
     margin-top: 10px;
-    font-size: $type70;
+    font-size: 16px;
+
+    @include respond($break70) {
+      font-size: 20px;
+    }
   }
 
   .notification-close {
     @include buttonUnstyled;
     position: absolute;
     top: 50%;
-    right: 115px;
+    right: $containerPaddingResp;
     margin-top: -14px;
-    font-size: 28px;
+    font-size: 24px;
+
+    @include respond($break70) {
+      font-size: 28px;
+    }
+
+    @include respond($break100) {
+      right: 26px;
+    }
   }
 
-  &.notice {
+  &.notice .container {
     background-color: $sp30Primary;
   }
 
-  &.warning {
+  &.warning .container {
     background-color: $sp30Secondary;
   }
 
-  &.error {
+  &.error .container {
     background-color: $sp30Tertiary;
   }
 }

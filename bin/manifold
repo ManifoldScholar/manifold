@@ -1,0 +1,198 @@
+#!/usr/bin/env ruby
+require 'gettext'
+require 'clamp'
+require 'paint'
+
+Clamp.messages = {
+  :usage_heading => '
+                     Manifold Scholarship
+
+  ╦
+  ░░░╬φ╦,                                               ,╓╤
+  ░░░╬░░░░░╬╦╦,                                  ,╓╦φ╣╬░░░░
+  ░░░    "╚╬░░░░╬▒╦╦,                     ,╓╦φ╬╬░░░░░╬╩╙"
+  ░░░         `╙╩╬░░░░╬φ╦╖         ,╓╦φ╣╬░░░░░╬╩╙"
+  ░░░               "╙╩░░░░░╬╦╦φ╣╬░░░░░╬╩╙"            ,╔╦φ
+  ░░░                ,╓╦╬░░░░░░░░░░░░,          ,╓╦φ╬╬░░░░░
+  ░░░         ,╓╦φ▒╬░░░░░╬╩╨╠░░░╙╩╬░░░░╬▒╦╦╦φ╬╬░░░░░╩╩╙`
+  ░░░   ,╦φ╣╬░░░░░╬╩╨"      ]░░░     "╙╩░░░░░░░░░
+  ░░░╬░░░░░░╩╨"            ,╠░░░           "╚╬░░░░░╬╦╦,╔╦ê╬
+  ░░╬╩╩"            ,╓╦φ╣╬░░░░░░                `╙╩╬░░░░░░░
+             ,╓╦φ╣╬░░░░░╬╩╙"╠░░░                      `║░░░
+      ,╓╦φ╣╬░░░░░╬╩╙"       ]░░░                       ║░░░
+  φ╣╬░░░░░╬╩╨"            ,╔╣░░░                       ║░░░
+  ░╬╩╙`            ,╓╦φ╬╬░░░░░░░                       ║░░░
+            ,╓╦φ╬╬░░░░░╩╩╙` ╠░░░                       ║░░░
+     ,╓╦φ╣╬░░░░░╩╩"`        ]░░░                       ║░░░
+  ╣╬░░░░░╩╩"`            ,╔╦╣░░░                       ║░░░
+  ╬╩╙`            ,╔╦φ╬░░░░░░░░░                       ║░░░
+           ,╔╦φ╬╬░░░░░╩╩"   ]░░░                       ║░░░
+    ,╔╦φ╣░░░░░░╩╩"`         ]░░░                       ║░░░
+  ░░░░░░╩╩"`            ,╦╦╣╬░░░╣╦╦,                   ║░░░
+  ╩"`            ,╦╦╣╬░░░░░╬╩╩╙╩╬░░░░╬▒╦╖              ║░░░
+         ,,╦╦▒╬░░░░░╬╩╙"           `╙╩╬░░░░╬φ╦╓        ║░░░
+   ,╦╦ê╣░░░░░░╩╨"                        "╚╬░░░░░╣╦╦,  ║░░░
+  ░░░░░╩╩"                                    `╙╩╬░░░░╬╬░░░
+  "                                                 `╙╩╬░░░
+                                                          "
+Manifold CLI Usage Help'
+}
+
+Clamp do
+
+  self.default_subcommand = "start"
+
+  subcommand ["start", "s"], "Start services" do
+
+    option "--noapi", :flag, "do not start API"
+    option "--noworker", :flag, "do not start background worker"
+    option "--noclockwork", :flag, "do not start clockwork"
+    option "--noclient", :flag, "do not start client"
+
+    self.default_subcommand = "all"
+
+    subcommand ["all"], "Start all services" do
+
+      def execute
+        api_num = noapi? ? 0 : 1
+        worker_num = noclient? ? 0 : 1
+        clockwork_num = noclockwork? ? 0 : 1
+        client_num = noclient? ? 0 : 1
+        exec "foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num}"
+      end
+
+    end
+
+    subcommand ["api"], "Start API service" do
+      def execute
+        exec "foreman start -m api=1,worker=0,clockwork=0,client=0"
+      end
+    end
+
+    subcommand ["worker"], "Start Worker service" do
+      def execute
+        exec "foreman start -m api=0,worker=1,clockwork=0,client=0"
+      end
+    end
+
+    subcommand ["clockwork"], "Start Clockwork service" do
+      def execute
+        exec "foreman start -m api=0,worker=0,clockwork=1,client=0"
+      end
+    end
+
+    subcommand ["client"], "Start Client service" do
+      def execute
+        exec "foreman start -m api=0,worker=0,clockwork=0,client=1"
+      end
+    end
+
+  end
+
+  subcommand ["lint", "l"], "Lint code" do
+
+    option "--autofix", :flag, "autofix when linting"
+    parameter "[SUBJECT]", "api or client"
+
+    def lint_api
+      autofix = autofix? ? "-a" : ""
+      puts Paint["$ rubocop . #{autofix}", :faint]
+      raise "API lint failed" unless system "cd api && rubocop #{autofix}"
+    end
+
+    def lint_client
+      autofix = autofix? ? "--fix" : ""
+      puts Paint["$ scss-lint -c .scss-lint.yml", :faint]
+      system "scss-lint -c .scss-lint.yml"
+      puts Paint["$ eslint . #{autofix}", :faint]
+      raise "Client lint failed" unless system "cd client && eslint . #{autofix}"
+    end
+
+    def execute
+      lint_api if subject == "api" || subject.nil?
+      lint_client if subject == "client" || subject.nil?
+    end
+
+  end
+
+  subcommand ["test", "t"], "Run tests" do
+
+    option "--update-snapshots", :flag, "update snapshots"
+    option "--integration", :flag, "include integration"
+    parameter "[SUBJECT]", "api or client"
+
+    def test_api
+      integration = integration? ? " --tag integration" : ""
+      puts Paint["rspec -fd #{integration}", :faint]
+      raise "API test failed" unless system "cd api && rspec -fd #{integration}"
+    end
+
+    def test_client
+      update = update_snapshots? ? " -u" : ""
+      puts Paint["jest#{update}", :faint]
+      raise "Client test failed" unless system "cd client && jest#{update}"
+    end
+
+    def execute
+      test_api if subject == "api" || subject.nil?
+      test_client if subject == "client" || subject.nil?
+    end
+  end
+
+  subcommand ["check", "c"], "Lint and test prior to commiting" do
+
+    parameter "[SUBJECT]", "api or client"
+
+    def check_client
+      puts Paint["mainfold lint client", :faint]
+      raise "Client lint failed" unless system "manifold lint client"
+      puts Paint["mainfold test client", :faint]
+      raise "Client test failed" unless system "manifold test client"
+    end
+
+    def check_api
+      puts Paint["mainfold lint api", :faint]
+      raise "API lint failed" unless system "manifold lint api"
+      puts Paint["mainfold test api", :faint]
+      raise "API test failed" unless system "manifold test api"
+    end
+
+    def execute
+      check_api if subject == "api" || subject.nil?
+      check_client if subject == "client" || subject.nil?
+    end
+
+  end
+
+  subcommand ["ingest"], "Ingest a text into Manifold" do
+    parameter "PATH", "path to text"
+
+    def execute
+      relative_path = File.join("..", path)
+      system "cd api && rails ingest:text[\"#{relative_path}\",\"debug\"]"
+    end
+  end
+
+  subcommand ["import", "i"], "Ingest a project into Manifold" do
+    parameter "PATH", "path to the project directory containing a project.json file"
+
+    def execute
+      relative_path = File.join("..", path)
+      system "cd api && rails import:project[\"#{relative_path}\",\"debug\"]"
+    end
+  end
+
+  subcommand ["development"], "Developer tasks" do
+
+    subcommand ["load"], "Reset database and load sample data from ./import dir" do
+
+      def execute
+        system "cd api && rails development:load"
+      end
+
+    end
+
+  end
+
+
+end

@@ -1,0 +1,92 @@
+common: &1
+  :twitter:
+    # env
+    :consumer_key:
+    :consumer_secret:
+    :access_token:
+    :access_token_secret:
+    # /env <-- these can be set from the environment
+  :google:
+    # env
+    :service_project_id:
+    :service_private_key_id:
+    :service_private_key:
+    :client_email:
+    :service_client_id:
+    # /env <-- these can be set from the environment
+    :analytics_oauth_scope: "https://www.googleapis.com/auth/analytics.readonly"
+    :auth_uri: "https://accounts.google.com/o/oauth2/auth"
+    :token_uri: "https://accounts.google.com/o/oauth2/token"
+    :auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+    :client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/manifold-service%40appspot.gserviceaccount.com"
+  # These are default settings values that can override database values when the
+  # development:load task is executed. Anything in "settings" may be exposed to the client
+  # so it is not a good place to store secrets.
+  :settings:
+    :general:
+      :ga_tracking_id: 'UA-90773269-1'
+      :ga_profile_id: 'ga:138727289'
+      :contact_url: 'http://manifold.umn.edu/contact/'
+    :theme:
+      :typekit_id: 'mnj5ltf'
+  :attachments:
+    :validations:
+      :image:
+        :allowed_mime:
+          - !ruby/regexp '/image\/.*/'
+        :allowed_ext:
+          - !ruby/regexp '/gif\Z/'
+          - !ruby/regexp '/jpe?g\Z/'
+          - !ruby/regexp '/png\Z/'
+          - !ruby/regexp '/svg\Z/'
+      :resource:
+        :allowed_mime:
+          - "application/xhtml+xml"
+          - "application/x-dtbncx+xml"
+          - "application/vnd.ms-opentype"
+          - "application/font-woff"
+          - "application/smil+xml"
+          - "application/pls+xml"
+          - "application/xml"
+          - "application/pdf"
+          - "application/vnd.ms-powerpoint"
+          - "application/x-font-ttf"
+          - "application/x-font-truetype"
+          - "application/x-font-otf"
+          - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+          - "application/zip"
+          - !ruby/regexp '/text\/.*/'
+          - !ruby/regexp '/audio\/.*/'
+          - !ruby/regexp '/video\/.*/'
+          - !ruby/regexp '/image\/.*/'
+        :allowed_ext:
+          - !ruby/regexp '/gif\Z/'
+          - !ruby/regexp '/jpe?g\Z/'
+          - !ruby/regexp '/png\Z/'
+          - !ruby/regexp '/svg\Z/'
+          - !ruby/regexp '/x?html\Z/'
+          - !ruby/regexp '/ttf\Z/'
+          - !ruby/regexp '/otf\Z/'
+          - !ruby/regexp '/woff\Z/'
+          - !ruby/regexp '/mp3\Z/'
+          - !ruby/regexp '/pls\Z/'
+          - !ruby/regexp '/smil\Z/'
+          - !ruby/regexp '/xml\Z/'
+          - !ruby/regexp '/mp3\Z/'
+          - !ruby/regexp '/mp4\Z/'
+          - !ruby/regexp '/css\Z/'
+          - !ruby/regexp '/ncx\Z/'
+          - !ruby/regexp '/js\Z/'
+          - !ruby/regexp '/webm\Z/'
+          - !ruby/regexp '/pdf\Z/'
+          - !ruby/regexp '/zip\Z/'
+          - !ruby/regexp '/docx\Z/'
+          - !ruby/regexp '/xlsx\Z/'
+          - !ruby/regexp '/ppt?x\Z/'
+          - !ruby/regexp '/md\Z/'
+
+production: *1
+development: *1
+test: *1

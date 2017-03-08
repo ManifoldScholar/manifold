@@ -1,0 +1,203 @@
+// Secondary form inputs. These include all of the form inputs (and more)
+// Outlined in 'form-inputs-primary', but change visually with this wrapper.
+@mixin formInputSecondary {
+  @include formInputPrimary;
+  width: 100%;
+  // Explicit height so that elements can line up
+  height: 33px;
+  // Declared in em as it should change with font size
+  padding: 0 0 0.65em;
+  color: $neutral40;
+  background-color: transparent;
+  // Override border
+  border: 0;
+  border-bottom: 1px solid $neutral80;
+  outline: 0;
+  transition: border-color $duration $timing;
+
+  .bg-neutral90 & {
+    &:-webkit-autofill {
+      box-shadow: 0 0 0 1000px $neutral90 inset;
+      // Important required to override chrome default
+      // scss-lint:disable ImportantRule
+      -webkit-text-fill-color: $accentPrimaryPale !important;
+    }
+  }
+}
+
+.form-secondary {
+  .drawer-primary & {
+    margin-bottom: 80px;
+  }
+
+  .form-input {
+    label:not(.checkbox):not(.radio) {
+      @include formLabelPrimary;
+      display: block;
+      margin-bottom: 1.5em;
+      color: $neutral75;
+    }
+
+    + .form-input {
+      margin-top: 40px;
+    }
+
+    input[type="text"], input[type="password"] {
+      @include formInputSecondary;
+      transition: border-color $duration $timing;
+
+      &:focus {
+        border-color: $accentPrimaryLight;
+      }
+    }
+
+    textarea {
+      @include templateCopy;
+      width: 100%;
+      padding: 1.579em;
+      font-size: 19px;
+      color: $neutral30;
+      background-color: transparent;
+      border: 1px solid $neutral80;
+      outline: none;
+      transition: border-color $duration $timing;
+      resize: vertical;
+    }
+
+    .form-toggle {
+      .toggle-label {
+        transition: color $duration $timing;
+      }
+
+      input:checked ~ .toggle-label {
+        color: $accentPrimary;
+      }
+    }
+
+    .button-secondary {
+      display: inline-block;
+      width: auto;
+    }
+  }
+
+  // Dropdown
+  .form-select {
+    // Default width
+    width: auto;
+
+    .manicon-caret-down {
+      position: absolute;
+      top: 40%;
+      right: 6px;
+      font-size: 12px;
+      color: $accentPrimary;
+      pointer-events: none;
+
+      // Use native dropdown arrow in IE9
+      .ie9 & {
+        display: none;
+      }
+    }
+
+    select {
+      @include formInputSecondary;
+      height: auto;
+      padding: 0 42px 0.55em 0; // OD
+      text-transform: none; // OD
+
+      &:focus {
+        border-color: $accentPrimaryLight;
+      }
+
+    }
+  }
+
+  .form-dropzone {
+    position: relative;
+    padding: 36px 30px 38px;
+    border: 1px solid $neutral80;
+
+    &.style-cover {
+      max-width: 150px;
+
+      .manicon-cloud-up {
+        padding-bottom: 13px;
+        font-size: 30px;
+      }
+
+      p {
+        font-size: 12px;
+      }
+
+    }
+
+    &.style-logo {
+      max-width: 250px;
+    }
+
+    &.style-thumbnail {
+      max-width: 175px;
+    }
+
+    .contents {
+      position: relative;
+      z-index: 2;
+    }
+
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0.15;
+    }
+
+    .remove {
+      @include utilityPrimary;
+      position: absolute;
+      right: 4px;
+      bottom: 4px;
+      z-index: 2;
+      font-size: 12px;
+      color: $neutral50;
+    }
+
+    .manicon-cloud-up {
+      display: block;
+      padding-bottom: 26px;
+      font-size: 36px;
+      color: $neutralWhite;
+      text-align: center;
+    }
+
+    p {
+      @include utilityPrimary;
+      font-size: 14px;
+      color: $neutral50;
+      text-align: center;
+    }
+
+  }
+
+  .boolean-labeled {
+    display: table;
+
+    span {
+      @include formInputSecondary;
+      display: table-cell;
+      padding-bottom: 0.5em;
+      vertical-align: middle;
+    }
+
+    .toggle-indicator {
+      display: table-cell;
+      padding-left: 10px;
+      vertical-align: middle;
+    }
+  }
+}

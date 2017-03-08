@@ -3,20 +3,31 @@
 module Collaborative
   extend ActiveSupport::Concern
 
+  # rubocop:disable Metrics/BlockLength
   included do
-    has_many :collaborators
+    has_many :collaborators,
+             -> { order(:position) },
+             as: :collaboratable
+
+    # "If you use a hash-style where option, then record creation via this association
+    # will be automatically scoped using the hash." -- Love, Rails
+    has_many :creator_collaborators,
+             -> { where(role: Collaborator::ROLE_CREATOR).order(:position) },
+             as: :collaboratable,
+             class_name: "Collaborator"
+    has_many :contributor_collaborators,
+             -> { where(role: Collaborator::ROLE_CONTRIBUTOR).order(:position) },
+             as: :collaboratable,
+             class_name: "Collaborator"
     has_many :makers, through: :collaborators
-    has_many :creators,
-             -> { where '"collaborators"."role" = ?', "creator" },
-             through: :collaborators,
-             source: "maker"
-    has_many :contributors,
-             -> { where '"collaborators"."role" = ?', "contributor" },
-             through: :collaborators,
-             source: "maker"
+    has_many :creators, through: :creator_collaborators, source: "maker"
+    has_many :contributors, through: :contributor_collaborators, source: "maker"
   end
 
   def creator_names
-    creators.pluck(:name).join(", ")
+    creators
+      .pluck(:first_name, :last_name)
+      .map { |parts| "#{parts[0]} #{parts[1]}" }
+      .join(", ")
   end
 end

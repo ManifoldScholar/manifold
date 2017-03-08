@@ -32,12 +32,13 @@ module Validator
                                        padding padding-top padding-bottom padding-left
                                        padding-right color).freeze
     TAG_IMG_CSS_PROPERTY_BLACKLIST = %w(max-width).freeze
+    TAG_DIV_CSS_PROPERTY_BLACKLIST = %w(width).freeze
     TAG_FIGURE_CSS_PROPERTY_BLACKLIST = %w(max-width).freeze
     TAG_ATTRIBUTE_BLACKLIST = %w(accept accept-charset accesskey async autofocus border
                                  bgcolor challenge charset code codebase color cols
                                  content contenteditable defer draggable dropzone height
                                  keytype language manifest required sandbox shape size
-                                 sizes tabindex width align).freeze
+                                 sizes tabindex width align rev).freeze
     CSS_VALUE_MAP = {
       "xx-small" => ".7em",
       "x-small" => ".7em",

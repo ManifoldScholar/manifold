@@ -12,11 +12,16 @@ RSpec.describe TextSection, type: :model do
     expect(text_section.text).to be text
   end
 
-  it "belongs to a resource" do
+  it "belongs to a project" do
+    text_section = FactoryGirl.create(:text_section)
+    expect(text_section.project).to be_a Project
+  end
+
+  it "belongs to an ingestion source" do
     text_section = TextSection.new
-    resource = Resource.new
-    text_section.resource = resource
-    expect(text_section.resource).to be resource
+    ingestion_source = IngestionSource.new
+    text_section.ingestion_source = ingestion_source
+    expect(text_section.ingestion_source).to be ingestion_source
   end
 
 end

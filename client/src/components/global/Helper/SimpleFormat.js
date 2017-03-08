@@ -1,6 +1,6 @@
-import React, { Component, PropTypes, createElement } from 'react';
+import React, { PureComponent, PropTypes, createElement } from 'react';
 
-export default class SimpleFormat extends Component {
+export default class SimpleFormat extends PureComponent {
 
   static propTypes = {
     text: PropTypes.string.isRequired,
@@ -9,7 +9,6 @@ export default class SimpleFormat extends Component {
       React.PropTypes.object
     ]),
     wrapperTagProps: PropTypes.object,
-    postfix: PropTypes.node
   }
 
   static defaultProps = {
@@ -17,24 +16,26 @@ export default class SimpleFormat extends Component {
     wrapperTagProps: {}
   }
 
-  paragraphs() {
+  lines(text) {
     const pattern = /([^\n]\n)(?=[^\n])/g;
-    const text = this.props.text;
-    return text.replace(/\r\n?/g, '\n').split(/\n\n+/).map((t) => {
-      if (t.match(pattern)) return t.replace(pattern, '$1<br />');
-      return t;
-    });
+    const lines = text.match(/[^\r\n]+/g);
+    return lines;
   }
 
   render() {
-    const { wrapperTag, wrapperTagProps, postfix } = this.props;
-    return createElement(wrapperTag, wrapperTagProps, this.paragraphs().map((paragraph, index) => (
-      (postfix && index === this.paragraphs().length - 1)
-        ? <p key={ index }>
-        <span dangerouslySetInnerHTML={{ __html: paragraph }} />
-        { postfix }
+    const { text, wrapperTag, wrapperTagProps, postfix } = this.props;
+    const lines = this.lines(text);
+    const children = (
+      <p>
+        {lines.map((line, index) => {
+          const last = index === lines.length - 1 ? true : false;
+          const after = last ? null : <br />;
+          return (
+            <span key={index}>{line}{after}</span>
+          );
+        })}
       </p>
-        : <p key={ index } dangerouslySetInnerHTML={{ __html: paragraph }} />
-    )));
+    );
+    return createElement(wrapperTag, wrapperTagProps, children);
   }
 }

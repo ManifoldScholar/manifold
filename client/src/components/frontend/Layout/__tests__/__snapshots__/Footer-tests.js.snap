@@ -35,8 +35,8 @@ exports[`Footer component renders correctly 1`] = `
             </li>
             <li>
               <a
-                onClick={[Function]}
-                style={Object {}}>
+                href="http://www.test.com"
+                target="_blank">
                 Contact
               </a>
             </li>
@@ -63,21 +63,6 @@ exports[`Footer component renders correctly 1`] = `
     </nav>
     <section
       className="footer-secondary">
-      <form>
-        <div
-          className="search-button-inline">
-          <input
-            placeholder="Search"
-            type="text" />
-          <button
-            className="manicon manicon-magnify">
-            <span
-              className="screen-reader-text">
-              Click to submit search query
-            </span>
-          </button>
-        </div>
-      </form>
       <p
         className="colophon">
         © 2015-2016 6 University of Minnesota Press.

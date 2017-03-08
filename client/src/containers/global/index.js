@@ -1,3 +1,7 @@
-export Manifold from './Manifold.js';
-export LoginForm from './LoginForm.js';
+import LoginForm from './LoginForm';
+import HigherOrder from './HigherOrder';
 
+export default {
+  LoginForm,
+  HigherOrder
+};

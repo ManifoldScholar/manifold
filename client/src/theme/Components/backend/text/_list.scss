@@ -1,0 +1,156 @@
+.text-category-list-secondary {
+  .text-category {
+    header {
+      display: table;
+      width: 100%;
+      padding: 1.063em 19px 0.938em;
+      font-size: 16px;
+      background-color: $neutral95;
+
+      .category-title {
+        @include utilityPrimary;
+        display: table-cell;
+        width: 100%;
+        font-weight: $medium;
+        color: $neutral30;
+
+        &.highlight {
+          color: $accentPrimary;
+        }
+
+        &.notice {
+          color: $sp40Tertiary;
+        }
+
+        span {
+          color: $neutral50;
+        }
+      }
+    }
+
+    .text-category-list-utility {
+      display: table-cell;
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+
+  .texts-group {
+    @include listUnstyled;
+    display: block;
+    margin: 0 0 30px; // OD
+
+    li {
+      display: table;
+      width: 100%;
+      padding: 19px 0 14px; // OD
+      margin: 0; // OD
+
+      + li {
+        border-top: 1px solid $neutral80;
+      }
+    }
+
+    .group-empty {
+      @include utilityPrimary;
+      width: 100%;
+      padding: 2em 0 2.214em;
+      margin-bottom: 31px;
+      font-size: 14px;
+      color: $neutral80;
+      text-align: center;
+      border: 1px solid $neutral80;
+    }
+
+    .asset-thumb {
+      display: table-cell;
+      width: 100%;
+      vertical-align: middle;
+
+      &:hover {
+        .asset-image svg path {
+          fill: $neutral20;
+        }
+
+        .asset-title {
+          color: $neutral20;
+        }
+
+        // Required to prevent over nesting
+        //scss-lint:disable MergeableSelector
+        .asset-title .subtitle {
+          color: $neutral20;
+        }
+      }
+    }
+
+    .asset-image {
+      width: 50px;
+
+      svg path {
+        fill: $neutral50;
+        transition: fill $duration $timing;
+      }
+    }
+
+    .asset-description {
+      width: calc(100% - 50px);
+      padding-left: 20px;
+
+      .asset-title {
+        margin-bottom: 1.055em;
+        font-size: 18px;
+        color: $neutral30;
+        transition: color $duration $timing;
+
+        .subtitle {
+          margin-top: 7px;
+          color: $neutral50;
+          transition: color $duration $timing;
+        }
+      }
+
+      .asset-date, .asset-state {
+        @include utilityPrimary;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: $medium;
+        color: $neutral70;
+
+        + .asset-state {
+          margin-left: 28px;
+        }
+      }
+    }
+
+    .asset-state {
+      &.active {
+        color: $accentPrimary;
+
+        &::before {
+          background-color: $accentPrimary;
+        }
+      }
+
+      &::before {
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        margin-top: -4px;
+        margin-right: 9px;
+        vertical-align: middle;
+        background-color: $neutral70;
+        border-radius: 100%;
+        content: '';
+      }
+    }
+
+    .text-category-list-utility {
+      display: table-cell;
+      padding-right: 19px;
+      text-align: right;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+  }
+}

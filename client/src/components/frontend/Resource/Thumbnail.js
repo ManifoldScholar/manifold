@@ -1,57 +1,94 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import get from 'lodash/get';
+import Icon from './Icon';
 
 export default class ResourceThumbnail extends Component {
 
   static displayName = "Resource.Thumbnail";
 
   static propTypes = {
+    projectId: PropTypes.string,
     resource: PropTypes.object,
-    isList: PropTypes.bool
+    isList: PropTypes.bool,
+    showKind: PropTypes.bool,
+    showTitle: PropTypes.bool,
+    variant: PropTypes.string,
+    noCrop: PropTypes.bool,
+    additionalClasses: PropTypes.string,
   };
 
   static defaultProps = {
-    isList: true
+    showKind: true,
+    showTitle: false,
+    variant: "smallPortrait",
+    additionalClasses: ""
   };
 
-  getResourceType(type) {
-    return type.toLowerCase().charAt(0).toUpperCase() + type.slice(1);
+  constructor() {
+    super();
+  }
+
+  getResourceKind(kind) {
+    if (!kind) return "file";
+    return kind.toLowerCase().charAt(0).toUpperCase() + kind.slice(1);
+  }
+
+  getImage(resource) {
+    return get(resource, `attributes.attachmentThumbnails.${this.props.variant}`);
+  }
+
+  hasImage(resource) {
+    return !!this.getImage(resource);
   }
 
   render() {
 
-    const resource = this.props.resource;
+    const { resource } = this.props;
+    const hasImage = this.hasImage(resource);
 
-    const linkClass = classNames({
-      'bg-image': resource.attributes.image
+    const wrapperClass = classNames({
+      'resource-thumbnail-primary': true,
+      'bg-image': hasImage && !this.props.noCrop,
+      title: this.props.showTitle
     });
 
-    let linkStyle = {};
-    if (resource.attributes.image) {
-      linkStyle = {
-        backgroundImage: `url('${resource.attributes.image}')`
-      };
-    }
+    const backgroundImage =
+      hasImage && !this.props.noCrop ? `url(${this.getImage(resource)})` : null;
 
-    const ContainerTag = this.props.isList ? 'li' : 'div';
     return (
-      <li>
-        <Link
-          to={`/browse/resource/${resource.id}`}
-          className={linkClass} style={linkStyle}
-        >
+      <div
+        className={`${wrapperClass} ${this.props.additionalClasses}`}
+        style={{ backgroundImage }}
+      >
+        <div className="wrapper">
           <figure className="resource-type">
-            <figcaption>
-              {this.getResourceType(resource.attributes.type)}
-            </figcaption>
-            <i className={`manicon manicon-resource-${resource.attributes.type}`}></i>
+            { this.props.showKind ?
+              <figcaption>
+                {this.getResourceKind(resource.attributes.kind)}
+              </figcaption>
+              : null }
+            { this.props.noCrop ?
+              <div className="resource-image">
+                <img src={this.getImage(resource)}/>
+                <div className="image-overlay"></div>
+              </div> :
+              <i className={`resource-icon ${resource.attributes.kind}`}>
+                {resource.attributes.kind ?
+                    <Icon.Composer kind={resource.attributes.kind}/> : null}
+              </i>
+            }
           </figure>
-          <h4 className="resource-title">
-            {resource.attributes.title}
-          </h4>
-        </Link>
-      </li>
+          { this.props.showTitle ?
+            <h4
+              className="resource-title"
+              dangerouslySetInnerHTML={{ __html: resource.attributes.titleFormatted }}
+            />
+          : null }
+        </div>
+      </div>
+
     );
 
   }

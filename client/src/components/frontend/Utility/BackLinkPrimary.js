@@ -17,15 +17,15 @@ export default class UtilityBackLinkPrimary extends Component {
 
   render() {
     return (
-      <div className="container flush">
-        <Link to={this.props.link} className="back-link-primary">
+      <Link to={this.props.link} className="back-link-primary full">
+        <div className="container flush">
           <i className="manicon manicon-arrow-left"></i>
           {this.props.backText}
             <span>
               {this.props.title}
             </span>
-        </Link>
-      </div>
+        </div>
+      </Link>
     );
   }
 }

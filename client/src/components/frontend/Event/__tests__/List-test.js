@@ -22,7 +22,7 @@ function mockEvents() {
 describe("EventList Component", () => {
 
   it("has the event-list-primary class", () => {
-    expect(shallow(<Event.List events={[]} />).is('.event-list-primary')).toBe(true)
+    expect(shallow(<Event.List events={[]} />).find('ul').is('.event-list-primary')).toBe(true)
   });
 
   it("renders a ProjectEvent for each event", () => {

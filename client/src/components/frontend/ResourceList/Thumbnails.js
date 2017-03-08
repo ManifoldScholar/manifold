@@ -16,12 +16,25 @@ export default class ResourceListThumbnails extends Component {
   }
 
   render() {
+    if (!this.props.resources) return null;
     return (
       <nav className="resource-thumbnail-list">
         <ul>
           {this.props.resources.map((resource) => {
             return (
-              <Resource.Thumbnail key={resource.id} resource={resource} />
+              <li key={resource.id}>
+                <Link
+                  to={`/browse/project/${this.props.projectId}/resource/${resource.id}`}
+                  className="resource-link"
+                >
+                  <Resource.Thumbnail
+                    key={resource.id}
+                    projectId={this.props.projectId}
+                    resource={resource}
+                    showTitle
+                  />
+                </Link>
+              </li>
             );
           })}
         </ul>

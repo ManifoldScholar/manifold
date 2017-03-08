@@ -42,15 +42,18 @@ export default class HeaderNotifications extends Component {
     if (this.refs.notificationList) {
       const listHeight = this.refs.notificationList.offsetHeight;
       // This causes problems for HMR. We'll need to revisit.
-      // setTimeout(() => {
-      //   if (!this.state.updating) {
-      //     this.setState({
-      //       updating: true
-      //     });
-      //   }
-      //   this.refs.notificationList.setAttribute('style', 'transform: translate3d(0, 0px, 0);' +
-      //       'height: auto;');
-      // }, 200);
+      this.timer = setTimeout(() => {
+        if (!this.state.updating) {
+          this.setState({
+            updating: true
+          });
+          this.timer = null;
+        }
+        if (this.refs.notificationList) {
+          this.refs.notificationList.setAttribute('style', 'transform: translate3d(0, 0px, 0);' +
+            'height: auto;');
+        }
+      }, 200);
       this.refs.notificationList.setAttribute('style',
           'transform: ' + 'translate3d(0, ' + (this.state.height - listHeight) + 'px, 0);' +
           'height:' + this.state.height + 'px;');
@@ -59,6 +62,7 @@ export default class HeaderNotifications extends Component {
 
   // Only necessary for debugging/testing notifications before they exist.
   componentWillUnmount() {
+    if (this.timer) clearTimeout(this.timer);
     if (__DEVELOPMENT__) {
       window.removeEventListener('keyup', this.handleNotifications);
     }
@@ -118,8 +122,8 @@ export default class HeaderNotifications extends Component {
     return (
       <ReactCSSTransitionGroup
         transitionName="notification"
-        transitionEnterTimeout={4000}
-        transitionLeaveTimeout={2000}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
       >
         {notificationList}
       </ReactCSSTransitionGroup>

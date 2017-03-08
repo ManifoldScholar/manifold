@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Project } from 'components/frontend';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import difference from 'lodash/difference';
 
 export default class ProjectListGrid extends Component {
 
@@ -12,11 +14,43 @@ export default class ProjectListGrid extends Component {
     dispatch: PropTypes.func
   };
 
+  constructor() {
+    super();
+    this.enableAnimation = false;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const currentIds = this.props.projects.map((p) => p.id);
+    const nextIds = nextProps.projects.map((p) => p.id);
+    const diffA = difference(currentIds, nextIds).length;
+    const diffB = difference(nextIds, currentIds).length;
+    if ((diffA + diffB) === 1) {
+      this.enableAnimation = true;
+    } else {
+      this.enableAnimation = false;
+    }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.projects !== this.props.projects) return true;
+    if (nextProps.favorites !== this.props.favorites) return true;
+    if (nextProps.authenticated !== this.props.authenticated) return true;
+    return false;
+  }
+
   render() {
     const hideDesc = true;
+
     return (
       <nav className="grid-project">
-        <ul>
+        <ReactCSSTransitionGroup
+          transitionName="grid-project"
+          transitionEnter={this.enableAnimation}
+          transitionLeave={this.enableAnimation}
+          transitionEnterTimeout={250}
+          transitionLeaveTimeout={250}
+          component="ul"
+        >
           {this.props.projects.map((project) => {
             return (
               <li key={project.id} >
@@ -30,7 +64,7 @@ export default class ProjectListGrid extends Component {
               </li>
             );
           })}
-        </ul>
+        </ReactCSSTransitionGroup>
       </nav>
     );
   }

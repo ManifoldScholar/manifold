@@ -1,0 +1,229 @@
+.resource-viewer {
+  position: absolute;
+  // Reader header height + gradient
+  top: 0;
+  display: none;
+  height: 100%;
+  background-color: $accentPrimaryPale;
+
+  @for $i from 1 through length($readerContainerWidths) {
+    &.container-width-#{$i - 1} {
+      right: calc((100vw - #{nth($readerContainerWidths, $i)})/2 + #{nth($readerContainerWidths, $i)});
+    }
+  }
+
+  @include respond($break80) {
+    display: block;
+  }
+
+  .viewer-list {
+    @include listUnstyled;
+    position: absolute;
+    top: 0;
+    right: 3vw;
+    height: 100%;
+
+    @include respond($break100) {
+      right: 45px;
+    }
+
+    .resource-single-link {
+      display: block;
+      text-decoration: none;
+
+      .image-overlay {
+        background-color: $accentPrimary;
+        opacity: 0;
+      }
+
+      &:hover, &.highlighted, .highlighted & {
+        .resource-title {
+          color: $accentPrimary;
+        }
+
+        .image-overlay {
+          opacity: 0.5;
+        }
+
+        .resource-icon {
+          background-color: $accentPrimary;
+        }
+
+        svg {
+          fill: $neutralWhite;
+        }
+      }
+    }
+  }
+}
+
+@mixin resourceOverflowFade {
+  &::before {
+    position: absolute;
+    // Local z-index
+    z-index: 5;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    content: '';
+    box-shadow: inset 0 -14px 10px -2px $neutralWhite;
+    transition: box-shadow $duration $timing;
+
+    .scheme-dark & {
+      box-shadow: inset 0 -14px 10px -2px $neutral90;
+    }
+  }
+}
+
+.resource-preview-single {
+  position: absolute;
+  right: 0;
+  width: 160px;
+  text-decoration: none;
+  transition: right 0.5s $timing 0.1s,
+    opacity 0.5s $timing;
+
+  &.transition-out {
+    right: 20px;
+    opacity: 0;
+  }
+
+  &.transition-in {
+    right: 0;
+    opacity: 1;
+  }
+
+  &.highlight-enter {
+    opacity: 0.01;
+  }
+
+  &.highlight-enter-active {
+    opacity: 1;
+    transition: opacity $duration $timing;
+  }
+
+  &.highlight-leave {
+    opacity: 1;
+  }
+
+  &.highlight-leave-active {
+    opacity: 0.01;
+    transition: opacity $duration $timing;
+  }
+
+  .resource-viewer .viewer-list &.highlighted {
+    .resource-title {
+      color: $accentPrimary;
+    }
+
+    .image-overlay {
+      opacity: 0.5;
+    }
+  }
+
+  .resource-preview-overflow {
+    @include resourceOverflowFade;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .resource-delete {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 0;
+    right: 0;
+    // Local z-index
+    z-index: 10;
+    width: 17px;
+    height: 17px;
+    padding-top: 2px;
+    font-size: 11px;
+    color: $neutralOffBlack;
+    cursor: pointer;
+    background-color: $neutral40;
+    transition: background-color $duration $timing;
+
+    &:hover {
+      background-color: $sp30Tertiary;
+    }
+  }
+}
+
+.resource-preview-group {
+  position: absolute;
+  right: 0;
+  overflow: hidden;
+  text-align: right;
+  transition: right 0.5s $timing 0.1s,
+  opacity 0.5s $timing;
+
+  &.transition-out {
+    right: 20px;
+    opacity: 0;
+  }
+
+  &.transition-in {
+    right: 0;
+    opacity: 1;
+  }
+
+  // ul
+  .group-thumbnails {
+    @include listUnstyled;
+    position: relative;
+    display: inline-block;
+    max-height: 80px;
+    margin-left: -4px;
+    overflow: hidden;
+    text-align: right;
+
+    &.overflow {
+      @include resourceOverflowFade;
+    }
+
+    li {
+      display: inline-block;
+      padding-left: 4px;
+      margin-bottom: 4px;
+      vertical-align: top;
+    }
+
+    .group-thumbnail {
+      position: relative;
+      cursor: pointer;
+
+      &.highlighted {
+        .resource-thumbnail-primary::before {
+          opacity: 0.5;
+        }
+
+        .resource-icon {
+          background-color: $accentPrimary;
+        }
+
+        svg {
+          fill: $neutralWhite;
+        }
+      }
+    }
+  }
+
+  .group-highlighted-resource-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 160px;
+  }
+
+  .group-highlighted-resource {
+    position: absolute;
+
+    .resource-preview-single {
+      position: static;
+      display: inline-block;
+      width: 160px;
+
+
+    }
+  }
+}

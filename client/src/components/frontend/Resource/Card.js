@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import classNames from 'classnames';
+import FormattedDate from 'components/global/FormattedDate';
+import { Resource } from 'components/frontend';
+import { find } from 'lodash';
 
 export default class ResourceCard extends Component {
 
@@ -8,11 +12,19 @@ export default class ResourceCard extends Component {
 
   static propTypes = {
     resource: PropTypes.object,
-    projectId: PropTypes.string
+    context: PropTypes.object
   };
 
   constructor() {
     super();
+    this.state = {
+      infoHover: false
+    };
+    this.handlePreviewClick = this.handlePreviewClick.bind(this);
+    this.handleInfoMouseOver = this.handleInfoMouseOver.bind(this);
+    this.handleInfoMouseOut = this.handleInfoMouseOut.bind(this);
+    this.handleInfoClick = this.handleInfoClick.bind(this);
+    this.handleTagHover = this.handleTagHover.bind(this);
   }
 
   getResourceType(type) {
@@ -20,25 +32,119 @@ export default class ResourceCard extends Component {
     if (type.toLowerCase() === 'pdf') {
       formattedType = 'PDF';
     }
-
     return formattedType;
   }
 
-  getPreviewText(type) {
-    let text = false;
+  getPreviewText(attr) {
+    const type = attr.kind;
+    const text = (attr.downloadable ?
+      this.renderDownloadablePreview(type)
+      : <span>
+          {'View'}
+          <i className="manicon manicon-arrow-right"></i>
+        </span>
+    );
+    return text;
+  }
 
+  getCollectionResourceId(resource) {
+    if (!resource) return null;
+    const collectionResources = resource.relationships.collectionResources;
+    const out = find(collectionResources, (obj) => {
+      return obj.attributes.collectionId === this.props.context.id;
+    });
+    return out.id;
+  }
+
+  detailUrl() {
+    const context = this.props.context;
+    if (context.type === "collections") {
+      const pid = context.relationships.project.id;
+      const cid = context.id;
+      const crid = this.getCollectionResourceId(this.props.resource);
+      return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+    }
+    if (context.type === "projects") {
+      const resource = this.resource();
+      const pid = context.id;
+      const rid = resource.id;
+      return `/browse/project/${pid}/resource/${rid}`;
+    }
+  }
+
+  handlePreviewClick(event) {
+    event.preventDefault();
+    const attr = this.resource().attributes;
+    let action = null;
+    switch (attr.kind.toLowerCase()) {
+      case "link":
+        action = window.open(attr.externalUrl);
+        break;
+      default:
+        action = attr.downloadable ?
+          window.open(attr.attachmentUrl)
+          : this.handleInfoClick();
+        break;
+    }
+    return action;
+  }
+
+  handleInfoMouseOver() {
+    this.setState({
+      infoHover: true
+    });
+  }
+
+  handleInfoMouseOut() {
+    this.setState({
+      infoHover: false
+    });
+  }
+
+  handleInfoClick() {
+    browserHistory.push(this.detailUrl());
+  }
+
+  handleTagHover(event) {
+    event.stopPropagation();
+    this.setState({
+      infoHover: false
+    });
+  }
+
+  handleTagClick(event) {
+    // Placeholder method, ultimately this will link
+    // to the tag detail
+
+    // Event handler, has access to react synthetic click event
+    // Will need to be bound to the component in the constructor to use any component
+    // state or props
+    event.stopPropagation();
+    browserHistory.push('/sample');
+  }
+
+  resource() {
+    if (this.props.resource.type === "collectionResources") {
+      return this.props.resource.relationships.resource;
+    }
+    return this.props.resource;
+  }
+
+  renderDownloadablePreview(type) {
+    if (!type) return null;
+    let out = null;
     switch (type.toLowerCase()) {
       case 'image':
       case 'interactive':
-        text = (
-            <span>
+        out = (
+          <span>
             {'Preview'}
-              <i className="manicon manicon-eye-outline"></i>
+            <i className="manicon manicon-eye-outline"></i>
           </span>
         );
         break;
       case 'link':
-        text = (
+        out = (
           <span>
             {'Visit'}
             <i className="manicon manicon-arrow-right"></i>
@@ -46,7 +152,7 @@ export default class ResourceCard extends Component {
         );
         break;
       case 'video':
-        text = (
+        out = (
           <span>
             {'Play'}
             <i className="manicon manicon-triangle-right"></i>
@@ -54,26 +160,25 @@ export default class ResourceCard extends Component {
         );
         break;
       default:
-        text = (
+        out = (
           <span>
             {'Download'}
             <i className="manicon manicon-arrow-down"></i>
           </span>
         );
     }
-
-    return text;
+    return out;
   }
 
   renderTags(resource) {
-    if (!resource.tags) {
+    if (!resource.attributes.tags) {
       return false;
     }
 
     function commaSeparate(index) {
-      if (index >= resource.tags.length - 1) return false;
+      if (index >= resource.attributes.tags.length - 1) return false;
       return (
-        <span>
+          <span>
           {', '}
         </span>
       );
@@ -82,11 +187,16 @@ export default class ResourceCard extends Component {
     return (
       <nav className="resource-tags">
         <ul>
-          {resource.tags.map((tag, index) => {
+          {resource.attributes.tags.map((tag, index) => {
             return (
-              <li key={index}>
-                <Link to="#">{tag}</Link>{commaSeparate(index)}
-              </li>
+                <div
+                  key={index}
+                  className="tag-link"
+                  onMouseOver={this.handleTagHover}
+                  onClick={this.handleTagClick}
+                >
+                  {tag}{commaSeparate(index)}
+                </div>
             );
           })}
         </ul>
@@ -95,59 +205,61 @@ export default class ResourceCard extends Component {
   }
 
   render() {
-    const resource = this.props.resource;
+    const resource = this.resource();
+    const attr = resource.attributes;
 
     const linkClass = classNames({
       thumbnail: true,
-      'bg-image': resource.image
+      'bg-image': attr.attachmentThumbnailUrl
     });
 
-    let linkStyle = {};
-    if (resource.image) {
-      linkStyle = {
-        backgroundImage: `url('${resource.image}')`
-      };
-    }
+    const infoClass = classNames({
+      'resource-info': true,
+      hover: this.state.infoHover
+    });
+
 
     return (
-      <li className="resource-listing">
-        <Link
-          to={`/browse/project/${this.props.projectId}/resources/${resource.id}`}
-          className={linkClass} style={linkStyle}
+      <li className="resource-card">
+        <div
+          className="resource-link"
+          onClick={this.handlePreviewClick}
         >
-          <figure className="resource-type">
-            <figcaption>
-              {this.getResourceType(resource.attributes.type)}
-            </figcaption>
-            <i className={`manicon manicon-resource-${resource.attributes.type}`}></i>
-          </figure>
+          <Resource.Thumbnail
+            resource={resource}
+          />
           <div className="preview-text">
-            {this.getPreviewText(resource.attributes.type)}
+            {this.getPreviewText(attr)}
           </div>
-        </Link>
-        <div className="resource-info">
+        </div>
+        <section
+          className={infoClass}
+          onMouseOver={this.handleInfoMouseOver}
+          onMouseOut={this.handleInfoMouseOut}
+          onClick={this.handleInfoClick}
+        >
           <div>
-            <Link
-              to={`/browse/project/${this.props.projectId}/resources/${resource.id}`}
+            <header
               className="resource-title"
             >
-              <h4>
-                {resource.title}
-              </h4>
-            </Link>
+              <h4 dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />
+            </header>
             <span className="resource-date">
-              {'Uploaded September, 2016'}
+              <FormattedDate
+                format="MMMM, YYYY"
+                date={attr.createdAt}
+              />
             </span>
-            <Link
-              to={`/browse/project/${this.props.projectId}/resources/${resource.id}`}
+            <div
+              to={this.detailUrl()}
               className="arrow-link"
             >
               <i className="manicon manicon-arrow-right"></i>
-            </Link>
+            </div>
           </div>
 
           {this.renderTags(resource)}
-        </div>
+        </section>
       </li>
     );
   }

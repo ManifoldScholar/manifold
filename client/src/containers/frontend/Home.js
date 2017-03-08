@@ -1,25 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { ProjectList, Layout } from 'components/frontend';
+import { commonActions } from 'actions/helpers';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router';
 import { uiFilterActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-import { projectsAPI } from 'api';
+import { projectsAPI, requests } from 'api';
 import get from 'lodash/get';
 
 const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class HomeContainer extends Component {
 
   static fetchData(getState, dispatch) {
     const state = getState();
     const filteredRequest =
-      request(projectsAPI.index(state.ui.projectFilters), requests.browseFilteredProjects);
+      request(projectsAPI.index(state.ui.projectFilters), requests.feProjectsFiltered);
     const featuredRequest =
-      request(projectsAPI.featured(), requests.browseFeaturedProjects);
+      request(projectsAPI.featured(), requests.feProjectsFeatured);
     const { promise: one } = dispatch(filteredRequest);
     const { promise: two } = dispatch(featuredRequest);
     return Promise.all([one, two]);
@@ -28,8 +28,9 @@ class HomeContainer extends Component {
   static mapStateToProps(state) {
     return {
       projectFilters: state.ui.filters.project,
-      filteredProjects: select(requests.browseFilteredProjects, state.entityStore),
-      featuredProjects: select(requests.browseFeaturedProjects, state.entityStore),
+      filteredProjects: select(requests.feProjectsFiltered, state.entityStore),
+      featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
+      subjects: select(requests.feSubjects, state.entityStore),
       authentication: state.authentication
     };
   }
@@ -40,8 +41,13 @@ class HomeContainer extends Component {
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
     projectFilters: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    subjects: PropTypes.array
   };
+
+  componentWillMount() {
+    this.commonActions = commonActions(this.props.dispatch);
+  }
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -52,14 +58,20 @@ class HomeContainer extends Component {
     if (prevProps.projectFilters !== this.props.projectFilters) {
       const apiCall = projectsAPI.index(this.props.projectFilters);
       const filteredRequest =
-        request(apiCall, requests.browseFilteredProjects);
+        request(apiCall, requests.feProjectsFiltered);
       dispatch(filteredRequest);
     }
   }
 
   render() {
     return (
-      <div>
+      <div style={ {
+        overflowX: 'hidden'
+      } }>
+        <Layout.Splash
+          authenticated={this.props.authentication.authenticated}
+          toggleSignInUpOverlay={this.commonActions.toggleSignInUpOverlay}
+        />
         {/*
           Note that this section will be used for "Recent Projects"
           once that list is available, this is currently using the
@@ -70,15 +82,14 @@ class HomeContainer extends Component {
           <div className="container">
             <header className="section-heading">
               <h4 className="title">
-                <i className="manicon manicon-new-round"></i>
-                {'Recent Projects'}
+                <i className="manicon manicon-lamp"></i>
+                {'Featured Projects'}
               </h4>
             </header>
             { this.props.featuredProjects ?
               <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}
                 favorites={get(this.props.authentication, 'currentUser.favorites')}
-                dispatch={this.props.dispatch}
                 projects={this.props.featuredProjects}
                 dispatch={this.props.dispatch}
               /> : null
@@ -87,20 +98,23 @@ class HomeContainer extends Component {
         </section>
         <section className="bg-neutral05">
           <div className="container">
-            <header className="section-heading">
+            <header className="section-heading utility-right">
               <h4 className="title">
                 <i className="manicon manicon-books-on-shelf"></i>
-                {'Filtered Projects'}
+                {'Our Projects'}
               </h4>
+              <div className="section-heading-utility-right">
+                {/*
+                 Note that we're using a different dumb component to render this.
+                 Note, too, that the parent component delivers all the data the child
+                 component needs to render (which is what keeps the child dumb)'
+                 */}
+                <ProjectList.Filters
+                  updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
+                  subjects={this.props.subjects}
+                />
+              </div>
             </header>
-            {/*
-              Note that we're using a different dumb component to render this.
-              Note, too, that the parent component delivers all the data the child
-              component needs to render (which is what keeps the child dumb)'
-            */}
-            <ProjectList.Filters
-              updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
-            />
             { this.props.filteredProjects ?
               <ProjectList.Grid
                 authenticated={this.props.authentication.authenticated}
@@ -111,7 +125,11 @@ class HomeContainer extends Component {
             }
           </div>
         </section>
-        <Layout.ButtonNavigation grayBg={false} showBrowse={false} />
+        <Layout.ButtonNavigation
+          grayBg={false}
+          showBrowse={false}
+          authenticated={this.props.authentication.authenticated}
+        />
       </div>
     );
   }

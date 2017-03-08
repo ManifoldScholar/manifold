@@ -1,16 +1,33 @@
 require "memoist"
 
 # A single Text
-class Text < ActiveRecord::Base
-  extend Memoist
+class Text < ApplicationRecord
 
+  # Authority
+  include Authority::Abilities
+
+  # Default Scope
+  default_scope { order(position: :asc).includes(:titles, :text_subjects, :category) }
+
+  # Concerns
+  extend Memoist
+  include Collaborative
+  include TrackedCreator
+
+  # Fields
   serialize :structure_titles, Hash
   serialize :toc, Array
   serialize :page_list, Array
   serialize :landmarks, Array
 
-  include Collaborative
+  # Acts as List
+  acts_as_list scope: [:project_id, :category_id]
 
+  # Associations
+  belongs_to :project, optional: true
+  belongs_to :category, optional: true
+  has_one :publishing_project, class_name: "Project", foreign_key: "published_text_id"
+  belongs_to :start_text_section, optional: true, class_name: "TextSection"
   has_many :titles, class_name: "TextTitle"
   has_many :text_subjects
   has_many :subjects, through: :text_subjects
@@ -19,10 +36,15 @@ class Text < ActiveRecord::Base
   has_many :text_sections, -> { order(position: :asc) }
   has_many :stylesheets
   has_many :favorites, as: :favoritable
-  belongs_to :project, optional: true
-  belongs_to :category, optional: true
+  has_many :annotations, through: :text_sections
 
+  # Validation
   validates :unique_identifier, presence: true
+  validates :spine,
+            presence: true, unless: proc { |x| x.spine.is_a?(Array) && x.spine.empty? }
+
+  # Callbacks
+  after_commit :trigger_text_added_event, on: [:create, :update]
 
   def title
     main_title = if new_record?
@@ -38,8 +60,7 @@ class Text < ActiveRecord::Base
     # text_sections.where("position > ?", position)
   end
 
-  def section_after(position)
-  end
+  def section_after(position); end
 
   def section_at(position)
     text_sections.find_by(position: position)
@@ -59,24 +80,22 @@ class Text < ActiveRecord::Base
   def section_source_map
     map = {}
     text_sections.each do |ts|
-      resource = ts.resource
-      source = ingestion_sources.find_by(resource: resource)
-      next if source.nil?
-      path = source.source_path
+      next if ts.ingestion_source.nil?
+      path = ts.ingestion_source.source_path
       map[path] = ts
     end
     map
   end
   memoize :section_source_map
 
-  def ingestion_resource_map
+  def source_path_map
     map = {}
     ingestion_sources.each do |s|
-      map[s.source_path] = s.resource.attachment.url
+      map[s.source_path] = s.attachment.url
     end
     map
   end
-  memoize :ingestion_resource_map
+  memoize :source_path_map
 
   def cover
     ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
@@ -84,8 +103,8 @@ class Text < ActiveRecord::Base
 
   def cover_url
     cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
-    return nil unless cover_source.try(:resource).try(:attachment_url)
-    ENV["API_DOMAIN"] + cover_source.resource.attachment.url if cover_source
+    return nil unless cover_source
+    cover_source.try(:attachment_url)
   end
 
   def toc_section
@@ -94,5 +113,27 @@ class Text < ActiveRecord::Base
 
   def published?
     project && project.published_text == self
+  end
+
+  def to_s
+    title
+  end
+
+  private
+
+  def category_list_scope
+    category_id || 0
+  end
+
+  def trigger_text_added_event
+    Event.trigger(Event::TEXT_ADDED, self) if project
+  end
+
+  def annotations_count
+    annotations.only_annotations.count
+  end
+
+  def highlights_count
+    annotations.only_highlights.count
   end
 end

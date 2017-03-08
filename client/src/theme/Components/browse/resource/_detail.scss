@@ -1,0 +1,256 @@
+.resource-detail {
+  @include clearfix;
+  padding-top: 22px;
+
+  .container {
+    @include clearfix;
+  }
+
+  .overlay-full-secondary & {
+    padding-top: 70px;
+
+    @include respond($break70) {
+      padding-top: 120px;
+    }
+  }
+
+  //.resource-default .figure-default {
+  //  padding: 5vh 40px;
+  //  margin: 32px 0 18px;
+  //  text-align: center;
+  //  background-size: cover;
+  //
+  //  .manicon {
+  //    display: block;
+  //    font-size: 7vw;
+  //    color: $neutral40;
+  //  }
+  //
+  //  .resource-type {
+  //    @include utilityPrimary;
+  //    display: block;
+  //    padding-top: 18px;
+  //    color: $neutral40;
+  //  }
+  //}
+
+  .resource-kind {
+    display: flex;
+    align-items: center;
+
+    @include respond($break60) {
+      width: 100%;
+    }
+
+    + .resource-title {
+      padding-top: 7px;
+    }
+
+    h3 {
+      @include utilityPrimary;
+      margin: -8px 0 0;
+      font-size: 13px;
+      color: $neutral50;
+
+      @include respond($break60) {
+        margin: 0;
+      }
+    }
+
+    .resource-icon {
+      max-width: 52px;
+      padding-right: 14px;
+
+      @include respond($break60) {
+        display: none;
+      }
+
+      svg {
+        width: 100%;
+        height: auto;
+        fill: $neutral50;
+      }
+    }
+  }
+
+  .resource-title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 23px;
+    padding-bottom: 26px;
+    text-decoration: none;
+
+    .resource-icon {
+      display: none;
+      max-width: 73px;
+      padding-right: 18px;
+
+      @include respond($break60) {
+        display: inline-block;
+      }
+
+      &.document, &.interactive, &.link, &.pdf {
+        max-width: 58px;
+      }
+
+      svg {
+        width: 100%;
+        height: auto;
+        fill: $neutral50;
+      }
+    }
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        h1, h2, h3, h4, h5, h6 {
+          color: $accentPrimary;
+        }
+      }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      @include templateHead;
+      width: 100%;
+      margin: 0;
+      margin-bottom: 5px;
+      font-size: 26px;
+      font-weight: $medium;
+      color: $neutral75;
+
+      @include respond($break60) {
+        width: auto;
+      }
+
+      .bg-neutral90 & {
+        color: $neutral05;
+      }
+    }
+
+    + .resource-content {
+      margin-top: -8px;
+    }
+  }
+
+  .resource-date {
+    @include subtitlePrimary;
+    width: 100%;
+    font-size: 16px;
+
+    .bg-neutral90 & {
+      color: $neutral40;
+    }
+  }
+
+  .resource-content {
+    // Default font-treatment
+    @include templateCopy;
+    font-size: 14px;
+    line-height: 1.4;
+    color: $neutral75;
+
+    @include respond($break60) {
+      font-size: 16px;
+    }
+
+    .bg-neutral90 & {
+      color: $neutral40;
+    }
+
+    &.left {
+      @include respond($break65) {
+        float: right;
+        width: 68%;
+        padding-right: 8.45%;
+      }
+    }
+
+    .attribute-header {
+      @include utilityPrimary;
+      margin-top: 2em;
+      font-size: 12px;
+      color: $neutral40;
+    }
+  }
+
+  aside {
+    @include respond($break65) {
+      float: right;
+      width: 32%;
+    }
+
+    .button-primary {
+      width: calc(50% - 7px);
+      padding: 0.813em 0.8em;
+      margin-bottom: 0.929em;
+      font-size: 12px;
+      line-height: 13px; // OD
+      text-align: center;
+
+      @include respond($break50) {
+        width: 180px;
+        padding: 0.813em 1.438em;
+        font-size: 14px;
+      }
+
+      @include respond($break65) {
+        display: block;
+        max-width: 100%;
+      }
+
+      + .button-primary {
+        margin-left: 14px;
+
+        @include respond($break65) {
+          margin-left: 0;
+        }
+      }
+
+      .manicon {
+        margin-left: 8px;
+        font-size: 13px;
+      }
+    }
+
+    .share-nav-primary {
+      margin: 21px 0 29px;
+    }
+
+    .resource-meta {
+      display: none;
+
+      @include respond($break65) {
+        display: block;
+      }
+    }
+  }
+
+  .resource-meta-mobile {
+    padding-top: 28px;
+
+    @include respond($break65) {
+      display: none;
+    }
+  }
+
+  .button-nav {
+    padding-top: 7px;
+    text-align: left;
+
+    @include respond($break60) {
+      padding-top: 20px;
+    }
+
+    .button-secondary {
+      width: 250px;
+      max-width: 100%;
+      margin-bottom: 13px;
+
+      @include respond($break60) {
+        width: 320px;
+      }
+    }
+  }
+}

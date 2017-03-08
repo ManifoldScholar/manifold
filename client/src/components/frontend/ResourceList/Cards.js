@@ -1,14 +1,16 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { Resource, Utility } from 'components/frontend';
+import React, { PureComponent, PropTypes } from 'react';
+import { Resource } from 'components/frontend';
+import { Utility } from 'components/global';
 
-export default class ResourceListCards extends Component {
+export default class ResourceListCards extends PureComponent {
 
   static displayName = "ResourceList.Cards";
 
   static propTypes = {
-    projectId: PropTypes.string,
-    resources: PropTypes.array
+    context: PropTypes.object,
+    resources: PropTypes.array,
+    pagination: PropTypes.object,
+    paginationClickHandler: PropTypes.func
   };
 
   constructor() {
@@ -16,6 +18,8 @@ export default class ResourceListCards extends Component {
   }
 
   render() {
+    if (!this.props.resources) return null;
+
     return (
       <div>
         <nav className="resource-list">
@@ -26,18 +30,25 @@ export default class ResourceListCards extends Component {
               {' Resources Shown'}
           </div>
           <ul>
-            {this.props.resources.map((resource) => {
+            {this.props.resources.map((resourceLike) => {
               return (
                 <Resource.Card
-                  key={resource.id}
-                  resource={resource}
-                  projectId={this.props.projectId}
+                  context={this.props.context}
+                  key={resourceLike.id}
+                  resource={resourceLike}
                 />
               );
             })}
           </ul>
+          {
+            this.props.pagination ?
+              <Utility.Pagination
+                paginationClickHandler={this.props.paginationClickHandler}
+                pagination={this.props.pagination}
+              />
+              : null
+          }
         </nav>
-        <Utility.Pagination />
       </div>
     );
   }

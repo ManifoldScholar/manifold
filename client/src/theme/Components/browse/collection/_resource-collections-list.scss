@@ -1,0 +1,120 @@
+// Nav wrapping a ul
+.resource-collections-list {
+  ul {
+    @include listUnstyled;
+
+    @include respond($break60) {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -25px;
+    }
+
+    @include respond($break85) {
+      margin-left: -4.858vw;
+    }
+  }
+
+  li {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+
+    @include respond($break60) {
+      width: 50%;
+      padding-left: 25px;
+      margin-bottom: 30px;
+    }
+
+    @include respond($break85) {
+      padding-left: 4.858vw;
+    }
+  }
+
+  a {
+    display: flex;
+    width: 100%;
+    padding-top: 120px;
+    text-decoration: none;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @include respond($break80) {
+      padding-top: 160px;
+    };
+
+    &:hover {
+      .collection-title {
+        color: $accentPrimaryDark;
+      }
+
+      .title-overlay {
+        //background-color: transparentize($neutralBlack, 0.4);
+      }
+    }
+  }
+
+  .title-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: transparentize($neutralBlack, 0.5);
+    transition: background-color $duration $timing;
+
+    @include respond($break80) {
+      flex-direction: row;
+    }
+  }
+
+  .collection-title, .icon {
+    margin: 0;
+    color: $neutralWhite;
+  }
+
+  .collection-title {
+    @include templateHead;
+    width: auto;
+    height: auto;
+    padding: 18px 16px;
+    font-size: 18px;
+    transition: color $duration $timing;
+
+    @include respond($break70) {
+      padding: 18px 21px;
+    }
+
+    @include respond($break85) {
+      font-size: 20px;
+    }
+
+    @include respond($break95) {
+      padding: 22px 21px;
+    }
+  }
+
+  .icon {
+    @include templateHead;
+    padding-right: 16px;
+    font-size: 12px;
+    text-align: center;
+
+    @include respond($break75) {
+      padding: 18px 16px 18px 0;
+    }
+
+    .manicon {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 25px;
+    }
+
+    span {
+      display: none;
+
+      @include respond($break75) {
+        display: block;
+      }
+    }
+  }
+}

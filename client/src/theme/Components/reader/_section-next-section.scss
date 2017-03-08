@@ -1,0 +1,42 @@
+.section-next-section {
+  padding: 0 0 50px;
+
+  @include respond($break65) {
+    padding: 5.46vw 0 8.9vw;
+  }
+
+  @include respond($break100) {
+    padding: 64px 0 101px;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      h3 {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  header {
+    @include utilityPrimary;
+    display: inline-block;
+    padding-bottom: 4px;
+    font-size: 14px;
+    color: $neutral40;
+    border-bottom: 2px solid $neutral40;
+  }
+
+  h3 {
+    @include templateHead();
+    font-size: 24px;
+    font-weight: $semibold;
+    color: $neutral70;
+    transition: color $duration $timing;
+
+    @include respond($break70) {
+      font-size: 32px;
+    }
+  }
+}

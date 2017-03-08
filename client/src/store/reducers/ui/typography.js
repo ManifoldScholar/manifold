@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 
-const initialState = {
+export const initialState = {
   font: 'serif',
   fontSize: {
     current: 3,
@@ -9,7 +9,7 @@ const initialState = {
   },
   margins: {
     current: 1,
-    max: 3,
+    max: 2,
     min: 0
   }
 };

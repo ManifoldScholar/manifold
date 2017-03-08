@@ -28,13 +28,14 @@ Object.assign(babelLoaderQuery, {cacheDirectory: true});
 // Create the entries. If we're in dev, we want hot loading
 var mainEntry = ['./src/client.js'];
 var themeEntry = ['./src/theme/theme.js'];
+var hotEntry = []
 if (__DEVELOPMENT__) {
   mainEntry.unshift('webpack/hot/only-dev-server');
   mainEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
   mainEntry.unshift('react-hot-loader/patch');
   themeEntry.unshift('webpack/hot/only-dev-server');
-  themeEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
-  themeEntry.unshift('react-hot-loader/patch');
+  // themeEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
+  // themeEntry.unshift('react-hot-loader/patch');
 }
 
 // Determine the public path
@@ -82,7 +83,7 @@ if (__CLIENT__ && __PRODUCTION__) {
 
 // Push those globals, yo.
 plugins.push(new webpack.DefinePlugin({
-    __MANIFOLD_API_URL__: '"' +  global.__MANIFOLD_API_URL__ + '"',
+    __API_URL__: '"' +  global.__API_URL__ + '"',
     __CLIENT__: global.__CLIENT__,
     __SERVER__: global.__SERVER__,
     __DEVELOPMENT__: global.__DEVELOPMENT__,
@@ -90,13 +91,12 @@ plugins.push(new webpack.DefinePlugin({
   })
 );
 
-// Use small sourcemaps in production
+// Use full source maps in production and fast source maps in dev.
 let devtool;
 if (__DEVELOPMENT__) {
-  devtool = "cheap-module-eval-source-map";
-  devtool = "source-map";
+  devtool = "eval-source-map";
 } else {
-  devtool = "cheap-module-source-map";
+  devtool = "source-map";
 }
 
 // In dev we load CSS as javascript so we can hot reload it. In production, we extract
@@ -108,9 +108,9 @@ if (__CLIENT__ && __PRODUCTION__) {
     loader: ExtractTextPlugin.extract(
       "style",
       [
-        "css?importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]",
+        "css?importLoaders=2",
         "postcss?syntax=postcss-scss",
-        "sass?outputStyle=expanded&sourceMap"
+        "sass?outputStyle=compact"
       ]
     ),
     include: path.resolve('./src')
@@ -120,9 +120,9 @@ if (__CLIENT__ && __PRODUCTION__) {
     test: /\.scss$/,
     loaders: [
       'style',
-      'css?importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]',
+      'css?importLoaders=2',
       'postcss?syntax=postcss-scss',
-      'sass?outputStyle=expanded&sourceMap'
+      'sass?outputStyle=expanded'
     ],
     include: path.resolve('./src')
   };
@@ -147,6 +147,9 @@ module.exports = {
     alias: {
       "fontgen": path.join(__dirname, "./loaders/fontgen")
     }
+  },
+  sassLoader: {
+    includePaths: [path.join(__dirname, "./src/theme")]
   },
   module: {
     loaders: [

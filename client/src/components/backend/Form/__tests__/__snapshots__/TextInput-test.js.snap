@@ -1,0 +1,17 @@
+exports[`Form.TextInput component renders correctly 1`] = `
+<div
+  className="form-input">
+  <label>
+    A form label
+  </label>
+  <div
+    className="">
+    <input
+      name="attributes[property]"
+      onChange={[Function]}
+      placeholder={undefined}
+      type="text"
+      value="" />
+  </div>
+</div>
+`;

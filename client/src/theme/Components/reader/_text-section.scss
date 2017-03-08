@@ -30,15 +30,18 @@
 
 .text-section {
   // Reader text temporary defaults
-  // TODO: Adjust scope and theming/customization once data is available
   font-family: "freight-text-pro", serif;
-  font-size: $type80;
-  font-weight: $light;
+  font-weight: $regular;
   line-height: 1.761;
-  transition: font-size $durationFast $timing;
+  letter-spacing: 0.01em;
+
+  *::selection, .annotation-locked-selected {
+    background: $sp20Quaternary;
+  }
 
   &.font-sans-serif {
     font-family: "sofia-pro",sans-serif;
+    font-weight: $light;
   }
 
   a {
@@ -76,6 +79,31 @@
 
   img {
     max-width: 100%;
+  }
+
+  pre {
+    font-size: 0.7em;
+  }
+
+  // Link with resource marker cube
+  .resource-marker {
+    font-size: 0.85em;
+    color: $neutral40;
+    text-decoration: none;
+
+    &.active {
+      color: $accentPrimary;
+    }
+
+    i {
+      position: relative;
+      top: 0.15em;
+      margin: -0.1em 0.15em 0;
+
+      &::before {
+        vertical-align: baseline;
+      }
+    }
   }
 
   //h2 {

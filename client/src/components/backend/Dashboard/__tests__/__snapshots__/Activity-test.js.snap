@@ -1,0 +1,47 @@
+exports[`Dashboard.Activity component renders correctly 1`] = `
+<table
+  className="table-single-value">
+  <tbody>
+    <tr>
+      <td>
+        Texts added this week
+      </td>
+      <td>
+        5
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Readers this week
+      </td>
+      <td>
+        2
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Change from last week
+      </td>
+      <td>
+        + 50%
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Highlights in the past week
+      </td>
+      <td>
+        4
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Annotations in the past week
+      </td>
+      <td>
+        3
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

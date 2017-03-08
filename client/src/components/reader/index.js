@@ -1,9 +1,10 @@
-// export AnnotationTools from './section/AnnotationTools';
+export Annotation from './Annotation';
+export Resource from './Resource';
 export Section from './Section';
-export Annotatable from './Annotatable';
 export AppearanceMenuBody from './AppearanceMenuBody';
 export AppearanceMenuButton from './AppearanceMenuButton';
 export Footer from './Footer';
+export FooterMenu from './FooterMenu';
 export Header from './Header';
 export StaticTextSample from './StaticTextSample';
 export TextTitles from './TextTitles';

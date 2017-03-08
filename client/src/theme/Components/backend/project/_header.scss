@@ -1,0 +1,147 @@
+.entity-header-primary {
+  padding-bottom: 30px;
+
+  @include respond($break60) {
+    padding-bottom: 39px;
+  }
+
+  @include respond($break65) {
+    display: table;
+  }
+
+  figure {
+    float: left;
+    width: 68px;
+
+    @include respond($break30) {
+      width: 75px;
+    }
+
+    @include respond($break65) {
+      display: table-cell;
+      width: auto;
+      padding-right: 36px;
+      vertical-align: top;
+    }
+
+    .manicon {
+      font-size: 52px;
+      color: $neutral50;
+
+      @include respond($break65) {
+        font-size: 64px;
+      }
+    }
+  }
+
+  .title {
+    @include respond($break65) {
+      display: table-cell;
+      vertical-align: top;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      @include templateHead;
+      float: left;
+      max-width: calc(100% - 75px);
+      margin-top: 0;
+      font-size: 22px;
+      font-weight: $medium;
+      color: $neutral20;
+
+      @include respond($break30) {
+        max-width: calc(100% - 86px);
+      }
+
+      @include respond($break60) {
+        font-size: 24px;
+      }
+
+      @include respond($break65) {
+        float: none;
+        max-width: none;
+        font-size: 28px;
+      }
+
+      span {
+        @include templateCopy;
+        margin-left: 0.433em;
+        // Relatively sized to be just a tiny bit bigger than the base
+        font-size: 1.071em;
+        color: $neutral50;
+      }
+    }
+  }
+
+  .utility {
+    clear: both;
+
+    .notes {
+      @include templateCopy;
+      font-size: 1.071em;
+      color: $neutral50;
+    }
+
+    button {
+      font-size: 0;
+
+      @include respond($break30) {
+        font-size: 14px;
+      }
+
+      @include respond($break65) {
+        font-size: 16px;
+      }
+
+      + button {
+        margin-left: 22px;
+
+        @include respond($break60) {
+          margin-left: 38px;
+        }
+      }
+
+      .manicon {
+        display: inline-block;
+        margin-left: 6px;
+        color: $accentPrimary;
+        vertical-align: middle;
+
+        @include respond($break60) {
+          margin-left: 11px;
+        }
+      }
+
+      // Relative sizes to make resizing simple,
+      // but fixed sizes at mobile since parents
+      // get size 0
+      .manicon-check-double {
+        font-size: 14px;
+
+        @include respond($break30) {
+          margin-top: -0.533em; // NP
+          font-size: 0.938em;
+        }
+      }
+
+      .manicon-eye-outline {
+        font-size: 15px;
+
+        @include respond($break30) {
+          margin-top: -0.429em;
+          font-size: 0.875em;
+        }
+      }
+
+      .manicon-trashcan {
+        font-size: 19px;
+        color: $sp40Tertiary;
+
+        @include respond($break30) {
+          margin-top: -0.471em;
+          font-size: 1.063em;
+        }
+      }
+    }
+  }
+}

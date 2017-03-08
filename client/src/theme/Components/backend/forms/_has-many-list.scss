@@ -1,0 +1,86 @@
+.has-many-list {
+  > ul {
+    @include listUnstyled;
+
+    li {
+      display: table;
+      width: 100%;
+      padding: 17px 0 9px;
+
+      + li {
+        border-top: 1px solid $neutral80;
+      }
+
+      &:last-child {
+        padding-bottom: 24px;
+      }
+    }
+
+    figure {
+      display: table-cell;
+      min-width: 29px;
+      white-space: nowrap;
+      vertical-align: middle;
+
+      .no-image, img {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .no-image {
+        @include buttonAvatar(29, $neutral40, $neutral20);
+        border: 2px solid $neutralWhite;
+
+        @include respond($break60) {
+          @include buttonAvatar(29, $neutral40, $neutral20);
+          border: 2px solid $neutralWhite;
+        }
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 100%;
+      }
+    }
+
+    .association-name {
+      @include formInputPrimary;
+      display: table-cell;
+      width: 100%;
+      padding-left: 15px;
+      margin: 0;
+      font-size: 22px;
+      line-height: 29px;
+      color: $neutral40;
+      vertical-align: middle;
+    }
+
+    .utility {
+      display: table-cell;
+      text-align: right;
+      white-space: nowrap;
+      vertical-align: middle;
+
+      button {
+        @include buttonUnstyled;
+        margin-left: 7px;
+        font-size: 15px;
+        color: $neutral70;
+        transition: color $duration $timing;
+      }
+
+      .manicon-arrow-up, .manicon-arrow-down {
+        &:hover {
+          color: $accentPrimary;
+        }
+      }
+
+      .manicon-x {
+        &:hover {
+          color: $sp40Tertiary;
+        }
+      }
+    }
+  }
+}

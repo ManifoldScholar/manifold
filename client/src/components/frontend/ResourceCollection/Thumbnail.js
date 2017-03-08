@@ -14,7 +14,7 @@ export default class ResourceCollectionThumbnail extends Component {
     const collectionsBackground = '/static/images/resource-collection.jpg';
     const collection = this.props.resourceCollection;
     const attr = collection.attributes;
-    const bgImage = attr.image ? attr.image : collectionsBackground;
+    const bgImage = attr.thumbnailUrl ? attr.thumbnailUrl : collectionsBackground;
     return (
       <li>
         <Link
@@ -27,7 +27,7 @@ export default class ResourceCollectionThumbnail extends Component {
             </h4>
             <div className="icon">
               <i className="manicon manicon-file-box"></i>
-              {'Collection'}
+              <span>{'Collection'}</span>
             </div>
           </div>
         </Link>

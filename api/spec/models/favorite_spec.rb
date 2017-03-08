@@ -29,4 +29,9 @@ RSpec.describe Favorite, type: :model do
                                            favoritable: project, user: user)
     expect(duplicate_favorite).to_not be_valid
   end
+
+  it "knows what project it belongs to" do
+    favorite = FactoryGirl.build(:favorite)
+    expect(favorite.project).to be_a Project
+  end
 end

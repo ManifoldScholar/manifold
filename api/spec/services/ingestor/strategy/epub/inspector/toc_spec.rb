@@ -91,9 +91,12 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
 
     it "creates a TOC structure item with the correct values" do
       last_toc_item = toc_structure.last
-      expect(last_toc_item).to eq(label: "Copyright Page",
-                                  anchor: "cip",
-                                  source_path: "some/ump-feeley1-0004.xhtml")
+      expect(last_toc_item).to eq(
+                                 label: "Copyright Page",
+                                 anchor: "cip",
+                                 source_path: "some/ump-feeley1-0004.xhtml",
+                                 type: nil
+                               )
     end
 
     it "parses the correct number of page list items" do
@@ -102,9 +105,12 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
 
     it "creates a page list structure item with the correct values" do
       last_page_list_item = page_list_structure.last
-      expect(last_page_list_item).to eq(label: "4",
-                                        anchor: "page4",
-                                        source_path: "some/intro.xhtml")
+      expect(last_page_list_item).to eq(
+                                       label: "4",
+                                       anchor: "page4",
+                                       source_path: "some/intro.xhtml",
+                                       type: nil
+                                     )
     end
 
     it "parses the correct number of guide items" do
@@ -113,9 +119,12 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
 
     it "creates a guide structure item with the correct values" do
       last_landmarks_item = landmarks_structure.last
-      expect(last_landmarks_item).to eq(label: "Title Page",
-                                        anchor: "bk",
-                                        source_path: "some/ump-feeley1-0003.xhtml")
+      expect(last_landmarks_item).to eq(
+                                       label: "Title Page",
+                                       anchor: "bk",
+                                       source_path: "some/ump-feeley1-0003.xhtml",
+                                       type: nil
+                                     )
     end
   end
 end

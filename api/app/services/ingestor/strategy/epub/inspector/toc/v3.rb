@@ -63,13 +63,16 @@ module Ingestor
               if nodes.count
                 nodes.each do |node|
                   if node.at_xpath("a")
-                    label = node.at_css("a").text
-                    href = node.at_css("a").attribute("href").value
+                    a_node = node.at_css("a")
+                    label = a_node.text
+                    href = a_node.attribute("href").try(:value)
+                    type = a_node.attribute("type").try(:value)
                   elsif node.at_xpath("span")
                     label = node.at_css("span").text.strip
                     href = nil
+                    type = nil
                   end
-                  item = make_structure_item(label, href)
+                  item = make_structure_item(label, href, type)
 
                   if node.at_xpath("ol/li")
                     item[:children] = nodes_to_structure(node.xpath("ol/li"))

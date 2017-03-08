@@ -1,0 +1,20 @@
+exports[`NextSection component renders correctly 1`] = `
+<section
+  className="section-next-section">
+  <div
+    className="container-focus container-width-undefined">
+    <a
+      onClick={[Function]}
+      style={Object {}}>
+      <header>
+        Next Chapter
+      </header>
+      <h3>
+        <div>
+          Second Section
+        </div>
+      </h3>
+    </a>
+  </div>
+</section>
+`;

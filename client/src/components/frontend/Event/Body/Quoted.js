@@ -29,7 +29,7 @@ export default class EventBodyQuoted extends Component {
           </div>
           {/* TODO: Include machine readable date-time */}
           <datetime className="event-date">
-            {attr.created_at}
+            {attr.createdAt}
           </datetime>
         </div>
       </div>

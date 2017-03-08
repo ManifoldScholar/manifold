@@ -46,6 +46,14 @@ export default class Header extends Component {
     this.renderContentsButton = this.renderContentsButton.bind(this);
   }
 
+  componentWillUnmount() {
+    this.resetHeaderState();
+  }
+
+  resetHeaderState() {
+    this.triggerHideToc();
+  }
+
   handleContentsButtonClick() {
     this.props.commonActions.visibilityToggle('tocDrawer');
   }
@@ -117,12 +125,15 @@ export default class Header extends Component {
           : null }
           <nav className="menu-buttons">
             <ul>
-              <li>
-                <SearchMenuButton
-                  toggleSearchMenu={this.handleSearchMenuButtonClick}
-                  active={this.props.visibility.uiPanels.search}
-                />
-              </li>
+              {/*
+               Hiding search markup until functionality is available
+                <li>
+                  <SearchMenuButton
+                    toggleSearchMenu={this.handleSearchMenuButtonClick}
+                    active={this.props.visibility.uiPanels.search}
+                  />
+                </li>
+              */}
               <li>
                 <AppearanceMenuButton
                   toggleAppearanceMenu={this.handleAppearanceMenuButtonClick}

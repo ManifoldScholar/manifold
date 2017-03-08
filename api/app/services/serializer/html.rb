@@ -11,16 +11,36 @@ module Serializer
                          time var a bdo br img map object q script span sub sup button
                          input label select textarea).freeze
 
-    def serialize(html)
+    def serialize(html, logger = Rails.logger)
       reset
       return if html.blank?
       fragment = Nokogiri::HTML.fragment(Validator::Html.new.validate(html))
       node = fragment.children.first
       output = visit(node)
+      check_for_node_uuid_duplicates(output, logger)
       output
     end
 
     protected
+
+    def check_for_node_uuid_duplicates(output, logger)
+      node_uuids = recursive_values(:node_uuid, output)
+      duplicates = node_uuids.select { |uuid| node_uuids.count(uuid) > 1 }
+      return if duplicates.empty?
+      duplicates.each do |d|
+        logger.error("Found duplicate node uuid: #{d}")
+      end
+      raise "There were duplicate node IDs in the text"
+    end
+
+    def recursive_values(key, structure, digests = [])
+      return digests unless structure.key?(:children)
+      structure[:children].each do |child|
+        digests << child[key] if child.key?(key)
+        recursive_values(key, child, digests) if child[:children].is_a? Array
+      end
+      digests
+    end
 
     def visit(node)
       representation = {}
@@ -95,10 +115,14 @@ module Serializer
     end
 
     def begin_visit_text(node, representation)
+      text_digest = Digest::SHA1.hexdigest(node.text)
+      @digest_cache[text_digest] =
+        @digest_cache.key?(text_digest) ? @digest_cache[text_digest] + 1 : 1
+      node_digest = Digest::SHA1.hexdigest("#{text_digest}-#{@digest_cache[text_digest]}")
       representation[:node_type] = "text"
       representation[:content] = node.content
-      representation[:text_digest] = Digest::MD5.hexdigest(node.text)
-      representation[:node_uuid] = SecureRandom.uuid
+      representation[:text_digest] = text_digest
+      representation[:node_uuid] = node_digest
       true
     end
 
@@ -106,6 +130,7 @@ module Serializer
       @parent_node = nil
       @current_node = nil
       @level = 0
+      @digest_cache = {}
       @path = []
     end
   end

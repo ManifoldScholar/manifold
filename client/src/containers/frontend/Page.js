@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { pagesAPI } from 'api';
+import { pagesAPI, requests } from 'api';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
-const { request, flush, requests } = entityStoreActions;
+const { request, flush } = entityStoreActions;
 
 class PageContainer extends Component {
 
   static fetchData(getState, dispatch, location, params) {
-    const page = request(pagesAPI.show(params.slug), requests.showPage);
+    const page = request(pagesAPI.show(params.slug), requests.gPage);
     const { promise: one } = dispatch(page);
     return Promise.all([one]);
   }
@@ -16,7 +16,7 @@ class PageContainer extends Component {
   static mapStateToProps(state) {
     return {
       loading: state.ui.loading.active,
-      page: entityUtils.select(requests.showPage, state.entityStore)
+      page: entityUtils.select(requests.gPage, state.entityStore)
     };
   }
 
@@ -26,7 +26,7 @@ class PageContainer extends Component {
   };
 
   componentWillUnmount() {
-    this.props.dispatch(flush(requests.showPage));
+    this.props.dispatch(flush(requests.gPage));
   }
 
   render() {

@@ -46,12 +46,20 @@
 }
 
 // Background color utility classes
+.bg-accent-primary {
+  background-color: $accentPrimary;
+}
+
 .bg-neutral05 {
   background-color: $neutral05;
 }
 
 .bg-neutral90 {
   background-color: $neutral90;
+}
+
+.bg-neutral95 {
+  background-color: $neutral95;
 }
 
 
@@ -70,7 +78,7 @@
   border-radius: 7px;
 }
 
-@mixin buttonAvatar($size: 36) {
+@mixin buttonAvatar($size: 36, $backColor: $accentPrimary, $iconColor: $accentPrimaryPale) {
   @include buttonUnstyled;
   // Default size from browse view that may be
   // changed in scope
@@ -78,7 +86,7 @@
   height: #{$size}px;
   text-align: center;
   overflow: hidden;
-  background-color: $accentPrimary;
+  background-color: $backColor;
   border-radius: 100%;
 
   .avatar-image {
@@ -88,7 +96,32 @@
   .manicon-person {
     font-size: #{$size * 0.85}px;
     line-height: #{$size * 1.2}px;
-    color: $accentPrimaryPale;
+    color: $iconColor;
+  }
+}
+
+@mixin buttonClose {
+  @include buttonUnstyled;
+  @include templateHead;
+  font-size: 15px;
+  line-height: 21px;
+
+  @include respond($break65) {
+    font-size: 18px;
+    line-height: 31px;
+  }
+
+  .manicon-x {
+    display: inline-block;
+    margin-left: 14px;
+    font-size: 21px;
+    vertical-align: top;
+
+    @include respond($break65) {
+      margin-left: 26px;
+      font-size: 31px;
+      line-height: 31px;
+    }
   }
 }
 
@@ -110,6 +143,8 @@
 
   &:focus:-moz-focusring {
     color: transparent;
+    // Add color back to text
+    text-shadow: 0 0 0 $neutral80;
   }
 
   &::-ms-expand {
@@ -131,7 +166,7 @@
     margin: 0;
     font-size: $type40;
     line-height: $baseLineHeight;
-    border: 3px solid $neutral40;
+    border: 2px solid $neutral40;
 
     &:focus {
       border-color: $accentPrimary;
@@ -144,7 +179,7 @@
     top: 50%;
     right: 24px;
     display: inline-block;
-    margin-top: -3px;
+    margin-top: -2px;
     font-size: 7px;
     pointer-events: none;
 
@@ -179,7 +214,7 @@
   font-size: $type70;
   color: $accentPrimary;
   background: transparent;
-  border: 3px solid $accentPrimary;
+  border: 2px solid $accentPrimary;
   outline: none;
 
   &:focus {
@@ -207,5 +242,38 @@
 
   &:focus {
     border-color: $accentPrimary;
+  }
+}
+
+@mixin inputSecondary {
+  @include templateCopy;
+  padding: 7px 10px;
+  font-size: $type70;
+  color: $accentPrimary;
+  background: transparent;
+  border: 3px solid $accentPrimary;
+  outline: none;
+
+  &:focus {
+    border-color: $neutralWhite;
+  }
+}
+
+// Dark input with border
+@mixin inputQuaternary {
+  @include templateHead;
+  padding: 0.438em 1.125em 0.563em;
+  background: transparent;
+  color: $neutral40;
+  border: 1px solid $neutral80;
+  outline: none;
+  transition: border-color $duration $timing;
+
+  &:focus {
+    border-color: $accentPrimary;
+  }
+
+  &::placeholder {
+    color: $accentPrimary;
   }
 }

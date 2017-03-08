@@ -1,0 +1,89 @@
+// Form Inputs that live outside a form element
+// These are just as abstract as form elements, but don't require a wrapper
+
+.checkbox-primary {
+  @include formLabelPrimary;
+  line-height: 25px;
+  cursor: pointer;
+
+  .bg-neutral90 & {
+    .toggle-indicator {
+      background-color: transparent;
+      border: 1px solid $neutral80;
+    }
+
+    &.checked {
+      .toggle-indicator {
+        background-color: $neutral30;
+      }
+    }
+  }
+
+  &.checked {
+    .manicon-check {
+      opacity: 1;
+    }
+  }
+
+  .toggle-indicator {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding: 7px 6px;
+    vertical-align: middle;
+    background-color: $neutral30;
+  }
+
+  .label {
+    display: inline-block;
+    margin-left: 9px;
+    vertical-align: middle;
+  }
+
+  // If check icon exists, hide it until selected
+  .manicon-check {
+    font-size: 11px;
+    color: $neutralOffBlack;
+    opacity: 0;
+    transition: opacity $duration $timing;
+  }
+}
+
+@mixin booleanPrimary($height) {
+  position: relative;
+  width: $height * 2;
+  height: $height;
+  background-blend-mode: multiply;
+  // Disabled to use built-in function
+  // scss-lint:disable NameFormat
+  background: $neutral50 linear-gradient(90deg, transparentize($neutral90, 0.5), transparentize($neutral90, 1));
+  border-radius: $height;
+  cursor: pointer;
+  transition: background $durationSlow $timing;
+
+  &.checked {
+    // Disabled to use built-in function
+    // scss-lint:disable NameFormat
+    background: $accentPrimary linear-gradient(270deg, transparentize($neutral90, 0.5), transparentize($neutral90, 1));
+
+    &::before {
+      left: calc(100% - #{$height});
+    }
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $height;
+    height: $height;
+    background-color: $neutral20;
+    border-radius: $height;
+    content: '';
+    transition: left $duration $timing;
+  }
+}
+
+.boolean-primary {
+  @include booleanPrimary(30px);
+}

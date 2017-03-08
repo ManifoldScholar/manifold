@@ -1,8 +1,4 @@
-# This file should contain all the record creation needed to seed the database
-# with its default values. The data can then be loaded with the rake db:seed
-# (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# Please ensure that seeding the databas is always an idempotent operation. Seeds are
+# run on every deployment.
+
+Seed.execute

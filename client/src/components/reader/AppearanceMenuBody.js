@@ -23,14 +23,14 @@ export default class AppearanceMenuBody extends Component {
     this.props.selectFont(font);
   };
 
-  incrementSizeHandler = (event) => {
+  incrementSizeHandler = (event, enabeled) => {
     event.stopPropagation();
-    this.props.incrementFontSize();
+    if (enabeled) this.props.incrementFontSize();
   };
 
-  decrementSizeHandler = (event) => {
+  decrementSizeHandler = (event, enabeled) => {
     event.stopPropagation();
-    this.props.decrementFontSize();
+    if (enabeled) this.props.decrementFontSize();
   };
 
   incrementMarginsHandler = (event) => {
@@ -84,6 +84,11 @@ export default class AppearanceMenuBody extends Component {
       'button-active': colorScheme === 'dark'
     });
 
+    const sansDecreasable = fontSize.current > fontSize.min && typography.font === 'sans-serif';
+    const sansIncreasable = fontSize.current < fontSize.max && typography.font === 'sans-serif';
+    const serifDecreasable = fontSize.current > fontSize.min && typography.font === 'serif';
+    const serifIncreasable = fontSize.current < fontSize.max && typography.font === 'serif';
+
     return (
       <nav className="appearance-menu">
         <div className="control-font">
@@ -96,9 +101,8 @@ export default class AppearanceMenuBody extends Component {
 
           <div className="font-size">
             <button
-              disabled={fontSize.current === fontSize.min ||
-                typography.font === 'sans-serif'}
-              onClick={this.decrementSizeHandler}
+              disabled={!serifDecreasable}
+              onClick={(event) => { this.decrementSizeHandler(event, serifDecreasable); }}
             >
               <i className="manicon manicon-dash"></i>
               <span className="screen-reader-text">
@@ -106,9 +110,8 @@ export default class AppearanceMenuBody extends Component {
               </span>
             </button>
             <button
-              disabled={fontSize.current === fontSize.max ||
-                typography.font === 'sans-serif'}
-              onClick={this.incrementSizeHandler}
+              disabled={!serifIncreasable}
+              onClick={(event) => { this.incrementSizeHandler(event, serifIncreasable); }}
             >
               <i className="manicon manicon-plus"></i>
               <span className="screen-reader-text">
@@ -126,9 +129,8 @@ export default class AppearanceMenuBody extends Component {
 
           <div className="font-size">
             <button
-              disabled={fontSize.current === fontSize.min ||
-                typography.font === 'serif'}
-              onClick={this.decrementSizeHandler}
+              disabled={!sansDecreasable}
+              onClick={(event) => { this.decrementSizeHandler(event, sansDecreasable); }}
             >
               <i className="manicon manicon-dash"></i>
               <span className="screen-reader-text">
@@ -136,9 +138,8 @@ export default class AppearanceMenuBody extends Component {
               </span>
             </button>
             <button
-              disabled={fontSize.current === fontSize.max ||
-                typography.font === 'serif'}
-              onClick={this.incrementSizeHandler}
+              disabled={!sansIncreasable}
+              onClick={(event) => { this.incrementSizeHandler(event, sansIncreasable); }}
             >
               <i className="manicon manicon-plus"></i>
               <span className="screen-reader-text">

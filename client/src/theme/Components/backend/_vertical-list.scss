@@ -1,0 +1,233 @@
+// Nav wrapping totals and a <ul>
+.vertical-list-primary {
+  padding-top: 49px;
+  padding-bottom: 36px;
+
+  .drawer-primary & {
+    padding-top: 20px;
+    padding-bottom: 0;
+
+    .list-total {
+      padding-bottom: 8px;
+    }
+
+    a {
+      padding: 10px 0 17px;
+    }
+  }
+
+  .list-total {
+    @include utilityPrimary;
+    padding-bottom: 15px;
+    font-size: 15px;
+    color: $neutral70;
+    border-bottom: 1px solid $neutral80;
+
+    span {
+      color: $neutral30;
+    }
+
+    &.empty {
+      padding-top: 20px;
+      border-bottom: 0;
+    }
+  }
+
+  .buttons-icon-horizontal {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 0;
+    border-top: 1px solid $neutral80;
+
+    .button-icon-secondary {
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  ul {
+    @include listUnstyled;
+
+    li:first-of-type {
+      border-top: 0;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid $neutral80;
+      transition: background-color $duration ease-out,
+        box-shadow $duration ease-out;
+
+      &.active {
+        background-color: $neutral95;
+        border-color: $neutral95;
+        box-shadow: -21px 0 0 $neutral95;
+
+        a {
+          color: $accentPrimary;
+        }
+
+        + li {
+          border-color: $neutral95;
+        }
+      }
+    }
+
+    a {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 20px 0 17px;
+      color: $neutral30;
+      text-decoration: none;
+      transition: color $duration ease-out;
+
+      &:hover {
+        figure img {
+          background-color: $accentPrimary;
+          border-color: $accentPrimary;
+        }
+
+        figure svg .highlight {
+          fill: $accentPrimary;
+        }
+
+        .project-title {
+          color: $neutral20;
+        }
+
+        .subtitle {
+          color: $neutral20;
+        }
+
+        .project-makers {
+          color: $neutral20;
+        }
+
+        .label {
+          color: $accentPrimary;
+        }
+      }
+    }
+
+    header {
+      display: flex;
+    }
+
+    figure {
+      &.cover {
+        width: 50px;
+
+        img {
+          border: 1px solid transparent;
+          transition: border $duration $timing,
+            background-color $duration $timing;
+        }
+
+        svg .highlight {
+          transition: fill $duration $timing;
+        }
+      }
+
+      &.avatar {
+        .image {
+          width: 30px;
+          height: 30px;
+          background-position: 50% 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          border-radius: 100%;
+        }
+
+        .no-image {
+          @include buttonAvatar(30);
+        }
+      }
+
+      img, svg {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .meta {
+      display: table-cell;
+      width: 100%;
+      padding-right: 20px;
+      padding-left: 15px;
+      vertical-align: top;
+    }
+
+    .label {
+      @include utilityPrimary;
+      display: table-cell;
+      font-size: 14px;
+      color: $neutral75;
+      white-space: nowrap;
+      vertical-align: top;
+      transition: color $duration $timing;
+
+      .specifier {
+        display: inline-block;
+        padding-right: 19px;
+        color: $accentPrimary;
+      }
+    }
+
+    .name {
+      @include templateHead;
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: 0.015em;
+      transition: color $duration $timing;
+
+      @include respond($break80) {
+        font-size: 18px;
+      }
+
+      &.large {
+        font-size: 18px;
+
+        @include respond($break80) {
+          font-size: 22px;
+        }
+      }
+    }
+
+    .subtitle {
+      @include subtitlePrimary;
+      display: block;
+      padding-top: 0.389em;
+      color: $neutral50;
+      transition: color $duration $timing;
+    }
+
+    .relations-list {
+      @include templateCopy;
+      padding-top: 6px;
+      font-size: 15px;
+      color: $neutral50;
+      transition: color $duration $timing;
+
+      @include respond($break80) {
+        font-size: 17px;
+      }
+    }
+
+    // Optional items
+    .checkbox-primary {
+      margin-right: 18px;
+
+      .toggle-indicator {
+        width: 15px;
+        height: 15px;
+        padding: 3px 2px;
+      }
+
+      .manicon-check {
+        font-size: 8px;
+      }
+    }
+  }
+}

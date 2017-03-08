@@ -1,24 +1,34 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
-
+import FormattedDate from 'components/global/FormattedDate';
 import {
   Utility,
   ResourceList
 } from 'components/frontend';
 
-export default class ResourceCollectionDetail extends Component {
+export default class ResourceCollectionDetail extends PureComponent {
 
   static displayName = "ResourceCollection.Detail";
 
   static propTypes = {
-    resourceCollection: PropTypes.object,
-    project: PropTypes.object
+    collection: PropTypes.object,
+    project: PropTypes.object,
+    slideshowResources: PropTypes.array,
+    slideshowPagination: PropTypes.object,
+    collectionResources: PropTypes.array,
+    collectionPagination: PropTypes.object,
+    collectionPaginationHandler: PropTypes.func,
+    dispatch: PropTypes.func,
+    filterChange: PropTypes.func.isRequired
   };
 
   render() {
     const project = this.props.project;
-    const resourceCollection = this.props.resourceCollection;
-    const resources = resourceCollection.relationships.resources;
+    const collection = this.props.collection;
+    if (!project || !collection) return null;
+
+    const attr = collection.attributes;
+    const resources = collection.relationships.resources;
 
     return (
       <section>
@@ -28,27 +38,50 @@ export default class ResourceCollectionDetail extends Component {
               <i className="manicon manicon-file-box"></i>
               <div className="collection-title">
                 <h1>
-                  {'Collection Title'}
+                  {attr.title}
                 </h1>
                 <span className="collection-date">
-                    {'Collection created January 2016'}
-                  </span>
+                  <FormattedDate
+                    prefix="Collection created"
+                    format="MMMM, YYYY"
+                    date={attr.createdAt}
+                  />
+                </span>
               </div>
             </header>
             <div className="collection-description">
               <p>
-                Maecenas sed diam eget risus varius blandit sit amet non magna.
-                Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                Donec sed odio dui.
+                {attr.description}
               </p>
             </div>
-            <Utility.ShareBar/>
+            {/*
+             <Utility.ShareBar/>
+            */}
           </div>
-
-          <ResourceList.Slideshow resources={resources} />
-          <ResourceList.Totals count={2028} projectId={project.id} />
-          <ResourceList.Filters />
-          <ResourceList.Thumbnails resources={resources} />
+          <ResourceList.Slideshow
+            collectionId={this.props.collection.id}
+            collectionResources={this.props.slideshowResources}
+            count={project.attributes.resourcesCount}
+            pagination={this.props.slideshowPagination}
+            dispatch={this.props.dispatch}
+          />
+          <a id="pagination-target" name="pagination-target"></a>
+          <ResourceList.Totals
+            belongsTo="collection"
+            count={project.attributes.resourcesCount}
+            projectId={project.id}
+          />
+          <ResourceList.Filters
+            kinds={collection.attributes.resourceKinds}
+            tags={collection.attributes.resourceTags}
+            filterChangeHandler={this.props.filterChange}
+          />
+          <ResourceList.Cards
+            context={this.props.collection}
+            resources={this.props.collectionResources}
+            pagination={this.props.collectionPagination}
+            paginationClickHandler={this.props.collectionPaginationHandler}
+          />
         </div>
       </section>
 

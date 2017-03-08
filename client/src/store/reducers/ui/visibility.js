@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import mapValues from 'lodash/mapValues';
 
-const initialState = {
+export const initialState = {
   loginOverlay: false,
   userMenu: false,
   tocDrawer: false,
@@ -77,5 +77,6 @@ export default handleActions({
   PANEL_TOGGLE: panelToggle,
   PANEL_SHOW: panelShow,
   PANEL_HIDE: panelHide,
+  PANEL_HIDE_ALL: allPanelsHide,
   '@@reduxReactRouter/routerDidChange': allPanelsHide
 }, initialState);

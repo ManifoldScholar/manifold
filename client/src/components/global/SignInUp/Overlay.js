@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { HigherOrder } from 'components/global';
 import PasswordForgot from './PasswordForgot';
-import PasswordReset from './PasswordReset';
 import Login from './Login';
 import CreateUpdate from './CreateUpdate';
 import Update from './Update';
@@ -25,12 +24,12 @@ export default class Overlay extends Component {
     this.childProps = this.childProps.bind(this);
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.props.authentication.authenticated === false &&
-  //     nextProps.authentication.authenticated === true) {
-  //     this.props.hideSignInUpOverlay();
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.authentication.authenticated === false &&
+      nextProps.authentication.authenticated === true) {
+      this.props.hideSignInUpOverlay();
+    }
+  }
 
   updateView(view, event = null) {
     if (event) event.preventDefault();
@@ -67,9 +66,6 @@ export default class Overlay extends Component {
       case 'account-password-forgot':
         child = <PasswordForgot {...childProps} />;
         break;
-      case 'account-password-reset':
-        child = <PasswordReset {...childProps} />;
-        break;
       case 'account-login':
         child = <Login {...childProps} />;
         break;
@@ -87,15 +83,20 @@ export default class Overlay extends Component {
   render() {
     return (
       <HigherOrder.BodyClass className={'no-scroll'}>
-        <div className="overlay-full">
-          <figure className="logo">
-            <i className="manicon manicon-manifold-logo"></i>
-            Manifold
-          </figure>
-          <button onClick={this.props.hideSignInUpOverlay} className="overlay-close">
-            Cancel
-            <i className="manicon manicon-x"></i>
-          </button>
+        <div className="overlay-full-primary">
+          <header className="overlay-header">
+            <div className="container">
+              <div className="rel">
+                <figure className="logo">
+                  <i className="manicon manicon-manifold-logo"></i>
+                </figure>
+                <button onClick={this.props.hideSignInUpOverlay} className="overlay-close">
+                  Cancel
+                  <i className="manicon manicon-x"></i>
+                </button>
+              </div>
+            </div>
+          </header>
           <div className="container">
             <div className="overlay-content-focus">
               {this.renderChild()}

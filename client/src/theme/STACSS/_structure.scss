@@ -30,6 +30,30 @@
   }
 }
 
+// Media show/hide classes, media-query variable dependent
+// --------------------------
+@mixin hide($breakpoint) {
+  @include respond($breakpoint) {
+    display: none;
+  }
+}
+
+@mixin show($breakpoint, $default: inherit) {
+  display: none;
+
+  @include respond($breakpoint) {
+    display: $default;
+  }
+}
+
+.hide-60 {
+  @include hide($break60);
+}
+
+.show-60 {
+  @include show($break60);
+}
+
 .rel {
   position: relative;
 }
@@ -90,15 +114,126 @@
   // Section can be abstracted to more specific section class (or body class) if necessary
   &:not(.flush) {
     section > & {
-      padding-top: 74px;
-      padding-bottom: 70px;
+      padding-top: 45px;
+      padding-bottom: 45px;
+
+      @include respond($break75) {
+        padding-top: 74px;
+        padding-bottom: 70px;
+      }
+    }
+  }
+
+  &.flush-top {
+    section > & {
+      padding-top: 0;
+      padding-bottom: 45px;
+
+      @include respond($break75) {
+        padding-top: 0;
+        padding-bottom: 70px;
+      }
+    }
+
+    &.flush-bottom {
+      section > & {
+        padding-top: 0;
+        padding-bottom: 0;
+
+        @include respond($break75) {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+
+  &.flush-bottom {
+    section > & {
+      padding-top: 45px;
+      padding-bottom: 0;
+
+      @include respond($break75) {
+        padding-top: 74px;
+        padding-bottom: 0;
+      }
     }
   }
 }
 
+$readerContainerWidths: (790px, 680px, 500px);
+
 .container-focus {
   @include containerFocus;
-  transition: max-width $duration $timing;
+  // Currently disabled to prevent bad resource group calculations
+  //transition: max-width $duration $timing;
+
+  @for $i from 1 through length($readerContainerWidths) {
+    &.container-width-#{$i - 1} {
+      max-width: nth($readerContainerWidths, $i);
+    }
+  }
+}
+
+@mixin headerContainerPrimary {
+  @include containerPrototype;
+  position: relative;
+  padding-top: 14px;
+  padding-bottom: 14px;
+
+  @include respond($break40) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+@mixin headerLogoPrimary {
+  display: inline-block;
+  margin-right: 22px;
+  color: $accentPrimary;
+  text-decoration: none;
+  vertical-align: middle;
+
+  @include respond($break40) {
+    margin-right: 33px;
+  }
+
+  // Icon Handling
+  .manicon-manifold-logo {
+    font-size: 32px;
+
+    @include respond($break40) {
+      font-size: 39px;
+    }
+  }
+
+  // Image handling
+  .logo-square {
+    .image {
+      width: 32px;
+      height: 32px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      @include respond($break40) {
+        width: 39px;
+        height: 39px;
+      }
+    }
+  }
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
 }
 
 

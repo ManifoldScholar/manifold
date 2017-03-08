@@ -1,0 +1,3 @@
+:queues:
+  - default
+  - searchkick

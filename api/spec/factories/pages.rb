@@ -10,5 +10,6 @@ FactoryGirl.define do
     is_external_link false
     external_link "http://cnn.com"
     open_in_new_tab false
+    association :creator, factory: :user
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020182356) do
+ActiveRecord::Schema.define(version: 20170307182231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,27 +22,71 @@ ActiveRecord::Schema.define(version: 20161020182356) do
     t.integer  "start_char"
     t.integer  "end_char"
     t.text     "subject"
-    t.uuid     "user_id"
     t.uuid     "text_section_id"
     t.string   "format"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.uuid     "creator_id"
+    t.uuid     "resource_id"
   end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid   "project_id"
-    t.string "title"
-    t.string "role"
+    t.uuid    "project_id"
+    t.string  "title"
+    t.string  "role"
+    t.integer "position"
   end
 
   create_table "collaborators", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "text_id"
     t.uuid     "maker_id"
     t.string   "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "position"
+    t.string   "collaboratable_type"
+    t.uuid     "collaboratable_id"
+  end
+
+  create_table "collection_resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "resource_id"
+    t.uuid     "collection_id"
+    t.integer  "position",      default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "collections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
     t.uuid     "project_id"
+    t.string   "thumbnail_file_name"
+    t.string   "thumbnail_content_type"
+    t.integer  "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
+    t.string   "thumbnail_checksum"
+    t.string   "fingerprint"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "event_type"
+    t.string   "event_url"
+    t.uuid     "subject_id"
+    t.string   "subject_type"
+    t.string   "subject_title"
+    t.string   "subject_subtitle"
+    t.string   "attribution_name"
+    t.string   "attribution_url"
+    t.string   "attribution_identifier"
+    t.text     "excerpt"
+    t.uuid     "project_id"
+    t.string   "event_title"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "event_subtitle"
+    t.string   "external_subject_id"
+    t.string   "external_subject_type"
   end
 
   create_table "favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -55,16 +99,31 @@ ActiveRecord::Schema.define(version: 20161020182356) do
 
   create_table "ingestion_sources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "text_id"
-    t.uuid     "resource_id"
     t.string   "source_identifier"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.string   "kind"
     t.text     "source_path"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+  end
+
+  create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
+    t.uuid     "creator_id"
+    t.text     "log"
+    t.integer  "state",               default: 0
+    t.string   "strategy"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name"
     t.string   "sort_name"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
@@ -91,7 +150,13 @@ ActiveRecord::Schema.define(version: 20161020182356) do
     t.boolean  "is_external_link", default: false
     t.text     "external_link"
     t.boolean  "open_in_new_tab",  default: false
+    t.uuid     "creator_id"
     t.index ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
+  end
+
+  create_table "project_subjects", force: :cascade do |t|
+    t.uuid "project_id"
+    t.uuid "subject_id"
   end
 
   create_table "projects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -104,14 +169,11 @@ ActiveRecord::Schema.define(version: 20161020182356) do
     t.datetime "cover_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "featured",                 default: false
+    t.boolean  "featured",                default: false
     t.uuid     "published_text_id"
     t.string   "hashtag"
-    t.integer  "publication_year"
-    t.integer  "publication_month"
-    t.integer  "publication_day_of_month"
     t.string   "purchase_url"
-    t.integer  "purchase_price_in_cents"
+    t.bigint   "purchase_price_in_cents"
     t.string   "purchase_price_currency"
     t.string   "purchase_version_label"
     t.string   "instagram_id"
@@ -125,17 +187,73 @@ ActiveRecord::Schema.define(version: 20161020182356) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.jsonb    "metadata",                default: {}
+    t.uuid     "creator_id"
+    t.jsonb    "tweet_fetch_config",      default: {}
+    t.date     "publication_date"
   end
 
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name"
-    t.string   "type"
+    t.string   "title"
+    t.string   "kind"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.uuid     "creator_id"
+    t.uuid     "project_id"
+    t.text     "caption"
+    t.text     "description"
+    t.string   "fingerprint"
+    t.text     "keywords"
+    t.string   "alt_text"
+    t.string   "copyright_status"
+    t.string   "copyright_holder"
+    t.string   "credit"
+    t.string   "external_url"
+    t.string   "external_id"
+    t.string   "external_type"
+    t.boolean  "allow_high_res",           default: true
+    t.boolean  "allow_download",           default: true
+    t.boolean  "doi_requested",            default: false
+    t.datetime "doi_added"
+    t.string   "doi",                      default: "f"
+    t.string   "high_res_checksum"
+    t.string   "transcript_checksum"
+    t.string   "translation_checksum"
+    t.string   "attachment_checksum"
+    t.string   "high_res_file_name"
+    t.string   "high_res_content_type"
+    t.integer  "high_res_file_size"
+    t.datetime "high_res_updated_at"
+    t.string   "transcript_file_name"
+    t.string   "transcript_content_type"
+    t.integer  "transcript_file_size"
+    t.datetime "transcript_updated_at"
+    t.string   "translation_file_name"
+    t.string   "translation_content_type"
+    t.integer  "translation_file_size"
+    t.datetime "translation_updated_at"
+    t.string   "title_formatted"
+    t.text     "description_formatted"
+    t.text     "caption_formatted"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.jsonb    "general",                 default: {}
+    t.jsonb    "theme",                   default: {}
+    t.jsonb    "oauth",                   default: {}
+    t.jsonb    "features",                default: {}
+    t.integer  "singleton_guard"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "press_logo_file_name"
+    t.string   "press_logo_content_type"
+    t.integer  "press_logo_file_size"
+    t.datetime "press_logo_updated_at"
+    t.index ["singleton_guard"], name: "index_settings_on_singleton_guard", unique: true, using: :btree
   end
 
   create_table "stylesheets", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -153,18 +271,43 @@ ActiveRecord::Schema.define(version: 20161020182356) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.string   "taggable_type"
+    t.uuid     "taggable_id"
+    t.string   "tagger_type"
+    t.integer  "tagger_id"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+    t.index ["context"], name: "index_taggings_on_context", using: :btree
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy", using: :btree
+    t.index ["taggable_id"], name: "index_taggings_on_taggable_id", using: :btree
+    t.index ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
+    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type", using: :btree
+    t.index ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string  "name"
+    t.integer "taggings_count", default: 0
+    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  end
+
   create_table "text_sections", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name"
-    t.uuid     "resource_id"
     t.text     "source_body"
     t.text     "body"
     t.string   "source_identifier"
     t.uuid     "text_id"
     t.integer  "position"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "kind"
     t.text     "body_json"
+    t.uuid     "ingestion_source_id"
   end
 
   create_table "text_subjects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -185,8 +328,8 @@ ActiveRecord::Schema.define(version: 20161020182356) do
 
   create_table "texts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "unique_identifier"
     t.string   "language"
     t.date     "publication_date"
@@ -198,6 +341,15 @@ ActiveRecord::Schema.define(version: 20161020182356) do
     t.text     "structure_titles"
     t.uuid     "project_id"
     t.uuid     "category_id"
+    t.uuid     "creator_id"
+    t.uuid     "start_text_section_id"
+    t.integer  "position"
+    t.string   "spine",                 default: [],              array: true
+  end
+
+  create_table "user_claims", force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "maker_id"
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -215,6 +367,9 @@ ActiveRecord::Schema.define(version: 20161020182356) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean  "is_cli_user",            default: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
   end
 
 end

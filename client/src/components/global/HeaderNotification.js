@@ -42,15 +42,17 @@ export default class HeaderNotification extends Component {
     });
     return (
       <div className={notificationClass} key={this.props.id}>
-        <header>
-          <h5 className="notification-heading">{this.props.heading}</h5>
-        </header>
-        {this.bodyCopy()}
+        <div className="container">
+          <header>
+            <h5 className="notification-heading">{this.props.heading}</h5>
+          </header>
+          {this.bodyCopy()}
 
-        <button className="notification-close" onClick={this.handleClose}>
-          <i className="manicon manicon-x"></i>
-          <span className="screen-reader-text">{'Click to close this notification'}</span>
-        </button>
+          <button className="notification-close" onClick={this.handleClose}>
+            <i className="manicon manicon-x"></i>
+            <span className="screen-reader-text">{'Click to close this notification'}</span>
+          </button>
+        </div>
       </div>
     );
   }

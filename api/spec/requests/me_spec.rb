@@ -1,83 +1,79 @@
 require "rails_helper"
 
-RSpec.configure do |c|
-  c.include Helpers
-end
+RSpec.describe "Me API", type: :request do
 
-RSpec.describe "api/v1/me", type: :request do
-  def build_authenticated_user
-    @user, @headers = create_user_and_authenticate.values_at(:user, :headers)
-    @user.save
-  end
+  include_context("authenticated request")
+  include_context("param helpers")
+  let(:path) { api_v1_me_path }
 
-  describe "PUT /api/v1/me" do
-    it "updates the first and last name" do
-      build_authenticated_user
-      params = {
-        data: {
-          type: "user",
-          id: @user.id,
-          attributes: {
-            first_name: "Jimbo",
-            last_name: "Higgins"
-          }
-        }
-      }
-      put api_v1_me_path, headers: @headers, params: params
-      api_response = JSON.parse(response.body)
-      expect(api_response["data"]["attributes"]["firstName"]).to eq("Jimbo")
+  describe "updates the current user" do
+
+    let(:first_name) { "John" }
+    let(:last_name) { "Rambozo" }
+    let(:update_params) {
+      json_payload(attributes: { firstName: first_name, lastName: last_name })
+    }
+    let(:api_response) { JSON.parse(response.body) }
+
+    context "when the user has not authenticated" do
+      before(:each) { patch path, params: update_params }
+      describe "the response" do
+        it "has a 401 status" do
+          expect(response).to have_http_status(401)
+        end
+      end
     end
 
-    it "accepts an avatar file upload and adds it to the user" do
-      build_authenticated_user
-      params = {
-        data: {
-          type: "user",
-          id: @user.id,
-          attributes: {
-            avatar: {
-              content_type: "image/png",
-              data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAA8SURBVDhPY2RgYPgPxFQBjCDDFjExU2xY3L+/DEwUm4JkwKhhpIfmaJiNhhmOEBhNGqQnDXDhSLo27DoAUSQGIRjvqU4AAAAASUVORK5CYII=",
-              filename: "box.png"
-            }
-          }
-        }
-      }
-      put api_v1_me_path, headers: @headers, params: params
-      user = @user.reload
-      expect(user.avatar.present?).to be true
-    end
-
-    it "removes the user's avatar if remove_avatar param is true" do
-    end
-  end
-
-  describe "GET /api/v1/me" do
-    context "when there is an authenticated user" do
-      before :each do
-        @user, @headers = create_user_and_authenticate.values_at(:user, :headers)
-        get api_v1_me_path, headers: @headers
-        @response = response
-        @api_response = JSON.parse(@response.body)
+    context "when the user is a reader" do
+      describe "the response" do
+        before(:each) { patch path, headers: reader_headers, params: update_params }
+        it "has a 200 status" do
+          expect(response).to have_http_status(200)
+        end
       end
 
-      it "responds with a 200 status code" do
-        expect(@response).to have_http_status(200)
-      end
+      describe "the current user" do
+        let(:headers) { reader_headers }
+        it("contains the updated first name") { expect_updated_param("firstName", "Janko") }
+        it("contains the updated last name") { expect_updated_param("lastName", "Rambozo") }
+        describe "the avatar" do
 
-      it "responds with the currently logged in user" do
-        expect(@api_response["data"]["id"]).to eq @user.id.to_s
+          let(:params) { json_payload(attributes: {avatar: image_params }) }
+          before(:each) { patch path, headers: reader_headers, params: params }
+
+          it("has an updated avatar") {
+            reader.reload
+            expect(reader.avatar.present?).to be true
+          }
+
+        end
+      end
+    end
+  end
+
+  describe "sends the current user" do
+
+    context "when the user is a reader" do
+      before(:each) { get path, headers: reader_headers }
+      let(:api_response) { JSON.parse(response.body) }
+
+      describe "the response" do
+        it "has a 200 status code" do
+          expect(response).to have_http_status(200)
+        end
+        it "contains the logged in user ID" do
+          expect(api_response["data"]["id"]).to eq reader.id
+        end
       end
     end
 
     context "when there is not an authenticated user" do
-      before :each do
-        get api_v1_me_path
-        @response = response
-      end
+      before(:each) { get path }
 
-      it "responds with a 401 status code" do
-        expect(@response).to have_http_status(401)
+      describe "the response" do
+        it "has a 401 status code" do
+          expect(response).to have_http_status(401)
+        end
       end
     end
   end

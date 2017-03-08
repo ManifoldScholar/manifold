@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Text } from 'components/frontend';
+import { Text } from 'components/global';
+import FormattedDate from 'components/global/FormattedDate';
 
 export default class TextThumbnail extends Component {
 
@@ -42,51 +43,68 @@ export default class TextThumbnail extends Component {
   render() {
     const text = this.props.text;
 
+    // Temporary while icons are not getting link styling
+    const styles = {
+      color: "#52e3ac"
+    };
+
     return (
       <div className="asset-thumb">
-        <Link to={`/read/${this.props.text.id}`} className="asset-link">
-          <figure className="asset-image">
-            {/*
-              Manicon-new can be added for texts that are "new"
-              <i className="manicon manicon-new"></i>
-            */}
-            {this.renderThumbnail(text)}
-          </figure>
+        <div className="asset-link">
+          <Link to={`/read/${this.props.text.id}`}>
+            <figure className="asset-image">
+              { text.attributes.age <= 30 ?
+                <i className="manicon manicon-new"></i>
+              :
+                null
+              }
+              {this.renderThumbnail(text)}
+            </figure>
+          </Link>
 
           <div className="asset-description">
-            <h3 className="asset-title">
-              {text.attributes.title}
-              {this.renderSubtitle(text)}
-            </h3>
+            <Link to={`/read/${this.props.text.id}`}>
+              <h3 className="asset-title">
+                {text.attributes.title}
+                {this.renderSubtitle(text)}
+              </h3>
+            </Link>
             <datetime className="asset-date">
-              {'Added ' + text.attributes.createdAt}
+              <FormattedDate
+                prefix="Added"
+                format="MMMM, YYYY"
+                date={text.attributes.createdAt}
+              />
             </datetime>
+
+            <div className="asset-status">
+              <ul className="asset-interactions">
+                <li>
+                  <div >
+                    <i className="manicon manicon-pencil-simple" style={styles}></i>
+                    {text.attributes.annotationsCount}
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <i className="manicon manicon-highlight" style={styles}></i>
+                    {text.attributes.highlightsCount}
+                  </div>
+                </li>
+                {/* <li>
+                  <div>
+                    <i className="manicon manicon-bookmark-outline" style={styles}></i>
+                    {text.attributes.bookmarksCount}
+                  </div>
+                </li> */}
+              </ul>
+            </div>
+
+
           </div>
-        </Link>
+        </div>
 
         {/* Asset status markup only stub at this point, may be abstracted to child component */}
-        <div className="asset-status">
-          <ul className="asset-interactions">
-            <li>
-              <Link to="/">
-                <i className="manicon manicon-pencil-simple"></i>
-                12
-              </Link>
-            </li>
-            <li>
-              <Link to="/">
-                <i className="manicon manicon-word-bubble"></i>
-                12
-              </Link>
-            </li>
-            <li>
-              <Link to="/">
-                <i className="manicon manicon-bookmark-outline"></i>
-                31
-              </Link>
-            </li>
-          </ul>
-        </div>
       </div>
     );
   }

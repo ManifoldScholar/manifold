@@ -9,7 +9,15 @@ export default class LayoutFooter extends Component {
   static propTypes = {
     commonActions: PropTypes.object,
     authentication: PropTypes.object,
-    pages: PropTypes.array
+    pages: PropTypes.array,
+    settings: PropTypes.shape({
+      attributes: PropTypes.shape({
+        general: PropTypes.object,
+        theme: PropTypes.object,
+        oauth: PropTypes.object,
+        features: PropTypes.object
+      })
+    })
   };
 
   constructor() {
@@ -60,12 +68,21 @@ export default class LayoutFooter extends Component {
     );
   }
 
+  buildContactLink() {
+    if (!this.props.settings) return null;
+    if (!this.props.settings.attributes.general.contactUrl) return null;
+    const url = this.props.settings.attributes.general.contactUrl;
+    return (
+      <a target="_blank" href={url}>{'Contact'}</a>
+    );
+  }
+
   buildPagesArray() {
     const pages = [];
     pages.push(this.buildAuthLink());
     pages.push(<Link to={'/browse'}>{'Projects'}</Link>);
     pages.push(...this.buildContentPages());
-    pages.push(<Link to={`/contact`}>{'Contact'}</Link>);
+    pages.push(this.buildContactLink());
     pages.push(<a target="_blank" href="http://twitter.com/manifoldscholar">{'Twitter'}</a>);
     pages.push(<a href="mailto:webbook@umn.edu">{'Email'}</a>);
     return pages;
@@ -95,14 +112,17 @@ export default class LayoutFooter extends Component {
           </nav>
 
           <section className="footer-secondary">
-            <form>
-              <div className="search-button-inline">
-                <input type="text" placeholder="Search"/>
-                <button className="manicon manicon-magnify">
-                  <span className="screen-reader-text">Click to submit search query</span>
-                </button>
-              </div>
-            </form>
+            {/*
+              Hiding search markup until basic search functionality is implemented
+              <form>
+                <div className="search-button-inline">
+                  <input type="text" placeholder="Search"/>
+                  <button className="manicon manicon-magnify">
+                    <span className="screen-reader-text">Click to submit search query</span>
+                  </button>
+                </div>
+              </form>
+            */}
             <p className="colophon">
               {'© 2015-2016 6 University of Minnesota Press.'}
               <br />

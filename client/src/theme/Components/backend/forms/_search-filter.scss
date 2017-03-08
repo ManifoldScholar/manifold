@@ -1,0 +1,37 @@
+.form-search-filter {
+  .search {
+    position: relative;
+
+    button {
+      @include buttonUnstyled;
+      position: absolute;
+      top: 50%;
+      left: 19px;
+      margin-top: -7px;
+
+      .manicon-magnify {
+        font-size: 12px;
+        color: $accentPrimary;
+      }
+    }
+
+    input[type="text"] {
+      @include inputQuaternary;
+      width: 100%;
+      padding-left: 3.188em;
+    }
+  }
+
+  .button-bare-primary {
+    margin-top: 10px;
+    margin-right: 20px;
+
+    + .button-bare-primary {
+      margin-top: 10px;
+    }
+  }
+
+  .reset {
+    color: $neutral80;
+  }
+}

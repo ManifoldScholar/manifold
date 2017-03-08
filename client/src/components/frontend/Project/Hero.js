@@ -58,13 +58,35 @@ export default class ProjectHero extends Component {
     }
   }
 
+  renderProjectImage(wrapperClass) {
+    let output = '';
+    const attr = this.props.project.attributes;
+
+    if (attr.coverUrl) {
+      output = (
+        <img src={attr.coverUrl} />
+      );
+
+      if (wrapperClass) {
+        output = (
+          <div className={wrapperClass}>
+            {output}
+          </div>
+        );
+      }
+    }
+
+    return output;
+  }
+
   renderSocial() {
     const attr = this.props.project.attributes;
     const services = ["twitter", "facebook", "instagram"];
+    const hashtag = attr.hashtag ? `#${attr.hashtag}` : null;
 
     return (
       <section className="project-social">
-        <span className="hashtag">#{attr.hashtag}</span>
+        <span className="hashtag">{hashtag}</span>
         <nav className="networks">
           <ul>
             {services.map((service) => {
@@ -87,6 +109,7 @@ export default class ProjectHero extends Component {
 
   renderPublishedText(position) {
     const publishedText = this.props.project.relationships.publishedText;
+    const publishedTextTocId = this.props.project.attributes.publishedTextTocId;
     if (!publishedText) return null;
     return (
       <section className={'project-entry ' + position}>
@@ -97,14 +120,16 @@ export default class ProjectHero extends Component {
           <i className="manicon manicon-glasses"></i>
           {'Start Reading'}
         </Link>
-
-        <Link
-          to={`/read/${publishedText.id}`}
-          className="button-secondary dull"
-        >
-          <i className="manicon manicon-bullet-list"></i>
-          {'View Contents'}
-        </Link>
+        {publishedTextTocId ?
+          <Link
+            to={`/read/${publishedText.id}/section/${publishedTextTocId}`}
+            className="button-secondary dull"
+          >
+            <i className="manicon manicon-bullet-list"></i>
+            {'View Contents'}
+          </Link>
+          : null
+        }
       </section>
 
     );
@@ -137,9 +162,7 @@ export default class ProjectHero extends Component {
         <div className="container">
           <div className="project-figure">
             {this.listMakers()}
-            <div className="image">
-              <img src={attr.coverUrl}/>
-            </div>
+            {this.renderProjectImage('image')}
             <h1 className="project-title">
               {attr.title}
               <span className="subtitle">
@@ -161,8 +184,8 @@ export default class ProjectHero extends Component {
             {this.renderPublishedText('bottom')}
             {this.renderPurchaseLink()}
           </div>
-          <div className="project-image">
-            <img src={attr.coverUrl}/>
+          <div className="project-aside">
+            {this.renderProjectImage()}
             {this.renderPurchaseLink()}
           </div>
         </div>

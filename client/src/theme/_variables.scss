@@ -17,7 +17,9 @@ $neutral50: #9a9a9a;
 $neutral70: #828282;
 $neutral75: #696969;
 $neutral80: #555555;
+$neutral85: #414042;
 $neutral90: #363636;
+$neutral95: #2e2e2e;
 $neutral100: #231f20;
 
 // Separated as this is often used for base template elements (like plain text)
@@ -29,15 +31,19 @@ $accentPrimary: #52e3ac !default;
 $accentPrimaryDark: #34a178 !default;
 $accentPrimaryMedium: #3dbd8c !default;
 $accentPrimaryLight: #75e9bd !default;
+$accentPrimaryDull: #b1ead2 !default;
 $accentPrimaryPale: #c1f7e4 !default;
 $accentPrimaryOffWhite: #f0faf7 !default;
 
 
 // Spectra
 // Color spectra are number by group and then given ordinal names, attributes
+
+// SP 20 Reader Annotations, Highlighting, Labels
 $sp20Primary: #2bd1fa;
 $sp20PrimaryLight: #99e3f5;
 $sp20PrimaryPale: #d9f5fb;
+$sp20PrimaryPaleLowContrast: #808f9b;
 
 $sp20Secondary: #70c930;
 $sp20SecondaryLight: #c6eaac;
@@ -47,13 +53,17 @@ $sp20Tertiary: #ff12ff;
 
 $sp20Quaternary: #fffd73;
 
+$sp20Quinary: #faffdb;
+
+// SP 30 Header Notifications
 $sp30Primary: #d4f2ff;
 $sp30Secondary: #fff799;
 $sp30Tertiary: #ffbdbd;
 
+// SP 40 Template Notices, Warnings, Acceptance, Errata
 $sp40Tertiary: #f75884;
 
-// Spectrum 50 used for project placholder tiles
+// SP 50 Project Placeholder tile backgrounds
 $sp50Primary: #cbf7e6;
 $sp50Secondary: #ebebeb;
 $sp50Tertiary: #deecf9;
@@ -91,17 +101,24 @@ $baseLineHeight: 1.2;
 $containerWidthFull: 1235px; // Maximum container width of 1135 plus maximum gutter padding
 $containerPaddingFull: 50px;
 $containerPaddingResp: 4.5%;
+$containerPaddingRespGlobal: 4.5vw;
 $containerWidthMin: 320px; // Minimum container width
 
+// Precalculated container width for convenience
+$containerWidthInner: $containerWidthFull - ($containerPaddingFull * 2);
 
 $containerWidthFocus: 680px; // Narrow container width for reading
 $containerPaddingMin: 15px; // Minimum gutter padding
+
+$readerHeaderHeightMin: 55px;
+$readerHeaderHeightMax: 63px;
 
 // Font Weights
 // These are convenience variables to keep font weight declarations consistent
 // --------------------------------------------------------
 $light: 200;
 $book: 300;
+$medium: 500;
 $regular: 400;
 $semibold: 600;
 $bold: 700;
@@ -131,8 +148,14 @@ $break75: 760px;
 $break70: 700px;
 $break65: 690px;
 $break60: 620px;
+$break50: 560px;
 $break40: 480px;
 $break30: 400px;
 $break20: 350px;
 // Minimum site width
 $break10: $containerWidthMin;
+
+// Height Breakpoints
+// --------------------------
+// Rarely used, but helpful for things like modals and height dependent interfaces
+$hbreak90: 900px;

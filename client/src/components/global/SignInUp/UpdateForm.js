@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { meAPI } from 'api';
+import { meAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { Avatar, Form } from 'components/global';
 import { connect } from 'react-redux';
@@ -7,13 +7,13 @@ import get from 'lodash/get';
 import hasIn from 'lodash/hasIn';
 import Dropzone from 'react-dropzone';
 
-const { request, requests } = entityStoreActions;
+const { request } = entityStoreActions;
 
 class UpdateForm extends Component {
 
   static mapStateToProps(state) {
     return {
-      response: state.entityStore.responses[requests.updateCurrentUser]
+      response: state.entityStore.responses[requests.gAuthenticatedUserUpdate]
     };
   }
 
@@ -61,7 +61,7 @@ class UpdateForm extends Component {
       };
     }
     const { promise } =
-      this.props.dispatch(request(meAPI.update(params), requests.updateCurrentUser));
+      this.props.dispatch(request(meAPI.update(params), requests.gAuthenticatedUserUpdate));
     promise.then(() => {
       this.props.hideSignInUpOverlay();
     });
@@ -123,7 +123,7 @@ class UpdateForm extends Component {
   }
 
   render() {
-    let errors = get(this.props.response, 'errors') || {};
+    let errors = get(this.props.response, 'errors') || [];
     if (!this.props.authentication.currentUser) return null;
     return (
       <form
@@ -155,7 +155,11 @@ class UpdateForm extends Component {
           </div>
         }
         <div className="row-1-p">
-          <Form.Errorable className="form-input" field="nickname" errors={errors} >
+          <Form.Errorable
+            className="form-input"
+            name="attribuets[nickname]"
+            errors={errors}
+          >
             <input
               value={this.state.nickname}
               type="text"

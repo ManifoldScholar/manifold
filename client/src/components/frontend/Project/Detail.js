@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 import fakeData from 'helpers/fakeData';
 import get from 'lodash/get';
 
@@ -42,10 +43,61 @@ class Detail extends Component {
     window.scrollTo(0, 0);
   }
 
-  renderActivity() {
-    const project = this.props.project;
+  onlyShowingMeta() {
+    const texts = this.shouldShowTexts();
+    const resources = this.shouldShowResources();
+    const activity = this.shouldShowActivity();
+    const result = !texts && !resources && !activity;
+    return result;
+  }
 
-    if (!this.state.activity.length > 0) return null;
+  shouldShowResources() {
+    const project = this.props.project;
+    const collectionCount = project.attributes.collectionsCount;
+    const resourcesCount = project.attributes.resourcesCount;
+    return collectionCount > 0 || resourcesCount > 0;
+  }
+
+  shouldShowTexts() {
+    const texts = this.props.project.relationships.texts;
+    return texts && texts.length > 0;
+  }
+
+  shouldShowActivity() {
+    const events = this.props.project.relationships.events;
+    return events && events.length > 0;
+  }
+
+  renderMeta() {
+    const project = this.props.project;
+    const collectionCount = project.attributes.collectionsCount;
+    const resourcesCount = project.attributes.resourcesCount;
+    if (!project.attributes.metadata) return null;
+    const containerClass = classNames({
+      container: true,
+      'flush-top': !this.shouldShowResources() || !this.shouldShowResources()
+    });
+    return (
+      <section>
+        <div className={containerClass}>
+          <header className="section-heading">
+            <h4 className="title">
+              <i className="manicon manicon-tag"></i>
+              {'Metadata'}
+            </h4>
+          </header>
+          <Project.Meta metadata={project.attributes.metadata} />
+        </div>
+      </section>
+    );
+  }
+
+  renderActivity() {
+    if (!this.shouldShowActivity()) return null;
+    const project = this.props.project;
+    const attr = project.attributes;
+    const events = project.relationships.events;
+    if (events && events.length === 0) return null;
     return (
       <section>
         <div className="container">
@@ -54,48 +106,85 @@ class Detail extends Component {
               <i className="manicon manicon-pulse"></i>
               {'Recent Activity'}
             </h4>
-            <Event.AllLink count={this.state.activity.length} projectId={project.id} />
+            <div className="hide-60">
+              <Event.AllLink count={attr.eventCount} threshold={2} projectId={project.id} />
+            </div>
+            <div className="show-60">
+              <Event.AllLink count={attr.eventCount} threshold={6} projectId={project.id} />
+            </div>
           </header>
-          <Event.List events={this.state.activity} limit={6} columns={3} />
-        </div>
-      </section>
-    );
-  }
-
-  renderMeta() {
-    return (
-      <section>
-        <div className="container">
-          <header className="section-heading">
-            <h4 className="title">
-              <i className="manicon manicon-tag"></i>
-              {'Metadata'}
-            </h4>
-          </header>
-          <Project.Meta data={this.state.meta} />
+          {/* NB: CSS limits the event list from showing more than 2 events on mobile */}
+          <Event.List events={events} limit={6} columns={3} />
         </div>
       </section>
     );
   }
 
   renderTexts() {
+    if (!this.shouldShowTexts()) return null;
     const project = this.props.project;
     const texts = get(this.props, 'project.relationships.texts');
-    if (!texts || texts.length === 0) return null;
+    const events = project.relationships.events;
+    const containerClass = classNames({
+      container: true,
+      'flush-top': this.shouldShowActivity()
+    });
+    let excludes = [];
+    if (project.relationships.publishedText) {
+      excludes.push(project.relationships.publishedText.id);
+    }
     return (
       <section>
+        <div className={containerClass}>
+          <div className="text-category-list-primary">
+            <header className="section-heading">
+              <h4 className="title">
+                <i className="manicon manicon-books-stack"></i>
+                {'Texts'}
+              </h4>
+            </header>
+            {
+              project.relationships.publishedText ?
+              <TextList.Published text={project.relationships.publishedText} />
+              : null
+            }
+            <TextList.Grouped
+              excludeIds={excludes}
+              categories={project.relationships.textCategories}
+              texts={project.relationships.texts}
+            />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  renderCollectionsOrResources() {
+    if (!this.shouldShowResources()) return null;
+    const project = this.props.project;
+    if (project.attributes.collectionsCount > 0) return this.renderCollections();
+    if (project.attributes.resourcesCount > 0) return this.renderResources();
+    return null;
+  }
+
+  renderCollections() {
+    const project = this.props.project;
+    return (
+      <section className="bg-neutral05">
         <div className="container">
           <header className="section-heading">
             <h4 className="title">
-              <i className="manicon manicon-books-stack"></i>
-              {'Texts'}
+              <i className="manicon manicon-cube-shine"></i>
+              {'Resources'}
             </h4>
           </header>
-          <TextList.Published text={project.relationships.publishedText} />
-          <TextList.Grouped
-            excludeIds={[project.relationships.publishedText.id]}
-            categories={project.relationships.textCategories}
-            texts={project.relationships.texts}
+          <ResourceCollectionList.Grid
+            resourceCollections={project.relationships.collections}
+            projectId={project.id}
+          />
+          <ResourceList.Totals
+            count={project.attributes.resourcesCount}
+            projectId={project.id}
           />
         </div>
       </section>
@@ -111,35 +200,24 @@ class Detail extends Component {
     // and not both
     const project = this.props.project;
     return (
-      <div>
-        <section className="bg-neutral05">
-          <div className="container">
-            <header className="section-heading">
-              <h4 className="title">
-                <i className="manicon manicon-cube-shine"></i>
-                {'Resources'}
-              </h4>
-            </header>
-            <ResourceCollectionList.Grid
-              resourceCollections={fakeData.resourceCollections}
-              projectId={project.id}
-            />
-            <ResourceList.Totals count={2028} projectId={project.id} />
-          </div>
-        </section>
-        <section className="bg-neutral05">
-          <div className="container">
-            <header className="section-heading">
-              <h4 className="title">
-                <i className="manicon manicon-cube-shine"></i>
-                {'Resources'}
-              </h4>
-            </header>
-            <ResourceList.Thumbnails resources={fakeData.resources} projectId={project.id} />
-            <ResourceList.Totals count={2028} projectId={project.id} />
-          </div>
-        </section>
-      </div>
+      <section className="bg-neutral05">
+        <div className="container">
+          <header className="section-heading">
+            <h4 className="title">
+              <i className="manicon manicon-cube-shine"></i>
+              {'Resources'}
+            </h4>
+          </header>
+          <ResourceList.Thumbnails
+            resources={project.relationships.uncollectedResources}
+            projectId={project.id}
+          />
+          <ResourceList.Totals
+            count={project.attributes.uncollectedResourcesCount}
+            projectId={project.id}
+          />
+        </div>
+      </section>
     );
   }
 
@@ -149,12 +227,14 @@ class Detail extends Component {
 
   render() {
     if (!this.props.project) return null;
+
     return (
       <div>
         <Project.Hero project={this.props.project} />
         {this.renderActivity()}
         {this.renderTexts()}
-        {this.renderResources()}
+
+        {this.renderCollectionsOrResources()}
         {this.renderMeta()}
         {this.renderNavButtons()}
       </div>

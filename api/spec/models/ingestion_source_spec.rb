@@ -1,6 +1,10 @@
 require "rails_helper"
 
 RSpec.describe IngestionSource, type: :model do
+  it "has a valid factory" do
+    expect(FactoryGirl.build(:text_section)).to be_valid
+  end
+
   it "belongs to a text" do
     ingestion_source = IngestionSource.new
     text = Text.new
@@ -8,10 +12,9 @@ RSpec.describe IngestionSource, type: :model do
     expect(ingestion_source.text).to be text
   end
 
-  it "belongs to a resource" do
-    ingestion_source = IngestionSource.new
-    resource = Resource.new
-    ingestion_source.resource = resource
-    expect(ingestion_source.resource).to be resource
+  it "belongs to a project" do
+    ingestion_source = FactoryGirl.create(:ingestion_source)
+    expect(ingestion_source.project).to be_a Project
   end
+
 end

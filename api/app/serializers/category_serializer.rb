@@ -1,5 +1,6 @@
-# Provides a partial serialization of a maker model.
+# Provides a serialization of a category model.
 class CategorySerializer < ActiveModel::Serializer
-  cache key: "category", expires_in: 3.hours
-  attributes :id, :title
+  meta(partial: false)
+
+  attributes :id, :title, :position
 end

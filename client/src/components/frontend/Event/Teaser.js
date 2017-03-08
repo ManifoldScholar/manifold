@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Body from './Body/';
+import classNames from 'classnames';
 import { Link } from 'react-router';
 
 export default class Teaser extends Component {
@@ -18,7 +19,7 @@ export default class Teaser extends Component {
         output = 'Keep Reading';
         break;
       case 'TWEET':
-        output = 'Visit Site';
+        output = 'View Tweet';
         break;
       default:
         output = 'View More';
@@ -29,10 +30,10 @@ export default class Teaser extends Component {
 
   getEventIcon(type) {
     const eventIconMap = {
-      ANNOTATION_CREATED: 'person-word-bubble',
+      ANNOTATION_ADDED: 'person-word-bubble',
       PROJECT_CREATED: 'egg',
-      RESOURCE_CREATED: 'cube-shine',
-      TEXT_CREATED: 'book-opening',
+      RESOURCE_ADDED: 'cube-shine',
+      TEXT_ADDED: 'book-opening',
       TWEET: 'twitter'
     };
 
@@ -48,8 +49,11 @@ export default class Teaser extends Component {
       case 'TWEET':
         component = Body.Attributable;
         break;
+      case 'TEXT_ADDED':
+        component = Body.Added;
+        break;
       default:
-        component = Body.ModelCreation;
+        component = Body.Created;
     }
 
     return component;
@@ -58,34 +62,36 @@ export default class Teaser extends Component {
   render() {
     const attr = this.props.event.attributes;
 
-    const EventBody = this.getEventBody(attr.event_type);
-    const eventLinked = attr.event_url ? true : false;
+    const EventBody = this.getEventBody(attr.eventType);
+
+    const eventWrapperClass = classNames({
+      'event-tile': true,
+      tweet: attr.eventType === 'TWEET'
+    });
 
     const eventWrapperProps = {
-      className: 'event-tile'
+      className: eventWrapperClass
     };
 
     let eventPrompt = false;
 
-    const EventWrapper = eventLinked ? 'a' : 'div';
-
+    const eventLinked = attr.eventUrl ? true : false;
     if (eventLinked) {
-      eventWrapperProps.href = this.props.event.attributes.event_url;
       eventPrompt = (
-        <span>
-          {this.getPromptByType(attr.event_type)}
+        <a target="_blank" href={this.props.event.attributes.eventUrl}>
+          {this.getPromptByType(attr.eventType)}
           <i className="manicon manicon-arrow-long-right"></i>
-        </span>
+        </a>
       );
     }
 
     return (
-      <EventWrapper {...eventWrapperProps}>
-        <EventBody event={this.props.event} icon={this.getEventIcon(attr.event_type)} />
+      <div {...eventWrapperProps}>
+        <EventBody event={this.props.event} icon={this.getEventIcon(attr.eventType)} />
         <div className="event-prompt">
           {eventPrompt}
         </div>
-      </EventWrapper>
+      </div>
     );
   }
 }

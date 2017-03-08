@@ -7,8 +7,10 @@ module Authentication
 
   included do
     before_action :load_current_user
+    rescue_from ActionController::RoutingError, with: :resource_not_found
     rescue_from AuthenticationTimeoutError, with: :authentication_timeout
     rescue_from NotAuthenticatedError, with: :user_not_authenticated
+    rescue_from Authority::MissingUser, with: :user_not_authenticated
   end
 
   protected
@@ -17,6 +19,10 @@ module Authentication
     @current_user = User.find(decoded_auth_token[:user_id])
   rescue JWT::DecodeError
     nil
+  end
+
+  def current_user
+    @current_user
   end
 
   # This method gets the current user based on the user_id included
@@ -55,17 +61,54 @@ module Authentication
                          end
   end
 
+  # Returns user with auth token
+  def render_authenticated_user(user)
+    if user
+      render json: user,
+             meta: { authToken: AuthToken.encode(user_id: user.id) },
+             include: %w(favorites)
+    else
+      render json: { errors: ["Invalid username or password"] }, status: :unauthorized
+    end
+  end
+
   # Helper Methods for responding to errors
   # ------------------------------------------------------------
+  def build_api_error(title: nil, detail: nil, status: nil)
+    [
+      {
+        id: "API_ERROR",
+        status: status,
+        title: title,
+        detail: detail
+      }
+    ]
+  end
+
   def authentication_timeout
-    render json: { errors: ["Authentication Timeout"] }, status: 419
+    options = {
+      status: 419,
+      title: I18n.t("controllers.errors.auth_timeout.title").titlecase,
+      detail: I18n.t("controllers.errors.auth_timeout.detail")
+    }
+    render json: { errors: build_api_error(options) }, status: 419
   end
 
   def forbidden_resource
-    render json: { errors: ["Not Authorized To Access Resource"] }, status: :forbidden
+    options = {
+      status: 403,
+      title: I18n.t("controllers.errors.forbidden_generic.title").titlecase,
+      detail: I18n.t("controllers.errors.forbidden_generic.detail")
+    }
+    render json: { errors: build_api_error(options) }, status: 403
   end
 
   def user_not_authenticated
-    render json: { errors: ["Not Authenticated"] }, status: :unauthorized
+    options = {
+      status: 401,
+      title: I18n.t("controllers.errors.unauthorized.title").titlecase,
+      detail: I18n.t("controllers.errors.unauthorized.detail")
+    }
+    render json: { errors: build_api_error(options) }, status: :unauthorized
   end
 end

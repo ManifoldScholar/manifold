@@ -9,13 +9,15 @@ export default class LayoutButtonNavigation extends Component {
   static defaultProps = {
     grayBg: true,
     showBrowse: true,
-    showFollowing: true
-  }
+    showFollowing: true,
+    authenticated: false
+  };
 
   static propTypes = {
     grayBg: PropTypes.bool,
     showBrowse: PropTypes.bool,
-    showFollowing: PropTypes.bool
+    showFollowing: PropTypes.bool,
+    authenticated: PropTypes.bool
   };
 
   constructor() {
@@ -34,6 +36,8 @@ export default class LayoutButtonNavigation extends Component {
 
   matchButtonWidths() {
     if (!this._browseButtonEl || !this._followingButtonEl) return;
+    // This currently gets the wrong measurement most of the time
+    // console.log(this._followingButtonEl.offsetWidth, 'offset width');
     const target = this._followingButtonEl.offsetWidth;
     this._browseButtonEl.style.width = `${target}px`;
   }
@@ -41,21 +45,22 @@ export default class LayoutButtonNavigation extends Component {
   renderBrowseButton() {
     if (this.props.showBrowse !== true) return null;
     return (
-      <Link to={'/browse'}>
-        <button ref={(node) => { this._browseButtonEl = node; }} className="button-icon-primary">
+      <Link to={'/browse'} className="button-icon-primary">
+        <span ref={(node) => { this._browseButtonEl = node; }}>
           <i className="manicon manicon-books-on-shelf"></i>See more projects
-        </button>
+        </span>
       </Link>
     );
   }
 
   renderFollowingButton() {
+    if (this.props.authenticated !== true) return null;
     if (this.props.showFollowing !== true) return null;
     return (
-      <Link to={'/browse/following'}>
-        <button ref={(node) => { this._followingButtonEl = node; }} className="button-icon-primary">
+      <Link to={'/browse/following'} className="button-icon-primary">
+        <span ref={(node) => { this._followingButtonEl = node; }}>
           <i className="manicon manicon-books-with-glasses"></i>Projects You're Following
-        </button>
+        </span>
       </Link>
     );
   }
@@ -65,6 +70,7 @@ export default class LayoutButtonNavigation extends Component {
       'bg-neutral05': this.props.grayBg === true
     });
 
+    if (!this.renderBrowseButton() && !this.renderFollowingButton()) return null;
     return (
       <section className={sectionClass}>
         <div className="container">

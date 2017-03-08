@@ -12,7 +12,7 @@ export default class TestListPublished extends Component {
 
   render() {
     return (
-      <div>
+      <nav className="text-category">
         <section>
           <h4 className="sub-section-heading">
             {'Published Version'}
@@ -23,7 +23,7 @@ export default class TestListPublished extends Component {
             </li>
           </ul>
         </section>
-      </div>
+      </nav>
     );
   }
 }

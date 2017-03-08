@@ -1,0 +1,52 @@
+.overlay-full-secondary {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 100px;
+  overflow: scroll;
+
+  &.text-child-enter {
+    opacity: 0.01;
+  }
+
+  &.text-child-enter-active {
+    opacity: 1;
+    transition: opacity, $duration, $timing, 0.3s;
+  }
+
+  &.text-child-leave {
+    opacity: 1;
+  }
+
+  &.text-child-leave-active {
+    opacity: 0.01;
+    transition: opacity, $duration, $timing;
+  }
+
+  // Button
+  .overlay-close {
+    @include buttonClose;
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    color: $neutral50;
+    cursor: pointer;
+    transition: color $duration $timing;
+
+    @include respond($break70) {
+      top: 6.11vh;
+      right: 35px;
+
+      @include respond($hbreak90, min, height) {
+        top: 55px;
+      }
+    }
+
+    &:hover {
+      color: $accentPrimary;
+    }
+
+
+  }
+}

@@ -64,6 +64,75 @@ RSpec.describe User, type: :model do
     expect(user.last_name).to eq("Rambo")
   end
 
+  it "returns the user's name" do
+    user = FactoryGirl.build(:user, name: "John Rambo")
+    expect(user.name).to eq("John Rambo")
+  end
+
+  it "has a collection of associated makers" do
+    user = FactoryGirl.create(:user)
+    2.times { user.makers << FactoryGirl.create(:maker) }
+    expect(user.makers.count).to eq(2)
+  end
+
+  context "can be searched", :integration, :elasticsearch do
+
+    let(:first) { "189274891457612" }
+    let(:last) { "HIOUFHAOASJDFIO" }
+    let(:email) { "#{first}@#{last}.com"}
+
+    before(:each) do
+      user = FactoryGirl.create(:user, first_name: first, last_name: last, email: email)
+      User.reindex
+      User.searchkick_index.refresh
+    end
+
+    it "by first name" do
+      results = User.filter({keyword: first, typeahead: true})
+      expect(results.length).to be 1
+    end
+
+    it "by last name" do
+      results = User.filter({keyword: last, typeahead: true})
+      expect(results.length).to be 1
+    end
+
+    it "by email" do
+      results = User.filter({keyword: email, typeahead: true})
+      expect(results.length).to be 1
+    end
+
+  end
+
+  context "when resetting password" do
+
+    let(:user) do
+      u = FactoryGirl.create(:user, password: "password", password_confirmation: "password")
+      User.find u.id
+    end
+
+    it "generates a reset password token" do
+      user.generate_reset_token
+      expect(user.reset_password_token).to_not be_nil
+    end
+
+    it "expires the reset password token after one hour" do
+      user.generate_reset_token
+      Timecop.travel(DateTime.now + 1.hour) do
+        expect(user.valid_token?).to be false
+      end
+    end
+
+    it "is valid after 59 minutes have elapsed" do
+      user.generate_reset_token
+      Timecop.travel(DateTime.now + 59.minutes) do
+        expect(user.valid_token?).to be true
+      end
+    end
+
+
+  end
+
   context "already exists" do
     let(:user) do
       u = FactoryGirl.create(:user, password: "password", password_confirmation: "password")

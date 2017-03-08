@@ -12,27 +12,17 @@ export const flush = createAction('ENTITY_STORE_FLUSH', (passedMetas) => {
 });
 
 export const request =
-  createAction('ENTITY_STORE_REQUEST', (requestConfig, meta = null, oneTime = false) => {
-    return {
+  createAction('API_REQUEST', (requestConfig, meta = null, options = {}) => {
+    return Object.assign({}, options, {
       request: requestConfig,
-      oneTime,
       state: 0
-    };
+    });
   }, (apiConfig, meta = null) => {
     return meta || uuid.v1();
   });
-
-export const requests = {
-  browseFilteredProjects: 'browse-filtered-projects',
-  browseFeaturedProjects: 'browse-featured-projects',
-  showProjectDetail: 'show-project-detail',
-  readerCurrentText: 'current-text',
-  readerCurrentSection: 'current-section',
-  developerTexts: 'developer-texts',
-  developerProjects: 'developer-projects',
-  updateCurrentUser: 'update-current-user',
-  allPages: 'all-pages',
-  showPage: 'show-page',
-  sectionAnnotations: 'section-annotations',
-  createAnnotation: 'create-annotation'
-};
+//
+// export const notifications = {
+//   [requests.beUserUpdate]: {
+//
+//   }
+// }

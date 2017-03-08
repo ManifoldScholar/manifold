@@ -120,6 +120,34 @@ module Ingestor
             rendition_xml.xpath("//xmlns:package/xmlns:guide")
           end
 
+          def start_section_identifier
+            return v2_start_section_identifier if v2?
+            return v3_start_section_identifier if v3?
+          end
+
+          def v2_guide_node_item(type)
+            guide_node.presence.css("[type=\"#{type}\"]").first
+          end
+
+          def v3_start_section_identifier
+            landmarks = toc_inspector.landmarks_structure
+            return unless landmarks
+            start = landmarks.detect { |l| l[:type] == "bodymatter" }
+            return unless start
+            href = start[:source_path]
+            node = manifest_item_nodes.detect { |n| n.attribute("href").value == href }
+            node.attribute("id").value
+          end
+
+          def v2_start_section_identifier
+            start = v2_guide_node_item("text") || v2_guide_node_item("start")
+            return unless start
+            href = start.attribute("href").value.split("#").first
+            node = manifest_item_nodes.detect { |n| n.attribute("href").value == href }
+            return unless node
+            node.attribute("id").value
+          end
+
           def title_nodes
             metadata_node.xpath("//dc:title", "dc" => dc)
           end
@@ -170,6 +198,14 @@ module Ingestor
           end
           memoize :manifest_nav_item
 
+          def stylesheet_nodes
+            manifest_item_nodes.select do |node|
+              href = node.attribute("href").try(:value)
+              media_type = node.attribute("media-type").try(:value)
+              File.extname(href) == "css" || media_type == "text/css"
+            end
+          end
+
           def manifest_cover_item
             manifest_node.xpath('//*[contains(@properties, "cover-image")]').first
           end
@@ -215,6 +251,17 @@ module Ingestor
             spine_node.xpath("//xmlns:itemref")
           end
           memoize :spine_item_nodes
+
+          def spine_source_ids
+            spine_item_nodes.map do |node|
+              ::Ingestor::Strategy::EPUB::Inspector::TextSection.new(node, self)
+                                                                .source_identifier
+            end
+          end
+
+          def position_in_spine(node)
+            spine_item_nodes.index(node)
+          end
 
           def read_rendition_source(relative_path)
             uri = URI(relative_path)
@@ -268,7 +315,6 @@ module Ingestor
             end
             file
           end
-          memoize :get_rendition_source
 
           def toc_inspector
             return TOC.new(self) if nav_xml
@@ -282,7 +328,11 @@ module Ingestor
           end
 
           def source_zip_path(relative_path)
-            [File.dirname(rendition_relative_path), relative_path].join("/")
+            paths = []
+            base = File.dirname(rendition_relative_path)
+            paths << base unless base == "."
+            paths << relative_path
+            paths.join("/")
           end
         end
       end

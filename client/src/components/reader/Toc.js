@@ -47,7 +47,7 @@ export default class Toc extends Component {
 
     let anchor = null;
     if (node.anchor) anchor = `#${node.anchor}`;
-    const path = `/read/${this.props.text.id}/section/${node.id}${anchor}`;
+    const path = `/read/${this.props.text.id}/section/${node.id}${anchor || ""}`;
 
     return (
       <li key={this.counter}>
@@ -69,9 +69,14 @@ export default class Toc extends Component {
         <ul className="toc-list">
           {this.props.text.attributes.toc.map(this.visitNode)}
         </ul>
-        <i className="manicon manicon-manifold-logo">
-          <span className="screen-reader-text">Manifold Logo</span>
-        </i>
+        <div className="toc-footer">
+          <a href="#">
+            <h4>
+              <i className="manicon manicon-question-round"></i>
+              About This Text
+            </h4>
+          </a>
+        </div>
       </nav>
     );
   }

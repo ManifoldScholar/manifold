@@ -1,0 +1,33 @@
+.resource-thumbnail-list {
+  ul {
+    @include listUnstyled;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -20px;
+  }
+
+  li {
+    display: flex;
+    width: 50%;
+    padding-left: 20px;
+    margin-bottom: 20px;
+
+    @include respond($break60) {
+      width: 33.333%;
+    };
+
+    @include respond($break75) {
+      width: 25%;
+    }
+
+    @include respond($break90) {
+      width: 20%;
+    }
+  }
+
+  a {
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+  }
+}

@@ -2,18 +2,14 @@
 // ---------------------------
 
 // Just for components that deal with selecting an action to create an annotation
-
-.annotation-selection {
-  background-color: $sp20Quaternary;
-}
-
 .annotation-popup {
   position: absolute;
   margin-top: -30px;
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
-  transition: margin $duration $timing, opacity $duration $timing;
+  transition: top $duration $timing, left $duration $timing,
+    opacity $duration $timing;
 
   &.visible {
     opacity: 1;
@@ -23,9 +19,13 @@
   button {
     @include buttonUnstyled;
     @include utilityPrimary;
-    padding: 24px 30px 22px;
-    font-size: $type60;
+    display: block;
+    width: 100%;
+    padding: 12px 22px 13px 17px;
+    font-size: 14px;
+    line-height: 23px;
     color: $neutralWhite;
+    text-align: left;
     background-color: $neutral80;
     transition: color $duration $timing, background-color $duration $timing;
 
@@ -35,24 +35,70 @@
     }
 
     + button {
-      border-left: 3px $neutralWhite solid;
+      border-top: 1.5px $neutral90 solid;
+    }
+
+    .manicon {
+      display: inline-block;
+      margin-right: 13px;
+      vertical-align: middle;
+    }
+
+    // Provisional icon for creating resources
+    .manicon-cube-shine {
+      margin-top: -3px;
+      font-size: 23px;
+    }
+
+    .manicon-pencil-simple {
+      margin-top: -3px;
+      font-size: 21px;
+    }
+
+    .manicon-word-bubble {
+      margin-top: -1px;
+      font-size: 20px;
+    }
+
+    .manicon-bookmark-outline {
+      margin-top: -3px;
+      font-size: 20px;
+    }
+
+    .manicon-nodes {
+      margin-top: -4px;
+      font-size: 23px;
     }
   }
 
   .tail {
     position: absolute;
-    top: 100%;
-    left: 12%;
+    left: 50%;
     display: block;
     width: 0;
     height: 0;
-    border-color: $neutral80 transparent transparent;
+    margin-left: -16px;
     border-style: solid;
-    border-width: 22px 23.5px 0;
     transition: border-color $duration $timing;
+
+    &.tail-down {
+      top: 100%;
+      border-color: $neutral80 transparent transparent;
+      border-width: 16px 16px 0;
+    }
+
+    &.tail-up {
+      top: -16px;
+      border-color: transparent transparent $neutral80;
+      border-width: 0 16px 16px;
+    }
   }
 
-  button:first-child:hover ~ .tail {
+  button:hover + .tail-down {
     border-color: $accentPrimary transparent transparent;
+  }
+
+  button:first-child:hover ~ .tail-up {
+    border-color: transparent transparent $accentPrimary;
   }
 }

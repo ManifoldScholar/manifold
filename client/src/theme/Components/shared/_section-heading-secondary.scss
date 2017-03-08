@@ -1,0 +1,41 @@
+.section-heading-secondary {
+  padding-bottom: 1.375em;
+  font-size: 16px;
+
+  h1, h2, h3, h4, h5, h6 {
+    @include templateHead;
+    margin: 0;
+    // Sized relative to parent so padding can follow suit
+    font-size: 1em;
+    letter-spacing: 0.075em;
+    color: $neutral30;
+    text-transform: uppercase;
+  }
+
+  .manicon {
+    display: inline-block;
+    margin-left: 9px;
+    color: $accentPrimary;
+    vertical-align: middle;
+
+    &.manicon-stack {
+      margin-top: -2px;
+      font-size: 23px;
+    }
+
+    &.manicon-bugle-small {
+      font-size: 14px;
+      vertical-align: top;
+    }
+
+    &.manicon-pulse-small {
+      margin-top: -6px;
+      font-size: 19px;
+    }
+
+    &.manicon-cube-shine {
+      margin-top: -8px;
+      font-size: 23px;
+    }
+  }
+}

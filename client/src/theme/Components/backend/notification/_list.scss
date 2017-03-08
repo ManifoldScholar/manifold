@@ -1,0 +1,54 @@
+.notification-list-block {
+  ul {
+    @include listUnstyled;
+
+    li {
+      position: relative;
+      padding: 14px 60px 17px 20px;
+      background-color: $neutral80;
+
+      + li {
+        margin-top: 20px;
+      }
+
+      p {
+        @include templateHead;
+        font-size: 16px;
+        letter-spacing: 0.015em;
+        color: $neutral40;
+
+        @include respond($break30) {
+          font-size: 18px;
+        }
+
+        @include respond($break75) {
+          font-size: 16px;
+        }
+
+        @include respond($break85) {
+          font-size: 18px;
+        }
+
+        a {
+          color: $accentPrimary;
+          text-decoration: none;
+        }
+      }
+
+      // Close button
+      .manicon-x {
+        @include buttonUnstyled;
+        position: absolute;
+        top: 50%;
+        right: 22px;
+        margin-top: -8px;
+        font-size: 19px;
+        color: $neutral40;
+      }
+    }
+  }
+
+  .button-bare-primary {
+    margin-top: 10px;
+  }
+}

@@ -6,22 +6,22 @@ export default class Pagination extends Component {
   static propTypes = {
     textId: PropTypes.string,
     sectionId: PropTypes.string,
-    textSections: PropTypes.array
+    spine: PropTypes.array
   };
 
   getSiblingSection(id, shift) {
+    if (!this.props.spine) return;
     let siblingSection = false;
-    this.props.textSections.forEach((section, i) => {
-      if (section.id === id && this.props.textSections[i + shift]) {
-        siblingSection = this.props.textSections[i + shift];
-      }
-    });
+    const index = this.props.spine.indexOf(id);
+    if (this.props.spine[index + shift] || index !== -1) {
+      siblingSection = this.props.spine[index + shift];
+    }
 
     return siblingSection;
   }
 
-  getSectionPath(section) {
-    return `/read/${this.props.textId}/section/${section.id}`;
+  getSectionPath(id) {
+    return `/read/${this.props.textId}/section/${id}`;
   }
 
   getPreviousLink() {

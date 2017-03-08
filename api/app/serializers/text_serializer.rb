@@ -1,6 +1,7 @@
 # Serializes a Text model
 class TextSerializer < TextPartialSerializer
-  cache key: "text", expires_in: 3.hours
+  meta(partial: false)
+
   attributes :toc
   belongs_to :project
   has_many :stylesheets

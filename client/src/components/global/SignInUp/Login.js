@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { authActions } from 'actions';
+// import { authActions } from 'actions';
+import { currentUserActions } from 'actions';
 import { get } from 'lodash';
 import classNames from 'classnames';
 
-const { startLogin } = authActions;
+// const { startLogin } = authActions;
 
 export default class Login extends Component {
 
@@ -43,7 +44,11 @@ export default class Login extends Component {
   handleLogin(event) {
     event.preventDefault();
     const { dispatch } = this.props;
-    dispatch(startLogin(this.state.email, this.state.password));
+    const action = currentUserActions.login({
+      email: this.state.email,
+      password: this.state.password
+    });
+    dispatch(action);
   }
 
   authenticationError() {
@@ -109,7 +114,8 @@ export default class Login extends Component {
           </a>
         </p>
 
-        <section className="login-external">
+        {/* Functionality not implemented yet */}
+        {/* <section className="login-external">
           <button className="button-secondary-dark">
             <i className="manicon manicon-facebook"></i>
             <span>Log in with Facebook</span>
@@ -118,7 +124,7 @@ export default class Login extends Component {
             <i className="manicon manicon-twitter"></i>
             <span>Log in with Twitter</span>
           </button>
-        </section>
+        </section> */}
       </div>
     );
   }

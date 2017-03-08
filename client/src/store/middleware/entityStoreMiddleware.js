@@ -1,23 +1,31 @@
 import { ApiClient } from 'api';
+import { entityUtils } from 'utils';
+const { constantizeMeta } = entityUtils;
 import get from 'lodash/get';
 
 function sendRequest(request, authToken) {
   const client = new ApiClient;
   const token = authToken;
-  const { endpoint, method, options } = request;
-  options.authToken = token;
+  const { endpoint, method } = request;
+  const options = Object.assign({}, request.options, { authToken: token });
   return client.call(endpoint, method, options);
 }
 
 function buildResponseAction(payload, meta, error) {
-  return { type: 'ENTITY_STORE_RESPONSE', error, payload, meta };
+  const type = `API_RESPONSE/${constantizeMeta(meta)}`;
+  return { type, error, payload, meta };
+}
+
+function buildRemovesAction(entity) {
+  const type = `ENTITY_STORE_REMOVE`;
+  return { type, payload: { entity } };
 }
 
 export default function entityStoreMiddleware({ dispatch, getState }) {
   return (next) => (action) => {
 
     // Guards
-    if (action.type !== 'ENTITY_STORE_REQUEST') {
+    if (action.type !== 'API_REQUEST') {
       return next(action);
     }
     if (action.payload.state !== 0) return next(action);
@@ -34,8 +42,11 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     const requestPromise =
       sendRequest(action.payload.request, state.authentication.authToken);
 
-    // Start and stop loading indication based on this promise.
-    dispatch({ type: 'START_LOADING', payload: action.meta });
+    setTimeout(() => {
+      // Start and stop loading indication based on this promise.
+      dispatch({ type: 'START_LOADING', payload: action.meta });
+    }, 0);
+
     requestPromise.then(() => {
       dispatch({ type: 'STOP_LOADING', payload: action.meta });
     }, () => {
@@ -48,23 +59,44 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     // We add the promise to the payload so that it can be used in fetch data to delay
     // loading.
     const withState = { state: 1, promise: requestPromise };
-    const newPayload = Object.assign({}, action.payload, withState);
-    const adjustedRequestAction = {
-      type: 'ENTITY_STORE_REQUEST',
-      payload: newPayload,
-      meta: action.meta
-    };
-    next(adjustedRequestAction);
+    const requestPayload = Object.assign({}, action.payload, withState);
+
+    let newMeta = action.meta;
+    if (!Array.isArray(newMeta)) newMeta = [action.meta];
+
+    newMeta.forEach((meta) => {
+      const type = `API_REQUEST/${meta.toUpperCase().replace(/-/g, '_')}`;
+      const adjustedRequestAction = {
+        type,
+        payload: requestPayload,
+        meta
+      };
+      next(adjustedRequestAction);
+    });
 
     // Execute the API call and when it is complete, dispatch a response action.
     requestPromise.then((response) => {
-      dispatch(buildResponseAction(response, action.meta, false));
-      // We fire off a post action if we need additional reducer methods to further change
-      // the state.
-      dispatch({ type: `REQUEST_COMPLETE_${action.meta.toUpperCase().replace(/-/g, '_')}` });
+      newMeta.forEach((meta) => {
+        const payload = response || {};
+        payload.request = action.payload.request;
+        dispatch(buildResponseAction(response, meta, false));
+      });
     }, (response) => {
-      dispatch(buildResponseAction(response, action.meta, true));
+      newMeta.forEach((meta) => {
+        const payload = response || {};
+        payload.request = action.payload.request;
+        dispatch(buildResponseAction(response, meta, true));
+      });
     });
+
+    // Remove object if requested on success.
+    if (requestPayload.removes) {
+      requestPromise.then(() => {
+        dispatch(buildRemovesAction(requestPayload.removes));
+      }, () => {
+        // noop
+      });
+    }
 
     return { meta: action.meta, promise: requestPromise };
   };

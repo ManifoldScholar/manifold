@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Project } from 'components/frontend';
-import moment from 'moment';
+import { Project as FrontEndProject } from 'components/frontend';
+import { Project as GlobalProject } from 'components/global';
+import FormattedDate from 'components/global/FormattedDate';
 
 export default class ProjectThumbnail extends Component {
 
@@ -24,7 +25,7 @@ export default class ProjectThumbnail extends Component {
   };
 
   renderCover() {
-    let cover = (<Project.Placeholder />);
+    let cover = (<GlobalProject.Placeholder />);
 
     if (this.props.project.attributes.coverUrl) {
       cover = (
@@ -39,22 +40,19 @@ export default class ProjectThumbnail extends Component {
 
   renderPublishedDate(project) {
     const attr = project.attributes;
-    const monthInt = attr.publicationMonth ? parseInt(attr.publicationMonth, 10) : null;
-    const yearInt = attr.publicationYear ? parseInt(attr.publicationYear, 10) : null;
-    let publishedString;
-    if (monthInt && yearInt) {
-      publishedString = `Published ${moment().month(monthInt).format("MMMM")}, ${yearInt}`;
-    } else if (yearInt) {
-      publishedString = `Published ${yearInt}`;
-    }
-    if (!publishedString) return null;
-    if (!this.props.hideDate) {
+    if (attr.publicationDate && !this.props.hideDate) {
       return (
         <div className="date">
-          {publishedString}
+          <FormattedDate
+            prefix="Published"
+            format="MMMM, YYYY"
+            date={attr.publicationDate}
+          />
         </div>
       );
     }
+    return null;
+
   }
 
   renderProjectDesc(project) {
@@ -78,6 +76,7 @@ export default class ProjectThumbnail extends Component {
 
   render() {
     const project = this.props.project;
+
     let projectDesc = null;
     if (!this.props.hideDesc) {
       projectDesc = (
@@ -100,23 +99,26 @@ export default class ProjectThumbnail extends Component {
     }
 
     let cover;
+    let className;
     if (project.attributes.avatarUrl) {
+      className = "figure-wrapper";
       cover = (
         <img src={project.attributes.avatarUrl}
           alt={`Click to view ${project.attributes.title}`}
         />
       );
     } else {
-      cover = <Project.Placeholder />;
+      className = "figure-wrapper figure-wrapper-placeholder";
+      cover = <GlobalProject.Placeholder />;
     }
 
     return (
       <Link to={`/browse/project/${project.id}`}>
         {/* Figure wrapper, controls maximum width of figure */}
-        <div className="figure-wrapper">
+        <div className={className} >
           <figure>
             {cover}
-            <Project.Follow
+            <FrontEndProject.Follow
               project={project}
               authenticated={this.props.authenticated}
               favorites={this.props.favorites}

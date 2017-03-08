@@ -14,7 +14,12 @@ export default class MakerAvatar extends Component {
       <figure className="maker-avatar" key={this.props.maker.id}>
         {/* If avatars will not be pre-rendered as squares they will require a styled
         wrapper here */}
-        { attr.avatarUrl ? <img src={attr.avatarUrl} /> : null }
+        { attr.avatarUrl ?
+            <img src={attr.avatarUrl} /> :
+            <div className="no-image">
+              <i className="manicon manicon-person"></i>
+            </div>
+        }
         <figcaption>
           {attr.fullName}
         </figcaption>

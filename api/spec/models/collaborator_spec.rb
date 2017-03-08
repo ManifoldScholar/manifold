@@ -1,18 +1,23 @@
 require "rails_helper"
 
 RSpec.describe Collaborator, type: :model do
+
+  it "has a valid factory" do
+    expect(FactoryGirl.build(:collaborator)).to be_valid
+  end
+
   it "optionally belongs to a text" do
     collaborator = Collaborator.new
     text = Text.new
-    collaborator.text = text
-    expect(collaborator.text).to be text
+    collaborator.collaboratable = text
+    expect(collaborator.collaboratable).to be text
   end
 
   it "optionally belongs to a project" do
     collaborator = Collaborator.new
     project = Project.new
-    collaborator.project = project
-    expect(collaborator.project).to be project
+    collaborator.collaboratable = project
+    expect(collaborator.collaboratable).to be project
   end
 
   it "belongs to a maker" do

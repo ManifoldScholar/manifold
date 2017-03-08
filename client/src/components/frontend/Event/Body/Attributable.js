@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import Autolinker from 'autolinker';
+import FormattedDate from 'components/global/FormattedDate';
 
 export default class EventBodyAttributable extends Component {
 
@@ -9,6 +11,16 @@ export default class EventBodyAttributable extends Component {
     event: PropTypes.object,
     icon: PropTypes.string,
   };
+
+  autoLink(excerpt) {
+    const options = {
+      mention: "twitter",
+      hashtag: "twitter"
+    };
+    return {
+      __html: Autolinker.link(excerpt, options)
+    };
+  }
 
   render() {
     const attr = this.props.event.attributes;
@@ -20,15 +32,18 @@ export default class EventBodyAttributable extends Component {
         <div>
           <i className={iconClass}></i>
           <div className="event-user">
-            {'@' + attr.attribution_id}
+            <a href={`https://twitter.com/${attr.attributionIdentifier}`}>
+              {'@' + attr.attributionIdentifier}
+            </a>
           </div>
           <div className="event-content">
-            <p>
-              {attr.excerpt}
-            </p>
+            <p dangerouslySetInnerHTML={this.autoLink(attr.excerpt)} />
           </div>
           <datetime className="event-date">
-            {attr.created_at}
+            <FormattedDate
+              format="MMMM Do, YYYY"
+              date={attr.createdAt}
+            />
           </datetime>
         </div>
       </div>
