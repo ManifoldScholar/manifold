@@ -37,7 +37,6 @@ class CollectionResourceDetailContainer extends PureComponent {
   }
 
   static propTypes = {
-    project: PropTypes.object,
     resource: PropTypes.object
   };
 
@@ -46,14 +45,28 @@ class CollectionResourceDetailContainer extends PureComponent {
     this.props.dispatch(flush(requests.feCollectionResource));
   }
 
+  projectUrl() {
+    const pid = this.props.collection.relationships.project.id;
+    return `/browse/project/${pid}/resources`;
+  }
+
   collectionUrl() {
     const cid = this.props.collection.id;
     const pid = this.props.collection.relationships.project.id;
     return `/browse/project/${pid}/collection/${cid}`;
   }
 
+  resourceUrl() {
+    const cid = this.props.collection.id;
+    const pid = this.props.collection.relationships.project.id;
+    const crid = this.props.collectionResource.id;
+    return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+  }
+
   render() {
     if (!this.props.collectionResource) return null;
+    if (!this.props.collection) return null;
+
     return (
       <div>
         {this.props.collection ?
@@ -66,6 +79,8 @@ class CollectionResourceDetailContainer extends PureComponent {
         {this.props.collectionResource ?
           <Resource.Detail
             projectId={this.props.params.id}
+            projectUrl={this.projectUrl()}
+            resourceUrl={this.resourceUrl()}
             resource={this.props.collectionResource.relationships.resource}
           /> : null
         }

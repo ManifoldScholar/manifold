@@ -13,7 +13,7 @@ export default class ResourceCollectionDetail extends PureComponent {
   static propTypes = {
     collection: PropTypes.object,
     project: PropTypes.object,
-    collectionUrl: PropTypes.string.required,
+    collectionUrl: PropTypes.string.isRequired,
     slideshowResources: PropTypes.array,
     slideshowPagination: PropTypes.object,
     collectionResources: PropTypes.array,

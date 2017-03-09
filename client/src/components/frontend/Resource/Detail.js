@@ -10,14 +10,14 @@ export default class ResourceDetail extends Component {
   static propTypes = {
     projectId: PropTypes.string,
     projectUrl: PropTypes.string,
-    resourceUrl: PropTypes.string.required,
+    resourceUrl: PropTypes.string.isRequired,
     resource: PropTypes.object
   };
 
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
-    const resourceUrl = `${this.props.resourceUrl}/${resource.id}`
+    const resourceUrl = `${this.props.resourceUrl}/${resource.id}`;
 
     return (
       <div>
