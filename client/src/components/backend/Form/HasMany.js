@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { Form as FormContainer } from 'containers/backend';
 import { Form as GlobalForm } from 'components/global';
 import indexOf from 'lodash/indexOf';
+import get from 'lodash/get';
 
 export default class FormMakers extends PureComponent {
 
@@ -132,14 +133,16 @@ export default class FormMakers extends PureComponent {
         <nav className="has-many-list">
           <ul>
             {entities.map((entity, index) => {
+              const path = `${this.props.entityAvatarAttribute}.smallSquare`;
+              const avatar = get(entity.attributes, path);
               return (
                 <li key={index} >
                   <div className="association">
                     { this.props.entityAvatarAttribute ?
                       <figure>
-                        { entity.attributes[this.props.entityAvatarAttribute] ?
+                        { avatar ?
                           <img
-                            src={entity.attributes[this.props.entityAvatarAttribute]}
+                            src={avatar}
                           /> :
                           <div className="no-image">
                             <i className="manicon manicon-person"></i>

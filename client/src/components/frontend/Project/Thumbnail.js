@@ -86,10 +86,10 @@ export default class ProjectThumbnail extends Component {
 
     let cover;
     let className;
-    if (project.attributes.avatarUrl) {
+    if (project.attributes.avatarStyles.small) {
       className = "figure-wrapper";
       cover = (
-        <img src={project.attributes.avatarUrl}
+        <img src={project.attributes.avatarStyles.small}
           alt={`Click to view ${project.attributes.title}`}
         />
       );

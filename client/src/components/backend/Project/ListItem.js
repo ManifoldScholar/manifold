@@ -35,7 +35,10 @@ export default class ProjectListItem extends PureComponent {
         <Link to={`/backend/project/${project.id}`}>
           <header>
             <figure className="cover">
-              {attr.coverUrl ? (<img src={attr.coverUrl} />) : <GlobalProject.Placeholder/>}
+              {attr.coverStyles.smallPortrait ?
+                <img src={attr.coverStyles.smallPortrait} />
+                : <GlobalProject.Placeholder/>
+              }
             </figure>
             <div className="meta">
               <h3 className="name">

@@ -102,7 +102,7 @@ class ResourceViewerSingle extends PureComponent {
   renderThumbnail() {
     const resource = this.props.resource;
     const variant = "smallLandscape";
-    const hasImage = !!get(resource, `attributes.attachmentThumbnails['${variant}']`);
+    const hasImage = !!get(resource, `attributes.attachmentStyles['${variant}']`);
     const height = this.props.height ? this.props.height + 'px' : 'auto';
 
     return (

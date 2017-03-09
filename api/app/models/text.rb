@@ -101,6 +101,12 @@ class Text < ApplicationRecord
     ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
   end
 
+  def cover_styles
+    cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
+    return nil unless cover_source
+    cover_source.try(:attachment_styles)
+  end
+
   def cover_url
     cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
     return nil unless cover_source

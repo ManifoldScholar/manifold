@@ -82,7 +82,7 @@ export default class ResourceCard extends Component {
         break;
       default:
         action = attr.downloadable ?
-          window.open(attr.attachmentUrl)
+          window.open(attr.attachmentStyles.original)
           : this.handleInfoClick();
         break;
     }
@@ -210,7 +210,7 @@ export default class ResourceCard extends Component {
 
     const linkClass = classNames({
       thumbnail: true,
-      'bg-image': attr.attachmentThumbnailUrl
+      'bg-image': attr.attachmentStyles.smallPortrait
     });
 
     const infoClass = classNames({

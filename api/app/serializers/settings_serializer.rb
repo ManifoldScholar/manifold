@@ -2,7 +2,7 @@
 class SettingsSerializer < ActiveModel::Serializer
   meta(partial: false)
 
-  attributes :general, :press_logo_url, :theme
+  attributes :general, :press_logo_styles, :theme
 
   # Singleton objects return 0 as their ID when serialized.
   def id

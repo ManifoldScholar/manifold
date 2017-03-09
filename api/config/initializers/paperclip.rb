@@ -13,9 +13,9 @@ end
 
 # rubocop:disable Metrics/LineLength
 Paperclip::Attachment.default_options.update(
-  path: ":rails_root/public/system/:class/:attachment/:uuid_partition/:style/:hash.:extension",
+  path: ":rails_root/public/system/:class/:attachment/:uuid_partition/:style-:hash.:extension",
   hash_secret: ENV["RAILS_SECRET_KEY"],
-  url: "/system/:class/:attachment/:uuid_partition/:style/:hash.:extension",
+  url: "/system/:class/:attachment/:uuid_partition/:style-:hash.:extension",
   include_updated_timestamp: false,
   default_url: ""
 )

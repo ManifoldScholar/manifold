@@ -4,11 +4,11 @@ class Maker < ApplicationRecord
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:first_name, :last_name].freeze
 
-  # Authority
-  include Authority::Abilities
-
   # Concerns
   include Filterable
+  include Attachments
+  include Authority::Abilities
+  include Attachments
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
@@ -19,12 +19,9 @@ class Maker < ApplicationRecord
   has_many :users, through: :user_claims
 
   # Attachments
-  has_attached_file :avatar,
-                    styles: { square: "300x300>", thumb: "100x100>" }
-  validation = Rails.configuration.manifold.attachments.validations.image
-  validates_attachment_content_type :avatar, content_type: validation[:allowed_mime]
-  validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
+  manifold_has_attached_file :avatar, :image
 
+  # Validation
   validates :first_name, presence: true
   validates :last_name, presence: true
 
@@ -47,11 +44,6 @@ class Maker < ApplicationRecord
 
   def name
     "#{first_name} #{last_name}"
-  end
-
-  def avatar_url
-    return nil if avatar.url(:square).blank?
-    Rails.configuration.manifold.api_url + avatar.url(:square)
   end
 
   def full_name

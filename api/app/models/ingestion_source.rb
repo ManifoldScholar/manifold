@@ -1,8 +1,9 @@
 # Connects texts to resources that were sources for text sections during ingestion
 class IngestionSource < ApplicationRecord
 
-  # Authority
+  # Concerns
   include Authority::Abilities
+  include Attachments
 
   # Constants
   KIND_COVER_IMAGE = "cover_image".freeze
@@ -27,18 +28,10 @@ class IngestionSource < ApplicationRecord
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 
   # Attachments
-  has_attached_file :attachment
-  validation = Rails.configuration.manifold.attachments.validations.resource
-  validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
-  validates_attachment_file_name :attachment, matches: validation[:allowed_ext]
+  manifold_has_attached_file :attachment, :resource, no_styles: true
 
   def to_s
     "ingestion source #{id}"
-  end
-
-  def attachment_url
-    return nil if attachment.url.blank?
-    Rails.configuration.manifold.api_url + attachment.url
   end
 
 end
