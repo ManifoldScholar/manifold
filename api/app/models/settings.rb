@@ -1,6 +1,7 @@
 class Settings < ApplicationRecord
   # Authority
   include Authority::Abilities
+  include HashAttributes
 
   validates :singleton_guard, inclusion: [0]
   merge_hash_attributes! :general

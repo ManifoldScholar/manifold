@@ -13,6 +13,7 @@ class Project < ApplicationRecord
   include MoneyAttributes
   include TruthyChecks
   include Filterable
+  include HashAttributes
 
   # Magic
   merge_hash_attributes! :metadata
