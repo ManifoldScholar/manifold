@@ -4,15 +4,14 @@ class Project < ApplicationRecord
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
 
-  # Authority
-  include Authority::Abilities
-
   # Concerns
+  include Authority::Abilities
   include TrackedCreator
   include Collaborative
   include MoneyAttributes
   include TruthyChecks
   include Filterable
+  include Attachments
   include HashAttributes
 
   # Magic
@@ -60,23 +59,9 @@ class Project < ApplicationRecord
             allow_nil: true
 
   # Attachments
-  has_attached_file :avatar,
-                    styles: {
-                      thumb: ["x246", :png]
-                    }
-  has_attached_file :cover,
-                    styles: {
-                      hero: ["800", :png]
-                    }
-  has_attached_file :hero,
-                    styles: { background: ["1800", :jpg] }
-  validation = Rails.configuration.manifold.attachments.validations.image
-  validates_attachment_content_type :cover, content_type: validation[:allowed_mime]
-  validates_attachment_content_type :hero, content_type: validation[:allowed_mime]
-  validates_attachment_content_type :avatar, content_type: validation[:allowed_mime]
-  validates_attachment_file_name :cover, matches: validation[:allowed_ext]
-  validates_attachment_file_name :hero, matches: validation[:allowed_ext]
-  validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
+  manifold_has_attached_file :cover, :image
+  manifold_has_attached_file :hero, :image
+  manifold_has_attached_file :avatar, :image
 
   # Scopes
   scope :by_featured, lambda { |featured|
@@ -124,21 +109,6 @@ class Project < ApplicationRecord
 
   def following_twitter_accounts?
     twitter_following.length.positive?
-  end
-
-  def avatar_url
-    return nil if avatar.url(:thumb).blank?
-    Rails.configuration.manifold.api_url + avatar.url(:thumb)
-  end
-
-  def cover_url
-    return nil if cover.url(:hero).blank?
-    Rails.configuration.manifold.api_url + cover.url(:hero)
-  end
-
-  def hero_url
-    return nil if hero.url(:background).blank?
-    Rails.configuration.manifold.api_url + hero.url(:background)
   end
 
   def to_s

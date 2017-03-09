@@ -5,12 +5,12 @@ class User < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:email, :first_name, :last_name].freeze
 
   # Concerns
-  include Filterable
-  include Recoverable
-
-  # Authority
   include Authority::UserAbilities
   include Authority::Abilities
+  include Filterable
+  include Recoverable
+  include Attachments
+  include Attachments
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
@@ -38,14 +38,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   # Attachments
-  has_attached_file :avatar,
-                    styles: { medium: "300x300>", thumb: "100x100>" }
-
-  validation = Rails.configuration.manifold.attachments.validations.image
-  validates_attachment_content_type :avatar,
-                                    content_type: validation[:allowed_mime],
-                                    unless: proc { |record| record[:image].nil? }
-  validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
+  manifold_has_attached_file :avatar, :image
 
   # Callbacks
   before_validation :ensure_nickname
@@ -78,11 +71,6 @@ class User < ApplicationRecord
 
   def name
     "#{first_name} #{last_name}"
-  end
-
-  def avatar_url
-    return nil unless avatar.present?
-    Rails.configuration.manifold.api_url + avatar.url
   end
 
   def favorite(favoritable)

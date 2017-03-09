@@ -94,7 +94,7 @@ class FormCollaborators extends Component {
               entities={entity.relationships.creators}
               entityBuilder={this.buildEntity}
               entityLabelAttribute="fullName"
-              entityAvatarAttribute="avatarUrl"
+              entityAvatarAttribute="avatarStyles"
               errors={get(this.props, 'createCreator.errors')}
               orderable
             />
@@ -108,7 +108,7 @@ class FormCollaborators extends Component {
               optionsFetch={makersAPI.index}
               entities={entity.relationships.contributors}
               entityLabelAttribute="fullName"
-              entityAvatarAttribute="avatarUrl"
+              entityAvatarAttribute="avatarStyles"
               errors={get(this.props, 'createContributor.errors')}
               orderable
             />

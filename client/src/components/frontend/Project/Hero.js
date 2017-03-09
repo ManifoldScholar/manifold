@@ -62,9 +62,9 @@ export default class ProjectHero extends Component {
     let output = '';
     const attr = this.props.project.attributes;
 
-    if (attr.coverUrl) {
+    if (attr.coverStyles.medium) {
       output = (
-        <img src={attr.coverUrl} />
+        <img src={attr.coverStyles.medium} />
       );
 
       if (wrapperClass) {
@@ -150,8 +150,8 @@ export default class ProjectHero extends Component {
 
     const attr = this.props.project.attributes;
     const heroStyle = {};
-    if (attr.heroUrl) {
-      heroStyle.backgroundImage = `url(${attr.heroUrl})`;
+    if (attr.heroStyles.largeLandscape) {
+      heroStyle.backgroundImage = `url(${attr.heroStyles.largeLandscape})`;
     }
 
     return (

@@ -98,8 +98,8 @@ class UpdateForm extends Component {
   displayAvatar() {
     if (this.state.removeAvatar) return null;
     if (hasIn(this.state, 'avatar.preview')) return this.state.avatar.preview;
-    if (hasIn(this.props, 'authentication.currentUser.attributes.avatarUrl')) {
-      return this.props.authentication.currentUser.attributes.avatarUrl;
+    if (hasIn(this.props, 'authentication.currentUser.attributes.avatarStyles.smallSquare')) {
+      return this.props.authentication.currentUser.attributes.avatarStyles.smallSquare;
     }
     return null;
   }

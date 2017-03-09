@@ -30,6 +30,7 @@ export default class ResourceSlideFigureImage extends Component {
   }
 
   render() {
+    const attr = this.props.resource.attributes;
     return (
       <figure>
         <div className="figure-image"
@@ -37,7 +38,7 @@ export default class ResourceSlideFigureImage extends Component {
             this._figure = c;
           } }
           style={ {
-            backgroundImage: 'url(' + this.props.resource.attributes.attachmentUrl + ')'
+            backgroundImage: 'url(' + attr.attachmentStyles.medium + ')'
           } }
         >
         </div>

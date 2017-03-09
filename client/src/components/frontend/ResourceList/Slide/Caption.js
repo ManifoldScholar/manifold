@@ -85,8 +85,13 @@ export default class ResourceSlideCaption extends Component {
                 {'Hide Description'}
               </span>
             </button>
-            <Link to={attr.attachmentUrl} target="_blank" className="download-link">
-              {'Download'} <i className="manicon manicon-arrow-down"></i>
+            <Link
+              to={attr.attachmentStyles.original}
+              target="_blank"
+              className="download-link"
+            >
+              {'Download'}
+              <i className="manicon manicon-arrow-down"></i>
             </Link>
           </div>
         </div>

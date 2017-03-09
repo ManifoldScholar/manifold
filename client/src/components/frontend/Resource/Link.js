@@ -20,14 +20,22 @@ export default class ResourceDetail extends Component {
     switch (attr.kind.toLowerCase()) {
       case "link":
         button = (
-            <Link to={attr.externalUrl} className={this.props.buttonClass} target="_blank">
+            <Link
+              to={attr.externalUrl}
+              className={this.props.buttonClass}
+              target="_blank"
+            >
               Visit Page <i className="manicon manicon-arrow-right"></i>
             </Link>
         );
         break;
       default:
         button = (attr.downloadable ?
-            <Link to={attr.attachmentUrl} className={this.props.buttonClass} target="_blank">
+            <Link
+              to={attr.attachmentStyles.original}
+              className={this.props.buttonClass}
+              target="_blank"
+            >
               Download <i className="manicon manicon-arrow-down"></i>
             </Link>
             : null
