@@ -24,20 +24,6 @@ export default class ProjectThumbnail extends Component {
     hideDesc: false
   };
 
-  renderCover() {
-    let cover = (<GlobalProject.Placeholder />);
-
-    if (this.props.project.attributes.coverUrl) {
-      cover = (
-        <img src={this.props.project.attributes.coverUrl}
-          alt={`Click to view ${this.props.project.attributes.title}`}
-        />
-      );
-    }
-
-    return cover;
-  }
-
   renderPublishedDate(project) {
     const attr = project.attributes;
     if (attr.publicationDate && !this.props.hideDate) {
