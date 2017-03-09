@@ -22,9 +22,13 @@ export default class ShareBar extends Component {
   componentDidMount() {
     // This won't be run by the server, so set an instance variable here
     // that will be hidden otherwise
-    this.setState({
-      inBrowser: true
-    });
+    /* eslint react/no-did-mount-set-state: 0 */
+    if (this.state.inBrowser === false) {
+      this.setState({
+        inBrowser: true
+      });
+    }
+    /* eslint react/no-did-mount-set-state: 1 */
   }
 
   render() {
