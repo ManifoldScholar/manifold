@@ -22,18 +22,5 @@ class ApplicationRecord < ActiveRecord::Base
     medium_portrait: "-gravity north -thumbnail 480x369^ -extent 480x369"
   }.freeze
 
-  class << self
-    def merge_hash_attributes!(*fields)
-      fields.each do |field|
-        class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        def #{field}=(value)
-          base = self.#{field} || {}
-          new = base.merge(value)
-          write_attribute(:#{field}, new)
-        end
-        RUBY
-      end
-    end
-  end
 
 end
