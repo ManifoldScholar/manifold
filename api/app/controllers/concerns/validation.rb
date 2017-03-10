@@ -83,6 +83,8 @@ module Validation
           :default_place_of_publication,
           :ga_tracking_id,
           :ga_profile_id,
+          :facebook_app_id,
+          :social_share_message,
           :contact_url
         ]
       },
