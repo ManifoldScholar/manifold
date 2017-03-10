@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { TwitterButton, FacebookButton } from 'react-social';
+import { HigherOrder } from 'containers/global';
 
-export default class ShareBar extends Component {
+class ShareBar extends Component {
 
   static displayName = "Utility.ShareBar";
 
   static propTypes = {
     url: PropTypes.string,
-    twitterAppId: PropTypes.string,
-    facebookAppId: PropTypes.string
+    message: PropTypes.string,
+    settings: PropTypes.object
   };
 
   constructor() {
@@ -22,22 +23,33 @@ export default class ShareBar extends Component {
   componentDidMount() {
     // This won't be run by the server, so set an instance variable here
     // that will be hidden otherwise
-    /* eslint react/no-did-mount-set-state: 0 */
     if (this.state.inBrowser === false) {
-      this.setState({
+      this.setState({ // eslint-disable-line react/no-did-mount-set-state
         inBrowser: true
       });
     }
-    /* eslint react/no-did-mount-set-state: 1 */
+  }
+
+  facebookAppId() {
+    const { settings } = this.props;
+    return settings.attributes.general.facebookAppId;
+  }
+
+  message() {
+    if (this.props.message) return this.props.message;
+    const { settings } = this.props;
+    return settings.attributes.general.socialShareMessage;
+  }
+
+  url() {
+    if (!this.state.inBrowser) return null;
+    const url = location.hostname + this.props.url;
+    return url;
   }
 
   render() {
     if (!this.state.inBrowser) return null;
-
     const twitterWindowOptions = ["", "", "width=600,height=300"];
-    const twitterAppId = this.props.twitterAppId ? this.props.twitterAppId : null;
-    const facebookAppId = this.props.facebookAppId ? this.props.facebookAppId : null;
-    const url = location.hostname + this.props.url;
 
     return (
       <nav className="share-nav-primary">
@@ -45,19 +57,20 @@ export default class ShareBar extends Component {
         <ul>
           <li>
             <TwitterButton
-              url={url}
-              appId={twitterAppId}
+              url={this.url()}
+              message={this.message()}
               windowOptions={twitterWindowOptions}
             >
               <i className="manicon manicon-twitter"></i>
             </TwitterButton>
           </li>
           {/* Facebook App Id is required for this component to load */}
-          {facebookAppId ?
+          {this.facebookAppId() ?
             <li>
               <FacebookButton
-                url={url}
-                appId={facebookAppId}
+                url={this.url()}
+                appId={this.facebookAppId()}
+                message={this.message()}
                 windowOptions={twitterWindowOptions}
               >
                 <i className="manicon manicon-facebook"></i>
@@ -81,3 +94,5 @@ export default class ShareBar extends Component {
     );
   }
 }
+
+export default HigherOrder.withSettings(ShareBar);
