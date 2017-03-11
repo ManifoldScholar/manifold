@@ -93,8 +93,10 @@ class Resource < ApplicationRecord
     return :video if %w(youtube vimeo).include?(external_type)
     return :audio if ["mp3"].include?(ext)
     return :link if !attachment.present? && !external_url.blank?
-    return :file if attachment.present?
-    nil
+    # We return a default because we always want the resource kind to be valid. If it's
+    # not valid, we have a problem because it will prevent Paperclip from processing
+    # attachments.
+    :file
   end
   # rubocop:enable Metrics/AbcSize, Metrics/PerceivedComplexity
   # rubocop:enable Metrics/CyclomaticComplexity

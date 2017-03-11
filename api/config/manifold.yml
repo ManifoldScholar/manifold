@@ -39,6 +39,88 @@ common: &1
           - !ruby/regexp '/jpe?g\Z/'
           - !ruby/regexp '/png\Z/'
           - !ruby/regexp '/svg\Z/'
+      :video:
+        :allowed_mime:
+          - !ruby/regexp '/video\/.*/'
+        :allowed_ext:
+          - !ruby/regexp '/mp4\Z/'
+          - !ruby/regexp '/webm\Z/'
+          - !ruby/regexp '/flv\Z/'
+          - !ruby/regexp '/wmv\Z/'
+          - !ruby/regexp '/mov\Z/'
+          - !ruby/regexp '/avi\Z/'
+      :audio:
+        :allowed_mime:
+          - !ruby/regexp '/audio\/.*/'
+        :allowed_ext:
+          - !ruby/regexp '/flac\Z/'
+          - !ruby/regexp '/mp3\Z/'
+          - !ruby/regexp '/wma\Z/'
+          - !ruby/regexp '/wav\Z/'
+          - !ruby/regexp '/mid\Z/'
+          - !ruby/regexp '/ogg\Z/'
+      :plain_text:
+        :allowed_mime:
+          - !ruby/regexp '/text\/.*/'
+        :allowed_ext:
+          - !ruby/regexp '/txt\Z/'
+      :excel:
+        :allowed_mime:
+          - "application/vnd.ms-excel"
+          - "application/msexcel"
+          - "application/x-msexcel"
+          - "application/x-ms-excel"
+          - "application/x-excel"
+          - "application/x-dos_ms_excel"
+          - "application/xls"
+          - "application/x-xls"
+          - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        :allowed_ext:
+          - !ruby/regexp '/xls\Z/'
+          - !ruby/regexp '/xlt\Z/'
+          - !ruby/regexp '/xlm\Z/'
+          - !ruby/regexp '/xlsx\Z/'
+          - !ruby/regexp '/xlsm\Z/'
+          - !ruby/regexp '/xltx\Z/'
+          - !ruby/regexp '/xltm\Z/'
+          - !ruby/regexp '/xlsb\Z/'
+          - !ruby/regexp '/xla\Z/'
+          - !ruby/regexp '/xlw\Z/'
+      :word:
+        :allowed_mime:
+          - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          - "application/vnd.openxmlformats-officedocument.wordprocessingml.template"
+          - "application/msword"
+          - "application/vnd.ms-word.document.macroEnabled.12"
+          - "application/vnd.ms-word.template.macroEnabled.12"
+        :allowed_ext:
+          - !ruby/regexp '/doc\Z/'
+          - !ruby/regexp '/docx\Z/'
+          - !ruby/regexp '/docm\Z/'
+          - !ruby/regexp '/dotx\Z/'
+          - !ruby/regexp '/dotm\Z/'
+          - !ruby/regexp '/docb\Z/'
+      :powerpoint:
+        :allowed_mime:
+          - "application/vnd.ms-powerpoint"
+          - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+          - "application/vnd.openxmlformats-officedocument.presentationml.template"
+          - "application/vnd.openxmlformats-officedocument.presentationml.slideshow"
+        :allowed_ext:
+          - !ruby/regexp '/ppt\Z/'
+          - !ruby/regexp '/pptm\Z/'
+          - !ruby/regexp '/potx\Z/'
+          - !ruby/regexp '/potm\Z/'
+          - !ruby/regexp '/ppam\Z/'
+          - !ruby/regexp '/ppsx\Z/'
+          - !ruby/regexp '/ppsm\Z/'
+          - !ruby/regexp '/sldx\Z/'
+          - !ruby/regexp '/sldm\Z/'
+      :pdf:
+        :allowed_mime:
+          - "application/pdf"
+        :allowed_ext:
+          - !ruby/regexp '/pdf\Z/'
       :resource:
         :allowed_mime:
           - "application/xhtml+xml"
