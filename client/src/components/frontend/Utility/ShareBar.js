@@ -8,9 +8,14 @@ class ShareBar extends Component {
   static displayName = "Utility.ShareBar";
 
   static propTypes = {
+    label: PropTypes.string,
     url: PropTypes.string,
     message: PropTypes.string,
     settings: PropTypes.object
+  };
+
+  static defaultProps = {
+    label: 'Share'
   };
 
   constructor() {
@@ -53,7 +58,9 @@ class ShareBar extends Component {
 
     return (
       <nav className="share-nav-primary">
-        <span>Share</span>
+        { this.props.label ?
+            <span>{this.props.label}</span> : null
+        }
         <ul>
           <li>
             <TwitterButton
