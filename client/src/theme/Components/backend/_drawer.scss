@@ -50,10 +50,16 @@
     top: 0;
   }
 
-  .close-button-primary {
-    position: absolute;
-    top: 0;
-    right: 0;
+  .drawer-bar {
+    text-align: right;
+
+    .close-button-primary {
+      display: inline-block;
+
+      .close-text {
+        display: none;
+      }
+    }
   }
 
   .drawer-header {
