@@ -3,12 +3,17 @@ import { browserHistory } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 import Utility from 'components/global/Utility';
+import isString from 'lodash/isString';
 
 export default class DrawerWrapper extends PureComponent {
 
   static displayName = "Drawer.Wrapper";
 
   static propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.string
+    ]),
     closeUrl: PropTypes.string,
     closeCallback: PropTypes.func,
     lockScroll: PropTypes.string,
@@ -20,7 +25,6 @@ export default class DrawerWrapper extends PureComponent {
   // unless they intentionally do so.
   // Always: Having the drawer open locks the body scroll until it is closed
   // None: Scrolling the drawer invokes default browser behavior
-
   static defaultProps = {
     lockScroll: 'hover',
     style: 'backend'
@@ -89,7 +93,11 @@ export default class DrawerWrapper extends PureComponent {
               Close Drawer
             </span>
           </div>
-          {React.cloneElement(this.props.children, { closeDrawer: this.handleLeaveEvent })}
+          {/* Render children without props if they aren't a component */}
+          { isString(this.props.children.type) ?
+              this.props.children :
+              React.cloneElement(this.props.children, { closeDrawer: this.handleLeaveEvent })
+          }
         </div>
       </div>
     );
