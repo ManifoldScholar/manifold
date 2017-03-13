@@ -388,6 +388,8 @@ class Annotatable extends Component {
         out = (
           <Drawer.Wrapper
             closeCallback={this.closeDrawer}
+            title="Annotations"
+            icon="word-bubble"
             style="frontend"
             lockScroll="always"
           >

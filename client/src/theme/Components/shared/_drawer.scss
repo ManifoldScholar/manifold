@@ -5,6 +5,7 @@
   bottom: 0;
   width: 100%;
   overflow: scroll;
+  background-color: $neutral05;
   transition: right $duration $timing;
 
   @include respond($break40) {
@@ -33,30 +34,47 @@
     top: 0;
   }
 
-  .rel {
-    padding-top: 91px;
-    background-color: $neutral05;
-  }
+  .drawer-bar {
+    @include drawerPadding(padding-right, 'heavy');
+    @include drawerPadding(padding-left);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 31px;
+    padding-bottom: 30px;
 
-  .close-button-primary {
-    @include templateHead;
-    @include drawerPadding(right, 'heavy');
-    position: absolute;
-    top: 31px;
-    font-size: 17px;
-    letter-spacing: 0.015em;
-    transition: color $duration $timing;
+    .drawer-title {
+      @include utilityPrimary;
+      font-size: 14px;
+      color: $neutral50;
 
-    &:hover {
-      color: $neutral75;
+      .manicon {
+        margin-right: 14px;
+        font-size: 1.571em;
+        vertical-align: middle;
+      }
     }
 
-    .manicon {
-      margin-left: 25px;
-      font-size: 31px;
-      vertical-align: middle;
+    .close-button-primary {
+      @include templateHead;
+      width: 100%;
+      font-size: 17px;
+      letter-spacing: 0.015em;
+      text-align: right;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $neutral75;
+      }
+
+      .manicon {
+        margin-left: 25px;
+        font-size: 31px;
+        vertical-align: middle;
+      }
     }
   }
+
 }
 
 .drawer-overlay {

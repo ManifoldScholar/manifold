@@ -14,6 +14,8 @@ export default class DrawerWrapper extends PureComponent {
       PropTypes.element,
       PropTypes.string
     ]),
+    title: PropTypes.string,
+    icon: PropTypes.string,
     closeUrl: PropTypes.string,
     closeCallback: PropTypes.func,
     lockScroll: PropTypes.string,
@@ -75,6 +77,20 @@ export default class DrawerWrapper extends PureComponent {
     }
   }
 
+  renderDrawerFrontMatter() {
+    if (!this.props.title && !this.props.icon) return null;
+    return (
+      <div className="drawer-title">
+        {this.props.icon ?
+          <i className={`manicon manicon-${this.props.icon}`}></i> : null
+        }
+        {this.props.title ?
+          this.props.title : null
+        }
+      </div>
+    )
+  }
+
   renderDrawer() {
     const drawerStyleClass = classNames({
       'drawer-backend': this.props.style === 'backend',
@@ -83,7 +99,8 @@ export default class DrawerWrapper extends PureComponent {
 
     return (
       <div key="drawer" className={drawerStyleClass}>
-        <div className="rel">
+        <div className="drawer-bar">
+          {this.renderDrawerFrontMatter()}
           <div onClick={this.handleLeaveEvent} className="close-button-primary">
             <span className="close-text">
               Close
@@ -93,12 +110,12 @@ export default class DrawerWrapper extends PureComponent {
               Close Drawer
             </span>
           </div>
-          {/* Render children without props if they aren't a component */}
-          { isString(this.props.children.type) ?
-              this.props.children :
-              React.cloneElement(this.props.children, { closeDrawer: this.handleLeaveEvent })
-          }
         </div>
+        {/* Render children without props if they aren't a component */}
+        { isString(this.props.children.type) ?
+            this.props.children :
+            React.cloneElement(this.props.children, { closeDrawer: this.handleLeaveEvent })
+        }
       </div>
     );
   }
