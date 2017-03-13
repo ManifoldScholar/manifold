@@ -8,11 +8,21 @@ class Annotation < ApplicationRecord
 
   # Concerns
   include TrackedCreator
+  include Filterable
 
   # Scopes
   scope :only_annotations, -> { where(format: "annotation") }
   scope :only_highlights, -> { where(format: "highlight") }
   scope :created_by, ->(user) { where(creator: user) }
+  # Scopes
+  scope :by_text_section, lambda { |text_section|
+    return all unless text_section.present?
+    where(text_section: text_section)
+  }
+  scope :by_ids, lambda { |ids|
+    return all unless ids.present?
+    where(id: ids)
+  }
 
   # Constants
   TYPE_ANNOTATION = "annotation".freeze

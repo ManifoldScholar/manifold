@@ -132,6 +132,15 @@ module Validation
     params.permit(filter: [:keyword, :typeahead])[:filter]
   end
 
+  def annotation_filter_params
+    # Client tends to pass indexes in the array of values, which makes rails reader it
+    # as a hash. We're coercing the hash to an array here, before it hits strong params.
+    if params.dig(:filter, :ids).respond_to? :values
+      params[:filter][:ids] = params[:filter][:ids].values
+    end
+    params.permit(filter: [ids: []])[:filter]
+  end
+
   def project_filter_params
     params.permit(filter: [:featured, :subject, :keyword, :typeahead])[:filter]
   end
