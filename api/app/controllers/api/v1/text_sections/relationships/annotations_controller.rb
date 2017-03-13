@@ -8,11 +8,22 @@ module Api
           before_action :set_text_section, only: [:create, :index]
 
           resourceful! Annotation, authorize_options: { except: [:index] } do
-            @text_section.nil? ? Annotation : @text_section.annotations
+            scope = @text_section.nil? ? Annotation : @text_section.annotations
+            Annotation.filter(
+              with_pagination!(annotation_filter_params),
+              scope: scope
+            )
           end
 
           def index
-            render json: @text_section.annotations
+            @annotations = load_annotations
+            location = api_v1_text_section_relationships_annotations_url(@text_section.id)
+            render_multiple_resources(
+              @annotations,
+              each_serializer: AnnotationSerializer,
+              include: [:creator],
+              location: location
+            )
           end
 
           def create
