@@ -1,0 +1,9 @@
+.form-section {
+  + .form-section {
+    margin-top: 45px;
+
+    @include respond($break60) {
+      margin-top: 52px;
+    }
+  }
+}
