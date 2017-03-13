@@ -85,6 +85,14 @@ export default class DrawerWrapper extends PureComponent {
         {this.renderDrawer()}
       </Utility.ScrollLock>
     ) : this.renderDrawer();
+      return (
+        <Utility.EdgeLockScroll>
+          {this.renderDrawer()}
+        </Utility.EdgeLockScroll>
+      );
+    }
+
+    return this.renderDrawer();
   }
 
   render() {

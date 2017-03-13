@@ -19,7 +19,7 @@ export default class TocDrawer extends Component {
       'drawer-visible': this.props.visible
     });
     return (
-      <Utility.ScrollLock>
+      <Utility.EdgeLockScroll>
         {/* NB: This ref is not currently accessible by the parent element */}
         <div className={drawerClass}>
           <Toc
@@ -28,7 +28,7 @@ export default class TocDrawer extends Component {
             hideTocDrawer={this.props.hideTocDrawer}
           />
         </div>
-      </Utility.ScrollLock>
+      </Utility.EdgeLockScroll>
     );
   }
 }
