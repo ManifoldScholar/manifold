@@ -78,7 +78,6 @@ class Annotatable extends Component {
 
   fetchAnnotations(props) {
     const annotationsCall = annotationsAPI.forSection(props.sectionId);
-    console.log(annotationsCall, 'fetch annotations');
     props.dispatch(request(annotationsCall, requests.rAnnotations));
   }
 
@@ -414,10 +413,15 @@ class Annotatable extends Component {
   }
 
   renderDrawerAnnotate() {
+    const { subject, startNode, startChar, endNode, endChar } =
+      this.state.selectionLockedAnnotation;
     return (
       <Annotation.Selection.Wrapper
-        annotation={this.state.selectionLockedAnnotation}
-        selection={this.state.selection}
+        subject={subject}
+        startNode={startNode}
+        startChar={startChar}
+        endNode={endNode}
+        endChar={endChar}
         createHandler={this.attachBodyToSelection}
         annotating
       />
@@ -427,7 +431,8 @@ class Annotatable extends Component {
   renderDrawerAnnotations() {
     return (
       <AnnotationContainers.List
-        listAnnotations={this.state.listAnnotations}
+        sectionId={this.props.sectionId}
+        annotationIds={this.state.listAnnotations}
       />
     );
   }

@@ -6,8 +6,11 @@ export default class AnnotationSelectionWrapper extends PureComponent {
   static displayName = "Annotation.Selection.Wrapper";
 
   static propTypes = {
-    annotation: PropTypes.object,
-    selection: PropTypes.object,
+    subject: PropTypes.string,
+    startNode: PropTypes.string,
+    startChar: PropTypes.number,
+    endNode: PropTypes.string,
+    endChar: PropTypes.number,
     annotating: PropTypes.bool,
     closeDrawer: PropTypes.func,
     truncate: PropTypes.number
@@ -37,17 +40,16 @@ export default class AnnotationSelectionWrapper extends PureComponent {
   }
 
   maybeTruncateSelection() {
-    const annotation = this.props.annotation;
-    if (this.props.truncate && annotation.subject.length > this.props.truncate) {
+    if (this.props.truncate && this.props.subject.length > this.props.truncate) {
       return (
         <Selection.Truncated
-          selection={this.props.annotation.subject}
+          selection={this.props.subject}
           truncate={this.props.truncate}
         />
       );
     }
 
-    return this.props.annotation.subject;
+    return this.props.subject;
   }
 
   render() {
