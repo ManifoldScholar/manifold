@@ -2,9 +2,9 @@ import React, { PureComponent, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import isString from 'lodash/isString';
 
-export default class ScrollLock extends PureComponent {
+export default class EdgeLockScroll extends PureComponent {
 
-  static displayName = "Utility.ScrollLock";
+  static displayName = "Utility.EdgeLockScroll";
 
   static propTypes = {
     children: React.PropTypes.element.isRequired
@@ -63,7 +63,7 @@ export default class ScrollLock extends PureComponent {
 
   render() {
     return (
-      <div className="scroll-lock">
+      <div className="edge-lock-scroll">
         {React.cloneElement(this.props.children, { ref: (child) => { this.child = child; } })}
       </div>
     );
