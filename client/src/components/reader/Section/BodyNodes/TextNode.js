@@ -105,13 +105,16 @@ export default class TextNode extends Component {
         'annotation-resource-end': resources && endingResources.length > 0
       });
 
-
-      // const annotationIds = endingResources.map((a) => a.id);
+      const listableAnnotationIds =
+        map[index]
+        .filter((a) => a.type === "annotation")
+        .map((a) => a.id);
 
       return (
         <span
           key={index}
           className={classes}
+          data-listable-annotation-ids={listableAnnotationIds}
           data-annotation-ids={map[index].map((a) => a.id)}
         >
           {chunk}

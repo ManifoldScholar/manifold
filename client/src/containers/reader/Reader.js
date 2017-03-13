@@ -6,10 +6,8 @@ import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
 import { Header, Footer, FooterMenu, Section } from 'components/reader';
 import { entityUtils } from 'utils';
 import { commonActions } from 'actions/helpers';
-import { textsAPI, resourcesAPI, sectionsAPI, annotationsAPI, requests } from 'api';
+import { textsAPI, sectionsAPI, annotationsAPI, requests } from 'api';
 import values from 'lodash/values';
-import uniq from 'lodash/uniq';
-import difference from 'lodash/difference';
 
 import {
   authActions,
@@ -102,53 +100,15 @@ class ReaderContainer extends Component {
     this.maybeRedirect(this.props);
     this.readerActions = this.makeReaderActions(this.props.dispatch);
     this.commonActions = commonActions(this.props.dispatch);
-
-    if (this.props.params.sectionId) {
-      this.fetchAnnotations();
-      this.fetchResources();
-    }
   }
 
   componentWillReceiveProps(nextProps) {
-    // Fetch resources and annotations on section change.
-    if (nextProps.section !== this.props.section) {
-      this.fetchAnnotations();
-      this.fetchResources();
-    }
-    // Check if we need to fetch more resources when annotations change
-    if (nextProps.annotations !== this.props.annotations) {
-      if (this.hasMissingResources(nextProps.annotations, nextProps.resources)) {
-        this.fetchResources();
-      }
-    }
     this.maybeRedirect(nextProps);
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.rSection));
     this.props.dispatch(flush(requests.rText));
-  }
-
-  hasMissingResources(annotations, resourcesIn) {
-    if (!annotations) return;
-    const resources = resourcesIn ? resourcesIn : [];
-    const needed = uniq(annotations
-      .map((a) => a.attributes.resourceId)
-      .filter((id) => id !== null));
-    const has = resources.map((r) => r.id);
-    const diff = difference(needed, has);
-    if (diff.length > 0) return true;
-    return false;
-  }
-
-  fetchAnnotations() {
-    const annotationsCall = annotationsAPI.forSection(this.props.params.sectionId);
-    this.props.dispatch(request(annotationsCall, requests.rAnnotations));
-  }
-
-  fetchResources() {
-    const resourcesCall = resourcesAPI.forSection(this.props.params.sectionId);
-    this.props.dispatch(request(resourcesCall, requests.rResources));
   }
 
   maybeRedirect(props) {

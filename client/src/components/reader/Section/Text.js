@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
-import { Resource, Annotation, Section } from 'components/reader';
+import { Resource, Section } from 'components/reader';
+import { Annotation } from 'containers/reader';
 import has from 'lodash/has';
 
 export default class Text extends Component {
@@ -29,7 +30,6 @@ export default class Text extends Component {
     super(props);
     this.state = {
       lockedSelection: null,
-      updates: 0
     };
     this.lockSelection = this.lockSelection.bind(this);
     this.recordBodyDomUpdate = this.recordBodyDomUpdate.bind(this);
@@ -57,8 +57,8 @@ export default class Text extends Component {
     this.setState({ updates: this.state.updates + 1 });
   }
 
-  // Store the current locked selection in the section, which wrapps the annotator and
-  // the body. This locked selectino is then passed down to the body, which needs to
+  // Store the current locked selection in the section, which wraps the annotator and
+  // the body. This locked selection is then passed down to the body, which needs to
   // render it in the text.
   lockSelection(raw) {
     if (!raw) return this.setState({ lockedSelection: null });
@@ -121,24 +121,18 @@ export default class Text extends Component {
     return (
       <div>
         <section className={readerAppearanceClass}>
-          {this.props.resources ?
-            <Resource.Viewer.Wrapper
-              sectionId={this.props.params.sectionId}
-              textId={this.props.params.textId}
-              updates={this.state.updates}
-              resources={this.props.resources}
-              annotations={this.props.annotations}
-              containerSize={typography.margins.current}
-              fontSize={typography.fontSize.current}
-              body={this.body}
-            /> : null
-          }
           <Annotation.Annotatable
             currentUser={this.props.authentication.currentUser}
+            textId={this.props.params.textId}
             projectId={this.props.text.relationships.project.id}
             sectionId={this.props.params.sectionId}
             createAnnotation={this.props.createAnnotation}
             lockSelection={this.lockSelection}
+            resources={this.props.resources}
+            annotations={this.props.annotations}
+            containerSize={typography.margins.current}
+            fontSize={typography.fontSize.current}
+            body={this.body}
           >
             <div className={containerClass}>
               <div className={textSectionClass} >

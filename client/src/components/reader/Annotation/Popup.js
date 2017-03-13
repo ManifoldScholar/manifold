@@ -16,7 +16,8 @@ export default class AnnotationPopup extends Component {
     annotate: PropTypes.func,
     attachResource: PropTypes.func,
     bookmark: PropTypes.func,
-    selectionClickEvent: PropTypes.object
+    selectionClickEvent: PropTypes.object,
+    annotatableDomElement: PropTypes.object
   };
 
   constructor() {
@@ -90,7 +91,7 @@ export default class AnnotationPopup extends Component {
     const up = 'up';
     const down = 'down';
     // not ideal to grab this by class, but not sure how else to handle it
-    const annotatable = closest(this.popupEl, '.annotatable');
+    const annotatable = this.props.annotatableDomElement;
     const annotatableRect = annotatable.getBoundingClientRect();
     const topVisiblePosition = document.body.scrollTop + 100;
     const bottomVisiblePosition = topVisiblePosition + window.innerHeight;
