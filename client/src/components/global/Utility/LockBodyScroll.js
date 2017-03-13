@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import isString from 'lodash/isString';
+import { HigherOrder } from 'components/global';
 
 export default class LockBodyScroll extends PureComponent {
 
@@ -35,21 +36,19 @@ export default class LockBodyScroll extends PureComponent {
         currentScrollTop: document.body.scrollTop
       });
     }
-
-    document.querySelector('body').classList.toggle(this.props.lockClass, true);
-    console.log(document.body.classList, 'body classes');
   }
 
   componentWillUnmount() {
     // Remove the body class and apply scrolltop (for touch)
     document.body.scrollTop = this.state.currentScrollTop;
-    document.querySelector('body').classList.remove(this.props.lockClass);
   }
 
   render() {
     return (
       <div className="lock-body-scroll">
-        {this.props.children}
+        <HigherOrder.BodyClass className={this.props.lockClass}>
+          {this.props.children}
+        </HigherOrder.BodyClass>
       </div>
     );
   }
