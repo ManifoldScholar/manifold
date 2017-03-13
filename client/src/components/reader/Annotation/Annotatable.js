@@ -25,7 +25,7 @@ class Annotatable extends Component {
     this.updateStateSelection = this.updateStateSelection.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.highlightSelection = this.highlightSelection.bind(this);
-    this.annotateSelection = this.annotateSelection.bind(this);
+    this.attachBodyToSelection = this.attachBodyToSelection.bind(this);
     this.startAnnotateSelection = this.startAnnotateSelection.bind(this);
     this.startResourceSelection = this.startResourceSelection.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
@@ -228,15 +228,11 @@ class Annotatable extends Component {
   createAnnotation(annotation, resource = null) {
     this.props.createAnnotation(this.props.sectionId, annotation, resource);
     setTimeout(() => {
+      this.closeDrawer();
       this.updateStateSelection(null);
       this.clearNativeSelection();
+      this.unlockSelection();
     }, 0);
-  }
-
-  annotateSelection(event) {
-    event.stopPropagation();
-    const annotation = this.mapStateToAnnotation(this.state.selection, 'annotation');
-    this.createAnnotation(annotation);
   }
 
   startAnnotateSelection(event) {
@@ -250,11 +246,18 @@ class Annotatable extends Component {
     this.createAnnotation(annotation);
   }
 
+  attachBodyToSelection(body, isPrivate) {
+    const annotation = this.state.selectionLockedAnnotation;
+    annotation.body = body;
+    annotation.private = isPrivate;
+    annotation.format = "annotation";
+    this.createAnnotation(annotation);
+  }
+
   attachResourceToSelection(resource) {
     const annotation = this.state.selectionLockedAnnotation;
     annotation.format = "resource";
     this.createAnnotation(annotation, resource);
-    this.endResourceSelection();
   }
 
   lockSelection() {
@@ -339,9 +342,11 @@ class Annotatable extends Component {
 
   renderDrawerAnnotate() {
     return (
-      <Annotation.Create
+      <Annotation.Selection.Wrapper
         annotation={this.state.selectionLockedAnnotation}
         selection={this.state.selection}
+        createHandler={this.attachBodyToSelection}
+        annotating
       />
     );
   }
@@ -355,6 +360,7 @@ class Annotatable extends Component {
   render() {
     return (
       <div className="annotatable" ref={(a) => { this.annotatable = a; }}>
+        {/*
         <Drawer.Wrapper
           closeCallback={this.closeDrawer}
           style="frontend"
@@ -362,6 +368,7 @@ class Annotatable extends Component {
         >
           {this.renderDrawerAnnotation()}
         </Drawer.Wrapper>
+        */}
         {this.state.drawerContents ?
           this.renderDrawer()
         : null}

@@ -61,7 +61,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
           {this.maybeTruncateSelection()}
         </div>
         { this.state.editorOpen ?
-          <Selection.Editor cancel={cancelFunction} /> :
+          <Selection.Editor {...this.props} cancel={cancelFunction} /> :
             <button className="annotate-button" onClick={this.handleOpenEditor}>
               Annotate
             </button>

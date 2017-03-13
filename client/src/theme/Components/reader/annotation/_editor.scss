@@ -50,6 +50,13 @@
       .toggle-indicator {
         background-color: $neutralWhite;
       }
+
+      &.checked {
+        .manicon-check {
+          opacity: 1;
+        }
+      }
+
     }
 
     .buttons {
