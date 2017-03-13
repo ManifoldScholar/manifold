@@ -11,12 +11,18 @@ export default class DrawerWrapper extends PureComponent {
   static propTypes = {
     closeUrl: PropTypes.string,
     closeCallback: PropTypes.func,
-    lockScroll: PropTypes.bool,
+    lockScroll: PropTypes.string,
     style: PropTypes.string,
   };
 
+  // NB lockScroll can be:
+  // Hover (default): User can scroll the drawer on hover, but it doesn't effect body scroll
+  // unless they intentionally do so.
+  // Always: Having the drawer open locks the body scroll until it is closed
+  // None: Scrolling the drawer invokes default browser behavior
+
   static defaultProps = {
-    lockScroll: true,
+    lockScroll: 'hover',
     style: 'backend'
   };
 
@@ -90,16 +96,23 @@ export default class DrawerWrapper extends PureComponent {
   }
 
   renderDrawerWrapper() {
-    return this.props.lockScroll ? (
-      <Utility.ScrollLock>
-        {this.renderDrawer()}
-      </Utility.ScrollLock>
-    ) : this.renderDrawer();
+    if (this.props.lockScroll === 'hover') {
       return (
         <Utility.EdgeLockScroll>
           {this.renderDrawer()}
         </Utility.EdgeLockScroll>
       );
+    }
+
+    if (this.props.lockScroll === 'always') {
+      return (
+        <Utility.LockBodyScroll>
+          <div>
+            <div className="drawer-overlay" onClick={this.handleLeaveEvent}></div>
+            {this.renderDrawer()}
+          </div>
+        </Utility.LockBodyScroll>
+      )
     }
 
     return this.renderDrawer();

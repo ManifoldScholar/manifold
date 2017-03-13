@@ -360,15 +360,13 @@ class Annotatable extends Component {
   render() {
     return (
       <div className="annotatable" ref={(a) => { this.annotatable = a; }}>
-        {/*
         <Drawer.Wrapper
           closeCallback={this.closeDrawer}
           style="frontend"
-          lockScroll={false}
+          lockScroll="always"
         >
           {this.renderDrawerAnnotation()}
         </Drawer.Wrapper>
-        */}
         {this.state.drawerContents ?
           this.renderDrawer()
         : null}

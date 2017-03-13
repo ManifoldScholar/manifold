@@ -58,6 +58,13 @@
   position: relative;
 }
 
+// Prevent scroll on an element (mainly body)
+// --------------------------
+.no-scroll {
+  position: fixed;
+  overflow: hidden;
+}
+
 // Clearfix
 // $mode accepts 'light' or 'heavy'
 // 'light' is sufficient for clearing floats, while 'heavy' is required to
