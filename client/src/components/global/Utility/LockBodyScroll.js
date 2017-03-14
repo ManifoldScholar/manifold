@@ -20,27 +20,17 @@ export default class LockBodyScroll extends PureComponent {
     super(props);
 
     this.state = {
-      inBrowser: false,
-      currentScrollTop: 0
+      currentScrollTop: __SERVER__ ? 0 : document.body.scrollTop
     };
-
   }
 
   componentDidMount() {
-    // When the component mounts, grab the scrolltop
-    // and apply a scroll-freezing class to the body
-    if (this.state.inBrowser === false) {
-      // eslint-disable-line react/no-did-mount-set-state
-      this.setState({
-        inBrowser: true,
-        currentScrollTop: document.body.scrollTop
-      });
-    }
+    // document.body.scrollTop = this.state.currentScrollTop;
   }
 
   componentWillUnmount() {
-    // Remove the body class and apply scrolltop (for touch)
-    document.body.scrollTop = this.state.currentScrollTop;
+    // Apply back scrolltop (for touch)
+    // document.body.scrollTop = this.state.currentScrollTop;
   }
 
   render() {

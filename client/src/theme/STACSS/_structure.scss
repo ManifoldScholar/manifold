@@ -61,7 +61,8 @@
 // Prevent scroll on an element (mainly body)
 // --------------------------
 .no-scroll {
-  position: fixed;
+  // NB: This will need to be applied on mobile
+  //position: fixed;
   overflow: hidden;
 }
 
