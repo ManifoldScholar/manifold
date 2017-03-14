@@ -38,8 +38,8 @@
     @include drawerPadding(padding-right, 'heavy');
     @include drawerPadding(padding-left);
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding-top: 31px;
     padding-bottom: 30px;
 
