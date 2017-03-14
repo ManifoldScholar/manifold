@@ -35,10 +35,19 @@ module Validator
     TAG_DIV_CSS_PROPERTY_BLACKLIST = %w(width).freeze
     TAG_FIGURE_CSS_PROPERTY_BLACKLIST = %w(max-width).freeze
     TAG_ATTRIBUTE_BLACKLIST = %w(accept accept-charset accesskey async autofocus border
-                                 bgcolor challenge charset code codebase color cols
-                                 content contenteditable defer draggable dropzone height
-                                 keytype language manifest required sandbox shape size
-                                 sizes tabindex width align rev).freeze
+                                 bgcolor challenge charset code codebase color content
+                                 contenteditable defer draggable dropzone height keytype
+                                 language manifest required sandbox shape size sizes
+                                 tabindex width align).freeze
+    TAG_ATTRIBUTE_WHITELIST = %w(action alt autocomplete checked cite class cols colspan
+                                 controls coords data datetime dir dirname disabled
+                                 download enctype for form formaction headers hidden high
+                                 href hreflang id lang list max maxlength media method min
+                                 multiple muted name novalidate onabort pattern
+                                 placeholder poster preload readonly rel reversed rows
+                                 rowspan scope selected span spellcheck src srcdoc srcset
+                                 start step style target title translate type usemap
+                                 value wrap).freeze
     CSS_VALUE_MAP = {
       "xx-small" => ".7em",
       "x-small" => ".7em",
