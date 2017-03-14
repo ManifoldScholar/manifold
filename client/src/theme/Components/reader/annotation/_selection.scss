@@ -33,8 +33,10 @@
 
   // Truncated variety
   .selection-truncated {
-    .wrapper.blur {
+    .wrapper {
       position: relative;
+      overflow: hidden;
+      transition: height $duration $timing;
 
       &::after {
         position: absolute;
@@ -44,6 +46,12 @@
         height: 4em;
         background: linear-gradient(to top, $neutral10 10%, transparentize($neutral10, 1) 100%);
         content: '';
+        opacity: 0;
+        transition: opacity $durationSlow $timing $duration;
+      }
+
+      &.blur::after {
+        opacity: 1;
       }
     }
 
@@ -51,6 +59,17 @@
       position: relative;
       margin-top: -8px;
       background-color: $neutral10;
+      opacity: 1;
+      visibility: visible;
+      transition: margin $duration linear,
+        opacity $duration $timing $durationFast,
+        visibility $duration $timing $durationFast;
+
+      &.hidden {
+        margin-top: -43px;
+        opacity: 0;
+        visibility: hidden;
+      }
     }
   }
 

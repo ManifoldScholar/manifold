@@ -20,6 +20,10 @@ export default class AnnotationSelectionTruncated extends PureComponent {
     this.handleShowFull = this.handleShowFull.bind(this);
   }
 
+  componentDidMount() {
+    this.wrapper.style.height = this.content.offsetHeight + 'px';
+  }
+
   truncateSelection() {
     return this.props.selection.substring(0, this.props.truncate) + '...';
   }
@@ -36,6 +40,10 @@ export default class AnnotationSelectionTruncated extends PureComponent {
     this.setState({
       truncated: false
     });
+
+    setTimeout(() => {
+      this.wrapper.style.height = this.content.offsetHeight + 'px';
+    }, 50);
   }
 
   render() {
@@ -44,17 +52,26 @@ export default class AnnotationSelectionTruncated extends PureComponent {
       blur: this.state.truncated
     });
 
+    const constShowFullButtonClass = classNames({
+      'button-trim-primary': true,
+      'trim-top': true,
+      hidden: !this.state.truncated
+    });
+
     return (
       <div>
         <div className="selection-truncated">
-          <div className={truncatedWrapperClass}>
-            {this.getPassage()}
+          <div
+            className={truncatedWrapperClass}
+            ref={ (wrapper) => { this.wrapper = wrapper; }}
+          >
+            <div ref={ (content) => { this.content = content; }}>
+              {this.getPassage()}
+            </div>
           </div>
-          {this.state.truncated ?
-            <button className="button-trim-primary trim-top" onClick={this.handleShowFull}>
-              {'Read Full Passage'}
-            </button> : null
-          }
+          <button className={constShowFullButtonClass} onClick={this.handleShowFull}>
+            {'Read Full Passage'}
+          </button>
         </div>
       </div>
     );

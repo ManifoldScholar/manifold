@@ -460,6 +460,7 @@ class Annotatable extends Component {
         endNode={endNode}
         endChar={endChar}
         createHandler={this.attachBodyToSelection}
+        truncate={600}
         annotating
       />
     );

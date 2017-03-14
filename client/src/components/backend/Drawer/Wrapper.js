@@ -163,8 +163,8 @@ export default class DrawerWrapper extends PureComponent {
       <ReactCSSTransitionGroup
         transitionName="drawer"
         // True value required to enable transform
-        transitionEnterTimeout={5000}
-        transitionLeaveTimeout={5000}
+        transitionEnterTimeout={200}
+        transitionLeaveTimeout={200}
       >
         { this.props.open ? this.renderDrawerWrapper() : null }
       </ReactCSSTransitionGroup>
