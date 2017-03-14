@@ -76,7 +76,8 @@
     line-height: 1.375;
   }
 
-  .utility {
+  // Direct scoping because nested comments also have utility
+  > .utility {
     margin-top: 5px;
 
     > ul {

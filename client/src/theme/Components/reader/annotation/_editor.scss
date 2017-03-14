@@ -13,6 +13,7 @@
     background-color: $neutralWhite;
     border: 0;
     outline: 0;
+    resize: vertical;
 
     @include respond($break60) {
       font-size: 18px;

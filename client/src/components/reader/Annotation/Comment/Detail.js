@@ -1,5 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Utility } from 'components/frontend';
+import Editor from './Editor';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 
@@ -7,7 +8,34 @@ export default class AnnotationCommentDetail extends PureComponent {
 
   static displayName = "Annotation.Comment.Detail";
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      replying: false
+    }
+
+    this.openReplyEditor = this.openReplyEditor.bind(this);
+    this.closeReplyEditor = this.closeReplyEditor.bind(this)
+  }
+
+  openReplyEditor() {
+    this.setState({
+      replying: true
+    })
+  }
+
+  closeReplyEditor() {
+    this.setState({
+      replying: false
+    })
+  }
+
   render() {
+    const replyButtonClass = classNames({
+      active: this.state.replying
+    });
+
     return (
       <li className="annotation-comment">
         <section className="meta">
@@ -35,7 +63,12 @@ export default class AnnotationCommentDetail extends PureComponent {
         <nav className="utility">
           <ul>
             <li>
-              <button>{'Reply'}</button>
+              <button
+                className="replyButtonClass"
+                onClick={this.openReplyEditor}
+              >
+                {'Reply'}
+              </button>
             </li>
             <li>
               <Utility.ShareBar url="#"/>
@@ -44,6 +77,7 @@ export default class AnnotationCommentDetail extends PureComponent {
               <button>{'Flag'}</button>
             </li>
           </ul>
+          {this.state.replying ? <Editor cancel={this.closeReplyEditor} /> : null}
         </nav>
         {/*
          NB: Nested comment thread would go here with the exact
