@@ -96,7 +96,7 @@
         color: $neutral40;
         transition: color $duration $timing;
 
-        &:hover {
+        &:hover, &.active {
           color: $accentPrimaryDark;
         }
       }

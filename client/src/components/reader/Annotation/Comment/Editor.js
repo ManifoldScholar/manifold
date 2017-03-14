@@ -50,7 +50,7 @@ export default class AnnotationCommentEditor extends PureComponent {
       <div className="comment-editor">
       <textarea
           className={textClass}
-          placeholder={'Annotate this passage...'}
+          placeholder={'Reply to this annotation...'}
           onChange={this.handleBodyChange}
           value={this.state.body}
       />

@@ -5,11 +5,8 @@ import { annotationsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { Utility } from 'components/frontend';
-import { FormattedDate } from 'components/global';
-import { Comment } from 'containers/global';
 const { request, flush } = entityStoreActions;
 const { select, meta } = entityUtils;
-import { Helper } from 'components/global';
 import { hash } from 'utils/string';
 
 class AnnotationList extends PureComponent {
@@ -87,57 +84,12 @@ class AnnotationList extends PureComponent {
                     {group.annotations.map((annotation) => {
                       const creator = annotation.relationships.creator;
                       return (
-                        <li key={annotation.id} className="annotation-annotation">
-                          <section className="meta">
-                            {/* NB: Empty div required for flex-positioning of private/author marker */}
-                            <div>
-                              <figure className="author-avatar">
-                                { creator.attributes.avatarStyles.smallSquare ?
-                                  <img src={creator.attributes.avatarStyles.smallSquare} /> :
-                                  <div className="no-image">
-                                    <i className="manicon manicon-person"></i>
-                                  </div>
-                                }
-                              </figure>
-                              <h4 className="author-name">
-                                {creator.attributes.fullName}
-                              </h4>
-                              <datetime>
-                                <FormattedDate
-                                  format="distanceInWords"
-                                  date={annotation.attributes.createdAt}
-                                /> ago
-                              </datetime>
-                            </div>
-                            { annotation.attributes.private ?
-                              <div className="marker secondary">
-                                {'Private'}
-                              </div>
-                              : null
-                            }
-                          </section>
-                          <section className="body">
-                            <Helper.SimpleFormat text={annotation.attributes.body} />
-                          </section>
-                          <nav className="utility">
-                            <ul>
-                              <li>
-                                <button>{'Reply'}</button>
-                              </li>
-                              <li>
-                                <button>{'Edit'}</button>
-                              </li>
-                              <li>
-                                <Utility.ShareBar url="#"/>
-                              </li>
-                              <li>
-                                <button>{'Delete'}</button>
-                              </li>
-                            </ul>
-                          </nav>
-                          <Comment.Thread topic={annotation} />
-                        </li>
-                      )
+                        <Annotation.Annotation
+                          key={annotation.id}
+                          creator={creator}
+                          annotation={annotation}
+                        />
+                      );
                     })}
                   </ul>
                 </div>

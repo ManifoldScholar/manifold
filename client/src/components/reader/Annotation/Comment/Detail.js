@@ -64,7 +64,7 @@ export default class AnnotationCommentDetail extends PureComponent {
           <ul>
             <li>
               <button
-                className="replyButtonClass"
+                className={replyButtonClass}
                 onClick={this.openReplyEditor}
               >
                 {'Reply'}
