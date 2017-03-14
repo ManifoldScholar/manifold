@@ -360,47 +360,84 @@ class Annotatable extends Component {
     event.stopPropagation();
   }
 
-  renderDrawer() {
-    let out;
+  // renderDrawer() {
+  //   let out;
+  //   switch (this.state.drawerContents) {
+  //     case "resources":
+  //       out = (
+  //         <Drawer.Wrapper
+  //           closeCallback={this.closeDrawer}
+  //         >
+  //           {this.renderDrawerResources()}
+  //         </Drawer.Wrapper>
+  //       );
+  //       break;
+  //     case "annotate":
+  //       out = (
+  //         <Drawer.Wrapper
+  //           closeCallback={this.closeDrawer}
+  //           style="frontend"
+  //           lockScroll="always"
+  //         >
+  //           {this.renderDrawerAnnotate()}
+  //         </Drawer.Wrapper>
+  //       );
+  //       break;
+  //     case "annotations":
+  //       out = (
+  //         <Drawer.Wrapper
+  //           closeCallback={this.closeDrawer}
+  //           title="Annotations"
+  //           icon="word-bubble"
+  //           style="frontend"
+  //           lockScroll="always"
+  //         >
+  //           {this.renderDrawerAnnotations()}
+  //         </Drawer.Wrapper>
+  //       );
+  //       break;
+  //     default:
+  //       out = null;
+  //       break;
+  //   }
+  //   return out;
+  // }
+  //
+  drawerProps() {
+    const base = { open: false, closeCallback: this.closeDrawer };
+    let options;
     switch (this.state.drawerContents) {
       case "resources":
-        out = (
-          <Drawer.Wrapper
-            closeCallback={this.closeDrawer}
-          >
-            {this.renderDrawerResources()}
-          </Drawer.Wrapper>
-        );
+        options = { open: true, style: "backend" };
         break;
       case "annotate":
-        out = (
-          <Drawer.Wrapper
-            closeCallback={this.closeDrawer}
-            style="frontend"
-            lockScroll="always"
-          >
-            {this.renderDrawerAnnotate()}
-          </Drawer.Wrapper>
-        );
+        options = { open: true, lockScroll: "always", style: "frontend" };
         break;
       case "annotations":
-        out = (
-          <Drawer.Wrapper
-            closeCallback={this.closeDrawer}
-            title="Annotations"
-            icon="word-bubble"
-            style="frontend"
-            lockScroll="always"
-          >
-            {this.renderDrawerAnnotations()}
-          </Drawer.Wrapper>
-        );
+        options = { open: true, lockScroll: "always", style: "frontend", icon: "word-bubble", title: "Annotations" };
         break;
       default:
-        out = null;
+        options = {};
         break;
     }
-    return out;
+    return Object.assign(base, options);
+  }
+
+  renderDrawerContents() {
+    switch (this.state.drawerContents) {
+      case "resources":
+        return this.renderDrawerResources();
+        break;
+      case "annotate":
+        return this.renderDrawerAnnotate();
+        break;
+      case "annotations":
+        return this.renderDrawerAnnotations();
+        break;
+      default:
+        return null;
+        break;
+    }
   }
 
   renderDrawerResources() {
@@ -440,9 +477,9 @@ class Annotatable extends Component {
   render() {
     return (
       <div>
-        {this.state.drawerContents ?
-          this.renderDrawer()
-        : null}
+        <Drawer.Wrapper {...this.drawerProps()}>
+          {this.renderDrawerContents()}
+        </Drawer.Wrapper>
         { this.props.currentUser ?
           <Annotation.Popup
             currentUser={this.props.currentUser}

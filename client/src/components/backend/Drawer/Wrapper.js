@@ -10,6 +10,7 @@ export default class DrawerWrapper extends PureComponent {
   static displayName = "Drawer.Wrapper";
 
   static propTypes = {
+    open: PropTypes.bool,
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.string
@@ -29,6 +30,7 @@ export default class DrawerWrapper extends PureComponent {
   // None: Scrolling the drawer invokes default browser behavior
   static defaultProps = {
     lockScroll: 'hover',
+    open: false,
     style: 'backend'
   };
 
@@ -112,31 +114,44 @@ export default class DrawerWrapper extends PureComponent {
           </div>
         </div>
         {/* Render children without props if they aren't a component */}
-        { isString(this.props.children.type) ?
-            this.props.children :
-            React.cloneElement(this.props.children, { closeDrawer: this.handleLeaveEvent })
-        }
+        { this.renderChildren() }
       </div>
     );
+  }
+
+  renderChildren() {
+    if (!this.props.children) return null;
+    if (isString(this.props.children.type)) {
+      return this.props.children;
+    } else {
+      return React.cloneElement(
+        this.props.children,
+        { closeDrawer: this.handleLeaveEvent }
+      );
+    }
   }
 
   renderDrawerWrapper() {
     if (this.props.lockScroll === 'hover') {
       return (
-        <Utility.EdgeLockScroll>
-          {this.renderDrawer()}
-        </Utility.EdgeLockScroll>
+        <div>
+          <Utility.EdgeLockScroll>
+            {this.renderDrawer()}
+          </Utility.EdgeLockScroll>
+        </div>
       );
     }
 
     if (this.props.lockScroll === 'always') {
       return (
-        <Utility.LockBodyScroll>
-          <div>
-            <div className="drawer-overlay" onClick={this.handleLeaveEvent}></div>
-            {this.renderDrawer()}
-          </div>
-        </Utility.LockBodyScroll>
+        <div>
+          <Utility.LockBodyScroll>
+            <div>
+              <div className="drawer-overlay" onClick={this.handleLeaveEvent}></div>
+              {this.renderDrawer()}
+            </div>
+          </Utility.LockBodyScroll>
+        </div>
       )
     }
 
@@ -149,9 +164,9 @@ export default class DrawerWrapper extends PureComponent {
         transitionName="drawer"
         // True value required to enable transform
         transitionEnterTimeout={5000}
-        transitionLeaveTimeout={200}
+        transitionLeaveTimeout={5000}
       >
-        { this.state.leaving ? null : this.renderDrawerWrapper() }
+        { this.props.open ? this.renderDrawerWrapper() : null }
       </ReactCSSTransitionGroup>
     );
   }
