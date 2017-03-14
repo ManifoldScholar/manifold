@@ -1,0 +1,19 @@
+.comment-editor {
+  textarea {
+    @include templateHead;
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.375;
+    background-color: $neutralWhite;
+    border: 0;
+  }
+
+  .utility {
+    text-align: right;
+    background-color: $neutral10;
+
+    .buttons {
+      display: inline-block;
+    }
+  }
+}
