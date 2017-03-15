@@ -60,14 +60,18 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     return (
       <div className="annotation-selection">
         <div className="selection-text">
-          <i className="manicon manicon-quote"></i>
-          {this.maybeTruncateSelection()}
-        </div>
-        { this.state.editorOpen ?
-          <Selection.Editor {...this.props} cancel={cancelFunction} /> :
+          <div className="container">
+            <i className="manicon manicon-quote"></i>
+            {this.maybeTruncateSelection()}
+          </div>
+          { this.state.editorOpen ? null :
             <button className="annotate-button" onClick={this.handleOpenEditor}>
               Annotate
             </button>
+          }
+        </div>
+        { this.state.editorOpen ?
+          <Selection.Editor {...this.props} cancel={cancelFunction} /> : null
         }
       </div>
     );

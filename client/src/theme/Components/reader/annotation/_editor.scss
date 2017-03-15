@@ -1,9 +1,10 @@
 .annotation-editor {
-  padding-top: 35px;
-  padding-bottom: 30px;
+  @include drawerPadding(padding-right, 'heavy');
+  @include drawerPadding(padding-left);
+  padding-top: 32px;
 
   @include respond($break90) {
-    padding-top: 52px;
+    padding-top: 48px;
   }
 
   textarea {
@@ -21,6 +22,10 @@
 
     @include respond($break90) {
       font-size: 20px;
+    }
+
+    &::placeholder {
+      color: $neutral40;
     }
   }
 

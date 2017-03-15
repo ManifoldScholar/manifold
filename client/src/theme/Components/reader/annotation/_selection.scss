@@ -1,33 +1,36 @@
 .annotation-selection {
-  @include drawerPadding(padding-right, 'heavy');
-  @include drawerPadding(padding-left);
-  padding-top: 30px;
-  padding-bottom: 10px;
-  background-color: $neutral10;
-
-  @include respond($break80) {
-    padding-top: 41px;
-    padding-bottom: 30px;
-  }
-
   .selection-text {
     @include templateHead;
-    @include drawerIndent(padding-left);
-    position: relative;
-    padding-left: 43px;
+    @include drawerPadding(padding-right, 'heavy');
+    @include drawerPadding(padding-left);
+    padding-top: 30px;
+    padding-bottom: 18px;
     font-size: 18px;
     line-height: 1.6;
     word-wrap: break-word;
+    background-color: $accentPrimary;
+
+    @include respond($break80) {
+      padding-top: 41px;
+      padding-bottom: 26px;
+    }
 
     @include respond($break90) {
       font-size: 20px;
+    }
+
+    .container {
+      @include drawerIndent(padding-left);
+      position: relative;
+      padding-right: 0; // OD
+      padding-bottom: 20px;
     }
 
     .manicon {
       position: absolute;
       top: 0.4em;
       left: 0;
-      color: $accentPrimary;
+      color: $neutralWhite;
     }
   }
 
@@ -44,7 +47,7 @@
         left: 0;
         width: 100%;
         height: 4em;
-        background: linear-gradient(to top, $neutral10 10%, transparentize($neutral10, 1) 100%);
+        background: linear-gradient(to top, $accentPrimary 10%, transparentize($accentPrimary, 1) 100%);
         content: '';
         opacity: 0;
         transition: opacity $durationSlow $timing $duration;
@@ -58,15 +61,21 @@
     .button-trim-primary {
       position: relative;
       margin-top: -8px;
-      background-color: $neutral10;
+      color: $neutralOffBlack;
+      background-color: $accentPrimary;
       opacity: 1;
       visibility: visible;
       transition: margin $duration linear,
+        color $duration $timing,
         opacity $duration $timing $durationFast,
         visibility $duration $timing $durationFast;
 
+      &:hover {
+        color: $neutralWhite;
+      }
+
       &.hidden {
-        margin-top: -43px;
+        margin-top: -38px;
         opacity: 0;
         visibility: hidden;
       }
@@ -77,9 +86,9 @@
     @include buttonUnstyled;
     @include utilityPrimary;
     @include drawerIndent(margin-left);
-    margin-top: 28px;
+    display: block;
     font-size: 14px;
-    color: $neutral40;
+    color: $neutralWhite;
     transition: color $duration $timing;
 
     &:hover {
