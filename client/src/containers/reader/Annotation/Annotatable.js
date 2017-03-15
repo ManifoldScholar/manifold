@@ -429,7 +429,7 @@ class Annotatable extends Component {
       <AnnotationContainers.List
         sectionId={this.props.sectionId}
         annotationIds={this.state.listAnnotations}
-        createAnnotation={this.createAnnotation}
+        createHandler={this.attachBodyToSelection}
       />
     );
   }
