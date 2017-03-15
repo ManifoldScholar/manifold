@@ -70,7 +70,6 @@ export default class Header extends Component {
   }
 
   handleVisibilityButtonClick() {
-    console.log('clicked!');
     this.props.commonActions.annotationVisibilityToggle('annotationVisibility');
   }
 
@@ -142,7 +141,10 @@ export default class Header extends Component {
                 </li>
               */}
               <li>
-                <VisibilityButton toggle={this.handleVisibilityButtonClick} />
+                <VisibilityButton
+                  toggle={this.handleVisibilityButtonClick}
+                  state={this.props.visibility.annotationVisibility}
+                />
               </li>
               <li>
                 <AppearanceMenuButton

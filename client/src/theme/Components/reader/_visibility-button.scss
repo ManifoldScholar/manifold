@@ -4,10 +4,19 @@
   height: 100%;
   padding: 0 14px;
   color: $neutral50;
+  transition: color $durationFast $timing;
 
   .manicon {
     display: inline-block;
     padding-top: 0.235em;
     font-size: 17px;
+  }
+
+  &.primary {
+    color: $sp20Primary;
+  }
+
+  &.secondary {
+    color: $sp20Secondary;
   }
 }
