@@ -31,7 +31,7 @@ class CommentThread extends PureComponent {
 
   componentDidMount() {
     if (this.props.subject && !this.props.comments) {
-      const call = commentsAPI.index(this.props.subject)
+      const call = commentsAPI.index(this.props.subject);
       this.props.dispatch(request(call, `comments-for-${this.props.subject.id}`));
     }
   }
@@ -43,11 +43,13 @@ class CommentThread extends PureComponent {
 
   render() {
     if (!this.props.comments) return null;
+    const children = this.childrenOf(this.props.parentId);
+    if (children.length <= 0) return null;
 
     return (
       <div className="annotation-comment-thread">
         <ul className="comment-list">
-          {this.childrenOf(this.props.parentId).map((comment) => {
+          {children.map((comment) => {
             return (
               <Comment.Detail
                 subject={this.props.subject}

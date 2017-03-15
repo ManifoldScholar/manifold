@@ -5,6 +5,7 @@ export const initialState = {
   loginOverlay: false,
   userMenu: false,
   tocDrawer: false,
+  annotationVisibility: 2,
   uiPanels: {
     readerReturn: false,
     user: false,
@@ -20,6 +21,12 @@ const panelSolo = {
   appearance: true,
   layers: true,
   search: true
+};
+
+const annotationVisibilityToggle = (state, action) => {
+  // Visibility toggle status can go up to 2 and then resets to 0
+  const result = state[action.payload] + 1 > 2 ? 0 : state[action.payload] + 1;
+  return Object.assign({}, state, { [action.payload]: result});
 };
 
 const visibilityToggle = (state, action) => {
@@ -73,6 +80,7 @@ const allPanelsHide = (state) => {
 };
 
 export default handleActions({
+  ANNOTATION_VISIBILITY_TOGGLE: annotationVisibilityToggle,
   VISIBILITY_TOGGLE: visibilityToggle,
   VISIBILITY_SHOW: visibilityShow,
   VISIBILITY_HIDE: visibilityHide,

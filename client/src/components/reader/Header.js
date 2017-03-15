@@ -4,7 +4,8 @@ import {
   AppearanceMenuBody,
   ReturnMenu,
   TextTitles,
-  TocDrawer
+  TocDrawer,
+  VisibilityButton
 } from 'components/reader';
 import {
   HeaderNotifications,
@@ -40,6 +41,7 @@ export default class Header extends Component {
     this.handleContentsButtonClick = this.handleContentsButtonClick.bind(this);
     this.handleReturnMenuButtonClick = this.handleReturnMenuButtonClick.bind(this);
     this.handleSearchMenuButtonClick = this.handleSearchMenuButtonClick.bind(this);
+    this.handleVisibilityButtonClick = this.handleVisibilityButtonClick.bind(this);
     this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(this);
     this.triggerShowSignInUpOverlay = this.triggerShowSignInUpOverlay.bind(this);
     this.triggerToggleUserMenu = this.triggerToggleUserMenu.bind(this);
@@ -65,6 +67,11 @@ export default class Header extends Component {
 
   handleSearchMenuButtonClick() {
     this.props.commonActions.panelToggle('search');
+  }
+
+  handleVisibilityButtonClick() {
+    console.log('clicked!');
+    this.props.commonActions.annotationVisibilityToggle('annotationVisibility');
   }
 
   handleAppearanceMenuButtonClick() {
@@ -134,6 +141,9 @@ export default class Header extends Component {
                   />
                 </li>
               */}
+              <li>
+                <VisibilityButton toggle={this.handleVisibilityButtonClick} />
+              </li>
               <li>
                 <AppearanceMenuButton
                   toggleAppearanceMenu={this.handleAppearanceMenuButtonClick}

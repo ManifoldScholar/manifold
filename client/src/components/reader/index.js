@@ -11,3 +11,4 @@ export StaticTextSample from './StaticTextSample';
 export TextTitles from './TextTitles';
 export Toc from './Toc';
 export TocDrawer from './TocDrawer';
+export VisibilityButton from './VisibilityButton';

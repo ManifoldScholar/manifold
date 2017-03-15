@@ -1,6 +1,10 @@
 .selection-list {
   @include listUnstyled;
-  padding-bottom: 110px;
+  padding-bottom: 50px;
+  
+  @include respond($break75) {
+    padding-bottom: 110px;
+  }
 }
 
 .annotation-list {
