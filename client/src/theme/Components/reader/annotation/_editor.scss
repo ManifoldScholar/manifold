@@ -52,13 +52,26 @@
       padding-left: 39px;
       font-size: 14px;
       color: $neutral50;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $neutral75;
+      }
 
       .toggle-indicator {
         background-color: $neutralWhite;
+        padding-left: 5px; // OD
+      }
+
+      .manicon-check-bold {
+        font-size: 13px;
+        color: $neutral70;
+        opacity: 0;
+        transition: opacity $durationFast $timing;
       }
 
       &.checked {
-        .manicon-check {
+        .manicon-check-bold {
           opacity: 1;
         }
       }

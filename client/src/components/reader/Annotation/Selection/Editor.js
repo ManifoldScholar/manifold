@@ -68,7 +68,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
                   onChange={this.handlePrivacyChange}
                 />
                 <span className="toggle-indicator">
-                <i className="manicon manicon-check"></i>
+                <i className="manicon manicon-check-bold"></i>
               </span>
                 <span className="toggle-label">This Annotation is Private</span>
               </label>

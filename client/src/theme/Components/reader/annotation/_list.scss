@@ -12,7 +12,11 @@
   padding-bottom: 37px;
 
   .annotation-annotation {
-    padding-top: 30px;
+    padding-top: 32px;
+
+    @include respond($break65) {
+      padding-top: 40px;
+    }
 
     + .annotation-annotation, +.annotation-more {
       margin-top: 23px;
@@ -33,9 +37,31 @@
 .annotation-comment-thread {
   padding-top: 22px;
 
+  .annotation-comment-thread {
+    // Responsivize first level nesting
+    .comment-list {
+      padding-left: 0;
+
+      @include respond($break70) {
+        @include drawerIndent(padding-left);
+      };
+    }
+  }
+
   .annotation-comment-thread .annotation-comment-thread {
+    // Responsivize second level nesting
+    .comment-list {
+      padding-left: 0;
+
+      @include respond($break95) {
+        @include drawerIndent(padding-left);
+      }
+    }
+  }
+
+  .annotation-comment-thread .annotation-comment-thread .annotation-comment-thread {
     // Disable nesting on comment lists that are more than
-    // 2 levels deep
+    // 3 levels deep
     .comment-list {
       padding-left: 0;
     }
@@ -47,9 +73,7 @@
 
     .annotation-comment {
       + .annotation-comment {
-        padding-top: 23px;
-        margin-top: 23px;
-        border-top: 1px solid $neutral20;
+        padding-top: 20px;
       }
     }
   }

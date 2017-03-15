@@ -65,8 +65,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 31px;
-    padding-bottom: 30px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+
+    @include respond($break60) {
+      padding-top: 31px;
+      padding-bottom: 30px;
+    }
 
     .drawer-title {
       @include utilityPrimary;
@@ -75,7 +80,7 @@
 
       .manicon {
         margin-right: 14px;
-        font-size: 1.571em;
+        font-size: 1.6em;
         vertical-align: middle;
       }
     }
@@ -88,14 +93,26 @@
       text-align: right;
       transition: color $duration $timing;
 
+      .close-text {
+        display: none;
+
+        @include respond($break50) {
+          display: inline;
+        }
+      }
+
       &:hover {
         color: $neutral75;
       }
 
       .manicon {
         margin-left: 25px;
-        font-size: 31px;
+        font-size: 26px;
         vertical-align: middle;
+
+        @include respond($break50) {
+          font-size: 31px;
+        }
       }
     }
   }

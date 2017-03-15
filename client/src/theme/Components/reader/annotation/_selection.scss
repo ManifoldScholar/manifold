@@ -71,7 +71,7 @@
         visibility $duration $timing $durationFast;
 
       &:hover {
-        color: $neutralWhite;
+        color: $neutral75;
       }
 
       &.hidden {
@@ -92,7 +92,7 @@
     transition: color $duration $timing;
 
     &:hover {
-      color: $accentPrimaryDark;
+      color: $accentPrimaryPale;
     }
   }
 }
