@@ -126,7 +126,6 @@ export default class Text extends Component {
             textId={this.props.params.textId}
             projectId={this.props.text.relationships.project.id}
             sectionId={this.props.params.sectionId}
-            createAnnotation={this.props.createAnnotation}
             lockSelection={this.lockSelection}
             resources={this.props.resources}
             annotations={this.props.annotations}

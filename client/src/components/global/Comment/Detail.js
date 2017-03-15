@@ -1,12 +1,17 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Utility } from 'components/frontend';
-import Editor from './Editor';
+import { Comment as CommentContainer } from 'containers/global';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import { FormattedDate } from 'components/global';
 
-export default class AnnotationCommentDetail extends PureComponent {
+export default class CommentDetail extends PureComponent {
 
-  static displayName = "Annotation.Comment.Detail";
+  static displayName = "Comment.Detail";
+
+  static propTypes = {
+    subject: PropTypes.object.isRequired
+  }
 
   constructor(props) {
     super(props);
@@ -35,30 +40,38 @@ export default class AnnotationCommentDetail extends PureComponent {
     const replyButtonClass = classNames({
       active: this.state.replying
     });
+    const { comment } = this.props;
+    const { creator } = comment.relationships;
 
     return (
       <li className="annotation-comment">
         <section className="meta">
           <div>
             <figure className="author-avatar dull">
-              <i className="manicon manicon-person"></i>
+              { creator.attributes.avatarStyles.smallSquare ?
+                <img src={creator.attributes.avatarStyles.smallSquare} /> :
+                <div className="no-image">
+                  <i className="manicon manicon-person"></i>
+                </div>
+              }
             </figure>
             <h4 className="author-name">
-              Zach Davis
+              {creator.attributes.fullName}
               <span className="reply-to">
                   <i className="manicon manicon-arrow-curved-right"></i>
                   Reply to Me
                 </span>
             </h4>
             <datetime>
-              1 day ago
+              <FormattedDate
+                format="distanceInWords"
+                date={comment.attributes.createdAt}
+              /> ago
             </datetime>
           </div>
         </section>
         <section className="body">
-          {'Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean eu' +
-          ' leo quam. Pellentesque ornare sem lacinia quam venenatis ' +
-          'vestibulum. Vestibulum id ligula porta felis euismod semper.'}
+          {comment.attributes.body}
         </section>
         <nav className="utility">
           <ul>
@@ -77,13 +90,19 @@ export default class AnnotationCommentDetail extends PureComponent {
               <button>{'Flag'}</button>
             </li>
           </ul>
-          {this.state.replying ? <Editor cancel={this.closeReplyEditor} /> : null}
+          {this.state.replying ?
+            <CommentContainer.Editor
+              subject={this.props.subject}
+              parentId={comment.id}
+              cancel={this.closeReplyEditor}
+            />
+            : null
+          }
         </nav>
-        {/*
-         NB: Nested comment thread would go here with the exact
-         same markup as this one, starting with
-         <div className="annotation-comment-thread">
-         */}
+        <CommentContainer.Thread
+          subject={this.props.subject}
+          parentId={comment.id}
+        />
       </li>
     );
   }

@@ -13,6 +13,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     endChar: PropTypes.number,
     annotating: PropTypes.bool,
     closeDrawer: PropTypes.func,
+    createAnnotation: PropTypes.func.isRequired,
     truncate: PropTypes.number
   }
 

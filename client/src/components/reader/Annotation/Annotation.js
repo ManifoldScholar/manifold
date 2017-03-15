@@ -3,13 +3,13 @@ import { Link } from 'react-router';
 import { Helper } from 'components/global';
 import { FormattedDate } from 'components/global';
 import { Utility } from 'components/frontend';
-import Annotation from 'components/reader/Annotation';
-import { Comment } from 'containers/global';
+import { Comment } from 'components/global';
+import { Comment as CommentContainer } from 'containers/global';
 import classNames from 'classnames';
 
-export default class AnnotationCommentDetail extends PureComponent {
+export default class AnnotationDetail extends PureComponent {
 
-  static displayName = "Annotation.Comment.Detail";
+  static displayName = "Annotation.Detail";
 
   static propTypes = {
     creator: PropTypes.object.isRequired,
@@ -101,10 +101,14 @@ export default class AnnotationCommentDetail extends PureComponent {
             </li>
           </ul>
           {this.state.replying ?
-            <Annotation.Comment.Editor cancel={this.closeReplyEditor} /> : null
+            <CommentContainer.Editor
+              subject={annotation}
+              cancel={this.closeReplyEditor}
+            />
+            : null
           }
         </nav>
-        <Comment.Thread topic={annotation} />
+        <CommentContainer.Thread subject={annotation} />
       </li>
     );
   }

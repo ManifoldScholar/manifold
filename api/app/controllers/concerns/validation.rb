@@ -67,7 +67,7 @@ module Validation
 
   def comment_params
     params.require(:data)
-    attributes = [:body]
+    attributes = [:body, :parent_id]
     relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

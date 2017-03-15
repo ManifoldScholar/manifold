@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
+import { Comment } from 'components/global';
 import { Utility } from 'components/frontend';
+import { commentsAPI } from 'api';
 import Annotation from 'components/reader/Annotation';
 const { request, flush } = entityStoreActions;
 const { select, meta } = entityUtils;
@@ -12,16 +14,48 @@ class CommentThread extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     const newState = {
+      comments: select(`comments-for-${ownProps.subject.id}`, state.entityStore),
     };
-    return Object.assign({}, newState, ownProps);
+    return Object.assign({}, ownProps, newState);
   }
+
+  static propTypes = {
+    subject: PropTypes.object.isRequired,
+    parentId: PropTypes.string,
+    parentAuthor: PropTypes.string
+  }
+
+  static defaultProps = {
+    parentId: null
+  }
+
+  componentDidMount() {
+    if (this.props.subject && !this.props.comments) {
+      const call = commentsAPI.index(this.props.subject)
+      this.props.dispatch(request(call, `comments-for-${this.props.subject.id}`));
+    }
+  }
+
+  childrenOf(parentId) {
+    const children = this.props.comments.filter((c) => c.attributes.parentId === parentId);
+    return children;
+  }
+
   render() {
+    if (!this.props.comments) return null;
+
     return (
       <div className="annotation-comment-thread">
         <ul className="comment-list">
-          {/* Iterate through available comments and render a comment.detail */}
-          <Annotation.Comment.Detail />
-          <Annotation.Comment.Detail />
+          {this.childrenOf(this.props.parentId).map((comment) => {
+            return (
+              <Comment.Detail
+                subject={this.props.subject}
+                key={comment.id}
+                comment={comment}
+              />
+            );
+          })}
         </ul>
       </div>
     );

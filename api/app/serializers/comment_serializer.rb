@@ -2,5 +2,7 @@
 class CommentSerializer < ActiveModel::Serializer
   meta(partial: false)
 
-  attributes :id, :body
+  attributes :id, :body, :parent_id, :created_at
+
+  belongs_to :creator
 end

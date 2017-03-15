@@ -15,7 +15,8 @@ class AnnotationList extends PureComponent {
 
   static propTypes = {
     annotations: PropTypes.array,
-    annotationIds: PropTypes.array.isRequired
+    annotationIds: PropTypes.array.isRequired,
+    createAnnotation: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -78,6 +79,7 @@ class AnnotationList extends PureComponent {
                 <Annotation.Selection.Wrapper
                   {...group.selection}
                   truncate={250}
+                  createAnnotation={this.props.createAnnotation}
                 />
                 <div className="container">
                   <ul className="annotation-list">

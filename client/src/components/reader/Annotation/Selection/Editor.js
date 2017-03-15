@@ -10,7 +10,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
     annotation: PropTypes.object,
     selection: PropTypes.object,
     cancel: PropTypes.func,
-    createHandler: PropTypes.func,
+    createAnnotation: PropTypes.func // this should be required --ZD
   }
 
   constructor(props) {
@@ -28,7 +28,11 @@ export default class AnnotationSelectionEditor extends PureComponent {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.createHandler(this.state.body, this.state.isPrivate);
+    const annotation = Object.assign({}, this.props.annotation, {
+      body: this.state.body,
+      isPrivate: this.state.isPrivate
+    });
+    this.props.createAnnotation(annotation);
   }
 
   handleBodyChange(event) {

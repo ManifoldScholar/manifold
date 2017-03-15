@@ -193,6 +193,19 @@ function handleRemove(state, action) {
   return Object.assign({}, state, { responses });
 }
 
+function handleAdd(state, action) {
+  const targetMeta = action.payload.meta;
+  const addEntity = action.payload.entity;
+  const meta = state.responses[targetMeta];
+  if (!meta) return state;
+  if (!Array.isArray(meta.collection)) return state;
+  if (meta.collection.find((entity) => entity.id === addEntity.id)) return state;
+  const newCollection = [...meta.collection, addEntity];
+  const newMeta = Object.assign({}, meta, { collection: newCollection })
+  const responses = Object.assign({}, state.responses, { [targetMeta]: newMeta });
+  return Object.assign({}, state, { responses });
+}
+
 function updateAnnotationCollection(state, action) {
   const created = state.responses[requests.rAnnotationCreate].entity;
   const collection = state.responses[requests.rAnnotations].collection.slice(0);
@@ -206,6 +219,7 @@ export default (state = initialState, action) => {
   const type = action.type;
   let newState = state;
   if (type === "ENTITY_STORE_REMOVE") return handleRemove(newState, action);
+  if (type === "ENTITY_STORE_ADD") return handleAdd(newState, action);
   if (type === "ENTITY_STORE_FLUSH") return handleFlush(newState, action);
   if (type.startsWith("API_REQUEST")) return handleRequest(newState, action);
   if (type.startsWith("API_RESPONSE")) newState = handleResponse(newState, action);
