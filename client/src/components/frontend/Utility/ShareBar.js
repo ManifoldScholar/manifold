@@ -85,7 +85,7 @@ class ShareBar extends Component {
 
             <li>
               <EmailButton url={this.props.url}>
-                <i className="manicon manicon-envelope"></i>
+                <i className="manicon manicon-envelope-simple"></i>
               </EmailButton>
             </li>
           */}
