@@ -9,6 +9,7 @@ import { projectsAPI, favoriteProjectsAPI, requests } from 'api';
 import HigherOrder from 'containers/global/HigherOrder';
 import get from 'lodash/get';
 import union from 'lodash/union';
+import size from 'lodash/size';
 
 const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
@@ -79,7 +80,13 @@ class FollowingContainer extends Component {
   updateFavorites() {
     const apiCall = favoriteProjectsAPI.index(this.props.projectFilters);
     const followedRequest = request(apiCall, requests.feProjectsFollowed);
-    this.props.dispatch(followedRequest);
+    const { promise } = this.props.dispatch(followedRequest);
+    promise.then((res) => {
+      const { favorites } = this.props.authentication.currentUser;
+      if (res.data && res.data.length === 0 && favorites && size(favorites) > 0) {
+        this.props.dispatch(setProjectFilters({}));
+      }
+    });
   }
 
   mapFavoritesToSubjects() {
@@ -132,7 +139,8 @@ class FollowingContainer extends Component {
     return (
       <HigherOrder.RequireRole requiredRole="any" redirect="/browse">
         <div>
-          {this.props.followedProjects && this.props.followedProjects.length > 0 ?
+          {this.props.authentication.currentUser.favorites &&
+          size(this.props.authentication.currentUser.favorites) > 0 ?
               this.renderFollowedProjects() : <Layout.NoFollow />
           }
           <section>
