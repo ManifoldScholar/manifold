@@ -1,7 +1,7 @@
 .selection-list {
   @include listUnstyled;
   padding-bottom: 50px;
-  
+
   @include respond($break75) {
     padding-bottom: 110px;
   }
@@ -46,24 +46,25 @@
         @include drawerIndent(padding-left);
       };
     }
-  }
 
-  .annotation-comment-thread .annotation-comment-thread {
-    // Responsivize second level nesting
-    .comment-list {
-      padding-left: 0;
+    .annotation-comment-thread {
+      // Responsivize second level nesting
+      .comment-list {
+        padding-left: 0;
 
-      @include respond($break95) {
-        @include drawerIndent(padding-left);
+        @include respond($break95) {
+          @include drawerIndent(padding-left);
+        }
       }
-    }
-  }
 
-  .annotation-comment-thread .annotation-comment-thread .annotation-comment-thread {
-    // Disable nesting on comment lists that are more than
-    // 3 levels deep
-    .comment-list {
-      padding-left: 0;
+      .annotation-comment-thread {
+        // Disable nesting on comment lists that are more than
+        // 3 levels deep
+        .comment-list {
+          padding-left: 0;
+        }
+      }
+
     }
   }
 

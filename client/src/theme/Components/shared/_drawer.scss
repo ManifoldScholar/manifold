@@ -7,15 +7,6 @@
   overflow: scroll;
   background-color: $neutral05;
 
-  .drawer-enter & {
-    right: -100%;
-  }
-
-  .drawer-leave.drawer-leave-active & {
-    right: -100%;
-    transition: right $duration $timing;
-  }
-
   @include respond($break40) {
     top: 80px;
   }
@@ -44,6 +35,15 @@
       right: -850px;
       transition: right $duration $timing;
     }
+  }
+
+  .drawer-enter & {
+    right: -100%;
+  }
+
+  .drawer-leave.drawer-leave-active & {
+    right: -100%;
+    transition: right $duration $timing;
   }
 
   .drawer-enter.drawer-enter-active & {
