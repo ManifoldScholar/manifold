@@ -13,8 +13,9 @@ class Annotatable extends Component {
     lockSelection: React.PropTypes.func,
     selectionLockedAnnotation: React.PropTypes.object,
     selectionLocked: React.PropTypes.bool,
-    sectionId: React.PropTypes.string,
-    projectId: React.PropTypes.string
+    projectId: React.PropTypes.string,
+    textId: React.PropTypes.string,
+    sectionId: React.PropTypes.string
   }
 
   constructor() {
@@ -28,7 +29,6 @@ class Annotatable extends Component {
     this.startResourceSelection = this.startResourceSelection.bind(this);
     this.endResourceSelection = this.endResourceSelection.bind(this);
     this.attachResourceToSelection = this.attachResourceToSelection.bind(this);
-    this.shareSelection = this.shareSelection.bind(this);
     this.closestTextNode = this.closestTextNode.bind(this);
 
     this.state = this.defaultState();
@@ -283,9 +283,6 @@ class Annotatable extends Component {
     this.unlockSelection();
   }
 
-  shareSelection() {
-    // TBD
-  }
 
   render() {
     return (
@@ -304,9 +301,9 @@ class Annotatable extends Component {
         : null}
 
         { this.props.currentUser ?
-          <Annotation.Popup
+          <Annotation.Popup.Wrapper
             currentUser={this.props.currentUser}
-            share={this.shareSelection}
+            shareUrl={`/read/${this.props.textId}/section/${this.props.sectionId}`}
             highlight={this.highlightSelection}
             annotate={this.annotateSelection}
             attachResource={this.startResourceSelection}

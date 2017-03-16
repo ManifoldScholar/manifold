@@ -16,11 +16,57 @@
     visibility: visible;
   }
 
+  .popup-page {
+    transition: margin $duration $timing,
+      opacity $duration $timing,
+      visibility $duration $timing;
+
+    &.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  .popup-page, .popup-page-secondary {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+
+    &.bottom {
+      vertical-align: bottom;
+    }
+  }
+
+  .popup-page-secondary-group {
+    display: inline-block;
+  }
+
+  .popup-page-secondary {
+    &.page-enter {
+      opacity: 0.01;
+
+      &.page-enter-active {
+        opacity: 1;
+        transition: opacity $durationFast $timing;
+      }
+    }
+
+    &.page-leave {
+      opacity: 1;
+
+      &.page-leave-active {
+        opacity: 0;
+        transition: opacity $duration $timing;
+      }
+    }
+  }
+
   button {
     @include buttonUnstyled;
     @include utilityPrimary;
     display: block;
     width: 100%;
+    height: 50px;
     padding: 12px 22px 13px 17px;
     font-size: 14px;
     line-height: 23px;
@@ -29,45 +75,81 @@
     background-color: $neutral80;
     transition: color $duration $timing, background-color $duration $timing;
 
+    &.dark {
+      color: $neutral70;
+      background-color: $neutral90;
+
+      + .tail-down {
+        border-color: $neutral90 transparent transparent;
+      }
+    }
+
     &:hover {
-      color: $neutralOffBlack;
+      color: $neutral80;
       background-color: $accentPrimary;
     }
 
-    + button {
+    + button, + .button-group {
       border-top: 1.5px $neutral90 solid;
     }
 
     .manicon {
       display: inline-block;
+      width: 24px;
       margin-right: 13px;
       vertical-align: middle;
     }
 
     // Provisional icon for creating resources
-    .manicon-cube-shine {
+    .manicon-cube-outline {
       margin-top: -3px;
-      font-size: 23px;
+      font-size: 26px;
     }
 
     .manicon-pencil-simple {
       margin-top: -3px;
-      font-size: 21px;
+      font-size: 24px;
     }
 
     .manicon-word-bubble {
       margin-top: -1px;
-      font-size: 20px;
+      font-size: 23px;
     }
 
     .manicon-bookmark-outline {
       margin-top: -3px;
-      font-size: 20px;
+      font-size: 23px;
     }
 
     .manicon-nodes {
       margin-top: -4px;
-      font-size: 23px;
+      font-size: 26px;
+    }
+
+    .manicon-quotes-left {
+      margin-top: -2px;
+      font-size: 19px;
+    }
+
+    .manicon-envelope {
+      margin-top: -1px;
+      font-size: 17px;
+    }
+
+    .manicon-twitter {
+      margin-top: -3px;
+      font-size: 22px;
+    }
+
+    .manicon-facebook {
+      margin-top: -1px;
+      font-size: 27px;
+      text-align: center;
+    }
+
+    .manicon-arrow-bold-left {
+      margin-top: -4px;
+      font-size: 16px;
     }
   }
 

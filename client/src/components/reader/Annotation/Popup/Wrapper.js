@@ -1,17 +1,23 @@
 import React, { Component, PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { throttle } from 'lodash';
+import { EmailButton, TwitterButton, FacebookButton } from 'react-social';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import { closest } from 'utils/domUtils';
-import HigherOrder from 'containers/global/HigherOrder';
+import Annotate from './Annotate';
+import Share from './Share';
+
 
 export default class AnnotationPopup extends Component {
+
+  static displayName = "Annotation.Popup.Wrapper";
 
   static propTypes = {
     selection: PropTypes.object,
     currentUser: PropTypes.object,
     selectionLocked: PropTypes.bool,
-    share: PropTypes.func,
+    shareUrl: PropTypes.string,
     highlight: PropTypes.func,
     annotate: PropTypes.func,
     attachResource: PropTypes.func,
@@ -24,9 +30,16 @@ export default class AnnotationPopup extends Component {
     this.state = {
       visible: false,
       top: 0,
+      bottom: 'auto',
       left: 0,
-      direction: 'up'
+      direction: 'up',
+      secondary: null,
     };
+
+    this.secondaryPageTransitionTime = 300;
+
+    this.showSecondary = this.showSecondary.bind(this);
+    this.resetSecondary = this.resetSecondary.bind(this);
   }
 
   componentDidMount() {
@@ -39,12 +52,16 @@ export default class AnnotationPopup extends Component {
     this.maybeShowPopup(this.props, nextProps);
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.secondaryPageTimeout);
+  }
+
   getLockedSelectionRect() {
     return document.querySelector('.annotation-locked-selected').getBoundingClientRect();
   }
 
   maybeShowPopup(prevProps, nextProps) {
-    if (nextProps && prevProps !== nextProps) {
+    if (nextProps && prevProps.selection !== nextProps.selection) {
       // Locked?
       if (nextProps.selectionLocked) {
         return;
@@ -52,7 +69,10 @@ export default class AnnotationPopup extends Component {
       // Update popup
       if (!nextProps.selection) {
         // Hide the popup if there is no "Range"
-        this.setState({ visible: false });
+        this.setState({
+          visible: false,
+          secondary: null
+        });
       } else {
         // Calculate the position for the popup
         this.positionPopup(nextProps.selection, nextProps.selectionClickEvent);
@@ -89,7 +109,6 @@ export default class AnnotationPopup extends Component {
     const clientY = get(selectionClickEvent, 'clientY');
     const up = 'up';
     const down = 'down';
-    // not ideal to grab this by class, but not sure how else to handle it
     const annotatable = closest(this.popupEl, '.annotatable');
     const annotatableRect = annotatable.getBoundingClientRect();
     const topVisiblePosition = document.body.scrollTop + 100;
@@ -104,6 +123,7 @@ export default class AnnotationPopup extends Component {
 
     let left;
     let top;
+    let bottom;
     let preferBottom = false;
 
     if (clientX !== null && clientX !== undefined && clientY !== null && clientY !== undefined) {
@@ -124,25 +144,47 @@ export default class AnnotationPopup extends Component {
     let direction = up;
     if (topCollisionPossible) direction = down;
     if (preferBottom && !bottomCollisionPossible) direction = down;
-    const naturalTopPosition = window.pageYOffset + rect.top - popupHeight;
+    // Hardcode offset so that the tail of the popop doesn't sit right on top of
+    // the text.
+    const naturalTopPosition = window.pageYOffset + rect.top - 60;
     const naturalBottomPosition = window.pageYOffset + rect.bottom + 60;
-    if (direction === up) top = naturalTopPosition;
-    if (direction === down) top = naturalBottomPosition;
+    if (direction === up) {
+      top = 'auto';
+      bottom = window.innerHeight - naturalTopPosition;
+    }
+    if (direction === down) {
+      top = naturalBottomPosition;
+      bottom = 'auto';
+    }
 
-    this.setState(Object.assign(this.state, { top, left, direction }));
+    this.setState({ top, bottom, left, direction });
+  }
+
+  showSecondary(page) { this.setState({ secondary: page }); }
+
+  resetSecondary() {
+    this.setState({
+      secondary: null
+    });
+  }
+
+  renderSecondaryShare() {
+    if (this.state.secondary !== 'share') return null;
+
+    return (
+      <Share
+        text={this.props.selection.text}
+        shareUrl={this.props.shareUrl}
+        direction={this.state.direction}
+        back={this.resetSecondary}
+      />
+    );
   }
 
   render() {
-
     const popupClass = classNames({
       'annotation-popup': true,
       visible: this.state.visible
-    });
-
-    const tailClass = classNames({
-      tail: true,
-      'tail-down': this.state.direction === 'up',
-      'tail-up': this.state.direction === 'down',
     });
 
     return (
@@ -150,32 +192,28 @@ export default class AnnotationPopup extends Component {
         ref={(a) => { this.popupEl = a; }}
         style={{
           top: this.state.top,
+          bottom: this.state.bottom,
           left: this.state.left
         }}
       >
-        <HigherOrder.RequireRole requiredRole="admin">
-          <button onClick={this.props.attachResource}>
-            <i className="manicon manicon-cube-shine"></i>
-            Resource
-          </button>
-        </HigherOrder.RequireRole>
-        <button onClick={this.props.highlight}>
-          <i className="manicon manicon-pencil-simple"></i>
-          Highlight
-        </button>
-        <button onClick={this.props.annotate}>
-          <i className="manicon manicon-word-bubble"></i>
-          Annotate
-        </button>
-        <button onClick={this.props.bookmark}>
-          <i className="manicon manicon-bookmark-outline"></i>
-          Bookmark
-        </button>
-        <button onClick={this.props.share}>
-          <i className="manicon manicon-nodes"></i>
-          Share
-        </button>
-        <div className={tailClass}></div>
+        <Annotate
+          attachResource={this.props.attachResource}
+          highlight={this.props.highlight}
+          annotate={this.props.annotate}
+          bookmark={this.props.bookmark}
+          showShare={() => { this.showSecondary('share'); }}
+          secondary={this.state.secondary}
+          direction={this.state.direction}
+        />
+        <ReactCSSTransitionGroup
+          transitionName="page"
+          transitionEnterTimeout={this.secondaryPageTransitionTime}
+          transitionLeaveTimeout={this.secondaryPageTransitionTime}
+          component="div"
+          className="popup-page-secondary-group"
+        >
+          {this.renderSecondaryShare()}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

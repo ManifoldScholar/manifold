@@ -136,6 +136,7 @@ export default class Text extends Component {
           <Annotation.Annotatable
             currentUser={this.props.authentication.currentUser}
             projectId={this.props.text.relationships.project.id}
+            textId={this.props.text.id}
             sectionId={this.props.params.sectionId}
             createAnnotation={this.props.createAnnotation}
             lockSelection={this.lockSelection}
