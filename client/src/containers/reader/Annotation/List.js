@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Annotation } from 'components/reader';
+import Annotation from 'components/reader/Annotation';
 import { connect } from 'react-redux';
 import { annotationsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
@@ -38,6 +38,7 @@ class AnnotationList extends PureComponent {
     this.fetchAnnotations(this.props);
   }
 
+  /* eslint-disable no-param-reassign */
   annotationsGroupedBySubject() {
     const grouped = this.props.annotations.reduce((memo, annotation) => {
       const key = hash(annotation.attributes.subject.trim());
@@ -52,17 +53,18 @@ class AnnotationList extends PureComponent {
             endNode: annotation.attributes.endNode,
             endChar: annotation.attributes.endChar
           }
-        }
+        };
       }
       memo[key].annotations.push(annotation);
       return memo;
     }, {});
     return Object.values(grouped);
   }
+  /* eslint-enable no-param-reassign */
 
   fetchAnnotations(props) {
     const sId = this.props.sectionId;
-    const annotationsCall = annotationsAPI.forSection(sId, {ids: this.props.annotationIds});
+    const annotationsCall = annotationsAPI.forSection(sId, { ids: this.props.annotationIds });
     props.dispatch(request(annotationsCall, requests.rDrawerAnnotations));
   }
 
@@ -96,7 +98,7 @@ class AnnotationList extends PureComponent {
                   </ul>
                 </div>
               </li>
-            )
+            );
           })}
         </ul>
       </div>
@@ -561,4 +563,4 @@ const banana = (
       </div>
     </li>
   </div>
-)
+);

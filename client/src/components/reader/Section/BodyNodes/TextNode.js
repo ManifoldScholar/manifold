@@ -99,11 +99,11 @@ export default class TextNode extends Component {
           resources.filter(a => starts[a.id] === index && a.startNode === this.props.nodeUuid);
       }
       const classes = classNames({
+        primary: isCreator,
+        secondary: !isCreator,
         'annotation-locked-selected primary': lockedSelection,
         'annotation-underline': underlined,
         'annotation-highlight': highlighted,
-        'primary': isCreator,
-        'secondary': !isCreator,
         'annotation-resource': resources.length > 0,
         'annotation-resource-start': resources && startingResources.length > 0,
         'annotation-resource-end': resources && endingResources.length > 0

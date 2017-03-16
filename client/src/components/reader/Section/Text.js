@@ -17,7 +17,6 @@ export default class Text extends Component {
     appearance: PropTypes.object,
     location: PropTypes.object,
     createAnnotation: PropTypes.func,
-    authentication: PropTypes.object,
     params: PropTypes.object,
     children: PropTypes.object,
     dispatch: PropTypes.func,
@@ -39,25 +38,23 @@ export default class Text extends Component {
       )
     };
     this.lockSelection = this.lockSelection.bind(this);
-    this.recordBodyDomUpdate = this.recordBodyDomUpdate.bind(this);
   }
 
   componentDidMount() {
     this.maybeScrollToAnchor(null, this.props.location.hash);
-    this.recordBodyDomUpdate();
   }
 
   componentWillReceiveProps(nextProps) {
     if (
-      (nextProps.visibility.annotation != this.props.visibility.annotation) ||
-      (nextProps.annotations != this.props.annotations)
+      (nextProps.visibility.annotation !== this.props.visibility.annotation) ||
+      (nextProps.annotations !== this.props.annotations)
     ) {
       const filteredAnnotations = this.filterAnnotations(
         nextProps.visibility.annotation,
         nextProps.annotations,
         this.props.authentication.currentUser
       );
-      this.setState({filteredAnnotations});
+      this.setState({ filteredAnnotations });
     }
   }
 
@@ -70,22 +67,10 @@ export default class Text extends Component {
     if (visibility === 0) return [];
     if (visibility === 1) {
       return annotations.filter((a) => {
-        return a.attributes.format === "resource" || a.attributes.currentUserIsCreator === true
+        return a.attributes.format === "resource" || a.attributes.currentUserIsCreator === true;
       });
     }
     return annotations;
-  }
-
-  // We need a callback from the body to let us know when it updates. We can then pass
-  // that information down to the Resource viewer, which absolutely has to look at the
-  // body's rendered DOM in order to determine the position of each marker.
-  //
-  // At some future point, we may want to refactor this a bit. It might make sense, for
-  // example, to have the section pass a callback down to the markers, which can trigger
-  // it and report their position when they are rendered. That would help avoid the
-  // cross cutting inspection that the resource viewer wrapper is currently doing.
-  recordBodyDomUpdate() {
-    this.setState({ updates: this.state.updates + 1 });
   }
 
   // Store the current locked selection in the section, which wraps the annotator and
@@ -168,7 +153,6 @@ export default class Text extends Component {
               <div className={textSectionClass} >
                 <div ref={(b) => { this.body = b; }}>
                   <Section.Body
-                    didUpdateCallback={this.recordBodyDomUpdate}
                     lockedSelection={this.state.lockedSelection}
                     annotations={this.state.filteredAnnotations}
                     section={this.props.section}

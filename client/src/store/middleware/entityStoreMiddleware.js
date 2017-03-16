@@ -107,9 +107,9 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     if (requestPayload.adds) {
       requestPromise.then((response) => {
         if (Array.isArray(response.data)) {
-          throw "Request options 'adds' is only supported for requests that return a " +
+          throw new Error("Request options 'adds' is only supported for requests that return a " +
           "single object. The attempt to add to the " + requestPayload.adds + " response" +
-          "di not succed because the response contained a collection of entities.";
+          "di not succed because the response contained a collection of entities.");
         }
         const { type, id } = response.data;
         dispatch(buildAddsAction(requestPayload.adds, { type, id }));

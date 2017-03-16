@@ -18,22 +18,22 @@ export default class CommentDetail extends PureComponent {
 
     this.state = {
       replying: false
-    }
+    };
 
     this.openReplyEditor = this.openReplyEditor.bind(this);
-    this.closeReplyEditor = this.closeReplyEditor.bind(this)
+    this.closeReplyEditor = this.closeReplyEditor.bind(this);
   }
 
   openReplyEditor() {
     this.setState({
       replying: true
-    })
+    });
   }
 
   closeReplyEditor() {
     this.setState({
       replying: false
-    })
+    });
   }
 
   render() {

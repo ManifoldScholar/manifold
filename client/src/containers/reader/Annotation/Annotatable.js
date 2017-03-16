@@ -15,13 +15,25 @@ const { request, flush } = entityStoreActions;
 class Annotatable extends Component {
 
   static propTypes = {
+    textId: React.PropTypes.string.isRequired,
+    sectionId: React.PropTypes.string.isRequired,
+    projectId: React.PropTypes.string.isRequired,
+    dispatch: React.PropTypes.func.isRequired,
+    containerSize: React.PropTypes.number.isRequired,
+    fontSize: React.PropTypes.number.isRequired,
     children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     currentUser: React.PropTypes.object,
     lockSelection: React.PropTypes.func,
     selectionLockedAnnotation: React.PropTypes.object,
     selectionLocked: React.PropTypes.bool,
-    sectionId: React.PropTypes.string,
-    projectId: React.PropTypes.string
+    body: React.PropTypes.object,
+    resources: React.PropTypes.array,
+    annotations: React.PropTypes.array
+  }
+
+  static defaultProps = {
+    resource: [],
+    annotations: []
   }
 
   constructor() {
@@ -236,7 +248,7 @@ class Annotatable extends Component {
   }
 
   createAnnotation(annotation, resource = null) {
-    const call = annotationsAPI.create(this.props.sectionId, annotation, resource)
+    const call = annotationsAPI.create(this.props.sectionId, annotation, resource);
     this.props.dispatch(request(call, requests.rAnnotationCreate));
     setTimeout(() => {
       this.closeDrawer();
@@ -319,6 +331,7 @@ class Annotatable extends Component {
     event.stopPropagation();
   }
 
+  /* eslint-disable no-unreachable */
   drawerProps() {
     const base = { open: false, closeCallback: this.closeDrawer };
     let options;
@@ -330,7 +343,13 @@ class Annotatable extends Component {
         options = { open: true, lockScroll: "always", style: "frontend" };
         break;
       case "annotations":
-        options = { open: true, lockScroll: "always", style: "frontend", icon: "word-bubble", title: "Annotations" };
+        options = {
+          open: true,
+          lockScroll: "always",
+          style: "frontend",
+          icon: "word-bubble",
+          title: "Annotations"
+        };
         break;
       default:
         options = {};
@@ -338,23 +357,26 @@ class Annotatable extends Component {
     }
     return Object.assign(base, options);
   }
+  /* eslint-enable no-unreachable */
 
+  /* eslint-disable no-unreachable */
   renderDrawerContents() {
     switch (this.state.drawerContents) {
       case "resources":
-        return this.renderDrawerResources();
+        return this.renderDrawerResources(); // eslint-disable no-unreachable
         break;
       case "annotate":
-        return this.renderDrawerAnnotate();
+        return this.renderDrawerAnnotate(); // eslint-disable no-unreachable
         break;
       case "annotations":
-        return this.renderDrawerAnnotations();
+        return this.renderDrawerAnnotations(); // eslint-disable no-unreachable
         break;
       default:
         return null;
         break;
     }
   }
+  /* eslint-enable no-unreachable */
 
   renderDrawerResources() {
     return (
@@ -395,15 +417,21 @@ class Annotatable extends Component {
   render() {
     return (
       <div>
+        {/* Children must preceed the resource viewer, because the annotatable ref needs to
+        be rendered prior to the resource viewer calculating where to put things. */}
         <div className="annotatable"
-             ref={(a) => { this.annotatable = a; }}
-             onClick={this.handlePossibleAnnotationClick}
+          ref={(a) => { this.annotatable = a; }}
+          onClick={this.handlePossibleAnnotationClick}
         >
           { this.props.children ? Children.only(this.props.children) : null }
         </div>
+
+        {/* The drawer contains resource, annotator, comments, etc */}
         <Drawer.Wrapper {...this.drawerProps()}>
           {this.renderDrawerContents()}
         </Drawer.Wrapper>
+
+        {/* Render the annotation popup interface */}
         { this.props.currentUser ?
           <Annotation.Popup
             currentUser={this.props.currentUser}
@@ -417,6 +445,8 @@ class Annotatable extends Component {
             annotatableDomElement={this.annotatable}
           />
         : null }
+
+        {/* Render the margin resources */}
         {this.props.resources ?
           <ResourceComponents.Viewer.Wrapper
             sectionId={this.props.sectionId}
@@ -426,7 +456,6 @@ class Annotatable extends Component {
             containerSize={this.props.containerSize}
             fontSize={this.props.fontSize}
             body={this.props.body}
-            updates={this.props.updates}
           /> : null
         }
       </div>

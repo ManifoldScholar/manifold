@@ -25,7 +25,7 @@ const panelSolo = {
 
 const visibilityToggle = (state, action) => {
   let result;
-  if (action.payload == "annotation") {
+  if (action.payload === "annotation") {
     result = state[action.payload] + 1 > 2 ? 0 : state[action.payload] + 1;
   } else {
     result = !state[action.payload];

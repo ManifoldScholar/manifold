@@ -12,9 +12,9 @@ export default class VisibilityButton extends PureComponent {
 
   render() {
     const buttonClass = classNames({
-      'annotation-visibility-button': true,
-      'primary': this.props.state === 1,
-      'secondary': this.props.state === 2,
+      primary: this.props.state === 1,
+      secondary: this.props.state === 2,
+      'annotation-visibility-button': true
     });
 
     return (

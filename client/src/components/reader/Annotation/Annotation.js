@@ -21,22 +21,22 @@ export default class AnnotationDetail extends PureComponent {
 
     this.state = {
       replying: false
-    }
+    };
 
     this.openReplyEditor = this.openReplyEditor.bind(this);
-    this.closeReplyEditor = this.closeReplyEditor.bind(this)
+    this.closeReplyEditor = this.closeReplyEditor.bind(this);
   }
 
   openReplyEditor() {
     this.setState({
       replying: true
-    })
+    });
   }
 
   closeReplyEditor() {
     this.setState({
       replying: false
-    })
+    });
   }
 
   render() {
@@ -65,8 +65,8 @@ export default class AnnotationDetail extends PureComponent {
             </h4>
             <datetime>
               <FormattedDate
-                  format="distanceInWords"
-                  date={annotation.attributes.createdAt}
+                format="distanceInWords"
+                date={annotation.attributes.createdAt}
               /> ago
             </datetime>
           </div>

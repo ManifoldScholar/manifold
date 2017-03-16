@@ -42,9 +42,9 @@ class CommentEditor extends PureComponent {
     const comment = {
       body: this.state.body,
       parentId: this.props.parentId
-    }
-    const call = commentsAPI.create(this.props.subject, comment)
-    const options = { adds: `comments-for-${this.props.subject.id}`}
+    };
+    const call = commentsAPI.create(this.props.subject, comment);
+    const options = { adds: `comments-for-${this.props.subject.id}` };
     this.props.dispatch(request(call, requests.rCommentCreate, options));
     this.props.cancel();
   }

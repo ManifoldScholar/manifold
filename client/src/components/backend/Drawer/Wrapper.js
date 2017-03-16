@@ -90,7 +90,7 @@ export default class DrawerWrapper extends PureComponent {
           this.props.title : null
         }
       </div>
-    )
+    );
   }
 
   renderDrawer() {
@@ -121,14 +121,11 @@ export default class DrawerWrapper extends PureComponent {
 
   renderChildren() {
     if (!this.props.children) return null;
-    if (isString(this.props.children.type)) {
-      return this.props.children;
-    } else {
-      return React.cloneElement(
-        this.props.children,
-        { closeDrawer: this.handleLeaveEvent }
-      );
-    }
+    if (isString(this.props.children.type)) return this.props.children;
+    return React.cloneElement(
+      this.props.children,
+      { closeDrawer: this.handleLeaveEvent }
+    );
   }
 
   renderDrawerWrapper() {
@@ -152,7 +149,7 @@ export default class DrawerWrapper extends PureComponent {
             </div>
           </Utility.LockBodyScroll>
         </div>
-      )
+      );
     }
 
     return this.renderDrawer();
