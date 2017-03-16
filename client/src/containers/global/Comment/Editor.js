@@ -29,12 +29,24 @@ class CommentEditor extends PureComponent {
     super(props);
 
     this.handleBodyChange = this.handleBodyChange.bind(this);
+    this.maybeSubmit = this.maybeSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
       body: props.body ? props.body : "",
       isPrivate: false
     };
+  }
+
+  componentDidMount() {
+    this.ci.focus();
+  }
+
+  maybeSubmit(event) {
+    if(event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
+      this.handleSubmit(event);
+    }
   }
 
   handleSubmit(event) {
@@ -69,6 +81,8 @@ class CommentEditor extends PureComponent {
       <div className="comment-editor">
         <form onSubmit={this.handleSubmit}>
           <textarea
+            ref={(ci) => { this.ci = ci; }}
+            onKeyUp={this.maybeSubmit}
             className={textClass}
             placeholder={'Reply to this annotation...'}
             onChange={this.handleBodyChange}
