@@ -35,8 +35,9 @@ class ResourceDetailGeneralContainer extends PureComponent {
             name="attributes[kind]"
             focusOnMount
             options={[
-              {label: "Image", value: "image"},
-              {label: "Video", value: "video"},
+              {label: "Select a resource type", value: ""},
+              {label: "Attachment", value: "attachment"},
+              {label: "Link", value: "link"},
             ]}
           />
           <Resource.Form.KindAttributes />

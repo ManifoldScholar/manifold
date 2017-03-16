@@ -12,14 +12,14 @@ export default class KindAttributes extends PureComponent {
 
   render() {
     switch (this.props.dirtyModel.attributes.kind) {
-      case "image":
-        return <Kind.Image {...this.props} />
-        break
-      case "video":
-        return <Kind.Video {...this.props} />
-        break
+      case "attachment":
+        return <Kind.Attachment {...this.props} />
+        break;
+      case "link":
+        return <Kind.Link {...this.props} />
+        break;
       default:
-        return null
+        return null;
         break;
     }
   }

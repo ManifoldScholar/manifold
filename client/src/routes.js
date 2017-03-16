@@ -70,6 +70,7 @@ export default () => {
         </Route>
         <Route component={Backend.ResourceDetail.Wrapper} path="resource/:id" >
           <IndexRoute component={Backend.ResourceDetail.General} />
+          <Route component={Backend.ResourceDetail.Metadata} path="metadata" />
         </Route>
         <Route component={Backend.Settings.Wrapper} path="settings" >
           <IndexRoute component={Backend.Settings.General} />

@@ -1,7 +1,7 @@
-import Image from './Image';
-import Video from './Video';
+import Attachment from './Attachment';
+import Link from './Link';
 
 export default {
-  Image,
-  Video
+  Attachment,
+  Link
 };

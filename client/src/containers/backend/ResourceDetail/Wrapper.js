@@ -106,6 +106,25 @@ class ResourceDetailWrapperContainer extends PureComponent {
     }, () => { this.closeDialog(); });
   }
 
+  activeChild() {
+    return get(this.props, 'children.type.activeNavItem');
+  }
+
+  secondaryNavigationLinks(resource) {
+    return [
+      {
+        path: `/backend/resource/${resource.id}/`,
+        label: "General",
+        key: "general"
+      },
+      {
+        path: `/backend/resource/${resource.id}/metadata`,
+        label: "Metadata",
+        key: "metadata"
+      }
+    ];
+  }
+
   renderUtility() {
     return (
       <div>
@@ -150,12 +169,27 @@ class ResourceDetailWrapperContainer extends PureComponent {
           subtitle={resource.attributes.subtitle}
         />
         <section className="backend-panel">
+          <aside className="scrollable">
+            <div className="wrapper">
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks(resource)}
+                active={this.activeChild()}
+              />
+            </div>
+          </aside>
           <div className="container">
+            <aside className="aside">
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks(resource)}
+                active={this.activeChild()}
+              />
+            </aside>
             <div className="panel">
               {React.cloneElement(this.props.children, { resource })}
             </div>
           </div>
         </section>
+
       </div>
     );
   }
