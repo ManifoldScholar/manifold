@@ -23,12 +23,13 @@ export default class TextNode extends Component {
     return values(openAnnotations).map((a) => {
       const id = a.id;
       const type = a.attributes.format;
+      const isCreator = a.attributes.currentUserIsCreator;
       const start = a.attributes.startNode === this.props.nodeUuid ? a.attributes.startChar : null;
       const end = a.attributes.endNode === this.props.nodeUuid ? a.attributes.endChar : null;
       const startNode = a.attributes.startNode;
       const endNode = a.attributes.endNode;
       const resourceId = a.attributes.resourceId;
-      return { id, type, start, end, startNode, endNode, resourceId };
+      return { id, type, isCreator, start, end, startNode, endNode, resourceId };
     });
   }
 
@@ -86,6 +87,7 @@ export default class TextNode extends Component {
     return chunks.map((chunk, index) => {
       const highlighted = map[index].find(a => a.type === "highlight");
       const underlined = map[index].find(a => a.type === "annotation");
+      const isCreator = map[index].find(a => a.isCreator);
       const lockedSelection = map[index].find(a => a.type === "selection");
       const resources = map[index].filter(a => a.type === "resource");
       let endingResources = [];
@@ -98,9 +100,11 @@ export default class TextNode extends Component {
       }
       const classes = classNames({
         'annotation-locked-selected primary': lockedSelection,
-        'annotation-underline primary': underlined,
-        'annotation-highlight primary': highlighted,
-        'annotation-resource primary': resources.length > 0,
+        'annotation-underline': underlined,
+        'annotation-highlight': highlighted,
+        'primary': isCreator,
+        'secondary': !isCreator,
+        'annotation-resource': resources.length > 0,
         'annotation-resource-start': resources && startingResources.length > 0,
         'annotation-resource-end': resources && endingResources.length > 0
       });

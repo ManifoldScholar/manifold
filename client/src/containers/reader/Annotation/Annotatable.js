@@ -7,10 +7,8 @@ import { Drawer, Dialog } from 'components/backend';
 import { Resource } from 'containers/reader';
 import { Resource as ResourceComponents } from 'components/reader';
 import fakeData from 'helpers/fakeData';
-import { resourcesAPI, annotationsAPI, requests } from 'api';
+import { annotationsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
-import uniq from 'lodash/uniq';
-import difference from 'lodash/difference';
 import isString from 'lodash/isString';
 const { request, flush } = entityStoreActions;
 
@@ -49,10 +47,6 @@ class Annotatable extends Component {
   componentDidMount() {
     document.addEventListener('mousedown', this.startSelection, false);
     document.addEventListener('keydown', this.handleKeyDown, false);
-    if (this.props.sectionId) {
-      this.fetchAnnotations(this.props);
-      this.fetchResources(this.props);
-    }
   }
 
   componentWillUnmount() {
@@ -60,42 +54,6 @@ class Annotatable extends Component {
     document.removeEventListener('mousedown', this.startSelection, false);
     document.removeEventListener('mouseup', this.updateSelection, false);
     document.removeEventListener('keydown', this.handleKeyDown, false);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // Fetch resources and annotations on section change.
-    if (nextProps.sectionId !== this.props.sectionId) {
-      this.fetchAnnotations(nextProps);
-      this.fetchResources(nextProps);
-    }
-    // Check if we need to fetch more resources when annotations change
-    if (nextProps.annotations !== this.props.annotations) {
-      if (this.hasMissingResources(nextProps.annotations, nextProps.resources)) {
-        this.fetchResources(nextProps);
-      }
-    }
-  }
-
-  fetchAnnotations(props) {
-    const annotationsCall = annotationsAPI.forSection(props.sectionId);
-    props.dispatch(request(annotationsCall, requests.rAnnotations));
-  }
-
-  fetchResources(props) {
-    const resourcesCall = resourcesAPI.forSection(props.sectionId);
-    props.dispatch(request(resourcesCall, requests.rResources));
-  }
-
-  hasMissingResources(annotations, resourcesIn) {
-    if (!annotations) return;
-    const resources = resourcesIn ? resourcesIn : [];
-    const needed = uniq(annotations
-      .map((a) => a.attributes.resourceId)
-      .filter((id) => id !== null));
-    const has = resources.map((r) => r.id);
-    const diff = difference(needed, has);
-    if (diff.length > 0) return true;
-    return false;
   }
 
   defaultState() {
@@ -417,7 +375,7 @@ class Annotatable extends Component {
         startChar={startChar}
         endNode={endNode}
         endChar={endChar}
-        createHandler={this.attachBodyToSelection}
+        createHandler={this.createAnnotation}
         truncate={600}
         annotating
       />
@@ -429,7 +387,7 @@ class Annotatable extends Component {
       <AnnotationContainers.List
         sectionId={this.props.sectionId}
         annotationIds={this.state.listAnnotations}
-        createHandler={this.attachBodyToSelection}
+        createHandler={this.createAnnotation}
       />
     );
   }
@@ -437,6 +395,12 @@ class Annotatable extends Component {
   render() {
     return (
       <div>
+        <div className="annotatable"
+             ref={(a) => { this.annotatable = a; }}
+             onClick={this.handlePossibleAnnotationClick}
+        >
+          { this.props.children ? Children.only(this.props.children) : null }
+        </div>
         <Drawer.Wrapper {...this.drawerProps()}>
           {this.renderDrawerContents()}
         </Drawer.Wrapper>
@@ -462,14 +426,9 @@ class Annotatable extends Component {
             containerSize={this.props.containerSize}
             fontSize={this.props.fontSize}
             body={this.props.body}
+            updates={this.props.updates}
           /> : null
         }
-        <div className="annotatable"
-             ref={(a) => { this.annotatable = a; }}
-             onClick={this.handlePossibleAnnotationClick}
-        >
-          { this.props.children ? Children.only(this.props.children) : null }
-        </div>
       </div>
     );
   }

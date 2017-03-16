@@ -7,10 +7,13 @@ export default class AnnotationSelectionEditor extends PureComponent {
   static displayName = "Annotation.Selection.Editor";
 
   static propTypes = {
-    annotation: PropTypes.object,
-    selection: PropTypes.object,
-    cancel: PropTypes.func,
-    createHandler: PropTypes.func,
+    subject: PropTypes.string.isRequired,
+    startNode: PropTypes.string.isRequired,
+    startChar: PropTypes.number.isRequired,
+    endNode: PropTypes.string.isRequired,
+    endChar: PropTypes.number.isRequired,
+    cancel: PropTypes.func.isRequired,
+    createHandler: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -28,7 +31,19 @@ export default class AnnotationSelectionEditor extends PureComponent {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.createHandler(this.state.body, this.state.isPrivate);
+    const { subject, startNode, startChar, endNode, endChar } = this.props;
+    const { body, isPrivate } = this.state;
+    const annotation = {
+      subject,
+      startNode,
+      startChar,
+      endNode,
+      endChar,
+      body,
+      isPrivate,
+      format: "annotation"
+    };
+    this.props.createHandler(annotation);
   }
 
   handleBodyChange(event) {

@@ -7,8 +7,7 @@ const {
   visibilityShow,
   panelToggle,
   panelHide,
-  panelShow,
-  annotationVisibilityToggle
+  panelShow
 } = uiVisibilityActions;
 const { addNotification, removeNotification, removeAllNotifications } = notificationActions;
 
@@ -30,8 +29,7 @@ const commonActions = (dispatch) => {
     visibilityShow: b((el) => visibilityShow(el), dispatch),
     panelToggle: b((el) => panelToggle(el), dispatch),
     panelHide: b((el) => panelHide(el), dispatch),
-    panelShow: b((el) => panelShow(el), dispatch),
-    annotationVisibilityToggle: b((el) => annotationVisibilityToggle(el), dispatch)
+    panelShow: b((el) => panelShow(el), dispatch)
   };
 };
 

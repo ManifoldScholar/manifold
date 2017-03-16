@@ -6,8 +6,10 @@ import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
 import { Header, Footer, FooterMenu, Section } from 'components/reader';
 import { entityUtils } from 'utils';
 import { commonActions } from 'actions/helpers';
-import { textsAPI, sectionsAPI, annotationsAPI, requests } from 'api';
+import { resourcesAPI, textsAPI, sectionsAPI, annotationsAPI, requests } from 'api';
 import values from 'lodash/values';
+import uniq from 'lodash/uniq';
+import difference from 'lodash/difference';
 
 import {
   authActions,
@@ -102,13 +104,41 @@ class ReaderContainer extends Component {
     this.commonActions = commonActions(this.props.dispatch);
   }
 
+  componentDidMount() {
+    if (this.props.params.sectionId) {
+      this.fetchAnnotations(this.props);
+      this.fetchResources(this.props);
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
+    // Fetch resources and annotations on section change.
+    if (nextProps.params.sectionId !== this.props.params.sectionId) {
+      this.fetchAnnotations(nextProps);
+      this.fetchResources(nextProps);
+    }
+    // Check if we need to fetch more resources when annotations change
+    if (nextProps.annotations !== this.props.annotations) {
+      if (this.hasMissingResources(nextProps.annotations, nextProps.resources)) {
+        this.fetchResources(nextProps);
+      }
+    }
     this.maybeRedirect(nextProps);
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.rSection));
     this.props.dispatch(flush(requests.rText));
+  }
+
+  fetchAnnotations(props) {
+    const annotationsCall = annotationsAPI.forSection(props.params.sectionId);
+    props.dispatch(request(annotationsCall, requests.rAnnotations));
+  }
+
+  fetchResources(props) {
+    const resourcesCall = resourcesAPI.forSection(props.params.sectionId);
+    props.dispatch(request(resourcesCall, requests.rResources));
   }
 
   maybeRedirect(props) {
@@ -118,6 +148,19 @@ class ReaderContainer extends Component {
         browserHistory.push(`/read/${props.text.id}/section/${startTextSectionId}`);
       }
     }
+  }
+
+
+  hasMissingResources(annotations, resourcesIn) {
+    if (!annotations) return;
+    const resources = resourcesIn ? resourcesIn : [];
+    const needed = uniq(annotations
+      .map((a) => a.attributes.resourceId)
+      .filter((id) => id !== null));
+    const has = resources.map((r) => r.id);
+    const diff = difference(needed, has);
+    if (diff.length > 0) return true;
+    return false;
   }
 
   makeReaderActions = (dispatch) => {

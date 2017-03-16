@@ -10,6 +10,7 @@ export default class Text extends Component {
 
   static propTypes = {
     text: PropTypes.object,
+    authentication: PropTypes.object,
     section: PropTypes.object,
     resources: PropTypes.array,
     annotations: PropTypes.array,
@@ -19,7 +20,8 @@ export default class Text extends Component {
     authentication: PropTypes.object,
     params: PropTypes.object,
     children: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    visibility: PropTypes.object
   };
 
   static contextTypes = {
@@ -30,6 +32,11 @@ export default class Text extends Component {
     super(props);
     this.state = {
       lockedSelection: null,
+      filteredAnnotations: this.filterAnnotations(
+        props.visibility.annotation,
+        props.annotations,
+        props.authentication.currentUser
+      )
     };
     this.lockSelection = this.lockSelection.bind(this);
     this.recordBodyDomUpdate = this.recordBodyDomUpdate.bind(this);
@@ -40,9 +47,33 @@ export default class Text extends Component {
     this.recordBodyDomUpdate();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (
+      (nextProps.visibility.annotation != this.props.visibility.annotation) ||
+      (nextProps.annotations != this.props.annotations)
+    ) {
+      const filteredAnnotations = this.filterAnnotations(
+        nextProps.visibility.annotation,
+        nextProps.annotations,
+        this.props.authentication.currentUser
+      );
+      this.setState({filteredAnnotations});
+    }
+  }
+
   componentDidUpdate(prevProps) {
     this.maybeScrollToTop(prevProps.section, this.props.section);
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
+  }
+
+  filterAnnotations(visibility, annotations, currentUser) {
+    if (visibility === 0) return [];
+    if (visibility === 1) {
+      return annotations.filter((a) => {
+        return a.attributes.format === "resource" || a.attributes.currentUserIsCreator === true
+      });
+    }
+    return annotations;
   }
 
   // We need a callback from the body to let us know when it updates. We can then pass
@@ -128,7 +159,7 @@ export default class Text extends Component {
             sectionId={this.props.params.sectionId}
             lockSelection={this.lockSelection}
             resources={this.props.resources}
-            annotations={this.props.annotations}
+            annotations={this.state.filteredAnnotations}
             containerSize={typography.margins.current}
             fontSize={typography.fontSize.current}
             body={this.body}
@@ -139,7 +170,7 @@ export default class Text extends Component {
                   <Section.Body
                     didUpdateCallback={this.recordBodyDomUpdate}
                     lockedSelection={this.state.lockedSelection}
-                    annotations={this.props.annotations}
+                    annotations={this.state.filteredAnnotations}
                     section={this.props.section}
                   />
                 </div>
