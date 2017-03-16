@@ -118,6 +118,11 @@ class ResourceDetailWrapperContainer extends PureComponent {
         key: "general"
       },
       {
+        path: `/backend/resource/${resource.id}/content`,
+        label: "Content",
+        key: "content"
+      },
+      {
         path: `/backend/resource/${resource.id}/metadata`,
         label: "Metadata",
         key: "metadata"

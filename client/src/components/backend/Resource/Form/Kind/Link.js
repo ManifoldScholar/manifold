@@ -13,16 +13,9 @@ export default class ResourceFormKindLink extends PureComponent {
       <div className="form-section">
         <Form.TextInput
           focusOnMount
-          label="A Link Field"
-          name="attributes[linkField]"
-          placeholder="A Link-Specific Field"
-          {...this.props}
-        />
-        <Form.TextInput
-          focusOnMount
-          label="Another Link Field"
-          name="attributes[anotherLinkField]"
-          placeholder="Another Link-Specific Field"
+          label="Link URL"
+          name="attributes[externalUrl]"
+          placeholder="Enter link url"
           {...this.props}
         />
       </div>

@@ -9,6 +9,7 @@ export default class FormSelect extends Component {
 
   static propTypes = {
     ...sharedPropsValidation,
+    selected: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.any.isRequired,
       label: PropTypes.string.isRequired
@@ -33,7 +34,7 @@ export default class FormSelect extends Component {
         <Form.Connect.Set {...this.props} >
           <div className="form-select">
             <i className="manicon manicon-caret-down"></i>
-            <select>
+            <select defaultValue={this.props.selected}>
               {options}
             </select>
           </div>
