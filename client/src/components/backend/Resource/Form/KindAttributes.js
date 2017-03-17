@@ -12,17 +12,27 @@ export default class KindAttributes extends PureComponent {
 
   render() {
     switch (this.props.resourceKind) {
-      case "attachment":
-        return <Kind.Attachment {...this.props} />;
+      case "image":
+        return <Kind.Image {...this.props}/>;
+        break;
+      case "video":
+        return <Kind.Video {...this.props}/>;
+        break;
+      case "audio":
+        return <Kind.Audio {...this.props}/>;
+        break;
+      case "interactive":
+        return <Kind.Interactive {...this.props}/>;
         break;
       case "link":
-        return <Kind.Link {...this.props} />;
+        return <Kind.Link {...this.props}/>;
         break;
-      case "externalVideo":
-        return <Kind.ExternalVideo {...this.props} />;
-        break;
-      default:
-        return null;
+      case "spreadsheet":
+      case "document":
+      case "presentation":
+      case "pdf":
+      case "file":
+        return <Kind.File {...this.props}/>;
         break;
     }
   }

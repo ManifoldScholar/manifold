@@ -1,20 +1,25 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form } from 'components/backend';
 
-export default class ResourceFormAttachmentTypeAudio extends PureComponent {
+export default class ResourceFormKindFile extends PureComponent {
 
-  static displayName = "Resource.Form.AttachmentType.Audio";
+  static displayName = "Resource.Form.Kind.File";
 
   static propTypes = {
+    fileType: PropTypes.string
   };
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
       <Form.TextInput
         focusOnMount
-        label="Audio"
+        label="File"
         name="attributes[fake]"
-        placeholder="It's an audio file"
+        placeholder="It's a file"
         {...this.props}
       />
     )

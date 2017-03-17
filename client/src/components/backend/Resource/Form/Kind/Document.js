@@ -1,9 +1,9 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form } from 'components/backend';
 
-export default class ResourceFormAttachmentTypeFile extends PureComponent {
+export default class ResourceFormKindDocument extends PureComponent {
 
-  static displayName = "Resource.Form.AttachmentType.File";
+  static displayName = "Resource.Form.Kind.Document";
 
   static propTypes = {
   };
@@ -12,9 +12,9 @@ export default class ResourceFormAttachmentTypeFile extends PureComponent {
     return (
       <Form.TextInput
         focusOnMount
-        label="File"
+        label="Document"
         name="attributes[fake]"
-        placeholder="It's a file"
+        placeholder="It's a document"
         {...this.props}
       />
     )

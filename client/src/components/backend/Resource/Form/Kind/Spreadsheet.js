@@ -1,9 +1,9 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form } from 'components/backend';
 
-export default class ResourceFormAttachmentTypeVideo extends PureComponent {
+export default class ResourceFormKindSpreadsheet extends PureComponent {
 
-  static displayName = "Resource.Form.AttachmentType.Video";
+  static displayName = "Resource.Form.Kind.Spreadsheet";
 
   static propTypes = {
   };
@@ -12,9 +12,9 @@ export default class ResourceFormAttachmentTypeVideo extends PureComponent {
     return (
       <Form.TextInput
         focusOnMount
-        label="Video"
+        label="Spreadsheet"
         name="attributes[fake]"
-        placeholder="It's a video file"
+        placeholder="It's a spreadsheet"
         {...this.props}
       />
     )
