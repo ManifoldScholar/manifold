@@ -8,7 +8,7 @@ module Api
       resourceful! Comment, authorize_options: { except: [:index, :show] } do
         Comment.filter(
           with_pagination!(comment_filter_params),
-          scope: @subject.comments
+          scope: comment_scope
         )
       end
 
@@ -40,17 +40,17 @@ module Api
 
       def update
         @comment = load_and_authorize_comment
-        ::Updaters::Default.new(comment_params).update(@comment)
+        ::Updaters::Default.new(comment_params(@comment)).update(@comment)
         render_single_resource(
           @comment,
           location: comment_location(@comment)
         )
       end
 
-      # def destroy
-      #   @project = load_and_authorize_project
-      #   @project.destroy
-      # end
+      def destroy
+        @comment = load_and_authorize_comment
+        @comment.destroy
+      end
 
       private
 
@@ -68,6 +68,10 @@ module Api
         elsif @subject.is_a? Resource
           api_v1_resource_relationships_comments_path(@subject)
         end
+      end
+
+      def comment_scope
+        @subject.nil? ? Comment.all : @subject.comments
       end
 
       def set_subject

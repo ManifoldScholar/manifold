@@ -107,6 +107,7 @@ export default class AnnotationDetail extends PureComponent {
             />
             : null
           }
+
         </nav>
         <CommentContainer.Thread subject={annotation} />
       </li>

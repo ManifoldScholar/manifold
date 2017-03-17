@@ -1,5 +1,6 @@
 import get from 'lodash/get';
 import isObject from 'lodash/isObject';
+import isString from 'lodash/isString';
 import has from 'lodash/has';
 import setWith from 'lodash/setWith';
 import memoize from 'lodash/memoize';
@@ -128,4 +129,16 @@ export function meta(requestMeta, entityStore) {
 
 export function constantizeMeta(metaKey) {
   return `${metaKey.toUpperCase().replace(/-/g, '_')}`;
+}
+
+export const entityTypeMap = {
+  annotations: "annotation",
+  resources: "resource"
+};
+
+export function singularEntityName(entity) {
+  if (!entity) return null;
+  if (!entity.type) return null;
+  if (isString(entity.type) && entityTypeMap[entity.type]) return entityTypeMap[entity.type];
+  return entity.type;
 }

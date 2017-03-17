@@ -22,11 +22,20 @@ class CommentThread extends PureComponent {
   static propTypes = {
     subject: PropTypes.object.isRequired,
     parentId: PropTypes.string,
-    parentAuthor: PropTypes.string
+    parent: PropTypes.object
   }
 
   static defaultProps = {
     parentId: null
+  }
+
+  constructor(props) {
+    super(props);
+    this.handleCommentDelete = this.handleCommentDelete.bind(this);
+    this.handleCommentDestroy = this.handleCommentDestroy.bind(this);
+    this.handleCommentRestore = this.handleCommentRestore.bind(this);
+    this.handleCommentFlag = this.handleCommentFlag.bind(this);
+    this.handleCommentUnflag = this.handleCommentUnflag.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +43,32 @@ class CommentThread extends PureComponent {
       const call = commentsAPI.index(this.props.subject);
       this.props.dispatch(request(call, `comments-for-${this.props.subject.id}`));
     }
+  }
+
+  handleCommentDestroy(event, comment) {
+    const call = commentsAPI.destroy(comment);
+    const options = { removes: { type: "comments", id: comment.id } };
+    this.props.dispatch(request(call, requests.rCommentDestroy, options));
+  }
+
+  handleCommentDelete(event, comment) {
+    const call = commentsAPI.update(comment.id, { attributes: { deleted: true } });
+    this.props.dispatch(request(call, requests.rCommentUpdate));
+  }
+
+  handleCommentRestore(event, comment) {
+    const call = commentsAPI.update(comment.id, { attributes: { deleted: false } });
+    this.props.dispatch(request(call, requests.rCommentUpdate));
+  }
+
+  handleCommentFlag(event, comment) {
+    const call = commentsAPI.flag(comment);
+    this.props.dispatch(request(call, requests.rCommentFlag));
+  }
+
+  handleCommentUnflag(event, comment) {
+    const call = commentsAPI.unflag(comment);
+    this.props.dispatch(request(call, requests.rCommentUnflag));
   }
 
   childrenOf(parentId) {
@@ -55,6 +90,13 @@ class CommentThread extends PureComponent {
                 subject={this.props.subject}
                 key={comment.id}
                 comment={comment}
+                parent={this.props.parent}
+                checkForChildren={this.checkForChildren}
+                handleDelete={this.handleCommentDelete}
+                handleRestore={this.handleCommentRestore}
+                handleDestroy={this.handleCommentDestroy}
+                handleFlag={this.handleCommentFlag}
+                handleUnflag={this.handleCommentUnflag}
               />
             );
           })}

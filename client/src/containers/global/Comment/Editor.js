@@ -7,7 +7,7 @@ import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { commentsAPI } from 'api';
 const { request, flush } = entityStoreActions;
-const { select, meta } = entityUtils;
+const { select, meta, singularEntityName } = entityUtils;
 
 class CommentEditor extends PureComponent {
 
@@ -19,6 +19,8 @@ class CommentEditor extends PureComponent {
   }
 
   static propTypes = {
+    comment: PropTypes.object,
+    placeholder: PropTypes.string,
     body: PropTypes.string,
     cancel: PropTypes.func.isRequired,
     subject: PropTypes.object.isRequired,
@@ -29,49 +31,93 @@ class CommentEditor extends PureComponent {
     super(props);
 
     this.handleBodyChange = this.handleBodyChange.bind(this);
-    this.maybeSubmit = this.maybeSubmit.bind(this);
+    this.submitOnReturnKey = this.submitOnReturnKey.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      body: props.body ? props.body : "",
-      isPrivate: false
+      body: ""
     };
+    if (this.isEdit(props)) this.state.body = props.comment.attributes.body;
   }
 
   componentDidMount() {
     this.ci.focus();
   }
 
-  maybeSubmit(event) {
-    if(event.keyCode === 13 && !event.shiftKey) {
+  submitOnReturnKey(event) {
+    if (event.keyCode === 13 && !event.shiftKey) {
       event.preventDefault();
+      event.stopPropagation();
       this.handleSubmit(event);
     }
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const comment = {
-      body: this.state.body,
-      parentId: this.props.parentId
-    };
-    const call = commentsAPI.create(this.props.subject, comment);
-    const options = { adds: `comments-for-${this.props.subject.id}` };
+    if (this.isEdit(this.props)) return this.updateComment(this.props, this.state);
+    return this.createComment(this.props, this.state);
+  }
+
+  createComment(props, state) {
+    const comment = this.commentFromPropsAndState(props, state);
+    const call = commentsAPI.create(props.subject, comment);
+    const options = { adds: `comments-for-${props.subject.id}` };
     this.props.dispatch(request(call, requests.rCommentCreate, options));
     this.props.cancel();
+  }
+
+  updateComment(props, state) {
+    const comment = this.commentFromPropsAndState(props, state);
+    const call = commentsAPI.update(props.comment.id, comment);
+    const options = { adds: `comments-for-${props.subject.id}` };
+    this.props.dispatch(request(call, requests.rCommentCreate, options));
+    this.props.cancel();
+  }
+
+  commentFromPropsAndState(props, state) {
+    return {
+      body: state.body,
+      parentId: props.parentId
+    };
   }
 
   handleBodyChange(event) {
     this.setState({ body: event.target.value });
   }
 
-  render() {
+  isEdit(props) {
+    return this.mode(props) === "edit";
+  }
 
-    const checkClass = classNames(
-        'form-toggle',
-        'checkbox',
-        { checked: this.state.isPrivate }
-    );
+  isReply(props) {
+    return this.mode(props) === "reply";
+  }
+
+  isComment(props) {
+    return this.mode(props) === "comment";
+  }
+
+  mode(props) {
+    if (props.comment) return "edit";
+    if (props.parentId) return "reply";
+    return "comment";
+  }
+
+  placeholder(props) {
+    if (props.placeholder) return props.placeholder;
+    if (this.isEdit(props)) return "Edit this comment...";
+    if (this.isReply(props)) return "Reply to this comment...";
+    if (this.isComment(props)) {
+      return `Discuss this ${singularEntityName(props.subject)}...`;
+    }
+  }
+
+  buttonLabel(props) {
+    if (this.isEdit(props)) return "Update";
+    return "Post";
+  }
+
+  render() {
 
     const textClass = classNames({
       expanded: this.state.body
@@ -82,9 +128,9 @@ class CommentEditor extends PureComponent {
         <form onSubmit={this.handleSubmit}>
           <textarea
             ref={(ci) => { this.ci = ci; }}
-            onKeyUp={this.maybeSubmit}
+            onKeyDown={this.submitOnReturnKey}
             className={textClass}
-            placeholder={'Reply to this annotation...'}
+            placeholder={this.placeholder(this.props)}
             onChange={this.handleBodyChange}
             value={this.state.body}
           />
@@ -100,7 +146,7 @@ class CommentEditor extends PureComponent {
                 className="button-secondary"
                 disabled={!this.state.body}
               >
-                Post
+                {this.buttonLabel(this.props)}
               </button>
             </div>
           </div>

@@ -25,6 +25,10 @@
     text-align: right;
     background-color: $neutral10;
 
+    .annotation-comment & {
+      margin: 0;
+    }
+
     .buttons {
       display: inline-block;
     }

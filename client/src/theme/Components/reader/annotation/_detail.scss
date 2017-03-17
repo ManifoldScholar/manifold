@@ -50,6 +50,12 @@
       }
     }
 
+    .deleted-notification {
+      @include subtitlePrimary;
+      margin-top: 0;
+      color: $neutral70;
+    }
+
     datetime {
       @include subtitlePrimary;
       margin-top: 2px;
@@ -77,7 +83,7 @@
   }
 
   // Direct scoping because nested comments also have utility
-  > .utility {
+  .utility {
     margin-top: 5px;
 
     > ul {

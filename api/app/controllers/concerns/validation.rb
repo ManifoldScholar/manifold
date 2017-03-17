@@ -65,9 +65,10 @@ module Validation
     params.permit(param_config)
   end
 
-  def comment_params
+  def comment_params(comment = nil)
     params.require(:data)
-    attributes = [:body, :parent_id]
+    attributes = [:body, :parent_id, :deleted]
+    attributes.push :deleted if comment && current_user.can_delete?(comment)
     relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

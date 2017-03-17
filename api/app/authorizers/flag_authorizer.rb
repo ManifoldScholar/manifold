@@ -1,7 +1,7 @@
-class CommentAuthorizer < ApplicationAuthorizer
+class FlagAuthorizer < ApplicationAuthorizer
 
   def self.readable_by?(_user)
-    true
+    false
   end
 
   def self.creatable_by?(_user)
@@ -13,11 +13,11 @@ class CommentAuthorizer < ApplicationAuthorizer
   end
 
   def self.updatable_by?(_user)
-    true
+    false
   end
 
   def readable_by?(_user)
-    true
+    false
   end
 
   def creatable_by?(_user)
@@ -28,12 +28,8 @@ class CommentAuthorizer < ApplicationAuthorizer
     resource.creator == user || user.admin?
   end
 
-  def updatable_by?(user)
-    resource.creator == user || user.admin?
-  end
-
-  def readable_if_deleted_by?(user)
-    user.admin?
+  def updatable_by?(_user)
+    false
   end
 
 end

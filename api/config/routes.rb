@@ -8,12 +8,16 @@ Rails.application.routes.draw do
       resources :pages
       resources :subjects
       resources :categories, except: [:create, :index]
-
       resources :makers
       resources :texts
       resource :statistics, only: [:show]
-
       resource :settings, except: [:destroy, :create]
+
+      resources :comments, only: [:show, :update, :destroy] do
+        namespace :relationships do
+          resource :flags, controller: "/api/v1/flags", only: [:create, :destroy]
+        end
+      end
 
       resources :annotations, only: [:show, :destroy], controller: "text_sections/relationships/annotations" do
         namespace :relationships do
