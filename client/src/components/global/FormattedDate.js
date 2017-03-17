@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
+import distanceInWords from 'date-fns/distance_in_words';
 import isDate from 'lodash/isDate';
 
 export default class FormattedDate extends Component {
@@ -19,6 +20,7 @@ export default class FormattedDate extends Component {
   formatDate(date) {
     if (!date) return;
     const out = isDate(date) ? date : parse(date);
+    if (this.props.format === "distanceInWords") return distanceInWords(out, Date.now());
     const outFormat = this.props.format ? this.props.format : 'MMMM DD, YYYY';
     return format(out, outFormat);
   }
