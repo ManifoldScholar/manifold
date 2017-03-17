@@ -22,7 +22,6 @@ export default class ResourceViewerWrapper extends PureComponent {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.updates !== nextProps.updates) return true;
     if (this.props.annotations !== nextProps.annotations) return true;
     if (this.props.activeAnnotation !== nextProps.activeAnnotation) return true;
     if (this.props.resources !== nextProps.resources) return true;

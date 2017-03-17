@@ -2,23 +2,25 @@ import React, { Component, PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
-import { Resource, Annotation, Section } from 'components/reader';
+import { Resource, Section } from 'components/reader';
+import { Annotation } from 'containers/reader';
 import has from 'lodash/has';
 
 export default class Text extends Component {
 
   static propTypes = {
     text: PropTypes.object,
+    authentication: PropTypes.object,
     section: PropTypes.object,
     resources: PropTypes.array,
     annotations: PropTypes.array,
     appearance: PropTypes.object,
     location: PropTypes.object,
     createAnnotation: PropTypes.func,
-    authentication: PropTypes.object,
     params: PropTypes.object,
     children: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    visibility: PropTypes.object
   };
 
   static contextTypes = {
@@ -29,15 +31,31 @@ export default class Text extends Component {
     super(props);
     this.state = {
       lockedSelection: null,
-      updates: 0
+      filteredAnnotations: this.filterAnnotations(
+        props.visibility.annotation,
+        props.annotations,
+        props.authentication.currentUser
+      )
     };
     this.lockSelection = this.lockSelection.bind(this);
-    this.recordBodyDomUpdate = this.recordBodyDomUpdate.bind(this);
   }
 
   componentDidMount() {
     this.maybeScrollToAnchor(null, this.props.location.hash);
-    this.recordBodyDomUpdate();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      (nextProps.visibility.annotation !== this.props.visibility.annotation) ||
+      (nextProps.annotations !== this.props.annotations)
+    ) {
+      const filteredAnnotations = this.filterAnnotations(
+        nextProps.visibility.annotation,
+        nextProps.annotations,
+        this.props.authentication.currentUser
+      );
+      this.setState({ filteredAnnotations });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -45,20 +63,18 @@ export default class Text extends Component {
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
 
-  // We need a callback from the body to let us know when it updates. We can then pass
-  // that information down to the Resource viewer, which absolutely has to look at the
-  // body's rendered DOM in order to determine the position of each marker.
-  //
-  // At some future point, we may want to refactor this a bit. It might make sense, for
-  // example, to have the section pass a callback down to the markers, which can trigger
-  // it and report their position when they are rendered. That would help avoid the
-  // cross cutting inspection that the resource viewer wrapper is currently doing.
-  recordBodyDomUpdate() {
-    this.setState({ updates: this.state.updates + 1 });
+  filterAnnotations(visibility, annotations, currentUser) {
+    if (visibility === 0) return [];
+    if (visibility === 1) {
+      return annotations.filter((a) => {
+        return a.attributes.format === "resource" || a.attributes.currentUserIsCreator === true;
+      });
+    }
+    return annotations;
   }
 
-  // Store the current locked selection in the section, which wrapps the annotator and
-  // the body. This locked selectino is then passed down to the body, which needs to
+  // Store the current locked selection in the section, which wraps the annotator and
+  // the body. This locked selection is then passed down to the body, which needs to
   // render it in the text.
   lockSelection(raw) {
     if (!raw) return this.setState({ lockedSelection: null });
@@ -121,32 +137,24 @@ export default class Text extends Component {
     return (
       <div>
         <section className={readerAppearanceClass}>
-          {this.props.resources ?
-            <Resource.Viewer.Wrapper
-              sectionId={this.props.params.sectionId}
-              textId={this.props.params.textId}
-              updates={this.state.updates}
-              resources={this.props.resources}
-              annotations={this.props.annotations}
-              containerSize={typography.margins.current}
-              fontSize={typography.fontSize.current}
-              body={this.body}
-            /> : null
-          }
           <Annotation.Annotatable
             currentUser={this.props.authentication.currentUser}
+            textId={this.props.params.textId}
             projectId={this.props.text.relationships.project.id}
             sectionId={this.props.params.sectionId}
-            createAnnotation={this.props.createAnnotation}
             lockSelection={this.lockSelection}
+            resources={this.props.resources}
+            annotations={this.state.filteredAnnotations}
+            containerSize={typography.margins.current}
+            fontSize={typography.fontSize.current}
+            body={this.body}
           >
             <div className={containerClass}>
               <div className={textSectionClass} >
                 <div ref={(b) => { this.body = b; }}>
                   <Section.Body
-                    didUpdateCallback={this.recordBodyDomUpdate}
                     lockedSelection={this.state.lockedSelection}
-                    annotations={this.props.annotations}
+                    annotations={this.state.filteredAnnotations}
                     section={this.props.section}
                   />
                 </div>

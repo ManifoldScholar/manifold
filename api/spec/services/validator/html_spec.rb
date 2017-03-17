@@ -41,13 +41,14 @@ RSpec.describe Validator::Html do
     expect(validator.validate(fragment).delete("\n")).to eq(fragment)
   end
 
-  Validator::Constants::TAG_ATTRIBUTE_BLACKLIST.each do |attr|
-    it "should remove blacklisted #{attr} attribute" do
-      fragment = "<div #{attr}=\"value\"></div>"
-      expect(validator.validate(fragment).include?("#{attr}=")).to eq(false)
+  describe "some context" do
+    Validator::Constants::TAG_ATTRIBUTE_BLACKLIST.each do |attr|
+      it "should remove blacklisted #{attr} attribute" do
+        fragment = "<div #{attr}=\"value\"></div>"
+        expect(validator.validate(fragment).include?("#{attr}=")).to eq(false)
+      end
     end
   end
-
   Validator::Constants::CSS_PROPERTY_BLACKLIST.each do |prop|
     it "should remove blacklisted #{prop} CSS property" do
       fragment = "<div style=\"#{prop}: value\"></div>"

@@ -43,7 +43,7 @@ module Validation
   def annotation_params
     params.require(:data)
     attributes = [:start_node, :end_node, :start_char, :end_char, :section_id, :format,
-                  :subject]
+                  :subject, :body, :private]
     relationships = [:resource]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -61,6 +61,15 @@ module Validation
     params.require(:data).require(:relationships).require(:favoritable).require(:data)
     attributes = []
     relationships = [:favoritable]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def comment_params(comment = nil)
+    params.require(:data)
+    attributes = [:body, :parent_id, :deleted]
+    attributes.push :deleted if comment && current_user.can_delete?(comment)
+    relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
@@ -120,7 +129,7 @@ module Validation
   end
 
   def collection_filter_params
-    params.permit(filter: [])
+    params.permit(filter: [])[:filter]
   end
 
   def resource_filter_params
@@ -128,8 +137,21 @@ module Validation
                            :project, :collection])[:filter]
   end
 
+  def comment_filter_params
+    params.permit(filter: [])[:filter]
+  end
+
   def user_filter_params
     params.permit(filter: [:keyword, :typeahead])[:filter]
+  end
+
+  def annotation_filter_params
+    # Client tends to pass indexes in the array of values, which makes rails reader it
+    # as a hash. We're coercing the hash to an array here, before it hits strong params.
+    if params.dig(:filter, :ids).respond_to? :values
+      params[:filter][:ids] = params[:filter][:ids].values
+    end
+    params.permit(filter: [ids: []])[:filter]
   end
 
   def project_filter_params

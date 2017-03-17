@@ -21,3 +21,14 @@ export function possessivize(str) {
   }
   return out;
 }
+
+// Thanks, darkskyapp
+// https://github.com/darkskyapp/string-hash/blob/master/index.js
+export function hash(str) {
+  let out = 5381;
+  let i = str.length;
+  while (i) {
+    out = (out * 33) ^ str.charCodeAt(--i);
+  }
+  return out >>> 0;
+}

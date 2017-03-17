@@ -104,71 +104,77 @@ class MakersEditContainer extends PureComponent {
      */
     return (
       <Drawer.Wrapper
+        open
         closeUrl="/backend/people/makers"
       >
-        {
-          this.state.confirmation ?
-            <Dialog.Confirm {...this.state.confirmation} />
-            : null
-        }
-        <header className="drawer-header">
-          <h2 className="heading-quaternary">
-            {`${attr.firstName} ${attr.lastName}`}
-          </h2>
-          <div className="buttons-bare-vertical">
-            <button className="button-bare-primary">
-              {'Reset Password'}
-              <i className="manicon manicon-key"></i>
-            </button><br/>
-            <button
-              className="button-bare-primary"
-              onClick={(event) => { this.handleMakerDestroy(event, this.props.maker); }}
+        <div>
+          {
+            this.state.confirmation ?
+              <Dialog.Confirm {...this.state.confirmation} />
+              : null
+          }
+          <header className="drawer-header">
+            <h2 className="heading-quaternary">
+              {`${attr.firstName} ${attr.lastName}`}
+            </h2>
+            <div className="buttons-bare-vertical">
+              <button className="button-bare-primary">
+                {'Reset Password'}
+                <i className="manicon manicon-key"></i>
+              </button><br/>
+              <button
+                className="button-bare-primary"
+                onClick={(event) => { this.handleMakerDestroy(event, this.props.maker); }}
+              >
+                {'Delete Maker'}
+                <i className="manicon manicon-trashcan"></i>
+              </button>
+            </div>
+          </header>
+          <section className="form-section">
+            <FormContainer.Form
+              route={this.props.routes[this.props.routes.length - 1]}
+              model={this.props.maker}
+              name="backend-maker-update"
+              update={makersAPI.update}
+              create={makersAPI.create}
+              className="form-secondary"
             >
-              {'Delete Maker'}
-              <i className="manicon manicon-trashcan"></i>
-            </button>
-          </div>
-        </header>
-
-        <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
-          model={this.props.maker}
-          name="backend-maker-update"
-          update={makersAPI.update}
-          create={makersAPI.create}
-          className="form-secondary"
-        >
-          <Form.TextInput
-            label="First Name"
-            name="attributes[firstName]"
-            placeholder="First Name"
-          />
-          <Form.TextInput
-            label="Last Name"
-            name="attributes[lastName]"
-            placeholder="Last Name"
-          />
-          <Form.Upload
-            style="square"
-            accepts="images"
-            label="Avatar Image"
-            current={this.props.maker.attributes.avatarStyles.smallSquare}
-            name="attributes[avatar]"
-            remove="attributes[removeAvatar]"
-          />
-          <Form.Save
-            text="Save Maker"
-          />
-        </FormContainer.Form>
-        <form className="form-secondary">
-          <FormContainer.UserClaims
-            label="Users"
-            placeholder="Add an associated user"
-            api={makersAPI}
-            entity={maker}
-            onChange={this.updateUsers}
-          />
-        </form>
+              <Form.TextInput
+                label="First Name"
+                name="attributes[firstName]"
+                placeholder="First Name"
+              />
+              <Form.TextInput
+                label="Last Name"
+                name="attributes[lastName]"
+                placeholder="Last Name"
+              />
+              <Form.Upload
+                style="square"
+                accepts="images"
+                label="Avatar Image"
+                current={this.props.maker.attributes.avatarStyles.smallSquare}
+                name="attributes[avatar]"
+                remove="attributes[removeAvatar]"
+              />
+              <Form.Save
+                text="Save Maker"
+              />
+            </FormContainer.Form>
+          </section>
+          <section className="form-section">
+            <form className="form-secondary">
+              <FormContainer.UserClaims
+                label="Users"
+                placeholder="Add an associated user"
+                api={makersAPI}
+                entity={maker}
+                onChange={this.updateUsers}
+              />
+            </form>
+          </section>
+        </div>
       </Drawer.Wrapper>
     );
   }
