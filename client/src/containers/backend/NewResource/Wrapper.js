@@ -17,11 +17,23 @@ class NewResourceWrapperContainer extends PureComponent {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      resourceKind: 'image'
+    };
+
     this.handleSuccess = this.handleSuccess.bind(this);
+    this.setResourceKind = this.setResourceKind.bind(this);
   }
 
   redirectToResource(resource) {
     browserHistory.push(`/backend/resource/${resource.id}`);
+  }
+
+  setResourceKind(kind) {
+    this.setState({
+      resourceKind: kind
+    });
   }
 
   handleSuccess(resource) {
@@ -43,6 +55,10 @@ class NewResourceWrapperContainer extends PureComponent {
         <section className="backend-panel">
           <div className="container">
             <div className="panel">
+              <Resource.Form.KindPicker
+                kind={this.state.resourceKind}
+                setKind={this.setResourceKind}
+              />
               <FormContainer.Form
                 route={this.props.routes[this.props.routes.length - 1]}
                 model={this.props.resource}
