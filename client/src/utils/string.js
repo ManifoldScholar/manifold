@@ -25,10 +25,10 @@ export function possessivize(str) {
 // Thanks, darkskyapp
 // https://github.com/darkskyapp/string-hash/blob/master/index.js
 export function hash(str) {
-  let hash = 5381;
+  let out = 5381;
   let i = str.length;
-  while(i) {
-    hash = (hash * 33) ^ str.charCodeAt(--i);
+  while (i) {
+    out = (out * 33) ^ str.charCodeAt(--i);
   }
-  return hash >>> 0;
+  return out >>> 0;
 }
