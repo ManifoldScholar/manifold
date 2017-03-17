@@ -393,6 +393,7 @@ const backendEditors = [
   }
 ];
 
+
 export default {
   resources,
   events,
