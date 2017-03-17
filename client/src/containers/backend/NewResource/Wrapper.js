@@ -119,10 +119,9 @@ class NewResourceWrapperContainer extends PureComponent {
                   placeholder="Enter a description"
                 />
                 {this.renderFormSectionForKind()}
-                <Form.TextInput
-                  label="Temporary Kind Field"
+                <Form.Hidden
                   name="attributes[kind]"
-                  placeholder="Manually type in kind for now"
+                  value={this.state.resourceKind}
                 />
                 <Form.Save
                   text="Save and continue"
