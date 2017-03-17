@@ -34,7 +34,7 @@ module Validation
     params.require(:data)
     attributes = [:title, attachment(:attachment), :caption, :description, :tag_list,
                   :alt_text, :copyright_status, :copyright_holder, :credit, :keywords,
-                  :allow_download, :external_type, :external_url]
+                  :allow_download, :external_type, :external_url, :kind]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

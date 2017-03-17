@@ -11,7 +11,6 @@ export default class ResourceFormKindSpreadsheet extends PureComponent {
   render() {
     return (
       <Form.TextInput
-        focusOnMount
         label="Spreadsheet"
         name="attributes[fake]"
         placeholder="It's a spreadsheet"

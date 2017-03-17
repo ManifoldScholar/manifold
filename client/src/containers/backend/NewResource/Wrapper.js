@@ -40,11 +40,10 @@ class NewResourceWrapperContainer extends PureComponent {
     this.redirectToResource(resource);
   }
 
-
   renderFormSectionForKind() {
     if (!this.state.resourceKind && !this.props.sourceModel.attributes.kind) return null;
-    const ext = this.state.resourceKind ? this.state.resourceKind : this.props.sourceModel.attributes.kind;
-    switch (ext) {
+    const kind = this.state.resourceKind ? this.state.resourceKind : this.props.sourceModel.attributes.kind;
+    switch (kind) {
       case "image":
         return <Resource.Form.Kind.Image {...this.props}/>;
         break;
@@ -88,7 +87,7 @@ class NewResourceWrapperContainer extends PureComponent {
           ]}
           title={'New Resource'}
           showUtility={false}
-          note={'Enter the name of your resource, and a brief description. Press save to continue.'}
+          note={'Select your resource type, then enter a name and a brief description. Press save to continue.'}
         />
         <section className="backend-panel">
           <div className="container">
@@ -105,6 +104,7 @@ class NewResourceWrapperContainer extends PureComponent {
                 create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
                 onSuccess={this.handleSuccess}
                 className="form-secondary"
+                debug={true}
               >
                 <Form.TextInput
                   label="Title"
@@ -119,6 +119,11 @@ class NewResourceWrapperContainer extends PureComponent {
                   placeholder="Enter a description"
                 />
                 {this.renderFormSectionForKind()}
+                <Form.TextInput
+                  label="Temporary Kind Field"
+                  name="attributes[kind]"
+                  placeholder="Manually type in kind for now"
+                />
                 <Form.Save
                   text="Save and continue"
                 />

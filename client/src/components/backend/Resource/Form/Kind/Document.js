@@ -11,7 +11,6 @@ export default class ResourceFormKindDocument extends PureComponent {
   render() {
     return (
       <Form.TextInput
-        focusOnMount
         label="Document"
         name="attributes[fake]"
         placeholder="It's a document"

@@ -16,7 +16,6 @@ export default class ResourceFormKindFile extends PureComponent {
   render() {
     return (
       <Form.TextInput
-        focusOnMount
         label="File"
         name="attributes[fake]"
         placeholder="It's a file"

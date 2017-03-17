@@ -29,6 +29,7 @@ class Resource < ApplicationRecord
   # Validation
   validates :title, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
+  validate :validates_fields_for_kind
 
   # Scopes
   scope :by_project, lambda { |project|
@@ -60,8 +61,30 @@ class Resource < ApplicationRecord
   before_save :update_caption_formatted
   before_save :update_description_formatted
 
+  def validates_fields_for_kind
+    case kind
+      when 'image'
+        validate_image_fields
+      when 'link'
+        validate_link_fields
+    end
+  end
+
+  def validate_image_fields
+    errors.add(:attachment, "image is required") unless attachment.present?
+    valid = errors.empty?
+    valid
+  end
+
+  def validate_link_fields
+    errors.add(:external_url, "can't be blank") if external_url.blank?
+    valid = errors.empty?
+    valid
+  end
+
+
   def update_kind
-    self.kind = determine_kind
+    self.kind ||= determine_kind
   end
 
   def force_update_kind

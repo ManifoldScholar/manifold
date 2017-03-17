@@ -11,7 +11,6 @@ export default class ResourceFormKindPdf extends PureComponent {
   render() {
     return (
       <Form.TextInput
-        focusOnMount
         label="Pdf"
         name="attributes[fake]"
         placeholder="It's a PDF"

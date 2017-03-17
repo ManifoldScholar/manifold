@@ -11,7 +11,6 @@ export default class ResourceFormKindVideo extends PureComponent {
   render() {
     return (
       <Form.TextInput
-        focusOnMount
         label="Video"
         name="attributes[fake]"
         placeholder="It's a video file"

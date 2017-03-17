@@ -10,14 +10,14 @@ export default class ResourceFormKindImage extends PureComponent {
 
   render() {
     return (
-      <div className="form-section">
-        <Form.TextInput
-          focusOnMount
-          label="Image"
-          name="attributes[fake]"
-          placeholder="It's an image file"
-        />
-      </div>
+      <Form.Upload
+        style="square"
+        label="Image"
+        accepts="images"
+        name="attributes[attachment]"
+        remove="attributes[removeAttachment]"
+        {...this.props}
+      />
     )
   }
 

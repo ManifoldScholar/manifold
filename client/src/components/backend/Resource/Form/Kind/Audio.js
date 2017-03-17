@@ -11,7 +11,6 @@ export default class ResourceFormKindAudio extends PureComponent {
   render() {
     return (
       <Form.TextInput
-        focusOnMount
         label="Audio"
         name="attributes[fake]"
         placeholder="It's an audio file"

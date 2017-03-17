@@ -12,7 +12,6 @@ export default class ResourceFormKindLink extends PureComponent {
     return (
       <div className="form-section">
         <Form.TextInput
-          focusOnMount
           label="Link URL"
           name="attributes[externalUrl]"
           placeholder="Enter link url"

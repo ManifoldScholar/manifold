@@ -12,7 +12,6 @@ export default class ResourceFormKindInteractive extends PureComponent {
     return (
       <div className="form-section">
         <Form.TextInput
-          focusOnMount
           label="Interactive"
           name="attributes[fake]"
           placeholder="It's interactive"
