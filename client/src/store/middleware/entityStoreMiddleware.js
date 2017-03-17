@@ -21,6 +21,11 @@ function buildRemovesAction(entity) {
   return { type, payload: { entity } };
 }
 
+function buildAddsAction(meta, entity) {
+  const type = `ENTITY_STORE_ADD`;
+  return { type, payload: { meta, entity } };
+}
+
 export default function entityStoreMiddleware({ dispatch, getState }) {
   return (next) => (action) => {
 
@@ -96,6 +101,22 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
       }, () => {
         // noop
       });
+    }
+
+    // Add object if requested on success.
+    if (requestPayload.adds) {
+      requestPromise.then((response) => {
+        if (Array.isArray(response.data)) {
+          throw new Error("Request options 'adds' is only supported for requests that return a " +
+          "single object. The attempt to add to the " + requestPayload.adds + " response" +
+          "di not succed because the response contained a collection of entities.");
+        }
+        const { type, id } = response.data;
+        dispatch(buildAddsAction(requestPayload.adds, { type, id }));
+      }, () => {
+        // noop
+      });
+
     }
 
     return { meta: action.meta, promise: requestPromise };
