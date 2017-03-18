@@ -202,6 +202,7 @@ function handleAdd(state, action) {
   if (meta.collection.find((entity) => entity.id === addEntity.id)) return state;
   const newCollection = [...meta.collection, addEntity];
   const newMeta = Object.assign({}, meta, { collection: newCollection });
+  if (!get(newMeta, 'type')) newMeta.type = addEntity.type;
   const responses = Object.assign({}, state.responses, { [targetMeta]: newMeta });
   return Object.assign({}, state, { responses });
 }
