@@ -1,0 +1,165 @@
+// This is a comprehensive component that contains styles
+// for the annotation itself as well as the comment list
+.annotation-detail {
+  .container {
+    @include drawerPadding(padding-right, 'heavy');
+    @include drawerPadding(padding-left);
+  }
+}
+
+.annotation-annotation, .annotation-comment {
+  // These are almost identical, but two classes are used
+  // for sanity, as they are quite different in use and
+  // may also have scope based variants
+  .meta {
+    @include drawerIndent(padding-left);
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .author-avatar {
+      @include buttonAvatar(32);
+      position: absolute;
+      top: 0;
+      left: 0;
+      border: 1px solid $neutral50;
+
+      &.dull {
+        @include buttonAvatar(32, $neutral50, $neutral20);
+        border: 1px solid $neutral50;
+      }
+    }
+
+    .author-name {
+      @include templateHead;
+      margin: 0;
+      font-weight: $semibold;
+
+      .reply-to {
+        display: inline-block;
+        margin-left: 6px;
+        color: $neutral40;
+
+        .manicon {
+          display: inline-block;
+          margin-right: 4px;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .deleted-notification {
+      @include subtitlePrimary;
+      margin-top: 0;
+      color: $neutral70;
+    }
+
+    datetime {
+      @include subtitlePrimary;
+      margin-top: 2px;
+      color: $neutral70;
+    }
+
+    .marker {
+      @include utilityPrimary;
+      padding: 8px 14px;
+      font-size: 11px;
+      color: $accentPrimaryDark;
+      background-color: $neutral10;
+
+      &.secondary {
+        color: $sp40Tertiary;
+      }
+    }
+  }
+
+  .body {
+    @include templateHead;
+    @include drawerIndent(padding-left);
+    font-weight: $regular;
+    line-height: 1.375;
+  }
+
+  // Direct scoping because nested comments also have utility
+  .utility {
+    margin-top: 5px;
+
+    > ul {
+      @include listHorizontal;
+      @include drawerIndent(padding-left);
+      li {
+        + li {
+          margin-left: 1.571em;
+        }
+      }
+
+      a, button {
+        @include buttonUnstyled;
+        @include utilityPrimary;
+        font-size: 14px;
+        color: $neutral40;
+        transition: color $duration $timing;
+
+        &:hover, &.active {
+          color: $accentPrimaryDark;
+        }
+      }
+    }
+
+    .share-nav-primary {
+      li:first-child {
+        margin-left: 8px;
+      }
+
+      .manicon {
+        display: inline-block;
+        padding-top: 2px;
+      }
+
+      span {
+        color: $neutral40;
+      }
+    }
+  }
+}
+
+.annotation-more {
+  padding-top: 30px;
+
+  a {
+    text-decoration: none;
+  }
+
+  .avatar-list {
+    @include listHorizontal;
+    position: relative;
+
+    .avatar {
+      @include buttonAvatar(32);
+      position: relative;
+      margin-right: -20px;
+      border: 1px solid $neutral50;
+
+
+      &.dull {
+        @include buttonAvatar(32, $neutral50, $neutral20);
+        border: 1px solid $neutral50;
+      }
+    }
+  }
+
+  .label {
+    @include utilityPrimary;
+    display: block;
+    padding-top: 6px;
+    padding-bottom: 24px;
+    font-size: 14px;
+    color: $neutral70;
+  }
+}
+
+.comment-more {
+  padding-top: 21px;
+}

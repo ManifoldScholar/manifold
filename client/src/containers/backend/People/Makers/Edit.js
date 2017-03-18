@@ -104,6 +104,7 @@ class MakersEditContainer extends PureComponent {
      */
     return (
       <Drawer.Wrapper
+        open
         closeUrl="/backend/people/makers"
       >
         <div>

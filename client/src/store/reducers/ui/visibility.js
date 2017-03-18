@@ -5,6 +5,7 @@ export const initialState = {
   loginOverlay: false,
   userMenu: false,
   tocDrawer: false,
+  annotation: 2,
   uiPanels: {
     readerReturn: false,
     user: false,
@@ -23,7 +24,13 @@ const panelSolo = {
 };
 
 const visibilityToggle = (state, action) => {
-  return Object.assign({}, state, { [action.payload]: !state[action.payload] });
+  let result;
+  if (action.payload === "annotation") {
+    result = state[action.payload] + 1 > 2 ? 0 : state[action.payload] + 1;
+  } else {
+    result = !state[action.payload];
+  }
+  return Object.assign({}, state, { [action.payload]: result });
 };
 
 const visibilityShow = (state, action) => {

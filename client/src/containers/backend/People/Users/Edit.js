@@ -121,6 +121,7 @@ class UsersEditContainer extends PureComponent {
     */
     return (
       <Drawer.Wrapper
+        open
         closeUrl="/backend/people/users"
       >
         <div>
