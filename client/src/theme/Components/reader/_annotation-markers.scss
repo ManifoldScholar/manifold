@@ -42,6 +42,7 @@
 //}
 
 .annotation-underline {
+  cursor: pointer;
   background-position: 0% 100%;
   background-repeat: repeat-x;
   background-size: 2px 2px;
@@ -53,6 +54,10 @@
 
     .scheme-dark & {
       background-image: linear-gradient($sp20PrimaryPaleLowContrast, $sp20PrimaryPaleLowContrast);
+    }
+
+    &:active {
+      background-color: $sp20PrimaryPale;
     }
 
     .multiple {

@@ -1,9 +1,9 @@
-import Annotatable from './Annotatable';
-import Popup from './Popup/';
-import Tools from './Tools';
+import Annotation from './Annotation';
+import Popup from './Popup';
+import Selection from './Selection';
 
 export default {
+  Annotation,
   Popup,
-  Annotatable,
-  Tools
+  Selection
 };

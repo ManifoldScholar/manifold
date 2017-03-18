@@ -6,14 +6,9 @@ export default class Body extends Component {
     section: PropTypes.object,
     annotations: PropTypes.array,
     lockedSelection: PropTypes.object,
-    didUpdateCallback: PropTypes.func,
     setActiveAnnotation: PropTypes.func,
     activeAnnotation: PropTypes.string
   };
-
-  componentDidMount() {
-    this.props.didUpdateCallback();
-  }
 
   shouldComponentUpdate(nextProps, nextState) {
     const same =
@@ -21,10 +16,6 @@ export default class Body extends Component {
       (this.props.annotations === nextProps.annotations) &&
       (this.props.lockedSelection === nextProps.lockedSelection);
     return !same;
-  }
-
-  componentDidUpdate() {
-    this.props.didUpdateCallback();
   }
 
   render() {

@@ -1,10 +1,11 @@
 export default {
 
-  forSection(sectionId) {
+  forSection(sectionId, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/text_sections/${sectionId}/relationships/annotations`,
       method: 'GET',
       options: {
+        params: { filter, page }
       }
     };
   },

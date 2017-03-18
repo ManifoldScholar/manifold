@@ -20,3 +20,4 @@ export Utility from './Utility';
 export Modal from './Modal';
 export FatalError from './FatalError';
 export Developer from './Developer';
+export Comment from './Comment';

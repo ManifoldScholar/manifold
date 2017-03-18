@@ -1,11 +1,11 @@
 import Pagination from './Pagination';
 import EdgeLockScroll from './EdgeLockScroll';
 import EntityCount from './EntityCount';
-import ScrollLock from './ScrollLock';
+import LockBodyScroll from './LockBodyScroll';
 
 export default {
   Pagination,
   EdgeLockScroll,
   EntityCount,
-  ScrollLock
+  LockBodyScroll
 };
