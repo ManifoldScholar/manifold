@@ -20,11 +20,11 @@ module Demonstration
     def load
       clear_db
       seed_db
+      ensure_settings
       create_admin_user
       create_fake_users
       create_pages
       import_projects
-      ensure_settings
       reindex_records
     end
 
