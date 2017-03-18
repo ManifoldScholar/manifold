@@ -32,6 +32,7 @@ class Annotation < ApplicationRecord
   # Associations
   belongs_to :text_section
   belongs_to :resource, optional: true
+  has_many :comments, as: :subject
 
   # Validations
   validates :text_section, presence: true
