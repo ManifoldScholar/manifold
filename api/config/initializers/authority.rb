@@ -42,7 +42,8 @@ Authority.configure do |config|
     read: "readable",
     update: "updatable",
     delete: "deletable",
-    destroy: "deleteable"
+    destroy: "deleteable",
+    read_deleted: "readable_if_deleted"
   }
 
   # LOGGER

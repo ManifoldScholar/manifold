@@ -65,6 +65,15 @@ module Validation
     params.permit(param_config)
   end
 
+  def comment_params(comment = nil)
+    params.require(:data)
+    attributes = [:body, :parent_id, :deleted]
+    attributes.push :deleted if comment && current_user.can_delete?(comment)
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def text_params
     params.require(:data)
     attributes = [:title, :position, :publication_date, metadata, :rights]
@@ -126,6 +135,10 @@ module Validation
   def resource_filter_params
     params.permit(filter: [:keyword, :kind, :tag, :order, :collection_order,
                            :project, :collection])[:filter]
+  end
+
+  def comment_filter_params
+    params.permit(filter: [])[:filter]
   end
 
   def user_filter_params
