@@ -120,7 +120,7 @@ module Validation
   end
 
   def collection_filter_params
-    params.permit(filter: [])
+    params.permit(filter: [])[:filter]
   end
 
   def resource_filter_params
