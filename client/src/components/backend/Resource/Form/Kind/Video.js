@@ -1,5 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Form } from 'components/backend';
+import { Resource, Form } from 'components/backend';
+import some from 'lodash/some';
 
 export default class ResourceFormKindVideo extends PureComponent {
 
@@ -11,10 +12,15 @@ export default class ResourceFormKindVideo extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      externalVideo: false
-    };
+    this.state = this.setInitialState();
     this.setVideoKind = this.setVideoKind.bind(this);
+  }
+
+  setInitialState() {
+    const isExternal = !!some(this.props.sourceModel.attributes.externalType);
+    return {
+        externalVideo: isExternal
+      };
   }
 
   truthy(value) {
@@ -51,11 +57,13 @@ export default class ResourceFormKindVideo extends PureComponent {
   }
 
   renderVideoAttachmentForm() {
+    const existingModel = some(this.props.sourceModel.attributes);
     return (
       <Form.Upload
         style="square"
         label="Video File"
         accepts="video"
+        current={existingModel ? this.props.sourceModel.attributes.attachmentFileName : null}
         name="attributes[attachment]"
         remove="attributes[removeAttachment]"
         {...this.props}

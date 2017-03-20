@@ -26,6 +26,11 @@ class Resource < ApplicationRecord
   has_many :collections, through: :collection_resources
 
   manifold_has_attached_file :attachment, :resource
+  manifold_has_attached_file :high_res, :image, no_styles: true
+  manifold_has_attached_file :variant_thumbnail, :image
+  manifold_has_attached_file :variant_poster, :image
+  manifold_has_attached_file :variant_format_one, :resource, no_styles: true
+  manifold_has_attached_file :variant_format_two, :resource, no_styles: true
 
   # Validation
   validates :title, presence: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307182231) do
+ActiveRecord::Schema.define(version: 20170320182809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,19 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.datetime "attachment_updated_at"
   end
 
+  create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
+    t.uuid     "creator_id"
+    t.text     "log"
+    t.integer  "state",               default: 0
+    t.string   "strategy"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "sort_name"
     t.datetime "created_at",          null: false
@@ -187,8 +200,8 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.uuid     "creator_id"
     t.uuid     "project_id"
     t.text     "caption"
@@ -202,11 +215,11 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.string   "external_url"
     t.string   "external_id"
     t.string   "external_type"
-    t.boolean  "allow_high_res",           default: true
-    t.boolean  "allow_download",           default: true
-    t.boolean  "doi_requested",            default: false
+    t.boolean  "allow_high_res",                  default: true
+    t.boolean  "allow_download",                  default: true
+    t.boolean  "doi_requested",                   default: false
     t.datetime "doi_added"
-    t.string   "doi",                      default: "f"
+    t.string   "doi",                             default: "f"
     t.string   "high_res_checksum"
     t.string   "transcript_checksum"
     t.string   "translation_checksum"
@@ -226,6 +239,22 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.string   "title_formatted"
     t.text     "description_formatted"
     t.text     "caption_formatted"
+    t.string   "variant_format_one_file_name"
+    t.string   "variant_format_one_content_type"
+    t.integer  "variant_format_one_file_size"
+    t.datetime "variant_format_one_updated_at"
+    t.string   "variant_format_two_file_name"
+    t.string   "variant_format_two_content_type"
+    t.integer  "variant_format_two_file_size"
+    t.datetime "variant_format_two_updated_at"
+    t.string   "variant_thumbnail_file_name"
+    t.string   "variant_thumbnail_content_type"
+    t.integer  "variant_thumbnail_file_size"
+    t.datetime "variant_thumbnail_updated_at"
+    t.string   "variant_poster_file_name"
+    t.string   "variant_poster_content_type"
+    t.integer  "variant_poster_file_size"
+    t.datetime "variant_poster_updated_at"
   end
 
   create_table "settings", force: :cascade do |t|

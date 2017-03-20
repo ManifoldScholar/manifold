@@ -4,7 +4,10 @@ module Updaters
     include ::Updaters
 
     def attachment_fields
-      [:attachment]
+      [
+        :attachment, :high_res, :variant_thumbnail, :variant_format_one,
+        :variant_format_two, :variant_poster
+      ]
     end
 
   end

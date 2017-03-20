@@ -1,5 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form } from 'components/backend';
+import some from 'lodash/some';
 
 export default class ResourceFormKindSpreadsheet extends PureComponent {
 
@@ -9,11 +10,13 @@ export default class ResourceFormKindSpreadsheet extends PureComponent {
   };
 
   render() {
+    const existingModel = some(this.props.sourceModel.attributes);
     return (
       <Form.Upload
         style="square"
         label="Spreadsheet File"
         accepts="spreadsheet"
+        current={existingModel ? this.props.sourceModel.attributes.attachmentFileName : null}
         name="attributes[attachment]"
         remove="attributes[removeAttachment]"
         {...this.props}

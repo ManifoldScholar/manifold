@@ -7,6 +7,7 @@ import Link from './Link';
 import Pdf from './Pdf';
 import Presentation from './Presentation';
 import Spreadsheet from './Spreadsheet';
+import Variants from './Variants';
 import Video from './Video';
 
 export default {
@@ -19,5 +20,6 @@ export default {
   Pdf,
   Presentation,
   Spreadsheet,
+  Variants,
   Video
 };

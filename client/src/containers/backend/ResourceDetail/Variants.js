@@ -6,10 +6,10 @@ import { resourcesAPI } from 'api';
 import { notificationActions } from 'actions';
 import { connect } from 'react-redux';
 
-class ResourceDetailContentContainer extends PureComponent {
+class ResourceDetailVariantsContainer extends PureComponent {
 
-  static displayName = "ResourceDetail.Content";
-  static activeNavItem = "content";
+  static displayName = "ResourceDetail.Variants";
+  static activeNavItem = "variants";
 
   static propTypes = {
   };
@@ -28,9 +28,8 @@ class ResourceDetailContentContainer extends PureComponent {
           update={resourcesAPI.update}
           create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
           className="form-secondary"
-          debug={true}
         >
-          <Resource.Form.KindAttributes resourceKind={this.props.sourceModel.attributes.kind} />
+          <Resource.Form.Kind.Variants kind={this.props.resource.attributes.kind} {...this.props} />
           <Form.Save
             text="Save Resource"
           />
@@ -41,5 +40,5 @@ class ResourceDetailContentContainer extends PureComponent {
 }
 
 export default connect(
-  ResourceDetailContentContainer.mapStateToProps
-)(ResourceDetailContentContainer);
+  ResourceDetailVariantsContainer.mapStateToProps
+)(ResourceDetailVariantsContainer);
