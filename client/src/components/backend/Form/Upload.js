@@ -32,11 +32,18 @@ export default class FormUpload extends Component {
   }
 
   render() {
+    const { label, errors, name } = this.props;
     const labelClass = classnames({
       "has-instructions": isString(this.props.instructions)
     });
     return (
       <div className="form-input">
+        <GlobalForm.Errorable
+          className="form-input"
+          name={name}
+          errors={errors}
+          label={label}
+        >
         <label className={labelClass}>{this.props.label}</label>
         {
           isString(this.props.instructions) ?
@@ -52,6 +59,7 @@ export default class FormUpload extends Component {
             accepts={this.props.accepts}
           />
         </Form.Connect.Set>
+        </GlobalForm.Errorable>
       </div>
     );
   }

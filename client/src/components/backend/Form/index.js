@@ -12,12 +12,14 @@ import Switch from './Switch';
 import Helpers from './Helpers';
 import Date from './Date';
 import HigherOrder from './HigherOrder';
+import Hidden from './Hidden';
 
 export default {
   Connect,
   Dropdown,
   HasMany,
   Radios,
+  Hidden,
   TextArea,
   TextInput,
   MaskedTextInput,

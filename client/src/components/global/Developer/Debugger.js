@@ -5,7 +5,7 @@ export default class Debugger extends PureComponent {
 
   static propTypes = {
     object: PropTypes.object,
-    label: PropTypes.object.string
+    label: PropTypes.string
   }
 
   static defaultProps = {

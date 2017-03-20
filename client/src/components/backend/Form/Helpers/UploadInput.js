@@ -25,12 +25,39 @@ export default class FormUploadInput extends Component {
   static defaultProps = {
     style: "square",
     accepts: "any"
-  }
+  };
 
   static types = {
     images: {
       accepts: "image/*",
       extensions: "jpeg, tiff, gif, png"
+    },
+    audio: {
+      accepts: "audio/*",
+      extensions: "mp3"
+    },
+    video: {
+      accepts: "video/*",
+      extensions: "mp4, webm"
+    },
+    pdf: {
+      accepts: "application/pdf",
+      extensions: "pdf"
+    },
+    document: {
+      accepts: "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
+        "application/msword,text/*",
+      extensions: "doc docx txt"
+    },
+    spreadsheet: {
+      accepts: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet," +
+        "application/vnd.ms-excel",
+      extensions: "xls xlsx"
+    },
+    presentation: {
+      accepts: "application/vnd.openxmlformats-officedocument.presentationml.presentation," +
+        "application/vnd.ms-powerpoint",
+      extensions: "ppt pptx"
     },
     texts: {
       accepts: "application/epub+zip,application/zip,text/*",
