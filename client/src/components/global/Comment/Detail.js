@@ -142,6 +142,7 @@ export default class CommentDetail extends PureComponent {
     });
     const { comment, parent } = this.props;
     const { creator } = comment.relationships;
+    console.log(creator);
     return (
       <li className="annotation-comment">
         <section className="meta">
