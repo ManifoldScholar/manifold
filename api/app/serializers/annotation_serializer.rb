@@ -8,7 +8,10 @@ class AnnotationSerializer < ActiveModel::Serializer
              :body, :private, :subject, :current_user_is_creator
 
   def current_user_is_creator
-    scope.authenticated_as.id == object.creator_id
+    user_id = scope.try(:authenticated_as).try(:id)
+    return false unless user_id
+    return false unless object.creator_id
+    user_id == object.creator_id
   end
 
 end
