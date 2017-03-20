@@ -236,6 +236,8 @@ GEM
     rake (12.0.0)
     redcarpet (3.4.0)
     redis (3.3.3)
+    redis-namespace (1.5.3)
+      redis (~> 3.0, >= 3.0.4)
     representable (2.3.0)
       uber (~> 0.0.7)
     retriable (2.1.0)
@@ -362,6 +364,8 @@ DEPENDENCIES
   rails (~> 5.0.1)
   rainbow
   redcarpet
+  redis
+  redis-namespace
   rspec-core (~> 3.5.0)
   rspec-expectations (~> 3.5.0)
   rspec-mocks (~> 3.5.0)
