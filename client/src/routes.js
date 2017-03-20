@@ -19,7 +19,6 @@ export default () => {
         <Route component={ReaderComponents.Section.Text} path="section/:sectionId">
           <Route component={Reader.Resource.Detail} path="resource/:resourceId"/>
         </Route>
-        <Route component={ReaderComponents.Annotation.Tools} path="annotation-tools" />
       </Route>
 
       <Route component={Frontend.Frontend} path="/browse" >
