@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import { FormattedDate } from 'components/global';
 import isObject from 'lodash/isObject';
+import HigherOrder from 'containers/global/HigherOrder';
 
 export default class CommentDetail extends PureComponent {
 
@@ -16,7 +17,8 @@ export default class CommentDetail extends PureComponent {
     handleDestroy: PropTypes.func.isRequired,
     handleRestore: PropTypes.func.isRequired,
     handleFlag: PropTypes.func.isRequired,
-    comment: PropTypes.object.isRequired
+    comment: PropTypes.object.isRequired,
+    showLogin: PropTypes.func
   }
 
   constructor(props) {
@@ -182,48 +184,63 @@ export default class CommentDetail extends PureComponent {
         <section className="body">
           {comment.attributes.body}
         </section>
-        <nav className="utility">
-          <ul>
-            <li>
-              <button
-                className={replyButtonClass}
-                onClick={this.startReply}
-              >
-                {'Reply'}
-              </button>
-            </li>
-            {comment.attributes.canUpdateObject ?
+        <HigherOrder.RequireRole requiredRole="any">
+          <nav className="utility">
+            <ul>
               <li>
-                <button onClick={this.startEdit}>{'Edit'}</button>
+                <button
+                  className={replyButtonClass}
+                  onClick={this.startReply}
+                >
+                  {'Reply'}
+                </button>
               </li>
+              {comment.attributes.canUpdateObject ?
+                <li>
+                  <button onClick={this.startEdit}>{'Edit'}</button>
+                </li>
+                : null}
+              {comment.attributes.canDeleteObject && !comment.attributes.deleted ?
+                <li>
+                  <button onClick={this.handleDelete}>{'Delete'}</button>
+                </li>
               : null}
-            {comment.attributes.canDeleteObject && !comment.attributes.deleted ?
+              {comment.attributes.deleted ?
+                <li>
+                  <button onClick={this.handleRestore}>{'Restore'}</button>
+                </li>
+              : null}
+              {comment.attributes.deleted ?
+                <li>
+                  <button onClick={this.handleDestroy}>{'Destroy'}</button>
+                </li>
+              : null}
+              {comment.attributes.flagged ?
+                <li>
+                  <button onClick={this.handleUnflag}>{'Unflag'}</button>
+                </li>
+              :
+                <li>
+                  <button onClick={this.handleFlag}>{'Flag'}</button>
+                </li>
+              }
+            </ul>
+            {this.renderEditor()}
+          </nav>
+        </HigherOrder.RequireRole>
+        <HigherOrder.RequireRole requiredRole="none">
+          <nav className="utility">
+            <ul>
               <li>
-                <button onClick={this.handleDelete}>{'Delete'}</button>
+                <button
+                  onClick={this.props.showLogin}
+                >
+                  {'Login to reply'}
+                </button>
               </li>
-            : null}
-            {comment.attributes.deleted ?
-              <li>
-                <button onClick={this.handleRestore}>{'Restore'}</button>
-              </li>
-            : null}
-            {comment.attributes.deleted ?
-              <li>
-                <button onClick={this.handleDestroy}>{'Destroy'}</button>
-              </li>
-            : null}
-            {comment.attributes.flagged ?
-              <li>
-                <button onClick={this.handleUnflag}>{'Unflag'}</button>
-              </li>
-            :
-              <li>
-                <button onClick={this.handleFlag}>{'Flag'}</button>
-              </li>
-            }
-          </ul>
-          {this.renderEditor()}
-        </nav>
+            </ul>
+          </nav>
+        </HigherOrder.RequireRole>
         <CommentContainer.Thread
           subject={this.props.subject}
           parent={this.props.comment}

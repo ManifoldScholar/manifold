@@ -2,7 +2,8 @@ import React, { PureComponent, PropTypes } from 'react';
 import Annotation from 'components/reader/Annotation';
 import { connect } from 'react-redux';
 import { annotationsAPI, requests } from 'api';
-import { entityStoreActions } from 'actions';
+import { entityStoreActions, uiVisibilityActions } from 'actions';
+import { bindActionCreators } from 'redux';
 import { entityUtils } from 'utils';
 import { Utility } from 'components/frontend';
 const { request, flush } = entityStoreActions;
@@ -93,6 +94,10 @@ class AnnotationList extends PureComponent {
   render() {
 
     const grouped = this.annotationsGroupedBySubject();
+    const showLogin = bindActionCreators(
+      () => uiVisibilityActions.visibilityToggle('signInUpOverlay'),
+      this.props.dispatch
+    );
 
     return (
       <div>
@@ -106,6 +111,7 @@ class AnnotationList extends PureComponent {
                   addsTo={requests.rDrawerAnnotations}
                   saveHandler={this.props.createHandler}
                   closeOnSave={false}
+                  showLogin={showLogin}
                 />
                 <div className="container">
                   <ul className="annotation-list">
@@ -117,6 +123,7 @@ class AnnotationList extends PureComponent {
                           deleteHandler={this.deleteAnnotation}
                           key={annotation.id}
                           creator={creator}
+                          showLogin={showLogin}
                           annotation={annotation}
                         />
                       );

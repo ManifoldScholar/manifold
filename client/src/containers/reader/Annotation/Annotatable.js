@@ -313,6 +313,7 @@ class Annotatable extends Component {
 
 
   handlePossibleAnnotationClick(event) {
+    console.log('click');
     if (!event || !event.target) return;
     const { listableAnnotationIds } = event.target.dataset;
     if (!isString(listableAnnotationIds) || listableAnnotationIds.length < 1) return;
