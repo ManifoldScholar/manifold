@@ -37,6 +37,10 @@
 
   *::selection, .annotation-locked-selected {
     background: $sp20Quaternary;
+
+    .scheme-dark & {
+      background: $neutral80;
+    }
   }
 
   &.font-sans-serif {
