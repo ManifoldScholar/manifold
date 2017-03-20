@@ -18,7 +18,7 @@ class Resource < ApplicationRecord
   include Filterable
   include WithMarkdown
   include Attachments
-  include ResourceValidation
+  include ResourceAttachmentValidation
 
   # Associations
   belongs_to :project
@@ -62,6 +62,7 @@ class Resource < ApplicationRecord
 
   # Callbacks
   before_validation :update_kind
+  before_save :reset_stale_fields
   before_save :update_tags
   before_save :update_title_formatted
   before_save :update_caption_formatted
@@ -86,6 +87,10 @@ class Resource < ApplicationRecord
       when 'link'
         validate_link_fields
     end
+  end
+
+  def reset_stale_fields
+    # clear attributes that aren't required by kind
   end
 
   def update_kind
