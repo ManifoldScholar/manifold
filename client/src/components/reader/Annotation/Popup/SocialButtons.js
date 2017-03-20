@@ -1,7 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { EmailButton, TwitterButton, FacebookButton } from 'react-social';
-import { HigherOrder } from 'containers/global';
-
+import HigherOrder from 'containers/global/HigherOrder';
 class AnnotationPopupShareSocialButtons extends PureComponent {
 
   static displayName = "Annotation.Popup.Share.SocialButtons";
