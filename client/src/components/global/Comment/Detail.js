@@ -147,9 +147,17 @@ export default class CommentDetail extends PureComponent {
       <li className="annotation-comment">
         <section className="meta">
           <div>
-            <figure className="author-avatar dull">
+            <figure className="author-avatar">
               { creator.attributes.avatarStyles.smallSquare ?
-                <img src={creator.attributes.avatarStyles.smallSquare} /> :
+                <div className="image"
+                  style={{
+                    backgroundImage: `url(${creator.attributes.avatarStyles.smallSquare})`
+                  }}
+                >
+                  <span className="screen-reader-text">
+                    Profile image for {creator.attributes.fullName}
+                  </span>
+                </div> :
                 <div className="no-image">
                   <i className="manicon manicon-person"></i>
                 </div>
@@ -171,17 +179,21 @@ export default class CommentDetail extends PureComponent {
               /> ago
             </datetime>
           </div>
-          {comment.attributes.flagsCount > 0 ?
-            <div className="marker">
-              {comment.attributes.flagsCount}
-              {comment.attributes.flagsCount === 1 ? " flag" : " flags" }
-            </div>
+          <div className="markers">
+            {comment.attributes.deleted ?
+              <div className="marker secondary">
+                Deleted
+              </div>
             : null}
-          {comment.attributes.deleted ?
-            <div className="marker">
-              Deleted
-            </div>
-          : null}
+            <HigherOrder.RequireRole requiredRole="admin">
+              {comment.attributes.flagsCount > 0 ?
+                <div className="marker secondary">
+                  {comment.attributes.flagsCount}
+                  {comment.attributes.flagsCount === 1 ? " flag" : " flags" }
+                </div>
+                : null}
+            </HigherOrder.RequireRole>
+          </div>
         </section>
         <section className="body">
           <Helper.SimpleFormat text={comment.attributes.body} />
@@ -219,7 +231,7 @@ export default class CommentDetail extends PureComponent {
               : null}
               {comment.attributes.flagged ?
                 <li>
-                  <button onClick={this.handleUnflag}>{'Unflag'}</button>
+                  <button className="secondary" onClick={this.handleUnflag}>{'Unflag'}</button>
                 </li>
               :
                 <li>

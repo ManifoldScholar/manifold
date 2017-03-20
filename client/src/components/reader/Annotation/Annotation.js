@@ -75,7 +75,15 @@ export default class AnnotationDetail extends PureComponent {
           <div>
             <figure className="author-avatar">
               { creator.attributes.avatarStyles.smallSquare ?
-                <img src={creator.attributes.avatarStyles.smallSquare} /> :
+                <div className="image"
+                  style={{
+                    backgroundImage: `url(${creator.attributes.avatarStyles.smallSquare})`
+                  }}
+                >
+                <span className="screen-reader-text">
+                  Profile image for {creator.attributes.fullName}
+                </span>
+                </div> :
                 <div className="no-image">
                   <i className="manicon manicon-person"></i>
                 </div>
