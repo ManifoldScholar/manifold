@@ -142,12 +142,16 @@ export default class CommentDetail extends PureComponent {
     });
     const { comment, parent } = this.props;
     const { creator } = comment.relationships;
-    console.log(creator);
+    const avatarClass = classNames({
+      'author-avatar': true,
+      dull: !creator.attributes.isCurrentUser
+    });
+
     return (
       <li className="annotation-comment">
         <section className="meta">
           <div>
-            <figure className="author-avatar">
+            <figure className={avatarClass}>
               { creator.attributes.avatarStyles.smallSquare ?
                 <div className="image"
                   style={{
