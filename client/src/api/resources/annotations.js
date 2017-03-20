@@ -24,12 +24,23 @@ export default {
     };
   },
 
+  update(id, annotation) {
+    const data = { attributes: annotation };
+    return {
+      endpoint: `/api/v1/annotations/${id}`,
+      method: 'PUT',
+      options: {
+        body: JSON.stringify({ type: "annotations", data })
+      }
+    };
+  },
+
   destroy(annotationId) {
     return {
       endpoint: `/api/v1/annotations/${annotationId}`,
       method: 'DELETE',
       options: {}
     };
-  },
+  }
 
 };

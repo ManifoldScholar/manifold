@@ -1,4 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
+import Editor from '../Editor';
 import Selection from '../Selection';
 
 export default class AnnotationSelectionWrapper extends PureComponent {
@@ -13,8 +14,14 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     endChar: PropTypes.number,
     annotating: PropTypes.bool,
     closeDrawer: PropTypes.func,
-    createHandler: PropTypes.func,
-    truncate: PropTypes.number
+    saveHandler: PropTypes.func,
+    truncate: PropTypes.number,
+    closeOnSave: PropTypes.bool,
+    addsTo: PropTypes.string
+  }
+
+  static defaultProps = {
+    closeOnSave: true
   }
 
   constructor(props) {
@@ -71,7 +78,10 @@ export default class AnnotationSelectionWrapper extends PureComponent {
           }
         </div>
         { this.state.editorOpen ?
-          <Selection.Editor {...this.props} cancel={cancelFunction} /> : null
+          <Editor
+            {...this.props}
+            cancel={cancelFunction}
+          /> : null
         }
       </div>
     );

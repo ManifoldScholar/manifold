@@ -58,7 +58,9 @@ export default class AnnotationPopup extends Component {
   }
 
   getLockedSelectionRect() {
-    return document.querySelector('.annotation-locked-selected').getBoundingClientRect();
+    const locked = document.querySelector('.annotation-locked-selected');
+    if (!locked) return null;
+    return locked.getBoundingClientRect();
   }
 
   maybeShowPopup(prevProps, nextProps) {
@@ -102,6 +104,7 @@ export default class AnnotationPopup extends Component {
     } else {
       return;
     }
+    if (!rect) return;
     const rectCenter = rect.width / 2;
     const popupHeight = this.popupEl.offsetHeight;
     const popupWidth = this.popupEl.offsetWidth;

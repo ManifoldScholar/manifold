@@ -1,10 +1,10 @@
 import React, { Children, Component, PropTypes } from 'react';
 import has from 'lodash/has';
 import { connect } from 'react-redux';
-import { Annotation } from 'components/reader';
-import { Annotation as AnnotationContainers } from 'containers/reader';
+import Annotation from 'components/reader/Annotation';
 import { Drawer, Dialog } from 'components/backend';
 import { Resource } from 'containers/reader';
+import AnnotationContainers from 'containers/reader/Annotation';
 import { Resource as ResourceComponents } from 'components/reader';
 import fakeData from 'helpers/fakeData';
 import { annotationsAPI, requests } from 'api';
@@ -43,7 +43,6 @@ class Annotatable extends Component {
     this.updateStateSelection = this.updateStateSelection.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.highlightSelection = this.highlightSelection.bind(this);
-    this.attachBodyToSelection = this.attachBodyToSelection.bind(this);
     this.startAnnotateSelection = this.startAnnotateSelection.bind(this);
     this.startResourceSelection = this.startResourceSelection.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
@@ -246,15 +245,19 @@ class Annotatable extends Component {
     window.getSelection().removeAllRanges();
   }
 
-  createAnnotation(annotation, resource = null) {
+  createAnnotation(annotation, options = {}) {
+    const resource = options.resource || null;
     const call = annotationsAPI.create(this.props.sectionId, annotation, resource);
-    this.props.dispatch(request(call, requests.rAnnotationCreate));
-    setTimeout(() => {
-      this.closeDrawer();
+    const requestOptions = {};
+    if (options.addsTo) requestOptions.adds = options.addsTo;
+    const res = this.props.dispatch(request(call, requests.rAnnotationCreate, requestOptions));
+    res.promise.then(() => {
+      if (options.closeOnSave) this.closeDrawer();
       this.updateStateSelection(null);
       this.clearNativeSelection();
       this.unlockSelection();
-    }, 0);
+    });
+    return res.promise;
   }
 
   startAnnotateSelection(event) {
@@ -268,18 +271,11 @@ class Annotatable extends Component {
     this.createAnnotation(annotation);
   }
 
-  attachBodyToSelection(body, isPrivate) {
-    const annotation = this.state.selectionLockedAnnotation;
-    annotation.body = body;
-    annotation.private = isPrivate;
-    annotation.format = "annotation";
-    this.createAnnotation(annotation);
-  }
-
   attachResourceToSelection(resource) {
     const annotation = this.state.selectionLockedAnnotation;
     annotation.format = "resource";
-    this.createAnnotation(annotation, resource);
+    const closeOnSave = true;
+    this.createAnnotation(annotation, { resource, closeOnSave });
   }
 
   lockSelection() {
@@ -393,7 +389,7 @@ class Annotatable extends Component {
         startChar={startChar}
         endNode={endNode}
         endChar={endChar}
-        createHandler={this.createAnnotation}
+        saveHandler={this.createAnnotation}
         truncate={600}
         annotating
       />
@@ -403,6 +399,7 @@ class Annotatable extends Component {
   renderDrawerAnnotations() {
     return (
       <AnnotationContainers.List
+        closeDrawer={this.closeDrawer}
         sectionId={this.props.sectionId}
         annotationIds={this.state.listAnnotations}
         createHandler={this.createAnnotation}
