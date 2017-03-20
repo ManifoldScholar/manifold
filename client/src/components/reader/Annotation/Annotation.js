@@ -103,7 +103,7 @@ export default class AnnotationDetail extends PureComponent {
           <Editor
             id={annotation.id}
             body={annotation.attributes.body}
-            isPrivate={annotation.attributes.isPrivate}
+            private={annotation.attributes.private}
             subject={annotation.attributes.subject}
             startNode={annotation.attributes.startNode}
             startChar={annotation.attributes.startChar}

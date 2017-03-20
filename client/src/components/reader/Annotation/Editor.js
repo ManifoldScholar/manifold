@@ -36,7 +36,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
     };
 
     if (props.body) this.state.body = props.body;
-    if (props.isPrivate) this.state.isPrivate = props.isPrivate;
+    if (props.private) this.state.isPrivate = props.private;
   }
 
   componentDidMount() {
@@ -54,7 +54,8 @@ export default class AnnotationSelectionEditor extends PureComponent {
       endNode,
       endChar,
       body,
-      isPrivate,
+      // eslint-disable-next-line quote-props
+      "private": isPrivate,
       format: "annotation"
     };
     if (this.props.id) annotation.id = this.props.id;
