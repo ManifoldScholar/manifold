@@ -33,11 +33,16 @@ module Api
             @annotation.creator = @current_user
             @annotation.save
             authorize_action_for @annotation
-            location = api_v1_text_section_relationships_annotations_url(
-              @annotation,
-              text_section_id: @text_section.id
-            )
             render_single_resource @annotation, location: location
+          end
+
+          def update
+            @annotation = load_and_authorize_annotation
+            ::Updaters::Default.new(annotation_params).update(@annotation)
+            render_single_resource(
+              @annotation,
+              location: location
+            )
           end
 
           def destroy
@@ -46,6 +51,13 @@ module Api
           end
 
           private
+
+          def location
+            api_v1_text_section_relationships_annotations_url(
+              @annotation,
+              text_section_id: @annotation.text_section_id
+            )
+          end
 
           def set_text_section
             @text_section = TextSection.find(params[:text_section_id])

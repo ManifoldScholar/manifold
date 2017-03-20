@@ -19,7 +19,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :annotations, only: [:show, :destroy], controller: "text_sections/relationships/annotations" do
+      resources :annotations, only: [:show, :update, :destroy], controller: "text_sections/relationships/annotations" do
         namespace :relationships do
           resources :comments, controller: "/api/v1/comments"
         end
