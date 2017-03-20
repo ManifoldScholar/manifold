@@ -51,10 +51,12 @@ export default class AnnotationPopupAnnotate extends PureComponent {
           <i className="manicon manicon-word-bubble"></i>
           Annotate
         </button>
-        <button onClick={this.props.bookmark}>
-          <i className="manicon manicon-bookmark-outline"></i>
-          Bookmark
-        </button>
+        {/*
+         <button onClick={this.props.bookmark}>
+         <i className="manicon manicon-bookmark-outline"></i>
+         Bookmark
+         </button>
+        */}
         <button onClick={this.props.showShare}>
           <i className="manicon manicon-nodes"></i>
           Share

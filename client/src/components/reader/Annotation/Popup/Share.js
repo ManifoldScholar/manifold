@@ -54,10 +54,12 @@ export default class AnnotationPopupShare extends PureComponent {
 
     return (
       <section className={pageClass}>
-        <button>
-          <i className="manicon manicon-quotes-left"></i>
-          Cite
-        </button>
+        {/*
+         <button>
+         <i className="manicon manicon-quotes-left"></i>
+         Cite
+         </button>
+        */}
         <SocialButtons text={this.props.text} url={this.url()} />
         <button onClick={this.props.back} className="dark">
           <i className="manicon manicon-arrow-bold-left"></i>
