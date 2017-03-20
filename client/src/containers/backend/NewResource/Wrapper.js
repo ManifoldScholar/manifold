@@ -2,10 +2,12 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Form as FormContainer } from 'containers/backend';
 import { Resource, Navigation, Form } from 'components/backend';
-import { resourcesAPI } from 'api';
-import { notificationActions } from 'actions';
+import { resourcesAPI, notifications } from 'api';
+import { notificationActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { browserHistory } from 'react-router';
+
+const { flush } = entityStoreActions;
 
 class NewResourceWrapperContainer extends PureComponent {
 
@@ -104,7 +106,6 @@ class NewResourceWrapperContainer extends PureComponent {
                 create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
                 onSuccess={this.handleSuccess}
                 className="form-secondary"
-                debug={true}
               >
                 <Form.TextInput
                   label="Title"

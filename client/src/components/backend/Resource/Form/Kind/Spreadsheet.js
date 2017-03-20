@@ -10,10 +10,12 @@ export default class ResourceFormKindSpreadsheet extends PureComponent {
 
   render() {
     return (
-      <Form.TextInput
-        label="Spreadsheet"
-        name="attributes[fake]"
-        placeholder="It's a spreadsheet"
+      <Form.Upload
+        style="square"
+        label="Spreadsheet File"
+        accepts="spreadsheet"
+        name="attributes[attachment]"
+        remove="attributes[removeAttachment]"
         {...this.props}
       />
     )

@@ -18,6 +18,7 @@ class Resource < ApplicationRecord
   include Filterable
   include WithMarkdown
   include Attachments
+  include ResourceValidation
 
   # Associations
   belongs_to :project
@@ -65,23 +66,22 @@ class Resource < ApplicationRecord
     case kind
       when 'image'
         validate_image_fields
+      when 'audio'
+        validate_audio_fields
+      when 'video'
+        validate_video_fields
+      when 'pdf'
+        validate_pdf_fields
+      when 'document'
+        validate_document_fields
+      when 'spreadsheet'
+        validate_spreadsheet_fields
+      when 'presentation'
+        validate_presentation_fields
       when 'link'
         validate_link_fields
     end
   end
-
-  def validate_image_fields
-    errors.add(:attachment, "image is required") unless attachment.present?
-    valid = errors.empty?
-    valid
-  end
-
-  def validate_link_fields
-    errors.add(:external_url, "can't be blank") if external_url.blank?
-    valid = errors.empty?
-    valid
-  end
-
 
   def update_kind
     self.kind ||= determine_kind
@@ -109,7 +109,7 @@ class Resource < ApplicationRecord
     ext = attachment_extension
     return :image if attachment_is_image?
     return :pdf if ext == "pdf"
-    return :document if %w(doc docx text).include?(ext)
+    return :document if %w(doc docx txt).include?(ext)
     return :spreadsheet if %w(xls xlsx).include?(ext)
     return :presentation if %w(ppt pptx).include?(ext)
     return :video if %w(mp4 webm).include?(ext)

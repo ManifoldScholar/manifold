@@ -10,10 +10,12 @@ export default class ResourceFormKindPresentation extends PureComponent {
 
   render() {
     return (
-      <Form.TextInput
-        label="Presentation"
-        name="attributes[fake]"
-        placeholder="It's a presentation"
+      <Form.Upload
+        style="square"
+        label="Presentation File"
+        accepts="presentation"
+        name="attributes[attachment]"
+        remove="attributes[removeAttachment]"
         {...this.props}
       />
     )

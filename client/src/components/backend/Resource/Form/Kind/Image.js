@@ -12,7 +12,7 @@ export default class ResourceFormKindImage extends PureComponent {
     return (
       <Form.Upload
         style="square"
-        label="Image"
+        label="Image File"
         accepts="images"
         name="attributes[attachment]"
         remove="attributes[removeAttachment]"

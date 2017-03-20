@@ -10,10 +10,12 @@ export default class ResourceFormKindPdf extends PureComponent {
 
   render() {
     return (
-      <Form.TextInput
-        label="Pdf"
-        name="attributes[fake]"
-        placeholder="It's a PDF"
+      <Form.Upload
+        style="square"
+        label="PDF File"
+        accepts="pdf"
+        name="attributes[attachment]"
+        remove="attributes[removeAttachment]"
         {...this.props}
       />
     )

@@ -32,7 +32,7 @@ module Validation
 
   def resource_params
     params.require(:data)
-    attributes = [:title, attachment(:attachment), :caption, :description, :tag_list,
+    attributes = [:title, attachment(:attachment), :remove_attachment, :caption, :description, :tag_list,
                   :alt_text, :copyright_status, :copyright_holder, :credit, :keywords,
                   :allow_download, :external_type, :external_url, :kind]
     relationships = [:project, :creators]

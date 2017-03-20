@@ -10,10 +10,12 @@ export default class ResourceFormKindAudio extends PureComponent {
 
   render() {
     return (
-      <Form.TextInput
-        label="Audio"
-        name="attributes[fake]"
-        placeholder="It's an audio file"
+      <Form.Upload
+        style="square"
+        label="Audio File"
+        accepts="audio"
+        name="attributes[attachment]"
+        remove="attributes[removeAttachment]"
         {...this.props}
       />
     )

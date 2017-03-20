@@ -10,10 +10,12 @@ export default class ResourceFormKindDocument extends PureComponent {
 
   render() {
     return (
-      <Form.TextInput
-        label="Document"
-        name="attributes[fake]"
-        placeholder="It's a document"
+      <Form.Upload
+        style="square"
+        label="Document File"
+        accepts="document"
+        name="attributes[attachment]"
+        remove="attributes[removeAttachment]"
         {...this.props}
       />
     )

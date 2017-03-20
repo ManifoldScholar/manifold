@@ -19,15 +19,15 @@ export default class FormHiddenInput extends Component {
   }
 
   componentWillMount() {
-    this.setValue();
+    this.setValue(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.value !== nextProps.value) this.setValue();
+    if (this.props.value !== nextProps.value) this.setValue(nextProps);
   }
 
-  setValue() {
-    this.props.setValue(this.props.value);
+  setValue(props) {
+    props.setValue(props.value);
   }
 
   render() {
