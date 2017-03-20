@@ -7,9 +7,20 @@
     padding-top: 48px;
   }
 
+  .annotation-annotation & {
+    @include drawerIndent(padding-left);
+    padding-top: 5px;
+    padding-right: 0;
+    padding-bottom: 5px;
+
+    textarea {
+      font-size: 16px;
+    }
+  }
+
   textarea {
     @include templateHead;
-    padding: 34px 43px;
+    padding: 1.7em 2.15em;
     font-size: 16px;
     background-color: $neutralWhite;
     border: 0;
