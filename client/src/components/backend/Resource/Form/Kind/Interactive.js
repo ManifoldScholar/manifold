@@ -17,7 +17,7 @@ export default class ResourceFormKindInteractive extends PureComponent {
           placeholder="It's interactive"
         />
       </div>
-    )
+    );
   }
 
 }

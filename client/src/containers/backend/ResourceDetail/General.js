@@ -40,7 +40,7 @@ class ResourceDetailGeneralContainer extends PureComponent {
   handleChangeKindClick() {
     this.setState({
       changeKind: true
-    })
+    });
   }
 
   handleSuccess() {
@@ -78,8 +78,9 @@ class ResourceDetailGeneralContainer extends PureComponent {
               </div>
             </li>
             <li>
-              <div className="button"
-                   onClick={this.handleChangeKindClick}
+              <div
+                className="button"
+                onClick={this.handleChangeKindClick}
               >
                 <figure>
                   <figcaption>
@@ -98,7 +99,8 @@ class ResourceDetailGeneralContainer extends PureComponent {
   }
 
   render() {
-    const renderKind = this.state.newKind ? this.state.newKind : this.props.resource.attributes.kind;
+    const renderKind = this.state.newKind ? this.state.newKind
+      : this.props.resource.attributes.kind;
     return (
       <section>
         {this.state.changeKind ? this.renderKindPicker(renderKind) : this.renderResourceKind()}

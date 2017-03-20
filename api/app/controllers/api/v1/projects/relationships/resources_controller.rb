@@ -20,7 +20,8 @@ module Api
           end
 
           def create
-            @resource = ::Updaters::Resource.new(resource_params).update(@project.resources.new)
+            @resource = ::Updaters::Resource.new(resource_params)
+                                            .update(@project.resources.new)
             @resource.creator = @current_user
             @resource.save
             authorize_action_for @resource

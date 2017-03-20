@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Form } from 'components/backend';
-import { Form as GlobalForm } from 'components/global';
 import sharedPropsValidation from './propTypes';
-import classnames from 'classnames';
-import isString from 'lodash/isString';
 
-const { label, ...validation} = sharedPropsValidation;
+const { label, ...validation } = sharedPropsValidation;
 
 export default class FormHiddenInput extends Component {
 
@@ -24,10 +21,10 @@ export default class FormHiddenInput extends Component {
   }
 
   render() {
-    return(
+    return (
       <Form.Connect.Set {...this.props} manualSet >
         <Form.Helpers.HiddenInput />
       </Form.Connect.Set>
-    )
+    );
   }
 }

@@ -6,7 +6,7 @@ import { Developer } from 'components/global';
 import { bindActionCreators } from 'redux';
 import { entityUtils } from 'utils';
 import get from 'lodash/get';
-import JSONTree from 'react-json-tree'
+import JSONTree from 'react-json-tree';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;

@@ -21,7 +21,7 @@ export default class ResourceFormKindPresentation extends PureComponent {
         remove="attributes[removeAttachment]"
         {...this.props}
       />
-    )
+    );
   }
 
 }

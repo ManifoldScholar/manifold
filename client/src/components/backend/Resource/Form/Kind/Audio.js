@@ -23,7 +23,7 @@ export default class ResourceFormKindAudio extends PureComponent {
           {...this.props}
         />
       </div>
-    )
+    );
   }
 
 }

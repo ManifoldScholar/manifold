@@ -10,8 +10,12 @@ export default class ResourceFormKindVariants extends PureComponent {
   };
 
   renderImageFields() {
-    const highRes = this.props.sourceModel.attributes.highResUrl ? this.props.sourceModel.attributes.highResUrl : null;
-    const thumbnail = this.props.sourceModel.attributes.variantThumbnailStyles ? this.props.sourceModel.attributes.variantThumbnailStyles.smallSquare : null;
+    const highRes = this.props.sourceModel.attributes.highResUrl ?
+      this.props.sourceModel.attributes.highResUrl
+      : null;
+    const thumbnail = this.props.sourceModel.attributes.variantThumbnailStyles ?
+      this.props.sourceModel.attributes.variantThumbnailStyles.smallSquare
+      : null;
     return (
       <div className="form-section">
         <Form.Upload
@@ -37,9 +41,15 @@ export default class ResourceFormKindVariants extends PureComponent {
   }
 
   renderVariantFields() {
-    const variantOne = this.props.sourceModel.attributes.variantFormatOneFileName ? this.props.sourceModel.attributes.variantFormatOneFileName : null;
-    const variantTwo = this.props.sourceModel.attributes.variantFormatTwoFileName ? this.props.sourceModel.attributes.variantFormatTwoFileName : null;
-    const variantPoster = this.props.sourceModel.attributes.variantPosterStyles ? this.props.sourceModel.attributes.variantPosterStyles.mediumLandscape : null;
+    const variantOne = this.props.sourceModel.attributes.variantFormatOneFileName ?
+      this.props.sourceModel.attributes.variantFormatOneFileName
+      : null;
+    const variantTwo = this.props.sourceModel.attributes.variantFormatTwoFileName ?
+      this.props.sourceModel.attributes.variantFormatTwoFileName
+      : null;
+    const variantPoster = this.props.sourceModel.attributes.variantPosterStyles ?
+      this.props.sourceModel.attributes.variantPosterStyles.mediumLandscape
+      : null;
     return (
       <div className="form-section">
         {
@@ -74,13 +84,13 @@ export default class ResourceFormKindVariants extends PureComponent {
           {...this.props}
         />
       </div>
-    )
+    );
   }
 
   render() {
     return (
       this.props.kind === "image" ? this.renderImageFields() : this.renderVariantFields()
-    )
+    );
   }
 
 }

@@ -16,12 +16,13 @@ export default class ResourceFormKindImage extends PureComponent {
         style="square"
         label="Image File"
         accepts="images"
-        current={existingModel ? this.props.sourceModel.attributes.attachmentStyles.smallSquare : null}
+        current={existingModel ? this.props.sourceModel.attributes.attachmentStyles.smallSquare
+          : null}
         name="attributes[attachment]"
         remove="attributes[removeAttachment]"
         {...this.props}
       />
-    )
+    );
   }
 
 }

@@ -21,7 +21,7 @@ export default class ResourceFormKindSpreadsheet extends PureComponent {
         remove="attributes[removeAttachment]"
         {...this.props}
       />
-    )
+    );
   }
 
 }

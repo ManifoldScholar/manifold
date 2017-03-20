@@ -18,7 +18,7 @@ export default class ResourceFormKindLink extends PureComponent {
           {...this.props}
         />
       </div>
-    )
+    );
   }
 
 }

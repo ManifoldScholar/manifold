@@ -106,10 +106,6 @@ class ResourceDetailWrapperContainer extends PureComponent {
     }, () => { this.closeDialog(); });
   }
 
-  activeChild() {
-    return get(this.props, 'children.type.activeNavItem');
-  }
-
   secondaryNavigationLinks(resource) {
     return [
       {

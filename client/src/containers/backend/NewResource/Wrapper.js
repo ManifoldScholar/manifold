@@ -52,7 +52,8 @@ class NewResourceWrapperContainer extends PureComponent {
           ]}
           title={'New Resource'}
           showUtility={false}
-          note={'Select your resource type, then enter a name and a brief description. Press save to continue.'}
+          note={'Select your resource type, then enter a name and a brief description.' +
+          ' Press save to continue.'}
         />
         <section className="backend-panel">
           <div className="container">
@@ -69,7 +70,6 @@ class NewResourceWrapperContainer extends PureComponent {
                 create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
                 onSuccess={this.handleSuccess}
                 className="form-secondary"
-                debug={true}
               >
                 <Form.TextInput
                   label="Title"

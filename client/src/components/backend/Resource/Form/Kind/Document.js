@@ -21,7 +21,7 @@ export default class ResourceFormKindDocument extends PureComponent {
         remove="attributes[removeAttachment]"
         {...this.props}
       />
-    )
+    );
   }
 
 }

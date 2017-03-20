@@ -19,8 +19,8 @@ export default class ResourceFormKindVideo extends PureComponent {
   setInitialState() {
     const isExternal = !!some(this.props.sourceModel.attributes.externalType);
     return {
-        externalVideo: isExternal
-      };
+      externalVideo: isExternal
+    };
   }
 
   truthy(value) {
@@ -29,7 +29,7 @@ export default class ResourceFormKindVideo extends PureComponent {
 
   setVideoKind(event) {
     if (!event.target.value) return null;
-    this.setState({externalVideo: this.truthy(event.target.value)});
+    this.setState({ externalVideo: this.truthy(event.target.value) });
   }
 
   renderExternalVideoForm() {
@@ -46,9 +46,9 @@ export default class ResourceFormKindVideo extends PureComponent {
           name="attributes[externalType]"
           selected={this.props.sourceModel.attributes.externalType}
           options={[
-            {label: "Select a video source...", value: ""},
-            {label: "Youtube", value: "youtube"},
-            {label: "Vimeo", value: "vimeo"}
+            { label: "Select a video source...", value: "" },
+            { label: "Youtube", value: "youtube" },
+            { label: "Vimeo", value: "vimeo" }
           ]}
           {...this.props}
         />
@@ -81,9 +81,12 @@ export default class ResourceFormKindVideo extends PureComponent {
             value={this.state.externalVideo}
           />
         </div>
-        {this.state.externalVideo ? this.renderExternalVideoForm() : this.renderVideoAttachmentForm()}
+        {this.state.externalVideo ?
+          this.renderExternalVideoForm()
+          : this.renderVideoAttachmentForm()
+        }
       </div>
-    )
+    );
   }
 
 }

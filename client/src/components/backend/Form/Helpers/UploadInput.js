@@ -45,15 +45,18 @@ export default class FormUploadInput extends Component {
       extensions: "pdf"
     },
     document: {
-      accepts: "application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,text/*",
+      accepts: "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
+        "application/msword,text/*",
       extensions: "doc docx txt"
     },
     spreadsheet: {
-      accepts: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel",
+      accepts: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet," +
+        "application/vnd.ms-excel",
       extensions: "xls xlsx"
     },
     presentation: {
-      accepts: "application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint",
+      accepts: "application/vnd.openxmlformats-officedocument.presentationml.presentation," +
+        "application/vnd.ms-powerpoint",
       extensions: "ppt pptx"
     },
     texts: {

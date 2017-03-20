@@ -35,7 +35,7 @@ class Resource < ApplicationRecord
   # Validation
   validates :title, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
-  validate :validates_fields_for_kind
+  validate :validate_kind_fields
 
   # Scopes
   scope :by_project, lambda { |project|
@@ -68,25 +68,8 @@ class Resource < ApplicationRecord
   before_save :update_caption_formatted
   before_save :update_description_formatted
 
-  def validates_fields_for_kind
-    case kind
-      when 'image'
-        validate_image_fields
-      when 'audio'
-        validate_audio_fields
-      when 'video'
-        validate_video_fields
-      when 'pdf'
-        validate_pdf_fields
-      when 'document'
-        validate_document_fields
-      when 'spreadsheet'
-        validate_spreadsheet_fields
-      when 'presentation'
-        validate_presentation_fields
-      when 'link'
-        validate_link_fields
-    end
+  def validate_kind_fields
+    send("validate_#{kind}_fields")
   end
 
   def reset_stale_fields
