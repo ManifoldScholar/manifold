@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import Editor from '../Editor';
 import Selection from '../Selection';
+import HigherOrder from 'containers/global/HigherOrder';
 
 export default class AnnotationSelectionWrapper extends PureComponent {
 
@@ -17,7 +18,8 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     saveHandler: PropTypes.func,
     truncate: PropTypes.number,
     closeOnSave: PropTypes.bool,
-    addsTo: PropTypes.string
+    addsTo: PropTypes.string,
+    showLogin: PropTypes.func
   }
 
   static defaultProps = {
@@ -71,11 +73,24 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             <i className="manicon manicon-quote"></i>
             {this.maybeTruncateSelection()}
           </div>
-          { this.state.editorOpen ? null :
-            <button className="annotate-button" onClick={this.handleOpenEditor}>
-              Annotate
+          <HigherOrder.RequireRole requiredRole="any">
+            { this.state.editorOpen ? null :
+              <button
+                className="annotate-button"
+                onClick={this.handleOpenEditor}
+              >
+                Annotate
+              </button>
+            }
+          </HigherOrder.RequireRole>
+          <HigherOrder.RequireRole requiredRole="none">
+            <button
+              className="annotate-button"
+              onClick={this.props.showLogin}
+            >
+              {'Login to annotate'}
             </button>
-          }
+          </HigherOrder.RequireRole>
         </div>
         { this.state.editorOpen ?
           <Editor

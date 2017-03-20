@@ -7,6 +7,7 @@ import { Comment } from 'components/global';
 import Editor from './Editor';
 import { Comment as CommentContainer } from 'containers/global';
 import classNames from 'classnames';
+import HigherOrder from 'containers/global/HigherOrder';
 
 export default class AnnotationDetail extends PureComponent {
 
@@ -16,7 +17,8 @@ export default class AnnotationDetail extends PureComponent {
     creator: PropTypes.object.isRequired,
     annotation: PropTypes.object.isRequired,
     saveHandler: PropTypes.func,
-    deleteHandler: PropTypes.func
+    deleteHandler: PropTypes.func,
+    showLogin: PropTypes.func
   }
 
   constructor(props) {
@@ -115,45 +117,59 @@ export default class AnnotationDetail extends PureComponent {
             <section className="body">
               <Helper.SimpleFormat text={annotation.attributes.body} />
             </section>
-            <nav className="utility">
-              <ul>
-                <li>
-                  <button
-                    className={replyButtonClass}
-                    onClick={this.startReply}
-                  >
-                    {'Reply'}
-                  </button>
-                </li>
-                {this.props.saveHandler ?
+            <HigherOrder.RequireRole requiredRole="any">
+              <nav className="utility">
+                <ul>
                   <li>
                     <button
-                      className={editButtonClass}
-                      onClick={this.startEdit}
+                      className={replyButtonClass}
+                      onClick={this.startReply}
                     >
-                      {'Edit'}
+                      {'Reply'}
                     </button>
                   </li>
-                : null}
-                {this.props.deleteHandler ?
+                  {this.props.saveHandler ?
+                    <li>
+                      <button
+                        className={editButtonClass}
+                        onClick={this.startEdit}
+                      >
+                        {'Edit'}
+                      </button>
+                    </li>
+                  : null}
+                  {this.props.deleteHandler ?
+                    <li>
+                      <button
+                        onClick={this.handleDelete}
+                      >
+                        {'Delete'}
+                      </button>
+                    </li>
+                  : null}
+                </ul>
+                {this.state.action === "replying" ?
+                  <CommentContainer.Editor
+                    subject={annotation}
+                    cancel={this.stopAction}
+                  />
+                  : null
+                }
+              </nav>
+            </HigherOrder.RequireRole>
+            <HigherOrder.RequireRole requiredRole="none">
+              <nav className="utility">
+                <ul>
                   <li>
                     <button
-                      onClick={this.handleDelete}
+                      onClick={this.props.showLogin}
                     >
-                      {'Delete'}
+                      {'Login to reply'}
                     </button>
                   </li>
-                : null}
-              </ul>
-              {this.state.action === "replying" ?
-                <CommentContainer.Editor
-                  subject={annotation}
-                  cancel={this.stopAction}
-                />
-                : null
-              }
-
-            </nav>
+                </ul>
+              </nav>
+            </HigherOrder.RequireRole>
           </div>
         }
         <CommentContainer.Thread subject={annotation} />

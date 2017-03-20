@@ -1,7 +1,8 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { requests } from 'api';
-import { entityStoreActions } from 'actions';
+import { entityStoreActions, uiVisibilityActions } from 'actions';
+import { bindActionCreators } from 'redux';
 import { entityUtils } from 'utils';
 import { Comment } from 'components/global';
 import { Utility } from 'components/frontend';
@@ -80,6 +81,10 @@ class CommentThread extends PureComponent {
     if (!this.props.comments) return null;
     const children = this.childrenOf(this.props.parentId);
     if (children.length <= 0) return null;
+    const showLogin = bindActionCreators(
+      () => uiVisibilityActions.visibilityToggle('signInUpOverlay'),
+      this.props.dispatch
+    );
 
     return (
       <div className="annotation-comment-thread">
@@ -97,6 +102,7 @@ class CommentThread extends PureComponent {
                 handleDestroy={this.handleCommentDestroy}
                 handleFlag={this.handleCommentFlag}
                 handleUnflag={this.handleCommentUnflag}
+                showLogin={showLogin}
               />
             );
           })}
