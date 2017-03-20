@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { UserList } from 'components/backend';
+import { UserList, Drawer } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { makersAPI, requests } from 'api';
@@ -93,7 +93,12 @@ class MakersListContainer extends PureComponent {
             {'Makers'} <i className="manicon manicon-users"></i>
           </h3>
         </header>
-        { children }
+        <Drawer.Wrapper
+          open={React.Children.count(children) > 0}
+          closeUrl="/backend/people/makers"
+        >
+          { children }
+        </Drawer.Wrapper>
         { makers ?
           <List.Searchable
             entities={makers}
