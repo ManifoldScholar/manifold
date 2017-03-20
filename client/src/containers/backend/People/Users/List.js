@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { UserList } from 'components/backend';
+import { Drawer, UserList } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { usersAPI, requests } from 'api';
@@ -94,7 +94,12 @@ class UsersListContainer extends PureComponent {
             {'Users'} <i className="manicon manicon-users"></i>
           </h3>
         </header>
-        { children }
+        <Drawer.Wrapper
+          open={React.Children.count(children) > 0}
+          closeUrl="/backend/people/users"
+        >
+          { children }
+        </Drawer.Wrapper>
         { users ?
           <List.Searchable
             entities={users}
