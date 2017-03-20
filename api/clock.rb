@@ -8,8 +8,11 @@ module Clockwork
     case job
     when "queue_fetch_project_tweets"
       ::QueueFetchProjectTweets.perform_later
+    when "update_statistics"
+      ::UpdateAnalyticsCache.perform_later
     end
   end
 
   every(1.hour, "queue_fetch_project_tweets")
+  every(4.hours, "update_statistics")
 end

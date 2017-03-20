@@ -7,6 +7,7 @@ module Factory
 
     # rubocop:disable LineLength
     def create_analytics_session
+      return nil unless settings_valid?
       client = Google::Apis::AnalyticsV3::AnalyticsService.new
       client.authorization = Signet::OAuth2::Client
                              .new(auth_options)
@@ -21,6 +22,15 @@ module Factory
     end
 
     private
+
+    def settings_valid?
+      c = Rails.configuration.manifold.google
+      return false if c.token_uri.blank?
+      return false if c.analytics_oauth_scope.blank?
+      return false if c.client_email.blank?
+      return false if c.service_private_key.blank?
+      true
+    end
 
     # rubocop:disable Metrics/AbcSize
     def auth_options

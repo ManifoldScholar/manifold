@@ -12,7 +12,6 @@ class Statistics
   end
 
   def initialize(_range = nil)
-    @client = Factory::AnalyticsSession.new.create_analytics_session
     @range ||= Time.zone.today.at_beginning_of_week..Time.zone.today.at_end_of_week
     @settings = Settings.instance.general
   end
@@ -26,11 +25,15 @@ class Statistics
   end
 
   def readers_this_week
-    get_reader_count(start_date, end_date)
+    REDIS.with do |conn|
+      conn.hget("cache:statistics", :this_week).to_f
+    end
   end
 
   def readers_last_week
-    get_reader_count(start_date - 7.days, end_date - 7.days)
+    REDIS.with do |conn|
+      conn.hget("cache:statistics", :last_week).to_f
+    end
   end
 
   def reader_increase
@@ -51,54 +54,30 @@ class Statistics
     Annotation.where("created_at >= ? AND created_at <= ? AND format = ?",
                      start_date,
                      end_date,
-                     "highlight")
-              .count
+                     "highlight").count
   end
 
   def new_annotations_count
     Annotation.where("created_at >= ? AND created_at <= ? AND format = ?",
                      start_date,
                      end_date,
-                     "annotation")
-              .count
+                     "annotation").count
   end
 
-  # def new_comments_count
-  #   Annotation.where("created_at >= ? AND created_at <= ? AND format = ?",
-  #                    start_date,
-  #                    end_date,
-  #                    "comment")
-  #             .count
-  # end
+  def new_comments_count
+    Comment.where("created_at >= ? AND created_at <= ?",
+                  start_date,
+                  end_date).count
+  end
 
   def new_texts_count
     Text.where("created_at >= ? AND created_at <= ?",
                start_date,
-               end_date)
-        .count
+               end_date).count
   end
 
   def read_attribute_for_serialization(n)
     send(n)
-  end
-
-  protected
-
-  def get_reader_count(start_date, end_date)
-    return nil unless @client
-    begin
-      @client.get_ga_data(
-        @settings["ga_profile_id"], # analytics profile ID
-        start_date.to_s, # query start date
-        end_date.to_s, # query end date
-        "ga:pageviews", # metric
-        dimensions: "ga:pagePath",
-        filters: "ga:pagePath=@read;ga:pagePath!@section"
-      ).totals_for_all_results["ga:pageviews"].to_f
-    rescue Google::Apis::ClientError => e
-      Rails.logger.error("Google API Client Error: #{e}")
-      nil
-    end
   end
 
 end
