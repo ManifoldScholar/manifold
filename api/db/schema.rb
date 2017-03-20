@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316234542) do
+ActiveRecord::Schema.define(version: 20170320200902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170316234542) do
     t.uuid     "resource_id"
     t.text     "body"
     t.boolean  "private",         default: false
+    t.integer  "comments_count",  default: 0
   end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
