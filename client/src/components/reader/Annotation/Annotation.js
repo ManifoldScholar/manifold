@@ -128,7 +128,7 @@ export default class AnnotationDetail extends PureComponent {
                       {'Reply'}
                     </button>
                   </li>
-                  {this.props.saveHandler ?
+                  {this.props.saveHandler && annotation.attributes.canUpdateObject ?
                     <li>
                       <button
                         className={editButtonClass}
@@ -138,7 +138,7 @@ export default class AnnotationDetail extends PureComponent {
                       </button>
                     </li>
                   : null}
-                  {this.props.deleteHandler ?
+                  {this.props.deleteHandler && annotation.attributes.canDeleteObject ?
                     <li>
                       <button
                         onClick={this.handleDelete}
