@@ -68,12 +68,17 @@ export default class AnnotationDetail extends PureComponent {
     const creator = this.props.creator;
     const annotation = this.props.annotation;
 
+    const avatarClass = classNames({
+      'author-avatar': true,
+      dull: !creator.attributes.isCurrentUser
+    });
+
     return (
       <li className="annotation-annotation">
         <section className="meta">
           {/* NB: Empty div required for flex-positioning of private/author marker */}
           <div>
-            <figure className="author-avatar">
+            <figure className={avatarClass}>
               { creator.attributes.avatarStyles.smallSquare ?
                 <div className="image"
                   style={{
