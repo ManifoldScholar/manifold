@@ -136,13 +136,27 @@ export default class TextNode extends Component {
     return this.props.content;
   }
 
+  commentsCount() {
+    const annotations = Object.values(this.props.openAnnotations);
+    return annotations.reduce((memo, a) => a.attributes.commentsCount + memo, 0);
+  }
+
   render() {
-    const content = this.containsAnnotations() ? this.annotatedContent() : this.content();
+    const containsAnnotations = this.containsAnnotations();
+    const content = containsAnnotations ? this.annotatedContent() : this.content();
+    const commentsCount = containsAnnotations ? this.commentsCount() : null;
+
+    const props = {
+      "data-text-digest": this.props.textDigest,
+      "data-node-uuid": this.props.nodeUuid
+    }
+    if (commentsCount) {
+      props["data-comments"] = commentsCount;
+    }
+    console.log(props);
+
     return (
-      <span
-        data-text-digest={this.props.textDigest}
-        data-node-uuid={this.props.nodeUuid}
-      >
+      <span {...props} >
         {content}
       </span>
     );
