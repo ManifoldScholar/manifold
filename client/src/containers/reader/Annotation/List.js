@@ -16,7 +16,8 @@ class AnnotationList extends PureComponent {
   static propTypes = {
     annotations: PropTypes.array,
     annotationIds: PropTypes.array.isRequired,
-    createHandler: PropTypes.func.isRequired
+    createHandler: PropTypes.func.isRequired,
+    closeDrawer: PropTypes.func
   }
 
   static defaultProps = {
@@ -32,10 +33,18 @@ class AnnotationList extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.updateAnnotation = this.updateAnnotation.bind(this);
+    this.deleteAnnotation = this.deleteAnnotation.bind(this);
   }
 
   componentDidMount() {
     this.fetchAnnotations(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.annotations.length === 0 && this.props.annotations.length > 0) {
+      nextProps.closeDrawer();
+    }
   }
 
   /* eslint-disable no-param-reassign */
@@ -68,6 +77,19 @@ class AnnotationList extends PureComponent {
     props.dispatch(request(annotationsCall, requests.rDrawerAnnotations));
   }
 
+  updateAnnotation(annotation) {
+    const call = annotationsAPI.update(annotation.id, annotation);
+    const res = this.props.dispatch(request(call, requests.rAnnotationUpdate));
+    return res.promise;
+  }
+
+  deleteAnnotation(annotation) {
+    const call = annotationsAPI.destroy(annotation.id);
+    const options = { removes: { type: "annotations", id: annotation.id } };
+    const res = this.props.dispatch(request(call, requests.rAnnotationDestroy, options));
+    return res.promise;
+  }
+
   render() {
 
     const grouped = this.annotationsGroupedBySubject();
@@ -81,7 +103,9 @@ class AnnotationList extends PureComponent {
                 <Annotation.Selection.Wrapper
                   {...group.selection}
                   truncate={250}
-                  createHandler={this.props.createHandler}
+                  addsTo={requests.rDrawerAnnotations}
+                  saveHandler={this.props.createHandler}
+                  closeOnSave={false}
                 />
                 <div className="container">
                   <ul className="annotation-list">
@@ -89,6 +113,8 @@ class AnnotationList extends PureComponent {
                       const creator = annotation.relationships.creator;
                       return (
                         <Annotation.Annotation
+                          saveHandler={this.updateAnnotation}
+                          deleteHandler={this.deleteAnnotation}
                           key={annotation.id}
                           creator={creator}
                           annotation={annotation}

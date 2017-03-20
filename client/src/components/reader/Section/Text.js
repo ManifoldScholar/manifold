@@ -3,7 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
 import { Resource, Section } from 'components/reader';
-import { Annotation } from 'containers/reader';
+import Annotation from 'containers/reader/Annotation';
 import has from 'lodash/has';
 
 export default class Text extends Component {

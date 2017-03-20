@@ -40,6 +40,8 @@ export default {
   rResources: 'reader-resources',
   rResource: 'reader-resource',
   rAnnotationCreate: 'reader-annotation-create',
+  rAnnotationUpdate: 'reader-annotation-update',
+  rAnnotationDestroy: 'reader-annotation-destroy',
   rCommentCreate: 'reader-comment-create',
   rCommentDestroy: 'reader-comment-destroy',
   rCommentUpdate: 'reader-comment-update',

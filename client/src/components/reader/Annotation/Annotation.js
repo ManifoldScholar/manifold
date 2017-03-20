@@ -4,6 +4,7 @@ import { Helper } from 'components/global';
 import { FormattedDate } from 'components/global';
 import { Utility } from 'components/frontend';
 import { Comment } from 'components/global';
+import Editor from './Editor';
 import { Comment as CommentContainer } from 'containers/global';
 import classNames from 'classnames';
 
@@ -13,35 +14,53 @@ export default class AnnotationDetail extends PureComponent {
 
   static propTypes = {
     creator: PropTypes.object.isRequired,
-    annotation: PropTypes.object.isRequired
+    annotation: PropTypes.object.isRequired,
+    saveHandler: PropTypes.func,
+    deleteHandler: PropTypes.func
   }
 
   constructor(props) {
     super(props);
 
     this.state = {
-      replying: false
+      action: null
     };
 
-    this.openReplyEditor = this.openReplyEditor.bind(this);
-    this.closeReplyEditor = this.closeReplyEditor.bind(this);
+    this.startReply = this.startReply.bind(this);
+    this.startEdit = this.startEdit.bind(this);
+    this.stopAction = this.stopAction.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
-  openReplyEditor() {
+  startReply() {
     this.setState({
-      replying: true
+      action: "replying"
     });
   }
 
-  closeReplyEditor() {
+  startEdit() {
     this.setState({
-      replying: false
+      action: "editing"
     });
+  }
+
+  stopAction() {
+    this.setState({
+      action: null
+    });
+  }
+
+  handleDelete(event) {
+    event.preventDefault();
+    this.props.deleteHandler(this.props.annotation);
   }
 
   render() {
     const replyButtonClass = classNames({
-      active: this.state.replying
+      active: this.state.action === "replying"
+    });
+    const editButtonClass = classNames({
+      active: this.state.action === "editing"
     });
 
     const creator = this.props.creator;
@@ -77,38 +96,66 @@ export default class AnnotationDetail extends PureComponent {
             : null
           }
         </section>
-        <section className="body">
-          <Helper.SimpleFormat text={annotation.attributes.body} />
-        </section>
-        <nav className="utility">
-          <ul>
-            <li>
-              <button
-                className={replyButtonClass}
-                onClick={this.openReplyEditor}
-              >
-                {'Reply'}
-              </button>
-            </li>
-            <li>
-              <button>{'Edit'}</button>
-            </li>
-            <li>
-              <Utility.ShareBar url="#"/>
-            </li>
-            <li>
-              <button>{'Delete'}</button>
-            </li>
-          </ul>
-          {this.state.replying ?
-            <CommentContainer.Editor
-              subject={annotation}
-              cancel={this.closeReplyEditor}
-            />
-            : null
-          }
 
-        </nav>
+        {this.state.action === "editing" ?
+          <Editor
+            id={annotation.id}
+            body={annotation.attributes.body}
+            isPrivate={annotation.attributes.isPrivate}
+            subject={annotation.attributes.subject}
+            startNode={annotation.attributes.startNode}
+            startChar={annotation.attributes.startChar}
+            endNode={annotation.attributes.endNode}
+            endChar={annotation.attributes.endChar}
+            saveHandler={this.props.saveHandler}
+            cancel={this.stopAction}
+          />
+        :
+          <div>
+            <section className="body">
+              <Helper.SimpleFormat text={annotation.attributes.body} />
+            </section>
+            <nav className="utility">
+              <ul>
+                <li>
+                  <button
+                    className={replyButtonClass}
+                    onClick={this.startReply}
+                  >
+                    {'Reply'}
+                  </button>
+                </li>
+                {this.props.saveHandler ?
+                  <li>
+                    <button
+                      className={editButtonClass}
+                      onClick={this.startEdit}
+                    >
+                      {'Edit'}
+                    </button>
+                  </li>
+                : null}
+                {this.props.deleteHandler ?
+                  <li>
+                    <button
+                      onClick={this.handleDelete}
+                    >
+                      {'Delete'}
+                    </button>
+                  </li>
+                : null}
+              </ul>
+              {this.state.action === "replying" ?
+                <CommentContainer.Editor
+                  subject={annotation}
+                  cancel={this.stopAction}
+                />
+                : null
+              }
+
+            </nav>
+          </div>
+        }
         <CommentContainer.Thread subject={annotation} />
       </li>
     );
