@@ -149,11 +149,10 @@ export default class TextNode extends Component {
     const props = {
       "data-text-digest": this.props.textDigest,
       "data-node-uuid": this.props.nodeUuid
-    }
+    };
     if (commentsCount) {
       props["data-comments"] = commentsCount;
     }
-    console.log(props);
 
     return (
       <span {...props} >
