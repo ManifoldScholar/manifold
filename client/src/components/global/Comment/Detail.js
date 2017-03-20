@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import { Utility } from 'components/frontend';
 import { Comment as CommentContainer } from 'containers/global';
 import { Link } from 'react-router';
+import { Helper } from 'components/global';
 import classNames from 'classnames';
 import { FormattedDate } from 'components/global';
 import isObject from 'lodash/isObject';
@@ -182,7 +183,7 @@ export default class CommentDetail extends PureComponent {
           : null}
         </section>
         <section className="body">
-          {comment.attributes.body}
+          <Helper.SimpleFormat text={comment.attributes.body} />
         </section>
         <HigherOrder.RequireRole requiredRole="any">
           <nav className="utility">
