@@ -31,21 +31,18 @@ if (__DEVELOPMENT__) {
   // different from the first client-side render.
   window.React = React; // enable debugger
   const style = 'background: #222; width: 100%; padding: 5px; color: #60F86F';
+  const errorStyle = 'background: #222; width: 100%; padding: 5px; color: orange';
   if (rootElement && (rootElement.hasAttribute('data-ssr-render') === true)) {
-    console.log("%c✊  Manifold's server-side, universal rendering is present ", style);
+    console.log("%c✅  SSR present", style);
     if (!rootElement ||
       !rootElement.firstChild ||
       !rootElement.firstChild.attributes ||
       !rootElement.firstChild.attributes['data-react-checksum']) {
-      console.log("%c⚠️  However, the server-side render was discarded because  ", style);
-      console.log("%c⚠️  it differed from the client-side render. This can      ", style);
-      console.log("%c⚠️  happen when components render random content, or when  ", style);
-      console.log("%c⚠️  client-side code is executed on the server.            ", style);
+      console.log("%c?  SSR differs", errorStyle);
     } else {
-      console.log("%c✊  and matches the client-side render.                    ", style);
+      console.log("%c✅  SSR matches", style);
     }
   } else {
-    console.log("%c⚠️  The server-side render is not present. Perhaps the ", style);
-    console.log("%c⚠️  universal server is reloading.                     ", style);
+    console.log("%c⚠  SSR:: missing", style);
   }
 }
