@@ -1,6 +1,7 @@
 import React, { Children, Component, PropTypes } from 'react';
 import has from 'lodash/has';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Annotation from 'components/reader/Annotation';
 import { Drawer, Dialog } from 'components/backend';
 import { Resource } from 'containers/reader';
@@ -8,7 +9,7 @@ import AnnotationContainers from 'containers/reader/Annotation';
 import { Resource as ResourceComponents } from 'components/reader';
 import fakeData from 'helpers/fakeData';
 import { annotationsAPI, requests } from 'api';
-import { entityStoreActions } from 'actions';
+import { entityStoreActions, uiVisibilityActions } from 'actions';
 import isString from 'lodash/isString';
 const { request, flush } = entityStoreActions;
 
@@ -409,6 +410,12 @@ class Annotatable extends Component {
   }
 
   render() {
+
+    const showLogin = bindActionCreators(
+      () => uiVisibilityActions.visibilityToggle('signInUpOverlay'),
+      this.props.dispatch
+    );
+
     return (
       <div>
         {/* Children must preceed the resource viewer, because the annotatable ref needs to
@@ -426,19 +433,18 @@ class Annotatable extends Component {
         </Drawer.Wrapper>
 
         {/* Render the annotation popup interface */}
-        { this.props.currentUser ?
-          <Annotation.Popup.Wrapper
-            currentUser={this.props.currentUser}
-            shareUrl={`/read/${this.props.textId}/section/${this.props.sectionId}`}
-            highlight={this.highlightSelection}
-            annotate={this.startAnnotateSelection}
-            attachResource={this.startResourceSelection}
-            selection={this.state.selection}
-            selectionClickEvent={this.state.selectionClickEvent}
-            selectionLocked={this.state.selectionLocked}
-            annotatableDomElement={this.annotatable}
-          />
-        : null }
+        <Annotation.Popup.Wrapper
+          currentUser={this.props.currentUser}
+          shareUrl={`/read/${this.props.textId}/section/${this.props.sectionId}`}
+          highlight={this.highlightSelection}
+          annotate={this.startAnnotateSelection}
+          attachResource={this.startResourceSelection}
+          selection={this.state.selection}
+          selectionClickEvent={this.state.selectionClickEvent}
+          selectionLocked={this.state.selectionLocked}
+          annotatableDomElement={this.annotatable}
+          showLogin={showLogin}
+        />
 
         {/* Render the margin resources */}
         {this.props.resources ?

@@ -43,20 +43,33 @@ export default class AnnotationPopupAnnotate extends PureComponent {
             Resource
           </button>
         </HigherOrder.RequireRole>
-        <button onClick={this.props.highlight}>
-          <i className="manicon manicon-pencil-simple"></i>
-          Highlight
-        </button>
-        <button onClick={this.props.annotate}>
-          <i className="manicon manicon-word-bubble"></i>
-          Annotate
-        </button>
-        {/*
-         <button onClick={this.props.bookmark}>
-         <i className="manicon manicon-bookmark-outline"></i>
-         Bookmark
-         </button>
-        */}
+
+        <HigherOrder.RequireRole requiredRole="any">
+          <div className="button-group">
+            <button onClick={this.props.highlight}>
+              <i className="manicon manicon-pencil-simple"></i>
+              Highlight
+            </button>
+            <button onClick={this.props.annotate}>
+              <i className="manicon manicon-word-bubble"></i>
+              Annotate
+            </button>
+            {/*
+             <button onClick={this.props.bookmark}>
+             <i className="manicon manicon-bookmark-outline"></i>
+             Bookmark
+             </button>
+            */}
+          </div>
+        </HigherOrder.RequireRole>
+
+        <HigherOrder.RequireRole requiredRole="none">
+          <button onClick={this.props.showLogin}>
+            <i className="manicon manicon-person-pencil"></i>
+            Login to Annotate
+          </button>
+        </HigherOrder.RequireRole>
+
         <button onClick={this.props.showShare}>
           <i className="manicon manicon-nodes"></i>
           Share

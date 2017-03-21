@@ -141,6 +141,12 @@
       font-size: 22px;
     }
 
+    .manicon-person-pencil {
+      margin-top: 2px;
+      font-size: 26px;
+      text-align: center;
+    }
+
     .manicon-facebook {
       margin-top: -1px;
       font-size: 27px;
@@ -150,6 +156,12 @@
     .manicon-arrow-bold-left {
       margin-top: -4px;
       font-size: 16px;
+    }
+  }
+
+  .button-group {
+    + button, + .button-group {
+      border-top: 1.5px $neutral90 solid;
     }
   }
 
