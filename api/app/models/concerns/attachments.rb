@@ -107,7 +107,7 @@ module Attachments
         end
 
         def #{field}_style_configuration(additional_styles = {}, no_styles = false)
-          out = {} if no_styles
+          return {} if no_styles
           out = manifold_attachment_image_styles if #{field}_is_image? 
           out = manifold_attachment_pdf_styles if #{field}_is_pdf? 
           out = manifold_attachment_image_styles
