@@ -22,7 +22,7 @@ module Demonstration
       seed_db
       ensure_settings
       create_admin_user
-      create_fake_users
+      # create_fake_users
       create_pages
       import_projects
       reindex_records
@@ -43,7 +43,9 @@ module Demonstration
 
     def clear_db
       clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource
-                 Subject TextSubject TextTitle User Category Page UserClaim)
+                 Subject TextSubject TextTitle User Category Page UserClaim Annotation
+                 CollectionResource Collection Comment Event Favorite Flag ProjectSubject
+                 Stylesheet Subject)
       clear.each do |model_name|
         @logger.info("Truncate #{model_name} table".red)
         model_name.constantize.destroy_all
