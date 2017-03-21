@@ -23,7 +23,8 @@ export default class AnnotationPopup extends Component {
     attachResource: PropTypes.func,
     bookmark: PropTypes.func,
     selectionClickEvent: PropTypes.object,
-    annotatableDomElement: PropTypes.object
+    annotatableDomElement: PropTypes.object,
+    showLogin: PropTypes.func
   };
 
   constructor() {
@@ -208,6 +209,7 @@ export default class AnnotationPopup extends Component {
           showShare={() => { this.showSecondary('share'); }}
           secondary={this.state.secondary}
           direction={this.state.direction}
+          showLogin={this.props.showLogin}
         />
         <ReactCSSTransitionGroup
           transitionName="page"
