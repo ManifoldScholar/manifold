@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import get from 'lodash/get';
 import has from 'lodash/has';
+import isNil from 'lodash/isNil';
 import isBoolean from 'lodash/isBoolean';
 import isString from 'lodash/isString';
 import { Form } from 'components/backend';
@@ -66,9 +67,14 @@ export default class Set extends PureComponent {
     return brackets2dots(name);
   }
 
-  handleChange(event) {
-    const value = this.valueFor(event.target);
-    if (value === undefined) return;
+  deriveValue(eventOrValue) {
+    if (isNil(eventOrValue)) return null;
+    if (eventOrValue.target) return this.valueFor(eventOrValue.target);
+    return eventOrValue;
+  }
+
+  handleChange(eventOrValue) {
+    const value = this.deriveValue(eventOrValue);
     this.props.actions.set(this.props.sessionKey, this.setPath(this.props.name), value);
   }
 
