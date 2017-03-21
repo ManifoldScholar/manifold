@@ -2,7 +2,8 @@ import { handleActions } from 'redux-actions';
 
 const initialState = {
   active: false,
-  activeLoaders: []
+  activeLoaders: [],
+  pendingRemovals: []
 };
 
 const getLoadingState = (activeLoaders) => {
@@ -27,21 +28,39 @@ const maybeRemoveLoader = (activeLoaders, loader) => {
   return activeLoaders;
 };
 
+const isLoaderActive = (activeLoaders, loader) => {
+  const loaderIndex = activeLoaders.indexOf(loader);
+  if (loaderIndex >= 0) return true;
+  return false;
+};
 
 const startLoader = (state, action) => {
+  if (state.pendingRemovals && state.pendingRemovals.indexOf(action.payload) >= 0) {
+    const pendingRemovals = state.pendingRemovals.slice(0);
+    pendingRemovals.splice(pendingRemovals.indexOf(action.payload), 1);
+    return Object.assign({}, state, { pendingRemovals });
+  }
   const activeLoaders = maybeAddLoader(state.activeLoaders, action.payload);
-  return {
+  return Object.assign({}, state, {
     active: getLoadingState(activeLoaders),
     activeLoaders
-  };
+  });
 };
 
 const stopLoader = (state, action) => {
+  if (!isLoaderActive(state.activeLoaders, action.payload)) {
+    const pendingRemovals = state.pendingRemovals.slice(0);
+    if (pendingRemovals.indexOf(action.payload) === -1) {
+      pendingRemovals.push(action.payload);
+      return Object.assign({}, state, { pendingRemovals });
+    }
+    return state;
+  }
   const activeLoaders = maybeRemoveLoader(state.activeLoaders, action.payload);
-  return {
+  return Object.assign({}, state, {
     active: getLoadingState(activeLoaders),
     activeLoaders
-  };
+  });
 };
 
 export default handleActions({
