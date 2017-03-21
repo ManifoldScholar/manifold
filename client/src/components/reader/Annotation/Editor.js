@@ -29,6 +29,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
     this.handleBodyChange = this.handleBodyChange.bind(this);
     this.handlePrivacyChange = this.handlePrivacyChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
 
     this.state = {
       body: "",
@@ -73,6 +74,14 @@ export default class AnnotationSelectionEditor extends PureComponent {
     this.setState({ body: event.target.value });
   }
 
+  handleCancel(event) {
+    console.log("test");
+    event.preventDefault();
+    if (this.props.cancel) {
+      this.props.cancel(event);
+    }
+  }
+
   handlePrivacyChange(event) {
     const value = !this.state.isPrivate;
     this.setState({ isPrivate: value });
@@ -114,7 +123,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
             </div>
             <div className="buttons">
               <button
-                onClick={this.props.cancel}
+                onClick={this.handleCancel}
                 className="button-primary dull"
               >
                 Cancel

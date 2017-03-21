@@ -384,6 +384,7 @@ class Annotatable extends Component {
       this.state.selectionLockedAnnotation;
     return (
       <Annotation.Selection.Wrapper
+        closeDrawer={this.closeDrawer}
         subject={subject}
         startNode={startNode}
         startChar={startChar}
