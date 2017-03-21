@@ -50,6 +50,7 @@ class Annotation < ApplicationRecord
             presence: true,
             inclusion: { in: %W(#{TYPE_ANNOTATION} #{TYPE_HIGHLIGHT} #{TYPE_RESOURCE}) }
   validate :valid_subject?
+  validates :body, presence: true, if: :annotation?
 
   # Delegations
   delegate :text, to: :text_section
