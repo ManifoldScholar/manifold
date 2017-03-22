@@ -38,7 +38,7 @@ if (__DEVELOPMENT__) {
       !rootElement.firstChild ||
       !rootElement.firstChild.attributes ||
       !rootElement.firstChild.attributes['data-react-checksum']) {
-      console.log("%c?  SSR differs", errorStyle);
+      console.log("%c🛑  SSR differs", errorStyle);
     } else {
       console.log("%c✅  SSR matches", style);
     }
