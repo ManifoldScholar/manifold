@@ -26,6 +26,7 @@ export default () => {
         <Route component={Frontend.Login} path="login" />
         <Route component={Frontend.PasswordReset} path="reset-password/:resetToken" />
         <Route component={Frontend.Following} path="following" />
+        <Route component={Frontend.Featured} path="featured" />
         <Route component={Frontend.ProjectDetail} path="project/:id" />
         <Route component={Frontend.CollectionDetail} path="project/:id/collection/:collectionId" />
         <Route component={Frontend.CollectionResourceDetail} path="project/:id/collection/:collectionId/collection_resource/:collectionResourceId" />

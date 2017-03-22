@@ -161,6 +161,10 @@ module Validation
     params.permit(filter: [ids: []])[:filter]
   end
 
+  def subject_filter_params
+    params.permit(filter: [:featured])[:filter]
+  end
+
   def project_filter_params
     params.permit(filter: [:featured, :subject, :keyword, :typeahead])[:filter]
   end

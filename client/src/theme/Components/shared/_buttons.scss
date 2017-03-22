@@ -122,6 +122,14 @@
     }
   }
 
+  .manicon-lamp {
+    font-size: 2.3em;
+
+    @include respond($break60) {
+      margin-top: -7px;
+    }
+  }
+
   .manicon-books-with-glasses {
     font-size: 1.933em;
 

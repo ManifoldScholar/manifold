@@ -28,6 +28,7 @@ export default {
   feProjectsFollowed: 'frontend-projects-followed',
   feEvents: 'frontend-events',
   feSubjects: 'frontend-subjects',
+  feSubjectsFeatured: 'frontend-subjects-featured',
   feResources: 'frontend-resources',
   feResource: 'frontend-resource',
   feSlideshow: 'frontend-slideshow',

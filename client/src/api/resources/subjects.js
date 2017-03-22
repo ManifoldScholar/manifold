@@ -17,6 +17,17 @@ export default {
       options: {
       }
     };
+  },
+
+  featuredSubjects() {
+    const filter = { featured: true };
+    return {
+      endpoint: `/api/v1/subjects/`,
+      method: 'GET',
+      options: {
+        params: { filter }
+      }
+    };
   }
 
 };
