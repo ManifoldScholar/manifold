@@ -63,9 +63,9 @@ class User < ApplicationRecord
 
   # Transform a name into first and last names
   def name=(name)
-    name_parts = name.split
-    first = name_parts[0]
-    last = name_parts[-1]
+    parts = name.try(:split) || []
+    first = parts.length > 1 ? parts.take(parts.size - 1).join(" ") : parts.first
+    last = parts.length > 1 ? parts.last : nil
     self.first_name = first
     self.last_name = last
   end
