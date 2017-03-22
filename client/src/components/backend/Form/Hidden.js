@@ -17,11 +17,13 @@ class FormHiddenInput extends Component {
   render() {
     const value = this.props.value || "";
     return (
-      <input
-        type="hidden"
-        value={value}
-        onChange={this.props.onChange}
-      />
+      <div className="form-input">
+        <input
+          type="hidden"
+          value={value}
+          onChange={this.props.onChange}
+        />
+      </div>
     );
   }
 }
