@@ -27,7 +27,7 @@ export default function setter(WrappedComponent) {
       dirtyModel: PropTypes.object,
       sourceModel: PropTypes.object,
       readFrom: PropTypes.string,
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string,
       actions: PropTypes.shape({
         set: PropTypes.func
       }).isRequired
@@ -69,6 +69,7 @@ export default function setter(WrappedComponent) {
     }
 
     setValue(value, props) {
+      if (!this.isConnected(this.props)) return;
       props.actions.set(props.sessionKey, this.setPath(props), value);
     }
 
@@ -122,12 +123,18 @@ export default function setter(WrappedComponent) {
       };
     }
 
+    isConnected(props) {
+      if (this.props.name) return true;
+      return false;
+    }
+
     childProps(props) {
       return Object.assign({}, this.passthroughProps(props), this.additionalProps(props));
     }
 
     render() {
-      return React.createElement(WrappedComponent, this.childProps(this.props));
+      const props = this.isConnected(this.props) ? this.childProps(this.props) : this.props;
+      return React.createElement(WrappedComponent, props);
     }
   }
 
