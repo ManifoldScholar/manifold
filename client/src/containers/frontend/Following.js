@@ -14,6 +14,7 @@ import size from 'lodash/size';
 const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
+const featuredLimit = 4;
 
 class FollowingContainer extends Component {
 
@@ -103,6 +104,19 @@ class FollowingContainer extends Component {
     });
   }
 
+  renderFeaturedButton(limit) {
+    if (this.props.featuredProjects.length <= limit) return null;
+    return (
+      <div className="section-heading-utility-right">
+        <Link to={`/browse/featured`} className="button-primary">
+          <span>
+            <i className="manicon manicon-lamp"></i>See all featured
+          </span>
+        </Link>
+      </div>
+    );
+  }
+
   renderFollowedProjects() {
     const boundSetFilters = bindActionCreators(setProjectFilters, this.props.dispatch);
     const subjects = this.mapFavoritesToSubjects();
@@ -150,12 +164,7 @@ class FollowingContainer extends Component {
                   <i className="manicon manicon-lamp"></i>
                   {'Featured Projects'}
                 </h4>
-                {/* Commented out until functional
-                <div className="section-heading-utility-right">
-                  <Link to={`/browse/`} className="button-primary">
-                    See all Featured
-                  </Link>
-                </div> */}
+                {this.renderFeaturedButton(featuredLimit)}
               </header>
               { this.props.featuredProjects ?
                 <ProjectList.Grid
@@ -163,6 +172,7 @@ class FollowingContainer extends Component {
                   favorites={get(this.props.authentication, 'currentUser.favorites')}
                   dispatch={this.props.dispatch}
                   projects={this.props.featuredProjects}
+                  limit={featuredLimit}
                 /> : null
               }
             </div>

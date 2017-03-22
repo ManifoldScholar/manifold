@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Project } from 'components/frontend';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import difference from 'lodash/difference';
+import shuffle from 'lodash/shuffle';
 
 export default class ProjectListGrid extends Component {
 
@@ -9,6 +10,7 @@ export default class ProjectListGrid extends Component {
 
   static propTypes = {
     projects: PropTypes.array,
+    limit: PropTypes.number,
     authenticated: PropTypes.bool,
     favorites: PropTypes.object,
     dispatch: PropTypes.func
@@ -38,7 +40,19 @@ export default class ProjectListGrid extends Component {
     return false;
   }
 
+  projectsList() {
+    if (!this.props.projects) return null;
+    let out = null;
+    if (this.props.limit) {
+      out = this.props.projects.slice(0, this.props.limit);
+    } else {
+      out = this.props.projects;
+    }
+    return out;
+  }
+
   render() {
+    const projects = this.projectsList();
     const hideDesc = true;
 
     return (
@@ -51,7 +65,7 @@ export default class ProjectListGrid extends Component {
           transitionLeaveTimeout={250}
           component="ul"
         >
-          {this.props.projects.map((project) => {
+          {projects.map((project) => {
             return (
               <li key={project.id} >
                 <Project.Thumbnail

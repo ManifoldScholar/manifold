@@ -105,6 +105,16 @@
       @include respond($break95) {
         margin-bottom: 0;
       }
+
+      .manicon {
+        display: inline-block;
+        margin-right: 8px;
+        vertical-align: top;
+
+        &.manicon-lamp {
+          font-size: 1.3em;
+        }
+      }
     }
   }
 }

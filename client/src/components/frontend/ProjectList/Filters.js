@@ -6,7 +6,8 @@ export default class ProjectListFilters extends Component {
 
   static propTypes = {
     updateAction: PropTypes.func,
-    subjects: PropTypes.array
+    subjects: PropTypes.array,
+    hideFeatured: PropTypes.bool
   };
 
   filterChange = (event) => {
@@ -38,6 +39,7 @@ export default class ProjectListFilters extends Component {
   }
 
   featuredOptions() {
+    if (this.props.hideFeatured) return null;
     return (
       <option value="featured">Featured Projects</option>
     );
