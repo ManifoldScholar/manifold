@@ -6,6 +6,7 @@ import { Developer } from 'components/global';
 import { bindActionCreators } from 'redux';
 import { entityUtils } from 'utils';
 import get from 'lodash/get';
+import isString from 'lodash/isString';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -143,6 +144,9 @@ class FormContainer extends PureComponent {
   renderChildren(props) {
     const childProps = this.childProps(props);
     return React.Children.map(props.children, child => {
+      if (isString(child.type)) {
+        return child;
+      }
       return React.cloneElement(child, childProps);
     });
   }
