@@ -150,7 +150,7 @@ class MakersEditContainer extends PureComponent {
               style="square"
               accepts="images"
               label="Avatar Image"
-              current={this.props.maker.attributes.avatarStyles.smallSquare}
+              readFrom="attributes[avatarStyles][smallSquare]"
               name="attributes[avatar]"
               remove="attributes[removeAvatar]"
             />

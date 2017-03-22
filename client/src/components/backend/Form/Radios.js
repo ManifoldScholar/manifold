@@ -1,18 +1,23 @@
 import React, { Component, PropTypes } from 'react';
-import sharedPropsValidation from './propTypes';
-import { Form } from 'components/backend';
+import setter from './setter';
 import classNames from 'classnames';
 
-export default class FormRadios extends Component {
+class FormRadios extends Component {
 
   static displayName = "Form.Radios";
 
   static propTypes = {
-    ...sharedPropsValidation,
     options: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.any.isRequired,
       label: PropTypes.string.isRequired
-    })).isRequired
+    })).isRequired,
+    label: PropTypes.string,
+    name: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.any,
+    errors: PropTypes.array,
+    layout: PropTypes.string,
+    set: PropTypes.func
   };
 
   static defaultProps = {
@@ -20,8 +25,11 @@ export default class FormRadios extends Component {
   };
 
   render() {
-
-    const inputClassNames = classNames('form-toggle', 'radio', this.props.layout);
+    const inputClassNames = classNames(
+      'form-toggle',
+      'radio',
+      this.props.layout
+    );
 
     return (
       <div className="form-input">
@@ -29,9 +37,12 @@ export default class FormRadios extends Component {
         {this.props.options.map((option) => {
           return (
             <label htmlFor={option.value} className={inputClassNames} key={option.value} >
-              <Form.Connect.Set {...this.props} value={option.value} >
-                <input id={option.value} checked={this.props.value === option.value} type="radio" />
-              </Form.Connect.Set>
+              <input
+                id={option.value}
+                checked={this.props.value === option.value}
+                onChange={() => { this.props.set(option.value); }}
+                type="radio"
+              />
               <span className="toggle-indicator"></span>
               <span className="toggle-label">{option.label}</span>
             </label>
@@ -43,3 +54,5 @@ export default class FormRadios extends Component {
   }
 
 }
+
+export default setter(FormRadios);

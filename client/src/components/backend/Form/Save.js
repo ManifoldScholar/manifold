@@ -5,22 +5,22 @@ export default class FormSave extends Component {
 
   static displayName = "Form.Save";
 
-  static defaultProps = {
-    text: 'Save'
-  };
-
   static propTypes = {
     text: PropTypes.string
   };
 
-  constructor(props) {
-    super(props);
-  }
+  static defaultProps = {
+    text: 'Save'
+  };
 
   render() {
     return (
       <div className="form-input submit">
-        <input className="button-secondary outlined" type="submit" value={this.props.text} />
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value={this.props.text}
+        />
       </div>
     );
   }

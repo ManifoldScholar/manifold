@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 import { Form } from 'components/backend';
 import { shallow, mount, render } from 'enzyme';
 import { Event } from 'components/frontend';
-import Set from '../Connect/Set';
 
 describe("Form.TextInput component", () => {
 
@@ -23,12 +22,5 @@ describe("Form.TextInput component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
-  it('triggers a change event', () => {
-    const component = shallow(element);
-    component.find('input').simulate('change');
-    expect(onChange.mock.calls.length).toBe(1);
-    onChange.mockClear();
-  });
-
+  
 });

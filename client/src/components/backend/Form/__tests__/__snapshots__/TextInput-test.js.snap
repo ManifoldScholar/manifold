@@ -6,10 +6,9 @@ exports[`Form.TextInput component renders correctly 1`] = `
     A form label
   </label>
   <input
-    name="attributes[property]"
     onChange={[Function]}
     placeholder={undefined}
     type="text"
-    value={undefined} />
+    value="" />
 </div>
 `;

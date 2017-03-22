@@ -66,7 +66,7 @@ export default class ProjectPanelGeneral extends PureComponent {
             style="square"
             label="Avatar"
             accepts="images"
-            current={this.props.project.attributes.avatarStyles.smallSquare}
+            readFrom="attributes[avatarStyles][smallSquare]"
             name="attributes[avatar]"
             remove="attributes[removeAvatar]"
           />
@@ -74,7 +74,7 @@ export default class ProjectPanelGeneral extends PureComponent {
             style="portrait"
             label="Cover"
             accepts="images"
-            current={this.props.project.attributes.coverStyles.smallPortrait}
+            readFrom="attributes[coverStyles][smallPortrait]"
             name="attributes[cover]"
             remove="attributes[removeCover]"
           />
@@ -82,7 +82,7 @@ export default class ProjectPanelGeneral extends PureComponent {
             style="landscape"
             accepts="images"
             label="Hero Image"
-            current={this.props.project.attributes.heroStyles.mediumLandscape}
+            readFrom="attributes[heroStyles][mediumLandscape]"
             name="attributes[hero]"
             remove="attributes[removeHero]"
           />

@@ -1,23 +1,23 @@
 import React, { Component, PropTypes } from 'react';
-import { Form } from 'components/backend';
-import sharedPropsValidation from './propTypes';
+import { Form as GlobalForm } from 'components/global';
 import classNames from 'classnames';
+import setter from './setter';
 
-export default class FormSelect extends Component {
+class FormSelect extends Component {
 
   static displayName = "Form.Select";
 
   static propTypes = {
-    ...sharedPropsValidation,
+    value: PropTypes.any,
+    errors: PropTypes.array,
+    label: PropTypes.string,
+    name: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.any.isRequired,
       label: PropTypes.string.isRequired
     })).isRequired
   };
-
-  static defaultProps = {
-    layout: "horizontal"
-  }
 
   render() {
 
@@ -29,17 +29,27 @@ export default class FormSelect extends Component {
 
     return (
       <div className="form-input">
-        <label>{this.props.label}</label>
-        <Form.Connect.Set {...this.props} >
+        <GlobalForm.Errorable
+          className="form-input"
+          name={this.props.name}
+          errors={this.props.errors}
+          label={this.props.label}
+        >
+          <label>{this.props.label}</label>
           <div className="form-select">
             <i className="manicon manicon-caret-down"></i>
-            <select>
+            <select
+              onChange={this.props.onChange}
+              value={this.props.value}
+            >
               {options}
             </select>
           </div>
-        </Form.Connect.Set>
+        </GlobalForm.Errorable>
       </div>
     );
   }
 
 }
+
+export default setter(FormSelect);

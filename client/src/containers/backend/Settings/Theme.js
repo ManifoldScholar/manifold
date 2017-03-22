@@ -34,7 +34,7 @@ class SettingsThemeContainer extends PureComponent {
             style="square"
             accepts="images"
             label="Press Logo"
-            current={this.props.settings.attributes.pressLogoUrl}
+            readFrom="attributes[pressLogoUrl][smallSquare]"
             name="attributes[press_logo]"
             remove="attributes[removePressLogo]"
           />
