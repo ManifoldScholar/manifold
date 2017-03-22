@@ -43,6 +43,6 @@ if (__DEVELOPMENT__) {
       console.log("%c✅  SSR matches", style);
     }
   } else {
-    console.log("%c⚠  SSR:: missing", style);
+    console.log("%c🛑  SSR missing", errorStyle);
   }
 }
