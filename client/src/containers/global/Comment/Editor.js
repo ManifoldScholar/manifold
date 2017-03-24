@@ -8,6 +8,7 @@ import { entityUtils } from 'utils';
 import { commentsAPI } from 'api';
 const { request, flush } = entityStoreActions;
 const { select, meta, singularEntityName } = entityUtils;
+import { Form as GlobalForm } from 'components/global';
 
 class CommentEditor extends PureComponent {
 
@@ -35,7 +36,8 @@ class CommentEditor extends PureComponent {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      body: ""
+      body: "",
+      errors: []
     };
     if (this.isEdit(props)) this.state.body = props.comment.attributes.body;
   }
@@ -62,16 +64,24 @@ class CommentEditor extends PureComponent {
     const comment = this.commentFromPropsAndState(props, state);
     const call = commentsAPI.create(props.subject, comment);
     const options = { adds: `comments-for-${props.subject.id}` };
-    this.props.dispatch(request(call, requests.rCommentCreate, options));
-    this.props.cancel();
+    const createRequest = request(call, requests.rCommentCreate, options);
+    this.processRequest(createRequest);
   }
 
   updateComment(props, state) {
     const comment = this.commentFromPropsAndState(props, state);
     const call = commentsAPI.update(props.comment.id, comment);
     const options = { adds: `comments-for-${props.subject.id}` };
-    this.props.dispatch(request(call, requests.rCommentCreate, options));
-    this.props.cancel();
+    const updateRequest = request(call, requests.rCommentCreate, options);
+    this.processRequest(updateRequest);
+  }
+
+  processRequest(apiRequest) {
+    this.props.dispatch(apiRequest).promise.then(() => {
+      this.props.cancel();
+    }, (response) => {
+      this.handleErrors(response.body.errors);
+    });
   }
 
   commentFromPropsAndState(props, state) {
@@ -79,6 +89,10 @@ class CommentEditor extends PureComponent {
       body: state.body,
       parentId: props.parentId
     };
+  }
+
+  handleErrors(errors) {
+    this.setState({ errors });
   }
 
   handleBodyChange(event) {
@@ -126,14 +140,18 @@ class CommentEditor extends PureComponent {
     return (
       <div className="comment-editor">
         <form onSubmit={this.handleSubmit}>
-          <textarea
-            ref={(ci) => { this.ci = ci; }}
-            onKeyDown={this.submitOnReturnKey}
-            className={textClass}
-            placeholder={this.placeholder(this.props)}
-            onChange={this.handleBodyChange}
-            value={this.state.body}
-          />
+          <GlobalForm.Errorable
+            name="attributes[body]"
+            errors={this.state.errors}
+          >
+            <textarea
+              ref={(ci) => { this.ci = ci; }}
+              onKeyDown={this.submitOnReturnKey}
+              className={textClass}
+              placeholder={this.placeholder(this.props)}
+              onChange={this.handleBodyChange}
+              value={this.state.body}
+            />
           <div className="utility">
             <div className="buttons">
               <button
@@ -150,6 +168,7 @@ class CommentEditor extends PureComponent {
               </button>
             </div>
           </div>
+          </GlobalForm.Errorable>
         </form>
       </div>
     );

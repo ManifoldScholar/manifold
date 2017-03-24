@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { isPromise } from 'utils/promise';
+import { Form as GlobalForm } from 'components/global';
 
 export default class AnnotationSelectionEditor extends PureComponent {
 
@@ -33,7 +34,8 @@ export default class AnnotationSelectionEditor extends PureComponent {
 
     this.state = {
       body: "",
-      isPrivate: false
+      isPrivate: false,
+      errors: []
     };
 
     if (props.body) this.state.body = props.body;
@@ -66,6 +68,8 @@ export default class AnnotationSelectionEditor extends PureComponent {
     if (isPromise(promise)) {
       promise.then(() => {
         this.props.cancel();
+      }, (response) => {
+        this.handleErrors(response.body.errors);
       });
     }
   }
@@ -75,7 +79,6 @@ export default class AnnotationSelectionEditor extends PureComponent {
   }
 
   handleCancel(event) {
-    console.log("test");
     event.preventDefault();
     if (this.props.cancel) {
       this.props.cancel(event);
@@ -85,6 +88,10 @@ export default class AnnotationSelectionEditor extends PureComponent {
   handlePrivacyChange(event) {
     const value = !this.state.isPrivate;
     this.setState({ isPrivate: value });
+  }
+
+  handleErrors(errors) {
+    this.setState({ errors });
   }
 
   render() {
@@ -98,13 +105,18 @@ export default class AnnotationSelectionEditor extends PureComponent {
     return (
       <div className="annotation-editor">
         <form onSubmit={this.handleSubmit}>
-        <textarea
-          ref={(ci) => { this.ci = ci; }}
-          style={{ width: "100%" }}
-          placeholder={'Annotate this passage...'}
-          onChange={this.handleBodyChange}
-          value={this.state.body}
-        />
+          <GlobalForm.Errorable
+            name="attributes[body]"
+            errors={this.state.errors}
+          >
+            <textarea
+              ref={(ci) => { this.ci = ci; }}
+              style={{ width: "100%" }}
+              placeholder={'Annotate this passage...'}
+              onChange={this.handleBodyChange}
+              value={this.state.body}
+            />
+          </GlobalForm.Errorable>
           <div className="utility">
             <div className="form-input">
               <label className={checkClass} >
