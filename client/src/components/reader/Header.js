@@ -179,6 +179,7 @@ export default class Header extends Component {
         <div className={bannerGradientClass} />
         <TocDrawer
           text={this.props.text}
+          section={this.props.section}
           visible={this.props.visibility.tocDrawer}
           hideTocDrawer={this.triggerHideToc}
         />

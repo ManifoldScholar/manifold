@@ -131,6 +131,21 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 />
               </li>
             </ul>
+            <div
+              className="toc-footer"
+            >
+              <a
+                href="/read/1/section/2/about"
+                onClick={[Function]}
+              >
+                <h4>
+                  <i
+                    className="manicon manicon-question-round"
+                  />
+                  About This Text
+                </h4>
+              </a>
+            </div>
           </nav>
         </div>
       </div>

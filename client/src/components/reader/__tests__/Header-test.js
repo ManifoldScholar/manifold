@@ -7,8 +7,8 @@ import { Provider } from "react-redux";
 
 describe("Reader.Header Component", () => {
   const text = build.entity.text("1");
-  const project = build.entity.project("2");
-  text.relationships.project = project;
+  const section = build.entity.textSection("2");
+  text.relationships.project = build.entity.project("3");
 
   const store = build.store();
 
@@ -41,6 +41,8 @@ describe("Reader.Header Component", () => {
         commonActions={commonActions}
         notifications={notifications}
         text={text}
+        section={section}
+        scrollAware={{}}
       />
     </Provider>
   );

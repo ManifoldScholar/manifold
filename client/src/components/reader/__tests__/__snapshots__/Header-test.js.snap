@@ -23,6 +23,21 @@ exports[`Reader.Header Component renders correctly 1`] = `
         className="manicon manicon-caret-down"
       />
     </button>
+    <header
+      className="title show-section"
+      onClick={[Function]}
+    >
+      <h3
+        className="text-title"
+      >
+        Ain't No Thang
+      </h3>
+      <h2
+        className="section-title"
+      >
+        Title Page
+      </h2>
+    </header>
     <nav
       className="menu-buttons"
     >
@@ -112,6 +127,21 @@ exports[`Reader.Header Component renders correctly 1`] = `
             />
           </li>
         </ul>
+        <div
+          className="toc-footer"
+        >
+          <a
+            href="/read/1/section/2/about"
+            onClick={[Function]}
+          >
+            <h4>
+              <i
+                className="manicon manicon-question-round"
+              />
+              About This Text
+            </h4>
+          </a>
+        </div>
       </nav>
     </div>
   </div>
@@ -127,7 +157,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
         <ul>
           <li>
             <a
-              href="/project/2"
+              href="/project/3"
               onClick={[Function]}
             >
               <i

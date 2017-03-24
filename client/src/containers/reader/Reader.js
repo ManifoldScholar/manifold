@@ -61,11 +61,7 @@ export class ReaderContainer extends Component {
     };
     return {
       annotations: select(requests.rAnnotations, state.entityStore),
-      section: grab(
-        "textSections",
-        ownProps.match.params.sectionId,
-        state.entityStore
-      ),
+      section: select(requests.rSection, state.entityStore),
       text: grab("texts", ownProps.match.params.textId, state.entityStore),
       resources: select(requests.rSectionResources, state.entityStore),
       authentication: state.authentication,
