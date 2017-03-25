@@ -198,6 +198,7 @@ class ProjectDetailTexts extends PureComponent {
   previousCategory(text) {
     const category = text.relationships.category;
     if (this.isUncategorizedText(text)) {
+      if (this.categories().length === 0) return "published";
       return this.categories()[this.categories().length - 1];
     }
     if (this.isPublishedText(text)) return null;
