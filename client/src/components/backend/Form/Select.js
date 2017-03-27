@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Form as GlobalForm } from 'components/global';
 import classNames from 'classnames';
 import setter from './setter';
+import isNull from 'lodash/isNull';
 
 class FormSelect extends Component {
 
@@ -20,6 +21,7 @@ class FormSelect extends Component {
   };
 
   render() {
+    const value = isNull(this.props.value) ? "" : this.props.value;
 
     const options = this.props.options.map((option) => {
       return (
@@ -28,25 +30,25 @@ class FormSelect extends Component {
     });
 
     return (
-      <div className="form-input">
-        <GlobalForm.Errorable
-          className="form-input"
-          name={this.props.name}
-          errors={this.props.errors}
-          label={this.props.label}
-        >
+      <GlobalForm.Errorable
+        className="form-input"
+        name={this.props.name}
+        errors={this.props.errors}
+        label={this.props.label}
+      >
+        <div className="form-input">
           <label>{this.props.label}</label>
           <div className="form-select">
             <i className="manicon manicon-caret-down"></i>
             <select
               onChange={this.props.onChange}
-              value={this.props.value}
+              value={value}
             >
               {options}
             </select>
           </div>
-        </GlobalForm.Errorable>
-      </div>
+        </div>
+      </GlobalForm.Errorable>
     );
   }
 
