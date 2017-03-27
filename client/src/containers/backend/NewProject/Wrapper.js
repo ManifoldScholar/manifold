@@ -72,6 +72,7 @@ class NewProjectWrapperContainer extends PureComponent {
                   />
                   <Form.Save
                     text="Save and Continue"
+                    cancelRoute={`/backend`}
                   />
                 </FormContainer.Form>
               </section>

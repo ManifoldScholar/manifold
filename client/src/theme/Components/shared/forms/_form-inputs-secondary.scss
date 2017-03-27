@@ -85,6 +85,17 @@
       display: inline-block;
       width: auto;
     }
+
+    &.submit {
+      .button-secondary, .button-secondary-dull {
+        line-height: normal;
+
+        + .button-secondary, + .button-secondary-dull {
+          margin-top: 0;
+          margin-left: 15px;
+        }
+      }
+    }
   }
 
   // Dropdown
