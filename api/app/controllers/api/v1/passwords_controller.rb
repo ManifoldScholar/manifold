@@ -5,6 +5,9 @@ module Api
       include Password
       include Resourceful
 
+      resourceful! User, authorize_options:
+        { only: [:admin_reset_password], actions: { admin_reset_password: :update } }
+
       def create
         @user = User.find_by(email: params[:email])
         @user&.generate_reset_token
@@ -19,6 +22,19 @@ module Api
           render_single_resource(user)
         else
           render json:  user,
+                 serializer: ActiveModel::Serializer::ErrorSerializer,
+                 status: :unprocessable_entity
+        end
+      end
+
+      def admin_reset_password
+        @user = User.find(params[:id])
+        @user.force_reset_password
+        if @user.save
+          ResetPasswordMailer.admin_reset_email(@user).deliver_now
+          render_single_resource(@user)
+        else
+          render json:  @user,
                  serializer: ActiveModel::Serializer::ErrorSerializer,
                  status: :unprocessable_entity
         end

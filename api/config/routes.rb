@@ -83,6 +83,7 @@ Rails.application.routes.draw do
       end
 
       resources :passwords, only: [:create, :update]
+      post "passwords/admin_reset_password" => "passwords#admin_reset_password"
 
       get "*path", to: "errors#error_404", via: :all
     end
