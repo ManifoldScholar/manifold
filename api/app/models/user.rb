@@ -94,4 +94,8 @@ class User < ApplicationRecord
     [first_name, last_name].reject(&:blank?).join(" ")
   end
 
+  def force_reset_password
+    self.password = SecureRandom.hex(6)
+  end
+
 end

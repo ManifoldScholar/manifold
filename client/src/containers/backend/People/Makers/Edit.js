@@ -114,10 +114,6 @@ class MakersEditContainer extends PureComponent {
             {`${attr.firstName} ${attr.lastName}`}
           </h2>
           <div className="buttons-bare-vertical">
-            <button className="button-bare-primary">
-              {'Reset Password'}
-              <i className="manicon manicon-key"></i>
-            </button><br/>
             <button
               className="button-bare-primary"
               onClick={(event) => { this.handleMakerDestroy(event, this.props.maker); }}
