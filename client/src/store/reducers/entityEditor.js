@@ -63,7 +63,12 @@ const set = (state, action) => {
     lodashSet(dirty, setPathToGetPath(path), null);
     newDirty = update(dirty, setPath);
   }
-  const changed = hasChanges(newDirty);
+  let changed;
+  if (action.payload.triggersDirty) {
+    changed = hasChanges(newDirty);
+  } else {
+    changed = lodashGet(state, `${id}.changed`) || false;
+  }
   return update(state, { sessions: { [id]: {
     changed: { $set: changed },
     dirty: { $set: newDirty }
