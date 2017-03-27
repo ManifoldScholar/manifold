@@ -89,14 +89,8 @@ class NewResourceWrapperContainer extends PureComponent {
                 />
                 <Form.Save
                   text="Save and continue"
+                  cancelRoute={`/backend/project/${this.props.params.projectId}/resources`}
                 />
-                <a
-                  style={{ marginTop: '15px' }}
-                  className="button-secondary outline dull"
-                  href={`/backend/project/${this.props.params.projectId}/resources`}
-                >
-                  Cancel
-                </a>
               </FormContainer.Form>
             </div>
           </div>
