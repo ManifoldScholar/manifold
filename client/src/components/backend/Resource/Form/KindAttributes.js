@@ -1,23 +1,17 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Resource, Form } from 'components/backend';
-import get from 'lodash/get';
 
 export default class KindAttributes extends PureComponent {
 
   static displayName = "Resource.KindAttributes";
 
   static propTypes = {
-    dirtyModel: PropTypes.object,
-    kind: PropTypes.string
+    getModelValue: PropTypes.func
   };
 
-  selectedKind(props) {
-    const path = 'attributes.kind';
-    return get(props.dirtyModel, path) || get(props.sourceModel.path)
-  }
-
   render() {
-    switch (this.selectedKind(this.props)) {
+    if (!this.props.getModelValue) return null;
+    switch (this.props.getModelValue("attributes[kind]")) {
       case "image":
         return <Resource.Form.Kind.Image {...this.props}/>;
       case "video":

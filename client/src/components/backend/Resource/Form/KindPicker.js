@@ -1,14 +1,14 @@
 import React, { PureComponent, PropTypes } from 'react';
 import classNames from 'classnames';
 import { Resource } from 'components/frontend';
+import setter from 'components/backend/Form/setter';
 
-export default class KindPicker extends PureComponent {
+class KindPicker extends PureComponent {
 
   static displayName = "Resource.KindPicker";
 
   static propTypes = {
-    kind: PropTypes.string,
-    setKind: PropTypes.func,
+    name: PropTypes.string,
     includeButtons: PropTypes.bool
   };
 
@@ -20,12 +20,12 @@ export default class KindPicker extends PureComponent {
           const safeKind = kind.toLowerCase();
           const buttonClass = classNames({
             button: true,
-            active: safeKind === this.props.kind
+            active: safeKind === this.props.value
           });
           return (
             <li key={safeKind}>
               <div
-                onClick={() => { this.props.setKind(safeKind); }}
+                onClick={() => { this.props.set(safeKind); }}
                 className={buttonClass}
               >
                 <figure>
@@ -74,9 +74,9 @@ export default class KindPicker extends PureComponent {
               <i className="manicon manicon-caret-down"></i>
                 <select
                   onChange={(event) => {
-                    this.props.setKind(event.target.value);
+                    this.props.set(event.target.value);
                   }}
-                  value={this.props.kind.toLowerCase()}
+                  value={this.props.value.toLowerCase()}
                 >
                   {kindList.map((kind) => {
                     const safeKind = kind.toLowerCase();
@@ -97,3 +97,5 @@ export default class KindPicker extends PureComponent {
   }
 
 }
+
+export default setter(KindPicker);

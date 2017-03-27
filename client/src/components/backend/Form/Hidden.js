@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import setter from './setter';
+import isNull from 'lodash/isNull';
 
 class FormHiddenInput extends Component {
 
@@ -15,7 +16,7 @@ class FormHiddenInput extends Component {
   }
 
   render() {
-    const value = this.props.value || "";
+    const value = isNull(this.props.value) ? "" : this.props.value;
     return (
       <div className="form-input">
         <input
