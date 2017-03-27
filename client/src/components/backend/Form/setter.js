@@ -46,7 +46,8 @@ export default function setter(WrappedComponent) {
     }
 
     componentWillMount() {
-      if (has(this.props, 'value')) this.setValue(this.props.value, this.props);
+      if (!has(this.props, 'value')) return;
+      this.setValue(this.props.value, this.props, false);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -68,9 +69,10 @@ export default function setter(WrappedComponent) {
       this.setValue(value, props);
     }
 
-    setValue(value, props) {
+    setValue(value, props, triggersDirty = true) {
       if (!this.isConnected(this.props)) return;
-      props.actions.set(props.sessionKey, this.setPath(props), value);
+      const path = this.setPath(props);
+      props.actions.set(props.sessionKey, path, value, triggersDirty);
     }
 
     isDirtyValueSet(props) {
