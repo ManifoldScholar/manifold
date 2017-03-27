@@ -20,22 +20,11 @@ class NewResourceWrapperContainer extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      resourceKind: 'image'
-    };
-
     this.handleSuccess = this.handleSuccess.bind(this);
-    this.setResourceKind = this.setResourceKind.bind(this);
   }
 
   redirectToResource(resource) {
     browserHistory.push(`/backend/resource/${resource.id}`);
-  }
-
-  setResourceKind(kind) {
-    this.setState({
-      resourceKind: kind
-    });
   }
 
   handleSuccess(resource) {
@@ -58,20 +47,19 @@ class NewResourceWrapperContainer extends PureComponent {
         <section className="backend-panel">
           <div className="container">
             <div className="panel">
-              <Resource.Form.KindPicker
-                kind={this.state.resourceKind}
-                setKind={this.setResourceKind}
-                includeButtons
-              />
               <FormContainer.Form
                 route={this.props.routes[this.props.routes.length - 1]}
-                model={this.props.resource}
+                model={{ attributes: { kind: "image" } }}
                 name="backend-resource-create"
                 update={resourcesAPI.update}
                 create={ (model) => resourcesAPI.create(this.props.params.projectId, model) }
                 onSuccess={this.handleSuccess}
                 className="form-secondary"
               >
+                <Resource.Form.KindPicker
+                  name="attributes[kind]"
+                  includeButtons
+                />
                 <Form.TextInput
                   label="Title"
                   name="attributes[title]"
@@ -82,11 +70,7 @@ class NewResourceWrapperContainer extends PureComponent {
                   name="attributes[description]"
                   placeholder="Enter a description"
                 />
-                <Resource.Form.KindAttributes kind={this.state.resourceKind} />
-                <Form.Hidden
-                  name="attributes[kind]"
-                  value={this.state.resourceKind}
-                />
+                <Resource.Form.KindAttributes />
                 <Form.Save
                   text="Save and continue"
                   cancelRoute={`/backend/project/${this.props.params.projectId}/resources`}

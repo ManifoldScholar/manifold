@@ -19,7 +19,6 @@ class ResourceDetailGeneralContainer extends PureComponent {
     super(props);
 
     this.state = this.initialState();
-    this.setResourceKind = this.setResourceKind.bind(this);
     this.handleSuccess = this.handleSuccess.bind(this);
   }
 
@@ -30,26 +29,14 @@ class ResourceDetailGeneralContainer extends PureComponent {
     };
   }
 
-  setResourceKind(kind) {
-    this.setState({
-      newKind: kind
-    });
-  }
-
   handleSuccess() {
     this.setState(this.initialState);
   }
 
   render() {
     const resource = this.props.resource.attributes;
-    const renderKind = this.state.newKind ? this.state.newKind
-      : resource.kind;
     return (
       <section>
-        <Resource.Form.KindPicker
-          kind={renderKind}
-          setKind={this.setResourceKind}
-        />
         <FormContainer.Form
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.resource}
@@ -59,14 +46,7 @@ class ResourceDetailGeneralContainer extends PureComponent {
           onSuccess={this.handleSuccess}
           className="form-secondary"
         >
-          <Resource.Form.KindAttributes kind={renderKind} />
-          {resource.downloadableKind ?
-            <Form.Switch
-              label="Allow download?"
-              name="attributes[allowDownload]"
-            />
-            : null
-          }
+          <Resource.Form.KindPicker name="attributes[kind]" />
           <Form.TextInput
             label="Title"
             name="attributes[title]"
@@ -85,10 +65,14 @@ class ResourceDetailGeneralContainer extends PureComponent {
             placeholder="Enter a short description"
             {...this.props}
           />
-          <Form.Hidden
-            name="attributes[kind]"
-            value={renderKind}
-          />
+          {resource.downloadableKind ?
+            <Form.Switch
+              label="Allow download?"
+              name="attributes[allowDownload]"
+            />
+            : null
+          }
+          <Resource.Form.KindAttributes />
           <Form.Save
             text="Save Resource"
           />

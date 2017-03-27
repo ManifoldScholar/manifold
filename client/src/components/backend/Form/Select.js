@@ -30,25 +30,25 @@ class FormSelect extends Component {
     });
 
     return (
-      <GlobalForm.Errorable
-        className="form-input"
-        name={this.props.name}
-        errors={this.props.errors}
-        label={this.props.label}
-      >
-        <div className="form-input">
-          <label>{this.props.label}</label>
-          <div className="form-select">
-            <i className="manicon manicon-caret-down"></i>
-            <select
-              onChange={this.props.onChange}
-              value={value}
-            >
-              {options}
-            </select>
-          </div>
+      <div className="form-input">
+        <GlobalForm.Errorable
+          className="form-input"
+          name={this.props.name}
+          errors={this.props.errors}
+          label={this.props.label}
+        >
+        <label>{this.props.label}</label>
+        <div className="form-select">
+          <i className="manicon manicon-caret-down"></i>
+          <select
+            onChange={this.props.onChange}
+            value={value}
+          >
+            {options}
+          </select>
         </div>
-      </GlobalForm.Errorable>
+        </GlobalForm.Errorable>
+      </div>
     );
   }
 

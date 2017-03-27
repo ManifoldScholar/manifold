@@ -8,24 +8,6 @@ export default class ResourceFormKindInteractive extends PureComponent {
   static propTypes = {
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = this.setInitialState();
-    this.setInteractiveKind = this.setInteractiveKind.bind(this);
-  }
-
-  setInitialState() {
-    const init = this.props.sourceModel.attributes.isIframe;
-    return {
-      isIframe: init
-    };
-  }
-
-  setInteractiveKind(value) {
-    this.setState({ isIframe: value });
-  }
-
   renderIframeForm() {
     return (
       <div className="form-section">
@@ -63,18 +45,13 @@ export default class ResourceFormKindInteractive extends PureComponent {
       <div className="form-section">
         <Form.Switch
           label="Is this an iFrame?"
-          set={this.setInteractiveKind}
-          value={this.state.isIframe}
+          name="attributes[isIframe]"
+          {...this.props}
         />
-        {this.state.isIframe ?
+        {this.props.getModelValue("attributes[isIframe]") ?
           this.renderIframeForm()
           : this.renderEmbedForm()
         }
-        <Form.Hidden
-          name="attributes[isIframe]"
-          value={this.state.isIframe}
-          {...this.props}
-        />
       </div>
     );
   }

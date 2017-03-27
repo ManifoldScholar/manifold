@@ -9,24 +9,6 @@ export default class ResourceFormKindVideo extends PureComponent {
   static propTypes = {
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = this.setInitialState();
-    this.setVideoKind = this.setVideoKind.bind(this);
-  }
-
-  setInitialState() {
-    const init = this.props.sourceModel.attributes.isExternalVideo;
-    return {
-      isExternalVideo: init
-    };
-  }
-
-  setVideoKind(value) {
-    this.setState({ isExternalVideo: value });
-  }
-
   renderExternalVideoForm() {
     return (
       <div className="form-section">
@@ -70,18 +52,13 @@ export default class ResourceFormKindVideo extends PureComponent {
       <div className="form-section">
         <Form.Switch
           label="Is this an externally linked video?"
-          set={this.setVideoKind}
-          value={this.state.isExternalVideo}
+          name="attributes[isExternalVideo]"
+          {...this.props}
         />
-        {this.state.isExternalVideo ?
+        {this.props.getModelValue("attributes[isExternalVideo]") ?
           this.renderExternalVideoForm()
           : this.renderVideoAttachmentForm()
         }
-        <Form.Hidden
-          name="attributes[isExternalVideo]"
-          value={this.state.isExternalVideo}
-          {...this.props}
-        />
       </div>
     );
   }

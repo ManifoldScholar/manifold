@@ -6,8 +6,10 @@ import { Developer } from 'components/global';
 import { bindActionCreators } from 'redux';
 import { entityUtils } from 'utils';
 import get from 'lodash/get';
+import has from 'lodash/has';
 import isString from 'lodash/isString';
 import JSONTree from 'react-json-tree';
+import brackets2dots from 'brackets2dots';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -153,6 +155,21 @@ class FormContainer extends PureComponent {
     });
   }
 
+  nameToPath(name) {
+    return brackets2dots(name);
+  }
+
+  lookupValue(name, props) {
+    const path = this.nameToPath(name);
+    if (has(props.session.dirty, path)) {
+      return get(props.session.dirty, path);
+    }
+    if (has(props.session.source, path)) {
+      return get(props.session.source, path);
+    }
+    return null;
+  }
+
   childProps(props) {
     return {
       actions: {
@@ -160,6 +177,7 @@ class FormContainer extends PureComponent {
       },
       dirtyModel: props.session.dirty,
       sourceModel: props.session.source,
+      getModelValue: (name) => this.lookupValue(name, this.props),
       sessionKey: props.name,
       errors: props.errors || []
     };
