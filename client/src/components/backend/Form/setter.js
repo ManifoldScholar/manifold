@@ -46,8 +46,9 @@ export default function setter(WrappedComponent) {
     }
 
     componentWillMount() {
-      if (!has(this.props, 'value')) return;
-      this.setValue(this.props.value, this.props, false);
+      if (this.isConnected(this.props) && has(this.props, 'value')) {
+        this.setValue(this.props.value, this.props);
+      }
     }
 
     componentWillReceiveProps(nextProps) {
