@@ -115,6 +115,14 @@ class Project < ApplicationRecord
     title
   end
 
+  def updated?
+    updated_at.strftime("%F") != created_at.strftime("%F")
+  end
+
+  def recently_updated?
+    updated? && updated_at >= Time.current - 1.week
+  end
+
   private
 
   def trigger_creation_event
