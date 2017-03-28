@@ -1,5 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Resource, Form } from 'components/backend';
+import get from 'lodash/get';
 
 export default class KindAttributes extends PureComponent {
 
@@ -10,10 +11,13 @@ export default class KindAttributes extends PureComponent {
     kind: PropTypes.string
   };
 
+  selectedKind(props) {
+    const path = 'attributes.kind';
+    return get(props.dirtyModel, path) || get(props.sourceModel.path)
+  }
+
   render() {
-    if (!this.props.kind && !this.props.sourceModel.attributes.kind) return null;
-    const kind = this.props.kind ? this.props.kind : this.props.sourceModel.attributes.kind;
-    switch (kind) {
+    switch (this.selectedKind(this.props)) {
       case "image":
         return <Resource.Form.Kind.Image {...this.props}/>;
       case "video":

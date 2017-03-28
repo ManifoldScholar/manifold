@@ -53,6 +53,7 @@ const close = (state, action) => {
 
 const set = (state, action) => {
   const { path, id, value } = action.payload;
+  if (value === undefined) return state; // undefined values are noops.
   const setPath = lodashSet({}, path, value);
   const sourceValue = getSourceValue(path, state.sessions[id].source);
   let newDirty;
