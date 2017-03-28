@@ -56,11 +56,11 @@ const set = (state, action) => {
   if (value === undefined) return state; // undefined values are noops.
   const setPath = lodashSet({}, path, value);
   const sourceValue = getSourceValue(path, state.sessions[id].source);
+  const dirty = cloneDeep(state.sessions[id].dirty);
   let newDirty;
   if (value === sourceValue) {
-    newDirty = lodashOmit(state.dirty, setPathToGetPath(path));
+    newDirty = lodashOmit(dirty, setPathToGetPath(path));
   } else {
-    const dirty = cloneDeep(state.sessions[id].dirty);
     lodashSet(dirty, setPathToGetPath(path), null);
     newDirty = update(dirty, setPath);
   }
