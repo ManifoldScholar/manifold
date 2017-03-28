@@ -108,6 +108,8 @@
     @include drawerIndent(padding-left);
     font-weight: $regular;
     line-height: 1.375;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   // Direct scoping because nested comments also have utility
