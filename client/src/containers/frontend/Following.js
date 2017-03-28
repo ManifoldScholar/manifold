@@ -105,7 +105,7 @@ class FollowingContainer extends Component {
   }
 
   renderFeaturedButton(limit) {
-    if (this.props.featuredProjects.length <= limit) return null;
+    if (!this.props.featuredProjects || this.props.featuredProjects.length <= limit) return null;
     return (
       <div className="section-heading-utility-right">
         <Link to={`/browse/featured`} className="button-primary">
