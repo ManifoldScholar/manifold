@@ -28,7 +28,7 @@ class Text < ApplicationRecord
   acts_as_list scope: [:project_id, :category_id]
 
   # Associations
-  belongs_to :project, optional: true
+  belongs_to :project, optional: true, touch: true
   belongs_to :category, optional: true
   has_one :publishing_project, class_name: "Project", foreign_key: "published_text_id"
   belongs_to :start_text_section, optional: true, class_name: "TextSection"

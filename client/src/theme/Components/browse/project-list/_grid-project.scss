@@ -148,5 +148,18 @@
     .date {
       @include gridProjectDate;
     }
+
+    .alert::before {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 5px;
+      margin-bottom: 2px;
+      margin-left: -12px;
+      color: $neutralWhite;
+      background-color: $sp40Tertiary;
+      border-radius: 50%;
+      content: '';
+    }
   }
 }

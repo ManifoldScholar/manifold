@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Project as FrontEndProject } from 'components/frontend';
 import { Project as GlobalProject } from 'components/global';
 import FormattedDate from 'components/global/FormattedDate';
+import classNames from 'classnames';
 
 export default class ProjectThumbnail extends Component {
 
@@ -60,6 +61,22 @@ export default class ProjectThumbnail extends Component {
     );
   }
 
+  renderUpdatedDate(project) {
+    const classes = classNames({
+      date: true,
+      alert: project.attributes.recentlyUpdated
+    });
+    return (
+      <div className={classes}>
+        <FormattedDate
+          prefix="Updated"
+          format="MMMM, YYYY"
+          date={project.attributes.updatedAt}
+        />
+      </div>
+    );
+  }
+
   render() {
     const project = this.props.project;
 
@@ -78,7 +95,10 @@ export default class ProjectThumbnail extends Component {
         <div className="meta">
           <h3 className="title">{project.attributes.title}</h3>
           {this.renderProjectMakers(project)}
-          {this.renderPublishedDate(project)}
+          { project.attributes.updated ?
+            this.renderUpdatedDate(project)
+          : this.renderPublishedDate(project)
+          }
           {this.renderProjectDesc(project)}
         </div>
       );
