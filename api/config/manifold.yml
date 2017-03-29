@@ -134,6 +134,8 @@ common: &1
           - "application/x-font-ttf"
           - "application/x-font-truetype"
           - "application/x-font-otf"
+          - "application/x-apple-diskimage"
+          - "application/x-bzip"
           - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
@@ -167,6 +169,7 @@ common: &1
           - !ruby/regexp '/xlsx\Z/'
           - !ruby/regexp '/ppt?x\Z/'
           - !ruby/regexp '/md\Z/'
+          - !ruby/regexp '/dmg\Z/'
 
 production: *1
 development: *1

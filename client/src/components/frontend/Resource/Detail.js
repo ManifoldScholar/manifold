@@ -14,6 +14,13 @@ export default class ResourceDetail extends Component {
     resource: PropTypes.object
   };
 
+  createDescription(description) {
+    if (!description) return { __html: 'No content provided.' };
+    return {
+      __html: description
+    };
+  }
+
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
@@ -45,18 +52,12 @@ export default class ResourceDetail extends Component {
                 />
               </aside>
               <div className="resource-content left">
-                <p>
-                  {attr.caption}
-                </p>
+                <div dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />
 
                 <h3 className="attribute-header">
                   Full Description
                 </h3>
-                <p>
-                  {attr.descriptionFormatted ?
-                    attr.descriptionFormatted
-                  : "No description provided."}
-                </p>
+                <div dangerouslySetInnerHTML={this.createDescription(attr.descriptionFormatted)} />
               </div>
               <div className="resource-meta-mobile">
                 <Resource.Meta

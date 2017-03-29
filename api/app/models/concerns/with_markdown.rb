@@ -7,11 +7,11 @@ module WithMarkdown
       filter_html: true,
       no_images: true,
       no_links: true,
-      no_styles: true
+      no_styles: true,
+      hard_wrap: true
     }
     renderer = Redcarpet::Render::HTML.new(options)
     redcarpet = Redcarpet::Markdown.new(renderer)
-    out = redcarpet.render(input)
-    Regexp.new(%r{\A<p>(.*)<\/p>\Z}).match(out)[1]
+    redcarpet.render(input).strip
   end
 end
