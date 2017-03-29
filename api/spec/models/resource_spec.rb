@@ -25,7 +25,7 @@ RSpec.describe Resource, type: :model do
 
   describe "formats some fields with a markdown subset" do
     let(:raw) { "_italic_ a **bold**"}
-    let(:formatted) { "<em>italic</em> a <strong>bold</strong>"}
+    let(:formatted) { "<p><em>italic</em> a <strong>bold</strong></p>"}
 
     it "has a formatted title after save" do
       resource = FactoryGirl.create(:resource, title: raw)

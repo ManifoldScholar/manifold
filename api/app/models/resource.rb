@@ -78,7 +78,9 @@ class Resource < ApplicationRecord
   end
 
   def update_kind
-    self.kind ||= determine_kind
+    return self.kind = determine_kind unless kind
+    return self.kind = kind.downcase if ALLOWED_KINDS.include?(kind.downcase)
+    self.kind = determine_kind # fallback
   end
 
   def force_update_kind
