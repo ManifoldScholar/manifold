@@ -23,7 +23,7 @@ RSpec.describe "Project Resources API", type: :request do
       title: "A new hope",
       externalType: "vimeo",
       externalId: "abc123",
-      isExternalVideo: true
+      sub_kind: "external_video"
     }, relationships: { project: { data: { type: "projects", id: project.id } } } } }
 
     context "when the user is an admin" do

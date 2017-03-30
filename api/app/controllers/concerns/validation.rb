@@ -38,10 +38,10 @@ module Validation
                   attachment(:variant_format_two), :remove_variant_format_two,
                   attachment(:variant_thumbnail), :remove_variant_thumbnail,
                   attachment(:variant_poster), :remove_variant_poster,
-                  :title, :caption, :description, :tag_list, :kind, :is_external_video,
+                  :title, :caption, :description, :tag_list, :kind, :sub_kind,
                   :alt_text, :copyright_status, :copyright_holder, :credit, :keywords,
                   :allow_download, :external_type, :external_url, :external_id,
-                  :iframe_dimensions, :is_iframe, :embed_code]
+                  :iframe_dimensions, :embed_code]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

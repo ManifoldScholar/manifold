@@ -101,12 +101,12 @@ RSpec.describe Resource, type: :model do
 
     context "when resource is an iframe" do
       it "is invalid without dimensions" do
-        resource = FactoryGirl.build(:resource, kind: "interactive", is_iframe: true)
+        resource = FactoryGirl.build(:resource, kind: "interactive", sub_kind: "iframe")
         expect(resource).to_not be_valid
       end
 
       it "is invalid without an external url" do
-        resource = FactoryGirl.build(:resource, kind: "interactive", is_iframe: true,
+        resource = FactoryGirl.build(:resource, kind: "interactive", sub_kind: "iframe",
                                      iframe_dimensions: "640x480", external_url: nil)
         expect(resource).to_not be_valid
       end
@@ -121,12 +121,12 @@ RSpec.describe Resource, type: :model do
 
     context "when resource is an external video" do
       it "is invalid without an external id" do
-        resource = FactoryGirl.build(:resource, kind: "video", is_external_video: true, external_type: "youtube")
+        resource = FactoryGirl.build(:resource, kind: "video", sub_kind: "external_video", external_type: "youtube")
         expect(resource).to_not be_valid
       end
 
       it "is invalid without an external type" do
-        resource = FactoryGirl.build(:resource, kind: "video", is_external_video: true, external_id: "abcd1234")
+        resource = FactoryGirl.build(:resource, kind: "video", sub_kind: "external_video", external_id: "abcd1234")
         expect(resource).to_not be_valid
       end
     end

@@ -9,7 +9,11 @@ class FormSwitch extends Component {
   static propTypes = {
     label: PropTypes.string,
     set: PropTypes.func,
-    value: PropTypes.any
+    value: PropTypes.any,
+    customValues: PropTypes.shape({
+      true: PropTypes.string,
+      false: PropTypes.string
+    })
   };
 
   constructor(props) {
@@ -23,13 +27,30 @@ class FormSwitch extends Component {
 
   handleClick(event) {
     event.preventDefault();
+    if (this.props.customValues) return this.handleCustomValues();
+    return this.handleBooleans();
+  }
+
+  handleCustomValues() {
+    const trueValue = this.props.customValues.true;
+    const falseValue = this.props.customValues.false;
+    if (this.props.value === trueValue) return this.props.set(falseValue);
+    return this.props.set(trueValue);
+  }
+
+  handleBooleans() {
     this.props.set(!this.truthy(this.props.value));
+  }
+
+  determineChecked(value) {
+    if (this.props.customValues) return (value === this.props.customValues.true);
+    return this.truthy(value);
   }
 
   render() {
     const classes = classnames({
       "boolean-primary": true,
-      checked: this.truthy(this.props.value)
+      checked: this.determineChecked(this.props.value)
     });
 
     return (
