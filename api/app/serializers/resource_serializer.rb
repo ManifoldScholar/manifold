@@ -22,19 +22,15 @@ class ResourceSerializer < ResourcePartialSerializer
              :transcript_content_type, :transcript_file_size, :transcript_updated_at,
              :translation_file_name, :translation_content_type,
              :translation_file_size, :translation_updated_at, :tag_list,
-             :is_external_video, :is_iframe, :embed_code, :iframe_dimensions,
+             :sub_kind, :embed_code, :iframe_dimensions,
              :iframe_length, :iframe_width, :downloadable_kind
 
   has_many :collections
   has_many :collection_resources
   belongs_to :project, serializer: ProjectPartialSerializer
 
-  def external_video
-    object.external_video?
-  end
-
-  def iframe
-    object.iframe?
+  def sub_kind
+    object.sub_kind ||= false
   end
 
   def iframe_length

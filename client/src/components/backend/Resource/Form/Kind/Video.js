@@ -52,10 +52,14 @@ export default class ResourceFormKindVideo extends PureComponent {
       <div className="form-section">
         <Form.Switch
           label="Is this an externally linked video?"
-          name="attributes[isExternalVideo]"
+          name="attributes[subKind]"
+          customValues={{
+            true: "external_video",
+            false: ""
+          }}
           {...this.props}
         />
-        {this.props.getModelValue("attributes[isExternalVideo]") ?
+        {this.props.getModelValue("attributes[subKind]") ?
           this.renderExternalVideoForm()
           : this.renderVideoAttachmentForm()
         }

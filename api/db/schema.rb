@@ -280,10 +280,9 @@ ActiveRecord::Schema.define(version: 20170404222122) do
     t.string   "variant_poster_content_type"
     t.integer  "variant_poster_file_size"
     t.datetime "variant_poster_updated_at"
-    t.boolean  "is_external_video",               default: false
     t.string   "iframe_dimensions"
-    t.boolean  "is_iframe",                       default: false
     t.text     "embed_code"
+    t.string   "sub_kind"
   end
 
   create_table "settings", force: :cascade do |t|
