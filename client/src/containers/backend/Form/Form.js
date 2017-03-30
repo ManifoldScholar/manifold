@@ -189,7 +189,11 @@ class FormContainer extends PureComponent {
 
   renderDebugger() {
     if (!this.props.debug) return null;
-    return <Developer.Debugger object={this.props.session} />;
+    const debug = {
+      session: this.props.session,
+      errors: this.props.errors
+    };
+    return <Developer.Debugger object={debug} />;
   }
 
   render() {
