@@ -12,6 +12,7 @@ module Validator
     end
 
     def validate(css_string)
+      return "" unless css_string
       css = css_string.clone
       parser = CssParser::Parser.new
       @out = ""

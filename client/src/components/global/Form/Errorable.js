@@ -11,10 +11,15 @@ export default class Errorable extends PureComponent {
   // field error.
   static propTypes = {
     errors: PropTypes.array,
+    containerStyle: PropTypes.object,
     className: PropTypes.string,
     name: React.PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
+
+  static defaultProps = {
+    containerStyle: {}
+  }
 
   constructor() {
     super();
@@ -63,7 +68,7 @@ export default class Errorable extends PureComponent {
     });
 
     return (
-      <div className={wrapperClass} >
+      <div style={this.props.containerStyle} className={wrapperClass} >
         {children}
         {hasErrors ?
           <Form.InputError errors={fieldErrors} />

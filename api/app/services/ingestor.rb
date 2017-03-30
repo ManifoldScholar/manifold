@@ -28,14 +28,34 @@ module Ingestor
     #   the ingestor.
     def ingest(path, creator)
       creator ||= User.find_by(is_cli_user: true)
-      basename, ingestion, strategy = start(path, creator)
+      _basename, ingestion, strategy = start(path, creator)
       validate_strategy(strategy)
       set_ingestion_text(strategy, ingestion)
-      strategy.ingest(ingestion)
-      info "services.ingestor.logging.ingestion_end", name: basename
-      return ingestion.text
-    rescue Ingestor::IngestionFailed => e
-      logger.error(e.message)
+      do_ingestion(strategy, ingestion)
+    end
+
+    def ingest_update(path, creator, text)
+      creator ||= User.find_by(is_cli_user: true)
+      _basename, ingestion, strategy = start(path, creator)
+      validate_strategy(strategy)
+      ingestion.text = text
+      do_ingestion(strategy, ingestion)
+    end
+
+    def ingest_new(path, creator)
+      creator ||= User.find_by(is_cli_user: true)
+      _basename, ingestion, strategy = start(path, creator)
+      validate_strategy(strategy)
+      id = strategy.unique_id(ingestion)
+      ingestion.text.unique_identifier = id
+      do_ingestion(strategy, ingestion)
+    end
+
+    def determine_strategy(path, creator)
+      creator ||= User.find_by(is_cli_user: true)
+      _basename, _ingestion, strategy = start(path, creator)
+      validate_strategy(strategy)
+      strategy.name
     end
 
     # Resets the ingestion logger to Rails.logger
@@ -52,6 +72,14 @@ module Ingestor
 
     private
 
+    def do_ingestion(strategy, ingestion)
+      strategy.ingest(ingestion)
+      info "services.ingestor.logging.ingestion_end"
+      return ingestion.text
+    rescue Ingestor::IngestionFailed => e
+      logger.error(e.message)
+    end
+
     # @private
     # @return [Array] Array with [basename, ingestion, strategy]
     def start(path, creator)
@@ -62,7 +90,7 @@ module Ingestor
       basename = File.basename(path)
       significant "services.ingestor.logging.ingestion_start", name: basename
       ingestion = Ingestor::Ingestion.new(path, creator)
-      strategy = Ingestor::Strategy.for(ingestion)
+      strategy = Ingestor::Strategy.for(ingestion, logger)
       return [basename, ingestion, nil] unless strategy
       info "services.ingestor.logging.using_strategy", strategy: strategy
       [basename, ingestion, strategy]

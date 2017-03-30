@@ -22,9 +22,9 @@ module Ingestor
 
       def report(sections)
         if sections.new_record?
-          debug "services.ingestor.creator.log.new_section", name: sections.name
+          info "services.ingestor.creator.log.new_section", name: sections.name
         else
-          debug "services.ingestor.creator.log.updated_section", name: sections.name
+          info "services.ingestor.creator.log.updated_section", name: sections.name
         end
       end
 

@@ -4,6 +4,7 @@ import entityStoreMiddleware from './middleware/entityStoreMiddleware';
 import currentUserMiddleware from './middleware/currentUserMiddleware';
 import notificationMiddleware from './middleware/notificationMiddleware';
 import apiErrorMiddleware from './middleware/apiErrorMiddleware';
+import websocketMiddleware from './middleware/websocketMiddleware';
 import promiseMiddleware from 'redux-promise';
 import reducers from './reducers';
 
@@ -16,6 +17,7 @@ export default function createStore(data) {
   middleware.push(entityStoreMiddleware);
   middleware.push(thunkMiddleware);
   middleware.push(promiseMiddleware);
+  middleware.push(websocketMiddleware);
   middleware.push(notificationMiddleware);
 
   let finalCreateStore;

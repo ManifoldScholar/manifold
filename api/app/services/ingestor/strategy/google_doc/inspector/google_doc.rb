@@ -35,10 +35,11 @@ module Ingestor
           end
 
           def google_doc?
-            @logger.debug(@doc_path)
+            @logger.info(@doc_path)
             return false unless can_ingest_doc?
             fetch_file
             create_temp_html
+            true
           end
 
           def title

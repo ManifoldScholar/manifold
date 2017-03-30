@@ -9,6 +9,7 @@ import isomorphic from './isomorphic';
 import developer from './developer';
 import entityStore from './entityStore';
 import entityEditor from './entityEditor';
+import websocket from './websocket';
 
 const routing = routerReducer;
 const reducers = combineReducers({
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   routing,
   authentication,
   isomorphic,
+  websocket,
   developer
 });
 export default reducers;

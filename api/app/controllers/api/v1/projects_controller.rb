@@ -3,10 +3,10 @@ module Api
     # Projects controller
     class ProjectsController < ApplicationController
 
-      INCLUDES = %w(
-        creators contributors texts text_categories events collections
-        uncollected_resources
-      ).freeze
+      INCLUDES = [
+        :creators, :contributors, :texts, :text_categories, :events,
+        :collections, :uncollected_resources
+      ].freeze
 
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project.filter(

@@ -152,6 +152,11 @@
   text-decoration: none;
   border: 1px solid $accentPrimary;
 
+  &:disabled {
+    color: $neutral80;
+    border: 1px solid $neutral80;
+  }
+
   .manicon-plus {
     display: inline-block;
     margin-right: 1.286em;

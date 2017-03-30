@@ -5,6 +5,7 @@ var path = require('path')
 
 global.rootFolder = path.resolve(__dirname, '..')
 global.__API_URL__ = process.env.API_URL
+global.__WS_URL__ = process.env.WS_URL
 global.__CLIENT__ = process.env.ENTRY_IS_CLIENT === 'true';
 global.__SERVER__ = process.env.ENTRY_IS_CLIENT !== 'true';
 global.__DISABLE_SSR__ = false;
