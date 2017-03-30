@@ -25,30 +25,31 @@ class FormRadios extends Component {
   };
 
   render() {
-    const inputClassNames = classNames(
-      'form-toggle',
-      'radio',
-      this.props.layout
-    );
-
     return (
       <div className="form-input">
         <label>{this.props.label}</label>
-        {this.props.options.map((option) => {
+        {this.props.options.map((option, index) => {
+          const checked = this.props.value === option.value;
+          const inputClassNames = classNames(
+            'form-toggle',
+            'radio',
+            this.props.layout,
+            { checked }
+          );
           return (
             <label htmlFor={option.value} className={inputClassNames} key={option.value} >
               <input
-                id={option.value}
-                checked={this.props.value === option.value}
-                onChange={() => { this.props.set(option.value); }}
                 type="radio"
+                value={option.value}
+                id={option.value}
+                checked={checked}
+                onChange={() => { this.props.set(option.value); }}
               />
               <span className="toggle-indicator"></span>
               <span className="toggle-label">{option.label}</span>
             </label>
           );
         })}
-
       </div>
     );
   }
