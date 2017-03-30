@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import sharedPropsValidation from './propTypes';
 import Dropzone from 'react-dropzone';
 import { Form as GlobalForm } from 'components/global';
 import classnames from 'classnames';
@@ -15,11 +14,11 @@ class FormUpload extends Component {
   static displayName = "Form.Upload";
 
   static propTypes = {
-    ...sharedPropsValidation,
     label: PropTypes.string,
     instructions: PropTypes.string,
     accepts: PropTypes.string,
     inlineStyle: PropTypes.object,
+    name: PropTypes.string,
     style: React.PropTypes.oneOf(['square', 'portrait', 'landscape']),
     set: PropTypes.func,
     value: PropTypes.any,
