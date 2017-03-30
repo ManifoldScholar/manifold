@@ -42,11 +42,16 @@ export default () => {
 
       <Route component={Backend.Backend} path="/backend" >
         <IndexRoute component={Backend.Dashboard} />
+
+        <Route component={Backend.Developer} path="developer" />
+
         <Route component={Backend.NewResource.Wrapper} path="project/:projectId/resources/new" />
         <Route component={Backend.NewProject.Wrapper} path="project/new" />
         <Route component={Backend.ProjectDetail.Wrapper} path="project/:id" >
           <IndexRoute component={Backend.ProjectDetail.General} />
           <Route component={Backend.ProjectDetail.Texts} path="texts" >
+            <Route component={Backend.ProjectDetail.Text.New} path="new(/:ingestionId)(/step/:step)" />
+            <Route component={Backend.ProjectDetail.Text.Ingest} path="process/ingestion/:ingestionId" />
             <Route component={Backend.ProjectDetail.Category.New} path="category/new" />
             <Route component={Backend.ProjectDetail.Category.Edit} path="category/:catId/edit" />
           </Route>

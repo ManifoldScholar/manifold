@@ -35,6 +35,8 @@ class Project < ApplicationRecord
   has_many :collection_resources, through: :collections
   has_many :project_subjects
   has_many :subjects, through: :project_subjects
+  has_many :ingestions
+
   # rubocop:disable Style/Lambda
   has_many :uncollected_resources, ->(object) {
     where.not(id: object.collection_resources.select(:resource_id))

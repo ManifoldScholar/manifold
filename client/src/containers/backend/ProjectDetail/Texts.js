@@ -377,16 +377,23 @@ class ProjectDetailTexts extends PureComponent {
 
         {
           this.props.children ?
-          React.cloneElement(this.props.children, { project, refresh })
+            <Dialog.Wrapper
+              closeOnOverlayClick={false}
+              closeUrl={`/backend/project/${this.props.params.id}/texts`}
+            >
+              {React.cloneElement(this.props.children, { project, refresh })}
+            </Dialog.Wrapper>
           : null
         }
 
         <div className="buttons-icon-horizontal">
-          {/*
-           <button className="button-icon-secondary">
-           <i className="manicon manicon-plus"></i>Add a new text
-           </button>
-          */}
+          <Link
+            to={`/backend/project/${project.id}/texts/new`}
+            className="button-icon-secondary"
+          >
+            <i className="manicon manicon-plus"></i>Add a new text
+          </Link>
+
           <Link
             to={`/backend/project/${project.id}/texts/category/new`}
             className="button-icon-secondary"
