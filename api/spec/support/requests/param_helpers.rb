@@ -41,6 +41,14 @@ RSpec.shared_context "param helpers" do
     }
   }
 
+  let(:markdown_source_params) {
+    {
+      content_type: "text/markdown",
+      data: "data:text/markdown;base64,IyBUaGlzIGlzIGEgaGVhZGVyDQoNClRoaXMgaXMgc29tZSB0ZXh0",
+      filename: "something.md"
+    }
+  }
+
 
 end
 

@@ -1,6 +1,7 @@
 exports[`Form.TextInput component renders correctly 1`] = `
 <div
-  className="form-input">
+  className="form-input"
+  style={Object {}}>
   <label
     className="">
     A form label

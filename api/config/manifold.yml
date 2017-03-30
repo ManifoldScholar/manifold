@@ -31,6 +31,17 @@ common: &1
       :typekit_id: 'mnj5ltf'
   :attachments:
     :validations:
+      :ingestion:
+        :allowed_mime:
+          - "text/markdown"
+          - "application/markdown"
+          - "text/plain"
+          - "application/zip"
+          - "application/epub+zip"
+        :allowed_ext:
+          - !ruby/regexp '/md\Z/'
+          - !ruby/regexp '/zip\Z/'
+          - !ruby/regexp '/epub\Z/'
       :image:
         :allowed_mime:
           - !ruby/regexp '/image\/.*/'

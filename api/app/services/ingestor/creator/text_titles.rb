@@ -25,9 +25,9 @@ module Ingestor
 
       def report(title)
         if title.new_record?
-          debug "services.ingestor.creator.log.new_title", title: title.value
+          info "services.ingestor.creator.log.new_title", title: title.value
         else
-          debug "services.ingestor.creator.log.updated_title", title: title.value
+          info "services.ingestor.creator.log.updated_title", title: title.value
         end
       end
 

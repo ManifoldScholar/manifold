@@ -1,6 +1,7 @@
 exports[`Form.HasMany component renders correctly 1`] = `
 <div
-  className="form-input">
+  className="form-input"
+  style={Object {}}>
   <label>
     A form label
   </label>

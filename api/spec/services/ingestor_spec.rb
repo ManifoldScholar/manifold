@@ -15,10 +15,4 @@ RSpec.describe Ingestor do
     expect(Ingestor.logger).to be Rails.logger
   end
 
-  it "should catch and report an ingestion failure" do
-    path = "/tmp/book.nevermind"
-    creator = FactoryGirl.create(:user)
-    expect(Ingestor.logger).to receive(:error)
-    Ingestor.ingest(path, creator)
-  end
 end

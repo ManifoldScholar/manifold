@@ -20,9 +20,11 @@ module Ingestor
       #   strategy.
       # @return [Symbol] the class name of the first strategy that can reports
       #   it can ingest the ingestion subject.
-      def for(ingestion)
+      def for(ingestion, logger = nil)
         strategy_class = strategies.find do |_key, classname|
-          classname.can_ingest?(ingestion)
+          result = classname.can_ingest?(ingestion)
+          logger&.info "#{classname} can ingest?   #{result}"
+          result
         end
         strategy_class.nil? ? nil : strategy_class.last
       end

@@ -8,6 +8,7 @@ import TextDetail from './TextDetail';
 import People from './People';
 import Settings from './Settings';
 import Form from './Form';
+import Developer from './Developer';
 
 export {
   Backend,
@@ -19,5 +20,6 @@ export {
   TextDetail,
   People,
   Settings,
-  Form
+  Form,
+  Developer
 };

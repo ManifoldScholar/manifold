@@ -58,7 +58,7 @@ module Ingestor
         transformer = ::Ingestor::Transformer::Stylesheet.new(text, @logger)
         text.stylesheets.each do |ss|
           key = "services.ingestor.strategy.ePUB.log.transform_ss"
-          debug key, name: ss.name, id: ss.id
+          info key, name: ss.name, id: ss.id
           ss.styles = transformer.transform_styles(ss.raw_styles)
           ss.save
         end
@@ -69,7 +69,7 @@ module Ingestor
         transformer = ::Ingestor::Transformer::TextSection.new(text, @logger)
         text.text_sections.each do |ts|
           key = "services.ingestor.strategy.ePUB.log.transform_ts"
-          debug key, name: ts.name, id: ts.id
+          info key, name: ts.name
           ts.body = transformer.convert_cont_doc_body(ts.source_body,
                                                       ts.source_path)
           ts.body_json = transformer.convert_cont_doc_body_to_json(ts.body)
@@ -159,29 +159,29 @@ module Ingestor
           source_identifier: start_section_identifier
         )
         return unless text_section
-        debug "services.ingestor.strategy.log.find_start_section",
-              text_section.source_identifier
+        info "services.ingestor.strategy.log.find_start_section",
+             source_identifier: text_section.source_identifier
         text.start_text_section = text_section
       end
 
       def update_landmarks!(text)
         landmarks = structure_inspector.landmarks
         text.landmarks = ::Ingestor::Transformer::TOCStructure.transform(landmarks, text)
-        debug "services.ingestor.strategy.log.find_landmark_structure"
+        info "services.ingestor.strategy.log.find_landmark_structure"
         Helper::Log.log_structure(text.landmarks, "  Landmarks: ", @logger)
       end
 
       def update_page_list!(text)
         page_list = structure_inspector.page_list
         text.page_list = ::Ingestor::Transformer::TOCStructure.transform(page_list, text)
-        debug "services.ingestor.strategy.log.find_page_list_structure"
+        info "services.ingestor.strategy.log.find_page_list_structure"
         Helper::Log.log_structure(text.page_list, "  Page List: ", @logger)
       end
 
       def update_toc!(text)
         toc = structure_inspector.toc
         text.toc = ::Ingestor::Transformer::TOCStructure.transform(toc, text)
-        debug "services.ingestor.strategy.log.find_toc_structure"
+        info "services.ingestor.strategy.log.find_toc_structure"
         Helper::Log.log_structure(text.toc, "  TOC: ", @logger)
       end
 
@@ -190,7 +190,7 @@ module Ingestor
         return unless cover_ingestion_source
         cover_ingestion_source.kind = IngestionSource::KIND_COVER_IMAGE
         cover_ingestion_source.save
-        debug "services.ingestor.strategy.log.set_cover", cover: text.cover.source_path
+        info "services.ingestor.strategy.log.set_cover", cover: text.cover.source_path
       end
 
       def update_stylesheets!(text)
@@ -246,25 +246,25 @@ module Ingestor
 
       def update_language!(text)
         text.language = language_inspector.language
-        debug "services.ingestor.strategy.log.set_lang", lang: text.language
+        info "services.ingestor.strategy.log.set_lang", lang: text.language
       end
 
       def update_date!(text)
         text.publication_date = date_inspector.date
-        debug "services.ingestor.strategy.log.set_date",
-              date: text.publication_date
+        info "services.ingestor.strategy.log.set_date",
+             date: text.publication_date
       end
 
       def update_rights!(text)
         text.rights = rights_inspector.rights
-        debug "services.ingestor.strategy.log.set_rights",
-              rights: text.rights
+        info "services.ingestor.strategy.log.set_rights",
+             rights: text.rights
       end
 
       def update_description!(text)
         text.description = description_inspector.description
-        debug "services.ingestor.strategy.log.set_desc",
-              desc: text.description.truncate(40)
+        info "services.ingestor.strategy.log.set_desc",
+             desc: text.description.truncate(40)
       end
 
       def destroy_tmp
