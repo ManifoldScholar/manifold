@@ -4,7 +4,7 @@ RSpec.describe Ingestor::Strategy::Word::Builder do
 
   before(:each) do
     @creator = FactoryGirl.create(:user)
-    path = File.join("spec", "data", "assets", "word_test")
+    path = File.join("spec", "data", "assets", "word_test", "word_test.zip")
 
     ingestion = Ingestor::Ingestion.new(path, @creator)
     strategy = Ingestor::Strategy.for(ingestion)
