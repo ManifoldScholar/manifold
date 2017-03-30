@@ -24,6 +24,7 @@ module Ingestor
 
           def initialize(gitbook_path, logger = nil)
             @gitbook_path = gitbook_path
+            @tmp_path = "tmp/#{basename}"
             @logger = logger
           end
 
@@ -31,8 +32,39 @@ module Ingestor
             @logger.send(level, msg) if @logger
           end
 
+          def gitbook_zip_file?(zip_path)
+            remove_tmp
+            FileUtils.mkdir(@tmp_path)
+            return false unless create_tmp_dir(zip_path)
+            return true if File.file?(File.join(@tmp_path, "#{basename}/book.json"))
+            remove_tmp
+            false
+          end
+          memoize :gitbook_zip_file?
+
+          def create_tmp_dir(zip_path)
+            return false unless File.extname(zip_path) == ".zip"
+            Zip::File.open(zip_path) do |zip_file|
+              zip_file.each do |f|
+                fpath = File.join(@tmp_path, f.name)
+                zip_file.extract(f, fpath) unless File.exist?(fpath)
+              end
+            end
+            @logger.debug("Unzipped archive to temporary directory")
+          end
+          memoize :create_tmp_dir
+
+          def remove_tmp
+            FileUtils.rm_rf(@tmp_path, secure: true) if File.directory?(@tmp_path)
+          end
+
+          def basename
+            File.basename(@gitbook_path, ".*")
+          end
+
           def gitbook?
-            File.file?(book_json_path)
+            @logger.debug(@gitbook_path)
+            gitbook_zip_file?(@gitbook_path) || File.file?(book_json_path)
           end
 
           def start_section_identifier
@@ -76,11 +108,15 @@ module Ingestor
           end
 
           def book_json_path
-            "#{@gitbook_path}/book.json"
+            zip_path = "#{@tmp_path}/#{basename}/book.json"
+            dir_path = "#{@gitbook_path}/book.json"
+            gitbook_zip_file?(@gitbook_path) ? zip_path : dir_path
           end
 
           def summary_path
-            "#{@gitbook_path}/SUMMARY.md"
+            zip_path = "#{@tmp_path}/#{basename}/SUMMARY.md"
+            dir_path = "#{@gitbook_path}/SUMMARY.md"
+            gitbook_zip_file?(@gitbook_path) ? zip_path : dir_path
           end
 
           def spine_list
@@ -149,7 +185,9 @@ module Ingestor
           end
 
           def stylesheet_path
-            File.join(@gitbook_path, "styles", "website.css")
+            zip_path = File.join("#{@tmp_path}/#{basename}", "styles", "website.css")
+            dir_path = File.join(@gitbook_path, "styles", "website.css")
+            gitbook_zip_file?(@gitbook_path) ? zip_path : dir_path
           end
 
           def text_section_inspectors
