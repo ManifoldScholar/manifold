@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import capitalize from 'lodash/capitalize';
-import get from 'lodash/get';
 
 export default class ResourceListFilters extends Component {
 
@@ -62,8 +61,7 @@ export default class ResourceListFilters extends Component {
 
   initialState(init) {
     return {
-      filter: {
-      },
+      filter: init ? init : {},
       inputs: init ? init : {
         keyword: "",
         kind: "default",
