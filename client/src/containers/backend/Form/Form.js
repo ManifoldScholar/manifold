@@ -5,6 +5,7 @@ import { entityEditorActions, entityStoreActions } from 'actions';
 import { Developer } from 'components/global';
 import { bindActionCreators } from 'redux';
 import { entityUtils } from 'utils';
+import { Form as GlobalForm } from 'components/global';
 import get from 'lodash/get';
 import has from 'lodash/has';
 import isString from 'lodash/isString';
@@ -29,22 +30,25 @@ class FormContainer extends PureComponent {
     create: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     onSuccess: PropTypes.func,
-    debug: PropTypes.bool
+    debug: PropTypes.bool,
+    groupErrors: PropTypes.bool,
+    groupErrorsStyle: PropTypes.object
   };
 
   static defaultProps = {
     model: {
       attributes: {}
     },
-    debug: false
+    debug: false,
+    groupErrors: false
   }
 
   static mapStateToProps(state, ownProps) {
     return {
       routing: state.routing,
       session: get(state.entityEditor.sessions, ownProps.name),
-      response: get(state.entityStore.responses, `editor-${ownProps.name}`),
-      errors: get(state.entityStore.responses, `editor-${ownProps.name}.errors`)
+      response: get(state.entityStore.responses, ownProps.name),
+      errors: get(state.entityStore.responses, `${ownProps.name}.errors`)
     };
   }
 
@@ -193,6 +197,14 @@ class FormContainer extends PureComponent {
     return (
       <div>
         {this.renderDebugger()}
+        {this.props.groupErrors === true ?
+          <GlobalForm.Errorable
+            containerStyle={this.props.groupErrorsStyle}
+            className="form-input"
+            name="*"
+            errors={this.props.errors}
+          />
+        : null}
         <form onSubmit={this.handleSubmit} className={this.props.className} >
           {this.renderChildren(this.props)}
         </form>
