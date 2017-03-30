@@ -112,8 +112,8 @@ class FormContainer extends PureComponent {
     this.props.dispatch(entityEditorActions.open(name, model));
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(event = null) {
+    if (event) event.preventDefault();
     if (this.props.session.source.id) {
       this.update();
     } else {
