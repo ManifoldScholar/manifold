@@ -155,7 +155,8 @@ class FormUpload extends Component {
   previewFileName(props, state) {
     if (this.isFile(props.value)) return props.value.filename;
     if (this.showInitialValue(props, state)) {
-      return props.initialValue.split("/").pop().split("-").shift();
+      return props.initialValue;
+      // return props.initialValue.split("/").pop().split("-").shift();
     }
   }
 
