@@ -11,6 +11,7 @@ import Date from './Date';
 import HigherOrder from './HigherOrder';
 import Hidden from './Hidden';
 import setter from './setter';
+import FieldGroup from './FieldGroup';
 
 export default {
   HasMany,
@@ -25,5 +26,6 @@ export default {
   Switch,
   Date,
   HigherOrder,
+  FieldGroup,
   setter
 };
