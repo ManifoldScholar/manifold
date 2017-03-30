@@ -94,12 +94,8 @@ class FormContainer extends PureComponent {
     props.dispatch(entityEditorActions.close(props.name));
   }
 
-  requestName(props) {
-    return `editor-${props.name}`;
-  }
-
   flushSave(props) {
-    props.dispatch(entityStoreActions.flush(this.requestName(props)));
+    props.dispatch(entityStoreActions.flush(props.name));
   }
 
   maybeOpenSession(props) {
@@ -125,7 +121,7 @@ class FormContainer extends PureComponent {
     const dirty = this.props.session.dirty;
     const source = this.props.session.source;
     const call = this.props.update(source.id, { attributes: dirty.attributes });
-    const action = request(call, this.requestName(this.props));
+    const action = request(call, this.props.name);
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty('promise') && this.props.onSuccess) {
       res.promise.then(() => {
@@ -138,7 +134,7 @@ class FormContainer extends PureComponent {
   create() {
     const dirty = this.props.session.dirty;
     const call = this.props.create({ attributes: dirty.attributes });
-    const action = request(call, this.requestName(this.props));
+    const action = request(call, this.props.name);
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty('promise') && this.props.onSuccess) {
       res.promise.then(() => {
