@@ -37,6 +37,8 @@ class AnnotationPopupShareSocialButtons extends PureComponent {
           url={this.props.url}
           message={shareMessage}
           windowOptions={twitterWindowOptions}
+          onMouseEnter={this.props.handleTailHighlight}
+          onMouseLeave={this.props.handleTailBlur}
         >
           <i className="manicon manicon-twitter"></i>
           {'Twitter'}

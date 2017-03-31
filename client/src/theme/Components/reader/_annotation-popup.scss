@@ -188,11 +188,11 @@
     }
   }
 
-  button:hover + .tail-down {
+  .tail-down.highlight, button:hover + .tail-down {
     border-color: $accentPrimary transparent transparent;
   }
 
-  button:first-child:hover ~ .tail-up {
+  .tail-up.highlight, button:first-child:hover ~ .tail-up {
     border-color: transparent transparent $accentPrimary;
   }
 }
