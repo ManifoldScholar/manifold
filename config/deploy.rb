@@ -23,7 +23,7 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :yarn_target_path, -> { release_path.join("client") }
 set :yarn_flags, "--production"
 
-
+# rubocop:disable Metrics/LineLength
 namespace :deploy do
 
   services = "manifold_client manifold_api manifold_scheduler manifold_workers manifold_cable"
@@ -115,3 +115,4 @@ namespace :import do
     end
   end
 end
+# rubocop:enable Metrics/LineLength
