@@ -56,7 +56,7 @@ class ProjectDetailTextIngest extends Component {
     this.backToEdit = this.backToEdit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.ingestion) this.openSocket(this.props.ingestion.id);
   }
 
