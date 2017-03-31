@@ -15,7 +15,7 @@ RSpec.describe "Texts API", type: :request do
     end
   end
 
-  describe "sends a texts" do
+  describe "sends a text" do
     let(:text) { FactoryGirl.create(:text) }
     let(:text_id ) { text.id }
     let(:stylesheet) { FactoryGirl.create(:stylesheet, text_id: text_id) }
