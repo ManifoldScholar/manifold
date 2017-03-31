@@ -19,8 +19,12 @@ export default class AnnotationPopupShare extends PureComponent {
     super(props);
 
     this.state = {
-      inBrowser: false
+      inBrowser: false,
+      tailHighlight: false
     };
+
+    this.handleTailHighlight = this.handleTailHighlight.bind(this);
+    this.handleTailBlur = this.handleTailBlur.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +33,22 @@ export default class AnnotationPopupShare extends PureComponent {
     if (this.state.inBrowser === false) {
       this.setState({ // eslint-disable-line react/no-did-mount-set-state
         inBrowser: true
+      });
+    }
+  }
+
+  handleTailHighlight(condition) {
+    if (condition) {
+      this.setState({
+        tailHighlight: true
+      });
+    }
+  }
+
+  handleTailBlur(condition) {
+    if (condition) {
+      this.setState({
+        tailHighlight: false
       });
     }
   }
@@ -50,6 +70,7 @@ export default class AnnotationPopupShare extends PureComponent {
       tail: true,
       'tail-down': this.props.direction === 'up',
       'tail-up': this.props.direction === 'down',
+      highlight: this.state.tailHighlight
     });
 
     return (
@@ -60,7 +81,16 @@ export default class AnnotationPopupShare extends PureComponent {
          Cite
          </button>
         */}
-        <SocialButtons text={this.props.text} url={this.url()} />
+        <SocialButtons
+          text={this.props.text}
+          url={this.url()}
+          handleTailHighlight={
+            () => {
+              this.handleTailHighlight(this.props.direction === 'down');
+            }
+          }
+          handleTailBlur={() => { this.handleTailBlur(true); }}
+        />
         <button onClick={this.props.back} className="dark">
           <i className="manicon manicon-arrow-bold-left"></i>
           Back

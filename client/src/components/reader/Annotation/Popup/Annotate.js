@@ -16,6 +16,33 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     direction: PropTypes.string
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      tailHighlight: false
+    };
+
+    this.handleTailHighlight = this.handleTailHighlight.bind(this);
+    this.handleTailBlur = this.handleTailBlur.bind(this);
+  }
+
+  handleTailHighlight(condition) {
+    if (condition) {
+      this.setState({
+        tailHighlight: true
+      });
+    }
+  }
+
+  handleTailBlur(condition) {
+    if (condition) {
+      this.setState({
+        tailHighlight: false
+      });
+    }
+  }
+
   render() {
     const pageClass = classNames({
       'popup-page': true,
@@ -28,6 +55,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
       tail: true,
       'tail-down': this.props.direction === 'up',
       'tail-up': this.props.direction === 'down',
+      highlight: this.state.tailHighlight
     });
 
     return (
@@ -46,7 +74,11 @@ export default class AnnotationPopupAnnotate extends PureComponent {
 
         <HigherOrder.RequireRole requiredRole="any">
           <div className="button-group">
-            <button onClick={this.props.highlight}>
+            <button
+              onClick={this.props.highlight}
+              onMouseEnter={() => { this.handleTailHighlight(this.props.direction === 'down'); }}
+              onMouseLeave={() => { this.handleTailBlur(true); }}
+            >
               <i className="manicon manicon-pencil-simple"></i>
               Highlight
             </button>
