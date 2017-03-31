@@ -36,7 +36,7 @@ module Ingestor
             remove_tmp
             FileUtils.mkdir(@tmp_path)
             return false unless create_tmp_dir(zip_path)
-            return true if File.file?(File.join(@tmp_path, "#{basename}/book.json"))
+            return true if File.file?(File.join(@tmp_path, "book.json"))
             remove_tmp
             false
           end
@@ -108,13 +108,13 @@ module Ingestor
           end
 
           def book_json_path
-            zip_path = "#{@tmp_path}/#{basename}/book.json"
+            zip_path = "#{@tmp_path}/book.json"
             dir_path = "#{@gitbook_path}/book.json"
             gitbook_zip_file?(@gitbook_path) ? zip_path : dir_path
           end
 
           def summary_path
-            zip_path = "#{@tmp_path}/#{basename}/SUMMARY.md"
+            zip_path = "#{@tmp_path}/SUMMARY.md"
             dir_path = "#{@gitbook_path}/SUMMARY.md"
             gitbook_zip_file?(@gitbook_path) ? zip_path : dir_path
           end
@@ -185,7 +185,7 @@ module Ingestor
           end
 
           def stylesheet_path
-            zip_path = File.join("#{@tmp_path}/#{basename}", "styles", "website.css")
+            zip_path = File.join(@tmp_path, "styles", "website.css")
             dir_path = File.join(@gitbook_path, "styles", "website.css")
             gitbook_zip_file?(@gitbook_path) ? zip_path : dir_path
           end

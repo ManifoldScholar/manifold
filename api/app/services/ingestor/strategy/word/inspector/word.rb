@@ -20,14 +20,22 @@ module Ingestor
 
           def initialize(path, logger = nil)
             @word_path = File.expand_path(path)
-            @zip_path = File.join(@word_path, "#{basename}.zip")
             @html_path = "tmp/#{basename}"
             @logger = logger
           end
 
-          def extract_zip(zip_path)
+          def word_zip_file?(zip_path)
             remove_tmp
             FileUtils.mkdir(@html_path)
+            return false unless create_tmp_dir(zip_path)
+            return true if html_file && resource_dir
+            remove_tmp
+            false
+          end
+          memoize :word_zip_file?
+
+          def create_tmp_dir(zip_path)
+            return false unless File.extname(zip_path) == ".zip"
             Zip::File.open(zip_path) do |zip_file|
               zip_file.each do |f|
                 fpath = File.join(@html_path, f.name)
@@ -36,6 +44,7 @@ module Ingestor
             end
             @logger.debug("Unzipped archive to temporary directory")
           end
+          memoize :create_tmp_dir
 
           def remove_tmp
             FileUtils.rm_rf(@html_path, secure: true) if File.directory?(@html_path)
@@ -46,18 +55,19 @@ module Ingestor
           end
 
           def resource_dir
-            "#{@html_path}/#{basename}.fld"
+            Dir.glob("#{@html_path}/*.fld").first || false
           end
+          memoize :resource_dir
 
           def html_file
-            "#{@html_path}/#{basename}.html"
+            Dir.glob("#{@html_path}/*.html").first || false
           end
+          memoize :html_file
 
           # returns true if file ends in html and has a matching .fld dir
           def word_doc?
             @logger.debug(@word_path)
-            File.file?(@zip_path) ? extract_zip(@zip_path) : false
-            File.file?(html_file) && File.directory?(resource_dir)
+            word_zip_file?(@word_path)
           end
 
           # returns md5 hash of file contents
@@ -88,7 +98,6 @@ module Ingestor
             (ingestion_source_paths - sources).each do |path|
               warn "services.ingestor.strategy.word.log.skipping_source", path: path
             end
-            @logger.debug(sources)
             sources
           end
 
