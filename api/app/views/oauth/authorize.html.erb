@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Authentication successful!</title>
+    <style></style>
+  </head>
+  <body>
+    <h1>Authorization success!</h1>
+    <script type="text/javascript">
+      window.opener.postMessage(<%= @oauth_payload.to_json.html_safe %>, "*");
+      window.close();
+    </script>
+  </body>
+</html>

@@ -124,6 +124,17 @@ ActiveRecord::Schema.define(version: 20170407212731) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "identities", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "user_id",                   null: false
+    t.text     "provider",                  null: false
+    t.text     "uid",                       null: false
+    t.jsonb    "info",       default: "{}", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true, using: :btree
+    t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
+  end
+
   create_table "ingestion_sources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "text_id"
     t.string   "source_identifier"
@@ -421,4 +432,5 @@ ActiveRecord::Schema.define(version: 20170407212731) do
     t.datetime "reset_password_sent_at"
   end
 
+  add_foreign_key "identities", "users", on_delete: :cascade
 end

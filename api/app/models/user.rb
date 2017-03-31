@@ -26,6 +26,8 @@ class User < ApplicationRecord
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   # Associations
+  has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
+
   has_many :annotations # TODO: refactor to use "creator_id"
   has_many :favorites # Todo: refactor to use "creator_id"
   has_many :favorite_projects, through: :favorites, source: :favoritable,
@@ -108,5 +110,4 @@ class User < ApplicationRecord
   def force_reset_password
     self.password = SecureRandom.hex(6)
   end
-
 end

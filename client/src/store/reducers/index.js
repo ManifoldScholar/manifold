@@ -5,6 +5,7 @@ import error from './error';
 import ui from './ui';
 import notifications from './notifications';
 import authentication from './authentication';
+import oauth from './oauth';
 import isomorphic from './isomorphic';
 import developer from './developer';
 import entityStore from './entityStore';
@@ -19,6 +20,7 @@ const reducers = combineReducers({
   ui,
   notifications,
   routing,
+  oauth,
   authentication,
   isomorphic,
   websocket,
