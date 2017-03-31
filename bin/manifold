@@ -114,7 +114,7 @@ Clamp do
       puts Paint["$ scss-lint -c .scss-lint.yml", :faint]
       system "scss-lint -c .scss-lint.yml"
       puts Paint["$ eslint . #{autofix}", :faint]
-      raise "Client lint failed" unless system "cd client && eslint . #{autofix}"
+      raise "Client lint failed" unless system "cd client && node_modules/.bin/eslint . #{autofix}"
     end
 
     def execute
@@ -139,7 +139,7 @@ Clamp do
     def test_client
       update = update_snapshots? ? " -u" : ""
       puts Paint["jest#{update}", :faint]
-      raise "Client test failed" unless system "cd client && jest#{update}"
+      raise "Client test failed" unless system "cd client && node_modules/.bin/jest#{update}"
     end
 
     def execute
