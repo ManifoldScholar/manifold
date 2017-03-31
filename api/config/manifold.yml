@@ -1,4 +1,14 @@
 common: &1
+  :oauth:
+    :facebook:
+      :id: <%= ENV['OAUTH_FB_ID'] %>
+      :secret: <%= ENV['OAUTH_FB_SECRET'] %>
+    :google:
+      :id: <%= ENV['OAUTH_GO_ID'] %>
+      :secret: <%= ENV['OAUTH_GO_SECRET'] %>
+    :twitter:
+      :id: <%= ENV['OAUTH_TW_ID'] %>
+      :secret: <%= ENV['OAUTH_TW_SECRET'] %>
   :twitter:
     # env
     :consumer_key:

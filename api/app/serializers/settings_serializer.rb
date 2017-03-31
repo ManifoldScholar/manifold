@@ -4,9 +4,14 @@ class SettingsSerializer < ActiveModel::Serializer
 
   attributes :general, :press_logo_styles, :theme
 
+  attribute :oauth
+
   # Singleton objects return 0 as their ID when serialized.
   def id
     0
   end
 
+  def oauth
+    ManifoldEnv.oauth.as_json
+  end
 end

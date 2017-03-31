@@ -1,0 +1,39 @@
+require 'rails_helper'
+
+RSpec.describe ExternalAuth::Provisioners::User, external_auth_provisioner: true do
+  with_provider :facebook do
+    upon_running_the_provisioner do
+      expect_hooks! :name_to_nickname, :first_and_last_name
+
+      the_user_has do
+        mapped_from_auth nickname: :name
+        copied_from_auth :first_name, :last_name
+      end
+    end
+  end
+
+  with_provider :google do
+    upon_running_the_provisioner do
+      expect_hooks! :name_to_nickname, :first_and_last_name
+
+      the_user_has do
+        mapped_from_auth nickname: :name
+        copied_from_auth :first_name, :last_name
+      end
+    end
+  end
+
+  with_provider :twitter do
+    upon_running_the_provisioner do
+      expect_hooks! :twitter_details
+
+      the_user_has do
+        set_attributes("set the twitter username to the user's nickname") do
+          { nickname: "@#{auth_hash.info.nickname}" }
+        end
+
+        set_static_attributes first_name: 'Twitter', last_name: 'User'
+      end
+    end
+  end
+end

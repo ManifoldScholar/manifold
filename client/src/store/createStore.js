@@ -1,5 +1,6 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from './middleware/thunkMiddleware';
+import oauthMiddleware from './middleware/oauthMiddleware';
 import entityStoreMiddleware from './middleware/entityStoreMiddleware';
 import currentUserMiddleware from './middleware/currentUserMiddleware';
 import notificationMiddleware from './middleware/notificationMiddleware';
@@ -12,6 +13,7 @@ export default function createStore(data) {
 
   const useDevTools = __DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__;
   const middleware = [];
+  middleware.push(oauthMiddleware);
   middleware.push(currentUserMiddleware);
   middleware.push(apiErrorMiddleware);
   middleware.push(entityStoreMiddleware);

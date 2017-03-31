@@ -1,0 +1,2 @@
+module ExternalAuth
+end

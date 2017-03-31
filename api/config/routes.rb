@@ -3,6 +3,9 @@ require "sidekiq/web"
 # rubocop:disable Metrics/BlockLength, Metrics/LineLength
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
+
+  get "auth/:provider/callback", to: "oauth#authorize"
+
   namespace :api do
     namespace :v1 do
       resources :pages
