@@ -158,7 +158,6 @@ class ProjectDetailWrapperContainer extends PureComponent {
           title={project.attributes.title}
           subtitle={project.attributes.subtitle}
           utility={this.renderUtility()}
-
         />
         <section className="backend-panel">
           <aside className="scrollable">
