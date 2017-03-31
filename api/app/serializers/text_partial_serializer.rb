@@ -11,7 +11,7 @@ class TextPartialSerializer < ActiveModel::Serializer
   belongs_to :category
 
   def start_text_section_id
-    object.start_text_section_id ||= object.spine[0]
+    object.start_text_section_id ||= object.spine[0] || object.text_sections.first.id
   end
 
   def sections_map
