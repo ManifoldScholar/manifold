@@ -19,9 +19,9 @@ module Ingestor
 
       def report(spine_source_ids)
         if spine_source_ids.count.positive?
-          debug "services.ingestor.creator.log.spine_populated", number: spine_source_ids.count
+          info "services.ingestor.creator.log.spine_populated", number: spine_source_ids.count
         else
-          debug "services.ingestor.creator.log.spine_empty"
+          info "services.ingestor.creator.log.spine_empty"
         end
       end
     end

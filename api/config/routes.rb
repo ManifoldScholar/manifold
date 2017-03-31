@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :categories, except: [:create, :index]
       resources :makers
       resources :texts
+      resources :ingestions, only: [:show, :update]
       resource :statistics, only: [:show]
       resource :settings, except: [:destroy, :create]
 
@@ -62,6 +63,7 @@ Rails.application.routes.draw do
             resources :events, only: [:index]
             resources :collaborators
             resources :text_categories, only: [:index, :create]
+            resources :ingestions, only: [:create], controller: "/api/v1/ingestions"
           end
         end
       end

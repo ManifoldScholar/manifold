@@ -22,9 +22,9 @@ module Ingestor
 
       def report(stylesheet)
         if stylesheet.new_record?
-          debug "services.ingestor.creator.log.new_stylesheet", name: stylesheet.name
+          info "services.ingestor.creator.log.new_stylesheet", name: stylesheet.name
         else
-          debug "services.ingestor.creator.log.updated_stylesheet", name: stylesheet.name
+          info "services.ingestor.creator.log.updated_stylesheet", name: stylesheet.name
         end
       end
 

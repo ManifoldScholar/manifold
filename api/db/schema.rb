@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322212627) do
+ActiveRecord::Schema.define(version: 20170330185847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,23 @@ ActiveRecord::Schema.define(version: 20170322212627) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+  end
+
+  create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "state"
+    t.string   "log",                              array: true
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
+    t.string   "strategy"
+    t.string   "external_source_url"
+    t.string   "ingestion_type"
+    t.uuid     "creator_id"
+    t.uuid     "text_id"
+    t.uuid     "project_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

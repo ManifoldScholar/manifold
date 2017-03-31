@@ -16,6 +16,7 @@ const applicationConfiguration = {
   universalServerSocket: process.env.CLIENT_UNIVERSAL_SERVER_SOCKET,
   assetPort: process.env.CLIENT_ASSET_PORT,
   apiUrl: process.env.API_URL,
+  wsUrl: process.env.WS_URL,
   assetProxyPaths: ['/dist'],
   apiProxyPaths: ['/api', '/system'],
   app: {

@@ -36,13 +36,13 @@ module Ingestor
 
       def report(collaborator)
         if collaborator.new_record?
-          debug "services.ingestor.creator.log.new_collaborator",
-                name: collaborator.maker.name,
-                role: collaborator.role
+          info "services.ingestor.creator.log.new_collaborator",
+               name: collaborator.maker.name,
+               role: collaborator.role
         else
-          debug "services.ingestor.creator.log.updated_collaborator",
-                name: collaborator.maker.name,
-                role: collaborator.role
+          info "services.ingestor.creator.log.updated_collaborator",
+               name: collaborator.maker.name,
+               role: collaborator.role
         end
       end
 

@@ -5,6 +5,7 @@ import { entityEditorActions, entityStoreActions } from 'actions';
 import { Developer } from 'components/global';
 import { bindActionCreators } from 'redux';
 import { entityUtils } from 'utils';
+import { Form as GlobalForm } from 'components/global';
 import get from 'lodash/get';
 import has from 'lodash/has';
 import isString from 'lodash/isString';
@@ -29,22 +30,25 @@ class FormContainer extends PureComponent {
     create: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     onSuccess: PropTypes.func,
-    debug: PropTypes.bool
+    debug: PropTypes.bool,
+    groupErrors: PropTypes.bool,
+    groupErrorsStyle: PropTypes.object
   };
 
   static defaultProps = {
     model: {
       attributes: {}
     },
-    debug: false
+    debug: false,
+    groupErrors: false
   }
 
   static mapStateToProps(state, ownProps) {
     return {
       routing: state.routing,
       session: get(state.entityEditor.sessions, ownProps.name),
-      response: get(state.entityStore.responses, `editor-${ownProps.name}`),
-      errors: get(state.entityStore.responses, `editor-${ownProps.name}.errors`)
+      response: get(state.entityStore.responses, ownProps.name),
+      errors: get(state.entityStore.responses, `${ownProps.name}.errors`)
     };
   }
 
@@ -90,12 +94,8 @@ class FormContainer extends PureComponent {
     props.dispatch(entityEditorActions.close(props.name));
   }
 
-  requestName(props) {
-    return `editor-${props.name}`;
-  }
-
   flushSave(props) {
-    props.dispatch(entityStoreActions.flush(this.requestName(props)));
+    props.dispatch(entityStoreActions.flush(props.name));
   }
 
   maybeOpenSession(props) {
@@ -108,8 +108,8 @@ class FormContainer extends PureComponent {
     this.props.dispatch(entityEditorActions.open(name, model));
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(event = null) {
+    if (event) event.preventDefault();
     if (this.props.session.source.id) {
       this.update();
     } else {
@@ -121,7 +121,7 @@ class FormContainer extends PureComponent {
     const dirty = this.props.session.dirty;
     const source = this.props.session.source;
     const call = this.props.update(source.id, { attributes: dirty.attributes });
-    const action = request(call, this.requestName(this.props));
+    const action = request(call, this.props.name);
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty('promise') && this.props.onSuccess) {
       res.promise.then(() => {
@@ -134,7 +134,7 @@ class FormContainer extends PureComponent {
   create() {
     const dirty = this.props.session.dirty;
     const call = this.props.create({ attributes: dirty.attributes });
-    const action = request(call, this.requestName(this.props));
+    const action = request(call, this.props.name);
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty('promise') && this.props.onSuccess) {
       res.promise.then(() => {
@@ -185,7 +185,11 @@ class FormContainer extends PureComponent {
 
   renderDebugger() {
     if (!this.props.debug) return null;
-    return <Developer.Debugger object={this.props.session} />;
+    const debug = {
+      session: this.props.session,
+      errors: this.props.errors
+    };
+    return <Developer.Debugger object={debug} />;
   }
 
   render() {
@@ -193,6 +197,14 @@ class FormContainer extends PureComponent {
     return (
       <div>
         {this.renderDebugger()}
+        {this.props.groupErrors === true ?
+          <GlobalForm.Errorable
+            containerStyle={this.props.groupErrorsStyle}
+            className="form-input"
+            name="*"
+            errors={this.props.errors}
+          />
+        : null}
         <form onSubmit={this.handleSubmit} className={this.props.className} >
           {this.renderChildren(this.props)}
         </form>

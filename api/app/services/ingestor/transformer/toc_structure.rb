@@ -25,6 +25,7 @@ module Ingestor
       #   TextSections and added them to the Text model.
       # @see Ingestor::Strategy::EPUB::Inspector::TOC#text_structure
       def self.transform(structure, text)
+        return unless structure
         branch_convert(structure.clone, text)
       end
 

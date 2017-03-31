@@ -267,7 +267,7 @@
     line-height: 1.375;
   }
 
-  .checked + .toggle-indicator {
+  &.checked .toggle-indicator {
     // For checkboxes
     .manicon-check {
       opacity: 1;

@@ -44,6 +44,7 @@
     ],
     "globals": {
       "__API_URL__": "http://manifold-api.dev:80",
+      "__WS_URL__": "ws://manifold-api.dev/websocket",
       "__CLIENT__": true,
       "__SERVER__": false,
       "__DEVELOPMENT__": true,
@@ -51,6 +52,7 @@
     }
   },
   "dependencies": {
+    "actioncable": "^5.0.2",
     "autolinker": "^1.2.1",
     "autoprefixer": "^6.7.1",
     "babel": "^6.5.2",
