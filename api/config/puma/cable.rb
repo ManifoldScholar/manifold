@@ -8,4 +8,4 @@ tag "manifold-cable"
 preload_app!
 rackup      "cable/config.ru"
 environment ENV["RAILS_ENV"] || "development"
-bind "tcp://0.0.0.0:#{ENV["CABLE_PORT"]}"
+bind "tcp://0.0.0.0:#{ENV['CABLE_PORT']}"
