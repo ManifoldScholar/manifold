@@ -2,12 +2,13 @@ import React, { PureComponent, PropTypes } from 'react';
 import HigherOrder from 'containers/global/HigherOrder';
 import classNames from 'classnames';
 
-export default class AnnotationPopupAnnotate extends PureComponent {
+class AnnotationPopupAnnotate extends PureComponent {
 
   static displayName = "Annotation.Popup.Annotate";
 
   static propTypes = {
     attachResource: PropTypes.func,
+    currentUser: PropTypes.object,
     highlight: PropTypes.func,
     annotate: PropTypes.func,
     bookmark: PropTypes.func,
@@ -44,6 +45,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
   }
 
   render() {
+
     const pageClass = classNames({
       'popup-page': true,
       hidden: this.props.secondary,
@@ -58,6 +60,19 @@ export default class AnnotationPopupAnnotate extends PureComponent {
       highlight: this.state.tailHighlight
     });
 
+    // The first button to render needs to have the enter and leave events. If the
+    // resource button is visible, it always has these props. Otherwise the highlight
+    // button gets them.
+    const firstButtonProps = {
+      onMouseEnter: () => { this.handleTailHighlight(this.props.direction === 'down'); },
+      onMouseLeave: () => { this.handleTailBlur(true); }
+    };
+    const resourceButtonProps = firstButtonProps;
+    let highlightButtonProps = firstButtonProps;
+    if (this.props.currentUser && this.props.currentUser.attributes.role === "admin") {
+      highlightButtonProps = {};
+    }
+
     return (
       <section className={pageClass}
         ref={(p) => { this.p = p; }}
@@ -66,7 +81,10 @@ export default class AnnotationPopupAnnotate extends PureComponent {
         }}
       >
         <HigherOrder.RequireRole requiredRole="admin">
-          <button onClick={this.props.attachResource}>
+          <button
+            onClick={this.props.attachResource}
+            {...resourceButtonProps}
+          >
             <i className="manicon manicon-cube-outline"></i>
             Resource
           </button>
@@ -76,8 +94,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
           <div className="button-group">
             <button
               onClick={this.props.highlight}
-              onMouseEnter={() => { this.handleTailHighlight(this.props.direction === 'down'); }}
-              onMouseLeave={() => { this.handleTailBlur(true); }}
+              {...highlightButtonProps}
             >
               <i className="manicon manicon-pencil-simple"></i>
               Highlight
@@ -115,3 +132,5 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     );
   }
 }
+
+export default HigherOrder.withCurrentUser(AnnotationPopupAnnotate);

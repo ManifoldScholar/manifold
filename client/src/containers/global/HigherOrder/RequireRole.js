@@ -78,4 +78,3 @@ class RequireRole extends PureComponent {
 export default connect(
   RequireRole.mapStateToProps
 )(RequireRole);
-
