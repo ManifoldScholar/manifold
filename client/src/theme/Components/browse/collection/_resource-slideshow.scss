@@ -34,6 +34,10 @@
     font-size: 15px;
     color: $neutral40;
 
+    p + p {
+      margin-top: 1em;
+    }
+
     &.transition-height {
       transition: height $duration $timing;
     }
