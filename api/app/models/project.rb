@@ -9,6 +9,7 @@ class Project < ApplicationRecord
   include TrackedCreator
   include Collaborative
   include MoneyAttributes
+  include WithMarkdown
   include TruthyChecks
   include Filterable
   include Attachments
@@ -46,6 +47,7 @@ class Project < ApplicationRecord
 
   # Callbacks
   after_commit :trigger_creation_event, on: [:create]
+  before_save :update_description_formatted
 
   # Delegations
   delegate :count, to: :collections, prefix: true
@@ -112,6 +114,10 @@ class Project < ApplicationRecord
 
   def following_twitter_accounts?
     twitter_following.length.positive?
+  end
+
+  def update_description_formatted
+    self.description_formatted = render_simple_markdown(description)
   end
 
   def to_s

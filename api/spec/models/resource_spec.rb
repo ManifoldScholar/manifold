@@ -25,21 +25,22 @@ RSpec.describe Resource, type: :model do
 
   describe "formats some fields with a markdown subset" do
     let(:raw) { "_italic_ a **bold**"}
-    let(:formatted) { "<p><em>italic</em> a <strong>bold</strong></p>"}
+    let(:formatted_without_blocks) { "<em>italic</em> a <strong>bold</strong>"}
+    let(:formatted_with_block) { "<p><em>italic</em> a <strong>bold</strong></p>"}
 
     it "has a formatted title after save" do
       resource = FactoryGirl.create(:resource, title: raw)
-      expect(resource.title_formatted).to eq(formatted)
+      expect(resource.title_formatted).to eq(formatted_without_blocks)
     end
 
     it "has a formatted caption after save" do
       resource = FactoryGirl.create(:resource, caption: raw)
-      expect(resource.caption_formatted).to eq(formatted)
+      expect(resource.caption_formatted).to eq(formatted_without_blocks)
     end
 
     it "has a formatted description after save" do
       resource = FactoryGirl.create(:resource, description: raw)
-      expect(resource.description_formatted).to eq(formatted)
+      expect(resource.description_formatted).to eq(formatted_with_block)
     end
   end
 
