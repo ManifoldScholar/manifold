@@ -174,7 +174,8 @@ class ResourceDetailWrapperContainer extends PureComponent {
             }
           ]}
           utility={this.renderUtility()}
-          title={resource.attributes.title}
+          title={resource.attributes.titleFormatted}
+          titleHtml
           subtitle={resource.attributes.subtitle}
         />
         <section className="backend-panel">

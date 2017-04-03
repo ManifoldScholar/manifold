@@ -88,11 +88,11 @@ class Resource < ApplicationRecord
   end
 
   def update_title_formatted
-    self.title_formatted = render_simple_markdown(title)
+    self.title_formatted = render_simple_markdown(title, false)
   end
 
   def update_caption_formatted
-    self.caption_formatted = render_simple_markdown(caption)
+    self.caption_formatted = render_simple_markdown(caption, false)
   end
 
   def update_description_formatted
