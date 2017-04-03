@@ -192,7 +192,7 @@ module Validation
 
   def metadata
     { metadata: [
-      :isbn, :publisher, :place_of_publication, :doi, :series, :pages,
+      :isbn_ten, :isbn_thirteen, :publisher, :place_of_publication, :doi, :series, :pages,
       :date_of_publication
     ] }
   end

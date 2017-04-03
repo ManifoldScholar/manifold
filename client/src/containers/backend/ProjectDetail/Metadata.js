@@ -37,9 +37,15 @@ export default class ProjectDetailMetadata extends PureComponent {
         >
           <Form.TextInput
             focusOnMount
-            label="ISBN"
-            name="attributes[metadata][isbn]"
-            placeholder="Enter ISBN Number"
+            label="ISBN-10"
+            name="attributes[metadata][isbnTen]"
+            placeholder="Enter ISBN-10 Number"
+          />
+          <Form.TextInput
+            focusOnMount
+            label="ISBN-13"
+            name="attributes[metadata][isbnThirteen]"
+            placeholder="Enter ISBN-13 Number"
           />
           <Form.TextInput
             label="Publisher"

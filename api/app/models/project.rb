@@ -12,10 +12,11 @@ class Project < ApplicationRecord
   include TruthyChecks
   include Filterable
   include Attachments
-  include HashAttributes
+  include Metadata
 
   # Magic
-  merge_hash_attributes! :metadata
+  with_metadata %w(isbn_ten isbn_thirteen publisher place_of_publication doi
+                   date_of_publication series)
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async

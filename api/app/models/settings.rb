@@ -2,11 +2,7 @@ class Settings < ApplicationRecord
 
   # Concerns
   include Authority::Abilities
-  include HashAttributes
   include Attachments
-
-  # Magic
-  merge_hash_attributes! :general
 
   # Validation
   validates :singleton_guard, inclusion: [0]
@@ -24,6 +20,12 @@ class Settings < ApplicationRecord
     row.singleton_guard = 0
     row.save!
     row
+  end
+
+  def general=(value)
+    base = general || {}
+    new = base.merge(value)
+    self[:general] = new
   end
 
 end
