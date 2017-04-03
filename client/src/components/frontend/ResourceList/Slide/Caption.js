@@ -77,7 +77,7 @@ export default class ResourceSlideCaption extends Component {
           <div className="resource-description" ref={ (c) => {
             this._description = c;
           } }>
-            <div dangerouslySetInnerHTML={this.createDescription(attr.descriptionFormatted)} />
+            <div dangerouslySetInnerHTML={this.createDescription(attr.captionFormatted)} />
           </div>
         </VelocityComponent>
         <div className="resource-utility">
