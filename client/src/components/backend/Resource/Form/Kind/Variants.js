@@ -34,6 +34,22 @@ export default class ResourceFormKindVariants extends PureComponent {
     );
   }
 
+  renderPdfFields() {
+    return (
+      <div className="form-section">
+        <Form.Upload
+          style="square"
+          label="Thumbnail Image"
+          accepts="images"
+          readFrom="attributes[variantThumbnailStyles][smallSquare]"
+          name="attributes[variantThumbnail]"
+          remove="attributes[removeVariantThumbnail]"
+          {...this.props}
+        />
+      </div>
+    );
+  }
+
   renderVariantFields() {
     return (
       <div className="form-section">
@@ -73,9 +89,9 @@ export default class ResourceFormKindVariants extends PureComponent {
   }
 
   render() {
-    return (
-      this.props.kind === "image" ? this.renderImageFields() : this.renderVariantFields()
-    );
+    if (this.props.kind === "image") return this.renderImageFields();
+    if (this.props.kind === "pdf") return this.renderPdfFields();
+    return this.renderVariantFields();
   }
 
 }

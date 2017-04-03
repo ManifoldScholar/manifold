@@ -120,7 +120,11 @@ class ResourceDetailWrapperContainer extends PureComponent {
         key: "metadata"
       }
     ];
-    if (kind === 'image' || kind === 'audio' || (kind === 'video' && !externalVideo)) {
+    if (
+      kind === 'image' ||
+      kind === 'audio' ||
+      kind === "pdf" ||
+      (kind === 'video' && !externalVideo)) {
       out.splice(1, 0, {
         path: `/backend/resource/${resource.id}/variants`,
         label: "Variants",
