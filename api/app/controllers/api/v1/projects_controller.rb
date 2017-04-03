@@ -45,6 +45,12 @@ module Api
         @project.destroy
       end
 
+      def scope_for_projects
+        Project.includes(:creators, :contributors, { texts: :text_sections },
+                         :text_categories, :events, :collections,
+                         resources: :collection_resources)
+      end
+
     end
   end
 end

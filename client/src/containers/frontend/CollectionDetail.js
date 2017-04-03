@@ -12,7 +12,7 @@ import { entityUtils } from 'utils';
 import { projectsAPI, collectionsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 
-const { select, meta } = entityUtils;
+const { select, grab, meta, isEntityLoaded } = entityUtils;
 const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
@@ -20,24 +20,36 @@ const perPage = 10;
 class CollectionDetailContainer extends PureComponent {
 
   static fetchData(getState, dispatch, location, params) {
+    const state = getState();
     const pageParam = params.page ? params.page : page;
     const collectionId = params.collectionId;
+    const projectLoaded = isEntityLoaded('projects', params.id, state)
     const projects = projectsAPI.show(params.id);
     const collection = collectionsAPI.show(params.collectionId);
     const collectionResources = collectionsAPI.collectionResources(
       collectionId, { }, { number: pageParam, size: perPage }
     );
-    const { promise: one } = dispatch(request(projects, requests.tmpProject));
+
+    const promises = [];
+
+    if (!projectLoaded) {
+      const { promise: one } = dispatch(request(projects, requests.tmpProject));
+      promises.push(one);
+    }
+
     const { promise: two } = dispatch(request(collection, requests.feCollection));
     const lookups = [requests.feSlideshow, requests.feCollectionResources];
     const { promise: three } = dispatch(request(collectionResources, lookups));
-    return Promise.all([one, two, three]);
+    promises.push(two);
+    promises.push(three);
+
+    return Promise.all(promises);
   }
 
-  static mapStateToProps(state) {
+  static mapStateToProps(state, ownProps) {
     const props = {
-      project: select(requests.tmpProject, state.entityStore),
-      collection: select(requests.feCollection, state.entityStore),
+      project: grab('projects', ownProps.params.id, state.entityStore),
+      collection: grab('collections', ownProps.params.collectionId, state.entityStore),
       resources: select(requests.feCollectionResources, state.entityStore),
       resourcesMeta: meta(requests.feCollectionResources, state.entityStore),
       slideshowResources: select(requests.feSlideshow, state.entityStore),

@@ -46,19 +46,20 @@ class CollectionResourceDetailContainer extends PureComponent {
   }
 
   projectUrl() {
-    const pid = this.props.collection.relationships.project.id;
+    const pid = this.props.collection.attributes.projectId;
     return `/browse/project/${pid}/resources`;
   }
 
   collectionUrl() {
+    console.log(this.props.collection);
     const cid = this.props.collection.id;
-    const pid = this.props.collection.relationships.project.id;
+    const pid = this.props.collection.attributes.projectId;
     return `/browse/project/${pid}/collection/${cid}`;
   }
 
   resourceUrl() {
     const cid = this.props.collection.id;
-    const pid = this.props.collection.relationships.project.id;
+    const pid = this.props.collection.attributes.projectId;
     const crid = this.props.collectionResource.id;
     return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
   }
