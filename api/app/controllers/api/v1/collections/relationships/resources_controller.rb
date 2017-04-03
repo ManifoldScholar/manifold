@@ -8,9 +8,10 @@ module Api
           before_action :set_collection, only: [:index]
 
           resourceful! Resource, authorize_options: { except: [:index, :show] } do
+            ids = @collection.resources.pluck(:id)
             Resource.filter(
               with_pagination!(resource_filter_params),
-              scope: @collection.resources
+              scope: Resource.all.where("resources.id IN (?)", ids)
             )
           end
 
@@ -20,7 +21,7 @@ module Api
             render_multiple_resources(
               @resources,
               include: %w(collection_resources),
-              each_serializer: ResourceSerializer,
+              each_serializer: ResourcePartialSerializer,
               meta: { pagination: pagination_dict(@resources) },
               location: api_v1_collection_relationships_resources_url(@collection)
             )
