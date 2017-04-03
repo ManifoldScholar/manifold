@@ -180,5 +180,23 @@ RSpec.describe Project, type: :model do
 
   end
 
+  describe "its metadata" do
+
+    it "can be set" do
+      p = FactoryGirl.build(:project)
+      p.metadata = { "isbn_ten" => "1234" }
+      p.save
+      expect(p.metadata["isbn_ten"]).to eq "1234"
+    end
+
+    it "filters out invalid metadata" do
+      p = FactoryGirl.build(:project)
+      p.metadata = { "isbn_ten" => "1234", "foo" => "bar" }
+      p.save
+      expect(p.metadata).to eq({ "isbn_ten" => "1234" })
+    end
+
+  end
+
 
 end

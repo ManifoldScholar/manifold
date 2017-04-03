@@ -13,10 +13,11 @@ class Text < ApplicationRecord
   extend Memoist
   include Collaborative
   include TrackedCreator
-  include HashAttributes
+  include Metadata
 
   # Magic
-  merge_hash_attributes! :metadata
+  with_metadata [:isbn_ten, :isbn_thirteen, :publisher, :place_of_publication, :doi,
+                 :series, :pages, :date_of_publication]
 
   # Fields
   serialize :structure_titles, Hash
