@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
-const perPage = 4;
+const perPage = 10;
 
 class ResourcePickerContainer extends PureComponent {
 
