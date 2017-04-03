@@ -37,6 +37,13 @@ export default class ResourceSlideCaption extends Component {
     });
   }
 
+  createDescription(description) {
+    if (!description) return { __html: 'No content provided.' };
+    return {
+      __html: description
+    };
+  }
+
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
@@ -70,9 +77,7 @@ export default class ResourceSlideCaption extends Component {
           <div className="resource-description" ref={ (c) => {
             this._description = c;
           } }>
-            <p>
-              {attr.description}
-            </p>
+            <div dangerouslySetInnerHTML={this.createDescription(attr.descriptionFormatted)} />
           </div>
         </VelocityComponent>
         <div className="resource-utility">
