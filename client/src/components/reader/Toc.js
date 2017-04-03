@@ -69,14 +69,15 @@ export default class Toc extends Component {
         <ul className="toc-list">
           {this.props.text.attributes.toc.map(this.visitNode)}
         </ul>
-        <div className="toc-footer">
+        {/* Commented out until functionality is working */}
+        {/* <div className="toc-footer">
           <a href="#">
             <h4>
               <i className="manicon manicon-question-round"></i>
               About This Text
             </h4>
           </a>
-        </div>
+        </div> */}
       </nav>
     );
   }
