@@ -94,6 +94,30 @@ export default class ResourceMeta extends Component {
               />
             </span>
           </li>
+          {attr.copyrightStatus ?
+            <li>
+              <span className="meta-label">{'Copyright Status'}</span>
+              <span className="meta-value">
+                {attr.copyrightStatus}
+              </span>
+            </li> : null
+          }
+          {attr.copyrightHolder ?
+            <li>
+              <span className="meta-label">{'Copyright Holder'}</span>
+              <span className="meta-value">
+                {attr.copyrightHolder}
+              </span>
+            </li> : null
+          }
+          {attr.credit ?
+            <li>
+              <span className="meta-label">{'Credit'}</span>
+              <span className="meta-value">
+                {attr.credit}
+              </span>
+            </li> : null
+          }
         </ul>
 
         {this.props.showTags ?
