@@ -51,7 +51,6 @@ class CollectionResourceDetailContainer extends PureComponent {
   }
 
   collectionUrl() {
-    console.log(this.props.collection);
     const cid = this.props.collection.id;
     const pid = this.props.collection.attributes.projectId;
     return `/browse/project/${pid}/collection/${cid}`;
