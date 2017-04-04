@@ -1,7 +1,3 @@
-import LoginForm from './LoginForm';
-import HigherOrder from './HigherOrder';
-
-export default {
-  LoginForm,
-  HigherOrder
-};
+export LoginForm from './LoginForm';
+export HigherOrder from './HigherOrder';
+export Comment from './Comment';

@@ -17,7 +17,8 @@ module Validator
       convert_attribute_to_style!(node, "align", "text-align")
       convert_measured_attribute_to_style!(node, "border", "border")
       convert_measured_attribute_to_style!(node, "width", "width")
-      remove_blacklisted_attributes!(node)
+      ensure_whitelisted_attribute!(node)
+      # remove_blacklisted_attributes!(node)
       remove_blacklisted_css_properties!(node)
       map_css_values!(node)
     end
@@ -52,6 +53,15 @@ module Validator
       attr_value = node.attributes[attr].try(:value).try(:to_i)
       return unless attr_value && attr_value > max
       node[attr] = max
+    end
+
+    def ensure_whitelisted_attribute!(node)
+      node.attributes.each do |attr_pair|
+        key = attr_pair[0]
+        unless Validator::Constants::TAG_ATTRIBUTE_WHITELIST.include?(key)
+          node.attributes[key].remove
+        end
+      end
     end
 
     def remove_blacklisted_attributes!(node)

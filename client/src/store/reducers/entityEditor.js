@@ -53,17 +53,23 @@ const close = (state, action) => {
 
 const set = (state, action) => {
   const { path, id, value } = action.payload;
+  if (value === undefined) return state; // undefined values are noops.
   const setPath = lodashSet({}, path, value);
   const sourceValue = getSourceValue(path, state.sessions[id].source);
+  const dirty = cloneDeep(state.sessions[id].dirty);
   let newDirty;
   if (value === sourceValue) {
-    newDirty = lodashOmit(state.dirty, setPathToGetPath(path));
+    newDirty = lodashOmit(dirty, setPathToGetPath(path));
   } else {
-    const dirty = cloneDeep(state.sessions[id].dirty);
     lodashSet(dirty, setPathToGetPath(path), null);
     newDirty = update(dirty, setPath);
   }
-  const changed = hasChanges(newDirty);
+  let changed;
+  if (action.payload.triggersDirty) {
+    changed = hasChanges(newDirty);
+  } else {
+    changed = lodashGet(state, `${id}.changed`) || false;
+  }
   return update(state, { sessions: { [id]: {
     changed: { $set: changed },
     dirty: { $set: newDirty }

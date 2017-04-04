@@ -8,3 +8,4 @@ export * as uiTypographyActions from './ui/typography';
 export * as uiVisibilityActions from './ui/visibility';
 export * as uiReaderActions from './ui/reader';
 export * as entityEditorActions from './entityEditor';
+export * as websocketActions from './websocket';

@@ -1,8 +1,9 @@
 # A collection of resources
 class Collection < ApplicationRecord
 
-  # Authority
+  # Concerns
   include Authority::Abilities
+  include Attachments
 
   # Associations
   belongs_to :project
@@ -11,21 +12,7 @@ class Collection < ApplicationRecord
   has_many :resources, through: :collection_resources
 
   # Attachments
-  has_attached_file :thumbnail,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
-                    styles: {
-                      thumb: ["x500", :jpg]
-                    }
-  validation = Rails.configuration.manifold.attachments.validations.image
-  validates_attachment_content_type :thumbnail, content_type: validation[:allowed_mime]
-  validates_attachment_file_name :thumbnail, matches: validation[:allowed_ext]
-
-  def thumbnail_url
-    return nil unless thumbnail.present?
-    Rails.configuration.manifold.api_url + thumbnail.url
-  end
+  manifold_has_attached_file :thumbnail, :image
 
   def resource_kinds
     resources

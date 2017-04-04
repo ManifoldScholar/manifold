@@ -58,7 +58,10 @@ export default class App extends Component {
     this.store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
     this.store.dispatch(currentUserActions.login);
     this.forceUpdate();
-    ReactGA.initialize('UA-90773269-1'); // Google Analytics Tracking ID
+    // eslint-disable-next-line
+    let gaid = get(this.store.getState(), 'entityStore.entities.settings.0.attributes.general.gaTrackingId');
+    if (!gaid) gaid = ('UA-73353326-2');
+    ReactGA.initialize(gaid); // Google Analytics Tracking ID
   }
 
   onRouteUpdate() {

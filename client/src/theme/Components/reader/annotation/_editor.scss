@@ -1,0 +1,115 @@
+.annotation-editor {
+  @include drawerPadding(padding-right, 'heavy');
+  @include drawerPadding(padding-left);
+  padding-top: 32px;
+
+  @include respond($break90) {
+    padding-top: 48px;
+  }
+
+  .annotation-annotation & {
+    @include drawerIndent(padding-left);
+    padding-top: 5px;
+    padding-right: 0;
+    padding-bottom: 5px;
+
+    textarea {
+      font-size: 16px;
+    }
+  }
+
+  textarea {
+    @include templateHead;
+    padding: 1.7em 2.15em;
+    font-size: 16px;
+    background-color: $neutralWhite;
+    border: 0;
+    outline: 0;
+    resize: vertical;
+
+    @include respond($break60) {
+      font-size: 18px;
+    }
+
+    @include respond($break90) {
+      font-size: 20px;
+    }
+
+    &::placeholder {
+      color: $neutral40;
+    }
+  }
+
+  .utility {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    @include respond($break90) {
+      margin-top: 20px;
+    }
+
+    .form-input {
+      width: 100%;
+
+      @include respond($break95) {
+        width: auto;
+      }
+    }
+
+    .checkbox {
+      padding-left: 39px;
+      font-size: 14px;
+      color: $neutral50;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $neutral75;
+      }
+
+      .toggle-indicator {
+        padding-left: 5px; // OD
+        background-color: $neutralWhite;
+      }
+
+      .manicon-check-bold {
+        font-size: 13px;
+        color: $neutral70;
+        opacity: 0;
+        transition: opacity $durationFast $timing;
+      }
+
+      &.checked {
+        .manicon-check-bold {
+          opacity: 1;
+        }
+      }
+
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-top: 18px;
+
+      @include respond($break95) {
+        width: auto;
+        margin-top: 0;
+      }
+
+      .button-primary, .button-secondary {
+        min-width: 100px;
+        padding: 12px 0 13px;
+        margin-left: 15px;
+        font-size: 14px;
+      }
+
+      .button-secondary[disabled=disabled], .button-secondary:disabled {
+        background-color: $accentPrimaryDull;
+      }
+    }
+  }
+}

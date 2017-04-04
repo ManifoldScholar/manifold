@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import { Utility, Project, ResourceList } from 'components/frontend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
@@ -20,9 +20,7 @@ class ProjectResourcesContainer extends Component {
     const projectRequest =
         request(projectsAPI.show(params.id), requests.feProject);
     // This can be made more robust with other types if need be.
-    const filter = location.query.tag ? {
-      tag: location.query.tag
-    } : {};
+    const filter = location.query ? location.query : {};
     const resourcesRequest =
         request(projectsAPI.resources(
           params.id,
@@ -53,6 +51,7 @@ class ProjectResourcesContainer extends Component {
 
   constructor(props) {
     super(props);
+    this.state = this.initialState(this.props.location.query);
     this.filterChange = this.filterChange.bind(this);
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
@@ -60,6 +59,13 @@ class ProjectResourcesContainer extends Component {
   componentWillUnmount() {
     this.props.dispatch(flush(requests.feProject));
     this.props.dispatch(flush(requests.feResources));
+  }
+
+  initialState(init) {
+    const filters = init ? init : {};
+    return ({
+      filter: filters
+    });
   }
 
   updateResults() {
@@ -74,15 +80,21 @@ class ProjectResourcesContainer extends Component {
   filterChange(filter) {
     this.setState({ filter }, () => {
       this.updateResults();
+      this.updateUrl(filter);
     });
+  }
+
+  updateUrl(filter) {
+    const base = this.props.location.pathname;
+    browserHistory.push({ pathname: base, query: filter });
   }
 
   render() {
     const project = this.props.project;
     if (!project) return null;
 
-    const tag = get(this.props, 'location.query.tag');
-    const initialFilter = tag ? { tag } : null;
+    const filter = get(this.props, 'location.query');
+    const initialFilter = filter ? filter : null;
 
     return (
       <div>

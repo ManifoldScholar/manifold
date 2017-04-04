@@ -19,7 +19,6 @@ export default () => {
         <Route component={ReaderComponents.Section.Text} path="section/:sectionId">
           <Route component={Reader.Resource.Detail} path="resource/:resourceId"/>
         </Route>
-        <Route component={ReaderComponents.Annotation.Tools} path="annotation-tools" />
       </Route>
 
       <Route component={Frontend.Frontend} path="/browse" >
@@ -27,6 +26,7 @@ export default () => {
         <Route component={Frontend.Login} path="login" />
         <Route component={Frontend.PasswordReset} path="reset-password/:resetToken" />
         <Route component={Frontend.Following} path="following" />
+        <Route component={Frontend.Featured} path="featured" />
         <Route component={Frontend.ProjectDetail} path="project/:id" />
         <Route component={Frontend.CollectionDetail} path="project/:id/collection/:collectionId" />
         <Route component={Frontend.CollectionResourceDetail} path="project/:id/collection/:collectionId/collection_resource/:collectionResourceId" />
@@ -42,11 +42,16 @@ export default () => {
 
       <Route component={Backend.Backend} path="/backend" >
         <IndexRoute component={Backend.Dashboard} />
+
+        <Route component={Backend.Developer} path="developer" />
+
         <Route component={Backend.NewResource.Wrapper} path="project/:projectId/resources/new" />
         <Route component={Backend.NewProject.Wrapper} path="project/new" />
         <Route component={Backend.ProjectDetail.Wrapper} path="project/:id" >
           <IndexRoute component={Backend.ProjectDetail.General} />
           <Route component={Backend.ProjectDetail.Texts} path="texts" >
+            <Route component={Backend.ProjectDetail.Text.New} path="new(/:ingestionId)(/step/:step)" />
+            <Route component={Backend.ProjectDetail.Text.Ingest} path="process/ingestion/:ingestionId" />
             <Route component={Backend.ProjectDetail.Category.New} path="category/new" />
             <Route component={Backend.ProjectDetail.Category.Edit} path="category/:catId/edit" />
           </Route>
@@ -70,6 +75,8 @@ export default () => {
         </Route>
         <Route component={Backend.ResourceDetail.Wrapper} path="resource/:id" >
           <IndexRoute component={Backend.ResourceDetail.General} />
+          <Route component={Backend.ResourceDetail.Variants} path="variants" />
+          <Route component={Backend.ResourceDetail.Metadata} path="metadata" />
         </Route>
         <Route component={Backend.Settings.Wrapper} path="settings" >
           <IndexRoute component={Backend.Settings.General} />

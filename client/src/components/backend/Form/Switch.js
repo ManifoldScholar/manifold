@@ -1,39 +1,47 @@
 import React, { Component, PropTypes } from 'react';
-import sharedPropsValidation from './propTypes';
-import { Form } from 'components/backend';
 import classnames from 'classnames';
+import setter from './setter';
 
-export default class FormSwitch extends Component {
+class FormSwitch extends Component {
 
   static displayName = "Form.Switch";
 
   static propTypes = {
-    ...sharedPropsValidation,
     label: PropTypes.string,
-
+    set: PropTypes.func,
+    value: PropTypes.any
   };
 
-  static defaultProps = {
-    dirtyModel: {},
-    actions: { set: () => {} },
-    layout: "horizontal"
-  };
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  truthy(value) {
+    return value === true || value === "true";
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+    this.props.set(!this.truthy(this.props.value));
+  }
 
   render() {
-
     const classes = classnames({
       "boolean-primary": true,
-      checked: this.props.value === true
+      checked: this.truthy(this.props.value)
     });
 
     return (
       <div className="form-input">
         <label>{this.props.label}</label>
-        <Form.Connect.Set {...this.props} >
-          <Form.Helpers.SwitchInput />
-        </Form.Connect.Set>
+        <div className="toggle-indicator">
+          {/* Add .checked to .boolean-primary to change visual state */}
+          <div onClick={this.handleClick} className={classes}></div>
+        </div>
       </div>
     );
   }
-
 }
+
+export default setter(FormSwitch);

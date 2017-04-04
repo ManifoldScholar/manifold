@@ -1,7 +1,7 @@
 // Reader Component Manifest
 // -------------------------
 
-@import './annotation-form';
+@import './annotation/index';
 @import './annotation-markers';
 @import './annotation-popup';
 @import './appearance-menu';
@@ -9,8 +9,10 @@
 @import './footer-reader';
 @import './header-reader';
 @import './resource-viewer';
+@import './return-menu';
 @import './section-category-label';
 @import './section-next-section';
 @import './section-pagination';
 @import './text-section';
 @import './toc-drawer';
+@import './visibility-button';

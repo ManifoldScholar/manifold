@@ -16,7 +16,7 @@ module Validation
     attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,
                   :purchase_price_money, :purchase_price_currency, :twitter_id,
                   :instagram_id, :remove_avatar, attachment(:avatar), attachment(:hero),
-                  :remove_hero, :publication_date, metadata]
+                  attachment(:cover), :remove_hero, :publication_date, metadata]
     relationships = [:collaborators, :creators, :contributors, :published_text]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -32,10 +32,25 @@ module Validation
 
   def resource_params
     params.require(:data)
-    attributes = [:title, attachment(:attachment), :caption, :description, :tag_list,
+    attributes = [attachment(:attachment), :remove_attachment,
+                  attachment(:high_res), :remove_high_res,
+                  attachment(:variant_format_one), :remove_variant_format_one,
+                  attachment(:variant_format_two), :remove_variant_format_two,
+                  attachment(:variant_thumbnail), :remove_variant_thumbnail,
+                  attachment(:variant_poster), :remove_variant_poster,
+                  :title, :caption, :description, :tag_list, :kind, :is_external_video,
                   :alt_text, :copyright_status, :copyright_holder, :credit, :keywords,
-                  :allow_download, :external_type]
+                  :allow_download, :external_type, :external_url, :external_id,
+                  :iframe_dimensions, :is_iframe, :embed_code]
     relationships = [:project, :creators]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def ingestion_params
+    params.require(:data)
+    attributes = [attachment(:source), :external_source_url, :ingestion_type]
+    relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
@@ -43,7 +58,7 @@ module Validation
   def annotation_params
     params.require(:data)
     attributes = [:start_node, :end_node, :start_char, :end_char, :section_id, :format,
-                  :subject]
+                  :subject, :body, :private]
     relationships = [:resource]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -61,6 +76,15 @@ module Validation
     params.require(:data).require(:relationships).require(:favoritable).require(:data)
     attributes = []
     relationships = [:favoritable]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def comment_params(comment = nil)
+    params.require(:data)
+    attributes = [:body, :parent_id, :deleted]
+    attributes.push :deleted if comment && current_user.can_delete?(comment)
+    relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
@@ -83,6 +107,8 @@ module Validation
           :default_place_of_publication,
           :ga_tracking_id,
           :ga_profile_id,
+          :facebook_app_id,
+          :social_share_message,
           :contact_url
         ]
       },
@@ -118,7 +144,7 @@ module Validation
   end
 
   def collection_filter_params
-    params.permit(filter: [])
+    params.permit(filter: [])[:filter]
   end
 
   def resource_filter_params
@@ -126,8 +152,25 @@ module Validation
                            :project, :collection])[:filter]
   end
 
+  def comment_filter_params
+    params.permit(filter: [])[:filter]
+  end
+
   def user_filter_params
     params.permit(filter: [:keyword, :typeahead])[:filter]
+  end
+
+  def annotation_filter_params
+    # Client tends to pass indexes in the array of values, which makes rails reader it
+    # as a hash. We're coercing the hash to an array here, before it hits strong params.
+    if params.dig(:filter, :ids).respond_to? :values
+      params[:filter][:ids] = params[:filter][:ids].values
+    end
+    params.permit(filter: [ids: []])[:filter]
+  end
+
+  def subject_filter_params
+    params.permit(filter: [:featured])[:filter]
   end
 
   def project_filter_params
@@ -149,7 +192,7 @@ module Validation
 
   def metadata
     { metadata: [
-      :isbn, :publisher, :place_of_publication, :doi, :series, :pages,
+      :isbn_ten, :isbn_thirteen, :publisher, :place_of_publication, :doi, :series, :pages,
       :date_of_publication
     ] }
   end

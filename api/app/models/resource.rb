@@ -12,55 +12,31 @@ class Resource < ApplicationRecord
   # Tags
   acts_as_ordered_taggable
 
-  # Authority
-  include Authority::Abilities
-
   # Concerns
+  include Authority::Abilities
   include TrackedCreator
   include Filterable
   include WithMarkdown
+  include Attachments
+  include ResourceAttachmentValidation
+  include ResourceAttributeResets
 
   # Associations
   belongs_to :project
   has_many :collection_resources, dependent: :destroy
   has_many :collections, through: :collection_resources
 
-  # Constants
-  ATTACHMENT_STYLES = {
-    small: ["320x320"],
-    small_square: "",
-    small_landscape: "",
-    small_portrait: "",
-    medium: ["480x480"],
-    medium_square: "",
-    medium_landscape: "",
-    medium_portrait: ""
-  }.freeze
-  CONVERT_OPTIONS = {
-    small_square: "-gravity north -thumbnail 320x320^ -extent 320x320",
-    small_landscape: "-gravity north -thumbnail 320x200^ -extent 320x200",
-    small_portrait: "-gravity north -thumbnail 320x246^ -extent 320x246",
-    medium_square: "-gravity north -thumbnail 480x480^ -extent 480x480",
-    medium_landscape: "-gravity north -thumbnail 480x300^ -extent 480x300",
-    medium_portrait: "-gravity north -thumbnail 480x369^ -extent 480x369"
-  }.freeze
-
-  # Attachment Validation
-  has_attached_file :attachment,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/resource/:uuid_partition/:id/:style_:filename",
-                    styles: ATTACHMENT_STYLES,
-                    convert_options: CONVERT_OPTIONS
-  validation = Rails.configuration.manifold.attachments.validations.resource
-  validates_attachment_content_type :attachment, content_type: validation[:allowed_mime]
-  validates_attachment_file_name :attachment, matches: validation[:allowed_ext]
-
-  before_attachment_post_process :resize_images
+  manifold_has_attached_file :attachment, :resource
+  manifold_has_attached_file :high_res, :image, no_styles: true
+  manifold_has_attached_file :variant_thumbnail, :image
+  manifold_has_attached_file :variant_poster, :image
+  manifold_has_attached_file :variant_format_one, :resource, no_styles: true
+  manifold_has_attached_file :variant_format_two, :resource, no_styles: true
 
   # Validation
   validates :title, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
+  validate :validate_kind_fields
 
   # Scopes
   scope :by_project, lambda { |project|
@@ -87,13 +63,24 @@ class Resource < ApplicationRecord
 
   # Callbacks
   before_validation :update_kind
+  before_update :reset_stale_fields
   before_save :update_tags
   before_save :update_title_formatted
   before_save :update_caption_formatted
   before_save :update_description_formatted
 
+  def validate_kind_fields
+    send("validate_#{kind}_fields")
+  end
+
+  def reset_stale_fields
+    send("reset_non_#{kind}_attributes")
+  end
+
   def update_kind
-    self.kind = determine_kind
+    return self.kind = determine_kind unless kind
+    return self.kind = kind.downcase if ALLOWED_KINDS.include?(kind.downcase)
+    self.kind = determine_kind # fallback
   end
 
   def force_update_kind
@@ -101,11 +88,11 @@ class Resource < ApplicationRecord
   end
 
   def update_title_formatted
-    self.title_formatted = render_simple_markdown(title)
+    self.title_formatted = render_simple_markdown(title, false)
   end
 
   def update_caption_formatted
-    self.caption_formatted = render_simple_markdown(caption)
+    self.caption_formatted = render_simple_markdown(caption, false)
   end
 
   def update_description_formatted
@@ -118,15 +105,18 @@ class Resource < ApplicationRecord
     ext = attachment_extension
     return :image if attachment_is_image?
     return :pdf if ext == "pdf"
-    return :document if %w(doc docx text).include?(ext)
+    return :document if %w(doc docx txt).include?(ext)
     return :spreadsheet if %w(xls xlsx).include?(ext)
     return :presentation if %w(ppt pptx).include?(ext)
     return :video if %w(mp4 webm).include?(ext)
     return :video if %w(youtube vimeo).include?(external_type)
     return :audio if ["mp3"].include?(ext)
+    return :interactive if is_iframe || embed_code.present?
     return :link if !attachment.present? && !external_url.blank?
-    return :file if attachment.present?
-    nil
+    # We return a default because we always want the resource kind to be valid. If it's
+    # not valid, we have a problem because it will prevent Paperclip from processing
+    # attachments.
+    :file
   end
   # rubocop:enable Metrics/AbcSize, Metrics/PerceivedComplexity
   # rubocop:enable Metrics/CyclomaticComplexity
@@ -151,56 +141,29 @@ class Resource < ApplicationRecord
     }
   end
 
-  def patterns
-    allowed = Rails.configuration.manifold.attachments.validations.image.allowed_mime
-    patterns = Regexp.union(allowed)
-    patterns
-  end
-
-  def attachment_is_image?
-    return false unless attachment.present?
-    !attachment_content_type.match(allowed_mimes_for(:image)).nil?
-  end
-
-  def allowed_mimes_for(type)
-    config = Rails.configuration.manifold.attachments.validations
-    Regexp.union(config[type][:allowed_mime])
-  end
-
-  def attachment_url
-    return nil unless attachment.present?
-    Rails.configuration.manifold.api_url + attachment.url
-  end
-
-  def attachment_extension
-    File.extname(attachment_file_name).delete(".").downcase if attachment.present?
-  end
-
-  def attachment_thumbnails
-    is_image = attachment_is_image?
-    styles = ATTACHMENT_STYLES.keys.map do |style|
-      value = nil
-      if is_image
-        value = "#{Rails.configuration.manifold.api_url}#{attachment.url(style)}"
-      end
-      [style, value]
-    end
-    Hash[styles]
-  end
-
-  def resize_images
-    attachment_is_image?
-  end
-
   def to_s
     title
   end
 
   def downloadable_kind?
-    attachment.exists?
+    attachment.exists? && !is_external_video
   end
 
   def downloadable?
     downloadable_kind? && allow_download
   end
+
+  def external_video?
+    is_external_video || false
+  end
+
+  def iframe?
+    is_iframe || false
+  end
+
+  def split_iframe_dimensions
+    return nil unless iframe_dimensions
+    iframe_dimensions.split("x")
+  end
+
 end

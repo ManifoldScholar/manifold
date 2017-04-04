@@ -33,7 +33,7 @@ export default class LayoutHeader extends Component {
       <header className={'header-app'}>
         <div className="header-container">
           <Link to={'/browse'} className="logo">
-            <PressLogo url={get(this.props.settings, 'attributes.pressLogoUrl')}/>
+            <PressLogo url={get(this.props.settings, 'attributes.pressLogoStyles.small')}/>
           </Link>
           {/* Use show-50 utility class to hide text-nav on mobile */}
           <nav className="text-nav show-50">
@@ -43,13 +43,13 @@ export default class LayoutHeader extends Component {
                   {'Projects'}
                 </Link>
               </li>
-              { this.props.authentication.authenticated ?
+              <HigherOrder.RequireRole requiredRole="any">
                 <li className={active === 'following' ? 'active' : ''}>
                   <Link to={`/browse/following/`}>
                     {'Following'}
                   </Link>
-                </li> : null
-              }
+                </li>
+              </HigherOrder.RequireRole>
             </ul>
           </nav>
 

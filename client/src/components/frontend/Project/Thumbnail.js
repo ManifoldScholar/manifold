@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Project as FrontEndProject } from 'components/frontend';
 import { Project as GlobalProject } from 'components/global';
 import FormattedDate from 'components/global/FormattedDate';
+import classNames from 'classnames';
 
 export default class ProjectThumbnail extends Component {
 
@@ -23,20 +24,6 @@ export default class ProjectThumbnail extends Component {
     hideDate: false,
     hideDesc: false
   };
-
-  renderCover() {
-    let cover = (<GlobalProject.Placeholder />);
-
-    if (this.props.project.attributes.coverUrl) {
-      cover = (
-        <img src={this.props.project.attributes.coverUrl}
-          alt={`Click to view ${this.props.project.attributes.title}`}
-        />
-      );
-    }
-
-    return cover;
-  }
 
   renderPublishedDate(project) {
     const attr = project.attributes;
@@ -74,6 +61,22 @@ export default class ProjectThumbnail extends Component {
     );
   }
 
+  renderUpdatedDate(project) {
+    const classes = classNames({
+      date: true,
+      alert: project.attributes.recentlyUpdated
+    });
+    return (
+      <div className={classes}>
+        <FormattedDate
+          prefix="Updated"
+          format="MMMM, YYYY"
+          date={project.attributes.updatedAt}
+        />
+      </div>
+    );
+  }
+
   render() {
     const project = this.props.project;
 
@@ -92,7 +95,10 @@ export default class ProjectThumbnail extends Component {
         <div className="meta">
           <h3 className="title">{project.attributes.title}</h3>
           {this.renderProjectMakers(project)}
-          {this.renderPublishedDate(project)}
+          { project.attributes.updated ?
+            this.renderUpdatedDate(project)
+          : this.renderPublishedDate(project)
+          }
           {this.renderProjectDesc(project)}
         </div>
       );
@@ -100,10 +106,10 @@ export default class ProjectThumbnail extends Component {
 
     let cover;
     let className;
-    if (project.attributes.avatarUrl) {
+    if (project.attributes.avatarStyles.small) {
       className = "figure-wrapper";
       cover = (
-        <img src={project.attributes.avatarUrl}
+        <img src={project.attributes.avatarStyles.small}
           alt={`Click to view ${project.attributes.title}`}
         />
       );

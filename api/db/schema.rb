@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307182231) do
+ActiveRecord::Schema.define(version: 20170403202550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,10 +24,13 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.text     "subject"
     t.uuid     "text_section_id"
     t.string   "format"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.uuid     "creator_id"
     t.uuid     "resource_id"
+    t.text     "body"
+    t.boolean  "private",         default: false
+    t.integer  "comments_count",  default: 0
   end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -69,6 +72,19 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "comments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.text     "body"
+    t.uuid     "creator_id"
+    t.uuid     "parent_id"
+    t.uuid     "subject_id"
+    t.string   "subject_type"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "deleted",        default: false
+    t.integer  "children_count", default: 0
+    t.integer  "flags_count"
+  end
+
   create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "event_type"
     t.string   "event_url"
@@ -97,6 +113,14 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "flags", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "creator_id"
+    t.uuid     "flaggable_id"
+    t.string   "flaggable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "ingestion_sources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "text_id"
     t.string   "source_identifier"
@@ -111,16 +135,20 @@ ActiveRecord::Schema.define(version: 20170307182231) do
   end
 
   create_table "ingestions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "state"
+    t.string   "log",                              array: true
     t.string   "source_file_name"
     t.string   "source_content_type"
     t.integer  "source_file_size"
     t.datetime "source_updated_at"
-    t.uuid     "creator_id"
-    t.text     "log"
-    t.integer  "state",               default: 0
     t.string   "strategy"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.string   "external_source_url"
+    t.string   "ingestion_type"
+    t.uuid     "creator_id"
+    t.uuid     "text_id"
+    t.uuid     "project_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "makers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -191,6 +219,7 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.uuid     "creator_id"
     t.jsonb    "tweet_fetch_config",      default: {}
     t.date     "publication_date"
+    t.text     "description_formatted"
   end
 
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -200,8 +229,8 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.uuid     "creator_id"
     t.uuid     "project_id"
     t.text     "caption"
@@ -215,11 +244,11 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.string   "external_url"
     t.string   "external_id"
     t.string   "external_type"
-    t.boolean  "allow_high_res",           default: true
-    t.boolean  "allow_download",           default: true
-    t.boolean  "doi_requested",            default: false
+    t.boolean  "allow_high_res",                  default: true
+    t.boolean  "allow_download",                  default: true
+    t.boolean  "doi_requested",                   default: false
     t.datetime "doi_added"
-    t.string   "doi",                      default: "f"
+    t.string   "doi",                             default: "f"
     t.string   "high_res_checksum"
     t.string   "transcript_checksum"
     t.string   "translation_checksum"
@@ -239,6 +268,26 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.string   "title_formatted"
     t.text     "description_formatted"
     t.text     "caption_formatted"
+    t.string   "variant_format_one_file_name"
+    t.string   "variant_format_one_content_type"
+    t.integer  "variant_format_one_file_size"
+    t.datetime "variant_format_one_updated_at"
+    t.string   "variant_format_two_file_name"
+    t.string   "variant_format_two_content_type"
+    t.integer  "variant_format_two_file_size"
+    t.datetime "variant_format_two_updated_at"
+    t.string   "variant_thumbnail_file_name"
+    t.string   "variant_thumbnail_content_type"
+    t.integer  "variant_thumbnail_file_size"
+    t.datetime "variant_thumbnail_updated_at"
+    t.string   "variant_poster_file_name"
+    t.string   "variant_poster_content_type"
+    t.integer  "variant_poster_file_size"
+    t.datetime "variant_poster_updated_at"
+    t.boolean  "is_external_video",               default: false
+    t.string   "iframe_dimensions"
+    t.boolean  "is_iframe",                       default: false
+    t.text     "embed_code"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -345,6 +394,7 @@ ActiveRecord::Schema.define(version: 20170307182231) do
     t.uuid     "start_text_section_id"
     t.integer  "position"
     t.string   "spine",                 default: [],              array: true
+    t.jsonb    "metadata",              default: {}
   end
 
   create_table "user_claims", force: :cascade do |t|

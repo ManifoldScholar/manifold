@@ -4,18 +4,18 @@
 // Z-Indices for all top level components, all in one place, all in order
 
 .loading-bar {
-  z-index: 600;
+  z-index: 700;
 }
 
 .backend .header-app {
-  z-index: 600;
-}
-
-.overlay-full-primary, .overlay-full-secondary {
   z-index: 500;
 }
 
-.drawer-primary {
+.overlay-full-primary, .overlay-full-secondary {
+  z-index: 600;
+}
+
+.drawer-backend, .drawer-frontend, .drawer-overlay {
   z-index: 500;
 }
 

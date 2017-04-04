@@ -63,7 +63,7 @@ class FormUserClaims extends Component {
         entities={keys.entities}
         entityBuilder={this.buildEntity}
         entityLabelAttribute="fullName"
-        entityAvatarAttribute="avatarUrl"
+        entityAvatarAttribute="avatarStyles"
         errors={this.props.errors}
       />
     );

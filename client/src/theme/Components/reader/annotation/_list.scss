@@ -1,0 +1,81 @@
+.selection-list {
+  @include listUnstyled;
+  padding-bottom: 50px;
+
+  @include respond($break75) {
+    padding-bottom: 110px;
+  }
+}
+
+.annotation-list {
+  @include listUnstyled;
+  padding-bottom: 37px;
+
+  .annotation-annotation {
+    padding-top: 32px;
+
+    @include respond($break65) {
+      padding-top: 40px;
+    }
+
+    + .annotation-annotation, +.annotation-more {
+      margin-top: 23px;
+      border-top: 1px solid $neutral40;
+    }
+  }
+
+  // More comments button has a special appearance if it's
+  // not in the last annotation
+  &:not(last-child) {
+    .annotation-comment-thread .button-trim-primary {
+      padding: 0;
+      border: 0;
+    }
+  }
+}
+
+.annotation-comment-thread {
+  padding-top: 22px;
+
+  .annotation-comment-thread {
+    // Responsivize first level nesting
+    .comment-list {
+      padding-left: 0;
+
+      @include respond($break70) {
+        @include drawerIndent(padding-left);
+      };
+    }
+
+    .annotation-comment-thread {
+      // Responsivize second level nesting
+      .comment-list {
+        padding-left: 0;
+
+        @include respond($break95) {
+          @include drawerIndent(padding-left);
+        }
+      }
+
+      .annotation-comment-thread {
+        // Disable nesting on comment lists that are more than
+        // 3 levels deep
+        .comment-list {
+          padding-left: 0;
+        }
+      }
+
+    }
+  }
+
+  .comment-list {
+    @include listUnstyled;
+    @include drawerIndent(padding-left);
+
+    .annotation-comment {
+      + .annotation-comment {
+        padding-top: 20px;
+      }
+    }
+  }
+}

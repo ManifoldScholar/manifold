@@ -16,7 +16,8 @@ export textCategoriesAPI from './resources/textCategories';
 export textsAPI from './resources/texts';
 export tokensAPI from './resources/tokens';
 export usersAPI from './resources/users';
-
+export commentsAPI from './resources/comments';
+export ingestionsAPI from './resources/ingestions';
 export requests from './requests';
 export ApiClient from './client';
 export notifications from './notifications';

@@ -1,22 +1,21 @@
-import Dropdown from './Dropdown';
 import HasMany from './HasMany';
 import Radios from './Radios';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
 import MaskedTextInput from './MaskedTextInput';
 import Upload from './Upload';
-import Connect from './Connect';
 import Select from './Select';
 import Save from './Save';
 import Switch from './Switch';
-import Helpers from './Helpers';
 import Date from './Date';
 import HigherOrder from './HigherOrder';
+import Hidden from './Hidden';
+import setter from './setter';
+import FieldGroup from './FieldGroup';
 
 export default {
-  Connect,
-  Dropdown,
   HasMany,
+  Hidden,
   Radios,
   TextArea,
   TextInput,
@@ -26,6 +25,7 @@ export default {
   Save,
   Switch,
   Date,
-  Helpers,
-  HigherOrder
+  HigherOrder,
+  FieldGroup,
+  setter
 };

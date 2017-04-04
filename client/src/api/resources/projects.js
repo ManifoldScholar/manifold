@@ -78,8 +78,9 @@ export default {
   },
 
 
-  featured(limit = 6) {
-    const filter = { featured: true };
+  featured(limit = 6, filterParams = {}) {
+    const filter = filterParams;
+    filter.featured = true;
     const page = { limit };
     return {
       endpoint: '/api/v1/projects',

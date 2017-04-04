@@ -1,4 +1,4 @@
-.drawer-primary {
+.drawer-backend {
   position: fixed;
   top: 60px;
   right: 0;
@@ -7,38 +7,93 @@
   padding: 20px $containerPaddingResp 33px;
   overflow: scroll;
   background-color: $neutral95;
-  transition: right $duration $timing;
 
+  .drawer-enter & {
+    right: -100%;
+  }
+
+  .drawer-leave.drawer-leave-active & {
+    right: -100%;
+    transition: right $duration $timing;
+  }
+
+  // Scoped adjustments need to come first in order to be
+  // overridden by media queries
+  // scss-lint:disable DeclarationOrder
   @include respond($break40) {
     top: 80px;
   }
 
   @include respond($break65) {
     width: 400px;
+
+    .drawer-enter & {
+      right: -400px;
+    }
+
+    .drawer-leave.drawer-leave-active & {
+      right: -400px;
+      transition: right $duration $timing;
+    }
   }
 
   @include respond($break90) {
     width: 555px;
     padding: 33px 48px;
+
+    .drawer-enter & {
+      right: -555px;
+    }
+
+    .drawer-leave.drawer-leave-active & {
+      right: -555px;
+      transition: right $duration $timing;
+    }
   }
 
   @include respond($break100 + (500 * 2)) {
     width: calc((100vw - #{$containerWidthInner})/2);
     padding: 33px 70px;
+
+    .drawer-enter & {
+      right: -100vw;
+    }
+
+    .drawer-leave.drawer-leave-active & {
+      right: -100vw;
+      transition: right $duration $timing;
+    }
   }
 
-  &.drawer-appear, &.drawer-leave {
-    right: -555px;
+  // Can handle nested appear state, or secondary class state
+  .drawer-enter.drawer-enter-active & {
+    right: 0;
+    transition: right $duration $timing;
+  }
+
+  .drawer-leave & {
+    right: 0;
   }
 
   .reader & {
     top: 0;
   }
 
-  .close-button-primary {
-    position: absolute;
-    top: 0;
-    right: 0;
+  .drawer-bar {
+    padding-bottom: 18px;
+    text-align: right;
+
+    @include respond($break50) {
+      padding-bottom: 26px;
+    }
+
+    .close-button-primary {
+      display: inline-block;
+
+      .close-text {
+        display: none;
+      }
+    }
   }
 
   .drawer-header {

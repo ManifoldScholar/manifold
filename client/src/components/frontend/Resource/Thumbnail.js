@@ -36,7 +36,9 @@ export default class ResourceThumbnail extends Component {
   }
 
   getImage(resource) {
-    return get(resource, `attributes.attachmentThumbnails.${this.props.variant}`);
+    const thumb = get(resource, `attributes.variantThumbnailStyles.${this.props.variant}`);
+    if (thumb) return thumb;
+    return get(resource, `attributes.attachmentStyles.${this.props.variant}`);
   }
 
   hasImage(resource) {

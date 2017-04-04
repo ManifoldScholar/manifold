@@ -32,7 +32,9 @@ module Importer
       "Alt-Text" => :alt_text,
       "URL" => :external_url,
       "Host Name" => :external_type,
-      "File ID" => :external_id
+      "File ID" => :external_id,
+      "Type" => :kind,
+      "External Video" => :is_external_video
     }.freeze
     RESOURCE_BOOLEAN_ATTRIBUTES = {
       "Allow High-Res Download" => :allow_high_res
@@ -111,16 +113,19 @@ module Importer
       resource.tag_list.add(row["Keywords"], parse: true)
     end
 
-    def add_resource_to_collection(resource, collection_title, count)
-      return if collection_title.blank?
-      @logger.info "    Attempting to add resource to collection \"#{collection_title}\""
-      collection = @project.collections.find_by(title: collection_title)
-      return @logger.log_missing_collection unless collection
-      return @logger.log_already_in_collection if
-        resource.collections.include?(collection)
-      remove_resource_from_all_collections(resource)
-      @logger.info "        Resource does not belong to collection. Adding."
-      create_collection_resource(collection, resource, count)
+    def add_resource_to_collection(resource, collection_list, count)
+      return if collection_list.empty?
+      collections = collection_list.split(";")
+      collections.each do |collection_title|
+        @logger.info "   Attempting to add resource to collection \"#{collection_title}\""
+        collection = @project.collections.find_by(title: collection_title)
+        return @logger.log_missing_collection unless collection
+        return @logger.log_already_in_collection if
+          resource.collections.include?(collection)
+        remove_resource_from_all_collections(resource)
+        @logger.info "        Resource does not belong to collection. Adding."
+        create_collection_resource(collection, resource, count)
+      end
     end
 
     def remove_resource_from_all_collections(resource)
@@ -142,7 +147,7 @@ module Importer
 
     def update_simple_attributes(model, row, simple_attributes)
       attr = simple_attributes_from_row(row, simple_attributes)
-      model.update_attributes(attr)
+      model.assign_attributes(attr)
     end
 
     def update_attachment_attributes(model, row, attachment_attributes)

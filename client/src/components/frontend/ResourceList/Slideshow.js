@@ -31,7 +31,7 @@ export default class ResourceListSlideshow extends PureComponent {
       map: {},
       totalCount: 0
     };
-    this.state.map = this.buildNewMap(props.collectionResources);
+    this.state.map = this.buildNewMap(props.collectionResources, props.pagination);
     this.state.totalCount = props.pagination.totalCount || 0;
 
     this.current = this.current.bind(this);
@@ -54,7 +54,7 @@ export default class ResourceListSlideshow extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.updateMap(nextProps.collectionResources);
+    this.updateMap(nextProps.collectionResources, nextProps.pagination);
     this.addLoadedPage(nextProps.pagination.currentPage);
     this.updateTotalCount(nextProps.pagination.totalCount);
   }
@@ -67,10 +67,11 @@ export default class ResourceListSlideshow extends PureComponent {
     }
   }
 
-  buildNewMap(collectionResources) {
+  buildNewMap(collectionResources, pagination) {
     const updates = {};
+    const start = (pagination.perPage * (pagination.currentPage - 1)) + 1;
     collectionResources.forEach((collectionResource, index) => {
-      updates[index + 1] = collectionResource;
+      updates[start + index] = collectionResource;
     });
     const map = Object.assign({}, this.state.map, updates);
     return map;
@@ -82,8 +83,8 @@ export default class ResourceListSlideshow extends PureComponent {
     }
   }
 
-  updateMap(collectionResources) {
-    const map = this.buildNewMap(collectionResources);
+  updateMap(collectionResources, pagination) {
+    const map = this.buildNewMap(collectionResources, pagination);
     this.setState({ map });
   }
 
@@ -115,7 +116,7 @@ export default class ResourceListSlideshow extends PureComponent {
     const page = this.positionToPage(position, this.props.pagination.perPage);
     if (!this.isPageLoaded(page)) {
       const fetch = collectionsAPI.collectionResources(
-        this.props.collectionId, { }, { number: page }
+        this.props.collectionId, { }, { number: page, size: this.props.pagination.perPage }
       );
       this.props.dispatch(request(fetch, requests.feSlideshow));
     }
@@ -195,6 +196,7 @@ export default class ResourceListSlideshow extends PureComponent {
             { this.isLoaded(position) ?
               <ResourceList.Slide.Caption
                 resource={collectionResource}
+                collectionId={this.props.collectionId}
               />
             :
               <ResourceList.Slide.LoadingCaption />

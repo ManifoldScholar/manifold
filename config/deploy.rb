@@ -23,7 +23,10 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :yarn_target_path, -> { release_path.join("client") }
 set :yarn_flags, "--production"
 
+# rubocop:disable Metrics/LineLength
 namespace :deploy do
+
+  services = %w(manifold_client manifold_api manifold_scheduler manifold_workers manifold_cable)
 
   after :updated, :build_client_dist do
      on roles(:app), in: :groups, limit: 3, wait: 10 do
@@ -38,30 +41,21 @@ namespace :deploy do
   desc "Stop Services"
   task :start do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "sudo systemctl start manifold_client"
-      execute "sudo systemctl start manifold_api"
-      execute "sudo systemctl start manifold_scheduler"
-      execute "sudo systemctl start manifold_workers"
+      services.each { |cmd| execute "sudo systemctl start #{cmd}" }
     end
   end
 
   desc "Stop Services"
   task :stop do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "sudo systemctl stop manifold_client"
-      execute "sudo systemctl stop manifold_api"
-      execute "sudo systemctl stop manifold_scheduler"
-      execute "sudo systemctl stop manifold_workers"
+      services.each { |cmd| execute "sudo systemctl stop #{cmd}" }
     end
   end
 
   desc "Restart Services"
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "sudo systemctl restart manifold_client"
-      execute "sudo systemctl restart manifold_api"
-      execute "sudo systemctl restart manifold_scheduler"
-      execute "sudo systemctl restart manifold_workers"
+      services.each { |cmd| execute "sudo systemctl restart #{cmd}" }
     end
   end
 
@@ -121,3 +115,4 @@ namespace :import do
     end
   end
 end
+# rubocop:enable Metrics/LineLength

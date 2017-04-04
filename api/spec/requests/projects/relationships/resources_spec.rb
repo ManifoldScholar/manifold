@@ -21,7 +21,9 @@ RSpec.describe "Project Resources API", type: :request do
     let(:path) { api_v1_project_relationships_resources_path(project) }
     let(:resource) { { attributes: {
       title: "A new hope",
-      externalType: "vimeo"
+      externalType: "vimeo",
+      externalId: "abc123",
+      isExternalVideo: true
     }, relationships: { project: { data: { type: "projects", id: project.id } } } } }
 
     context "when the user is an admin" do

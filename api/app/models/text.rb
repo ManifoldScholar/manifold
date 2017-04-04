@@ -13,6 +13,11 @@ class Text < ApplicationRecord
   extend Memoist
   include Collaborative
   include TrackedCreator
+  include Metadata
+
+  # Magic
+  with_metadata [:isbn_ten, :isbn_thirteen, :publisher, :place_of_publication, :doi,
+                 :series, :pages, :date_of_publication]
 
   # Fields
   serialize :structure_titles, Hash
@@ -24,7 +29,7 @@ class Text < ApplicationRecord
   acts_as_list scope: [:project_id, :category_id]
 
   # Associations
-  belongs_to :project, optional: true
+  belongs_to :project, optional: true, touch: true
   belongs_to :category, optional: true
   has_one :publishing_project, class_name: "Project", foreign_key: "published_text_id"
   belongs_to :start_text_section, optional: true, class_name: "TextSection"
@@ -99,6 +104,12 @@ class Text < ApplicationRecord
 
   def cover
     ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
+  end
+
+  def cover_styles
+    cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
+    return nil unless cover_source
+    cover_source.try(:attachment_styles)
   end
 
   def cover_url

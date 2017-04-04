@@ -1,0 +1,36 @@
+// SCSS Lint SelectorFormat disabled on partial in order to
+// override predefined library classes
+//scss-lint:disable SelectorFormat
+
+.rh5v-DefaultPlayer_component {
+  @include templateHead;
+
+  &:fullscreen {
+    background-color: $neutralBlack;
+  }
+}
+
+.rh5v-Overlay_inner {
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: transparentize($neutralBlack, 0.78);
+
+  svg {
+    width: 68px;
+    height: 68px;
+    padding: 6px;
+    background-color: $accentPrimary;
+    border-radius: 100%;
+  }
+}
+
+.rh5v-PlayPause_button , .rh5v-Volume_button, .rh5v-Fullscreen_button {
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// scss-lint:enable SelectorFormat

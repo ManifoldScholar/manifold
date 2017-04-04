@@ -5,12 +5,12 @@ class User < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:email, :first_name, :last_name].freeze
 
   # Concerns
-  include Filterable
-  include Recoverable
-
-  # Authority
   include Authority::UserAbilities
   include Authority::Abilities
+  include Filterable
+  include Recoverable
+  include Attachments
+  include Attachments
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :created_projects, class_name: "Project", foreign_key: "creator_id"
   has_many :created_resources, class_name: "Resource", foreign_key: "creator_id"
   has_many :created_pages, class_name: "Page", foreign_key: "creator_id"
+  has_many :created_flags, class_name: "Flag", foreign_key: "creator_id"
   has_many :user_claims
   has_many :makers, through: :user_claims
 
@@ -38,16 +39,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   # Attachments
-  has_attached_file :avatar,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
-                    styles: { medium: "300x300>", thumb: "100x100>" }
-  validation = Rails.configuration.manifold.attachments.validations.image
-  validates_attachment_content_type :avatar,
-                                    content_type: validation[:allowed_mime],
-                                    unless: proc { |record| record[:image].nil? }
-  validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
+  manifold_has_attached_file :avatar, :image
 
   # Callbacks
   before_validation :ensure_nickname
@@ -71,20 +63,15 @@ class User < ApplicationRecord
 
   # Transform a name into first and last names
   def name=(name)
-    name_parts = name.split
-    first = name_parts[0]
-    last = name_parts[-1]
+    parts = name.try(:split) || []
+    first = parts.length > 1 ? parts.take(parts.size - 1).join(" ") : parts.first
+    last = parts.length > 1 ? parts.last : nil
     self.first_name = first
     self.last_name = last
   end
 
   def name
     "#{first_name} #{last_name}"
-  end
-
-  def avatar_url
-    return nil unless avatar.present?
-    Rails.configuration.manifold.api_url + avatar.url
   end
 
   def favorite(favoritable)
@@ -105,6 +92,10 @@ class User < ApplicationRecord
 
   def full_name
     [first_name, last_name].reject(&:blank?).join(" ")
+  end
+
+  def force_reset_password
+    self.password = SecureRandom.hex(6)
   end
 
 end

@@ -3,10 +3,10 @@ module Api
     # Projects controller
     class ProjectsController < ApplicationController
 
-      INCLUDES = %w(
-        creators contributors texts text_categories events collections
-        uncollected_resources
-      ).freeze
+      INCLUDES = [
+        :creators, :contributors, :texts, :text_categories, :events,
+        :collections, :uncollected_resources
+      ].freeze
 
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project.filter(
@@ -43,6 +43,12 @@ module Api
       def destroy
         @project = load_and_authorize_project
         @project.destroy
+      end
+
+      def scope_for_projects
+        Project.includes(:creators, :contributors, { texts: :text_sections },
+                         :text_categories, :events, :collections,
+                         resources: :collection_resources)
       end
 
     end

@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import {
   AppearanceMenuButton,
   AppearanceMenuBody,
+  ReturnMenu,
   TextTitles,
-  TocDrawer
+  TocDrawer,
+  VisibilityButton
 } from 'components/reader';
 import {
   HeaderNotifications,
@@ -13,7 +15,6 @@ import {
   UserMenuButton,
   UserMenuBody
 } from 'components/global';
-import { Link } from 'react-router';
 import classNames from 'classnames';
 
 export default class Header extends Component {
@@ -38,7 +39,9 @@ export default class Header extends Component {
   constructor() {
     super();
     this.handleContentsButtonClick = this.handleContentsButtonClick.bind(this);
+    this.handleReturnMenuButtonClick = this.handleReturnMenuButtonClick.bind(this);
     this.handleSearchMenuButtonClick = this.handleSearchMenuButtonClick.bind(this);
+    this.handleVisibilityButtonClick = this.handleVisibilityButtonClick.bind(this);
     this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(this);
     this.triggerShowSignInUpOverlay = this.triggerShowSignInUpOverlay.bind(this);
     this.triggerToggleUserMenu = this.triggerToggleUserMenu.bind(this);
@@ -58,8 +61,16 @@ export default class Header extends Component {
     this.props.commonActions.visibilityToggle('tocDrawer');
   }
 
+  handleReturnMenuButtonClick() {
+    this.props.commonActions.panelToggle('readerReturn');
+  }
+
   handleSearchMenuButtonClick() {
     this.props.commonActions.panelToggle('search');
+  }
+
+  handleVisibilityButtonClick() {
+    this.props.commonActions.visibilityToggle('annotation');
   }
 
   handleAppearanceMenuButtonClick() {
@@ -107,14 +118,9 @@ export default class Header extends Component {
     return (
       <header className="header-reader">
         <nav className="container-banner">
-          <Link to={`/browse/project/${this.props.text.relationships.project.id}`} >
-            <button className="button-close" >
-              <i className="manicon manicon-x"></i>
-                <span className="screen-reader-text">
-                  {'Click to close reader'}
-                </span>
-            </button>
-          </Link>
+          <ReturnMenu.Button
+            toggleReaderMenu={this.handleReturnMenuButtonClick}
+          />
           { this.renderContentsButton(this.props.text.attributes.toc) }
           { this.props.section ?
             <TextTitles
@@ -134,6 +140,12 @@ export default class Header extends Component {
                   />
                 </li>
               */}
+              <li>
+                <VisibilityButton
+                  toggle={this.handleVisibilityButtonClick}
+                  state={this.props.visibility.annotation}
+                />
+              </li>
               <li>
                 <AppearanceMenuButton
                   toggleAppearanceMenu={this.handleAppearanceMenuButtonClick}
@@ -157,7 +169,22 @@ export default class Header extends Component {
           visible={this.props.visibility.tocDrawer}
           hideTocDrawer={this.triggerHideToc}
         />
-        <nav className="menu-panels">
+        <nav className="menu-panels-left">
+          <UIPanel
+            id="readerReturn"
+            visibility={this.props.visibility.uiPanels}
+            bodyComponent={ReturnMenu.Body}
+
+            // Props required by body component
+            projectId={this.props.text.relationships.project.id}
+            projectTitle={this.props.text.relationships.project.attributes.title}
+            toggleSignInUpOverlay={this.props.commonActions.toggleSignInUpOverlay}
+            // TODO: More link (and eventually, the link text) should be pulled from settings
+            moreLink="http://manifold.umn.edu/about/"
+          />
+        </nav>
+
+        <nav className="menu-panels-right">
           <UIPanel
             id="search"
             visibility={this.props.visibility.uiPanels}
@@ -181,6 +208,8 @@ export default class Header extends Component {
             id="user"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={UserMenuBody}
+
+            // Props required by body component
             showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
             startLogout={this.props.commonActions.logout}
             hideUserMenu={this.props.commonActions.toggleUserPanel}

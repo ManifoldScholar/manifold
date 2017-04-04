@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import throttle from 'lodash/throttle';
+import { DefaultPlayer as Video } from 'react-html5video';
 
 export default class ResourceSlideFigureVideo extends Component {
   static propTypes = {
@@ -26,12 +27,13 @@ export default class ResourceSlideFigureVideo extends Component {
   }
 
   getParentWidth(figure) {
-    return figure.parentNode.offsetWidth + 'px';
+    const w = figure.parentNode.offsetWidth;
+    return w + 'px';
   }
 
   renderVideoByService(service, id) {
     let output = false;
-    if (service === 'VIMEO') {
+    if (service === 'vimeo') {
       output = (
         <iframe src={`//player.vimeo.com/video/${id}`}
           frameBorder="0"
@@ -40,7 +42,7 @@ export default class ResourceSlideFigureVideo extends Component {
         </iframe>
       );
     }
-    if (service === 'YOUTUBE') {
+    if (service === 'youtube') {
       output = (
         <iframe id="ytplayer" type="text/html"
           src={`https://www.youtube.com/embed/${id}`}
@@ -50,7 +52,38 @@ export default class ResourceSlideFigureVideo extends Component {
         </iframe>
       );
     }
-    return output;
+    return (
+      <div
+        className="figure-video"
+        ref={ (c) => {
+          this._figure = c;
+        }}
+      >
+        {output}
+      </div>
+    );
+  }
+
+  renderFileVideo(resource) {
+    return (
+      <div className="figure-video">
+        <Video
+          controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
+        >
+          <source src={resource.attributes.attachmentStyles.original} type="video/mp4" />
+        </Video>
+      </div>
+    );
+  }
+
+  renderVideo(resource) {
+    if (resource.attributes.externalType) {
+      return this.renderVideoByService(
+        resource.attributes.externalType,
+        resource.attributes.externalId
+      );
+    }
+    return this.renderFileVideo(resource);
   }
 
   render() {
@@ -58,17 +91,7 @@ export default class ResourceSlideFigureVideo extends Component {
 
     return (
       <figure>
-        <div
-          className="figure-video"
-          ref={ (c) => {
-            this._figure = c;
-          } }
-        >
-          {this.renderVideoByService(
-              resource.attributes.externalType,
-              resource.attributes.externalId
-          )}
-        </div>
+        {this.renderVideo(resource)}
       </figure>
     );
   }

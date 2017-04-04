@@ -9,10 +9,12 @@ import { projectsAPI, favoriteProjectsAPI, requests } from 'api';
 import HigherOrder from 'containers/global/HigherOrder';
 import get from 'lodash/get';
 import union from 'lodash/union';
+import size from 'lodash/size';
 
 const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
+const featuredLimit = 4;
 
 class FollowingContainer extends Component {
 
@@ -79,7 +81,13 @@ class FollowingContainer extends Component {
   updateFavorites() {
     const apiCall = favoriteProjectsAPI.index(this.props.projectFilters);
     const followedRequest = request(apiCall, requests.feProjectsFollowed);
-    this.props.dispatch(followedRequest);
+    const { promise } = this.props.dispatch(followedRequest);
+    promise.then((res) => {
+      const { favorites } = this.props.authentication.currentUser;
+      if (res.data && res.data.length === 0 && favorites && size(favorites) > 0) {
+        this.props.dispatch(setProjectFilters({}));
+      }
+    });
   }
 
   mapFavoritesToSubjects() {
@@ -94,6 +102,19 @@ class FollowingContainer extends Component {
     return subjects.filter((subject) => {
       return subjectIds.indexOf(subject.id) > -1;
     });
+  }
+
+  renderFeaturedButton(limit) {
+    if (!this.props.featuredProjects || this.props.featuredProjects.length <= limit) return null;
+    return (
+      <div className="section-heading-utility-right">
+        <Link to={`/browse/featured`} className="button-primary">
+          <span>
+            <i className="manicon manicon-lamp"></i>See all featured
+          </span>
+        </Link>
+      </div>
+    );
   }
 
   renderFollowedProjects() {
@@ -132,7 +153,8 @@ class FollowingContainer extends Component {
     return (
       <HigherOrder.RequireRole requiredRole="any" redirect="/browse">
         <div>
-          {this.props.followedProjects && this.props.followedProjects.length > 0 ?
+          {this.props.authentication.currentUser.favorites &&
+          size(this.props.authentication.currentUser.favorites) > 0 ?
               this.renderFollowedProjects() : <Layout.NoFollow />
           }
           <section>
@@ -142,12 +164,7 @@ class FollowingContainer extends Component {
                   <i className="manicon manicon-lamp"></i>
                   {'Featured Projects'}
                 </h4>
-                {/* Commented out until functional
-                <div className="section-heading-utility-right">
-                  <Link to={`/browse/`} className="button-primary">
-                    See all Featured
-                  </Link>
-                </div> */}
+                {this.renderFeaturedButton(featuredLimit)}
               </header>
               { this.props.featuredProjects ?
                 <ProjectList.Grid
@@ -155,6 +172,7 @@ class FollowingContainer extends Component {
                   favorites={get(this.props.authentication, 'currentUser.favorites')}
                   dispatch={this.props.dispatch}
                   projects={this.props.featuredProjects}
+                  limit={featuredLimit}
                 /> : null
               }
             </div>

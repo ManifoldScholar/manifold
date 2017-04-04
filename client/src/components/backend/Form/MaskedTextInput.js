@@ -1,23 +1,24 @@
 import React, { Component, PropTypes } from 'react';
-import sharedPropsValidation from './propTypes';
-import { Form } from 'components/backend';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask.js';
 import fill from 'lodash/fill';
 import startsWith from 'lodash/startsWith';
 import replace from 'lodash/replace';
+import setter from './setter';
 
-export default class FormMaskedTextInput extends Component {
+class FormMaskedTextInput extends Component {
 
   static displayName = "Form.MaskedTextInput";
 
   static propTypes = {
-    ...sharedPropsValidation,
     mask: PropTypes.oneOfType([
       PropTypes.string.isRequired,
       PropTypes.array.isRequired
     ]),
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    label: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.string
   };
 
   constructor(props) {
@@ -61,14 +62,16 @@ export default class FormMaskedTextInput extends Component {
     return (
       <div className="form-input">
         <label>{this.props.label}</label>
-        <Form.Connect.Set {...this.props} >
-          <MaskedInput
-            type="text"
-            mask={mask}
-            placeholder={this.props.placeholder}
-          />
-        </Form.Connect.Set>
+        <MaskedInput
+          onChange={this.props.onChange}
+          value={this.props.value}
+          type="text"
+          mask={mask}
+          placeholder={this.props.placeholder}
+        />
       </div>
     );
   }
 }
+
+export default setter(FormMaskedTextInput);

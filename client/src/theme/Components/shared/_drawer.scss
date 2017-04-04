@@ -1,0 +1,150 @@
+.drawer-frontend {
+  position: fixed;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: scroll;
+  background-color: $neutral05;
+
+  // Scoped adjustments need to come first in order to be
+  // overridden by media queries
+  // scss-lint:disable DeclarationOrder
+  .drawer-enter & {
+    right: -100%;
+  }
+
+  .drawer-leave.drawer-leave-active & {
+    right: -100%;
+    transition: right $duration $timing;
+  }
+
+  @include respond($break40) {
+    top: 80px;
+  }
+
+  @include respond($break75) {
+    width: 70vw;
+
+    .drawer-enter & {
+      right: -70vw;
+    }
+
+    .drawer-leave.drawer-leave-active & {
+      right: -70vw;
+      transition: right $duration $timing;
+    }
+  }
+
+  @include respond($break100) {
+    width: 850px;
+
+    .drawer-enter & {
+      right: -850px;
+    }
+
+    .drawer-leave.drawer-leave-active & {
+      right: -850px;
+      transition: right $duration $timing;
+    }
+  }
+
+  .drawer-enter.drawer-enter-active & {
+    right: 0;
+    transition: right $duration $timing;
+  }
+
+  .drawer-leave & {
+    right: 0;
+  }
+
+  .reader & {
+    top: 0;
+  }
+
+  .drawer-bar {
+    @include drawerPadding(padding-right, 'heavy');
+    @include drawerPadding(padding-left);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 17px;
+    padding-bottom: 17px;
+
+    @include respond($break60) {
+      padding-top: 31px;
+      padding-bottom: 30px;
+    }
+
+    .drawer-title {
+      @include utilityPrimary;
+      font-size: 14px;
+      color: $neutral50;
+
+      .manicon {
+        margin-right: 14px;
+        font-size: 1.6em;
+        vertical-align: middle;
+      }
+    }
+
+    .close-button-primary {
+      @include templateHead;
+      width: 100%;
+      font-size: 17px;
+      letter-spacing: 0.015em;
+      text-align: right;
+      transition: color $duration $timing;
+
+      .close-text {
+        display: none;
+
+        @include respond($break50) {
+          display: inline;
+        }
+      }
+
+      &:hover {
+        color: $neutral75;
+      }
+
+      .manicon {
+        margin-left: 25px;
+        font-size: 26px;
+        vertical-align: middle;
+
+        @include respond($break50) {
+          font-size: 31px;
+        }
+      }
+    }
+  }
+
+}
+
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparentize($neutralBlack, 0.35);
+
+  .drawer-enter & {
+    opacity: 0.01;
+  }
+
+  .drawer-enter.drawer-enter-active & {
+    opacity: 1;
+    transition: opacity $duration $timing;
+  }
+
+  .drawer-leave & {
+    opacity: 1;
+  }
+
+  .drawer-leave.drawer-leave-active & {
+    opacity: 0.01;
+    transition: opacity $duration $timing;
+  }
+}

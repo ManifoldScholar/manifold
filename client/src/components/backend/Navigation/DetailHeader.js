@@ -9,16 +9,29 @@ export default class DetailHeader extends PureComponent {
     breadcrumb: PropTypes.array,
     type: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    titleHtml: PropTypes.bool,
     subtitle: PropTypes.string
   };
 
   static defaultProps = {
+    titleHtml: false
   }
 
   typeToManiconClass(type) {
     let segment = `${type}-placeholder`;
     if (type === "resource") segment = 'cube-shine';
     return `manicon-${segment}`;
+  }
+
+  renderTitle() {
+    if (this.props.titleHtml) {
+      return (
+        <span
+          dangerouslySetInnerHTML={{ __html: this.props.title }}
+        />
+      );
+    }
+    return this.props.title;
   }
 
   render() {
@@ -36,7 +49,7 @@ export default class DetailHeader extends PureComponent {
             </figure>
             <div className="title">
               <h1>
-                {this.props.title}
+                {this.renderTitle()}
                 <span className="subtitle">
                   {this.props.subtitle}
                 </span>

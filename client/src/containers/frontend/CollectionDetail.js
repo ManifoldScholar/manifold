@@ -12,7 +12,7 @@ import { entityUtils } from 'utils';
 import { projectsAPI, collectionsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 
-const { select, meta } = entityUtils;
+const { select, grab, meta, loaded, isEntityLoaded } = entityUtils;
 const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
@@ -20,24 +20,41 @@ const perPage = 10;
 class CollectionDetailContainer extends PureComponent {
 
   static fetchData(getState, dispatch, location, params) {
-    const pageParam = params.page ? params.page : page;
-    const collectionId = params.collectionId;
-    const projects = projectsAPI.show(params.id);
-    const collection = collectionsAPI.show(params.collectionId);
-    const collectionResources = collectionsAPI.collectionResources(
-      collectionId, { }, { number: pageParam, size: perPage }
-    );
-    const { promise: one } = dispatch(request(projects, requests.tmpProject));
-    const { promise: two } = dispatch(request(collection, requests.feCollection));
-    const lookups = [requests.feSlideshow, requests.feCollectionResources];
-    const { promise: three } = dispatch(request(collectionResources, lookups));
-    return Promise.all([one, two, three]);
+    const state = getState();
+    const promises = [];
+
+    // Load project, unless it is already loaded
+    if (!isEntityLoaded('projects', params.id, state)) {
+      const p = projectsAPI.show(params.id);
+      const { promise } = dispatch(request(p, requests.tmpProject));
+      promises.push(promise);
+    }
+
+    // Load the collection, unless it is already loaded
+    if (!isEntityLoaded('collections', params.collectionId, state)) {
+      const c = collectionsAPI.show(params.collectionId);
+      const { promise } = dispatch(request(c, requests.feCollection));
+      promises.push(promise);
+    }
+
+    // Load the collection resources, unless they have already been loaded
+    if (!loaded(requests.feCollectionResources, state.entityStore)) {
+      const pp = params.page ? params.page : page;
+      const cr = collectionsAPI.collectionResources(
+        params.collectionId, { }, { number: pp, size: perPage }
+      );
+      const lookups = [requests.feSlideshow, requests.feCollectionResources];
+      const { promise } = dispatch(request(cr, lookups));
+      promises.push(promise);
+    }
+
+    return Promise.all(promises);
   }
 
-  static mapStateToProps(state) {
+  static mapStateToProps(state, ownProps) {
     const props = {
-      project: select(requests.tmpProject, state.entityStore),
-      collection: select(requests.feCollection, state.entityStore),
+      project: grab('projects', ownProps.params.id, state.entityStore),
+      collection: grab('collections', ownProps.params.collectionId, state.entityStore),
       resources: select(requests.feCollectionResources, state.entityStore),
       resourcesMeta: meta(requests.feCollectionResources, state.entityStore),
       slideshowResources: select(requests.feSlideshow, state.entityStore),
@@ -72,6 +89,7 @@ class CollectionDetailContainer extends PureComponent {
   }
 
   handlePageChange(event, pageParam) {
+    console.log('handle page change');
     const cId = this.props.collection.id;
     const pagination = { number: pageParam, size: perPage };
     const filter = { };
@@ -95,6 +113,7 @@ class CollectionDetailContainer extends PureComponent {
   }
 
   updateResults() {
+    console.log('update results called');
     const cId = this.props.collection.id;
     const pagination = { number: page, size: perPage };
     const action = request(
@@ -107,7 +126,11 @@ class CollectionDetailContainer extends PureComponent {
   render() {
     const project = this.props.project;
     const collection = this.props.collection;
-    if (!project && !collection) return null;
+
+    if (!project || !collection) return null;
+
+    const collectionUrl = `/browse/project/${project.id}/collection/${collection.id}`;
+
     return (
       <div>
         <Utility.BackLinkPrimary
@@ -124,6 +147,7 @@ class CollectionDetailContainer extends PureComponent {
             collectionPagination={this.props.resourcesMeta.pagination}
             collectionPaginationHandler={this.pageChangeHandlerCreator}
             collection={this.props.collection}
+            collectionUrl={collectionUrl}
             filterChange={this.filterChange}
           />
         : null }

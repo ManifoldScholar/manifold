@@ -12,7 +12,7 @@ module Updaters
     end
 
     def attachment_fields
-      [:avatar, :hero]
+      [:avatar, :hero, :cover]
     end
 
     def adjusted_attributes

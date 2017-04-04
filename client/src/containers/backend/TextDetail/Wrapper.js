@@ -1,10 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Text, Navigation } from 'components/backend';
+import { Dialog, Text, Navigation } from 'components/backend';
 import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { textsAPI, requests } from 'api';
 import get from 'lodash/get';
+import { browserHistory } from 'react-router';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -24,6 +25,16 @@ class TextDetailWrapperContainer extends PureComponent {
     text: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      confirmation: null
+    };
+    this.doPreview = this.doPreview.bind(this);
+    this.doDestroy = this.doDestroy.bind(this);
+    this.handleTextDestroy = this.handleTextDestroy .bind(this);
+  }
+
   componentDidMount() {
     this.fetchText();
   }
@@ -36,6 +47,10 @@ class TextDetailWrapperContainer extends PureComponent {
     const call = textsAPI.show(this.props.params.id);
     const textRequest = request(call, requests.beText);
     this.props.dispatch(textRequest);
+  }
+
+  closeDialog() {
+    this.setState({ confirmation: null });
   }
 
   activeChild() {
@@ -54,16 +69,6 @@ class TextDetailWrapperContainer extends PureComponent {
         label: "People",
         key: "collaborators"
       },
-      // {
-      //   path: `/backend/text/${text.id}/ingestion`,
-      //   label: "Ingestion",
-      //   key: "ingestion"
-      // },
-      // {
-      //   path: `/backend/text/${text.id}/sections`,
-      //   label: "Sections",
-      //   key: "sections"
-      // },
       {
         path: `/backend/text/${text.id}/metadata`,
         label: "Metadata",
@@ -72,12 +77,68 @@ class TextDetailWrapperContainer extends PureComponent {
     ];
   }
 
+  doDestroy() {
+    const call = textsAPI.destroy(this.props.text.id);
+    const options = { removes: this.props.text };
+    const textRequest = request(call, requests.beTextDestroy, options);
+    this.props.dispatch(textRequest).promise.then(() => {
+      this.redirectToDashboard();
+    });
+  }
+
+  redirectToDashboard() {
+    browserHistory.push("/backend");
+  }
+
+  handleTextDestroy(event) {
+    const heading = "Are you sure you want to delete this text?";
+    const message = "This action cannot be undone.";
+    new Promise((resolve, reject) => {
+      this.setState({
+        confirmation: { resolve, reject, heading, message }
+      });
+    }).then(() => {
+      this.doDestroy(event);
+      this.closeDialog();
+    }, () => { this.closeDialog(); });
+  }
+
+  doPreview(event) {
+    event.preventDefault();
+    const win = window.open(`/read/${this.props.text.id}`, '_blank');
+    win.focus();
+  }
+
+  renderUtility() {
+    return (
+      <div>
+        <button
+          onClick={this.doPreview}
+          className="button-bare-primary"
+        >
+          Preview <i className="manicon manicon-eye-outline"></i>
+        </button>
+        <button
+          onClick={this.handleTextDestroy}
+          className="button-bare-primary"
+        >
+          Delete <i className="manicon manicon-trashcan"></i>
+        </button>
+      </div>
+    );
+  }
+
   render() {
     if (!this.props.text) return null;
     const { text } = this.props;
 
     return (
       <div>
+        {
+          this.state.confirmation ?
+            <Dialog.Confirm {...this.state.confirmation} />
+            : null
+        }
         <Navigation.DetailHeader
           type="text"
           breadcrumb={[
@@ -89,6 +150,7 @@ class TextDetailWrapperContainer extends PureComponent {
           ]}
           title={text.attributes.title}
           subtitle={text.attributes.subtitle}
+          utility={this.renderUtility()}
         />
         <section className="backend-panel">
           <aside className="scrollable">

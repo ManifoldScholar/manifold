@@ -1,0 +1,98 @@
+.annotation-selection {
+  .selection-text {
+    @include templateHead;
+    @include drawerPadding(padding-right, 'heavy');
+    @include drawerPadding(padding-left);
+    padding-top: 30px;
+    padding-bottom: 18px;
+    font-size: 18px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    background-color: $accentPrimary;
+
+    @include respond($break80) {
+      padding-top: 41px;
+      padding-bottom: 26px;
+    }
+
+    @include respond($break90) {
+      font-size: 20px;
+    }
+
+    .container {
+      @include drawerIndent(padding-left);
+      position: relative;
+      padding-right: 0; // OD
+      padding-bottom: 20px;
+    }
+
+    .manicon {
+      position: absolute;
+      top: 0.4em;
+      left: 0;
+      color: $neutralWhite;
+    }
+  }
+
+  // Truncated variety
+  .selection-truncated {
+    .wrapper {
+      position: relative;
+      overflow: hidden;
+      transition: height $duration $timing;
+
+      &::after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4em;
+        background: linear-gradient(to top, $accentPrimary 10%, transparentize($accentPrimary, 1) 100%);
+        content: '';
+        opacity: 0;
+        transition: opacity $durationSlow $timing $duration;
+      }
+
+      &.blur::after {
+        opacity: 1;
+      }
+    }
+
+    .button-trim-primary {
+      position: relative;
+      margin-top: -8px;
+      color: $neutralOffBlack;
+      background-color: $accentPrimary;
+      opacity: 1;
+      visibility: visible;
+      transition: margin $duration linear,
+        color $duration $timing,
+        opacity $duration $timing $durationFast,
+        visibility $duration $timing $durationFast;
+
+      &:hover {
+        color: $neutral75;
+      }
+
+      &.hidden {
+        margin-top: -38px;
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+
+  .annotate-button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    @include drawerIndent(margin-left);
+    display: block;
+    font-size: 14px;
+    color: $neutralWhite;
+    transition: color $duration $timing;
+
+    &:hover {
+      color: $accentPrimaryPale;
+    }
+  }
+}

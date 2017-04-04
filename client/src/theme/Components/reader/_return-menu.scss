@@ -1,0 +1,83 @@
+.reader-return-menu {
+  max-width: 390px;
+  background-color: $neutral10;
+
+  ul {
+    @include listUnstyled;
+    padding: 35px 69px 59px 42px;
+  }
+
+  li + li {
+    margin-top: 32px;
+  }
+
+  li a, li button {
+    @include buttonUnstyled;
+    @include templateHead;
+    font-size: 26px;
+    letter-spacing: 0.004em;
+    color: $neutral75;
+    text-decoration: none;
+
+    &:hover i {
+      color: $accentPrimary;
+    }
+
+    i {
+      display: inline-block;
+      width: 70px;
+      color: $neutral50;
+      text-align: left;
+      vertical-align: middle;
+      transition: color $duration $timing;
+    }
+
+    .manicon-arrow-round-left {
+      padding-left: 4px;
+      font-size: 1.423em;
+    }
+
+    .manicon-books-with-glasses-simple {
+      margin-top: -5px;
+      font-size: 24px;
+    }
+
+    .manicon-books-on-shelf-simple {
+      margin-top: -6px;
+      font-size: 28px;
+    }
+
+    .manicon-manifold-logo {
+      padding-left: 9px;
+      font-size: 33px;
+    }
+
+    span {
+      display: block;
+      padding-left: 70px;
+      margin-bottom: -4px;
+      font-size: 0.692em;
+      color: $neutral50;
+    }
+  }
+
+  li .note {
+    @include utilityPrimary;
+    display: block;
+    padding-left: 70px;
+    font-size: 12px;
+    color: $neutral50;
+
+    &:hover span {
+      color: $accentPrimary;
+    }
+
+    span {
+      display: inline;
+      padding: 0; // OD
+      font-size: 1em; // OD
+      color: $neutral50;
+      transition: color $duration $timing;
+    }
+  }
+}

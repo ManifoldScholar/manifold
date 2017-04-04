@@ -1,16 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import { Form } from 'components/backend';
+import setter from './setter';
 import { Form as GlobalForm } from 'components/global';
-import sharedPropsValidation from './propTypes';
+import classnames from 'classnames';
+import isString from 'lodash/isString';
 
-export default class FormTextInput extends Component {
+class FormTextInput extends Component {
 
   static displayName = "Form.TextInput";
 
   static propTypes = {
-    ...sharedPropsValidation,
     placeholder: PropTypes.string,
-    focusOnMount: PropTypes.bool
+    instructions: PropTypes.string,
+    label: PropTypes.string,
+    name: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.any,
+    focusOnMount: PropTypes.bool,
+    errors: PropTypes.array
   };
 
   static defaultProps = {
@@ -25,27 +32,34 @@ export default class FormTextInput extends Component {
     if (this.props.focusOnMount === true) this.inputElement.focus();
   }
 
-
   render() {
-    const { label, errors, name, placeholder } = this.props;
+    const labelClass = classnames({
+      "has-instructions": isString(this.props.instructions)
+    });
+
     return (
       <GlobalForm.Errorable
         className="form-input"
-        name={name}
-        errors={errors}
-        label={label}
+        name={this.props.name}
+        errors={this.props.errors}
+        label={this.props.label}
       >
-        <label>{label}</label>
-        <Form.Connect.Set {...this.props} >
+        <label className={labelClass}>{this.props.label}</label>
+        {
+          isString(this.props.instructions) ?
+            <span className="instructions">{this.props.instructions}</span>
+            : null
+        }
           <input
             ref={(input) => { this.inputElement = input; }}
             type="text"
-            placeholder={placeholder}
+            placeholder={this.props.placeholder}
             onChange={this.props.onChange}
-            value={this.props.value}
+            value={this.props.value || ""}
           />
-        </Form.Connect.Set>
       </GlobalForm.Errorable>
     );
   }
 }
+
+export default setter(FormTextInput);

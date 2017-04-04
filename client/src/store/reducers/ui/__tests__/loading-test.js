@@ -7,7 +7,8 @@ describe('store/reducers/ui/loading', () => {
     const state = loadingReducer(undefined, { type: 'SOME_ACTION'});
     expect(state).toEqual({
       active: false,
-      activeLoaders: []
+      activeLoaders: [],
+      pendingRemovals: []
     });
   });
 

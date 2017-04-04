@@ -1,26 +1,37 @@
 import React, { Component, PropTypes } from 'react';
 import { Form } from 'components/backend';
+import { Link } from 'react-router';
 
 export default class FormSave extends Component {
 
   static displayName = "Form.Save";
 
+  static propTypes = {
+    text: PropTypes.string,
+    cancelRoute: PropTypes.string
+  };
+
   static defaultProps = {
     text: 'Save'
   };
 
-  static propTypes = {
-    text: PropTypes.string
-  };
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="form-input submit">
-        <input className="button-secondary outlined" type="submit" value={this.props.text} />
+        {this.props.cancelRoute ?
+          <Link
+            to={this.props.cancelRoute}
+            className="button-secondary outlined dull"
+          >
+            {'Cancel'}
+          </Link>
+          : null
+        }
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value={this.props.text}
+        />
       </div>
     );
   }

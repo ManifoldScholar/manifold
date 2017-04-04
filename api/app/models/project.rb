@@ -4,18 +4,20 @@ class Project < ApplicationRecord
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
 
-  # Authority
-  include Authority::Abilities
-
   # Concerns
+  include Authority::Abilities
   include TrackedCreator
   include Collaborative
   include MoneyAttributes
+  include WithMarkdown
   include TruthyChecks
   include Filterable
+  include Attachments
+  include Metadata
 
   # Magic
-  merge_hash_attributes! :metadata
+  with_metadata %w(isbn_ten isbn_thirteen publisher place_of_publication doi
+                   date_of_publication series)
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
@@ -35,6 +37,8 @@ class Project < ApplicationRecord
   has_many :collection_resources, through: :collections
   has_many :project_subjects
   has_many :subjects, through: :project_subjects
+  has_many :ingestions
+
   # rubocop:disable Style/Lambda
   has_many :uncollected_resources, ->(object) {
     where.not(id: object.collection_resources.select(:resource_id))
@@ -43,6 +47,7 @@ class Project < ApplicationRecord
 
   # Callbacks
   after_commit :trigger_creation_event, on: [:create]
+  before_save :update_description_formatted
 
   # Delegations
   delegate :count, to: :collections, prefix: true
@@ -59,32 +64,9 @@ class Project < ApplicationRecord
             allow_nil: true
 
   # Attachments
-  has_attached_file :avatar,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
-                    styles: {
-                      thumb: ["x246", :png]
-                    }
-  has_attached_file :cover,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
-                    styles: {
-                      hero: ["800", :png]
-                    }
-  has_attached_file :hero,
-                    include_updated_timestamp: false,
-                    url: "/system/:class/:uuid_partition/:id/:style_:filename",
-                    default_url: "",
-                    styles: { background: ["1800", :jpg] }
-  validation = Rails.configuration.manifold.attachments.validations.image
-  validates_attachment_content_type :cover, content_type: validation[:allowed_mime]
-  validates_attachment_content_type :hero, content_type: validation[:allowed_mime]
-  validates_attachment_content_type :avatar, content_type: validation[:allowed_mime]
-  validates_attachment_file_name :cover, matches: validation[:allowed_ext]
-  validates_attachment_file_name :hero, matches: validation[:allowed_ext]
-  validates_attachment_file_name :avatar, matches: validation[:allowed_ext]
+  manifold_has_attached_file :cover, :image
+  manifold_has_attached_file :hero, :image
+  manifold_has_attached_file :avatar, :image
 
   # Scopes
   scope :by_featured, lambda { |featured|
@@ -134,23 +116,20 @@ class Project < ApplicationRecord
     twitter_following.length.positive?
   end
 
-  def avatar_url
-    return nil if avatar.url(:thumb).blank?
-    Rails.configuration.manifold.api_url + avatar.url(:thumb)
-  end
-
-  def cover_url
-    return nil if cover.url(:hero).blank?
-    Rails.configuration.manifold.api_url + cover.url(:hero)
-  end
-
-  def hero_url
-    return nil if hero.url(:background).blank?
-    Rails.configuration.manifold.api_url + hero.url(:background)
+  def update_description_formatted
+    self.description_formatted = render_simple_markdown(description)
   end
 
   def to_s
     title
+  end
+
+  def updated?
+    updated_at.strftime("%F") != created_at.strftime("%F")
+  end
+
+  def recently_updated?
+    updated? && updated_at >= Time.current - 1.week
   end
 
   private

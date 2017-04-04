@@ -2,16 +2,16 @@
 class TextPartialSerializer < ActiveModel::Serializer
   meta(partial: true)
 
-  attributes :id, :title, :creator_names, :unique_identifier, :cover_url, :created_at,
+  attributes :id, :title, :creator_names, :unique_identifier, :created_at,
              :start_text_section_id, :published, :annotations_count, :highlights_count,
              :bookmarks_count, :age, :position, :publication_date, :spine, :rights,
-             :sections_map
+             :sections_map, :cover_styles
 
   belongs_to :project
   belongs_to :category
 
   def start_text_section_id
-    object.start_text_section_id ||= object.spine[0]
+    object.start_text_section_id || object.spine[0] || object.text_sections.first.try(:id)
   end
 
   def sections_map
@@ -20,13 +20,13 @@ class TextPartialSerializer < ActiveModel::Serializer
   end
 
   def annotations_count
-    return object.annotations.only_annotations.count unless scope.authenticated_as
-    object.annotations.only_annotations.created_by(scope.authenticated_as).count
+    return object.annotations.only_annotations.count unless scope.try(:authenticated_as)
+    object.annotations.only_annotations.created_by(scope.try(:authenticated_as)).count
   end
 
   def highlights_count
-    return object.annotations.only_highlights.count unless scope.authenticated_as
-    object.annotations.only_highlights.created_by(scope.authenticated_as).count
+    return object.annotations.only_highlights.count unless scope.try(:authenticated_as)
+    object.annotations.only_highlights.created_by(scope.try(:authenticated_as)).count
   end
 
   # TODO: Implement bookmarks

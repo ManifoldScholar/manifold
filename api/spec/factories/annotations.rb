@@ -4,7 +4,8 @@ FactoryGirl.define do
     end_node "end"
     start_char 1
     end_char 1
-    subject "MyText"
+    subject "This is the selected passage."
+    body "This is the body."
     format Annotation::TYPE_ANNOTATION
     association :text_section, factory: :text_section
     association :creator, factory: :user

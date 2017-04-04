@@ -46,6 +46,7 @@ Clamp do
 
     option "--noapi", :flag, "do not start API"
     option "--noworker", :flag, "do not start background worker"
+    option "--nocable", :flag, "do not start the websocket (action cable) server"
     option "--noclockwork", :flag, "do not start clockwork"
     option "--noclient", :flag, "do not start client"
 
@@ -55,35 +56,43 @@ Clamp do
 
       def execute
         api_num = noapi? ? 0 : 1
-        worker_num = noclient? ? 0 : 1
+        worker_num = noworker? ? 0 : 1
         clockwork_num = noclockwork? ? 0 : 1
         client_num = noclient? ? 0 : 1
-        exec "foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num}"
+        cable_num = nocable? ? 0 : 1
+        exec "foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num},cable=#{cable_num}"
       end
 
     end
 
     subcommand ["api"], "Start API service" do
       def execute
-        exec "foreman start -m api=1,worker=0,clockwork=0,client=0"
+        exec "foreman start -m cable=0,api=1,worker=0,clockwork=0,client=0"
       end
     end
 
+    subcommand ["cable"], "Start Action Cable service" do
+      def execute
+        exec "foreman start -m cable=1,api=0,worker=0,clockwork=0,client=0"
+      end
+    end
+
+
     subcommand ["worker"], "Start Worker service" do
       def execute
-        exec "foreman start -m api=0,worker=1,clockwork=0,client=0"
+        exec "foreman start -m cable=0,api=0,worker=1,clockwork=0,client=0"
       end
     end
 
     subcommand ["clockwork"], "Start Clockwork service" do
       def execute
-        exec "foreman start -m api=0,worker=0,clockwork=1,client=0"
+        exec "foreman start -m cable=0,api=0,worker=0,clockwork=1,client=0"
       end
     end
 
     subcommand ["client"], "Start Client service" do
       def execute
-        exec "foreman start -m api=0,worker=0,clockwork=0,client=1"
+        exec "foreman start -m cable=0,api=0,worker=0,clockwork=0,client=1"
       end
     end
 
@@ -105,7 +114,7 @@ Clamp do
       puts Paint["$ scss-lint -c .scss-lint.yml", :faint]
       system "scss-lint -c .scss-lint.yml"
       puts Paint["$ eslint . #{autofix}", :faint]
-      raise "Client lint failed" unless system "cd client && eslint . #{autofix}"
+      raise "Client lint failed" unless system "cd client && node_modules/.bin/eslint . #{autofix}"
     end
 
     def execute
@@ -130,7 +139,7 @@ Clamp do
     def test_client
       update = update_snapshots? ? " -u" : ""
       puts Paint["jest#{update}", :faint]
-      raise "Client test failed" unless system "cd client && jest#{update}"
+      raise "Client test failed" unless system "cd client && node_modules/.bin/jest#{update}"
     end
 
     def execute

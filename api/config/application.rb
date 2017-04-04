@@ -3,11 +3,13 @@ require File.expand_path("../boot", __FILE__)
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
+require "action_cable/engine"
 require "active_job/railtie"
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
+require "active_record/railtie"
 require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -34,6 +36,9 @@ module ManifoldApi
   # Manifold main application
   class Application < Rails::Application
     config.active_record.belongs_to_required_by_default = true
+
+    # TODO: Abstract this into env
+    config.action_cable.allowed_request_origins = [ENV["CLIENT_URL"]]
 
     # Settings in config/environments/* take precedence over those specified
     # here. Application configuration should go into files in

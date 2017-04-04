@@ -2,10 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 import { VelocityComponent } from 'velocity-react';
+import get from 'lodash/get';
 
 export default class ResourceSlideCaption extends Component {
+
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    collectionId: PropTypes.string
   };
 
   constructor() {
@@ -18,7 +21,16 @@ export default class ResourceSlideCaption extends Component {
     this.handleReadMore = this.handleReadMore.bind(this);
   }
 
+  componentDidMount() {
+    this.checkReadMoreVisibility();
+  }
+
+  componentDidUpdate() {
+    this.checkReadMoreVisibility();
+  }
+
   getFullDescriptionHeight() {
+    if (!this._description) return;
     this._description.style.height = 'auto';
     const measuredHeight = this._description.offsetHeight;
     this._description.style.height = '5em';
@@ -37,6 +49,39 @@ export default class ResourceSlideCaption extends Component {
     });
   }
 
+  createDescription(description) {
+    if (!description) return { __html: 'No content provided.' };
+    return {
+      __html: description
+    };
+  }
+
+  checkReadMoreVisibility() {
+    if (!this._readMoreButton || !this._descriptionContents) return;
+    const visibleHeight = 37;
+    if (this._descriptionContents.offsetHeight < visibleHeight) {
+      this._readMoreButton.classList.add("hidden");
+    } else {
+      this._readMoreButton.classList.remove("hidden");
+    }
+  }
+
+  detailUrl() {
+    const { resource } = this.props;
+    const pid = resource.attributes.projectId;
+    const cid = this.props.collectionId;
+    if (cid) {
+      const crs = get(resource, "relationships.collectionResources");
+      const cr = crs.find((cmpr) => cmpr.attributes.collectionId === cid);
+      if (cr) {
+        const crid = cr.id;
+        return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+      }
+    }
+    const rid = resource.id;
+    return `browse/project/${pid}/resource/${rid}`;
+  }
+
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
@@ -44,6 +89,7 @@ export default class ResourceSlideCaption extends Component {
       'more-link': true,
       open: this.state.expanded
     });
+    const detailUrl = this.detailUrl();
 
     // Animation to open description
     const animation = {
@@ -67,17 +113,26 @@ export default class ResourceSlideCaption extends Component {
           />
         </header>
         <VelocityComponent {...animation}>
-          <div className="resource-description" ref={ (c) => {
-            this._description = c;
+          <div className="resource-description" ref={ (e) => {
+            this._description = e;
           } }>
-            <p>
-              {attr.description}
-            </p>
+            <div
+              ref={ (e) => {
+                this._descriptionContents = e;
+              }}
+              dangerouslySetInnerHTML={this.createDescription(attr.captionFormatted)}
+            />
           </div>
         </VelocityComponent>
         <div className="resource-utility">
           <div className="bg-neutral90">
-            <button className={moreLinkClass} onClick={this.handleReadMore}>
+            <button
+              className={moreLinkClass}
+              onClick={this.handleReadMore}
+              ref={ (e) => {
+                this._readMoreButton = e;
+              }}
+            >
               <span className="open-text">
                 {'Read More'}
               </span>
@@ -85,9 +140,24 @@ export default class ResourceSlideCaption extends Component {
                 {'Hide Description'}
               </span>
             </button>
-            <Link to={attr.attachmentUrl} target="_blank" className="download-link">
-              {'Download'} <i className="manicon manicon-arrow-down"></i>
-            </Link>
+            {attr.downloadable ?
+              <Link
+                to={attr.attachmentStyles.original}
+                target="_blank"
+                className="download-link"
+              >
+                {'Download'}
+                <i className="manicon manicon-arrow-down"></i>
+              </Link>
+            : null}
+            {detailUrl ?
+              <Link
+                className="detail-link"
+                to={detailUrl}
+              >
+                {'Details'}
+              </Link>
+            : null}
           </div>
         </div>
       </div>

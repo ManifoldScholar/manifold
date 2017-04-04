@@ -126,6 +126,7 @@ module Ingestor
           end
 
           def v2_guide_node_item(type)
+            return nil unless guide_node.presence
             guide_node.presence.css("[type=\"#{type}\"]").first
           end
 

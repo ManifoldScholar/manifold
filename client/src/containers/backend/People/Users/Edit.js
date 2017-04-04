@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Drawer, Dialog } from 'components/backend';
+import { Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { usersAPI, makersAPI, requests } from 'api';
@@ -25,7 +25,8 @@ class UsersEditContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      confirmation: null
+      confirmation: null,
+      resetPassword: null
     };
     this.newMaker = this.newMaker.bind(this);
     this.updateMakers = this.updateMakers.bind(this);
@@ -77,6 +78,10 @@ class UsersEditContainer extends PureComponent {
     this.setState({ confirmation: null });
   }
 
+  closeResetDialog() {
+    this.setState({ resetPassword: null });
+  }
+
   updateMakers(makers, changeType) {
     const adjustedMakers = makers.map((e) => {
       return {
@@ -110,6 +115,18 @@ class UsersEditContainer extends PureComponent {
     return promise;
   }
 
+  handleResetPasswordClick(event) {
+    const heading = "How would you like to reset the user's password?";
+    const message = "Automatically send the user a new password or set one yourself.";
+    new Promise((resolve, reject) => {
+      this.setState({
+        resetPassword: { resolve, reject, heading, message }
+      });
+    }).then(() => {
+      this.closeResetDialog();
+    }, () => { this.closeResetDialog(); });
+  }
+
   render() {
     if (!this.props.user) return null;
     const attr = this.props.user.attributes;
@@ -120,20 +137,29 @@ class UsersEditContainer extends PureComponent {
       <Dialog.Wrapper> Overlay with dialog box
     */
     return (
-      <Drawer.Wrapper
-        closeUrl="/backend/people/users"
-      >
+      <div>
         {
           this.state.confirmation ?
             <Dialog.Confirm {...this.state.confirmation} />
             : null
+        }
+        {
+          this.state.resetPassword ?
+            <Dialog.ResetPassword
+              uiProps={this.state.resetPassword}
+              {...this.props}
+            />
+          : null
         }
         <header className="drawer-header">
           <h2 className="heading-quaternary">
             {`${attr.firstName} ${attr.lastName}`}
           </h2>
           <div className="buttons-bare-vertical">
-            <button className="button-bare-primary">
+            <button
+              className="button-bare-primary"
+              onClick={(event) => this.handleResetPasswordClick(event, this.props.user)}
+            >
               {'Reset Password'}
               <i className="manicon manicon-key"></i>
             </button><br/>
@@ -146,46 +172,49 @@ class UsersEditContainer extends PureComponent {
             </button>
           </div>
         </header>
-
-        <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
-          model={this.props.user}
-          name="backend-edit-user"
-          update={usersAPI.update}
-          create={usersAPI.create}
-          className="form-secondary"
-        >
-          <Form.TextInput
-            label="Email"
-            name="attributes[email]"
-            placeholder="Email"
-          />
-          <Form.TextInput
-            label="First Name"
-            name="attributes[firstName]"
-            placeholder="First Name"
-          />
-          <Form.TextInput
-            label="Last Name"
-            name="attributes[lastName]"
-            placeholder="Last Name"
-          />
-          <Form.Save
-            text="Save User"
-          />
-        </FormContainer.Form>
-        <form className="form-secondary">
-          <FormContainer.UserClaims
-            label="Makers"
-            placeholder="Add or create a maker"
-            onNew={this.newMaker}
-            onChange={this.updateMakers}
-            api={usersAPI}
-            entity={user}
-            errors={get(this.props, "createMakerResponse.errors")}
-          />
-        </form>
-      </Drawer.Wrapper>
+        <section className="form-section">
+          <FormContainer.Form
+            route={this.props.routes[this.props.routes.length - 1]}
+            model={this.props.user}
+            name="backend-edit-user"
+            update={usersAPI.update}
+            create={usersAPI.create}
+            className="form-secondary"
+          >
+            <Form.TextInput
+              label="Email"
+              name="attributes[email]"
+              placeholder="Email"
+            />
+            <Form.TextInput
+              label="First Name"
+              name="attributes[firstName]"
+              placeholder="First Name"
+            />
+            <Form.TextInput
+              label="Last Name"
+              name="attributes[lastName]"
+              placeholder="Last Name"
+            />
+            <Form.Save
+              text="Save User"
+            />
+          </FormContainer.Form>
+        </section>
+        <section className="form-section">
+          <form className="form-secondary">
+            <FormContainer.UserClaims
+              label="Makers"
+              placeholder="Add or create a maker"
+              onNew={this.newMaker}
+              onChange={this.updateMakers}
+              api={usersAPI}
+              entity={user}
+              errors={get(this.props, "createMakerResponse.errors")}
+            />
+          </form>
+        </section>
+      </div>
     );
   }
 

@@ -49,12 +49,24 @@ export default class ProjectHero extends Component {
 
 
   renderDescription() {
-    if (this.props.project.attributes.description) {
+    const attr = this.props.project.attributes;
+    if (attr.description) {
+      if (attr.descriptionFormatted) {
+        return (
+          <section
+            className="project-summary"
+            dangerouslySetInnerHTML={{ __html: attr.descriptionFormatted }}
+          />
+        );
+      }
       return (
-        <section className="project-summary">
-          <Helper.SimpleFormat text={this.props.project.attributes.description} />
+        <section
+          className="project-summary"
+        >
+          <Helper.SimpleFormat text={attr.description} />
         </section>
       );
+
     }
   }
 
@@ -62,9 +74,9 @@ export default class ProjectHero extends Component {
     let output = '';
     const attr = this.props.project.attributes;
 
-    if (attr.coverUrl) {
+    if (attr.coverStyles.medium) {
       output = (
-        <img src={attr.coverUrl} />
+        <img src={attr.coverStyles.medium} />
       );
 
       if (wrapperClass) {
@@ -150,8 +162,8 @@ export default class ProjectHero extends Component {
 
     const attr = this.props.project.attributes;
     const heroStyle = {};
-    if (attr.heroUrl) {
-      heroStyle.backgroundImage = `url(${attr.heroUrl})`;
+    if (attr.heroStyles.largeLandscape) {
+      heroStyle.backgroundImage = `url(${attr.heroStyles.largeLandscape})`;
     }
 
     return (

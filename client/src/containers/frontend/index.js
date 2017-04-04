@@ -1,5 +1,6 @@
 import CollectionDetail from './CollectionDetail';
 import NotFound from './NotFound';
+import Featured from './Featured';
 import Following from './Following';
 import Frontend from './Frontend';
 import Home from './Home';
@@ -15,6 +16,7 @@ import CollectionResourceDetail from './CollectionResourceDetail';
 export {
     CollectionDetail,
     NotFound,
+    Featured,
     Following,
     Frontend,
     Home,

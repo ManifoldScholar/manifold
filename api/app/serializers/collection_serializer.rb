@@ -2,10 +2,10 @@
 class CollectionSerializer < ActiveModel::Serializer
   meta(partial: false)
 
-  attributes :id, :title, :thumbnail_url, :created_at, :description,
-             :resource_kinds, :resource_tags
+  attributes :id, :title, :created_at, :description, :project_id,
+             :resource_kinds, :resource_tags, :thumbnail_styles
 
-  has_many :resources
+  has_many :resources, serializer: ResourcePartialSerializer
   belongs_to :project
 
 end

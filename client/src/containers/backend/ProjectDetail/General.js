@@ -22,7 +22,6 @@ export default class ProjectPanelGeneral extends PureComponent {
   }
 
   render() {
-
     // See https://github.com/ReactTraining/react-router/issues/3753
     return (
       <section>
@@ -50,20 +49,6 @@ export default class ProjectPanelGeneral extends PureComponent {
             label="Publication Date"
             name="attributes[publicationDate]"
           />
-          <Form.Upload
-            style="cover"
-            label="Avatar"
-            current={this.props.project.attributes.avatarUrl}
-            name="attributes[avatar]"
-            remove="attributes[removeAvatar]"
-          />
-          <Form.Upload
-            style="hero"
-            label="Hero Image"
-            current={this.props.project.attributes.heroUrl}
-            name="attributes[hero]"
-            remove="attributes[removeHero]"
-          />
           <Form.Switch
             label="Featured"
             name="attributes[featured]"
@@ -76,6 +61,30 @@ export default class ProjectPanelGeneral extends PureComponent {
           <Form.TextArea
             label="Description"
             name="attributes[description]"
+          />
+          <Form.Upload
+            style="square"
+            label="Avatar"
+            accepts="images"
+            readFrom="attributes[avatarStyles][smallSquare]"
+            name="attributes[avatar]"
+            remove="attributes[removeAvatar]"
+          />
+          <Form.Upload
+            style="portrait"
+            label="Cover"
+            accepts="images"
+            readFrom="attributes[coverStyles][smallPortrait]"
+            name="attributes[cover]"
+            remove="attributes[removeCover]"
+          />
+          <Form.Upload
+            style="landscape"
+            accepts="images"
+            label="Hero Image"
+            readFrom="attributes[heroStyles][mediumLandscape]"
+            name="attributes[hero]"
+            remove="attributes[removeHero]"
           />
           <Form.TextInput
             label="Purchase URL"

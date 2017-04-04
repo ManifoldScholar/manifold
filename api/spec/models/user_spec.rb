@@ -130,6 +130,13 @@ RSpec.describe User, type: :model do
       end
     end
 
+    it "can be generated automatically" do
+      user.force_reset_password
+      expect(user.password).to_not eq("password")
+      expect(user.password.length).to eq(12)
+      expect(user).to be_valid
+    end
+
 
   end
 

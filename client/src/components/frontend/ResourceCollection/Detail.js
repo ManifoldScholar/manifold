@@ -13,6 +13,7 @@ export default class ResourceCollectionDetail extends PureComponent {
   static propTypes = {
     collection: PropTypes.object,
     project: PropTypes.object,
+    collectionUrl: PropTypes.string.isRequired,
     slideshowResources: PropTypes.array,
     slideshowPagination: PropTypes.object,
     collectionResources: PropTypes.array,
@@ -54,9 +55,7 @@ export default class ResourceCollectionDetail extends PureComponent {
                 {attr.description}
               </p>
             </div>
-            {/*
-             <Utility.ShareBar/>
-            */}
+            <Utility.ShareBar url={this.props.collectionUrl}/>
           </div>
           <ResourceList.Slideshow
             collectionId={this.props.collection.id}

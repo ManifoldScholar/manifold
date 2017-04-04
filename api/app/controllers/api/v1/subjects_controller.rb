@@ -4,7 +4,7 @@ module Api
     class SubjectsController < ApplicationController
 
       resourceful! Subject, authorize_options: { except: [:index, :show] } do
-        Subject.all
+        Subject.filter(with_pagination!(subject_filter_params))
       end
 
       def index

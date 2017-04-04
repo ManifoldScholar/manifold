@@ -6,7 +6,7 @@ import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
 import { Header, Footer, FooterMenu, Section } from 'components/reader';
 import { entityUtils } from 'utils';
 import { commonActions } from 'actions/helpers';
-import { textsAPI, resourcesAPI, sectionsAPI, annotationsAPI, requests } from 'api';
+import { resourcesAPI, textsAPI, sectionsAPI, annotationsAPI, requests } from 'api';
 import values from 'lodash/values';
 import uniq from 'lodash/uniq';
 import difference from 'lodash/difference';
@@ -102,23 +102,25 @@ class ReaderContainer extends Component {
     this.maybeRedirect(this.props);
     this.readerActions = this.makeReaderActions(this.props.dispatch);
     this.commonActions = commonActions(this.props.dispatch);
+  }
 
+  componentDidMount() {
     if (this.props.params.sectionId) {
-      this.fetchAnnotations();
-      this.fetchResources();
+      this.fetchAnnotations(this.props);
+      this.fetchResources(this.props);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     // Fetch resources and annotations on section change.
-    if (nextProps.section !== this.props.section) {
-      this.fetchAnnotations();
-      this.fetchResources();
+    if (nextProps.params.sectionId !== this.props.params.sectionId) {
+      this.fetchAnnotations(nextProps);
+      this.fetchResources(nextProps);
     }
     // Check if we need to fetch more resources when annotations change
     if (nextProps.annotations !== this.props.annotations) {
       if (this.hasMissingResources(nextProps.annotations, nextProps.resources)) {
-        this.fetchResources();
+        this.fetchResources(nextProps);
       }
     }
     this.maybeRedirect(nextProps);
@@ -128,6 +130,26 @@ class ReaderContainer extends Component {
     this.props.dispatch(flush(requests.rSection));
     this.props.dispatch(flush(requests.rText));
   }
+
+  fetchAnnotations(props) {
+    const annotationsCall = annotationsAPI.forSection(props.params.sectionId);
+    props.dispatch(request(annotationsCall, requests.rAnnotations));
+  }
+
+  fetchResources(props) {
+    const resourcesCall = resourcesAPI.forSection(props.params.sectionId);
+    props.dispatch(request(resourcesCall, requests.rResources));
+  }
+
+  maybeRedirect(props) {
+    if (props.text && !props.params.sectionId && __CLIENT__) {
+      const startTextSectionId = props.text.attributes.startTextSectionId;
+      if (startTextSectionId) {
+        browserHistory.push(`/read/${props.text.id}/section/${startTextSectionId}`);
+      }
+    }
+  }
+
 
   hasMissingResources(annotations, resourcesIn) {
     if (!annotations) return;
@@ -141,25 +163,6 @@ class ReaderContainer extends Component {
     return false;
   }
 
-  fetchAnnotations() {
-    const annotationsCall = annotationsAPI.forSection(this.props.params.sectionId);
-    this.props.dispatch(request(annotationsCall, requests.rAnnotations));
-  }
-
-  fetchResources() {
-    const resourcesCall = resourcesAPI.forSection(this.props.params.sectionId);
-    this.props.dispatch(request(resourcesCall, requests.rResources));
-  }
-
-  maybeRedirect(props) {
-    if (props.text && !props.params.sectionId && __CLIENT__) {
-      const startTextSectionId = props.text.attributes.startTextSectionId;
-      if (startTextSectionId) {
-        browserHistory.push(`/read/${props.text.id}/section/${startTextSectionId}`);
-      }
-    }
-  }
-
   makeReaderActions = (dispatch) => {
     const b = bindActionCreators;
     return {
@@ -168,16 +171,7 @@ class ReaderContainer extends Component {
       decrementFontSize: b(decrementFontSize, dispatch),
       incrementMargins: b(incrementMargins, dispatch),
       decrementMargins: b(decrementMargins, dispatch),
-      setColorScheme: b((el) => setColorScheme(el), dispatch),
-      createAnnotation: b(
-        (sectionId, annotation, resource = null) => {
-          return request(
-            annotationsAPI.create(sectionId, annotation, resource),
-            requests.rAnnotationCreate
-          );
-        },
-        dispatch
-      )
+      setColorScheme: b((el) => setColorScheme(el), dispatch)
     };
   };
 

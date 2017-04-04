@@ -2,10 +2,12 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Form as FormContainer } from 'containers/backend';
 import { Resource, Navigation, Form } from 'components/backend';
-import { resourcesAPI } from 'api';
-import { notificationActions } from 'actions';
+import { resourcesAPI, notifications } from 'api';
+import { notificationActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { browserHistory } from 'react-router';
+
+const { flush } = entityStoreActions;
 
 class NewResourceWrapperContainer extends PureComponent {
 
@@ -17,6 +19,7 @@ class NewResourceWrapperContainer extends PureComponent {
 
   constructor(props) {
     super(props);
+
     this.handleSuccess = this.handleSuccess.bind(this);
   }
 
@@ -38,34 +41,39 @@ class NewResourceWrapperContainer extends PureComponent {
           ]}
           title={'New Resource'}
           showUtility={false}
-          note={'Enter the name of your resource, and a brief description. Press save to continue.'}
+          note={'Select your resource type, then enter a name and a brief description.' +
+          ' Press save to continue.'}
         />
         <section className="backend-panel">
           <div className="container">
             <div className="panel">
               <FormContainer.Form
                 route={this.props.routes[this.props.routes.length - 1]}
-                model={this.props.resource}
+                model={{ attributes: { kind: "image" } }}
                 name="backend-resource-create"
                 update={resourcesAPI.update}
-                create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
+                create={ (model) => resourcesAPI.create(this.props.params.projectId, model) }
                 onSuccess={this.handleSuccess}
                 className="form-secondary"
               >
+                <Resource.Form.KindPicker
+                  name="attributes[kind]"
+                  includeButtons
+                />
                 <Form.TextInput
                   label="Title"
-                  focusOnMount
                   name="attributes[title]"
                   placeholder="Enter a resource title"
                 />
                 <Form.TextArea
                   label="Description"
-                  focusOnMount
                   name="attributes[description]"
                   placeholder="Enter a description"
                 />
+                <Resource.Form.KindAttributes />
                 <Form.Save
                   text="Save and continue"
+                  cancelRoute={`/backend/project/${this.props.params.projectId}/resources`}
                 />
               </FormContainer.Form>
             </div>

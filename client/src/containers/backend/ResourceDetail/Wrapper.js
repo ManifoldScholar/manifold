@@ -106,6 +106,34 @@ class ResourceDetailWrapperContainer extends PureComponent {
     }, () => { this.closeDialog(); });
   }
 
+  secondaryNavigationLinks(resource, kind) {
+    const externalVideo = resource.attributes.externalVideo;
+    const out = [
+      {
+        path: `/backend/resource/${resource.id}/`,
+        label: "General",
+        key: "general"
+      },
+      {
+        path: `/backend/resource/${resource.id}/metadata`,
+        label: "Metadata",
+        key: "metadata"
+      }
+    ];
+    if (
+      kind === 'image' ||
+      kind === 'audio' ||
+      kind === "pdf" ||
+      (kind === 'video' && !externalVideo)) {
+      out.splice(1, 0, {
+        path: `/backend/resource/${resource.id}/variants`,
+        label: "Variants",
+        key: "variants"
+      });
+    }
+    return out;
+  }
+
   renderUtility() {
     return (
       <div>
@@ -146,16 +174,32 @@ class ResourceDetailWrapperContainer extends PureComponent {
             }
           ]}
           utility={this.renderUtility()}
-          title={resource.attributes.title}
+          title={resource.attributes.titleFormatted}
+          titleHtml
           subtitle={resource.attributes.subtitle}
         />
         <section className="backend-panel">
+          <aside className="scrollable">
+            <div className="wrapper">
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks(resource, resource.attributes.kind)}
+                active={this.activeChild()}
+              />
+            </div>
+          </aside>
           <div className="container">
+            <aside className="aside">
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks(resource, resource.attributes.kind)}
+                active={this.activeChild()}
+              />
+            </aside>
             <div className="panel">
               {React.cloneElement(this.props.children, { resource })}
             </div>
           </div>
         </section>
+
       </div>
     );
   }

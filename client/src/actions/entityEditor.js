@@ -14,7 +14,7 @@ export const completeAction = createAction('ENTITY_EDITOR_COMPLETE_ACTION', (id,
   return { id, action };
 });
 
-export const set = createAction('ENTITY_EDITOR_SET', (id, path, value) => {
-  return { id, path, value };
+export const set = createAction('ENTITY_EDITOR_SET', (id, path, value, triggersDirty = true) => {
+  return { id, path, value, triggersDirty };
 });
 

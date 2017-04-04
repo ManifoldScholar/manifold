@@ -8,6 +8,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.12.0)
+      concurrent-ruby (~> 1.0)
     actioncable (5.0.1)
       actionpack (= 5.0.1)
       nio4r (~> 1.2)
@@ -236,6 +238,8 @@ GEM
     rake (12.0.0)
     redcarpet (3.4.0)
     redis (3.3.3)
+    redis-namespace (1.5.3)
+      redis (~> 3.0, >= 3.0.4)
     representable (2.3.0)
       uber (~> 0.0.7)
     retriable (2.1.0)
@@ -328,6 +332,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm (~> 4.12.0)
   active_model_serializers (~> 0.10.2)
   acts-as-taggable-on (~> 4.0)
   acts_as_list (~> 0.8.2)
@@ -362,6 +367,8 @@ DEPENDENCIES
   rails (~> 5.0.1)
   rainbow
   redcarpet
+  redis
+  redis-namespace
   rspec-core (~> 3.5.0)
   rspec-expectations (~> 3.5.0)
   rspec-mocks (~> 3.5.0)

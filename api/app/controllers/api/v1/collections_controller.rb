@@ -16,7 +16,7 @@ module Api
       # GET /collections/1
       def show
         render json: @collection,
-               include: %w(resources)
+               include: [:resources]
       end
 
       # POST /collections
@@ -46,7 +46,8 @@ module Api
       private
 
       def set_collection
-        @collection = Collection.includes(:resources).find(params[:id])
+        @collection = Collection.includes(resources: :collection_resources)
+                                .find(params[:id])
       end
 
       # Only allow a trusted parameter "white list" through.

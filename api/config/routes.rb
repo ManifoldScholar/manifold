@@ -1,6 +1,6 @@
 require "sidekiq/web"
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable Metrics/BlockLength, Metrics/LineLength
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
   namespace :api do
@@ -8,15 +8,29 @@ Rails.application.routes.draw do
       resources :pages
       resources :subjects
       resources :categories, except: [:create, :index]
-      resources :annotations,
-                only: [:show, :destroy],
-                controller: "text_sections/relationships/annotations"
       resources :makers
-      resources :resources
       resources :texts
+      resources :ingestions, only: [:show, :update]
       resource :statistics, only: [:show]
-
       resource :settings, except: [:destroy, :create]
+
+      resources :comments, only: [:show, :update, :destroy] do
+        namespace :relationships do
+          resource :flags, controller: "/api/v1/flags", only: [:create, :destroy]
+        end
+      end
+
+      resources :annotations, only: [:show, :update, :destroy], controller: "text_sections/relationships/annotations" do
+        namespace :relationships do
+          resources :comments, controller: "/api/v1/comments"
+        end
+      end
+
+      resources :resources do
+        namespace :relationships do
+          resources :comments, controller: "/api/v1/comments"
+        end
+      end
 
       resources :collections do
         scope module: :collections do
@@ -49,6 +63,7 @@ Rails.application.routes.draw do
             resources :events, only: [:index]
             resources :collaborators
             resources :text_categories, only: [:index, :create]
+            resources :ingestions, only: [:create], controller: "/api/v1/ingestions"
           end
         end
       end
@@ -70,9 +85,10 @@ Rails.application.routes.draw do
       end
 
       resources :passwords, only: [:create, :update]
+      post "passwords/admin_reset_password" => "passwords#admin_reset_password"
 
       get "*path", to: "errors#error_404", via: :all
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
+# rubocop:enable Metrics/BlockLength, Metrics/LineLength

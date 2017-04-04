@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { ProjectList, Layout } from 'components/frontend';
 import { commonActions } from 'actions/helpers';
 import { bindActionCreators } from 'redux';
@@ -11,6 +12,7 @@ import get from 'lodash/get';
 const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;
+const featuredLimit = 4;
 
 class HomeContainer extends Component {
 
@@ -63,6 +65,19 @@ class HomeContainer extends Component {
     }
   }
 
+  renderFeaturedButton(limit) {
+    if (!this.props.featuredProjects || this.props.featuredProjects.length <= limit) return null;
+    return (
+      <div className="button-nav" style={{ marginTop: '26px' }}>
+        <Link to={'/browse/featured'} className="button-icon-primary">
+          <span>
+            <i className="manicon manicon-lamp"></i>See all featured
+          </span>
+        </Link>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div style={ {
@@ -92,8 +107,10 @@ class HomeContainer extends Component {
                 favorites={get(this.props.authentication, 'currentUser.favorites')}
                 projects={this.props.featuredProjects}
                 dispatch={this.props.dispatch}
+                limit={featuredLimit}
               /> : null
             }
+            {this.renderFeaturedButton(featuredLimit)}
           </div>
         </section>
         <section className="bg-neutral05">

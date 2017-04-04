@@ -24,15 +24,48 @@ module Ingestor
 
           def initialize(gitbook_path, logger = nil)
             @gitbook_path = gitbook_path
+            @tmp_path = "tmp/#{basename}"
             @logger = logger
+            @root_path = gitbook_zip_file?(@gitbook_path) ? @tmp_path : @gitbook_path
           end
 
           def log(level, msg)
             @logger.send(level, msg) if @logger
           end
 
+          def gitbook_zip_file?(zip_path)
+            remove_tmp
+            FileUtils.mkdir(@tmp_path)
+            return false unless create_tmp_dir(zip_path)
+            return true if File.file?(File.join(@tmp_path, "book.json"))
+            remove_tmp
+            false
+          end
+          memoize :gitbook_zip_file?
+
+          def create_tmp_dir(zip_path)
+            return false unless File.extname(zip_path) == ".zip"
+            Zip::File.open(zip_path) do |zip_file|
+              zip_file.each do |f|
+                fpath = File.join(@tmp_path, f.name)
+                zip_file.extract(f, fpath) unless File.exist?(fpath)
+              end
+            end
+            @logger.debug("Unzipped archive to temporary directory")
+          end
+          memoize :create_tmp_dir
+
+          def remove_tmp
+            FileUtils.rm_rf(@tmp_path, secure: true) if File.directory?(@tmp_path)
+          end
+
+          def basename
+            File.basename(@gitbook_path, ".*")
+          end
+
           def gitbook?
-            File.file?(book_json_path)
+            @logger.debug(@gitbook_path)
+            gitbook_zip_file?(@gitbook_path) || File.file?(book_json_path)
           end
 
           def start_section_identifier
@@ -76,18 +109,18 @@ module Ingestor
           end
 
           def book_json_path
-            "#{@gitbook_path}/book.json"
+            "#{@root_path}/book.json"
           end
 
           def summary_path
-            "#{@gitbook_path}/SUMMARY.md"
+            "#{@root_path}/SUMMARY.md"
           end
 
           def spine_list
             list = []
             File.readlines(summary_path).each do |line|
               next unless line.strip.start_with?("*", "-")
-              path = File.join(@gitbook_path, clean_line(line))
+              path = File.join(@root_path, clean_line(line))
               next unless File.file?(path)
               list << path
             end
@@ -120,7 +153,7 @@ module Ingestor
           memoize :allowed_file_types
 
           def ingestion_source_paths
-            Dir.glob(File.join(@gitbook_path, "**", "*")).reject do |path|
+            Dir.glob(File.join(@root_path, "**", "*")).reject do |path|
               File.directory?(path)
             end
           end
@@ -149,7 +182,7 @@ module Ingestor
           end
 
           def stylesheet_path
-            File.join(@gitbook_path, "styles", "website.css")
+            File.join(@root_path, "styles", "website.css")
           end
 
           def text_section_inspectors
@@ -170,7 +203,7 @@ module Ingestor
           end
 
           def cover_path
-            File.join(@gitbook_path, "styles", "cover.jpg")
+            File.join(@root_path, "styles", "cover.jpg")
           end
 
           def cover
@@ -179,7 +212,7 @@ module Ingestor
 
           def relative_path(path)
             second = Pathname.new(path)
-            first = Pathname.new(@gitbook_path)
+            first = Pathname.new(@root_path)
             second.relative_path_from first
           end
 

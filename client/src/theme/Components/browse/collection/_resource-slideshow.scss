@@ -34,6 +34,10 @@
     font-size: 15px;
     color: $neutral40;
 
+    p + p {
+      margin-top: 1em;
+    }
+
     &.transition-height {
       transition: height $duration $timing;
     }
@@ -86,7 +90,7 @@
       padding: 9px 23px 15px;
     }
 
-    .more-link, .download-link {
+    .more-link, .download-link, .detail-link {
       @include utilityPrimary;
       @include buttonUnstyled;
       font-size: 13px;
@@ -94,13 +98,21 @@
       text-decoration: none;
       transition: color $duration $timing;
 
+      &.hidden {
+        display: none;
+      }
+
       &:hover {
         color: $accentPrimary;
       }
 
-      + .download-link {
+      + .download-link, + .detail-link {
         margin-left: 22px;
       }
+    }
+
+    .more-link.hidden + .download-link, .more-link.hidden + .detail-link, {
+      margin-left: 0;
     }
 
     .more-link .close-text {

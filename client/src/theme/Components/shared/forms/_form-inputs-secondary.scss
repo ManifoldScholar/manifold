@@ -30,16 +30,23 @@
     margin-bottom: 80px;
   }
 
+  .form-input + .form-input,
+  .form-input + .form-section,
+  .form-section + .form-section,
+  .form-section + .form-input {
+    margin-top: 40px;
+  }
+
   .form-input {
     label:not(.checkbox):not(.radio) {
       @include formLabelPrimary;
       display: block;
       margin-bottom: 1.5em;
       color: $neutral75;
-    }
 
-    + .form-input {
-      margin-top: 40px;
+      &.has-instructions {
+        margin-bottom: 1em;
+      }
     }
 
     input[type="text"], input[type="password"] {
@@ -78,6 +85,17 @@
       display: inline-block;
       width: auto;
     }
+
+    &.submit {
+      .button-secondary, .button-secondary-dull {
+        line-height: normal;
+
+        + .button-secondary, + .button-secondary-dull {
+          margin-top: 0;
+          margin-left: 15px;
+        }
+      }
+    }
   }
 
   // Dropdown
@@ -114,47 +132,94 @@
 
   .form-dropzone {
     position: relative;
-    padding: 36px 30px 38px;
+    //padding: 36px 30px 38px;
     border: 1px solid $neutral80;
 
-    &.style-cover {
-      max-width: 150px;
+    .primary {
+      @include utilityPrimary;
+      padding-bottom: 0;
+      font-size: 13px;
+      font-weight: $semibold;
+      line-height: 1.5em;
+      color: $neutral50;
+      text-align: center;
+    }
 
-      .manicon-cloud-up {
-        padding-bottom: 13px;
-        font-size: 30px;
+    .secondary {
+      @include formLabelPrimary;
+      padding-bottom: 0;
+      margin-top: 10px;
+      line-height: 1.5em;
+      color: $neutral75;
+      text-align: center;
+
+      a, a:visited {
+        color: $neutral75;
       }
 
-      p {
-        font-size: 12px;
-      }
-
     }
 
-    &.style-logo {
-      max-width: 250px;
+    .fake-link {
+      text-decoration: underline;
+      cursor: pointer;
     }
 
-    &.style-thumbnail {
-      max-width: 175px;
-    }
-
-    .contents {
-      position: relative;
-      z-index: 2;
-    }
-
-    .background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-      width: 100%;
+    .contents-icon-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 100%;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      opacity: 0.15;
+
+      .manicon-document {
+        display: block;
+        padding-bottom: 22px;
+        font-size: 56px;
+        color: $neutralWhite;
+        text-align: center;
+      }
+
+    }
+
+    .contents-image-preview {
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+
+      .preview {
+        position: absolute;
+        z-index: 1;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .secondary {
+        color: $neutral70;
+
+        a, a:visited {
+          color: $neutral70;
+        }
+      }
+
+      .message {
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+    }
+
+    .contents-empty {
+      position: relative;
+      top: 50%;
+      z-index: 2;
+      height: 100px;
+      margin-top: -50px;
     }
 
     .remove {
@@ -169,19 +234,61 @@
 
     .manicon-cloud-up {
       display: block;
-      padding-bottom: 26px;
+      padding-bottom: 22px;
       font-size: 36px;
       color: $neutralWhite;
       text-align: center;
     }
 
-    p {
-      @include utilityPrimary;
-      font-size: 14px;
-      color: $neutral50;
-      text-align: center;
+    &.style-portrait {
+      width: 220px;
+      height: 288px;
+
+      .preview {
+        top: 30px;
+        left: 50px;
+        width: 120px;
+        height: 157px;
+      }
+
+      .message {
+        margin-bottom: 35px;
+      }
     }
 
+    &.style-square {
+      width: 220px;
+      height: 220px;
+
+      .preview {
+        top: 30px;
+        left: 50px;
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    &.style-landscape {
+      width: 477px;
+      height: 218px;
+
+      .preview {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .contents-image-preview .message {
+        bottom: auto;
+        display: block;
+        width: 250px;
+        padding: 5px 20px 15px;
+        margin: auto;
+        background: $neutral95;
+        opacity: 0.9;
+      }
+    }
   }
 
   .boolean-labeled {

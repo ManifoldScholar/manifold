@@ -16,7 +16,8 @@
       vertical-align: middle;
     }
 
-    a {
+    a, button {
+      @include buttonUnstyled;
       color: $neutral40;
       text-decoration: none;
       transition: color $duration $timing;
@@ -38,7 +39,7 @@
       font-size: 15px;
     }
 
-    .manicon-envelope {
+    .manicon-envelope-simple {
       font-size: 12px;
     }
   }

@@ -198,6 +198,7 @@ class ProjectDetailTexts extends PureComponent {
   previousCategory(text) {
     const category = text.relationships.category;
     if (this.isUncategorizedText(text)) {
+      if (this.categories().length === 0) return "published";
       return this.categories()[this.categories().length - 1];
     }
     if (this.isPublishedText(text)) return null;
@@ -376,16 +377,23 @@ class ProjectDetailTexts extends PureComponent {
 
         {
           this.props.children ?
-          React.cloneElement(this.props.children, { project, refresh })
+            <Dialog.Wrapper
+              closeOnOverlayClick={false}
+              closeUrl={`/backend/project/${this.props.params.id}/texts`}
+            >
+              {React.cloneElement(this.props.children, { project, refresh })}
+            </Dialog.Wrapper>
           : null
         }
 
         <div className="buttons-icon-horizontal">
-          {/*
-           <button className="button-icon-secondary">
-           <i className="manicon manicon-plus"></i>Add a new text
-           </button>
-          */}
+          <Link
+            to={`/backend/project/${project.id}/texts/new`}
+            className="button-icon-secondary"
+          >
+            <i className="manicon manicon-plus"></i>Add a new text
+          </Link>
+
           <Link
             to={`/backend/project/${project.id}/texts/category/new`}
             className="button-icon-secondary"

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Toc } from 'components/reader';
+import Utility from 'components/global/Utility';
 import classNames from 'classnames';
 
 export default class TocDrawer extends Component {
@@ -18,13 +19,16 @@ export default class TocDrawer extends Component {
       'drawer-visible': this.props.visible
     });
     return (
-      <div className={drawerClass}>
-        <Toc
-          text={this.props.text}
-          tocDrawerVisible={this.props.visible}
-          hideTocDrawer={this.props.hideTocDrawer}
-        />
-      </div>
+      <Utility.EdgeLockScroll>
+        {/* NB: This ref is not currently accessible by the parent element */}
+        <div className={drawerClass}>
+          <Toc
+            text={this.props.text}
+            tocDrawerVisible={this.props.visible}
+            hideTocDrawer={this.props.hideTocDrawer}
+          />
+        </div>
+      </Utility.EdgeLockScroll>
     );
   }
 }

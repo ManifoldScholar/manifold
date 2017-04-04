@@ -8,11 +8,25 @@ class Annotation < ApplicationRecord
 
   # Concerns
   include TrackedCreator
+  include Filterable
 
   # Scopes
   scope :only_annotations, -> { where(format: "annotation") }
   scope :only_highlights, -> { where(format: "highlight") }
   scope :created_by, ->(user) { where(creator: user) }
+  # Scopes
+  scope :by_text_section, lambda { |text_section|
+    return all unless text_section.present?
+    where(text_section: text_section)
+  }
+  scope :by_ids, lambda { |ids|
+    return all unless ids.present?
+    where(id: ids)
+  }
+  scope :excluding_private, lambda { |creator|
+    return all unless creator.present?
+    where("(private = true AND creator_id = ?) OR (private = false)", creator.id)
+  }
 
   # Constants
   TYPE_ANNOTATION = "annotation".freeze
@@ -22,6 +36,7 @@ class Annotation < ApplicationRecord
   # Associations
   belongs_to :text_section
   belongs_to :resource, optional: true
+  has_many :comments, as: :subject
 
   # Validations
   validates :text_section, presence: true
@@ -35,6 +50,7 @@ class Annotation < ApplicationRecord
             presence: true,
             inclusion: { in: %W(#{TYPE_ANNOTATION} #{TYPE_HIGHLIGHT} #{TYPE_RESOURCE}) }
   validate :valid_subject?
+  validates :body, presence: true, if: :annotation?
 
   # Delegations
   delegate :text, to: :text_section

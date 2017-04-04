@@ -14,7 +14,8 @@ export default class ResourceCollectionThumbnail extends Component {
     const collectionsBackground = '/static/images/resource-collection.jpg';
     const collection = this.props.resourceCollection;
     const attr = collection.attributes;
-    const bgImage = attr.thumbnailUrl ? attr.thumbnailUrl : collectionsBackground;
+    const bgImage = attr.thumbnailStyles.medium ?
+      attr.thumbnailStyles.medium : collectionsBackground;
     return (
       <li>
         <Link

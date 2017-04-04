@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Text } from 'components/global';
 import FormattedDate from 'components/global/FormattedDate';
+import get from 'lodash/get';
 
 export default class TextThumbnail extends Component {
 
@@ -30,9 +31,12 @@ export default class TextThumbnail extends Component {
   // placeholder icon
   renderThumbnail(text) {
     let thumbnail = null;
-    if (text.attributes.coverUrl) {
+    if (get(text.attributes, 'coverStyles.small')) {
       thumbnail = (
-        <img src={text.attributes.coverUrl} alt={'Thumbnail image for ' + text.attributes.title} />
+        <img
+          src={text.attributes.coverStyles.small}
+          alt={'Thumbnail image for ' + text.attributes.title}
+        />
       );
     } else {
       thumbnail = <Text.Placeholder />;

@@ -3,6 +3,7 @@ import General from './General';
 import Collaborators from './Collaborators';
 import Texts from './Texts';
 import Category from './Category';
+import Text from './Text';
 import Metadata from './Metadata';
 import Resources from './Resources';
 
@@ -11,6 +12,7 @@ export default {
   General,
   Collaborators,
   Texts,
+  Text,
   Category,
   Metadata,
   Resources

@@ -22,6 +22,16 @@ export default {
         }
       }
     };
+  },
+
+  admin_reset_password(id) {
+    return {
+      endpoint: `/api/v1/passwords/admin_reset_password`,
+      method: 'POST',
+      options: {
+        params: { id }
+      }
+    };
   }
 
 };

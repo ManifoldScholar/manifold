@@ -1,21 +1,14 @@
 class Settings < ApplicationRecord
-  # Authority
-  include Authority::Abilities
 
+  # Concerns
+  include Authority::Abilities
+  include Attachments
+
+  # Validation
   validates :singleton_guard, inclusion: [0]
-  merge_hash_attributes! :general
 
   # Attachments
-  has_attached_file :press_logo,
-                    include_updated_timestamp: false,
-                    default_url: "",
-                    url: "/system/:class/:id/:style_:filename",
-                    styles: {
-                      default: ["x246", :png]
-                    }
-  validation = Rails.configuration.manifold.attachments.validations.image
-  validates_attachment_content_type :press_logo, content_type: validation[:allowed_mime]
-  validates_attachment_file_name :press_logo, matches: validation[:allowed_ext]
+  manifold_has_attached_file :press_logo, :image
 
   def self.instance
     row = first
@@ -29,9 +22,10 @@ class Settings < ApplicationRecord
     row
   end
 
-  def press_logo_url
-    return nil if press_logo.url(:default).blank?
-    Rails.configuration.manifold.api_url + press_logo.url(:default)
+  def general=(value)
+    base = general || {}
+    new = base.merge(value)
+    self[:general] = new
   end
 
 end

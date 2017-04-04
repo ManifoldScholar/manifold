@@ -43,7 +43,7 @@ RSpec.describe "Projects API", type: :request do
     let(:path) { api_v1_project_path(project) }
     let(:metadata) {
       {
-        "isbn" => "1234",
+        "isbnTen" => "1234",
         "publisher" => "Someone",
         "placeOfPublication" => "Somewhere",
         "doi" => "1234",

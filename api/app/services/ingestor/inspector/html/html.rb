@@ -54,7 +54,7 @@ module Ingestor
         memoize :get_contents_from_path
 
         def stylesheet
-          get_contents_from_path(@html_path).at("//style").to_html
+          get_contents_from_path(@html_path).at("//style").try(:to_html)
         end
 
         def cover(_text)

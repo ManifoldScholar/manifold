@@ -44,7 +44,9 @@ export default class LayoutHeader extends Component {
        <header className={'header-app dark'}>
           <div className="header-container">
             <Link to={'/browse'} className="logo">
-              <PressLogo url={get(this.props.settings, 'attributes.pressLogoUrl')}/>
+              <PressLogo
+                url={get(this.props.settings, 'attributes.pressLogoStyles.small')}
+              />
             </Link>
             <nav className="text-nav">
               <ul>

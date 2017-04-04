@@ -1,10 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Form } from 'components/backend';
+import { Resource, Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
-import { Resource } from 'components/backend';
+import { Resource as FrontendResource } from 'components/frontend';
 import { resourcesAPI } from 'api';
 import { notificationActions } from 'actions';
 import { connect } from 'react-redux';
+import capitalize from 'lodash/capitalize';
 
 class ResourceDetailGeneralContainer extends PureComponent {
 
@@ -16,9 +17,24 @@ class ResourceDetailGeneralContainer extends PureComponent {
 
   constructor(props) {
     super(props);
+
+    this.state = this.initialState();
+    this.handleSuccess = this.handleSuccess.bind(this);
+  }
+
+  initialState() {
+    return {
+      newKind: null,
+      changeKind: false
+    };
+  }
+
+  handleSuccess() {
+    this.setState(this.initialState);
   }
 
   render() {
+    const resource = this.props.resource.attributes;
     return (
       <section>
         <FormContainer.Form
@@ -27,38 +43,38 @@ class ResourceDetailGeneralContainer extends PureComponent {
           name="backend-resource-update"
           update={resourcesAPI.update}
           create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
+          onSuccess={this.handleSuccess}
           className="form-secondary"
         >
+          <Resource.Form.KindPicker name="attributes[kind]" />
           <Form.TextInput
             label="Title"
-            focusOnMount
             name="attributes[title]"
-            placeholder="Enter a resource title"
+            placeholder="Enter a title"
+            {...this.props}
           />
           <Form.TextArea
             label="Description"
-            focusOnMount
             name="attributes[description]"
             placeholder="Enter a description"
+            {...this.props}
           />
           <Form.TextInput
             label="Caption"
-            focusOnMount
             name="attributes[caption]"
-            placeholder="Enter a caption"
+            placeholder="Enter a short description"
+            {...this.props}
           />
-          <Form.TextInput
-            label="Keywords"
-            focusOnMount
-            name="attributes[keywords]"
-            placeholder="Enter some keywords separated by , or ;"
-          />
-          <Form.Switch
-            label="Allow Download?"
-            name="attributes[allowDownload]"
-          />
+          {resource.downloadableKind ?
+            <Form.Switch
+              label="Allow download?"
+              name="attributes[allowDownload]"
+            />
+            : null
+          }
+          <Resource.Form.KindAttributes />
           <Form.Save
-            text="Update Resource"
+            text="Save Resource"
           />
         </FormContainer.Form>
       </section>

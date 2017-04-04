@@ -37,8 +37,11 @@ export default class ResourceListItem extends PureComponent {
         <Link to={`/backend/people/users/${user.id}`}>
           <header>
             <figure className="avatar">
-              {attr.avatarUrl ?
-                <div className="image" style={ { backgroundImage: `url(${attr.avatarUrl})` } }/>
+              {attr.avatarStyles.smallSquare ?
+                <div
+                  className="image"
+                  style={ { backgroundImage: `url(${attr.avatarStyles.smallSquare})` } }
+                />
                 :
                 <div className="no-image">
                   <i className="manicon manicon-person"></i>
