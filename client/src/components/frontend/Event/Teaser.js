@@ -21,6 +21,9 @@ export default class Teaser extends Component {
       case 'TWEET':
         output = 'View Tweet';
         break;
+      case 'TEXT_ADDED':
+        output = 'Start Reading';
+        break;
       default:
         output = 'View More';
     }
