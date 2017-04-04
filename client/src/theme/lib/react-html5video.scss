@@ -1,8 +1,9 @@
+// Library defaults with some overrides by CIC
 .rh5v-DefaultPlayer_component {
-  position: relative;
-  font-family: Helvetica;
-  font-size: 11px;
-  background-color: #000;
+  // CIC override default sizing
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .rh5v-DefaultPlayer_video {
