@@ -69,6 +69,21 @@ class Resource < ApplicationRecord
   before_validation :update_kind
   before_update :reset_stale_fields
   before_save :update_tags
+  after_create :resource_to_event
+
+  # Create a new project event for the new resource
+  def resource_to_event
+    factory = Factory::Event.new
+    event = factory.create(
+      Event::RESOURCE_ADDED,
+      subject_id: id,
+      subject_type: self.class.name
+    )
+    return if event.valid?
+    Rails.logger.info(
+      "#resource_to_event created an invalid event: #{event.errors.full_messages}"
+    )
+  end
 
   def validate_kind_fields
     send("validate_#{kind}_fields")

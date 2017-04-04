@@ -16,6 +16,7 @@
   li {
     display: flex;
     width: 100%;
+    min-height: 170px;
 
     @include respond($break60) {
       width: 50%;
@@ -46,6 +47,7 @@
   li {
     display: flex;
     width: 100%;
+    min-height: 170px;
 
     @include respond($break60) {
       width: 50%;
