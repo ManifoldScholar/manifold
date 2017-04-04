@@ -98,6 +98,10 @@
       text-decoration: none;
       transition: color $duration $timing;
 
+      &.hidden {
+        display: none;
+      }
+
       &:hover {
         color: $accentPrimary;
       }
@@ -105,6 +109,10 @@
       + .download-link, + .detail-link {
         margin-left: 22px;
       }
+    }
+
+    .more-link.hidden + .download-link, .more-link.hidden + .detail-link, {
+      margin-left: 0;
     }
 
     .more-link .close-text {

@@ -18,7 +18,16 @@ export default class ResourceSlideCaption extends Component {
     this.handleReadMore = this.handleReadMore.bind(this);
   }
 
+  componentDidMount() {
+    this.checkReadMoreVisibility();
+  }
+
+  componentDidUpdate() {
+    this.checkReadMoreVisibility();
+  }
+
   getFullDescriptionHeight() {
+    if (!this._description) return;
     this._description.style.height = 'auto';
     const measuredHeight = this._description.offsetHeight;
     this._description.style.height = '5em';
@@ -42,6 +51,16 @@ export default class ResourceSlideCaption extends Component {
     return {
       __html: description
     };
+  }
+
+  checkReadMoreVisibility() {
+    if (!this._readMoreButton || !this._descriptionContents) return;
+    const visibleHeight = 37;
+    if (this._descriptionContents.offsetHeight < visibleHeight) {
+      this._readMoreButton.classList.add("hidden");
+    } else {
+      this._readMoreButton.classList.remove("hidden");
+    }
   }
 
   render() {
@@ -74,15 +93,26 @@ export default class ResourceSlideCaption extends Component {
           />
         </header>
         <VelocityComponent {...animation}>
-          <div className="resource-description" ref={ (c) => {
-            this._description = c;
+          <div className="resource-description" ref={ (e) => {
+            this._description = e;
           } }>
-            <div dangerouslySetInnerHTML={this.createDescription(attr.captionFormatted)} />
+            <div
+              ref={ (e) => {
+                this._descriptionContents = e;
+              }}
+              dangerouslySetInnerHTML={this.createDescription(attr.captionFormatted)}
+            />
           </div>
         </VelocityComponent>
         <div className="resource-utility">
           <div className="bg-neutral90">
-            <button className={moreLinkClass} onClick={this.handleReadMore}>
+            <button
+              className={moreLinkClass}
+              onClick={this.handleReadMore}
+              ref={ (e) => {
+                this._readMoreButton = e;
+              }}
+            >
               <span className="open-text">
                 {'Read More'}
               </span>
