@@ -13,7 +13,8 @@ module Factory
                    event_subtitle: event_subtitle(event_type),
                    subject_title: subject_title(event_type, subject),
                    subject_subtitle: subject_subtitle(event_type, subject),
-                   attribution_name: subject_attribution_name(event_type, subject))
+                   attribution_name: subject_attribution_name(event_type, subject),
+                   event_url: new_text_event_url(event_type, subject))
       log_event_errors(event)
       event
     end
@@ -78,6 +79,11 @@ module Factory
 
     def event_subtitle(type)
       t("event_subtitle", type)
+    end
+
+    def new_text_event_url(type, subject)
+      return unless type == ::Event::TEXT_ADDED
+      "/read/#{subject.id}"
     end
 
     # rubocop:disable LineLength
