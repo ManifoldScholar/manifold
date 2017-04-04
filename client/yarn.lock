@@ -4656,6 +4656,10 @@ react-hot-loader@^3.0.0-beta.1:
     redbox-react "^1.2.5"
     source-map "^0.4.4"
 
+react-html5video@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-html5video/-/react-html5video-2.1.0.tgz#e6d1e29487a5949d058a7ef78b60138d129c8e96"
+
 react-json-tree@>=0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/react-json-tree/-/react-json-tree-0.10.0.tgz#92d5c223fc7718614a906591cd916127ce2b6033"

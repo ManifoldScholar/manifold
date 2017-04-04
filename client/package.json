@@ -125,6 +125,7 @@
     "react-dropzone": "^3.4.0",
     "react-ga": "^2.1.2",
     "react-hot-loader": "^3.0.0-beta.1",
+    "react-html5video": "^2.1.0",
     "react-json-tree": ">=0.10.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.0.0",

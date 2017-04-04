@@ -30,9 +30,8 @@ export default class DetailHeader extends PureComponent {
           dangerouslySetInnerHTML={{ __html: this.props.title }}
         />
       );
-    } else {
-      return this.props.title;
     }
+    return this.props.title;
   }
 
   render() {
