@@ -196,6 +196,7 @@ export default class ResourceListSlideshow extends PureComponent {
             { this.isLoaded(position) ?
               <ResourceList.Slide.Caption
                 resource={collectionResource}
+                collectionId={this.props.collectionId}
               />
             :
               <ResourceList.Slide.LoadingCaption />

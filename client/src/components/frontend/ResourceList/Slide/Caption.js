@@ -2,10 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 import { VelocityComponent } from 'velocity-react';
+import get from 'lodash/get';
 
 export default class ResourceSlideCaption extends Component {
+
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    collectionId: PropTypes.string
   };
 
   constructor() {
@@ -63,6 +66,22 @@ export default class ResourceSlideCaption extends Component {
     }
   }
 
+  detailUrl() {
+    const { resource } = this.props;
+    const pid = resource.attributes.projectId;
+    const cid = this.props.collectionId;
+    if (cid) {
+      const crs = get(resource, "relationships.collectionResources");
+      const cr = crs.find((cmpr) => cmpr.attributes.collectionId === cid);
+      if (cr) {
+        const crid = cr.id;
+        return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+      }
+    }
+    const rid = resource.id;
+    return `browse/project/${pid}/resource/${rid}`;
+  }
+
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
@@ -70,6 +89,7 @@ export default class ResourceSlideCaption extends Component {
       'more-link': true,
       open: this.state.expanded
     });
+    const detailUrl = this.detailUrl();
 
     // Animation to open description
     const animation = {
@@ -130,12 +150,14 @@ export default class ResourceSlideCaption extends Component {
                 <i className="manicon manicon-arrow-down"></i>
               </Link>
             : null}
-            <Link
-              className="detail-link"
-              to={`/project/${attr.projectId}/resources/${resource.id}`}
-            >
-              {'Details'}
-            </Link>
+            {detailUrl ?
+              <Link
+                className="detail-link"
+                to={detailUrl}
+              >
+                {'Details'}
+              </Link>
+            : null}
           </div>
         </div>
       </div>
