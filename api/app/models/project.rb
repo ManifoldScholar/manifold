@@ -14,6 +14,7 @@ class Project < ApplicationRecord
   include Filterable
   include Attachments
   include Metadata
+  include Concerns::HasFormattedAttributes
 
   # Magic
   with_metadata %w(isbn_ten isbn_thirteen publisher place_of_publication doi
@@ -21,6 +22,8 @@ class Project < ApplicationRecord
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
+
+  has_formatted_attribute :description
 
   # Associations
   belongs_to :published_text, class_name: "Text", optional: true
@@ -47,7 +50,6 @@ class Project < ApplicationRecord
 
   # Callbacks
   after_commit :trigger_creation_event, on: [:create]
-  before_save :update_description_formatted
 
   # Delegations
   delegate :count, to: :collections, prefix: true
@@ -114,10 +116,6 @@ class Project < ApplicationRecord
 
   def following_twitter_accounts?
     twitter_following.length.positive?
-  end
-
-  def update_description_formatted
-    self.description_formatted = render_simple_markdown(description)
   end
 
   def to_s

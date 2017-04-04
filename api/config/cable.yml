@@ -1,12 +1,8 @@
 # Action Cable uses Redis by default to administer connections, channels, and sending/receiving messages over the WebSocket.
 
-<%
-url = ENV["BOXEN_REDIS_URL"] || ENV["RAILS_REDIS_URL"] || "redis://127.0.0.1:6379"
-%>
-
 production: &production
   adapter: redis
-  url: <%= url %>
+  url: <%= ManifoldEnv.redis.url %>
 
 development: *production
 test: *production

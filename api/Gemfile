@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "aasm", "~> 4.12.0"
+gem "active_interaction", "~> 3.5.0"
 gem "active_model_serializers", "~> 0.10.2"
 # Locked until this is resolved:
 # https://github.com/swanandp/acts_as_list/issues/253
@@ -30,6 +31,7 @@ gem "naught", "~> 1.1.0"
 gem "nokogiri"
 gem "paperclip", "~> 5.1.0"
 gem "pg"
+gem "pry-rails"
 gem "puma", "~> 3.6.0"
 gem "rack-cors"
 gem "rails", "~> 5.0.1"
@@ -37,6 +39,7 @@ gem "rainbow"
 gem "redcarpet"
 gem "redis"
 gem "redis-namespace"
+gem "redis-rails", "~> 5.0.1"
 gem "rubyzip", ">= 1.2.0"
 gem "searchkick"
 gem "sidekiq", "4.2.3"

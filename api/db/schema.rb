@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403202550) do
+ActiveRecord::Schema.define(version: 20170404222122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -219,7 +219,6 @@ ActiveRecord::Schema.define(version: 20170403202550) do
     t.uuid     "creator_id"
     t.jsonb    "tweet_fetch_config",      default: {}
     t.date     "publication_date"
-    t.text     "description_formatted"
   end
 
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -265,9 +264,6 @@ ActiveRecord::Schema.define(version: 20170403202550) do
     t.string   "translation_content_type"
     t.integer  "translation_file_size"
     t.datetime "translation_updated_at"
-    t.string   "title_formatted"
-    t.text     "description_formatted"
-    t.text     "caption_formatted"
     t.string   "variant_format_one_file_name"
     t.string   "variant_format_one_content_type"
     t.integer  "variant_format_one_file_size"
