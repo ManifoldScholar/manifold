@@ -120,7 +120,7 @@
     padding-left: 50px;
 
     @include respond($break60) {
-      padding: 15px 17px 19px 50px;
+      padding: 22px 17px 26px 50px;
       padding-left: 36px;
     }
 
@@ -208,7 +208,7 @@
     @include templateHead;
     margin-top: 0;
     margin-bottom: 0.467em;
-    font-size: 15px;
+    font-size: 19px;
     font-weight: $semibold;
 
     // No event subtitle
@@ -221,7 +221,7 @@
     @include subtitlePrimary;
     display: block;
     padding-bottom: 17px;
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .event-user, .event-user a {
