@@ -70,7 +70,9 @@ module Factory
     end
 
     def subject_title(_type, subject)
-      subject.respond_to?(:title) ? subject.title : nil
+      return nil unless subject.respond_to?(:title)
+      return subject.title unless subject.respond_to?(:title_formatted)
+      subject.title_formatted
     end
 
     def event_title(type)
@@ -82,8 +84,12 @@ module Factory
     end
 
     def new_text_event_url(type, subject)
-      return unless type == ::Event::TEXT_ADDED
-      "/read/#{subject.id}"
+      case type
+      when ::Event::TEXT_ADDED
+        "/read/#{subject.id}"
+      when ::Event::RESOURCE_ADDED
+        "/browse/project/#{subject.project.id}/resource/#{subject.id}"
+      end
     end
 
     # rubocop:disable LineLength

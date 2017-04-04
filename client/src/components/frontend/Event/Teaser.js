@@ -21,6 +21,9 @@ export default class Teaser extends Component {
       case 'TWEET':
         output = 'View Tweet';
         break;
+      case 'RESOURCE_ADDED':
+        output = 'View Resource';
+        break;
       case 'TEXT_ADDED':
         output = 'Start Reading';
         break;
@@ -52,6 +55,7 @@ export default class Teaser extends Component {
       case 'TWEET':
         component = Body.Attributable;
         break;
+      case 'RESOURCE_ADDED':
       case 'TEXT_ADDED':
         component = Body.Added;
         break;
