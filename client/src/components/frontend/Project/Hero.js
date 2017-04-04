@@ -49,12 +49,24 @@ export default class ProjectHero extends Component {
 
 
   renderDescription() {
-    if (this.props.project.attributes.description) {
+    const attr = this.props.project.attributes;
+    if (attr.description) {
+      if (attr.descriptionFormatted) {
+        return (
+          <section
+            className="project-summary"
+            dangerouslySetInnerHTML={{ __html: attr.descriptionFormatted }}
+          />
+        );
+      }
       return (
-        <section className="project-summary">
-          <Helper.SimpleFormat text={this.props.project.attributes.description} />
+        <section
+          className="project-summary"
+        >
+          <Helper.SimpleFormat text={attr.descriptionFormatted} />
         </section>
       );
+
     }
   }
 
