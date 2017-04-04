@@ -63,7 +63,7 @@ export default class ProjectHero extends Component {
         <section
           className="project-summary"
         >
-          <Helper.SimpleFormat text={attr.descriptionFormatted} />
+          <Helper.SimpleFormat text={attr.description} />
         </section>
       );
 
