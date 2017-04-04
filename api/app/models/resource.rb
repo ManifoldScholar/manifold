@@ -20,6 +20,7 @@ class Resource < ApplicationRecord
   include Attachments
   include ResourceAttachmentValidation
   include ResourceAttributeResets
+  include Concerns::HasFormattedAttributes
 
   # Associations
   belongs_to :project
@@ -32,6 +33,9 @@ class Resource < ApplicationRecord
   manifold_has_attached_file :variant_poster, :image
   manifold_has_attached_file :variant_format_one, :resource, no_styles: true
   manifold_has_attached_file :variant_format_two, :resource, no_styles: true
+
+  has_formatted_attributes :title, :caption, include_wrap: false
+  has_formatted_attributes :description
 
   # Validation
   validates :title, presence: true
@@ -65,9 +69,6 @@ class Resource < ApplicationRecord
   before_validation :update_kind
   before_update :reset_stale_fields
   before_save :update_tags
-  before_save :update_title_formatted
-  before_save :update_caption_formatted
-  before_save :update_description_formatted
 
   def validate_kind_fields
     send("validate_#{kind}_fields")
@@ -85,18 +86,6 @@ class Resource < ApplicationRecord
 
   def force_update_kind
     self.kind = determine_kind
-  end
-
-  def update_title_formatted
-    self.title_formatted = render_simple_markdown(title, false)
-  end
-
-  def update_caption_formatted
-    self.caption_formatted = render_simple_markdown(caption, false)
-  end
-
-  def update_description_formatted
-    self.description_formatted = render_simple_markdown(description)
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity
