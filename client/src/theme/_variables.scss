@@ -22,6 +22,9 @@ $neutral90: #363636;
 $neutral95: #2e2e2e;
 $neutral100: #231f20;
 
+// ---> For SVG interpolation
+$neutral40hex: str-slice(#{$neutral40}, 2);
+
 // Separated as this is often used for base template elements (like plain text)
 $neutralOffWhite: $neutral05;
 $neutralOffBlack: $neutral90;
@@ -35,6 +38,8 @@ $accentPrimaryDull: #b1ead2 !default;
 $accentPrimaryPale: #c1f7e4 !default;
 $accentPrimaryOffWhite: #f0faf7 !default;
 
+// ---> For SVG interpolation
+$accentPrimaryHex: str-slice(#{$accentPrimary}, 2);
 
 // Spectra
 // Color spectra are number by group and then given ordinal names, attributes
