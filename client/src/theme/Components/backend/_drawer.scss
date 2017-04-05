@@ -116,4 +116,8 @@
   .utility-primary {
     color: $neutralWhite;
   }
+
+  .list-pagination-primary {
+    @include constrainedPaginationResponsive;
+  }
 }
