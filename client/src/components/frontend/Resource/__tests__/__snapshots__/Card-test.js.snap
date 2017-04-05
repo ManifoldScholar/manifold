@@ -103,36 +103,38 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
       </div>
     </div>
     <nav
-      className="resource-tags"
+      className="resource-tag-list"
+      onClick={[Function]}
+      onMouseOver={[Function]}
     >
       <ul>
-        <div
-          className="tag-link"
-          onClick={[Function]}
-          onMouseOver={[Function]}
-        >
-          dog
-          <span>
-            , 
-          </span>
-        </div>
-        <div
-          className="tag-link"
-          onClick={[Function]}
-          onMouseOver={[Function]}
-        >
-          puppy
-          <span>
-            , 
-          </span>
-        </div>
-        <div
-          className="tag-link"
-          onClick={[Function]}
-          onMouseOver={[Function]}
-        >
-          GOAT
-        </div>
+        <li>
+          <a
+            className={null}
+            href="/project/1/resources?tag=dog"
+            onClick={[Function]}
+          >
+            dog
+          </a>
+        </li>
+        <li>
+          <a
+            className={null}
+            href="/project/1/resources?tag=puppy"
+            onClick={[Function]}
+          >
+            puppy
+          </a>
+        </li>
+        <li>
+          <a
+            className={null}
+            href="/project/1/resources?tag=goat"
+            onClick={[Function]}
+          >
+            GOAT
+          </a>
+        </li>
       </ul>
     </nav>
   </section>

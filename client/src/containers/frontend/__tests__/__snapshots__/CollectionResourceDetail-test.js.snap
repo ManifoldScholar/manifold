@@ -4,7 +4,7 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
 <div>
   <a
     className="back-link-primary full"
-    href="/project/undefined/collection/2"
+    href="/project/1/collection/2"
     onClick={[Function]}
   >
     <div
@@ -163,26 +163,34 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
                 </li>
               </ul>
               <nav
-                className="tag-list"
+                className="resource-tag-list"
+                onClick={[Function]}
+                onMouseOver={[Function]}
               >
                 <ul>
                   <li>
                     <a
-                      href="/project/undefined/resources?tag=dog"
+                      className={null}
+                      href="/project/1/resources?tag=dog"
+                      onClick={[Function]}
                     >
                       dog
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/project/undefined/resources?tag=puppy"
+                      className={null}
+                      href="/project/1/resources?tag=puppy"
+                      onClick={[Function]}
                     >
                       puppy
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/project/undefined/resources?tag=goat"
+                      className={null}
+                      href="/project/1/resources?tag=goat"
+                      onClick={[Function]}
                     >
                       GOAT
                     </a>
@@ -235,26 +243,34 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
                 </li>
               </ul>
               <nav
-                className="tag-list"
+                className="resource-tag-list"
+                onClick={[Function]}
+                onMouseOver={[Function]}
               >
                 <ul>
                   <li>
                     <a
-                      href="/project/undefined/resources?tag=dog"
+                      className={null}
+                      href="/project/1/resources?tag=dog"
+                      onClick={[Function]}
                     >
                       dog
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/project/undefined/resources?tag=puppy"
+                      className={null}
+                      href="/project/1/resources?tag=puppy"
+                      onClick={[Function]}
                     >
                       puppy
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/project/undefined/resources?tag=goat"
+                      className={null}
+                      href="/project/1/resources?tag=goat"
+                      onClick={[Function]}
                     >
                       GOAT
                     </a>
@@ -315,7 +331,7 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
     >
       <a
         className="back-link-secondary"
-        href="/project/undefined/collection/2"
+        href="/project/1/collection/2"
         onClick={[Function]}
       >
         <i

@@ -51,18 +51,10 @@ export default class ResourceDetail extends Component {
                 </Link>
                 */}
                 <Utility.ShareBar url={resourceUrl} />
-                <Resource.Meta
-                  resource={resource}
-                  layout={"secondary"}
-                  projectUrl={this.props.projectUrl}
-                />
+                <Resource.Meta resource={resource} layout={"secondary"} />
               </aside>
               <div className="resource-meta-mobile">
-                <Resource.Meta
-                  resource={resource}
-                  layout={"secondary"}
-                  projectUrl={this.props.projectUrl}
-                />
+                <Resource.Meta resource={resource} layout={"secondary"} />
               </div>
               <div className="resource-content left">
                 <div

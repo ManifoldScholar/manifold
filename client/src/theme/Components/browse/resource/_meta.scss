@@ -18,32 +18,4 @@
   .meta-list-primary {
     margin-bottom: 22px;
   }
-
-  // <nav> around <ul>
-  .tag-list {
-    ul {
-      @include listUnstyled;
-    }
-
-    li {
-      @include utilityPrimary;
-      display: inline;
-      font-size: 13px;
-      color: $neutral40;
-
-      + li::before {
-        content: ', ';
-      }
-    }
-
-    a {
-      color: $neutral40;
-      text-decoration: none;
-      transition: color $duration $timing;
-
-      &:hover {
-        color: $accentPrimary;
-      }
-    }
-  }
 }

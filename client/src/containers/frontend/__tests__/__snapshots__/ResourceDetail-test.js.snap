@@ -163,26 +163,34 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                 </li>
               </ul>
               <nav
-                className="tag-list"
+                className="resource-tag-list"
+                onClick={[Function]}
+                onMouseOver={[Function]}
               >
                 <ul>
                   <li>
                     <a
+                      className={null}
                       href="/project/1/resources?tag=dog"
+                      onClick={[Function]}
                     >
                       dog
                     </a>
                   </li>
                   <li>
                     <a
+                      className={null}
                       href="/project/1/resources?tag=puppy"
+                      onClick={[Function]}
                     >
                       puppy
                     </a>
                   </li>
                   <li>
                     <a
+                      className={null}
                       href="/project/1/resources?tag=goat"
+                      onClick={[Function]}
                     >
                       GOAT
                     </a>
@@ -235,26 +243,34 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                 </li>
               </ul>
               <nav
-                className="tag-list"
+                className="resource-tag-list"
+                onClick={[Function]}
+                onMouseOver={[Function]}
               >
                 <ul>
                   <li>
                     <a
+                      className={null}
                       href="/project/1/resources?tag=dog"
+                      onClick={[Function]}
                     >
                       dog
                     </a>
                   </li>
                   <li>
                     <a
+                      className={null}
                       href="/project/1/resources?tag=puppy"
+                      onClick={[Function]}
                     >
                       puppy
                     </a>
                   </li>
                   <li>
                     <a
+                      className={null}
                       href="/project/1/resources?tag=goat"
+                      onClick={[Function]}
                     >
                       GOAT
                     </a>

@@ -8,7 +8,7 @@ import build from "test/fixtures/build";
 describe("Frontend ResourceDetail Container", () => {
   const store = build.store();
   const project = build.entity.project("1");
-  const resource = build.entity.resource("2");
+  const resource = build.entity.resource("2", { projectId: "1" });
   resource.relationships.project = project;
 
   const component = renderer.create(
