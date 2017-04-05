@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { HigherOrder, FatalError } from 'components/global';
+import HigherOrderContainers from 'containers/global/HigherOrder';
 import { Layout } from 'components/frontend';
 import { commonActions } from 'actions/helpers';
 import { pagesAPI, subjectsAPI, requests } from 'api';
@@ -90,7 +91,9 @@ class FrontendContainer extends Component {
               settings={this.props.settings}
             />
           </HigherOrder.ScrollAware>
-          <Layout.MobileNav location={this.props.location} />
+          <HigherOrderContainers.RequireRole requiredRole="any">
+            <Layout.MobileNav location={this.props.location} />
+          </HigherOrderContainers.RequireRole>
           <main ref="mainContainer">
             { (fatalError) ?
               <div className="global-container">
