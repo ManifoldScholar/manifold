@@ -21,12 +21,11 @@ class ResourceSerializer < ResourcePartialSerializer
              :variant_poster_updated_at, :transcript_file_name,
              :transcript_content_type, :transcript_file_size, :transcript_updated_at,
              :translation_file_name, :translation_content_type,
-             :translation_file_size, :translation_updated_at, :tag_list,
-             :embed_code, :iframe_dimensions, :iframe_length, :iframe_width,
+             :translation_file_size, :translation_updated_at, :embed_code,
+             :iframe_dimensions, :iframe_length, :iframe_width,
              :downloadable_kind
 
   has_many :collections
-  has_many :collection_resources
   belongs_to :project, serializer: ProjectPartialSerializer
 
   def sub_kind

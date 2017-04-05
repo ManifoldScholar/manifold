@@ -24,7 +24,6 @@ class ResourceCard extends Component {
     this.handleInfoMouseOver = this.handleInfoMouseOver.bind(this);
     this.handleInfoMouseOut = this.handleInfoMouseOut.bind(this);
     this.handleInfoClick = this.handleInfoClick.bind(this);
-    this.handleTagHover = this.handleTagHover.bind(this);
     this.handlePreviewClick = this.handlePreviewClick.bind(this);
   }
 
@@ -125,19 +124,6 @@ class ResourceCard extends Component {
     this.props.history.push(this.detailUrl());
   }
 
-  handleTagHover(event) {
-    event.stopPropagation();
-    this.setState({
-      infoHover: false
-    });
-  }
-
-  handleTagClick(event) {
-    // Placeholder method, ultimately this will link
-    // to the tag detail
-    event.stopPropagation();
-  }
-
   resource() {
     if (this.props.resource.type === "collectionResources") {
       return this.props.resource.relationships.resource;
@@ -185,41 +171,6 @@ class ResourceCard extends Component {
     return out;
   }
 
-  renderTags(resource) {
-    if (!resource.attributes.tagList) {
-      return false;
-    }
-
-    function commaSeparate(index) {
-      if (index >= resource.attributes.tagList.length - 1) return false;
-      return (
-        <span>
-          {", "}
-        </span>
-      );
-    }
-
-    return (
-      <nav className="resource-tags">
-        <ul>
-          {resource.attributes.tagList.map((tag, index) => {
-            return (
-              <div
-                key={tag}
-                className="tag-link"
-                onMouseOver={this.handleTagHover}
-                onClick={this.handleTagClick}
-              >
-                {tag}
-                {commaSeparate(index)}
-              </div>
-            );
-          })}
-        </ul>
-      </nav>
-    );
-  }
-
   render() {
     const resource = this.resource();
     if (!resource) return null;
@@ -257,8 +208,7 @@ class ResourceCard extends Component {
               <i className="manicon manicon-arrow-right" />
             </div>
           </div>
-
-          {this.renderTags(resource)}
+          <Resource.TagList resource={resource} />
         </section>
       </li>
     );

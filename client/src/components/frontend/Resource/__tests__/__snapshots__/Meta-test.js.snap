@@ -42,26 +42,34 @@ exports[`Frontend.Resource.Meta component renders correctly 1`] = `
     </li>
   </ul>
   <nav
-    className="tag-list"
+    className="resource-tag-list"
+    onClick={[Function]}
+    onMouseOver={[Function]}
   >
     <ul>
       <li>
         <a
-          href="project/url?tag=dog"
+          className={null}
+          href="/project/1/resources?tag=dog"
+          onClick={[Function]}
         >
           dog
         </a>
       </li>
       <li>
         <a
-          href="project/url?tag=puppy"
+          className={null}
+          href="/project/1/resources?tag=puppy"
+          onClick={[Function]}
         >
           puppy
         </a>
       </li>
       <li>
         <a
-          href="project/url?tag=goat"
+          className={null}
+          href="/project/1/resources?tag=goat"
+          onClick={[Function]}
         >
           GOAT
         </a>

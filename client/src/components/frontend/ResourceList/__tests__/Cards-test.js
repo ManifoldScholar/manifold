@@ -6,7 +6,10 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.ResourceList.Cards Component", () => {
   const project = build.entity.project("1");
-  const resources = [build.entity.resource("2"), build.entity.resource("3")];
+  const resources = [
+    build.entity.resource("2", { projectId: "1" }),
+    build.entity.resource("3", { projectId: "1" })
+  ];
   const pagination = {
     currentPage: 1,
     perPage: 5,

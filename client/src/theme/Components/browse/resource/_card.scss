@@ -168,39 +168,11 @@
     }
   }
 
-  .resource-tags {
+  .resource-tag-list {
     padding-top: 18px;
 
     @include respond($break75) {
       padding-top: 11px;
-    }
-
-    ul {
-      @include listUnstyled;
-      @include utilityPrimary;
-      font-size: 12px;
-      line-height: 1.2;
-
-      @include respond($break85) {
-        font-size: 13px;
-      }
-    }
-
-    li {
-      display: inline;
-      color: $neutral40;
-    }
-
-    .tag-link {
-      display: inline;
-      color: $neutral40;
-      text-decoration: none;
-      cursor: pointer;
-      transition: color $duration $timing;
-
-      &:hover {
-        color: $accentPrimary;
-      }
     }
   }
 }

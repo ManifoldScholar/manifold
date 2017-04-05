@@ -1,0 +1,31 @@
+// <nav> around <ul>
+.resource-tag-list {
+  ul {
+    @include listUnstyled;
+  }
+
+  li {
+    @include utilityPrimary;
+    display: inline;
+    font-size: 13px;
+    color: $neutral40;
+
+    + li::before {
+      content: ', ';
+    }
+  }
+
+  a {
+    color: $neutral40;
+    text-decoration: none;
+    transition: color $duration $timing;
+
+    &.disabled {
+      pointer-events: none;
+    }
+
+    &:hover:not(.disabled) {
+      color: $accentPrimary;
+    }
+  }
+}

@@ -9,8 +9,8 @@ describe("Frontend CollectionResourceDetail Container", () => {
   const store = build.store();
 
   const project = build.entity.project("1");
-  const collection = build.entity.collection("2");
-  const resource = build.entity.resource("3");
+  const collection = build.entity.collection("2", { projectId: "1" });
+  const resource = build.entity.resource("3", { projectId: "1" });
   const collectionResource = build.entity.collectionResource("4");
   collection.relationships.resources.push(resource);
   collectionResource.relationships.resource = resource;

@@ -5,6 +5,7 @@ import Icon from "./Icon";
 import Link from "./Link";
 import Meta from "./Meta";
 import Preview from "./Preview/Preview";
+import TagList from "./TagList";
 import Title from "./Title";
 import Thumbnail from "./Thumbnail";
 import Player from "./Player";
@@ -17,6 +18,7 @@ export default {
   Link,
   Meta,
   Preview,
+  TagList,
   Title,
   Thumbnail,
   Player
