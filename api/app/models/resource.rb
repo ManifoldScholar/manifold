@@ -34,7 +34,7 @@ class Resource < ApplicationRecord
   manifold_has_attached_file :variant_format_one, :resource, no_styles: true
   manifold_has_attached_file :variant_format_two, :resource, no_styles: true
 
-  has_formatted_attributes :title, :caption, include_wrap: false
+  has_formatted_attributes :title, :caption, :credit, include_wrap: false
   has_formatted_attributes :description
 
   # Validation
