@@ -91,22 +91,10 @@
 
   // Link with resource marker cube
   .resource-marker {
-    font-size: 0.85em;
-    color: $neutral40;
-    text-decoration: none;
-
-    &.active {
-      color: $accentPrimary;
-    }
+    cursor: pointer;
 
     i {
-      position: relative;
-      top: 0.15em;
-      margin: -0.1em 0.15em 0;
-
-      &::before {
-        vertical-align: baseline;
-      }
+      display: inline;
     }
   }
 

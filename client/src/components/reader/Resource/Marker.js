@@ -51,8 +51,8 @@ class ResourceMarker extends Component {
               onMouseLeave={() => { this.setActiveAnnotation(null); }}
             >
               <i
-                className="manicon manicon-cube-fill"
-              ></i>
+                className="manicon resource-cube-fill"
+              >&nbsp;&nbsp;&nbsp;&nbsp;</i>
             </span>
           );
         })}
