@@ -16,8 +16,8 @@ module ResourceAttributeResets
   end
 
   def reset_non_pdf_attributes
-    attributes = %w(external_url external_id external_type is_external_video
-                    embed_code is_iframe iframe_dimensions)
+    attributes = %w(external_url external_id external_type sub_kind
+                    embed_code iframe_dimensions)
     attachments = %w(variant_format_one variant_format_two high_res
                      variant_poster)
     reset_attributes(attributes, attachments)
