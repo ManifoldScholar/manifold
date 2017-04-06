@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classnames from 'classnames';
+import { linkHelpers as lh } from 'routes';
 
 export default class ResourceListItem extends PureComponent {
 
@@ -34,7 +35,7 @@ export default class ResourceListItem extends PureComponent {
             <i className="manicon manicon-check"></i>
           </div>
         </div>
-        <Link to={`/backend/people/users/${user.id}`}>
+        <Link to={lh.backendPeopleUser(user.id)}>
           <header>
             <figure className="avatar">
               {attr.avatarStyles.smallSquare ?

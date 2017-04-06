@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Settings, Navigation } from 'components/backend';
 import { entityStoreActions, notificationActions } from 'actions';
 import get from 'lodash/get';
+import { linkHelpers as lh } from 'routes';
 
 class SettingsWrapperContainer extends PureComponent {
 
@@ -16,10 +17,10 @@ class SettingsWrapperContainer extends PureComponent {
 
   secondaryNavigationLinks() {
     return [
-      { path: "/backend/settings", label: "General", key: "general" },
-      { path: "/backend/settings/theme", label: "Theme", key: "theme" },
-      { path: "/backend/settings/oauth", label: "OAuth", key: "oauth" },
-      { path: "/backend/settings/features", label: "Features", key: "features" }
+      { path: lh.backendSettings(), label: "General", key: "general" },
+      { path: lh.backendSettingsTheme(), label: "Theme", key: "theme" },
+      { path: lh.backendSettingsOauth(), label: "OAuth", key: "oauth" },
+      { path: lh.backendSettingsFeatures(), label: "Features", key: "features" }
     ];
   }
 

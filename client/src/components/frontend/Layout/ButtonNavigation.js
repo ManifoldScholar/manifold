@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import { linkHelpers as lh } from 'routes';
 
 export default class LayoutButtonNavigation extends Component {
 
@@ -45,7 +46,7 @@ export default class LayoutButtonNavigation extends Component {
   renderBrowseButton() {
     if (this.props.showBrowse !== true) return null;
     return (
-      <Link to={'/browse'} className="button-icon-primary">
+      <Link to={lh.frontend()} className="button-icon-primary">
         <span ref={(node) => { this._browseButtonEl = node; }}>
           <i className="manicon manicon-books-on-shelf"></i>See more projects
         </span>
@@ -57,7 +58,7 @@ export default class LayoutButtonNavigation extends Component {
     if (this.props.authenticated !== true) return null;
     if (this.props.showFollowing !== true) return null;
     return (
-      <Link to={'/browse/following'} className="button-icon-primary">
+      <Link to={lh.frontendFollowing()} className="button-icon-primary">
         <span ref={(node) => { this._followingButtonEl = node; }}>
           <i className="manicon manicon-books-with-glasses"></i>Projects You're Following
         </span>

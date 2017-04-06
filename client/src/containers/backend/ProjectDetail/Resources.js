@@ -5,6 +5,7 @@ import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
@@ -81,7 +82,7 @@ class ProjectDetailResources extends PureComponent {
         </header>
         <List.Searchable
           newButtonVisible
-          newButtonPath={`/backend/project/${project.id}/resources/new`}
+          newButtonPath={lh.backendProjectResourcesNew(project.id)}
           newButtonText="Add a New Resource"
           entities={this.props.resources}
           singularUnit="resource"

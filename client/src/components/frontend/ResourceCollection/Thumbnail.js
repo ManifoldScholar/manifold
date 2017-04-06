@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { linkHelpers as lh } from 'routes';
+
 
 export default class ResourceCollectionThumbnail extends Component {
 
@@ -19,7 +21,7 @@ export default class ResourceCollectionThumbnail extends Component {
     return (
       <li>
         <Link
-          to={`/browse/project/${this.props.projectId}/collection/${collection.id}`}
+          to={lh.frontendProjectCollection(this.props.projectId, collection.id)}
           style={ { backgroundImage: 'url(' + bgImage + ')' } }
         >
           <div className="title-overlay">

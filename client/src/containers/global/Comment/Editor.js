@@ -1,5 +1,4 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { requests } from 'api';

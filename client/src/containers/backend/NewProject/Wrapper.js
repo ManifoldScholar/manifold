@@ -7,6 +7,7 @@ import { notificationActions } from 'actions';
 import { projectsAPI } from 'api';
 import { browserHistory } from 'react-router';
 import { entityUtils } from 'utils';
+import { linkHelpers as lh } from 'routes';
 
 class NewProjectWrapperContainer extends PureComponent {
 
@@ -21,7 +22,8 @@ class NewProjectWrapperContainer extends PureComponent {
   }
 
   redirectToProject(project) {
-    browserHistory.push(`/backend/project/${project.id}`);
+    const path = lh.frontendProject(project.id);
+    browserHistory.push(path);
   }
 
   handleSuccess(project) {
@@ -34,7 +36,7 @@ class NewProjectWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="project"
           breadcrumb={[
-            { path: "/backend", label: "ALL PROJECTS" }
+            { path: lh.backend(), label: "ALL PROJECTS" }
           ]}
           title={'New Project'}
           showUtility={false}
@@ -72,7 +74,7 @@ class NewProjectWrapperContainer extends PureComponent {
                   />
                   <Form.Save
                     text="Save and Continue"
-                    cancelRoute={`/backend`}
+                    cancelRoute={lh.backend()}
                   />
                 </FormContainer.Form>
               </section>

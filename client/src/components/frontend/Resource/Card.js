@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import FormattedDate from 'components/global/FormattedDate';
 import { Resource } from 'components/frontend';
 import { find } from 'lodash';
+import { linkHelpers as lh } from 'routes';
 
 export default class ResourceCard extends Component {
 
@@ -63,13 +64,13 @@ export default class ResourceCard extends Component {
       const pid = context.attributes.projectId;
       const cid = context.id;
       const crid = this.getCollectionResourceId(this.props.resource);
-      return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+      return lh.frontendProjectCollectionCollectionResource(pid, cid, crid);
     }
     if (context.type === "projects") {
       const resource = this.resource();
       const pid = context.id;
       const rid = resource.id;
-      return `/browse/project/${pid}/resource/${rid}`;
+      return lh.frontendProjectResource(pid, rid);
     }
   }
 

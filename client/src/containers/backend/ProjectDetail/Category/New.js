@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Category } from 'components/backend';
 import { Dialog } from 'components/backend';
 import { withRouter } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 class ProjectDetailCategoryNew extends Component {
 
@@ -26,14 +27,14 @@ class ProjectDetailCategoryNew extends Component {
   }
 
   closeUrl() {
-    return `/backend/project/${this.props.params.id}/texts`;
+    return lh.backendProjectTexts(this.props.params.id);
   }
 
   render() {
 
     return (
       <Dialog.Wrapper
-        closeUrl={`/backend/project/${this.props.params.id}/texts`}
+        closeUrl={this.closeUrl()}
       >
         <header className="dialog-header-large">
           <h2>{'Create Category'}</h2>

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Resource } from 'components/frontend';
+import { linkHelpers as lh } from 'routes';
 
 export default class ResourceListThumbnails extends Component {
 
@@ -24,7 +25,7 @@ export default class ResourceListThumbnails extends Component {
             return (
               <li key={resource.id}>
                 <Link
-                  to={`/browse/project/${this.props.projectId}/resource/${resource.id}`}
+                  to={lh.frontendProjectResource(this.props.projectId, resource.id)}
                   className="resource-link"
                 >
                   <Resource.Thumbnail

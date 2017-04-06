@@ -22,9 +22,9 @@ export default class ResourceDetail extends Component {
   }
 
   render() {
-    const resource = this.props.resource;
+    const { resource, resourceUrl } = this.props;
+    if (!resource) return null;
     const attr = resource.attributes;
-    const resourceUrl = `${this.props.resourceUrl}/${resource.id}`;
 
     return (
       <div>

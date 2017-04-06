@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { ResourceList } from 'components/frontend';
+import { linkHelpers as lh } from 'routes';
 
 export default class ProjectResources extends Component {
 
@@ -19,7 +20,7 @@ export default class ProjectResources extends Component {
   }
 
   paginationClickHandler(page) {
-    return `/browse/project/${this.props.project.id}/resources/${page}`;
+    return lh.frontendProjectResources(this.props.project.id, page);
   }
 
   render() {

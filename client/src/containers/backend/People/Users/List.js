@@ -7,6 +7,7 @@ import { usersAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import { User, List } from 'components/backend';
+import { linkHelpers as lh } from 'routes';
 
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
@@ -96,7 +97,7 @@ class UsersListContainer extends PureComponent {
         </header>
         <Drawer.Wrapper
           open={React.Children.count(children) > 0}
-          closeUrl="/backend/people/users"
+          closeUrl={lh.backendPeopleUsers()}
         >
           { children }
         </Drawer.Wrapper>

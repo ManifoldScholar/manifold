@@ -6,6 +6,7 @@ import { entityUtils } from 'utils';
 import { projectsAPI, requests } from 'api';
 import get from 'lodash/get';
 import { browserHistory } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -61,27 +62,27 @@ class ProjectDetailWrapperContainer extends PureComponent {
   secondaryNavigationLinks(project) {
     return [
       {
-        path: `/backend/project/${project.id}/`,
+        path: lh.backendProject(project.id),
         label: "General",
         key: "general"
       },
       {
-        path: `/backend/project/${project.id}/collaborators`,
+        path: lh.backendProjectCollaborators(project.id),
         label: "People",
         key: "collaborators"
       },
       {
-        path: `/backend/project/${project.id}/texts`,
+        path: lh.backendProjectTexts(project.id),
         label: "Texts",
         key: "texts"
       },
       {
-        path: `/backend/project/${project.id}/resources`,
+        path: lh.backendProjectResources(project.id),
         label: "Resources",
         key: "resources"
       },
       {
-        path: `/backend/project/${project.id}/metadata`,
+        path: lh.backendProjectMetadata(project.id),
         label: "Metadata",
         key: "metadata"
       }
@@ -90,7 +91,7 @@ class ProjectDetailWrapperContainer extends PureComponent {
 
   doPreview(event) {
     event.preventDefault();
-    const win = window.open(`/browse/project/${this.props.project.id}`, '_blank');
+    const win = window.open(lh.frontendProject(this.props.project.id), '_blank');
     win.focus();
   }
 
@@ -104,7 +105,7 @@ class ProjectDetailWrapperContainer extends PureComponent {
   }
 
   redirectToDashboard() {
-    browserHistory.push("/backend");
+    browserHistory.push(lh.backend());
   }
 
   handleProjectDestroy(event) {
@@ -153,7 +154,7 @@ class ProjectDetailWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="project"
           breadcrumb={[
-            { path: "/backend", label: "ALL PROJECTS" }
+            { path: lh.backend(), label: "ALL PROJECTS" }
           ]}
           title={project.attributes.title}
           subtitle={project.attributes.subtitle}

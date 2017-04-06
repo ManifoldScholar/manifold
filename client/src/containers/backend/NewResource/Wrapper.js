@@ -6,6 +6,7 @@ import { resourcesAPI, notifications } from 'api';
 import { notificationActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { browserHistory } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 const { flush } = entityStoreActions;
 
@@ -19,12 +20,12 @@ class NewResourceWrapperContainer extends PureComponent {
 
   constructor(props) {
     super(props);
-
     this.handleSuccess = this.handleSuccess.bind(this);
   }
 
   redirectToResource(resource) {
-    browserHistory.push(`/backend/resource/${resource.id}`);
+    const path = lh.backendResource(resource.id);
+    browserHistory.push(path);
   }
 
   handleSuccess(resource) {
@@ -37,7 +38,10 @@ class NewResourceWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="resource"
           breadcrumb={[
-            { path: `/backend/project/${this.props.params.projectId}/resources`, label: "Project" }
+            {
+              path: lh.backendProjectResources(this.props.params.projectId),
+              label: "Project"
+            }
           ]}
           title={'New Resource'}
           showUtility={false}
@@ -73,7 +77,7 @@ class NewResourceWrapperContainer extends PureComponent {
                 <Resource.Form.KindAttributes />
                 <Form.Save
                   text="Save and continue"
-                  cancelRoute={`/backend/project/${this.props.params.projectId}/resources`}
+                  cancelRoute={lh.backendProjectResources(this.props.params.projectId)}
                 />
               </FormContainer.Form>
             </div>

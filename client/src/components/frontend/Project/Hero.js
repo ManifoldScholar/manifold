@@ -4,6 +4,7 @@ import { Helper } from 'components/global';
 import { Link } from 'react-router';
 import has from 'lodash/has';
 import get from 'lodash/get';
+import { linkHelpers as lh } from 'routes';
 
 export default class ProjectHero extends Component {
 
@@ -126,7 +127,7 @@ export default class ProjectHero extends Component {
     return (
       <section className={'project-entry ' + position}>
         <Link
-          to={`/read/${publishedText.id}`}
+          to={lh.reader(publishedText.id)}
           className="button-secondary"
         >
           <i className="manicon manicon-glasses"></i>
@@ -134,7 +135,7 @@ export default class ProjectHero extends Component {
         </Link>
         {publishedTextTocId ?
           <Link
-            to={`/read/${publishedText.id}/section/${publishedTextTocId}`}
+            to={lh.readerSection(publishedText.id, publishedTextTocId)}
             className="button-secondary dull"
           >
             <i className="manicon manicon-bullet-list"></i>

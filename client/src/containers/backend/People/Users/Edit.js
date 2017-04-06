@@ -4,12 +4,14 @@ import { Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { usersAPI, makersAPI, requests } from 'api';
-const { select } = entityUtils;
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import { browserHistory } from 'react-router';
 import get from 'lodash/get';
+import { linkHelpers as lh } from 'routes';
+
 const { request, flush } = entityStoreActions;
+const { select } = entityUtils;
 
 class UsersEditContainer extends PureComponent {
 
@@ -70,7 +72,7 @@ class UsersEditContainer extends PureComponent {
     const options = { removes: user };
     const userRequest = request(call, requests.beUserDestroy, options);
     this.props.dispatch(userRequest).promise.then(() => {
-      browserHistory.push('/backend/people/users');
+      browserHistory.push(lh.backendPeopleUsers());
     });
   }
 

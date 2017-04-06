@@ -6,6 +6,7 @@ import { uiVisibilityActions, entityStoreActions, notificationActions } from 'ac
 import { entityUtils } from 'utils';
 import { resourcesAPI, requests } from 'api';
 import get from 'lodash/get';
+import { linkHelpers as lh } from 'routes';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -61,7 +62,7 @@ class ResourceDetailWrapperContainer extends PureComponent {
   doPreview(event) {
     event.preventDefault();
     const projectId = this.props.resource.relationships.project.id;
-    const previewUrl = `/browse/project/${projectId}/resource/${this.props.resource.id}`;
+    const previewUrl = lh.frontendProjectResource(projectId, this.props.resource.id);
     const win = window.open(previewUrl, '_blank');
     win.focus();
   }
@@ -78,8 +79,8 @@ class ResourceDetailWrapperContainer extends PureComponent {
 
   redirectToProjectResources() {
     const projectId = this.props.resource.relationships.project.id;
-    const redirectURL = `/backend/project/${projectId}/resources`;
-    browserHistory.push(redirectURL);
+    const redirectUrl = lh.backendProjectResources(projectId);
+    browserHistory.push(redirectUrl);
   }
 
   notifyDestroy() {
@@ -110,12 +111,12 @@ class ResourceDetailWrapperContainer extends PureComponent {
     const externalVideo = resource.attributes.externalVideo;
     const out = [
       {
-        path: `/backend/resource/${resource.id}/`,
+        path: lh.backendResource(resource.id),
         label: "General",
         key: "general"
       },
       {
-        path: `/backend/resource/${resource.id}/metadata`,
+        path: lh.backendResourceMetadata(resource.id),
         label: "Metadata",
         key: "metadata"
       }
@@ -126,7 +127,7 @@ class ResourceDetailWrapperContainer extends PureComponent {
       kind === "pdf" ||
       (kind === 'video' && !externalVideo)) {
       out.splice(1, 0, {
-        path: `/backend/resource/${resource.id}/variants`,
+        path: lh.backendResourceVariants(resource.id),
         label: "Variants",
         key: "variants"
       });
@@ -167,9 +168,9 @@ class ResourceDetailWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="resource"
           breadcrumb={[
-            { path: "/backend", label: "ALL PROJECTS" },
+            { path: lh.backend(), label: "ALL PROJECTS" },
             {
-              path: `/backend/project/${resource.relationships.project.id}/resources`,
+              path: lh.backendProjectResources(resource.relationships.project.id),
               label: resource.relationships.project.attributes.title
             }
           ]}

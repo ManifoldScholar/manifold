@@ -1,5 +1,4 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
 import FormattedDate from 'components/global/FormattedDate';
 import { Resource } from 'components/frontend';
 

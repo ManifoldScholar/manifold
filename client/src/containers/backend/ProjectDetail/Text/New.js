@@ -10,9 +10,10 @@ import { entityUtils } from 'utils';
 import has from 'lodash/has';
 import get from 'lodash/get';
 import { browserHistory } from 'react-router';
+import { linkHelpers as lh } from 'routes';
+
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
-
 
 class ProjectDetailTextNew extends PureComponent {
 
@@ -120,13 +121,14 @@ class ProjectDetailTextNew extends PureComponent {
   }
 
   ingestUrl() {
-    /* eslint-disable max-len */
-    return `/backend/project/${this.props.params.id}/texts/process/ingestion/${this.props.ingestion.id}`;
-    /* eslint-enable max-len */
+    return lh.backendProjectIngestionProcess(
+      this.props.params.id,
+      this.props.ingestion.id
+    );
   }
 
   closeUrl() {
-    return `/backend/project/${this.props.params.id}/texts`;
+    return lh.backendProjectTexts(this.props.params.id);
   }
 
   currentAttributes() {

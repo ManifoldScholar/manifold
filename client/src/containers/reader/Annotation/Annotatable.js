@@ -11,6 +11,7 @@ import fakeData from 'helpers/fakeData';
 import { annotationsAPI, requests } from 'api';
 import { entityStoreActions, uiVisibilityActions } from 'actions';
 import isString from 'lodash/isString';
+import { linkHelpers as lh } from 'routes';
 const { request, flush } = entityStoreActions;
 
 class Annotatable extends Component {
@@ -435,7 +436,7 @@ class Annotatable extends Component {
         {/* Render the annotation popup interface */}
         <Annotation.Popup.Wrapper
           currentUser={this.props.currentUser}
-          shareUrl={`/read/${this.props.textId}/section/${this.props.sectionId}`}
+          shareUrl={lh.readerSection(this.props.textId, this.props.sectionId)}
           highlight={this.highlightSelection}
           annotate={this.startAnnotateSelection}
           attachResource={this.startResourceSelection}

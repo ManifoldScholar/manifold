@@ -8,6 +8,7 @@ import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import { browserHistory } from 'react-router';
 import get from 'lodash/get';
+import { linkHelpers as lh } from 'routes';
 
 const { request, flush } = entityStoreActions;
 const { select } = entityUtils;
@@ -67,7 +68,7 @@ class MakersEditContainer extends PureComponent {
     const options = { removes: maker };
     const makerRequest = request(call, requests.beMakerDestroy, options);
     this.props.dispatch(makerRequest).promise.then(() => {
-      browserHistory.push('/backend/people/makers');
+      browserHistory.push(lh.backendPeopleMakers());
     });
   }
 

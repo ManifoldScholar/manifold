@@ -6,6 +6,7 @@ import { entityUtils } from 'utils';
 import { textsAPI, requests } from 'api';
 import get from 'lodash/get';
 import { browserHistory } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -60,17 +61,17 @@ class TextDetailWrapperContainer extends PureComponent {
   secondaryNavigationLinks(text) {
     return [
       {
-        path: `/backend/text/${text.id}/`,
+        path: lh.backendText(text.id),
         label: "General",
         key: "general"
       },
       {
-        path: `/backend/text/${text.id}/collaborators`,
+        path: lh.backendTextCollaborators(text.id),
         label: "People",
         key: "collaborators"
       },
       {
-        path: `/backend/text/${text.id}/metadata`,
+        path: lh.backendTextMetadata(text.id),
         label: "Metadata",
         key: "metadata"
       }
@@ -87,7 +88,7 @@ class TextDetailWrapperContainer extends PureComponent {
   }
 
   redirectToDashboard() {
-    browserHistory.push("/backend");
+    browserHistory.push(lh.backend());
   }
 
   handleTextDestroy(event) {
@@ -105,7 +106,7 @@ class TextDetailWrapperContainer extends PureComponent {
 
   doPreview(event) {
     event.preventDefault();
-    const win = window.open(`/read/${this.props.text.id}`, '_blank');
+    const win = window.open(lh.reader(this.props.text.id), '_blank');
     win.focus();
   }
 
@@ -142,9 +143,9 @@ class TextDetailWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="text"
           breadcrumb={[
-            { path: "/backend", label: "ALL PROJECTS" },
+            { path: lh.backend(), label: "ALL PROJECTS" },
             {
-              path: `/backend/project/${text.relationships.project.id}/texts`,
+              path: lh.backendProjectTexts(text.relationships.project.id),
               label: text.relationships.project.attributes.title
             }
           ]}

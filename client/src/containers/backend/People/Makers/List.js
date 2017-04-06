@@ -7,6 +7,7 @@ import { makersAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import { Maker, List } from 'components/backend';
+import { linkHelpers as lh } from 'routes';
 
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
@@ -95,7 +96,7 @@ class MakersListContainer extends PureComponent {
         </header>
         <Drawer.Wrapper
           open={React.Children.count(children) > 0}
-          closeUrl="/backend/people/makers"
+          closeUrl={lh.backendPeopleMakers()}
         >
           { children }
         </Drawer.Wrapper>

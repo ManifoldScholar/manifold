@@ -8,6 +8,7 @@ import GroupThumbnail from './GroupThumbnail';
 import { Resource } from 'components/frontend';
 import { connect } from 'react-redux';
 import { uiReaderActions } from 'actions';
+import { linkHelpers as lh } from 'routes';
 
 export class ResourceViewerGroup extends PureComponent {
 
@@ -145,7 +146,7 @@ export class ResourceViewerGroup extends PureComponent {
               resource={highlightedItem.resource}
               height={this.props.singleHeight}
               fadeIn={false}
-              link={`/read/${textId}/section/${sectionId}/resource/${highlightedItem.resource.id}`}
+              link={lh.readerSectionResource(textId, sectionId, highlightedItem.resource.id)}
               key={highlightedItem.resource.id}
             />
           </ReactCSSTransitionGroup>
@@ -161,7 +162,7 @@ export class ResourceViewerGroup extends PureComponent {
                     this.setGroupActive(item.annotationId);
                   }}
                   onMouseLeave={() => { this.setActiveAnnotation(null); }}
-                  to={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
+                  to={lh.readerSectionResource(textId, sectionId, item.resource.id)}
                   title={item.resource.id}
                 >
                   <GroupThumbnail

@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import Single from './Single';
 import Group from './Group';
+import { linkHelpers as lh } from 'routes';
 
 export default class ResourceViewerList extends PureComponent {
 
@@ -95,7 +96,7 @@ export default class ResourceViewerList extends PureComponent {
                   resource={item.resource}
                   location={item.location}
                   height={this.resourceHeight}
-                  link={`/read/${textId}/section/${sectionId}/resource/${item.resource.id}`}
+                  link={lh.readerSectionResource(textId, sectionId, item.resource.id)}
                 />
               }
             </li>

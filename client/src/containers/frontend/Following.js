@@ -10,6 +10,7 @@ import HigherOrder from 'containers/global/HigherOrder';
 import get from 'lodash/get';
 import union from 'lodash/union';
 import size from 'lodash/size';
+import { linkHelpers as lh } from 'routes';
 
 const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
@@ -108,7 +109,10 @@ class FollowingContainer extends Component {
     if (!this.props.featuredProjects || this.props.featuredProjects.length <= limit) return null;
     return (
       <div className="section-heading-utility-right">
-        <Link to={`/browse/featured`} className="button-primary">
+        <Link
+          to={lh.frontendFeatured()}
+          className="button-primary"
+        >
           <span>
             <i className="manicon manicon-lamp"></i>See all featured
           </span>
@@ -151,7 +155,7 @@ class FollowingContainer extends Component {
 
   render() {
     return (
-      <HigherOrder.RequireRole requiredRole="any" redirect="/browse">
+      <HigherOrder.RequireRole requiredRole="any" redirect={lh.frontend()}>
         <div>
           {this.props.authentication.currentUser.favorites &&
           size(this.props.authentication.currentUser.favorites) > 0 ?

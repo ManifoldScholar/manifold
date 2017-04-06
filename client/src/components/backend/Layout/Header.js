@@ -11,6 +11,7 @@ import { Link } from 'react-router';
 import startsWith from 'lodash/startsWith';
 import classNames from 'classnames';
 import get from 'lodash/get';
+import { linkHelpers as lh } from 'routes';
 
 export default class LayoutHeader extends Component {
 
@@ -25,17 +26,11 @@ export default class LayoutHeader extends Component {
     settings: PropTypes.object
   };
 
-  isPath(segment) {
-    const path = this.props.location.pathname;
-    if (segment === "projects" && path === "/backend/") return true;
-    return startsWith(path, `/backend/${segment}`);
-  }
-
   classesFor(segment) {
     let active = false;
     const path = this.props.location.pathname;
-    if (segment === "project" && path === "/backend/") active = true;
-    if (startsWith(path, `/backend/${segment}`)) active = true;
+    if (segment === "project" && path === `${lh.backend()}/`) active = true;
+    if (startsWith(path, `${lh.backend()}/${segment}`)) active = true;
     return classNames({ active });
   }
 
@@ -43,7 +38,7 @@ export default class LayoutHeader extends Component {
     return (
        <header className={'header-app dark'}>
           <div className="header-container">
-            <Link to={'/browse'} className="logo">
+            <Link to={lh.backend()} className="logo">
               <PressLogo
                 url={get(this.props.settings, 'attributes.pressLogoStyles.small')}
               />
@@ -51,17 +46,17 @@ export default class LayoutHeader extends Component {
             <nav className="text-nav">
               <ul>
                 <li className={this.classesFor('project')} >
-                  <Link to={`/backend/`}>
+                  <Link to={lh.backend()}>
                     {'Projects'}
                   </Link>
                 </li>
                 <li className={this.classesFor('people')} >
-                  <Link to={`/backend/people/`}>
+                  <Link to={lh.backendPeople()}>
                     {'People'}
                   </Link>
                 </li>
                 <li className={this.classesFor('settings')} >
-                  <Link to={`/backend/settings/`}>
+                  <Link to={lh.backendSettings()}>
                     {'Settings'}
                   </Link>
                 </li>
@@ -71,7 +66,7 @@ export default class LayoutHeader extends Component {
             <nav className="menu-dropdowns">
               <ul>
                 <li className="show-60">
-                  <Link className="button-mode" to={`/browse`}>
+                  <Link className="button-mode" to={lh.frontend()}>
                     Exit Admin Mode
                   </Link>
                 </li>

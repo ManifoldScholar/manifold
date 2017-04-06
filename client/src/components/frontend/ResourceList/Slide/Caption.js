@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 import { VelocityComponent } from 'velocity-react';
 import get from 'lodash/get';
+import { linkHelpers as lh } from 'routes';
 
 export default class ResourceSlideCaption extends Component {
 
@@ -75,11 +76,11 @@ export default class ResourceSlideCaption extends Component {
       const cr = crs.find((cmpr) => cmpr.attributes.collectionId === cid);
       if (cr) {
         const crid = cr.id;
-        return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+        return lh.frontendProjectCollectionCollectionResource(pid, cid, crid);
       }
     }
     const rid = resource.id;
-    return `browse/project/${pid}/resource/${rid}`;
+    return lh.frontendProjectResource(pid, rid);
   }
 
   render() {

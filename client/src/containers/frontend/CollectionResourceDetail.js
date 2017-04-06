@@ -2,7 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Resource, Utility } from 'components/frontend';
-
+import { linkHelpers as lh } from 'routes';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { collectionsAPI, requests } from 'api';
@@ -47,20 +47,20 @@ class CollectionResourceDetailContainer extends PureComponent {
 
   projectUrl() {
     const pid = this.props.collection.attributes.projectId;
-    return `/browse/project/${pid}/resources`;
+    return lh.frontendProjectResources(pid);
   }
 
   collectionUrl() {
     const cid = this.props.collection.id;
     const pid = this.props.collection.attributes.projectId;
-    return `/browse/project/${pid}/collection/${cid}`;
+    return lh.frontendProjectCollection(pid, cid);
   }
 
   resourceUrl() {
     const cid = this.props.collection.id;
     const pid = this.props.collection.attributes.projectId;
     const crid = this.props.collectionResource.id;
-    return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+    return lh.frontendProjectCollectionCollectionResource(pid, cid, crid);
   }
 
   render() {
@@ -92,7 +92,6 @@ class CollectionResourceDetailContainer extends PureComponent {
             />
           </section> : null
         }
-
       </div>
     );
   }

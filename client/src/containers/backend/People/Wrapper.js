@@ -5,6 +5,7 @@ import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { usersAPI } from 'api';
 import get from 'lodash/get';
+import { linkHelpers as lh } from 'routes';
 
 class UsersWrapperContainer extends PureComponent {
 
@@ -21,8 +22,8 @@ class UsersWrapperContainer extends PureComponent {
 
   secondaryNavigationLinks() {
     return [
-      { path: "/backend/people", label: "Users", key: "users" },
-      { path: "/backend/people/makers", label: "Makers", key: "makers" }
+      { path: lh.backendPeople(), label: "Users", key: "users" },
+      { path: lh.backendPeopleMakers(), label: "Makers", key: "makers" }
     ];
   }
 

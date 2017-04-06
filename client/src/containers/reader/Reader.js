@@ -10,6 +10,7 @@ import { resourcesAPI, textsAPI, sectionsAPI, annotationsAPI, requests } from 'a
 import values from 'lodash/values';
 import uniq from 'lodash/uniq';
 import difference from 'lodash/difference';
+import { linkHelpers as lh } from 'routes';
 
 import {
   authActions,
@@ -145,11 +146,11 @@ class ReaderContainer extends Component {
     if (props.text && !props.params.sectionId && __CLIENT__) {
       const startTextSectionId = props.text.attributes.startTextSectionId;
       if (startTextSectionId) {
-        browserHistory.push(`/read/${props.text.id}/section/${startTextSectionId}`);
+        const path = lh.readerSection(props.text.id, startTextSectionId);
+        browserHistory.push(path);
       }
     }
   }
-
 
   hasMissingResources(annotations, resourcesIn) {
     if (!annotations) return;

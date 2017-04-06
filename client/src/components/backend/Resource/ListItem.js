@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
 import FormattedDate from 'components/global/FormattedDate';
 import { Resource } from 'components/frontend';
+import { linkHelpers as lh } from 'routes';
 
 export default class ResourceListItem extends PureComponent {
 
@@ -16,7 +17,7 @@ export default class ResourceListItem extends PureComponent {
     const attr = resource.attributes;
     return (
       <li>
-        <Link to={`/backend/resource/${this.props.entity.id}`}>
+        <Link to={lh.backendResource(this.props.entity.id)}>
           <header>
             <figure className="cover">
               <Resource.Thumbnail

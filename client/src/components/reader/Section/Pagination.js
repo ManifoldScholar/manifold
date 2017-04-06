@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 export default class Pagination extends Component {
 
@@ -21,7 +22,7 @@ export default class Pagination extends Component {
   }
 
   getSectionPath(id) {
-    return `/read/${this.props.textId}/section/${id}`;
+    return lh.readerSection(this.props.textId, id);
   }
 
   getPreviousLink() {

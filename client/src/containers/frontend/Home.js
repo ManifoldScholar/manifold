@@ -8,6 +8,7 @@ import { uiFilterActions, entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI, requests } from 'api';
 import get from 'lodash/get';
+import { linkHelpers as lh } from 'routes';
 
 const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
@@ -69,7 +70,10 @@ class HomeContainer extends Component {
     if (!this.props.featuredProjects || this.props.featuredProjects.length <= limit) return null;
     return (
       <div className="button-nav" style={{ marginTop: '26px' }}>
-        <Link to={'/browse/featured'} className="button-icon-primary">
+        <Link
+          to={lh.frontendFeatured()}
+          className="button-icon-primary"
+        >
           <span>
             <i className="manicon manicon-lamp"></i>See all featured
           </span>

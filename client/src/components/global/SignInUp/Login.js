@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-// import { authActions } from 'actions';
 import { currentUserActions } from 'actions';
 import { get } from 'lodash';
 import classNames from 'classnames';

@@ -7,6 +7,7 @@ import { entityUtils } from 'utils';
 import { projectsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
+import { linkHelpers as lh } from 'routes';
 
 const { select, meta } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -100,7 +101,7 @@ class ProjectResourcesContainer extends Component {
       <div>
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
-            link={`/browse/project/${project.id}`}
+            link={lh.frontendProject(project.id)}
             title={project.attributes.title}
           />
         </section>
@@ -115,7 +116,7 @@ class ProjectResourcesContainer extends Component {
         : null }
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
-            link={`/browse/project/${project.id}`}
+            link={lh.frontendProject(project.id)}
             title={project.attributes.title}
           />
         </section>

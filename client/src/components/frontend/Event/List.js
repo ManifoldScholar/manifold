@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Teaser from './Teaser';
 import classNames from 'classnames';
 import { Utility } from 'components/global';
+import { linkHelpers as lh } from 'routes';
 
 export default class EventList extends Component {
 
@@ -25,7 +26,7 @@ export default class EventList extends Component {
   }
 
   paginationClickHandler(page) {
-    return `/browse/project/${this.props.project.id}/events/${page}`;
+    return lh.frontendProjectEventsPage(this.props.project.id, page);
   }
 
   render() {

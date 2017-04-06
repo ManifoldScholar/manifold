@@ -12,6 +12,7 @@ import { Link } from 'react-router';
 import startsWith from 'lodash/startsWith';
 import get from 'lodash/get';
 import HigherOrder from 'containers/global/HigherOrder';
+import { linkHelpers as lh } from 'routes';
 
 export default class LayoutHeader extends Component {
 
@@ -28,24 +29,24 @@ export default class LayoutHeader extends Component {
 
   render() {
     const path = this.props.location.pathname;
-    const active = startsWith(path, '/browse/following') ? 'following' : 'browse';
+    const active = startsWith(path, lh.frontendFollowing()) ? 'following' : 'browse';
     return (
       <header className={'header-app'}>
         <div className="header-container">
-          <Link to={'/browse'} className="logo">
+          <Link to={lh.frontend()} className="logo">
             <PressLogo url={get(this.props.settings, 'attributes.pressLogoStyles.small')}/>
           </Link>
           {/* Use show-50 utility class to hide text-nav on mobile */}
           <nav className="text-nav show-50">
             <ul>
               <li className={active === 'browse' ? 'active' : ''}>
-                <Link to={`/browse/`}>
+                <Link to={lh.frontend()}>
                   {'Projects'}
                 </Link>
               </li>
               <HigherOrder.RequireRole requiredRole="any">
                 <li className={active === 'following' ? 'active' : ''}>
-                  <Link to={`/browse/following/`}>
+                  <Link to={lh.frontendFollowing()}>
                     {'Following'}
                   </Link>
                 </li>
@@ -57,7 +58,7 @@ export default class LayoutHeader extends Component {
             <ul>
               <HigherOrder.RequireRole requiredRole="admin">
                 <li>
-                  <Link className="button-mode" to={`/backend/`}>
+                  <Link className="button-mode" to={lh.backend()}>
                     Admin Mode
                   </Link>
                 </li>

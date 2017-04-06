@@ -1,15 +1,16 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Resource, Utility } from 'components/frontend';
-
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI, resourcesAPI, requests } from 'api';
+import { linkHelpers as lh } from 'routes';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class ResourceDetailContainer extends PureComponent {
+
   static fetchData(getState, dispatch, location, params) {
     const page = params.page ? params.page : 1;
     const projectFetch = projectsAPI.show(params.id);
@@ -41,12 +42,12 @@ class ResourceDetailContainer extends PureComponent {
 
   projectUrl() {
     const pid = this.props.project.id;
-    return `/browse/project/${pid}/resources`;
+    return lh.frontendProjectResources(pid);
   }
 
   resourceUrl() {
     const pid = this.props.project.id;
-    return `/browse/project/${pid}/resource`;
+    return lh.frontendProjectResource(pid);
   }
 
   render() {

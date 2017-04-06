@@ -3,6 +3,7 @@ import { Link, browserHistory } from 'react-router';
 import { ResourceList } from 'components/frontend';
 import { Utility, Resource } from 'components/frontend';
 import Icon from 'components/frontend/Resource/Icon';
+import { linkHelpers as lh } from 'routes';
 
 export default class ResourceOverlayDetail extends PureComponent {
 
@@ -33,9 +34,7 @@ export default class ResourceOverlayDetail extends PureComponent {
   buildRedirectUrl(resource) {
     if (!resource) return null;
     const pId = resource.relationships.project.id;
-    return (
-      `/browse/project/${pId}/resource/${resource.id}`
-    );
+    return lh.frontendProjectResource(pId, resource.id);
   }
 
   render() {

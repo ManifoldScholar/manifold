@@ -6,6 +6,7 @@ import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { textCategoriesAPI, requests } from 'api';
 import { withRouter } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -47,7 +48,7 @@ class ProjectDetailCategoryEdit extends Component {
   }
 
   closeUrl() {
-    return `/backend/project/${this.props.params.id}/texts`;
+    return lh.backendProjectTexts(this.props.params.id);
   }
 
   fetchCategory() {

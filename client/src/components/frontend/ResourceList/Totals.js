@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 export default class ResourceListTotals extends Component {
 
@@ -26,7 +27,9 @@ export default class ResourceListTotals extends Component {
           </span>
           {' total resources'}
         </div>
-        <Link to={`/browse/project/${this.props.projectId}/resources`}>
+        <Link
+          to={lh.frontendProjectResources(this.props.projectId)}
+        >
           View All Project Resources <i className="manicon manicon-arrow-right"></i>
         </Link>
       </div>

@@ -14,6 +14,7 @@ import isEmpty from 'lodash/isEmpty';
 import capitalize from 'lodash/capitalize';
 import { browserHistory } from 'react-router';
 import { websocketActions } from 'actions';
+import { linkHelpers as lh } from 'routes';
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
@@ -102,7 +103,11 @@ class ProjectDetailTextIngest extends Component {
   }
 
   editUrl() {
-    return `/backend/project/${this.props.params.id}/texts/new/${this.props.ingestion.id}/step/2`;
+    return lh.backendProjectIngestionEdit(
+      this.props.params.id,
+      this.props.ingestion.id,
+      "2"
+    );
   }
 
   clearLog() {

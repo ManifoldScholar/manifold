@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import { entityUtils } from 'utils';
 import { projectsAPI, statisticsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
+import { linkHelpers as lh } from 'routes';
 
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
@@ -82,7 +83,7 @@ class DashboardContainer extends PureComponent {
                 { this.props.projects && this.props.projectsMeta ?
                   <List.Searchable
                     newButtonVisible
-                    newButtonPath="/backend/project/new"
+                    newButtonPath={lh.backendProjectsNew()}
                     newButtonText="Add a New Project"
                     entities={this.props.projects}
                     singularUnit="project"

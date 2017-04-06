@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { uiReaderActions } from 'actions';
 import { browserHistory } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 class ResourceMarker extends Component {
 
@@ -27,7 +28,9 @@ class ResourceMarker extends Component {
 
   handleClick(event, annotation) {
     event.preventDefault();
-    const url = `${window.location.pathname}/resource/${annotation.resourceId}`;
+    const base = window.location.pathname;
+    const rel = lh.frontendProjectResourceRelative(annotation.resourceId);
+    const url = `${base}/${rel}`;
     browserHistory.push(url);
   }
 

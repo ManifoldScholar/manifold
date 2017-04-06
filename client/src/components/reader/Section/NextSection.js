@@ -1,5 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 export default class NextSection extends PureComponent {
 
@@ -19,7 +20,7 @@ export default class NextSection extends PureComponent {
   }
 
   getSectionPath(id) {
-    return `/read/${this.props.textId}/section/${id}`;
+    return lh.readerSection(this.props.textId, id);
   }
 
   renderSectionLink() {

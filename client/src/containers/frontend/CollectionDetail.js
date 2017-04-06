@@ -11,6 +11,7 @@ import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI, collectionsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
+import { linkHelpers as lh } from 'routes';
 
 const { select, grab, meta, loaded, isEntityLoaded } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -128,13 +129,12 @@ class CollectionDetailContainer extends PureComponent {
     const collection = this.props.collection;
 
     if (!project || !collection) return null;
-
-    const collectionUrl = `/browse/project/${project.id}/collection/${collection.id}`;
+    const collectionUrl = lh.frontendProjectCollection(project.id, collection.id);
 
     return (
       <div>
         <Utility.BackLinkPrimary
-          link={`/browse/project/${project.id}`}
+          link={lh.frontendProject(project.id)}
           title={project.attributes.title}
         />
         { this.props.slideshowResources && this.props.resources ?
@@ -153,7 +153,7 @@ class CollectionDetailContainer extends PureComponent {
         : null }
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
-            link={`/browse/project/${project.id}`}
+            link={lh.frontendProject(project.id)}
             title={project.attributes.title}
           />
         </section>

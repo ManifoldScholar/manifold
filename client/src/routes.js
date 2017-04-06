@@ -93,4 +93,55 @@ export default () => {
     </Route>
   );
 };
+
+/*
+Link|href|url|path|route|redirect
+import { linkHelpers as lh } from 'routes';
+ */
+export const linkHelpers = {
+  frontend: () => '/browse',
+  frontendFeatured: () => '/browse/featured',
+  frontendFollowing: () => '/browse/following',
+  frontendPage: (p) => `/browse/page/${p}`,
+  frontendProject: (p) => `/browse/project/${p}`,
+  frontendProjectCollectionCollectionResource: (p, c, cr) => `/browse/project/${p}/collection/${c}/collection_resource/${cr}`,
+  frontendProjectResources: (p, pg = null) => `/browse/project/${p}/resources${pg ? `/page/${pg}` : ""}`,
+  frontendProjectResource: (p, r) => `/browse/project/${p}/resource/${r}`,
+  frontendProjectResourceRelative: (r) => `resource/${r}`,
+  frontendProjectCollection: (p, c) => `/browse/project/${p}/collection/${c}`,
+  frontendProjectEvents: (p) => `/browse/project/${p}/events`,
+  frontendProjectEventsPage: (pr, pg) => `/browse/project/${pr}/events/${pg}`,
+  reader: (t) => `/read/${t}`,
+  readerSection: (t, s, anchor = "") => `/read/${t}/section/${s}${anchor}`,
+  readerSectionResource: (t, s, r) => `/read/${t}/section/${s}/resource/${r}`,
+  backend: () => '/backend',
+  backendProjectsNew: () => '/backend/project/new',
+  backendProject: (p) => `/backend/project/${p}`,
+  backendProjectCategoriesNew: (p) => `/backend/project/${p}/texts/category/new`,
+  backendProjectCategory: (p, c) => `/backend/project/${p}/texts/category/${c}/edit`,
+  backendProjectTexts: (p) => `/backend/project/${p}/texts`,
+  backendProjectTextsNew: (p) => `/backend/project/${p}/texts/new`,
+  backendProjectResources: (p) => `/backend/project/${p}/resources`,
+  backendProjectResourcesNew: (p) => `/backend/project/${p}/resources/new`,
+  backendProjectCollaborators: (p) => `/backend/project/${p}/collaborators`,
+  backendProjectMetadata: (p) => `/backend/project/${p}/metadata`,
+  backendProjectIngestion: (p) => `/backend/project/${p}/text/new`,
+  backendProjectIngestionEdit: (p, i, step = null) => `/backend/project/${p}/texts/new/${i}${step ? `/step/${step}` : ""}`,
+  backendProjectIngestionProcess: (p, i) => `/backend/project/${p}/texts/process/ingestion/${i}`,
+  backendResource: (r) => `/backend/resource/${r}`,
+  backendResourceMetadata: (r) => `/backend/resource/${r}/metadata`,
+  backendResourceVariants: (r) => `/backend/resource/${r}/variants`,
+  backendPeopleUsers: () => '/backend/people/users',
+  backendPeopleUser: (u) => `/backend/people/users/${u}`,
+  backendPeople: () => '/backend/people',
+  backendPeopleMakers: () => `/backend/people/makers`,
+  backendPeopleMaker: (m) => `/backend/people/makers/${m}`,
+  backendSettings: () => '/backend/settings',
+  backendSettingsTheme: () => '/backend/settings/theme',
+  backendSettingsOauth: () => '/backend/settings/oauth',
+  backendSettingsFeatures: () => '/backend/settings/features',
+  backendText: (t) => `/backend/text/${t}`,
+  backendTextCollaborators: (t) => `/backend/text/${t}/collaborators`,
+  backendTextMetadata: (t) => `/backend/text/${t}/metadata`
+};
 /* eslint-enable max-len */

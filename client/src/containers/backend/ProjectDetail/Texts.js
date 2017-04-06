@@ -9,6 +9,7 @@ import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI, textsAPI, textCategoriesAPI, requests } from 'api';
 import FormattedDate from 'components/global/FormattedDate';
+import { linkHelpers as lh } from 'routes';
 
 const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -294,7 +295,10 @@ class ProjectDetailTexts extends PureComponent {
         return (
           <li key={text.id}>
             <div>
-              <Link to={`/backend/text/${text.id}`} className="asset-thumb">
+              <Link
+                to={lh.backendText(text.id)}
+                className="asset-thumb"
+              >
                 <figure className="asset-image">
                   <Text.Placeholder/>
                 </figure>
@@ -320,7 +324,7 @@ class ProjectDetailTexts extends PureComponent {
               <div className="text-category-list-utility">
                 <Link
                   className="button"
-                  to={`/backend/text/${text.id}`}
+                  to={lh.backendText(text.id)}
                 >
                   {'Edit'}
                 </Link>
@@ -379,7 +383,7 @@ class ProjectDetailTexts extends PureComponent {
           this.props.children ?
             <Dialog.Wrapper
               closeOnOverlayClick={false}
-              closeUrl={`/backend/project/${this.props.params.id}/texts`}
+              closeUrl={lh.backendProjectTexts(this.props.params.id)}
             >
               {React.cloneElement(this.props.children, { project, refresh })}
             </Dialog.Wrapper>
@@ -388,14 +392,14 @@ class ProjectDetailTexts extends PureComponent {
 
         <div className="buttons-icon-horizontal">
           <Link
-            to={`/backend/project/${project.id}/texts/new`}
+            to={lh.backendProjectTextsNew(project.id)}
             className="button-icon-secondary"
           >
             <i className="manicon manicon-plus"></i>Add a new text
           </Link>
 
           <Link
-            to={`/backend/project/${project.id}/texts/category/new`}
+            to={lh.backendProjectCategoriesNew(project.id)}
             className="button-icon-secondary"
           >
             <i className="manicon manicon-plus"></i>Create a new category
@@ -420,7 +424,7 @@ class ProjectDetailTexts extends PureComponent {
                   <div className="text-category-list-utility">
                     <Link
                       className="button"
-                      to={`/backend/project/${project.id}/texts/category/${category.id}/edit`}
+                      to={lh.backendProjectCategory(project.id, category.id)}
                     >{'edit'}</Link>
                     {
                       this.canShowCategoryUp(category) ?

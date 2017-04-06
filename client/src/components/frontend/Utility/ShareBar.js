@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { TwitterButton, FacebookButton } from 'react-social';
 import { HigherOrder } from 'containers/global';
 

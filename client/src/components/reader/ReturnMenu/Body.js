@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Link } from 'react-router';
 import HigherOrder from 'containers/global/HigherOrder';
+import { linkHelpers as lh } from 'routes';
 
 export default class ReturnMenuBody extends PureComponent {
 
@@ -18,7 +19,9 @@ export default class ReturnMenuBody extends PureComponent {
       <nav className="reader-return-menu">
         <ul>
           <li>
-            <Link to={`/browse/project/${this.props.projectId}`}>
+            <Link
+              to={lh.frontendProject(this.props.projectId)}
+            >
               <i className="manicon manicon-arrow-round-left"></i>
               {'Project Home'}
               <span>
@@ -27,13 +30,17 @@ export default class ReturnMenuBody extends PureComponent {
             </Link>
           </li>
           <li>
-            <Link to="/browse/">
+            <Link
+              to={lh.frontend()}
+            >
               <i className="manicon manicon-books-with-glasses-simple"></i>{'Projects'}
             </Link>
           </li>
           <HigherOrder.RequireRole requiredRole="any">
             <li>
-              <Link to="/browse/following/">
+              <Link
+                to={lh.frontendFollowing()}
+              >
                 <i className="manicon manicon-books-on-shelf-simple"></i>{'Following'}
               </Link>
             </li>

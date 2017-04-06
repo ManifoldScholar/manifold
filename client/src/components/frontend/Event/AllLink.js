@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { linkHelpers as lh } from 'routes';
 
 export default class EventAllLink extends Component {
 
@@ -17,7 +18,10 @@ export default class EventAllLink extends Component {
     if (this.props.count > this.props.threshold) {
       allLink = (
         <div className="section-heading-utility-right">
-          <Link to={`/browse/project/${this.props.projectId}/events`} className="button-primary">
+          <Link
+            to={lh.frontendProjectEvents(this.props.projectId)}
+            className="button-primary"
+          >
             See all Activity
           </Link>
         </div>

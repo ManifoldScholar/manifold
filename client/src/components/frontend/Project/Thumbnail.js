@@ -4,6 +4,7 @@ import { Project as FrontEndProject } from 'components/frontend';
 import { Project as GlobalProject } from 'components/global';
 import FormattedDate from 'components/global/FormattedDate';
 import classNames from 'classnames';
+import { linkHelpers as lh } from 'routes';
 
 export default class ProjectThumbnail extends Component {
 
@@ -119,7 +120,9 @@ export default class ProjectThumbnail extends Component {
     }
 
     return (
-      <Link to={`/browse/project/${project.id}`}>
+      <Link
+        to={lh.frontendProject(project.id)}
+      >
         {/* Figure wrapper, controls maximum width of figure */}
         <div className={className} >
           <figure>
