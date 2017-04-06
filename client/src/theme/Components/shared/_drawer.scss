@@ -5,6 +5,8 @@
   bottom: 0;
   width: 100%;
   overflow: scroll;
+  // Required to overrwrite reader-mode color
+  color: $neutralOffBlack;
   background-color: $neutral05;
 
   // Scoped adjustments need to come first in order to be
