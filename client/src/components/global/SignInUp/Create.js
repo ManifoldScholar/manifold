@@ -174,7 +174,7 @@ class Create extends Component {
             </div>
           </div>
         </form>
-        <p className="login-links">
+        {/* <p className="login-links">
           {'You can also create a Manifold account using your Facebook or Twitter credentials.'}
         </p>
         <section className="login-external">
@@ -186,15 +186,15 @@ class Create extends Component {
             <i className="manicon manicon-twitter"></i>
             <span>Log in with Twitter</span>
           </button>
-        </section>
+        </section> */}
         <p className="login-links">
           <a href="#" onClick={this.props.showLogin}>
             {'Already have an account?'}
           </a>
         </p>
-        <p className="login-links">
+        {/* <p className="login-links">
           {'By creating this account, you agree to Manifold\'s terms and conditions.'}
-        </p>
+        </p> */}
 
       </div>
     );

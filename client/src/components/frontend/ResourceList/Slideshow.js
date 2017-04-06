@@ -5,6 +5,7 @@ import includes from 'lodash/includes';
 import { ResourceList } from 'components/frontend';
 import { collectionsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
+import classNames from 'classnames';
 
 const { request } = entityStoreActions;
 
@@ -206,13 +207,21 @@ export default class ResourceListSlideshow extends PureComponent {
                 {position} {'/'} {count}
               </span>
               <div>
-                <button className="slide-previous" onClick={this.handleSlidePrev}>
+                <button
+                  className="slide-previous"
+                  onClick={this.handleSlidePrev}
+                  disabled={position === 1}
+                >
                   <i className="manicon manicon-arrow-round-left"></i>
                   <span className="screen-reader-text">
                     {'Click to load previous slide'}
                   </span>
                 </button>
-                <button className="slide-next" onClick={this.handleSlideNext}>
+                <button
+                  className="slide-next"
+                  onClick={this.handleSlideNext}
+                  disabled={position === count}
+                >
                   <i className="manicon manicon-arrow-round-right"></i>
                   <span className="screen-reader-text"></span>
                 </button>

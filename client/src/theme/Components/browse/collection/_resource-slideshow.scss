@@ -64,6 +64,10 @@
       .manicon {
         font-size: 42px;
       }
+
+      &:disabled {
+        opacity: 0.4;
+      }
     }
 
     .slide-next {

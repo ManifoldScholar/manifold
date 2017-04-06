@@ -39,6 +39,7 @@
     display: inline-block;
     line-height: 14px;
 
+
     .manicon {
       font-size: 14px;
       vertical-align: middle;
@@ -46,7 +47,11 @@
   }
 
   .pagination-previous {
-    margin-right: 50px;
+    margin-right: 30px;
+
+    @include respond($break90) {
+      margin-right: 50px;
+    }
 
     .manicon {
       margin-right: 12px;
@@ -54,7 +59,11 @@
   }
 
   .pagination-next {
-    margin-left: 50px;
+    margin-left: 30px;
+
+    @include respond($break90) {
+      margin-left: 50px;
+    }
 
     .manicon {
       margin-left: 12px;

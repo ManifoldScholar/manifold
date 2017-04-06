@@ -53,12 +53,9 @@ export default class ResourceOverlayDetail extends PureComponent {
           </div>
           <Resource.Title resource={resource} />
           <div className="resource-content">
-            <p>
-              {/*
-                TODO/Bug: Description is not available in this context, but
-                should likely appear here.
-              */}
-              {attr.caption}
+            <p dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}>
+            </p>
+            <p dangerouslySetInnerHTML={{ __html: attr.descriptionFormatted }}>
             </p>
           </div>
 
