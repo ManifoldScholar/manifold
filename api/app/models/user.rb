@@ -3,6 +3,16 @@ class User < ApplicationRecord
 
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:email, :first_name, :last_name].freeze
+  ROLE_ADMIN = "admin".freeze
+  ROLE_AUTHOR = "author".freeze
+  ROLE_CLI = "cli".freeze
+  ROLE_READER = "reader".freeze
+  ROLE_KEYS = [
+    ROLE_ADMIN,
+    ROLE_AUTHOR,
+    ROLE_CLI,
+    ROLE_READER
+  ].freeze
 
   # Concerns
   include Authority::UserAbilities
@@ -37,6 +47,7 @@ class User < ApplicationRecord
                        unless: proc { |user| user.password.blank? }
   validates :nickname, :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
+  validates :role, inclusion: { in: ROLE_KEYS }, presence: true
 
   # Attachments
   manifold_has_attached_file :avatar, :image

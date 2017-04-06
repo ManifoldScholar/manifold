@@ -13,7 +13,8 @@ RSpec.describe "Users API", type: :request do
       password: "testtest123",
       email: "jon@higgins.com",
       password_confirmation: "testtest123",
-      avatar: image_params
+      avatar: image_params,
+      role: "reader"
     }
   }
   let(:valid_params) {
