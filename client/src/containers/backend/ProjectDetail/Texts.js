@@ -1,22 +1,20 @@
 import React, { PureComponent, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Form, Dialog } from 'components/backend';
 import { Text } from 'components/global';
-import { Text as globalText } from 'components/global';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import get from 'lodash/get';
-import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
 import { projectsAPI, textsAPI, textCategoriesAPI, requests } from 'api';
 import FormattedDate from 'components/global/FormattedDate';
+import lh from 'helpers/linkHandler';
+import { renderRoutes } from 'helpers/routing';
 
-const { select } = entityUtils;
-const { request, flush } = entityStoreActions;
+const { request } = entityStoreActions;
 
 class ProjectDetailTexts extends PureComponent {
 
   static displayName = "ProjectDetail.Texts";
-  static activeNavItem = "texts";
 
   static mapStateToProps(state, ownProps) {
     return {
@@ -294,7 +292,10 @@ class ProjectDetailTexts extends PureComponent {
         return (
           <li key={text.id}>
             <div>
-              <Link to={`/backend/text/${text.id}`} className="asset-thumb">
+              <Link
+                to={lh.link("backendText", text.id)}
+                className="asset-thumb"
+              >
                 <figure className="asset-image">
                   <Text.Placeholder/>
                 </figure>
@@ -320,7 +321,7 @@ class ProjectDetailTexts extends PureComponent {
               <div className="text-category-list-utility">
                 <Link
                   className="button"
-                  to={`/backend/text/${text.id}`}
+                  to={lh.link("backendText", text.id)}
                 >
                   {'Edit'}
                 </Link>
@@ -360,10 +361,25 @@ class ProjectDetailTexts extends PureComponent {
     );
   }
 
+  renderRoutes() {
+    const { refresh, project } = this.props;
+    const factory = (component) => {
+      return (
+        <Dialog.Wrapper
+          closeOnOverlayClick={false}
+          closeUrl={lh.link("backendProjectTexts", this.props.project.id)}
+        >
+          {component}
+        </Dialog.Wrapper>
+      );
+    };
+    const childRoutes = renderRoutes(this.props.route.routes, { refresh, project }, factory);
+    return childRoutes;
+  }
+
   render() {
     const categories = this.categories();
-    const project = this.props.project;
-    const refresh = this.props.refresh;
+    const { match, project } = this.props;
     if (!project) return null;
 
     return (
@@ -375,27 +391,18 @@ class ProjectDetailTexts extends PureComponent {
           : null
         }
 
-        {
-          this.props.children ?
-            <Dialog.Wrapper
-              closeOnOverlayClick={false}
-              closeUrl={`/backend/project/${this.props.params.id}/texts`}
-            >
-              {React.cloneElement(this.props.children, { project, refresh })}
-            </Dialog.Wrapper>
-          : null
-        }
+        {this.renderRoutes()}
 
         <div className="buttons-icon-horizontal">
           <Link
-            to={`/backend/project/${project.id}/texts/new`}
+            to={lh.link("backendProjectTextsNew", project.id)}
             className="button-icon-secondary"
           >
             <i className="manicon manicon-plus"></i>Add a new text
           </Link>
 
           <Link
-            to={`/backend/project/${project.id}/texts/category/new`}
+            to={lh.link("backendProjectCategoriesNew", project.id)}
             className="button-icon-secondary"
           >
             <i className="manicon manicon-plus"></i>Create a new category
@@ -414,13 +421,13 @@ class ProjectDetailTexts extends PureComponent {
               <div key={category.id} className="text-category">
                 <header>
                   <h4 className="category-title">
-                    <span>Category:</span>
+                    <span>Category: </span>
                     {category.attributes.title}
                   </h4>
                   <div className="text-category-list-utility">
                     <Link
                       className="button"
-                      to={`/backend/project/${project.id}/texts/category/${category.id}/edit`}
+                      to={lh.link("backendProjectCategory", project.id, category.id)}
                     >{'edit'}</Link>
                     {
                       this.canShowCategoryUp(category) ?
@@ -463,7 +470,4 @@ class ProjectDetailTexts extends PureComponent {
   }
 }
 
-export default connect(
-  ProjectDetailTexts.mapStateToProps
-)(ProjectDetailTexts);
-
+export default connectAndFetch(ProjectDetailTexts);

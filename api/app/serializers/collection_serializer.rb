@@ -4,7 +4,7 @@ class CollectionSerializer < ActiveModel::Serializer
 
   attributes :id, :title, :created_at, :description, :project_id,
              :resource_kinds, :resource_tags, :thumbnail_styles,
-             :collection_resources_count
+             :collection_resources_count, :slug
 
   has_many :resources, serializer: ResourcePartialSerializer
   belongs_to :project

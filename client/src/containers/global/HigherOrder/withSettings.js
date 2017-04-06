@@ -1,7 +1,7 @@
 import React from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { connect } from 'react-redux';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { requests } from 'api';
 
 function getDisplayName(WrappedComponent) {
@@ -14,13 +14,13 @@ export default function withSettings(WrappedComponent) {
 
   class WithSettings extends React.PureComponent {
 
-    static displayName: displayName;
+    static displayName = displayName;
 
-    static WrappedComponent: WrappedComponent
+    static WrappedComponent = WrappedComponent;
 
     static mapStateToProps(state) {
       return {
-        settings: entityUtils.select(requests.settings, state.entityStore)
+        settings: select(requests.settings, state.entityStore)
       };
     }
 

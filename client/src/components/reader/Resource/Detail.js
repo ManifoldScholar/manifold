@@ -1,8 +1,9 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { Link, browserHistory } from 'react-router-dom';
 import { ResourceList } from 'components/frontend';
 import { Utility, Resource } from 'components/frontend';
 import Icon from 'components/frontend/Resource/Icon';
+import lh from 'helpers/linkHandler';
 
 export default class ResourceOverlayDetail extends PureComponent {
 
@@ -33,9 +34,7 @@ export default class ResourceOverlayDetail extends PureComponent {
   buildRedirectUrl(resource) {
     if (!resource) return null;
     const pId = resource.relationships.project.id;
-    return (
-      `/browse/project/${pId}/resource/${resource.id}`
-    );
+    return lh.link("frontendProjectResource", pId, resource.id);
   }
 
   render() {

@@ -37,6 +37,13 @@ module Api
         @resource = load_and_authorize_zresource
         @resource.destroy
       end
+
+      protected
+
+      def scope_for_zresources
+        Resource.friendly
+      end
+
     end
   end
 end

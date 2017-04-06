@@ -1,20 +1,18 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form, Event, List, Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select, meta } from 'utils/entityUtils';
 import { projectsAPI, eventsAPI, requests } from 'api';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 import config from '../../../config';
 
-const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
 const perPage = 6;
 
 class ProjectDetailEvents extends PureComponent {
 
   static displayName = "ProjectDetail.Events";
-  static activeNavItem = "events";
 
   static mapStateToProps(state) {
     return {
@@ -59,7 +57,7 @@ class ProjectDetailEvents extends PureComponent {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
-      projectsAPI.events(this.props.params.id, this.state.filter, pagination),
+      projectsAPI.events(this.props.project.id, this.state.filter, pagination),
       requests.beEvents
     );
     this.props.dispatch(action);

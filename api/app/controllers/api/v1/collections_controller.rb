@@ -45,9 +45,13 @@ module Api
 
       private
 
+      def scope_for_collections
+        Collection.friendly
+      end
+
       def set_collection
         @collection = Collection.includes(resources: :collection_resources)
-                                .find(params[:id])
+                                .friendly.find(params[:id])
       end
 
       # Only allow a trusted parameter "white list" through.

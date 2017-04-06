@@ -92,8 +92,8 @@ exports[`CollectionResourcesDetail Component renders correctly 1`] = `
                 </button>
                 <a
                   className="detail-link"
-                  onClick={[Function]}
-                  style={Object {}}>
+                  href="/project/1/collection/2/collection_resource/4"
+                  onClick={[Function]}>
                   Details
                 </a>
               </div>
@@ -142,8 +142,8 @@ exports[`CollectionResourcesDetail Component renders correctly 1`] = `
       className="resource-totals"
       data-id="total-container">
       <a
-        onClick={[Function]}
-        style={Object {}}>
+        href="/project/1/resources"
+        onClick={[Function]}>
         View All Project Resources 
         <i
           className="manicon manicon-arrow-right" />
@@ -308,7 +308,7 @@ exports[`CollectionResourcesDetail Component renders correctly 1`] = `
                   className="resource-date" />
                 <div
                   className="arrow-link"
-                  to="/browse/project/undefined/collection/2/collection_resource/null">
+                  to="/project/1/collection/2/collection_resource/4">
                   <i
                     className="manicon manicon-arrow-right" />
                 </div>

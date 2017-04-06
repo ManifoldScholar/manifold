@@ -1,22 +1,17 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form, List } from 'components/backend';
 import { Resource } from 'components/reader';
-import { Form as FormContainer } from 'containers/backend';
-import update from 'immutability-helper';
-import set from 'lodash/set';
 import { projectsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select, meta } from 'utils/entityUtils';
 import { connect } from 'react-redux';
 
-const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
 const perPage = 10;
 
 class ResourcePickerContainer extends PureComponent {
 
   static displayName = "ProjectDetail.Resources";
-  static activeNavItem = "resources";
 
   static mapStateToProps(state, ownProps) {
     const newState = {

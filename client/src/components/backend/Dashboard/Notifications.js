@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default class Notifications extends Component {
 
@@ -30,9 +30,9 @@ export default class Notifications extends Component {
             <button className="manicon manicon-x"></button>
           </li>
         </ul>
-        <Link to="#" className="button-bare-primary">
+        <a href="#" className="button-bare-primary">
           {'Notification History'}
-        </Link>
+        </a>
       </nav>
     );
   }

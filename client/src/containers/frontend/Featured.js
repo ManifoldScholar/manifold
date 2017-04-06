@@ -1,15 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { ProjectList, Layout } from 'components/frontend';
 import { commonActions } from 'actions/helpers';
 import { bindActionCreators } from 'redux';
 import { uiFilterActions, entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { projectsAPI, subjectsAPI, requests } from 'api';
 import get from 'lodash/get';
 
 
-const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;
 
@@ -100,8 +99,4 @@ class FeaturedContainer extends Component {
   }
 }
 
-const Featured = connect(
-  FeaturedContainer.mapStateToProps
-)(FeaturedContainer);
-
-export default Featured;
+export default connectAndFetch(FeaturedContainer);

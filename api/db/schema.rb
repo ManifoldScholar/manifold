@@ -72,7 +72,9 @@ ActiveRecord::Schema.define(version: 20170503180816) do
     t.string   "fingerprint"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.string   "slug"
     t.integer  "collection_resources_count", default: 0
+    t.index ["slug"], name: "index_collections_on_slug", unique: true, using: :btree
   end
 
   create_table "comments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -123,6 +125,18 @@ ActiveRecord::Schema.define(version: 20170503180816) do
     t.string   "flaggable_type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
   create_table "identities", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -234,6 +248,8 @@ ActiveRecord::Schema.define(version: 20170503180816) do
     t.uuid     "creator_id"
     t.jsonb    "tweet_fetch_config",      default: {}
     t.date     "publication_date"
+    t.string   "slug"
+    t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
 
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -298,7 +314,8 @@ ActiveRecord::Schema.define(version: 20170503180816) do
     t.string   "iframe_dimensions"
     t.text     "embed_code"
     t.string   "sub_kind"
-    t.integer  "comments_count",                  default: 0
+    t.string   "slug"
+    t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
 
   create_table "settings", force: :cascade do |t|
@@ -407,7 +424,9 @@ ActiveRecord::Schema.define(version: 20170503180816) do
     t.integer  "position"
     t.string   "spine",                 default: [],              array: true
     t.jsonb    "metadata",              default: {}
+    t.string   "slug"
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
+    t.index ["slug"], name: "index_texts_on_slug", unique: true, using: :btree
   end
 
   create_table "thumbnail_fetch_attempts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

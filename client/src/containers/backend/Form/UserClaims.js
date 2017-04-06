@@ -3,9 +3,6 @@ import { Form, Text } from 'components/backend';
 import { makersAPI, usersAPI } from 'api';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
-import get from 'lodash/get';
-import capitalize from 'lodash/capitalize';
 
 class FormUserClaims extends Component {
 

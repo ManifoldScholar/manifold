@@ -1,13 +1,15 @@
 import React, { Component, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { passwordsAPI, requests } from 'api';
 import { entityStoreActions, notificationActions } from 'actions';
 import get from 'lodash/get';
 import pull from 'lodash/pull';
-import { connect } from 'react-redux';
 import { Form } from 'components/backend';
 const { request, flush } = entityStoreActions;
 
-class PasswordForgot extends Component {
+class PasswordForgotContainer extends Component {
+
+  static displayName = "PasswordForgotContainer";
 
   static propTypes = {
     showLogin: PropTypes.func.isRequired,
@@ -143,7 +145,4 @@ class PasswordForgot extends Component {
   }
 }
 
-const ConnectedPasswordForgot = connect(
-  PasswordForgot.mapStateToProps
-)(PasswordForgot);
-export default ConnectedPasswordForgot;
+export default connectAndFetch(PasswordForgotContainer);

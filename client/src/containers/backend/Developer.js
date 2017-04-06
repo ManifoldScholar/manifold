@@ -1,12 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { websocketActions } from 'actions';
 import get from 'lodash/get';
 
 class DeveloperContainer extends PureComponent {
 
   static mapStateToProps(state) {
-    console.log(state, 'state');
     return {
       messages: get(state.websocket.channels, "IngestionChannel.messages")
     };
@@ -74,8 +73,4 @@ class DeveloperContainer extends PureComponent {
 
 }
 
-const Developer = connect(
-  DeveloperContainer.mapStateToProps
-)(DeveloperContainer);
-
-export default Developer;
+export default connectAndFetch(DeveloperContainer);

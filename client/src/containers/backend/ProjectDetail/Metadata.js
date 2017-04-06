@@ -8,7 +8,6 @@ import { projectsAPI } from 'api';
 export default class ProjectDetailMetadata extends PureComponent {
 
   static displayName = "ProjectDetail.Metadata";
-  static activeNavItem = "metadata";
 
   static propTypes = {
     route: PropTypes.object,
@@ -22,13 +21,9 @@ export default class ProjectDetailMetadata extends PureComponent {
   }
 
   render() {
-
-
-    // See https://github.com/ReactTraining/react-router/issues/3753
     return (
       <section>
         <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.project}
           name="backend-project-general"
           update={projectsAPI.update}
@@ -42,7 +37,6 @@ export default class ProjectDetailMetadata extends PureComponent {
             placeholder="Enter ISBN-10 Number"
           />
           <Form.TextInput
-            focusOnMount
             label="ISBN-13"
             name="attributes[metadata][isbnThirteen]"
             placeholder="Enter ISBN-13 Number"

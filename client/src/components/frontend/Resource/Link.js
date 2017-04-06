@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Utility, Resource } from 'components/frontend';
 
 export default class ResourceDetail extends Component {
@@ -20,24 +20,24 @@ export default class ResourceDetail extends Component {
     switch (attr.kind.toLowerCase()) {
       case "link":
         button = (
-            <Link
-              to={attr.externalUrl}
+            <a
+              href={attr.externalUrl}
               className={this.props.buttonClass}
               target="_blank"
             >
               Visit Page <i className="manicon manicon-arrow-right"></i>
-            </Link>
+            </a>
         );
         break;
       default:
         button = (attr.downloadable ?
-            <Link
-              to={attr.attachmentStyles.original}
+            <a
+              href={attr.attachmentStyles.original}
               className={this.props.buttonClass}
               target="_blank"
             >
               Download <i className="manicon manicon-arrow-down"></i>
-            </Link>
+            </a>
             : null
         );
         break;

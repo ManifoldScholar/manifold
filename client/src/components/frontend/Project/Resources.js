@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { ResourceList } from 'components/frontend';
+import lh from 'helpers/linkHandler';
 
 export default class ProjectResources extends Component {
 
@@ -25,7 +26,7 @@ export default class ProjectResources extends Component {
         <div className="container">
           <header className="section-heading">
             <h2 className="title">
-              <i className="manicon manicon-cube-shine"></i>
+              <i className="manicon manicon-cube-shine" />
               All Project Resources
             </h2>
           </header>

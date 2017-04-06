@@ -8,7 +8,6 @@ import { projectsAPI } from 'api';
 export default class ProjectPanelGeneral extends PureComponent {
 
   static displayName = "ProjectDetail.General";
-  static activeNavItem = "general";
 
   static propTypes = {
     route: PropTypes.object,
@@ -22,11 +21,9 @@ export default class ProjectPanelGeneral extends PureComponent {
   }
 
   render() {
-    // See https://github.com/ReactTraining/react-router/issues/3753
     return (
       <section>
         <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.project}
           name="backend-project-update"
           update={projectsAPI.update}

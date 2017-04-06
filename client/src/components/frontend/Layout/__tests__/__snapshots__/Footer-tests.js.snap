@@ -7,8 +7,8 @@ exports[`Footer component renders correctly 1`] = `
       className="rel">
       <a
         className="logo"
-        onClick={[Function]}
-        style={Object {}}>
+        href="/"
+        onClick={[Function]}>
         <i
           className="manicon manicon-manifold-logo" />
         Manifold
@@ -28,8 +28,8 @@ exports[`Footer component renders correctly 1`] = `
             </li>
             <li>
               <a
-                onClick={[Function]}
-                style={Object {}}>
+                href="/"
+                onClick={[Function]}>
                 Projects
               </a>
             </li>

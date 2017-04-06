@@ -1,16 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { browserHistory } from 'react-router';
+import { Link, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import FormattedDate from 'components/global/FormattedDate';
 import { Resource } from 'components/frontend';
 import { find } from 'lodash';
+import lh from 'helpers/linkHandler';
 
-export default class ResourceCard extends Component {
+class ResourceCard extends Component {
 
   static displayName = "Resource.Card";
 
   static propTypes = {
+    history: PropTypes.object.isRequired,
     resource: PropTypes.object,
     context: PropTypes.object
   };
@@ -63,13 +64,13 @@ export default class ResourceCard extends Component {
       const pid = context.attributes.projectId;
       const cid = context.id;
       const crid = this.getCollectionResourceId(this.props.resource);
-      return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+      return lh.link("frontendProjectCollectionCollectionResource", pid, cid, crid);
     }
     if (context.type === "projects") {
       const resource = this.resource();
       const pid = context.id;
       const rid = resource.id;
-      return `/browse/project/${pid}/resource/${rid}`;
+      return lh.link("frontendProjectResource", pid, rid);
     }
   }
 
@@ -103,7 +104,7 @@ export default class ResourceCard extends Component {
   }
 
   handleInfoClick() {
-    browserHistory.push(this.detailUrl());
+    this.props.history.push(this.detailUrl());
   }
 
   handleTagHover(event) {
@@ -121,7 +122,6 @@ export default class ResourceCard extends Component {
     // Will need to be bound to the component in the constructor to use any component
     // state or props
     event.stopPropagation();
-    browserHistory.push('/sample');
   }
 
   resource() {
@@ -266,3 +266,5 @@ export default class ResourceCard extends Component {
     );
   }
 }
+
+export default withRouter(ResourceCard);

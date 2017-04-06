@@ -7,9 +7,8 @@ import forEach from 'lodash/forEach';
 import findIndex from 'lodash/findIndex';
 import intersection from 'lodash/intersection';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { constantizeMeta } from 'utils/entityUtils';
 import { requests } from 'api';
-const { constantizeMeta } = entityUtils;
 
 export const initialState = {
   responses: {},

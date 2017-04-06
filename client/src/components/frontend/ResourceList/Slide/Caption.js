@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { VelocityComponent } from 'velocity-react';
 import get from 'lodash/get';
+import lh from 'helpers/linkHandler';
 
 export default class ResourceSlideCaption extends Component {
 
@@ -75,11 +76,11 @@ export default class ResourceSlideCaption extends Component {
       const cr = crs.find((cmpr) => cmpr.attributes.collectionId === cid);
       if (cr) {
         const crid = cr.id;
-        return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+        return lh.link("frontendProjectCollectionCollectionResource", pid, cid, crid);
       }
     }
     const rid = resource.id;
-    return `browse/project/${pid}/resource/${rid}`;
+    return lh.link("frontendProjectResource", pid, rid);
   }
 
   render() {

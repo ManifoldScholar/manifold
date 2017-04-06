@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default class Breadcrumb extends PureComponent {
 

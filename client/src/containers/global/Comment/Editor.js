@@ -1,13 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { requests } from 'api';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select, meta, singularEntityName } from 'utils/entityUtils';
 import { commentsAPI } from 'api';
-const { request, flush } = entityStoreActions;
-const { select, meta, singularEntityName } = entityUtils;
+const { request } = entityStoreActions;
 import { Form as GlobalForm } from 'components/global';
 
 class CommentEditor extends PureComponent {

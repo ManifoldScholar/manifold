@@ -9,8 +9,8 @@ exports[`ButtonNavigation component renders correctly 1`] = `
       className="button-nav">
       <a
         className="button-icon-primary"
-        onClick={[Function]}
-        style={Object {}}>
+        href="/"
+        onClick={[Function]}>
         <span>
           <i
             className="manicon manicon-books-on-shelf" />
@@ -19,8 +19,8 @@ exports[`ButtonNavigation component renders correctly 1`] = `
       </a>
       <a
         className="button-icon-primary"
-        onClick={[Function]}
-        style={Object {}}>
+        href="/following"
+        onClick={[Function]}>
         <span>
           <i
             className="manicon manicon-books-with-glasses" />
@@ -41,8 +41,8 @@ exports[`ButtonNavigation component respects the grayBg prop 1`] = `
       className="button-nav">
       <a
         className="button-icon-primary"
-        onClick={[Function]}
-        style={Object {}}>
+        href="/"
+        onClick={[Function]}>
         <span>
           <i
             className="manicon manicon-books-on-shelf" />
@@ -51,8 +51,8 @@ exports[`ButtonNavigation component respects the grayBg prop 1`] = `
       </a>
       <a
         className="button-icon-primary"
-        onClick={[Function]}
-        style={Object {}}>
+        href="/following"
+        onClick={[Function]}>
         <span>
           <i
             className="manicon manicon-books-with-glasses" />
@@ -73,8 +73,8 @@ exports[`ButtonNavigation component respects the showBrowse prop 1`] = `
       className="button-nav">
       <a
         className="button-icon-primary"
-        onClick={[Function]}
-        style={Object {}}>
+        href="/following"
+        onClick={[Function]}>
         <span>
           <i
             className="manicon manicon-books-with-glasses" />
@@ -95,8 +95,8 @@ exports[`ButtonNavigation component respects the showFollowing prop 1`] = `
       className="button-nav">
       <a
         className="button-icon-primary"
-        onClick={[Function]}
-        style={Object {}}>
+        href="/"
+        onClick={[Function]}>
         <span>
           <i
             className="manicon manicon-books-on-shelf" />

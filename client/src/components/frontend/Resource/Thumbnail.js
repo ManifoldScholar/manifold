@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import Icon from './Icon';

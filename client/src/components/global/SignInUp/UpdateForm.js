@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { meAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { Avatar, Form } from 'components/global';
-import { connect } from 'react-redux';
 import get from 'lodash/get';
 import hasIn from 'lodash/hasIn';
 import Dropzone from 'react-dropzone';
 
 const { request } = entityStoreActions;
 
-class UpdateForm extends Component {
+class UpdateFormContainer extends Component {
 
   static mapStateToProps(state) {
     return {
@@ -219,7 +219,4 @@ class UpdateForm extends Component {
   }
 }
 
-const ConnectedUpdateForm = connect(
-  UpdateForm.mapStateToProps
-)(UpdateForm);
-export default ConnectedUpdateForm;
+export default connectAndFetch(UpdateFormContainer);

@@ -2,10 +2,10 @@
 class TextPartialSerializer < ActiveModel::Serializer
   meta(partial: true)
 
-  attributes :id, :title, :creator_names, :unique_identifier, :created_at,
+  attributes :title, :creator_names, :unique_identifier, :created_at,
              :start_text_section_id, :published, :annotations_count, :highlights_count,
              :bookmarks_count, :age, :position, :publication_date, :spine, :rights,
-             :sections_map, :cover_styles
+             :sections_map, :cover_styles, :slug
 
   belongs_to :project
   belongs_to :category

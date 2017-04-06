@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { ProjectList, Layout } from 'components/frontend';
+import connectAndFetch from 'utils/connectAndFetch';
 import { commonActions } from 'actions/helpers';
 import { bindActionCreators } from 'redux';
 import { uiFilterActions, entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { projectsAPI, requests } from 'api';
 import get from 'lodash/get';
+import lh from 'helpers/linkHandler';
 
-const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
-const { request, flush } = entityStoreActions;
+const { request } = entityStoreActions;
 const featuredLimit = 4;
 
 class HomeContainer extends Component {
@@ -69,7 +69,10 @@ class HomeContainer extends Component {
     if (!this.props.featuredProjects || this.props.featuredProjects.length <= limit) return null;
     return (
       <div className="button-nav" style={{ marginTop: '26px' }}>
-        <Link to={'/browse/featured'} className="button-icon-primary">
+        <Link
+          to={lh.link("frontendFeatured")}
+          className="button-icon-primary"
+        >
           <span>
             <i className="manicon manicon-lamp"></i>See all featured
           </span>
@@ -152,8 +155,4 @@ class HomeContainer extends Component {
   }
 }
 
-const Home = connect(
-  HomeContainer.mapStateToProps
-)(HomeContainer);
-
-export default Home;
+export default connectAndFetch(HomeContainer);

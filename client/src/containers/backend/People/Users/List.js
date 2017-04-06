@@ -1,21 +1,22 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Drawer, UserList } from 'components/backend';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select, meta } from 'utils/entityUtils';
 import { usersAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import { User, List } from 'components/backend';
+import lh from 'helpers/linkHandler';
+import { Route } from 'react-router-dom';
+import { renderRoutes } from 'helpers/routing';
 
-const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
 const perPage = 10;
 
 class UsersListContainer extends PureComponent {
 
   static displayName = "Users.List";
-  static activeNavItem = "users";
 
   static mapStateToProps(state) {
     return {
@@ -82,10 +83,16 @@ class UsersListContainer extends PureComponent {
     };
   }
 
+  isDrawerOpen() {
+    return !!this.props.match.params.id;
+  }
+
   render() {
+    const { match } = this.props;
+
     if (!this.props.users) return null;
-    const { children, users, usersMeta, currentUserId } = this.props;
-    const active = this.props.params.id;
+    const { users, usersMeta, currentUserId } = this.props;
+    const active = match.params.id;
 
     return (
       <div>
@@ -95,10 +102,10 @@ class UsersListContainer extends PureComponent {
           </h3>
         </header>
         <Drawer.Wrapper
-          open={React.Children.count(children) > 0}
-          closeUrl="/backend/people/users"
+          open={this.isDrawerOpen()}
+          closeUrl={lh.link("backendPeopleUsers")}
         >
-          { children }
+          {renderRoutes(this.props.route.routes)}
         </Drawer.Wrapper>
         { users ?
           <List.Searchable
@@ -120,7 +127,5 @@ class UsersListContainer extends PureComponent {
 
 }
 
-export default connect(
-  UsersListContainer.mapStateToProps
-)(UsersListContainer);
+export default connectAndFetch(UsersListContainer);
 

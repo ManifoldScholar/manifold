@@ -8,7 +8,7 @@ import path from 'path';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import cookie from 'cookie';
-import { match } from 'react-router';
+import { match } from 'react-router-dom';
 import config from './config';
 import proxy from 'http-proxy-middleware';
 import createStore from './store/createStore';

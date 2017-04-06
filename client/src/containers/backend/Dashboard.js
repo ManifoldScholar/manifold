@@ -1,13 +1,13 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { entityStoreActions } from 'actions';
 import { List, Project, Dashboard as DashboardComponents } from 'components/backend';
-import { Link } from 'react-router';
-import { entityUtils } from 'utils';
+import { Link } from 'react-router-dom';
+import { select, meta } from 'utils/entityUtils';
 import { projectsAPI, statisticsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
+import lh from 'helpers/linkHandler';
 
-const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
 
 const perPage = 5;
@@ -82,7 +82,7 @@ class DashboardContainer extends PureComponent {
                 { this.props.projects && this.props.projectsMeta ?
                   <List.Searchable
                     newButtonVisible
-                    newButtonPath="/backend/project/new"
+                    newButtonPath={lh.link("backendProjectsNew")}
                     newButtonText="Add a New Project"
                     entities={this.props.projects}
                     singularUnit="project"
@@ -126,8 +126,4 @@ class DashboardContainer extends PureComponent {
   }
 }
 
-const Dashboard = connect(
-  DashboardContainer.mapStateToProps
-)(DashboardContainer);
-
-export default Dashboard;
+export default connectAndFetch(DashboardContainer);

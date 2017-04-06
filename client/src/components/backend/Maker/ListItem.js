@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+import lh from 'helpers/linkHandler';
 
 export default class MakerListItem extends PureComponent {
 
@@ -22,7 +23,7 @@ export default class MakerListItem extends PureComponent {
             <i className="manicon manicon-check"></i>
           </div>
         </div>
-        <Link to={`/backend/people/makers/${maker.id}`}>
+        <Link to={lh.link("backendPeopleMaker", maker.id)}>
           <header>
             <figure className="avatar">
               {attr.avatarStyles.smallSquare ?
@@ -48,5 +49,4 @@ export default class MakerListItem extends PureComponent {
       </li>
     );
   }
-
 }

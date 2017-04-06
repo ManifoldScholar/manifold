@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { wrapWithRouter } from 'test/helpers/routing';
 import { Section } from 'components/reader'
 
 describe("NextSection component", () => {
@@ -15,14 +16,14 @@ describe("NextSection component", () => {
   };
 
   it('renders correctly', () => {
-    const component = renderer.create(
+    const component = renderer.create(wrapWithRouter(
       <Section.NextSection
         sectionId={sectionId}
         sectionsMap={sectionsMap}
         textId={textId}
         typography={typography}
       />
-    );
+    ));
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

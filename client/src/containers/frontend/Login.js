@@ -1,18 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { LoginForm } from 'containers/global';
-// import { authActions } from 'actions';
 import { currentUserActions } from 'actions';
 
-// const { startLogout } = authActions;
+class LoginContainer extends Component {
 
-class Login extends Component {
+  static mapStateToProps(state) {
+    return {
+      authentication: state.authentication
+    };
+  }
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     authentication: React.PropTypes.shape({
       authToken: React.PropTypes.string,
-      user: React.PropTypes.object
+      currentUser: React.PropTypes.object,
+      authenticated: React.PropTypes.bool
     })
   };
 
@@ -39,7 +43,7 @@ class Login extends Component {
   logoutUI = () => {
     const loginNotice = (
       <p className="login-notice">
-        {`You are logged in as ${this.props.authentication.user.email}`}
+        {`You are logged in as ${this.props.authentication.currentUser.email}`}
       </p>
     );
     return (
@@ -51,7 +55,7 @@ class Login extends Component {
           </h4>
         </header>
         <form method="post" onSubmit={this.handleLogout}>
-          { this.props.authentication.user ? loginNotice : ''}
+          { this.props.authentication.currentUser ? loginNotice : ''}
           <input type="submit" value="Log Out" className="button-secondary" />
         </form>
       </div>
@@ -59,20 +63,15 @@ class Login extends Component {
   };
 
   render() {
+
+    const { authenticated } = this.props.authentication;
+    console.log(authenticated, 'auth');
     return (
       <section className="login-page">
-        {this.props.authentication.authToken === null ? this.loginUI() : this.logoutUI()}
+        {authenticated ? this.logoutUI() : this.loginUI()}
       </section>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    authentication: state.authentication
-  };
-}
-
-export default connect(
-  mapStateToProps
-)(Login);
+export default connectAndFetch(LoginContainer);

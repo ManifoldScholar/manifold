@@ -2,9 +2,12 @@ import React, { PureComponent, PropTypes } from 'react';
 import { Navigation } from 'components/backend';
 import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
 import { usersAPI } from 'api';
 import get from 'lodash/get';
+import lh from 'helpers/linkHandler';
+import { Route, Switch } from 'react-router-dom';
+import { People } from 'containers/backend';
+import { renderRoutes } from 'helpers/routing';
 
 class UsersWrapperContainer extends PureComponent {
 
@@ -21,17 +24,12 @@ class UsersWrapperContainer extends PureComponent {
 
   secondaryNavigationLinks() {
     return [
-      { path: "/backend/people", label: "Users", key: "users" },
-      { path: "/backend/people/makers", label: "Makers", key: "makers" }
+      { path: lh.link("backendPeople"), label: "Users", key: "users" },
+      { path: lh.link("backendPeopleMakers"), label: "Makers", key: "makers" }
     ];
   }
 
-  activeChild() {
-    return get(this.props, 'children.type.activeNavItem');
-  }
-
   render() {
-
     return (
       <div>
         <section className="backend-panel">
@@ -39,7 +37,6 @@ class UsersWrapperContainer extends PureComponent {
             <div className="wrapper">
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks()}
-                active={this.activeChild()}
               />
             </div>
           </aside>
@@ -47,11 +44,10 @@ class UsersWrapperContainer extends PureComponent {
             <aside className="aside">
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks()}
-                active={this.activeChild()}
               />
             </aside>
             <div className="panel">
-              {this.props.children}
+              {renderRoutes(this.props.route.routes)}
             </div>
           </div>
         </section>

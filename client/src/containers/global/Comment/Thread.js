@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import { requests } from 'api';
 import { entityStoreActions, uiVisibilityActions } from 'actions';
 import { bindActionCreators } from 'redux';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { Comment } from 'components/global';
 import { Utility } from 'components/frontend';
 import { commentsAPI } from 'api';
-import Annotation from 'components/reader/Annotation';
-const { request, flush } = entityStoreActions;
-const { select, meta } = entityUtils;
+const { request } = entityStoreActions;
 
 class CommentThread extends PureComponent {
 

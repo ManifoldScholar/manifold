@@ -1,13 +1,14 @@
 import React, { PureComponent, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Dialog, Project, Navigation } from 'components/backend';
-import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { projectsAPI, requests } from 'api';
 import get from 'lodash/get';
-import { browserHistory } from 'react-router';
+import { ProjectDetail } from 'containers/backend';
+import { renderRoutes } from 'helpers/routing';
+import lh from 'helpers/linkHandler';
 
-const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class ProjectDetailWrapperContainer extends PureComponent {
@@ -41,17 +42,13 @@ class ProjectDetailWrapperContainer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(entityStoreActions.flush(requests.feProject));
+    this.props.dispatch(flush(requests.feProject));
   }
 
   fetchProject() {
-    const call = projectsAPI.show(this.props.params.id);
+    const call = projectsAPI.show(this.props.match.params.id);
     const projectRequest = request(call, requests.feProject);
     this.props.dispatch(projectRequest);
-  }
-
-  activeChild() {
-    return get(this.props, 'children.type.activeNavItem');
   }
 
   closeDialog() {
@@ -61,32 +58,32 @@ class ProjectDetailWrapperContainer extends PureComponent {
   secondaryNavigationLinks(project) {
     return [
       {
-        path: `/backend/project/${project.id}/`,
+        path: lh.link("backendProject", project.id),
         label: "General",
         key: "general"
       },
       {
-        path: `/backend/project/${project.id}/collaborators`,
+        path: lh.link("backendProjectCollaborators", project.id),
         label: "People",
         key: "collaborators"
       },
       {
-        path: `/backend/project/${project.id}/texts`,
+        path: lh.link("backendProjectTexts", project.id),
         label: "Texts",
         key: "texts"
       },
       {
-        path: `/backend/project/${project.id}/resources`,
+        path: lh.link("backendProjectResources", project.id),
         label: "Resources",
         key: "resources"
       },
       {
-        path: `/backend/project/${project.id}/events`,
+        path: lh.link("backendProjectEvents", project.id),
         label: "Activity",
         key: "events"
       },
       {
-        path: `/backend/project/${project.id}/metadata`,
+        path: lh.link("backendProjectMetadata", project.id),
         label: "Metadata",
         key: "metadata"
       }
@@ -95,7 +92,7 @@ class ProjectDetailWrapperContainer extends PureComponent {
 
   doPreview(event) {
     event.preventDefault();
-    const win = window.open(`/browse/project/${this.props.project.id}`, '_blank');
+    const win = window.open(lh.link("frontendProject", this.props.project.id), '_blank');
     win.focus();
   }
 
@@ -109,7 +106,7 @@ class ProjectDetailWrapperContainer extends PureComponent {
   }
 
   redirectToDashboard() {
-    browserHistory.push("/backend");
+    this.props.history.push(lh.link("backend"));
   }
 
   handleProjectDestroy(event) {
@@ -144,6 +141,13 @@ class ProjectDetailWrapperContainer extends PureComponent {
     );
   }
 
+  renderRoutes() {
+    const { project } = this.props;
+    const refresh = this.fetchProject;
+    const childRoutes = renderRoutes(this.props.route.routes, { refresh, project });
+    return childRoutes;
+  }
+
   render() {
     if (!this.props.project) return null;
     const { project } = this.props;
@@ -158,7 +162,7 @@ class ProjectDetailWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="project"
           breadcrumb={[
-            { path: "/backend", label: "ALL PROJECTS" }
+            { path: lh.link("backend"), label: "ALL PROJECTS" }
           ]}
           title={project.attributes.title}
           subtitle={project.attributes.subtitle}
@@ -169,7 +173,6 @@ class ProjectDetailWrapperContainer extends PureComponent {
             <div className="wrapper">
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(project)}
-                active={this.activeChild()}
               />
             </div>
           </aside>
@@ -177,16 +180,10 @@ class ProjectDetailWrapperContainer extends PureComponent {
             <aside className="aside">
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(project)}
-                active={this.activeChild()}
               />
             </aside>
             <div className="panel">
-              {
-                React.cloneElement(
-                  this.props.children,
-                  { project, refresh: this.fetchProject }
-                )
-              }
+              {this.renderRoutes()}
             </div>
           </div>
         </section>
@@ -195,7 +192,4 @@ class ProjectDetailWrapperContainer extends PureComponent {
   }
 }
 
-export default connect(
-  ProjectDetailWrapperContainer.mapStateToProps
-)(ProjectDetailWrapperContainer);
-
+export default connectAndFetch(ProjectDetailWrapperContainer);

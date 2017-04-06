@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { ResourceCollection } from 'components/frontend';
 
 export default class ResourceCollectionGrid extends Component {

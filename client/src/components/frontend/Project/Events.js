@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Utility, Event, Layout } from 'components/frontend';
+import lh from 'helpers/linkHandler';
 
 export default class ProjectEvents extends Component {
 
@@ -19,7 +20,7 @@ export default class ProjectEvents extends Component {
       <div>
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
-            link={`/browse/project/${project.id}`}
+            link={lh.link("frontendProject", project.id)}
             title={project.attributes.title}
           />
         </section>

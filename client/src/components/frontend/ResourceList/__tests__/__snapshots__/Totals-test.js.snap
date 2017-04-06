@@ -12,8 +12,8 @@ exports[`ResourceTotals Component renders correctly 1`] = `
      total resources
   </div>
   <a
-    onClick={[Function]}
-    style={Object {}}>
+    href="/project/1/resources"
+    onClick={[Function]}>
     View All Project Resources 
     <i
       className="manicon manicon-arrow-right" />

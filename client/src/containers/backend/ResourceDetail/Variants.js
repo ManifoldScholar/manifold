@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 class ResourceDetailVariantsContainer extends PureComponent {
 
   static displayName = "ResourceDetail.Variants";
-  static activeNavItem = "variants";
 
   static propTypes = {
   };
@@ -22,7 +21,6 @@ class ResourceDetailVariantsContainer extends PureComponent {
     return (
       <section>
         <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.resource}
           name="backend-resource-update"
           update={resourcesAPI.update}

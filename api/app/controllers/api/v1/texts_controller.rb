@@ -42,6 +42,12 @@ module Api
         @text.destroy
       end
 
+      protected
+
+      def scope_for_texts
+        Text.friendly
+      end
+
     end
   end
 end

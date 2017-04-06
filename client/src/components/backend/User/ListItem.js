@@ -1,10 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+import lh from 'helpers/linkHandler';
 
 export default class ResourceListItem extends PureComponent {
 
-  static displayName = "Resource.ListItem";
+  static displayName = "User.ListItem";
 
   static propTypes = {
     entity: PropTypes.object
@@ -34,7 +35,7 @@ export default class ResourceListItem extends PureComponent {
             <i className="manicon manicon-check"></i>
           </div>
         </div>
-        <Link to={`/backend/people/users/${user.id}`}>
+        <Link to={lh.link("backendPeopleUser", user.id)}>
           <header>
             <figure className="avatar">
               {attr.avatarStyles.smallSquare ?
