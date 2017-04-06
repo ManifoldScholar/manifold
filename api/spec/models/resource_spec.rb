@@ -23,6 +23,13 @@ RSpec.describe Resource, type: :model do
     expect(resource.tag_list.count).to eq(3)
   end
 
+  it "creates a RESOURCE_ADDED event on creation" do
+    resource = FactoryGirl.create(:resource)
+    event = resource.project.events.first
+    expect(event).to_not be_nil
+    expect(event.event_type).to eq(Event::RESOURCE_ADDED)
+  end
+
   describe "formats some fields with a markdown subset" do
     let(:raw) { "_italic_ a **bold**"}
     let(:formatted_without_blocks) { "<em>italic</em> a <strong>bold</strong>"}
