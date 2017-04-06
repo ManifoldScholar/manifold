@@ -41,7 +41,10 @@ class Resource < ApplicationRecord
   # Validation
   validates :title, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
-  validates :sub_kind, inclusion: { in: ALLOWED_SUB_KINDS }, allow_nil: true
+  validates :sub_kind,
+            inclusion: { in: ALLOWED_SUB_KINDS },
+            allow_nil: true,
+            allow_blank: true
   validate :validate_kind_fields
 
   # Scopes
