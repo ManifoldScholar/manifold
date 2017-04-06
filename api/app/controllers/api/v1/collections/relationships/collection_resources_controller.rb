@@ -38,7 +38,7 @@ module Api
           private
 
           def set_collection
-            @collection = Collection.find(params[:collection_id])
+            @collection = Collection.friendly.find(params[:collection_id])
           end
 
         end

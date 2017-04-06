@@ -5,8 +5,6 @@ import Placeholder from './Placeholder';
 
 class SettingsFeaturesContainer extends PureComponent {
 
-  static activeNavItem = "features";
-
   render() {
     return (
       <section>

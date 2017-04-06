@@ -1,16 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Project, ResourceList } from 'components/frontend';
+import { HigherOrder } from 'components/global';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select, meta } from 'utils/entityUtils';
 import { projectsAPI, requests } from 'api';
 
-const { select, meta } = entityUtils;
-const { request, flush } = entityStoreActions;
+const { request } = entityStoreActions;
 
 class ProjectEventsContainer extends Component {
 
-  static fetchData(getState, dispatch, location, params) {
+  static fetchData(getState, dispatch, location, match) {
+    const { params } = match;
     const page = params.page ? params.page : 1;
     const projectRequest =
         request(projectsAPI.show(params.id), requests.feProject);
@@ -47,12 +48,7 @@ class ProjectEventsContainer extends Component {
         pagination={eventsMeta.pagination}
       />
     );
-
   }
 }
 
-const ProjectEvents = connect(
-    ProjectEventsContainer.mapStateToProps
-)(ProjectEventsContainer);
-
-export default ProjectEvents;
+export default connectAndFetch(ProjectEventsContainer);

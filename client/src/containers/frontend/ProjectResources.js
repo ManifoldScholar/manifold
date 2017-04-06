@@ -1,31 +1,30 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Utility, Project, ResourceList } from 'components/frontend';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select, meta } from 'utils/entityUtils';
 import { projectsAPI, requests } from 'api';
+import queryString from 'query-string';
 import debounce from 'lodash/debounce';
-import get from 'lodash/get';
 import omitBy from 'lodash/omitBy';
 import isNull from 'lodash/isNull';
+import lh from 'helpers/linkHandler';
 
-const { select, meta } = entityUtils;
 const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 
 class ProjectResourcesContainer extends Component {
 
-  static fetchData(getState, dispatch, location, params) {
-    const pageParam = params.page ? params.page : page;
+  static fetchData(getState, dispatch, location, match) {
+    const pageParam = match.params.page ? match.params.page : page;
     const projectRequest =
-        request(projectsAPI.show(params.id), requests.feProject);
+        request(projectsAPI.show(match.params.id), requests.feProject);
     // This can be made more robust with other types if need be.
-    const filter = location.query ? location.query : {};
+    const filter = queryString.parse(location.search);
     const resourcesRequest =
         request(projectsAPI.resources(
-          params.id,
+          match.params.id,
           filter,
           { number: pageParam, size: perPage }),
           requests.feResources
@@ -40,7 +39,8 @@ class ProjectResourcesContainer extends Component {
     resources: PropTypes.array,
     meta: PropTypes.object,
     dispatch: PropTypes.func,
-    location: PropTypes.object
+    location: PropTypes.object,
+    history: PropTypes.object
   };
 
   static mapStateToProps(state) {
@@ -54,7 +54,7 @@ class ProjectResourcesContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = this.initialState(this.props.location.query);
+    this.state = this.initialState(queryString.parse(this.props.location.search));
     this.filterChange = this.filterChange.bind(this);
     this.updateResults = debounce(this.updateResults.bind(this), 250);
     this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
@@ -90,8 +90,9 @@ class ProjectResourcesContainer extends Component {
   }
 
   updateUrl(filter) {
-    const base = this.props.location.pathname;
-    browserHistory.push({ pathname: base, query: filter });
+    const pathname = this.props.location.pathname;
+    const search = queryString.stringify(filter);
+    this.props.history.push({ pathname, search });
   }
 
   handlePageChange(event, pageParam) {
@@ -115,14 +116,14 @@ class ProjectResourcesContainer extends Component {
     const project = this.props.project;
     if (!project) return null;
 
-    const filter = get(this.props, 'location.query');
+    const filter = this.state.filter;
     const initialFilter = filter ? filter : null;
 
     return (
       <div>
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
-            link={`/browse/project/${project.id}`}
+            link={lh.link("frontendProject", project.id)}
             title={project.attributes.title}
           />
         </section>
@@ -138,7 +139,7 @@ class ProjectResourcesContainer extends Component {
         : null }
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
-            link={`/browse/project/${project.id}`}
+            link={lh.link("frontendProject", project.id)}
             title={project.attributes.title}
           />
         </section>
@@ -147,8 +148,4 @@ class ProjectResourcesContainer extends Component {
   }
 }
 
-const ProjectResources = connect(
-    ProjectResourcesContainer.mapStateToProps
-)(ProjectResourcesContainer);
-
-export default ProjectResources;
+export default connectAndFetch(ProjectResourcesContainer);

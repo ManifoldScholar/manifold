@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import lh from 'helpers/linkHandler';
+import { Link } from 'react-router-dom';
 import { Text } from 'components/global';
 import FormattedDate from 'components/global/FormattedDate';
 import get from 'lodash/get';
@@ -55,7 +56,7 @@ export default class TextThumbnail extends Component {
     return (
       <div className="asset-thumb">
         <div className="asset-link">
-          <Link to={`/read/${this.props.text.id}`}>
+          <Link to={lh.link("reader", this.props.text.id)}>
             <figure className="asset-image">
               { text.attributes.age <= 30 ?
                 <i className="manicon manicon-new"></i>
@@ -67,7 +68,7 @@ export default class TextThumbnail extends Component {
           </Link>
 
           <div className="asset-description">
-            <Link to={`/read/${this.props.text.id}`}>
+            <Link to={lh.link("reader", this.props.text.id)}>
               <h3 className="asset-title">
                 {text.attributes.title}
                 {this.renderSubtitle(text)}
@@ -103,12 +104,8 @@ export default class TextThumbnail extends Component {
                 </li> */}
               </ul>
             </div>
-
-
           </div>
         </div>
-
-        {/* Asset status markup only stub at this point, may be abstracted to child component */}
       </div>
     );
   }

@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import { annotationsAPI, requests } from 'api';
 import { entityStoreActions, uiVisibilityActions } from 'actions';
 import { bindActionCreators } from 'redux';
-import { entityUtils } from 'utils';
+import { select, meta } from 'utils/entityUtils';
 import { Utility } from 'components/frontend';
-const { request, flush } = entityStoreActions;
-const { select, meta } = entityUtils;
+const { request } = entityStoreActions;
 import { hash } from 'utils/string';
 
 class AnnotationList extends PureComponent {

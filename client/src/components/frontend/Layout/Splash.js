@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default class Splash extends Component {
 
@@ -37,12 +37,13 @@ export default class Splash extends Component {
                 'living digital works.'}
               </p>
               <nav className="buttons">
-                <Link to="http://manifold.umn.edu/"
+                <a
+                  href="http://manifold.umn.edu/"
                   target="blank"
                   className="button-bare-primary"
                 >
                   {'Learn More'}
-                </Link>
+                </a>
                 {!this.props.authenticated ?
                   <Link
                     to="#"

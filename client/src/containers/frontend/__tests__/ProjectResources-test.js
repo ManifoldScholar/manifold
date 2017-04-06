@@ -1,8 +1,11 @@
+jest.mock('components/global/HigherOrder/fetchData');
+
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { ProjectResources } from 'containers/frontend';
 import { Provider } from 'react-redux';
 import build from 'test/fixtures/build';
+import { wrapWithRouter } from 'test/helpers/routing';
 
 describe("ProjectResourcesContainer", () => {
 
@@ -25,13 +28,13 @@ describe("ProjectResourcesContainer", () => {
     location: { query: null }
   };
 
-  const component = renderer.create(
+  const component = renderer.create(wrapWithRouter(
     <Provider store={store}>
       <ProjectResources
         {...props}
       />
     </Provider>
-  );
+  ));
 
   it("renders correctly", () => {
     let tree = component.toJSON();

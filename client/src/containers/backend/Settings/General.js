@@ -3,18 +3,16 @@ import { connect } from 'react-redux';
 import { Form, MaskedTextInput } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import { settingsAPI, requests } from 'api';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 
 class SettingsGeneralContainer extends PureComponent {
 
   static propTypes = {
   };
 
-  static activeNavItem = "general";
-
   static mapStateToProps(state) {
     return {
-      settings: entityUtils.select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore)
     };
   }
 
@@ -23,7 +21,6 @@ class SettingsGeneralContainer extends PureComponent {
     return (
       <section>
         <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.settings}
           name="backend-settings"
           update={settingsAPI.update}

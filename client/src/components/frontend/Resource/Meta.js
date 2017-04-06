@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import filesize from 'filesize';
 import FormattedDate from 'components/global/FormattedDate';
 
@@ -39,9 +39,9 @@ export default class ResourceMeta extends Component {
     return (
       <li key={index}>
         {/* Will be route to view resources by tags */}
-        <Link to={`${this.props.projectUrl}?tag=${tag.toLowerCase()}`}>
+        <a href={`${this.props.projectUrl}?tag=${tag.toLowerCase()}`}>
           {tag}
-        </Link>
+        </a>
       </li>
     );
   }

@@ -4,6 +4,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import lodashSet from 'lodash/set';
 import lodashGet from 'lodash/get';
 import lodashOmit from 'lodash/omit';
+import flatMapDeep from 'lodash/flatMapDeep';
 
 const initialState = {
   sessions: {}
@@ -24,7 +25,8 @@ const getSourceValue = (setPath, model) => {
 };
 
 const hasChanges = (model) => {
-  return Object.keys(model).length > 0;
+  const found = flatMapDeep(model).find((obj) => { return Object.keys(obj).length > 0; });
+  return found !== undefined;
 };
 
 // End helper methods

@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Utility, Project as globalProject } from 'components/global';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import get from 'lodash/get';
 import classnames from 'classnames';
 

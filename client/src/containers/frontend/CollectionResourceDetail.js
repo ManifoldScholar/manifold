@@ -1,22 +1,22 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import connectAndFetch from 'utils/connectAndFetch';
+import { Link } from 'react-router-dom';
 import { Resource, Utility } from 'components/frontend';
-
+import { HigherOrder } from 'components/global';
+import lh from 'helpers/linkHandler';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { collectionsAPI, requests } from 'api';
 
-const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class CollectionResourceDetailContainer extends PureComponent {
-  static fetchData(getState, dispatch, location, params) {
-    const page = params.page ? params.page : 1;
-    const collectionFetch = collectionsAPI.show(params.collectionId);
+  static fetchData(getState, dispatch, location, match) {
+    const page = match.params.page ? match.params.page : 1;
+    const collectionFetch = collectionsAPI.show(match.params.collectionId);
     const collectionResourceFetch = collectionsAPI.collectionResource(
-      params.collectionId,
-      params.collectionResourceId
+      match.params.collectionId,
+      match.params.collectionResourceId
     );
     const collectionAction = request(collectionFetch, requests.feCollection);
     const collectionResourceAction = request(
@@ -47,20 +47,20 @@ class CollectionResourceDetailContainer extends PureComponent {
 
   projectUrl() {
     const pid = this.props.collection.attributes.projectId;
-    return `/browse/project/${pid}/resources`;
+    return lh.link("frontendProjectResources", pid);
   }
 
   collectionUrl() {
     const cid = this.props.collection.id;
     const pid = this.props.collection.attributes.projectId;
-    return `/browse/project/${pid}/collection/${cid}`;
+    return lh.link("frontendProjectCollection", pid, cid);
   }
 
   resourceUrl() {
     const cid = this.props.collection.id;
     const pid = this.props.collection.attributes.projectId;
     const crid = this.props.collectionResource.id;
-    return `/browse/project/${pid}/collection/${cid}/collection_resource/${crid}`;
+    return lh.link("frontendProjectCollectionCollectionResource", pid, cid, crid);
   }
 
   render() {
@@ -78,7 +78,7 @@ class CollectionResourceDetailContainer extends PureComponent {
         }
         {this.props.collectionResource ?
           <Resource.Detail
-            projectId={this.props.params.id}
+            projectId={this.props.match.params.id}
             projectUrl={this.projectUrl()}
             resourceUrl={this.resourceUrl()}
             resource={this.props.collectionResource.relationships.resource}
@@ -92,14 +92,9 @@ class CollectionResourceDetailContainer extends PureComponent {
             />
           </section> : null
         }
-
       </div>
     );
   }
 }
 
-const CollectionResourceDetail = connect(
-  CollectionResourceDetailContainer.mapStateToProps
-)(CollectionResourceDetailContainer);
-
-export default CollectionResourceDetail;
+export default connectAndFetch(CollectionResourceDetailContainer);

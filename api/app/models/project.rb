@@ -15,10 +15,14 @@ class Project < ApplicationRecord
   include Attachments
   include Metadata
   include Concerns::HasFormattedAttributes
+  extend FriendlyId
 
   # Magic
   with_metadata %w(isbn_ten isbn_thirteen publisher place_of_publication doi
                    date_of_publication series)
+
+  # URLs
+  friendly_id :title, use: :slugged
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async

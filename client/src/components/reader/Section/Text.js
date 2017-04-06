@@ -16,7 +16,7 @@ export default class Text extends Component {
     appearance: PropTypes.object,
     location: PropTypes.object,
     createAnnotation: PropTypes.func,
-    params: PropTypes.object,
+    match: PropTypes.object,
     children: PropTypes.object,
     dispatch: PropTypes.func,
     visibility: PropTypes.object
@@ -140,7 +140,7 @@ export default class Text extends Component {
             currentUser={this.props.authentication.currentUser}
             projectId={this.props.text.relationships.project.id}
             textId={this.props.text.id}
-            sectionId={this.props.params.sectionId}
+            sectionId={this.props.match.params.sectionId}
             lockSelection={this.lockSelection}
             resources={this.props.resources}
             annotations={this.state.filteredAnnotations}

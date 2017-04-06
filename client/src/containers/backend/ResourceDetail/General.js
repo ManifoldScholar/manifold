@@ -10,7 +10,6 @@ import capitalize from 'lodash/capitalize';
 class ResourceDetailGeneralContainer extends PureComponent {
 
   static displayName = "ResourceDetail.General";
-  static activeNavItem = "general";
 
   static propTypes = {
   };
@@ -38,7 +37,6 @@ class ResourceDetailGeneralContainer extends PureComponent {
     return (
       <section>
         <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.resource}
           name="backend-resource-update"
           update={resourcesAPI.update}

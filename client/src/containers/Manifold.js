@@ -1,9 +1,9 @@
 import React, { Children, PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import DocumentMeta from 'react-document-meta';
-import { SignInUp, LoadingBar } from 'components/global';
+import { SignInUp, LoadingBar, Utility } from 'components/global';
 import config from '../config';
 import has from 'lodash/has';
 import get from 'lodash/get';
@@ -11,15 +11,19 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { notificationActions, uiVisibilityActions } from 'actions';
 import { meAPI, settingsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { closest } from 'utils/domUtils';
 import ReactGA from 'react-ga';
+import Typekit from 'react-typekit';
+import { renderRoutes } from 'react-router-config';
+import getRoutes from '/routes';
+import lh from 'helpers/linkHandler';
 
+const routes = getRoutes();
 const { request } = entityStoreActions;
 const { visibilityHide } = uiVisibilityActions;
 
 class ManifoldContainer extends PureComponent {
-
 
   // This method will bootstrap data into manifold. Nothing else is loaded into the
   // store at this point, including params and the authenticated user.
@@ -28,7 +32,6 @@ class ManifoldContainer extends PureComponent {
     const promises = [];
     const loaded = has(getState(), 'entityStore.entities.settings.0');
     if (loaded) return Promise.all(promises);
-
     const settingsRequest = request(settingsAPI.show(), requests.settings, { oneTime: true });
     promises.push(dispatch(settingsRequest));
     return Promise.all(promises);
@@ -41,7 +44,7 @@ class ManifoldContainer extends PureComponent {
       loading: state.ui.loading.active,
       notifications: state.notifications,
       routing: state.routing,
-      settings: entityUtils.select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore)
     };
   }
 
@@ -99,7 +102,7 @@ class ManifoldContainer extends PureComponent {
   }
 
   redirectToHome() {
-    browserHistory.push('/');
+    this.props.history.push("/");
   }
 
   updateCurrentUser() {
@@ -136,14 +139,23 @@ class ManifoldContainer extends PureComponent {
     }
   }
 
-  render() {
+  renderTypekit() {
+    const tkId = get(this.props.settings, "attributes.theme.typekitId");
+    const tkEnabled = !!tkId;
+    if (!tkEnabled) return null;
+    return <Typekit kitId={tkId} />;
+  }
 
+  render() {
     const hideSignInUpOverlay = bindActionCreators(
       () => visibilityHide('signInUpOverlay'), this.props.dispatch
     );
 
     return (
       <div onClick={this.handleGlobalClick} className="global-container">
+        {this.renderTypekit()}
+        {this.props.confirm}
+        <Utility.ScrollToTop />
         <DocumentMeta {...config.app}/>
         <LoadingBar loading={this.props.loading} />
         <ReactCSSTransitionGroup
@@ -161,15 +173,15 @@ class ManifoldContainer extends PureComponent {
             />
             : null}
         </ReactCSSTransitionGroup>
-        {this.props.children}
+        {renderRoutes(routes)}
       </div>
     );
   }
 
 }
 
-const Manifold = connect(
+const Manifold = withRouter(connect(
   ManifoldContainer.mapStateToProps
-)(ManifoldContainer);
+)(ManifoldContainer));
 
 export default Manifold;

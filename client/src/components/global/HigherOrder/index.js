@@ -1,9 +1,11 @@
 import BodyClass from './BodyClass';
-import ResolveDataDependencies from './ResolveDataDependencies';
+import Analytics from './Analytics';
 import ScrollAware from './ScrollAware';
+import fetchData from './fetchData';
 
 export default {
   BodyClass,
-  ResolveDataDependencies,
-  ScrollAware
+  Analytics,
+  ScrollAware,
+  fetchData
 };

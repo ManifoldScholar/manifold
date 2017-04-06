@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Project as FrontEndProject } from 'components/frontend';
 import { Project as GlobalProject } from 'components/global';
 import FormattedDate from 'components/global/FormattedDate';
 import classNames from 'classnames';
+import lh from 'helpers/linkHandler';
 
 export default class ProjectThumbnail extends Component {
 
@@ -119,7 +120,9 @@ export default class ProjectThumbnail extends Component {
     }
 
     return (
-      <Link to={`/browse/project/${project.id}`}>
+      <Link
+        to={lh.link("frontendProject", project.attributes.slug)}
+      >
         {/* Figure wrapper, controls maximum width of figure */}
         <div className={className} >
           <figure>

@@ -142,3 +142,14 @@ export function singularEntityName(entity) {
   if (isString(entity.type) && entityTypeMap[entity.type]) return entityTypeMap[entity.type];
   return entity.type;
 }
+
+export default {
+  singularEntityName,
+  constantizeMeta,
+  meta,
+  loaded,
+  grab,
+  select,
+  isEntityLoaded,
+  isLoaded
+};

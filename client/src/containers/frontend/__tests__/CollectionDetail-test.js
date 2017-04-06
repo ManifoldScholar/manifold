@@ -1,10 +1,12 @@
 jest.mock('velocity-react');
+jest.mock('components/global/HigherOrder/fetchData');
 
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { CollectionDetail } from 'containers/frontend';
 import { Provider } from 'react-redux';
 import build from 'test/fixtures/build';
+import { wrapWithRouter } from 'test/helpers/routing';
 
 describe("CollectionDetailContainer", () => {
 
@@ -40,13 +42,13 @@ describe("CollectionDetailContainer", () => {
     location: { query: null }
   };
 
-  const component = renderer.create(
+  const component = renderer.create(wrapWithRouter(
     <Provider store={store}>
       <CollectionDetail
         {...props}
       />
     </Provider>
-  );
+  ));
 
   it("renders correctly", () => {
     let tree = component.toJSON();

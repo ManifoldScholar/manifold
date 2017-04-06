@@ -1,7 +1,6 @@
 import { Children, PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import isString from 'lodash/isString';
-import { browserHistory } from 'react-router';
 
 class RequireRole extends PureComponent {
 
@@ -42,7 +41,7 @@ class RequireRole extends PureComponent {
   }
 
   redirect(props) {
-    browserHistory.push(props.redirect);
+    props.history.push(props.redirect);
   }
 
   roleMatch(props) {

@@ -1,11 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { browserHistory } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 import Utility from 'components/global/Utility';
 import isString from 'lodash/isString';
+import { withRouter } from 'react-router-dom';
 
-export default class DrawerWrapper extends PureComponent {
+class DrawerWrapper extends PureComponent {
 
   static displayName = "Drawer.Wrapper";
 
@@ -74,7 +74,7 @@ export default class DrawerWrapper extends PureComponent {
 
     if (this.props.closeUrl) {
       setTimeout(() => {
-        browserHistory.push(this.props.closeUrl);
+        this.props.history.push(this.props.closeUrl);
       }, 200);
     }
   }
@@ -168,3 +168,5 @@ export default class DrawerWrapper extends PureComponent {
     );
   }
 }
+
+export default withRouter(DrawerWrapper);

@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router';
 import classNames from 'classnames';
-import fakeData from 'helpers/fakeData';
 import get from 'lodash/get';
 
 import {
@@ -26,13 +24,6 @@ class Detail extends Component {
 
   constructor() {
     super();
-    this.state = {
-      activity: fakeData.events,
-      categories: [],
-      texts: [],
-      meta: []
-    };
-
     this.renderActivity = this.renderActivity.bind(this);
     this.renderTexts = this.renderTexts.bind(this);
     this.renderResources = this.renderResources.bind(this);

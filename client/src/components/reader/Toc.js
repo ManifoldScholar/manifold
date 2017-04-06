@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import lh from 'helpers/linkHandler';
 
 export default class Toc extends Component {
 
@@ -45,13 +46,14 @@ export default class Toc extends Component {
       );
     }
 
-    let anchor = null;
+    let anchor = "";
     if (node.anchor) anchor = `#${node.anchor}`;
-    const path = `/read/${this.props.text.id}/section/${node.id}${anchor || ""}`;
-
     return (
       <li key={this.counter}>
-        <Link to={path} onClick={this.UIHideTocDrawer}>
+        <Link
+          to={lh.link("readerSection", this.props.text.id, node.id, anchor)}
+          onClick={this.UIHideTocDrawer}
+        >
           {node.label}
         </Link>
         {children}

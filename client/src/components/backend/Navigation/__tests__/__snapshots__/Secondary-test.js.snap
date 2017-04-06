@@ -4,17 +4,19 @@ exports[`Navigation.Secondary component renders correctly 1`] = `
   <ul>
     <li>
       <a
-        className=""
+        className={undefined}
+        href="/link-1"
         onClick={[Function]}
-        style={Object {}}>
+        style={undefined}>
         Link One
       </a>
     </li>
     <li>
       <a
-        className=""
+        className={undefined}
+        href="/link-2"
         onClick={[Function]}
-        style={Object {}}>
+        style={undefined}>
         Link Two
       </a>
     </li>

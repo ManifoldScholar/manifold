@@ -25,6 +25,7 @@ module Api
       end
 
       def show
+        @scope_for_projects = Project.friendly
         @project = load_project
         render_single_resource(@project, include: INCLUDES)
       end
@@ -45,10 +46,12 @@ module Api
         @project.destroy
       end
 
+      protected
+
       def scope_for_projects
         Project.includes(:creators, :contributors, { texts: :text_sections },
                          :text_categories, :events, :collections,
-                         resources: :collection_resources)
+                         resources: :collection_resources).friendly
       end
 
     end

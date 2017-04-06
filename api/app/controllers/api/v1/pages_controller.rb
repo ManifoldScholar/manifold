@@ -13,6 +13,7 @@ module Api
       end
 
       def show
+        @scope_for_pages = Page.friendly
         @page = load_page
         render_single_resource(@page)
       end

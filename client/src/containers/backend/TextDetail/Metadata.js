@@ -8,7 +8,6 @@ import { textsAPI } from 'api';
 export default class TextDetailMetadata extends PureComponent {
 
   static displayName = "TextDetail.Metadata";
-  static activeNavItem = "metadata";
 
   static propTypes = {
     route: PropTypes.object,
@@ -25,7 +24,6 @@ export default class TextDetailMetadata extends PureComponent {
     return (
       <section>
         <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.text}
           name="backend-project-general"
           update={textsAPI.update}

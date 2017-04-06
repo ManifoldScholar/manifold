@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
+import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import { uiReaderActions } from 'actions';
-import { browserHistory } from 'react-router';
+import lh from 'helpers/linkHandler';
 
 class ResourceMarker extends Component {
 
@@ -18,7 +18,8 @@ class ResourceMarker extends Component {
     annotations: PropTypes.array,
     handleClick: PropTypes.func,
     dispatch: PropTypes.func,
-    activeAnnotation: PropTypes.string
+    activeAnnotation: PropTypes.string,
+    history: PropTypes.object
   };
 
   setActiveAnnotation(annotationId) {
@@ -27,8 +28,10 @@ class ResourceMarker extends Component {
 
   handleClick(event, annotation) {
     event.preventDefault();
-    const url = `${window.location.pathname}/resource/${annotation.resourceId}`;
-    browserHistory.push(url);
+    const base = window.location.pathname;
+    const rel = lh.link("frontendProjectResourceRelative", annotation.resourceId);
+    const url = `${base}/${rel}`;
+    this.props.history.push(url);
   }
 
   render() {
@@ -61,6 +64,4 @@ class ResourceMarker extends Component {
   }
 }
 
-export default connect(
-  ResourceMarker.mapStateToProps
-)(ResourceMarker);
+export default connectAndFetch(ResourceMarker);

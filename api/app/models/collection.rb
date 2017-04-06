@@ -4,6 +4,9 @@ class Collection < ApplicationRecord
   # Concerns
   include Authority::Abilities
   include Attachments
+  extend FriendlyId
+
+  friendly_id :title, use: :slugged
 
   # Associations
   belongs_to :project

@@ -4,37 +4,25 @@ import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import cookie from 'cookie';
-import { match } from 'react-router';
 import config from './config';
 import Html from './helpers/Html';
 import ch from './helpers/consoleHelpers';
 import createStore from './store/createStore';
 import { currentUserActions } from 'actions';
-import getStatusFromRoutes from './helpers/getStatusFromRoutes';
-import fetchAllData from './helpers/fetchAllData';
 import exceptionRenderer from './helpers/exceptionRenderer';
 import App from './App';
-import getRoutes from './routes';
-import { authenticateWithToken } from 'store/middleware/currentUserMiddleware';
 import Manifold from 'containers/Manifold';
+import { authenticateWithToken } from 'store/middleware/currentUserMiddleware';
+import { isPromise } from 'utils/promise';
+import isFunction from 'lodash/isFunction';
+import has from 'lodash/has';
+import { matchRoutes } from 'react-router-config';
+import getRoutes from '/routes';
 
 const pretty = new PrettyError();
 
-function respondWithRouterError(res, error) {
-  ch.error("The server-side render experienced a routing error.");
-  console.error('ROUTER ERROR:', pretty.render(error));
-  res.status(500);
-  res.send("Internal Server Error");
-}
-
 function respondWithRedirect(res, redirectLocation) {
-  res.redirect(redirectLocation.pathname + redirectLocation.search);
-  return;
-}
-
-function respondWithInternalServerError(res) {
-  res.status(500);
-  res.send("Internal Server Error");
+  res.redirect(redirectLocation);
   return;
 }
 
@@ -42,17 +30,6 @@ function respondWithSSRDisabledError(res) {
   res.status(500);
   res.send("Server side rendering is disabled");
   return;
-}
-
-function fetchComponentData(props, store) {
-  const bootstrap = Manifold.bootstrap(store.getState, store.dispatch);
-  const fetch = fetchAllData(
-    props.components,
-    store.getState, store.dispatch,
-    props.location,
-    props.params
-  );
-  return Promise.all([bootstrap, fetch]);
 }
 
 function authenticateUser(req, store) {
@@ -65,16 +42,20 @@ function authenticateUser(req, store) {
   return Promise.resolve();
 }
 
-function render(req, res, store, props, parameters) {
+function render(req, res, store, parameters) {
   ch.info("Server-side data fetch completed successfully");
   store.dispatch({ type: 'SERVER_LOADED', payload: req.originalUrl });
+
+  const routingContext = {
+    fetchDataPromises: []
+  };
   const appComponent = (
-    <App {...props} store={store} />
+    <App
+      staticContext={routingContext}
+      staticRequest={req}
+      store={store}
+    />
   );
-  const status = getStatusFromRoutes(props.routes);
-  if (status) {
-    res.status(status);
-  }
 
   let renderString = '';
   let isError = false;
@@ -94,6 +75,12 @@ function render(req, res, store, props, parameters) {
       "ERROR: Server-side render failed in server-react.js"
     );
   } finally {
+
+    // Redirect if the routing context has a url prop.
+    if (routingContext.url) {
+      return respondWithRedirect(res, routingContext.url);
+    }
+
     if (isError) {
       res.status(500);
       res.send(renderString);
@@ -101,6 +88,40 @@ function render(req, res, store, props, parameters) {
       res.send('<!doctype html>\n' + renderString);
     }
   }
+}
+
+function fetchRouteData(req, store) {
+  const location = req.url;
+  const routes = getRoutes();
+  const branch = matchRoutes(routes, location);
+  const promises = branch.reduce((allPromises, matchedRoute) => {
+    const component = matchedRoute.route.component;
+    if (isFunction(component.fetchData)) {
+      const result = component.fetchData(
+        store.getState,
+        store.dispatch,
+        location,
+        matchedRoute.match
+      );
+      if (isPromise(result)) allPromises.push(result);
+      if (Array.isArray(result)) {
+        result.forEach((aResult) => {
+          if (isPromise(aResult)) allPromises.push(aResult);
+        });
+      }
+      return allPromises;
+    }
+    return allPromises;
+  }, []);
+  return Promise.all(promises);
+}
+
+function bootstrap(req, store) {
+  const promises = [];
+  if (!has(store.getState(), "entityStore.entities.settings.0")) {
+    promises.push(Manifold.bootstrap(store.getState, store.dispatch));
+  }
+  return Promise.all(promises);
 }
 
 export default function (parameters) {
@@ -114,6 +135,7 @@ export default function (parameters) {
   app.use(morgan(logStyle));
 
   app.use((req, res) => {
+
     const store = createStore();
 
     if (__DISABLE_SSR__) return respondWithSSRDisabledError(res);
@@ -124,35 +146,24 @@ export default function (parameters) {
       if (authToken) store.dispatch(currentUserActions.login({ authToken }));
     }
 
-    match({
-      routes: getRoutes(store),
-      location: req.url
-    }, (error, redirectLocation, props) => {
+    // Prior to the router upgrade, we handled these cases... may no
+    // longer be necessary.
+    // if (error) return respondWithRouterError(res, error);
+    // if (!props) return respondWithInternalServerError(res);
 
-      // We want the full location to be available to components even during server-side render.
-      // Not sure this is the best way to accomplish this.
-      if (props) {
-        store.dispatch({
-          type: '@@router/UPDATE_LOCATION',
-          payload: props.location
-        });
-      }
-
-      if (redirectLocation) return respondWithRedirect(res, redirectLocation);
-      if (error) return respondWithRouterError(res, error);
-      if (!props) return respondWithInternalServerError(res);
-
-      // 1. Authenticate user
-      // 2. Fetch any data, as the user
-      // 3. Send the response to the user
-      authenticateUser(req, store).then(
-        () => { return fetchComponentData(props, store); },
-        () => { return fetchComponentData(props, store); }
-      ).then(
-        () => { render(req, res, store, props, parameters); },
-        () => { render(req, res, store, props, parameters); }
-      );
-    });
+    // 1. Authenticate user
+    // 2. Fetch any data, as the user
+    // 3. Send the response to the user
+    bootstrap(req, store).then(
+      () => { return authenticateUser(req, store); },
+      () => { return authenticateUser(req, store); },
+    ).then(
+      () => { console.log('test a'); return fetchRouteData(req, store); },
+      () => { console.log('test b'); return fetchRouteData(req, store); }
+    ).then(
+      () => { render(req, res, store, parameters); },
+      () => { render(req, res, store, parameters); }
+    );
   });
 
   const listenOn = config.universalServerPort;

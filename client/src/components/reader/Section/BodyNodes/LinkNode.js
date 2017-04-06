@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import URI from 'uri-js';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import validatedNode from './HigherOrder/ValidatedNode';
 
 class LinkNode extends Component {

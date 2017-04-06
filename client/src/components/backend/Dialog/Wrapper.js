@@ -1,10 +1,10 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { browserHistory } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router-dom';
 import classnames from 'classnames';
+import isString from 'lodash/isString';
 
-export default class DialogWrapper extends PureComponent {
+class DialogWrapper extends PureComponent {
 
   static displayName = "Dialog.Wrapper";
 
@@ -54,7 +54,7 @@ export default class DialogWrapper extends PureComponent {
 
   closeWithUrlChange() {
     this.leave(() => {
-      browserHistory.push(this.props.closeUrl);
+      this.props.history.push(this.props.closeUrl);
     });
   }
 
@@ -84,6 +84,12 @@ export default class DialogWrapper extends PureComponent {
     const style = {};
     if (this.props.maxWidth) style.maxWidth = this.props.maxWidth;
     return style;
+  }
+
+  renderChildren() {
+    if (isString(this.props.children.type)) return this.props.children;
+    if (React.Children.count(this.props.children) !== 1) return this.props.children;
+    return React.cloneElement(this.props.children, { triggerClose: this.handleCloseClick });
   }
 
   render() {
@@ -119,12 +125,13 @@ export default class DialogWrapper extends PureComponent {
                 </div>
                 : null
               }
-              {this.props.children}
+              {this.renderChildren()}
             </div>
           </div>
         }
       </ReactCSSTransitionGroup>
     );
   }
-
 }
+
+export default withRouter(DialogWrapper);

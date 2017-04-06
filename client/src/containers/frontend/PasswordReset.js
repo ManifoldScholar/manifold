@@ -1,20 +1,22 @@
 import React, { Component, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { passwordsAPI, requests } from 'api';
 import { Form } from 'components/global';
 import { entityStoreActions, notificationActions, currentUserActions } from 'actions';
-import { browserHistory } from 'react-router';
 import { get } from 'lodash';
 import { select } from 'utils/entityUtils';
-import { connect } from 'react-redux';
 const { request, flush } = entityStoreActions;
 
-class PasswordReset extends Component {
+class PasswordResetContainer extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    params: PropTypes.shape({
-      resetToken: PropTypes.string
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        resetToken: PropTypes.string
+      })
     }).isRequired,
+    history: PropTypes.object.isRequired,
     response: PropTypes.object
   };
 
@@ -43,7 +45,7 @@ class PasswordReset extends Component {
     const action = passwordsAPI.update(
       this.state.password,
       this.state.passwordConfirmation,
-      this.props.params.resetToken
+      this.props.match.params.resetToken
     );
     const changeRequest = request(action, requests.gPasswordReset);
     this.props.dispatch(changeRequest).promise.then((response) => {
@@ -64,7 +66,7 @@ class PasswordReset extends Component {
   }
 
   redirectToHome() {
-    browserHistory.push('/');
+    this.props.history.push('/');
   }
 
   handleInputChange(event) {
@@ -138,7 +140,4 @@ class PasswordReset extends Component {
   }
 }
 
-const PasswordResetContainer = connect(
-  PasswordReset.mapStateToProps
-)(PasswordReset);
-export default PasswordResetContainer;
+export default connectAndFetch(PasswordResetContainer);

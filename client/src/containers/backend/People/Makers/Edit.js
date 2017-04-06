@@ -1,16 +1,15 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { makersAPI, requests } from 'api';
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
-import { browserHistory } from 'react-router';
 import get from 'lodash/get';
+import lh from 'helpers/linkHandler';
 
 const { request, flush } = entityStoreActions;
-const { select } = entityUtils;
 
 class MakersEditContainer extends PureComponent {
 
@@ -32,7 +31,7 @@ class MakersEditContainer extends PureComponent {
   }
 
   componentDidMount() {
-    this.fetchMaker(this.props.params.id);
+    this.fetchMaker(this.props.match.params.id);
   }
 
   componentWillUnmount() {
@@ -40,7 +39,9 @@ class MakersEditContainer extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.id !== this.props.params.id) this.fetchMaker(nextProps.params.id);
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      this.fetchMaker(nextProps.match.params.id);
+    }
   }
 
   fetchMaker(id) {
@@ -67,7 +68,7 @@ class MakersEditContainer extends PureComponent {
     const options = { removes: maker };
     const makerRequest = request(call, requests.beMakerDestroy, options);
     this.props.dispatch(makerRequest).promise.then(() => {
-      browserHistory.push('/backend/people/makers');
+      this.props.history.push(lh.link("backendPeopleMakers"));
     });
   }
 
@@ -125,7 +126,6 @@ class MakersEditContainer extends PureComponent {
         </header>
         <section className="form-section">
           <FormContainer.Form
-            route={this.props.routes[this.props.routes.length - 1]}
             model={this.props.maker}
             name="backend-maker-update"
             update={makersAPI.update}
@@ -169,9 +169,7 @@ class MakersEditContainer extends PureComponent {
       </div>
     );
   }
-
 }
 
-export default connect(
-  MakersEditContainer.mapStateToProps
-)(MakersEditContainer);
+export default connectAndFetch(MakersEditContainer);
+

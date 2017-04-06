@@ -1,5 +1,4 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { Helper } from 'components/global';
 import { FormattedDate } from 'components/global';
 import { Utility } from 'components/frontend';

@@ -1,19 +1,20 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { HigherOrder, FatalError } from 'components/global';
 import HigherOrderContainers from 'containers/global/HigherOrder';
 import { Layout } from 'components/frontend';
 import { commonActions } from 'actions/helpers';
 import { pagesAPI, subjectsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
-import get from 'lodash/get';
+import { select, isLoaded } from 'utils/entityUtils';
+import connectAndFetch from 'utils/connectAndFetch';
+import { renderRoutes } from 'react-router-config';
+
 const { request } = entityStoreActions;
 
 class FrontendContainer extends Component {
 
   static fetchData(getState, dispatch) {
-    if (!entityUtils.isLoaded(requests.gPages, getState())) {
+    if (!isLoaded(requests.gPages, getState())) {
       const pages = request(pagesAPI.index(), requests.gPages, { oneTime: true });
       const subjects = request(
         subjectsAPI.index({ used: true }),
@@ -27,9 +28,6 @@ class FrontendContainer extends Component {
   }
 
   static propTypes = {
-    routeDataLoaded: PropTypes.bool,
-    routing: PropTypes.object,
-    children: PropTypes.object,
     location: PropTypes.object,
     dispatch: PropTypes.func,
     authentication: PropTypes.object,
@@ -37,9 +35,9 @@ class FrontendContainer extends Component {
     loading: PropTypes.bool,
     notifications: PropTypes.object,
     history: PropTypes.object.isRequired,
-    renderDevTools: PropTypes.bool,
     pages: PropTypes.array,
-    settings: PropTypes.object
+    settings: PropTypes.object,
+    route: PropTypes.object
   };
 
   static mapStateToProps(state) {
@@ -48,9 +46,8 @@ class FrontendContainer extends Component {
       visibility: state.ui.visibility,
       loading: state.ui.loading.active,
       notifications: state.notifications,
-      routing: state.routing,
-      pages: entityUtils.select(requests.gPages, state.entityStore),
-      settings: entityUtils.select(requests.settings, state.entityStore)
+      pages: select(requests.gPages, state.entityStore),
+      settings: select(requests.settings, state.entityStore)
     };
   }
 
@@ -62,14 +59,8 @@ class FrontendContainer extends Component {
     this.setMinHeight();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.routing.locationBeforeTransitions.key !==
-      nextProps.routing.locationBeforeTransitions.key) {
-      window.scrollTo(0, 0);
-    }
-  }
-
   setMinHeight() {
+    if (!this.refs.mainContainer) return;
     const mainHeight = this.refs.mainContainer.offsetHeight;
     const offsetHeight = this.refs.mainContainer.parentNode.offsetHeight - mainHeight;
     this.refs.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
@@ -77,7 +68,6 @@ class FrontendContainer extends Component {
 
   render() {
     const fatalError = this.props.notifications.fatalError;
-
     return (
       <HigherOrder.BodyClass className={'browse'}>
         <div>
@@ -100,7 +90,9 @@ class FrontendContainer extends Component {
                 <FatalError error={fatalError} />
               </div>
               :
-              this.props.children
+              <div>
+                {renderRoutes(this.props.route.routes)}
+              </div>
             }
           </main>
           <Layout.Footer
@@ -115,8 +107,4 @@ class FrontendContainer extends Component {
   }
 }
 
-const Frontend = connect(
-  FrontendContainer.mapStateToProps
-)(FrontendContainer);
-
-export default Frontend;
+export default connectAndFetch(FrontendContainer);

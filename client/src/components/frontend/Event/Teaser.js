@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Body from './Body/';
 import classNames from 'classnames';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default class Teaser extends Component {
 

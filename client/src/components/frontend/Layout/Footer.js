@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import chunk from 'lodash/chunk';
+import lh from 'helpers/linkHandler';
 
 export default class LayoutFooter extends Component {
 
@@ -44,8 +45,8 @@ export default class LayoutFooter extends Component {
     if (this.props.pages) {
       pages = this.props.pages.map((page) => {
         return (
-          <Link to={`/browse/page/${page.attributes.slug}`}>
-            {page.attributes.navTitle}
+          <Link to={lh.link("frontendPage", page.attributes.slug)}>
+            {page.attributes.navTitle || page.attributes.title}
           </Link>
         );
       });
@@ -80,7 +81,7 @@ export default class LayoutFooter extends Component {
   buildPagesArray() {
     const pages = [];
     pages.push(this.buildAuthLink());
-    pages.push(<Link to={'/browse'}>{'Projects'}</Link>);
+    pages.push(<Link to={lh.link("frontend")}>{'Projects'}</Link>);
     pages.push(...this.buildContentPages());
     pages.push(this.buildContactLink());
     pages.push(<a target="_blank" href="http://twitter.com/manifoldscholar">{'Twitter'}</a>);
@@ -94,7 +95,7 @@ export default class LayoutFooter extends Component {
       <footer className="footer-browse">
         <div className="container">
           <div className="rel">
-            <Link to={'/browse'} className="logo">
+            <Link to={lh.link("frontend")} className="logo">
               <i className="manicon manicon-manifold-logo"></i>
               {'Manifold'}
             </Link>

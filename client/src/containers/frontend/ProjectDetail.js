@@ -1,19 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Project } from 'components/frontend';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { projectsAPI, requests } from 'api';
 
-const { select } = entityUtils;
 const { visibilityShow } = uiVisibilityActions;
 const { request, flush } = entityStoreActions;
 
 class ProjectDetailContainer extends Component {
 
-  static fetchData(getState, dispatch, location, params) {
+  static fetchData(getState, dispatch, location, match) {
     const projectRequest =
-      request(projectsAPI.show(params.id), requests.feProject);
+      request(projectsAPI.show(match.params.id), requests.feProject);
     const { promise: one } = dispatch(projectRequest);
     return Promise.all([one]);
   }
@@ -39,8 +38,4 @@ class ProjectDetailContainer extends Component {
 
 }
 
-const ProjectDetail = connect(
-  ProjectDetailContainer.mapStateToProps
-)(ProjectDetailContainer);
-
-export default ProjectDetail;
+export default connectAndFetch(ProjectDetailContainer);

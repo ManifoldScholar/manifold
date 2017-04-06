@@ -26,7 +26,7 @@ module Api
           private
 
           def set_project
-            @project = Project.find(params[:project_id])
+            @project = Project.friendly.find(params[:project_id])
           end
         end
       end

@@ -78,7 +78,7 @@ module Api
         if params[:annotation_id]
           @subject = Annotation.find(params[:annotation_id])
         elsif params[:resource_id]
-          @subject = Resource.find(params[:resource_id])
+          @subject = Resource.friendly.find(params[:resource_id])
         end
       end
 

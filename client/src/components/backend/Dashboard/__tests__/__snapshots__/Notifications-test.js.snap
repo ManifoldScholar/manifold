@@ -27,8 +27,7 @@ exports[`Dashboard.Notification component renders correctly 1`] = `
   </ul>
   <a
     className="button-bare-primary"
-    onClick={[Function]}
-    style={Object {}}>
+    href="#">
     Notification History
   </a>
 </nav>

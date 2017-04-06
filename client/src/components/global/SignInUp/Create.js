@@ -1,17 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { usersAPI } from 'api';
+import { usersAPI, requests } from 'api';
 import { entityStoreActions, currentUserActions } from 'actions';
 import { select } from 'utils/entityUtils';
 import { Form, SignInUp } from 'components/global';
-
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import get from 'lodash/get';
 
 const { request, flush } = entityStoreActions;
 
-// const { startLogin } = authActions;
-
-class Create extends Component {
+class CreateContainer extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -22,15 +19,10 @@ class Create extends Component {
     showCreateUpdate: PropTypes.func.isRequired
   };
 
-  static requests = {
-    create: 'signinup-create-user'
-  };
-
   static mapStateToProps(state) {
-    const r = Create.requests;
     const myState = {
-      user: select(r.create, state.entityStore),
-      response: state.entityStore.responses[r.create]
+      user: select(requests.gCreateUser, state.entityStore),
+      response: state.entityStore.responses[requests.gCreateUser]
     };
     return myState;
   }
@@ -61,7 +53,7 @@ class Create extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush(Create.requests));
+    this.props.dispatch(flush(requests.gCreateUser));
   }
 
   authenticateUser() {
@@ -75,7 +67,7 @@ class Create extends Component {
 
   createUser(event) {
     event.preventDefault(event.target);
-    this.props.dispatch(request(usersAPI.create(this.state.user), Create.requests.create));
+    this.props.dispatch(request(usersAPI.create(this.state.user), requests.gCreateUser));
   }
 
   handleInputChange(event) {
@@ -213,7 +205,4 @@ class Create extends Component {
   }
 }
 
-const SignUpCreate = connect(
-  Create.mapStateToProps
-)(Create);
-export default SignUpCreate;
+export default connectAndFetch(CreateContainer);

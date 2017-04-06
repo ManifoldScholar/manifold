@@ -4,7 +4,6 @@ import isPlainObject from 'lodash/isPlainObject';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-
 export class LowLevelApiClient {
 
   constructor() {

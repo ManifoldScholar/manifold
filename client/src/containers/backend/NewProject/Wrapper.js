@@ -1,12 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Project, Navigation } from 'components/backend';
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
-import { connect } from 'react-redux';
 import { notificationActions } from 'actions';
 import { projectsAPI } from 'api';
-import { browserHistory } from 'react-router';
-import { entityUtils } from 'utils';
+import lh from 'helpers/linkHandler';
 
 class NewProjectWrapperContainer extends PureComponent {
 
@@ -21,10 +20,12 @@ class NewProjectWrapperContainer extends PureComponent {
   }
 
   redirectToProject(project) {
-    browserHistory.push(`/backend/project/${project.id}`);
+    const path = lh.link("backendProject", project.id);
+    this.props.history.push(path);
   }
 
   handleSuccess(project) {
+    console.log('redirecting');
     this.redirectToProject(project);
   }
 
@@ -34,7 +35,7 @@ class NewProjectWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="project"
           breadcrumb={[
-            { path: "/backend", label: "ALL PROJECTS" }
+            { path: lh.link("backend"), label: "ALL PROJECTS" }
           ]}
           title={'New Project'}
           showUtility={false}
@@ -45,7 +46,7 @@ class NewProjectWrapperContainer extends PureComponent {
             <div className="panel">
               <section>
                 <FormContainer.Form
-                  route={this.props.routes[this.props.routes.length - 1]}
+                  debug
                   model={this.props.project}
                   name="backend-create-project"
                   update={projectsAPI.update}
@@ -72,7 +73,7 @@ class NewProjectWrapperContainer extends PureComponent {
                   />
                   <Form.Save
                     text="Save and Continue"
-                    cancelRoute={`/backend`}
+                    cancelRoute={lh.link("backend")}
                   />
                 </FormContainer.Form>
               </section>
@@ -84,7 +85,4 @@ class NewProjectWrapperContainer extends PureComponent {
   }
 }
 
-export default connect(
-  NewProjectWrapperContainer.mapStateToProps
-)(NewProjectWrapperContainer);
-
+export default connectAndFetch(NewProjectWrapperContainer);

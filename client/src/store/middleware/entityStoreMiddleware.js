@@ -1,6 +1,5 @@
 import { ApiClient } from 'api';
-import { entityUtils } from 'utils';
-const { constantizeMeta } = entityUtils;
+import { constantizeMeta } from 'utils/entityUtils';
 import get from 'lodash/get';
 
 function sendRequest(request, authToken) {
