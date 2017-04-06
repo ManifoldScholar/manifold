@@ -77,7 +77,7 @@ export default class ResourceSlideFigureVideo extends Component {
   }
 
   renderVideo(resource) {
-    if (resource.attributes.externalType) {
+    if (resource.attributes.subKind === "external_video") {
       return this.renderVideoByService(
         resource.attributes.externalType,
         resource.attributes.externalId
