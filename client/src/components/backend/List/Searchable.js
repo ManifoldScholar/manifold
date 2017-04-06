@@ -19,7 +19,8 @@ export default class ListSearchable extends PureComponent {
     paginationPadding: PropTypes.number,
     newButtonText: PropTypes.string,
     newButtonVisible: PropTypes.bool,
-    newButtonPath: PropTypes.string
+    newButtonPath: PropTypes.string,
+    filterOptions: PropTypes.object
   };
 
   static defaultProps = {
@@ -29,25 +30,36 @@ export default class ListSearchable extends PureComponent {
     paginationPadding: 3
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = this.initialState();
     this.setKeyword = this.setKeyword.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
+    this.toggleOptions = this.toggleOptions.bind(this);
     this.renderEntityList = this.renderEntityList.bind(this);
     this.renderEntity = this.renderEntity.bind(this);
   }
 
   initialState() {
+    const inputs = this.props.filterOptions ? this.initialInputs() : { keyword: "" };
     return {
-      inputs: { keyword: "" },
+      inputs,
       filter: { }
     };
   }
 
+  initialInputs() {
+    const out = { keyword: "" };
+    const keys = Object.keys(this.props.filterOptions);
+    keys.map((key) => {
+      out[key] = false;
+    });
+    return out;
+  }
+
   componentDidUpdate(prevProps, prevState) {
-    if (get(prevState, 'filter.keyword') !== get(this.state, 'filter.keyword')) {
+    if (get(prevState, 'filter') !== get(this.state, 'filter')) {
       this.props.filterChangeHandler(this.state.filter);
     }
   }
@@ -55,6 +67,11 @@ export default class ListSearchable extends PureComponent {
   resetSearch(event) {
     event.preventDefault();
     this.setState(this.initialState());
+  }
+
+  toggleOptions(event) {
+    event.preventDefault();
+    this.setState({ showOptions: !this.state.showOptions });
   }
 
   setKeyword(event) {
@@ -70,11 +87,70 @@ export default class ListSearchable extends PureComponent {
     this.setState({ inputs: { keyword }, filter });
   }
 
+  setFilters(event, label) {
+    event.preventDefault();
+    const value = event.target.value;
+    const filter = Object.assign({}, this.state.filter);
+    const inputs = Object.assign({}, this.state.inputs);
+    if (value && label) {
+      switch (value) {
+        case "default":
+          delete filter[label];
+          inputs[label] = "default";
+          break;
+        default:
+          filter[label] = value;
+          inputs[label] = value;
+          break;
+      }
+      this.setState({ inputs, filter }, this.updateResults);
+    }
+  }
+
   renderEntity(entity) {
     const props = Object.assign({}, this.props.entityComponentProps);
     props.key = entity.id;
     props.entity = entity;
     return React.createElement(this.props.entityComponent, props);
+  }
+
+  renderOptionsText() {
+    if (this.state.showOptions) return `Hide Search Options`;
+    return `Show Search Options`;
+  }
+
+  renderFilterList() {
+    if (!this.state.showOptions || !this.props.filterOptions) return null;
+    const out = [];
+    Object.keys(this.props.filterOptions).forEach((key, index) => {
+      out.push(this.renderFilterSelect(key, index));
+    });
+    return out;
+  }
+
+  renderFilterSelect(key, index) {
+    return (
+      <div className="select" key={index}>
+        <select
+          onChange={event => this.setFilters(event, key)}
+          value={this.state.inputs[key]}
+        >
+          <option value="default">
+            {`${key}:`}
+          </option>
+          {this.renderFilterOptions(this.props.filterOptions[key])}
+        </select>
+        <i className="manicon manicon-caret-down"></i>
+      </div>
+    );
+  }
+
+  renderFilterOptions(values) {
+    const out = [];
+    values.map((value, index) => {
+      out.push(<option key={index} value={value}>{value}</option>);
+    });
+    return out;
   }
 
   renderEntityList() {
@@ -114,7 +190,6 @@ export default class ListSearchable extends PureComponent {
   }
 
   render() {
-
     const listClassName = classnames("vertical-list-primary", this.props.listClassName);
 
     return (
@@ -132,6 +207,20 @@ export default class ListSearchable extends PureComponent {
               onChange={this.setKeyword}
             />
           </div>
+          <div className="form-list-filter">
+            <div className="select-group">
+              {this.renderFilterList()}
+            </div>
+          </div>
+          { this.props.filterOptions ?
+            <button
+              onClick={this.toggleOptions}
+              className="button-bare-primary"
+            >
+              {this.renderOptionsText()}
+            </button>
+            : null
+          }
           <button
             onClick={this.resetSearch}
             className="button-bare-primary reset"
