@@ -8,7 +8,8 @@ class Seed
       email: "cli@manifold.app",
       first_name: "CLI",
       last_name: "User",
-      is_cli_user: true
+      is_cli_user: true,
+      role: User::ROLE_CLI
     )
 
     if admin_user.new_record?

@@ -5,7 +5,7 @@ module Validation
   def user_params
     params.require(:data)
     attributes = [:first_name, :last_name, :nickname, :name, :email, :password,
-                  :password_confirmation, :remove_avatar, attachment(:avatar)]
+                  :password_confirmation, :remove_avatar, attachment(:avatar), :role]
     relationships = [:makers]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

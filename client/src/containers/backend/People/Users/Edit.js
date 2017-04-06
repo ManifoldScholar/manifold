@@ -196,6 +196,16 @@ class UsersEditContainer extends PureComponent {
               name="attributes[lastName]"
               placeholder="Last Name"
             />
+            <Form.Select
+              label="Role"
+              name="attributes[role]"
+              selected={user.attributes.role}
+              options={[
+                { label: "Admin", value: "admin" },
+                { label: "Author", value: "author" },
+                { label: "Reader", value: "reader" }
+              ]}
+            />
             <Form.Save
               text="Save User"
             />
