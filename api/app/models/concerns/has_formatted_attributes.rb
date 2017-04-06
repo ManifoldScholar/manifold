@@ -1,3 +1,5 @@
+require "uber/inheritable_attr"
+
 module Concerns
   module HasFormattedAttributes
     extend ActiveSupport::Concern
