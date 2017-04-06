@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import connectAndFetch from 'utils/connectAndFetch';
+import { Link } from 'react-router-dom';
 import { ProjectList, Layout } from 'components/frontend';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { uiFilterActions, entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { projectsAPI, favoriteProjectsAPI, requests } from 'api';
 import HigherOrder from 'containers/global/HigherOrder';
 import get from 'lodash/get';
 import union from 'lodash/union';
 import size from 'lodash/size';
+import lh from 'helpers/linkHandler';
 
-const { select } = entityUtils;
 const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
 const featuredLimit = 4;
@@ -108,7 +108,10 @@ class FollowingContainer extends Component {
     if (!this.props.featuredProjects || this.props.featuredProjects.length <= limit) return null;
     return (
       <div className="section-heading-utility-right">
-        <Link to={`/browse/featured`} className="button-primary">
+        <Link
+          to={lh.link("frontendFeatured")}
+          className="button-primary"
+        >
           <span>
             <i className="manicon manicon-lamp"></i>See all featured
           </span>
@@ -151,7 +154,7 @@ class FollowingContainer extends Component {
 
   render() {
     return (
-      <HigherOrder.RequireRole requiredRole="any" redirect="/browse">
+      <HigherOrder.RequireRole requiredRole="any" redirect={lh.link("frontend")}>
         <div>
           {this.props.authentication.currentUser.favorites &&
           size(this.props.authentication.currentUser.favorites) > 0 ?
@@ -184,8 +187,4 @@ class FollowingContainer extends Component {
   }
 }
 
-const Following = connect(
-  FollowingContainer.mapStateToProps
-)(FollowingContainer);
-
-export default Following;
+export default connectAndFetch(FollowingContainer);

@@ -1,11 +1,12 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Resource } from 'components/reader';
-import { browserHistory } from 'react-router';
+import lh from 'helpers/linkHandler';
 
 export default class ResourceOverlay extends PureComponent {
 
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    match: PropTypes.object
   };
 
   constructor(props) {
@@ -14,20 +15,28 @@ export default class ResourceOverlay extends PureComponent {
   }
 
   handleClose(event) {
-    const { textId, sectionId } = this.props.params;
-    const closeUrl = `/read/${textId}/section/${sectionId}`;
-    browserHistory.push(closeUrl);
+    const { textId, sectionId } = this.props.match.params;
+    const closeUrl = lh.link("readerSection", textId, sectionId);
+    this.props.history.push(closeUrl);
   }
 
   render() {
+    const { resource } = this.props;
+    const resourceUrl = lh.link(
+      "frontendProjectResource",
+      resource.attributes.projectId,
+      resource.id
+    );
+
     return (
       <div className="overlay-full-secondary bg-neutral90">
         <div onClick={this.handleClose} className="overlay-close">
           Close
-          <i className="manicon manicon-x"></i>
+          <i className="manicon manicon-x" />
         </div>
         <Resource.Detail
-          resource={this.props.resource}
+          resource={resource}
+          resourceUrl={resourceUrl}
           handleClose={this.handleClose}
         />
       </div>

@@ -1,19 +1,19 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Resource, Utility } from 'components/frontend';
-
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { projectsAPI, resourcesAPI, requests } from 'api';
+import lh from 'helpers/linkHandler';
 
-const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class ResourceDetailContainer extends PureComponent {
-  static fetchData(getState, dispatch, location, params) {
-    const page = params.page ? params.page : 1;
-    const projectFetch = projectsAPI.show(params.id);
-    const resourceFetch = resourcesAPI.show(params.resourceId);
+
+  static fetchData(getState, dispatch, location, match) {
+    const page = match.params.page ? match.params.page : 1;
+    const projectFetch = projectsAPI.show(match.params.id);
+    const resourceFetch = resourcesAPI.show(match.params.resourceId);
     const projectAction = request(projectFetch, requests.feProject);
     const resourceAction = request(resourceFetch, requests.feResource);
     const { promise: one } = dispatch(projectAction);
@@ -41,12 +41,12 @@ class ResourceDetailContainer extends PureComponent {
 
   projectUrl() {
     const pid = this.props.project.id;
-    return `/browse/project/${pid}/resources`;
+    return lh.link("frontendProjectResources", pid);
   }
 
   resourceUrl() {
     const pid = this.props.project.id;
-    return `/browse/project/${pid}/resource`;
+    return lh.link("frontendProjectResource", pid);
   }
 
   render() {
@@ -82,8 +82,4 @@ class ResourceDetailContainer extends PureComponent {
   }
 }
 
-const ResourceDetail = connect(
-    ResourceDetailContainer.mapStateToProps
-)(ResourceDetailContainer);
-
-export default ResourceDetail;
+export default connectAndFetch(ResourceDetailContainer);

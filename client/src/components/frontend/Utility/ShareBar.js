@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { TwitterButton, FacebookButton } from 'react-social';
 import { HigherOrder } from 'containers/global';
 
@@ -54,6 +53,8 @@ class ShareBar extends Component {
 
   render() {
     if (!this.state.inBrowser) return null;
+    if (!this.props.settings) return null;
+
     const twitterWindowOptions = ["", "", "width=600,height=300"];
 
     return (

@@ -1,19 +1,17 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { entityEditorActions, entityStoreActions } from 'actions';
 import { Developer } from 'components/global';
 import { bindActionCreators } from 'redux';
-import { entityUtils } from 'utils';
 import { Form as GlobalForm } from 'components/global';
 import get from 'lodash/get';
 import has from 'lodash/has';
 import isString from 'lodash/isString';
-import JSONTree from 'react-json-tree';
 import brackets2dots from 'brackets2dots';
+import { Prompt } from 'react-router-dom';
 
-const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
+const { close, open, set } = entityEditorActions;
 
 class FormContainer extends PureComponent {
 
@@ -45,7 +43,6 @@ class FormContainer extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     return {
-      routing: state.routing,
       session: get(state.entityEditor.sessions, ownProps.name),
       response: get(state.entityStore.responses, ownProps.name),
       errors: get(state.entityStore.responses, `${ownProps.name}.errors`)
@@ -54,14 +51,15 @@ class FormContainer extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.state = {
+      preventDirtyWarning: false
+    };
     this.preventDirtyWarning = false;
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.routerWillLeave = this.routerWillLeave.bind(this);
   }
 
   componentDidMount() {
     this.maybeOpenSession(this.props);
-    this.setRouterLeaveHook(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,23 +77,12 @@ class FormContainer extends PureComponent {
     this.flushSave(this.props);
   }
 
-  routerWillLeave(event) {
-    if (this.props.session.changed !== true) return;
-    if (this.preventDirtyWarning === true) return;
-    return window.confirm("Changes you made may not be saved.");
-  }
-
-  setRouterLeaveHook(props) {
-    if (!props.route) return;
-    props.router.setRouteLeaveHook(props.route, this.routerWillLeave);
-  }
-
   closeSession(props) {
-    props.dispatch(entityEditorActions.close(props.name));
+    props.dispatch(close(props.name));
   }
 
   flushSave(props) {
-    props.dispatch(entityStoreActions.flush(props.name));
+    props.dispatch(flush(props.name));
   }
 
   maybeOpenSession(props) {
@@ -105,7 +92,7 @@ class FormContainer extends PureComponent {
   }
 
   openSession(name, model = {}) {
-    this.props.dispatch(entityEditorActions.open(name, model));
+    this.props.dispatch(open(name, model));
   }
 
   handleSubmit(event = null) {
@@ -125,8 +112,9 @@ class FormContainer extends PureComponent {
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty('promise') && this.props.onSuccess) {
       res.promise.then(() => {
-        this.preventDirtyWarning = true;
-        this.props.onSuccess();
+        this.setState({ preventDirtyWarning: true }, () => {
+          this.props.onSuccess();
+        });
       });
     }
   }
@@ -138,8 +126,9 @@ class FormContainer extends PureComponent {
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty('promise') && this.props.onSuccess) {
       res.promise.then(() => {
-        this.preventDirtyWarning = true;
-        this.props.onSuccess(this.props.response.entity);
+        this.setState({ preventDirtyWarning: true }, () => {
+          this.props.onSuccess(this.props.response.entity);
+        });
       });
     }
   }
@@ -173,7 +162,7 @@ class FormContainer extends PureComponent {
   childProps(props) {
     return {
       actions: {
-        set: bindActionCreators(entityEditorActions.set, props.dispatch),
+        set: bindActionCreators(set, props.dispatch),
       },
       dirtyModel: props.session.dirty,
       sourceModel: props.session.source,
@@ -192,11 +181,23 @@ class FormContainer extends PureComponent {
     return <Developer.Debugger object={debug} />;
   }
 
+  isBlocking() {
+    if (this.state.preventDirtyWarning === true) return false;
+    if (this.props.session.changed === true) return true;
+    return false;
+  }
+
   render() {
     if (!this.props.session) return null;
     return (
       <div>
         {this.renderDebugger()}
+
+        <Prompt
+          when={this.isBlocking()}
+          message="You may have unsaved changes. Do you want to leave without saving your changes?"
+        />
+
         {this.props.groupErrors === true ?
           <GlobalForm.Errorable
             containerStyle={this.props.groupErrorsStyle}
@@ -213,9 +214,5 @@ class FormContainer extends PureComponent {
   }
 }
 
-const Form = connect(
-  FormContainer.mapStateToProps
-)(FormContainer);
-
-export default withRouter(Form);
+export default connectAndFetch(FormContainer);
 

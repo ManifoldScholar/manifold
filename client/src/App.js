@@ -1,109 +1,119 @@
 import React, { Component, PropTypes } from 'react';
 import createStore from 'store/createStore';
-import { Router, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import {
+  BrowserRouter,
+  StaticRouter,
+  Route,
+  Link
+} from 'react-router-dom';
+import { Dialog } from 'components/backend';
 import { HigherOrder } from 'components/global';
 import { Provider } from 'react-redux';
-import getRoutes from 'routes';
 import { currentUserActions } from 'actions';
 import Manifold from 'containers/Manifold';
-import ReactGA from 'react-ga';
 import get from 'lodash/get';
+
 
 export default class App extends Component {
 
   static propTypes = {
     store: PropTypes.object,
+    staticContext: PropTypes.object,
+    staticRequest: PropTypes.object
   };
 
   constructor(props) {
     super(props);
-    this.gaInitialized = false;
-    this.gaInitCallback = this.gaInitCallback.bind(this);
-    this.router = this.router.bind(this);
-    this.serverRouter = this.serverRouter.bind(this);
-    this.clientRouter = this.clientRouter.bind(this);
-    this.componentWillMount = this.componentWillMount.bind(this);
-    this.onRouteUpdate = this.onRouteUpdate.bind(this);
+    this.state = {
+      routerConfirm: false,
+      routerConfirmCallback: null,
+      routerConfirmMessage: null
+    };
+    this.resolveRouterConfirm = this.resolveRouterConfirm.bind(this);
+    this.getConfirmation = this.getConfirmation.bind(this);
+
   }
 
   componentWillMount() {
     if (__SERVER__) {
-      this.isServer = true;
       this.store = this.props.store;
-      this.history = null;
     } else {
-      this.isServer = false;
       // Create the Redux store using our store creator function. Note that we're passing the
       // store state, which was dumped by the server-side render.
       this.store = createStore(window.__INITIAL_STATE__);
       // Load bootstrap data on the client side.
       Manifold.bootstrap(this.store.getState, this.store.dispatch);
-      // Setup history and wrap it with our scrolling helper
-      // Ensure that the history in our story stays in sync with react-router's history
-      // TODO: Restore scrolling helper
-      this.history = syncHistoryWithStore(browserHistory, this.store);
-      // We want to wrap all of our containers with the higher order ResolveDataDependencies
-      // component. That component is responsible for detecting route changes and calling the
-      // fetchData methods in the containers, to ensure that data is loaded when the route
-      // changes.
-      this.routeRenderMethod = (props) => {
-        return <HigherOrder.ResolveDataDependencies {...props} />;
-      };
     }
-    this.finalRouter = this.router();
   }
 
   componentDidMount() {
     this.store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
     this.store.dispatch(currentUserActions.login);
     this.forceUpdate();
-    // eslint-disable-next-line
-    let gaid = get(this.store.getState(), 'entityStore.entities.settings.0.attributes.general.gaTrackingId');
-    if (!gaid) gaid = ('UA-73353326-2');
-    ReactGA.initialize(gaid); // Google Analytics Tracking ID
   }
 
-  onRouteUpdate() {
-    this.trackRouteUpdate();
+  settings() {
+    return get(this.store.getState(), 'entityStore.entities.settings.0.attributes');
   }
 
-  gaInitCallback() {
-    this.gaInitialized = true;
-    this.trackRouteUpdate();
+  getConfirmation(message, callback) {
+    this.setState({
+      routerConfirm: true,
+      routerConfirmMessage: message,
+      routerConfirmCallback: callback
+    });
   }
 
-  trackRouteUpdate() {
-    if (__SERVER__) return;
-    if (!this.gaInitialized) return;
-    ReactGA.ga('send', 'pageview', window.location.pathname);
+  getRouter() {
+    if (this.props.staticRequest) {
+      return {
+        Router: StaticRouter,
+        routerProps: {
+          context: this.props.staticContext,
+          location: this.props.staticRequest.url
+        }
+      };
+    }
+    return {
+      Router: BrowserRouter,
+      routerProps: {
+        getUserConfirmation: this.getConfirmation
+      }
+    };
   }
 
-  serverRouter() {
-    return <HigherOrder.ResolveDataDependencies {...this.props} />;
+  resolveRouterConfirm(answer) {
+    this.state.routerConfirmCallback(answer);
+    this.setState({
+      routerConfirm: false,
+      routerConfirmMessage: null,
+      routerConfirmCallback: null
+    });
   }
 
-  clientRouter() {
+  renderConfirm() {
+    if (!this.state.routerConfirm) return null;
     return (
-      <Router onUpdate={this.onRouteUpdate} history={this.history} render={this.routeRenderMethod} >
-        {getRoutes()}
-      </Router>
+      <Dialog.Confirm
+        message={this.state.routerConfirmMessage}
+        heading="Are you sure?"
+        resolve={() => this.resolveRouterConfirm(true)}
+        reject={() => this.resolveRouterConfirm(false)}
+      />
     );
   }
 
-  router() {
-    if (this.isServer) {
-      return this.serverRouter();
-    }
-    return this.clientRouter();
-  }
-
   render() {
+    const { routerProps, Router } = this.getRouter();
     return (
       <Provider store={this.store} key="provider">
-        <Manifold gaInitCallback={this.gaInitCallback}>
-          {this.finalRouter}
-        </Manifold>
+        <Router {...routerProps} >
+          <HigherOrder.Analytics settings={this.settings()}>
+            <Manifold
+              confirm={this.renderConfirm()}
+            />
+          </HigherOrder.Analytics>
+        </Router>
       </Provider>
     );
   }

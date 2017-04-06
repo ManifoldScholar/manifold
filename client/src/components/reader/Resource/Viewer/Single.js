@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import get from 'lodash/get';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import throttle from 'lodash/throttle';
 import classNames from 'classnames';
 import { Resource } from 'components/frontend';

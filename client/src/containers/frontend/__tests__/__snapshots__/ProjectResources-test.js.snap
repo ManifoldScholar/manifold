@@ -4,8 +4,8 @@ exports[`ProjectResourcesContainer renders correctly 1`] = `
     className="bg-neutral05">
     <a
       className="back-link-primary full"
-      onClick={[Function]}
-      style={Object {}}>
+      href="/project/1"
+      onClick={[Function]}>
       <div
         className="container flush">
         <i
@@ -44,7 +44,7 @@ exports[`ProjectResourcesContainer renders correctly 1`] = `
             onChange={[Function]}
             placeholder="Search"
             type="text"
-            value="" />
+            value={undefined} />
         </div>
         <div
           className="select-group">
@@ -52,7 +52,7 @@ exports[`ProjectResourcesContainer renders correctly 1`] = `
             className="select">
             <select
               onChange={[Function]}
-              value="default">
+              value={undefined}>
               <option
                 value="default">
                 Type:
@@ -65,7 +65,7 @@ exports[`ProjectResourcesContainer renders correctly 1`] = `
             className="select">
             <select
               onChange={[Function]}
-              value="default">
+              value={undefined}>
               <option
                 value="default">
                 Tag:
@@ -78,7 +78,7 @@ exports[`ProjectResourcesContainer renders correctly 1`] = `
             className="select">
             <select
               onChange={[Function]}
-              value="default">
+              value={undefined}>
               <option
                 value="default">
                 Order By:
@@ -176,7 +176,7 @@ exports[`ProjectResourcesContainer renders correctly 1`] = `
                     className="resource-date" />
                   <div
                     className="arrow-link"
-                    to="/browse/project/1/resource/2">
+                    to="/project/1/resource/2">
                     <i
                       className="manicon manicon-arrow-right" />
                   </div>
@@ -247,8 +247,8 @@ exports[`ProjectResourcesContainer renders correctly 1`] = `
       className="container flush">
       <a
         className="back-link-secondary"
-        onClick={[Function]}
-        style={Object {}}>
+        href="/project/1"
+        onClick={[Function]}>
         <i
           className="manicon manicon-arrow-round-left" />
         <div>

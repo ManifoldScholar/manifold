@@ -8,7 +8,6 @@ import { textsAPI } from 'api';
 export default class TextDetailGeneralContainer extends PureComponent {
 
   static displayName = "TextDetail.General";
-  static activeNavItem = "general";
 
   static propTypes = {
     route: PropTypes.object,
@@ -26,7 +25,6 @@ export default class TextDetailGeneralContainer extends PureComponent {
     return (
       <section>
         <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.text}
           name="backend-text-general"
           update={textsAPI.update}

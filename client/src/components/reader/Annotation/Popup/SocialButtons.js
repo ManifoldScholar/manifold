@@ -16,6 +16,7 @@ class AnnotationPopupShareSocialButtons extends PureComponent {
   }
 
   render() {
+    if (!this.props.settings) return null;
     const twitterWindowOptions = ["", "", "width=600,height=300"];
     const shareMessage = `"${this.props.text}" from Manifold:`;
 

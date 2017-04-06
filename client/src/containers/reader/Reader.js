@@ -1,16 +1,18 @@
 import React, { Component, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
-import { Header, Footer, FooterMenu, Section } from 'components/reader';
-import { entityUtils } from 'utils';
+import { Header, Footer, FooterMenu } from 'components/reader';
+import { select, grab, isEntityLoaded } from 'utils/entityUtils';
 import { commonActions } from 'actions/helpers';
 import { resourcesAPI, textsAPI, sectionsAPI, annotationsAPI, requests } from 'api';
 import values from 'lodash/values';
 import uniq from 'lodash/uniq';
 import difference from 'lodash/difference';
-
+import lh from 'helpers/linkHandler';
+import { renderRoutes } from 'helpers/routing';
+import { Redirect } from 'react-router-dom';
+import { matchRoutes } from 'react-router-config';
 import {
   authActions,
   uiColorActions,
@@ -20,8 +22,6 @@ import {
   entityStoreActions
 } from 'actions';
 
-const { visibilityHide } = uiVisibilityActions;
-const { select, grab, isEntityLoaded } = entityUtils;
 const {
   selectFont,
   incrementFontSize,
@@ -35,21 +35,21 @@ const { request, flush } = entityStoreActions;
 
 class ReaderContainer extends Component {
 
-  static fetchData(getState, dispatch, location, params) {
+  static fetchData(getState, dispatch, location, match) {
     const promises = [];
     const state = getState();
-    const { sectionId, textId } = params;
+    const { sectionId, textId } = match.params;
     const sectionLoaded = sectionId ? isEntityLoaded('textSections', sectionId, state) : false;
     const textLoaded = textId ? isEntityLoaded('texts', textId, state) : false;
 
     if (textId && !textLoaded) {
-      const textCall = textsAPI.show(params.textId);
+      const textCall = textsAPI.show(textId);
       const { promise: one } = dispatch(request(textCall, requests.rText));
       promises.push(one);
     }
 
     if (sectionId && !sectionLoaded) {
-      const sectionCall = sectionsAPI.show(params.sectionId);
+      const sectionCall = sectionsAPI.show(sectionId);
       const { promise: two } = dispatch(request(sectionCall, requests.rSection));
       promises.push(two);
     }
@@ -63,8 +63,8 @@ class ReaderContainer extends Component {
     };
     return {
       annotations: select(requests.rAnnotations, state.entityStore),
-      section: grab("textSections", ownProps.params.sectionId, state.entityStore),
-      text: grab("texts", ownProps.params.textId, state.entityStore),
+      section: grab("textSections", ownProps.match.params.sectionId, state.entityStore),
+      text: grab("texts", ownProps.match.params.textId, state.entityStore),
       resources: select(requests.rSectionResources, state.entityStore),
       authentication: state.authentication,
       visibility: state.ui.visibility,
@@ -77,7 +77,7 @@ class ReaderContainer extends Component {
 
   static propTypes = {
     children: PropTypes.object,
-    params: PropTypes.object,
+    match: PropTypes.object,
     annotations: PropTypes.array,
     resources: PropTypes.array,
     location: PropTypes.object,
@@ -89,23 +89,22 @@ class ReaderContainer extends Component {
     dispatch: PropTypes.func,
     history: PropTypes.object,
     loading: PropTypes.bool,
-    notifications: PropTypes.object
+    notifications: PropTypes.object,
+    route: PropTypes.object.isRequired
   };
 
   constructor() {
     super();
     this.counter = 0;
-    this.maybeRedirect = this.maybeRedirect.bind(this);
   }
 
   componentWillMount() {
-    this.maybeRedirect(this.props);
     this.readerActions = this.makeReaderActions(this.props.dispatch);
     this.commonActions = commonActions(this.props.dispatch);
   }
 
   componentDidMount() {
-    if (this.props.params.sectionId) {
+    if (this.props.match.params.sectionId) {
       this.fetchAnnotations(this.props);
       this.fetchResources(this.props);
     }
@@ -113,7 +112,7 @@ class ReaderContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     // Fetch resources and annotations on section change.
-    if (nextProps.params.sectionId !== this.props.params.sectionId) {
+    if (nextProps.match.params.sectionId !== this.props.match.params.sectionId) {
       this.fetchAnnotations(nextProps);
       this.fetchResources(nextProps);
     }
@@ -123,7 +122,6 @@ class ReaderContainer extends Component {
         this.fetchResources(nextProps);
       }
     }
-    this.maybeRedirect(nextProps);
   }
 
   componentWillUnmount() {
@@ -132,22 +130,18 @@ class ReaderContainer extends Component {
   }
 
   fetchAnnotations(props) {
-    const annotationsCall = annotationsAPI.forSection(props.params.sectionId);
+    const annotationsCall = annotationsAPI.forSection(props.match.params.sectionId);
     props.dispatch(request(annotationsCall, requests.rAnnotations));
   }
 
   fetchResources(props) {
-    const resourcesCall = resourcesAPI.forSection(props.params.sectionId);
+    const resourcesCall = resourcesAPI.forSection(props.match.params.sectionId);
     props.dispatch(request(resourcesCall, requests.rSectionResources));
   }
 
-  maybeRedirect(props) {
-    if (props.text && !props.params.sectionId && __CLIENT__) {
-      const startTextSectionId = props.text.attributes.startTextSectionId;
-      if (startTextSectionId) {
-        browserHistory.push(`/read/${props.text.id}/section/${startTextSectionId}`);
-      }
-    }
+  shouldRedirect(props) {
+    const matches = matchRoutes(props.route.routes, this.props.location.pathname);
+    return matches.length === 0;
   }
 
   hasMissingResources(annotations, resourcesIn) {
@@ -174,6 +168,12 @@ class ReaderContainer extends Component {
     };
   };
 
+  renderRedirect(props) {
+    const startTextSectionId = props.text.attributes.startTextSectionId;
+    const path = lh.link("readerSection", props.text.id, startTextSectionId);
+    return <Redirect to={path} />;
+  }
+
   renderStyles = () => {
     return values(this.props.text.relationships.stylesheets).map((stylesheet, index) => {
       return (
@@ -184,16 +184,17 @@ class ReaderContainer extends Component {
     });
   };
 
-  render() {
-    if (!this.props.text || !this.props.section) return null;
+  renderRoutes() {
+    const { route, ...otherProps } = this.props;
+    const injectProps = { ...otherProps, ...this.readerActions };
+    const childRoutes = renderRoutes(this.props.route.routes, injectProps);
+    return childRoutes;
+  }
 
-    const hideLoginOverlay = bindActionCreators(
-      () => visibilityHide('loginOverlay'),
-      this.props.dispatch
-    );
-    const { children, ...sectionProps } = this.props;
-    const section = this.props.children &&
-      React.cloneElement(this.props.children, { ...sectionProps, ...this.readerActions });
+  render() {
+    if (!this.props.text) return null;
+    if (this.shouldRedirect(this.props)) return this.renderRedirect(this.props);
+    if (!this.props.text) return null;
 
     return (
       <HigherOrder.BodyClass className="reader">
@@ -214,19 +215,7 @@ class ReaderContainer extends Component {
             />
           </HigherOrder.ScrollAware>
           <main>
-            {section}
-            <Section.Label text={this.props.text} />
-            <Section.NextSection
-              sectionsMap={this.props.text.attributes.sectionsMap}
-              textId={this.props.text.id}
-              sectionId={this.props.section.id}
-              typography={this.props.appearance.typography}
-            />
-            <Section.Pagination
-              textId={this.props.text.id}
-              sectionId={this.props.section.id}
-              spine={this.props.text.attributes.spine}
-            />
+            {this.renderRoutes()}
           </main>
           <Footer
             text={this.props.text}
@@ -242,6 +231,4 @@ class ReaderContainer extends Component {
   }
 }
 
-export default connect(
-    ReaderContainer.mapStateToProps
-)(ReaderContainer);
+export default connectAndFetch(ReaderContainer);

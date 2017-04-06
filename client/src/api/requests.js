@@ -61,5 +61,6 @@ export default {
   gPage: 'global-page',
   gPasswordRequest: 'global-password-request',
   gPasswordReset: 'global-password-reset',
+  gCreateUser: 'global-create-user',
   settings: 'settings'
 };

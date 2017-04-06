@@ -1,21 +1,21 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { usersAPI, makersAPI, requests } from 'api';
-const { select } = entityUtils;
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
-import { browserHistory } from 'react-router';
 import get from 'lodash/get';
+import lh from 'helpers/linkHandler';
+
 const { request, flush } = entityStoreActions;
 
 class UsersEditContainer extends PureComponent {
 
   static displayName = "Users.Edit";
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state) {
     return {
       user: select(requests.beUser, state.entityStore),
       createMakerResponse: get(state.entityStore.responses, requests.beMakerCreate)
@@ -33,7 +33,7 @@ class UsersEditContainer extends PureComponent {
   }
 
   componentDidMount() {
-    this.fetchUser(this.props.params.id);
+    this.fetchUser(this.props.match.params.id);
   }
 
   componentWillUnmount() {
@@ -43,7 +43,9 @@ class UsersEditContainer extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.id !== this.props.params.id) this.fetchUser(nextProps.params.id);
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      this.fetchUser(nextProps.match.params.id);
+    }
   }
 
   fetchUser(id) {
@@ -70,7 +72,7 @@ class UsersEditContainer extends PureComponent {
     const options = { removes: user };
     const userRequest = request(call, requests.beUserDestroy, options);
     this.props.dispatch(userRequest).promise.then(() => {
-      browserHistory.push('/backend/people/users');
+      this.props.history.push(lh.link("backendPeopleUsers"));
     });
   }
 
@@ -174,7 +176,6 @@ class UsersEditContainer extends PureComponent {
         </header>
         <section className="form-section">
           <FormContainer.Form
-            route={this.props.routes[this.props.routes.length - 1]}
             model={this.props.user}
             name="backend-edit-user"
             update={usersAPI.update}
@@ -230,6 +231,4 @@ class UsersEditContainer extends PureComponent {
 
 }
 
-export default connect(
-  UsersEditContainer.mapStateToProps
-)(UsersEditContainer);
+export default connectAndFetch(UsersEditContainer);

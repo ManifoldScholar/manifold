@@ -2,7 +2,6 @@ Example Form:
 
 ```
         <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.project}
           name="backend-project-general"
           update={projectsAPI.update}

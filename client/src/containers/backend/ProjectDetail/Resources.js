@@ -1,18 +1,17 @@
 import React, { PureComponent, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Form, List, Resource } from 'components/backend';
 import { projectsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
-import { connect } from 'react-redux';
+import { select, meta } from 'utils/entityUtils';
+import lh from 'helpers/linkHandler';
 
-const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
 const perPage = 5;
 
 class ProjectDetailResources extends PureComponent {
 
   static displayName = "ProjectDetail.Resources";
-  static activeNavItem = "resources";
 
   static mapStateToProps(state) {
     return {
@@ -44,7 +43,7 @@ class ProjectDetailResources extends PureComponent {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
-      projectsAPI.resources(this.props.params.id, this.state.filter, pagination),
+      projectsAPI.resources(this.props.project.id, this.state.filter, pagination),
       requests.beResources
     );
     this.props.dispatch(action);
@@ -80,7 +79,7 @@ class ProjectDetailResources extends PureComponent {
         </header>
         <List.Searchable
           newButtonVisible
-          newButtonPath={`/backend/project/${project.id}/resources/new`}
+          newButtonPath={lh.link("backendProjectResourcesNew", project.id)}
           newButtonText="Add a New Resource"
           entities={this.props.resources}
           singularUnit="resource"
@@ -99,7 +98,5 @@ class ProjectDetailResources extends PureComponent {
   }
 }
 
-export default connect(
-  ProjectDetailResources.mapStateToProps
-)(ProjectDetailResources);
+export default connectAndFetch(ProjectDetailResources);
 

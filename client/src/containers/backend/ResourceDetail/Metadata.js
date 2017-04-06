@@ -6,7 +6,6 @@ import { resourcesAPI } from 'api';
 export default class ResourceDetailMetadataContainer extends PureComponent {
 
   static displayName = "ResourceDetail.Metadata";
-  static activeNavItem = "metadata";
 
   static propTypes = {
     route: PropTypes.object,
@@ -25,7 +24,6 @@ export default class ResourceDetailMetadataContainer extends PureComponent {
     return (
       <section>
         <FormContainer.Form
-          route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.resource}
           name="backend-project-general"
           update={resourcesAPI.update}

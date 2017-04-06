@@ -1,12 +1,15 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { HigherOrder, FatalError } from 'components/global';
 import { Layout as LayoutFrontend } from 'components/frontend';
 import { Layout as LayoutBackend } from 'components/backend';
+import { NotFound } from 'containers/frontend';
 import { commonActions } from 'actions/helpers';
 import { pagesAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import entityUtils from 'utils/entityUtils';
+import { Switch, Route } from 'react-router-dom';
+import { renderRoutes } from 'helpers/routing';
 const { request } = entityStoreActions;
 
 class BackendContainer extends PureComponent {
@@ -66,27 +69,30 @@ class BackendContainer extends PureComponent {
     );
   }
 
-  renderChildren() {
-    if (this.props.notifications.fatalError) {
-      return this.renderError(this.props.notifications.fatalError);
-    }
-    if (!this.props.authentication.authenticated) {
-      return this.renderError({
-        status: null,
-        detail: "Please login to access the backend.",
-        title: "Login Required"
-      });
-    }
-    return this.props.children;
+  renderFatalError() {
+    return this.renderError(this.props.notifications.fatalError);
   }
 
-  render() {
-    const fatalError = this.props.notifications.fatalError;
-    const loginError = {
+  renderAuthenticationError() {
+    return this.renderError({
       status: null,
       detail: "Please login to access the backend.",
       title: "Login Required"
-    };
+    });
+  }
+
+  hasFatalError() {
+    return !!this.props.notifications.fatalError;
+  }
+
+  hasAuthenticationError() {
+    return !this.props.authentication.authenticated;
+  }
+
+  render() {
+    if (this.hasFatalError()) return this.renderFatalError();
+    if (this.hasAuthenticationError()) return this.renderAuthenticationError();
+
     return (
       <HigherOrder.BodyClass className={'backend bg-neutral90'}>
         <div>
@@ -101,7 +107,7 @@ class BackendContainer extends PureComponent {
             />
           </HigherOrder.ScrollAware>
           <main ref="mainContainer">
-            {this.renderChildren()}
+            {renderRoutes(this.props.route.routes)}
           </main>
           <LayoutFrontend.Footer
             pages={this.props.pages}
@@ -115,8 +121,4 @@ class BackendContainer extends PureComponent {
   }
 }
 
-const Backend = connect(
-  BackendContainer.mapStateToProps
-)(BackendContainer);
-
-export default Backend;
+export default connectAndFetch(BackendContainer);

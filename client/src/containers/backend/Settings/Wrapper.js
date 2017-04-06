@@ -1,14 +1,12 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Settings, Navigation } from 'components/backend';
+import { Navigation } from 'components/backend';
 import { entityStoreActions, notificationActions } from 'actions';
 import get from 'lodash/get';
+import lh from 'helpers/linkHandler';
+import { renderRoutes } from 'helpers/routing';
 
 class SettingsWrapperContainer extends PureComponent {
-
-  activeChild() {
-    return get(this.props, 'children.type.activeNavItem');
-  }
 
   constructor(props) {
     super(props);
@@ -16,10 +14,10 @@ class SettingsWrapperContainer extends PureComponent {
 
   secondaryNavigationLinks() {
     return [
-      { path: "/backend/settings", label: "General", key: "general" },
-      { path: "/backend/settings/theme", label: "Theme", key: "theme" },
-      { path: "/backend/settings/integrations", label: "Integrations", key: "integrations" },
-      { path: "/backend/settings/features", label: "Features", key: "features" }
+      { path: lh.link("backendSettings"), label: "General", key: "general" },
+      { path: lh.link("backendSettingsTheme"), label: "Theme", key: "theme" },
+      { path: lh.link("backendSettingsIntegrations"), label: "Integrations", key: "integrations" },
+      { path: lh.link("backendSettingsFeatures"), label: "Features", key: "features" }
     ];
   }
 
@@ -30,7 +28,6 @@ class SettingsWrapperContainer extends PureComponent {
           <div className="wrapper">
             <Navigation.Secondary
               links={this.secondaryNavigationLinks()}
-              active={this.activeChild()}
             />
           </div>
         </aside>
@@ -38,11 +35,10 @@ class SettingsWrapperContainer extends PureComponent {
           <aside className="aside">
             <Navigation.Secondary
               links={this.secondaryNavigationLinks()}
-              active={this.activeChild()}
             />
           </aside>
           <div className="panel">
-            {React.cloneElement(this.props.children)}
+            {renderRoutes(this.props.route.routes)}
           </div>
         </div>
       </section>

@@ -2,20 +2,21 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { UserList, Drawer } from 'components/backend';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select, meta } from 'utils/entityUtils';
 import { makersAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import { Maker, List } from 'components/backend';
+import lh from 'helpers/linkHandler';
+import { Route } from 'react-router-dom';
+import { renderRoutes } from 'helpers/routing';
 
-const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
 const perPage = 10;
 
 class MakersListContainer extends PureComponent {
 
   static displayName = "Makers.List";
-  static activeNavItem = "makers";
 
   static mapStateToProps(state) {
     return {
@@ -81,11 +82,14 @@ class MakersListContainer extends PureComponent {
     };
   }
 
-  render() {
-    if (!this.props.makers) return null;
-    const { children, makers, makersMeta } = this.props;
-    const active = this.props.params.id;
+  isDrawerOpen() {
+    return !!this.props.match.params.id;
+  }
 
+  render() {
+    const { makers, makersMeta, match } = this.props;
+    if (!makers) return null;
+    const active = match.params.id;
     return (
       <div>
         <header className="section-heading-secondary">
@@ -94,10 +98,10 @@ class MakersListContainer extends PureComponent {
           </h3>
         </header>
         <Drawer.Wrapper
-          open={React.Children.count(children) > 0}
-          closeUrl="/backend/people/makers"
+          open={this.isDrawerOpen()}
+          closeUrl={lh.link("backendPeopleMakers")}
         >
-          { children }
+          {renderRoutes(this.props.route.routes)}
         </Drawer.Wrapper>
         { makers ?
           <List.Searchable

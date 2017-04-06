@@ -1,38 +1,32 @@
 import React, { Component, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Dialog } from 'components/backend';
-import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
 import { Form } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
 import { ingestionsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
-import isObject from 'lodash/isObject';
-import has from 'lodash/has';
+import { select, isLoaded } from 'utils/entityUtils';
 import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
 import capitalize from 'lodash/capitalize';
-import { browserHistory } from 'react-router';
 import { websocketActions } from 'actions';
-const { select } = entityUtils;
+import lh from 'helpers/linkHandler';
 const { request, flush } = entityStoreActions;
 
 class ProjectDetailTextIngest extends Component {
 
   static displayName = "ProjectDetail.Text.Ingest";
-  static activeNavItem = "texts";
 
   static propTypes = {
     ingestion: PropTypes.object,
     channel: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    params: PropTypes.object,
+    history: PropTypes.object.isRequired,
+    project: PropTypes.object.isRequired,
     refresh: PropTypes.func.isRequired
   }
 
-  static fetchData(getState, dispatch, location, params) {
-    if (entityUtils.isLoaded(requests.beIngestionShow, getState())) return;
-    const call = ingestionsAPI.show(params.ingestionId);
+  static fetchData(getState, dispatch, location, match) {
+    if (isLoaded(requests.beIngestionShow, getState())) return;
+    const call = ingestionsAPI.show(match.params.ingestionId);
     const ingestion = request(call, requests.beIngestionShow);
     const { promise: one } = dispatch(ingestion);
     return Promise.all([one]);
@@ -92,7 +86,7 @@ class ProjectDetailTextIngest extends Component {
 
   backToEdit(event = null) {
     if (event) event.preventDefault();
-    browserHistory.push(this.editUrl());
+    this.props.history.push(this.editUrl());
   }
 
   triggerEvent(domEvent = null, event) {
@@ -102,7 +96,11 @@ class ProjectDetailTextIngest extends Component {
   }
 
   editUrl() {
-    return `/backend/project/${this.props.params.id}/texts/new/${this.props.ingestion.id}/step/2`;
+    return lh.backendProjectIngestionEdit(
+      this.props.project.id,
+      this.props.ingestion.id,
+      "2"
+    );
   }
 
   clearLog() {
@@ -183,6 +181,4 @@ class ProjectDetailTextIngest extends Component {
 
 }
 
-export default connect(
-  ProjectDetailTextIngest.mapStateToProps
-)(withRouter(ProjectDetailTextIngest));
+export default connectAndFetch(ProjectDetailTextIngest);

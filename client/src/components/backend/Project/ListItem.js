@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Project as GlobalProject } from 'components/global';
+import lh from 'helpers/linkHandler';
 
 export default class ProjectListItem extends PureComponent {
 
@@ -32,7 +33,7 @@ export default class ProjectListItem extends PureComponent {
     const attr = project.attributes;
     return (
       <li key={project.id}>
-        <Link to={`/backend/project/${project.id}`}>
+        <Link to={lh.link("backendProject", project.id)}>
           <header>
             <figure className="cover">
               {attr.coverStyles.smallPortrait ?

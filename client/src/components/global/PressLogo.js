@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { entityUtils } from 'utils';
 
 export default class PressLogo extends Component {
   static propTypes = {

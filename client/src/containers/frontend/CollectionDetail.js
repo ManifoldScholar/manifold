@@ -1,46 +1,47 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Utility, ResourceCollection } from 'components/frontend';
-import { browserHistory } from 'react-router';
+import { HigherOrder } from 'components/global';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select, grab, meta, loaded, isEntityLoaded } from 'utils/entityUtils';
 import { projectsAPI, collectionsAPI, requests } from 'api';
+import queryString from 'query-string';
 import debounce from 'lodash/debounce';
-import get from 'lodash/get';
 import omitBy from 'lodash/omitBy';
 import isNull from 'lodash/isNull';
+import lh from 'helpers/linkHandler';
 
-const { select, grab, meta, loaded, isEntityLoaded } = entityUtils;
 const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 
 class CollectionDetailContainer extends PureComponent {
 
-  static fetchData(getState, dispatch, location, params) {
+  static fetchData(getState, dispatch, location, match) {
+    console.log('test test');
     const state = getState();
+    const filter = queryString.parse(location.search);
     const promises = [];
 
     // Load project, unless it is already loaded
-    if (!isEntityLoaded('projects', params.id, state)) {
-      const p = projectsAPI.show(params.id);
+    if (!isEntityLoaded('projects', match.params.id, state)) {
+      const p = projectsAPI.show(match.params.id);
       const { promise } = dispatch(request(p, requests.tmpProject));
       promises.push(promise);
     }
 
     // Load the collection, unless it is already loaded
-    if (!isEntityLoaded('collections', params.collectionId, state)) {
-      const c = collectionsAPI.show(params.collectionId);
+    if (!isEntityLoaded('collections', match.params.collectionId, state)) {
+      const c = collectionsAPI.show(match.params.collectionId);
       const { promise } = dispatch(request(c, requests.feCollection));
       promises.push(promise);
     }
 
     // Load the collection resources, unless they have already been loaded
     if (!loaded(requests.feCollectionResources, state.entityStore)) {
-      const filter = location.query ? location.query : {};
-      const pp = params.page ? params.page : page;
+      const pp = match.params.page ? match.params.page : page;
       const cr = collectionsAPI.collectionResources(
-        params.collectionId, filter, { number: pp, size: perPage }
+        match.params.collectionId, filter, { number: pp, size: perPage }
       );
       const lookups = [requests.feSlideshow, requests.feCollectionResources];
       const { promise } = dispatch(request(cr, lookups));
@@ -52,8 +53,8 @@ class CollectionDetailContainer extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     const props = {
-      project: grab('projects', ownProps.params.id, state.entityStore),
-      collection: grab('collections', ownProps.params.collectionId, state.entityStore),
+      project: grab('projects', ownProps.match.params.id, state.entityStore),
+      collection: grab('collections', ownProps.match.params.collectionId, state.entityStore),
       resources: select(requests.feCollectionResources, state.entityStore),
       resourcesMeta: meta(requests.feCollectionResources, state.entityStore),
       slideshowResources: select(requests.feSlideshow, state.entityStore),
@@ -75,7 +76,7 @@ class CollectionDetailContainer extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = this.initialState(this.props.location.query);
+    this.state = this.initialState(queryString.parse(this.props.location.search));
     this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.filterChange = this.filterChange.bind(this);
@@ -126,10 +127,11 @@ class CollectionDetailContainer extends PureComponent {
   }
 
   updateUrl(stateFilter) {
-    const base = this.props.location.pathname;
     const filter = stateFilter;
     if (filter.collection_order) delete filter.collection_order;
-    browserHistory.push({ pathname: base, query: filter });
+    const pathname = this.props.location.pathname;
+    const search = queryString.stringify(filter);
+    this.props.history.push({ pathname, search });
   }
 
   updateResults() {
@@ -146,17 +148,16 @@ class CollectionDetailContainer extends PureComponent {
     const project = this.props.project;
     const collection = this.props.collection;
 
-    const filter = get(this.props, 'location.query');
+    const filter = this.state.filter;
     const initialFilter = filter ? filter : null;
 
     if (!project || !collection) return null;
-
-    const collectionUrl = `/browse/project/${project.id}/collection/${collection.id}`;
+    const collectionUrl = lh.link("frontendProjectCollection", project.id, collection.id);
 
     return (
       <div>
         <Utility.BackLinkPrimary
-          link={`/browse/project/${project.id}`}
+          link={lh.link("frontendProject", project.id)}
           title={project.attributes.title}
         />
         { this.props.slideshowResources && this.props.resources ?
@@ -176,7 +177,7 @@ class CollectionDetailContainer extends PureComponent {
         : null }
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
-            link={`/browse/project/${project.id}`}
+            link={lh.link("frontendProject", project.id)}
             title={project.attributes.title}
           />
         </section>
@@ -185,8 +186,4 @@ class CollectionDetailContainer extends PureComponent {
   }
 }
 
-const CollectionDetail = connect(
-    CollectionDetailContainer.mapStateToProps
-)(CollectionDetailContainer);
-
-export default CollectionDetail;
+export default connectAndFetch(CollectionDetailContainer);

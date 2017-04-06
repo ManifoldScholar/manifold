@@ -2,8 +2,8 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
 <div>
   <a
     className="back-link-primary full"
-    onClick={[Function]}
-    style={Object {}}>
+    href="/project/1"
+    onClick={[Function]}>
     <div
       className="container flush">
       <i
@@ -107,8 +107,8 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
                   </button>
                   <a
                     className="detail-link"
-                    onClick={[Function]}
-                    style={Object {}}>
+                    href="/project/undefined/resource/3"
+                    onClick={[Function]}>
                     Details
                   </a>
                 </div>
@@ -157,8 +157,8 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
         className="resource-totals"
         data-id="total-container">
         <a
-          onClick={[Function]}
-          style={Object {}}>
+          href="/project/1/resources"
+          onClick={[Function]}>
           View All Project Resources 
           <i
             className="manicon manicon-arrow-right" />
@@ -179,7 +179,7 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
             onChange={[Function]}
             placeholder="Search"
             type="text"
-            value="" />
+            value={undefined} />
         </div>
         <div
           className="select-group">
@@ -187,7 +187,7 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
             className="select">
             <select
               onChange={[Function]}
-              value="default">
+              value={undefined}>
               <option
                 value="default">
                 Type:
@@ -208,7 +208,7 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
             className="select">
             <select
               onChange={[Function]}
-              value="default">
+              value={undefined}>
               <option
                 value="default">
                 Tag:
@@ -225,7 +225,7 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
             className="select">
             <select
               onChange={[Function]}
-              value="default">
+              value={undefined}>
               <option
                 value="default">
                 Order By:
@@ -323,7 +323,7 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
                     className="resource-date" />
                   <div
                     className="arrow-link"
-                    to="/browse/project/undefined/collection/2/collection_resource/null">
+                    to="/project/undefined/collection/2/collection_resource/null">
                     <i
                       className="manicon manicon-arrow-right" />
                   </div>
@@ -394,8 +394,8 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
       className="container flush">
       <a
         className="back-link-secondary"
-        onClick={[Function]}
-        style={Object {}}>
+        href="/project/1"
+        onClick={[Function]}>
         <i
           className="manicon manicon-arrow-round-left" />
         <div>

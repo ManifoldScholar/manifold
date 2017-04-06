@@ -4,6 +4,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { ResourceCollection } from 'components/frontend';
 import { Provider } from 'react-redux';
+import { wrapWithRouter } from 'test/helpers/routing';
 import build from 'test/fixtures/build';
 
 describe("CollectionResourcesDetail Component", () => {
@@ -12,9 +13,9 @@ describe("CollectionResourcesDetail Component", () => {
   const store = build.store();
 
   const project = build.entity.project("1");
-  const collection = build.entity.collection("2");
-  const resource = build.entity.resource("3");
-  const collectionResource = build.entity.collectionResource("4");
+  const collection = build.entity.collection("2", {projectId: "1"});
+  const resource = build.entity.resource("3", {projectId: "1"});
+  const collectionResource = build.entity.collectionResource("4", {collectionId: "2", resourceId: "3"});
   collection.relationships.resources.push(resource);
   resource.relationships.collectionResources.push(collectionResource);
   project.relationships.resources.push(resource);
@@ -24,7 +25,7 @@ describe("CollectionResourcesDetail Component", () => {
   const filterChangeMock = jest.fn();
 
   it("renders correctly", () => {
-    const component = renderer.create(
+    const component = renderer.create(wrapWithRouter(
       <Provider store={store}>
         <ResourceCollection.Detail
           project={project}
@@ -38,7 +39,8 @@ describe("CollectionResourcesDetail Component", () => {
           filterChange={filterChangeMock}
           initialFilterState={null}
         />
-      </Provider>);
+      </Provider>
+    ));
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

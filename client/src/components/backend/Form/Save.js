@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Form } from 'components/backend';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default class FormSave extends Component {
 

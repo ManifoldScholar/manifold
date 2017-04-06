@@ -1,21 +1,19 @@
 import React, { PureComponent, PropTypes } from 'react';
-import update from 'immutability-helper';
+import connectAndFetch from 'utils/connectAndFetch';
 import { resourcesAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
-import { connect } from 'react-redux';
+import { select, meta } from 'utils/entityUtils';
 import { Section, Resource } from 'components/reader';
 
-const { select, meta } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class ResourceDetailContainer extends PureComponent {
 
   static displayName = "ReaderContainer.Resource.Detail";
 
-  static fetchData(getState, dispatch, location, params) {
+  static fetchData(getState, dispatch, location, match) {
     const promises = [];
-    const resourceCall = resourcesAPI.show(params.resourceId);
+    const resourceCall = resourcesAPI.show(match.params.resourceId);
     const { promise: one } = dispatch(request(resourceCall, requests.rResource));
     promises.push(one);
     return Promise.all(promises);
@@ -31,7 +29,7 @@ class ResourceDetailContainer extends PureComponent {
 
   static propTypes = {
     route: PropTypes.object,
-    params: PropTypes.object,
+    match: PropTypes.object,
     resource: PropTypes.object,
     dispatch: PropTypes.func
   };
@@ -46,17 +44,15 @@ class ResourceDetailContainer extends PureComponent {
 
   render() {
     if (!this.props.resource) return null;
-
     return (
        <Resource.Overlay
-         params={this.props.params}
+         history={this.props.history}
+         match={this.props.match}
          resource={this.props.resource}
        />
     );
   }
 }
 
-export default connect(
-  ResourceDetailContainer.mapStateToProps
-)(ResourceDetailContainer);
+export default connectAndFetch(ResourceDetailContainer);
 

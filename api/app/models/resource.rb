@@ -22,6 +22,9 @@ class Resource < ApplicationRecord
   include ResourceAttachmentValidation
   include ResourceAttributeResets
   include Concerns::HasFormattedAttributes
+  extend FriendlyId
+
+  friendly_id :title, use: :slugged
 
   # Associations
   belongs_to :project
@@ -66,8 +69,9 @@ class Resource < ApplicationRecord
     where(kind: kind)
   }
   scope :with_collection_order, lambda { |collection_id|
+    id = Collection.friendly.find(collection_id)
     joins(:collection_resources)
-      .where("collection_resources.collection_id = ?", collection_id)
+      .where("collection_resources.collection_id = ?", id)
       .order("collection_resources.position ASC")
   }
   scope :with_order, lambda { |by|

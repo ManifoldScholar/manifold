@@ -1,30 +1,27 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Form as FormContainer } from 'containers/backend';
 import { Resource, Navigation, Form } from 'components/backend';
 import { resourcesAPI, notifications } from 'api';
-import { notificationActions, entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
-import { browserHistory } from 'react-router';
-
-const { flush } = entityStoreActions;
+import { notificationActions } from 'actions';
+import lh from 'helpers/linkHandler';
 
 class NewResourceWrapperContainer extends PureComponent {
 
   static displayName = "NewResource.WrapperContainer";
-  static activeNavItem = "resources";
-
   static propTypes = {
   };
 
   constructor(props) {
     super(props);
-
     this.handleSuccess = this.handleSuccess.bind(this);
+    this.defaultResource = { attributes: { kind: "image" } };
+
   }
 
   redirectToResource(resource) {
-    browserHistory.push(`/backend/resource/${resource.id}`);
+    const path = lh.link("backendResource", resource.id);
+    this.props.history.push(path);
   }
 
   handleSuccess(resource) {
@@ -32,12 +29,17 @@ class NewResourceWrapperContainer extends PureComponent {
   }
 
   render() {
+    const { match } = this.props;
+
     return (
       <div>
         <Navigation.DetailHeader
           type="resource"
           breadcrumb={[
-            { path: `/backend/project/${this.props.params.projectId}/resources`, label: "Project" }
+            {
+              path: lh.link("backendProjectResources", match.params.projectId),
+              label: "Project"
+            }
           ]}
           title={'New Resource'}
           showUtility={false}
@@ -48,11 +50,10 @@ class NewResourceWrapperContainer extends PureComponent {
           <div className="container">
             <div className="panel">
               <FormContainer.Form
-                route={this.props.routes[this.props.routes.length - 1]}
-                model={{ attributes: { kind: "image" } }}
+                model={this.defaultResource}
                 name="backend-resource-create"
                 update={resourcesAPI.update}
-                create={ (model) => resourcesAPI.create(this.props.params.projectId, model) }
+                create={ (model) => resourcesAPI.create(match.params.projectId, model) }
                 onSuccess={this.handleSuccess}
                 className="form-secondary"
               >
@@ -73,7 +74,7 @@ class NewResourceWrapperContainer extends PureComponent {
                 <Resource.Form.KindAttributes />
                 <Form.Save
                   text="Save and continue"
-                  cancelRoute={`/backend/project/${this.props.params.projectId}/resources`}
+                  cancelRoute={lh.link("backendProjectResources", match.params.projectId)}
                 />
               </FormContainer.Form>
             </div>
@@ -82,10 +83,7 @@ class NewResourceWrapperContainer extends PureComponent {
       </div>
     );
   }
-
 }
 
-export default connect(
-  NewResourceWrapperContainer.mapStateToProps
-)(NewResourceWrapperContainer);
+export default connectAndFetch(NewResourceWrapperContainer);
 

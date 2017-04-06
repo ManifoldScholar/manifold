@@ -3,7 +3,6 @@ import { Form, Text } from 'components/backend';
 import { makersAPI, requests } from 'api';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
 import get from 'lodash/get';
 
 const { request, flush } = entityStoreActions;

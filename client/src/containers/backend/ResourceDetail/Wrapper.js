@@ -1,13 +1,13 @@
 import React, { PureComponent, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Text, Navigation, Dialog } from 'components/backend';
-import { browserHistory } from 'react-router';
-import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { resourcesAPI, requests } from 'api';
 import get from 'lodash/get';
+import lh from 'helpers/linkHandler';
+import { renderRoutes } from 'helpers/routing';
 
-const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class ResourceDetailWrapperContainer extends PureComponent {
@@ -41,17 +41,13 @@ class ResourceDetailWrapperContainer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(entityStoreActions.flush(requests.beResource));
+    this.props.dispatch(flush(requests.beResource));
   }
 
   fetchResource() {
-    const call = resourcesAPI.show(this.props.params.id);
+    const call = resourcesAPI.show(this.props.match.params.id);
     const resourceRequest = request(call, requests.beResource);
     this.props.dispatch(resourceRequest);
-  }
-
-  activeChild() {
-    return get(this.props, 'children.type.activeNavItem');
   }
 
   closeDialog() {
@@ -61,7 +57,7 @@ class ResourceDetailWrapperContainer extends PureComponent {
   doPreview(event) {
     event.preventDefault();
     const projectId = this.props.resource.relationships.project.id;
-    const previewUrl = `/browse/project/${projectId}/resource/${this.props.resource.id}`;
+    const previewUrl = lh.link("frontendProjectResource", projectId, this.props.resource.id);
     const win = window.open(previewUrl, '_blank');
     win.focus();
   }
@@ -78,8 +74,8 @@ class ResourceDetailWrapperContainer extends PureComponent {
 
   redirectToProjectResources() {
     const projectId = this.props.resource.relationships.project.id;
-    const redirectURL = `/backend/project/${projectId}/resources`;
-    browserHistory.push(redirectURL);
+    const redirectUrl = lh.link("backendProjectResources", projectId);
+    this.props.history.push(redirectUrl);
   }
 
   notifyDestroy() {
@@ -110,12 +106,12 @@ class ResourceDetailWrapperContainer extends PureComponent {
     const externalVideo = resource.attributes.externalVideo;
     const out = [
       {
-        path: `/backend/resource/${resource.id}/`,
+        path: lh.link("backendResource", resource.id),
         label: "General",
         key: "general"
       },
       {
-        path: `/backend/resource/${resource.id}/metadata`,
+        path: lh.link("backendResourceMetadata", resource.id),
         label: "Metadata",
         key: "metadata"
       }
@@ -126,7 +122,7 @@ class ResourceDetailWrapperContainer extends PureComponent {
       kind === "pdf" ||
       (kind === 'video' && !externalVideo)) {
       out.splice(1, 0, {
-        path: `/backend/resource/${resource.id}/variants`,
+        path: lh.link("backendResourceVariants", resource.id),
         label: "Variants",
         key: "variants"
       });
@@ -153,9 +149,15 @@ class ResourceDetailWrapperContainer extends PureComponent {
     );
   }
 
-  render() {
-    if (!this.props.resource) return null;
+  renderRoutes() {
     const { resource } = this.props;
+    const childRoutes = renderRoutes(this.props.route.routes, { resource });
+    return childRoutes;
+  }
+
+  render() {
+    const { resource, match } = this.props;
+    if (!resource) return null;
 
     return (
       <div>
@@ -167,9 +169,9 @@ class ResourceDetailWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="resource"
           breadcrumb={[
-            { path: "/backend", label: "ALL PROJECTS" },
+            { path: lh.link("backend"), label: "ALL PROJECTS" },
             {
-              path: `/backend/project/${resource.relationships.project.id}/resources`,
+              path: lh.link("backendProjectResources", resource.relationships.project.id),
               label: resource.relationships.project.attributes.title
             }
           ]}
@@ -183,7 +185,6 @@ class ResourceDetailWrapperContainer extends PureComponent {
             <div className="wrapper">
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(resource, resource.attributes.kind)}
-                active={this.activeChild()}
               />
             </div>
           </aside>
@@ -191,21 +192,16 @@ class ResourceDetailWrapperContainer extends PureComponent {
             <aside className="aside">
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(resource, resource.attributes.kind)}
-                active={this.activeChild()}
               />
             </aside>
             <div className="panel">
-              {React.cloneElement(this.props.children, { resource })}
+              {this.renderRoutes()}
             </div>
           </div>
         </section>
-
       </div>
     );
   }
 }
 
-export default connect(
-  ResourceDetailWrapperContainer.mapStateToProps
-)(ResourceDetailWrapperContainer);
-
+export default connectAndFetch(ResourceDetailWrapperContainer);

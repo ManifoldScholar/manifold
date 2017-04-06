@@ -1,30 +1,28 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 export default class NavigationSecondary extends Component {
 
   static displayName = "Navigation.Secondary";
 
   static propTypes = {
-    links: PropTypes.array,
-    active: PropTypes.string
+    links: PropTypes.array
   };
 
   render() {
-    const active = this.props.active;
-
     return (
       <nav className="panel-nav">
         <ul>
           {this.props.links.map((link) => {
             return (
               <li key={link.key} >
-                <Link
+                <NavLink
+                  exact
                   to={link.path}
-                  className={active === link.key ? 'active' : ''}
+                  activeClassName="active"
                 >
                   {link.label}
-                </Link>
+                </NavLink>
               </li>
             );
           })}

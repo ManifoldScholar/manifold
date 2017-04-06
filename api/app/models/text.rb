@@ -14,10 +14,14 @@ class Text < ApplicationRecord
   include Collaborative
   include TrackedCreator
   include Metadata
+  extend FriendlyId
 
   # Magic
   with_metadata [:isbn_ten, :isbn_thirteen, :publisher, :place_of_publication, :doi,
                  :series, :pages, :date_of_publication]
+
+  # URLs
+  friendly_id :title, use: :slugged
 
   # Fields
   serialize :structure_titles, Hash

@@ -5,8 +5,8 @@ exports[`Navigation.Breadcrumb component renders correctly 1`] = `
     className="breadcrumb-primary">
     <a
       className="initial"
-      onClick={[Function]}
-      style={Object {}}>
+      href="/link-1"
+      onClick={[Function]}>
       <i
         className="manicon manicon-arrow-left" />
       Back to:
@@ -15,16 +15,16 @@ exports[`Navigation.Breadcrumb component renders correctly 1`] = `
       <li>
         <a
           className="back-link-primary-segment"
-          onClick={[Function]}
-          style={Object {}}>
+          href="/link-1"
+          onClick={[Function]}>
           Link One
         </a>
       </li>
       <li>
         <a
           className="back-link-primary-segment"
-          onClick={[Function]}
-          style={Object {}}>
+          href="/link-2"
+          onClick={[Function]}>
           Link Two
         </a>
       </li>

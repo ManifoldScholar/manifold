@@ -1,13 +1,13 @@
 import React, { PureComponent, PropTypes } from 'react';
+import connectAndFetch from 'utils/connectAndFetch';
 import { Dialog, Text, Navigation } from 'components/backend';
-import { connect } from 'react-redux';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
-import { entityUtils } from 'utils';
+import { select } from 'utils/entityUtils';
 import { textsAPI, requests } from 'api';
 import get from 'lodash/get';
-import { browserHistory } from 'react-router';
+import lh from 'helpers/linkHandler';
+import { renderRoutes } from 'helpers/routing';
 
-const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class TextDetailWrapperContainer extends PureComponent {
@@ -44,7 +44,7 @@ class TextDetailWrapperContainer extends PureComponent {
   }
 
   fetchText() {
-    const call = textsAPI.show(this.props.params.id);
+    const call = textsAPI.show(this.props.match.params.id);
     const textRequest = request(call, requests.beText);
     this.props.dispatch(textRequest);
   }
@@ -53,24 +53,20 @@ class TextDetailWrapperContainer extends PureComponent {
     this.setState({ confirmation: null });
   }
 
-  activeChild() {
-    return get(this.props, 'children.type.activeNavItem');
-  }
-
   secondaryNavigationLinks(text) {
     return [
       {
-        path: `/backend/text/${text.id}/`,
+        path: lh.link("backendText", text.id),
         label: "General",
         key: "general"
       },
       {
-        path: `/backend/text/${text.id}/collaborators`,
+        path: lh.link("backendTextCollaborators", text.id),
         label: "People",
         key: "collaborators"
       },
       {
-        path: `/backend/text/${text.id}/metadata`,
+        path: lh.link("backendTextMetadata", text.id),
         label: "Metadata",
         key: "metadata"
       }
@@ -87,7 +83,7 @@ class TextDetailWrapperContainer extends PureComponent {
   }
 
   redirectToDashboard() {
-    browserHistory.push("/backend");
+    this.props.history.push(lh.link("backend"));
   }
 
   handleTextDestroy(event) {
@@ -105,7 +101,7 @@ class TextDetailWrapperContainer extends PureComponent {
 
   doPreview(event) {
     event.preventDefault();
-    const win = window.open(`/read/${this.props.text.id}`, '_blank');
+    const win = window.open(lh.link("reader", this.props.text.id), '_blank');
     win.focus();
   }
 
@@ -128,9 +124,15 @@ class TextDetailWrapperContainer extends PureComponent {
     );
   }
 
+  renderRoutes() {
+    const { _routes, ...otherProps } = this.props;
+    const childRoutes = renderRoutes(this.props.route.routes, otherProps);
+    return childRoutes;
+  }
+
   render() {
-    if (!this.props.text) return null;
-    const { text } = this.props;
+    const { match, text } = this.props;
+    if (!text) return null;
 
     return (
       <div>
@@ -142,9 +144,9 @@ class TextDetailWrapperContainer extends PureComponent {
         <Navigation.DetailHeader
           type="text"
           breadcrumb={[
-            { path: "/backend", label: "ALL PROJECTS" },
+            { path: lh.link("backend"), label: "ALL PROJECTS" },
             {
-              path: `/backend/project/${text.relationships.project.id}/texts`,
+              path: lh.link("backendProjectTexts", text.relationships.project.id),
               label: text.relationships.project.attributes.title
             }
           ]}
@@ -157,7 +159,6 @@ class TextDetailWrapperContainer extends PureComponent {
             <div className="wrapper">
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(text)}
-                active={this.activeChild()}
               />
             </div>
           </aside>
@@ -165,11 +166,10 @@ class TextDetailWrapperContainer extends PureComponent {
             <aside className="aside">
               <Navigation.Secondary
                 links={this.secondaryNavigationLinks(text)}
-                active={this.activeChild()}
               />
             </aside>
             <div className="panel">
-              {React.cloneElement(this.props.children, { text })}
+              {this.renderRoutes()}
             </div>
           </div>
         </section>
@@ -178,7 +178,5 @@ class TextDetailWrapperContainer extends PureComponent {
   }
 }
 
-export default connect(
-  TextDetailWrapperContainer.mapStateToProps
-)(TextDetailWrapperContainer);
+export default connectAndFetch(TextDetailWrapperContainer);
 

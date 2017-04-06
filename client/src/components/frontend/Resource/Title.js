@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import FormattedDate from 'components/global/FormattedDate';
 import Icon from './Icon';
 

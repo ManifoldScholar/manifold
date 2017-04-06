@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Breadcrumb from '../Breadcrumb';
+import { wrapWithRouter } from 'test/helpers/routing';
 
 describe("Navigation.Breadcrumb component", () => {
 
@@ -16,9 +17,9 @@ describe("Navigation.Breadcrumb component", () => {
   ]
 
   it('renders correctly', () => {
-    const component = renderer.create(
+    const component = renderer.create(wrapWithRouter(
       <Breadcrumb links={links} />
-    );
+    ));
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
