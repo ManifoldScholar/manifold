@@ -4,7 +4,6 @@ import { projectsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
@@ -90,6 +89,10 @@ class ProjectDetailResources extends PureComponent {
           paginationClickHandler={this.pageChangeHandlerCreator}
           entityComponent={Resource.ListItem}
           filterChangeHandler={this.filterChangeHandler}
+          filterOptions={{
+            tag: this.props.project.attributes.resourceTags,
+            kind: this.props.project.attributes.resourceKinds
+          }}
         />
       </section>
     );

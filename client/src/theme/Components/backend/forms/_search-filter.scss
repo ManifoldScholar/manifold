@@ -34,4 +34,33 @@
   .reset {
     color: $neutral80;
   }
+
+  .form-list-filter {
+    padding-top: 10px;
+    padding-bottom: 0;
+
+    .select-group {
+      padding-left: 0;
+      margin-top: 0;
+
+      .select select {
+        font-size: 13px;
+        border: 1px solid $neutral80;
+
+        + select {
+          padding-left: 10px;
+        }
+      }
+    }
+
+    button {
+      margin-left: 0;
+      font-size: 13px;
+      color: $neutral80;
+
+      @include respond($break75) {
+        margin-left: 20px;
+      }
+    }
+  }
 }
