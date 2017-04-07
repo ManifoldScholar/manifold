@@ -22,11 +22,12 @@ export default class EdgeLockScroll extends PureComponent {
 
   edgeLock(scroller, event, touchDelta) {
     const delta = touchDelta ? touchDelta : event.deltaY;
+    const offset = scroller.offsetTop;
     if (delta < 0 && scroller.scrollTop <= 0) {
       event.preventDefault();
     }
 
-    if (delta > 0 && scroller.scrollTop >= scroller.scrollHeight - window.innerHeight) {
+    if (delta > 0 && scroller.scrollTop >= scroller.scrollHeight - window.innerHeight + offset) {
       event.preventDefault();
     }
   }
