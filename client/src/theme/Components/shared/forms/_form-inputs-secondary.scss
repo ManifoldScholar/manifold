@@ -243,37 +243,42 @@
       text-align: center;
     }
 
-    &.style-portrait {
-      width: 220px;
-      height: 288px;
+    &.style-square, &.style-portrait {
+      width: 200px;
+      min-height: 200px;
 
-      .preview {
-        top: 30px;
-        left: 50px;
-        width: 120px;
-        height: 157px;
+      @include respond($break50) {
+        width: 220px;
+        min-height: 220px;
       }
 
-      .message {
-        margin-bottom: 35px;
+      .contents-image-preview {
+        flex-wrap: wrap;
+        padding: 35px 10px 0;
       }
-    }
-
-    &.style-square {
-      width: 220px;
-      min-height: 220px;
 
       .preview {
-        top: 30px;
-        left: 50px;
+        position: static;
+        display: inline-block;
         width: 120px;
         height: 120px;
       }
+
+      .message {
+        position: static;
+        width: 100%;
+        padding-top: 0.75em;
+      }
+    }
+
+    &.style-portrait .preview {
+      height: 157px;
     }
 
     &.style-landscape {
       width: 477px;
       height: 218px;
+      max-width: 100%;
 
       .preview {
         top: 0;
@@ -283,7 +288,7 @@
       }
 
       .contents-image-preview .message {
-        bottom: auto;
+        position: static;
         display: block;
         width: 250px;
         padding: 5px 20px 15px;
