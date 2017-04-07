@@ -165,7 +165,7 @@ class FormUpload extends Component {
       <div className="contents-image-preview">
         <div
           className="preview"
-          style={{ backgroundImage: `url(${this.previewFile(this.props, this.state)}` }}
+          style={{ backgroundImage: `url(${this.previewFile(this.props, this.state)})` }}
         >
         </div>
         <div className="message">
