@@ -25,6 +25,7 @@ module Api
       end
 
       def show
+        @scope_for_projects = Project.friendly
         @project = load_project
         render_single_resource(@project, include: INCLUDES)
       end
