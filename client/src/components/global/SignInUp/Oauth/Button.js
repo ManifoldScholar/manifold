@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import { openPopup, providerSetting } from 'utils/oauth';
 import HigherOrder from 'containers/global/HigherOrder';
 
-class OauthButton extends Component {
+class Button extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     provider: PropTypes.string.isRequired,
@@ -66,4 +66,4 @@ class OauthButton extends Component {
   }
 }
 
-export default HigherOrder.withSettings(OauthButton);
+export default HigherOrder.withSettings(Button);

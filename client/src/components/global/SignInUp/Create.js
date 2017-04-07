@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { usersAPI } from 'api';
 import { entityStoreActions, currentUserActions } from 'actions';
 import { select } from 'utils/entityUtils';
-import { Form } from 'components/global';
+import { Form, SignInUp } from 'components/global';
 
 import { connect } from 'react-redux';
 import get from 'lodash/get';
@@ -174,28 +174,29 @@ class Create extends Component {
             </div>
           </div>
         </form>
-        {/* <p className="login-links">
-          {'You can also create a Manifold account using your Facebook or Twitter credentials.'}
+        <p className="login-links">
+          {'You can also create a Manifold account using your Facebook, Twitter, or Google credentials.'}
         </p>
         <section className="login-external">
-          <button className="button-secondary-dark">
-            <i className="manicon manicon-facebook"></i>
+          <SignInUp.Oauth.Monitor dispatch={this.props.dispatch} />
+          <SignInUp.Oauth.Button dispatch={this.props.dispatch} provider="facebook">
             <span>Log in with Facebook</span>
-          </button>
-          <button className="button-secondary-dark">
-            <i className="manicon manicon-twitter"></i>
+          </SignInUp.Oauth.Button>
+          <SignInUp.Oauth.Button dispatch={this.props.dispatch} provider="google" iconName="manicon-envelope">
+            <span>Log in with Google</span>
+          </SignInUp.Oauth.Button>
+          <SignInUp.Oauth.Button dispatch={this.props.dispatch} provider="twitter">
             <span>Log in with Twitter</span>
-          </button>
-        </section> */}
+          </SignInUp.Oauth.Button>
+        </section>
+        <p className="login-links">
+          {'By creating this account, you agree to Manifold\'s terms and conditions.'}
+        </p>
         <p className="login-links">
           <a href="#" onClick={this.props.showLogin}>
             {'Already have an account?'}
           </a>
         </p>
-        {/* <p className="login-links">
-          {'By creating this account, you agree to Manifold\'s terms and conditions.'}
-        </p> */}
-
       </div>
     );
   }

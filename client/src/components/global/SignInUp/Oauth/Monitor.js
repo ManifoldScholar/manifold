@@ -10,7 +10,7 @@ function mapStateToProps({ oauth }) {
 
 const MONITOR_FREQUENCY = 100;
 
-class OauthMonitor extends Component {
+class Monitor extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     oauth: PropTypes.shape({
@@ -79,4 +79,4 @@ class OauthMonitor extends Component {
   }
 }
 
-export default connect(mapStateToProps)(OauthMonitor);
+export default connect(mapStateToProps)(Monitor);
