@@ -1,0 +1,69 @@
+exports[`Event.Thumbnail component renders thumbnail for ANNOTATION_ADD correctly 1`] = `
+<div
+  className="event-thumbnail-primary">
+  <div
+    className="wrapper">
+    <figure
+      className="event-type">
+      <i
+        className="manicon manicon-undefined" />
+    </figure>
+  </div>
+</div>
+`;
+
+exports[`Event.Thumbnail component renders thumbnail for PROJECT_CREATED correctly 1`] = `
+<div
+  className="event-thumbnail-primary">
+  <div
+    className="wrapper">
+    <figure
+      className="event-type">
+      <i
+        className="manicon manicon-egg" />
+    </figure>
+  </div>
+</div>
+`;
+
+exports[`Event.Thumbnail component renders thumbnail for RESOURCE_ADDED correctly 1`] = `
+<div
+  className="event-thumbnail-primary">
+  <div
+    className="wrapper">
+    <figure
+      className="event-type">
+      <i
+        className="manicon manicon-cube-shine" />
+    </figure>
+  </div>
+</div>
+`;
+
+exports[`Event.Thumbnail component renders thumbnail for TEXT_ADDED correctly 1`] = `
+<div
+  className="event-thumbnail-primary">
+  <div
+    className="wrapper">
+    <figure
+      className="event-type">
+      <i
+        className="manicon manicon-book-opening" />
+    </figure>
+  </div>
+</div>
+`;
+
+exports[`Event.Thumbnail component renders thumbnail for TWEET correctly 1`] = `
+<div
+  className="event-thumbnail-primary">
+  <div
+    className="wrapper">
+    <figure
+      className="event-type">
+      <i
+        className="manicon manicon-twitter" />
+    </figure>
+  </div>
+</div>
+`;

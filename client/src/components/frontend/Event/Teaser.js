@@ -9,6 +9,11 @@ export default class Teaser extends Component {
 
   static propTypes = {
     event: PropTypes.object,
+    showLink: PropTypes.bool
+  };
+
+  static defaultProps = {
+    showLink: true
   };
 
   getPromptByType(type) {
@@ -95,9 +100,11 @@ export default class Teaser extends Component {
     return (
       <div {...eventWrapperProps}>
         <EventBody event={this.props.event} icon={this.getEventIcon(attr.eventType)} />
-        <div className="event-prompt">
-          {eventPrompt}
-        </div>
+        { this.props.showLink ?
+          <div className="event-prompt">
+            {eventPrompt}
+          </div>
+        : null }
       </div>
     );
   }

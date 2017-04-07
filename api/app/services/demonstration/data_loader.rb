@@ -82,6 +82,8 @@ module Demonstration
       @logger.info("Makers reindexed".green)
       Resource.reindex
       @logger.info("Resources reindexed".green)
+      Event.reindex
+      @logger.info("Events reindexed".green)
     end
 
     private

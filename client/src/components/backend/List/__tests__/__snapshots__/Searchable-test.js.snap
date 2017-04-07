@@ -1,0 +1,192 @@
+exports[`List.Searchable component renders correctly 1`] = `
+<div>
+  <form
+    className="form-search-filter"
+    onSubmit={[Function]}>
+    <div
+      className="search">
+      <button>
+        <i
+          className="manicon manicon-magnify" />
+        <span
+          className="screen-reader-text">
+          Click to search
+        </span>
+      </button>
+      <input
+        onChange={[Function]}
+        placeholder="Search..."
+        type="text"
+        value="" />
+    </div>
+    <div
+      className="form-list-filter">
+      <div
+        className="select-group" />
+    </div>
+    <button
+      className="button-bare-primary"
+      data-id="filter-toggle"
+      onClick={[Function]}>
+      Show Search Options
+    </button>
+    <button
+      className="button-bare-primary reset"
+      onClick={[Function]}>
+      Reset Search
+    </button>
+  </form>
+  <nav
+    className="vertical-list-primary">
+    <div>
+      <p
+        className="list-total">
+        Showing 
+        <span>
+          1-1
+        </span>
+         of 
+        <span>
+          2
+        </span>
+         events: 
+      </p>
+      <ul>
+        <li
+          className="list-item">
+          <div
+            className="event-tile">
+            <div
+              className="event-data">
+              <div>
+                <i
+                  className="manicon manicon-egg" />
+                <h5
+                  className="event-title">
+                  Bicycle Race
+                </h5>
+                <datetime
+                  className="event-date" />
+              </div>
+            </div>
+          </div>
+          <div
+            className="utility"
+            data-id="destroy"
+            onClick={[Function]}>
+            <i
+              className="manicon manicon-trashcan" />
+          </div>
+        </li>
+        <li
+          className="list-item">
+          <div
+            className="event-tile tweet">
+            <div
+              className="event-data">
+              <div>
+                <i
+                  className="manicon manicon-twitter" />
+                <div
+                  className="event-user">
+                  <a
+                    href="https://twitter.com/undefined">
+                    @undefined
+                  </a>
+                </div>
+                <div
+                  className="event-content">
+                  <p
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "Buddy, you\'re a boy, make a big noise.",
+                      }
+                    } />
+                </div>
+                <datetime
+                  className="event-date" />
+              </div>
+            </div>
+          </div>
+          <div
+            className="utility"
+            data-id="destroy"
+            onClick={[Function]}>
+            <i
+              className="manicon manicon-trashcan" />
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <nav
+    className="list-pagination-primary">
+    <ul>
+      <li
+        className="pagination-previous"
+        style={
+          Object {
+            "visibility": "hidden",
+          }
+        }>
+        <a
+          data-id="page-prev"
+          href="#pagination-target"
+          onClick={[Function]}>
+          <i
+            className="manicon manicon-arrow-long-left" />
+          <span>
+            Prev
+          </span>
+        </a>
+      </li>
+      <li
+        className="active ordinal">
+        <a
+          href="#pagination-target"
+          onClick={[Function]}>
+          1
+        </a>
+      </li>
+      <li
+        className="ordinal">
+        <a
+          href="#pagination-target"
+          onClick={[Function]}>
+          2
+        </a>
+      </li>
+      <li
+        className="ordinal">
+        <a
+          href="#pagination-target"
+          onClick={[Function]}>
+          3
+        </a>
+      </li>
+      <li
+        className="ordinal">
+        <a
+          href="#pagination-target"
+          onClick={[Function]}>
+          4
+        </a>
+      </li>
+      <li
+        className="pagination-next"
+        style={Object {}}>
+        <a
+          data-id="page-next"
+          href="#pagination-target"
+          onClick={[Function]}>
+          <span>
+            Next
+          </span>
+          <i
+            className="manicon manicon-arrow-long-right" />
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

@@ -4,6 +4,8 @@ export default {
   beResource: 'backend-resource',
   beResources: 'backend-resources',
   beResourceDestroy: 'backend-resource-destroy',
+  beEvents: 'backend-events',
+  beEventDestroy: 'backend-event-destroy',
   beText: 'backend-text',
   beMaker: 'backend-maker',
   beMakers: 'backend-makers',

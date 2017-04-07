@@ -20,7 +20,8 @@ export default class ListSearchable extends PureComponent {
     newButtonText: PropTypes.string,
     newButtonVisible: PropTypes.bool,
     newButtonPath: PropTypes.string,
-    filterOptions: PropTypes.object
+    filterOptions: PropTypes.object,
+    destroyHandler: PropTypes.func
   };
 
   static defaultProps = {
@@ -116,6 +117,9 @@ export default class ListSearchable extends PureComponent {
     const props = Object.assign({}, this.props.entityComponentProps);
     props.key = entity.id;
     props.entity = entity;
+    if (this.props.destroyHandler) {
+      props.destroyHandler = this.props.destroyHandler;
+    }
     return React.createElement(this.props.entityComponent, props);
   }
 
@@ -127,35 +131,43 @@ export default class ListSearchable extends PureComponent {
   renderFilterList() {
     if (!this.state.showOptions || !this.props.filterOptions) return null;
     const out = [];
-    Object.keys(this.props.filterOptions).forEach((key, index) => {
-      out.push(this.renderFilterSelect(key, index));
+    Object.keys(this.props.filterOptions).forEach((filter, index) => {
+      out.push(this.renderFilterSelect(filter, index));
     });
     return out;
   }
 
-  renderFilterSelect(key, index) {
+  renderFilterSelect(filter, index) {
     return (
       <div className="select" key={index}>
         <select
-          onChange={event => this.setFilters(event, key)}
-          value={this.state.inputs[key]}
+          onChange={event => this.setFilters(event, filter)}
+          value={this.state.inputs[filter]}
+          data-id={'filter'}
         >
           <option value="default">
-            {`${key}:`}
+            {`${filter}:`}
           </option>
-          {this.renderFilterOptions(this.props.filterOptions[key])}
+          {this.renderFilterOptions(this.props.filterOptions[filter])}
         </select>
         <i className="manicon manicon-caret-down"></i>
       </div>
     );
   }
 
-  renderFilterOptions(values) {
+  renderFilterOptions(filter) {
+    const options = filter.options || filter;
     const out = [];
-    values.map((value, index) => {
-      out.push(<option key={index} value={value}>{value}</option>);
+    options.map((option, index) => {
+      const label = this.renderOptionLabel(option, filter);
+      out.push(<option key={index} value={option}>{label}</option>);
     });
     return out;
+  }
+
+  renderOptionLabel(option, filter) {
+    if (!filter.labels || !filter.labels[option]) return option;
+    return filter.labels[option];
   }
 
   renderEntityList() {
@@ -221,6 +233,7 @@ export default class ListSearchable extends PureComponent {
             <button
               onClick={this.toggleOptions}
               className="button-bare-primary"
+              data-id={'filter-toggle'}
             >
               {this.renderOptionsText()}
             </button>

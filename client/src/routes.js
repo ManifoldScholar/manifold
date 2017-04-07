@@ -57,6 +57,7 @@ export default () => {
           </Route>
           <Route component={Backend.ProjectDetail.Resources} path="resources" />
           <Route component={Backend.ProjectDetail.Collaborators} path="collaborators" />
+          <Route component={Backend.ProjectDetail.Events} path="events" />
           <Route component={Backend.ProjectDetail.Metadata} path="metadata" />
         </Route>
         <Route component={Backend.People.Wrapper} path="people" >

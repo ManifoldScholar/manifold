@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :makers
       resources :texts
       resources :ingestions, only: [:show, :update]
+      resources :events, only: [:destroy]
       resource :statistics, only: [:show]
       resource :settings, except: [:destroy, :create]
 

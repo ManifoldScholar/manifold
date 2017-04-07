@@ -52,7 +52,11 @@ export default class UtilityPagination extends PureComponent {
             <span>Prev</span>
           </Link>
         :
-          <a href={this.props.paginationTarget} onClick={handler}>
+          <a
+            href={this.props.paginationTarget}
+            onClick={handler}
+            data-id={'page-prev'}
+          >
             <i className="manicon manicon-arrow-long-left"></i>
             <span>Prev</span>
           </a>
@@ -72,7 +76,11 @@ export default class UtilityPagination extends PureComponent {
             <i className="manicon manicon-arrow-long-right"></i>
           </Link>
         :
-          <a href={this.props.paginationTarget} onClick={handler}>
+          <a
+            href={this.props.paginationTarget}
+            onClick={handler}
+            data-id={'page-next'}
+          >
             <span>Next</span>
             <i className="manicon manicon-arrow-long-right"></i>
           </a>

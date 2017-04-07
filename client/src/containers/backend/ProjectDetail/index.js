@@ -5,6 +5,7 @@ import Texts from './Texts';
 import Category from './Category';
 import Text from './Text';
 import Metadata from './Metadata';
+import Events from './Events';
 import Resources from './Resources';
 
 export default {
@@ -15,5 +16,6 @@ export default {
   Text,
   Category,
   Metadata,
+  Events,
   Resources
 };

@@ -2,6 +2,7 @@ export annotationsAPI from './resources/annotations';
 export collectionsAPI from './resources/collections';
 export favoriteProjectsAPI from './resources/favoriteProjects';
 export favoritesAPI from './resources/favorites';
+export eventsAPI from './resources/events';
 export makersAPI from './resources/makers';
 export meAPI from './resources/me';
 export pagesAPI from './resources/pages';

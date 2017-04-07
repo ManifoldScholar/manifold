@@ -15,13 +15,27 @@ class Event < ApplicationRecord
     TEXT_ANNOTATED,
     TWEET
   ].freeze
+  TYPEAHEAD_ATTRIBUTES = [:subject_title].freeze
+
+  # Search
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   # Authority
   include Authority::Abilities
+  include Filterable
+  include Concerns::HasFormattedAttributes
+
+  has_formatted_attributes :subject_title
 
   # Associations
   belongs_to :subject, polymorphic: true
   belongs_to :project
+
+  # Scopes
+  scope :by_type, lambda { |type|
+    return all unless type.present?
+    where(event_type: type)
+  }
 
   # Validation
   validates :event_type, presence: true, inclusion: { in: self::EVENT_TYPES }
