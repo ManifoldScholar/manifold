@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406200143) do
+ActiveRecord::Schema.define(version: 20170407212731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20170406200143) do
     t.text     "body"
     t.boolean  "private",         default: false
     t.integer  "comments_count",  default: 0
+    t.index ["created_at"], name: "index_annotations_on_created_at", using: :brin
+    t.index ["format"], name: "index_annotations_on_format", using: :btree
   end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -83,6 +85,7 @@ ActiveRecord::Schema.define(version: 20170406200143) do
     t.boolean  "deleted",        default: false
     t.integer  "children_count", default: 0
     t.integer  "flags_count"
+    t.index ["created_at"], name: "index_comments_on_created_at", using: :brin
   end
 
   create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -390,6 +393,7 @@ ActiveRecord::Schema.define(version: 20170406200143) do
     t.integer  "position"
     t.string   "spine",                 default: [],              array: true
     t.jsonb    "metadata",              default: {}
+    t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
   end
 
   create_table "user_claims", force: :cascade do |t|
