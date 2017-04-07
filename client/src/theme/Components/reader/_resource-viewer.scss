@@ -100,16 +100,26 @@
 
   &.highlight-enter-active {
     opacity: 1;
-    transition: opacity $duration $timing;
+
+    figure {
+      transition: opacity $duration $timing;
+    }
   }
 
   &.highlight-leave {
     opacity: 1;
+
+    .resource-title {
+      opacity: 0;
+    }
   }
 
   &.highlight-leave-active {
     opacity: 0.01;
-    transition: opacity $duration $timing;
+
+    figure {
+      transition: opacity $duration $timing;
+    }
   }
 
   .resource-viewer .viewer-list &.highlighted {
