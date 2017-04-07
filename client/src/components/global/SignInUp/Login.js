@@ -3,8 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { currentUserActions } from 'actions';
 import { get } from 'lodash';
 import classNames from 'classnames';
-import OauthButton from './OauthButton';
-import OauthMonitor from './OauthMonitor';
+import { SignInUp } from 'components/global';
 
 // const { startLogin } = authActions;
 
@@ -117,16 +116,16 @@ export default class Login extends Component {
         </p>
 
         <section className="login-external">
-          <OauthMonitor dispatch={this.props.dispatch} />
-          <OauthButton dispatch={this.props.dispatch} provider="facebook">
+          <SignInUp.Oauth.Monitor dispatch={this.props.dispatch} />
+          <SignInUp.Oauth.Button dispatch={this.props.dispatch} provider="facebook">
             <span>Log in with Facebook</span>
-          </OauthButton>
-          <OauthButton dispatch={this.props.dispatch} provider="google" iconName="manicon-envelope">
+          </SignInUp.Oauth.Button>
+          <SignInUp.Oauth.Button dispatch={this.props.dispatch} provider="google" iconName="manicon-envelope">
             <span>Log in with Google</span>
-          </OauthButton>
-          <OauthButton dispatch={this.props.dispatch} provider="twitter">
+          </SignInUp.Oauth.Button>
+          <SignInUp.Oauth.Button dispatch={this.props.dispatch} provider="twitter">
             <span>Log in with Twitter</span>
-          </OauthButton>
+          </SignInUp.Oauth.Button>
         </section>
       </div>
     );
