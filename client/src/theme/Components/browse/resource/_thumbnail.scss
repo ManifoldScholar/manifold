@@ -201,6 +201,10 @@
   .resource-type {
     @include templateHead;
     font-size: 14px;
+
+    .resource-viewer & {
+      font-size: 0;
+    }
   }
 
   .resource-title {
