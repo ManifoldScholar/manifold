@@ -2,82 +2,102 @@ require "google/apis/analytics_v3"
 require "google/api_client/auth/key_utils"
 
 class Statistics
+  extend ActiveModel::Naming
   include ActiveModel::Validations
   include ActiveModel::Conversion
   include Authority::Abilities
-  extend ActiveModel::Naming
+  include Redis::Objects
+
+  lock :transaction, timeout: 1, expiration: 15
+  value :this_week, marshal: true
+  value :last_week, marshal: true
 
   def id
     0
   end
 
-  def initialize(_range = nil)
-    @range ||= Time.zone.today.at_beginning_of_week..Time.zone.today.at_end_of_week
-    @settings = Settings.instance.general
-  end
-
-  def start_date
-    @range.first
-  end
-
-  def end_date
-    @range.last
-  end
-
+  # @!attribute [rw] readers_this_week
+  # @return [Float]
   def readers_this_week
-    REDIS.with do |conn|
-      conn.hget("cache:statistics", :this_week).to_f
-    end
+    this_week.value.to_f
   end
 
+  def readers_this_week=(new_value)
+    this_week.value = new_value.to_f
+  end
+
+  # @!attribute [rw] readers_last_week
+  # @return [Float]
   def readers_last_week
-    REDIS.with do |conn|
-      conn.hget("cache:statistics", :last_week).to_f
+    last_week.value.to_f
+  end
+
+  def readers_last_week=(new_value)
+    last_week.value = new_value
+  end
+
+  # Update values in a redis lock.
+  #
+  # @yieldparam [Statistics] instance the instance itself to update
+  # @yieldreturn [void]
+  # @return [void]
+  def update
+    transaction_lock.lock do
+      yield self if block_given?
     end
   end
 
+  # @return [Integer]
   def reader_increase
-    this_week = readers_this_week
-    last_week = readers_last_week
-    return nil unless this_week && last_week
-
-    if last_week.zero?
-      result = this_week.positive? ? (this_week * 100).to_i : 0
+    if readers_last_week.zero?
+      readers_this_week.positive? ? percentify(readers_this_week) : 0
     else
-      diff = this_week - last_week
-      result = diff.zero? ? 0 : ((diff / last_week) * 100).to_i
+      diff = readers_this_week - readers_last_week
+
+      diff.zero? ? 0 : percentify(diff / readers_last_week)
     end
-    result
   end
 
   def new_highlights_count
-    Annotation.where("created_at >= ? AND created_at <= ? AND format = ?",
-                     start_date,
-                     end_date,
-                     "highlight").count
+    Annotation.only_annotations.in_the_week_of(Date.current).count
   end
 
   def new_annotations_count
-    Annotation.where("created_at >= ? AND created_at <= ? AND format = ?",
-                     start_date,
-                     end_date,
-                     "annotation").count
+    Annotation.only_highlights.in_the_week_of(Date.current).count
   end
 
   def new_comments_count
-    Comment.where("created_at >= ? AND created_at <= ?",
-                  start_date,
-                  end_date).count
+    Comment.in_the_week_of(Date.current).count
   end
 
   def new_texts_count
-    Text.where("created_at >= ? AND created_at <= ?",
-               start_date,
-               end_date).count
+    Text.in_the_week_of(Date.current).count
   end
 
   def read_attribute_for_serialization(n)
     send(n)
   end
 
+  private
+
+  # @param [Numeric] value
+  # @return [Integer]
+  def percentify(value)
+    (value * 100).to_i
+  end
+
+  class << self
+    # @yieldparam [Statistics] statistics
+    # @yieldreturn [void]
+    # @return [void]
+    def update!
+      return unless block_given?
+
+      instance = new
+
+      instance.update do
+        yield instance
+      end
+    end
+  end
 end

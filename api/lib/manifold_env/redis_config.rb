@@ -24,6 +24,16 @@ module ManifoldEnv
       }
     end
 
+    def build_connection_pool(*namespace_parts, size: 5, timeout: 5)
+      ConnectionPool.new size: size, timeout: timeout do
+        build_connection(*namespace_parts)
+      end
+    end
+
+    def build_connection(*namespace_parts)
+      Redis::Namespace.new(namespace(*namespace_parts), redis: Redis.new(url: url))
+    end
+
     private
 
     def default_url
