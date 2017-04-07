@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-export default class ResourceIconAudio extends Component {
+export default class ResourceIconFile extends Component {
 
-  static displayName = "Resource.Icon.Audio";
+  static displayName = "Resource.Icon.File";
 
   render() {
     return (
