@@ -1,10 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { bindActionCreators } from 'redux';
-import get from 'lodash/get';
 import { Project, ResourceList } from 'components/frontend';
-import fakeData from 'helpers/fakeData';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI, requests } from 'api';
@@ -19,7 +15,7 @@ class ProjectEventsContainer extends Component {
     const projectRequest =
         request(projectsAPI.show(params.id), requests.feProject);
     const eventRequest =
-      request(projectsAPI.events(params.id, { number: page }), requests.feEvents);
+      request(projectsAPI.events(params.id, {}, { number: page }), requests.feEvents);
     const { promise: one } = dispatch(projectRequest);
     const { promise: two } = dispatch(eventRequest);
     return Promise.all([one, two]);

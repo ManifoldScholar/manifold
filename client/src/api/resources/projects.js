@@ -47,12 +47,12 @@ export default {
     };
   },
 
-  events(id, page = {}) {
+  events(id, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/projects/${id}/relationships/events`,
       method: 'GET',
       options: {
-        params: { page }
+        params: { filter, page }
       }
     };
   },

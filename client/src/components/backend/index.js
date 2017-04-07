@@ -10,3 +10,4 @@ export Dialog from './Dialog';
 export Navigation from './Navigation';
 export Category from './Category';
 export Maker from './Maker';
+export Event from './Event';

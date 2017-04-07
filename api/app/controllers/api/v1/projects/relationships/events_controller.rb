@@ -7,8 +7,11 @@ module Api
         class EventsController < ApplicationController
           before_action :set_project, only: [:index]
 
-          resourceful! Event, authorize_options: { except: [:index, :show] } do
-            @project.events.page(page_number).per(page_size)
+          resourceful! Event, authorize_options: { except: [:index] } do
+            Event.filter(
+              with_pagination!(event_filter_params),
+              scope: @project.events
+            )
           end
 
           def index
@@ -16,8 +19,7 @@ module Api
             render_multiple_resources(
               @events,
               each_serializer: EventSerializer,
-              location: api_v1_project_relationships_events_url(@project),
-              meta: { pagination: pagination_dict(@events) }
+              location: api_v1_project_relationships_events_url(@project)
             )
           end
 

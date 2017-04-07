@@ -3,7 +3,7 @@ class ProjectSerializer < ProjectPartialSerializer
   meta(partial: false)
 
   attributes :event_count, :metadata, :collections_count, :resources_count,
-             :uncollected_resources_count, :published_text_toc_id
+             :uncollected_resources_count, :published_text_toc_id, :event_types
 
   link :self do
     "https://manifold-api.dev/api/v1/projects/#{object.id}"
@@ -30,6 +30,10 @@ class ProjectSerializer < ProjectPartialSerializer
 
   def events
     object.events.limit(6)
+  end
+
+  def event_types
+    object.events.pluck(:event_type).uniq
   end
 
   def published_text_toc_id

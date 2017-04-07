@@ -5,5 +5,5 @@ class EventSerializer < ActiveModel::Serializer
   attributes :event_type, :event_url, :subject_id, :subject_type, :subject_title,
              :subject_subtitle, :attribution_name, :attribution_url,
              :attribution_identifier, :excerpt, :project_id, :event_title,
-             :event_subtitle, :created_at
+             :event_subtitle, :created_at, :subject_title_formatted
 end

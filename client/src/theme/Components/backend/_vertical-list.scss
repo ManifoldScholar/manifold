@@ -45,6 +45,17 @@
     }
   }
 
+  &.tile-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 17px;
+    margin-bottom: -28px;
+
+    @include respond($break60) {
+      margin-left: -40px;
+    }
+  }
+
   ul {
     @include listUnstyled;
 
@@ -74,6 +85,7 @@
       }
     }
 
+    // Use .list-item on li if the items don't link
     a {
       display: flex;
       justify-content: space-between;
@@ -230,6 +242,71 @@
 
       .manicon-check {
         font-size: 8px;
+      }
+    }
+
+    .list-item {
+      position: relative;
+      width: 100%;
+
+      @include respond($break60) {
+        width: 100%;
+        min-height: 150px;
+        padding-left: 40px;
+        margin-bottom: 28px;
+        border-top: 0;
+      }
+
+      @include respond($break95) {
+        width: 50%;
+      }
+
+      .utility {
+        position: absolute;
+        right: 12px;
+        bottom: 8px;
+
+        @include respond($break60) {
+          font-size: 1.2em;
+        }
+
+        .manicon-trashcan {
+          color: $sp40Tertiary;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    // Events list items
+    .event-tile {
+      height: 100%;
+      color: $neutral30;
+      background-color: transparent;
+
+      @include respond($break60) {
+        background-color: $neutral85;
+      }
+
+      .manicon {
+        background-color: $neutral75;
+      }
+
+      .event-data {
+        padding-right: 26px;
+
+        a {
+          display: inline-block;
+          width: auto;
+          padding: 7px 0 5px;
+        }
+
+        .event-content {
+          padding-top: 0;
+          line-height: 1em;
+        }
       }
     }
   }

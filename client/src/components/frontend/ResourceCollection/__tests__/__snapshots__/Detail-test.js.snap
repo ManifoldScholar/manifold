@@ -327,6 +327,7 @@ exports[`CollectionResourcesDetail Component renders correctly 1`] = `
                 }
               }>
               <a
+                data-id="page-prev"
                 href="#pagination-target"
                 onClick={undefined}>
                 <i
@@ -356,6 +357,7 @@ exports[`CollectionResourcesDetail Component renders correctly 1`] = `
               className="pagination-next"
               style={Object {}}>
               <a
+                data-id="page-next"
                 href="#pagination-target"
                 onClick={undefined}>
                 <span>

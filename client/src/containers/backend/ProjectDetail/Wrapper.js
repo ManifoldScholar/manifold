@@ -81,6 +81,11 @@ class ProjectDetailWrapperContainer extends PureComponent {
         key: "resources"
       },
       {
+        path: `/backend/project/${project.id}/events`,
+        label: "Activity",
+        key: "events"
+      },
+      {
         path: `/backend/project/${project.id}/metadata`,
         label: "Metadata",
         key: "metadata"

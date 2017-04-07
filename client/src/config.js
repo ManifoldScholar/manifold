@@ -39,6 +39,15 @@ const applicationConfiguration = {
         'twitter:image:width': '200',
         'twitter:image:height': '200'
       }
+    },
+    locale: {
+      event_types: {
+        PROJECT_CREATED: 'Project Created',
+        TEXT_ADDED: 'Text Added',
+        TEXT_ANNOTATED: 'Text Annotated',
+        RESOURCE_ADDED: 'Resource Added',
+        TWEET: 'Tweet'
+      }
     }
   }
 };
