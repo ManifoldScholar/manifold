@@ -116,10 +116,12 @@ export default class AnnotationPopup extends Component {
     const down = 'down';
     const annotatable = this.props.annotatableDomElement;
     const annotatableRect = annotatable.getBoundingClientRect();
-    const topVisiblePosition = document.body.scrollTop + 100;
-    const bottomVisiblePosition = topVisiblePosition + window.innerHeight;
-    const popupTopEdgeIfUp = window.scrollY + rect.top - popupHeight;
-    const popupBottomEdgeIfDown = window.scrollY + rect.bottom + popupHeight;
+    // Get crossbrowser document scrollTop
+    const documentScrollTop = document.documentElement.scrollTop || document.body.scrollTop || window.scrollY;
+    const topVisiblePosition = documentScrollTop + 100;
+    const bottomVisiblePosition = documentScrollTop + window.innerHeight;
+    const popupTopEdgeIfUp = documentScrollTop + rect.top - popupHeight;
+    const popupBottomEdgeIfDown = documentScrollTop + rect.bottom + popupHeight;
     const topCollisionPossible = popupTopEdgeIfUp < topVisiblePosition;
     const bottomCollisionPossible = popupBottomEdgeIfDown > bottomVisiblePosition;
     const margin = annotatableRect.left;
