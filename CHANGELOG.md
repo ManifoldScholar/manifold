@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/ManifoldScholar/manifold/tree/HEAD)
-
-[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.1.1...HEAD)
+## [v0.1.2](https://github.com/ManifoldScholar/manifold/tree/v0.1.2) (2017-04-08)
+[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.1.1...v0.1.2)
 
 **Fixed bugs:**
 
@@ -10,8 +9,11 @@
 
 **Merged pull requests:**
 
+- \[B\] Fix Statistics caching / fetching [\#239](https://github.com/ManifoldScholar/manifold/pull/239) ([scryptmouse](https://github.com/scryptmouse))
+- \[C\] Add Changelog to project [\#236](https://github.com/ManifoldScholar/manifold/pull/236) ([zdavis](https://github.com/zdavis))
+- \[B\] Fix backend drawer scroll-to-bottom [\#235](https://github.com/ManifoldScholar/manifold/pull/235) ([naomiyaki](https://github.com/naomiyaki))
 - \[B\] Fix mismatched resource icons [\#234](https://github.com/ManifoldScholar/manifold/pull/234) ([SMaxOwok](https://github.com/SMaxOwok))
-- \[B\] Remove leftovers from resource sub kind change [\#233](https://github.com/ManifoldScholar/manifold/pull/233) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[B\] Address lingering resource sub-kind issues [\#233](https://github.com/ManifoldScholar/manifold/pull/233) ([SMaxOwok](https://github.com/SMaxOwok))
 
 ## [v0.1.1](https://github.com/ManifoldScholar/manifold/tree/v0.1.1) (2017-04-06)
 [Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.1.0...v0.1.1)
