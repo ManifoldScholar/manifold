@@ -9,8 +9,12 @@ class OmniauthStack
     if skip?(env)
       @app.call(env)
     else
-      middleware_stack.build(@app).call(env)
+      call_with_stack(env)
     end
+  end
+
+  def call_with_stack(env)
+    middleware_stack.build(@app).call(env)
   end
 
   def skip?(env)
