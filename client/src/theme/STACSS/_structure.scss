@@ -276,7 +276,6 @@ $readerContainerWidths: (790px, 680px, 500px);
   #{$parameter}: (43px * $dimension);
 }
 
-
 // Lists
 // --------------------------------------------------------
 @mixin listUnstyled {
@@ -314,6 +313,23 @@ $readerContainerWidths: (790px, 680px, 500px);
   .button-secondary {
     display: block;
     margin-top: 30px;
+  }
+}
+
+// Pagination
+// --------------------------------------------------------
+// Show/hide pagination button text
+@mixin constrainedPaginationResponsive {
+  span {
+    display: inline-block;
+
+    @include respond($break65) {
+      display: none;
+    }
+
+    @include respond($break90) {
+      display: inline-block;
+    }
   }
 }
 

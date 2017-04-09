@@ -110,12 +110,13 @@ export default class ResourceMeta extends Component {
               </span>
             </li> : null
           }
-          {attr.credit ?
+          {attr.creditFormatted ?
             <li>
               <span className="meta-label">{'Credit'}</span>
-              <span className="meta-value">
-                {attr.credit}
-              </span>
+              <span
+                className="meta-value"
+                dangerouslySetInnerHTML={{ __html: attr.creditFormatted }}
+              />
             </li> : null
           }
         </ul>

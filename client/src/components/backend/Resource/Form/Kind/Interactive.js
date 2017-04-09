@@ -45,10 +45,14 @@ export default class ResourceFormKindInteractive extends PureComponent {
       <div className="form-section">
         <Form.Switch
           label="Is this an iFrame?"
-          name="attributes[isIframe]"
+          name="attributes[subKind]"
+          customValues={{
+            true: "iframe",
+            false: "embed"
+          }}
           {...this.props}
         />
-        {this.props.getModelValue("attributes[isIframe]") ?
+        {this.props.getModelValue("attributes[subKind]") === "iframe" ?
           this.renderIframeForm()
           : this.renderEmbedForm()
         }

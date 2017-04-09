@@ -6,8 +6,8 @@ class ResourceSerializer < ResourcePartialSerializer
              :attachment_content_type, :attachment_file_size, :attachment_updated_at,
              :created_at, :updated_at, :project_id, :description_formatted,
              :caption, :description, :downloadable, :fingerprint, :alt_text, :keywords,
-             :copyright_status, :copyright_holder, :credit, :external_url, :external_id,
-             :external_type, :allow_high_res, :allow_download, :doi, :high_res_url,
+             :copyright_status, :copyright_holder, :external_url,
+             :allow_high_res, :allow_download, :doi, :high_res_url,
              :high_res_file_name, :high_res_content_type, :high_res_file_size,
              :high_res_updated_at, :variant_format_one_file_name,
              :variant_format_one_content_type, :variant_format_one_file_size,
@@ -22,19 +22,15 @@ class ResourceSerializer < ResourcePartialSerializer
              :transcript_content_type, :transcript_file_size, :transcript_updated_at,
              :translation_file_name, :translation_content_type,
              :translation_file_size, :translation_updated_at, :tag_list,
-             :is_external_video, :is_iframe, :embed_code, :iframe_dimensions,
-             :iframe_length, :iframe_width, :downloadable_kind
+             :embed_code, :iframe_dimensions, :iframe_length, :iframe_width,
+             :downloadable_kind
 
   has_many :collections
   has_many :collection_resources
   belongs_to :project, serializer: ProjectPartialSerializer
 
-  def external_video
-    object.external_video?
-  end
-
-  def iframe
-    object.iframe?
+  def sub_kind
+    object.sub_kind ||= false
   end
 
   def iframe_length

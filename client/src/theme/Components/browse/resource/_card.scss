@@ -33,6 +33,10 @@
       }
     }
 
+    .resource-thumbnail-primary {
+      flex-grow: 2;
+    }
+
     .preview-text {
       @include utilityPrimary;
       position: relative; // Required to rise above overlay

@@ -58,6 +58,16 @@ RSpec.describe User, type: :model do
     expect(user).to_not be_valid
   end
 
+  it "should not be valid without a role" do
+    user = FactoryGirl.build(:user, role: nil)
+    expect(user).to_not be_valid
+  end
+
+  it "should not be valid with an invalid role" do
+    user = FactoryGirl.build(:user, role: "dog")
+    expect(user).to_not be_valid
+  end
+
   it "should split split name and assign to first and last name" do
     user = FactoryGirl.build(:user, name: "John Rambo")
     expect(user.first_name).to eq("John")

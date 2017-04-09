@@ -16,6 +16,8 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require_relative "../lib/manifold_env"
+
 # We're monkey patching dotenv's load method to load the .env file from the parent
 # directory.
 module Dotenv
@@ -70,5 +72,6 @@ module ManifoldApi
 
     config.active_job.queue_adapter = :sidekiq
 
+    config.cache_store = :redis_store, ManifoldEnv.redis.namespaced_url("cache")
   end
 end

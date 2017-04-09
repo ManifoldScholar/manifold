@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403202550) do
+ActiveRecord::Schema.define(version: 20170407212731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20170403202550) do
     t.text     "body"
     t.boolean  "private",         default: false
     t.integer  "comments_count",  default: 0
+    t.index ["created_at"], name: "index_annotations_on_created_at", using: :brin
+    t.index ["format"], name: "index_annotations_on_format", using: :btree
   end
 
   create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -83,6 +85,7 @@ ActiveRecord::Schema.define(version: 20170403202550) do
     t.boolean  "deleted",        default: false
     t.integer  "children_count", default: 0
     t.integer  "flags_count"
+    t.index ["created_at"], name: "index_comments_on_created_at", using: :brin
   end
 
   create_table "events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -219,7 +222,6 @@ ActiveRecord::Schema.define(version: 20170403202550) do
     t.uuid     "creator_id"
     t.jsonb    "tweet_fetch_config",      default: {}
     t.date     "publication_date"
-    t.text     "description_formatted"
   end
 
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -265,9 +267,6 @@ ActiveRecord::Schema.define(version: 20170403202550) do
     t.string   "translation_content_type"
     t.integer  "translation_file_size"
     t.datetime "translation_updated_at"
-    t.string   "title_formatted"
-    t.text     "description_formatted"
-    t.text     "caption_formatted"
     t.string   "variant_format_one_file_name"
     t.string   "variant_format_one_content_type"
     t.integer  "variant_format_one_file_size"
@@ -284,10 +283,9 @@ ActiveRecord::Schema.define(version: 20170403202550) do
     t.string   "variant_poster_content_type"
     t.integer  "variant_poster_file_size"
     t.datetime "variant_poster_updated_at"
-    t.boolean  "is_external_video",               default: false
     t.string   "iframe_dimensions"
-    t.boolean  "is_iframe",                       default: false
     t.text     "embed_code"
+    t.string   "sub_kind"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -395,6 +393,7 @@ ActiveRecord::Schema.define(version: 20170403202550) do
     t.integer  "position"
     t.string   "spine",                 default: [],              array: true
     t.jsonb    "metadata",              default: {}
+    t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
   end
 
   create_table "user_claims", force: :cascade do |t|
@@ -411,7 +410,7 @@ ActiveRecord::Schema.define(version: 20170403202550) do
     t.string   "password_confirmation"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
+    t.string   "role",                   default: "reader"
     t.text     "nickname"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"

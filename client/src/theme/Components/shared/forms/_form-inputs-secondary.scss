@@ -132,6 +132,7 @@
 
   .form-dropzone {
     position: relative;
+    display: flex;
     //padding: 36px 30px 38px;
     border: 1px solid $neutral80;
 
@@ -168,7 +169,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100%;
+      width: 100%;
+
+      .message {
+        width: 100%;
+        padding: 20px;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+      }
 
       .manicon-document {
         display: block;
@@ -181,11 +189,10 @@
     }
 
     .contents-image-preview {
-
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100%;
+      width: 100%;
 
       .preview {
         position: absolute;
@@ -215,11 +222,7 @@
     }
 
     .contents-empty {
-      position: relative;
-      top: 50%;
-      z-index: 2;
-      height: 100px;
-      margin-top: -50px;
+      margin: auto;
     }
 
     .remove {
@@ -258,7 +261,7 @@
 
     &.style-square {
       width: 220px;
-      height: 220px;
+      min-height: 220px;
 
       .preview {
         top: 30px;

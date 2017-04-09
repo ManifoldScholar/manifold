@@ -5,6 +5,7 @@ class Resource < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
   ALLOWED_KINDS = %w(image video audio link pdf document file spreadsheet presentation
                      interactive).freeze
+  ALLOWED_SUB_KINDS = %w(external_video iframe embed).freeze
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
@@ -20,6 +21,7 @@ class Resource < ApplicationRecord
   include Attachments
   include ResourceAttachmentValidation
   include ResourceAttributeResets
+  include Concerns::HasFormattedAttributes
 
   # Associations
   belongs_to :project
@@ -33,9 +35,16 @@ class Resource < ApplicationRecord
   manifold_has_attached_file :variant_format_one, :resource, no_styles: true
   manifold_has_attached_file :variant_format_two, :resource, no_styles: true
 
+  has_formatted_attributes :title, :caption, :credit, include_wrap: false
+  has_formatted_attributes :description
+
   # Validation
   validates :title, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
+  validates :sub_kind,
+            inclusion: { in: ALLOWED_SUB_KINDS },
+            allow_nil: true,
+            allow_blank: true
   validate :validate_kind_fields
 
   # Scopes
@@ -65,9 +74,21 @@ class Resource < ApplicationRecord
   before_validation :update_kind
   before_update :reset_stale_fields
   before_save :update_tags
-  before_save :update_title_formatted
-  before_save :update_caption_formatted
-  before_save :update_description_formatted
+  after_create :resource_to_event
+
+  # Create a new project event for the new resource
+  def resource_to_event
+    factory = Factory::Event.new
+    event = factory.create(
+      Event::RESOURCE_ADDED,
+      subject_id: id,
+      subject_type: self.class.name
+    )
+    return if event.valid?
+    Rails.logger.info(
+      "#resource_to_event created an invalid event: #{event.errors.full_messages}"
+    )
+  end
 
   def validate_kind_fields
     send("validate_#{kind}_fields")
@@ -78,6 +99,7 @@ class Resource < ApplicationRecord
   end
 
   def update_kind
+    sub_kind.present? ? sub_kind : nil
     return self.kind = determine_kind unless kind
     return self.kind = kind.downcase if ALLOWED_KINDS.include?(kind.downcase)
     self.kind = determine_kind # fallback
@@ -85,18 +107,6 @@ class Resource < ApplicationRecord
 
   def force_update_kind
     self.kind = determine_kind
-  end
-
-  def update_title_formatted
-    self.title_formatted = render_simple_markdown(title, false)
-  end
-
-  def update_caption_formatted
-    self.caption_formatted = render_simple_markdown(caption, false)
-  end
-
-  def update_description_formatted
-    self.description_formatted = render_simple_markdown(description)
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity
@@ -109,9 +119,9 @@ class Resource < ApplicationRecord
     return :spreadsheet if %w(xls xlsx).include?(ext)
     return :presentation if %w(ppt pptx).include?(ext)
     return :video if %w(mp4 webm).include?(ext)
-    return :video if %w(youtube vimeo).include?(external_type)
+    return :video if sub_kind == "external_video"
     return :audio if ["mp3"].include?(ext)
-    return :interactive if is_iframe || embed_code.present?
+    return :interactive if sub_kind == "iframe" || sub_kind == "embed"
     return :link if !attachment.present? && !external_url.blank?
     # We return a default because we always want the resource kind to be valid. If it's
     # not valid, we have a problem because it will prevent Paperclip from processing
@@ -146,7 +156,7 @@ class Resource < ApplicationRecord
   end
 
   def downloadable_kind?
-    attachment.exists? && !is_external_video
+    attachment.exists? && !external_video?
   end
 
   def downloadable?
@@ -154,11 +164,15 @@ class Resource < ApplicationRecord
   end
 
   def external_video?
-    is_external_video || false
+    kind == "video" && sub_kind == "external_video"
   end
 
   def iframe?
-    is_iframe || false
+    kind == "interactive" && sub_kind == "iframe"
+  end
+
+  def embed?
+    kind == "interactive" && sub_kind == "embed"
   end
 
   def split_iframe_dimensions

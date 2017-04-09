@@ -13,7 +13,8 @@ module Factory
                    event_subtitle: event_subtitle(event_type),
                    subject_title: subject_title(event_type, subject),
                    subject_subtitle: subject_subtitle(event_type, subject),
-                   attribution_name: subject_attribution_name(event_type, subject))
+                   attribution_name: subject_attribution_name(event_type, subject),
+                   event_url: new_text_event_url(event_type, subject))
       log_event_errors(event)
       event
     end
@@ -69,7 +70,9 @@ module Factory
     end
 
     def subject_title(_type, subject)
-      subject.respond_to?(:title) ? subject.title : nil
+      return nil unless subject.respond_to?(:title)
+      return subject.title unless subject.respond_to?(:title_formatted)
+      subject.title_formatted
     end
 
     def event_title(type)
@@ -78,6 +81,15 @@ module Factory
 
     def event_subtitle(type)
       t("event_subtitle", type)
+    end
+
+    def new_text_event_url(type, subject)
+      case type
+      when ::Event::TEXT_ADDED
+        "/read/#{subject.id}"
+      when ::Event::RESOURCE_ADDED
+        "/browse/project/#{subject.project.id}/resource/#{subject.id}"
+      end
     end
 
     # rubocop:disable LineLength

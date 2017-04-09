@@ -7,12 +7,12 @@
   z-index: 700;
 }
 
-.backend .header-app {
-  z-index: 500;
-}
-
 .overlay-full-primary, .overlay-full-secondary {
   z-index: 600;
+}
+
+.backend .header-app {
+  z-index: 500;
 }
 
 .drawer-backend, .drawer-frontend, .drawer-overlay {

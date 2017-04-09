@@ -52,6 +52,7 @@ en:
         event_title:
           project_created: "Project Kickoff"
           text_added: "Text Added"
+          resource_added: "Resource Added"
         event_subtitle:
           project_created: "A Manifold project is born!"
 

@@ -116,4 +116,13 @@
   .utility-primary {
     color: $neutralWhite;
   }
+
+  .list-pagination-primary {
+    @include constrainedPaginationResponsive;
+  }
+
+  // full width selects
+  .form-secondary .form-select {
+    width: 100%;
+  }
 }

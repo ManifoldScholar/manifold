@@ -13,6 +13,7 @@ export default class ProjectEvents extends Component {
 
   render() {
     const project = this.props.project;
+    if (!project) return null;
 
     return (
       <div>

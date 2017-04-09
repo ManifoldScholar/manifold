@@ -223,6 +223,7 @@
     svg {
       width: 100%;
       height: auto;
+      max-height: 100%;
       fill: $neutral70;
       transition: fill $duration $timing;
     }

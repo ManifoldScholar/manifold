@@ -34,7 +34,7 @@ module Importer
       "Host Name" => :external_type,
       "File ID" => :external_id,
       "Type" => :kind,
-      "External Video" => :is_external_video
+      "Sub Type" => :sub_kind
     }.freeze
     RESOURCE_BOOLEAN_ATTRIBUTES = {
       "Allow High-Res Download" => :allow_high_res

@@ -49,12 +49,12 @@ export default class UtilityPagination extends PureComponent {
         { isString(handler) ?
           <Link to={handler}>
             <i className="manicon manicon-arrow-long-left"></i>
-            Prev
+            <span>Prev</span>
           </Link>
         :
           <a href={this.props.paginationTarget} onClick={handler}>
             <i className="manicon manicon-arrow-long-left"></i>
-            Prev
+            <span>Prev</span>
           </a>
         }
       </li>
@@ -68,12 +68,12 @@ export default class UtilityPagination extends PureComponent {
       <li style={style} className="pagination-next" key="next">
         { isString(handler) ?
           <Link to={handler}>
-            Next
+            <span>Next</span>
             <i className="manicon manicon-arrow-long-right"></i>
           </Link>
         :
           <a href={this.props.paginationTarget} onClick={handler}>
-            Next
+            <span>Next</span>
             <i className="manicon manicon-arrow-long-right"></i>
           </a>
         }

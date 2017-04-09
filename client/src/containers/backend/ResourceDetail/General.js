@@ -59,7 +59,7 @@ class ResourceDetailGeneralContainer extends PureComponent {
             placeholder="Enter a description"
             {...this.props}
           />
-          <Form.TextInput
+          <Form.TextArea
             label="Caption"
             name="attributes[caption]"
             placeholder="Enter a short description"

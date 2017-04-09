@@ -4,11 +4,13 @@ class Event < ApplicationRecord
 
   # Constants
   PROJECT_CREATED = "PROJECT_CREATED".freeze
+  RESOURCE_ADDED = "RESOURCE_ADDED".freeze
   TEXT_ADDED = "TEXT_ADDED".freeze
   TEXT_ANNOTATED = "TEXT_ANNOTATED".freeze
   TWEET = "TWEET".freeze
   EVENT_TYPES = [
     PROJECT_CREATED,
+    RESOURCE_ADDED,
     TEXT_ADDED,
     TEXT_ANNOTATED,
     TWEET

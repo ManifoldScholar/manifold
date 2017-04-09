@@ -23,6 +23,13 @@ RSpec.describe Resource, type: :model do
     expect(resource.tag_list.count).to eq(3)
   end
 
+  it "creates a RESOURCE_ADDED event on creation" do
+    resource = FactoryGirl.create(:resource)
+    event = resource.project.events.first
+    expect(event).to_not be_nil
+    expect(event.event_type).to eq(Event::RESOURCE_ADDED)
+  end
+
   describe "formats some fields with a markdown subset" do
     let(:raw) { "_italic_ a **bold**"}
     let(:formatted_without_blocks) { "<em>italic</em> a <strong>bold</strong>"}
@@ -101,12 +108,12 @@ RSpec.describe Resource, type: :model do
 
     context "when resource is an iframe" do
       it "is invalid without dimensions" do
-        resource = FactoryGirl.build(:resource, kind: "interactive", is_iframe: true)
+        resource = FactoryGirl.build(:resource, kind: "interactive", sub_kind: "iframe")
         expect(resource).to_not be_valid
       end
 
       it "is invalid without an external url" do
-        resource = FactoryGirl.build(:resource, kind: "interactive", is_iframe: true,
+        resource = FactoryGirl.build(:resource, kind: "interactive", sub_kind: "iframe",
                                      iframe_dimensions: "640x480", external_url: nil)
         expect(resource).to_not be_valid
       end
@@ -121,12 +128,12 @@ RSpec.describe Resource, type: :model do
 
     context "when resource is an external video" do
       it "is invalid without an external id" do
-        resource = FactoryGirl.build(:resource, kind: "video", is_external_video: true, external_type: "youtube")
+        resource = FactoryGirl.build(:resource, kind: "video", sub_kind: "external_video", external_type: "youtube")
         expect(resource).to_not be_valid
       end
 
       it "is invalid without an external type" do
-        resource = FactoryGirl.build(:resource, kind: "video", is_external_video: true, external_id: "abcd1234")
+        resource = FactoryGirl.build(:resource, kind: "video", sub_kind: "external_video", external_id: "abcd1234")
         expect(resource).to_not be_valid
       end
     end
