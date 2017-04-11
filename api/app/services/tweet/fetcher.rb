@@ -42,11 +42,12 @@ module Tweet
     # rubocop:enable Metrics/AbcSize
 
     def client
+      settings = Settings.instance
       @client ||= Twitter::REST::Client.new do |config|
-        config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
-        config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
-        config.access_token        = ENV["TWITTER_ACCESS_TOKEN"]
-        config.access_token_secret = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
+        config.consumer_key        = settings.integrations.dig(:twitter_app_id)
+        config.consumer_secret     = settings.secrets.dig(:twitter_app_secret)
+        config.access_token        = settings.integrations.dig(:twitter_access_token)
+        config.access_token_secret = settings.secrets.dig(:twitter_access_token_secret)
       end
     end
   end

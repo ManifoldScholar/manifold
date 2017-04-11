@@ -81,7 +81,7 @@ export default () => {
         <Route component={Backend.Settings.Wrapper} path="settings" >
           <IndexRoute component={Backend.Settings.General} />
           <Route component={Backend.Settings.Theme} path="theme" />
-          <Route component={Backend.Settings.OAuth} path="oauth" />
+          <Route component={Backend.Settings.Integrations} path="integrations" />
           <Route component={Backend.Settings.Features} path="features" />
           <Route component={Backend.Settings.PressLogo} path="press_logo" />
         </Route>

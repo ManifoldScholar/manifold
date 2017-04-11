@@ -17,11 +17,13 @@ class FormTextInput extends Component {
     onChange: PropTypes.func,
     value: PropTypes.any,
     focusOnMount: PropTypes.bool,
-    errors: PropTypes.array
+    errors: PropTypes.array,
+    password: PropTypes.bool
   };
 
   static defaultProps = {
-    focusOnMount: false
+    focusOnMount: false,
+    password: false
   };
 
   constructor(props) {
@@ -36,6 +38,7 @@ class FormTextInput extends Component {
     const labelClass = classnames({
       "has-instructions": isString(this.props.instructions)
     });
+    const inputType = this.props.password ? "password" : "text";
 
     return (
       <GlobalForm.Errorable
@@ -52,7 +55,7 @@ class FormTextInput extends Component {
         }
           <input
             ref={(input) => { this.inputElement = input; }}
-            type="text"
+            type={inputType}
             placeholder={this.props.placeholder}
             onChange={this.props.onChange}
             value={this.props.value || ""}
