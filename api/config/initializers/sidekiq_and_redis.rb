@@ -5,5 +5,3 @@ end
 Sidekiq.configure_client do |config|
   config.redis = ManifoldEnv.redis.sidekiq_options
 end
-
-Redis::Objects.redis = ManifoldEnv.redis.build_connection_pool

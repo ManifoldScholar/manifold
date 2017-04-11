@@ -11,7 +11,9 @@ RSpec.describe Settings, type: :model do
   it "it shallow merges new general settings into existing ones" do
     s = Settings.instance()
     s.general = { a: "a" }
-    s.general = { b: "b" }
+
+    s.merge_settings_into! :general, b: 'b'
+
     expect(s.general).to eq({ "a" => "a", "b" => "b" })
   end
 

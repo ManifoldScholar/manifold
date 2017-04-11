@@ -4,13 +4,17 @@ class SettingsSerializer < ActiveModel::Serializer
 
   attributes :general, :theme, :features, :integrations, :secrets, :press_logo_styles
 
+  attribute :oauth
+
   # Singleton objects return 0 as their ID when serialized.
   def id
     0
   end
 
   def secrets
-    object.secrets.map { |k, _str| [k, "(redacted)"] }.to_h
+    object.secrets.transform_values do |_value|
+      "(redacted)"
+    end
   end
 
   def oauth

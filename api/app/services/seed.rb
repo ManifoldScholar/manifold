@@ -1,7 +1,6 @@
 require "securerandom"
 
 class Seed
-
   # rubocop:disable Metrics/MethodLength
   def self.execute(logger = nil)
     logger ||= Logger.new(STDOUT)
@@ -21,10 +20,9 @@ class Seed
       admin_user.save
     end
 
-    Settings.instance.update_from_environment if ENV["MANAGE_SETTINGS_FROM_ENV"].present?
+    Settings.potentially_update_from_environment!
 
     logger.info("Creating CLI user: cli@manifold.app".green)
   end
   # rubocop:enable Metrics/MethodLength
-
 end

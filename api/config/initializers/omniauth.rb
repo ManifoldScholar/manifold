@@ -1,10 +1,6 @@
 # rubocop:disable Style/SymbolProc
 ManifoldEnv.oauth.configure do |config|
   config.provider :facebook do |provider|
-    provider.detect_credentials!
-
-    provider.env_infix "FB"
-
     provider.strategy_options do |hsh|
       hsh[:scope] = "email"
 
@@ -19,8 +15,6 @@ ManifoldEnv.oauth.configure do |config|
   end
 
   config.provider :google do |provider|
-    provider.detect_credentials!
-
     provider.strategy_name :google_oauth2
 
     provider.strategy_options do |hsh|
@@ -32,9 +26,7 @@ ManifoldEnv.oauth.configure do |config|
     end
   end
 
-  config.provider :twitter do |provider|
-    provider.detect_credentials!
-  end
+  config.provider :twitter
 end
 
 Rails.application.configure do

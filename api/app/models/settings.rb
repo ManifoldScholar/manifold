@@ -1,77 +1,60 @@
 class Settings < ApplicationRecord
-
   # Concerns
   include Authority::Abilities
   include Attachments
 
+  attribute :general, :indifferent_hash
+  attribute :integrations, :indifferent_hash
+  attribute :secrets, :indifferent_hash
+
   # Validation
-  validates :singleton_guard, inclusion: [0]
+  validates :singleton_guard, inclusion: [0], uniqueness: true
 
   # Attachments
   manifold_has_attached_file :press_logo, :image
 
-  def self.instance
-    row = first
-    raise ActiveRecord::RecordNotFound unless row
-    row
-  rescue ActiveRecord::RecordNotFound
-    # slight race condition here, but it will only happen once
-    row = Settings .new
-    row.singleton_guard = 0
-    row.save!
-    row
+  after_update :update_oauth_providers!
+
+  # @param [Symbol] section
+  # @param [{Symbol => String}] new_values
+  # @return [void]
+  def merge_settings_into!(section, **new_values)
+    current = self[section]
+
+    raise TypeError, "#{section} is not mergeable!" unless current.respond_to?(:merge)
+
+    self[section] = current.merge(new_values)
   end
 
-  def general
-    ActiveSupport::HashWithIndifferentAccess.new(self[:general])
+  # @see [Settings::UpdateFromEnv]
+  # @return [void]
+  def update_from_environment!
+    Settings::UpdateFromEnv.run! settings: self
   end
 
-  def integrations
-    ActiveSupport::HashWithIndifferentAccess.new(self[:integrations])
+  # @see [Settings::UpdateOauthProviders]
+  # @return [void]
+  def update_oauth_providers!
+    Settings::UpdateOauthProviders.run!
   end
 
-  def secrets
-    ActiveSupport::HashWithIndifferentAccess.new(self[:secrets])
-  end
+  class << self
+    # Check if we {.update_from_environment? should update from the environment}
+    # and {#update_from_environment! do so}.
+    # @return [void]
+    def potentially_update_from_environment!
+      return unless update_from_environment?
 
-  def general=(value)
-    base = general || {}
-    new = base.merge(value)
-    self[:general] = new
-  end
-
-  def integrations=(value)
-    base = integrations || {}
-    new = base.merge(value)
-    self[:integrations] = new
-  end
-
-  def secrets=(value)
-    base = secrets || {}
-    new = base.merge(value)
-    self[:secrets] = new
-  end
-
-  def read_google_private_key
-    env_key_path = ENV["MANIFOLD_SETTING_SECRETS_GOOGLE_PRIVATE_KEY"]
-    path = Rails.application.root.join("..", env_key_path)
-    return nil unless File.exist?(path) && File.file?(path)
-    File.read(path)
-  end
-
-  # rubocop:disable Metrics/AbcSize
-  def update_from_environment
-    ENV.select { |key| key.start_with? "MANIFOLD_SETTING" }.each do |key, value|
-      next if key == "MANIFOLD_SETTING_SECRETS_GOOGLE_PRIVATE_KEY"
-      parts = key.split("_")
-      section = parts.third.downcase
-      setting = parts[3..-1].join("_").downcase
-      set_value = {}
-      set_value[setting] = value
-      send("#{section}=", set_value)
+      instance.update_from_environment!
     end
-    gpk = read_google_private_key
-    send("secrets=", google_private_key: gpk) if gpk
-    save
+
+    # @return [Settings]
+    def instance
+      where(singleton_guard: 0).first_or_create!
+    end
+
+    def update_from_environment?
+      ENV["MANAGE_SETTINGS_FROM_ENV"].present? && table_exists?
+    end
   end
 end
