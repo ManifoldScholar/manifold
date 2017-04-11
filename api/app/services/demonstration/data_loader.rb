@@ -5,11 +5,6 @@ module Demonstration
   # Loads demo data into the Manifold installation
   class DataLoader
 
-    ENV_SETTINGS = {
-      general: %w(ga_profile_id ga_tracking_id contact_url).freeze,
-      theme: %w(typekit_id).freeze
-    }.freeze
-
     def initialize
       @logger = Logger.new(STDOUT)
       @logger.formatter = proc { |severity, _datetime, _progname, msg|
@@ -20,7 +15,6 @@ module Demonstration
     def load
       clear_db
       seed_db
-      ensure_settings
       create_admin_user
       # create_fake_users
       create_pages
@@ -77,16 +71,6 @@ module Demonstration
         )
         @logger.info("Creating page: #{page.title}".green)
       end
-    end
-
-    def ensure_settings
-      settings = Settings.instance
-      ENV_SETTINGS.each do |category, keys|
-        keys.each do |key|
-          settings[category][key] ||= Rails.configuration.manifold.settings[category][key]
-        end
-      end
-      settings.save
     end
 
     def reindex_records

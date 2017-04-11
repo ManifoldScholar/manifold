@@ -105,11 +105,29 @@ module Validation
         general: [
           :default_publisher,
           :default_place_of_publication,
-          :ga_tracking_id,
-          :ga_profile_id,
-          :facebook_app_id,
           :social_share_message,
           :contact_url
+        ]
+      },
+      {
+        secrets: [
+          :facebook_app_secret,
+          :twitter_app_secret,
+          :twitter_access_token_secret,
+          :google_private_key
+        ]
+      },
+      {
+        integrations: [
+          :facebook_app_id,
+          :twitter_app_id,
+          :twitter_access_token,
+          :google_project_id,
+          :google_private_key_id,
+          :google_client_email,
+          :google_client_id,
+          :ga_tracking_id,
+          :ga_profile_id
         ]
       },
       {

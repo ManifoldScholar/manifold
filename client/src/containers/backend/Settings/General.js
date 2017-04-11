@@ -44,29 +44,9 @@ class SettingsGeneralContainer extends PureComponent {
           />
           <Form.TextInput
             focusOnMount
-            label="Facebook App ID"
-            name="attributes[general][facebookAppId]"
-          />
-          <Form.TextInput
-            focusOnMount
             label="Social Sharing Messge"
             name="attributes[general][socialShareMessage]"
             instructions="Enter the text you would like to appear when a page is shared"
-          />
-          <Form.TextInput
-            focusOnMount
-            label="Google Analytics Tracking ID"
-            name="attributes[general][gaTrackingId]"
-            placeholder="UA-000000-00"
-          />
-          <Form.MaskedTextInput
-            focusOnMount
-            label="Google Analytics Profile ID"
-            name="attributes[general][gaProfileId]"
-            placeholder="ga:123456789"
-            mask={
-              ['g', 'a', ':', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]
-            }
           />
           <Form.TextInput
             focusOnMount

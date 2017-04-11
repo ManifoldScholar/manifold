@@ -37,6 +37,16 @@
     margin-top: 40px;
   }
 
+  .form-input + .form-header,
+  .form-section + .form-header {
+    margin-top: 60px;
+  }
+
+  .form-header + .form-input,
+  .form-header + .form-section {
+    margin-top: 10px;
+  }
+
   .form-input {
     label:not(.checkbox):not(.radio) {
       @include formLabelPrimary;

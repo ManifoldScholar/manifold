@@ -175,17 +175,28 @@ class Create extends Component {
           </div>
         </form>
         <p className="login-links">
-          {'You can also create a Manifold account using your Facebook, Twitter, or Google credentials.'}
+          {'You can also create a Manifold account using your Facebook, Twitter, or ' +
+          'Google credentials.'}
         </p>
         <section className="login-external">
           <SignInUp.Oauth.Monitor dispatch={this.props.dispatch} />
-          <SignInUp.Oauth.Button dispatch={this.props.dispatch} provider="facebook">
+          <SignInUp.Oauth.Button
+            dispatch={this.props.dispatch}
+            provider="facebook"
+          >
             <span>Log in with Facebook</span>
           </SignInUp.Oauth.Button>
-          <SignInUp.Oauth.Button dispatch={this.props.dispatch} provider="google" iconName="manicon-envelope">
+          <SignInUp.Oauth.Button
+            dispatch={this.props.dispatch}
+            provider="google"
+            iconName="manicon-envelope"
+          >
             <span>Log in with Google</span>
           </SignInUp.Oauth.Button>
-          <SignInUp.Oauth.Button dispatch={this.props.dispatch} provider="twitter">
+          <SignInUp.Oauth.Button
+            dispatch={this.props.dispatch}
+            provider="twitter"
+          >
             <span>Log in with Twitter</span>
           </SignInUp.Oauth.Button>
         </section>

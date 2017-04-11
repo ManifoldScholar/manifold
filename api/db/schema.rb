@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407212731) do
+ActiveRecord::Schema.define(version: 20170410182659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -302,7 +302,6 @@ ActiveRecord::Schema.define(version: 20170407212731) do
   create_table "settings", force: :cascade do |t|
     t.jsonb    "general",                 default: {}
     t.jsonb    "theme",                   default: {}
-    t.jsonb    "oauth",                   default: {}
     t.jsonb    "features",                default: {}
     t.integer  "singleton_guard"
     t.datetime "created_at",                           null: false
@@ -311,6 +310,8 @@ ActiveRecord::Schema.define(version: 20170407212731) do
     t.string   "press_logo_content_type"
     t.integer  "press_logo_file_size"
     t.datetime "press_logo_updated_at"
+    t.jsonb    "integrations",            default: {}
+    t.jsonb    "secrets",                 default: {}
     t.index ["singleton_guard"], name: "index_settings_on_singleton_guard", unique: true, using: :btree
   end
 

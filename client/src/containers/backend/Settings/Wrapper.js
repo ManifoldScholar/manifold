@@ -18,7 +18,7 @@ class SettingsWrapperContainer extends PureComponent {
     return [
       { path: "/backend/settings", label: "General", key: "general" },
       { path: "/backend/settings/theme", label: "Theme", key: "theme" },
-      { path: "/backend/settings/oauth", label: "OAuth", key: "oauth" },
+      { path: "/backend/settings/integrations", label: "Integrations", key: "integrations" },
       { path: "/backend/settings/features", label: "Features", key: "features" }
     ];
   }
