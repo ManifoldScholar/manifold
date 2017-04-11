@@ -27,6 +27,7 @@ before_install:
 env:
   global:
     - API="/home/travis/build/ManifoldScholar/manifold/api"
+    - RAILS_SECRET_KEY=6d48e59424e38e0a1aec8515cc31385ccd39a868e7681a1382ccfed7178f2c2ae60bb91371815a9937890097f3eb43808035777510a810599756bf83fa7e0b20
     - RAILS_DB_USER=postgres
     - TRAVIS_NODE_VERSION="4"
 
@@ -45,6 +46,8 @@ script:
   - yarn run test
   - cd ../api
   - bundle install
+  - RAILS_ENV=test bundle exec rails db:migrate --trace
+  - bundle exec rake db:test:prepare
   - bundle exec rspec spec -fd --tag ~@integration
 
 notifications:
