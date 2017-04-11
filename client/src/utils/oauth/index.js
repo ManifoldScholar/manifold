@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { camelize } from 'humps'
+import { camelize } from 'humps';
 
 export openPopup from './popup';
 
@@ -19,7 +19,7 @@ export function providerSlug(provider) {
  * @return {String}
  */
 export function providerSetting(provider) {
-  return camelize(providerSlug(provider))
+  return camelize(providerSlug(provider));
 }
 
 /**
