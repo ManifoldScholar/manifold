@@ -74,6 +74,4 @@ class Settings < ApplicationRecord
     send("secrets=", google_private_key: gpk) if gpk
     save
   end
-  # rubocop:enable Metrics/AbcSize
-
 end
