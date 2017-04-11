@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { oauthActions } from 'actions';
 import { get } from 'lodash';
 import { openPopup, providerSetting } from 'utils/oauth';
 import HigherOrder from 'containers/global/HigherOrder';
 
-class Button extends Component {
+class Button extends PureComponent {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     provider: PropTypes.string.isRequired,
@@ -16,6 +16,10 @@ class Button extends Component {
 
   static defaultProps = {
     hasIcon: true
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.settings !== nextProps.settings;
   }
 
   openWindow = (event) => {

@@ -4,11 +4,8 @@ module ManifoldEnv
     include ManifoldEnv::HasConfigurationDSL
     include Enumerable
 
-    after_configure :update_enabled!
-
     def initialize
-      @providers  = SortedSet.new
-      @enabled    = SortedSet.new
+      @providers = SortedSet.new
     end
 
     # @param [Symbol] name
@@ -30,19 +27,14 @@ module ManifoldEnv
     def enabled
       return enum_for(__method__) unless block_given?
 
-      @enabled.each do |provider|
+      @providers.select(&:enabled?).each do |provider|
         yield provider
       end
     end
 
-    # @return [<Symbol>]
-    def enabled_strategies
-      enabled.map(&:strategy_name)
-    end
-
-    # @return [<Symbol>]
+    # @return [<String>]
     def known_strategies
-      map(&:strategy_name)
+      map { |p| p.strategy_name.to_s }
     end
 
     def as_json(_options = nil)
@@ -65,12 +57,6 @@ module ManifoldEnv
 
         definition.configure(&config)
       end
-    end
-
-    private
-
-    def update_enabled!
-      @enabled = SortedSet.new(@providers.select(&:enabled?))
     end
 
     class DefinedProvider < ArgumentError

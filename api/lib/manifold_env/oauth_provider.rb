@@ -6,12 +6,18 @@ module ManifoldEnv
     include Equalizer.new(:name)
     include ManifoldEnv::HasConfigurationDSL
     include ActiveModel::Validations
+    include Redis::Objects
+
+    value :app_id
+    value :secret
 
     CREDENTIAL_KEYS = %i(id secret).freeze
 
     validates :credentials, presence: { message: "are unset" }
 
     attr_reader :name
+
+    alias id name
 
     def initialize(name)
       @name = name
@@ -34,17 +40,10 @@ module ManifoldEnv
     # @return [(String, String)] if {#has_credentials?}
     # @return [nil]
     def credentials
-      @credential_hash.values_at(*CREDENTIAL_KEYS) if has_credentials?
+      [app_id.value, secret.value] if has_credentials?
     end
 
     alias enabled? valid?
-
-    # @!attribute [r] env_infix
-    # The unique infix for the environment variables
-    # @return [String]
-    configurable_property :env_infix do
-      name.to_s.upcase[0..1]
-    end
 
     configurable_property :settings_key do
       name
@@ -56,16 +55,16 @@ module ManifoldEnv
 
     configurable_hash :strategy_options
 
-    def env_vars
-      CREDENTIAL_KEYS.map do |key|
-        "OAUTH_#{env_infix}_#{key.to_s.upcase}"
-      end
+    def has_app_id?
+      app_id.value.present?
     end
 
     def has_credentials?
-      CREDENTIAL_KEYS.all? do |key|
-        @credential_hash.present? && @credential_hash[key].present?
-      end
+      has_app_id? && has_secret?
+    end
+
+    def has_secret?
+      secret.value.present?
     end
 
     # Generates a list of args to be consumed by {Omniauth::Builder#provider}
@@ -87,20 +86,5 @@ module ManifoldEnv
       end
     end
     # rubocop:enable Style/CaseEquality
-
-    dsl do
-      def set_credentials(id, secret)
-        id      &&= id.to_s
-        secret  &&= secret.to_s
-
-        ivar_set :credential_hash, id: id, secret: secret
-      end
-
-      def detect_credentials!
-        read_from_config = manifold_settings.oauth!.underbang_reader(settings_key)
-
-        set_credentials read_from_config[:id], read_from_config[:secret]
-      end
-    end
   end
 end
