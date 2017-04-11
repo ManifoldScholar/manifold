@@ -16,10 +16,10 @@
   li {
     display: flex;
     width: 100%;
-    min-height: 170px;
 
     @include respond($break60) {
       width: 50%;
+      min-height: 170px;
       padding-left: 40px;
       margin-bottom: 28px;
     }
@@ -47,10 +47,10 @@
   li {
     display: flex;
     width: 100%;
-    min-height: 170px;
 
     @include respond($break60) {
       width: 50%;
+      min-height: 170px;
       padding-left: 40px;
       margin-bottom: 28px;
     }
@@ -90,8 +90,6 @@
 // Can be a link or a div
 .event-tile {
   position: relative;
-  display: flex;
-  flex-direction: column;
   width: 100%;
   padding: 15px 17px 19px 0;
   color: $neutralOffBlack;
@@ -100,6 +98,8 @@
     background-color $duration $timing;
 
   @include respond($break60) {
+    display: flex;
+    flex-direction: column;
     padding: 0;
     background-color: $neutral05;
   }
@@ -210,8 +210,12 @@
     @include templateHead;
     margin-top: 0;
     margin-bottom: 0.467em;
-    font-size: 19px;
+    font-size: 15px;
     font-weight: $semibold;
+
+    @include respond($break40) {
+      font-size: 19px;
+    }
 
     // No event subtitle
     + .event-date {
@@ -285,7 +289,6 @@
     a {
       display: block;
       width: 100%;
-      min-height: 43px;
       padding: 14px 17px 0 50px;
       margin: auto;
       line-height: 9px;
@@ -295,6 +298,7 @@
         background-color $duration $timing;
 
       @include respond($break60) {
+        min-height: 43px;
         padding: 16px 17px 0 36px;
         line-height: 11px;
       }
