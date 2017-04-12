@@ -15,9 +15,6 @@ port = ENV["RAILS_SERVER_PORT"] || ENV["API_PORT"]
 if ENV["BOXEN_SOCKET_DIR"]
   socket_dir = "unix://#{ENV['BOXEN_SOCKET_DIR']}"
   socket_path = "#{socket_dir}/#{name}"
-elsif ENV["APP_SOCKET_DIR"]
-  socket_dir  = "unix://#{ENV['APP_SOCKET_DIR']}"
-  socket_path = "#{socket_dir}/#{name}"
 elsif ENV["RAILS_SERVER_SOCKET_DIR"] && ENV["RAILS_SERVER_SOCKET_PATH"]
   socket_dir = "unix://#{ENV['RAILS_SERVER_SOCKET_DIR']}"
   socket_path = "unix://#{ENV['RAILS_SERVER_SOCKET_PATH']}"

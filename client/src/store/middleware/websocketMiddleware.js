@@ -2,7 +2,7 @@ import ActionCable from 'actioncable';
 import get from 'lodash/get';
 import { websocketActions } from 'actions';
 
-const url = __WS_URL__;
+const url = __CABLE_URL__;
 const cable = ActionCable.createConsumer(url);
 const openSubscriptions = {};
 

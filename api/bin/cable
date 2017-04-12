@@ -1,2 +1,2 @@
 #!/bin/bash
-bundle exec puma -p $CABLE_PORT cable/config.ru
+bundle exec puma  -C config/puma_cable.rb cable/config.ru
