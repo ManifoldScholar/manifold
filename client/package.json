@@ -43,8 +43,7 @@
       "src"
     ],
     "globals": {
-      "__API_URL__": "http://manifold-api.dev:80",
-      "__WS_URL__": "ws://manifold-api.dev/websocket",
+      "__CABLE_URL__": "",
       "__CLIENT__": true,
       "__SERVER__": false,
       "__DEVELOPMENT__": true,

@@ -28,14 +28,11 @@ Object.assign(babelLoaderQuery, {cacheDirectory: true});
 // Create the entries. If we're in dev, we want hot loading
 var mainEntry = ['./src/client.js'];
 var themeEntry = ['./src/theme/theme.js'];
-var hotEntry = []
 if (__DEVELOPMENT__) {
   mainEntry.unshift('webpack/hot/only-dev-server');
-  mainEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
+  mainEntry.unshift(`webpack-dev-server/client?http://0.0.0.0:${process.env.CLIENT_ASSET_PORT}`);
   mainEntry.unshift('react-hot-loader/patch');
   themeEntry.unshift('webpack/hot/only-dev-server');
-  // themeEntry.unshift('webpack-dev-server/client?http://0.0.0.0:3001');
-  // themeEntry.unshift('react-hot-loader/patch');
 }
 
 // Determine the public path
@@ -56,13 +53,7 @@ if (__DEVELOPMENT__) {
 } else {
   plugins = [
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        dead_code: true
-      }
-    })
+    new webpack.optimize.OccurenceOrderPlugin()
   ];
   if (__CLIENT__ && __PRODUCTION__) {
     plugins.push(new ExtractTextPlugin("[name]-[hash].css"));
@@ -84,7 +75,7 @@ if (__CLIENT__ && __PRODUCTION__) {
 // Push those globals, yo.
 plugins.push(new webpack.DefinePlugin({
     __API_URL__: '"' +  global.__API_URL__ + '"',
-    __WS_URL__: '"' +  global.__WS_URL__ + '"',
+    __CABLE_URL__: '"' +  global.__CABLE_URL__ + '"',
     __CLIENT__: global.__CLIENT__,
     __SERVER__: global.__SERVER__,
     __DEVELOPMENT__: global.__DEVELOPMENT__,

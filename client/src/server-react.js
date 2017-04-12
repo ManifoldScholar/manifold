@@ -165,7 +165,7 @@ export default function (parameters) {
       ch.header(`Manifold Universal Server engaged on port ${config.universalServerPort}`);
     });
   } else {
-    ch.error(`No MANIFOLD_REACT_SERVER_PORT environment variable has been specified`);
+    ch.error(`No CLIENT_UNIVERSAL_SERVER_PORT environment variable has been specified`);
   }
 
   process.once('SIGUSR2', () => {

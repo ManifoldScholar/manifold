@@ -38,6 +38,9 @@ class OmniauthStack
       middleware.use session_store, session_options
 
       middleware.use OmniAuth::Builder do
+        configure do |config|
+          config.full_host = ENV["API_URL"]
+        end
         ManifoldEnv.oauth.enabled.each do |enabled_provider|
           provider(*enabled_provider.provider_args)
         end

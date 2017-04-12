@@ -27,6 +27,7 @@ export function providerSetting(provider) {
  * @return {String}
  */
 export function getUrl(provider) {
+  console.log('__API_URL__');
   return `${__API_URL__}/auth/${providerSlug(provider)}`;
 }
 

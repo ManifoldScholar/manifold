@@ -74,7 +74,7 @@
     "__DISABLE_SSR__": true,
     "__DEVTOOLS__": true,
     "__API_URL__": true,
-    "__WS_URL__": true,
+    "__CABLE_URL__": true,
     "socket": true
   }
 }
