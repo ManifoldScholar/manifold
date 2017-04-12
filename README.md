@@ -9,6 +9,9 @@ Branch       | Passing?
 Development  | [![Build Status](https://travis-ci.org/ManifoldScholar/manifold.svg?branch=development)](https://travis-ci.org/ManifoldScholar/manifold)
 Master       |[![Build Status](https://travis-ci.org/ManifoldScholar/manifold.svg?branch=master)](https://travis-ci.org/ManifoldScholar/manifold)
 
+# WARNING:
+Manifold is still very much in a beta state. More to the point, our documentation, and this README, is still in a beta state and contains inaccuracies. We will be releasing new documentation in the next week or so. In the meantime, YMMV.
+
 # Manifold
 Manifold is an intuitive, collaborative platform for scholarly publishing. With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works.
 
