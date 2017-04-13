@@ -7,6 +7,15 @@
 **Fixed bugs:**
 
 - Recent event CSS changes broke mobile event layout [\#241](https://github.com/ManifoldScholar/manifold/issues/241)
+- Settings are loaded even when SSR is unavailable
+- Fix upload display in FF/Safari
+- Fix popup position in Firefox
+
+**Features:**
+
+- Refactor integration setttings; move to DB
+- Add styled 50x error page
+- Refactor service port configuration for easier install
 
 **Closed issues:**
 
