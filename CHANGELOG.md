@@ -1,5 +1,23 @@
 # Change Log
 
+## [v0.1.3](https://github.com/ManifoldScholar/manifold/tree/v0.1.3) (2017-04-12)
+
+[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.1.2...HEAD)
+
+**Fixed bugs:**
+
+- Recent event CSS changes broke mobile event layout [\#241](https://github.com/ManifoldScholar/manifold/issues/241)
+
+**Closed issues:**
+
+- Missing Favicon in production env. [\#242](https://github.com/ManifoldScholar/manifold/issues/242)
+
+**Merged pull requests:**
+
+- \[B\] Fix events list responsive regressions [\#244](https://github.com/ManifoldScholar/manifold/pull/244) ([naomiyaki](https://github.com/naomiyaki))
+- \[B\] Add root dir detection in Gitbook ingestion [\#243](https://github.com/ManifoldScholar/manifold/pull/243) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[F\] Add support for OAuth authentication [\#208](https://github.com/ManifoldScholar/manifold/pull/208) ([scryptmouse](https://github.com/scryptmouse))
+
 ## [v0.1.2](https://github.com/ManifoldScholar/manifold/tree/v0.1.2) (2017-04-08)
 [Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.1.1...v0.1.2)
 
@@ -9,7 +27,9 @@
 
 **Merged pull requests:**
 
+- \[B\] Fix upload display in FF/Safari [\#240](https://github.com/ManifoldScholar/manifold/pull/240) ([naomiyaki](https://github.com/naomiyaki))
 - \[B\] Fix Statistics caching / fetching [\#239](https://github.com/ManifoldScholar/manifold/pull/239) ([scryptmouse](https://github.com/scryptmouse))
+- \[B\] Fix popup position in Firefox [\#238](https://github.com/ManifoldScholar/manifold/pull/238) ([naomiyaki](https://github.com/naomiyaki))
 - \[C\] Add Changelog to project [\#236](https://github.com/ManifoldScholar/manifold/pull/236) ([zdavis](https://github.com/zdavis))
 - \[B\] Fix backend drawer scroll-to-bottom [\#235](https://github.com/ManifoldScholar/manifold/pull/235) ([naomiyaki](https://github.com/naomiyaki))
 - \[B\] Fix mismatched resource icons [\#234](https://github.com/ManifoldScholar/manifold/pull/234) ([SMaxOwok](https://github.com/SMaxOwok))
