@@ -98,6 +98,21 @@ Clamp do
 
   end
 
+  subcommand ["create", "c"], "Create an API model" do
+
+    subcommand ["admin"], "Create an admin user" do
+        parameter "EMAIL", "user email address"
+        parameter "PASSWORD", "user password"
+
+        def execute
+          cmd = "cd api && rails create:admin[\"#{email}\",\"#{password}\"]"
+          puts Paint[cmd, :faint]
+          system cmd
+        end
+    end
+
+  end
+
   subcommand ["lint", "l"], "Lint code" do
 
     option "--autofix", :flag, "autofix when linting"
