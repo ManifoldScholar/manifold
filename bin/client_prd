@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd client
+if [ "$RAILS_ENV" == "development" ]; then
+    exec yarn prod
+fi
