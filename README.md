@@ -2,114 +2,48 @@
     <img width="150" src="http://manifold.umn.edu/logo/manifold_avatar-01.png" alt="Manifold Scholarship" />
 </a>
 
-## Build Status
+Manifold is an intuitive, collaborative platform for scholarly publishing. With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works.
+
+#### Build Status
 
 Branch       | Passing?
 ------------ | -------------
 Development  | [![Build Status](https://travis-ci.org/ManifoldScholar/manifold.svg?branch=development)](https://travis-ci.org/ManifoldScholar/manifold)
 Master       |[![Build Status](https://travis-ci.org/ManifoldScholar/manifold.svg?branch=master)](https://travis-ci.org/ManifoldScholar/manifold)
 
-# WARNING:
-Manifold is still very much in a beta state. More to the point, our documentation, and this README, is still in a beta state and contains inaccuracies. We will be releasing new documentation in the next week or so. In the meantime, YMMV.
+## Overview
 
-# Manifold
-Manifold is an intuitive, collaborative platform for scholarly publishing. With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works.
+#### Manifold is Beta Software.
+Manifold is still very much in a beta state, and has another year of development ahead of it. More to the point, our documentation is still a work in progress.
 
-## About the Project
+#### Manifold is a collaboration, funded by the Andrew W. Mellon Mellon Foundation.
 
 The [University of Minnesota Press](https://www.upress.umn.edu) in partnership with the [GC Digital Scholarship Lab](https://gcdsl.commons.gc.cuny.edu/) at the [Graduate Center](http://www.gc.cuny.edu/Home) of the [City University of New York](http://cuny.edu) has been awarded [a $732,000 grant](https://mellon.org/grants/grants-database/grants/university-of-minnesota-at-twin-cities/11500644/) from the [Andrew W. Mellon Foundation](https://mellon.org) to launch [Manifold Scholarship](http://manifold.umn.edu). The development of Manifold is performed by [Cast Iron Coding](http://castironcoding.com), a digital development agency in Portland, Oregon.
 
-## Open Development
+#### Manifold is Open Source
 
-Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us on our [Building Manifold Development Blog](http://manifold.umn.edu). As we proceed with this project, we'll be using a [Pivotal Tracker project](https://www.pivotaltracker.com/n/projects/1457566) to plan our sprints.
+Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us on our [Building Manifold Development Blog](http://manifold.umn.edu). Early adopters of Manifold are encouraged to download the source code, experiment, and submit fixes and features in the form of pull requests.
 
-## Manifold API
+## About Manifold
 
-Manifold API is the server-side component of Manifold. It is currently being actively developed and should be considered pre-alpha.
+#### License
 
-While there may be parts of this API that will become stand-alone components, it is primarily intended to serve as a backend server for the Manifold frontend and admin interfaces, which are in separate repositories.
+Manifold is released under the Gnu Public License, version 3. See the [LICENSE.md](LICENSE.md) file for details
 
-## Features
+#### Versioning
 
-* Strategies for parsing EPUB3 documents and storing their content, resources, and metadata in a relational database
-* Expose EPUB structure and content via a RESTful API
-* Extracts all source document assets and persists them in storage layer (Filesystem, S3, etc.)
-* Maintains internal structure and links in documents
-* Idempotent import allows source documents to be updated without losing associated data
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/ManifoldScholar/manifold/tags). 
 
-### Planned Features
+#### Documentation
 
-* Additional text ingestion strategies: EPUB2, Markdown
-* OAuth2 Authentication
-* Storage and APIs for text annotations, comments, and assets
+Visit [our documentation repository](https://github.com/ManifoldScholar/manifold-docs) for current documentation.
 
-## Requirements
+#### News
 
-* Postgres Database
-* Ruby 2.2.2
+Read about Manifold in the News
 
-## Installation
-
-The following instructions assume that you have Ruby 2.2.2 installed, a working Bundler executable, and a Postgres database.
-
-**Before doing anything:**
-
-- Ensure that /opt/boxen/config/nginx/sites/manifold-api.conf doesn't exist.
-- Ensure that you have Intellij 15 with these JetBrains plugins: Ruby, NodeJS
-- Ensure that you don't have an existing ~/src/manifold dir. Get rid of ~/src/manifold-api if you have it.
-
-**First, setup Ruby and Gems.**
-
-```
-boxen manifold
-cd ~/src/manifold
-
-# Confirm that you're using Ruby 2.2.3
-ruby -v
-gem install bundler
-
-# Confirm that rails is at ./bin/rails
-cd api && which rails
-bundle install
-rbenv rehash
-```
-
-**Then setup your NPM modules**
-
-```
-cd ~/src/manifold/client
-npm install
-```
-
-**Then setup the rails DB and ingest some texts**
-
-```
-cd ~/src/manifold/api
-rake db:migrate
-rails g manifold:install
-
-# There's a spring + rake issue that hasn't been fixed yet.
-spring stop && rake ingest:specpubs
-```
-
-**Open the project in your IDE**
-
-- Open intellij. Click "open" and open the manifold directory.
-- Start the client and API servers
-
-## Text Ingestion
-
-```bash
-# Ingest one text, log level debug
-rake ingest:text['relative/path/to/text','debug']
-# Ingest all texts in "epubs" folder in project root
-rake ingest:batch['debug']
-```
-## API Docs
-
-Detailed API docs coming soon, it's very much a work in progress right now. In the meantime, try these:
-
-```bash
-curl -O ./texts.json http://localhost:3001/api/v1/texts.json
-curl -O ./texts.json http://localhost:3001/api/v1/texts/1.json
-```
+* [The University of Minnesota Press partners with CUNY’s GC Digital Scholarship Lab to launch MANIFOLD SCHOLARSHIP](https://www.upress.umn.edu/press/press-releases/manifold-scholarship)
+* [Univ of Minnesota Press Gets Interactive with Scholarly Books](http://www.publishersweekly.com/pw/by-topic/industry-news/publisher-news/article/66371-univ-of-minnesota-press-gets-interactive-with-scholarly-books.html), Publishers Weekly
+* [GC Digital Scholarship Lab Awarded Shared Grant to Launch Manifold Scholarship](http://www.gc.cuny.edu/News/GC-News/Detail?id=30695#sthash.5Q1m0NQP.dpuf)
+* [U. Minnesota Press, CUNY Grad Center Develop Hybrid Publishing Platform](http://lj.libraryjournal.com/2015/05/publishing/u-minnesota-press-cuny-grad-center-develop-hybrid-publishing-platform/), Library Journal
+* [Manifold Uses](https://www.insidehighered.com/news/2017/04/07/hybrid-publishing-platform-manifold-enters-public-beta-phase), Inside Higher Ed
