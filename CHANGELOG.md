@@ -2,7 +2,7 @@
 
 ## [v0.1.3](https://github.com/ManifoldScholar/manifold/tree/v0.1.3) (2017-04-12)
 
-[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.1.2...HEAD)
+[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.1.2...v0.1.3)
 
 **Fixed bugs:**
 
