@@ -42,18 +42,6 @@ Clamp do
 
   self.default_subcommand = "start"
 
-  subcommand ["build", "b"], "Build production javascript" do
-    def execute
-      system "cd client && yarn prebuild && yarn dist"
-    end
-  end
-
-  subcommand ["serve"], "Start Manifold server" do
-    def execute
-      exec "foreman start -f ProdProcfile"
-    end
-  end
-
   subcommand ["start", "s"], "Start development services" do
 
     option "--noapi", :flag, "do not start API"
