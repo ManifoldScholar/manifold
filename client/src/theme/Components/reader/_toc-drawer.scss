@@ -87,7 +87,7 @@
       > ul > li {
         // Secondary level globals
         a {
-          @include tocBasePadding();
+          @include tocBasePadding($tocNestedPadding);
           padding-top: 0.8em;
           padding-right: 3.068em;
           padding-bottom: 0.7em;
@@ -97,22 +97,18 @@
             font-size: 16px;
           }
         }
-      }
 
-      // Third level indenting
-      > ul > ul > a {
-        @include tocBasePadding($tocNestedPadding);
-      }
+        // Third level indenting
+        // scss-lint:disable SelectorDepth
+        > ul > li > a {
+          @include tocBasePadding($tocNestedPadding * 2);
+        }
 
-      // Fourth level indenting
-      > ul > ul > ul > a {
-        @include tocBasePadding($tocNestedPadding * 2);
-      }
-
-      // Fifth level (and on) indenting
-      // scss-lint:disable SelectorDepth
-      > ul > ul > ul > ul a {
-        @include tocBasePadding($tocNestedPadding * 3);
+        // Fourth level (and on) indenting
+        // scss-lint:disable SelectorDepth
+        > ul > li > ul > li > a {
+          @include tocBasePadding($tocNestedPadding * 3);
+        }
       }
     }
   }
