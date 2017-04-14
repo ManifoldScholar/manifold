@@ -107,6 +107,11 @@ export default class ListSearchable extends PureComponent {
     }
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    this.updateResults();
+  }
+
   renderEntity(entity) {
     const props = Object.assign({}, this.props.entityComponentProps);
     props.key = entity.id;
@@ -194,7 +199,7 @@ export default class ListSearchable extends PureComponent {
 
     return (
       <div>
-        <form className="form-search-filter">
+        <form className="form-search-filter" onSubmit={this.handleSubmit}>
           <div className="search">
             <button>
               <i className="manicon manicon-magnify"></i>
