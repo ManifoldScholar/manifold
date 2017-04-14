@@ -171,7 +171,7 @@ module Ingestor
 
           def ingestion_source_paths
             Dir.glob(File.join(root_path, "**", "*")).reject do |path|
-              File.directory?(path)
+              File.directory?(path) || File.zero?(path)
             end
           end
           memoize :ingestion_source_paths
