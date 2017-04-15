@@ -1,5 +1,6 @@
 # A section in a text
 class TextSection < ApplicationRecord
+  attribute :body_json, :indifferent_hash
 
   # Constants
   KIND_COVER_IMAGE = "cover_image".freeze
