@@ -133,5 +133,19 @@ module Serializer
       @digest_cache = {}
       @path = []
     end
+
+    class << self
+      # @param [String] html
+      # @param [Logger] logger
+      # @yield [json] validation block
+      # @yieldparam [Hash] json the serialized value
+      # @yieldreturn [void]
+      # @return [Hash] JSON-serializable object
+      def serialize_as_json(html, logger: Rails.logger)
+        new.serialize(html, logger).as_json.tap do |json|
+          yield json if block_given?
+        end
+      end
+    end
   end
 end
