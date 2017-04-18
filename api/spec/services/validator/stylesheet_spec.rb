@@ -7,10 +7,9 @@ end
 # rubocop:disable Metrics/LineLength
 # rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::Stylesheet do
-  let(:scope_selector) { Validator::Constants::CSS_SCOPE_SELECTOR }
-  let(:css_value_map) { Validator::Constants::CSS_VALUE_MAP }
+  let(:scope_selector) { Rails.configuration.manifold.css_validator.scope }
   let(:validator) { Validator::Stylesheet.new }
-  let(:blacklisted_property) { Validator::Constants::CSS_PROPERTY_BLACKLIST.first }
+  let(:blacklisted_property) { "font-family" }
 
   it "should return a string" do
     valid_css = "#{scope_selector} p { font-weight: bold; }"
@@ -20,57 +19,64 @@ RSpec.describe Validator::Stylesheet do
   it "should return the same CSS if valid" do
     valid_css = "#{scope_selector} p { font-weight: bold; }"
     results = validator.validate(valid_css)
-    expect(compact(results)).to eq compact(valid_css)
+    expect(results).to eq_ignoring_whitespace valid_css
   end
 
-  it "should scope rules with #{Validator::Constants::CSS_SCOPE_SELECTOR}" do
+  it "should scope all CSS selectors" do
     invalid = "p { font-weight: bold; }"
     valid = "#{scope_selector} p { font-weight: bold; }"
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
-  it "should correctly scope nested selectors with #{Validator::Constants::CSS_SCOPE_SELECTOR}" do
+  it "should correctly scope nested selectors with configured scoped selector" do
     invalid = "p ul { font-weight: bold; }"
     valid = "#{scope_selector} p ul { font-weight: bold; }"
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
-  it "should correctly scope sibling + nested selectors with #{Validator::Constants::CSS_SCOPE_SELECTOR}" do
+  it "should correctly scope sibling + nested selectors with configured scoped selector" do
     invalid = "span, p ul { font-weight: bold; }"
     valid = "#{scope_selector} span { font-weight: bold; }
              #{scope_selector} p ul { font-weight: bold; }"
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   it "should not allow a blacklisted property" do
     invalid = "p { #{blacklisted_property}: some_value; }"
     valid = "#{scope_selector} p { }"
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   it "should not allow a blacklisted selector" do
     invalid = "body { font-weight: bold; }"
     valid = ""
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
+  end
+
+  it "should not allow a blacklisted selector when there are multiple selectors" do
+    invalid = "body, p { font-weight: bold; }"
+    valid = "#{scope_selector} p { font-weight: bold; }"
+    results = validator.validate(invalid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   it "should not allow a * selector" do
     invalid = "* { font-weight: bold; }"
     valid = ""
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   it "should not allow a @font-family selector" do
     invalid = "@font-face { font-family: \"Gallery\"; }"
     valid = ""
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   it "should properly scope multiple selectors" do
@@ -78,7 +84,7 @@ RSpec.describe Validator::Stylesheet do
     valid = "#{scope_selector} span { font-weight: bold; }
              #{scope_selector} p { font-weight: bold; }"
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   describe "with complex selectors" do
@@ -120,61 +126,54 @@ RSpec.describe Validator::Stylesheet do
 
     invalid_test_cases.each do |test_case|
       it "it does not allow blacklisted selector when selector is #{test_case[0]} selector: #{test_case[1]}" do
-        expect(compact(validator.validate(test_case[1]))).to eq ""
+        expect(validator.validate(test_case[1])).to eq_ignoring_whitespace ""
       end
     end
 
     valid_test_cases.each do |test_case|
       it "it does allow non-blacklisted selector when selector is #{test_case[0]} selector: #{test_case[1]}" do
         valid = scope_selector + " " + test_case[1]
-        expect(compact(validator.validate(test_case[1]))).to eq compact(valid)
+        expect(validator.validate(test_case[1])).to eq_ignoring_whitespace compact(valid)
       end
     end
-  end
-
-  it "should not allow a blacklisted selector when there are multiple selectors" do
-    invalid = "body, p { font-weight: bold; }"
-    valid = "#{scope_selector} p { font-weight: bold; }"
-    results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
   end
 
   it "should pass through allowed properties" do
     invalid = "p { #{blacklisted_property}: some_value; font-weight: bold; }"
     valid = "#{scope_selector} p { font-weight: bold; }"
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   it "should respect the tag specific property blacklist" do
     invalid = "#{scope_selector} a { color: red }"
     valid = "#{scope_selector} a { }"
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   it "should ignore the tag specific property blacklist for class selectors" do
     valid = "#{scope_selector} a.something { color: red; }"
     results = validator.validate(valid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   it "should ignore the tag specific property blacklist for ID selectors" do
     valid = "#{scope_selector} a#something { color: red; }"
     results = validator.validate(valid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   it "rewrites mapped css values" do
     invalid = ".au { font-size: medium; }"
-    valid = "#{scope_selector}  .au { font-size: #{css_value_map["medium"]}; }"
+    valid = "#{scope_selector}  .au { font-size: 1em; }"
     results = validator.validate(invalid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 
   it "does not rewrite unmapped css values" do
     valid = "#{scope_selector} h2 { this_will_never_be_blacklisted: value; }"
     results = validator.validate(valid)
-    expect(compact(results)).to eq compact(valid)
+    expect(results).to eq_ignoring_whitespace valid
   end
 end
