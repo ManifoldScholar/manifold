@@ -20,10 +20,9 @@ class Settings < ApplicationRecord
   # @return [void]
   def merge_settings_into!(section, **new_values)
     current = self[section]
-    #raise TypeError, "#{section} is not mergeable!" unless current.respond_to?(:merge)
-    if current.respond_to?(:merge)
-      self[section] = current.merge(new_values)
-    end
+    # raise TypeError, "#{section} is not mergeable!" unless current.respond_to?(:merge)
+    return unless current.respond_to?(:merge)
+    self[section] = current.merge(new_values)
   end
 
   # @see [Settings::UpdateFromEnv]
