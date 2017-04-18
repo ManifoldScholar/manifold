@@ -27,9 +27,6 @@ module Validator
         parent_tag = node.parent.try(:name)
         valid = tag_valid_with_parent?(tag, parent_tag)
         insert_valid_parent(node) unless valid
-        # TODO: Some nodes will need their parent changed. For example, react will
-        # not let a <pre> node have a <p> parent. We'll need to turn that parent into a
-        # div.
       end
     end
 

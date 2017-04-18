@@ -5,6 +5,99 @@ common: &1
     :token_uri: "https://accounts.google.com/o/oauth2/token"
     :auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
     :client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/manifold-service%40appspot.gserviceaccount.com"
+  :html_validator:
+    # The order of these transforms matters. They will be applied in the order listed here.
+    # So, you'll want a transform that changes an attribute value to be applied before
+    # that attribute is turned into a CSS property.
+    :attribute_transforms:
+      -
+        :name: "width"
+        :max: 650
+        :type: "max_value"
+      -
+        :name: "color"
+        :type: "css_map"
+      -
+        :name: "bgcolor"
+        :to: "background-color"
+        :type: "css_map"
+      -
+        :name: "align"
+        :to: "text-align"
+        :type: "css_map"
+      -
+        :name: "border"
+        :type: "measured_css_map"
+      -
+        :name: "width"
+        :type: "measured_css_map"
+    :attribute_exclusions:
+      - "accept"
+      - "accept-charset"
+      - "accesskey"
+      - "async"
+      - "autofocus"
+      - "border"
+      - "bgcolor"
+      - "challenge"
+      - "charset"
+      - "code"
+      - "codebase"
+      - "color"
+      - "content"
+      - "contenteditable"
+      - "defer"
+      - "draggable"
+      - "dropzone"
+      - "height"
+      - "keytype"
+      - "language"
+      - "manifest"
+      - "required"
+      - "sandbox"
+      - "shape"
+      - "size"
+      - "sizes"
+      - "tabindex"
+      - "width"
+      - "align"
+  :css_validator:
+    :scope: ".manifold-text-section"
+    :value_maps:
+      -
+        :match: !ruby/regexp '/font-size/'
+        :entries:
+          - ["xx-small", ".7em"]
+          - ["x-small", ".7em"]
+          - ["small", ".8em"]
+          - ["medium", "1em"]
+          - ["large", "1.2em"]
+          - ["x-large", "1.3em"]
+          - ["xx-large", "1.3em"]
+    :exclusions:
+      :selectors:
+        - !ruby/regexp '/\*/'
+        - !ruby/regexp '/html/'
+        - !ruby/regexp '/body/'
+        - !ruby/regexp '/@font-face/'
+      :properties:
+        -
+          :exclude: ['position', 'font-family', 'overflow', 'overflow-x', 'overflow-y', 'z-index', 'max-width']
+        -
+          :condition:
+            :match: !ruby/regexp '/h1|h2|h3|h4|h5|h6/'
+            :type: "tag"
+          :exclude: ['font-weight', 'size', 'line-height margin', 'margin-top', 'margin-bottom', 'margin-left', 'margin-right', 'padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right', 'color']
+        -
+          :condition:
+            :match: !ruby/regexp '/^div$/'
+            :type: "tag"
+          :exclude: ['width']
+        -
+          :condition:
+            :match: !ruby/regexp '/^[a]$/'
+            :type: "tag"
+          :exclude: ['color']
   :attachments:
     :validations:
       :ingestion:
