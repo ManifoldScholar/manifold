@@ -66,12 +66,13 @@ module Ingestor
       end
 
       def convert_cont_doc_body_to_json(body)
-        json = Serializer::Html.new.serialize(body).to_json
-        if json.nil?
-          error_string(body)
-          raise exception
+        Serializer::Html.serialize_as_json(body) do |json|
+          if json.blank?
+            error_string(body)
+
+            raise "Body contains no nodes"
+          end
         end
-        json
       end
 
       private
