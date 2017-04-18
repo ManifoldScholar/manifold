@@ -15,5 +15,4 @@ namespace :create do
       puts u.errors.full_messages
     end
   end
-
 end

@@ -21,4 +21,4 @@ elsif ENV["RAILS_SERVER_SOCKET_DIR"] && ENV["RAILS_SERVER_SOCKET_PATH"]
 end
 
 bind socket_path if socket_dir && socket_path
-bind "tcp://#{ENV["API_BIND_IP"]}:#{port}" if port
+bind "tcp://#{ENV['API_BIND_IP']}:#{port}" if port

@@ -21,4 +21,4 @@ elsif ENV["CABLE_SERVER_SOCKET_DIR"] && ENV["CABLE_SERVER_SOCKET_PATH"]
 end
 
 bind socket_path if socket_dir && socket_path
-bind "tcp://#{ENV["CABLE_BIND_IP"]}:#{port}" if port
+bind "tcp://#{ENV['CABLE_BIND_IP']}:#{port}" if port

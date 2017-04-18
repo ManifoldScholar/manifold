@@ -129,7 +129,7 @@ module Validator
       out = value
       @config.value_maps.each do |value_map|
         next if (property =~ value_map.match).nil?
-        match = value_map[:entries].find { |kvp| out == kvp[0] }
+        match = value_map[:entries].detect { |kvp| out == kvp[0] }
         out = match[1] unless match.nil?
       end
       out
@@ -140,7 +140,7 @@ module Validator
     # @param selector [String]
     # @return [Boolean]
     def allowed_property?(property, selector = nil)
-      match = @config.exclusions.properties.find do |exclusion|
+      match = @config.exclusions.properties.detect do |exclusion|
         exclusion_matches_property?(exclusion, property, selector)
       end
       match.nil?
