@@ -45,7 +45,7 @@ export default class ResourceSlideFigureVideo extends Component {
     if (service === 'youtube') {
       output = (
         <iframe id="ytplayer" type="text/html"
-          src={`https://www.youtube.com/embed/${id}`}
+          src={`https://www.youtube.com/embed/${id}?rel=0`}
           frameBorder="0"
           allowFullScreen
         >
