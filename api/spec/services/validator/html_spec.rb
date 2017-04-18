@@ -2,8 +2,19 @@ require "rails_helper"
 
 # rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::Html do
+
+  html_config = Rails.configuration.manifold.html_validator
+  excluded_css_properties = [
+    'position',
+    'font-family',
+    'overflow',
+    'overflow-x',
+    'overflow-y',
+    'z-index',
+    'max-width'
+  ]
+
   let(:validator) { Validator::Html.new }
-  let(:css_value_map) { Validator::Constants::CSS_VALUE_MAP }
 
   it "should wrap top level siblings in a div element" do
     fragment = "<p>AAA</p><p>BBB</p>"
@@ -41,20 +52,32 @@ RSpec.describe Validator::Html do
     expect(validator.validate(fragment).delete("\n")).to eq(fragment)
   end
 
-  describe "some context" do
-    Validator::Constants::TAG_ATTRIBUTE_BLACKLIST.each do |attr|
-      it "should remove blacklisted #{attr} attribute" do
+  describe "excluded attributes" do
+    html_config.attribute_exclusions.each do |attr|
+      it "are removed: #{attr}" do
         fragment = "<div #{attr}=\"value\"></div>"
         expect(validator.validate(fragment).include?("#{attr}=")).to eq(false)
       end
     end
   end
-  Validator::Constants::CSS_PROPERTY_BLACKLIST.each do |prop|
+
+  it "removes height attributes" do
+    fragment = "<div height=\"value\"></div>"
+    expect(validator.validate(fragment).include?("height=")).to eq(false)
+  end
+
+  excluded_css_properties.each do |prop|
     it "should remove blacklisted #{prop} CSS property" do
       fragment = "<div style=\"#{prop}: value\"></div>"
       valid = "<div></div>"
       expect(validator.validate(fragment).delete("\n")).to eq(valid)
     end
+  end
+
+  it "should remove an empty css property" do
+    fragment = "<div style=\"position: absolute\"></div>"
+    valid = "<div></div>"
+    expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
   it "should remove a blacklisted CSS property while keeping a valid property" do
@@ -71,6 +94,12 @@ RSpec.describe Validator::Html do
 
   it "should rewrite width attribute to width style" do
     fragment = "<img width=\"650px\">"
+    valid = "<img style=\"width: 650px\">"
+    expect(validator.validate(fragment).delete("\n")).to eq(valid)
+  end
+
+  it "should cap the width" do
+    fragment = "<img width=\"700px\">"
     valid = "<img style=\"width: 650px\">"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
@@ -106,8 +135,8 @@ RSpec.describe Validator::Html do
   end
 
   it "rewrites mapped css values" do
-    fragment = "<div style=\"font-size: x-small\"></div>"
-    valid = "<div style=\"font-size: #{css_value_map["x-small"]}\"></div>"
+    fragment = "<div style=\"font-size: medium\"></div>"
+    valid = "<div style=\"font-size: 1em\"></div>"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
