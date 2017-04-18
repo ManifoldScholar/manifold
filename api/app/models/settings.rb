@@ -3,9 +3,9 @@ class Settings < ApplicationRecord
   include Authority::Abilities
   include Attachments
 
-  attribute :general, :indifferent_hash
-  attribute :integrations, :indifferent_hash
-  attribute :secrets, :indifferent_hash
+  attribute :general, :indifferent_hash, default: {}
+  attribute :integrations, :indifferent_hash, default: {}
+  attribute :secrets, :indifferent_hash, default: {}
 
   # Validation
   validates :singleton_guard, inclusion: [0], uniqueness: true
