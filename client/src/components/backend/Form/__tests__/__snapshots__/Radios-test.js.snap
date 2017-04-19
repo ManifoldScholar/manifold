@@ -8,7 +8,7 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
     Label this
   </label>
   <label
-    className="form-toggle radio horizontal"
+    className="form-toggle radio"
     htmlFor="1"
   >
     <input
@@ -28,7 +28,7 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
     </span>
   </label>
   <label
-    className="form-toggle radio horizontal"
+    className="form-toggle radio"
     htmlFor="2"
   >
     <input

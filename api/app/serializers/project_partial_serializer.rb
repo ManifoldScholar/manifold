@@ -7,7 +7,7 @@ class ProjectPartialSerializer < ActiveModel::Serializer
              :purchase_price_currency, :purchase_price, :purchase_version_label,
              :twitter_id, :instagram_id, :facebook_id, :hero_styles, :cover_styles,
              :avatar_styles, :recently_updated, :updated, :description_formatted, :slug,
-             :resource_kinds, :resource_tags
+             :resource_kinds, :resource_tags, :avatar_color
 
   has_many :creators, serializer: MakerSerializer
   has_many :contributors, serializer: MakerSerializer

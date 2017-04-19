@@ -1,0 +1,70 @@
+.colors {
+  display: flex;
+  align-items: center;
+  max-width: 140px;
+  min-height: 120px;
+  margin: 20px auto 16px;
+
+  .form-input {
+    margin-top: -6px;
+
+    .form-toggle {
+      display: inline-block;
+      width: 33px;
+      height: 33px;
+      margin: 6px;
+
+      &.primary {
+        background: $sp50Primary;
+      }
+
+      &.secondary {
+        background: $sp50Secondary;
+      }
+
+      &.tertiary {
+        background: $sp50Tertiary;
+      }
+
+      &.quaternary {
+        background: $sp50Quaternary;
+      }
+
+      &.quinary {
+        background: $sp50Quinary;
+      }
+
+      &.sentary {
+        background: $neutralWhite;
+      }
+
+      + .form-toggle {
+        margin-top: 0;
+      }
+
+      .toggle-indicator {
+        width: 100%;
+        height: 100%;
+        padding-top: 5px;
+        background: none;
+
+        .manicon::before {
+          display: inline-block;
+          font-size: 16px;
+          color: $neutral90;
+          text-align: center;
+          vertical-align: middle;
+        }
+
+        &::before {
+          display: none;
+        }
+
+      }
+
+      .toggle-label {
+        display: none;
+      }
+    }
+  }
+}

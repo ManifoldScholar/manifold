@@ -2,7 +2,7 @@
 
 exports[`Backend.Form.MaskedTextInput component renders correctly 1`] = `
 "<Form.Setter('Form.MaskedTextInput) mask={{...}} placeholder=\\"Hold my place\\" onChange={[Function]} label=\\"Label this\\" value=\\"attributes[fake]\\" actions={{...}}>
-  <Form.MaskedTextInput mask={{...}} placeholder=\\"Hold my place\\" onChange={[Function]} label=\\"Label this\\" value=\\"attributes[fake]\\" actions={{...}}>
+  <Form.MaskedTextInput setOther={[Function]} mask={{...}} placeholder=\\"Hold my place\\" onChange={[Function]} label=\\"Label this\\" value=\\"attributes[fake]\\">
     <div className=\\"form-input\\">
       <label>
         Label this

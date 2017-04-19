@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Form } from 'components/backend';
+import { Form, Project } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import { projectsAPI } from 'api';
 
@@ -19,6 +19,8 @@ export default class ProjectPanelGeneral extends PureComponent {
   }
 
   render() {
+    const project = this.props.project;
+
     return (
       <section>
         <FormContainer.Form
@@ -57,13 +59,9 @@ export default class ProjectPanelGeneral extends PureComponent {
             label="Description"
             name="attributes[description]"
           />
-          <Form.Upload
-            style="square"
-            label="Avatar"
-            accepts="images"
-            readFrom="attributes[avatarStyles][smallSquare]"
-            name="attributes[avatar]"
-            remove="attributes[removeAvatar]"
+          <Project.Form.AvatarBuilder
+            project={project}
+            {...this.props}
           />
           <Form.Upload
             style="portrait"

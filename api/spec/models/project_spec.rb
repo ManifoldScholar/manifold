@@ -198,5 +198,27 @@ RSpec.describe Project, type: :model do
 
   end
 
+  context "when avatar is present" do
+    let(:avatar_path) { File.join("spec", "data", "assets", "images", "test_avatar.jpg") }
+    let(:avatar) { File.new(avatar_path) }
+
+    it "is valid without avatar color" do
+      project = FactoryGirl.build(:project, avatar: avatar)
+      expect(project).to be_valid
+    end
+  end
+
+  context "when avatar is not present" do
+    it "is invalid without an avatar color" do
+      project = FactoryGirl.build(:project, avatar_color: nil)
+      expect(project).to_not be_valid
+    end
+
+    it "is invalid with an avatar color not in list" do
+      project = FactoryGirl.build(:project, avatar_color: "none more black")
+      expect(project).to_not be_valid
+    end
+  end
+
 
 end

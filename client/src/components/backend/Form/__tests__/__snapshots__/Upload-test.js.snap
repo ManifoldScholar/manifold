@@ -116,7 +116,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
             <span
               className="fake-link"
             >
-              Upload a new image
+              Upload an image
             </span>
           </p>
         </div>
@@ -190,7 +190,7 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
             <span
               className="fake-link"
             >
-              Upload a new image
+              Upload an image
             </span>
           </p>
         </div>
@@ -264,7 +264,7 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
             <span
               className="fake-link"
             >
-              Upload a new image
+              Upload an image
             </span>
           </p>
         </div>
