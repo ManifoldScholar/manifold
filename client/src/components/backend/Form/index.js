@@ -10,6 +10,7 @@ import Switch from './Switch';
 import Date from './Date';
 import HigherOrder from './HigherOrder';
 import Hidden from './Hidden';
+import AvatarBuilder from './AvatarBuilder/AvatarBuilder';
 import setter from './setter';
 import FieldGroup from './FieldGroup';
 
@@ -25,6 +26,7 @@ export default {
   Save,
   Switch,
   Date,
+  AvatarBuilder,
   HigherOrder,
   FieldGroup,
   setter
