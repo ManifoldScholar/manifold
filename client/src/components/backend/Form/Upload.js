@@ -29,7 +29,7 @@ class FormUpload extends Component {
   static defaultProps = {
     style: "square",
     accepts: "any"
-  }
+  };
 
   static types = {
     images: {
@@ -97,7 +97,6 @@ class FormUpload extends Component {
   setValueFromCurrentState() {
     const { attachment, removed } = this.state;
     const { set, setOther, remove: removeName } = this.props;
-
     if (setOther && removeName) setOther(removed, removeName);
     if (attachment) {
       const { type, name } = attachment;
@@ -177,7 +176,7 @@ class FormUpload extends Component {
             >
               Remove this image
             </a><br />
-            or <span className="fake-link">Upload a new image</span>
+            or <span className="fake-link">Upload an image</span>
           </p>
         </div>
       </div>

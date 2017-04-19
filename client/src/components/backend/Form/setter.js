@@ -30,14 +30,12 @@ export default function setter(WrappedComponent) {
 
     static defaultProps = {
       actions: {
-        set: () => { console.log(WrappedComponent, "No actions passed to setter."); }
+        set: () => { }
       }
     };
 
     constructor(props) {
       super(props);
-      this.callbackSet = this.callbackSet.bind(this);
-      this.callbackChange = this.callbackChange.bind(this);
     }
 
     componentWillMount() {
@@ -55,22 +53,7 @@ export default function setter(WrappedComponent) {
       }
     }
 
-    callbackSet(value, props) {
-      this.setValue(value, props);
-    }
-
-    callbackSetOther(value, name, triggersDirty, props) {
-      this.setOtherValue(value, name, triggersDirty, props);
-    }
-
-    callbackChange(event, props) {
-      const target = event.target;
-      const value = target.value;
-      this.setValue(value, props);
-    }
-
     setOtherValue(value, name, triggersDirty, props) {
-      if (!this.isConnected(props)) return;
       const path = `${this.nameToPath(name)}.$set`;
       props.actions.set(props.sessionKey, path, value, triggersDirty);
     }
@@ -113,30 +96,52 @@ export default function setter(WrappedComponent) {
       return other;
     }
 
-    additionalProps(props) {
-      const setOther = (value, name, triggersDirty = true) => {
-        this.callbackSetOther(value, name, triggersDirty, props);
-      };
-      return {
-        onChange: (event) => this.callbackChange(event, props),
-        set: (value) => this.callbackSet(value, props),
-        setOther,
+    connectedProps(props) {
+      const additional = {
+        onChange: this.buildOnChangeHandler(props),
+        set: this.buildSetHandler(props),
+        setOther: this.buildSetOtherHandler(props),
         value: this.currentValue(props),
         initialValue: this.sourceValue(props)
+      };
+      return Object.assign({}, this.passthroughProps(props), additional);
+    }
+
+    disconnectedProps(props) {
+      const additional = {
+        setOther: this.buildSetOtherHandler(props),
+      };
+      return Object.assign({}, additional, this.passthroughProps(props));
+    }
+
+    buildOnChangeHandler(props) {
+      return (event) => {
+        const target = event.target;
+        const value = target.value;
+        this.setValue(value, props);
+      };
+    }
+
+    buildSetHandler(props) {
+      return (value) => {
+        return this.setValue(value, props);
+      };
+    }
+
+    buildSetOtherHandler(props) {
+      return (value, name, triggersDirty = true) => {
+        return this.setOtherValue(value, name, triggersDirty, props);
       };
     }
 
     isConnected(props) {
-      if (this.props.name) return true;
+      if (props.name) return true;
       return false;
     }
 
-    childProps(props) {
-      return Object.assign({}, this.passthroughProps(props), this.additionalProps(props));
-    }
-
     render() {
-      const props = this.isConnected(this.props) ? this.childProps(this.props) : this.props;
+      const props = this.isConnected(this.props) ? this.connectedProps(this.props) :
+        this.disconnectedProps(this.props);
       return React.createElement(WrappedComponent, props);
     }
   }

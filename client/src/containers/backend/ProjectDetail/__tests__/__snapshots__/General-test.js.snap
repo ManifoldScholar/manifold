@@ -232,38 +232,105 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </div>
                         </Form.TextArea>
                       </Form.Setter('Form.TextArea)>
-                      <Form.Setter('Form.Upload) style=\\"square\\" label=\\"Avatar\\" accepts=\\"images\\" readFrom=\\"attributes[avatarStyles][smallSquare]\\" name=\\"attributes[avatar]\\" remove=\\"attributes[removeAvatar]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.Upload style=\\"square\\" label=\\"Avatar\\" accepts=\\"images\\" name=\\"attributes[avatar]\\" remove=\\"attributes[removeAvatar]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
-                          <div className=\\"form-input\\">
-                            <Errorable className=\\"form-input\\" name=\\"attributes[avatar]\\" errors={{...}} label=\\"Avatar\\" containerStyle={{...}}>
-                              <div style={{...}} className=\\"form-input\\">
-                                <label className=\\"\\">
-                                  Avatar
+                      <Form.Setter('Project.Form.AvatarBuilder) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Project.Form.AvatarBuilder setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                          <div className=\\"avatar-builder\\">
+                            <label className=\\"section-header\\">
+                              Project Thumbnail
+                            </label>
+                            <div className=\\"grid\\">
+                              <div className=\\"section current\\">
+                                <label>
+                                  Current
                                 </label>
-                                <Dropzone style={[undefined]} className=\\"form-dropzone style-square\\" activeStyle={{...}} multiple={false} onDrop={[Function]} accept=\\"image/*\\" disablePreview={false} disableClick={false} maxSize={Infinity} minSize={0}>
-                                  <div className=\\"form-dropzone style-square\\" style={{...}} onDrop={[Function]} onClick={[Function]} onDragStart={[Function]} onDragEnter={[Function]} onDragOver={[Function]} onDragLeave={[Function]}>
-                                    <div className=\\"contents-empty\\">
-                                      <i className=\\"manicon manicon-cloud-up\\" />
-                                      <div className=\\"message\\">
-                                        <p className=\\"primary\\">
-                                          Upload a file or
-                                          <br />
-                                          drag and drop here
-                                          <br />
-                                        </p>
-                                        <p className=\\"secondary\\">
-                                          jpeg, tiff, gif, png
-                                        </p>
+                              </div>
+                              <div className=\\"section active\\">
+                                <label>
+                                  Default
+                                </label>
+                                <Project.Form.ColorPicker onChange={[Function]} value={{...}} setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                                  <div className=\\"color-picker\\">
+                                    <div className=\\"colors\\">
+                                      <div className=\\"form-input\\">
+                                        <label htmlFor=\\"primary\\" className=\\"form-toggle radio primary\\">
+                                          <input type=\\"radio\\" value=\\"primary\\" id=\\"primary\\" checked={false} onChange={[Function]} />
+                                          <span className=\\"toggle-indicator\\" />
+                                          <span className=\\"toggle-label\\" />
+                                        </label>
+                                        <label htmlFor=\\"secondary\\" className=\\"form-toggle radio secondary\\">
+                                          <input type=\\"radio\\" value=\\"secondary\\" id=\\"secondary\\" checked={false} onChange={[Function]} />
+                                          <span className=\\"toggle-indicator\\" />
+                                          <span className=\\"toggle-label\\" />
+                                        </label>
+                                        <label htmlFor=\\"tertiary\\" className=\\"form-toggle radio tertiary\\">
+                                          <input type=\\"radio\\" value=\\"tertiary\\" id=\\"tertiary\\" checked={false} onChange={[Function]} />
+                                          <span className=\\"toggle-indicator\\" />
+                                          <span className=\\"toggle-label\\" />
+                                        </label>
+                                        <label htmlFor=\\"quaternary\\" className=\\"form-toggle radio quaternary\\">
+                                          <input type=\\"radio\\" value=\\"quaternary\\" id=\\"quaternary\\" checked={false} onChange={[Function]} />
+                                          <span className=\\"toggle-indicator\\" />
+                                          <span className=\\"toggle-label\\" />
+                                        </label>
+                                        <label htmlFor=\\"quinary\\" className=\\"form-toggle radio quinary\\">
+                                          <input type=\\"radio\\" value=\\"quinary\\" id=\\"quinary\\" checked={false} onChange={[Function]} />
+                                          <span className=\\"toggle-indicator\\" />
+                                          <span className=\\"toggle-label\\" />
+                                        </label>
+                                        <label htmlFor=\\"sentary\\" className=\\"form-toggle radio sentary\\">
+                                          <input type=\\"radio\\" value=\\"sentary\\" id=\\"sentary\\" checked={false} onChange={[Function]} />
+                                          <span className=\\"toggle-indicator\\" />
+                                          <span className=\\"toggle-label\\" />
+                                        </label>
                                       </div>
                                     </div>
-                                    <input accept=\\"image/*\\" type=\\"file\\" style={{...}} multiple={false} onChange={[Function]} />
+                                    <div className=\\"default-description\\">
+                                      Select A Different
+                                      <br />
+                                      Background Color
+                                    </div>
                                   </div>
-                                </Dropzone>
+                                </Project.Form.ColorPicker>
                               </div>
-                            </Errorable>
+                              <div className=\\"section\\">
+                                <label>
+                                  Custom
+                                </label>
+                                <Form.Setter('Form.Upload) set={[Function]} initialValue={{...}} value={{...}} style=\\"square\\" accepts=\\"images\\" actions={{...}}>
+                                  <Form.Upload setOther={[Function]} set={[Function]} initialValue={{...}} value={{...}} style=\\"square\\" accepts=\\"images\\">
+                                    <div className=\\"form-input\\">
+                                      <Errorable className=\\"form-input\\" name={[undefined]} errors={[undefined]} label={[undefined]} containerStyle={{...}}>
+                                        <div style={{...}} className=\\"form-input\\">
+                                          <label className=\\"\\" />
+                                          <Dropzone style={[undefined]} className=\\"form-dropzone style-square\\" activeStyle={{...}} multiple={false} onDrop={[Function]} accept=\\"image/*\\" disablePreview={false} disableClick={false} maxSize={Infinity} minSize={0}>
+                                            <div className=\\"form-dropzone style-square\\" style={{...}} onDrop={[Function]} onClick={[Function]} onDragStart={[Function]} onDragEnter={[Function]} onDragOver={[Function]} onDragLeave={[Function]}>
+                                              <div className=\\"contents-empty\\">
+                                                <i className=\\"manicon manicon-cloud-up\\" />
+                                                <div className=\\"message\\">
+                                                  <p className=\\"primary\\">
+                                                    Upload a file or
+                                                    <br />
+                                                    drag and drop here
+                                                    <br />
+                                                  </p>
+                                                  <p className=\\"secondary\\">
+                                                    jpeg, tiff, gif, png
+                                                  </p>
+                                                </div>
+                                              </div>
+                                              <input accept=\\"image/*\\" type=\\"file\\" style={{...}} multiple={false} onChange={[Function]} />
+                                            </div>
+                                          </Dropzone>
+                                        </div>
+                                      </Errorable>
+                                    </div>
+                                  </Form.Upload>
+                                </Form.Setter('Form.Upload)>
+                              </div>
+                            </div>
                           </div>
-                        </Form.Upload>
-                      </Form.Setter('Form.Upload)>
+                        </Project.Form.AvatarBuilder>
+                      </Form.Setter('Project.Form.AvatarBuilder)>
                       <Form.Setter('Form.Upload) style=\\"portrait\\" label=\\"Cover\\" accepts=\\"images\\" readFrom=\\"attributes[coverStyles][smallPortrait]\\" name=\\"attributes[cover]\\" remove=\\"attributes[removeCover]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
                         <Form.Upload style=\\"portrait\\" label=\\"Cover\\" accepts=\\"images\\" name=\\"attributes[cover]\\" remove=\\"attributes[removeCover]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
                           <div className=\\"form-input\\">

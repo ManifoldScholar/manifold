@@ -250,6 +250,7 @@ ActiveRecord::Schema.define(version: 20170512190317) do
     t.date     "publication_date"
     t.string   "slug"
     t.jsonb    "citations",               default: {}
+    t.string   "avatar_color",            default: "primary"
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
 

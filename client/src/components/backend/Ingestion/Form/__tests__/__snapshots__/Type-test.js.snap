@@ -9,7 +9,7 @@ exports[`Backend.Ingestion.Form.Type component renders correctly 1`] = `
       Text Format
     </label>
     <label
-      className="form-toggle radio vertical"
+      className="form-toggle radio"
       htmlFor="epub"
     >
       <input
@@ -29,7 +29,7 @@ exports[`Backend.Ingestion.Form.Type component renders correctly 1`] = `
       </span>
     </label>
     <label
-      className="form-toggle radio vertical"
+      className="form-toggle radio"
       htmlFor="word"
     >
       <input
@@ -49,7 +49,7 @@ exports[`Backend.Ingestion.Form.Type component renders correctly 1`] = `
       </span>
     </label>
     <label
-      className="form-toggle radio vertical"
+      className="form-toggle radio"
       htmlFor="markdown"
     >
       <input
@@ -69,7 +69,7 @@ exports[`Backend.Ingestion.Form.Type component renders correctly 1`] = `
       </span>
     </label>
     <label
-      className="form-toggle radio vertical"
+      className="form-toggle radio"
       htmlFor="googledoc"
     >
       <input
@@ -89,7 +89,7 @@ exports[`Backend.Ingestion.Form.Type component renders correctly 1`] = `
       </span>
     </label>
     <label
-      className="form-toggle radio vertical"
+      className="form-toggle radio"
       htmlFor="html"
     >
       <input

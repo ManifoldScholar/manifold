@@ -1,16 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
 export default class ProjectPlaceholder extends Component {
 
   static displayName = "Project.Placeholder";
+
+  static propTypes = {
+    color: PropTypes.string
+  };
 
   // static propTypes = {};
   // NB: project-thumb-placeholder can take 1 of 5 modifier classes (Primary through Quinary)
   // For background colors, or none for white.
 
   render() {
+    const color = !this.props.color || this.props.color === "sentary" ? '' : this.props.color;
+    const placeholderClasses = classNames(
+      'project-thumb-placeholder',
+      color
+    );
+
     return (
-      <svg version="1.1" className="project-thumb-placeholder quaternary"
+      <svg version="1.1" className={placeholderClasses}
         x="0px" y="0px" width="200.34735px" height="200.68436px"
         viewBox="0 0 200.34735 200.68436"
       >
