@@ -2,11 +2,6 @@ import React, { PropTypes } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import get from 'lodash/get';
 import has from 'lodash/has';
-import isNil from 'lodash/isNil';
-import isBoolean from 'lodash/isBoolean';
-import isString from 'lodash/isString';
-import startsWith from 'lodash/startsWith';
-import intersection from 'lodash/intersection';
 import brackets2dots from 'brackets2dots';
 
 function getDisplayName(WrappedComponent) {
@@ -64,14 +59,24 @@ export default function setter(WrappedComponent) {
       this.setValue(value, props);
     }
 
+    callbackSetOther(value, name, triggersDirty, props) {
+      this.setOtherValue(value, name, triggersDirty, props);
+    }
+
     callbackChange(event, props) {
       const target = event.target;
       const value = target.value;
       this.setValue(value, props);
     }
 
+    setOtherValue(value, name, triggersDirty, props) {
+      if (!this.isConnected(props)) return;
+      const path = `${this.nameToPath(name)}.$set`;
+      props.actions.set(props.sessionKey, path, value, triggersDirty);
+    }
+
     setValue(value, props, triggersDirty = true) {
-      if (!this.isConnected(this.props)) return;
+      if (!this.isConnected(props)) return;
       const path = this.setPath(props);
       props.actions.set(props.sessionKey, path, value, triggersDirty);
     }
@@ -103,26 +108,21 @@ export default function setter(WrappedComponent) {
       return this.isDirtyValueSet(props) ? this.dirtyValue(props) : this.sourceValue(props);
     }
 
-    /* eslint-disable no-return-assign */
-    /* eslint-disable no-param-reassign */
-    /* eslint-disable no-sequences */
     passthroughProps(props) {
-      const passthrough = intersection(
-        Object.keys(WrappedComponent.propTypes),
-        Object.keys(props)
-      );
-      return passthrough.reduce((a, e) => (a[e] = props[e], a), {});
+      const { dirtyModel, sourceModel, readFrom, actions, ...other } = props;
+      return other;
     }
-    /* eslint-enable no-sequences */
-    /* eslint-enable no-param-reassign */
-    /* eslint-enable no-return-assign */
 
     additionalProps(props) {
+      const setOther = (value, name, triggersDirty = true) => {
+        this.callbackSetOther(value, name, triggersDirty, props);
+      };
       return {
-        onChange: (event) => this.callbackChange(event, this.props),
-        set: (value) => this.callbackSet(value, this.props),
-        value: this.currentValue(this.props),
-        initialValue: this.sourceValue(this.props)
+        onChange: (event) => this.callbackChange(event, props),
+        set: (value) => this.callbackSet(value, props),
+        setOther,
+        value: this.currentValue(props),
+        initialValue: this.sourceValue(props)
       };
     }
 
