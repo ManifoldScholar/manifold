@@ -15,8 +15,9 @@ module Validation
     params.require(:data)
     attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,
                   :purchase_price_money, :purchase_price_currency, :twitter_id,
-                  :instagram_id, :remove_avatar, attachment(:avatar), attachment(:hero),
-                  attachment(:cover), :remove_hero, :publication_date, metadata]
+                  :instagram_id, :remove_avatar, attachment(:avatar),
+                  attachment(:hero), attachment(:cover), :remove_hero,
+                  :remove_cover, :publication_date, metadata]
     relationships = [:collaborators, :creators, :contributors, :published_text]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
