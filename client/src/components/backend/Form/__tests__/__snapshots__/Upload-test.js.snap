@@ -1,0 +1,241 @@
+exports[`Form.Upload component when the upload input does not have a value renders correctly 1`] = `
+<div
+  className="form-input">
+  <div
+    className="form-input"
+    style={Object {}}>
+    <label
+      className="">
+      Cover
+    </label>
+    <div
+      className="form-dropzone style-portrait"
+      onClick={[Function]}
+      onDragEnter={[Function]}
+      onDragLeave={[Function]}
+      onDragOver={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      style={Object {}}>
+      <div
+        className="contents-empty">
+        <i
+          className="manicon manicon-cloud-up" />
+        <div
+          className="message">
+          <p
+            className="primary">
+            Upload a file or
+            <br />
+            drag and drop here
+            <br />
+          </p>
+          <p
+            className="secondary">
+            jpeg, tiff, gif, png
+          </p>
+        </div>
+      </div>
+      <input
+        accept="image/*"
+        multiple={false}
+        onChange={[Function]}
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="file" />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Form.Upload component when the upload input doesn't have a remove prop renders correctly 1`] = `
+<div
+  className="form-input">
+  <div
+    className="form-input"
+    style={Object {}}>
+    <label
+      className="">
+      Cover
+    </label>
+    <div
+      className="form-dropzone style-portrait"
+      onClick={[Function]}
+      onDragEnter={[Function]}
+      onDragLeave={[Function]}
+      onDragOver={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      style={Object {}}>
+      <div
+        className="contents-image-preview">
+        <div
+          className="preview"
+          data-id="preview"
+          style={
+            Object {
+              "backgroundImage": "url(/some/image.jpg)",
+            }
+          } />
+        <div
+          className="message">
+          <p
+            className="secondary">
+            <a
+              data-id="remove"
+              href="#"
+              onClick={[Function]}>
+              Remove this image
+            </a>
+            <br />
+            or 
+            <span
+              className="fake-link">
+              Upload a new image
+            </span>
+          </p>
+        </div>
+      </div>
+      <input
+        accept="image/*"
+        multiple={false}
+        onChange={[Function]}
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="file" />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Form.Upload component when the upload input doesn't have set and setOther methods renders correctly 1`] = `
+<div
+  className="form-input">
+  <div
+    className="form-input"
+    style={Object {}}>
+    <label
+      className="">
+      Cover
+    </label>
+    <div
+      className="form-dropzone style-portrait"
+      onClick={[Function]}
+      onDragEnter={[Function]}
+      onDragLeave={[Function]}
+      onDragOver={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      style={Object {}}>
+      <div
+        className="contents-image-preview">
+        <div
+          className="preview"
+          data-id="preview"
+          style={
+            Object {
+              "backgroundImage": "url(/some/image.jpg)",
+            }
+          } />
+        <div
+          className="message">
+          <p
+            className="secondary">
+            <a
+              data-id="remove"
+              href="#"
+              onClick={[Function]}>
+              Remove this image
+            </a>
+            <br />
+            or 
+            <span
+              className="fake-link">
+              Upload a new image
+            </span>
+          </p>
+        </div>
+      </div>
+      <input
+        accept="image/*"
+        multiple={false}
+        onChange={[Function]}
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="file" />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Form.Upload component when the upload input has a value renders correctly 1`] = `
+<div
+  className="form-input">
+  <div
+    className="form-input"
+    style={Object {}}>
+    <label
+      className="">
+      Cover
+    </label>
+    <div
+      className="form-dropzone style-portrait"
+      onClick={[Function]}
+      onDragEnter={[Function]}
+      onDragLeave={[Function]}
+      onDragOver={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      style={Object {}}>
+      <div
+        className="contents-image-preview">
+        <div
+          className="preview"
+          data-id="preview"
+          style={
+            Object {
+              "backgroundImage": "url(/some/image.jpg)",
+            }
+          } />
+        <div
+          className="message">
+          <p
+            className="secondary">
+            <a
+              data-id="remove"
+              href="#"
+              onClick={[Function]}>
+              Remove this image
+            </a>
+            <br />
+            or 
+            <span
+              className="fake-link">
+              Upload a new image
+            </span>
+          </p>
+        </div>
+      </div>
+      <input
+        accept="image/*"
+        multiple={false}
+        onChange={[Function]}
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="file" />
+    </div>
+  </div>
+</div>
+`;
