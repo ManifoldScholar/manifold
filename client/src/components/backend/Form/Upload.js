@@ -4,8 +4,6 @@ import { Form as GlobalForm } from 'components/global';
 import classnames from 'classnames';
 import isString from 'lodash/isString';
 import isObject from 'lodash/isObject';
-import startsWith from 'lodash/startsWith';
-import endsWith from 'lodash/endsWith';
 import get from 'lodash/get';
 import setter from './setter';
 
@@ -14,15 +12,17 @@ class FormUpload extends Component {
   static displayName = "Form.Upload";
 
   static propTypes = {
+    set: PropTypes.func.isRequired, // set is called when the value changes
+    setOther: PropTypes.func, // used to set another prop, eg removed, in session
     label: PropTypes.string,
     instructions: PropTypes.string,
     accepts: PropTypes.string,
     inlineStyle: PropTypes.object,
-    name: PropTypes.string,
+    name: PropTypes.string, // name of the model field: attributes[avatar]
+    remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
     style: React.PropTypes.oneOf(['square', 'portrait', 'landscape']),
-    set: PropTypes.func,
-    value: PropTypes.any,
-    initialValue: PropTypes.string,
+    value: PropTypes.any, // the current value of the field in the connected model
+    initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array
   };
 
@@ -85,29 +85,30 @@ class FormUpload extends Component {
       attachment: null
     };
 
-    this.setValue = this.setValue.bind(this);
+    this.setValueFromCurrentState = this.setValueFromCurrentState.bind(this);
     this.handleFileDrop = this.handleFileDrop.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.state.attachment) return;
-    if (this.state.attachment && prevState.attachment !== this.state.attachment) {
-      this.setValue();
-    }
+    if (this.state !== prevState) this.setValueFromCurrentState();
   }
 
-  setValue() {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const attachment = {
-        data: reader.result,
-        content_type: this.state.attachment.type,
-        filename: this.state.attachment.name
+  setValueFromCurrentState() {
+    const { attachment, removed } = this.state;
+    const { set, setOther, remove: removeName } = this.props;
+
+    if (setOther && removeName) setOther(removed, removeName);
+    if (attachment) {
+      const { type, name } = attachment;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        set({ data: reader.result, content_type: type, filename: name });
       };
-      this.props.set(attachment);
-    };
-    reader.readAsDataURL(this.state.attachment);
+      reader.readAsDataURL(attachment);
+    } else {
+      set(null);
+    }
   }
 
   handleFileDrop(file) {
@@ -118,7 +119,6 @@ class FormUpload extends Component {
     event.preventDefault();
     event.stopPropagation();
     this.setState({ attachment: null, removed: true });
-    this.props.set(null);
   }
 
   isFile(object) {
@@ -164,13 +164,14 @@ class FormUpload extends Component {
     return (
       <div className="contents-image-preview">
         <div
+          data-id="preview"
           className="preview"
           style={{ backgroundImage: `url(${this.previewFile(this.props, this.state)})` }}
         >
         </div>
         <div className="message">
           <p className="secondary">
-            <a
+            <a data-id="remove"
               onClick={this.handleRemove}
               href="#"
             >
@@ -186,8 +187,11 @@ class FormUpload extends Component {
   renderFilePreview() {
     return (
       <div className="contents-icon-preview">
-        <div className="message">
-          <i className="manicon manicon-document"></i>
+        <div
+          className="message"
+          data-id="preview"
+        >
+          <i className="manicon manicon-document" />
           <p className="primary">
             {this.previewFileName(this.props, this.state)}
           </p>
@@ -209,7 +213,7 @@ class FormUpload extends Component {
     const { extensions } = this.accepts(this.props);
     return (
       <div className="contents-empty">
-        <i className="manicon manicon-cloud-up"></i>
+        <i className="manicon manicon-cloud-up" />
         <div className="message">
           <p className="primary">
             {'Upload a file or'}
