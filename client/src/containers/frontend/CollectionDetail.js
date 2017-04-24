@@ -7,6 +7,8 @@ import { entityUtils } from 'utils';
 import { projectsAPI, collectionsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
+import omitBy from 'lodash/omitBy';
+import isNull from 'lodash/isNull';
 
 const { select, grab, meta, loaded, isEntityLoaded } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -57,13 +59,18 @@ class CollectionDetailContainer extends PureComponent {
       slideshowResources: select(requests.feSlideshow, state.entityStore),
       slideshowResourcesMeta: meta(requests.feSlideshow, state.entityStore)
     };
-    return props;
+    return omitBy(props, isNull);
   }
 
   static propTypes = {
+    location: PropTypes.object,
+    dispatch: PropTypes.func,
+    slideshowResources: PropTypes.array,
+    slideshowResourcesMeta: PropTypes.object,
     project: PropTypes.object,
     collection: PropTypes.object,
-    location: PropTypes.object
+    resources: PropTypes.array,
+    resourcesMeta: PropTypes.object
   };
 
   constructor(props) {

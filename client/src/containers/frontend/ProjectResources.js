@@ -7,6 +7,8 @@ import { entityUtils } from 'utils';
 import { projectsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
+import omitBy from 'lodash/omitBy';
+import isNull from 'lodash/isNull';
 
 const { select, meta } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -42,11 +44,12 @@ class ProjectResourcesContainer extends Component {
   };
 
   static mapStateToProps(state) {
-    return {
+    const props = {
       project: select(requests.feProject, state.entityStore),
       resources: select(requests.feResources, state.entityStore),
       meta: meta(requests.feResources, state.entityStore)
     };
+    return omitBy(props, isNull);
   }
 
   constructor(props) {
@@ -54,6 +57,8 @@ class ProjectResourcesContainer extends Component {
     this.state = this.initialState(this.props.location.query);
     this.filterChange = this.filterChange.bind(this);
     this.updateResults = debounce(this.updateResults.bind(this), 250);
+    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   componentWillUnmount() {
@@ -89,6 +94,23 @@ class ProjectResourcesContainer extends Component {
     browserHistory.push({ pathname: base, query: filter });
   }
 
+  handlePageChange(event, pageParam) {
+    const pagination = { number: pageParam, size: perPage };
+    const project = this.props.project;
+    const filter = this.state.filter;
+    const action = request(
+      projectsAPI.resources(project.id, filter, pagination),
+      requests.feResources
+    );
+    this.props.dispatch(action);
+  }
+
+  pageChangeHandlerCreator(pageParam) {
+    return (event) => {
+      this.handlePageChange(event, pageParam);
+    };
+  }
+
   render() {
     const project = this.props.project;
     if (!project) return null;
@@ -109,6 +131,7 @@ class ProjectResourcesContainer extends Component {
             project={project}
             resources={this.props.resources}
             pagination={this.props.meta.pagination}
+            paginationClickHandler={this.pageChangeHandlerCreator}
             filterChange={this.filterChange}
             initialFilterState={initialFilter}
           />
