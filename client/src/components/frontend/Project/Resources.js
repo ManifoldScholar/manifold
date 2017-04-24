@@ -9,17 +9,13 @@ export default class ProjectResources extends Component {
     project: PropTypes.object,
     resources: PropTypes.array,
     pagination: PropTypes.object,
+    paginationClickHandler: PropTypes.func,
     filterChange: PropTypes.func.isRequired,
     initialFilterState: PropTypes.object
   };
 
   constructor() {
     super();
-    this.paginationClickHandler = this.paginationClickHandler.bind(this);
-  }
-
-  paginationClickHandler(page) {
-    return `/browse/project/${this.props.project.id}/resources/${page}`;
   }
 
   render() {
@@ -44,7 +40,7 @@ export default class ProjectResources extends Component {
             pagination={this.props.pagination}
             resources={this.props.resources}
             projectId={project.id}
-            paginationClickHandler={this.paginationClickHandler}
+            paginationClickHandler={this.props.paginationClickHandler}
           />
         </div>
       </section>
