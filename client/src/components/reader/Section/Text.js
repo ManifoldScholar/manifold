@@ -139,7 +139,6 @@ export default class Text extends Component {
         <section className={readerAppearanceClass}>
           <Annotation.Annotatable
             currentUser={this.props.authentication.currentUser}
-            textId={this.props.params.textId}
             projectId={this.props.text.relationships.project.id}
             textId={this.props.text.id}
             sectionId={this.props.params.sectionId}
