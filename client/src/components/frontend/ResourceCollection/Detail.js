@@ -30,7 +30,7 @@ export default class ResourceCollectionDetail extends PureComponent {
     if (!project || !collection) return null;
 
     const attr = collection.attributes;
-    const resources = collection.relationships.resources;
+    const count = attr.collectionResourcesCount;
 
     return (
       <section>
@@ -68,7 +68,7 @@ export default class ResourceCollectionDetail extends PureComponent {
           <a id="pagination-target" name="pagination-target"></a>
           <ResourceList.Totals
             belongsTo="collection"
-            count={project.attributes.resourcesCount}
+            count={count}
             projectId={project.id}
           />
           <ResourceList.Filters
