@@ -74,12 +74,12 @@ export default class ResourceFormKindVariants extends PureComponent {
         {
           this.props.kind === "video" ?
             <Form.Upload
-              style="portrait"
-              label="Cover Image"
+              style="square"
+              label="Thumbnail Image"
               accepts="images"
-              readFrom="attributes[variantPosterStyles][smallPortrait]"
-              name="attributes[variantPoster]"
-              remove="attributes[removeVariantPoster]"
+              readFrom="attributes[variantThumbnailStyles][smallSquare]"
+              name="attributes[variantThumbnail]"
+              remove="attributes[removeVariantThumbnail]"
               {...this.props}
             />
             : null

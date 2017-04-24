@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425220220) do
+ActiveRecord::Schema.define(version: 20170503180816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -298,6 +298,7 @@ ActiveRecord::Schema.define(version: 20170425220220) do
     t.string   "iframe_dimensions"
     t.text     "embed_code"
     t.string   "sub_kind"
+    t.integer  "comments_count",                  default: 0
   end
 
   create_table "settings", force: :cascade do |t|
@@ -407,6 +408,14 @@ ActiveRecord::Schema.define(version: 20170425220220) do
     t.string   "spine",                 default: [],              array: true
     t.jsonb    "metadata",              default: {}
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
+  end
+
+  create_table "thumbnail_fetch_attempts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.boolean "successful",  default: false, null: false
+    t.integer "attempts",    default: 0
+    t.string  "reference"
+    t.uuid    "resource_id"
+    t.index ["resource_id"], name: "index_thumbnail_fetch_attempts_on_resource_id", using: :btree
   end
 
   create_table "user_claims", force: :cascade do |t|

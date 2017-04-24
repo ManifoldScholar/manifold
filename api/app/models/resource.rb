@@ -25,6 +25,7 @@ class Resource < ApplicationRecord
 
   # Associations
   belongs_to :project
+  has_one :thumbnail_fetch_attempt, dependent: :destroy
   has_many :collection_resources, dependent: :destroy
   has_many :collections, through: :collection_resources
 
@@ -37,6 +38,9 @@ class Resource < ApplicationRecord
 
   has_formatted_attributes :title, :caption, :credit, include_wrap: false
   has_formatted_attributes :description
+
+  # Paperclip direct image from URL
+  attr_reader :variant_thumbnail_remote_url
 
   # Validation
   validates :title, presence: true
@@ -74,6 +78,7 @@ class Resource < ApplicationRecord
   before_validation :update_kind
   before_update :reset_stale_fields
   before_save :update_tags
+  after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_create :resource_to_event
 
   # Create a new project event for the new resource
@@ -88,6 +93,18 @@ class Resource < ApplicationRecord
     Rails.logger.info(
       "#resource_to_event created an invalid event: #{event.errors.full_messages}"
     )
+  end
+
+  def fetch_thumbnail?
+    return unless Thumbnail::Fetcher.accepts?(self)
+    !variant_thumbnail.present? || previous_changes.key?(:external_id)
+  end
+
+  def queue_fetch_thumbnail(force = false)
+    unless force
+      return unless fetch_thumbnail?
+    end
+    FetchResourceThumbnail.perform_later(id)
   end
 
   def validate_kind_fields
@@ -167,6 +184,14 @@ class Resource < ApplicationRecord
     kind == "video" && sub_kind == "external_video"
   end
 
+  def youtube?
+    external_video? && external_type == "youtube"
+  end
+
+  def vimeo?
+    external_video? && external_type == "vimeo"
+  end
+
   def iframe?
     kind == "interactive" && sub_kind == "iframe"
   end
@@ -178,6 +203,11 @@ class Resource < ApplicationRecord
   def split_iframe_dimensions
     return nil unless iframe_dimensions
     iframe_dimensions.split("x")
+  end
+
+  def variant_thumbnail_remote_url=(url_value)
+    self.variant_thumbnail = URI.parse(url_value)
+    @variant_thumbnail_remote_url = url_value
   end
 
 end
