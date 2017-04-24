@@ -7,11 +7,10 @@ import { Drawer, Dialog } from 'components/backend';
 import { Resource } from 'containers/reader';
 import AnnotationContainers from 'containers/reader/Annotation';
 import { Resource as ResourceComponents } from 'components/reader';
-import fakeData from 'helpers/fakeData';
 import { annotationsAPI, requests } from 'api';
 import { entityStoreActions, uiVisibilityActions } from 'actions';
 import isString from 'lodash/isString';
-const { request, flush } = entityStoreActions;
+const { request } = entityStoreActions;
 
 class Annotatable extends Component {
 
