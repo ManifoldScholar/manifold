@@ -5,7 +5,7 @@ class CollectionResource < ApplicationRecord
   include Authority::Abilities
 
   # Associations
-  belongs_to :collection
+  belongs_to :collection, counter_cache: true
   belongs_to :resource
 
   # Concerns

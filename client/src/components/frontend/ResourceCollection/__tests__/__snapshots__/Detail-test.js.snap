@@ -138,6 +138,17 @@ exports[`CollectionResourcesDetail Component renders correctly 1`] = `
     <a
       id="pagination-target"
       name="pagination-target" />
+    <div
+      className="resource-totals"
+      data-id="total-container">
+      <a
+        onClick={[Function]}
+        style={Object {}}>
+        View All Project Resources 
+        <i
+          className="manicon manicon-arrow-right" />
+      </a>
+    </div>
     <form
       className="form-list-filter"
       onSubmit={[Function]}>

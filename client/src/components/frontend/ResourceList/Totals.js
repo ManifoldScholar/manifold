@@ -13,19 +13,25 @@ export default class ResourceListTotals extends Component {
 
   static defaultProps = {
     belongsTo: "project"
+  };
+
+  renderResourceCount() {
+    if (!this.props.count) return null;
+    return (
+      <div className="total-count">
+        {`This ${this.props.belongsTo} features `}
+        <span data-id="count">
+          { this.props.count.toLocaleString() }
+        </span>
+        {' total resources'}
+      </div>
+    );
   }
 
   render() {
-    if (!this.props.count) return null;
     return (
-      <div className="resource-totals">
-        <div className="total-count">
-          {`This ${this.props.belongsTo} features `}
-          <span>
-            { this.props.count.toLocaleString() }
-          </span>
-          {' total resources'}
-        </div>
+      <div className="resource-totals" data-id="total-container">
+        {this.renderResourceCount()}
         <Link to={`/browse/project/${this.props.projectId}/resources`}>
           View All Project Resources <i className="manicon manicon-arrow-right"></i>
         </Link>

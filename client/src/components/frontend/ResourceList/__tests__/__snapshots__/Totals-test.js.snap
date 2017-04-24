@@ -1,0 +1,22 @@
+exports[`ResourceTotals Component renders correctly 1`] = `
+<div
+  className="resource-totals"
+  data-id="total-container">
+  <div
+    className="total-count">
+    This project features 
+    <span
+      data-id="count">
+      3
+    </span>
+     total resources
+  </div>
+  <a
+    onClick={[Function]}
+    style={Object {}}>
+    View All Project Resources 
+    <i
+      className="manicon manicon-arrow-right" />
+  </a>
+</div>
+`;
