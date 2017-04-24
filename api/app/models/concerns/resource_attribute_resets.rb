@@ -78,9 +78,9 @@ module ResourceAttributeResets
   end
 
   def reset_non_external_video_attributes
-    attributes = %w(external_url embed_code iframe_dimensions)
+    attributes = %w(embed_code iframe_dimensions)
     attachments = %w(attachment variant_format_one variant_format_two
-                     high_res variant_thumbnail variant_poster)
+                     high_res variant_poster)
     reset_attributes(attributes, attachments)
   end
 

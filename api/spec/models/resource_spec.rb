@@ -30,6 +30,32 @@ RSpec.describe Resource, type: :model do
     expect(event.event_type).to eq(Event::RESOURCE_ADDED)
   end
 
+  context "thumbnail fetch" do
+    it "queues the job when created" do
+      resource = FactoryGirl.build(
+        :resource,
+        kind: "vidoe",
+        sub_kind: "external_video",
+        external_id: "lVrAwK7FaOw",
+        external_type: "youtube"
+      )
+      expect { resource.save }.to have_enqueued_job(FetchResourceThumbnail)
+    end
+
+    it "queues the job when video id is changed" do
+      resource = FactoryGirl.create(
+        :resource,
+        kind: "vidoe",
+        sub_kind: "external_video",
+        external_id: "lVrAwK7FaOw",
+        external_type: "youtube"
+      )
+      resource.external_id = "zXg5cQZJNzA"
+      expect { resource.save }.to have_enqueued_job(FetchResourceThumbnail)
+    end
+  end
+
+
   describe "formats some fields with a markdown subset" do
     let(:raw) { "_italic_ a **bold**"}
     let(:formatted_without_blocks) { "<em>italic</em> a <strong>bold</strong>"}
