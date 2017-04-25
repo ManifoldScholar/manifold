@@ -42,6 +42,7 @@ export default {
   rSection: 'reader-section',
   rAnnotations: 'reader-annotations',
   rResources: 'reader-resources',
+  rSectionResources: 'reader-section-resources',
   rResource: 'reader-resource',
   rAnnotationCreate: 'reader-annotation-create',
   rAnnotationUpdate: 'reader-annotation-update',
