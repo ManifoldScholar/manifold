@@ -26,6 +26,7 @@ export default class ProjectPanelGeneral extends PureComponent {
     return (
       <section>
         <FormContainer.Form
+          debug
           route={this.props.routes[this.props.routes.length - 1]}
           model={this.props.project}
           name="backend-project-update"
@@ -33,6 +34,12 @@ export default class ProjectPanelGeneral extends PureComponent {
           create={projectsAPI.create}
           className="form-secondary"
         >
+          <Form.AvatarBuilder
+            avatarColorName="attributes[avatarColor]"
+            avatarFileName="attributes[avatar]"
+            currentAvatarName="attributes[avatarStyles][smallSquare]"
+            removeAvatarName="attributes[removeAvatar]"
+          />
           <Form.TextInput
             validation={["required"]}
             focusOnMount

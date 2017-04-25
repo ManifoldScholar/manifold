@@ -3,6 +3,20 @@ class Project < ApplicationRecord
 
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
+  AVATAR_COLOR_PRIMARY = "primary".freeze
+  AVATAR_COLOR_SECONDARY = "secondary".freeze
+  AVATAR_COLOR_TERTIARY = "tertiary".freeze
+  AVATAR_COLOR_QUARTERNARY = "quarternary".freeze
+  AVATAR_COLOR_QUINARY = "quinary".freeze
+  AVATAR_COLOR_SENTARY = "sentary".freeze
+  AVATAR_COLORS = [
+    AVATAR_COLOR_PRIMARY,
+    AVATAR_COLOR_SECONDARY,
+    AVATAR_COLOR_TERTIARY,
+    AVATAR_COLOR_QUARTERNARY,
+    AVATAR_COLOR_QUINARY,
+    AVATAR_COLOR_SENTARY
+  ].freeze
 
   # Concerns
   include Authority::Abilities
@@ -64,6 +78,10 @@ class Project < ApplicationRecord
   validates :purchase_price_currency,
             inclusion: { in: Money::Currency.all.map(&:iso_code) },
             allow_nil: true
+  validates :avatar_color,
+            presence: true,
+            inclusion: { in: AVATAR_COLORS },
+            unless: :avatar?
 
   # Attachments
   manifold_has_attached_file :cover, :image
