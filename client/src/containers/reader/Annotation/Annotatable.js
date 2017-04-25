@@ -18,15 +18,14 @@ class Annotatable extends Component {
     textId: React.PropTypes.string.isRequired,
     sectionId: React.PropTypes.string.isRequired,
     projectId: React.PropTypes.string.isRequired,
+    bodySelector: React.PropTypes.string.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     containerSize: React.PropTypes.number.isRequired,
-    fontSize: React.PropTypes.number.isRequired,
     children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     currentUser: React.PropTypes.object,
     lockSelection: React.PropTypes.func,
     selectionLockedAnnotation: React.PropTypes.object,
     selectionLocked: React.PropTypes.bool,
-    body: React.PropTypes.object,
     resources: React.PropTypes.array,
     annotations: React.PropTypes.array
   }
@@ -453,8 +452,7 @@ class Annotatable extends Component {
             resources={this.props.resources}
             annotations={this.props.annotations}
             containerSize={this.props.containerSize}
-            fontSize={this.props.fontSize}
-            body={this.props.body}
+            bodySelector={this.props.bodySelector}
           /> : null
         }
       </div>

@@ -9,35 +9,77 @@ export default class ResourceViewerWrapper extends PureComponent {
   static propTypes = {
     resources: PropTypes.array,
     annotations: PropTypes.array,
+    bodySelector: PropTypes.string,
     containerSize: PropTypes.number,
-    fontSize: PropTypes.number,
-    body: PropTypes.object,
     sectionId: PropTypes.string,
     textId: PropTypes.string,
   };
 
   constructor() {
     super();
+    this.state = {
+      markers: []
+    };
     this.resourceMarkers = this.resourceMarkers.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.annotations !== nextProps.annotations) return true;
-    if (this.props.activeAnnotation !== nextProps.activeAnnotation) return true;
-    if (this.props.resources !== nextProps.resources) return true;
-    if (this.props.body !== nextProps.body) return true;
-    if (this.props.containerSize !== nextProps.containerSize) return true;
-    if (this.props.fontSize !== nextProps.fontSize) return true;
-    return false;
+  componentWillReceiveProps(nextProps) {
+    if (this.propsChanged(this.props, nextProps)) this.updateMarkers(nextProps);
   }
 
-  resourceMarkers() {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState !== this.state) return true;
+    return this.propsChanged(this.props, nextProps);
+  }
+
+  propsChanged(props, nextProps) {
+    const compare = Object.keys(ResourceViewerWrapper.propTypes);
+    const changed = compare.find((k) => {
+      return props[k] !== nextProps[k];
+    });
+    return changed !== undefined;
+  }
+
+  componentDidMount() {
+    this.updateMarkers(this.props);
+    this.height = this.bodyNodeHeight();
+    this.timer = setInterval(() => {
+      this.updateIfHeightChanged();
+    }, 500);
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.timer);
+  }
+
+  updateIfHeightChanged() {
+    const height = this.bodyNodeHeight();
+    if (height === this.height) return;
+    this.height = height;
+    this.updateMarkers(this.props);
+  }
+
+  updateMarkers(props) {
+    const markers = this.resourceMarkers(props);
+    this.setState({ markers });
+  }
+
+  bodyNodeHeight() {
+    const body = this.bodyNode();
+    return body.offsetHeight;
+  }
+
+  bodyNode() {
+    return document.querySelector(this.props.bodySelector);
+  }
+
+  resourceMarkers(props) {
     const markers = [];
-    if (!this.props.body) return markers;
-    const markerNodes = this.props.body.querySelectorAll('[data-annotation-resource]');
+    const body = this.bodyNode();
+    const markerNodes = body.querySelectorAll('[data-annotation-resource]');
     [...markerNodes].forEach((markerNode) => {
       const annotationId = markerNode.getAttribute('data-annotation-resource');
-      const annotation = this.props.annotations.find((a) => a.id === annotationId);
+      const annotation = props.annotations.find((a) => a.id === annotationId);
       if (annotation) {
         const resourceId = annotation.attributes.resourceId;
         const rect = markerNode.getBoundingClientRect();
@@ -60,8 +102,8 @@ export default class ResourceViewerWrapper extends PureComponent {
         textId={this.props.textId}
         sectionId={this.props.sectionId}
         resources={this.props.resources}
-        resourceMarkers={this.resourceMarkers()}
         containerSize={this.props.containerSize}
+        resourceMarkers={this.state.markers}
       />
     );
   }

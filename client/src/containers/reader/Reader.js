@@ -65,7 +65,7 @@ class ReaderContainer extends Component {
       annotations: select(requests.rAnnotations, state.entityStore),
       section: grab("textSections", ownProps.params.sectionId, state.entityStore),
       text: grab("texts", ownProps.params.textId, state.entityStore),
-      resources: select(requests.rResources, state.entityStore),
+      resources: select(requests.rSectionResources, state.entityStore),
       authentication: state.authentication,
       visibility: state.ui.visibility,
       loading: state.ui.loading.active,
@@ -138,7 +138,7 @@ class ReaderContainer extends Component {
 
   fetchResources(props) {
     const resourcesCall = resourcesAPI.forSection(props.params.sectionId);
-    props.dispatch(request(resourcesCall, requests.rResources));
+    props.dispatch(request(resourcesCall, requests.rSectionResources));
   }
 
   maybeRedirect(props) {
@@ -149,7 +149,6 @@ class ReaderContainer extends Component {
       }
     }
   }
-
 
   hasMissingResources(annotations, resourcesIn) {
     if (!annotations) return;
