@@ -123,7 +123,7 @@ export function loaded(requestMeta, entityStore) {
 
 export function meta(requestMeta, entityStore) {
   const response = get(entityStore, `responses.${requestMeta}`);
-  if (!response) return {};
+  if (!response) return null;
   return response.meta;
 }
 
