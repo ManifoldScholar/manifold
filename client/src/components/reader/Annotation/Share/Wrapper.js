@@ -1,11 +1,10 @@
 import React, { PureComponent, PropTypes } from 'react';
-import Editor from '../Editor';
+import Share from './';
 import Selection from '../Selection';
-import HigherOrder from 'containers/global/HigherOrder';
 
-export default class AnnotationCitationWrapper extends PureComponent {
+export default class AnnotationShareWrapper extends PureComponent {
 
-  static displayName = "Annotation.Citation.Wrapper";
+  static displayName = "Annotation.Share.Wrapper";
 
   static propTypes = {
     subject: PropTypes.string,
@@ -15,7 +14,6 @@ export default class AnnotationCitationWrapper extends PureComponent {
     endChar: PropTypes.number,
     annotating: PropTypes.bool,
     closeDrawer: PropTypes.func,
-    saveHandler: PropTypes.func,
     truncate: PropTypes.number,
     closeOnSave: PropTypes.bool,
     addsTo: PropTypes.string,
@@ -68,25 +66,14 @@ export default class AnnotationCitationWrapper extends PureComponent {
 
     return (
       <div className="annotation-selection">
-        YYOOOOOOOOOOOOOOOO
         <div className="selection-text">
           <div className="container">
             <i className="manicon manicon-quote"></i>
             {this.maybeTruncateSelection()}
           </div>
-          <HigherOrder.RequireRole requiredRole="any">
-            { this.state.editorOpen ? null :
-              <button
-                className="annotate-button"
-                onClick={this.handleOpenEditor}
-              >
-                Cite
-              </button>
-            }
-          </HigherOrder.RequireRole>
         </div>
         { this.state.editorOpen ?
-          <Editor
+          <Share.Citation
             {...this.props}
             cancel={cancelFunction}
           /> : null

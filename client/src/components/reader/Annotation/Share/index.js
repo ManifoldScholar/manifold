@@ -1,7 +1,7 @@
-import Editor from './Editor';
+import Citation from './Citation';
 import Wrapper from './Wrapper';
 
 export default {
-  Editor,
+  Citation,
   Wrapper
 };

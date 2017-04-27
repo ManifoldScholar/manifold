@@ -376,8 +376,8 @@ class Annotatable extends Component {
       case "annotations":
         return this.renderDrawerAnnotations(); // eslint-disable no-unreachable
         break;
-      case "share":
-        return this.renderDrawerShare(); // eslint-disable no-unreachable
+      case "citation":
+        return this.renderDrawerCitation(); // eslint-disable no-unreachable
         break;
       default:
         return null;
@@ -424,18 +424,17 @@ class Annotatable extends Component {
     );
   }
 
-  renderDrawerShare() {
+  renderDrawerCitation() {
     const { subject, startNode, startChar, endNode, endChar } =
       this.state.selectionLockedAnnotation;
     return (
-      <Annotation.Citation.Wrapper
+      <Annotation.Share.Wrapper
         closeDrawer={this.closeDrawer}
         subject={subject}
         startNode={startNode}
         startChar={startChar}
         endNode={endNode}
         endChar={endChar}
-        saveHandler={this.createAnnotation}
         truncate={600}
         annotating
       />
