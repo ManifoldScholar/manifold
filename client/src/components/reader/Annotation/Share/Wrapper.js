@@ -18,7 +18,8 @@ export default class AnnotationShareWrapper extends PureComponent {
     closeOnSave: PropTypes.bool,
     addsTo: PropTypes.string,
     showLogin: PropTypes.func,
-    shareType: PropTypes.string
+    shareType: PropTypes.string,
+    text: PropTypes.object
   };
 
   static defaultProps = {

@@ -27,13 +27,14 @@ class Annotatable extends Component {
     selectionLockedAnnotation: React.PropTypes.object,
     selectionLocked: React.PropTypes.bool,
     resources: React.PropTypes.array,
-    annotations: React.PropTypes.array
-  }
+    annotations: React.PropTypes.array,
+    text: PropTypes.object
+  };
 
   static defaultProps = {
     resource: [],
     annotations: []
-  }
+  };
 
   constructor() {
     super();
@@ -438,13 +439,13 @@ class Annotatable extends Component {
         endChar={endChar}
         truncate={600}
         shareType={type}
+        text={this.props.text}
         annotating
       />
     );
   };
 
   render() {
-
     const showLogin = bindActionCreators(
       () => uiVisibilityActions.visibilityToggle('signInUpOverlay'),
       this.props.dispatch
@@ -479,6 +480,7 @@ class Annotatable extends Component {
           selectionLocked={this.state.selectionLocked}
           annotatableDomElement={this.annotatable}
           showLogin={showLogin}
+          text={this.props.text}
         />
 
         {/* Render the margin resources */}

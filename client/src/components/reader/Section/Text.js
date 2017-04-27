@@ -146,6 +146,7 @@ export default class Text extends Component {
             annotations={this.state.filteredAnnotations}
             containerSize={typography.margins.current}
             bodySelector='[data-id="body"]'
+            text={this.props.text}
           >
             <div className={containerClass}>
               <div data-id="body" className={textSectionClass} >
