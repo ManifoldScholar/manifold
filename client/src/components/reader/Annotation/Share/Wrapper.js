@@ -17,12 +17,13 @@ export default class AnnotationShareWrapper extends PureComponent {
     truncate: PropTypes.number,
     closeOnSave: PropTypes.bool,
     addsTo: PropTypes.string,
-    showLogin: PropTypes.func
-  }
+    showLogin: PropTypes.func,
+    shareType: PropTypes.string
+  };
 
   static defaultProps = {
     closeOnSave: true
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -47,6 +48,26 @@ export default class AnnotationShareWrapper extends PureComponent {
     });
   }
 
+  renderShareEditor(type) {
+    if (!type) return null;
+    const cancelFunction = this.props.closeDrawer ?
+      this.props.closeDrawer : this.handleCloseEditor;
+
+    switch (type) {
+      case "citation":
+        return (
+          <Share.Citation
+            {...this.props}
+            cancel={cancelFunction}
+          />
+        );
+        break;
+      default:
+        return null;
+        break;
+    }
+  }
+
   maybeTruncateSelection() {
     if (this.props.truncate && this.props.subject.length > this.props.truncate) {
       return (
@@ -61,8 +82,6 @@ export default class AnnotationShareWrapper extends PureComponent {
   }
 
   render() {
-    const cancelFunction = this.props.closeDrawer ?
-      this.props.closeDrawer : this.handleCloseEditor;
 
     return (
       <div className="annotation-selection">
@@ -73,10 +92,8 @@ export default class AnnotationShareWrapper extends PureComponent {
           </div>
         </div>
         { this.state.editorOpen ?
-          <Share.Citation
-            {...this.props}
-            cancel={cancelFunction}
-          /> : null
+          this.renderShareEditor(this.props.shareType)
+          : null
         }
       </div>
     );

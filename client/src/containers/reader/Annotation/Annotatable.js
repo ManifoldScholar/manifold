@@ -44,7 +44,7 @@ class Annotatable extends Component {
     this.highlightSelection = this.highlightSelection.bind(this);
     this.startAnnotateSelection = this.startAnnotateSelection.bind(this);
     this.startResourceSelection = this.startResourceSelection.bind(this);
-    this.startCitation = this.startCitation.bind(this);
+    this.startShare = this.startShare.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
     this.attachResourceToSelection = this.attachResourceToSelection.bind(this);
     this.closestTextNode = this.closestTextNode.bind(this);
@@ -301,8 +301,8 @@ class Annotatable extends Component {
     this.lockSelection();
   }
 
-  startCitation(event) {
-    this.setState({ drawerContents: "citation"});
+  startShare(event, type) {
+    this.setState({ drawerContents: "share", shareType: type});
     this.lockSelection();
   }
 
@@ -347,7 +347,7 @@ class Annotatable extends Component {
           title: "Annotations"
         };
         break;
-      case "citation":
+      case "share":
         options = {
           open: true,
           lockScroll: "always",
@@ -376,8 +376,8 @@ class Annotatable extends Component {
       case "annotations":
         return this.renderDrawerAnnotations(); // eslint-disable no-unreachable
         break;
-      case "citation":
-        return this.renderDrawerCitation(); // eslint-disable no-unreachable
+      case "share":
+        return this.renderDrawerShare(); // eslint-disable no-unreachable
         break;
       default:
         return null;
@@ -424,9 +424,10 @@ class Annotatable extends Component {
     );
   }
 
-  renderDrawerCitation() {
+  renderDrawerShare() {
     const { subject, startNode, startChar, endNode, endChar } =
       this.state.selectionLockedAnnotation;
+    const type = this.state.shareType || null;
     return (
       <Annotation.Share.Wrapper
         closeDrawer={this.closeDrawer}
@@ -436,6 +437,7 @@ class Annotatable extends Component {
         endNode={endNode}
         endChar={endChar}
         truncate={600}
+        shareType={type}
         annotating
       />
     );
@@ -471,7 +473,7 @@ class Annotatable extends Component {
           highlight={this.highlightSelection}
           annotate={this.startAnnotateSelection}
           attachResource={this.startResourceSelection}
-          cite={this.startCitation}
+          cite={(event) => this.startShare(event, "citation")}
           selection={this.state.selection}
           selectionClickEvent={this.state.selectionClickEvent}
           selectionLocked={this.state.selectionLocked}
