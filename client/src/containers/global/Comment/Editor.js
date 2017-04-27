@@ -24,9 +24,10 @@ class CommentEditor extends PureComponent {
     placeholder: PropTypes.string,
     body: PropTypes.string,
     cancel: PropTypes.func.isRequired,
+    onSuccess: PropTypes.func,
     subject: PropTypes.object.isRequired,
     parentId: PropTypes.string
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -35,11 +36,15 @@ class CommentEditor extends PureComponent {
     this.submitOnReturnKey = this.submitOnReturnKey.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.state = {
+    this.state = this.initialState();
+    if (this.isEdit(props)) this.state.body = props.comment.attributes.body;
+  }
+
+  initialState() {
+    return {
       body: "",
       errors: []
     };
-    if (this.isEdit(props)) this.state.body = props.comment.attributes.body;
   }
 
   componentDidMount() {
@@ -78,7 +83,7 @@ class CommentEditor extends PureComponent {
 
   processRequest(apiRequest) {
     this.props.dispatch(apiRequest).promise.then(() => {
-      this.props.cancel();
+      this.handleSuccess();
     }, (response) => {
       this.handleErrors(response.body.errors);
     });
@@ -89,6 +94,11 @@ class CommentEditor extends PureComponent {
       body: state.body,
       parentId: props.parentId
     };
+  }
+
+  handleSuccess() {
+    this.setState(this.initialState());
+    this.props.cancel();
   }
 
   handleErrors(errors) {

@@ -28,6 +28,7 @@ class Resource < ApplicationRecord
   has_one :thumbnail_fetch_attempt, dependent: :destroy
   has_many :collection_resources, dependent: :destroy
   has_many :collections, through: :collection_resources
+  has_many :comments, as: :subject
 
   manifold_has_attached_file :attachment, :resource
   manifold_has_attached_file :high_res, :image, no_styles: true

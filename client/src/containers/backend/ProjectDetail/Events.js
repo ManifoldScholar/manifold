@@ -42,7 +42,7 @@ class ProjectDetailEvents extends PureComponent {
   componentDidMount() {
     this.fetchEvents(1);
   }
-  
+
   componentWillReceiveProps(nextProps) {
     this.maybeReload(nextProps.eventsMeta);
   }

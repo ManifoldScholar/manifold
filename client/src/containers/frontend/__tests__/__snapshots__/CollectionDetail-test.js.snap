@@ -153,6 +153,17 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
       <a
         id="pagination-target"
         name="pagination-target" />
+      <div
+        className="resource-totals"
+        data-id="total-container">
+        <a
+          onClick={[Function]}
+          style={Object {}}>
+          View All Project Resources 
+          <i
+            className="manicon manicon-arrow-right" />
+        </a>
+      </div>
       <form
         className="form-list-filter"
         onSubmit={[Function]}>
@@ -331,6 +342,7 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
                   }
                 }>
                 <a
+                  data-id="page-prev"
                   href="#pagination-target"
                   onClick={[Function]}>
                   <i
@@ -360,6 +372,7 @@ exports[`CollectionDetailContainer renders correctly 1`] = `
                 className="pagination-next"
                 style={Object {}}>
                 <a
+                  data-id="page-next"
                   href="#pagination-target"
                   onClick={[Function]}>
                   <span>
