@@ -232,7 +232,6 @@
   }
 
   .resource-meta-mobile {
-    padding-top: 28px;
 
     @include respond($break65) {
       display: none;
@@ -240,12 +239,7 @@
   }
 
   .button-nav {
-    padding-top: 7px;
     text-align: left;
-
-    @include respond($break60) {
-      padding-top: 20px;
-    }
 
     .button-secondary {
       width: 250px;
@@ -255,6 +249,38 @@
       @include respond($break60) {
         width: 320px;
       }
+    }
+  }
+
+  .resource-comments {
+    padding-top: 16px;
+    margin-top: 54px;
+    color: $neutral20;
+    border-top: 1px solid $neutral30;
+
+    .author-name, .body, textarea {
+      color: $neutral80;
+    }
+
+    .comment-list {
+      padding-left: 0;
+    }
+
+    .annotation-comment-thread + .comment-editor {
+      padding-top: 27px;
+    }
+
+    > .comment-editor {
+      padding-top: 16px;
+      padding-left: 0;
+
+      .button-secondary-dull {
+        display: none;
+      }
+    }
+
+    .comment-editor textarea {
+      border: 1px solid $neutral10;
     }
   }
 }

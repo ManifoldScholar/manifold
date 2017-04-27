@@ -144,7 +144,7 @@ export default class CommentDetail extends PureComponent {
     const { creator } = comment.relationships;
     const avatarClass = classNames({
       'author-avatar': true,
-      dull: !creator.attributes.isCurrentUser
+      dull: creator && !creator.attributes.isCurrentUser
     });
 
     return (

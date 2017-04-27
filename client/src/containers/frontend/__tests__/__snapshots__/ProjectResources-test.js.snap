@@ -195,6 +195,7 @@ exports[`ProjectResourcesContainer renders correctly 1`] = `
                   }
                 }>
                 <a
+                  data-id="page-prev"
                   href="#pagination-target"
                   onClick={[Function]}>
                   <i
@@ -224,6 +225,7 @@ exports[`ProjectResourcesContainer renders correctly 1`] = `
                 className="pagination-next"
                 style={Object {}}>
                 <a
+                  data-id="page-next"
                   href="#pagination-target"
                   onClick={[Function]}>
                   <span>

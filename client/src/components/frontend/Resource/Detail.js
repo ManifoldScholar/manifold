@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import classNames from 'classnames';
+import { Comment as CommentContainer } from 'containers/global';
 import { Utility, Resource } from 'components/frontend';
 
 export default class ResourceDetail extends Component {
@@ -19,6 +18,14 @@ export default class ResourceDetail extends Component {
     return {
       __html: description
     };
+  }
+
+  // The cancel prop is required by CommentEditor.
+  // We don't render the cancel button in this context,
+  // so this is basically a stub. --MO
+  cancelComment(event) {
+    if (!event) return null;
+    event.preventDefault();
   }
 
   render() {
@@ -51,6 +58,13 @@ export default class ResourceDetail extends Component {
                   projectUrl={this.props.projectUrl}
                 />
               </aside>
+              <div className="resource-meta-mobile">
+                <Resource.Meta
+                  resource={resource}
+                  style={'secondary'}
+                  projectUrl={this.props.projectUrl}
+                />
+              </div>
               <div className="resource-content left">
                 <div dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />
 
@@ -58,13 +72,13 @@ export default class ResourceDetail extends Component {
                   Full Description
                 </h3>
                 <div dangerouslySetInnerHTML={this.createDescription(attr.descriptionFormatted)} />
-              </div>
-              <div className="resource-meta-mobile">
-                <Resource.Meta
-                  resource={resource}
-                  style={'primary'}
-                  projectUrl={this.props.projectUrl}
-                />
+                <div className="resource-comments">
+                  <CommentContainer.Thread subject={resource} />
+                  <CommentContainer.Editor
+                    subject={resource}
+                    cancel={(event) => this.cancelComment(event)}
+                  />
+                </div>
               </div>
             </div>
           </section>
