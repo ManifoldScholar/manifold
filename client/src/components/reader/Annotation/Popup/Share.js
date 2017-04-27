@@ -12,7 +12,8 @@ export default class AnnotationPopupShare extends PureComponent {
     pageClass: PropTypes.string,
     tailClass: PropTypes.string,
     back: PropTypes.func,
-    direction: PropTypes.string
+    direction: PropTypes.string,
+    cite: PropTypes.func
   };
 
   constructor(props) {
@@ -75,7 +76,7 @@ export default class AnnotationPopupShare extends PureComponent {
 
     return (
       <section className={pageClass}>
-         <button>
+         <button onClick={this.props.cite}>
          <i className="manicon manicon-quotes-left"></i>
          Cite
          </button>

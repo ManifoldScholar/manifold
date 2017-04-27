@@ -44,6 +44,7 @@ class Annotatable extends Component {
     this.highlightSelection = this.highlightSelection.bind(this);
     this.startAnnotateSelection = this.startAnnotateSelection.bind(this);
     this.startResourceSelection = this.startResourceSelection.bind(this);
+    this.startCitation = this.startCitation.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
     this.attachResourceToSelection = this.attachResourceToSelection.bind(this);
     this.closestTextNode = this.closestTextNode.bind(this);
@@ -300,6 +301,11 @@ class Annotatable extends Component {
     this.lockSelection();
   }
 
+  startCitation(event) {
+    this.setState({ drawerContents: "citation"});
+    this.lockSelection();
+  }
+
   closeDrawer(event) {
     this.setState({ drawerContents: null });
     // Keyboard event doesn't hide the popup by default,
@@ -309,7 +315,6 @@ class Annotatable extends Component {
     }
     this.unlockSelection();
   }
-
 
   handlePossibleAnnotationClick(event) {
     if (!event || !event.target) return;
@@ -342,6 +347,15 @@ class Annotatable extends Component {
           title: "Annotations"
         };
         break;
+      case "citation":
+        options = {
+          open: true,
+          lockScroll: "always",
+          style: "frontend",
+          icon: "nodes",
+          title: "Share"
+        };
+        break;
       default:
         options = {};
         break;
@@ -361,6 +375,9 @@ class Annotatable extends Component {
         break;
       case "annotations":
         return this.renderDrawerAnnotations(); // eslint-disable no-unreachable
+        break;
+      case "share":
+        return this.renderDrawerShare(); // eslint-disable no-unreachable
         break;
       default:
         return null;
@@ -407,6 +424,24 @@ class Annotatable extends Component {
     );
   }
 
+  renderDrawerShare() {
+    const { subject, startNode, startChar, endNode, endChar } =
+      this.state.selectionLockedAnnotation;
+    return (
+      <Annotation.Citation.Wrapper
+        closeDrawer={this.closeDrawer}
+        subject={subject}
+        startNode={startNode}
+        startChar={startChar}
+        endNode={endNode}
+        endChar={endChar}
+        saveHandler={this.createAnnotation}
+        truncate={600}
+        annotating
+      />
+    );
+  };
+
   render() {
 
     const showLogin = bindActionCreators(
@@ -437,6 +472,7 @@ class Annotatable extends Component {
           highlight={this.highlightSelection}
           annotate={this.startAnnotateSelection}
           attachResource={this.startResourceSelection}
+          cite={this.startCitation}
           selection={this.state.selection}
           selectionClickEvent={this.state.selectionClickEvent}
           selectionLocked={this.state.selectionLocked}
