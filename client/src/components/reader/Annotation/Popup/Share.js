@@ -57,10 +57,9 @@ export default class AnnotationPopupShare extends PureComponent {
 
   renderCiteButton() {
     if (!this.props.text) return null;
-    // These attributes aren't updatable right now, have to investigate
-    // const attr = this.props.text.attributes;
-    // const metadata = attr.metadata;
-    // if (!metadata.publisher || !metadata.placeOfPublication || !attr.publicationDate) return null;
+    const attr = this.props.text.attributes;
+    const metadata = attr.metadata;
+    if (!metadata.publisher || !metadata.placeOfPublication || !attr.publicationDate) return null;
     return (
       <button onClick={this.props.cite}>
         <i className="manicon manicon-quotes-left"></i>

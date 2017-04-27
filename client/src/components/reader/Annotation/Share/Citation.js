@@ -7,6 +7,7 @@ export default class AnnotationShareEditor extends PureComponent {
   static displayName = "Annotation.Share.Citation";
 
   static propTypes = {
+    text: PropTypes.object.isRequired,
     cancel: PropTypes.func.isRequired
   };
 
@@ -39,7 +40,7 @@ export default class AnnotationShareEditor extends PureComponent {
   }
 
   setStyle(event, style) {
-    this.setState({ style: style });
+    this.setState({ style });
     this.formatCitation(style);
   }
 
@@ -47,38 +48,73 @@ export default class AnnotationShareEditor extends PureComponent {
     this.setState({ citation: event.target.value });
   }
 
+  /* eslint-disable no-unreachable */
   formatCitation(style) {
     switch (style) {
       case "mla":
-        return this.setState({ citation: this.formatMla() });
+        return this.setState({ citation: this.formatMla() }); // eslint-disable no-unreachable
         break;
-      case "aba":
-        return this.setState({ citation: this.formatAba() });
+      case "apa":
+        return this.setState({ citation: this.formatAba() }); // eslint-disable no-unreachable
         break;
       case "chicago":
-        return this.setState({ citation: this.formatChicago() });
+        return this.setState({ citation: this.formatChicago() }); // eslint-disable no-unreachable
         break;
       default:
         return "";
         break;
     }
   }
+  /* eslint-enable no-unreachable */
+
+  /* eslint-disable no-unreachable */
+  formatAttribute(attribute) {
+    if (!this.props.text) return null;
+    const attr = this.props.text.attributes;
+    const meta = attr.metadata;
+    switch (attribute) {
+      case "author":
+        return attr.creatorNames; // eslint-disable no-unreachable
+        break;
+      case "title":
+        return attr.title; // eslint-disable no-unreachable
+        break;
+      case "contributers":
+        break;
+      case "number":
+        return meta.number || ""; // eslint-disable no-unreachable
+        break;
+      case "publisher":
+        return meta.publisher; // eslint-disable no-unreachable
+        break;
+      case "publicationDate":
+        return attr.publicationDate; // eslint-disable no-unreachable
+        break;
+      case "placeOfPublication":
+        return meta.placeOfPublication; // eslint-disable no-unreachable
+        break;
+      default:
+        return null; // eslint-disable no-unreachable
+        break;
+    }
+  }
+  /* eslint-enable no-unreachable */
 
   formatMla() {
-    return "MLA";
+    return `${this.formatAttribute("author")}. ${this.formatAttribute("title")}. ${this.formatAttribute("number")} ${this.formatAttribute("publisher")}, ${this.formatAttribute("placeOfPublication")}.`;
   }
 
   formatAba() {
-    return "ABA";
+    return `${this.formatAttribute("author")}. (${this.formatAttribute("publicationDate")}) ${this.formatAttribute("title")}. ${this.formatAttribute("placeOfPublication")}: ${this.formatAttribute("publisher")}.`;
   }
 
   formatChicago() {
-    return "Chicago";
+    return `${this.formatAttribute("author")}. ${this.formatAttribute("title")}. ${this.formatAttribute("placeOfPublication")}: ${this.formatAttribute("publisher")}. ${this.formatAttribute("publicationDate")}`;
   }
 
   renderStyleButtons() {
-    const styles = ["mla", "aba", "chicago"];
-    let out = [];
+    const styles = ["mla", "apa", "chicago"];
+    const out = [];
     styles.forEach((style) => {
       out.push(
         <li key={style}>
@@ -89,7 +125,7 @@ export default class AnnotationShareEditor extends PureComponent {
             {style}
           </button>
         </li>
-      )
+      );
     });
     return out;
   }

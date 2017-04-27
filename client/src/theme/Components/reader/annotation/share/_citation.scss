@@ -1,6 +1,10 @@
 .citation {
   padding-top: 28px;
 
+  textarea {
+    font-size: 16px;
+  }
+
   .utility {
     display: block;
     margin-top: 5px;
@@ -25,10 +29,10 @@
       a, button {
         @include buttonUnstyled;
         @include utilityPrimary;
-        font-size: 14px;
-        transition: color $duration $timing;
         padding-bottom: 4px;
+        font-size: 14px;
         border-bottom: 2px solid transparent;
+        transition: color $duration $timing;
 
         &:hover, &.active {
           color: $neutralBlack;

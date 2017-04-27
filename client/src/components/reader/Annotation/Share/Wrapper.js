@@ -54,6 +54,8 @@ export default class AnnotationShareWrapper extends PureComponent {
     const cancelFunction = this.props.closeDrawer ?
       this.props.closeDrawer : this.handleCloseEditor;
 
+
+    /* eslint-disable no-unreachable */
     switch (type) {
       case "citation":
         return (
@@ -68,6 +70,7 @@ export default class AnnotationShareWrapper extends PureComponent {
         break;
     }
   }
+  /* eslint-enable no-unreachable */
 
   maybeTruncateSelection() {
     if (this.props.truncate && this.props.subject.length > this.props.truncate) {

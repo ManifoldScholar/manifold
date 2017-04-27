@@ -303,7 +303,7 @@ class Annotatable extends Component {
   }
 
   startShare(event, type) {
-    this.setState({ drawerContents: "share", shareType: type});
+    this.setState({ drawerContents: "share", shareType: type });
     this.lockSelection();
   }
 
@@ -443,7 +443,7 @@ class Annotatable extends Component {
         annotating
       />
     );
-  };
+  }
 
   render() {
     const showLogin = bindActionCreators(

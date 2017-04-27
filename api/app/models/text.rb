@@ -16,8 +16,8 @@ class Text < ApplicationRecord
   include Metadata
 
   # Magic
-  with_metadata [:isbn_ten, :isbn_thirteen, :publisher, :place_of_publication, :doi,
-                 :series, :pages, :date_of_publication]
+  with_metadata %w(isbn_ten isbn_thirteen publisher place_of_publication doi
+                   date_of_publication series pages)
 
   # Fields
   serialize :structure_titles, Hash
