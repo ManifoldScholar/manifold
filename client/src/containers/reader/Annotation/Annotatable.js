@@ -7,11 +7,10 @@ import { Drawer, Dialog } from 'components/backend';
 import { Resource } from 'containers/reader';
 import AnnotationContainers from 'containers/reader/Annotation';
 import { Resource as ResourceComponents } from 'components/reader';
-import fakeData from 'helpers/fakeData';
 import { annotationsAPI, requests } from 'api';
 import { entityStoreActions, uiVisibilityActions } from 'actions';
 import isString from 'lodash/isString';
-const { request, flush } = entityStoreActions;
+const { request } = entityStoreActions;
 
 class Annotatable extends Component {
 
@@ -19,15 +18,14 @@ class Annotatable extends Component {
     textId: React.PropTypes.string.isRequired,
     sectionId: React.PropTypes.string.isRequired,
     projectId: React.PropTypes.string.isRequired,
+    bodySelector: React.PropTypes.string.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     containerSize: React.PropTypes.number.isRequired,
-    fontSize: React.PropTypes.number.isRequired,
     children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     currentUser: React.PropTypes.object,
     lockSelection: React.PropTypes.func,
     selectionLockedAnnotation: React.PropTypes.object,
     selectionLocked: React.PropTypes.bool,
-    body: React.PropTypes.object,
     resources: React.PropTypes.array,
     annotations: React.PropTypes.array
   }
@@ -454,8 +452,7 @@ class Annotatable extends Component {
             resources={this.props.resources}
             annotations={this.props.annotations}
             containerSize={this.props.containerSize}
-            fontSize={this.props.fontSize}
-            body={this.props.body}
+            bodySelector={this.props.bodySelector}
           /> : null
         }
       </div>

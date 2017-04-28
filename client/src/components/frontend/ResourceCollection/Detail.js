@@ -20,7 +20,8 @@ export default class ResourceCollectionDetail extends PureComponent {
     collectionPagination: PropTypes.object,
     collectionPaginationHandler: PropTypes.func,
     dispatch: PropTypes.func,
-    filterChange: PropTypes.func.isRequired
+    filterChange: PropTypes.func.isRequired,
+    initialFilterState: PropTypes.object
   };
 
   render() {
@@ -73,6 +74,7 @@ export default class ResourceCollectionDetail extends PureComponent {
           <ResourceList.Filters
             kinds={collection.attributes.resourceKinds}
             tags={collection.attributes.resourceTags}
+            initialFilterState={this.props.initialFilterState}
             filterChangeHandler={this.props.filterChange}
           />
           <ResourceList.Cards

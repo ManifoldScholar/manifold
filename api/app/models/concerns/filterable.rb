@@ -9,9 +9,11 @@ module Filterable
       results = filter_with_query(params, scope: scope)
       results = filter_with_elasticsearch(params, results) if use_elasticsearch
       results = results.by_pagination(page, per_page) unless use_elasticsearch
-      results = validate_paginated_results(params, results)
+      results = validate_paginated_results(params, results, scope)
       results
     end
+
+    private
 
     def filter_with_query(params, scope: all)
       results = scope
@@ -39,9 +41,9 @@ module Filterable
       lookup(search_query, filter)
     end
 
-    def validate_paginated_results(params, results)
+    def validate_paginated_results(params, results, scope)
       return results unless exceeds_total_pages?(results)
-      filter(params.merge(page: results.total_pages))
+      filter(params.merge(page: results.total_pages), scope: scope)
     end
 
     def paginated?(maybe_paginated)
@@ -57,6 +59,13 @@ module Filterable
   # rubocop:enable Metrics/BlockLength
 
   included do
+
+    private_class_method :exceeds_total_pages?
+    private_class_method :paginated?
+    private_class_method :validate_paginated_results
+    private_class_method :filter_with_elasticsearch
+    private_class_method :filter_with_query
+
     scope :by_pagination, lambda { |page, per|
       return all unless page.present?
       page(page).per(per)

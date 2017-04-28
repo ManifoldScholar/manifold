@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
 import { Resource, Section } from 'components/reader';
 import Annotation from 'containers/reader/Annotation';
-import has from 'lodash/has';
 
 export default class Text extends Component {
 
@@ -139,7 +138,6 @@ export default class Text extends Component {
         <section className={readerAppearanceClass}>
           <Annotation.Annotatable
             currentUser={this.props.authentication.currentUser}
-            textId={this.props.params.textId}
             projectId={this.props.text.relationships.project.id}
             textId={this.props.text.id}
             sectionId={this.props.params.sectionId}
@@ -147,18 +145,15 @@ export default class Text extends Component {
             resources={this.props.resources}
             annotations={this.state.filteredAnnotations}
             containerSize={typography.margins.current}
-            fontSize={typography.fontSize.current}
-            body={this.body}
+            bodySelector='[data-id="body"]'
           >
             <div className={containerClass}>
-              <div className={textSectionClass} >
-                <div ref={(b) => { this.body = b; }}>
-                  <Section.Body
-                    lockedSelection={this.state.lockedSelection}
-                    annotations={this.state.filteredAnnotations}
-                    section={this.props.section}
-                  />
-                </div>
+              <div data-id="body" className={textSectionClass} >
+                <Section.Body
+                  lockedSelection={this.state.lockedSelection}
+                  annotations={this.state.filteredAnnotations}
+                  section={this.props.section}
+                />
               </div>
             </div>
           </Annotation.Annotatable>

@@ -1,16 +1,12 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import fakeData from 'helpers/fakeData';
-import {
-  Utility,
-  ResourceCollection
-} from 'components/frontend';
-
+import { Utility, ResourceCollection } from 'components/frontend';
+import { browserHistory } from 'react-router';
 import { entityStoreActions } from 'actions';
 import { entityUtils } from 'utils';
 import { projectsAPI, collectionsAPI, requests } from 'api';
 import debounce from 'lodash/debounce';
+import get from 'lodash/get';
 
 const { select, grab, meta, loaded, isEntityLoaded } = entityUtils;
 const { request, flush } = entityStoreActions;
@@ -39,9 +35,10 @@ class CollectionDetailContainer extends PureComponent {
 
     // Load the collection resources, unless they have already been loaded
     if (!loaded(requests.feCollectionResources, state.entityStore)) {
+      const filter = location.query ? location.query : {};
       const pp = params.page ? params.page : page;
       const cr = collectionsAPI.collectionResources(
-        params.collectionId, { }, { number: pp, size: perPage }
+        params.collectionId, filter, { number: pp, size: perPage }
       );
       const lookups = [requests.feSlideshow, requests.feCollectionResources];
       const { promise } = dispatch(request(cr, lookups));
@@ -65,11 +62,13 @@ class CollectionDetailContainer extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object,
-    collection: PropTypes.object
+    collection: PropTypes.object,
+    location: PropTypes.object
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = this.initialState(this.props.location.query);
     this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.filterChange = this.filterChange.bind(this);
@@ -81,6 +80,13 @@ class CollectionDetailContainer extends PureComponent {
     this.flushStoreRequests();
   }
 
+  initialState(init) {
+    const filters = init ? init : {};
+    return ({
+      filter: filters
+    });
+  }
+
   flushStoreRequests() {
     this.props.dispatch(flush(requests.tmpProject));
     this.props.dispatch(flush(requests.feSlideshow));
@@ -89,10 +95,9 @@ class CollectionDetailContainer extends PureComponent {
   }
 
   handlePageChange(event, pageParam) {
-    console.log('handle page change');
     const cId = this.props.collection.id;
     const pagination = { number: pageParam, size: perPage };
-    const filter = { };
+    const filter = this.state.filter;
     const action = request(
       collectionsAPI.collectionResources(cId, filter, pagination),
       requests.feCollectionResources
@@ -109,11 +114,18 @@ class CollectionDetailContainer extends PureComponent {
   filterChange(filter) {
     this.setState({ filter }, () => {
       this.updateResults();
+      this.updateUrl(filter);
     });
   }
 
+  updateUrl(stateFilter) {
+    const base = this.props.location.pathname;
+    const filter = stateFilter;
+    if (filter.collection_order) delete filter.collection_order;
+    browserHistory.push({ pathname: base, query: filter });
+  }
+
   updateResults() {
-    console.log('update results called');
     const cId = this.props.collection.id;
     const pagination = { number: page, size: perPage };
     const action = request(
@@ -126,6 +138,9 @@ class CollectionDetailContainer extends PureComponent {
   render() {
     const project = this.props.project;
     const collection = this.props.collection;
+
+    const filter = get(this.props, 'location.query');
+    const initialFilter = filter ? filter : null;
 
     if (!project || !collection) return null;
 
@@ -149,6 +164,7 @@ class CollectionDetailContainer extends PureComponent {
             collection={this.props.collection}
             collectionUrl={collectionUrl}
             filterChange={this.filterChange}
+            initialFilterState={initialFilter}
           />
         : null }
         <section className="bg-neutral05">
