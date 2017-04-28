@@ -18,9 +18,11 @@ export default class AnnotationShareEditor extends PureComponent {
 
     this.state = {
       style: "mla",
-      citation: ""
+      citation: "",
+      copied: false
     };
     this.handleCitationChange = this.handleCitationChange.bind(this);
+    this.handleCopyClick = this.handleCopyClick.bind(this);
   }
 
   componentDidMount() {
@@ -40,12 +42,21 @@ export default class AnnotationShareEditor extends PureComponent {
   }
 
   setStyle(event, style) {
-    this.setState({ style });
+    this.setState({ style, copied: false });
     this.formatCitation(style);
   }
 
   handleCitationChange(event) {
-    this.setState({ citation: event.target.value });
+    this.setState({ citation: event.target.value, copied: false });
+  }
+
+  handleCopyClick(event) {
+    event.preventDefault();
+    const textarea = document.querySelector("textarea");
+    textarea.select();
+    const copiedText = document.execCommand("copy");
+    if (!copiedText) return null;
+    this.setState({ copied: true })
   }
 
   /* eslint-disable no-unreachable */
@@ -131,10 +142,12 @@ export default class AnnotationShareEditor extends PureComponent {
   }
 
   render() {
+    const copiedText = this.state.copied ? "Copied!" : null;
+
     return (
       <div className="annotation-editor citation">
         <div>
-          <nav className="utility">
+          <nav className="utility styles">
             <label>Citation Style:</label>
             <ul>
               {this.renderStyleButtons()}
@@ -147,6 +160,7 @@ export default class AnnotationShareEditor extends PureComponent {
             value={this.state.citation}
           />
           <div className="utility">
+            <span className="notice">{copiedText}</span>
             <div className="buttons">
               <button
                 onClick={this.handleCancel}
@@ -156,6 +170,7 @@ export default class AnnotationShareEditor extends PureComponent {
               </button>
               <button
                 className="button-secondary"
+                onClick={this.handleCopyClick}
               >
                 Copy
               </button>
