@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.Hidden component renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <input
+    onChange={[Function]}
+    type="hidden"
+    value="attributes[fake]"
+  />
+</div>
+`;

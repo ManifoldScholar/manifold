@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ResourceList.Slide.Slide component renders correctly 1`] = `
+<figure>
+  <div
+    className="figure-default"
+    style={
+      Object {
+        "backgroundImage": "url(/static/images/resource-splash.png)",
+      }
+    }
+  >
+    <div
+      className="resource-info"
+    >
+      <i
+        className="manicon manicon-resource-image"
+      />
+      <span
+        className="resource-type"
+      >
+        image
+      </span>
+      <span
+        className="resource-date"
+      >
+        <span>
+          Uploaded April, 2017
+        </span>
+      </span>
+    </div>
+  </div>
+</figure>
+`;

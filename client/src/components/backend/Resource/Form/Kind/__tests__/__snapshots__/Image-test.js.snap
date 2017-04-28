@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Resource.Form.Image component renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+    >
+      Image File
+    </label>
+    <div
+      className="form-dropzone style-square"
+      onClick={[Function]}
+      onDragEnter={[Function]}
+      onDragLeave={[Function]}
+      onDragOver={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      style={Object {}}
+    >
+      <div
+        className="contents-empty"
+      >
+        <i
+          className="manicon manicon-cloud-up"
+        />
+        <div
+          className="message"
+        >
+          <p
+            className="primary"
+          >
+            Upload a file or
+            <br />
+            drag and drop here
+            <br />
+          </p>
+          <p
+            className="secondary"
+          >
+            jpeg, tiff, gif, png
+          </p>
+        </div>
+      </div>
+      <input
+        accept="image/*"
+        multiple={false}
+        onChange={[Function]}
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="file"
+      />
+    </div>
+  </div>
+</div>
+`;

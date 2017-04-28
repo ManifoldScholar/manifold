@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Layout.NoFollow component renders correctly 1`] = `
+<div>
+  <section
+    className="bg-neutral05"
+  >
+    <div
+      className="container flush-bottom"
+    >
+      <section
+        className="no-follow"
+      >
+        <h3
+          className="heading-primary"
+        >
+          You're not following any projects yet
+        </h3>
+        <p>
+          But don't fret, it's easy to start following projects. Just browse through the available projects, and when you find one you like, select the green plus symbol. When the green plus is replaced with a blue checkmark, you're done!
+        </p>
+        <figure
+          className="demo-animation"
+        >
+          <img
+            src="/static/images/browse_no-follow-animation.gif"
+          />
+        </figure>
+      </section>
+    </div>
+  </section>
+  <section
+    className="bg-neutral05"
+  >
+    <div
+      className="container"
+    >
+      <nav
+        className="button-nav"
+      >
+        <a
+          className="button-icon-primary"
+          href="/"
+          onClick={[Function]}
+        >
+          <span>
+            <i
+              className="manicon manicon-books-on-shelf"
+            />
+            See more projects
+          </span>
+        </a>
+      </nav>
+    </div>
+  </section>
+</div>
+`;

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { TwitterButton, FacebookButton } from 'react-social';
-import { HigherOrder } from 'containers/global';
+import HigherOrder from 'containers/global/HigherOrder';
 
 class ShareBar extends Component {
 

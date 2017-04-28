@@ -5,7 +5,7 @@ import { VelocityComponent } from 'velocity-react';
 import get from 'lodash/get';
 import lh from 'helpers/linkHandler';
 
-export default class ResourceSlideCaption extends Component {
+export default class ResourceListSlideCaption extends Component {
 
   static propTypes = {
     resource: PropTypes.object,

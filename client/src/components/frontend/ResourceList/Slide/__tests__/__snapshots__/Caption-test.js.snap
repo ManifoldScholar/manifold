@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
+<div
+  className="slide-caption"
+>
+  <header>
+    <h2
+      className="resource-title"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Image",
+        }
+      }
+    />
+  </header>
+  <div
+    className="resource-utility"
+  >
+    <div
+      className="bg-neutral90"
+    >
+      <button
+        className="more-link"
+        onClick={[Function]}
+      >
+        <span
+          className="open-text"
+        >
+          Read More
+        </span>
+        <span
+          className="close-text"
+        >
+          Hide Description
+        </span>
+      </button>
+      <a
+        className="download-link"
+        href="original-image.mock"
+        onClick={[Function]}
+        target="_blank"
+      >
+        Download
+        <i
+          className="manicon manicon-arrow-down"
+        />
+      </a>
+      <a
+        className="detail-link"
+        href="/project/undefined/resource/1"
+        onClick={[Function]}
+      >
+        Details
+      </a>
+    </div>
+  </div>
+</div>
+`;

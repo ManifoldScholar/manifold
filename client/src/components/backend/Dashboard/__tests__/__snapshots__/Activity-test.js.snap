@@ -1,6 +1,9 @@
-exports[`Dashboard.Activity component renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Dashboard.Activity component renders correctly 1`] = `
 <table
-  className="table-single-value">
+  className="table-single-value"
+>
   <tbody>
     <tr>
       <td>

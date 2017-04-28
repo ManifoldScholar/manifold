@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Section.Body component renders correctly 1`] = `
+<section
+  className="chapter"
+  id="RO"
+  type="titlepage"
+/>
+`;

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router-dom';
 import { Utility, Resource } from 'components/frontend';
 
 export default class ResourceDetail extends Component {

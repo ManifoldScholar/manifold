@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Annotation.Popup.Annotate Component renders correctly when not logged in 1`] = `
+<section
+  className="popup-page"
+  style={
+    Object {
+      "marginLeft": null,
+    }
+  }
+>
+  <button
+    onClick={undefined}
+  >
+    <i
+      className="manicon manicon-person-pencil"
+    />
+    Login to Annotate
+  </button>
+  <button
+    onClick={undefined}
+  >
+    <i
+      className="manicon manicon-nodes"
+    />
+    Share
+  </button>
+  <div
+    className="tail"
+  />
+</section>
+`;

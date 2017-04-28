@@ -1,14 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class ResourceSlideFigureLoading extends Component {
+export default class ResourceListSlideFigureLoading extends Component {
 
-  static displayName = "Resource.Slide.Loading";
+  static displayName = "ResourceList.Slide.Loading";
 
   static propTypes = {
     resource: PropTypes.object
   };
 
   componentDidMount() {
+    if (!this._figure) return null;
     const parentWidth = this._figure.parentNode.offsetWidth;
     this._figure.style.width = parentWidth + 'px';
   }

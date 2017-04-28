@@ -1,6 +1,4 @@
 import React, { PureComponent, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import isString from 'lodash/isString';
 import { HigherOrder } from 'components/global';
 
 export default class LockBodyScroll extends PureComponent {

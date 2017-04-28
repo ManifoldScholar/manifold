@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Resource.Form.Interactive component when sub kind is embed renders correctly 1`] = `
+<div
+  className="form-section"
+>
+  <div
+    className="form-input"
+  >
+    <label>
+      Is this an iFrame?
+    </label>
+    <div
+      className="toggle-indicator"
+    >
+      <div
+        className="boolean-primary"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+  <div
+    className="form-section"
+  >
+    <div
+      className="form-input"
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label>
+          Embed Code
+        </label>
+        <textarea
+          onChange={[Function]}
+          placeholder="Enter HTML embed code"
+          style={
+            Object {
+              "height": 100,
+            }
+          }
+          value=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Backend.Resource.Form.Interactive component when sub kind is iframe renders correctly 1`] = `
+<div
+  className="form-section"
+>
+  <div
+    className="form-input"
+  >
+    <label>
+      Is this an iFrame?
+    </label>
+    <div
+      className="toggle-indicator"
+    >
+      <div
+        className="boolean-primary"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+  <div
+    className="form-section"
+  >
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label
+        className=""
+      >
+        Dimensions
+      </label>
+      <input
+        onChange={[Function]}
+        placeholder="Enter length and height (e.g., 1440x900)"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label
+        className=""
+      >
+        iFrame URL
+      </label>
+      <input
+        onChange={[Function]}
+        placeholder="Enter iFrame URL"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;

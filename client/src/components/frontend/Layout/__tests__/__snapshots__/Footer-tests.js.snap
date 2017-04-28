@@ -1,42 +1,53 @@
-exports[`Footer component renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Layout.Footer component renders correctly 1`] = `
 <footer
-  className="footer-browse">
+  className="footer-browse"
+>
   <div
-    className="container">
+    className="container"
+  >
     <div
-      className="rel">
+      className="rel"
+    >
       <a
         className="logo"
         href="/"
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         <i
-          className="manicon manicon-manifold-logo" />
+          className="manicon manicon-manifold-logo"
+        />
         Manifold
       </a>
     </div>
     <nav
-      className="text-nav">
+      className="text-nav"
+    >
       <ul>
         <li>
           <ul>
             <li>
               <a
                 href="#"
-                onClick={[Function]}>
+                onClick={[Function]}
+              >
                 Log In
               </a>
             </li>
             <li>
               <a
                 href="/"
-                onClick={[Function]}>
+                onClick={[Function]}
+              >
                 Projects
               </a>
             </li>
             <li>
               <a
                 href="http://www.test.com"
-                target="_blank">
+                target="_blank"
+              >
                 Contact
               </a>
             </li>
@@ -47,13 +58,15 @@ exports[`Footer component renders correctly 1`] = `
             <li>
               <a
                 href="http://twitter.com/manifoldscholar"
-                target="_blank">
+                target="_blank"
+              >
                 Twitter
               </a>
             </li>
             <li>
               <a
-                href="mailto:webbook@umn.edu">
+                href="mailto:webbook@umn.edu"
+              >
                 Email
               </a>
             </li>
@@ -62,19 +75,23 @@ exports[`Footer component renders correctly 1`] = `
       </ul>
     </nav>
     <section
-      className="footer-secondary">
+      className="footer-secondary"
+    >
       <p
-        className="colophon">
+        className="colophon"
+      >
         © 2015-2016 6 University of Minnesota Press.
         <br />
         Manifold is released under the 
         <a
-          href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md">
+          href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md"
+        >
           GNU General Public License v3
         </a>
         . Download and contribute to 
         <a
-          href="https://github.com/ManifoldScholar/manifold">
+          href="https://github.com/ManifoldScholar/manifold"
+        >
           Manifold
         </a>
          on github.

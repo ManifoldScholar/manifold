@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.UserMenu.UserMenuButton Component renders correctly 1`] = `
+<button
+  className="button-avatar"
+  onClick={[Function]}
+>
+  <span
+    className="screen-reader-text"
+  >
+    Click to login or open user settings
+  </span>
+  <figure
+    className="avatar"
+    style={undefined}
+  >
+    <i
+      className="manicon manicon-person"
+    />
+  </figure>
+</button>
+`;

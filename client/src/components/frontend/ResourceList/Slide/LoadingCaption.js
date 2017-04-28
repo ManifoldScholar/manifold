@@ -1,7 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 
-export default class ResourceLoadingCaption extends Component {
+export default class ResourceListLoadingCaption extends Component {
 
   render() {
 

@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.SignInUp.Create component renders correctly 1`] = `
+<div>
+  <form
+    method="post"
+    onSubmit={[Function]}
+  >
+    <h4
+      className="form-heading"
+    >
+      Create Account
+    </h4>
+    <div
+      className="row-1-p"
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label>
+          Email
+        </label>
+        <input
+          id="create-email"
+          name="email"
+          onChange={[Function]}
+          placeholder="Email"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="row-1-p"
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label>
+          Name
+        </label>
+        <input
+          id="create-name"
+          name="name"
+          onChange={[Function]}
+          placeholder="Name"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="row-1-p"
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label>
+          Password
+        </label>
+        <input
+          id="create-password"
+          name="password"
+          onChange={[Function]}
+          placeholder="Password"
+          type="password"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="row-1-p"
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label>
+          Confirm Password
+        </label>
+        <input
+          id="create-password-confirmation"
+          name="passwordConfirmation"
+          onChange={[Function]}
+          placeholder="Confirm Password"
+          type="password"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="row-1-p"
+    >
+      <div
+        className="form-input"
+      >
+        <input
+          className="button-secondary button-with-room"
+          type="submit"
+          value="Create Account"
+        />
+      </div>
+    </div>
+  </form>
+  <p
+    className="login-links"
+  >
+    You can also create a Manifold account using your Facebook, Twitter, or Google credentials.
+  </p>
+  <section
+    className="login-external"
+  >
+    <div />
+    <button
+      className="button-secondary-dark"
+      onClick={[Function]}
+    >
+      <i
+        className="manicon manicon-envelope"
+      />
+      <span>
+        Log in with Google
+      </span>
+    </button>
+    <button
+      className="button-secondary-dark"
+      onClick={[Function]}
+    >
+      <i
+        className="manicon manicon-twitter"
+      />
+      <span>
+        Log in with Twitter
+      </span>
+    </button>
+  </section>
+  <p
+    className="login-links"
+  >
+    By creating this account, you agree to Manifold's terms and conditions.
+  </p>
+  <p
+    className="login-links"
+  >
+    <a
+      data-id="show-login"
+      href="#"
+      onClick={[Function]}
+    >
+      Already have an account?
+    </a>
+  </p>
+</div>
+`;

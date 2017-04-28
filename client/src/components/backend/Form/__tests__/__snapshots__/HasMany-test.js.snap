@@ -1,28 +1,37 @@
-exports[`Form.HasMany component renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.HasMany component renders correctly 1`] = `
 <div
   className="form-input"
-  style={Object {}}>
+  style={Object {}}
+>
   <label>
     A form label
   </label>
   <nav
-    className="has-many-list">
+    className="has-many-list"
+  >
     <ul>
       <li>
         <div
-          className="association">
+          className="association"
+        >
           <h4
-            className="association-name">
+            className="association-name"
+          >
             John
           </h4>
         </div>
         <div
-          className="utility">
+          className="utility"
+        >
           <button
             className="manicon manicon-arrow-down"
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             <span
-              className="screen-reader-text">
+              className="screen-reader-text"
+            >
               Click to move 
               John
                up in the order of makers.
@@ -30,9 +39,11 @@ exports[`Form.HasMany component renders correctly 1`] = `
           </button>
           <button
             className="manicon manicon-x"
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             <span
-              className="screen-reader-text">
+              className="screen-reader-text"
+            >
               Click to remove 
               John
               from the makers list.
@@ -42,19 +53,24 @@ exports[`Form.HasMany component renders correctly 1`] = `
       </li>
       <li>
         <div
-          className="association">
+          className="association"
+        >
           <h4
-            className="association-name">
+            className="association-name"
+          >
             Jane
           </h4>
         </div>
         <div
-          className="utility">
+          className="utility"
+        >
           <button
             className="manicon manicon-arrow-up"
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             <span
-              className="screen-reader-text">
+              className="screen-reader-text"
+            >
               Click to move 
               Jane
                up in the order of makers.
@@ -62,9 +78,11 @@ exports[`Form.HasMany component renders correctly 1`] = `
           </button>
           <button
             className="manicon manicon-x"
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             <span
-              className="screen-reader-text">
+              className="screen-reader-text"
+            >
               Click to remove 
               Jane
               from the makers list.
@@ -74,11 +92,14 @@ exports[`Form.HasMany component renders correctly 1`] = `
       </li>
     </ul>
     <div
-      className="input-predictive">
+      className="input-predictive"
+    >
       <div
-        className="input">
+        className="input"
+      >
         <button
-          className="manicon manicon-plus" />
+          className="manicon manicon-plus"
+        />
         <input
           className="text-input"
           onBlur={[Function]}
@@ -88,15 +109,18 @@ exports[`Form.HasMany component renders correctly 1`] = `
           onKeyPress={[Function]}
           placeholder={undefined}
           type="text"
-          value="" />
+          value=""
+        />
         <button
           className="submit"
-          onClick={[Function]}>
+          onClick={[Function]}
+        >
           Create New
         </button>
       </div>
       <nav
-        className="predictive-list">
+        className="predictive-list"
+      >
         <ul />
       </nav>
     </div>

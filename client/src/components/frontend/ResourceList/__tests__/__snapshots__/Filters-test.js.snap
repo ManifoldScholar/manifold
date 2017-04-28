@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ResourceList.Filters Component renders correctly 1`] = `
+<form
+  className="form-list-filter"
+  onSubmit={[Function]}
+>
+  <div
+    className="search-input"
+  >
+    <button
+      className="search-button"
+      type="submit"
+    >
+      <i
+        className="manicon manicon-magnify"
+      />
+    </button>
+    <input
+      onChange={[Function]}
+      placeholder="Search"
+      type="text"
+      value={undefined}
+    />
+  </div>
+  <div
+    className="select-group"
+  >
+    <div
+      className="select"
+    >
+      <select
+        onChange={[Function]}
+        value={undefined}
+      >
+        <option
+          value="default"
+        >
+          Type:
+        </option>
+        <option
+          value="image"
+        >
+          Image
+        </option>
+        <option
+          value="video"
+        >
+          Video
+        </option>
+      </select>
+      <i
+        className="manicon manicon-caret-down"
+      />
+    </div>
+    <div
+      className="select"
+    >
+      <select
+        onChange={[Function]}
+        value={undefined}
+      >
+        <option
+          value="default"
+        >
+          Tag:
+        </option>
+        <option
+          value="dog"
+        >
+          Dog
+        </option>
+        <option
+          value="puppy"
+        >
+          Puppy
+        </option>
+      </select>
+      <i
+        className="manicon manicon-caret-down"
+      />
+    </div>
+    <div
+      className="select"
+    >
+      <select
+        onChange={[Function]}
+        value={undefined}
+      >
+        <option
+          value="default"
+        >
+          Order By:
+        </option>
+        <option
+          value="title ASC"
+        >
+          A-Z
+        </option>
+        <option
+          value="title DESC"
+        >
+          Z-A
+        </option>
+      </select>
+      <i
+        className="manicon manicon-caret-down"
+      />
+    </div>
+  </div>
+  <button
+    className="reset-button"
+    onClick={[Function]}
+  >
+    Reset Search + Filters
+  </button>
+</form>
+`;

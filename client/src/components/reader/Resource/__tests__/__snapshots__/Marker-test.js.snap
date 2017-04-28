@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Resource.Marker component renders correctly 1`] = `
+<span>
+  <span
+    className="resource-marker"
+    data-annotation-resource="1"
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    title="1"
+  >
+    <i
+      className="manicon resource-cube-fill"
+    >
+          
+    </i>
+  </span>
+</span>
+`;

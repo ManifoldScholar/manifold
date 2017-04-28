@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Project.Follow component renders correctly 1`] = `
+<div
+  className="follow-button-wrapper follow"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <div
+    className="following-button"
+  >
+    <div
+      className="icons"
+    >
+      <i
+        className="manicon manicon-minus-bold"
+      />
+      <i
+        className="manicon manicon-check-bold"
+      />
+      <i
+        className="manicon manicon-plus-bold"
+      />
+    </div>
+    <span>
+      <span
+        className="follow-text"
+      >
+        Follow
+      </span>
+    </span>
+  </div>
+</div>
+`;

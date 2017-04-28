@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.VisibilityButton Component renders correctly 1`] = `
+<button
+  className="primary annotation-visibility-button"
+  data-id="toggle"
+  onClick={[Function]}
+>
+  <i
+    className="manicon manicon-eye-fill"
+  />
+  <span
+    className="screen-reader-text"
+  >
+    Click to hide or show annotation/resources in the reader
+  </span>
+</button>
+`;

@@ -1,14 +1,13 @@
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
 import { renderWithRouter, wrapWithRouter } from 'test/helpers/routing';
 import renderer from 'react-test-renderer';
-import { ResourceList } from 'components/frontend';
+import Totals from '../Totals';
 
-describe("ResourceTotals Component", () => {
+describe("Frontend.ResourceList.Totals Component", () => {
 
   it("renders correctly", () => {
     const component = renderer.create(wrapWithRouter(
-      <ResourceList.Totals
+      <Totals
         count={3}
         projectId="1"
       />
@@ -19,7 +18,7 @@ describe("ResourceTotals Component", () => {
 
   it("displays the correct count", () => {
     const wrapper = renderWithRouter(
-      <ResourceList.Totals
+      <Totals
         count={3}
         projectId="1"
       />
@@ -29,7 +28,7 @@ describe("ResourceTotals Component", () => {
 
   it("doesn't render the count when there is no count", () => {
     const wrapper = renderWithRouter(
-      <ResourceList.Totals
+      <Totals
         count={null}
         projectId="1"
       />

@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Project.Detail component renders correctly 1`] = `
+<div>
+  <section
+    className="project-detail-hero hero-image"
+    style={Object {}}
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="project-figure"
+      >
+        
+        <h1
+          className="project-title"
+        >
+          Rowan Test
+          <span
+            className="subtitle"
+          >
+            World's Greatest Dog
+          </span>
+        </h1>
+      </div>
+      <div
+        className="project-info"
+      >
+        <h1
+          className="project-title"
+        >
+          Rowan Test
+          <span
+            className="subtitle"
+          >
+            World's Greatest Dog
+          </span>
+        </h1>
+        <section
+          className="project-social"
+        >
+          <span
+            className="hashtag"
+          />
+          <nav
+            className="networks"
+          >
+            <ul />
+          </nav>
+        </section>
+      </div>
+      <div
+        className="project-aside"
+      >
+        
+      </div>
+    </div>
+  </section>
+  <section
+    className="bg-neutral05"
+  >
+    <div
+      className="container"
+    >
+      <nav
+        className="button-nav"
+      >
+        <a
+          className="button-icon-primary"
+          href="/"
+          onClick={[Function]}
+        >
+          <span>
+            <i
+              className="manicon manicon-books-on-shelf"
+            />
+            See more projects
+          </span>
+        </a>
+      </nav>
+    </div>
+  </section>
+</div>
+`;

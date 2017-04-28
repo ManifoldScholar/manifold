@@ -4,7 +4,6 @@ import includes from 'lodash/includes';
 import { ResourceList } from 'components/frontend';
 import { collectionsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
-import classNames from 'classnames';
 
 const { request } = entityStoreActions;
 

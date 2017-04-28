@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.Select component renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label>
+      Label this
+    </label>
+    <div
+      className="form-select"
+    >
+      <i
+        className="manicon manicon-caret-down"
+      />
+      <select
+        onChange={[Function]}
+        value={undefined}
+      >
+        <option
+          value="1"
+        >
+          option-1
+        </option>
+        <option
+          value="2"
+        >
+          option-2
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+`;

@@ -1,11 +1,16 @@
-exports[`Form.Upload component when the upload input does not have a value renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.Upload component when the upload input does not have a value renders correctly 1`] = `
 <div
-  className="form-input">
+  className="form-input"
+>
   <div
     className="form-input"
-    style={Object {}}>
+    style={Object {}}
+  >
     <label
-      className="">
+      className=""
+    >
       Cover
     </label>
     <div
@@ -16,22 +21,28 @@ exports[`Form.Upload component when the upload input does not have a value rende
       onDragOver={[Function]}
       onDragStart={[Function]}
       onDrop={[Function]}
-      style={Object {}}>
+      style={Object {}}
+    >
       <div
-        className="contents-empty">
+        className="contents-empty"
+      >
         <i
-          className="manicon manicon-cloud-up" />
+          className="manicon manicon-cloud-up"
+        />
         <div
-          className="message">
+          className="message"
+        >
           <p
-            className="primary">
+            className="primary"
+          >
             Upload a file or
             <br />
             drag and drop here
             <br />
           </p>
           <p
-            className="secondary">
+            className="secondary"
+          >
             jpeg, tiff, gif, png
           </p>
         </div>
@@ -45,20 +56,24 @@ exports[`Form.Upload component when the upload input does not have a value rende
             "display": "none",
           }
         }
-        type="file" />
+        type="file"
+      />
     </div>
   </div>
 </div>
 `;
 
-exports[`Form.Upload component when the upload input doesn't have a remove prop renders correctly 1`] = `
+exports[`Backend.Form.Upload component when the upload input doesn't have a remove prop renders correctly 1`] = `
 <div
-  className="form-input">
+  className="form-input"
+>
   <div
     className="form-input"
-    style={Object {}}>
+    style={Object {}}
+  >
     <label
-      className="">
+      className=""
+    >
       Cover
     </label>
     <div
@@ -69,9 +84,11 @@ exports[`Form.Upload component when the upload input doesn't have a remove prop 
       onDragOver={[Function]}
       onDragStart={[Function]}
       onDrop={[Function]}
-      style={Object {}}>
+      style={Object {}}
+    >
       <div
-        className="contents-image-preview">
+        className="contents-image-preview"
+      >
         <div
           className="preview"
           data-id="preview"
@@ -79,21 +96,26 @@ exports[`Form.Upload component when the upload input doesn't have a remove prop 
             Object {
               "backgroundImage": "url(/some/image.jpg)",
             }
-          } />
+          }
+        />
         <div
-          className="message">
+          className="message"
+        >
           <p
-            className="secondary">
+            className="secondary"
+          >
             <a
               data-id="remove"
               href="#"
-              onClick={[Function]}>
+              onClick={[Function]}
+            >
               Remove this image
             </a>
             <br />
             or 
             <span
-              className="fake-link">
+              className="fake-link"
+            >
               Upload a new image
             </span>
           </p>
@@ -108,20 +130,24 @@ exports[`Form.Upload component when the upload input doesn't have a remove prop 
             "display": "none",
           }
         }
-        type="file" />
+        type="file"
+      />
     </div>
   </div>
 </div>
 `;
 
-exports[`Form.Upload component when the upload input doesn't have set and setOther methods renders correctly 1`] = `
+exports[`Backend.Form.Upload component when the upload input doesn't have set and setOther methods renders correctly 1`] = `
 <div
-  className="form-input">
+  className="form-input"
+>
   <div
     className="form-input"
-    style={Object {}}>
+    style={Object {}}
+  >
     <label
-      className="">
+      className=""
+    >
       Cover
     </label>
     <div
@@ -132,9 +158,11 @@ exports[`Form.Upload component when the upload input doesn't have set and setOth
       onDragOver={[Function]}
       onDragStart={[Function]}
       onDrop={[Function]}
-      style={Object {}}>
+      style={Object {}}
+    >
       <div
-        className="contents-image-preview">
+        className="contents-image-preview"
+      >
         <div
           className="preview"
           data-id="preview"
@@ -142,21 +170,26 @@ exports[`Form.Upload component when the upload input doesn't have set and setOth
             Object {
               "backgroundImage": "url(/some/image.jpg)",
             }
-          } />
+          }
+        />
         <div
-          className="message">
+          className="message"
+        >
           <p
-            className="secondary">
+            className="secondary"
+          >
             <a
               data-id="remove"
               href="#"
-              onClick={[Function]}>
+              onClick={[Function]}
+            >
               Remove this image
             </a>
             <br />
             or 
             <span
-              className="fake-link">
+              className="fake-link"
+            >
               Upload a new image
             </span>
           </p>
@@ -171,20 +204,24 @@ exports[`Form.Upload component when the upload input doesn't have set and setOth
             "display": "none",
           }
         }
-        type="file" />
+        type="file"
+      />
     </div>
   </div>
 </div>
 `;
 
-exports[`Form.Upload component when the upload input has a value renders correctly 1`] = `
+exports[`Backend.Form.Upload component when the upload input has a value renders correctly 1`] = `
 <div
-  className="form-input">
+  className="form-input"
+>
   <div
     className="form-input"
-    style={Object {}}>
+    style={Object {}}
+  >
     <label
-      className="">
+      className=""
+    >
       Cover
     </label>
     <div
@@ -195,9 +232,11 @@ exports[`Form.Upload component when the upload input has a value renders correct
       onDragOver={[Function]}
       onDragStart={[Function]}
       onDrop={[Function]}
-      style={Object {}}>
+      style={Object {}}
+    >
       <div
-        className="contents-image-preview">
+        className="contents-image-preview"
+      >
         <div
           className="preview"
           data-id="preview"
@@ -205,21 +244,26 @@ exports[`Form.Upload component when the upload input has a value renders correct
             Object {
               "backgroundImage": "url(/some/image.jpg)",
             }
-          } />
+          }
+        />
         <div
-          className="message">
+          className="message"
+        >
           <p
-            className="secondary">
+            className="secondary"
+          >
             <a
               data-id="remove"
               href="#"
-              onClick={[Function]}>
+              onClick={[Function]}
+            >
               Remove this image
             </a>
             <br />
             or 
             <span
-              className="fake-link">
+              className="fake-link"
+            >
               Upload a new image
             </span>
           </p>
@@ -234,7 +278,8 @@ exports[`Form.Upload component when the upload input has a value renders correct
             "display": "none",
           }
         }
-        type="file" />
+        type="file"
+      />
     </div>
   </div>
 </div>

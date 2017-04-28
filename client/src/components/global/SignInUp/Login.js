@@ -106,10 +106,10 @@ export default class Login extends Component {
           </div>
         </form>
         <p className="login-links">
-          <a href="#" onClick={this.props.showForgot}>
+          <a href="#" onClick={this.props.showForgot} data-id="show-forgot">
             {'Forgot your password?'}
           </a>
-          <a href="#" onClick={this.props.showCreate}>
+          <a href="#" onClick={this.props.showCreate} data-id="show-create">
             {'Need to sign up?'}
           </a>
         </p>

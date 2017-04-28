@@ -53,6 +53,7 @@ export default class Toc extends Component {
         <Link
           to={lh.link("readerSection", this.props.text.id, node.id, anchor)}
           onClick={this.UIHideTocDrawer}
+          data-id="hide-drawer"
         >
           {node.label}
         </Link>

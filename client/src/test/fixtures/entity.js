@@ -1,5 +1,9 @@
 import uuid from 'uuid';
 
+// Must be constant for comment snapshot 'days ago' rendering
+const commentDate = new Date();
+commentDate.setDate(commentDate.getDate() - 4);
+
 const defaults = {
 
   settings: {
@@ -8,6 +12,17 @@ const defaults = {
       general: {},
       theme: {
         typekitId: null
+      },
+      oauth: {
+        facebook: {
+          enabled: false
+        },
+        googleOauth2: {
+          enabled: true
+        },
+        twitter: {
+          enabled: true
+        }
       }
     },
     features: {},
@@ -41,24 +56,17 @@ const defaults = {
       mediumPortrait: null,
       largeLandscape: null,
       original: null
-    },
-    oauth: {
-      facebook: {
-        enabled: false
-      },
-      googleOauth2: {
-        enabled: true
-      },
-      twitter: {
-        enabled: true
-      }
     }
   },
 
   project: {
     type: "projects",
     attributes: {
-      title: "Rowan Test"
+      title: "Rowan Test",
+      subtitle: "World's Greatest Dog",
+      heroStyles: {},
+      coverStyles: {},
+      avatarStyles: {}
     },
     relationships: {
       resources: []
@@ -71,7 +79,8 @@ const defaults = {
       title: "Rowan",
       createdAt: "2017-04-24T23:25:50.161Z",
       resourceKinds: ["image", "video"],
-      resourceTags: ["dog"]
+      resourceTags: ["dog"],
+      thumbnailStyles: {}
     },
     relationships: {
       resources: []
@@ -94,23 +103,20 @@ const defaults = {
     type: "resources",
     attributes: {
       title: "Image",
+      titleFormatted: "Image",
       kind: "image",
       attachmentStyles: {
+        original: "original-image.mock",
         medium: null
       },
-      captionFormatted: "World's Greatest Dog"
+      descriptionFormatted: "Black and white freckles",
+      createdAt: "2017-04-24T23:25:50.161Z",
+      captionFormatted: "World's Greatest Dog",
+      downloadable: true,
+      tagList: ["dog", "puppy", "GOAT"]
     },
     relationships: {
       collectionResources: []
-    }
-  },
-
-  text: {
-    type: "texts",
-    attributes: {
-    },
-    relationships: {
-      project: null
     }
   },
 
@@ -123,8 +129,131 @@ const defaults = {
       strategy: "Ingestor::Strategy::EPUB::Strategy",
       availableEvents: ["reset", "process"]
     }
-  }
+  },
 
+  comment: {
+    type: "comments",
+    attributes: {
+      body: "Plaid clash with polka dots, I hope you ain't mad.",
+      createdAt: commentDate
+    },
+    relationships: {
+      creator: null
+    }
+  },
+
+  user: {
+    type: "users",
+    attributes: {
+      email: "test@cic-fake.gotcha",
+      firstName: "Rowan",
+      lastName: "Ida",
+      fullName: "Rowan Ida",
+      role: "Admin",
+      avatarStyles: {},
+      isCurrentUser: true
+    }
+  },
+
+  event: {
+    type: "events",
+    attributes: {
+      eventType: "TEXT_ADDED",
+      eventTitle: "Text Added",
+      eventSubtitle: "It was added",
+      subjectType: "Text",
+      subjectTitle: "New Text",
+      createdAt: "2017-04-24T23:25:50.161Z"
+    }
+  },
+
+  tweetEvent: {
+    type: "events",
+    attributes: {
+      eventType: "TWEET",
+      eventTitle: "Tweet Created",
+      subjectType: "Tweet",
+      subjectTitle: "New Tweet",
+      createdAt: "2017-04-24T23:25:50.161Z",
+      attributionName: "Manifold Scholarship",
+      attributionUrl: "https://twitter.com/ManifoldScholar",
+      attributionIdentifier: "ManifoldScholar",
+      excerpt: "Manifold is great!"
+    }
+  },
+
+  text: {
+    type: "texts",
+    attributes: {
+      title: "Ain't No Thang",
+      creatorNames: "Andre3000, Big Boi",
+      createdAt: "2017-04-24T23:25:50.161Z",
+      published: true,
+      coverStyles: {},
+      rights: "All Rights Reserved",
+      publicationDate: "2001-12-04",
+      toc: ["Chapter 1", "Chapter 2"]
+    },
+    relationships: {
+      project: null,
+      category: null
+    }
+  },
+
+  category: {
+    type: "categories",
+    attributes: {
+      title: "Hip Hop Classics",
+      position: 1
+    },
+    relationships: {}
+  },
+
+  annotation: {
+    type: "annotations",
+    attributes: {
+      subject: "Gods, Earths, and 85ers",
+      body: "Hands on your boxes, turn 'em up like seven notches." +
+      " Your Magnavoxes amplify my super conscious.",
+      startNode: "some-node",
+      endNode: "another-node",
+      startChar: 4,
+      endChar: 13
+    }
+  },
+
+  textSection: {
+    type: "textSections",
+    kind: "section",
+    sourceIdentifier: "ro-dintl-001",
+    attributes: {
+      name: "Title Page",
+      bodyJson: {
+        tag: "section",
+        nodeType: "element",
+        attributes: {
+          id: "RO",
+          type: "titlepage",
+          class: "chapter"
+        },
+        children: {
+          0: {
+            tag: "h1",
+            nodeType: "element",
+            attributes: {},
+            children: {
+              0: {
+                content: "A day in the life of Rowan",
+                nodeType: "text",
+                nodeUuid: "1234-5678-9000",
+                textDigest: "1234-5678-9000"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 };
 
 const buildEntity = (entityType, id = null, attributes, relationships) => {
@@ -145,10 +274,6 @@ const resource = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("resource", id, attributes, relationships);
 };
 
-const text = (id = null, attributes = {}, relationships = {}) => {
-  return buildEntity("text", id, attributes, relationships);
-};
-
 const ingestion = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("ingestion", id, attributes, relationships);
 };
@@ -161,16 +286,56 @@ const collectionResource = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("collectionResource", id, attributes, relationships);
 };
 
+const comment = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("comment", id, attributes, relationships);
+};
+
+const user = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("user", id, attributes, relationships);
+};
+
 const settings = (id = 0, attributes = {}, relationships = {}) => {
   return buildEntity("settings", id, attributes, relationships);
 };
 
+const event = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("event", id, attributes, relationships);
+};
+
+const tweetEvent = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("tweetEvent", id, attributes, relationships);
+};
+
+const text = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("text", id, attributes, relationships);
+};
+
+const category = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("category", id, attributes, relationships);
+};
+
+const annotation = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("annotation", id, attributes, relationships);
+};
+
+const textSection = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("textSection", id, attributes, relationships);
+};
+
 export default {
+  defaults,
   project,
   resource,
-  text,
   ingestion,
   collection,
   collectionResource,
-  settings
+  comment,
+  user,
+  settings,
+  event,
+  tweetEvent,
+  text,
+  category,
+  annotation,
+  textSection
 };

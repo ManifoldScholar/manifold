@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Avatar component renders correctly 1`] = `
+<figure
+  className="avatar"
+  style={undefined}
+>
+  <div
+    style={
+      Object {
+        "backgroundImage": "url(some/url)",
+        "backgroundPosition": "50% 50%",
+        "backgroundSize": "cover",
+        "borderRadius": "100%",
+        "height": 0,
+        "paddingTop": "100%",
+        "width": "100%",
+      }
+    }
+  />
+</figure>
+`;

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.Radios component renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <label>
+    Label this
+  </label>
+  <label
+    className="form-toggle radio horizontal"
+    htmlFor="1"
+  >
+    <input
+      checked={false}
+      id="1"
+      onChange={[Function]}
+      type="radio"
+      value="1"
+    />
+    <span
+      className="toggle-indicator"
+    />
+    <span
+      className="toggle-label"
+    >
+      option-1
+    </span>
+  </label>
+  <label
+    className="form-toggle radio horizontal"
+    htmlFor="2"
+  >
+    <input
+      checked={false}
+      id="2"
+      onChange={[Function]}
+      type="radio"
+      value="2"
+    />
+    <span
+      className="toggle-indicator"
+    />
+    <span
+      className="toggle-label"
+    >
+      option-2
+    </span>
+  </label>
+</div>
+`;

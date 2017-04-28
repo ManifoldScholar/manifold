@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Layout.Header component renders correctly 1`] = `
+<header
+  className="header-app dark"
+>
+  <div
+    className="header-container"
+  >
+    <a
+      className="logo"
+      href="/backend"
+      onClick={[Function]}
+    >
+      <figure
+        className=""
+      >
+        <div>
+          <i
+            className="manicon manicon-manifold-logo"
+          />
+          <span
+            className="screen-reader-text"
+          >
+            Manifold Logo: Click to return to the browse page
+          </span>
+        </div>
+      </figure>
+    </a>
+    <nav
+      className="text-nav"
+    >
+      <ul>
+        <li>
+          <a
+            className={undefined}
+            href="/backend"
+            onClick={[Function]}
+            style={undefined}
+          >
+            Projects
+          </a>
+        </li>
+        <li>
+          <a
+            className={undefined}
+            href="/backend/people"
+            onClick={[Function]}
+            style={undefined}
+          >
+            People
+          </a>
+        </li>
+        <li>
+          <a
+            className={undefined}
+            href="/backend/settings"
+            onClick={[Function]}
+            style={undefined}
+          >
+            Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <nav
+      className="menu-dropdowns"
+    >
+      <ul>
+        <li
+          className="show-60"
+        >
+          <a
+            className="button-mode"
+            href="/"
+            onClick={[Function]}
+          >
+            Exit Admin Mode
+          </a>
+        </li>
+        <li>
+          <button
+            className="button-avatar"
+            onClick={[Function]}
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Click to login or open user settings
+            </span>
+            <figure
+              className="avatar"
+              style={undefined}
+            >
+              <i
+                className="manicon manicon-person"
+              />
+            </figure>
+          </button>
+          <div
+            className="panel-hidden"
+          >
+            <nav
+              className="user-menu menu-hidden"
+            >
+              <i
+                className="tail"
+              />
+              <ul>
+                <li>
+                  <a
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="manicon manicon-person-pencil"
+                    />
+                    Edit Profile
+                  </a>
+                </li>
+                <li>
+                  <button
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="manicon manicon-circle-arrow-out-right"
+                    />
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div
+    className="header-border"
+  />
+  <section
+    className="header-notifications-container"
+  >
+    <div
+      className="header-notifications-list"
+    >
+      <span />
+    </div>
+  </section>
+</header>
+`;

@@ -90,7 +90,11 @@ export default class Overlay extends Component {
                 <figure className="logo">
                   <i className="manicon manicon-manifold-logo"></i>
                 </figure>
-                <button onClick={this.props.hideSignInUpOverlay} className="overlay-close">
+                <button
+                  onClick={this.props.hideSignInUpOverlay}
+                  className="overlay-close"
+                  data-id="overlay-close"
+                >
                   Cancel
                   <i className="manicon manicon-x"></i>
                 </button>

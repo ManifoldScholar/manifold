@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
+<nav
+  className="user-menu menu-hidden"
+>
+  <i
+    className="tail"
+  />
+  <ul>
+    <li>
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        <i
+          className="manicon manicon-person-pencil"
+        />
+        Edit Profile
+      </a>
+    </li>
+    <li>
+      <button
+        onClick={[Function]}
+      >
+        <i
+          className="manicon manicon-circle-arrow-out-right"
+        />
+        Logout
+      </button>
+    </li>
+  </ul>
+</nav>
+`;

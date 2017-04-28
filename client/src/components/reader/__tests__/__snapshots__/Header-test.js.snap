@@ -1,0 +1,465 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Header Component renders correctly 1`] = `
+<header
+  className="header-reader"
+>
+  <nav
+    className="container-banner"
+  >
+    <button
+      className="button-menu"
+      data-id="toggle-menu"
+      onClick={[Function]}
+    >
+      Menu
+    </button>
+    <button
+      className="button-index"
+      onClick={[Function]}
+    >
+      Contents
+      <i
+        className="manicon manicon-caret-down"
+      />
+    </button>
+    <nav
+      className="menu-buttons"
+    >
+      <ul>
+        <li>
+          <button
+            className="annotation-visibility-button"
+            data-id="toggle"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-eye-fill"
+            />
+            <span
+              className="screen-reader-text"
+            >
+              Click to hide or show annotation/resources in the reader
+            </span>
+          </button>
+        </li>
+        <li>
+          <button
+            className="button-appearance"
+            data-id="toggle-appearance"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-aa"
+            />
+            <span
+              className="screen-reader-text"
+            >
+              Click to open reader appearance menu
+            </span>
+          </button>
+        </li>
+        <li>
+          <button
+            className="button-avatar"
+            onClick={[Function]}
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Click to login or open user settings
+            </span>
+            <figure
+              className="avatar"
+              style={undefined}
+            >
+              <i
+                className="manicon manicon-person"
+              />
+            </figure>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </nav>
+  <div
+    className="banner-gradient"
+  />
+  <div
+    className="edge-lock-scroll"
+  >
+    <div
+      className="toc-drawer drawer-hidden"
+    >
+      <nav
+        className="table-of-contents"
+      >
+        <ul
+          className="toc-list"
+        >
+          <li>
+            <a
+              data-id="hide-drawer"
+              href="/read/1/section/undefined#function%20anchor()%20%7B%20%5Bnative%20code%5D%20%7D"
+              onClick={[Function]}
+            />
+          </li>
+          <li>
+            <a
+              data-id="hide-drawer"
+              href="/read/1/section/undefined#function%20anchor()%20%7B%20%5Bnative%20code%5D%20%7D"
+              onClick={[Function]}
+            />
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <nav
+    className="menu-panels-left"
+  >
+    <div
+      className="panel-hidden"
+    >
+      <nav
+        className="reader-return-menu"
+      >
+        <ul>
+          <li>
+            <a
+              href="/project/2"
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-arrow-round-left"
+              />
+              Project Home
+              <span>
+                Rowan Test
+              </span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/"
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-books-with-glasses-simple"
+              />
+              Projects
+            </a>
+          </li>
+          <li>
+            <button
+              data-id="toggle-overlay"
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-manifold-logo"
+              />
+              Sign-in
+            </button>
+            <a
+              className="note"
+              href="http://manifold.umn.edu/about/"
+              target="_blank"
+            >
+              Learn More About 
+              <span>
+                Manifold
+              </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </nav>
+  <nav
+    className="menu-panels-right"
+  >
+    <div
+      className="panel-hidden"
+    >
+      <nav
+        className="search-menu"
+      >
+        <form>
+          <div
+            className="input-magnify"
+          >
+            <input
+              placeholder="Search for..."
+              type="text"
+            />
+            <button
+              className="manicon manicon-magnify"
+            />
+          </div>
+          <div
+            className="filters"
+          >
+            <label>
+              Search within:
+            </label>
+            <div
+              className="checkbox-group"
+            >
+              <label
+                className="checkbox"
+              >
+                <input
+                  type="checkbox"
+                />
+                <div
+                  className="control-indicator"
+                >
+                  <i
+                    className="manicon manicon-check"
+                  />
+                </div>
+                Chapter
+              </label>
+              <label
+                className="checkbox"
+              >
+                <input
+                  type="checkbox"
+                />
+                <div
+                  className="control-indicator"
+                >
+                  <i
+                    className="manicon manicon-check"
+                  />
+                </div>
+                Text
+              </label>
+              <label
+                className="checkbox"
+              >
+                <input
+                  type="checkbox"
+                />
+                <div
+                  className="control-indicator"
+                >
+                  <i
+                    className="manicon manicon-check"
+                  />
+                </div>
+                Project
+              </label>
+            </div>
+          </div>
+        </form>
+      </nav>
+    </div>
+    <div
+      className="panel-hidden"
+    >
+      <nav
+        className="appearance-menu"
+      >
+        <div
+          className="control-font"
+        >
+          <button
+            className="font-type serif"
+            onClick={[Function]}
+          >
+            Serif
+          </button>
+          <div
+            className="font-size"
+          >
+            <button
+              disabled={true}
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-dash"
+              />
+              <span
+                className="screen-reader-text"
+              >
+                Click to decrease font-size
+              </span>
+            </button>
+            <button
+              disabled={true}
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-plus"
+              />
+              <span
+                className="screen-reader-text"
+              >
+                Click to increase font-size
+              </span>
+            </button>
+          </div>
+        </div>
+        <div
+          className="control-font"
+        >
+          <button
+            className="font-type sans-serif"
+            onClick={[Function]}
+          >
+            Sans Serif
+          </button>
+          <div
+            className="font-size"
+          >
+            <button
+              disabled={true}
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-dash"
+              />
+              <span
+                className="screen-reader-text"
+              >
+                Click to decrease font-size
+              </span>
+            </button>
+            <button
+              disabled={true}
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-plus"
+              />
+              <span
+                className="screen-reader-text"
+              >
+                Click to increase font-size
+              </span>
+            </button>
+          </div>
+        </div>
+        <div
+          className="control-colors"
+        >
+          <button
+            className="color-scheme light"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-check"
+            />
+            <span
+              className="screen-reader-text"
+            >
+              Click to use light color scheme in reader
+            </span>
+          </button>
+          <button
+            className="color-scheme dark"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-check"
+            />
+            <span
+              className="screen-reader-text"
+            >
+              Click to use dark color scheme in reader
+            </span>
+          </button>
+        </div>
+        <div
+          className="control-margins"
+        >
+          <button
+            className="margin-increase"
+            onClick={[Function]}
+          >
+            <i
+              className="compound-icon"
+            >
+              <i
+                className="manicon manicon-margins-narrow-arrows"
+              />
+              <i
+                className="manicon manicon-margins-narrow-text"
+              />
+            </i>
+            <span
+              className="screen-reader-text"
+            >
+              Click to increase text margins
+            </span>
+          </button>
+          <button
+            className="margin-decrease"
+            onClick={[Function]}
+          >
+            <i
+              className="compound-icon"
+            >
+              <i
+                className="manicon manicon-margins-wide-arrows"
+              />
+              <i
+                className="manicon manicon-margins-wide-text"
+              />
+            </i>
+            <span
+              className="screen-reader-text"
+            >
+              Click to increase text margins
+            </span>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <div
+      className="panel-hidden"
+    >
+      <nav
+        className="user-menu menu-hidden"
+      >
+        <i
+          className="tail"
+        />
+        <ul>
+          <li>
+            <a
+              href="#"
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-person-pencil"
+              />
+              Edit Profile
+            </a>
+          </li>
+          <li>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-circle-arrow-out-right"
+              />
+              Logout
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </nav>
+  <section
+    className="header-notifications-container"
+  >
+    <div
+      className="header-notifications-list"
+    >
+      <span />
+    </div>
+  </section>
+</header>
+`;

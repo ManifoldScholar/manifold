@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import lh from 'helpers/linkHandler';
 
-export default class ResourceListItem extends PureComponent {
+export default class UserListItem extends PureComponent {
 
   static displayName = "User.ListItem";
 

@@ -20,6 +20,7 @@ export default class VisibilityButton extends PureComponent {
     return (
       <button className={buttonClass}
         onClick={this.props.toggle}
+        data-id="toggle"
       >
         <i className="manicon manicon-eye-fill"></i>
         <span className="screen-reader-text">

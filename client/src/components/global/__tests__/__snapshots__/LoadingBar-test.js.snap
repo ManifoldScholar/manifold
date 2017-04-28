@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.LoadingBar component renders correctly 1`] = `
+<div>
+  <div
+    className="loading-bar default"
+  >
+    <div
+      className="progress"
+    />
+  </div>
+</div>
+`;

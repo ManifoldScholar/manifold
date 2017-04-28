@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import TestUtils from 'react-addons-test-utils';
 import { Dashboard } from 'components/backend';
 
-describe("Dashboard.Activity component", () => {
+describe("Backend.Dashboard.Activity component", () => {
 
   const valid_stats = {
     attributes: {

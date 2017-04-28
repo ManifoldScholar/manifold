@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Resource.Meta component renders correctly 1`] = `
+<section
+  className="resource-meta"
+>
+  <figure
+    className="resource-type"
+  >
+    <i
+      className="manicon manicon-resource-image"
+    />
+  </figure>
+  <ul
+    className="meta-list-undefined"
+  >
+    <li>
+      <span
+        className="meta-label"
+      >
+        Type
+      </span>
+      <span
+        className="meta-value"
+      >
+        Image
+      </span>
+    </li>
+    <li>
+      <span
+        className="meta-label"
+      >
+        Created On
+      </span>
+      <span
+        className="meta-value"
+      >
+        <span>
+          April 24, 2017
+        </span>
+      </span>
+    </li>
+  </ul>
+  <nav
+    className="tag-list"
+  >
+    <ul>
+      <li>
+        <a
+          href="project/url?tag=dog"
+        >
+          dog
+        </a>
+      </li>
+      <li>
+        <a
+          href="project/url?tag=puppy"
+        >
+          puppy
+        </a>
+      </li>
+      <li>
+        <a
+          href="project/url?tag=goat"
+        >
+          GOAT
+        </a>
+      </li>
+    </ul>
+  </nav>
+</section>
+`;

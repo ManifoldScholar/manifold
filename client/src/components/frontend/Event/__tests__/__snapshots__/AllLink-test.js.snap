@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Event.AllLink Component renders correctly 1`] = `
+<div
+  className="section-heading-utility-right"
+>
+  <a
+    className="button-primary"
+    href="/project/1/events"
+    onClick={[Function]}
+  >
+    See all Activity
+  </a>
+</div>
+`;

@@ -76,7 +76,7 @@ class CommentThread extends PureComponent {
   }
 
   render() {
-    if (!this.props.comments) return null;
+    if (!this.props.comments || !Array.isArray(this.props.comments)) return null;
     const children = this.childrenOf(this.props.parentId);
     if (children.length <= 0) return null;
     const showLogin = bindActionCreators(

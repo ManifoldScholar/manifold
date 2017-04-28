@@ -14,11 +14,11 @@ class FormTextArea extends Component {
     value: PropTypes.string,
     errors: PropTypes.array,
     name: PropTypes.string
-  }
+  };
 
   static defaultProps = {
     height: 100
-  }
+  };
 
   render() {
     return (

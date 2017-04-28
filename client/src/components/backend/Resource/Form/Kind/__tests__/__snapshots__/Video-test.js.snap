@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
+<div
+  className="form-section"
+>
+  <div
+    className="form-input"
+  >
+    <label>
+      Is this an externally linked video?
+    </label>
+    <div
+      className="toggle-indicator"
+    >
+      <div
+        className="boolean-primary"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+  <div
+    className="form-input"
+  >
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label
+        className=""
+      >
+        Video File
+      </label>
+      <div
+        className="form-dropzone style-square"
+        onClick={[Function]}
+        onDragEnter={[Function]}
+        onDragLeave={[Function]}
+        onDragOver={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        style={Object {}}
+      >
+        <div
+          className="contents-empty"
+        >
+          <i
+            className="manicon manicon-cloud-up"
+          />
+          <div
+            className="message"
+          >
+            <p
+              className="primary"
+            >
+              Upload a file or
+              <br />
+              drag and drop here
+              <br />
+            </p>
+            <p
+              className="secondary"
+            >
+              mp4, webm
+            </p>
+          </div>
+        </div>
+        <input
+          accept="video/*"
+          multiple={false}
+          onChange={[Function]}
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+          type="file"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Backend.Resource.Form.Video component when sub kind is external_video renders correctly 1`] = `
+<div
+  className="form-section"
+>
+  <div
+    className="form-input"
+  >
+    <label>
+      Is this an externally linked video?
+    </label>
+    <div
+      className="toggle-indicator"
+    >
+      <div
+        className="boolean-primary"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+  <div
+    className="form-section"
+  >
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label
+        className=""
+      >
+        Video ID
+      </label>
+      <input
+        onChange={[Function]}
+        placeholder="Video ID"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="form-input"
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label>
+          External Video Type
+        </label>
+        <div
+          className="form-select"
+        >
+          <i
+            className="manicon manicon-caret-down"
+          />
+          <select
+            onChange={[Function]}
+            value={undefined}
+          >
+            <option
+              value=""
+            >
+              Select a video source...
+            </option>
+            <option
+              value="youtube"
+            >
+              Youtube
+            </option>
+            <option
+              value="vimeo"
+            >
+              Vimeo
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Section.Pagination component renders correctly 1`] = `
+<nav
+  className="section-pagination"
+>
+  <div
+    className="container"
+  >
+    <a
+      className="pagination-next"
+      href="/read/1/section/1234"
+      onClick={[Function]}
+    >
+      <span
+        className="text"
+      >
+        Next
+      </span>
+      <i
+        className="manicon manicon-arrow-round-right"
+      />
+    </a>
+  </div>
+</nav>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.UIPanel component renders correctly 1`] = `
+<div
+  className="panel-visible"
+>
+  <div>
+    Render me
+  </div>
+</div>
+`;

@@ -1,14 +1,20 @@
-exports[`Navigation.Breadcrumb component renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Navigation.Breadcrumb component renders correctly 1`] = `
 <div
-  className="container flush">
+  className="container flush"
+>
   <nav
-    className="breadcrumb-primary">
+    className="breadcrumb-primary"
+  >
     <a
       className="initial"
       href="/link-1"
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       <i
-        className="manicon manicon-arrow-left" />
+        className="manicon manicon-arrow-left"
+      />
       Back to:
     </a>
     <ul>
@@ -16,7 +22,8 @@ exports[`Navigation.Breadcrumb component renders correctly 1`] = `
         <a
           className="back-link-primary-segment"
           href="/link-1"
-          onClick={[Function]}>
+          onClick={[Function]}
+        >
           Link One
         </a>
       </li>
@@ -24,7 +31,8 @@ exports[`Navigation.Breadcrumb component renders correctly 1`] = `
         <a
           className="back-link-primary-segment"
           href="/link-2"
-          onClick={[Function]}>
+          onClick={[Function]}
+        >
           Link Two
         </a>
       </li>

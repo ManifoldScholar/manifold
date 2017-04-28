@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import { Layout } from 'components/frontend';
 import { wrapWithRouter } from 'test/helpers/routing';
 
-describe("Footer component", () => {
+describe("Frontend.Layout.Footer component", () => {
 
   const settings = {
     attributes: {

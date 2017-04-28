@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.PressLogo component renders correctly 1`] = `
+<figure
+  className="logo-square"
+>
+  <div
+    className="image"
+    style={
+      Object {
+        "backgroundImage": "url(some/url)",
+      }
+    }
+  />
+</figure>
+`;

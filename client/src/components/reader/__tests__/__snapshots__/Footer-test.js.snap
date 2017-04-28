@@ -1,14 +1,21 @@
-exports[`Footer component adds a line break between lines 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Footer component adds a line break between lines 1`] = `
 <footer
-  className="footer-reader">
+  className="footer-reader"
+>
   <div
-    className="container">
+    className="container"
+  >
     <div
-      className="rel">
+      className="rel"
+    >
       <section
-        className="colophon">
+        className="colophon"
+      >
         <i
-          className="manicon manicon-manifold-logo" />
+          className="manicon manicon-manifold-logo"
+        />
         <div>
           <p>
             <span>
@@ -16,7 +23,7 @@ exports[`Footer component adds a line break between lines 1`] = `
               <br />
             </span>
             <span>
-              line two
+                    line two
             </span>
           </p>
         </div>
@@ -27,17 +34,22 @@ exports[`Footer component adds a line break between lines 1`] = `
 </footer>
 `;
 
-exports[`Footer component renders correctly 1`] = `
+exports[`Reader.Footer component renders correctly 1`] = `
 <footer
-  className="footer-reader">
+  className="footer-reader"
+>
   <div
-    className="container">
+    className="container"
+  >
     <div
-      className="rel">
+      className="rel"
+    >
       <section
-        className="colophon">
+        className="colophon"
+      >
         <i
-          className="manicon manicon-manifold-logo" />
+          className="manicon manicon-manifold-logo"
+        />
         <div>
           <p>
             <span>

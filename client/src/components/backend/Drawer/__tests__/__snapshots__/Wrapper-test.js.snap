@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
+"<MemoryRouter>
+  <Router history={{...}}>
+    <withRouter(Drawer.Wrapper) open={true} style=\\"backend\\">
+      <Route render={[Function]}>
+        <Drawer.Wrapper open={true} style=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} lockScroll=\\"hover\\">
+          <ReactCSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+            <ReactTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+              <span>
+                <ReactCSSTransitionGroupChild name=\\"drawer\\" appear={false} enter={true} leave={true} appearTimeout={[undefined]} enterTimeout={500} leaveTimeout={300}>
+                  <div>
+                    <Utility.EdgeLockScroll>
+                      <div className=\\"edge-lock-scroll\\">
+                        <div className=\\"drawer-backend\\">
+                          <div className=\\"drawer-bar\\">
+                            <div onClick={[Function]} className=\\"close-button-primary\\">
+                              <span className=\\"close-text\\">
+                                Close
+                              </span>
+                              <i className=\\"manicon manicon-x\\" />
+                              <span className=\\"screen-reader-text\\">
+                                Close Drawer
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Utility.EdgeLockScroll>
+                  </div>
+                </ReactCSSTransitionGroupChild>
+              </span>
+            </ReactTransitionGroup>
+          </ReactCSSTransitionGroup>
+        </Drawer.Wrapper>
+      </Route>
+    </withRouter(Drawer.Wrapper)>
+  </Router>
+</MemoryRouter>"
+`;

@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Annotation.Annotation component renders correctly 1`] = `
+<li
+  className="annotation-annotation"
+>
+  <section
+    className="meta"
+  >
+    <div>
+      <figure
+        className="author-avatar"
+      >
+        <div
+          className="no-image"
+        >
+          <i
+            className="manicon manicon-person"
+          />
+        </div>
+      </figure>
+      <h4
+        className="author-name"
+      >
+        Rowan Ida
+      </h4>
+      <datetime>
+         ago
+      </datetime>
+    </div>
+  </section>
+  <div>
+    <section
+      className="body"
+    >
+      <div>
+        <p>
+          <span>
+            Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.
+          </span>
+        </p>
+      </div>
+    </section>
+    <nav
+      className="utility"
+    >
+      <ul>
+        <li>
+          <button
+            onClick={undefined}
+          >
+            Login to reply
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</li>
+`;

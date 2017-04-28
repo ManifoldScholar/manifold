@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
 import classNames from 'classnames';
 import get from 'lodash/get';
 

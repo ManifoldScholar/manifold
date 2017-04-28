@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import { Layout } from 'components/frontend';
 import { wrapWithRouter } from 'test/helpers/routing';
 
-describe("ButtonNavigation component", () => {
+describe("Frontend.Layout.ButtonNavigation component", () => {
 
   it('renders correctly', () => {
     const component = renderer.create(wrapWithRouter(

@@ -29,8 +29,6 @@ class Button extends PureComponent {
   get oauthSettings() {
     const settingsKey = providerSetting(this.props.provider);
 
-    console.log('settingsKey: %s', settingsKey);
-
     return get(this.props, `settings.attributes.oauth.${settingsKey}`);
   }
 
@@ -47,7 +45,6 @@ class Button extends PureComponent {
   }
 
   render() {
-    console.log('provider %s is enabled? %s', this.props.provider, this.isEnabled);
 
     if (!this.isEnabled) {
       return null;

@@ -133,10 +133,10 @@ class PasswordForgotContainer extends Component {
           </div>
         </form>
         <p className="login-links">
-          <a href="#" onClick={this.props.showLogin}>
+          <a href="#" onClick={this.props.showLogin} data-id="show-login">
             {'Remember your password?'}
           </a>
-          <a href="#" onClick={this.props.showCreate}>
+          <a href="#" onClick={this.props.showCreate} data-id="show-create">
             {'Need to sign up?'}
           </a>
         </p>

@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Project.Events component renders correctly 1`] = `
+<div>
+  <section
+    className="bg-neutral05"
+  >
+    <a
+      className="back-link-primary full"
+      href="/project/1"
+      onClick={[Function]}
+    >
+      <div
+        className="container flush"
+      >
+        <i
+          className="manicon manicon-arrow-left"
+        />
+        Back to Project
+        <span>
+          Rowan Test
+        </span>
+      </div>
+    </a>
+  </section>
+  <section>
+    <div
+      className="container"
+    >
+      <header
+        className="section-heading"
+      >
+        <h4
+          className="title"
+        >
+          <i
+            className="manicon manicon-pulse"
+          />
+          All Activity
+        </h4>
+      </header>
+      <div>
+        <ul
+          className="event-list-primary"
+        >
+          <li>
+            <div
+              className="event-tile"
+            >
+              <div
+                className="event-data"
+              >
+                <div>
+                  <i
+                    className="manicon manicon-book-opening"
+                  />
+                  <h5
+                    className="event-title"
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "New Text",
+                      }
+                    }
+                  />
+                  <datetime
+                    className="event-date"
+                  >
+                    <span>
+                      Text Added April 24th, 2017
+                    </span>
+                  </datetime>
+                </div>
+              </div>
+              <div
+                className="event-prompt"
+              />
+            </div>
+          </li>
+          <li>
+            <div
+              className="event-tile"
+            >
+              <div
+                className="event-data"
+              >
+                <div>
+                  <i
+                    className="manicon manicon-book-opening"
+                  />
+                  <h5
+                    className="event-title"
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "New Text",
+                      }
+                    }
+                  />
+                  <datetime
+                    className="event-date"
+                  >
+                    <span>
+                      Text Added April 24th, 2017
+                    </span>
+                  </datetime>
+                </div>
+              </div>
+              <div
+                className="event-prompt"
+              />
+            </div>
+          </li>
+        </ul>
+        <nav
+          className="list-pagination-primary"
+        >
+          <ul>
+            <li
+              className="pagination-previous"
+              style={
+                Object {
+                  "visibility": "hidden",
+                }
+              }
+            >
+              <a
+                href="/project/1/events/0"
+                onClick={[Function]}
+              >
+                <i
+                  className="manicon manicon-arrow-long-left"
+                />
+                <span>
+                  Prev
+                </span>
+              </a>
+            </li>
+            <li
+              className="active ordinal"
+            >
+              <a
+                href="/project/1/events/1"
+                onClick={[Function]}
+              >
+                1
+              </a>
+            </li>
+            <li
+              className="ordinal"
+            >
+              <a
+                href="/project/1/events/2"
+                onClick={[Function]}
+              >
+                2
+              </a>
+            </li>
+            <li
+              className="pagination-next"
+              style={Object {}}
+            >
+              <a
+                href="/project/1/events/2"
+                onClick={[Function]}
+              >
+                <span>
+                  Next
+                </span>
+                <i
+                  className="manicon manicon-arrow-long-right"
+                />
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+  <section
+    className="bg-neutral05"
+  >
+    <div
+      className="container"
+    >
+      <nav
+        className="button-nav"
+      >
+        <a
+          className="button-icon-primary"
+          href="/"
+          onClick={[Function]}
+        >
+          <span>
+            <i
+              className="manicon manicon-books-on-shelf"
+            />
+            See more projects
+          </span>
+        </a>
+      </nav>
+    </div>
+  </section>
+</div>
+`;

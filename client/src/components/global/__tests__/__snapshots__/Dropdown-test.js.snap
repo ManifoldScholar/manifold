@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Dropdown component renders correctly 1`] = `
+<div>
+  <div>
+    Render me
+  </div>
+  <div>
+    Me too
+  </div>
+</div>
+`;

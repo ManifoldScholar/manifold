@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Resource.Form.Spreadsheet component renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+    >
+      Spreadsheet File
+    </label>
+    <div
+      className="form-dropzone style-square"
+      onClick={[Function]}
+      onDragEnter={[Function]}
+      onDragLeave={[Function]}
+      onDragOver={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      style={Object {}}
+    >
+      <div
+        className="contents-empty"
+      >
+        <i
+          className="manicon manicon-cloud-up"
+        />
+        <div
+          className="message"
+        >
+          <p
+            className="primary"
+          >
+            Upload a file or
+            <br />
+            drag and drop here
+            <br />
+          </p>
+          <p
+            className="secondary"
+          >
+            xls xlsx
+          </p>
+        </div>
+      </div>
+      <input
+        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+        multiple={false}
+        onChange={[Function]}
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="file"
+      />
+    </div>
+  </div>
+</div>
+`;

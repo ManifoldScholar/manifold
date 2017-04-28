@@ -1,0 +1,430 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Static.Form component renders correctly 1`] = `
+<div>
+  <section>
+    <div
+      className="container"
+    >
+      <h4
+        className="section-heading"
+      >
+        Assorted form elements
+      </h4>
+      <div
+        className="row-3-p"
+      >
+        <div
+          className="col-33"
+        >
+          <div
+            className="form-input form-error"
+          >
+            <label>
+              Text Entry Field
+            </label>
+            <input
+              placeholder="Text Entry Field"
+              type="text"
+            />
+            <i
+              className="manicon manicon-stop"
+            />
+            <span
+              className="form-error-message"
+            >
+              something happened
+            </span>
+          </div>
+        </div>
+        <div
+          className="col-33"
+        >
+          <div
+            className="form-input"
+          >
+            <label>
+              Text Entry Field
+            </label>
+            <input
+              placeholder="Text Entry Field"
+              type="text"
+            />
+          </div>
+        </div>
+        <div
+          className="col-33"
+        >
+          <div
+            className="form-input"
+          >
+            <label>
+               
+            </label>
+            <div
+              className="form-select"
+            >
+              <i
+                className="manicon manicon-caret-down"
+              />
+              <select>
+                <option>
+                  Select Dropdown
+                </option>
+                <option>
+                  Select an option
+                </option>
+                <option>
+                  If you please
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="row-3-p"
+      >
+        <div
+          className="col-66"
+        >
+          <div
+            className="form-input"
+          >
+            <label>
+              Editable text field
+            </label>
+            <textarea
+              placeholder="Start typing annotation here..."
+            />
+          </div>
+        </div>
+        <div
+          className="col-33"
+        >
+          <div
+            className="form-callout"
+          >
+            <header>
+              <i
+                className="manicon manicon-bugle"
+              />
+              Notifications
+            </header>
+            <div
+              className="form-input"
+            >
+              <label
+                className="form-toggle radio annotated"
+              >
+                <input
+                  name="notifications"
+                  type="radio"
+                />
+                <span
+                  className="toggle-indicator"
+                />
+                <span
+                  className="toggle-label"
+                >
+                  Please Opt Me In
+                </span>
+                <span
+                  className="toggle-note"
+                >
+                  I have always been very upset when I am left out of the group. This goes double for newsletters,  promotional offers, and targeted advertising.
+                </span>
+              </label>
+              <label
+                className="form-toggle radio annotated"
+              >
+                <input
+                  name="notifications"
+                  type="radio"
+                />
+                <span
+                  className="toggle-indicator"
+                />
+                <span
+                  className="toggle-label"
+                >
+                  None of your bee's wax
+                </span>
+                <span
+                  className="toggle-note"
+                >
+                  I have several suggestions for where I would most like to see your newsletter delivered, none of which include my email address.
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="form-input"
+          >
+            <label>
+              Checkboxes Vertical
+            </label>
+            <label
+              className="form-toggle checkbox"
+            >
+              <input
+                type="checkbox"
+              />
+              <span
+                className="toggle-indicator"
+              >
+                <i
+                  className="manicon manicon-check"
+                />
+              </span>
+              <span
+                className="toggle-label"
+              >
+                Checkbox item
+              </span>
+            </label>
+            <label
+              className="form-toggle checkbox"
+            >
+              <input
+                type="checkbox"
+              />
+              <span
+                className="toggle-indicator"
+              >
+                <i
+                  className="manicon manicon-check"
+                />
+              </span>
+              <span
+                className="toggle-label"
+              >
+                Checkbox item
+              </span>
+            </label>
+            <label
+              className="form-toggle checkbox"
+            >
+              <input
+                type="checkbox"
+              />
+              <span
+                className="toggle-indicator"
+              >
+                <i
+                  className="manicon manicon-check"
+                />
+              </span>
+              <span
+                className="toggle-label"
+              >
+                Checkbox item
+              </span>
+            </label>
+          </div>
+          <div
+            className="form-input"
+          >
+            <label>
+              Radios Vertical
+            </label>
+            <label
+              className="form-toggle radio"
+            >
+              <input
+                name="test"
+                type="radio"
+              />
+              <span
+                className="toggle-indicator"
+              />
+              <span
+                className="toggle-label"
+              >
+                Radio item
+              </span>
+            </label>
+            <label
+              className="form-toggle radio"
+            >
+              <input
+                name="test"
+                type="radio"
+              />
+              <span
+                className="toggle-indicator"
+              />
+              <span
+                className="toggle-label"
+              >
+                Radio item
+              </span>
+            </label>
+            <label
+              className="form-toggle radio"
+            >
+              <input
+                name="test"
+                type="radio"
+              />
+              <span
+                className="toggle-indicator"
+              />
+              <span
+                className="toggle-label"
+              >
+                Radio item
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        className="row-3-p"
+      >
+        <div
+          className="col-66"
+        >
+          <div
+            className="form-input"
+          >
+            <label>
+              Checkboxes Horizontal
+            </label>
+            <label
+              className="form-toggle checkbox horizontal"
+            >
+              <input
+                type="checkbox"
+              />
+              <span
+                className="toggle-indicator"
+              >
+                <i
+                  className="manicon manicon-check"
+                />
+              </span>
+              <span
+                className="toggle-label"
+              >
+                Checkbox item
+              </span>
+            </label>
+            <label
+              className="form-toggle checkbox horizontal"
+            >
+              <input
+                type="checkbox"
+              />
+              <span
+                className="toggle-indicator"
+              >
+                <i
+                  className="manicon manicon-check"
+                />
+              </span>
+              <span
+                className="toggle-label"
+              >
+                Checkbox item
+              </span>
+            </label>
+            <label
+              className="form-toggle checkbox horizontal"
+            >
+              <input
+                type="checkbox"
+              />
+              <span
+                className="toggle-indicator"
+              >
+                <i
+                  className="manicon manicon-check"
+                />
+              </span>
+              <span
+                className="toggle-label"
+              >
+                Checkbox item
+              </span>
+            </label>
+          </div>
+          <div
+            className="form-input"
+          >
+            <label>
+              Checkboxes Horizontal
+            </label>
+            <label
+              className="form-toggle radio horizontal"
+            >
+              <input
+                type="radio"
+              />
+              <span
+                className="toggle-indicator"
+              />
+              <span
+                className="toggle-label"
+              >
+                Checkbox item
+              </span>
+            </label>
+            <label
+              className="form-toggle radio horizontal"
+            >
+              <input
+                type="radio"
+              />
+              <span
+                className="toggle-indicator"
+              />
+              <span
+                className="toggle-label"
+              >
+                Checkbox item
+              </span>
+            </label>
+            <label
+              className="form-toggle radio horizontal"
+            >
+              <input
+                type="radio"
+              />
+              <span
+                className="toggle-indicator"
+              />
+              <span
+                className="toggle-label"
+              >
+                Checkbox item
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        className="row-3-p"
+      >
+        <div
+          className="col-33"
+        >
+          <div
+            className="form-input"
+          >
+            <input
+              className="button-secondary-dull"
+              disabled={true}
+              type="submit"
+            />
+            <input
+              className="button-secondary"
+              type="submit"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;

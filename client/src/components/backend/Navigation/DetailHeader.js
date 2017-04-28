@@ -15,7 +15,7 @@ export default class DetailHeader extends PureComponent {
 
   static defaultProps = {
     titleHtml: false
-  }
+  };
 
   typeToManiconClass(type) {
     let segment = `${type}-placeholder`;

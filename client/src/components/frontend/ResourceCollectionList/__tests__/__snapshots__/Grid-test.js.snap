@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ResourceCollectionList.Grid component renders correctly 1`] = `
+<nav
+  className="resource-collections-list"
+>
+  <ul>
+    <li>
+      <a
+        href="/project/1/collection/1"
+        onClick={[Function]}
+        style={
+          Object {
+            "backgroundImage": "url(/static/images/resource-collection.jpg)",
+          }
+        }
+      >
+        <div
+          className="title-overlay"
+        >
+          <h4
+            className="collection-title"
+          >
+            Rowan
+          </h4>
+          <div
+            className="icon"
+          >
+            <i
+              className="manicon manicon-file-box"
+            />
+            <span>
+              Collection
+            </span>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        href="/project/1/collection/2"
+        onClick={[Function]}
+        style={
+          Object {
+            "backgroundImage": "url(/static/images/resource-collection.jpg)",
+          }
+        }
+      >
+        <div
+          className="title-overlay"
+        >
+          <h4
+            className="collection-title"
+          >
+            Rowan
+          </h4>
+          <div
+            className="icon"
+          >
+            <i
+              className="manicon manicon-file-box"
+            />
+            <span>
+              Collection
+            </span>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</nav>
+`;

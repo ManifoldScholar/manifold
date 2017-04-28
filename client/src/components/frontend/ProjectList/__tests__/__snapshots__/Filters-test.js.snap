@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ProjectList.Filters component renders correctly 1`] = `
+<div
+  className="select-browse"
+>
+  <select
+    onChange={[Function]}
+  >
+    <option
+      value=""
+    >
+      Show All
+    </option>
+    <option
+      value="featured"
+    >
+      Featured Projects
+    </option>
+    <option
+      value="1"
+    >
+      Subject 1
+    </option>
+    <option
+      value="2"
+    >
+      Subject 2
+    </option>
+  </select>
+  <i
+    className="manicon manicon-caret-down"
+  />
+</div>
+`;

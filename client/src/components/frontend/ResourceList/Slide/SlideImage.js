@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import throttle from 'lodash/throttle';
 
-export default class ResourceSlideFigureImage extends Component {
+export default class ResourceListSlideFigureImage extends Component {
   static propTypes = {
     resource: PropTypes.object
   };
