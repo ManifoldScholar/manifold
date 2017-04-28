@@ -9,6 +9,7 @@ class KindPicker extends PureComponent {
 
   static propTypes = {
     name: PropTypes.string,
+    getModelValue: PropTypes.func,
     includeButtons: PropTypes.bool
   };
 
@@ -20,7 +21,7 @@ class KindPicker extends PureComponent {
           const safeKind = kind.toLowerCase();
           const buttonClass = classNames({
             button: true,
-            active: safeKind === this.props.value
+            active: safeKind === this.props.getModelValue("attributes[kind]")
           });
           return (
             <li key={safeKind}>
@@ -76,7 +77,7 @@ class KindPicker extends PureComponent {
                   onChange={(event) => {
                     this.props.set(event.target.value);
                   }}
-                  value={this.props.value.toLowerCase()}
+                  value={this.props.getModelValue("attributes[kind]").toLowerCase()}
                 >
                   {kindList.map((kind) => {
                     const safeKind = kind.toLowerCase();

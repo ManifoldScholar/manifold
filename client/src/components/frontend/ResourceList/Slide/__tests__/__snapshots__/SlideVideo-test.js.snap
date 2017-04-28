@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ResourceList.Slide.SlideVideo component renders correctly 1`] = `
+<figure>
+  <div
+    className="figure-video"
+  >
+    <iframe
+      allowFullScreen={true}
+      frameBorder="0"
+      id="ytplayer"
+      src="https://www.youtube.com/embed/lVrAwK7FaOw?rel=0"
+      type="text/html"
+    />
+  </div>
+</figure>
+`;

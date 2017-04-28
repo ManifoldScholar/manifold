@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.Save component renders correctly 1`] = `
+<div
+  className="form-input submit"
+>
+  <a
+    className="button-secondary outlined dull"
+    href="cancel/this"
+    onClick={[Function]}
+  >
+    Cancel
+  </a>
+  <input
+    className="button-secondary outlined"
+    type="submit"
+    value="Save"
+  />
+</div>
+`;

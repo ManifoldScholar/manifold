@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Layout.Splash component renders correctly 1`] = `
+<section
+  className="bg-accent-primary"
+>
+  <div
+    className="container rel"
+  >
+    <div
+      className="splash-50"
+    >
+      <div
+        className="left"
+      >
+        <h2
+          className="heading-primary"
+        >
+          Welcome to Manifold. An Intuitive, collaborative, open-source platform for scholarly publishing
+        </h2>
+        <p>
+          With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works.
+        </p>
+        <nav
+          className="buttons"
+        >
+          <a
+            className="button-bare-primary"
+            href="http://manifold.umn.edu/"
+            target="blank"
+          >
+            Learn More
+          </a>
+        </nav>
+      </div>
+      <figure
+        className="right"
+      >
+        <img
+          src="/static/images/browse-splash_manifold-devices.png"
+        />
+      </figure>
+    </div>
+  </div>
+</section>
+`;

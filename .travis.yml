@@ -18,6 +18,7 @@ before_script:
 
 before_install:
   - gem update --system
+  - echo $TRAVIS_NODE_VERSION
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
   - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
   - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -29,7 +30,7 @@ env:
     - API="/home/travis/build/ManifoldScholar/manifold/api"
     - RAILS_SECRET_KEY=6d48e59424e38e0a1aec8515cc31385ccd39a868e7681a1382ccfed7178f2c2ae60bb91371815a9937890097f3eb43808035777510a810599756bf83fa7e0b20
     - RAILS_DB_USER=postgres
-    - TRAVIS_NODE_VERSION="4"
+    - TRAVIS_NODE_VERSION="6.10.3"
 
 gemfile: api/Gemfile
 

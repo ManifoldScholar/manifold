@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Comment.Detail component renders correctly 1`] = `
+<li
+  className="annotation-comment"
+>
+  <section
+    className="meta"
+  >
+    <div>
+      <figure
+        className="author-avatar"
+      >
+        <div
+          className="no-image"
+        >
+          <i
+            className="manicon manicon-person"
+          />
+        </div>
+      </figure>
+      <h4
+        className="author-name"
+      >
+        Rowan Ida
+      </h4>
+      <datetime>
+        <span>
+          4 days
+        </span>
+         ago
+      </datetime>
+    </div>
+    <div
+      className="markers"
+    />
+  </section>
+  <section
+    className="body"
+  >
+    <div>
+      <p>
+        <span>
+          Plaid clash with polka dots, I hope you ain't mad.
+        </span>
+      </p>
+    </div>
+  </section>
+  <nav
+    className="utility"
+  >
+    <ul>
+      <li>
+        <button
+          onClick={undefined}
+        >
+          Login to reply
+        </button>
+      </li>
+    </ul>
+  </nav>
+</li>
+`;

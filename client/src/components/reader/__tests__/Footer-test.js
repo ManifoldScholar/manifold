@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { Footer } from 'components/reader';
 
-describe("Footer component", () => {
+describe("Reader.Footer component", () => {
 
   const text = {
     attributes: {
@@ -13,7 +13,7 @@ describe("Footer component", () => {
   const text_multiline = {
     attributes: {
       rights: `line one
-line two`
+      line two`
     }
   };
 

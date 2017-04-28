@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.Switch component renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <label>
+    Label this
+  </label>
+  <div
+    className="toggle-indicator"
+  >
+    <div
+      className="boolean-primary"
+      onClick={[Function]}
+    />
+  </div>
+</div>
+`;

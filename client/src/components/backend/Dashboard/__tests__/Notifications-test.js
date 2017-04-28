@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { Dashboard } from 'components/backend';
 
-describe("Dashboard.Notification component", () => {
+describe("Backend.Dashboard.Notification component", () => {
 
   it('renders correctly', () => {
     const component = renderer.create(

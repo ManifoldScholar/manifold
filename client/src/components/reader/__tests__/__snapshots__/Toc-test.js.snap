@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Toc Component renders correctly 1`] = `
+<nav
+  className="table-of-contents"
+>
+  <ul
+    className="toc-list"
+  >
+    <li>
+      <a
+        data-id="hide-drawer"
+        href="/read/1/section/undefined#function%20anchor()%20%7B%20%5Bnative%20code%5D%20%7D"
+        onClick={[Function]}
+      />
+    </li>
+    <li>
+      <a
+        data-id="hide-drawer"
+        href="/read/1/section/undefined#function%20anchor()%20%7B%20%5Bnative%20code%5D%20%7D"
+        onClick={[Function]}
+      />
+    </li>
+  </ul>
+</nav>
+`;

@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Resource.Form.Audio component renders correctly 1`] = `
+<div
+  className="form-section"
+>
+  <div
+    className="form-input"
+  >
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label
+        className=""
+      >
+        Audio File
+      </label>
+      <div
+        className="form-dropzone style-square"
+        onClick={[Function]}
+        onDragEnter={[Function]}
+        onDragLeave={[Function]}
+        onDragOver={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        style={Object {}}
+      >
+        <div
+          className="contents-empty"
+        >
+          <i
+            className="manicon manicon-cloud-up"
+          />
+          <div
+            className="message"
+          >
+            <p
+              className="primary"
+            >
+              Upload a file or
+              <br />
+              drag and drop here
+              <br />
+            </p>
+            <p
+              className="secondary"
+            >
+              mp3
+            </p>
+          </div>
+        </div>
+        <input
+          accept="audio/*"
+          multiple={false}
+          onChange={[Function]}
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+          type="file"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.SignInUp.Update component renders correctly 1`] = `
+<form
+  autoComplete="off"
+  className="sign-in-up-update"
+  method="post"
+  onSubmit={[Function]}
+>
+  <div>
+    <h4
+      className="form-heading"
+    >
+      Hello, 
+      <span
+        className="nickname"
+      >
+        Rowan
+      </span>
+      .
+    </h4>
+    <p
+      className="overlay-copy"
+    >
+      Would you like to update your Nickname?
+    </p>
+  </div>
+  <div
+    className="row-1-p"
+  >
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <input
+        id="update-nickname"
+        name="nickname"
+        onChange={[Function]}
+        placeholder="Nickname"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    className="row-1-p"
+  >
+    <p
+      className="overlay-copy"
+    >
+      While you're here, why not upload a profile image?
+    </p>
+    <div
+      className="form-dropzone"
+      onClick={[Function]}
+      onDragEnter={[Function]}
+      onDragLeave={[Function]}
+      onDragOver={[Function]}
+      onDragStart={[Function]}
+      onDrop={[Function]}
+      style={Object {}}
+    >
+      <div
+        className="dropzone-button dropzone-button-dotted"
+        style={
+          Object {
+            "position": "relative",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "height": 66,
+              "marginTop": -33,
+              "position": "absolute",
+              "top": "50%",
+              "width": 66,
+            }
+          }
+        >
+          <figure
+            className="avatar"
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
+            <i
+              className="manicon manicon-person"
+            />
+          </figure>
+        </div>
+        <span
+          className="dropzone-button-text"
+        >
+          Click to browse or
+          <br />
+          drag and drop
+        </span>
+      </div>
+      <input
+        accept="image/*"
+        multiple={false}
+        onChange={[Function]}
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="file"
+      />
+    </div>
+  </div>
+  <div
+    className="row-1-p"
+  >
+    <div
+      className="form-input form-error"
+    >
+      <input
+        className="button-secondary button-with-room"
+        type="submit"
+        value="Save Changes"
+      />
+    </div>
+  </div>
+</form>
+`;

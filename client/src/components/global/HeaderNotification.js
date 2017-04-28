@@ -48,7 +48,7 @@ export default class HeaderNotification extends Component {
           </header>
           {this.bodyCopy()}
 
-          <button className="notification-close" onClick={this.handleClose}>
+          <button className="notification-close" onClick={this.handleClose} data-id="close">
             <i className="manicon manicon-x"></i>
             <span className="screen-reader-text">{'Click to close this notification'}</span>
           </button>

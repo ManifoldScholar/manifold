@@ -1,33 +1,41 @@
-exports[`Dashboard.Notification component renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Dashboard.Notification component renders correctly 1`] = `
 <nav
-  className="notification-list-block">
+  className="notification-list-block"
+>
   <ul>
     <li>
       <p>
          Notifications are still a 
         <a
-          href="https://en.wikipedia.org/wiki/Democracy_in_America">
+          href="https://en.wikipedia.org/wiki/Democracy_in_America"
+        >
           work in progress!
         </a>
       </p>
       <button
-        className="manicon manicon-x" />
+        className="manicon manicon-x"
+      />
     </li>
     <li>
       <p>
         For now, these are just 
         <a
-          href="https://en.wikipedia.org/wiki/Placeholder">
+          href="https://en.wikipedia.org/wiki/Placeholder"
+        >
           placeholders
         </a>
       </p>
       <button
-        className="manicon manicon-x" />
+        className="manicon manicon-x"
+      />
     </li>
   </ul>
   <a
     className="button-bare-primary"
-    href="#">
+    href="#"
+  >
     Notification History
   </a>
 </nav>

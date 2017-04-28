@@ -1,12 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Event.Thumbnail component renders thumbnail for ANNOTATION_ADD correctly 1`] = `
 <div
-  className="event-thumbnail-primary">
+  className="event-thumbnail-primary"
+>
   <div
-    className="wrapper">
+    className="wrapper"
+  >
     <figure
-      className="event-type">
+      className="event-type"
+    >
       <i
-        className="manicon manicon-undefined" />
+        className="manicon manicon-undefined"
+      />
     </figure>
   </div>
 </div>
@@ -14,13 +20,17 @@ exports[`Event.Thumbnail component renders thumbnail for ANNOTATION_ADD correctl
 
 exports[`Event.Thumbnail component renders thumbnail for PROJECT_CREATED correctly 1`] = `
 <div
-  className="event-thumbnail-primary">
+  className="event-thumbnail-primary"
+>
   <div
-    className="wrapper">
+    className="wrapper"
+  >
     <figure
-      className="event-type">
+      className="event-type"
+    >
       <i
-        className="manicon manicon-egg" />
+        className="manicon manicon-egg"
+      />
     </figure>
   </div>
 </div>
@@ -28,13 +38,17 @@ exports[`Event.Thumbnail component renders thumbnail for PROJECT_CREATED correct
 
 exports[`Event.Thumbnail component renders thumbnail for RESOURCE_ADDED correctly 1`] = `
 <div
-  className="event-thumbnail-primary">
+  className="event-thumbnail-primary"
+>
   <div
-    className="wrapper">
+    className="wrapper"
+  >
     <figure
-      className="event-type">
+      className="event-type"
+    >
       <i
-        className="manicon manicon-cube-shine" />
+        className="manicon manicon-cube-shine"
+      />
     </figure>
   </div>
 </div>
@@ -42,13 +56,17 @@ exports[`Event.Thumbnail component renders thumbnail for RESOURCE_ADDED correctl
 
 exports[`Event.Thumbnail component renders thumbnail for TEXT_ADDED correctly 1`] = `
 <div
-  className="event-thumbnail-primary">
+  className="event-thumbnail-primary"
+>
   <div
-    className="wrapper">
+    className="wrapper"
+  >
     <figure
-      className="event-type">
+      className="event-type"
+    >
       <i
-        className="manicon manicon-book-opening" />
+        className="manicon manicon-book-opening"
+      />
     </figure>
   </div>
 </div>
@@ -56,13 +74,17 @@ exports[`Event.Thumbnail component renders thumbnail for TEXT_ADDED correctly 1`
 
 exports[`Event.Thumbnail component renders thumbnail for TWEET correctly 1`] = `
 <div
-  className="event-thumbnail-primary">
+  className="event-thumbnail-primary"
+>
   <div
-    className="wrapper">
+    className="wrapper"
+  >
     <figure
-      className="event-type">
+      className="event-type"
+    >
       <i
-        className="manicon manicon-twitter" />
+        className="manicon manicon-twitter"
+      />
     </figure>
   </div>
 </div>

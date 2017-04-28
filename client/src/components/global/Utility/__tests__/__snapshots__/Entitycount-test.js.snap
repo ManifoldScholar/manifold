@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Utility.EntityCount component renders correctly 1`] = `
+<p
+  className="list-total"
+>
+  Showing 
+  <span>
+    1-5
+  </span>
+   of 
+  <span>
+    10
+  </span>
+   entities: 
+</p>
+`;

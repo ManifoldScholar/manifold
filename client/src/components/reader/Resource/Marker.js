@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import connectAndFetch from 'utils/connectAndFetch';
-import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import { uiReaderActions } from 'actions';
 import lh from 'helpers/linkHandler';

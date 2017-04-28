@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Annotation.Popup.Share Component renders correctly 1`] = `
+<section
+  className="popup-page-secondary"
+>
+  <div
+    className="button-group"
+  >
+    <button
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      target="_blank"
+    >
+      <i
+        className="manicon manicon-twitter"
+      />
+      Twitter
+    </button>
+  </div>
+  <button
+    className="dark"
+    onClick={undefined}
+  >
+    <i
+      className="manicon manicon-arrow-bold-left"
+    />
+    Back
+  </button>
+  <div
+    className="tail"
+  />
+</section>
+`;

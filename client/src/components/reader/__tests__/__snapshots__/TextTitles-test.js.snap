@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.TextTitles Component renders correctly 1`] = `
+<header
+  className="title show-section"
+  onClick={[Function]}
+>
+  <h3
+    className="text-title"
+  >
+    Rowan: Greatest Dog
+  </h3>
+  <h2
+    className="section-title"
+  >
+    Chapter 1
+  </h2>
+</header>
+`;

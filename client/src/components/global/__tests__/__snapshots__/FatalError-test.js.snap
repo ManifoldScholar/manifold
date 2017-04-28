@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.FatalError component renders correctly 1`] = `
+<section
+  className="error-page"
+>
+  <div
+    className="error-wrapper"
+  >
+    <div
+      className="container"
+    >
+      <header>
+        <div
+          className="stop-sign"
+        >
+          <i
+            className="manicon manicon-octagon"
+          />
+          <i
+            className="manicon manicon-bang"
+          />
+        </div>
+        <h3>
+          We're at a bit of a loose end.
+          <br />
+          Frightfully sorry.
+        </h3>
+      </header>
+      <div
+        className="error-description"
+      >
+        <h1>
+          404 error.
+           
+          Jump, jump
+        </h1>
+        <p>
+          Kriss Kross'll make you
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+`;

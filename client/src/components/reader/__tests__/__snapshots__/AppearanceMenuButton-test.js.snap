@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.AppearanceMenuButton Component renders correctly 1`] = `
+<button
+  className="button-appearance"
+  data-id="toggle-appearance"
+  onClick={[Function]}
+>
+  <i
+    className="manicon manicon-aa"
+  />
+  <span
+    className="screen-reader-text"
+  >
+    Click to open reader appearance menu
+  </span>
+</button>
+`;

@@ -2,28 +2,13 @@ import React from 'react';
 import Searchable from '../Searchable';
 import { shallow, render, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
-import { Event } from '/components/backend';
+import ListItem from 'components/backend/Resource/ListItem';
+import build from 'test/fixtures/build';
+import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
 
-describe("List.Searchable component", () => {
+describe("Backend.List.Searchable component", () => {
 
-  const entities = [
-    {
-      id: 1,
-      attributes: {
-        eventType: 'PROJECT_CREATED',
-        eventTitle: "Bicycle Race",
-        excerpt: "I want to ride my bicycle"
-      }
-    },
-    {
-      id: 2,
-      attributes: {
-        eventType: 'TWEET',
-        eventTitle: "We Will Rock You",
-        excerpt: "Buddy, you're a boy, make a big noise."
-      }
-    }
-  ];
+  const entities = [build.entity.resource("1"), build.entity.resource("2")];
   const pagination = {
     perPage: 1,
     currentPage: 1,
@@ -34,22 +19,22 @@ describe("List.Searchable component", () => {
   };
   const pageChangeMock = jest.fn();
   const filterChangeMock = jest.fn();
-  const eventDestroyMock = jest.fn();
   const fakeClick = {stopPropagation: () => undefined, preventDefault: () => undefined};
   const root = (
-    <Searchable
-      entities={entities}
-      singularUnit="event"
-      pluralUnit="events"
-      pagination={pagination}
-      paginationClickHandler={() => pageChangeMock}
-      entityComponent={Event.ListItem}
-      filterChangeHandler={filterChangeMock}
-      destroyHandler={eventDestroyMock}
-      filterOptions={{
-        type: ['TWEET', 'PROJECT_CREATED']
-      }}
-    />
+    wrapWithRouter(
+      <Searchable
+        entities={entities}
+        singularUnit="resource"
+        pluralUnit="resources"
+        pagination={pagination}
+        paginationClickHandler={() => pageChangeMock}
+        entityComponent={ListItem}
+        filterChangeHandler={filterChangeMock}
+        filterOptions={{
+          type: ['TWEET', 'PROJECT_CREATED']
+        }}
+      />
+    )
   );
 
   it('renders correctly', () => {
@@ -60,34 +45,27 @@ describe("List.Searchable component", () => {
 
   it('should render the correct number of ListItems', () => {
     const wrapper = mount(root);
-    expect(wrapper.find(wrapper.props().entityComponent)).toHaveLength(2);
+    expect(wrapper.find(ListItem)).toHaveLength(2);
   });
 
   it('should show filter options when toggle is clicked', () => {
-    const wrapper = shallow(root);
+    const wrapper = mount(root);
     expect(wrapper.find('[data-id="filter"]')).toHaveLength(0);
     wrapper.find('[data-id="filter-toggle"]').simulate('click', fakeClick);
     expect(wrapper.find('[data-id="filter"]')).toHaveLength(1);
   });
 
   it('should trigger filterChangeMock callback when filter is changed', () => {
-    const wrapper = shallow(root);
+    const wrapper = mount(root);
     const filterEvent = {
       preventDefault: () => true,
       target: {
         value: "TWEET"
       }
     };
-    wrapper.setState({ showOptions: true });
+    wrapper.find('[data-id="filter-toggle"]').simulate('click', fakeClick);
     wrapper.find('[data-id="filter"]').simulate('change', filterEvent);
     expect(filterChangeMock).toHaveBeenCalled();
-  });
-
-  it('should trigger eventDestroyMock callback when destroy is clicked', () => {
-    const wrapper = mount(root);
-    eventDestroyMock.mockClear();
-    wrapper.find('[data-id="destroy"]').first().simulate('click', fakeClick);
-    expect(eventDestroyMock).toHaveBeenCalled();
   });
 
   it('should trigger paginationClickHandler callback when page change is clicked', () => {
@@ -96,5 +74,4 @@ describe("List.Searchable component", () => {
     wrapper.find('[data-id="page-next"]').simulate('click', fakeClick);
     expect(pageChangeMock).toHaveBeenCalled();
   });
-
 });

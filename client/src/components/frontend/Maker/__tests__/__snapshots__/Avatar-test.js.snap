@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Maker.Avatar component renders correctly 1`] = `
+<figure
+  className="maker-avatar"
+>
+  <div
+    className="no-image"
+  >
+    <i
+      className="manicon manicon-person"
+    />
+  </div>
+  <figcaption>
+    Rowan Ida
+  </figcaption>
+</figure>
+`;

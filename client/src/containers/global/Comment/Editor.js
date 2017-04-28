@@ -46,6 +46,7 @@ class CommentEditor extends PureComponent {
   }
 
   componentDidMount() {
+    if (!this.ci) return null;
     this.ci.focus();
   }
 

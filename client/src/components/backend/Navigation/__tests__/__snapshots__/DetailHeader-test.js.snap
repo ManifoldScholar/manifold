@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Navigation.DetailHeader component renders correctly 1`] = `
+<section
+  className="bg-neutral95"
+>
+  <div
+    className="container flush"
+  >
+    <nav
+      className="breadcrumb-primary"
+    >
+      <a
+        className="initial"
+        href="/backend"
+        onClick={[Function]}
+      >
+        <i
+          className="manicon manicon-arrow-left"
+        />
+        Back to:
+      </a>
+      <ul>
+        <li>
+          <a
+            className="back-link-primary-segment"
+            href="/backend"
+            onClick={[Function]}
+          >
+            All Projects
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div
+    className="container flush"
+  >
+    <header
+      className="entity-header-primary"
+    >
+      <figure>
+        <i
+          className="manicon manicon-project-placeholder"
+        />
+      </figure>
+      <div
+        className="title"
+      >
+        <h1>
+          Rowan
+          <span
+            className="subtitle"
+          >
+            World's Greatest Dog
+          </span>
+        </h1>
+        <div
+          className="utility"
+        />
+      </div>
+    </header>
+  </div>
+</section>
+`;

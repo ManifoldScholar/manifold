@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import throttle from 'lodash/throttle';
 import FormattedDate from 'components/global/FormattedDate';
 
-export default class ResourceSlideFigure extends Component {
+export default class ResourceListSlideFigure extends Component {
   static propTypes = {
     resource: PropTypes.object
   };

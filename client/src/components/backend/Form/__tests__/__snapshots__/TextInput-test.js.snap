@@ -1,15 +1,20 @@
-exports[`Form.TextInput component renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.TextInput component renders correctly 1`] = `
 <div
   className="form-input"
-  style={Object {}}>
+  style={Object {}}
+>
   <label
-    className="">
+    className=""
+  >
     A form label
   </label>
   <input
     onChange={[Function]}
     placeholder={undefined}
     type="text"
-    value="" />
+    value=""
+  />
 </div>
 `;

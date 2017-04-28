@@ -1,75 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Backend Ingest Container when the ingestion state is analyzed renders correctly 1`] = `
 <div>
   <div
-    className="ingestion-output">
+    className="ingestion-output"
+  >
     <header
-      className="entity-header-primary">
+      className="entity-header-primary"
+    >
       <figure>
         <i
-          className="manicon manicon-text-placeholder" />
+          className="manicon manicon-text-placeholder"
+        />
       </figure>
       <div
-        className="title">
+        className="title"
+      >
         <h1>
           some-file.epub
         </h1>
         <div
-          className="utility">
+          className="utility"
+        >
           <button
             className="button-bare-primary"
             disabled={false}
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             Reset
             <i
-              className="manicon manicon-x-bold" />
+              className="manicon manicon-x-bold"
+            />
           </button>
         </div>
       </div>
     </header>
     <div
-      className="properties">
+      className="properties"
+    >
       <div
-        className="item">
+        className="item"
+      >
         <p
-          className="label">
+          className="label"
+        >
           Current state
         </p>
         <p
-          className="value">
+          className="value"
+        >
           Analyzed
         </p>
       </div>
       <div
-        className="item">
+        className="item"
+      >
         <p
-          className="label">
+          className="label"
+        >
           Strategy
         </p>
         <p
-          className="value">
+          className="value"
+        >
           Ingestor::Strategy::EPUB::Strategy
         </p>
       </div>
       <div
-        className="item">
+        className="item"
+      >
         <p
-          className="label">
+          className="label"
+        >
           Text
         </p>
         <p
-          className="value">
+          className="value"
+        >
           This ingestion will create a new text
         </p>
       </div>
     </div>
     <div
-      className="log">
+      className="log"
+    >
       <p
-        className="label">
+        className="label"
+      >
         Log
       </p>
       <div
-        className="value">
+        className="value"
+      >
         
       </div>
     </div>
@@ -80,19 +102,24 @@ exports[`Backend Ingest Container when the ingestion state is analyzed renders c
       Object {
         "marginTop": 30,
       }
-    }>
+    }
+  >
     <button
       className="button-icon-secondary dull"
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       <i
-        className="manicon manicon-x small" />
+        className="manicon manicon-x small"
+      />
       Back
     </button>
     <button
       className="button-icon-secondary"
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       <i
-        className="manicon manicon-arrow-right small" />
+        className="manicon manicon-arrow-right small"
+      />
       Ingest
     </button>
   </div>
@@ -102,75 +129,95 @@ exports[`Backend Ingest Container when the ingestion state is analyzed renders c
 exports[`Backend Ingest Container when the ingestion state is finished renders correctly 1`] = `
 <div>
   <div
-    className="ingestion-output">
+    className="ingestion-output"
+  >
     <header
-      className="entity-header-primary">
+      className="entity-header-primary"
+    >
       <figure>
         <i
-          className="manicon manicon-text-placeholder" />
+          className="manicon manicon-text-placeholder"
+        />
       </figure>
       <div
-        className="title">
+        className="title"
+      >
         <h1>
           some-file.epub
         </h1>
         <div
-          className="utility">
+          className="utility"
+        >
           <button
             className="button-bare-primary"
             disabled={false}
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             Reset
             <i
-              className="manicon manicon-x-bold" />
+              className="manicon manicon-x-bold"
+            />
           </button>
         </div>
       </div>
     </header>
     <div
-      className="properties">
+      className="properties"
+    >
       <div
-        className="item">
+        className="item"
+      >
         <p
-          className="label">
+          className="label"
+        >
           Current state
         </p>
         <p
-          className="value">
+          className="value"
+        >
           Finish
         </p>
       </div>
       <div
-        className="item">
+        className="item"
+      >
         <p
-          className="label">
+          className="label"
+        >
           Strategy
         </p>
         <p
-          className="value">
+          className="value"
+        >
           Ingestor::Strategy::EPUB::Strategy
         </p>
       </div>
       <div
-        className="item">
+        className="item"
+      >
         <p
-          className="label">
+          className="label"
+        >
           Text
         </p>
         <p
-          className="value">
+          className="value"
+        >
           This ingestion will create a new text
         </p>
       </div>
     </div>
     <div
-      className="log">
+      className="log"
+    >
       <p
-        className="label">
+        className="label"
+      >
         Log
       </p>
       <div
-        className="value">
+        className="value"
+      >
         
       </div>
     </div>
@@ -181,12 +228,15 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
       Object {
         "marginTop": 30,
       }
-    }>
+    }
+  >
     <button
       className="button-icon-secondary dull"
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       <i
-        className="manicon manicon-x small" />
+        className="manicon manicon-x small"
+      />
       Back
     </button>
   </div>
@@ -196,75 +246,95 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
 exports[`Backend Ingest Container when the ingestion state is sleeping renders correctly 1`] = `
 <div>
   <div
-    className="ingestion-output">
+    className="ingestion-output"
+  >
     <header
-      className="entity-header-primary">
+      className="entity-header-primary"
+    >
       <figure>
         <i
-          className="manicon manicon-text-placeholder" />
+          className="manicon manicon-text-placeholder"
+        />
       </figure>
       <div
-        className="title">
+        className="title"
+      >
         <h1>
           some-file.epub
         </h1>
         <div
-          className="utility">
+          className="utility"
+        >
           <button
             className="button-bare-primary loading"
             disabled={true}
-            onClick={[Function]}>
+            onClick={[Function]}
+          >
             Reset
             <i
-              className="manicon manicon-x-bold" />
+              className="manicon manicon-x-bold"
+            />
           </button>
         </div>
       </div>
     </header>
     <div
-      className="properties">
+      className="properties"
+    >
       <div
-        className="item">
+        className="item"
+      >
         <p
-          className="label">
+          className="label"
+        >
           Current state
         </p>
         <p
-          className="value">
+          className="value"
+        >
           Sleeping
         </p>
       </div>
       <div
-        className="item">
+        className="item"
+      >
         <p
-          className="label">
+          className="label"
+        >
           Strategy
         </p>
         <p
-          className="value">
+          className="value"
+        >
           Ingestor::Strategy::EPUB::Strategy
         </p>
       </div>
       <div
-        className="item">
+        className="item"
+      >
         <p
-          className="label">
+          className="label"
+        >
           Text
         </p>
         <p
-          className="value">
+          className="value"
+        >
           This ingestion will create a new text
         </p>
       </div>
     </div>
     <div
-      className="log">
+      className="log"
+    >
       <p
-        className="label">
+        className="label"
+      >
         Log
       </p>
       <div
-        className="value">
+        className="value"
+      >
         
       </div>
     </div>
@@ -275,19 +345,24 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
       Object {
         "marginTop": 30,
       }
-    }>
+    }
+  >
     <button
       className="button-icon-secondary dull"
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       <i
-        className="manicon manicon-x small" />
+        className="manicon manicon-x small"
+      />
       Back
     </button>
     <button
       className="button-icon-secondary"
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       <i
-        className="manicon manicon-arrow-right small" />
+        className="manicon manicon-arrow-right small"
+      />
       Analyze
     </button>
   </div>

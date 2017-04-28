@@ -31,7 +31,7 @@ class FormTextInput extends Component {
   }
 
   componentDidMount() {
-    if (this.props.focusOnMount === true) this.inputElement.focus();
+    if (this.props.focusOnMount === true && this.inputElement) this.inputElement.focus();
   }
 
   render() {

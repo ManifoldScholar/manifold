@@ -36,6 +36,8 @@ export default class EdgeLockScroll extends PureComponent {
     this.scroller = isString(this.props.children.type) ?
       this.child : ReactDOM.findDOMNode(this.child);
 
+    if (!this.scroller) return null;
+
     this.handleWheel = (event) => {
       this.edgeLock(this.scroller, event);
     };

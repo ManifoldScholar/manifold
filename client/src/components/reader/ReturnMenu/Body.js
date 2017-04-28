@@ -47,7 +47,7 @@ export default class ReturnMenuBody extends PureComponent {
           </HigherOrder.RequireRole>
           <HigherOrder.RequireRole requiredRole="none">
             <li>
-              <button onClick={this.props.toggleSignInUpOverlay}>
+              <button onClick={this.props.toggleSignInUpOverlay} data-id="toggle-overlay">
                 <i className="manicon manicon-manifold-logo"></i>
                 Sign-in
               </button>

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { ResourceList } from 'components/frontend';
-import lh from 'helpers/linkHandler';
 
 export default class ProjectResources extends Component {
 

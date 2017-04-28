@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Event.Body.Added Component renders correctly 1`] = `
+<div
+  className="event-data"
+>
+  <div>
+    <i
+      className="manicon manicon-book-opening"
+    />
+    <h5
+      className="event-title"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "New Text",
+        }
+      }
+    />
+    <datetime
+      className="event-date"
+    >
+      <span>
+        Text Added April 24th, 2017
+      </span>
+    </datetime>
+  </div>
+</div>
+`;

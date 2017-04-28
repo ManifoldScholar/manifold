@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
+<div
+  className="overlay-full-primary"
+>
+  <header
+    className="overlay-header"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="rel"
+      >
+        <figure
+          className="logo"
+        >
+          <i
+            className="manicon manicon-manifold-logo"
+          />
+        </figure>
+        <button
+          className="overlay-close"
+          data-id="overlay-close"
+          onClick={[Function]}
+        >
+          Cancel
+          <i
+            className="manicon manicon-x"
+          />
+        </button>
+      </div>
+    </div>
+  </header>
+  <div
+    className="container"
+  >
+    <div
+      className="overlay-content-focus"
+    >
+      <div>
+        <form
+          method="post"
+          onSubmit={[Function]}
+        >
+          <div
+            className="row-1-p"
+          >
+            <div
+              className="form-input form-error"
+            >
+              <label>
+                Email
+              </label>
+              <input
+                id="login-email"
+                onChange={[Function]}
+                placeholder="Username"
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="row-1-p"
+          >
+            <div
+              className="form-input"
+            >
+              <label>
+                Password
+              </label>
+              <input
+                id="login-password"
+                onChange={[Function]}
+                placeholder="Password"
+                type="password"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="row-1-p"
+          >
+            <div
+              className="form-input"
+            >
+              <input
+                className="button-secondary button-with-room"
+                type="submit"
+                value="Log in"
+              />
+            </div>
+          </div>
+        </form>
+        <p
+          className="login-links"
+        >
+          <a
+            data-id="show-forgot"
+            href="#"
+            onClick={[Function]}
+          >
+            Forgot your password?
+          </a>
+          <a
+            data-id="show-create"
+            href="#"
+            onClick={[Function]}
+          >
+            Need to sign up?
+          </a>
+        </p>
+        <section
+          className="login-external"
+        >
+          <div />
+          <button
+            className="button-secondary-dark"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-envelope"
+            />
+            <span>
+              Log in with Google
+            </span>
+          </button>
+          <button
+            className="button-secondary-dark"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-twitter"
+            />
+            <span>
+              Log in with Twitter
+            </span>
+          </button>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+`;

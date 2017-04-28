@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Ingestion.Form.Upload component renders correctly 1`] = `
+<div>
+  <div
+    className="buttons-icon-horizontal"
+    style={
+      Object {
+        "marginTop": 30,
+      }
+    }
+  >
+    <button
+      className="button-icon-secondary dull"
+      onClick={[Function]}
+    >
+      <i
+        className="manicon manicon-x small"
+      />
+      Back
+    </button>
+    <button
+      className="button-icon-secondary"
+      disabled={true}
+      type="submit"
+    >
+      <i
+        className="manicon manicon-x small"
+      />
+      Continue
+    </button>
+  </div>
+</div>
+`;

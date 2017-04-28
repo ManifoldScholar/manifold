@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Utility.BackLinkSecondary component renders correctly 1`] = `
+<div
+  className="container flush"
+>
+  <a
+    className="back-link-secondary"
+    href="test/link"
+    onClick={[Function]}
+  >
+    <i
+      className="manicon manicon-arrow-round-left"
+    />
+    <div>
+      <span
+        className="back-text"
+      >
+        Back to Project
+      </span>
+      <span
+        className="project-title"
+      >
+        test
+      </span>
+    </div>
+  </a>
+</div>
+`;

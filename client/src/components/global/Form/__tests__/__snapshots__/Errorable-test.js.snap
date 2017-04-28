@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Form.Errorable component renders correctly 1`] = `
+<div
+  className="form-error"
+  style={Object {}}
+>
+  <span
+    className="errors"
+  >
+    <span
+      className="error"
+    >
+      Name can't be blank.  
+      <br />
+    </span>
+  </span>
+</div>
+`;

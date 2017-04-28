@@ -19,7 +19,7 @@ export default class AppearanceMenuButton extends Component {
       'button-active': this.props.active
     });
     return (
-        <button className={buttonClass} onClick={this.clickHandler}>
+        <button className={buttonClass} onClick={this.clickHandler} data-id="toggle-appearance">
           <i className="manicon manicon-aa"></i>
           <span className="screen-reader-text">{'Click to open reader appearance menu'}</span>
         </button>

@@ -1,13 +1,17 @@
-exports[`Navigation.Secondary component renders correctly 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Navigation.Secondary component renders correctly 1`] = `
 <nav
-  className="panel-nav">
+  className="panel-nav"
+>
   <ul>
     <li>
       <a
         className={undefined}
         href="/link-1"
         onClick={[Function]}
-        style={undefined}>
+        style={undefined}
+      >
         Link One
       </a>
     </li>
@@ -16,7 +20,8 @@ exports[`Navigation.Secondary component renders correctly 1`] = `
         className={undefined}
         href="/link-2"
         onClick={[Function]}
-        style={undefined}>
+        style={undefined}
+      >
         Link Two
       </a>
     </li>

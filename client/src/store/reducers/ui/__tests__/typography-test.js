@@ -122,7 +122,7 @@ describe('store/reducers/ui/typography/incrementMargins', () => {
   });
 });
 
-describe('store/reducers/ui/typography/decrementFontSize', () => {
+describe('store/reducers/ui/typography/decrementMargins', () => {
   it('Should decrement the value by 1', () => {
     const initialState = {
       margins: {

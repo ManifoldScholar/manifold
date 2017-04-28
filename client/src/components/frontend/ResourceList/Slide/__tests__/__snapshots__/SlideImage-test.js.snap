@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ResourceList.Slide.SlideImage component renders correctly 1`] = `
+<figure>
+  <div
+    className="figure-image"
+    style={
+      Object {
+        "backgroundImage": "url(null)",
+      }
+    }
+  />
+</figure>
+`;

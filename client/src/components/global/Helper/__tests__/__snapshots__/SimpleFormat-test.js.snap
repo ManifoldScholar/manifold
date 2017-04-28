@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Helper.SimpleFormat component renders correctly 1`] = `
+<div>
+  <p>
+    <span>
+      Basketball is my favorite sport. I like the way they dribble up and down the court.
+    </span>
+  </p>
+</div>
+`;

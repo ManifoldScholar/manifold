@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Annotation.Editor component renders correctly 1`] = `
+<div
+  className="annotation-editor"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className=""
+      style={Object {}}
+    >
+      <textarea
+        onChange={[Function]}
+        placeholder="Annotate this passage..."
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+        value=""
+      />
+    </div>
+    <div
+      className="utility"
+    >
+      <div
+        className="form-input"
+      >
+        <label
+          className="form-toggle checkbox"
+        >
+          <input
+            checked={false}
+            name="isPrivate"
+            onChange={[Function]}
+            type="checkbox"
+            value="1"
+          />
+          <span
+            className="toggle-indicator"
+          >
+            <i
+              className="manicon manicon-check-bold"
+            />
+          </span>
+          <span
+            className="toggle-label"
+          >
+            This Annotation is Private
+          </span>
+        </label>
+      </div>
+      <div
+        className="buttons"
+      >
+        <button
+          className="button-primary dull"
+          onClick={[Function]}
+        >
+          Cancel
+        </button>
+        <button
+          className="button-secondary"
+          disabled={true}
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;

@@ -7,7 +7,9 @@ export default class CategoryForm extends PureComponent {
 
   static displayName = "Category.Form";
 
-  static propTypes = {};
+  static propTypes = {
+    projectId: PropTypes.string
+  };
 
   render() {
 

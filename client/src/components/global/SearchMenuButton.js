@@ -19,7 +19,7 @@ export default class SearchMenuButton extends Component {
       'button-active': this.props.active
     });
     return (
-        <button className={buttonClass} onClick={this.clickHandler}>
+        <button className={buttonClass} onClick={this.clickHandler} data-id="toggle-menu">
           <i className="manicon manicon-magnify"></i>
           <span className="screen-reader-text">{'Click to open search'}</span>
         </button>

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Resource.Form.Link component renders correctly 1`] = `
+<div
+  className="form-section"
+>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+    >
+      Link URL
+    </label>
+    <input
+      onChange={[Function]}
+      placeholder="Enter link URL"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;

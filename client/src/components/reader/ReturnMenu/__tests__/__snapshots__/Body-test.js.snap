@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.ReturnMenu.Body component renders correctly 1`] = `
+<nav
+  className="reader-return-menu"
+>
+  <ul>
+    <li>
+      <a
+        href="/project/1"
+        onClick={[Function]}
+      >
+        <i
+          className="manicon manicon-arrow-round-left"
+        />
+        Project Home
+        <span>
+          Rowan Test
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <i
+          className="manicon manicon-books-with-glasses-simple"
+        />
+        Projects
+      </a>
+    </li>
+    <li>
+      <button
+        data-id="toggle-overlay"
+        onClick={[Function]}
+      >
+        <i
+          className="manicon manicon-manifold-logo"
+        />
+        Sign-in
+      </button>
+    </li>
+  </ul>
+</nav>
+`;

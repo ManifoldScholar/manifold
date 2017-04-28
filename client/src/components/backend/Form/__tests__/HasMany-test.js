@@ -1,11 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Form } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
 import { Provider } from 'react-redux';
 import createStore from 'store/createStore';
 
-describe("Form.HasMany component", () => {
+describe("Backend.Form.HasMany component", () => {
 
   const store = createStore();
 

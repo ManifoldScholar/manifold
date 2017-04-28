@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import throttle from 'lodash/throttle';
 import { DefaultPlayer as Video } from 'react-html5video';
 
-export default class ResourceSlideFigureVideo extends Component {
+export default class ResourceListSlideFigureVideo extends Component {
   static propTypes = {
     resource: PropTypes.object
   };

@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { wrapWithRouter } from 'test/helpers/routing';
 import build from 'test/fixtures/build';
 
-describe("CollectionResourcesDetail Component", () => {
+describe("Frontend.ResourceCollection.Detail Component", () => {
 
   const pagination = build.pagination();
   const store = build.store();
@@ -25,22 +25,24 @@ describe("CollectionResourcesDetail Component", () => {
   const filterChangeMock = jest.fn();
 
   it("renders correctly", () => {
-    const component = renderer.create(wrapWithRouter(
-      <Provider store={store}>
-        <ResourceCollection.Detail
-          project={project}
-          slideshowResources={resources}
-          slideshowPagination={pagination}
-          collectionResources={resources}
-          collectionPagination={pagination}
-          collectionPaginationHandler={pageChangeMock}
-          collection={collection}
-          collectionUrl={`/browse/project/${project.id}/collection/${collection.id}`}
-          filterChange={filterChangeMock}
-          initialFilterState={null}
-        />
-      </Provider>
-    ));
+    const component = renderer.create(
+      wrapWithRouter(
+        <Provider store={store}>
+          <ResourceCollection.Detail
+            project={project}
+            slideshowResources={resources}
+            slideshowPagination={pagination}
+            collectionResources={resources}
+            collectionPagination={pagination}
+            collectionPaginationHandler={pageChangeMock}
+            collection={collection}
+            collectionUrl={`/browse/project/${project.id}/collection/${collection.id}`}
+            filterChange={filterChangeMock}
+            initialFilterState={null}
+          />
+        </Provider>
+      )
+    );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

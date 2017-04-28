@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 export default class Dropdown extends Component {
   static propTypes = {
-    triggerComponent: PropTypes.object,
-    bodyComponent: PropTypes.object
+    triggerComponent: PropTypes.func,
+    bodyComponent: PropTypes.func
   };
 
   constructor() {

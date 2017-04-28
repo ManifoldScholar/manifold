@@ -4,7 +4,7 @@ import { Form } from 'components/backend';
 import { shallow, mount, render } from 'enzyme';
 import { Event } from 'components/frontend';
 
-describe("Form.TextInput component", () => {
+describe("Backend.Form.TextInput component", () => {
 
   const onChange = jest.fn();
 
@@ -15,12 +15,12 @@ describe("Form.TextInput component", () => {
       mask="hashtag"
       onChange={onChange}
     />
-  )
+  );
 
   it('renders correctly', () => {
     const component = renderer.create(element);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-  
+
 });

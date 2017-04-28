@@ -1,7 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Dialog } from 'components/backend';
 
-export default class DialogWrapper extends PureComponent {
+export default class DialogConfirm extends PureComponent {
 
   static displayName = "Dialog.Confirm";
 

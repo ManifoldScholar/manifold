@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import isString from 'lodash/isString';
 

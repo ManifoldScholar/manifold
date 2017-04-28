@@ -1,10 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Secondary from '../Secondary';
-import { shallow, mount, render } from 'enzyme';
 import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
 
-describe("Navigation.Secondary component", () => {
+describe("Backend.Navigation.Secondary component", () => {
 
   const links = [
     {
@@ -26,6 +25,6 @@ describe("Navigation.Secondary component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-  
+
 });
 

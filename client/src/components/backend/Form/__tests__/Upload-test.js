@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import { Form } from 'components/backend';
 import { shallow, mount, render } from 'enzyme';
 
-describe("Form.Upload component", () => {
+describe("Backend.Form.Upload component", () => {
 
   const setMock = jest.fn();
   const setOtherMock = jest.fn();

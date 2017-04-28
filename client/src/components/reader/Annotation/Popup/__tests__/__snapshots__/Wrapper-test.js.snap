@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Annotation.Popup.Wrapper Component renders correctly when not logged in 1`] = `
+<div
+  className="annotation-popup"
+  style={
+    Object {
+      "bottom": "auto",
+      "left": 0,
+      "top": 0,
+    }
+  }
+>
+  <section
+    className="popup-page bottom"
+    style={
+      Object {
+        "marginLeft": null,
+      }
+    }
+  >
+    <button
+      onClick={undefined}
+    >
+      <i
+        className="manicon manicon-person-pencil"
+      />
+      Login to Annotate
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      <i
+        className="manicon manicon-nodes"
+      />
+      Share
+    </button>
+    <div
+      className="tail tail-down"
+    />
+  </section>
+  <div
+    className="popup-page-secondary-group"
+  />
+</div>
+`;

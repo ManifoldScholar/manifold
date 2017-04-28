@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask.js';
 import fill from 'lodash/fill';
-import startsWith from 'lodash/startsWith';
-import replace from 'lodash/replace';
 import setter from './setter';
 
 class FormMaskedTextInput extends Component {

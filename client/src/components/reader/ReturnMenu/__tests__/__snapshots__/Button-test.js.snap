@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.ReturnMenu.Button component renders correctly 1`] = `
+<button
+  className="button-menu"
+  data-id="toggle-menu"
+  onClick={[Function]}
+>
+  Menu
+</button>
+`;

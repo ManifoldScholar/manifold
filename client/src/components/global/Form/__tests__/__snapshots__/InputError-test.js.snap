@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Form.InputError component renders correctly 1`] = `
+<span
+  className="errors"
+>
+  <span
+    className="error"
+  >
+    Name can't be blank.  
+    <br />
+  </span>
+</span>
+`;

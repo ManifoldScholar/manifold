@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.HeaderNotification component renders correctly 1`] = `
+<div
+  className="header-notification error"
+>
+  <div
+    className="container"
+  >
+    <header>
+      <h5
+        className="notification-heading"
+      >
+        Welcome to the Terrordome
+      </h5>
+    </header>
+    <p
+      className="notification-body"
+    >
+      Here's your ticket.  Every time I get wicked.
+    </p>
+    <button
+      className="notification-close"
+      data-id="close"
+      onClick={[Function]}
+    >
+      <i
+        className="manicon manicon-x"
+      />
+      <span
+        className="screen-reader-text"
+      >
+        Click to close this notification
+      </span>
+    </button>
+  </div>
+</div>
+`;
