@@ -55,7 +55,6 @@ RSpec.describe "Text Section Annotations API", type: :request do
     context "when the user is an admin" do
       describe "the response" do
         it "has a 204 NO CONTENT status code" do
-          puts path
           delete path, headers: admin_headers
           expect(response).to have_http_status(204)
         end
