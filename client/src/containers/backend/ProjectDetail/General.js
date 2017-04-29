@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
+import { Project as FrontEndProject } from 'components/frontend';
 import update from 'immutability-helper';
 import set from 'lodash/set';
 import { projectsAPI } from 'api';
@@ -23,6 +24,8 @@ export default class ProjectPanelGeneral extends PureComponent {
 
   render() {
     // See https://github.com/ReactTraining/react-router/issues/3753
+    const project = this.props.project;
+
     return (
       <section>
         <FormContainer.Form
@@ -39,6 +42,7 @@ export default class ProjectPanelGeneral extends PureComponent {
             avatarFileName="attributes[avatar]"
             currentAvatarName="attributes[avatarStyles][smallSquare]"
             removeAvatarName="attributes[removeAvatar]"
+            project={project}
           />
           <Form.TextInput
             validation={["required"]}

@@ -1,0 +1,247 @@
+.avatar-builder {
+
+		position: relative;
+		color: $neutral20;
+		text-transform: uppercase;
+		font-size: 16px;
+		font-weight: 600;
+		letter-spacing: 0.075em;
+	
+	.custom-upload-wrapper {
+		position: relative;
+
+		.form-dropzone.style-square {
+			border: 0;
+			width: auto;
+			min-height: 0;
+
+			.message {
+					position: absolute;
+					top: 13.6vw;
+					padding-top: 0;
+					margin-bottom: 0;
+					display: none;
+
+					@include respond($break65) {
+						display: block;
+					}
+
+					@include respond($break105) {
+						top: 170px;
+					}
+
+				p.secondary {
+					margin: -10px 0;
+					text-align: center;
+					font-size: 10px;
+
+					@include respond($break85) {
+						font-size: 12px;
+						margin: 0;
+					}
+
+					@include respond($break105) {
+						margin: 0 35px;
+					}
+				}
+			}
+
+			.contents-image-preview {
+				padding: 0;
+
+				@include respond($break85) {
+					padding: 1.6vw;
+				}
+
+				@include respond($break105) {
+					padding: 20px;
+				}
+
+
+				.preview {
+					width: 20.6vw;
+					height: 20.6vw;
+
+					@include respond($break40) {		
+						width: 9.6vw;
+						height: 9.6vw;
+					}
+
+					@include respond($break105) {
+						width: 120px;
+						height: 120px;
+					}
+				}
+			}
+		}
+	}
+
+
+	.color-picker-wrapper {
+		position: relative;
+
+		.default-description {
+			font-size: 10px;
+			font-weight: 600;
+			text-transform: uppercase;
+			line-height: 1.5em;
+			letter-spacing: 0.075em;
+			color: $neutral70;
+			position: absolute;
+			top: 19.2vw;
+			right: 0;
+			display: none;
+
+			@include respond($break65) {
+				display: block;
+			}
+
+			@include respond($break85) {
+				font-size: 12px;
+			}
+
+			@include respond($break95) {
+				margin: 0 2.84vw;
+			}
+
+			@include respond($break105) {
+				margin: 0 35px;
+				top: 240px;
+				right: 0;
+			}
+		}
+
+		&::after {
+			content: "Or";
+			width: 26px;
+			background-color: $neutral90;
+			position: absolute;
+			top: calc(50% - 3.92vw);
+			right: -13px;
+			z-index: 1;
+			line-height: 8.1vw;
+			font-size: 14px;
+
+			@include respond($break40) {
+				font-size: 16px;
+			}
+
+			@include respond($break105) {
+				top: calc(50% - 49px);
+				// top: 150px;
+				// right: 0;
+				line-height: 100px;
+			}
+		}
+	}
+	
+	label {
+		font-size: 14px;
+
+		@include respond($break40) {
+			font-size: 16px;
+		}
+	}
+
+	label.section-header {
+		color: $neutral75;
+		text-transform: uppercase;
+		font-size: 12px;
+		font-weight: 600;
+		letter-spacing: 0.075em;
+		margin-bottom: 5px;
+		display: block;
+	}
+
+	.grid {
+		padding: 20px 0;
+
+		.current-cover-wrapper {
+			width: 100%;
+			height: 44vw;
+
+			@include respond($break40) {
+				width: 24.9338vw;
+				height: 24.9338vw;
+			}
+
+			@include respond($break105) {
+				width: 311.672px;
+				height: 311.672px;
+			}
+		}
+
+		.color-picker-wrapper {
+			display: inline-block;
+			vertical-align: top;
+			width: 50%;
+			height: 44vw;
+
+			@include respond($break40) {
+				width: 24.9338vw;
+				height: 24.9338vw;
+			}
+
+			@include respond($break105) {
+				width: 311.672px;
+				height: 311.672px;
+			}
+		}
+
+		.custom-upload-wrapper {
+			display: inline-block;
+			width: 50%;
+			height: 44vw;
+
+			@include respond($break40) {
+				width: 24.9338vw;
+				height: 24.9338vw;
+			}
+
+			@include respond($break105) {
+				width: 311.672px;
+				height: 311.672px;
+			}
+		}
+		
+		@include respond($break40) {
+			display: flex;
+		}
+	}
+
+	div.border {
+		border: 1px solid $neutral75;
+		width: 24.9338vw;
+		height: 24.9338vw;
+		padding: 2.27vw 0;
+		text-align: center;
+
+		@include respond($break75) {
+			padding: 2.27vw 0;
+		}
+
+		@include respond($break105) {
+			width: 311.672px;
+			height: 311.672px;
+			padding: 28px 0;
+		}
+		
+		img {
+				margin-top: 3.2vw;
+				width: 18vw;
+
+			@include respond($break40) {
+				width: 9.12vw;
+			}
+
+			@include respond($break105) {
+				width: 114px;
+				margin-top: 40px;
+			}
+		}
+	}
+
+	div.active {
+		border-color: $accentPrimary;
+	}
+}

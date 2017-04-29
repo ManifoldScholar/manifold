@@ -18,15 +18,28 @@ class AvatarBuilderColorPicker extends Component {
     super(props);
   }
   render() {
+    const avatarColors = [
+      {value: 'primary', label: '', className: 'primary'},
+      {value: '', label: '', className: ''},
+      {value: 'secondary', label: '', className: 'secondary'},
+      {value: 'tertiary', label: '', className: 'tertiary'},
+      {value: 'quaternary', label: '', className: 'quaternary'},
+      {value: 'quinary', label: '', className: 'quinary'}
+    ];
     return (
-      <div>
-        <input
-          ref={(input) => { this.inputElement = input; }}
-          type="text"
-          placeholder={this.props.placeholder}
-          onChange={this.props.onChange}
-          value={this.props.value || ""}
+      <div className="color-picker">
+
+      <div className="colors">
+        <Form.Radios
+            options={avatarColors}
+            layout="color-picker-item"
+            toggleIcon="manicon-check"
         />
+      </div>
+
+        <div>
+          <p className="default-description">Select A Different Background Color</p>
+        </div>
       </div>
     );
   }

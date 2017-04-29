@@ -9,7 +9,8 @@ class FormRadios extends Component {
   static propTypes = {
     options: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.any.isRequired,
-      label: PropTypes.string.isRequired
+      label: PropTypes.string.isRequired,
+      className: PropTypes.string
     })).isRequired,
     label: PropTypes.string,
     name: PropTypes.string,
@@ -17,7 +18,8 @@ class FormRadios extends Component {
     value: PropTypes.any,
     errors: PropTypes.array,
     layout: PropTypes.string,
-    set: PropTypes.func
+    set: PropTypes.func,
+    toggleIcon: PropTypes.string
   };
 
   static defaultProps = {
@@ -30,12 +32,18 @@ class FormRadios extends Component {
         <label>{this.props.label}</label>
         {this.props.options.map((option, index) => {
           const checked = this.props.value === option.value;
+          const optionalClass = option.className ? option.className : '';
           const inputClassNames = classNames(
             'form-toggle',
             'radio',
             this.props.layout,
+            optionalClass,
             { checked }
           );
+          const iconClassNames = classNames(
+              'manicon',
+              this.props.toggleIcon
+            )
           return (
             <label htmlFor={option.value} className={inputClassNames} key={option.value} >
               <input
@@ -45,7 +53,11 @@ class FormRadios extends Component {
                 checked={checked}
                 onChange={() => { this.props.set(option.value); }}
               />
-              <span className="toggle-indicator"></span>
+              <span className="toggle-indicator">
+                {this.props.toggleIcon &&
+                  <i className={iconClassNames}></i>
+                }
+              </span>
               <span className="toggle-label">{option.label}</span>
             </label>
           );

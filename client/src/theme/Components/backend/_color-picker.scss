@@ -1,0 +1,123 @@
+
+.color-picker {
+
+	.colors {
+		margin: 0 5vw;
+
+		@include respond($break30) {
+			margin: 3vw 7vw;
+		}
+
+		@include respond($break40) {
+			margin: 3vw 1.5vw;
+		}
+
+		@include respond($break65) {
+			margin: 2vw 2vw;
+		}
+
+		@include respond($break75) {
+			margin: 4.4vw 2.4vw;	
+		}
+
+		@include respond($break85) {
+			margin: 4.4vw 3.4vw;	
+		}
+
+		@include respond($break95) {
+			margin: 4.4vw 4.4vw;
+		}
+
+		@include respond($break105) {
+			margin: 55px 55px;
+		}
+	}
+
+
+	.color-picker-item {
+		display: inline-block;
+		background: white;
+		width: 5.04vw;
+		height: 7.04vw;
+		margin: .48vw .48vw;
+
+		@include respond($break40) {
+			width: 3.04vw;
+			height: 3.04vw;
+			margin: .48vw .48vw;
+		}
+
+		@include respond($break105) {
+			width: 38px;
+			height: 38px;
+			margin: 6px 6px;
+		}
+
+		&.primary {
+			background: $sp50Primary;
+		}
+		&.secondary {
+			background: $sp50Secondary;
+		}
+		&.tertiary {
+			background: $sp50Tertiary;
+		}
+		&.quaternary {
+			background: $sp50Quaternary;
+		}
+		&.quinary {
+			background: $sp50Quinary;
+		}
+
+		&.form-toggle {
+			margin-top: 0;
+		}
+
+		span.toggle-indicator {
+			background: none;
+			// font-size: 3vw;
+
+			// @include respond($break100) {
+			// 	font-size: 16px;
+			// }
+			width: auto;
+			height: auto;
+			padding-top: 1.5vw;
+
+			@include respond($break40) {
+				padding-top: .2vw;
+			}
+
+			@include respond($break75) {
+				padding-top: .8vw;
+			}
+
+			@include respond($break105) {
+				padding-top: 10px;
+			}
+
+			i.manicon {
+
+				&::before {
+					color: $neutral90;
+					display: inline-block;
+					vertical-align: middle;
+					text-align: center;
+					font-size: 3vw;
+
+					@include respond($break40) {
+						font-size: 1.29vw;		
+					}
+
+					@include respond($break105) {
+						font-size: 16px;
+					}
+				}
+			}
+		}
+
+		.toggle-label {
+			display: none;
+		}
+	}
+}

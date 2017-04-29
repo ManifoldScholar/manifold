@@ -1,7 +1,7 @@
+import AvatarBuilder from './AvatarBuilder';
 import ColorPicker from './ColorPicker';
-import Wrapper from './Wrapper';
 
 export default {
+  AvatarBuilder
   ColorPicker,
-  Wrapper
 };
