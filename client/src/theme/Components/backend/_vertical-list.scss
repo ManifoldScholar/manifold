@@ -62,7 +62,7 @@
       &.active {
         background-color: $neutral95;
         border-color: $neutral95;
-        box-shadow: -21px 0 0 $neutral95;
+        box-shadow: -21px 0 0 $neutral95, 21px 0 0 $neutral95;
 
         a {
           color: $accentPrimary;
