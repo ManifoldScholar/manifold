@@ -63,7 +63,7 @@
         font-size: 28px;
       }
 
-      span {
+      .subtitle {
         @include templateCopy;
         margin-left: 0.433em;
         // Relatively sized to be just a tiny bit bigger than the base
