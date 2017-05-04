@@ -70,7 +70,7 @@
   // Scrollable top version of aside nav
   // Scopes and modifies panel nav
   .scrollable {
-    overflow: hidden;
+    overflow: scroll;
     background-color: $neutral80;
 
     @include respond($break40) {

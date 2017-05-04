@@ -21,6 +21,8 @@ html {
   // It seems that the width of the element is computed prior to kerning
   // https://code.google.com/p/chromium/issues/detail?id=189755
   // text-rendering: optimizeLegibility;
+  // Autohide scrollbars when not in use on Edge
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 body {
