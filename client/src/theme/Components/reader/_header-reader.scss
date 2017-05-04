@@ -194,6 +194,14 @@
       }
     }
 
+    .annotation-visibility-button {
+      display: none;
+
+      @include respond($break50) {
+        display: inline-block;
+      }
+    }
+
     .button-appearance {
       display: none;
       padding: 0 10px;
