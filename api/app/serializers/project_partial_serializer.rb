@@ -19,4 +19,8 @@ class ProjectPartialSerializer < ActiveModel::Serializer
   def updated
     object.updated?
   end
+
+  def resource_tags
+    object.resource_tags.sort
+  end
 end
