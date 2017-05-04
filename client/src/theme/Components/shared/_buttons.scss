@@ -151,10 +151,27 @@
   text-align: left;
   text-decoration: none;
   border: 1px solid $accentPrimary;
+  transition: color $duration $timing,
+  background-color $duration $timing;
 
   &:disabled {
     color: $neutral80;
     border: 1px solid $neutral80;
+  }
+
+  &:hover {
+    color: $neutral90;
+    background-color: $accentPrimary;
+  }
+
+  &.dull {
+    color: $neutral50;
+    border-color: $neutral50;
+
+    &:hover {
+      color: $neutralWhite;
+      background-color: $neutral70;
+    }
   }
 
   .manicon-plus {

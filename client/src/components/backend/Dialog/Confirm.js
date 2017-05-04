@@ -60,7 +60,7 @@ export default class DialogWrapper extends PureComponent {
             Yes
           </button>
           <button
-            className="button-icon-secondary"
+            className="button-icon-secondary dull"
             onClick={this.handleRejectClick}
           >
             <i className="manicon manicon-x small"></i>
