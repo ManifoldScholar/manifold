@@ -51,8 +51,9 @@ module Ingestor
           end
 
           def create_temp_html
+            encoded_html = fetch_html.encode("utf-8", invalid: :replace, undef: :replace)
             File.open(@html_path, "w+") do |f|
-              f.write(fetch_html)
+              f.write(encoded_html)
             end
           end
           memoize :create_temp_html
