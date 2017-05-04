@@ -9,4 +9,8 @@ class CollectionSerializer < ActiveModel::Serializer
   has_many :resources, serializer: ResourcePartialSerializer
   belongs_to :project
 
+  def resource_tags
+    object.resource_tags.sort
+  end
+
 end
