@@ -125,7 +125,9 @@
             background-color $duration $timing;
         }
 
-        svg .highlight {
+        svg {
+          width: 50px;
+          max-height: 50px;
           transition: fill $duration $timing;
         }
       }
@@ -146,14 +148,15 @@
       }
 
       img, svg {
-        width: 100%;
+        width: 50px;
         height: auto;
       }
     }
 
     .meta {
-      display: table-cell;
-      width: 100%;
+      display: flex;
+      flex-flow: column;
+      flex-grow: 1;
       padding-right: 20px;
       padding-left: 15px;
       vertical-align: top;
