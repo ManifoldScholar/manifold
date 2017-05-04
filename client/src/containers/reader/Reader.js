@@ -206,7 +206,7 @@ class ReaderContainer extends Component {
               text={this.props.text}
               section={this.props.section}
               authentication={this.props.authentication}
-              visibility={this.props.visibility }
+              visibility={this.props.visibility}
               appearance={this.props.appearance}
               notifications={this.props.notifications}
               commonActions={this.commonActions}

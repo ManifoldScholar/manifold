@@ -13,10 +13,14 @@
   }
 
   &.primary {
-    color: $sp20Primary;
+    .manicon {
+      color: $sp20Primary;
+    }
   }
 
   &.secondary {
-    color: $sp20Secondary;
+    .manicon {
+      color: $sp20Secondary;
+    }
   }
 }

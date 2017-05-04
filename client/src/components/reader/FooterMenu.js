@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {
     AppearanceMenuButton,
     AppearanceMenuBody,
+    VisibilityButton
 } from 'components/reader';
 
 export default class Footer extends Component {
@@ -13,10 +14,15 @@ export default class Footer extends Component {
   constructor() {
     super();
     this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(this);
+    this.handleVisibilityButtonClick = this.handleVisibilityButtonClick.bind(this);
   }
 
   handleAppearanceMenuButtonClick() {
     this.props.commonActions.panelToggle('appearance');
+  }
+
+  handleVisibilityButtonClick() {
+    this.props.commonActions.visibilityToggle('annotation');
   }
 
   render() {
@@ -34,17 +40,17 @@ export default class Footer extends Component {
                     <span className="Click to see text bookmarks"></span>
                   </button>
                 </li>
-                <li>
-                  <button className="button-visibility">
-                    <i className="manicon manicon-eye-outline"></i>
-                    <span className="Click to open reader layer settings"></span>
-                  </button>
-                </li>
                */}
               <li>
                 <AppearanceMenuButton
                   toggleAppearanceMenu={this.handleAppearanceMenuButtonClick}
                   active={this.props.visibility.uiPanels.appearance}
+                />
+              </li>
+              <li>
+                <VisibilityButton
+                  toggle={this.handleVisibilityButtonClick}
+                  state={this.props.visibility.annotation}
                 />
               </li>
             </ul>
