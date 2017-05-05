@@ -42,12 +42,14 @@ export default class LayoutFooter extends Component {
   buildContentPages() {
     let pages = [];
     if (this.props.pages) {
-      pages = this.props.pages.map((page) => {
-        return (
-          <Link to={`/browse/page/${page.attributes.slug}`}>
-            {page.attributes.navTitle}
-          </Link>
-        );
+      this.props.pages.forEach((page) => {
+        if (page.showInFooter) {
+          pages.push((
+            <Link to={`/browse/page/${page.attributes.slug}`}>
+              {page.attributes.navTitle ? page.attributes.navTitle : page.attributes.title}
+            </Link>
+          ));
+        }
       });
     }
     return pages;
