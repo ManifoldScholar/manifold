@@ -2,5 +2,5 @@
 class PagePartialSerializer < ActiveModel::Serializer
   meta(partial: true)
 
-  attributes :id, :slug, :title, :nav_title
+  attributes :id, :slug, :title, :nav_title, :show_in_footer
 end
