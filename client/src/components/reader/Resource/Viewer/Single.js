@@ -52,7 +52,7 @@ class ResourceViewerSingle extends PureComponent {
 
   componentDidMount() {
     if (this.props.fadeIn) {
-      this.handleFade(event);
+      this.handleFade();
       window.addEventListener('scroll', this.throttledFade);
     }
   }
@@ -63,7 +63,7 @@ class ResourceViewerSingle extends PureComponent {
     }
   }
 
-  handleFade(event) {
+  handleFade(event = null) {
     const rect = this.single.getBoundingClientRect();
     this.setState({
       visible: rect.top > 120 && (rect.top + rect.height / 2) < window.innerHeight
@@ -83,7 +83,7 @@ class ResourceViewerSingle extends PureComponent {
         confirmation: { resolve, reject, heading, message }
       });
     }).then(() => {
-      this.doDestroy(event);
+      this.doDestroy();
       this.closeDialog();
     }, () => { this.closeDialog(); });
   }
