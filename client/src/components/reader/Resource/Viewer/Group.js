@@ -51,7 +51,7 @@ export class ResourceViewerGroup extends PureComponent {
 
   componentDidMount() {
     if (this.props.fadeIn) {
-      this.handleFade(event);
+      this.handleFade();
       window.addEventListener('scroll', this.throttledFade);
     }
   }
@@ -62,7 +62,7 @@ export class ResourceViewerGroup extends PureComponent {
     }
   }
 
-  handleFade(event) {
+  handleFade(event = null) {
     const rect = this.group.getBoundingClientRect();
     this.setState({
       visible: rect.top > 120 && (rect.top + rect.height / 2) < window.innerHeight

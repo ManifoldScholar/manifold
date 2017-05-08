@@ -80,7 +80,7 @@ export default class HeaderNotifications extends Component {
 
   // Debug wrapper method to pass random notification in.
   // NB: Do not use to produce actual notifications.
-  handleNotifications() {
+  handleNotifications(event) {
     const headings = ['Error', 'Warning', 'Hey, Listen!'];
     const copy = ['Dummy error message copy', ''];
     if (event.ctrlKey && event.keyCode === 78) {

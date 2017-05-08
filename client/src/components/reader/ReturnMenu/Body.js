@@ -52,9 +52,9 @@ export default class ReturnMenuBody extends PureComponent {
                 Sign-in
               </button>
               {this.props.moreLink ?
-                <Link to={this.props.moreLink} target="_blank" className="note">
+                <a href={this.props.moreLink} target="_blank" className="note">
                   Learn More About <span>Manifold</span>
-                </Link> : null
+                </a> : null
               }
             </li>
           </HigherOrder.RequireRole>
