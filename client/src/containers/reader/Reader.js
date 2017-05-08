@@ -7,8 +7,6 @@ import { select, grab, isEntityLoaded } from 'utils/entityUtils';
 import { commonActions } from 'actions/helpers';
 import { resourcesAPI, textsAPI, sectionsAPI, annotationsAPI, requests } from 'api';
 import values from 'lodash/values';
-import uniq from 'lodash/uniq';
-import difference from 'lodash/difference';
 import lh from 'helpers/linkHandler';
 import { renderRoutes } from 'helpers/routing';
 import { Redirect } from 'react-router-dom';
@@ -78,15 +76,13 @@ class ReaderContainer extends Component {
   static propTypes = {
     children: PropTypes.object,
     match: PropTypes.object,
-    annotations: PropTypes.array,
-    resources: PropTypes.array,
     location: PropTypes.object,
     text: PropTypes.object,
     section: PropTypes.object,
     visibility: PropTypes.object,
     appearance: PropTypes.object,
     authentication: PropTypes.object,
-    dispatch: PropTypes.func,
+    dispatch: PropTypes.func.isRequired,
     history: PropTypes.object,
     loading: PropTypes.bool,
     notifications: PropTypes.object,
@@ -103,57 +99,13 @@ class ReaderContainer extends Component {
     this.commonActions = commonActions(this.props.dispatch);
   }
 
-  componentDidMount() {
-    if (this.props.match.params.sectionId) {
-      this.fetchAnnotations(this.props);
-      this.fetchResources(this.props);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // Fetch resources and annotations on section change.
-    if (nextProps.match.params.sectionId !== this.props.match.params.sectionId) {
-      this.fetchAnnotations(nextProps);
-      this.fetchResources(nextProps);
-    }
-    // Check if we need to fetch more resources when annotations change
-    if (nextProps.annotations !== this.props.annotations) {
-      if (this.hasMissingResources(nextProps.annotations, nextProps.resources)) {
-        this.fetchResources(nextProps);
-      }
-    }
-  }
-
   componentWillUnmount() {
-    this.props.dispatch(flush(requests.rSection));
     this.props.dispatch(flush(requests.rText));
-  }
-
-  fetchAnnotations(props) {
-    const annotationsCall = annotationsAPI.forSection(props.match.params.sectionId);
-    props.dispatch(request(annotationsCall, requests.rAnnotations));
-  }
-
-  fetchResources(props) {
-    const resourcesCall = resourcesAPI.forSection(props.match.params.sectionId);
-    props.dispatch(request(resourcesCall, requests.rSectionResources));
   }
 
   shouldRedirect(props) {
     const matches = matchRoutes(props.route.routes, this.props.location.pathname);
     return matches.length === 0;
-  }
-
-  hasMissingResources(annotations, resourcesIn) {
-    if (!annotations) return;
-    const resources = resourcesIn ? resourcesIn : [];
-    const needed = uniq(annotations
-      .map((a) => a.attributes.resourceId)
-      .filter((id) => id !== null));
-    const has = resources.map((r) => r.id);
-    const diff = difference(needed, has);
-    if (diff.length > 0) return true;
-    return false;
   }
 
   makeReaderActions = (dispatch) => {
