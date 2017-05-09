@@ -46,7 +46,6 @@ class NewProjectWrapperContainer extends PureComponent {
             <div className="panel">
               <section>
                 <FormContainer.Form
-                  debug
                   model={this.props.project}
                   name="backend-create-project"
                   update={projectsAPI.update}
