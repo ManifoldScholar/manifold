@@ -39,7 +39,7 @@ export default class TextDetailMetadata extends PureComponent {
             placeholder="Enter Publisher Name"
           />
           <Form.TextInput
-            label="Publisher"
+            label="Place of Publication"
             name="attributes[metadata][placeOfPublication]"
             placeholder="Enter Place of Publication"
           />

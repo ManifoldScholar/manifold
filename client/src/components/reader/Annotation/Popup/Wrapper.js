@@ -20,11 +20,13 @@ export default class AnnotationPopup extends Component {
     shareUrl: PropTypes.string,
     highlight: PropTypes.func,
     annotate: PropTypes.func,
+    cite: PropTypes.func,
     attachResource: PropTypes.func,
     bookmark: PropTypes.func,
     selectionClickEvent: PropTypes.object,
     annotatableDomElement: PropTypes.object,
-    showLogin: PropTypes.func
+    showLogin: PropTypes.func,
+    text: PropTypes.object
   };
 
   constructor() {
@@ -184,10 +186,12 @@ export default class AnnotationPopup extends Component {
 
     return (
       <Share
-        text={this.props.selection.text}
+        selectionText={this.props.selection.text}
         shareUrl={this.props.shareUrl}
         direction={this.state.direction}
         back={this.resetSecondary}
+        cite={this.props.cite}
+        text={this.props.text}
       />
     );
   }

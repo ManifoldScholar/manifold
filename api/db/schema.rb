@@ -315,6 +315,7 @@ ActiveRecord::Schema.define(version: 20170503180816) do
     t.text     "embed_code"
     t.string   "sub_kind"
     t.string   "slug"
+    t.integer  "comments_count",                  default: 0
     t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
 
