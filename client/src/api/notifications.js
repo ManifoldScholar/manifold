@@ -64,6 +64,22 @@ export default {
       expiration: 5000
     };
   },
+  'update-contributors': (payload) => {
+    return {
+      level: 0,
+      heading: "Project contributors have been updated",
+      expiration: 5000
+    };
+  },
+  'create-contributors': (payload) => {
+    return {
+      level: 0,
+      heading: "New maker record created",
+      body: `${possessivize(payload.data.attributes.fullName)} can now be added to 
+             projects, texts, and users in the backend.`,
+      expiration: 5000
+    };
+  },
   [r.beTextCategoryDestroy]: () => {
     return {
       level: 0,

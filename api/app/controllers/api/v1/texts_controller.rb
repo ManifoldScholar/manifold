@@ -33,8 +33,9 @@ module Api
 
       def update
         @text = load_and_authorize_text
+        includes = INCLUDES + %w(creators contributors)
         ::Updaters::Text.new(text_params).update(@text)
-        render_single_resource(@text, include: INCLUDES)
+        render_single_resource(@text, include: includes)
       end
 
       def destroy
