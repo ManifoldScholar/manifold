@@ -1,6 +1,5 @@
 # rubocop:disable Metrics/BlockLength
 namespace :ingest do
-
   desc "Ingests a single text into Manifold"
   task :new, [:path, :log_level] => :environment do |_t, args|
     ingest(args.path, args.log_level)
