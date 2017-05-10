@@ -40,10 +40,16 @@ class FormCollaborators extends Component {
   }
 
   updateMakers(makers, changeType, key) {
+    const adjustedMakers = makers.map((e) => {
+      return {
+        id: e.id,
+        type: e.type
+      };
+    });
     const entity = {
       type: this.props.entity.type,
       id: this.props.entity.id,
-      relationships: { [key]: { data: makers } }
+      relationships: { [key]: { data: adjustedMakers } }
     };
     const call = this.props.api.update(entity.id, entity);
     const entityRequest = request(call, `update-${key}`);
@@ -63,17 +69,6 @@ class FormCollaborators extends Component {
     const makerRequest = request(call, `create-${key}`);
     const { promise } = this.props.dispatch(makerRequest);
     return promise;
-  }
-
-  mapInputToEntity(value) {
-    const parts = value.split(' ');
-    return {
-      type: "makers",
-      attributes: {
-        firstName: parts[0],
-        lastName: parts[1]
-      }
-    };
   }
 
   render() {
@@ -107,6 +102,7 @@ class FormCollaborators extends Component {
               }}
               optionsFetch={makersAPI.index}
               entities={entity.relationships.contributors}
+              entityBuilder={this.buildEntity}
               entityLabelAttribute="fullName"
               entityAvatarAttribute="avatarStyles"
               errors={get(this.props, 'createContributor.errors')}
