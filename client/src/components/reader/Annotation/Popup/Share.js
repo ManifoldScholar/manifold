@@ -7,12 +7,14 @@ export default class AnnotationPopupShare extends PureComponent {
   static displayName = "Annotation.Popup.Share";
 
   static propTypes = {
-    text: PropTypes.string,
+    selectionText: PropTypes.string,
     shareUrl: PropTypes.string,
     pageClass: PropTypes.string,
     tailClass: PropTypes.string,
     back: PropTypes.func,
-    direction: PropTypes.string
+    direction: PropTypes.string,
+    cite: PropTypes.func,
+    text: PropTypes.object
   };
 
   constructor(props) {
@@ -53,6 +55,19 @@ export default class AnnotationPopupShare extends PureComponent {
     }
   }
 
+  renderCiteButton() {
+    if (!this.props.text) return null;
+    const attr = this.props.text.attributes;
+    const metadata = attr.metadata;
+    if (!metadata.publisher || !metadata.placeOfPublication || !attr.publicationDate) return null;
+    return (
+      <button onClick={this.props.cite}>
+        <i className="manicon manicon-quotes-left"></i>
+        Cite
+      </button>
+    );
+  }
+
   url() {
     if (!this.state.inBrowser) return null;
     const url = location.hostname + this.props.shareUrl;
@@ -75,14 +90,9 @@ export default class AnnotationPopupShare extends PureComponent {
 
     return (
       <section className={pageClass}>
-        {/*
-         <button>
-         <i className="manicon manicon-quotes-left"></i>
-         Cite
-         </button>
-        */}
+        {this.renderCiteButton()}
         <SocialButtons
-          text={this.props.text}
+          text={this.props.selectionText}
           url={this.url()}
           handleTailHighlight={
             () => {

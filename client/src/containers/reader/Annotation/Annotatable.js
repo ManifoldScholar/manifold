@@ -29,13 +29,14 @@ class Annotatable extends Component {
     selectionLockedAnnotation: React.PropTypes.object,
     selectionLocked: React.PropTypes.bool,
     resources: React.PropTypes.array,
-    annotations: React.PropTypes.array
-  }
+    annotations: React.PropTypes.array,
+    text: PropTypes.object
+  };
 
   static defaultProps = {
     resource: [],
     annotations: []
-  }
+  };
 
   constructor() {
     super();
@@ -46,6 +47,7 @@ class Annotatable extends Component {
     this.highlightSelection = this.highlightSelection.bind(this);
     this.startAnnotateSelection = this.startAnnotateSelection.bind(this);
     this.startResourceSelection = this.startResourceSelection.bind(this);
+    this.startShare = this.startShare.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
     this.attachResourceToSelection = this.attachResourceToSelection.bind(this);
     this.closestTextNode = this.closestTextNode.bind(this);
@@ -302,6 +304,11 @@ class Annotatable extends Component {
     this.lockSelection();
   }
 
+  startShare(event, type) {
+    this.setState({ drawerContents: "share", shareType: type });
+    this.lockSelection();
+  }
+
   closeDrawer(event) {
     this.setState({ drawerContents: null });
     // Keyboard event doesn't hide the popup by default,
@@ -311,7 +318,6 @@ class Annotatable extends Component {
     }
     this.unlockSelection();
   }
-
 
   handlePossibleAnnotationClick(event) {
     if (!event || !event.target) return;
@@ -344,6 +350,15 @@ class Annotatable extends Component {
           title: "Annotations"
         };
         break;
+      case "share":
+        options = {
+          open: true,
+          lockScroll: "always",
+          style: "frontend",
+          icon: "nodes",
+          title: "Share"
+        };
+        break;
       default:
         options = {};
         break;
@@ -363,6 +378,9 @@ class Annotatable extends Component {
         break;
       case "annotations":
         return this.renderDrawerAnnotations(); // eslint-disable no-unreachable
+        break;
+      case "share":
+        return this.renderDrawerShare(); // eslint-disable no-unreachable
         break;
       default:
         return null;
@@ -409,8 +427,27 @@ class Annotatable extends Component {
     );
   }
 
-  render() {
+  renderDrawerShare() {
+    const { subject, startNode, startChar, endNode, endChar } =
+      this.state.selectionLockedAnnotation;
+    const type = this.state.shareType || null;
+    return (
+      <Annotation.Share.Wrapper
+        closeDrawer={this.closeDrawer}
+        subject={subject}
+        startNode={startNode}
+        startChar={startChar}
+        endNode={endNode}
+        endChar={endChar}
+        truncate={600}
+        shareType={type}
+        text={this.props.text}
+        annotating
+      />
+    );
+  }
 
+  render() {
     const showLogin = bindActionCreators(
       () => uiVisibilityActions.visibilityToggle('signInUpOverlay'),
       this.props.dispatch
@@ -439,11 +476,13 @@ class Annotatable extends Component {
           highlight={this.highlightSelection}
           annotate={this.startAnnotateSelection}
           attachResource={this.startResourceSelection}
+          cite={(event) => this.startShare(event, "citation")}
           selection={this.state.selection}
           selectionClickEvent={this.state.selectionClickEvent}
           selectionLocked={this.state.selectionLocked}
           annotatableDomElement={this.annotatable}
           showLogin={showLogin}
+          text={this.props.text}
         />
 
         {/* Render the margin resources */}

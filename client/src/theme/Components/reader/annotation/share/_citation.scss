@@ -1,0 +1,49 @@
+.citation {
+  padding-top: 28px;
+
+  textarea {
+    font-size: 16px;
+  }
+
+  .styles {
+    display: block;
+    margin-top: 5px;
+    color: $neutral50;
+
+    > label {
+      @include utilityPrimary;
+      font-size: 14px;
+    }
+
+    > ul {
+      @include listHorizontal;
+      padding-top: 13px;
+      padding-bottom: 35px;
+
+      li {
+        + li {
+          margin-left: 1.571em;
+        }
+      }
+
+      a, button {
+        @include buttonUnstyled;
+        @include utilityPrimary;
+        padding-bottom: 4px;
+        font-size: 14px;
+        border-bottom: 2px solid transparent;
+        transition: color $duration $timing;
+
+        &:hover, &.active {
+          color: $neutralBlack;
+          border-bottom: 2px solid $neutralBlack;
+        }
+      }
+    }
+  }
+
+  .notice {
+    @include formInputMessage;
+    color: $sp40Tertiary;
+  }
+}
