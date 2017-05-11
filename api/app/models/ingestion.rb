@@ -63,8 +63,8 @@ class Ingestion < ApplicationRecord
       transitions from: :finished, to: :sleeping
     end
   end
-  # rubocop:enable Metrics/BlockLength
 
+  # rubocop:enable Metrics/BlockLength
   %w(DEBUG INFO WARN ERROR FATAL UNKNOWN).each do |severity|
     class_eval <<-EOT, __FILE__, __LINE__ + 1
       def #{severity.downcase}(message = nil, progname = nil, &block)
@@ -95,6 +95,7 @@ class Ingestion < ApplicationRecord
   def add(severity, message = nil, _progname = nil)
     line = [severity, message]
     log_buffer << line
+    return if severity == "DEBUG"
     IngestionChannel.broadcast_to self, type: "log", payload: line
   end
 

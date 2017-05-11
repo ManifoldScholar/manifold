@@ -133,6 +133,26 @@
         }
       }
 
+      .manicon-x-bold {
+        font-size: 15px;
+        color: $sp40Tertiary;
+
+        @include respond($break30) {
+          margin-top: -0.20em;
+          font-size: 0.8em;
+        }
+      }
+
+      .manicon-magnify {
+        font-size: 15px;
+
+        @include respond($break30) {
+          margin-top: -0.14em;
+          font-size: 0.95em;
+        }
+      }
+
+
       .manicon-trashcan {
         font-size: 19px;
         color: $sp40Tertiary;
@@ -142,6 +162,7 @@
           font-size: 1.063em;
         }
       }
+
     }
   }
 }

@@ -103,6 +103,26 @@ const defaults = {
     relationships: {
       collectionResources: []
     }
+  },
+
+  text: {
+    type: "texts",
+    attributes: {
+    },
+    relationships: {
+      project: null
+    }
+  },
+
+  ingestion: {
+    type: "ingestions",
+    attributes: {
+      state: "analyzed",
+      sourceFileName: "some-file.epub",
+      externalSourceUrl: null,
+      strategy: "Ingestor::Strategy::EPUB::Strategy",
+      availableEvents: ["reset", "process"]
+    }
   }
 
 };
@@ -125,6 +145,14 @@ const resource = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("resource", id, attributes, relationships);
 };
 
+const text = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("text", id, attributes, relationships);
+};
+
+const ingestion = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("ingestion", id, attributes, relationships);
+};
+
 const collection = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("collection", id, attributes, relationships);
 };
@@ -140,6 +168,8 @@ const settings = (id = 0, attributes = {}, relationships = {}) => {
 export default {
   project,
   resource,
+  text,
+  ingestion,
   collection,
   collectionResource,
   settings

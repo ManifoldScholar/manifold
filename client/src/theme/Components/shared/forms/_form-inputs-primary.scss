@@ -103,6 +103,18 @@
   }
 }
 
+.form-error-grouped {
+  margin-bottom: 15px;
+
+  .dialog-box & {
+    max-width: 80%;
+  }
+
+  .error {
+    margin-top: 0;
+  }
+}
+
 .form-select {
   position: relative;
   display: inline-block;

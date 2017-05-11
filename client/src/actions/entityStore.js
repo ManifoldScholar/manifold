@@ -20,9 +20,3 @@ export const request =
   }, (apiConfig, meta = null) => {
     return meta || uuid.v1();
   });
-//
-// export const notifications = {
-//   [requests.beUserUpdate]: {
-//
-//   }
-// }

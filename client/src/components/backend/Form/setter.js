@@ -14,8 +14,8 @@ export default function setter(WrappedComponent) {
 
   class Setter extends React.PureComponent {
 
-    static displayName: displayName;
-    static WrappedComponent: WrappedComponent;
+    static displayName = displayName;
+    static WrappedComponent = WrappedComponent;
 
     static propTypes = {
       sessionKey: PropTypes.string,
@@ -26,13 +26,13 @@ export default function setter(WrappedComponent) {
       actions: PropTypes.shape({
         set: PropTypes.func
       }).isRequired
-    }
+    };
 
     static defaultProps = {
       actions: {
         set: () => { console.log(WrappedComponent, "No actions passed to setter."); }
       }
-    }
+    };
 
     constructor(props) {
       super(props);

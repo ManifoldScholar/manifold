@@ -1,9 +1,5 @@
-import New from './New';
-import Ingest from './Ingest';
-import Upload from './Upload';
+import Ingestion from './Ingestion';
 
 export default {
-  New,
-  Upload,
-  Ingest
+  Ingestion
 };

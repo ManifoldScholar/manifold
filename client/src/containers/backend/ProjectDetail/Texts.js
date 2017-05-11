@@ -395,7 +395,7 @@ class ProjectDetailTexts extends PureComponent {
 
         <div className="buttons-icon-horizontal">
           <Link
-            to={lh.link("backendProjectTextsNew", project.id)}
+            to={lh.link("backendProjectTextsIngestionsNew", project.id)}
             className="button-icon-secondary"
           >
             <i className="manicon manicon-plus"></i>Add a new text

@@ -8,6 +8,7 @@ import TextDetail from './TextDetail';
 import People from './People';
 import Settings from './Settings';
 import Form from './Form';
+import Ingestion from './Ingestion';
 import Developer from './Developer';
 
 export {
@@ -21,5 +22,6 @@ export {
   People,
   Settings,
   Form,
+  Ingestion,
   Developer
 };

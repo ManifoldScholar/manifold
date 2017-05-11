@@ -1,0 +1,295 @@
+exports[`Backend Ingest Container when the ingestion state is analyzed renders correctly 1`] = `
+<div>
+  <div
+    className="ingestion-output">
+    <header
+      className="entity-header-primary">
+      <figure>
+        <i
+          className="manicon manicon-text-placeholder" />
+      </figure>
+      <div
+        className="title">
+        <h1>
+          some-file.epub
+        </h1>
+        <div
+          className="utility">
+          <button
+            className="button-bare-primary"
+            disabled={false}
+            onClick={[Function]}>
+            Reset
+            <i
+              className="manicon manicon-x-bold" />
+          </button>
+        </div>
+      </div>
+    </header>
+    <div
+      className="properties">
+      <div
+        className="item">
+        <p
+          className="label">
+          Current state
+        </p>
+        <p
+          className="value">
+          Analyzed
+        </p>
+      </div>
+      <div
+        className="item">
+        <p
+          className="label">
+          Strategy
+        </p>
+        <p
+          className="value">
+          Ingestor::Strategy::EPUB::Strategy
+        </p>
+      </div>
+      <div
+        className="item">
+        <p
+          className="label">
+          Text
+        </p>
+        <p
+          className="value">
+          This ingestion will create a new text
+        </p>
+      </div>
+    </div>
+    <div
+      className="log">
+      <p
+        className="label">
+        Log
+      </p>
+      <div
+        className="value">
+        
+      </div>
+    </div>
+  </div>
+  <div
+    className="buttons-icon-horizontal"
+    style={
+      Object {
+        "marginTop": 30,
+      }
+    }>
+    <button
+      className="button-icon-secondary dull"
+      onClick={[Function]}>
+      <i
+        className="manicon manicon-x small" />
+      Back
+    </button>
+    <button
+      className="button-icon-secondary"
+      onClick={[Function]}>
+      <i
+        className="manicon manicon-arrow-right small" />
+      Ingest
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Backend Ingest Container when the ingestion state is finished renders correctly 1`] = `
+<div>
+  <div
+    className="ingestion-output">
+    <header
+      className="entity-header-primary">
+      <figure>
+        <i
+          className="manicon manicon-text-placeholder" />
+      </figure>
+      <div
+        className="title">
+        <h1>
+          some-file.epub
+        </h1>
+        <div
+          className="utility">
+          <button
+            className="button-bare-primary"
+            disabled={false}
+            onClick={[Function]}>
+            Reset
+            <i
+              className="manicon manicon-x-bold" />
+          </button>
+        </div>
+      </div>
+    </header>
+    <div
+      className="properties">
+      <div
+        className="item">
+        <p
+          className="label">
+          Current state
+        </p>
+        <p
+          className="value">
+          Finish
+        </p>
+      </div>
+      <div
+        className="item">
+        <p
+          className="label">
+          Strategy
+        </p>
+        <p
+          className="value">
+          Ingestor::Strategy::EPUB::Strategy
+        </p>
+      </div>
+      <div
+        className="item">
+        <p
+          className="label">
+          Text
+        </p>
+        <p
+          className="value">
+          This ingestion will create a new text
+        </p>
+      </div>
+    </div>
+    <div
+      className="log">
+      <p
+        className="label">
+        Log
+      </p>
+      <div
+        className="value">
+        
+      </div>
+    </div>
+  </div>
+  <div
+    className="buttons-icon-horizontal"
+    style={
+      Object {
+        "marginTop": 30,
+      }
+    }>
+    <button
+      className="button-icon-secondary dull"
+      onClick={[Function]}>
+      <i
+        className="manicon manicon-x small" />
+      Back
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Backend Ingest Container when the ingestion state is sleeping renders correctly 1`] = `
+<div>
+  <div
+    className="ingestion-output">
+    <header
+      className="entity-header-primary">
+      <figure>
+        <i
+          className="manicon manicon-text-placeholder" />
+      </figure>
+      <div
+        className="title">
+        <h1>
+          some-file.epub
+        </h1>
+        <div
+          className="utility">
+          <button
+            className="button-bare-primary loading"
+            disabled={true}
+            onClick={[Function]}>
+            Reset
+            <i
+              className="manicon manicon-x-bold" />
+          </button>
+        </div>
+      </div>
+    </header>
+    <div
+      className="properties">
+      <div
+        className="item">
+        <p
+          className="label">
+          Current state
+        </p>
+        <p
+          className="value">
+          Sleeping
+        </p>
+      </div>
+      <div
+        className="item">
+        <p
+          className="label">
+          Strategy
+        </p>
+        <p
+          className="value">
+          Ingestor::Strategy::EPUB::Strategy
+        </p>
+      </div>
+      <div
+        className="item">
+        <p
+          className="label">
+          Text
+        </p>
+        <p
+          className="value">
+          This ingestion will create a new text
+        </p>
+      </div>
+    </div>
+    <div
+      className="log">
+      <p
+        className="label">
+        Log
+      </p>
+      <div
+        className="value">
+        
+      </div>
+    </div>
+  </div>
+  <div
+    className="buttons-icon-horizontal"
+    style={
+      Object {
+        "marginTop": 30,
+      }
+    }>
+    <button
+      className="button-icon-secondary dull"
+      onClick={[Function]}>
+      <i
+        className="manicon manicon-x small" />
+      Back
+    </button>
+    <button
+      className="button-icon-secondary"
+      onClick={[Function]}>
+      <i
+        className="manicon manicon-arrow-right small" />
+      Analyze
+    </button>
+  </div>
+</div>
+`;

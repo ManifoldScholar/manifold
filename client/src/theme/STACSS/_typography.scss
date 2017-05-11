@@ -158,6 +158,12 @@
   letter-spacing: 0.075em;
 }
 
+@mixin formInstructions {
+  @include templateCopy;
+  font-size: $type50;
+  font-style: italic;
+}
+
 // Overlay
 // --------------------------------------------------------
 @mixin overlayCopy {

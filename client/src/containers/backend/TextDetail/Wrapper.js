@@ -69,6 +69,11 @@ class TextDetailWrapperContainer extends PureComponent {
         path: lh.link("backendTextMetadata", text.id),
         label: "Metadata",
         key: "metadata"
+      },
+      {
+        path: lh.link("backendTextIngestionsNew", text.id),
+        label: "Reingest",
+        key: "reingest"
       }
     ];
   }
