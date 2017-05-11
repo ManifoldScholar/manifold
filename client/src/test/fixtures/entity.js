@@ -13,6 +13,26 @@ const defaults = {
       theme: {
         typekitId: "typekitId"
       },
+      features: {},
+      integrations: {
+        gaProfileId: null,
+        gaTrackingId: null,
+        twitterAppId: null,
+        facebookAppId: null,
+        googleClientId: null,
+        googleProjectId: null,
+        googleClientEmail: null,
+        twitterAccessToken: null,
+        googlePrivateKeyId: null,
+        googleOauthClientId: null
+      },
+      secrets: {
+        googlePrivateKey: null,
+        twitterAppSecret: null,
+        facebookAppSecret: null,
+        googleOauthClientSecret: null,
+        twitterAccessTokenSecret: null
+      },
       oauth: {
         facebook: {
           enabled: false
@@ -23,26 +43,6 @@ const defaults = {
         twitter: {
           enabled: true
         }
-      },
-      features: {},
-      integrations: {
-        gaProfileId: "1234",
-        gaTrackingId: "1234",
-        twitterAppId: "1234",
-        facebookAppId: "1234",
-        googleClientId: "1234",
-        googleProjectId: "1234",
-        googleClientEmail: "1234",
-        twitterAccessToken: "1234",
-        googlePrivateKeyId: "1234",
-        googleOauthClientId: "1234"
-      },
-      secrets: {
-        googlePrivateKey: null,
-        twitterAppSecret: null,
-        facebookAppSecret: null,
-        googleOauthClientSecret: null,
-        twitterAccessTokenSecret: null
       },
       pressLogoStyles: {
         small: null,
