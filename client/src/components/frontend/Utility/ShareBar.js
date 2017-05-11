@@ -36,7 +36,7 @@ class ShareBar extends Component {
 
   facebookAppId() {
     const { settings } = this.props;
-    return settings.attributes.general.facebookAppId;
+    return settings.attributes.integrations.facebookAppId;
   }
 
   message() {
