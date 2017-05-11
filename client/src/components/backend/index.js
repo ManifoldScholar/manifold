@@ -11,3 +11,4 @@ export Navigation from './Navigation';
 export Category from './Category';
 export Maker from './Maker';
 export Event from './Event';
+export Ingestion from './Ingestion';

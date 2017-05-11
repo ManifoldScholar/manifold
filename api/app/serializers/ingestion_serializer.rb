@@ -6,7 +6,7 @@ class IngestionSerializer < ActiveModel::Serializer
              :available_events, :strategy, :text_id, :creator_id
 
   def available_events
-    allowed = [:analyze, :reset, :process]
+    allowed = [:analyze, :reset, :process, :reingest]
     actions = object.aasm.events.map(&:name)
     actions.select { |action| allowed.include?(action) }
   end

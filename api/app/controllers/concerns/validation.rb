@@ -51,7 +51,7 @@ module Validation
   def ingestion_params
     params.require(:data)
     attributes = [attachment(:source), :external_source_url, :ingestion_type]
-    relationships = []
+    relationships = [:text]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end

@@ -67,27 +67,28 @@ export default () => {
               helper: (p) => `/backend/project/${p}/texts`,
               routes: [
                 {
-                  name: "backendProjectTextsNew",
+                  name: "backendProjectTextsIngestionsNew",
                   exact: false,
-                  component: Backend.ProjectDetail.Text.New,
-                  path: "/backend/project/:id/texts/new",
-                  helper: (p) => `/backend/project/${p}/texts/new`,
-                  routes: [
-                    {
-                      name: "backendProjectIngestionProcess",
-                      exact: true,
-                      component: Backend.ProjectDetail.Text.Ingest,
-                      path: "/backend/project/:id/texts/new/:ingestionId/process",
-                      helper: (p, i) => `/backend/project/${p}/texts/new/${i}/process`
-                    },
-                    {
-                      name: "backendProjectIngestionEdit",
-                      exact: true,
-                      component: Backend.ProjectDetail.Text.Upload,
-                      path: "/backend/project/:id/texts/new/:ingestionId?/:step(step)?/:step?",
-                      helper: (p, i, step = null) => `/backend/project/${p}/texts/new/${i}${step ? `/step/${step}` : ""}`
-                    }
-                  ]
+                  component: Backend.ProjectDetail.Text.Ingestion.New,
+                  path: "/backend/project/:id/texts/ingestions/new",
+                  helper: (p) => `/backend/project/${p}/texts/ingestions/new`,
+                  modal: true
+                },
+                {
+                  name: "backendProjectTextsIngestionEdit",
+                  exact: false,
+                  component: Backend.ProjectDetail.Text.Ingestion.Edit,
+                  path: "/backend/project/:id/texts/ingestion/:ingestionId/edit",
+                  helper: (p, i) => `/backend/project/${p}/texts/ingestion/${i}/edit`,
+                  modal: true
+                },
+                {
+                  name: "backendProjectTextsIngestionIngest",
+                  exact: false,
+                  component: Backend.Ingestion.Ingest,
+                  path: "/backend/project/:id/texts/ingestion/:ingestionId/ingest",
+                  helper: (p, i) => `/backend/project/${p}/texts/ingestion/${i}/ingest`,
+                  modal: true
                 },
                 {
                   exact: false,
@@ -203,6 +204,30 @@ export default () => {
               component: Backend.TextDetail.Collaborators,
               path: "/backend/text/:id/collaborators",
               helper: (t) => `/backend/text/${t}/collaborators`
+            },
+            {
+              name: "backendTextIngestionsNew",
+              exact: true,
+              component: Backend.TextDetail.Ingestion.New,
+              path: "/backend/text/:id/ingestions/new",
+              helper: (t) => `/backend/text/${t}/ingestions/new`,
+              modal: false
+            },
+            {
+              name: "backendTextIngestionEdit",
+              exact: false,
+              component: Backend.TextDetail.Ingestion.Edit,
+              path: "/backend/text/:id/ingestion/:ingestionId/edit",
+              helper: (t, i) => `/backend/text/${t}/ingestion/${i}/edit`,
+              modal: false
+            },
+            {
+              name: "backendTextIngestionIngest",
+              exact: false,
+              component: Backend.Ingestion.Ingest,
+              path: "/backend/text/:id/ingestion/:ingestionId/ingest",
+              helper: (t, i) => `/backend/text/${t}/ingestion/${i}/ingest`,
+              modal: false
             },
             {
               name: "backendText",
