@@ -34,9 +34,9 @@ export default class InputError extends Component {
     if (this.hasErrors()) {
       return (
         <span className="errors">
-          {this.props.errors.map((e) => {
+          {this.props.errors.map((e, i) => {
             return (
-              <span key={e.source.pointer} className="error">
+              <span key={i} className="error">
                 { this.errorString(e) }
                 <br />
               </span>
