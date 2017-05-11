@@ -16,7 +16,7 @@ class TextDetailCollaborators extends Component {
     const text = this.props.text;
 
     return (
-      <FormContainer.Collaborators entity={text} api={textsAPI } />
+      <FormContainer.Collaborators entity={text} api={textsAPI} />
     );
   }
 }
