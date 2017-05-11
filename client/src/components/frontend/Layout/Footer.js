@@ -43,7 +43,8 @@ export default class LayoutFooter extends Component {
     let pages = [];
     if (this.props.pages) {
       this.props.pages.forEach((page) => {
-        if (page.showInFooter) {
+        console.log(page.attributes.showInFooter, page.attributes.title);
+        if (page.attributes.showInFooter) {
           pages.push((
             <Link to={`/browse/page/${page.attributes.slug}`}>
               {page.attributes.navTitle ? page.attributes.navTitle : page.attributes.title}
