@@ -18,6 +18,7 @@ class FormContainer extends PureComponent {
   static displayName = "Form.Form";
 
   static propTypes = {
+    doNotWarn: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
     children: React.PropTypes.oneOfType([
       React.PropTypes.array,
@@ -34,6 +35,7 @@ class FormContainer extends PureComponent {
   };
 
   static defaultProps = {
+    doNotWarn: false,
     model: {
       attributes: {}
     },
@@ -182,6 +184,7 @@ class FormContainer extends PureComponent {
   }
 
   isBlocking() {
+    if (this.props.doNotWarn === true) return false;
     if (this.state.preventDirtyWarning === true) return false;
     if (this.props.session.changed === true) return true;
     return false;
@@ -198,10 +201,10 @@ class FormContainer extends PureComponent {
           message="You may have unsaved changes. Do you want to leave without saving your changes?"
         />
 
-        {this.props.groupErrors === true ?
+        {this.props.groupErrors === true && this.props.errors ?
           <GlobalForm.Errorable
             containerStyle={this.props.groupErrorsStyle}
-            className="form-input"
+            className="form-input form-error-grouped"
             name="*"
             errors={this.props.errors}
           />
