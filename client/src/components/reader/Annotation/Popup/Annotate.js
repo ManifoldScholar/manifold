@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import HigherOrder from 'containers/global/HigherOrder';
-import classNames from 'classnames';
+import Button from './Button';
+import Panel from './Panel';
 
 class AnnotationPopupAnnotate extends PureComponent {
 
@@ -8,7 +9,6 @@ class AnnotationPopupAnnotate extends PureComponent {
 
   static propTypes = {
     attachResource: PropTypes.func,
-    currentUser: PropTypes.object,
     highlight: PropTypes.func,
     annotate: PropTypes.func,
     bookmark: PropTypes.func,
@@ -17,118 +17,58 @@ class AnnotationPopupAnnotate extends PureComponent {
     direction: PropTypes.string
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      tailHighlight: false
-    };
-
-    this.handleTailHighlight = this.handleTailHighlight.bind(this);
-    this.handleTailBlur = this.handleTailBlur.bind(this);
-  }
-
-  handleTailHighlight(condition) {
-    if (condition) {
-      this.setState({
-        tailHighlight: true
-      });
-    }
-  }
-
-  handleTailBlur(condition) {
-    if (condition) {
-      this.setState({
-        tailHighlight: false
-      });
-    }
-  }
-
   render() {
 
-    const pageClass = classNames({
-      'popup-page': true,
-      hidden: this.props.secondary,
-      bottom: this.props.direction === 'up',
-      top: this.props.direction === 'down'
-    });
-
-    const tailClass = classNames({
-      tail: true,
-      'tail-down': this.props.direction === 'up',
-      'tail-up': this.props.direction === 'down',
-      highlight: this.state.tailHighlight
-    });
-
-    // The first button to render needs to have the enter and leave events. If the
-    // resource button is visible, it always has these props. Otherwise the highlight
-    // button gets them.
-    const firstButtonProps = {
-      onMouseEnter: () => { this.handleTailHighlight(this.props.direction === 'down'); },
-      onMouseLeave: () => { this.handleTailBlur(true); }
-    };
-    const resourceButtonProps = firstButtonProps;
-    let highlightButtonProps = firstButtonProps;
-    if (this.props.currentUser && this.props.currentUser.attributes.role === "admin") {
-      highlightButtonProps = {};
-    }
-
     return (
-      <section className={pageClass}
-        ref={(p) => { this.p = p; }}
-        style={{
-          marginLeft: this.props.secondary ? -this.p.offsetWidth + 'px' : null
-        }}
+      <Panel
+        primary
+        secondary={this.props.secondary}
+        direction={this.props.direction}
       >
-        <HigherOrder.RequireRole requiredRole="admin">
-          <button
-            onClick={this.props.attachResource}
-            {...resourceButtonProps}
-          >
-            <i className="manicon manicon-cube-outline"></i>
-            Resource
-          </button>
-        </HigherOrder.RequireRole>
+        <Button
+          onClick={this.props.attachResource}
+          requiredRole="admin"
+          label="Resource"
+          iconClass="manicon-cube-outline"
+        />
 
-        <HigherOrder.RequireRole requiredRole="any">
-          <div className="button-group">
-            <button
-              onClick={this.props.highlight}
-              {...highlightButtonProps}
-            >
-              <i className="manicon manicon-pencil-simple"></i>
-              Highlight
-            </button>
-            <button onClick={this.props.annotate}>
-              <i className="manicon manicon-word-bubble"></i>
-              Annotate
-            </button>
-            {/*
-             <button onClick={this.props.bookmark}>
-             <i className="manicon manicon-bookmark-outline"></i>
-             Bookmark
-             </button>
-            */}
-          </div>
-        </HigherOrder.RequireRole>
+        <Button
+          onClick={this.props.highlight}
+          requiredRole="any"
+          label="Highlight"
+          iconClass="manicon-pencil-simple"
+        />
 
-        <HigherOrder.RequireRole requiredRole="none">
-          <button onClick={this.props.showLogin}>
-            <i className="manicon manicon-person-pencil"></i>
-            Login to Annotate
-          </button>
-        </HigherOrder.RequireRole>
+        <Button
+          onClick={this.props.annotate}
+          requiredRole="any"
+          label="Annotate"
+          iconClass="manicon-word-bubble"
+        />
 
-        <button onClick={this.props.showShare}>
-          <i className="manicon manicon-nodes"></i>
-          Share
-        </button>
+        {/*
+        <Buttons.Default
+          onClick={this.props.bookmark}
+          requiredRole="any"
+          label="Bookmark"
+          iconClass="manicon-bookmark-outline"
+        />
+        */}
 
-        <div
-          className={tailClass}
-        >
-        </div>
-      </section>
+        <Button
+          onClick={this.props.showLogin}
+          requiredRole="none"
+          label="Login to Annotate"
+          iconClass="manicon-person-pencil"
+        />
+
+        <Button
+          onClick={this.props.showShare}
+          requiredRole="any"
+          label="Share"
+          iconClass="manicon-nodes"
+        />
+      </Panel>
     );
   }
 }

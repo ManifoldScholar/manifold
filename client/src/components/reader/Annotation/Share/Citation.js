@@ -110,6 +110,7 @@ export default class AnnotationShareEditor extends PureComponent {
   }
   /* eslint-enable no-unreachable */
 
+  /* eslint-disable max-len */
   formatMla() {
     return `${this.formatAttribute("author")}. ${this.formatAttribute("title")}. ${this.formatAttribute("number")} ${this.formatAttribute("publisher")}, ${this.formatAttribute("placeOfPublication")}.`;
   }
@@ -121,6 +122,7 @@ export default class AnnotationShareEditor extends PureComponent {
   formatChicago() {
     return `${this.formatAttribute("author")}. ${this.formatAttribute("title")}. ${this.formatAttribute("placeOfPublication")}: ${this.formatAttribute("publisher")}. ${this.formatAttribute("publicationDate")}`;
   }
+  /* eslint-enable max-len */
 
   renderStyleButtons() {
     const styles = ["mla", "apa", "chicago"];
