@@ -1,17 +1,18 @@
 import React, { PureComponent, PropTypes } from 'react';
-import classNames from 'classnames';
-import SocialButtons from './SocialButtons';
+import HigherOrder from 'containers/global/HigherOrder';
+import { EmailButton, TwitterButton, FacebookButton } from 'react-social';
+import Button from './Button';
+import Panel from './Panel';
 
-export default class AnnotationPopupShare extends PureComponent {
+class AnnotationPopupShare extends PureComponent {
 
   static displayName = "Annotation.Popup.Share";
 
   static propTypes = {
     selectionText: PropTypes.string,
     shareUrl: PropTypes.string,
-    pageClass: PropTypes.string,
-    tailClass: PropTypes.string,
     back: PropTypes.func,
+    secondary: PropTypes.string,
     direction: PropTypes.string,
     cite: PropTypes.func,
     text: PropTypes.object
@@ -19,19 +20,13 @@ export default class AnnotationPopupShare extends PureComponent {
 
   constructor(props) {
     super(props);
-
     this.state = {
-      inBrowser: false,
-      tailHighlight: false
+      inBrowser: false
     };
-
-    this.handleTailHighlight = this.handleTailHighlight.bind(this);
-    this.handleTailBlur = this.handleTailBlur.bind(this);
+    this.twitterWindowOptions = ["", "", "width=600,height=300"];
   }
 
   componentDidMount() {
-    // This won't be run by the server, so set an instance variable here
-    // that will be hidden otherwise
     if (this.state.inBrowser === false) {
       this.setState({ // eslint-disable-line react/no-did-mount-set-state
         inBrowser: true
@@ -39,77 +34,74 @@ export default class AnnotationPopupShare extends PureComponent {
     }
   }
 
-  handleTailHighlight(condition) {
-    if (condition) {
-      this.setState({
-        tailHighlight: true
-      });
-    }
-  }
-
-  handleTailBlur(condition) {
-    if (condition) {
-      this.setState({
-        tailHighlight: false
-      });
-    }
-  }
-
-  renderCiteButton() {
-    if (!this.props.text) return null;
-    const attr = this.props.text.attributes;
-    const metadata = attr.metadata;
-    if (!metadata.publisher || !metadata.placeOfPublication || !attr.publicationDate) return null;
-    return (
-      <button onClick={this.props.cite}>
-        <i className="manicon manicon-quotes-left"></i>
-        Cite
-      </button>
-    );
+  facebookAppId() {
+    const { settings } = this.props;
+    return settings.attributes.integrations.facebookAppId;
   }
 
   url() {
     if (!this.state.inBrowser) return null;
-    const url = location.hostname + this.props.shareUrl;
-    return url;
+    return location.hostname + this.props.shareUrl;
+  }
+
+  message() {
+    return `"${this.props.text}" from Manifold:`;
+  }
+
+  canCite() {
+    if (!this.props.text) return false;
+    const attr = this.props.text.attributes;
+    const meta = attr.metadata;
+    if (!meta) return false;
+    return !(!meta.publisher || !meta.placeOfPublication || !attr.publicationDate);
   }
 
   render() {
-    const pageClass = classNames({
-      'popup-page-secondary': true,
-      bottom: this.props.direction === 'up',
-      top: this.props.direction === 'down'
-    });
-
-    const tailClass = classNames({
-      tail: true,
-      'tail-down': this.props.direction === 'up',
-      'tail-up': this.props.direction === 'down',
-      highlight: this.state.tailHighlight
-    });
-
     return (
-      <section className={pageClass}>
-        {this.renderCiteButton()}
-        <SocialButtons
-          text={this.props.selectionText}
+      <Panel
+        primary={false}
+        name="share"
+        secondary={this.props.secondary}
+        direction={this.props.direction}
+      >
+        {this.canCite() ?
+          <Button
+            onClick={this.props.cite}
+            requiredRole="any"
+            label="Cite"
+            iconClass="manicon-quotes-left"
+          />
+          : null
+        }
+        <TwitterButton
           url={this.url()}
-          handleTailHighlight={
-            () => {
-              this.handleTailHighlight(this.props.direction === 'down');
-            }
-          }
-          handleTailBlur={() => { this.handleTailBlur(true); }}
-        />
-        <button onClick={this.props.back} className="dark">
-          <i className="manicon manicon-arrow-bold-left"></i>
-          Back
-        </button>
-        <div
-          className={tailClass}
+          message={this.message()}
+          windowOptions={this.twitterWindowOptions}
         >
-        </div>
-      </section>
+          <i className="manicon manicon-twitter"></i>
+          {'Twitter'}
+        </TwitterButton>
+        {this.facebookAppId() ?
+          <FacebookButton
+            url={this.url()}
+            message={this.message()}
+            windowOptions={this.twitterWindowOptions}
+            appId={this.facebookAppId()}
+          >
+            <i className="manicon manicon-facebook"></i>
+            {'Facebook'}
+          </FacebookButton> : null
+        }
+        <Button
+          onClick={this.props.back}
+          requiredRole="any"
+          label="Back"
+          className="dark"
+          iconClass="manicon-arrow-bold-left"
+        />
+      </Panel>
     );
   }
 }
+
+export default HigherOrder.withSettings(AnnotationPopupShare);

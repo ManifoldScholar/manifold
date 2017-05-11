@@ -3,7 +3,7 @@ import entity from './entity';
 
 export default function makeStoreFixture() {
 
-  const settings = entity.settings();
+  const settings = entity.settings("0");
   const store = createStore();
   store.dispatch({
     type: 'API_RESPONSE/SETTINGS',
