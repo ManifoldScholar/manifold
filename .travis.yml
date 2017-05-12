@@ -5,7 +5,7 @@ rvm:
   - 2.3.3
 
 nvm:
-  - "4.6.1"
+  - "6.10.3"
 
 services:
   - postgresql
