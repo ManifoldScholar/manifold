@@ -29,7 +29,7 @@ export default function (parameters) {
   const pretty = new PrettyError();
 
   app.use(morgan(logStyle));
-  app.use(favicon(__dirname + '../../../../../static/favicon.ico'));
+  app.use(favicon(__dirname + '/../../../../static/favicon.ico'));
 
   if (__DEVELOPMENT__) {
 
