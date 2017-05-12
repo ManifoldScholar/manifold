@@ -3,7 +3,8 @@ class ProjectSerializer < ProjectPartialSerializer
   meta(partial: false)
 
   attributes :event_count, :metadata, :collections_count, :resources_count,
-             :uncollected_resources_count, :published_text_toc_id, :event_types
+             :uncollected_resources_count, :published_text_toc_id, :event_types,
+             :metadata_properties
 
   link :self do
     "https://manifold-api.dev/api/v1/projects/#{object.id}"
@@ -39,4 +40,9 @@ class ProjectSerializer < ProjectPartialSerializer
   def published_text_toc_id
     object.published_text.try(:toc_section).try(:id)
   end
+
+  def metadata_properties
+    object.metadata_properties.map { |p| p.camelize(:lower) }
+  end
+
 end

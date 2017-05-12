@@ -18,8 +18,13 @@ class Project < ApplicationRecord
   extend FriendlyId
 
   # Magic
-  with_metadata %w(isbn_ten isbn_thirteen publisher place_of_publication doi
-                   date_of_publication series)
+  with_metadata %w(
+    abstract archive archive_location archive_place authority call_number collection_title
+    container_title dimensions event event_place isbn issn jurisdiction medium
+    original_publisher original_publisher_place original_title pmcid pmid publisher
+    publisher_place reviewed_title section version year_suffix chapter_number
+    collection_number edition issue number number_of_pages number_of_volumes volume
+  )
 
   # URLs
   friendly_id :title, use: :slugged

@@ -184,16 +184,16 @@ RSpec.describe Project, type: :model do
 
     it "can be set" do
       p = FactoryGirl.build(:project)
-      p.metadata = { "isbn_ten" => "1234" }
+      p.metadata = { "isbn" => "1234" }
       p.save
-      expect(p.metadata["isbn_ten"]).to eq "1234"
+      expect(p.metadata["isbn"]).to eq "1234"
     end
 
     it "filters out invalid metadata" do
       p = FactoryGirl.build(:project)
-      p.metadata = { "isbn_ten" => "1234", "foo" => "bar" }
+      p.metadata = { "isbn" => "1234", "foo" => "bar" }
       p.save
-      expect(p.metadata).to eq({ "isbn_ten" => "1234" })
+      expect(p.metadata).to eq({ "isbn" => "1234" })
     end
 
   end

@@ -14,7 +14,19 @@ module Metadata
   end
 
   class_methods do
+    def metadata_properties
+      @metadata_properties
+    end
+
     def with_metadata(properties)
+      attr_reader :metadata_properties
+
+      @metadata_properties = properties
+
+      after_initialize do
+        @metadata_properties = properties
+      end
+
       before_save do
         validate_metadata(properties)
       end
