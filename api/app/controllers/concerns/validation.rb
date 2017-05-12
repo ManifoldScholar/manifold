@@ -17,7 +17,7 @@ module Validation
                   :purchase_price_money, :purchase_price_currency, :twitter_id,
                   :instagram_id, :remove_avatar, attachment(:avatar),
                   attachment(:hero), attachment(:cover), :remove_hero,
-                  :remove_cover, :publication_date, metadata]
+                  :remove_cover, :publication_date, metadata(Project)]
     relationships = [:collaborators, :creators, :contributors, :published_text]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -92,7 +92,7 @@ module Validation
 
   def text_params
     params.require(:data)
-    attributes = [:title, :position, :publication_date, metadata, :rights]
+    attributes = [:title, :position, :publication_date, metadata(Text), :rights]
     relationships = [:category, :contributors, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -213,11 +213,8 @@ module Validation
 
   private
 
-  def metadata
-    { metadata: [
-      :isbn_ten, :isbn_thirteen, :publisher, :place_of_publication, :doi, :series, :pages,
-      :date_of_publication
-    ] }
+  def metadata(klass)
+    { metadata: klass.metadata_properties }
   end
 
   def attachment(name)

@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
+import { Metadata } from 'components/backend';
 import { textsAPI } from 'api';
 
 export default class TextDetailMetadata extends PureComponent {
@@ -20,48 +20,14 @@ export default class TextDetailMetadata extends PureComponent {
 
   render() {
     return (
-      <section>
-        <FormContainer.Form
-          model={this.props.text}
-          name="backend-project-general"
-          update={textsAPI.update}
-          create={textsAPI.create}
-          className="form-secondary"
-        >
-          <Form.TextInput
-            label="ISBN"
-            name="attributes[metadata][isbn]"
-            placeholder="Enter ISBN Number"
-          />
-          <Form.TextInput
-            label="Publisher"
-            name="attributes[metadata][publisher]"
-            placeholder="Enter Publisher Name"
-          />
-          <Form.TextInput
-            label="Place of Publication"
-            name="attributes[metadata][placeOfPublication]"
-            placeholder="Enter Place of Publication"
-          />
-          <Form.Date
-            label="Publication Date"
-            name="attributes[publicationDate]"
-          />
-          <Form.TextInput
-            label="Digital Object Identifier (DOI)"
-            name="attributes[metadata][doi]"
-            placeholder="Enter DOI"
-          />
-          <Form.TextInput
-            label="Series"
-            name="attributes[metadata][series]"
-            placeholder="Enter Series Name"
-          />
-          <Form.Save
-            text="Save Metadata"
-          />
-        </FormContainer.Form>
-      </section>
+      <Metadata.Form
+        model={this.props.text}
+        name="backend-project-general"
+        update={textsAPI.update}
+        create={textsAPI.create}
+        className="form-secondary"
+      />
     );
+
   }
 }

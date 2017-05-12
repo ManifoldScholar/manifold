@@ -37,4 +37,11 @@ class TextSection < ApplicationRecord
     name
   end
 
+  def citation_parts
+    {
+      container_title: text.title,
+      isbn: text.isbn
+    }
+  end
+
 end
