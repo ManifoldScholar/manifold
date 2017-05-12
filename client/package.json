@@ -100,6 +100,7 @@
     "humps": "^1.0.0",
     "immutability-helper": "^2.0.0",
     "isomorphic-fetch": "^2.2.0",
+    "jest": "next",
     "json-loader": "^0.5.3",
     "loader-utils": "^0.2.10",
     "lodash": "^4.11.2",
@@ -161,8 +162,7 @@
   },
   "devDependencies": {
     "babel-jest": "^18.0.0",
-    "enzyme": "^2.3.0",
-    "jest": "^18.0.0"
+    "enzyme": "^2.3.0"
   },
   "engines": {
     "node": "4.1.1"
