@@ -308,12 +308,27 @@
 
       li + li {
         margin-left: 20px;
+
+        + li {
+          margin-left: 22px;
+        }
       }
 
       a {
-        font-size: 17px;
         color: inherit;
         text-decoration: none;
+
+        .manicon-twitter {
+          font-size: 17px;
+        }
+
+        .manicon-facebook {
+          font-size: 18px;
+        }
+
+        .manicon-instagram {
+          font-size: 18px;
+        }
       }
     }
   }
