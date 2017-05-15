@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 const { request } = entityStoreActions;
 const perPage = 10;
 
-class ResourcePickerContainer extends PureComponent {
+export class ResourcePickerContainer extends PureComponent {
 
   static displayName = "ProjectDetail.Resources";
 

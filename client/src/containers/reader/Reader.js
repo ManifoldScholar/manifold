@@ -31,7 +31,7 @@ const { setColorScheme } = uiColorActions;
 const { request, flush } = entityStoreActions;
 
 
-class ReaderContainer extends Component {
+export class ReaderContainer extends Component {
 
   static fetchData(getState, dispatch, location, match) {
     const promises = [];

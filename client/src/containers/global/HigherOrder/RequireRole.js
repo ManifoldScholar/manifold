@@ -2,7 +2,7 @@ import { Children, PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import isString from 'lodash/isString';
 
-export class RequireRole extends PureComponent {
+class RequireRole extends PureComponent {
 
   static mapStateToProps(state) {
     return {
@@ -74,6 +74,7 @@ export class RequireRole extends PureComponent {
   }
 }
 
+export { RequireRole as RequireRoleWrapper }; // unconnected for testing
 export default connect(
   RequireRole.mapStateToProps
 )(RequireRole);

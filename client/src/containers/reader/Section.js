@@ -10,7 +10,7 @@ import { renderRoutes } from 'helpers/routing';
 
 const { request, flush } = entityStoreActions;
 
-class SectionContainer extends Component {
+export class SectionContainer extends Component {
 
   static fetchData(getState, dispatch, location, match) {
     const state = getState();

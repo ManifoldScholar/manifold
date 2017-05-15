@@ -7,7 +7,7 @@ import { Section, Resource } from 'components/reader';
 
 const { request, flush } = entityStoreActions;
 
-class ResourceDetailContainer extends PureComponent {
+export class ResourceDetailContainer extends PureComponent {
 
   static displayName = "ReaderContainer.Resource.Detail";
 

@@ -9,7 +9,7 @@ import { Utility } from 'components/frontend';
 const { request } = entityStoreActions;
 import { hash } from 'utils/string';
 
-class AnnotationList extends PureComponent {
+export class AnnotationList extends PureComponent {
 
   static displayName = "Annotation.List";
 
