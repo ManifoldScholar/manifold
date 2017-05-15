@@ -42,7 +42,9 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
         >
           <span
             className="hashtag"
-          />
+          >
+            ##cute_dog
+          </span>
           <nav
             className="networks"
           >

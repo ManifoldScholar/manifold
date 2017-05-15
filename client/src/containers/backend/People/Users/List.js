@@ -14,7 +14,7 @@ import { renderRoutes } from 'helpers/routing';
 const { request } = entityStoreActions;
 const perPage = 10;
 
-class UsersListContainer extends PureComponent {
+export class UsersListContainer extends PureComponent {
 
   static displayName = "Users.List";
 

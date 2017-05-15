@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend TextDetail General Container renders correctly 1`] = `
+<section>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Title
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter Text Title"
+          type="text"
+          value="Ain't No Thang"
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Unique Identifier
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter the Unique Identifier"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Language
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter the Language"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label>
+            Rights
+          </label>
+          <textarea
+            onChange={[Function]}
+            placeholder="Enter Text Rights"
+            style={
+              Object {
+                "height": 100,
+              }
+            }
+            value="All Rights Reserved"
+          />
+        </div>
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label>
+            Description
+          </label>
+          <textarea
+            onChange={[Function]}
+            placeholder="Enter a Brief Description"
+            style={
+              Object {
+                "height": 100,
+              }
+            }
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Text"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;

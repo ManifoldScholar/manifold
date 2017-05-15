@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend ProjectDetail Category New Container renders correctly 1`] = `
+<div>
+  <header
+    className="dialog-header-large"
+  >
+    <h2>
+      Create Category
+    </h2>
+  </header>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Title
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="What would you like to call this category?"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Create Category"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+`;

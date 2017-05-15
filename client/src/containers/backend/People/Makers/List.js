@@ -14,7 +14,7 @@ import { renderRoutes } from 'helpers/routing';
 const { request } = entityStoreActions;
 const perPage = 10;
 
-class MakersListContainer extends PureComponent {
+export class MakersListContainer extends PureComponent {
 
   static displayName = "Makers.List";
 

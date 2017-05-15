@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProjectDetail Text New Ingestion Container renders correctly 1`] = `
+exports[`ProjectDetail Text Ingestion New Container renders correctly 1`] = `
 <div>
   <div>
     <form
       className="form-secondary"
+      data-id="submit"
       onSubmit={[Function]}
     >
       <div>

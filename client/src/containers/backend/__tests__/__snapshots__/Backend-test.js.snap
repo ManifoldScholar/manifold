@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Backend Container renders correctly 1`] = `
+"<MemoryRouter>
+  <Router history={{...}}>
+    <Provider store={{...}}>
+      <BackendContainer history={{...}} notifications={{...}} authentication={{...}} route={{...}} visibility={{...}}>
+        <SideEffect(BodyClass) className=\\"backend bg-neutral90\\">
+          <BodyClass className=\\"backend bg-neutral90\\">
+            <div>
+              <ScrollAware threshold={200} throttle={500} topClass=\\"top\\" notTopClass=\\"not-top\\">
+                <div className=\\"scroll-aware top\\">
+                  <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} notifications={{...}} commonActions={{...}} settings={[undefined]} scrollAware={{...}}>
+                    <header className=\\"header-app dark\\">
+                      <div className=\\"header-container\\">
+                        <Link to=\\"/backend\\" className=\\"logo\\" replace={false}>
+                          <a className=\\"logo\\" onClick={[Function]} href=\\"/backend\\">
+                            <PressLogo url={[undefined]}>
+                              <figure className=\\"\\">
+                                <div>
+                                  <i className=\\"manicon manicon-manifold-logo\\" />
+                                  <span className=\\"screen-reader-text\\">
+                                    Manifold Logo: Click to return to the browse page
+                                  </span>
+                                </div>
+                              </figure>
+                            </PressLogo>
+                          </a>
+                        </Link>
+                        <nav className=\\"text-nav\\">
+                          <ul>
+                            <li>
+                              <NavLink isActive={[Function]} activeClassName=\\"active\\" to=\\"/backend\\">
+                                <Route path=\\"/backend\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
+                                  <Link to=\\"/backend\\" className={[undefined]} style={[undefined]} replace={false}>
+                                    <a className={[undefined]} style={[undefined]} onClick={[Function]} href=\\"/backend\\">
+                                      Projects
+                                    </a>
+                                  </Link>
+                                </Route>
+                              </NavLink>
+                            </li>
+                            <li>
+                              <NavLink activeClassName=\\"active\\" to=\\"/backend/people\\">
+                                <Route path=\\"/backend/people\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
+                                  <Link to=\\"/backend/people\\" className={[undefined]} style={[undefined]} replace={false}>
+                                    <a className={[undefined]} style={[undefined]} onClick={[Function]} href=\\"/backend/people\\">
+                                      People
+                                    </a>
+                                  </Link>
+                                </Route>
+                              </NavLink>
+                            </li>
+                            <li>
+                              <NavLink activeClassName=\\"active\\" to=\\"/backend/settings\\">
+                                <Route path=\\"/backend/settings\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
+                                  <Link to=\\"/backend/settings\\" className={[undefined]} style={[undefined]} replace={false}>
+                                    <a className={[undefined]} style={[undefined]} onClick={[Function]} href=\\"/backend/settings\\">
+                                      Settings
+                                    </a>
+                                  </Link>
+                                </Route>
+                              </NavLink>
+                            </li>
+                          </ul>
+                        </nav>
+                        <nav className=\\"menu-dropdowns\\">
+                          <ul>
+                            <li className=\\"show-60\\">
+                              <Link className=\\"button-mode\\" to=\\"/\\" replace={false}>
+                                <a className=\\"button-mode\\" onClick={[Function]} href=\\"/\\">
+                                  Exit Admin Mode
+                                </a>
+                              </Link>
+                            </li>
+                            <li>
+                              <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
+                                <button onClick={[Function]} className=\\"button-avatar\\">
+                                  <span className=\\"screen-reader-text\\">
+                                    Click to login or open user settings
+                                  </span>
+                                  <Avatar url={[undefined]}>
+                                    <figure style={[undefined]} className=\\"avatar\\">
+                                      <i className=\\"manicon manicon-person\\" />
+                                    </figure>
+                                  </Avatar>
+                                </button>
+                              </UserMenuButton>
+                              <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]}>
+                                <div className=\\"panel-hidden\\">
+                                  <UserMenuBody id=\\"user\\" visibility={{...}} bodyComponent={[Function]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]}>
+                                    <nav className=\\"user-menu menu-hidden\\">
+                                      <i className=\\"tail\\" />
+                                      <ul>
+                                        <li>
+                                          <a href=\\"#\\" onClick={[Function]}>
+                                            <i className=\\"manicon manicon-person-pencil\\" />
+                                            Edit Profile
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <button onClick={[Function]}>
+                                            <i className=\\"manicon manicon-circle-arrow-out-right\\" />
+                                            Logout
+                                          </button>
+                                        </li>
+                                      </ul>
+                                    </nav>
+                                  </UserMenuBody>
+                                </div>
+                              </UIPanel>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+                      <div className=\\"header-border\\" />
+                      <HeaderNotifications notifications={{...}} addNotification={[Function]} removeNotification={[Function]} removeAllNotifications={[Function]}>
+                        <section className=\\"header-notifications-container\\">
+                          <div className=\\"header-notifications-list\\">
+                            <ReactCSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+                              <ReactTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                                <span />
+                              </ReactTransitionGroup>
+                            </ReactCSSTransitionGroup>
+                          </div>
+                        </section>
+                      </HeaderNotifications>
+                    </header>
+                  </Layout.Header>
+                </div>
+              </ScrollAware>
+              <main>
+                <Switch />
+              </main>
+              <Layout.Footer pages={[undefined]} authentication={{...}} commonActions={{...}} settings={[undefined]}>
+                <footer className=\\"footer-browse\\">
+                  <div className=\\"container\\">
+                    <div className=\\"rel\\">
+                      <Link to=\\"/\\" className=\\"logo\\" replace={false}>
+                        <a className=\\"logo\\" onClick={[Function]} href=\\"/\\">
+                          <i className=\\"manicon manicon-manifold-logo\\" />
+                          Manifold
+                        </a>
+                      </Link>
+                    </div>
+                    <nav className=\\"text-nav\\">
+                      <ul>
+                        <li>
+                          <ul>
+                            <li>
+                              <a onClick={[Function]} href=\\"#\\">
+                                Log Out
+                              </a>
+                            </li>
+                            <li>
+                              <Link to=\\"/\\" replace={false}>
+                                <a onClick={[Function]} href=\\"/\\">
+                                  Projects
+                                </a>
+                              </Link>
+                            </li>
+                            <li />
+                          </ul>
+                        </li>
+                        <li>
+                          <ul>
+                            <li>
+                              <a target=\\"_blank\\" href=\\"http://twitter.com/manifoldscholar\\">
+                                Twitter
+                              </a>
+                            </li>
+                            <li>
+                              <a href=\\"mailto:webbook@umn.edu\\">
+                                Email
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </nav>
+                    <section className=\\"footer-secondary\\">
+                      <p className=\\"colophon\\">
+                        © 2015-2016 6 University of Minnesota Press.
+                        <br />
+                        Manifold is released under the 
+                        <a href=\\"https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md\\">
+                          GNU General Public License v3
+                        </a>
+                        . Download and contribute to 
+                        <a href=\\"https://github.com/ManifoldScholar/manifold\\">
+                          Manifold
+                        </a>
+                         on github.
+                      </p>
+                    </section>
+                  </div>
+                </footer>
+              </Layout.Footer>
+            </div>
+          </BodyClass>
+        </SideEffect(BodyClass)>
+      </BackendContainer>
+    </Provider>
+  </Router>
+</MemoryRouter>"
+`;

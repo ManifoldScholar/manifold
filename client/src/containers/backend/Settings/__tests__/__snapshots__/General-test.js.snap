@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Settings General Container renders correctly 1`] = `
+<section>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Default Publisher
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter Default Publisher"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Default Place of Publication
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter Default Place of Publication"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Social Sharing Messge
+        </label>
+        <span
+          className="instructions"
+        >
+          Enter the text you would like to appear when a page is shared
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Contact Link URL
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter a URL"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Settings"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;

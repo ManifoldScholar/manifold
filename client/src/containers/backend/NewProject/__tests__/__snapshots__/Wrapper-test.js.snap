@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend NewProject Wrapper Container renders correctly 1`] = `
+<div>
+  <section
+    className="bg-neutral95"
+  >
+    <div
+      className="container flush"
+    >
+      <nav
+        className="breadcrumb-primary"
+      >
+        <a
+          className="initial"
+          href="/backend"
+          onClick={[Function]}
+        >
+          <i
+            className="manicon manicon-arrow-left"
+          />
+          Back to:
+        </a>
+        <ul>
+          <li>
+            <a
+              className="back-link-primary-segment"
+              href="/backend"
+              onClick={[Function]}
+            >
+              ALL PROJECTS
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div
+      className="container flush"
+    >
+      <header
+        className="entity-header-primary"
+      >
+        <figure>
+          <i
+            className="manicon manicon-project-placeholder"
+          />
+        </figure>
+        <div
+          className="title"
+        >
+          <h1>
+            New Project
+            <span
+              className="subtitle"
+            />
+          </h1>
+          <div
+            className="utility"
+          >
+            <span
+              className="notes"
+            >
+              Enter the name of your project, and a brief description. Press save to continue.
+            </span>
+          </div>
+        </div>
+      </header>
+    </div>
+  </section>
+  <section
+    className="backend-panel"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="panel"
+      >
+        <section>
+          <div>
+            <form
+              className="form-secondary"
+              data-id="submit"
+              onSubmit={[Function]}
+            >
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className=""
+                >
+                  Title
+                </label>
+                <input
+                  onChange={[Function]}
+                  placeholder="Enter Project Title"
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className=""
+                >
+                  Subtitle
+                </label>
+                <input
+                  onChange={[Function]}
+                  placeholder="Enter Project Subtitle"
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="form-input"
+              >
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label>
+                    Description
+                  </label>
+                  <textarea
+                    onChange={[Function]}
+                    placeholder={undefined}
+                    style={
+                      Object {
+                        "height": 100,
+                      }
+                    }
+                    value=""
+                  />
+                </div>
+              </div>
+              <div
+                className="form-input submit"
+              >
+                <a
+                  className="button-secondary outlined dull"
+                  href="/backend"
+                  onClick={[Function]}
+                >
+                  Cancel
+                </a>
+                <input
+                  className="button-secondary outlined"
+                  type="submit"
+                  value="Save and Continue"
+                />
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+`;

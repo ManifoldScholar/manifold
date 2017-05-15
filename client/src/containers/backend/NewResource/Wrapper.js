@@ -6,7 +6,7 @@ import { resourcesAPI, notifications } from 'api';
 import { notificationActions } from 'actions';
 import lh from 'helpers/linkHandler';
 
-class NewResourceWrapperContainer extends PureComponent {
+export class NewResourceWrapperContainer extends PureComponent {
 
   static displayName = "NewResource.WrapperContainer";
   static propTypes = {

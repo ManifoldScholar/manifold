@@ -4,7 +4,7 @@ import { Form as FormContainer } from 'containers/backend';
 import { connect } from 'react-redux';
 
 
-class ProjectDetailCollaborators extends Component {
+export class ProjectDetailCollaborators extends Component {
 
   static displayName = "ProjectDetail.Collaborators";
 

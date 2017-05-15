@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend ProjectDetail Metadata Container renders correctly 1`] = `
+<section>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          ISBN-10
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter ISBN-10 Number"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          ISBN-13
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter ISBN-13 Number"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Publisher
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter Publisher Name"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Place of Publication
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter Place of Publication"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Digital Object Identifier (DOI)
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter DOI"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Series
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter Series Name"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Metadata"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;

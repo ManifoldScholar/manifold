@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Form Form Container renders correctly 1`] = `
+<div>
+  <form
+    className={undefined}
+    data-id="submit"
+    onSubmit={[Function]}
+  />
+</div>
+`;

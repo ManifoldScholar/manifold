@@ -5,7 +5,7 @@ import { Form as FormContainer } from 'containers/backend';
 import { settingsAPI, requests } from 'api';
 import { select } from 'utils/entityUtils';
 
-class SettingsIntegrationsContainer extends PureComponent {
+export class SettingsIntegrationsContainer extends PureComponent {
 
   static propTypes = {
   };

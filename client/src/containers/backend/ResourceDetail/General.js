@@ -1,13 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Resource, Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
-import { Resource as FrontendResource } from 'components/frontend';
 import { resourcesAPI } from 'api';
 import { notificationActions } from 'actions';
 import { connect } from 'react-redux';
-import capitalize from 'lodash/capitalize';
 
-class ResourceDetailGeneralContainer extends PureComponent {
+export class ResourceDetailGeneralContainer extends PureComponent {
 
   static displayName = "ResourceDetail.General";
 

@@ -1,12 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { Form } from 'components/backend';
 
 export default class SettingsPlaceholder extends PureComponent {
 
   static propTypes = {
     label: PropTypes.string.isRequired
-  }
+  };
 
   render() {
     const label = this.props.label;

@@ -2,11 +2,10 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Navigation } from 'components/backend';
 import { entityStoreActions, notificationActions } from 'actions';
-import get from 'lodash/get';
 import lh from 'helpers/linkHandler';
 import { renderRoutes } from 'helpers/routing';
 
-class SettingsWrapperContainer extends PureComponent {
+export class SettingsWrapperContainer extends PureComponent {
 
   constructor(props) {
     super(props);

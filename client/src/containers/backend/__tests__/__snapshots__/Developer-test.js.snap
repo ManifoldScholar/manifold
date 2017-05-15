@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Developer Container renders correctly 1`] = `
+<div>
+  <section>
+    <div
+      className="container"
+    >
+      <div
+        style={
+          Object {
+            "marginBottom": 15,
+          }
+        }
+      >
+        <button
+          className="button-secondary outlined"
+          onClick={[Function]}
+        >
+          Start websocket connection
+        </button>
+      </div>
+      <div
+        style={
+          Object {
+            "marginBottom": 15,
+          }
+        }
+      >
+        <button
+          className="button-secondary outlined"
+          onClick={[Function]}
+        >
+          Close websocket connection
+        </button>
+      </div>
+      <div
+        style={
+          Object {
+            "border": "1px solid red",
+          }
+        }
+      />
+    </div>
+  </section>
+</div>
+`;

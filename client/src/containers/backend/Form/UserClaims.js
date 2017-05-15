@@ -4,7 +4,7 @@ import { makersAPI, usersAPI } from 'api';
 import { connect } from 'react-redux';
 import { entityStoreActions } from 'actions';
 
-class FormUserClaims extends Component {
+export class FormUserClaims extends Component {
 
   static displayName = "Form.UserClaims";
 

@@ -3,7 +3,7 @@ import connectAndFetch from 'utils/connectAndFetch';
 import { websocketActions } from 'actions';
 import get from 'lodash/get';
 
-class DeveloperContainer extends PureComponent {
+export class DeveloperContainer extends PureComponent {
 
   static mapStateToProps(state) {
     return {

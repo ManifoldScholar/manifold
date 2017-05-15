@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend ResourceDetail Metadata Container renders correctly 1`] = `
+<section>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Tags
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter tags separated by ,"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Alt Text
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Alt Text"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Copyright Status
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Copyright Status"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Copyright Holder
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Copyright Holder"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Credit
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Credit"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Metadata"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;
