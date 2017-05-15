@@ -5,10 +5,9 @@ import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { select } from 'utils/entityUtils';
 import { projectsAPI, requests } from 'api';
 
-const { visibilityShow } = uiVisibilityActions;
 const { request, flush } = entityStoreActions;
 
-class ProjectDetailContainer extends Component {
+export class ProjectDetailContainer extends Component {
 
   static fetchData(getState, dispatch, location, match) {
     const projectRequest =

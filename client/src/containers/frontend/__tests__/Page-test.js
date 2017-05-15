@@ -2,36 +2,24 @@ jest.mock('components/global/HigherOrder/fetchData');
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ProjectResources from '../ProjectResources';
+import { PageContainer } from '../Page';
 import { Provider } from 'react-redux';
 import build from 'test/fixtures/build';
 import { wrapWithRouter } from 'test/helpers/routing';
 
-describe("Frontend ProjectResources Container", () => {
+describe("Frontend Page Container", () => {
 
-  const pagination = build.pagination();
   const store = build.store();
-
-  const project = build.entity.project("1");
-  const resource = build.entity.resource("2");
-
-  const pageChangeMock = jest.fn();
-  const filterChangeMock = jest.fn();
-
-  const props = {
-    project,
-    resources: [resource],
-    meta: { pagination },
-    paginationClickHandler: () => pageChangeMock,
-    filterChange: filterChangeMock,
-    initialFilterState: null,
-    location: { query: null }
-  };
 
   const component = renderer.create(wrapWithRouter(
     <Provider store={store}>
-      <ProjectResources
-        {...props}
+      <PageContainer
+        page={{
+          attributes: {
+            body: "I rip rock and gravel when I time travel, " +
+            "my rhymes bust shots with the beats that I battle."
+          }
+        }}
       />
     </Provider>
   ));

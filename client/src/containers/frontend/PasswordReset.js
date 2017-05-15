@@ -7,7 +7,7 @@ import { get } from 'lodash';
 import { select } from 'utils/entityUtils';
 const { request, flush } = entityStoreActions;
 
-class PasswordResetContainer extends Component {
+export class PasswordResetContainer extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,

@@ -5,7 +5,7 @@ import { entityStoreActions } from 'actions';
 import { select } from 'utils/entityUtils';
 const { request, flush } = entityStoreActions;
 
-class PageContainer extends Component {
+export class PageContainer extends Component {
 
   static fetchData(getState, dispatch, location, match) {
     const page = request(pagesAPI.show(match.params.slug), requests.gPage);

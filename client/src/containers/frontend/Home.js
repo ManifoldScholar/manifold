@@ -14,7 +14,7 @@ const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
 const featuredLimit = 4;
 
-class HomeContainer extends Component {
+export class HomeContainer extends Component {
 
   static fetchData(getState, dispatch) {
     const state = getState();

@@ -12,7 +12,7 @@ import get from 'lodash/get';
 const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;
 
-class FeaturedContainer extends Component {
+export class FeaturedContainer extends Component {
 
   static fetchData(getState, dispatch) {
     const state = getState();

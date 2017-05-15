@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProjectResourcesContainer renders correctly 1`] = `
+exports[`Frontend ProjectResources Container renders correctly 1`] = `
 <div>
   <section
     className="bg-neutral05"

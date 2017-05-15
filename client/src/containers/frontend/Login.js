@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import connectAndFetch from 'utils/connectAndFetch';
-import { LoginForm } from 'containers/global';
 import { currentUserActions } from 'actions';
 
-class LoginContainer extends Component {
+export class LoginContainer extends Component {
 
   static mapStateToProps(state) {
     return {
@@ -35,7 +34,6 @@ class LoginContainer extends Component {
             {'Log In'}
           </h4>
         </header>
-        <LoginForm />
       </div>
     );
   };

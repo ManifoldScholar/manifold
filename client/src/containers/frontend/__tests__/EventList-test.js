@@ -2,36 +2,29 @@ jest.mock('components/global/HigherOrder/fetchData');
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ProjectResources from '../ProjectResources';
+import { ProjectEventsContainer } from '../EventList';
 import { Provider } from 'react-redux';
 import build from 'test/fixtures/build';
 import { wrapWithRouter } from 'test/helpers/routing';
 
-describe("Frontend ProjectResources Container", () => {
+describe("Frontend EventList Container", () => {
 
   const pagination = build.pagination();
   const store = build.store();
 
   const project = build.entity.project("1");
-  const resource = build.entity.resource("2");
-
-  const pageChangeMock = jest.fn();
-  const filterChangeMock = jest.fn();
-
-  const props = {
-    project,
-    resources: [resource],
-    meta: { pagination },
-    paginationClickHandler: () => pageChangeMock,
-    filterChange: filterChangeMock,
-    initialFilterState: null,
-    location: { query: null }
+  const events = [build.entity.event("2"), build.entity.event("3")];
+  project.relationships.events = events;
+  const meta = {
+    pagination
   };
 
   const component = renderer.create(wrapWithRouter(
     <Provider store={store}>
-      <ProjectResources
-        {...props}
+      <ProjectEventsContainer
+        project={project}
+        events={events}
+        meta={meta}
       />
     </Provider>
   ));

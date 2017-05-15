@@ -1,6 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
 import connectAndFetch from 'utils/connectAndFetch';
-import { Link } from 'react-router-dom';
 import { Resource, Utility } from 'components/frontend';
 import { HigherOrder } from 'components/global';
 import lh from 'helpers/linkHandler';
@@ -10,7 +9,7 @@ import { collectionsAPI, requests } from 'api';
 
 const { request, flush } = entityStoreActions;
 
-class CollectionResourceDetailContainer extends PureComponent {
+export class CollectionResourceDetailContainer extends PureComponent {
   static fetchData(getState, dispatch, location, match) {
     const page = match.params.page ? match.params.page : 1;
     const collectionFetch = collectionsAPI.show(match.params.collectionId);

@@ -11,7 +11,7 @@ import { renderRoutes } from 'react-router-config';
 
 const { request } = entityStoreActions;
 
-class FrontendContainer extends Component {
+export class FrontendContainer extends Component {
 
   static fetchData(getState, dispatch) {
     if (!isLoaded(requests.gPages, getState())) {
