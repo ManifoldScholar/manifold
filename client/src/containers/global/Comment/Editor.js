@@ -8,7 +8,7 @@ import { commentsAPI } from 'api';
 const { request } = entityStoreActions;
 import { Form as GlobalForm } from 'components/global';
 
-class CommentEditor extends PureComponent {
+export class CommentEditor extends PureComponent {
 
   static displayName = "Comment.Editor";
 

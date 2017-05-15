@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global Comment Editor Container renders correctly 1`] = `
+<div
+  className="comment-editor"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className=""
+      style={Object {}}
+    >
+      <textarea
+        className="expanded"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Edit this comment..."
+        value="Plaid clash with polka dots, I hope you ain't mad."
+      />
+      <div
+        className="utility"
+      >
+        <div
+          className="buttons"
+        >
+          <button
+            className="button-secondary-dull"
+            onClick={[Function]}
+          >
+            Cancel
+          </button>
+          <button
+            className="button-secondary"
+            disabled={false}
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+`;
