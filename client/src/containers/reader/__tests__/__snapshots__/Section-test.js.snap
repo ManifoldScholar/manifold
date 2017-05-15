@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader Section Container renders correctly 1`] = `
+<div>
+  <div>
+    <section
+      className="reader-window"
+    >
+      <div>
+        <div
+          className="annotatable"
+          onClick={[Function]}
+        >
+          <div
+            className="container-focus container-width-100"
+          >
+            <div
+              className="manifold-text-section text-section font-size-undefined"
+              data-id="body"
+            >
+              <section
+                className="chapter"
+                id="RO"
+                type="titlepage"
+              />
+            </div>
+          </div>
+        </div>
+        <span />
+        <div
+          className="annotation-popup"
+          style={
+            Object {
+              "bottom": "auto",
+              "left": 0,
+              "top": 0,
+            }
+          }
+        >
+          <section
+            className="popup-page bottom"
+            style={
+              Object {
+                "marginLeft": null,
+              }
+            }
+          >
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-person-pencil"
+              />
+              Login to Annotate
+            </button>
+            <button
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-nodes"
+              />
+              Share
+            </button>
+            <div
+              className="tail tail-down"
+            />
+          </section>
+          <div
+            className="popup-page-secondary-group"
+          />
+        </div>
+      </div>
+    </section>
+    <span />
+  </div>
+  <div>
+    <section
+      className="section-next-section"
+    >
+      <div
+        className="container-focus container-width-100"
+      />
+    </section>
+    <nav
+      className="section-pagination"
+    >
+      <div
+        className="container"
+      />
+    </nav>
+  </div>
+</div>
+`;

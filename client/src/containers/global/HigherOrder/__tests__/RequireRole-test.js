@@ -3,7 +3,7 @@ jest.mock('components/global/HigherOrder/fetchData');
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { RequireRole } from '../RequireRole';
+import { RequireRoleWrapper } from '../RequireRole';
 import { Provider } from 'react-redux';
 import build from 'test/fixtures/build';
 import { wrapWithRouter } from 'test/helpers/routing';
@@ -14,7 +14,7 @@ describe("Global HigherOrder RequireRole Container", () => {
   const authentication = {
     authenticated: true,
     currentUser: build.entity.user("1")
-  }
+  };
   const child = (
     <div>
       How is babby formed?
@@ -25,7 +25,7 @@ describe("Global HigherOrder RequireRole Container", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <RequireRole
+          <RequireRoleWrapper
             roleMatchBehavior="show"
             requiredRole="any"
             authentication={authentication}
@@ -42,7 +42,7 @@ describe("Global HigherOrder RequireRole Container", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <RequireRole
+          <RequireRoleWrapper
             roleMatchBehavior="show"
             requiredRole="any"
             authentication={{}}

@@ -463,6 +463,7 @@ class Annotatable extends Component {
 
 }
 
+export { Annotatable as AnnotatableContainer }; // unconnected for testing
 export default connect(
   Annotatable.mapStateToProps
 )(Annotatable);
