@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend Frontend Container renders correctly 1`] = `
+<div>
+  <div
+    className="scroll-aware top"
+  >
+    <header
+      className="header-app"
+    >
+      <div
+        className="header-container"
+      >
+        <a
+          className="logo"
+          href="/"
+          onClick={[Function]}
+        >
+          <figure
+            className=""
+          >
+            <div>
+              <i
+                className="manicon manicon-manifold-logo"
+              />
+              <span
+                className="screen-reader-text"
+              >
+                Manifold Logo: Click to return to the browse page
+              </span>
+            </div>
+          </figure>
+        </a>
+        <nav
+          className="text-nav show-50"
+        >
+          <ul>
+            <li
+              className="active"
+            >
+              <a
+                href="/"
+                onClick={[Function]}
+              >
+                Projects
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <nav
+          className="menu-dropdowns"
+        >
+          <ul>
+            <li>
+              <button
+                className="button-avatar"
+                onClick={[Function]}
+              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Click to login or open user settings
+                </span>
+                <figure
+                  className="avatar"
+                  style={undefined}
+                >
+                  <i
+                    className="manicon manicon-person"
+                  />
+                </figure>
+              </button>
+              <div
+                className="panel-hidden"
+              >
+                <nav
+                  className="user-menu menu-hidden"
+                >
+                  <i
+                    className="tail"
+                  />
+                  <ul>
+                    <li>
+                      <a
+                        href="#"
+                        onClick={[Function]}
+                      >
+                        <i
+                          className="manicon manicon-person-pencil"
+                        />
+                        Edit Profile
+                      </a>
+                    </li>
+                    <li>
+                      <button
+                        onClick={[Function]}
+                      >
+                        <i
+                          className="manicon manicon-circle-arrow-out-right"
+                        />
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div
+        className="header-border"
+      />
+      <section
+        className="header-notifications-container"
+      >
+        <div
+          className="header-notifications-list"
+        >
+          <span />
+        </div>
+      </section>
+    </header>
+  </div>
+  <main>
+    <div />
+  </main>
+  <footer
+    className="footer-browse"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="rel"
+      >
+        <a
+          className="logo"
+          href="/"
+          onClick={[Function]}
+        >
+          <i
+            className="manicon manicon-manifold-logo"
+          />
+          Manifold
+        </a>
+      </div>
+      <nav
+        className="text-nav"
+      >
+        <ul>
+          <li>
+            <ul>
+              <li>
+                <a
+                  href="#"
+                  onClick={[Function]}
+                >
+                  Log Out
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/"
+                  onClick={[Function]}
+                >
+                  Projects
+                </a>
+              </li>
+              <li />
+            </ul>
+          </li>
+          <li>
+            <ul>
+              <li>
+                <a
+                  href="http://twitter.com/manifoldscholar"
+                  target="_blank"
+                >
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:webbook@umn.edu"
+                >
+                  Email
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <section
+        className="footer-secondary"
+      >
+        <p
+          className="colophon"
+        >
+          © 2015-2016 6 University of Minnesota Press.
+          <br />
+          Manifold is released under the 
+          <a
+            href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md"
+          >
+            GNU General Public License v3
+          </a>
+          . Download and contribute to 
+          <a
+            href="https://github.com/ManifoldScholar/manifold"
+          >
+            Manifold
+          </a>
+           on github.
+        </p>
+      </section>
+    </div>
+  </footer>
+</div>
+`;

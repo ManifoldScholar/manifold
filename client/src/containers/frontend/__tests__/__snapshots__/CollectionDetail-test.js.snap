@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CollectionDetailContainer renders correctly 1`] = `
+exports[`Frontend CollectionDetail Container renders correctly 1`] = `
 <div>
   <a
     className="back-link-primary full"

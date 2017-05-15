@@ -3,14 +3,13 @@ jest.mock('components/global/HigherOrder/fetchData');
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import CollectionDetail from '../CollectionDetail';
+import { CollectionResourceDetailContainer } from '../CollectionResourceDetail';
 import { Provider } from 'react-redux';
 import build from 'test/fixtures/build';
 import { wrapWithRouter } from 'test/helpers/routing';
 
-describe("Frontend CollectionDetail Container", () => {
+describe("Frontend CollectionResourceDetail Container", () => {
 
-  const pagination = build.pagination();
   const store = build.store();
 
   const project = build.entity.project("1");
@@ -18,37 +17,24 @@ describe("Frontend CollectionDetail Container", () => {
   const resource = build.entity.resource("3");
   const collectionResource = build.entity.collectionResource("4");
   collection.relationships.resources.push(resource);
+  collectionResource.relationships.resource = resource;
   resource.relationships.collectionResources.push(collectionResource);
   project.relationships.resources.push(resource);
-  const resources = project.relationships.resources;
 
-  const pageChangeMock = jest.fn();
-  const filterChangeMock = jest.fn();
-
-  const props = {
-    project,
-    collection,
-    params: { id: "2" },
-    resources: resources,
-    resourcesMeta: { pagination },
-    slideshowResources: resources,
-    slideshowResourcesMeta: { pagination },
-    collectionResources: resources,
-    collectionPagination: pagination,
-    collectionPaginationHandler: pageChangeMock,
-    collectionUrl: `/browse/project/${project.id}/collection/${collection.id}`,
-    filterChange: filterChangeMock,
-    initialFilterState: null,
-    location: { query: null }
-  };
-
-  const component = renderer.create(wrapWithRouter(
+  const component = renderer.create(
+    wrapWithRouter(
     <Provider store={store}>
-      <CollectionDetail
-        {...props}
+      <CollectionResourceDetailContainer
+        collection={collection}
+        collectionResource={collectionResource}
+        resource={resource}
+        match={{
+          params: {}
+        }}
       />
     </Provider>
-  ));
+    )
+  );
 
   it("renders correctly", () => {
     let tree = component.toJSON();

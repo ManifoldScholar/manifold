@@ -8,7 +8,7 @@ import lh from 'helpers/linkHandler';
 
 const { request, flush } = entityStoreActions;
 
-class ResourceDetailContainer extends PureComponent {
+export class ResourceDetailContainer extends PureComponent {
 
   static fetchData(getState, dispatch, location, match) {
     const page = match.params.page ? match.params.page : 1;

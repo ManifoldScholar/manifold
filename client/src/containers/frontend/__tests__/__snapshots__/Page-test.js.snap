@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend Page Container renders correctly 1`] = `
+<section>
+  <div
+    className="container"
+  >
+    I rip rock and gravel when I time travel, my rhymes bust shots with the beats that I battle.
+  </div>
+</section>
+`;

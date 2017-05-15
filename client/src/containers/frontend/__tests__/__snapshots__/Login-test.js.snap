@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend Login Container renders correctly when logged in 1`] = `
+<section
+  className="login-page"
+>
+  <div
+    className="container"
+  >
+    <header
+      className="rel"
+    >
+      <h4
+        className="section-heading"
+      >
+        <i
+          className="manicon manicon-lamp"
+        />
+        Log Out
+      </h4>
+    </header>
+    <form
+      method="post"
+      onSubmit={[Function]}
+    >
+      <p
+        className="login-notice"
+      >
+        You are logged in as rowan@woof.dog
+      </p>
+      <input
+        className="button-secondary"
+        type="submit"
+        value="Log Out"
+      />
+    </form>
+  </div>
+</section>
+`;
+
+exports[`Frontend Login Container renders correctly when logged out 1`] = `
+<section
+  className="login-page"
+>
+  <div
+    className="container"
+  >
+    <header
+      className="rel"
+    >
+      <h4
+        className="section-heading"
+      >
+        <i
+          className="manicon manicon-lamp"
+        />
+        Log In
+      </h4>
+    </header>
+  </div>
+</section>
+`;

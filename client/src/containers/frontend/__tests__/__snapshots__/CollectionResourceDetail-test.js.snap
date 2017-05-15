@@ -1,0 +1,347 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
+<div>
+  <a
+    className="back-link-primary full"
+    href="/project/undefined/collection/2"
+    onClick={[Function]}
+  >
+    <div
+      className="container flush"
+    >
+      <i
+        className="manicon manicon-arrow-left"
+      />
+      Back to Collection
+      <span>
+        Rowan
+      </span>
+    </div>
+  </a>
+  <div>
+    <section>
+      <section
+        className="resource-detail"
+      >
+        <div
+          className="container flush-top flush-bottom"
+        >
+          <div
+            className="resource-title"
+          >
+            <div>
+              <h1
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "Image",
+                  }
+                }
+              />
+              <span
+                className="resource-date"
+              >
+                Resource added 
+                <span>
+                  April, 2017
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <section
+          className="resource-hero-container"
+        >
+          <div
+            className="resource-hero"
+          >
+            <div
+              className="resource-slide-figure"
+            >
+              <figure>
+                <div
+                  className="figure-image"
+                  style={
+                    Object {
+                      "backgroundImage": "url(null)",
+                    }
+                  }
+                />
+              </figure>
+            </div>
+          </div>
+        </section>
+        <div
+          className="container flush-top"
+        >
+          <aside>
+            <a
+              className="button-primary"
+              href="original-image.mock"
+              target="_blank"
+            >
+              Download 
+              <i
+                className="manicon manicon-arrow-down"
+              />
+            </a>
+            <nav
+              className="share-nav-primary"
+            >
+              <span>
+                Share
+              </span>
+              <ul>
+                <li>
+                  <button
+                    onClick={[Function]}
+                    target="_blank"
+                  >
+                    <i
+                      className="manicon manicon-twitter"
+                    />
+                  </button>
+                </li>
+              </ul>
+            </nav>
+            <section
+              className="resource-meta"
+            >
+              <figure
+                className="resource-type"
+              >
+                <i
+                  className="manicon manicon-resource-image"
+                />
+              </figure>
+              <ul
+                className="meta-list-secondary"
+              >
+                <li>
+                  <span
+                    className="meta-label"
+                  >
+                    Type
+                  </span>
+                  <span
+                    className="meta-value"
+                  >
+                    Image
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="meta-label"
+                  >
+                    Created On
+                  </span>
+                  <span
+                    className="meta-value"
+                  >
+                    <span>
+                      April 24, 2017
+                    </span>
+                  </span>
+                </li>
+              </ul>
+              <nav
+                className="tag-list"
+              >
+                <ul>
+                  <li>
+                    <a
+                      href="/project/undefined/resources?tag=dog"
+                    >
+                      dog
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/project/undefined/resources?tag=puppy"
+                    >
+                      puppy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/project/undefined/resources?tag=goat"
+                    >
+                      GOAT
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </section>
+          </aside>
+          <div
+            className="resource-meta-mobile"
+          >
+            <section
+              className="resource-meta"
+            >
+              <figure
+                className="resource-type"
+              >
+                <i
+                  className="manicon manicon-resource-image"
+                />
+              </figure>
+              <ul
+                className="meta-list-secondary"
+              >
+                <li>
+                  <span
+                    className="meta-label"
+                  >
+                    Type
+                  </span>
+                  <span
+                    className="meta-value"
+                  >
+                    Image
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="meta-label"
+                  >
+                    Created On
+                  </span>
+                  <span
+                    className="meta-value"
+                  >
+                    <span>
+                      April 24, 2017
+                    </span>
+                  </span>
+                </li>
+              </ul>
+              <nav
+                className="tag-list"
+              >
+                <ul>
+                  <li>
+                    <a
+                      href="/project/undefined/resources?tag=dog"
+                    >
+                      dog
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/project/undefined/resources?tag=puppy"
+                    >
+                      puppy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/project/undefined/resources?tag=goat"
+                    >
+                      GOAT
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </section>
+          </div>
+          <div
+            className="resource-content left"
+          >
+            <div
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "World's Greatest Dog",
+                }
+              }
+            />
+            <h3
+              className="attribute-header"
+            >
+              Full Description
+            </h3>
+            <div
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Black and white freckles",
+                }
+              }
+            />
+            <div
+              className="resource-comments"
+            >
+              <div
+                className="comment-editor"
+              >
+                <form
+                  onSubmit={[Function]}
+                >
+                  <div
+                    className=""
+                    style={Object {}}
+                  >
+                    <textarea
+                      className=""
+                      onChange={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="Discuss this resource..."
+                      value=""
+                    />
+                    <div
+                      className="utility"
+                    >
+                      <div
+                        className="buttons"
+                      >
+                        <button
+                          className="button-secondary-dull"
+                          onClick={[Function]}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className="button-secondary"
+                          disabled={true}
+                        >
+                          Post
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+  <section
+    className="bg-neutral05"
+  >
+    <div
+      className="container flush"
+    >
+      <a
+        className="back-link-secondary"
+        href="/project/undefined/collection/2"
+        onClick={[Function]}
+      >
+        <i
+          className="manicon manicon-arrow-round-left"
+        />
+        <div>
+          <span
+            className="back-text"
+          >
+            Back to Collection
+          </span>
+          <span
+            className="project-title"
+          />
+        </div>
+      </a>
+    </div>
+  </section>
+</div>
+`;

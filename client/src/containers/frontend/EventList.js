@@ -8,7 +8,7 @@ import { projectsAPI, requests } from 'api';
 
 const { request } = entityStoreActions;
 
-class ProjectEventsContainer extends Component {
+export class ProjectEventsContainer extends Component {
 
   static fetchData(getState, dispatch, location, match) {
     const { params } = match;
