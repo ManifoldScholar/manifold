@@ -9,7 +9,7 @@ import { Utility } from 'components/frontend';
 import { commentsAPI } from 'api';
 const { request } = entityStoreActions;
 
-class CommentThread extends PureComponent {
+export class CommentThread extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     const newState = {
@@ -22,11 +22,11 @@ class CommentThread extends PureComponent {
     subject: PropTypes.object.isRequired,
     parentId: PropTypes.string,
     parent: PropTypes.object
-  }
+  };
 
   static defaultProps = {
     parentId: null
-  }
+  };
 
   constructor(props) {
     super(props);
