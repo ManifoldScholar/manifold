@@ -5,9 +5,8 @@ import { Form as FormContainer } from 'containers/backend';
 import { settingsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { select } from 'utils/entityUtils';
-const { request } = entityStoreActions;
 
-class SettingsThemeContainer extends PureComponent {
+export class SettingsThemeContainer extends PureComponent {
 
   static displayName = "Settings.Theme";
 

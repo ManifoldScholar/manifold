@@ -12,7 +12,7 @@ import { renderRoutes } from 'helpers/routing';
 
 const { request } = entityStoreActions;
 
-class ProjectDetailTexts extends PureComponent {
+export class ProjectDetailTexts extends PureComponent {
 
   static displayName = "ProjectDetail.Texts";
 

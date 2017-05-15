@@ -12,7 +12,7 @@ const { request } = entityStoreActions;
 
 const perPage = 5;
 
-class DashboardContainer extends PureComponent {
+export class DashboardContainer extends PureComponent {
 
   static fetchData(getState, dispatch) {
     const state = getState();

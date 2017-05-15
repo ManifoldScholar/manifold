@@ -9,7 +9,7 @@ import lh from 'helpers/linkHandler';
 const { request } = entityStoreActions;
 const perPage = 5;
 
-class ProjectDetailResources extends PureComponent {
+export class ProjectDetailResources extends PureComponent {
 
   static displayName = "ProjectDetail.Resources";
 

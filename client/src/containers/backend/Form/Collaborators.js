@@ -7,7 +7,7 @@ import get from 'lodash/get';
 
 const { request, flush } = entityStoreActions;
 
-class FormCollaborators extends Component {
+export class FormCollaborators extends Component {
 
   static displayName = "Form.Collaborators";
 

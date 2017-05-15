@@ -4,7 +4,7 @@ import { textsAPI, requests } from 'api';
 import { Form as FormContainer } from 'containers/backend';
 import { connect } from 'react-redux';
 
-class TextDetailCollaborators extends Component {
+export class TextDetailCollaborators extends Component {
 
   static displayName = "TextDetail.Collaborators";
 

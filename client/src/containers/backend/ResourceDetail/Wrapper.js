@@ -10,7 +10,7 @@ import { renderRoutes } from 'helpers/routing';
 
 const { request, flush } = entityStoreActions;
 
-class ResourceDetailWrapperContainer extends PureComponent {
+export class ResourceDetailWrapperContainer extends PureComponent {
 
   static displayName = "ResourceDetail.Wrapper";
 

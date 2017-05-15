@@ -6,7 +6,7 @@ import { resourcesAPI } from 'api';
 import { notificationActions } from 'actions';
 import { connect } from 'react-redux';
 
-class ResourceDetailVariantsContainer extends PureComponent {
+export class ResourceDetailVariantsContainer extends PureComponent {
 
   static displayName = "ResourceDetail.Variants";
 

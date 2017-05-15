@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Settings Placeholder Container renders correctly 1`] = `
+<form
+  className="form-secondary"
+>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+    >
+      A All temporary stuff setting
+    </label>
+    <input
+      onChange={[Function]}
+      placeholder="Some setting could go here"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+    >
+      Another All temporary stuff setting
+    </label>
+    <input
+      onChange={[Function]}
+      placeholder="Some other setting could go here"
+      type="text"
+      value=""
+    />
+  </div>
+</form>
+`;

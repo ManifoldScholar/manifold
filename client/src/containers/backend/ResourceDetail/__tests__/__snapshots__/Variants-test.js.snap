@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend ResourceDetail Variants Container renders correctly 1`] = `
+<section>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-section"
+      >
+        <div
+          className="form-input"
+        >
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className=""
+            >
+              High Resolution Image
+            </label>
+            <div
+              className="form-dropzone style-square"
+              onClick={[Function]}
+              onDragEnter={[Function]}
+              onDragLeave={[Function]}
+              onDragOver={[Function]}
+              onDragStart={[Function]}
+              onDrop={[Function]}
+              style={Object {}}
+            >
+              <div
+                className="contents-empty"
+              >
+                <i
+                  className="manicon manicon-cloud-up"
+                />
+                <div
+                  className="message"
+                >
+                  <p
+                    className="primary"
+                  >
+                    Upload a file or
+                    <br />
+                    drag and drop here
+                    <br />
+                  </p>
+                  <p
+                    className="secondary"
+                  >
+                    jpeg, tiff, gif, png
+                  </p>
+                </div>
+              </div>
+              <input
+                accept="image/*"
+                multiple={false}
+                onChange={[Function]}
+                style={
+                  Object {
+                    "display": "none",
+                  }
+                }
+                type="file"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-input"
+        >
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className=""
+            >
+              Thumbnail Image
+            </label>
+            <div
+              className="form-dropzone style-square"
+              onClick={[Function]}
+              onDragEnter={[Function]}
+              onDragLeave={[Function]}
+              onDragOver={[Function]}
+              onDragStart={[Function]}
+              onDrop={[Function]}
+              style={Object {}}
+            >
+              <div
+                className="contents-empty"
+              >
+                <i
+                  className="manicon manicon-cloud-up"
+                />
+                <div
+                  className="message"
+                >
+                  <p
+                    className="primary"
+                  >
+                    Upload a file or
+                    <br />
+                    drag and drop here
+                    <br />
+                  </p>
+                  <p
+                    className="secondary"
+                  >
+                    jpeg, tiff, gif, png
+                  </p>
+                </div>
+              </div>
+              <input
+                accept="image/*"
+                multiple={false}
+                onChange={[Function]}
+                style={
+                  Object {
+                    "display": "none",
+                  }
+                }
+                type="file"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Resource"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;

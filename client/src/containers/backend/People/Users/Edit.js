@@ -11,7 +11,7 @@ import lh from 'helpers/linkHandler';
 
 const { request, flush } = entityStoreActions;
 
-class UsersEditContainer extends PureComponent {
+export class UsersEditContainer extends PureComponent {
 
   static displayName = "Users.Edit";
 

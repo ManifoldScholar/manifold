@@ -13,7 +13,7 @@ import { Prompt } from 'react-router-dom';
 const { request, flush } = entityStoreActions;
 const { close, open, set } = entityEditorActions;
 
-class FormContainer extends PureComponent {
+export class FormContainer extends PureComponent {
 
   static displayName = "Form.Form";
 
@@ -209,7 +209,7 @@ class FormContainer extends PureComponent {
             errors={this.props.errors}
           />
         : null}
-        <form onSubmit={this.handleSubmit} className={this.props.className} >
+        <form onSubmit={this.handleSubmit} className={this.props.className} data-id="submit" >
           {this.renderChildren(this.props)}
         </form>
       </div>

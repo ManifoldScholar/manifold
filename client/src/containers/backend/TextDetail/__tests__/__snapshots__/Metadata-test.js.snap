@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
+"<MemoryRouter>
+  <Router history={{...}}>
+    <Provider store={{...}}>
+      <TextDetail.Metadata text={{...}}>
+        <section>
+          <withRouter(Connect(Form.Form)) model={{...}} name=\\"backend-project-general\\" update={[Function]} create={[Function]} className=\\"form-secondary\\">
+            <Route render={[Function]}>
+              <Connect(Form.Form) model={{...}} name=\\"backend-project-general\\" update={[Function]} create={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
+                <Form.Form model={{...}} name=\\"backend-project-general\\" update={[Function]} create={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} session={{...}} response={[undefined]} errors={[undefined]} dispatch={[Function]} doNotWarn={false} debug={false} groupErrors={false}>
+                  <div>
+                    <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
+                    <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
+                      <Form.Setter('Form.TextInput) label=\\"ISBN\\" name=\\"attributes[metadata][isbn]\\" placeholder=\\"Enter ISBN Number\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
+                        <Form.TextInput label=\\"ISBN\\" name=\\"attributes[metadata][isbn]\\" placeholder=\\"Enter ISBN Number\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[metadata][isbn]\\" errors={{...}} label=\\"ISBN\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                ISBN
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter ISBN Number\\" onChange={[Function]} value=\\"\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Setter('Form.TextInput) label=\\"Publisher\\" name=\\"attributes[metadata][publisher]\\" placeholder=\\"Enter Publisher Name\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
+                        <Form.TextInput label=\\"Publisher\\" name=\\"attributes[metadata][publisher]\\" placeholder=\\"Enter Publisher Name\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[metadata][publisher]\\" errors={{...}} label=\\"Publisher\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                Publisher
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter Publisher Name\\" onChange={[Function]} value=\\"\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Setter('Form.TextInput) label=\\"Publisher\\" name=\\"attributes[metadata][placeOfPublication]\\" placeholder=\\"Enter Place of Publication\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
+                        <Form.TextInput label=\\"Publisher\\" name=\\"attributes[metadata][placeOfPublication]\\" placeholder=\\"Enter Place of Publication\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[metadata][placeOfPublication]\\" errors={{...}} label=\\"Publisher\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                Publisher
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter Place of Publication\\" onChange={[Function]} value=\\"\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Setter('Form.Date) label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
+                        <Form.Date label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"2001-12-04\\" initialValue=\\"2001-12-04\\">
+                          <div className=\\"form-input\\">
+                            <label>
+                              Publication Date
+                            </label>
+                            <div className=\\"form-date\\">
+                              <div className=\\"form-select input-month\\">
+                                <i className=\\"manicon manicon-caret-down\\" />
+                                <select onChange={[Function]} value=\\"11\\">
+                                  <option />
+                                  <option value={0}>
+                                    January
+                                  </option>
+                                  <option value={1}>
+                                    February
+                                  </option>
+                                  <option value={2}>
+                                    March
+                                  </option>
+                                  <option value={3}>
+                                    April
+                                  </option>
+                                  <option value={4}>
+                                    May
+                                  </option>
+                                  <option value={5}>
+                                    June
+                                  </option>
+                                  <option value={6}>
+                                    July
+                                  </option>
+                                  <option value={7}>
+                                    August
+                                  </option>
+                                  <option value={8}>
+                                    September
+                                  </option>
+                                  <option value={9}>
+                                    October
+                                  </option>
+                                  <option value={10}>
+                                    November
+                                  </option>
+                                  <option value={11}>
+                                    December
+                                  </option>
+                                </select>
+                              </div>
+                              <div className=\\"form-select input-day\\">
+                                <i className=\\"manicon manicon-caret-down\\" />
+                                <select onChange={[Function]} value=\\"4\\">
+                                  <option />
+                                  <option>
+                                    1
+                                  </option>
+                                  <option>
+                                    2
+                                  </option>
+                                  <option>
+                                    3
+                                  </option>
+                                  <option>
+                                    4
+                                  </option>
+                                  <option>
+                                    5
+                                  </option>
+                                  <option>
+                                    6
+                                  </option>
+                                  <option>
+                                    7
+                                  </option>
+                                  <option>
+                                    8
+                                  </option>
+                                  <option>
+                                    9
+                                  </option>
+                                  <option>
+                                    10
+                                  </option>
+                                  <option>
+                                    11
+                                  </option>
+                                  <option>
+                                    12
+                                  </option>
+                                  <option>
+                                    13
+                                  </option>
+                                  <option>
+                                    14
+                                  </option>
+                                  <option>
+                                    15
+                                  </option>
+                                  <option>
+                                    16
+                                  </option>
+                                  <option>
+                                    17
+                                  </option>
+                                  <option>
+                                    18
+                                  </option>
+                                  <option>
+                                    19
+                                  </option>
+                                  <option>
+                                    20
+                                  </option>
+                                  <option>
+                                    21
+                                  </option>
+                                  <option>
+                                    22
+                                  </option>
+                                  <option>
+                                    23
+                                  </option>
+                                  <option>
+                                    24
+                                  </option>
+                                  <option>
+                                    25
+                                  </option>
+                                  <option>
+                                    26
+                                  </option>
+                                  <option>
+                                    27
+                                  </option>
+                                  <option>
+                                    28
+                                  </option>
+                                  <option>
+                                    29
+                                  </option>
+                                  <option>
+                                    30
+                                  </option>
+                                  <option>
+                                    31
+                                  </option>
+                                </select>
+                              </div>
+                              <div className=\\"form-input\\">
+                                <MaskedInput type=\\"text\\" mask={{...}} className=\\"input-year\\" onChange={[Function]} value=\\"2001\\">
+                                  <input type=\\"text\\" className=\\"input-year\\" onInput={[Function]} defaultValue=\\"2001\\" />
+                                </MaskedInput>
+                              </div>
+                            </div>
+                          </div>
+                        </Form.Date>
+                      </Form.Setter('Form.Date)>
+                      <Form.Setter('Form.TextInput) label=\\"Digital Object Identifier (DOI)\\" name=\\"attributes[metadata][doi]\\" placeholder=\\"Enter DOI\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
+                        <Form.TextInput label=\\"Digital Object Identifier (DOI)\\" name=\\"attributes[metadata][doi]\\" placeholder=\\"Enter DOI\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[metadata][doi]\\" errors={{...}} label=\\"Digital Object Identifier (DOI)\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                Digital Object Identifier (DOI)
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter DOI\\" onChange={[Function]} value=\\"\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Setter('Form.TextInput) label=\\"Series\\" name=\\"attributes[metadata][series]\\" placeholder=\\"Enter Series Name\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
+                        <Form.TextInput label=\\"Series\\" name=\\"attributes[metadata][series]\\" placeholder=\\"Enter Series Name\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[metadata][series]\\" errors={{...}} label=\\"Series\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                Series
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter Series Name\\" onChange={[Function]} value=\\"\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Save text=\\"Save Metadata\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
+                        <div className=\\"form-input submit\\">
+                          <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Metadata\\" />
+                        </div>
+                      </Form.Save>
+                    </form>
+                  </div>
+                </Form.Form>
+              </Connect(Form.Form)>
+            </Route>
+          </withRouter(Connect(Form.Form))>
+        </section>
+      </TextDetail.Metadata>
+    </Provider>
+  </Router>
+</MemoryRouter>"
+`;

@@ -7,7 +7,7 @@ import { IngestionEdit } from '../Edit';
 import build from 'test/fixtures/build';
 import { wrapWithRouter } from 'test/helpers/routing';
 
-describe("ProjectDetail Text Edit Ingestion Container", () => {
+describe("ProjectDetail Text Ingestion Edit Container", () => {
 
   const project = build.entity.project("1");
   const location =  {};

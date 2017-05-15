@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend People Makers Edit Container renders correctly 1`] = `
+<div>
+  <header
+    className="drawer-header"
+  >
+    <h2
+      className="heading-quaternary"
+    >
+      Rowan Ida
+    </h2>
+    <div
+      className="buttons-bare-vertical"
+    >
+      <button
+        className="button-bare-primary"
+        onClick={[Function]}
+      >
+        Delete Maker
+        <i
+          className="manicon manicon-trashcan"
+        />
+      </button>
+    </div>
+  </header>
+  <section
+    className="form-section"
+  >
+    <div>
+      <form
+        className="form-secondary"
+        data-id="submit"
+        onSubmit={[Function]}
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            First Name
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="First Name"
+            type="text"
+            value="Rowan"
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Last Name
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Last Name"
+            type="text"
+            value="Ida"
+          />
+        </div>
+        <div
+          className="form-input"
+        >
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className=""
+            >
+              Avatar Image
+            </label>
+            <div
+              className="form-dropzone style-square"
+              onClick={[Function]}
+              onDragEnter={[Function]}
+              onDragLeave={[Function]}
+              onDragOver={[Function]}
+              onDragStart={[Function]}
+              onDrop={[Function]}
+              style={Object {}}
+            >
+              <div
+                className="contents-empty"
+              >
+                <i
+                  className="manicon manicon-cloud-up"
+                />
+                <div
+                  className="message"
+                >
+                  <p
+                    className="primary"
+                  >
+                    Upload a file or
+                    <br />
+                    drag and drop here
+                    <br />
+                  </p>
+                  <p
+                    className="secondary"
+                  >
+                    jpeg, tiff, gif, png
+                  </p>
+                </div>
+              </div>
+              <input
+                accept="image/*"
+                multiple={false}
+                onChange={[Function]}
+                style={
+                  Object {
+                    "display": "none",
+                  }
+                }
+                type="file"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-input submit"
+        >
+          <input
+            className="button-secondary outlined"
+            type="submit"
+            value="Save Maker"
+          />
+        </div>
+      </form>
+    </div>
+  </section>
+  <section
+    className="form-section"
+  >
+    <form
+      className="form-secondary"
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <header
+          className="section-heading-secondary"
+        >
+          <h3>
+            Users
+          </h3>
+        </header>
+        <nav
+          className="has-many-list"
+        >
+          <ul />
+          <div
+            className="input-predictive"
+          >
+            <div
+              className="input"
+            >
+              <button
+                className="manicon manicon-plus"
+              />
+              <input
+                className="text-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyPress={[Function]}
+                placeholder="Add an associated user"
+                type="text"
+                value=""
+              />
+            </div>
+            <nav
+              className="predictive-list"
+            >
+              <ul />
+            </nav>
+          </div>
+        </nav>
+      </div>
+    </form>
+  </section>
+</div>
+`;

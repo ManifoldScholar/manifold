@@ -7,7 +7,7 @@ import { notificationActions } from 'actions';
 import { projectsAPI } from 'api';
 import lh from 'helpers/linkHandler';
 
-class NewProjectWrapperContainer extends PureComponent {
+export class NewProjectWrapperContainer extends PureComponent {
 
   static displayName = "NewProject.WrapperContainer";
 

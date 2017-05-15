@@ -1,0 +1,407 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend ProjectDetail General Container renders correctly 1`] = `
+"<MemoryRouter>
+  <Router history={{...}}>
+    <Provider store={{...}}>
+      <ProjectDetail.General project={{...}}>
+        <section>
+          <withRouter(Connect(Form.Form)) model={{...}} name=\\"backend-project-update\\" update={[Function]} create={[Function]} className=\\"form-secondary\\">
+            <Route render={[Function]}>
+              <Connect(Form.Form) model={{...}} name=\\"backend-project-update\\" update={[Function]} create={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
+                <Form.Form model={{...}} name=\\"backend-project-update\\" update={[Function]} create={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} session={{...}} response={[undefined]} errors={[undefined]} dispatch={[Function]} doNotWarn={false} debug={false} groupErrors={false}>
+                  <div>
+                    <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
+                    <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
+                      <Form.Setter('Form.TextInput) validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.TextInput validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"Rowan Test\\" initialValue=\\"Rowan Test\\" password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[title]\\" errors={{...}} label=\\"Title\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                Title
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter Project Title\\" onChange={[Function]} value=\\"Rowan Test\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Setter('Form.TextInput) label=\\"Subtitle\\" name=\\"attributes[subtitle]\\" placeholder=\\"Enter Project Subtitle\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.TextInput label=\\"Subtitle\\" name=\\"attributes[subtitle]\\" placeholder=\\"Enter Project Subtitle\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"World's Greatest Dog\\" initialValue=\\"World's Greatest Dog\\" focusOnMount={false} password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[subtitle]\\" errors={{...}} label=\\"Subtitle\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                Subtitle
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter Project Subtitle\\" onChange={[Function]} value=\\"World's Greatest Dog\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Setter('Form.Date) label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.Date label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                          <div className=\\"form-input\\">
+                            <label>
+                              Publication Date
+                            </label>
+                            <div className=\\"form-date\\">
+                              <div className=\\"form-select input-month\\">
+                                <i className=\\"manicon manicon-caret-down\\" />
+                                <select onChange={[Function]} value=\\"NaN\\">
+                                  <option />
+                                  <option value={0}>
+                                    January
+                                  </option>
+                                  <option value={1}>
+                                    February
+                                  </option>
+                                  <option value={2}>
+                                    March
+                                  </option>
+                                  <option value={3}>
+                                    April
+                                  </option>
+                                  <option value={4}>
+                                    May
+                                  </option>
+                                  <option value={5}>
+                                    June
+                                  </option>
+                                  <option value={6}>
+                                    July
+                                  </option>
+                                  <option value={7}>
+                                    August
+                                  </option>
+                                  <option value={8}>
+                                    September
+                                  </option>
+                                  <option value={9}>
+                                    October
+                                  </option>
+                                  <option value={10}>
+                                    November
+                                  </option>
+                                  <option value={11}>
+                                    December
+                                  </option>
+                                </select>
+                              </div>
+                              <div className=\\"form-select input-day\\">
+                                <i className=\\"manicon manicon-caret-down\\" />
+                                <select onChange={[Function]} value=\\"NaN\\">
+                                  <option />
+                                  <option>
+                                    1
+                                  </option>
+                                  <option>
+                                    2
+                                  </option>
+                                  <option>
+                                    3
+                                  </option>
+                                  <option>
+                                    4
+                                  </option>
+                                  <option>
+                                    5
+                                  </option>
+                                  <option>
+                                    6
+                                  </option>
+                                  <option>
+                                    7
+                                  </option>
+                                  <option>
+                                    8
+                                  </option>
+                                  <option>
+                                    9
+                                  </option>
+                                  <option>
+                                    10
+                                  </option>
+                                  <option>
+                                    11
+                                  </option>
+                                  <option>
+                                    12
+                                  </option>
+                                  <option>
+                                    13
+                                  </option>
+                                  <option>
+                                    14
+                                  </option>
+                                  <option>
+                                    15
+                                  </option>
+                                  <option>
+                                    16
+                                  </option>
+                                  <option>
+                                    17
+                                  </option>
+                                  <option>
+                                    18
+                                  </option>
+                                  <option>
+                                    19
+                                  </option>
+                                  <option>
+                                    20
+                                  </option>
+                                  <option>
+                                    21
+                                  </option>
+                                  <option>
+                                    22
+                                  </option>
+                                  <option>
+                                    23
+                                  </option>
+                                  <option>
+                                    24
+                                  </option>
+                                  <option>
+                                    25
+                                  </option>
+                                  <option>
+                                    26
+                                  </option>
+                                  <option>
+                                    27
+                                  </option>
+                                  <option>
+                                    28
+                                  </option>
+                                  <option>
+                                    29
+                                  </option>
+                                  <option>
+                                    30
+                                  </option>
+                                  <option>
+                                    31
+                                  </option>
+                                </select>
+                              </div>
+                              <div className=\\"form-input\\">
+                                <MaskedInput type=\\"text\\" mask={{...}} className=\\"input-year\\" onChange={[Function]} value=\\"NaN\\">
+                                  <input type=\\"text\\" className=\\"input-year\\" onInput={[Function]} defaultValue=\\"NaN\\" />
+                                </MaskedInput>
+                              </div>
+                            </div>
+                          </div>
+                        </Form.Date>
+                      </Form.Setter('Form.Date)>
+                      <Form.Setter('Form.Switch) label=\\"Featured\\" name=\\"attributes[featured]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.Switch label=\\"Featured\\" name=\\"attributes[featured]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                          <div className=\\"form-input\\">
+                            <label>
+                              Featured
+                            </label>
+                            <div className=\\"toggle-indicator\\">
+                              <div onClick={[Function]} className=\\"boolean-primary\\" />
+                            </div>
+                          </div>
+                        </Form.Switch>
+                      </Form.Setter('Form.Switch)>
+                      <Form.Setter('Form.MaskedTextInput) label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.MaskedTextInput label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"#cute_dog\\" initialValue=\\"#cute_dog\\">
+                          <div className=\\"form-input\\">
+                            <label>
+                              Hashtag
+                            </label>
+                            <MaskedInput onChange={[Function]} value=\\"#cute_dog\\" type=\\"text\\" mask={[Function]} placeholder={[undefined]}>
+                              <input type=\\"text\\" placeholder={[undefined]} onInput={[Function]} defaultValue=\\"#cute_dog\\" />
+                            </MaskedInput>
+                          </div>
+                        </Form.MaskedTextInput>
+                      </Form.Setter('Form.MaskedTextInput)>
+                      <Form.Setter('Form.TextArea) label=\\"Description\\" name=\\"attributes[description]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.TextArea label=\\"Description\\" name=\\"attributes[description]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} height={100}>
+                          <div className=\\"form-input\\">
+                            <Errorable className=\\"form-input\\" name=\\"attributes[description]\\" errors={{...}} label=\\"Description\\" containerStyle={{...}}>
+                              <div style={{...}} className=\\"form-input\\">
+                                <label>
+                                  Description
+                                </label>
+                                <textarea style={{...}} placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
+                              </div>
+                            </Errorable>
+                          </div>
+                        </Form.TextArea>
+                      </Form.Setter('Form.TextArea)>
+                      <Form.Setter('Form.Upload) style=\\"square\\" label=\\"Avatar\\" accepts=\\"images\\" readFrom=\\"attributes[avatarStyles][smallSquare]\\" name=\\"attributes[avatar]\\" remove=\\"attributes[removeAvatar]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.Upload style=\\"square\\" label=\\"Avatar\\" accepts=\\"images\\" name=\\"attributes[avatar]\\" remove=\\"attributes[removeAvatar]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                          <div className=\\"form-input\\">
+                            <Errorable className=\\"form-input\\" name=\\"attributes[avatar]\\" errors={{...}} label=\\"Avatar\\" containerStyle={{...}}>
+                              <div style={{...}} className=\\"form-input\\">
+                                <label className=\\"\\">
+                                  Avatar
+                                </label>
+                                <Dropzone style={[undefined]} className=\\"form-dropzone style-square\\" activeStyle={{...}} multiple={false} onDrop={[Function]} accept=\\"image/*\\" disablePreview={false} disableClick={false} maxSize={Infinity} minSize={0}>
+                                  <div className=\\"form-dropzone style-square\\" style={{...}} onDrop={[Function]} onClick={[Function]} onDragStart={[Function]} onDragEnter={[Function]} onDragOver={[Function]} onDragLeave={[Function]}>
+                                    <div className=\\"contents-empty\\">
+                                      <i className=\\"manicon manicon-cloud-up\\" />
+                                      <div className=\\"message\\">
+                                        <p className=\\"primary\\">
+                                          Upload a file or
+                                          <br />
+                                          drag and drop here
+                                          <br />
+                                        </p>
+                                        <p className=\\"secondary\\">
+                                          jpeg, tiff, gif, png
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <input accept=\\"image/*\\" type=\\"file\\" style={{...}} multiple={false} onChange={[Function]} />
+                                  </div>
+                                </Dropzone>
+                              </div>
+                            </Errorable>
+                          </div>
+                        </Form.Upload>
+                      </Form.Setter('Form.Upload)>
+                      <Form.Setter('Form.Upload) style=\\"portrait\\" label=\\"Cover\\" accepts=\\"images\\" readFrom=\\"attributes[coverStyles][smallPortrait]\\" name=\\"attributes[cover]\\" remove=\\"attributes[removeCover]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.Upload style=\\"portrait\\" label=\\"Cover\\" accepts=\\"images\\" name=\\"attributes[cover]\\" remove=\\"attributes[removeCover]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                          <div className=\\"form-input\\">
+                            <Errorable className=\\"form-input\\" name=\\"attributes[cover]\\" errors={{...}} label=\\"Cover\\" containerStyle={{...}}>
+                              <div style={{...}} className=\\"form-input\\">
+                                <label className=\\"\\">
+                                  Cover
+                                </label>
+                                <Dropzone style={[undefined]} className=\\"form-dropzone style-portrait\\" activeStyle={{...}} multiple={false} onDrop={[Function]} accept=\\"image/*\\" disablePreview={false} disableClick={false} maxSize={Infinity} minSize={0}>
+                                  <div className=\\"form-dropzone style-portrait\\" style={{...}} onDrop={[Function]} onClick={[Function]} onDragStart={[Function]} onDragEnter={[Function]} onDragOver={[Function]} onDragLeave={[Function]}>
+                                    <div className=\\"contents-empty\\">
+                                      <i className=\\"manicon manicon-cloud-up\\" />
+                                      <div className=\\"message\\">
+                                        <p className=\\"primary\\">
+                                          Upload a file or
+                                          <br />
+                                          drag and drop here
+                                          <br />
+                                        </p>
+                                        <p className=\\"secondary\\">
+                                          jpeg, tiff, gif, png
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <input accept=\\"image/*\\" type=\\"file\\" style={{...}} multiple={false} onChange={[Function]} />
+                                  </div>
+                                </Dropzone>
+                              </div>
+                            </Errorable>
+                          </div>
+                        </Form.Upload>
+                      </Form.Setter('Form.Upload)>
+                      <Form.Setter('Form.Upload) style=\\"landscape\\" accepts=\\"images\\" label=\\"Hero Image\\" readFrom=\\"attributes[heroStyles][mediumLandscape]\\" name=\\"attributes[hero]\\" remove=\\"attributes[removeHero]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.Upload style=\\"landscape\\" accepts=\\"images\\" label=\\"Hero Image\\" name=\\"attributes[hero]\\" remove=\\"attributes[removeHero]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                          <div className=\\"form-input\\">
+                            <Errorable className=\\"form-input\\" name=\\"attributes[hero]\\" errors={{...}} label=\\"Hero Image\\" containerStyle={{...}}>
+                              <div style={{...}} className=\\"form-input\\">
+                                <label className=\\"\\">
+                                  Hero Image
+                                </label>
+                                <Dropzone style={[undefined]} className=\\"form-dropzone style-landscape\\" activeStyle={{...}} multiple={false} onDrop={[Function]} accept=\\"image/*\\" disablePreview={false} disableClick={false} maxSize={Infinity} minSize={0}>
+                                  <div className=\\"form-dropzone style-landscape\\" style={{...}} onDrop={[Function]} onClick={[Function]} onDragStart={[Function]} onDragEnter={[Function]} onDragOver={[Function]} onDragLeave={[Function]}>
+                                    <div className=\\"contents-empty\\">
+                                      <i className=\\"manicon manicon-cloud-up\\" />
+                                      <div className=\\"message\\">
+                                        <p className=\\"primary\\">
+                                          Upload a file or
+                                          <br />
+                                          drag and drop here
+                                          <br />
+                                        </p>
+                                        <p className=\\"secondary\\">
+                                          jpeg, tiff, gif, png
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <input accept=\\"image/*\\" type=\\"file\\" style={{...}} multiple={false} onChange={[Function]} />
+                                  </div>
+                                </Dropzone>
+                              </div>
+                            </Errorable>
+                          </div>
+                        </Form.Upload>
+                      </Form.Setter('Form.Upload)>
+                      <Form.Setter('Form.TextInput) label=\\"Purchase URL\\" name=\\"attributes[purchaseUrl]\\" placeholder=\\"Enter Purchase URL\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.TextInput label=\\"Purchase URL\\" name=\\"attributes[purchaseUrl]\\" placeholder=\\"Enter Purchase URL\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[purchaseUrl]\\" errors={{...}} label=\\"Purchase URL\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                Purchase URL
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter Purchase URL\\" onChange={[Function]} value=\\"\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Setter('Form.MaskedTextInput) label=\\"Purchase Price\\" name=\\"attributes[purchasePriceMoney]\\" mask=\\"currency\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.MaskedTextInput label=\\"Purchase Price\\" name=\\"attributes[purchasePriceMoney]\\" mask=\\"currency\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                          <div className=\\"form-input\\">
+                            <label>
+                              Purchase Price
+                            </label>
+                            <MaskedInput onChange={[Function]} value={[undefined]} type=\\"text\\" mask={[Function]} placeholder={[undefined]}>
+                              <input type=\\"text\\" placeholder={[undefined]} onInput={[Function]} defaultValue={[undefined]} />
+                            </MaskedInput>
+                          </div>
+                        </Form.MaskedTextInput>
+                      </Form.Setter('Form.MaskedTextInput)>
+                      <Form.Setter('Form.TextInput) label=\\"Currency\\" name=\\"attributes[purchasePriceCurrency]\\" placeholder=\\"Enter Purchase Price Currency Code\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.TextInput label=\\"Currency\\" name=\\"attributes[purchasePriceCurrency]\\" placeholder=\\"Enter Purchase Price Currency Code\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[purchasePriceCurrency]\\" errors={{...}} label=\\"Currency\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                Currency
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter Purchase Price Currency Code\\" onChange={[Function]} value=\\"\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Setter('Form.TextInput) label=\\"Twitter Username\\" name=\\"attributes[twitterId]\\" placeholder=\\"Enter Twitter username\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.TextInput label=\\"Twitter Username\\" name=\\"attributes[twitterId]\\" placeholder=\\"Enter Twitter username\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[twitterId]\\" errors={{...}} label=\\"Twitter Username\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                Twitter Username
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter Twitter username\\" onChange={[Function]} value=\\"\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Setter('Form.TextInput) label=\\"Instagram Username\\" name=\\"attributes[instagramId]\\" placeholder=\\"Enter Instagram username\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.TextInput label=\\"Instagram Username\\" name=\\"attributes[instagramId]\\" placeholder=\\"Enter Instagram username\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                          <Errorable className=\\"form-input\\" name=\\"attributes[instagramId]\\" errors={{...}} label=\\"Instagram Username\\" containerStyle={{...}}>
+                            <div style={{...}} className=\\"form-input\\">
+                              <label className=\\"\\">
+                                Instagram Username
+                              </label>
+                              <input type=\\"text\\" placeholder=\\"Enter Instagram username\\" onChange={[Function]} value=\\"\\" />
+                            </div>
+                          </Errorable>
+                        </Form.TextInput>
+                      </Form.Setter('Form.TextInput)>
+                      <Form.Save text=\\"Save Project\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <div className=\\"form-input submit\\">
+                          <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Project\\" />
+                        </div>
+                      </Form.Save>
+                    </form>
+                  </div>
+                </Form.Form>
+              </Connect(Form.Form)>
+            </Route>
+          </withRouter(Connect(Form.Form))>
+        </section>
+      </ProjectDetail.General>
+    </Provider>
+  </Router>
+</MemoryRouter>"
+`;

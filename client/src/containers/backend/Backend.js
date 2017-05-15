@@ -12,7 +12,7 @@ import { Switch, Route } from 'react-router-dom';
 import { renderRoutes } from 'helpers/routing';
 const { request } = entityStoreActions;
 
-class BackendContainer extends PureComponent {
+export class BackendContainer extends PureComponent {
 
   static fetchData(getState, dispatch) {
     if (!entityUtils.isLoaded(requests.gPages, getState())) {

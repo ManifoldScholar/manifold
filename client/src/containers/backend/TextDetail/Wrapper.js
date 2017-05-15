@@ -4,13 +4,12 @@ import { Dialog, Text, Navigation } from 'components/backend';
 import { uiVisibilityActions, entityStoreActions } from 'actions';
 import { select } from 'utils/entityUtils';
 import { textsAPI, requests } from 'api';
-import get from 'lodash/get';
 import lh from 'helpers/linkHandler';
 import { renderRoutes } from 'helpers/routing';
 
 const { request, flush } = entityStoreActions;
 
-class TextDetailWrapperContainer extends PureComponent {
+export class TextDetailWrapperContainer extends PureComponent {
 
   static displayName = "TextDetail.Wrapper";
 

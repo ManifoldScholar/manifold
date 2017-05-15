@@ -10,7 +10,7 @@ import config from '../../../config';
 const { request } = entityStoreActions;
 const perPage = 6;
 
-class ProjectDetailEvents extends PureComponent {
+export class ProjectDetailEvents extends PureComponent {
 
   static displayName = "ProjectDetail.Events";
 

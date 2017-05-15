@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend People Users Edit Container renders correctly 1`] = `
+<div>
+  <header
+    className="drawer-header"
+  >
+    <h2
+      className="heading-quaternary"
+    >
+      Rowan Ida
+    </h2>
+    <div
+      className="buttons-bare-vertical"
+    >
+      <button
+        className="button-bare-primary"
+        onClick={[Function]}
+      >
+        Reset Password
+        <i
+          className="manicon manicon-key"
+        />
+      </button>
+      <br />
+      <button
+        className="button-bare-primary"
+        onClick={[Function]}
+      >
+        Delete User
+        <i
+          className="manicon manicon-trashcan"
+        />
+      </button>
+    </div>
+  </header>
+  <section
+    className="form-section"
+  >
+    <div>
+      <form
+        className="form-secondary"
+        data-id="submit"
+        onSubmit={[Function]}
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Email
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Email"
+            type="text"
+            value="test@cic-fake.gotcha"
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            First Name
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="First Name"
+            type="text"
+            value="Rowan"
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Last Name
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Last Name"
+            type="text"
+            value="Ida"
+          />
+        </div>
+        <div
+          className="form-input"
+        >
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label>
+              Role
+            </label>
+            <div
+              className="form-select"
+            >
+              <i
+                className="manicon manicon-caret-down"
+              />
+              <select
+                onChange={[Function]}
+                value="Admin"
+              >
+                <option
+                  value="admin"
+                >
+                  Admin
+                </option>
+                <option
+                  value="author"
+                >
+                  Author
+                </option>
+                <option
+                  value="reader"
+                >
+                  Reader
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-input submit"
+        >
+          <input
+            className="button-secondary outlined"
+            type="submit"
+            value="Save User"
+          />
+        </div>
+      </form>
+    </div>
+  </section>
+  <section
+    className="form-section"
+  >
+    <form
+      className="form-secondary"
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <header
+          className="section-heading-secondary"
+        >
+          <h3>
+            Makers
+          </h3>
+        </header>
+        <nav
+          className="has-many-list"
+        >
+          <ul />
+          <div
+            className="input-predictive"
+          >
+            <div
+              className="input"
+            >
+              <button
+                className="manicon manicon-plus"
+              />
+              <input
+                className="text-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyPress={[Function]}
+                placeholder="Add or create a maker"
+                type="text"
+                value=""
+              />
+              <button
+                className="submit"
+                onClick={[Function]}
+              >
+                Create New
+              </button>
+            </div>
+            <nav
+              className="predictive-list"
+            >
+              <ul />
+            </nav>
+          </div>
+        </nav>
+      </div>
+    </form>
+  </section>
+</div>
+`;

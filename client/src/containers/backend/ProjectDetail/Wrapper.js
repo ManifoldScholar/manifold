@@ -4,14 +4,13 @@ import { Dialog, Project, Navigation } from 'components/backend';
 import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
 import { select } from 'utils/entityUtils';
 import { projectsAPI, requests } from 'api';
-import get from 'lodash/get';
 import { ProjectDetail } from 'containers/backend';
 import { renderRoutes } from 'helpers/routing';
 import lh from 'helpers/linkHandler';
 
 const { request, flush } = entityStoreActions;
 
-class ProjectDetailWrapperContainer extends PureComponent {
+export class ProjectDetailWrapperContainer extends PureComponent {
 
   static displayName = "ProjectDetail.Wrapper";
 

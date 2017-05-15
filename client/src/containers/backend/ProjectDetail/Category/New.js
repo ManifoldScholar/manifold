@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Category } from 'components/backend';
 import { Dialog } from 'components/backend';
-import { withRouter } from 'react-router-dom';
 
 export default class ProjectDetailCategoryNew extends Component {
 

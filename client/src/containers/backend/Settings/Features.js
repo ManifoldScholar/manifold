@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Form } from 'components/backend';
 import Placeholder from './Placeholder';
 
-class SettingsFeaturesContainer extends PureComponent {
+export class SettingsFeaturesContainer extends PureComponent {
 
   render() {
     return (

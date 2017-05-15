@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Settings Features Container renders correctly 1`] = `
+<section>
+  <form
+    className="form-secondary"
+  >
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label
+        className=""
+      >
+        A features setting
+      </label>
+      <input
+        onChange={[Function]}
+        placeholder="Some setting could go here"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label
+        className=""
+      >
+        Another features setting
+      </label>
+      <input
+        onChange={[Function]}
+        placeholder="Some other setting could go here"
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
+</section>
+`;

@@ -1,8 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Form } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
-import update from 'immutability-helper';
-import set from 'lodash/set';
 import { textsAPI } from 'api';
 
 export default class TextDetailGeneralContainer extends PureComponent {

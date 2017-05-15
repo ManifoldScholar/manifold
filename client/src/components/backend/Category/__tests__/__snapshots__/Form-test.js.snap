@@ -4,6 +4,7 @@ exports[`Backend.Category.Form Component renders correctly 1`] = `
 <div>
   <form
     className="form-secondary"
+    data-id="submit"
     onSubmit={[Function]}
   >
     <div

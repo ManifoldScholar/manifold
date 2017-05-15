@@ -9,7 +9,7 @@ import { Route, Switch } from 'react-router-dom';
 import { People } from 'containers/backend';
 import { renderRoutes } from 'helpers/routing';
 
-class UsersWrapperContainer extends PureComponent {
+export class UsersWrapperContainer extends PureComponent {
 
   static displayName = "Users.Wrapper";
 

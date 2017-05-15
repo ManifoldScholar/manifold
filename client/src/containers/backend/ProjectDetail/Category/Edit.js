@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import connectAndFetch from 'utils/connectAndFetch';
 import { Category } from 'components/backend';
-import { connect } from 'react-redux';
 import { Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { select } from 'utils/entityUtils';
@@ -9,7 +8,7 @@ import { textCategoriesAPI, requests } from 'api';
 
 const { request } = entityStoreActions;
 
-class ProjectDetailCategoryEditContainer extends Component {
+export class ProjectDetailCategoryEditContainer extends Component {
 
   static displayName = "ProjectDetail.Category.Edit";
 
