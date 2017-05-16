@@ -34,14 +34,29 @@ class DrawerWrapper extends PureComponent {
     style: 'backend'
   };
 
+  static childContextTypes = {
+    pauseKeyboardEvents: PropTypes.func,
+    unpauseKeyboardEvents: PropTypes.func
+  };
+
+  getChildContext() {
+    return {
+      pauseKeyboardEvents: this.pauseKeyboardEvents,
+      unpauseKeyboardEvents: this.unpauseKeyboardEvents
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      leaving: false
+      leaving: false,
+      keyboardEventsPaused: false
     };
 
     this.handleLeaveEvent = this.handleLeaveEvent.bind(this);
     this.handleLeaveKey = this.handleLeaveKey.bind(this);
+    this.pauseKeyboardEvents = this.pauseKeyboardEvents.bind(this);
+    this.unpauseKeyboardEvents = this.unpauseKeyboardEvents.bind(this);
   }
 
   componentDidMount() {
@@ -53,9 +68,18 @@ class DrawerWrapper extends PureComponent {
   }
 
   handleLeaveKey(event) {
+    if (this.state.keyboardEventsPaused) return null;
     if (event.keyCode === 27) {
       this.handleLeaveEvent(event);
     }
+  }
+
+  pauseKeyboardEvents() {
+    this.setState({ keyboardEventsPaused: true });
+  }
+
+  unpauseKeyboardEvents() {
+    this.setState({ keyboardEventsPaused: false });
   }
 
   handleLeaveEvent(event) {

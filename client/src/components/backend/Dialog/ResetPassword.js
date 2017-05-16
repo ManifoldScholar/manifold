@@ -25,6 +25,11 @@ class ResetPasswordWrapper extends PureComponent {
   static defaultProps = {
   };
 
+  static contextTypes = {
+    pauseKeyboardEvents: PropTypes.func,
+    unpauseKeyboardEvents: PropTypes.func
+  };
+
   static mapStateToProps(state, ownProps) {
     return {
       response: get(state.entityStore.responses, requests.beUserUpdate)
@@ -40,10 +45,23 @@ class ResetPasswordWrapper extends PureComponent {
     };
     this.handleResolveClick = this.handleResolveClick.bind(this);
     this.handleRejectClick = this.handleRejectClick.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  componentWillMount() {
+    if (this.context.pauseKeyboardEvents) this.context.pauseKeyboardEvents();
+    window.addEventListener('keyup', this.handleKeyPress);
   }
 
   componentWillUnmount() {
+    if (this.context.unpauseKeyboardEvents) this.context.unpauseKeyboardEvents();
+    window.removeEventListener('keyup', this.handleKeyPress);
     this.props.dispatch(flush([requests.beUserUpdate]));
+  }
+
+  handleKeyPress(event) {
+    event.preventDefault();
+    if (event.keyCode === 27) return this.handleRejectClick(event);
   }
 
   handleResolveClick() {
@@ -171,27 +189,12 @@ class ResetPasswordWrapper extends PureComponent {
 
   renderConfirmation() {
     return (
-      <div>
-        <header className="dialog-header-small">
-          <h2>Are you sure you want to reset this password?</h2>
-        </header>
-        <div className="buttons-icon-horizontal">
-          <button
-            onClick={(event) => this.handleResetEmailClick(event, this.props.user)}
-            className="button-icon-secondary"
-          >
-            <i className="manicon manicon-check small"></i>
-            Yes
-          </button>
-          <button
-            className="button-icon-secondary"
-            onClick={(event) => this.handleStateChange(event, 'confirm', false)}
-          >
-            <i className="manicon manicon-x small"></i>
-            No
-          </button>
-        </div>
-      </div>
+      <Dialog.Confirm
+        heading="Are you sure you want to reset this password?"
+        message="This action cannot be undone."
+        resolve={(event) => this.handleResetEmailClick(event, this.props.user)}
+        reject={(event) => this.handleStateChange(event, 'confirm', false)}
+      />
     );
   }
 
