@@ -19,17 +19,17 @@ module Attachments
     small_square: {
       geometry: "",
       format: :jpg,
-      convert_options: "-gravity north -thumbnail #{SMALL}x#{SMALL}^ -extent #{SMALL}x#{SMALL}"
+      convert_options: "-background none -gravity north -thumbnail #{SMALL}x#{SMALL}^ -extent #{SMALL}x#{SMALL}"
     },
     small_landscape: {
       geometry: "",
       format: :jpg,
-      convert_options: "-gravity north -thumbnail #{SMALL}x#{SMALL_REL}^ -extent #{SMALL}x#{SMALL_REL}"
+      convert_options: "-background none -gravity north -thumbnail #{SMALL}x#{SMALL_REL}^ -extent #{SMALL}x#{SMALL_REL}"
     },
     small_portrait: {
       geometry: "",
       format: :jpg,
-      convert_options: "-gravity north -thumbnail #{SMALL_REL}x#{SMALL}^ -extent #{SMALL_REL}x#{SMALL}"
+      convert_options: "-background none -gravity north -thumbnail #{SMALL_REL}x#{SMALL}^ -extent #{SMALL_REL}x#{SMALL}"
     },
     medium: {
       geometry: "#{MED}x#{MED}",
@@ -38,22 +38,22 @@ module Attachments
     medium_square: {
       geometry: "",
       format: :jpg,
-      convert_options: "-gravity north -thumbnail #{MED}x#{MED}^ -extent #{MED}x#{MED}"
+      convert_options: "-background none -gravity north -thumbnail #{MED}x#{MED}^ -extent #{MED}x#{MED}"
     },
     medium_landscape: {
       geometry: "",
       format: :jpg,
-      convert_options: "-gravity north -thumbnail #{MED}x#{MED_REL}^ -extent #{MED}x#{MED_REL}"
+      convert_options: "-background none -gravity north -thumbnail #{MED}x#{MED_REL}^ -extent #{MED}x#{MED_REL}"
     },
     medium_portrait: {
       geometry: "",
       format: :jpg,
-      convert_options: "-gravity north -thumbnail #{MED / 1.6}x#{MED}^ -extent #{MED_REL}"
+      convert_options: "-background none -gravity north -thumbnail #{MED / 1.6}x#{MED}^ -extent #{MED_REL}"
     },
     large_landscape: {
       geometry: "",
       format: :jpg,
-      convert_options: "-gravity north -thumbnail #{LRG}x#{LRG / 1.6}^ -extent #{LRG}x#{LRG / 1.6}"
+      convert_options: "-background none -gravity north -thumbnail #{LRG}x#{LRG / 1.6}^ -extent #{LRG}x#{LRG / 1.6}"
     }
   }.freeze
 
@@ -98,21 +98,19 @@ module Attachments
           return BASE_STYLES
         end
 
-        def manifold_attachment_pdf_styles
-          BASE_STYLES.map do |style_name, base_style|
-            out = base_style.clone
-            out[:format] = :png
-            [style_name, out]
-          end.to_h
+        def manifold_attachment_alpha_styles
+          BASE_STYLES.transform_values do |base_style|
+            base_style.merge(format: :png)
+          end
         end
 
         def #{field}_style_configuration(additional_styles = {}, no_styles = false)
           return {} if no_styles
-          out = manifold_attachment_image_styles if #{field}_is_image? 
-          out = manifold_attachment_pdf_styles if #{field}_is_pdf? 
-          out = manifold_attachment_image_styles
+          return manifold_attachment_alpha_styles if #{field}_is_pdf? ||
+                                                       #{field}_extension == "png" ||
+                                                       #{field}_extension == "gif"
+          manifold_attachment_image_styles
           # Debugger.add_breakpoint(__FILE__, __LINE__ + 1)
-          out
         end
 
         def #{field}_url
