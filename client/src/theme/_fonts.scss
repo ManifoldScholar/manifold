@@ -3,14 +3,126 @@
 
 // Do your @font-face embedding/include mixins here, in the privacy of your own partial
 
+// TypeKit fallback serif font
+// --------------------------
+@font-face {
+  font-family: 'aleo';
+  src: url('assets/fonts/aleo/aleo-regular/Aleo-Regular.eot');
+  src: url('assets/fonts/aleo/aleo-regular/Aleo-Regular.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/aleo/aleo-regular/Aleo-Regular.woff') format('woff'),
+  url('assets/fonts/aleo/aleo-regular/Aleo-Regular.ttf') format('truetype'),
+  url('assets/fonts/aleo/aleo-regular/Aleo-Regular.svg#aleoregular') format('svg');
+
+  font-weight: $regular;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'aleo';
+  src: url('assets/fonts/aleo/aleo-italic/Aleo-Italic.eot');
+  src: url('assets/fonts/aleo/aleo-italic/Aleo-Italic.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/aleo/aleo-italic/Aleo-Italic.woff') format('woff'),
+  url('assets/fonts/aleo/aleo-italic/Aleo-Italic.ttf') format('truetype'),
+  url('assets/fonts/aleo/aleo-italic/Aleo-Italic.svg#aleoregular') format('svg');
+
+  font-weight: $regular;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'aleo';
+  src: url('assets/fonts/aleo/aleo-light/Aleo-Light.eot');
+  src: url('assets/fonts/aleo/aleo-light/Aleo-Light.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/aleo/aleo-light/Aleo-Light.woff') format('woff'),
+  url('assets/fonts/aleo/aleo-light/Aleo-Light.ttf') format('truetype'),
+  url('assets/fonts/aleo/aleo-light/Aleo-Light.svg#aleoregular') format('svg');
+
+  font-weight: $light;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'aleo';
+  src: url('assets/fonts/aleo/aleo-bold/Aleo-Bold.eot');
+  src: url('assets/fonts/aleo/aleo-bold/Aleo-Bold.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/aleo/aleo-bold/Aleo-Bold.woff') format('woff'),
+  url('assets/fonts/aleo/aleo-bold/Aleo-Bold.ttf') format('truetype'),
+  url('assets/fonts/aleo/aleo-bold/Aleo-Bold.svg#aleoregular') format('svg');
+
+  font-weight: $bold;
+  font-style: normal;
+}
+
+// TypeKit fallback san-serif font
+// --------------------------
+@font-face {
+  font-family: 'trueno';
+  src: url('assets/fonts/trueno/trueno-regular/TruenoRg.eot');
+  src: url('assets/fonts/trueno/trueno-regular/TruenoRg.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/trueno/trueno-regular/TruenoRg.woff') format('woff'),
+  url('assets/fonts/trueno/trueno-regular/TruenoRg.ttf') format('truetype'),
+  url('assets/fonts/trueno/trueno-regular/TruenoRg.svg#aleoregular') format('svg');
+
+  font-weight: $regular;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'trueno';
+  src: url('assets/fonts/trueno/trueno-italic/TruenoRgIt.eot');
+  src: url('assets/fonts/trueno/trueno-italic/TruenoRgIt.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/trueno/trueno-italic/TruenoRgIt.woff') format('woff'),
+  url('assets/fonts/trueno/trueno-italic/TruenoRgIt.ttf') format('truetype'),
+  url('assets/fonts/trueno/trueno-italic/TruenoRgIt.svg#aleoregular') format('svg');
+
+  font-weight: $regular;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'trueno';
+  src: url('assets/fonts/trueno/trueno-bold/TruenoBd.eot');
+  src: url('assets/fonts/trueno/trueno-bold/TruenoBd.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/trueno/trueno-bold/TruenoBd.woff') format('woff'),
+  url('assets/fonts/trueno/trueno-bold/TruenoBd.ttf') format('truetype'),
+  url('assets/fonts/trueno/trueno-bold/TruenoBd.svg#aleoregular') format('svg');
+
+  font-weight: $bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'trueno';
+  src: url('assets/fonts/trueno/trueno-semi/TruenoSBd.eot');
+  src: url('assets/fonts/trueno/trueno-semi/TruenoSBd.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/trueno/trueno-semi/TruenoSBd.woff') format('woff'),
+  url('assets/fonts/trueno/trueno-semi/TruenoSBd.ttf') format('truetype'),
+  url('assets/fonts/trueno/trueno-semi/TruenoSBd.svg#aleoregular') format('svg');
+
+  font-weight: $semibold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'trueno';
+  src: url('assets/fonts/trueno/trueno-light/TruenoLt.eot');
+  src: url('assets/fonts/trueno/trueno-light/TruenoLt.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/trueno/trueno-light/TruenoLt.woff') format('woff'),
+  url('assets/fonts/trueno/trueno-light/TruenoLt.ttf') format('truetype'),
+  url('assets/fonts/trueno/trueno-light/TruenoLt.svg#aleoregular') format('svg');
+
+  font-weight: $light;
+  font-style: normal;
+}
+
 // Mixins
 // --------------------------
 @mixin templateCopy {
-  font-family: 'freight-text-pro', serif;
+  font-family: 'freight-text-pro', 'aleo', serif;
 }
 
 @mixin templateHead {
-  font-family: 'sofia-pro',sans-serif;
+  font-family: 'sofia-pro', 'trueno', sans-serif;
 }
 
 // Abstracted in order to allow scoped changes
