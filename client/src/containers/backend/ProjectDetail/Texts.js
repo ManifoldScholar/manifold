@@ -224,7 +224,6 @@ export class ProjectDetailTexts extends PureComponent {
   }
 
   handleTextDown(event, text) {
-    const position = this.positionInCategory(text);
     let targetCategory = text.relationships.category;
     let move = "down";
     if (this.isPublishedText(text)) return this.handleTextUnpublish(text);
