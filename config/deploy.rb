@@ -103,7 +103,7 @@ namespace :import do
   task :projects, :project do |t, args|
     project = args[:project]
     path = "../import"
-    task = project ? "import:project" : "import:project"
+    task = project ? "import:project" : "import:projects"
     path << "/#{project}" if project
     on roles(:app) do
       with path: "./bin:$PATH" do
