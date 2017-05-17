@@ -1,0 +1,240 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend ProjectDetail Resource CollectionList Container renders correctly 1`] = `
+<div
+  className="project-resource-list"
+>
+  <header
+    className="section-heading-secondary"
+  >
+    <h3>
+      Collections
+       
+      <i
+        className="manicon manicon-cube-shine"
+      />
+    </h3>
+  </header>
+  <div>
+    <form
+      className="form-search-filter"
+      onSubmit={[Function]}
+    >
+      <div
+        className="search"
+      >
+        <button>
+          <i
+            className="manicon manicon-magnify"
+          />
+          <span
+            className="screen-reader-text"
+          >
+            Click to search
+          </span>
+        </button>
+        <input
+          onChange={[Function]}
+          placeholder="Search..."
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-list-filter"
+      >
+        <div
+          className="select-group"
+        />
+      </div>
+      <button
+        className="button-bare-primary reset"
+        onClick={[Function]}
+      >
+        Reset Search
+      </button>
+    </form>
+    <nav
+      className="vertical-list-primary"
+    >
+      <div>
+        <p
+          className="list-total"
+        >
+          Showing 
+          <span>
+            1-1
+          </span>
+           of 
+          <span>
+            2
+          </span>
+           collections: 
+        </p>
+        <div
+          className="buttons-icon-horizontal"
+        >
+          <a
+            className="button-icon-secondary"
+            href="/backend/project/1/collections/new"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-plus"
+            />
+            Add a New Collection
+          </a>
+        </div>
+        <ul>
+          <li>
+            <a
+              href="/backend/collection/2"
+              onClick={[Function]}
+            >
+              <header>
+                <figure
+                  className="cover"
+                >
+                  <div
+                    className="collection-thumbnail-square bg-image icon-only"
+                    style={
+                      Object {
+                        "backgroundImage": "url(/static/images/resource-collection.jpg)",
+                      }
+                    }
+                  />
+                </figure>
+                <div
+                  className="meta"
+                >
+                  <h3
+                    className="name"
+                  >
+                    <span
+                      className="collection-title"
+                    >
+                      Rowan
+                    </span>
+                    <span
+                      className="subtitle"
+                    >
+                      <span>
+                        April 24, 2017
+                      </span>
+                    </span>
+                  </h3>
+                </div>
+              </header>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/backend/collection/3"
+              onClick={[Function]}
+            >
+              <header>
+                <figure
+                  className="cover"
+                >
+                  <div
+                    className="collection-thumbnail-square bg-image icon-only"
+                    style={
+                      Object {
+                        "backgroundImage": "url(/static/images/resource-collection.jpg)",
+                      }
+                    }
+                  />
+                </figure>
+                <div
+                  className="meta"
+                >
+                  <h3
+                    className="name"
+                  >
+                    <span
+                      className="collection-title"
+                    >
+                      Rowan
+                    </span>
+                    <span
+                      className="subtitle"
+                    >
+                      <span>
+                        April 24, 2017
+                      </span>
+                    </span>
+                  </h3>
+                </div>
+              </header>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <nav
+      className="list-pagination-primary"
+    >
+      <ul>
+        <li
+          className="pagination-previous"
+          style={
+            Object {
+              "visibility": "hidden",
+            }
+          }
+        >
+          <a
+            data-id="page-prev"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-arrow-long-left"
+            />
+            <span>
+              Prev
+            </span>
+          </a>
+        </li>
+        <li
+          className="active ordinal"
+        >
+          <a
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            1
+          </a>
+        </li>
+        <li
+          className="ordinal"
+        >
+          <a
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            2
+          </a>
+        </li>
+        <li
+          className="pagination-next"
+          style={Object {}}
+        >
+          <a
+            data-id="page-next"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <span>
+              Next
+            </span>
+            <i
+              className="manicon manicon-arrow-long-right"
+            />
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+`;

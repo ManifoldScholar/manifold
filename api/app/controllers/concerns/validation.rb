@@ -31,6 +31,14 @@ module Validation
     params.permit(param_config)
   end
 
+  def collection_params
+    params.require(:data)
+    attributes = [:title, :description, attachment(:thumbnail)]
+    relationships = [:project, :resources]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def resource_params
     params.require(:data)
     attributes = [attachment(:attachment), :remove_attachment,
@@ -164,7 +172,7 @@ module Validation
   end
 
   def collection_filter_params
-    params.permit(filter: [])[:filter]
+    params.permit(filter: [:keyword])[:filter]
   end
 
   def resource_filter_params

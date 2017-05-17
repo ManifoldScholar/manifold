@@ -73,6 +73,7 @@ module Demonstration
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     def reindex_records
       Project.reindex
       @logger.info("Projects reindexed".green)
@@ -82,9 +83,12 @@ module Demonstration
       @logger.info("Makers reindexed".green)
       Resource.reindex
       @logger.info("Resources reindexed".green)
+      Collection.reindex
+      @logger.info("Collections reindexed".green)
       Event.reindex
       @logger.info("Events reindexed".green)
     end
+    # rubocop:enable Metrics/AbcSize
 
     private
 

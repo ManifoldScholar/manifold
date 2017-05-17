@@ -1,9 +1,8 @@
 jest.mock('components/global/HigherOrder/fetchData');
-jest.mock('api/client');
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { ProjectDetailResources } from '../Resources';
+import ProjectDetailResourcesContainer from '../Resources';
 import { wrapWithRouter } from 'test/helpers/routing';
 import { Provider } from 'react-redux';
 import build from 'test/fixtures/build';
@@ -12,18 +11,12 @@ describe("Backend ProjectDetail Resources Container", () => {
 
   const store = build.store();
   const project = build.entity.project("1");
-  const resources = [build.entity.resource("2"), build.entity.resource("3")];
-  project.relationships.resources = resources;
 
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store} >
-        <ProjectDetailResources
+        <ProjectDetailResourcesContainer
           project={project}
-          resources={resources}
-          resourcesMeta={{
-            pagination: build.pagination()
-          }}
           dispatch={store.dispatch}
         />
       </Provider>

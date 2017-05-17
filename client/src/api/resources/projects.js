@@ -67,6 +67,16 @@ export default {
     };
   },
 
+  collections(id, filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/projects/${id}/relationships/collections`,
+      method: 'GET',
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   uncollected_resources(id, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/projects/${id}/relationships/uncollected_resources`,

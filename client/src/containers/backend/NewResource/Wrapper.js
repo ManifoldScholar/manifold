@@ -38,7 +38,7 @@ export class NewResourceWrapperContainer extends PureComponent {
           breadcrumb={[
             {
               path: lh.link("backendProjectResources", match.params.projectId),
-              label: "Project"
+              label: "Resources"
             }
           ]}
           title={'New Resource'}

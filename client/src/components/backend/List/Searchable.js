@@ -16,6 +16,7 @@ export default class ListSearchable extends PureComponent {
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func,
     entityComponentProps: PropTypes.object,
+    entityComponent: PropTypes.func.isRequired,
     paginationPadding: PropTypes.number,
     newButtonText: PropTypes.string,
     newButtonVisible: PropTypes.bool,
@@ -113,6 +114,8 @@ export default class ListSearchable extends PureComponent {
     this.updateResults();
   }
 
+  // Can take either a builder function that returns JSX or
+  // a component class as this.props.entityComponent
   renderEntity(entity) {
     const props = Object.assign({}, this.props.entityComponentProps);
     props.key = entity.id;
