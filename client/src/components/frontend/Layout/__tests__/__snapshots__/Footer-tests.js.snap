@@ -82,13 +82,13 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
       >
         © 2015-2016 6 University of Minnesota Press.
         <br />
-        Manifold is released under the
+        Manifold is released under the 
         <a
           href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md"
         >
           GNU General Public License v3
         </a>
-        . Download and contribute to
+        . Download and contribute to 
         <a
           href="https://github.com/ManifoldScholar/manifold"
         >

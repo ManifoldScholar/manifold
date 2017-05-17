@@ -41,15 +41,15 @@ export default class LayoutFooter extends Component {
   }
 
   buildContentPages() {
-    let pages = [];
+    const pages = [];
     if (this.props.pages) {
       this.props.pages.forEach((page) => {
         if (page.attributes.showInFooter) {
-          pages.push((
-            <Link to={`/browse/page/${page.attributes.slug}`}>
-              {page.attributes.navTitle ? page.attributes.navTitle : page.attributes.title}
+          pages.push(
+            <Link to={lh.link("frontendPage", page.attributes.slug)}>
+              {page.attributes.navTitle || page.attributes.title}
             </Link>
-          ));
+          );
         }
       });
     }
