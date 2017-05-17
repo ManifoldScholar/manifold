@@ -1,7 +1,14 @@
 # A collection of resources
 class Collection < ApplicationRecord
 
+  # Constants
+  TYPEAHEAD_ATTRIBUTES = [:title].freeze
+
+  # Search
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
+
   # Concerns
+  include Filterable
   include Authority::Abilities
   include Attachments
   extend FriendlyId

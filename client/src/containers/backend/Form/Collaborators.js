@@ -75,40 +75,38 @@ export class FormCollaborators extends Component {
 
     return (
       <section>
-        <section>
-          <form className="form-secondary">
-            <Form.HasMany
-              label="Authors"
-              placeholder="Add an Author"
-              onNew={(value) => { return this.newMaker(value, "creator"); }}
-              onChange={(makers, changeType) => {
-                this.updateMakers(makers, changeType, "creators");
-              }}
-              optionsFetch={makersAPI.index}
-              entities={entity.relationships.creators}
-              entityBuilder={this.buildEntity}
-              entityLabelAttribute="fullName"
-              entityAvatarAttribute="avatarStyles"
-              errors={get(this.props, 'createCreator.errors')}
-              orderable
-            />
-            <Form.HasMany
-              label="Contributors"
-              placeholder="Add a Contributor"
-              onNew={(value) => { return this.newMaker(value, "contributor"); }}
-              onChange={(makers, changeType) => {
-                this.updateMakers(makers, changeType, "contributors");
-              }}
-              optionsFetch={makersAPI.index}
-              entities={entity.relationships.contributors}
-              entityBuilder={this.buildEntity}
-              entityLabelAttribute="fullName"
-              entityAvatarAttribute="avatarStyles"
-              errors={get(this.props, 'createContributor.errors')}
-              orderable
-            />
-          </form>
-        </section>
+        <form className="form-secondary">
+          <Form.HasMany
+            label="Authors"
+            placeholder="Add an Author"
+            onNew={(value) => { return this.newMaker(value, "creator"); }}
+            onChange={(makers, changeType) => {
+              this.updateMakers(makers, changeType, "creators");
+            }}
+            optionsFetch={makersAPI.index}
+            entities={entity.relationships.creators}
+            entityBuilder={this.buildEntity}
+            entityLabelAttribute="fullName"
+            entityAvatarAttribute="avatarStyles"
+            errors={get(this.props, 'createCreator.errors')}
+            orderable
+          />
+          <Form.HasMany
+            label="Contributors"
+            placeholder="Add a Contributor"
+            onNew={(value) => { return this.newMaker(value, "contributor"); }}
+            onChange={(makers, changeType) => {
+              this.updateMakers(makers, changeType, "contributors");
+            }}
+            optionsFetch={makersAPI.index}
+            entities={entity.relationships.contributors}
+            entityBuilder={this.buildEntity}
+            entityLabelAttribute="fullName"
+            entityAvatarAttribute="avatarStyles"
+            errors={get(this.props, 'createContributor.errors')}
+            orderable
+          />
+        </form>
       </section>
     );
   }

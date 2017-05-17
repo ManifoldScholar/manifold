@@ -9,12 +9,13 @@ export default class ResourceListItem extends PureComponent {
   static displayName = "Resource.ListItem";
 
   static propTypes = {
-    resource: PropTypes.object
+    entity: PropTypes.object,
   };
 
   render() {
     const resource = this.props.entity;
     const attr = resource.attributes;
+
     return (
       <li>
         <Link to={lh.link("backendResource", this.props.entity.id)}>

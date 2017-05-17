@@ -60,6 +60,11 @@ class Resource < ApplicationRecord
     return all unless project.present?
     where(project: project)
   }
+  scope :by_collection, lambda { |collection|
+    return all unless collection.present?
+    joins(:collection_resources)
+      .where("collection_resources.collection_id = ?", collection)
+  }
   scope :by_tag, lambda { |tag|
     return all unless tag.present?
     tagged_with(tag)

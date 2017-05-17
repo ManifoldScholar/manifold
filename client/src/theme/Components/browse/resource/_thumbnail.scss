@@ -1,6 +1,6 @@
 // Any kind of resource thumbnail can use this component class
 // Use wrapper list classes to affect external position, width, etc, but not appearance.
-.resource-thumbnail-primary {
+.resource-thumbnail-primary, .collection-thumbnail-square {
   position: relative;
   display: flex;
   justify-content: space-between;

@@ -4,7 +4,6 @@ import { Text, Navigation, Dialog } from 'components/backend';
 import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
 import { select } from 'utils/entityUtils';
 import { resourcesAPI, requests } from 'api';
-import get from 'lodash/get';
 import lh from 'helpers/linkHandler';
 import { renderRoutes } from 'helpers/routing';
 

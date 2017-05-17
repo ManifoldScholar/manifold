@@ -37,8 +37,38 @@ describe("Backend.List.Searchable component", () => {
     )
   );
 
+  function buildComponent(props) {
+    return (
+      <div>
+        Can we build {props.entity.attributes.title}?
+        <p>Yes, we can.</p>
+      </div>
+    )
+  }
+
   it('renders correctly', () => {
     const component = renderer.create(root);
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders correctly when passed a component builder function', () => {
+    const component = renderer.create((
+      wrapWithRouter(
+        <Searchable
+          entities={entities}
+          singularUnit="resource"
+          pluralUnit="resources"
+          pagination={pagination}
+          paginationClickHandler={() => pageChangeMock}
+          entityComponent={buildComponent}
+          filterChangeHandler={filterChangeMock}
+          filterOptions={{
+            type: ['TWEET', 'PROJECT_CREATED']
+          }}
+        />
+      )
+    ));
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

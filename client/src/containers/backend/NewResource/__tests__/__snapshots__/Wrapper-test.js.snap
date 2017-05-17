@@ -28,7 +28,7 @@ exports[`Backend NewResource Wrapper Container renders correctly 1`] = `
               href="/backend/project/undefined/resources"
               onClick={[Function]}
             >
-              Project
+              Resources
             </a>
           </li>
         </ul>

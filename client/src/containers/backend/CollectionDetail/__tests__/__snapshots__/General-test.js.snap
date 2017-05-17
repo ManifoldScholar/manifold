@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend CollectionDetail General Container renders correctly 1`] = `
+<section>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Title
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter a title"
+          type="text"
+          value="Rowan"
+        />
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label>
+            Description
+          </label>
+          <textarea
+            onChange={[Function]}
+            placeholder="Enter a description"
+            style={
+              Object {
+                "height": 100,
+              }
+            }
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Cover Image
+          </label>
+          <div
+            className="form-dropzone style-landscape"
+            onClick={[Function]}
+            onDragEnter={[Function]}
+            onDragLeave={[Function]}
+            onDragOver={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            style={Object {}}
+          >
+            <div
+              className="contents-empty"
+            >
+              <i
+                className="manicon manicon-cloud-up"
+              />
+              <div
+                className="message"
+              >
+                <p
+                  className="primary"
+                >
+                  Upload a file or
+                  <br />
+                  drag and drop here
+                  <br />
+                </p>
+                <p
+                  className="secondary"
+                >
+                  jpeg, tiff, gif, png
+                </p>
+              </div>
+            </div>
+            <input
+              accept="image/*"
+              multiple={false}
+              onChange={[Function]}
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+              type="file"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Collection"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;
