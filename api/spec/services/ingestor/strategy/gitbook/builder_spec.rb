@@ -4,7 +4,7 @@ RSpec.describe Ingestor::Strategy::Gitbook::Builder do
 
   before(:each) do
     @creator = FactoryGirl.create(:user)
-    path = File.join("spec", "data", "assets", "gitbook_test")
+    path = File.join("spec", "data", "assets", "gitbook_test", "original")
 
     ingestion = Ingestor::Ingestion.new(path, @creator)
     strategy = Ingestor::Strategy.for(ingestion)

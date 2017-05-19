@@ -19,6 +19,7 @@ module Ingestor
         transform_text_sections!(text)
         validate_text(text)
         attempt_save!(text)
+        remove_stale_sections(text)
         destroy_tmp
       end
 
@@ -203,6 +204,14 @@ module Ingestor
         creator = ::Ingestor::Creator::TextSections.new(@logger, text)
         text_sections = creator.create(text_section_inspectors, text.text_sections)
         text_sections.each(&:save)
+      end
+
+      def remove_stale_sections(text)
+        text.text_sections.each do |section|
+          next if text.spine.include? section.id
+          section.destroy
+          info "services.ingestor.logging.remove_text_section", id: section.id
+        end
       end
 
       def update_ingestion_sources!(text)

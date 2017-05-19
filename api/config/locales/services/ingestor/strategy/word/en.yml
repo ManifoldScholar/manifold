@@ -1,0 +1,7 @@
+en:
+  services:
+    ingestor:
+      strategy:
+        word:
+          log:
+            skipping_source: 'Skipping source: "%{path}"'
