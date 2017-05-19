@@ -134,7 +134,6 @@ exports[`Frontend CollectionDetail Container renders correctly 1`] = `
                   <a
                     className="download-link"
                     href="original-image.mock"
-                    onClick={[Function]}
                     target="_blank"
                   >
                     Download
