@@ -8,6 +8,7 @@ class ResourcePartialSerializer < ActiveModel::Serializer
              :downloadable, :created_at
 
   has_many :collection_resources
+  has_many :collection_resources
 
   def downloadable
     object.downloadable?
