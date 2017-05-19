@@ -18,7 +18,6 @@ const perPage = 10;
 class CollectionDetailContainer extends PureComponent {
 
   static fetchData(getState, dispatch, location, match) {
-    console.log('test test');
     const state = getState();
     const filter = queryString.parse(location.search);
     const promises = [];

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ResourceList.Slide.SlidePlaceholder component renders correctly 1`] = `
+<figure>
+  <div
+    className="figure-default"
+    style={
+      Object {
+        "backgroundImage": "url(/static/images/resource-collection.jpg)",
+      }
+    }
+  >
+    <div
+      className="resource-info"
+    >
+      <i
+        className="manicon manicon-file-box"
+      />
+      <span
+        className="resource-type"
+      >
+        This collection has no resources
+      </span>
+    </div>
+  </div>
+</figure>
+`;
