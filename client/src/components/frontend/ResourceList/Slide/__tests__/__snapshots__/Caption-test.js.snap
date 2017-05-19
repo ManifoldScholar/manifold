@@ -38,7 +38,6 @@ exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
       <a
         className="download-link"
         href="original-image.mock"
-        onClick={[Function]}
         target="_blank"
       >
         Download

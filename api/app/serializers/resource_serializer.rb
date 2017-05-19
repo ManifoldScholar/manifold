@@ -5,7 +5,7 @@ class ResourceSerializer < ResourcePartialSerializer
   attributes :title, :kind, :attachment_file_name, :attachment_extension,
              :attachment_content_type, :attachment_file_size, :attachment_updated_at,
              :created_at, :updated_at, :project_id, :description_formatted,
-             :caption, :description, :downloadable, :fingerprint, :alt_text, :keywords,
+             :caption, :description, :fingerprint, :alt_text, :keywords,
              :copyright_status, :copyright_holder, :external_url,
              :allow_high_res, :allow_download, :doi, :high_res_url,
              :high_res_file_name, :high_res_content_type, :high_res_file_size,
@@ -41,10 +41,6 @@ class ResourceSerializer < ResourcePartialSerializer
   def iframe_width
     return nil unless object.iframe_dimensions
     object.split_iframe_dimensions[1]
-  end
-
-  def downloadable
-    object.downloadable?
   end
 
   def downloadable_kind

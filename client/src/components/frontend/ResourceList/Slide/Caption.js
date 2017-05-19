@@ -142,14 +142,14 @@ export default class ResourceListSlideCaption extends Component {
               </span>
             </button>
             {attr.downloadable ?
-              <Link
-                to={attr.attachmentStyles.original}
+              <a
+                href={attr.attachmentStyles.original}
                 target="_blank"
                 className="download-link"
               >
                 {'Download'}
                 <i className="manicon manicon-arrow-down"></i>
-              </Link>
+              </a>
             : null}
             {detailUrl ?
               <Link
