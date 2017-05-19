@@ -163,6 +163,27 @@ export default class ResourceListSlideshow extends PureComponent {
     return output;
   }
 
+  renderSlideShow() {
+    const position = this.state.position;
+    const collectionResource = this.state.map[position];
+
+    return (
+      <div key={position}>
+        { this.isLoaded(position) ?
+          this.getFigureByType(collectionResource)
+          :
+          <ResourceList.Slide.SlideLoading />
+        }
+      </div>
+    );
+  }
+
+  renderPlaceholder() {
+    return (
+      <ResourceList.Slide.SlidePlaceholder />
+    );
+  }
+
   render() {
     const position = this.state.position;
     const count = this.state.totalCount;
@@ -181,13 +202,10 @@ export default class ResourceListSlideshow extends PureComponent {
               transitionEnterTimeout={500}
               transitionLeaveTimeout={500}
             >
-              <div key={position}>
-                { this.isLoaded(position) ?
-                  this.getFigureByType(collectionResource)
-                  :
-                  <ResourceList.Slide.SlideLoading />
-                }
-              </div>
+              { this.props.collectionResources.length > 0 ?
+                  this.renderSlideShow()
+                : this.renderPlaceholder()
+              }
             </ReactCSSTransitionGroup>
           </div>
           <div className="slide-footer">
@@ -200,31 +218,34 @@ export default class ResourceListSlideshow extends PureComponent {
             :
               <ResourceList.Slide.LoadingCaption />
             }
-            <div className="slide-pagination">
-              <span className="slide-ordinal">
-                {position} {'/'} {count}
-              </span>
-              <div>
-                <button
-                  className="slide-previous"
-                  onClick={this.handleSlidePrev}
-                  disabled={position === 1}
-                >
-                  <i className="manicon manicon-arrow-round-left"></i>
-                  <span className="screen-reader-text">
-                    {'Click to load previous slide'}
+            { this.props.collectionResources.length > 0 ?
+                <div className="slide-pagination">
+                  <span className="slide-ordinal">
+                    {position} {'/'} {count}
                   </span>
-                </button>
-                <button
-                  className="slide-next"
-                  onClick={this.handleSlideNext}
-                  disabled={position === count}
-                >
-                  <i className="manicon manicon-arrow-round-right"></i>
-                  <span className="screen-reader-text"></span>
-                </button>
-              </div>
-            </div>
+                  <div>
+                    <button
+                      className="slide-previous"
+                      onClick={this.handleSlidePrev}
+                      disabled={position === 1}
+                    >
+                      <i className="manicon manicon-arrow-round-left"></i>
+                      <span className="screen-reader-text">
+                      {'Click to load previous slide'}
+                    </span>
+                    </button>
+                    <button
+                      className="slide-next"
+                      onClick={this.handleSlideNext}
+                      disabled={position === count}
+                    >
+                      <i className="manicon manicon-arrow-round-right"></i>
+                      <span className="screen-reader-text"></span>
+                    </button>
+                  </div>
+                </div>
+              : null
+            }
           </div>
         </div>
       </div>
