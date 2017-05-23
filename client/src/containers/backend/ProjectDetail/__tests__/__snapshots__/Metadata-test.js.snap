@@ -13,13 +13,18 @@ exports[`Backend ProjectDetail Metadata Container renders correctly 1`] = `
         style={Object {}}
       >
         <label
-          className=""
+          className="has-instructions"
         >
-          ISBN-10
+          abstract
         </label>
+        <span
+          className="instructions"
+        >
+          e.g. the abstract of a journal article
+        </span>
         <input
           onChange={[Function]}
-          placeholder="Enter ISBN-10 Number"
+          placeholder="Abstract of the item"
           type="text"
           value=""
         />
@@ -31,11 +36,32 @@ exports[`Backend ProjectDetail Metadata Container renders correctly 1`] = `
         <label
           className=""
         >
-          ISBN-13
+          archive
         </label>
         <input
           onChange={[Function]}
-          placeholder="Enter ISBN-13 Number"
+          placeholder="Archive storing the item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          archive location
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. a box and folder number
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Storage location within an archive"
           type="text"
           value=""
         />
@@ -47,11 +73,11 @@ exports[`Backend ProjectDetail Metadata Container renders correctly 1`] = `
         <label
           className=""
         >
-          Publisher
+          archive place
         </label>
         <input
           onChange={[Function]}
-          placeholder="Enter Publisher Name"
+          placeholder="Geographic location of the archive"
           type="text"
           value=""
         />
@@ -63,11 +89,11 @@ exports[`Backend ProjectDetail Metadata Container renders correctly 1`] = `
         <label
           className=""
         >
-          Place of Publication
+          authority
         </label>
         <input
           onChange={[Function]}
-          placeholder="Enter Place of Publication"
+          placeholder="Issuing or judicial authority"
           type="text"
           value=""
         />
@@ -79,11 +105,11 @@ exports[`Backend ProjectDetail Metadata Container renders correctly 1`] = `
         <label
           className=""
         >
-          Digital Object Identifier (DOI)
+          call number
         </label>
         <input
           onChange={[Function]}
-          placeholder="Enter DOI"
+          placeholder="Call number (to help locate the item in a library)"
           type="text"
           value=""
         />
@@ -95,11 +121,513 @@ exports[`Backend ProjectDetail Metadata Container renders correctly 1`] = `
         <label
           className=""
         >
-          Series
+          chapter number
         </label>
         <input
           onChange={[Function]}
-          placeholder="Enter Series Name"
+          placeholder={null}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          collection number
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. the series number for a book
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Number identifying the collection holding the item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          collection title
+        </label>
+        <span
+          className="instructions"
+        >
+          (e.g. the series title for a book)
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Title of the collection holding the item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          container title
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. the book title for a book chapter, the journal title for a journal article
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Title of the container holding the item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          dimensions
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. the physical size or running time
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="physical or temporal dimensions of the item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          edition
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. "3" when citing a chapter in the third edition of a book
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="(Container) edition holding the item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          event
+        </label>
+        <span
+          className="instructions"
+        >
+          the conference name when citing a conference paper
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="name of the related event"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          event place
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. "Amsterdam, the Netherlands"
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="geographic location of the related event"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          isbn
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="International Standard Book Number"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          issn
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="International Standard Serial Number"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          issue
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. "5" when citing a journal article from journal volume 2, issue 5
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="(Container) issue holding the item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          jurisdiction
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. "US" for a US patent
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Geographic scope of relevance "
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          medium
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. "CD", "DVD", etc.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Medium description"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          number
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. a report number
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Number identifying the item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          number of pages
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={null}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          number of volumes
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Total number of volumes, usable for citing multi-volume books and such"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          original publisher
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Original publisher, for items that have been republished by a different publisher"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          original publisher place
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Geographic location of the original publisher"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          original title
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Title of the original version"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          pmcid
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="PubMed Central reference number"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          pmid
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="PubMed reference number"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          publisher
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="The Publisher"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          publisher place
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Geographic location of the publisher"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          reviewed title
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Title of the item reviewed by the current item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          section
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. "politics" for a newspaper article
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Container section holding the item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          version
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Version of the item"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          volume
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. “2” when citing a chapter from book volume 2
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="(Container) volume holding the item "
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          year suffix
+        </label>
+        <span
+          className="instructions"
+        >
+          e.g. “a” in "Doe, 1999a"
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Disambiguating year suffix in author-date styles"
           type="text"
           value=""
         />

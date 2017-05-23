@@ -30,7 +30,8 @@ class Annotatable extends Component {
     selectionLocked: React.PropTypes.bool,
     resources: React.PropTypes.array,
     annotations: React.PropTypes.array,
-    text: PropTypes.object
+    text: PropTypes.object,
+    section: PropTypes.object
   };
 
   static defaultProps = {
@@ -309,6 +310,10 @@ class Annotatable extends Component {
     this.lockSelection();
   }
 
+  startBookmark(event) {
+    // TOD: Implement bookmarks
+  }
+
   closeDrawer(event) {
     this.setState({ drawerContents: null });
     // Keyboard event doesn't hide the popup by default,
@@ -442,6 +447,7 @@ class Annotatable extends Component {
         truncate={600}
         shareType={type}
         text={this.props.text}
+        section={this.props.section}
         annotating
       />
     );
@@ -475,6 +481,7 @@ class Annotatable extends Component {
           shareUrl={lh.link("readerSection", this.props.textId, this.props.sectionId)}
           highlight={this.highlightSelection}
           annotate={this.startAnnotateSelection}
+          bookmark={this.startBookmark}
           attachResource={this.startResourceSelection}
           cite={(event) => this.startShare(event, "citation")}
           selection={this.state.selection}
@@ -483,6 +490,7 @@ class Annotatable extends Component {
           annotatableDomElement={this.annotatable}
           showLogin={showLogin}
           text={this.props.text}
+          section={this.props.section}
         />
 
         {/* Render the margin resources */}

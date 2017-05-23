@@ -62,6 +62,11 @@ GEM
     builder (3.2.3)
     case_transform (0.2)
       activesupport
+    citeproc (1.0.5)
+      namae (~> 0.8)
+    citeproc-ruby (1.1.6)
+      citeproc (>= 1.0.4, < 2.0)
+      csl (~> 1.4)
     climate_control (0.1.0)
     clockwork (2.0.0)
       activesupport
@@ -74,6 +79,10 @@ GEM
     connection_pool (2.2.1)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    csl (1.4.5)
+      namae (~> 0.7)
+    csl-styles (1.0.1.7)
+      csl (~> 1.0)
     css_parser (1.4.7)
       addressable
     database_cleaner (1.5.3)
@@ -186,6 +195,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    namae (0.11.3)
     naught (1.1.0)
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
@@ -389,8 +399,10 @@ DEPENDENCIES
   acts_as_list (~> 0.8.2)
   authority (~> 3.2.0)
   bcrypt (~> 3.1.11)
+  citeproc-ruby
   clockwork (= 2.0.0)
   colorize
+  csl-styles
   css_parser
   database_cleaner
   dotenv-rails

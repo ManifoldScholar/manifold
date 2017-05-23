@@ -147,6 +147,7 @@ export default class Text extends Component {
             containerSize={typography.margins.current}
             bodySelector='[data-id="body"]'
             text={this.props.text}
+            section={this.props.section}
           >
             <div className={containerClass}>
               <div data-id="body" className={textSectionClass} >

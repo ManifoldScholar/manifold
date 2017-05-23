@@ -21,13 +21,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                         </header>
                       </div>
                       <Form.Setter('Form.TextInput) focusOnMount={true} label=\\"Facebook App ID\\" name=\\"attributes[integrations][facebookAppId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
-                        <Form.TextInput focusOnMount={true} label=\\"Facebook App ID\\" name=\\"attributes[integrations][facebookAppId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"1234\\" initialValue=\\"1234\\" password={false}>
+                        <Form.TextInput focusOnMount={true} label=\\"Facebook App ID\\" name=\\"attributes[integrations][facebookAppId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[integrations][facebookAppId]\\" errors={{...}} label=\\"Facebook App ID\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
                                 Facebook App ID
                               </label>
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"1234\\" />
+                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
                         </Form.TextInput>
@@ -52,13 +52,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                         </header>
                       </div>
                       <Form.Setter('Form.TextInput) label=\\"Twitter Consumer Key\\" name=\\"attributes[integrations][twitterAppId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
-                        <Form.TextInput label=\\"Twitter Consumer Key\\" name=\\"attributes[integrations][twitterAppId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"1234\\" initialValue=\\"1234\\" focusOnMount={false} password={false}>
+                        <Form.TextInput label=\\"Twitter Consumer Key\\" name=\\"attributes[integrations][twitterAppId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[integrations][twitterAppId]\\" errors={{...}} label=\\"Twitter Consumer Key\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
                                 Twitter Consumer Key
                               </label>
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"1234\\" />
+                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
                         </Form.TextInput>
@@ -76,13 +76,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                         </Form.TextInput>
                       </Form.Setter('Form.TextInput)>
                       <Form.Setter('Form.TextInput) label=\\"Twitter Access Token\\" name=\\"attributes[integrations][twitterAccessToken]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
-                        <Form.TextInput label=\\"Twitter Access Token\\" name=\\"attributes[integrations][twitterAccessToken]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"1234\\" initialValue=\\"1234\\" focusOnMount={false} password={false}>
+                        <Form.TextInput label=\\"Twitter Access Token\\" name=\\"attributes[integrations][twitterAccessToken]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[integrations][twitterAccessToken]\\" errors={{...}} label=\\"Twitter Access Token\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
                                 Twitter Access Token
                               </label>
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"1234\\" />
+                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
                         </Form.TextInput>
@@ -107,25 +107,25 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                         </header>
                       </div>
                       <Form.Setter('Form.TextInput) label=\\"Google Project Id\\" name=\\"attributes[integrations][googleProjectId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
-                        <Form.TextInput label=\\"Google Project Id\\" name=\\"attributes[integrations][googleProjectId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"1234\\" initialValue=\\"1234\\" focusOnMount={false} password={false}>
+                        <Form.TextInput label=\\"Google Project Id\\" name=\\"attributes[integrations][googleProjectId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googleProjectId]\\" errors={{...}} label=\\"Google Project Id\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
                                 Google Project Id
                               </label>
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"1234\\" />
+                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
                         </Form.TextInput>
                       </Form.Setter('Form.TextInput)>
                       <Form.Setter('Form.TextInput) label=\\"Google Private Key ID\\" name=\\"attributes[integrations][googlePrivateKeyId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
-                        <Form.TextInput label=\\"Google Private Key ID\\" name=\\"attributes[integrations][googlePrivateKeyId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"1234\\" initialValue=\\"1234\\" focusOnMount={false} password={false}>
+                        <Form.TextInput label=\\"Google Private Key ID\\" name=\\"attributes[integrations][googlePrivateKeyId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googlePrivateKeyId]\\" errors={{...}} label=\\"Google Private Key ID\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
                                 Google Private Key ID
                               </label>
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"1234\\" />
+                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
                         </Form.TextInput>
@@ -145,25 +145,25 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                         </Form.TextArea>
                       </Form.Setter('Form.TextArea)>
                       <Form.Setter('Form.TextInput) label=\\"Google Client Email\\" name=\\"attributes[integrations][googleClientEmail]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
-                        <Form.TextInput label=\\"Google Client Email\\" name=\\"attributes[integrations][googleClientEmail]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"1234\\" initialValue=\\"1234\\" focusOnMount={false} password={false}>
+                        <Form.TextInput label=\\"Google Client Email\\" name=\\"attributes[integrations][googleClientEmail]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googleClientEmail]\\" errors={{...}} label=\\"Google Client Email\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
                                 Google Client Email
                               </label>
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"1234\\" />
+                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
                         </Form.TextInput>
                       </Form.Setter('Form.TextInput)>
                       <Form.Setter('Form.TextInput) label=\\"Google Client ID\\" name=\\"attributes[integrations][googleClientId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
-                        <Form.TextInput label=\\"Google Client ID\\" name=\\"attributes[integrations][googleClientId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"1234\\" initialValue=\\"1234\\" focusOnMount={false} password={false}>
+                        <Form.TextInput label=\\"Google Client ID\\" name=\\"attributes[integrations][googleClientId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googleClientId]\\" errors={{...}} label=\\"Google Client ID\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
                                 Google Client ID
                               </label>
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"1234\\" />
+                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
                         </Form.TextInput>
@@ -176,13 +176,13 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                         </header>
                       </div>
                       <Form.Setter('Form.TextInput) label=\\"Google Client ID\\" name=\\"attributes[integrations][googleOauthClientId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
-                        <Form.TextInput label=\\"Google Client ID\\" name=\\"attributes[integrations][googleOauthClientId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"1234\\" initialValue=\\"1234\\" focusOnMount={false} password={false}>
+                        <Form.TextInput label=\\"Google Client ID\\" name=\\"attributes[integrations][googleOauthClientId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googleOauthClientId]\\" errors={{...}} label=\\"Google Client ID\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
                                 Google Client ID
                               </label>
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"1234\\" />
+                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
                         </Form.TextInput>
@@ -207,25 +207,25 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                         </header>
                       </div>
                       <Form.Setter('Form.MaskedTextInput) label=\\"Google Analytics Profile ID\\" name=\\"attributes[integrations][gaProfileId]\\" placeholder=\\"ga:123456789\\" mask={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
-                        <Form.MaskedTextInput label=\\"Google Analytics Profile ID\\" name=\\"attributes[integrations][gaProfileId]\\" placeholder=\\"ga:123456789\\" mask={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"1234\\" initialValue=\\"1234\\">
+                        <Form.MaskedTextInput label=\\"Google Analytics Profile ID\\" name=\\"attributes[integrations][gaProfileId]\\" placeholder=\\"ga:123456789\\" mask={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}}>
                           <div className=\\"form-input\\">
                             <label>
                               Google Analytics Profile ID
                             </label>
-                            <MaskedInput onChange={[Function]} value=\\"1234\\" type=\\"text\\" mask={{...}} placeholder=\\"ga:123456789\\">
-                              <input type=\\"text\\" placeholder=\\"ga:123456789\\" onInput={[Function]} defaultValue=\\"1234\\" />
+                            <MaskedInput onChange={[Function]} value={{...}} type=\\"text\\" mask={{...}} placeholder=\\"ga:123456789\\">
+                              <input type=\\"text\\" placeholder=\\"ga:123456789\\" onInput={[Function]} defaultValue={{...}} />
                             </MaskedInput>
                           </div>
                         </Form.MaskedTextInput>
                       </Form.Setter('Form.MaskedTextInput)>
                       <Form.Setter('Form.TextInput) label=\\"Google Analytics Tracking ID\\" name=\\"attributes[integrations][gaTrackingId]\\" placeholder=\\"UA-000000-00\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
-                        <Form.TextInput label=\\"Google Analytics Tracking ID\\" name=\\"attributes[integrations][gaTrackingId]\\" placeholder=\\"UA-000000-00\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"1234\\" initialValue=\\"1234\\" focusOnMount={false} password={false}>
+                        <Form.TextInput label=\\"Google Analytics Tracking ID\\" name=\\"attributes[integrations][gaTrackingId]\\" placeholder=\\"UA-000000-00\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[integrations][gaTrackingId]\\" errors={{...}} label=\\"Google Analytics Tracking ID\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
                                 Google Analytics Tracking ID
                               </label>
-                              <input type=\\"text\\" placeholder=\\"UA-000000-00\\" onChange={[Function]} value=\\"1234\\" />
+                              <input type=\\"text\\" placeholder=\\"UA-000000-00\\" onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
                         </Form.TextInput>

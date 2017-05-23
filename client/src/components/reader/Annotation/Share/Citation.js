@@ -1,151 +1,83 @@
-import React, { PureComponent, PropTypes } from 'react';
-import classNames from 'classnames';
-import { isPromise } from 'utils/promise';
+  import React, { PureComponent, PropTypes } from 'react';
+  import classNames from 'classnames';
+  import { isPromise } from 'utils/promise';
 
-export default class AnnotationShareEditor extends PureComponent {
+  export default class AnnotationShareEditor extends PureComponent {
 
-  static displayName = "Annotation.Share.Citation";
+    static displayName = "Annotation.Share.Citation";
 
-  static propTypes = {
-    text: PropTypes.object.isRequired,
-    cancel: PropTypes.func.isRequired
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.handleCancel = this.handleCancel.bind(this);
-
-    this.state = {
-      style: "mla",
-      citation: "",
-      copied: false
+    static propTypes = {
+      text: PropTypes.object.isRequired,
+      cancel: PropTypes.func.isRequired
     };
-    this.handleCitationChange = this.handleCitationChange.bind(this);
-    this.handleCopyClick = this.handleCopyClick.bind(this);
-  }
 
-  componentDidMount() {
-    this.ci.focus();
-    this.state.citation = this.formatCitation(this.state.style);
-  }
+    constructor(props) {
+      super(props);
 
-  handleCancel(event) {
-    event.preventDefault();
-    if (this.props.cancel) {
-      this.props.cancel(event);
+      this.handleCancel = this.handleCancel.bind(this);
+      const citations = props.section.attributes.citations;
+      const styles = Object.keys(citations);
+
+      this.state = {
+        style: styles[0],
+        copied: false
+      };
+      this.handleCitationChange = this.handleCitationChange.bind(this);
+      this.handleCopyClick = this.handleCopyClick.bind(this);
     }
-  }
 
-  handleErrors(errors) {
-    this.setState({ errors });
-  }
-
-  setStyle(event, style) {
-    this.setState({ style, copied: false });
-    this.formatCitation(style);
-  }
-
-  handleCitationChange(event) {
-    this.setState({ citation: event.target.value, copied: false });
-  }
-
-  handleCopyClick(event) {
-    event.preventDefault();
-    const textarea = document.querySelector("textarea");
-    textarea.select();
-    const copiedText = document.execCommand("copy");
-    if (!copiedText) return null;
-    this.setState({ copied: true });
-  }
-
-  /* eslint-disable no-unreachable */
-  formatCitation(style) {
-    switch (style) {
-      case "mla":
-        return this.setState({ citation: this.formatMla() });
-        break;
-      case "apa":
-        return this.setState({ citation: this.formatAba() });
-        break;
-      case "chicago":
-        return this.setState({ citation: this.formatChicago() });
-        break;
-      default:
-        return "";
-        break;
+    componentDidMount() {
+      this.ci.focus();
     }
-  }
 
-  // Maybe will include attribute and style options
-  formatAttribute(attribute) {
-    if (!this.props.text) return null;
-    const attr = this.props.text.attributes;
-    const meta = attr.metadata;
-    switch (attribute) {
-      case "author":
-        return attr.creatorNames;
-        break;
-      case "title":
-        return attr.title;
-        break;
-      case "contributers":
-        break;
-      case "number":
-        return meta.number || "";
-        break;
-      case "publisher":
-        return meta.publisher;
-        break;
-      case "publicationDate":
-        return attr.publicationDate;
-        break;
-      case "placeOfPublication":
-        return meta.placeOfPublication;
-        break;
-      default:
-        return null;
-        break;
+    handleCancel(event) {
+      event.preventDefault();
+      if (this.props.cancel) {
+        this.props.cancel(event);
+      }
     }
-  }
-  /* eslint-enable no-unreachable */
 
-  /* eslint-disable max-len */
-  formatMla() {
-    return `${this.formatAttribute("author")}. ${this.formatAttribute("title")}. ${this.formatAttribute("number")} ${this.formatAttribute("publisher")}, ${this.formatAttribute("placeOfPublication")}.`;
-  }
+    setStyle(_event, style) {
+      this.setState({ style, copied: false });
+    }
 
-  formatAba() {
-    return `${this.formatAttribute("author")}. (${this.formatAttribute("publicationDate")}) ${this.formatAttribute("title")}. ${this.formatAttribute("placeOfPublication")}: ${this.formatAttribute("publisher")}.`;
-  }
+    handleCitationChange(event) {
+      this.setState({ citation: event.target.value, copied: false });
+    }
 
-  formatChicago() {
-    return `${this.formatAttribute("author")}. ${this.formatAttribute("title")}. ${this.formatAttribute("placeOfPublication")}: ${this.formatAttribute("publisher")}. ${this.formatAttribute("publicationDate")}`;
-  }
-  /* eslint-enable max-len */
+    handleCopyClick(event) {
+      event.preventDefault();
+      const range = document.createRange();
+      range.selectNode(this.ci);
+      window.getSelection().addRange(range);
+      const copiedText = document.execCommand("copy");
+      if (!copiedText) return null;
+      this.setState({ copied: true });
+    }
 
-  renderStyleButtons() {
-    const styles = ["mla", "apa", "chicago"];
-    const out = [];
-    styles.forEach((style) => {
-      out.push(
+    renderStyleButtons() {
+      const citations = this.props.section.attributes.citations;
+      const styles = Object.keys(citations);
+      const selected = this.state.style;
+      return styles.map((style) => {
+        return (
         <li key={style}>
           <button
-            className={this.state.style === style ? "active" : null}
+            className={selected === style ? "active" : null}
             onClick={(event) => this.setStyle(event, style)}
           >
             {style}
           </button>
         </li>
       );
-    });
-    return out;
-  }
+      });
+    }
 
-  render() {
-    const copiedText = this.state.copied ? "Copied!" : null;
+    render() {
+      const copiedText = this.state.copied ? "Copied!" : null;
+      const citations = this.props.section.attributes.citations;
 
-    return (
+      return (
       <div className="annotation-editor citation">
         <div>
           <nav className="utility styles">
@@ -154,11 +86,11 @@ export default class AnnotationShareEditor extends PureComponent {
               {this.renderStyleButtons()}
             </ul>
           </nav>
-          <textarea
+          <div
+            className="copyable"
             ref={(ci) => { this.ci = ci; }}
             style={{ width: "100%" }}
-            onChange={this.handleCitationChange}
-            value={this.state.citation}
+            dangerouslySetInnerHTML={{ __html: citations[this.state.style] }}
           />
           <div className="utility">
             <span className="notice">{copiedText}</span>
@@ -170,9 +102,12 @@ export default class AnnotationShareEditor extends PureComponent {
                 Cancel
               </button>
               <button
-                className="button-secondary"
+                className="button-secondary button-icon-secondary"
                 onClick={this.handleCopyClick}
               >
+                <i
+                  className="manicon manicon-copy"
+                />
                 Copy
               </button>
             </div>
@@ -180,6 +115,6 @@ export default class AnnotationShareEditor extends PureComponent {
         </div>
       </div>
     );
-  }
+    }
 
 }

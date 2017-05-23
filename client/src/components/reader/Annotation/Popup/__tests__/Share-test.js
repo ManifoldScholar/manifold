@@ -11,7 +11,10 @@ describe("Reader.Annotation.Popup.Share Component", () => {
   it('renders correctly', () => {
     const component = renderer.create(
       <Provider store={store} >
-        <Share />
+        <Share
+          cite={() => {}}
+          back={() => {}}
+        />
       </Provider>
     );
     let tree = component.toJSON();

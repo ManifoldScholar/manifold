@@ -1,4 +1,8 @@
 common: &1
+  :citation_styles:
+    :mla: "modern-language-association-8th-edition"
+    :chicago: "chicago-annotated-bibliography"
+    :apa: "apa"
   :google:
     :analytics_oauth_scope: "https://www.googleapis.com/auth/analytics.readonly"
     :auth_uri: "https://accounts.google.com/o/oauth2/auth"

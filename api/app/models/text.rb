@@ -12,6 +12,7 @@ class Text < ApplicationRecord
   # Concerns
   extend Memoist
   include Collaborative
+  include Citable
   include TrackedCreator
   include Metadata
   extend FriendlyId
@@ -23,7 +24,19 @@ class Text < ApplicationRecord
     original_publisher original_publisher_place original_title pmcid pmid publisher
     publisher_place reviewed_title section version year_suffix chapter_number
     collection_number edition issue number number_of_pages number_of_volumes volume
+    issued
   )
+
+  with_citation do |text|
+    text_authors = text.creator_names_array
+    author = text_authors.empty? ? text.project_creator_names_array : text_authors
+    issued = text.publication_date || text.project_publication_date
+    {
+      title: text.title,
+      author: author,
+      issued: issued
+    }
+  end
 
   # URLs
   friendly_id :title, use: :slugged
@@ -51,6 +64,10 @@ class Text < ApplicationRecord
   has_many :stylesheets
   has_many :favorites, as: :favoritable
   has_many :annotations, through: :text_sections
+
+  # Delegations
+  delegate :creator_names_array, to: :project, prefix: true
+  delegate :publication_date, to: :project, prefix: true
 
   # Validation
   validates :unique_identifier, presence: true
@@ -121,7 +138,7 @@ class Text < ApplicationRecord
     cover_source.try(:attachment_styles)
   end
 
-  def cover_url
+  def covenor_url
     cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
     return nil unless cover_source
     cover_source.try(:attachment_url)

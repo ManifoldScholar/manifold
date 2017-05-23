@@ -8,6 +8,7 @@ class Project < ApplicationRecord
   include Authority::Abilities
   include TrackedCreator
   include Collaborative
+  include Citable
   include MoneyAttributes
   include WithMarkdown
   include TruthyChecks
@@ -25,6 +26,14 @@ class Project < ApplicationRecord
     publisher_place reviewed_title section version year_suffix chapter_number
     collection_number edition issue number number_of_pages number_of_volumes volume
   )
+
+  with_citation do |project|
+    {
+      title: project.title,
+      author: project.creator_names_array,
+      issued: project.publication_date
+    }
+  end
 
   # URLs
   friendly_id :title, use: :slugged

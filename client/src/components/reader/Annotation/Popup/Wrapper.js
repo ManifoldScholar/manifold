@@ -8,25 +8,24 @@ import { closest } from 'utils/domUtils';
 import Annotate from './Annotate';
 import Share from './Share';
 
-
 export default class AnnotationPopup extends Component {
 
   static displayName = "Annotation.Popup.Wrapper";
 
   static propTypes = {
     selection: PropTypes.object,
-    currentUser: PropTypes.object,
     selectionLocked: PropTypes.bool,
-    shareUrl: PropTypes.string,
-    highlight: PropTypes.func,
-    annotate: PropTypes.func,
-    cite: PropTypes.func,
-    attachResource: PropTypes.func,
-    bookmark: PropTypes.func,
     selectionClickEvent: PropTypes.object,
     annotatableDomElement: PropTypes.object,
-    showLogin: PropTypes.func,
-    text: PropTypes.object
+    shareUrl: PropTypes.string.isRequired,
+    highlight: PropTypes.func.isRequired,
+    annotate: PropTypes.func.isRequired,
+    cite: PropTypes.func.isRequired,
+    attachResource: PropTypes.func.isRequired,
+    bookmark: PropTypes.func.isRequired,
+    showLogin: PropTypes.func.isRequired,
+    text: PropTypes.object.isRequired,
+    section: PropTypes.object.isRequired
   };
 
   constructor() {
@@ -192,6 +191,7 @@ export default class AnnotationPopup extends Component {
         back={this.resetSecondary}
         cite={this.props.cite}
         text={this.props.text}
+        section={this.props.section}
       />
     );
   }
