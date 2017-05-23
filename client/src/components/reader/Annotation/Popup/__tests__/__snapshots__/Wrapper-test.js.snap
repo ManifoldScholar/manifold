@@ -20,20 +20,13 @@ exports[`Reader.Annotation.Popup.Wrapper Component renders correctly when not lo
     }
   >
     <button
-      onClick={undefined}
+      className={undefined}
+      onClick={[Function]}
     >
       <i
         className="manicon manicon-person-pencil"
       />
       Login to Annotate
-    </button>
-    <button
-      onClick={[Function]}
-    >
-      <i
-        className="manicon manicon-nodes"
-      />
-      Share
     </button>
     <div
       className="tail tail-down"

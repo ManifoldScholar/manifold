@@ -2,5 +2,5 @@
 class TextSectionSerializer < TextSectionPartialSerializer
   meta(partial: false)
 
-  attributes :body_json
+  attributes :body_json, :citations
 end

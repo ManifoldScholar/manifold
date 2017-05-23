@@ -15,6 +15,8 @@ describe("Reader Annotation Annotatable Container", () => {
   const section = build.entity.textSection("2");
   const project = build.entity.project("3");
   const props = {
+    text,
+    section,
     textId: text.id,
     projectId: project.id,
     sectionId: section.id,

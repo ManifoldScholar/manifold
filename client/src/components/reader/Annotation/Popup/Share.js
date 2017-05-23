@@ -11,11 +11,12 @@ class AnnotationPopupShare extends PureComponent {
   static propTypes = {
     selectionText: PropTypes.string,
     shareUrl: PropTypes.string,
-    back: PropTypes.func,
+    back: PropTypes.func.isRequired,
     secondary: PropTypes.string,
     direction: PropTypes.string,
-    cite: PropTypes.func,
-    text: PropTypes.object
+    cite: PropTypes.func.isRequired,
+    text: PropTypes.object,
+    section: PropTypes.object
   };
 
   constructor(props) {
@@ -49,11 +50,10 @@ class AnnotationPopupShare extends PureComponent {
   }
 
   canCite() {
-    if (!this.props.text) return false;
+    if (!this.props.section) return false;
     const attr = this.props.text.attributes;
-    const meta = attr.metadata;
-    if (!meta) return false;
-    return !(!meta.publisher || !meta.placeOfPublication || !attr.publicationDate);
+    const citations = Object.keys(attr.citations);
+    return citations.length > 0;
   }
 
   render() {

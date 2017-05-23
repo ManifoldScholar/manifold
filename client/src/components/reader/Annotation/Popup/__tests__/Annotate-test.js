@@ -8,21 +8,17 @@ describe("Reader.Annotation.Popup.Annotate Component", () => {
 
   const store = build.store();
 
-  // it('renders correctly when logged in', () => {
-  //   const component = mount(
-  //     <Provider store={store} >
-  //       <Annotate
-  //       />
-  //     </Provider>
-  //   );
-  //   let tree = component.toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
-
   it('renders correctly when not logged in', () => {
     const component = renderer.create(
       <Provider store={store} >
-        <Annotate />
+        <Annotate
+          attachResource={() => {}}
+          highlight={() => {}}
+          annotate={() => {}}
+          bookmark={() => {}}
+          showShare={() => {}}
+          showLogin={() => {}}
+        />
       </Provider>
     );
     let tree = component.toJSON();

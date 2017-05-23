@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503180816) do
+ActiveRecord::Schema.define(version: 20170512190317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,6 +249,7 @@ ActiveRecord::Schema.define(version: 20170503180816) do
     t.jsonb    "tweet_fetch_config",      default: {}
     t.date     "publication_date"
     t.string   "slug"
+    t.jsonb    "citations",               default: {}
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
 
@@ -387,6 +388,7 @@ ActiveRecord::Schema.define(version: 20170503180816) do
     t.string   "kind"
     t.uuid     "ingestion_source_id"
     t.jsonb    "body_json",           default: "{}", null: false
+    t.jsonb    "citations",           default: {}
   end
 
   create_table "text_subjects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -426,6 +428,7 @@ ActiveRecord::Schema.define(version: 20170503180816) do
     t.string   "spine",                 default: [],              array: true
     t.jsonb    "metadata",              default: {}
     t.string   "slug"
+    t.jsonb    "citations",             default: {}
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
     t.index ["slug"], name: "index_texts_on_slug", unique: true, using: :btree
   end

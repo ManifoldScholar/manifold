@@ -2,31 +2,23 @@
 
 exports[`Reader.Annotation.Popup.Share Component renders correctly 1`] = `
 <section
-  className="popup-page-secondary"
+  className="popup-page-secondary hidden"
+  style={
+    Object {
+      "marginLeft": null,
+    }
+  }
 >
-  <div
-    className="button-group"
-  >
-    <button
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      target="_blank"
-    >
-      <i
-        className="manicon manicon-twitter"
-      />
-      Twitter
-    </button>
-  </div>
   <button
-    className="dark"
-    onClick={undefined}
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    target="_blank"
   >
     <i
-      className="manicon manicon-arrow-bold-left"
+      className="manicon manicon-twitter"
     />
-    Back
+    Twitter
   </button>
   <div
     className="tail"

@@ -10,20 +10,13 @@ exports[`Reader.Annotation.Popup.Annotate Component renders correctly when not l
   }
 >
   <button
-    onClick={undefined}
+    className={undefined}
+    onClick={[Function]}
   >
     <i
       className="manicon manicon-person-pencil"
     />
     Login to Annotate
-  </button>
-  <button
-    onClick={undefined}
-  >
-    <i
-      className="manicon manicon-nodes"
-    />
-    Share
   </button>
   <div
     className="tail"

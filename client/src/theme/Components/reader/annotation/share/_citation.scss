@@ -1,8 +1,15 @@
 .citation {
   padding-top: 28px;
 
-  textarea {
-    font-size: 16px;
+  .copyable {
+    @include formInputPrimary;
+    width: 100%;
+    padding: 1.2em 1.5em;
+    color: $neutral90;
+    background-color: $neutralWhite;
+    border: 1px solid transparent;
+    outline: none;
+    transition: border-color $duration $timing;
   }
 
   .styles {

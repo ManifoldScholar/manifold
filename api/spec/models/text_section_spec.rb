@@ -1,6 +1,8 @@
 require "rails_helper"
+require "models/concerns/citable_spec.rb"
 
 RSpec.describe TextSection, type: :model do
+
   it "has a valid factory" do
     expect(FactoryGirl.build(:text_section)).to be_valid
   end

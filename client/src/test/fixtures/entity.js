@@ -4,6 +4,43 @@ import uuid from 'uuid';
 const commentDate = new Date();
 commentDate.setDate(commentDate.getDate() - 4);
 
+const metadataProperties = [
+  "abstract",
+  "archive",
+  "archiveLocation",
+  "archivePlace",
+  "authority",
+  "callNumber",
+  "collectionTitle",
+  "containerTitle",
+  "dimensions",
+  "event",
+  "eventPlace",
+  "isbn",
+  "issn",
+  "jurisdiction",
+  "medium",
+  "originalPublisher",
+  "originalPublisherPlace",
+  "originalTitle",
+  "pmcid",
+  "pmid",
+  "publisher",
+  "publisherPlace",
+  "reviewedTitle",
+  "section",
+  "version",
+  "yearSuffix",
+  "chapterNumber",
+  "collectionNumber",
+  "edition",
+  "issue",
+  "number",
+  "numberOfPages",
+  "numberOfVolumes",
+  "volume"
+];
+
 const defaults = {
 
   settings: {
@@ -62,6 +99,7 @@ const defaults = {
   project: {
     type: "projects",
     attributes: {
+      metadataProperties,
       title: "Rowan Test",
       subtitle: "World's Greatest Dog",
       heroStyles: {},
@@ -186,6 +224,7 @@ const defaults = {
   text: {
     type: "texts",
     attributes: {
+      metadataProperties,
       title: "Ain't No Thang",
       creatorNames: "Andre3000, Big Boi",
       createdAt: "2017-04-24T23:25:50.161Z",
@@ -229,6 +268,7 @@ const defaults = {
     sourceIdentifier: "ro-dintl-001",
     attributes: {
       name: "Title Page",
+      metadataProperties,
       bodyJson: {
         tag: "section",
         nodeType: "element",

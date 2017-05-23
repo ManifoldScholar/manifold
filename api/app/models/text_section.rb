@@ -10,6 +10,14 @@ class TextSection < ApplicationRecord
 
   # Authority
   include Authority::Abilities
+  include Citable
+
+  with_citation do |text_section|
+    (text_section.text_citation_parts || {}).merge(
+      title: text_section.name,
+      container_title: text_section.text_title
+    )
+  end
 
   # Associations
   belongs_to :text
@@ -18,8 +26,12 @@ class TextSection < ApplicationRecord
   has_many :resources, through: :annotations
 
   # Delegation
+  delegate :citation_parts, to: :text, prefix: true, allow_nil: true
   delegate :source_path, to: :ingestion_source
   delegate :project, to: :text
+  delegate :metadata, to: :text, allow_nil: true
+  delegate :title, to: :text, prefix: true, allow_nil: true
+  delegate :creator_names_array, to: :text, prefix: true, allow_nil: true
 
   # Validation
   validates :position, numericality: { only_integer: true }
@@ -35,13 +47,6 @@ class TextSection < ApplicationRecord
 
   def to_s
     name
-  end
-
-  def citation_parts
-    {
-      container_title: text.title,
-      isbn: text.isbn
-    }
   end
 
 end

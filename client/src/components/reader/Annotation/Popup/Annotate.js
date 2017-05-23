@@ -8,17 +8,17 @@ class AnnotationPopupAnnotate extends PureComponent {
   static displayName = "Annotation.Popup.Annotate";
 
   static propTypes = {
-    attachResource: PropTypes.func,
-    highlight: PropTypes.func,
-    annotate: PropTypes.func,
-    bookmark: PropTypes.func,
-    showShare: PropTypes.func,
+    attachResource: PropTypes.func.isRequired,
+    highlight: PropTypes.func.isRequired,
+    annotate: PropTypes.func.isRequired,
+    bookmark: PropTypes.func.isRequired,
+    showShare: PropTypes.func.isRequired,
     secondary: PropTypes.string,
-    direction: PropTypes.string
+    direction: PropTypes.string,
+    showLogin: PropTypes.func.isRequired
   };
 
   render() {
-
     return (
       <Panel
         primary
