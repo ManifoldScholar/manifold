@@ -1,5 +1,5 @@
 .annotation-editor {
-  @include drawerPadding(padding-right, 'heavy');
+  @include drawerPadding(padding-right);
   @include drawerPadding(padding-left);
   padding-top: 32px;
 
