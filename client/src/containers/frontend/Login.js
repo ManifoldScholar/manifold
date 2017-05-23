@@ -63,7 +63,6 @@ export class LoginContainer extends Component {
   render() {
 
     const { authenticated } = this.props.authentication;
-    console.log(authenticated, 'auth');
     return (
       <section className="login-page">
         {authenticated ? this.logoutUI() : this.loginUI()}
