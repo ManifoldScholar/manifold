@@ -155,14 +155,14 @@ export default function (parameters) {
     // 2. Fetch any data, as the user
     // 3. Send the response to the user
     bootstrap(req, store).then(
-      () => { return authenticateUser(req, store); },
-      () => { return authenticateUser(req, store); },
+      () => { ch.info("Bootstrap App: ✅"); return authenticateUser(req, store); },
+      () => { ch.info("Bootstrap App: ❌"); return authenticateUser(req, store); },
     ).then(
-      () => { console.log('test a'); return fetchRouteData(req, store); },
-      () => { console.log('test b'); return fetchRouteData(req, store); }
+      () => { ch.info("Authenticate user: ✅"); return fetchRouteData(req, store); },
+      () => { ch.info("Authenticate user: ❌"); return fetchRouteData(req, store); }
     ).then(
-      () => { render(req, res, store, parameters); },
-      () => { render(req, res, store, parameters); }
+      () => { ch.info("Fetch route data: ✅"); render(req, res, store, parameters); },
+      () => { ch.info("Fetch route data: ❌"); render(req, res, store, parameters); }
     );
   });
 
