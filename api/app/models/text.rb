@@ -66,8 +66,8 @@ class Text < ApplicationRecord
   has_many :annotations, through: :text_sections
 
   # Delegations
-  delegate :creator_names_array, to: :project, prefix: true
-  delegate :publication_date, to: :project, prefix: true
+  delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
+  delegate :publication_date, to: :project, prefix: true, allow_nil: true
 
   # Validation
   validates :unique_identifier, presence: true
