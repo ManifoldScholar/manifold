@@ -311,7 +311,13 @@
 
       .form-secondary &, .form-primary & {
         display: inline;
-        width: 100px;
+        min-width: 49px;
+        max-width: 100px;
+        width: calc(91vw - 242px);
+
+        @include respond($break40) {
+          width: calc(91vw - 372px);
+        }
       }
     }
   }
