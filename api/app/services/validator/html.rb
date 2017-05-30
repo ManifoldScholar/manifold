@@ -8,6 +8,7 @@ module Validator
       fragment = Nokogiri::HTML.fragment(html)
       fragment = ensure_one_parent_node(fragment)
       ensure_valid_parent_nodes(fragment)
+      strip_invalid_children(fragment)
       validate_tags(fragment)
       fragment.to_s
     end
@@ -18,6 +19,20 @@ module Validator
       tag_validator = Tag.new
       fragment.traverse do |node|
         tag_validator.validate_node!(node)
+      end
+    end
+
+    def strip_invalid_children(fragment)
+      fragment.traverse do |node|
+        strip = false
+        tag = node.name
+        ancestors = []
+        node.ancestors.each { |n| ancestors.push(n.name) }
+        case tag
+        when "p"
+          strip = true if ancestors.include?("p")
+        end
+        node.remove if strip
       end
     end
 

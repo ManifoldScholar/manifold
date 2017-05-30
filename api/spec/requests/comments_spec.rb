@@ -27,8 +27,6 @@ RSpec.describe "Comments API", type: :request do
         before(:each) { get path, headers: reader_headers }
         describe "the response" do
           it "has a 200 status code" do
-            puts "id: #{comment_a.id}"
-            puts "valid?: #{comment_a.valid?}"
             expect(response).to have_http_status(200)
           end
         end
@@ -140,8 +138,6 @@ RSpec.describe "Comments API", type: :request do
         before(:each) { get path, headers: reader_headers }
         describe "the response" do
           it "has a 200 status code" do
-            puts "id: #{comment_b.id}"
-            puts "valid?: #{comment_b.valid?}"
             expect(response).to have_http_status(200)
           end
         end

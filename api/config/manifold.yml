@@ -233,7 +233,7 @@ common: &1
           - !ruby/regexp '/jpe?g\Z/'
           - !ruby/regexp '/png\Z/'
           - !ruby/regexp '/svg\Z/'
-          - !ruby/regexp '/x?html\Z/'
+          - !ruby/regexp '/x?html?\Z/'
           - !ruby/regexp '/ttf\Z/'
           - !ruby/regexp '/otf\Z/'
           - !ruby/regexp '/woff\Z/'

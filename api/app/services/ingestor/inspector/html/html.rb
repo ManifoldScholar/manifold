@@ -16,7 +16,7 @@ module Ingestor
         extend Memoist
 
         def basename
-          File.basename(@html_path, ".*")
+          File.basename(@extracted_path, ".*")
         end
 
         def language
@@ -49,12 +49,13 @@ module Ingestor
         end
 
         def get_contents_from_path(path)
-          Nokogiri::HTML(File.open(path), nil, "utf-8")
+          doc = Nokogiri::HTML(File.open(path), nil, "utf-8")
+          doc
         end
         memoize :get_contents_from_path
 
         def stylesheet
-          get_contents_from_path(@html_path).at("//style").try(:to_html)
+          get_contents_from_path(@extracted_path).at("//style").try(:to_html)
         end
 
         def cover(_text)

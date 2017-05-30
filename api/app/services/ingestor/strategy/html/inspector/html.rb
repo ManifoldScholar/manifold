@@ -7,11 +7,12 @@ require "json"
 require "pathname"
 require "digest/md5"
 require "securerandom"
+
 module Ingestor
   module Strategy
-    module Word
+    module Html
       module Inspector
-        class Word
+        class Html
 
           include Ingestor::Loggable
           include Ingestor::Inspector::Helpers
@@ -29,7 +30,6 @@ module Ingestor
 
           def setup
             return if @ready == true
-            FileUtils.mkdir_p(@base_path)
             FileUtils.mkdir(@extracted_path)
             create_tmp_dir
             @ready = true
@@ -45,8 +45,8 @@ module Ingestor
           end
 
           # returns true if file ends in html and has a matching .fld dir
-          def word_doc?
-            html_file && resource_dir
+          def html_doc?
+            !html_file.blank?
           end
 
           def date
@@ -59,7 +59,7 @@ module Ingestor
           end
 
           def ingestion_source_paths
-            Dir.glob(File.join(File.dirname(resource_dir), "**", "*")).reject do |path|
+            Dir.glob(File.join(File.dirname(@extracted_path), "**", "*")).reject do |path|
               File.directory?(path)
             end
           end
@@ -132,13 +132,8 @@ module Ingestor
           end
           memoize :create_tmp_dir
 
-          def resource_dir
-            Dir.glob("#{@extracted_path}/*.fld").first
-          end
-          memoize :resource_dir
-
           def html_file
-            Dir.glob("#{@extracted_path}/*.html").first
+            Dir.glob("#{@extracted_path}/*.{htm,html}").first
           end
           memoize :html_file
 

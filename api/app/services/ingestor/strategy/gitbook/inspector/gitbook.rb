@@ -34,7 +34,6 @@ module Ingestor
 
           # Ingestion capability check
           def gitbook?
-            @logger.debug(@gitbook_path)
             gitbook_zip_file?(@gitbook_path) || File.file?(book_json_path)
           end
 

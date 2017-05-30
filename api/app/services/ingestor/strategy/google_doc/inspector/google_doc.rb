@@ -22,7 +22,7 @@ module Ingestor
             @doc_path = path
             @session = ::Factory::DriveSession.create_service_account_session
             @logger = logger
-            @html_path = "tmp/#{title}.html" if can_ingest_doc?
+            @extracted_path = "tmp/#{title}.html" if can_ingest_doc?
           end
 
           # returns md5 hash of file contents
@@ -35,7 +35,6 @@ module Ingestor
           end
 
           def google_doc?
-            @logger.info(@doc_path)
             return false unless can_ingest_doc?
             fetch_file
             create_temp_html
@@ -52,14 +51,14 @@ module Ingestor
 
           def create_temp_html
             encoded_html = fetch_html.encode("utf-8", invalid: :replace, undef: :replace)
-            File.open(@html_path, "w+") do |f|
+            File.open(@extracted_path, "w+") do |f|
               f.write(encoded_html)
             end
           end
           memoize :create_temp_html
 
           def ingestion_source_path
-            @html_path
+            @extracted_path
           end
 
           def ingestion_source
@@ -107,7 +106,7 @@ module Ingestor
           memoize :fetch_html
 
           def remove_tmp
-            FileUtils.rm_rf(@html_path)
+            FileUtils.rm_rf(@extracted_path)
           end
 
         end

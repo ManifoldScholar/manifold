@@ -27,6 +27,10 @@ export default class IngestionFormType extends PureComponent {
     {
       value: "googledoc",
       label: "Google Doc"
+    },
+    {
+      value: "html",
+      label: "HTML document"
     }
   ];
 
