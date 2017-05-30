@@ -219,7 +219,7 @@ module Ingestor
             return unless meta_cover_node
             id = meta_cover_node.attribute("content")
             cover_node = rendition_source_node_by_id(id)
-            return unless cover_node && !cover_node.length.empty?
+            return unless cover_node && cover_node.length.positive?
             attr = cover_node.attribute("id")
             attr.to_str
           end
