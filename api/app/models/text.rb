@@ -87,6 +87,12 @@ class Text < ApplicationRecord
     main_title.value
   end
 
+  def title=(value)
+    title = titles.find_or_initialize_by(kind: TextTitle::KIND_MAIN)
+    title.value = value
+    title.save
+  end
+
   def section_before(position)
     # text_sections.where("position > ?", position)
   end
