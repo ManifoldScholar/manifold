@@ -32,7 +32,10 @@ module Ingestor
         end
 
         def source_body
-          @html_inspector.get_contents_from_path(@section_path).at("//body").to_html
+          contents = @html_inspector.get_contents_from_path(@section_path)
+          body = contents.at("//body").to_html
+          body = body.mb_chars.tidy_bytes unless body.valid_encoding?
+          body
         end
 
         def kind

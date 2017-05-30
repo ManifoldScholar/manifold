@@ -69,6 +69,17 @@ export default class IngestionFormUpload extends PureComponent {
             accepts="zips"
           />
           : null}
+        { ingestionType === "html" ?
+          <Form.Upload
+            inlineStyle={{ width: "100%" }}
+            style="landscape"
+            name="attributes[source]"
+            readFrom="attributes[sourceFileName]"
+            instructions="Create a zip archive with a .htm or .html file in the root."
+            label="Zip source file"
+            accepts="zips"
+          />
+          : null}
         { ingestionType === "markdown" ?
           <Form.Upload
             inlineStyle={{ width: "100%" }}

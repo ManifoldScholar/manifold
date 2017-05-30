@@ -95,6 +95,26 @@ exports[`ProjectDetail Text Ingestion New Container renders correctly 1`] = `
               Google Doc
             </span>
           </label>
+          <label
+            className="form-toggle radio vertical"
+            htmlFor="html"
+          >
+            <input
+              checked={false}
+              id="html"
+              onChange={[Function]}
+              type="radio"
+              value="html"
+            />
+            <span
+              className="toggle-indicator"
+            />
+            <span
+              className="toggle-label"
+            >
+              HTML document
+            </span>
+          </label>
         </div>
         <div
           className="buttons-icon-horizontal"

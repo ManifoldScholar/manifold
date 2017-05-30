@@ -90,7 +90,6 @@ RSpec.describe Factory::Event do
 
   it "correctly records the attribution_name from the subject creator" do
     user = FactoryGirl.create(:user, first_name: "Alexander", last_name: "Hamilton")
-    puts user.id
     annotation = FactoryGirl.create(:annotation, creator: user)
     event = factory.create(Event::TEXT_ANNOTATED, subject: annotation)
     expect(event.attribution_name).to eq "Alexander Hamilton"
