@@ -8,6 +8,7 @@ Paperclip.options[:content_type_mappings] = {
 
 Paperclip.interpolates :uuid_partition do |attachment, _style|
   id = attachment.instance.id
+  return id unless id.is_a? String
   id[0..2].scan(/\w/).join("/".freeze)
 end
 
