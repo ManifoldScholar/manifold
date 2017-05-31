@@ -20,6 +20,8 @@ module Factory
     end
 
     def self.create_service_account_session
+      settings = Settings.instance
+      return unless settings.secrets.dig(:google_private_key)
       GoogleDrive::Session.from_service_account_key(StringIO.new(config.to_json))
     end
     # rubocop:enable Metrics/AbcSize, Metrics/LineLength
