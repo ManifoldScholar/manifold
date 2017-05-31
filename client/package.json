@@ -30,7 +30,9 @@
     "prod:serve:web": "node ./script/web-server-entry",
     "prod:serve:universal": "node ./script/react-server-entry",
     "lint": "eslint .",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "test-ci": "jest --runInBand"
+
   },
   "jest": {
     "moduleFileExtensions": [
