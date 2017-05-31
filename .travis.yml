@@ -44,7 +44,7 @@ script:
   - cd client
   - node -v
   - yarn install
-  - yarn run test
+  - yarn run test-ci
   - cd ../api
   - bundle install
   - RAILS_ENV=test bundle exec rails db:migrate --trace
