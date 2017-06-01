@@ -32,6 +32,7 @@ export default (RenderComponent) => {
         class: 'className',
         for: 'htmlFor',
         colspan: 'colSpan',
+        rowspan: 'rowSpan'
       };
       const mapped = mapKeys(attr, (attributeValue, attributeName) => {
         if (map.hasOwnProperty(attributeName)) return map[attributeName];
