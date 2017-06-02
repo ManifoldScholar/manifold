@@ -30,8 +30,8 @@ RSpec.describe Validator::Stylesheet do
   end
 
   it "should correctly scope nested selectors with configured scoped selector" do
-    invalid = "p ul { font-weight: bold; }"
-    valid = "#{scope_selector} p ul { font-weight: bold; }"
+    invalid = "p ul { text-decoration: underline; }"
+    valid = "#{scope_selector} p ul { text-decoration: underline; }"
     results = validator.validate(invalid)
     expect(results).to eq_ignoring_whitespace valid
   end
