@@ -31,8 +31,8 @@ export class SettingsThemeContainer extends PureComponent {
             style="square"
             accepts="images"
             label="Press Logo"
-            readFrom="attributes[pressLogoUrl][smallSquare]"
-            name="attributes[press_logo]"
+            readFrom="attributes[pressLogoStyles][smallSquare]"
+            name="attributes[pressLogo]"
             remove="attributes[removePressLogo]"
           />
           <Form.TextInput
