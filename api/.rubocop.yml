@@ -29,7 +29,7 @@ Metrics/ModuleLength:
 Metrics/ClassLength:
   Enabled: false
 
-Style/DotPosition:
+Layout/DotPosition:
   EnforcedStyle: leading
 
 Rails:
@@ -38,8 +38,23 @@ Rails:
 Lint/UnneededDisable:
   Enabled: false
 
-Style/EmptyLinesAroundClassBody:
+Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
 Style/Documentation:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Rails/Blank:
+  Enabled: false
+
+Rails/Present:
+  Enabled: false
+
+Lint/ScriptPermission:
   Enabled: false

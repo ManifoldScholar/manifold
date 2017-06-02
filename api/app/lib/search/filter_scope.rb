@@ -6,7 +6,7 @@ module Search
     end
 
     def typeahead(typeahead, fields)
-      return self unless typeahead == true || typeahead == 1 || typeahead == "true"
+      return self unless [true, 1, "true"].include? typeahead
       @filter[:match] = :word_start
       @filter[:fields] = fields
       self
