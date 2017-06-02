@@ -234,7 +234,7 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                       </Form.Setter('Form.TextArea)>
                       <Form.Setter('Project.Form.AvatarBuilder) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
                         <Project.Form.AvatarBuilder setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                          <div className=\\"avatar-builder\\">
+                          <div className=\\"form-input avatar-builder\\">
                             <label className=\\"section-header\\">
                               Project Thumbnail
                             </label>
