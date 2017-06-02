@@ -252,8 +252,7 @@ class Annotatable extends Component {
   createAnnotation(annotation, options = {}) {
     const resource = options.resource || null;
     const call = annotationsAPI.create(this.props.sectionId, annotation, resource);
-    const requestOptions = {};
-    if (options.addsTo) requestOptions.adds = options.addsTo;
+    const requestOptions = { adds: requests.rAnnotations };
     const res = this.props.dispatch(request(call, requests.rAnnotationCreate, requestOptions));
     res.promise.then(() => {
       if (options.closeOnSave) this.closeDrawer();
