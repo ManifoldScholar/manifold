@@ -111,7 +111,7 @@ class AvatarBuilder extends Component {
     });
 
     return (
-      <div className="avatar-builder">
+      <div className="form-input avatar-builder">
         {
           this.state.confirmation ?
             <Dialog.Confirm {...this.state.confirmation} />
