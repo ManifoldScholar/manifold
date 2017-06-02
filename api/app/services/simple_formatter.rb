@@ -3,7 +3,7 @@ class SimpleFormatter < ActiveInteraction::Base
 
   boolean :include_wrap, default: true
 
-  hash :renderer_options, default: proc { Hash.new } do
+  hash :renderer_options, default: proc { {} } do
     boolean :filter_html, default: true
     boolean :no_images, default: true
     boolean :no_links, default: true

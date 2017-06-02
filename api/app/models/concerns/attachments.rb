@@ -1,5 +1,5 @@
 # Model concern that tracks who created a record
-# rubocop:disable Metrics/LineLength, Style/TrailingWhitespace
+# rubocop:disable Metrics/LineLength, Layout/TrailingWhitespace
 module Attachments
   extend ActiveSupport::Concern
 
@@ -187,4 +187,4 @@ module Attachments
   end
   # rubocop:enable Metrics/BlockLength
 end
-# rubocop:enable Metrics/LineLength, Style/TrailingWhitespace
+# rubocop:enable Metrics/LineLength, Layout/TrailingWhitespace

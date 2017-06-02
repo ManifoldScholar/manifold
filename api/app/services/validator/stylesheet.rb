@@ -107,9 +107,9 @@ module Validator
     # @return [String]
     def compose_rule_set(selector, declarations)
       <<~END
-      #{selector} {
-        #{declarations.join("\n")}
-      }
+        #{selector} {
+          #{declarations.join("\n")}
+        }
       END
     end
 

@@ -202,7 +202,7 @@ module Ingestor
           end
 
           def text_section_inspectors
-            ingestion_source_paths.reject { |p| File.extname(p) != ".md" }.map do |path|
+            ingestion_source_paths.select { |p| File.extname(p) == ".md" }.map do |path|
               ::Ingestor::Strategy::Gitbook::Inspector::TextSection.new(path,
                                                                         self,
                                                                         summary_path)
