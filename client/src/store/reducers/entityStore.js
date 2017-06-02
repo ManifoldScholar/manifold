@@ -206,15 +206,6 @@ function handleAdd(state, action) {
   return Object.assign({}, state, { responses });
 }
 
-function updateAnnotationCollection(state, action) {
-  const created = state.responses[requests.rAnnotationCreate].entity;
-  const collection = state.responses[requests.rAnnotations].collection.slice(0);
-  collection.push({ id: created.id, type: created.type });
-  const response = Object.assign({}, state.responses[requests.rAnnotations], { collection });
-  const responses = Object.assign({}, state.responses, { [requests.rAnnotations]: response });
-  return Object.assign({}, state, { responses });
-}
-
 export default (state = initialState, action) => {
   const type = action.type;
   let newState = state;
@@ -223,8 +214,5 @@ export default (state = initialState, action) => {
   if (type === "ENTITY_STORE_FLUSH") return handleFlush(newState, action);
   if (type.startsWith("API_REQUEST")) return handleRequest(newState, action);
   if (type.startsWith("API_RESPONSE")) newState = handleResponse(newState, action);
-  if (type === `API_RESPONSE/${constantizeMeta(requests.rAnnotationCreate)}`) {
-    newState = updateAnnotationCollection(newState, action);
-  }
   return newState;
 };
