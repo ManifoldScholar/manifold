@@ -88,7 +88,7 @@ module Factory
       when ::Event::TEXT_ADDED
         "/read/#{subject.id}"
       when ::Event::RESOURCE_ADDED
-        "/browse/project/#{subject.project.id}/resource/#{subject.id}"
+        "/project/#{subject.project.id}/resource/#{subject.id}"
       end
     end
 
