@@ -59,7 +59,7 @@ module Attachments
 
   # rubocop:disable Metrics/BlockLength
   class_methods do
-    # Sets up paperclip atttachment configuration for `field`. The `type` argument
+    # Sets up paperclip attachment configuration for `field`. The `type` argument
     # references attachment validation in Manifold config attachments.validations. This
     # bit of metaprogramming provides a number of methods to the model for each attachment
     # field. If the field name were, for example, "avatar," we'd have the following
@@ -93,7 +93,8 @@ module Attachments
         )
   
         before_#{field}_post_process :can_process_#{field}_styles?
-        
+        after_#{field}_post_process :update_#{field}_meta
+    
         def manifold_attachment_image_styles
           return BASE_STYLES
         end
@@ -120,6 +121,18 @@ module Attachments
   
         def #{field}_extension
           File.extname(#{field}_file_name).delete(".").downcase if #{field}.present?
+        end
+
+        def update_#{field}_meta
+          return unless has_attribute?("#{field}_meta")
+          meta = {}
+          tempfile = #{field}.queued_for_write[:original]
+          if tempfile
+            geometry = Paperclip::Geometry.from_file(tempfile)
+            dimensions = {height: geometry.height.to_i, width: geometry.width.to_i}
+            meta[:original] = dimensions
+          end
+          self.#{field}_meta = meta
         end
   
         def #{field}_styles

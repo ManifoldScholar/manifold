@@ -9,11 +9,14 @@ export default class ProjectCover extends Component {
     project: PropTypes.object
   };
 
-  renderCoverImage(project) {
-    if (!project.attributes.avatarStyles.small) return null;
+  renderAvatarImage(project) {
+    if (!project.attributes.avatarMeta.original) return null;
+    const meta = project.attributes.avatarMeta.original;
+    const imageStyle = meta.width >= meta.height ? project.attributes.avatarStyles.smallSquare
+      : project.attributes.avatarStyles.small;
     return (
       <img
-        src={project.attributes.avatarStyles.small}
+        src={imageStyle}
         alt={`Click to view ${project.attributes.title}`}
       />
     );
@@ -33,8 +36,8 @@ export default class ProjectCover extends Component {
     if (!project) return null;
 
     return (
-      project.attributes.avatarStyles.small ?
-        this.renderCoverImage(project)
+      project.attributes.avatarStyles.original ?
+        this.renderAvatarImage(project)
         : this.renderPlaceholderImage(project)
     );
   }
