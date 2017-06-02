@@ -64,6 +64,10 @@ class Text < ApplicationRecord
   has_many :stylesheets
   has_many :favorites, as: :favoritable
   has_many :annotations, through: :text_sections
+  has_one :text_created_event, -> { where event_type: Event::TEXT_ADDED },
+          class_name: Event,
+          as: :subject,
+          dependent: :destroy
 
   # Delegations
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
