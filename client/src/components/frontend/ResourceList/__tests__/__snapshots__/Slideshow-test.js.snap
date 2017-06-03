@@ -127,3 +127,64 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
   </div>
 </div>
 `;
+
+exports[`Frontend.ResourceList.Slideshow Component renders correctly with no resources 1`] = `
+<div
+  className="resource-slideshow"
+>
+  <div
+    className="slide"
+  >
+    <div
+      className="resource-slide-figure"
+    >
+      <span>
+        <figure>
+          <div
+            className="figure-default"
+            style={
+              Object {
+                "backgroundImage": "url(/static/images/resource-collection.jpg)",
+              }
+            }
+          >
+            <div
+              className="resource-info"
+            >
+              <i
+                className="manicon manicon-file-box"
+              />
+              <span
+                className="resource-type"
+              >
+                This collection has no resources
+              </span>
+            </div>
+          </div>
+        </figure>
+      </span>
+    </div>
+    <div
+      className="slide-footer"
+    >
+      <div
+        className="slide-caption"
+      >
+        <header>
+          <h2
+            className="resource-title"
+          />
+        </header>
+        <div
+          className="resource-description"
+        >
+          <p />
+        </div>
+        <div
+          className="resource-utility"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

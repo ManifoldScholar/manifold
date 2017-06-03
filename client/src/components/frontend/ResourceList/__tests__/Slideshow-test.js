@@ -34,4 +34,20 @@ describe("Frontend.ResourceList.Slideshow Component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("renders correctly with no resources", () => {
+    const component = renderer.create(
+      wrapWithRouter(
+        <Slideshow
+          collectionResources={[]}
+          pagination={pagination}
+          count={5}
+          dispatch={dispatchMock}
+          collectionId="1"
+        />
+      )
+    );
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
