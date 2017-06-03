@@ -12,19 +12,19 @@ RSpec.describe Validator::Stylesheet do
   let(:blacklisted_property) { "font-family" }
 
   it "should return a string" do
-    valid_css = "#{scope_selector} p { font-weight: bold; }"
+    valid_css = "#{scope_selector} p { text-decoration: underline; }"
     expect(validator.validate(valid_css)).to be_an_instance_of String
   end
 
   it "should return the same CSS if valid" do
-    valid_css = "#{scope_selector} p { font-weight: bold; }"
+    valid_css = "#{scope_selector} p { text-decoration: underline; }"
     results = validator.validate(valid_css)
     expect(results).to eq_ignoring_whitespace valid_css
   end
 
   it "should scope all CSS selectors" do
-    invalid = "p { font-weight: bold; }"
-    valid = "#{scope_selector} p { font-weight: bold; }"
+    invalid = "p { text-decoration: underline; }"
+    valid = "#{scope_selector} p { text-decoration: underline; }"
     results = validator.validate(invalid)
     expect(results).to eq_ignoring_whitespace valid
   end
@@ -37,9 +37,9 @@ RSpec.describe Validator::Stylesheet do
   end
 
   it "should correctly scope sibling + nested selectors with configured scoped selector" do
-    invalid = "span, p ul { font-weight: bold; }"
-    valid = "#{scope_selector} span { font-weight: bold; }
-             #{scope_selector} p ul { font-weight: bold; }"
+    invalid = "span, p ul { text-decoration: underline; }"
+    valid = "#{scope_selector} span { text-decoration: underline; }
+             #{scope_selector} p ul { text-decoration: underline; }"
     results = validator.validate(invalid)
     expect(results).to eq_ignoring_whitespace valid
   end
@@ -59,8 +59,8 @@ RSpec.describe Validator::Stylesheet do
   end
 
   it "should not allow a blacklisted selector when there are multiple selectors" do
-    invalid = "body, p { font-weight: bold; }"
-    valid = "#{scope_selector} p { font-weight: bold; }"
+    invalid = "body, p { text-decoration: underline; }"
+    valid = "#{scope_selector} p { text-decoration: underline; }"
     results = validator.validate(invalid)
     expect(results).to eq_ignoring_whitespace valid
   end
@@ -80,9 +80,9 @@ RSpec.describe Validator::Stylesheet do
   end
 
   it "should properly scope multiple selectors" do
-    invalid = "span, p { font-weight: bold; }"
-    valid = "#{scope_selector} span { font-weight: bold; }
-             #{scope_selector} p { font-weight: bold; }"
+    invalid = "span, p { text-decoration: underline; }"
+    valid = "#{scope_selector} span { text-decoration: underline; }
+             #{scope_selector} p { text-decoration: underline; }"
     results = validator.validate(invalid)
     expect(results).to eq_ignoring_whitespace valid
   end
@@ -139,8 +139,8 @@ RSpec.describe Validator::Stylesheet do
   end
 
   it "should pass through allowed properties" do
-    invalid = "p { #{blacklisted_property}: some_value; font-weight: bold; }"
-    valid = "#{scope_selector} p { font-weight: bold; }"
+    invalid = "p { #{blacklisted_property}: some_value; text-decoration: underline; }"
+    valid = "#{scope_selector} p { text-decoration: underline; }"
     results = validator.validate(invalid)
     expect(results).to eq_ignoring_whitespace valid
   end
