@@ -77,6 +77,11 @@ export class ProjectDetailWrapperContainer extends PureComponent {
         key: "resources"
       },
       {
+        path: lh.link("backendProjectCollections", project.id),
+        label: "Collections",
+        key: "collections"
+      },
+      {
         path: lh.link("backendProjectEvents", project.id),
         label: "Activity",
         key: "events"

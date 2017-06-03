@@ -46,6 +46,13 @@ export default () => {
           helper: (p) => `/backend/project/${p}/resources/new`
         },
         {
+          name: "backendProjectCollectionsNew",
+          exact: true,
+          component: Backend.NewCollection.Wrapper,
+          path: "/backend/project/:projectId/collections/new",
+          helper: (p) => `/backend/project/${p}/collections/new`
+        },
+        {
           name: "backendProjectsNew",
           exact: true,
           component: Backend.NewProject.Wrapper,
@@ -119,6 +126,13 @@ export default () => {
               component: Backend.ProjectDetail.Resources,
               path: "/backend/project/:id/resources",
               helper: (p) => `/backend/project/${p}/resources`
+            },
+            {
+              name: "backendProjectCollections",
+              exact: true,
+              component: Backend.ProjectDetail.Collections,
+              path: "/backend/project/:id/collections",
+              helper: (p) => `/backend/project/${p}/collections`
             },
             {
               name: "backendProjectCollaborators",
@@ -263,6 +277,27 @@ export default () => {
               component: Backend.ResourceDetail.General,
               path: "/backend/resource/:id",
               helper: (r) => `/backend/resource/${r}`,
+            }
+          ]
+        },
+        {
+          exact: false,
+          component: Backend.CollectionDetail.Wrapper,
+          path: "/backend/collection/:id",
+          routes: [
+            {
+              name: "backendCollection",
+              exact: true,
+              component: Backend.CollectionDetail.General,
+              path: "/backend/collection/:id",
+              helper: (r) => `/backend/collection/${r}`,
+            },
+            {
+              name: "backendCollectionResources",
+              exact: true,
+              component: Backend.CollectionDetail.Resources,
+              path: "/backend/collection/:id/resources",
+              helper: (r) => `/backend/collection/${r}/resources`,
             }
           ]
         },

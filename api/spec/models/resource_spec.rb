@@ -84,6 +84,8 @@ RSpec.describe Resource, type: :model do
     before(:each) do
       @project_a = FactoryGirl.create(:project, title: "project_a")
       @project_b = FactoryGirl.create(:project, title: "project_b")
+      @collection_a = FactoryGirl.create(:collection, title: "collection_a", project: @project_a)
+      @collection_b = FactoryGirl.create(:collection, title: "collection_b", project: @project_a)
       @resource_a = FactoryGirl.create(:resource, title: "resource_a", project: @project_a)
       @resource_b = FactoryGirl.create(:resource, title: "resource_b", project: @project_a)
       @resource_c = FactoryGirl.create(:resource, title: "resource_c", project: @project_b, keywords: "test")
@@ -102,6 +104,17 @@ RSpec.describe Resource, type: :model do
       results = Resource.filter({project: @project_a})
       expect(results.length).to be 2
       results = Resource.filter({project: @project_b})
+      expect(results.length).to be 1
+    end
+
+    it "to only include those belonging to a collection" do
+      @resource_d = FactoryGirl.create(:resource, title: "resource_d", project: @project_a)
+      @collection_resource_a = FactoryGirl.create(:collection_resource, collection: @collection_a, resource: @resource_a)
+      @collection_resource_b = FactoryGirl.create(:collection_resource, collection: @collection_a, resource: @resource_b)
+      @collection_resource_c = FactoryGirl.create(:collection_resource, collection: @collection_b, resource: @resource_d)
+      results = Resource.filter({collection: @collection_a.id})
+      expect(results.length).to be 2
+      results = Resource.filter({collection: @collection_b.id})
       expect(results.length).to be 1
     end
 

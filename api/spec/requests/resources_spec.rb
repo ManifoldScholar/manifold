@@ -7,7 +7,7 @@ RSpec.describe "Resources API", type: :request do
 
   let(:resource) { FactoryGirl.create(:resource) }
 
-  describe "sends a resource" do
+  describe "sends a list of resources" do
     describe "the response" do
       it "has a 200 status code" do
         get api_v1_resources_path

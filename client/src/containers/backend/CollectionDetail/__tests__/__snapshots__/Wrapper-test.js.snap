@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend CollectionDetail Wrapper Container renders correctly 1`] = `
+<div>
+  <section
+    className="bg-neutral95"
+  >
+    <div
+      className="container flush"
+    >
+      <nav
+        className="breadcrumb-primary"
+      >
+        <a
+          className="initial"
+          href="/backend"
+          onClick={[Function]}
+        >
+          <i
+            className="manicon manicon-arrow-left"
+          />
+          Back to:
+        </a>
+        <ul>
+          <li>
+            <a
+              className="back-link-primary-segment"
+              href="/backend"
+              onClick={[Function]}
+            >
+              ALL PROJECTS
+            </a>
+          </li>
+          <li>
+            <a
+              className="back-link-primary-segment"
+              href="/backend/project/4/resources"
+              onClick={[Function]}
+            >
+              Rowan Test
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div
+      className="container flush"
+    >
+      <header
+        className="entity-header-primary"
+      >
+        <figure>
+          <i
+            className="manicon manicon-cube-shine"
+          />
+        </figure>
+        <div
+          className="title"
+        >
+          <h1>
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Rowan",
+                }
+              }
+            />
+            <span
+              className="subtitle"
+            />
+          </h1>
+          <div
+            className="utility"
+          >
+            <div>
+              <button
+                className="button-bare-primary"
+                onClick={[Function]}
+              >
+                Preview 
+                <i
+                  className="manicon manicon-eye-outline"
+                />
+              </button>
+              <button
+                className="button-bare-primary"
+                onClick={[Function]}
+              >
+                Delete 
+                <i
+                  className="manicon manicon-trashcan"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </section>
+  <section
+    className="backend-panel"
+  >
+    <aside
+      className="scrollable"
+    >
+      <div
+        className="wrapper"
+      >
+        <nav
+          className="panel-nav"
+        >
+          <ul>
+            <li>
+              <a
+                className={undefined}
+                href="/backend/collection/1"
+                onClick={[Function]}
+                style={undefined}
+              >
+                General
+              </a>
+            </li>
+            <li>
+              <a
+                className={undefined}
+                href="/backend/collection/1/resources"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Resources
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+    <div
+      className="container"
+    >
+      <aside
+        className="aside"
+      >
+        <nav
+          className="panel-nav"
+        >
+          <ul>
+            <li>
+              <a
+                className={undefined}
+                href="/backend/collection/1"
+                onClick={[Function]}
+                style={undefined}
+              >
+                General
+              </a>
+            </li>
+            <li>
+              <a
+                className={undefined}
+                href="/backend/collection/1/resources"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Resources
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <div
+        className="panel"
+      />
+    </div>
+  </section>
+</div>
+`;

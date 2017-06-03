@@ -154,5 +154,21 @@ export default {
       heading: "Success",
       body: `${payload.data.attributes.title} has been updated`,
     };
+  },
+  [r.beCollectionCreate]: (payload) => {
+    return {
+      level: 0,
+      heading: "Your collection has been created.",
+      body: "A new manifold collection is born.",
+      expiration: 5000
+    };
+  },
+  [r.beCollectionUpdate]: (payload) => {
+    return {
+      level: 0,
+      heading: "Success",
+      body: `${payload.data.attributes.title} has been updated`,
+      expiration: 5000
+    };
   }
 };

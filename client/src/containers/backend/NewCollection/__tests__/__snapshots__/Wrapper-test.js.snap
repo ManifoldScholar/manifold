@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend NewCollection Wrapper Container renders correctly 1`] = `
+<div>
+  <section
+    className="bg-neutral95"
+  >
+    <div
+      className="container flush"
+    >
+      <nav
+        className="breadcrumb-primary"
+      >
+        <a
+          className="initial"
+          href="/backend/project/1/collections"
+          onClick={[Function]}
+        >
+          <i
+            className="manicon manicon-arrow-left"
+          />
+          Back to:
+        </a>
+        <ul>
+          <li>
+            <a
+              className="back-link-primary-segment"
+              href="/backend/project/1/collections"
+              onClick={[Function]}
+            >
+              Collections
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div
+      className="container flush"
+    >
+      <header
+        className="entity-header-primary"
+      >
+        <figure>
+          <i
+            className="manicon manicon-collection-placeholder"
+          />
+        </figure>
+        <div
+          className="title"
+        >
+          <h1>
+            New Collection
+            <span
+              className="subtitle"
+            />
+          </h1>
+          <div
+            className="utility"
+          >
+            <span
+              className="notes"
+            >
+              Enter a name and a brief description. Press save to continue.
+            </span>
+          </div>
+        </div>
+      </header>
+    </div>
+  </section>
+  <section
+    className="backend-panel"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="panel"
+      >
+        <div>
+          <form
+            className="form-secondary"
+            data-id="submit"
+            onSubmit={[Function]}
+          >
+            <div
+              className="form-input"
+              style={Object {}}
+            >
+              <label
+                className=""
+              >
+                Title
+              </label>
+              <input
+                onChange={[Function]}
+                placeholder="Enter a title"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="form-input"
+            >
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label>
+                  Description
+                </label>
+                <textarea
+                  onChange={[Function]}
+                  placeholder="Enter a description"
+                  style={
+                    Object {
+                      "height": 100,
+                    }
+                  }
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              className="form-input"
+            >
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className=""
+                >
+                  Cover Image
+                </label>
+                <div
+                  className="form-dropzone style-landscape"
+                  onClick={[Function]}
+                  onDragEnter={[Function]}
+                  onDragLeave={[Function]}
+                  onDragOver={[Function]}
+                  onDragStart={[Function]}
+                  onDrop={[Function]}
+                  style={Object {}}
+                >
+                  <div
+                    className="contents-empty"
+                  >
+                    <i
+                      className="manicon manicon-cloud-up"
+                    />
+                    <div
+                      className="message"
+                    >
+                      <p
+                        className="primary"
+                      >
+                        Upload a file or
+                        <br />
+                        drag and drop here
+                        <br />
+                      </p>
+                      <p
+                        className="secondary"
+                      >
+                        jpeg, tiff, gif, png
+                      </p>
+                    </div>
+                  </div>
+                  <input
+                    accept="image/*"
+                    multiple={false}
+                    onChange={[Function]}
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                    type="file"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              className="form-input submit"
+            >
+              <a
+                className="button-secondary outlined dull"
+                href="/backend/project/1/resources"
+                onClick={[Function]}
+              >
+                Cancel
+              </a>
+              <input
+                className="button-secondary outlined"
+                type="submit"
+                value="Save and continue"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;

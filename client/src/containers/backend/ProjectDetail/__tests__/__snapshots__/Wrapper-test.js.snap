@@ -140,6 +140,16 @@ exports[`Backend ProjectDetail Wrapper Container renders correctly 1`] = `
             <li>
               <a
                 className={undefined}
+                href="/backend/project/1/collections"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Collections
+              </a>
+            </li>
+            <li>
+              <a
+                className={undefined}
                 href="/backend/project/1/events"
                 onClick={[Function]}
                 style={undefined}
@@ -209,6 +219,16 @@ exports[`Backend ProjectDetail Wrapper Container renders correctly 1`] = `
                 style={undefined}
               >
                 Resources
+              </a>
+            </li>
+            <li>
+              <a
+                className={undefined}
+                href="/backend/project/1/collections"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Collections
               </a>
             </li>
             <li>

@@ -142,6 +142,10 @@
           max-height: 50px;
           transition: fill $duration $timing;
         }
+
+        .collection-thumbnail-square {
+          height: 52px;
+        }
       }
 
       &.avatar {
