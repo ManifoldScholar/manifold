@@ -15,20 +15,28 @@ module Filterable
 
     private
 
+    # rubocop:disable Metrics/MethodLength
     def filter_with_query(params, scope: all)
       results = scope
       params.each do |key, value|
         by_method = "by_#{key}"
         with_method = "with_#{key}"
+        containing_methods = %W(excluding_#{key} including_#{key})
         if results.respond_to?(by_method)
           results = results.send(by_method, value)
         end
         if results.respond_to?(with_method)
           results = results.send(with_method, value)
         end
+        containing_methods.each do |containing_method|
+          if results.respond_to?(containing_method)
+            results = results.send(containing_method)
+          end
+        end
       end
       results
     end
+    # rubocop:enable Metrics/MethodLength
 
     def filter_with_elasticsearch(params, query_scope = nil)
       ids = query_scope.nil? ? nil : query_scope.pluck(:id)

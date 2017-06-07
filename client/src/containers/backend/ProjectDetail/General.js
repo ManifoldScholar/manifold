@@ -23,6 +23,7 @@ export default class ProjectPanelGeneral extends PureComponent {
           create={projectsAPI.create}
           className="form-secondary"
         >
+          <Form.Switch label="Draft Mode" name="attributes[draft]" />
           <Form.TextInput
             validation={["required"]}
             focusOnMount

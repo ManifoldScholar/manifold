@@ -13,6 +13,18 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                   <div>
                     <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
                     <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
+                      <Form.Setter('Form.Switch) label=\\"Draft Mode\\" name=\\"attributes[draft]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.Switch label=\\"Draft Mode\\" name=\\"attributes[draft]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                          <div className=\\"form-input\\">
+                            <label>
+                              Draft Mode
+                            </label>
+                            <div className=\\"toggle-indicator\\">
+                              <div onClick={[Function]} className=\\"boolean-primary\\" />
+                            </div>
+                          </div>
+                        </Form.Switch>
+                      </Form.Setter('Form.Switch)>
                       <Form.Setter('Form.TextInput) validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
                         <Form.TextInput validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"Rowan Test\\" initialValue=\\"Rowan Test\\" password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[title]\\" errors={{...}} label=\\"Title\\" containerStyle={{...}}>

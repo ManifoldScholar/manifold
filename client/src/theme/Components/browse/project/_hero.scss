@@ -103,7 +103,6 @@
     @include clearfix;
     position: relative;
 
-
     @include respond($break75) {
       display: none;
     }

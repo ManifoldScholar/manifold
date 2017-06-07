@@ -20,6 +20,7 @@ const perPage = 20;
 
 export class HomeContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
+    console.log("fetch data");
     const pageParam = match.params.page ? match.params.page : page;
     const state = getState();
     const filteredRequest = request(
@@ -73,12 +74,16 @@ export class HomeContainer extends Component {
     window.scrollTo(0, 0);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.authentication !== this.props.authentication) {
+      this.fetchFeaturedProjects();
+      this.fetchFilteredProjects();
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
-      const apiCall = projectsAPI.index(this.props.projectFilters);
-      const filteredRequest = request(apiCall, requests.feProjectsFiltered);
-      dispatch(filteredRequest);
+      this.fetchFilteredProjects();
     }
   }
 
@@ -98,6 +103,26 @@ export class HomeContainer extends Component {
       this.handlePageChange(event, pageParam);
     };
   }
+
+  fetchFilteredProjects = () => {
+    const pagination = {
+      number: this.props.meta.pagination.currentPage,
+      size: perPage
+    };
+    const filteredRequest = request(
+      projectsAPI.index(this.props.projectFilters, pagination),
+      requests.feProjectsFiltered
+    );
+    this.props.dispatch(filteredRequest);
+  };
+
+  fetchFeaturedProjects = () => {
+    const featuredRequest = request(
+      projectsAPI.featured(),
+      requests.feProjectsFeatured
+    );
+    this.props.dispatch(featuredRequest);
+  };
 
   renderFeaturedButton(limit) {
     if (

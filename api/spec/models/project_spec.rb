@@ -72,6 +72,16 @@ RSpec.describe Project, type: :model do
     }.to_not have_enqueued_job(CreateEventJob)
   end
 
+  it "is created as a draft" do
+    project = FactoryGirl.build(:project)
+    expect(project.draft).to be(true)
+  end
+
+  it "is invalid without draft state" do
+    project = FactoryGirl.build(:project, draft: nil)
+    expect(project).to_not be_valid
+  end
+
   it "returns an array when tweet_fetch_config is not configured" do
     project = FactoryGirl.build(:project, tweet_fetch_config: {})
     expect(project.twitter_following).to be_a Array
@@ -226,6 +236,5 @@ RSpec.describe Project, type: :model do
       expect(project).to_not be_valid
     end
   end
-
 
 end

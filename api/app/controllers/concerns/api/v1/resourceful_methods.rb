@@ -80,11 +80,11 @@ module Api
         end
 
         def #{method_names[:load_resource]}
-        #{method_names[:resource_scope]}.find(params[:id])
+          #{method_names[:resource_scope]}.find(params[:id])
         end
 
         def #{method_names[:load_and_authorize_resource]}
-        #{method_names[:load_resource]}.tap do |resource|
+          #{method_names[:load_resource]}.tap do |resource|
             authorize_action_for resource
           end
         end

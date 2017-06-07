@@ -166,7 +166,6 @@ export default class ProjectHero extends Component {
       </a>
     );
   }
-
   render() {
     const attr = this.props.project.attributes;
     const heroStyle = {};

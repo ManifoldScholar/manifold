@@ -51,6 +51,7 @@ module Importer
       excludes << "published_text_id" unless include_texts
       unset_untouched(project, @project_json[:attributes], excludes)
       raise "Invalid project: #{project.errors.full_messages}" unless project.valid?
+      project.draft = false
       project.save
       import_collaborators(project)
       import_subject(project)
@@ -150,10 +151,8 @@ module Importer
     end
 
     def unset_untouched(model, attributes, exclude = [])
-      exclude << "id"
-      exclude << "created_at"
-      exclude << "updated_at"
-      exclude << "creator_id"
+      default_excludes = %w(id created_at updated_at creator_id draft)
+      exclude.concat(default_excludes)
       fields = model.class.column_names.map(&:to_sym)
       touched = attributes.keys
       unset = (fields - touched).reject do |key|

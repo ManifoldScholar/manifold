@@ -12,7 +12,11 @@ describe("Frontend ProjectDetail Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <ProjectDetailContainer dispatch={store.dispatch} project={project} />
+        <ProjectDetailContainer
+          dispatch={store.dispatch}
+          project={project}
+          projectResponse={{}}
+        />
       </Provider>
     )
   );
