@@ -196,6 +196,13 @@ RSpec.describe Project, type: :model do
       expect(p.metadata).to eq({ "isbn" => "1234" })
     end
 
+    it "filters out blank metadata" do
+      p = FactoryGirl.build(:project)
+      p.metadata = { "isbn" => "1234", "foo" => "" }
+      p.save
+      expect(p.metadata).to eq({ "isbn" => "1234" })
+    end
+
   end
 
   context "when avatar is present" do

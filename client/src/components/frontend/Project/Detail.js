@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 
 import {
   Event,
@@ -60,9 +61,8 @@ class Detail extends Component {
 
   renderMeta() {
     const project = this.props.project;
-    const collectionCount = project.attributes.collectionsCount;
-    const resourcesCount = project.attributes.resourcesCount;
-    if (!project.attributes.metadata) return null;
+    if (!project.attributes.metadata ||
+      isEmpty(project.attributes.metadata)) return null;
     const containerClass = classNames({
       container: true,
       'flush-top': !this.shouldShowResources() || !this.shouldShowResources()
