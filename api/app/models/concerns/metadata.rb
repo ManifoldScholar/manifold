@@ -9,7 +9,7 @@ module Metadata
 
   def metadata=(value)
     base = metadata || {}
-    new = base.merge(value)
+    new = base.merge(value).delete_if { |_k, v| v.blank? }
     write_attribute(:metadata, new)
   end
 
