@@ -43,18 +43,30 @@ export class FeaturedContainer extends Component {
     subjects: PropTypes.array,
     dispatch: PropTypes.func
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.authentication !== this.props.authentication) {
+      this.fetchProjects();
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
-      const apiCall = projectsAPI.featured(6, this.props.projectFilters);
-      const featuredRequest = request(apiCall, requests.feProjectsFeatured);
-      dispatch(featuredRequest);
+      this.fetchProjects();
     }
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.feSubjectsFeatured));
   }
+
+  fetchProjects = () => {
+    const featuredRequest = request(
+      projectsAPI.featured(6, this.props.projectFilters),
+      requests.feProjectsFeatured
+    );
+    this.props.dispatch(featuredRequest);
+  };
 
   render() {
     const boundSetFilters = bindActionCreators(

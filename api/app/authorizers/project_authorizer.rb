@@ -16,4 +16,9 @@ class ProjectAuthorizer < ApplicationAuthorizer
     user.admin?
   end
 
+  def readable_by?(user)
+    return user.can?(:view_draft_projects) if resource.draft?
+    true
+  end
+
 end

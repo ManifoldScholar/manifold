@@ -17,4 +17,8 @@ class ApplicationAuthorizer < Authority::Authorizer
     user.admin?
   end
 
+  def self.authorizes_to_view_drafts?(user)
+    user.admin?
+  end
+
 end

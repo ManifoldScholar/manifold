@@ -5,7 +5,7 @@ RSpec.describe "Projects API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:project) { FactoryGirl.create(:project) }
+  let(:project) { FactoryGirl.create(:project, draft: false) }
 
   describe "responds with a list of projects" do
     before(:each) { get api_v1_projects_path, headers: reader_headers }

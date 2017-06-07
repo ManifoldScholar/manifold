@@ -5,6 +5,9 @@ import { Project } from "components/frontend";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
+import { Redirect } from "react-router-dom";
+import get from "lodash/get";
+import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
 
@@ -20,12 +23,14 @@ export class ProjectDetailContainer extends Component {
 
   static mapStateToProps = state => {
     return {
-      project: select(requests.feProject, state.entityStore)
+      project: select(requests.feProject, state.entityStore),
+      projectResponse: get(state.entityStore.responses, requests.feProject)
     };
   };
 
   static propTypes = {
     project: PropTypes.object,
+    projectResponse: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   };
 
@@ -34,7 +39,15 @@ export class ProjectDetailContainer extends Component {
   }
 
   render() {
-    return <Project.Detail project={this.props.project} />;
+    if (!this.props.projectResponse) return null;
+    if (this.props.projectResponse.status === 401)
+      return <Redirect to={lh.link("frontend")} />;
+    return (
+      <Project.Detail
+        project={this.props.project}
+        dispatch={this.props.dispatch}
+      />
+    );
   }
 }
 

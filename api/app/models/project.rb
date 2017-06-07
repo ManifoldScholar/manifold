@@ -100,6 +100,7 @@ class Project < ApplicationRecord
             presence: true,
             inclusion: { in: AVATAR_COLORS },
             unless: :avatar?
+  validates :draft, inclusion: { in: [true, false] }
 
   # Attachments
   manifold_has_attached_file :cover, :image
@@ -116,6 +117,8 @@ class Project < ApplicationRecord
     return all unless subject.present?
     joins(:project_subjects).where(project_subjects: { subject: subject })
   }
+
+  scope :excluding_drafts, -> { where(draft: false) }
 
   # Why is this here? --ZD
   def self.call

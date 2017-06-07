@@ -11,7 +11,7 @@ module Api
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project.filter(
           with_pagination!(project_filter_params),
-          scope: Project.includes(:makers, :creators, :contributors)
+          scope: project_scope.includes(:makers, :creators, :contributors)
         )
       end
 
@@ -52,6 +52,10 @@ module Api
         Project.includes(:creators, :contributors, { texts: :text_sections },
                          :text_categories, :events, :collections,
                          resources: :collection_resources).friendly
+      end
+
+      def project_scope
+        current_user&.can?(:view_drafts) ? Project.all : Project.excluding_drafts
       end
 
     end
