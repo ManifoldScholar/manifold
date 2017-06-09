@@ -1,5 +1,6 @@
-import { Children, PureComponent, PropTypes } from 'react';
+import React, { Children, PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import isString from 'lodash/isString';
 
 class RequireRole extends PureComponent {
@@ -22,6 +23,11 @@ class RequireRole extends PureComponent {
 
   static defaultProps = {
     roleMatchBehavior: 'show'
+  };
+
+  constructor() {
+    super();
+    this.state = { redirect: false };
   }
 
   isAuthenticated(props) {
@@ -37,11 +43,13 @@ class RequireRole extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.canRedirect(nextProps) && !this.roleMatch(nextProps)) this.redirect(nextProps);
+    if (this.canRedirect(nextProps) && !this.roleMatch(nextProps)) {
+      return this.setState({ redirect: true });
+    }
   }
 
   redirect(props) {
-    props.history.push(props.redirect);
+    return <Redirect to={props.redirect} />;
   }
 
   roleMatch(props) {
@@ -66,6 +74,7 @@ class RequireRole extends PureComponent {
   }
 
   render() {
+    if (this.state.redirect) return this.redirect(this.props);
     if (!this.props.children) return false;
     const behavior = this.behavior(this.props);
     if (behavior === 'hide') return this.renderHide(this.props);
