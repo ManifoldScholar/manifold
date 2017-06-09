@@ -8,8 +8,6 @@ import { select } from 'utils/entityUtils';
 import { projectsAPI, favoriteProjectsAPI, requests } from 'api';
 import HigherOrder from 'containers/global/HigherOrder';
 import get from 'lodash/get';
-import union from 'lodash/union';
-import size from 'lodash/size';
 import lh from 'helpers/linkHandler';
 
 const { setProjectFilters } = uiFilterActions;
@@ -58,7 +56,6 @@ export class FollowingContainer extends Component {
 
   constructor() {
     super();
-    this.renderFollowedProjects = this.renderFollowedProjects.bind(this);
   }
 
   componentDidMount() {
@@ -90,20 +87,6 @@ export class FollowingContainer extends Component {
     });
   }
 
-  mapFavoritesToSubjects() {
-    const subjects = this.props.subjects;
-    const favorites = this.props.authentication.currentUser.favorites;
-    if (!subjects || !favorites) return null;
-
-    const subjectIds = Object.values(favorites).reduce((memo, favorite) => {
-      return union(memo, favorite.attributes.subjectIds);
-    }, []);
-
-    return subjects.filter((subject) => {
-      return subjectIds.indexOf(subject.id) > -1;
-    });
-  }
-
   renderFeaturedButton(limit) {
     if (!this.props.featuredProjects || this.props.featuredProjects.length <= limit) return null;
     return (
@@ -120,46 +103,19 @@ export class FollowingContainer extends Component {
     );
   }
 
-  renderFollowedProjects() {
-    const boundSetFilters = bindActionCreators(setProjectFilters, this.props.dispatch);
-    const subjects = this.mapFavoritesToSubjects();
-
-    return (
-      <section className="bg-neutral05">
-        <div className="container">
-          <header className="section-heading utility-right">
-            <h4 className="title">
-              <i className="manicon manicon-books-with-glasses"></i>
-              {'Projects You\'re Following'}
-            </h4>
-            <div className="section-heading-utility-right">
-              <ProjectList.Filters
-                updateAction={boundSetFilters}
-                subjects={subjects}
-              />
-            </div>
-          </header>
-          { this.props.followedProjects ?
-            <ProjectList.Grid
-              authenticated={this.props.authentication.authenticated}
-              favorites={get(this.props.authentication, 'currentUser.favorites')}
-              dispatch={this.props.dispatch}
-              projects={this.props.followedProjects}
-            /> : null
-          }
-        </div>
-      </section>
-    );
-  }
-
   render() {
+    const boundSetFilters = bindActionCreators(setProjectFilters, this.props.dispatch);
+
     return (
-      <HigherOrder.RequireRole requiredRole="any" redirect={lh.link("frontend")}>
+      <HigherOrder.RequireRole requiredRole="any" redirect={lh.link("frontend")} {...this.props}>
         <div>
-          {this.props.authentication.currentUser.favorites &&
-          size(this.props.authentication.currentUser.favorites) > 0 ?
-              this.renderFollowedProjects() : <Layout.NoFollow />
-          }
+          <ProjectList.Following
+            followedProjects={this.props.followedProjects}
+            authentication={this.props.authentication}
+            subjects={this.props.subjects}
+            favorites={get(this.props.authentication, 'currentUser.favorites')}
+            handleUpdate={boundSetFilters}
+          />
           <section>
             <div className="container">
               <header className="section-heading utility-right">
