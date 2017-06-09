@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
+<section
+  className="bg-neutral05"
+>
+  <div
+    className="container"
+  >
+    <header
+      className="section-heading utility-right"
+    >
+      <h4
+        className="title"
+      >
+        <i
+          className="manicon manicon-books-with-glasses"
+        />
+        Projects You're Following
+      </h4>
+      <div
+        className="section-heading-utility-right"
+      >
+        <div
+          className="select-browse"
+        >
+          <select
+            onChange={[Function]}
+          >
+            <option
+              value=""
+            >
+              Show All
+            </option>
+            <option
+              value="featured"
+            >
+              Featured Projects
+            </option>
+          </select>
+          <i
+            className="manicon manicon-caret-down"
+          />
+        </div>
+      </div>
+    </header>
+    <nav
+      className="grid-project"
+    >
+      <ul>
+        <li>
+          <a
+            href="/project/undefined"
+            onClick={[Function]}
+          >
+            <div
+              className="figure-wrapper figure-wrapper-placeholder"
+            >
+              <figure />
+            </div>
+            <div
+              className="meta"
+            >
+              <h3
+                className="title"
+              >
+                Rowan Test
+              </h3>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/project/undefined"
+            onClick={[Function]}
+          >
+            <div
+              className="figure-wrapper figure-wrapper-placeholder"
+            >
+              <figure />
+            </div>
+            <div
+              className="meta"
+            >
+              <h3
+                className="title"
+              >
+                Rowan Test
+              </h3>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</section>
+`;
+
+exports[`Frontend.ProjectList.Following component renders correctly with no projects 1`] = `
+<div>
+  <section
+    className="bg-neutral05"
+  >
+    <div
+      className="container flush-bottom"
+    >
+      <section
+        className="no-follow"
+      >
+        <h3
+          className="heading-primary"
+        >
+          You're not following any projects yet
+        </h3>
+        <p>
+          But don't fret, it's easy to start following projects. Just browse through the available projects, and when you find one you like, select the green plus symbol. When the green plus is replaced with a blue checkmark, you're done!
+        </p>
+        <figure
+          className="demo-animation"
+        >
+          <img
+            src="/static/images/browse_no-follow-animation.gif"
+          />
+        </figure>
+      </section>
+    </div>
+  </section>
+  <section
+    className="bg-neutral05"
+  >
+    <div
+      className="container"
+    >
+      <nav
+        className="button-nav"
+      >
+        <a
+          className="button-icon-primary"
+          href="/"
+          onClick={[Function]}
+        >
+          <span>
+            <i
+              className="manicon manicon-books-on-shelf"
+            />
+            See more projects
+          </span>
+        </a>
+      </nav>
+    </div>
+  </section>
+</div>
+`;
