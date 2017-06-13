@@ -5,11 +5,6 @@ import { Form as GlobalForm } from 'components/global';
 import isString from 'lodash/isString';
 import { loadingActions } from 'actions';
 
-// Quick require.ensure polyfill for Jest.
-if (!require.ensure) {
-  require.ensure = (deps, cb) => {};
-}
-
 class FormCodeArea extends Component {
 
   static displayName = "Form.CodeArea";
@@ -53,7 +48,9 @@ class FormCodeArea extends Component {
       ],
       () => {
         const Editor = require('react-ace').default;
-        require(`brace/mode/${this.props.mode}`);
+        require(`brace/mode/css`);
+        require(`brace/mode/javascript`);
+        require(`brace/mode/html`);
         require('./CodeArea/theme');
         this.props.dispatch(loadingActions.stop('code-area'));
         this.setState({ Editor });
