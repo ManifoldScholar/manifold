@@ -158,6 +158,12 @@ RSpec.describe Validator::Stylesheet do
     expect(results).to eq_ignoring_whitespace valid
   end
 
+  it "should ignore the tag specific property blacklist for class selectors when there's no tag" do
+    valid = "#{scope_selector} .ept { margin-top: 50px; }"
+    results = validator.validate(valid)
+    expect(results).to eq_ignoring_whitespace valid
+  end
+
   it "should ignore the tag specific property blacklist for ID selectors" do
     valid = "#{scope_selector} a#something { color: red; }"
     results = validator.validate(valid)

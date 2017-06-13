@@ -32,7 +32,6 @@
     "lint": "eslint .",
     "test": "jest --verbose",
     "test-ci": "jest --runInBand"
-
   },
   "jest": {
     "moduleFileExtensions": [
@@ -121,6 +120,7 @@
     "qs": "^6.0.0",
     "query-string": "^4.1.0",
     "react": "^15.4.0",
+    "react-ace": "^5.0.1",
     "react-addons-css-transition-group": "^15.4.0",
     "react-addons-test-utils": "^15.4.0",
     "react-document-meta": "https://github.com/ManifoldScholar/react-document-meta/tarball/master",

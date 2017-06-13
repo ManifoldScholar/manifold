@@ -1,6 +1,7 @@
-# Provides a partial serialization of a project model.
-class StylesheetSerializer < ActiveModel::Serializer
+# Serializes a stylesheet model
+class StylesheetSerializer < StylesheetPartialSerializer
   meta(partial: false)
 
-  attributes :id, :name, :source_identifier, :styles
+  attributes :raw_styles
+
 end

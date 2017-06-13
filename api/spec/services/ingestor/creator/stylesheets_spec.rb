@@ -26,6 +26,12 @@ RSpec.describe Ingestor::Creator::Stylesheets do
     expect(creator).to respond_to(:warn)
   end
 
+  it "maintains boolean attributes" do
+    inspector = double_builder("1")
+    attr = creator.attributes_with_defaults(inspector)
+    expect(attr[:ingested]).to be true
+  end
+
   it "creates a stylesheet for each inspector" do
     models = creator.create(inspectors)
     expect(models.length).to eq(inspectors.length)
@@ -40,5 +46,13 @@ RSpec.describe Ingestor::Creator::Stylesheets do
     expect(text.stylesheets.count).to eq 3
     expect(text.stylesheets.pluck(:id)).to match_array models.pluck(:id)
   end
+
+  it "sets the ingeseted property on existing stylesheets correctly" do
+    FactoryGirl.create(:stylesheet, text: text, source_identifier: "1", ingested: false)
+    models = creator.create([double_builder("1")], text.stylesheets)
+    models.each(&:save)
+    expect(models.first.ingested).to eq true
+  end
+
 
 end

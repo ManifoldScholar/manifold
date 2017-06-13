@@ -61,8 +61,9 @@ class Text < ApplicationRecord
   has_many :ingestion_sources
   has_many :source_resources, through: :ingestion_sources, source: :resource
   has_many :text_sections, -> { order(position: :asc) }
-  has_many :stylesheets
+  has_many :stylesheets, -> { order(position: :asc) }
   has_many :favorites, as: :favoritable
+  has_many :annotations, through: :text_sections
   has_many :annotations, through: :text_sections
   has_one :text_created_event, -> { where event_type: Event::TEXT_ADDED },
           class_name: Event,

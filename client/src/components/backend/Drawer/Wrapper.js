@@ -120,6 +120,7 @@ class DrawerWrapper extends PureComponent {
   renderDrawer() {
     const drawerStyleClass = classNames({
       'drawer-backend': this.props.style === 'backend',
+      'drawer-backend wide': this.props.style === 'backend-wide',
       'drawer-frontend': this.props.style === 'frontend'
     });
 

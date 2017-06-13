@@ -26,6 +26,7 @@ module Ingestor
 
       def attributes_with_defaults(inspector, options = {})
         clean_attributes = attributes(inspector, options).delete_if do |_key, value|
+          return false if value == false # Boolean false should be kept.
           value.blank?
         end
         self.class::DEFAULT_ATTRIBUTES.clone.merge(clean_attributes)

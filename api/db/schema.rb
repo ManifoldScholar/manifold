@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606175305) do
+ActiveRecord::Schema.define(version: 20170612204527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -339,12 +339,17 @@ ActiveRecord::Schema.define(version: 20170606175305) do
   end
 
   create_table "stylesheets", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "source_identifier"
-    t.text   "styles"
-    t.text   "raw_styles"
-    t.uuid   "text_id"
-    t.uuid   "ingestion_source_id"
+    t.string   "name"
+    t.string   "source_identifier"
+    t.text     "styles"
+    t.text     "raw_styles"
+    t.uuid     "text_id"
+    t.uuid     "ingestion_source_id"
+    t.boolean  "ingested",            default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "position"
+    t.uuid     "creator_id"
   end
 
   create_table "subjects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

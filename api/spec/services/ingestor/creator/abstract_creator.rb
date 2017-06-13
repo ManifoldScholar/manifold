@@ -12,4 +12,5 @@ RSpec.describe Ingestor::Creator::AbstractCreator do
     expect(creator).to respond_to(:error)
     expect(creator).to respond_to(:warn)
   end
+
 end

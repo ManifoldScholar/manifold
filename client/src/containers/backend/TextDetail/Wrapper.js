@@ -42,11 +42,11 @@ export class TextDetailWrapperContainer extends PureComponent {
     this.props.dispatch(entityStoreActions.flush(requests.beText));
   }
 
-  fetchText() {
+  fetchText = () => {
     const call = textsAPI.show(this.props.match.params.id);
     const textRequest = request(call, requests.beText);
     this.props.dispatch(textRequest);
-  }
+  };
 
   closeDialog() {
     this.setState({ confirmation: null });
@@ -68,6 +68,11 @@ export class TextDetailWrapperContainer extends PureComponent {
         path: lh.link("backendTextMetadata", text.id),
         label: "Metadata",
         key: "metadata"
+      },
+      {
+        path: lh.link("backendTextStyles", text.id),
+        label: "Styles",
+        key: "styles"
       },
       {
         path: lh.link("backendTextIngestionsNew", text.id),
@@ -129,7 +134,8 @@ export class TextDetailWrapperContainer extends PureComponent {
   }
 
   renderRoutes() {
-    const { _routes, ...otherProps } = this.props;
+    const { _routes, match, history, location, ...otherProps } = this.props;
+    otherProps.refresh = this.fetchText;
     const childRoutes = renderRoutes(this.props.route.routes, otherProps);
     return childRoutes;
   }

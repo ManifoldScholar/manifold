@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend TextDetail Styles Container renders correctly 1`] = `
+"<MemoryRouter>
+  <Router history={{...}}>
+    <Provider store={{...}}>
+      <withRouter(Connect(Stylesheet.Edit)) stylesheet={{...}}>
+        <Route render={[Function]}>
+          <Connect(Stylesheet.Edit) stylesheet={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
+            <Stylesheet.Edit stylesheet={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} dispatch={[Function]}>
+              <div>
+                <section className=\\"text-category-list-secondary\\">
+                  <div className=\\"text-category\\">
+                    <header>
+                      <h4 className=\\"category-title highlight\\">
+                        <Link to=\\"/backend/text/undefined/styles\\" replace={false}>
+                          <a onClick={[Function]} href=\\"/backend/text/undefined/styles\\">
+                            Stylesheets / 
+                          </a>
+                        </Link>
+                         New
+                      </h4>
+                    </header>
+                    <section className=\\"form-section\\">
+                      <withRouter(Connect(Form.Form)) model={[undefined]} name=\\"backend-edit-stylesheet\\" update={[Function]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\">
+                        <Route render={[Function]}>
+                          <Connect(Form.Form) model={[undefined]} name=\\"backend-edit-stylesheet\\" update={[Function]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
+                            <Form.Form model={{...}} name=\\"backend-edit-stylesheet\\" update={[Function]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} session={{...}} response={[undefined]} errors={[undefined]} dispatch={[Function]} doNotWarn={false} debug={false} groupErrors={false}>
+                              <div>
+                                <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
+                                <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
+                                  <div className=\\"form-input\\">
+                                    <p className=\\"instructions\\" />
+                                  </div>
+                                  <Form.Setter('Form.TextInput) label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}}>
+                                    <Form.TextInput label=\\"Name\\" name=\\"attributes[name]\\" placeholder=\\"Name\\" getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                                      <Errorable className=\\"form-input\\" name=\\"attributes[name]\\" errors={{...}} label=\\"Name\\" containerStyle={{...}}>
+                                        <div style={{...}} className=\\"form-input\\">
+                                          <label className=\\"\\">
+                                            Name
+                                          </label>
+                                          <input type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" />
+                                        </div>
+                                      </Errorable>
+                                    </Form.TextInput>
+                                  </Form.Setter('Form.TextInput)>
+                                  <Form.Setter('Connect(HigherOrder.WithDispatch('Form.CodeArea))) label=\\"Source Styles\\" height=\\"300px\\" mode=\\"css\\" name=\\"attributes[rawStyles]\\" instructions=\\"These are the raw source styles, which can be edited.\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}}>
+                                    <Connect(HigherOrder.WithDispatch('Form.CodeArea)) label=\\"Source Styles\\" height=\\"300px\\" mode=\\"css\\" name=\\"attributes[rawStyles]\\" instructions=\\"These are the raw source styles, which can be edited.\\" getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                                      <HigherOrder.WithDispatch('Form.CodeArea) label=\\"Source Styles\\" height=\\"300px\\" mode=\\"css\\" name=\\"attributes[rawStyles]\\" instructions=\\"These are the raw source styles, which can be edited.\\" getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} dispatch={[Function]}>
+                                        <Form.CodeArea label=\\"Source Styles\\" height=\\"300px\\" mode=\\"css\\" name=\\"attributes[rawStyles]\\" instructions=\\"These are the raw source styles, which can be edited.\\" getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} dispatch={[Function]} readOnly={false} />
+                                      </HigherOrder.WithDispatch('Form.CodeArea)>
+                                    </Connect(HigherOrder.WithDispatch('Form.CodeArea))>
+                                  </Form.Setter('Connect(HigherOrder.WithDispatch('Form.CodeArea)))>
+                                  <Form.Setter('Connect(HigherOrder.WithDispatch('Form.CodeArea))) label=\\"Validated Styles\\" name=\\"attributes[styles]\\" mode=\\"css\\" instructions=\\"The following input is read-only. It contains the validated styles that are included in the reader for this text.\\" readOnly={true} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}}>
+                                    <Connect(HigherOrder.WithDispatch('Form.CodeArea)) label=\\"Validated Styles\\" name=\\"attributes[styles]\\" mode=\\"css\\" instructions=\\"The following input is read-only. It contains the validated styles that are included in the reader for this text.\\" readOnly={true} getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                                      <HigherOrder.WithDispatch('Form.CodeArea) label=\\"Validated Styles\\" name=\\"attributes[styles]\\" mode=\\"css\\" instructions=\\"The following input is read-only. It contains the validated styles that are included in the reader for this text.\\" readOnly={true} getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} dispatch={[Function]}>
+                                        <Form.CodeArea label=\\"Validated Styles\\" name=\\"attributes[styles]\\" mode=\\"css\\" instructions=\\"The following input is read-only. It contains the validated styles that are included in the reader for this text.\\" readOnly={true} getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} dispatch={[Function]} height=\\"200px\\" />
+                                      </HigherOrder.WithDispatch('Form.CodeArea)>
+                                    </Connect(HigherOrder.WithDispatch('Form.CodeArea))>
+                                  </Form.Setter('Connect(HigherOrder.WithDispatch('Form.CodeArea)))>
+                                  <Form.Save cancelRoute=\\"/backend/text/undefined/styles\\" text=\\"Save Stylesheet\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-edit-stylesheet\\" errors={{...}}>
+                                    <div className=\\"form-input submit\\">
+                                      <Link to=\\"/backend/text/undefined/styles\\" className=\\"button-secondary outlined dull\\" replace={false}>
+                                        <a className=\\"button-secondary outlined dull\\" onClick={[Function]} href=\\"/backend/text/undefined/styles\\">
+                                          Cancel
+                                        </a>
+                                      </Link>
+                                      <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Stylesheet\\" />
+                                    </div>
+                                  </Form.Save>
+                                </form>
+                              </div>
+                            </Form.Form>
+                          </Connect(Form.Form)>
+                        </Route>
+                      </withRouter(Connect(Form.Form))>
+                    </section>
+                  </div>
+                </section>
+              </div>
+            </Stylesheet.Edit>
+          </Connect(Stylesheet.Edit)>
+        </Route>
+      </withRouter(Connect(Stylesheet.Edit))>
+    </Provider>
+  </Router>
+</MemoryRouter>"
+`;

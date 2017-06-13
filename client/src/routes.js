@@ -206,6 +206,27 @@ export default () => {
           path: "/backend/text/:id",
           routes: [
             {
+              name: "backendTextStyles",
+              component: Backend.TextDetail.Styles,
+              exact: true,
+              path: "/backend/text/:id/styles",
+              helper: (t) => `/backend/text/${t}/styles`,
+            },
+            {
+              name: "BackendTextStylesheetNew",
+              component: Backend.Stylesheet.Edit,
+              exact: true,
+              path: "/backend/text/:id/styles/new",
+              helper: (t) => `/backend/text/${t}/styles/new`
+            },
+            {
+              name: "BackendTextStylesheetEdit",
+              component: Backend.Stylesheet.Edit,
+              exact: true,
+              path: "/backend/text/:id/styles/:stylesheet",
+              helper: (t, ss) => `/backend/text/${t}/styles/${ss}`
+            },
+            {
               name: "backendTextMetadata",
               exact: true,
               component: Backend.TextDetail.Metadata,

@@ -12,11 +12,19 @@ Rails.application.routes.draw do
       resources :subjects
       resources :categories, except: [:create, :index]
       resources :makers
-      resources :texts
       resources :ingestions, only: [:show, :update]
+      resources :stylesheets, only: [:show, :update, :destroy]
       resources :events, only: [:destroy]
       resource :statistics, only: [:show]
       resource :settings, except: [:destroy, :create]
+
+      resources :texts do
+        scope module: :texts do
+          namespace :relationships do
+            resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
+          end
+        end
+      end
 
       resources :comments, only: [:show, :update, :destroy] do
         namespace :relationships do

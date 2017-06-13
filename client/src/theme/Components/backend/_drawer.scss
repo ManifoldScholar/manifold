@@ -6,7 +6,7 @@
   width: 100%;
   padding: 20px $containerPaddingResp 33px;
   overflow: scroll;
-  background-color: $neutral95;
+  background-color: $neutral100;
 
   .drawer-enter & {
     right: -100%;
@@ -40,6 +40,10 @@
   @include respond($break90) {
     width: 555px;
     padding: 33px 48px;
+
+    &.wide {
+      width: 750px;
+    }
 
     .drawer-enter & {
       right: -555px;
