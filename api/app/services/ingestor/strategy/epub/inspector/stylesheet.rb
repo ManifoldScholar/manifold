@@ -15,7 +15,7 @@ module Ingestor
           end
 
           def name
-            "source/#{@epub_inspector.unique_id}/#{id}"
+            source_identifier
           end
 
           def raw_styles
