@@ -46,7 +46,7 @@ module Validator
 
     # @return [String]
     def output
-      @out.split("\n").map(&:squish).join("\n").strip
+      @out.split("\n").join("\n").strip
     end
 
     # Reset the validator state
@@ -108,7 +108,7 @@ module Validator
     def compose_rule_set(selector, declarations)
       <<~END
         #{selector} {
-          #{declarations.join("\n")}
+        #{declarations.map { |d| "    #{d}" }.join("\n")}
         }
       END
     end
