@@ -132,7 +132,7 @@ module.exports = {
   output: {
     path: assetsPath,
     filename: '[name]-[hash].js',
-    chunkFilename: '[name]-[chunkhash].js',
+    chunkFilename: 'chunk-[name].js',
     publicPath: publicPath
   },
   resolveLoader: {
