@@ -25,7 +25,6 @@ export class NewProjectWrapperContainer extends PureComponent {
   }
 
   handleSuccess(project) {
-    console.log('redirecting');
     this.redirectToProject(project);
   }
 
