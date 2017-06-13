@@ -10,3 +10,4 @@ export * as uiReaderActions from './ui/reader';
 export * as entityEditorActions from './entityEditor';
 export * as websocketActions from './websocket';
 export * as oauthActions from './oauth';
+export * as loadingActions from './loading';
