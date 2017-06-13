@@ -37,9 +37,11 @@ module Ingestor
       def attributes(inspector, _options = {})
         {
           name: inspector.name,
+          creator: @text.creator,
           raw_styles: inspector.raw_styles,
           ingestion_source: inspector.ingestion_source(@text),
-          source_identifier: inspector.source_identifier
+          source_identifier: inspector.source_identifier,
+          ingested: true
         }
       end
 

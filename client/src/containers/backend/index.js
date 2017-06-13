@@ -11,6 +11,7 @@ import People from './People';
 import Settings from './Settings';
 import Form from './Form';
 import Ingestion from './Ingestion';
+import Stylesheet from './Stylesheet';
 import Developer from './Developer';
 
 export {
@@ -27,5 +28,6 @@ export {
   Settings,
   Form,
   Ingestion,
+  Stylesheet,
   Developer
 };

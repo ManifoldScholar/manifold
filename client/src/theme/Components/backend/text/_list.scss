@@ -22,6 +22,16 @@
           color: $sp40Tertiary;
         }
 
+        a {
+          color: $neutral50;
+          text-decoration: none;
+          transition: color $duration $timing;
+        }
+
+        a:hover {
+          color: $accentPrimary;
+        }
+
         span {
           color: $neutral50;
         }

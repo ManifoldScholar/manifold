@@ -12,6 +12,16 @@
     text-transform: uppercase;
   }
 
+  a {
+    color: $neutral50;
+    text-decoration: none;
+    transition: color $duration $timing;
+
+    &:hover {
+      color: $accentPrimary;
+    }
+  }
+
   .manicon {
     display: inline-block;
     margin-left: 9px;
@@ -37,6 +47,11 @@
     &.manicon-pulse-small {
       margin-top: -6px;
       font-size: 19px;
+    }
+
+    &.manicon-document {
+      margin-top: -8px;
+      font-size: 23px;
     }
 
     &.manicon-cube-shine {

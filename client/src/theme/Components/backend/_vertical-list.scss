@@ -3,6 +3,11 @@
   padding-top: 49px;
   padding-bottom: 36px;
 
+  &.flush {
+    padding-top: 0;
+    border-top: 1px solid $neutral80;
+  }
+
   .drawer-primary & {
     padding-top: 20px;
     padding-bottom: 0;
@@ -71,16 +76,16 @@
         box-shadow $duration ease-out;
 
       &.active {
-        background-color: $neutral95;
-        border-color: $neutral95;
-        box-shadow: -21px 0 0 $neutral95, 21px 0 0 $neutral95;
+        background-color: $neutral100;
+        border-color: $neutral100;
+        box-shadow: -21px 0 0 $neutral100, 21px 0 0 $neutral100;
 
         a {
           color: $accentPrimary;
         }
 
         + li {
-          border-color: $neutral95;
+          border-color: $neutral100;
         }
       }
     }
@@ -175,6 +180,14 @@
       flex-grow: 1;
       padding-right: 20px;
       padding-left: 15px;
+      vertical-align: top;
+    }
+
+    .title {
+      display: flex;
+      flex-flow: column;
+      flex-grow: 1;
+      padding-right: 20px;
       vertical-align: top;
     }
 

@@ -64,6 +64,14 @@ module Validation
     params.permit(param_config)
   end
 
+  def stylesheet_params
+    params.require(:data)
+    attributes = [:raw_styles, :name, :position]
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def annotation_params
     params.require(:data)
     attributes = [:start_node, :end_node, :start_char, :end_char, :section_id, :format,

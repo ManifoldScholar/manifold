@@ -5,7 +5,7 @@ class TextSerializer < TextPartialSerializer
   attributes :toc, :metadata, :metadata_properties, :citations
 
   belongs_to :project
-  has_many :stylesheets
+  has_many :stylesheets, serializer: StylesheetPartialSerializer
   has_many :creators
   has_many :contributors
   has_many :text_sections, serializer: TextSectionPartialSerializer

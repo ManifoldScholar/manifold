@@ -236,7 +236,21 @@ const defaults = {
     },
     relationships: {
       project: null,
-      category: null
+      category: null,
+      stylesheets: []
+    }
+  },
+
+  stylesheet: {
+    type: "stylesheets",
+    attributes: {
+      position: 1,
+      name: "Slarmbo",
+      rawStyles: ".some-class { font-weight: bold }",
+      styles: ".manifold-text-section .some-class { font-weight: bold }"
+    },
+    relationships: {
+      texet: null,
     }
   },
 
@@ -351,6 +365,10 @@ const text = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("text", id, attributes, relationships);
 };
 
+const stylesheet = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("stylesheet", id, attributes, relationships);
+};
+
 const category = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("category", id, attributes, relationships);
 };
@@ -378,5 +396,6 @@ export default {
   text,
   category,
   annotation,
+  stylesheet,
   textSection
 };
