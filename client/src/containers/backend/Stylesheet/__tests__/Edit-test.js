@@ -1,4 +1,5 @@
 jest.mock('components/global/HigherOrder/fetchData');
+jest.mock('components/backend/Form/CodeArea');
 
 import React from 'react';
 import { mount } from 'enzyme';
