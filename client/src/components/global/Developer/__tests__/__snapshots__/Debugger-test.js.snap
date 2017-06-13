@@ -8,19 +8,6 @@ exports[`Global.Developer.Debugger component renders correctly 1`] = `
     }
   }
 >
-  <div
-    style={
-      Object {
-        "backgroundColor": "rgb(0, 17, 0)",
-        "color": "rgb(0, 153, 0)",
-        "display": "inline-block",
-        "margin": 0,
-        "padding": "10px 20px",
-      }
-    }
-  >
-    Project
-  </div>
   <ul
     style={
       Object {

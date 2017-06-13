@@ -5,14 +5,55 @@ export default class Debugger extends PureComponent {
 
   static propTypes = {
     object: PropTypes.object,
-    label: PropTypes.string
+    label: PropTypes.string,
+    hideLabel: PropTypes.bool,
+    theme: PropTypes.string,
+    shouldExpandNode: PropTypes.func,
   }
 
   static defaultProps = {
-    label: "Debugger"
+    label: "Debugger",
+    hideLabel: false,
+    theme: "dark",
+    shouldExpandNode: (keyName, data, level) => level === 0
+  };
+
+  theme(type) {
+    if (type === "dark") return this.darkTheme();
+    return this.lightTheme();
   }
 
-  theme() {
+  lightTheme() {
+    const theme = {
+      scheme: "Mexico Light",
+      author: "Sheldon Johnson",
+      base00: "#f8f8f8",
+      base01: "#e8e8e8",
+      base02: "#d8d8d8",
+      base03: "#b8b8b8",
+      base04: "#585858",
+      base05: "#383838",
+      base06: "#282828",
+      base07: "#181818",
+      base08: "#ab4642",
+      base09: "#dc9656",
+      base0A: "#f79a0e",
+      base0B: "#538947",
+      base0C: "#4b8093",
+      base0D: "#7cafc2",
+      base0E: "#96609e",
+      base0F: "#a16946"
+    };
+    return {
+      extend: theme,
+      tree: {
+        padding: 20,
+        margin: 0
+      }
+    };
+  }
+
+  darkTheme() {
     const theme = {
       scheme: 'green screen',
       author: 'chris kempson (http://chriskempson.com)',
@@ -50,16 +91,20 @@ export default class Debugger extends PureComponent {
       <div style={{
         marginBottom: 15
       }}>
-        <div style={{
-          backgroundColor: "rgb(0, 17, 0)",
-          color: "rgb(0, 153, 0)",
-          margin: 0,
-          padding: "10px 20px",
-          display: "inline-block"
-        }}>{this.props.label}</div>
+        { this.props.hideLabel ?
+          <div style={{
+            backgroundColor: "rgb(0, 17, 0)",
+            color: "rgb(0, 153, 0)",
+            margin: 0,
+            padding: "10px 20px",
+            display: "inline-block"
+          }}>{this.props.label}</div>
+        : null
+        }
         <JSONTree
           hideRoot
-          theme={this.theme()}
+          shouldExpandNode={this.props.shouldExpandNode}
+          theme={this.theme(this.props.theme)}
           invertTheme={false}
           data={this.props.object}
         />

@@ -1,19 +1,21 @@
 import React, { Component, PropTypes } from 'react';
+import { Developer } from 'components/global';
 
 export default class FatalError extends Component {
 
   static propTypes = {
-    error: PropTypes.shape({
-      detail: PropTypes.string.isRequired,
-      status: PropTypes.number,
-      title: PropTypes.string.isRequired
-    }).isRequired
+    error: PropTypes.object.isRequired
   }
 
   render() {
     const error = this.props.error;
     let statusMessage = "";
     if (error.status) statusMessage = `${error.status} error.`;
+
+    const detail = error.detail;
+    const status = error.status;
+    const title = error.title || error.error;
+
     return (
       <section className="error-page" ref="fillHeight">
         <div className="error-wrapper">
@@ -31,13 +33,39 @@ export default class FatalError extends Component {
 
             <div className="error-description">
               <h1>
-                {statusMessage} {error.title}
+                {statusMessage} {title}
               </h1>
-              <p>
-                {error.detail}
-              </p>
-            </div>
+              { __DEVELOPMENT__ && error.exception ?
+                <h1>{error.exception}</h1>
+                : null
+              }
+              { detail ?
+                <p>
+                  {detail}
+                </p>
+              : null
+              }
           </div>
+        </div>
+          { error.traces && __DEVELOPMENT__ ?
+            <div
+              style={{
+                textAlign: "left",
+                marginTop: 25,
+                paddingBottom: "1vh",
+                backgroundColor: "rgb(248,248,248)",
+                position: "relative",
+                marginBottom: "-10vh"
+              }}
+            >
+              <Developer.Debugger
+                label="Traces"
+                theme="light"
+                shouldExpandNode={(keyName, data, level) => true}
+                object={{ ApplicationTrace: error.traces["Application Trace"] }}
+              />
+            </div>
+          : null }
         </div>
       </section>
     );

@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import has from 'lodash/has';
 import startsWith from 'lodash/startsWith';
 import { notificationActions } from 'actions';
 
@@ -23,7 +24,11 @@ function apiErrors(action) {
 }
 
 function firstFatalError(action) {
-  const errors = get(action, 'payload.body.errors');
+  let errors;
+  errors = get(action, 'payload.body.errors');
+  if (!errors && action.error === true && has(action, 'payload.body.status')) {
+    errors = [action.payload.body];
+  }
   if (!errors) return null;
   return errors.find((error) => {
     return isFatal(error);

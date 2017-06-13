@@ -47,7 +47,9 @@ const handleErrorAction = (state, action) => {
 
 const notificationReducer = (state = initialState, action) => {
 
-  if (action.type && action.type.startsWith("API_REQUEST")) {
+  if (action.type && action.type.startsWith("API_REQUEST")
+    || action.type === "ROUTE_UPDATE"
+  ) {
     return clearFatalError(state, action);
   }
 

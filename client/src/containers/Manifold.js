@@ -8,7 +8,7 @@ import config from '../config';
 import has from 'lodash/has';
 import get from 'lodash/get';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { notificationActions, uiVisibilityActions } from 'actions';
+import { notificationActions, uiVisibilityActions, routingActions } from 'actions';
 import { meAPI, settingsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
 import { select } from 'utils/entityUtils';
@@ -77,6 +77,13 @@ class ManifoldContainer extends PureComponent {
       this.gaInitialized = true;
       nextProps.gaInitCallback();
     }
+    if (this.routeChanged(this.props.location, nextProps.location)) {
+      this.props.dispatch(routingActions.update());
+    }
+  }
+
+  routeChanged(location, nextLocation) {
+    return location.pathname !== nextLocation.pathname;
   }
 
   receivedGaTrackingId(nextSettings) {

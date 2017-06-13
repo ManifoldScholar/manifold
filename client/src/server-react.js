@@ -81,6 +81,10 @@ function render(req, res, store, parameters) {
       return respondWithRedirect(res, routingContext.url);
     }
 
+    const state = store.getState();
+    if (has(state, 'notifications.fatalError.status')) {
+      res.status(state.notifications.fatalError.status);
+    }
     if (isError) {
       res.status(500);
       res.send(renderString);
