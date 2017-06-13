@@ -12,6 +12,7 @@ import HigherOrder from './HigherOrder';
 import Hidden from './Hidden';
 import setter from './setter';
 import FieldGroup from './FieldGroup';
+import CodeArea from './CodeArea';
 
 export default {
   HasMany,
@@ -27,5 +28,6 @@ export default {
   Date,
   HigherOrder,
   FieldGroup,
+  CodeArea,
   setter
 };
