@@ -169,5 +169,7 @@ module Updaters
     when "bottom"
       model.move_to_bottom
     end
+    # https://github.com/swanandp/acts_as_list/issues/23
+    model.reload
   end
 end
