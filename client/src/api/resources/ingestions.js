@@ -5,7 +5,7 @@ export default {
       endpoint: `/api/v1/projects/${projectId}/relationships/ingestions`,
       method: 'POST',
       options: {
-        body: JSON.stringify({ type: "ingestion", data: ingestion })
+        body: JSON.stringify({ type: "ingestions", data: ingestion })
       }
     };
   },
@@ -15,7 +15,7 @@ export default {
       endpoint: `/api/v1/ingestions/${id}`,
       method: 'PUT',
       options: {
-        body: JSON.stringify({ type: "project", data: ingestion })
+        body: JSON.stringify({ type: "ingestions", data: ingestion })
       }
     };
   },
