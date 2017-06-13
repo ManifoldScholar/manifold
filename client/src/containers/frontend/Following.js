@@ -9,6 +9,7 @@ import { projectsAPI, favoriteProjectsAPI, requests } from 'api';
 import HigherOrder from 'containers/global/HigherOrder';
 import get from 'lodash/get';
 import lh from 'helpers/linkHandler';
+import size from 'lodash/size';
 
 const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
