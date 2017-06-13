@@ -13,7 +13,7 @@ class IngestionAuthorizer < ApplicationAuthorizer
     user.admin?
   end
 
-  def readble_by?(_user)
+  def readable_by?(_user)
     true
   end
 
