@@ -19,7 +19,7 @@ module Ingestor
           end
 
           def raw_styles
-            @epub_inspector.get_rendition_source(href).string
+            @epub_inspector.read_rendition_source_by_href(href)
           end
 
           def ingestion_source(text)

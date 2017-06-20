@@ -1,0 +1,40 @@
+h1, h2, h3, h4, h5 {
+    text-decoration: none;
+}
+
+p {
+	font-size: 18px;
+}
+
+p + p, pre + p {
+	margin-top: 2em;
+}
+
+p + h1, 
+p + h2,
+p + h3, 
+p + h4, 
+p + h5
+pre + h1, 
+pre + h2,
+pre + h3, 
+pre + h4, 
+pre + h5 {
+	margin-top: 2em;
+}
+
+p code {
+	font-size: 15px;
+	background-color: #f4f5f7;
+	display: inline-block;
+	padding: 0 5px;
+	border-radius: 3px;
+	border: 1px solid #f4f5f7;
+}
+
+pre {
+	font-size: 16px;
+	background-color: #f4f5f7;
+	padding: 20px;
+	line-height: 1.25em;
+}

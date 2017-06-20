@@ -1,7 +1,0 @@
-en:
-  services:
-    ingestor:
-      strategy:
-        gitbook:
-          log:
-            skipping_source: 'Skipping source: "%{path}"'

@@ -1,9 +1,3 @@
-require "fileutils"
-require "zip"
-require "memoist"
-require "uri"
-require "open-uri"
-
 module Ingestor
   module Strategy
     module EPUB
@@ -14,23 +8,90 @@ module Ingestor
         # @author Zach Davis
         # rubocop: disable Metrics/ClassLength
         class EPUB
-          extend Memoist
+
           include Ingestor::Loggable
-          attr_reader :logger
 
-          def initialize(epub_path, logger = nil)
-            @epub_path = epub_path
-            @logger = logger
+          attr_reader :logger, :ingestion
+
+          def initialize(ingestion)
+            @ingestion = ingestion
+            @logger = @ingestion.logger
           end
 
-          def log(level, msg)
-            @logger.send(level, msg) if @logger
+          def unique_id
+            rendition_unique_id_node&.content
           end
 
-          def epub_basename
-            File.basename(@epub_path)
+          def epub_version
+            rendition_package_node_attribute_value("version")
           end
-          memoize :epub_basename
+
+          def title_nodes
+            metadata_node.search("//dc:title", "dc" => dc)
+          end
+
+          def metadata_node
+            rendition_parsed.at("//xmlns:package/xmlns:metadata")
+          end
+
+          def creator_nodes
+            metadata_node.search("//dc:creator", "dc" => dc)
+          end
+
+          def contributor_nodes
+            metadata_node.search("//dc:contributor", "dc" => dc)
+          end
+
+          def language_node
+            metadata_node.at("//dc:language", "dc" => dc)
+          end
+
+          def date_node
+            metadata_node.xpath("//dc:date", "dc" => dc)
+          end
+
+          def rights_node
+            metadata_node.xpath("//dc:rights", "dc" => dc)
+          end
+
+          def description_node
+            metadata_node.xpath("//dc:description", "dc" => dc)
+          end
+
+          def manifest_item_nodes
+            manifest_node.search("//xmlns:item")
+          end
+
+          def stylesheet_nodes
+            manifest_item_nodes.search("//*[@media-type=\"text/css\"]")
+          end
+
+          def spine_item_nodes
+            spine_node.xpath("//xmlns:itemref")
+          end
+
+          def open_rendition_source_by_href(href)
+            # Rendition HREFs could be relative to the rendition (OPF) file
+            open_rendition_source_by_path(rendition_href_to_path(href))
+          end
+
+          def read_rendition_source_by_href(href)
+            read_rendition_source_by_path(rendition_href_to_path(href))
+          end
+
+          def toc_inspector
+            return TOC.new(self, ingestion) if nav_parsed
+            Naught.build
+          end
+
+          def nav_path
+            href = manifest_nav_node&.attribute("href")&.value
+            ingestion.href_to_ingestion_path(rendition_path, href)
+          end
+
+          def nav_parsed
+            xml_parse(nav_path)
+          end
 
           def v3?
             epub_version.starts_with?("3")
@@ -40,84 +101,37 @@ module Ingestor
             epub_version.starts_with?("2")
           end
 
-          def epub_extension
-            File.extname(epub_basename).split(".").last
+          def rendition_source_node_by_id(id)
+            manifest_item_nodes.at("//*[@id='#{id}']")
           end
-          memoize :epub_extension
 
-          def container_zip_entry
-            container_zip_entry = nil
-            Zip::File.open(@epub_path) do |zip_file|
-              container_zip_entry = zip_file.glob("META-INF/container.xml").first
+          def rendition_source_node_by_property(property)
+            manifest_node.at("//*[contains(@properties, \"#{property}\")]")
+          end
+
+          def spine_item_parsed(id)
+            xml_parse(rendition_source_path_by_id(id)).remove_namespaces!
+          end
+
+          def manifest_cover_node
+            if v2?
+              id = metadata_node.at("//meta[@name=\"cover\"]")&.content
+              rendition_source_node_by_id(id)
+              # TODO: Cover can also come from the guide node.
             end
-            container_zip_entry
+            # V3
+            rendition_source_node_by_property("cover-image")
           end
-          memoize :container_zip_entry
 
-          def container_file_contents
-            container_zip_entry.get_input_stream.read
+          def manifest_cover_node_id
+            manifest_cover_node&.attribute("id")&.value
           end
-          memoize :container_file_contents
 
-          def container_xml
-            Nokogiri::XML(container_file_contents)
-          end
-          memoize :container_xml
-
-          def rendition_relative_path
-            container_xml.xpath("//xmlns:rootfile").first.attribute("full-path").value
-          end
-          memoize :rendition_relative_path
-
-          def rendition_zip_entry
-            rendition_zip_entry = nil
-            Zip::File.open(@epub_path) do |zip_file|
-              rendition_zip_entry = zip_file.glob(rendition_relative_path).first
+          def spine_source_ids
+            spine_item_nodes.map do |node|
+              ::Ingestor::Strategy::EPUB::Inspector::TextSection.new(node, self)
+                                                                .source_identifier
             end
-            rendition_zip_entry
-          end
-          memoize :rendition_zip_entry
-
-          def rendition_file_contents
-            rendition_zip_entry.get_input_stream.read
-          end
-          memoize :rendition_file_contents
-
-          def rendition_xml
-            Nokogiri::XML(rendition_file_contents)
-          end
-          memoize :rendition_xml
-
-          def epub_version
-            rendition_xml.xpath("//xmlns:package").first.attribute("version").value
-          end
-          memoize :epub_version
-
-          def unique_id
-            id_id = rendition_xml.xpath("//xmlns:package")
-                                 .attribute("unique-identifier").value
-            rendition_xml.css("##{id_id}").first.text
-          end
-          memoize :unique_id
-
-          def metadata_node
-            rendition_xml.xpath("//xmlns:package/xmlns:metadata")
-          end
-          memoize :metadata_node
-
-          def manifest_node
-            rendition_xml.xpath("//xmlns:package/xmlns:manifest")
-          end
-          memoize :manifest_node
-
-          def spine_node
-            rendition_xml.xpath("//xmlns:package/xmlns:spine")
-          end
-          memoize :spine_node
-
-          # V2 only
-          def guide_node
-            rendition_xml.xpath("//xmlns:package/xmlns:guide")
           end
 
           def start_section_identifier
@@ -125,10 +139,16 @@ module Ingestor
             return v3_start_section_identifier if v3?
           end
 
-          def v2_guide_node_item(type)
-            return nil unless guide_node.presence
-            guide_node.presence.css("[type=\"#{type}\"]").first
+          # V2 only
+          def guide_node
+            rendition_parsed.at("//xmlns:package/xmlns:guide")
           end
+
+          def rendition_href_to_path(href)
+            ingestion.href_to_ingestion_path(rendition_path, href)
+          end
+
+          protected
 
           def v3_start_section_identifier
             landmarks = toc_inspector.landmarks_structure
@@ -141,7 +161,7 @@ module Ingestor
           end
 
           def v2_start_section_identifier
-            start = v2_guide_node_item("text") || v2_guide_node_item("start")
+            start = v2_guide_node_by_type("text") || v2_guide_node_by_type("start")
             return unless start
             href = start.attribute("href").value.split("#").first
             node = manifest_item_nodes.detect { |n| n.attribute("href").value == href }
@@ -149,192 +169,81 @@ module Ingestor
             node.attribute("id").value
           end
 
-          def title_nodes
-            metadata_node.xpath("//dc:title", "dc" => dc)
-          end
-          memoize :title_nodes
-
-          def creator_nodes
-            metadata_node.xpath("//dc:creator", "dc" => dc)
-          end
-          memoize :creator_nodes
-
-          def contributor_nodes
-            metadata_node.xpath("//dc:contributor", "dc" => dc)
-          end
-          memoize :contributor_nodes
-
-          def language_node
-            metadata_node.xpath("//dc:language", "dc" => dc)
-          end
-          memoize :language_node
-
-          def date_node
-            metadata_node.xpath("//dc:date", "dc" => dc)
-          end
-          memoize :date_node
-
-          def rights_node
-            metadata_node.xpath("//dc:rights", "dc" => dc)
-          end
-          memoize :rights_node
-
-          def description_node
-            metadata_node.xpath("//dc:description", "dc" => dc)
-          end
-          memoize :description_node
-
-          def manifest_item_nodes
-            manifest_node.xpath("//xmlns:item")
-          end
-          memoize :manifest_item_nodes
-
-          def manifest_nav_item
+          def manifest_nav_node
             if v2?
-              toc_id = spine_node.attribute("toc")
-              manifest_node.at_xpath('//*[@id="' + toc_id + '"]')
+              id = spine_node&.attribute("toc")&.value
+              rendition_source_node_by_id(id)
             elsif v3?
-              manifest_node.at_xpath('//*[contains(@properties, "nav")]')
-            end
-          end
-          memoize :manifest_nav_item
-
-          def stylesheet_nodes
-            manifest_item_nodes.select do |node|
-              href = node.attribute("href").try(:value)
-              media_type = node.attribute("media-type").try(:value)
-              File.extname(href) == "css" || media_type == "text/css"
+              rendition_source_node_by_property("nav")
             end
           end
 
-          def manifest_cover_item
-            manifest_node.xpath('//*[contains(@properties, "cover-image")]').first
-          end
-          memoize :manifest_cover_item
-
-          def manifest_cover_item_id
-            node = manifest_cover_item
-            return node.attribute("id").to_str if node
-            meta_cover_node = metadata_node.css('[name="cover"]').first
-            return unless meta_cover_node
-            id = meta_cover_node.attribute("content")
-            cover_node = rendition_source_node_by_id(id)
-            return unless cover_node && cover_node.length.positive?
-            attr = cover_node.attribute("id")
-            attr.to_str
-          end
-          memoize :manifest_cover_item_id
-
-          def nav_path
-            node = manifest_nav_item
-            if node
-              local_path = node.attribute("href")
-              return local_path
-            else
-              Raise "Unable to find nav document in manifest"
-            end
+          def spine_node
+            rendition_parsed.xpath("//xmlns:package/xmlns:spine")
           end
 
-          def nav_xml_with_ns
-            node = manifest_nav_item
-            return unless node
-            local_path = node.attribute("href")
-            Nokogiri::XML(get_rendition_source(local_path))
-          end
-          memoize :nav_xml_with_ns
-
-          def nav_xml
-            nav_xml_with_ns.remove_namespaces!
-          end
-          memoize :nav_xml
-
-          def spine_item_nodes
-            spine_node.xpath("//xmlns:itemref")
-          end
-          memoize :spine_item_nodes
-
-          def spine_source_ids
-            spine_item_nodes.map do |node|
-              ::Ingestor::Strategy::EPUB::Inspector::TextSection.new(node, self)
-                                                                .source_identifier
-            end
+          def read_rendition_source_by_path(rel_path)
+            ingestion.read(rel_path)
           end
 
-          def position_in_spine(node)
-            spine_item_nodes.index(node)
+          def open_rendition_source_by_path(rel_path)
+            ingestion.open(rel_path)
           end
 
-          def read_rendition_source(relative_path)
-            uri = URI(relative_path)
-            if uri.absolute?
-              debug "services.ingestor.strategy.ePUB.log.download_external",
-                    relative_path: relative_path
-              return nil
-            end
-            debug "services.ingestor.strategy.ePUB.log.extract_local_resource",
-                  relative_path: relative_path
-            Zip::File.open(@epub_path) do |zip_file|
-              return zip_file
-                     .glob(source_zip_path(relative_path)).first.get_input_stream.read
-            end
-          end
-          memoize :read_rendition_source
-
-          def spine_item_xml(source_id)
-            doc = Nokogiri::XML(get_rendition_source_by_id(source_id))
-            doc.remove_namespaces!
-            doc
+          def open_rendition_source_by_id(id)
+            open_rendition_source_by_path(rendition_source_path_by_id(id))
           end
 
-          def rendition_source_node_by_id(source_id)
-            xpath = "//*[@id='#{source_id}']"
-            manifest_item_nodes.xpath(xpath)
+          def rendition_source_path_by_id(id)
+            href = rendition_source_node_by_id(id)&.attribute("href")&.value
+            rendition_href_to_path(href)
           end
-
-          def get_rendition_source_by_id(source_id)
-            debug "services.ingestor.strategy.ePUB.log.get_rendition_source",
-                  source_id: source_id
-            node = rendition_source_node_by_id(source_id)
-            path = node.attribute("href")
-            get_rendition_source(path)
-          end
-
-          def get_rendition_source(relative_path)
-            # This warrants explanation. We stream the file contents from the zip, then
-            # we convert it to StringIO, which mostly acts like a file. However, we need
-            # to add some additional info for paperclip, and rather than monkey patch
-            # String IO, we just add some methods to the instance.
-            # See http://stackoverflow.com/questions/5166782/write-stream-to-paperclip
-            string_contents = read_rendition_source(relative_path)
-            return nil unless string_contents
-            file = StringIO.new(string_contents)
-            filename = File.basename(relative_path)
-            metaclass = class << file; self; end
-            metaclass.class_eval do
-              define_method(:original_filename) { filename }
-              define_method(:content_type) { "" }
-            end
-            file
-          end
-
-          def toc_inspector
-            return TOC.new(self) if nav_xml
-            Naught.build
-          end
-
-          private
 
           def dc
             "http://purl.org/dc/elements/1.1/"
           end
 
-          def source_zip_path(relative_path)
-            paths = []
-            base = File.dirname(rendition_relative_path)
-            paths << base unless base == "."
-            paths << relative_path
-            paths.join("/")
+          def rendition_package_node
+            rendition_parsed.at("//xmlns:package")
           end
+
+          def rendition_unique_id_node
+            id = rendition_package_node_attribute_value("unique-identifier")
+            rendition_parsed.at("//*[@id=\"#{id}\"]")
+          end
+
+          def rendition_package_node_attribute_value(attr)
+            rendition_package_node&.attribute(attr)&.value
+          end
+
+          def manifest_node
+            rendition_parsed.at("//xmlns:package/xmlns:manifest")
+          end
+
+          def container_path
+            "/META-INF/container.xml"
+          end
+
+          def container_parsed
+            xml_parse(container_path)
+          end
+
+          def rendition_path
+            container_parsed.at("//xmlns:rootfile").attribute("full-path").value
+          end
+
+          def rendition_parsed
+            xml_parse(rendition_path)
+          end
+
+          def xml_parse(rel_path)
+            Nokogiri::XML(ingestion.open(rel_path), nil, "utf-8")
+          end
+
+          def v2_guide_node_by_type(type)
+            guide_node&.css("[type=\"#{type}\"]")&.first
+          end
+
         end
       end
     end

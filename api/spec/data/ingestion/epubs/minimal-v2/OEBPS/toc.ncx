@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:fe93046f-af57-475a-a0cb-a0d4bc99ba6d" />
+  </head>
+  <docTitle>
+    <text>Your title here</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navPoint-1">
+      <navLabel>
+        <text>Section 1</text>
+      </navLabel>
+      <content src="xhtml/section0001.xhtml" />
+    </navPoint>
+    <navPoint id="navPoint-2">
+      <navLabel>
+        <text>Section 2</text>
+      </navLabel>
+      <content src="xhtml/section0002.xhtml" />
+      <navPoint id="navPoint-2a">
+        <navLabel>
+          <text>Section 2.a</text>
+        </navLabel>
+        <content src="xhtml/section0002a.xhtml" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-3">
+      <navLabel>
+        <text>Section 3</text>
+      </navLabel>
+      <content src="xhtml/section0003.xhtml" />
+    </navPoint>
+  </navMap>
+</ncx>

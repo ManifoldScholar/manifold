@@ -55,10 +55,4 @@ RSpec.describe Ingestor::Strategy do
     end.to raise_error(NoMethodError)
   end
 
-  it "should allow me to clear the strategies" do
-    Ingestor::Strategy.add(:valid_strategy, ValidSampleStrategy)
-    expect(Ingestor::Strategy[:valid_strategy]).to_not be_nil
-    Ingestor::Strategy.clear!
-    expect(Ingestor::Strategy[:valid_strategy]).to be_nil
-  end
 end

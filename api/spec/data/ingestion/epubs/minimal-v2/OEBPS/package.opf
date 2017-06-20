@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.0" unique-identifier="pub-id" xmlns="http://www.idpf.org/2007/opf">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:identifier id="pub-id" opf:scheme="UUID">test-v2</dc:identifier>
+    <dc:title>Your title here</dc:title>
+    <dc:language>en</dc:language>
+    <dc:description>Your description here</dc:description>
+    <dc:rights>Your rights here</dc:rights>
+    <dc:creator opf:role="aut" opf:file-as="Culp, Andrew">Andrew Culp</dc:creator>
+    <meta name="cover" content="cover"/>
+  </metadata>
+  <manifest>
+    <item id="cover" href="images/cover.jpg" media-type="image/jpeg" properties="cover-image" />
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
+    <item id="section0001.xhtml" href="xhtml/section0001.xhtml" media-type="application/xhtml+xml" />
+    <item id="section0002.xhtml" href="xhtml/section0002.xhtml" media-type="application/xhtml+xml" />
+    <item id="section0002a.xhtml" href="xhtml/section0002a.xhtml" media-type="application/xhtml+xml" />
+    <item id="section0003.xhtml" href="xhtml/section0003.xhtml" media-type="application/xhtml+xml" />
+    <item id="css" href="stylesheet.css" media-type="text/css" />
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="section0001.xhtml" />
+    <itemref idref="section0002.xhtml" />
+    <itemref idref="section0002a.xhtml" />
+    <itemref idref="section0003.xhtml" />
+  </spine>
+</package>

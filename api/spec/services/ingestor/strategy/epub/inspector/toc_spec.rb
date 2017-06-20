@@ -50,17 +50,17 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
       '
     end
 
-    let(:logger) { Logger.new("/dev/null") }
     let(:path) { "some/dumb/path" }
     let(:epub_inspector) do
-      inspector = Ingestor::Strategy::EPUB::Inspector::EPUB.new(path, logger)
+      ingestion = Ingestor::Ingestion.new(path, FactoryGirl.create(:user), NullLogger.new )
+      inspector = Ingestor::Strategy::EPUB::Inspector::EPUB.new(ingestion)
       allow(inspector).to receive(:v2?).and_return(true)
-      allow(inspector).to receive(:nav_xml_with_ns).and_return(Nokogiri::XML(ncx_content))
+      allow(inspector).to receive(:nav_parsed).and_return(Nokogiri::XML(ncx_content))
       allow(inspector).to receive(:nav_path).and_return("some/path")
       inspector
     end
     let(:toc_inspector) do
-      toc_inspector = Ingestor::Strategy::EPUB::Inspector::TOC.new(epub_inspector)
+      toc_inspector = epub_inspector.toc_inspector
       allow(toc_inspector).to receive(:guide_node_references).and_return(opf_content.xpath("//xmlns:reference"))
       toc_inspector
     end

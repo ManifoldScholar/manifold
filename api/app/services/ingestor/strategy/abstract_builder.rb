@@ -273,7 +273,7 @@ module Ingestor
       def update_description!(text)
         text.description = description_inspector.description
         info "services.ingestor.strategy.log.set_desc",
-             desc: text.description.truncate(40)
+             desc: text.description&.truncate(40)
       end
 
       def destroy_tmp
