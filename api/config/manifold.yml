@@ -89,9 +89,14 @@ common: &1
           :exclude: ['position', 'font-family', 'overflow', 'overflow-x', 'overflow-y', 'z-index', 'max-width']
         -
           :condition:
-            :match: !ruby/regexp '/^(h1|h2|h3|h4|h5|h6|p)$/i'
+            :match: !ruby/regexp '/^(h1|h2|h3|h4|h5|h6)$/i'
             :type: "tag"
           :exclude: ['font-weight', 'size', 'font-size', 'line-height', 'margin', 'margin-top', 'margin-bottom', 'margin-left', 'margin-right', 'padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right', 'color']
+        -
+          :condition:
+            :match: !ruby/regexp '/^(p)$/i'
+            :type: "tag"
+          :exclude: ['font-weight', 'size', 'font-size', 'line-height']
         -
           :condition:
             :match: !ruby/regexp '/^div$/'
