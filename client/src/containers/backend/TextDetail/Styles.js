@@ -135,7 +135,7 @@ export default class TextDetailStyles extends PureComponent {
                           </figure>
                           <div className="asset-description">
                             <h3 className="asset-title">
-                              {stylesheet.attributes.name} {stylesheet.attributes.position}
+                              {stylesheet.attributes.name}
                               <span className="subtitle"></span>
                             </h3>
                             <datetime className="asset-date">
