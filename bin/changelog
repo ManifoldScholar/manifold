@@ -1,0 +1,3 @@
+cd ~/src/manifold
+github_changelog_generator --enhancement-labels=feature --exclude-labels=wontfix --include-labels=feature,chore,bug --enhancement-label="**Features**" --bugs-label="**Bugs**" --date-format="%m/%d/%Y" --pr-label="**Accepted Pull Requests**" --issues-label="Other Revisions"
+
