@@ -7,7 +7,37 @@ module Ingestor
         # Inspects a Word ingestion source
         class IngestionSource < ::Ingestor::Inspector::IngestionSourceInspector
 
-          include ::Ingestor::Inspector::HTML::IngestionSource
+          attr_reader :rel_path, :ingestion
+
+          def initialize(rel_path, ingestion)
+            @rel_path = rel_path
+            @ingestion = ingestion
+          end
+
+          def source_identifier
+            Digest::MD5.hexdigest(rel_path)
+          end
+
+          def basename
+            File.basename(rel_path)
+          end
+
+          def ext
+            File.extname(basename).split(".").last
+          end
+
+          def source_path
+            rel_path
+          end
+
+          def kind
+            return ::IngestionSource::KIND_SECTION if ext == "html"
+            ::IngestionSource::KIND_PUBLICATION_RESOURCE
+          end
+
+          def attachment
+            ingestion.open(rel_path)
+          end
 
         end
       end

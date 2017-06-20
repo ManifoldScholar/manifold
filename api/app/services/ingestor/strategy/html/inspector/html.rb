@@ -1,10 +1,3 @@
-require "fileutils"
-require "zip"
-require "memoist"
-require "uri"
-require "open-uri"
-require "json"
-require "pathname"
 require "digest/md5"
 require "securerandom"
 
@@ -14,128 +7,143 @@ module Ingestor
       module Inspector
         class Html
 
-          include Ingestor::Loggable
-          include Ingestor::Inspector::Helpers
-          include Ingestor::Inspector::HTML::HTML
-          extend Memoist
+          attr_reader :ingestion
 
-          def initialize(path, logger = nil)
-            @archive_path = File.expand_path(path)
-            @base_name = SecureRandom.hex
-            @base_path = Rails.root.join("tmp", "ingestion").to_s
-            @extracted_path = File.join(@base_path, @base_name).to_s
-            @ready = false
-            @logger = logger
+          def initialize(ingestion)
+            @ingestion = ingestion
           end
 
-          def setup
-            return if @ready == true
-            FileUtils.mkdir(@extracted_path)
-            create_tmp_dir
-            @ready = true
+          def nil(*_args)
+            nil
           end
+          alias start_section_identifier nil
+          alias cover nil
 
-          def teardown
-            remove_tmp
+          def empty_collection(*_args)
+            []
           end
+          alias toc empty_collection
+          alias page_list empty_collection
+          alias landmarks empty_collection
 
           # returns md5 hash of file contents
           def unique_id
-            Digest::MD5.hexdigest(@archive_path)
+            Digest::MD5.hexdigest(index)
           end
 
-          # returns true if file ends in html and has a matching .fld dir
           def html_doc?
-            !html_file.blank?
-          end
-
-          def date
-            return nil unless html_file
-            File.mtime(html_file)
+            !index_path.blank?
           end
 
           def title
-            basename.titleize
+            dublin_core_metadata("dc.title") ||
+              first_tag_content("title") ||
+              ingestion.basename.titleize
           end
 
-          def ingestion_source_paths
-            Dir.glob(File.join(File.dirname(@extracted_path), "**", "*")).reject do |path|
-              File.directory?(path)
-            end
+          def language
+            dublin_core_metadata("dc.language") ||
+              first_tag_attribute_value("html", "lang")
           end
 
-          def ingestion_sources
-            allowed = Regexp.union(allowed_file_types)
-            sources = ingestion_source_paths.reject do |path|
-              next true unless File.extname(path).match(allowed)
-              false
-            end
-            (ingestion_source_paths - sources).each do |path|
-              warn "services.ingestor.strategy.word.log.skipping_source", path: path
-            end
-            sources
+          def date
+            dublin_core_metadata("dc.date") ||
+              index_parsed.at("//meta[@name=\"date\"]")&.attribute("content")&.value
+          end
+
+          def rights
+            dublin_core_metadata("dc.rights")
+          end
+
+          def description
+            dublin_core_metadata("dc.description")
           end
 
           def ingestion_source_inspectors
-            ingestion_sources.map do |source|
-              ::Ingestor::Strategy::Word::Inspector::IngestionSource.new(source, self)
+            ingestion.sources.map do |source|
+              ::Ingestor::Strategy::Html::Inspector::IngestionSource
+                .new(source, ingestion)
             end
           end
 
           def stylesheet_inspectors
-            [
-              ::Ingestor::Strategy::Word::Inspector::Stylesheet.new(
-                stylesheet,
-                self
-              )
-            ]
-          end
-
-          def stylesheet
-            get_contents_from_path(html_file).at("//style").to_html
-          end
-
-          def spine_source_ids
-            [html_file].map do |item|
-              ::Ingestor::Strategy::Word::Inspector::TextSection.new(item, self)
-                                                                .source_identifier
+            style_chunks.map do |chunk|
+              ::Ingestor::Strategy::Html::Inspector::Stylesheet.new(chunk, ingestion)
             end
           end
 
           def text_section_inspectors
-            [html_file].map do |path|
-              ::Ingestor::Strategy::Word::Inspector::TextSection.new(path, self)
+            [index_path].map do |path|
+              ::Ingestor::Strategy::Html::Inspector::TextSection.new(path, ingestion)
             end
           end
 
-          def basename
-            File.basename(@archive_path, ".*")
+          def spine_source_ids
+            text_section_inspectors.map(&:source_identifier)
           end
 
           protected
 
-          def remove_tmp
-            opts = { secure: true }
-            FileUtils.rm_rf(@extracted_path, opts) if File.directory?(@extracted_path)
+          # returns the first html file found in the root
+          def index_path
+            html_file = Dir.glob("#{ingestion.root}/*.{htm,html}").first
+            return nil unless html_file
+            ingestion.rel(html_file)
           end
 
-          def create_tmp_dir
-            return false unless File.extname(@archive_path) == ".zip"
-            Zip::File.open(@archive_path) do |zip_file|
-              zip_file.each do |f|
-                fpath = File.join(@extracted_path, f.name)
-                zip_file.extract(f, fpath) unless File.exist?(fpath)
-              end
-            end
-            @logger.debug("Unzipped archive to temporary directory")
-            true
+          def index
+            ingestion.read(index_path)
           end
-          memoize :create_tmp_dir
 
-          def html_file
-            Dir.glob("#{@extracted_path}/*.{htm,html}").first
+          def index_parsed
+            Nokogiri::HTML(ingestion.open(index_path), nil, "utf-8")
           end
-          memoize :html_file
+
+          def first_tag_attribute_value(tag, attribute)
+            index_parsed.at("//#{tag}")&.attribute(attribute)&.value
+          end
+
+          def first_tag_content(tag)
+            index_parsed.at("//#{tag}")&.content
+          end
+
+          def dublin_core_metadata(name)
+            index_parsed.at("//meta[@name=\"#{name}\"]")&.attribute("content")&.value
+          end
+
+          def node_to_style_chunk(node, index)
+            return stylesheet_chunk(node, index) if node.name == "link"
+            return style_chunk(node, index) if node.name == "style"
+            raise "Invalid style chunk"
+          end
+
+          def style_chunk(node, index)
+            position = index + 1
+            {
+              position: position,
+              name: "head-#{position}",
+              source_path: index_path,
+              styles: node.content
+            }
+          end
+
+          def stylesheet_chunk(node, index)
+            path = node.attribute("href").value
+            position = index + 1
+            {
+              position: position,
+              name: "stylesheet-#{position}",
+              source_path: path,
+              styles: ingestion.read(path)
+            }
+          end
+
+          def style_chunks
+            xpath = "//*[@rel=\"stylesheet\" or @media=\"all\" or @media=\"screen\"] |
+                    //style"
+            nodes = index_parsed.search(xpath)
+            nodes.map.with_index { |node, index| node_to_style_chunk(node, index) }
+          end
 
         end
       end

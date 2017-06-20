@@ -5,7 +5,7 @@ module Ingestor
       class Builder < ::Ingestor::Strategy::AbstractBuilder
 
         def title_inspectors
-          [Inspector::Title.new(@inspector)]
+          [Ingestor::Strategy::Html::Inspector::Title.new(@inspector)]
         end
 
         def creator_inspectors

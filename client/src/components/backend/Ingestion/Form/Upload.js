@@ -58,17 +58,6 @@ export default class IngestionFormUpload extends PureComponent {
             accepts="epubs"
           />
           : null}
-        { ingestionType === "word" ?
-          <Form.Upload
-            inlineStyle={{ width: "100%" }}
-            style="landscape"
-            name="attributes[source]"
-            readFrom="attributes[sourceFileName]"
-            instructions="To create a text from a word document, save the word document as HTML and create a single zip archive. Manifold will expect to see a top level directory in the archive ending in .fld"
-            label="Zip source file"
-            accepts="zips"
-          />
-          : null}
         { ingestionType === "html" ?
           <Form.Upload
             inlineStyle={{ width: "100%" }}

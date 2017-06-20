@@ -37,26 +37,6 @@ exports[`Backend TextDetail Ingestion New Container renders correctly 1`] = `
           </label>
           <label
             className="form-toggle radio"
-            htmlFor="word"
-          >
-            <input
-              checked={false}
-              id="word"
-              onChange={[Function]}
-              type="radio"
-              value="word"
-            />
-            <span
-              className="toggle-indicator"
-            />
-            <span
-              className="toggle-label"
-            >
-              Word HTML Export
-            </span>
-          </label>
-          <label
-            className="form-toggle radio"
             htmlFor="markdown"
           >
             <input

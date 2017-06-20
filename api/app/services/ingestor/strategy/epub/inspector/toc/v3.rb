@@ -14,27 +14,27 @@ module Ingestor
             private
 
             def selector_toc_root_node
-              "//nav[@type='toc']/ol"
+              "//xmlns:nav[@epub:type='toc']/xmlns:ol"
             end
 
             def selector_toc_node
-              "li"
+              "xmlns:li"
             end
 
             def selector_page_list_root_node
-              "//nav[@type='page-list']/ol"
+              "//nav[@epub:type='page-list']/xmlns:ol"
             end
 
             def selector_page_list_node
-              "li"
+              "xmlns:li"
             end
 
             def selector_landmark_root_node
-              "//nav[@type='landmarks']/ol"
+              "//nav[@epub:type='landmarks']/xmlns:ol"
             end
 
             def selector_landmark_node
-              "li"
+              "xmlns:li"
             end
 
             def selector_toc_label
@@ -62,20 +62,20 @@ module Ingestor
               items = []
               if nodes.count
                 nodes.each do |node|
-                  if node.at_xpath("a")
-                    a_node = node.at_css("a")
+                  if node.at_xpath("xmlns:a")
+                    a_node = node.at_xpath("xmlns:a")
                     label = a_node.text
                     href = a_node.attribute("href").try(:value)
                     type = a_node.attribute("type").try(:value)
-                  elsif node.at_xpath("span")
-                    label = node.at_css("span").text.strip
+                  elsif node.at_xpath("xmlns:span")
+                    label = node.at_xpath("xmlns:span").text.strip
                     href = nil
                     type = nil
                   end
                   item = make_structure_item(label, href, type)
 
-                  if node.at_xpath("ol/li")
-                    item[:children] = nodes_to_structure(node.xpath("ol/li"))
+                  if node.at_xpath("xmlns:ol/xmlns:li")
+                    item[:children] = nodes_to_structure(node.xpath("xmlns:ol/xmlns:li"))
                   end
                   items.push item unless item.empty?
                 end

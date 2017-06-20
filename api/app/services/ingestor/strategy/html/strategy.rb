@@ -14,16 +14,11 @@ module Ingestor
         def self.can_ingest?(ingestion)
           i = inspector(ingestion)
           result = i.html_doc?
-          i.teardown
           result
         end
 
-        # Return an MD5 string of based on the file contents;
         def self.unique_id(ingestion)
-          i = inspector(ingestion)
-          id = i.unique_id
-          i.teardown
-          id
+          inspector(ingestion).unique_id
         end
 
         def self.ingest(ingestion)
@@ -31,12 +26,7 @@ module Ingestor
         end
 
         def self.inspector(ingestion)
-          inspector = ::Ingestor::Strategy::Html::Inspector::Html.new(
-            ingestion.source_path,
-            ingestion.logger
-          )
-          inspector.setup
-          inspector
+          ::Ingestor::Strategy::Html::Inspector::Html.new(ingestion)
         end
 
         def initialize(ingestion)
@@ -50,7 +40,6 @@ module Ingestor
           i = self.class.inspector(@ingestion)
           b = ::Ingestor::Strategy::Html::Builder.new(i, @ingestion.logger)
           b.build(text)
-          i.teardown
           text
         end
       end

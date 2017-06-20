@@ -11,11 +11,56 @@ RSpec.describe Ingestor::Ingestion do
   end
 
   describe "when instantiated" do
-    subject { Ingestor::Ingestion.new("/tmp/book.epub", FactoryGirl.create(:user)) }
-    it("should have a basename accessor") { is_expected.to have_attr_accessor(:basename) }
-    it("should have a source_path accessor") { is_expected.to have_attr_accessor(:source_path) }
-    it("should have a logger accessor") { is_expected.to have_attr_accessor(:logger) }
-    it("should have a extension accessor") { is_expected.to have_attr_accessor(:extension) }
-    it("should have a text accessor") { is_expected.to have_attr_accessor(:text) }
+
+    subject do
+      path = Rails.root.join("spec","data","ingestion", "epubs","minimal-v3")
+      Ingestor::Ingestion.new(path, FactoryGirl.create(:user), NullLogger.new)
+    end
+
+    after(:each) do
+      subject.teardown
+    end
+
+    it("should open a relative path in a source package") do
+      expect(subject.open("EPUB/xhtml/section0001.xhtml")).to be_a File
+    end
+
+    it("should confirm that a file existss in a source package") do
+      expect(subject.file?("EPUB/xhtml/section0001.xhtml")).to be true
+    end
+
+    it("should read a relative path in a source package") do
+      expect(subject.read("EPUB/xhtml/section0001.xhtml")).to be_a String
+    end
+
+    it("should convert a relative path in a source package to an absolute path") do
+      rel_path = "EPUB/xhtml/section0001.xhtml"
+      abs_path = Pathname.new(subject.abs(rel_path))
+      expect(abs_path.absolute?).to be true
+    end
+
+    it("converts a relative path within the package to a path relative to the project root") do
+      href = "xhtml/section0001.xhtml"
+      source = "EPUB/package.opf"
+      package_rel_path = subject.href_to_ingestion_path(source, href)
+      expect(package_rel_path).to eq "EPUB/xhtml/section0001.xhtml"
+    end
+
+    it("returns the ingestion basename") do
+      expect(subject.basename).to eq "minimal-v3"
+    end
+
+    it("does not return an extension when a directory is the ingestion subject") do
+      expect(subject.extension).to be nil
+    end
+
+    it("returns the package working directory") do
+      expect(subject.root).to be_a String
+    end
+
+    it("returns all the files in the ingestion") do
+      expect(subject.sources).to be_a Array
+    end
+
   end
 end

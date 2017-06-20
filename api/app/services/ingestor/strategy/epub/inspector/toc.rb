@@ -16,12 +16,11 @@ module Ingestor
           extend Memoist
           include Ingestor::Loggable
 
-          def initialize(epub_inspector)
+          def initialize(epub_inspector, ingestion)
+            @ingestion = ingestion
             @epub_inspector = epub_inspector
             @logger = epub_inspector.logger
-            @nav_xml = @epub_inspector.nav_xml
-            @nav_path = @epub_inspector.nav_path
-
+            @nav_xml = @epub_inspector.nav_parsed
             extend @epub_inspector.v2? ? V2 : V3
           end
 
@@ -91,12 +90,13 @@ module Ingestor
 
           def make_structure_item(raw_label, raw_path = nil, type = nil)
             label = raw_label.strip
-
             anchor = source_path = ""
             unless raw_path.nil?
               relative_source_path, anchor = raw_path.split("#")
-              source_path =
-                Helper::URI.to_absolute_package_path(relative_source_path, @nav_path)
+              source_path = @ingestion.href_to_ingestion_path(
+                @epub_inspector.nav_path,
+                relative_source_path
+              )
             end
 
             {

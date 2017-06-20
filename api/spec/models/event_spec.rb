@@ -18,7 +18,7 @@ RSpec.describe Event, type: :model do
     expect(FactoryGirl.create(:event)).to be_valid
   end
 
-  context "can be searched", :integration, :elasticsearch do
+  context "can be searched", :slow, :elasticsearch do
 
     it "by title" do
       @event_a = FactoryGirl.create(:event, subject_title: "Aquemini")

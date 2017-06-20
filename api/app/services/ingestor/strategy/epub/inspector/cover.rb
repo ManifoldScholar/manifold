@@ -11,7 +11,7 @@ module Ingestor
 
           def cover(text)
             text.ingestion_sources.find_by(
-              source_identifier: @epub_inspector.manifest_cover_item_id
+              source_identifier: @epub_inspector.manifest_cover_node_id
             )
           end
 

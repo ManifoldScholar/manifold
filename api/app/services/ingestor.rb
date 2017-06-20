@@ -26,12 +26,14 @@ module Ingestor
     # @raise [IngestionFailed] Strategies can trigger an ingestion failure by
     #   raising an IngestionFailed exception, which will be caught and logged by
     #   the ingestor.
-    def ingest(path, creator)
+    def ingest(path, creator, strategy = nil)
       creator ||= User.find_by(is_cli_user: true)
-      _basename, ingestion, strategy = start(path, creator)
+      _basename, ingestion, strategy = start(path, creator, strategy)
       validate_strategy(strategy)
       set_ingestion_text(strategy, ingestion)
-      do_ingestion(strategy, ingestion)
+      res = do_ingestion(strategy, ingestion)
+      ingestion.teardown
+      res
     end
 
     def ingest_update(path, creator, text)
@@ -39,7 +41,9 @@ module Ingestor
       _basename, ingestion, strategy = start(path, creator)
       validate_strategy(strategy)
       ingestion.text = text
-      do_ingestion(strategy, ingestion)
+      res = do_ingestion(strategy, ingestion)
+      ingestion.teardown
+      res
     end
 
     def ingest_new(path, creator)
@@ -48,13 +52,16 @@ module Ingestor
       validate_strategy(strategy)
       id = strategy.unique_id(ingestion)
       ingestion.text.unique_identifier = id
-      do_ingestion(strategy, ingestion)
+      res = do_ingestion(strategy, ingestion)
+      ingestion.teardown
+      res
     end
 
     def determine_strategy(path, creator)
       creator ||= User.find_by(is_cli_user: true)
-      _basename, _ingestion, strategy = start(path, creator)
+      _basename, ingestion, strategy = start(path, creator)
       validate_strategy(strategy)
+      ingestion.teardown
       strategy.name
     end
 
@@ -70,7 +77,7 @@ module Ingestor
       @logger || Rails.logger
     end
 
-    private
+    protected
 
     def do_ingestion(strategy, ingestion)
       strategy.ingest(ingestion)
@@ -82,18 +89,14 @@ module Ingestor
 
     # @private
     # @return [Array] Array with [basename, ingestion, strategy]
-    def start(path, creator)
-      unless File.exist?(path) || path.start_with?("https") || path.start_with?("http")
-        raise Ingestor::IngestionFailed,
-              "Could not find ingestion source"
-      end
+    def start(path, creator, strategy = nil)
       basename = File.basename(path)
       significant "services.ingestor.logging.ingestion_start", name: basename
-      ingestion = Ingestor::Ingestion.new(path, creator)
-      strategy = Ingestor::Strategy.for(ingestion, logger)
-      return [basename, ingestion, nil] unless strategy
-      info "services.ingestor.logging.using_strategy", strategy: strategy
-      [basename, ingestion, strategy]
+      ingestion = Ingestor::Ingestion.new(path, creator, logger)
+      final_strategy = strategy || Ingestor::Strategy.for(ingestion, logger)
+      return [basename, ingestion, nil] unless final_strategy
+      info "services.ingestor.logging.using_strategy", strategy: final_strategy
+      [basename, ingestion, final_strategy]
     end
 
     def validate_strategy(strategy)

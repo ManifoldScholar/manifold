@@ -15,14 +15,13 @@ module Ingestor
           end
 
           def source_path
-            href
+            @epub_inspector.rendition_href_to_path(href)
           end
 
           def attachment
-            @epub_inspector.get_rendition_source(href)
+            @epub_inspector.open_rendition_source_by_href(href)
           end
 
-          # TODO: Support EPUB2 covers, etc.
           def kind
             if properties
               return ::IngestionSource::KIND_COVER_IMAGE if

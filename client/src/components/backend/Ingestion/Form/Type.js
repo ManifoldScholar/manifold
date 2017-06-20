@@ -17,10 +17,6 @@ export default class IngestionFormType extends PureComponent {
       label: "EPUB v2 or v3"
     },
     {
-      value: "word",
-      label: "Word HTML Export"
-    },
-    {
       value: "markdown",
       label: "Markdown document(s)"
     },

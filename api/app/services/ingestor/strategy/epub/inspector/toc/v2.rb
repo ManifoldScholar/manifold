@@ -13,27 +13,27 @@ module Ingestor
             private
 
             def guide_node_references
-              @epub_inspector.guide_node.xpath("xmlns:reference")
+              @epub_inspector.guide_node&.at("xmlns:reference")
             end
 
             def selector_toc_root_node
-              "//navMap"
+              "//xmlns:navMap"
             end
 
             def selector_toc_node
-              "navPoint"
+              "xmlns:navPoint"
             end
 
             def selector_page_list_root_node
-              "//pageList"
+              "//xmlns:pageList"
             end
 
             def selector_page_list_node
-              "pageTarget"
+              "xmlns:pageTarget"
             end
 
             def selector_header_node
-              "//navLabel/text/text()"
+              "//xmlns:navLabel/xmlns:text/text()"
             end
 
             def selector_toc_label
@@ -53,12 +53,13 @@ module Ingestor
               if nodes.count
                 nodes.each do |node|
                   item = {}
-                  if node.at_xpath("content")
-                    label = node.at_xpath("navLabel/text/text()").text
-                    href = node.at_css("content").attribute("src").value
+                  if node.at(".//xmlns:content")
+                    label = node.at(".//xmlns:navLabel/xmlns:text/text()")&.text
+                    href = node.at("content")&.attribute("src")&.value
                     item = make_structure_item(label, href)
-                    if node.at_xpath("navPoint")
-                      item[:children] = toc_nodes_to_structure(node.xpath("navPoint"))
+                    if node.at(".//xmlns:navPoint")
+                      children = node.search(".//xmlns:navPoint")
+                      item[:children] = toc_nodes_to_structure(children)
                     end
                   end
                   items.push item unless item.empty?
@@ -78,7 +79,7 @@ module Ingestor
             # Landmarks are different than the other two
             def landmarks_nodes_to_structure(nodes)
               items = []
-              if nodes.count
+              if nodes&.count
                 nodes.each do |node|
                   label = node.at_xpath("@title").value
                   href = node.at_xpath("@href").value

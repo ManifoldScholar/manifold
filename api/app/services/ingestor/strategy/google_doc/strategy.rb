@@ -1,4 +1,5 @@
 require "filesize"
+require "memoist"
 
 module Ingestor
   module Strategy
@@ -7,49 +8,57 @@ module Ingestor
       # Google Doc source documents into Manifold.
       #
       # @author Max Ono
+      # @author Zach Davis
       class Strategy < Ingestor::Strategy::Base
+
         include Ingestor::Loggable
+        extend Memoist
 
         def initialize(ingestion)
           @ingestion = ingestion
-          @inspector =
-            ::Ingestor::Strategy::GoogleDoc::Inspector::GoogleDoc.new(
-              @ingestion.source_path,
-              @ingestion.logger
-            )
-          @logger = @ingestion.logger ||
-                    Naught.build { |config| config.mimic Logger }
         end
 
         # Return true if the url is valid
         def self.can_ingest?(ingestion)
-          inspector = create_inspector(ingestion)
-          inspector.google_doc?
+          return false unless ingestion.url?
+          return false unless ingestion.source_url.start_with?("https://docs.google.com/")
+          true
         end
 
         # Return an MD5 string of based on the file contents;
         def self.unique_id(ingestion)
-          inspector = create_inspector(ingestion)
-          inspector.unique_id
+          inspector(ingestion, pointer(ingestion)).unique_id
         end
 
         def self.ingest(ingestion)
-          new(ingestion).ingest
+          pointer = pointer(ingestion)
+          new(ingestion).fetch(pointer).ingest(pointer)
         end
 
-        def ingest
+        def self.session
+          ::Factory::DriveSession.create_service_account_session
+        end
+
+        def self.pointer(ingestion)
+          session.file_by_url(ingestion.source_url)
+        end
+
+        def self.inspector(ingestion, pointer)
+          ::Ingestor::Strategy::GoogleDoc::Inspector::GoogleDoc.new(ingestion, pointer)
+        end
+
+        def fetch(pointer)
+          contents = self.class.session.drive.export_file(pointer.id, "text/html")
+          @ingestion.write("index.html", contents)
+          self
+        end
+
+        def ingest(pointer)
           text = @ingestion.text
-          ::Ingestor::Strategy::GoogleDoc::Builder.new(@inspector, @logger).build(text)
+          i = self.class.inspector(@ingestion, pointer)
+          b = ::Ingestor::Strategy::GoogleDoc::Builder.new(i, @ingestion.logger)
+          b.build(text)
           text
-        end
-
-        private_class_method
-
-        def self.create_inspector(ingestion)
-          ::Ingestor::Strategy::GoogleDoc::Inspector::GoogleDoc.new(
-            ingestion.source_path,
-            ingestion.logger
-          )
         end
 
       end

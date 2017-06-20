@@ -113,7 +113,7 @@ class Text < ApplicationRecord
   end
 
   def find_text_section_by_source_path(path)
-    source = ingestion_sources.to_ary.find { |is| is.source_path == path }
+    source = ingestion_sources.find_by(source_path: path)
     return unless source
     source_id = source.source_identifier
     text_sections.to_ary.find { |cd| cd.source_identifier == source_id }

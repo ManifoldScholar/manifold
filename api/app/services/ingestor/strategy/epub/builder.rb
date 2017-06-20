@@ -11,12 +11,14 @@ module Ingestor
         end
 
         def creator_inspectors
+          return [] unless @inspector.creator_nodes
           @inspector.creator_nodes.map do |node|
             Inspector::Creator.new(node, @inspector)
           end
         end
 
         def contributor_inspectors
+          return [] unless @inspector.contributor_nodes
           @inspector.contributor_nodes.map do |node|
             Inspector::Creator.new(node, @inspector)
           end

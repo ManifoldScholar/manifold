@@ -38,7 +38,7 @@ module Ingestor
           protected
 
           def text_section
-            @epub_inspector.spine_item_xml(idref)
+            @epub_inspector.spine_item_parsed(idref)
           end
 
           def idref
@@ -86,7 +86,7 @@ module Ingestor
           end
 
           def cover?
-            cover_item = @epub_inspector.manifest_cover_item
+            cover_item = @epub_inspector.manifest_cover_node
             if cover_item
               cover_image_resource_path = cover_item.attribute("href")
               results = text_section.css("[src=\"#{cover_image_resource_path}\"]")

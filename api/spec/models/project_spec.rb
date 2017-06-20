@@ -115,7 +115,7 @@ RSpec.describe Project, type: :model do
     expect(project.uncollected_resources.count).to be 2
   end
 
-  context "can be searched", :integration, :elasticsearch do
+  context "can be searched", :slow, :elasticsearch do
 
     it "by title" do
       @project_a = FactoryGirl.create(:project, title: "Bartholomew Smarts", featured: true)

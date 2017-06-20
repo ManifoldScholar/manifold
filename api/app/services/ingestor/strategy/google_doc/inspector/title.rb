@@ -2,10 +2,24 @@ module Ingestor
   module Strategy
     module GoogleDoc
       module Inspector
-        # Inspects GoogleDoc title
+        # Inspects Word title
         class Title < ::Ingestor::Inspector::TitleInspector
 
-          include ::Ingestor::Inspector::HTML::Title
+          def initialize(inspector)
+            @inspector = inspector
+          end
+
+          def value
+            @inspector.title
+          end
+
+          def position
+            1
+          end
+
+          def kind
+            TextTitle::KIND_MAIN
+          end
 
         end
       end

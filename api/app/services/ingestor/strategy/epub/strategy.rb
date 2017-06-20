@@ -10,37 +10,35 @@ module Ingestor
       class Strategy < Ingestor::Strategy::Base
         include Ingestor::Loggable
 
-        def initialize(ingestion)
-          @ingestion = ingestion
-          @inspector = Inspector::EPUB.new(@ingestion.source_path,
-                                           @ingestion.logger)
-          @logger = @ingestion.logger ||
-                    Naught.build { |config| config.mimic Logger }
-        end
-
         def self.can_ingest?(ingestion)
-          inspector = Inspector::EPUB.new(ingestion.source_path,
-                                          ingestion.logger)
-          return false if inspector.epub_extension != "epub"
-          return false unless inspector.v2? || inspector.v3?
-          true
+          ingestion.dir?("META-INF")
         end
 
         def self.unique_id(ingestion)
-          inspector = Inspector::EPUB.new(ingestion.source_path,
-                                          ingestion.logger)
-          inspector.unique_id
+          inspector(ingestion).unique_id
+        end
+
+        def self.inspector(ingestion)
+          ::Ingestor::Strategy::EPUB::Inspector::EPUB.new(ingestion)
         end
 
         def self.ingest(ingestion)
           new(ingestion).ingest
         end
 
+        def initialize(ingestion)
+          @ingestion = ingestion
+          @logger = @ingestion.logger ||
+                    Naught.build { |config| config.mimic Logger }
+        end
+
         def ingest
-          info "services.ingestor.strategy.ePUB.log.version",
-               version: @inspector.epub_version
           text = @ingestion.text
-          Builder.new(@inspector, @logger).build(text)
+          i = self.class.inspector(@ingestion)
+          info "services.ingestor.strategy.ePUB.log.version",
+               version: i.epub_version
+          b = ::Ingestor::Strategy::EPUB::Builder.new(i, @ingestion.logger)
+          b.build(text)
           text
         end
       end

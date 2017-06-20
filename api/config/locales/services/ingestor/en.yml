@@ -23,7 +23,7 @@ en:
           set_desc: 'Setting description to "%{desc}"'
           find_start_section: 'Found text starting section: "%{source_identifier}"'
         fail:
-          missing_uid: 'Ingestion Failed: unable to find a unique identifier for this Gitbook.'
+          missing_uid: 'Ingestion Failed: unable to find a unique identifier for this Markdown ingestion.'
           missing_method: '%{method} is not declared in the %{strategy} strategy'
           save_fail: 'Unable to save text due to ingestion errors.'
       inspector:
