@@ -40,8 +40,6 @@ exports[`Backend TextDetail Styles Container renders correctly 1`] = `
                         <div className=\\"asset-description\\">
                           <h3 className=\\"asset-title\\">
                             Slarmbo
-                             
-                            1
                             <span className=\\"subtitle\\" />
                           </h3>
                           <datetime className=\\"asset-date\\">
@@ -92,8 +90,6 @@ exports[`Backend TextDetail Styles Container renders correctly 1`] = `
                         <div className=\\"asset-description\\">
                           <h3 className=\\"asset-title\\">
                             Slarmbo
-                             
-                            1
                             <span className=\\"subtitle\\" />
                           </h3>
                           <datetime className=\\"asset-date\\">
