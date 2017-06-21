@@ -7,7 +7,7 @@ import { SignInUp, LoadingBar, Utility } from 'components/global';
 import config from '../config';
 import has from 'lodash/has';
 import get from 'lodash/get';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group'
 import { notificationActions, uiVisibilityActions, routingActions } from 'actions';
 import { meAPI, settingsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
@@ -17,7 +17,6 @@ import ReactGA from 'react-ga';
 import Typekit from 'react-typekit';
 import { renderRoutes } from 'react-router-config';
 import getRoutes from '/routes';
-import lh from 'helpers/linkHandler';
 
 const routes = getRoutes();
 const { request } = entityStoreActions;

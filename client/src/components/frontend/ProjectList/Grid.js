@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Project } from 'components/frontend';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group'
 import difference from 'lodash/difference';
 import shuffle from 'lodash/shuffle';
 

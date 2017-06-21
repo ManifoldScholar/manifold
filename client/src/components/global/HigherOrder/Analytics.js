@@ -44,13 +44,13 @@ class Analytics extends Component {
   }
 
   logInit(props) {
-    if (__DEVELOPMENT__ && __CLIENT__) {
+    if (process.env.NODE_ENV === "development" && __CLIENT__) {
       console.log(`📈 Analytics: Initialized`);
     }
   }
 
   logTrack(props) {
-    if (__DEVELOPMENT__ && __CLIENT__) {
+    if (process.env.NODE_ENV === "development" && __CLIENT__) {
       console.log(`📉 Analytics: page view for ${props.location.pathname}`);
     }
   }

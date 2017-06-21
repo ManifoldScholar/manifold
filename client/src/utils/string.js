@@ -1,10 +1,10 @@
-import isString from 'lodash/isString';
+const isString = require('lodash/isString');
 
-export function repeat(str, times) {
+function repeat(str, times) {
   return new Array(times + 1).join(str);
 }
 
-export function pad(aString, maxLength, padWith = '0', padLeft = true) {
+function pad(aString, maxLength, padWith = '0', padLeft = true) {
   const toPad = typeof aString.toString === 'function' ? aString.toString() : aString;
   const padding = repeat(padWith, maxLength - toPad.length);
   if (padLeft) {
@@ -13,7 +13,7 @@ export function pad(aString, maxLength, padWith = '0', padLeft = true) {
   return toPad + padding;
 }
 
-export function possessivize(str) {
+function possessivize(str) {
   let out;
   if (isString(str)) {
     out = str.trim();
@@ -24,7 +24,7 @@ export function possessivize(str) {
 
 // Thanks, darkskyapp
 // https://github.com/darkskyapp/string-hash/blob/master/index.js
-export function hash(str) {
+function hash(str) {
   let out = 5381;
   let i = str.length;
   while (i) {
@@ -32,3 +32,7 @@ export function hash(str) {
   }
   return out >>> 0;
 }
+
+module.exports = {
+  repeat, pad, possessivize, hash
+};

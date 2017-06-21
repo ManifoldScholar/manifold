@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import get from 'lodash/get';
 import { currentUserActions } from 'actions';
 import classNames from 'classnames';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group'
 
 export default class ProjectFollow extends Component {
 

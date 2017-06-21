@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group'
 import { throttle } from 'lodash';
 import { EmailButton, TwitterButton, FacebookButton } from 'react-social';
 import classNames from 'classnames';

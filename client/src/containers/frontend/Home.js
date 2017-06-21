@@ -101,7 +101,7 @@ export class HomeContainer extends Component {
             <header className="section-heading">
               <h4 className="title">
                 <i className="manicon manicon-lamp"></i>
-                {'Featured Projects'}
+                {'Featured Projects BLERBO'}
               </h4>
             </header>
             { this.props.featuredProjects ?

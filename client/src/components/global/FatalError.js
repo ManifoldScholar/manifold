@@ -35,7 +35,7 @@ export default class FatalError extends Component {
               <h1>
                 {statusMessage} {title}
               </h1>
-              { __DEVELOPMENT__ && error.exception ?
+              { process.env.NODE_ENV === "development" && error.exception ?
                 <h1>{error.exception}</h1>
                 : null
               }
@@ -47,7 +47,7 @@ export default class FatalError extends Component {
               }
           </div>
         </div>
-          { error.traces && __DEVELOPMENT__ ?
+          { error.traces && process.env.NODE_ENV === "development" ?
             <div
               style={{
                 textAlign: "left",
