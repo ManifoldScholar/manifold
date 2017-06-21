@@ -40,8 +40,6 @@ export class IngestionNew extends PureComponent {
     return this.props.text.id;
   }
 
-  get
-
   render() {
     return (
       <div>

@@ -84,7 +84,7 @@ export default class Debugger extends PureComponent {
   }
 
   render() {
-    if (!__DEVELOPMENT__) return null;
+    if (!process.env.NODE_ENV === "development") return null;
     if (!this.props.object) return null;
 
     return (

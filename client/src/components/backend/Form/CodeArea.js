@@ -38,24 +38,11 @@ class FormCodeArea extends Component {
 
   componentDidMount() {
     this.props.dispatch(loadingActions.start('code-area'));
-    require.ensure(
-      [
-        'react-ace',
-        'brace/mode/css',
-        'brace/mode/javascript',
-        'brace/mode/html',
-        './CodeArea/theme'
-      ],
-      () => {
-        const Editor = require('react-ace').default;
-        require(`brace/mode/css`);
-        require(`brace/mode/javascript`);
-        require(`brace/mode/html`);
-        require('./CodeArea/theme');
-        this.props.dispatch(loadingActions.stop('code-area'));
-        this.setState({ Editor });
-      }
-    );
+    import(/* webpackChunkName: "ace-editor" */ './CodeArea/Ace').then((ace) => {
+      const Editor = ace.default;
+      this.props.dispatch(loadingActions.stop('code-area'));
+      this.setState({ Editor });
+    });
   }
 
   onChange = (value) => {

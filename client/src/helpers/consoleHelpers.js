@@ -1,6 +1,7 @@
-import emoji from 'node-emoji';
-import chalk from 'chalk';
-import { pad } from '../utils/string';
+const emoji = require('node-emoji');
+const chalk = require('chalk');
+const stringUtils = require('../utils/string');
+const pad = stringUtils.pad;
 
 function baseString(emojiKey) {
   let out = '';
@@ -28,8 +29,11 @@ function error(string, emojiKey = 'fire') {
   console.log(out);
 }
 
-export default {
-  header,
-  info,
-  error
+function background(string) {
+  const out = chalk.bold.gray(string);
+  console.log(out);
+}
+
+module.exports = {
+  header, info, error, background
 };

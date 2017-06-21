@@ -62,7 +62,7 @@ export default function fetchData(WrappedComponent) {
     }
 
     log(props) {
-      if (__DEVELOPMENT__ && __CLIENT__) {
+      if (process.env.NODE_ENV === "development" && __CLIENT__) {
         console.log(`💾 FetchData: ${getDisplayName(WrappedComponent)} [${props.location.key}]`);
       }
     }

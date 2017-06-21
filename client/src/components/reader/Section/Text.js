@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group'
 import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
 import { Resource, Section } from 'components/reader';

@@ -1,4 +1,4 @@
 webpack/*
 **/__tests__
-dist/build
+dist
 src/config.js

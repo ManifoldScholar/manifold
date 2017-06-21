@@ -1,7 +1,5 @@
 import qs from 'qs';
 import isPlainObject from 'lodash/isPlainObject';
-
-require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 export class LowLevelApiClient {
@@ -22,7 +20,7 @@ export class LowLevelApiClient {
   }
 
   _adjustedEndpoint(endpoint) {
-    const out = __API_URL__ + endpoint;
+    const out = process.env.API_URL + endpoint;
     return out;
   }
 

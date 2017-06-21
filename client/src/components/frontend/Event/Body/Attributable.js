@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Autolinker from 'autolinker';
 import FormattedDate from 'components/global/FormattedDate';
 
 export default class EventBodyAttributable extends Component {
@@ -11,13 +10,20 @@ export default class EventBodyAttributable extends Component {
     icon: PropTypes.string,
   };
 
+  componentDidMount() {
+    import(/* webpackChunkName: "autolinker" */ 'autolinker').then((autolinker) => {
+      this.setState({ autolinker });
+    });
+  }
+
   autoLink(excerpt) {
+    if (!this.state.autolinker) return { __html: "" };
     const options = {
       mention: "twitter",
       hashtag: "twitter"
     };
     return {
-      __html: Autolinker.link(excerpt, options)
+      __html: this.state.autolinker.link(excerpt, options)
     };
   }
 
