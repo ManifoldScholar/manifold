@@ -49,7 +49,8 @@ module Ingestor
 
         def fetch(pointer)
           contents = self.class.session.drive.export_file(pointer.id, "text/html")
-          @ingestion.write("index.html", contents)
+          encoded_contents = contents.encode("utf-8", invalid: :replace, undef: :replace)
+          @ingestion.write("index.html", encoded_contents)
           self
         end
 

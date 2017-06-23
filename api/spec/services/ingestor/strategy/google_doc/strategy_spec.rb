@@ -37,8 +37,8 @@ RSpec.describe Ingestor::Strategy::GoogleDoc::Strategy do
         expect(@text.page_list).to eq []
       end
 
-      it "has no stylesheets" do
-        expect(@text.stylesheets.length).to eq 0
+      it "has one stylesheet" do
+        expect(@text.stylesheets.length).to eq 1
       end
 
       it "has one entry in the spine" do
@@ -49,7 +49,7 @@ RSpec.describe Ingestor::Strategy::GoogleDoc::Strategy do
         expect(@text.text_sections.length).to eq 1
       end
 
-      it "has ond ingestion sources" do
+      it "has one ingestion sources" do
         expect(@text.ingestion_sources.length).to eq 1
       end
 
