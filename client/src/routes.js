@@ -53,6 +53,13 @@ export default () => {
           helper: p => `/backend/project/${p}/collections/new`
         },
         {
+          name: "backendPeopleUsersNew",
+          exact: true,
+          component: Backend.NewUser.Wrapper,
+          path: "/backend/people/users/new",
+          helper: () => '/backend/people/users/new',
+        },
+        {
           name: "backendProjectsNew",
           exact: true,
           component: Backend.NewProject.Wrapper,

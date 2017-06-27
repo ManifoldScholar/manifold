@@ -63,3 +63,31 @@
     min-width: 310px;
   }
 }
+
+.password-input {
+  position: relative;
+
+  .hidden {
+    display: none;
+  }
+
+  .password-visibility-toggle {
+    position: absolute;
+    top: -1px;
+    left: 80px;
+    background: none;
+    border: 0;
+    outline: 0;
+
+    .manicon {
+      position: absolute;
+      font-size: 14px;
+      color: $neutral70;
+
+      &.manicon-eye-slash {
+        top: -1px;
+        font-size: 20px;
+      }
+    }
+  }
+}

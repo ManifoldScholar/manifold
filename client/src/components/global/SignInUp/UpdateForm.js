@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import connectAndFetch from "utils/connectAndFetch";
-import { meAPI, requests } from "api";
-import { entityStoreActions } from "actions";
-import { Avatar, Form } from "components/global";
-import get from "lodash/get";
-import hasIn from "lodash/hasIn";
-import Dropzone from "react-dropzone";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import connectAndFetch from 'utils/connectAndFetch';
+import { meAPI, requests } from 'api';
+import { entityStoreActions } from 'actions';
+import { Avatar, Form } from 'components/global';
+import get from 'lodash/get';
+import hasIn from 'lodash/hasIn';
+import startCase from 'lodash/startCase';
+import Dropzone from 'react-dropzone';
 
 const { request } = entityStoreActions;
 

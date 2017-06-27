@@ -56,6 +56,7 @@ class User < ApplicationRecord
 
   # Callbacks
   before_validation :ensure_nickname
+  after_create :send_welcome_email
 
   # Misc
   has_secure_password
@@ -109,5 +110,9 @@ class User < ApplicationRecord
 
   def force_reset_password
     self.password = SecureRandom.hex(6)
+  end
+
+  def send_welcome_email
+    WelcomeMailer.welcome(self).deliver_now
   end
 end

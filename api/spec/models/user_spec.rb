@@ -38,6 +38,11 @@ RSpec.describe User, type: :model do
     expect(user).to_not be_valid
   end
 
+  it "sends the welcome email on creation" do
+    expect { FactoryGirl.create(:user) }
+      .to change { ActionMailer::Base.deliveries.count }.by(1)
+  end
+
   it "should not be valid with a confirmation mismatch" do
     user = FactoryGirl.build(:user, password: "short", password_confirmation: "long")
     expect(user).to_not be_valid
