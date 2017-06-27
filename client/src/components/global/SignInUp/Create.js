@@ -70,7 +70,7 @@ class CreateContainer extends Component {
   createUser(event) {
     event.preventDefault(event.target);
     this.props.dispatch(
-      request(usersAPI.create(this.state.user), requests.gCreateUser)
+      request(usersAPI.create({ attributes: this.state.user }), requests.gCreateUser)
     );
   }
 

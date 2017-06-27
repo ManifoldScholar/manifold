@@ -114,18 +114,22 @@ export class UsersListContainer extends PureComponent {
         >
           {renderRoutes(this.props.route.routes)}
         </Drawer.Wrapper>
-        {users
-          ? <List.Searchable
-              entities={users}
-              singularUnit="user"
-              pluralUnit="users"
-              pagination={usersMeta.pagination}
-              paginationClickHandler={this.usersPageChangeHandlerCreator}
-              entityComponent={User.ListItem}
-              entityComponentProps={{ currentUserId, active }}
-              filterChangeHandler={this.filterChangeHandler}
-            />
-          : null}
+        { users ?
+          <List.Searchable
+            newButtonVisible
+            newButtonPath={lh.link("backendPeopleUsersNew")}
+            newButtonText="Add a New User"
+            entities={users}
+            singularUnit="user"
+            pluralUnit="users"
+            pagination={usersMeta.pagination}
+            paginationClickHandler={this.usersPageChangeHandlerCreator}
+            entityComponent={User.ListItem}
+            entityComponentProps={{ currentUserId, active }}
+            filterChangeHandler={this.filterChangeHandler}
+          />
+          : null
+        }
       </div>
     );
   }

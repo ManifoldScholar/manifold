@@ -1,18 +1,19 @@
-import Backend from "./Backend";
-import Dashboard from "./Dashboard";
-import NewProject from "./NewProject";
-import NewResource from "./NewResource";
-import NewCollection from "./NewCollection";
-import ProjectDetail from "./ProjectDetail";
-import ResourceDetail from "./ResourceDetail";
-import CollectionDetail from "./CollectionDetail";
-import TextDetail from "./TextDetail";
-import People from "./People";
-import Settings from "./Settings";
-import Form from "./Form";
-import Ingestion from "./Ingestion";
-import Stylesheet from "./Stylesheet";
-import Developer from "./Developer";
+import Backend from './Backend';
+import Dashboard from './Dashboard';
+import NewProject from './NewProject';
+import NewResource from './NewResource';
+import NewCollection from './NewCollection';
+import ProjectDetail from './ProjectDetail';
+import ResourceDetail from './ResourceDetail';
+import CollectionDetail from './CollectionDetail';
+import TextDetail from './TextDetail';
+import People from './People';
+import Settings from './Settings';
+import Form from './Form';
+import Ingestion from './Ingestion';
+import Stylesheet from './Stylesheet';
+import Developer from './Developer';
+import NewUser from './NewUser';
 
 export {
   Backend,
@@ -29,5 +30,6 @@ export {
   Form,
   Ingestion,
   Stylesheet,
-  Developer
+  Developer,
+  NewUser
 };

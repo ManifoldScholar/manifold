@@ -70,6 +70,20 @@ exports[`Backend People Users List Container renders correctly 1`] = `
           </span>
            users: 
         </p>
+        <div
+          className="buttons-icon-horizontal"
+        >
+          <a
+            className="button-icon-secondary"
+            href="/backend/people/users/new"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-plus"
+            />
+            Add a New User
+          </a>
+        </div>
         <ul>
           <li
             className=""
