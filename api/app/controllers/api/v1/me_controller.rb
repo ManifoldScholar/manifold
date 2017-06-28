@@ -14,11 +14,12 @@ module Api
       end
 
       def update
-        updated = ::Updaters::User.new(user_params).update(@current_user)
-        if updated
+        ::Updaters::User.new(user_params).update(@current_user)
+        if @current_user.valid?
           render json: @current_user
         else
-          render json: @current_user.errors.as_json(full_messages: true),
+          render json: @current_user,
+                 serializer: ActiveModel::Serializer::ErrorSerializer,
                  status: :unprocessable_entity
         end
       end

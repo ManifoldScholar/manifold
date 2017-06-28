@@ -59,6 +59,95 @@ exports[`Global.SignInUp.CreateUpdate component renders correctly 1`] = `
   <div
     className="row-1-p"
   >
+    <p
+      className="overlay-copy"
+    >
+      Do you want to edit your account information?
+    </p>
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label>
+        First Name
+      </label>
+      <input
+        id="update-firstName"
+        name="firstName"
+        onChange={[Function]}
+        placeholder="Rowan"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label>
+        Last Name
+      </label>
+      <input
+        id="update-lastName"
+        name="lastName"
+        onChange={[Function]}
+        placeholder="Ida"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label>
+        Email
+      </label>
+      <input
+        id="update-email"
+        name="email"
+        onChange={[Function]}
+        placeholder="test@cic-fake.gotcha"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label>
+        Password
+      </label>
+      <input
+        id="update-password"
+        name="password"
+        onChange={[Function]}
+        placeholder="New password"
+        type="password"
+        value=""
+      />
+    </div>
+    <div
+      className="form-input"
+      style={Object {}}
+    >
+      <label>
+        Confirm Password
+      </label>
+      <input
+        id="update-passwordConfirmation"
+        name="passwordConfirmation"
+        onChange={[Function]}
+        placeholder="Confirm new password"
+        type="password"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    className="row-1-p"
+  >
     <div
       className="form-input form-error"
     >

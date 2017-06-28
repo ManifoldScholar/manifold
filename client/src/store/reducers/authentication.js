@@ -74,7 +74,7 @@ const setCurrentUser = (state, action) => {
 };
 
 const syncCurrentUser = (state, action) => {
-  if (action.meta === requests.gAuthenticatedUserUpdate) {
+  if (action.meta === requests.gAuthenticatedUserUpdate && !action.error) {
     return updateStateFromUser(state, action.payload);
   }
   return state;
