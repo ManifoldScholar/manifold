@@ -116,6 +116,7 @@ export class FollowingContainer extends Component {
             subjects={this.props.subjects}
             favorites={get(this.props.authentication, 'currentUser.favorites')}
             handleUpdate={boundSetFilters}
+            dispatch={this.props.dispatch}
           />
           <section>
             <div className="container">
