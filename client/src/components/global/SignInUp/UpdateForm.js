@@ -35,14 +35,29 @@ class UpdateFormContainer extends Component {
     this.doUpdateRequest = this.doUpdateRequest.bind(this);
     this.displayAvatar = this.displayAvatar.bind(this);
     this.displayNickname = this.displayNickname.bind(this);
-    this.placeholderNickname = this.placeholderNickname.bind(this);
+    this.placeholderAttribute = this.placeholderAttribute.bind(this);
     this.hasAvatar = this.hasAvatar.bind(this);
 
     this.state = {
-      nickname: "",
+      nickname: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
       removeAvatar: false,
       avatar: null
     };
+  }
+
+  setParams() {
+    const params = {};
+    Object.keys(this.state).forEach((key) => {
+      if (key === 'removeAvatar' || key === 'avatar') return null;
+      if (key === 'password' && this.state.password === '') return null;
+      params[key] = this.placeholderAttribute(key);
+    });
+    return params;
   }
 
   handleInputChange(event) {
@@ -50,10 +65,8 @@ class UpdateFormContainer extends Component {
   }
 
   doUpdateRequest(avatarData = null) {
-    const params = {
-      nickname: this.displayNickname(),
-      removeAvatar: this.state.removeAvatar
-    };
+    const params = this.setParams();
+    params.removeAvatar = this.state.removeAvatar;
     if (avatarData) {
       params.avatar = {
         data: avatarData,
@@ -122,12 +135,12 @@ class UpdateFormContainer extends Component {
     }
   }
 
-  placeholderNickname() {
-    if (this.state.nickname) return this.state.nickname;
-    if (hasIn(this.props.authentication, "currentUser.attributes.nickname")) {
-      return this.props.authentication.currentUser.attributes.nickname;
+  placeholderAttribute(attribute) {
+    if (this.state[attribute].length) return this.state[attribute];
+    if (hasIn(this.props.authentication, `currentUser.attributes[${attribute}]`)) {
+      return this.props.authentication.currentUser.attributes[attribute];
     }
-    return "Nickname";
+    return startCase(attribute);
   }
 
   render() {
@@ -166,7 +179,7 @@ class UpdateFormContainer extends Component {
         <div className="row-1-p">
           <Form.Errorable
             className="form-input"
-            name="attribuets[nickname]"
+            name="attributes[nickname]"
             errors={errors}
           >
             <input
@@ -175,60 +188,138 @@ class UpdateFormContainer extends Component {
               name="nickname"
               id="update-nickname"
               onChange={this.handleInputChange}
-              placeholder="Nickname"
+              placeholder={this.placeholderAttribute("nickname")}
             />
           </Form.Errorable>
         </div>
-        <div className="row-1-p">
-          <p className="overlay-copy">
-            {"While you're here, why not upload a profile image?"}
-          </p>
-          {__CLIENT__
-            ? <Dropzone
-                className="form-dropzone"
-                style={{}}
-                activeStyle={{}}
-                accept="image/*"
-                multiple={false}
-                ref={dropzone => {
-                  this.dropzone = dropzone;
-                }}
-                onDrop={this.handleFileDrop}
+        { __CLIENT__ ?
+          <div className="row-1-p">
+            { this.displayAvatar() ?
+                null
+              : <p className="overlay-copy">
+                  While you're here, why not upload a profile image?
+                </p>
+            }
+            <Dropzone
+              className="form-dropzone"
+              style={{}}
+              activeStyle={{}}
+              accept="image/*"
+              multiple={false}
+              ref="dropzone"
+              onDrop={this.handleFileDrop}
+            >
+              <div
+                style={{ position: "relative" }}
+                className="dropzone-button dropzone-button-dotted"
               >
                 <div
-                  style={{ position: "relative" }}
-                  className="dropzone-button dropzone-button-dotted"
+                  style={{
+                    top: "50%",
+                    marginTop: -33,
+                    height: 66,
+                    width: 66,
+                    position: "absolute"
+                  }}
                 >
-                  <div
-                    style={{
-                      top: "50%",
-                      marginTop: -33,
-                      height: 66,
-                      width: 66,
-                      position: "absolute"
-                    }}
-                  >
-                    {this.hasAvatar()
-                      ? <i
-                          onClick={this.handleRemoveAvatar}
-                          style={{
-                            position: "absolute",
-                            top: 0,
-                            right: -8,
-                            fontSize: 10
-                          }}
-                          className="manicon manicon-x"
-                        />
-                      : null}
-                    <Avatar style={{ margin: 0 }} url={this.displayAvatar()} />
-                  </div>
-                  <span className="dropzone-button-text">
-                    Click to browse or<br />
-                    drag and drop
-                  </span>
+                  {this.hasAvatar()
+                    ? <i
+                        onClick={this.handleRemoveAvatar}
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          right: -8,
+                          fontSize: 10
+                        }}
+                        className="manicon manicon-x"
+                      />
+                    : null}
+                  <Avatar style={{ margin: 0 }} url={this.displayAvatar()} />
                 </div>
-              </Dropzone>
-            : null}
+                <span className="dropzone-button-text">Click to browse or<br />drag and drop</span>
+              </div>
+            </Dropzone>
+          </div>
+        : null}
+        <div className="row-1-p">
+          <p className="overlay-copy">
+            Do you want to edit your account information?
+          </p>
+          <Form.Errorable
+            className="form-input"
+            name="attributes[firstName]"
+            errors={errors}
+          >
+            <label>First Name</label>
+            <input
+              value={this.state.firstName}
+              type="text"
+              name="firstName"
+              id="update-firstName"
+              onChange={this.handleInputChange}
+              placeholder={this.placeholderAttribute("firstName")}
+            />
+          </Form.Errorable>
+          <Form.Errorable
+            className="form-input"
+            name="attributes[lastName]"
+            errors={errors}
+          >
+            <label>Last Name</label>
+            <input
+              value={this.state.lastName}
+              type="text"
+              name="lastName"
+              id="update-lastName"
+              onChange={this.handleInputChange}
+              placeholder={this.placeholderAttribute("lastName")}
+            />
+          </Form.Errorable>
+          <Form.Errorable
+            className="form-input"
+            name="attributes[email]"
+            errors={errors}
+          >
+            <label>Email</label>
+            <input
+              value={this.state.email}
+              type="text"
+              name="email"
+              id="update-email"
+              onChange={this.handleInputChange}
+              placeholder={this.placeholderAttribute("email")}
+            />
+          </Form.Errorable>
+          <Form.Errorable
+            className="form-input"
+            name="attributes[password]"
+            errors={errors}
+          >
+            <label>Password</label>
+            <input
+              value={this.state.password}
+              type="password"
+              name="password"
+              id="update-password"
+              onChange={this.handleInputChange}
+              placeholder="New password"
+            />
+          </Form.Errorable>
+          <Form.Errorable
+            className="form-input"
+            name="attributes[passwordConfirmation]"
+            errors={errors}
+          >
+            <label>Confirm Password</label>
+            <input
+              value={this.state.passwordConfirmation}
+              type="password"
+              name="passwordConfirmation"
+              id="update-passwordConfirmation"
+              onChange={this.handleInputChange}
+              placeholder="Confirm new password"
+            />
+          </Form.Errorable>
         </div>
         <div className="row-1-p">
           <div className="form-input form-error">
