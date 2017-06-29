@@ -67,6 +67,7 @@ common: &1
       - "align"
   :css_validator:
     :scope: ".manifold-text-section"
+    :dark_scope: ".scheme-dark"
     :value_maps:
       -
         :match: !ruby/regexp '/font-size/'
@@ -78,6 +79,9 @@ common: &1
           - ["large", "1.2em"]
           - ["x-large", "1.3em"]
           - ["xx-large", "1.3em"]
+    :invertables:
+      :properties:
+        :include: ['color', 'background-color', 'border-color', 'border-right-color', 'border-left-color', 'border-top-color', 'border-bottom-color']
     :exclusions:
       :selectors:
         - !ruby/regexp '/\*/'

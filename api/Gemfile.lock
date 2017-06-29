@@ -62,6 +62,7 @@ GEM
     builder (3.2.3)
     case_transform (0.2)
       activesupport
+    chroma (0.1.0)
     citeproc (1.0.5)
       namae (~> 0.8)
     citeproc-ruby (1.1.6)
@@ -227,6 +228,7 @@ GEM
       omniauth-oauth (~> 1.1)
       rack
     os (0.9.6)
+    paleta (0.3.0)
     paperclip (5.1.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
@@ -402,6 +404,7 @@ DEPENDENCIES
   acts_as_list (~> 0.8.2)
   authority (~> 3.2.0)
   bcrypt (~> 3.1.11)
+  chroma
   citeproc-ruby
   clockwork (= 2.0.0)
   colorize
@@ -431,6 +434,7 @@ DEPENDENCIES
   omniauth-facebook (~> 4.0.0)
   omniauth-google-oauth2 (~> 0.4.1)
   omniauth-twitter (~> 1.4.0)
+  paleta
   paperclip (~> 5.1.0)
   pg
   pry-rails
