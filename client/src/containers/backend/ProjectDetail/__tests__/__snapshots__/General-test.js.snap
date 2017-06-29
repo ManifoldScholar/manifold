@@ -186,9 +186,7 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                                 </select>
                               </div>
                               <div className=\\"form-input\\">
-                                <MaskedInput type=\\"text\\" mask={{...}} className=\\"input-year\\" onChange={[Function]} value=\\"NaN\\">
-                                  <input type=\\"text\\" className=\\"input-year\\" onInput={[Function]} defaultValue=\\"NaN\\" />
-                                </MaskedInput>
+                                <ReactTextMask type=\\"text\\" mask={{...}} className=\\"input-year\\" onChange={[Function]} value=\\"NaN\\" />
                               </div>
                             </div>
                           </div>
@@ -212,9 +210,7 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                             <label>
                               Hashtag
                             </label>
-                            <MaskedInput onChange={[Function]} value=\\"#cute_dog\\" type=\\"text\\" mask={[Function]} placeholder={[undefined]}>
-                              <input type=\\"text\\" placeholder={[undefined]} onInput={[Function]} defaultValue=\\"#cute_dog\\" />
-                            </MaskedInput>
+                            <ReactTextMask onChange={[Function]} value=\\"#cute_dog\\" type=\\"text\\" mask={[Function]} placeholder={[undefined]} />
                           </div>
                         </Form.MaskedTextInput>
                       </Form.Setter('Form.MaskedTextInput)>
@@ -302,23 +298,20 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                                       <Errorable className=\\"form-input\\" name={[undefined]} errors={[undefined]} label={[undefined]} containerStyle={{...}}>
                                         <div style={{...}} className=\\"form-input\\">
                                           <label className=\\"\\" />
-                                          <Dropzone style={[undefined]} className=\\"form-dropzone style-square\\" activeStyle={{...}} multiple={false} onDrop={[Function]} accept=\\"image/*\\" disablePreview={false} disableClick={false} maxSize={Infinity} minSize={0}>
-                                            <div className=\\"form-dropzone style-square\\" style={{...}} onDrop={[Function]} onClick={[Function]} onDragStart={[Function]} onDragEnter={[Function]} onDragOver={[Function]} onDragLeave={[Function]}>
-                                              <div className=\\"contents-empty\\">
-                                                <i className=\\"manicon manicon-cloud-up\\" />
-                                                <div className=\\"message\\">
-                                                  <p className=\\"primary\\">
-                                                    Upload a file or
-                                                    <br />
-                                                    drag and drop here
-                                                    <br />
-                                                  </p>
-                                                  <p className=\\"secondary\\">
-                                                    jpeg, tiff, gif, png
-                                                  </p>
-                                                </div>
+                                          <Dropzone style={[undefined]} className=\\"form-dropzone style-square\\" multiple={false} onDrop={[Function]} accept=\\"image/*\\">
+                                            <div className=\\"contents-empty\\">
+                                              <i className=\\"manicon manicon-cloud-up\\" />
+                                              <div className=\\"message\\">
+                                                <p className=\\"primary\\">
+                                                  Upload a file or
+                                                  <br />
+                                                  drag and drop here
+                                                  <br />
+                                                </p>
+                                                <p className=\\"secondary\\">
+                                                  jpeg, tiff, gif, png
+                                                </p>
                                               </div>
-                                              <input accept=\\"image/*\\" type=\\"file\\" style={{...}} multiple={false} onChange={[Function]} />
                                             </div>
                                           </Dropzone>
                                         </div>
@@ -339,23 +332,20 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                                 <label className=\\"\\">
                                   Cover
                                 </label>
-                                <Dropzone style={[undefined]} className=\\"form-dropzone style-portrait\\" activeStyle={{...}} multiple={false} onDrop={[Function]} accept=\\"image/*\\" disablePreview={false} disableClick={false} maxSize={Infinity} minSize={0}>
-                                  <div className=\\"form-dropzone style-portrait\\" style={{...}} onDrop={[Function]} onClick={[Function]} onDragStart={[Function]} onDragEnter={[Function]} onDragOver={[Function]} onDragLeave={[Function]}>
-                                    <div className=\\"contents-empty\\">
-                                      <i className=\\"manicon manicon-cloud-up\\" />
-                                      <div className=\\"message\\">
-                                        <p className=\\"primary\\">
-                                          Upload a file or
-                                          <br />
-                                          drag and drop here
-                                          <br />
-                                        </p>
-                                        <p className=\\"secondary\\">
-                                          jpeg, tiff, gif, png
-                                        </p>
-                                      </div>
+                                <Dropzone style={[undefined]} className=\\"form-dropzone style-portrait\\" multiple={false} onDrop={[Function]} accept=\\"image/*\\">
+                                  <div className=\\"contents-empty\\">
+                                    <i className=\\"manicon manicon-cloud-up\\" />
+                                    <div className=\\"message\\">
+                                      <p className=\\"primary\\">
+                                        Upload a file or
+                                        <br />
+                                        drag and drop here
+                                        <br />
+                                      </p>
+                                      <p className=\\"secondary\\">
+                                        jpeg, tiff, gif, png
+                                      </p>
                                     </div>
-                                    <input accept=\\"image/*\\" type=\\"file\\" style={{...}} multiple={false} onChange={[Function]} />
                                   </div>
                                 </Dropzone>
                               </div>
@@ -371,23 +361,20 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                                 <label className=\\"\\">
                                   Hero Image
                                 </label>
-                                <Dropzone style={[undefined]} className=\\"form-dropzone style-landscape\\" activeStyle={{...}} multiple={false} onDrop={[Function]} accept=\\"image/*\\" disablePreview={false} disableClick={false} maxSize={Infinity} minSize={0}>
-                                  <div className=\\"form-dropzone style-landscape\\" style={{...}} onDrop={[Function]} onClick={[Function]} onDragStart={[Function]} onDragEnter={[Function]} onDragOver={[Function]} onDragLeave={[Function]}>
-                                    <div className=\\"contents-empty\\">
-                                      <i className=\\"manicon manicon-cloud-up\\" />
-                                      <div className=\\"message\\">
-                                        <p className=\\"primary\\">
-                                          Upload a file or
-                                          <br />
-                                          drag and drop here
-                                          <br />
-                                        </p>
-                                        <p className=\\"secondary\\">
-                                          jpeg, tiff, gif, png
-                                        </p>
-                                      </div>
+                                <Dropzone style={[undefined]} className=\\"form-dropzone style-landscape\\" multiple={false} onDrop={[Function]} accept=\\"image/*\\">
+                                  <div className=\\"contents-empty\\">
+                                    <i className=\\"manicon manicon-cloud-up\\" />
+                                    <div className=\\"message\\">
+                                      <p className=\\"primary\\">
+                                        Upload a file or
+                                        <br />
+                                        drag and drop here
+                                        <br />
+                                      </p>
+                                      <p className=\\"secondary\\">
+                                        jpeg, tiff, gif, png
+                                      </p>
                                     </div>
-                                    <input accept=\\"image/*\\" type=\\"file\\" style={{...}} multiple={false} onChange={[Function]} />
                                   </div>
                                 </Dropzone>
                               </div>
@@ -413,9 +400,7 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                             <label>
                               Purchase Price
                             </label>
-                            <MaskedInput onChange={[Function]} value={[undefined]} type=\\"text\\" mask={[Function]} placeholder={[undefined]}>
-                              <input type=\\"text\\" placeholder={[undefined]} onInput={[Function]} defaultValue={[undefined]} />
-                            </MaskedInput>
+                            <ReactTextMask onChange={[Function]} value={[undefined]} type=\\"text\\" mask={[Function]} placeholder={[undefined]} />
                           </div>
                         </Form.MaskedTextInput>
                       </Form.Setter('Form.MaskedTextInput)>

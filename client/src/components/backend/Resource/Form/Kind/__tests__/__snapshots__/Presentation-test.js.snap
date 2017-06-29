@@ -13,15 +13,12 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
     >
       Presentation File
     </label>
-    <div
+    <Dropzone
+      accept="application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint"
       className="form-dropzone style-square"
-      onClick={[Function]}
-      onDragEnter={[Function]}
-      onDragLeave={[Function]}
-      onDragOver={[Function]}
-      onDragStart={[Function]}
+      multiple={false}
       onDrop={[Function]}
-      style={Object {}}
+      style={undefined}
     >
       <div
         className="contents-empty"
@@ -47,18 +44,7 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
           </p>
         </div>
       </div>
-      <input
-        accept="application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint"
-        multiple={false}
-        onChange={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-        type="file"
-      />
-    </div>
+    </Dropzone>
   </div>
 </div>
 `;

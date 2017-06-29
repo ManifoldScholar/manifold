@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import mapKeys from 'lodash/mapKeys';
 import humps from 'humps';
 import startsWith from 'lodash/startsWith';

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import connectAndFetch from 'utils/connectAndFetch';
 import { Link } from 'react-router-dom';
 import { ProjectList, Layout } from 'components/frontend';

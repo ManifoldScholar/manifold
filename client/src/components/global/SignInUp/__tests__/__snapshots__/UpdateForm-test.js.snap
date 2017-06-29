@@ -50,68 +50,6 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
     >
       While you're here, why not upload a profile image?
     </p>
-    <div
-      className="form-dropzone"
-      onClick={[Function]}
-      onDragEnter={[Function]}
-      onDragLeave={[Function]}
-      onDragOver={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
-      style={Object {}}
-    >
-      <div
-        className="dropzone-button dropzone-button-dotted"
-        style={
-          Object {
-            "position": "relative",
-          }
-        }
-      >
-        <div
-          style={
-            Object {
-              "height": 66,
-              "marginTop": -33,
-              "position": "absolute",
-              "top": "50%",
-              "width": 66,
-            }
-          }
-        >
-          <figure
-            className="avatar"
-            style={
-              Object {
-                "margin": 0,
-              }
-            }
-          >
-            <i
-              className="manicon manicon-person"
-            />
-          </figure>
-        </div>
-        <span
-          className="dropzone-button-text"
-        >
-          Click to browse or
-          <br />
-          drag and drop
-        </span>
-      </div>
-      <input
-        accept="image/*"
-        multiple={false}
-        onChange={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-        type="file"
-      />
-    </div>
   </div>
   <div
     className="row-1-p"
@@ -183,68 +121,6 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
     >
       While you're here, why not upload a profile image?
     </p>
-    <div
-      className="form-dropzone"
-      onClick={[Function]}
-      onDragEnter={[Function]}
-      onDragLeave={[Function]}
-      onDragOver={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
-      style={Object {}}
-    >
-      <div
-        className="dropzone-button dropzone-button-dotted"
-        style={
-          Object {
-            "position": "relative",
-          }
-        }
-      >
-        <div
-          style={
-            Object {
-              "height": 66,
-              "marginTop": -33,
-              "position": "absolute",
-              "top": "50%",
-              "width": 66,
-            }
-          }
-        >
-          <figure
-            className="avatar"
-            style={
-              Object {
-                "margin": 0,
-              }
-            }
-          >
-            <i
-              className="manicon manicon-person"
-            />
-          </figure>
-        </div>
-        <span
-          className="dropzone-button-text"
-        >
-          Click to browse or
-          <br />
-          drag and drop
-        </span>
-      </div>
-      <input
-        accept="image/*"
-        multiple={false}
-        onChange={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-        type="file"
-      />
-    </div>
   </div>
   <div
     className="row-1-p"

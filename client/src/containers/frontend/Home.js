@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ProjectList, Layout } from 'components/frontend';
 import connectAndFetch from 'utils/connectAndFetch';
@@ -101,7 +102,7 @@ export class HomeContainer extends Component {
             <header className="section-heading">
               <h4 className="title">
                 <i className="manicon manicon-lamp"></i>
-                {'Featured Projects BLERBO'}
+                {'Featured Projects'}
               </h4>
             </header>
             { this.props.featuredProjects ?

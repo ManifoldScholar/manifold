@@ -7,9 +7,7 @@ exports[`Backend.Form.MaskedTextInput component renders correctly 1`] = `
       <label>
         Label this
       </label>
-      <MaskedInput onChange={[Function]} value=\\"attributes[fake]\\" type=\\"text\\" mask={{...}} placeholder=\\"Hold my place\\">
-        <input type=\\"text\\" placeholder=\\"Hold my place\\" onInput={[Function]} defaultValue=\\"attributes[fake]\\" />
-      </MaskedInput>
+      <ReactTextMask onChange={[Function]} value=\\"attributes[fake]\\" type=\\"text\\" mask={{...}} placeholder=\\"Hold my place\\" />
     </div>
   </Form.MaskedTextInput>
 </Form.Setter('Form.MaskedTextInput)>"

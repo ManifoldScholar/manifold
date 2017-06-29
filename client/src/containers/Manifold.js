@@ -1,4 +1,5 @@
-import React, { Children, PureComponent, PropTypes } from 'react';
+import React, { Children, PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -7,7 +8,7 @@ import { SignInUp, LoadingBar, Utility } from 'components/global';
 import config from '../config';
 import has from 'lodash/has';
 import get from 'lodash/get';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group'
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
 import { notificationActions, uiVisibilityActions, routingActions } from 'actions';
 import { meAPI, settingsAPI, requests } from 'api';
 import { entityStoreActions } from 'actions';
@@ -53,8 +54,8 @@ class ManifoldContainer extends PureComponent {
     visibility: PropTypes.object,
     authentication: PropTypes.object,
     children: PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.element
+      PropTypes.array,
+      PropTypes.element
     ])
   };
 

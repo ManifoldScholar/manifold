@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import renderer from 'react-test-renderer';
 import { Form } from 'components/backend';
 import { shallow, mount, render } from 'enzyme';
@@ -24,16 +25,17 @@ describe("Backend.Form.Upload component", () => {
     );
 
     let wrapper;
+
     beforeEach(() => {
       wrapper  = shallow(root).first().shallow();
     });
 
     it('renders correctly', () => {
-      const tree =  renderer.create(root).toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(wrapper.html()).toMatchSnapshot();
     });
 
     it('should contain a preview', () => {
+      // wrapper  = shallow(root).first().shallow();
       expect(wrapper.find('[data-id="preview"]')).toHaveLength(1);
     });
 
@@ -94,8 +96,7 @@ describe("Backend.Form.Upload component", () => {
     });
 
     it('renders correctly', () => {
-      const tree =  renderer.create(root).toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(wrapper.html()).toMatchSnapshot();
     });
 
     it('should contain a preview', () => {
@@ -132,8 +133,7 @@ describe("Backend.Form.Upload component", () => {
     });
 
     it('renders correctly', () => {
-      const tree =  renderer.create(root).toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(wrapper.html()).toMatchSnapshot();
     });
 
     it('should contain a preview', () => {
@@ -202,8 +202,7 @@ describe("Backend.Form.Upload component", () => {
     });
 
     it('renders correctly', () => {
-      const tree =  renderer.create(root).toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(wrapper.html()).toMatchSnapshot();
     });
 
     it('should not contain a preview', () => {

@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import JSONTree from 'react-json-tree';
 
 export default class Debugger extends PureComponent {

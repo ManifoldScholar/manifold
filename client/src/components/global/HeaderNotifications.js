@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { HeaderNotification } from 'components/global';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group'
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 import get from 'lodash/get';
 

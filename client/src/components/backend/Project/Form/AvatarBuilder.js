@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Dialog } from 'components/backend';
 import ColorPicker from './ColorPicker';
 import { Project } from 'components/global';

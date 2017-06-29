@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import { Form as GlobalForm } from 'components/global';
 import classnames from 'classnames';
@@ -20,7 +21,7 @@ class FormUpload extends Component {
     inlineStyle: PropTypes.object,
     name: PropTypes.string, // name of the model field: attributes[avatar]
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
-    style: React.PropTypes.oneOf(['square', 'portrait', 'landscape']),
+    style: PropTypes.oneOf(['square', 'portrait', 'landscape']),
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array
@@ -262,7 +263,6 @@ class FormUpload extends Component {
           <Dropzone
             style={this.props.inlineStyle}
             className={`form-dropzone style-${this.props.style}`}
-            activeStyle={{}}
             multiple={false}
             ref={"dropzone"}
             onDrop={this.handleFileDrop}

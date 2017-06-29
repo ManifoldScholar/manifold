@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Project } from 'components/backend';
 import { Form as FormContainer } from 'containers/backend';
 import { projectsAPI } from 'api';
