@@ -37,6 +37,19 @@ module Validator
       cleaned
     end
 
+    # Creates inverted declarations from declarations
+    # @param declarations [String]
+    # @return [String]
+    def create_inverted_declarations(declarations)
+      cleaned = []
+      parse_declarations(declarations).each_declaration do |property, value, important|
+        next unless invertable_property?(property, value)
+        inverted_value = inverted_value(value)
+        cleaned.push compose_declaration(property, inverted_value, important)
+      end
+      cleaned
+    end
+
     private
 
     # @return [CssParser::Parser]
@@ -69,6 +82,7 @@ module Validator
     def visit_selector(selector, declarations, *_args)
       return unless allowed_selector?(selector)
       write_rule_set(selector, declarations)
+      maybe_write_inverted_rule_set(selector, declarations)
       nil
     end
 
@@ -80,6 +94,18 @@ module Validator
       scoped_selector = scope_selector(selector)
       cleaned_declarations = validate_declarations(declarations, selector)
       @out << compose_rule_set(scoped_selector, cleaned_declarations)
+      nil
+    end
+
+    # Appends to @out
+    # @param selector [String]
+    # @param declarations [String]
+    # @return [nil]
+    def maybe_write_inverted_rule_set(selector, declarations)
+      scoped_selector = "#{@config.dark_scope} #{selector}"
+      inverted_declarations = create_inverted_declarations(declarations)
+      return nil unless inverted_declarations.any?
+      @out << compose_rule_set(scoped_selector, inverted_declarations)
       nil
     end
 
@@ -113,6 +139,16 @@ module Validator
       END
     end
 
+    # Is the color in grayscale?
+    # @param value [String]
+    # @return [Boolean]
+    def grayscale_value?(value)
+      return false if value == "inherit"
+      hex_value = hex_color_value(value)
+      rgb_value = ::Paleta::Color.new(:hex, hex_value).to_array(:rgb)
+      rgb_value.all? { |c| c.between?(rgb_value[0].to_i - 5, rgb_value[0].to_i + 5) }
+    end
+
     # Scopes a selector
     # @param selector [String]
     # @return [String]
@@ -135,6 +171,23 @@ module Validator
       out
     end
 
+    # Converts a color to its hex value
+    # @param value [String]
+    # @return [String]
+    def hex_color_value(value)
+      ::Chroma.paint(value).to_hex
+    end
+
+    # Inverts a given color value
+    # @param property [String]
+    # @param value [String]
+    # @return [String]
+    def inverted_value(value)
+      hex_value = hex_color_value(value)
+      color = ::Paleta::Color.new(:hex, hex_value).invert.hex
+      "##{color}"
+    end
+
     # Is a given property allowed generally and for the selector (if provided)?
     # @param property [String]
     # @param selector [String]
@@ -144,6 +197,14 @@ module Validator
         exclusion_matches_property?(exclusion, property, selector)
       end
       match.nil?
+    end
+
+    # Is a given property one we can invert for dark mode?
+    # @param property [String]
+    # @return [Boolean]
+    def invertable_property?(property, value)
+      return false unless @config.invertables.properties.include.include? property
+      grayscale_value?(value)
     end
 
     # Is the property excluded from the exclusion config?

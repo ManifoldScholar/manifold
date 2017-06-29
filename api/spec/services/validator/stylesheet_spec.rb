@@ -8,6 +8,7 @@ end
 # rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::Stylesheet do
   let(:scope_selector) { Rails.configuration.manifold.css_validator.scope }
+  let(:dark_scope_selector) { Rails.configuration.manifold.css_validator.dark_scope }
   let(:validator) { Validator::Stylesheet.new }
   let(:blacklisted_property) { "font-family" }
 
@@ -181,5 +182,20 @@ RSpec.describe Validator::Stylesheet do
     valid = "#{scope_selector} h2 { this_will_never_be_blacklisted: value; }"
     results = validator.validate(valid)
     expect(results).to eq_ignoring_whitespace valid
+  end
+
+  it "creates a dark style for grayscale values" do
+    selector = "p { color: #000000 }"
+    valid = "#{scope_selector} p { color: #000000; }"
+    dark_style = "#{dark_scope_selector} p { color: #FFFFFF; }"
+    results = validator.validate(selector)
+    expect(results).to eq_ignoring_whitespace "#{valid}#{dark_style}"
+  end
+
+  it "does not create a dark style for non-grayscale values" do
+    selector = "p { color: blue }"
+    valid = "#{scope_selector} p { color: blue; }"
+    results = validator.validate(selector)
+    expect(results).to eq_ignoring_whitespace "#{valid}"
   end
 end
