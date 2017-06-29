@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Toc } from 'components/reader';
 import Utility from 'components/global/Utility';
 import classNames from 'classnames';

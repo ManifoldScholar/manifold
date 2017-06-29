@@ -1,10 +1,10 @@
 import React from 'react';
-import TestUtils from 'react-dom/test-utils';
 import FormattedDate from '../FormattedDate';
 import renderer from 'react-test-renderer';
+import { createRenderer } from 'react-test-renderer/shallow';
 
 function setup(props) {
-  let output = TestUtils.createRenderer().render(<FormattedDate {...props} />);
+  let output = createRenderer().render(<FormattedDate {...props} />);
   return {
     props,
     output

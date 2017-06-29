@@ -1,5 +1,6 @@
-import React, { PureComponent, PropTypes } from 'react';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group'
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 import Utility from 'components/global/Utility';
 import isString from 'lodash/isString';

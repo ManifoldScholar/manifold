@@ -2,7 +2,6 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { Form } from 'components/backend';
 import { shallow, mount, render } from 'enzyme';
-import { Event } from 'components/frontend';
 
 describe("Backend.Form.TextInput component", () => {
 

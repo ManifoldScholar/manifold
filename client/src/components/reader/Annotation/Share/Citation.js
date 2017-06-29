@@ -1,83 +1,83 @@
-  import React, { PureComponent, PropTypes } from 'react';
-  import classNames from 'classnames';
-  import { isPromise } from 'utils/promise';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { isPromise } from 'utils/promise';
 
-  export default class AnnotationShareEditor extends PureComponent {
+export default class AnnotationShareEditor extends PureComponent {
 
-    static displayName = "Annotation.Share.Citation";
+  static displayName = "Annotation.Share.Citation";
 
-    static propTypes = {
-      text: PropTypes.object.isRequired,
-      cancel: PropTypes.func.isRequired
+  static propTypes = {
+    text: PropTypes.object.isRequired,
+    cancel: PropTypes.func.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.handleCancel = this.handleCancel.bind(this);
+    const citations = props.section.attributes.citations;
+    const styles = Object.keys(citations);
+
+    this.state = {
+      style: styles[0],
+      copied: false
     };
+    this.handleCitationChange = this.handleCitationChange.bind(this);
+    this.handleCopyClick = this.handleCopyClick.bind(this);
+  }
 
-    constructor(props) {
-      super(props);
+  componentDidMount() {
+    this.ci.focus();
+  }
 
-      this.handleCancel = this.handleCancel.bind(this);
-      const citations = props.section.attributes.citations;
-      const styles = Object.keys(citations);
-
-      this.state = {
-        style: styles[0],
-        copied: false
-      };
-      this.handleCitationChange = this.handleCitationChange.bind(this);
-      this.handleCopyClick = this.handleCopyClick.bind(this);
+  handleCancel(event) {
+    event.preventDefault();
+    if (this.props.cancel) {
+      this.props.cancel(event);
     }
+  }
 
-    componentDidMount() {
-      this.ci.focus();
-    }
+  setStyle(_event, style) {
+    this.setState({ style, copied: false });
+  }
 
-    handleCancel(event) {
-      event.preventDefault();
-      if (this.props.cancel) {
-        this.props.cancel(event);
-      }
-    }
+  handleCitationChange(event) {
+    this.setState({ citation: event.target.value, copied: false });
+  }
 
-    setStyle(_event, style) {
-      this.setState({ style, copied: false });
-    }
+  handleCopyClick(event) {
+    event.preventDefault();
+    const range = document.createRange();
+    range.selectNode(this.ci);
+    window.getSelection().addRange(range);
+    const copiedText = document.execCommand("copy");
+    if (!copiedText) return null;
+    this.setState({ copied: true });
+  }
 
-    handleCitationChange(event) {
-      this.setState({ citation: event.target.value, copied: false });
-    }
-
-    handleCopyClick(event) {
-      event.preventDefault();
-      const range = document.createRange();
-      range.selectNode(this.ci);
-      window.getSelection().addRange(range);
-      const copiedText = document.execCommand("copy");
-      if (!copiedText) return null;
-      this.setState({ copied: true });
-    }
-
-    renderStyleButtons() {
-      const citations = this.props.section.attributes.citations;
-      const styles = Object.keys(citations);
-      const selected = this.state.style;
-      return styles.map((style) => {
-        return (
-        <li key={style}>
-          <button
-            className={selected === style ? "active" : null}
-            onClick={(event) => this.setStyle(event, style)}
-          >
-            {style}
-          </button>
-        </li>
-      );
-      });
-    }
-
-    render() {
-      const copiedText = this.state.copied ? "Copied!" : null;
-      const citations = this.props.section.attributes.citations;
-
+  renderStyleButtons() {
+    const citations = this.props.section.attributes.citations;
+    const styles = Object.keys(citations);
+    const selected = this.state.style;
+    return styles.map((style) => {
       return (
+      <li key={style}>
+        <button
+          className={selected === style ? "active" : null}
+          onClick={(event) => this.setStyle(event, style)}
+        >
+          {style}
+        </button>
+      </li>
+    );
+    });
+  }
+
+  render() {
+    const copiedText = this.state.copied ? "Copied!" : null;
+    const citations = this.props.section.attributes.citations;
+
+    return (
       <div className="annotation-editor citation">
         <div>
           <nav className="utility styles">
@@ -115,6 +115,5 @@
         </div>
       </div>
     );
-    }
-
+  }
 }

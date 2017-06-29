@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { projectsAPI } from 'api';
 import { Form as FormContainer } from 'containers/backend';
 import { connect } from 'react-redux';

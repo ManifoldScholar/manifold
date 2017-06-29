@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Utility, Resource } from 'components/frontend';
 
 export default class ResourceDetail extends Component {

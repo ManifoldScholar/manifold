@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 import smoothScroll from '../../../utils/smoothScroll';
 import { Resource, Section } from 'components/reader';

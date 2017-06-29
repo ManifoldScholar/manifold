@@ -1,12 +1,13 @@
-import React, { PureComponent, PropTypes, createElement } from 'react';
+import React, { PureComponent, createElement } from 'react';
+import PropTypes from 'prop-types';
 
 export default class SimpleFormat extends PureComponent {
 
   static propTypes = {
     text: PropTypes.string.isRequired,
     wrapperTag: PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.object
+      PropTypes.string,
+      PropTypes.object
     ]),
     wrapperTagProps: PropTypes.object,
   }

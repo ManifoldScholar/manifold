@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form } from 'components/backend';
 import { Form as GlobalForm } from 'components/global';
 import classNames from 'classnames';
@@ -14,9 +15,9 @@ export default class FormHigherOrderValidation extends Component {
     errorHandler: PropTypes.func,
     value: PropTypes.any,
     name: PropTypes.string,
-    children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
-    onChange: React.PropTypes.func,
-    setValue: React.PropTypes.func
+    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+    onChange: PropTypes.func,
+    setValue: PropTypes.func
   };
 
   static defaultProps = {

@@ -1,7 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
 import { throttle } from 'lodash';
-import { EmailButton, TwitterButton, FacebookButton } from 'react-social';
+import { EmailButton, TwitterButton, FacebookButton } from 'react-sociable';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import { closest } from 'utils/domUtils';

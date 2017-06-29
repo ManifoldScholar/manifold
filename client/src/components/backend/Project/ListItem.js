@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Project as GlobalProject } from 'components/global';
 import lh from 'helpers/linkHandler';

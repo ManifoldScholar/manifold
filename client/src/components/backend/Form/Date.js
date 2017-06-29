@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import setter from './setter';
 import parse from 'date-fns/parse';
 import range from 'lodash/range';

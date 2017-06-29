@@ -20,15 +20,12 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           >
             Press Logo
           </label>
-          <div
+          <Dropzone
+            accept="image/*"
             className="form-dropzone style-square"
-            onClick={[Function]}
-            onDragEnter={[Function]}
-            onDragLeave={[Function]}
-            onDragOver={[Function]}
-            onDragStart={[Function]}
+            multiple={false}
             onDrop={[Function]}
-            style={Object {}}
+            style={undefined}
           >
             <div
               className="contents-empty"
@@ -54,18 +51,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                 </p>
               </div>
             </div>
-            <input
-              accept="image/*"
-              multiple={false}
-              onChange={[Function]}
-              style={
-                Object {
-                  "display": "none",
-                }
-              }
-              type="file"
-            />
-          </div>
+          </Dropzone>
         </div>
       </div>
       <div
