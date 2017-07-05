@@ -46,7 +46,7 @@ script:
   - node -v
   - /usr/bin/yarn --version
   - /usr/bin/yarn install --production=false
-  - /usr/bin/yarn run test-ci
+  - /usr/bin/yarn run test
   - cd ../api
   - bundle install
   - RAILS_ENV=test bundle exec rails db:migrate --trace
