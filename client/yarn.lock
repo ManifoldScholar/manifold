@@ -1772,13 +1772,13 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@2.6.7:
+debug@2.6.7, debug@^2.6.3:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.7.tgz#92bad1f6d05bbb6bba22cca88bcd0ec894c2861e"
   dependencies:
     ms "2.0.0"
 
-debug@2.6.8, debug@^2.6.3, debug@^2.6.8:
+debug@2.6.8, debug@^2.6.8:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
   dependencies:
@@ -7148,9 +7148,9 @@ webpack-dev-middleware@^1.11.0:
     path-is-absolute "^1.0.0"
     range-parser "^1.0.3"
 
-"webpack-dev-server@https://github.com/lencioni/webpack-dev-server.git#patch-1":
+"webpack-dev-server@https://github.com/webpack/webpack-dev-server.git#047a5954398e67b0a17e6be7d5877d9f55f40cba":
   version "2.5.0"
-  resolved "https://github.com/lencioni/webpack-dev-server.git#8978059d9b880c6c28908a6ed4608e27d40f2f69"
+  resolved "https://github.com/webpack/webpack-dev-server.git#047a5954398e67b0a17e6be7d5877d9f55f40cba"
   dependencies:
     ansi-html "0.0.7"
     bonjour "^3.5.0"

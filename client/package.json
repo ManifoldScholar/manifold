@@ -152,7 +152,7 @@
     "webfonts-generator": "^0.4.0",
     "webpack": "^3.0.0",
     "webpack-bundle-analyzer": "^2.8.2",
-    "webpack-dev-server": "https://github.com/lencioni/webpack-dev-server.git#patch-1",
+    "webpack-dev-server": "https://github.com/webpack/webpack-dev-server.git#047a5954398e67b0a17e6be7d5877d9f55f40cba",
     "webpack-node-externals": "^1.6.0"
   },
   "engines": {
