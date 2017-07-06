@@ -48,3 +48,4 @@ Read about Manifold in the News
 * [U. Minnesota Press, CUNY Grad Center Develop Hybrid Publishing Platform](http://lj.libraryjournal.com/2015/05/publishing/u-minnesota-press-cuny-grad-center-develop-hybrid-publishing-platform/), Library Journal
 * [Manifold Uses](https://www.insidehighered.com/news/2017/04/07/hybrid-publishing-platform-manifold-enters-public-beta-phase), Inside Higher Ed
 123
+123
