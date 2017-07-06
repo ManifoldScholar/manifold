@@ -1,4 +1,5 @@
-import React, { Children, Component, PropTypes } from 'react';
+import React, { Children, Component } from 'react';
+import PropTypes from 'prop-types';
 import has from 'lodash/has';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -17,19 +18,19 @@ const { request } = entityStoreActions;
 class Annotatable extends Component {
 
   static propTypes = {
-    textId: React.PropTypes.string.isRequired,
-    sectionId: React.PropTypes.string.isRequired,
-    projectId: React.PropTypes.string.isRequired,
-    bodySelector: React.PropTypes.string.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
-    containerSize: React.PropTypes.number.isRequired,
-    children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    currentUser: React.PropTypes.object,
-    lockSelection: React.PropTypes.func,
-    selectionLockedAnnotation: React.PropTypes.object,
-    selectionLocked: React.PropTypes.bool,
-    resources: React.PropTypes.array,
-    annotations: React.PropTypes.array,
+    textId: PropTypes.string.isRequired,
+    sectionId: PropTypes.string.isRequired,
+    projectId: PropTypes.string.isRequired,
+    bodySelector: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    containerSize: PropTypes.number.isRequired,
+    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    currentUser: PropTypes.object,
+    lockSelection: PropTypes.func,
+    selectionLockedAnnotation: PropTypes.object,
+    selectionLocked: PropTypes.bool,
+    resources: PropTypes.array,
+    annotations: PropTypes.array,
     text: PropTypes.object,
     section: PropTypes.object
   };

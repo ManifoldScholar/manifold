@@ -64,8 +64,8 @@ function mergeEntities(stateEntities, payloadEntities) {
     const adjusted = pickBy(payloadEntities[type], (e, uuid) => {
       const stateEntity = get(stateEntities, `${type}.${uuid}`);
       if (!stateEntity) return true; // pick it if there's no existing entity
-      if (e.meta.partial === false) return true; // pick it if new entity is not partial
-      return stateEntity.meta.partial === true; // pick it if the state entity is partial
+      if (get(e, 'meta.partial') === false) return true; // pick it if new entity is not partial
+      return get(stateEntity, 'meta.partial') === true; // pick it if the state entity is partial
     });
     mergedEntities[type] = Object.assign({}, stateEntities[type], adjusted);
   });

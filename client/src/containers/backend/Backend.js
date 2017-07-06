@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import connectAndFetch from 'utils/connectAndFetch';
 import { HigherOrder, FatalError } from 'components/global';
 import { Layout as LayoutFrontend } from 'components/frontend';

@@ -4,6 +4,7 @@ import * as Backend from 'containers/backend';
 
 /* eslint-disable max-len */
 export default () => {
+
   return [
     {
       name: "reader",
@@ -366,6 +367,14 @@ export default () => {
       component: Frontend.Frontend,
       path: "/",
       routes: [
+        {
+          name: "frontendTest",
+          exact: true,
+          component: Frontend.Test,
+          path: "/test",
+          helper: () => `/test`
+        },
+
         {
           name: "frontendProject",
           exact: true,

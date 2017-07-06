@@ -1,6 +1,3 @@
-jest.mock('velocity-react');
-jest.mock('components/global/HigherOrder/fetchData');
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { ReaderContainer } from '../Reader';

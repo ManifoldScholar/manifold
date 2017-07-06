@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { usersAPI, requests } from 'api';
 import { entityStoreActions, currentUserActions } from 'actions';
 import { select } from 'utils/entityUtils';

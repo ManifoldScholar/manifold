@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import setter from './setter';
 import withDispatch from 'containers/global/HigherOrder/withDispatch';
 import { Form as GlobalForm } from 'components/global';
@@ -38,24 +39,11 @@ class FormCodeArea extends Component {
 
   componentDidMount() {
     this.props.dispatch(loadingActions.start('code-area'));
-    require.ensure(
-      [
-        'react-ace',
-        'brace/mode/css',
-        'brace/mode/javascript',
-        'brace/mode/html',
-        './CodeArea/theme'
-      ],
-      () => {
-        const Editor = require('react-ace').default;
-        require(`brace/mode/css`);
-        require(`brace/mode/javascript`);
-        require(`brace/mode/html`);
-        require('./CodeArea/theme');
-        this.props.dispatch(loadingActions.stop('code-area'));
-        this.setState({ Editor });
-      }
-    );
+    import(/* webpackChunkName: "ace-editor" */ './CodeArea/Ace').then((ace) => {
+      const Editor = ace.default;
+      this.props.dispatch(loadingActions.stop('code-area'));
+      this.setState({ Editor });
+    });
   }
 
   onChange = (value) => {

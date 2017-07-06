@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Drawer, Dialog } from 'components/backend';
 import { Link } from 'react-router-dom';
 import lh from 'helpers/linkHandler';

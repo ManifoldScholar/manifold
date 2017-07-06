@@ -191,7 +191,22 @@ exports[`Backend.Form.Date component renders correctly 1`] = `
     </div>
     <div
       className="form-input"
-    />
+    >
+      <ReactTextMask
+        className="input-year"
+        mask={
+          Array [
+            /\\\\d/,
+            /\\\\d/,
+            /\\\\d/,
+            /\\\\d/,
+          ]
+        }
+        onChange={[Function]}
+        type="text"
+        value="1989"
+      />
+    </div>
   </div>
 </div>
 `;

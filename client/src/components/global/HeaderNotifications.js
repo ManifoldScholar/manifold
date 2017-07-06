@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { HeaderNotification } from 'components/global';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 import get from 'lodash/get';
 
@@ -24,7 +25,7 @@ export default class HeaderNotifications extends Component {
 
   // Only necessary for debugging/testing notifications before they exist.
   componentDidMount() {
-    if (__DEVELOPMENT__) {
+    if (process.env.NODE_ENV === "development") {
       window.addEventListener('keyup', this.handleNotifications);
     }
   }
@@ -63,7 +64,7 @@ export default class HeaderNotifications extends Component {
   // Only necessary for debugging/testing notifications before they exist.
   componentWillUnmount() {
     if (this.timer) clearTimeout(this.timer);
-    if (__DEVELOPMENT__) {
+    if (process.env.NODE_ENV === "development") {
       window.removeEventListener('keyup', this.handleNotifications);
     }
   }

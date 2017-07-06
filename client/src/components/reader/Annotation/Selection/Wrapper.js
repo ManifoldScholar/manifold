@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Editor from '../Editor';
 import Selection from '../Selection';
 import HigherOrder from 'containers/global/HigherOrder';

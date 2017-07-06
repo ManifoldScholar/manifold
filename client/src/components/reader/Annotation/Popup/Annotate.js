@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import HigherOrder from 'containers/global/HigherOrder';
 import Button from './Button';
 import Panel from './Panel';
