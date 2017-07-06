@@ -16,15 +16,11 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
       >
         Variant
       </label>
-      <div
+      <Dropzone
         className="form-dropzone style-square"
-        onClick={[Function]}
-        onDragEnter={[Function]}
-        onDragLeave={[Function]}
-        onDragOver={[Function]}
-        onDragStart={[Function]}
+        multiple={false}
         onDrop={[Function]}
-        style={Object {}}
+        style={undefined}
       >
         <div
           className="contents-empty"
@@ -45,18 +41,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
             </p>
           </div>
         </div>
-        <input
-          accept={undefined}
-          multiple={false}
-          onChange={[Function]}
-          style={
-            Object {
-              "display": "none",
-            }
-          }
-          type="file"
-        />
-      </div>
+      </Dropzone>
     </div>
   </div>
   <div
@@ -71,15 +56,11 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
       >
         Variant
       </label>
-      <div
+      <Dropzone
         className="form-dropzone style-square"
-        onClick={[Function]}
-        onDragEnter={[Function]}
-        onDragLeave={[Function]}
-        onDragOver={[Function]}
-        onDragStart={[Function]}
+        multiple={false}
         onDrop={[Function]}
-        style={Object {}}
+        style={undefined}
       >
         <div
           className="contents-empty"
@@ -100,18 +81,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
             </p>
           </div>
         </div>
-        <input
-          accept={undefined}
-          multiple={false}
-          onChange={[Function]}
-          style={
-            Object {
-              "display": "none",
-            }
-          }
-          type="file"
-        />
-      </div>
+      </Dropzone>
     </div>
   </div>
 </div>
@@ -133,15 +103,12 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
       >
         High Resolution Image
       </label>
-      <div
+      <Dropzone
+        accept="image/*"
         className="form-dropzone style-square"
-        onClick={[Function]}
-        onDragEnter={[Function]}
-        onDragLeave={[Function]}
-        onDragOver={[Function]}
-        onDragStart={[Function]}
+        multiple={false}
         onDrop={[Function]}
-        style={Object {}}
+        style={undefined}
       >
         <div
           className="contents-empty"
@@ -167,18 +134,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             </p>
           </div>
         </div>
-        <input
-          accept="image/*"
-          multiple={false}
-          onChange={[Function]}
-          style={
-            Object {
-              "display": "none",
-            }
-          }
-          type="file"
-        />
-      </div>
+      </Dropzone>
     </div>
   </div>
   <div
@@ -193,15 +149,12 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
       >
         Thumbnail Image
       </label>
-      <div
+      <Dropzone
+        accept="image/*"
         className="form-dropzone style-square"
-        onClick={[Function]}
-        onDragEnter={[Function]}
-        onDragLeave={[Function]}
-        onDragOver={[Function]}
-        onDragStart={[Function]}
+        multiple={false}
         onDrop={[Function]}
-        style={Object {}}
+        style={undefined}
       >
         <div
           className="contents-empty"
@@ -227,18 +180,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             </p>
           </div>
         </div>
-        <input
-          accept="image/*"
-          multiple={false}
-          onChange={[Function]}
-          style={
-            Object {
-              "display": "none",
-            }
-          }
-          type="file"
-        />
-      </div>
+      </Dropzone>
     </div>
   </div>
 </div>
@@ -260,15 +202,12 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
       >
         Thumbnail Image
       </label>
-      <div
+      <Dropzone
+        accept="image/*"
         className="form-dropzone style-square"
-        onClick={[Function]}
-        onDragEnter={[Function]}
-        onDragLeave={[Function]}
-        onDragOver={[Function]}
-        onDragStart={[Function]}
+        multiple={false}
         onDrop={[Function]}
-        style={Object {}}
+        style={undefined}
       >
         <div
           className="contents-empty"
@@ -294,18 +233,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
             </p>
           </div>
         </div>
-        <input
-          accept="image/*"
-          multiple={false}
-          onChange={[Function]}
-          style={
-            Object {
-              "display": "none",
-            }
-          }
-          type="file"
-        />
-      </div>
+      </Dropzone>
     </div>
   </div>
 </div>

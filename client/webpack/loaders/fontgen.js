@@ -5,6 +5,7 @@ var glob = require('glob');
 var util = require('util')
 var _ = require('lodash/string');
 var startsWith = _.startsWith;
+var isString = _.isString;
 
 var mimeTypes = {
   'eot': 'application/vnd.ms-fontobject',
@@ -62,8 +63,8 @@ function getFilesAndDeps(patterns, context) {
 }
 
 module.exports = function (content) {
-  this.cacheable();
-  var params = loaderUtils.parseQuery(this.query);
+  this.cacheable()
+  var params = loaderUtils.getOptions(this);
   var config;
   try {
     config = JSON.parse(content);
@@ -99,7 +100,7 @@ module.exports = function (content) {
     order: formats,
     fontHeight: config.fontHeight || 1000, // Fixes conversion issues with small svgs
     templateOptions: {
-      baseClass: config.baseClass || "icon",
+      baseSelector: config.baseSelector || "icon",
       classPrefix: "classPrefix" in config ? config.classPrefix : "icon-"
     },
     dest: "",
@@ -155,7 +156,6 @@ module.exports = function (content) {
 
 
   var embed = !!params.embed;
-
   if (fontconf.cssTemplate) {
     this.addDependency(fontconf.cssTemplate)
   }
@@ -195,7 +195,6 @@ module.exports = function (content) {
           + (new Buffer(res[format]).toString('base64'));
       }
     }
-
     cb(null, res.generateCss(urls));
   });
 };

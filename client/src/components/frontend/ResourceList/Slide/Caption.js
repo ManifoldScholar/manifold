@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { VelocityComponent } from 'velocity-react';
 import get from 'lodash/get';
 import lh from 'helpers/linkHandler';
 
@@ -23,6 +23,9 @@ export default class ResourceListSlideCaption extends Component {
   }
 
   componentDidMount() {
+    import(/* webpackChunkName: "velocity-react" */ 'velocity-react').then((Velocity) => {
+      this.setState({ Velocity });
+    });
     this.checkReadMoreVisibility();
   }
 
@@ -113,18 +116,21 @@ export default class ResourceListSlideCaption extends Component {
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
           />
         </header>
-        <VelocityComponent {...animation}>
-          <div className="resource-description" ref={ (e) => {
-            this._description = e;
-          } }>
-            <div
-              ref={ (e) => {
-                this._descriptionContents = e;
-              }}
-              dangerouslySetInnerHTML={this.createDescription(attr.captionFormatted)}
-            />
-          </div>
-        </VelocityComponent>
+        { this.state.Velocity ?
+          <this.state.Velocity {...animation}>
+            <div className="resource-description" ref={ (e) => {
+              this._description = e;
+            } }>
+              <div
+                ref={ (e) => {
+                  this._descriptionContents = e;
+                }}
+                dangerouslySetInnerHTML={this.createDescription(attr.captionFormatted)}
+              />
+            </div>
+          </this.state.Velocity>
+        : null
+        }
         <div className="resource-utility">
           <div className="bg-neutral90">
             <button

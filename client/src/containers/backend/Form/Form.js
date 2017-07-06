@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import connectAndFetch from 'utils/connectAndFetch';
 import { entityEditorActions, entityStoreActions } from 'actions';
 import { Developer } from 'components/global';
@@ -20,9 +21,9 @@ export class FormContainer extends PureComponent {
   static propTypes = {
     doNotWarn: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
-    children: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.element
+    children: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.element
     ]),
     model: PropTypes.object,
     update: PropTypes.func.isRequired,

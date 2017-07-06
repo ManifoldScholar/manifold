@@ -2,5 +2,5 @@
 
 cd client
 if [ "$RAILS_ENV" == "development" ]; then
-    exec yarn start-dev
+    exec yarn dev
 fi

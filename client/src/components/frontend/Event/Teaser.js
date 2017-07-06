@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Body from './Body/';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';

@@ -1,5 +1,6 @@
-import React, { PureComponent, PropTypes } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
 import includes from 'lodash/includes';
 import { ResourceList } from 'components/frontend';
 import { collectionsAPI, requests } from 'api';

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { List, Resource, Form } from 'components/backend';
 import { Resource as FrontendResource } from 'components/frontend';

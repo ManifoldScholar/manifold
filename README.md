@@ -47,3 +47,5 @@ Read about Manifold in the News
 * [GC Digital Scholarship Lab Awarded Shared Grant to Launch Manifold Scholarship](http://www.gc.cuny.edu/News/GC-News/Detail?id=30695#sthash.5Q1m0NQP.dpuf)
 * [U. Minnesota Press, CUNY Grad Center Develop Hybrid Publishing Platform](http://lj.libraryjournal.com/2015/05/publishing/u-minnesota-press-cuny-grad-center-develop-hybrid-publishing-platform/), Library Journal
 * [Manifold Uses](https://www.insidehighered.com/news/2017/04/07/hybrid-publishing-platform-manifold-enters-public-beta-phase), Inside Higher Ed
+123
+123

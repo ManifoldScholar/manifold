@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { TwitterButton, FacebookButton } from 'react-social';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { TwitterButton, FacebookButton } from 'react-sociable';
 import HigherOrder from 'containers/global/HigherOrder';
 
 class ShareBar extends Component {
@@ -88,7 +89,7 @@ class ShareBar extends Component {
           {/*
             Hiding email share button until we have more robust
             functionality for custom mailing
-            NB: `EmailButton` component from react-social required
+            NB: `EmailButton` component from react-sociable required
             for this one in particular.
 
             <li>

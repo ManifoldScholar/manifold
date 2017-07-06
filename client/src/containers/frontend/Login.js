@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import connectAndFetch from 'utils/connectAndFetch';
 import { currentUserActions } from 'actions';
 
@@ -12,10 +13,10 @@ export class LoginContainer extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    authentication: React.PropTypes.shape({
-      authToken: React.PropTypes.string,
-      currentUser: React.PropTypes.object,
-      authenticated: React.PropTypes.bool
+    authentication: PropTypes.shape({
+      authToken: PropTypes.string,
+      currentUser: PropTypes.object,
+      authenticated: PropTypes.bool
     })
   };
 

@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Link, browserHistory } from 'react-router-dom';
 import { ResourceList } from 'components/frontend';
 import { Utility, Resource } from 'components/frontend';

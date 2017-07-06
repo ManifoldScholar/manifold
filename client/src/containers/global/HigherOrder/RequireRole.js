@@ -1,4 +1,5 @@
-import React, { Children, PureComponent, PropTypes } from 'react';
+import React, { Children, PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import isString from 'lodash/isString';
