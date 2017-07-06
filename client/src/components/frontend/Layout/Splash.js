@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Splash extends Component {
 
@@ -45,14 +45,14 @@ export default class Splash extends Component {
                   {'Learn More'}
                 </a>
                 {!this.props.authenticated ?
-                  <Link
-                    to="#"
+                  <a
+                    href="#"
                     onClick={this.handleSignUp}
                     target="blank"
                     className="button-bare-primary"
                   >
                     {'Sign Up'}
-                  </Link> : null
+                  </a> : null
                 }
               </nav>
             </div>

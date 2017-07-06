@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { HigherOrder } from 'components/global';
 
 export default class LockBodyScroll extends PureComponent {

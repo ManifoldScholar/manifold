@@ -1,5 +1,3 @@
-jest.mock('react-text-mask');
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Date from '../Date';

@@ -132,15 +132,12 @@ exports[`Backend NewCollection Wrapper Container renders correctly 1`] = `
                 >
                   Cover Image
                 </label>
-                <div
+                <Dropzone
+                  accept="image/*"
                   className="form-dropzone style-landscape"
-                  onClick={[Function]}
-                  onDragEnter={[Function]}
-                  onDragLeave={[Function]}
-                  onDragOver={[Function]}
-                  onDragStart={[Function]}
+                  multiple={false}
                   onDrop={[Function]}
-                  style={Object {}}
+                  style={undefined}
                 >
                   <div
                     className="contents-empty"
@@ -166,18 +163,7 @@ exports[`Backend NewCollection Wrapper Container renders correctly 1`] = `
                       </p>
                     </div>
                   </div>
-                  <input
-                    accept="image/*"
-                    multiple={false}
-                    onChange={[Function]}
-                    style={
-                      Object {
-                        "display": "none",
-                      }
-                    }
-                    type="file"
-                  />
-                </div>
+                </Dropzone>
               </div>
             </div>
             <div

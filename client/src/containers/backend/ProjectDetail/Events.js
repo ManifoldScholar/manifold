@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Event, List, Dialog } from 'components/backend';
 import { entityStoreActions } from 'actions';
 import { select, meta } from 'utils/entityUtils';

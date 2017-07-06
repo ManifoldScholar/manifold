@@ -1,10 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import DocumentMeta from 'react-document-meta';
 import { HigherOrder } from 'components/global';
 import get from 'lodash/get';
-import has from 'lodash/has';
+import reduce from 'lodash/reduce';
+import isString from 'lodash/isString';
+import isArray from 'lodash/isArray';
+import endsWith from 'lodash/endsWith';
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -17,10 +21,10 @@ import has from 'lodash/has';
  */
 export default class Html extends Component {
   static propTypes = {
-    assets: PropTypes.object,
+    stats: PropTypes.object,
     component: PropTypes.node,
     store: PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -28,11 +32,32 @@ export default class Html extends Component {
     this.stylesheets = this.stylesheets.bind(this);
   }
 
+  reduceAssets(ext) {
+
+    const test = (asset) => {
+      return endsWith(asset, ext);
+    };
+
+    const chunks = this.props.stats.assetsByChunkName;
+    return reduce(chunks, (entries, assets, chunkName) => {
+      if (!["build/theme", "build/client"].includes(chunkName)) return entries;
+      if (isString(assets) && test(assets)) entries.push(assets);
+      if (isArray(assets)) {
+        assets.forEach((asset) => {
+          if (test(asset)) entries.push(asset);
+        });
+      }
+      return entries;
+    }, []);
+  }
+
+
   stylesheets() {
-    if (!this.props.assets && !this.props.assets.styles) return null;
-    return Object.keys(this.props.assets.styles).map((style, key) =>
+    if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
+    const stylesheets = this.reduceAssets('.css');
+    return stylesheets.map((stylesheet, key) =>
       <link
-        href={this.props.assets.styles[style]}
+        href={`/${stylesheet}`}
         key={key}
         media="screen, projection"
         rel="stylesheet"
@@ -43,15 +68,11 @@ export default class Html extends Component {
   }
 
   javascripts() {
-    if (!this.props.assets && !this.props.assets.javascript) return null;
-    const keys = Object.keys(this.props.assets.javascript);
-    keys.splice(keys.indexOf("main"), 1);
-    keys.splice(keys.indexOf("theme"), 1);
-    keys.unshift("main");
-    keys.unshift("theme");
-    return keys.map((js, key) =>
+    if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
+    const scripts = this.reduceAssets('.js');
+    return scripts.map((script, key) =>
       <script
-        src={this.props.assets.javascript[js]}
+        src={`/${script}`}
         key={key}
         charSet="UTF-8"
       />
@@ -59,7 +80,7 @@ export default class Html extends Component {
   }
 
   render() {
-    const { assets, component, store } = this.props;
+    const { component, store } = this.props;
     const content = component ? ReactDOM.renderToString(component) : null;
     const bodyClass = HigherOrder.BodyClass.rewind();
     const tkId = get(store.getState(),
@@ -79,19 +100,10 @@ export default class Html extends Component {
           <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
           {DocumentMeta.renderAsReact()}
 
+          <script src="/build/env.js" charSet="UTF-8" />
           <link rel="shortcut icon" href="/favicon.ico?client=true" />
 
           {this.stylesheets()}
-
-          {/* Import fonts from webkit */}
-          {tkEnabled ? <script src={`https://use.typekit.net/${tkId}.js`}></script> : null}
-          {tkEnabled ?
-            <script
-              dangerouslySetInnerHTML={{ __html: 'try{Typekit.load({ async: true });}catch(e){}' }}
-              charSet="UTF-8"
-            /> : null
-          }
-
           {/* styles (will be present only in production with webpack extract text plugin) */}
 
         </head>

@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Form } from 'components/global';
 import classNames from 'classnames';
 import brackets2dots from 'brackets2dots';
@@ -13,8 +14,8 @@ export default class Errorable extends PureComponent {
     errors: PropTypes.array,
     containerStyle: PropTypes.object,
     className: PropTypes.string,
-    name: React.PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    children: React.PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+    name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
 
   static defaultProps = {

@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import connectAndFetch from 'utils/connectAndFetch';
 import { Ingestion } from 'components/backend';
 import { ingestionsAPI, requests } from 'api';
@@ -39,8 +40,6 @@ export class IngestionNew extends PureComponent {
   get textId() {
     return this.props.text.id;
   }
-
-  get
 
   render() {
     return (

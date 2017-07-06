@@ -1,7 +1,3 @@
-jest.mock('velocity-react');
-jest.mock('components/global/HigherOrder/fetchData');
-jest.mock('api/client');
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { CollectionResourceDetailContainer } from '../CollectionResourceDetail';

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { currentUserActions } from 'actions';
 import { get } from 'lodash';
 import classNames from 'classnames';
@@ -12,8 +13,8 @@ export default class Login extends Component {
     dispatch: PropTypes.func.isRequired,
     showForgot: PropTypes.func.isRequired,
     showCreate: PropTypes.func.isRequired,
-    authentication: React.PropTypes.shape({
-      currentUser: React.PropTypes.object
+    authentication: PropTypes.shape({
+      currentUser: PropTypes.object
     }),
     hideSignInUpOverlay: PropTypes.func
   };

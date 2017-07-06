@@ -13,15 +13,11 @@ exports[`Backend.Resource.Form.File component renders correctly 1`] = `
     >
       File
     </label>
-    <div
+    <Dropzone
       className="form-dropzone style-square"
-      onClick={[Function]}
-      onDragEnter={[Function]}
-      onDragLeave={[Function]}
-      onDragOver={[Function]}
-      onDragStart={[Function]}
+      multiple={false}
       onDrop={[Function]}
-      style={Object {}}
+      style={undefined}
     >
       <div
         className="contents-empty"
@@ -42,18 +38,7 @@ exports[`Backend.Resource.Form.File component renders correctly 1`] = `
           </p>
         </div>
       </div>
-      <input
-        accept={undefined}
-        multiple={false}
-        onChange={[Function]}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-        type="file"
-      />
-    </div>
+    </Dropzone>
   </div>
 </div>
 `;

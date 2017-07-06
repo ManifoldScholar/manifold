@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 import { isFunction } from 'lodash';
 import { isPromise } from 'utils/promise';
@@ -62,7 +63,7 @@ export default function fetchData(WrappedComponent) {
     }
 
     log(props) {
-      if (__DEVELOPMENT__ && __CLIENT__) {
+      if (process.env.NODE_ENV === "development" && __CLIENT__) {
         console.log(`💾 FetchData: ${getDisplayName(WrappedComponent)} [${props.location.key}]`);
       }
     }

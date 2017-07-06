@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { oauthActions } from 'actions';
 import { get } from 'lodash';
 import { openPopup, providerSetting } from 'utils/oauth';

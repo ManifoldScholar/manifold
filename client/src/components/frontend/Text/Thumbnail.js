@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import lh from 'helpers/linkHandler';
 import { Link } from 'react-router-dom';
 import { Text } from 'components/global';

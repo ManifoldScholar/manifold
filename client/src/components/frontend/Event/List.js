@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Teaser from './Teaser';
 import classNames from 'classnames';
 import { Utility } from 'components/global';

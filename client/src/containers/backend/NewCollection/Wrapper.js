@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import connectAndFetch from 'utils/connectAndFetch';
 import { Form as FormContainer } from 'containers/backend';
 import { Navigation, Form } from 'components/backend';

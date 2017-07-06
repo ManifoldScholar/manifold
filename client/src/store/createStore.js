@@ -11,7 +11,6 @@ import reducers from './reducers';
 
 export default function createStore(data) {
 
-  const useDevTools = __DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__;
   const middleware = [];
   middleware.push(oauthMiddleware);
   middleware.push(currentUserMiddleware);
