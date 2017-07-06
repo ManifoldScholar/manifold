@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import isString from 'lodash/isString';
 import capitalize from 'lodash/capitalize';

@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
 import http from 'http';
+import path from 'path';
 import cookie from 'cookie';
 import config from './config';
 import Html from './helpers/Html';
@@ -18,17 +19,12 @@ import isFunction from 'lodash/isFunction';
 import has from 'lodash/has';
 import { matchRoutes } from 'react-router-config';
 import getRoutes from '/routes';
+import fs from 'fs';
 
 const pretty = new PrettyError();
 
 function respondWithRedirect(res, redirectLocation) {
   res.redirect(redirectLocation);
-  return;
-}
-
-function respondWithSSRDisabledError(res) {
-  res.status(500);
-  res.send("Server side rendering is disabled");
   return;
 }
 
@@ -42,8 +38,8 @@ function authenticateUser(req, store) {
   return Promise.resolve();
 }
 
-function render(req, res, store, parameters) {
-  ch.info("Server-side data fetch completed successfully");
+function render(req, res, store, stats) {
+
   store.dispatch({ type: 'SERVER_LOADED', payload: req.originalUrl });
 
   const routingContext = {
@@ -63,7 +59,7 @@ function render(req, res, store, parameters) {
     renderString = ReactDOM.renderToString(
       <Html
         component={appComponent}
-        assets={parameters.chunks()}
+        stats={stats}
         store={store}
       />
     );
@@ -128,21 +124,19 @@ function bootstrap(req, store) {
   return Promise.all(promises);
 }
 
-export default function (parameters) {
+function start(stats) {
 
   const morgan = require('morgan');
   const app = new Express();
   const server = new http.Server(app);
-  const devLogFormat = "[UNV] :method :url :status :response-time ms - :res[content-length]";
-  const logStyle = __DEVELOPMENT__ ? devLogFormat : 'combined';
+  const devLogFormat = "[REND] :method :url :status :response-time ms - :res[content-length]";
+  const logStyle = process.env.NODE_ENV === "development" ? devLogFormat : 'combined';
 
   app.use(morgan(logStyle));
 
   app.use((req, res) => {
 
     const store = createStore();
-
-    if (__DISABLE_SSR__) return respondWithSSRDisabledError(res);
 
     if (req.headers.cookie) {
       const manifoldCookie = cookie.parse(req.headers.cookie);
@@ -158,35 +152,47 @@ export default function (parameters) {
     // 1. Authenticate user
     // 2. Fetch any data, as the user
     // 3. Send the response to the user
+    /* eslint-disable max-len */
     bootstrap(req, store).then(
-      () => { ch.info("Bootstrap App: ✅"); return authenticateUser(req, store); },
-      () => { ch.info("Bootstrap App: ❌"); return authenticateUser(req, store); },
+      () => { ch.info("App bootstrapped", "sparkles"); return authenticateUser(req, store); },
+      () => { ch.error("App bootstrap failed", "rain_cloud"); return authenticateUser(req, store); },
     ).then(
-      () => { ch.info("Authenticate user: ✅"); return fetchRouteData(req, store); },
-      () => { ch.info("Authenticate user: ❌"); return fetchRouteData(req, store); }
+      () => { ch.info("User authenticated", "sparkles"); return fetchRouteData(req, store); },
+      () => { ch.warning("Unable to authenticate user", "rain_cloud"); return fetchRouteData(req, store); }
     ).then(
-      () => { ch.info("Fetch route data: ✅"); render(req, res, store, parameters); },
-      () => { ch.info("Fetch route data: ❌"); render(req, res, store, parameters); }
+      () => { ch.info("Route data fetched", "sparkles"); render(req, res, store, stats); },
+      () => { ch.error("Unable to fetch route data", "rain_cloud"); render(req, res, store, stats); }
     );
+    /* eslint-enable max-len */
   });
 
   const listenOn = config.universalServerPort;
   if (listenOn) {
     server.listen(listenOn, (err) => {
       if (err) {
-        ch.error("Universal server encountered an error.");
+        ch.error("Rendering service encountered an error.");
         console.error('SERVER ERROR:', pretty.render(err));
       }
-      ch.header(`Manifold Universal Server engaged on port ${config.universalServerPort}`);
+      ch.header(`Manifold rendering service engaged on port ${config.universalServerPort}`);
     });
   } else {
     ch.error(`No CLIENT_UNIVERSAL_SERVER_PORT environment variable has been specified`);
   }
 
   process.once('SIGUSR2', () => {
-    ch.info("The Universal Server has received a restart signal. Hang tight!");
+    ch.info("The rendering service has received a restart signal. Hang tight!");
     ch.info("   While it's being restarted, there will be no server-side rendering.", null);
     process.kill(process.pid, 'SIGUSR2');
   });
-
 }
+
+const statsPath = path.join(__dirname, "../manifest/client.json");
+fs.readFile(statsPath, 'utf8', (err, data) => {
+  if (err) {
+    start({});
+  } else {
+    const stats = JSON.parse(data);
+    start(stats);
+  }
+});
+

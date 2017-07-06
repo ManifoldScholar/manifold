@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Dialog } from 'components/backend';
 
 export default class DialogConfirm extends PureComponent {

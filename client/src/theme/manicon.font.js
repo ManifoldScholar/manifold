@@ -7,6 +7,6 @@ module.exports = {
   files: svgFiles,
   fontName: 'ManifoldIconFont',
   classPrefix: 'manicon-',
-  baseClass: 'manicon',
+  baseSelector: ".manicon",
   fixedWidth: true
 };

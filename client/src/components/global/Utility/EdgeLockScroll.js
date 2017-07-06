@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import isString from 'lodash/isString';
 
@@ -7,7 +8,7 @@ export default class EdgeLockScroll extends PureComponent {
   static displayName = "Utility.EdgeLockScroll";
 
   static propTypes = {
-    children: React.PropTypes.element.isRequired
+    children: PropTypes.element.isRequired
   };
 
   constructor(props) {

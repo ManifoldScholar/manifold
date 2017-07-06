@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
-import TestUtils from 'react-addons-test-utils';
 import { Dashboard } from 'components/backend';
+import { createRenderer } from 'react-test-renderer/shallow';
 
 describe("Backend.Dashboard.Activity component", () => {
 
@@ -47,7 +47,7 @@ describe("Backend.Dashboard.Activity component", () => {
   });
 
   it('returns null when no stats are present', () => {
-    const component = TestUtils.createRenderer().render(
+    const component = createRenderer().render(
       <Dashboard.Activity />
     );
     expect(component).toBe(null);

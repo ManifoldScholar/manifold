@@ -117,11 +117,11 @@ exports[`Backend Backend Container renders correctly 1`] = `
                       <HeaderNotifications notifications={{...}} addNotification={[Function]} removeNotification={[Function]} removeAllNotifications={[Function]}>
                         <section className=\\"header-notifications-container\\">
                           <div className=\\"header-notifications-list\\">
-                            <ReactCSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-                              <ReactTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                            <CSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+                              <TransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
                                 <span />
-                              </ReactTransitionGroup>
-                            </ReactCSSTransitionGroup>
+                              </TransitionGroup>
+                            </CSSTransitionGroup>
                           </div>
                         </section>
                       </HeaderNotifications>
