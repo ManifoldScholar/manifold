@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Maker } from 'components/frontend';
 import { Helper } from 'components/global';
 import { Link } from 'react-router-dom';

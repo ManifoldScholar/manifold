@@ -6,10 +6,10 @@ exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
     <withRouter(Drawer.Wrapper) open={true} style=\\"backend\\">
       <Route render={[Function]}>
         <Drawer.Wrapper open={true} style=\\"backend\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} lockScroll=\\"hover\\">
-          <ReactCSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-            <ReactTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+          <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+            <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
               <span>
-                <ReactCSSTransitionGroupChild name=\\"drawer\\" appear={false} enter={true} leave={true} appearTimeout={[undefined]} enterTimeout={500} leaveTimeout={300}>
+                <CSSTransitionGroupChild name=\\"drawer\\" appear={false} enter={true} leave={true} appearTimeout={[undefined]} enterTimeout={500} leaveTimeout={300}>
                   <div>
                     <Utility.EdgeLockScroll>
                       <div className=\\"edge-lock-scroll\\">
@@ -29,10 +29,10 @@ exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
                       </div>
                     </Utility.EdgeLockScroll>
                   </div>
-                </ReactCSSTransitionGroupChild>
+                </CSSTransitionGroupChild>
               </span>
-            </ReactTransitionGroup>
-          </ReactCSSTransitionGroup>
+            </TransitionGroup>
+          </CSSTransitionGroup>
         </Drawer.Wrapper>
       </Route>
     </withRouter(Drawer.Wrapper)>

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import distanceInWords from 'date-fns/distance_in_words';

@@ -27,8 +27,7 @@ export function providerSetting(provider) {
  * @return {String}
  */
 export function getUrl(provider) {
-  console.log('__API_URL__');
-  return `${__API_URL__}/auth/${providerSlug(provider)}`;
+  return `${process.env.API_URL}/auth/${providerSlug(provider)}`;
 }
 
 /**
@@ -37,7 +36,7 @@ export function getUrl(provider) {
  */
 export function isOauthEvent(event) {
   if (get(event, 'data.type') === 'oauth') {
-    if (get(event, 'origin') !== __API_URL__) {
+    if (get(event, 'origin') !== process.env.API_URL) {
       console.error('Origin mismatch, %s is not API', event.origin);
 
       return false;

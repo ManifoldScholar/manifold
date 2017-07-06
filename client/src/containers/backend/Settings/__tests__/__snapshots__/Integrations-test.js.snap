@@ -212,9 +212,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                             <label>
                               Google Analytics Profile ID
                             </label>
-                            <MaskedInput onChange={[Function]} value={{...}} type=\\"text\\" mask={{...}} placeholder=\\"ga:123456789\\">
-                              <input type=\\"text\\" placeholder=\\"ga:123456789\\" onInput={[Function]} defaultValue={{...}} />
-                            </MaskedInput>
+                            <ReactTextMask onChange={[Function]} value={{...}} type=\\"text\\" mask={{...}} placeholder=\\"ga:123456789\\" />
                           </div>
                         </Form.MaskedTextInput>
                       </Form.Setter('Form.MaskedTextInput)>

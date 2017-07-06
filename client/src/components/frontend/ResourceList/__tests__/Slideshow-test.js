@@ -1,5 +1,3 @@
-jest.mock('velocity-react');
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Slideshow from '../Slideshow';

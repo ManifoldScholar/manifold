@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Text } from 'components/backend';
 import { makersAPI, usersAPI } from 'api';
 import { connect } from 'react-redux';

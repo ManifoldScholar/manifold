@@ -1,5 +1,3 @@
-jest.mock('components/global/HigherOrder/fetchData');
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { CollectionDetailGeneralContainer }from '../General';

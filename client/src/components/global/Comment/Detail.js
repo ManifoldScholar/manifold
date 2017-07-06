@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Utility } from 'components/frontend';
 import { Comment as CommentContainer } from 'containers/global';
 import { Helper } from 'components/global';

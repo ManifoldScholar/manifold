@@ -8,10 +8,10 @@ exports[`Reader.Resource.Viewer.Group component renders correctly 1`] = `
         <ResourceViewer.Group items={{...}} activeAnnotation={{...}} dispatch={[Function]} location={0} fadeIn={true}>
           <div className=\\"resource-preview-group transition-out\\" style={{...}}>
             <div className=\\"group-highlighted-resource-wrapper\\" style={{...}}>
-              <ReactCSSTransitionGroup transitionName=\\"highlight\\" transitionEnterTimeout={200} transitionLeaveTimeout={200} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-                <ReactTransitionGroup transitionName=\\"highlight\\" transitionEnterTimeout={200} transitionLeaveTimeout={200} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+              <CSSTransitionGroup transitionName=\\"highlight\\" transitionEnterTimeout={200} transitionLeaveTimeout={200} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+                <TransitionGroup transitionName=\\"highlight\\" transitionEnterTimeout={200} transitionLeaveTimeout={200} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
                   <span>
-                    <ReactCSSTransitionGroupChild name=\\"highlight\\" appear={false} enter={true} leave={true} appearTimeout={[undefined]} enterTimeout={200} leaveTimeout={200}>
+                    <CSSTransitionGroupChild name=\\"highlight\\" appear={false} enter={true} leave={true} appearTimeout={[undefined]} enterTimeout={200} leaveTimeout={200}>
                       <Connect(ResourceViewer.Single) annotationId=\\"1\\" resource={{...}} height={[undefined]} fadeIn={false} link=\\"/read/undefined/section/undefined/resource/1\\">
                         <ResourceViewer.Single annotationId=\\"1\\" resource={{...}} height={[undefined]} fadeIn={false} link=\\"/read/undefined/section/undefined/resource/1\\" activeAnnotation={{...}} dispatch={[Function]} location={0}>
                           <div className=\\"resource-preview-single\\" style={{...}}>
@@ -46,10 +46,10 @@ exports[`Reader.Resource.Viewer.Group component renders correctly 1`] = `
                           </div>
                         </ResourceViewer.Single>
                       </Connect(ResourceViewer.Single)>
-                    </ReactCSSTransitionGroupChild>
+                    </CSSTransitionGroupChild>
                   </span>
-                </ReactTransitionGroup>
-              </ReactCSSTransitionGroup>
+                </TransitionGroup>
+              </CSSTransitionGroup>
             </div>
             <ul className=\\"group-thumbnails\\">
               <li>

@@ -1,6 +1,3 @@
-jest.mock('components/global/HigherOrder/fetchData');
-jest.mock('api/client');
-
 import React from 'react';
 import { Provider } from 'react-redux';
 import Annotation from '../Annotation';
