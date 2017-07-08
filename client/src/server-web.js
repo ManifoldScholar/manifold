@@ -34,7 +34,7 @@ function start(stats) {
 
   if (process.env.WEBPACK_DEV_SERVER) {
 
-    ch.header(`Webpack dev server is present. Proxying asset requests.`);
+    ch.info(`Webpack dev server is present. Proxying asset requests.`);
 
     const assetTarget = `http://localhost:${process.env.CLIENT_ASSET_PORT}`;
     const assetProxy = proxy({
@@ -43,10 +43,10 @@ function start(stats) {
     });
 
     app.use(['/build', "/static", /.*hot\-update.*$/], assetProxy);
-    ch.info(`Proxying /build requests to ${assetTarget}`);
-
+    ch.info(`Proxying /build requests to ${assetTarget}/build`);
+    ch.info(`Proxying /static requests to ${assetTarget}/static`);
+    ch.info(`Proxying HMR related requests to ${assetTarget}`);
   } else {
-
     const wwwPath = path.join(__dirname, "../www");
     app.use(Express.static(wwwPath));
     app.use('/static', Express.static(`${wwwPath}/static`));
@@ -119,10 +119,10 @@ function start(stats) {
 
   server.listen(listenOn, (err) => {
     if (err) {
-      ch.error("Manifold's Node web server encountered an error.");
+      ch.error("Manifold's web server encountered an error.");
       console.error('SERVER ERROR:', pretty.render(err));
     }
-    ch.header(`Manifold's Node web server is listening at ${listenOn}`);
+    ch.header(`Manifold's web server is listening at ${listenOn}`);
   });
 
 }

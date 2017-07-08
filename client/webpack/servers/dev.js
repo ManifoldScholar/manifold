@@ -22,13 +22,14 @@ compiler.plugin('compile', (params) => {
 
 const serverOptions = {
   quiet: false,
-  allowedHosts: ["manifold.dev"],
+  allowedHosts: ["manifold.dev", "localhost", "127.0.0.1"],
   noInfo: false,
   hot: true,
   inline: true,
   lazy: false,
   headers: { 'Access-Control-Allow-Origin': '*' },
   stats: {
+    modules: false,
     colors: true
   }
 };

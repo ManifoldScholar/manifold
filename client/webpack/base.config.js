@@ -118,6 +118,10 @@ module.exports = (options = {}) => {
     resolve: {
       modules: [paths.src, "node_modules"]
     },
+    stats: {
+      modules: false,
+      colors: true
+    },
     plugins
   }
 
