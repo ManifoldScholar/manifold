@@ -1,9 +1,8 @@
-import { Children, Component } from 'react';
-import PropTypes from 'prop-types';
-import withSideEffect from 'react-side-effect';
+import { Children, Component } from "react";
+import PropTypes from "prop-types";
+import withSideEffect from "react-side-effect";
 
 class BodyClass extends Component {
-
   static propTypes = {
     className: PropTypes.string.isRequired,
     children: PropTypes.object
@@ -18,17 +17,16 @@ class BodyClass extends Component {
 }
 
 function reducePropsToState(propsList) {
-  const classes = propsList.map((prop) => {
+  const classes = propsList.map(prop => {
     return prop.className;
   });
   return classes;
 }
 
 function handleStateChangeOnClient(bodyClasses) {
-  document.body.className = bodyClasses.join(' ').trim();
+  document.body.className = bodyClasses.join(" ").trim();
 }
 
-export default withSideEffect(
-  reducePropsToState,
-  handleStateChangeOnClient
-)(BodyClass);
+export default withSideEffect(reducePropsToState, handleStateChangeOnClient)(
+  BodyClass
+);

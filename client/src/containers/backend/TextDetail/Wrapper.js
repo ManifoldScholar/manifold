@@ -1,20 +1,19 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Dialog, Text, Navigation } from 'components/backend';
-import { uiVisibilityActions, entityStoreActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { textsAPI, requests } from 'api';
-import lh from 'helpers/linkHandler';
-import { renderRoutes } from 'helpers/routing';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Dialog, Navigation } from "components/backend";
+import { entityStoreActions } from "actions";
+import { select } from "utils/entityUtils";
+import { textsAPI, requests } from "api";
+import lh from "helpers/linkHandler";
+import { renderRoutes } from "helpers/routing";
 
-const { request, flush } = entityStoreActions;
+const { request } = entityStoreActions;
 
 export class TextDetailWrapperContainer extends PureComponent {
-
   static displayName = "TextDetail.Wrapper";
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state) {
     return {
       text: select(requests.beText, state.entityStore)
     };
@@ -22,7 +21,12 @@ export class TextDetailWrapperContainer extends PureComponent {
 
   static propTypes = {
     children: PropTypes.object,
-    text: PropTypes.object
+    text: PropTypes.object,
+    dispatch: PropTypes.func,
+    match: PropTypes.object,
+    history: PropTypes.object,
+    location: PropTypes.object,
+    route: PropTypes.object
   };
 
   constructor(props) {
@@ -32,7 +36,7 @@ export class TextDetailWrapperContainer extends PureComponent {
     };
     this.doPreview = this.doPreview.bind(this);
     this.doDestroy = this.doDestroy.bind(this);
-    this.handleTextDestroy = this.handleTextDestroy .bind(this);
+    this.handleTextDestroy = this.handleTextDestroy.bind(this);
   }
 
   componentDidMount() {
@@ -103,61 +107,65 @@ export class TextDetailWrapperContainer extends PureComponent {
       this.setState({
         confirmation: { resolve, reject, heading, message }
       });
-    }).then(() => {
-      this.doDestroy(event);
-      this.closeDialog();
-    }, () => { this.closeDialog(); });
+    }).then(
+      () => {
+        this.doDestroy(event);
+        this.closeDialog();
+      },
+      () => {
+        this.closeDialog();
+      }
+    );
   }
 
   doPreview(event) {
     event.preventDefault();
-    const win = window.open(lh.link("reader", this.props.text.id), '_blank');
+    const win = window.open(lh.link("reader", this.props.text.id), "_blank");
     win.focus();
   }
 
   renderUtility() {
     return (
       <div>
-        <button
-          onClick={this.doPreview}
-          className="button-bare-primary"
-        >
-          Preview <i className="manicon manicon-eye-outline"></i>
+        <button onClick={this.doPreview} className="button-bare-primary">
+          Preview <i className="manicon manicon-eye-outline" />
         </button>
         <button
           onClick={this.handleTextDestroy}
           className="button-bare-primary"
         >
-          Delete <i className="manicon manicon-trashcan"></i>
+          Delete <i className="manicon manicon-trashcan" />
         </button>
       </div>
     );
   }
 
   renderRoutes() {
-    const { _routes, match, history, location, ...otherProps } = this.props;
+    /* eslint-disable no-unused-vars */
+    const { match, history, location, ...otherProps } = this.props;
+    /* eslint-enable no-unused-vars */
     otherProps.refresh = this.fetchText;
     const childRoutes = renderRoutes(this.props.route.routes, otherProps);
     return childRoutes;
   }
 
   render() {
-    const { match, text } = this.props;
+    const { text } = this.props;
     if (!text) return null;
-
     return (
       <div>
-        {
-          this.state.confirmation ?
-            <Dialog.Confirm {...this.state.confirmation} />
-            : null
-        }
+        {this.state.confirmation
+          ? <Dialog.Confirm {...this.state.confirmation} />
+          : null}
         <Navigation.DetailHeader
           type="text"
           breadcrumb={[
             { path: lh.link("backend"), label: "ALL PROJECTS" },
             {
-              path: lh.link("backendProjectTexts", text.relationships.project.id),
+              path: lh.link(
+                "backendProjectTexts",
+                text.relationships.project.id
+              ),
               label: text.relationships.project.attributes.title
             }
           ]}
@@ -190,4 +198,3 @@ export class TextDetailWrapperContainer extends PureComponent {
 }
 
 export default connectAndFetch(TextDetailWrapperContainer);
-

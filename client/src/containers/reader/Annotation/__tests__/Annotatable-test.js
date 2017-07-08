@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { AnnotatableContainer } from '../Annotatable';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { AnnotatableContainer } from "../Annotatable";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Reader Annotation Annotatable Container", () => {
-
   const store = build.store();
   const text = build.entity.text("1");
   const section = build.entity.textSection("2");
@@ -25,9 +24,7 @@ describe("Reader Annotation Annotatable Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <AnnotatableContainer
-          {...props}
-        />
+        <AnnotatableContainer {...props} />
       </Provider>
     )
   );
@@ -41,5 +38,4 @@ describe("Reader Annotation Annotatable Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

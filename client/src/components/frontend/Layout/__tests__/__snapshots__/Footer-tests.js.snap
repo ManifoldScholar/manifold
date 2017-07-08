@@ -58,6 +58,7 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
             <li>
               <a
                 href="http://twitter.com/manifoldscholar"
+                rel="noopener noreferrer"
                 target="_blank"
               >
                 Twitter

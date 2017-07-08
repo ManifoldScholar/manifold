@@ -1,12 +1,9 @@
-import React from 'react';
-import TextNode from '../TextNode';
-import DefaultNode from '../DefaultNode';
-import LinkNode from '../LinkNode';
-import CodeNode from '../CodeNode';
-import isEmpty from 'lodash/isEmpty';
+import React from "react";
+import TextNode from "../TextNode";
+import DefaultNode from "../DefaultNode";
+import LinkNode from "../LinkNode";
 
 export default class NodeTreeIterator {
-
   constructor(bodyProps) {
     const { annotations, lockedSelection } = bodyProps;
     this.annotations = annotations ? annotations.slice(0) : [];
@@ -14,7 +11,7 @@ export default class NodeTreeIterator {
     this.annotationsMap = {};
     this.annotationStartMap = {};
     this.annotationEndMap = {};
-    this.annotations.forEach((a) => {
+    this.annotations.forEach(a => {
       this.annotationsMap[a.id] = a;
       if (this.annotationStartMap.hasOwnProperty(a.attributes.startNode)) {
         this.annotationStartMap[a.attributes.startNode].push(a.id);
@@ -50,7 +47,7 @@ export default class NodeTreeIterator {
   visitElementNode(node) {
     let ComponentClass;
     switch (node.tag) {
-      case 'a':
+      case "a":
         ComponentClass = LinkNode;
         break;
       // case 'code':
@@ -64,18 +61,40 @@ export default class NodeTreeIterator {
   }
 
   visitTextNode(node, parent) {
-    const noTextNodes = ['area', 'audio', 'map', 'track', 'video', 'embed', 'object',
-      'param', 'source', 'canvas', 'noscript', 'script', 'col', 'colgroup', 'table',
-      'tbody', 'tfoot', 'thead', 'tr'];
+    const noTextNodes = [
+      "area",
+      "audio",
+      "map",
+      "track",
+      "video",
+      "embed",
+      "object",
+      "param",
+      "source",
+      "canvas",
+      "noscript",
+      "script",
+      "col",
+      "colgroup",
+      "table",
+      "tbody",
+      "tfoot",
+      "thead",
+      "tr"
+    ];
 
-    if (!parent || parent.nodeType !== 'element' || !noTextNodes.includes(parent.tag)) {
+    if (
+      !parent ||
+      parent.nodeType !== "element" ||
+      !noTextNodes.includes(parent.tag)
+    ) {
       return React.createElement(TextNode, node);
     }
   }
 
   startAnnotations(nodeUuid) {
     const annotationIds = this.annotationStartMap[nodeUuid];
-    annotationIds.forEach((annotationId) => {
+    annotationIds.forEach(annotationId => {
       const annotation = this.annotationsMap[annotationId];
       this.openAnnotations[annotation.id] = annotation;
     });
@@ -83,14 +102,13 @@ export default class NodeTreeIterator {
 
   endAnnotations(nodeUuid) {
     const annotationIds = this.annotationEndMap[nodeUuid];
-    annotationIds.forEach((annotationId) => {
+    annotationIds.forEach(annotationId => {
       const annotation = this.annotationsMap[annotationId];
       delete this.openAnnotations[annotation.id];
     });
   }
 
   visit(node, parent = null) {
-
     if (this.annotationStartMap.hasOwnProperty(node.nodeUuid)) {
       this.startAnnotations(node.nodeUuid);
     }
@@ -100,10 +118,10 @@ export default class NodeTreeIterator {
     let out;
 
     switch (node.nodeType) {
-      case 'element':
+      case "element":
         out = this.visitElementNode(adjustedNode);
         break;
-      case 'text':
+      case "text":
         out = this.visitTextNode(adjustedNode, parent);
         break;
       default:
@@ -116,6 +134,5 @@ export default class NodeTreeIterator {
     }
 
     return out;
-
   }
 }

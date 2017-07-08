@@ -1,11 +1,10 @@
-import isString from 'lodash/isString';
+import isString from "lodash/isString";
 
 export default {
-
   index(subject, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/${subject.type}/${subject.id}/relationships/comments`,
-      method: 'GET',
+      method: "GET",
       options: {
         params: { filter, page }
       }
@@ -16,7 +15,7 @@ export default {
     const data = { attributes: comment };
     return {
       endpoint: `/api/v1/${subject.type}/${subject.id}/relationships/comments`,
-      method: 'POST',
+      method: "POST",
       options: {
         body: JSON.stringify({ type: "comments", data })
       }
@@ -27,7 +26,7 @@ export default {
     const data = { attributes: comment };
     return {
       endpoint: `/api/v1/comments/${id}`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "comments", data })
       }
@@ -38,7 +37,7 @@ export default {
     const id = isString(comment) ? comment : comment.id;
     return {
       endpoint: `/api/v1/comments/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
   },
@@ -47,7 +46,7 @@ export default {
     const id = isString(comment) ? comment : comment.id;
     return {
       endpoint: `/api/v1/comments/${id}/relationships/flags`,
-      method: 'POST',
+      method: "POST",
       options: {}
     };
   },
@@ -56,9 +55,8 @@ export default {
     const id = isString(comment) ? comment : comment.id;
     return {
       endpoint: `/api/v1/comments/${id}/relationships/flags`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
   }
-
 };

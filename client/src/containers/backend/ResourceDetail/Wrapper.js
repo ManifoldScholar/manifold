@@ -1,28 +1,30 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Text, Navigation, Dialog } from 'components/backend';
-import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { resourcesAPI, requests } from 'api';
-import lh from 'helpers/linkHandler';
-import { renderRoutes } from 'helpers/routing';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Navigation, Dialog } from "components/backend";
+import { entityStoreActions, notificationActions } from "actions";
+import { select } from "utils/entityUtils";
+import { resourcesAPI, requests } from "api";
+import lh from "helpers/linkHandler";
+import { renderRoutes } from "helpers/routing";
 
 const { request, flush } = entityStoreActions;
 
 export class ResourceDetailWrapperContainer extends PureComponent {
-
   static displayName = "ResourceDetail.Wrapper";
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state) {
     return {
       resource: select(requests.beResource, state.entityStore)
     };
   }
 
   static propTypes = {
-    children: PropTypes.object,
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    match: PropTypes.object,
+    dispatch: PropTypes.func,
+    history: PropTypes.object,
+    route: PropTypes.object
   };
 
   constructor(props) {
@@ -57,8 +59,12 @@ export class ResourceDetailWrapperContainer extends PureComponent {
   doPreview(event) {
     event.preventDefault();
     const projectId = this.props.resource.relationships.project.id;
-    const previewUrl = lh.link("frontendProjectResource", projectId, this.props.resource.id);
-    const win = window.open(previewUrl, '_blank');
+    const previewUrl = lh.link(
+      "frontendProjectResource",
+      projectId,
+      this.props.resource.id
+    );
+    const win = window.open(previewUrl, "_blank");
     win.focus();
   }
 
@@ -83,7 +89,8 @@ export class ResourceDetailWrapperContainer extends PureComponent {
       level: 0,
       id: `RESOURCE_DESTROYED_${this.props.resource.id}`,
       heading: "The resource has been destroyed.",
-      body: `${this.props.resource.attributes.title} has passed into the endless night.`,
+      body: `${this.props.resource.attributes
+        .title} has passed into the endless night.`,
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -96,10 +103,15 @@ export class ResourceDetailWrapperContainer extends PureComponent {
       this.setState({
         confirmation: { resolve, reject, heading, message }
       });
-    }).then(() => {
-      this.doDestroy(event);
-      this.closeDialog();
-    }, () => { this.closeDialog(); });
+    }).then(
+      () => {
+        this.doDestroy(event);
+        this.closeDialog();
+      },
+      () => {
+        this.closeDialog();
+      }
+    );
   }
 
   secondaryNavigationLinks(resource, kind) {
@@ -117,10 +129,11 @@ export class ResourceDetailWrapperContainer extends PureComponent {
       }
     ];
     if (
-      kind === 'image' ||
-      kind === 'audio' ||
+      kind === "image" ||
+      kind === "audio" ||
       kind === "pdf" ||
-      (kind === 'video' && !externalVideo)) {
+      (kind === "video" && !externalVideo)
+    ) {
       out.splice(1, 0, {
         path: lh.link("backendResourceVariants", resource.id),
         label: "Variants",
@@ -133,17 +146,14 @@ export class ResourceDetailWrapperContainer extends PureComponent {
   renderUtility() {
     return (
       <div>
-        <button
-          onClick={this.doPreview}
-          className="button-bare-primary"
-        >
-          Preview <i className="manicon manicon-eye-outline"></i>
+        <button onClick={this.doPreview} className="button-bare-primary">
+          Preview <i className="manicon manicon-eye-outline" />
         </button>
         <button
           onClick={this.handleResourceDestroy}
           className="button-bare-primary"
         >
-          Delete <i className="manicon manicon-trashcan"></i>
+          Delete <i className="manicon manicon-trashcan" />
         </button>
       </div>
     );
@@ -156,22 +166,25 @@ export class ResourceDetailWrapperContainer extends PureComponent {
   }
 
   render() {
+    /* eslint-disable no-unused-vars */
     const { resource, match } = this.props;
+    /* eslint-enable no-unused-vars */
     if (!resource) return null;
 
     return (
       <div>
-        {
-          this.state.confirmation ?
-            <Dialog.Confirm {...this.state.confirmation} />
-            : null
-        }
+        {this.state.confirmation
+          ? <Dialog.Confirm {...this.state.confirmation} />
+          : null}
         <Navigation.DetailHeader
           type="resource"
           breadcrumb={[
             { path: lh.link("backend"), label: "ALL PROJECTS" },
             {
-              path: lh.link("backendProjectResources", resource.relationships.project.id),
+              path: lh.link(
+                "backendProjectResources",
+                resource.relationships.project.id
+              ),
               label: resource.relationships.project.attributes.title
             }
           ]}
@@ -184,14 +197,20 @@ export class ResourceDetailWrapperContainer extends PureComponent {
           <aside className="scrollable">
             <div className="wrapper">
               <Navigation.Secondary
-                links={this.secondaryNavigationLinks(resource, resource.attributes.kind)}
+                links={this.secondaryNavigationLinks(
+                  resource,
+                  resource.attributes.kind
+                )}
               />
             </div>
           </aside>
           <div className="container">
             <aside className="aside">
               <Navigation.Secondary
-                links={this.secondaryNavigationLinks(resource, resource.attributes.kind)}
+                links={this.secondaryNavigationLinks(
+                  resource,
+                  resource.attributes.kind
+                )}
               />
             </aside>
             <div className="panel">

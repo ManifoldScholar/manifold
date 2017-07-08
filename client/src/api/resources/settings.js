@@ -1,9 +1,8 @@
 export default {
-
   update(id = null, settings) {
     return {
       endpoint: `/api/v1/settings`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "settings", data: settings })
       }
@@ -13,11 +12,8 @@ export default {
   show() {
     return {
       endpoint: `/api/v1/settings`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
-  },
-
-
+  }
 };

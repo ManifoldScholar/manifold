@@ -1,20 +1,22 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { CollectionDetailWrapperContainer } from '../Wrapper';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { CollectionDetailWrapperContainer } from "../Wrapper";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend CollectionDetail Wrapper Container", () => {
-
   const store = build.store();
   const collection = build.entity.collection("1");
-  collection.relationships.resources = [build.entity.resource("2"), build.entity.resource("3")];
+  collection.relationships.resources = [
+    build.entity.resource("2"),
+    build.entity.resource("3")
+  ];
   collection.relationships.project = build.entity.project("4");
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <CollectionDetailWrapperContainer
           collection={collection}
           route={{
@@ -38,5 +40,4 @@ describe("Backend CollectionDetail Wrapper Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

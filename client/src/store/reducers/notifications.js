@@ -17,7 +17,7 @@ const setFatalError = (state, action) => {
   return Object.assign({}, state, { fatalError: action.payload });
 };
 
-const clearFatalError = (state, action) => {
+const clearFatalError = (state, actionIgnored) => {
   return Object.assign({}, state, { fatalError: null });
 };
 
@@ -34,33 +34,26 @@ const removeNotification = (state, action) => {
   return Object.assign({}, state, { notifications: output });
 };
 
-const removeAllNotifications = (state) => {
+const removeAllNotifications = state => {
   return Object.assign({}, state, { notifications: [] });
 };
 
-const handleErrorAction = (state, action) => {
-  if (action.payload.level && action.payload.heading) {
-    return addNotification(state, action);
-  }
-  return state;
-};
-
 const notificationReducer = (state = initialState, action) => {
-
-  if (action.type && action.type.startsWith("API_REQUEST")
-    || action.type === "ROUTE_UPDATE"
+  if (
+    (action.type && action.type.startsWith("API_REQUEST")) ||
+    action.type === "ROUTE_UPDATE"
   ) {
     return clearFatalError(state, action);
   }
 
   switch (action.type) {
-    case 'ADD_NOTIFICATION':
+    case "ADD_NOTIFICATION":
       return addNotification(state, action);
-    case 'REMOVE_NOTIFICATION':
+    case "REMOVE_NOTIFICATION":
       return removeNotification(state, action);
-    case 'REMOVE_ALL_NOTIFICATIONS':
+    case "REMOVE_ALL_NOTIFICATIONS":
       return removeAllNotifications(state, action);
-    case 'FATAL_ERROR_NOTIFICATION':
+    case "FATAL_ERROR_NOTIFICATION":
       return setFatalError(state, action);
     default:
       return state;

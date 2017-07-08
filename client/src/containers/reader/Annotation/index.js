@@ -1,5 +1,5 @@
-import Annotatable from './Annotatable';
-import List from './List';
+import Annotatable from "./Annotatable";
+import List from "./List";
 
 export default {
   Annotatable,

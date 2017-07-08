@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Project, Navigation } from 'components/backend';
-import { Form } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import { notificationActions } from 'actions';
-import { projectsAPI } from 'api';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Navigation } from "components/backend";
+import { Form } from "components/backend";
+import { Form as FormContainer } from "containers/backend";
+import { projectsAPI } from "api";
+import lh from "helpers/linkHandler";
 
 export class NewProjectWrapperContainer extends PureComponent {
-
   static displayName = "NewProject.WrapperContainer";
 
   static propTypes = {
+    history: PropTypes.object,
+    project: PropTypes.object
   };
 
   constructor(props) {
@@ -34,12 +34,12 @@ export class NewProjectWrapperContainer extends PureComponent {
       <div>
         <Navigation.DetailHeader
           type="project"
-          breadcrumb={[
-            { path: lh.link("backend"), label: "ALL PROJECTS" }
-          ]}
-          title={'New Project'}
+          breadcrumb={[{ path: lh.link("backend"), label: "ALL PROJECTS" }]}
+          title={"New Project"}
           showUtility={false}
-          note={'Enter the name of your project, and a brief description. Press save to continue.'}
+          note={
+            "Enter the name of your project, and a brief description. Press save to continue."
+          }
         />
         <section className="backend-panel">
           <div className="container">

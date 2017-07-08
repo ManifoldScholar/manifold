@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import TextDetailGeneralContainer from '../General';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import TextDetailGeneralContainer from "../General";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend TextDetail General Container", () => {
-
   const store = build.store();
   const text = build.entity.text("1");
   text.relationships.creators = [build.entity.user("2")];
@@ -14,10 +13,8 @@ describe("Backend TextDetail General Container", () => {
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
-        <TextDetailGeneralContainer
-          text={text}
-        />
+      <Provider store={store}>
+        <TextDetailGeneralContainer text={text} />
       </Provider>
     )
   );
@@ -31,5 +28,4 @@ describe("Backend TextDetail General Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

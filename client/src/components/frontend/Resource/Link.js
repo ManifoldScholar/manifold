@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Utility, Resource } from 'components/frontend';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class ResourceDetail extends Component {
-
   static displayName = "Resource.Detail";
 
   static propTypes = {
@@ -12,7 +10,7 @@ export default class ResourceDetail extends Component {
   };
 
   static defaultProps = {
-    buttonClass: 'button-primary'
+    buttonClass: "button-primary"
   };
 
   renderButton(attr) {
@@ -20,26 +18,25 @@ export default class ResourceDetail extends Component {
     switch (attr.kind.toLowerCase()) {
       case "link":
         button = (
-            <a
-              href={attr.externalUrl}
-              className={this.props.buttonClass}
-              target="_blank"
-            >
-              Visit Page <i className="manicon manicon-arrow-right"></i>
-            </a>
+          <a
+            href={attr.externalUrl}
+            className={this.props.buttonClass}
+            target="_blank"
+          >
+            Visit Page <i className="manicon manicon-arrow-right" />
+          </a>
         );
         break;
       default:
-        button = (attr.downloadable ?
-            <a
+        button = attr.downloadable
+          ? <a
               href={attr.attachmentStyles.original}
               className={this.props.buttonClass}
               target="_blank"
             >
-              Download <i className="manicon manicon-arrow-down"></i>
+              Download <i className="manicon manicon-arrow-down" />
             </a>
-            : null
-        );
+          : null;
         break;
     }
 

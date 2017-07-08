@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
-import classNames from 'classnames';
-import smoothScroll from '../../../utils/smoothScroll';
-import { Resource, Section } from 'components/reader';
-import Annotation from 'containers/reader/Annotation';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import classNames from "classnames";
+import smoothScroll from "../../../utils/smoothScroll";
+import { Section } from "components/reader";
+import Annotation from "containers/reader/Annotation";
 
 export default class Text extends Component {
-
   static propTypes = {
     text: PropTypes.object,
     authentication: PropTypes.object,
@@ -16,10 +15,8 @@ export default class Text extends Component {
     annotations: PropTypes.array,
     appearance: PropTypes.object,
     location: PropTypes.object,
-    createAnnotation: PropTypes.func,
     match: PropTypes.object,
     children: PropTypes.object,
-    dispatch: PropTypes.func,
     visibility: PropTypes.object
   };
 
@@ -46,8 +43,8 @@ export default class Text extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      (nextProps.visibility.annotation !== this.props.visibility.annotation) ||
-      (nextProps.annotations !== this.props.annotations)
+      nextProps.visibility.annotation !== this.props.visibility.annotation ||
+      nextProps.annotations !== this.props.annotations
     ) {
       const filteredAnnotations = this.filterAnnotations(
         nextProps.visibility.annotation,
@@ -63,11 +60,14 @@ export default class Text extends Component {
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
 
-  filterAnnotations(visibility, annotations, currentUser) {
+  filterAnnotations(visibility, annotations, currentUserIgnored) {
     if (visibility === 0) return [];
     if (visibility === 1) {
-      return annotations.filter((a) => {
-        return a.attributes.format === "resource" || a.attributes.currentUserIsCreator === true;
+      return annotations.filter(a => {
+        return (
+          a.attributes.format === "resource" ||
+          a.attributes.currentUserIsCreator === true
+        );
       });
     }
     return annotations;
@@ -98,7 +98,8 @@ export default class Text extends Component {
     if (previousHash === currentHash) return;
     const scrollTarget = document.querySelector(currentHash);
     if (!scrollTarget) return false;
-    const position = scrollTarget.getBoundingClientRect().top + window.pageYOffset;
+    const position =
+      scrollTarget.getBoundingClientRect().top + window.pageYOffset;
     setTimeout(() => {
       smoothScroll(position - 125);
     }, 0);
@@ -109,25 +110,26 @@ export default class Text extends Component {
     const colorScheme = this.props.appearance.colors.colorScheme;
 
     const readerAppearanceClass = classNames({
-      'reader-window': true,
-      'scheme-light': colorScheme === 'light',
-      'scheme-dark': colorScheme === 'dark'
+      "reader-window": true,
+      "scheme-light": colorScheme === "light",
+      "scheme-dark": colorScheme === "dark"
     });
 
     // Font selection may be handled differently later, but for now, variants are based
     // on class names
     let textSectionClass = classNames({
-      'manifold-text-section text-section': true,
-      'font-serif': typography.font === 'serif',
-      'font-sans-serif': typography.font === 'sans-serif'
+      "manifold-text-section text-section": true,
+      "font-serif": typography.font === "serif",
+      "font-sans-serif": typography.font === "sans-serif"
     });
 
     // Apply a font-size class to the text-section
     // This maps to a numbered class with responsive font declarations
-    textSectionClass = textSectionClass + ` font-size-${typography.fontSize.current}`;
+    textSectionClass += ` font-size-${typography.fontSize.current}`;
 
     // Apply a conditional container class that maps to a size in CSS
-    const containerClass = `container-focus container-width-${typography.margins.current}`;
+    const containerClass = `container-focus container-width-${typography.margins
+      .current}`;
 
     const section = this.props.section;
 
@@ -146,12 +148,12 @@ export default class Text extends Component {
             resources={this.props.resources}
             annotations={this.state.filteredAnnotations}
             containerSize={typography.margins.current}
-            bodySelector='[data-id="body"]'
+            bodySelector="[data-id=&quot;body&quot;]"
             text={this.props.text}
             section={this.props.section}
           >
             <div className={containerClass}>
-              <div data-id="body" className={textSectionClass} >
+              <div data-id="body" className={textSectionClass}>
                 <Section.Body
                   lockedSelection={this.state.lockedSelection}
                   annotations={this.state.filteredAnnotations}
@@ -161,13 +163,15 @@ export default class Text extends Component {
             </div>
           </Annotation.Annotatable>
         </section>
-          <ReactCSSTransitionGroup
-            transitionName="text-child"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}
-          >
-            {this.props.children ? React.cloneElement(this.props.children, { key: page }) : null}
-          </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+          transitionName="text-child"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          {this.props.children
+            ? React.cloneElement(this.props.children, { key: page })
+            : null}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

@@ -20,7 +20,8 @@ exports[`Frontend.ResourceList.Totals Component renders correctly 1`] = `
     href="/project/1/resources"
     onClick={[Function]}
   >
-    View All Project Resources 
+    View All Project Resources
+     
     <i
       className="manicon manicon-arrow-right"
     />

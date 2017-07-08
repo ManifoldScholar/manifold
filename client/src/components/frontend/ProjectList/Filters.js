@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class ProjectListFilters extends Component {
-
   static displayName = "ProjectList.Filters";
 
   static propTypes = {
@@ -11,15 +10,15 @@ export default class ProjectListFilters extends Component {
     hideFeatured: PropTypes.bool
   };
 
-  filterChange = (event) => {
+  filterChange = event => {
     let filter = {};
     const value = event.target.value;
     if (value) {
       switch (value) {
-        case 'featured':
+        case "featured":
           filter = { featured: true };
           break;
-        case 'notFeatured':
+        case "notFeatured":
           filter = { featured: false };
           break;
         default:
@@ -32,29 +31,29 @@ export default class ProjectListFilters extends Component {
 
   subjectOptions() {
     if (!this.props.subjects) return null;
-    return this.props.subjects.map((subject) => {
+    return this.props.subjects.map(subject => {
       return (
-        <option key={subject.id} value={subject.id}>{subject.attributes.name}</option>
+        <option key={subject.id} value={subject.id}>
+          {subject.attributes.name}
+        </option>
       );
     });
   }
 
   featuredOptions() {
     if (this.props.hideFeatured) return null;
-    return (
-      <option value="featured">Featured Projects</option>
-    );
+    return <option value="featured">Featured Projects</option>;
   }
 
   render() {
     return (
       <div className="select-browse">
-        <select onChange={ this.filterChange } >
+        <select onChange={this.filterChange}>
           <option value="">Show All</option>
           {this.featuredOptions()}
           {this.subjectOptions()}
         </select>
-        <i className="manicon manicon-caret-down"></i>
+        <i className="manicon manicon-caret-down" />
       </div>
     );
   }

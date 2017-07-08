@@ -1,10 +1,9 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import TextTitles from '../TextTitles';
+import React from "react";
+import renderer from "react-test-renderer";
+import TextTitles from "../TextTitles";
 
 describe("Reader.TextTitles Component", () => {
-
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       <TextTitles
         textTitle="Rowan: Greatest Dog"
@@ -15,5 +14,4 @@ describe("Reader.TextTitles Component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

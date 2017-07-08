@@ -1,11 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Cards from '../Cards';
-import build from 'test/fixtures/build';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import Cards from "../Cards";
+import build from "test/fixtures/build";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.ResourceList.Cards Component", () => {
-
   const project = build.entity.project("1");
   const resources = [build.entity.resource("2"), build.entity.resource("3")];
   const pagination = {

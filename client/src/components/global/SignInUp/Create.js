@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { usersAPI, requests } from 'api';
-import { entityStoreActions, currentUserActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { Form, SignInUp } from 'components/global';
-import connectAndFetch from 'utils/connectAndFetch';
-import get from 'lodash/get';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { usersAPI, requests } from "api";
+import { entityStoreActions, currentUserActions } from "actions";
+import { select } from "utils/entityUtils";
+import { Form, SignInUp } from "components/global";
+import connectAndFetch from "utils/connectAndFetch";
+import get from "lodash/get";
 
 const { request, flush } = entityStoreActions;
 
 class CreateContainer extends Component {
-
   static propTypes = {
     dispatch: PropTypes.func,
     response: PropTypes.object,
     user: PropTypes.object,
-    showForgot: PropTypes.func.isRequired,
+    authentication: PropTypes.object,
     showLogin: PropTypes.func.isRequired,
     showCreateUpdate: PropTypes.func.isRequired
   };
@@ -36,10 +35,10 @@ class CreateContainer extends Component {
     this.state = {
       authenticating: false,
       user: {
-        email: '',
-        name: '',
-        password: '',
-        passwordConfirmation: ''
+        email: "",
+        name: "",
+        password: "",
+        passwordConfirmation: ""
       }
     };
   }
@@ -60,28 +59,33 @@ class CreateContainer extends Component {
   authenticateUser() {
     this.setState({ authenticating: true });
     const { dispatch } = this.props;
-    dispatch(currentUserActions.login({
-      email: this.state.user.email,
-      password: this.state.user.password
-    }));
+    dispatch(
+      currentUserActions.login({
+        email: this.state.user.email,
+        password: this.state.user.password
+      })
+    );
   }
 
   createUser(event) {
     event.preventDefault(event.target);
-    this.props.dispatch(request(usersAPI.create(this.state.user), requests.gCreateUser));
+    this.props.dispatch(
+      request(usersAPI.create(this.state.user), requests.gCreateUser)
+    );
   }
 
   handleInputChange(event) {
-    const user =
-      Object.assign({}, this.state.user, { [event.target.name]: event.target.value });
+    const user = Object.assign({}, this.state.user, {
+      [event.target.name]: event.target.value
+    });
     this.setState({ user });
   }
 
   render() {
-    let errors = get(this.props.response, 'errors') || [];
+    const errors = get(this.props.response, "errors") || [];
     return (
       <div>
-        <form method="post" onSubmit={this.createUser} >
+        <form method="post" onSubmit={this.createUser}>
           <h4 className="form-heading">Create Account</h4>
           <div className="row-1-p">
             <Form.Errorable
@@ -89,7 +93,7 @@ class CreateContainer extends Component {
               name="attributes[email]"
               errors={errors}
             >
-             <label>Email</label>
+              <label>Email</label>
               <input
                 value={this.state.user.email}
                 type="text"
@@ -103,12 +107,10 @@ class CreateContainer extends Component {
           <div className="row-1-p">
             <Form.Errorable
               className="form-input"
-              name={['attributes[firstName]', 'attributes[lastName]']}
+              name={["attributes[firstName]", "attributes[lastName]"]}
               errors={errors}
             >
-              <label>
-                Name
-              </label>
+              <label>Name</label>
               <input
                 value={this.state.user.name}
                 type="text"
@@ -125,9 +127,7 @@ class CreateContainer extends Component {
               name="attributes[password]"
               errors={errors}
             >
-              <label>
-                Password
-              </label>
+              <label>Password</label>
               <input
                 value={this.state.user.password}
                 type="password"
@@ -144,9 +144,7 @@ class CreateContainer extends Component {
               name="attributes[passwordConfirmation]"
               errors={errors}
             >
-              <label>
-                Confirm Password
-              </label>
+              <label>Confirm Password</label>
               <input
                 value={this.state.user.passwordConfirmation}
                 type="password"
@@ -168,8 +166,8 @@ class CreateContainer extends Component {
           </div>
         </form>
         <p className="login-links">
-          {'You can also create a Manifold account using your Facebook, Twitter, or ' +
-          'Google credentials.'}
+          {"You can also create a Manifold account using your Facebook, Twitter, or " +
+            "Google credentials."}
         </p>
         <section className="login-external">
           <SignInUp.Oauth.Monitor dispatch={this.props.dispatch} />
@@ -194,11 +192,13 @@ class CreateContainer extends Component {
           </SignInUp.Oauth.Button>
         </section>
         <p className="login-links">
-          {'By creating this account, you agree to Manifold\'s terms and conditions.'}
+          {
+            "By creating this account, you agree to Manifold's terms and conditions."
+          }
         </p>
         <p className="login-links">
           <a href="#" onClick={this.props.showLogin} data-id="show-login">
-            {'Already have an account?'}
+            {"Already have an account?"}
           </a>
         </p>
       </div>

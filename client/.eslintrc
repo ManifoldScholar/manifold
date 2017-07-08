@@ -1,4 +1,4 @@
-{ "extends": "eslint-config-airbnb",
+{ "extends": ["eslint-config-airbnb", "prettier"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -6,65 +6,80 @@
     "jest": true
   },
   "rules": {
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 2,
-    "react/jsx-quotes": 0,
 
-    // Need to deal with this block. Added to make things pass after eslint update.
-    "react/jsx-first-prop-new-line": 0,
-    "react/jsx-space-before-closing": 0,
-    "global-require": 0,
-    "arrow-body-style": 0,
-    "consistent-return": 0,
+    "prettier/prettier": "error",
+
+    // Developer should choose whether concatenation or string templates make more sense.
     "prefer-template": 0,
-    "no-useless-concat": 0,
-    "react/prefer-stateless-function": 0,
-    "react/jsx-indent": 0,
-    "no-useless-constructor": 0,
-    "jsx-a11y/img-has-alt": 0,
-    "react/jsx-curly-spacing": 0,
-    "array-callback-return": 0,
-    "quotes": 0,
-    "no-duplicate-imports": 0,
-    "no-unneeded-ternary": 0,
-    "no-whitespace-before-property": 0,
-    "react/require-render-return": 0,
 
-    "react/prop-types": 1,
+    // We routinely import named modules in lodash, for example
+    "import/prefer-default-export": 0,
+
+    // Our imports aren't always resolved correctly by the linter
     "import/default": 0,
     "import/no-duplicates": 0,
     "import/named": 0,
     "import/namespace": 0,
     "import/no-unresolved": 0,
-    "import/no-named-as-default": 2,
-    "jsx-quotes": 2,
-    // Temporarirly disabled due to a possible bug in babel-eslint (todomvc example)
-    "block-scoped-var": 0,
-    // Temporarily disabled for test/* until babel/babel-eslint#33 is resolved
-    "padded-blocks": 0,
-    "comma-dangle": 0,
-    "comma-spacing": 1,
-    "indent": [2, 2, {"SwitchCase": 1}],
-    "no-console": 0,
-    "no-alert": 0,
-    "prefer-const": 1,
-    "semi": 1,
-    "no-unused-vars": [0, {"args": "after-used", "varsIgnorePattern": "PropTypes", "argsIgnorePattern": "[iI]gnored"}],
-    "no-trailing-spaces": 1,
-    "no-multiple-empty-lines": 1,
-    "spaced-comment": 1,
-    "react/no-multi-comp": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/first": 0,
+    "import/no-absolute-path": 0,
+
+    // We're not including the .js extensions on imports.
+    "import/extensions": [2, { "js": "never" }],
+
+    // Sometimes braces are added so the arrow function can wrap
+    "arrow-body-style": 0,
+
+    // Underscores are a useful way to indicate that a property should be treated as private.
     "no-underscore-dangle": 0,
-    "max-len": 1
+
+    // Style rules we can disable because prettier will fix them
+    "react/jsx-indent": 0,
+
+    // Unused vars are bad.
+    "no-unused-vars": [1, {"args": "after-used", "varsIgnorePattern": "PropTypes", "argsIgnorePattern": "[iI]gnored"}],
+
+    // We don't need a jsx extension.
+    "react/jsx-filename-extension": 0,
+
+    // Sometimes it's required.
+    "react/no-danger": 0,
+
+    // Prettier does it differently.
+    "react/jsx-closing-bracket-location": 0,
+    "react/jsx-indent-props": 0,
+    "react/jsx-wrap-multilines": 0,
+
+    // Consistency is more important.
+    "react/prefer-stateless-function": 0,
+
+    // Too many false positives from this rule.
+    "react/no-unused-prop-types": 0,
+
+    // Rules we may not want to fix
+    "no-plusplus": 0,
+    "no-bitwise": 0,
+    "no-prototype-builtins": 0,
+    "react/forbid-prop-types": 0,
+    "consistent-return": 0,
+    "class-methods-use-this": 0,
+
+    // Rules we should eventually enable.
+    "react/require-default-props": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/href-no-hash": 0
+
   },
   "plugins": [
-    "react", "import"
+    "react", "import", "prettier"
   ],
   "settings": {
     "import/parser": "babel-eslint",
     "import/resolve": {
-      moduleDirectory: ["node_modules", "src"]
+      "moduleDirectory": ["node_modules", "src"]
     }
   },
   "globals": {

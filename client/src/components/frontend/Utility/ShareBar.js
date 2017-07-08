@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { TwitterButton, FacebookButton } from 'react-sociable';
-import HigherOrder from 'containers/global/HigherOrder';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { TwitterButton, FacebookButton } from "react-sociable";
+import HigherOrder from "containers/global/HigherOrder";
 
 class ShareBar extends Component {
-
   static displayName = "Utility.ShareBar";
 
   static propTypes = {
@@ -15,7 +14,7 @@ class ShareBar extends Component {
   };
 
   static defaultProps = {
-    label: 'Share'
+    label: "Share"
   };
 
   constructor() {
@@ -29,9 +28,11 @@ class ShareBar extends Component {
     // This won't be run by the server, so set an instance variable here
     // that will be hidden otherwise
     if (this.state.inBrowser === false) {
-      this.setState({ // eslint-disable-line react/no-did-mount-set-state
+      /* eslint-disable react/no-did-mount-set-state */
+      this.setState({
         inBrowser: true
       });
+      /* eslint-enable react/no-did-mount-set-state */
     }
   }
 
@@ -60,9 +61,11 @@ class ShareBar extends Component {
 
     return (
       <nav className="share-nav-primary">
-        { this.props.label ?
-            <span>{this.props.label}</span> : null
-        }
+        {this.props.label
+          ? <span>
+              {this.props.label}
+            </span>
+          : null}
         <ul>
           <li>
             <TwitterButton
@@ -70,22 +73,22 @@ class ShareBar extends Component {
               message={this.message()}
               windowOptions={twitterWindowOptions}
             >
-              <i className="manicon manicon-twitter"></i>
+              <i className="manicon manicon-twitter" />
             </TwitterButton>
           </li>
           {/* Facebook App Id is required for this component to load */}
-          {this.facebookAppId() ?
-            <li>
-              <FacebookButton
-                url={this.url()}
-                appId={this.facebookAppId()}
-                message={this.message()}
-                windowOptions={twitterWindowOptions}
-              >
-                <i className="manicon manicon-facebook"></i>
-              </FacebookButton>
-            </li> : null
-          }
+          {this.facebookAppId()
+            ? <li>
+                <FacebookButton
+                  url={this.url()}
+                  appId={this.facebookAppId()}
+                  message={this.message()}
+                  windowOptions={twitterWindowOptions}
+                >
+                  <i className="manicon manicon-facebook" />
+                </FacebookButton>
+              </li>
+            : null}
           {/*
             Hiding email share button until we have more robust
             functionality for custom mailing

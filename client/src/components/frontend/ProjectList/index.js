@@ -1,8 +1,8 @@
-import Grid from './Grid.js';
-import Filters from './Filters.js';
-import Following from './Following.js';
-import SummaryGrid from './SummaryGrid.js';
-import CoversGrid from './CoversGrid.js';
+import Grid from "./Grid";
+import Filters from "./Filters";
+import Following from "./Following";
+import SummaryGrid from "./SummaryGrid";
+import CoversGrid from "./CoversGrid";
 
 export default {
   Grid,

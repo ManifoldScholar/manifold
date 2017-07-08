@@ -1,11 +1,11 @@
-import Cover from './Cover.js';
-import Detail from './Detail.js';
-import Events from './Events';
-import Meta from './Meta.js';
-import Hero from './Hero.js';
-import Thumbnail from './Thumbnail.js';
-import Follow from './Follow.js';
-import Resources from './Resources.js';
+import Cover from "./Cover";
+import Detail from "./Detail";
+import Events from "./Events";
+import Meta from "./Meta";
+import Hero from "./Hero";
+import Thumbnail from "./Thumbnail";
+import Follow from "./Follow";
+import Resources from "./Resources";
 
 export default {
   Cover,

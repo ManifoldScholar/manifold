@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { ResourceDetailContainer } from '../Detail';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { ResourceDetailContainer } from "../Detail";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Reader Resource Detail Container", () => {
-
   const store = build.store();
   const resource = build.entity.resource("1");
   resource.relationships.project = build.entity.project("2");
@@ -28,9 +27,7 @@ describe("Reader Resource Detail Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <ResourceDetailContainer
-          {...props}
-        />
+        <ResourceDetailContainer {...props} />
       </Provider>
     )
   );
@@ -44,5 +41,4 @@ describe("Reader Resource Detail Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

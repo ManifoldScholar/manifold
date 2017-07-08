@@ -1,9 +1,10 @@
-import ActionCable from 'actioncable';
-import get from 'lodash/get';
-import { websocketActions } from 'actions';
+/* eslint-disable import/no-mutable-exports */
+import ActionCable from "actioncable";
+import get from "lodash/get";
+import { websocketActions } from "actions";
 
-let actionCableMiddleware = ({ dispatch, getState }) => {
-  return (next) => (action) => {
+let actionCableMiddleware = ({ dispatchIgnored, getStateIgnored }) => {
+  return next => action => {
     next(action);
   };
 };
@@ -18,15 +19,15 @@ if (__CLIENT__) {
       connected: () => {
         dispatch(websocketActions.connected(channel));
       },
-      received: (packet) => {
+      received: packet => {
         dispatch(websocketActions.messageReceived(channel, packet));
         if (packet.type === "entity") {
-          const type = 'API_RESPONSE/WEBSOCKET_MODEL_UPDATE';
+          const type = "API_RESPONSE/WEBSOCKET_MODEL_UPDATE";
           dispatch({
             type,
             error: null,
             payload: packet.payload,
-            meta: 'websocket-model-update'
+            meta: "websocket-model-update"
           });
         }
       }
@@ -34,8 +35,7 @@ if (__CLIENT__) {
   };
 
   actionCableMiddleware = ({ dispatch, getState }) => {
-    return (next) => (action) => {
-
+    return next => action => {
       const handledActions = [
         "WEBSOCKET_CONNECT",
         "WEBSOCKET_DISCONNECT",
@@ -44,13 +44,15 @@ if (__CLIENT__) {
 
       if (!handledActions.includes(action.type)) return next(action);
 
-      const token = get(getState(), 'authentication.authToken');
+      const token = get(getState(), "authentication.authToken");
       const { channel, options } = action.payload;
 
       if (action.type === "WEBSOCKET_CONNECT") {
         const conf = Object.assign({}, { channel }, { token }, options);
-        openSubscriptions[channel] =
-          cable.subscriptions.create(conf, socketHandler(dispatch, channel));
+        openSubscriptions[channel] = cable.subscriptions.create(
+          conf,
+          socketHandler(dispatch, channel)
+        );
       }
 
       if (action.type === "WEBSOCKET_DISCONNECT") {
@@ -64,7 +66,6 @@ if (__CLIENT__) {
       }
 
       return next(action);
-
     };
   };
 }

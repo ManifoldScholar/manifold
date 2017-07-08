@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import setter from './setter';
-import isNull from 'lodash/isNull';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import setter from "./setter";
+import isNull from "lodash/isNull";
 
 class FormHiddenInput extends Component {
-
   static displayName = "Form.HiddenInput";
 
   static propTypes = {
@@ -12,19 +11,11 @@ class FormHiddenInput extends Component {
     onChange: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const value = isNull(this.props.value) ? "" : this.props.value;
     return (
       <div className="form-input">
-        <input
-          type="hidden"
-          value={value}
-          onChange={this.props.onChange}
-        />
+        <input type="hidden" value={value} onChange={this.props.onChange} />
       </div>
     );
   }

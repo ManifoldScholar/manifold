@@ -1,4 +1,4 @@
-import Placeholder from './Placeholder.js';
+import Placeholder from "./Placeholder";
 
 export default {
   Placeholder

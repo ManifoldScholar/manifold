@@ -1,22 +1,19 @@
-jest.mock('components/backend/Form/CodeArea');
-import React from 'react';
-import { mount } from 'enzyme';
-import Edit from '../Edit';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+jest.mock("components/backend/Form/CodeArea");
+import React from "react";
+import { mount } from "enzyme";
+import Edit from "../Edit";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend TextDetail Styles Container", () => {
-
   const store = build.store();
   const stylesheet = build.entity.stylesheet("2");
 
   const component = mount(
     wrapWithRouter(
-      <Provider store={store} >
-        <Edit
-          stylesheet={stylesheet}
-        />
+      <Provider store={store}>
+        <Edit stylesheet={stylesheet} />
       </Provider>
     )
   );
@@ -30,5 +27,4 @@ describe("Backend TextDetail Styles Container", () => {
     let tree = component.debug();
     expect(tree).not.toBe(null);
   });
-
 });

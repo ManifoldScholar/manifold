@@ -37,6 +37,7 @@ exports[`Frontend.Layout.Splash component renders correctly 1`] = `
         className="right"
       >
         <img
+          alt=""
           src="/static/images/browse-splash_manifold-devices.png"
         />
       </figure>

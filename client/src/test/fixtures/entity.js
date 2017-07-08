@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import uuid from "uuid";
 
 // Must be constant for comment snapshot 'days ago' rendering
 const commentDate = new Date();
@@ -42,7 +42,6 @@ const metadataProperties = [
 ];
 
 const defaults = {
-
   settings: {
     type: "settings",
     attributes: {
@@ -93,7 +92,7 @@ const defaults = {
         largeLandscape: null,
         original: null
       }
-    },
+    }
   },
 
   project: {
@@ -250,7 +249,7 @@ const defaults = {
       styles: ".manifold-text-section .some-class { font-weight: bold }"
     },
     relationships: {
-      texet: null,
+      texet: null
     }
   },
 
@@ -267,8 +266,9 @@ const defaults = {
     type: "annotations",
     attributes: {
       subject: "Gods, Earths, and 85ers",
-      body: "Hands on your boxes, turn 'em up like seven notches." +
-      " Your Magnavoxes amplify my super conscious.",
+      body:
+        "Hands on your boxes, turn 'em up like seven notches." +
+        " Your Magnavoxes amplify my super conscious.",
       startNode: "some-node",
       endNode: "another-node",
       startChar: 4,

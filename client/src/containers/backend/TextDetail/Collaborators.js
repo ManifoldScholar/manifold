@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Text } from 'components/backend';
-import { textsAPI, requests } from 'api';
-import { Form as FormContainer } from 'containers/backend';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { textsAPI } from "api";
+import { Form as FormContainer } from "containers/backend";
+import { connect } from "react-redux";
 
 export class TextDetailCollaborators extends Component {
-
   static displayName = "TextDetail.Collaborators";
 
   static propTypes = {
@@ -16,13 +14,10 @@ export class TextDetailCollaborators extends Component {
   render() {
     const text = this.props.text;
 
-    return (
-      <FormContainer.Collaborators entity={text} api={textsAPI} />
-    );
+    return <FormContainer.Collaborators entity={text} api={textsAPI} />;
   }
 }
 
-export default connect(
-  TextDetailCollaborators.mapStateToProps
-)(TextDetailCollaborators);
-
+export default connect(TextDetailCollaborators.mapStateToProps)(
+  TextDetailCollaborators
+);

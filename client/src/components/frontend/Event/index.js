@@ -1,7 +1,7 @@
-import AllLink from './AllLink.js';
-import List from './List.js';
-import Teaser from './Teaser.js';
-import Thumbnail from './Thumbnail.js';
+import AllLink from "./AllLink";
+import List from "./List";
+import Teaser from "./Teaser";
+import Thumbnail from "./Thumbnail";
 
 export default {
   AllLink,

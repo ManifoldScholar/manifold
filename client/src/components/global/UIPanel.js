@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
 export default class UIPanel extends Component {
   static propTypes = {
@@ -11,14 +11,14 @@ export default class UIPanel extends Component {
 
   render() {
     const visibilityClass = classNames({
-      'panel-hidden': !this.props.visibility[this.props.id],
-      'panel-visible': this.props.visibility[this.props.id]
+      "panel-hidden": !this.props.visibility[this.props.id],
+      "panel-visible": this.props.visibility[this.props.id]
     });
     return (
-        <div className={visibilityClass}>
-          {/* Second argument as props */}
-          {React.createElement(this.props.bodyComponent, { ...this.props })}
-        </div>
+      <div className={visibilityClass}>
+        {/* Second argument as props */}
+        {React.createElement(this.props.bodyComponent, { ...this.props })}
+      </div>
     );
   }
 }

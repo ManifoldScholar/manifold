@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { passwordsAPI, requests } from 'api';
-import { entityStoreActions, notificationActions } from 'actions';
-import get from 'lodash/get';
-import pull from 'lodash/pull';
-import { Form } from 'components/backend';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { passwordsAPI, requests } from "api";
+import { entityStoreActions, notificationActions } from "actions";
+import get from "lodash/get";
+import pull from "lodash/pull";
+import { Form } from "components/backend";
+
 const { request, flush } = entityStoreActions;
 
 class PasswordForgotContainer extends Component {
-
   static displayName = "PasswordForgotContainer";
 
   static propTypes = {
@@ -20,17 +20,17 @@ class PasswordForgotContainer extends Component {
     response: PropTypes.object
   };
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state, ownPropsIgnored) {
     return {
-      response: get(state.entityStore.responses, 'request-reset-password')
+      response: get(state.entityStore.responses, "request-reset-password")
     };
   }
 
-  constructor(props) {
+  constructor(propsIgnored) {
     super();
     this.state = {
       submitted: false,
-      email: '',
+      email: "",
       errors: []
     };
     this.clientErrorHandler = this.clientErrorHandler.bind(this);
@@ -64,12 +64,15 @@ class PasswordForgotContainer extends Component {
   createSuccessNotification() {
     const notification = {
       level: 0,
-      id: 'PASSWORD_RESET_SENT',
-      heading: `Email sent to ${this.state.email} with instructions to reset your password.`
+      id: "PASSWORD_RESET_SENT",
+      heading: `Email sent to ${this.state
+        .email} with instructions to reset your password.`
     };
     this.props.dispatch(notificationActions.addNotification(notification));
     setTimeout(() => {
-      this.props.dispatch(notificationActions.removeNotification(notification.id));
+      this.props.dispatch(
+        notificationActions.removeNotification(notification.id)
+      );
     }, 5000);
   }
 
@@ -101,7 +104,7 @@ class PasswordForgotContainer extends Component {
   render() {
     return (
       <div>
-        <form method="" onSubmit={(event) => this.handleSubmit(event)}>
+        <form method="" onSubmit={event => this.handleSubmit(event)}>
           <div className="row-1-p">
             <div className="form-input form-error">
               <label>Email</label>
@@ -111,7 +114,7 @@ class PasswordForgotContainer extends Component {
                 errorHandler={this.clientErrorHandler}
                 validation={["required"]}
                 name="email"
-                onChange={(event) => this.handleInputChange(event)}
+                onChange={event => this.handleInputChange(event)}
               >
                 <input
                   value={this.state.email}
@@ -135,10 +138,10 @@ class PasswordForgotContainer extends Component {
         </form>
         <p className="login-links">
           <a href="#" onClick={this.props.showLogin} data-id="show-login">
-            {'Remember your password?'}
+            {"Remember your password?"}
           </a>
           <a href="#" onClick={this.props.showCreate} data-id="show-create">
-            {'Need to sign up?'}
+            {"Need to sign up?"}
           </a>
         </p>
       </div>

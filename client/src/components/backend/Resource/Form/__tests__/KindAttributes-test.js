@@ -1,20 +1,16 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import KindAttributes from '../KindAttributes';
+import React from "react";
+import renderer from "react-test-renderer";
+import KindAttributes from "../KindAttributes";
 
 describe("Backend.Resource.Form.KindAttributes component", () => {
-
   function getModelValue(kind) {
     return kind;
   }
 
   describe("when kind is audio", () => {
-
-    it('renders correctly', () => {
+    it("renders correctly", () => {
       const component = renderer.create(
-        <KindAttributes
-          getModelValue={() => getModelValue("image")}
-        />
+        <KindAttributes getModelValue={() => getModelValue("image")} />
       );
       let tree = component.toJSON();
       expect(tree).toMatchSnapshot();
@@ -128,4 +124,3 @@ describe("Backend.Resource.Form.KindAttributes component", () => {
   //   });
   // });
 });
-

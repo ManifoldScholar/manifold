@@ -1,23 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Toc } from 'components/reader';
-import Utility from 'components/global/Utility';
-import classNames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Toc } from "components/reader";
+import Utility from "components/global/Utility";
+import classNames from "classnames";
 
 export default class TocDrawer extends Component {
-
   static propTypes = {
     // TOC Drawer gets text, simply to pass on to the TOC component
     text: PropTypes.object,
     visible: PropTypes.bool,
-    hideTocDrawer: PropTypes.func,
+    hideTocDrawer: PropTypes.func
   };
 
   render() {
     const drawerClass = classNames({
-      'toc-drawer': true,
-      'drawer-hidden': !this.props.visible,
-      'drawer-visible': this.props.visible
+      "toc-drawer": true,
+      "drawer-hidden": !this.props.visible,
+      "drawer-visible": this.props.visible
     });
     return (
       <Utility.EdgeLockScroll>

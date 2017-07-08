@@ -1,22 +1,19 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Ingestion } from 'components/backend';
-import { renderRoutes } from 'helpers/routing';
-import { stylesheetsAPI, requests } from 'api';
-import { select } from 'utils/entityUtils';
-import { Form } from 'components/backend';
-import lh from 'helpers/linkHandler';
-import { Link, Redirect } from 'react-router-dom';
-import { Form as FormContainer } from 'containers/backend';
-import { entityStoreActions } from 'actions';
-import has from 'lodash/has';
-import get from 'lodash/get';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { stylesheetsAPI, requests } from "api";
+import { select } from "utils/entityUtils";
+import { Form } from "components/backend";
+import lh from "helpers/linkHandler";
+import { Link, Redirect } from "react-router-dom";
+import { Form as FormContainer } from "containers/backend";
+import { entityStoreActions } from "actions";
+import has from "lodash/has";
+import get from "lodash/get";
 
 const { request } = entityStoreActions;
 
 export class StylesheetEdit extends PureComponent {
-
   static displayName = "Stylesheet.Edit";
 
   static fetchData(getState, dispatch, location, match) {
@@ -34,6 +31,9 @@ export class StylesheetEdit extends PureComponent {
   }
 
   static propTypes = {
+    match: PropTypes.object,
+    refresh: PropTypes.func,
+    stylesheet: PropTypes.object
   };
 
   constructor(props) {
@@ -42,17 +42,21 @@ export class StylesheetEdit extends PureComponent {
     this.state = { redirect: null };
   }
 
-  create = (attributes) => {
-    return stylesheetsAPI.create(this.props.match.params.id, attributes);
-  };
-
-  onSuccess = (stylesheet) => {
+  onSuccess = stylesheet => {
     const { params } = this.props.match;
     if (stylesheet) {
-      const redirect = lh.link("BackendTextStylesheetEdit", params.id, stylesheet.id);
+      const redirect = lh.link(
+        "BackendTextStylesheetEdit",
+        params.id,
+        stylesheet.id
+      );
       this.setState({ redirect });
     }
     this.props.refresh();
+  };
+
+  create = attributes => {
+    return stylesheetsAPI.create(this.props.match.params.id, attributes);
   };
 
   renderEdit(isNew) {
@@ -65,19 +69,12 @@ export class StylesheetEdit extends PureComponent {
             <header>
               <h4 className="category-title highlight">
                 <Link to={lh.link("backendTextStyles", params.id)}>
-                  {'Stylesheets / '}
+                  {"Stylesheets / "}
                 </Link>
-                { isNew ?
-                  " New"
-                  : get(stylesheet, "attributes.name")
-                }
+                {isNew ? " New" : get(stylesheet, "attributes.name")}
               </h4>
             </header>
-            { isNew ?
-              this.renderForm()
-              :
-              this.renderForm(this.props.stylesheet)
-            }
+            {isNew ? this.renderForm() : this.renderForm(this.props.stylesheet)}
           </div>
         </section>
       </div>
@@ -99,14 +96,13 @@ export class StylesheetEdit extends PureComponent {
         >
           <div className="form-input">
             <p className="instructions">
-              { stylesheet && stylesheet.attributes.ingested ?
-                'This stylesheet was ingested as part of the source document. You may ' +
-                'make changes to it. However, if the source document is reingested, ' +
-                'those changes will be lost. If you\'d like to add styles to this ' +
-                'text consider creating a new, supplemental stylesheet rather than ' +
-                'modifying this one.'
-                : null
-              }
+              {stylesheet && stylesheet.attributes.ingested
+                ? "This stylesheet was ingested as part of the source document. You may " +
+                  "make changes to it. However, if the source document is reingested, " +
+                  "those changes will be lost. If you'd like to add styles to this " +
+                  "text consider creating a new, supplemental stylesheet rather than " +
+                  "modifying this one."
+                : null}
             </p>
           </div>
           <Form.TextInput
@@ -125,8 +121,10 @@ export class StylesheetEdit extends PureComponent {
             label="Validated Styles"
             name="attributes[styles]"
             mode="css"
-            instructions={"The following input is read-only. It contains the validated " +
-            "styles that are included in the reader for this text."}
+            instructions={
+              "The following input is read-only. It contains the validated " +
+              "styles that are included in the reader for this text."
+            }
             readOnly
           />
           <Form.Save
@@ -139,17 +137,12 @@ export class StylesheetEdit extends PureComponent {
   }
 
   render() {
-
     if (this.state.redirect) {
-      return (
-        <Redirect
-          to={this.state.redirect}
-        />
-      );
+      return <Redirect to={this.state.redirect} />;
     }
 
     const { params } = this.props.match;
-    const isNew = !has(params, 'stylesheet');
+    const isNew = !has(params, "stylesheet");
     return this.renderEdit(isNew);
   }
 }

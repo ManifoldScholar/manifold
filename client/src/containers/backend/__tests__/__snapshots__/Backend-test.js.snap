@@ -8,7 +8,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
         <SideEffect(BodyClass) className=\\"backend bg-neutral90\\">
           <BodyClass className=\\"backend bg-neutral90\\">
             <div>
-              <ScrollAware threshold={200} throttle={500} topClass=\\"top\\" notTopClass=\\"not-top\\">
+              <ScrollAware threshold={200} topClass=\\"top\\" notTopClass=\\"not-top\\">
                 <div className=\\"scroll-aware top\\">
                   <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} notifications={{...}} commonActions={{...}} settings={[undefined]} scrollAware={{...}}>
                     <header className=\\"header-app dark\\">
@@ -165,7 +165,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                         <li>
                           <ul>
                             <li>
-                              <a target=\\"_blank\\" href=\\"http://twitter.com/manifoldscholar\\">
+                              <a target=\\"_blank\\" rel=\\"noopener noreferrer\\" href=\\"http://twitter.com/manifoldscholar\\">
                                 Twitter
                               </a>
                             </li>

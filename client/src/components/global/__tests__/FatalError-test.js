@@ -1,10 +1,9 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import FatalError from '../FatalError';
+import React from "react";
+import renderer from "react-test-renderer";
+import FatalError from "../FatalError";
 
 describe("Global.FatalError component", () => {
-
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       <FatalError
         error={{
@@ -17,6 +16,4 @@ describe("Global.FatalError component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });
-

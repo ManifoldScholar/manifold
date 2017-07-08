@@ -1,9 +1,8 @@
 export default {
-
   index(filter = {}) {
     return {
-      endpoint: '/api/v1/subjects',
-      method: 'GET',
+      endpoint: "/api/v1/subjects",
+      method: "GET",
       options: {
         params: { filter }
       }
@@ -13,9 +12,8 @@ export default {
   show(id) {
     return {
       endpoint: `/api/v1/subjects/${id}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   },
 
@@ -23,11 +21,10 @@ export default {
     const filter = { featured: true };
     return {
       endpoint: `/api/v1/subjects/`,
-      method: 'GET',
+      method: "GET",
       options: {
         params: { filter }
       }
     };
   }
-
 };

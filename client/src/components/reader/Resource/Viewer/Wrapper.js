@@ -1,10 +1,8 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import throttle from 'lodash/throttle';
-import { Resource } from 'components/reader';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Resource } from "components/reader";
 
 export default class ResourceViewerWrapper extends PureComponent {
-
   static displayName = "ResourceViewer.Wrapper";
 
   static propTypes = {
@@ -13,7 +11,7 @@ export default class ResourceViewerWrapper extends PureComponent {
     bodySelector: PropTypes.string,
     containerSize: PropTypes.number,
     sectionId: PropTypes.string,
-    textId: PropTypes.string,
+    textId: PropTypes.string
   };
 
   constructor() {
@@ -22,6 +20,14 @@ export default class ResourceViewerWrapper extends PureComponent {
       markers: []
     };
     this.resourceMarkers = this.resourceMarkers.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateMarkers(this.props);
+    this.height = this.bodyNodeHeight();
+    this.timer = setInterval(() => {
+      this.updateIfHeightChanged();
+    }, 500);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,24 +39,16 @@ export default class ResourceViewerWrapper extends PureComponent {
     return this.propsChanged(this.props, nextProps);
   }
 
+  componentWillUnmount() {
+    window.clearInterval(this.timer);
+  }
+
   propsChanged(props, nextProps) {
     const compare = Object.keys(ResourceViewerWrapper.propTypes);
-    const changed = compare.find((k) => {
+    const changed = compare.find(k => {
       return props[k] !== nextProps[k];
     });
     return changed !== undefined;
-  }
-
-  componentDidMount() {
-    this.updateMarkers(this.props);
-    this.height = this.bodyNodeHeight();
-    this.timer = setInterval(() => {
-      this.updateIfHeightChanged();
-    }, 500);
-  }
-
-  componentWillUnmount() {
-    window.clearInterval(this.timer);
   }
 
   updateIfHeightChanged() {
@@ -77,10 +75,10 @@ export default class ResourceViewerWrapper extends PureComponent {
   resourceMarkers(props) {
     const markers = [];
     const body = this.bodyNode();
-    const markerNodes = body.querySelectorAll('[data-annotation-resource]');
-    [...markerNodes].forEach((markerNode) => {
-      const annotationId = markerNode.getAttribute('data-annotation-resource');
-      const annotation = props.annotations.find((a) => a.id === annotationId);
+    const markerNodes = body.querySelectorAll("[data-annotation-resource]");
+    [...markerNodes].forEach(markerNode => {
+      const annotationId = markerNode.getAttribute("data-annotation-resource");
+      const annotation = props.annotations.find(a => a.id === annotationId);
       if (annotation) {
         const resourceId = annotation.attributes.resourceId;
         const rect = markerNode.getBoundingClientRect();

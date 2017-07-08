@@ -1,9 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import InputError from '../InputError';
+import React from "react";
+import renderer from "react-test-renderer";
+import InputError from "../InputError";
 
 describe("Global.Form.InputError component", () => {
-
   const error = {
     detail: "can't be blank",
     source: {
@@ -11,12 +10,8 @@ describe("Global.Form.InputError component", () => {
     }
   };
 
-  it('renders correctly', () => {
-    const component = renderer.create(
-      <InputError
-        errors={[error]}
-      />
-    );
+  it("renders correctly", () => {
+    const component = renderer.create(<InputError errors={[error]} />);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

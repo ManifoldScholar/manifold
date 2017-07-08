@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class ResourceListSlideFigureLoading extends Component {
-
   static displayName = "ResourceList.Slide.Loading";
 
   static propTypes = {
@@ -12,26 +11,26 @@ export default class ResourceListSlideFigureLoading extends Component {
   componentDidMount() {
     if (!this._figure) return null;
     const parentWidth = this._figure.parentNode.offsetWidth;
-    this._figure.style.width = parentWidth + 'px';
+    this._figure.style.width = parentWidth + "px";
   }
 
   render() {
     return (
       <figure>
         <div
-          ref={ (c) => {
+          ref={c => {
             this._figure = c;
-          } }
+          }}
           className="figure-default"
-          style={ { backgroundImage: 'url(/static/images/resource-splash.png)' } }
+          style={{ backgroundImage: "url(/static/images/resource-splash.png)" }}
         >
           <div className="resource-info">
-            <i className={`manicon manicon-resource-file`}></i>
+            <i className={`manicon manicon-resource-file`} />
             <span className="resource-type">
-              {'loading'}
+              {"loading"}
             </span>
             <span className="resource-date">
-              {'loading'}
+              {"loading"}
             </span>
           </div>
         </div>

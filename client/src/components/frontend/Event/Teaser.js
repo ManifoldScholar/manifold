@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Body from './Body/';
-import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Body from "./Body/";
+import classNames from "classnames";
 
 export default class Teaser extends Component {
-
   static displayName = "Event.Teaser";
 
   static propTypes = {
@@ -18,23 +16,23 @@ export default class Teaser extends Component {
   };
 
   getPromptByType(type) {
-    let output = '';
+    let output = "";
 
     switch (type) {
-      case 'ANNOTATION_CREATED':
-        output = 'Keep Reading';
+      case "ANNOTATION_CREATED":
+        output = "Keep Reading";
         break;
-      case 'TWEET':
-        output = 'View Tweet';
+      case "TWEET":
+        output = "View Tweet";
         break;
-      case 'RESOURCE_ADDED':
-        output = 'View Resource';
+      case "RESOURCE_ADDED":
+        output = "View Resource";
         break;
-      case 'TEXT_ADDED':
-        output = 'Start Reading';
+      case "TEXT_ADDED":
+        output = "Start Reading";
         break;
       default:
-        output = 'View More';
+        output = "View More";
     }
 
     return output;
@@ -42,11 +40,11 @@ export default class Teaser extends Component {
 
   getEventIcon(type) {
     const eventIconMap = {
-      ANNOTATION_ADDED: 'person-word-bubble',
-      PROJECT_CREATED: 'egg',
-      RESOURCE_ADDED: 'cube-shine',
-      TEXT_ADDED: 'book-opening',
-      TWEET: 'twitter'
+      ANNOTATION_ADDED: "person-word-bubble",
+      PROJECT_CREATED: "egg",
+      RESOURCE_ADDED: "cube-shine",
+      TEXT_ADDED: "book-opening",
+      TWEET: "twitter"
     };
 
     return eventIconMap[type];
@@ -55,14 +53,14 @@ export default class Teaser extends Component {
   getEventBody(type) {
     let component = false;
     switch (type) {
-      case 'ANNOTATION_CREATED':
+      case "ANNOTATION_CREATED":
         component = Body.Quoted;
         break;
-      case 'TWEET':
+      case "TWEET":
         component = Body.Attributable;
         break;
-      case 'RESOURCE_ADDED':
-      case 'TEXT_ADDED':
+      case "RESOURCE_ADDED":
+      case "TEXT_ADDED":
         component = Body.Added;
         break;
       default:
@@ -78,8 +76,8 @@ export default class Teaser extends Component {
     const EventBody = this.getEventBody(attr.eventType);
 
     const eventWrapperClass = classNames({
-      'event-tile': true,
-      tweet: attr.eventType === 'TWEET'
+      "event-tile": true,
+      tweet: attr.eventType === "TWEET"
     });
 
     const eventWrapperProps = {
@@ -88,24 +86,27 @@ export default class Teaser extends Component {
 
     let eventPrompt = false;
 
-    const eventLinked = attr.eventUrl ? true : false;
+    const eventLinked = !!attr.eventUrl;
     if (eventLinked) {
       eventPrompt = (
         <a target="_blank" href={this.props.event.attributes.eventUrl}>
           {this.getPromptByType(attr.eventType)}
-          <i className="manicon manicon-arrow-long-right"></i>
+          <i className="manicon manicon-arrow-long-right" />
         </a>
       );
     }
 
     return (
       <div {...eventWrapperProps}>
-        <EventBody event={this.props.event} icon={this.getEventIcon(attr.eventType)} />
-        { this.props.showLink ?
-          <div className="event-prompt">
-            {eventPrompt}
-          </div>
-        : null }
+        <EventBody
+          event={this.props.event}
+          icon={this.getEventIcon(attr.eventType)}
+        />
+        {this.props.showLink
+          ? <div className="event-prompt">
+              {eventPrompt}
+            </div>
+          : null}
       </div>
     );
   }

@@ -1,5 +1,5 @@
-import Thumbnail from './Thumbnail.js';
-import Detail from './Detail.js';
+import Thumbnail from "./Thumbnail";
+import Detail from "./Detail";
 
 export default {
   Thumbnail,

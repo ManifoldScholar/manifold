@@ -1,21 +1,18 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import ProjectPanelGeneral from '../General';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import { mount } from "enzyme";
+import ProjectPanelGeneral from "../General";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend ProjectDetail General Container", () => {
-
   const store = build.store();
   const project = build.entity.project("1");
 
   const component = mount(
     wrapWithRouter(
-      <Provider store={store} >
-        <ProjectPanelGeneral
-          project={project}
-        />
+      <Provider store={store}>
+        <ProjectPanelGeneral project={project} />
       </Provider>
     )
   );
@@ -29,5 +26,4 @@ describe("Backend ProjectDetail General Container", () => {
     let tree = component.debug();
     expect(tree).not.toBe(null);
   });
-
 });

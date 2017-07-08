@@ -1,11 +1,9 @@
 export default {
-
   destroy(id) {
     return {
       endpoint: `/api/v1/events/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
   }
-
 };

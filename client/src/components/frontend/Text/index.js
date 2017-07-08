@@ -1,4 +1,4 @@
-import Thumbnail from './Thumbnail.js';
+import Thumbnail from "./Thumbnail";
 
 export default {
   Thumbnail

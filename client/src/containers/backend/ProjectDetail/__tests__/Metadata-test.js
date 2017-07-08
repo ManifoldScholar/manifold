@@ -1,21 +1,18 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import ProjectDetailMetadata from '../Metadata';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import ProjectDetailMetadata from "../Metadata";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend ProjectDetail Metadata Container", () => {
-
   const store = build.store();
   const project = build.entity.project("1");
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
-        <ProjectDetailMetadata
-          project={project}
-        />
+      <Provider store={store}>
+        <ProjectDetailMetadata project={project} />
       </Provider>
     )
   );
@@ -29,5 +26,4 @@ describe("Backend ProjectDetail Metadata Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

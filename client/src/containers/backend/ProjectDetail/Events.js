@@ -1,29 +1,32 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Event, List, Dialog } from 'components/backend';
-import { entityStoreActions } from 'actions';
-import { select, meta } from 'utils/entityUtils';
-import { projectsAPI, eventsAPI, requests } from 'api';
-import { connect } from 'react-redux';
-import get from 'lodash/get';
-import config from '../../../config';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Event, List, Dialog } from "components/backend";
+import { entityStoreActions } from "actions";
+import { select, meta } from "utils/entityUtils";
+import { projectsAPI, eventsAPI, requests } from "api";
+import { connect } from "react-redux";
+import get from "lodash/get";
+import config from "../../../config";
 
 const { request } = entityStoreActions;
 const perPage = 6;
 
 export class ProjectDetailEvents extends PureComponent {
-
   static displayName = "ProjectDetail.Events";
 
   static mapStateToProps(state) {
     return {
       events: select(requests.beEvents, state.entityStore),
-      eventsMeta: meta(requests.beEvents, state.entityStore),
+      eventsMeta: meta(requests.beEvents, state.entityStore)
     };
   }
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    events: PropTypes.array,
+    eventsMeta: PropTypes.object,
+    refresh: PropTypes.func,
+    dispatch: PropTypes.func
   };
 
   constructor(props) {
@@ -47,8 +50,8 @@ export class ProjectDetailEvents extends PureComponent {
   }
 
   maybeReload(nextMakersMeta) {
-    const currentModified = get(this.props, 'eventsMeta.modified');
-    const nextModified = get(nextMakersMeta, 'modified');
+    const currentModified = get(this.props, "eventsMeta.modified");
+    const nextModified = get(nextMakersMeta, "modified");
     if (!nextModified) return;
     if (currentModified && nextModified) return;
     this.fetchEvents(this.lastFetchedPage);
@@ -77,10 +80,15 @@ export class ProjectDetailEvents extends PureComponent {
       this.setState({
         confirmation: { resolve, reject, heading, message }
       });
-    }).then(() => {
-      this.destroyEvent(event);
-      this.closeDialog();
-    }, () => { this.closeDialog(); });
+    }).then(
+      () => {
+        this.destroyEvent(event);
+        this.closeDialog();
+      },
+      () => {
+        this.closeDialog();
+      }
+    );
   }
 
   destroyEvent(event) {
@@ -101,7 +109,7 @@ export class ProjectDetailEvents extends PureComponent {
   }
 
   pageChangeHandlerCreator(page) {
-    return (event) => {
+    return event => {
       this.handleUsersPageChange(event, page);
     };
   }
@@ -113,14 +121,12 @@ export class ProjectDetailEvents extends PureComponent {
 
     return (
       <section>
-        {
-          this.state.confirmation ?
-            <Dialog.Confirm {...this.state.confirmation} />
-            : null
-        }
+        {this.state.confirmation
+          ? <Dialog.Confirm {...this.state.confirmation} />
+          : null}
         <header className="section-heading-secondary">
           <h3>
-            {'Events'} <i className="manicon manicon-bugle"></i>
+            {"Events"} <i className="manicon manicon-bugle" />
           </h3>
         </header>
         <List.Searchable
@@ -138,7 +144,6 @@ export class ProjectDetailEvents extends PureComponent {
               options: project.attributes.eventTypes,
               labels: config.app.locale.event_types
             }
-
           }}
         />
       </section>
@@ -146,7 +151,6 @@ export class ProjectDetailEvents extends PureComponent {
   }
 }
 
-export default connect(
-  ProjectDetailEvents.mapStateToProps
-)(ProjectDetailEvents);
-
+export default connect(ProjectDetailEvents.mapStateToProps)(
+  ProjectDetailEvents
+);

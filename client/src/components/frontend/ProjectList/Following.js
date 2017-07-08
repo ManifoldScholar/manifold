@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { ProjectList, Layout } from 'components/frontend';
-import size from 'lodash/size';
-import union from 'lodash/union';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { ProjectList, Layout } from "components/frontend";
+import size from "lodash/size";
+import union from "lodash/union";
 
 export default class ProjectListFollowing extends Component {
-
   static displayName = "ProjectList.Following";
 
   static propTypes = {
@@ -25,7 +24,7 @@ export default class ProjectListFollowing extends Component {
       return union(memo, favorite.attributes.subjectIds);
     }, []);
 
-    return subjects.filter((subject) => {
+    return subjects.filter(subject => {
       return subjectIds.indexOf(subject.id) > -1;
     });
   }
@@ -33,14 +32,15 @@ export default class ProjectListFollowing extends Component {
   render() {
     const currentUser = this.props.authentication.currentUser;
     if (!currentUser) return null;
-    if (!currentUser.favorites || size(currentUser.favorites) <= 0) return <Layout.NoFollow />;
+    if (!currentUser.favorites || size(currentUser.favorites) <= 0)
+      return <Layout.NoFollow />;
     return (
       <section className="bg-neutral05">
         <div className="container">
           <header className="section-heading utility-right">
             <h4 className="title">
-              <i className="manicon manicon-books-with-glasses"></i>
-              {'Projects You\'re Following'}
+              <i className="manicon manicon-books-with-glasses" />
+              {"Projects You're Following"}
             </h4>
             <div className="section-heading-utility-right">
               <ProjectList.Filters
@@ -49,14 +49,14 @@ export default class ProjectListFollowing extends Component {
               />
             </div>
           </header>
-          { this.props.followedProjects ?
-            <ProjectList.Grid
-              authenticated={this.props.authentication.authenticated}
-              favorites={this.props.authentication.currentUser.favorites}
-              dispatch={this.props.dispatch}
-              projects={this.props.followedProjects}
-            /> : null
-          }
+          {this.props.followedProjects
+            ? <ProjectList.Grid
+                authenticated={this.props.authentication.authenticated}
+                favorites={this.props.authentication.currentUser.favorites}
+                dispatch={this.props.dispatch}
+                projects={this.props.followedProjects}
+              />
+            : null}
         </div>
       </section>
     );

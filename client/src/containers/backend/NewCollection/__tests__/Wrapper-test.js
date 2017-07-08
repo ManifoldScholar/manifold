@@ -1,15 +1,14 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { NewCollectionWrapperContainer } from '../Wrapper';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { NewCollectionWrapperContainer } from "../Wrapper";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend NewCollection Wrapper Container", () => {
-
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={build.store()} >
+      <Provider store={build.store()}>
         <NewCollectionWrapperContainer
           match={{
             params: {
@@ -30,5 +29,4 @@ describe("Backend NewCollection Wrapper Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

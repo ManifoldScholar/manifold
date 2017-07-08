@@ -1,18 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import classNames from 'classnames';
-import { isPromise } from 'utils/promise';
-import { Form as GlobalForm } from 'components/global';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { isPromise } from "utils/promise";
+import { Form as GlobalForm } from "components/global";
 
 export default class AnnotationSelectionEditor extends PureComponent {
-
   static displayName = "Annotation.Selection.Editor";
 
   static propTypes = {
     id: PropTypes.string,
     body: PropTypes.string,
-    isPrivate: PropTypes.bool,
+    private: PropTypes.bool,
     subject: PropTypes.string.isRequired,
     startNode: PropTypes.string.isRequired,
     startChar: PropTypes.number.isRequired,
@@ -22,7 +20,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
     saveHandler: PropTypes.func.isRequired,
     closeOnSave: PropTypes.bool,
     addsTo: PropTypes.string
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -59,7 +57,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
       endChar,
       body,
       // eslint-disable-next-line quote-props
-      "private": isPrivate,
+      private: isPrivate,
       format: "annotation"
     };
     if (this.props.id) annotation.id = this.props.id;
@@ -67,11 +65,14 @@ export default class AnnotationSelectionEditor extends PureComponent {
     if (this.props.addsTo) options.addsTo = this.props.addsTo;
     const promise = this.props.saveHandler(annotation, options);
     if (isPromise(promise)) {
-      promise.then(() => {
-        this.props.cancel();
-      }, (response) => {
-        this.handleErrors(response.body.errors);
-      });
+      promise.then(
+        () => {
+          this.props.cancel();
+        },
+        response => {
+          this.handleErrors(response.body.errors);
+        }
+      );
     }
   }
 
@@ -86,7 +87,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
     }
   }
 
-  handlePrivacyChange(event) {
+  handlePrivacyChange(eventIgnored) {
     const value = !this.state.isPrivate;
     this.setState({ isPrivate: value });
   }
@@ -96,12 +97,9 @@ export default class AnnotationSelectionEditor extends PureComponent {
   }
 
   render() {
-
-    const checkClass = classNames(
-      'form-toggle',
-      'checkbox',
-      { checked: this.state.isPrivate }
-    );
+    const checkClass = classNames("form-toggle", "checkbox", {
+      checked: this.state.isPrivate
+    });
 
     return (
       <div className="annotation-editor">
@@ -111,16 +109,18 @@ export default class AnnotationSelectionEditor extends PureComponent {
             errors={this.state.errors}
           >
             <textarea
-              ref={(ci) => { this.ci = ci; }}
+              ref={ci => {
+                this.ci = ci;
+              }}
               style={{ width: "100%" }}
-              placeholder={'Annotate this passage...'}
+              placeholder={"Annotate this passage..."}
               onChange={this.handleBodyChange}
               value={this.state.body}
             />
           </GlobalForm.Errorable>
           <div className="utility">
             <div className="form-input">
-              <label className={checkClass} >
+              <label className={checkClass}>
                 <input
                   type="checkbox"
                   name="isPrivate"
@@ -129,8 +129,8 @@ export default class AnnotationSelectionEditor extends PureComponent {
                   onChange={this.handlePrivacyChange}
                 />
                 <span className="toggle-indicator">
-                <i className="manicon manicon-check-bold"></i>
-              </span>
+                  <i className="manicon manicon-check-bold" />
+                </span>
                 <span className="toggle-label">This Annotation is Private</span>
               </label>
             </div>
@@ -141,18 +141,13 @@ export default class AnnotationSelectionEditor extends PureComponent {
               >
                 Cancel
               </button>
-              <button
-                className="button-secondary"
-                disabled={!this.state.body}
-              >
+              <button className="button-secondary" disabled={!this.state.body}>
                 Save
               </button>
             </div>
           </div>
-
         </form>
       </div>
     );
   }
-
 }

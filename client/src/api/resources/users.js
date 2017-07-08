@@ -1,17 +1,16 @@
 export default {
-
   whoami() {
     return {
-      endpoint: '/api/v1/users/whoami',
-      method: 'GET',
+      endpoint: "/api/v1/users/whoami",
+      method: "GET",
       options: {}
     };
   },
 
   index(filter = {}, page = {}) {
     return {
-      endpoint: '/api/v1/users',
-      method: 'GET',
+      endpoint: "/api/v1/users",
+      method: "GET",
       options: {
         params: { filter, page }
       }
@@ -21,7 +20,7 @@ export default {
   update(id, user) {
     return {
       endpoint: `/api/v1/users/${id}`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "user", data: user })
       }
@@ -31,17 +30,15 @@ export default {
   show(id) {
     return {
       endpoint: `/api/v1/users/${id}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   },
 
-
   create(user) {
     return {
-      endpoint: '/api/v1/users',
-      method: 'POST',
+      endpoint: "/api/v1/users",
+      method: "POST",
       options: {
         body: JSON.stringify({ type: "user", data: { attributes: user } })
       }
@@ -51,9 +48,8 @@ export default {
   destroy(id) {
     return {
       endpoint: `/api/v1/users/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
   }
-
 };

@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export default class UtilityBackLinkPrimary extends Component {
-
   static displayName = "Utility.BackLinkPrimary";
 
   static defaultProps = {
-    backText: 'Back to Project'
+    backText: "Back to Project"
   };
 
   static propTypes = {
@@ -20,11 +19,11 @@ export default class UtilityBackLinkPrimary extends Component {
     return (
       <Link to={this.props.link} className="back-link-primary full">
         <div className="container flush">
-          <i className="manicon manicon-arrow-left"></i>
+          <i className="manicon manicon-arrow-left" />
           {this.props.backText}
-            <span>
-              {this.props.title}
-            </span>
+          <span>
+            {this.props.title}
+          </span>
         </div>
       </Link>
     );

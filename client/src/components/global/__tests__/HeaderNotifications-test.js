@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import renderer from 'react-test-renderer';
-import TestUtils from 'react-dom/test-utils';
-import HeaderNotifications from '../HeaderNotifications';
+import React from "react";
+import ReactDOM from "react-dom";
+import renderer from "react-test-renderer";
+import TestUtils from "react-dom/test-utils";
+import HeaderNotifications from "../HeaderNotifications";
 
 const props = {
   addNotification: () => {},
@@ -36,21 +36,18 @@ function setup() {
   };
 }
 
-describe('Global.HeaderNotifications component', () => {
-
-  it('renders correctly', () => {
-    const component = renderer.create(
-      <HeaderNotifications
-        {...props}
-      />
-    );
+describe("Global.HeaderNotifications component", () => {
+  it("renders correctly", () => {
+    const component = renderer.create(<HeaderNotifications {...props} />);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('should not render scoped notifications', () => {
+  it("should not render scoped notifications", () => {
     const { output } = setup();
-    let listDOM = ReactDOM.findDOMNode(output.refs.notificationList);
-    expect(listDOM.querySelectorAll('.header-notification-container').length).toBe(1);
+    let listDOM = ReactDOM.findDOMNode(output.notificationList);
+    expect(
+      listDOM.querySelectorAll(".header-notification-container").length
+    ).toBe(1);
   });
 });

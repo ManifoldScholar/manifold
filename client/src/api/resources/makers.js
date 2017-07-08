@@ -1,9 +1,8 @@
 export default {
-
   index(filter = {}, page = {}) {
     return {
-      endpoint: '/api/v1/makers',
-      method: 'GET',
+      endpoint: "/api/v1/makers",
+      method: "GET",
       options: {
         params: { filter, page }
       }
@@ -12,8 +11,8 @@ export default {
 
   create(maker) {
     return {
-      endpoint: '/api/v1/makers',
-      method: 'POST',
+      endpoint: "/api/v1/makers",
+      method: "POST",
       options: {
         body: JSON.stringify({ type: "makers", data: maker })
       }
@@ -23,7 +22,7 @@ export default {
   update(id, maker) {
     return {
       endpoint: `/api/v1/makers/${id}`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "maker", data: maker })
       }
@@ -33,18 +32,16 @@ export default {
   show(id) {
     return {
       endpoint: `/api/v1/makers/${id}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   },
 
   destroy(id) {
     return {
       endpoint: `/api/v1/makers/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
   }
-
 };

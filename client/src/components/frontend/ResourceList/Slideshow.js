@@ -1,20 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
-import includes from 'lodash/includes';
-import { ResourceList } from 'components/frontend';
-import { collectionsAPI, requests } from 'api';
-import { entityStoreActions } from 'actions';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import includes from "lodash/includes";
+import { ResourceList } from "components/frontend";
+import { collectionsAPI, requests } from "api";
+import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;
 
 export default class ResourceListSlideshow extends PureComponent {
-
   static displayName = "ResourceList.Slideshow";
 
   static propTypes = {
     collectionResources: PropTypes.array,
-    count: PropTypes.number,
     pagination: PropTypes.object,
     dispatch: PropTypes.func,
     collectionId: PropTypes.string
@@ -31,7 +29,10 @@ export default class ResourceListSlideshow extends PureComponent {
       map: {},
       totalCount: 0
     };
-    this.state.map = this.buildNewMap(props.collectionResources, props.pagination);
+    this.state.map = this.buildNewMap(
+      props.collectionResources,
+      props.pagination
+    );
     this.state.totalCount = props.pagination.totalCount || 0;
 
     this.current = this.current.bind(this);
@@ -46,11 +47,7 @@ export default class ResourceListSlideshow extends PureComponent {
   }
 
   componentDidMount() {
-    document.addEventListener('keyup', this.bindKeyboard, false);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keyup', this.bindKeyboard, false);
+    document.addEventListener("keyup", this.bindKeyboard, false);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,45 +56,57 @@ export default class ResourceListSlideshow extends PureComponent {
     this.updateTotalCount(nextProps.pagination.totalCount);
   }
 
-  addLoadedPage(page) {
-    const loadedPages = this.state.loadedPages.slice(0);
-    if (!includes(loadedPages, page)) {
-      loadedPages.push(page);
-      this.setState({ loadedPages });
+  componentWillUnmount() {
+    document.removeEventListener("keyup", this.bindKeyboard, false);
+  }
+
+  getFigureByType(resource) {
+    let output = false;
+    switch (resource.attributes.kind) {
+      case "image":
+        output = <ResourceList.Slide.SlideImage resource={resource} />;
+        break;
+      case "video":
+        output = <ResourceList.Slide.SlideVideo resource={resource} />;
+        break;
+      default:
+        output = <ResourceList.Slide.Slide resource={resource} />;
+    }
+
+    return output;
+  }
+
+  bindKeyboard(event) {
+    if (event.keyCode === 39) {
+      this.handleSlideNext();
+    } else if (event.keyCode === 37) {
+      this.handleSlidePrev();
     }
   }
 
-  buildNewMap(collectionResources, pagination) {
-    const updates = {};
-    const start = (pagination.perPage * (pagination.currentPage - 1)) + 1;
-    collectionResources.forEach((collectionResource, index) => {
-      updates[start + index] = collectionResource;
-    });
-    const map = Object.assign({}, this.state.map, updates);
-    return map;
-  }
-
-  updateTotalCount(totalCount) {
-    if (totalCount > 0) {
-      this.setState({ totalCount });
+  handleUnloadedSlide(position) {
+    const page = this.positionToPage(position, this.props.pagination.perPage);
+    if (!this.isPageLoaded(page)) {
+      const fetch = collectionsAPI.collectionResources(
+        this.props.collectionId,
+        {},
+        { number: page, size: this.props.pagination.perPage }
+      );
+      this.props.dispatch(request(fetch, requests.feSlideshow));
     }
   }
 
-  updateMap(collectionResources, pagination) {
-    const map = this.buildNewMap(collectionResources, pagination);
-    this.setState({ map });
+  handleSlidePrev() {
+    let newPosition = this.state.position - 1;
+    if (newPosition < 1) newPosition = 1;
+    this.updatePosition(newPosition);
   }
 
-  updatePosition(newPosition) {
-    if (!this.isLoaded(newPosition)) {
-      this.handleUnloadedSlide(newPosition);
-    }
-    this.setState({ position: newPosition });
-  }
-
-  current() {
-    const collectionResource = this.state.map[this.state.currentPosition];
-    return collectionResource;
+  handleSlideNext() {
+    let newPosition = this.state.position + 1;
+    if (newPosition > this.state.totalCount)
+      newPosition = this.state.totalCount;
+    this.updatePosition(newPosition);
   }
 
   isLoaded(position) {
@@ -112,56 +121,45 @@ export default class ResourceListSlideshow extends PureComponent {
     return includes(this.state.loadedPages, page);
   }
 
-  handleUnloadedSlide(position) {
-    const page = this.positionToPage(position, this.props.pagination.perPage);
-    if (!this.isPageLoaded(page)) {
-      const fetch = collectionsAPI.collectionResources(
-        this.props.collectionId, { }, { number: page, size: this.props.pagination.perPage }
-      );
-      this.props.dispatch(request(fetch, requests.feSlideshow));
+  current() {
+    const collectionResource = this.state.map[this.state.currentPosition];
+    return collectionResource;
+  }
+
+  updateMap(collectionResources, pagination) {
+    const map = this.buildNewMap(collectionResources, pagination);
+    this.setState({ map });
+  }
+
+  updatePosition(newPosition) {
+    if (!this.isLoaded(newPosition)) {
+      this.handleUnloadedSlide(newPosition);
+    }
+    this.setState({ position: newPosition });
+  }
+
+  updateTotalCount(totalCount) {
+    if (totalCount > 0) {
+      this.setState({ totalCount });
     }
   }
 
-  handleSlidePrev() {
-    let newPosition = this.state.position - 1;
-    if (newPosition < 1) newPosition = 1;
-    this.updatePosition(newPosition);
+  buildNewMap(collectionResources, pagination) {
+    const updates = {};
+    const start = pagination.perPage * (pagination.currentPage - 1) + 1;
+    collectionResources.forEach((collectionResource, index) => {
+      updates[start + index] = collectionResource;
+    });
+    const map = Object.assign({}, this.state.map, updates);
+    return map;
   }
 
-  handleSlideNext() {
-    let newPosition = this.state.position + 1;
-    if (newPosition > this.state.totalCount) newPosition = this.state.totalCount;
-    this.updatePosition(newPosition);
-  }
-
-  bindKeyboard(event) {
-    if (event.keyCode === 39) {
-      this.handleSlideNext();
-    } else if (event.keyCode === 37) {
-      this.handleSlidePrev();
+  addLoadedPage(page) {
+    const loadedPages = this.state.loadedPages.slice(0);
+    if (!includes(loadedPages, page)) {
+      loadedPages.push(page);
+      this.setState({ loadedPages });
     }
-  }
-
-  getFigureByType(resource) {
-    let output = false;
-    switch (resource.attributes.kind) {
-      case 'image':
-        output = (<ResourceList.Slide.SlideImage
-          resource={resource}
-        />);
-        break;
-      case 'video':
-        output = (<ResourceList.Slide.SlideVideo
-          resource={resource}
-        />);
-        break;
-      default:
-        output = (<ResourceList.Slide.Slide
-          resource={resource}
-        />);
-    }
-
-    return output;
   }
 
   renderSlideShow() {
@@ -170,24 +168,20 @@ export default class ResourceListSlideshow extends PureComponent {
 
     return (
       <div key={position}>
-        { this.isLoaded(position) ?
-          this.getFigureByType(collectionResource)
-          :
-          <ResourceList.Slide.SlideLoading />
-        }
+        {this.isLoaded(position)
+          ? this.getFigureByType(collectionResource)
+          : <ResourceList.Slide.SlideLoading />}
       </div>
     );
   }
 
   renderPlaceholder() {
-    return (
-      <ResourceList.Slide.SlidePlaceholder />
-    );
+    return <ResourceList.Slide.SlidePlaceholder />;
   }
 
   render() {
     const position = this.state.position;
-    const count = this.state.totalCount;
+    const totalCount = this.state.totalCount;
     const collectionResource = this.state.map[position];
 
     return (
@@ -203,26 +197,22 @@ export default class ResourceListSlideshow extends PureComponent {
               transitionEnterTimeout={500}
               transitionLeaveTimeout={500}
             >
-              { this.props.collectionResources.length > 0 ?
-                  this.renderSlideShow()
-                : this.renderPlaceholder()
-              }
+              {this.props.collectionResources.length > 0
+                ? this.renderSlideShow()
+                : this.renderPlaceholder()}
             </ReactCSSTransitionGroup>
           </div>
           <div className="slide-footer">
-
-            { this.isLoaded(position) ?
-              <ResourceList.Slide.Caption
-                resource={collectionResource}
-                collectionId={this.props.collectionId}
-              />
-            :
-              <ResourceList.Slide.LoadingCaption />
-            }
-            { this.props.collectionResources.length > 0 ?
-                <div className="slide-pagination">
+            {this.isLoaded(position)
+              ? <ResourceList.Slide.Caption
+                  resource={collectionResource}
+                  collectionId={this.props.collectionId}
+                />
+              : <ResourceList.Slide.LoadingCaption />}
+            {this.props.collectionResources.length > 0
+              ? <div className="slide-pagination">
                   <span className="slide-ordinal">
-                    {position} {'/'} {count}
+                    {position} {"/"} {totalCount}
                   </span>
                   <div>
                     <button
@@ -230,23 +220,22 @@ export default class ResourceListSlideshow extends PureComponent {
                       onClick={this.handleSlidePrev}
                       disabled={position === 1}
                     >
-                      <i className="manicon manicon-arrow-round-left"></i>
+                      <i className="manicon manicon-arrow-round-left" />
                       <span className="screen-reader-text">
-                      {'Click to load previous slide'}
-                    </span>
+                        {"Click to load previous slide"}
+                      </span>
                     </button>
                     <button
                       className="slide-next"
                       onClick={this.handleSlideNext}
-                      disabled={position === count}
+                      disabled={position === totalCount}
                     >
-                      <i className="manicon manicon-arrow-round-right"></i>
-                      <span className="screen-reader-text"></span>
+                      <i className="manicon manicon-arrow-round-right" />
+                      <span className="screen-reader-text" />
                     </button>
                   </div>
                 </div>
-              : null
-            }
+              : null}
           </div>
         </div>
       </div>

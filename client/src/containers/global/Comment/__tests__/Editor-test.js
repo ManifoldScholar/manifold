@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { CommentEditor } from '../Editor';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { CommentEditor } from "../Editor";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Global Comment Editor Container", () => {
-
   const store = build.store();
   const comment = build.entity.comment("1");
   const resource = build.entity.resource("2");
@@ -16,6 +15,7 @@ describe("Global Comment Editor Container", () => {
     wrapWithRouter(
       <Provider store={store}>
         <CommentEditor
+          dispatch={store.dispatch}
           comment={comment}
           subject={resource}
           cancel={cancelMock}
@@ -33,11 +33,4 @@ describe("Global Comment Editor Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
-
-
 });
-
-
-
-

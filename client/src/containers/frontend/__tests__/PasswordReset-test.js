@@ -1,9 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { PasswordResetContainer } from '../PasswordReset';
+import React from "react";
+import renderer from "react-test-renderer";
+import { PasswordResetContainer } from "../PasswordReset";
 
 describe("Frontend PasswordReset Container", () => {
-
   const component = renderer.create(
     <PasswordResetContainer
       match={{
@@ -22,5 +21,4 @@ describe("Frontend PasswordReset Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

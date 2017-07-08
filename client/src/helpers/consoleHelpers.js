@@ -1,29 +1,31 @@
-const emoji = require('node-emoji');
-const chalk = require('chalk');
-const stringUtils = require('../utils/string');
+/* eslint-disable no-console */
+const emoji = require("node-emoji");
+const chalk = require("chalk");
+const stringUtils = require("../utils/string");
+
 const pad = stringUtils.pad;
 
 function baseString(emojiKey) {
-  let out = '';
+  let out = "";
   if (emojiKey) {
-    out = out + `${emoji.get(emojiKey)}  `;
+    out += `${emoji.get(emojiKey)}  `;
   }
   return out;
 }
 
-function header(string, emojiKey = 'fist') {
+function header(string, emojiKey = "fist") {
   let out = baseString(emojiKey) + string;
-  out = chalk.bold.green(pad(out, 80, ' ', false));
+  out = chalk.bold.green(pad(out, 80, " ", false));
   console.log(out);
 }
 
-function info(string, emojiKey = 'bell') {
+function info(string, emojiKey = "bell") {
   let out = baseString(emojiKey) + string;
   out = chalk.bold.cyan(out);
   console.log(out);
 }
 
-function error(string, emojiKey = 'fire') {
+function error(string, emojiKey = "fire") {
   let out = baseString(emojiKey) + string;
   out = chalk.bold.red(out);
   console.log(out);
@@ -35,5 +37,8 @@ function background(string) {
 }
 
 module.exports = {
-  header, info, error, background
+  header,
+  info,
+  error,
+  background
 };

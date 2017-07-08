@@ -1,18 +1,12 @@
-import React from 'react';
-import Wrapper from '../Wrapper';
-import { mount } from 'enzyme';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
+import React from "react";
+import Wrapper from "../Wrapper";
+import { mount } from "enzyme";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Backend.Drawer.Wrapper Component", () => {
-
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = mount(
-      wrapWithRouter(
-        <Wrapper
-          open={true}
-          style="backend"
-        />
-      )
+      wrapWithRouter(<Wrapper open={true} style="backend" />)
     );
 
     // Wrapper has event listeners attached to document,
@@ -21,5 +15,4 @@ describe("Backend.Drawer.Wrapper Component", () => {
     let tree = component.debug();
     expect(tree).toMatchSnapshot();
   });
-
 });

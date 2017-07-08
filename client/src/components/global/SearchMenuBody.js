@@ -1,41 +1,42 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export default class UserButton extends Component {
-
   render() {
     return (
       <nav className="search-menu">
         <form>
           <div className="input-magnify">
-            <input type="text" placeholder={'Search for...'}/>
-            <button className="manicon manicon-magnify"></button>
+            <input type="text" placeholder={"Search for..."} />
+            <button className="manicon manicon-magnify" />
           </div>
           <div className="filters">
-            <label>{'Search within:'}</label>
+            <label>
+              {"Search within:"}
+            </label>
             <div className="checkbox-group">
               <label className="checkbox">
-                <input type="checkbox"/>
+                <input type="checkbox" />
                 {/* Fake control to allow for custom checkbox styles */}
                 <div className="control-indicator">
-                  <i className="manicon manicon-check"></i>
+                  <i className="manicon manicon-check" />
                 </div>
-                {'Chapter'}
+                {"Chapter"}
               </label>
               <label className="checkbox">
-                <input type="checkbox"/>
+                <input type="checkbox" />
                 {/* Fake control to allow for custom checkbox styles */}
                 <div className="control-indicator">
-                  <i className="manicon manicon-check"></i>
+                  <i className="manicon manicon-check" />
                 </div>
-                {'Text'}
+                {"Text"}
               </label>
               <label className="checkbox">
-                <input type="checkbox"/>
+                <input type="checkbox" />
                 {/* Fake control to allow for custom checkbox styles */}
                 <div className="control-indicator">
-                  <i className="manicon manicon-check"></i>
+                  <i className="manicon manicon-check" />
                 </div>
-                {'Project'}
+                {"Project"}
               </label>
             </div>
           </div>

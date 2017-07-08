@@ -1,12 +1,13 @@
-const glob = require('glob');
-const path = require('path');
-const svgPath = path.resolve(__dirname, 'assets/svg/fonts/manicon/*.svg');
+const glob = require("glob");
+const path = require("path");
+
+const svgPath = path.resolve(__dirname, "assets/svg/fonts/manicon/*.svg");
 const svgFiles = glob.sync(svgPath);
 
 module.exports = {
   files: svgFiles,
-  fontName: 'ManifoldIconFont',
-  classPrefix: 'manicon-',
+  fontName: "ManifoldIconFont",
+  classPrefix: "manicon-",
   baseSelector: ".manicon",
   fixedWidth: true
 };

@@ -1,9 +1,8 @@
 export default {
-
   index(filter = {}, page = {}) {
     return {
-      endpoint: '/api/v1/resources',
-      method: 'GET',
+      endpoint: "/api/v1/resources",
+      method: "GET",
       options: {
         params: { filter, page }
       }
@@ -13,16 +12,15 @@ export default {
   show(id) {
     return {
       endpoint: `/api/v1/resources/${id}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   },
 
   create(pId, resource) {
     return {
       endpoint: `/api/v1/projects/${pId}/relationships/resources`,
-      method: 'POST',
+      method: "POST",
       options: {
         body: JSON.stringify({ type: "resources", data: resource })
       }
@@ -32,7 +30,7 @@ export default {
   update(id, resource) {
     return {
       endpoint: `/api/v1/resources/${id}`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "resources", data: resource })
       }
@@ -42,19 +40,16 @@ export default {
   destroy(id) {
     return {
       endpoint: `/api/v1/resources/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
   },
 
-
-  forSection(sectionId, filter = {}) {
+  forSection(sectionId, filterIgnored = {}) {
     return {
       endpoint: `/api/v1/text_sections/${sectionId}/relationships/resources`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   }
-
 };

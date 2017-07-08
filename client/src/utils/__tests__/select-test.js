@@ -1,11 +1,10 @@
-import { select } from '../select';
+import { select } from "../select";
 
-describe('utils/select', () => {
-
-  const maker1 = { attributes: { id: '1' } };
-  const maker2 = { attributes: { id: '2' } };
-  const text1 = { attributes: { id: '1' } };
-  const text2 = { attributes: { id: '2' } };
+describe("utils/select", () => {
+  const maker1 = { attributes: { id: "1" } };
+  const maker2 = { attributes: { id: "2" } };
+  const text1 = { attributes: { id: "1" } };
+  const text2 = { attributes: { id: "2" } };
 
   const entities = {
     makers: {
@@ -22,61 +21,59 @@ describe('utils/select', () => {
     creators: {
       data: [
         {
-          id: '1',
-          type: 'makers'
+          id: "1",
+          type: "makers"
         },
         {
-          id: '2',
-          type: 'makers'
+          id: "2",
+          type: "makers"
         }
-
       ]
     },
     texts: {
       data: [
         {
-          id: '1',
-          type: 'texts'
+          id: "1",
+          type: "texts"
         },
         {
-          id: '2',
-          type: 'texts'
+          id: "2",
+          type: "texts"
         }
       ]
     },
     publishedText: {
       data: {
-        id: '1',
-        type: 'texts'
+        id: "1",
+        type: "texts"
       }
     },
     toc_section: {
-      data: { id: '1', type: 'section' }
+      data: { id: "1", type: "section" }
     }
   };
 
   const results = select({ relationships }, entities);
 
-  it('should return an object with a corresponding key for each relationship', () => {
+  it("should return an object with a corresponding key for each relationship", () => {
     expect(Object.keys(results)).toEqual(Object.keys(relationships));
   });
 
-  it('should return relationships with the same number of entities', () => {
+  it("should return relationships with the same number of entities", () => {
     expect(results.texts.length).toEqual(relationships.texts.data.length);
   });
 
-  it('should return an object when the relationship is an object rather than an array', () => {
+  it("should return an object when the relationship is an object rather than an array", () => {
     expect(results.publishedText).toEqual(text1);
   });
 
-  it('should return a collection of entities with the correct IDs', () => {
-    const expectedIds = relationships.texts.data.map((entityData) => {
+  it("should return a collection of entities with the correct IDs", () => {
+    const expectedIds = relationships.texts.data.map(entityData => {
       return entityData.id;
     });
-    const resultingIds = results.texts.map((entity) => {
+    const resultingIds = results.texts.map(entity => {
       return entity.attributes.id;
     });
     expect(expectedIds).toEqual(resultingIds);
   });
-
 });

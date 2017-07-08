@@ -1,10 +1,10 @@
-import { handleActions } from 'redux-actions';
-import update from 'immutability-helper';
-import cloneDeep from 'lodash/cloneDeep';
-import lodashSet from 'lodash/set';
-import lodashGet from 'lodash/get';
-import lodashOmit from 'lodash/omit';
-import flatMapDeep from 'lodash/flatMapDeep';
+import { handleActions } from "redux-actions";
+import update from "immutability-helper";
+import cloneDeep from "lodash/cloneDeep";
+import lodashSet from "lodash/set";
+import lodashGet from "lodash/get";
+import lodashOmit from "lodash/omit";
+import flatMapDeep from "lodash/flatMapDeep";
 
 const initialState = {
   sessions: {}
@@ -12,10 +12,10 @@ const initialState = {
 
 // Begin helper methods
 
-const setPathToGetPath = (path) => {
-  const parts = path.split('.');
+const setPathToGetPath = path => {
+  const parts = path.split(".");
   parts.pop();
-  const getPath = parts.join('.');
+  const getPath = parts.join(".");
   return getPath;
 };
 
@@ -24,8 +24,10 @@ const getSourceValue = (setPath, model) => {
   return value;
 };
 
-const hasChanges = (model) => {
-  const found = flatMapDeep(model).find((obj) => { return Object.keys(obj).length > 0; });
+const hasChanges = model => {
+  const found = flatMapDeep(model).find(obj => {
+    return Object.keys(obj).length > 0;
+  });
   return found !== undefined;
 };
 
@@ -39,7 +41,7 @@ const open = (state, action) => {
       relationships: {}
     },
     source: model,
-    changed: false,
+    changed: false
   };
   const newSessions = Object.assign({}, state.session, { [key]: newSession });
   const newState = Object.assign({}, state, { sessions: newSessions });
@@ -72,26 +74,37 @@ const set = (state, action) => {
   } else {
     changed = lodashGet(state, `${id}.changed`) || false;
   }
-  return update(state, { sessions: { [id]: {
-    changed: { $set: changed },
-    dirty: { $set: newDirty }
-  } } });
+  return update(state, {
+    sessions: {
+      [id]: {
+        changed: { $set: changed },
+        dirty: { $set: newDirty }
+      }
+    }
+  });
 };
 
 const startAction = (state, dispatchedAction) => {
   const { id, action } = dispatchedAction.payload;
-  return update(state, { sessions: { [id]: { pendingAction: { $set: action } } } });
+  return update(state, {
+    sessions: { [id]: { pendingAction: { $set: action } } }
+  });
 };
 
 const completeAction = (state, dispatchedAction) => {
   const { id } = dispatchedAction.payload;
-  return update(state, { sessions: { [id]: { pendingAction: { $set: null } } } });
+  return update(state, {
+    sessions: { [id]: { pendingAction: { $set: null } } }
+  });
 };
 
-export default handleActions({
-  ENTITY_EDITOR_OPEN: open,
-  ENTITY_EDITOR_CLOSE: close,
-  ENTITY_EDITOR_SET: set,
-  ENTITY_EDITOR_PENDING_ACTION: startAction,
-  ENTITY_EDITOR_COMPLETE_ACTION: completeAction
-}, initialState);
+export default handleActions(
+  {
+    ENTITY_EDITOR_OPEN: open,
+    ENTITY_EDITOR_CLOSE: close,
+    ENTITY_EDITOR_SET: set,
+    ENTITY_EDITOR_PENDING_ACTION: startAction,
+    ENTITY_EDITOR_COMPLETE_ACTION: completeAction
+  },
+  initialState
+);

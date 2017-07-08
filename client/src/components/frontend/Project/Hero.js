@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Maker } from 'components/frontend';
-import { Helper } from 'components/global';
-import { Link } from 'react-router-dom';
-import has from 'lodash/has';
-import get from 'lodash/get';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Maker } from "components/frontend";
+import { Helper } from "components/global";
+import { Link } from "react-router-dom";
+import has from "lodash/has";
+import get from "lodash/get";
+import lh from "helpers/linkHandler";
 
 export default class ProjectHero extends Component {
-
   static displayName = "Project.Hero";
 
   static propTypes = {
@@ -16,14 +15,12 @@ export default class ProjectHero extends Component {
   };
 
   listMakers() {
-    const creators = get(this.props.project, 'relationships.creators');
+    const creators = get(this.props.project, "relationships.creators");
     if (creators && creators.length > 0) {
       return (
         <section className="project-makers">
-          {this.props.project.relationships.creators.map((creator) => {
-            return (
-                <Maker.Avatar key={creator.id} maker={creator}/>
-            );
+          {this.props.project.relationships.creators.map(creator => {
+            return <Maker.Avatar key={creator.id} maker={creator} />;
           })}
         </section>
       );
@@ -33,13 +30,13 @@ export default class ProjectHero extends Component {
   socialUrl(service, id) {
     let out;
     switch (service) {
-      case 'twitter':
+      case "twitter":
         out = `http://twitter.com/${id}`;
         break;
-      case 'instagram':
+      case "instagram":
         out = `http://instagram.com/${id}`;
         break;
-      case 'facebook':
+      case "facebook":
         out = `http://facebook.com/${id}`;
         break;
       default:
@@ -48,7 +45,6 @@ export default class ProjectHero extends Component {
     }
     return out;
   }
-
 
   renderDescription() {
     const attr = this.props.project.attributes;
@@ -62,24 +58,19 @@ export default class ProjectHero extends Component {
         );
       }
       return (
-        <section
-          className="project-summary"
-        >
+        <section className="project-summary">
           <Helper.SimpleFormat text={attr.description} />
         </section>
       );
-
     }
   }
 
   renderProjectImage(wrapperClass) {
-    let output = '';
+    let output = "";
     const attr = this.props.project.attributes;
 
     if (attr.coverStyles.medium) {
-      output = (
-        <img src={attr.coverStyles.medium} />
-      );
+      output = <img src={attr.coverStyles.medium} alt="project-cover" />;
 
       if (wrapperClass) {
         output = (
@@ -100,16 +91,22 @@ export default class ProjectHero extends Component {
 
     return (
       <section className="project-social">
-        <span className="hashtag">{hashtag}</span>
+        <span className="hashtag">
+          {hashtag}
+        </span>
         <nav className="networks">
           <ul>
-            {services.map((service) => {
+            {services.map(service => {
               const key = `${service}Id`;
               if (!has(attr, key) || !attr[key]) return null;
               return (
                 <li key={service}>
-                  <a target="_blank" href={this.socialUrl(service, attr[key])} className={service}>
-                    <i className={`manicon manicon-${service}`}></i>
+                  <a
+                    target="_blank"
+                    href={this.socialUrl(service, attr[key])}
+                    className={service}
+                  >
+                    <i className={`manicon manicon-${service}`} />
                     <span className="screen-reader-text">{`View this project on ${service}`}</span>
                   </a>
                 </li>
@@ -126,26 +123,28 @@ export default class ProjectHero extends Component {
     const publishedTextTocId = this.props.project.attributes.publishedTextTocId;
     if (!publishedText) return null;
     return (
-      <section className={'project-entry ' + position}>
+      <section className={"project-entry " + position}>
         <Link
           to={lh.link("reader", publishedText.id)}
           className="button-secondary"
         >
-          <i className="manicon manicon-glasses"></i>
-          {'Start Reading'}
+          <i className="manicon manicon-glasses" />
+          {"Start Reading"}
         </Link>
-        {publishedTextTocId ?
-          <Link
-            to={lh.link("readerSection", publishedText.id, publishedTextTocId)}
-            className="button-secondary dull"
-          >
-            <i className="manicon manicon-bullet-list"></i>
-            {'View Contents'}
-          </Link>
-          : null
-        }
+        {publishedTextTocId
+          ? <Link
+              to={lh.link(
+                "readerSection",
+                publishedText.id,
+                publishedTextTocId
+              )}
+              className="button-secondary dull"
+            >
+              <i className="manicon manicon-bullet-list" />
+              {"View Contents"}
+            </Link>
+          : null}
       </section>
-
     );
   }
 
@@ -153,15 +152,22 @@ export default class ProjectHero extends Component {
     const attr = this.props.project.attributes;
     if (!attr.purchaseUrl) return null;
     return (
-      <a target="_blank" href={attr.purchaseUrl} className="button-tagged outline">
-        <span className="text">{'Buy '} {attr.purchaseVersionLabel}</span>
-        <span className="tag">{attr.purchasePriceMoney}</span>
+      <a
+        target="_blank"
+        href={attr.purchaseUrl}
+        className="button-tagged outline"
+      >
+        <span className="text">
+          {"Buy "} {attr.purchaseVersionLabel}
+        </span>
+        <span className="tag">
+          {attr.purchasePriceMoney}
+        </span>
       </a>
     );
   }
 
   render() {
-
     const attr = this.props.project.attributes;
     const heroStyle = {};
     if (attr.heroStyles.largeLandscape) {
@@ -169,14 +175,11 @@ export default class ProjectHero extends Component {
     }
 
     return (
-      <section
-        className="project-detail-hero hero-image"
-        style={heroStyle}
-      >
+      <section className="project-detail-hero hero-image" style={heroStyle}>
         <div className="container">
           <div className="project-figure">
             {this.listMakers()}
-            {this.renderProjectImage('image')}
+            {this.renderProjectImage("image")}
             <h1 className="project-title">
               {attr.title}
               <span className="subtitle">
@@ -185,7 +188,7 @@ export default class ProjectHero extends Component {
             </h1>
           </div>
           <div className="project-info">
-            {this.renderPublishedText('top')}
+            {this.renderPublishedText("top")}
             {this.listMakers()}
             <h1 className="project-title">
               {attr.title}
@@ -195,7 +198,7 @@ export default class ProjectHero extends Component {
             </h1>
             {this.renderDescription()}
             {this.renderSocial()}
-            {this.renderPublishedText('bottom')}
+            {this.renderPublishedText("bottom")}
             {this.renderPurchaseLink()}
           </div>
           <div className="project-aside">

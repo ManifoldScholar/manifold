@@ -1,30 +1,26 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { entityEditorActions, entityStoreActions } from 'actions';
-import { Developer } from 'components/global';
-import { bindActionCreators } from 'redux';
-import { Form as GlobalForm } from 'components/global';
-import get from 'lodash/get';
-import has from 'lodash/has';
-import isString from 'lodash/isString';
-import brackets2dots from 'brackets2dots';
-import { Prompt } from 'react-router-dom';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { entityEditorActions, entityStoreActions } from "actions";
+import { Developer } from "components/global";
+import { bindActionCreators } from "redux";
+import { Form as GlobalForm } from "components/global";
+import get from "lodash/get";
+import has from "lodash/has";
+import isString from "lodash/isString";
+import brackets2dots from "brackets2dots";
+import { Prompt } from "react-router-dom";
 
 const { request, flush } = entityStoreActions;
 const { close, open, set } = entityEditorActions;
 
 export class FormContainer extends PureComponent {
-
   static displayName = "Form.Form";
 
   static propTypes = {
     doNotWarn: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
-    children: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.element
-    ]),
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
     model: PropTypes.object,
     update: PropTypes.func.isRequired,
     create: PropTypes.func.isRequired,
@@ -32,7 +28,11 @@ export class FormContainer extends PureComponent {
     onSuccess: PropTypes.func,
     debug: PropTypes.bool,
     groupErrors: PropTypes.bool,
-    groupErrorsStyle: PropTypes.object
+    groupErrorsStyle: PropTypes.object,
+    session: PropTypes.object,
+    errors: PropTypes.array,
+    response: PropTypes.object,
+    className: PropTypes.string
   };
 
   static defaultProps = {
@@ -42,7 +42,7 @@ export class FormContainer extends PureComponent {
     },
     debug: false,
     groupErrors: false
-  }
+  };
 
   static mapStateToProps(state, ownProps) {
     return {
@@ -71,7 +71,7 @@ export class FormContainer extends PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevPropsIgnored, prevStateIgnored) {
     this.maybeOpenSession(this.props);
   }
 
@@ -113,7 +113,7 @@ export class FormContainer extends PureComponent {
     const call = this.props.update(source.id, { attributes: dirty.attributes });
     const action = request(call, this.props.name);
     const res = this.props.dispatch(action);
-    if (res.hasOwnProperty('promise') && this.props.onSuccess) {
+    if (res.hasOwnProperty("promise") && this.props.onSuccess) {
       res.promise.then(() => {
         this.setState({ preventDirtyWarning: true }, () => {
           this.props.onSuccess();
@@ -127,24 +127,13 @@ export class FormContainer extends PureComponent {
     const call = this.props.create({ attributes: dirty.attributes });
     const action = request(call, this.props.name);
     const res = this.props.dispatch(action);
-    if (res.hasOwnProperty('promise') && this.props.onSuccess) {
+    if (res.hasOwnProperty("promise") && this.props.onSuccess) {
       res.promise.then(() => {
         this.setState({ preventDirtyWarning: true }, () => {
           this.props.onSuccess(this.props.response.entity);
         });
       });
     }
-  }
-
-  renderChildren(props) {
-    const childProps = this.childProps(props);
-    return React.Children.map(props.children, child => {
-      if (!child) return null;
-      if (isString(child.type)) {
-        return child;
-      }
-      return React.cloneElement(child, childProps);
-    });
   }
 
   nameToPath(name) {
@@ -165,14 +154,20 @@ export class FormContainer extends PureComponent {
   childProps(props) {
     return {
       actions: {
-        set: bindActionCreators(set, props.dispatch),
+        set: bindActionCreators(set, props.dispatch)
       },
       dirtyModel: props.session.dirty,
       sourceModel: props.session.source,
-      getModelValue: (name) => this.lookupValue(name, this.props),
+      getModelValue: name => this.lookupValue(name, this.props),
       sessionKey: props.name,
       errors: props.errors || []
     };
+  }
+  isBlocking() {
+    if (this.props.doNotWarn === true) return false;
+    if (this.state.preventDirtyWarning === true) return false;
+    if (this.props.session.changed === true) return true;
+    return false;
   }
 
   renderDebugger() {
@@ -184,11 +179,15 @@ export class FormContainer extends PureComponent {
     return <Developer.Debugger object={debug} />;
   }
 
-  isBlocking() {
-    if (this.props.doNotWarn === true) return false;
-    if (this.state.preventDirtyWarning === true) return false;
-    if (this.props.session.changed === true) return true;
-    return false;
+  renderChildren(props) {
+    const childProps = this.childProps(props);
+    return React.Children.map(props.children, child => {
+      if (!child) return null;
+      if (isString(child.type)) {
+        return child;
+      }
+      return React.cloneElement(child, childProps);
+    });
   }
 
   render() {
@@ -202,15 +201,19 @@ export class FormContainer extends PureComponent {
           message="You may have unsaved changes. Do you want to leave without saving your changes?"
         />
 
-        {this.props.groupErrors === true && this.props.errors ?
-          <GlobalForm.Errorable
-            containerStyle={this.props.groupErrorsStyle}
-            className="form-input form-error-grouped"
-            name="*"
-            errors={this.props.errors}
-          />
-        : null}
-        <form onSubmit={this.handleSubmit} className={this.props.className} data-id="submit" >
+        {this.props.groupErrors === true && this.props.errors
+          ? <GlobalForm.Errorable
+              containerStyle={this.props.groupErrorsStyle}
+              className="form-input form-error-grouped"
+              name="*"
+              errors={this.props.errors}
+            />
+          : null}
+        <form
+          onSubmit={this.handleSubmit}
+          className={this.props.className}
+          data-id="submit"
+        >
           {this.renderChildren(this.props)}
         </form>
       </div>
@@ -219,4 +222,3 @@ export class FormContainer extends PureComponent {
 }
 
 export default connectAndFetch(FormContainer);
-

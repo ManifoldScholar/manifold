@@ -1,18 +1,16 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Header from '../Header';
-import build from 'test/fixtures/build';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import Header from "../Header";
+import build from "test/fixtures/build";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Backend.Layout.Header component", () => {
-
   const settings = build.entity.settings();
   const toggleOverlayMock = jest.fn();
   const togglerUserPanelMock = jest.fn();
   const startLogoutMock = jest.fn();
 
-
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Header
@@ -32,5 +30,4 @@ describe("Backend.Layout.Header component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

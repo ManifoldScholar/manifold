@@ -190,7 +190,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
             <i
               className="manicon manicon-books-with-glasses"
             />
-            Projects You're Following
+            Projects You're Following 
           </span>
         </a>
       </nav>

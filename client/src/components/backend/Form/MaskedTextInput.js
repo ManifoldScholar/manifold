@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import MaskedInput from 'react-text-mask';
-import createNumberMask from 'text-mask-addons/dist/createNumberMask.js';
-import fill from 'lodash/fill';
-import setter from './setter';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import MaskedInput from "react-text-mask";
+import createNumberMask from "text-mask-addons/dist/createNumberMask";
+import fill from "lodash/fill";
+import setter from "./setter";
 
 class FormMaskedTextInput extends Component {
-
   static displayName = "Form.MaskedTextInput";
 
   static propTypes = {
@@ -20,22 +19,18 @@ class FormMaskedTextInput extends Component {
     value: PropTypes.string
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   currencyMask() {
     return createNumberMask({
-      prefix: '$',
+      prefix: "$",
       allowDecimal: true
     });
   }
 
   hashTagMask() {
-    return (raw) => {
-      const wordChar = /^[A-Za-z0-9\-]$/;
-      const notWordChar = /[^A-Za-z0-9\-]/g;
-      const adjusted = raw.replace(notWordChar, '').replace('_', '');
+    return raw => {
+      const wordChar = /^[A-Za-z0-9-]$/;
+      const notWordChar = /[^A-Za-z0-9-]/g;
+      const adjusted = raw.replace(notWordChar, "").replace("_", "");
       const length = adjusted.length;
       let mask = Array(length);
       mask.unshift("#");
@@ -56,11 +51,12 @@ class FormMaskedTextInput extends Component {
   }
 
   render() {
-
     const mask = this.mask();
     return (
       <div className="form-input">
-        <label>{this.props.label}</label>
+        <label>
+          {this.props.label}
+        </label>
         <MaskedInput
           onChange={this.props.onChange}
           value={this.props.value}

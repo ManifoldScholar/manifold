@@ -1,22 +1,20 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { UserList, Drawer } from 'components/backend';
-import { entityStoreActions } from 'actions';
-import { select, meta } from 'utils/entityUtils';
-import { makersAPI, requests } from 'api';
-import debounce from 'lodash/debounce';
-import get from 'lodash/get';
-import { Maker, List } from 'components/backend';
-import lh from 'helpers/linkHandler';
-import { Route } from 'react-router-dom';
-import { renderRoutes } from 'helpers/routing';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Drawer } from "components/backend";
+import { entityStoreActions } from "actions";
+import { select, meta } from "utils/entityUtils";
+import { makersAPI, requests } from "api";
+import debounce from "lodash/debounce";
+import get from "lodash/get";
+import { Maker, List } from "components/backend";
+import lh from "helpers/linkHandler";
+import { renderRoutes } from "helpers/routing";
 
 const { request } = entityStoreActions;
 const perPage = 10;
 
 export class MakersListContainer extends PureComponent {
-
   static displayName = "Makers.List";
 
   static mapStateToProps(state) {
@@ -27,7 +25,11 @@ export class MakersListContainer extends PureComponent {
   }
 
   static propTypes = {
-    makers: PropTypes.array
+    makers: PropTypes.array,
+    makersMeta: PropTypes.object,
+    dispatch: PropTypes.func,
+    match: PropTypes.object,
+    route: PropTypes.object
   };
 
   constructor() {
@@ -35,9 +37,10 @@ export class MakersListContainer extends PureComponent {
     this.state = { filter: {} };
     this.lastFetchedPage = null;
     this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
-    this.fetchMakers = debounce(
-      this.fetchMakers.bind(this), 250, { leading: false, trailing: true }
-    );
+    this.fetchMakers = debounce(this.fetchMakers.bind(this), 250, {
+      leading: false,
+      trailing: true
+    });
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
   }
 
@@ -50,8 +53,8 @@ export class MakersListContainer extends PureComponent {
   }
 
   maybeReload(nextMakersMeta) {
-    const currentModified = get(this.props, 'makersMeta.modified');
-    const nextModified = get(nextMakersMeta, 'modified');
+    const currentModified = get(this.props, "makersMeta.modified");
+    const nextModified = get(nextMakersMeta, "modified");
     if (!nextModified) return;
     if (currentModified && nextModified) return;
     this.fetchMakers(this.lastFetchedPage);
@@ -78,7 +81,7 @@ export class MakersListContainer extends PureComponent {
   }
 
   pageChangeHandlerCreator(page) {
-    return (event) => {
+    return event => {
       this.handlePageChange(event, page);
     };
   }
@@ -95,7 +98,7 @@ export class MakersListContainer extends PureComponent {
       <div>
         <header className="section-heading-secondary">
           <h3>
-            {'Makers'} <i className="manicon manicon-users"></i>
+            {"Makers"} <i className="manicon manicon-users" />
           </h3>
         </header>
         <Drawer.Wrapper
@@ -104,27 +107,23 @@ export class MakersListContainer extends PureComponent {
         >
           {renderRoutes(this.props.route.routes)}
         </Drawer.Wrapper>
-        { makers ?
-          <List.Searchable
-            entities={makers}
-            singularUnit="maker"
-            pluralUnit="makers"
-            pagination={makersMeta.pagination}
-            paginationClickHandler={this.pageChangeHandlerCreator}
-            entityComponent={Maker.ListItem}
-            entityComponentProps={{ active }}
-            filterChangeHandler={this.filterChangeHandler}
-          />
-          : null
-        }
+        {makers
+          ? <List.Searchable
+              entities={makers}
+              singularUnit="maker"
+              pluralUnit="makers"
+              pagination={makersMeta.pagination}
+              paginationClickHandler={this.pageChangeHandlerCreator}
+              entityComponent={Maker.ListItem}
+              entityComponentProps={{ active }}
+              filterChangeHandler={this.filterChangeHandler}
+            />
+          : null}
       </div>
     );
-
   }
-
 }
 
-export default connect(
-  MakersListContainer.mapStateToProps
-)(MakersListContainer);
-
+export default connect(MakersListContainer.mapStateToProps)(
+  MakersListContainer
+);

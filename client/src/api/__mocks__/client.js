@@ -1,15 +1,21 @@
-import pagination from 'test/fixtures/pagination';
+import pagination from "test/fixtures/pagination";
+import some from "lodash/some";
 
 export default class ApiClient {
-
-  call = (endpoint, method, options) => {
-
+  call = (endpoint, methodIgnored, optionsIgnored) => {
     const collectionEndpoints = [
-      "/api/v1/projects/1/relationships/resources"
+      /\/api\/v1\/projects\/\w*\/relationships\/resources/,
+      /\/api\/v1\/annotations\/\w*\/relationships\/comments/,
+      /\/api\/v1\/resources\/\w*\/relationships\/comments/
     ];
 
     let response;
-    if (collectionEndpoints.includes(endpoint)) {
+
+    const isCollectionEndpoint = some(collectionEndpoints, pattern => {
+      return pattern.test(endpoint);
+    });
+
+    if (isCollectionEndpoint) {
       response = {
         data: [],
         meta: { pagination: pagination() }
@@ -18,9 +24,8 @@ export default class ApiClient {
       response = { data: {} };
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, rejectIgnored) => {
       resolve(response);
     });
-  }
-
+  };
 }

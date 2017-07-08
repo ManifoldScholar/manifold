@@ -1,23 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Project } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import { projectsAPI } from 'api';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form, Project } from "components/backend";
+import { Form as FormContainer } from "containers/backend";
+import { projectsAPI } from "api";
 
 export default class ProjectPanelGeneral extends PureComponent {
-
   static displayName = "ProjectDetail.General";
 
   static propTypes = {
-    route: PropTypes.object,
-    project: PropTypes.object,
-    dispatch: PropTypes.func,
-    editSession: PropTypes.object
+    project: PropTypes.object
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const project = this.props.project;
@@ -47,25 +39,16 @@ export default class ProjectPanelGeneral extends PureComponent {
             label="Publication Date"
             name="attributes[publicationDate]"
           />
-          <Form.Switch
-            label="Featured"
-            name="attributes[featured]"
-          />
+          <Form.Switch label="Featured" name="attributes[featured]" />
           <Form.MaskedTextInput
             label="Hashtag"
             name="attributes[hashtag]"
             mask="hashtag"
           />
-          <Form.TextArea
-            label="Description"
-            name="attributes[description]"
-          />
-          <Project.Form.AvatarBuilder
-            project={project}
-            {...this.props}
-          />
+          <Form.TextArea label="Description" name="attributes[description]" />
+          <Project.Form.AvatarBuilder project={project} {...this.props} />
           <Form.Upload
-            style="portrait"
+            layout="portrait"
             label="Cover"
             accepts="images"
             readFrom="attributes[coverStyles][smallPortrait]"
@@ -73,7 +56,7 @@ export default class ProjectPanelGeneral extends PureComponent {
             remove="attributes[removeCover]"
           />
           <Form.Upload
-            style="landscape"
+            layout="landscape"
             accepts="images"
             label="Hero Image"
             readFrom="attributes[heroStyles][mediumLandscape]"
@@ -105,9 +88,7 @@ export default class ProjectPanelGeneral extends PureComponent {
             name="attributes[instagramId]"
             placeholder="Enter Instagram username"
           />
-          <Form.Save
-            text="Save Project"
-          />
+          <Form.Save text="Save Project" />
         </FormContainer.Form>
       </section>
     );

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import throttle from 'lodash/throttle';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import throttle from "lodash/throttle";
 
 export default class ResourceListSlideFigureImage extends Component {
   static propTypes = {
@@ -18,31 +18,31 @@ export default class ResourceListSlideFigureImage extends Component {
       this.throttledWidth = throttle(() => {
         this._figure.style.width = this.getParentWidth(this._figure);
       }, 200);
-      window.addEventListener('resize', this.throttledWidth);
+      window.addEventListener("resize", this.throttledWidth);
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.throttledWidth);
+    window.removeEventListener("resize", this.throttledWidth);
   }
 
   getParentWidth(figure) {
-    return figure.parentNode.offsetWidth + 'px';
+    return figure.parentNode.offsetWidth + "px";
   }
 
   render() {
     const attr = this.props.resource.attributes;
     return (
       <figure>
-        <div className="figure-image"
-          ref={ (c) => {
+        <div
+          className="figure-image"
+          ref={c => {
             this._figure = c;
-          } }
-          style={ {
-            backgroundImage: 'url(' + attr.attachmentStyles.medium + ')'
-          } }
-        >
-        </div>
+          }}
+          style={{
+            backgroundImage: "url(" + attr.attachmentStyles.medium + ")"
+          }}
+        />
       </figure>
     );
   }

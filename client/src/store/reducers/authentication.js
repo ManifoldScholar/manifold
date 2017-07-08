@@ -1,6 +1,6 @@
-import { handleActions } from 'redux-actions';
-import { constantizeMeta } from 'utils/entityUtils';
-import { requests } from 'api';
+import { handleActions } from "redux-actions";
+import { constantizeMeta } from "utils/entityUtils";
+import { requests } from "api";
 
 const initialState = {
   authenticated: false,
@@ -34,11 +34,11 @@ const setAuthToken = (state, action) => {
   return Object.assign({}, state, newState);
 };
 
-const endLogin = (state) => {
+const endLogin = state => {
   return Object.assign({}, state, { authenticating: false });
 };
 
-const startLogin = (state) => {
+const startLogin = state => {
   return Object.assign({}, state, { authenticating: true });
 };
 
@@ -46,12 +46,14 @@ const updateStateFromUser = (state, payload) => {
   const adjustedUser = Object.assign({}, payload.data);
   const favorites = {};
   if (payload.included) {
-    payload.included.filter((inc) => {
-      return inc.type === 'favorites';
-    }).forEach((fave) => {
-      const id = fave.attributes.favoritableId;
-      favorites[id] = fave;
-    });
+    payload.included
+      .filter(inc => {
+        return inc.type === "favorites";
+      })
+      .forEach(fave => {
+        const id = fave.attributes.favoritableId;
+        favorites[id] = fave;
+      });
   }
   delete adjustedUser.relationships;
   adjustedUser.favorites = favorites;
@@ -78,14 +80,19 @@ const syncCurrentUser = (state, action) => {
   return state;
 };
 
-export default handleActions({
-  [`API_RESPONSE/${constantizeMeta(requests.gAuthenticatedUserUpdate)}`]: syncCurrentUser,
-  LOGIN: startLogin,
-  LOGIN_SET_CURRENT_USER: setCurrentUser,
-  UPDATE_CURRENT_USER: setCurrentUser,
-  DELETE_CURRENT_USER_FAVORITE: deleteFavorite,
-  LOGIN_SET_AUTH_TOKEN: setAuthToken,
-  LOGIN_COMPLETE: endLogin,
-  LOGIN_SET_ERROR: setError,
-  LOGOUT: logout
-}, initialState);
+export default handleActions(
+  {
+    [`API_RESPONSE/${constantizeMeta(
+      requests.gAuthenticatedUserUpdate
+    )}`]: syncCurrentUser,
+    LOGIN: startLogin,
+    LOGIN_SET_CURRENT_USER: setCurrentUser,
+    UPDATE_CURRENT_USER: setCurrentUser,
+    DELETE_CURRENT_USER_FAVORITE: deleteFavorite,
+    LOGIN_SET_AUTH_TOKEN: setAuthToken,
+    LOGIN_COMPLETE: endLogin,
+    LOGIN_SET_ERROR: setError,
+    LOGOUT: logout
+  },
+  initialState
+);

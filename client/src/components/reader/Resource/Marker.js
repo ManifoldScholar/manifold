@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import classnames from 'classnames';
-import { uiReaderActions } from 'actions';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import classnames from "classnames";
+import { uiReaderActions } from "actions";
+import lh from "helpers/linkHandler";
 
 class ResourceMarker extends Component {
-
   static mapStateToProps(state, ownProps) {
     const newState = {
       activeAnnotation: state.ui.reader.activeAnnotation
@@ -16,7 +15,6 @@ class ResourceMarker extends Component {
 
   static propTypes = {
     annotations: PropTypes.array,
-    handleClick: PropTypes.func,
     dispatch: PropTypes.func,
     activeAnnotation: PropTypes.string,
     history: PropTypes.object
@@ -29,7 +27,10 @@ class ResourceMarker extends Component {
   handleClick(event, annotation) {
     event.preventDefault();
     const base = window.location.pathname;
-    const rel = lh.link("frontendProjectResourceRelative", annotation.resourceId);
+    const rel = lh.link(
+      "frontendProjectResourceRelative",
+      annotation.resourceId
+    );
     const url = `${base}/${rel}`;
     this.props.history.push(url);
   }
@@ -37,25 +38,31 @@ class ResourceMarker extends Component {
   render() {
     return (
       <span>
-        {this.props.annotations.map((annotation, index) => {
+        {this.props.annotations.map(annotation => {
           const id = annotation.id;
           const markerClassNames = classnames({
-            'resource-marker': true,
+            "resource-marker": true,
             active: id === this.props.activeAnnotation
           });
           return (
             <span
-              key={index}
+              key={annotation.id}
               title={id}
               data-annotation-resource={id}
               className={markerClassNames}
-              onClick={(event) => { this.handleClick(event, annotation); }}
-              onMouseOver={() => { this.setActiveAnnotation(id); }}
-              onMouseLeave={() => { this.setActiveAnnotation(null); }}
+              onClick={event => {
+                this.handleClick(event, annotation);
+              }}
+              onMouseOver={() => {
+                this.setActiveAnnotation(id);
+              }}
+              onMouseLeave={() => {
+                this.setActiveAnnotation(null);
+              }}
             >
-              <i
-                className="manicon resource-cube-fill"
-              >&nbsp;&nbsp;&nbsp;&nbsp;</i>
+              <i className="manicon resource-cube-fill">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+              </i>
             </span>
           );
         })}

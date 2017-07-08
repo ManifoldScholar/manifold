@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import CollectionDetail from '../CollectionDetail';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import CollectionDetail from "../CollectionDetail";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend CollectionDetail Container", () => {
-
   const pagination = build.pagination();
   const store = build.store();
 
@@ -39,13 +38,13 @@ describe("Frontend CollectionDetail Container", () => {
     location: { query: null }
   };
 
-  const component = renderer.create(wrapWithRouter(
-    <Provider store={store}>
-      <CollectionDetail
-        {...props}
-      />
-    </Provider>
-  ));
+  const component = renderer.create(
+    wrapWithRouter(
+      <Provider store={store}>
+        <CollectionDetail {...props} />
+      </Provider>
+    )
+  );
 
   it("renders correctly", () => {
     let tree = component.toJSON();
@@ -56,11 +55,4 @@ describe("Frontend CollectionDetail Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
-
-
 });
-
-
-
-

@@ -1,6 +1,6 @@
-import React from 'react';
-import { render } from 'enzyme';
-import { MemoryRouter } from 'react-router-dom';
+import React from "react";
+import { render } from "enzyme";
+import { MemoryRouter } from "react-router-dom";
 
 export function wrapWithRouter(component) {
   return (

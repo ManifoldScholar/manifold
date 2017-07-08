@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Category } from 'components/backend';
-import { Dialog } from 'components/backend';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Category } from "components/backend";
 
 export default class ProjectDetailCategoryNew extends Component {
-
   static displayName = "ProjectDetail.Category.New";
 
   static propTypes = {
@@ -27,7 +25,9 @@ export default class ProjectDetailCategoryNew extends Component {
     return (
       <div>
         <header className="dialog-header-large">
-          <h2>{'Create Category'}</h2>
+          <h2>
+            {"Create Category"}
+          </h2>
         </header>
         <Category.Form
           projectId={this.props.project.id}

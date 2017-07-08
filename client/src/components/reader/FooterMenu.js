@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {
-    AppearanceMenuButton,
-    AppearanceMenuBody,
-    VisibilityButton
-} from 'components/reader';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { AppearanceMenuButton, VisibilityButton } from "components/reader";
 
 export default class Footer extends Component {
   static propTypes = {
@@ -14,16 +10,20 @@ export default class Footer extends Component {
 
   constructor() {
     super();
-    this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(this);
-    this.handleVisibilityButtonClick = this.handleVisibilityButtonClick.bind(this);
+    this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(
+      this
+    );
+    this.handleVisibilityButtonClick = this.handleVisibilityButtonClick.bind(
+      this
+    );
   }
 
   handleAppearanceMenuButtonClick() {
-    this.props.commonActions.panelToggle('appearance');
+    this.props.commonActions.panelToggle("appearance");
   }
 
   handleVisibilityButtonClick() {
-    this.props.commonActions.visibilityToggle('annotation');
+    this.props.commonActions.visibilityToggle("annotation");
   }
 
   render() {

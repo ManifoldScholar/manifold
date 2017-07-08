@@ -1,21 +1,20 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { Form } from 'components/backend';
-import { Provider } from 'react-redux';
-import createStore from 'store/createStore';
+import React from "react";
+import renderer from "react-test-renderer";
+import { Form } from "components/backend";
+import { Provider } from "react-redux";
+import createStore from "store/createStore";
 
 describe("Backend.Form.HasMany component", () => {
-
   const store = createStore();
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       <Provider store={store}>
         <Form.HasMany
           label="A form label"
           entities={[
-            { id: 1, attributes: { name: "John"}},
-            { id: 2, attributes: { name: "Jane"}}
+            { id: 1, attributes: { name: "John" } },
+            { id: 2, attributes: { name: "Jane" } }
           ]}
           onChange={() => {}}
           optionsFetch={() => {}}
@@ -28,5 +27,4 @@ describe("Backend.Form.HasMany component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

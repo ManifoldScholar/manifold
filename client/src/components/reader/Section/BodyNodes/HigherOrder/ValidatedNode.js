@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import mapKeys from 'lodash/mapKeys';
-import humps from 'humps';
-import startsWith from 'lodash/startsWith';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import mapKeys from "lodash/mapKeys";
+import humps from "humps";
+import startsWith from "lodash/startsWith";
 
-export default (RenderComponent) => {
-
+export default RenderComponent => {
   class ValidatedNode extends Component {
-
     static propTypes = {
       children: PropTypes.array,
       attributes: PropTypes.object,
@@ -18,9 +16,9 @@ export default (RenderComponent) => {
     };
 
     styleStringToObject(stylesString) {
-      const declarations = stylesString.split(';');
+      const declarations = stylesString.split(";");
       const object = declarations.reduce((previous, value) => {
-        const parts = value.split(':');
+        const parts = value.split(":");
         const styleProp = humps.camelize(parts[0]);
         previous[styleProp] = parts[1]; // eslint-disable-line no-param-reassign
         return previous;
@@ -30,19 +28,19 @@ export default (RenderComponent) => {
 
     cleanAttributes(attr) {
       const map = {
-        class: 'className',
-        for: 'htmlFor',
-        colspan: 'colSpan',
-        rowspan: 'rowSpan'
+        class: "className",
+        for: "htmlFor",
+        colspan: "colSpan",
+        rowspan: "rowSpan"
       };
       const mapped = mapKeys(attr, (attributeValue, attributeName) => {
         if (map.hasOwnProperty(attributeName)) return map[attributeName];
-        if (startsWith(attributeName, 'data')) {
-          return humps.decamelize(attributeName, { separator: '-' });
+        if (startsWith(attributeName, "data")) {
+          return humps.decamelize(attributeName, { separator: "-" });
         }
         return attributeName;
       });
-      if (mapped.hasOwnProperty('style')) {
+      if (mapped.hasOwnProperty("style")) {
         mapped.style = this.styleStringToObject(mapped.style);
       }
       return mapped;
@@ -51,14 +49,15 @@ export default (RenderComponent) => {
     render() {
       return (
         <RenderComponent
-          children={this.props.children}
           attributes={this.cleanAttributes(this.props.attributes)}
           tag={this.props.tag}
           textDigest={this.props.textDigest}
           nodeUuid={this.props.nodeUuid}
           openAnnotations={this.props.openAnnotations}
           {...this.state}
-        />
+        >
+          {this.props.children}
+        </RenderComponent>
       );
     }
   }

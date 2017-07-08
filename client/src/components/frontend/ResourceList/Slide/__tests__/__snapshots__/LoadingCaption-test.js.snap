@@ -5,7 +5,7 @@ exports[`Frontend.ResourceList.Slide.LoadingCaption component renders correctly 
   className="slide-caption"
 >
   <header>
-    <h2
+    <p
       className="resource-title"
     />
   </header>

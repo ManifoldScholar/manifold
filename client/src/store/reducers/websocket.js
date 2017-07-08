@@ -1,5 +1,5 @@
-import { handleActions } from 'redux-actions';
-import has from 'lodash/has';
+import { handleActions } from "redux-actions";
+import has from "lodash/has";
 
 export const initialState = {
   channels: {}
@@ -22,7 +22,9 @@ function _updateChannels(state, channels) {
 
 function _updateChannel(state, channelName, overlay) {
   const channel = Object.assign({}, state.channels[channelName], overlay);
-  const channels = Object.assign({}, state.channels, { [channelName]: channel });
+  const channels = Object.assign({}, state.channels, {
+    [channelName]: channel
+  });
   return _updateChannels(state, channels);
 }
 
@@ -34,7 +36,7 @@ function _closeChannel(state, channelName) {
 
 function _addMessage(state, channelName, message) {
   const channel = Object.assign({}, state.channels[channelName]);
-  const id = has(channel, 'message.id') ? channel.message.id + 1 : 1;
+  const id = has(channel, "message.id") ? channel.message.id + 1 : 1;
   channel.message = { type: message.type, payload: message.payload, id };
   return _updateChannel(state, channelName, channel);
 }
@@ -60,9 +62,12 @@ function receiveMessage(currentState, action) {
   return _addMessage(state, channel, message);
 }
 
-export default handleActions({
-  WEBSOCKET_CONNECT: openChannel,
-  WEBSOCKET_CONNECTED: activateChannel,
-  WEBSOCKET_DISCONNECTED: closeChannel,
-  WEBSOCKET_MESSAGE_RECEIVED: receiveMessage
-}, initialState);
+export default handleActions(
+  {
+    WEBSOCKET_CONNECT: openChannel,
+    WEBSOCKET_CONNECTED: activateChannel,
+    WEBSOCKET_DISCONNECTED: closeChannel,
+    WEBSOCKET_MESSAGE_RECEIVED: receiveMessage
+  },
+  initialState
+);

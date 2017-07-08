@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { ProjectList, Layout } from 'components/frontend';
-import { commonActions } from 'actions/helpers';
-import { bindActionCreators } from 'redux';
-import { uiFilterActions, entityStoreActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { projectsAPI, subjectsAPI, requests } from 'api';
-import get from 'lodash/get';
-
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { ProjectList, Layout } from "components/frontend";
+import { bindActionCreators } from "redux";
+import { uiFilterActions, entityStoreActions } from "actions";
+import { select } from "utils/entityUtils";
+import { projectsAPI, subjectsAPI, requests } from "api";
+import get from "lodash/get";
 
 const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;
 
 export class FeaturedContainer extends Component {
-
   static fetchData(getState, dispatch) {
-    const state = getState();
-    const featuredProjectsRequest =
-      request(projectsAPI.featured(), requests.feProjectsFeatured);
+    const featuredProjectsRequest = request(
+      projectsAPI.featured(),
+      requests.feProjectsFeatured
+    );
     const featuredSubjectsRequest = request(
       subjectsAPI.featuredSubjects(),
       requests.feSubjectsFeatured
@@ -48,8 +46,7 @@ export class FeaturedContainer extends Component {
     const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
       const apiCall = projectsAPI.featured(6, this.props.projectFilters);
-      const featuredRequest =
-        request(apiCall, requests.feProjectsFeatured);
+      const featuredRequest = request(apiCall, requests.feProjectsFeatured);
       dispatch(featuredRequest);
     }
   }
@@ -59,19 +56,24 @@ export class FeaturedContainer extends Component {
   }
 
   render() {
-    const boundSetFilters = bindActionCreators(setProjectFilters, this.props.dispatch);
+    const boundSetFilters = bindActionCreators(
+      setProjectFilters,
+      this.props.dispatch
+    );
     const subjects = this.props.subjects;
 
     return (
-      <div style={ {
-        overflowX: 'hidden'
-      } }>
+      <div
+        style={{
+          overflowX: "hidden"
+        }}
+      >
         <section className="bg-neutral05">
           <div className="container">
             <header className="section-heading utility-right">
               <h4 className="title">
-                <i className="manicon manicon-lamp"></i>
-                {'Featured Projects'}
+                <i className="manicon manicon-lamp" />
+                {"Featured Projects"}
               </h4>
               <div className="section-heading-utility-right">
                 <ProjectList.Filters
@@ -81,14 +83,17 @@ export class FeaturedContainer extends Component {
                 />
               </div>
             </header>
-            { this.props.featuredProjects ?
-              <ProjectList.Grid
-                authenticated={this.props.authentication.authenticated}
-                favorites={get(this.props.authentication, 'currentUser.favorites')}
-                dispatch={this.props.dispatch}
-                projects={this.props.featuredProjects}
-              /> : null
-            }
+            {this.props.featuredProjects
+              ? <ProjectList.Grid
+                  authenticated={this.props.authentication.authenticated}
+                  favorites={get(
+                    this.props.authentication,
+                    "currentUser.favorites"
+                  )}
+                  dispatch={this.props.dispatch}
+                  projects={this.props.featuredProjects}
+                />
+              : null}
           </div>
         </section>
         <Layout.ButtonNavigation

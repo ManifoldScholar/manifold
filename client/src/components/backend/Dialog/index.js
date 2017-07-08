@@ -1,6 +1,6 @@
-import Wrapper from './Wrapper.js';
-import Confirm from './Confirm.js';
-import ResetPassword from './ResetPassword.js';
+import Wrapper from "./Wrapper";
+import Confirm from "./Confirm";
+import ResetPassword from "./ResetPassword";
 
 export default {
   Wrapper,

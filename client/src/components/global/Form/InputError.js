@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import get from 'lodash/get';
-import isString from 'lodash/isString';
-import capitalize from 'lodash/capitalize';
-import humps from 'humps';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import get from "lodash/get";
+import capitalize from "lodash/capitalize";
+import humps from "humps";
 
 export default class InputError extends Component {
-
   static propTypes = {
     errors: PropTypes.array
   };
@@ -25,12 +23,13 @@ export default class InputError extends Component {
   }
 
   errorString(error) {
-    const param = get(error, 'source.param');
-    const pointer = get(error, 'source.pointer');
+    const param = get(error, "source.param");
+    const pointer = get(error, "source.pointer");
     const name = param || this.nameFromPointer(pointer);
     return capitalize(`${name} ${error.detail}.  `);
   }
 
+  /* eslint-disable react/no-array-index-key */
   render() {
     if (this.hasErrors()) {
       return (
@@ -38,7 +37,7 @@ export default class InputError extends Component {
           {this.props.errors.map((e, i) => {
             return (
               <span key={i} className="error">
-                { this.errorString(e) }
+                {this.errorString(e)}
                 <br />
               </span>
             );
@@ -48,4 +47,5 @@ export default class InputError extends Component {
     }
     return null;
   }
+  /* eslint-enable react/no-array-index-key */
 }

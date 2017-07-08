@@ -1,12 +1,11 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import ResetPassword from '../ResetPassword';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
+import React from "react";
+import { mount } from "enzyme";
+import ResetPassword from "../ResetPassword";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Backend.Dialog.ResetPassword Component", () => {
-
   const resolveMock = jest.fn();
   const rejectMock = jest.fn();
   const uiProps = {
@@ -16,13 +15,11 @@ describe("Backend.Dialog.ResetPassword Component", () => {
     resolve: resolveMock
   };
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = mount(
       wrapWithRouter(
-        <Provider store={build.store()} >
-          <ResetPassword
-            uiProps={uiProps}
-          />
+        <Provider store={build.store()}>
+          <ResetPassword uiProps={uiProps} />
         </Provider>
       )
     );
@@ -33,5 +30,4 @@ describe("Backend.Dialog.ResetPassword Component", () => {
     let tree = component.debug();
     expect(tree).toMatchSnapshot();
   });
-
 });

@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Project } from 'components/frontend';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Project } from "components/frontend";
 
 export default class ProjectListSummaryGrid extends Component {
-
   static displayName = "ProjectList.SummaryGrid";
 
   static propTypes = {
@@ -14,13 +13,12 @@ export default class ProjectListSummaryGrid extends Component {
   };
 
   render() {
-    const hideDate = true;
     return (
       <nav className="grid-project-summary">
         <ul>
-          {this.props.projects.map((project) => {
+          {this.props.projects.map(project => {
             return (
-              <li key={project.id} >
+              <li key={project.id}>
                 <Project.Thumbnail
                   authenticated={this.props.authenticated}
                   favorites={this.props.favorites}

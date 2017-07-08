@@ -1,18 +1,13 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import UIPanel from '../UIPanel';
+import React from "react";
+import renderer from "react-test-renderer";
+import UIPanel from "../UIPanel";
 
 describe("Global.UIPanel component", () => {
-
   function bodyComponentMock() {
-    return (
-      <div>
-        Render me
-      </div>
-    );
+    return <div>Render me</div>;
   }
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       <UIPanel
         id="show"
@@ -26,4 +21,3 @@ describe("Global.UIPanel component", () => {
     expect(tree).toMatchSnapshot();
   });
 });
-

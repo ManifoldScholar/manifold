@@ -1,9 +1,9 @@
-import { createAction } from 'redux-actions';
-import isString from 'lodash/isString';
-import isObject from 'lodash/isObject';
-import uuid from 'uuid';
+import { createAction } from "redux-actions";
+import isString from "lodash/isString";
+import isObject from "lodash/isObject";
+import uuid from "uuid";
 
-export const flush = createAction('ENTITY_STORE_FLUSH', (passedMetas) => {
+export const flush = createAction("ENTITY_STORE_FLUSH", passedMetas => {
   let metas;
   if (isString(passedMetas)) metas = [passedMetas];
   if (!metas && isObject(passedMetas)) metas = Object.values(passedMetas);
@@ -11,12 +11,15 @@ export const flush = createAction('ENTITY_STORE_FLUSH', (passedMetas) => {
   return metas;
 });
 
-export const request =
-  createAction('API_REQUEST', (requestConfig, meta = null, options = {}) => {
+export const request = createAction(
+  "API_REQUEST",
+  (requestConfig, meta = null, options = {}) => {
     return Object.assign({}, options, {
       request: requestConfig,
       state: 0
     });
-  }, (apiConfig, meta = null) => {
+  },
+  (apiConfig, meta = null) => {
     return meta || uuid.v1();
-  });
+  }
+);

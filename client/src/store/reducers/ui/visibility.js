@@ -1,5 +1,5 @@
-import { handleActions } from 'redux-actions';
-import mapValues from 'lodash/mapValues';
+import { handleActions } from "redux-actions";
+import mapValues from "lodash/mapValues";
 
 export const initialState = {
   loginOverlay: false,
@@ -46,7 +46,10 @@ const panelToggle = (state, action) => {
 
   // If the panel should display solo and its state is false when it is toggled,
   // set other panels to false on toggle
-  if (panelSolo[action.payload] === true && state.uiPanels[action.payload] === false) {
+  if (
+    panelSolo[action.payload] === true &&
+    state.uiPanels[action.payload] === false
+  ) {
     soloSwitch = true;
   }
 
@@ -75,17 +78,20 @@ const panelHide = (state, action) => {
   return Object.assign({}, state, { uiPanels: switchedPanels });
 };
 
-const allPanelsHide = (state) => {
+const allPanelsHide = state => {
   return Object.assign({}, state, { uiPanels: initialState.uiPanels });
 };
 
-export default handleActions({
-  VISIBILITY_TOGGLE: visibilityToggle,
-  VISIBILITY_SHOW: visibilityShow,
-  VISIBILITY_HIDE: visibilityHide,
-  PANEL_TOGGLE: panelToggle,
-  PANEL_SHOW: panelShow,
-  PANEL_HIDE: panelHide,
-  PANEL_HIDE_ALL: allPanelsHide,
-  '@@reduxReactRouter/routerDidChange': allPanelsHide
-}, initialState);
+export default handleActions(
+  {
+    VISIBILITY_TOGGLE: visibilityToggle,
+    VISIBILITY_SHOW: visibilityShow,
+    VISIBILITY_HIDE: visibilityHide,
+    PANEL_TOGGLE: panelToggle,
+    PANEL_SHOW: panelShow,
+    PANEL_HIDE: panelHide,
+    PANEL_HIDE_ALL: allPanelsHide,
+    "@@reduxReactRouter/routerDidChange": allPanelsHide
+  },
+  initialState
+);

@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import setter from './setter';
-import withDispatch from 'containers/global/HigherOrder/withDispatch';
-import { Form as GlobalForm } from 'components/global';
-import isString from 'lodash/isString';
-import { loadingActions } from 'actions';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import setter from "./setter";
+import withDispatch from "containers/global/HigherOrder/withDispatch";
+import { Form as GlobalForm } from "components/global";
+import isString from "lodash/isString";
+import { loadingActions } from "actions";
 
 class FormCodeArea extends Component {
-
   static displayName = "Form.CodeArea";
 
   static propTypes = {
     label: PropTypes.string,
-    onChange: PropTypes.func,
     dispatch: PropTypes.func.isRequired,
     value: PropTypes.string,
     instructions: PropTypes.string,
@@ -21,7 +19,7 @@ class FormCodeArea extends Component {
     height: PropTypes.string,
     name: PropTypes.string,
     readOnly: PropTypes.bool,
-    mode: PropTypes.oneOf(['css', 'javascript', 'html']).isRequired
+    mode: PropTypes.oneOf(["css", "javascript", "html"]).isRequired
   };
 
   static defaultProps = {
@@ -38,15 +36,15 @@ class FormCodeArea extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(loadingActions.start('code-area'));
-    import(/* webpackChunkName: "ace-editor" */ './CodeArea/Ace').then((ace) => {
+    this.props.dispatch(loadingActions.start("code-area"));
+    import(/* webpackChunkName: "ace-editor" */ "./CodeArea/Ace").then(ace => {
       const Editor = ace.default;
-      this.props.dispatch(loadingActions.stop('code-area'));
+      this.props.dispatch(loadingActions.stop("code-area"));
       this.setState({ Editor });
     });
   }
 
-  onChange = (value) => {
+  onChange = value => {
     this.props.set(value);
   };
 
@@ -55,7 +53,6 @@ class FormCodeArea extends Component {
   }
 
   render() {
-
     const { Editor } = this.state;
     if (!Editor) return null;
 
@@ -67,12 +64,14 @@ class FormCodeArea extends Component {
           errors={this.props.errors}
           label={this.props.label}
         >
-          <label>{this.props.label}</label>
-          {
-            isString(this.props.instructions) ?
-              <span className="instructions">{this.props.instructions}</span>
-              : null
-          }
+          <label>
+            {this.props.label}
+          </label>
+          {isString(this.props.instructions)
+            ? <span className="instructions">
+                {this.props.instructions}
+              </span>
+            : null}
           <Editor
             mode={this.props.mode}
             theme="idle_fingers"
@@ -88,7 +87,6 @@ class FormCodeArea extends Component {
       </div>
     );
   }
-
 }
 
 export default setter(withDispatch(FormCodeArea));

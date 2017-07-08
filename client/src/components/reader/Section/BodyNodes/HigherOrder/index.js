@@ -1,4 +1,4 @@
-import ValidatedNode from './ValidatedNode';
+import ValidatedNode from "./ValidatedNode";
 
 export default {
   ValidatedNode

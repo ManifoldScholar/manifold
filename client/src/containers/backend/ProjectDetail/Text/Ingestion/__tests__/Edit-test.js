@@ -1,25 +1,24 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import renderer from 'react-test-renderer';
-import { IngestionEdit } from '../Edit';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import { Provider } from "react-redux";
+import renderer from "react-test-renderer";
+import { IngestionEdit } from "../Edit";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("ProjectDetail Text Ingestion Edit Container", () => {
-
   const project = build.entity.project("1");
-  const location =  {};
+  const location = {};
   const history = build.history();
 
   const props = { project, location, history };
 
-  const component = renderer.create(wrapWithRouter(
-    <Provider store={build.store()}>
-      <IngestionEdit
-        {...props}
-      />
-    </Provider>
-  ));
+  const component = renderer.create(
+    wrapWithRouter(
+      <Provider store={build.store()}>
+        <IngestionEdit {...props} />
+      </Provider>
+    )
+  );
 
   it("renders correctly", () => {
     let tree = component.toJSON();
@@ -30,5 +29,4 @@ describe("ProjectDetail Text Ingestion Edit Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

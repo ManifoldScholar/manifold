@@ -1,9 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Filters from '../Filters';
+import React from "react";
+import renderer from "react-test-renderer";
+import Filters from "../Filters";
 
 describe("Frontend.ResourceList.Filters Component", () => {
-
   const tags = ["dog", "puppy"];
   const kinds = ["image", "video"];
   const filterChangeMock = jest.fn();

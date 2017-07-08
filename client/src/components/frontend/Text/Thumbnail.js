@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import lh from 'helpers/linkHandler';
-import { Link } from 'react-router-dom';
-import { Text } from 'components/global';
-import FormattedDate from 'components/global/FormattedDate';
-import get from 'lodash/get';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import lh from "helpers/linkHandler";
+import { Link } from "react-router-dom";
+import { Text } from "components/global";
+import FormattedDate from "components/global/FormattedDate";
+import get from "lodash/get";
 
 export default class TextThumbnail extends Component {
-
   static displayName = "Text.Thumbnail";
 
   static propTypes = {
@@ -33,11 +32,11 @@ export default class TextThumbnail extends Component {
   // placeholder icon
   renderThumbnail(text) {
     let thumbnail = null;
-    if (get(text.attributes, 'coverStyles.small')) {
+    if (get(text.attributes, "coverStyles.small")) {
       thumbnail = (
         <img
           src={text.attributes.coverStyles.small}
-          alt={'Thumbnail image for ' + text.attributes.title}
+          alt={"Thumbnail image for " + text.attributes.title}
         />
       );
     } else {
@@ -59,11 +58,9 @@ export default class TextThumbnail extends Component {
         <div className="asset-link">
           <Link to={lh.link("reader", this.props.text.id)}>
             <figure className="asset-image">
-              { text.attributes.age <= 30 ?
-                <i className="manicon manicon-new"></i>
-              :
-                null
-              }
+              {text.attributes.age <= 30
+                ? <i className="manicon manicon-new" />
+                : null}
               {this.renderThumbnail(text)}
             </figure>
           </Link>
@@ -86,14 +83,17 @@ export default class TextThumbnail extends Component {
             <div className="asset-status">
               <ul className="asset-interactions">
                 <li>
-                  <div >
-                    <i className="manicon manicon-pencil-simple" style={styles}></i>
+                  <div>
+                    <i
+                      className="manicon manicon-pencil-simple"
+                      style={styles}
+                    />
                     {text.attributes.annotationsCount}
                   </div>
                 </li>
                 <li>
                   <div>
-                    <i className="manicon manicon-highlight" style={styles}></i>
+                    <i className="manicon manicon-highlight" style={styles} />
                     {text.attributes.highlightsCount}
                   </div>
                 </li>

@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
 export default class UserMenuBody extends Component {
-
   static propTypes = {
     hideUserMenu: PropTypes.func.isRequired,
     startLogout: PropTypes.func.isRequired,
@@ -30,25 +29,25 @@ export default class UserMenuBody extends Component {
 
   render() {
     const menuClass = classNames({
-      'user-menu': true,
-      'menu-hidden': !this.props.visible,
-      'menu-visible': this.props.visible
+      "user-menu": true,
+      "menu-hidden": !this.props.visible,
+      "menu-visible": this.props.visible
     });
 
     return (
       <nav className={menuClass}>
-        <i className="tail"></i>
+        <i className="tail" />
         <ul>
           <li>
-            <a href="#" onClick={this.handleProfileClick} >
-              <i className="manicon manicon-person-pencil"></i>
-              {'Edit Profile'}
+            <a href="#" onClick={this.handleProfileClick}>
+              <i className="manicon manicon-person-pencil" />
+              {"Edit Profile"}
             </a>
           </li>
           <li>
             <button onClick={this.logout}>
-              <i className="manicon manicon-circle-arrow-out-right"></i>
-              {'Logout'}
+              <i className="manicon manicon-circle-arrow-out-right" />
+              {"Logout"}
             </button>
           </li>
         </ul>

@@ -1,9 +1,8 @@
 export default {
-
   index(filter, page) {
     return {
-      endpoint: '/api/v1/texts',
-      method: 'GET',
+      endpoint: "/api/v1/texts",
+      method: "GET",
       options: {
         params: { filter, page }
       }
@@ -13,16 +12,15 @@ export default {
   show(id) {
     return {
       endpoint: `/api/v1/texts/${id}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   },
 
   create(text) {
     return {
-      endpoint: '/api/v1/texts',
-      method: 'POST',
+      endpoint: "/api/v1/texts",
+      method: "POST",
       options: {
         body: JSON.stringify({ type: "texts", data: text })
       }
@@ -32,7 +30,7 @@ export default {
   update(id, text) {
     return {
       endpoint: `/api/v1/texts/${id}`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "texts", data: text })
       }
@@ -42,9 +40,8 @@ export default {
   destroy(id) {
     return {
       endpoint: `/api/v1/texts/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
   }
-
 };

@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export default class StaticForm extends Component {
-
   static displayName = "Static.Form";
 
   render() {
@@ -16,17 +15,14 @@ export default class StaticForm extends Component {
         */}
         <section>
           <div className="container">
-            <h4 className="section-heading">
-              Assorted form elements
-            </h4>
+            <h4 className="section-heading">Assorted form elements</h4>
 
             <div className="row-3-p">
               <div className="col-33">
-
                 <div className="form-input form-error">
                   <label>Text Entry Field</label>
                   <input type="text" placeholder="Text Entry Field" />
-                  <i className="manicon manicon-stop"></i>
+                  <i className="manicon manicon-stop" />
                   <span className="form-error-message">something happened</span>
                 </div>
               </div>
@@ -42,7 +38,7 @@ export default class StaticForm extends Component {
                 <div className="form-input">
                   <label>&nbsp;</label>
                   <div className="form-select">
-                    <i className="manicon manicon-caret-down"></i>
+                    <i className="manicon manicon-caret-down" />
                     <select>
                       <option>Select Dropdown</option>
                       <option>Select an option</option>
@@ -57,36 +53,39 @@ export default class StaticForm extends Component {
               <div className="col-66">
                 <div className="form-input">
                   <label>Editable text field</label>
-                  <textarea placeholder="Start typing annotation here..."></textarea>
+                  <textarea placeholder="Start typing annotation here..." />
                 </div>
               </div>
 
               <div className="col-33">
                 <div className="form-callout">
                   <header>
-                    <i className="manicon manicon-bugle"></i>
+                    <i className="manicon manicon-bugle" />
                     Notifications
                   </header>
 
                   <div className="form-input">
                     <label className="form-toggle radio annotated">
-                      <input type="radio" name="notifications"/>
-                    <span className="toggle-indicator"></span>
+                      <input type="radio" name="notifications" />
+                      <span className="toggle-indicator" />
                       <span className="toggle-label">Please Opt Me In</span>
                       <span className="toggle-note">
-                        I have always been very upset when I am left out of the group.
-                        This goes double for newsletters,  promotional offers,
-                        and targeted advertising.
+                        I have always been very upset when I am left out of the
+                        group. This goes double for newsletters, promotional
+                        offers, and targeted advertising.
                       </span>
                     </label>
 
                     <label className="form-toggle radio annotated">
-                      <input type="radio" name="notifications"/>
-                    <span className="toggle-indicator"></span>
-                      <span className="toggle-label">None of your bee's wax</span>
+                      <input type="radio" name="notifications" />
+                      <span className="toggle-indicator" />
+                      <span className="toggle-label">
+                        {"None of your bee's wax"}
+                      </span>
                       <span className="toggle-note">
-                        I have several suggestions for where I would most like to see
-                        your newsletter delivered, none of which include my email address.
+                        I have several suggestions for where I would most like
+                        to see your newsletter delivered, none of which include
+                        my email address.
                       </span>
                     </label>
                   </div>
@@ -96,7 +95,7 @@ export default class StaticForm extends Component {
                   <label>Checkboxes Vertical</label>
                   {/* Radio buttons and checkboxes get wrapped in a toggle class */}
                   <label className="form-toggle checkbox">
-                    <input type="checkbox"/>
+                    <input type="checkbox" />
                     <span className="toggle-indicator">
                       {/*
                         Checkboxes, and radio buttons require a .toggle-indicator in order
@@ -104,21 +103,21 @@ export default class StaticForm extends Component {
                         require a "check" icon that is shown/hidden conditionally by
                         the state of the element.
                       */}
-                      <i className="manicon manicon-check"></i>
+                      <i className="manicon manicon-check" />
                     </span>
                     <span className="toggle-label">Checkbox item</span>
                   </label>
                   <label className="form-toggle checkbox">
-                    <input type="checkbox"/>
+                    <input type="checkbox" />
                     <span className="toggle-indicator">
-                      <i className="manicon manicon-check"></i>
+                      <i className="manicon manicon-check" />
                     </span>
                     <span className="toggle-label">Checkbox item</span>
                   </label>
                   <label className="form-toggle checkbox">
-                    <input type="checkbox"/>
+                    <input type="checkbox" />
                     <span className="toggle-indicator">
-                      <i className="manicon manicon-check"></i>
+                      <i className="manicon manicon-check" />
                     </span>
                     <span className="toggle-label">Checkbox item</span>
                   </label>
@@ -127,7 +126,7 @@ export default class StaticForm extends Component {
                 <div className="form-input">
                   <label>Radios Vertical</label>
                   <label className="form-toggle radio">
-                    <input type="radio" name="test"/>
+                    <input type="radio" name="test" />
                     <span className="toggle-indicator">
                       {/* Radio Buttons don't have/require a check icon */}
                     </span>
@@ -135,16 +134,14 @@ export default class StaticForm extends Component {
                   </label>
 
                   <label className="form-toggle radio">
-                    <input type="radio" name="test"/>
-                    <span className="toggle-indicator">
-                    </span>
+                    <input type="radio" name="test" />
+                    <span className="toggle-indicator" />
                     <span className="toggle-label">Radio item</span>
                   </label>
 
                   <label className="form-toggle radio">
-                    <input type="radio" name="test"/>
-                    <span className="toggle-indicator">
-                    </span>
+                    <input type="radio" name="test" />
+                    <span className="toggle-indicator" />
                     <span className="toggle-label">Radio item</span>
                   </label>
                 </div>
@@ -157,27 +154,27 @@ export default class StaticForm extends Component {
                   <label>Checkboxes Horizontal</label>
 
                   <label className="form-toggle checkbox horizontal">
-                    <input type="checkbox"/>
-                      <span className="toggle-indicator">
-                        <i className="manicon manicon-check"></i>
-                      </span>
-                      <span className="toggle-label">Checkbox item</span>
+                    <input type="checkbox" />
+                    <span className="toggle-indicator">
+                      <i className="manicon manicon-check" />
+                    </span>
+                    <span className="toggle-label">Checkbox item</span>
                   </label>
 
                   <label className="form-toggle checkbox horizontal">
-                    <input type="checkbox"/>
-                      <span className="toggle-indicator">
-                        <i className="manicon manicon-check"></i>
-                      </span>
-                      <span className="toggle-label">Checkbox item</span>
+                    <input type="checkbox" />
+                    <span className="toggle-indicator">
+                      <i className="manicon manicon-check" />
+                    </span>
+                    <span className="toggle-label">Checkbox item</span>
                   </label>
 
                   <label className="form-toggle checkbox horizontal">
-                    <input type="checkbox"/>
-                      <span className="toggle-indicator">
-                        <i className="manicon manicon-check"></i>
-                      </span>
-                      <span className="toggle-label">Checkbox item</span>
+                    <input type="checkbox" />
+                    <span className="toggle-indicator">
+                      <i className="manicon manicon-check" />
+                    </span>
+                    <span className="toggle-label">Checkbox item</span>
                   </label>
                 </div>
 
@@ -185,24 +182,21 @@ export default class StaticForm extends Component {
                   <label>Checkboxes Horizontal</label>
 
                   <label className="form-toggle radio horizontal">
-                    <input type="radio"/>
-                      <span className="toggle-indicator">
-                      </span>
-                      <span className="toggle-label">Checkbox item</span>
+                    <input type="radio" />
+                    <span className="toggle-indicator" />
+                    <span className="toggle-label">Checkbox item</span>
                   </label>
 
                   <label className="form-toggle radio horizontal">
-                    <input type="radio"/>
-                      <span className="toggle-indicator">
-                      </span>
-                      <span className="toggle-label">Checkbox item</span>
+                    <input type="radio" />
+                    <span className="toggle-indicator" />
+                    <span className="toggle-label">Checkbox item</span>
                   </label>
 
                   <label className="form-toggle radio horizontal">
-                    <input type="radio"/>
-                      <span className="toggle-indicator">
-                      </span>
-                      <span className="toggle-label">Checkbox item</span>
+                    <input type="radio" />
+                    <span className="toggle-indicator" />
+                    <span className="toggle-label">Checkbox item</span>
                   </label>
                 </div>
               </div>
@@ -212,7 +206,11 @@ export default class StaticForm extends Component {
               <div className="col-33">
                 {/* Use button-secondary-dull when button is disabled */}
                 <div className="form-input">
-                  <input type="submit" className="button-secondary-dull" disabled />
+                  <input
+                    type="submit"
+                    className="button-secondary-dull"
+                    disabled
+                  />
                   <input type="submit" className="button-secondary" />
                 </div>
               </div>

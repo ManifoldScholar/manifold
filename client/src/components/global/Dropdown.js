@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class Dropdown extends Component {
   static propTypes = {
@@ -18,14 +18,15 @@ export default class Dropdown extends Component {
     // Add logic here to show/hide menu
   }
 
-  clickHandler() {
-  }
+  clickHandler() {}
 
   render() {
     return (
       <div>
         {/* Second argument as props */}
-        {React.createElement(this.props.triggerComponent, { onClick: this.clickHandler })}
+        {React.createElement(this.props.triggerComponent, {
+          onClick: this.clickHandler
+        })}
         {React.createElement(this.props.bodyComponent, { ...this.props })}
       </div>
     );

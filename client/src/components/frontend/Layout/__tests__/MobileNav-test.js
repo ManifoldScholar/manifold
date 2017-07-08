@@ -1,21 +1,14 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import MobileNav from '../MobileNav';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import MobileNav from "../MobileNav";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Layout.MobileNav component", () => {
-
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
-      wrapWithRouter(
-        <MobileNav
-          location={{}}
-        />
-      )
+      wrapWithRouter(<MobileNav location={{}} />)
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });
-

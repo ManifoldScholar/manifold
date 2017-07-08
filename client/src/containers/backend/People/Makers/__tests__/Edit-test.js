@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { MakersEditContainer } from '../Edit';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { MakersEditContainer } from "../Edit";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend People Makers Edit Container", () => {
-
   const store = build.store();
   const maker = build.entity.user("1");
   maker.type = "makers";
@@ -14,7 +13,7 @@ describe("Backend People Makers Edit Container", () => {
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <MakersEditContainer
           maker={maker}
           dispatch={store.dispatch}
@@ -35,5 +34,4 @@ describe("Backend People Makers Edit Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

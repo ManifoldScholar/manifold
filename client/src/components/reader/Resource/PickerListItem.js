@@ -1,14 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import FormattedDate from 'components/global/FormattedDate';
-import { Resource } from 'components/frontend';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import FormattedDate from "components/global/FormattedDate";
+import { Resource } from "components/frontend";
 
 export default class ResourcePickerListItem extends PureComponent {
-
   static displayName = "Resource.PickerListItem";
 
   static propTypes = {
-    entity: PropTypes.object
+    entity: PropTypes.object,
+    selectionHandler: PropTypes.func,
+    projectId: PropTypes.string
   };
 
   constructor(props) {
@@ -27,7 +28,7 @@ export default class ResourcePickerListItem extends PureComponent {
     const attr = resource.attributes;
     return (
       <li>
-        <a href="#" onClick={this.handleClick} >
+        <a href="#" onClick={this.handleClick}>
           <header>
             <figure className="cover">
               <Resource.Thumbnail
@@ -45,10 +46,7 @@ export default class ResourcePickerListItem extends PureComponent {
                   dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
                 />
                 <span className="subtitle">
-                  <FormattedDate
-                    format="MMMM DD, YYYY"
-                    date={attr.createdAt}
-                  />
+                  <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
                 </span>
               </h3>
             </div>
@@ -56,7 +54,5 @@ export default class ResourcePickerListItem extends PureComponent {
         </a>
       </li>
     );
-
   }
-
 }

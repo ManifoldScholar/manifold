@@ -1,5 +1,5 @@
-import Thread from './Thread';
-import Editor from './Editor';
+import Thread from "./Thread";
+import Editor from "./Editor";
 
 export default {
   Thread,

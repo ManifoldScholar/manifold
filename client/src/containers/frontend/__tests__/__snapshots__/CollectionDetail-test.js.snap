@@ -216,10 +216,6 @@ exports[`Frontend CollectionDetail Container renders correctly 1`] = `
           </div>
         </div>
       </div>
-      <a
-        id="pagination-target"
-        name="pagination-target"
-      />
       <div
         className="resource-totals"
         data-id="total-container"
@@ -228,7 +224,8 @@ exports[`Frontend CollectionDetail Container renders correctly 1`] = `
           href="/project/1/resources"
           onClick={[Function]}
         >
-          View All Project Resources 
+          View All Project Resources
+           
           <i
             className="manicon manicon-arrow-right"
           />

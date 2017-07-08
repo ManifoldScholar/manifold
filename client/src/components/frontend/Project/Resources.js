@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { ResourceList } from 'components/frontend';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { ResourceList } from "components/frontend";
 
 export default class ProjectResources extends Component {
-
   static displayName = "Project.Resources";
 
   static propTypes = {
@@ -14,10 +13,6 @@ export default class ProjectResources extends Component {
     filterChange: PropTypes.func.isRequired,
     initialFilterState: PropTypes.object
   };
-
-  constructor() {
-    super();
-  }
 
   render() {
     const project = this.props.project;

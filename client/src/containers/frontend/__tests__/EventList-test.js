@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { ProjectEventsContainer } from '../EventList';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { ProjectEventsContainer } from "../EventList";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend EventList Container", () => {
-
   const pagination = build.pagination();
   const store = build.store();
 
@@ -17,15 +16,13 @@ describe("Frontend EventList Container", () => {
     pagination
   };
 
-  const component = renderer.create(wrapWithRouter(
-    <Provider store={store}>
-      <ProjectEventsContainer
-        project={project}
-        events={events}
-        meta={meta}
-      />
-    </Provider>
-  ));
+  const component = renderer.create(
+    wrapWithRouter(
+      <Provider store={store}>
+        <ProjectEventsContainer project={project} events={events} meta={meta} />
+      </Provider>
+    )
+  );
 
   it("renders correctly", () => {
     let tree = component.toJSON();
@@ -37,7 +34,3 @@ describe("Frontend EventList Container", () => {
     expect(tree).not.toBe(null);
   });
 });
-
-
-
-

@@ -1,4 +1,4 @@
-import Form from './Form.js';
+import Form from "./Form";
 
 export default {
   Form

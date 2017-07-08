@@ -1,9 +1,8 @@
 export default {
-
   create(email) {
     return {
       endpoint: `/api/v1/passwords`,
-      method: 'POST',
+      method: "POST",
       options: {
         params: { email }
       }
@@ -13,7 +12,7 @@ export default {
   update(password, passwordConfirmation, resetToken) {
     return {
       endpoint: `/api/v1/passwords/update`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         params: {
           password,
@@ -27,11 +26,10 @@ export default {
   admin_reset_password(id) {
     return {
       endpoint: `/api/v1/passwords/admin_reset_password`,
-      method: 'POST',
+      method: "POST",
       options: {
         params: { id }
       }
     };
   }
-
 };

@@ -1,8 +1,7 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 
 export default class Label extends PureComponent {
-
   static propTypes = {
     text: PropTypes.object.isRequired
   };

@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import capitalize from 'lodash/capitalize';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import capitalize from "lodash/capitalize";
 
 export default class ResourceListFilters extends Component {
-
   static displayName = "ResourceList.Filters";
 
   static propTypes = {
@@ -22,9 +21,10 @@ export default class ResourceListFilters extends Component {
 
   setFilters(event, label) {
     event.preventDefault();
-    const value = (label === "keyword")
-      ? event.target.querySelector(".search-input input").value
-      : event.target.value;
+    const value =
+      label === "keyword"
+        ? event.target.querySelector(".search-input input").value
+        : event.target.value;
     const filter = Object.assign({}, this.state.filter);
     const inputs = Object.assign({}, this.state.inputs);
     if (value && label) {
@@ -62,8 +62,8 @@ export default class ResourceListFilters extends Component {
 
   initialState(init) {
     return {
-      filter: init ? init : {},
-      inputs: init ? init : {
+      filter: init || {},
+      inputs: init || {
         keyword: "",
         kind: "default",
         tag: "default",
@@ -85,7 +85,7 @@ export default class ResourceListFilters extends Component {
       >
         <div className="search-input">
           <button className="search-button" type="submit">
-            <i className="manicon manicon-magnify"></i>
+            <i className="manicon manicon-magnify" />
           </button>
           <input
             value={this.state.inputs.keyword}
@@ -100,53 +100,51 @@ export default class ResourceListFilters extends Component {
               onChange={event => this.setFilters(event, "kind")}
               value={this.state.inputs.kind}
             >
-              <option value="default">
-                Type:
-              </option>
-              {this.props.kinds ?
-                this.props.kinds.map((kind, index) => {
-                  return (
-                    <option key={index} value={kind}>{capitalize(kind)}</option>
-                  );
-                })
-              : null}
+              <option value="default">Type:</option>
+              {this.props.kinds
+                ? this.props.kinds.map(kind => {
+                    return (
+                      <option key={kind} value={kind}>
+                        {capitalize(kind)}
+                      </option>
+                    );
+                  })
+                : null}
             </select>
-            <i className="manicon manicon-caret-down"></i>
+            <i className="manicon manicon-caret-down" />
           </div>
           <div className="select">
             <select
               onChange={event => this.setFilters(event, "tag")}
               value={this.state.inputs.tag}
             >
-              <option value="default">
-                Tag:
-              </option>
-              {this.props.tags ?
-                this.props.tags.map((tag, index) => {
-                  return (
-                    <option key={index} value={tag}>{capitalize(tag)}</option>
-                  );
-                })
-              : null}
+              <option value="default">Tag:</option>
+              {this.props.tags
+                ? this.props.tags.map(tag => {
+                    return (
+                      <option key={tag} value={tag}>
+                        {capitalize(tag)}
+                      </option>
+                    );
+                  })
+                : null}
             </select>
-            <i className="manicon manicon-caret-down"></i>
+            <i className="manicon manicon-caret-down" />
           </div>
           <div className="select">
             <select
               onChange={event => this.setFilters(event, "order")}
               value={this.state.inputs.order}
             >
-              <option value="default">
-                Order By:
-              </option>
+              <option value="default">Order By:</option>
               <option value="title ASC">A-Z</option>
               <option value="title DESC">Z-A</option>
             </select>
-            <i className="manicon manicon-caret-down"></i>
+            <i className="manicon manicon-caret-down" />
           </div>
         </div>
         <button className="reset-button" onClick={this.resetFilters}>
-          {'Reset Search + Filters'}
+          {"Reset Search + Filters"}
         </button>
       </form>
     );

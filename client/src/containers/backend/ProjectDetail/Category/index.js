@@ -1,6 +1,6 @@
-import Wrapper from './Wrapper';
-import New from './New';
-import Edit from './Edit';
+import Wrapper from "./Wrapper";
+import New from "./New";
+import Edit from "./Edit";
 
 export default {
   Wrapper,

@@ -1,18 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
-import classNames from 'classnames';
-import throttle from 'lodash/throttle';
-import Single from './Single';
-import GroupThumbnail from './GroupThumbnail';
-import { Resource } from 'components/frontend';
-import { connect } from 'react-redux';
-import { uiReaderActions } from 'actions';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import classNames from "classnames";
+import throttle from "lodash/throttle";
+import Single from "./Single";
+import GroupThumbnail from "./GroupThumbnail";
+import { connect } from "react-redux";
+import { uiReaderActions } from "actions";
+import lh from "helpers/linkHandler";
 
 export class ResourceViewerGroup extends PureComponent {
-
   static displayName = "ResourceViewer.Group";
 
   static propTypes = {
@@ -23,7 +21,8 @@ export class ResourceViewerGroup extends PureComponent {
     singleHeight: PropTypes.number,
     fadeIn: PropTypes.bool,
     textId: PropTypes.string,
-    sectionId: PropTypes.string
+    sectionId: PropTypes.string,
+    dispatch: PropTypes.func
   };
 
   static mapStateToProps(state, ownProps) {
@@ -42,7 +41,7 @@ export class ResourceViewerGroup extends PureComponent {
     super();
     this.state = {
       visible: true,
-      groupActiveAnnotationId: null,
+      groupActiveAnnotationId: null
     };
 
     this.handleFade = this.handleFade.bind(this);
@@ -53,21 +52,14 @@ export class ResourceViewerGroup extends PureComponent {
   componentDidMount() {
     if (this.props.fadeIn) {
       this.handleFade();
-      window.addEventListener('scroll', this.throttledFade);
+      window.addEventListener("scroll", this.throttledFade);
     }
   }
 
   componentWillUnmount() {
     if (this.props.fadeIn) {
-      window.removeEventListener('scroll', this.throttledFade);
+      window.removeEventListener("scroll", this.throttledFade);
     }
-  }
-
-  handleFade(event = null) {
-    const rect = this.group.getBoundingClientRect();
-    this.setState({
-      visible: rect.top > 120 && (rect.top + rect.height / 2) < window.innerHeight
-    });
   }
 
   setGroupActive(annotationId) {
@@ -80,9 +72,23 @@ export class ResourceViewerGroup extends PureComponent {
     this.props.dispatch(uiReaderActions.setActiveAnnotation(annotationId));
   }
 
+  getHighlightedItem() {
+    const propsActive = this.props.activeAnnotation;
+    const stateActive = this.state.groupActiveAnnotationId;
+    if (!propsActive && !stateActive) {
+      return this.props.items[0];
+    }
+
+    if (this.matchHighlightItemById(propsActive))
+      return this.matchHighlightItemById(propsActive);
+    if (this.matchHighlightItemById(stateActive))
+      return this.matchHighlightItemById(stateActive);
+    return this.props.items[0];
+  }
+
   matchHighlightItemById(id) {
     // Match highlighted items based on props activeAnnotation
-    const highlighted = this.props.items.filter((item) => {
+    const highlighted = this.props.items.filter(item => {
       return id === item.annotationId;
     });
 
@@ -93,49 +99,41 @@ export class ResourceViewerGroup extends PureComponent {
     return null;
   }
 
-  getHighlightedItem() {
-    const propsActive = this.props.activeAnnotation;
-    const stateActive = this.state.groupActiveAnnotationId;
-    if (!propsActive && !stateActive) {
-      return this.props.items[0];
-    }
-
-    if (this.matchHighlightItemById(propsActive)) return this.matchHighlightItemById(propsActive);
-    if (this.matchHighlightItemById(stateActive)) return this.matchHighlightItemById(stateActive);
-    return this.props.items[0];
+  handleFade(eventIgnored) {
+    const rect = this.group.getBoundingClientRect();
+    this.setState({
+      visible: rect.top > 120 && rect.top + rect.height / 2 < window.innerHeight
+    });
   }
 
   render() {
     const { textId, sectionId } = this.props;
     const highlightedItem = this.getHighlightedItem();
     const groupClass = classNames({
-      'resource-preview-group': true,
-      'transition-out': this.props.fadeIn && !this.state.visible,
-      'transition-in': this.props.fadeIn && this.state.visible
-    });
-
-    const highlightedLinkClass = classNames({
-      'group-highlighted-resource': true,
-      'resource-single-link': true,
-      highlighted: highlightedItem.annotationId === this.props.activeAnnotation
+      "resource-preview-group": true,
+      "transition-out": this.props.fadeIn && !this.state.visible,
+      "transition-in": this.props.fadeIn && this.state.visible
     });
 
     const thumbnailsClass = classNames({
-      'group-thumbnails': true,
+      "group-thumbnails": true,
       overflow: this.props.items.length > 8
     });
 
     return (
-      <div className={groupClass}
+      <div
+        className={groupClass}
         style={{
-          top: this.props.location + 'px',
-          height: this.props.height + 'px'
+          top: this.props.location + "px",
+          height: this.props.height + "px"
         }}
-        ref={(r) => { this.group = r; }}
+        ref={r => {
+          this.group = r;
+        }}
       >
         <div
           className="group-highlighted-resource-wrapper"
-          style={{ height: this.props.singleHeight + 'px' }}
+          style={{ height: this.props.singleHeight + "px" }}
         >
           <ReactCSSTransitionGroup
             transitionName="highlight"
@@ -159,16 +157,23 @@ export class ResourceViewerGroup extends PureComponent {
         </div>
 
         <ul className={thumbnailsClass}>
-          {this.props.items.map((item, index) => {
+          {this.props.items.map(item => {
             return (
-              <li key={index}>
+              <li key={item.resource.id}>
                 <Link
                   onMouseOver={() => {
                     this.setActiveAnnotation(item.annotationId);
                     this.setGroupActive(item.annotationId);
                   }}
-                  onMouseLeave={() => { this.setActiveAnnotation(null); }}
-                  to={lh.link("readerSectionResource", textId, sectionId, item.resource.id)}
+                  onMouseLeave={() => {
+                    this.setActiveAnnotation(null);
+                  }}
+                  to={lh.link(
+                    "readerSectionResource",
+                    textId,
+                    sectionId,
+                    item.resource.id
+                  )}
                   title={item.resource.id}
                 >
                   <GroupThumbnail
@@ -185,6 +190,6 @@ export class ResourceViewerGroup extends PureComponent {
   }
 }
 
-export default connect(
-  ResourceViewerGroup.mapStateToProps
-)(ResourceViewerGroup);
+export default connect(ResourceViewerGroup.mapStateToProps)(
+  ResourceViewerGroup
+);

@@ -1,12 +1,11 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import MaskedTextInput from '../MaskedTextInput';
+import React from "react";
+import { mount } from "enzyme";
+import MaskedTextInput from "../MaskedTextInput";
 
 describe("Backend.Form.MaskedTextInput component", () => {
-
   const changeMock = jest.fn();
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = mount(
       <MaskedTextInput
         mask={[/\d/, /\d/, /\d/, /\d/]}
@@ -23,5 +22,4 @@ describe("Backend.Form.MaskedTextInput component", () => {
     let tree = component.debug();
     expect(tree).toMatchSnapshot();
   });
-
 });

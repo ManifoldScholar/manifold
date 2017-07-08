@@ -1,20 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import hoistStatics from 'hoist-non-react-statics';
-import get from 'lodash/get';
-import has from 'lodash/has';
-import brackets2dots from 'brackets2dots';
+import React from "react";
+import PropTypes from "prop-types";
+import hoistStatics from "hoist-non-react-statics";
+import get from "lodash/get";
+import has from "lodash/has";
+import brackets2dots from "brackets2dots";
 
 function getDisplayName(WrappedComponent) {
-  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+  return WrappedComponent.displayName || WrappedComponent.name || "Component";
 }
 
 export default function setter(WrappedComponent) {
-
   const displayName = `Form.Setter('${getDisplayName(WrappedComponent)})`;
 
   class Setter extends React.PureComponent {
-
     static displayName = displayName;
     static WrappedComponent = WrappedComponent;
 
@@ -26,29 +24,26 @@ export default function setter(WrappedComponent) {
       name: PropTypes.string,
       actions: PropTypes.shape({
         set: PropTypes.func
-      }).isRequired
+      }).isRequired,
+      value: PropTypes.string
     };
 
     static defaultProps = {
       actions: {
-        set: () => { }
+        set: () => {}
       }
     };
 
-    constructor(props) {
-      super(props);
-    }
-
     componentWillMount() {
-      if (this.isConnected(this.props) && has(this.props, 'value')) {
+      if (this.isConnected(this.props) && has(this.props, "value")) {
         this.setValue(this.props.value, this.props);
       }
     }
 
     componentWillReceiveProps(nextProps) {
       if (
-        has(nextProps, 'value') &&
-        (get(nextProps, 'value') !== get(this.props, 'value'))
+        has(nextProps, "value") &&
+        get(nextProps, "value") !== get(this.props, "value")
       ) {
         this.setValue(nextProps.value, nextProps);
       }
@@ -65,23 +60,23 @@ export default function setter(WrappedComponent) {
       props.actions.set(props.sessionKey, path, value, triggersDirty);
     }
 
-    isDirtyValueSet(props) {
-      return has(props.dirtyModel, this.nameToPath(props.name));
+    setPath(props) {
+      return `${this.nameToPath(props.name)}.$set`;
+    }
+
+    sourceValue(props) {
+      if (has(props, "readFrom")) {
+        return get(props.sourceModel, this.nameToPath(props.readFrom));
+      }
+      return get(props.sourceModel, this.nameToPath(props.name));
     }
 
     dirtyValue(props) {
       return get(props.dirtyModel, this.nameToPath(props.name));
     }
 
-    sourceValue(props) {
-      if (has(props, 'readFrom')) {
-        return get(props.sourceModel, this.nameToPath(props.readFrom));
-      }
-      return get(props.sourceModel, this.nameToPath(props.name));
-    }
-
-    setPath(props) {
-      return `${this.nameToPath(props.name)}.$set`;
+    isDirtyValueSet(props) {
+      return has(props.dirtyModel, this.nameToPath(props.name));
     }
 
     nameToPath(name) {
@@ -89,11 +84,15 @@ export default function setter(WrappedComponent) {
     }
 
     currentValue(props) {
-      return this.isDirtyValueSet(props) ? this.dirtyValue(props) : this.sourceValue(props);
+      return this.isDirtyValueSet(props)
+        ? this.dirtyValue(props)
+        : this.sourceValue(props);
     }
 
     passthroughProps(props) {
+      /* eslint-disable no-unused-vars */
       const { dirtyModel, sourceModel, readFrom, actions, ...other } = props;
+      /* eslint-enable no-unused-vars */
       return other;
     }
 
@@ -110,13 +109,13 @@ export default function setter(WrappedComponent) {
 
     disconnectedProps(props) {
       const additional = {
-        setOther: this.buildSetOtherHandler(props),
+        setOther: this.buildSetOtherHandler(props)
       };
       return Object.assign({}, additional, this.passthroughProps(props));
     }
 
     buildOnChangeHandler(props) {
-      return (event) => {
+      return event => {
         const target = event.target;
         const value = target.value;
         this.setValue(value, props);
@@ -124,7 +123,7 @@ export default function setter(WrappedComponent) {
     }
 
     buildSetHandler(props) {
-      return (value) => {
+      return value => {
         return this.setValue(value, props);
       };
     }
@@ -141,12 +140,12 @@ export default function setter(WrappedComponent) {
     }
 
     render() {
-      const props = this.isConnected(this.props) ? this.connectedProps(this.props) :
-        this.disconnectedProps(this.props);
+      const props = this.isConnected(this.props)
+        ? this.connectedProps(this.props)
+        : this.disconnectedProps(this.props);
       return React.createElement(WrappedComponent, props);
     }
   }
 
   return hoistStatics(Setter, WrappedComponent);
-
 }

@@ -1,12 +1,11 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import TextDetailMetadata from '../Metadata';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import { mount } from "enzyme";
+import TextDetailMetadata from "../Metadata";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend TextDetail Metadata Container", () => {
-
   const store = build.store();
   const text = build.entity.text("1");
   text.relationships.creators = [build.entity.user("2")];
@@ -14,10 +13,8 @@ describe("Backend TextDetail Metadata Container", () => {
 
   const component = mount(
     wrapWithRouter(
-      <Provider store={store} >
-        <TextDetailMetadata
-          text={text}
-        />
+      <Provider store={store}>
+        <TextDetailMetadata text={text} />
       </Provider>
     )
   );
@@ -31,5 +28,4 @@ describe("Backend TextDetail Metadata Container", () => {
     let tree = component.debug();
     expect(tree).not.toBe(null);
   });
-
 });

@@ -1,23 +1,22 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Form as FormContainer } from 'containers/backend';
-import { Resource, Navigation, Form } from 'components/backend';
-import { resourcesAPI, notifications } from 'api';
-import { notificationActions } from 'actions';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Form as FormContainer } from "containers/backend";
+import { Resource, Navigation, Form } from "components/backend";
+import { resourcesAPI } from "api";
+import lh from "helpers/linkHandler";
 
 export class NewResourceWrapperContainer extends PureComponent {
-
   static displayName = "NewResource.WrapperContainer";
   static propTypes = {
+    history: PropTypes.object,
+    match: PropTypes.object
   };
 
   constructor(props) {
     super(props);
     this.handleSuccess = this.handleSuccess.bind(this);
     this.defaultResource = { attributes: { kind: "image" } };
-
   }
 
   redirectToResource(resource) {
@@ -42,10 +41,12 @@ export class NewResourceWrapperContainer extends PureComponent {
               label: "Resources"
             }
           ]}
-          title={'New Resource'}
+          title={"New Resource"}
           showUtility={false}
-          note={'Select your resource type, then enter a name and a brief description.' +
-          ' Press save to continue.'}
+          note={
+            "Select your resource type, then enter a name and a brief description." +
+            " Press save to continue."
+          }
         />
         <section className="backend-panel">
           <div className="container">
@@ -54,7 +55,8 @@ export class NewResourceWrapperContainer extends PureComponent {
                 model={this.defaultResource}
                 name="backend-resource-create"
                 update={resourcesAPI.update}
-                create={ (model) => resourcesAPI.create(match.params.projectId, model) }
+                create={model =>
+                  resourcesAPI.create(match.params.projectId, model)}
                 onSuccess={this.handleSuccess}
                 className="form-secondary"
               >
@@ -75,7 +77,10 @@ export class NewResourceWrapperContainer extends PureComponent {
                 <Resource.Form.KindAttributes />
                 <Form.Save
                   text="Save and continue"
-                  cancelRoute={lh.link("backendProjectResources", match.params.projectId)}
+                  cancelRoute={lh.link(
+                    "backendProjectResources",
+                    match.params.projectId
+                  )}
                 />
               </FormContainer.Form>
             </div>
@@ -87,4 +92,3 @@ export class NewResourceWrapperContainer extends PureComponent {
 }
 
 export default connectAndFetch(NewResourceWrapperContainer);
-

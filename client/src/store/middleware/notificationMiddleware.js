@@ -1,6 +1,6 @@
-import { notificationActions } from 'actions';
-import startsWith from 'lodash/startsWith';
-import { notifications } from 'api';
+import { notificationActions } from "actions";
+import startsWith from "lodash/startsWith";
+import { notifications } from "api";
 
 function isAddNotificationAction(action) {
   if (!__CLIENT__) return false;
@@ -9,7 +9,7 @@ function isAddNotificationAction(action) {
 
 function isApiResponseAction(action) {
   if (!__CLIENT__) return false;
-  return startsWith(action.type, 'API_RESPONSE');
+  return startsWith(action.type, "API_RESPONSE");
 }
 
 function handleAddNotificationAction(dispatch, action) {
@@ -28,17 +28,16 @@ function handleApiResponseAction(dispatch, action) {
   if (!notifications.hasOwnProperty(action.meta)) return;
   const key = action.error === true ? `${action.meta}-error` : action.meta;
   if (!notifications[key]) return;
-  const notification = Object.assign(
-    {},
-    notifications[key](action.payload),
-    { id: action.meta }
-  );
+  const notification = Object.assign({}, notifications[key](action.payload), {
+    id: action.meta
+  });
   dispatch(notificationActions.addNotification(notification));
 }
 
-export default function notificationMiddleware({ dispatch, getState }) {
-  return (next) => (action) => {
-    if (isAddNotificationAction(action)) handleAddNotificationAction(dispatch, action);
+export default function notificationMiddleware({ dispatch, getStateIgnored }) {
+  return next => action => {
+    if (isAddNotificationAction(action))
+      handleAddNotificationAction(dispatch, action);
     if (isApiResponseAction(action)) handleApiResponseAction(dispatch, action);
     return next(action);
   };

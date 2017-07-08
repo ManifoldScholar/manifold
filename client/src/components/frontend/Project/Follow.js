@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import get from 'lodash/get';
-import { currentUserActions } from 'actions';
-import classNames from 'classnames';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import get from "lodash/get";
+import { currentUserActions } from "actions";
+import classNames from "classnames";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 
 export default class ProjectFollow extends Component {
-
   static displayName = "Project.Follow";
 
-  static propTypes= {
+  static propTypes = {
     authenticated: PropTypes.bool,
     favorites: PropTypes.object,
     dispatch: PropTypes.func,
@@ -74,7 +73,9 @@ export default class ProjectFollow extends Component {
     event.stopPropagation();
     const followed = this.getFollowed(this.props);
     if (followed) {
-      this.props.dispatch(currentUserActions.unfollow(this.props.project.id, followed.id));
+      this.props.dispatch(
+        currentUserActions.unfollow(this.props.project.id, followed.id)
+      );
     }
   }
 
@@ -117,7 +118,6 @@ export default class ProjectFollow extends Component {
   }
 
   render() {
-
     if (!this.isAuthenticated()) return null;
 
     const wrapperClasses = classNames({
@@ -133,8 +133,10 @@ export default class ProjectFollow extends Component {
     if (this.state.view === "follow") clickHandler = this.handleFollow;
     if (this.state.view === "follow-active") clickHandler = this.handleFollow;
     if (this.state.view === "unfollow") clickHandler = this.handleUnfollow;
-    if (this.state.view === "unfollow-active") clickHandler = this.handleUnfollow;
-    if (this.state.view === "unfollow-confirm-active") clickHandler = this.handleUnfollowConfirmed;
+    if (this.state.view === "unfollow-active")
+      clickHandler = this.handleUnfollow;
+    if (this.state.view === "unfollow-confirm-active")
+      clickHandler = this.handleUnfollowConfirmed;
 
     return (
       <div
@@ -145,9 +147,9 @@ export default class ProjectFollow extends Component {
       >
         <div className="following-button">
           <div className="icons">
-            <i key="minus" className="manicon manicon-minus-bold"></i>
-            <i key="check" className="manicon manicon-check-bold"></i>
-            <i key="plus" className="manicon manicon-plus-bold"></i>
+            <i key="minus" className="manicon manicon-minus-bold" />
+            <i key="check" className="manicon manicon-check-bold" />
+            <i key="plus" className="manicon manicon-plus-bold" />
           </div>
 
           <ReactCSSTransitionGroup
@@ -155,28 +157,32 @@ export default class ProjectFollow extends Component {
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}
           >
-            {this.state.view === "follow" || this.state.view === "follow-active" ?
-              <span key="follow" className="follow-text">Follow</span>
-            : null}
-            {this.state.view === "unfollow" || this.state.view === "unfollow-active" ?
-              <span
-                key="unfollow"
-                className="follow-text follow-text-hide-immediately"
-              >Unfollow</span>
+            {this.state.view === "follow" || this.state.view === "follow-active"
+              ? <span key="follow" className="follow-text">
+                  Follow
+                </span>
+              : null}
+            {this.state.view === "unfollow" ||
+            this.state.view === "unfollow-active"
+              ? <span
+                  key="unfollow"
+                  className="follow-text follow-text-hide-immediately"
+                >
+                  Unfollow
+                </span>
               : null}
             {this.state.view === "unfollow-confirm" ||
-            this.state.view === "unfollow-confirm-active" ?
-              <span
-                key="unfollow-confirm"
-                className="follow-text follow-text-show-immediately"
-              >Are You Sure?</span>
+            this.state.view === "unfollow-confirm-active"
+              ? <span
+                  key="unfollow-confirm"
+                  className="follow-text follow-text-show-immediately"
+                >
+                  Are You Sure?
+                </span>
               : null}
-
           </ReactCSSTransitionGroup>
         </div>
       </div>
     );
-
   }
-
 }

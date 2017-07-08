@@ -1,9 +1,8 @@
 export default {
-
   create(pId, textCategory) {
     return {
       endpoint: `/api/v1/projects/${pId}/relationships/text_categories`,
-      method: 'POST',
+      method: "POST",
       options: {
         body: JSON.stringify({ type: "text_categories", data: textCategory })
       }
@@ -13,7 +12,7 @@ export default {
   show(id) {
     return {
       endpoint: `/api/v1/categories/${id}`,
-      method: 'GET',
+      method: "GET",
       options: {}
     };
   },
@@ -21,7 +20,7 @@ export default {
   destroy(id) {
     return {
       endpoint: `/api/v1/categories/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
   },
@@ -29,11 +28,10 @@ export default {
   update(id, textCategory) {
     return {
       endpoint: `/api/v1/categories/${id}`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "text_categories", data: textCategory })
       }
     };
   }
-
 };

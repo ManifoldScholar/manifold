@@ -1,7 +1,7 @@
-import { handleActions } from 'redux-actions';
+import { handleActions } from "redux-actions";
 
 export const initialState = {
-  font: 'serif',
+  font: "serif",
   fontSize: {
     current: 3,
     max: 5,
@@ -21,7 +21,7 @@ const selectFont = (state, action) => {
 const incrementAttribute = (state, attribute) => {
   const parameter = state[attribute];
   if (parameter.current < parameter.max) {
-    parameter.current = parameter.current + 1;
+    parameter.current += 1;
   }
   return Object.assign({}, state, { [attribute]: parameter });
 };
@@ -29,15 +29,26 @@ const incrementAttribute = (state, attribute) => {
 const decrementAttribute = (state, attribute) => {
   const parameter = state[attribute];
   if (parameter.current > parameter.min) {
-    parameter.current = parameter.current - 1;
+    parameter.current -= 1;
   }
   return Object.assign({}, state, { [attribute]: parameter });
 };
 
-export default handleActions({
-  SELECT_FONT: selectFont,
-  INCREMENT_FONT_SIZE: (state) => { return incrementAttribute(state, 'fontSize'); },
-  DECREMENT_FONT_SIZE: (state) => { return decrementAttribute(state, 'fontSize'); },
-  INCREMENT_MARGINS: (state) => { return incrementAttribute(state, 'margins'); },
-  DECREMENT_MARGINS: (state) => { return decrementAttribute(state, 'margins'); }
-}, initialState);
+export default handleActions(
+  {
+    SELECT_FONT: selectFont,
+    INCREMENT_FONT_SIZE: state => {
+      return incrementAttribute(state, "fontSize");
+    },
+    DECREMENT_FONT_SIZE: state => {
+      return decrementAttribute(state, "fontSize");
+    },
+    INCREMENT_MARGINS: state => {
+      return incrementAttribute(state, "margins");
+    },
+    DECREMENT_MARGINS: state => {
+      return decrementAttribute(state, "margins");
+    }
+  },
+  initialState
+);

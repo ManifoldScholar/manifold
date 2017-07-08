@@ -1,5 +1,5 @@
-import Truncated from './Truncated';
-import Wrapper from './Wrapper';
+import Truncated from "./Truncated";
+import Wrapper from "./Wrapper";
 
 export default {
   Truncated,

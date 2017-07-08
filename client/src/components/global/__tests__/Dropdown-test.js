@@ -1,26 +1,17 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Dropdown from '../Dropdown';
+import React from "react";
+import renderer from "react-test-renderer";
+import Dropdown from "../Dropdown";
 
 describe("Global.Dropdown component", () => {
-
   function triggerComponentMock() {
-    return (
-      <div>
-        Render me
-      </div>
-    );
+    return <div>Render me</div>;
   }
 
   function bodyComponentMock() {
-    return (
-      <div>
-        Me too
-      </div>
-    );
+    return <div>Me too</div>;
   }
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       <Dropdown
         triggerComponent={triggerComponentMock}
@@ -31,4 +22,3 @@ describe("Global.Dropdown component", () => {
     expect(tree).toMatchSnapshot();
   });
 });
-

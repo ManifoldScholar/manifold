@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import classNames from 'classnames';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
+import lh from "helpers/linkHandler";
 
 export default class Toc extends Component {
-
   static propTypes = {
     text: PropTypes.object,
     tocDrawerVisible: PropTypes.bool,
@@ -28,8 +27,8 @@ export default class Toc extends Component {
 
   hasChildren(array) {
     let hasChildren = false;
-    array.forEach((object) => {
-      if (object.hasOwnProperty('children') && object.children.length > 0) {
+    array.forEach(object => {
+      if (object.hasOwnProperty("children") && object.children.length > 0) {
         hasChildren = true;
       }
     });
@@ -65,8 +64,8 @@ export default class Toc extends Component {
 
   render() {
     const tocClass = classNames({
-      'table-of-contents': true,
-      'multi-level': this.hasChildren(this.props.text.attributes.toc)
+      "table-of-contents": true,
+      "multi-level": this.hasChildren(this.props.text.attributes.toc)
     });
     return (
       <nav className={tocClass}>

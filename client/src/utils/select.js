@@ -1,13 +1,13 @@
-import isPlainObject from 'lodash/isPlainObject';
+import isPlainObject from "lodash/isPlainObject";
 
 export function select(entity, entities) {
   const selection = {};
-  if (!entity || !entity.hasOwnProperty('relationships')) return selection;
+  if (!entity || !entity.hasOwnProperty("relationships")) return selection;
   const relationships = entity.relationships;
-  Object.keys(relationships).forEach((key) => {
+  Object.keys(relationships).forEach(key => {
     const data = relationships[key].data;
     if (Array.isArray(data)) {
-      const selected = data.map((entityData) => {
+      const selected = data.map(entityData => {
         const id = entityData.id;
         const type = entityData.type;
         if (entities[type] && entities[type][id]) {

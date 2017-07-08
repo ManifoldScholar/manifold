@@ -1,23 +1,24 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import classnames from 'classnames';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import classnames from "classnames";
+import lh from "helpers/linkHandler";
 
 export default class UserListItem extends PureComponent {
-
   static displayName = "User.ListItem";
 
   static propTypes = {
-    entity: PropTypes.object
+    entity: PropTypes.object,
+    currentUserId: PropTypes.string,
+    active: PropTypes.string
   };
 
   isCurrentUser(id) {
-    let output = '';
+    let output = "";
     if (this.props.currentUserId === id) {
       output = (
         <span className="specifier">
-          {'You'}
+          {"You"}
         </span>
       );
     }
@@ -29,26 +30,26 @@ export default class UserListItem extends PureComponent {
     const attr = user.attributes;
     const rowClasses = classnames({ active: this.props.active === user.id });
     return (
-      <li key={user.id} className={rowClasses} >
+      <li key={user.id} className={rowClasses}>
         {/* Add .checked to .checkbox-primary to display checked state */}
         <div className="checkbox-primary">
           <div className="toggle-indicator">
-            <i className="manicon manicon-check"></i>
+            <i className="manicon manicon-check" />
           </div>
         </div>
         <Link to={lh.link("backendPeopleUser", user.id)}>
           <header>
             <figure className="avatar">
-              {attr.avatarStyles.smallSquare ?
-                <div
-                  className="image"
-                  style={ { backgroundImage: `url(${attr.avatarStyles.smallSquare})` } }
-                />
-                :
-                <div className="no-image">
-                  <i className="manicon manicon-person"></i>
-                </div>
-              }
+              {attr.avatarStyles.smallSquare
+                ? <div
+                    className="image"
+                    style={{
+                      backgroundImage: `url(${attr.avatarStyles.smallSquare})`
+                    }}
+                  />
+                : <div className="no-image">
+                    <i className="manicon manicon-person" />
+                  </div>}
             </figure>
             <div className="meta">
               <h3 className="name large">
@@ -64,5 +65,4 @@ export default class UserListItem extends PureComponent {
       </li>
     );
   }
-
 }

@@ -1,4 +1,4 @@
-import Ingest from './Ingest';
+import Ingest from "./Ingest";
 
 export default {
   Ingest

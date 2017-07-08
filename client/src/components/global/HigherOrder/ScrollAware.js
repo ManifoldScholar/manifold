@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { throttle } from 'lodash';
-import classNames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { throttle } from "lodash";
+import classNames from "classnames";
 
 export default class ScrollAware extends Component {
   static propTypes = {
     children: PropTypes.object,
     threshold: PropTypes.number,
-    throttle: PropTypes.number,
     topClass: PropTypes.string,
     notTopClass: PropTypes.string
   };
 
   static defaultProps = {
     threshold: 200,
-    throttle: 500,
-    topClass: 'top',
-    notTopClass: 'not-top'
+    topClass: "top",
+    notTopClass: "not-top"
   };
 
   constructor() {
@@ -27,7 +25,7 @@ export default class ScrollAware extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -36,7 +34,7 @@ export default class ScrollAware extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   getScrollTop() {
@@ -44,7 +42,9 @@ export default class ScrollAware extends Component {
     if (window.pageYOffset !== undefined) {
       scrollTop = window.pageYOffset;
     } else {
-      scrollTop = (document.documentElement || document.body.parentNode || document.body).scrollTop;
+      scrollTop = (document.documentElement ||
+        document.body.parentNode ||
+        document.body).scrollTop;
     }
     return scrollTop;
   }
@@ -71,7 +71,7 @@ export default class ScrollAware extends Component {
   render() {
     // Dynaimcally assign scroller classes based on props
     const scrollClasses = {
-      'scroll-aware': true
+      "scroll-aware": true
     };
 
     scrollClasses[this.props.topClass] = this.state.top;
@@ -80,9 +80,9 @@ export default class ScrollAware extends Component {
     const scrollClass = classNames(scrollClasses);
 
     return (
-        <div className={scrollClass}>
-          {this.renderChildren()}
-        </div>
+      <div className={scrollClass}>
+        {this.renderChildren()}
+      </div>
     );
   }
 }

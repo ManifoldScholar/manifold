@@ -1,10 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Resource } from 'components/frontend';
-import { Utility } from 'components/global';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Resource } from "components/frontend";
+import { Utility } from "components/global";
 
 export default class ResourceListCards extends PureComponent {
-
   static displayName = "ResourceList.Cards";
 
   static propTypes = {
@@ -13,10 +12,6 @@ export default class ResourceListCards extends PureComponent {
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func
   };
-
-  constructor() {
-    super();
-  }
 
   render() {
     if (!this.props.resources) return null;
@@ -28,10 +23,10 @@ export default class ResourceListCards extends PureComponent {
             <span>
               {this.props.resources.length.toLocaleString()}
             </span>
-              {' Resources Shown'}
+            {" Resources Shown"}
           </div>
           <ul>
-            {this.props.resources.map((resourceLike) => {
+            {this.props.resources.map(resourceLike => {
               return (
                 <Resource.Card
                   context={this.props.context}
@@ -41,14 +36,12 @@ export default class ResourceListCards extends PureComponent {
               );
             })}
           </ul>
-          {
-            this.props.pagination ?
-              <Utility.Pagination
+          {this.props.pagination
+            ? <Utility.Pagination
                 paginationClickHandler={this.props.paginationClickHandler}
                 pagination={this.props.pagination}
               />
-              : null
-          }
+            : null}
         </nav>
       </div>
     );

@@ -1,9 +1,8 @@
 export default {
-
   index(filter = {}, page = {}) {
     return {
-      endpoint: '/api/v1/projects',
-      method: 'GET',
+      endpoint: "/api/v1/projects",
+      method: "GET",
       options: {
         params: { filter, page }
       }
@@ -12,8 +11,8 @@ export default {
 
   create(project) {
     return {
-      endpoint: '/api/v1/projects',
-      method: 'POST',
+      endpoint: "/api/v1/projects",
+      method: "POST",
       options: {
         body: JSON.stringify({ type: "project", data: project })
       }
@@ -23,7 +22,7 @@ export default {
   update(id, project) {
     return {
       endpoint: `/api/v1/projects/${id}`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "project", data: project })
       }
@@ -33,16 +32,15 @@ export default {
   show(id) {
     return {
       endpoint: `/api/v1/projects/${id}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   },
 
   destroy(id) {
     return {
       endpoint: `/api/v1/projects/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
   },
@@ -50,7 +48,7 @@ export default {
   events(id, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/projects/${id}/relationships/events`,
-      method: 'GET',
+      method: "GET",
       options: {
         params: { filter, page }
       }
@@ -60,7 +58,7 @@ export default {
   resources(id, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/projects/${id}/relationships/resources`,
-      method: 'GET',
+      method: "GET",
       options: {
         params: { filter, page }
       }
@@ -70,7 +68,7 @@ export default {
   collections(id, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/projects/${id}/relationships/collections`,
-      method: 'GET',
+      method: "GET",
       options: {
         params: { filter, page }
       }
@@ -80,25 +78,23 @@ export default {
   uncollected_resources(id, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/projects/${id}/relationships/uncollected_resources`,
-      method: 'GET',
+      method: "GET",
       options: {
         params: { filter, page }
       }
     };
   },
-
 
   featured(limit = 6, filterParams = {}) {
     const filter = filterParams;
     filter.featured = true;
     const page = { limit };
     return {
-      endpoint: '/api/v1/projects',
-      method: 'GET',
+      endpoint: "/api/v1/projects",
+      method: "GET",
       options: {
         params: { filter, page }
       }
     };
-  },
-
+  }
 };

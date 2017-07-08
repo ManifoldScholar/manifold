@@ -1,4 +1,4 @@
-import Wrapper from './Wrapper.js';
+import Wrapper from "./Wrapper";
 
 export default {
   Wrapper

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import {
   AppearanceMenuButton,
   AppearanceMenuBody,
@@ -7,19 +7,17 @@ import {
   TextTitles,
   TocDrawer,
   VisibilityButton
-} from 'components/reader';
+} from "components/reader";
 import {
   HeaderNotifications,
-  SearchMenuButton,
   SearchMenuBody,
   UIPanel,
   UserMenuButton,
   UserMenuBody
-} from 'components/global';
-import classNames from 'classnames';
+} from "components/global";
+import classNames from "classnames";
 
 export default class Header extends Component {
-
   static propTypes = {
     text: PropTypes.object,
     section: PropTypes.object,
@@ -40,11 +38,21 @@ export default class Header extends Component {
   constructor() {
     super();
     this.handleContentsButtonClick = this.handleContentsButtonClick.bind(this);
-    this.handleReturnMenuButtonClick = this.handleReturnMenuButtonClick.bind(this);
-    this.handleSearchMenuButtonClick = this.handleSearchMenuButtonClick.bind(this);
-    this.handleVisibilityButtonClick = this.handleVisibilityButtonClick.bind(this);
-    this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(this);
-    this.triggerShowSignInUpOverlay = this.triggerShowSignInUpOverlay.bind(this);
+    this.handleReturnMenuButtonClick = this.handleReturnMenuButtonClick.bind(
+      this
+    );
+    this.handleSearchMenuButtonClick = this.handleSearchMenuButtonClick.bind(
+      this
+    );
+    this.handleVisibilityButtonClick = this.handleVisibilityButtonClick.bind(
+      this
+    );
+    this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(
+      this
+    );
+    this.triggerShowSignInUpOverlay = this.triggerShowSignInUpOverlay.bind(
+      this
+    );
     this.triggerToggleUserMenu = this.triggerToggleUserMenu.bind(this);
     this.triggerHideToc = this.triggerHideToc.bind(this);
     this.renderContentsButton = this.renderContentsButton.bind(this);
@@ -59,61 +67,65 @@ export default class Header extends Component {
   }
 
   handleContentsButtonClick() {
-    this.props.commonActions.visibilityToggle('tocDrawer');
+    this.props.commonActions.visibilityToggle("tocDrawer");
   }
 
   handleReturnMenuButtonClick() {
-    this.props.commonActions.panelToggle('readerReturn');
+    this.props.commonActions.panelToggle("readerReturn");
   }
 
   handleSearchMenuButtonClick() {
-    this.props.commonActions.panelToggle('search');
+    this.props.commonActions.panelToggle("search");
   }
 
   handleVisibilityButtonClick() {
-    this.props.commonActions.visibilityToggle('annotation');
+    this.props.commonActions.visibilityToggle("annotation");
   }
 
   handleAppearanceMenuButtonClick() {
-    this.props.commonActions.panelToggle('appearance');
+    this.props.commonActions.panelToggle("appearance");
   }
 
   triggerShowSignInUpOverlay() {
-    this.props.commonActions.visibilityShow('signInUpOverlay');
+    this.props.commonActions.visibilityShow("signInUpOverlay");
   }
 
   triggerToggleUserMenu() {
-    this.props.commonActions.panelToggle('user');
+    this.props.commonActions.panelToggle("user");
   }
 
   triggerHideToc() {
-    this.props.commonActions.visibilityHide('tocDrawer');
+    this.props.commonActions.visibilityHide("tocDrawer");
   }
 
-  renderContentsButton = (contents) => {
+  renderContentsButton = contents => {
     if (contents.length <= 0) {
       return null;
     }
 
     const buttonIndexClass = classNames({
-      'button-index': true,
+      "button-index": true,
       active: this.props.visibility.tocDrawer
     });
 
     return (
-      <button className={buttonIndexClass} onClick={this.handleContentsButtonClick}>
-        {'Contents'}<i className="manicon manicon-caret-down"></i>
+      <button
+        className={buttonIndexClass}
+        onClick={this.handleContentsButtonClick}
+      >
+        {"Contents"}
+        <i className="manicon manicon-caret-down" />
       </button>
     );
-  }
+  };
 
   render() {
     const colorScheme = this.props.appearance.colors.colorScheme;
 
     const bannerGradientClass = classNames({
-      'banner-gradient': true,
-      'scheme-light': colorScheme === 'light',
-      'scheme-dark': colorScheme === 'dark'
+      "banner-gradient": true,
+      "scheme-light": colorScheme === "light",
+      "scheme-dark": colorScheme === "dark"
     });
 
     return (
@@ -122,14 +134,14 @@ export default class Header extends Component {
           <ReturnMenu.Button
             toggleReaderMenu={this.handleReturnMenuButtonClick}
           />
-          { this.renderContentsButton(this.props.text.attributes.toc) }
-          { this.props.section ?
-            <TextTitles
-              textTitle={this.props.text.attributes.title}
-              sectionTitle={this.props.section.attributes.name}
-              showSection={!this.props.scrollAware.top}
-            />
-          : null }
+          {this.renderContentsButton(this.props.text.attributes.toc)}
+          {this.props.section
+            ? <TextTitles
+                textTitle={this.props.text.attributes.title}
+                sectionTitle={this.props.section.attributes.name}
+                showSection={!this.props.scrollAware.top}
+              />
+            : null}
           <nav className="menu-buttons">
             <ul>
               {/*
@@ -164,7 +176,7 @@ export default class Header extends Component {
             </ul>
           </nav>
         </nav>
-        <div className={bannerGradientClass}></div>
+        <div className={bannerGradientClass} />
         <TocDrawer
           text={this.props.text}
           visible={this.props.visibility.tocDrawer}
@@ -175,11 +187,14 @@ export default class Header extends Component {
             id="readerReturn"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={ReturnMenu.Body}
-
             // Props required by body component
             projectId={this.props.text.relationships.project.id}
-            projectTitle={this.props.text.relationships.project.attributes.title}
-            toggleSignInUpOverlay={this.props.commonActions.toggleSignInUpOverlay}
+            projectTitle={
+              this.props.text.relationships.project.attributes.title
+            }
+            toggleSignInUpOverlay={
+              this.props.commonActions.toggleSignInUpOverlay
+            }
             // TODO: More link (and eventually, the link text) should be pulled from settings
             moreLink="http://manifold.umn.edu/about/"
           />
@@ -195,7 +210,6 @@ export default class Header extends Component {
             id="appearance"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={AppearanceMenuBody}
-
             // Props required by body component
             appearance={this.props.appearance}
             selectFont={this.props.selectFont}
@@ -209,7 +223,6 @@ export default class Header extends Component {
             id="user"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={UserMenuBody}
-
             // Props required by body component
             showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
             startLogout={this.props.commonActions.logout}

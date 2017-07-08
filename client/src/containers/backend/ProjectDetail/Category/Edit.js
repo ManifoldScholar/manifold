@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Category } from 'components/backend';
-import { Dialog } from 'components/backend';
-import { entityStoreActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { textCategoriesAPI, requests } from 'api';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Category } from "components/backend";
+import { entityStoreActions } from "actions";
+import { select } from "utils/entityUtils";
+import { textCategoriesAPI, requests } from "api";
 
 const { request } = entityStoreActions;
 
 export class ProjectDetailCategoryEditContainer extends Component {
-
   static displayName = "ProjectDetail.Category.Edit";
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state) {
     return {
       category: select(requests.beTextCategory, state.entityStore)
     };
@@ -55,10 +53,7 @@ export class ProjectDetailCategoryEditContainer extends Component {
         <header className="dialog-header-large">
           <h2 className="heading-quaternary">Edit Category</h2>
         </header>
-        <Category.Form
-          model={this.props.category}
-          onSuccess={this.onSuccess}
-        />
+        <Category.Form model={this.props.category} onSuccess={this.onSuccess} />
       </div>
     );
   }

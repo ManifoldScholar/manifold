@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Teaser from './Teaser';
-import classNames from 'classnames';
-import { Utility } from 'components/global';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Teaser from "./Teaser";
+import classNames from "classnames";
+import { Utility } from "components/global";
+import lh from "helpers/linkHandler";
 
 export default class EventList extends Component {
-
   static displayName = "Event.List";
 
   static propTypes = {
@@ -34,29 +33,32 @@ export default class EventList extends Component {
     if (!this.props.events) return null;
 
     const listClass = classNames({
-      'event-list-primary': this.props.columns === 2,
-      'event-list-secondary': this.props.columns === 3
+      "event-list-primary": this.props.columns === 2,
+      "event-list-secondary": this.props.columns === 3
     });
 
     return (
       <div>
-        <ul className={listClass} ref="eventList">
-          {this.props.events.map((event, index) => {
+        <ul
+          className={listClass}
+          ref={eventList => {
+            this.eventList = eventList;
+          }}
+        >
+          {this.props.events.map(event => {
             return (
-              <li key={index}>
+              <li key={event.id}>
                 <Teaser event={event} />
               </li>
             );
           })}
         </ul>
-        {
-          this.props.pagination ?
-            <Utility.Pagination
+        {this.props.pagination
+          ? <Utility.Pagination
               paginationClickHandler={this.paginationClickHandler}
               pagination={this.props.pagination}
             />
-          : null
-        }
+          : null}
       </div>
     );
   }

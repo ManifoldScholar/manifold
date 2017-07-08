@@ -1,13 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import FormattedDate from 'components/global/FormattedDate';
-import {
-  Utility,
-  ResourceList
-} from 'components/frontend';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import FormattedDate from "components/global/FormattedDate";
+import { Utility, ResourceList } from "components/frontend";
 
 export default class ResourceCollectionDetail extends PureComponent {
-
   static displayName = "ResourceCollection.Detail";
 
   static propTypes = {
@@ -37,7 +33,7 @@ export default class ResourceCollectionDetail extends PureComponent {
         <div className="container">
           <div className="collection-detail">
             <header>
-              <i className="manicon manicon-file-box"></i>
+              <i className="manicon manicon-file-box" />
               <div className="collection-title">
                 <h1>
                   {attr.title}
@@ -56,7 +52,7 @@ export default class ResourceCollectionDetail extends PureComponent {
                 {attr.description}
               </p>
             </div>
-            <Utility.ShareBar url={this.props.collectionUrl}/>
+            <Utility.ShareBar url={this.props.collectionUrl} />
           </div>
           <ResourceList.Slideshow
             collectionId={this.props.collection.id}
@@ -65,7 +61,6 @@ export default class ResourceCollectionDetail extends PureComponent {
             pagination={this.props.slideshowPagination}
             dispatch={this.props.dispatch}
           />
-          <a id="pagination-target" name="pagination-target"></a>
           <ResourceList.Totals
             belongsTo="collection"
             count={count}
@@ -85,7 +80,6 @@ export default class ResourceCollectionDetail extends PureComponent {
           />
         </div>
       </section>
-
     );
   }
 }

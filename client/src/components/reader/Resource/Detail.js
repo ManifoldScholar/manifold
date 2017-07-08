@@ -1,13 +1,11 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Link, browserHistory } from 'react-router-dom';
-import { ResourceList } from 'components/frontend';
-import { Utility, Resource } from 'components/frontend';
-import Icon from 'components/frontend/Resource/Icon';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { Resource } from "components/frontend";
+import Icon from "components/frontend/Resource/Icon";
+import lh from "helpers/linkHandler";
 
 export default class ResourceOverlayDetail extends PureComponent {
-
   static propTypes = {
     resource: PropTypes.object,
     handleClose: PropTypes.func
@@ -19,11 +17,11 @@ export default class ResourceOverlayDetail extends PureComponent {
   }
 
   componentDidMount() {
-    window.addEventListener('keyup', this.handleEscape);
+    window.addEventListener("keyup", this.handleEscape);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keyup', this.handleEscape);
+    window.removeEventListener("keyup", this.handleEscape);
   }
 
   handleEscape(event) {
@@ -48,15 +46,15 @@ export default class ResourceOverlayDetail extends PureComponent {
         <div className="container">
           <div className="resource-kind">
             <figure className={`resource-icon ${attr.kind}`}>
-              <Icon.Composer kind={attr.kind}/>
+              <Icon.Composer kind={attr.kind} />
             </figure>
           </div>
           <Resource.Title resource={resource} />
           <div className="resource-content">
-            <p dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}>
-            </p>
-            <p dangerouslySetInnerHTML={{ __html: attr.descriptionFormatted }}>
-            </p>
+            <p dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />
+            <p
+              dangerouslySetInnerHTML={{ __html: attr.descriptionFormatted }}
+            />
           </div>
 
           {/*
@@ -71,22 +69,27 @@ export default class ResourceOverlayDetail extends PureComponent {
         <div className="container">
           <Resource.Meta
             resource={resource}
-            style={'secondary columnar'}
+            layout={"secondary columnar"}
             showIcon={false}
             showTags={false}
           />
 
           <nav className="button-nav">
-            <Resource.Link attributes={attr} buttonClass="button-secondary outlined" /><br/>
+            <Resource.Link
+              attributes={attr}
+              buttonClass="button-secondary outlined"
+            />
+            <br />
             <Link to={resourceUrl} className="button-secondary outlined">
-              Visit Resource Page<i className="manicon manicon-arrow-right"></i>
-            </Link><br/>
+              Visit Resource Page<i className="manicon manicon-arrow-right" />
+            </Link>
+            <br />
             <button
               onClick={this.props.handleClose}
               className="button-secondary outlined dull"
               data-id="close-overlay"
             >
-              <i className="manicon manicon-arrow-left"></i>Return to Reader
+              <i className="manicon manicon-arrow-left" />Return to Reader
             </button>
           </nav>
         </div>

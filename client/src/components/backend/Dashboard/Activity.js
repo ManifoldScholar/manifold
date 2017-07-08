@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class Activity extends Component {
-
   static displayName = "Dashboard.Activity";
 
   static propTypes = {
@@ -27,9 +25,8 @@ export default class Activity extends Component {
     if (increase === null) return "";
     if (increase > 0) return "+ " + increase.toString() + "%";
     if (increase < 0) return "- " + Math.abs(increase).toString() + "%";
-    return "0" + "%";
+    return "0%";
   }
-
 
   render() {
     if (!this.props.statistics) return null;
@@ -40,27 +37,37 @@ export default class Activity extends Component {
         <tbody>
           <tr>
             <td>Texts added this week</td>
-            <td>{stats.newTextsCount}</td>
+            <td>
+              {stats.newTextsCount}
+            </td>
           </tr>
-          { stats.readersThisWeek !== null ?
-            <tr>
-              <td>Readers this week</td>
-              <td>{stats.readersThisWeek}</td>
-            </tr>
-          : null }
-          { stats.readerIncrease != null ?
-            <tr>
-              <td>Change from last week</td>
-              <td>{this.formatReaderIncrease(stats)}</td>
-            </tr>
-          : null }
+          {stats.readersThisWeek !== null
+            ? <tr>
+                <td>Readers this week</td>
+                <td>
+                  {stats.readersThisWeek}
+                </td>
+              </tr>
+            : null}
+          {stats.readerIncrease != null
+            ? <tr>
+                <td>Change from last week</td>
+                <td>
+                  {this.formatReaderIncrease(stats)}
+                </td>
+              </tr>
+            : null}
           <tr>
             <td>Highlights in the past week</td>
-            <td>{stats.newHighlightsCount}</td>
+            <td>
+              {stats.newHighlightsCount}
+            </td>
           </tr>
           <tr>
             <td>Annotations in the past week</td>
-            <td>{stats.newAnnotationsCount}</td>
+            <td>
+              {stats.newAnnotationsCount}
+            </td>
           </tr>
         </tbody>
       </table>

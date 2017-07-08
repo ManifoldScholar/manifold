@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import Icon from './index';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import Icon from "./index";
 
 export default class ResourceIconComposer extends PureComponent {
-
   // Optional resource icon wrapper that can choose the correct icon based on kind
   // Insures that logic for picking a resource icon/name-mapping is only ever in one place
   static displayName = "Resource.Icon.Composer";
@@ -31,6 +30,6 @@ export default class ResourceIconComposer extends PureComponent {
   render() {
     const ResourceIcon = this.icons[this.props.kind];
 
-    return <ResourceIcon/>;
+    return <ResourceIcon />;
   }
 }

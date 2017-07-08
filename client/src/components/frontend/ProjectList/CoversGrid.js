@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Project } from 'components/frontend';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Project } from "components/frontend";
 
 export default class ProjectListCoversGrid extends Component {
-
   static displayName = "ProjectList.CoversGrid";
 
   static propTypes = {
@@ -18,7 +17,7 @@ export default class ProjectListCoversGrid extends Component {
     return (
       <nav className="grid-project-covers">
         <ul>
-          {this.props.projects.map((project) => {
+          {this.props.projects.map(project => {
             return (
               <li key={project.id}>
                 <Project.Thumbnail

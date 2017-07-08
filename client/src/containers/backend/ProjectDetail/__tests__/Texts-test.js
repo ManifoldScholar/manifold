@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { ProjectDetailTexts } from '../Texts';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { ProjectDetailTexts } from "../Texts";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend ProjectDetail Texts Container", () => {
-
   const store = build.store();
   const project = build.entity.project("1");
   const category = build.entity.category("2");
@@ -17,10 +16,9 @@ describe("Backend ProjectDetail Texts Container", () => {
   project.relationships.publishedText = textA;
   project.relationships.texts = [textB];
 
-
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <ProjectDetailTexts
           project={project}
           route={{
@@ -40,5 +38,4 @@ describe("Backend ProjectDetail Texts Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

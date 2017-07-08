@@ -1,12 +1,11 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import renderer from 'react-test-renderer';
-import { DashboardContainer } from '../Dashboard';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import { Provider } from "react-redux";
+import renderer from "react-test-renderer";
+import { DashboardContainer } from "../Dashboard";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Backend Dashboard Container", () => {
-
   const projects = [build.entity.project("1"), build.entity.project("2")];
   const projectsMeta = {
     pagination: build.pagination()
@@ -15,10 +14,7 @@ describe("Backend Dashboard Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={build.store()}>
-        <DashboardContainer
-          projects={projects}
-          projectsMeta={projectsMeta}
-        />
+        <DashboardContainer projects={projects} projectsMeta={projectsMeta} />
       </Provider>
     )
   );
@@ -32,5 +28,4 @@ describe("Backend Dashboard Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

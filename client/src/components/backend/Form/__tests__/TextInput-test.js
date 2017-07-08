@@ -1,10 +1,9 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { Form } from 'components/backend';
-import { shallow, mount, render } from 'enzyme';
+import React from "react";
+import renderer from "react-test-renderer";
+import { Form } from "components/backend";
+import { shallow, mount, render } from "enzyme";
 
 describe("Backend.Form.TextInput component", () => {
-
   const onChange = jest.fn();
 
   const element = (
@@ -16,10 +15,9 @@ describe("Backend.Form.TextInput component", () => {
     />
   );
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(element);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

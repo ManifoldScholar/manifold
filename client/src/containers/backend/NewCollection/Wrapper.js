@@ -1,16 +1,17 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Form as FormContainer } from 'containers/backend';
-import { Navigation, Form } from 'components/backend';
-import { collectionsAPI, notifications } from 'api';
-import { notificationActions } from 'actions';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Form as FormContainer } from "containers/backend";
+import { Navigation, Form } from "components/backend";
+import { collectionsAPI } from "api";
+import lh from "helpers/linkHandler";
 
 export class NewCollectionWrapperContainer extends PureComponent {
-
   static displayName = "NewCollection.WrapperContainer";
   static propTypes = {
+    history: PropTypes.object,
+    match: PropTypes.object,
+    collection: PropTypes.object
   };
 
   constructor(props) {
@@ -36,14 +37,16 @@ export class NewCollectionWrapperContainer extends PureComponent {
           type="collection"
           breadcrumb={[
             {
-              path: lh.link("backendProjectCollections", match.params.projectId),
+              path: lh.link(
+                "backendProjectCollections",
+                match.params.projectId
+              ),
               label: "Collections"
             }
           ]}
-          title={'New Collection'}
+          title={"New Collection"}
           showUtility={false}
-          note={'Enter a name and a brief description.' +
-          ' Press save to continue.'}
+          note={"Enter a name and a brief description. Press save to continue."}
         />
         <section className="backend-panel">
           <div className="container">
@@ -52,7 +55,8 @@ export class NewCollectionWrapperContainer extends PureComponent {
                 model={this.props.collection}
                 name="backend-collection-create"
                 update={collectionsAPI.update}
-                create={(model) => collectionsAPI.create(match.params.projectId, model) }
+                create={model =>
+                  collectionsAPI.create(match.params.projectId, model)}
                 onSuccess={this.handleSuccess}
                 className="form-secondary"
               >
@@ -69,7 +73,7 @@ export class NewCollectionWrapperContainer extends PureComponent {
                   {...this.props}
                 />
                 <Form.Upload
-                  style="landscape"
+                  layout="landscape"
                   accepts="images"
                   label="Cover Image"
                   readFrom="attributes[thumbnailStyles][mediumLandscape]"
@@ -78,7 +82,10 @@ export class NewCollectionWrapperContainer extends PureComponent {
                 />
                 <Form.Save
                   text="Save and continue"
-                  cancelRoute={lh.link("backendProjectResources", match.params.projectId)}
+                  cancelRoute={lh.link(
+                    "backendProjectResources",
+                    match.params.projectId
+                  )}
                 />
               </FormContainer.Form>
             </div>
@@ -90,4 +97,3 @@ export class NewCollectionWrapperContainer extends PureComponent {
 }
 
 export default connectAndFetch(NewCollectionWrapperContainer);
-

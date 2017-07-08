@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { pagesAPI, requests } from 'api';
-import { entityStoreActions } from 'actions';
-import { select } from 'utils/entityUtils';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { pagesAPI, requests } from "api";
+import { entityStoreActions } from "actions";
+import { select } from "utils/entityUtils";
+
 const { request, flush } = entityStoreActions;
 
 export class PageContainer extends Component {
-
   static fetchData(getState, dispatch, location, match) {
     const page = request(pagesAPI.show(match.params.slug), requests.gPage);
     const { promise: one } = dispatch(page);

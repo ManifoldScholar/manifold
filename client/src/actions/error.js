@@ -1,3 +1,3 @@
-import { createAction } from 'redux-actions';
+import { createAction } from "redux-actions";
 
-export const clearError = createAction('CLEAR_ERROR');
+export const clearError = createAction("CLEAR_ERROR");

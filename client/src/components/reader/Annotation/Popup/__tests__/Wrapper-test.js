@@ -1,18 +1,17 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Wrapper from '../Wrapper';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import Wrapper from "../Wrapper";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Reader.Annotation.Popup.Wrapper Component", () => {
-
   const store = build.store();
   const text = build.entity.text(1);
   const section = build.entity.textSection(2);
 
-  it('renders correctly when not logged in', () => {
+  it("renders correctly when not logged in", () => {
     const component = renderer.create(
-      <Provider store={store} >
+      <Provider store={store}>
         <Wrapper
           text={text}
           section={section}

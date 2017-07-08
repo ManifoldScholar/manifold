@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
 export default class HeaderNotification extends Component {
   static propTypes = {
@@ -36,7 +36,7 @@ export default class HeaderNotification extends Component {
 
   render() {
     const notificationClass = classNames({
-      'header-notification': true,
+      "header-notification": true,
       notice: this.props.level === 0,
       warning: this.props.level === 1,
       error: this.props.level === 2
@@ -45,13 +45,21 @@ export default class HeaderNotification extends Component {
       <div className={notificationClass} key={this.props.id}>
         <div className="container">
           <header>
-            <h5 className="notification-heading">{this.props.heading}</h5>
+            <h5 className="notification-heading">
+              {this.props.heading}
+            </h5>
           </header>
           {this.bodyCopy()}
 
-          <button className="notification-close" onClick={this.handleClose} data-id="close">
-            <i className="manicon manicon-x"></i>
-            <span className="screen-reader-text">{'Click to close this notification'}</span>
+          <button
+            className="notification-close"
+            onClick={this.handleClose}
+            data-id="close"
+          >
+            <i className="manicon manicon-x" />
+            <span className="screen-reader-text">
+              {"Click to close this notification"}
+            </span>
           </button>
         </div>
       </div>

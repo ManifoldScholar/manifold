@@ -1,9 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
 import UserMenuButton from "../UserMenuButton";
 
 describe("Global.UserMenu.UserMenuButton Component", () => {
-
   const props = {
     startLogout: jest.fn(),
     showLoginOverlay: jest.fn(),
@@ -11,14 +10,9 @@ describe("Global.UserMenu.UserMenuButton Component", () => {
     visible: false
   };
 
-  it('renders correctly', () => {
-    const component = renderer.create(
-      <UserMenuButton
-        {...props}
-      />
-    );
+  it("renders correctly", () => {
+    const component = renderer.create(<UserMenuButton {...props} />);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
-

@@ -1,19 +1,17 @@
-import React from 'react';
-import hoistStatics from 'hoist-non-react-statics';
-import { connect } from 'react-redux';
-import { select } from 'utils/entityUtils';
-import { requests } from 'api';
+import React from "react";
+import hoistStatics from "hoist-non-react-statics";
+import { connect } from "react-redux";
 
 function getDisplayName(WrappedComponent) {
-  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+  return WrappedComponent.displayName || WrappedComponent.name || "Component";
 }
 
 export default function withDispatch(WrappedComponent) {
-
-  const displayName = `HigherOrder.WithDispatch('${getDisplayName(WrappedComponent)})`;
+  const displayName = `HigherOrder.WithDispatch('${getDisplayName(
+    WrappedComponent
+  )})`;
 
   class WithDispatch extends React.PureComponent {
-
     static displayName = displayName;
 
     static WrappedComponent = WrappedComponent;
@@ -28,10 +26,9 @@ export default function withDispatch(WrappedComponent) {
     }
   }
 
-  const ConnectedWithSettings = connect(
-    null, WithDispatch.mapDispatchToProps
-  )(WithDispatch);
+  const ConnectedWithSettings = connect(null, WithDispatch.mapDispatchToProps)(
+    WithDispatch
+  );
 
   return hoistStatics(ConnectedWithSettings, WrappedComponent);
-
 }

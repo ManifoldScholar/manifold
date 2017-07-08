@@ -1,9 +1,8 @@
 export default {
-
   index(filter = {}) {
     return {
-      endpoint: '/api/v1/pages',
-      method: 'GET',
+      endpoint: "/api/v1/pages",
+      method: "GET",
       options: {
         params: { filter }
       }
@@ -13,10 +12,8 @@ export default {
   show(id) {
     return {
       endpoint: `/api/v1/pages/${id}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   }
-
 };

@@ -1,20 +1,17 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import SettingsPlaceholder from '../Placeholder';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import SettingsPlaceholder from "../Placeholder";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend Settings Placeholder Container", () => {
-
   const store = build.store();
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
-        <SettingsPlaceholder
-          label="All temporary stuff"
-        />
+      <Provider store={store}>
+        <SettingsPlaceholder label="All temporary stuff" />
       </Provider>
     )
   );
@@ -28,5 +25,4 @@ describe("Backend Settings Placeholder Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

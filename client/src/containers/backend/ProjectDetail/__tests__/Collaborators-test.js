@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { ProjectDetailCollaborators } from '../Collaborators';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { ProjectDetailCollaborators } from "../Collaborators";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend ProjectDetail Collaborators Container", () => {
-
   const store = build.store();
   const project = build.entity.project("1");
   project.relationships.creators = [build.entity.user("2")];
@@ -14,10 +13,8 @@ describe("Backend ProjectDetail Collaborators Container", () => {
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
-        <ProjectDetailCollaborators
-          project={project}
-        />
+      <Provider store={store}>
+        <ProjectDetailCollaborators project={project} />
       </Provider>
     )
   );
@@ -31,5 +28,4 @@ describe("Backend ProjectDetail Collaborators Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

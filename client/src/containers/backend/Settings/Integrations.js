@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Form, MaskedTextInput } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import { settingsAPI, requests } from 'api';
-import { select } from 'utils/entityUtils';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Form } from "components/backend";
+import { Form as FormContainer } from "containers/backend";
+import { settingsAPI, requests } from "api";
+import { select } from "utils/entityUtils";
 
 export class SettingsIntegrationsContainer extends PureComponent {
-
   static propTypes = {
+    settings: PropTypes.object
   };
 
   static mapStateToProps(state) {
@@ -28,7 +28,6 @@ export class SettingsIntegrationsContainer extends PureComponent {
           create={settingsAPI.update}
           className="form-secondary"
         >
-
           <div className="form-header">
             <header className="section-heading-secondary">
               <h3>Facebook Configuration</h3>
@@ -118,26 +117,33 @@ export class SettingsIntegrationsContainer extends PureComponent {
             label="Google Analytics Profile ID"
             name="attributes[integrations][gaProfileId]"
             placeholder="ga:123456789"
-            mask={
-              ['g', 'a', ':', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]
-            }
+            mask={[
+              "g",
+              "a",
+              ":",
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/
+            ]}
           />
           <Form.TextInput
             label="Google Analytics Tracking ID"
             name="attributes[integrations][gaTrackingId]"
             placeholder="UA-000000-00"
           />
-          <Form.Save
-            text="Save Settings"
-          />
+          <Form.Save text="Save Settings" />
         </FormContainer.Form>
       </section>
     );
   }
-
 }
 
-export default connect(
-  SettingsIntegrationsContainer.mapStateToProps
-)(SettingsIntegrationsContainer);
-
+export default connect(SettingsIntegrationsContainer.mapStateToProps)(
+  SettingsIntegrationsContainer
+);

@@ -1,5 +1,5 @@
-import Activity from './Activity.js';
-import Notifications from './Notifications.js';
+import Activity from "./Activity";
+import Notifications from "./Notifications";
 
 export default {
   Activity,

@@ -1,29 +1,27 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import FormattedDate from 'components/global/FormattedDate';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import FormattedDate from "components/global/FormattedDate";
 
 export default class EventBodyAdded extends Component {
-
   static displayName = "Event.Body.Added";
 
   static propTypes = {
     event: PropTypes.object,
-    icon: PropTypes.string,
+    icon: PropTypes.string
   };
 
   getPrefixByType(type) {
-    let output = '';
+    let output = "";
 
     switch (type) {
-      case 'TEXT_ADDED':
-        output = 'Text';
+      case "TEXT_ADDED":
+        output = "Text";
         break;
-      case 'RESOURCE_ADDED':
-        output = 'Resource';
+      case "RESOURCE_ADDED":
+        output = "Resource";
         break;
       default:
-        output = '';
+        output = "";
     }
 
     return output;
@@ -31,21 +29,24 @@ export default class EventBodyAdded extends Component {
 
   render() {
     const attr = this.props.event.attributes;
-    const iconClass = 'manicon manicon-' + this.props.icon;
+    const iconClass = "manicon manicon-" + this.props.icon;
     const prefix = this.getPrefixByType(attr.eventType);
 
     return (
       <div className="event-data">
         {/* Event-data requires a classless empty div for vertical alignment */}
         <div>
-          <i className={iconClass}></i>
-          <h5 className="event-title" dangerouslySetInnerHTML={{ __html: attr.subjectTitle }}></h5>
+          <i className={iconClass} />
+          <h5
+            className="event-title"
+            dangerouslySetInnerHTML={{ __html: attr.subjectTitle }}
+          />
           {/* Only show the subtitle (and its wrapper) if it exists */}
-          {attr.subjectSubtitle ?
-            <span className="event-subtitle">
-              {attr.subjectSubtitle}
-            </span> : null
-          }
+          {attr.subjectSubtitle
+            ? <span className="event-subtitle">
+                {attr.subjectSubtitle}
+              </span>
+            : null}
           <datetime className="event-date">
             <FormattedDate
               prefix={`${prefix} Added`}

@@ -1,17 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Dialog } from 'components/backend';
-import { Form } from 'components/global';
-import { entityStoreActions } from 'actions';
-import { usersAPI, requests, passwordsAPI } from 'api';
-import { get } from 'lodash';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Dialog } from "components/backend";
+import { Form } from "components/global";
+import { entityStoreActions } from "actions";
+import { usersAPI, requests, passwordsAPI } from "api";
+import { get } from "lodash";
 
 const { request, flush } = entityStoreActions;
 
-
 class ResetPasswordWrapper extends PureComponent {
-
   static displayName = "ResetPassword.Confirm";
 
   static propTypes = {
@@ -20,18 +18,20 @@ class ResetPasswordWrapper extends PureComponent {
       heading: PropTypes.heading,
       resolve: PropTypes.func.isRequired,
       reject: PropTypes.func.isRequired
-    }).isRequired
+    }).isRequired,
+    dispatch: PropTypes.func,
+    user: PropTypes.object,
+    response: PropTypes.object
   };
 
-  static defaultProps = {
-  };
+  static defaultProps = {};
 
   static contextTypes = {
     pauseKeyboardEvents: PropTypes.func,
     unpauseKeyboardEvents: PropTypes.func
   };
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state, ownPropsIgnored) {
     return {
       response: get(state.entityStore.responses, requests.beUserUpdate)
     };
@@ -42,7 +42,7 @@ class ResetPasswordWrapper extends PureComponent {
     this.state = {
       editing: false,
       confirm: false,
-      password: '',
+      password: ""
     };
     this.handleResolveClick = this.handleResolveClick.bind(this);
     this.handleRejectClick = this.handleRejectClick.bind(this);
@@ -51,12 +51,13 @@ class ResetPasswordWrapper extends PureComponent {
 
   componentWillMount() {
     if (this.context.pauseKeyboardEvents) this.context.pauseKeyboardEvents();
-    window.addEventListener('keyup', this.handleKeyPress);
+    window.addEventListener("keyup", this.handleKeyPress);
   }
 
   componentWillUnmount() {
-    if (this.context.unpauseKeyboardEvents) this.context.unpauseKeyboardEvents();
-    window.removeEventListener('keyup', this.handleKeyPress);
+    if (this.context.unpauseKeyboardEvents)
+      this.context.unpauseKeyboardEvents();
+    window.removeEventListener("keyup", this.handleKeyPress);
     this.props.dispatch(flush([requests.beUserUpdate]));
   }
 
@@ -88,7 +89,7 @@ class ResetPasswordWrapper extends PureComponent {
 
   resetUserPassword(event, user) {
     event.preventDefault();
-    const adjustPassword = !!this.state.password ? this.state.password : null;
+    const adjustPassword = this.state.password ? this.state.password : null;
     const adjustedUser = {
       type: this.props.user.type,
       id: this.props.user.id,
@@ -111,26 +112,29 @@ class ResetPasswordWrapper extends PureComponent {
   }
 
   renderResetForm() {
-    let errors = get(this.props.response, 'errors') || [];
+    const errors = get(this.props.response, "errors") || [];
 
     return (
-      <form method="put" onSubmit={(event) => this.resetUserPassword(event, this.props.user)}>
+      <form
+        method="put"
+        onSubmit={event => this.resetUserPassword(event, this.props.user)}
+      >
         <div className="row-1-p">
           <Form.Errorable
             className="form-input"
             name="attributes[password]"
             errors={errors}
           >
-            <label>New Password</label>
+            <label htmlFor="reset-password">New Password</label>
             <input
               value={this.state.password}
-              onChange={(event) => this.handleInputChange(event)}
+              onChange={event => this.handleInputChange(event)}
               name="password"
               type="password"
               id="reset-password"
               placeholder="New Password"
             />
-          </ Form.Errorable>
+          </Form.Errorable>
         </div>
         <div className="row-1-p">
           <div className="form-input">
@@ -141,8 +145,10 @@ class ResetPasswordWrapper extends PureComponent {
             />
             <button
               className="button-secondary dull outlined"
-              onClick={(event) => this.handleStateChange(event, 'editing', false)}
-            >Cancel</button>
+              onClick={event => this.handleStateChange(event, "editing", false)}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </form>
@@ -153,37 +159,40 @@ class ResetPasswordWrapper extends PureComponent {
     return (
       <div>
         <header className="dialog-header-small">
-          <h2>{this.props.uiProps.heading}</h2>
+          <h2>
+            {this.props.uiProps.heading}
+          </h2>
         </header>
 
-        { this.props.uiProps.message ?
-          <p>
-            {this.props.uiProps.message}
-          </p>
-          : null
-        }
-        { this.state.editing ?
-          this.renderResetForm()
-          :
-          <div className="form-input">
-            <button
-              onClick={(event) => this.handleStateChange(event, 'confirm', true)}
-              className="button-secondary outlined"
-            >
-              Generate new password
-            </button>
-            <button
-              onClick={(event) => this.handleStateChange(event, 'editing', true)}
-              className="button-secondary outlined"
-            >
-              Set new password
-            </button>
-            <button
-              className="button-secondary dull outlined"
-              onClick={(event) => this.handleRejectClick(event)}
-            >Cancel</button>
-          </div>
-        }
+        {this.props.uiProps.message
+          ? <p>
+              {this.props.uiProps.message}
+            </p>
+          : null}
+        {this.state.editing
+          ? this.renderResetForm()
+          : <div className="form-input">
+              <button
+                onClick={event =>
+                  this.handleStateChange(event, "confirm", true)}
+                className="button-secondary outlined"
+              >
+                Generate new password
+              </button>
+              <button
+                onClick={event =>
+                  this.handleStateChange(event, "editing", true)}
+                className="button-secondary outlined"
+              >
+                Set new password
+              </button>
+              <button
+                className="button-secondary dull outlined"
+                onClick={event => this.handleRejectClick(event)}
+              >
+                Cancel
+              </button>
+            </div>}
       </div>
     );
   }
@@ -193,8 +202,8 @@ class ResetPasswordWrapper extends PureComponent {
       <Dialog.Confirm
         heading="Are you sure you want to reset this password?"
         message="This action cannot be undone."
-        resolve={(event) => this.handleResetEmailClick(event, this.props.user)}
-        reject={(event) => this.handleStateChange(event, 'confirm', false)}
+        resolve={event => this.handleResetEmailClick(event, this.props.user)}
+        reject={event => this.handleStateChange(event, "confirm", false)}
       />
     );
   }
@@ -207,16 +216,12 @@ class ResetPasswordWrapper extends PureComponent {
         showCloseButton={false}
         closeOnOverlayClick={false}
       >
-        { this.state.confirm ?
-          this.renderConfirmation()
-          : this.renderInitial()
-        }
+        {this.state.confirm ? this.renderConfirmation() : this.renderInitial()}
       </Dialog.Wrapper>
     );
   }
-
 }
 
-export default connect(
-  ResetPasswordWrapper.mapStateToProps
-)(ResetPasswordWrapper);
+export default connect(ResetPasswordWrapper.mapStateToProps)(
+  ResetPasswordWrapper
+);

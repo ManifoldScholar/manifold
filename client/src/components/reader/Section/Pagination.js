@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import lh from 'helpers/linkHandler';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import lh from "helpers/linkHandler";
+import { Link } from "react-router-dom";
 
 export default class Pagination extends Component {
-
   static propTypes = {
     textId: PropTypes.string,
     sectionId: PropTypes.string,
@@ -28,14 +27,14 @@ export default class Pagination extends Component {
 
   getPreviousLink() {
     let previousLink = null;
-    const previousNode = this.getSiblingSection(this.props.sectionId, - 1);
+    const previousNode = this.getSiblingSection(this.props.sectionId, -1);
     if (previousNode) {
       const previousPath = this.getSectionPath(previousNode);
       previousLink = (
-        <Link to={previousPath} className="pagination-previous" >
-          <i className="manicon manicon-arrow-round-left"></i>
+        <Link to={previousPath} className="pagination-previous">
+          <i className="manicon manicon-arrow-round-left" />
           <span className="text">
-            {'Previous'}
+            {"Previous"}
           </span>
         </Link>
       );
@@ -49,11 +48,11 @@ export default class Pagination extends Component {
     if (nextNode) {
       const nextPath = this.getSectionPath(nextNode);
       nextLink = (
-        <Link to={nextPath} className="pagination-next" >
+        <Link to={nextPath} className="pagination-next">
           <span className="text">
-            {'Next'}
+            {"Next"}
           </span>
-          <i className="manicon manicon-arrow-round-right"></i>
+          <i className="manicon manicon-arrow-round-right" />
         </Link>
       );
     }

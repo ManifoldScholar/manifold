@@ -1,9 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Select from '../Select';
+import React from "react";
+import renderer from "react-test-renderer";
+import Select from "../Select";
 
 describe("Backend.Form.Select component", () => {
-
   const changeMock = jest.fn();
   const options = [
     {
@@ -16,7 +15,7 @@ describe("Backend.Form.Select component", () => {
     }
   ];
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       <Select
         options={options}
@@ -28,5 +27,4 @@ describe("Backend.Form.Select component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

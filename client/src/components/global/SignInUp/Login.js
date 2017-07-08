@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { currentUserActions } from 'actions';
-import { get } from 'lodash';
-import classNames from 'classnames';
-import { SignInUp } from 'components/global';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { currentUserActions } from "actions";
+import { get } from "lodash";
+import classNames from "classnames";
+import { SignInUp } from "components/global";
 
 // const { startLogin } = authActions;
 
 export default class Login extends Component {
-
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     showForgot: PropTypes.func.isRequired,
@@ -25,17 +24,22 @@ export default class Login extends Component {
     this.updateEmail = this.updateEmail.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.authenticationError = this.authenticationError.bind(this);
-    this.state = { email: '', password: '' };
+    this.state = { email: "", password: "" };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.authentication.currentUser && !this.props.authentication.currentUser) {
+    if (
+      nextProps.authentication.currentUser &&
+      !this.props.authentication.currentUser
+    ) {
       this.props.hideSignInUpOverlay();
     }
   }
 
   updatePassword(event) {
-    this.setState(Object.assign({}, this.state, { password: event.target.value }));
+    this.setState(
+      Object.assign({}, this.state, { password: event.target.value })
+    );
   }
 
   updateEmail(event) {
@@ -53,20 +57,19 @@ export default class Login extends Component {
   }
 
   authenticationError() {
-    const error = get(this.props.authentication, 'error.body');
+    const error = get(this.props.authentication, "error.body");
     return error;
   }
 
   render() {
-
     const submitClass = classNames({
-      'form-input': true,
-      'form-error': this.authenticationError()
+      "form-input": true,
+      "form-error": this.authenticationError()
     });
 
     return (
       <div>
-        <form method="post" onSubmit={this.handleLogin} >
+        <form method="post" onSubmit={this.handleLogin}>
           <div className="row-1-p">
             <div className="form-input form-error">
               <label>Email</label>
@@ -93,11 +96,11 @@ export default class Login extends Component {
           </div>
           <div className="row-1-p">
             <div className={submitClass}>
-              { this.authenticationError() ?
-                <span style={{ marginTop: 0 }} className="error">
-                  {this.authenticationError()}
-                </span>
-              : null }
+              {this.authenticationError()
+                ? <span style={{ marginTop: 0 }} className="error">
+                    {this.authenticationError()}
+                  </span>
+                : null}
               <input
                 className="button-secondary button-with-room"
                 type="submit"
@@ -108,10 +111,10 @@ export default class Login extends Component {
         </form>
         <p className="login-links">
           <a href="#" onClick={this.props.showForgot} data-id="show-forgot">
-            {'Forgot your password?'}
+            {"Forgot your password?"}
           </a>
           <a href="#" onClick={this.props.showCreate} data-id="show-create">
-            {'Need to sign up?'}
+            {"Need to sign up?"}
           </a>
         </p>
 
@@ -130,7 +133,10 @@ export default class Login extends Component {
           >
             <span>Log in with Google</span>
           </SignInUp.Oauth.Button>
-          <SignInUp.Oauth.Button dispatch={this.props.dispatch} provider="twitter">
+          <SignInUp.Oauth.Button
+            dispatch={this.props.dispatch}
+            provider="twitter"
+          >
             <span>Log in with Twitter</span>
           </SignInUp.Oauth.Button>
         </section>

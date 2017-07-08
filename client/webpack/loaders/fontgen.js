@@ -1,22 +1,22 @@
 var loaderUtils = require("loader-utils");
 var fontgen = require("webfonts-generator");
 var path = require("path");
-var glob = require('glob');
-var util = require('util')
-var _ = require('lodash/string');
+var glob = require("glob");
+var util = require("util");
+var _ = require("lodash/string");
 var startsWith = _.startsWith;
 var isString = _.isString;
 
 var mimeTypes = {
-  'eot': 'application/vnd.ms-fontobject',
-  'svg': 'image/svg+xml',
-  'ttf': 'application/x-font-ttf',
-  'woff': 'application/font-woff'
+  eot: "application/vnd.ms-fontobject",
+  svg: "image/svg+xml",
+  ttf: "application/x-font-ttf",
+  woff: "application/font-woff"
 };
 
 function absolute(from, to) {
   if (arguments.length < 2) {
-    return function (to) {
+    return function(to) {
       return path.resolve(from, to);
     };
   }
@@ -34,21 +34,20 @@ function getFilesAndDeps(patterns, context) {
   }
 
   function addByGlob(globExp) {
-    var globOptions = {cwd: context};
+    var globOptions = { cwd: context };
 
     var foundFiles = glob.sync(globExp, globOptions);
     files = files.concat(foundFiles.map(absolute(context)));
 
-    var globDirs = glob.sync(path.dirname(globExp) + '/', globOptions);
+    var globDirs = glob.sync(path.dirname(globExp) + "/", globOptions);
     directoryDeps = directoryDeps.concat(globDirs.map(absolute(context)));
   }
 
   // Re-work the files array.
-  patterns.forEach(function (pattern) {
+  patterns.forEach(function(pattern) {
     if (glob.hasMagic(pattern)) {
       addByGlob(pattern);
-    }
-    else {
+    } else {
       addFile(pattern);
     }
   });
@@ -62,14 +61,13 @@ function getFilesAndDeps(patterns, context) {
   };
 }
 
-module.exports = function (content) {
-  this.cacheable()
+module.exports = function(content) {
+  this.cacheable();
   var params = loaderUtils.getOptions(this);
   var config;
   try {
     config = JSON.parse(content);
-  }
-  catch (ex) {
+  } catch (ex) {
     config = this.exec(content, this.resourcePath);
   }
 
@@ -84,11 +82,13 @@ module.exports = function (content) {
    */
   var filesAndDeps = getFilesAndDeps(config.files, this.context);
   filesAndDeps.dependencies.files.forEach(this.addDependency.bind(this));
-  filesAndDeps.dependencies.directories.forEach(this.addContextDependency.bind(this));
+  filesAndDeps.dependencies.directories.forEach(
+    this.addContextDependency.bind(this)
+  );
   config.files = filesAndDeps.files;
 
   // With everything set up, let's make an ACTUAL config.
-  var formats = config.types || ['eot', 'woff', 'ttf'];
+  var formats = config.types || ["eot", "woff", "ttf"];
   if (formats.constructor !== Array) {
     formats = [formats];
   }
@@ -111,20 +111,20 @@ module.exports = function (content) {
   // This originally was in the object notation itself.
   // Unfortunately that actually broke my editor's syntax-highlighting...
   // ... what a shame.
-  if(typeof config.rename == "function") {
+  if (typeof config.rename == "function") {
     fontconf.rename = config.rename;
   } else {
     fontconf.rename = function(f) {
       return path.basename(f, ".svg");
-    }
+    };
   }
 
   if (config.cssTemplate) {
     fontconf.cssTemplate = absolute(this.context, config.cssTemplate);
   }
 
-  for(var option in config.templateOptions) {
-    if(config.templateOptions.hasOwnProperty(option)) {
+  for (var option in config.templateOptions) {
+    if (config.templateOptions.hasOwnProperty(option)) {
       fontconf.templateOptions[option] = config.templateOptions[option];
     }
   }
@@ -147,21 +147,15 @@ module.exports = function (content) {
   var cb = this.async();
   var self = this;
   var opts = this.options;
-  var outputPath = (
-    opts.output.path || "/"
-  );
-  var pub = (
-    opts.output.publicPath || "/"
-  );
-
+  var outputPath = opts.output.path || "/";
+  var pub = opts.output.publicPath || "/";
 
   var embed = !!params.embed;
   if (fontconf.cssTemplate) {
-    this.addDependency(fontconf.cssTemplate)
+    this.addDependency(fontconf.cssTemplate);
   }
 
-  fontgen(fontconf, function (err, res) {
-
+  fontgen(fontconf, function(err, res) {
     if (err) {
       return cb(err);
     }
@@ -169,30 +163,29 @@ module.exports = function (content) {
     for (var i in formats) {
       var format = formats[i];
       if (!embed) {
-        var filename = config.fileName || params.fileName || "[hash]-[fontname][ext]";
+        var filename =
+          config.fileName || params.fileName || "[hash]-[fontname][ext]";
         filename = filename
           .replace("[fontname]", fontconf.fontName)
           .replace("[ext]", "." + format);
-        var url = loaderUtils.interpolateName(process,
-          filename,
-          {
-            context: self.options.context || process.context,
-            content: res[format]
-          }
-        );
+        var url = loaderUtils.interpolateName(process, filename, {
+          context: self.options.context || process.context,
+          content: res[format]
+        });
 
-        if (startsWith(pub, 'http')) {
-          urls[format] = pub + url
+        if (startsWith(pub, "http")) {
+          urls[format] = pub + url;
         } else {
           urls[format] = path.join(pub, url);
         }
 
         self.emitFile(url, res[format]);
       } else {
-        urls[format] = 'data:'
-          + mimeTypes[format]
-          + ';charset=utf-8;base64,'
-          + (new Buffer(res[format]).toString('base64'));
+        urls[format] =
+          "data:" +
+          mimeTypes[format] +
+          ";charset=utf-8;base64," +
+          new Buffer(res[format]).toString("base64");
       }
     }
     cb(null, res.generateCss(urls));

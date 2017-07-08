@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import classNames from 'classnames';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
+import lh from "helpers/linkHandler";
 
 export default class LayoutButtonNavigation extends Component {
-
-  static displayName = 'Layout.ButtonNavigation';
+  static displayName = "Layout.ButtonNavigation";
 
   static defaultProps = {
     grayBg: true,
@@ -48,8 +47,12 @@ export default class LayoutButtonNavigation extends Component {
     if (this.props.showBrowse !== true) return null;
     return (
       <Link to={lh.link("frontend")} className="button-icon-primary">
-        <span ref={(node) => { this._browseButtonEl = node; }}>
-          <i className="manicon manicon-books-on-shelf"></i>See more projects
+        <span
+          ref={node => {
+            this._browseButtonEl = node;
+          }}
+        >
+          <i className="manicon manicon-books-on-shelf" />See more projects
         </span>
       </Link>
     );
@@ -60,8 +63,13 @@ export default class LayoutButtonNavigation extends Component {
     if (this.props.showFollowing !== true) return null;
     return (
       <Link to={lh.link("frontendFollowing")} className="button-icon-primary">
-        <span ref={(node) => { this._followingButtonEl = node; }}>
-          <i className="manicon manicon-books-with-glasses"></i>Projects You're Following
+        <span
+          ref={node => {
+            this._followingButtonEl = node;
+          }}
+        >
+          <i className="manicon manicon-books-with-glasses" />
+          {"Projects You're Following "}
         </span>
       </Link>
     );
@@ -69,10 +77,11 @@ export default class LayoutButtonNavigation extends Component {
 
   render() {
     const sectionClass = classNames({
-      'bg-neutral05': this.props.grayBg === true
+      "bg-neutral05": this.props.grayBg === true
     });
 
-    if (!this.renderBrowseButton() && !this.renderFollowingButton()) return null;
+    if (!this.renderBrowseButton() && !this.renderFollowingButton())
+      return null;
     return (
       <section className={sectionClass}>
         <div className="container">
@@ -84,5 +93,4 @@ export default class LayoutButtonNavigation extends Component {
       </section>
     );
   }
-
 }

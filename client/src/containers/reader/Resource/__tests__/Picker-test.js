@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { ResourcePickerContainer } from '../Picker';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { ResourcePickerContainer } from "../Picker";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Reader Resource Picker Container", () => {
-
   const store = build.store();
   const resources = [build.entity.resource("1"), build.entity.resource("2")];
   const resourcesMeta = {
@@ -28,9 +27,7 @@ describe("Reader Resource Picker Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <ResourcePickerContainer
-          {...props}
-        />
+        <ResourcePickerContainer {...props} />
       </Provider>
     )
   );
@@ -44,5 +41,4 @@ describe("Reader Resource Picker Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

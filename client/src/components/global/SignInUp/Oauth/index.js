@@ -1,5 +1,5 @@
-import Button from './Button.js';
-import Monitor from './Monitor.js';
+import Button from "./Button";
+import Monitor from "./Monitor";
 
 export default {
   Button,

@@ -1,4 +1,4 @@
-import { pad } from './string';
+import { pad } from "./string";
 
 export function timestamp(time) {
   const hours = pad(time.getHours(), 2);
