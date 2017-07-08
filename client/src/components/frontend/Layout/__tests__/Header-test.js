@@ -1,19 +1,18 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Header from '../Header';
-import build from 'test/fixtures/build';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
+import React from "react";
+import renderer from "react-test-renderer";
+import Header from "../Header";
+import build from "test/fixtures/build";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
 
 describe("Frontend.Layout.Header component", () => {
-
   const settings = build.entity.settings();
   const store = build.store();
   const toggleOverlayMock = jest.fn();
   const togglerUserPanelMock = jest.fn();
   const startLogoutMock = jest.fn();
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
@@ -35,5 +34,4 @@ describe("Frontend.Layout.Header component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

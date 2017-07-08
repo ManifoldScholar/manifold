@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { passwordsAPI, requests } from 'api';
-import { Form } from 'components/global';
-import { entityStoreActions, notificationActions, currentUserActions } from 'actions';
-import { get } from 'lodash';
-import { select } from 'utils/entityUtils';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { passwordsAPI, requests } from "api";
+import { Form } from "components/global";
+import { entityStoreActions, currentUserActions } from "actions";
+import { get } from "lodash";
+
 const { request, flush } = entityStoreActions;
 
 export class PasswordResetContainer extends Component {
-
   static propTypes = {
     dispatch: PropTypes.func,
     match: PropTypes.shape({
@@ -21,7 +20,7 @@ export class PasswordResetContainer extends Component {
     response: PropTypes.object
   };
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state) {
     return {
       response: get(state.entityStore.responses, requests.gPasswordReset)
     };
@@ -30,8 +29,8 @@ export class PasswordResetContainer extends Component {
   constructor() {
     super();
     this.state = {
-      password: '',
-      passwordConfirmation: ''
+      password: "",
+      passwordConfirmation: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,7 +48,7 @@ export class PasswordResetContainer extends Component {
       this.props.match.params.resetToken
     );
     const changeRequest = request(action, requests.gPasswordReset);
-    this.props.dispatch(changeRequest).promise.then((response) => {
+    this.props.dispatch(changeRequest).promise.then(response => {
       this.postUpdate(response.data);
     });
   }
@@ -60,14 +59,16 @@ export class PasswordResetContainer extends Component {
   }
 
   loginUser(user) {
-    this.props.dispatch(currentUserActions.login({
-      email: user.attributes.email,
-      password: this.state.password
-    }));
+    this.props.dispatch(
+      currentUserActions.login({
+        email: user.attributes.email,
+        password: this.state.password
+      })
+    );
   }
 
   redirectToHome() {
-    this.props.history.push('/');
+    this.props.history.push("/");
   }
 
   handleInputChange(event) {
@@ -75,23 +76,20 @@ export class PasswordResetContainer extends Component {
   }
 
   render() {
-    let errors = get(this.props.response, 'errors') || [];
+    const errors = get(this.props.response, "errors") || [];
     return (
       <section>
         <div className="container">
-          <form method="post" onSubmit={(event) => this.handleSubmit(event)}>
+          <form method="post" onSubmit={event => this.handleSubmit(event)}>
             <h4 className="form-heading">Reset Password</h4>
-            <div className="row-1-p">
-            </div>
+            <div className="row-1-p" />
             <div className="row-1-p">
               <Form.Errorable
                 className="form-input"
                 name="attributes[password]"
                 errors={errors}
               >
-                <label>
-                  New Password
-                </label>
+                <label>New Password</label>
                 <input
                   value={this.state.password}
                   type="password"
@@ -108,9 +106,7 @@ export class PasswordResetContainer extends Component {
                 name="attributes[passwordConfirmation]"
                 errors={errors}
               >
-                <label>
-                  Confirm Password
-                </label>
+                <label>Confirm Password</label>
                 <input
                   value={this.state.passwordConfirmation}
                   type="password"

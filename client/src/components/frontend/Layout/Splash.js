@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class Splash extends Component {
-
   static displayName = "Layout.Splash";
 
   static propTypes = {
@@ -27,14 +26,14 @@ export default class Splash extends Component {
           <div className="splash-50">
             <div className="left">
               <h2 className="heading-primary">
-                {'Welcome to Manifold. An Intuitive, collaborative, ' +
-                'open-source platform for scholarly publishing'}
+                {"Welcome to Manifold. An Intuitive, collaborative, " +
+                  "open-source platform for scholarly publishing"}
               </h2>
               <p>
-                {'With iterative texts, powerful annotation tools, ' +
-                'rich media support, and robust community dialogue, ' +
-                'Manifold transforms scholarly publications into ' +
-                'living digital works.'}
+                {"With iterative texts, powerful annotation tools, " +
+                  "rich media support, and robust community dialogue, " +
+                  "Manifold transforms scholarly publications into " +
+                  "living digital works."}
               </p>
               <nav className="buttons">
                 <a
@@ -42,22 +41,25 @@ export default class Splash extends Component {
                   target="blank"
                   className="button-bare-primary"
                 >
-                  {'Learn More'}
+                  {"Learn More"}
                 </a>
-                {!this.props.authenticated ?
-                  <a
-                    href="#"
-                    onClick={this.handleSignUp}
-                    target="blank"
-                    className="button-bare-primary"
-                  >
-                    {'Sign Up'}
-                  </a> : null
-                }
+                {!this.props.authenticated
+                  ? <a
+                      href="#"
+                      onClick={this.handleSignUp}
+                      target="blank"
+                      className="button-bare-primary"
+                    >
+                      {"Sign Up"}
+                    </a>
+                  : null}
               </nav>
             </div>
             <figure className="right">
-              <img src="/static/images/browse-splash_manifold-devices.png" />
+              <img
+                src="/static/images/browse-splash_manifold-devices.png"
+                alt=""
+              />
             </figure>
           </div>
         </div>

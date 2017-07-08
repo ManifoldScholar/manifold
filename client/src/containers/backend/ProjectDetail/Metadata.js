@@ -1,23 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
-import { Metadata } from 'components/backend';
-import { projectsAPI } from 'api';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Metadata } from "components/backend";
+import { projectsAPI } from "api";
 
 export default class ProjectDetailMetadata extends PureComponent {
-
   static displayName = "ProjectDetail.Metadata";
 
   static propTypes = {
-    route: PropTypes.object,
-    project: PropTypes.object,
-    dispatch: PropTypes.func,
-    editSession: PropTypes.object
+    project: PropTypes.object
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
@@ -31,4 +22,3 @@ export default class ProjectDetailMetadata extends PureComponent {
     );
   }
 }
-

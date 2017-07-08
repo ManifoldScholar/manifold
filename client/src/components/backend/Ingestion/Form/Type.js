@@ -1,15 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/backend";
 
 export default class IngestionFormType extends PureComponent {
-
   static displayName = "ProjectDetail.Text.Ingestion.Form.Type";
 
-  static PropTypes = {
+  static propTypes = {
     getModelValue: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
+  };
+
+  static defaultProps = {
+    getModelValue: () => {}
   };
 
   static types = [
@@ -33,33 +36,29 @@ export default class IngestionFormType extends PureComponent {
 
   get valid() {
     const value = this.props.getModelValue("attributes[ingestionType]");
-    return this.ingestionTypeOptions.map((o) => o.value).includes(value);
+    return this.ingestionTypeOptions.map(o => o.value).includes(value);
   }
 
   get ingestionTypeOptions() {
     return IngestionFormType.types;
   }
 
-  handleProceedClick = (event) => {
+  handleProceedClick = event => {
     event.preventDefault();
     this.props.history.push(this.props.location.pathname, { stage: "upload" });
   };
 
   render() {
     return (
-      <Form.FieldGroup {...this.props} >
+      <Form.FieldGroup {...this.props}>
         <Form.Radios
-          layout="vertical"
           name="attributes[ingestionType]"
           label="Text Format"
           options={this.ingestionTypeOptions}
         />
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
-          <button
-            onClick={this.close}
-            className="button-icon-secondary dull"
-          >
-            <i className="manicon manicon-x small"></i>
+          <button onClick={this.close} className="button-icon-secondary dull">
+            <i className="manicon manicon-x small" />
             Cancel
           </button>
           <button
@@ -67,7 +66,7 @@ export default class IngestionFormType extends PureComponent {
             className="button-icon-secondary"
             disabled={!this.valid}
           >
-            <i className="manicon manicon-check small"></i>
+            <i className="manicon manicon-check small" />
             Continue
           </button>
         </div>
@@ -75,4 +74,3 @@ export default class IngestionFormType extends PureComponent {
     );
   }
 }
-

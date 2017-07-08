@@ -1,9 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Radios from '../Radios';
+import React from "react";
+import renderer from "react-test-renderer";
+import Radios from "../Radios";
 
 describe("Backend.Form.Radios component", () => {
-
   const changeMock = jest.fn();
   const options = [
     {
@@ -16,7 +15,7 @@ describe("Backend.Form.Radios component", () => {
     }
   ];
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       <Radios
         options={options}
@@ -28,5 +27,4 @@ describe("Backend.Form.Radios component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

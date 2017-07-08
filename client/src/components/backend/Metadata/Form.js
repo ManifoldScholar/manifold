@@ -1,17 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form as FormContainer } from 'containers/backend';
-import { Form } from 'components/backend';
-import split from 'lodash/split';
-import capitalize from 'lodash/capitalize';
-import config from '../../../config';
-import humps from 'humps';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form as FormContainer } from "containers/backend";
+import { Form } from "components/backend";
+import config from "../../../config";
+import humps from "humps";
 
 export default class FormMakers extends PureComponent {
-
   static displayName = "Metadata.Form";
 
   static propTypes = {
+    model: PropTypes.object.isRequired
   };
 
   get attributes() {
@@ -42,24 +40,22 @@ export default class FormMakers extends PureComponent {
   }
 
   placeholderFor(prop) {
-    return this.configValueFor(prop, 'placeholder');
+    return this.configValueFor(prop, "placeholder");
   }
 
   instructionsFor(prop) {
-    return this.configValueFor(prop, 'instructions');
+    return this.configValueFor(prop, "instructions");
   }
 
   render() {
     return (
       <section>
-        <FormContainer.Form
-          {...this.props}
-        >
+        <FormContainer.Form {...this.props}>
           {this.metadataProperties.map((prop, i) => {
-            const focus = i === 0 ? true : false;
+            const focus = i === 0;
             return (
               <Form.TextInput
-                key={i}
+                key={prop}
                 focusOnMount={focus}
                 placeholder={this.placeholderFor(prop)}
                 instructions={this.instructionsFor(prop)}
@@ -68,14 +64,11 @@ export default class FormMakers extends PureComponent {
               />
             );
           })}
-          <Form.Save
-            text="Save Metadata"
-          />
+          <Form.Save text="Save Metadata" />
         </FormContainer.Form>
       </section>
     );
   }
-
 }
 
 //

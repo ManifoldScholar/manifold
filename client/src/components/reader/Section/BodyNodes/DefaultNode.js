@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import validatedNode from './HigherOrder/ValidatedNode';
-import isEmpty from 'lodash/isEmpty';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import validatedNode from "./HigherOrder/ValidatedNode";
 
 class DefaultNode extends Component {
-
   static propTypes = {
     attributes: PropTypes.object,
     tag: PropTypes.string,
@@ -12,9 +10,12 @@ class DefaultNode extends Component {
   };
 
   render() {
-    return React.createElement(this.props.tag, this.props.attributes, this.props.children);
+    return React.createElement(
+      this.props.tag,
+      this.props.attributes,
+      this.props.children
+    );
   }
-
 }
 
 export default validatedNode(DefaultNode);

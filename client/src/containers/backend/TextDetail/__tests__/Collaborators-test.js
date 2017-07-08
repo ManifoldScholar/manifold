@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { TextDetailCollaborators } from '../Collaborators';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { TextDetailCollaborators } from "../Collaborators";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend TextDetail Collaborators Container", () => {
-
   const store = build.store();
   const text = build.entity.text("1");
   text.relationships.creators = [build.entity.user("2")];
@@ -14,10 +13,8 @@ describe("Backend TextDetail Collaborators Container", () => {
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
-        <TextDetailCollaborators
-          text={text}
-        />
+      <Provider store={store}>
+        <TextDetailCollaborators text={text} />
       </Provider>
     )
   );
@@ -31,5 +28,4 @@ describe("Backend TextDetail Collaborators Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

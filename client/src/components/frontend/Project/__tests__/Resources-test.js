@@ -1,11 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Resources from '../Resources';
-import build from 'test/fixtures/build';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import Resources from "../Resources";
+import build from "test/fixtures/build";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Project.Resources component", () => {
-
   const project = build.entity.project("1");
   const resources = [build.entity.resource("2"), build.entity.resource("3")];
   const filterChangeMock = jest.fn();
@@ -19,7 +18,7 @@ describe("Frontend.Project.Resources component", () => {
     totalPages: 2
   };
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Resources
@@ -35,5 +34,4 @@ describe("Frontend.Project.Resources component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

@@ -1,20 +1,19 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { requests } from 'api';
-import { entityStoreActions, uiVisibilityActions } from 'actions';
-import { bindActionCreators } from 'redux';
-import { select } from 'utils/entityUtils';
-import { Comment } from 'components/global';
-import { Utility } from 'components/frontend';
-import { commentsAPI } from 'api';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { requests } from "api";
+import { entityStoreActions, uiVisibilityActions } from "actions";
+import { bindActionCreators } from "redux";
+import { select } from "utils/entityUtils";
+import { Comment } from "components/global";
+import { commentsAPI } from "api";
+
 const { request } = entityStoreActions;
 
 export class CommentThread extends PureComponent {
-
   static mapStateToProps(state, ownProps) {
     const newState = {
-      comments: select(`comments-for-${ownProps.subject.id}`, state.entityStore),
+      comments: select(`comments-for-${ownProps.subject.id}`, state.entityStore)
     };
     return Object.assign({}, ownProps, newState);
   }
@@ -22,7 +21,9 @@ export class CommentThread extends PureComponent {
   static propTypes = {
     subject: PropTypes.object.isRequired,
     parentId: PropTypes.string,
-    parent: PropTypes.object
+    parent: PropTypes.object,
+    comments: PropTypes.array,
+    dispatch: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -41,7 +42,9 @@ export class CommentThread extends PureComponent {
   componentDidMount() {
     if (this.props.subject && !this.props.comments) {
       const call = commentsAPI.index(this.props.subject);
-      this.props.dispatch(request(call, `comments-for-${this.props.subject.id}`));
+      this.props.dispatch(
+        request(call, `comments-for-${this.props.subject.id}`)
+      );
     }
   }
 
@@ -72,23 +75,26 @@ export class CommentThread extends PureComponent {
   }
 
   childrenOf(parentId) {
-    const children = this.props.comments.filter((c) => c.attributes.parentId === parentId);
+    const children = this.props.comments.filter(
+      c => c.attributes.parentId === parentId
+    );
     return children;
   }
 
   render() {
-    if (!this.props.comments || !Array.isArray(this.props.comments)) return null;
+    if (!this.props.comments || !Array.isArray(this.props.comments))
+      return null;
     const children = this.childrenOf(this.props.parentId);
     if (children.length <= 0) return null;
     const showLogin = bindActionCreators(
-      () => uiVisibilityActions.visibilityToggle('signInUpOverlay'),
+      () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
       this.props.dispatch
     );
 
     return (
       <div className="annotation-comment-thread">
         <ul className="comment-list">
-          {children.map((comment) => {
+          {children.map(comment => {
             return (
               <Comment.Detail
                 subject={this.props.subject}
@@ -111,8 +117,4 @@ export class CommentThread extends PureComponent {
   }
 }
 
-
-export default connect(
-  CommentThread.mapStateToProps
-)(CommentThread);
-
+export default connect(CommentThread.mapStateToProps)(CommentThread);

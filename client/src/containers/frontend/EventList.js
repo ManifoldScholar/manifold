@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Project, ResourceList } from 'components/frontend';
-import { HigherOrder } from 'components/global';
-import { entityStoreActions } from 'actions';
-import { select, meta } from 'utils/entityUtils';
-import { projectsAPI, requests } from 'api';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Project } from "components/frontend";
+import { entityStoreActions } from "actions";
+import { select, meta } from "utils/entityUtils";
+import { projectsAPI, requests } from "api";
 
 const { request } = entityStoreActions;
 
 export class ProjectEventsContainer extends Component {
-
   static fetchData(getState, dispatch, location, match) {
     const { params } = match;
     const page = params.page ? params.page : 1;
-    const projectRequest =
-        request(projectsAPI.show(params.id), requests.feProject);
-    const eventRequest =
-      request(projectsAPI.events(params.id, {}, { number: page }), requests.feEvents);
+    const projectRequest = request(
+      projectsAPI.show(params.id),
+      requests.feProject
+    );
+    const eventRequest = request(
+      projectsAPI.events(params.id, {}, { number: page }),
+      requests.feEvents
+    );
     const { promise: one } = dispatch(projectRequest);
     const { promise: two } = dispatch(eventRequest);
     return Promise.all([one, two]);

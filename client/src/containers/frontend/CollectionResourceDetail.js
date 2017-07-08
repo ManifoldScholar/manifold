@@ -1,18 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Resource, Utility } from 'components/frontend';
-import { HigherOrder } from 'components/global';
-import lh from 'helpers/linkHandler';
-import { entityStoreActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { collectionsAPI, requests } from 'api';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Resource, Utility } from "components/frontend";
+import lh from "helpers/linkHandler";
+import { entityStoreActions } from "actions";
+import { select } from "utils/entityUtils";
+import { collectionsAPI, requests } from "api";
 
 const { request, flush } = entityStoreActions;
 
 export class CollectionResourceDetailContainer extends PureComponent {
   static fetchData(getState, dispatch, location, match) {
-    const page = match.params.page ? match.params.page : 1;
     const collectionFetch = collectionsAPI.show(match.params.collectionId);
     const collectionResourceFetch = collectionsAPI.collectionResource(
       match.params.collectionId,
@@ -31,13 +29,20 @@ export class CollectionResourceDetailContainer extends PureComponent {
   static mapStateToProps(state) {
     const props = {
       collection: select(requests.feCollection, state.entityStore),
-      collectionResource: select(requests.feCollectionResource, state.entityStore)
+      collectionResource: select(
+        requests.feCollectionResource,
+        state.entityStore
+      )
     };
     return props;
   }
 
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    dispatch: PropTypes.func,
+    collection: PropTypes.object,
+    collectionResource: PropTypes.object,
+    match: PropTypes.object
   };
 
   componentWillUnmount() {
@@ -60,7 +65,12 @@ export class CollectionResourceDetailContainer extends PureComponent {
     const cid = this.props.collection.id;
     const pid = this.props.collection.attributes.projectId;
     const crid = this.props.collectionResource.id;
-    return lh.link("frontendProjectCollectionCollectionResource", pid, cid, crid);
+    return lh.link(
+      "frontendProjectCollectionCollectionResource",
+      pid,
+      cid,
+      crid
+    );
   }
 
   render() {
@@ -69,29 +79,29 @@ export class CollectionResourceDetailContainer extends PureComponent {
 
     return (
       <div>
-        {this.props.collection ?
-          <Utility.BackLinkPrimary
-            backText="Back to Collection"
-            link={this.collectionUrl()}
-            title={this.props.collection.attributes.title}
-          /> : null
-        }
-        {this.props.collectionResource ?
-          <Resource.Detail
-            projectId={this.props.match.params.id}
-            projectUrl={this.projectUrl()}
-            resourceUrl={this.resourceUrl()}
-            resource={this.props.collectionResource.relationships.resource}
-          /> : null
-        }
-        {this.props.collection ?
-          <section className="bg-neutral05">
-            <Utility.BackLinkSecondary
-              link={this.collectionUrl()}
+        {this.props.collection
+          ? <Utility.BackLinkPrimary
               backText="Back to Collection"
+              link={this.collectionUrl()}
+              title={this.props.collection.attributes.title}
             />
-          </section> : null
-        }
+          : null}
+        {this.props.collectionResource
+          ? <Resource.Detail
+              projectId={this.props.match.params.id}
+              projectUrl={this.projectUrl()}
+              resourceUrl={this.resourceUrl()}
+              resource={this.props.collectionResource.relationships.resource}
+            />
+          : null}
+        {this.props.collection
+          ? <section className="bg-neutral05">
+              <Utility.BackLinkSecondary
+                link={this.collectionUrl()}
+                backText="Back to Collection"
+              />
+            </section>
+          : null}
       </div>
     );
   }

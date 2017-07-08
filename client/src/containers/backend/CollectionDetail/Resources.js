@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { List, Resource, Form } from 'components/backend';
-import { Resource as FrontendResource } from 'components/frontend';
-import { Utility } from 'components/global';
-import FormattedDate from 'components/global/FormattedDate';
-import { collectionsAPI, projectsAPI, requests } from 'api';
-import { connect } from 'react-redux';
-import { entityStoreActions } from 'actions';
-import { select, meta } from 'utils/entityUtils';
-import find from 'lodash/find';
-import lh from 'helpers/linkHandler';
-import classnames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { List } from "components/backend";
+import { Resource as FrontendResource } from "components/frontend";
+import FormattedDate from "components/global/FormattedDate";
+import { collectionsAPI, projectsAPI, requests } from "api";
+import { connect } from "react-redux";
+import { entityStoreActions } from "actions";
+import { select, meta } from "utils/entityUtils";
+import find from "lodash/find";
+import lh from "helpers/linkHandler";
+import classnames from "classnames";
 
 const { request, flush } = entityStoreActions;
 const perPage = 5;
 
 export class CollectionDetailResourcesContainer extends Component {
-
   static displayName = "CollectionDetail.Resources";
 
   static mapStateToProps(state) {
@@ -68,15 +66,15 @@ export class CollectionDetailResourcesContainer extends Component {
     this.props.dispatch(action);
   }
 
-  updateResources(resources, changeType) {
-    const adjustedResources = resources.map((e) => {
+  updateResources(resources, changeTypeIgnored) {
+    const adjustedResources = resources.map(e => {
       return {
         id: e.id,
         type: e.type
       };
     });
     const collection = {
-      type: 'collections',
+      type: "collections",
       id: this.props.collection.id,
       relationships: { resources: { data: adjustedResources } }
     };
@@ -87,7 +85,8 @@ export class CollectionDetailResourcesContainer extends Component {
 
   handleFilterChange(filter) {
     const newFilter = filter;
-    if (this.state.filter.collection) newFilter.collection = this.state.filter.collection;
+    if (this.state.filter.collection)
+      newFilter.collection = this.state.filter.collection;
     this.setState({ filter: newFilter }, () => {
       this.fetchResources(1);
     });
@@ -98,7 +97,7 @@ export class CollectionDetailResourcesContainer extends Component {
   }
 
   pageChangeHandlerCreator(page) {
-    return (event) => {
+    return event => {
       this.handleResourcesPageChange(event, page);
     };
   }
@@ -110,7 +109,7 @@ export class CollectionDetailResourcesContainer extends Component {
   }
 
   removeFromCollection(entity, collectionResources) {
-    const newEntities = collectionResources.filter((compare) => {
+    const newEntities = collectionResources.filter(compare => {
       return compare.id !== entity.id;
     });
     this.updateResources(newEntities, "remove");
@@ -119,9 +118,15 @@ export class CollectionDetailResourcesContainer extends Component {
   handleSelect(event, resource) {
     event.preventDefault();
     if (this.isInCollection(resource)) {
-      this.removeFromCollection(resource, this.props.collection.relationships.resources);
+      this.removeFromCollection(
+        resource,
+        this.props.collection.relationships.resources
+      );
     } else if (!this.isInCollection(resource)) {
-      this.addToCollection(resource, this.props.collection.relationships.resources);
+      this.addToCollection(
+        resource,
+        this.props.collection.relationships.resources
+      );
     } else {
       return null;
     }
@@ -129,7 +134,7 @@ export class CollectionDetailResourcesContainer extends Component {
 
   isInCollection(resource) {
     if (!this.props.collection.relationships.resources) return false;
-    return !!find(this.props.collection.relationships.resources, (cResource) => {
+    return !!find(this.props.collection.relationships.resources, cResource => {
       return cResource.id === resource.id;
     });
   }
@@ -170,7 +175,9 @@ export class CollectionDetailResourcesContainer extends Component {
             <div className="meta">
               <h3 className="name">
                 <span
-                  dangerouslySetInnerHTML={{ __html: resource.attributes.titleFormatted }}
+                  dangerouslySetInnerHTML={{
+                    __html: resource.attributes.titleFormatted
+                  }}
                 />
                 <span className="subtitle">
                   <FormattedDate
@@ -185,7 +192,10 @@ export class CollectionDetailResourcesContainer extends Component {
         <div className="form-input utility">
           <div className="toggle-indicator">
             {/* Add .checked to .boolean-primary to change visual state */}
-            <div onClick={(event) => this.handleSelect(event, resource)} className={classes}></div>
+            <div
+              onClick={event => this.handleSelect(event, resource)}
+              className={classes}
+            />
           </div>
         </div>
       </li>
@@ -194,7 +204,9 @@ export class CollectionDetailResourcesContainer extends Component {
 
   render() {
     if (!this.props.resources) return null;
-    const toggleLabel = this.state.filter.collection ? "Show all" : "Show collection only";
+    const toggleLabel = this.state.filter.collection
+      ? "Show all"
+      : "Show collection only";
     const project = this.props.collection.relationships.project;
     const collectionFilter = {
       options: [this.props.collection.id],
@@ -206,9 +218,7 @@ export class CollectionDetailResourcesContainer extends Component {
       <section className="collection-resources-list">
         <div>
           <header className="section-heading-secondary">
-            <h3>
-              Resources
-            </h3>
+            <h3>Resources</h3>
           </header>
           <button
             onClick={this.toggleCollectionOnly}
@@ -235,6 +245,6 @@ export class CollectionDetailResourcesContainer extends Component {
   }
 }
 
-export default connect(
-  CollectionDetailResourcesContainer.mapStateToProps
-)(CollectionDetailResourcesContainer);
+export default connect(CollectionDetailResourcesContainer.mapStateToProps)(
+  CollectionDetailResourcesContainer
+);

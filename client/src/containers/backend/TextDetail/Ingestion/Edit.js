@@ -1,16 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Ingestion } from 'components/backend';
-import { renderRoutes } from 'helpers/routing';
-import { entityStoreActions } from 'actions';
-import { ingestionsAPI, requests } from 'api';
-import { select, isLoaded } from 'utils/entityUtils';
-const { request, flush } = entityStoreActions;
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Ingestion } from "components/backend";
+import { entityStoreActions } from "actions";
+import { ingestionsAPI, requests } from "api";
+import { select, isLoaded } from "utils/entityUtils";
+import lh from "helpers/linkHandler";
+
+const { request } = entityStoreActions;
 
 export class IngestionEdit extends PureComponent {
-
   static displayName = "TextDetail.Ingestion.Edit";
 
   static fetchData(getState, dispatch, location, match) {
@@ -22,13 +21,16 @@ export class IngestionEdit extends PureComponent {
 
   static mapStateToProps(state) {
     return {
-      ingestion: select(requests.beIngestionShow, state.entityStore),
+      ingestion: select(requests.beIngestionShow, state.entityStore)
     };
   }
 
   static propTypes = {
     text: PropTypes.object.isRequired,
-    history: PropTypes.object
+    history: PropTypes.object,
+    ingestion: PropTypes.object,
+    match: PropTypes.object,
+    location: PropTypes.object
   };
 
   handleSuccess = () => {
@@ -37,7 +39,7 @@ export class IngestionEdit extends PureComponent {
 
   redirectToIngestion(ingestionId) {
     const path = lh.link(
-      'backendTextIngestionIngest',
+      "backendTextIngestionIngest",
       this.textId,
       ingestionId
     );

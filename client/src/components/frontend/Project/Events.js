@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Utility, Event, Layout } from 'components/frontend';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Utility, Event, Layout } from "components/frontend";
+import lh from "helpers/linkHandler";
 
 export default class ProjectEvents extends Component {
-
-  static displayName = "Project.Events"
+  static displayName = "Project.Events";
 
   static propTypes = {
     project: PropTypes.object,
@@ -29,8 +28,8 @@ export default class ProjectEvents extends Component {
           <div className="container">
             <header className="section-heading">
               <h4 className="title">
-                <i className="manicon manicon-pulse"></i>
-                {'All Activity'}
+                <i className="manicon manicon-pulse" />
+                {"All Activity"}
               </h4>
             </header>
 

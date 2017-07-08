@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Header from '../Header';
-import build from 'test/fixtures/build';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
+import React from "react";
+import renderer from "react-test-renderer";
+import Header from "../Header";
+import build from "test/fixtures/build";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
 
 describe("Reader.Header Component", () => {
-
   const text = build.entity.text("1");
   const project = build.entity.project("2");
   text.relationships.project = project;
@@ -14,10 +13,10 @@ describe("Reader.Header Component", () => {
   const store = build.store();
 
   const appearance = {
-      typography: {
-        fontSize: {}
-      },
-      colors: {}
+    typography: {
+      fontSize: {}
+    },
+    colors: {}
   };
   const visibility = {
     uiPanels: {}
@@ -34,21 +33,19 @@ describe("Reader.Header Component", () => {
     notifications: []
   };
 
-  const root = (
-    wrapWithRouter(
-      <Provider store={store} >
-        <Header
-          appearance={appearance}
-          visibility={visibility}
-          commonActions={commonActions}
-          notifications={notifications}
-          text={text}
-        />
-      </Provider>
-    )
+  const root = wrapWithRouter(
+    <Provider store={store}>
+      <Header
+        appearance={appearance}
+        visibility={visibility}
+        commonActions={commonActions}
+        notifications={notifications}
+        text={text}
+      />
+    </Provider>
   );
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(root);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

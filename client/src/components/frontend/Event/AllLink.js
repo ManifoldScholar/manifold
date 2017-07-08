@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import lh from "helpers/linkHandler";
 
 export default class EventAllLink extends Component {
-
   static displayName = "Event.AllLink";
 
   static propTypes = {

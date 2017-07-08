@@ -1,18 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Resource, Utility } from 'components/frontend';
-import { entityStoreActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { projectsAPI, resourcesAPI, requests } from 'api';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Resource, Utility } from "components/frontend";
+import { entityStoreActions } from "actions";
+import { select } from "utils/entityUtils";
+import { projectsAPI, resourcesAPI, requests } from "api";
+import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
 
 export class ResourceDetailContainer extends PureComponent {
-
   static fetchData(getState, dispatch, location, match) {
-    const page = match.params.page ? match.params.page : 1;
     const projectFetch = projectsAPI.show(match.params.id);
     const resourceFetch = resourcesAPI.show(match.params.resourceId);
     const projectAction = request(projectFetch, requests.feProject);
@@ -32,7 +30,8 @@ export class ResourceDetailContainer extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object,
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   componentWillUnmount() {
@@ -55,29 +54,29 @@ export class ResourceDetailContainer extends PureComponent {
     if (!projectId) return null;
     return (
       <div>
-        {this.props.project ?
-          <Utility.BackLinkPrimary
-            backText="Back to Project Resources"
-            link={this.projectUrl()}
-            title={this.props.project.attributes.title}
-          /> : null
-        }
-        {this.props.resource ?
-          <Resource.Detail
-            projectId={projectId}
-            projectUrl={this.projectUrl()}
-            resourceUrl={this.resourceUrl()}
-            resource={this.props.resource}
-          /> : null
-        }
-        {this.props.project ?
-          <section className="bg-neutral05">
-            <Utility.BackLinkSecondary
+        {this.props.project
+          ? <Utility.BackLinkPrimary
               backText="Back to Project Resources"
               link={this.projectUrl()}
+              title={this.props.project.attributes.title}
             />
-          </section> : null
-        }
+          : null}
+        {this.props.resource
+          ? <Resource.Detail
+              projectId={projectId}
+              projectUrl={this.projectUrl()}
+              resourceUrl={this.resourceUrl()}
+              resource={this.props.resource}
+            />
+          : null}
+        {this.props.project
+          ? <section className="bg-neutral05">
+              <Utility.BackLinkSecondary
+                backText="Back to Project Resources"
+                link={this.projectUrl()}
+              />
+            </section>
+          : null}
       </div>
     );
   }

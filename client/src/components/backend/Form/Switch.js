@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import setter from './setter';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import setter from "./setter";
 
 class FormSwitch extends Component {
-
   static displayName = "Form.Switch";
 
   static propTypes = {
@@ -44,7 +43,7 @@ class FormSwitch extends Component {
   }
 
   determineChecked(value) {
-    if (this.props.customValues) return (value === this.props.customValues.true);
+    if (this.props.customValues) return value === this.props.customValues.true;
     return this.truthy(value);
   }
 
@@ -56,10 +55,12 @@ class FormSwitch extends Component {
 
     return (
       <div className="form-input">
-        <label>{this.props.label}</label>
+        <label>
+          {this.props.label}
+        </label>
         <div className="toggle-indicator">
           {/* Add .checked to .boolean-primary to change visual state */}
-          <div onClick={this.handleClick} className={classes}></div>
+          <div onClick={this.handleClick} className={classes} />
         </div>
       </div>
     );

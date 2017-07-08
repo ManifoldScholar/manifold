@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { projectsAPI } from 'api';
-import { Form as FormContainer } from 'containers/backend';
-import { connect } from 'react-redux';
-
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { projectsAPI } from "api";
+import { Form as FormContainer } from "containers/backend";
+import { connect } from "react-redux";
 
 export class ProjectDetailCollaborators extends Component {
-
   static displayName = "ProjectDetail.Collaborators";
 
   static propTypes = {
@@ -16,12 +14,10 @@ export class ProjectDetailCollaborators extends Component {
   render() {
     const project = this.props.project;
 
-    return (
-      <FormContainer.Collaborators entity={project} api={projectsAPI} />
-    );
+    return <FormContainer.Collaborators entity={project} api={projectsAPI} />;
   }
 }
 
-export default connect(
-  ProjectDetailCollaborators.mapStateToProps
-)(ProjectDetailCollaborators);
+export default connect(ProjectDetailCollaborators.mapStateToProps)(
+  ProjectDetailCollaborators
+);

@@ -1,9 +1,10 @@
-import qs from 'qs';
-import isPlainObject from 'lodash/isPlainObject';
-require('isomorphic-fetch');
+/* eslint-disable no-console */
+import qs from "qs";
+import isPlainObject from "lodash/isPlainObject";
+
+require("isomorphic-fetch");
 
 export class LowLevelApiClient {
-
   constructor() {
     this.defaultOptions = {
       authToken: null,
@@ -25,52 +26,58 @@ export class LowLevelApiClient {
   }
 
   _endpointWithParams(endpoint, params) {
-    return endpoint + '?' + qs.stringify(params);
+    return endpoint + "?" + qs.stringify(params);
   }
 
   call(rawEndpoint, rawMethod, rawOptions) {
     const method = this._adjustedMethod(rawMethod);
     const options = this._adjustedOptions(rawOptions);
-    const endpoint = this._endpointWithParams(this._adjustedEndpoint(rawEndpoint), options.params);
+    const endpoint = this._endpointWithParams(
+      this._adjustedEndpoint(rawEndpoint),
+      options.params
+    );
     const fetchConfig = {
       method,
       body: options.body,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${options.authToken}`
       }
     };
-    return fetch(endpoint, fetchConfig).catch((error) => {
-      console.log('There has been a problem with your fetch operation: ' + error.message);
+    return fetch(endpoint, fetchConfig).catch(error => {
+      console.log(
+        "There has been a problem with your fetch operation: " + error.message
+      );
     });
   }
 }
 
 export default class ApiClient {
-
   constructor() {
     this.client = new LowLevelApiClient();
   }
 
   call = (endpoint, method, options) => {
-    return this.client.call(endpoint, method, options)
+    return this.client
+      .call(endpoint, method, options)
       .then(this._responseToJson, this._fetchNotOK)
       .then(this._cleanJson, this._responseNotOK)
       .then(this._returnResults, this._jsonNotOK)
       .catch(this._handleFailure);
   };
 
-  _responseToJson = (response) => {
+  _responseToJson = response => {
     if (!response) {
       const returnResponse = new Response(
         JSON.stringify({
           errors: [
             {
-              id: 'API_ERROR',
+              id: "API_ERROR",
               status: 503,
               title: "API Service Unavailable.",
-              detail: "Manifold is experiencing problems communicating with its API " +
-              "backend. Please report this problem to the Manifold administrative team."
+              detail:
+                "Manifold is experiencing problems communicating with its API " +
+                "backend. Please report this problem to the Manifold administrative team."
             }
           ]
         }),
@@ -85,8 +92,13 @@ export default class ApiClient {
       return { json: null, response };
     }
     return response.json().then(
-      (json) => { return { json, response }; },
-      () => { console.log('API response error #4'); return Promise.reject({ response }); }
+      json => {
+        return { json, response };
+      },
+      () => {
+        console.log("API response error #4");
+        return Promise.reject({ response });
+      }
     );
   };
 
@@ -111,19 +123,19 @@ export default class ApiClient {
     return json;
   };
 
-  _responseNotOK = (response) => {
+  _responseNotOK = response => {
     return Promise.reject(response);
   };
 
-  _jsonNotOK = (response) => {
+  _jsonNotOK = response => {
     return Promise.reject(response);
   };
 
-  _fetchNotOK = (response) => {
+  _fetchNotOK = response => {
     return Promise.reject(response);
   };
 
-  _handleFailure = (reason) => {
+  _handleFailure = reason => {
     return new Promise((resolve, reject) => {
       const response = reason.returnResponse || reason.response;
       const payload = {
@@ -132,7 +144,7 @@ export default class ApiClient {
         body: null
       };
       response.json().then(
-        (json) => {
+        json => {
           reject(Object.assign(payload, { body: json }));
         },
         () => {
@@ -141,5 +153,4 @@ export default class ApiClient {
       );
     });
   };
-
 }

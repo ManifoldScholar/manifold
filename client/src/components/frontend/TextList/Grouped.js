@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Text } from 'components/frontend';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Text } from "components/frontend";
 
 export default class TextListGrouped extends Component {
-
   static displayName = "TextList.Grouped";
 
   static propTypes = {
@@ -20,8 +19,11 @@ export default class TextListGrouped extends Component {
   }
 
   textsForCategory(category) {
-    const texts = this.props.texts.filter((text) => {
-      if (this.props.excludeIds && this.props.excludeIds.indexOf(text.id) !== -1) {
+    const texts = this.props.texts.filter(text => {
+      if (
+        this.props.excludeIds &&
+        this.props.excludeIds.indexOf(text.id) !== -1
+      ) {
         return false;
       }
       if (category.id === -1) {
@@ -44,8 +46,8 @@ export default class TextListGrouped extends Component {
     const collection = [];
     const uncategorized = { id: -1, attributes: { title: "Uncategorized" } };
     this.addGroup(collection, uncategorized);
-    this.props.categories.map((category) => {
-      this.addGroup(collection, category);
+    this.props.categories.map(category => {
+      return this.addGroup(collection, category);
     });
     return collection;
   }
@@ -58,8 +60,7 @@ export default class TextListGrouped extends Component {
 
     return (
       <div>
-        {textsByCategory.map((group) => {
-
+        {textsByCategory.map(group => {
           if (group.category === null) {
             categoryKey = 0;
             header = null;
@@ -76,10 +77,10 @@ export default class TextListGrouped extends Component {
             <nav key={categoryKey} className="text-category">
               {header}
               <ul className="texts-group">
-                {group.texts.map((text) => {
+                {group.texts.map(text => {
                   return (
                     <li key={text.id}>
-                      <Text.Thumbnail text={text}/>
+                      <Text.Thumbnail text={text} />
                     </li>
                   );
                 })}

@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/backend";
 
 export default class ResourceFormKindInteractive extends PureComponent {
-
   static displayName = "Resource.Form.Kind.Interactive";
 
   static propTypes = {
+    getModelValue: PropTypes.func
   };
 
   renderIframeForm() {
@@ -53,13 +53,10 @@ export default class ResourceFormKindInteractive extends PureComponent {
           }}
           {...this.props}
         />
-        {this.props.getModelValue("attributes[subKind]") === "iframe" ?
-          this.renderIframeForm()
-          : this.renderEmbedForm()
-        }
+        {this.props.getModelValue("attributes[subKind]") === "iframe"
+          ? this.renderIframeForm()
+          : this.renderEmbedForm()}
       </div>
     );
   }
-
 }
-

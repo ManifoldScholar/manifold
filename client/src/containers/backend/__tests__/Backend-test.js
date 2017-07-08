@@ -1,12 +1,11 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { mount } from 'enzyme';
-import { BackendContainer } from '../Backend';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import { Provider } from "react-redux";
+import { mount } from "enzyme";
+import { BackendContainer } from "../Backend";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Backend Backend Container", () => {
-
   const history = build.history();
   const notifications = {
     notifications: {}
@@ -45,5 +44,4 @@ describe("Backend Backend Container", () => {
     let tree = component.debug();
     expect(tree).not.toBe(null);
   });
-
 });

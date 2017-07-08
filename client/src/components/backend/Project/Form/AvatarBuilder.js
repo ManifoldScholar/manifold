@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Dialog } from 'components/backend';
-import ColorPicker from './ColorPicker';
-import { Project } from 'components/global';
-import setter from 'components/backend/Form/setter';
-import classNames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Form, Dialog } from "components/backend";
+import ColorPicker from "./ColorPicker";
+import { Project } from "components/global";
+import setter from "components/backend/Form/setter";
+import classNames from "classnames";
 
 class AvatarBuilder extends Component {
-
   static displayName = "Project.Form.AvatarBuilder";
 
   static propTypes = {
@@ -16,8 +15,7 @@ class AvatarBuilder extends Component {
     setOther: PropTypes.func
   };
 
-  static defaultProps = {
-  };
+  static defaultProps = {};
 
   constructor(props) {
     super(props);
@@ -30,8 +28,10 @@ class AvatarBuilder extends Component {
   }
 
   onColorChange(color) {
-    if (this.props.getModelValue("attributes[avatar][data]") ||
-      this.props.getModelValue("attributes[avatarStyles][smallSquare]")) {
+    if (
+      this.props.getModelValue("attributes[avatar][data]") ||
+      this.props.getModelValue("attributes[avatarStyles][smallSquare]")
+    ) {
       return this.handleColorChange(color);
     }
     this.setAvatarColor(color);
@@ -54,17 +54,23 @@ class AvatarBuilder extends Component {
   }
 
   handleColorChange(color) {
-    const heading = "Changing this will remove the project's current avatar image";
+    const heading =
+      "Changing this will remove the project's current avatar image";
     const message = "Do you wish to proceed?";
     new Promise((resolve, reject) => {
       this.setState({
         confirmation: { resolve, reject, heading, message }
       });
-    }).then(() => {
-      this.removeAvatar();
-      this.setAvatarColor(color);
-      this.closeDialog();
-    }, () => { this.closeDialog(); });
+    }).then(
+      () => {
+        this.removeAvatar();
+        this.setAvatarColor(color);
+        this.closeDialog();
+      },
+      () => {
+        this.closeDialog();
+      }
+    );
   }
 
   removeAvatar() {
@@ -100,7 +106,8 @@ class AvatarBuilder extends Component {
   }
 
   render() {
-    const image = this.props.getModelValue("attributes[avatar][data]") ||
+    const image =
+      this.props.getModelValue("attributes[avatar][data]") ||
       this.props.getModelValue("attributes[avatarStyles][smallSquare]");
     const uploadClasses = classNames({
       section: true,
@@ -113,37 +120,36 @@ class AvatarBuilder extends Component {
 
     return (
       <div className="form-input avatar-builder">
-        {
-          this.state.confirmation ?
-            <Dialog.Confirm {...this.state.confirmation} />
-            : null
-        }
+        {this.state.confirmation
+          ? <Dialog.Confirm {...this.state.confirmation} />
+          : null}
         <label className="section-header">Project Thumbnail</label>
         <div className="grid">
           <div className="section current">
             <label>Current</label>
-            { image ?
-              this.renderCoverImage(image)
-              : this.renderPlaceholderImage()
-            }
+            {image
+              ? this.renderCoverImage(image)
+              : this.renderPlaceholderImage()}
           </div>
           <div className={pickerClasses}>
             <label>Default</label>
-              <ColorPicker
-                onChange={this.onColorChange}
-                value={this.props.getModelValue("attributes[avatarColor]")}
-                {...this.props}
-              />
+            <ColorPicker
+              onChange={this.onColorChange}
+              value={this.props.getModelValue("attributes[avatarColor]")}
+              {...this.props}
+            />
           </div>
           <div className={uploadClasses}>
             <label>Custom</label>
-              <Form.Upload
-                set={this.onUploadChange}
-                initialValue={this.props.getModelValue("attributes[avatarStyles][smallSquare]")}
-                value={this.props.getModelValue("attributes[avatar]")}
-                style="square"
-                accepts="images"
-              />
+            <Form.Upload
+              set={this.onUploadChange}
+              initialValue={this.props.getModelValue(
+                "attributes[avatarStyles][smallSquare]"
+              )}
+              value={this.props.getModelValue("attributes[avatar]")}
+              layout="square"
+              accepts="images"
+            />
           </div>
         </div>
       </div>

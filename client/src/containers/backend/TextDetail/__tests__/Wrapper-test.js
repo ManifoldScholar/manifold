@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { TextDetailWrapperContainer } from '../Wrapper';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { TextDetailWrapperContainer } from "../Wrapper";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend TextDetail Wrapper Container", () => {
-
   const store = build.store();
   const text = build.entity.text("1");
   text.relationships.creators = [build.entity.user("2")];
@@ -15,7 +14,7 @@ describe("Backend TextDetail Wrapper Container", () => {
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <TextDetailWrapperContainer
           text={text}
           dispatch={store.dispatch}
@@ -39,5 +38,4 @@ describe("Backend TextDetail Wrapper Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

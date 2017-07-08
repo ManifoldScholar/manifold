@@ -1,44 +1,50 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Drawer, UserList } from 'components/backend';
-import { entityStoreActions } from 'actions';
-import { select, meta } from 'utils/entityUtils';
-import { usersAPI, requests } from 'api';
-import debounce from 'lodash/debounce';
-import get from 'lodash/get';
-import { User, List } from 'components/backend';
-import lh from 'helpers/linkHandler';
-import { Route } from 'react-router-dom';
-import { renderRoutes } from 'helpers/routing';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Drawer } from "components/backend";
+import { entityStoreActions } from "actions";
+import { select, meta } from "utils/entityUtils";
+import { usersAPI, requests } from "api";
+import debounce from "lodash/debounce";
+import get from "lodash/get";
+import { User, List } from "components/backend";
+import lh from "helpers/linkHandler";
+import { renderRoutes } from "helpers/routing";
 
 const { request } = entityStoreActions;
 const perPage = 10;
 
 export class UsersListContainer extends PureComponent {
-
   static displayName = "Users.List";
 
   static mapStateToProps(state) {
     return {
       users: select(requests.beUsers, state.entityStore),
       usersMeta: meta(requests.beUsers, state.entityStore),
-      currentUserId: get(state, 'authentication.currentUser.id')
+      currentUserId: get(state, "authentication.currentUser.id")
     };
   }
 
   static propTypes = {
-    users: PropTypes.array
+    users: PropTypes.array,
+    usersMeta: PropTypes.object,
+    match: PropTypes.object,
+    route: PropTypes.object,
+    dispatch: PropTypes.func,
+    currentUserId: PropTypes.string
   };
 
   constructor() {
     super();
     this.state = { filter: {} };
     this.lastFetchedPage = null;
-    this.usersPageChangeHandlerCreator = this.usersPageChangeHandlerCreator.bind(this);
-    this.fetchUsers = debounce(
-      this.fetchUsers.bind(this), 250, { leading: false, trailing: true }
-      );
+    this.usersPageChangeHandlerCreator = this.usersPageChangeHandlerCreator.bind(
+      this
+    );
+    this.fetchUsers = debounce(this.fetchUsers.bind(this), 250, {
+      leading: false,
+      trailing: true
+    });
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
   }
 
@@ -51,8 +57,8 @@ export class UsersListContainer extends PureComponent {
   }
 
   maybeReload(nextUsersMeta) {
-    const currentModified = get(this.props, 'usersMeta.modified');
-    const nextModified = get(nextUsersMeta, 'modified');
+    const currentModified = get(this.props, "usersMeta.modified");
+    const nextModified = get(nextUsersMeta, "modified");
     if (!nextModified) return;
     if (currentModified && nextModified) return;
     this.fetchUsers(this.lastFetchedPage);
@@ -79,7 +85,7 @@ export class UsersListContainer extends PureComponent {
   }
 
   usersPageChangeHandlerCreator(page) {
-    return (event) => {
+    return event => {
       this.handleUsersPageChange(event, page);
     };
   }
@@ -99,7 +105,7 @@ export class UsersListContainer extends PureComponent {
       <div>
         <header className="section-heading-secondary">
           <h3>
-            {'Users'} <i className="manicon manicon-users"></i>
+            {"Users"} <i className="manicon manicon-users" />
           </h3>
         </header>
         <Drawer.Wrapper
@@ -108,25 +114,21 @@ export class UsersListContainer extends PureComponent {
         >
           {renderRoutes(this.props.route.routes)}
         </Drawer.Wrapper>
-        { users ?
-          <List.Searchable
-            entities={users}
-            singularUnit="user"
-            pluralUnit="users"
-            pagination={usersMeta.pagination}
-            paginationClickHandler={this.usersPageChangeHandlerCreator}
-            entityComponent={User.ListItem}
-            entityComponentProps={{ currentUserId, active }}
-            filterChangeHandler={this.filterChangeHandler}
-          />
-          : null
-        }
+        {users
+          ? <List.Searchable
+              entities={users}
+              singularUnit="user"
+              pluralUnit="users"
+              pagination={usersMeta.pagination}
+              paginationClickHandler={this.usersPageChangeHandlerCreator}
+              entityComponent={User.ListItem}
+              entityComponentProps={{ currentUserId, active }}
+              filterChangeHandler={this.filterChangeHandler}
+            />
+          : null}
       </div>
     );
-
   }
-
 }
 
 export default connectAndFetch(UsersListContainer);
-

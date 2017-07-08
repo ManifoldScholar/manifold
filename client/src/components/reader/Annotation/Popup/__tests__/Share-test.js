@@ -1,20 +1,16 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Share from '../Share';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import Share from "../Share";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Reader.Annotation.Popup.Share Component", () => {
-
   const store = build.store();
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
-      <Provider store={store} >
-        <Share
-          cite={() => {}}
-          back={() => {}}
-        />
+      <Provider store={store}>
+        <Share cite={() => {}} back={() => {}} />
       </Provider>
     );
     let tree = component.toJSON();

@@ -1,19 +1,18 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { ResourceDetailWrapperContainer } from '../Wrapper';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { ResourceDetailWrapperContainer } from "../Wrapper";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend ResourceDetail Wrapper Container", () => {
-
   const store = build.store();
   const resource = build.entity.resource("1");
   resource.relationships.project = build.entity.project("1");
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <ResourceDetailWrapperContainer
           resource={resource}
           route={{
@@ -37,5 +36,4 @@ describe("Backend ResourceDetail Wrapper Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

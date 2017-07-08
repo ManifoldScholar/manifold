@@ -1,11 +1,10 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Project as GlobalProject } from 'components/global';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { Project as GlobalProject } from "components/global";
+import lh from "helpers/linkHandler";
 
 export default class ProjectListItem extends PureComponent {
-
   static displayName = "Project.ListItem";
 
   static propTypes = {
@@ -19,7 +18,7 @@ export default class ProjectListItem extends PureComponent {
         <div className="relations-list">
           {makers.map((maker, i) => {
             let nameList = maker.attributes.fullName;
-            if (i > 0) nameList = ', ' + nameList;
+            if (i > 0) nameList = ", " + nameList;
             return nameList;
           })}
         </div>
@@ -37,28 +36,26 @@ export default class ProjectListItem extends PureComponent {
         <Link to={lh.link("backendProject", project.id)}>
           <header>
             <figure className="cover">
-              {attr.coverStyles.smallPortrait ?
-                <img src={attr.coverStyles.smallPortrait} />
-                : <GlobalProject.Placeholder/>
-              }
+              {attr.coverStyles.smallPortrait
+                ? <img
+                    src={attr.coverStyles.smallPortrait}
+                    alt="project-cover"
+                  />
+                : <GlobalProject.Placeholder />}
             </figure>
             <div className="meta">
               <h3 className="name">
                 {attr.title}
                 <span className="subtitle">
-                    {attr.subtitle}
-                  </span>
+                  {attr.subtitle}
+                </span>
               </h3>
               {this.renderProjectMakers(project.relationships.creators)}
             </div>
           </header>
-          <span className="label">
-            Edit
-          </span>
+          <span className="label">Edit</span>
         </Link>
       </li>
     );
-
   }
-
 }

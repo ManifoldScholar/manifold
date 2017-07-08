@@ -1,11 +1,11 @@
-import Create from './Create.js';
-import CreateUpdate from './CreateUpdate.js';
-import Login from './Login.js';
-import Oauth from './Oauth';
-import Overlay from './Overlay.js';
-import PasswordForgot from './PasswordForgot.js';
-import Update from './Update.js';
-import UpdateForm from './UpdateForm.js';
+import Create from "./Create";
+import CreateUpdate from "./CreateUpdate";
+import Login from "./Login";
+import Oauth from "./Oauth";
+import Overlay from "./Overlay";
+import PasswordForgot from "./PasswordForgot";
+import Update from "./Update";
+import UpdateForm from "./UpdateForm";
 
 export default {
   Create,

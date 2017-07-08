@@ -1,31 +1,39 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import setter from './setter';
-import parse from 'date-fns/parse';
-import range from 'lodash/range';
-import getMonth from 'date-fns/get_month';
-import getDate from 'date-fns/get_date';
-import getYear from 'date-fns/get_year';
-import isEqual from 'date-fns/is_equal';
-import getDaysInMonth from 'date-fns/get_days_in_month';
-import MaskedInput from 'react-text-mask';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import setter from "./setter";
+import parse from "date-fns/parse";
+import range from "lodash/range";
+import getMonth from "date-fns/get_month";
+import getDate from "date-fns/get_date";
+import getYear from "date-fns/get_year";
+import isEqual from "date-fns/is_equal";
+import getDaysInMonth from "date-fns/get_days_in_month";
+import MaskedInput from "react-text-mask";
 
 class FormDate extends Component {
-
   static displayName = "Form.Date";
 
   static propTypes = {
     value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
     label: PropTypes.string,
-    errors: PropTypes.array,
     set: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
     this.months = [
-      "January", "February", "March", "April", "May", "June", "July", "August",
-      "September", "October", "November", "December"
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
     ];
 
     const parts = this.dateToUserInput(this.parse(props.value));
@@ -40,8 +48,11 @@ class FormDate extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.props.value &&
-      nextProps.value !== "" && nextProps.value !== null) {
+    if (
+      nextProps.value !== this.props.value &&
+      nextProps.value !== "" &&
+      nextProps.value !== null
+    ) {
       const parts = this.dateToUserInput(this.parse(nextProps.value));
       const newState = {
         input: parts,
@@ -88,9 +99,9 @@ class FormDate extends Component {
     let month = parseInt(parts.month, 10);
     let day = parseInt(parts.day, 10);
     let year = parts.year;
-    month = (month >= 0 && month <= 11) ? month : null;
-    year = (year && year.match(/^\d{4}$/)) ? parseInt(year, 10) : null;
-    day = (day >= 0 && day <= 31) ? day : null;
+    month = month >= 0 && month <= 11 ? month : null;
+    year = year && year.match(/^\d{4}$/) ? parseInt(year, 10) : null;
+    day = day >= 0 && day <= 31 ? day : null;
     if (month === null || day === null || year === null) return null;
     return { month, year, day };
   }
@@ -112,8 +123,11 @@ class FormDate extends Component {
 
   isValid() {
     if (!this.state.validated) return false;
-    return this.state.validated.month &&
-      this.state.validated.day && this.state.validated.year;
+    return (
+      this.state.validated.month &&
+      this.state.validated.day &&
+      this.state.validated.year
+    );
   }
 
   validStateDate() {
@@ -151,26 +165,35 @@ class FormDate extends Component {
   render() {
     return (
       <div className="form-input">
-        <label>{this.props.label}</label>
+        <label>
+          {this.props.label}
+        </label>
         <div className="form-date">
           <div className="form-select input-month">
-            <i className="manicon manicon-caret-down"></i>
-            <select onChange={this.setInputMonth} value={this.state.input.month} >
-              <option></option>
+            <i className="manicon manicon-caret-down" />
+            <select
+              onChange={this.setInputMonth}
+              value={this.state.input.month}
+            >
+              <option />
               {this.months.map((month, index) => {
                 return (
-                  <option value={index} key={index}>{month}</option>
+                  <option value={index} key={month}>
+                    {month}
+                  </option>
                 );
               })}
             </select>
           </div>
           <div className="form-select input-day">
-            <i className="manicon manicon-caret-down"></i>
-            <select onChange={this.setInputDay} value={this.state.input.day} >
-              <option></option>
-              {this.days().map((day, index) => {
+            <i className="manicon manicon-caret-down" />
+            <select onChange={this.setInputDay} value={this.state.input.day}>
+              <option />
+              {this.days().map(day => {
                 return (
-                  <option key={index}>{day}</option>
+                  <option key={day}>
+                    {day}
+                  </option>
                 );
               })}
             </select>
@@ -188,7 +211,6 @@ class FormDate extends Component {
       </div>
     );
   }
-
 }
 
 export default setter(FormDate);

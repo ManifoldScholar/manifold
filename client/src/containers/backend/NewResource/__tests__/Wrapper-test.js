@@ -1,15 +1,14 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { NewResourceWrapperContainer } from '../Wrapper';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { NewResourceWrapperContainer } from "../Wrapper";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend NewResource Wrapper Container", () => {
-
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={build.store()} >
+      <Provider store={build.store()}>
         <NewResourceWrapperContainer
           match={{
             params: {}
@@ -28,5 +27,4 @@ describe("Backend NewResource Wrapper Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

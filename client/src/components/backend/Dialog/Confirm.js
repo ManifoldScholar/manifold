@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Dialog } from 'components/backend';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Dialog } from "components/backend";
 
 export default class DialogConfirm extends PureComponent {
-
   static displayName = "Dialog.Confirm";
 
   static propTypes = {
@@ -31,12 +30,13 @@ export default class DialogConfirm extends PureComponent {
 
   componentDidMount() {
     if (this.context.pauseKeyboardEvents) this.context.pauseKeyboardEvents();
-    window.addEventListener('keyup', this.handleKeyPress);
+    window.addEventListener("keyup", this.handleKeyPress);
   }
 
   componentWillUnmount() {
-    if (this.context.unpauseKeyboardEvents) this.context.unpauseKeyboardEvents();
-    window.removeEventListener('keyup', this.handleKeyPress);
+    if (this.context.unpauseKeyboardEvents)
+      this.context.unpauseKeyboardEvents();
+    window.removeEventListener("keyup", this.handleKeyPress);
   }
 
   handleKeyPress(event) {
@@ -64,15 +64,16 @@ export default class DialogConfirm extends PureComponent {
         closeOnOverlayClick={false}
       >
         <header className="dialog-header-small">
-          <h2>{this.props.heading}</h2>
+          <h2>
+            {this.props.heading}
+          </h2>
         </header>
 
-        { this.props.message ?
-          <p>
-            {this.props.message}
-          </p>
-          : null
-        }
+        {this.props.message
+          ? <p>
+              {this.props.message}
+            </p>
+          : null}
 
         <div className="buttons-icon-horizontal">
           <button
@@ -80,7 +81,7 @@ export default class DialogConfirm extends PureComponent {
             className="button-icon-secondary"
             data-id="accept"
           >
-            <i className="manicon manicon-check small"></i>
+            <i className="manicon manicon-check small" />
             Yes
           </button>
           <button
@@ -88,12 +89,11 @@ export default class DialogConfirm extends PureComponent {
             onClick={this.handleRejectClick}
             data-id="reject"
           >
-            <i className="manicon manicon-x small"></i>
+            <i className="manicon manicon-x small" />
             No
           </button>
         </div>
       </Dialog.Wrapper>
     );
   }
-
 }

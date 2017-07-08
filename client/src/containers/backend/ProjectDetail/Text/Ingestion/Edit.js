@@ -1,16 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Ingestion } from 'components/backend';
-import { renderRoutes } from 'helpers/routing';
-import { entityStoreActions } from 'actions';
-import { ingestionsAPI, requests } from 'api';
-import { select, isLoaded } from 'utils/entityUtils';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Ingestion } from "components/backend";
+import { entityStoreActions } from "actions";
+import { ingestionsAPI, requests } from "api";
+import { select, isLoaded } from "utils/entityUtils";
+
 const { request } = entityStoreActions;
-import lh from 'helpers/linkHandler';
+import lh from "helpers/linkHandler";
 
 export class IngestionEdit extends PureComponent {
-
   static displayName = "ProjectDetail.Text.Ingestion.Edit";
 
   static fetchData(getState, dispatch, location, match) {
@@ -22,14 +21,15 @@ export class IngestionEdit extends PureComponent {
 
   static mapStateToProps(state) {
     return {
-      ingestion: select(requests.beIngestionShow, state.entityStore),
+      ingestion: select(requests.beIngestionShow, state.entityStore)
     };
   }
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    text: PropTypes.object,
-    history: PropTypes.object
+    ingestion: PropTypes.object,
+    history: PropTypes.object,
+    location: PropTypes.object
   };
 
   handleSuccess = () => {
@@ -38,7 +38,7 @@ export class IngestionEdit extends PureComponent {
 
   redirectToIngestion(ingestionId) {
     const path = lh.link(
-      'backendProjectTextsIngestionIngest',
+      "backendProjectTextsIngestionIngest",
       this.projectId,
       ingestionId
     );

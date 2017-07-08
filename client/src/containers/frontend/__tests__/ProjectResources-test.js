@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import ProjectResources from '../ProjectResources';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import ProjectResources from "../ProjectResources";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend ProjectResources Container", () => {
-
   const pagination = build.pagination();
   const store = build.store();
 
@@ -26,13 +25,13 @@ describe("Frontend ProjectResources Container", () => {
     location: { query: null }
   };
 
-  const component = renderer.create(wrapWithRouter(
-    <Provider store={store}>
-      <ProjectResources
-        {...props}
-      />
-    </Provider>
-  ));
+  const component = renderer.create(
+    wrapWithRouter(
+      <Provider store={store}>
+        <ProjectResources {...props} />
+      </Provider>
+    )
+  );
 
   it("renders correctly", () => {
     let tree = component.toJSON();
@@ -44,7 +43,3 @@ describe("Frontend ProjectResources Container", () => {
     expect(tree).not.toBe(null);
   });
 });
-
-
-
-

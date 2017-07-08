@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
-import values from 'lodash/values';
-import union from 'lodash/union';
-import find from 'lodash/find';
-import { Resource } from 'components/reader';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import isEmpty from "lodash/isEmpty";
+import values from "lodash/values";
+import union from "lodash/union";
+import { Resource } from "components/reader";
 
 export default class TextNode extends Component {
-
   static propTypes = {
     content: PropTypes.string,
     openAnnotations: PropTypes.object,
@@ -21,21 +19,38 @@ export default class TextNode extends Component {
   }
 
   propsToLocalAnnotationsArray(openAnnotations) {
-    return values(openAnnotations).map((a) => {
+    return values(openAnnotations).map(a => {
       const id = a.id;
       const type = a.attributes.format;
       const isCreator = a.attributes.currentUserIsCreator;
-      const start = a.attributes.startNode === this.props.nodeUuid ? a.attributes.startChar : null;
-      const end = a.attributes.endNode === this.props.nodeUuid ? a.attributes.endChar : null;
+      const start =
+        a.attributes.startNode === this.props.nodeUuid
+          ? a.attributes.startChar
+          : null;
+      const end =
+        a.attributes.endNode === this.props.nodeUuid
+          ? a.attributes.endChar
+          : null;
       const startNode = a.attributes.startNode;
       const endNode = a.attributes.endNode;
       const resourceId = a.attributes.resourceId;
-      return { id, type, isCreator, start, end, startNode, endNode, resourceId };
+      return {
+        id,
+        type,
+        isCreator,
+        start,
+        end,
+        startNode,
+        endNode,
+        resourceId
+      };
     });
   }
 
   annotatedContent() {
-    const annotations = this.propsToLocalAnnotationsArray(this.props.openAnnotations);
+    const annotations = this.propsToLocalAnnotationsArray(
+      this.props.openAnnotations
+    );
     const content = this.props.content;
 
     // Create an array that includes all the points in the string where we'll split.
@@ -44,22 +59,24 @@ export default class TextNode extends Component {
     const splits = union(
       [content.length + 1],
       annotations.filter(el => el.start != null).map(a => a.start),
-      annotations.filter(el => el.end != null).map(a => a.end + 1 || content.length)
+      annotations
+        .filter(el => el.end != null)
+        .map(a => a.end + 1 || content.length)
     ).sort((a, b) => a - b);
 
     // Build a map of IDs to the splits
-    const map = splits.map((split, index) => {
-      return annotations.filter((annotation) => {
+    const map = splits.map(split => {
+      return annotations.filter(annotation => {
         const rangeEnd = annotation.end || content.length;
         const rangeStart = annotation.start || 0;
-        return (rangeStart < split && rangeEnd + 1 >= split);
+        return rangeStart < split && rangeEnd + 1 >= split;
       });
     });
 
     // ends
     const ends = {};
     map.forEach((chunk, index) => {
-      chunk.forEach((annotation) => {
+      chunk.forEach(annotation => {
         ends[annotation.id] = index;
       });
     });
@@ -67,7 +84,7 @@ export default class TextNode extends Component {
     // starts
     const starts = {};
     map.slice().reverse().forEach((chunk, index) => {
-      chunk.forEach((annotation) => {
+      chunk.forEach(annotation => {
         starts[annotation.id] = index;
       });
     });
@@ -75,7 +92,7 @@ export default class TextNode extends Component {
     // split the string into chunks for each difference and intersection between the ranges
     const chunks = splits.map((split, index) => {
       const substringStart = index === 0 ? 0 : splits[index - 1] - 1;
-      const substringEnd = (index === splits.length - 1) ? split + 1 : split - 1;
+      const substringEnd = index === splits.length - 1 ? split + 1 : split - 1;
       return content.substring(substringStart, substringEnd);
     });
 
@@ -94,40 +111,39 @@ export default class TextNode extends Component {
       let endingResources = [];
       let startingResources = [];
       if (resources.length > 0) {
-        endingResources =
-          resources.filter(a => ends[a.id] === index && a.endNode === this.props.nodeUuid);
-        startingResources =
-          resources.filter(a => starts[a.id] === index && a.startNode === this.props.nodeUuid);
+        endingResources = resources.filter(
+          a => ends[a.id] === index && a.endNode === this.props.nodeUuid
+        );
+        startingResources = resources.filter(
+          a => starts[a.id] === index && a.startNode === this.props.nodeUuid
+        );
       }
       const classes = classNames({
         primary: isCreator,
         secondary: !isCreator,
-        'annotation-locked-selected primary': lockedSelection,
-        'annotation-underline': underlined,
-        'annotation-highlight': highlighted,
-        'annotation-resource': resources.length > 0,
-        'annotation-resource-start': resources && startingResources.length > 0,
-        'annotation-resource-end': resources && endingResources.length > 0
+        "annotation-locked-selected primary": lockedSelection,
+        "annotation-underline": underlined,
+        "annotation-highlight": highlighted,
+        "annotation-resource": resources.length > 0,
+        "annotation-resource-start": resources && startingResources.length > 0,
+        "annotation-resource-end": resources && endingResources.length > 0
       });
 
-      const listableAnnotationIds =
-        map[index]
-        .filter((a) => a.type === "annotation")
-        .map((a) => a.id);
+      const listableAnnotationIds = map[index]
+        .filter(a => a.type === "annotation")
+        .map(a => a.id);
 
       return (
         <span
-          key={index}
+          key={index} // eslint-disable-line react/no-array-index-key
           className={classes}
           data-listable-annotation-ids={listableAnnotationIds}
-          data-annotation-ids={map[index].map((a) => a.id)}
+          data-annotation-ids={map[index].map(a => a.id)}
         >
           {chunk}
-          {
-            endingResources.length > 0 ?
-            <Resource.Marker annotations={endingResources} />
-            : null
-          }
+          {endingResources.length > 0
+            ? <Resource.Marker annotations={endingResources} />
+            : null}
         </span>
       );
     });
@@ -139,12 +155,17 @@ export default class TextNode extends Component {
 
   commentsCount() {
     const annotations = Object.values(this.props.openAnnotations);
-    return annotations.reduce((memo, a) => a.attributes.commentsCount + memo, 0);
+    return annotations.reduce(
+      (memo, a) => a.attributes.commentsCount + memo,
+      0
+    );
   }
 
   render() {
     const containsAnnotations = this.containsAnnotations();
-    const content = containsAnnotations ? this.annotatedContent() : this.content();
+    const content = containsAnnotations
+      ? this.annotatedContent()
+      : this.content();
     const commentsCount = containsAnnotations ? this.commentsCount() : null;
 
     const props = {
@@ -156,10 +177,9 @@ export default class TextNode extends Component {
     }
 
     return (
-      <span {...props} >
+      <span {...props}>
         {content}
       </span>
     );
   }
-
 }

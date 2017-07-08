@@ -1,13 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import NotFound from '../NotFound';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import NotFound from "../NotFound";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend Not Found Container", () => {
-
-  const component = renderer.create(
-    <NotFound />
-  );
+  const component = renderer.create(<NotFound />);
 
   it("renders correctly", () => {
     let tree = component.toJSON();
@@ -18,5 +15,4 @@ describe("Frontend Not Found Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

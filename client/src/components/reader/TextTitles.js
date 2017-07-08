@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
 export default class TextTitles extends Component {
   static propTypes = {
@@ -41,12 +41,14 @@ export default class TextTitles extends Component {
   render() {
     const titleClass = classNames({
       title: true,
-      'show-section': this.props.showSection && this.state.showSection
+      "show-section": this.props.showSection && this.state.showSection
     });
 
     return (
       <header className={titleClass} onClick={this.handleTitleClick}>
-        <h3 className="text-title">{this.props.textTitle}</h3>
+        <h3 className="text-title">
+          {this.props.textTitle}
+        </h3>
         <h2 className="section-title">
           {this.props.sectionTitle}
         </h2>

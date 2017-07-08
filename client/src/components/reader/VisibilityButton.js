@@ -1,10 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
 export default class VisibilityButton extends PureComponent {
-
-  static displayName = 'VisibilityButton';
+  static displayName = "VisibilityButton";
 
   static propTypes = {
     toggle: PropTypes.func,
@@ -15,15 +14,16 @@ export default class VisibilityButton extends PureComponent {
     const buttonClass = classNames({
       primary: this.props.state === 1,
       secondary: this.props.state === 2,
-      'annotation-visibility-button': true
+      "annotation-visibility-button": true
     });
 
     return (
-      <button className={buttonClass}
+      <button
+        className={buttonClass}
         onClick={this.props.toggle}
         data-id="toggle"
       >
-        <i className="manicon manicon-eye-fill"></i>
+        <i className="manicon manicon-eye-fill" />
         <span className="screen-reader-text">
           Click to hide or show annotation/resources in the reader
         </span>

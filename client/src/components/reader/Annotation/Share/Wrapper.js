@@ -1,10 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import Share from './';
-import Selection from '../Selection';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import Share from "./";
+import Selection from "../Selection";
 
 export default class AnnotationShareWrapper extends PureComponent {
-
   static displayName = "Annotation.Share.Wrapper";
 
   static propTypes = {
@@ -13,14 +12,13 @@ export default class AnnotationShareWrapper extends PureComponent {
     startChar: PropTypes.number,
     endNode: PropTypes.string,
     endChar: PropTypes.number,
+    closeOnSave: PropTypes.bool,
+    addsTo: PropTypes.string,
+    text: PropTypes.object,
     annotating: PropTypes.bool,
     closeDrawer: PropTypes.func,
     truncate: PropTypes.number,
-    closeOnSave: PropTypes.bool,
-    addsTo: PropTypes.string,
-    showLogin: PropTypes.func,
-    shareType: PropTypes.string,
-    text: PropTypes.object
+    shareType: PropTypes.string
   };
 
   static defaultProps = {
@@ -50,32 +48,11 @@ export default class AnnotationShareWrapper extends PureComponent {
     });
   }
 
-  renderShareEditor(type) {
-    if (!type) return null;
-    const cancelFunction = this.props.closeDrawer ?
-      this.props.closeDrawer : this.handleCloseEditor;
-
-
-    /* eslint-disable no-unreachable */
-    switch (type) {
-      case "citation":
-        return (
-          <Share.Citation
-            {...this.props}
-            cancel={cancelFunction}
-          />
-        );
-        break;
-      // Email will go here, when the time is right...
-      default:
-        return null;
-        break;
-    }
-  }
-  /* eslint-enable no-unreachable */
-
   maybeTruncateSelection() {
-    if (this.props.truncate && this.props.subject.length > this.props.truncate) {
+    if (
+      this.props.truncate &&
+      this.props.subject.length > this.props.truncate
+    ) {
       return (
         <Selection.Truncated
           selection={this.props.subject}
@@ -87,22 +64,38 @@ export default class AnnotationShareWrapper extends PureComponent {
     return this.props.subject;
   }
 
-  render() {
+  renderShareEditor(type) {
+    if (!type) return null;
+    const cancelFunction = this.props.closeDrawer
+      ? this.props.closeDrawer
+      : this.handleCloseEditor;
 
+    /* eslint-disable no-unreachable */
+    switch (type) {
+      case "citation":
+        return <Share.Citation {...this.props} cancel={cancelFunction} />;
+        break;
+      // Email will go here, when the time is right...
+      default:
+        return null;
+        break;
+    }
+  }
+  /* eslint-enable no-unreachable */
+
+  render() {
     return (
       <div className="annotation-selection">
         <div className="selection-text">
           <div className="container">
-            <i className="manicon manicon-quote"></i>
+            <i className="manicon manicon-quote" />
             {this.maybeTruncateSelection()}
           </div>
         </div>
-        { this.state.editorOpen ?
-          this.renderShareEditor(this.props.shareType)
-          : null
-        }
+        {this.state.editorOpen
+          ? this.renderShareEditor(this.props.shareType)
+          : null}
       </div>
     );
   }
-
 }

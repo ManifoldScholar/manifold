@@ -7,8 +7,7 @@ const environmentConfiguration = {
   production: {
     isProduction: true
   }
-}[process.env.NODE_ENV || 'development'];
-
+}[process.env.NODE_ENV || "development"];
 
 // eslint-disable max-len
 const applicationConfiguration = {
@@ -19,36 +18,39 @@ const applicationConfiguration = {
   assetPort: process.env.CLIENT_ASSET_PORT,
   apiUrl: process.env.API_URL,
   cableUrl: process.env.CABLE_URL,
-  assetProxyPaths: ['/dist'],
-  apiProxyPaths: ['/api', '/system'],
+  assetProxyPaths: ["/dist"],
+  apiProxyPaths: ["/api", "/system"],
   app: {
-    title: 'Manifold Scholarship',
-    description: 'Transforming scholarly publications into living digital works',
+    title: "Manifold Scholarship",
+    description:
+      "Transforming scholarly publications into living digital works",
     meta: {
-      charSet: 'utf-8',
+      charSet: "utf-8",
       property: {
-        'og:site_name': 'Manifold Scholarship',
-        'og:image': 'manifold.umn.edu/logo/manifold_avatar-01.png',
-        'og:locale': 'en_US',
-        'og:title': 'Manifold Scholarship',
-        'og:description': 'Transforming scholarly publications into living digital works',
-        'twitter:card': 'summary',
-        'twitter:site': '@manifoldscholar',
-        'twitter:creator': '@manifoldscholar',
-        'twitter:title': 'Manifold Scholarship',
-        'twitter:description': 'Transforming scholarly publications into living digital works',
-        'twitter:image': 'manifold.umn.edu/logo/manifold_avatar-01.png',
-        'twitter:image:width': '200',
-        'twitter:image:height': '200'
+        "og:site_name": "Manifold Scholarship",
+        "og:image": "manifold.umn.edu/logo/manifold_avatar-01.png",
+        "og:locale": "en_US",
+        "og:title": "Manifold Scholarship",
+        "og:description":
+          "Transforming scholarly publications into living digital works",
+        "twitter:card": "summary",
+        "twitter:site": "@manifoldscholar",
+        "twitter:creator": "@manifoldscholar",
+        "twitter:title": "Manifold Scholarship",
+        "twitter:description":
+          "Transforming scholarly publications into living digital works",
+        "twitter:image": "manifold.umn.edu/logo/manifold_avatar-01.png",
+        "twitter:image:width": "200",
+        "twitter:image:height": "200"
       }
     },
     locale: {
       event_types: {
-        PROJECT_CREATED: 'Project Created',
-        TEXT_ADDED: 'Text Added',
-        TEXT_ANNOTATED: 'Text Annotated',
-        RESOURCE_ADDED: 'Resource Added',
-        TWEET: 'Tweet'
+        PROJECT_CREATED: "Project Created",
+        TEXT_ADDED: "Text Added",
+        TEXT_ANNOTATED: "Text Annotated",
+        RESOURCE_ADDED: "Resource Added",
+        TWEET: "Tweet"
       },
       metadata: {
         abstract: {
@@ -84,7 +86,8 @@ const applicationConfiguration = {
         },
         containerTitle: {
           placeholder: "Title of the container holding the item",
-          instructions: "e.g. the book title for a book chapter, the journal title for a journal article",
+          instructions:
+            "e.g. the book title for a book chapter, the journal title for a journal article",
           type: "TextInput"
         },
         dimensions: {
@@ -99,7 +102,7 @@ const applicationConfiguration = {
         },
         eventPlace: {
           placeholder: "geographic location of the related event",
-          instructions: "e.g. \"Amsterdam, the Netherlands\"",
+          instructions: 'e.g. "Amsterdam, the Netherlands"',
           type: "TextInput"
         },
         isbn: {
@@ -112,16 +115,17 @@ const applicationConfiguration = {
         },
         jurisdiction: {
           placeholder: "Geographic scope of relevance ",
-          instructions: "e.g. \"US\" for a US patent",
+          instructions: 'e.g. "US" for a US patent',
           type: "TextInput"
         },
         medium: {
           placeholder: "Medium description",
-          instructions: "e.g. \"CD\", \"DVD\", etc.",
+          instructions: 'e.g. "CD", "DVD", etc.',
           type: "TextInput"
         },
         originalPublisher: {
-          placeholder: "Original publisher, for items that have been republished by a different publisher",
+          placeholder:
+            "Original publisher, for items that have been republished by a different publisher",
           type: "TextInput"
         },
         originalPublisherPlace: {
@@ -154,12 +158,12 @@ const applicationConfiguration = {
         },
         section: {
           placeholder: "Container section holding the item",
-          instructions: "e.g. \"politics\" for a newspaper article",
+          instructions: 'e.g. "politics" for a newspaper article',
           type: "TextInput"
         },
         status: {
           placeholder: "Publication status of the item",
-          instructions: "e.g \"forthcoming\"",
+          instructions: 'e.g "forthcoming"',
           type: "TextInput"
         },
         version: {
@@ -168,7 +172,7 @@ const applicationConfiguration = {
         },
         yearSuffix: {
           placeholder: "Disambiguating year suffix in author-date styles",
-          instructions: "e.g. “a” in \"Doe, 1999a\"",
+          instructions: 'e.g. “a” in "Doe, 1999a"',
           type: "TextInput"
         },
         chapterNumber: {
@@ -181,12 +185,14 @@ const applicationConfiguration = {
         },
         edition: {
           placeholder: "(Container) edition holding the item",
-          instructions: "e.g. \"3\" when citing a chapter in the third edition of a book",
+          instructions:
+            'e.g. "3" when citing a chapter in the third edition of a book',
           type: "TextInput"
         },
         issue: {
           placeholder: "(Container) issue holding the item",
-          instructions: "e.g. \"5\" when citing a journal article from journal volume 2, issue 5",
+          instructions:
+            'e.g. "5" when citing a journal article from journal volume 2, issue 5',
           type: "TextInput"
         },
         number: {
@@ -199,7 +205,8 @@ const applicationConfiguration = {
           type: "TextInput"
         },
         numberOfVolumes: {
-          placeholder: "Total number of volumes, usable for citing multi-volume books and such",
+          placeholder:
+            "Total number of volumes, usable for citing multi-volume books and such",
           type: "TextInput"
         },
         volume: {
@@ -213,4 +220,8 @@ const applicationConfiguration = {
 };
 // eslint-enable max-len
 
-module.exports = Object.assign({}, environmentConfiguration, applicationConfiguration);
+module.exports = Object.assign(
+  {},
+  environmentConfiguration,
+  applicationConfiguration
+);

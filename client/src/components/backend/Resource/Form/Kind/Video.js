@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Resource, Form } from 'components/backend';
-import some from 'lodash/some';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/backend";
 
 export default class ResourceFormKindVideo extends PureComponent {
-
   static displayName = "Resource.Form.Kind.Video";
 
   static propTypes = {
+    sourceModel: PropTypes.object,
+    getModelValue: PropTypes.func
   };
 
   renderExternalVideoForm() {
@@ -37,7 +37,7 @@ export default class ResourceFormKindVideo extends PureComponent {
   renderVideoAttachmentForm() {
     return (
       <Form.Upload
-        style="square"
+        layout="square"
         label="Video File"
         accepts="video"
         readFrom="attributes[attachmentFileName]"
@@ -60,13 +60,10 @@ export default class ResourceFormKindVideo extends PureComponent {
           }}
           {...this.props}
         />
-        {this.props.getModelValue("attributes[subKind]") ?
-          this.renderExternalVideoForm()
-          : this.renderVideoAttachmentForm()
-        }
+        {this.props.getModelValue("attributes[subKind]")
+          ? this.renderExternalVideoForm()
+          : this.renderVideoAttachmentForm()}
       </div>
     );
   }
-
 }
-

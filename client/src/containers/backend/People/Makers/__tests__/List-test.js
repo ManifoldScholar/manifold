@@ -1,19 +1,18 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { MakersListContainer } from '../List';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { MakersListContainer } from "../List";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend People Makers List Container", () => {
-
   const store = build.store();
   const maker = build.entity.user("1");
   maker.type = "makers";
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <MakersListContainer
           makers={[maker]}
           makersMeta={{
@@ -37,5 +36,4 @@ describe("Backend People Makers List Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

@@ -1,25 +1,27 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Ingestion } from 'components/backend';
-import { ingestionsAPI, requests } from 'api';
-import { select, isLoaded } from 'utils/entityUtils';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Ingestion } from "components/backend";
+import { requests } from "api";
+import { select } from "utils/entityUtils";
+import lh from "helpers/linkHandler";
 
 export class IngestionNew extends PureComponent {
-
   static displayName = "TextDetail.Ingestion.New";
 
   static mapStateToProps(state) {
     return {
-      ingestion: select(requests.beIngestionCreate, state.entityStore),
+      ingestion: select(requests.beIngestionCreate, state.entityStore)
     };
   }
 
   static propTypes = {
     project: PropTypes.object,
     text: PropTypes.object,
-    history: PropTypes.object
+    history: PropTypes.object,
+    ingestion: PropTypes.object,
+    match: PropTypes.object,
+    location: PropTypes.object
   };
 
   componentWillReceiveProps(nextProps) {
@@ -30,7 +32,7 @@ export class IngestionNew extends PureComponent {
 
   redirectToIngestion(ingestionId) {
     const path = lh.link(
-      'backendTextIngestionIngest',
+      "backendTextIngestionIngest",
       this.textId,
       ingestionId
     );

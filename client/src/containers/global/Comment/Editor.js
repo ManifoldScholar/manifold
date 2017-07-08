@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { requests } from 'api';
-import { entityStoreActions } from 'actions';
-import { select, meta, singularEntityName } from 'utils/entityUtils';
-import { commentsAPI } from 'api';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { connect } from "react-redux";
+import { requests } from "api";
+import { entityStoreActions } from "actions";
+import { singularEntityName } from "utils/entityUtils";
+import { commentsAPI } from "api";
+
 const { request } = entityStoreActions;
-import { Form as GlobalForm } from 'components/global';
+import { Form as GlobalForm } from "components/global";
 
 export class CommentEditor extends PureComponent {
-
   static displayName = "Comment.Editor";
 
   static mapStateToProps(state, ownProps) {
@@ -19,6 +19,7 @@ export class CommentEditor extends PureComponent {
   }
 
   static propTypes = {
+    dispatch: PropTypes.func.isRequired,
     comment: PropTypes.object,
     placeholder: PropTypes.string,
     body: PropTypes.string,
@@ -39,16 +40,16 @@ export class CommentEditor extends PureComponent {
     if (this.isEdit(props)) this.state.body = props.comment.attributes.body;
   }
 
+  componentDidMount() {
+    if (!this.ci) return null;
+    this.ci.focus();
+  }
+
   initialState() {
     return {
       body: "",
       errors: []
     };
-  }
-
-  componentDidMount() {
-    if (!this.ci) return null;
-    this.ci.focus();
   }
 
   submitOnReturnKey(event) {
@@ -61,7 +62,8 @@ export class CommentEditor extends PureComponent {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.isEdit(this.props)) return this.updateComment(this.props, this.state);
+    if (this.isEdit(this.props))
+      return this.updateComment(this.props, this.state);
     return this.createComment(this.props, this.state);
   }
 
@@ -82,11 +84,14 @@ export class CommentEditor extends PureComponent {
   }
 
   processRequest(apiRequest) {
-    this.props.dispatch(apiRequest).promise.then(() => {
-      this.handleSuccess();
-    }, (response) => {
-      this.handleErrors(response.body.errors);
-    });
+    this.props.dispatch(apiRequest).promise.then(
+      () => {
+        this.handleSuccess();
+      },
+      response => {
+        this.handleErrors(response.body.errors);
+      }
+    );
   }
 
   commentFromPropsAndState(props, state) {
@@ -142,7 +147,6 @@ export class CommentEditor extends PureComponent {
   }
 
   render() {
-
     const textClass = classNames({
       expanded: this.state.body
     });
@@ -155,29 +159,31 @@ export class CommentEditor extends PureComponent {
             errors={this.state.errors}
           >
             <textarea
-              ref={(ci) => { this.ci = ci; }}
+              ref={ci => {
+                this.ci = ci;
+              }}
               onKeyDown={this.submitOnReturnKey}
               className={textClass}
               placeholder={this.placeholder(this.props)}
               onChange={this.handleBodyChange}
               value={this.state.body}
             />
-          <div className="utility">
-            <div className="buttons">
-              <button
-                onClick={this.props.cancel}
-                className="button-secondary-dull"
-              >
-                Cancel
-              </button>
-              <button
-                className="button-secondary"
-                disabled={!this.state.body}
-              >
-                {this.buttonLabel(this.props)}
-              </button>
+            <div className="utility">
+              <div className="buttons">
+                <button
+                  onClick={this.props.cancel}
+                  className="button-secondary-dull"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="button-secondary"
+                  disabled={!this.state.body}
+                >
+                  {this.buttonLabel(this.props)}
+                </button>
+              </div>
             </div>
-          </div>
           </GlobalForm.Errorable>
         </form>
       </div>
@@ -185,7 +191,4 @@ export class CommentEditor extends PureComponent {
   }
 }
 
-export default connect(
-  CommentEditor.mapStateToProps
-)(CommentEditor);
-
+export default connect(CommentEditor.mapStateToProps)(CommentEditor);

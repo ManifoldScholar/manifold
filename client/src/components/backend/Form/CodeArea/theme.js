@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len, no-unused-vars */
 window.ace.define(
   "ace/theme/idle_fingers",
   ["require", "exports", "module", "ace/lib/dom"],
@@ -6,7 +6,8 @@ window.ace.define(
     exports = _exports;
     exports.isDark = true;
     exports.cssClass = "ace-idle-fingers";
-    exports.cssText = "" +
+    exports.cssText =
+      "" +
       ".ace-idle-fingers .ace_gutter { " +
       "background: #3b3b3b; " +
       "color: rgb(153,153,153) " +
@@ -97,7 +98,6 @@ window.ace.define(
       "} ";
     const dom = acequire("../lib/dom");
     dom.importCssString(exports.cssText, exports.cssClass);
-
   }
 );
-/* eslint-enable max-len */
+/* eslint-enable max-len, no-unused-vars */

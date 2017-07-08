@@ -11,7 +11,8 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
     <h4
       className="form-heading"
     >
-      Hello, 
+      Hello,
+       
       <span
         className="nickname"
       >
@@ -83,7 +84,8 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
     <p
       className="overlay-copy"
     >
-      Your account has been successfully created and you are now logged in to Manifold. From now on, I'm going to call you
+      Your account has been successfully created and you are now
+                      logged in to Manifold. From now on, I'm going to call you
     </p>
     <h4
       className="nickname"

@@ -1,30 +1,30 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form, List } from 'components/backend';
-import { Resource } from 'components/reader';
-import { projectsAPI, requests } from 'api';
-import { entityStoreActions } from 'actions';
-import { select, meta } from 'utils/entityUtils';
-import { connect } from 'react-redux';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { List } from "components/backend";
+import { Resource } from "components/reader";
+import { projectsAPI, requests } from "api";
+import { entityStoreActions } from "actions";
+import { select, meta } from "utils/entityUtils";
+import { connect } from "react-redux";
 
 const { request } = entityStoreActions;
 const perPage = 10;
 
 export class ResourcePickerContainer extends PureComponent {
-
   static displayName = "ProjectDetail.Resources";
 
   static mapStateToProps(state, ownProps) {
     const newState = {
       resources: select(requests.beResources, state.entityStore),
-      resourcesMeta: meta(requests.beResources, state.entityStore),
+      resourcesMeta: meta(requests.beResources, state.entityStore)
     };
     return Object.assign({}, newState, ownProps);
   }
 
   static propTypes = {
-    route: PropTypes.object,
-    project: PropTypes.object,
+    projectId: PropTypes.string,
+    resources: PropTypes.array,
+    resourcesMeta: PropTypes.object,
     dispatch: PropTypes.func,
     selectionHandler: PropTypes.func
   };
@@ -45,7 +45,11 @@ export class ResourcePickerContainer extends PureComponent {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
-      projectsAPI.resources(this.props.projectId, this.state.filter, pagination),
+      projectsAPI.resources(
+        this.props.projectId,
+        this.state.filter,
+        pagination
+      ),
       requests.beResources
     );
     this.props.dispatch(action);
@@ -62,7 +66,7 @@ export class ResourcePickerContainer extends PureComponent {
   }
 
   pageChangeHandlerCreator(page) {
-    return (event) => {
+    return event => {
       this.handleUsersPageChange(event, page);
     };
   }
@@ -75,24 +79,27 @@ export class ResourcePickerContainer extends PureComponent {
     if (!this.props.resources) return null;
 
     return (
-      <section onMouseDown={this.handleMouseDown}>
-        <List.Searchable
-          entities={this.props.resources}
-          singularUnit="resource"
-          pluralUnit="resources"
-          pagination={this.props.resourcesMeta.pagination}
-          paginationClickHandler={this.pageChangeHandlerCreator}
-          entityComponent={Resource.PickerListItem}
-          filterChangeHandler={this.filterChangeHandler}
-          paginationPadding={2}
-          entityComponentProps={{ selectionHandler: this.props.selectionHandler }}
-        />
+      <section role="search">
+        <div onMouseDown={this.handleMouseDown} role="presentation">
+          <List.Searchable
+            entities={this.props.resources}
+            singularUnit="resource"
+            pluralUnit="resources"
+            pagination={this.props.resourcesMeta.pagination}
+            paginationClickHandler={this.pageChangeHandlerCreator}
+            entityComponent={Resource.PickerListItem}
+            filterChangeHandler={this.filterChangeHandler}
+            paginationPadding={2}
+            entityComponentProps={{
+              selectionHandler: this.props.selectionHandler
+            }}
+          />
+        </div>
       </section>
     );
   }
 }
 
-export default connect(
-  ResourcePickerContainer.mapStateToProps
-)(ResourcePickerContainer);
-
+export default connect(ResourcePickerContainer.mapStateToProps)(
+  ResourcePickerContainer
+);

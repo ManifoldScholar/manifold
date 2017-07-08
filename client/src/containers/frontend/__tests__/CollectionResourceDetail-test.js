@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { CollectionResourceDetailContainer } from '../CollectionResourceDetail';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { CollectionResourceDetailContainer } from "../CollectionResourceDetail";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend CollectionResourceDetail Container", () => {
-
   const store = build.store();
 
   const project = build.entity.project("1");
@@ -20,16 +19,16 @@ describe("Frontend CollectionResourceDetail Container", () => {
 
   const component = renderer.create(
     wrapWithRouter(
-    <Provider store={store}>
-      <CollectionResourceDetailContainer
-        collection={collection}
-        collectionResource={collectionResource}
-        resource={resource}
-        match={{
-          params: {}
-        }}
-      />
-    </Provider>
+      <Provider store={store}>
+        <CollectionResourceDetailContainer
+          collection={collection}
+          collectionResource={collectionResource}
+          resource={resource}
+          match={{
+            params: {}
+          }}
+        />
+      </Provider>
     )
   );
 
@@ -42,11 +41,4 @@ describe("Frontend CollectionResourceDetail Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
-
-
 });
-
-
-
-

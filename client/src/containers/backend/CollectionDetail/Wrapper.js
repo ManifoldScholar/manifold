@@ -1,28 +1,30 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Text, Navigation, Dialog } from 'components/backend';
-import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { collectionsAPI, requests } from 'api';
-import lh from 'helpers/linkHandler';
-import { renderRoutes } from 'helpers/routing';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Navigation, Dialog } from "components/backend";
+import { entityStoreActions, notificationActions } from "actions";
+import { select } from "utils/entityUtils";
+import { collectionsAPI, requests } from "api";
+import lh from "helpers/linkHandler";
+import { renderRoutes } from "helpers/routing";
 
 const { request, flush } = entityStoreActions;
 
 export class CollectionDetailWrapperContainer extends PureComponent {
-
   static displayName = "CollectionDetail.Wrapper";
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state, ownPropsIgnored) {
     return {
       collection: select(requests.beCollection, state.entityStore)
     };
   }
 
   static propTypes = {
-    children: PropTypes.object,
-    collection: PropTypes.object
+    collection: PropTypes.object,
+    dispatch: PropTypes.func,
+    match: PropTypes.object,
+    route: PropTypes.object,
+    history: PropTypes.object
   };
 
   constructor(props) {
@@ -57,15 +59,23 @@ export class CollectionDetailWrapperContainer extends PureComponent {
   doPreview(event) {
     event.preventDefault();
     const projectId = this.props.collection.relationships.project.id;
-    const previewUrl = lh.link("frontendProjectCollection", projectId, this.props.collection.id);
-    const win = window.open(previewUrl, '_blank');
+    const previewUrl = lh.link(
+      "frontendProjectCollection",
+      projectId,
+      this.props.collection.id
+    );
+    const win = window.open(previewUrl, "_blank");
     win.focus();
   }
 
   doDestroy() {
     const call = collectionsAPI.destroy(this.props.collection.id);
     const options = { removes: this.props.collection };
-    const collectionRequest = request(call, requests.beCollectionDestroy, options);
+    const collectionRequest = request(
+      call,
+      requests.beCollectionDestroy,
+      options
+    );
     this.props.dispatch(collectionRequest).promise.then(() => {
       this.notifyDestroy();
       this.redirectToProjectResources();
@@ -83,7 +93,8 @@ export class CollectionDetailWrapperContainer extends PureComponent {
       level: 0,
       id: `COLLECTION_DESTROYED_${this.props.collection.id}`,
       heading: "The collection has been destroyed.",
-      body: `${this.props.collection.attributes.title} has passed into the endless night.`,
+      body: `${this.props.collection.attributes
+        .title} has passed into the endless night.`,
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -96,10 +107,15 @@ export class CollectionDetailWrapperContainer extends PureComponent {
       this.setState({
         confirmation: { resolve, reject, heading, message }
       });
-    }).then(() => {
-      this.doDestroy(event);
-      this.closeDialog();
-    }, () => { this.closeDialog(); });
+    }).then(
+      () => {
+        this.doDestroy(event);
+        this.closeDialog();
+      },
+      () => {
+        this.closeDialog();
+      }
+    );
   }
 
   secondaryNavigationLinks(collection) {
@@ -120,17 +136,14 @@ export class CollectionDetailWrapperContainer extends PureComponent {
   renderUtility() {
     return (
       <div>
-        <button
-          onClick={this.doPreview}
-          className="button-bare-primary"
-        >
-          Preview <i className="manicon manicon-eye-outline"></i>
+        <button onClick={this.doPreview} className="button-bare-primary">
+          Preview <i className="manicon manicon-eye-outline" />
         </button>
         <button
           onClick={this.handleCollectionDestroy}
           className="button-bare-primary"
         >
-          Delete <i className="manicon manicon-trashcan"></i>
+          Delete <i className="manicon manicon-trashcan" />
         </button>
       </div>
     );
@@ -143,22 +156,25 @@ export class CollectionDetailWrapperContainer extends PureComponent {
   }
 
   render() {
+    /* eslint-disable no-unused-vars */
     const { collection, match } = this.props;
+    /* eslint-enable no-unused-vars */
     if (!collection) return null;
 
     return (
       <div>
-        {
-          this.state.confirmation ?
-            <Dialog.Confirm {...this.state.confirmation} />
-            : null
-        }
+        {this.state.confirmation
+          ? <Dialog.Confirm {...this.state.confirmation} />
+          : null}
         <Navigation.DetailHeader
           type="resource"
           breadcrumb={[
             { path: lh.link("backend"), label: "ALL PROJECTS" },
             {
-              path: lh.link("backendProjectResources", collection.relationships.project.id),
+              path: lh.link(
+                "backendProjectResources",
+                collection.relationships.project.id
+              ),
               label: collection.relationships.project.attributes.title
             }
           ]}

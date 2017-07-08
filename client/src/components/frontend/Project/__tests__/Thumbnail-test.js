@@ -1,15 +1,14 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Thumbnail from '../Thumbnail';
-import build from 'test/fixtures/build';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import Thumbnail from "../Thumbnail";
+import build from "test/fixtures/build";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Project.Thumbnail component", () => {
-
   const project = build.entity.project("1");
   const dispatchMock = jest.fn();
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Thumbnail
@@ -23,5 +22,4 @@ describe("Frontend.Project.Thumbnail component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

@@ -1,13 +1,11 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/global';
-import classNames from 'classnames';
-import brackets2dots from 'brackets2dots';
-import humps from 'humps';
-import has from 'lodash/has';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/global";
+import classNames from "classnames";
+import brackets2dots from "brackets2dots";
+import has from "lodash/has";
 
 export default class Errorable extends PureComponent {
-
   // If name = "*" this component will show all errors, rather than a specific
   // field error.
   static propTypes = {
@@ -15,12 +13,13 @@ export default class Errorable extends PureComponent {
     containerStyle: PropTypes.object,
     className: PropTypes.string,
     name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    label: PropTypes.string
   };
 
   static defaultProps = {
     containerStyle: {}
-  }
+  };
 
   constructor() {
     super();
@@ -29,7 +28,7 @@ export default class Errorable extends PureComponent {
 
   allErrors() {
     if (!this.props.errors) return [];
-    return this.props.errors.filter((error) => {
+    return this.props.errors.filter(error => {
       return has(error, "source");
     });
   }
@@ -42,10 +41,10 @@ export default class Errorable extends PureComponent {
     if (!Array.isArray(names)) {
       names = [this.props.name];
     }
-    names.forEach((name) => {
+    names.forEach(name => {
       const pointer = this.pointerFor(name);
-      const pointerErrors = this.props.errors.filter((error) => {
-        if (!error.hasOwnProperty('source')) return false;
+      const pointerErrors = this.props.errors.filter(error => {
+        if (!error.hasOwnProperty("source")) return false;
         return error.source.pointer === pointer;
       });
       errors = [...errors, ...pointerErrors];
@@ -60,20 +59,20 @@ export default class Errorable extends PureComponent {
   }
 
   render() {
+    /* eslint-disable no-unused-vars */
     const { className, children, errors, label } = this.props;
+    /* eslint-enable no-unused-vars */
     const fieldErrors = this.fieldErrors();
     const hasErrors = fieldErrors.length > 0;
     const wrapperClass = classNames({
-      'form-error': hasErrors,
+      "form-error": hasErrors,
       [className]: className
     });
 
     return (
-      <div style={this.props.containerStyle} className={wrapperClass} >
+      <div style={this.props.containerStyle} className={wrapperClass}>
         {children}
-        {hasErrors ?
-          <Form.InputError errors={fieldErrors} />
-        : null}
+        {hasErrors ? <Form.InputError errors={fieldErrors} /> : null}
       </div>
     );
   }

@@ -1,28 +1,31 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { ProjectList, Layout } from 'components/frontend';
-import connectAndFetch from 'utils/connectAndFetch';
-import { commonActions } from 'actions/helpers';
-import { bindActionCreators } from 'redux';
-import { uiFilterActions, entityStoreActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { projectsAPI, requests } from 'api';
-import get from 'lodash/get';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { ProjectList, Layout } from "components/frontend";
+import connectAndFetch from "utils/connectAndFetch";
+import { commonActions } from "actions/helpers";
+import { bindActionCreators } from "redux";
+import { uiFilterActions, entityStoreActions } from "actions";
+import { select } from "utils/entityUtils";
+import { projectsAPI, requests } from "api";
+import get from "lodash/get";
+import lh from "helpers/linkHandler";
 
 const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
 const featuredLimit = 4;
 
 export class HomeContainer extends Component {
-
   static fetchData(getState, dispatch) {
     const state = getState();
-    const filteredRequest =
-      request(projectsAPI.index(state.ui.projectFilters), requests.feProjectsFiltered);
-    const featuredRequest =
-      request(projectsAPI.featured(), requests.feProjectsFeatured);
+    const filteredRequest = request(
+      projectsAPI.index(state.ui.projectFilters),
+      requests.feProjectsFiltered
+    );
+    const featuredRequest = request(
+      projectsAPI.featured(),
+      requests.feProjectsFeatured
+    );
     const { promise: one } = dispatch(filteredRequest);
     const { promise: two } = dispatch(featuredRequest);
     return Promise.all([one, two]);
@@ -40,7 +43,6 @@ export class HomeContainer extends Component {
 
   static propTypes = {
     authentication: PropTypes.object,
-    children: PropTypes.object,
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
     projectFilters: PropTypes.object,
@@ -60,22 +62,22 @@ export class HomeContainer extends Component {
     const { dispatch } = this.props;
     if (prevProps.projectFilters !== this.props.projectFilters) {
       const apiCall = projectsAPI.index(this.props.projectFilters);
-      const filteredRequest =
-        request(apiCall, requests.feProjectsFiltered);
+      const filteredRequest = request(apiCall, requests.feProjectsFiltered);
       dispatch(filteredRequest);
     }
   }
 
   renderFeaturedButton(limit) {
-    if (!this.props.featuredProjects || this.props.featuredProjects.length <= limit) return null;
+    if (
+      !this.props.featuredProjects ||
+      this.props.featuredProjects.length <= limit
+    )
+      return null;
     return (
-      <div className="button-nav" style={{ marginTop: '26px' }}>
-        <Link
-          to={lh.link("frontendFeatured")}
-          className="button-icon-primary"
-        >
+      <div className="button-nav" style={{ marginTop: "26px" }}>
+        <Link to={lh.link("frontendFeatured")} className="button-icon-primary">
           <span>
-            <i className="manicon manicon-lamp"></i>See all featured
+            <i className="manicon manicon-lamp" />See all featured
           </span>
         </Link>
       </div>
@@ -84,9 +86,11 @@ export class HomeContainer extends Component {
 
   render() {
     return (
-      <div style={ {
-        overflowX: 'hidden'
-      } }>
+      <div
+        style={{
+          overflowX: "hidden"
+        }}
+      >
         <Layout.Splash
           authenticated={this.props.authentication.authenticated}
           toggleSignInUpOverlay={this.commonActions.toggleSignInUpOverlay}
@@ -101,19 +105,22 @@ export class HomeContainer extends Component {
           <div className="container">
             <header className="section-heading">
               <h4 className="title">
-                <i className="manicon manicon-lamp"></i>
-                {'Featured Projects'}
+                <i className="manicon manicon-lamp" />
+                {"Featured Projects"}
               </h4>
             </header>
-            { this.props.featuredProjects ?
-              <ProjectList.Grid
-                authenticated={this.props.authentication.authenticated}
-                favorites={get(this.props.authentication, 'currentUser.favorites')}
-                projects={this.props.featuredProjects}
-                dispatch={this.props.dispatch}
-                limit={featuredLimit}
-              /> : null
-            }
+            {this.props.featuredProjects
+              ? <ProjectList.Grid
+                  authenticated={this.props.authentication.authenticated}
+                  favorites={get(
+                    this.props.authentication,
+                    "currentUser.favorites"
+                  )}
+                  projects={this.props.featuredProjects}
+                  dispatch={this.props.dispatch}
+                  limit={featuredLimit}
+                />
+              : null}
             {this.renderFeaturedButton(featuredLimit)}
           </div>
         </section>
@@ -121,8 +128,8 @@ export class HomeContainer extends Component {
           <div className="container">
             <header className="section-heading utility-right">
               <h4 className="title">
-                <i className="manicon manicon-books-on-shelf"></i>
-                {'Our Projects'}
+                <i className="manicon manicon-books-on-shelf" />
+                {"Our Projects"}
               </h4>
               <div className="section-heading-utility-right">
                 {/*
@@ -131,19 +138,25 @@ export class HomeContainer extends Component {
                  component needs to render (which is what keeps the child dumb)'
                  */}
                 <ProjectList.Filters
-                  updateAction={bindActionCreators(setProjectFilters, this.props.dispatch)}
+                  updateAction={bindActionCreators(
+                    setProjectFilters,
+                    this.props.dispatch
+                  )}
                   subjects={this.props.subjects}
                 />
               </div>
             </header>
-            { this.props.filteredProjects ?
-              <ProjectList.Grid
-                authenticated={this.props.authentication.authenticated}
-                favorites={get(this.props.authentication, 'currentUser.favorites')}
-                dispatch={this.props.dispatch}
-                projects={this.props.filteredProjects}
-              /> : null
-            }
+            {this.props.filteredProjects
+              ? <ProjectList.Grid
+                  authenticated={this.props.authentication.authenticated}
+                  favorites={get(
+                    this.props.authentication,
+                    "currentUser.favorites"
+                  )}
+                  dispatch={this.props.dispatch}
+                  projects={this.props.filteredProjects}
+                />
+              : null}
           </div>
         </section>
         <Layout.ButtonNavigation

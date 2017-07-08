@@ -1,23 +1,22 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import HigherOrder from 'containers/global/HigherOrder';
-import { EmailButton, TwitterButton, FacebookButton } from 'react-sociable';
-import Button from './Button';
-import Panel from './Panel';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import HigherOrder from "containers/global/HigherOrder";
+import { TwitterButton, FacebookButton } from "react-sociable";
+import Button from "./Button";
+import Panel from "./Panel";
 
 class AnnotationPopupShare extends PureComponent {
-
   static displayName = "Annotation.Popup.Share";
 
   static propTypes = {
-    selectionText: PropTypes.string,
     shareUrl: PropTypes.string,
     back: PropTypes.func.isRequired,
     secondary: PropTypes.string,
     direction: PropTypes.string,
     cite: PropTypes.func.isRequired,
     text: PropTypes.object,
-    section: PropTypes.object
+    section: PropTypes.object,
+    settings: PropTypes.object
   };
 
   constructor(props) {
@@ -30,9 +29,11 @@ class AnnotationPopupShare extends PureComponent {
 
   componentDidMount() {
     if (this.state.inBrowser === false) {
-      this.setState({ // eslint-disable-line react/no-did-mount-set-state
+      /* eslint-disable react/no-did-mount-set-state */
+      this.setState({
         inBrowser: true
       });
+      /* eslint-enable react/no-did-mount-set-state */
     }
   }
 
@@ -65,34 +66,33 @@ class AnnotationPopupShare extends PureComponent {
         secondary={this.props.secondary}
         direction={this.props.direction}
       >
-        {this.canCite() ?
-          <Button
-            onClick={this.props.cite}
-            requiredRole="any"
-            label="Cite"
-            iconClass="manicon-quotes-left"
-          />
-          : null
-        }
+        {this.canCite()
+          ? <Button
+              onClick={this.props.cite}
+              requiredRole="any"
+              label="Cite"
+              iconClass="manicon-quotes-left"
+            />
+          : null}
         <TwitterButton
           url={this.url()}
           message={this.message()}
           windowOptions={this.twitterWindowOptions}
         >
-          <i className="manicon manicon-twitter"></i>
-          {'Twitter'}
+          <i className="manicon manicon-twitter" />
+          {"Twitter"}
         </TwitterButton>
-        {this.facebookAppId() ?
-          <FacebookButton
-            url={this.url()}
-            message={this.message()}
-            windowOptions={this.twitterWindowOptions}
-            appId={this.facebookAppId()}
-          >
-            <i className="manicon manicon-facebook"></i>
-            {'Facebook'}
-          </FacebookButton> : null
-        }
+        {this.facebookAppId()
+          ? <FacebookButton
+              url={this.url()}
+              message={this.message()}
+              windowOptions={this.twitterWindowOptions}
+              appId={this.facebookAppId()}
+            >
+              <i className="manicon manicon-facebook" />
+              {"Facebook"}
+            </FacebookButton>
+          : null}
         <Button
           onClick={this.props.back}
           requiredRole="any"

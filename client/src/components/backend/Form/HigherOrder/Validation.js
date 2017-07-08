@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
-import { Form as GlobalForm } from 'components/global';
-import classNames from 'classnames';
-import brackets2dots from 'brackets2dots';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Form as GlobalForm } from "components/global";
+import brackets2dots from "brackets2dots";
 
 export default class FormHigherOrderValidation extends Component {
-
   static displayName = "Form.HigherOrder.Validation";
 
   static propTypes = {
@@ -15,13 +12,13 @@ export default class FormHigherOrderValidation extends Component {
     errorHandler: PropTypes.func,
     value: PropTypes.any,
     name: PropTypes.string,
-    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+      .isRequired,
     onChange: PropTypes.func,
     setValue: PropTypes.func
   };
 
-  static defaultProps = {
-  };
+  static defaultProps = {};
 
   constructor(props) {
     super(props);
@@ -49,8 +46,8 @@ export default class FormHigherOrderValidation extends Component {
   }
 
   validate(value) {
-    this.props.validation.forEach((validation) => {
-      if (validation === 'required') this.validateRequired(value);
+    this.props.validation.forEach(validation => {
+      if (validation === "required") this.validateRequired(value);
     });
   }
 
@@ -59,7 +56,7 @@ export default class FormHigherOrderValidation extends Component {
   }
 
   validateRequired(value) {
-    const key = 'required';
+    const key = "required";
     if (value === "" || value === null) {
       this.addError(key, "is required");
     } else {
@@ -91,33 +88,39 @@ export default class FormHigherOrderValidation extends Component {
   }
 
   proxyOnChange(callback) {
-    return (event) => {
+    return event => {
       this.validate(event.target.value);
       callback(event);
     };
   }
 
   proxySetValue(callback) {
-    return (value) => {
+    return value => {
       this.validate(value);
       callback(value);
     };
   }
 
   render() {
-    const { validation, children, errorHandler, submitted, ...transfer } = this.props;
+    /* eslint-disable no-unused-vars */
+    const {
+      validation,
+      children,
+      errorHandler,
+      submitted,
+      ...transfer
+    } = this.props;
+    /* eslint-enable no-unused-vars */
 
     if (!this.props.validation) {
       return React.cloneElement(children, transfer);
     }
-    if (transfer.hasOwnProperty('onChange')) {
+    if (transfer.hasOwnProperty("onChange")) {
       transfer.onChange = this.proxyOnChange(this.props.onChange);
     }
-    if (transfer.hasOwnProperty('setValue')) {
+    if (transfer.hasOwnProperty("setValue")) {
       transfer.setValue = this.proxySetValue(this.props.setValue);
     }
-
-    const errors = Object.values(this.state.errors);
 
     return (
       <div>
@@ -128,5 +131,4 @@ export default class FormHigherOrderValidation extends Component {
       </div>
     );
   }
-
 }

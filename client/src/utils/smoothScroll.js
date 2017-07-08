@@ -1,11 +1,11 @@
 // Reworked from https://github.com/cferdinandi/smooth-scroll
 
-const getTop = (element) => {
-  if (element.nodeName === 'HTML') return -window.pageYOffset;
+const getTop = element => {
+  if (element.nodeName === "HTML") return -window.pageYOffset;
   return element.getBoundingClientRect().top + window.pageYOffset;
 };
 
-const easeInOutCubic = (t) => {
+const easeInOutCubic = t => {
   return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
 };
 
@@ -20,27 +20,36 @@ export default function smoothScroll(el, duration, callback, context) {
   const start = window.pageYOffset;
 
   let end;
-  if (typeof el === 'number') {
+  if (typeof el === "number") {
     end = parseInt(el, 10);
   } else {
     end = getTop(el);
   }
 
   const clock = Date.now();
-  const requestAnimationFrame = window.requestAnimationFrame ||
-    window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
-    function delay(fn) { window.setTimeout(fn, 15); };
+  const requestAnimationFrame =
+    window.requestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    function delay(fn) {
+      window.setTimeout(fn, 15);
+    };
 
   function step() {
     const elapsed = Date.now() - clock;
     if (adjustedContext !== window) {
-      adjustedContext .scrollTop = position(start, end, elapsed, adjustedDuration);
+      adjustedContext.scrollTop = position(
+        start,
+        end,
+        elapsed,
+        adjustedDuration
+      );
     } else {
       window.scroll(0, position(start, end, elapsed, adjustedDuration));
     }
 
     if (elapsed > adjustedDuration) {
-      if (typeof callback === 'function') {
+      if (typeof callback === "function") {
         callback(el);
       }
     } else {

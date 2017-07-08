@@ -1,12 +1,11 @@
-import React from 'react';
-import List from '../List';
-import { mount } from 'enzyme';
-import build from 'test/fixtures/build';
-import { Provider } from 'react-redux';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
+import React from "react";
+import List from "../List";
+import { mount } from "enzyme";
+import build from "test/fixtures/build";
+import { Provider } from "react-redux";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Reader.Resource.Viewer.List component", () => {
-
   const resources = [build.entity.resource("1"), build.entity.resource("2")];
   const resourceMarkers = [
     {
@@ -26,21 +25,15 @@ describe("Reader.Resource.Viewer.List component", () => {
   ];
   const store = build.store();
 
-  const root = (
-    wrapWithRouter(
-      <Provider store={store} >
-        <List
-          resources={resources}
-          resourceMarkers={resourceMarkers}
-        />
-      </Provider>
-    )
+  const root = wrapWithRouter(
+    <Provider store={store}>
+      <List resources={resources} resourceMarkers={resourceMarkers} />
+    </Provider>
   );
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = mount(root);
     let tree = component.debug();
     expect(tree).toMatchSnapshot();
   });
-
 });

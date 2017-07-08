@@ -1,13 +1,11 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { isPromise } from 'utils/promise';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 
 export default class AnnotationShareEditor extends PureComponent {
-
   static displayName = "Annotation.Share.Citation";
 
   static propTypes = {
-    text: PropTypes.object.isRequired,
+    section: PropTypes.object,
     cancel: PropTypes.func.isRequired
   };
 
@@ -30,15 +28,15 @@ export default class AnnotationShareEditor extends PureComponent {
     this.ci.focus();
   }
 
+  setStyle(_event, style) {
+    this.setState({ style, copied: false });
+  }
+
   handleCancel(event) {
     event.preventDefault();
     if (this.props.cancel) {
       this.props.cancel(event);
     }
-  }
-
-  setStyle(_event, style) {
-    this.setState({ style, copied: false });
   }
 
   handleCitationChange(event) {
@@ -59,17 +57,17 @@ export default class AnnotationShareEditor extends PureComponent {
     const citations = this.props.section.attributes.citations;
     const styles = Object.keys(citations);
     const selected = this.state.style;
-    return styles.map((style) => {
+    return styles.map(style => {
       return (
-      <li key={style}>
-        <button
-          className={selected === style ? "active" : null}
-          onClick={(event) => this.setStyle(event, style)}
-        >
-          {style}
-        </button>
-      </li>
-    );
+        <li key={style}>
+          <button
+            className={selected === style ? "active" : null}
+            onClick={event => this.setStyle(event, style)}
+          >
+            {style}
+          </button>
+        </li>
+      );
     });
   }
 
@@ -88,12 +86,16 @@ export default class AnnotationShareEditor extends PureComponent {
           </nav>
           <div
             className="copyable"
-            ref={(ci) => { this.ci = ci; }}
+            ref={ci => {
+              this.ci = ci;
+            }}
             style={{ width: "100%" }}
             dangerouslySetInnerHTML={{ __html: citations[this.state.style] }}
           />
           <div className="utility">
-            <span className="notice">{copiedText}</span>
+            <span className="notice">
+              {copiedText}
+            </span>
             <div className="buttons">
               <button
                 onClick={this.handleCancel}
@@ -105,9 +107,7 @@ export default class AnnotationShareEditor extends PureComponent {
                 className="button-secondary button-icon-secondary"
                 onClick={this.handleCopyClick}
               >
-                <i
-                  className="manicon manicon-copy"
-                />
+                <i className="manicon manicon-copy" />
                 Copy
               </button>
             </div>

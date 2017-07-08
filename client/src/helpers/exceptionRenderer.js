@@ -1,43 +1,42 @@
-import { RedBoxError } from 'redbox-react';
-import React from 'react';
-import ReactDOM from 'react-dom/server';
-import PrettyError from 'pretty-error';
+/* eslint-disable no-console */
+import { RedBoxError } from "redbox-react";
+import React from "react";
+import ReactDOM from "react-dom/server";
 
 const redBoxStyles = {
   redbox: {
-    boxSizing: 'border-box',
-    top: '0px',
-    left: '0px',
-    bottom: '0px',
-    right: '0px',
-    width: '100%',
+    boxSizing: "border-box",
+    top: "0px",
+    left: "0px",
+    bottom: "0px",
+    right: "0px",
+    width: "100%",
     zIndex: 9999,
-    overflowX: 'scroll',
+    overflowX: "scroll"
   },
   message: {
-    textTransform: 'uppercase',
-    WebkitAnimation: 'blink-animation 2s steps(5, start) infinite',
-    animation: 'blink-animation 2s steps(5, start) infinite'
+    textTransform: "uppercase",
+    WebkitAnimation: "blink-animation 2s steps(5, start) infinite",
+    animation: "blink-animation 2s steps(5, start) infinite"
   },
   stack: {
-    marginTop: '2em'
+    marginTop: "2em"
   },
   frame: {
-    marginTop: '1em'
+    marginTop: "1em"
   },
   file: {
     marginTop: 5,
-    fontSize: '16px',
-    color: '#3d54a9'
+    fontSize: "16px",
+    color: "#3d54a9"
   },
   linkToFile: {
-    textDecoration: 'none',
-    color: '#3d54a9'
+    textDecoration: "none",
+    color: "#3d54a9"
   }
 };
 
 function template(redboxString, preface = null) {
-
   let prefaceString;
   if (preface) {
     prefaceString = `
@@ -121,7 +120,6 @@ function template(redboxString, preface = null) {
 }
 
 export default function renderException(error, preface) {
-  const pretty = new PrettyError();
   let redboxString;
   try {
     redboxString = ReactDOM.renderToString(

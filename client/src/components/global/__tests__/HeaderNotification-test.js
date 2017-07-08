@@ -1,10 +1,9 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import renderer from 'react-test-renderer';
-import HeaderNotification from '../HeaderNotification';
+import React from "react";
+import { mount } from "enzyme";
+import renderer from "react-test-renderer";
+import HeaderNotification from "../HeaderNotification";
 
 describe("Global.HeaderNotification component", () => {
-
   const removeMock = jest.fn();
   const root = (
     <HeaderNotification
@@ -16,18 +15,16 @@ describe("Global.HeaderNotification component", () => {
     />
   );
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(root);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('should trigger removeNotification callback when close is clicked', () => {
+  it("should trigger removeNotification callback when close is clicked", () => {
     const wrapper = mount(root);
     removeMock.mockClear();
-    wrapper.find('[data-id="close"]').first().simulate('click');
+    wrapper.find('[data-id="close"]').first().simulate("click");
     expect(removeMock).toHaveBeenCalled();
   });
-
 });
-

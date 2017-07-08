@@ -1,11 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Detail from '../Detail';
-import build from 'test/fixtures/build'
-import { Provider } from 'react-redux';
+import React from "react";
+import renderer from "react-test-renderer";
+import Detail from "../Detail";
+import build from "test/fixtures/build";
+import { Provider } from "react-redux";
 
 describe("Global.Comment.Detail component", () => {
-
   const store = build.store();
 
   const handleDeleteMock = jest.fn();
@@ -16,9 +15,9 @@ describe("Global.Comment.Detail component", () => {
   const comment = build.entity.comment("2");
   comment.relationships.creator = build.entity.user("3");
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
-      <Provider store={store} >
+      <Provider store={store}>
         <Detail
           handleDelete={handleDeleteMock}
           handleDestroy={handleDestroyMock}

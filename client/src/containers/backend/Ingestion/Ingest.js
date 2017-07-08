@@ -1,21 +1,19 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Dialog } from 'components/backend';
-import { Form } from 'components/backend';
-import { ingestionsAPI, requests } from 'api';
-import { entityStoreActions } from 'actions';
-import { select, isLoaded, grab } from 'utils/entityUtils';
-import get from 'lodash/get';
-import truncate from 'lodash/truncate';
-import capitalize from 'lodash/capitalize';
-import { websocketActions } from 'actions';
-import classnames from 'classnames';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { ingestionsAPI, requests } from "api";
+import { entityStoreActions } from "actions";
+import { select, isLoaded } from "utils/entityUtils";
+import get from "lodash/get";
+import truncate from "lodash/truncate";
+import capitalize from "lodash/capitalize";
+import { websocketActions } from "actions";
+import classnames from "classnames";
+import lh from "helpers/linkHandler";
+
 const { request, flush } = entityStoreActions;
 
 export class IngestionIngest extends PureComponent {
-
   static displayName = "ProjectDetail.Text.Ingest";
 
   static propTypes = {
@@ -25,7 +23,8 @@ export class IngestionIngest extends PureComponent {
     history: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
     refresh: PropTypes.func,
-    text: PropTypes.object
+    text: PropTypes.object,
+    match: PropTypes.object
   };
 
   static fetchData(getState, dispatch, location, match) {
@@ -36,7 +35,7 @@ export class IngestionIngest extends PureComponent {
     return Promise.all([one]);
   }
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state, ownPropsIgnored) {
     return {
       channel: get(state.websocket.channels, "IngestionChannel"),
       ingestion: select(requests.beIngestionShow, state.entityStore)
@@ -59,8 +58,16 @@ export class IngestionIngest extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.ingestion && nextProps.ingestion) this.openSocket(nextProps.ingestion.id);
+    if (!this.props.ingestion && nextProps.ingestion)
+      this.openSocket(nextProps.ingestion.id);
     this.maybeProcessMessage(nextProps.channel, this.props.channel, nextProps);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.loading !== nextState.loading) return true;
+    if (this.props.ingestion !== nextProps.ingestion) return true;
+    if (this.state.textLog !== nextState.textLog) return true;
+    return false;
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -73,32 +80,33 @@ export class IngestionIngest extends PureComponent {
     if (this.props.refresh) this.props.refresh();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.loading !== nextState.loading) return true;
-    if (this.props.ingestion !== nextProps.ingestion) return true;
-    if (this.state.textLog !== nextState.textLog) return true;
-    return false;
-  }
-
   analyze = () => {
     if (this.state.loading) return;
-    this.props.dispatch(websocketActions.triggerAction(this.channelName, "analyze"));
+    this.props.dispatch(
+      websocketActions.triggerAction(this.channelName, "analyze")
+    );
   };
 
   reset = () => {
     if (this.state.loading) return;
     this.setState({ textLog: "" });
-    this.props.dispatch(websocketActions.triggerAction(this.channelName, "reset"));
+    this.props.dispatch(
+      websocketActions.triggerAction(this.channelName, "reset")
+    );
   };
 
   ingest = () => {
     if (this.state.loading) return;
-    this.props.dispatch(websocketActions.triggerAction(this.channelName, "process"));
+    this.props.dispatch(
+      websocketActions.triggerAction(this.channelName, "process")
+    );
   };
 
   reingest = () => {
     if (this.state.loading) return;
-    this.props.dispatch(websocketActions.triggerAction(this.channelName, "reingest"));
+    this.props.dispatch(
+      websocketActions.triggerAction(this.channelName, "reingest")
+    );
   };
 
   complete = () => {
@@ -110,11 +118,11 @@ export class IngestionIngest extends PureComponent {
     this.props.history.push(this.editUrl(), { stage: "upload" });
   };
 
-  maybeProcessMessage(nextChannel, thisChannel, nextProps) {
-    const nextMessage = get(nextChannel, 'message');
-    const lastMessage = get(thisChannel, 'message');
-    const nextMessageId = get(nextMessage, 'id');
-    const lastMessageId = get(lastMessage, 'id');
+  maybeProcessMessage(nextChannel, thisChannel, nextPropsIgnored) {
+    const nextMessage = get(nextChannel, "message");
+    const lastMessage = get(thisChannel, "message");
+    const nextMessageId = get(nextMessage, "id");
+    const lastMessageId = get(lastMessage, "id");
     if (!nextMessage) return;
     if (nextMessageId === lastMessageId) return;
     if (nextMessage.type === "message") this.handleMessage(nextMessage.payload);
@@ -128,13 +136,19 @@ export class IngestionIngest extends PureComponent {
 
   startLoading() {
     this.setState({ loading: true }, () => {
-      this.props.dispatch({ type: 'START_LOADING', payload: "ingestion-websocket" });
+      this.props.dispatch({
+        type: "START_LOADING",
+        payload: "ingestion-websocket"
+      });
     });
   }
 
   stopLoading() {
     this.setState({ loading: false }, () => {
-      this.props.dispatch({ type: 'STOP_LOADING', payload: "ingestion-websocket" });
+      this.props.dispatch({
+        type: "STOP_LOADING",
+        payload: "ingestion-websocket"
+      });
     });
   }
 
@@ -207,11 +221,8 @@ export class IngestionIngest extends PureComponent {
   renderFinished() {
     if (this.isModal) {
       return (
-        <button
-          onClick={this.complete}
-          className="button-icon-secondary"
-        >
-          <i className="manicon manicon-check small"></i>
+        <button onClick={this.complete} className="button-icon-secondary">
+          <i className="manicon manicon-check small" />
           {"Complete"}
         </button>
       );
@@ -222,17 +233,16 @@ export class IngestionIngest extends PureComponent {
   render() {
     if (!this.props.ingestion) return null;
     const attr = this.props.ingestion.attributes;
-    const resetButtonClass = classnames(
-      "button-bare-primary",
-      { loading: this.state.loading || !this.canReset }
-    );
+    const resetButtonClass = classnames("button-bare-primary", {
+      loading: this.state.loading || !this.canReset
+    });
 
     return (
       <div>
         <div className="ingestion-output">
           <header className="entity-header-primary">
             <figure>
-              <i className="manicon manicon-text-placeholder"></i>
+              <i className="manicon manicon-text-placeholder" />
             </figure>
             <div className="title">
               <h1>
@@ -242,10 +252,10 @@ export class IngestionIngest extends PureComponent {
                 <button
                   className={resetButtonClass}
                   onClick={this.reset}
-                  disabled={this.state.loading || !this.canReset }
+                  disabled={this.state.loading || !this.canReset}
                 >
                   Reset
-                  <i className="manicon manicon-x-bold"></i>
+                  <i className="manicon manicon-x-bold" />
                 </button>
               </div>
             </div>
@@ -253,65 +263,63 @@ export class IngestionIngest extends PureComponent {
           <div className="properties">
             <div className="item">
               <p className="label">Current state</p>
-              <p className="value">{capitalize(attr.state)}</p>
+              <p className="value">
+                {capitalize(attr.state)}
+              </p>
             </div>
             <div className="item">
               <p className="label">Strategy</p>
-              <p className="value">{attr.strategy || "None"}</p>
+              <p className="value">
+                {attr.strategy || "None"}
+              </p>
             </div>
             <div className="item">
               <p className="label">Text</p>
               <p className="value">
-                {attr.textId ?
-                  attr.textId
-                  : "This ingestion will create a new text"
-                }
+                {attr.textId
+                  ? attr.textId
+                  : "This ingestion will create a new text"}
               </p>
             </div>
           </div>
           <div className="log">
             <p className="label">Log</p>
-            <div className="value" ref={(el) => { this.logEl = el; }}>
+            <div
+              className="value"
+              ref={el => {
+                this.logEl = el;
+              }}
+            >
               {this.state.textLog.trim()}
             </div>
           </div>
         </div>
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
-          {this.props.ingestion.attributes.state !== "finished" ?
-            <button
-              onClick={this.backToEdit}
-              className="button-icon-secondary dull"
-            >
-              <i className="manicon manicon-x small"></i>
-              Back
-            </button>
-            : null
-          }
+          {this.props.ingestion.attributes.state !== "finished"
+            ? <button
+                onClick={this.backToEdit}
+                className="button-icon-secondary dull"
+              >
+                <i className="manicon manicon-x small" />
+                Back
+              </button>
+            : null}
 
-          {this.canProcess ?
-            <button
-              onClick={this.ingest}
-              className="button-icon-secondary"
-            >
-              <i className="manicon manicon-arrow-right small"></i>
-              {"Ingest"}
-            </button>
-            : null
-          }
-          {this.canAnalyze ?
-            <button
-              onClick={this.analyze}
-              className="button-icon-secondary"
-            >
-              <i className="manicon manicon-arrow-right small"></i>
-              {"Analyze"}
-            </button>
-            : null
-          }
-          {this.props.ingestion.attributes.state === "finished" ?
-            this.renderFinished()
-            : null
-          }
+          {this.canProcess
+            ? <button onClick={this.ingest} className="button-icon-secondary">
+                <i className="manicon manicon-arrow-right small" />
+                {"Ingest"}
+              </button>
+            : null}
+          {this.canAnalyze
+            ? <button onClick={this.analyze} className="button-icon-secondary">
+                <i className="manicon manicon-arrow-right small" />
+                {"Analyze"}
+              </button>
+            : null}
+          {this.props.ingestion.attributes.state === "finished"
+            ? this.renderFinished()
+            : null}
         </div>
       </div>
     );

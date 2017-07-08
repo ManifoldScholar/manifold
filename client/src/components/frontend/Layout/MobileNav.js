@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import startsWith from 'lodash/startsWith';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import startsWith from "lodash/startsWith";
+import lh from "helpers/linkHandler";
 
 export default class MobileNav extends Component {
-
   static displayName = "Layout.MobileNav";
 
   static propTypes = {
@@ -14,7 +13,9 @@ export default class MobileNav extends Component {
 
   render() {
     const path = this.props.location.pathname;
-    const active = startsWith(path, lh.link("frontendFollowing")) ? 'following' : 'browse';
+    const active = startsWith(path, lh.link("frontendFollowing"))
+      ? "following"
+      : "browse";
 
     return (
       <nav className="footer-fixed">
@@ -22,7 +23,7 @@ export default class MobileNav extends Component {
           <li>
             <Link
               to={lh.link("frontend")}
-              className={active === 'browse' ? 'active' : ''}
+              className={active === "browse" ? "active" : ""}
             >
               Projects
             </Link>
@@ -30,7 +31,7 @@ export default class MobileNav extends Component {
           <li>
             <Link
               to={lh.link("frontendFollowing")}
-              className={active === 'following' ? 'active' : ''}
+              className={active === "following" ? "active" : ""}
             >
               Following
             </Link>

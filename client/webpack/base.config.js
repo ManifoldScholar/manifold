@@ -2,14 +2,16 @@ const webpack = require("webpack");
 const paths = require("./paths");
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 // No hashes in names when we're in development, to simplify finding assets.
-const nameTemplate = process.env.NODE_ENV === "development"  ? "[name]" : "[name]-[hash]";
-const fontnameTemplate = process.env.NODE_ENV === "development"  ? "[fontname]" : "[fontname]-[hash]";
+const nameTemplate =
+  process.env.NODE_ENV === "development" ? "[name]" : "[name]-[hash]";
+const fontnameTemplate =
+  process.env.NODE_ENV === "development" ? "[fontname]" : "[fontname]-[hash]";
 
 module.exports = (options = {}) => {
-
   // #####################################################################################
   // RULES
   // #####################################################################################
@@ -49,8 +51,7 @@ module.exports = (options = {}) => {
       { loader: "style-loader" },
       { loader: "css-loader", options: "importLoaders=2" },
       { loader: "postcss-loader", options: "syntax=postcss-scss" },
-      { loader: "sass-loader", options: "outputStyle=expanded" },
-
+      { loader: "sass-loader", options: "outputStyle=expanded" }
     ],
     include: paths.theme
   };
@@ -59,7 +60,8 @@ module.exports = (options = {}) => {
     return {
       test: new RegExp(`\\.${ext}(\\?v=\\d+\\.\d+\\.\\d+)?$`),
       use: [
-        { loader: "url-loader",
+        {
+          loader: "url-loader",
           options: {
             limit,
             mimetype,
@@ -68,7 +70,7 @@ module.exports = (options = {}) => {
         }
       ],
       include: paths.src
-    }
+    };
   };
 
   // rules.push(ruleEnv);
@@ -80,7 +82,6 @@ module.exports = (options = {}) => {
   rules.push(generateUrlRule("ttf", "application/octet-stream"));
   rules.push(generateUrlRule("eot", "application/vnd.ms-fontobject"));
   rules.push(generateUrlRule("svg", "image/svg+xml"));
-
 
   // #####################################################################################
   // PLUGINS
@@ -98,7 +99,7 @@ module.exports = (options = {}) => {
   // HANDLE OPTIONS
   // #####################################################################################
   if (options.plugins) {
-    plugins = plugins.concat(options.plugins)
+    plugins = plugins.concat(options.plugins);
   }
 
   // #####################################################################################
@@ -112,7 +113,7 @@ module.exports = (options = {}) => {
     },
     resolveLoader: {
       alias: {
-        "fontgen": path.join(__dirname, "./loaders/fontgen")
+        fontgen: path.join(__dirname, "./loaders/fontgen")
       }
     },
     resolve: {
@@ -123,6 +124,5 @@ module.exports = (options = {}) => {
       colors: true
     },
     plugins
-  }
-
+  };
 };

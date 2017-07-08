@@ -1,22 +1,28 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Dialog } from 'components/backend';
-import { entityStoreActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { makersAPI, requests } from 'api';
-import { Form } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import get from 'lodash/get';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Dialog } from "components/backend";
+import { entityStoreActions } from "actions";
+import { select } from "utils/entityUtils";
+import { makersAPI, requests } from "api";
+import { Form } from "components/backend";
+import { Form as FormContainer } from "containers/backend";
+import get from "lodash/get";
+import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
 
 export class MakersEditContainer extends PureComponent {
-
   static displayName = "Makers.Edit";
 
-  static mapStateToProps(state, ownProps) {
+  static propTypes = {
+    maker: PropTypes.object,
+    match: PropTypes.object,
+    history: PropTypes.object,
+    dispatch: PropTypes.func
+  };
+
+  static mapStateToProps(state, ownPropsIgnored) {
     return {
       maker: select(requests.beMaker, state.entityStore),
       updateMakers: get(state.entityStore.responses, requests.beMakerUpdate)
@@ -35,14 +41,14 @@ export class MakersEditContainer extends PureComponent {
     this.fetchMaker(this.props.match.params.id);
   }
 
-  componentWillUnmount() {
-    this.props.dispatch(flush([requests.beMakerUpdate]));
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.id !== this.props.match.params.id) {
       this.fetchMaker(nextProps.match.params.id);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(flush([requests.beMakerUpdate]));
   }
 
   fetchMaker(id) {
@@ -58,10 +64,15 @@ export class MakersEditContainer extends PureComponent {
       this.setState({
         confirmation: { resolve, reject, heading, message }
       });
-    }).then(() => {
-      this.destroyMaker(maker);
-      this.closeDialog();
-    }, () => { this.closeDialog(); });
+    }).then(
+      () => {
+        this.destroyMaker(maker);
+        this.closeDialog();
+      },
+      () => {
+        this.closeDialog();
+      }
+    );
   }
 
   destroyMaker(maker) {
@@ -73,8 +84,8 @@ export class MakersEditContainer extends PureComponent {
     });
   }
 
-  updateUsers(users, changeType) {
-    const adjustedUsers = users.map((e) => {
+  updateUsers(users, changeTypeIgnored) {
+    const adjustedUsers = users.map(e => {
       return {
         id: e.id,
         type: e.type
@@ -106,11 +117,9 @@ export class MakersEditContainer extends PureComponent {
      */
     return (
       <div>
-        {
-          this.state.confirmation ?
-            <Dialog.Confirm {...this.state.confirmation} />
-            : null
-        }
+        {this.state.confirmation
+          ? <Dialog.Confirm {...this.state.confirmation} />
+          : null}
         <header className="drawer-header">
           <h2 className="heading-quaternary">
             {`${attr.firstName} ${attr.lastName}`}
@@ -118,10 +127,12 @@ export class MakersEditContainer extends PureComponent {
           <div className="buttons-bare-vertical">
             <button
               className="button-bare-primary"
-              onClick={(event) => { this.handleMakerDestroy(event, this.props.maker); }}
+              onClick={event => {
+                this.handleMakerDestroy(event, this.props.maker);
+              }}
             >
-              {'Delete Maker'}
-              <i className="manicon manicon-trashcan"></i>
+              {"Delete Maker"}
+              <i className="manicon manicon-trashcan" />
             </button>
           </div>
         </header>
@@ -144,16 +155,14 @@ export class MakersEditContainer extends PureComponent {
               placeholder="Last Name"
             />
             <Form.Upload
-              style="square"
+              layout="square"
               accepts="images"
               label="Avatar Image"
               readFrom="attributes[avatarStyles][smallSquare]"
               name="attributes[avatar]"
               remove="attributes[removeAvatar]"
             />
-            <Form.Save
-              text="Save Maker"
-            />
+            <Form.Save text="Save Maker" />
           </FormContainer.Form>
         </section>
         <section className="form-section">
@@ -173,4 +182,3 @@ export class MakersEditContainer extends PureComponent {
 }
 
 export default connectAndFetch(MakersEditContainer);
-

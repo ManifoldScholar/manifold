@@ -1,12 +1,13 @@
-import { get } from 'lodash';
-import { camelize } from 'humps';
+/* eslint-disable no-console */
+import { get } from "lodash";
+import { camelize } from "humps";
 
-export openPopup from './popup';
+export openPopup from "./popup";
 
 export function providerSlug(provider) {
   switch (provider) {
-    case 'google':
-      return 'google_oauth2';
+    case "google":
+      return "google_oauth2";
     default:
       return provider;
   }
@@ -35,9 +36,9 @@ export function getUrl(provider) {
  * @return {Boolean}
  */
 export function isOauthEvent(event) {
-  if (get(event, 'data.type') === 'oauth') {
-    if (get(event, 'origin') !== process.env.API_URL) {
-      console.error('Origin mismatch, %s is not API', event.origin);
+  if (get(event, "data.type") === "oauth") {
+    if (get(event, "origin") !== process.env.API_URL) {
+      console.error("Origin mismatch, %s is not API", event.origin);
 
       return false;
     }

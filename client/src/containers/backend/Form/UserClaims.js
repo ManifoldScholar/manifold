@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Text } from 'components/backend';
-import { makersAPI, usersAPI } from 'api';
-import { connect } from 'react-redux';
-import { entityStoreActions } from 'actions';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/backend";
+import { makersAPI, usersAPI } from "api";
+import { connect } from "react-redux";
 
 export class FormUserClaims extends Component {
-
   static displayName = "Form.UserClaims";
 
   static propTypes = {
     entity: PropTypes.object.isRequired,
-    api: PropTypes.object.isRequired,
     label: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     onNew: PropTypes.func,
-    dispatch: PropTypes.func,
     errors: PropTypes.array
   };
 
@@ -53,7 +49,13 @@ export class FormUserClaims extends Component {
         label={this.props.label}
         labelHeader
         placeholder={this.props.placeholder}
-        onNew={this.props.onNew ? (value) => { return this.props.onNew(value); } : null}
+        onNew={
+          this.props.onNew
+            ? value => {
+                return this.props.onNew(value);
+              }
+            : null
+        }
         onChange={(entities, changeType) => {
           this.props.onChange(entities, changeType);
         }}
@@ -68,7 +70,4 @@ export class FormUserClaims extends Component {
   }
 }
 
-export default connect(
-  FormUserClaims.mapStateToProps
-)(FormUserClaims);
-
+export default connect(FormUserClaims.mapStateToProps)(FormUserClaims);

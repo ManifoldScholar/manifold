@@ -1,4 +1,4 @@
-import Detail from './Detail';
+import Detail from "./Detail";
 
 export default {
   Detail

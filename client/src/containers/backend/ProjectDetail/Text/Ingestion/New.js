@@ -1,18 +1,17 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Ingestion } from 'components/backend';
-import { ingestionsAPI, requests } from 'api';
-import { select, isLoaded } from 'utils/entityUtils';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Ingestion } from "components/backend";
+import { requests } from "api";
+import { select } from "utils/entityUtils";
+import lh from "helpers/linkHandler";
 
 export class IngestionNew extends PureComponent {
-
   static displayName = "ProjectDetail.Text.Ingestion.New";
 
   static mapStateToProps(state) {
     return {
-      ingestion: select(requests.beIngestionCreate, state.entityStore),
+      ingestion: select(requests.beIngestionCreate, state.entityStore)
     };
   }
 
@@ -20,7 +19,7 @@ export class IngestionNew extends PureComponent {
     project: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    text: PropTypes.object,
+    ingestion: PropTypes.object
   };
 
   componentWillReceiveProps(nextProps) {
@@ -31,7 +30,7 @@ export class IngestionNew extends PureComponent {
 
   redirectToIngestion(ingestionId) {
     const path = lh.link(
-      'backendProjectTextsIngestionIngest',
+      "backendProjectTextsIngestionIngest",
       this.projectId,
       ingestionId
     );
@@ -41,7 +40,6 @@ export class IngestionNew extends PureComponent {
   get projectId() {
     return this.props.project.id;
   }
-
 
   render() {
     return (

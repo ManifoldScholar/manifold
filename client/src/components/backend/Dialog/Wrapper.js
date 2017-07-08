@@ -1,12 +1,11 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
-import { withRouter } from 'react-router-dom';
-import classnames from 'classnames';
-import isString from 'lodash/isString';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { withRouter } from "react-router-dom";
+import classnames from "classnames";
+import isString from "lodash/isString";
 
 class DialogWrapper extends PureComponent {
-
   static displayName = "Dialog.Wrapper";
 
   static propTypes = {
@@ -15,13 +14,16 @@ class DialogWrapper extends PureComponent {
     showCloseButton: PropTypes.bool,
     closeOnOverlayClick: PropTypes.bool,
     maxWidth: PropTypes.number,
-    className: PropTypes.string
+    className: PropTypes.string,
+    history: PropTypes.object,
+    closeHandler: PropTypes.func,
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
   };
 
   static defaultProps = {
     showCloseButton: true,
     closeOnOverlayClick: true
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -35,11 +37,11 @@ class DialogWrapper extends PureComponent {
   }
 
   componentDidMount() {
-    window.addEventListener('keyup', this.handleEscape);
+    window.addEventListener("keyup", this.handleEscape);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keyup', this.handleEscape);
+    window.removeEventListener("keyup", this.handleEscape);
   }
 
   handleEscape(event) {
@@ -64,7 +66,7 @@ class DialogWrapper extends PureComponent {
   }
 
   closeWithCallback() {
-    this.leave(this.closeCallback);
+    this.leave(this.props.closeCallback);
   }
 
   doClose() {
@@ -73,11 +75,11 @@ class DialogWrapper extends PureComponent {
     return this.closeWithNoAction();
   }
 
-  handleOverlayClick(event) {
+  handleOverlayClick(eventIgnored) {
     if (this.props.closeOnOverlayClick) this.doClose();
   }
 
-  handleCloseClick(event) {
+  handleCloseClick(eventIgnored) {
     this.doClose();
   }
 
@@ -89,8 +91,11 @@ class DialogWrapper extends PureComponent {
 
   renderChildren() {
     if (isString(this.props.children.type)) return this.props.children;
-    if (React.Children.count(this.props.children) !== 1) return this.props.children;
-    return React.cloneElement(this.props.children, { triggerClose: this.handleCloseClick });
+    if (React.Children.count(this.props.children) !== 1)
+      return this.props.children;
+    return React.cloneElement(this.props.children, {
+      triggerClose: this.handleCloseClick
+    });
   }
 
   render() {
@@ -105,31 +110,29 @@ class DialogWrapper extends PureComponent {
         transitionAppearTimeout={1}
         transitionLeaveTimeout={200}
       >
-        {this.state.leaving ?
-          null
-          :
-          <div
-            key="dialog"
-            className="dialog-primary dialog-appear"
-          >
-            <div className="dialog-overlay" onClick={this.handleOverlayClick}></div>
-            <div
-              className={classnames('dialog-box', this.props.className)}
-              style={this.style()}
-            >
-              { this.props.showCloseButton ?
-                <div onClick={this.handleCloseClick} className="close-button-primary">
-                  <i className="manicon manicon-x"></i>
-                  <span className="screen-reader-text">
-                  Close Dialog
-                </span>
-                </div>
-                : null
-              }
-              {this.renderChildren()}
-            </div>
-          </div>
-        }
+        {this.state.leaving
+          ? null
+          : <div key="dialog" className="dialog-primary dialog-appear">
+              <div
+                className="dialog-overlay"
+                onClick={this.handleOverlayClick}
+              />
+              <div
+                className={classnames("dialog-box", this.props.className)}
+                style={this.style()}
+              >
+                {this.props.showCloseButton
+                  ? <div
+                      onClick={this.handleCloseClick}
+                      className="close-button-primary"
+                    >
+                      <i className="manicon manicon-x" />
+                      <span className="screen-reader-text">Close Dialog</span>
+                    </div>
+                  : null}
+                {this.renderChildren()}
+              </div>
+            </div>}
       </ReactCSSTransitionGroup>
     );
   }

@@ -1,11 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
-import { Dashboard } from 'components/backend';
-import { createRenderer } from 'react-test-renderer/shallow';
+import React from "react";
+import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+import { Dashboard } from "components/backend";
+import { createRenderer } from "react-test-renderer/shallow";
 
 describe("Backend.Dashboard.Activity component", () => {
-
   const valid_stats = {
     attributes: {
       newTextsCount: 5,
@@ -26,7 +25,7 @@ describe("Backend.Dashboard.Activity component", () => {
     }
   };
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
       <Dashboard.Activity statistics={valid_stats} />
     );
@@ -34,23 +33,20 @@ describe("Backend.Dashboard.Activity component", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('does not render google fields when not present', () => {
+  it("does not render google fields when not present", () => {
     const component = shallow(
       <Dashboard.Activity statistics={no_google_stats} />
     );
-    expect(component.containsMatchingElement(
-      <td>Readers this week</td>
-    )).toEqual(false);
-    expect(component.containsMatchingElement(
-      <td>Change from last week</td>
-    )).toEqual(false);
+    expect(
+      component.containsMatchingElement(<td>Readers this week</td>)
+    ).toEqual(false);
+    expect(
+      component.containsMatchingElement(<td>Change from last week</td>)
+    ).toEqual(false);
   });
 
-  it('returns null when no stats are present', () => {
-    const component = createRenderer().render(
-      <Dashboard.Activity />
-    );
+  it("returns null when no stats are present", () => {
+    const component = createRenderer().render(<Dashboard.Activity />);
     expect(component).toBe(null);
   });
 });
-

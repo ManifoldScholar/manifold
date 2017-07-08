@@ -9,7 +9,13 @@ exports[`Backend TextDetail Styles Container renders correctly 1`] = `
           <section className=\\"text-category-list-secondary\\">
             <div className=\\"instructional-copy\\">
               <p>
-                Stylesheets are applied to texts in the order listed below. &quot;Ingested&quot; stylesheets are part of the source document and are copied into Manifold (with some modification) during text ingestion. &quot;User&quot; stylesheets are those that have been created after the initial ingestion. To override styles in the source document, create a new stylesheet and move it to the bottom of the list.
+                Stylesheets are applied to texts in the order listed below.
+                              &quot;Ingested&quot; stylesheets are part of the source document and are
+                              copied into Manifold (with some modification) during text
+                              ingestion. &quot;User&quot; stylesheets are those that have been created
+                              after the initial ingestion. To override styles in the source
+                              document, create a new stylesheet and move it to the bottom of the
+                              list.
               </p>
             </div>
             <div className=\\"text-category\\">

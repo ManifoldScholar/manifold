@@ -23,6 +23,7 @@ exports[`Frontend.Layout.NoFollow component renders correctly 1`] = `
           className="demo-animation"
         >
           <img
+            alt=""
             src="/static/images/browse_no-follow-animation.gif"
           />
         </figure>

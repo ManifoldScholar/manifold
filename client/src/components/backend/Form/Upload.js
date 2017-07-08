@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Dropzone from 'react-dropzone';
-import { Form as GlobalForm } from 'components/global';
-import classnames from 'classnames';
-import isString from 'lodash/isString';
-import isObject from 'lodash/isObject';
-import get from 'lodash/get';
-import setter from './setter';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Dropzone from "react-dropzone";
+import { Form as GlobalForm } from "components/global";
+import classnames from "classnames";
+import isString from "lodash/isString";
+import isObject from "lodash/isObject";
+import get from "lodash/get";
+import setter from "./setter";
 
 class FormUpload extends Component {
-
   static displayName = "Form.Upload";
 
   static propTypes = {
@@ -17,18 +16,18 @@ class FormUpload extends Component {
     setOther: PropTypes.func, // used to set another prop, eg removed, in session
     label: PropTypes.string,
     instructions: PropTypes.string,
-    accepts: PropTypes.string,
     inlineStyle: PropTypes.object,
     name: PropTypes.string, // name of the model field: attributes[avatar]
+    layout: PropTypes.oneOf(["square", "portrait", "landscape"]),
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
-    style: PropTypes.oneOf(['square', 'portrait', 'landscape']),
+    accepts: PropTypes.string,
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array
   };
 
   static defaultProps = {
-    style: "square",
+    layout: "square",
     accepts: "any"
   };
 
@@ -50,18 +49,21 @@ class FormUpload extends Component {
       extensions: "pdf"
     },
     document: {
-      accepts: "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
-      "application/msword,text/*",
+      accepts:
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
+        "application/msword,text/*",
       extensions: "doc docx txt"
     },
     spreadsheet: {
-      accepts: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet," +
-      "application/vnd.ms-excel",
+      accepts:
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet," +
+        "application/vnd.ms-excel",
       extensions: "xls xlsx"
     },
     presentation: {
-      accepts: "application/vnd.openxmlformats-officedocument.presentationml.presentation," +
-      "application/vnd.ms-powerpoint",
+      accepts:
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation," +
+        "application/vnd.ms-powerpoint",
       extensions: "ppt pptx"
     },
     texts: {
@@ -102,7 +104,7 @@ class FormUpload extends Component {
     if (attachment) {
       const { type, name } = attachment;
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = eventIgnored => {
         set({ data: reader.result, content_type: type, filename: name });
       };
       reader.readAsDataURL(attachment);
@@ -122,15 +124,15 @@ class FormUpload extends Component {
   }
 
   isFile(object) {
-    return isObject(object) && object.hasOwnProperty('data');
+    return isObject(object) && object.hasOwnProperty("data");
   }
 
   displayState(props, state) {
     if (props.value || this.showInitialValue(props, state)) {
-      if (props.accepts === "images") return 'image-preview';
-      return 'file-preview';
+      if (props.accepts === "images") return "image-preview";
+      return "file-preview";
     }
-    return 'empty';
+    return "empty";
   }
 
   accepts(props) {
@@ -166,17 +168,16 @@ class FormUpload extends Component {
         <div
           data-id="preview"
           className="preview"
-          style={{ backgroundImage: `url(${this.previewFile(this.props, this.state)})` }}
-        >
-        </div>
+          style={{
+            backgroundImage: `url(${this.previewFile(this.props, this.state)})`
+          }}
+        />
         <div className="message">
           <p className="secondary">
-            <a data-id="remove"
-              onClick={this.handleRemove}
-              href="#"
-            >
+            <a data-id="remove" onClick={this.handleRemove} href="#">
               Remove this image
-            </a><br />
+            </a>
+            <br />
             or <span className="fake-link">Upload an image</span>
           </p>
         </div>
@@ -187,21 +188,16 @@ class FormUpload extends Component {
   renderFilePreview() {
     return (
       <div className="contents-icon-preview">
-        <div
-          className="message"
-          data-id="preview"
-        >
+        <div className="message" data-id="preview">
           <i className="manicon manicon-document" />
           <p className="primary">
             {this.previewFileName(this.props, this.state)}
           </p>
           <p className="secondary">
-            <a
-              onClick={this.handleRemove}
-              href="#"
-            >
+            <a onClick={this.handleRemove} href="#">
               Remove this file
-            </a><br />
+            </a>
+            <br />
             or <span className="fake-link">Upload a new file</span>
           </p>
         </div>
@@ -216,16 +212,16 @@ class FormUpload extends Component {
         <i className="manicon manicon-cloud-up" />
         <div className="message">
           <p className="primary">
-            {'Upload a file or'}
-            <br/>
-            {'drag and drop here'}
+            {"Upload a file or"}
+            <br />
+            {"drag and drop here"}
             <br />
           </p>
-          { extensions ?
-            <p className="secondary">
-              {extensions}
-            </p>
-            : null }
+          {extensions
+            ? <p className="secondary">
+                {extensions}
+              </p>
+            : null}
         </div>
       </div>
     );
@@ -254,17 +250,21 @@ class FormUpload extends Component {
           errors={this.props.errors}
           label={this.props.label}
         >
-        <label className={labelClass}>{this.props.label}</label>
-        {
-          isString(this.props.instructions) ?
-            <span className="instructions">{this.props.instructions}</span>
-          : null
-        }
+          <label className={labelClass}>
+            {this.props.label}
+          </label>
+          {isString(this.props.instructions)
+            ? <span className="instructions">
+                {this.props.instructions}
+              </span>
+            : null}
           <Dropzone
             style={this.props.inlineStyle}
-            className={`form-dropzone style-${this.props.style}`}
+            className={`form-dropzone style-${this.props.layout}`}
             multiple={false}
-            ref={"dropzone"}
+            ref={dropzone => {
+              this.dropzone = dropzone;
+            }}
             onDrop={this.handleFileDrop}
             {...dropzoneProps}
           >

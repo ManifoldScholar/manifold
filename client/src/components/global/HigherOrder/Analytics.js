@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import ReactGA from 'react-ga';
-import { Route } from 'react-router-dom';
-import withSettings from 'containers/global/HigherOrder/withSettings';
-import { withRouter } from 'react-router-dom';
-import get from 'lodash/get';
+import { Component } from "react";
+import PropTypes from "prop-types";
+import ReactGA from "react-ga";
+import withSettings from "containers/global/HigherOrder/withSettings";
+import { withRouter } from "react-router-dom";
+import get from "lodash/get";
 
 class Analytics extends Component {
-
   static propTypes = {
     location: PropTypes.object.isRequired,
     settings: PropTypes.object,
@@ -36,23 +34,23 @@ class Analytics extends Component {
   trackRouteUpdate(props) {
     if (__SERVER__) return;
     if (!this.state.initialized) return;
-    ReactGA.ga('send', 'pageview', props.location.pathname);
+    ReactGA.ga("send", "pageview", props.location.pathname);
     // this.logTrack(props);
   }
 
-  gaid(props) {
-    return get(this.props.settings, 'attributes.integrations.gaTrackingId');
+  gaid(propsIgnored) {
+    return get(this.props.settings, "attributes.integrations.gaTrackingId");
   }
 
-  logInit(props) {
+  logInit(propsIgnored) {
     if (process.env.NODE_ENV === "development" && __CLIENT__) {
-      console.log(`📈 Analytics: Initialized`);
+      console.log(`📈 Analytics: Initialized`); // eslint-disable-line no-console
     }
   }
 
   logTrack(props) {
     if (process.env.NODE_ENV === "development" && __CLIENT__) {
-      console.log(`📉 Analytics: page view for ${props.location.pathname}`);
+      console.log(`📉 Analytics: page view for ${props.location.pathname}`); // eslint-disable-line no-console
     }
   }
 
@@ -72,7 +70,6 @@ class Analytics extends Component {
   render() {
     return this.props.children;
   }
-
 }
 
 export default withRouter(withSettings(Analytics));

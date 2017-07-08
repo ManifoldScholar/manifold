@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { AnnotationList } from '../List';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { AnnotationList } from "../List";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Reader Annotation List Container", () => {
-
   const store = build.store();
   const annotationA = build.entity.annotation("1");
   const annotationB = build.entity.annotation("2");
@@ -24,9 +23,7 @@ describe("Reader Annotation List Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <AnnotationList
-          {...props}
-        />
+        <AnnotationList {...props} />
       </Provider>
     )
   );
@@ -40,5 +37,4 @@ describe("Reader Annotation List Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

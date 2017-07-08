@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import validatedNode from './HigherOrder/ValidatedNode';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import validatedNode from "./HigherOrder/ValidatedNode";
 
 class CodeNode extends Component {
-
   static propTypes = {
-    attributes: PropTypes.object,
-    tag: PropTypes.string,
     children: PropTypes.array
   };
 
@@ -22,7 +19,6 @@ class CodeNode extends Component {
       </code>
     );
   }
-
 }
 
 export default validatedNode(CodeNode);

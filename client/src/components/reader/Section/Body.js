@@ -1,21 +1,20 @@
-import { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Section } from 'components/reader';
-export default class Body extends Component {
+import { Component } from "react";
+import PropTypes from "prop-types";
+import { Section } from "components/reader";
 
+export default class Body extends Component {
   static propTypes = {
     section: PropTypes.object,
     annotations: PropTypes.array,
-    lockedSelection: PropTypes.object,
-    setActiveAnnotation: PropTypes.func,
-    activeAnnotation: PropTypes.string
+    lockedSelection: PropTypes.object
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextStateIgnored) {
     const same =
-      (this.props.section.attributes.bodyJson === nextProps.section.attributes.bodyJson) &&
-      (this.props.annotations === nextProps.annotations) &&
-      (this.props.lockedSelection === nextProps.lockedSelection);
+      this.props.section.attributes.bodyJson ===
+        nextProps.section.attributes.bodyJson &&
+      this.props.annotations === nextProps.annotations &&
+      this.props.lockedSelection === nextProps.lockedSelection;
     return !same;
   }
 

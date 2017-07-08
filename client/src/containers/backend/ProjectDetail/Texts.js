@@ -1,31 +1,37 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Form, Dialog } from 'components/backend';
-import { Text } from 'components/global';
-import { Link } from 'react-router-dom';
-import get from 'lodash/get';
-import { entityStoreActions } from 'actions';
-import { projectsAPI, textsAPI, textCategoriesAPI, requests } from 'api';
-import FormattedDate from 'components/global/FormattedDate';
-import lh from 'helpers/linkHandler';
-import { renderRoutes } from 'helpers/routing';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Dialog } from "components/backend";
+import { Text } from "components/global";
+import { Link } from "react-router-dom";
+import get from "lodash/get";
+import { entityStoreActions } from "actions";
+import { projectsAPI, textsAPI, textCategoriesAPI, requests } from "api";
+import FormattedDate from "components/global/FormattedDate";
+import lh from "helpers/linkHandler";
+import { renderRoutes } from "helpers/routing";
 
 const { request } = entityStoreActions;
 
 export class ProjectDetailTexts extends PureComponent {
-
   static displayName = "ProjectDetail.Texts";
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state) {
     return {
       moveTextResponse: get(state.entityStore.responses, requests.beTextUpdate),
-      moveCategoryResponse: get(state.entityStore.responses, requests.beTextCategoryUpdate)
+      moveCategoryResponse: get(
+        state.entityStore.responses,
+        requests.beTextCategoryUpdate
+      )
     };
   }
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    dispatch: PropTypes.func,
+    refresh: PropTypes.func,
+    route: PropTypes.object,
+    match: PropTypes.object
   };
 
   constructor(props) {
@@ -42,20 +48,25 @@ export class ProjectDetailTexts extends PureComponent {
   }
 
   categoryTexts(category) {
-    return this.texts().filter((text) => {
-      return text.relationships.category === category
-        && text.id !== this.publishedTextId(this.props);
+    return this.texts().filter(text => {
+      return (
+        text.relationships.category === category &&
+        text.id !== this.publishedTextId(this.props)
+      );
     });
   }
 
   uncategorizedTexts() {
-    return this.texts().filter((text) => {
-      return !text.relationships.category && text.id !== this.publishedTextId(this.props);
+    return this.texts().filter(text => {
+      return (
+        !text.relationships.category &&
+        text.id !== this.publishedTextId(this.props)
+      );
     });
   }
 
   publishedTextId(props) {
-    return get(props, 'project.relationships.publishedText.id');
+    return get(props, "project.relationships.publishedText.id");
   }
 
   isUncategorizedText(text) {
@@ -113,7 +124,7 @@ export class ProjectDetailTexts extends PureComponent {
 
   handleTextPublish(text) {
     const changes = {
-      relationships: { publishedText: { data: { id: text.id, type: "texts" } } },
+      relationships: { publishedText: { data: { id: text.id, type: "texts" } } }
     };
     const call = projectsAPI.update(this.props.project.id, changes);
     const projectRequest = request(call, requests.beProjectUpdate);
@@ -122,9 +133,9 @@ export class ProjectDetailTexts extends PureComponent {
     });
   }
 
-  handleTextUnpublish(text) {
+  handleTextUnpublish(textIgnored) {
     const changes = {
-      relationships: { publishedText: { data: null } },
+      relationships: { publishedText: { data: null } }
     };
     const call = projectsAPI.update(this.props.project.id, changes);
     const projectRequest = request(call, requests.beProjectUpdate);
@@ -136,12 +147,14 @@ export class ProjectDetailTexts extends PureComponent {
   positionInCategory(text) {
     if (this.isPublishedText(text)) return 1;
     if (text.relationships.category) {
-      const index = this.categoryTexts(text.relationships.category).findIndex((compare) => {
+      const index = this.categoryTexts(
+        text.relationships.category
+      ).findIndex(compare => {
         return compare.id === text.id;
       });
       return index + 1;
     }
-    const index = this.uncategorizedTexts().findIndex((compare) => {
+    const index = this.uncategorizedTexts().findIndex(compare => {
       return compare.id === text.id;
     });
     return index + 1;
@@ -179,7 +192,7 @@ export class ProjectDetailTexts extends PureComponent {
   }
 
   categoryIndex(category, categories) {
-    return categories.findIndex((compare) => compare.id === category.id);
+    return categories.findIndex(compare => compare.id === category.id);
   }
 
   isLastInCategory(text) {
@@ -201,15 +214,20 @@ export class ProjectDetailTexts extends PureComponent {
       return this.categories()[this.categories().length - 1];
     }
     if (this.isPublishedText(text)) return null;
-    if (this.categoryIndex(category, this.categories()) === 0) return "published";
-    return this.categories()[this.categoryIndex(category, this.categories()) - 1];
+    if (this.categoryIndex(category, this.categories()) === 0)
+      return "published";
+    return this.categories()[
+      this.categoryIndex(category, this.categories()) - 1
+    ];
   }
 
   nextCategory(text) {
     const category = text.relationships.category;
     if (this.isUncategorizedText(text)) return null;
     if (this.isPublishedText(text)) return this.categories()[0];
-    return this.categories()[this.categoryIndex(category, this.categories()) + 1];
+    return this.categories()[
+      this.categoryIndex(category, this.categories()) + 1
+    ];
   }
 
   handleTextUp(event, text) {
@@ -250,29 +268,41 @@ export class ProjectDetailTexts extends PureComponent {
 
   handleCategoryDestroy(event, category) {
     const heading = "Are you sure you want to delete this category?";
-    const message = "Any texts belonging to this category will become uncategorized.";
+    const message =
+      "Any texts belonging to this category will become uncategorized.";
     new Promise((resolve, reject) => {
       this.setState({
         confirmation: { resolve, reject, heading, message }
       });
-    }).then(() => {
-      this.destroyCategory(category);
-      this.closeDialog();
-    }, () => { this.closeDialog(); });
+    }).then(
+      () => {
+        this.destroyCategory(category);
+        this.closeDialog();
+      },
+      () => {
+        this.closeDialog();
+      }
+    );
   }
 
   handleTextDestroy(event, text) {
     const heading = "Are you sure you want to delete this text?";
-    const message = "All annotations and highlights of this text will also be deleted. " +
+    const message =
+      "All annotations and highlights of this text will also be deleted. " +
       "This action cannot be undone.";
     new Promise((resolve, reject) => {
       this.setState({
         confirmation: { resolve, reject, heading, message }
       });
-    }).then(() => {
-      this.destroyText(text);
-      this.closeDialog();
-    }, () => { this.closeDialog(); });
+    }).then(
+      () => {
+        this.destroyText(text);
+        this.closeDialog();
+      },
+      () => {
+        this.closeDialog();
+      }
+    );
   }
 
   closeDialog() {
@@ -282,13 +312,15 @@ export class ProjectDetailTexts extends PureComponent {
   renderTexts(texts) {
     let renderedTexts;
     if (texts.length === 0) {
-      renderedTexts = (<li key="0">
-        <p className="group-empty">
-          {'No texts have been added to this category'}
-        </p>
-      </li>);
+      renderedTexts = (
+        <li key="0">
+          <p className="group-empty">
+            {"No texts have been added to this category"}
+          </p>
+        </li>
+      );
     } else {
-      renderedTexts = texts.map((text) => {
+      renderedTexts = texts.map(text => {
         return (
           <li key={text.id}>
             <div>
@@ -297,7 +329,7 @@ export class ProjectDetailTexts extends PureComponent {
                 className="asset-thumb"
               >
                 <figure className="asset-image">
-                  <Text.Placeholder/>
+                  <Text.Placeholder />
                 </figure>
 
                 <div className="asset-description">
@@ -319,34 +351,37 @@ export class ProjectDetailTexts extends PureComponent {
               </Link>
 
               <div className="text-category-list-utility">
-                <Link
-                  className="button"
-                  to={lh.link("backendText", text.id)}
-                >
-                  {'Edit'}
+                <Link className="button" to={lh.link("backendText", text.id)}>
+                  {"Edit"}
                 </Link>
-                {
-                 this.canShowTextUp(text) ?
-                   <button onClick={(event) => { this.handleTextUp(event, text); }}>
-                     <i className="manicon manicon-arrow-up"></i>
-                   </button>
-                   :
-                   <button style={{ visibility: "hidden" }} >
-                     <i className="manicon manicon-arrow-up"></i>
-                   </button>
-                }
-                {
-                  this.canShowTextDown(text) ?
-                    <button onClick={(event) => { this.handleTextDown(event, text); }}>
-                      <i className="manicon manicon-arrow-down"></i>
+                {this.canShowTextUp(text)
+                  ? <button
+                      onClick={event => {
+                        this.handleTextUp(event, text);
+                      }}
+                    >
+                      <i className="manicon manicon-arrow-up" />
                     </button>
-                  :
-                    <button style={{ visibility: "hidden" }} >
-                      <i className="manicon manicon-arrow-down"></i>
+                  : <button style={{ visibility: "hidden" }}>
+                      <i className="manicon manicon-arrow-up" />
+                    </button>}
+                {this.canShowTextDown(text)
+                  ? <button
+                      onClick={event => {
+                        this.handleTextDown(event, text);
+                      }}
+                    >
+                      <i className="manicon manicon-arrow-down" />
                     </button>
-                }
-                <button onClick={(event) => { this.handleTextDestroy(event, text); }}>
-                  <i className="manicon manicon-x"></i>
+                  : <button style={{ visibility: "hidden" }}>
+                      <i className="manicon manicon-arrow-down" />
+                    </button>}
+                <button
+                  onClick={event => {
+                    this.handleTextDestroy(event, text);
+                  }}
+                >
+                  <i className="manicon manicon-x" />
                 </button>
               </div>
             </div>
@@ -363,7 +398,7 @@ export class ProjectDetailTexts extends PureComponent {
 
   renderRoutes() {
     const { refresh, project } = this.props;
-    const factory = (component) => {
+    const factory = component => {
       return (
         <Dialog.Wrapper
           closeOnOverlayClick={false}
@@ -373,23 +408,26 @@ export class ProjectDetailTexts extends PureComponent {
         </Dialog.Wrapper>
       );
     };
-    const childRoutes = renderRoutes(this.props.route.routes, { refresh, project }, factory);
+    const childRoutes = renderRoutes(
+      this.props.route.routes,
+      { refresh, project },
+      factory
+    );
     return childRoutes;
   }
 
   render() {
     const categories = this.categories();
+    /* eslint-disable no-unused-vars */
     const { match, project } = this.props;
+    /* eslint-enabe no-unused-vars */
     if (!project) return null;
 
     return (
       <section>
-
-        {
-          this.state.confirmation ?
-            <Dialog.Confirm {...this.state.confirmation} />
-          : null
-        }
+        {this.state.confirmation
+          ? <Dialog.Confirm {...this.state.confirmation} />
+          : null}
 
         {this.renderRoutes()}
 
@@ -398,14 +436,14 @@ export class ProjectDetailTexts extends PureComponent {
             to={lh.link("backendProjectTextsIngestionsNew", project.id)}
             className="button-icon-secondary"
           >
-            <i className="manicon manicon-plus"></i>Add a new text
+            <i className="manicon manicon-plus" />Add a new text
           </Link>
 
           <Link
             to={lh.link("backendProjectCategoriesNew", project.id)}
             className="button-icon-secondary"
           >
-            <i className="manicon manicon-plus"></i>Create a new category
+            <i className="manicon manicon-plus" />Create a new category
           </Link>
         </div>
 
@@ -416,7 +454,7 @@ export class ProjectDetailTexts extends PureComponent {
             </header>
             {this.renderTexts(this.publishedTexts())}
           </div>
-          {categories.map((category) => {
+          {categories.map(category => {
             return (
               <div key={category.id} className="text-category">
                 <header>
@@ -427,30 +465,42 @@ export class ProjectDetailTexts extends PureComponent {
                   <div className="text-category-list-utility">
                     <Link
                       className="button"
-                      to={lh.link("backendProjectCategory", project.id, category.id)}
-                    >{'edit'}</Link>
-                    {
-                      this.canShowCategoryUp(category) ?
-                        <button onClick={(event) => { this.handleCategoryUp(event, category); }}>
-                          <i className="manicon manicon-arrow-up"></i>
+                      to={lh.link(
+                        "backendProjectCategory",
+                        project.id,
+                        category.id
+                      )}
+                    >
+                      {"edit"}
+                    </Link>
+                    {this.canShowCategoryUp(category)
+                      ? <button
+                          onClick={event => {
+                            this.handleCategoryUp(event, category);
+                          }}
+                        >
+                          <i className="manicon manicon-arrow-up" />
                         </button>
-                      :
-                        <button style={{ visibility: "hidden" }} >
-                          <i className="manicon manicon-arrow-up"></i>
+                      : <button style={{ visibility: "hidden" }}>
+                          <i className="manicon manicon-arrow-up" />
+                        </button>}
+                    {this.canShowCategoryDown(category)
+                      ? <button
+                          onClick={event => {
+                            this.handleCategoryDown(event, category);
+                          }}
+                        >
+                          <i className="manicon manicon-arrow-down" />
                         </button>
-                    }
-                    {
-                      this.canShowCategoryDown(category) ?
-                        <button onClick={(event) => { this.handleCategoryDown(event, category); }}>
-                          <i className="manicon manicon-arrow-down"></i>
-                        </button>
-                      :
-                        <button style={{ visibility: "hidden" }} >
-                          <i className="manicon manicon-arrow-down"></i>
-                        </button>
-                    }
-                    <button onClick={(event) => { this.handleCategoryDestroy(event, category); }}>
-                      <i className="manicon manicon-x"></i>
+                      : <button style={{ visibility: "hidden" }}>
+                          <i className="manicon manicon-arrow-down" />
+                        </button>}
+                    <button
+                      onClick={event => {
+                        this.handleCategoryDestroy(event, category);
+                      }}
+                    >
+                      <i className="manicon manicon-x" />
                     </button>
                   </div>
                 </header>

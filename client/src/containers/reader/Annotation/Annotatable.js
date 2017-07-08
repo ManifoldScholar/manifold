@@ -1,22 +1,21 @@
-import React, { Children, Component } from 'react';
-import PropTypes from 'prop-types';
-import has from 'lodash/has';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Annotation from 'components/reader/Annotation';
-import { Drawer, Dialog } from 'components/backend';
-import { Resource } from 'containers/reader';
-import AnnotationContainers from 'containers/reader/Annotation';
-import { Resource as ResourceComponents } from 'components/reader';
-import { annotationsAPI, requests } from 'api';
-import { entityStoreActions, uiVisibilityActions } from 'actions';
-import isString from 'lodash/isString';
-import lh from 'helpers/linkHandler';
+import React, { Children, Component } from "react";
+import PropTypes from "prop-types";
+import has from "lodash/has";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import Annotation from "components/reader/Annotation";
+import { Drawer } from "components/backend";
+import { Resource } from "containers/reader";
+import AnnotationContainers from "containers/reader/Annotation";
+import { Resource as ResourceComponents } from "components/reader";
+import { annotationsAPI, requests } from "api";
+import { entityStoreActions, uiVisibilityActions } from "actions";
+import isString from "lodash/isString";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
 class Annotatable extends Component {
-
   static propTypes = {
     textId: PropTypes.string.isRequired,
     sectionId: PropTypes.string.isRequired,
@@ -53,22 +52,24 @@ class Annotatable extends Component {
     this.closeDrawer = this.closeDrawer.bind(this);
     this.attachResourceToSelection = this.attachResourceToSelection.bind(this);
     this.closestTextNode = this.closestTextNode.bind(this);
-    this.handlePossibleAnnotationClick = this.handlePossibleAnnotationClick.bind(this);
+    this.handlePossibleAnnotationClick = this.handlePossibleAnnotationClick.bind(
+      this
+    );
     this.createAnnotation = this.createAnnotation.bind(this);
 
     this.state = this.defaultState();
   }
 
   componentDidMount() {
-    document.addEventListener('mousedown', this.startSelection, false);
-    document.addEventListener('keydown', this.handleKeyDown, false);
+    document.addEventListener("mousedown", this.startSelection, false);
+    document.addEventListener("keydown", this.handleKeyDown, false);
   }
 
   componentWillUnmount() {
     if (this.timer) clearTimeout(this.timer);
-    document.removeEventListener('mousedown', this.startSelection, false);
-    document.removeEventListener('mouseup', this.updateSelection, false);
-    document.removeEventListener('keydown', this.handleKeyDown, false);
+    document.removeEventListener("mousedown", this.startSelection, false);
+    document.removeEventListener("mouseup", this.updateSelection, false);
+    document.removeEventListener("keydown", this.handleKeyDown, false);
   }
 
   defaultState() {
@@ -95,7 +96,8 @@ class Annotatable extends Component {
   // that we have more control over.
   updateStateSelection(nativeSelection, selectionClickEvent = null) {
     // if there is no native selection and we're not in a locked start, clear it.
-    if (!nativeSelection && !this.state.selectionLocked) return this.clearSelection();
+    if (!nativeSelection && !this.state.selectionLocked)
+      return this.clearSelection();
     // if there's no native selection, return
     if (!nativeSelection) return;
     // does the native selection start and end in our document?
@@ -114,8 +116,14 @@ class Annotatable extends Component {
   }
 
   clearSelection() {
-    const { listAnnotations, drawerContents, ...newState } = this.defaultState();
+    /* eslint-disable no-unused-vars */
+    const {
+      listAnnotations,
+      drawerContents,
+      ...newState
+    } = this.defaultState();
     this.setState(newState);
+    /* eslint-enable no-unused-vars */
   }
 
   // Maps the browser selection object to component state
@@ -137,7 +145,6 @@ class Annotatable extends Component {
 
   // Maps selection to an annotation data structure
   mapStateToAnnotation(selection, format) {
-
     const range = selection.range;
 
     // 1. Find the closest element with a data-node-uuid attribute
@@ -162,10 +169,11 @@ class Annotatable extends Component {
     if (endNode === null) {
       endNode = startNode;
       endRange.setStart(endNode, 0);
-      const endContainer = [...endNode.childNodes].find((node) => node.nodeType === 3);
+      const endContainer = [...endNode.childNodes].find(
+        node => node.nodeType === 3
+      );
       endRange.setEnd(endContainer, endNode.textContent.length);
     } else {
-
       // In the case of a locked selection, this range is wrong because the locking of the
       // selection changed the dom and invalidate the selection range.
       endRange.setStart(endNode, 0);
@@ -188,21 +196,24 @@ class Annotatable extends Component {
   closestTextNode(node) {
     if (node.nodeType === Node.TEXT_NODE) {
       const parent = node.parentElement;
-      if (has(parent.dataset, 'nodeUuid')) {
+      if (has(parent.dataset, "nodeUuid")) {
         return parent;
       }
-      const ancestorNode = this.closest(parent, '[data-node-uuid]');
+      const ancestorNode = this.closest(parent, "[data-node-uuid]");
       return ancestorNode;
     }
-    const ancestorNode = this.closest(node, '[data-node-uuid]');
+    const ancestorNode = this.closest(node, "[data-node-uuid]");
     return ancestorNode;
   }
 
   // Utility method should probably be put elsewhere.
   closest(el, selector) {
     let element = el;
-    const matchesSelector = element.matches || element.webkitMatchesSelector ||
-      element.mozMatchesSelector || element.msMatchesSelector;
+    const matchesSelector =
+      element.matches ||
+      element.webkitMatchesSelector ||
+      element.mozMatchesSelector ||
+      element.msMatchesSelector;
     while (element) {
       if (matchesSelector.call(element, selector)) {
         break;
@@ -230,20 +241,23 @@ class Annotatable extends Component {
   updateSelection(event) {
     // We can now remove the one-time event listener that was setup when selection
     // started.
-    document.removeEventListener('mouseup', this.updateSelection, false);
+    document.removeEventListener("mouseup", this.updateSelection, false);
     // Selection events still only have varied support, so we need to depend on mouse
     // events. In the case of deselection, the mouseUp event is fired before the previous
     // selection has been cleared. We need to delay grabbing the selection until the
     // default handlers for the mouseup event have fired, and and selected text has been
     // deselected.
     this.timer = setTimeout(() => {
-      this.updateStateSelection(this.validateSelection(window.getSelection()), event);
+      this.updateStateSelection(
+        this.validateSelection(window.getSelection()),
+        event
+      );
     }, 0);
   }
 
-  startSelection(event) {
+  startSelection(eventIgnored) {
     // Once we start the selection, we'll wait for the mouseup to happen.
-    document.addEventListener('mouseup', this.updateSelection, false);
+    document.addEventListener("mouseup", this.updateSelection, false);
   }
 
   clearNativeSelection() {
@@ -252,9 +266,15 @@ class Annotatable extends Component {
 
   createAnnotation(annotation, options = {}) {
     const resource = options.resource || null;
-    const call = annotationsAPI.create(this.props.sectionId, annotation, resource);
+    const call = annotationsAPI.create(
+      this.props.sectionId,
+      annotation,
+      resource
+    );
     const requestOptions = { adds: requests.rAnnotations };
-    const res = this.props.dispatch(request(call, requests.rAnnotationCreate, requestOptions));
+    const res = this.props.dispatch(
+      request(call, requests.rAnnotationCreate, requestOptions)
+    );
     res.promise.then(() => {
       if (options.closeOnSave) this.closeDrawer();
       this.updateStateSelection(null);
@@ -264,14 +284,17 @@ class Annotatable extends Component {
     return res.promise;
   }
 
-  startAnnotateSelection(event) {
+  startAnnotateSelection(eventIgnored) {
     this.setState({ drawerContents: "annotate" });
     this.lockSelection();
   }
 
   highlightSelection(event) {
     event.stopPropagation();
-    const annotation = this.mapStateToAnnotation(this.state.selection, 'highlight');
+    const annotation = this.mapStateToAnnotation(
+      this.state.selection,
+      "highlight"
+    );
     this.createAnnotation(annotation);
   }
 
@@ -283,15 +306,20 @@ class Annotatable extends Component {
   }
 
   lockSelection() {
-    const selectionLockedAnnotation =
-      this.mapStateToAnnotation(this.state.selection, 'selection');
-    this.setState({
-      selectionLocked: true,
-      selectionLockedAnnotation
-    }, () => {
-      this.clearNativeSelection();
-      this.props.lockSelection(selectionLockedAnnotation);
-    });
+    const selectionLockedAnnotation = this.mapStateToAnnotation(
+      this.state.selection,
+      "selection"
+    );
+    this.setState(
+      {
+        selectionLocked: true,
+        selectionLockedAnnotation
+      },
+      () => {
+        this.clearNativeSelection();
+        this.props.lockSelection(selectionLockedAnnotation);
+      }
+    );
   }
 
   unlockSelection() {
@@ -300,7 +328,7 @@ class Annotatable extends Component {
     });
   }
 
-  startResourceSelection(event) {
+  startResourceSelection(eventIgnored) {
     this.setState({ drawerContents: "resources" });
     this.lockSelection();
   }
@@ -310,7 +338,7 @@ class Annotatable extends Component {
     this.lockSelection();
   }
 
-  startBookmark(event) {
+  startBookmark(eventIgnored) {
     // TOD: Implement bookmarks
   }
 
@@ -318,7 +346,7 @@ class Annotatable extends Component {
     this.setState({ drawerContents: null });
     // Keyboard event doesn't hide the popup by default,
     // so manually remove the selection
-    if (event && event.type === 'keyup') {
+    if (event && event.type === "keyup") {
       this.setState({ selection: null });
     }
     this.unlockSelection();
@@ -327,7 +355,8 @@ class Annotatable extends Component {
   handlePossibleAnnotationClick(event) {
     if (!event || !event.target) return;
     const { listableAnnotationIds } = event.target.dataset;
-    if (!isString(listableAnnotationIds) || listableAnnotationIds.length < 1) return;
+    if (!isString(listableAnnotationIds) || listableAnnotationIds.length < 1)
+      return;
     const listAnnotations = listableAnnotationIds.split(",");
     const drawerContents = "annotations";
     this.setState({ drawerContents, listAnnotations });
@@ -404,8 +433,13 @@ class Annotatable extends Component {
   }
 
   renderDrawerAnnotate() {
-    const { subject, startNode, startChar, endNode, endChar } =
-      this.state.selectionLockedAnnotation;
+    const {
+      subject,
+      startNode,
+      startChar,
+      endNode,
+      endChar
+    } = this.state.selectionLockedAnnotation;
     return (
       <Annotation.Selection.Wrapper
         closeDrawer={this.closeDrawer}
@@ -433,8 +467,13 @@ class Annotatable extends Component {
   }
 
   renderDrawerShare() {
-    const { subject, startNode, startChar, endNode, endChar } =
-      this.state.selectionLockedAnnotation;
+    const {
+      subject,
+      startNode,
+      startChar,
+      endNode,
+      endChar
+    } = this.state.selectionLockedAnnotation;
     const type = this.state.shareType || null;
     return (
       <Annotation.Share.Wrapper
@@ -455,7 +494,7 @@ class Annotatable extends Component {
 
   render() {
     const showLogin = bindActionCreators(
-      () => uiVisibilityActions.visibilityToggle('signInUpOverlay'),
+      () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
       this.props.dispatch
     );
 
@@ -463,11 +502,14 @@ class Annotatable extends Component {
       <div>
         {/* Children must preceed the resource viewer, because the annotatable ref needs to
         be rendered prior to the resource viewer calculating where to put things. */}
-        <div className="annotatable"
-          ref={(a) => { this.annotatable = a; }}
+        <div
+          className="annotatable"
+          ref={a => {
+            this.annotatable = a;
+          }}
           onClick={this.handlePossibleAnnotationClick}
         >
-          { this.props.children ? Children.only(this.props.children) : null }
+          {this.props.children ? Children.only(this.props.children) : null}
         </div>
 
         {/* The drawer contains resource, annotator, comments, etc */}
@@ -478,12 +520,16 @@ class Annotatable extends Component {
         {/* Render the annotation popup interface */}
         <Annotation.Popup.Wrapper
           currentUser={this.props.currentUser}
-          shareUrl={lh.link("readerSection", this.props.textId, this.props.sectionId)}
+          shareUrl={lh.link(
+            "readerSection",
+            this.props.textId,
+            this.props.sectionId
+          )}
           highlight={this.highlightSelection}
           annotate={this.startAnnotateSelection}
           bookmark={this.startBookmark}
           attachResource={this.startResourceSelection}
-          cite={(event) => this.startShare(event, "citation")}
+          cite={event => this.startShare(event, "citation")}
           selection={this.state.selection}
           selectionClickEvent={this.state.selectionClickEvent}
           selectionLocked={this.state.selectionLocked}
@@ -494,23 +540,20 @@ class Annotatable extends Component {
         />
 
         {/* Render the margin resources */}
-        {this.props.resources ?
-          <ResourceComponents.Viewer.Wrapper
-            sectionId={this.props.sectionId}
-            textId={this.props.textId}
-            resources={this.props.resources}
-            annotations={this.props.annotations}
-            containerSize={this.props.containerSize}
-            bodySelector={this.props.bodySelector}
-          /> : null
-        }
+        {this.props.resources
+          ? <ResourceComponents.Viewer.Wrapper
+              sectionId={this.props.sectionId}
+              textId={this.props.textId}
+              resources={this.props.resources}
+              annotations={this.props.annotations}
+              containerSize={this.props.containerSize}
+              bodySelector={this.props.bodySelector}
+            />
+          : null}
       </div>
     );
   }
-
 }
 
 export { Annotatable as AnnotatableContainer }; // unconnected for testing
-export default connect(
-  Annotatable.mapStateToProps
-)(Annotatable);
+export default connect(Annotatable.mapStateToProps)(Annotatable);

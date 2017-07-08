@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link, withRouter } from 'react-router-dom';
-import classNames from 'classnames';
-import FormattedDate from 'components/global/FormattedDate';
-import { Resource } from 'components/frontend';
-import { find } from 'lodash';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import classNames from "classnames";
+import FormattedDate from "components/global/FormattedDate";
+import { Resource } from "components/frontend";
+import { find } from "lodash";
+import lh from "helpers/linkHandler";
 
 class ResourceCard extends Component {
-
   static displayName = "Resource.Card";
 
   static propTypes = {
@@ -30,29 +29,29 @@ class ResourceCard extends Component {
   }
 
   getResourceType(type) {
-    let formattedType = type.toLowerCase().charAt(0).toUpperCase() + type.slice(1);
-    if (type.toLowerCase() === 'pdf') {
-      formattedType = 'PDF';
+    let formattedType =
+      type.toLowerCase().charAt(0).toUpperCase() + type.slice(1);
+    if (type.toLowerCase() === "pdf") {
+      formattedType = "PDF";
     }
     return formattedType;
   }
 
   getPreviewText(attr) {
     const type = attr.kind;
-    const text = (attr.downloadable ?
-      this.renderDownloadablePreview(type)
+    const text = attr.downloadable
+      ? this.renderDownloadablePreview(type)
       : <span>
-          {'View'}
-          <i className="manicon manicon-arrow-right"></i>
-        </span>
-    );
+          {"View"}
+          <i className="manicon manicon-arrow-right" />
+        </span>;
     return text;
   }
 
   getCollectionResourceId(resource) {
     if (!resource) return null;
     const collectionResources = resource.relationships.collectionResources;
-    const out = find(collectionResources, (obj) => {
+    const out = find(collectionResources, obj => {
       return obj.attributes.collectionId === this.props.context.id;
     });
     if (!out) return null;
@@ -65,7 +64,12 @@ class ResourceCard extends Component {
       const pid = context.attributes.projectId;
       const cid = context.id;
       const crid = this.getCollectionResourceId(this.props.resource);
-      return lh.link("frontendProjectCollectionCollectionResource", pid, cid, crid);
+      return lh.link(
+        "frontendProjectCollectionCollectionResource",
+        pid,
+        cid,
+        crid
+      );
     }
     if (context.type === "projects") {
       const resource = this.resource();
@@ -84,8 +88,8 @@ class ResourceCard extends Component {
         action = window.open(attr.externalUrl);
         break;
       default:
-        action = attr.downloadable ?
-          window.open(attr.attachmentStyles.original)
+        action = attr.downloadable
+          ? window.open(attr.attachmentStyles.original)
           : this.handleInfoClick();
         break;
     }
@@ -136,36 +140,36 @@ class ResourceCard extends Component {
     if (!type) return null;
     let out = null;
     switch (type.toLowerCase()) {
-      case 'image':
-      case 'interactive':
+      case "image":
+      case "interactive":
         out = (
           <span>
-            {'Preview'}
-            <i className="manicon manicon-eye-outline"></i>
+            {"Preview"}
+            <i className="manicon manicon-eye-outline" />
           </span>
         );
         break;
-      case 'link':
+      case "link":
         out = (
           <span>
-            {'Visit'}
-            <i className="manicon manicon-arrow-right"></i>
+            {"Visit"}
+            <i className="manicon manicon-arrow-right" />
           </span>
         );
         break;
-      case 'video':
+      case "video":
         out = (
           <span>
-            {'Play'}
-            <i className="manicon manicon-triangle-right"></i>
+            {"Play"}
+            <i className="manicon manicon-triangle-right" />
           </span>
         );
         break;
       default:
         out = (
           <span>
-            {'Download'}
-            <i className="manicon manicon-arrow-down"></i>
+            {"Download"}
+            <i className="manicon manicon-arrow-down" />
           </span>
         );
     }
@@ -180,8 +184,8 @@ class ResourceCard extends Component {
     function commaSeparate(index) {
       if (index >= resource.attributes.tags.length - 1) return false;
       return (
-          <span>
-          {', '}
+        <span>
+          {", "}
         </span>
       );
     }
@@ -191,14 +195,15 @@ class ResourceCard extends Component {
         <ul>
           {resource.attributes.tags.map((tag, index) => {
             return (
-                <div
-                  key={index}
-                  className="tag-link"
-                  onMouseOver={this.handleTagHover}
-                  onClick={this.handleTagClick}
-                >
-                  {tag}{commaSeparate(index)}
-                </div>
+              <div
+                key={tag}
+                className="tag-link"
+                onMouseOver={this.handleTagHover}
+                onClick={this.handleTagClick}
+              >
+                {tag}
+                {commaSeparate(index)}
+              </div>
             );
           })}
         </ul>
@@ -211,26 +216,15 @@ class ResourceCard extends Component {
     if (!resource) return null;
     const attr = resource.attributes;
 
-    const linkClass = classNames({
-      thumbnail: true,
-      'bg-image': attr.attachmentStyles.smallPortrait
-    });
-
     const infoClass = classNames({
-      'resource-info': true,
+      "resource-info": true,
       hover: this.state.infoHover
     });
 
-
     return (
       <li className="resource-card">
-        <div
-          className="resource-link"
-          onClick={this.handlePreviewClick}
-        >
-          <Resource.Thumbnail
-            resource={resource}
-          />
+        <div className="resource-link" onClick={this.handlePreviewClick}>
+          <Resource.Thumbnail resource={resource} />
           <div className="preview-text">
             {this.getPreviewText(attr)}
           </div>
@@ -242,22 +236,14 @@ class ResourceCard extends Component {
           onClick={this.handleInfoClick}
         >
           <div>
-            <header
-              className="resource-title"
-            >
+            <header className="resource-title">
               <h4 dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />
             </header>
             <span className="resource-date">
-              <FormattedDate
-                format="MMMM, YYYY"
-                date={attr.createdAt}
-              />
+              <FormattedDate format="MMMM, YYYY" date={attr.createdAt} />
             </span>
-            <div
-              to={this.detailUrl()}
-              className="arrow-link"
-            >
-              <i className="manicon manicon-arrow-right"></i>
+            <div to={this.detailUrl()} className="arrow-link">
+              <i className="manicon manicon-arrow-right" />
             </div>
           </div>
 

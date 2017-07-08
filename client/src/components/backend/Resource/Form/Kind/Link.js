@@ -1,13 +1,11 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/backend";
 
 export default class ResourceFormKindLink extends PureComponent {
-
   static displayName = "Resource.Form.Kind.Link";
 
-  static propTypes = {
-  };
+  static propTypes = {};
 
   render() {
     return (
@@ -21,5 +19,4 @@ export default class ResourceFormKindLink extends PureComponent {
       </div>
     );
   }
-
 }

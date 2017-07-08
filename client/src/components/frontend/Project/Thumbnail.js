@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Project as FrontEndProject } from 'components/frontend';
-import FormattedDate from 'components/global/FormattedDate';
-import classNames from 'classnames';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { Project as FrontEndProject } from "components/frontend";
+import FormattedDate from "components/global/FormattedDate";
+import classNames from "classnames";
+import lh from "helpers/linkHandler";
 // import { Project as GlobalProject } from 'components/global';
 
-
 export default class ProjectThumbnail extends Component {
-
   static displayName = "Project.Thumbnail";
 
   static propTypes = {
@@ -42,7 +40,6 @@ export default class ProjectThumbnail extends Component {
       );
     }
     return null;
-
   }
 
   renderProjectDesc(project) {
@@ -59,7 +56,9 @@ export default class ProjectThumbnail extends Component {
     if (!creators || creators.length === 0) return null;
     return (
       <div className="makers">
-        <span>{creators.map((maker) => maker.attributes.fullName).join(", ")}</span>
+        <span>
+          {creators.map(maker => maker.attributes.fullName).join(", ")}
+        </span>
       </div>
     );
   }
@@ -82,26 +81,17 @@ export default class ProjectThumbnail extends Component {
 
   render() {
     const project = this.props.project;
-
-    let projectDesc = null;
-    if (!this.props.hideDesc) {
-      projectDesc = (
-        <p className="description">
-          {project.attributes.subtitle}
-        </p>
-      );
-    }
-
     let projectMeta = null;
     if (!this.props.hideMeta) {
       projectMeta = (
         <div className="meta">
-          <h3 className="title">{project.attributes.title}</h3>
+          <h3 className="title">
+            {project.attributes.title}
+          </h3>
           {this.renderProjectMakers(project)}
-          { project.attributes.updated ?
-            this.renderUpdatedDate(project)
-          : this.renderPublishedDate(project)
-          }
+          {project.attributes.updated
+            ? this.renderUpdatedDate(project)
+            : this.renderPublishedDate(project)}
           {this.renderProjectDesc(project)}
         </div>
       );
@@ -115,15 +105,11 @@ export default class ProjectThumbnail extends Component {
     }
 
     return (
-      <Link
-        to={lh.link("frontendProject", project.attributes.slug)}
-      >
+      <Link to={lh.link("frontendProject", project.attributes.slug)}>
         {/* Figure wrapper, controls maximum width of figure */}
         <div className={className}>
           <figure>
-            <FrontEndProject.Cover
-              project={project}
-            />
+            <FrontEndProject.Cover project={project} />
             <FrontEndProject.Follow
               project={project}
               authenticated={this.props.authenticated}

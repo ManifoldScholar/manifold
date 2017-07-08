@@ -5,4 +5,3 @@ import "brace/mode/html";
 import "./theme";
 
 export default ace;
-

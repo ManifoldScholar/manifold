@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import throttle from 'lodash/throttle';
-import { DefaultPlayer as Video } from 'react-html5video';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import throttle from "lodash/throttle";
+import { DefaultPlayer as Video } from "react-html5video";
 
 export default class ResourceListSlideFigureVideo extends Component {
   static propTypes = {
@@ -19,44 +19,47 @@ export default class ResourceListSlideFigureVideo extends Component {
       this.throttledWidth = throttle(() => {
         this._figure.style.width = this.getParentWidth(this._figure);
       }, 200);
-      window.addEventListener('resize', this.throttledWidth);
+      window.addEventListener("resize", this.throttledWidth);
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.throttledWidth);
+    window.removeEventListener("resize", this.throttledWidth);
   }
 
   getParentWidth(figure) {
     const w = figure.parentNode.offsetWidth;
-    return w + 'px';
+    return w + "px";
   }
 
   renderVideoByService(service, id) {
     let output = false;
-    if (service === 'vimeo') {
+    if (service === "vimeo") {
       output = (
-        <iframe src={`//player.vimeo.com/video/${id}`}
+        <iframe
+          src={`//player.vimeo.com/video/${id}`}
           frameBorder="0"
+          title={`vimeo-${id}`}
           allowFullScreen
-        >
-        </iframe>
+        />
       );
     }
-    if (service === 'youtube') {
+    if (service === "youtube") {
       output = (
-        <iframe id="ytplayer" type="text/html"
+        <iframe
+          id="ytplayer"
+          type="text/html"
           src={`https://www.youtube.com/embed/${id}?rel=0`}
           frameBorder="0"
+          title={`yt-${id}`}
           allowFullScreen
-        >
-        </iframe>
+        />
       );
     }
     return (
       <div
         className="figure-video"
-        ref={ (c) => {
+        ref={c => {
           this._figure = c;
         }}
       >
@@ -68,10 +71,11 @@ export default class ResourceListSlideFigureVideo extends Component {
   renderFileVideo(resource) {
     return (
       <div className="figure-video">
-        <Video
-          controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
-        >
-          <source src={resource.attributes.attachmentStyles.original} type="video/mp4" />
+        <Video controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}>
+          <source
+            src={resource.attributes.attachmentStyles.original}
+            type="video/mp4"
+          />
         </Video>
       </div>
     );

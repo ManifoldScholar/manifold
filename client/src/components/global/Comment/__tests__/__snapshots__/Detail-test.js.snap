@@ -28,7 +28,8 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
         <span>
           4 days
         </span>
-         ago
+         
+        ago
       </datetime>
     </div>
     <div

@@ -292,8 +292,8 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                                 <label>
                                   Custom
                                 </label>
-                                <Form.Setter('Form.Upload) set={[Function]} initialValue={{...}} value={{...}} style=\\"square\\" accepts=\\"images\\" actions={{...}}>
-                                  <Form.Upload setOther={[Function]} set={[Function]} initialValue={{...}} value={{...}} style=\\"square\\" accepts=\\"images\\">
+                                <Form.Setter('Form.Upload) set={[Function]} initialValue={{...}} value={{...}} layout=\\"square\\" accepts=\\"images\\" actions={{...}}>
+                                  <Form.Upload setOther={[Function]} set={[Function]} initialValue={{...}} value={{...}} layout=\\"square\\" accepts=\\"images\\">
                                     <div className=\\"form-input\\">
                                       <Errorable className=\\"form-input\\" name={[undefined]} errors={[undefined]} label={[undefined]} containerStyle={{...}}>
                                         <div style={{...}} className=\\"form-input\\">
@@ -324,8 +324,8 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </div>
                         </Project.Form.AvatarBuilder>
                       </Form.Setter('Project.Form.AvatarBuilder)>
-                      <Form.Setter('Form.Upload) style=\\"portrait\\" label=\\"Cover\\" accepts=\\"images\\" readFrom=\\"attributes[coverStyles][smallPortrait]\\" name=\\"attributes[cover]\\" remove=\\"attributes[removeCover]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.Upload style=\\"portrait\\" label=\\"Cover\\" accepts=\\"images\\" name=\\"attributes[cover]\\" remove=\\"attributes[removeCover]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                      <Form.Setter('Form.Upload) layout=\\"portrait\\" label=\\"Cover\\" accepts=\\"images\\" readFrom=\\"attributes[coverStyles][smallPortrait]\\" name=\\"attributes[cover]\\" remove=\\"attributes[removeCover]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.Upload layout=\\"portrait\\" label=\\"Cover\\" accepts=\\"images\\" name=\\"attributes[cover]\\" remove=\\"attributes[removeCover]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
                           <div className=\\"form-input\\">
                             <Errorable className=\\"form-input\\" name=\\"attributes[cover]\\" errors={{...}} label=\\"Cover\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
@@ -353,8 +353,8 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </div>
                         </Form.Upload>
                       </Form.Setter('Form.Upload)>
-                      <Form.Setter('Form.Upload) style=\\"landscape\\" accepts=\\"images\\" label=\\"Hero Image\\" readFrom=\\"attributes[heroStyles][mediumLandscape]\\" name=\\"attributes[hero]\\" remove=\\"attributes[removeHero]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.Upload style=\\"landscape\\" accepts=\\"images\\" label=\\"Hero Image\\" name=\\"attributes[hero]\\" remove=\\"attributes[removeHero]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                      <Form.Setter('Form.Upload) layout=\\"landscape\\" accepts=\\"images\\" label=\\"Hero Image\\" readFrom=\\"attributes[heroStyles][mediumLandscape]\\" name=\\"attributes[hero]\\" remove=\\"attributes[removeHero]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <Form.Upload layout=\\"landscape\\" accepts=\\"images\\" label=\\"Hero Image\\" name=\\"attributes[hero]\\" remove=\\"attributes[removeHero]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
                           <div className=\\"form-input\\">
                             <Errorable className=\\"form-input\\" name=\\"attributes[hero]\\" errors={{...}} label=\\"Hero Image\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">

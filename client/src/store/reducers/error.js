@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import { handleActions } from "redux-actions";
 
 const initialState = {
   response: null,
@@ -7,7 +7,7 @@ const initialState = {
   exists: false
 };
 
-const handleAPIError = (state, action) => {
+const handleAPIError = (state, actionIgnored) => {
   return state;
   // return {
   //   response: action.payload,
@@ -22,7 +22,10 @@ const handleClearError = () => {
   return initialState;
 };
 
-export default handleActions({
-  API_ERROR: handleAPIError,
-  CLEAR_ERROR: handleClearError
-}, initialState);
+export default handleActions(
+  {
+    API_ERROR: handleAPIError,
+    CLEAR_ERROR: handleClearError
+  },
+  initialState
+);

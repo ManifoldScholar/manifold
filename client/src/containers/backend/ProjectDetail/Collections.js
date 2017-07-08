@@ -1,21 +1,13 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import Resource from './Resource';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import Resource from "./Resource";
 
 export default class ProjectDetailCollectionsContainer extends PureComponent {
-
   static displayName = "ProjectDetail.CollectionsContainer";
 
   static propTypes = {
-    route: PropTypes.object,
-    project: PropTypes.object,
-    dispatch: PropTypes.func,
-    editSession: PropTypes.object
+    project: PropTypes.object
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const project = this.props.project;
@@ -23,11 +15,8 @@ export default class ProjectDetailCollectionsContainer extends PureComponent {
 
     return (
       <section>
-        <Resource.CollectionsList
-          project={project}
-        />
+        <Resource.CollectionsList project={project} />
       </section>
     );
   }
 }
-

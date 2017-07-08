@@ -1,23 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import { textsAPI } from 'api';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/backend";
+import { Form as FormContainer } from "containers/backend";
+import { textsAPI } from "api";
 
 export default class TextDetailGeneralContainer extends PureComponent {
-
   static displayName = "TextDetail.General";
 
   static propTypes = {
-    route: PropTypes.object,
-    text: PropTypes.object,
-    dispatch: PropTypes.func,
-    editSession: PropTypes.object
+    text: PropTypes.object
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     // See https://github.com/ReactTraining/react-router/issues/3753

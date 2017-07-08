@@ -1,9 +1,8 @@
 export default {
-
   create(textId, stylesheet) {
     return {
       endpoint: `/api/v1/texts/${textId}/relationships/stylesheets`,
-      method: 'POST',
+      method: "POST",
       options: {
         body: JSON.stringify({ type: "stylesheets", data: stylesheet })
       }
@@ -13,7 +12,7 @@ export default {
   update(id, stylesheet) {
     return {
       endpoint: `/api/v1/stylesheets/${id}`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "stylesheets", data: stylesheet })
       }
@@ -23,19 +22,16 @@ export default {
   show(id) {
     return {
       endpoint: `/api/v1/stylesheets/${id}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   },
 
   destroy(id) {
     return {
       endpoint: `/api/v1/stylesheets/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
-  },
-
-
+  }
 };

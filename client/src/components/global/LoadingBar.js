@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class LoadingBar extends Component {
-
   static propTypes = {
     loading: PropTypes.bool
   };
@@ -14,18 +13,16 @@ export default class LoadingBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.refs.loader) {
+    if (this.loader) {
       if (nextProps.loading === true) {
         if (this.props.loading === false) {
-          this.refs.loader.className = 'loading-bar loading';
+          this.loader.className = "loading-bar loading";
         }
-      } else {
-        if (this.props.loading === true) {
-          this.refs.loader.className = 'loading-bar complete';
-          this.timer = setTimeout(() => {
-            this.refs.loader.className = 'loading-bar default';
-          }, 800);
-        }
+      } else if (this.props.loading === true) {
+        this.loader.className = "loading-bar complete";
+        this.timer = setTimeout(() => {
+          this.loader.className = "loading-bar default";
+        }, 800);
       }
     }
   }
@@ -40,8 +37,13 @@ export default class LoadingBar extends Component {
   render() {
     return (
       <div>
-        <div ref="loader" className="loading-bar default">
-          <div className="progress"></div>
+        <div
+          ref={loader => {
+            this.loader = loader;
+          }}
+          className="loading-bar default"
+        >
+          <div className="progress" />
         </div>
       </div>
     );

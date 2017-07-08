@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/backend";
 
 export default class ResourceFormKindVariants extends PureComponent {
-
   static displayName = "Resource.Form.Kind.Variants";
 
   static propTypes = {
@@ -14,7 +13,7 @@ export default class ResourceFormKindVariants extends PureComponent {
     return (
       <div className="form-section">
         <Form.Upload
-          style="square"
+          layout="square"
           label="High Resolution Image"
           accepts="images"
           readfrom="attributes[highResUrl]"
@@ -23,7 +22,7 @@ export default class ResourceFormKindVariants extends PureComponent {
           {...this.props}
         />
         <Form.Upload
-          style="square"
+          layout="square"
           label="Thumbnail Image"
           accepts="images"
           readFrom="attributes[variantThumbnailStyles][smallSquare]"
@@ -39,7 +38,7 @@ export default class ResourceFormKindVariants extends PureComponent {
     return (
       <div className="form-section">
         <Form.Upload
-          style="square"
+          layout="square"
           label="Thumbnail Image"
           accepts="images"
           readFrom="attributes[variantThumbnailStyles][smallSquare]"
@@ -55,7 +54,7 @@ export default class ResourceFormKindVariants extends PureComponent {
     return (
       <div className="form-section">
         <Form.Upload
-          style="square"
+          layout="square"
           label="Variant"
           accepts={this.props.kind}
           readFrom="attributes[variantFormatOneFileName]"
@@ -64,7 +63,7 @@ export default class ResourceFormKindVariants extends PureComponent {
           {...this.props}
         />
         <Form.Upload
-          style="square"
+          layout="square"
           label="Variant"
           accepts={this.props.kind}
           readFrom="attributes[variantFormatTwoFileName]"
@@ -72,10 +71,9 @@ export default class ResourceFormKindVariants extends PureComponent {
           remove="attributes[removeVariantFormatTwo]"
           {...this.props}
         />
-        {
-          this.props.kind === "video" ?
-            <Form.Upload
-              style="square"
+        {this.props.kind === "video"
+          ? <Form.Upload
+              layout="square"
               label="Thumbnail Image"
               accepts="images"
               readFrom="attributes[variantThumbnailStyles][smallSquare]"
@@ -83,8 +81,7 @@ export default class ResourceFormKindVariants extends PureComponent {
               remove="attributes[removeVariantThumbnail]"
               {...this.props}
             />
-            : null
-        }
+          : null}
       </div>
     );
   }
@@ -94,6 +91,4 @@ export default class ResourceFormKindVariants extends PureComponent {
     if (this.props.kind === "pdf") return this.renderPdfFields();
     return this.renderVariantFields();
   }
-
 }
-

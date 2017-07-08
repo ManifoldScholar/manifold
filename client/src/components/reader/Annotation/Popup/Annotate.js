@@ -1,18 +1,17 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import HigherOrder from 'containers/global/HigherOrder';
-import Button from './Button';
-import Panel from './Panel';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import HigherOrder from "containers/global/HigherOrder";
+import Button from "./Button";
+import Panel from "./Panel";
 
 class AnnotationPopupAnnotate extends PureComponent {
-
   static displayName = "Annotation.Popup.Annotate";
 
   static propTypes = {
     attachResource: PropTypes.func.isRequired,
     highlight: PropTypes.func.isRequired,
     annotate: PropTypes.func.isRequired,
-    bookmark: PropTypes.func.isRequired,
+    // bookmark: PropTypes.func.isRequired,
     showShare: PropTypes.func.isRequired,
     secondary: PropTypes.string,
     direction: PropTypes.string,

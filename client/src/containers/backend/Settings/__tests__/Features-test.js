@@ -1,17 +1,16 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { SettingsFeaturesContainer }from '../Features';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { SettingsFeaturesContainer } from "../Features";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend Settings Features Container", () => {
-
   const store = build.store();
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <SettingsFeaturesContainer />
       </Provider>
     )
@@ -26,5 +25,4 @@ describe("Backend Settings Features Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

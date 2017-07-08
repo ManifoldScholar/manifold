@@ -1,21 +1,18 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import ResourceDetailMetadataContainer from '../Metadata';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import ResourceDetailMetadataContainer from "../Metadata";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend ResourceDetail Metadata Container", () => {
-
   const store = build.store();
   const resource = build.entity.resource("1");
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
-        <ResourceDetailMetadataContainer
-          resource={resource}
-        />
+      <Provider store={store}>
+        <ResourceDetailMetadataContainer resource={resource} />
       </Provider>
     )
   );
@@ -29,5 +26,4 @@ describe("Backend ResourceDetail Metadata Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

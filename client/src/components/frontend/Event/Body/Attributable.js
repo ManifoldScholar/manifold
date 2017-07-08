@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import FormattedDate from 'components/global/FormattedDate';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import FormattedDate from "components/global/FormattedDate";
 
 export default class EventBodyAttributable extends Component {
-
   static displayName = "Event.Body.Attributable";
 
   static propTypes = {
     event: PropTypes.object,
-    icon: PropTypes.string,
+    icon: PropTypes.string
   };
 
   constructor(props) {
@@ -17,9 +16,11 @@ export default class EventBodyAttributable extends Component {
   }
 
   componentDidMount() {
-    import(/* webpackChunkName: "autolinker" */ 'autolinker').then((autolinker) => {
-      this.setState({ autolinker });
-    });
+    import(/* webpackChunkName: "autolinker" */ "autolinker").then(
+      autolinker => {
+        this.setState({ autolinker });
+      }
+    );
   }
 
   autoLink(excerpt) {
@@ -35,26 +36,23 @@ export default class EventBodyAttributable extends Component {
 
   render() {
     const attr = this.props.event.attributes;
-    const iconClass = 'manicon manicon-' + this.props.icon;
+    const iconClass = "manicon manicon-" + this.props.icon;
 
     return (
       <div className="event-data">
         {/* Event-data requires a classless empty div for vertical alignment */}
         <div>
-          <i className={iconClass}></i>
+          <i className={iconClass} />
           <div className="event-user">
             <a href={`https://twitter.com/${attr.attributionIdentifier}`}>
-              {'@' + attr.attributionIdentifier}
+              {"@" + attr.attributionIdentifier}
             </a>
           </div>
           <div className="event-content">
             <p dangerouslySetInnerHTML={this.autoLink(attr.excerpt)} />
           </div>
           <datetime className="event-date">
-            <FormattedDate
-              format="MMMM Do, YYYY"
-              date={attr.createdAt}
-            />
+            <FormattedDate format="MMMM Do, YYYY" date={attr.createdAt} />
           </datetime>
         </div>
       </div>

@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Text } from 'components/backend';
-import { makersAPI, requests } from 'api';
-import { connect } from 'react-redux';
-import { entityStoreActions } from 'actions';
-import get from 'lodash/get';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/backend";
+import { makersAPI } from "api";
+import { connect } from "react-redux";
+import { entityStoreActions } from "actions";
+import get from "lodash/get";
 
 const { request, flush } = entityStoreActions;
 
 export class FormCollaborators extends Component {
-
   static displayName = "Form.Collaborators";
 
   static mapStateToProps(state) {
     return {
-      updateCreators: get(state.entityStore.responses, 'update-creators'),
-      updateContributors: get(state.entityStore.responses, 'update-contributors'),
-      createCreator: get(state.entityStore.responses, 'create-creator'),
-      createContributor: get(state.entityStore.responses, 'create-contributor')
+      updateCreators: get(state.entityStore.responses, "update-creators"),
+      updateContributors: get(
+        state.entityStore.responses,
+        "update-contributors"
+      ),
+      createCreator: get(state.entityStore.responses, "create-creator"),
+      createContributor: get(state.entityStore.responses, "create-contributor")
     };
   }
 
@@ -34,13 +36,18 @@ export class FormCollaborators extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(flush([
-      'update-creators', 'update-contributors', 'create-creator', 'create-contributor'
-    ]));
+    this.props.dispatch(
+      flush([
+        "update-creators",
+        "update-contributors",
+        "create-creator",
+        "create-contributor"
+      ])
+    );
   }
 
   updateMakers(makers, changeType, key) {
-    const adjustedMakers = makers.map((e) => {
+    const adjustedMakers = makers.map(e => {
       return {
         id: e.id,
         type: e.type
@@ -57,7 +64,7 @@ export class FormCollaborators extends Component {
   }
 
   newMaker(value, key) {
-    const parts = value.split(' ');
+    const parts = value.split(" ");
     const maker = {
       type: "makers",
       attributes: {
@@ -80,7 +87,9 @@ export class FormCollaborators extends Component {
           <Form.HasMany
             label="Authors"
             placeholder="Add an Author"
-            onNew={(value) => { return this.newMaker(value, "creator"); }}
+            onNew={value => {
+              return this.newMaker(value, "creator");
+            }}
             onChange={(makers, changeType) => {
               this.updateMakers(makers, changeType, "creators");
             }}
@@ -89,13 +98,15 @@ export class FormCollaborators extends Component {
             entityBuilder={this.buildEntity}
             entityLabelAttribute="fullName"
             entityAvatarAttribute="avatarStyles"
-            errors={get(this.props, 'createCreator.errors')}
+            errors={get(this.props, "createCreator.errors")}
             orderable
           />
           <Form.HasMany
             label="Contributors"
             placeholder="Add a Contributor"
-            onNew={(value) => { return this.newMaker(value, "contributor"); }}
+            onNew={value => {
+              return this.newMaker(value, "contributor");
+            }}
             onChange={(makers, changeType) => {
               this.updateMakers(makers, changeType, "contributors");
             }}
@@ -104,7 +115,7 @@ export class FormCollaborators extends Component {
             entityBuilder={this.buildEntity}
             entityLabelAttribute="fullName"
             entityAvatarAttribute="avatarStyles"
-            errors={get(this.props, 'createContributor.errors')}
+            errors={get(this.props, "createContributor.errors")}
             orderable
           />
         </form>
@@ -113,7 +124,4 @@ export class FormCollaborators extends Component {
   }
 }
 
-export default connect(
-  FormCollaborators.mapStateToProps
-)(FormCollaborators);
-
+export default connect(FormCollaborators.mapStateToProps)(FormCollaborators);

@@ -1,9 +1,9 @@
-import get from 'lodash/get';
-import isObject from 'lodash/isObject';
-import isString from 'lodash/isString';
-import has from 'lodash/has';
-import setWith from 'lodash/setWith';
-import memoize from 'lodash/memoize';
+import get from "lodash/get";
+import isObject from "lodash/isObject";
+import isString from "lodash/isString";
+import has from "lodash/has";
+import setWith from "lodash/setWith";
+import memoize from "lodash/memoize";
 
 function hydrateEntity({ id, type }, entities, hydrationMap = {}) {
   const entityPath = `${type}.${id}`;
@@ -33,56 +33,64 @@ function hydrateEntity({ id, type }, entities, hydrationMap = {}) {
 
 function hydrateRelationships(entity, entities, hydrationMap) {
   const relationships = {};
-  if (has(entity, 'relationships')) {
-    Object.keys(entity.relationships).forEach((key) => {
+  if (has(entity, "relationships")) {
+    Object.keys(entity.relationships).forEach(key => {
       const relatedEntities = entity.relationships[key].data;
       if (!relatedEntities) {
         relationships[key] = null;
+      } else if (Array.isArray(relatedEntities)) {
+        relationships[key] = relatedEntities.map(entityLookup => {
+          return hydrateEntity(entityLookup, entities, hydrationMap);
+        });
       } else {
-        if (Array.isArray(relatedEntities)) {
-          relationships[key] = relatedEntities.map((entityLookup) => {
-            return hydrateEntity(entityLookup, entities, hydrationMap);
-          });
-        } else {
-          relationships[key] = hydrateEntity(relatedEntities, entities, hydrationMap);
-        }
+        relationships[key] = hydrateEntity(
+          relatedEntities,
+          entities,
+          hydrationMap
+        );
       }
     });
   }
   return relationships;
 }
 
-const selectCollection = memoize((response, entities) => {
-  if (!Array.isArray(response.collection)) return [];
-  return response.collection.map((entity) => {
-    return hydrateEntity(entity, entities);
-  });
-}, (response, entities) => {
-  // for collections, if the response object has changed in any way, then we will go ahead
-  // and rehydrate the collection. See comment below for why this is more complicated for
-  // single models, which we can cache longer.
-  return response;
-});
+const selectCollection = memoize(
+  (response, entities) => {
+    if (!Array.isArray(response.collection)) return [];
+    return response.collection.map(entity => {
+      return hydrateEntity(entity, entities);
+    });
+  },
+  (response, entitiesIgnored) => {
+    // for collections, if the response object has changed in any way, then we will go ahead
+    // and rehydrate the collection. See comment below for why this is more complicated for
+    // single models, which we can cache longer.
+    return response;
+  }
+);
 
-const selectEntity = memoize((response, entities) => {
-  if (!has(response.entity, 'id')) return null;
-  if (!has(response.entity, 'type')) return null;
-  return hydrateEntity(response.entity, entities);
-}, (response, entities) => {
-  // Let's discuss what's happening here. This second function is LoDash's resolver
-  // function for memoize. The resolver function returns a value, which is used to
-  // determine whether to refresh the memoized value. If the resolver returns a new value
-  // since the last time it was called, it will reselect the entity from the store. We
-  // don't want to go selecting a new entity every single time the entity store changes,
-  // which is why we memoize above. However, if the base entity hasn't changed, we don't
-  // want to re-select its associations, etc, which is why check if the main entity
-  // is unchanged in the resolver.
-  if (!has(response.entity, 'id')) return response;
-  if (!has(response.entity, 'type')) return response;
-  const entityPath = `${response.entity.type}.${response.entity.id}`;
-  const entity = get(entities, entityPath);
-  return entity;
-});
+const selectEntity = memoize(
+  (response, entities) => {
+    if (!has(response.entity, "id")) return null;
+    if (!has(response.entity, "type")) return null;
+    return hydrateEntity(response.entity, entities);
+  },
+  (response, entities) => {
+    // Let's discuss what's happening here. This second function is LoDash's resolver
+    // function for memoize. The resolver function returns a value, which is used to
+    // determine whether to refresh the memoized value. If the resolver returns a new value
+    // since the last time it was called, it will reselect the entity from the store. We
+    // don't want to go selecting a new entity every single time the entity store changes,
+    // which is why we memoize above. However, if the base entity hasn't changed, we don't
+    // want to re-select its associations, etc, which is why check if the main entity
+    // is unchanged in the resolver.
+    if (!has(response.entity, "id")) return response;
+    if (!has(response.entity, "type")) return response;
+    const entityPath = `${response.entity.type}.${response.entity.id}`;
+    const entity = get(entities, entityPath);
+    return entity;
+  }
+);
 
 // TODO: Refactor this to isRequestLoaded and remove duplicate at line 113 below.
 export function isLoaded(request, state) {
@@ -94,7 +102,7 @@ export function isEntityLoaded(type, id, state) {
   const path = `entityStore.entities.${type}.${id}`;
   const entity = get(state, path);
   if (!isObject(entity)) return false;
-  if (get(entity, 'meta.partial') === true) return false;
+  if (get(entity, "meta.partial") === true) return false;
   return true;
 }
 
@@ -111,7 +119,7 @@ export function grab(type, id, entityStore) {
   const entityPath = `${type}.${id}`;
   const source = get(entityStore.entities, entityPath);
   if (!source) return null;
-  if (get(source, 'meta.partial') === true) return null;
+  if (get(source, "meta.partial") === true) return null;
   return selectEntity({ entity: { type, id } }, entityStore.entities);
 }
 
@@ -128,7 +136,7 @@ export function meta(requestMeta, entityStore) {
 }
 
 export function constantizeMeta(metaKey) {
-  return `${metaKey.toUpperCase().replace(/-/g, '_')}`;
+  return `${metaKey.toUpperCase().replace(/-/g, "_")}`;
 }
 
 export const entityTypeMap = {
@@ -139,7 +147,8 @@ export const entityTypeMap = {
 export function singularEntityName(entity) {
   if (!entity) return null;
   if (!entity.type) return null;
-  if (isString(entity.type) && entityTypeMap[entity.type]) return entityTypeMap[entity.type];
+  if (isString(entity.type) && entityTypeMap[entity.type])
+    return entityTypeMap[entity.type];
   return entity.type;
 }
 

@@ -1,9 +1,8 @@
 export default {
-
   create(projectId, ingestion) {
     return {
       endpoint: `/api/v1/projects/${projectId}/relationships/ingestions`,
-      method: 'POST',
+      method: "POST",
       options: {
         body: JSON.stringify({ type: "ingestions", data: ingestion })
       }
@@ -13,7 +12,7 @@ export default {
   update(id, ingestion) {
     return {
       endpoint: `/api/v1/ingestions/${id}`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "ingestions", data: ingestion })
       }
@@ -23,10 +22,8 @@ export default {
   show(id) {
     return {
       endpoint: `/api/v1/ingestions/${id}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
-  },
-
+  }
 };

@@ -1,4 +1,4 @@
-import Ingestion from './Ingestion';
+import Ingestion from "./Ingestion";
 
 export default {
   Ingestion

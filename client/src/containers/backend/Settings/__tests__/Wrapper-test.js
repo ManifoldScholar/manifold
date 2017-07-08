@@ -1,17 +1,16 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { SettingsWrapperContainer } from '../Wrapper';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { SettingsWrapperContainer } from "../Wrapper";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend Settings Wrapper Container", () => {
-
   const store = build.store();
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <SettingsWrapperContainer
           route={{
             routes: []
@@ -30,5 +29,4 @@ describe("Backend Settings Wrapper Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

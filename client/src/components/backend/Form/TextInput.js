@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
-import setter from './setter';
-import { Form as GlobalForm } from 'components/global';
-import classnames from 'classnames';
-import isString from 'lodash/isString';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import setter from "./setter";
+import { Form as GlobalForm } from "components/global";
+import classnames from "classnames";
+import isString from "lodash/isString";
 
 class FormTextInput extends Component {
-
   static displayName = "Form.TextInput";
 
   static propTypes = {
@@ -27,12 +25,9 @@ class FormTextInput extends Component {
     password: false
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
-    if (this.props.focusOnMount === true && this.inputElement) this.inputElement.focus();
+    if (this.props.focusOnMount === true && this.inputElement)
+      this.inputElement.focus();
   }
 
   render() {
@@ -48,19 +43,23 @@ class FormTextInput extends Component {
         errors={this.props.errors}
         label={this.props.label}
       >
-        <label className={labelClass}>{this.props.label}</label>
-        {
-          isString(this.props.instructions) ?
-            <span className="instructions">{this.props.instructions}</span>
-            : null
-        }
-          <input
-            ref={(input) => { this.inputElement = input; }}
-            type={inputType}
-            placeholder={this.props.placeholder}
-            onChange={this.props.onChange}
-            value={this.props.value || ""}
-          />
+        <label className={labelClass}>
+          {this.props.label}
+        </label>
+        {isString(this.props.instructions)
+          ? <span className="instructions">
+              {this.props.instructions}
+            </span>
+          : null}
+        <input
+          ref={input => {
+            this.inputElement = input;
+          }}
+          type={inputType}
+          placeholder={this.props.placeholder}
+          onChange={this.props.onChange}
+          value={this.props.value || ""}
+        />
       </GlobalForm.Errorable>
     );
   }

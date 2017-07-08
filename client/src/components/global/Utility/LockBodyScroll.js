@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { HigherOrder } from 'components/global';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { HigherOrder } from "components/global";
 
 export default class LockBodyScroll extends PureComponent {
-
   static displayName = "Utility.LockBodyScroll";
 
   static propTypes = {
@@ -12,7 +11,7 @@ export default class LockBodyScroll extends PureComponent {
   };
 
   static defaultProps = {
-    lockClass: 'no-scroll'
+    lockClass: "no-scroll"
   };
 
   constructor(props) {
@@ -41,5 +40,4 @@ export default class LockBodyScroll extends PureComponent {
       </div>
     );
   }
-
 }

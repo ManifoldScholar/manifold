@@ -1,37 +1,35 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Utility, ResourceCollection } from 'components/frontend';
-import { HigherOrder } from 'components/global';
-import { entityStoreActions } from 'actions';
-import { select, grab, meta, loaded, isEntityLoaded } from 'utils/entityUtils';
-import { projectsAPI, collectionsAPI, requests } from 'api';
-import queryString from 'query-string';
-import debounce from 'lodash/debounce';
-import omitBy from 'lodash/omitBy';
-import isNull from 'lodash/isNull';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Utility, ResourceCollection } from "components/frontend";
+import { entityStoreActions } from "actions";
+import { select, grab, meta, loaded, isEntityLoaded } from "utils/entityUtils";
+import { projectsAPI, collectionsAPI, requests } from "api";
+import queryString from "query-string";
+import debounce from "lodash/debounce";
+import omitBy from "lodash/omitBy";
+import isNull from "lodash/isNull";
+import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 
 class CollectionDetailContainer extends PureComponent {
-
   static fetchData(getState, dispatch, location, match) {
     const state = getState();
     const filter = queryString.parse(location.search);
     const promises = [];
 
     // Load project, unless it is already loaded
-    if (!isEntityLoaded('projects', match.params.id, state)) {
+    if (!isEntityLoaded("projects", match.params.id, state)) {
       const p = projectsAPI.show(match.params.id);
       const { promise } = dispatch(request(p, requests.tmpProject));
       promises.push(promise);
     }
 
     // Load the collection, unless it is already loaded
-    if (!isEntityLoaded('collections', match.params.collectionId, state)) {
+    if (!isEntityLoaded("collections", match.params.collectionId, state)) {
       const c = collectionsAPI.show(match.params.collectionId);
       const { promise } = dispatch(request(c, requests.feCollection));
       promises.push(promise);
@@ -41,7 +39,9 @@ class CollectionDetailContainer extends PureComponent {
     if (!loaded(requests.feCollectionResources, state.entityStore)) {
       const pp = match.params.page ? match.params.page : page;
       const cr = collectionsAPI.collectionResources(
-        match.params.collectionId, filter, { number: pp, size: perPage }
+        match.params.collectionId,
+        filter,
+        { number: pp, size: perPage }
       );
       const lookups = [requests.feSlideshow, requests.feCollectionResources];
       const { promise } = dispatch(request(cr, lookups));
@@ -53,8 +53,12 @@ class CollectionDetailContainer extends PureComponent {
 
   static mapStateToProps(state, ownProps) {
     const props = {
-      project: grab('projects', ownProps.match.params.id, state.entityStore),
-      collection: grab('collections', ownProps.match.params.collectionId, state.entityStore),
+      project: grab("projects", ownProps.match.params.id, state.entityStore),
+      collection: grab(
+        "collections",
+        ownProps.match.params.collectionId,
+        state.entityStore
+      ),
       resources: select(requests.feCollectionResources, state.entityStore),
       resourcesMeta: meta(requests.feCollectionResources, state.entityStore),
       slideshowResources: select(requests.feSlideshow, state.entityStore),
@@ -71,12 +75,15 @@ class CollectionDetailContainer extends PureComponent {
     project: PropTypes.object,
     collection: PropTypes.object,
     resources: PropTypes.array,
-    resourcesMeta: PropTypes.object
+    resourcesMeta: PropTypes.object,
+    history: PropTypes.object
   };
 
   constructor(props) {
     super(props);
-    this.state = this.initialState(queryString.parse(this.props.location.search));
+    this.state = this.initialState(
+      queryString.parse(this.props.location.search)
+    );
     this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.filterChange = this.filterChange.bind(this);
@@ -89,10 +96,10 @@ class CollectionDetailContainer extends PureComponent {
   }
 
   initialState(init) {
-    const filters = init ? init : {};
-    return ({
+    const filters = init || {};
+    return {
       filter: filters
-    });
+    };
   }
 
   flushStoreRequests() {
@@ -114,7 +121,7 @@ class CollectionDetailContainer extends PureComponent {
   }
 
   pageChangeHandlerCreator(pageParam) {
-    return (event) => {
+    return event => {
       this.handlePageChange(event, pageParam);
     };
   }
@@ -149,10 +156,14 @@ class CollectionDetailContainer extends PureComponent {
     const collection = this.props.collection;
 
     const filter = this.state.filter;
-    const initialFilter = filter ? filter : null;
+    const initialFilter = filter || null;
 
     if (!project || !collection) return null;
-    const collectionUrl = lh.link("frontendProjectCollection", project.id, collection.id);
+    const collectionUrl = lh.link(
+      "frontendProjectCollection",
+      project.id,
+      collection.id
+    );
 
     return (
       <div>
@@ -160,21 +171,21 @@ class CollectionDetailContainer extends PureComponent {
           link={lh.link("frontendProject", project.id)}
           title={project.attributes.title}
         />
-        { this.props.slideshowResources && this.props.resources ?
-          <ResourceCollection.Detail
-            dispatch={this.props.dispatch}
-            project={this.props.project}
-            slideshowResources={this.props.slideshowResources}
-            slideshowPagination={this.props.slideshowResourcesMeta.pagination}
-            collectionResources={this.props.resources}
-            collectionPagination={this.props.resourcesMeta.pagination}
-            collectionPaginationHandler={this.pageChangeHandlerCreator}
-            collection={this.props.collection}
-            collectionUrl={collectionUrl}
-            filterChange={this.filterChange}
-            initialFilterState={initialFilter}
-          />
-        : null }
+        {this.props.slideshowResources && this.props.resources
+          ? <ResourceCollection.Detail
+              dispatch={this.props.dispatch}
+              project={this.props.project}
+              slideshowResources={this.props.slideshowResources}
+              slideshowPagination={this.props.slideshowResourcesMeta.pagination}
+              collectionResources={this.props.resources}
+              collectionPagination={this.props.resourcesMeta.pagination}
+              collectionPaginationHandler={this.pageChangeHandlerCreator}
+              collection={this.props.collection}
+              collectionUrl={collectionUrl}
+              filterChange={this.filterChange}
+              initialFilterState={initialFilter}
+            />
+          : null}
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
             link={lh.link("frontendProject", project.id)}

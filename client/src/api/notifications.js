@@ -1,8 +1,8 @@
-import { possessivize } from 'utils/string';
-import r from './requests';
+import { possessivize } from "utils/string";
+import r from "./requests";
 
 export default {
-  [r.beProjectDestroy]: (payload) => {
+  [r.beProjectDestroy]: payloadIgnored => {
     return {
       level: 0,
       heading: "The project has been deleted.",
@@ -10,72 +10,80 @@ export default {
       expiration: 5000
     };
   },
-  [r.beUserUpdate]: (payload) => {
+  [r.beUserUpdate]: payload => {
     return {
       level: 0,
       heading: "Success!",
-      body: `${possessivize(payload.data.attributes.fullName)} account has been updated`,
+      body: `${possessivize(
+        payload.data.attributes.fullName
+      )} account has been updated`,
       expiration: 5000
     };
   },
-  [r.gPasswordReset]: (payload) => {
+  [r.gPasswordReset]: payloadIgnored => {
     return {
       level: 0,
       heading: "Success",
       body: "Your password has been reset."
     };
   },
-  [r.beMakerUpdate]: (payload) => {
+  [r.beMakerUpdate]: payload => {
     return {
       level: 0,
       heading: "Success",
-      body: `${payload.data.attributes.fullName} has been updated`,
+      body: `${payload.data.attributes.fullName} has been updated`
     };
   },
-  [r.beMakerCreate]: (payload) => {
+  [r.beMakerCreate]: payload => {
     return {
       level: 0,
       heading: "New maker record created",
-      body: `${possessivize(payload.data.attributes.fullName)} can now be added to 
+      body: `${possessivize(
+        payload.data.attributes.fullName
+      )} can now be added to 
               projects, texts, and users in the backend.`
     };
   },
-  'editor-backend-settings': (payload) => {
+  "editor-backend-settings": payloadIgnored => {
     return {
       level: 0,
-      id: 'SETTINGS_UPDATED',
+      id: "SETTINGS_UPDATED",
       heading: "Manifold settings updated",
       body: "Your Manifold settings changes have been applied."
     };
   },
-  'update-creators': (payload) => {
+  "update-creators": payloadIgnored => {
     return {
       level: 0,
       heading: "Project authors has been updated",
       expiration: 5000
     };
   },
-  'create-creators': (payload) => {
+  "create-creators": payload => {
     return {
       level: 0,
       heading: "New maker record created",
-      body: `${possessivize(payload.data.attributes.fullName)} can now be added to 
+      body: `${possessivize(
+        payload.data.attributes.fullName
+      )} can now be added to 
              projects, texts, and users in the backend.`,
       expiration: 5000
     };
   },
-  'update-contributors': (payload) => {
+  "update-contributors": payloadIgnored => {
     return {
       level: 0,
       heading: "Project contributors have been updated",
       expiration: 5000
     };
   },
-  'create-contributors': (payload) => {
+  "create-contributors": payload => {
     return {
       level: 0,
       heading: "New maker record created",
-      body: `${possessivize(payload.data.attributes.fullName)} can now be added to 
+      body: `${possessivize(
+        payload.data.attributes.fullName
+      )} can now be added to 
              projects, texts, and users in the backend.`,
       expiration: 5000
     };
@@ -104,11 +112,13 @@ export default {
       expiration: 5000
     };
   },
-  "editor-backend-edit-user": (payload) => {
+  "editor-backend-edit-user": payload => {
     return {
       level: 0,
       heading: "Success!",
-      body: `${possessivize(payload.data.attributes.fullName)} account has been updated`,
+      body: `${possessivize(
+        payload.data.attributes.fullName
+      )} account has been updated`,
       expiration: 5000
     };
   },
@@ -120,42 +130,42 @@ export default {
       expiration: 5000
     };
   },
-  "editor-backend-project-update": (payload) => {
+  "editor-backend-project-update": payload => {
     return {
       level: 0,
       heading: "Success",
-      body: `${payload.data.attributes.title} has been updated`,
+      body: `${payload.data.attributes.title} has been updated`
     };
   },
-  "editor-backend-category-update": (payload) => {
+  "editor-backend-category-update": payload => {
     return {
       level: 0,
       heading: "Success",
-      body: `${payload.data.attributes.title} has been saved`,
+      body: `${payload.data.attributes.title} has been saved`
     };
   },
-  "editor-backend-resource-create": (payload) => {
+  "editor-backend-resource-create": payloadIgnored => {
     return {
       level: 0,
       heading: "Your resource has been created.",
-      body: "A new manifold resource is born.",
+      body: "A new manifold resource is born."
     };
   },
-  "editor-backend-maker-update": (payload) => {
+  "editor-backend-maker-update": payload => {
     return {
       level: 0,
       heading: "Success",
-      body: `${payload.data.attributes.fullName} has been updated`,
+      body: `${payload.data.attributes.fullName} has been updated`
     };
   },
-  "editor-backend-resource-update": (payload) => {
+  "editor-backend-resource-update": payload => {
     return {
       level: 0,
       heading: "Success",
-      body: `${payload.data.attributes.title} has been updated`,
+      body: `${payload.data.attributes.title} has been updated`
     };
   },
-  [r.beCollectionCreate]: (payload) => {
+  [r.beCollectionCreate]: payloadIgnored => {
     return {
       level: 0,
       heading: "Your collection has been created.",
@@ -163,7 +173,7 @@ export default {
       expiration: 5000
     };
   },
-  [r.beCollectionUpdate]: (payload) => {
+  [r.beCollectionUpdate]: payload => {
     return {
       level: 0,
       heading: "Success",

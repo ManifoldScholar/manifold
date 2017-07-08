@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import chunk from 'lodash/chunk';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import chunk from "lodash/chunk";
+import lh from "helpers/linkHandler";
 
 export default class LayoutFooter extends Component {
-
   static displayName = "Layout.Footer";
 
   static propTypes = {
@@ -44,7 +43,7 @@ export default class LayoutFooter extends Component {
   buildContentPages() {
     const pages = [];
     if (this.props.pages) {
-      this.props.pages.forEach((page) => {
+      this.props.pages.forEach(page => {
         if (page.attributes.showInFooter) {
           pages.push(
             <Link to={lh.link("frontendPage", page.attributes.slug)}>
@@ -61,13 +60,13 @@ export default class LayoutFooter extends Component {
     if (this.props.authentication.authenticated) {
       return (
         <a onClick={this.handleLogoutClick} href="#">
-          {'Log Out'}
+          {"Log Out"}
         </a>
       );
     }
     return (
       <a onClick={this.handleLoginClick} href="#">
-        {'Log In'}
+        {"Log In"}
       </a>
     );
   }
@@ -77,18 +76,36 @@ export default class LayoutFooter extends Component {
     if (!this.props.settings.attributes.general.contactUrl) return null;
     const url = this.props.settings.attributes.general.contactUrl;
     return (
-      <a target="_blank" href={url}>{'Contact'}</a>
+      <a target="_blank" href={url}>
+        {"Contact"}
+      </a>
     );
   }
 
   buildPagesArray() {
     const pages = [];
     pages.push(this.buildAuthLink());
-    pages.push(<Link to={lh.link("frontend")}>{'Projects'}</Link>);
+    pages.push(
+      <Link to={lh.link("frontend")}>
+        {"Projects"}
+      </Link>
+    );
     pages.push(...this.buildContentPages());
     pages.push(this.buildContactLink());
-    pages.push(<a target="_blank" href="http://twitter.com/manifoldscholar">{'Twitter'}</a>);
-    pages.push(<a href="mailto:webbook@umn.edu">{'Email'}</a>);
+    pages.push(
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="http://twitter.com/manifoldscholar"
+      >
+        {"Twitter"}
+      </a>
+    );
+    pages.push(
+      <a href="mailto:webbook@umn.edu">
+        {"Email"}
+      </a>
+    );
     return pages;
   }
 
@@ -99,19 +116,25 @@ export default class LayoutFooter extends Component {
         <div className="container">
           <div className="rel">
             <Link to={lh.link("frontend")} className="logo">
-              <i className="manicon manicon-manifold-logo"></i>
-              {'Manifold'}
+              <i className="manicon manicon-manifold-logo" />
+              {"Manifold"}
             </Link>
           </div>
           <nav className="text-nav">
             <ul>
-              {chunkedPages.map((pageGroup, pageGroupIndex) => (
-                <li key={pageGroupIndex}><ul>
-                  {pageGroup.map((page, pageIndex) => (
-                    <li key={pageIndex}>{page}</li>
-                  ))}
-                </ul></li>
-              ))}
+              {/* eslint-disable react/no-array-index-key */}
+              {chunkedPages.map((pageGroup, pageGroupIndex) =>
+                <li key={pageGroupIndex}>
+                  <ul>
+                    {pageGroup.map((page, pageIndex) =>
+                      <li key={pageIndex}>
+                        {page}
+                      </li>
+                    )}
+                  </ul>
+                </li>
+              )}
+              {/* eslint-enable react/no-array-index-key */}
             </ul>
           </nav>
 
@@ -128,17 +151,15 @@ export default class LayoutFooter extends Component {
               </form>
             */}
             <p className="colophon">
-              {'© 2015-2016 6 University of Minnesota Press.'}
+              {"© 2015-2016 6 University of Minnesota Press."}
               <br />
               {`Manifold is released under the `}
               <a href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md">
                 GNU General Public License v3
               </a>
-              { `. Download and contribute to `}
+              {`. Download and contribute to `}
               <a href="https://github.com/ManifoldScholar/manifold">Manifold</a>
-              {
-                ` on github.`
-              }
+              {` on github.`}
             </p>
           </section>
         </div>

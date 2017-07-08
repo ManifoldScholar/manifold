@@ -1,11 +1,10 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import Editor from '../Editor';
-import Selection from '../Selection';
-import HigherOrder from 'containers/global/HigherOrder';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import Editor from "../Editor";
+import Selection from "../Selection";
+import HigherOrder from "containers/global/HigherOrder";
 
 export default class AnnotationSelectionWrapper extends PureComponent {
-
   static displayName = "Annotation.Selection.Wrapper";
 
   static propTypes = {
@@ -14,18 +13,18 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     startChar: PropTypes.number,
     endNode: PropTypes.string,
     endChar: PropTypes.number,
-    annotating: PropTypes.bool,
-    closeDrawer: PropTypes.func,
     saveHandler: PropTypes.func,
-    truncate: PropTypes.number,
     closeOnSave: PropTypes.bool,
     addsTo: PropTypes.string,
+    annotating: PropTypes.bool,
+    closeDrawer: PropTypes.func,
+    truncate: PropTypes.number,
     showLogin: PropTypes.func
-  }
+  };
 
   static defaultProps = {
     closeOnSave: true
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -51,7 +50,10 @@ export default class AnnotationSelectionWrapper extends PureComponent {
   }
 
   maybeTruncateSelection() {
-    if (this.props.truncate && this.props.subject.length > this.props.truncate) {
+    if (
+      this.props.truncate &&
+      this.props.subject.length > this.props.truncate
+    ) {
       return (
         <Selection.Truncated
           selection={this.props.subject}
@@ -64,43 +66,37 @@ export default class AnnotationSelectionWrapper extends PureComponent {
   }
 
   render() {
-    const cancelFunction = this.props.closeDrawer ?
-        this.props.closeDrawer : this.handleCloseEditor;
+    const cancelFunction = this.props.closeDrawer
+      ? this.props.closeDrawer
+      : this.handleCloseEditor;
 
     return (
       <div className="annotation-selection">
         <div className="selection-text">
           <div className="container">
-            <i className="manicon manicon-quote"></i>
+            <i className="manicon manicon-quote" />
             {this.maybeTruncateSelection()}
           </div>
           <HigherOrder.RequireRole requiredRole="any">
-            { this.state.editorOpen ? null :
-              <button
-                className="annotate-button"
-                onClick={this.handleOpenEditor}
-              >
-                Annotate
-              </button>
-            }
+            {this.state.editorOpen
+              ? null
+              : <button
+                  className="annotate-button"
+                  onClick={this.handleOpenEditor}
+                >
+                  Annotate
+                </button>}
           </HigherOrder.RequireRole>
           <HigherOrder.RequireRole requiredRole="none">
-            <button
-              className="annotate-button"
-              onClick={this.props.showLogin}
-            >
-              {'Login to annotate'}
+            <button className="annotate-button" onClick={this.props.showLogin}>
+              {"Login to annotate"}
             </button>
           </HigherOrder.RequireRole>
         </div>
-        { this.state.editorOpen ?
-          <Editor
-            {...this.props}
-            cancel={cancelFunction}
-          /> : null
-        }
+        {this.state.editorOpen
+          ? <Editor {...this.props} cancel={cancelFunction} />
+          : null}
       </div>
     );
   }
-
 }

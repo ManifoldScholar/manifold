@@ -1,26 +1,24 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import FormattedDate from 'components/global/FormattedDate';
-import { ResourceCollection } from 'components/frontend';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import FormattedDate from "components/global/FormattedDate";
+import lh from "helpers/linkHandler";
 
 export default class ResourceCollectionListItem extends PureComponent {
-
   static displayName = "ResourceCollection.ListItem";
 
   static propTypes = {
-    entity: PropTypes.object,
-    projectId: PropTypes.string
+    entity: PropTypes.object
   };
 
   render() {
     const collection = this.props.entity;
     if (!collection) return null;
     const attr = collection.attributes;
-    const collectionsBackground = '/static/images/resource-collection.jpg';
-    const bgImage = attr.thumbnailStyles.smallSquare ?
-      attr.thumbnailStyles.smallSquare : collectionsBackground;
+    const collectionsBackground = "/static/images/resource-collection.jpg";
+    const bgImage = attr.thumbnailStyles.smallSquare
+      ? attr.thumbnailStyles.smallSquare
+      : collectionsBackground;
 
     return (
       <li>
@@ -29,7 +27,7 @@ export default class ResourceCollectionListItem extends PureComponent {
             <figure className="cover">
               <div
                 className="collection-thumbnail-square bg-image icon-only"
-                style={ { backgroundImage: 'url(' + bgImage + ')' } }
+                style={{ backgroundImage: "url(" + bgImage + ")" }}
               />
             </figure>
             <div className="meta">
@@ -38,10 +36,7 @@ export default class ResourceCollectionListItem extends PureComponent {
                   {attr.title}
                 </span>
                 <span className="subtitle">
-                  <FormattedDate
-                    format="MMMM DD, YYYY"
-                    date={attr.createdAt}
-                  />
+                  <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
                 </span>
               </h3>
             </div>
@@ -49,7 +44,5 @@ export default class ResourceCollectionListItem extends PureComponent {
         </Link>
       </li>
     );
-
   }
-
 }

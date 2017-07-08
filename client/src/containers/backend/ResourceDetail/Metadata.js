@@ -1,26 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import { resourcesAPI } from 'api';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/backend";
+import { Form as FormContainer } from "containers/backend";
+import { resourcesAPI } from "api";
 
 export default class ResourceDetailMetadataContainer extends PureComponent {
-
   static displayName = "ResourceDetail.Metadata";
 
   static propTypes = {
-    route: PropTypes.object,
-    project: PropTypes.object,
-    dispatch: PropTypes.func,
-    editSession: PropTypes.object
+    resource: PropTypes.object,
+    params: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-
     // See https://github.com/ReactTraining/react-router/issues/3753
     return (
       <section>
@@ -28,7 +20,8 @@ export default class ResourceDetailMetadataContainer extends PureComponent {
           model={this.props.resource}
           name="backend-project-general"
           update={resourcesAPI.update}
-          create={(model) => resourcesAPI.create(this.props.params.projectId, model) }
+          create={model =>
+            resourcesAPI.create(this.props.params.projectId, model)}
           className="form-secondary"
         >
           <Form.TextInput
@@ -61,9 +54,7 @@ export default class ResourceDetailMetadataContainer extends PureComponent {
             name="attributes[credit]"
             placeholder="Credit"
           />
-          <Form.Save
-            text="Save Metadata"
-          />
+          <Form.Save text="Save Metadata" />
         </FormContainer.Form>
       </section>
     );

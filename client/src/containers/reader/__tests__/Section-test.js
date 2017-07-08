@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { SectionContainer } from '../Section';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { SectionContainer } from "../Section";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Reader Section Container", () => {
-
   const store = build.store();
   const text = build.entity.text("1");
   text.relationships.project = build.entity.project("3");
@@ -57,9 +56,7 @@ describe("Reader Section Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <SectionContainer
-          {...props}
-        />
+        <SectionContainer {...props} />
       </Provider>
     )
   );
@@ -73,5 +70,4 @@ describe("Reader Section Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

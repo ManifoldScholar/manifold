@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { FormContainer } from '../Form';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { FormContainer } from "../Form";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend Form Form Container", () => {
-
   const store = build.store();
   const project = build.entity.project("1");
   const createMock = jest.fn();
@@ -22,7 +21,7 @@ describe("Backend Form Form Container", () => {
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <FormContainer
           session={session}
           dispatch={store.dispatch}
@@ -43,5 +42,4 @@ describe("Backend Form Form Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

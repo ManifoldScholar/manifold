@@ -1,27 +1,24 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
-import classNames from 'classnames';
-import Utility from 'components/global/Utility';
-import isString from 'lodash/isString';
-import { withRouter } from 'react-router-dom';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import classNames from "classnames";
+import Utility from "components/global/Utility";
+import isString from "lodash/isString";
+import { withRouter } from "react-router-dom";
 
 class DrawerWrapper extends PureComponent {
-
   static displayName = "Drawer.Wrapper";
 
   static propTypes = {
     open: PropTypes.bool,
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.string
-    ]),
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     title: PropTypes.string,
     icon: PropTypes.string,
     closeUrl: PropTypes.string,
     closeCallback: PropTypes.func,
     lockScroll: PropTypes.string,
     style: PropTypes.string,
+    history: PropTypes.object
   };
 
   // NB lockScroll can be:
@@ -30,22 +27,15 @@ class DrawerWrapper extends PureComponent {
   // Always: Having the drawer open locks the body scroll until it is closed
   // None: Scrolling the drawer invokes default browser behavior
   static defaultProps = {
-    lockScroll: 'hover',
+    lockScroll: "hover",
     open: false,
-    style: 'backend'
+    style: "backend"
   };
 
   static childContextTypes = {
     pauseKeyboardEvents: PropTypes.func,
     unpauseKeyboardEvents: PropTypes.func
   };
-
-  getChildContext() {
-    return {
-      pauseKeyboardEvents: this.pauseKeyboardEvents,
-      unpauseKeyboardEvents: this.unpauseKeyboardEvents
-    };
-  }
 
   constructor(props) {
     super(props);
@@ -60,12 +50,19 @@ class DrawerWrapper extends PureComponent {
     this.unpauseKeyboardEvents = this.unpauseKeyboardEvents.bind(this);
   }
 
+  getChildContext() {
+    return {
+      pauseKeyboardEvents: this.pauseKeyboardEvents,
+      unpauseKeyboardEvents: this.unpauseKeyboardEvents
+    };
+  }
+
   componentDidMount() {
-    document.addEventListener('keyup', this.handleLeaveKey);
+    document.addEventListener("keyup", this.handleLeaveKey);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keyup', this.handleLeaveKey);
+    document.removeEventListener("keyup", this.handleLeaveKey);
   }
 
   handleLeaveKey(event) {
@@ -108,21 +105,19 @@ class DrawerWrapper extends PureComponent {
     if (!this.props.title && !this.props.icon) return null;
     return (
       <div className="drawer-title">
-        {this.props.icon ?
-          <i className={`manicon manicon-${this.props.icon}`}></i> : null
-        }
-        {this.props.title ?
-          this.props.title : null
-        }
+        {this.props.icon
+          ? <i className={`manicon manicon-${this.props.icon}`} />
+          : null}
+        {this.props.title ? this.props.title : null}
       </div>
     );
   }
 
   renderDrawer() {
     const drawerStyleClass = classNames({
-      'drawer-backend': this.props.style === 'backend',
-      'drawer-backend wide': this.props.style === 'backend-wide',
-      'drawer-frontend': this.props.style === 'frontend'
+      "drawer-backend": this.props.style === "backend",
+      "drawer-backend wide": this.props.style === "backend-wide",
+      "drawer-frontend": this.props.style === "frontend"
     });
 
     return (
@@ -130,17 +125,13 @@ class DrawerWrapper extends PureComponent {
         <div className="drawer-bar">
           {this.renderDrawerFrontMatter()}
           <div onClick={this.handleLeaveEvent} className="close-button-primary">
-            <span className="close-text">
-              Close
-            </span>
-            <i className="manicon manicon-x"></i>
-            <span className="screen-reader-text">
-              Close Drawer
-            </span>
+            <span className="close-text">Close</span>
+            <i className="manicon manicon-x" />
+            <span className="screen-reader-text">Close Drawer</span>
           </div>
         </div>
         {/* Render children without props if they aren't a component */}
-        { this.renderChildren() }
+        {this.renderChildren()}
       </div>
     );
   }
@@ -148,14 +139,13 @@ class DrawerWrapper extends PureComponent {
   renderChildren() {
     if (!this.props.children) return null;
     if (isString(this.props.children.type)) return this.props.children;
-    return React.cloneElement(
-      this.props.children,
-      { closeDrawer: this.handleLeaveEvent }
-    );
+    return React.cloneElement(this.props.children, {
+      closeDrawer: this.handleLeaveEvent
+    });
   }
 
   renderDrawerWrapper() {
-    if (this.props.lockScroll === 'hover') {
+    if (this.props.lockScroll === "hover") {
       return (
         <div>
           <Utility.EdgeLockScroll>
@@ -165,12 +155,12 @@ class DrawerWrapper extends PureComponent {
       );
     }
 
-    if (this.props.lockScroll === 'always') {
+    if (this.props.lockScroll === "always") {
       return (
         <div>
           <Utility.LockBodyScroll>
             <div>
-              <div className="drawer-overlay" onClick={this.handleLeaveEvent}></div>
+              <div className="drawer-overlay" onClick={this.handleLeaveEvent} />
               {this.renderDrawer()}
             </div>
           </Utility.LockBodyScroll>
@@ -189,7 +179,7 @@ class DrawerWrapper extends PureComponent {
         transitionEnterTimeout={500}
         transitionLeaveTimeout={300}
       >
-        { this.props.open ? this.renderDrawerWrapper() : null }
+        {this.props.open ? this.renderDrawerWrapper() : null}
       </ReactCSSTransitionGroup>
     );
   }

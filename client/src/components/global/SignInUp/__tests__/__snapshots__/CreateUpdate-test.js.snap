@@ -16,7 +16,8 @@ exports[`Global.SignInUp.CreateUpdate component renders correctly 1`] = `
     <p
       className="overlay-copy"
     >
-      Your account has been successfully created and you are now logged in to Manifold. From now on, I'm going to call you
+      Your account has been successfully created and you are now
+                      logged in to Manifold. From now on, I'm going to call you
     </p>
     <h4
       className="nickname"

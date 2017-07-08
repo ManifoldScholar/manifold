@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import classNames from 'classnames';
-import get from 'lodash/get';
-import lh from 'helpers/linkHandler';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
+import get from "lodash/get";
+import lh from "helpers/linkHandler";
 
 export default class ResourceListSlideCaption extends Component {
-
   static propTypes = {
     resource: PropTypes.object,
     collectionId: PropTypes.string
@@ -17,15 +16,17 @@ export default class ResourceListSlideCaption extends Component {
     this.state = {
       init: true,
       expanded: false,
-      targetHeight: '5em'
+      targetHeight: "5em"
     };
     this.handleReadMore = this.handleReadMore.bind(this);
   }
 
   componentDidMount() {
-    import(/* webpackChunkName: "velocity-react" */ 'velocity-react').then((Velocity) => {
-      this.setState({ Velocity });
-    });
+    import(/* webpackChunkName: "velocity-react" */ "velocity-react").then(
+      Velocity => {
+        this.setState({ Velocity });
+      }
+    );
     this.checkReadMoreVisibility();
   }
 
@@ -35,10 +36,10 @@ export default class ResourceListSlideCaption extends Component {
 
   getFullDescriptionHeight() {
     if (!this._description) return;
-    this._description.style.height = 'auto';
+    this._description.style.height = "auto";
     const measuredHeight = this._description.offsetHeight;
-    this._description.style.height = '5em';
-    return measuredHeight + 'px';
+    this._description.style.height = "5em";
+    return measuredHeight + "px";
   }
 
   handleReadMore() {
@@ -54,7 +55,7 @@ export default class ResourceListSlideCaption extends Component {
   }
 
   createDescription(description) {
-    if (!description) return { __html: 'No content provided.' };
+    if (!description) return { __html: "No content provided." };
     return {
       __html: description
     };
@@ -76,10 +77,15 @@ export default class ResourceListSlideCaption extends Component {
     const cid = this.props.collectionId;
     if (cid) {
       const crs = get(resource, "relationships.collectionResources");
-      const cr = crs.find((cmpr) => cmpr.attributes.collectionId === cid);
+      const cr = crs.find(cmpr => cmpr.attributes.collectionId === cid);
       if (cr) {
         const crid = cr.id;
-        return lh.link("frontendProjectCollectionCollectionResource", pid, cid, crid);
+        return lh.link(
+          "frontendProjectCollectionCollectionResource",
+          pid,
+          cid,
+          crid
+        );
       }
     }
     const rid = resource.id;
@@ -90,7 +96,7 @@ export default class ResourceListSlideCaption extends Component {
     const resource = this.props.resource;
     const attr = resource.attributes;
     const moreLinkClass = classNames({
-      'more-link': true,
+      "more-link": true,
       open: this.state.expanded
     });
     const detailUrl = this.detailUrl();
@@ -98,12 +104,12 @@ export default class ResourceListSlideCaption extends Component {
     // Animation to open description
     const animation = {
       animation: {
-        height: this.state.expanded ? this.state.targetHeight : '5em'
+        height: this.state.expanded ? this.state.targetHeight : "5em"
       },
       duration: 250,
       complete: () => {
         if (this.state.expanded) {
-          this._description.style.height = 'auto';
+          this._description.style.height = "auto";
         }
       }
     };
@@ -116,55 +122,56 @@ export default class ResourceListSlideCaption extends Component {
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
           />
         </header>
-        { this.state.Velocity ?
-          <this.state.Velocity {...animation}>
-            <div className="resource-description" ref={ (e) => {
-              this._description = e;
-            } }>
+        {this.state.Velocity
+          ? <this.state.Velocity {...animation}>
               <div
-                ref={ (e) => {
-                  this._descriptionContents = e;
+                className="resource-description"
+                ref={e => {
+                  this._description = e;
                 }}
-                dangerouslySetInnerHTML={this.createDescription(attr.captionFormatted)}
-              />
-            </div>
-          </this.state.Velocity>
-        : null
-        }
+              >
+                <div
+                  ref={e => {
+                    this._descriptionContents = e;
+                  }}
+                  dangerouslySetInnerHTML={this.createDescription(
+                    attr.captionFormatted
+                  )}
+                />
+              </div>
+            </this.state.Velocity>
+          : null}
         <div className="resource-utility">
           <div className="bg-neutral90">
             <button
               className={moreLinkClass}
               onClick={this.handleReadMore}
-              ref={ (e) => {
+              ref={e => {
                 this._readMoreButton = e;
               }}
             >
               <span className="open-text">
-                {'Read More'}
+                {"Read More"}
               </span>
               <span className="close-text">
-                {'Hide Description'}
+                {"Hide Description"}
               </span>
             </button>
-            {attr.downloadable ?
-              <a
-                href={attr.attachmentStyles.original}
-                target="_blank"
-                className="download-link"
-              >
-                {'Download'}
-                <i className="manicon manicon-arrow-down"></i>
-              </a>
-            : null}
-            {detailUrl ?
-              <Link
-                className="detail-link"
-                to={detailUrl}
-              >
-                {'Details'}
-              </Link>
-            : null}
+            {attr.downloadable
+              ? <a
+                  href={attr.attachmentStyles.original}
+                  target="_blank"
+                  className="download-link"
+                >
+                  {"Download"}
+                  <i className="manicon manicon-arrow-down" />
+                </a>
+              : null}
+            {detailUrl
+              ? <Link className="detail-link" to={detailUrl}>
+                  {"Details"}
+                </Link>
+              : null}
           </div>
         </div>
       </div>

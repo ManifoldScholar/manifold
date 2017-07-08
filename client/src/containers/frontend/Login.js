@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { currentUserActions } from 'actions';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { currentUserActions } from "actions";
 
 export class LoginContainer extends Component {
-
   static mapStateToProps(state) {
     return {
       authentication: state.authentication
@@ -20,7 +19,7 @@ export class LoginContainer extends Component {
     })
   };
 
-  handleLogout = (event) => {
+  handleLogout = event => {
     event.preventDefault();
     const { dispatch } = this.props;
     dispatch(currentUserActions.logout());
@@ -31,8 +30,8 @@ export class LoginContainer extends Component {
       <div className="container">
         <header className="rel">
           <h4 className="section-heading">
-            <i className="manicon manicon-lamp"></i>
-            {'Log In'}
+            <i className="manicon manicon-lamp" />
+            {"Log In"}
           </h4>
         </header>
       </div>
@@ -49,12 +48,12 @@ export class LoginContainer extends Component {
       <div className="container">
         <header className="rel">
           <h4 className="section-heading">
-            <i className="manicon manicon-lamp"></i>
-            {'Log Out'}
+            <i className="manicon manicon-lamp" />
+            {"Log Out"}
           </h4>
         </header>
         <form method="post" onSubmit={this.handleLogout}>
-          { this.props.authentication.currentUser ? loginNotice : ''}
+          {this.props.authentication.currentUser ? loginNotice : ""}
           <input type="submit" value="Log Out" className="button-secondary" />
         </form>
       </div>
@@ -62,7 +61,6 @@ export class LoginContainer extends Component {
   };
 
   render() {
-
     const { authenticated } = this.props.authentication;
     return (
       <section className="login-page">

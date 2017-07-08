@@ -1,4 +1,4 @@
-import NodeTreeIterator from './NodeTreeIterator';
+import NodeTreeIterator from "./NodeTreeIterator";
 
 export default {
   NodeTreeIterator

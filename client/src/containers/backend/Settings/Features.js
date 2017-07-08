@@ -1,11 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Form } from 'components/backend';
-import Placeholder from './Placeholder';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Placeholder from "./Placeholder";
 
 export class SettingsFeaturesContainer extends PureComponent {
-
   render() {
     return (
       <section>
@@ -13,10 +11,8 @@ export class SettingsFeaturesContainer extends PureComponent {
       </section>
     );
   }
-
 }
 
-export default connect(
-  SettingsFeaturesContainer.mapStateToProps
-)(SettingsFeaturesContainer);
-
+export default connect(SettingsFeaturesContainer.mapStateToProps)(
+  SettingsFeaturesContainer
+);

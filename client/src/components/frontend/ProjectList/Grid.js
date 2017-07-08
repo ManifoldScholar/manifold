@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Project } from 'components/frontend';
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from 'react-transition-group';
-import difference from 'lodash/difference';
-import shuffle from 'lodash/shuffle';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Project } from "components/frontend";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import difference from "lodash/difference";
 
 export default class ProjectListGrid extends Component {
-
   static displayName = "ProjectList.Grid";
 
   static propTypes = {
@@ -23,11 +21,11 @@ export default class ProjectListGrid extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const currentIds = this.props.projects.map((p) => p.id);
-    const nextIds = nextProps.projects.map((p) => p.id);
+    const currentIds = this.props.projects.map(p => p.id);
+    const nextIds = nextProps.projects.map(p => p.id);
     const diffA = difference(currentIds, nextIds).length;
     const diffB = difference(nextIds, currentIds).length;
-    if ((diffA + diffB) === 1) {
+    if (diffA + diffB === 1) {
       this.enableAnimation = true;
     } else {
       this.enableAnimation = false;
@@ -66,9 +64,9 @@ export default class ProjectListGrid extends Component {
           transitionLeaveTimeout={250}
           component="ul"
         >
-          {projects.map((project) => {
+          {projects.map(project => {
             return (
-              <li key={project.id} >
+              <li key={project.id}>
                 <Project.Thumbnail
                   authenticated={this.props.authenticated}
                   favorites={this.props.favorites}

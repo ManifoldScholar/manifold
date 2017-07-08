@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import FormattedDate from 'components/global/FormattedDate';
-import { Resource } from 'components/frontend';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import FormattedDate from "components/global/FormattedDate";
+import { Resource } from "components/frontend";
+import lh from "helpers/linkHandler";
 
 export default class ResourceListItem extends PureComponent {
-
   static displayName = "Resource.ListItem";
 
   static propTypes = {
     entity: PropTypes.object,
+    projectId: PropTypes.string
   };
 
   render() {
@@ -37,10 +37,7 @@ export default class ResourceListItem extends PureComponent {
                   dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
                 />
                 <span className="subtitle">
-                  <FormattedDate
-                    format="MMMM DD, YYYY"
-                    date={attr.createdAt}
-                  />
+                  <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
                 </span>
               </h3>
             </div>
@@ -48,7 +45,5 @@ export default class ResourceListItem extends PureComponent {
         </Link>
       </li>
     );
-
   }
-
 }

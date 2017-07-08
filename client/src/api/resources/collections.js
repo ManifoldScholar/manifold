@@ -1,18 +1,16 @@
 export default {
-
   show(id) {
     return {
       endpoint: `/api/v1/collections/${id}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   },
 
   create(pId, collection) {
     return {
       endpoint: `/api/v1/projects/${pId}/relationships/collections`,
-      method: 'POST',
+      method: "POST",
       options: {
         body: JSON.stringify({ type: "collections", data: collection })
       }
@@ -22,7 +20,7 @@ export default {
   update(id, collection) {
     return {
       endpoint: `/api/v1/collections/${id}`,
-      method: 'PUT',
+      method: "PUT",
       options: {
         body: JSON.stringify({ type: "collections", data: collection })
       }
@@ -32,7 +30,7 @@ export default {
   destroy(id) {
     return {
       endpoint: `/api/v1/collections/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       options: {}
     };
   },
@@ -40,9 +38,8 @@ export default {
   collectionResource(cid, crid) {
     return {
       endpoint: `/api/v1/collections/${cid}/relationships/collection_resources/${crid}`,
-      method: 'GET',
-      options: {
-      }
+      method: "GET",
+      options: {}
     };
   },
 
@@ -51,11 +48,10 @@ export default {
     filter.collection_order = id;
     return {
       endpoint: `/api/v1/collections/${id}/relationships/resources`,
-      method: 'GET',
+      method: "GET",
       options: {
         params: { filter, page }
       }
     };
   }
-
 };

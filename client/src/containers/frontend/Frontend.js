@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { HigherOrder, FatalError } from 'components/global';
-import HigherOrderContainers from 'containers/global/HigherOrder';
-import { Layout } from 'components/frontend';
-import { commonActions } from 'actions/helpers';
-import { pagesAPI, subjectsAPI, requests } from 'api';
-import { entityStoreActions } from 'actions';
-import { select, isLoaded } from 'utils/entityUtils';
-import connectAndFetch from 'utils/connectAndFetch';
-import { renderRoutes } from 'react-router-config';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { HigherOrder, FatalError } from "components/global";
+import HigherOrderContainers from "containers/global/HigherOrder";
+import { Layout } from "components/frontend";
+import { commonActions } from "actions/helpers";
+import { pagesAPI, subjectsAPI, requests } from "api";
+import { entityStoreActions } from "actions";
+import { select, isLoaded } from "utils/entityUtils";
+import connectAndFetch from "utils/connectAndFetch";
+import { renderRoutes } from "react-router-config";
 
 const { request } = entityStoreActions;
 
 export class FrontendContainer extends Component {
-
   static fetchData(getState, dispatch) {
     if (!isLoaded(requests.gPages, getState())) {
-      const pages = request(pagesAPI.index(), requests.gPages, { oneTime: true });
+      const pages = request(pagesAPI.index(), requests.gPages, {
+        oneTime: true
+      });
       const subjects = request(
         subjectsAPI.index({ used: true }),
         requests.feSubjects,
@@ -33,9 +34,7 @@ export class FrontendContainer extends Component {
     dispatch: PropTypes.func,
     authentication: PropTypes.object,
     visibility: PropTypes.object,
-    loading: PropTypes.bool,
     notifications: PropTypes.object,
-    history: PropTypes.object.isRequired,
     pages: PropTypes.array,
     settings: PropTypes.object,
     route: PropTypes.object
@@ -61,20 +60,21 @@ export class FrontendContainer extends Component {
   }
 
   setMinHeight() {
-    if (!this.refs.mainContainer) return;
-    const mainHeight = this.refs.mainContainer.offsetHeight;
-    const offsetHeight = this.refs.mainContainer.parentNode.offsetHeight - mainHeight;
-    this.refs.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
+    if (!this.mainContainer) return;
+    const mainHeight = this.mainContainer.offsetHeight;
+    const offsetHeight =
+      this.mainContainer.parentNode.offsetHeight - mainHeight;
+    this.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
   }
 
   render() {
     const fatalError = this.props.notifications.fatalError;
     return (
-      <HigherOrder.BodyClass className={'browse'}>
+      <HigherOrder.BodyClass className={"browse"}>
         <div>
           <HigherOrder.ScrollAware>
             <Layout.Header
-              visibility={this.props.visibility }
+              visibility={this.props.visibility}
               location={this.props.location}
               authentication={this.props.authentication}
               notifications={this.props.notifications}
@@ -85,16 +85,18 @@ export class FrontendContainer extends Component {
           <HigherOrderContainers.RequireRole requiredRole="any">
             <Layout.MobileNav location={this.props.location} />
           </HigherOrderContainers.RequireRole>
-          <main ref="mainContainer">
-            { (fatalError) ?
-              <div className="global-container">
-                <FatalError error={fatalError} />
-              </div>
-              :
-              <div>
-                {renderRoutes(this.props.route.routes)}
-              </div>
-            }
+          <main
+            ref={mainContainer => {
+              this.mainContainer = mainContainer;
+            }}
+          >
+            {fatalError
+              ? <div className="global-container">
+                  <FatalError error={fatalError} />
+                </div>
+              : <div>
+                  {renderRoutes(this.props.route.routes)}
+                </div>}
           </main>
           <Layout.Footer
             pages={this.props.pages}

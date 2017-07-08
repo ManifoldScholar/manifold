@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { ResourceDetailContainer } from '../ResourceDetail';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import { ResourceDetailContainer } from "../ResourceDetail";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Frontend ResourceDetail Container", () => {
-
   const store = build.store();
   const project = build.entity.project("1");
   const resource = build.entity.resource("2");
@@ -14,7 +13,7 @@ describe("Frontend ResourceDetail Container", () => {
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <ResourceDetailContainer
           dispatch={store.dispatch}
           project={project}
@@ -33,5 +32,4 @@ describe("Frontend ResourceDetail Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

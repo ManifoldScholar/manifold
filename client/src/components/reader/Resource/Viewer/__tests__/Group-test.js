@@ -1,12 +1,11 @@
-import React from 'react';
-import Group from '../Group';
-import { mount } from 'enzyme';
-import build from 'test/fixtures/build';
-import { Provider } from 'react-redux';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
+import React from "react";
+import Group from "../Group";
+import { mount } from "enzyme";
+import build from "test/fixtures/build";
+import { Provider } from "react-redux";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Reader.Resource.Viewer.Group component", () => {
-
   const items = [
     {
       annotationId: "1",
@@ -23,20 +22,15 @@ describe("Reader.Resource.Viewer.Group component", () => {
   ];
   const store = build.store();
 
-  const root = (
-    wrapWithRouter(
-      <Provider store={store} >
-        <Group
-          items={items}
-        />
-      </Provider>
-    )
+  const root = wrapWithRouter(
+    <Provider store={store}>
+      <Group items={items} />
+    </Provider>
   );
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = mount(root);
     let tree = component.debug();
     expect(tree).toMatchSnapshot();
   });
-
 });

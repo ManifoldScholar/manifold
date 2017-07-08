@@ -171,7 +171,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly with no res
         className="slide-caption"
       >
         <header>
-          <h2
+          <p
             className="resource-title"
           />
         </header>

@@ -1,14 +1,13 @@
-const paths = require('../paths');
-const fs = require('fs');
-const mkdirp = require('mkdirp');
+const paths = require("../paths");
+const fs = require("fs");
+const mkdirp = require("mkdirp");
 
 function statsPlugin(options) {
   this.options = options;
 }
 
 statsPlugin.prototype.apply = function apply(compiler) {
-  compiler.plugin('after-emit', (compilation, done) => {
-
+  compiler.plugin("after-emit", (compilation, done) => {
     const stats = compilation.getStats().toJson({
       hash: true,
       version: true,
@@ -25,11 +24,11 @@ statsPlugin.prototype.apply = function apply(compiler) {
       errors: false,
       errorDetails: false,
       warnings: false,
-      publicPath: true,
+      publicPath: true
     });
     delete stats.assets;
     const out = { assetsByChunkName: stats.assetsByChunkName };
-    const base= `${paths.output}/manifest`;
+    const base = `${paths.output}/manifest`;
     const path = `${base}/${this.options.fileName}`;
     mkdirp.sync(base);
     fs.writeFile(path, JSON.stringify(out, null, 2), done);

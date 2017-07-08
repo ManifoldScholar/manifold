@@ -1,15 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 
 export default class AnnotationSelectionTruncated extends PureComponent {
-
   static displayName = "Annotation.Selection.Truncated";
 
   static propTypes = {
     selection: PropTypes.string,
     truncate: PropTypes.number.isRequired
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -22,11 +21,7 @@ export default class AnnotationSelectionTruncated extends PureComponent {
   }
 
   componentDidMount() {
-    this.wrapper.style.height = this.content.offsetHeight + 'px';
-  }
-
-  truncateSelection() {
-    return this.props.selection.substring(0, this.props.truncate) + '...';
+    this.wrapper.style.height = this.content.offsetHeight + "px";
   }
 
   getPassage() {
@@ -37,13 +32,17 @@ export default class AnnotationSelectionTruncated extends PureComponent {
     return this.props.selection;
   }
 
+  truncateSelection() {
+    return this.props.selection.substring(0, this.props.truncate) + "...";
+  }
+
   handleShowFull() {
     this.setState({
       truncated: false
     });
 
     setTimeout(() => {
-      this.wrapper.style.height = this.content.offsetHeight + 'px';
+      this.wrapper.style.height = this.content.offsetHeight + "px";
     }, 50);
   }
 
@@ -54,8 +53,8 @@ export default class AnnotationSelectionTruncated extends PureComponent {
     });
 
     const constShowFullButtonClass = classNames({
-      'button-trim-primary': true,
-      'trim-top': true,
+      "button-trim-primary": true,
+      "trim-top": true,
       hidden: !this.state.truncated
     });
 
@@ -64,18 +63,26 @@ export default class AnnotationSelectionTruncated extends PureComponent {
         <div className="selection-truncated">
           <div
             className={truncatedWrapperClass}
-            ref={ (wrapper) => { this.wrapper = wrapper; }}
+            ref={wrapper => {
+              this.wrapper = wrapper;
+            }}
           >
-            <div ref={ (content) => { this.content = content; }}>
+            <div
+              ref={content => {
+                this.content = content;
+              }}
+            >
               {this.getPassage()}
             </div>
           </div>
-          <button className={constShowFullButtonClass} onClick={this.handleShowFull}>
-            {'Read Full Passage'}
+          <button
+            className={constShowFullButtonClass}
+            onClick={this.handleShowFull}
+          >
+            {"Read Full Passage"}
           </button>
         </div>
       </div>
     );
   }
-
 }

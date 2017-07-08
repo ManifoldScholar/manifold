@@ -1,10 +1,9 @@
-import React from 'react';
-import Truncated from '../Truncated';
-import { mount } from 'enzyme';
+import React from "react";
+import Truncated from "../Truncated";
+import { mount } from "enzyme";
 
 describe("Reader.Annotation.Selection.Truncated Component", () => {
-
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = mount(
       <Truncated
         truncate={40}

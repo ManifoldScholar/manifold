@@ -1,22 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import createStore from 'store/createStore';
-import {
-  BrowserRouter,
-  StaticRouter,
-  Route,
-  Link
-} from 'react-router-dom';
-import { Dialog } from 'components/backend';
-import { HigherOrder } from 'components/global';
-import { Provider } from 'react-redux';
-import { currentUserActions } from 'actions';
-import Manifold from 'containers/Manifold';
-import get from 'lodash/get';
-
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import createStore from "store/createStore";
+import { BrowserRouter, StaticRouter } from "react-router-dom";
+import { Dialog } from "components/backend";
+import { HigherOrder } from "components/global";
+import { Provider } from "react-redux";
+import { currentUserActions } from "actions";
+import Manifold from "containers/Manifold";
+import get from "lodash/get";
 
 export default class App extends Component {
-
   static propTypes = {
     store: PropTypes.object,
     staticContext: PropTypes.object,
@@ -32,7 +25,6 @@ export default class App extends Component {
     };
     this.resolveRouterConfirm = this.resolveRouterConfirm.bind(this);
     this.getConfirmation = this.getConfirmation.bind(this);
-
   }
 
   componentWillMount() {
@@ -48,13 +40,16 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.store.dispatch({ type: 'CLIENT_LOADED', payload: {} });
+    this.store.dispatch({ type: "CLIENT_LOADED", payload: {} });
     this.store.dispatch(currentUserActions.login);
     this.forceUpdate();
   }
 
   settings() {
-    return get(this.store.getState(), 'entityStore.entities.settings.0.attributes');
+    return get(
+      this.store.getState(),
+      "entityStore.entities.settings.0.attributes"
+    );
   }
 
   getConfirmation(message, callback) {
@@ -108,15 +103,12 @@ export default class App extends Component {
     const { routerProps, Router } = this.getRouter();
     return (
       <Provider store={this.store} key="provider">
-        <Router {...routerProps} >
+        <Router {...routerProps}>
           <HigherOrder.Analytics settings={this.settings()}>
-            <Manifold
-              confirm={this.renderConfirm()}
-            />
+            <Manifold confirm={this.renderConfirm()} />
           </HigherOrder.Analytics>
         </Router>
       </Provider>
     );
   }
-
 }

@@ -1,25 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { bindActionCreators } from 'redux';
-import { HigherOrder, LoginOverlay, LoadingBar } from 'components/global';
-import { Header, Footer, FooterMenu } from 'components/reader';
-import { select, grab, isEntityLoaded } from 'utils/entityUtils';
-import { commonActions } from 'actions/helpers';
-import { resourcesAPI, textsAPI, sectionsAPI, annotationsAPI, requests } from 'api';
-import values from 'lodash/values';
-import lh from 'helpers/linkHandler';
-import { renderRoutes } from 'helpers/routing';
-import { Redirect } from 'react-router-dom';
-import { matchRoutes } from 'react-router-config';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { bindActionCreators } from "redux";
+import { HigherOrder } from "components/global";
+import { Header, Footer, FooterMenu } from "components/reader";
+import { select, grab, isEntityLoaded } from "utils/entityUtils";
+import { commonActions } from "actions/helpers";
+import { textsAPI, sectionsAPI, requests } from "api";
+import values from "lodash/values";
+import lh from "helpers/linkHandler";
+import { renderRoutes } from "helpers/routing";
+import { Redirect } from "react-router-dom";
+import { matchRoutes } from "react-router-config";
 import {
-  authActions,
   uiColorActions,
-  uiVisibilityActions,
   uiTypographyActions,
-  notificationActions,
   entityStoreActions
-} from 'actions';
+} from "actions";
 
 const {
   selectFont,
@@ -31,15 +28,15 @@ const {
 const { setColorScheme } = uiColorActions;
 const { request, flush } = entityStoreActions;
 
-
 export class ReaderContainer extends Component {
-
   static fetchData(getState, dispatch, location, match) {
     const promises = [];
     const state = getState();
     const { sectionId, textId } = match.params;
-    const sectionLoaded = sectionId ? isEntityLoaded('textSections', sectionId, state) : false;
-    const textLoaded = textId ? isEntityLoaded('texts', textId, state) : false;
+    const sectionLoaded = sectionId
+      ? isEntityLoaded("textSections", sectionId, state)
+      : false;
+    const textLoaded = textId ? isEntityLoaded("texts", textId, state) : false;
 
     if (textId && !textLoaded) {
       const textCall = textsAPI.show(textId);
@@ -49,7 +46,9 @@ export class ReaderContainer extends Component {
 
     if (sectionId && !sectionLoaded) {
       const sectionCall = sectionsAPI.show(sectionId);
-      const { promise: two } = dispatch(request(sectionCall, requests.rSection));
+      const { promise: two } = dispatch(
+        request(sectionCall, requests.rSection)
+      );
       promises.push(two);
     }
     return Promise.all(promises);
@@ -62,7 +61,11 @@ export class ReaderContainer extends Component {
     };
     return {
       annotations: select(requests.rAnnotations, state.entityStore),
-      section: grab("textSections", ownProps.match.params.sectionId, state.entityStore),
+      section: grab(
+        "textSections",
+        ownProps.match.params.sectionId,
+        state.entityStore
+      ),
       text: grab("texts", ownProps.match.params.textId, state.entityStore),
       resources: select(requests.rSectionResources, state.entityStore),
       authentication: state.authentication,
@@ -105,19 +108,22 @@ export class ReaderContainer extends Component {
   }
 
   shouldRedirect(props) {
-    const matches = matchRoutes(props.route.routes, this.props.location.pathname);
+    const matches = matchRoutes(
+      props.route.routes,
+      this.props.location.pathname
+    );
     return matches.length === 0;
   }
 
-  makeReaderActions = (dispatch) => {
+  makeReaderActions = dispatch => {
     const b = bindActionCreators;
     return {
-      selectFont: b((el) => selectFont(el), dispatch),
+      selectFont: b(el => selectFont(el), dispatch),
       incrementFontSize: b(incrementFontSize, dispatch),
       decrementFontSize: b(decrementFontSize, dispatch),
       incrementMargins: b(incrementMargins, dispatch),
       decrementMargins: b(decrementMargins, dispatch),
-      setColorScheme: b((el) => setColorScheme(el), dispatch)
+      setColorScheme: b(el => setColorScheme(el), dispatch)
     };
   };
 
@@ -128,9 +134,9 @@ export class ReaderContainer extends Component {
   }
 
   renderStyles = () => {
-    return values(this.props.text.relationships.stylesheets).map((stylesheet, index) => {
+    return values(this.props.text.relationships.stylesheets).map(stylesheet => {
       return (
-        <style key={index}>
+        <style key={stylesheet.id}>
           {stylesheet.attributes.styles}
         </style>
       );
@@ -138,7 +144,9 @@ export class ReaderContainer extends Component {
   };
 
   renderRoutes() {
+    /* eslint-disable no-unused-vars */
     const { route, ...otherProps } = this.props;
+    /* eslint-enable no-unused-vars */
     const injectProps = { ...otherProps, ...this.readerActions };
     const childRoutes = renderRoutes(this.props.route.routes, injectProps);
     return childRoutes;
@@ -170,9 +178,7 @@ export class ReaderContainer extends Component {
           <main>
             {this.renderRoutes()}
           </main>
-          <Footer
-            text={this.props.text}
-          />
+          <Footer text={this.props.text} />
           <FooterMenu
             visibility={this.props.visibility}
             commonActions={this.commonActions}

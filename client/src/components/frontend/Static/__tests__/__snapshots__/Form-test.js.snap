@@ -132,7 +132,7 @@ exports[`Frontend.Static.Form component renders correctly 1`] = `
                 <span
                   className="toggle-note"
                 >
-                  I have always been very upset when I am left out of the group. This goes double for newsletters,  promotional offers, and targeted advertising.
+                  I have always been very upset when I am left out of the group. This goes double for newsletters, promotional offers, and targeted advertising.
                 </span>
               </label>
               <label

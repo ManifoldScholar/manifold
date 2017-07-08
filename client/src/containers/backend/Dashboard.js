@@ -1,26 +1,28 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { entityStoreActions } from 'actions';
-import { List, Project, Dashboard as DashboardComponents } from 'components/backend';
-import { Link } from 'react-router-dom';
-import { select, meta } from 'utils/entityUtils';
-import { projectsAPI, statisticsAPI, requests } from 'api';
-import debounce from 'lodash/debounce';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { entityStoreActions } from "actions";
+import {
+  List,
+  Project,
+  Dashboard as DashboardComponents
+} from "components/backend";
+import { select, meta } from "utils/entityUtils";
+import { projectsAPI, statisticsAPI, requests } from "api";
+import debounce from "lodash/debounce";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
 const perPage = 5;
 
 export class DashboardContainer extends PureComponent {
-
   static fetchData(getState, dispatch) {
-    const state = getState();
-    const projectsRequest =
-      request(projectsAPI.index({}, { size: perPage }), requests.beProjects);
-    const statsRequest =
-      request(statisticsAPI.show(), requests.beStats);
+    const projectsRequest = request(
+      projectsAPI.index({}, { size: perPage }),
+      requests.beProjects
+    );
+    const statsRequest = request(statisticsAPI.show(), requests.beStats);
     const { promise: one } = dispatch(projectsRequest);
     const { promise: two } = dispatch(statsRequest);
     return Promise.all([one, two]);
@@ -36,7 +38,9 @@ export class DashboardContainer extends PureComponent {
 
   static propTypes = {
     projects: PropTypes.array,
-    statistics: PropTypes.object
+    statistics: PropTypes.object,
+    dispatch: PropTypes.func,
+    projectsMeta: PropTypes.object
   };
 
   constructor() {
@@ -63,7 +67,7 @@ export class DashboardContainer extends PureComponent {
   }
 
   updateHandlerCreator(page) {
-    return (event) => {
+    return event => {
       this.updateResults(event, page);
     };
   }
@@ -77,32 +81,31 @@ export class DashboardContainer extends PureComponent {
               <div className="left">
                 <header className="section-heading-secondary">
                   <h3>
-                    {'Projects'} <i className="manicon manicon-stack"></i>
+                    {"Projects"} <i className="manicon manicon-stack" />
                   </h3>
                 </header>
-                { this.props.projects && this.props.projectsMeta ?
-                  <List.Searchable
-                    newButtonVisible
-                    newButtonPath={lh.link("backendProjectsNew")}
-                    newButtonText="Add a New Project"
-                    entities={this.props.projects}
-                    singularUnit="project"
-                    pluralUnit="projects"
-                    pagination={this.props.projectsMeta.pagination}
-                    paginationClickHandler={this.updateHandlerCreator}
-                    entityComponent={Project.ListItem}
-                    filterChangeHandler={this.filterChangeHandler}
-                  />
-                  : null
-                }
-
+                {this.props.projects && this.props.projectsMeta
+                  ? <List.Searchable
+                      newButtonVisible
+                      newButtonPath={lh.link("backendProjectsNew")}
+                      newButtonText="Add a New Project"
+                      entities={this.props.projects}
+                      singularUnit="project"
+                      pluralUnit="projects"
+                      pagination={this.props.projectsMeta.pagination}
+                      paginationClickHandler={this.updateHandlerCreator}
+                      entityComponent={Project.ListItem}
+                      filterChangeHandler={this.filterChangeHandler}
+                    />
+                  : null}
               </div>
 
               <div className="right">
                 <section>
                   <header className="section-heading-secondary">
                     <h3>
-                      {'Notifications'} <i className="manicon manicon-bugle-small"></i>
+                      {"Notifications"}{" "}
+                      <i className="manicon manicon-bugle-small" />
                     </h3>
                   </header>
                   <DashboardComponents.Notifications />
@@ -111,7 +114,7 @@ export class DashboardContainer extends PureComponent {
                 <section>
                   <header className="section-heading-secondary">
                     <h3>
-                      {'Activity'} <i className="manicon manicon-pulse-small"></i>
+                      {"Activity"} <i className="manicon manicon-pulse-small" />
                     </h3>
                   </header>
                   <DashboardComponents.Activity

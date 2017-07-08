@@ -1,13 +1,12 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import update from 'immutability-helper';
-import debounce from 'lodash/debounce';
-import classNames from 'classnames';
-import { ApiClient } from 'api';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import update from "immutability-helper";
+import debounce from "lodash/debounce";
+import classNames from "classnames";
+import { ApiClient } from "api";
 
 class PredictiveInput extends PureComponent {
-
   static displayName = "Form.PredictiveInput";
 
   static mapStateToProps(state) {
@@ -22,7 +21,8 @@ class PredictiveInput extends PureComponent {
     onSelect: PropTypes.func.isRequired,
     label: PropTypes.func.isRequired,
     fetch: PropTypes.func.isRequired,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    authToken: PropTypes.string
   };
 
   constructor(props) {
@@ -51,48 +51,18 @@ class PredictiveInput extends PureComponent {
     }
   }
 
-  updateOptions(value, fetch) {
-    if (value === "") {
-      const state = update(this.state, {
-        options: { $set: [] },
-        highlighted: { $set: false },
-        open: { $set: false }
-      });
-      this.setState(state);
-      return;
-    }
-    const { endpoint, method, options } = fetch({ keyword: value, typeahead: true });
-    options.authToken = this.props.authToken;
-    const client = new ApiClient;
-    client.call(endpoint, method, options).then((results) => {
-      const items = results.data;
-      const open = results.data.length > 0 ? true : false;
-      // Check to see if key-selected option is still available
-      const selected = this.getHighlightedOption(items, this.state.highlighted);
-      const state = update(this.state, {
-        open: { $set: open },
-        options: { $set: items },
-        highlighted: { $set: selected ? selected : false }
-      });
-      this.setState(state);
-    });
+  getHighlightedOption(list, id) {
+    return list.filter(item => {
+      return item.id === id;
+    })[0];
   }
 
-  handleChange(event) {
-    const value = event.target.value;
-    const set = {
-      value: { $set: value },
-      highlighted: { $set: false }
-    };
-    if (value === "") set.open = { $set: false };
-    const state = update(this.state, set);
-    this.setState(state);
-  }
-
-  handleBlur(event) {
-    setTimeout(() => {
-      this.close();
-    }, 250);
+  getOptionOrdinal(list, id) {
+    return list
+      .map(item => {
+        return item.id;
+      })
+      .indexOf(id);
   }
 
   clear() {
@@ -110,7 +80,7 @@ class PredictiveInput extends PureComponent {
     this.setState(state);
   }
 
-  handleFocus(event) {
+  handleFocus(eventIgnored) {
     this.open();
   }
 
@@ -120,11 +90,14 @@ class PredictiveInput extends PureComponent {
   }
 
   handleKeyPress(event) {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       event.preventDefault();
       // Otherwise, submit a new one
       if (this.state.highlighted) {
-        const selected = this.getHighlightedOption(this.state.options, this.state.highlighted);
+        const selected = this.getHighlightedOption(
+          this.state.options,
+          this.state.highlighted
+        );
         this.select(selected);
       } else {
         this.submit();
@@ -132,15 +105,54 @@ class PredictiveInput extends PureComponent {
     }
   }
 
-  getOptionOrdinal(list, id) {
-    return list.map((item) => { return item.id; }).indexOf(id);
+  handleBlur(eventIgnored) {
+    setTimeout(() => {
+      this.close();
+    }, 250);
   }
 
-  getHighlightedOption(list, id) {
-    return list.filter((item) => { return item.id === id; })[0];
+  handleChange(event) {
+    const value = event.target.value;
+    const set = {
+      value: { $set: value },
+      highlighted: { $set: false }
+    };
+    if (value === "") set.open = { $set: false };
+    const state = update(this.state, set);
+    this.setState(state);
   }
 
-  clearHighlighted(event) {
+  updateOptions(value, fetch) {
+    if (value === "") {
+      const state = update(this.state, {
+        options: { $set: [] },
+        highlighted: { $set: false },
+        open: { $set: false }
+      });
+      this.setState(state);
+      return;
+    }
+    const { endpoint, method, options } = fetch({
+      keyword: value,
+      typeahead: true
+    });
+    options.authToken = this.props.authToken;
+    const client = new ApiClient();
+    client.call(endpoint, method, options).then(results => {
+      const items = results.data;
+      const open = results.data.length > 0;
+      // Check to see if key-selected option is still available
+      const selected = this.getHighlightedOption(items, this.state.highlighted);
+      const state = update(this.state, {
+        open: { $set: open },
+        options: { $set: items },
+        highlighted: { $set: selected || false }
+      });
+      this.setState(state);
+    });
+  }
+
+  clearHighlighted(eventIgnored) {
     this.setState({
       highlighted: false
     });
@@ -154,7 +166,7 @@ class PredictiveInput extends PureComponent {
 
     if (options.length > 0) {
       // If the down key is pressed...
-      if (event.key === 'ArrowDown') {
+      if (event.key === "ArrowDown") {
         event.preventDefault();
         // If nothing has been highlighted, select
         // the first option
@@ -170,7 +182,7 @@ class PredictiveInput extends PureComponent {
             });
           }
         }
-      } else if (event.key === 'ArrowUp' && highlighted) {
+      } else if (event.key === "ArrowUp" && highlighted) {
         // If the up key is pressed... (highlighted only)
         event.preventDefault();
         const prevOrdinal = this.getOptionOrdinal(options, highlighted) - 1;
@@ -209,15 +221,15 @@ class PredictiveInput extends PureComponent {
   }
 
   render() {
-
     const classes = classNames(this.props.className, {
-      'predictive-open': this.state.open === true && this.hasOptions(this.state.options)
+      "predictive-open":
+        this.state.open === true && this.hasOptions(this.state.options)
     });
 
     return (
       <div className={classes}>
         <div className="input">
-          <button className="manicon manicon-plus"></button>
+          <button className="manicon manicon-plus" />
           <input
             className="text-input"
             type="text"
@@ -229,16 +241,15 @@ class PredictiveInput extends PureComponent {
             onKeyPress={this.handleKeyPress}
             onKeyDown={this.handleKeyDown}
           />
-          { this.props.onNew ?
-            <button className="submit" onClick={this.handleNew} >
-              {'Create New'}
-            </button>
-            : null
-          }
+          {this.props.onNew
+            ? <button className="submit" onClick={this.handleNew}>
+                {"Create New"}
+              </button>
+            : null}
         </div>
         <nav className="predictive-list">
           <ul>
-            {this.state.options.map((option) => {
+            {this.state.options.map(option => {
               const listingClass = classNames({
                 highlighted: option.id === this.state.highlighted
               });
@@ -246,8 +257,12 @@ class PredictiveInput extends PureComponent {
                 <li
                   key={option.id}
                   className={listingClass}
-                  onClick={(event) => { this.handleSelect(event, option); }}
-                  onMouseOver={(event) => { this.clearHighlighted(event); }}
+                  onClick={event => {
+                    this.handleSelect(event, option);
+                  }}
+                  onMouseOver={event => {
+                    this.clearHighlighted(event);
+                  }}
                 >
                   {this.props.label(option)}
                 </li>
@@ -260,6 +275,4 @@ class PredictiveInput extends PureComponent {
   }
 }
 
-export default connect(
-  PredictiveInput.mapStateToProps
-)(PredictiveInput);
+export default connect(PredictiveInput.mapStateToProps)(PredictiveInput);

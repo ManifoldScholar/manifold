@@ -1,9 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import isNil from 'lodash/isNil';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import isNil from "lodash/isNil";
 
 export default class Panel extends PureComponent {
+  static propTypes = {
+    primary: PropTypes.bool,
+    secondary: PropTypes.string,
+    direction: PropTypes.string,
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+    name: PropTypes.string
+  };
 
   constructor(props) {
     super(props);
@@ -12,7 +19,7 @@ export default class Panel extends PureComponent {
     };
   }
 
-  handleTailHighlight = (condition) => {
+  handleTailHighlight = condition => {
     if (condition) {
       this.setState({
         tailHighlight: true
@@ -20,7 +27,7 @@ export default class Panel extends PureComponent {
     }
   };
 
-  handleTailBlur = (condition) => {
+  handleTailBlur = condition => {
     if (condition) {
       this.setState({
         tailHighlight: false
@@ -47,10 +54,12 @@ export default class Panel extends PureComponent {
       key: position
     };
     if (position === 0) {
-      additionalProps.onMouseEnter =
-        () => { this.handleTailHighlight(this.props.direction === 'down'); };
-      additionalProps.onMouseLeave =
-        () => { this.handleTailBlur(true); };
+      additionalProps.onMouseEnter = () => {
+        this.handleTailHighlight(this.props.direction === "down");
+      };
+      additionalProps.onMouseLeave = () => {
+        this.handleTailBlur(true);
+      };
     }
     return React.cloneElement(child, additionalProps);
   }
@@ -67,28 +76,30 @@ export default class Panel extends PureComponent {
 
   render() {
     const pageClass = classNames({
-      'popup-page': !this.isSecondary(),
-      'popup-page-secondary': this.isSecondary(),
+      "popup-page": !this.isSecondary(),
+      "popup-page-secondary": this.isSecondary(),
       hidden: this.isHidden(),
-      bottom: this.props.direction === 'up',
-      top: this.props.direction === 'down'
+      bottom: this.props.direction === "up",
+      top: this.props.direction === "down"
     });
 
     const tailClass = classNames({
       tail: true,
-      'tail-down': this.props.direction === 'up',
-      'tail-up': this.props.direction === 'down',
+      "tail-down": this.props.direction === "up",
+      "tail-up": this.props.direction === "down",
       highlight: this.state.tailHighlight
     });
 
     const style = {
-      marginLeft: this.props.secondary ? -this.p.offsetWidth + 'px' : null
+      marginLeft: this.props.secondary ? -this.p.offsetWidth + "px" : null
     };
 
     return (
       <section
         className={pageClass}
-        ref={(p) => { this.p = p; }}
+        ref={p => {
+          this.p = p;
+        }}
         style={style}
       >
         {this.renderChildren()}
@@ -96,5 +107,4 @@ export default class Panel extends PureComponent {
       </section>
     );
   }
-
 }

@@ -1,19 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
-import some from 'lodash/some';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form } from "components/backend";
 
 export default class ResourceFormKindDocument extends PureComponent {
-
   static displayName = "Resource.Form.Kind.Document";
 
-  static propTypes = {
-  };
+  static propTypes = {};
 
   render() {
     return (
       <Form.Upload
-        style="square"
+        layout="square"
         label="Document File"
         accepts="document"
         readFrom="attributes[attachmentFileName]"
@@ -23,6 +20,4 @@ export default class ResourceFormKindDocument extends PureComponent {
       />
     );
   }
-
 }
-

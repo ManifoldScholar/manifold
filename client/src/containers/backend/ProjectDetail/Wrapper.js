@@ -1,29 +1,30 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Dialog, Project, Navigation } from 'components/backend';
-import { uiVisibilityActions, entityStoreActions, notificationActions } from 'actions';
-import { select } from 'utils/entityUtils';
-import { projectsAPI, requests } from 'api';
-import { ProjectDetail } from 'containers/backend';
-import { renderRoutes } from 'helpers/routing';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Dialog, Navigation } from "components/backend";
+import { entityStoreActions } from "actions";
+import { select } from "utils/entityUtils";
+import { projectsAPI, requests } from "api";
+import { renderRoutes } from "helpers/routing";
+import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
 
 export class ProjectDetailWrapperContainer extends PureComponent {
-
   static displayName = "ProjectDetail.Wrapper";
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps(state) {
     return {
       project: select(requests.feProject, state.entityStore)
     };
   }
 
   static propTypes = {
-    children: PropTypes.object,
-    project: PropTypes.object
+    project: PropTypes.object,
+    dispatch: PropTypes.func,
+    match: PropTypes.object,
+    history: PropTypes.object,
+    route: PropTypes.object
   };
 
   constructor(props) {
@@ -97,7 +98,10 @@ export class ProjectDetailWrapperContainer extends PureComponent {
 
   doPreview(event) {
     event.preventDefault();
-    const win = window.open(lh.link("frontendProject", this.props.project.id), '_blank');
+    const win = window.open(
+      lh.link("frontendProject", this.props.project.id),
+      "_blank"
+    );
     win.focus();
   }
 
@@ -121,26 +125,28 @@ export class ProjectDetailWrapperContainer extends PureComponent {
       this.setState({
         confirmation: { resolve, reject, heading, message }
       });
-    }).then(() => {
-      this.doDestroy(event);
-      this.closeDialog();
-    }, () => { this.closeDialog(); });
+    }).then(
+      () => {
+        this.doDestroy(event);
+        this.closeDialog();
+      },
+      () => {
+        this.closeDialog();
+      }
+    );
   }
 
   renderUtility() {
     return (
       <div>
-        <button
-          onClick={this.doPreview}
-          className="button-bare-primary"
-        >
-          Preview <i className="manicon manicon-eye-outline"></i>
+        <button onClick={this.doPreview} className="button-bare-primary">
+          Preview <i className="manicon manicon-eye-outline" />
         </button>
         <button
           onClick={this.handleProjectDestroy}
           className="button-bare-primary"
         >
-          Delete <i className="manicon manicon-trashcan"></i>
+          Delete <i className="manicon manicon-trashcan" />
         </button>
       </div>
     );
@@ -149,7 +155,10 @@ export class ProjectDetailWrapperContainer extends PureComponent {
   renderRoutes() {
     const { project } = this.props;
     const refresh = this.fetchProject;
-    const childRoutes = renderRoutes(this.props.route.routes, { refresh, project });
+    const childRoutes = renderRoutes(this.props.route.routes, {
+      refresh,
+      project
+    });
     return childRoutes;
   }
 
@@ -159,16 +168,12 @@ export class ProjectDetailWrapperContainer extends PureComponent {
 
     return (
       <div>
-        {
-          this.state.confirmation ?
-            <Dialog.Confirm {...this.state.confirmation} />
-            : null
-        }
+        {this.state.confirmation
+          ? <Dialog.Confirm {...this.state.confirmation} />
+          : null}
         <Navigation.DetailHeader
           type="project"
-          breadcrumb={[
-            { path: lh.link("backend"), label: "ALL PROJECTS" }
-          ]}
+          breadcrumb={[{ path: lh.link("backend"), label: "ALL PROJECTS" }]}
           title={project.attributes.title}
           subtitle={project.attributes.subtitle}
           utility={this.renderUtility()}

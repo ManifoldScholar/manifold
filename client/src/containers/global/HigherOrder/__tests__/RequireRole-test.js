@@ -1,22 +1,17 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { RequireRoleWrapper } from '../RequireRole';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { RequireRoleWrapper } from "../RequireRole";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Global HigherOrder RequireRole Container", () => {
-
   const store = build.store();
   const authentication = {
     authenticated: true,
     currentUser: build.entity.user("1")
   };
-  const child = (
-    <div>
-      How is babby formed?
-    </div>
-  );
+  const child = <div>How is babby formed?</div>;
 
   it("renders correctly when role matches", () => {
     const component = renderer.create(
@@ -51,9 +46,4 @@ describe("Global HigherOrder RequireRole Container", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });
-
-
-
-

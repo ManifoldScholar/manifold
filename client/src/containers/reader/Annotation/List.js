@@ -1,33 +1,34 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import Annotation from 'components/reader/Annotation';
-import { connect } from 'react-redux';
-import { annotationsAPI, requests } from 'api';
-import { entityStoreActions, uiVisibilityActions } from 'actions';
-import { bindActionCreators } from 'redux';
-import { select, meta } from 'utils/entityUtils';
-import { Utility } from 'components/frontend';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import Annotation from "components/reader/Annotation";
+import { connect } from "react-redux";
+import { annotationsAPI, requests } from "api";
+import { entityStoreActions, uiVisibilityActions } from "actions";
+import { bindActionCreators } from "redux";
+import { select } from "utils/entityUtils";
+
 const { request } = entityStoreActions;
-import { hash } from 'utils/string';
+import { hash } from "utils/string";
 
 export class AnnotationList extends PureComponent {
-
   static displayName = "Annotation.List";
 
   static propTypes = {
     annotations: PropTypes.array,
     annotationIds: PropTypes.array.isRequired,
     createHandler: PropTypes.func.isRequired,
-    closeDrawer: PropTypes.func
-  }
+    closeDrawer: PropTypes.func,
+    sectionId: PropTypes.string,
+    dispatch: PropTypes.func.isRequired
+  };
 
   static defaultProps = {
     annotations: []
-  }
+  };
 
   static mapStateToProps(state, ownProps) {
     const newState = {
-      annotations: select(requests.rDrawerAnnotations, state.entityStore) || [],
+      annotations: select(requests.rDrawerAnnotations, state.entityStore) || []
     };
     return Object.assign({}, newState, ownProps);
   }
@@ -43,7 +44,10 @@ export class AnnotationList extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.annotations.length === 0 && this.props.annotations.length > 0) {
+    if (
+      nextProps.annotations.length === 0 &&
+      this.props.annotations.length > 0
+    ) {
       nextProps.closeDrawer();
     }
   }
@@ -74,7 +78,9 @@ export class AnnotationList extends PureComponent {
 
   fetchAnnotations(props) {
     const sId = this.props.sectionId;
-    const annotationsCall = annotationsAPI.forSection(sId, { ids: this.props.annotationIds });
+    const annotationsCall = annotationsAPI.forSection(sId, {
+      ids: this.props.annotationIds
+    });
     props.dispatch(request(annotationsCall, requests.rDrawerAnnotations));
   }
 
@@ -87,22 +93,23 @@ export class AnnotationList extends PureComponent {
   deleteAnnotation(annotation) {
     const call = annotationsAPI.destroy(annotation.id);
     const options = { removes: { type: "annotations", id: annotation.id } };
-    const res = this.props.dispatch(request(call, requests.rAnnotationDestroy, options));
+    const res = this.props.dispatch(
+      request(call, requests.rAnnotationDestroy, options)
+    );
     return res.promise;
   }
 
   render() {
-
     const grouped = this.annotationsGroupedBySubject();
     const showLogin = bindActionCreators(
-      () => uiVisibilityActions.visibilityToggle('signInUpOverlay'),
+      () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
       this.props.dispatch
     );
 
     return (
       <div>
         <ul className="selection-list">
-          {grouped.map((group) => {
+          {grouped.map(group => {
             return (
               <li key={group.selection.hash} className="annotation-detail">
                 <Annotation.Selection.Wrapper
@@ -115,7 +122,7 @@ export class AnnotationList extends PureComponent {
                 />
                 <div className="container">
                   <ul className="annotation-list">
-                    {group.annotations.map((annotation) => {
+                    {group.annotations.map(annotation => {
                       const creator = annotation.relationships.creator;
                       return (
                         <Annotation.Annotation
@@ -139,6 +146,4 @@ export class AnnotationList extends PureComponent {
   }
 }
 
-export default connect(
-  AnnotationList.mapStateToProps
-)(AnnotationList);
+export default connect(AnnotationList.mapStateToProps)(AnnotationList);

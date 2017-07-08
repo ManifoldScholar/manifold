@@ -25,7 +25,8 @@ exports[`Reader.Annotation.Annotation component renders correctly 1`] = `
         Rowan Ida
       </h4>
       <datetime>
-         ago
+         
+        ago
       </datetime>
     </div>
   </section>

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import throttle from 'lodash/throttle';
-import FormattedDate from 'components/global/FormattedDate';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import throttle from "lodash/throttle";
+import FormattedDate from "components/global/FormattedDate";
 
 export default class ResourceListSlideFigure extends Component {
   static propTypes = {
@@ -19,16 +19,16 @@ export default class ResourceListSlideFigure extends Component {
       this.throttledWidth = throttle(() => {
         this._figure.style.width = this.getParentWidth(this._figure);
       }, 200);
-      window.addEventListener('resize', this.throttledWidth);
+      window.addEventListener("resize", this.throttledWidth);
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.throttledWidth);
+    window.removeEventListener("resize", this.throttledWidth);
   }
 
   getParentWidth(figure) {
-    return figure.parentNode.offsetWidth + 'px';
+    return figure.parentNode.offsetWidth + "px";
   }
 
   render() {
@@ -38,14 +38,14 @@ export default class ResourceListSlideFigure extends Component {
     return (
       <figure>
         <div
-          ref={ (c) => {
+          ref={c => {
             this._figure = c;
-          } }
+          }}
           className="figure-default"
-          style={ { backgroundImage: 'url(/static/images/resource-splash.png)' } }
+          style={{ backgroundImage: "url(/static/images/resource-splash.png)" }}
         >
           <div className="resource-info">
-            <i className={`manicon manicon-resource-${attr.kind}`}></i>
+            <i className={`manicon manicon-resource-${attr.kind}`} />
             <span className="resource-type">
               {attr.kind}
             </span>

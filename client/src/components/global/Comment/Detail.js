@@ -1,15 +1,13 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Utility } from 'components/frontend';
-import { Comment as CommentContainer } from 'containers/global';
-import { Helper } from 'components/global';
-import classNames from 'classnames';
-import { FormattedDate } from 'components/global';
-import isObject from 'lodash/isObject';
-import HigherOrder from 'containers/global/HigherOrder';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Comment as CommentContainer } from "containers/global";
+import { Helper } from "components/global";
+import classNames from "classnames";
+import { FormattedDate } from "components/global";
+import isObject from "lodash/isObject";
+import HigherOrder from "containers/global/HigherOrder";
 
 export default class CommentDetail extends PureComponent {
-
   static displayName = "Comment.Detail";
 
   static propTypes = {
@@ -19,8 +17,10 @@ export default class CommentDetail extends PureComponent {
     handleRestore: PropTypes.func.isRequired,
     handleFlag: PropTypes.func.isRequired,
     comment: PropTypes.object.isRequired,
-    showLogin: PropTypes.func
-  }
+    showLogin: PropTypes.func,
+    handleUnflag: PropTypes.func,
+    parent: PropTypes.object
+  };
 
   constructor(props) {
     super(props);
@@ -60,23 +60,29 @@ export default class CommentDetail extends PureComponent {
   }
 
   startEdit() {
-    this.setState({
-      editor: null
-    }, () => {
-      this.setState({
-        editor: "edit"
-      });
-    });
+    this.setState(
+      {
+        editor: null
+      },
+      () => {
+        this.setState({
+          editor: "edit"
+        });
+      }
+    );
   }
 
   startReply() {
-    this.setState({
-      editor: null
-    }, () => {
-      this.setState({
-        editor: "reply"
-      });
-    });
+    this.setState(
+      {
+        editor: null
+      },
+      () => {
+        this.setState({
+          editor: "reply"
+        });
+      }
+    );
   }
 
   closeEditor() {
@@ -93,12 +99,10 @@ export default class CommentDetail extends PureComponent {
           <div>
             <figure className="author-avatar dull">
               <div className="no-image">
-                <i className="manicon manicon-person"></i>
+                <i className="manicon manicon-person" />
               </div>
             </figure>
-            <h4 className="deleted-notification">
-              This comment was deleted.
-            </h4>
+            <h4 className="deleted-notification">This comment was deleted.</h4>
           </div>
         </section>
         <CommentContainer.Thread
@@ -143,7 +147,7 @@ export default class CommentDetail extends PureComponent {
     const { comment, parent } = this.props;
     const { creator } = comment.relationships;
     const avatarClass = classNames({
-      'author-avatar': true,
+      "author-avatar": true,
       dull: creator && !creator.attributes.isCurrentUser
     });
 
@@ -152,49 +156,49 @@ export default class CommentDetail extends PureComponent {
         <section className="meta">
           <div>
             <figure className={avatarClass}>
-              { creator.attributes.avatarStyles.smallSquare ?
-                <div className="image"
-                  style={{
-                    backgroundImage: `url(${creator.attributes.avatarStyles.smallSquare})`
-                  }}
-                >
-                  <span className="screen-reader-text">
-                    Profile image for {creator.attributes.fullName}
-                  </span>
-                </div> :
-                <div className="no-image">
-                  <i className="manicon manicon-person"></i>
-                </div>
-              }
+              {creator.attributes.avatarStyles.smallSquare
+                ? <div
+                    className="image"
+                    style={{
+                      backgroundImage: `url(${creator.attributes.avatarStyles
+                        .smallSquare})`
+                    }}
+                  >
+                    <span className="screen-reader-text">
+                      Profile image for {creator.attributes.fullName}
+                    </span>
+                  </div>
+                : <div className="no-image">
+                    <i className="manicon manicon-person" />
+                  </div>}
             </figure>
             <h4 className="author-name">
               {creator.attributes.fullName}
-              {isObject(parent) ?
-                <span className="reply-to">
-                  <i className="manicon manicon-arrow-curved-right"></i>
-                  Reply to {parent.relationships.creator.attributes.fullName}
-                </span>
-              : null}
+              {isObject(parent)
+                ? <span className="reply-to">
+                    <i className="manicon manicon-arrow-curved-right" />
+                    Reply to {parent.relationships.creator.attributes.fullName}
+                  </span>
+                : null}
             </h4>
             <datetime>
               <FormattedDate
                 format="distanceInWords"
                 date={comment.attributes.createdAt}
-              /> ago
+              />{" "}
+              ago
             </datetime>
           </div>
           <div className="markers">
-            {comment.attributes.deleted ?
-              <div className="marker secondary">
-                Deleted
-              </div>
-            : null}
+            {comment.attributes.deleted
+              ? <div className="marker secondary">Deleted</div>
+              : null}
             <HigherOrder.RequireRole requiredRole="admin">
-              {comment.attributes.flagsCount > 0 ?
-                <div className="marker secondary">
-                  {comment.attributes.flagsCount}
-                  {comment.attributes.flagsCount === 1 ? " flag" : " flags" }
-                </div>
+              {comment.attributes.flagsCount > 0
+                ? <div className="marker secondary">
+                    {comment.attributes.flagsCount}
+                    {comment.attributes.flagsCount === 1 ? " flag" : " flags"}
+                  </div>
                 : null}
             </HigherOrder.RequireRole>
           </div>
@@ -206,42 +210,49 @@ export default class CommentDetail extends PureComponent {
           <nav className="utility">
             <ul>
               <li>
-                <button
-                  className={replyButtonClass}
-                  onClick={this.startReply}
-                >
-                  {'Reply'}
+                <button className={replyButtonClass} onClick={this.startReply}>
+                  {"Reply"}
                 </button>
               </li>
-              {comment.attributes.canUpdateObject ?
-                <li>
-                  <button onClick={this.startEdit}>{'Edit'}</button>
-                </li>
+              {comment.attributes.canUpdateObject
+                ? <li>
+                    <button onClick={this.startEdit}>
+                      {"Edit"}
+                    </button>
+                  </li>
                 : null}
-              {comment.attributes.canDeleteObject && !comment.attributes.deleted ?
-                <li>
-                  <button onClick={this.handleDelete}>{'Delete'}</button>
-                </li>
-              : null}
-              {comment.attributes.deleted ?
-                <li>
-                  <button onClick={this.handleRestore}>{'Restore'}</button>
-                </li>
-              : null}
-              {comment.attributes.deleted ?
-                <li>
-                  <button onClick={this.handleDestroy}>{'Destroy'}</button>
-                </li>
-              : null}
-              {comment.attributes.flagged ?
-                <li>
-                  <button className="secondary" onClick={this.handleUnflag}>{'Unflag'}</button>
-                </li>
-              :
-                <li>
-                  <button onClick={this.handleFlag}>{'Flag'}</button>
-                </li>
-              }
+              {comment.attributes.canDeleteObject && !comment.attributes.deleted
+                ? <li>
+                    <button onClick={this.handleDelete}>
+                      {"Delete"}
+                    </button>
+                  </li>
+                : null}
+              {comment.attributes.deleted
+                ? <li>
+                    <button onClick={this.handleRestore}>
+                      {"Restore"}
+                    </button>
+                  </li>
+                : null}
+              {comment.attributes.deleted
+                ? <li>
+                    <button onClick={this.handleDestroy}>
+                      {"Destroy"}
+                    </button>
+                  </li>
+                : null}
+              {comment.attributes.flagged
+                ? <li>
+                    <button className="secondary" onClick={this.handleUnflag}>
+                      {"Unflag"}
+                    </button>
+                  </li>
+                : <li>
+                    <button onClick={this.handleFlag}>
+                      {"Flag"}
+                    </button>
+                  </li>}
             </ul>
             {this.renderEditor()}
           </nav>
@@ -250,10 +261,8 @@ export default class CommentDetail extends PureComponent {
           <nav className="utility">
             <ul>
               <li>
-                <button
-                  onClick={this.props.showLogin}
-                >
-                  {'Login to reply'}
+                <button onClick={this.props.showLogin}>
+                  {"Login to reply"}
                 </button>
               </li>
             </ul>
@@ -276,5 +285,4 @@ export default class CommentDetail extends PureComponent {
     }
     return this.renderComment();
   }
-
 }

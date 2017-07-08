@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { FatalError } from 'components/global';
+import React, { Component } from "react";
+import { FatalError } from "components/global";
 
 export default class NotFound extends Component {
-
   error() {
     return {
       status: 404,
@@ -12,8 +11,6 @@ export default class NotFound extends Component {
   }
 
   render() {
-    return (
-      <FatalError error={this.error()}/>
-    );
+    return <FatalError error={this.error()} />;
   }
 }

@@ -1,9 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Filters from '../Filters';
+import React from "react";
+import renderer from "react-test-renderer";
+import Filters from "../Filters";
 
 describe("Frontend.ProjectList.Filters component", () => {
-
   const subjects = [
     {
       type: "subjects",
@@ -22,15 +21,11 @@ describe("Frontend.ProjectList.Filters component", () => {
   ];
   const updateActionMock = jest.fn();
 
-  it('renders correctly', () => {
+  it("renders correctly", () => {
     const component = renderer.create(
-      <Filters
-        updateAction={updateActionMock}
-        subjects={subjects}
-      />
+      <Filters updateAction={updateActionMock} subjects={subjects} />
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

@@ -33,7 +33,7 @@ exports[`Frontend.Layout.ButtonNavigation component renders correctly 1`] = `
           <i
             className="manicon manicon-books-with-glasses"
           />
-          Projects You're Following
+          Projects You're Following 
         </span>
       </a>
     </nav>
@@ -72,7 +72,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the grayBg prop 1`]
           <i
             className="manicon manicon-books-with-glasses"
           />
-          Projects You're Following
+          Projects You're Following 
         </span>
       </a>
     </nav>
@@ -99,7 +99,7 @@ exports[`Frontend.Layout.ButtonNavigation component respects the showBrowse prop
           <i
             className="manicon manicon-books-with-glasses"
           />
-          Projects You're Following
+          Projects You're Following 
         </span>
       </a>
     </nav>

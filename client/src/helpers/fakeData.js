@@ -3,31 +3,29 @@ const resources = [
     id: 1,
     type: "resources",
     attributes: {
-      type: 'audio',
-      title: 'Consectetur Ullamcorper',
-      tags: [
-        'Japan'
-      ],
+      type: "audio",
+      title: "Consectetur Ullamcorper",
+      tags: ["Japan"],
       position: 0
-    },
+    }
   },
   {
     id: 2,
     type: "resources",
     attributes: {
-      title: 'Cras justo odio, dapibus ac facilisis',
-      type: 'video',
-      externalHost: 'vimeo',
-      externalIdentifier: '89700651',
+      title: "Cras justo odio, dapibus ac facilisis",
+      type: "video",
+      externalHost: "vimeo",
+      externalIdentifier: "89700651",
       description:
-      'Praesent commodo cursus magna, vel scelerisque nisl consectetur et. ' +
-      'Donec id elit non mi porta gravida at eget metus. Morbi leo risus, ' +
-      'porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget ' +
-      'risus varius blandit sit amet non magna. Integer posuere erat a ante ' +
-      'venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna ' +
-      'mollis ornare vel eu leo. Praesent commodo cursus magna, ' +
-      'vel scelerisque nisl consectetur et.',
-      link: 'https://vimeo.com/89700651',
+        "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. " +
+        "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, " +
+        "porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget " +
+        "risus varius blandit sit amet non magna. Integer posuere erat a ante " +
+        "venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna " +
+        "mollis ornare vel eu leo. Praesent commodo cursus magna, " +
+        "vel scelerisque nisl consectetur et.",
+      link: "https://vimeo.com/89700651",
       position: 1
     }
   },
@@ -35,19 +33,19 @@ const resources = [
     id: 3,
     type: "resources",
     attributes: {
-      title: 'Cras justo odio, dapibus ac facilisis',
-      type: 'video',
-      externalHost: 'youTube',
-      externalIdentifier: 'YbcxU1IK7s4',
+      title: "Cras justo odio, dapibus ac facilisis",
+      type: "video",
+      externalHost: "youTube",
+      externalIdentifier: "YbcxU1IK7s4",
       description:
-      'Praesent commodo cursus magna, vel scelerisque nisl consectetur et. ' +
-      'Donec id elit non mi porta gravida at eget metus. Morbi leo risus, ' +
-      'porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget ' +
-      'risus varius blandit sit amet non magna. Integer posuere erat a ante ' +
-      'venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna ' +
-      'mollis ornare vel eu leo. Praesent commodo cursus magna, ' +
-      'vel scelerisque nisl consectetur et.',
-      link: 'https://youtu.be/YbcxU1IK7s4',
+        "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. " +
+        "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, " +
+        "porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget " +
+        "risus varius blandit sit amet non magna. Integer posuere erat a ante " +
+        "venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna " +
+        "mollis ornare vel eu leo. Praesent commodo cursus magna, " +
+        "vel scelerisque nisl consectetur et.",
+      link: "https://youtu.be/YbcxU1IK7s4",
       position: 2
     }
   },
@@ -55,14 +53,14 @@ const resources = [
     id: 4,
     type: "resources",
     attributes: {
-      title: 'Cras justo odio, dapibus ac facilisis',
-      type: 'image',
-      image: '/static/placeholder/portrait-ndt01.jpg',
+      title: "Cras justo odio, dapibus ac facilisis",
+      type: "image",
+      image: "/static/placeholder/portrait-ndt01.jpg",
       description:
-      'Maecenas sed diam eget risus varius blandit sit amet non magna. ' +
-      'Cras mattis consectetur purus sit amet fermentum. Donec id elit non' +
-      ' mi porta gravida at eget metus. Curabitur blandit tempus porttitor.',
-      link: '/static/placeholder/portrait-ndt01.jpg',
+        "Maecenas sed diam eget risus varius blandit sit amet non magna. " +
+        "Cras mattis consectetur purus sit amet fermentum. Donec id elit non" +
+        " mi porta gravida at eget metus. Curabitur blandit tempus porttitor.",
+      link: "/static/placeholder/portrait-ndt01.jpg",
       position: 3
     }
   },
@@ -70,18 +68,18 @@ const resources = [
     id: 5,
     type: "resources",
     attributes: {
-      title: 'Nulla vitae elit libero',
-      type: 'image',
-      image: '/static/placeholder/portrait-unsplash01.jpg',
+      title: "Nulla vitae elit libero",
+      type: "image",
+      image: "/static/placeholder/portrait-unsplash01.jpg",
       description:
-      'Praesent commodo cursus magna, vel scelerisque nisl consectetur et. ' +
-      'Donec id elit non mi porta gravida at eget metus. Morbi leo risus, ' +
-      'porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget ' +
-      'risus varius blandit sit amet non magna. Integer posuere erat a ante ' +
-      'venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna ' +
-      'mollis ornare vel eu leo. Praesent commodo cursus magna, ' +
-      'vel scelerisque nisl consectetur et.',
-      link: '/static/placeholder/portrait-unsplash01.jpg',
+        "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. " +
+        "Donec id elit non mi porta gravida at eget metus. Morbi leo risus, " +
+        "porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget " +
+        "risus varius blandit sit amet non magna. Integer posuere erat a ante " +
+        "venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna " +
+        "mollis ornare vel eu leo. Praesent commodo cursus magna, " +
+        "vel scelerisque nisl consectetur et.",
+      link: "/static/placeholder/portrait-unsplash01.jpg",
       position: 4
     }
   },
@@ -89,18 +87,15 @@ const resources = [
     id: 6,
     type: "resources",
     attributes: {
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      type: 'file',
-      image: '/static/placeholder/background-coniferous.jpg',
+      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      type: "file",
+      image: "/static/placeholder/background-coniferous.jpg",
       description:
-      'Maecenas sed diam eget risus varius blandit sit amet non magna. ' +
-      'Cras mattis consectetur purus sit amet fermentum. Donec id elit non' +
-      ' mi porta gravida at eget metus. Curabitur blandit tempus porttitor.',
-      link: '#',
-      tags: [
-        'Japan',
-        'Photography'
-      ],
+        "Maecenas sed diam eget risus varius blandit sit amet non magna. " +
+        "Cras mattis consectetur purus sit amet fermentum. Donec id elit non" +
+        " mi porta gravida at eget metus. Curabitur blandit tempus porttitor.",
+      link: "#",
+      tags: ["Japan", "Photography"],
       position: 5
     }
   },
@@ -108,11 +103,9 @@ const resources = [
     id: 7,
     type: "resources",
     attributes: {
-      type: 'presentation',
-      title: 'Etiam Dolor Ipsum',
-      tags: [
-        'Second Interview'
-      ],
+      type: "presentation",
+      title: "Etiam Dolor Ipsum",
+      tags: ["Second Interview"],
       position: 6
     }
   },
@@ -120,8 +113,8 @@ const resources = [
     id: 8,
     type: "resources",
     attributes: {
-      type: 'link',
-      title: 'Lorem ipsum dolor sit, adipiscing elit.',
+      type: "link",
+      title: "Lorem ipsum dolor sit, adipiscing elit.",
       position: 7
     }
   },
@@ -129,12 +122,9 @@ const resources = [
     id: 9,
     type: "resources",
     attributes: {
-      type: 'file',
-      title: 'Venenatis Vehicula',
-      tags: [
-        'Photography',
-        'Second Interview'
-      ],
+      type: "file",
+      title: "Venenatis Vehicula",
+      tags: ["Photography", "Second Interview"],
       position: 8
     }
   },
@@ -142,12 +132,9 @@ const resources = [
     id: 10,
     type: "resources",
     attributes: {
-      type: 'document',
-      title: 'Dapibus Magna Elit Justo',
-      tags: [
-        'Japan',
-        'Photography'
-      ],
+      type: "document",
+      title: "Dapibus Magna Elit Justo",
+      tags: ["Japan", "Photography"],
       position: 9
     }
   },
@@ -155,11 +142,9 @@ const resources = [
     id: 11,
     type: "resources",
     attributes: {
-      type: 'pdf',
-      title: 'Vestibulum id ligula porta felis euismod semper.',
-      tags: [
-        'Second Interview'
-      ],
+      type: "pdf",
+      title: "Vestibulum id ligula porta felis euismod semper.",
+      tags: ["Second Interview"],
       position: 10
     }
   },
@@ -167,8 +152,8 @@ const resources = [
     id: 12,
     type: "resources",
     attributes: {
-      type: 'document',
-      title: 'Dolor Sollicitudin Ultricies',
+      type: "document",
+      title: "Dolor Sollicitudin Ultricies",
       position: 11
     }
   },
@@ -176,12 +161,9 @@ const resources = [
     id: 13,
     type: "resources",
     attributes: {
-      type: 'audio',
-      title: 'Parturient Dolor Ultricies Adipiscing',
-      tags: [
-        'Japan',
-        'Second Interview'
-      ],
+      type: "audio",
+      title: "Parturient Dolor Ultricies Adipiscing",
+      tags: ["Japan", "Second Interview"],
       position: 12
     }
   }
@@ -189,8 +171,8 @@ const resources = [
 
 const resourceCollection = {
   id: "1234",
-  attributes: { },
-  links: { },
+  attributes: {},
+  links: {},
   relationships: { resources }
 };
 
@@ -289,7 +271,8 @@ const events = [
       subject_subtitle: "The Meiji Era through Hiroshima",
       attribution: "Zach Davis",
       attribution_url: undefined,
-      excerpt: "Maecenas sed diam eget risus varius blandit sit amet non magna. " +
+      excerpt:
+        "Maecenas sed diam eget risus varius blandit sit amet non magna. " +
         "Aenean lacinia bibendum nulla sed consectetur.",
       project_id: "AAA-BBB"
     }
@@ -307,7 +290,8 @@ const events = [
       subject_subtitle: "The Meiji Era through Hiroshima",
       attribution: "Susan Doerr",
       attribution_url: undefined,
-      excerpt: "Praesent commodo cursus magna, vel scelerisque nisl consectetur et." +
+      excerpt:
+        "Praesent commodo cursus magna, vel scelerisque nisl consectetur et." +
         " Vestibulum id ligula porta felis euismod semper.",
       project_id: "AAA-BBB"
     }
@@ -325,7 +309,8 @@ const events = [
       attribution_name: "Doug Armato",
       attribution_id: "noctambulate",
       attribution_url: "https://twitter.com/noctambulate/",
-      excerpt: "The lowdown on lefse (must be russet potatoes!) from Beatrice Ojakanga" +
+      excerpt:
+        "The lowdown on lefse (must be russet potatoes!) from Beatrice Ojakanga" +
         "s at the @AmSwedInstitute @UMinnPress",
       project_id: "AAA-BBB"
     }
@@ -343,7 +328,8 @@ const events = [
       subject_subtitle: "The Meiji Era through Hiroshima",
       attribution: "Gabriel Hale Thomas Chud Marcela Masterson Blair",
       attribution_url: undefined,
-      excerpt: "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. " +
+      excerpt:
+        "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. " +
         "Morbi leo risus, porta ac consectetur ac, vestibulum at eros.",
       project_id: "AAA-BBB"
     }
@@ -392,7 +378,6 @@ const backendEditors = [
     avatar: "/static/placeholder/user-avatar-rowan01.jpg"
   }
 ];
-
 
 export default {
   resources,

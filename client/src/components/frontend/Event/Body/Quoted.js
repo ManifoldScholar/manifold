@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class EventBodyQuoted extends Component {
-
   static displayName = "Event.Body.Quoted";
 
   static propTypes = {
     event: PropTypes.object,
-    icon: PropTypes.string,
+    icon: PropTypes.string
   };
 
   render() {
     const attr = this.props.event.attributes;
-    const iconClass = 'manicon manicon-' + this.props.icon;
+    const iconClass = "manicon manicon-" + this.props.icon;
 
     return (
       <div className="event-data">
         {/* Event-data requires a classless empty div for vertical alignment */}
         <div>
-          <i className={iconClass}></i>
+          <i className={iconClass} />
           <div className="event-content">
             <p>
               {attr.excerpt}

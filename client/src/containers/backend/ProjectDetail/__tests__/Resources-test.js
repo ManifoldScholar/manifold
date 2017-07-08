@@ -1,18 +1,17 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import ProjectDetailResourcesContainer from '../Resources';
-import { wrapWithRouter } from 'test/helpers/routing';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
+import React from "react";
+import renderer from "react-test-renderer";
+import ProjectDetailResourcesContainer from "../Resources";
+import { wrapWithRouter } from "test/helpers/routing";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
 
 describe("Backend ProjectDetail Resources Container", () => {
-
   const store = build.store();
   const project = build.entity.project("1");
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={store} >
+      <Provider store={store}>
         <ProjectDetailResourcesContainer
           project={project}
           dispatch={store.dispatch}
@@ -30,5 +29,4 @@ describe("Backend ProjectDetail Resources Container", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
-
 });

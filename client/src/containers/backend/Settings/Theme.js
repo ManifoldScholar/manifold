@@ -1,15 +1,17 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Form } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import { settingsAPI, requests } from 'api';
-import { entityStoreActions } from 'actions';
-import { select } from 'utils/entityUtils';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Form } from "components/backend";
+import { Form as FormContainer } from "containers/backend";
+import { settingsAPI, requests } from "api";
+import { select } from "utils/entityUtils";
 
 export class SettingsThemeContainer extends PureComponent {
-
   static displayName = "Settings.Theme";
+
+  static propTypes = {
+    settings: PropTypes.object
+  };
 
   static mapStateToProps(state) {
     return {
@@ -29,7 +31,7 @@ export class SettingsThemeContainer extends PureComponent {
           className="form-secondary"
         >
           <Form.Upload
-            style="square"
+            layout="square"
             accepts="images"
             label="Press Logo"
             readFrom="attributes[pressLogoStyles][smallSquare]"
@@ -42,17 +44,13 @@ export class SettingsThemeContainer extends PureComponent {
             name="attributes[theme][typekitId]"
             placeholder="Enter Typekit ID"
           />
-          <Form.Save
-            text="Save Settings"
-          />
+          <Form.Save text="Save Settings" />
         </FormContainer.Form>
       </section>
     );
   }
-
 }
 
-export default connect(
-  SettingsThemeContainer.mapStateToProps
-)(SettingsThemeContainer);
-
+export default connect(SettingsThemeContainer.mapStateToProps)(
+  SettingsThemeContainer
+);

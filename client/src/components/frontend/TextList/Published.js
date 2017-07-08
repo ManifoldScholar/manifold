@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Text } from 'components/frontend';
-import find from 'lodash/find';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Text } from "components/frontend";
 
 export default class TestListPublished extends Component {
-
   static displayName = "TextList.Published";
 
   static propTypes = {
@@ -16,7 +14,7 @@ export default class TestListPublished extends Component {
       <nav className="text-category">
         <section>
           <h4 className="sub-section-heading">
-            {'Published Version'}
+            {"Published Version"}
           </h4>
           <ul className="texts-group">
             <li>

@@ -1,11 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
-import { Layout } from 'components/frontend';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+import { Layout } from "components/frontend";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Layout.Footer component", () => {
-
   const settings = {
     attributes: {
       general: {
@@ -35,18 +34,20 @@ describe("Frontend.Layout.Footer component", () => {
     }
   };
 
-  it('renders correctly', () => {
-    const component = renderer.create(wrapWithRouter(
-      <Layout.Footer
-        authentication={{ authenticated: false }}
-        settings={settings}
-      />
-    ));
+  it("renders correctly", () => {
+    const component = renderer.create(
+      wrapWithRouter(
+        <Layout.Footer
+          authentication={{ authenticated: false }}
+          settings={settings}
+        />
+      )
+    );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('shows page links based on show_in_footer attribute', () => {
+  it("shows page links based on show_in_footer attribute", () => {
     const component = shallow(
       <Layout.Footer
         authentication={{ authenticated: false }}
@@ -54,9 +55,7 @@ describe("Frontend.Layout.Footer component", () => {
         settings={settings}
       />
     );
-    expect(component.contains('Bomfunk MCs')).toBe(true);
-    expect(component.contains('Dub Pistols')).toBe(false);
+    expect(component.contains("Bomfunk MCs")).toBe(true);
+    expect(component.contains("Dub Pistols")).toBe(false);
   });
-
 });
-

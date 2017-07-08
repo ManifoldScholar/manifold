@@ -1,27 +1,30 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Section } from 'components/reader';
-import { sectionsAPI, annotationsAPI, resourcesAPI, requests } from 'api';
-import { select, grab, isEntityLoaded } from 'utils/entityUtils';
-import { entityStoreActions } from 'actions';
-import uniq from 'lodash/uniq';
-import difference from 'lodash/difference';
-import { renderRoutes } from 'helpers/routing';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Section } from "components/reader";
+import { sectionsAPI, annotationsAPI, resourcesAPI, requests } from "api";
+import { grab, isEntityLoaded } from "utils/entityUtils";
+import { entityStoreActions } from "actions";
+import uniq from "lodash/uniq";
+import difference from "lodash/difference";
+import { renderRoutes } from "helpers/routing";
 
 const { request, flush } = entityStoreActions;
 
 export class SectionContainer extends Component {
-
   static fetchData(getState, dispatch, location, match) {
     const state = getState();
     const promises = [];
     const { sectionId } = match.params;
-    const sectionLoaded = sectionId ? isEntityLoaded('textSections', sectionId, state) : false;
+    const sectionLoaded = sectionId
+      ? isEntityLoaded("textSections", sectionId, state)
+      : false;
 
     if (sectionId && !sectionLoaded) {
       const sectionCall = sectionsAPI.show(sectionId);
-      const { promise: two } = dispatch(request(sectionCall, requests.rSection));
+      const { promise: two } = dispatch(
+        request(sectionCall, requests.rSection)
+      );
       promises.push(two);
     }
     return Promise.all(promises);
@@ -29,7 +32,11 @@ export class SectionContainer extends Component {
 
   static mapStateToProps(state, ownProps) {
     return {
-      section: grab("textSections", ownProps.match.params.sectionId, state.entityStore)
+      section: grab(
+        "textSections",
+        ownProps.match.params.sectionId,
+        state.entityStore
+      )
     };
   }
 
@@ -53,13 +60,17 @@ export class SectionContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     // Fetch resources and annotations on section change.
-    if (nextProps.match.params.sectionId !== this.props.match.params.sectionId) {
+    if (
+      nextProps.match.params.sectionId !== this.props.match.params.sectionId
+    ) {
       this.fetchAnnotations(nextProps);
       this.fetchResources(nextProps);
     }
     // Check if we need to fetch more resources when annotations change
     if (nextProps.annotations !== this.props.annotations) {
-      if (this.hasMissingResources(nextProps.annotations, nextProps.resources)) {
+      if (
+        this.hasMissingResources(nextProps.annotations, nextProps.resources)
+      ) {
         this.fetchResources(nextProps);
       }
     }
@@ -70,7 +81,9 @@ export class SectionContainer extends Component {
   }
 
   fetchAnnotations(props) {
-    const annotationsCall = annotationsAPI.forSection(props.match.params.sectionId);
+    const annotationsCall = annotationsAPI.forSection(
+      props.match.params.sectionId
+    );
     props.dispatch(request(annotationsCall, requests.rAnnotations));
   }
 
@@ -81,11 +94,11 @@ export class SectionContainer extends Component {
 
   hasMissingResources(annotations, resourcesIn) {
     if (!annotations) return;
-    const resources = resourcesIn ? resourcesIn : [];
-    const needed = uniq(annotations
-      .map((a) => a.attributes.resourceId)
-      .filter((id) => id !== null));
-    const has = resources.map((r) => r.id);
+    const resources = resourcesIn || [];
+    const needed = uniq(
+      annotations.map(a => a.attributes.resourceId).filter(id => id !== null)
+    );
+    const has = resources.map(r => r.id);
     const diff = difference(needed, has);
     if (diff.length > 0) return true;
     return false;
@@ -115,7 +128,6 @@ export class SectionContainer extends Component {
       </div>
     );
   }
-
 }
 
 export default connectAndFetch(SectionContainer);

@@ -1,12 +1,14 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Slideshow from '../Slideshow';
-import build from 'test/fixtures/build';
-import { wrapWithRouter, renderWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import Slideshow from "../Slideshow";
+import build from "test/fixtures/build";
+import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.ResourceList.Slideshow Component", () => {
-
-  const collectionResources = [build.entity.resource("1"), build.entity.resource("2")];
+  const collectionResources = [
+    build.entity.resource("1"),
+    build.entity.resource("2")
+  ];
   const pagination = {
     currentPage: 1,
     perPage: 5,

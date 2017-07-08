@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { HigherOrder } from 'components/global';
-import PasswordForgot from './PasswordForgot';
-import Login from './Login';
-import CreateUpdate from './CreateUpdate';
-import Update from './Update';
-import Create from './Create';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { HigherOrder } from "components/global";
+import PasswordForgot from "./PasswordForgot";
+import Login from "./Login";
+import CreateUpdate from "./CreateUpdate";
+import Update from "./Update";
+import Create from "./Create";
 
 export default class Overlay extends Component {
-
   static propTypes = {
-    visible: PropTypes.bool,
     hideSignInUpOverlay: PropTypes.func,
     authentication: PropTypes.object,
-    dispatch: PropTypes.func,
+    dispatch: PropTypes.func
   };
 
   constructor() {
@@ -26,8 +24,10 @@ export default class Overlay extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.authentication.authenticated === false &&
-      nextProps.authentication.authenticated === true) {
+    if (
+      this.props.authentication.authenticated === false &&
+      nextProps.authentication.authenticated === true
+    ) {
       this.props.hideSignInUpOverlay();
     }
   }
@@ -40,11 +40,21 @@ export default class Overlay extends Component {
   childProps() {
     return {
       updateView: this.updateView,
-      showLogin: (e) => { this.updateView('account-login', e); },
-      showCreate: (e) => { this.updateView('account-create', e); },
-      showForgot: (e) => { this.updateView('account-password-forgot', e); },
-      showReset: (e) => { this.updateView('account-password-reset', e); },
-      showCreateUpdate: (e) => { this.updateView('account-create-update', e); },
+      showLogin: e => {
+        this.updateView("account-login", e);
+      },
+      showCreate: e => {
+        this.updateView("account-create", e);
+      },
+      showForgot: e => {
+        this.updateView("account-password-forgot", e);
+      },
+      showReset: e => {
+        this.updateView("account-password-reset", e);
+      },
+      showCreateUpdate: e => {
+        this.updateView("account-create-update", e);
+      },
       dispatch: this.props.dispatch,
       hideSignInUpOverlay: this.props.hideSignInUpOverlay,
       authentication: this.props.authentication
@@ -55,19 +65,19 @@ export default class Overlay extends Component {
     let child = null;
     const childProps = this.childProps();
     switch (this.state.view) {
-      case 'account-create':
+      case "account-create":
         child = <Create {...childProps} />;
         break;
-      case 'account-update':
+      case "account-update":
         child = <Update {...childProps} />;
         break;
-      case 'account-create-update':
+      case "account-create-update":
         child = <CreateUpdate {...childProps} />;
         break;
-      case 'account-password-forgot':
+      case "account-password-forgot":
         child = <PasswordForgot {...childProps} />;
         break;
-      case 'account-login':
+      case "account-login":
         child = <Login {...childProps} />;
         break;
       default:
@@ -83,13 +93,13 @@ export default class Overlay extends Component {
 
   render() {
     return (
-      <HigherOrder.BodyClass className={'no-scroll'}>
+      <HigherOrder.BodyClass className={"no-scroll"}>
         <div className="overlay-full-primary">
           <header className="overlay-header">
             <div className="container">
               <div className="rel">
                 <figure className="logo">
-                  <i className="manicon manicon-manifold-logo"></i>
+                  <i className="manicon manicon-manifold-logo" />
                 </figure>
                 <button
                   onClick={this.props.hideSignInUpOverlay}
@@ -97,7 +107,7 @@ export default class Overlay extends Component {
                   data-id="overlay-close"
                 >
                   Cancel
-                  <i className="manicon manicon-x"></i>
+                  <i className="manicon manicon-x" />
                 </button>
               </div>
             </div>

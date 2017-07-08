@@ -1,5 +1,5 @@
-import Grouped from './Grouped.js';
-import Published from './Published.js';
+import Grouped from "./Grouped";
+import Published from "./Published";
 
 export default {
   Grouped,

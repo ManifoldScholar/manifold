@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Form, MaskedTextInput } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import { settingsAPI, requests } from 'api';
-import { select } from 'utils/entityUtils';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Form } from "components/backend";
+import { Form as FormContainer } from "containers/backend";
+import { settingsAPI, requests } from "api";
+import { select } from "utils/entityUtils";
 
 export class SettingsGeneralContainer extends PureComponent {
-
   static propTypes = {
+    settings: PropTypes.object
   };
 
   static mapStateToProps(state) {
@@ -52,17 +52,13 @@ export class SettingsGeneralContainer extends PureComponent {
             name="attributes[general][contactUrl]"
             placeholder="Enter a URL"
           />
-          <Form.Save
-            text="Save Settings"
-          />
+          <Form.Save text="Save Settings" />
         </FormContainer.Form>
       </section>
     );
   }
-
 }
 
-export default connect(
-  SettingsGeneralContainer.mapStateToProps
-)(SettingsGeneralContainer);
-
+export default connect(SettingsGeneralContainer.mapStateToProps)(
+  SettingsGeneralContainer
+);

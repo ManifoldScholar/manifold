@@ -1,4 +1,4 @@
-import SimpleFormat from './SimpleFormat.js';
+import SimpleFormat from "./SimpleFormat";
 
 export default {
   SimpleFormat

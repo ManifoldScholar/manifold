@@ -1,23 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'components/backend';
-import { Metadata } from 'components/backend';
-import { textsAPI } from 'api';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Metadata } from "components/backend";
+import { textsAPI } from "api";
 
 export default class TextDetailMetadata extends PureComponent {
-
   static displayName = "TextDetail.Metadata";
 
   static propTypes = {
-    route: PropTypes.object,
-    project: PropTypes.object,
-    dispatch: PropTypes.func,
-    editSession: PropTypes.object
+    text: PropTypes.object
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
@@ -29,6 +20,5 @@ export default class TextDetailMetadata extends PureComponent {
         className="form-secondary"
       />
     );
-
   }
 }

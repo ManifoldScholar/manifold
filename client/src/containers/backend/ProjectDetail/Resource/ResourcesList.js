@@ -1,17 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { List, Resource } from 'components/backend';
-import { projectsAPI, requests } from 'api';
-import { entityStoreActions } from 'actions';
-import { select, meta } from 'utils/entityUtils';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { List, Resource } from "components/backend";
+import { projectsAPI, requests } from "api";
+import { entityStoreActions } from "actions";
+import { select, meta } from "utils/entityUtils";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 const perPage = 5;
 
 export class ProjectDetailResourcesList extends PureComponent {
-
   static displayName = "ProjectDetail.ResourcesList";
 
   static mapStateToProps(state) {
@@ -22,10 +21,10 @@ export class ProjectDetailResourcesList extends PureComponent {
   }
 
   static propTypes = {
-    route: PropTypes.object,
     project: PropTypes.object,
-    dispatch: PropTypes.func,
-    editSession: PropTypes.object
+    resources: PropTypes.array,
+    resourcesMeta: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   constructor(props) {
@@ -44,7 +43,11 @@ export class ProjectDetailResourcesList extends PureComponent {
     this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
-      projectsAPI.resources(this.props.project.id, this.state.filter, pagination),
+      projectsAPI.resources(
+        this.props.project.id,
+        this.state.filter,
+        pagination
+      ),
       requests.beResources
     );
     this.props.dispatch(action);
@@ -61,7 +64,7 @@ export class ProjectDetailResourcesList extends PureComponent {
   }
 
   pageChangeHandlerCreator(page) {
-    return (event) => {
+    return event => {
       this.handleResourcesPageChange(event, page);
     };
   }
@@ -74,7 +77,7 @@ export class ProjectDetailResourcesList extends PureComponent {
       <div className="project-resource-list">
         <header className="section-heading-secondary">
           <h3>
-            {'Resources'} <i className="manicon manicon-cube-shine"></i>
+            {"Resources"} <i className="manicon manicon-cube-shine" />
           </h3>
         </header>
         <List.Searchable

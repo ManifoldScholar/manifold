@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import { handleActions } from "redux-actions";
 
 const initialState = {
   active: false,
@@ -6,14 +6,14 @@ const initialState = {
   pendingRemovals: []
 };
 
-const getLoadingState = (activeLoaders) => {
+const getLoadingState = activeLoaders => {
   return activeLoaders.length > 0;
 };
 
 const maybeAddLoader = (activeLoaders, loader) => {
   if (activeLoaders.indexOf(loader) === -1) {
     const newActiveLoaders = activeLoaders.slice(0);
-    newActiveLoaders .push(loader);
+    newActiveLoaders.push(loader);
     return newActiveLoaders;
   }
   return activeLoaders;
@@ -35,7 +35,10 @@ const isLoaderActive = (activeLoaders, loader) => {
 };
 
 const startLoader = (state, action) => {
-  if (state.pendingRemovals && state.pendingRemovals.indexOf(action.payload) >= 0) {
+  if (
+    state.pendingRemovals &&
+    state.pendingRemovals.indexOf(action.payload) >= 0
+  ) {
     const pendingRemovals = state.pendingRemovals.slice(0);
     pendingRemovals.splice(pendingRemovals.indexOf(action.payload), 1);
     return Object.assign({}, state, { pendingRemovals });
@@ -63,7 +66,10 @@ const stopLoader = (state, action) => {
   });
 };
 
-export default handleActions({
-  START_LOADING: startLoader,
-  STOP_LOADING: stopLoader
-}, initialState);
+export default handleActions(
+  {
+    START_LOADING: startLoader,
+    STOP_LOADING: stopLoader
+  },
+  initialState
+);

@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import setter from './setter';
-import { Form as GlobalForm } from 'components/global';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import setter from "./setter";
+import { Form as GlobalForm } from "components/global";
 
 class FormTextArea extends Component {
-
   static displayName = "Form.TextArea";
 
   static propTypes = {
@@ -30,7 +29,9 @@ class FormTextArea extends Component {
           errors={this.props.errors}
           label={this.props.label}
         >
-          <label>{this.props.label}</label>
+          <label>
+            {this.props.label}
+          </label>
           <textarea
             style={{ height: this.props.height }}
             placeholder={this.props.placeholder}
@@ -41,7 +42,6 @@ class FormTextArea extends Component {
       </div>
     );
   }
-
 }
 
 export default setter(FormTextArea);

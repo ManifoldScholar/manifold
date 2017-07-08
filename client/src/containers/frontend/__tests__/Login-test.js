@@ -1,12 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { LoginContainer } from '../Login';
-import { Provider } from 'react-redux';
-import build from 'test/fixtures/build';
-import { wrapWithRouter } from 'test/helpers/routing';
+import React from "react";
+import renderer from "react-test-renderer";
+import { LoginContainer } from "../Login";
+import { Provider } from "react-redux";
+import build from "test/fixtures/build";
+import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend Login Container", () => {
-
   const store = build.store();
   const user = build.entity.user("1");
   user.email = "rowan@woof.dog";
@@ -46,9 +45,4 @@ describe("Frontend Login Container", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });
-
-
-
-

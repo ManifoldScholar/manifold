@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import humps from 'humps';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import humps from "humps";
 
 export default class ProjectMeta extends Component {
-
-  static displayName = "Project.Meta"
+  static displayName = "Project.Meta";
 
   static propTypes = {
     metadata: PropTypes.object
@@ -14,11 +13,11 @@ export default class ProjectMeta extends Component {
     const keys = Object.keys(this.props.metadata);
     return (
       <ul className="meta-list-primary">
-        {keys.map((key) => {
+        {keys.map(key => {
           return (
-            <li key={key} >
+            <li key={key}>
               <span className="meta-label">
-                {humps.decamelize(key, { separator: ' ' })}
+                {humps.decamelize(key, { separator: " " })}
               </span>
               <div className="meta-value">
                 {this.props.metadata[key]}
