@@ -57,7 +57,7 @@ export default () => {
           exact: true,
           component: Backend.NewUser.Wrapper,
           path: "/backend/people/users/new",
-          helper: () => '/backend/people/users/new',
+          helper: () => "/backend/people/users/new"
         },
         {
           name: "backendProjectsNew",

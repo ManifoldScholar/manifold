@@ -1,12 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import { Form } from 'components/backend';
-import setter from './setter';
-import classnames from 'classnames';
-import { Form as GlobalForm } from 'components/global';
-import generatePassword from 'password-generator';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import setter from "./setter";
+import classnames from "classnames";
+import { Form as GlobalForm } from "components/global";
+import generatePassword from "password-generator";
 
 class FormGeneratedPasswordInput extends Component {
-
   static displayName = "Form.GeneratedPasswordInput";
 
   static propTypes = {
@@ -32,7 +31,8 @@ class FormGeneratedPasswordInput extends Component {
   }
 
   componentDidMount() {
-    if (this.props.focusOnMount === true && this.inputElement) this.inputElement.focus();
+    if (this.props.focusOnMount === true && this.inputElement)
+      this.inputElement.focus();
     this.setValueFromCurrentState();
   }
 
@@ -69,10 +69,12 @@ class FormGeneratedPasswordInput extends Component {
     return (
       <input
         className={inputClass}
-        ref={(input) => { this.inputElement = input; }}
+        ref={input => {
+          this.inputElement = input;
+        }}
         type="text"
         placeholder={"Enter a password"}
-        onChange={(event) => this.handlePasswordChange(event)}
+        onChange={event => this.handlePasswordChange(event)}
         value={this.state.password}
       />
     );
@@ -95,9 +97,9 @@ class FormGeneratedPasswordInput extends Component {
         <label>Password</label>
         <button
           className="password-visibility-toggle"
-          onClick={(event) => this.togglePassword(event)}
+          onClick={event => this.togglePassword(event)}
         >
-          <i className={iconClass}></i>
+          <i className={iconClass} />
         </button>
         {this.renderInput()}
       </GlobalForm.Errorable>
