@@ -1,17 +1,17 @@
-import React, { PureComponent, PropTypes } from 'react';
-import connectAndFetch from 'utils/connectAndFetch';
-import { Navigation } from 'components/backend';
-import { Form } from 'components/backend';
-import { Form as FormContainer } from 'containers/backend';
-import { notificationActions } from 'actions';
-import { usersAPI } from 'api';
-import lh from 'helpers/linkHandler';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { Navigation } from "components/backend";
+import { Form } from "components/backend";
+import { Form as FormContainer } from "containers/backend";
+import { usersAPI } from "api";
+import lh from "helpers/linkHandler";
 
 export class NewUserWrapperContainer extends PureComponent {
-
   static displayName = "NewUser.WrapperContainer";
 
   static propTypes = {
+    history: PropTypes.object
   };
 
   constructor(props) {
@@ -34,12 +34,10 @@ export class NewUserWrapperContainer extends PureComponent {
       <div>
         <Navigation.DetailHeader
           type="user"
-          breadcrumb={[
-            { path: lh.link("backendPeople"), label: "ALL USERS" }
-          ]}
-          title={'New User'}
+          breadcrumb={[{ path: lh.link("backendPeople"), label: "ALL USERS" }]}
+          title={"New User"}
           showUtility={false}
-          note={'Enter the user details. Press save to continue.'}
+          note={"Enter the user details. Press save to continue."}
         />
         <section className="backend-panel">
           <div className="container">

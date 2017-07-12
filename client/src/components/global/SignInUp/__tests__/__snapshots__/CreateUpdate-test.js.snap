@@ -53,15 +53,6 @@ exports[`Global.SignInUp.CreateUpdate component renders correctly 1`] = `
     <p
       className="overlay-copy"
     >
-      While you're here, why not upload a profile image?
-    </p>
-  </div>
-  <div
-    className="row-1-p"
-  >
-    <p
-      className="overlay-copy"
-    >
       Do you want to edit your account information?
     </p>
     <div

@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import connectAndFetch from 'utils/connectAndFetch';
-import { meAPI, requests } from 'api';
-import { entityStoreActions } from 'actions';
-import { Avatar, Form } from 'components/global';
-import get from 'lodash/get';
-import hasIn from 'lodash/hasIn';
-import startCase from 'lodash/startCase';
-import Dropzone from 'react-dropzone';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import connectAndFetch from "utils/connectAndFetch";
+import { meAPI, requests } from "api";
+import { entityStoreActions } from "actions";
+import { Avatar, Form } from "components/global";
+import get from "lodash/get";
+import hasIn from "lodash/hasIn";
+import startCase from "lodash/startCase";
+import Dropzone from "react-dropzone";
 
 const { request } = entityStoreActions;
 
@@ -39,12 +39,12 @@ class UpdateFormContainer extends Component {
     this.hasAvatar = this.hasAvatar.bind(this);
 
     this.state = {
-      nickname: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      passwordConfirmation: '',
+      nickname: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
       removeAvatar: false,
       avatar: null
     };
@@ -52,9 +52,9 @@ class UpdateFormContainer extends Component {
 
   setParams() {
     const params = {};
-    Object.keys(this.state).forEach((key) => {
-      if (key === 'removeAvatar' || key === 'avatar') return null;
-      if (key === 'password' && this.state.password === '') return null;
+    Object.keys(this.state).forEach(key => {
+      if (key === "removeAvatar" || key === "avatar") return null;
+      if (key === "password" && this.state.password === "") return null;
       params[key] = this.placeholderAttribute(key);
     });
     return params;
@@ -137,7 +137,9 @@ class UpdateFormContainer extends Component {
 
   placeholderAttribute(attribute) {
     if (this.state[attribute].length) return this.state[attribute];
-    if (hasIn(this.props.authentication, `currentUser.attributes[${attribute}]`)) {
+    if (
+      hasIn(this.props.authentication, `currentUser.attributes[${attribute}]`)
+    ) {
       return this.props.authentication.currentUser.attributes[attribute];
     }
     return startCase(attribute);
@@ -192,55 +194,58 @@ class UpdateFormContainer extends Component {
             />
           </Form.Errorable>
         </div>
-        { __CLIENT__ ?
-          <div className="row-1-p">
-            { this.displayAvatar() ?
-                null
-              : <p className="overlay-copy">
-                  While you're here, why not upload a profile image?
-                </p>
-            }
-            <Dropzone
-              className="form-dropzone"
-              style={{}}
-              activeStyle={{}}
-              accept="image/*"
-              multiple={false}
-              ref="dropzone"
-              onDrop={this.handleFileDrop}
-            >
-              <div
-                style={{ position: "relative" }}
-                className="dropzone-button dropzone-button-dotted"
+        {__CLIENT__
+          ? <div className="row-1-p">
+              {this.displayAvatar()
+                ? null
+                : <p className="overlay-copy">
+                    {"While you're here, why not upload a profile image?"}
+                  </p>}
+              <Dropzone
+                className="form-dropzone"
+                style={{}}
+                activeStyle={{}}
+                accept="image/*"
+                multiple={false}
+                ref={dropzone => {
+                  this.dropzone = dropzone;
+                }}
+                onDrop={this.handleFileDrop}
               >
                 <div
-                  style={{
-                    top: "50%",
-                    marginTop: -33,
-                    height: 66,
-                    width: 66,
-                    position: "absolute"
-                  }}
+                  style={{ position: "relative" }}
+                  className="dropzone-button dropzone-button-dotted"
                 >
-                  {this.hasAvatar()
-                    ? <i
-                        onClick={this.handleRemoveAvatar}
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          right: -8,
-                          fontSize: 10
-                        }}
-                        className="manicon manicon-x"
-                      />
-                    : null}
-                  <Avatar style={{ margin: 0 }} url={this.displayAvatar()} />
+                  <div
+                    style={{
+                      top: "50%",
+                      marginTop: -33,
+                      height: 66,
+                      width: 66,
+                      position: "absolute"
+                    }}
+                  >
+                    {this.hasAvatar()
+                      ? <i
+                          onClick={this.handleRemoveAvatar}
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            right: -8,
+                            fontSize: 10
+                          }}
+                          className="manicon manicon-x"
+                        />
+                      : null}
+                    <Avatar style={{ margin: 0 }} url={this.displayAvatar()} />
+                  </div>
+                  <span className="dropzone-button-text">
+                    Click to browse or<br />drag and drop
+                  </span>
                 </div>
-                <span className="dropzone-button-text">Click to browse or<br />drag and drop</span>
-              </div>
-            </Dropzone>
-          </div>
-        : null}
+              </Dropzone>
+            </div>
+          : null}
         <div className="row-1-p">
           <p className="overlay-copy">
             Do you want to edit your account information?

@@ -13,7 +13,7 @@ import Hidden from "./Hidden";
 import setter from "./setter";
 import FieldGroup from "./FieldGroup";
 import CodeArea from "./CodeArea";
-import GeneratedPasswordInput from './GeneratedPasswordInput';
+import GeneratedPasswordInput from "./GeneratedPasswordInput";
 
 export default {
   HasMany,
