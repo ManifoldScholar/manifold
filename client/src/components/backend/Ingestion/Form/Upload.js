@@ -6,7 +6,7 @@ export default class IngestionFormUpload extends PureComponent {
   static displayName = "ProjectDetail.Text.Ingestion.Form.Upload";
 
   static propTypes = {
-    getModelValue: PropTypes.func.isRequired,
+    getModelValue: PropTypes.func,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
   };

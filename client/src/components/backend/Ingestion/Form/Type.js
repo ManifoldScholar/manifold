@@ -8,7 +8,8 @@ export default class IngestionFormType extends PureComponent {
   static propTypes = {
     getModelValue: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    triggerClose: PropTypes.func
   };
 
   static defaultProps = {
@@ -46,6 +47,13 @@ export default class IngestionFormType extends PureComponent {
   handleProceedClick = event => {
     event.preventDefault();
     this.props.history.push(this.props.location.pathname, { stage: "upload" });
+  };
+
+  close = event => {
+    if (this.props.triggerClose) {
+      event.preventDefault();
+      this.props.triggerClose();
+    }
   };
 
   render() {

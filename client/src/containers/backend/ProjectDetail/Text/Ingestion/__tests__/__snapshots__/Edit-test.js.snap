@@ -106,7 +106,7 @@ exports[`ProjectDetail Text Ingestion Edit Container renders correctly 1`] = `
         >
           <button
             className="button-icon-secondary dull"
-            onClick={undefined}
+            onClick={[Function]}
           >
             <i
               className="manicon manicon-x small"

@@ -19,7 +19,8 @@ export class IngestionNew extends PureComponent {
     project: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    ingestion: PropTypes.object
+    ingestion: PropTypes.object,
+    triggerClose: PropTypes.func
   };
 
   componentWillReceiveProps(nextProps) {
@@ -49,6 +50,7 @@ export class IngestionNew extends PureComponent {
           history={this.props.history}
           name={requests.beIngestionCreate}
           project={this.props.project}
+          triggerClose={this.props.triggerClose}
         />
       </div>
     );
