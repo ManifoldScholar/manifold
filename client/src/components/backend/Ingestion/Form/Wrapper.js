@@ -17,7 +17,8 @@ export default class IngestionFormWrapper extends PureComponent {
     history: PropTypes.object.isRequired,
     text: PropTypes.object,
     ingestion: PropTypes.object.isRequired,
-    onSuccess: PropTypes.func
+    onSuccess: PropTypes.func,
+    triggerClose: PropTypes.func
   };
 
   static defaultProps = {
@@ -69,6 +70,7 @@ export default class IngestionFormWrapper extends PureComponent {
         <StageComponent
           history={this.props.history}
           location={this.props.location}
+          triggerClose={this.props.triggerClose}
         />
       </FormContainer.Form>
     );
