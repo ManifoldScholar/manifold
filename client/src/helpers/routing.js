@@ -21,12 +21,15 @@ export const renderRoutes = (routes, injectProps = {}, factory = null) => {
     };
   };
 
+  /* eslint-disable react/no-array-index-key */
+  // We can use the array index as the key here, because the order of the routes will
+  // never change after the initial mount.
   return (
     <Switch>
-      {routes.map(route => {
+      {routes.map((route, i) => {
         return (
           <Route
-            key={route.name}
+            key={i}
             path={route.path}
             exact={route.exact}
             strict={route.strict}
@@ -40,4 +43,5 @@ export const renderRoutes = (routes, injectProps = {}, factory = null) => {
       })}
     </Switch>
   );
+  /* eslint-enable react/no-array-index-key */
 };
