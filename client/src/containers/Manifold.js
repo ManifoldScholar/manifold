@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import DocumentMeta from "react-document-meta";
+import Helmet from "react-helmet";
 import { SignInUp, LoadingBar, Utility } from "components/global";
 import config from "../config";
 import has from "lodash/has";
@@ -184,7 +184,7 @@ class ManifoldContainer extends PureComponent {
         {this.renderTypekit()}
         {this.props.confirm}
         <Utility.ScrollToTop />
-        <DocumentMeta {...config.app} />
+        <Helmet {...config.app.head} />
         <LoadingBar loading={this.props.loading} />
         <ReactCSSTransitionGroup
           transitionName={"overlay-login"}

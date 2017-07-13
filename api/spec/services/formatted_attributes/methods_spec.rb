@@ -21,12 +21,15 @@ RSpec.describe FormattedAttributes::Methods do
 
     specify { is_expected.to include method_name_for(:refresh) }
     specify { is_expected.to include method_name_for(:format) }
+    specify { is_expected.to include method_name_for(:textify) }
     specify { is_expected.to include method_name_for(:formatted) }
+    specify { is_expected.to include method_name_for(:plaintext) }
   end
 
   describe 'private instance methods' do
     subject { generated_module.private_instance_methods }
 
-    specify { is_expected.to include method_name_for(:cache_key) }
+    specify { is_expected.to include method_name_for(:formatted_cache_key) }
+    specify { is_expected.to include method_name_for(:plaintext_cache_key) }
   end
 end

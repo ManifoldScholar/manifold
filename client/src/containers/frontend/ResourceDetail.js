@@ -6,6 +6,7 @@ import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, resourcesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
+import { HeadContent } from "components/global";
 
 const { request, flush } = entityStoreActions;
 
@@ -52,8 +53,19 @@ export class ResourceDetailContainer extends PureComponent {
   render() {
     const projectId = this.props.project ? this.props.project.id : null;
     if (!projectId) return null;
+    const { project, resource } = this.props;
+
     return (
       <div>
+        <HeadContent
+          title={`Manifold Scholarship | ${project.attributes
+            .title} | ${resource.attributes.titlePlaintext}`}
+          description={resource.attributes.captionPlaintext}
+          image={
+            resource.attributes.attachmentStyles.mediumSquare ||
+            resource.attributes.variantThumbnailStyles.mediumSquare
+          }
+        />
         {this.props.project
           ? <Utility.BackLinkPrimary
               backText="Back to Project Resources"

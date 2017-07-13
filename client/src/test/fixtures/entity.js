@@ -145,7 +145,8 @@ const defaults = {
       kind: "image",
       attachmentStyles: {
         original: "original-image.mock",
-        medium: null
+        medium: null,
+        mediumSquare: "original-image.mock"
       },
       descriptionFormatted: "Black and white freckles",
       createdAt: "2017-04-24T23:25:50.161Z",

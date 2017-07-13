@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "components/global/FormattedDate";
 import { Utility, ResourceList } from "components/frontend";
+import { HeadContent } from "components/global";
 
 export default class ResourceCollectionDetail extends PureComponent {
   static displayName = "ResourceCollection.Detail";
@@ -30,6 +31,11 @@ export default class ResourceCollectionDetail extends PureComponent {
 
     return (
       <section>
+        <HeadContent
+          title={`Manifold Scholarship | ${collection.attributes.title}`}
+          description={collection.attributes.description}
+          image={collection.attributes.thumbnailStyles.mediumSquare}
+        />
         <div className="container">
           <div className="collection-detail">
             <header>

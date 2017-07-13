@@ -11,6 +11,7 @@ import HigherOrder from "containers/global/HigherOrder";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import size from "lodash/size";
+import { HeadContent } from "components/global";
 
 const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
@@ -124,6 +125,7 @@ export class FollowingContainer extends Component {
         {...this.props}
       >
         <div>
+          <HeadContent title="Manifold Scholarship | Following" />
           <ProjectList.Following
             followedProjects={this.props.followedProjects}
             authentication={this.props.authentication}

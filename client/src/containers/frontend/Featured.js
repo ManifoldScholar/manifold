@@ -7,6 +7,7 @@ import { uiFilterActions, entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, subjectsAPI, requests } from "api";
 import get from "lodash/get";
+import { HeadContent } from "components/global";
 
 const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;
@@ -68,6 +69,7 @@ export class FeaturedContainer extends Component {
           overflowX: "hidden"
         }}
       >
+        <HeadContent title="Manifold Scholarship | Featured" />
         <section className="bg-neutral05">
           <div className="container">
             <header className="section-heading utility-right">

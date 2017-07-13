@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom/server";
 import serialize from "serialize-javascript";
-import DocumentMeta from "react-document-meta";
+import Helmet from "react-helmet";
 import { HigherOrder } from "components/global";
 import reduce from "lodash/reduce";
 import isString from "lodash/isString";
@@ -80,6 +80,7 @@ export default class Html extends Component {
   render() {
     const { component, store } = this.props;
     const content = component ? ReactDOM.renderToString(component) : null;
+    const helmet = Helmet.renderStatic();
     const bodyClass = HigherOrder.BodyClass.rewind();
     const contentProps = {};
     if (content) {
@@ -95,7 +96,8 @@ export default class Html extends Component {
             name="viewport"
             content="width=device-width, initial-scale=1, user-scalable=0"
           />
-          {DocumentMeta.renderAsReact()}
+          {helmet.title.toComponent()}
+          {helmet.meta.toComponent()}
 
           <script src="/build/env.js" charSet="UTF-8" />
           <link rel="shortcut icon" href="/favicon.ico?client=true" />
