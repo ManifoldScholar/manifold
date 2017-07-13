@@ -6,6 +6,7 @@ import lh from "helpers/linkHandler";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { collectionsAPI, requests } from "api";
+import { HeadContent } from "components/global";
 
 const { request, flush } = entityStoreActions;
 
@@ -76,9 +77,20 @@ export class CollectionResourceDetailContainer extends PureComponent {
   render() {
     if (!this.props.collectionResource) return null;
     if (!this.props.collection) return null;
+    const { collection, collectionResource } = this.props;
+    const resource = collectionResource.relationships.resource;
 
     return (
       <div>
+        <HeadContent
+          title={`Manifold Scholarship | ${collection.attributes
+            .title} | ${resource.attributes.titlePlaintext}`}
+          description={resource.attributes.captionPlaintext}
+          image={
+            resource.attributes.attachmentStyles.mediumSquare ||
+            resource.attributes.variantThumbnailStyles.mediumSquare
+          }
+        />
         {this.props.collection
           ? <Utility.BackLinkPrimary
               backText="Back to Collection"

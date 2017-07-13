@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ResourceList } from "components/frontend";
+import { HeadContent } from "components/global";
 
 export default class ProjectResources extends Component {
   static displayName = "Project.Resources";
@@ -18,6 +19,12 @@ export default class ProjectResources extends Component {
     const project = this.props.project;
     return (
       <section>
+        <HeadContent
+          title={`Manifold Scholarship | ${project.attributes
+            .title} | Resources`}
+          description={this.props.project.attributes.description}
+          image={this.props.project.attributes.avatarStyles.mediumSquare}
+        />
         <div className="container">
           <header className="section-heading">
             <h2 className="title">

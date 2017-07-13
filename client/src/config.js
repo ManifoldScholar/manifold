@@ -21,28 +21,42 @@ const applicationConfiguration = {
   assetProxyPaths: ["/dist"],
   apiProxyPaths: ["/api", "/system"],
   app: {
-    title: "Manifold Scholarship",
-    description:
-      "Transforming scholarly publications into living digital works",
-    meta: {
-      charSet: "utf-8",
-      property: {
-        "og:site_name": "Manifold Scholarship",
-        "og:image": "manifold.umn.edu/logo/manifold_avatar-01.png",
-        "og:locale": "en_US",
-        "og:title": "Manifold Scholarship",
-        "og:description":
-          "Transforming scholarly publications into living digital works",
-        "twitter:card": "summary",
-        "twitter:site": "@manifoldscholar",
-        "twitter:creator": "@manifoldscholar",
-        "twitter:title": "Manifold Scholarship",
-        "twitter:description":
-          "Transforming scholarly publications into living digital works",
-        "twitter:image": "manifold.umn.edu/logo/manifold_avatar-01.png",
-        "twitter:image:width": "200",
-        "twitter:image:height": "200"
-      }
+    head: {
+      defaultTitle: "Manifold Scholarship",
+      meta: [
+        { charset: "utf-8" },
+        {
+          name: "description",
+          content:
+            "Transforming scholarly publications into living digital works"
+        },
+        { property: "og:site_name", content: "Manifold Scholarship" },
+        {
+          property: "og:image",
+          content: "http://manifold.umn.edu/logo/manifold_avatar-01.png"
+        },
+        { property: "og:locale", content: "en_US" },
+        { property: "og:title", content: "Manifold Scholarship" },
+        {
+          property: "og:description",
+          content:
+            "Transforming scholarly publications into living digital works"
+        },
+        { property: "twitter:card", content: "summary" },
+        { property: "twitter:site", content: "@manifoldscholar" },
+        { property: "twitter:creator", content: "@manifoldscholar" },
+        {
+          property: "twitter:description",
+          content:
+            "Transforming scholarly publications into living digital works"
+        },
+        {
+          property: "twitter:image",
+          content: "http://manifold.umn.edu/logo/manifold_avatar-01.png"
+        },
+        { property: "twitter:image:width", content: "200" },
+        { property: "twitter:image:height", content: "200" }
+      ]
     },
     locale: {
       event_types: {

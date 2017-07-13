@@ -21,3 +21,4 @@ export Modal from "./Modal";
 export FatalError from "./FatalError";
 export Developer from "./Developer";
 export Comment from "./Comment";
+export HeadContent from "./HeadContent";

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Utility, Event, Layout } from "components/frontend";
 import lh from "helpers/linkHandler";
+import { HeadContent } from "components/global";
 
 export default class ProjectEvents extends Component {
   static displayName = "Project.Events";
@@ -18,6 +19,12 @@ export default class ProjectEvents extends Component {
 
     return (
       <div>
+        <HeadContent
+          title={`Manifold Scholarship | ${this.props.project.attributes
+            .title} | Events`}
+          description={this.props.project.attributes.description}
+          image={this.props.project.attributes.avatarStyles.mediumSquare}
+        />
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
             link={lh.link("frontendProject", project.id)}

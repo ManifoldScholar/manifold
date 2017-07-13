@@ -8,6 +8,7 @@ import { entityStoreActions } from "actions";
 import uniq from "lodash/uniq";
 import difference from "lodash/difference";
 import { renderRoutes } from "helpers/routing";
+import { HeadContent } from "components/global";
 
 const { request, flush } = entityStoreActions;
 
@@ -105,10 +106,21 @@ export class SectionContainer extends Component {
   }
 
   render() {
-    if (!this.props.section) return null;
+    if (!this.props.section || !this.props.text) return null;
+    const project = this.props.text.relationships.project;
+    const projectImage = project
+      ? project.attributes.avatarStyles.mediumSquare
+      : null;
+    const projectDesc = project ? project.attributes.description : null;
 
     return (
       <div>
+        <HeadContent
+          title={`Manifold Scholarship | ${this.props.text.attributes
+            .title} | ${this.props.section.attributes.name}`}
+          image={projectImage}
+          description={projectDesc}
+        />
         {renderRoutes(this.props.route.routes)}
         <Section.Text {...this.props} />
         <Section.Label text={this.props.text} />
