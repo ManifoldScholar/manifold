@@ -5,11 +5,11 @@ import { websocketActions } from "actions";
 import get from "lodash/get";
 
 export class DeveloperContainer extends PureComponent {
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       messages: get(state.websocket.channels, "IngestionChannel.messages")
     };
-  }
+  };
 
   static propTypes = {
     dispatch: PropTypes.func,

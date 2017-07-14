@@ -12,7 +12,7 @@ import { renderRoutes } from "helpers/routing";
 const { request, flush } = entityStoreActions;
 
 export class SectionContainer extends Component {
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
     const promises = [];
     const { sectionId } = match.params;
@@ -28,9 +28,9 @@ export class SectionContainer extends Component {
       promises.push(two);
     }
     return Promise.all(promises);
-  }
+  };
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     return {
       section: grab(
         "textSections",
@@ -38,7 +38,7 @@ export class SectionContainer extends Component {
         state.entityStore
       )
     };
-  }
+  };
 
   static propTypes = {
     section: PropTypes.object,

@@ -16,9 +16,9 @@ export default function withDispatch(WrappedComponent) {
 
     static WrappedComponent = WrappedComponent;
 
-    static mapDispatchToProps(dispatch) {
+    static mapDispatchToProps = dispatch => {
       return { dispatch };
-    }
+    };
 
     render() {
       const props = Object.assign({}, this.props);

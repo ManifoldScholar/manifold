@@ -14,12 +14,12 @@ const perPage = 6;
 export class ProjectDetailEvents extends PureComponent {
   static displayName = "ProjectDetail.Events";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       events: select(requests.beEvents, state.entityStore),
       eventsMeta: meta(requests.beEvents, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     project: PropTypes.object,

@@ -16,7 +16,7 @@ const { request } = entityStoreActions;
 export class ProjectDetailTexts extends PureComponent {
   static displayName = "ProjectDetail.Texts";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       moveTextResponse: get(state.entityStore.responses, requests.beTextUpdate),
       moveCategoryResponse: get(
@@ -24,7 +24,7 @@ export class ProjectDetailTexts extends PureComponent {
         requests.beTextCategoryUpdate
       )
     };
-  }
+  };
 
   static propTypes = {
     project: PropTypes.object,

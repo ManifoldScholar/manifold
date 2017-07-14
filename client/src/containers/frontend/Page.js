@@ -8,18 +8,18 @@ import { select } from "utils/entityUtils";
 const { request, flush } = entityStoreActions;
 
 export class PageContainer extends Component {
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     const page = request(pagesAPI.show(match.params.slug), requests.gPage);
     const { promise: one } = dispatch(page);
     return Promise.all([one]);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       loading: state.ui.loading.active,
       page: select(requests.gPage, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     dispatch: PropTypes.func,

@@ -16,7 +16,7 @@ const page = 1;
 const perPage = 10;
 
 class ProjectResourcesContainer extends Component {
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     const pageParam = match.params.page ? match.params.page : page;
     const projectRequest = request(
       projectsAPI.show(match.params.id),
@@ -34,7 +34,7 @@ class ProjectResourcesContainer extends Component {
     const { promise: one } = dispatch(projectRequest);
     const { promise: two } = dispatch(resourcesRequest);
     return Promise.all([one, two]);
-  }
+  };
 
   static propTypes = {
     project: PropTypes.object,
@@ -45,14 +45,14 @@ class ProjectResourcesContainer extends Component {
     history: PropTypes.object
   };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     const props = {
       project: select(requests.feProject, state.entityStore),
       resources: select(requests.feResources, state.entityStore),
       meta: meta(requests.feResources, state.entityStore)
     };
     return omitBy(props, isNull);
-  }
+  };
 
   constructor(props) {
     super(props);

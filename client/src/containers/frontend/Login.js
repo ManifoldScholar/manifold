@@ -4,11 +4,11 @@ import connectAndFetch from "utils/connectAndFetch";
 import { currentUserActions } from "actions";
 
 export class LoginContainer extends Component {
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       authentication: state.authentication
     };
-  }
+  };
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,

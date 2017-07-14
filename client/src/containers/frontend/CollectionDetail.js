@@ -16,7 +16,7 @@ const page = 1;
 const perPage = 10;
 
 class CollectionDetailContainer extends PureComponent {
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
     const filter = queryString.parse(location.search);
     const promises = [];
@@ -49,9 +49,9 @@ class CollectionDetailContainer extends PureComponent {
     }
 
     return Promise.all(promises);
-  }
+  };
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     const props = {
       project: grab("projects", ownProps.match.params.id, state.entityStore),
       collection: grab(
@@ -65,7 +65,7 @@ class CollectionDetailContainer extends PureComponent {
       slideshowResourcesMeta: meta(requests.feSlideshow, state.entityStore)
     };
     return omitBy(props, isNull);
-  }
+  };
 
   static propTypes = {
     location: PropTypes.object,

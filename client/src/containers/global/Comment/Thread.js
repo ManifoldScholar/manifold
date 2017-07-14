@@ -11,12 +11,12 @@ import { commentsAPI } from "api";
 const { request } = entityStoreActions;
 
 export class CommentThread extends PureComponent {
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     const newState = {
       comments: select(`comments-for-${ownProps.subject.id}`, state.entityStore)
     };
     return Object.assign({}, ownProps, newState);
-  }
+  };
 
   static propTypes = {
     subject: PropTypes.object.isRequired,

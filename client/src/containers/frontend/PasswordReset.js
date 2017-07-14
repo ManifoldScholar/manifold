@@ -20,11 +20,11 @@ export class PasswordResetContainer extends Component {
     response: PropTypes.object
   };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       response: get(state.entityStore.responses, requests.gPasswordReset)
     };
-  }
+  };
 
   constructor() {
     super();

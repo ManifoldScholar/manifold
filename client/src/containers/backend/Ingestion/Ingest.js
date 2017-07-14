@@ -27,20 +27,20 @@ export class IngestionIngest extends PureComponent {
     match: PropTypes.object
   };
 
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     if (isLoaded(requests.beIngestionShow, getState())) return;
     const call = ingestionsAPI.show(match.params.ingestionId);
     const ingestion = request(call, requests.beIngestionShow);
     const { promise: one } = dispatch(ingestion);
     return Promise.all([one]);
-  }
+  };
 
-  static mapStateToProps(state, ownPropsIgnored) {
+  static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       channel: get(state.websocket.channels, "IngestionChannel"),
       ingestion: select(requests.beIngestionShow, state.entityStore)
     };
-  }
+  };
 
   constructor(props) {
     super(props);

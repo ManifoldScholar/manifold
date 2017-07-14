@@ -13,12 +13,12 @@ const perPage = 5;
 export class ProjectDetailCollectionsList extends PureComponent {
   static displayName = "ProjectDetail.CollectionsList";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       collections: select(requests.beCollections, state.entityStore),
       collectionsMeta: meta(requests.beCollections, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     project: PropTypes.object,

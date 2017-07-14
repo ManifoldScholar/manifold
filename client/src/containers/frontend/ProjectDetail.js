@@ -9,20 +9,20 @@ import { projectsAPI, requests } from "api";
 const { request, flush } = entityStoreActions;
 
 export class ProjectDetailContainer extends Component {
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     const projectRequest = request(
       projectsAPI.show(match.params.id),
       requests.feProject
     );
     const { promise: one } = dispatch(projectRequest);
     return Promise.all([one]);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       project: select(requests.feProject, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     project: PropTypes.object,

@@ -10,7 +10,7 @@ import lh from "helpers/linkHandler";
 const { request, flush } = entityStoreActions;
 
 export class ResourceDetailContainer extends PureComponent {
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     const projectFetch = projectsAPI.show(match.params.id);
     const resourceFetch = resourcesAPI.show(match.params.resourceId);
     const projectAction = request(projectFetch, requests.feProject);
@@ -18,15 +18,15 @@ export class ResourceDetailContainer extends PureComponent {
     const { promise: one } = dispatch(projectAction);
     const { promise: two } = dispatch(resourceAction);
     return Promise.all([one, two]);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     const props = {
       project: select(requests.feProject, state.entityStore),
       resource: select(requests.feResource, state.entityStore)
     };
     return props;
-  }
+  };
 
   static propTypes = {
     project: PropTypes.object,

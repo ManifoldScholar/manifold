@@ -13,11 +13,11 @@ const { request, flush } = entityStoreActions;
 export class CollectionDetailWrapperContainer extends PureComponent {
   static displayName = "CollectionDetail.Wrapper";
 
-  static mapStateToProps(state, ownPropsIgnored) {
+  static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       collection: select(requests.beCollection, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     collection: PropTypes.object,

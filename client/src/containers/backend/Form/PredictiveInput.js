@@ -9,11 +9,11 @@ import { ApiClient } from "api";
 class PredictiveInput extends PureComponent {
   static displayName = "Form.PredictiveInput";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       authToken: state.authentication.authToken
     };
-  }
+  };
 
   static propTypes = {
     className: PropTypes.string,

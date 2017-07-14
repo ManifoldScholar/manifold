@@ -13,12 +13,12 @@ const perPage = 5;
 export class ProjectDetailResourcesList extends PureComponent {
   static displayName = "ProjectDetail.ResourcesList";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       resources: select(requests.beResources, state.entityStore),
       resourcesMeta: meta(requests.beResources, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     project: PropTypes.object,

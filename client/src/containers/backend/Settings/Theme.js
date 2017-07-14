@@ -13,11 +13,11 @@ export class SettingsThemeContainer extends PureComponent {
     settings: PropTypes.object
   };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       settings: select(requests.settings, state.entityStore)
     };
-  }
+  };
 
   render() {
     if (!this.props.settings) return null;

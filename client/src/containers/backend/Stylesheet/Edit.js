@@ -16,19 +16,19 @@ const { request } = entityStoreActions;
 export class StylesheetEdit extends PureComponent {
   static displayName = "Stylesheet.Edit";
 
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     if (!match.params.stylesheet) return;
     const call = stylesheetsAPI.show(match.params.stylesheet);
     const stylesheet = request(call, requests.beStylesheetShow);
     return dispatch(stylesheet);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     const out = {
       stylesheet: select(requests.beStylesheetShow, state.entityStore)
     };
     return out;
-  }
+  };
 
   static propTypes = {
     match: PropTypes.object,

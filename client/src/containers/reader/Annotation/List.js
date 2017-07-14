@@ -26,12 +26,12 @@ export class AnnotationList extends PureComponent {
     annotations: []
   };
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     const newState = {
       annotations: select(requests.rDrawerAnnotations, state.entityStore) || []
     };
     return Object.assign({}, newState, ownProps);
-  }
+  };
 
   constructor(props) {
     super(props);

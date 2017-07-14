@@ -9,11 +9,11 @@ import lh from "helpers/linkHandler";
 export class IngestionNew extends PureComponent {
   static displayName = "TextDetail.Ingestion.New";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       ingestion: select(requests.beIngestionCreate, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     project: PropTypes.object,

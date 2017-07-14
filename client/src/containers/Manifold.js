@@ -30,7 +30,7 @@ const { visibilityHide } = uiVisibilityActions;
 class ManifoldContainer extends PureComponent {
   // This method will bootstrap data into manifold. Nothing else is loaded into the
   // store at this point, including params and the authenticated user.
-  static bootstrap(getState, dispatch) {
+  static bootstrap = (getState, dispatch) => {
     // if (__CLIENT__) return;
     const promises = [];
     const loaded = has(getState(), "entityStore.entities.settings.0");
@@ -40,9 +40,9 @@ class ManifoldContainer extends PureComponent {
     });
     promises.push(dispatch(settingsRequest));
     return Promise.all(promises);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       authentication: state.authentication,
       visibility: state.ui.visibility,
@@ -51,7 +51,7 @@ class ManifoldContainer extends PureComponent {
       routing: state.routing,
       settings: select(requests.settings, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     dispatch: PropTypes.func,

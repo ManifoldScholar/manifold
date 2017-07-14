@@ -20,11 +20,11 @@ class PasswordForgotContainer extends Component {
     response: PropTypes.object
   };
 
-  static mapStateToProps(state, ownPropsIgnored) {
+  static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       response: get(state.entityStore.responses, "request-reset-password")
     };
-  }
+  };
 
   constructor(propsIgnored) {
     super();

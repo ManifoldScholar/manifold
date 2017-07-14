@@ -25,12 +25,12 @@ export class ResourceViewerGroup extends PureComponent {
     dispatch: PropTypes.func
   };
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     const newState = {
       activeAnnotation: state.ui.reader.activeAnnotation
     };
     return Object.assign({}, newState, ownProps);
-  }
+  };
 
   static defaultProps = {
     location: 0,

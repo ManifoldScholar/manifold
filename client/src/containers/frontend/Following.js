@@ -17,7 +17,7 @@ const { request } = entityStoreActions;
 const featuredLimit = 4;
 
 export class FollowingContainer extends Component {
-  static fetchData(getState, dispatch) {
+  static fetchData = (getState, dispatch) => {
     const state = getState();
     if (state.authentication.authenticated) {
       const followedProjectsRequest = request(
@@ -33,7 +33,7 @@ export class FollowingContainer extends Component {
       return Promise.all([one, two]);
     }
     return Promise.all([]);
-  }
+  };
 
   static propTypes = {
     featuredProjects: PropTypes.array,
@@ -48,7 +48,7 @@ export class FollowingContainer extends Component {
     store: PropTypes.object.isRequired
   };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       projectFilters: state.ui.filters.project,
       followedProjects: select(requests.feProjectsFollowed, state.entityStore),
@@ -56,7 +56,7 @@ export class FollowingContainer extends Component {
       subjects: select(requests.feSubjects, state.entityStore),
       authentication: state.authentication
     };
-  }
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);

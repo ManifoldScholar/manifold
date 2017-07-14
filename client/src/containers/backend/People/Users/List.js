@@ -17,13 +17,13 @@ const perPage = 10;
 export class UsersListContainer extends PureComponent {
   static displayName = "Users.List";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       users: select(requests.beUsers, state.entityStore),
       usersMeta: meta(requests.beUsers, state.entityStore),
       currentUserId: get(state, "authentication.currentUser.id")
     };
-  }
+  };
 
   static propTypes = {
     users: PropTypes.array,

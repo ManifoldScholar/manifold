@@ -13,7 +13,7 @@ import { renderRoutes } from "react-router-config";
 const { request } = entityStoreActions;
 
 export class FrontendContainer extends Component {
-  static fetchData(getState, dispatch) {
+  static fetchData = (getState, dispatch) => {
     if (!isLoaded(requests.gPages, getState())) {
       const pages = request(pagesAPI.index(), requests.gPages, {
         oneTime: true
@@ -27,7 +27,7 @@ export class FrontendContainer extends Component {
       const { promise: two } = dispatch(subjects);
       return Promise.all([one, two]);
     }
-  }
+  };
 
   static propTypes = {
     location: PropTypes.object,
@@ -40,7 +40,7 @@ export class FrontendContainer extends Component {
     route: PropTypes.object
   };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       authentication: state.authentication,
       visibility: state.ui.visibility,
@@ -49,7 +49,7 @@ export class FrontendContainer extends Component {
       pages: select(requests.gPages, state.entityStore),
       settings: select(requests.settings, state.entityStore)
     };
-  }
+  };
 
   componentWillMount() {
     this.commonActions = commonActions(this.props.dispatch);

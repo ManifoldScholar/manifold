@@ -16,12 +16,12 @@ const { request } = entityStoreActions;
 class ResourceViewerSingle extends PureComponent {
   static displayName = "ResourceViewer.Single";
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     const newState = {
       activeAnnotation: state.ui.reader.activeAnnotation
     };
     return Object.assign({}, newState, ownProps);
-  }
+  };
 
   static propTypes = {
     resource: PropTypes.object,

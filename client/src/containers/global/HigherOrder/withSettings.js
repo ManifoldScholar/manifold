@@ -18,11 +18,11 @@ export default function withSettings(WrappedComponent) {
 
     static WrappedComponent = WrappedComponent;
 
-    static mapStateToProps(state) {
+    static mapStateToProps = state => {
       return {
         settings: select(requests.settings, state.entityStore)
       };
-    }
+    };
 
     render() {
       const props = Object.assign({}, this.props);

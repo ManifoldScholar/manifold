@@ -5,11 +5,11 @@ import { Redirect } from "react-router-dom";
 import isString from "lodash/isString";
 
 class RequireRole extends PureComponent {
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       authentication: state.authentication
     };
-  }
+  };
 
   static propTypes = {
     requiredRole: PropTypes.string.isRequired,

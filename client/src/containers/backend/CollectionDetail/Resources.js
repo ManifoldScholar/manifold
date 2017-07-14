@@ -18,12 +18,12 @@ const perPage = 5;
 export class CollectionDetailResourcesContainer extends Component {
   static displayName = "CollectionDetail.Resources";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       resources: select(requests.beResources, state.entityStore),
       resourcesMeta: meta(requests.beResources, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     dispatch: PropTypes.func,

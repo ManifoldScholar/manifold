@@ -13,7 +13,7 @@ import { renderRoutes } from "helpers/routing";
 const { request } = entityStoreActions;
 
 export class BackendContainer extends PureComponent {
-  static fetchData(getState, dispatch) {
+  static fetchData = (getState, dispatch) => {
     if (!entityUtils.isLoaded(requests.gPages, getState())) {
       const pages = request(pagesAPI.index(), requests.gPages, {
         oneTime: true
@@ -21,7 +21,7 @@ export class BackendContainer extends PureComponent {
       const { promise: one } = dispatch(pages);
       return Promise.all([one]);
     }
-  }
+  };
 
   static propTypes = {
     location: PropTypes.object,
@@ -34,7 +34,7 @@ export class BackendContainer extends PureComponent {
     route: PropTypes.object
   };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       authentication: state.authentication,
       visibility: state.ui.visibility,
@@ -44,7 +44,7 @@ export class BackendContainer extends PureComponent {
       pages: entityUtils.select(requests.gPages, state.entityStore),
       settings: entityUtils.select(requests.settings, state.entityStore)
     };
-  }
+  };
 
   componentWillMount() {
     this.commonActions = commonActions(this.props.dispatch);
