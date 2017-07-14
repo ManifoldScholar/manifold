@@ -34,7 +34,8 @@ module Api
         @comment = authorize_and_create_comment(comment_params)
         render_single_resource(
           @comment,
-          location: comment_location(@comment)
+          location: comment_location(@comment),
+          include: %w(creator)
         )
       end
 

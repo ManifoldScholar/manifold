@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { connect } from "react-redux";
 import { requests } from "api";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, uiVisibilityActions } from "actions";
 import { singularEntityName } from "utils/entityUtils";
+import { bindActionCreators } from "redux";
 import { commentsAPI } from "api";
+import { HigherOrder } from "containers/global";
 
 const { request } = entityStoreActions;
 import { Form as GlobalForm } from "components/global";
@@ -150,42 +152,53 @@ export class CommentEditor extends PureComponent {
     const textClass = classNames({
       expanded: this.state.body
     });
+    const showLogin = bindActionCreators(
+      () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
+      this.props.dispatch
+    );
 
     return (
       <div className="comment-editor">
-        <form onSubmit={this.handleSubmit}>
-          <GlobalForm.Errorable
-            name="attributes[body]"
-            errors={this.state.errors}
-          >
-            <textarea
-              ref={ci => {
-                this.ci = ci;
-              }}
-              onKeyDown={this.submitOnReturnKey}
-              className={textClass}
-              placeholder={this.placeholder(this.props)}
-              onChange={this.handleBodyChange}
-              value={this.state.body}
-            />
-            <div className="utility">
-              <div className="buttons">
-                <button
-                  onClick={this.props.cancel}
-                  className="button-secondary-dull"
-                >
-                  Cancel
-                </button>
-                <button
-                  className="button-secondary"
-                  disabled={!this.state.body}
-                >
-                  {this.buttonLabel(this.props)}
-                </button>
+        <HigherOrder.RequireRole requiredRole="none">
+          <div className="placeholder">
+            <button onClick={showLogin}>Login to post a comment</button>
+          </div>
+        </HigherOrder.RequireRole>
+        <HigherOrder.RequireRole requiredRole="any">
+          <form onSubmit={this.handleSubmit}>
+            <GlobalForm.Errorable
+              name="attributes[body]"
+              errors={this.state.errors}
+            >
+              <textarea
+                ref={ci => {
+                  this.ci = ci;
+                }}
+                onKeyDown={this.submitOnReturnKey}
+                className={textClass}
+                placeholder={this.placeholder(this.props)}
+                onChange={this.handleBodyChange}
+                value={this.state.body}
+              />
+              <div className="utility">
+                <div className="buttons">
+                  <button
+                    onClick={this.props.cancel}
+                    className="button-secondary-dull"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="button-secondary"
+                    disabled={!this.state.body}
+                  >
+                    {this.buttonLabel(this.props)}
+                  </button>
+                </div>
               </div>
-            </div>
-          </GlobalForm.Errorable>
-        </form>
+            </GlobalForm.Errorable>
+          </form>
+        </HigherOrder.RequireRole>
       </div>
     );
   }

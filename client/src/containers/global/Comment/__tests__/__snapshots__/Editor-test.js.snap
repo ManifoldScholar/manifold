@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Global Comment Editor Container renders correctly 1`] = `
+exports[`Global Comment Editor Container renders correctly when logged in 1`] = `
 <div
   className="comment-editor"
 >
@@ -40,5 +40,21 @@ exports[`Global Comment Editor Container renders correctly 1`] = `
       </div>
     </div>
   </form>
+</div>
+`;
+
+exports[`Global Comment Editor Container renders correctly when logged out 1`] = `
+<div
+  className="comment-editor"
+>
+  <div
+    className="placeholder"
+  >
+    <button
+      onClick={[Function]}
+    >
+      Login to post a comment
+    </button>
+  </div>
 </div>
 `;

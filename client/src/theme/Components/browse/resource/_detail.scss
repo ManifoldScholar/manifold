@@ -279,8 +279,11 @@
       }
     }
 
-    .comment-editor textarea {
-      border: 1px solid $neutral10;
+    .comment-editor {
+      textarea {
+        border: 1px solid $neutral10;
+        border-bottom: 0;
+      }
     }
   }
 }
