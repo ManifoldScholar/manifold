@@ -4,7 +4,6 @@ module Ingestor
   module Strategy
     module Html
       module Inspector
-        # Inspects a Word ingestion source
         class IngestionSource < ::Ingestor::Inspector::IngestionSourceInspector
 
           attr_reader :rel_path, :ingestion

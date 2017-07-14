@@ -49,8 +49,10 @@ RSpec.describe Ingestor::Strategy::Html::Strategy do
         expect(@text.page_list).to eq []
       end
 
-      it "has two stylesheets" do
-        expect(@text.stylesheets.length).to eq 2
+      it "has three stylesheets" do
+        # The sample document has one external sheet, an inline block, and then all the
+        # inline styles make up a third block.
+        expect(@text.stylesheets.length).to eq 3
       end
 
       it "has one entry in the spine" do

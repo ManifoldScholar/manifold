@@ -11,7 +11,7 @@ module Ingestor
   # @author Zach Davis
   class Ingestion
 
-    attr_accessor :logger, :text, :identifier
+    attr_accessor :logger, :text, :identifier, :source_path
 
     WORKING_DIR_BASE = Rails.root.join("tmp", "ingestion")
 
@@ -20,13 +20,17 @@ module Ingestor
       @identifier = SecureRandom.uuid
       @text ||= Text.create(creator: creator)
       @logger = logger
+      update_working_dir(source_path)
+    end
+
+    def update_working_dir(path)
       ensure_root
-      copy if source_dir_exists?
-      extract if extractable?
+      copy(path) if source_dir_exists?(path)
+      extract(path) if extractable?(path)
     end
 
     def teardown
-      FileUtils.rm_rf(root)
+      # FileUtils.rm_rf(root)
     end
 
     def open(rel_path, options = "r")
@@ -53,6 +57,15 @@ module Ingestor
       file_operation(:write, rel_path, [contents])
     end
 
+    def write_tmp(name, ext, contents)
+      tmp = Tempfile.new([name, ".#{ext}"])
+      tmp.close
+      File.open(tmp.path, "wb") do |f|
+        f.write(contents)
+      end
+      [tmp, tmp.path]
+    end
+
     def dir?(rel_path)
       file_operation(:directory?, rel_path)
     end
@@ -70,13 +83,13 @@ module Ingestor
       rel(File.expand_path(File.join(root, File.dirname(source), path)))
     end
 
-    def basename
-      File.basename(source_path)
+    def basename(path = source_path)
+      File.basename(path)
     end
 
-    def extension
-      return nil unless source?
-      File.extname(basename).split(".").last
+    def extension(path = source_path)
+      return nil unless source?(path)
+      File.extname(basename(path)).split(".").last
     end
 
     def root
@@ -89,13 +102,13 @@ module Ingestor
          .map { |path| rel(path) }
     end
 
-    def source_url
+    def source_url(path = source_path)
       return nil unless url?
-      source_path
+      path
     end
 
-    def url?
-      source_path.to_s.start_with?("http://", "https://")
+    def url?(path = source_path)
+      path.to_s.start_with?("http://", "https://")
     end
 
     protected
@@ -119,8 +132,8 @@ module Ingestor
       FileUtils.mkdir_p(root) unless File.exist?(root)
     end
 
-    def extract
-      Zip::File.open(source_path) do |zip_file|
+    def extract(path = source_path)
+      Zip::File.open(path) do |zip_file|
         zip_file.each do |f|
           fpath = File.join(root, f.name)
           FileUtils.mkdir_p(File.dirname(fpath))
@@ -130,20 +143,20 @@ module Ingestor
       logger.debug("Unzipped archive to temporary directory: #{root}")
     end
 
-    def source?
-      File.file?(source_path)
+    def source?(path = source_path)
+      File.file?(path)
     end
 
-    def source_dir_exists?
-      File.directory?(source_path)
+    def source_dir_exists?(source_dir = source_path)
+      File.directory?(source_dir)
     end
 
-    def extractable?
-      %w(zip epub).include? extension&.downcase
+    def extractable?(path = source_path)
+      %w(zip epub).include? extension(path)&.downcase
     end
 
-    def copy
-      FileUtils.cp_r(Dir[File.join(source_path, "*")], root)
+    def copy(path = source_path)
+      FileUtils.cp_r(Dir[File.join(path, "*")], root)
     end
 
   end

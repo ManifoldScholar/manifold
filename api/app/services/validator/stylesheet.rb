@@ -168,6 +168,7 @@ module Validator
         match = value_map[:entries].detect { |kvp| out == kvp[0] }
         out = match[1] unless match.nil?
       end
+
       out
     end
 

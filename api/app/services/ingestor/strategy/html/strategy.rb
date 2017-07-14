@@ -22,7 +22,7 @@ module Ingestor
         end
 
         def self.ingest(ingestion)
-          new(ingestion).ingest
+          new(ingestion).preprocess(ingestion).ingest
         end
 
         def self.inspector(ingestion)
@@ -33,6 +33,13 @@ module Ingestor
           @ingestion = ingestion
           @logger = @ingestion.logger ||
                     Naught.build { |config| config.mimic Logger }
+        end
+
+        def preprocess(ingestion)
+          inspector = self.class.inspector(ingestion)
+          path = ingestion.abs(inspector.index_path)
+          ::Ingestor::Preprocessor::HTML.process!(path)
+          self
         end
 
         def ingest
