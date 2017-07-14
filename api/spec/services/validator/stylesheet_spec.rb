@@ -184,6 +184,21 @@ RSpec.describe Validator::Stylesheet do
     expect(results).to eq_ignoring_whitespace valid
   end
 
+  describe "font-sizes" do
+    it "are removed when absolute" do
+      invalid = ".test { font-size: 15pt; }"
+      valid = "#{scope_selector}  .test { }"
+      results = validator.validate(invalid)
+      expect(results).to eq_ignoring_whitespace valid
+    end
+
+    it "are maintained when relative" do
+      valid = ".test { font-size: 1em; }"
+      results = validator.validate(valid)
+      expect(results).to eq_ignoring_whitespace ".manifold-text-section #{valid}"
+    end
+  end
+
   it "creates a dark style for grayscale values" do
     selector = "p { color: #000000 }"
     valid = "#{scope_selector} p { color: #000000; }"

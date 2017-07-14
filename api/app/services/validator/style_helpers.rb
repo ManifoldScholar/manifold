@@ -1,5 +1,7 @@
 module Validator
   module StyleHelpers
+    CSS_UNITS = %w(em ex % px cm mm in pt pc ch rem vh vw vmin vmax).freeze
+
     # @param node [Nokogiri::XML::Node]
     # @return [Hash]
     def read_styles(node)
@@ -62,6 +64,13 @@ module Validator
       styles = read_styles(node)
       styles[property] = value
       write_styles!(node, styles)
+    end
+
+    # @param value [String] an attribute value
+    # @return [String]
+    def unit(value)
+      unit = value.downcase.gsub(/\d+/, "")
+      return unit if CSS_UNITS.include? unit
     end
   end
 end

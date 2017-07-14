@@ -30,7 +30,7 @@ module Validator
     def validate_declarations(declarations, selector = nil)
       cleaned = []
       parse_declarations(declarations).each_declaration do |property, value, important|
-        next unless allowed_property?(property, selector)
+        next unless allowed_property?(property, selector, value)
         mapped_value = map_value(property, value)
         cleaned.push compose_declaration(property, mapped_value, important)
       end
@@ -192,10 +192,11 @@ module Validator
     # Is a given property allowed generally and for the selector (if provided)?
     # @param property [String]
     # @param selector [String]
+    # @param value [String]
     # @return [Boolean]
-    def allowed_property?(property, selector = nil)
+    def allowed_property?(property, selector, value)
       match = @config.exclusions.properties.detect do |exclusion|
-        exclusion_matches_property?(exclusion, property, selector)
+        exclusion_matches_property?(exclusion, property, selector, value)
       end
       match.nil?
     end
@@ -212,27 +213,46 @@ module Validator
     # @param exclusion [Hash]
     # @param property [String]
     # @param selector [String]
+    # @param value [String]
     # @return [Boolean]
-    def exclusion_matches_property?(exclusion, property, selector = nil)
+    def exclusion_matches_property?(exclusion, property, selector, value)
       return false unless exclusion.key?(:exclude)
-      covered = exclusion.exclude.include? property
-      return covered unless exclusion.key?(:condition)
-      return covered if selector && exclusion_matches_selector?(exclusion, selector)
-      false
+      return false unless exclusion.exclude.include? property
+      return true unless exclusion.key?(:condition)
+      exclusion_condition_matches?(exclusion, selector, property, value)
     end
 
     # Does the match condition in the exclusion match the given selector?
     # @param exclusion [Hash]
     # @param selector [String]
+    # @param property [String]
+    # @param value [String]
     # @return [Boolean]
     # @raise InvalidCondition if the exclusions configuration is invalid.
-    def exclusion_matches_selector?(exclusion, selector)
+    def exclusion_condition_matches?(exclusion, selector, _property, value)
       return true unless exclusion.key?(:condition)
       raise InvalidCondition unless valid_selector_condition?(exclusion.condition)
-      compare = selector
-      compare = tag_from_selector(selector) if exclusion.condition.type == "tag"
+      condition = exclusion.condition
+      type = exclusion.condition.type
+      case type
+      when "selector_tag"
+        return condition_selector_tag_matches?(condition, selector)
+      when "value"
+        return condition_value_matches?(condition, value)
+      end
+      false
+    end
+
+    def condition_value_matches?(condition, value)
+      return false if value.blank?
+      !(value =~ condition.match).nil?
+    end
+
+    def condition_selector_tag_matches?(condition, selector)
+      return false if selector.blank?
+      compare = tag_from_selector(selector)
       return false if compare.blank?
-      !(compare =~ exclusion.condition.match).nil?
+      !(compare =~ condition.match).nil?
     end
 
     # Is the condition property on an exclusion configuration valid?
