@@ -3,9 +3,18 @@ class Settings < ApplicationRecord
   include Authority::Abilities
   include Attachments
 
-  attribute :general, :indifferent_hash, default: {}
-  attribute :integrations, :indifferent_hash, default: {}
-  attribute :secrets, :indifferent_hash, default: {}
+  SECTIONS = [:general, :integrations, :secrets, :email].freeze
+
+  # Create merge setters for the various settings sections. Initialize the hashes.
+  SECTIONS.each do |section|
+    attribute section, :indifferent_hash, default: {}
+    class_eval <<-RUBY, __FILE__, __LINE__ + 1
+    def #{section}=(new_values)
+      value = merge_settings_into!(:#{section}, new_values.symbolize_keys)
+      write_attribute(:#{section}, value)
+    end
+    RUBY
+  end
 
   # Validation
   validates :singleton_guard, inclusion: [0], uniqueness: true
