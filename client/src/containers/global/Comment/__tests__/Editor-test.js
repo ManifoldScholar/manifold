@@ -4,12 +4,14 @@ import { CommentEditor } from "../Editor";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
+import auth from "test/helpers/auth";
 
 describe("Global Comment Editor Container", () => {
   const store = build.store();
   const comment = build.entity.comment("1");
   const resource = build.entity.resource("2");
   const cancelMock = jest.fn();
+  const user = build.entity.user("3");
 
   const component = renderer.create(
     wrapWithRouter(
@@ -24,7 +26,14 @@ describe("Global Comment Editor Container", () => {
     )
   );
 
-  it("renders correctly", () => {
+  it("renders correctly when logged in", () => {
+    auth.startSession(store.dispatch, user);
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+    auth.endSession(store.dispatch);
+  });
+
+  it("renders correctly when logged out", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

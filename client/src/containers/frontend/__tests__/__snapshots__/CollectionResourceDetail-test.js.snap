@@ -273,42 +273,15 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
               <div
                 className="comment-editor"
               >
-                <form
-                  onSubmit={[Function]}
+                <div
+                  className="placeholder"
                 >
-                  <div
-                    className=""
-                    style={Object {}}
+                  <button
+                    onClick={[Function]}
                   >
-                    <textarea
-                      className=""
-                      onChange={[Function]}
-                      onKeyDown={[Function]}
-                      placeholder="Discuss this resource..."
-                      value=""
-                    />
-                    <div
-                      className="utility"
-                    >
-                      <div
-                        className="buttons"
-                      >
-                        <button
-                          className="button-secondary-dull"
-                          onClick={[Function]}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          className="button-secondary"
-                          disabled={true}
-                        >
-                          Post
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
+                    Login to post a comment
+                  </button>
+                </div>
               </div>
             </div>
           </div>
