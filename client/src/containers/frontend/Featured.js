@@ -12,7 +12,7 @@ const { setProjectFilters } = uiFilterActions;
 const { request, flush } = entityStoreActions;
 
 export class FeaturedContainer extends Component {
-  static fetchData(getState, dispatch) {
+  static fetchData = (getState, dispatch) => {
     const featuredProjectsRequest = request(
       projectsAPI.featured(),
       requests.feProjectsFeatured
@@ -24,16 +24,16 @@ export class FeaturedContainer extends Component {
     const { promise: one } = dispatch(featuredProjectsRequest);
     const { promise: two } = dispatch(featuredSubjectsRequest);
     return Promise.all([one, two]);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       projectFilters: state.ui.filters.project,
       featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
       subjects: select(requests.feSubjectsFeatured, state.entityStore),
       authentication: state.authentication
     };
-  }
+  };
 
   static propTypes = {
     featuredProjects: PropTypes.array,

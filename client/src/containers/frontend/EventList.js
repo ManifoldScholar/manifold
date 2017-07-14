@@ -9,7 +9,7 @@ import { projectsAPI, requests } from "api";
 const { request } = entityStoreActions;
 
 export class ProjectEventsContainer extends Component {
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     const { params } = match;
     const page = params.page ? params.page : 1;
     const projectRequest = request(
@@ -23,15 +23,15 @@ export class ProjectEventsContainer extends Component {
     const { promise: one } = dispatch(projectRequest);
     const { promise: two } = dispatch(eventRequest);
     return Promise.all([one, two]);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       project: select(requests.feProject, state.entityStore),
       events: select(requests.feEvents, state.entityStore),
       meta: meta(requests.feEvents, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     project: PropTypes.object,

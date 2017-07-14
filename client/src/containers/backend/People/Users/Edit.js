@@ -22,7 +22,7 @@ export class UsersEditContainer extends PureComponent {
     history: PropTypes.object
   };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       user: select(requests.beUser, state.entityStore),
       createMakerResponse: get(
@@ -30,7 +30,7 @@ export class UsersEditContainer extends PureComponent {
         requests.beMakerCreate
       )
     };
-  }
+  };
 
   constructor(props) {
     super(props);

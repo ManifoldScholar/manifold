@@ -12,18 +12,18 @@ const { request } = entityStoreActions;
 export class IngestionEdit extends PureComponent {
   static displayName = "TextDetail.Ingestion.Edit";
 
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     if (isLoaded(requests.beIngestionShow, getState())) return;
     const call = ingestionsAPI.show(match.params.ingestionId);
     const ingestion = request(call, requests.beIngestionShow);
     return dispatch(ingestion);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       ingestion: select(requests.beIngestionShow, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     text: PropTypes.object.isRequired,

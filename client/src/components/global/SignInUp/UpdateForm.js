@@ -11,11 +11,11 @@ import Dropzone from "react-dropzone";
 const { request } = entityStoreActions;
 
 class UpdateFormContainer extends Component {
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       response: state.entityStore.responses[requests.gAuthenticatedUserUpdate]
     };
-  }
+  };
 
   static propTypes = {
     dispatch: PropTypes.func,

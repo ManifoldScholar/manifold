@@ -17,12 +17,12 @@ const perPage = 10;
 export class MakersListContainer extends PureComponent {
   static displayName = "Makers.List";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       makers: select(requests.beMakers, state.entityStore),
       makersMeta: meta(requests.beMakers, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     makers: PropTypes.array,

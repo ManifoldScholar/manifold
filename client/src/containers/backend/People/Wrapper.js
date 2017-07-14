@@ -8,9 +8,9 @@ import { renderRoutes } from "helpers/routing";
 export class UsersWrapperContainer extends PureComponent {
   static displayName = "Users.Wrapper";
 
-  static mapStateToProps(stateIgnored, ownPropsIgnored) {
+  static mapStateToProps = (stateIgnored, ownPropsIgnored) => {
     return {};
-  }
+  };
 
   static propTypes = {
     route: PropTypes.object

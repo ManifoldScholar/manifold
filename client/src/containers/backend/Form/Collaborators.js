@@ -11,7 +11,7 @@ const { request, flush } = entityStoreActions;
 export class FormCollaborators extends Component {
   static displayName = "Form.Collaborators";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       updateCreators: get(state.entityStore.responses, "update-creators"),
       updateContributors: get(
@@ -21,7 +21,7 @@ export class FormCollaborators extends Component {
       createCreator: get(state.entityStore.responses, "create-creator"),
       createContributor: get(state.entityStore.responses, "create-contributor")
     };
-  }
+  };
 
   static propTypes = {
     entity: PropTypes.object,

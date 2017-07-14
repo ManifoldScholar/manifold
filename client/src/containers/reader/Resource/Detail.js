@@ -11,7 +11,7 @@ const { request, flush } = entityStoreActions;
 export class ResourceDetailContainer extends PureComponent {
   static displayName = "ReaderContainer.Resource.Detail";
 
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     const promises = [];
     const resourceCall = resourcesAPI.show(match.params.resourceId);
     const { promise: one } = dispatch(
@@ -19,15 +19,15 @@ export class ResourceDetailContainer extends PureComponent {
     );
     promises.push(one);
     return Promise.all(promises);
-  }
+  };
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     const newState = {
       resource: select(requests.rResource, state.entityStore),
       resourceMeta: meta(requests.rResource, state.entityStore)
     };
     return Object.assign({}, newState, ownProps);
-  }
+  };
 
   static propTypes = {
     route: PropTypes.object,

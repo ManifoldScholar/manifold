@@ -13,11 +13,11 @@ const { request, flush } = entityStoreActions;
 export class ResourceDetailWrapperContainer extends PureComponent {
   static displayName = "ResourceDetail.Wrapper";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       resource: select(requests.beResource, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     resource: PropTypes.object,

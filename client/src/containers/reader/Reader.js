@@ -29,7 +29,7 @@ const { setColorScheme } = uiColorActions;
 const { request, flush } = entityStoreActions;
 
 export class ReaderContainer extends Component {
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     const promises = [];
     const state = getState();
     const { sectionId, textId } = match.params;
@@ -52,9 +52,9 @@ export class ReaderContainer extends Component {
       promises.push(two);
     }
     return Promise.all(promises);
-  }
+  };
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     const appearance = {
       typography: state.ui.typography,
       colors: state.ui.colors
@@ -75,7 +75,7 @@ export class ReaderContainer extends Component {
       renderDevTools: state.developer.renderDevTools,
       appearance
     };
-  }
+  };
 
   static propTypes = {
     children: PropTypes.object,

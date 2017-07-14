@@ -11,11 +11,11 @@ const { request } = entityStoreActions;
 export class ProjectDetailCategoryEditContainer extends Component {
   static displayName = "ProjectDetail.Category.Edit";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       category: select(requests.beTextCategory, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     match: PropTypes.object.isRequired,

@@ -16,7 +16,7 @@ const { request } = entityStoreActions;
 const featuredLimit = 4;
 
 export class HomeContainer extends Component {
-  static fetchData(getState, dispatch) {
+  static fetchData = (getState, dispatch) => {
     const state = getState();
     const filteredRequest = request(
       projectsAPI.index(state.ui.projectFilters),
@@ -29,9 +29,9 @@ export class HomeContainer extends Component {
     const { promise: one } = dispatch(filteredRequest);
     const { promise: two } = dispatch(featuredRequest);
     return Promise.all([one, two]);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       projectFilters: state.ui.filters.project,
       filteredProjects: select(requests.feProjectsFiltered, state.entityStore),
@@ -39,7 +39,7 @@ export class HomeContainer extends Component {
       subjects: select(requests.feSubjects, state.entityStore),
       authentication: state.authentication
     };
-  }
+  };
 
   static propTypes = {
     authentication: PropTypes.object,

@@ -13,11 +13,11 @@ const { request } = entityStoreActions;
 export class TextDetailWrapperContainer extends PureComponent {
   static displayName = "TextDetail.Wrapper";
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       text: select(requests.beText, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     children: PropTypes.object,

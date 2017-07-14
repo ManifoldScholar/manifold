@@ -19,13 +19,13 @@ class CreateContainer extends Component {
     showCreateUpdate: PropTypes.func.isRequired
   };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     const myState = {
       user: select(requests.gCreateUser, state.entityStore),
       response: state.entityStore.responses[requests.gCreateUser]
     };
     return myState;
-  }
+  };
 
   constructor() {
     super();

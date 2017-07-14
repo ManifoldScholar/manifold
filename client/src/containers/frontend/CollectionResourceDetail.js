@@ -10,7 +10,7 @@ import { collectionsAPI, requests } from "api";
 const { request, flush } = entityStoreActions;
 
 export class CollectionResourceDetailContainer extends PureComponent {
-  static fetchData(getState, dispatch, location, match) {
+  static fetchData = (getState, dispatch, location, match) => {
     const collectionFetch = collectionsAPI.show(match.params.collectionId);
     const collectionResourceFetch = collectionsAPI.collectionResource(
       match.params.collectionId,
@@ -24,9 +24,9 @@ export class CollectionResourceDetailContainer extends PureComponent {
     const { promise: one } = dispatch(collectionAction);
     const { promise: two } = dispatch(collectionResourceAction);
     return Promise.all([one, two]);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     const props = {
       collection: select(requests.feCollection, state.entityStore),
       collectionResource: select(
@@ -35,7 +35,7 @@ export class CollectionResourceDetailContainer extends PureComponent {
       )
     };
     return props;
-  }
+  };
 
   static propTypes = {
     resource: PropTypes.object,

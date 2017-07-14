@@ -44,13 +44,13 @@ export class FormContainer extends PureComponent {
     groupErrors: false
   };
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     return {
       session: get(state.entityEditor.sessions, ownProps.name),
       response: get(state.entityStore.responses, ownProps.name),
       errors: get(state.entityStore.responses, `${ownProps.name}.errors`)
     };
-  }
+  };
 
   constructor(props) {
     super(props);

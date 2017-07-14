@@ -17,7 +17,7 @@ const { request } = entityStoreActions;
 const perPage = 5;
 
 export class DashboardContainer extends PureComponent {
-  static fetchData(getState, dispatch) {
+  static fetchData = (getState, dispatch) => {
     const projectsRequest = request(
       projectsAPI.index({}, { size: perPage }),
       requests.beProjects
@@ -26,15 +26,15 @@ export class DashboardContainer extends PureComponent {
     const { promise: one } = dispatch(projectsRequest);
     const { promise: two } = dispatch(statsRequest);
     return Promise.all([one, two]);
-  }
+  };
 
-  static mapStateToProps(state) {
+  static mapStateToProps = state => {
     return {
       statistics: select(requests.beStats, state.entityStore),
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore)
     };
-  }
+  };
 
   static propTypes = {
     projects: PropTypes.array,

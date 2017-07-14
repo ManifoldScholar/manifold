@@ -6,12 +6,12 @@ import { uiReaderActions } from "actions";
 import lh from "helpers/linkHandler";
 
 class ResourceMarker extends Component {
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     const newState = {
       activeAnnotation: state.ui.reader.activeAnnotation
     };
     return Object.assign({}, newState, ownProps);
-  }
+  };
 
   static propTypes = {
     annotations: PropTypes.array,

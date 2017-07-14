@@ -31,11 +31,11 @@ class ResetPasswordWrapper extends PureComponent {
     unpauseKeyboardEvents: PropTypes.func
   };
 
-  static mapStateToProps(state, ownPropsIgnored) {
+  static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       response: get(state.entityStore.responses, requests.beUserUpdate)
     };
-  }
+  };
 
   constructor(props) {
     super(props);

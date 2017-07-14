@@ -13,13 +13,13 @@ const perPage = 10;
 export class ResourcePickerContainer extends PureComponent {
   static displayName = "ProjectDetail.Resources";
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     const newState = {
       resources: select(requests.beResources, state.entityStore),
       resourcesMeta: meta(requests.beResources, state.entityStore)
     };
     return Object.assign({}, newState, ownProps);
-  }
+  };
 
   static propTypes = {
     projectId: PropTypes.string,

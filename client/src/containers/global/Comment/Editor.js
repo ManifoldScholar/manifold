@@ -13,10 +13,10 @@ import { Form as GlobalForm } from "components/global";
 export class CommentEditor extends PureComponent {
   static displayName = "Comment.Editor";
 
-  static mapStateToProps(state, ownProps) {
+  static mapStateToProps = (state, ownProps) => {
     const newState = {};
     return Object.assign({}, newState, ownProps);
-  }
+  };
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,

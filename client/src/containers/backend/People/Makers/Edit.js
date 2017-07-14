@@ -22,12 +22,12 @@ export class MakersEditContainer extends PureComponent {
     dispatch: PropTypes.func
   };
 
-  static mapStateToProps(state, ownPropsIgnored) {
+  static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       maker: select(requests.beMaker, state.entityStore),
       updateMakers: get(state.entityStore.responses, requests.beMakerUpdate)
     };
-  }
+  };
 
   constructor(props) {
     super(props);

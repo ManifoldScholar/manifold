@@ -16,14 +16,14 @@ export default function withCurrentUser(WrappedComponent) {
 
     static WrappedComponent = WrappedComponent;
 
-    static mapStateToProps(state) {
+    static mapStateToProps = state => {
       const user = state.authentication.authenticated
         ? state.authentication.currentUser
         : null;
       return {
         currentUser: user
       };
-    }
+    };
 
     render() {
       const props = Object.assign({}, this.props);
