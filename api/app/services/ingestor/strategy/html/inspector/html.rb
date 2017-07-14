@@ -82,7 +82,9 @@ module Ingestor
             text_section_inspectors.map(&:source_identifier)
           end
 
-          protected
+          def index
+            ingestion.read(index_path)
+          end
 
           # returns the first html file found in the root
           def index_path
@@ -91,9 +93,7 @@ module Ingestor
             ingestion.rel(html_file)
           end
 
-          def index
-            ingestion.read(index_path)
-          end
+          protected
 
           def index_parsed
             Nokogiri::HTML(ingestion.open(index_path), nil, "utf-8")

@@ -32,7 +32,7 @@ module Ingestor
 
         def self.ingest(ingestion)
           pointer = pointer(ingestion)
-          new(ingestion).fetch(pointer).ingest(pointer)
+          new(ingestion).fetch(pointer).preprocess(pointer).ingest(pointer)
         end
 
         def self.session
@@ -48,9 +48,17 @@ module Ingestor
         end
 
         def fetch(pointer)
-          contents = self.class.session.drive.export_file(pointer.id, "text/html")
-          encoded_contents = contents.encode("utf-8", invalid: :replace, undef: :replace)
-          @ingestion.write("index.html", encoded_contents)
+          contents = self.class.session.drive.export_file(pointer.id, "application/zip")
+          tmp_file, tmp_path = @ingestion.write_tmp("gdoc_ingestion", "zip", contents)
+          @ingestion.update_working_dir(tmp_path)
+          tmp_file.unlink
+          self
+        end
+
+        def preprocess(pointer)
+          inspector = self.class.inspector(@ingestion, pointer)
+          path = @ingestion.abs(inspector.index_path)
+          ::Ingestor::Preprocessor::HTML.process!(path)
           self
         end
 
