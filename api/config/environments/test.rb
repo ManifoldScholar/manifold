@@ -29,10 +29,8 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
   config.action_mailer.perform_caching = false
 
-  # Tell Action Mailer not to deliver emails to the real world.
-  # The :test delivery method accumulates sent emails in the
-  # ActionMailer::Base.deliveries array.
-  config.action_mailer.delivery_method = :test
+  # Our dynamic mailer will detect a test env and proxy to the Mail gem's TestMailer.
+  config.action_mailer.delivery_method = :manifold_dynamic
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

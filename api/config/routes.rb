@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :test_mails, only: [:create]
       resources :pages
       resources :subjects
       resources :categories, except: [:create, :index]

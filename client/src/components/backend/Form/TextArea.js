@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "./setter";
 import { Form as GlobalForm } from "components/global";
+import isString from "lodash/isString";
 
 class FormTextArea extends Component {
   static displayName = "Form.TextArea";
@@ -13,7 +14,8 @@ class FormTextArea extends Component {
     onChange: PropTypes.func,
     value: PropTypes.string,
     errors: PropTypes.array,
-    name: PropTypes.string
+    name: PropTypes.string,
+    instructions: PropTypes.string
   };
 
   static defaultProps = {
@@ -32,6 +34,11 @@ class FormTextArea extends Component {
           <label>
             {this.props.label}
           </label>
+          {isString(this.props.instructions)
+            ? <span className="instructions">
+                {this.props.instructions}
+              </span>
+            : null}
           <textarea
             style={{ height: this.props.height }}
             placeholder={this.props.placeholder}

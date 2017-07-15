@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612204527) do
+ActiveRecord::Schema.define(version: 20170714204543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -335,6 +335,7 @@ ActiveRecord::Schema.define(version: 20170612204527) do
     t.datetime "press_logo_updated_at"
     t.jsonb    "integrations",            default: {}
     t.jsonb    "secrets",                 default: {}
+    t.jsonb    "email",                   default: {}
     t.index ["singleton_guard"], name: "index_settings_on_singleton_guard", unique: true, using: :btree
   end
 

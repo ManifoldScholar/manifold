@@ -361,6 +361,13 @@ export default () => {
               helper: () => "/backend/settings/integrations"
             },
             {
+              name: "backendSettingsEmail",
+              exact: true,
+              component: Backend.Settings.Email,
+              path: "/backend/settings/email",
+              helper: () => "/backend/settings/email"
+            },
+            {
               name: "backendSettings",
               exact: true,
               component: Backend.Settings.General,
