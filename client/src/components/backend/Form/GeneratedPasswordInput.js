@@ -43,7 +43,7 @@ class FormGeneratedPasswordInput extends Component {
   setValueFromCurrentState() {
     const password = this.state.password;
     const { set } = this.props;
-    set(password);
+    set(password, false);
   }
 
   togglePassword(event) {
@@ -62,17 +62,17 @@ class FormGeneratedPasswordInput extends Component {
   }
 
   renderInput() {
-    const inputClass = classnames({
-      hidden: !this.state.showPassword
-    });
-
+    // const inputClass = classnames({
+    //   hidden: !this.state.showPassword
+    // });
+    //
+    const type = this.state.showPassword ? "text" : "password";
     return (
       <input
-        className={inputClass}
         ref={input => {
           this.inputElement = input;
         }}
-        type="text"
+        type={type}
         placeholder={"Enter a password"}
         onChange={event => this.handlePasswordChange(event)}
         value={this.state.password}

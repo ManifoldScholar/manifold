@@ -123,8 +123,8 @@ export default function setter(WrappedComponent) {
     }
 
     buildSetHandler(props) {
-      return value => {
-        return this.setValue(value, props);
+      return (value, triggersDirty = true) => {
+        return this.setValue(value, props, triggersDirty);
       };
     }
 
