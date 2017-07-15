@@ -7,7 +7,9 @@ exports[`Backend.Ingestion.Form.Wrapper component renders correctly 1`] = `
     data-id="submit"
     onSubmit={[Function]}
   >
-    <div>
+    <div
+      className="form-section"
+    >
       <div
         className="form-input"
       >

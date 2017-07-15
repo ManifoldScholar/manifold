@@ -8,7 +8,9 @@ exports[`Backend TextDetail Ingestion New Container renders correctly 1`] = `
       data-id="submit"
       onSubmit={[Function]}
     >
-      <div>
+      <div
+        className="form-section"
+      >
         <div
           className="form-input"
         >
