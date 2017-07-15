@@ -2,7 +2,8 @@
 class SettingsSerializer < ActiveModel::Serializer
   meta(partial: false)
 
-  attributes :general, :theme, :features, :integrations, :secrets, :press_logo_styles
+  attributes :general, :theme, :features, :integrations, :secrets, :email,
+             :press_logo_styles
 
   attribute :oauth
 

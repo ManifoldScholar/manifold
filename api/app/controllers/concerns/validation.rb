@@ -133,7 +133,8 @@ module Validation
           :facebook_app_secret,
           :twitter_app_secret,
           :twitter_access_token_secret,
-          :google_private_key
+          :google_private_key,
+          :smtp_settings_password
         ]
       },
       {
@@ -147,6 +148,21 @@ module Validation
           :google_client_id,
           :ga_tracking_id,
           :ga_profile_id
+        ]
+      },
+      {
+        email: [
+          :from_address,
+          :from_name,
+          :reply_to_address,
+          :reply_to_name,
+          :closing,
+          :delivery_method,
+          :smtp_settings_address,
+          :smtp_settings_port,
+          :smtp_settings_user_name,
+          :sendmail_settings_location,
+          :sendmail_settings_arguments
         ]
       },
       {

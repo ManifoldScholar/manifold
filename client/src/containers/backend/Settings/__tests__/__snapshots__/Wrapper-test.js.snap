@@ -54,6 +54,16 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
               Features
             </a>
           </li>
+          <li>
+            <a
+              className={undefined}
+              href="/backend/settings/email"
+              onClick={[Function]}
+              style={undefined}
+            >
+              Email
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -106,6 +116,16 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
               style={undefined}
             >
               Features
+            </a>
+          </li>
+          <li>
+            <a
+              className={undefined}
+              href="/backend/settings/email"
+              onClick={[Function]}
+              style={undefined}
+            >
+              Email
             </a>
           </li>
         </ul>

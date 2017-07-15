@@ -13,4 +13,8 @@ class ApplicationAuthorizer < Authority::Authorizer
     false
   end
 
+  def self.authorizes_to_send_test_mail?(user)
+    user.admin?
+  end
+
 end

@@ -163,6 +163,7 @@ export class FormContainer extends PureComponent {
       errors: props.errors || []
     };
   }
+
   isBlocking() {
     if (this.props.doNotWarn === true) return false;
     if (this.state.preventDirtyWarning === true) return false;

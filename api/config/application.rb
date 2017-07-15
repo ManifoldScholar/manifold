@@ -11,6 +11,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "active_record/railtie"
 require "rails/test_unit/railtie"
+require "dynamic_mailer/mailer"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -34,9 +35,14 @@ module Dotenv
 end
 Dotenv::Railtie.load
 
+ActionMailer::Base.add_delivery_method :manifold_dynamic, DynamicMailer::Mailer
+
 module ManifoldApi
   # Manifold main application
   class Application < Rails::Application
+
+    config.action_mailer.delivery_method = :manifold_dynamic
+
     config.active_record.belongs_to_required_by_default = true
 
     # TODO: Abstract this into env
@@ -67,7 +73,8 @@ module ManifoldApi
     config.eager_load_paths += [
       "#{config.root}/app/jobs",
       "#{config.root}/app/services",
-      "#{config.root}/app/presenters"
+      "#{config.root}/app/presenters",
+      "#{config.root}/app/lib"
     ]
 
     config.active_job.queue_adapter = :sidekiq

@@ -1,0 +1,511 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Settings Email Container when delivery method is sendmail renders correctly 1`] = `
+<section>
+  <p
+    className="instructional-copy"
+  >
+    Use the settings below to configure how Manifold should send email to           users. Manifold supports sending mail via an external SMTP server or           via a local Sendmail installation. To test your configuration, press           the "send test email" button below. Doing so will send a message to           the email address on file for you user.
+  </p>
+  <p
+    className="instructional-copy margin-bottom"
+  >
+    <button
+      className="button-secondary-dark"
+      onClick={[Function]}
+    >
+      Send test email
+    </button>
+  </p>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Email from address
+        </label>
+        <span
+          className="instructions"
+        >
+          All emails sent by manifold will be from this address.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="do-not-reply@manifoldapp.org"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Email from name
+        </label>
+        <span
+          className="instructions"
+        >
+          All emails sent by manifold will appear to be sent by this name.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Manifold Scholarship"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Email reply-to address
+        </label>
+        <span
+          className="instructions"
+        >
+          Replies to emails sent by Manifold will go to this address.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="do-not-reply@manifoldapp.org"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Email reply-to name
+        </label>
+        <span
+          className="instructions"
+        >
+          Replies to emails sent by Manifold will appear to be sent by this name.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label>
+            Email closing
+          </label>
+          <span
+            className="instructions"
+          >
+            How do you want to close emails sent by Manifold?
+          </span>
+          <textarea
+            onChange={[Function]}
+            placeholder="Sincerely,
+          The Manifold Team"
+            style={
+              Object {
+                "height": 100,
+              }
+            }
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label>
+            Email Delivery Method
+          </label>
+          <div
+            className="form-select"
+          >
+            <i
+              className="manicon manicon-caret-down"
+            />
+            <select
+              onChange={[Function]}
+              value={undefined}
+            >
+              <option
+                value=""
+              >
+                
+              </option>
+              <option
+                value="smtp"
+              >
+                SMTP
+              </option>
+              <option
+                value="sendmail"
+              >
+                Sendmail
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div
+        className="form-section"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            Sendmail Location
+          </label>
+          <span
+            className="instructions"
+          >
+            The location of the sendmail executable. Defaults to /usr/sbin/sendmail.
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            Sendmail Arguments
+          </label>
+          <span
+            className="instructions"
+          >
+            The command line arguments. Defaults to -i with -f sender@address added automatically before the message is sent.
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Settings"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;
+
+exports[`Backend Settings Email Container when delivery method is smtp renders correctly 1`] = `
+<section>
+  <p
+    className="instructional-copy"
+  >
+    Use the settings below to configure how Manifold should send email to           users. Manifold supports sending mail via an external SMTP server or           via a local Sendmail installation. To test your configuration, press           the "send test email" button below. Doing so will send a message to           the email address on file for you user.
+  </p>
+  <p
+    className="instructional-copy margin-bottom"
+  >
+    <button
+      className="button-secondary-dark"
+      onClick={[Function]}
+    >
+      Send test email
+    </button>
+  </p>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Email from address
+        </label>
+        <span
+          className="instructions"
+        >
+          All emails sent by manifold will be from this address.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="do-not-reply@manifoldapp.org"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Email from name
+        </label>
+        <span
+          className="instructions"
+        >
+          All emails sent by manifold will appear to be sent by this name.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Manifold Scholarship"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Email reply-to address
+        </label>
+        <span
+          className="instructions"
+        >
+          Replies to emails sent by Manifold will go to this address.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="do-not-reply@manifoldapp.org"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Email reply-to name
+        </label>
+        <span
+          className="instructions"
+        >
+          Replies to emails sent by Manifold will appear to be sent by this name.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label>
+            Email closing
+          </label>
+          <span
+            className="instructions"
+          >
+            How do you want to close emails sent by Manifold?
+          </span>
+          <textarea
+            onChange={[Function]}
+            placeholder="Sincerely,
+          The Manifold Team"
+            style={
+              Object {
+                "height": 100,
+              }
+            }
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label>
+            Email Delivery Method
+          </label>
+          <div
+            className="form-select"
+          >
+            <i
+              className="manicon manicon-caret-down"
+            />
+            <select
+              onChange={[Function]}
+              value={undefined}
+            >
+              <option
+                value=""
+              >
+                
+              </option>
+              <option
+                value="smtp"
+              >
+                SMTP
+              </option>
+              <option
+                value="sendmail"
+              >
+                Sendmail
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div
+        className="form-section"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            SMTP Address
+          </label>
+          <span
+            className="instructions"
+          >
+            Allows you to use a remote mail server.
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            SMTP Port
+          </label>
+          <span
+            className="instructions"
+          >
+            On the off chance that your mail server doesn't run on port 25, you can change it.
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            SMTP Username
+          </label>
+          <span
+            className="instructions"
+          >
+            If your mail server requires authentication, set the username in this setting.
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            SMTP Password
+          </label>
+          <span
+            className="instructions"
+          >
+            If your mail server requires authentication, set the password in this setting.
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder={undefined}
+            type="password"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Settings"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;

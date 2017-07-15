@@ -4,6 +4,7 @@ import Wrapper from "./Wrapper";
 import Features from "./Features";
 import Placeholder from "./Placeholder";
 import Integrations from "./Integrations";
+import Email from "./Email";
 
 export default {
   General,
@@ -11,5 +12,6 @@ export default {
   Theme,
   Features,
   Placeholder,
-  Integrations
+  Integrations,
+  Email
 };
