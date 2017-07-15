@@ -15,7 +15,7 @@ export default class FieldGroup extends PureComponent {
 
   render() {
     return (
-      <div key="group">
+      <div className="form-section" key="group">
         {this.renderChildren(this.props)}
       </div>
     );
