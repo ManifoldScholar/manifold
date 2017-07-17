@@ -4,17 +4,6 @@ exports[`Backend.User.ListItem component renders correctly 1`] = `
 <li
   className=""
 >
-  <div
-    className="checkbox-primary"
-  >
-    <div
-      className="toggle-indicator"
-    >
-      <i
-        className="manicon manicon-check"
-      />
-    </div>
-  </div>
   <a
     href="/backend/people/users/1"
     onClick={[Function]}

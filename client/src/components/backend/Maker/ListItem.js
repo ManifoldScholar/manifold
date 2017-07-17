@@ -18,12 +18,13 @@ export default class MakerListItem extends PureComponent {
     const rowClasses = classnames({ active: this.props.active === maker.id });
     return (
       <li key={maker.id} className={rowClasses}>
-        {/* Add .checked to .checkbox-primary to display checked state */}
-        <div className="checkbox-primary">
-          <div className="toggle-indicator">
-            <i className="manicon manicon-check" />
-          </div>
-        </div>
+        {/* Add .checked to .checkbox-primary to display checked state.
+         Disabled until functionality is implemented. */}
+        {/* <div className="checkbox-primary">
+         <div className="toggle-indicator">
+         <i className="manicon manicon-check" />
+         </div>
+         </div> */}
         <Link to={lh.link("backendPeopleMaker", maker.id)}>
           <header>
             <figure className="avatar">
