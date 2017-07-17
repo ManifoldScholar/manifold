@@ -31,12 +31,13 @@ export default class UserListItem extends PureComponent {
     const rowClasses = classnames({ active: this.props.active === user.id });
     return (
       <li key={user.id} className={rowClasses}>
-        {/* Add .checked to .checkbox-primary to display checked state */}
-        <div className="checkbox-primary">
+        {/* Add .checked to .checkbox-primary to display checked state.
+            Disabled until functionality is implemented. */}
+        {/* <div className="checkbox-primary">
           <div className="toggle-indicator">
             <i className="manicon manicon-check" />
           </div>
-        </div>
+        </div> */}
         <Link to={lh.link("backendPeopleUser", user.id)}>
           <header>
             <figure className="avatar">
