@@ -26,9 +26,13 @@ module Importer
     private
 
     def find_project
-      ::Project.find_or_initialize_by(
-        hashtag: @project_json[:attributes][:hashtag]
-      )
+      if @project_json[:attributes][:hashtag]
+        ::Project.find_or_initialize_by(
+          hashtag: @project_json[:attributes][:hashtag]
+        )
+      else
+        ::Project.new
+      end
     end
 
     # rubocop:disable all
