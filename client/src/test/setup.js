@@ -1,7 +1,6 @@
 // We mock 3rd party libraries that depend on the refs because react-test-renderer doesn't
 // support DOM refs, which breaks our tests.
 jest.mock("react-dropzone", () => "Dropzone");
-jest.mock("velocity-react", () => "Velocity");
 jest.mock("react-text-mask", () => "ReactTextMask");
 
 // Mocked fetch-data is a noop component that renders it's child.

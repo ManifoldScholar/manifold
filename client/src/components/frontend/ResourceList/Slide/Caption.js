@@ -123,7 +123,7 @@ export default class ResourceListSlideCaption extends Component {
           />
         </header>
         {this.state.Velocity
-          ? <this.state.Velocity {...animation}>
+          ? <this.state.Velocity.VelocityComponent {...animation}>
               <div
                 className="resource-description"
                 ref={e => {
@@ -139,7 +139,7 @@ export default class ResourceListSlideCaption extends Component {
                   )}
                 />
               </div>
-            </this.state.Velocity>
+            </this.state.Velocity.VelocityComponent>
           : null}
         <div className="resource-utility">
           <div className="bg-neutral90">

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import CollectionDetail from "../CollectionDetail";
+import { CollectionDetailContainer } from "../CollectionDetail";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
@@ -41,7 +41,7 @@ describe("Frontend CollectionDetail Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <CollectionDetail {...props} />
+        <CollectionDetailContainer {...props} />
       </Provider>
     )
   );

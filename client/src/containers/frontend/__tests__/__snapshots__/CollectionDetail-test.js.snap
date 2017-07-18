@@ -110,27 +110,17 @@ exports[`Frontend CollectionDetail Container renders correctly 1`] = `
                   }
                 />
               </header>
-              <Velocity
-                animation={
-                  Object {
-                    "height": "5em",
-                  }
-                }
-                complete={[Function]}
-                duration={250}
+              <div
+                className="resource-description"
               >
                 <div
-                  className="resource-description"
-                >
-                  <div
-                    dangerouslySetInnerHTML={
-                      Object {
-                        "__html": "World's Greatest Dog",
-                      }
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "World's Greatest Dog",
                     }
-                  />
-                </div>
-              </Velocity>
+                  }
+                />
+              </div>
               <div
                 className="resource-utility"
               >

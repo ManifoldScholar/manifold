@@ -15,7 +15,7 @@ const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 
-class CollectionDetailContainer extends PureComponent {
+export class CollectionDetailContainer extends PureComponent {
   static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
     const filter = queryString.parse(location.search);
