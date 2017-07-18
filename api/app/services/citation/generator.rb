@@ -13,6 +13,8 @@ module Citation
         citation = cp.render(:bibliography, id: subject.id).first
         results[style[0]] = citation unless citation.blank?
       end
+    rescue TypeError
+      nil
     end
 
     def map(subject)
