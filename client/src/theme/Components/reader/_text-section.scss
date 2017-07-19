@@ -16,6 +16,7 @@
 }
 
 .reader-window {
+  @include resetWordWrap;
   padding: 60px 0 120px;
   overflow: hidden;
   color: $neutralOffBlack;

@@ -32,7 +32,10 @@ body {
   min-width: $containerWidthMin;
   font-size: 1em;
   font-weight: $regular;
+  hyphens: auto;
   line-height: $baseLineHeight;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
   // color: $something;
   &.no-scroll {
     overflow: hidden;
