@@ -107,15 +107,6 @@ exports[`ProjectDetail Text Ingestion New Container renders correctly 1`] = `
           }
         >
           <button
-            className="button-icon-secondary dull"
-            onClick={[Function]}
-          >
-            <i
-              className="manicon manicon-x small"
-            />
-            Cancel
-          </button>
-          <button
             className="button-icon-secondary"
             disabled={true}
             onClick={[Function]}
