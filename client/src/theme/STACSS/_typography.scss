@@ -82,6 +82,12 @@
   @include utilityPrimary;
 }
 
+@mixin resetWordWrap {
+  overflow-wrap: normal;
+  word-wrap: normal;
+  hyphens: none;
+}
+
 
 // Labels
 // --------------------------------------------------------
