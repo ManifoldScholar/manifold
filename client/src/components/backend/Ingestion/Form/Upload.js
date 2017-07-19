@@ -96,7 +96,7 @@ export default class IngestionFormUpload extends PureComponent {
             className="button-icon-secondary"
             disabled={!this.valid}
           >
-            <i className="manicon manicon-x small" />
+            <i className="manicon manicon-check small" />
             Continue
           </button>
         </div>

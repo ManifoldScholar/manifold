@@ -8,6 +8,7 @@ describe("Backend.Ingestion.Form.Type component", () => {
   const modelValueMock = jest.fn();
   const location = {};
   const history = build.history();
+  const triggerClose = jest.fn();
 
   it("renders correctly", () => {
     const component = renderer.create(
@@ -16,6 +17,21 @@ describe("Backend.Ingestion.Form.Type component", () => {
           getModelValue={modelValueMock}
           location={location}
           history={history}
+        />
+      )
+    );
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it("renders cancel button when passed triggerClose prop", () => {
+    const component = renderer.create(
+      wrapWithRouter(
+        <Type
+          getModelValue={modelValueMock}
+          location={location}
+          history={history}
+          triggerClose={triggerClose}
         />
       )
     );

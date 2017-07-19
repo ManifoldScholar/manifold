@@ -27,7 +27,7 @@ exports[`Backend.Ingestion.Form.Upload component renders correctly 1`] = `
       type="submit"
     >
       <i
-        className="manicon manicon-x small"
+        className="manicon manicon-check small"
       />
       Continue
     </button>
