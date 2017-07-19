@@ -70,8 +70,7 @@
   background: transparent;
   border: 0;
   outline: none;
-  // TODO: This should be auto-prefixed
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 @mixin buttonRounded {
