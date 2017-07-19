@@ -50,7 +50,13 @@ module.exports = (options = {}) => {
     use: [
       { loader: "style-loader" },
       { loader: "css-loader", options: "importLoaders=2" },
-      { loader: "postcss-loader", options: "syntax=postcss-scss" },
+      {
+        loader: "postcss-loader",
+        options: {
+          syntax: "postcss-scss",
+          plugins: () => [require("autoprefixer")]
+        }
+      },
       { loader: "sass-loader", options: "outputStyle=expanded" }
     ],
     include: paths.theme
