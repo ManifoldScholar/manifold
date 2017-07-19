@@ -249,8 +249,8 @@ ActiveRecord::Schema.define(version: 20170612204527) do
     t.jsonb    "tweet_fetch_config",      default: {}
     t.date     "publication_date"
     t.string   "slug"
-    t.jsonb    "citations",               default: {}
     t.string   "avatar_color",            default: "primary"
+    t.jsonb    "citations",               default: {}
     t.jsonb    "avatar_meta",             default: {},        null: false
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
