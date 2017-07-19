@@ -20,11 +20,11 @@ module Ingestor
 
       private
 
-      def report(sections)
-        if sections.new_record?
-          info "services.ingestor.creator.log.new_section", name: sections.name
+      def report(section)
+        if section.new_record?
+          info "services.ingestor.creator.log.new_section", name: section.name
         else
-          info "services.ingestor.creator.log.updated_section", name: sections.name
+          info "services.ingestor.creator.log.updated_section", name: section.name
         end
       end
 
