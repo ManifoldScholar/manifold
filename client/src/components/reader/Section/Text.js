@@ -60,17 +60,48 @@ export default class Text extends Component {
     this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
   }
 
-  filterAnnotations(visibility, annotations, currentUserIgnored) {
-    if (visibility === 0) return [];
-    if (visibility === 1) {
-      return annotations.filter(a => {
-        return (
-          a.attributes.format === "resource" ||
-          a.attributes.currentUserIsCreator === true
-        );
-      });
+  /* eslint-disable no-unreachable */
+  getScrollTargetNode(hash) {
+    const annotationUuid = new RegExp(
+      /^#(annotation)-([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12})/
+    );
+    const nodeHexidigest = new RegExp(/^#(node)-([a-f0-9]{40})/);
+    const match = hash.match(annotationUuid) || hash.match(nodeHexidigest);
+    const identifier = match ? match[1] : hash;
+    const id = match ? match[2] : null;
+    switch (identifier) {
+      case "node": // Text Node
+        return document.querySelector(`[data-node-uuid="${id}"]`);
+        break;
+      case "annotation": // Annotation, Highlight, or Resource
+        return document.querySelector(`[data-annotation-ids="${id}"]`);
+        break;
+      default:
+        return document.querySelector(identifier);
+        break;
     }
-    return annotations;
+  }
+  /* eslint-enable no-unreachable */
+
+  maybeScrollToTop(previousSection, thisSection) {
+    if (previousSection.id === thisSection.id) return;
+    window.scrollTo(0, 0);
+  }
+
+  maybeScrollToAnchor(previousHash, currentHash) {
+    if (!currentHash) return;
+    if (previousHash === currentHash) return;
+    const scrollTarget = this.getScrollTargetNode(currentHash);
+    if (!scrollTarget) return false;
+    this.scrollToAnchor(scrollTarget);
+  }
+
+  scrollToAnchor(scrollTarget) {
+    const position =
+      scrollTarget.getBoundingClientRect().top + window.pageYOffset;
+    setTimeout(() => {
+      smoothScroll(position - 150);
+    }, 0);
   }
 
   // Store the current locked selection in the section, which wraps the annotator and
@@ -86,23 +117,17 @@ export default class Text extends Component {
     this.setState({ lockedSelection });
   }
 
-  maybeScrollToTop(previousSection, thisSection) {
-    if (previousSection.id === thisSection.id) return;
-    window.scrollTo(0, 0);
-  }
-
-  // TODO: My sense is that this method is not working very well. It may need to be
-  // revisited.
-  maybeScrollToAnchor(previousHash, currentHash) {
-    if (!currentHash) return;
-    if (previousHash === currentHash) return;
-    const scrollTarget = document.querySelector(currentHash);
-    if (!scrollTarget) return false;
-    const position =
-      scrollTarget.getBoundingClientRect().top + window.pageYOffset;
-    setTimeout(() => {
-      smoothScroll(position - 125);
-    }, 0);
+  filterAnnotations(visibility, annotations, currentUserIgnored) {
+    if (visibility === 0) return [];
+    if (visibility === 1) {
+      return annotations.filter(a => {
+        return (
+          a.attributes.format === "resource" ||
+          a.attributes.currentUserIsCreator === true
+        );
+      });
+    }
+    return annotations;
   }
 
   render() {
