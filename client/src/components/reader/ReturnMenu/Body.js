@@ -11,7 +11,8 @@ export default class ReturnMenuBody extends PureComponent {
     projectId: PropTypes.string,
     projectTitle: PropTypes.string.isRequired,
     toggleSignInUpOverlay: PropTypes.func.isRequired,
-    moreLink: PropTypes.string
+    moreLink: PropTypes.string,
+    text: PropTypes.object
   };
 
   render() {
@@ -38,6 +39,14 @@ export default class ReturnMenuBody extends PureComponent {
               <Link to={lh.link("frontendFollowing")}>
                 <i className="manicon manicon-books-on-shelf-simple" />
                 {"Following"}
+              </Link>
+            </li>
+          </HigherOrder.RequireRole>
+          <HigherOrder.RequireRole requiredRole="any">
+            <li>
+              <Link to={lh.link("readerMyAnnotations", this.props.text.id)}>
+                <i className="manicon manicon-pencil-simple" />
+                {"My Annotations"}
               </Link>
             </li>
           </HigherOrder.RequireRole>

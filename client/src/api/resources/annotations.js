@@ -9,6 +9,16 @@ export default {
     };
   },
 
+  forMe(filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/me/relationships/annotations`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   create(sectionId, annotation, resource = null) {
     const data = { attributes: annotation };
     if (resource) {

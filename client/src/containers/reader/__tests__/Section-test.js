@@ -31,8 +31,11 @@ describe("Reader Section Container", () => {
       uiPanels: {}
     },
     appearance: {
-      colors: {},
+      colors: {
+        colorScheme: "light"
+      },
       typography: {
+        font: "serif",
         fontSize: {},
         margins: {
           current: 100

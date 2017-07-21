@@ -15,6 +15,10 @@ class Annotation < ApplicationRecord
   scope :only_highlights, -> { where(format: "highlight") }
   scope :created_by, ->(user) { where(creator: user) }
   # Scopes
+  scope :excluding_private, lambda { |creator|
+    return all unless creator.present?
+    where("(private = true AND creator_id = ?) OR (private = false)", creator.id)
+  }
   scope :by_text_section, lambda { |text_section|
     return all unless text_section.present?
     where(text_section: text_section)
@@ -23,9 +27,13 @@ class Annotation < ApplicationRecord
     return all unless ids.present?
     where(id: ids)
   }
-  scope :excluding_private, lambda { |creator|
-    return all unless creator.present?
-    where("(private = true AND creator_id = ?) OR (private = false)", creator.id)
+  scope :by_project, lambda { |project|
+    return all unless project.present?
+    joins(text_section: :text).where("texts.project_id = ?", project)
+  }
+  scope :by_text, lambda { |text|
+    return all unless text.present?
+    joins(:text_section).where("text_sections.text_id = ?", text)
   }
 
   # Constants

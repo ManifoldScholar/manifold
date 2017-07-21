@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader MyAnnotations Detail Component renders correctly 1`] = `
+<div
+  className="annotation-selection"
+>
+  <div
+    className="selection-text"
+  >
+    <div
+      className="container"
+    >
+      <i
+        className="manicon manicon-quote"
+      />
+      Gods, Earths, and 85ers
+    </div>
+  </div>
+  <div
+    className="annotation-list"
+  >
+    <div
+      className="annotation-annotation"
+    >
+      <div
+        className="body"
+      >
+        Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.
+      </div>
+      <nav
+        className="utility"
+      >
+        <ul>
+          <li>
+            <button
+              className="annotate-button"
+              onClick={[Function]}
+            >
+              Edit
+            </button>
+          </li>
+          <li>
+            <a
+              href="/read/1/section/2#annotation-1"
+              onClick={[Function]}
+            >
+              View in Text
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+`;

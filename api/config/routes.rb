@@ -92,6 +92,7 @@ Rails.application.routes.draw do
       resource :me, only: [:show, :update], controller: "me"
       namespace :me do
         namespace :relationships do
+          resources :annotations, only: [:index]
           resources :favorites
           resources :favorite_projects, only: [:index]
         end

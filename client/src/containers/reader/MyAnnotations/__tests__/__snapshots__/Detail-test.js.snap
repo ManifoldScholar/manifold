@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader MyAnnotations Detail Container renders correctly 1`] = `
+<section
+  className="reader-window scheme-light"
+>
+  <div
+    className="container-focus container-width-100 user-annotations"
+  >
+    <div
+      className="manifold-text-section text-section font-serif font-size-undefined"
+    >
+      <ul
+        className="selection-list"
+      >
+        <li
+          className="annotation-detail"
+        >
+          <div
+            className="annotation-selection"
+          >
+            <div
+              className="selection-text"
+            >
+              <div
+                className="container"
+              >
+                <i
+                  className="manicon manicon-quote"
+                />
+                Gods, Earths, and 85ers
+              </div>
+            </div>
+            <div
+              className="annotation-list"
+            >
+              <div
+                className="annotation-annotation"
+              >
+                <div
+                  className="body"
+                >
+                  Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.
+                </div>
+                <nav
+                  className="utility"
+                >
+                  <ul>
+                    <li>
+                      <button
+                        className="annotate-button"
+                        onClick={[Function]}
+                      >
+                        Edit
+                      </button>
+                    </li>
+                    <li>
+                      <a
+                        href="/read/1/section/2#annotation-1"
+                        onClick={[Function]}
+                      >
+                        View in Text
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li
+          className="annotation-detail"
+        >
+          <div
+            className="annotation-selection"
+          >
+            <div
+              className="selection-text"
+            >
+              <div
+                className="container"
+              >
+                <i
+                  className="manicon manicon-quote"
+                />
+                Gods, Earths, and 85ers
+              </div>
+            </div>
+            <div
+              className="annotation-list"
+            >
+              <div
+                className="annotation-annotation"
+              >
+                <div
+                  className="body"
+                >
+                  Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.
+                </div>
+                <nav
+                  className="utility"
+                >
+                  <ul>
+                    <li>
+                      <button
+                        className="annotate-button"
+                        onClick={[Function]}
+                      >
+                        Edit
+                      </button>
+                    </li>
+                    <li>
+                      <a
+                        href="/read/1/section/2#annotation-2"
+                        onClick={[Function]}
+                      >
+                        View in Text
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+`;

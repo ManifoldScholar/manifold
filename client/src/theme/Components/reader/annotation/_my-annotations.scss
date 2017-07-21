@@ -1,0 +1,111 @@
+.user-annotations {
+  width: 80%;
+  margin: auto;
+
+  .selection-list {
+    padding: 75px 0;
+
+    .annotation-list {
+      background-color: $neutral05;
+
+      .annotation-annotation {
+        .body {
+          font-family: inherit;
+          font-size: inherit;
+        }
+
+        .utility {
+          margin-top: 15px;
+        }
+
+        .annotate-button {
+          margin-left: 0;
+          color: $neutral40;
+        }
+
+        .annotate-button:hover {
+          color: $accentPrimaryDark;
+        }
+
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+
+    .annotation-comment {
+      .meta {
+        font-size: initial;
+      }
+
+      .body {
+        font-family: inherit;
+      }
+
+      .comment-editor {
+        padding-right: 43px;
+      }
+    }
+
+    .annotation-detail {
+      .selection-text {
+        font-family: inherit;
+        background-color: $accentPrimaryDull;
+      }
+
+      + .annotation-detail {
+        margin-top: 25px;
+      }
+    }
+  }
+}
+
+.reader-window.scheme-dark .user-annotations {
+  .selection-list {
+    .annotation-list {
+      background-color: $neutral50;
+
+      .annotation-annotation .annotate-button,
+      .annotation-annotation a {
+        color: $neutral30;
+
+        &:hover {
+          color: $neutral95;
+        }
+      }
+
+      .annotation-editor {
+        color: $neutral95;
+
+        .button-primary.dull {
+          color: $neutral30;
+          border-color: $neutral30;
+        }
+
+        .button-primary.dull:hover {
+          color: $neutral75;
+          background-color: $neutral30;
+        }
+
+        .toggle-label {
+          color: $neutral30;
+        }
+      }
+
+      .annotation-comment {
+        .meta datetime {
+          color: $neutral30;
+        }
+
+        .comment-editor {
+          color: $neutral95;
+        }
+      }
+    }
+
+    .annotation-detail .selection-text {
+      background-color: $neutral80;
+    }
+  }
+
+}

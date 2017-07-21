@@ -273,7 +273,9 @@ const defaults = {
       startNode: "some-node",
       endNode: "another-node",
       startChar: 4,
-      endChar: 13
+      endChar: 13,
+      textId: "1",
+      textSectionId: "2"
     }
   },
 

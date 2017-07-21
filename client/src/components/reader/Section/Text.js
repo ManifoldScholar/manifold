@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
-import classNames from "classnames";
 import smoothScroll from "../../../utils/smoothScroll";
 import { Section } from "components/reader";
 import Annotation from "containers/reader/Annotation";
+import rcc from "helpers/readerControlClasses";
 
 export default class Text extends Component {
   static propTypes = {
@@ -109,27 +109,9 @@ export default class Text extends Component {
     const typography = this.props.appearance.typography;
     const colorScheme = this.props.appearance.colors.colorScheme;
 
-    const readerAppearanceClass = classNames({
-      "reader-window": true,
-      "scheme-light": colorScheme === "light",
-      "scheme-dark": colorScheme === "dark"
-    });
-
-    // Font selection may be handled differently later, but for now, variants are based
-    // on class names
-    let textSectionClass = classNames({
-      "manifold-text-section text-section": true,
-      "font-serif": typography.font === "serif",
-      "font-sans-serif": typography.font === "sans-serif"
-    });
-
-    // Apply a font-size class to the text-section
-    // This maps to a numbered class with responsive font declarations
-    textSectionClass += ` font-size-${typography.fontSize.current}`;
-
-    // Apply a conditional container class that maps to a size in CSS
-    const containerClass = `container-focus container-width-${typography.margins
-      .current}`;
+    const readerAppearanceClass = rcc.readerClasses(colorScheme);
+    const textSectionClass = rcc.textClasses(typography);
+    const containerClass = rcc.containerClasses(typography.margins);
 
     const section = this.props.section;
 
