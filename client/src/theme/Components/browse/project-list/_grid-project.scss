@@ -161,4 +161,20 @@
       content: '';
     }
   }
+
+  .list-pagination-primary {
+    margin-top: 30px;
+
+    ul li {
+      width: auto;
+
+      a {
+        padding: 0;
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+  }
 }

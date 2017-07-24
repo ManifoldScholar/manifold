@@ -6,7 +6,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
 import { bindActionCreators } from "redux";
 import { uiFilterActions, entityStoreActions } from "actions";
-import { select } from "utils/entityUtils";
+import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
@@ -14,12 +14,18 @@ import lh from "helpers/linkHandler";
 const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
 const featuredLimit = 4;
+const page = 1;
+const perPage = 20;
 
 export class HomeContainer extends Component {
-  static fetchData = (getState, dispatch) => {
+  static fetchData = (getState, dispatch, location, match) => {
+    const pageParam = match.params.page ? match.params.page : page;
     const state = getState();
     const filteredRequest = request(
-      projectsAPI.index(state.ui.projectFilters),
+      projectsAPI.index(state.ui.projectFilters, {
+        number: pageParam,
+        size: perPage
+      }),
       requests.feProjectsFiltered
     );
     const featuredRequest = request(
@@ -37,6 +43,7 @@ export class HomeContainer extends Component {
       filteredProjects: select(requests.feProjectsFiltered, state.entityStore),
       featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
       subjects: select(requests.feSubjects, state.entityStore),
+      meta: meta(requests.feProjectsFiltered, state.entityStore),
       authentication: state.authentication
     };
   };
@@ -47,8 +54,15 @@ export class HomeContainer extends Component {
     filteredProjects: PropTypes.array,
     projectFilters: PropTypes.object,
     dispatch: PropTypes.func,
-    subjects: PropTypes.array
+    subjects: PropTypes.array,
+    meta: PropTypes.object
   };
+
+  constructor(props) {
+    super(props);
+    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
 
   componentWillMount() {
     this.commonActions = commonActions(this.props.dispatch);
@@ -65,6 +79,23 @@ export class HomeContainer extends Component {
       const filteredRequest = request(apiCall, requests.feProjectsFiltered);
       dispatch(filteredRequest);
     }
+  }
+
+  handlePageChange(event, pageParam) {
+    event.preventDefault(); // Remove this to scroll back to top.  Will add #pagination-target to URL
+    const pagination = { number: pageParam, size: perPage };
+    const filter = this.props.projectFilters;
+    const action = request(
+      projectsAPI.index(filter, pagination),
+      requests.feProjectsFiltered
+    );
+    this.props.dispatch(action);
+  }
+
+  pageChangeHandlerCreator(pageParam) {
+    return event => {
+      this.handlePageChange(event, pageParam);
+    };
   }
 
   renderFeaturedButton(limit) {
@@ -155,6 +186,9 @@ export class HomeContainer extends Component {
                   )}
                   dispatch={this.props.dispatch}
                   projects={this.props.filteredProjects}
+                  pagination={this.props.meta.pagination}
+                  paginationClickHandler={this.pageChangeHandlerCreator}
+                  limit={perPage}
                 />
               : null}
           </div>

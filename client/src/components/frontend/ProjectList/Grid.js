@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Project } from "components/frontend";
+import { Utility } from "components/global";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import difference from "lodash/difference";
 
@@ -12,7 +13,9 @@ export default class ProjectListGrid extends Component {
     limit: PropTypes.number,
     authenticated: PropTypes.bool,
     favorites: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    pagination: PropTypes.object,
+    paginationClickHandler: PropTypes.func
   };
 
   constructor() {
@@ -78,6 +81,12 @@ export default class ProjectListGrid extends Component {
             );
           })}
         </ReactCSSTransitionGroup>
+        {this.props.pagination
+          ? <Utility.Pagination
+              paginationClickHandler={this.props.paginationClickHandler}
+              pagination={this.props.pagination}
+            />
+          : null}
       </nav>
     );
   }
