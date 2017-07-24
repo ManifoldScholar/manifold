@@ -112,6 +112,35 @@ export class FollowingContainer extends Component {
     );
   }
 
+  renderFeaturedProjects() {
+    if (!this.props.featuredProjects.length > 0) return null;
+    return (
+      <section>
+        <div className="container">
+          <header className="section-heading utility-right">
+            <h4 className="title">
+              <i className="manicon manicon-lamp" />
+              {"Featured Projects"}
+            </h4>
+            {this.renderFeaturedButton(featuredLimit)}
+          </header>
+          {this.props.featuredProjects
+            ? <ProjectList.Grid
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(
+                  this.props.authentication,
+                  "currentUser.favorites"
+                )}
+                dispatch={this.props.dispatch}
+                projects={this.props.featuredProjects}
+                limit={featuredLimit}
+              />
+            : null}
+        </div>
+      </section>
+    );
+  }
+
   render() {
     const boundSetFilters = bindActionCreators(
       setProjectFilters,
@@ -134,30 +163,10 @@ export class FollowingContainer extends Component {
             handleUpdate={boundSetFilters}
             dispatch={this.props.dispatch}
           />
-          <section>
-            <div className="container">
-              <header className="section-heading utility-right">
-                <h4 className="title">
-                  <i className="manicon manicon-lamp" />
-                  {"Featured Projects"}
-                </h4>
-                {this.renderFeaturedButton(featuredLimit)}
-              </header>
-              {this.props.featuredProjects
-                ? <ProjectList.Grid
-                    authenticated={this.props.authentication.authenticated}
-                    favorites={get(
-                      this.props.authentication,
-                      "currentUser.favorites"
-                    )}
-                    dispatch={this.props.dispatch}
-                    projects={this.props.featuredProjects}
-                    limit={featuredLimit}
-                  />
-                : null}
-            </div>
-          </section>
-          <Layout.ButtonNavigation grayBg showFollowing={false} />
+          {this.renderFeaturedProjects()}
+          {this.props.followedProjects && this.props.followedProjects.length > 0
+            ? <Layout.ButtonNavigation grayBg showFollowing={false} />
+            : null}
         </div>
       </HigherOrder.RequireRole>
     );
