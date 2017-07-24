@@ -10,6 +10,7 @@ import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
+import classNames from "classnames";
 
 const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
@@ -109,6 +110,15 @@ export class HomeContainer extends Component {
   }
 
   render() {
+    const headerClass = classNames({
+      "section-heading": true,
+      "utility-right": this.renderFeaturedProjects(),
+      "utility-under": !this.renderFeaturedProjects()
+    });
+    const utilityHeader = classNames({
+      "section-heading-utility-right": this.renderFeaturedProjects(),
+      "section-heading-utility-under": !this.renderFeaturedProjects()
+    });
     return (
       <div
         style={{
@@ -128,12 +138,12 @@ export class HomeContainer extends Component {
         {this.renderFeaturedProjects()}
         <section className="bg-neutral05">
           <div className="container">
-            <header className="section-heading utility-right">
+            <header className={headerClass}>
               <h4 className="title">
                 <i className="manicon manicon-books-on-shelf" />
                 {"Our Projects"}
               </h4>
-              <div className="section-heading-utility-right">
+              <div className={utilityHeader}>
                 {/*
                  Note that we're using a different dumb component to render this.
                  Note, too, that the parent component delivers all the data the child
