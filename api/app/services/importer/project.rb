@@ -26,8 +26,10 @@ module Importer
     private
 
     def find_project
+      hashtag = @project_json[:attributes][:hashtag] ||
+                @project_json[:attributes][:title].parameterize
       ::Project.find_or_initialize_by(
-        hashtag: @project_json[:attributes][:hashtag]
+        hashtag: hashtag
       )
     end
 
