@@ -84,6 +84,30 @@ export class HomeContainer extends Component {
     );
   }
 
+  renderFeaturedProjects() {
+    if (!this.props.featuredProjects.length > 0) return null;
+    return (
+      <section>
+        <div className="container">
+          <header className="section-heading">
+            <h4 className="title">
+              <i className="manicon manicon-lamp" />
+              {"Featured Projects"}
+            </h4>
+          </header>
+          <ProjectList.Grid
+            authenticated={this.props.authentication.authenticated}
+            favorites={get(this.props.authentication, "currentUser.favorites")}
+            projects={this.props.featuredProjects}
+            dispatch={this.props.dispatch}
+            limit={featuredLimit}
+          />
+          {this.renderFeaturedButton(featuredLimit)}
+        </div>
+      </section>
+    );
+  }
+
   render() {
     return (
       <div
@@ -101,29 +125,7 @@ export class HomeContainer extends Component {
           "featured projects" set of entities instead so as to
           showcase/debug the markup for this type of list.
         */}
-        <section>
-          <div className="container">
-            <header className="section-heading">
-              <h4 className="title">
-                <i className="manicon manicon-lamp" />
-                {"Featured Projects"}
-              </h4>
-            </header>
-            {this.props.featuredProjects
-              ? <ProjectList.Grid
-                  authenticated={this.props.authentication.authenticated}
-                  favorites={get(
-                    this.props.authentication,
-                    "currentUser.favorites"
-                  )}
-                  projects={this.props.featuredProjects}
-                  dispatch={this.props.dispatch}
-                  limit={featuredLimit}
-                />
-              : null}
-            {this.renderFeaturedButton(featuredLimit)}
-          </div>
-        </section>
+        {this.renderFeaturedProjects()}
         <section className="bg-neutral05">
           <div className="container">
             <header className="section-heading utility-right">
