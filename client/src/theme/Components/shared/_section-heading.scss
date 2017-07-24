@@ -10,6 +10,10 @@
     }
   }
 
+  &.utility-under {
+    margin-bottom: 37px;
+  }
+
   .title {
     @include headingPrimary;
     color: $neutral80;
