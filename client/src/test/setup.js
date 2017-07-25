@@ -2,6 +2,7 @@
 // support DOM refs, which breaks our tests.
 jest.mock("react-dropzone", () => "Dropzone");
 jest.mock("react-text-mask", () => "ReactTextMask");
+jest.mock("password-generator");
 
 // Mocked fetch-data is a noop component that renders it's child.
 // see src/components/global/HigherOrder/__mocks__/fetchData.js
