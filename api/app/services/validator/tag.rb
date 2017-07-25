@@ -84,7 +84,9 @@ module Validator
     # @param attribute [Array] containing exactly two elements: key and value
     # @return [void]
     def transform_attribute!(node, attribute)
-      transforms = @config.attribute_transforms.select { |t| t.name == attribute[0] }
+      transforms = @config.attribute_transforms.select do |t|
+        t.name == attribute[0] || t.name == "*"
+      end
       transforms.each do |transform|
         method = "transform_#{transform.type}!"
         __send__(method, node, attribute, transform)
@@ -121,10 +123,28 @@ module Validator
     # @param node [Nokogiri::XML::Node]
     # @param attribute [Array] containing exactly two elements: key and value
     # @return [void]
+    def transform_namespaced!(node, attribute, _transform)
+      name = attribute_name(attribute)
+      return unless name.include? ":"
+      new_name = "data-#{name.tr(':', '-')}"
+      node[new_name] = attribute_value(attribute)
+      node.delete(name)
+    end
+
+    # @param node [Nokogiri::XML::Node]
+    # @param attribute [Array] containing exactly two elements: key and value
+    # @return [void]
     def transform_css_map!(node, attribute, transform)
       value = attribute_value(attribute)
       property = transform.key?(:to) ? transform[:to] : transform[:name]
       set_style(node, property, value)
+    end
+
+    def transform_attribute_name!(node, attribute, transform)
+      value = attribute_value(attribute)
+      to = transform[:to]
+      node[to] = value
+      node.delete(attribute_name(attribute))
     end
 
     # @param attribute [Array] containing exactly two elements: key and value

@@ -35,6 +35,9 @@ common: &1
       -
         :name: "width"
         :type: "measured_css_map"
+      -
+        :name: "*"
+        :type: "namespaced"
     :attribute_exclusions:
       - "accept"
       - "accept-charset"
@@ -65,9 +68,15 @@ common: &1
       - "tabindex"
       - "width"
       - "align"
+
   :css_validator:
     :scope: ".manifold-text-section"
     :dark_scope: ".scheme-dark"
+    :selector_replace:
+      -
+        :match: !ruby/regexp '/(?<=\[)epub\|type(?=.*\])/'
+        :search: "|"
+        :replace: "-"
     :value_maps:
       -
         :match: !ruby/regexp '/font-size/'
@@ -84,10 +93,14 @@ common: &1
         :include: ['color', 'background-color', 'border-color', 'border-right-color', 'border-left-color', 'border-top-color', 'border-bottom-color']
     :exclusions:
       :selectors:
-        - !ruby/regexp '/\*/'
+        # Strip most universal selectors (while allowing the *= operator)
+        - !ruby/regexp '/^\*$|\*:|\s\*$|\*\[/'
         - !ruby/regexp '/html/'
         - !ruby/regexp '/body/'
+        # All the fonts belong to Manifold
         - !ruby/regexp '/@font-face/'
+        # CSS at rules are extracted before selectors are validated, so we exclude them as a selector.
+        - !ruby/regexp '/^@(.*);$/'
       :properties:
         -
           :exclude: ['position', 'font-family', 'overflow', 'overflow-x', 'overflow-y', 'z-index', 'max-width', 'line-height']

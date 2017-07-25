@@ -18,6 +18,7 @@ module Validator
     def validate(css)
       reset
       return output unless css?(css)
+      css = extract_at_rules(css)
       @parser.load_string!(css.dup)
       parser.each_selector(&method(:visit_selector))
       output
@@ -51,6 +52,22 @@ module Validator
     end
 
     private
+
+    # Move supported at rules in buffered @out output, and return remaining declarations
+    # @param css [String]
+    # @return [String]
+    def extract_at_rules(css)
+      out = ""
+      css.each_line do |line|
+        # rubocop:disable Style/DoubleNegation
+        if !!(line =~ /^(\s*)@(.*);(\s*)$/)
+          @out << line
+        else
+          out << line
+        end
+      end
+      out
+    end
 
     # @return [CssParser::Parser]
     def parser
@@ -91,7 +108,8 @@ module Validator
     # @param declarations [String]
     # @return [nil]
     def write_rule_set(selector, declarations)
-      scoped_selector = scope_selector(selector)
+      adjusted_selector = apply_selector_replacements(selector)
+      scoped_selector = scope_selector(adjusted_selector)
       cleaned_declarations = validate_declarations(declarations, selector)
       @out << compose_rule_set(scoped_selector, cleaned_declarations)
       nil
@@ -102,11 +120,21 @@ module Validator
     # @param declarations [String]
     # @return [nil]
     def maybe_write_inverted_rule_set(selector, declarations)
-      scoped_selector = "#{@config.dark_scope} #{selector}"
+      adjusted_selector = apply_selector_replacements(selector)
+      scoped_selector = "#{@config.dark_scope} #{adjusted_selector}"
       inverted_declarations = create_inverted_declarations(declarations)
       return nil unless inverted_declarations.any?
       @out << compose_rule_set(scoped_selector, inverted_declarations)
       nil
+    end
+
+    def apply_selector_replacements(selector)
+      # Replace namespaced attribute selectors
+      pattern = /\[(.*\|[a-z\-_]+)(|=|~=|\|=|\$=|\*=).*\]/
+      search = selector[pattern, 1]
+      return selector unless search
+      replace = "data-#{search.tr('|', '-')}"
+      selector.gsub(search, replace)
     end
 
     # Prepares declarations for enumeration

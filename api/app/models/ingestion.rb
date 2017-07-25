@@ -138,11 +138,22 @@ class Ingestion < ApplicationRecord
       text.save
       processing_success
     rescue => e
-      error("Processing failed: #{e}")
-      processing_failure
+      handle_ingestion_exception(e)
     end
     Ingestor.reset_logger
   end
   # rubocop:enable Metrics/AbcSize
+
+  private
+
+  def handle_ingestion_exception(error)
+    error("Processing failed: #{error}")
+    if Rails.env.development?
+      Rails.backtrace_cleaner.clean(error.backtrace).each do |line|
+        error(line)
+      end
+    end
+    processing_failure
+  end
 
 end
