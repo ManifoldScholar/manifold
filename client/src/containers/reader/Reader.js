@@ -136,9 +136,10 @@ export class ReaderContainer extends Component {
   renderStyles = () => {
     return values(this.props.text.relationships.stylesheets).map(stylesheet => {
       return (
-        <style key={stylesheet.id}>
-          {stylesheet.attributes.styles}
-        </style>
+        <style
+          key={stylesheet.id}
+          dangerouslySetInnerHTML={{ __html: stylesheet.attributes.styles }}
+        />
       );
     });
   };

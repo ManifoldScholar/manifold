@@ -110,7 +110,7 @@ module Ingestor
           end
 
           def spine_item_parsed(id)
-            xml_parse(rendition_source_path_by_id(id)).remove_namespaces!
+            xml_parse(rendition_source_path_by_id(id))
           end
 
           def manifest_cover_node

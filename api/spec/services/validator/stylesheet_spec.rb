@@ -17,6 +17,47 @@ RSpec.describe Validator::Stylesheet do
     expect(validator.validate(valid_css)).to be_an_instance_of String
   end
 
+  it "should not preface namespace" do
+    valid_css = "@namespace epub \"http://www.idpf.org/2007/ops\";"
+    results = validator.validate(valid_css)
+    expect(results).to eq_ignoring_whitespace valid_css
+  end
+
+  it "should maintain namespaces" do
+    valid_css = <<~HEREDOC
+    @charset "UTF-8";
+    @namespace epub "http://www.idpf.org/2007/ops";
+    
+    abbr.name{
+      white-space: nowrap;
+    }
+    HEREDOC
+    validated_css = <<~HEREDOC
+    @charset "UTF-8";
+    @namespace epub "http://www.idpf.org/2007/ops";
+    
+    #{scope_selector} abbr.name{
+      white-space: nowrap;
+    }
+    HEREDOC
+    results = validator.validate(valid_css)
+    expect(results).to eq_ignoring_whitespace validated_css
+  end
+
+  # XHTML supports namespaced selectors, but HTML does not.
+  describe "when mapping attributes" do
+    operators = %w(= !- |= ^= $= *=)
+    operators = %w(*=)
+    operators.each do |op|
+      it "it should translate namespaced a namespaced attribute to data a data attribute with an #{op} operator" do
+        invalid_css = "#{scope_selector} section[epub|type#{op}\"imprint\"] { text-decoration: underline; }"
+        valid_css = "#{scope_selector} section[data-epub-type#{op}\"imprint\"] { text-decoration: underline; }"
+        results = validator.validate(invalid_css)
+        expect(results).to eq_ignoring_whitespace valid_css
+      end
+    end
+  end
+
   it "should return the same CSS if valid" do
     valid_css = "#{scope_selector} p { text-decoration: underline; }"
     results = validator.validate(valid_css)

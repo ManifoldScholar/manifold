@@ -22,6 +22,12 @@ RSpec.describe Validator::Html do
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
+  it "transforms epub|type attributes" do
+    fragment = "<section epub:type=\"foo\">AAA</section>"
+    valid = "<section data-epub-type=\"foo\">AAA</section>"
+    expect(validator.validate(fragment).delete("\n")).to eq(valid)
+  end
+
   it "should ensure that an option tag is wrapped in a select tag" do
     fragment = "<div><option></option></div>"
     valid = "<div><select><option></option></select></div>"
