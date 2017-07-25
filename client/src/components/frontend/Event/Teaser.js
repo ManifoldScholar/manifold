@@ -70,6 +70,14 @@ export default class Teaser extends Component {
     return component;
   }
 
+  getTargetByType(type) {
+    let out = null;
+    if (type === "TWEET") {
+      out = "_blank";
+    }
+    return out;
+  }
+
   render() {
     const attr = this.props.event.attributes;
 
@@ -89,7 +97,10 @@ export default class Teaser extends Component {
     const eventLinked = !!attr.eventUrl;
     if (eventLinked) {
       eventPrompt = (
-        <a target="_blank" href={this.props.event.attributes.eventUrl}>
+        <a
+          target={this.getTargetByType(attr.eventType)}
+          href={this.props.event.attributes.eventUrl}
+        >
           {this.getPromptByType(attr.eventType)}
           <i className="manicon manicon-arrow-long-right" />
         </a>
