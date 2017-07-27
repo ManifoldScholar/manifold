@@ -59,6 +59,200 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
       </div>
     </div>
   </section>
+  <section>
+    <div
+      className="container"
+    >
+      <header
+        className="section-heading"
+      >
+        <h4
+          className="title"
+        >
+          <i
+            className="manicon manicon-pulse"
+          />
+          Recent Activity
+        </h4>
+        <div
+          className="hide-60"
+        />
+        <div
+          className="show-60"
+        />
+      </header>
+      <div>
+        <ul
+          className="event-list-secondary"
+        >
+          <li>
+            <div
+              className="event-tile"
+            >
+              <div
+                className="event-data"
+              >
+                <div>
+                  <i
+                    className="manicon manicon-book-opening"
+                  />
+                  <h5
+                    className="event-title"
+                    dangerouslySetInnerHTML={
+                      Object {
+                        "__html": "New Text",
+                      }
+                    }
+                  />
+                  <datetime
+                    className="event-date"
+                  >
+                    <span>
+                      Text Added April 24th, 2017
+                    </span>
+                  </datetime>
+                </div>
+              </div>
+              <div
+                className="event-prompt"
+              />
+            </div>
+          </li>
+          <li>
+            <div
+              className="event-tile tweet"
+            >
+              <div
+                className="event-data"
+              >
+                <div>
+                  <i
+                    className="manicon manicon-twitter"
+                  />
+                  <div
+                    className="event-user"
+                  >
+                    <a
+                      href="https://twitter.com/ManifoldScholar"
+                    >
+                      @ManifoldScholar
+                    </a>
+                  </div>
+                  <div
+                    className="event-content"
+                  >
+                    <p
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "Manifold is great!",
+                        }
+                      }
+                    />
+                  </div>
+                  <datetime
+                    className="event-date"
+                  >
+                    <span>
+                      April 24th, 2017
+                    </span>
+                  </datetime>
+                </div>
+              </div>
+              <div
+                className="event-prompt"
+              />
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section
+    className="bg-neutral05"
+  >
+    <div
+      className="container"
+    >
+      <nav
+        className="button-nav"
+      >
+        <a
+          className="button-icon-primary"
+          href="/"
+          onClick={[Function]}
+        >
+          <span>
+            <i
+              className="manicon manicon-books-on-shelf"
+            />
+            See more projects
+          </span>
+        </a>
+      </nav>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`Frontend.Project.Detail component renders correctly when hideActivity is true 1`] = `
+<div>
+  <section
+    className="project-detail-hero hero-image"
+    style={Object {}}
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="project-figure"
+      >
+        
+        <h1
+          className="project-title"
+        >
+          Rowan Test
+          <span
+            className="subtitle"
+          >
+            World's Greatest Dog
+          </span>
+        </h1>
+      </div>
+      <div
+        className="project-info"
+      >
+        <h1
+          className="project-title"
+        >
+          Rowan Test
+          <span
+            className="subtitle"
+          >
+            World's Greatest Dog
+          </span>
+        </h1>
+        <section
+          className="project-social"
+        >
+          <span
+            className="hashtag"
+          >
+            ##cute_dog
+          </span>
+          <nav
+            className="networks"
+          >
+            <ul />
+          </nav>
+        </section>
+      </div>
+      <div
+        className="project-aside"
+      >
+        
+      </div>
+    </div>
+  </section>
   <section
     className="bg-neutral05"
   >

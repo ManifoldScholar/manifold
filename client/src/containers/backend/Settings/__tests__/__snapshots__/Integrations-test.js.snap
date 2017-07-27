@@ -209,7 +209,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                       <Form.Setter('Form.MaskedTextInput) label=\\"Google Analytics Profile ID\\" name=\\"attributes[integrations][gaProfileId]\\" placeholder=\\"ga:123456789\\" mask={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}}>
                         <Form.MaskedTextInput label=\\"Google Analytics Profile ID\\" name=\\"attributes[integrations][gaProfileId]\\" placeholder=\\"ga:123456789\\" mask={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}}>
                           <div className=\\"form-input\\">
-                            <label>
+                            <label className=\\"\\">
                               Google Analytics Profile ID
                             </label>
                             <ReactTextMask onChange={[Function]} value={{...}} type=\\"text\\" mask={{...}} placeholder=\\"ga:123456789\\" />

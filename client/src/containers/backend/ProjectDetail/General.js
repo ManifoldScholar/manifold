@@ -23,7 +23,24 @@ export default class ProjectPanelGeneral extends PureComponent {
           create={projectsAPI.create}
           className="form-secondary"
         >
-          <Form.Switch label="Draft Mode" name="attributes[draft]" />
+          <Form.FieldGroup
+            horizontal
+            label="Project States"
+            instructions="Draft projects are only visible to admins. Featured projects are highlighted on the home page."
+          >
+            <Form.Switch
+              label="Draft Mode"
+              labelClass="secondary"
+              labelPos="below"
+              name="attributes[draft]"
+            />
+            <Form.Switch
+              label="Featured"
+              labelClass="secondary"
+              labelPos="below"
+              name="attributes[featured]"
+            />
+          </Form.FieldGroup>
           <Form.TextInput
             validation={["required"]}
             focusOnMount
@@ -40,55 +57,12 @@ export default class ProjectPanelGeneral extends PureComponent {
             label="Publication Date"
             name="attributes[publicationDate]"
           />
-          <Form.Switch label="Featured" name="attributes[featured]" />
           <Form.MaskedTextInput
             label="Hashtag"
             name="attributes[hashtag]"
             mask="hashtag"
           />
-          <Form.TextArea label="Description" name="attributes[description]" />
           <Project.Form.AvatarBuilder project={project} {...this.props} />
-          <Form.Upload
-            layout="portrait"
-            label="Cover"
-            accepts="images"
-            readFrom="attributes[coverStyles][smallPortrait]"
-            name="attributes[cover]"
-            remove="attributes[removeCover]"
-          />
-          <Form.Upload
-            layout="landscape"
-            accepts="images"
-            label="Hero Image"
-            readFrom="attributes[heroStyles][mediumLandscape]"
-            name="attributes[hero]"
-            remove="attributes[removeHero]"
-          />
-          <Form.TextInput
-            label="Purchase URL"
-            name="attributes[purchaseUrl]"
-            placeholder="Enter Purchase URL"
-          />
-          <Form.MaskedTextInput
-            label="Purchase Price"
-            name="attributes[purchasePriceMoney]"
-            mask="currency"
-          />
-          <Form.TextInput
-            label="Currency"
-            name="attributes[purchasePriceCurrency]"
-            placeholder="Enter Purchase Price Currency Code"
-          />
-          <Form.TextInput
-            label="Twitter Username"
-            name="attributes[twitterId]"
-            placeholder="Enter Twitter username"
-          />
-          <Form.TextInput
-            label="Instagram Username"
-            name="attributes[instagramId]"
-            placeholder="Enter Instagram username"
-          />
           <Form.Save text="Save Project" />
         </FormContainer.Form>
       </section>

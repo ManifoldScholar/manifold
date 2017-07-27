@@ -1,9 +1,43 @@
 .form-section {
+
   + .form-section {
     margin-top: 45px;
 
     @include respond($break60) {
       margin-top: 52px;
+    }
+  }
+
+  .form-section-label {
+    @include formLabelPrimary;
+    display: block;
+    margin-bottom: 1.5em;
+    color: $neutral75;
+  }
+
+  &.horizontal {
+    .form-input {
+      display: block;
+      margin-right: 0;
+
+      @include respond($break60) {
+        display: inline-block;
+        margin-right: 40px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+    }
+
+    .form-input + .form-input,
+    .form-input + .form-section,
+    .form-section + .form-section,
+    .form-section + .form-input {
+      @include respond($break60) {
+        margin-top: 0;
+      }
     }
   }
 }

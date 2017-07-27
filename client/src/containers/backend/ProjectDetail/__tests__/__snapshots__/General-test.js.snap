@@ -13,18 +13,40 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                   <div>
                     <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
                     <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
-                      <Form.Setter('Form.Switch) label=\\"Draft Mode\\" name=\\"attributes[draft]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.Switch label=\\"Draft Mode\\" name=\\"attributes[draft]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
-                          <div className=\\"form-input\\">
-                            <label>
-                              Draft Mode
-                            </label>
-                            <div className=\\"toggle-indicator\\">
-                              <div onClick={[Function]} className=\\"boolean-primary\\" />
-                            </div>
-                          </div>
-                        </Form.Switch>
-                      </Form.Setter('Form.Switch)>
+                      <FieldGroup horizontal={true} label=\\"Project States\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                        <div className=\\"form-section horizontal\\">
+                          <span className=\\"form-section-label\\">
+                            Project States
+                          </span>
+                          <span className=\\"instructions\\">
+                            Draft projects are only visible to admins. Featured projects are highlighted on the home page.
+                          </span>
+                          <Form.Setter('Form.Switch) label=\\"Draft Mode\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[draft]\\" actions={{...}} instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                            <Form.Switch label=\\"Draft Mode\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[draft]\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                              <div className=\\"form-input\\">
+                                <div className=\\"toggle-indicator\\">
+                                  <div onClick={[Function]} className=\\"boolean-primary\\" />
+                                </div>
+                                <label className=\\"below secondary\\">
+                                  Draft Mode
+                                </label>
+                              </div>
+                            </Form.Switch>
+                          </Form.Setter('Form.Switch)>
+                          <Form.Setter('Form.Switch) label=\\"Featured\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[featured]\\" actions={{...}} instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                            <Form.Switch label=\\"Featured\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[featured]\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                              <div className=\\"form-input\\">
+                                <div className=\\"toggle-indicator\\">
+                                  <div onClick={[Function]} className=\\"boolean-primary\\" />
+                                </div>
+                                <label className=\\"below secondary\\">
+                                  Featured
+                                </label>
+                              </div>
+                            </Form.Switch>
+                          </Form.Setter('Form.Switch)>
+                        </div>
+                      </FieldGroup>
                       <Form.Setter('Form.TextInput) validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
                         <Form.TextInput validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"Rowan Test\\" initialValue=\\"Rowan Test\\" password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[title]\\" errors={{...}} label=\\"Title\\" containerStyle={{...}}>
@@ -204,42 +226,16 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </div>
                         </Form.Date>
                       </Form.Setter('Form.Date)>
-                      <Form.Setter('Form.Switch) label=\\"Featured\\" name=\\"attributes[featured]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.Switch label=\\"Featured\\" name=\\"attributes[featured]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
-                          <div className=\\"form-input\\">
-                            <label>
-                              Featured
-                            </label>
-                            <div className=\\"toggle-indicator\\">
-                              <div onClick={[Function]} className=\\"boolean-primary\\" />
-                            </div>
-                          </div>
-                        </Form.Switch>
-                      </Form.Setter('Form.Switch)>
                       <Form.Setter('Form.MaskedTextInput) label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
                         <Form.MaskedTextInput label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"#cute_dog\\" initialValue=\\"#cute_dog\\">
                           <div className=\\"form-input\\">
-                            <label>
+                            <label className=\\"\\">
                               Hashtag
                             </label>
                             <ReactTextMask onChange={[Function]} value=\\"#cute_dog\\" type=\\"text\\" mask={[Function]} placeholder={[undefined]} />
                           </div>
                         </Form.MaskedTextInput>
                       </Form.Setter('Form.MaskedTextInput)>
-                      <Form.Setter('Form.TextArea) label=\\"Description\\" name=\\"attributes[description]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.TextArea label=\\"Description\\" name=\\"attributes[description]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} height={100}>
-                          <div className=\\"form-input\\">
-                            <Errorable className=\\"form-input\\" name=\\"attributes[description]\\" errors={{...}} label=\\"Description\\" containerStyle={{...}}>
-                              <div style={{...}} className=\\"form-input\\">
-                                <label>
-                                  Description
-                                </label>
-                                <textarea style={{...}} placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                              </div>
-                            </Errorable>
-                          </div>
-                        </Form.TextArea>
-                      </Form.Setter('Form.TextArea)>
                       <Form.Setter('Project.Form.AvatarBuilder) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
                         <Project.Form.AvatarBuilder setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
                           <div className=\\"form-input avatar-builder\\">
@@ -336,122 +332,6 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </div>
                         </Project.Form.AvatarBuilder>
                       </Form.Setter('Project.Form.AvatarBuilder)>
-                      <Form.Setter('Form.Upload) layout=\\"portrait\\" label=\\"Cover\\" accepts=\\"images\\" readFrom=\\"attributes[coverStyles][smallPortrait]\\" name=\\"attributes[cover]\\" remove=\\"attributes[removeCover]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.Upload layout=\\"portrait\\" label=\\"Cover\\" accepts=\\"images\\" name=\\"attributes[cover]\\" remove=\\"attributes[removeCover]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
-                          <div className=\\"form-input\\">
-                            <Errorable className=\\"form-input\\" name=\\"attributes[cover]\\" errors={{...}} label=\\"Cover\\" containerStyle={{...}}>
-                              <div style={{...}} className=\\"form-input\\">
-                                <label className=\\"\\">
-                                  Cover
-                                </label>
-                                <Dropzone style={[undefined]} className=\\"form-dropzone style-portrait\\" multiple={false} onDrop={[Function]} accept=\\"image/*\\">
-                                  <div className=\\"contents-empty\\">
-                                    <i className=\\"manicon manicon-cloud-up\\" />
-                                    <div className=\\"message\\">
-                                      <p className=\\"primary\\">
-                                        Upload a file or
-                                        <br />
-                                        drag and drop here
-                                        <br />
-                                      </p>
-                                      <p className=\\"secondary\\">
-                                        jpeg, tiff, gif, png
-                                      </p>
-                                    </div>
-                                  </div>
-                                </Dropzone>
-                              </div>
-                            </Errorable>
-                          </div>
-                        </Form.Upload>
-                      </Form.Setter('Form.Upload)>
-                      <Form.Setter('Form.Upload) layout=\\"landscape\\" accepts=\\"images\\" label=\\"Hero Image\\" readFrom=\\"attributes[heroStyles][mediumLandscape]\\" name=\\"attributes[hero]\\" remove=\\"attributes[removeHero]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.Upload layout=\\"landscape\\" accepts=\\"images\\" label=\\"Hero Image\\" name=\\"attributes[hero]\\" remove=\\"attributes[removeHero]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
-                          <div className=\\"form-input\\">
-                            <Errorable className=\\"form-input\\" name=\\"attributes[hero]\\" errors={{...}} label=\\"Hero Image\\" containerStyle={{...}}>
-                              <div style={{...}} className=\\"form-input\\">
-                                <label className=\\"\\">
-                                  Hero Image
-                                </label>
-                                <Dropzone style={[undefined]} className=\\"form-dropzone style-landscape\\" multiple={false} onDrop={[Function]} accept=\\"image/*\\">
-                                  <div className=\\"contents-empty\\">
-                                    <i className=\\"manicon manicon-cloud-up\\" />
-                                    <div className=\\"message\\">
-                                      <p className=\\"primary\\">
-                                        Upload a file or
-                                        <br />
-                                        drag and drop here
-                                        <br />
-                                      </p>
-                                      <p className=\\"secondary\\">
-                                        jpeg, tiff, gif, png
-                                      </p>
-                                    </div>
-                                  </div>
-                                </Dropzone>
-                              </div>
-                            </Errorable>
-                          </div>
-                        </Form.Upload>
-                      </Form.Setter('Form.Upload)>
-                      <Form.Setter('Form.TextInput) label=\\"Purchase URL\\" name=\\"attributes[purchaseUrl]\\" placeholder=\\"Enter Purchase URL\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.TextInput label=\\"Purchase URL\\" name=\\"attributes[purchaseUrl]\\" placeholder=\\"Enter Purchase URL\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[purchaseUrl]\\" errors={{...}} label=\\"Purchase URL\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Purchase URL
-                              </label>
-                              <input type=\\"text\\" placeholder=\\"Enter Purchase URL\\" onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.MaskedTextInput) label=\\"Purchase Price\\" name=\\"attributes[purchasePriceMoney]\\" mask=\\"currency\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.MaskedTextInput label=\\"Purchase Price\\" name=\\"attributes[purchasePriceMoney]\\" mask=\\"currency\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
-                          <div className=\\"form-input\\">
-                            <label>
-                              Purchase Price
-                            </label>
-                            <ReactTextMask onChange={[Function]} value={[undefined]} type=\\"text\\" mask={[Function]} placeholder={[undefined]} />
-                          </div>
-                        </Form.MaskedTextInput>
-                      </Form.Setter('Form.MaskedTextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Currency\\" name=\\"attributes[purchasePriceCurrency]\\" placeholder=\\"Enter Purchase Price Currency Code\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.TextInput label=\\"Currency\\" name=\\"attributes[purchasePriceCurrency]\\" placeholder=\\"Enter Purchase Price Currency Code\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[purchasePriceCurrency]\\" errors={{...}} label=\\"Currency\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Currency
-                              </label>
-                              <input type=\\"text\\" placeholder=\\"Enter Purchase Price Currency Code\\" onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Twitter Username\\" name=\\"attributes[twitterId]\\" placeholder=\\"Enter Twitter username\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.TextInput label=\\"Twitter Username\\" name=\\"attributes[twitterId]\\" placeholder=\\"Enter Twitter username\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[twitterId]\\" errors={{...}} label=\\"Twitter Username\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Twitter Username
-                              </label>
-                              <input type=\\"text\\" placeholder=\\"Enter Twitter username\\" onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Instagram Username\\" name=\\"attributes[instagramId]\\" placeholder=\\"Enter Instagram username\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.TextInput label=\\"Instagram Username\\" name=\\"attributes[instagramId]\\" placeholder=\\"Enter Instagram username\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[instagramId]\\" errors={{...}} label=\\"Instagram Username\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Instagram Username
-                              </label>
-                              <input type=\\"text\\" placeholder=\\"Enter Instagram username\\" onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
                       <Form.Save text=\\"Save Project\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
                         <div className=\\"form-input submit\\">
                           <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Project\\" />

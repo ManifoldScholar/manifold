@@ -4,6 +4,8 @@ import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
 import fill from "lodash/fill";
 import setter from "./setter";
+import classnames from "classnames";
+import isString from "lodash/isString";
 
 class FormMaskedTextInput extends Component {
   static displayName = "Form.MaskedTextInput";
@@ -16,7 +18,8 @@ class FormMaskedTextInput extends Component {
     placeholder: PropTypes.string,
     label: PropTypes.string,
     onChange: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
+    instructions: PropTypes.string
   };
 
   currencyMask() {
@@ -52,11 +55,20 @@ class FormMaskedTextInput extends Component {
 
   render() {
     const mask = this.mask();
+    const labelClass = classnames({
+      "has-instructions": isString(this.props.instructions)
+    });
+
     return (
       <div className="form-input">
-        <label>
+        <label className={labelClass}>
           {this.props.label}
         </label>
+        {isString(this.props.instructions)
+          ? <span className="instructions">
+              {this.props.instructions}
+            </span>
+          : null}
         <MaskedInput
           onChange={this.props.onChange}
           value={this.props.value}

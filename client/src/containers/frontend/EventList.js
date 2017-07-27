@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
+import { Redirect } from "react-router-dom";
 import { Project } from "components/frontend";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
@@ -39,8 +40,14 @@ export class ProjectEventsContainer extends Component {
     meta: PropTypes.object
   };
 
+  renderRedirect() {
+    return <Redirect to={"/"} />;
+  }
+
   render() {
     const project = this.props.project;
+    if (!project) return null;
+    if (project.attributes.hideActivity) return this.renderRedirect();
     const events = this.props.events;
     const eventsMeta = this.props.meta;
     if (!events) return null;

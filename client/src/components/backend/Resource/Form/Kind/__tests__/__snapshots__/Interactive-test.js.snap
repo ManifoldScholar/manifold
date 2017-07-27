@@ -7,7 +7,9 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
   <div
     className="form-input"
   >
-    <label>
+    <label
+      className="above"
+    >
       Is this an iFrame?
     </label>
     <div
@@ -55,7 +57,9 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
   <div
     className="form-input"
   >
-    <label>
+    <label
+      className="above"
+    >
       Is this an iFrame?
     </label>
     <div

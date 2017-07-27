@@ -103,7 +103,8 @@ const defaults = {
       heroStyles: {},
       coverStyles: {},
       avatarStyles: {},
-      hashtag: "#cute_dog"
+      hashtag: "#cute_dog",
+      hideActivity: false
     },
     relationships: {
       resources: []

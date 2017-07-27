@@ -4,7 +4,9 @@ exports[`Backend.Form.Switch component renders correctly 1`] = `
 <div
   className="form-input"
 >
-  <label>
+  <label
+    className="above"
+  >
     Label this
   </label>
   <div
