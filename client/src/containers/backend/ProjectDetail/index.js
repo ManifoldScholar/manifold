@@ -1,4 +1,5 @@
 import Wrapper from "./Wrapper";
+import ProjectPage from "./ProjectPage";
 import General from "./General";
 import Collections from "./Collections";
 import Collaborators from "./Collaborators";
@@ -12,6 +13,7 @@ import Resource from "./Resource";
 
 export default {
   Wrapper,
+  ProjectPage,
   General,
   Collections,
   Collaborators,

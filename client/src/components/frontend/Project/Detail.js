@@ -53,6 +53,7 @@ class Detail extends Component {
   }
 
   shouldShowActivity() {
+    if (this.props.project.attributes.hideActivity) return null;
     const events = this.props.project.relationships.events;
     return events && events.length > 0;
   }

@@ -64,6 +64,11 @@ export class ProjectDetailWrapperContainer extends PureComponent {
         key: "general"
       },
       {
+        path: lh.link("backendProjectProjectPage", project.id),
+        label: "Appearance",
+        key: "projectPage"
+      },
+      {
         path: lh.link("backendProjectCollaborators", project.id),
         label: "People",
         key: "collaborators"

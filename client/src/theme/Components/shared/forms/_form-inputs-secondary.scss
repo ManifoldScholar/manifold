@@ -47,15 +47,35 @@
     margin-top: 10px;
   }
 
+  .instructions {
+    @include templateCopy;
+    display: block;
+    margin-bottom: 1em;
+    font-size: 17px;
+    font-style: italic;
+    color: $neutral50;
+    text-transform: none;
+  }
+
   .form-input {
+
     label:not(.checkbox):not(.radio) {
       @include formLabelPrimary;
       display: block;
       margin-bottom: 1.5em;
       color: $neutral75;
 
+      &.below {
+        margin-top: 0.75em;
+        margin-bottom: 0;
+      }
+
       &.has-instructions {
         margin-bottom: 1em;
+      }
+
+      &.secondary {
+        font-weight: normal;
       }
     }
 

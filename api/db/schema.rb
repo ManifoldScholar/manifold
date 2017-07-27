@@ -254,6 +254,7 @@ ActiveRecord::Schema.define(version: 20170803204651) do
     t.jsonb    "citations",               default: {}
     t.jsonb    "avatar_meta",             default: {},        null: false
     t.boolean  "draft",                   default: true,      null: false
+    t.boolean  "hide_activity",           default: false
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
 

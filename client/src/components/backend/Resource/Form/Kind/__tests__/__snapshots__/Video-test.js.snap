@@ -7,7 +7,9 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
   <div
     className="form-input"
   >
-    <label>
+    <label
+      className="above"
+    >
       Is this an externally linked video?
     </label>
     <div
@@ -75,7 +77,9 @@ exports[`Backend.Resource.Form.Video component when sub kind is external_video r
   <div
     className="form-input"
   >
-    <label>
+    <label
+      className="above"
+    >
       Is this an externally linked video?
     </label>
     <div

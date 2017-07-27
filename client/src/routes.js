@@ -174,6 +174,13 @@ export default () => {
               helper: p => `/backend/project/${p}/metadata`
             },
             {
+              name: "backendProjectProjectPage",
+              exact: true,
+              component: Backend.ProjectDetail.ProjectPage,
+              path: "/backend/project/:id/project-page",
+              helper: p => `/backend/project/${p}/project-page`
+            },
+            {
               exact: true,
               component: Backend.ProjectDetail.General,
               path: "/backend/project/:id"

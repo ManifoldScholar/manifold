@@ -8,12 +8,18 @@ class FormSwitch extends Component {
 
   static propTypes = {
     label: PropTypes.string,
+    labelPos: PropTypes.string,
+    labelClass: PropTypes.string,
     set: PropTypes.func,
     value: PropTypes.any,
     customValues: PropTypes.shape({
       true: PropTypes.string,
       false: PropTypes.string
     })
+  };
+
+  static defaultProps = {
+    labelPos: "above"
   };
 
   constructor(props) {
@@ -53,15 +59,22 @@ class FormSwitch extends Component {
       checked: this.determineChecked(this.props.value)
     });
 
+    const labelClasses = classnames(this.props.labelPos, this.props.labelClass);
+
+    const label = (
+      <label className={labelClasses}>
+        {this.props.label}
+      </label>
+    );
+
     return (
       <div className="form-input">
-        <label>
-          {this.props.label}
-        </label>
+        {this.props.labelPos === "above" ? label : null}
         <div className="toggle-indicator">
           {/* Add .checked to .boolean-primary to change visual state */}
           <div onClick={this.handleClick} className={classes} />
         </div>
+        {this.props.labelPos === "below" ? label : null}
       </div>
     );
   }
