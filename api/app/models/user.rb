@@ -56,7 +56,6 @@ class User < ApplicationRecord
 
   # Callbacks
   before_validation :ensure_nickname
-  after_create :send_welcome_email
 
   # Misc
   has_secure_password
@@ -113,6 +112,6 @@ class User < ApplicationRecord
   end
 
   def send_welcome_email
-    WelcomeMailer.welcome(self).deliver_now
+    AccountMailer.welcome(self, false).deliver
   end
 end
