@@ -13,6 +13,27 @@ exports[`Backend Settings General Container renders correctly 1`] = `
         style={Object {}}
       >
         <label
+          className="has-instructions"
+        >
+          How do you refer you your Manifold installation?
+        </label>
+        <span
+          className="instructions"
+        >
+          There are various places throughout the application where             Manifold refers to itself. If you set a value here, Manifold will use it where             appropriate. For example, you could call it "Manifold at the University of             Minnesota Press" or just "University of Minnesota Digital Books." Or, if you            prefer, you can leave this blank, and Manifold will just refer to itself as             "Manifold."
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Manifold"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
           className=""
         >
           Default Publisher
