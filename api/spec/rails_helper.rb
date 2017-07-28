@@ -66,7 +66,7 @@ RSpec.configure do |config|
   # Truncate all test database tables before running tests.
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.clean_with(:truncation, except: %w(settings))
   end
 
   # Allow elastic search for tests tagged with elasticsearch
