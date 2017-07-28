@@ -7,11 +7,12 @@ RSpec.shared_context "param helpers" do
     json_structure(attributes: attributes)
   end
 
-  def json_structure(attributes: {}, relationships: {})
+  def json_structure(attributes: {}, relationships: {}, meta: {})
     {
       data: {
         attributes: attributes,
-        relationships: relationships
+        relationships: relationships,
+        meta: meta
       }
     }
   end
@@ -20,8 +21,8 @@ RSpec.shared_context "param helpers" do
     Hash[*[name, models]]
   end
 
-  def json_payload(attributes: {}, relationships: {})
-    json_structure(attributes: attributes, relationships: relationships).to_json
+  def json_payload(attributes: {}, relationships: {}, meta: {})
+    json_structure(attributes: attributes, relationships: relationships, meta: meta).to_json
   end
 
   def expect_updated_param(param, value, expected_value = nil, expected_param = nil)
