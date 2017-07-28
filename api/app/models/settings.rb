@@ -1,9 +1,25 @@
 class Settings < ApplicationRecord
+
   # Concerns
   include Authority::Abilities
   include Attachments
 
   SECTIONS = [:general, :integrations, :secrets, :email].freeze
+
+  DEFAULTS = {
+    general: {
+      installation_name: "Manifold",
+      social_share_message: "Shared from Manifold Scholarship"
+    },
+    email: {
+      from_address: "do-not-reply@manifoldapp.org",
+      from_name: "Manifold Scholarship",
+      reply_to_address: "do-not-reply@manifoldapp.org",
+      reply_to_name: "Manifold Scholarship",
+      closing: "Sincerely,\nThe Manifold Team",
+      delivery_method: "sendmail"
+    }
+  }.freeze
 
   # Create merge setters for the various settings sections. Initialize the hashes.
   SECTIONS.each do |section|
@@ -22,7 +38,9 @@ class Settings < ApplicationRecord
   # Attachments
   manifold_has_attached_file :press_logo, :image
 
+  # Callbacks
   after_update :update_oauth_providers!
+  after_initialize :ensure_defaults
 
   # @param [Symbol] section
   # @param [{Symbol => String}] new_values
@@ -46,13 +64,21 @@ class Settings < ApplicationRecord
     Settings::UpdateOauthProviders.run!
   end
 
+  def ensure_defaults
+    DEFAULTS.each do |section_key, section_defaults|
+      section = send(section_key)
+      section_defaults.each do |key, value|
+        section[key] = value if section[key].blank?
+      end
+    end
+  end
+
   class << self
     # Check if we {.update_from_environment? should update from the environment}
     # and {#update_from_environment! do so}.
     # @return [void]
     def potentially_update_from_environment!
       return unless update_from_environment?
-
       instance.update_from_environment!
     end
 
