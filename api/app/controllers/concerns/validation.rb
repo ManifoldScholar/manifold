@@ -121,6 +121,7 @@ module Validation
     attributes = [
       {
         general: [
+          :installation_name,
           :default_publisher,
           :default_place_of_publication,
           :social_share_message,

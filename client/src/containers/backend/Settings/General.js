@@ -30,24 +30,34 @@ export class SettingsGeneralContainer extends PureComponent {
         >
           <Form.TextInput
             focusOnMount
+            label="How do you refer you your Manifold installation?"
+            name="attributes[general][installationName]"
+            placeholder="Manifold"
+            instructions={
+              'There are various places throughout the application where \
+            Manifold refers to itself. If you set a value here, Manifold will use it where \
+            appropriate. For example, you could call it "Manifold at the University of \
+            Minnesota Press" or just "University of Minnesota Digital Books." Or, if you\
+            prefer, you can leave this blank, and Manifold will just refer to itself as \
+            "Manifold."'
+            }
+          />
+          <Form.TextInput
             label="Default Publisher"
             name="attributes[general][defaultPublisher]"
             placeholder="Enter Default Publisher"
           />
           <Form.TextInput
-            focusOnMount
             label="Default Place of Publication"
             name="attributes[general][defaultPlaceOfPublication]"
             placeholder="Enter Default Place of Publication"
           />
           <Form.TextInput
-            focusOnMount
             label="Social Sharing Messge"
             name="attributes[general][socialShareMessage]"
             instructions="Enter the text you would like to appear when a page is shared"
           />
           <Form.TextInput
-            focusOnMount
             label="Contact Link URL"
             name="attributes[general][contactUrl]"
             placeholder="Enter a URL"
