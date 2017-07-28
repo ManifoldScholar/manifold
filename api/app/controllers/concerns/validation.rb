@@ -255,8 +255,15 @@ module Validation
     { name => [:data, :filename, :content_type] }
   end
 
+  def allowed_meta
+    [
+      :created_by_admin
+    ]
+  end
+
   def structure_params(attributes: nil, relationships: nil)
     data = [:type, :id]
+    data << { meta: allowed_meta }
     data << { attributes: attributes } unless attributes.nil?
     unless relationships.nil?
       relationships_config = {}
