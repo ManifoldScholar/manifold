@@ -42,16 +42,37 @@ RSpec.describe "Users API", type: :request do
 
   describe "creates a user" do
     let(:path) { api_v1_users_path }
-    let(:api_response) { JSON.parse(response.body) }
-    before(:each) { post path, headers: anonymous_headers, params: valid_params }
 
-    it "sets the first name correctly" do
-      expect(api_response["data"]["attributes"]["firstName"]).to eq(first_name)
+    context do
+      let(:api_response) { JSON.parse(response.body) }
+      before(:each) { allow(AccountMailer).to receive(:welcome).and_call_original }
+      before(:each) { post path, headers: anonymous_headers, params: valid_params }
+      it "sets the first name correctly" do
+        expect(api_response["data"]["attributes"]["firstName"]).to eq(first_name)
+      end
+
+      it "accepts an avatar file upload and adds it to the user" do
+        url = api_response["data"]["attributes"]["avatarStyles"]["original"]
+        expect(url.start_with?("http")).to be true
+      end
+
+      it "sends a welcome message" do
+        expect(AccountMailer).to have_received(:welcome).once
+      end
     end
 
-    it "accepts an avatar file upload and adds it to the user" do
-      url = api_response["data"]["attributes"]["avatarStyles"]["original"]
-      expect(url.start_with?("http")).to be true
+    it "tells the welcome mailer that the user was created by the admin when meta[createdByAdmin] is true" do
+      valid_params = json_payload(attributes: attributes, meta: { created_by_admin: true })
+      allow(AccountMailer).to receive(:welcome).and_call_original
+      post path, headers: anonymous_headers, params: valid_params
+      expect(AccountMailer).to have_received(:welcome).with(anything, true)
+    end
+
+    it "does not tell the welcome mailer that the user was created by the admin when meta[createdByAdmin] is absent" do
+      valid_params = json_payload(attributes: attributes)
+      allow(AccountMailer).to receive(:welcome).and_call_original
+      post path, headers: anonymous_headers, params: valid_params
+      expect(AccountMailer).to have_received(:welcome).with(anything, false)
     end
 
   end

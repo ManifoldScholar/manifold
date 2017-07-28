@@ -31,7 +31,7 @@ module Api
         @user = User.find(params[:id])
         @user.force_reset_password
         if @user.save
-          ResetPasswordMailer.admin_reset_email(@user).deliver_now
+          AccountMailer.password_change_notification(@user).deliver
           render_single_resource(@user)
         else
           render json:  @user,

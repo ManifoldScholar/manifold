@@ -30,6 +30,8 @@ module Api
 
       def create
         @user = ::Updaters::User.new(user_params).update(User.new)
+        include_password = user_params[:data][:meta][:created_by_admin] == true
+        AccountMailer.welcome(@user, include_password).deliver
         render_single_resource @user
       end
 

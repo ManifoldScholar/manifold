@@ -1,0 +1,13 @@
+<% if @created_by_admin %>
+Welcome to <%= @installation_name %>.
+
+An admin user has created a user account for you. Your credentials are as follows:
+
+Email: <%= @user.email %>
+Password: <%= @user.password %>
+<% else %>
+Welcome to <%= @installation_name %>. Thanks for signing up!
+<% end %>
+
+Once you've logged in, you'll be able to annotate project texts and view your annotations.
+You'll also be able to engage in discussion about the texts and project resources.

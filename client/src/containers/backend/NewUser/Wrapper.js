@@ -25,6 +25,11 @@ export class NewUserWrapperContainer extends PureComponent {
     this.props.history.push(path);
   }
 
+  createUser(user) {
+    const meta = { createdByAdmin: true };
+    return usersAPI.create(Object.assign({}, user, { meta }));
+  }
+
   handleSuccess(user) {
     this.redirectToUser(user);
   }
@@ -47,7 +52,7 @@ export class NewUserWrapperContainer extends PureComponent {
                   model={this.defaultUser}
                   name="backend-create-user"
                   update={usersAPI.update}
-                  create={usersAPI.create}
+                  create={this.createUser}
                   onSuccess={this.handleSuccess}
                   className="form-secondary"
                 >

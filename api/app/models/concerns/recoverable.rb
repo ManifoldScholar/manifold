@@ -17,7 +17,7 @@ module Recoverable
   end
 
   def send_reset_password_email
-    ResetPasswordMailer.reset_password(self).deliver_now
+    AccountMailer.reset_password(self).deliver
   end
 
   def update_password(new_password, new_password_confirmation)
