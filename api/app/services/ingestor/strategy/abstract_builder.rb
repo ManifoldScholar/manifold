@@ -209,6 +209,8 @@ module Ingestor
       def remove_stale_sections(text)
         text.text_sections.each do |section|
           next if text.spine.include? section.id
+          next if section.toc?
+          next if section.cover?
           section.destroy
           info "services.ingestor.logging.remove_text_section", id: section.id
         end

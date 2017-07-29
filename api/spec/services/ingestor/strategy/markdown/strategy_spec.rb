@@ -58,6 +58,10 @@ RSpec.describe Ingestor::Strategy::Markdown::Strategy do
         expect(@text.ingestion_sources.length).to eq 8
       end
 
+      it "has a navigation text section" do
+        expect(@text.toc_section).to_not be nil
+      end
+
       describe "the generated ingestion sources" do
 
         it "has a source_path property equal to the relative path within the package" do

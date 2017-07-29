@@ -30,10 +30,6 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
         expect(@text.text_sections.length).to be 4
       end
 
-      it "has an empty landmarks property" do
-        expect(@text.landmarks).to eq []
-      end
-
       it "has an empty page list" do
         expect(@text.page_list).to eq []
       end
@@ -116,12 +112,18 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
       @epub = Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3" )
       @text = Ingestor.ingest(@epub, @creator, Ingestor::Strategy::EPUB::Strategy)
     }
+
     include_examples "output text assertions", "EPUB", "test-v3"
 
     it "has a navigation text section" do
       expect(@text.toc_section).to_not be nil
     end
-    
+
+    it "has a TOC in the landmarks" do
+      expect(@text.landmarks.first[:label]).to eq "Table of Contents"
+      expect(@text.landmarks.first[:type]).to eq "toc"
+    end
+
     it "has the correct starting text section" do
       expect(@text.start_text_section.source_path).to eq "EPUB/xhtml/section0002.xhtml"
     end
@@ -137,6 +139,16 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
     }
 
     include_examples "output text assertions", "OEBPS", "test-v2"
+
+    it "has a navigation text section" do
+      expect(@text.toc_section).to_not be nil
+    end
+
+    it "has a TOC in the landmarks, derived from the guide node" do
+      expect(@text.landmarks.first[:label]).to eq "Table of Contents"
+      expect(@text.landmarks.first[:type]).to eq "toc"
+    end
+
     it "has the correct starting text section" do
       expect(@text.start_text_section.source_path).to eq "OEBPS/xhtml/section0002.xhtml"
     end

@@ -68,7 +68,8 @@ module Ingestor
 
           def text_section_resource_path
             node = @epub_inspector.rendition_source_node_by_id(idref)
-            node.attribute("href").try(:value)
+            value = node.attribute("href").try(:value)
+            @epub_inspector.rendition_href_to_path(value)
           end
 
           def guess_name_from_toc

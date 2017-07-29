@@ -22,7 +22,7 @@ module Ingestor
             end
 
             def selector_page_list_root_node
-              "//nav[@epub:type='page-list']/xmlns:ol"
+              "//xmlns:nav[@epub:type='page-list']/xmlns:ol"
             end
 
             def selector_page_list_node
@@ -30,7 +30,7 @@ module Ingestor
             end
 
             def selector_landmark_root_node
-              "//nav[@epub:type='landmarks']/xmlns:ol"
+              "//xmlns:nav[@epub:type='landmarks']/xmlns:ol"
             end
 
             def selector_landmark_node

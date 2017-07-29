@@ -123,7 +123,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
                                        label: "Title Page",
                                        anchor: "bk",
                                        source_path: "some/ump-feeley1-0003.xhtml",
-                                       type: nil
+                                       type: "text"
                                      )
     end
   end

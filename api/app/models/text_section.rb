@@ -45,6 +45,14 @@ class TextSection < ApplicationRecord
     text.section_after(position)
   end
 
+  def toc?
+    kind == KIND_NAVIGATION
+  end
+
+  def cover?
+    kind == KIND_COVER_IMAGE
+  end
+
   def to_s
     name
   end
