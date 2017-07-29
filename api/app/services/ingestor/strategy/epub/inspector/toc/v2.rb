@@ -13,7 +13,7 @@ module Ingestor
             private
 
             def guide_node_references
-              @epub_inspector.guide_node&.at("xmlns:reference")
+              @epub_inspector.guide_node&.css("reference")
             end
 
             def selector_toc_root_node
@@ -83,7 +83,8 @@ module Ingestor
                 nodes.each do |node|
                   label = node.at_xpath("@title").value
                   href = node.at_xpath("@href").value
-                  items.push make_structure_item(label, href)
+                  type = node.at_xpath("@type").value
+                  items.push make_structure_item(label, href, type)
                 end
               end
               items
