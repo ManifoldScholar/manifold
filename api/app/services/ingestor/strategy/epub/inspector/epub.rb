@@ -156,18 +156,25 @@ module Ingestor
             start = landmarks.detect { |l| l[:type] == "bodymatter" }
             return unless start
             href = start[:source_path]
-            node = manifest_item_nodes.detect { |n| n.attribute("href").value == href }
-            node.attribute("id").value
-          end
-
-          def v2_start_section_identifier
-            start = v2_guide_node_by_type("text") || v2_guide_node_by_type("start")
-            return unless start
-            href = start.attribute("href").value.split("#").first
-            node = manifest_item_nodes.detect { |n| n.attribute("href").value == href }
+            node = manifest_item_nodes.detect do |n|
+              rendition_href_to_path(n.attribute("href").value) == href
+            end
             return unless node
             node.attribute("id").value
           end
+
+          # rubocop:disable Metrics/AbcSize
+          def v2_start_section_identifier
+            start = v2_guide_node_by_type("text") || v2_guide_node_by_type("start")
+            return unless start
+            href = rendition_href_to_path(start.attribute("href").value.split("#").first)
+            node = manifest_item_nodes.detect do |n|
+              rendition_href_to_path(n.attribute("href").value) == href
+            end
+            return unless node
+            node.attribute("id").value
+          end
+          # rubocop:enable Metrics/AbcSize
 
           def manifest_nav_node
             if v2?
