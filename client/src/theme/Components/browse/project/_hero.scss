@@ -246,7 +246,7 @@
     }
 
     .project-entry {
-      max-width: 210px;
+      display: inline-block;
       margin-top: 34px;
 
       &.top {
@@ -262,7 +262,7 @@
         display: none;
 
         @include respond($break75) {
-          display: block;
+          display: inline-block;
         }
       }
 
@@ -272,7 +272,7 @@
     }
 
     .button-secondary {
-      width: 100%;
+      display: block;
 
       + .button-secondary {
         margin-top: 14px;
