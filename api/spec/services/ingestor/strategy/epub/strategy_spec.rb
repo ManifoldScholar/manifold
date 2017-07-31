@@ -117,8 +117,16 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
       @text = Ingestor.ingest(@epub, @creator, Ingestor::Strategy::EPUB::Strategy)
     }
     include_examples "output text assertions", "EPUB", "test-v3"
-  end
 
+    it "has a navigation text section" do
+      expect(@text.toc_section).to_not be nil
+    end
+    
+    it "has the correct starting text section" do
+      expect(@text.start_text_section.source_path).to eq "EPUB/xhtml/section0002.xhtml"
+    end
+
+  end
 
   context "when ingesting a V2 EPUB", :integration do
     before(:all) {
@@ -127,7 +135,12 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
       @epub = Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2" )
       @text = Ingestor.ingest(@epub, @creator, Ingestor::Strategy::EPUB::Strategy)
     }
+
     include_examples "output text assertions", "OEBPS", "test-v2"
+    it "has the correct starting text section" do
+      expect(@text.start_text_section.source_path).to eq "OEBPS/xhtml/section0002.xhtml"
+    end
+
   end
 
 end

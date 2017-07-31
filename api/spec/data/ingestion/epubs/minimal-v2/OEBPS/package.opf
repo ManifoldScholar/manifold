@@ -24,4 +24,8 @@
     <itemref idref="section0002a.xhtml" />
     <itemref idref="section0003.xhtml" />
   </spine>
+  <guide>
+    <reference type="toc" title="Table of Contents" href="xhtml/section0001.xhtml" />
+    <reference type="text" title="Start" href="xhtml/section0002.xhtml" />
+  </guide>
 </package>
