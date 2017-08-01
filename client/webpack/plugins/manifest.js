@@ -1,6 +1,7 @@
 const paths = require("../paths");
 const fs = require("fs");
 const mkdirp = require("mkdirp");
+const path = require("path");
 
 function statsPlugin(options) {
   this.options = options;
@@ -28,10 +29,18 @@ statsPlugin.prototype.apply = function apply(compiler) {
     });
     delete stats.assets;
     const out = { assetsByChunkName: stats.assetsByChunkName };
-    const base = `${paths.output}/manifest`;
-    const path = `${base}/${this.options.fileName}`;
+    const targetDir = process.env.WEBPACK_BUILD_TARGET
+      ? process.env.WEBPACK_BUILD_TARGET
+      : "";
+    const base = path.resolve(
+      paths.root,
+      targetDir,
+      paths.relativeOutput,
+      "manifest"
+    );
+    const writePath = `${base}/${this.options.fileName}`;
     mkdirp.sync(base);
-    fs.writeFile(path, JSON.stringify(out, null, 2), done);
+    fs.writeFile(writePath, JSON.stringify(out, null, 2), done);
   });
 };
 

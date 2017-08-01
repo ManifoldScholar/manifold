@@ -1,2 +1,2 @@
 server "manifold.cicnode.com", user: "manifold", roles: %w{app db web}
-set :branch, "master"
+set :branch, "zd/deploy"

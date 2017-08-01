@@ -7,7 +7,7 @@ module.exports = {
   static: path.resolve(root, "./static"),
   scripts: path.resolve(root, "./script"),
   servers: path.resolve(root, "./script/servers"),
-  output: path.resolve(root, "./dist"),
+  relativeOutput: "dist",
   src: path.resolve(root, "./src"),
   theme: path.resolve(root, "./src/theme"),
   env: path.resolve(root, "../.env")

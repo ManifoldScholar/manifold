@@ -1,5 +1,6 @@
 require("dotenv").config({ path: "../.env" });
 
+const path = require("path");
 const paths = require("./paths");
 const webpack = require("webpack");
 const base = require("./base.config");
@@ -10,7 +11,15 @@ const compileEnv = require("./transforms/env");
 const ch = require("../src/helpers/consoleHelpers");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
-const buildDir = `${paths.output}/www`;
+const targetDir = process.env.WEBPACK_BUILD_TARGET
+  ? process.env.WEBPACK_BUILD_TARGET
+  : "";
+const buildDir = path.resolve(
+  paths.root,
+  targetDir,
+  paths.relativeOutput,
+  "www"
+);
 
 // No hashes in development env.
 const nameTemplate =
@@ -91,7 +100,7 @@ if (!process.env.WEBPACK_DEV_SERVER) {
 // the client, and it provides an environment of sorts for the browser code.
 copyEntries.push({
   from: "webpack/templates/www_env.ejs",
-  to: `${paths.output}/www/build/env.js`,
+  to: `${buildDir}/build/env.js`,
   transform: compileEnv
 });
 
