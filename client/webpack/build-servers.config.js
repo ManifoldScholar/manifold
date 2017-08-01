@@ -9,7 +9,16 @@ const nodeExternals = require("webpack-node-externals");
 const rimraf = require("rimraf");
 const compileEnv = require("./transforms/env");
 
-const buildDir = `${paths.output}/node`;
+const path = require("path");
+const targetDir = process.env.WEBPACK_BUILD_TARGET
+  ? process.env.WEBPACK_BUILD_TARGET
+  : "";
+const buildDir = path.resolve(
+  paths.root,
+  targetDir,
+  paths.relativeOutput,
+  "node"
+);
 
 // Clean up build dir
 rimraf.sync(buildDir);
@@ -31,7 +40,7 @@ const config = {
   devtool: "sourcemap",
   output: {
     chunkFilename: `chunk-[name].js`,
-    path: `${paths.output}/node`,
+    path: buildDir,
     filename: "[name].js"
   }
 };
@@ -59,7 +68,7 @@ const sourceMapSupport = new webpack.BannerPlugin({
 const copyFiles = new CopyWebpackPlugin([
   {
     from: "webpack/templates/node_env.ejs",
-    to: `${paths.output}/node/env.js`,
+    to: `${buildDir}/env.js`,
     transform: compileEnv
   }
 ]);

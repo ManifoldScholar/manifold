@@ -1,4 +1,4 @@
-load File.expand_path("../set_rails_env.rake", __FILE__)
+load File.expand_path("../environment.rake", __FILE__)
 
 namespace :deploy do
 
