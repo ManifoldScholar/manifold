@@ -172,14 +172,14 @@ exports[`Backend NewUser Wrapper Container renders correctly 1`] = `
                 <label>
                   Password
                 </label>
-                <button
+                <span
                   className="password-visibility-toggle"
                   onClick={[Function]}
                 >
                   <i
                     className="manicon manicon-eye-outline"
                   />
-                </button>
+                </span>
                 <input
                   onChange={[Function]}
                   placeholder="Enter a password"

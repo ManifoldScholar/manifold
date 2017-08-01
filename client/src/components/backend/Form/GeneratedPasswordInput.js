@@ -95,12 +95,12 @@ class FormGeneratedPasswordInput extends Component {
         label="Password"
       >
         <label>Password</label>
-        <button
+        <span
           className="password-visibility-toggle"
           onClick={event => this.togglePassword(event)}
         >
           <i className={iconClass} />
-        </button>
+        </span>
         {this.renderInput()}
       </GlobalForm.Errorable>
     );
