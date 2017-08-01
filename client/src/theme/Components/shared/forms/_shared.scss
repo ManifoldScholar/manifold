@@ -75,6 +75,7 @@
     position: absolute;
     top: -1px;
     left: 80px;
+    cursor: pointer;
     background: none;
     border: 0;
     outline: 0;
@@ -85,7 +86,7 @@
       color: $neutral70;
 
       &.manicon-eye-slash {
-        top: -1px;
+        top: -3px;
         font-size: 20px;
       }
     }
