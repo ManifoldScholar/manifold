@@ -80,7 +80,13 @@ const globals = new webpack.DefinePlugin({
 
 const manifest = new ManifestPlugin({ fileName: "server.json" });
 
-const plugins = [globals, copyFiles, sourceMapSupport, manifest];
+const plugins = [];
+plugins.push(globals);
+plugins.push(copyFiles);
+plugins.push(manifest);
+if (process.env.NODE_ENV == "development") {
+  plugins.push(sourceMapSupport);
+}
 
 const finalConfig = Object.assign({}, base({ plugins }), config);
 module.exports = finalConfig;
