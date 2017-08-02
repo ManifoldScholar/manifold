@@ -123,7 +123,6 @@ export class SectionContainer extends Component {
         />
         {renderRoutes(this.props.route.routes)}
         <Section.Text {...this.props} />
-        <Section.Label text={this.props.text} />
         <div>
           <Section.NextSection
             sectionsMap={this.props.text.attributes.sectionsMap}
@@ -137,6 +136,7 @@ export class SectionContainer extends Component {
             spine={this.props.text.attributes.spine}
           />
         </div>
+        <Section.Label text={this.props.text} />
       </div>
     );
   }
