@@ -29,7 +29,7 @@ function handleStateChangeOnClient(classes) {
   const htmlClasses = classes.map(className => className.trim());
   if (htmlClasses.join(",") === lastHtmlElementClassValue) return;
   const element = document.documentElement;
-  if (!document || !document.dataset) return;
+  if (!element || !element.dataset) return;
   if (element.dataset.addedClasses) {
     const previouslyAddedClasses = element.dataset.addedClasses.split(",");
     previouslyAddedClasses.forEach(className => {
