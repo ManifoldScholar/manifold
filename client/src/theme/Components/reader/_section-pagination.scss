@@ -1,23 +1,20 @@
 .section-pagination {
   @include clearfix;
-  padding: 28px 0 20px;
   background-color: $neutral20;
-
-  @include respond($break40) {
-    padding: 42px 0 25px;
-  }
 
   // Global button styles
   // <a>
   .pagination-previous, .pagination-next {
     @include utilityPrimary;
     display: inline-block;
+    padding: 28px 0 20px;
     font-size: 14px;
     color: $neutral40;
     text-decoration: none;
     vertical-align: middle;
 
     @include respond($break40) {
+      padding: 42px 0 25px;
       font-size: 18px;
     }
 
