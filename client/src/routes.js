@@ -12,6 +12,12 @@ export default () => {
       helper: t => `/read/${t}`,
       routes: [
         {
+          name: "readerMyAnnotations",
+          component: Reader.MyAnnotations.Detail,
+          path: "/read/:textId/my/annotations",
+          helper: t => `/read/${t}/my/annotations`
+        },
+        {
           name: "readerSection",
           component: Reader.Section,
           path: "/read/:textId/section/:sectionId",

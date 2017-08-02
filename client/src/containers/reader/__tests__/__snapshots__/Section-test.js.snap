@@ -4,7 +4,7 @@ exports[`Reader Section Container renders correctly 1`] = `
 <div>
   <div>
     <section
-      className="reader-window"
+      className="reader-window scheme-light"
     >
       <div>
         <div
@@ -15,7 +15,7 @@ exports[`Reader Section Container renders correctly 1`] = `
             className="container-focus container-width-100"
           >
             <div
-              className="manifold-text-section text-section font-size-undefined"
+              className="manifold-text-section text-section font-serif font-size-undefined"
               data-id="body"
             >
               <section

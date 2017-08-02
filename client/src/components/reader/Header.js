@@ -195,6 +195,7 @@ export default class Header extends Component {
             toggleSignInUpOverlay={
               this.props.commonActions.toggleSignInUpOverlay
             }
+            text={this.props.text}
             // TODO: More link (and eventually, the link text) should be pulled from settings
             moreLink="http://manifold.umn.edu/about/"
           />

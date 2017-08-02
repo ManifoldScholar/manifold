@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 
 describe("Reader.ReturnMenu.Body component", () => {
   const project = build.entity.project("1");
+  const text = build.entity.text("2");
   const toggleMock = jest.fn();
   const store = build.store();
 
@@ -17,6 +18,7 @@ describe("Reader.ReturnMenu.Body component", () => {
         projectId={project.id}
         projectTitle={project.attributes.title}
         toggleSignInUpOverlay={toggleMock}
+        text={text}
       />
     </Provider>
   );

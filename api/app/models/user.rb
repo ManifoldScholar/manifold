@@ -28,8 +28,9 @@ class User < ApplicationRecord
   # Associations
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
 
-  has_many :annotations # TODO: refactor to use "creator_id"
-  has_many :favorites # Todo: refactor to use "creator_id"
+  has_many :annotations, -> { where format: "annotation" }, # Maybe without scope here
+           class_name: "Annotation", foreign_key: "creator_id"
+  has_many :favorites # TODO: refactor to use "creator_id"
   has_many :favorite_projects, through: :favorites, source: :favoritable,
                                source_type: "Project"
   has_many :favorite_texts, through: :favorites, source: :favoritable,

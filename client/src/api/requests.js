@@ -58,6 +58,7 @@ export default {
   rAnnotationCreate: "reader-annotation-create",
   rAnnotationUpdate: "reader-annotation-update",
   rAnnotationDestroy: "reader-annotation-destroy",
+  rUserAnnotations: "reader-user-annotations",
   rCommentCreate: "reader-comment-create",
   rCommentDestroy: "reader-comment-destroy",
   rCommentUpdate: "reader-comment-update",
