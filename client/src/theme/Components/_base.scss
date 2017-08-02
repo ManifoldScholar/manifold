@@ -12,7 +12,7 @@
 
 html {
   // Set the base font size here, which will correspond to 1em inside <body>
-  font-size: 100%;
+  font-size: 22px;
   // Do you want to force grayscale antialiasing globally in webkit & gecko?
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -30,7 +30,7 @@ body {
   // @include font-body;
   width: 100%;
   min-width: $containerWidthMin;
-  font-size: 1em;
+  font-size: 16px;
   font-weight: $regular;
   hyphens: auto;
   line-height: $baseLineHeight;

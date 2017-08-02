@@ -81,13 +81,13 @@ common: &1
       -
         :match: !ruby/regexp '/font-size/'
         :entries:
-          - ["xx-small", ".7em"]
-          - ["x-small", ".7em"]
-          - ["small", ".8em"]
-          - ["medium", "1em"]
-          - ["large", "1.2em"]
-          - ["x-large", "1.3em"]
-          - ["xx-large", "1.3em"]
+          - ["xx-small", ".7rem"]
+          - ["x-small", ".7rem"]
+          - ["small", ".8rem"]
+          - ["medium", "1rem"]
+          - ["large", "1.2rem"]
+          - ["x-large", "1.3rem"]
+          - ["xx-large", "1.3rem"]
     :invertables:
       :properties:
         :include: ['color', 'background-color', 'border-color', 'border-right-color', 'border-left-color', 'border-top-color', 'border-bottom-color']

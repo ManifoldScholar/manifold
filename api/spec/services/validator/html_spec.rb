@@ -142,13 +142,13 @@ RSpec.describe Validator::Html do
 
   it "rewrites mapped css values" do
     fragment = "<div style=\"font-size: medium\"></div>"
-    valid = "<div style=\"font-size: 1em\"></div>"
+    valid = "<div style=\"font-size: 1rem\"></div>"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 
   it "does not rewrite unmapped css values" do
-    fragment = "<div style=\"font-size: .5em\"></div>"
-    valid = "<div style=\"font-size: .5em\"></div>"
+    fragment = "<div style=\"font-size: .5rem\"></div>"
+    valid = "<div style=\"font-size: .5rem\"></div>"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
 end

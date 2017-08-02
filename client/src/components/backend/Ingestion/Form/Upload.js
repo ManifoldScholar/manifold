@@ -47,7 +47,7 @@ export default class IngestionFormUpload extends PureComponent {
           ? <Form.TextInput
               label="URL"
               name="attributes[externalSourceUrl]"
-              instructions="Manifold can ingest any publically avaiable Google doc by entering its URL."
+              instructions="Manifold can ingest any publicly available Google doc by entering its URL."
             />
           : null}
         {ingestionType === "epub"

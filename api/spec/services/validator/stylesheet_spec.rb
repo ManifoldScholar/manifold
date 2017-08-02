@@ -214,7 +214,7 @@ RSpec.describe Validator::Stylesheet do
 
   it "rewrites mapped css values" do
     invalid = ".au { font-size: medium; }"
-    valid = "#{scope_selector}  .au { font-size: 1em; }"
+    valid = "#{scope_selector}  .au { font-size: 1rem; }"
     results = validator.validate(invalid)
     expect(results).to eq_ignoring_whitespace valid
   end
@@ -226,16 +226,17 @@ RSpec.describe Validator::Stylesheet do
   end
 
   describe "font-sizes" do
-    it "are removed when absolute" do
-      invalid = ".test { font-size: 15pt; }"
-      valid = "#{scope_selector}  .test { }"
+    it "are mapped to rem units when absolute" do
+      invalid = ".test { font-size: 22pt; }"
+      valid = "#{scope_selector}  .test { font-size: 2.0rem; }"
       results = validator.validate(invalid)
       expect(results).to eq_ignoring_whitespace valid
     end
 
-    it "are maintained when relative" do
-      valid = ".test { font-size: 1em; }"
-      results = validator.validate(valid)
+    it "are mapped to rem units when relative" do
+      invalid = ".test { font-size: 1em; }"
+      valid = ".test { font-size: 1.0rem; }"
+      results = validator.validate(invalid)
       expect(results).to eq_ignoring_whitespace ".manifold-text-section #{valid}"
     end
   end
@@ -254,4 +255,5 @@ RSpec.describe Validator::Stylesheet do
     results = validator.validate(selector)
     expect(results).to eq_ignoring_whitespace "#{valid}"
   end
+
 end

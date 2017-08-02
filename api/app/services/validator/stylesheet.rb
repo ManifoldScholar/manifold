@@ -31,11 +31,20 @@ module Validator
     def validate_declarations(declarations, selector = nil)
       cleaned = []
       parse_declarations(declarations).each_declaration do |property, value, important|
-        next unless allowed_property?(property, selector, value)
-        mapped_value = map_value(property, value)
-        cleaned.push compose_declaration(property, mapped_value, important)
+        new_value = map_value(property, value)
+        new_value = maybe_transform_font_sizes(new_value) if property == "font-size"
+        next unless allowed_property?(property, selector, new_value)
+        cleaned.push compose_declaration(property, new_value, important)
       end
       cleaned
+    end
+
+    def maybe_transform_font_sizes(value)
+      match = !(value =~ /\d+pt|\d+px/).nil?
+      return "#{value.to_f / 11}rem" if match
+      match = !(value =~ /\d+em/).nil?
+      return "#{value.to_f}rem" if match
+      value
     end
 
     # Creates inverted declarations from declarations

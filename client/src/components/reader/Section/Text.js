@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { HigherOrder } from "components/global";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import classNames from "classnames";
 import smoothScroll from "../../../utils/smoothScroll";
@@ -150,7 +151,8 @@ export default class Text extends Component {
 
     // Apply a font-size class to the text-section
     // This maps to a numbered class with responsive font declarations
-    textSectionClass += ` font-size-${typography.fontSize.current}`;
+    const fontSizeClass = `font-size-${typography.fontSize.current}`;
+    textSectionClass += " " + fontSizeClass;
 
     // Apply a conditional container class that maps to a size in CSS
     const containerClass = `container-focus container-width-${typography.margins
@@ -162,42 +164,44 @@ export default class Text extends Component {
     const page = this.props.location.pathname.substr(1);
 
     return (
-      <div>
-        <section className={readerAppearanceClass}>
-          <Annotation.Annotatable
-            currentUser={this.props.authentication.currentUser}
-            projectId={this.props.text.relationships.project.id}
-            textId={this.props.text.id}
-            sectionId={this.props.match.params.sectionId}
-            lockSelection={this.lockSelection}
-            resources={this.props.resources}
-            annotations={this.state.filteredAnnotations}
-            containerSize={typography.margins.current}
-            bodySelector="[data-id=&quot;body&quot;]"
-            text={this.props.text}
-            section={this.props.section}
-          >
-            <div className={containerClass}>
-              <div data-id="body" className={textSectionClass}>
-                <Section.Body
-                  lockedSelection={this.state.lockedSelection}
-                  annotations={this.state.filteredAnnotations}
-                  section={this.props.section}
-                />
+      <HigherOrder.HtmlClass className={fontSizeClass}>
+        <div>
+          <section className={readerAppearanceClass}>
+            <Annotation.Annotatable
+              currentUser={this.props.authentication.currentUser}
+              projectId={this.props.text.relationships.project.id}
+              textId={this.props.text.id}
+              sectionId={this.props.match.params.sectionId}
+              lockSelection={this.lockSelection}
+              resources={this.props.resources}
+              annotations={this.state.filteredAnnotations}
+              containerSize={typography.margins.current}
+              bodySelector="[data-id=&quot;body&quot;]"
+              text={this.props.text}
+              section={this.props.section}
+            >
+              <div className={containerClass}>
+                <div data-id="body" className={textSectionClass}>
+                  <Section.Body
+                    lockedSelection={this.state.lockedSelection}
+                    annotations={this.state.filteredAnnotations}
+                    section={this.props.section}
+                  />
+                </div>
               </div>
-            </div>
-          </Annotation.Annotatable>
-        </section>
-        <ReactCSSTransitionGroup
-          transitionName="text-child"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-        >
-          {this.props.children
-            ? React.cloneElement(this.props.children, { key: page })
-            : null}
-        </ReactCSSTransitionGroup>
-      </div>
+            </Annotation.Annotatable>
+          </section>
+          <ReactCSSTransitionGroup
+            transitionName="text-child"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
+          >
+            {this.props.children
+              ? React.cloneElement(this.props.children, { key: page })
+              : null}
+          </ReactCSSTransitionGroup>
+        </div>
+      </HigherOrder.HtmlClass>
     );
   }
 }
