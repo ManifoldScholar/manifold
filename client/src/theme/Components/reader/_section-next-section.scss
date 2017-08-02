@@ -1,16 +1,16 @@
 .section-next-section {
-  padding: 0 0 50px;
-
-  @include respond($break65) {
-    padding: 5.46vw 0 8.9vw;
-  }
-
-  @include respond($break100) {
-    padding: 64px 0 101px;
-  }
-
   a {
+    display: block;
+    padding: 0 0 50px;
     text-decoration: none;
+
+    @include respond($break65) {
+      padding: 5.46vw 0 8.9vw;
+    }
+
+    @include respond($break100) {
+      padding: 64px 0 101px;
+    }
 
     &:hover {
       h3 {
