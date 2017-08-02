@@ -2,6 +2,8 @@
   padding: 20px 0 18px;
   text-align: center;
   background-color: $sp20Quinary;
+  transition: opacity $duration $timing,
+    visibility $duration $timing;
 
   .label {
     @include utilityPrimary;
@@ -11,5 +13,17 @@
     font-weight: $light;
     color: $neutral80;
     border: 1px solid $neutral80;
+  }
+
+  &.fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
   }
 }
