@@ -5,13 +5,24 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 
+const isDev = process.env.NODE_ENV === "development";
+
 // No hashes in names when we're in development, to simplify finding assets.
-const nameTemplate =
-  process.env.NODE_ENV === "development" ? "[name]" : "[name]-[hash]";
-const fontnameTemplate =
-  process.env.NODE_ENV === "development" ? "[fontname]" : "[fontname]-[hash]";
+const nameTemplate = isDev ? "[name]" : "[name]-[hash]";
+const fontnameTemplate = isDev ? "[fontname]" : "[fontname]-[hash]";
 
 module.exports = (options = {}) => {
+  // #####################################################################################
+  // PLUGINS
+  // #####################################################################################
+  let plugins = [];
+
+  const extractText = new ExtractTextPlugin({
+    filename: "[name].css",
+    disable: isDev
+  });
+  plugins.push(extractText);
+
   // #####################################################################################
   // RULES
   // #####################################################################################
@@ -47,18 +58,20 @@ module.exports = (options = {}) => {
 
   const ruleSass = {
     test: /\.scss$/,
-    use: [
-      { loader: "style-loader" },
-      { loader: "css-loader", options: "importLoaders=2" },
-      {
-        loader: "postcss-loader",
-        options: {
-          syntax: "postcss-scss",
-          plugins: () => [require("autoprefixer")]
-        }
-      },
-      { loader: "sass-loader", options: "outputStyle=expanded" }
-    ],
+    use: extractText.extract({
+      use: [
+        { loader: "css-loader", options: "importLoaders=2" },
+        {
+          loader: "postcss-loader",
+          options: {
+            syntax: "postcss-scss",
+            plugins: () => [require("autoprefixer")]
+          }
+        },
+        { loader: "sass-loader", options: "outputStyle=expanded" }
+      ],
+      fallback: "style-loader"
+    }),
     include: paths.theme
   };
 
@@ -88,18 +101,6 @@ module.exports = (options = {}) => {
   rules.push(generateUrlRule("ttf", "application/octet-stream"));
   rules.push(generateUrlRule("eot", "application/vnd.ms-fontobject"));
   rules.push(generateUrlRule("svg", "image/svg+xml"));
-
-  // #####################################################################################
-  // PLUGINS
-  // #####################################################################################
-  let plugins = [];
-
-  const extractText = new ExtractTextPlugin("[name].css");
-  plugins.push(extractText);
-
-  // if (process.env.NODE_ENV === "development") {
-  //   plugins.push(new BundleAnalyzerPlugin());
-  // }
 
   // #####################################################################################
   // HANDLE OPTIONS
