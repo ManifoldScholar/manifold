@@ -9,6 +9,8 @@ class ApplicationController < ActionController::API
 
   serialization_scope :serial_scope
 
+  rescue_from ApiExceptions::StandardError, with: :render_error_response
+
   protected
 
   def serial_scope
@@ -83,6 +85,15 @@ class ApplicationController < ActionController::API
     Authority.logger.warn(error.message)
     return authority_forbidden_resource_class(error) if error.resource.is_a?(Class)
     authority_forbidden_resource_instance(error)
+  end
+
+  def render_error_response(error)
+    options = {
+      status: 500,
+      title: "Manifold encountered an error",
+      detail: error.message
+    }
+    render json: { errors: build_api_error(options) }, status: 500
   end
 
   class << self

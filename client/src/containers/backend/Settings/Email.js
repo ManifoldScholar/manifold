@@ -43,17 +43,6 @@ export class SettingsEmailContainer extends PureComponent {
     this.props.dispatch(notificationActions.addNotification(notification));
   };
 
-  notifyEmailFail = error => {
-    const notification = {
-      level: 2,
-      id: `TEST_EMAIL_FAILED`,
-      heading: `Dang it. ${error.body.error}!`,
-      body: `${error.body.exception}`,
-      expiration: 5000
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-  };
-
   render() {
     if (!this.props.settings) return null;
     return (

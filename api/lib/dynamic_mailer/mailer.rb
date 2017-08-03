@@ -13,30 +13,32 @@ module DynamicMailer
       return deliver_sendmail!(mail) if @config.use_sendmail?
       handle_send_failure(mail)
     # rubocop:disable Metrics/LineLength
-    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+    rescue => e
       # rubocop:enable Metrics/LineLength
       handle_exception(e)
     end
 
     private
 
-    def handle_exception
+    def handle_exception(e)
       # rubocop:disable Metrics/LineLength
       msg =
-        case e.class
-        when Net::SMTPAuthenticationError
+        case e.class.name
+        when "Net::SMTPAuthenticationError"
           "Manifold wasn't able to authenticate against the SMTP server using the stored credentials."
-        when Net::SMTPServerBusy
+        when "Net::SMTPServerBusy"
           "The SMTP server appears to be busy. Is it available?"
-        when Net::SMTPSyntaxError
+        when "Net::SMTPSyntaxError"
           "Manifold received a Net::SMTPSyntaxError while trying to send your message. Double check your SMTP configuration"
-        when Net::SMTPFatalError, Net::SMTPUnknownError
+        when "Net::SMTPFatalError", "Net::SMTPUnknownError"
           "Manifold ran into a fatal SMTP error. Double check your configuration."
         else
-          "Manifold ran into a fatal error. Double check your configuration."
+          "Manifold was unable to send the email. The exception was of the type
+           \"#{e.class.name}.\" The message was \"#{e.message}.\" Double check your
+          configuration."
         end
       # rubocop:enable Metrics/LineLength
-      raise msg
+      raise ApiExceptions::StandardError, msg
     end
 
     def add_defaults!(mail)
