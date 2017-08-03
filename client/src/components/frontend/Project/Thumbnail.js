@@ -51,6 +51,21 @@ export default class ProjectThumbnail extends Component {
     );
   }
 
+  renderProjectStatusMarker(project) {
+    // Currently, this can only return a 'draft' marker
+    let marker = null;
+
+    if (project.attributes.draft) {
+      marker = (
+        <div className="block-label">
+          {"Draft"}
+        </div>
+      );
+    }
+
+    return marker;
+  }
+
   renderProjectMakers(project) {
     const creators = project.relationships.creators;
     if (!creators || creators.length === 0) return null;
@@ -81,6 +96,7 @@ export default class ProjectThumbnail extends Component {
 
   render() {
     const project = this.props.project;
+
     let projectMeta = null;
     if (!this.props.hideMeta) {
       projectMeta = (
@@ -89,6 +105,7 @@ export default class ProjectThumbnail extends Component {
             {project.attributes.title}
           </h3>
           {this.renderProjectMakers(project)}
+          {this.renderProjectStatusMarker(project)}
           {project.attributes.updated
             ? this.renderUpdatedDate(project)
             : this.renderPublishedDate(project)}
@@ -97,17 +114,15 @@ export default class ProjectThumbnail extends Component {
       );
     }
 
-    let className;
-    if (project.attributes.avatarStyles.small) {
-      className = "figure-wrapper";
-    } else {
-      className = "figure-wrapper figure-wrapper-placeholder";
-    }
+    const figureClass = classNames("figure-wrapper", {
+      "figure-wrapper-placeholder": project.attributes.avatarStyles.small,
+      dim: project.attributes.draft
+    });
 
     return (
       <Link to={lh.link("frontendProject", project.attributes.slug)}>
         {/* Figure wrapper, controls maximum width of figure */}
-        <div className={className}>
+        <div className={figureClass}>
           <figure>
             <FrontEndProject.Cover project={project} />
             <FrontEndProject.Follow

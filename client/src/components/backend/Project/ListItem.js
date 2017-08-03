@@ -28,6 +28,21 @@ export default class ProjectListItem extends PureComponent {
     return output;
   }
 
+  renderProjectStatusMarker(attr) {
+    // Currently, this can only return a 'draft' marker
+    let marker = null;
+
+    if (attr.draft) {
+      marker = (
+        <div className="block-label">
+          {"Draft"}
+        </div>
+      );
+    }
+
+    return marker;
+  }
+
   render() {
     const project = this.props.entity;
     const attr = project.attributes;
@@ -45,7 +60,10 @@ export default class ProjectListItem extends PureComponent {
             </figure>
             <div className="meta">
               <h3 className="name">
-                {attr.title}
+                <span className="title-text">
+                  {attr.title}
+                </span>
+                {this.renderProjectStatusMarker(attr)}
                 <span className="subtitle">
                   {attr.subtitle}
                 </span>

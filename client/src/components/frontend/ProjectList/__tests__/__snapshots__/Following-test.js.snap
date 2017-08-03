@@ -54,7 +54,7 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
             onClick={[Function]}
           >
             <div
-              className="figure-wrapper figure-wrapper-placeholder"
+              className="figure-wrapper"
             >
               <figure />
             </div>
@@ -75,7 +75,7 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
             onClick={[Function]}
           >
             <div
-              className="figure-wrapper figure-wrapper-placeholder"
+              className="figure-wrapper"
             >
               <figure />
             </div>

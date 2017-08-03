@@ -124,6 +124,16 @@
   }
 }
 
+@mixin blockLabel {
+  @include utilityPrimary;
+  display: inline-block;
+  padding: 0.333em 8px;
+  font-size: 12px;
+  color: $neutralWhite;
+  background-color: $sp20Primary;
+  border-radius: 3px;
+}
+
 
 // Browser UI
 // --------------------------------------------------------

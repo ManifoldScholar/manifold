@@ -70,6 +70,10 @@
 
     .figure-wrapper {
       max-width: 180px;
+
+      &.dim figure img, &.dim figure svg {
+        opacity: 0.25;
+      }
     }
 
     // Figure
@@ -79,6 +83,10 @@
       max-width: 100%;
       padding-top: 94%;
       margin-bottom: 20px;
+
+      .figure-border {
+        display: inline-block;
+      }
 
       img, svg {
         position: absolute;
@@ -143,6 +151,11 @@
       padding-bottom: 0.75em;
       font-size: 16px;
       color: $neutral80;
+    }
+
+    .block-label {
+      @include blockLabel;
+      margin-bottom: 5px;
     }
 
     .date {
