@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170803164607) do
+ActiveRecord::Schema.define(version: 20170803195751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,8 +249,8 @@ ActiveRecord::Schema.define(version: 20170803164607) do
     t.jsonb    "tweet_fetch_config",      default: {}
     t.date     "publication_date"
     t.string   "slug"
-    t.string   "avatar_color",            default: "primary"
     t.jsonb    "citations",               default: {}
+    t.string   "avatar_color",            default: "primary"
     t.jsonb    "avatar_meta",             default: {},        null: false
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
