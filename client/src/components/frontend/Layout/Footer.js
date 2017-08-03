@@ -15,8 +15,7 @@ export default class LayoutFooter extends Component {
       attributes: PropTypes.shape({
         general: PropTypes.object,
         theme: PropTypes.object,
-        oauth: PropTypes.object,
-        features: PropTypes.object
+        oauth: PropTypes.object
       })
     })
   };

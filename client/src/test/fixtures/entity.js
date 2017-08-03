@@ -49,7 +49,6 @@ const defaults = {
       theme: {
         typekitId: "typekitId"
       },
-      features: {},
       integrations: {
         gaProfileId: null,
         gaTrackingId: null,
