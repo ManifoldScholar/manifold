@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { bindActionCreators } from "redux";
-import { HigherOrder, HeadContent } from "components/global";
+import { HigherOrder, HeadContent, Overlay } from "components/global";
 import { Header, Footer, FooterMenu } from "components/reader";
+import { Annotation } from "containers/reader";
 import { select, grab, isEntityLoaded } from "utils/entityUtils";
 import { commonActions } from "actions/helpers";
 import { textsAPI, sectionsAPI, requests } from "api";
@@ -127,6 +128,12 @@ export class ReaderContainer extends Component {
     };
   };
 
+  maybeRenderOverlay() {
+    if (this.props.location.hash === "#my-annotations")
+      return this.renderMyAnnotations();
+    return null;
+  }
+
   renderRedirect(props) {
     const startTextSectionId = props.text.attributes.startTextSectionId;
     const path = lh.link("readerSection", props.text.id, startTextSectionId);
@@ -151,6 +158,18 @@ export class ReaderContainer extends Component {
     const injectProps = { ...otherProps, ...this.readerActions };
     const childRoutes = renderRoutes(this.props.route.routes, injectProps);
     return childRoutes;
+  }
+
+  renderMyAnnotations() {
+    return (
+      <Overlay
+        closeCallback={this.props.history.goBack}
+        appearance={"overlay-full-bar"}
+        title={"Your Highlights + Annotations"}
+      >
+        <Annotation.MineForText text={this.props.text} />
+      </Overlay>
+    );
   }
 
   render() {
@@ -187,6 +206,7 @@ export class ReaderContainer extends Component {
             />
           </HigherOrder.ScrollAware>
           <main>
+            {this.maybeRenderOverlay()}
             {this.renderRoutes()}
           </main>
           <Footer text={this.props.text} />

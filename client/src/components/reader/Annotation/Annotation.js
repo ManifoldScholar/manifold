@@ -15,7 +15,12 @@ export default class AnnotationDetail extends PureComponent {
     annotation: PropTypes.object.isRequired,
     saveHandler: PropTypes.func,
     deleteHandler: PropTypes.func,
-    showLogin: PropTypes.func
+    showLogin: PropTypes.func,
+    includeComments: PropTypes.bool.isRequired
+  };
+
+  static defaultProps = {
+    includeComments: true
   };
 
   constructor(props) {
@@ -178,8 +183,18 @@ export default class AnnotationDetail extends PureComponent {
                 </nav>
               </HigherOrder.RequireRole>
             </div>}
-        <CommentContainer.Thread subject={annotation} />
+        {this.props.includeComments
+          ? <div>
+              <CommentContainer.Thread subject={annotation} />
+              <button className="comment-more">
+                <i className="manicon manicon-word-bubble-multiple" />
+                {`See all 36 replies`}
+              </button>
+            </div>
+          : null}
       </li>
     );
   }
 }
+
+//

@@ -193,5 +193,21 @@
 }
 
 .comment-more {
-  padding-top: 21px;
+  @include utilityPrimary;
+  @include buttonUnstyled;
+  display: block;
+  width: 100%;
+  padding-top: 13px;
+  margin-top: 45px;
+  font-size: 15px;
+  color: $accentPrimaryDark;
+  text-align: left;
+  border-top: 1px solid $neutral20;
+
+  .manicon {
+    margin-right: 12px;
+    font-size: 2.267em;
+    color: $neutral40;
+    vertical-align: middle;
+  }
 }

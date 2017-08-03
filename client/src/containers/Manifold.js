@@ -89,7 +89,7 @@ class ManifoldContainer extends PureComponent {
     if (this.receivedGaTrackingId(nextProps.settings) && !this.gaInitialized) {
       ReactGA.initialize(nextProps.settings.attributes.general.gaTrackingId);
       this.gaInitialized = true;
-      nextProps.gaInitCallback();
+      if (nextProps.gaInitCallback) nextProps.gaInitCallback();
     }
     if (this.routeChanged(this.props.location, nextProps.location)) {
       this.props.dispatch(routingActions.update());

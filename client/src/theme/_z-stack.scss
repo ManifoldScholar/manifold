@@ -47,6 +47,14 @@
   }
 }
 
+.overlay-full-bar {
+  z-index: 300;
+}
+
+.overlay-full-header {
+  z-index: 350;
+}
+
 .footer-fixed {
   z-index: 200;
 }

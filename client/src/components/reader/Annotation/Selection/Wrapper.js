@@ -19,11 +19,13 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     annotating: PropTypes.bool,
     closeDrawer: PropTypes.func,
     truncate: PropTypes.number,
-    showLogin: PropTypes.func
+    showLogin: PropTypes.func,
+    includeEditor: PropTypes.bool.isRequired
   };
 
   static defaultProps = {
-    closeOnSave: true
+    closeOnSave: true,
+    includeEditor: true
   };
 
   constructor(props) {
@@ -77,21 +79,28 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             <i className="manicon manicon-quote" />
             {this.maybeTruncateSelection()}
           </div>
-          <HigherOrder.RequireRole requiredRole="any">
-            {this.state.editorOpen
-              ? null
-              : <button
+          {this.props.includeEditor
+            ? <HigherOrder.RequireRole requiredRole="any">
+                {this.state.editorOpen
+                  ? null
+                  : <button
+                      className="annotate-button"
+                      onClick={this.handleOpenEditor}
+                    >
+                      Annotate
+                    </button>}
+              </HigherOrder.RequireRole>
+            : null}
+          {this.props.includeEditor
+            ? <HigherOrder.RequireRole requiredRole="none">
+                <button
                   className="annotate-button"
-                  onClick={this.handleOpenEditor}
+                  onClick={this.props.showLogin}
                 >
-                  Annotate
-                </button>}
-          </HigherOrder.RequireRole>
-          <HigherOrder.RequireRole requiredRole="none">
-            <button className="annotate-button" onClick={this.props.showLogin}>
-              {"Login to annotate"}
-            </button>
-          </HigherOrder.RequireRole>
+                  {"Login to annotate"}
+                </button>
+              </HigherOrder.RequireRole>
+            : null}
         </div>
         {this.state.editorOpen
           ? <Editor {...this.props} cancel={cancelFunction} />

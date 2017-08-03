@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Overlay component renders correctly 1`] = `
+<div>
+  <header
+    className="overlay-full-header"
+  >
+    <button
+      className="overlay-close"
+      data-id="overlay-close"
+      onClick={[Function]}
+    >
+      Close
+      <i
+        className="manicon manicon-x"
+      />
+    </button>
+  </header>
+  <div
+    className="overlay-full"
+  >
+    <div
+      className="container"
+      style={
+        Object {
+          "maxWidth": undefined,
+        }
+      }
+    >
+      <div>
+        Test me
+      </div>
+    </div>
+  </div>
+</div>
+`;

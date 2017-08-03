@@ -1,0 +1,56 @@
+.annotation-highlight-detail {
+  @include drawerPadding(padding-right);
+  @include drawerPadding(padding-left);
+  padding-top: 30px;
+  padding-bottom: 27px;
+  background-color: $neutralOffWhite;
+
+  @include respond($break75) {
+    padding-top: 47px;
+    padding-bottom: 43px;
+  }
+
+  .annotation-selection {
+    @include templateHead;
+    width: 100%;
+    font-size: 18px;
+    font-weight: $light;
+    line-height: 1.9;
+    letter-spacing: 0.01em;
+    background-color: $sp20PrimaryPale;
+    transition: background-color $duration $timing;
+
+    @include respond($break65) {
+      font-size: 20px;
+    }
+
+    &:hover {
+      background-color: $sp20PrimaryLight;
+    }
+  }
+
+  .utility {
+    padding-top: 25px;
+
+    ul {
+      @include listHorizontal;
+      li {
+        + li {
+          margin-left: 1.571em;
+        }
+      }
+
+      a, button {
+        @include buttonUnstyled;
+        @include utilityPrimary;
+        font-size: 14px;
+        color: $neutral40;
+        transition: color $duration $timing;
+
+        &:hover, &.active {
+          color: $accentPrimaryDark;
+        }
+      }
+    }
+  }
+}
