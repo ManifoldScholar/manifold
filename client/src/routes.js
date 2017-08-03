@@ -347,13 +347,6 @@ export default () => {
               helper: () => "/backend/settings/theme"
             },
             {
-              name: "backendSettingsFeatures",
-              exact: true,
-              component: Backend.Settings.Features,
-              path: "/backend/settings/features",
-              helper: () => "/backend/settings/features"
-            },
-            {
               name: "backendSettingsIntegrations",
               exact: true,
               component: Backend.Settings.Integrations,
