@@ -15,5 +15,15 @@ export default {
         body: JSON.stringify({ data: { type: "user", attributes: me } })
       }
     };
+  },
+
+  annotations(filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/me/relationships/annotations`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
   }
 };

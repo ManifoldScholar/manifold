@@ -1,0 +1,36 @@
+.overlay-full-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  // Height is declared statically to make room for
+  // absolutely positioned close button even if there is no title
+  min-height: 60px;
+  background-color: $neutral05;
+
+  .container {
+    text-align: center;
+  }
+
+  .overlay-title {
+    @include templateHead;
+    padding: 0.85em 0;
+    margin: 0;
+    font-size: 22px;
+    font-weight: $medium;
+    color: $neutral75;
+  }
+
+  .overlay-close {
+    @include buttonClose;
+    position: absolute;
+    top: 50%;
+    right: 17px;
+    margin-top: -16px;
+    color: $neutral75;
+
+    @include respond($break65) {
+      font-size: 17px;
+    }
+  }
+}
