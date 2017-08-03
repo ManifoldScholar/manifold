@@ -77,7 +77,7 @@ exports[`Frontend Home Container renders correctly 1`] = `
               onClick={[Function]}
             >
               <div
-                className="figure-wrapper figure-wrapper-placeholder"
+                className="figure-wrapper"
               >
                 <figure>
                   <div
@@ -130,7 +130,7 @@ exports[`Frontend Home Container renders correctly 1`] = `
               onClick={[Function]}
             >
               <div
-                className="figure-wrapper figure-wrapper-placeholder"
+                className="figure-wrapper"
               >
                 <figure>
                   <div

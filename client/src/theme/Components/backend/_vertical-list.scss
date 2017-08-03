@@ -211,7 +211,9 @@
       @include templateHead;
       margin: 0;
       font-size: 16px;
+      line-height: 21px;
       letter-spacing: 0.015em;
+      white-space: nowrap;
       transition: color $duration $timing;
 
       @include respond($break80) {
@@ -225,6 +227,25 @@
           font-size: 22px;
         }
       }
+
+      .title-text {
+        margin-right: 9px;
+      }
+
+      .title-text, .subtitle {
+        white-space: normal;
+      }
+
+      .block-label {
+        @include blockLabel;
+        position: relative;
+        display: inline;
+        padding: 0.333em 5px;
+        font-size: 9px;
+        color: $neutral85;
+        vertical-align: middle;
+        background-color: $neutral30;
+      }
     }
 
     .subtitle {
@@ -234,6 +255,7 @@
       color: $neutral50;
       transition: color $duration $timing;
     }
+
 
     .relations-list {
       @include templateCopy;

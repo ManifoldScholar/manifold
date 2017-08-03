@@ -84,7 +84,11 @@ exports[`Backend.Project.ListItem component renders correctly 1`] = `
         <h3
           className="name"
         >
-          Rowan Test
+          <span
+            className="title-text"
+          >
+            Rowan Test
+          </span>
           <span
             className="subtitle"
           >
