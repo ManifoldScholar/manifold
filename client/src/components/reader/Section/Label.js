@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 export default class Label extends PureComponent {
   static propTypes = {
-    text: PropTypes.object.isRequired
+    label: PropTypes.string.isRequired
   };
 
   constructor() {
@@ -34,18 +34,7 @@ export default class Label extends PureComponent {
     });
   }
 
-  isPublished() {
-    return this.props.text.attributes.published;
-  }
-
-  category() {
-    return this.props.text.relationships.category;
-  }
-
   render() {
-    if (this.isPublished()) return null;
-    if (!this.category()) return null;
-
     const hidden = !this.state.fixed;
     const fixedLabelClass = classNames("section-category-label", "fixed", {
       hidden
@@ -56,7 +45,7 @@ export default class Label extends PureComponent {
         <div className={fixedLabelClass}>
           <div className="container">
             <div className="label">
-              {this.category().attributes.title}
+              {this.props.label}
             </div>
           </div>
         </div>
@@ -68,7 +57,7 @@ export default class Label extends PureComponent {
         >
           <div className="container">
             <div className="label">
-              {this.category().attributes.title}
+              {this.props.label}
             </div>
           </div>
         </div>

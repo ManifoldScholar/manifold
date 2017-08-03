@@ -105,9 +105,17 @@ export class SectionContainer extends Component {
     return false;
   }
 
+  showLabel() {
+    const text = this.props.text;
+    return (
+      !text.attributes.published && text.relationships.category.attributes.title
+    );
+  }
+
   render() {
     if (!this.props.section || !this.props.text) return null;
-    const project = this.props.text.relationships.project;
+    const text = this.props.text;
+    const project = text.relationships.project;
     const projectImage = project
       ? project.attributes.avatarStyles.mediumSquare
       : null;
@@ -116,8 +124,8 @@ export class SectionContainer extends Component {
     return (
       <div>
         <HeadContent
-          title={`Manifold Scholarship | ${this.props.text.attributes
-            .title} | ${this.props.section.attributes.name}`}
+          title={`Manifold Scholarship | ${text.attributes.title} | ${this.props
+            .section.attributes.name}`}
           image={projectImage}
           description={projectDesc}
         />
@@ -125,18 +133,22 @@ export class SectionContainer extends Component {
         <Section.Text {...this.props} />
         <div>
           <Section.NextSection
-            sectionsMap={this.props.text.attributes.sectionsMap}
-            textId={this.props.text.id}
+            sectionsMap={text.attributes.sectionsMap}
+            textId={text.id}
             sectionId={this.props.section.id}
             typography={this.props.appearance.typography}
           />
           <Section.Pagination
-            textId={this.props.text.id}
+            textId={text.id}
             sectionId={this.props.section.id}
-            spine={this.props.text.attributes.spine}
+            spine={text.attributes.spine}
           />
         </div>
-        <Section.Label text={this.props.text} />
+        {this.showLabel()
+          ? <Section.Label
+              label={text.relationships.category.attributes.title}
+            />
+          : null}
       </div>
     );
   }

@@ -20,8 +20,8 @@ module DynamicMailer
 
     private
 
+    # rubocop:disable Metrics/LineLength, Metrics/MethodLength
     def handle_exception(e)
-      # rubocop:disable Metrics/LineLength
       msg =
         case e.class.name
         when "Net::SMTPAuthenticationError"
@@ -37,9 +37,9 @@ module DynamicMailer
            \"#{e.class.name}.\" The message was \"#{e.message}.\" Double check your
           configuration."
         end
-      # rubocop:enable Metrics/LineLength
       raise ApiExceptions::StandardError, msg
     end
+    # rubocop:enable Metrics/LineLength, Metrics/MethodLength
 
     def add_defaults!(mail)
       mail.from = @config.from unless mail.from
