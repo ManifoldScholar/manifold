@@ -4,13 +4,14 @@ const initialState = {
 };
 
 const addNotification = (state, action) => {
-  const index = state.notifications.findIndex(n => n.id === action.payload.id);
+  const notifications = state.notifications.slice(0);
+  const index = notifications.findIndex(n => n.id === action.payload.id);
   if (index >= 0) {
-    const notifications = state.notifications.slice(0);
     notifications[index] = action.payload;
     return Object.assign({}, state, { notifications });
   }
-  return Object.assign({}, state, state.notifications.unshift(action.payload));
+  notifications.unshift(action.payload);
+  return Object.assign({}, state, { notifications });
 };
 
 const setFatalError = (state, action) => {
