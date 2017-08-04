@@ -26,7 +26,7 @@ module Api
         @stylesheet.save
         render_single_resource(
           @stylesheet,
-          serializer: StylesheetSerializer,
+          serializer: set_serializer,
           location: location(@stylesheet)
         )
       end
@@ -36,7 +36,7 @@ module Api
         ::Updaters::Stylesheet.new(stylesheet_params).update(@stylesheet)
         render_single_resource(
           @stylesheet,
-          serializer: @stylesheet.valid? ? StylesheetSerializer : error_serializer,
+          serializer: set_serializer,
           location: location(@stylesheet)
         )
       end
@@ -55,6 +55,11 @@ module Api
 
       def set_text
         @text = Text.friendly.find(params[:text_id]) if params[:text_id]
+      end
+
+      def set_serializer
+        return error_serializer unless @stylesheet.valid?
+        StylesheetSerializer
       end
 
     end
