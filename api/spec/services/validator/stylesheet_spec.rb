@@ -241,6 +241,26 @@ RSpec.describe Validator::Stylesheet do
     end
   end
 
+  it "strips 400 font weights" do
+    invalid = "#{scope_selector} span { font-weight: 400 }"
+    valid = "#{scope_selector} span { }"
+    results = validator.validate(invalid)
+    expect(results).to eq_ignoring_whitespace valid
+  end
+
+  it "strips normal font weights" do
+    invalid = "#{scope_selector} span { font-weight: normal }"
+    valid = "#{scope_selector} span { }"
+    results = validator.validate(invalid)
+    expect(results).to eq_ignoring_whitespace valid
+  end
+
+  it "only strips normal values when the property is font-weight" do
+    valid = "#{scope_selector} span { display: normal; }"
+    results = validator.validate(valid)
+    expect(results).to eq_ignoring_whitespace valid
+  end
+
   it "creates a dark style for grayscale values" do
     selector = "p { color: #000000 }"
     valid = "#{scope_selector} p { color: #000000; }"
