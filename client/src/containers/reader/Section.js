@@ -7,6 +7,7 @@ import { grab, isEntityLoaded } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
 import uniq from "lodash/uniq";
 import difference from "lodash/difference";
+import get from "lodash/get";
 import { renderRoutes } from "helpers/routing";
 import { HeadContent } from "components/global";
 
@@ -107,9 +108,9 @@ export class SectionContainer extends Component {
 
   showLabel() {
     const text = this.props.text;
-    return (
-      !text.attributes.published && text.relationships.category.attributes.title
-    );
+    if (text.attributes.published) return false;
+    if (get(text, "relationships.category.attributes.title")) return true;
+    return false;
   }
 
   render() {
@@ -146,7 +147,7 @@ export class SectionContainer extends Component {
         </div>
         {this.showLabel()
           ? <Section.Label
-              label={text.relationships.category.attributes.title}
+              label={get(text, "relationships.category.attributes.title")}
             />
           : null}
       </div>
