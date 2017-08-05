@@ -6,7 +6,7 @@
     @include clearfix;
   }
 
-  .overlay-full-secondary & {
+  .overlay-full & {
     padding-top: 70px;
 
     @include respond($break70) {

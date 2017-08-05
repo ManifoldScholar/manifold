@@ -30,7 +30,7 @@ export default class ResourceOverlay extends PureComponent {
     );
 
     return (
-      <div className="overlay-full-secondary bg-neutral90">
+      <div className="overlay-full bg-neutral90">
         <div onClick={this.handleClose} className="overlay-close">
           Close
           <i className="manicon manicon-x" />

@@ -12,6 +12,7 @@ export default class Overlay extends Component {
     icon: PropTypes.string,
     closeUrl: PropTypes.string,
     closeCallback: PropTypes.func,
+    contentWidth: PropTypes.number,
     appearance: PropTypes.string
   };
 
@@ -34,9 +35,7 @@ export default class Overlay extends Component {
   };
 
   overlayClass() {
-    return this.props.appearance
-      ? this.props.appearance
-      : "overlay-full-secondary";
+    return this.props.appearance ? this.props.appearance : "overlay-full";
   }
 
   renderChildren() {
@@ -69,7 +68,10 @@ export default class Overlay extends Component {
             </button>
           </header>
           <div className={this.overlayClass()}>
-            <div className="container">
+            <div
+              style={{ maxWidth: this.props.contentWidth }}
+              className="container"
+            >
               {this.renderChildren()}
             </div>
           </div>

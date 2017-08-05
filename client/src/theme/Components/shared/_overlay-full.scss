@@ -1,27 +1,20 @@
-.overlay-full-secondary {
+.overlay-full {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   padding-bottom: 100px;
-  overflow: scroll;
+  overflow: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 
-  &.text-child-enter {
-    opacity: 0.01;
+  // Background default
+  &:not([class*="bg-"]) {
+    background-color: $neutralWhite;
   }
 
-  &.text-child-enter-active {
-    opacity: 1;
-    transition: opacity, $duration, $timing, 0.3s;
-  }
-
-  &.text-child-leave {
-    opacity: 1;
-  }
-
-  &.text-child-leave-active {
-    opacity: 0.01;
-    transition: opacity, $duration, $timing;
+  .overlay-full-header + & {
+    padding-top: 135px;
   }
 
   // Button

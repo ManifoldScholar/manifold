@@ -164,8 +164,8 @@ export class ReaderContainer extends Component {
     return (
       <Overlay
         closeCallback={this.props.history.goBack}
-        appearance={"overlay-full-bar"}
         title={"Your Highlights + Annotations"}
+        contentWidth={850}
       >
         <Annotation.MineForText text={this.props.text} />
       </Overlay>

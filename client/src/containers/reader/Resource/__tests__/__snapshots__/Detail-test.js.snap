@@ -2,7 +2,7 @@
 
 exports[`Reader Resource Detail Container renders correctly 1`] = `
 <div
-  className="overlay-full-secondary bg-neutral90"
+  className="overlay-full bg-neutral90"
 >
   <div
     className="overlay-close"
