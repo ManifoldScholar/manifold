@@ -14,10 +14,12 @@ export default class Overlay extends Component {
     dispatch: PropTypes.func
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      view: null
+      view: props.authentication.authenticated
+        ? "account-update"
+        : "account-login"
     };
     this.updateView = this.updateView.bind(this);
     this.childProps = this.childProps.bind(this);
@@ -28,7 +30,9 @@ export default class Overlay extends Component {
       this.props.authentication.authenticated === false &&
       nextProps.authentication.authenticated === true
     ) {
-      this.props.hideSignInUpOverlay();
+      if (this.state.view !== "account-create-update") {
+        this.props.hideSignInUpOverlay();
+      }
     }
   }
 
@@ -39,22 +43,7 @@ export default class Overlay extends Component {
 
   childProps() {
     return {
-      updateView: this.updateView,
-      showLogin: e => {
-        this.updateView("account-login", e);
-      },
-      showCreate: e => {
-        this.updateView("account-create", e);
-      },
-      showForgot: e => {
-        this.updateView("account-password-forgot", e);
-      },
-      showReset: e => {
-        this.updateView("account-password-reset", e);
-      },
-      showCreateUpdate: e => {
-        this.updateView("account-create-update", e);
-      },
+      handleViewChange: this.updateView,
       dispatch: this.props.dispatch,
       hideSignInUpOverlay: this.props.hideSignInUpOverlay,
       authentication: this.props.authentication
@@ -81,11 +70,7 @@ export default class Overlay extends Component {
         child = <Login {...childProps} />;
         break;
       default:
-        if (this.props.authentication.authenticated) {
-          child = <Update {...childProps} />;
-        } else {
-          child = <Login {...childProps} />;
-        }
+        child = null;
         break;
     }
     return child;

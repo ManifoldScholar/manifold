@@ -9,15 +9,13 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 describe("Global.SignInUp.PasswordForgot component", () => {
   const store = build.store();
 
-  const showCreate = jest.fn();
-  const showLogin = jest.fn();
+  const handleViewChange = jest.fn();
 
   const root = wrapWithRouter(
     <Provider store={store}>
       <PasswordForgot
         dispatch={store.dispatch}
-        showCreate={showCreate}
-        showLogin={showLogin}
+        handleViewChange={handleViewChange}
       />
     </Provider>
   );
@@ -28,17 +26,17 @@ describe("Global.SignInUp.PasswordForgot component", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("should trigger showLogin callback when show login is clicked", () => {
+  it("should trigger handleViewChange callback when show login is clicked", () => {
     const wrapper = mount(root);
-    showLogin.mockClear();
+    handleViewChange.mockClear();
     wrapper.find('[data-id="show-login"]').first().simulate("click");
-    expect(showLogin).toHaveBeenCalled();
+    expect(handleViewChange).toHaveBeenCalled();
   });
 
-  it("should trigger showCreate callback when show create is clicked", () => {
+  it("should trigger handleViewChange callback when show create is clicked", () => {
     const wrapper = mount(root);
-    showCreate.mockClear();
+    handleViewChange.mockClear();
     wrapper.find('[data-id="show-create"]').first().simulate("click");
-    expect(showCreate).toHaveBeenCalled();
+    expect(handleViewChange).toHaveBeenCalled();
   });
 });

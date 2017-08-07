@@ -15,8 +15,7 @@ class CreateContainer extends Component {
     response: PropTypes.object,
     user: PropTypes.object,
     authentication: PropTypes.object,
-    showLogin: PropTypes.func.isRequired,
-    showCreateUpdate: PropTypes.func.isRequired
+    handleViewChange: PropTypes.func.isRequired
   };
 
   static mapStateToProps = state => {
@@ -47,9 +46,6 @@ class CreateContainer extends Component {
     if (nextProps.user && !this.props.user) {
       this.authenticateUser();
     }
-    if (nextProps.authentication.authenticated) {
-      this.props.showCreateUpdate();
-    }
   }
 
   componentWillUnmount() {
@@ -69,12 +65,16 @@ class CreateContainer extends Component {
 
   createUser(event) {
     event.preventDefault(event.target);
-    this.props.dispatch(
-      request(
-        usersAPI.create({ attributes: this.state.user }),
-        requests.gCreateUser
+    this.props
+      .dispatch(
+        request(
+          usersAPI.create({ attributes: this.state.user }),
+          requests.gCreateUser
+        )
       )
-    );
+      .promise.then(() => {
+        this.props.handleViewChange("account-create-update");
+      });
   }
 
   handleInputChange(event) {
@@ -200,7 +200,12 @@ class CreateContainer extends Component {
           }
         </p>
         <p className="login-links">
-          <a href="#" onClick={this.props.showLogin} data-id="show-login">
+          <a
+            href="#"
+            onClick={event =>
+              this.props.handleViewChange("account-login", event)}
+            data-id="show-login"
+          >
             {"Already have an account?"}
           </a>
         </p>

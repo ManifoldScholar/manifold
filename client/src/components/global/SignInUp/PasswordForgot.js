@@ -13,8 +13,7 @@ class PasswordForgotContainer extends Component {
   static displayName = "PasswordForgotContainer";
 
   static propTypes = {
-    showLogin: PropTypes.func.isRequired,
-    showCreate: PropTypes.func.isRequired,
+    handleViewChange: PropTypes.func.isRequired,
     hideSignInUpOverlay: PropTypes.func,
     dispatch: PropTypes.func,
     response: PropTypes.object
@@ -137,10 +136,20 @@ class PasswordForgotContainer extends Component {
           </div>
         </form>
         <p className="login-links">
-          <a href="#" onClick={this.props.showLogin} data-id="show-login">
+          <a
+            href="#"
+            onClick={event =>
+              this.props.handleViewChange("account-login", event)}
+            data-id="show-login"
+          >
             {"Remember your password?"}
           </a>
-          <a href="#" onClick={this.props.showCreate} data-id="show-create">
+          <a
+            href="#"
+            onClick={event =>
+              this.props.handleViewChange("account-create", event)}
+            data-id="show-create"
+          >
             {"Need to sign up?"}
           </a>
         </p>

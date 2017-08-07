@@ -10,8 +10,7 @@ import { SignInUp } from "components/global";
 export default class Login extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    showForgot: PropTypes.func.isRequired,
-    showCreate: PropTypes.func.isRequired,
+    handleViewChange: PropTypes.func.isRequired,
     authentication: PropTypes.shape({
       currentUser: PropTypes.object
     }),
@@ -110,10 +109,20 @@ export default class Login extends Component {
           </div>
         </form>
         <p className="login-links">
-          <a href="#" onClick={this.props.showForgot} data-id="show-forgot">
+          <a
+            href="#"
+            onClick={event =>
+              this.props.handleViewChange("account-password-forgot", event)}
+            data-id="show-forgot"
+          >
             {"Forgot your password?"}
           </a>
-          <a href="#" onClick={this.props.showCreate} data-id="show-create">
+          <a
+            href="#"
+            onClick={event =>
+              this.props.handleViewChange("account-create", event)}
+            data-id="show-create"
+          >
             {"Need to sign up?"}
           </a>
         </p>

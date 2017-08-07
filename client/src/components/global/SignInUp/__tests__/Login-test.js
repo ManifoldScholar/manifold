@@ -8,18 +8,14 @@ import { Provider } from "react-redux";
 describe("Global.SignInUp.Login component", () => {
   const store = build.store();
 
-  const showForgot = jest.fn();
-  const showLogin = jest.fn();
-  const showCreate = jest.fn();
+  const handleViewChange = jest.fn();
   const user = build.entity.user("1");
 
   const root = (
     <Provider store={store}>
       <Login
         dispatch={store.dispatch}
-        showForgot={showForgot}
-        showLogin={showLogin}
-        showCreate={showCreate}
+        handleViewChange={handleViewChange}
         user={user}
         authentication={{
           currentUser: user
@@ -34,17 +30,17 @@ describe("Global.SignInUp.Login component", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("should trigger showForgot callback when show forgot is clicked", () => {
+  it("should trigger handleViewChange callback when show forgot is clicked", () => {
     const wrapper = mount(root);
-    showForgot.mockClear();
+    handleViewChange.mockClear();
     wrapper.find('[data-id="show-forgot"]').first().simulate("click");
-    expect(showForgot).toHaveBeenCalled();
+    expect(handleViewChange).toHaveBeenCalled();
   });
 
-  it("should trigger showCreate callback when show create is clicked", () => {
+  it("should trigger handleViewChange callback when show create is clicked", () => {
     const wrapper = mount(root);
-    showCreate.mockClear();
+    handleViewChange.mockClear();
     wrapper.find('[data-id="show-create"]').first().simulate("click");
-    expect(showCreate).toHaveBeenCalled();
+    expect(handleViewChange).toHaveBeenCalled();
   });
 });
