@@ -9,18 +9,14 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 describe("Global.SignInUp.Create component", () => {
   const store = build.store();
 
-  const showForgot = jest.fn();
-  const showLogin = jest.fn();
-  const showCreateUpdate = jest.fn();
+  const handleViewChange = jest.fn();
   const user = build.entity.user("1");
 
   const root = wrapWithRouter(
     <Provider store={store}>
       <Create
         dispatch={store.dispatch}
-        showForgot={showForgot}
-        showLogin={showLogin}
-        showCreateUpdate={showCreateUpdate}
+        handleViewChange={handleViewChange}
         user={user}
       />
     </Provider>
@@ -32,10 +28,10 @@ describe("Global.SignInUp.Create component", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("should trigger showLogin callback when show login is clicked", () => {
+  it("should trigger handleViewChange callback when show login is clicked", () => {
     const wrapper = mount(wrapWithRouter(root));
-    showLogin.mockClear();
+    handleViewChange.mockClear();
     wrapper.find('[data-id="show-login"]').first().simulate("click");
-    expect(showLogin).toHaveBeenCalled();
+    expect(handleViewChange).toHaveBeenCalled();
   });
 });
