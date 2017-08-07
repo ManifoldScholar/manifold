@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import throttle from "lodash/throttle";
 import lh from "helpers/linkHandler";
 
 export default class LayoutButtonNavigation extends Component {
@@ -32,7 +33,18 @@ export default class LayoutButtonNavigation extends Component {
   }
 
   componentDidMount() {
+    this.throttledWidth = throttle(() => {
+      this.matchButtonWidths();
+    }, 200);
+    window.addEventListener("resize", this.throttledWidth);
+  }
+
+  componentDidUpdate() {
     this.matchButtonWidths();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.throttledWidth);
   }
 
   matchButtonWidths() {
