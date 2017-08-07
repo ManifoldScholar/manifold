@@ -165,7 +165,11 @@ export class FollowingContainer extends Component {
           />
           {this.renderFeaturedProjects()}
           {this.props.followedProjects && this.props.followedProjects.length > 0
-            ? <Layout.ButtonNavigation grayBg showFollowing={false} />
+            ? <Layout.ButtonNavigation
+                hideAtNarrow
+                grayBg
+                showFollowing={false}
+              />
             : null}
         </div>
       </HigherOrder.RequireRole>

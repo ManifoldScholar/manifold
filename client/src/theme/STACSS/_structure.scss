@@ -50,9 +50,14 @@
   @include hide($break60);
 }
 
+.show-50 {
+  @include show($break50);
+}
+
 .show-60 {
   @include show($break60);
 }
+
 
 .rel {
   position: relative;

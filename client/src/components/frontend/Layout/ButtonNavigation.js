@@ -19,6 +19,7 @@ export default class LayoutButtonNavigation extends Component {
     grayBg: PropTypes.bool,
     showBrowse: PropTypes.bool,
     showFollowing: PropTypes.bool,
+    hideAtNarrow: PropTypes.bool,
     authenticated: PropTypes.bool
   };
 
@@ -89,6 +90,7 @@ export default class LayoutButtonNavigation extends Component {
 
   render() {
     const sectionClass = classNames({
+      "show-50": this.props.hideAtNarrow === true,
       "bg-neutral05": this.props.grayBg === true
     });
 
