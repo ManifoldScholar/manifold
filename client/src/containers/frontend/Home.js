@@ -231,6 +231,7 @@ export class HomeContainer extends Component {
           </div>
         </section>
         <Layout.ButtonNavigation
+          hideAtNarrow
           grayBg={false}
           showBrowse={false}
           authenticated={this.props.authentication.authenticated}

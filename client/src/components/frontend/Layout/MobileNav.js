@@ -11,11 +11,24 @@ export default class MobileNav extends Component {
     location: PropTypes.object
   };
 
+  getActiveLink(props) {
+    const path = props.location.pathname;
+    let out = null;
+    switch (path) {
+      case lh.link("frontend"):
+        out = "browse";
+        break;
+      case lh.link("frontendFollowing"):
+        out = "following";
+        break;
+      default:
+        break;
+    }
+    return out;
+  }
+
   render() {
-    const path = this.props.location.pathname;
-    const active = startsWith(path, lh.link("frontendFollowing"))
-      ? "following"
-      : "browse";
+    const active = this.getActiveLink(this.props);
 
     return (
       <nav className="footer-fixed">

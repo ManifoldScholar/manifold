@@ -227,7 +227,7 @@ exports[`Frontend Home Container renders correctly 1`] = `
     </div>
   </section>
   <section
-    className=""
+    className="show-50"
   >
     <div
       className="container"
