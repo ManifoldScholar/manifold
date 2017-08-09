@@ -1,11 +1,17 @@
 .project-detail-hero {
   position: relative;
-  background-color: $neutral05;
+  color: $neutralWhite;
+  background-color: $neutral90;
 
   .container {
     @include clearfix;
-    padding-top: 61px;
-    padding-bottom: 66px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+
+    @include respond($break50) {
+      padding-top: 61px;
+      padding-bottom: 42px;
+    }
   }
 
   // When a hero image is present, set background properties and an overlay
@@ -21,27 +27,25 @@
       display: block;
       width: 100%;
       height: 100%;
-      background-color: transparentize($neutral100, 0.3);
+      background-color: transparentize($neutralBlack, 0.3);
       content: '';
     }
+  }
 
-    .project-info {
-      color: $neutralWhite;
-
-      .maker-avatar figcaption, .project-title, .project-title .subtitle, .project-summary {
-        color: $neutralWhite;
-      }
-    }
-
-    .project-figure {
-      .maker-avatar figcaption, .project-title, .project-title .subtitle {
-        color: $neutralWhite;
-      }
-    }
-
-    .button-tagged, .button-tagged .tag {
-      color: $neutralWhite;
-      border-color: $neutralWhite;
+  // Shared project hero styles
+  // --------------------------------------------------------
+  .project-title {
+    .block-label {
+      @include blockLabel;
+      position: relative;
+      top: -0.272em;
+      display: inline;
+      padding: 0.2em 7px 0.25em;
+      font-size: 11px;
+      line-height: inherit;
+      color: $neutral85;
+      vertical-align: middle;
+      background-color: $neutralWhite;
     }
   }
 
@@ -60,11 +64,6 @@
     .no-image {
       @include buttonAvatar(42, $neutral40, $neutral20);
       border: 2px solid $neutralWhite;
-
-      @include respond($break60) {
-        @include buttonAvatar(50, $neutral40, $neutral20);
-        border: 2px solid $neutralWhite;
-      }
     }
 
     // NB: This needs to be browser tested heavily before settling on this rounding method
@@ -74,10 +73,6 @@
       height: auto;
       border: 2px solid $neutralWhite;
       border-radius: 100%;
-
-      @include respond($break60) {
-        width: 50px;
-      }
     }
 
     figcaption {
@@ -88,11 +83,81 @@
       vertical-align: middle;
 
       @include respond($break60) {
-        font-size: 20px;
+        font-size: 21px;
+      }
+    }
+  }
+
+  .project-creator-avatars {
+    // Account for bottom spacing of last avatar
+    margin-bottom: -8px;
+
+    + .project-contributor-list {
+      margin-top: 10px;
+    }
+  }
+
+  .project-creator-list {
+    @include respond($break60) {
+      margin-top: -5px;
+    }
+
+    ul {
+      @include listUnstyled;
+      @include templateCopy;
+      font-size: 19px;
+      line-height: 1.419;
+      letter-spacing: 0.01em;
+
+      @include respond($break60) {
+        font-size: 21px;
+      }
+    }
+
+    li {
+      display: inline;
+
+      &::after {
+        content: ', ';
       }
 
-      @include respond($break75) {
-        display: block;
+      &:last-child::after {
+        display: none;
+      }
+    }
+
+    + .project-contributor-list {
+      margin-top: 7px;
+    }
+  }
+
+  .project-contributor-list {
+    @include templateCopy;
+    font-size: 16px;
+    line-height: 1.395;
+
+    @include respond($break60) {
+      font-size: 19px;
+    }
+
+    .label {
+      font-style: italic;
+    }
+
+    ul {
+      @include listUnstyled;
+      display: inline;
+    }
+
+    li {
+      display: inline;
+
+      &::after {
+        content: ', ';
+      }
+
+      &:last-child::after {
+        display: none;
       }
     }
   }
@@ -107,7 +172,7 @@
       display: none;
     }
 
-    .project-makers {
+    .project-creator-avatars {
       margin-bottom: 22px;
     }
 
@@ -127,7 +192,7 @@
         width: 25%;
       }
 
-      + .project-title {
+      + .project-figure-caption {
         padding-left: 18px;
 
         @include respond($break40) {
@@ -141,23 +206,44 @@
       }
     }
 
-    .project-title {
-      @include templateHead;
+    .project-figure-caption {
       float: left;
       width: calc(100% - 80px);
-      margin-top: 0;
-      font-size: 20px;
-      font-weight: $semibold;
-      color: $neutral75;
 
       @include respond($break40) {
         width: 75%;
+      }
+    }
+
+    .project-title {
+      @include templateHead;
+      margin-top: 0;
+      font-size: 20px;
+      font-weight: $semibold;
+
+      @include respond($break60) {
+        font-size: 26px;
+      }
+
+      .title-text {
+        margin-right: 12px;
+      }
+
+      .block-label {
+        padding: 0.25em 6px;
+        font-size: 10px;
       }
 
       .subtitle {
         @include subtitlePrimary;
         display: block;
-        color: $neutral75;
+        // Size relative to font
+        margin-top: 0.682em;
+        font-size: 17px;
+
+        @include respond($break60) {
+          font-size: 19px;
+        }
       }
     }
   }
@@ -167,7 +253,6 @@
   .project-info {
     position: relative;
     padding-top: 20px;
-    color: $neutral75;
 
     @include respond($break60) {
       padding-top: 26px;
@@ -180,7 +265,7 @@
       padding-right: 12%;
     }
 
-    .project-makers {
+    .project-creator-avatars {
       display: none;
 
       @include respond($break75) {
@@ -193,6 +278,22 @@
       }
     }
 
+    .project-creator-list {
+      display: none;
+
+      @include respond($break75) {
+        display: block;
+      }
+    }
+
+    .project-contributor-list {
+      display: none;
+
+      @include respond($break75) {
+        display: block;
+      }
+    }
+
     .maker-avatar {
       display: inline-block;
       margin-right: 20px;
@@ -202,41 +303,53 @@
     .project-title {
       @include templateHead;
       display: none;
-      margin-top: 0;
+      margin-top: -0.29em;
+      margin-bottom: 1.06em;
       font-size: 20px;
       font-weight: $semibold;
-      color: $neutral75;
+      line-height: 1.273;
 
       @include respond($break40) {
-        font-size: 24px;
+        font-size: 26px;
       }
 
       @include respond($break60) {
-        font-size: 28px;
+        font-size: 33px;
       }
 
       @include respond($break75) {
         display: block;
+      }
+
+      .title-text {
+        margin-right: 14px;
       }
 
       .subtitle {
         @include subtitlePrimary;
         display: block;
         // Size relative to font
-        margin-top: 0.682em;
+        margin-top: 0.5em;
         font-size: 22px;
-        color: $neutral75;
       }
     }
 
     // Summary content defaults
     .project-summary {
       @include templateCopy;
+      padding-top: 0.739em;
+      margin-top: 20px;
       // Relative to font-size
-      line-height: 1.611;
+      font-size: 16px;
+      line-height: 1.395;
+      border-top: 1px solid $neutralWhite;
+
+      @include respond($break65) {
+        font-size: 19px;
+      }
 
       @include respond($break75) {
-        margin-top: 30px;
+        margin-top: 72px;
       }
 
       p {
@@ -261,7 +374,7 @@
         display: none;
 
         @include respond($break75) {
-          display: inline-block;
+          display: flex;
         }
       }
 
@@ -273,8 +386,17 @@
     .button-secondary {
       display: block;
 
+      @include respond($break75) {
+        display: inline-block;
+      }
+
       + .button-secondary {
         margin-top: 14px;
+
+        @include respond($break75) {
+          margin-top: 0;
+          margin-left: 14px;
+        }
       }
     }
 
@@ -290,16 +412,10 @@
   // Project Social
   // --------------------------
   .project-social {
-    margin-top: 20px;
+    margin-top: 33px;
 
-    .hashtag {
-      @include templateHead;
-      font-size: 17px;
-      font-weight: $semibold;
-
-      + .networks {
-        margin-top: 17px;
-      }
+    @include respond($break75) {
+      margin-top: 86px;
     }
 
     .networks ul {
@@ -330,6 +446,17 @@
         }
       }
     }
+
+    .networks + .hashtag {
+      margin-top: 23px;
+    }
+
+    .hashtag {
+      @include templateHead;
+      display: block;
+      font-size: 20px;
+      font-weight: $semibold;
+    }
   }
 
   // Project Image
@@ -350,7 +477,7 @@
     }
 
     .button-tagged {
-      margin-top: 8px;
+      margin-top: 14px;
     }
   }
 }

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.Project.Hero component renders correctly 1`] = `
-<section
-  className="project-detail-hero hero-image"
+<div
+  className="project-detail-hero"
   style={Object {}}
 >
   <div
@@ -12,16 +12,27 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
       className="project-figure"
     >
       
-      <h1
-        className="project-title"
+      <div
+        className="project-figure-caption"
       >
-        Rowan Test
-        <span
-          className="subtitle"
+        <h1
+          className="project-title"
         >
-          World's Greatest Dog
-        </span>
-      </h1>
+          <span
+            className="title-text"
+          >
+            Rowan Test
+          </span>
+          <span
+            className="subtitle"
+          >
+            World's Greatest Dog
+          </span>
+        </h1>
+        <section
+          className="project-maker"
+        />
+      </div>
     </div>
     <div
       className="project-info"
@@ -29,7 +40,11 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
       <h1
         className="project-title"
       >
-        Rowan Test
+        <span
+          className="title-text"
+        >
+          Rowan Test
+        </span>
         <span
           className="subtitle"
         >
@@ -37,18 +52,21 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
         </span>
       </h1>
       <section
+        className="project-maker"
+      />
+      <section
         className="project-social"
       >
-        <span
-          className="hashtag"
-        >
-          ##cute_dog
-        </span>
         <nav
           className="networks"
         >
           <ul />
         </nav>
+        <span
+          className="hashtag"
+        >
+          ##cute_dog
+        </span>
       </section>
     </div>
     <div
@@ -57,5 +75,5 @@ exports[`Frontend.Project.Hero component renders correctly 1`] = `
       
     </div>
   </div>
-</section>
+</div>
 `;

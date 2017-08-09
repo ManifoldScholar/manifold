@@ -366,19 +366,31 @@
 .button-tagged {
   @extend %button-secondary-prototype;
   display: table;
+  height: 46px;
   padding: 0;
-  font-size: 14px;
-  color: $neutral50;
-  background-color: $neutral10;
+  font-size: 12px;
+  color: $neutralWhite;
+  background-color: $neutralWhite;
+
+  @include respond($break50) {
+    height: 54px;
+    padding: 0;
+    font-size: 13px;
+  }
 
   &.outline {
-    color: $neutral75;
     background: none;
-    border: 1px solid $neutral75;
+    border: 1px solid $neutralWhite;
 
     .tag {
+      font-size: 16px;
+      font-weight: $regular;
       background: none;
-      border-left: 1px solid $neutral75;
+      border-left: 1px solid $neutralWhite;
+
+      @include respond($break50) {
+        font-size: 18px;
+      }
     }
   }
 
@@ -389,11 +401,11 @@
   }
 
   .text {
-    padding: 10px 18px 12px;
+    padding: 0 18px;
   }
 
   .tag {
-    padding: 10px 12px 12px;
+    padding: 0 12px;
     font-size: 15px;
     letter-spacing: 0; // OD
     color: $neutralWhite;
