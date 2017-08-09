@@ -4,8 +4,11 @@ import { Maker } from "components/frontend";
 import { Helper } from "components/global";
 import { Link } from "react-router-dom";
 import has from "lodash/has";
+import some from "lodash/some";
+import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
+import classNames from "classnames";
 
 export default class ProjectHero extends Component {
   static displayName = "Project.Hero";
@@ -14,17 +17,72 @@ export default class ProjectHero extends Component {
     project: PropTypes.object
   };
 
-  listMakers() {
+  hasAvatars(creators, variant) {
+    return !some(creators, c => isEmpty(c.attributes.avatarStyles[variant]));
+  }
+
+  hasMakers(type) {
+    return !isEmpty(get(this.props.project, `relationships.${type}`));
+  }
+
+  listCreators() {
+    if (!this.hasMakers("creators")) return null;
     const creators = get(this.props.project, "relationships.creators");
-    if (creators && creators.length > 0) {
+
+    if (creators.length <= 2 && this.hasAvatars(creators, "smallSquare")) {
       return (
-        <section className="project-makers">
-          {this.props.project.relationships.creators.map(creator => {
+        <div className="project-creator-avatars">
+          {creators.map(creator => {
             return <Maker.Avatar key={creator.id} maker={creator} />;
           })}
-        </section>
+        </div>
       );
     }
+
+    return (
+      <div className="project-creator-list">
+        <ul>
+          {creators.map(creator => {
+            return (
+              <li key={creator.id}>
+                {creator.attributes.fullName}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
+
+  listContributors() {
+    if (!this.hasMakers("contributors")) return null;
+    const contributors = get(this.props.project, "relationships.contributors");
+
+    return (
+      <div className="project-contributor-list">
+        <span className="label">
+          {"Contributors: "}
+        </span>
+        <ul>
+          {contributors.map(creator => {
+            return (
+              <li key={creator.id}>
+                {creator.attributes.fullName}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
+
+  listMakers() {
+    return (
+      <section className="project-maker">
+        {this.listCreators()}
+        {this.listContributors()}
+      </section>
+    );
   }
 
   socialUrl(service, id) {
@@ -44,6 +102,23 @@ export default class ProjectHero extends Component {
         break;
     }
     return out;
+  }
+
+  renderProjectStatusMarker() {
+    const project = this.props.project;
+
+    // Currently, this can only return a 'draft' marker
+    let marker = null;
+
+    if (project.attributes.draft) {
+      marker = (
+        <div className="block-label">
+          {"Draft"}
+        </div>
+      );
+    }
+
+    return marker;
   }
 
   renderDescription() {
@@ -91,9 +166,6 @@ export default class ProjectHero extends Component {
 
     return (
       <section className="project-social">
-        <span className="hashtag">
-          {hashtag}
-        </span>
         <nav className="networks">
           <ul>
             {services.map(service => {
@@ -114,6 +186,9 @@ export default class ProjectHero extends Component {
             })}
           </ul>
         </nav>
+        <span className="hashtag">
+          {hashtag}
+        </span>
       </section>
     );
   }
@@ -168,36 +243,49 @@ export default class ProjectHero extends Component {
   }
   render() {
     const attr = this.props.project.attributes;
+
+    const heroClass = classNames("project-detail-hero", {
+      "hero-image": attr.heroStyles.largeLandscape
+    });
+
     const heroStyle = {};
     if (attr.heroStyles.largeLandscape) {
       heroStyle.backgroundImage = `url(${attr.heroStyles.largeLandscape})`;
     }
 
     return (
-      <section className="project-detail-hero hero-image" style={heroStyle}>
+      <div className={heroClass} style={heroStyle}>
         <div className="container">
           <div className="project-figure">
-            {this.listMakers()}
             {this.renderProjectImage("image")}
-            <h1 className="project-title">
-              {attr.title}
-              <span className="subtitle">
-                {attr.subtitle}
-              </span>
-            </h1>
+            <div className="project-figure-caption">
+              <h1 className="project-title">
+                <span className="title-text">
+                  {attr.title}
+                </span>
+                {this.renderProjectStatusMarker()}
+                <span className="subtitle">
+                  {attr.subtitle}
+                </span>
+              </h1>
+              {this.listMakers()}
+            </div>
           </div>
           <div className="project-info">
             {this.renderPublishedText("top")}
-            {this.listMakers()}
             <h1 className="project-title">
-              {attr.title}
+              <span className="title-text">
+                {attr.title}
+              </span>
+              {this.renderProjectStatusMarker()}
               <span className="subtitle">
                 {attr.subtitle}
               </span>
             </h1>
+            {this.listMakers()}
             {this.renderDescription()}
-            {this.renderSocial()}
             {this.renderPublishedText("bottom")}
+            {this.renderSocial()}
             {this.renderPurchaseLink()}
           </div>
           <div className="project-aside">
@@ -205,7 +293,7 @@ export default class ProjectHero extends Component {
             {this.renderPurchaseLink()}
           </div>
         </div>
-      </section>
+      </div>
     );
   }
 }
