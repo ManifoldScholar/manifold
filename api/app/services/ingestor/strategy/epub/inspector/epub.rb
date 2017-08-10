@@ -22,6 +22,7 @@ module Ingestor
           end
 
           def unique_id
+            return Digest::MD5.hexdigest(ingestion.source_url) if ingestion.source_url
             rendition_unique_id_node&.content
           end
           memoize :unique_id

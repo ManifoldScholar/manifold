@@ -152,16 +152,17 @@ export class FormContainer extends PureComponent {
   }
 
   childProps(props) {
-    return {
+    const out = {
       actions: {
         set: bindActionCreators(set, props.dispatch)
       },
       dirtyModel: props.session.dirty,
       sourceModel: props.session.source,
       getModelValue: name => this.lookupValue(name, this.props),
-      sessionKey: props.name,
-      errors: props.errors || []
+      sessionKey: props.name
     };
+    if (!this.props.groupErrors) out.errors = props.errors || [];
+    return out;
   }
 
   isBlocking() {

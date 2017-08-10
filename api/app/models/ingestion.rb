@@ -81,6 +81,7 @@ class Ingestion < ApplicationRecord
   end
 
   def file_based_ingestion?
+    return external_source_url.blank? if ingestion_type == "epub"
     ingestion_type != "googledoc"
   end
 
