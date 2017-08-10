@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend.Ingestion.Form.Upload component renders correctly 1`] = `
-<div
-  className="form-section"
->
+<div>
   <div
     className="buttons-icon-horizontal"
     style={

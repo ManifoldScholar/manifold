@@ -1,15 +1,33 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Form } from "components/backend";
+import setter from "components/backend/Form/setter";
 
-export default class IngestionFormUpload extends PureComponent {
+class IngestionFormUpload extends PureComponent {
   static displayName = "ProjectDetail.Text.Ingestion.Form.Upload";
 
   static propTypes = {
     getModelValue: PropTypes.func,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    setOther: PropTypes.func
   };
+
+  constructor() {
+    super();
+    this.onSourceChange = this.onSourceChange.bind(this);
+    this.onUrlChange = this.onUrlChange.bind(this);
+  }
+
+  onSourceChange(source) {
+    this.props.setOther(source, "attributes[source]");
+    this.props.setOther(null, "attributes[externalSourceUrl]");
+  }
+
+  onUrlChange(event) {
+    this.props.setOther(event.target.value, "attributes[externalSourceUrl]");
+    this.props.setOther(null, "attributes[source]");
+  }
 
   get valid() {
     return (
@@ -42,46 +60,66 @@ export default class IngestionFormUpload extends PureComponent {
 
     /* eslint-disable max-len */
     return (
-      <Form.FieldGroup {...this.props}>
+      <div>
         {ingestionType === "googledoc"
-          ? <Form.TextInput
-              label="URL"
-              name="attributes[externalSourceUrl]"
-              instructions="Manifold can ingest any publicly available Google doc by entering its URL."
-            />
+          ? <Form.FieldGroup {...this.props}>
+              <Form.TextInput
+                label="URL"
+                name="attributes[externalSourceUrl]"
+                instructions="Manifold can ingest any publicly available Google doc by entering its URL."
+              />
+            </Form.FieldGroup>
           : null}
         {ingestionType === "epub"
-          ? <Form.Upload
-              inlineStyle={{ width: "100%" }}
-              layout="landscape"
-              name="attributes[source]"
-              readFrom="attributes[sourceFileName]"
-              instructions="Manifold supports both v2 and v3 epub files."
-              label="Upload a file ending in .epub"
-              accepts="epubs"
-            />
+          ? <Form.FieldGroup {...this.props}>
+              <Form.Upload
+                inlineStyle={{ width: "100%" }}
+                layout="landscape"
+                // name="attributes[source]"
+                readFrom="attributes[source]"
+                instructions="Manifold supports both v2 and v3 epub files."
+                label="Upload a file ending in .epub"
+                value={this.props.getModelValue("attributes[source]")}
+                set={this.onSourceChange}
+                accepts="epubs"
+              />
+              <div className="form-divider">or</div>
+              <Form.TextInput
+                label="URL"
+                // name="attributes[externalSourceUrl]"
+                instructions="Manifold can also ingest epub files by entering a URL"
+                value={this.props.getModelValue(
+                  "attributes[externalSourceUrl]"
+                )}
+                onChange={event => this.onUrlChange(event)}
+              />
+            </Form.FieldGroup>
           : null}
         {ingestionType === "html"
-          ? <Form.Upload
-              inlineStyle={{ width: "100%" }}
-              layout="landscape"
-              name="attributes[source]"
-              readFrom="attributes[sourceFileName]"
-              instructions="Create a zip archive with a .htm or .html file in the root."
-              label="Zip source file"
-              accepts="zips"
-            />
+          ? <Form.FieldGroup {...this.props}>
+              <Form.Upload
+                inlineStyle={{ width: "100%" }}
+                layout="landscape"
+                name="attributes[source]"
+                readFrom="attributes[sourceFileName]"
+                instructions="Create a zip archive with a .htm or .html file in the root."
+                label="Zip source file"
+                accepts="zips"
+              />
+            </Form.FieldGroup>
           : null}
         {ingestionType === "markdown"
-          ? <Form.Upload
-              inlineStyle={{ width: "100%" }}
-              layout="landscape"
-              name="attributes[source]"
-              readFrom="attributes[sourceFileName]"
-              instructions="Upload a single markdown file, or a zipped collection of markdown files with a book.json file in root directory"
-              label="Markdown or .zip source file"
-              accepts="zips"
-            />
+          ? <Form.FieldGroup {...this.props}>
+              <Form.Upload
+                inlineStyle={{ width: "100%" }}
+                layout="landscape"
+                name="attributes[source]"
+                readFrom="attributes[sourceFileName]"
+                instructions="Upload a single markdown file, or a zipped collection of markdown files with a book.json file in root directory"
+                label="Markdown or .zip source file"
+                accepts="zips"
+              />
+            </Form.FieldGroup>
           : null}
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
           <button
@@ -100,7 +138,9 @@ export default class IngestionFormUpload extends PureComponent {
             Continue
           </button>
         </div>
-      </Form.FieldGroup>
+      </div>
     );
   }
 }
+
+export default setter(IngestionFormUpload);

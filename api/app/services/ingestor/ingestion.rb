@@ -30,7 +30,7 @@ module Ingestor
     end
 
     def teardown
-      # FileUtils.rm_rf(root)
+      FileUtils.rm_rf(root)
     end
 
     def open(rel_path, options = "r")
@@ -57,13 +57,21 @@ module Ingestor
       file_operation(:write, rel_path, [contents])
     end
 
-    def write_tmp(name, ext, contents)
+    def write_tmp(name, ext, contents = nil, url: nil)
       tmp = Tempfile.new([name, ".#{ext}"])
       tmp.close
-      File.open(tmp.path, "wb") do |f|
-        f.write(contents)
+      if url.present?
+        fetch_and_write(url, tmp.path)
+      else
+        File.open(tmp.path, "wb") do |f|
+          f.write(contents)
+        end
       end
       [tmp, tmp.path]
+    end
+
+    def fetch_and_write(uri, path)
+      IO.copy_stream(URI(uri).open, path)
     end
 
     def dir?(rel_path)
