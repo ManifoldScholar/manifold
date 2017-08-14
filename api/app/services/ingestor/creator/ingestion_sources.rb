@@ -17,10 +17,17 @@ module Ingestor
           report(source)
           source
         end
-        sources
+        remove_invalid_sources!
+        @text.ingestion_sources
       end
 
       private
+
+      def remove_invalid_sources!
+        @text.ingestion_sources.each do |source|
+          @text.ingestion_sources.delete(source) if source.invalid?
+        end
+      end
 
       def report(source)
         key = if source.new_record?
