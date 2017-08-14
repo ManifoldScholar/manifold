@@ -16,8 +16,8 @@ module Ingestor
           attempt_save!(text)
         end
         transform_stylesheets!(text)
-        transform_text_sections!(text)
         validate_text(text)
+        transform_text_sections!(text)
         attempt_save!(text)
         remove_stale_sections(text)
         destroy_tmp
