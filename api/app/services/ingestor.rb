@@ -85,6 +85,7 @@ module Ingestor
       return ingestion.text
     rescue Ingestor::IngestionFailed => e
       logger.error(e.message)
+      nil
     end
 
     # @private
