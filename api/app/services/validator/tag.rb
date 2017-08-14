@@ -85,7 +85,12 @@ module Validator
     # @return [void]
     def transform_attribute!(node, attribute)
       transforms = @config.attribute_transforms.select do |t|
-        t.name == attribute[0] || t.name == "*"
+        attr_match = t.name == attribute[0] || t.name == "*"
+        if t.tag
+          attr_match && t.tag == node.name
+        else
+          attr_match
+        end
       end
       transforms.each do |transform|
         method = "transform_#{transform.type}!"
