@@ -24,6 +24,7 @@ module Ingestor
       URI_ATTRIBUTES = [
         %w(a href),
         %w(img src),
+        %w(image href),
         %w(base href),
         %w(iframe src),
         %w(link href),

@@ -36,6 +36,12 @@ common: &1
         :name: "width"
         :type: "measured_css_map"
       -
+        # SVG V2 image tags are weird.
+        :name: "xlink:href"
+        :to: "href"
+        :tag: "image"
+        :type: "attribute_name"
+      -
         :name: "*"
         :type: "namespaced"
     :attribute_exclusions:

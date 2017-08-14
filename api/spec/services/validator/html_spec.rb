@@ -151,4 +151,11 @@ RSpec.describe Validator::Html do
     valid = "<div style=\"font-size: .5rem\"></div>"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
+
+  it "adds a corresponding href attribute for the xlink:href attribute" do
+    fragment = "<image xlink:href=\"images/cover.jpg\"></image>"
+    valid = "<image href=\"images/cover.jpg\" data-xlink-href=\"images/cover.jpg\"></image>"
+    expect(validator.validate(fragment).delete("\n")).to eq(valid)
+  end
+
 end
