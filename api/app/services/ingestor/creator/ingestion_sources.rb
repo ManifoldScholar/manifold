@@ -11,22 +11,21 @@ module Ingestor
 
       def create(source_inspectors, current_sources = nil)
         sources = source_inspectors.each_with_index.map do |source_inspector, index|
-          extant_source = find_in_set(current_sources, compare_attr(source_inspector))
-          source = extant_source || @text.ingestion_sources.new
-          source.attributes = attributes_with_defaults(source_inspector, index: index)
-          report(source)
-          source
+          source = create_one(source_inspector, current_sources, index)
+          source.valid? ? report(source) : report_invalid(source)
+          source.valid? ? source : nil
         end
-        remove_invalid_sources!
+        sources.compact!
+        @text.ingestion_sources = sources
         @text.ingestion_sources
       end
 
-      private
-
-      def remove_invalid_sources!
-        @text.ingestion_sources.each do |source|
-          @text.ingestion_sources.delete(source) if source.invalid?
-        end
+      def create_one(source_inspector, current_sources, index)
+        extant_source = find_in_set(current_sources, compare_attr(source_inspector))
+        source = extant_source || IngestionSource.new
+        source.attributes = attributes_with_defaults(source_inspector, index: index)
+        source.text = @text
+        source
       end
 
       def report(source)
@@ -35,7 +34,12 @@ module Ingestor
               else
                 "services.ingestor.creator.log.updated_source"
               end
-        debug key, source_path: source.source_path
+        info key, source_path: source.source_path
+      end
+
+      def report_invalid(source)
+        key = "services.ingestor.creator.log.invalid_source"
+        warn key, source_path: source.source_path
       end
 
       def compare_attr(source_inspector)
