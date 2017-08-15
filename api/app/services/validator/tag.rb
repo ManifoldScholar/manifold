@@ -83,6 +83,8 @@ module Validator
     # @param node [Nokogiri::XML::Node]
     # @param attribute [Array] containing exactly two elements: key and value
     # @return [void]
+
+    # rubocop:disable Metrics/AbcSize
     def transform_attribute!(node, attribute)
       transforms = @config.attribute_transforms.select do |t|
         attr_match = t.name == attribute[0] || t.name == "*"
@@ -102,6 +104,7 @@ module Validator
       # rubocop:enable LineLength
       Rails.logger.error(e)
     end
+    # rubocop:enable Metrics/AbcSize
 
     # @param node [Nokogiri::XML::Node]
     # @param attribute [Array] containing exactly two elements: key and value
