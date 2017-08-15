@@ -36,6 +36,7 @@ en:
           updated_stylesheet: 'Updated stylesheet: "%{name}"'
           new_stylesheet: 'New stylesheet: "%{name}"'
           new_source: 'New ingestion_source: "%{source_path}"'
+          invalid_source: 'Skipping invalid ingestion_source: "%{source_path}"'
           updated_source: 'Updated ingestion_source: "%{source_path}"'
           new_title: 'New title: "%{title}"'
           updated_title: 'Updated title: "%{title}"'
