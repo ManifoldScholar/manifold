@@ -1,3 +1,5 @@
+require "memoist"
+
 module Ingestor
   module Strategy
     module EPUB
@@ -62,7 +64,7 @@ module Ingestor
           end
 
           def guess_name_from_title
-            title = text_section.xpath("//title")
+            title = text_section.css("title")
             return title.text if title
           end
 

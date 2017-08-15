@@ -37,7 +37,7 @@ module Ingestor
             end
 
             def selector_toc_label
-              "//*[starts-with(@src,'%s')]/../navLabel/text/text()"
+              "//*[starts-with(@src,'%s')]/../xmlns:navLabel/xmlns:text/text()"
             end
 
             # We're relying on the guide element in the opf file; there's no title for
