@@ -21,13 +21,14 @@ module Ingestor
             @epub_inspector = epub_inspector
             @logger = epub_inspector.logger
             @nav_xml = @epub_inspector.nav_parsed
+            @nav_path = @epub_inspector.nav_path
             extend @epub_inspector.v2? ? V2 : V3
           end
 
-          # @todo: This isn't working with relative nav paths. (Eg. GhV-oeb-page epub)
-          def toc_label_for_cont_doc(contdoc_resource_path)
-            return unless @nav_xml
-            link = @nav_xml.at_xpath(selector_toc_label % contdoc_resource_path)
+          def toc_label_for_cont_doc(contdoc_path)
+            return unless @nav_xml && @nav_path
+            rel_path = @ingestion.relativize_ingestion_path(@nav_path, contdoc_path)
+            link = @nav_xml.at_xpath(selector_toc_label % rel_path)
             return link.text if link && link.element_children.empty?
           end
           memoize :toc_label_for_cont_doc
@@ -40,16 +41,19 @@ module Ingestor
               landmarks: landmarks_structure
             }
           end
+          memoize :text_structure
 
           def toc_structure
             nodes = toc_node.xpath(selector_toc_node)
             toc_nodes_to_structure(nodes)
           end
+          memoize :toc_structure
 
           def page_list_structure
             nodes = page_list_node.xpath(selector_page_list_node)
             page_list_nodes_to_structure(nodes)
           end
+          memoize :page_list_structure
 
           private
 
