@@ -19,6 +19,7 @@ module Ingestor
           end
 
           def attachment
+            return nil if uri?(href)
             @epub_inspector.open_rendition_source_by_href(href)
           end
 
@@ -33,6 +34,15 @@ module Ingestor
           end
 
           protected
+
+          def uri?(string)
+            uri = URI.parse(string)
+            %w(http https).include?(uri.scheme)
+          rescue URI::BadURIError
+            false
+          rescue URI::InvalidURIError
+            false
+          end
 
           def id
             @source_node.attribute("id").try(:value)
