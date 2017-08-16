@@ -12,7 +12,7 @@ exports[`NextSection component renders correctly 1`] = `
       onClick={[Function]}
     >
       <header>
-        Next Chapter
+        Next
       </header>
       <h3>
         <div>
