@@ -3,7 +3,7 @@
 exports[`Reader.Section.Label component renders correctly 1`] = `
 <div>
   <div
-    className="section-category-label fixed"
+    className="section-category-label fixed hidden"
   >
     <div
       className="container"
