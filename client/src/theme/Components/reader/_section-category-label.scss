@@ -2,7 +2,7 @@
   padding: 20px 0 18px;
   text-align: center;
   background-color: $sp20Quinary;
-  transition: opacity $duration $timing,
+  transition: opacity $durationFast $timing,
     visibility $duration $timing;
 
   .label {

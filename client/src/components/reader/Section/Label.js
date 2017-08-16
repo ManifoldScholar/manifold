@@ -11,13 +11,14 @@ export default class Label extends PureComponent {
   constructor() {
     super();
     this.state = {
-      fixed: true
+      fixed: false
     };
   }
 
   componentDidMount() {
     // Check if footer label is visible on scroll, and hide
     // fixed clone if it is
+    this.toggleFixed();
     this.throttledFixed = throttle(this.toggleFixed, 200).bind(this);
     window.addEventListener("scroll", this.throttledFixed);
   }
@@ -27,6 +28,8 @@ export default class Label extends PureComponent {
   }
 
   toggleFixed() {
+    if (!this.staticLabel) return null;
+
     // Show or hide label depending on footer visibility
     const staticRect = this.staticLabel.getBoundingClientRect();
     this.setState({
