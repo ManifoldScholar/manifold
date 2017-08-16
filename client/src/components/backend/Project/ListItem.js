@@ -43,6 +43,26 @@ export default class ProjectListItem extends PureComponent {
     return marker;
   }
 
+  renderProjectImage(project) {
+    if (project.attributes.coverStyles.smallPortrait) {
+      return (
+        <img
+          src={project.attributes.coverStyles.smallPortrait}
+          alt="project-cover"
+        />
+      );
+    }
+    if (project.attributes.avatarStyles.smallSquare) {
+      return (
+        <img
+          src={project.attributes.avatarStyles.smallSquare}
+          alt="project-cover"
+        />
+      );
+    }
+    return <GlobalProject.Placeholder />;
+  }
+
   render() {
     const project = this.props.entity;
     const attr = project.attributes;
@@ -51,12 +71,7 @@ export default class ProjectListItem extends PureComponent {
         <Link to={lh.link("backendProject", project.id)}>
           <header>
             <figure className="cover">
-              {attr.coverStyles.smallPortrait
-                ? <img
-                    src={attr.coverStyles.smallPortrait}
-                    alt="project-cover"
-                  />
-                : <GlobalProject.Placeholder />}
+              {this.renderProjectImage(project)}
             </figure>
             <div className="meta">
               <h3 className="name">
