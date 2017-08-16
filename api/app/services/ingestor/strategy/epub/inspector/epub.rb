@@ -105,7 +105,7 @@ module Ingestor
 
           def nav_path
             href = manifest_nav_node&.attribute("href")&.value
-            ingestion.href_to_ingestion_path(rendition_path, href)
+            ingestion.derelativize_ingestion_path(rendition_path, href)
           end
           memoize :nav_path
 
@@ -176,7 +176,7 @@ module Ingestor
           memoize :guide_node
 
           def rendition_href_to_path(href)
-            ingestion.href_to_ingestion_path(rendition_path, href)
+            ingestion.derelativize_ingestion_path(rendition_path, href)
           end
           memoize :rendition_href_to_path
 

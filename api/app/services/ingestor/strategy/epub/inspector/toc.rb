@@ -97,7 +97,7 @@ module Ingestor
             anchor = source_path = ""
             unless raw_path.nil?
               relative_source_path, anchor = raw_path.split("#")
-              source_path = @ingestion.href_to_ingestion_path(
+              source_path = @ingestion.derelativize_ingestion_path(
                 @epub_inspector.nav_path,
                 relative_source_path
               )

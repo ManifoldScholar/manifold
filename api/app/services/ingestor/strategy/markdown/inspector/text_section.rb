@@ -29,7 +29,7 @@ module Ingestor
           end
 
           def source_path
-            @ingestion.href_to_ingestion_path(@summary_path, @section_path)
+            @ingestion.derelativize_ingestion_path(@summary_path, @section_path)
           end
 
           def ingestion_source(text)

@@ -84,7 +84,8 @@ module Ingestor
       abs_path.relative_path_from(abs_src.dirname).to_s
     end
 
-    def href_to_ingestion_path(source, path)
+    def derelativize_ingestion_path(source, path)
+      return path if url?(path)
       return path if Pathname.new("path").absolute?
       rel(File.expand_path(File.join(root, File.dirname(source), path)))
     end

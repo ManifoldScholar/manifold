@@ -49,7 +49,7 @@ RSpec.describe Ingestor::Ingestion do
     it("converts a relative path within the package to a path relative to the project root") do
       href = "xhtml/section0001.xhtml"
       source = "EPUB/package.opf"
-      package_rel_path = subject.href_to_ingestion_path(source, href)
+      package_rel_path = subject.derelativize_ingestion_path(source, href)
       expect(package_rel_path).to eq "EPUB/xhtml/section0001.xhtml"
     end
 
