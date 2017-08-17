@@ -18,6 +18,12 @@ export default () => {
           helper: (t, s, anchor = "") => `/read/${t}/section/${s}${anchor}`,
           routes: [
             {
+              name: "readerAbout",
+              component: Reader.About.Detail,
+              path: "/read/:textId/section/:sectionId/about",
+              helper: (t, s) => `/read/${t}/section/${s}/about`
+            },
+            {
               name: "readerSectionResource",
               component: Reader.Resource.Detail,
               path: "/read/:textId/section/:sectionId/resource/:resourceId",
@@ -385,7 +391,6 @@ export default () => {
           path: "/test",
           helper: () => `/test`
         },
-
         {
           name: "frontendProject",
           exact: true,

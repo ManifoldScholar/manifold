@@ -6,10 +6,10 @@ export default class ProjectPlaceholder extends Component {
   static displayName = "Project.Placeholder";
 
   static propTypes = {
-    color: PropTypes.string
+    color: PropTypes.string,
+    width: PropTypes.string,
+    height: PropTypes.string
   };
-
-  // static propTypes = {};
   // NB: project-thumb-placeholder can take 1 of 5 modifier classes (Primary through Quinary)
   // For background colors, or none for white.
 
@@ -19,6 +19,8 @@ export default class ProjectPlaceholder extends Component {
         ? ""
         : this.props.color;
     const placeholderClasses = classNames("project-thumb-placeholder", color);
+    const width = this.props.width ? this.props.width : "200.34735px";
+    const height = this.props.height ? this.props.height : "200.68436px";
 
     return (
       <svg
@@ -26,8 +28,8 @@ export default class ProjectPlaceholder extends Component {
         className={placeholderClasses}
         x="0px"
         y="0px"
-        width="200.34735px"
-        height="200.68436px"
+        width={width}
+        height={height}
         viewBox="0 0 200.34735 200.68436"
       >
         {/* Disable max-length on linter for long SVG path declarations */}

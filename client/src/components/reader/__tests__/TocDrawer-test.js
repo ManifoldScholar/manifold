@@ -7,10 +7,16 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Reader.TocDrawer Component", () => {
   const text = build.entity.text("1");
+  const section = build.entity.textSection("2");
   const hideTocMock = jest.fn();
 
   const root = wrapWithRouter(
-    <TocDrawer text={text} visible hideTocDrawer={hideTocMock} />
+    <TocDrawer
+      text={text}
+      section={section}
+      visible
+      hideTocDrawer={hideTocMock}
+    />
   );
 
   it("renders correctly", () => {

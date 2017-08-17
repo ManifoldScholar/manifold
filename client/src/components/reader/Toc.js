@@ -7,6 +7,7 @@ import lh from "helpers/linkHandler";
 export default class Toc extends Component {
   static propTypes = {
     text: PropTypes.object,
+    section: PropTypes.object,
     tocDrawerVisible: PropTypes.bool,
     hideTocDrawer: PropTypes.func
   };
@@ -72,15 +73,20 @@ export default class Toc extends Component {
         <ul className="toc-list">
           {this.props.text.attributes.toc.map(this.visitNode)}
         </ul>
-        {/* Commented out until functionality is working */}
-        {/* <div className="toc-footer">
-          <a href="#">
+        <div className="toc-footer">
+          <Link
+            to={lh.link(
+              "readerAbout",
+              this.props.text.id,
+              this.props.section.id
+            )}
+          >
             <h4>
-              <i className="manicon manicon-question-round"></i>
+              <i className="manicon manicon-question-round" />
               About This Text
             </h4>
-          </a>
-        </div> */}
+          </Link>
+        </div>
       </nav>
     );
   }
