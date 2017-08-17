@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import setter from "./setter";
 import classnames from "classnames";
 import { Form as GlobalForm } from "components/global";
-import generatePassword from "password-generator";
+import generatePassword from "helpers/passwordGenerator";
 
 class FormGeneratedPasswordInput extends Component {
   static displayName = "Form.GeneratedPasswordInput";
@@ -18,16 +18,19 @@ class FormGeneratedPasswordInput extends Component {
   };
 
   static defaultProps = {
-    focusOnMount: false,
-    password: false
+    focusOnMount: false
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      password: this.generatePassword(),
+      password: "",
       showPassword: false
     };
+  }
+
+  componentWillMount() {
+    this.setState({ password: this.initializePassword() });
   }
 
   componentDidMount() {
@@ -51,8 +54,8 @@ class FormGeneratedPasswordInput extends Component {
     this.setState({ showPassword: !this.state.showPassword });
   }
 
-  generatePassword() {
-    return generatePassword(16, false);
+  initializePassword() {
+    return generatePassword();
   }
 
   handlePasswordChange(event) {
