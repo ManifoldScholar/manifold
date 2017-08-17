@@ -56,11 +56,13 @@ if (process.env.WEBPACK_DEV_SERVER) {
 // things:
 // 1) Support source maps in node
 // 2) Require the environment before any other code is loaded
-const sourceMapSupport = new webpack.BannerPlugin({
-  banner: `
-    require("source-map-support").install();
-    require("./env");
-  `,
+let bannerContents = "";
+if (process.env.NODE_ENV == "development") {
+  bannerContents += `require("source-map-support").install();`;
+}
+bannerContents += `\nrequire("./env");`;
+const banner = new webpack.BannerPlugin({
+  banner: bannerContents,
   raw: true,
   entryOnly: false
 });
@@ -84,9 +86,7 @@ const plugins = [];
 plugins.push(globals);
 plugins.push(copyFiles);
 plugins.push(manifest);
-if (process.env.NODE_ENV == "development") {
-  plugins.push(sourceMapSupport);
-}
+plugins.push(banner);
 
 const finalConfig = Object.assign({}, base({ plugins }), config);
 module.exports = finalConfig;
