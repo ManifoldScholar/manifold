@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { scrollOptions } from "utils/domUtils";
 
 export default class EdgeLockScroll extends PureComponent {
   static displayName = "Utility.EdgeLockScroll";
@@ -38,15 +39,39 @@ export default class EdgeLockScroll extends PureComponent {
       });
     };
 
-    this.scroller.addEventListener("mousewheel", this.handleWheel);
-    this.scroller.addEventListener("touchmove", this.handleTouch);
-    this.scroller.addEventListener("touchstart", this.setTouchStart);
+    this.scroller.addEventListener(
+      "mousewheel",
+      this.handleWheel,
+      scrollOptions()
+    );
+    this.scroller.addEventListener(
+      "touchmove",
+      this.handleTouch,
+      scrollOptions()
+    );
+    this.scroller.addEventListener(
+      "touchstart",
+      this.setTouchStart,
+      scrollOptions()
+    );
   }
 
   componentWillUnmount() {
-    this.scroller.removeEventListener("mousewheel", this.handleWheel);
-    this.scroller.removeEventListener("touchmove", this.handleTouch);
-    this.scroller.removeEventListener("touchstart", this.setTouchStart);
+    this.scroller.removeEventListener(
+      "mousewheel",
+      this.handleWheel,
+      scrollOptions()
+    );
+    this.scroller.removeEventListener(
+      "touchmove",
+      this.handleTouch,
+      scrollOptions()
+    );
+    this.scroller.removeEventListener(
+      "touchstart",
+      this.setTouchStart,
+      scrollOptions()
+    );
   }
 
   edgeLock(scroller, event, touchDelta) {
