@@ -7,6 +7,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
 
   let(:text_section) { FactoryGirl.create(:text_section) }
   let(:resource) { FactoryGirl.create(:resource, project: text_section.project) }
+  let(:collection) { FactoryGirl.create(:collection, project: text_section.project) }
   let(:annotation_params) { { attributes: FactoryGirl.attributes_for(:annotation) } }
   let(:resource_params) do
     {
@@ -16,6 +17,19 @@ RSpec.describe "Text Section Annotations API", type: :request do
           data: {
             type: "resources",
             id: resource.id
+          }
+        }
+      }
+    }
+  end
+  let(:collection_params) do
+    {
+      attributes: FactoryGirl.build(:collection_annotation).attributes,
+      relationships: {
+        collection: {
+          data: {
+            type: "collections",
+            id: collection.id
           }
         }
       }
@@ -95,6 +109,27 @@ RSpec.describe "Text Section Annotations API", type: :request do
 
     context "when the user is an admin" do
       before(:each) { post path, headers: admin_headers, params: json_payload(resource_params) }
+      describe "the response" do
+        it "has a 201 status code" do
+          expect(response).to have_http_status(201)
+        end
+      end
+    end
+  end
+
+  describe "creates a collection annotation" do
+    context "when the user is an reader" do
+      before(:each) { post path, headers: reader_headers, params: json_payload(collection_params) }
+      describe "the response" do
+        it "has a 403 FORBIDDEN status code" do
+          a = response.body
+          expect(response).to have_http_status(403)
+        end
+      end
+    end
+
+    context "when the user is an admin" do
+      before(:each) { post path, headers: admin_headers, params: json_payload(collection_params) }
       describe "the response" do
         it "has a 201 status code" do
           expect(response).to have_http_status(201)

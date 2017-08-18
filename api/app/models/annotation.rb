@@ -35,15 +35,28 @@ class Annotation < ApplicationRecord
   TYPE_ANNOTATION = "annotation".freeze
   TYPE_HIGHLIGHT = "highlight".freeze
   TYPE_RESOURCE = "resource".freeze
+  TYPE_COLLECTION = "collection".freeze
+  ANNOTATION_FORMATS = [
+    TYPE_ANNOTATION,
+    TYPE_HIGHLIGHT,
+    TYPE_RESOURCE,
+    TYPE_COLLECTION
+  ].freeze
+  NOTATION_TYPES = [
+    TYPE_RESOURCE,
+    TYPE_COLLECTION
+  ].freeze
 
   # Associations
   belongs_to :text_section
   belongs_to :resource, optional: true
+  belongs_to :collection, optional: true
   has_many :comments, as: :subject
 
   # Validations
   validates :text_section, presence: true
   validates :resource, presence: true, if: :resource?
+  validates :collection, presence: true, if: :collection?
   validates :start_node, :end_node, presence: true
   validates :start_char,
             :end_char,
@@ -51,7 +64,7 @@ class Annotation < ApplicationRecord
             numericality: :only_integer, length: { minimum: 0 }
   validates :format,
             presence: true,
-            inclusion: { in: %W(#{TYPE_ANNOTATION} #{TYPE_HIGHLIGHT} #{TYPE_RESOURCE}) }
+            inclusion: { in: ANNOTATION_FORMATS }
   validate :valid_subject?
   validates :body, presence: true, if: :annotation?
 
@@ -73,6 +86,10 @@ class Annotation < ApplicationRecord
 
   def highlight?
     format == TYPE_HIGHLIGHT
+  end
+
+  def collection?
+    format == TYPE_COLLECTION
   end
 
   def valid_subject?

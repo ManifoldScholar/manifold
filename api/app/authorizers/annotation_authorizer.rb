@@ -17,7 +17,7 @@ class AnnotationAuthorizer < ApplicationAuthorizer
   end
 
   def creatable_by?(user)
-    resource.format == Annotation::TYPE_RESOURCE ? user.admin? : true
+    Annotation::NOTATION_TYPES.include?(resource.format) ? user.admin? : true
   end
 
   def deletable_by?(user)

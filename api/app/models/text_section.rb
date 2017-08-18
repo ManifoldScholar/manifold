@@ -24,6 +24,7 @@ class TextSection < ApplicationRecord
   belongs_to :ingestion_source
   has_many :annotations
   has_many :resources, through: :annotations
+  has_many :collections, through: :annotations
 
   # Delegation
   delegate :citation_parts, to: :text, prefix: true, allow_nil: true

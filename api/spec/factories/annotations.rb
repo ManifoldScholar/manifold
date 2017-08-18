@@ -15,4 +15,8 @@ FactoryGirl.define do
     format Annotation::TYPE_RESOURCE
     association :resource, factory: :resource
   end
+  factory :collection_annotation, parent: :annotation do
+    format Annotation::TYPE_COLLECTION
+    association :collection, factory: :collection
+  end
 end
