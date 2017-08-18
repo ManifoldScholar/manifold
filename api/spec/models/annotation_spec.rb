@@ -84,16 +84,30 @@ RSpec.describe Annotation, type: :model do
     expect(@annotation).to_not be_valid
   end
 
-  it "is invalid without a resource if format is resource" do
-    @annotation.format = "resource"
-    expect(@annotation).to_not be_valid
-  end
+  context "with notation" do
+    it "is invalid without a resource if format is resource" do
+      @annotation.format = "resource"
+      expect(@annotation).to_not be_valid
+    end
 
-  it "is valid with a resource if format is resource" do
-    resource = FactoryGirl.create(:resource)
-    @annotation.format = "resource"
-    @annotation.resource = resource
-    expect(@annotation).to be_valid
+    it "is valid with a resource if format is resource" do
+      resource = FactoryGirl.create(:resource)
+      @annotation.format = "resource"
+      @annotation.resource = resource
+      expect(@annotation).to be_valid
+    end
+
+    it "is invalid without a collection if format is collection" do
+      @annotation.format = "collection"
+      expect(@annotation).to_not be_valid
+    end
+
+    it "is valid with a collection if format is collection" do
+      collection = FactoryGirl.create(:collection)
+      @annotation.format = "collection"
+      @annotation.collection = collection
+      expect(@annotation).to be_valid
+    end
   end
 
 end

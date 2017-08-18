@@ -59,6 +59,7 @@ Rails.application.routes.draw do
           namespace :relationships do
             resources :annotations, only: [:index, :create, :update]
             resources :resources, only: [:index, :create, :update]
+            resources :collections, only: [:index, :create, :update]
           end
         end
       end

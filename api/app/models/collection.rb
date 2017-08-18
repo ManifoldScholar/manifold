@@ -20,6 +20,7 @@ class Collection < ApplicationRecord
   has_many :collection_resources,
            dependent: :destroy
   has_many :resources, through: :collection_resources
+  has_many :annotations, dependent: :destroy
 
   # Attachments
   manifold_has_attached_file :thumbnail, :image
