@@ -9,11 +9,12 @@ export default {
     };
   },
 
-  create(sectionId, annotation, resource = null) {
+  create(sectionId, annotation, notation = null) {
     const data = { attributes: annotation };
-    if (resource) {
-      data.relationships = {
-        resource: { data: { id: resource.id, type: "resources" } }
+    if (notation) {
+      data.relationships = {};
+      data.relationships[annotation.format] = {
+        data: { id: notation.id, type: notation.type }
       };
     }
     return {

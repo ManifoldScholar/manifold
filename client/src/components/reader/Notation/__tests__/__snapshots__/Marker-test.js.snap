@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Notation.Marker component renders correctly 1`] = `
+<span>
+  <span
+    className="notation-marker"
+    data-annotation-notation="1"
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOver={[Function]}
+    title="1"
+  >
+    <i
+      className="manicon notation-cube-fill"
+    >
+          
+    </i>
+  </span>
+</span>
+`;

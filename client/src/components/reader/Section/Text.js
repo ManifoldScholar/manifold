@@ -13,6 +13,7 @@ export default class Text extends Component {
     authentication: PropTypes.object,
     section: PropTypes.object,
     resources: PropTypes.array,
+    collections: PropTypes.array,
     annotations: PropTypes.array,
     appearance: PropTypes.object,
     location: PropTypes.object,
@@ -163,6 +164,11 @@ export default class Text extends Component {
     // Page used to generate key for transitions
     const page = this.props.location.pathname.substr(1);
 
+    let notations = this.props.resources;
+    if (notations && this.props.collections) {
+      notations = notations.concat(this.props.collections);
+    }
+
     return (
       <HigherOrder.HtmlClass className={fontSizeClass}>
         <div>
@@ -173,7 +179,7 @@ export default class Text extends Component {
               textId={this.props.text.id}
               sectionId={this.props.match.params.sectionId}
               lockSelection={this.lockSelection}
-              resources={this.props.resources}
+              notations={notations}
               annotations={this.state.filteredAnnotations}
               containerSize={typography.margins.current}
               bodySelector="[data-id=&quot;body&quot;]"

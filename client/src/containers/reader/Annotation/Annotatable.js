@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Annotation from "components/reader/Annotation";
 import { Drawer } from "components/backend";
-import { Resource } from "containers/reader";
+import { Notation } from "containers/reader";
 import AnnotationContainers from "containers/reader/Annotation";
-import { Resource as ResourceComponents } from "components/reader";
+import { Notation as NotationComponents } from "components/reader";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
 import isString from "lodash/isString";
@@ -28,14 +28,14 @@ class Annotatable extends Component {
     lockSelection: PropTypes.func,
     selectionLockedAnnotation: PropTypes.object,
     selectionLocked: PropTypes.bool,
-    resources: PropTypes.array,
+    notations: PropTypes.array,
     annotations: PropTypes.array,
     text: PropTypes.object,
     section: PropTypes.object
   };
 
   static defaultProps = {
-    resource: [],
+    notation: [],
     annotations: []
   };
 
@@ -47,10 +47,10 @@ class Annotatable extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.highlightSelection = this.highlightSelection.bind(this);
     this.startAnnotateSelection = this.startAnnotateSelection.bind(this);
-    this.startResourceSelection = this.startResourceSelection.bind(this);
+    this.startNotationSelection = this.startNotationSelection.bind(this);
     this.startShare = this.startShare.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
-    this.attachResourceToSelection = this.attachResourceToSelection.bind(this);
+    this.attachNotationToSelection = this.attachNotationToSelection.bind(this);
     this.closestTextNode = this.closestTextNode.bind(this);
     this.handlePossibleAnnotationClick = this.handlePossibleAnnotationClick.bind(
       this
@@ -265,11 +265,11 @@ class Annotatable extends Component {
   }
 
   createAnnotation(annotation, options = {}) {
-    const resource = options.resource || null;
+    const notation = options.notation || null;
     const call = annotationsAPI.create(
       this.props.sectionId,
       annotation,
-      resource
+      notation
     );
     const requestOptions = { adds: requests.rAnnotations };
     const res = this.props.dispatch(
@@ -298,11 +298,11 @@ class Annotatable extends Component {
     this.createAnnotation(annotation);
   }
 
-  attachResourceToSelection(resource) {
+  attachNotationToSelection(notation) {
     const annotation = this.state.selectionLockedAnnotation;
-    annotation.format = "resource";
+    annotation.format = notation.type.slice(0, -1); // Type is a plural, so take the 's' off
     const closeOnSave = true;
-    this.createAnnotation(annotation, { resource, closeOnSave });
+    this.createAnnotation(annotation, { notation, closeOnSave });
   }
 
   lockSelection() {
@@ -328,8 +328,8 @@ class Annotatable extends Component {
     });
   }
 
-  startResourceSelection(eventIgnored) {
-    this.setState({ drawerContents: "resources" });
+  startNotationSelection(eventIgnored) {
+    this.setState({ drawerContents: "notations" });
     this.lockSelection();
   }
 
@@ -369,7 +369,7 @@ class Annotatable extends Component {
     const base = { open: false, closeCallback: this.closeDrawer };
     let options;
     switch (this.state.drawerContents) {
-      case "resources":
+      case "notations":
         options = { open: true, style: "backend" };
         break;
       case "annotate":
@@ -404,8 +404,8 @@ class Annotatable extends Component {
   /* eslint-disable no-unreachable */
   renderDrawerContents() {
     switch (this.state.drawerContents) {
-      case "resources":
-        return this.renderDrawerResources(); // eslint-disable no-unreachable
+      case "notations":
+        return this.renderDrawerNotations(); // eslint-disable no-unreachable
         break;
       case "annotate":
         return this.renderDrawerAnnotate(); // eslint-disable no-unreachable
@@ -423,11 +423,11 @@ class Annotatable extends Component {
   }
   /* eslint-enable no-unreachable */
 
-  renderDrawerResources() {
+  renderDrawerNotations() {
     return (
-      <Resource.Picker
+      <Notation.Picker
         projectId={this.props.projectId}
-        selectionHandler={this.attachResourceToSelection}
+        selectionHandler={this.attachNotationToSelection}
       />
     );
   }
@@ -500,8 +500,8 @@ class Annotatable extends Component {
 
     return (
       <div>
-        {/* Children must preceed the resource viewer, because the annotatable ref needs to
-        be rendered prior to the resource viewer calculating where to put things. */}
+        {/* Children must precede the notation viewer, because the annotatable ref needs to
+        be rendered prior to the notation viewer calculating where to put things. */}
         <div
           className="annotatable"
           ref={a => {
@@ -512,7 +512,7 @@ class Annotatable extends Component {
           {this.props.children ? Children.only(this.props.children) : null}
         </div>
 
-        {/* The drawer contains resource, annotator, comments, etc */}
+        {/* The drawer contains notations, annotator, comments, etc */}
         <Drawer.Wrapper {...this.drawerProps()}>
           {this.renderDrawerContents()}
         </Drawer.Wrapper>
@@ -528,7 +528,7 @@ class Annotatable extends Component {
           highlight={this.highlightSelection}
           annotate={this.startAnnotateSelection}
           bookmark={this.startBookmark}
-          attachResource={this.startResourceSelection}
+          attachNotation={this.startNotationSelection}
           cite={event => this.startShare(event, "citation")}
           selection={this.state.selection}
           selectionClickEvent={this.state.selectionClickEvent}
@@ -539,12 +539,12 @@ class Annotatable extends Component {
           section={this.props.section}
         />
 
-        {/* Render the margin resources */}
-        {this.props.resources
-          ? <ResourceComponents.Viewer.Wrapper
+        {/* Render the margin notations */}
+        {this.props.notations
+          ? <NotationComponents.Viewer.List
               sectionId={this.props.sectionId}
               textId={this.props.textId}
-              resources={this.props.resources}
+              notations={this.props.notations}
               annotations={this.props.annotations}
               containerSize={this.props.containerSize}
               bodySelector={this.props.bodySelector}

@@ -2,8 +2,8 @@
 
 exports[`Global.Overlay component renders correctly 1`] = `
 <div>
-  <header
-    className="overlay-full-header"
+  <div
+    className="overlay-full"
   >
     <button
       className="overlay-close"
@@ -15,10 +15,6 @@ exports[`Global.Overlay component renders correctly 1`] = `
         className="manicon manicon-x"
       />
     </button>
-  </header>
-  <div
-    className="overlay-full"
-  >
     <div
       className="container"
       style={

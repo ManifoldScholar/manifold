@@ -1,6 +1,6 @@
 import Reader from "./Reader";
-import Resource from "./Resource";
+import Notation from "./Notation";
 import Annotation from "./Annotation";
 import Section from "./Section";
 
-export { Reader, Resource, Annotation, Section };
+export { Reader, Notation, Annotation, Section };

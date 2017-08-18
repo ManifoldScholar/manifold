@@ -19,7 +19,7 @@ export default class AnnotationPopup extends Component {
     highlight: PropTypes.func.isRequired,
     annotate: PropTypes.func.isRequired,
     cite: PropTypes.func.isRequired,
-    attachResource: PropTypes.func.isRequired,
+    attachNotation: PropTypes.func.isRequired,
     bookmark: PropTypes.func.isRequired,
     showLogin: PropTypes.func.isRequired,
     text: PropTypes.object.isRequired,
@@ -228,7 +228,7 @@ export default class AnnotationPopup extends Component {
         }}
       >
         <Annotate
-          attachResource={this.props.attachResource}
+          attachNotation={this.props.attachNotation}
           highlight={this.props.highlight}
           annotate={this.props.annotate}
           bookmark={this.props.bookmark}

@@ -15,7 +15,8 @@ export default class ResourceListSlideshow extends PureComponent {
     collectionResources: PropTypes.array,
     pagination: PropTypes.object,
     dispatch: PropTypes.func,
-    collectionId: PropTypes.string
+    collectionId: PropTypes.string,
+    hideDetailUrl: PropTypes.bool
   };
 
   constructor(props) {
@@ -207,6 +208,7 @@ export default class ResourceListSlideshow extends PureComponent {
               ? <ResourceList.Slide.Caption
                   resource={collectionResource}
                   collectionId={this.props.collectionId}
+                  hideDetailUrl={this.props.hideDetailUrl}
                 />
               : <ResourceList.Slide.LoadingCaption />}
             {this.props.collectionResources.length > 0

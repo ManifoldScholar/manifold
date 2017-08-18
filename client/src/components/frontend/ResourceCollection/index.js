@@ -1,7 +1,11 @@
-import Thumbnail from "./Thumbnail";
+import Cover from "./Cover";
 import Detail from "./Detail";
+import Title from "./Title";
+import Thumbnail from "./Thumbnail";
 
 export default {
-  Thumbnail,
-  Detail
+  Cover,
+  Detail,
+  Title,
+  Thumbnail
 };

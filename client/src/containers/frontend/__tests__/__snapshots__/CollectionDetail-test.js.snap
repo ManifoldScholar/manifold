@@ -21,28 +21,32 @@ exports[`Frontend CollectionDetail Container renders correctly 1`] = `
   </a>
   <section>
     <div
-      className="container"
+      className="container flush-top flush-bottom"
     >
       <div
         className="collection-detail"
       >
         <header>
-          <i
-            className="manicon manicon-file-box"
-          />
           <div
             className="collection-title"
           >
-            <h1>
-              Rowan
-            </h1>
-            <span
-              className="collection-date"
-            >
-              <span>
-                Collection created April, 2017
-              </span>
-            </span>
+            <div>
+              <i
+                className="manicon manicon-file-box"
+              />
+              <div>
+                <h1>
+                  Rowan
+                </h1>
+                <span
+                  className="collection-date"
+                >
+                  <span>
+                    Collection created April, 2017
+                  </span>
+                </span>
+              </div>
+            </div>
           </div>
         </header>
         <div
@@ -70,142 +74,146 @@ exports[`Frontend CollectionDetail Container renders correctly 1`] = `
           </ul>
         </nav>
       </div>
+    </div>
+    <div
+      className="resource-slideshow"
+    >
       <div
-        className="resource-slideshow"
+        className="slide"
       >
         <div
-          className="slide"
+          className="resource-slide-figure"
+        >
+          <span>
+            <div>
+              <figure>
+                <div
+                  className="figure-image"
+                  style={
+                    Object {
+                      "backgroundImage": "url(null)",
+                    }
+                  }
+                />
+              </figure>
+            </div>
+          </span>
+        </div>
+        <div
+          className="slide-footer"
         >
           <div
-            className="resource-slide-figure"
+            className="slide-caption"
           >
-            <span>
-              <div>
-                <figure>
-                  <div
-                    className="figure-image"
-                    style={
-                      Object {
-                        "backgroundImage": "url(null)",
-                      }
-                    }
-                  />
-                </figure>
-              </div>
-            </span>
-          </div>
-          <div
-            className="slide-footer"
-          >
+            <header>
+              <h2
+                className="resource-title"
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "Image",
+                  }
+                }
+              />
+            </header>
             <div
-              className="slide-caption"
+              className="resource-description"
             >
-              <header>
-                <h2
-                  className="resource-title"
-                  dangerouslySetInnerHTML={
-                    Object {
-                      "__html": "Image",
-                    }
-                  }
-                />
-              </header>
               <div
-                className="resource-description"
-              >
-                <div
-                  dangerouslySetInnerHTML={
-                    Object {
-                      "__html": "World's Greatest Dog",
-                    }
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "World's Greatest Dog",
                   }
-                />
-              </div>
-              <div
-                className="resource-utility"
-              >
-                <div
-                  className="bg-neutral90"
-                >
-                  <button
-                    className="more-link"
-                    onClick={[Function]}
-                  >
-                    <span
-                      className="open-text"
-                    >
-                      Read More
-                    </span>
-                    <span
-                      className="close-text"
-                    >
-                      Hide Description
-                    </span>
-                  </button>
-                  <a
-                    className="download-link"
-                    href="original-image.mock"
-                    target="_blank"
-                  >
-                    Download
-                    <i
-                      className="manicon manicon-arrow-down"
-                    />
-                  </a>
-                  <a
-                    className="detail-link"
-                    href="/project/undefined/resource/3"
-                    onClick={[Function]}
-                  >
-                    Details
-                  </a>
-                </div>
-              </div>
+                }
+              />
             </div>
             <div
-              className="slide-pagination"
+              className="resource-utility"
             >
-              <span
-                className="slide-ordinal"
+              <div
+                className="bg-neutral90"
               >
-                1
-                 
-                /
-                 
-                2
-              </span>
-              <div>
                 <button
-                  className="slide-previous"
-                  disabled={true}
+                  className="more-link"
                   onClick={[Function]}
                 >
-                  <i
-                    className="manicon manicon-arrow-round-left"
-                  />
                   <span
-                    className="screen-reader-text"
+                    className="open-text"
                   >
-                    Click to load previous slide
+                    Read More
+                  </span>
+                  <span
+                    className="close-text"
+                  >
+                    Hide Description
                   </span>
                 </button>
-                <button
-                  className="slide-next"
-                  disabled={false}
+                <a
+                  className="download-link"
+                  href="original-image.mock"
+                  target="_blank"
+                >
+                  Download
+                  <i
+                    className="manicon manicon-arrow-down"
+                  />
+                </a>
+                <a
+                  className="detail-link"
+                  href="/project/undefined/resource/3"
                   onClick={[Function]}
                 >
-                  <i
-                    className="manicon manicon-arrow-round-right"
-                  />
-                  <span
-                    className="screen-reader-text"
-                  />
-                </button>
+                  Details
+                </a>
               </div>
+            </div>
+          </div>
+          <div
+            className="slide-pagination"
+          >
+            <span
+              className="slide-ordinal"
+            >
+              1
+               
+              /
+               
+              2
+            </span>
+            <div>
+              <button
+                className="slide-previous"
+                disabled={true}
+                onClick={[Function]}
+              >
+                <i
+                  className="manicon manicon-arrow-round-left"
+                />
+                <span
+                  className="screen-reader-text"
+                >
+                  Click to load previous slide
+                </span>
+              </button>
+              <button
+                className="slide-next"
+                disabled={false}
+                onClick={[Function]}
+              >
+                <i
+                  className="manicon manicon-arrow-round-right"
+                />
+                <span
+                  className="screen-reader-text"
+                />
+              </button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div
+      className="container flush-top"
+    >
       <div
         className="resource-totals"
         data-id="total-container"

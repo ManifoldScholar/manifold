@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Utility.Toggle component renders correctly 1`] = `
+<div
+  className="button-switch-primary"
+>
+  <div
+    className="wrapper"
+    onClick={[Function]}
+  >
+    <div
+      className="button selected"
+    >
+      <i
+        className="manicon manicon-cube-outline"
+      />
+      resources
+    </div>
+    <div
+      className="button"
+    >
+      <i
+        className="manicon manicon-file-box"
+      />
+      collection
+    </div>
+  </div>
+</div>
+`;

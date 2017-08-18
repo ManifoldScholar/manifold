@@ -1,4 +1,5 @@
 .collection-detail {
+  padding-top: 22px;
   padding-bottom: 12px;
 
   header {
@@ -8,7 +9,6 @@
 
     .manicon {
       display: table-cell;
-      padding-top: 6px;
       padding-right: 16px;
       font-size: 36px;
       color: $neutral75;
@@ -18,7 +18,13 @@
     .collection-title {
       display: table-cell;
       width: 100%;
+      padding-top: 23px;
       vertical-align: top;
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
 
       h1 {
         @include templateHead;
@@ -39,7 +45,7 @@
 
   .collection-description {
     @include templateCopy;
-    max-width: $containerWidthFocus;
+    max-width: 840px;
     font-size: 15px;
     color: $neutral70;
   }

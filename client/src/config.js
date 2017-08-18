@@ -66,6 +66,16 @@ const applicationConfiguration = {
         RESOURCE_ADDED: "Resource Added",
         TWEET: "Tweet"
       },
+      dialogs: {
+        notation: {
+          destroy: {
+            heading: "Are you sure you want to remove this notation?",
+            message:
+              "Pressing yes will remove the notation from this spot in the text. " +
+              "It will not remove it from the project."
+          }
+        }
+      },
       metadata: {
         abstract: {
           type: "TextInput",
