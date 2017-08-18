@@ -2,12 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Section } from "components/reader";
-import { sectionsAPI, annotationsAPI, resourcesAPI, requests } from "api";
+import {
+  sectionsAPI,
+  annotationsAPI,
+  resourcesAPI,
+  collectionsAPI,
+  requests
+} from "api";
 import { grab, isEntityLoaded } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
 import uniq from "lodash/uniq";
 import difference from "lodash/difference";
 import get from "lodash/get";
+import some from "lodash/some";
 import { renderRoutes } from "helpers/routing";
 import { HeadContent } from "components/global";
 
@@ -48,6 +55,7 @@ export class SectionContainer extends Component {
     match: PropTypes.object.isRequired,
     annotations: PropTypes.array,
     resources: PropTypes.array,
+    collections: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
     text: PropTypes.object.isRequired,
     appearance: PropTypes.object.isRequired
@@ -57,6 +65,7 @@ export class SectionContainer extends Component {
     if (this.props.match.params.sectionId) {
       this.fetchAnnotations(this.props);
       this.fetchResources(this.props);
+      this.fetchCollections(this.props);
     }
   }
 
@@ -67,19 +76,30 @@ export class SectionContainer extends Component {
     ) {
       this.fetchAnnotations(nextProps);
       this.fetchResources(nextProps);
+      this.fetchCollections(nextProps);
     }
     // Check if we need to fetch more resources when annotations change
     if (nextProps.annotations !== this.props.annotations) {
-      if (
-        this.hasMissingResources(nextProps.annotations, nextProps.resources)
-      ) {
-        this.fetchResources(nextProps);
+      const missing = this.hasMissingResourcesOrCollections(
+        nextProps.annotations,
+        nextProps.resources,
+        nextProps.collections
+      );
+      if (missing) {
+        if (some(missing, ["type", "resource"])) {
+          this.fetchResources(nextProps);
+        }
+        if (some(missing, ["type", "collection"])) {
+          this.fetchCollections(nextProps);
+        }
       }
     }
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.rSection));
+    this.props.dispatch(flush(requests.rSectionResources));
+    this.props.dispatch(flush(requests.rSectionCollections));
   }
 
   fetchAnnotations(props) {
@@ -94,15 +114,32 @@ export class SectionContainer extends Component {
     props.dispatch(request(resourcesCall, requests.rSectionResources));
   }
 
-  hasMissingResources(annotations, resourcesIn) {
+  fetchCollections(props) {
+    const collectionsCall = collectionsAPI.forSection(
+      props.match.params.sectionId
+    );
+    props.dispatch(request(collectionsCall, requests.rSectionCollections));
+  }
+
+  hasMissingResourcesOrCollections(annotations, resourcesIn, collectionsIn) {
     if (!annotations) return;
     const resources = resourcesIn || [];
+    const collections = collectionsIn || [];
     const needed = uniq(
-      annotations.map(a => a.attributes.resourceId).filter(id => id !== null)
+      annotations
+        .map(a => {
+          return {
+            id: a.attributes.resourceId || a.attributes.collectionId,
+            type: a.attributes.format
+          };
+        })
+        .filter(id => id !== null)
     );
     const has = resources.map(r => r.id);
+    const cHas = collections.map(r => r.id);
+    has.concat(cHas);
     const diff = difference(needed, has);
-    if (diff.length > 0) return true;
+    if (diff.length > 0) return diff;
     return false;
   }
 

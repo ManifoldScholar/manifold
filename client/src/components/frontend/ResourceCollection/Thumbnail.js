@@ -1,46 +1,81 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
-import { Link } from "react-router-dom";
+import classNames from "classnames";
+import get from "lodash/get";
 
 export default class ResourceCollectionThumbnail extends Component {
   static displayName = "ResourceCollection.Thumbnail";
 
   static propTypes = {
     resourceCollection: PropTypes.object,
-    projectId: PropTypes.string
+    showTitle: PropTypes.bool,
+    variant: PropTypes.string,
+    noCrop: PropTypes.bool,
+    additionalClasses: PropTypes.string
   };
 
+  static defaultProps = {
+    showTitle: false,
+    variant: "smallPortrait",
+    noCrop: false,
+    additionalClasses: ""
+  };
+
+  getImage(resource) {
+    const thumb = get(
+      resource,
+      `attributes.thumbnailStyles.${this.props.variant}`
+    );
+    if (thumb) return thumb;
+    return get(resource, `attributes.thumbnailStyles.${this.props.variant}`);
+  }
+
+  hasImage(resource) {
+    return !!this.getImage(resource);
+  }
+
   render() {
-    const collectionsBackground = "/static/images/resource-collection.jpg";
-    const collection = this.props.resourceCollection;
-    const attr = collection.attributes;
-    const bgImage = attr.thumbnailStyles.medium
-      ? attr.thumbnailStyles.medium
-      : collectionsBackground;
+    const { resourceCollection } = this.props;
+    const hasImage = this.hasImage(resourceCollection);
+
+    const wrapperClass = classNames({
+      "resource-thumbnail-primary": true,
+      "bg-image": hasImage && !this.props.noCrop,
+      title: this.props.showTitle
+    });
+
+    const backgroundImage =
+      hasImage && !this.props.noCrop
+        ? `url(${this.getImage(resourceCollection)})`
+        : null;
+
     return (
-      <li>
-        <Link
-          to={lh.link(
-            "frontendProjectCollection",
-            this.props.projectId,
-            collection.id
-          )}
-          style={{ backgroundImage: "url(" + bgImage + ")" }}
-        >
-          <div className="title-overlay">
-            <h4 className="collection-title">
-              {attr.title}
-            </h4>
-            <div className="icon">
-              <i className="manicon manicon-file-box" />
-              <span>
-                {"Collection"}
-              </span>
-            </div>
-          </div>
-        </Link>
-      </li>
+      <div
+        className={`${wrapperClass} ${this.props.additionalClasses}`}
+        style={{ backgroundImage }}
+      >
+        <div className="wrapper">
+          <figure className="resource-type">
+            {this.props.noCrop
+              ? <div className="resource-image">
+                  <img
+                    src={this.getImage(resourceCollection)}
+                    alt={resourceCollection.attributes.title}
+                  />
+                  <div className="image-overlay" />
+                </div>
+              : null}
+          </figure>
+          {this.props.showTitle
+            ? <h4
+                className="resource-title"
+                dangerouslySetInnerHTML={{
+                  __html: resourceCollection.attributes.titleFormatted
+                }}
+              />
+            : null}
+        </div>
+      </div>
     );
   }
 }

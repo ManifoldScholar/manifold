@@ -17,7 +17,7 @@ export default class ResourceCollectionGrid extends Component {
         <ul>
           {this.props.resourceCollections.map(collection => {
             return (
-              <ResourceCollection.Thumbnail
+              <ResourceCollection.Cover
                 key={collection.id}
                 projectId={this.props.projectId}
                 resourceCollection={collection}

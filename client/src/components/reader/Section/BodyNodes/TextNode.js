@@ -4,7 +4,7 @@ import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import values from "lodash/values";
 import union from "lodash/union";
-import { Resource } from "components/reader";
+import { Notation } from "components/reader";
 
 export default class TextNode extends Component {
   static propTypes = {
@@ -34,6 +34,7 @@ export default class TextNode extends Component {
       const startNode = a.attributes.startNode;
       const endNode = a.attributes.endNode;
       const resourceId = a.attributes.resourceId;
+      const collectionId = a.attributes.collectionId;
       return {
         id,
         type,
@@ -42,7 +43,8 @@ export default class TextNode extends Component {
         end,
         startNode,
         endNode,
-        resourceId
+        resourceId,
+        collectionId
       };
     });
   }
@@ -107,14 +109,16 @@ export default class TextNode extends Component {
       const underlined = map[index].find(a => a.type === "annotation");
       const isCreator = map[index].find(a => a.isCreator);
       const lockedSelection = map[index].find(a => a.type === "selection");
-      const resources = map[index].filter(a => a.type === "resource");
+      const notations = map[index].filter(
+        a => a.type === "resource" || a.type === "collection"
+      );
       let endingResources = [];
       let startingResources = [];
-      if (resources.length > 0) {
-        endingResources = resources.filter(
+      if (notations.length > 0) {
+        endingResources = notations.filter(
           a => ends[a.id] === index && a.endNode === this.props.nodeUuid
         );
-        startingResources = resources.filter(
+        startingResources = notations.filter(
           a => starts[a.id] === index && a.startNode === this.props.nodeUuid
         );
       }
@@ -124,9 +128,9 @@ export default class TextNode extends Component {
         "annotation-locked-selected primary": lockedSelection,
         "annotation-underline": underlined,
         "annotation-highlight": highlighted,
-        "annotation-resource": resources.length > 0,
-        "annotation-resource-start": resources && startingResources.length > 0,
-        "annotation-resource-end": resources && endingResources.length > 0
+        "annotation-resource": notations.length > 0,
+        "annotation-resource-start": notations && startingResources.length > 0,
+        "annotation-resource-end": notations && endingResources.length > 0
       });
 
       const listableAnnotationIds = map[index]
@@ -142,7 +146,7 @@ export default class TextNode extends Component {
         >
           {chunk}
           {endingResources.length > 0
-            ? <Resource.Marker annotations={endingResources} />
+            ? <Notation.Marker annotations={endingResources} />
             : null}
         </span>
       );

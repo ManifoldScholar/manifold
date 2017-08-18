@@ -1,6 +1,6 @@
 export Section from "./Section";
 export Annotation from "./Annotation";
-export Resource from "./Resource";
+export Notation from "./Notation";
 export AppearanceMenuBody from "./AppearanceMenuBody";
 export AppearanceMenuButton from "./AppearanceMenuButton";
 export Footer from "./Footer";

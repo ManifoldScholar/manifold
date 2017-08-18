@@ -3,7 +3,7 @@
     @include containerPrototype;
   }
 
-  .overlay-full-secondary & {
+  .overlay-full & {
     margin-top: 17px;
 
     @include respond($break60) {
@@ -20,7 +20,7 @@
       margin-bottom: 40px;
     }
 
-    .overlay-full-secondary & {
+    .overlay-full & {
       margin-bottom: 19px;
     }
   }

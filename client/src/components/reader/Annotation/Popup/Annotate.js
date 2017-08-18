@@ -8,7 +8,7 @@ class AnnotationPopupAnnotate extends PureComponent {
   static displayName = "Annotation.Popup.Annotate";
 
   static propTypes = {
-    attachResource: PropTypes.func.isRequired,
+    attachNotation: PropTypes.func.isRequired,
     highlight: PropTypes.func.isRequired,
     annotate: PropTypes.func.isRequired,
     // bookmark: PropTypes.func.isRequired,
@@ -26,7 +26,7 @@ class AnnotationPopupAnnotate extends PureComponent {
         direction={this.props.direction}
       >
         <Button
-          onClick={this.props.attachResource}
+          onClick={this.props.attachNotation}
           requiredRole="admin"
           label="Resource"
           iconClass="manicon-cube-outline"

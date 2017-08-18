@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
+<div
+  className="collection-detail"
+>
+  <div
+    className="container"
+  >
+    <header>
+      <div
+        className="collection-title"
+      >
+        <div>
+          <i
+            className="manicon manicon-file-box"
+          />
+          <div>
+            <h1>
+              Rowan
+            </h1>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div
+      className="collection-description"
+    >
+      <p
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": undefined,
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    className="resource-slideshow"
+  >
+    <div
+      className="slide"
+    >
+      <div
+        className="resource-slide-figure"
+      >
+        <span>
+          <div>
+            <figure>
+              <div
+                className="figure-image"
+                style={
+                  Object {
+                    "backgroundImage": "url(null)",
+                  }
+                }
+              />
+            </figure>
+          </div>
+        </span>
+      </div>
+      <div
+        className="slide-footer"
+      >
+        <div
+          className="slide-caption"
+        >
+          <header>
+            <h2
+              className="resource-title"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Image",
+                }
+              }
+            />
+          </header>
+          <div
+            className="resource-description"
+          >
+            <div
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "World's Greatest Dog",
+                }
+              }
+            />
+          </div>
+          <div
+            className="resource-utility"
+          >
+            <div
+              className="bg-neutral90"
+            >
+              <button
+                className="more-link"
+                onClick={[Function]}
+              >
+                <span
+                  className="open-text"
+                >
+                  Read More
+                </span>
+                <span
+                  className="close-text"
+                >
+                  Hide Description
+                </span>
+              </button>
+              <a
+                className="download-link"
+                href="original-image.mock"
+                target="_blank"
+              >
+                Download
+                <i
+                  className="manicon manicon-arrow-down"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          className="slide-pagination"
+        >
+          <span
+            className="slide-ordinal"
+          >
+            1
+             
+            /
+             
+            2
+          </span>
+          <div>
+            <button
+              className="slide-previous"
+              disabled={true}
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-arrow-round-left"
+              />
+              <span
+                className="screen-reader-text"
+              >
+                Click to load previous slide
+              </span>
+            </button>
+            <button
+              className="slide-next"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-arrow-round-right"
+              />
+              <span
+                className="screen-reader-text"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="container"
+  >
+    <nav
+      className="button-nav"
+    >
+      <br />
+      <a
+        className="button-secondary outlined"
+        href="/browse/project/1/collection/2"
+        onClick={[Function]}
+      >
+        Visit Collection Page
+        <i
+          className="manicon manicon-arrow-right"
+        />
+      </a>
+      <br />
+      <button
+        className="button-secondary outlined dull"
+        data-id="close-overlay"
+        onClick={[Function]}
+      >
+        <i
+          className="manicon manicon-arrow-left"
+        />
+        Return to Reader
+      </button>
+    </nav>
+  </div>
+</div>
+`;

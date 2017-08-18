@@ -8,7 +8,12 @@ import lh from "helpers/linkHandler";
 export default class ResourceListSlideCaption extends Component {
   static propTypes = {
     resource: PropTypes.object,
-    collectionId: PropTypes.string
+    collectionId: PropTypes.string,
+    hideDetailUrl: PropTypes.bool
+  };
+
+  static defaultProps = {
+    hideDetailUrl: false
   };
 
   constructor() {
@@ -38,7 +43,7 @@ export default class ResourceListSlideCaption extends Component {
     if (!this._description) return;
     this._description.style.height = "auto";
     const measuredHeight = this._description.offsetHeight;
-    this._description.style.height = "5em";
+    this._description.style.height = "6em";
     return measuredHeight + "px";
   }
 
@@ -99,12 +104,16 @@ export default class ResourceListSlideCaption extends Component {
       "more-link": true,
       open: this.state.expanded
     });
+    const shadowClass = classNames({
+      "bg-neutral90": true,
+      hidden: this.state.expanded
+    });
     const detailUrl = this.detailUrl();
 
     // Animation to open description
     const animation = {
       animation: {
-        height: this.state.expanded ? this.state.targetHeight : "5em"
+        height: this.state.expanded ? this.state.targetHeight : "6em"
       },
       duration: 250,
       complete: () => {
@@ -142,7 +151,7 @@ export default class ResourceListSlideCaption extends Component {
             </this.state.Velocity.VelocityComponent>
           : null}
         <div className="resource-utility">
-          <div className="bg-neutral90">
+          <div className={shadowClass}>
             <button
               className={moreLinkClass}
               onClick={this.handleReadMore}
@@ -167,7 +176,7 @@ export default class ResourceListSlideCaption extends Component {
                   <i className="manicon manicon-arrow-down" />
                 </a>
               : null}
-            {detailUrl
+            {detailUrl && !this.props.hideDetailUrl
               ? <Link className="detail-link" to={detailUrl}>
                   {"Details"}
                 </Link>

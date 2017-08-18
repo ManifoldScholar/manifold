@@ -19,9 +19,15 @@ export default () => {
           routes: [
             {
               name: "readerSectionResource",
-              component: Reader.Resource.Detail,
+              component: Reader.Notation.Resource.Detail,
               path: "/read/:textId/section/:sectionId/resource/:resourceId",
               helper: (t, s, r) => `/read/${t}/section/${s}/resource/${r}`
+            },
+            {
+              name: "readerSectionCollection",
+              component: Reader.Notation.Collection.Detail,
+              path: "/read/:textId/section/:sectionId/collection/:collectionId",
+              helper: (t, s, c) => `/read/${t}/section/${s}/collection/${c}`
             }
           ]
         }
@@ -434,7 +440,11 @@ export default () => {
           exact: true,
           component: Frontend.CollectionDetail,
           path: "/project/:id/collection/:collectionId",
-          helper: (p, c) => `/project/${p}/collection/${c}`
+          helpers: {
+            frontendProjectCollection: (p, c) =>
+              `/project/${p}/collection/${c}`,
+            frontendProjectCollectionRelative: c => `collection/${c}`
+          }
         },
         {
           name: "frontendProjectResources",

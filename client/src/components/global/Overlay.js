@@ -46,28 +46,43 @@ export default class Overlay extends Component {
     });
   }
 
+  renderHeader(props) {
+    if (!props.title) return null;
+    return (
+      <header className="overlay-full-header">
+        <div className="container">
+          <h3 className="overlay-title">
+            {this.props.title}
+          </h3>
+        </div>
+        <button
+          onClick={this.handleCloseEvent}
+          className="overlay-close"
+          data-id="overlay-close"
+        >
+          Close
+          <i className="manicon manicon-x" />
+        </button>
+      </header>
+    );
+  }
+
   render() {
     return (
       <HigherOrder.BodyClass className={"no-scroll"}>
         <div>
-          <header className="overlay-full-header">
-            {this.props.title
-              ? <div className="container">
-                  <h3 className="overlay-title">
-                    {this.props.title}
-                  </h3>
-                </div>
-              : null}
-            <button
-              onClick={this.handleCloseEvent}
-              className="overlay-close"
-              data-id="overlay-close"
-            >
-              Close
-              <i className="manicon manicon-x" />
-            </button>
-          </header>
+          {this.renderHeader(this.props)}
           <div className={this.overlayClass()}>
+            {!this.props.title
+              ? <button
+                  onClick={this.handleCloseEvent}
+                  className="overlay-close"
+                  data-id="overlay-close"
+                >
+                  Close
+                  <i className="manicon manicon-x" />
+                </button>
+              : null}
             <div
               style={{ maxWidth: this.props.contentWidth }}
               className="container"

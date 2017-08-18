@@ -53,5 +53,13 @@ export default {
         params: { filter, page }
       }
     };
+  },
+
+  forSection(sectionId, filterIgnored = {}) {
+    return {
+      endpoint: `/api/v1/text_sections/${sectionId}/relationships/collections`,
+      method: "GET",
+      options: {}
+    };
   }
 };

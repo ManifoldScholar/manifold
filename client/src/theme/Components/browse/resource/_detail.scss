@@ -6,14 +6,6 @@
     @include clearfix;
   }
 
-  .overlay-full & {
-    padding-top: 70px;
-
-    @include respond($break70) {
-      padding-top: 120px;
-    }
-  }
-
   //.resource-default .figure-default {
   //  padding: 5vh 40px;
   //  margin: 32px 0 18px;
@@ -235,20 +227,6 @@
 
     @include respond($break65) {
       display: none;
-    }
-  }
-
-  .button-nav {
-    text-align: left;
-
-    .button-secondary {
-      width: 250px;
-      max-width: 100%;
-      margin-bottom: 13px;
-
-      @include respond($break60) {
-        width: 320px;
-      }
     }
   }
 

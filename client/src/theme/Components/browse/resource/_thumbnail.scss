@@ -166,14 +166,19 @@
     .wrapper {
       padding: 0;
       padding-bottom: 1em;
+
+      .viewer-list & {
+        padding-bottom: 0.5em;
+      }
     }
+
 
     .resource-title {
       @include templateHead;
-      padding-top: 10px;
+      padding-top: 8px;
       font-size: 14px;
       font-weight: $light;
-      line-height: 1.2;
+      line-height: 1.1;
       color: $neutral50;
     }
   }
@@ -202,7 +207,7 @@
     @include templateHead;
     font-size: 14px;
 
-    .resource-viewer & {
+    .notation-viewer & {
       font-size: 0;
     }
   }

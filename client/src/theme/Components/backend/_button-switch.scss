@@ -1,0 +1,45 @@
+.button-switch-primary {
+  border: 1px solid $accentPrimary;
+
+  .wrapper {
+    display: flex;
+  }
+
+  .button {
+    @include buttonUnstyled;
+    @include utilityPrimary;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+    padding: 13px 20px 14px;
+    font-size: 12px;
+    color: $accentPrimary;
+    cursor: pointer;
+    transition: background-color $duration $timing,
+      color $duration $timing;
+
+    @include respond($break90) {
+      font-size: 14px;
+    }
+
+    &.selected {
+      color: $neutral100;
+      background-color: $accentPrimary;
+    }
+
+    .manicon {
+      margin-right: 0.36em;
+      margin-bottom: -2px; // NP
+      font-size: 1.45em;
+
+      @include respond($break30) {
+        font-size: 1.788em;
+      }
+    }
+  }
+
+  .drawer-backend & {
+    margin-bottom: 28px;
+  }
+}

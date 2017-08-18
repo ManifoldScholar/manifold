@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import FormattedDate from "components/global/FormattedDate";
-import { Utility, ResourceList } from "components/frontend";
+import { Utility, ResourceList, ResourceCollection } from "components/frontend";
 import { HeadContent } from "components/global";
 
 export default class ResourceCollectionDetail extends PureComponent {
@@ -36,23 +35,9 @@ export default class ResourceCollectionDetail extends PureComponent {
           description={collection.attributes.description}
           image={collection.attributes.thumbnailStyles.mediumSquare}
         />
-        <div className="container">
+        <div className="container flush-top flush-bottom">
           <div className="collection-detail">
-            <header>
-              <i className="manicon manicon-file-box" />
-              <div className="collection-title">
-                <h1>
-                  {attr.title}
-                </h1>
-                <span className="collection-date">
-                  <FormattedDate
-                    prefix="Collection created"
-                    format="MMMM, YYYY"
-                    date={attr.createdAt}
-                  />
-                </span>
-              </div>
-            </header>
+            <ResourceCollection.Title collection={collection} showCreatedAt />
             <div className="collection-description">
               <p>
                 {attr.description}
@@ -60,13 +45,15 @@ export default class ResourceCollectionDetail extends PureComponent {
             </div>
             <Utility.ShareBar url={this.props.collectionUrl} />
           </div>
-          <ResourceList.Slideshow
-            collectionId={this.props.collection.id}
-            collectionResources={this.props.slideshowResources}
-            count={project.attributes.resourcesCount}
-            pagination={this.props.slideshowPagination}
-            dispatch={this.props.dispatch}
-          />
+        </div>
+        <ResourceList.Slideshow
+          collectionId={this.props.collection.id}
+          collectionResources={this.props.slideshowResources}
+          count={project.attributes.resourcesCount}
+          pagination={this.props.slideshowPagination}
+          dispatch={this.props.dispatch}
+        />
+        <div className="container flush-top">
           <ResourceList.Totals
             belongsTo="collection"
             count={count}
