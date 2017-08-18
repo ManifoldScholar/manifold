@@ -20,7 +20,6 @@ const perPage = 20;
 
 export class HomeContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
-    console.log("fetch data");
     const pageParam = match.params.page ? match.params.page : page;
     const state = getState();
     const filteredRequest = request(
