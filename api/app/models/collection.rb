@@ -1,6 +1,8 @@
 # A collection of resources
 class Collection < ApplicationRecord
 
+  include Concerns::HasFormattedAttributes
+
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
@@ -21,6 +23,8 @@ class Collection < ApplicationRecord
            dependent: :destroy
   has_many :resources, through: :collection_resources
   has_many :annotations, dependent: :destroy
+
+  has_formatted_attributes :title, include_wrap: false
 
   # Attachments
   manifold_has_attached_file :thumbnail, :image
