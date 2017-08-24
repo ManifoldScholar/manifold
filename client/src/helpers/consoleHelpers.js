@@ -15,7 +15,7 @@ function baseString(emojiKey) {
 
 function header(string, emojiKey = "fist") {
   let out = baseString(emojiKey) + string;
-  out = chalk.bold.green(pad(out, 80, " ", false));
+  out = chalk.bold.green(out);
   console.log(out);
 }
 
