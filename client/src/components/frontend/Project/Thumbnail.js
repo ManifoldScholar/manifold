@@ -79,6 +79,7 @@ export default class ProjectThumbnail extends Component {
   }
 
   renderUpdatedDate(project) {
+    if (project.attributes.draft) return null;
     const classes = classNames({
       date: true,
       alert: project.attributes.recentlyUpdated
