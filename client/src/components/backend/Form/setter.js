@@ -25,7 +25,7 @@ export default function setter(WrappedComponent) {
       actions: PropTypes.shape({
         set: PropTypes.func
       }).isRequired,
-      value: PropTypes.string
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
     };
 
     static defaultProps = {
