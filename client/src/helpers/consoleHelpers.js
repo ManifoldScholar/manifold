@@ -1,9 +1,6 @@
 /* eslint-disable no-console */
 const emoji = require("node-emoji");
 const chalk = require("chalk");
-const stringUtils = require("../utils/string");
-
-const pad = stringUtils.pad;
 
 function baseString(emojiKey) {
   let out = "";

@@ -53,7 +53,7 @@ const config = {
 
 // HMR
 if (process.env.WEBPACK_DEV_SERVER) {
-  ch.info("Webpack dev server is enabled. Enabling HMR");
+  ch.info("Webpack dev server is running. Enabling HMR.");
 
   config.devServer = {
     hot: true,
