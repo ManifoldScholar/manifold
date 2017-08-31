@@ -20,14 +20,18 @@ const buildDir = path.resolve(
   "node"
 );
 
+const entries = {
+  "server-client": "./src/server-client"
+};
+if (process.env.WEBPACK_DEV_SERVER) {
+  entries["server-development"] = "./src/server-dev";
+}
+
 // Clean up build dir
 rimraf.sync(buildDir);
 
 const config = {
-  entry: {
-    web: "./src/server-web",
-    renderer: "./src/server-renderer"
-  },
+  entry: entries,
   target: "node",
   node: {
     __dirname: false,

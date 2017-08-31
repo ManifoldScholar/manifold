@@ -12,12 +12,12 @@ let timer;
 compiler.plugin("done", stats => {
   const end = +new Date();
   const ms = end - timer;
-  ch.header(`Client-side assets have finished building (${ms}ms)`);
+  ch.header(`Client-side assets have finished building (${ms}ms).`);
 });
 
 compiler.plugin("compile", params => {
   timer = +new Date();
-  ch.info("Client-side assets are being built");
+  ch.info("Client-side assets are being built.");
 });
 
 const serverOptions = {

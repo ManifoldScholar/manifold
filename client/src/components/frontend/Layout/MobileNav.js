@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import startsWith from "lodash/startsWith";
 import lh from "helpers/linkHandler";
 
 export default class MobileNav extends Component {

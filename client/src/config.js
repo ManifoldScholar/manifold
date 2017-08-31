@@ -11,11 +11,10 @@ const environmentConfiguration = {
 
 // eslint-disable max-len
 const applicationConfiguration = {
-  webServerPort: process.env.CLIENT_WEB_SERVER_PORT,
-  webServerSocket: process.env.CLIENT_WEB_SERVER_SOCKET,
-  universalServerPort: process.env.CLIENT_UNIVERSAL_SERVER_PORT,
-  universalServerSocket: process.env.CLIENT_UNIVERSAL_SERVER_SOCKET,
-  assetPort: process.env.CLIENT_ASSET_PORT,
+  clientPort: process.env.CLIENT_SERVER_PORT || 3010,
+  clientFallbackPort: process.env.CLIENT_SERVER_FALLBACK_PORT || 3011,
+  clientSocket: process.env.CLIENT_SERVER_SOCKET,
+  assetPort: process.env.CLIENT_ASSET_PORT || 3012,
   apiUrl: process.env.API_URL,
   cableUrl: process.env.CABLE_URL,
   assetProxyPaths: ["/dist"],
