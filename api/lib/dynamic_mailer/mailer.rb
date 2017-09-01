@@ -61,7 +61,7 @@ module DynamicMailer
     end
 
     def deliver_sendmail!(mail)
-      mailer = Mail::Sendmnail.new(@config.sendmail_config)
+      mailer = Mail::Sendmail.new(@config.sendmail_config)
       mailer.deliver!(mail)
     end
 
