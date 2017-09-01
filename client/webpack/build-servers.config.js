@@ -23,6 +23,7 @@ const buildDir = path.resolve(
 const entries = {
   "server-client": "./src/server-client"
 };
+
 if (process.env.WEBPACK_DEV_SERVER) {
   entries["server-development"] = "./src/server-dev";
 }

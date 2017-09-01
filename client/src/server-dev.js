@@ -13,7 +13,7 @@ const socket = config.clientSocket;
 const port = config.clientPort;
 const clientFallbackPort = `http://localhost:${config.clientFallbackPort}`;
 const stats = readStats();
-
+console.log(config, "socket");
 // Handle requests
 const requestHandler = (req, res) => {
   const store = createStore();
