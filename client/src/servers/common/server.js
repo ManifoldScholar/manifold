@@ -33,9 +33,9 @@ export default function webServer(app, name, options) {
       ch.header(
         capitalize(`${name} server is listening on a socket at ${listen}.`)
       );
-    } else {
-      ch.header(capitalize(`${name} server is listening on port ${listen}.`));
+      return fs.chmod(socket, "0775");
     }
+    ch.header(capitalize(`${name} server is listening on port ${listen}.`));
   };
 
   const onServerError = error => {
