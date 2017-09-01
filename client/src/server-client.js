@@ -99,7 +99,9 @@ const fetchRouteData = (req, store) => {
         location,
         matchedRoute.match
       );
-      if (isPromise(result)) allPromises.push(result);
+      if (isPromise(result)) {
+        allPromises.push(result);
+      }
       if (Array.isArray(result)) {
         result.forEach(aResult => {
           if (isPromise(aResult)) allPromises.push(aResult);
@@ -109,6 +111,14 @@ const fetchRouteData = (req, store) => {
     }
     return allPromises;
   }, []);
+  promises.forEach(promise => {
+    promise.catch(resp => {
+      ch.error(
+        `API Error ${resp.status} ${resp.statusText}: ${resp.request.endpoint}`,
+        "rain_cloud"
+      );
+    });
+  });
   return Promise.all(promises);
 };
 
@@ -156,7 +166,7 @@ const requestHandler = (req, res) => {
         return fetchRouteData(req, store);
       },
       () => {
-        ch.warning("Unable to authenticate user", "rain_cloud");
+        ch.info("Unable to authenticate user", "rain_cloud");
         return fetchRouteData(req, store);
       }
     )
