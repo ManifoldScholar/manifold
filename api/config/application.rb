@@ -17,8 +17,6 @@ require "dynamic_mailer/mailer"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-require_relative "../lib/manifold_env"
-
 # We're monkey patching dotenv's load method to load the .env file from the parent
 # directory.
 module Dotenv
@@ -34,6 +32,9 @@ module Dotenv
   end
 end
 Dotenv::Railtie.load
+
+# Make sure this is included _after_ the environment is setup.
+require_relative "../lib/manifold_env"
 
 ActionMailer::Base.add_delivery_method :manifold_dynamic, DynamicMailer::Mailer
 
