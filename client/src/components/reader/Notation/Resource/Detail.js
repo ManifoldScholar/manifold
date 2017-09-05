@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Resource } from "components/frontend";
 import Icon from "components/frontend/Resource/Icon";
 import lh from "helpers/linkHandler";
+import isEmpty from "lodash/isEmpty";
 
 export default class ResourceDetail extends PureComponent {
   static propTypes = {
@@ -51,19 +52,19 @@ export default class ResourceDetail extends PureComponent {
           </div>
           <Resource.Title resource={resource} />
           <div className="resource-content">
-            <p dangerouslySetInnerHTML={{ __html: attr.captionFormatted }} />
-            <p
-              dangerouslySetInnerHTML={{ __html: attr.descriptionFormatted }}
-            />
+            {!isEmpty(attr.captionFormatted)
+              ? <p
+                  dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
+                />
+              : null}
+            {!isEmpty(attr.descriptionFormatted)
+              ? <p
+                  dangerouslySetInnerHTML={{
+                    __html: attr.descriptionFormatted
+                  }}
+                />
+              : null}
           </div>
-
-          {/*
-          <div className="resource-default">
-            <ResourceList.Slide.Slide
-                resource={resource}
-            />
-          </div>
-        */}
         </div>
         <Resource.Hero
           resource={resource}

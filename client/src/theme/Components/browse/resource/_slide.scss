@@ -4,6 +4,7 @@
   height: 52vw;
   max-height: 52vh;
   min-height: 350px;
+  overflow: hidden;
   background-color: $neutralBlack;
 
   figure {
@@ -14,12 +15,43 @@
     height: 100%;
     overflow: hidden;
     opacity: 1;
-    transition: width 0.4s $timing,
-      opacity 0.2s $timing 0.23s;
   }
 
-  .figure-leave figure {
-    width: 0;
+  // Transition classes
+  .slide-left-enter figure {
+    left: 100%;
+  }
+
+  .slide-left-enter-active figure {
+    left: 0;
+    transition: left 0.4s $timing;
+  }
+
+  .slide-left-leave figure {
+    left: 0;
+  }
+
+  .slide-left-leave-active figure {
+    left: -100%;
+    transition: left 0.4s $timing;
+  }
+
+  .slide-right-enter figure {
+    left: -100%;
+  }
+
+  .slide-right-enter-active figure {
+    left: 0;
+    transition: left 0.4s $timing;
+  }
+
+  .slide-right-leave figure {
+    left: 0;
+  }
+
+  .slide-right-leave-active figure {
+    left: 100%;
+    transition: left 0.4s $timing;
   }
 
   //.figure-enter figure {

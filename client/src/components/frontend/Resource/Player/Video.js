@@ -1,36 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import throttle from "lodash/throttle";
 import { DefaultPlayer as Video } from "react-html5video";
 
 export default class ResourcePlayerVideo extends Component {
   static propTypes = {
     resource: PropTypes.object
   };
-
-  constructor() {
-    super();
-    this.getParentWidth = this.getParentWidth.bind(this);
-  }
-
-  componentDidMount() {
-    if (this._figure) {
-      this._figure.style.width = this.getParentWidth(this._figure);
-      this.throttledWidth = throttle(() => {
-        this._figure.style.width = this.getParentWidth(this._figure);
-      }, 200);
-      window.addEventListener("resize", this.throttledWidth);
-    }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.throttledWidth);
-  }
-
-  getParentWidth(figure) {
-    const w = figure.parentNode.offsetWidth;
-    return w + "px";
-  }
 
   renderVideoByService(service, id) {
     let output = false;

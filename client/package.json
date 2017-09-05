@@ -107,6 +107,7 @@
     "react-router-redux": "next",
     "react-side-effect": "^1.1.3",
     "react-sociable": "^0.0.5",
+    "react-swipeable": "^4.1.0",
     "react-test-renderer": "15.5.x",
     "react-text-mask": "5.x",
     "react-transition-group": "1.x",

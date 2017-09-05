@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import Swipeable from "react-swipeable";
 import includes from "lodash/includes";
 import { ResourceList } from "components/frontend";
 import { collectionsAPI, requests } from "api";
@@ -17,11 +18,14 @@ export default class ResourceListSlideshow extends PureComponent {
     dispatch: PropTypes.func,
     collectionId: PropTypes.string,
     hideDetailUrl: PropTypes.bool,
+    hideDownload: PropTypes.bool,
     slideOptions: PropTypes.object
   };
 
   static defaultProps = {
-    slideOptions: {}
+    slideOptions: {},
+    hideDetailUrl: false,
+    hideDownload: false
   };
 
   constructor(props) {
@@ -33,7 +37,8 @@ export default class ResourceListSlideshow extends PureComponent {
       position: 1,
       loadedPages: [1],
       map: {},
-      totalCount: 0
+      totalCount: 0,
+      slideDirection: "left"
     };
     this.state.map = this.buildNewMap(
       props.collectionResources,
@@ -67,7 +72,6 @@ export default class ResourceListSlideshow extends PureComponent {
   }
 
   getFigureByType(resource) {
-    const output = false;
     let Slide = ResourceList.Slide.Slide;
     if (resource.attributes.kind === "image")
       Slide = ResourceList.Slide.SlideImage;
@@ -97,12 +101,24 @@ export default class ResourceListSlideshow extends PureComponent {
   }
 
   handleSlidePrev() {
+    if (this.state.slideDirection !== "right") {
+      this.setState({
+        slideDirection: "right"
+      });
+    }
+
     let newPosition = this.state.position - 1;
     if (newPosition < 1) newPosition = 1;
     this.updatePosition(newPosition);
   }
 
   handleSlideNext() {
+    if (this.state.slideDirection !== "left") {
+      this.setState({
+        slideDirection: "left"
+      });
+    }
+
     let newPosition = this.state.position + 1;
     if (newPosition > this.state.totalCount)
       newPosition = this.state.totalCount;
@@ -191,23 +207,30 @@ export default class ResourceListSlideshow extends PureComponent {
           listed format to support multiple, sliding images
         */}
         <div className="slide">
-          <div className="resource-slide-figure">
-            <ReactCSSTransitionGroup
-              transitionName="figure"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={500}
-            >
-              {this.props.collectionResources.length > 0
-                ? this.renderSlideShow()
-                : this.renderPlaceholder()}
-            </ReactCSSTransitionGroup>
-          </div>
+          <Swipeable
+            onSwipedLeft={this.handleSlideNext}
+            onSwipedRight={this.handleSlidePrev}
+          >
+            {/* Concatenate a reactive transition name */}
+            <div className="resource-slide-figure">
+              <ReactCSSTransitionGroup
+                transitionName={`slide-${this.state.slideDirection}`}
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={500}
+              >
+                {this.props.collectionResources.length > 0
+                  ? this.renderSlideShow()
+                  : this.renderPlaceholder()}
+              </ReactCSSTransitionGroup>
+            </div>
+          </Swipeable>
           <div className="slide-footer">
             {this.isLoaded(position)
               ? <ResourceList.Slide.Caption
                   resource={collectionResource}
                   collectionId={this.props.collectionId}
                   hideDetailUrl={this.props.hideDetailUrl}
+                  hideDownload={this.props.hideDownload}
                 />
               : <ResourceList.Slide.LoadingCaption />}
             {this.props.collectionResources.length > 0
@@ -221,7 +244,9 @@ export default class ResourceListSlideshow extends PureComponent {
                       onClick={this.handleSlidePrev}
                       disabled={position === 1}
                     >
+                      <i className="manicon manicon-arrow-left" />
                       <i className="manicon manicon-arrow-round-left" />
+                      <span className="text">Prev</span>
                       <span className="screen-reader-text">
                         {"Click to load previous slide"}
                       </span>
@@ -231,8 +256,12 @@ export default class ResourceListSlideshow extends PureComponent {
                       onClick={this.handleSlideNext}
                       disabled={position === totalCount}
                     >
+                      <span className="text">Next</span>
+                      <span className="screen-reader-text">
+                        {"Click to load next slide"}
+                      </span>
                       <i className="manicon manicon-arrow-round-right" />
-                      <span className="screen-reader-text" />
+                      <i className="manicon manicon-arrow-right" />
                     </button>
                   </div>
                 </div>

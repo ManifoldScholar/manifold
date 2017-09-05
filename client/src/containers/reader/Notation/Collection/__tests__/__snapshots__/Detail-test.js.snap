@@ -26,47 +26,36 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
       <div
         className="notation-detail"
       >
-        <div
-          className="container"
-        >
-          <span
-            className="notation-type"
-          >
-            Collection
-          </span>
-        </div>
-        <div
-          className="collection-detail"
-        >
+        <div>
           <div
-            className="container"
+            className="collection-detail"
           >
-            <header>
-              <div
-                className="collection-title"
-              >
-                <div>
-                  <i
-                    className="manicon manicon-file-box"
-                  />
+            <div
+              className="container"
+            >
+              <header>
+                <div
+                  className="collection-title"
+                >
                   <div>
-                    <h1>
-                      Rowan
-                    </h1>
+                    <i
+                      className="manicon manicon-file-box"
+                    />
+                    <div>
+                      <h1>
+                        Rowan
+                      </h1>
+                      <span
+                        className="collection-date"
+                      >
+                        <span>
+                          Collection created April, 2017
+                        </span>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </header>
-            <div
-              className="collection-description"
-            >
-              <p
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": undefined,
-                  }
-                }
-              />
+              </header>
             </div>
           </div>
           <div
@@ -76,28 +65,36 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
               className="slide"
             >
               <div
-                className="resource-slide-figure"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
               >
-                <span>
-                  <div>
-                    <figure>
-                      <div
-                        className="figure-image"
-                        style={
-                          Object {
-                            "backgroundImage": "url(null)",
+                <div
+                  className="resource-slide-figure"
+                >
+                  <span>
+                    <div>
+                      <figure>
+                        <div
+                          className="figure-image"
+                          style={
+                            Object {
+                              "backgroundImage": "url(null)",
+                            }
                           }
-                        }
-                      />
-                    </figure>
-                  </div>
-                </span>
+                        />
+                      </figure>
+                    </div>
+                  </span>
+                </div>
               </div>
               <div
                 className="slide-footer"
               >
                 <div
                   className="slide-caption"
+                  onClick={[Function]}
                 >
                   <header>
                     <h2
@@ -121,10 +118,10 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
                     />
                   </div>
                   <div
-                    className="resource-utility"
+                    className="resource-utility with-shadow"
                   >
                     <div
-                      className="bg-neutral90"
+                      className="wrapper"
                     >
                       <button
                         className="more-link"
@@ -173,8 +170,16 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
                       onClick={[Function]}
                     >
                       <i
+                        className="manicon manicon-arrow-left"
+                      />
+                      <i
                         className="manicon manicon-arrow-round-left"
                       />
+                      <span
+                        className="text"
+                      >
+                        Prev
+                      </span>
                       <span
                         className="screen-reader-text"
                       >
@@ -186,11 +191,21 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
                       disabled={false}
                       onClick={[Function]}
                     >
+                      <span
+                        className="text"
+                      >
+                        Next
+                      </span>
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Click to load next slide
+                      </span>
                       <i
                         className="manicon manicon-arrow-round-right"
                       />
-                      <span
-                        className="screen-reader-text"
+                      <i
+                        className="manicon manicon-arrow-right"
                       />
                     </button>
                   </div>

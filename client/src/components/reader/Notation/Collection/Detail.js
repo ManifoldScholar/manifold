@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { ResourceList, ResourceCollection } from "components/frontend";
 import lh from "helpers/linkHandler";
+import isEmpty from "lodash/isEmpty";
 
 export default class CollectionDetail extends PureComponent {
   static propTypes = {
@@ -46,11 +47,15 @@ export default class CollectionDetail extends PureComponent {
       this.props.collectionUrl || this.buildRedirectUrl(collection);
 
     return (
-      <div className="collection-detail">
-        <div className="container">
-          <ResourceCollection.Title collection={collection} />
-          <div className="collection-description">
-            <p dangerouslySetInnerHTML={{ __html: attr.description }} />
+      <div>
+        <div className="collection-detail">
+          <div className="container">
+            <ResourceCollection.Title collection={collection} />
+            {!isEmpty(attr.description)
+              ? <div className="collection-description">
+                  <p dangerouslySetInnerHTML={{ __html: attr.description }} />
+                </div>
+              : null}
           </div>
         </div>
         <ResourceList.Slideshow
