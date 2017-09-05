@@ -64,46 +64,54 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
       className="slide"
     >
       <div
-        className="resource-slide-figure"
+        onMouseDown={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
       >
-        <span>
-          <div>
-            <figure>
-              <div
-                className="resource-link-wrapper"
-              >
-                <span />
+        <div
+          className="resource-slide-figure"
+        >
+          <span>
+            <div>
+              <figure>
                 <div
-                  className="resource-preview-wrapper"
-                  onClick={[Function]}
+                  className="resource-link-wrapper"
                 >
+                  <span />
                   <div
-                    className="zoom-indicator"
+                    className="resource-preview-wrapper"
+                    onClick={[Function]}
                   >
-                    Zoom
-                    <i
-                      className="manicon manicon-magnify-plus"
-                    />
+                    <div
+                      className="zoom-indicator"
+                    >
+                      Zoom
+                      <i
+                        className="manicon manicon-magnify-plus"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="figure-image"
-                style={
-                  Object {
-                    "backgroundImage": "url(null)",
+                <div
+                  className="figure-image"
+                  style={
+                    Object {
+                      "backgroundImage": "url(null)",
+                    }
                   }
-                }
-              />
-            </figure>
-          </div>
-        </span>
+                />
+              </figure>
+            </div>
+          </span>
+        </div>
       </div>
       <div
         className="slide-footer"
       >
         <div
           className="slide-caption"
+          onClick={[Function]}
         >
           <header>
             <h2
@@ -116,10 +124,10 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
             />
           </header>
           <div
-            className="resource-utility"
+            className="resource-utility with-shadow"
           >
             <div
-              className="bg-neutral90"
+              className="wrapper"
             >
               <button
                 className="more-link"
@@ -151,7 +159,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                 href="/project/1/collection/2/collection_resource/4"
                 onClick={[Function]}
               >
-                Details
+                View Resource
               </a>
             </div>
           </div>
@@ -175,8 +183,16 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
               onClick={[Function]}
             >
               <i
+                className="manicon manicon-arrow-left"
+              />
+              <i
                 className="manicon manicon-arrow-round-left"
               />
+              <span
+                className="text"
+              >
+                Prev
+              </span>
               <span
                 className="screen-reader-text"
               >
@@ -188,11 +204,21 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
               disabled={false}
               onClick={[Function]}
             >
+              <span
+                className="text"
+              >
+                Next
+              </span>
+              <span
+                className="screen-reader-text"
+              >
+                Click to load next slide
+              </span>
               <i
                 className="manicon manicon-arrow-round-right"
               />
-              <span
-                className="screen-reader-text"
+              <i
+                className="manicon manicon-arrow-right"
               />
             </button>
           </div>

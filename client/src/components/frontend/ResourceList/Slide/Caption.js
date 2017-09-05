@@ -3,17 +3,23 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import get from "lodash/get";
+import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
+import isEmpty from "lodash/isEmpty";
 
 export default class ResourceListSlideCaption extends Component {
+  static visibleCaptionHeight = 48;
+
   static propTypes = {
     resource: PropTypes.object,
     collectionId: PropTypes.string,
-    hideDetailUrl: PropTypes.bool
+    hideDetailUrl: PropTypes.bool,
+    hideDownload: PropTypes.bool
   };
 
   static defaultProps = {
-    hideDetailUrl: false
+    hideDetailUrl: false,
+    hideDownload: false
   };
 
   constructor() {
@@ -23,7 +29,9 @@ export default class ResourceListSlideCaption extends Component {
       expanded: false,
       targetHeight: "5em"
     };
+
     this.handleReadMore = this.handleReadMore.bind(this);
+    this.checkExpandable = this.checkExpandable.bind(this);
   }
 
   componentDidMount() {
@@ -32,22 +40,37 @@ export default class ResourceListSlideCaption extends Component {
         this.setState({ Velocity });
       }
     );
-    this.checkReadMoreVisibility();
+
+    this.checkExpandable();
+
+    // Check expandable on resize
+    const debouncedExpand = debounce(this.checkExpandable, 120);
+    window.addEventListener("resize", debouncedExpand);
   }
 
   componentDidUpdate() {
-    this.checkReadMoreVisibility();
+    this.checkExpandable();
   }
 
   getFullDescriptionHeight() {
     if (!this._description) return;
     this._description.style.height = "auto";
     const measuredHeight = this._description.offsetHeight;
-    this._description.style.height = "6em";
+    this._description.style.height = "3em";
     return measuredHeight + "px";
   }
 
+  canDownload(resource) {
+    if (this.props.hideDownload) return false;
+    return get(resource, "attributes.downloadable") || false;
+  }
+
+  hasCaption(resource) {
+    return !isEmpty(get(resource, "attributes.captionFormatted"));
+  }
+
   handleReadMore() {
+    if (!this.canExpand()) return;
     if (!this.state.expanded) {
       this.setState({
         targetHeight: this.getFullDescriptionHeight()
@@ -60,20 +83,32 @@ export default class ResourceListSlideCaption extends Component {
   }
 
   createDescription(description) {
-    if (!description) return { __html: "No content provided." };
     return {
-      __html: description
+      __html: description || ""
     };
   }
 
-  checkReadMoreVisibility() {
-    if (!this._readMoreButton || !this._descriptionContents) return;
-    const visibleHeight = 37;
-    if (this._descriptionContents.offsetHeight < visibleHeight) {
-      this._readMoreButton.classList.add("hidden");
-    } else {
-      this._readMoreButton.classList.remove("hidden");
-    }
+  canExpand() {
+    if (!this._utility) return false;
+    if (!this._descriptionContents) return false;
+    return (
+      this._descriptionContents.offsetHeight >
+      ResourceListSlideCaption.visibleCaptionHeight
+    );
+  }
+
+  checkExpandable() {
+    if (!this._utility) return;
+    if (this.canExpand()) return this.showExpandable();
+    this.hideExpandable();
+  }
+
+  hideExpandable() {
+    this._utility.classList.remove("expandable");
+  }
+
+  showExpandable() {
+    this._utility.classList.add("expandable");
   }
 
   detailUrl() {
@@ -100,20 +135,21 @@ export default class ResourceListSlideCaption extends Component {
   render() {
     const resource = this.props.resource;
     const attr = resource.attributes;
-    const moreLinkClass = classNames({
-      "more-link": true,
+    const moreLinkClass = classNames("more-link", {
       open: this.state.expanded
     });
-    const shadowClass = classNames({
-      "bg-neutral90": true,
-      hidden: this.state.expanded
+
+    const utilityClass = classNames("resource-utility", {
+      "with-shadow": this.hasCaption(resource),
+      expanded: this.state.expanded
     });
+
     const detailUrl = this.detailUrl();
 
     // Animation to open description
     const animation = {
       animation: {
-        height: this.state.expanded ? this.state.targetHeight : "6em"
+        height: this.state.expanded ? this.state.targetHeight : "3em"
       },
       duration: 250,
       complete: () => {
@@ -124,14 +160,14 @@ export default class ResourceListSlideCaption extends Component {
     };
 
     return (
-      <div className="slide-caption">
+      <div className="slide-caption" onClick={this.handleReadMore}>
         <header>
           <h2
             className="resource-title"
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
           />
         </header>
-        {this.state.Velocity
+        {this.state.Velocity && this.hasCaption(resource)
           ? <this.state.Velocity.VelocityComponent {...animation}>
               <div
                 className="resource-description"
@@ -150,15 +186,14 @@ export default class ResourceListSlideCaption extends Component {
               </div>
             </this.state.Velocity.VelocityComponent>
           : null}
-        <div className="resource-utility">
-          <div className={shadowClass}>
-            <button
-              className={moreLinkClass}
-              onClick={this.handleReadMore}
-              ref={e => {
-                this._readMoreButton = e;
-              }}
-            >
+        <div
+          className={utilityClass}
+          ref={e => {
+            this._utility = e;
+          }}
+        >
+          <div className="wrapper">
+            <button className={moreLinkClass} onClick={this.handleReadMore}>
               <span className="open-text">
                 {"Read More"}
               </span>
@@ -166,7 +201,7 @@ export default class ResourceListSlideCaption extends Component {
                 {"Hide Description"}
               </span>
             </button>
-            {attr.downloadable
+            {this.canDownload(resource)
               ? <a
                   href={attr.attachmentStyles.original}
                   target="_blank"
@@ -178,7 +213,7 @@ export default class ResourceListSlideCaption extends Component {
               : null}
             {detailUrl && !this.props.hideDetailUrl
               ? <Link className="detail-link" to={detailUrl}>
-                  {"Details"}
+                  {"View Resource"}
                 </Link>
               : null}
           </div>

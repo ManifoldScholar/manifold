@@ -3,6 +3,7 @@
 exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
 <div
   className="slide-caption"
+  onClick={[Function]}
 >
   <header>
     <h2
@@ -15,10 +16,10 @@ exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
     />
   </header>
   <div
-    className="resource-utility"
+    className="resource-utility with-shadow"
   >
     <div
-      className="bg-neutral90"
+      className="wrapper"
     >
       <button
         className="more-link"
@@ -50,7 +51,7 @@ exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
         href="/project/undefined/resource/1"
         onClick={[Function]}
       >
-        Details
+        View Resource
       </a>
     </div>
   </div>

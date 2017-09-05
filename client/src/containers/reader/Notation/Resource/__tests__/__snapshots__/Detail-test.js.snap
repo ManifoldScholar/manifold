@@ -27,15 +27,6 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
         className="notation-detail"
       >
         <div
-          className="container"
-        >
-          <span
-            className="notation-type"
-          >
-            image
-          </span>
-        </div>
-        <div
           className="resource-detail"
         >
           <div

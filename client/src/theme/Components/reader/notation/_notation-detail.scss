@@ -15,7 +15,6 @@
   }
 
   .collection-detail {
-
     .collection-title {
       padding-top: 7px;
 
@@ -33,24 +32,30 @@
     .collection-description {
       color: $neutral40;
     }
+  }
 
-    .resource-slideshow {
-      margin-top: 40px;
+  .resource-slideshow {
+    margin-top: 14px;
 
-      .resource-description {
-        padding-bottom: 5em;
+    @include respond($break60) {
+      margin-top: 25px;
+    }
 
-        @include respond($break40) {
-          padding-bottom: 3.5em;
-        }
+    .resource-description {
+      padding-bottom: 5em;
+
+      @include respond($break40) {
+        padding-bottom: 3.5em;
       }
+    }
 
-      .slide-footer {
-        padding: 17px 23px;
+    .slide-footer {
+      padding-right: 0;
+      padding-left: 0;
 
-        @include respond($break60) {
-          padding: 17px 0;
-        }
+      @include respond($break60) {
+        padding-right: 0;
+        padding-left: 0;
       }
     }
   }

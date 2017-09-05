@@ -8,46 +8,54 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
     className="slide"
   >
     <div
-      className="resource-slide-figure"
+      onMouseDown={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
     >
-      <span>
-        <div>
-          <figure>
-            <div
-              className="resource-link-wrapper"
-            >
-              <span />
+      <div
+        className="resource-slide-figure"
+      >
+        <span>
+          <div>
+            <figure>
               <div
-                className="resource-preview-wrapper"
-                onClick={[Function]}
+                className="resource-link-wrapper"
               >
+                <span />
                 <div
-                  className="zoom-indicator"
+                  className="resource-preview-wrapper"
+                  onClick={[Function]}
                 >
-                  Zoom
-                  <i
-                    className="manicon manicon-magnify-plus"
-                  />
+                  <div
+                    className="zoom-indicator"
+                  >
+                    Zoom
+                    <i
+                      className="manicon manicon-magnify-plus"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              className="figure-image"
-              style={
-                Object {
-                  "backgroundImage": "url(null)",
+              <div
+                className="figure-image"
+                style={
+                  Object {
+                    "backgroundImage": "url(null)",
+                  }
                 }
-              }
-            />
-          </figure>
-        </div>
-      </span>
+              />
+            </figure>
+          </div>
+        </span>
+      </div>
     </div>
     <div
       className="slide-footer"
     >
       <div
         className="slide-caption"
+        onClick={[Function]}
       >
         <header>
           <h2
@@ -60,10 +68,10 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
           />
         </header>
         <div
-          className="resource-utility"
+          className="resource-utility with-shadow"
         >
           <div
-            className="bg-neutral90"
+            className="wrapper"
           >
             <button
               className="more-link"
@@ -95,7 +103,7 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
               href="/project/undefined/resource/1"
               onClick={[Function]}
             >
-              Details
+              View Resource
             </a>
           </div>
         </div>
@@ -119,8 +127,16 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
             onClick={[Function]}
           >
             <i
+              className="manicon manicon-arrow-left"
+            />
+            <i
               className="manicon manicon-arrow-round-left"
             />
+            <span
+              className="text"
+            >
+              Prev
+            </span>
             <span
               className="screen-reader-text"
             >
@@ -132,11 +148,21 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly 1`] = `
             disabled={false}
             onClick={[Function]}
           >
+            <span
+              className="text"
+            >
+              Next
+            </span>
+            <span
+              className="screen-reader-text"
+            >
+              Click to load next slide
+            </span>
             <i
               className="manicon manicon-arrow-round-right"
             />
-            <span
-              className="screen-reader-text"
+            <i
+              className="manicon manicon-arrow-right"
             />
           </button>
         </div>
@@ -154,33 +180,40 @@ exports[`Frontend.ResourceList.Slideshow Component renders correctly with no res
     className="slide"
   >
     <div
-      className="resource-slide-figure"
+      onMouseDown={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
     >
-      <span>
-        <figure>
-          <div
-            className="figure-default"
-            style={
-              Object {
-                "backgroundImage": "url(/static/images/resource-collection.jpg)",
-              }
-            }
-          >
+      <div
+        className="resource-slide-figure"
+      >
+        <span>
+          <figure>
             <div
-              className="resource-info"
+              className="figure-default"
+              style={
+                Object {
+                  "backgroundImage": "url(/static/images/resource-collection.jpg)",
+                }
+              }
             >
-              <i
-                className="manicon manicon-file-box"
-              />
-              <span
-                className="resource-type"
+              <div
+                className="resource-info"
               >
-                This collection has no resources
-              </span>
+                <i
+                  className="manicon manicon-file-box"
+                />
+                <span
+                  className="resource-type"
+                >
+                  This collection has no resources
+                </span>
+              </div>
             </div>
-          </div>
-        </figure>
-      </span>
+          </figure>
+        </span>
+      </div>
     </div>
     <div
       className="slide-footer"

@@ -1,5 +1,4 @@
 .resource-slideshow {
-
   $slideCopyFocus: 570px;
   padding-bottom: 38px;
 
@@ -8,10 +7,15 @@
   }
 
   .slide-footer {
-    display: table;
-    width: 100%;
-    padding: 17px 23px;
-    background-color: $neutral90;
+    position: relative;
+    padding: 10px $containerPaddingResp;
+
+    @include respond($break60) {
+      display: table;
+      width: 100%;
+      padding: 17px 23px;
+      background-color: $neutral90;
+    }
   }
 
   .slide-caption {
@@ -24,24 +28,29 @@
   .resource-title {
     @include templateHead;
     margin-top: 0;
-    margin-bottom: 0.364em;
-    font-size: 22px;
+    margin-bottom: 0.2em;
+    font-size: 20px;
     font-weight: $regular;
-    color: $neutral05;
+    color: $neutralOffBlack;
+
+    @include respond($break60) {
+      margin-bottom: 0.364em;
+      font-size: 22px;
+      color: $neutral05;
+    }
+
+    .overlay-full & {
+      color: $neutral05;
+    }
   }
 
   .resource-description {
     @include templateCopy;
     height: 5em;
     max-width: $slideCopyFocus;
-    padding-bottom: 6.5em;
     overflow: hidden;
     font-size: 15px;
     color: $neutral40;
-
-    @include respond($break40) {
-      padding-bottom: 3.5em;
-    }
 
     p + p {
       margin-top: 1em;
@@ -53,25 +62,82 @@
   }
 
   .slide-pagination {
-    width: 160px;
-    padding-top: 2px;
-    text-align: right;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: transparentize($neutral90, 0.1);
+
+    @include respond($break60) {
+      position: static;
+      width: 160px;
+      padding-top: 2px;
+      text-align: right;
+      background: transparent;
+    }
 
     .slide-ordinal {
       @include utilityPrimary;
       display: inline-block;
-      font-weight: $regular;
+      padding: 11px 0 13px;
+      font-size: 13px;
       letter-spacing: 0.05em;
       color: $neutral50;
+
+      @include respond($break60) {
+        padding: 0;
+        font-size: 16px;
+      }
     }
 
     .slide-previous, .slide-next {
       @include buttonUnstyled;
-      margin-top: 16px;
+      @include utilityPrimary;
+      position: absolute;
+      top: 50%;
+      margin-top: -9px;
+      font-size: 13px;
+      letter-spacing: 0.05em;
       color: $neutral40;
 
-      .manicon {
+      @include respond($break60) {
+        position: static;
+        margin-top: 16px;
+      }
+
+      .text {
+        @include respond($break60) {
+          display: none;
+        }
+      }
+
+      .manicon-arrow-left, .manicon-arrow-right {
+        display: inline-block;
+        margin-top: -1px;
+        font-size: 0.923em;
+        vertical-align: middle;
+
+        @include respond($break60) {
+          display: none;
+        }
+      }
+
+      .manicon-arrow-left {
+        margin-right: 9px;
+      }
+
+      .manicon-arrow-right {
+        margin-left: 9px;
+      }
+
+      .manicon-arrow-round-right, .manicon-arrow-round-left {
+        display: none;
         font-size: 42px;
+
+        @include respond($break60) {
+          display: inline-block;
+        }
       }
 
       &:disabled {
@@ -83,31 +149,72 @@
       }
     }
 
+    .slide-previous {
+      left: 20px;
+    }
+
     .slide-next {
-      margin-left: 14px;
+      right: 20px;
+
+      @include respond($break60) {
+        margin-left: 14px;
+      }
     }
   }
 
   .resource-utility {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
+    position: relative;
 
-    &::before {
-      display: block;
-      width: 120%;
-      height: 33px;
-      content: '';
-      box-shadow: inset -10px -10px 18px 0 $neutral90;
+    .wrapper {
+      padding: 9px 0 15px;
+      background-color: $neutralWhite;
+
+      @include respond($break60) {
+        background-color: $neutral90;
+      }
+
+      .overlay-full & {
+        background-color: $neutral90;
+      }
     }
 
-    > div {
-      padding: 9px 0 15px;
+    &.expandable {
+      &.expanded {
+        margin-top: 33px;
 
-      &.hidden {
-        padding-top: 0;
+        .wrapper {
+          margin-top: 0;
+        }
+      }
+
+      .more-link {
+        display: block;
+
+        @include respond($break40) {
+          display: inline;
+        }
+      }
+
+      &::before {
+        // Resource utility fade that hides part of the
+        // above description
+        // Only displayed if description is present
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 33px;
+        content: '';
+        box-shadow: inset -10px -10px 18px 0 $neutralWhite;
+
+        @include respond($break60) {
+          box-shadow: inset -10px -10px 18px 0 $neutral90;
+        }
+
+        .overlay-full & {
+          box-shadow: inset -10px -10px 18px 0 $neutral90;
+        }
       }
     }
 
@@ -115,6 +222,7 @@
       @include utilityPrimary;
       @include buttonUnstyled;
       display: block;
+      margin-top: 7px;
       font-size: 13px;
       color: $neutral40;
       text-decoration: none;
@@ -122,48 +230,52 @@
 
       @include respond($break40) {
         display: inline;
+        margin-top: 0;
+        margin-right: 22px;
+        color: $neutral50;
       }
 
-      &.hidden {
-        display: none;
+      .overlay-full & {
+        color: $neutral50;
       }
 
       &:hover {
         color: $accentPrimary;
       }
+    }
 
-      + .download-link, + .detail-link {
-        margin-top: 7px;
+    .more-link {
+      // Only show more link when expandable (see above)
+      display: none;
+      color: $neutral50;
 
-        @include respond($break40) {
-          margin-top: 0;
-          margin-left: 22px;
+      @include respond($break60) {
+        color: $neutral40;
+      }
+
+      .overlay-full & {
+        color: $neutral40;
+      }
+
+      .close-text {
+        display: none;
+      }
+
+      &.open {
+        .open-text {
+          display: none;
+        }
+
+        .close-text {
+          display: inline;
         }
       }
     }
 
-    .more-link.hidden + .download-link, .more-link.hidden + .detail-link {
-      margin-left: 0;
-    }
-
-    .more-link .close-text {
-      display: none;
-    }
-
-    .more-link.open {
-      .open-text {
-        display: none;
-      }
-
-      .close-text {
-        display: inline;
-      }
-    }
-
     .download-link {
-      color: $neutral50;
-
-      .manicon-arrow-down::before {
+      .manicon-arrow-down {
+        display: inline-block;
+        margin-top: -2px;
         margin-left: 6px;
         font-size: 11px;
         vertical-align: middle;
