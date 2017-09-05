@@ -10,6 +10,7 @@ set :rails_env, "production"
 # Linked Files
 set :linked_files, fetch(:linked_files, []).push(".env")
 set :linked_files, fetch(:linked_files, []).push("client/dist/www/build/env.js")
+set :linked_files, fetch(:linked_files, []).push("client/dist/node/env.js")
 set :linked_dirs, fetch(:linked_dirs, []).push(
   "api/public/system", "client/node_modules", "import", "api/tmp", "config/keys"
 )
