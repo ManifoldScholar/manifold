@@ -4,6 +4,7 @@ import Single from "./Single";
 import List from "./List";
 import Notation from "./Notation";
 import Fader from "./Fader";
+import Preview from "./Preview";
 
 export default {
   Group,
@@ -11,5 +12,6 @@ export default {
   Single,
   List,
   Notation,
-  Fader
+  Fader,
+  Preview
 };

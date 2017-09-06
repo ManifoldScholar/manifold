@@ -55,7 +55,10 @@ export default class NotationViewerSingle extends PureComponent {
               this.wrapperDomEl = r;
             }}
             onMouseOver={() => {
-              actions.makeActive(annotation.id);
+              actions.makeActive({
+                annotationId: annotation.id,
+                passive: false
+              });
             }}
             onMouseLeave={() => {
               actions.makeActive(null);
