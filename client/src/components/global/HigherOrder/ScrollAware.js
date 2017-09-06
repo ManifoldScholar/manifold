@@ -8,19 +8,34 @@ export default class ScrollAware extends Component {
     children: PropTypes.object,
     threshold: PropTypes.number,
     topClass: PropTypes.string,
-    notTopClass: PropTypes.string
+    notTopClass: PropTypes.string,
+    startPinned: PropTypes.bool,
+    pinnedClass: PropTypes.string,
+    notPinnedClass: PropTypes.string,
+    pinThreshold: PropTypes.number
   };
 
   static defaultProps = {
     threshold: 200,
     topClass: "top",
-    notTopClass: "not-top"
+    notTopClass: "not-top",
+    // Following convention from Headroom.js,
+    // pinned is used to reference having scroll up past a
+    // threshold amount
+    startPinned: true,
+    pinnedClass: "pinned",
+    notPinnedClass: "not-pinned",
+    pinThreshold: 50
   };
 
   constructor() {
     super();
     this.state = {
-      top: true
+      top: true,
+      pinned: true,
+      scroll: 0,
+      direction: "down",
+      log: null
     };
   }
 
@@ -30,7 +45,9 @@ export default class ScrollAware extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps !== this.props) return true;
-    return this.state.top !== nextState.top;
+    return (
+      this.state.top !== nextState.top || this.state.pinned !== nextState.pinned
+    );
   }
 
   componentWillUnmount() {
@@ -49,9 +66,49 @@ export default class ScrollAware extends Component {
     return scrollTop;
   }
 
+  isPinned(direction, log) {
+    // Note that direction and log are the next direction/log
+    // Unpin by default
+    let pinned = this.state.pinned;
+    if (
+      direction === "up" &&
+      Math.abs(this.getScrollTop() - log) > this.props.pinThreshold
+    ) {
+      pinned = true;
+    } else if (
+      direction === "down" &&
+      Math.abs(this.getScrollTop() - log) > this.props.pinThreshold
+    ) {
+      pinned = false;
+    }
+
+    return pinned;
+  }
+
+  maybeLog(direction) {
+    // Set a scroll log on direction change
+    // Note that this.state.direction is the old direction
+    let log = this.state.log;
+    if (this.state.direction !== direction) {
+      log = this.getScrollTop();
+    }
+
+    return log;
+  }
+
   handleScroll = throttle(() => {
-    const isTop = this.getScrollTop() < this.props.threshold;
-    this.setState({ top: isTop });
+    const top = this.getScrollTop() < this.props.threshold;
+    const direction = this.getScrollTop() > this.state.scroll ? "down" : "up";
+    const log = this.maybeLog(direction);
+    const pinned = this.isPinned(direction, log);
+
+    this.setState({
+      top,
+      pinned,
+      direction,
+      log,
+      scroll: this.getScrollTop()
+    });
   }, 500);
 
   renderChildren() {
@@ -63,7 +120,8 @@ export default class ScrollAware extends Component {
     }
     return React.cloneElement(firstChild, {
       scrollAware: {
-        top: this.state.top
+        top: this.state.top,
+        pinned: this.state.pinned
       }
     });
   }
@@ -76,6 +134,8 @@ export default class ScrollAware extends Component {
 
     scrollClasses[this.props.topClass] = this.state.top;
     scrollClasses[this.props.notTopClass] = !this.state.top;
+    scrollClasses[this.props.pinnedClass] = this.state.pinned;
+    scrollClasses[this.props.notPinnedClass] = !this.state.pinned;
 
     const scrollClass = classNames(scrollClasses);
 

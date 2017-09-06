@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Notation } from "components/reader";
 import { connect } from "react-redux";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import { uiReaderActions, entityStoreActions } from "actions";
 import { annotationsAPI, requests } from "api";
 import { bindActionCreators } from "redux";
@@ -19,7 +20,8 @@ class NotationViewerList extends PureComponent {
 
   static mapStateToProps = (state, ownProps) => {
     const newState = {
-      activeAnnotation: state.ui.reader.activeAnnotation || null
+      activeAnnotation: state.ui.reader.activeAnnotation || null,
+      activeAnnotationPassive: state.ui.reader.activeAnnotationPassive
     };
     return Object.assign({}, newState, ownProps);
   };
@@ -48,6 +50,7 @@ class NotationViewerList extends PureComponent {
     this.state = {
       markers: [],
       scrollY: 0,
+      previewEntry: null,
       confirmation: null
     };
   }
@@ -68,6 +71,9 @@ class NotationViewerList extends PureComponent {
     ) {
       this.updateEntries(nextProps);
     }
+    if (nextProps.activeAnnotation !== this.props.activeAnnotation) {
+      this.setPreviewEntry(nextProps);
+    }
   }
 
   componentWillUnmount() {
@@ -80,8 +86,72 @@ class NotationViewerList extends PureComponent {
     return top - 10;
   }
 
+  setPreviewEntry(props) {
+    const aId = props.activeAnnotation;
+    if (!aId) return this.clearPreviewAnnotation();
+    const annotation = props.annotations.find(a => a.id === aId);
+    const notation = this.notationForAnnotation(props, annotation);
+    if (!notation || !annotation) return this.clearPreviewAnnotation();
+    return this.setState({
+      previewEntry: { annotation, notation, key: annotation.id }
+    });
+  }
+
+  markerByAnnotationId(props, aId) {
+    return [...this.markerNodes(props)].find(marker => {
+      return marker.dataset.annotationNotation === aId;
+    });
+  }
+
+  markerIsVisible(marker) {
+    const top = marker.getBoundingClientRect().top;
+    return top > 50 && top < window.innerHeight - 130;
+  }
+
+  annotationMarkerIsVisible(props, aId) {
+    const annotationMarker = this.markerByAnnotationId(props, aId);
+    if (!annotationMarker) return false;
+    return this.markerIsVisible(annotationMarker);
+  }
+
+  activeAnnotationMarkerIsVisibleAndNotPasive(props) {
+    if (!props.activeAnnotation) return false;
+    if (props.activeAnnotationPassive === true) return false;
+    return this.annotationMarkerIsVisible(props, props.activeAnnotation);
+  }
+
+  lastVisibleMarker(props) {
+    return [...this.markerNodes(props)].reverse().find(this.markerIsVisible);
+  }
+
+  clearPreviewAnnotation() {
+    this.setState({ previewEntry: null });
+  }
+
+  autoSetActive(props) {
+    if (this.activeAnnotationMarkerIsVisibleAndNotPasive(props)) return;
+    const makeActiveMarker = this.lastVisibleMarker(props);
+    if (!makeActiveMarker && props.activeAnnotation)
+      return this.actions.makeActive(null);
+    if (!makeActiveMarker) return;
+    const annotationId = makeActiveMarker.dataset.annotationNotation;
+    if (annotationId !== props.activeAnnotation) {
+      this.actions.makeActive({ annotationId, passive: true });
+    }
+  }
+
+  listIsVisible = () => {
+    // If the list element hasn't rendered yet, we'll assume that it's going to.
+    if (!this.listEl) return true;
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent
+    // offsetParent is null when the element has display: none.
+    // There are other ways to check for this, but not as fast.
+    return this.listEl.offsetParent !== null;
+  };
+
   updateScrollY = throttle(eventIgnored => {
     const { scrollY } = window;
+    if (!this.listIsVisible()) this.autoSetActive(this.props);
     this.setState({ scrollY });
   }, 250);
 
@@ -100,6 +170,7 @@ class NotationViewerList extends PureComponent {
   }
 
   markerNodes(props) {
+    if (!this.bodyNode(props)) return [];
     const markerNodes = this.bodyNode(props).querySelectorAll(
       "[data-annotation-notation]"
     );
@@ -107,6 +178,7 @@ class NotationViewerList extends PureComponent {
   }
 
   entryFromMarkerNode(props, markerNode) {
+    if (!markerNode) return null;
     const aId = markerNode.getAttribute("data-annotation-notation");
     const annotation = props.annotations.find(a => a.id === aId);
     const notation = this.notationForAnnotation(props, annotation);
@@ -239,6 +311,8 @@ class NotationViewerList extends PureComponent {
 
   render() {
     if (!this.state.entries) return null;
+
+    const { textId, sectionId } = this.props;
     const viewerClass = `notation-viewer container-width-${this.props
       .containerSize}`;
 
@@ -247,7 +321,7 @@ class NotationViewerList extends PureComponent {
         {this.state.confirmation
           ? <Dialog.Confirm {...this.state.confirmation} />
           : null}
-        <ul className="viewer-list">
+        <ul className="viewer-list" ref={el => (this.listEl = el)}>
           {this.state.entries.map(entry => {
             return (
               <li key={entry.key}>
@@ -258,6 +332,19 @@ class NotationViewerList extends PureComponent {
             );
           })}
         </ul>
+        <ReactCSSTransitionGroup
+          transitionName="notation"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+        >
+          {this.state.previewEntry
+            ? <Notation.Viewer.Preview
+                entry={this.state.previewEntry}
+                actions={this.actions}
+                params={{ textId, sectionId }}
+              />
+            : null}
+        </ReactCSSTransitionGroup>
       </nav>
     );
   }

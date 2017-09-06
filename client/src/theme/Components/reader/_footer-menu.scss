@@ -6,6 +6,7 @@
   width: 100%;
   background-color: $neutralWhite;
   border-top: 1px solid $neutral40;
+  transition: bottom $duration $timing;
 
   @include respond($break50) {
     display: none;

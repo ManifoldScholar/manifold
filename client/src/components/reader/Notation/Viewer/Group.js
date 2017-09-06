@@ -100,7 +100,10 @@ export default class NotationViewerGroup extends PureComponent {
               <li key={annotation.id}>
                 <div
                   onMouseOver={() => {
-                    actions.makeActive(annotation.id);
+                    actions.makeActive({
+                      annotationId: annotation.id,
+                      passive: false
+                    });
                   }}
                   onMouseLeave={() => {
                     actions.makeActive(null);
@@ -123,7 +126,10 @@ export default class NotationViewerGroup extends PureComponent {
         </ul>
         <h4
           onMouseOver={() => {
-            actions.makeActive(activeEntry.annotation.id);
+            actions.makeActive({
+              annotationId: activeEntry.annotation.id,
+              passive: false
+            });
           }}
           onMouseLeave={() => {
             actions.makeActive(null);

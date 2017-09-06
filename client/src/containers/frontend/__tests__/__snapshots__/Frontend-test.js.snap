@@ -3,7 +3,7 @@
 exports[`Frontend Frontend Container renders correctly 1`] = `
 <div>
   <div
-    className="scroll-aware top"
+    className="scroll-aware top pinned"
   >
     <header
       className="header-app"

@@ -8,8 +8,8 @@ exports[`Backend Backend Container renders correctly 1`] = `
         <SideEffect(BodyClass) className=\\"backend bg-neutral90\\">
           <BodyClass className=\\"backend bg-neutral90\\">
             <div>
-              <ScrollAware threshold={200} topClass=\\"top\\" notTopClass=\\"not-top\\">
-                <div className=\\"scroll-aware top\\">
+              <ScrollAware threshold={200} topClass=\\"top\\" notTopClass=\\"not-top\\" startPinned={true} pinnedClass=\\"pinned\\" notPinnedClass=\\"not-pinned\\" pinThreshold={50}>
+                <div className=\\"scroll-aware top pinned\\">
                   <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} notifications={{...}} commonActions={{...}} settings={[undefined]} scrollAware={{...}}>
                     <header className=\\"header-app dark\\">
                       <div className=\\"header-container\\">

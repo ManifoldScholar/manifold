@@ -1,0 +1,158 @@
+.notation-preview-footer {
+  position: fixed;
+  bottom: 44px;
+  left: 0;
+  width: 100%;
+  background-color: $neutralWhite;
+  border-top: 1px solid $neutral50;
+  // This gets overwritten during a show/hide
+  transition: margin $duration $timing;
+  
+  @include respond($break50) {
+    bottom: 0;
+  }
+
+  &.notation-enter {
+    bottom: -100px;
+  }
+
+  &.notation-enter-active {
+    bottom: 44px;
+    transition: bottom $duration $timing;
+
+    @include respond($break50) {
+      bottom: 0;
+    }
+  }
+
+  &.notation-leave {
+    bottom: 44px;
+
+    @include respond($break50) {
+      bottom: 0;
+    }
+  }
+
+  &.notation-leave-active {
+    bottom: -100px;
+    transition: bottom $duration $timing;
+  }
+
+  .scheme-dark & {
+    background-color: $neutral90;
+  }
+
+  a {
+    display: block;
+    color: $neutral80;
+    text-decoration: none;
+    transition: color $duration $timing;
+
+    &:hover, &.active {
+      color: $accentPrimary;
+
+      .icon-thumbnail-primary {
+        background-color: $accentPrimary;
+
+        &::after {
+          opacity: 0.5;
+        }
+
+        svg {
+          fill: $neutralWhite;
+        }
+      }
+    }
+
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 10px $containerPaddingResp;
+
+      .scheme-dark & {
+        color: $neutralWhite;
+      }
+    }
+  }
+
+  figure {
+    display: flex;
+    flex-grow: 2;
+
+    .manicon-cube-fill {
+      margin-right: 0.643em;
+      font-size: 14px;
+      color: $accentPrimary;
+
+      @include respond($break60) {
+        font-size: 16px;
+      }
+    }
+
+    .icon-thumbnail-primary {
+      position: relative;
+      min-width: 70px;
+      max-width: 70px;
+      height: 43px;
+      background-color: $neutral10;
+      transition: background-color $duration $timing;
+
+      &::after {
+        position: absolute;
+        display: none;
+        width: 100%;
+        height: 100%;
+        content: '';
+        background-color: $accentPrimary;
+        opacity: 0;
+      }
+
+      &.icon-only.bg-image {
+        &::after {
+          display: block;
+        }
+
+        .wrapper {
+          padding-top: 61.429%;
+        }
+      }
+
+      .icon-thumbnail-icon {
+        display: flex;
+
+        &.document, &.interactive, &.link, &.pdf {
+          svg {
+            max-width: 20px;
+          }
+        }
+
+        svg {
+          max-width: 30px;
+          margin: auto;
+          transition: fill $duration $timing;
+        }
+      }
+
+    }
+
+    figcaption {
+      @include templateHead;
+      margin-top: -0.231em;
+      margin-left: 10px;
+      font-size: 13px;
+      font-weight: $light;
+      letter-spacing: 0.06em;
+
+      @include respond($break60) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .manicon-caret-right {
+    font-size: 18px;
+    color: $accentPrimary;
+  }
+}

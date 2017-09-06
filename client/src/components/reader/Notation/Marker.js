@@ -21,24 +21,44 @@ class NotationMarker extends Component {
   };
 
   setActiveAnnotation(annotationId) {
-    this.props.dispatch(uiReaderActions.setActiveAnnotation(annotationId));
+    this.props.dispatch(
+      uiReaderActions.setActiveAnnotation({ annotationId, passive: false })
+    );
+  }
+
+  hasTouchSupport() {
+    return (
+      "ontouchstart" in window ||
+      (window.DocumentTouch && document instanceof window.DocumentTouch) ||
+      navigator.maxTouchPoints > 0 ||
+      window.navigator.msMaxTouchPoints > 0
+    );
   }
 
   handleClick(event, annotation) {
     event.preventDefault();
-    const base = window.location.pathname;
-    let rel = lh.link("frontendProjectResourceRelative", annotation.resourceId);
-    if (annotation.type === "collection") {
-      rel = lh.link(
-        "frontendProjectCollectionRelative",
-        annotation.collectionId
+    if (!this.hasTouchSupport()) {
+      const base = window.location.pathname;
+      let rel = lh.link(
+        "frontendProjectResourceRelative",
+        annotation.resourceId
       );
+      if (annotation.type === "collection") {
+        rel = lh.link(
+          "frontendProjectCollectionRelative",
+          annotation.collectionId
+        );
+      }
+      const url = `${base}/${rel}`;
+      this.props.history.push(url);
+    } else {
+      this.setActiveAnnotation(annotation.id);
     }
-    const url = `${base}/${rel}`;
-    this.props.history.push(url);
   }
 
   render() {
+    const touch = this.hasTouchSupport();
+
     return (
       <span>
         {this.props.annotations.map(annotation => {
@@ -57,10 +77,10 @@ class NotationMarker extends Component {
                 this.handleClick(event, annotation);
               }}
               onMouseOver={() => {
-                this.setActiveAnnotation(id);
+                if (!touch) this.setActiveAnnotation(id);
               }}
               onMouseLeave={() => {
-                this.setActiveAnnotation(null);
+                if (!touch) this.setActiveAnnotation(null);
               }}
             >
               <i className="manicon notation-cube-fill">
