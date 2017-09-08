@@ -55,7 +55,8 @@ export class FormContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      preventDirtyWarning: false
+      preventDirtyWarning: false,
+      submitKey: null
     };
     this.preventDirtyWarning = false;
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -100,11 +101,17 @@ export class FormContainer extends PureComponent {
 
   handleSubmit(event = null) {
     if (event) event.preventDefault();
+    this.setState({ submitKey: this.createKey() });
     if (this.props.session.source.id) {
       this.update();
     } else {
       this.create();
     }
+  }
+
+  createKey() {
+    const keyLength = 6;
+    return Math.random().toString(36).substr(2, keyLength);
   }
 
   update() {
@@ -159,7 +166,8 @@ export class FormContainer extends PureComponent {
       dirtyModel: props.session.dirty,
       sourceModel: props.session.source,
       getModelValue: name => this.lookupValue(name, this.props),
-      sessionKey: props.name
+      sessionKey: props.name,
+      submitKey: this.state.submitKey
     };
     if (!this.props.groupErrors) out.errors = props.errors || [];
     return out;
