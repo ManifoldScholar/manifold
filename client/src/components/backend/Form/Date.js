@@ -9,6 +9,7 @@ import getYear from "date-fns/get_year";
 import isEqual from "date-fns/is_equal";
 import getDaysInMonth from "date-fns/get_days_in_month";
 import MaskedInput from "react-text-mask";
+import isNull from "lodash/isNull";
 
 class FormDate extends Component {
   static displayName = "Form.Date";
@@ -16,7 +17,8 @@ class FormDate extends Component {
   static propTypes = {
     value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
     label: PropTypes.string,
-    set: PropTypes.func.isRequired
+    set: PropTypes.func.isRequired,
+    submitKey: PropTypes.string
   };
 
   constructor(props) {
@@ -35,7 +37,6 @@ class FormDate extends Component {
       "November",
       "December"
     ];
-
     const parts = this.dateToUserInput(this.parse(props.value));
 
     this.state = {
@@ -49,16 +50,14 @@ class FormDate extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      nextProps.value !== this.props.value &&
-      nextProps.value !== "" &&
-      nextProps.value !== null
+      // the form was submitted
+      nextProps.submitKey !== this.props.submitKey ||
+      // the input value changed and it's not blank or null
+      (nextProps.value !== this.props.value &&
+        nextProps.value !== "" &&
+        nextProps.value !== null)
     ) {
-      const parts = this.dateToUserInput(this.parse(nextProps.value));
-      const newState = {
-        input: parts,
-        validated: this.validate(parts)
-      };
-      this.setState(newState);
+      this.updateStateFromPropValue(nextProps.value);
     }
   }
 
@@ -93,6 +92,15 @@ class FormDate extends Component {
     const max = this.maxDayForMonthAndYear(input.month, input.year);
     input.day = input.day > max ? max : input.day;
     this.setState({ input });
+  }
+
+  updateStateFromPropValue(value) {
+    const parts = this.dateToUserInput(this.parse(value));
+    const newState = {
+      input: parts,
+      validated: this.validate(parts)
+    };
+    this.setState(newState);
   }
 
   validate(parts) {
@@ -137,6 +145,7 @@ class FormDate extends Component {
   }
 
   parse(string) {
+    if (isNull(string)) return null;
     if (string === "") return null;
     return parse(string);
   }

@@ -13,7 +13,7 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                   <div>
                     <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
                     <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
-                      <FieldGroup horizontal={true} label=\\"Project States\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                      <FieldGroup horizontal={true} label=\\"Project States\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
                         <div className=\\"form-section horizontal\\">
                           <span className=\\"form-section-label\\">
                             Project States
@@ -21,8 +21,8 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           <span className=\\"instructions\\">
                             Draft projects are only visible to admins. Featured projects are highlighted on the home page.
                           </span>
-                          <Form.Setter('Form.Switch) label=\\"Draft Mode\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[draft]\\" actions={{...}} instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                            <Form.Switch label=\\"Draft Mode\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[draft]\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                          <Form.Setter('Form.Switch) label=\\"Draft Mode\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[draft]\\" actions={{...}} instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                            <Form.Switch label=\\"Draft Mode\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[draft]\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
                               <div className=\\"form-input\\">
                                 <div className=\\"toggle-indicator\\">
                                   <div onClick={[Function]} className=\\"boolean-primary\\" />
@@ -33,8 +33,8 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                               </div>
                             </Form.Switch>
                           </Form.Setter('Form.Switch)>
-                          <Form.Setter('Form.Switch) label=\\"Featured\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[featured]\\" actions={{...}} instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                            <Form.Switch label=\\"Featured\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[featured]\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                          <Form.Setter('Form.Switch) label=\\"Featured\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[featured]\\" actions={{...}} instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                            <Form.Switch label=\\"Featured\\" labelClass=\\"secondary\\" labelPos=\\"below\\" name=\\"attributes[featured]\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
                               <div className=\\"form-input\\">
                                 <div className=\\"toggle-indicator\\">
                                   <div onClick={[Function]} className=\\"boolean-primary\\" />
@@ -47,8 +47,8 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </Form.Setter('Form.Switch)>
                         </div>
                       </FieldGroup>
-                      <Form.Setter('Form.TextInput) validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.TextInput validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"Rowan Test\\" initialValue=\\"Rowan Test\\" password={false}>
+                      <Form.Setter('Form.TextInput) validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                        <Form.TextInput validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"Rowan Test\\" initialValue=\\"Rowan Test\\" password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[title]\\" errors={{...}} label=\\"Title\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
@@ -59,8 +59,8 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </Errorable>
                         </Form.TextInput>
                       </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Subtitle\\" name=\\"attributes[subtitle]\\" placeholder=\\"Enter Project Subtitle\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.TextInput label=\\"Subtitle\\" name=\\"attributes[subtitle]\\" placeholder=\\"Enter Project Subtitle\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"World's Greatest Dog\\" initialValue=\\"World's Greatest Dog\\" focusOnMount={false} password={false}>
+                      <Form.Setter('Form.TextInput) label=\\"Subtitle\\" name=\\"attributes[subtitle]\\" placeholder=\\"Enter Project Subtitle\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                        <Form.TextInput label=\\"Subtitle\\" name=\\"attributes[subtitle]\\" placeholder=\\"Enter Project Subtitle\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"World's Greatest Dog\\" initialValue=\\"World's Greatest Dog\\" focusOnMount={false} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[subtitle]\\" errors={{...}} label=\\"Subtitle\\" containerStyle={{...}}>
                             <div style={{...}} className=\\"form-input\\">
                               <label className=\\"\\">
@@ -71,8 +71,8 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </Errorable>
                         </Form.TextInput>
                       </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.Date) label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.Date label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
+                      <Form.Setter('Form.Date) label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                        <Form.Date label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
                           <div className=\\"form-input\\">
                             <label>
                               Publication Date
@@ -226,8 +226,8 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </div>
                         </Form.Date>
                       </Form.Setter('Form.Date)>
-                      <Form.Setter('Form.MaskedTextInput) label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Form.MaskedTextInput label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"#cute_dog\\" initialValue=\\"#cute_dog\\">
+                      <Form.Setter('Form.MaskedTextInput) label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                        <Form.MaskedTextInput label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"#cute_dog\\" initialValue=\\"#cute_dog\\">
                           <div className=\\"form-input\\">
                             <label className=\\"\\">
                               Hashtag
@@ -236,8 +236,8 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </div>
                         </Form.MaskedTextInput>
                       </Form.Setter('Form.MaskedTextInput)>
-                      <Form.Setter('Project.Form.AvatarBuilder) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
-                        <Project.Form.AvatarBuilder setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                      <Form.Setter('Project.Form.AvatarBuilder) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                        <Project.Form.AvatarBuilder setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
                           <div className=\\"form-input avatar-builder\\">
                             <label className=\\"section-header\\">
                               Project Thumbnail
@@ -252,7 +252,7 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                                 <label>
                                   Default
                                 </label>
-                                <Project.Form.ColorPicker onChange={[Function]} value={{...}} setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                                <Project.Form.ColorPicker onChange={[Function]} value={{...}} setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
                                   <div className=\\"color-picker\\">
                                     <div className=\\"colors\\">
                                       <div className=\\"form-input\\">
@@ -332,7 +332,7 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </div>
                         </Project.Form.AvatarBuilder>
                       </Form.Setter('Project.Form.AvatarBuilder)>
-                      <Form.Save text=\\"Save Project\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" errors={{...}}>
+                      <Form.Save text=\\"Save Project\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
                         <div className=\\"form-input submit\\">
                           <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Project\\" />
                         </div>

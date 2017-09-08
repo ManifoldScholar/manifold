@@ -14,8 +14,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                     <div>
                       <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
                       <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
-                        <Form.Setter('Form.TextInput) focusOnMount={true} placeholder=\\"Abstract of the item\\" instructions=\\"e.g. the abstract of a journal article\\" label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={true} placeholder=\\"Abstract of the item\\" instructions=\\"e.g. the abstract of a journal article\\" label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={true} placeholder=\\"Abstract of the item\\" instructions=\\"e.g. the abstract of a journal article\\" label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={true} placeholder=\\"Abstract of the item\\" instructions=\\"e.g. the abstract of a journal article\\" label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][abstract]\\" errors={{...}} label=\\"abstract\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -29,8 +29,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Archive storing the item\\" instructions={[undefined]} label=\\"archive\\" name=\\"attributes[metadata][archive]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Archive storing the item\\" instructions={[undefined]} label=\\"archive\\" name=\\"attributes[metadata][archive]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Archive storing the item\\" instructions={[undefined]} label=\\"archive\\" name=\\"attributes[metadata][archive]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Archive storing the item\\" instructions={[undefined]} label=\\"archive\\" name=\\"attributes[metadata][archive]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][archive]\\" errors={{...}} label=\\"archive\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -41,8 +41,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Storage location within an archive\\" instructions=\\"e.g. a box and folder number\\" label=\\"archive location\\" name=\\"attributes[metadata][archiveLocation]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Storage location within an archive\\" instructions=\\"e.g. a box and folder number\\" label=\\"archive location\\" name=\\"attributes[metadata][archiveLocation]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Storage location within an archive\\" instructions=\\"e.g. a box and folder number\\" label=\\"archive location\\" name=\\"attributes[metadata][archiveLocation]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Storage location within an archive\\" instructions=\\"e.g. a box and folder number\\" label=\\"archive location\\" name=\\"attributes[metadata][archiveLocation]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][archiveLocation]\\" errors={{...}} label=\\"archive location\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -56,8 +56,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the archive\\" instructions={[undefined]} label=\\"archive place\\" name=\\"attributes[metadata][archivePlace]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the archive\\" instructions={[undefined]} label=\\"archive place\\" name=\\"attributes[metadata][archivePlace]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the archive\\" instructions={[undefined]} label=\\"archive place\\" name=\\"attributes[metadata][archivePlace]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the archive\\" instructions={[undefined]} label=\\"archive place\\" name=\\"attributes[metadata][archivePlace]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][archivePlace]\\" errors={{...}} label=\\"archive place\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -68,8 +68,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Issuing or judicial authority\\" instructions={[undefined]} label=\\"authority\\" name=\\"attributes[metadata][authority]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Issuing or judicial authority\\" instructions={[undefined]} label=\\"authority\\" name=\\"attributes[metadata][authority]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Issuing or judicial authority\\" instructions={[undefined]} label=\\"authority\\" name=\\"attributes[metadata][authority]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Issuing or judicial authority\\" instructions={[undefined]} label=\\"authority\\" name=\\"attributes[metadata][authority]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][authority]\\" errors={{...}} label=\\"authority\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -80,8 +80,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Call number (to help locate the item in a library)\\" instructions={[undefined]} label=\\"call number\\" name=\\"attributes[metadata][callNumber]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Call number (to help locate the item in a library)\\" instructions={[undefined]} label=\\"call number\\" name=\\"attributes[metadata][callNumber]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Call number (to help locate the item in a library)\\" instructions={[undefined]} label=\\"call number\\" name=\\"attributes[metadata][callNumber]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Call number (to help locate the item in a library)\\" instructions={[undefined]} label=\\"call number\\" name=\\"attributes[metadata][callNumber]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][callNumber]\\" errors={{...}} label=\\"call number\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -92,8 +92,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"chapter number\\" name=\\"attributes[metadata][chapterNumber]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"chapter number\\" name=\\"attributes[metadata][chapterNumber]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"chapter number\\" name=\\"attributes[metadata][chapterNumber]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"chapter number\\" name=\\"attributes[metadata][chapterNumber]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][chapterNumber]\\" errors={{...}} label=\\"chapter number\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -104,8 +104,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Number identifying the collection holding the item\\" instructions=\\"e.g. the series number for a book\\" label=\\"collection number\\" name=\\"attributes[metadata][collectionNumber]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Number identifying the collection holding the item\\" instructions=\\"e.g. the series number for a book\\" label=\\"collection number\\" name=\\"attributes[metadata][collectionNumber]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Number identifying the collection holding the item\\" instructions=\\"e.g. the series number for a book\\" label=\\"collection number\\" name=\\"attributes[metadata][collectionNumber]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Number identifying the collection holding the item\\" instructions=\\"e.g. the series number for a book\\" label=\\"collection number\\" name=\\"attributes[metadata][collectionNumber]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][collectionNumber]\\" errors={{...}} label=\\"collection number\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -119,8 +119,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the collection holding the item\\" instructions=\\"(e.g. the series title for a book)\\" label=\\"collection title\\" name=\\"attributes[metadata][collectionTitle]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Title of the collection holding the item\\" instructions=\\"(e.g. the series title for a book)\\" label=\\"collection title\\" name=\\"attributes[metadata][collectionTitle]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the collection holding the item\\" instructions=\\"(e.g. the series title for a book)\\" label=\\"collection title\\" name=\\"attributes[metadata][collectionTitle]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Title of the collection holding the item\\" instructions=\\"(e.g. the series title for a book)\\" label=\\"collection title\\" name=\\"attributes[metadata][collectionTitle]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][collectionTitle]\\" errors={{...}} label=\\"collection title\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -134,8 +134,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][containerTitle]\\" errors={{...}} label=\\"container title\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -149,8 +149,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"physical or temporal dimensions of the item\\" instructions=\\"e.g. the physical size or running time\\" label=\\"dimensions\\" name=\\"attributes[metadata][dimensions]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"physical or temporal dimensions of the item\\" instructions=\\"e.g. the physical size or running time\\" label=\\"dimensions\\" name=\\"attributes[metadata][dimensions]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"physical or temporal dimensions of the item\\" instructions=\\"e.g. the physical size or running time\\" label=\\"dimensions\\" name=\\"attributes[metadata][dimensions]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"physical or temporal dimensions of the item\\" instructions=\\"e.g. the physical size or running time\\" label=\\"dimensions\\" name=\\"attributes[metadata][dimensions]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][dimensions]\\" errors={{...}} label=\\"dimensions\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -164,8 +164,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) edition holding the item\\" instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\" label=\\"edition\\" name=\\"attributes[metadata][edition]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"(Container) edition holding the item\\" instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\" label=\\"edition\\" name=\\"attributes[metadata][edition]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) edition holding the item\\" instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\" label=\\"edition\\" name=\\"attributes[metadata][edition]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"(Container) edition holding the item\\" instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\" label=\\"edition\\" name=\\"attributes[metadata][edition]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][edition]\\" errors={{...}} label=\\"edition\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -179,8 +179,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"name of the related event\\" instructions=\\"the conference name when citing a conference paper\\" label=\\"event\\" name=\\"attributes[metadata][event]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"name of the related event\\" instructions=\\"the conference name when citing a conference paper\\" label=\\"event\\" name=\\"attributes[metadata][event]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"name of the related event\\" instructions=\\"the conference name when citing a conference paper\\" label=\\"event\\" name=\\"attributes[metadata][event]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"name of the related event\\" instructions=\\"the conference name when citing a conference paper\\" label=\\"event\\" name=\\"attributes[metadata][event]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][event]\\" errors={{...}} label=\\"event\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -194,8 +194,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"geographic location of the related event\\" instructions=\\"e.g. \\"Amsterdam, the Netherlands\\"\\" label=\\"event place\\" name=\\"attributes[metadata][eventPlace]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"geographic location of the related event\\" instructions=\\"e.g. \\"Amsterdam, the Netherlands\\"\\" label=\\"event place\\" name=\\"attributes[metadata][eventPlace]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"geographic location of the related event\\" instructions=\\"e.g. \\"Amsterdam, the Netherlands\\"\\" label=\\"event place\\" name=\\"attributes[metadata][eventPlace]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"geographic location of the related event\\" instructions=\\"e.g. \\"Amsterdam, the Netherlands\\"\\" label=\\"event place\\" name=\\"attributes[metadata][eventPlace]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][eventPlace]\\" errors={{...}} label=\\"event place\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -209,8 +209,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][isbn]\\" errors={{...}} label=\\"isbn\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -221,8 +221,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"International Standard Serial Number\\" instructions={[undefined]} label=\\"issn\\" name=\\"attributes[metadata][issn]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"International Standard Serial Number\\" instructions={[undefined]} label=\\"issn\\" name=\\"attributes[metadata][issn]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"International Standard Serial Number\\" instructions={[undefined]} label=\\"issn\\" name=\\"attributes[metadata][issn]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"International Standard Serial Number\\" instructions={[undefined]} label=\\"issn\\" name=\\"attributes[metadata][issn]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][issn]\\" errors={{...}} label=\\"issn\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -233,8 +233,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) issue holding the item\\" instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\" label=\\"issue\\" name=\\"attributes[metadata][issue]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"(Container) issue holding the item\\" instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\" label=\\"issue\\" name=\\"attributes[metadata][issue]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) issue holding the item\\" instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\" label=\\"issue\\" name=\\"attributes[metadata][issue]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"(Container) issue holding the item\\" instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\" label=\\"issue\\" name=\\"attributes[metadata][issue]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][issue]\\" errors={{...}} label=\\"issue\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -248,8 +248,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic scope of relevance \\" instructions=\\"e.g. \\"US\\" for a US patent\\" label=\\"jurisdiction\\" name=\\"attributes[metadata][jurisdiction]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Geographic scope of relevance \\" instructions=\\"e.g. \\"US\\" for a US patent\\" label=\\"jurisdiction\\" name=\\"attributes[metadata][jurisdiction]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic scope of relevance \\" instructions=\\"e.g. \\"US\\" for a US patent\\" label=\\"jurisdiction\\" name=\\"attributes[metadata][jurisdiction]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Geographic scope of relevance \\" instructions=\\"e.g. \\"US\\" for a US patent\\" label=\\"jurisdiction\\" name=\\"attributes[metadata][jurisdiction]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][jurisdiction]\\" errors={{...}} label=\\"jurisdiction\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -263,8 +263,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Medium description\\" instructions=\\"e.g. \\"CD\\", \\"DVD\\", etc.\\" label=\\"medium\\" name=\\"attributes[metadata][medium]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Medium description\\" instructions=\\"e.g. \\"CD\\", \\"DVD\\", etc.\\" label=\\"medium\\" name=\\"attributes[metadata][medium]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Medium description\\" instructions=\\"e.g. \\"CD\\", \\"DVD\\", etc.\\" label=\\"medium\\" name=\\"attributes[metadata][medium]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Medium description\\" instructions=\\"e.g. \\"CD\\", \\"DVD\\", etc.\\" label=\\"medium\\" name=\\"attributes[metadata][medium]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][medium]\\" errors={{...}} label=\\"medium\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -278,8 +278,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Number identifying the item\\" instructions=\\"e.g. a report number\\" label=\\"number\\" name=\\"attributes[metadata][number]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Number identifying the item\\" instructions=\\"e.g. a report number\\" label=\\"number\\" name=\\"attributes[metadata][number]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Number identifying the item\\" instructions=\\"e.g. a report number\\" label=\\"number\\" name=\\"attributes[metadata][number]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Number identifying the item\\" instructions=\\"e.g. a report number\\" label=\\"number\\" name=\\"attributes[metadata][number]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][number]\\" errors={{...}} label=\\"number\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -293,8 +293,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of pages\\" name=\\"attributes[metadata][numberOfPages]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of pages\\" name=\\"attributes[metadata][numberOfPages]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of pages\\" name=\\"attributes[metadata][numberOfPages]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"number of pages\\" name=\\"attributes[metadata][numberOfPages]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][numberOfPages]\\" errors={{...}} label=\\"number of pages\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -305,8 +305,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Total number of volumes, usable for citing multi-volume books and such\\" instructions={[undefined]} label=\\"number of volumes\\" name=\\"attributes[metadata][numberOfVolumes]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Total number of volumes, usable for citing multi-volume books and such\\" instructions={[undefined]} label=\\"number of volumes\\" name=\\"attributes[metadata][numberOfVolumes]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Total number of volumes, usable for citing multi-volume books and such\\" instructions={[undefined]} label=\\"number of volumes\\" name=\\"attributes[metadata][numberOfVolumes]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Total number of volumes, usable for citing multi-volume books and such\\" instructions={[undefined]} label=\\"number of volumes\\" name=\\"attributes[metadata][numberOfVolumes]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][numberOfVolumes]\\" errors={{...}} label=\\"number of volumes\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -317,8 +317,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" instructions={[undefined]} label=\\"original publisher\\" name=\\"attributes[metadata][originalPublisher]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" instructions={[undefined]} label=\\"original publisher\\" name=\\"attributes[metadata][originalPublisher]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" instructions={[undefined]} label=\\"original publisher\\" name=\\"attributes[metadata][originalPublisher]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" instructions={[undefined]} label=\\"original publisher\\" name=\\"attributes[metadata][originalPublisher]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][originalPublisher]\\" errors={{...}} label=\\"original publisher\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -329,8 +329,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the original publisher\\" instructions={[undefined]} label=\\"original publisher place\\" name=\\"attributes[metadata][originalPublisherPlace]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the original publisher\\" instructions={[undefined]} label=\\"original publisher place\\" name=\\"attributes[metadata][originalPublisherPlace]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the original publisher\\" instructions={[undefined]} label=\\"original publisher place\\" name=\\"attributes[metadata][originalPublisherPlace]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the original publisher\\" instructions={[undefined]} label=\\"original publisher place\\" name=\\"attributes[metadata][originalPublisherPlace]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][originalPublisherPlace]\\" errors={{...}} label=\\"original publisher place\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -341,8 +341,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the original version\\" instructions={[undefined]} label=\\"original title\\" name=\\"attributes[metadata][originalTitle]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Title of the original version\\" instructions={[undefined]} label=\\"original title\\" name=\\"attributes[metadata][originalTitle]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the original version\\" instructions={[undefined]} label=\\"original title\\" name=\\"attributes[metadata][originalTitle]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Title of the original version\\" instructions={[undefined]} label=\\"original title\\" name=\\"attributes[metadata][originalTitle]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][originalTitle]\\" errors={{...}} label=\\"original title\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -353,8 +353,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"PubMed Central reference number\\" instructions={[undefined]} label=\\"pmcid\\" name=\\"attributes[metadata][pmcid]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"PubMed Central reference number\\" instructions={[undefined]} label=\\"pmcid\\" name=\\"attributes[metadata][pmcid]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"PubMed Central reference number\\" instructions={[undefined]} label=\\"pmcid\\" name=\\"attributes[metadata][pmcid]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"PubMed Central reference number\\" instructions={[undefined]} label=\\"pmcid\\" name=\\"attributes[metadata][pmcid]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][pmcid]\\" errors={{...}} label=\\"pmcid\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -365,8 +365,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"PubMed reference number\\" instructions={[undefined]} label=\\"pmid\\" name=\\"attributes[metadata][pmid]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"PubMed reference number\\" instructions={[undefined]} label=\\"pmid\\" name=\\"attributes[metadata][pmid]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"PubMed reference number\\" instructions={[undefined]} label=\\"pmid\\" name=\\"attributes[metadata][pmid]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"PubMed reference number\\" instructions={[undefined]} label=\\"pmid\\" name=\\"attributes[metadata][pmid]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][pmid]\\" errors={{...}} label=\\"pmid\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -377,8 +377,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][publisher]\\" errors={{...}} label=\\"publisher\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -389,8 +389,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions={[undefined]} label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions={[undefined]} label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions={[undefined]} label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions={[undefined]} label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][publisherPlace]\\" errors={{...}} label=\\"publisher place\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -401,8 +401,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the item reviewed by the current item\\" instructions={[undefined]} label=\\"reviewed title\\" name=\\"attributes[metadata][reviewedTitle]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Title of the item reviewed by the current item\\" instructions={[undefined]} label=\\"reviewed title\\" name=\\"attributes[metadata][reviewedTitle]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the item reviewed by the current item\\" instructions={[undefined]} label=\\"reviewed title\\" name=\\"attributes[metadata][reviewedTitle]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Title of the item reviewed by the current item\\" instructions={[undefined]} label=\\"reviewed title\\" name=\\"attributes[metadata][reviewedTitle]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][reviewedTitle]\\" errors={{...}} label=\\"reviewed title\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -413,8 +413,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Container section holding the item\\" instructions=\\"e.g. \\"politics\\" for a newspaper article\\" label=\\"section\\" name=\\"attributes[metadata][section]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Container section holding the item\\" instructions=\\"e.g. \\"politics\\" for a newspaper article\\" label=\\"section\\" name=\\"attributes[metadata][section]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Container section holding the item\\" instructions=\\"e.g. \\"politics\\" for a newspaper article\\" label=\\"section\\" name=\\"attributes[metadata][section]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Container section holding the item\\" instructions=\\"e.g. \\"politics\\" for a newspaper article\\" label=\\"section\\" name=\\"attributes[metadata][section]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][section]\\" errors={{...}} label=\\"section\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -428,8 +428,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Version of the item\\" instructions={[undefined]} label=\\"version\\" name=\\"attributes[metadata][version]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Version of the item\\" instructions={[undefined]} label=\\"version\\" name=\\"attributes[metadata][version]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Version of the item\\" instructions={[undefined]} label=\\"version\\" name=\\"attributes[metadata][version]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Version of the item\\" instructions={[undefined]} label=\\"version\\" name=\\"attributes[metadata][version]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][version]\\" errors={{...}} label=\\"version\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"\\">
@@ -440,8 +440,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) volume holding the item \\" instructions=\\"e.g. “2” when citing a chapter from book volume 2\\" label=\\"volume\\" name=\\"attributes[metadata][volume]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"(Container) volume holding the item \\" instructions=\\"e.g. “2” when citing a chapter from book volume 2\\" label=\\"volume\\" name=\\"attributes[metadata][volume]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"(Container) volume holding the item \\" instructions=\\"e.g. “2” when citing a chapter from book volume 2\\" label=\\"volume\\" name=\\"attributes[metadata][volume]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"(Container) volume holding the item \\" instructions=\\"e.g. “2” when citing a chapter from book volume 2\\" label=\\"volume\\" name=\\"attributes[metadata][volume]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][volume]\\" errors={{...}} label=\\"volume\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -455,8 +455,8 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Disambiguating year suffix in author-date styles\\" instructions=\\"e.g. “a” in \\"Doe, 1999a\\"\\" label=\\"year suffix\\" name=\\"attributes[metadata][yearSuffix]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
-                          <Form.TextInput focusOnMount={false} placeholder=\\"Disambiguating year suffix in author-date styles\\" instructions=\\"e.g. “a” in \\"Doe, 1999a\\"\\" label=\\"year suffix\\" name=\\"attributes[metadata][yearSuffix]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
+                        <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Disambiguating year suffix in author-date styles\\" instructions=\\"e.g. “a” in \\"Doe, 1999a\\"\\" label=\\"year suffix\\" name=\\"attributes[metadata][yearSuffix]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                          <Form.TextInput focusOnMount={false} placeholder=\\"Disambiguating year suffix in author-date styles\\" instructions=\\"e.g. “a” in \\"Doe, 1999a\\"\\" label=\\"year suffix\\" name=\\"attributes[metadata][yearSuffix]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                             <Errorable className=\\"form-input\\" name=\\"attributes[metadata][yearSuffix]\\" errors={{...}} label=\\"year suffix\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
                                 <label className=\\"has-instructions\\">
@@ -470,7 +470,7 @@ exports[`Backend TextDetail Metadata Container renders correctly 1`] = `
                             </Errorable>
                           </Form.TextInput>
                         </Form.Setter('Form.TextInput)>
-                        <Form.Save text=\\"Save Metadata\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" errors={{...}}>
+                        <Form.Save text=\\"Save Metadata\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                           <div className=\\"form-input submit\\">
                             <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Metadata\\" />
                           </div>
