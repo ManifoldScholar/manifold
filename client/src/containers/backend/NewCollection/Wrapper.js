@@ -63,6 +63,7 @@ export class NewCollectionWrapperContainer extends PureComponent {
                 <Form.TextInput
                   label="Title"
                   name="attributes[title]"
+                  focusOnMount
                   placeholder="Enter a title"
                   {...this.props}
                 />
