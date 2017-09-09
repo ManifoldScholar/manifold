@@ -250,8 +250,8 @@ ActiveRecord::Schema.define(version: 20170803204651) do
     t.jsonb    "tweet_fetch_config",      default: {}
     t.date     "publication_date"
     t.string   "slug"
-    t.string   "avatar_color",            default: "primary"
     t.jsonb    "citations",               default: {}
+    t.string   "avatar_color",            default: "primary"
     t.jsonb    "avatar_meta",             default: {},        null: false
     t.boolean  "draft",                   default: true,      null: false
     t.boolean  "hide_activity",           default: false
