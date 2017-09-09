@@ -20,7 +20,11 @@ describe("Backend Settings Email Container", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <SettingsEmailContainer settings={settings} form={formMock} />
+          <SettingsEmailContainer
+            dispatch={() => {}}
+            settings={settings}
+            form={formMock}
+          />
         </Provider>
       )
     );
