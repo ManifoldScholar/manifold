@@ -118,7 +118,9 @@ exports[`Backend ResourceDetail General Container renders correctly 1`] = `
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            className=""
+          >
             Description
           </label>
           <textarea
@@ -140,7 +142,9 @@ exports[`Backend ResourceDetail General Container renders correctly 1`] = `
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            className=""
+          >
             Caption
           </label>
           <textarea

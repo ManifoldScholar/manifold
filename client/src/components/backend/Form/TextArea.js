@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import setter from "./setter";
 import { Form as GlobalForm } from "components/global";
 import isString from "lodash/isString";
+import classnames from "classnames";
 
 class FormTextArea extends Component {
   static displayName = "Form.TextArea";
@@ -23,6 +24,10 @@ class FormTextArea extends Component {
   };
 
   render() {
+    const labelClass = classnames({
+      "has-instructions": isString(this.props.instructions)
+    });
+
     return (
       <div className="form-input">
         <GlobalForm.Errorable
@@ -31,7 +36,7 @@ class FormTextArea extends Component {
           errors={this.props.errors}
           label={this.props.label}
         >
-          <label>
+          <label className={labelClass}>
             {this.props.label}
           </label>
           {isString(this.props.instructions)

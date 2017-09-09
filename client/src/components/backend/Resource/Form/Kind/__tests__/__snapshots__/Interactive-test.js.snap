@@ -31,7 +31,9 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
         className="form-input"
         style={Object {}}
       >
-        <label>
+        <label
+          className=""
+        >
           Embed Code
         </label>
         <textarea

@@ -114,7 +114,9 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            className="has-instructions"
+          >
             Email closing
           </label>
           <span
@@ -348,7 +350,9 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            className="has-instructions"
+          >
             Email closing
           </label>
           <span
