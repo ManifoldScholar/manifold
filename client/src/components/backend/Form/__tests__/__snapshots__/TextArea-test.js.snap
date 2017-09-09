@@ -8,7 +8,9 @@ exports[`Backend.Form.TextArea component renders correctly 1`] = `
     className="form-input"
     style={Object {}}
   >
-    <label>
+    <label
+      className=""
+    >
       Label this
     </label>
     <textarea

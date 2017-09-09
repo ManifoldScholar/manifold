@@ -15,7 +15,9 @@ exports[`Backend ProjectDetail ProjectPage Container renders correctly 1`] = `
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            className="has-instructions"
+          >
             Description
           </label>
           <span

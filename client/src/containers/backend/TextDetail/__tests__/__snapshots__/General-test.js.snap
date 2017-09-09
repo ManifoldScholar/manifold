@@ -63,7 +63,9 @@ exports[`Backend TextDetail General Container renders correctly 1`] = `
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            className=""
+          >
             Rights
           </label>
           <textarea
@@ -85,7 +87,9 @@ exports[`Backend TextDetail General Container renders correctly 1`] = `
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            className=""
+          >
             Description
           </label>
           <textarea

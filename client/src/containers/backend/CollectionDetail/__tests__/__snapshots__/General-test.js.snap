@@ -31,7 +31,9 @@ exports[`Backend CollectionDetail General Container renders correctly 1`] = `
           className="form-input"
           style={Object {}}
         >
-          <label>
+          <label
+            className=""
+          >
             Description
           </label>
           <textarea

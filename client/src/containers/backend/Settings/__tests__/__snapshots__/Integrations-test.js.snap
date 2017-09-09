@@ -135,7 +135,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                           <div className=\\"form-input\\">
                             <Errorable className=\\"form-input\\" name=\\"attributes[secrets][googlePrivateKey]\\" errors={{...}} label=\\"Google Private Key\\" containerStyle={{...}}>
                               <div style={{...}} className=\\"form-input\\">
-                                <label>
+                                <label className=\\"\\">
                                   Google Private Key
                                 </label>
                                 <textarea style={{...}} placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
