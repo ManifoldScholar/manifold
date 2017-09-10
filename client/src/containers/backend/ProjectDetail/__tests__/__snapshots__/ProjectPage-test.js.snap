@@ -162,6 +162,27 @@ exports[`Backend ProjectDetail ProjectPage Container renders correctly 1`] = `
       </div>
       <div
         className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Purchase Call To Action
+        </label>
+        <span
+          className="instructions"
+        >
+          If set, this text will appear in the buy button on the project page
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Buy Print Version"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
       >
         <label
           className="has-instructions"

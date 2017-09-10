@@ -233,7 +233,7 @@ export default class ProjectHero extends Component {
         className="button-tagged outline"
       >
         <span className="text">
-          {"Buy "} {attr.purchaseVersionLabel}
+          {attr.purchaseCallToAction || "Buy Print Version"}
         </span>
         <span className="tag">
           {attr.purchasePriceMoney}
