@@ -263,6 +263,8 @@ common: &1
           - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
           - "application/zip"
+          - "application/markdown"
+          - "application/epub+zip"
           - !ruby/regexp '/text\/.*/'
           - !ruby/regexp '/audio\/.*/'
           - !ruby/regexp '/video\/.*/'
@@ -293,7 +295,8 @@ common: &1
           - !ruby/regexp '/ppt?x\Z/'
           - !ruby/regexp '/md\Z/'
           - !ruby/regexp '/dmg\Z/'
-
+          - !ruby/regexp '/txt\Z/'
+          - !ruby/regexp '/epub\Z/'
 production: *1
 development: *1
 test: *1
