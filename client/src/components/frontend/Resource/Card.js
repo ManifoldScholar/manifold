@@ -21,11 +21,11 @@ class ResourceCard extends Component {
     this.state = {
       infoHover: false
     };
-    this.handlePreviewClick = this.handlePreviewClick.bind(this);
     this.handleInfoMouseOver = this.handleInfoMouseOver.bind(this);
     this.handleInfoMouseOut = this.handleInfoMouseOut.bind(this);
     this.handleInfoClick = this.handleInfoClick.bind(this);
     this.handleTagHover = this.handleTagHover.bind(this);
+    this.handlePreviewClick = this.handlePreviewClick.bind(this);
   }
 
   getResourceType(type) {
@@ -79,21 +79,34 @@ class ResourceCard extends Component {
     }
   }
 
+  previewable(resource) {
+    return Resource.Preview.canPreview(resource);
+  }
+
+  linkable(resource) {
+    return resource.attributes.kind.toLowerCase() === "link";
+  }
+
+  downloadable(resource) {
+    return resource.attributes.downloadable || false;
+  }
+
+  doDownload(resource) {
+    window.open(resource.attributes.attachmentStyles.original);
+  }
+
+  openLink(resource) {
+    window.open(resource.attributes.externalUrl);
+  }
+
   handlePreviewClick(event) {
     event.preventDefault();
-    const attr = this.resource().attributes;
-    let action = null;
-    switch (attr.kind.toLowerCase()) {
-      case "link":
-        action = window.open(attr.externalUrl);
-        break;
-      default:
-        action = attr.downloadable
-          ? window.open(attr.attachmentStyles.original)
-          : this.handleInfoClick();
-        break;
-    }
-    return action;
+    const resource = this.resource();
+    if (this.previewable(resource)) return;
+    if (this.downloadable(resource)) return this.doDownload(resource);
+    if (this.linkable(resource)) return this.openLink(resource);
+    // Open the resource detail view if all else fails.
+    return this.handleInfoClick();
   }
 
   handleInfoMouseOver() {
@@ -122,10 +135,6 @@ class ResourceCard extends Component {
   handleTagClick(event) {
     // Placeholder method, ultimately this will link
     // to the tag detail
-
-    // Event handler, has access to react synthetic click event
-    // Will need to be bound to the component in the constructor to use any component
-    // state or props
     event.stopPropagation();
   }
 
@@ -177,12 +186,12 @@ class ResourceCard extends Component {
   }
 
   renderTags(resource) {
-    if (!resource.attributes.tags) {
+    if (!resource.attributes.tagList) {
       return false;
     }
 
     function commaSeparate(index) {
-      if (index >= resource.attributes.tags.length - 1) return false;
+      if (index >= resource.attributes.tagList.length - 1) return false;
       return (
         <span>
           {", "}
@@ -193,7 +202,7 @@ class ResourceCard extends Component {
     return (
       <nav className="resource-tags">
         <ul>
-          {resource.attributes.tags.map((tag, index) => {
+          {resource.attributes.tagList.map((tag, index) => {
             return (
               <div
                 key={tag}
@@ -220,15 +229,16 @@ class ResourceCard extends Component {
       "resource-info": true,
       hover: this.state.infoHover
     });
-
     return (
       <li className="resource-card">
-        <div className="resource-link" onClick={this.handlePreviewClick}>
-          <Resource.Thumbnail resource={resource} />
-          <div className="preview-text">
-            {this.getPreviewText(attr)}
+        <Resource.Preview resource={resource}>
+          <div className="resource-link" onClick={this.handlePreviewClick}>
+            <Resource.Thumbnail resource={resource} />
+            <div className="preview-text">
+              {this.getPreviewText(attr)}
+            </div>
           </div>
-        </div>
+        </Resource.Preview>
         <section
           className={infoClass}
           onMouseOver={this.handleInfoMouseOver}
@@ -240,6 +250,7 @@ class ResourceCard extends Component {
               <h4 dangerouslySetInnerHTML={{ __html: attr.titleFormatted }} />
             </header>
             <span className="resource-date">
+              Uploaded{" "}
               <FormattedDate format="MMMM, YYYY" date={attr.createdAt} />
             </span>
             <div to={this.detailUrl()} className="arrow-link">

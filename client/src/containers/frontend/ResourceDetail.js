@@ -24,7 +24,8 @@ export class ResourceDetailContainer extends PureComponent {
   static mapStateToProps = state => {
     const props = {
       project: select(requests.feProject, state.entityStore),
-      resource: select(requests.feResource, state.entityStore)
+      resource: select(requests.feResource, state.entityStore),
+      visibility: state.ui.visibility
     };
     return props;
   };
@@ -32,7 +33,8 @@ export class ResourceDetailContainer extends PureComponent {
   static propTypes = {
     project: PropTypes.object,
     resource: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    visibility: PropTypes.object
   };
 
   componentWillUnmount() {
@@ -79,6 +81,7 @@ export class ResourceDetailContainer extends PureComponent {
               projectUrl={this.projectUrl()}
               resourceUrl={this.resourceUrl()}
               resource={this.props.resource}
+              dispatch={this.props.dispatch}
             />
           : null}
         {this.props.project
