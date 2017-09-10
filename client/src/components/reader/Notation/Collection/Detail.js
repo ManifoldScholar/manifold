@@ -58,6 +58,7 @@ export default class CollectionDetail extends PureComponent {
           collectionResources={this.props.slideshowResources}
           dispatch={this.props.dispatch}
           pagination={this.props.slideshowPagination}
+          slideOptions={{ enableZoom: false }}
           hideDetailUrl
         />
         <div className="container">

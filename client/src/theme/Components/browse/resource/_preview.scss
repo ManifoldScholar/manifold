@@ -1,0 +1,22 @@
+.resource-preview {
+  .overlay-full & {
+    padding-top: 70px;
+
+    @include respond($break70) {
+      padding-top: 120px;
+    }
+  }
+}
+
+.resource-preview-image {
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.resource-preview-video {
+  position: relative;
+  height: 500px;
+
+}

@@ -229,6 +229,15 @@
       max-width: 25%;
     }
 
+    // Hack to make the resource icons the same height on resource cards. --ZD
+    &.image {
+      margin-bottom: 7px;
+    }
+
+    &.audio {
+      margin-bottom: 12px;
+    }
+
     svg {
       width: 100%;
       height: auto;

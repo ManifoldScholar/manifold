@@ -65,7 +65,10 @@ export default class ResourceDetail extends PureComponent {
           </div>
         */}
         </div>
-        <Resource.Hero resource={resource} />
+        <Resource.Hero
+          resource={resource}
+          slideOptions={{ enableZoom: false }}
+        />
         <div className="container">
           <Resource.Meta
             resource={resource}

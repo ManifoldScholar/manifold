@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.Resource.Preview.Image component renders correctly 1`] = `
+<div
+  className="resource-preview resource-preview-image"
+>
+  <img
+    alt="Image"
+    src="original-image.mock"
+  />
+</div>
+`;

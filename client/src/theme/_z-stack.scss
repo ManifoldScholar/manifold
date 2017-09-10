@@ -49,6 +49,14 @@
 
 .overlay-full {
   z-index: 300;
+
+  .container {
+    z-index: 310;
+  }
+
+  .overlay-close {
+    z-index: 320;
+  }
 }
 
 .overlay-full-header {

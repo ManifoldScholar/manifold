@@ -1,3 +1,5 @@
+// This might not be being used.  We have another at shared/_overlay-full.scss that seems to have precedence.
+
 .overlay-full {
   @include templateCopy;
   position: fixed;
@@ -52,6 +54,7 @@
       font-size: 18px;
       line-height: 28px;
       color: $neutral50;
+
 
       @include respond($break40) {
         line-height: 31px;

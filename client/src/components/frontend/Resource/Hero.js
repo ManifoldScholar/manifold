@@ -6,7 +6,12 @@ export default class ResourceHero extends Component {
   static displayName = "Resource.Hero";
 
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
+    slideOptions: PropTypes.object
+  };
+
+  static defaultProps = {
+    slideOptions: {}
   };
 
   constructor() {
@@ -20,14 +25,20 @@ export default class ResourceHero extends Component {
       case "image":
         output = (
           <div className="resource-slide-figure">
-            <ResourceList.Slide.SlideImage resource={resource} />
+            <ResourceList.Slide.SlideImage
+              resource={resource}
+              {...this.props.slideOptions}
+            />
           </div>
         );
         break;
       case "video":
         output = (
           <div className="resource-slide-figure">
-            <ResourceList.Slide.SlideVideo resource={resource} />
+            <ResourceList.Slide.SlideVideo
+              resource={resource}
+              {...this.props.slideOptions}
+            />
           </div>
         );
         break;

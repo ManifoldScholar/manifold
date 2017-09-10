@@ -16,7 +16,12 @@ export default class ResourceListSlideshow extends PureComponent {
     pagination: PropTypes.object,
     dispatch: PropTypes.func,
     collectionId: PropTypes.string,
-    hideDetailUrl: PropTypes.bool
+    hideDetailUrl: PropTypes.bool,
+    slideOptions: PropTypes.object
+  };
+
+  static defaultProps = {
+    slideOptions: {}
   };
 
   constructor(props) {
@@ -62,19 +67,13 @@ export default class ResourceListSlideshow extends PureComponent {
   }
 
   getFigureByType(resource) {
-    let output = false;
-    switch (resource.attributes.kind) {
-      case "image":
-        output = <ResourceList.Slide.SlideImage resource={resource} />;
-        break;
-      case "video":
-        output = <ResourceList.Slide.SlideVideo resource={resource} />;
-        break;
-      default:
-        output = <ResourceList.Slide.Slide resource={resource} />;
-    }
-
-    return output;
+    const output = false;
+    let Slide = ResourceList.Slide.Slide;
+    if (resource.attributes.kind === "image")
+      Slide = ResourceList.Slide.SlideImage;
+    if (resource.attributes.kind === "video")
+      Slide = ResourceList.Slide.SlideVideo;
+    return <Slide resource={resource} {...this.props.slideOptions} />;
   }
 
   bindKeyboard(event) {

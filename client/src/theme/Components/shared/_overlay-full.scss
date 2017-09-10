@@ -17,6 +17,24 @@
     padding-top: 135px;
   }
 
+  .overlay-full-enter & {
+    opacity: 0.01;
+  }
+
+  .overlay-full-enter.overlay-full-enter-active & {
+    opacity: 1;
+    transition: opacity $duration $timing;
+  }
+
+  .overlay-full-leave & {
+    opacity: 1;
+  }
+
+  .overlay-full-leave.overlay-full-leave-active & {
+    opacity: 0.01;
+    transition: opacity $duration $timing;
+  }
+
   // Button
   .overlay-close {
     @include buttonClose;

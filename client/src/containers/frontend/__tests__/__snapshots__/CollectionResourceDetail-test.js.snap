@@ -59,6 +59,21 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
               className="resource-slide-figure"
             >
               <figure>
+                <div>
+                  <span />
+                  <span
+                    onClick={[Function]}
+                  >
+                    <div
+                      className="zoom-indicator"
+                    >
+                      Zoom
+                      <i
+                        className="manicon manicon-magnify-plus"
+                      />
+                    </div>
+                  </span>
+                </div>
                 <div
                   className="figure-image"
                   style={
