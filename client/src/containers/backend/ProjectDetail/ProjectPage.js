@@ -50,6 +50,12 @@ export default class ProjectDetailAppearance extends PureComponent {
             placeholder="Enter Purchase URL"
             instructions="A URL where users can purchase the published edition"
           />
+          <Form.TextInput
+            label="Purchase Call To Action"
+            name="attributes[purchaseCallToAction]"
+            placeholder="Buy Print Version"
+            instructions="If set, this text will appear in the buy button on the project page"
+          />
           <Form.MaskedTextInput
             label="Purchase Price"
             name="attributes[purchasePriceMoney]"

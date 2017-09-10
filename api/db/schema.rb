@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170803204651) do
+ActiveRecord::Schema.define(version: 20170910234415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -233,7 +233,7 @@ ActiveRecord::Schema.define(version: 20170803204651) do
     t.string   "purchase_url"
     t.bigint   "purchase_price_in_cents"
     t.string   "purchase_price_currency"
-    t.string   "purchase_version_label"
+    t.string   "purchase_call_to_action"
     t.string   "instagram_id"
     t.string   "twitter_id"
     t.string   "facebook_id"
