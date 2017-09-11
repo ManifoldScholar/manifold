@@ -11,7 +11,7 @@ export default class ResourceCollectionTitle extends Component {
   };
 
   static defaultProps = {
-    showCreatedAt: false
+    showCreatedAt: true
   };
 
   render() {
