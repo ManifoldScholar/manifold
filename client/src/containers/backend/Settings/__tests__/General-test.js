@@ -8,7 +8,7 @@ import entity from "test/fixtures/entity";
 
 describe("Backend Settings General Container", () => {
   const store = build.store();
-  const settings = entity.defaults.settings;
+  const settings = build.entity.settings("0");
 
   const component = renderer.create(
     wrapWithRouter(

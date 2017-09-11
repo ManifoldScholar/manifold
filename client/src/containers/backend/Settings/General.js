@@ -53,7 +53,13 @@ export class SettingsGeneralContainer extends PureComponent {
             placeholder="Enter Default Place of Publication"
           />
           <Form.TextInput
-            label="Social Sharing Messge"
+            label="Copyright"
+            name="attributes[general][copyright]"
+            placeholder="Enter Copyright Information"
+            instructions="Enter the installation copyright information to be displayed in the footer."
+          />
+          <Form.TextInput
+            label="Social Sharing Message"
             name="attributes[general][socialShareMessage]"
             instructions="Enter the text you would like to appear when a page is shared"
           />

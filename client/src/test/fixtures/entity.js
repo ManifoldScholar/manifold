@@ -45,7 +45,10 @@ const defaults = {
   settings: {
     type: "settings",
     attributes: {
-      general: {},
+      general: {
+        contactUrl: "http://www.dailyrowan.com",
+        copyright: "2015-2016 6 University of Minnesota Press"
+      },
       theme: {
         typekitId: "typekitId"
       },

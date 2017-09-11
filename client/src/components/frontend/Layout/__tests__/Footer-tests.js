@@ -2,17 +2,11 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 import { Layout } from "components/frontend";
+import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Layout.Footer component", () => {
-  const settings = {
-    attributes: {
-      general: {
-        contactUrl: "http://www.test.com"
-      }
-    }
-  };
-
+  const settings = build.entity.settings("0");
   const showPage = {
     type: "pages",
     id: "1",

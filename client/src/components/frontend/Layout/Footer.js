@@ -27,6 +27,7 @@ export default class LayoutFooter extends Component {
     this.buildPagesArray = this.buildPagesArray.bind(this);
     this.buildAuthLink = this.buildAuthLink.bind(this);
     this.buildContentPages = this.buildContentPages.bind(this);
+    this.renderCopyright = this.renderCopyright.bind(this);
   }
 
   handleLogoutClick(event) {
@@ -108,6 +109,17 @@ export default class LayoutFooter extends Component {
     return pages;
   }
 
+  renderCopyright() {
+    if (!this.props.settings) return null;
+    if (!this.props.settings.attributes.general.copyright) return null;
+    return (
+      <div>
+        {`© ${this.props.settings.attributes.general.copyright}.`}
+        <br />
+      </div>
+    );
+  }
+
   render() {
     const chunkedPages = chunk(this.buildPagesArray(), 3);
     return (
@@ -150,8 +162,7 @@ export default class LayoutFooter extends Component {
               </form>
             */}
             <p className="colophon">
-              {"© 2015-2016 6 University of Minnesota Press."}
-              <br />
+              {this.renderCopyright()}
               {`Manifold is released under the `}
               <a href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md">
                 GNU General Public License v3

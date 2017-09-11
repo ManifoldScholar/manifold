@@ -45,7 +45,7 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
             </li>
             <li>
               <a
-                href="http://www.test.com"
+                href="http://www.dailyrowan.com"
                 target="_blank"
               >
                 Contact
@@ -81,8 +81,10 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
       <p
         className="colophon"
       >
-        © 2015-2016 6 University of Minnesota Press.
-        <br />
+        <div>
+          © 2015-2016 6 University of Minnesota Press.
+          <br />
+        </div>
         Manifold is released under the 
         <a
           href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md"
