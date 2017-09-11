@@ -96,7 +96,7 @@ exports[`Backend ProjectDetail Resource CollectionList Container renders correct
                   className="cover"
                 >
                   <div
-                    className="collection-thumbnail-square bg-image icon-only"
+                    className="collection-thumbnail-primary bg-image"
                     style={
                       Object {
                         "backgroundImage": "url(/static/images/resource-collection.jpg)",
@@ -137,7 +137,7 @@ exports[`Backend ProjectDetail Resource CollectionList Container renders correct
                   className="cover"
                 >
                   <div
-                    className="collection-thumbnail-square bg-image icon-only"
+                    className="collection-thumbnail-primary bg-image"
                     style={
                       Object {
                         "backgroundImage": "url(/static/images/resource-collection.jpg)",

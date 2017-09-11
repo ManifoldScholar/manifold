@@ -22,7 +22,7 @@ exports[`Backend.Resource.ListItem component renders correctly 1`] = `
             className="wrapper"
           >
             <figure
-              className="resource-type"
+              className="asset-type"
             >
               <i
                 className="resource-icon image"

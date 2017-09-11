@@ -2,7 +2,7 @@
 
 exports[`Frontend.ResourceCollection.Thumbnail component renders correctly 1`] = `
 <div
-  className="resource-thumbnail-primary "
+  className="collection-thumbnail-primary "
   style={
     Object {
       "backgroundImage": null,
@@ -13,7 +13,7 @@ exports[`Frontend.ResourceCollection.Thumbnail component renders correctly 1`] =
     className="wrapper"
   >
     <figure
-      className="resource-type"
+      className="asset-type"
     />
   </div>
 </div>

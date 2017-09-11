@@ -39,7 +39,7 @@ export default class ResourceCollectionThumbnail extends Component {
     const hasImage = this.hasImage(resourceCollection);
 
     const wrapperClass = classNames({
-      "resource-thumbnail-primary": true,
+      "collection-thumbnail-primary": true,
       "bg-image": hasImage && !this.props.noCrop,
       title: this.props.showTitle
     });
@@ -55,9 +55,9 @@ export default class ResourceCollectionThumbnail extends Component {
         style={{ backgroundImage }}
       >
         <div className="wrapper">
-          <figure className="resource-type">
+          <figure className="asset-type">
             {this.props.noCrop
-              ? <div className="resource-image">
+              ? <div className="asset-image">
                   <img
                     src={this.getImage(resourceCollection)}
                     alt={resourceCollection.attributes.title}
@@ -68,7 +68,7 @@ export default class ResourceCollectionThumbnail extends Component {
           </figure>
           {this.props.showTitle
             ? <h4
-                className="resource-title"
+                className="asset-title"
                 dangerouslySetInnerHTML={{
                   __html: resourceCollection.attributes.titleFormatted
                 }}

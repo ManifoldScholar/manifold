@@ -24,7 +24,7 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                                   <Resource.Thumbnail resource={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal right\\">
                                     <div className=\\"resource-thumbnail-primary minimal right\\" style={{...}}>
                                       <div className=\\"wrapper\\">
-                                        <figure className=\\"resource-type\\">
+                                        <figure className=\\"asset-type\\">
                                           <i className=\\"resource-icon image\\">
                                             <Resource.Icon.Composer kind=\\"image\\">
                                               <Resource.Icon.Image>
@@ -62,7 +62,7 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                           <Resource.Thumbnail resource={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal preview\\">
                             <div className=\\"resource-thumbnail-primary minimal preview\\" style={{...}}>
                               <div className=\\"wrapper\\">
-                                <figure className=\\"resource-type\\">
+                                <figure className=\\"asset-type\\">
                                   <i className=\\"resource-icon image\\">
                                     <Resource.Icon.Composer kind=\\"image\\">
                                       <Resource.Icon.Image>
@@ -94,7 +94,7 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                           <Resource.Thumbnail resource={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal preview\\">
                             <div className=\\"resource-thumbnail-primary minimal preview\\" style={{...}}>
                               <div className=\\"wrapper\\">
-                                <figure className=\\"resource-type\\">
+                                <figure className=\\"asset-type\\">
                                   <i className=\\"resource-icon image\\">
                                     <Resource.Icon.Composer kind=\\"image\\">
                                       <Resource.Icon.Image>

@@ -11,7 +11,7 @@ exports[`Backend.ResourceCollection.ListItem component renders correctly 1`] = `
         className="cover"
       >
         <div
-          className="collection-thumbnail-square bg-image icon-only"
+          className="collection-thumbnail-primary bg-image"
           style={
             Object {
               "backgroundImage": "url(/static/images/resource-collection.jpg)",

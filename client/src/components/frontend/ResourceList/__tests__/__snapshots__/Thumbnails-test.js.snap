@@ -23,7 +23,7 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
             className="wrapper"
           >
             <figure
-              className="resource-type"
+              className="asset-type"
             >
               <figcaption>
                 Image
@@ -47,7 +47,7 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
               </i>
             </figure>
             <h4
-              className="resource-title"
+              className="asset-title"
               dangerouslySetInnerHTML={
                 Object {
                   "__html": "Image",
@@ -76,7 +76,7 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
             className="wrapper"
           >
             <figure
-              className="resource-type"
+              className="asset-type"
             >
               <figcaption>
                 Image
@@ -100,7 +100,7 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
               </i>
             </figure>
             <h4
-              className="resource-title"
+              className="asset-title"
               dangerouslySetInnerHTML={
                 Object {
                   "__html": "Image",

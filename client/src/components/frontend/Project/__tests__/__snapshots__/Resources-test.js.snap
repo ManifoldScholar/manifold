@@ -148,7 +148,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                       className="wrapper"
                     >
                       <figure
-                        className="resource-type"
+                        className="asset-type"
                       >
                         <figcaption>
                           Image
@@ -281,7 +281,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
                       className="wrapper"
                     >
                       <figure
-                        className="resource-type"
+                        className="asset-type"
                       >
                         <figcaption>
                           Image
