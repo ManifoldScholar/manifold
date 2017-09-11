@@ -34,7 +34,7 @@ module Validation
 
   def collection_params
     params.require(:data)
-    attributes = [:title, :description, attachment(:thumbnail)]
+    attributes = [:title, :description, attachment(:thumbnail), :remove_thumbnail]
     relationships = [:project, :resources]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
