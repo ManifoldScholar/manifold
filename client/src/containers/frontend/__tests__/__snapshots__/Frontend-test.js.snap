@@ -198,8 +198,6 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
         <p
           className="colophon"
         >
-          © 2015-2016 6 University of Minnesota Press.
-          <br />
           Manifold is released under the 
           <a
             href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md"

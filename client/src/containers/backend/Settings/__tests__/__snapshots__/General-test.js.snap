@@ -68,7 +68,28 @@ exports[`Backend Settings General Container renders correctly 1`] = `
         <label
           className="has-instructions"
         >
-          Social Sharing Messge
+          Copyright
+        </label>
+        <span
+          className="instructions"
+        >
+          Enter the installation copyright information to be displayed in the footer.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Enter Copyright Information"
+          type="text"
+          value="2015-2016 6 University of Minnesota Press"
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Social Sharing Message
         </label>
         <span
           className="instructions"
@@ -95,7 +116,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
           onChange={[Function]}
           placeholder="Enter a URL"
           type="text"
-          value=""
+          value="http://www.dailyrowan.com"
         />
       </div>
       <div

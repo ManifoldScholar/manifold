@@ -126,7 +126,8 @@ module Validation
           :default_publisher,
           :default_place_of_publication,
           :social_share_message,
-          :contact_url
+          :contact_url,
+          :copyright
         ]
       },
       {
