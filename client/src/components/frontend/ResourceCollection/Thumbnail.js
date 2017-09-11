@@ -10,61 +10,44 @@ export default class ResourceCollectionThumbnail extends Component {
     resourceCollection: PropTypes.object,
     showTitle: PropTypes.bool,
     variant: PropTypes.string,
-    noCrop: PropTypes.bool,
     additionalClasses: PropTypes.string
   };
 
   static defaultProps = {
     showTitle: false,
     variant: "smallPortrait",
-    noCrop: false,
     additionalClasses: ""
   };
 
-  getImage(resource) {
+  getImage(collection) {
+    const collectionPlaceholder = "/static/images/resource-collection.jpg";
     const thumb = get(
-      resource,
+      collection,
       `attributes.thumbnailStyles.${this.props.variant}`
     );
     if (thumb) return thumb;
-    return get(resource, `attributes.thumbnailStyles.${this.props.variant}`);
-  }
-
-  hasImage(resource) {
-    return !!this.getImage(resource);
+    return collectionPlaceholder;
   }
 
   render() {
     const { resourceCollection } = this.props;
-    const hasImage = this.hasImage(resourceCollection);
 
     const wrapperClass = classNames({
       "collection-thumbnail-primary": true,
-      "bg-image": hasImage && !this.props.noCrop,
       title: this.props.showTitle
     });
 
-    const backgroundImage =
-      hasImage && !this.props.noCrop
-        ? `url(${this.getImage(resourceCollection)})`
-        : null;
-
     return (
-      <div
-        className={`${wrapperClass} ${this.props.additionalClasses}`}
-        style={{ backgroundImage }}
-      >
+      <div className={`${wrapperClass} ${this.props.additionalClasses}`}>
         <div className="wrapper">
           <figure className="asset-type">
-            {this.props.noCrop
-              ? <div className="asset-image">
-                  <img
-                    src={this.getImage(resourceCollection)}
-                    alt={resourceCollection.attributes.title}
-                  />
-                  <div className="image-overlay" />
-                </div>
-              : null}
+            <div className="asset-image">
+              <img
+                src={this.getImage(resourceCollection)}
+                alt={resourceCollection.attributes.title}
+              />
+              <div className="image-overlay" />
+            </div>
           </figure>
           {this.props.showTitle
             ? <h4
