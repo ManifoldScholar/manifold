@@ -50,11 +50,6 @@ export class NotationResourceDetailContainer extends PureComponent {
         appearance="overlay-full bg-neutral90"
       >
         <div className="notation-detail">
-          <div className="container">
-            <span className="notation-type">
-              {this.props.resource.attributes.kind}
-            </span>
-          </div>
           <Notation.Resource.Detail
             resource={this.props.resource}
             handleClose={this.props.history.goBack}
