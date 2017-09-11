@@ -8,7 +8,7 @@ module Api
       resourceful! Comment, authorize_options: { except: [:index, :show] } do
         Comment.filter(
           with_pagination!(comment_filter_params),
-          scope: comment_scope
+          scope: comment_scope.roots_and_descendants_preordered
         )
       end
 

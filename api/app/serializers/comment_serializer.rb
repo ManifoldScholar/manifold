@@ -4,7 +4,8 @@ class CommentSerializer < ActiveModel::Serializer
   meta(partial: false)
 
   attributes :id, :body, :parent_id, :created_at, :can_update_object, :can_delete_object,
-             :can_read_deleted, :deleted, :children_count, :flags_count, :flagged
+             :can_read_deleted, :deleted, :children_count, :flags_count, :flagged,
+             :sort_order
 
   belongs_to :creator
 
