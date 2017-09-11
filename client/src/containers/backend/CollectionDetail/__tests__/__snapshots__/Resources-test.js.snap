@@ -103,7 +103,7 @@ exports[`Backend CollectionDetail Resources Container renders correctly 1`] = `
                         className="wrapper"
                       >
                         <figure
-                          className="resource-type"
+                          className="asset-type"
                         >
                           <i
                             className="resource-icon image"
@@ -184,7 +184,7 @@ exports[`Backend CollectionDetail Resources Container renders correctly 1`] = `
                         className="wrapper"
                       >
                         <figure
-                          className="resource-type"
+                          className="asset-type"
                         >
                           <i
                             className="resource-icon image"

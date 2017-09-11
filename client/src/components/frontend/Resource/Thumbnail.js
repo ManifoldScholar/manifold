@@ -60,14 +60,14 @@ export default class ResourceThumbnail extends Component {
         style={{ backgroundImage }}
       >
         <div className="wrapper">
-          <figure className="resource-type">
+          <figure className="asset-type">
             {this.props.showKind
               ? <figcaption>
                   {this.getResourceKind(resource.attributes.kind)}
                 </figcaption>
               : null}
             {this.props.noCrop
-              ? <div className="resource-image">
+              ? <div className="asset-image">
                   <img
                     src={this.getImage(resource)}
                     alt={resource.attributes.title}
@@ -82,7 +82,7 @@ export default class ResourceThumbnail extends Component {
           </figure>
           {this.props.showTitle
             ? <h4
-                className="resource-title"
+                className="asset-title"
                 dangerouslySetInnerHTML={{
                   __html: resource.attributes.titleFormatted
                 }}

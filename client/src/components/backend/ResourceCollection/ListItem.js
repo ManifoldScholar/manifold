@@ -26,7 +26,7 @@ export default class ResourceCollectionListItem extends PureComponent {
           <header>
             <figure className="cover">
               <div
-                className="collection-thumbnail-square bg-image icon-only"
+                className="collection-thumbnail-primary bg-image"
                 style={{ backgroundImage: "url(" + bgImage + ")" }}
               />
             </figure>

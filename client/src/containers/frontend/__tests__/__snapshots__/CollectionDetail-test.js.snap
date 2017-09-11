@@ -422,7 +422,7 @@ exports[`Frontend CollectionDetail Container renders correctly 1`] = `
                         className="wrapper"
                       >
                         <figure
-                          className="resource-type"
+                          className="asset-type"
                         >
                           <figcaption>
                             Image

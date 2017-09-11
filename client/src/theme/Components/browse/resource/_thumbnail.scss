@@ -1,25 +1,9 @@
 // Any kind of resource thumbnail can use this component class
 // Use wrapper list classes to affect external position, width, etc, but not appearance.
-.resource-thumbnail-primary, .collection-thumbnail-square {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  color: $neutral70;
-  text-align: center;
-  background-color: $neutral10;
-
-  &:hover {
-    .resource-title {
-      color: $accentPrimary;
-    }
-  }
+.resource-thumbnail-primary {
+  @include assetThumbnailPrimary;
 
   &.bg-image {
-    color: $neutralWhite;
-    background-position: 0 0;
-    background-size: cover;
-
     &::before {
       position: absolute;
       width: 100%;
@@ -36,14 +20,6 @@
   }
 
   &.title {
-    .wrapper {
-      padding: 11% 7.6%;
-    }
-
-    .resource-type {
-      font-size: 12px;
-    }
-
     .resource-icon {
       width: 27%;
       padding: 14px 0 17px;
@@ -86,16 +62,8 @@
     }
   }
 
-  &.minimal:not(.preview) {
-    background: transparent;
-  }
-
   &.minimal {
     &.preview {
-      width: 37px;
-      height: 37px;
-      overflow: hidden;
-
       .resource-icon {
         width: 100%;
         height: 37px;
@@ -114,27 +82,6 @@
       &::before {
         background-color: $accentPrimary;
         opacity: 0;
-      }
-    }
-
-    .resource-image {
-      position: relative;
-      display: inline-block;
-
-      .image-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        content: '';
-        transition: opacity $duration $timing;
-      }
-
-      img {
-        display: block;
-        width: auto;
-        height: 50px;
       }
     }
 
@@ -162,61 +109,6 @@
         }
       }
     }
-
-    .wrapper {
-      padding: 0;
-      padding-bottom: 1em;
-
-      .viewer-list & {
-        padding-bottom: 0.5em;
-      }
-    }
-
-
-    .resource-title {
-      @include templateHead;
-      padding-top: 8px;
-      font-size: 14px;
-      font-weight: $light;
-      line-height: 1.1;
-      color: $neutral50;
-    }
-  }
-
-  &.right {
-    text-align: right;
-  }
-
-  .wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 24px 0 30px;
-
-    @include respond($break40) {
-      padding: 30px 0 37px;
-    }
-
-    @include respond($break85) {
-      padding: 35px 0 43px;
-    }
-  }
-
-  .resource-type {
-    @include templateHead;
-    font-size: 14px;
-
-    .notation-viewer & {
-      font-size: 0;
-    }
-  }
-
-  .resource-title {
-    @include templateHead;
-    margin: 0;
-    font-size: 14px;
-    transition: color $duration $timing;
   }
 
   .resource-icon {

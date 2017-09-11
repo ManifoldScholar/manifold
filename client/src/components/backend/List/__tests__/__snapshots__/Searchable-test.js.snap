@@ -86,7 +86,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
                     className="wrapper"
                   >
                     <figure
-                      className="resource-type"
+                      className="asset-type"
                     >
                       <i
                         className="resource-icon image"
@@ -155,7 +155,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
                     className="wrapper"
                   >
                     <figure
-                      className="resource-type"
+                      className="asset-type"
                     >
                       <i
                         className="resource-icon image"

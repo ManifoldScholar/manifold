@@ -114,7 +114,7 @@ exports[`Backend ProjectDetail Resource ResourcesList Container renders correctl
                       className="wrapper"
                     >
                       <figure
-                        className="resource-type"
+                        className="asset-type"
                       >
                         <i
                           className="resource-icon image"
@@ -183,7 +183,7 @@ exports[`Backend ProjectDetail Resource ResourcesList Container renders correctl
                       className="wrapper"
                     >
                       <figure
-                        className="resource-type"
+                        className="asset-type"
                       >
                         <i
                           className="resource-icon image"
