@@ -3,18 +3,25 @@
 exports[`Frontend.ResourceCollection.Thumbnail component renders correctly 1`] = `
 <div
   className="collection-thumbnail-primary "
-  style={
-    Object {
-      "backgroundImage": null,
-    }
-  }
 >
   <div
     className="wrapper"
   >
     <figure
       className="asset-type"
-    />
+    >
+      <div
+        className="asset-image"
+      >
+        <img
+          alt="Rowan"
+          src="/static/images/resource-collection.jpg"
+        />
+        <div
+          className="image-overlay"
+        />
+      </div>
+    </figure>
   </div>
 </div>
 `;

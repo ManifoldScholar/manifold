@@ -67,14 +67,11 @@ export default class NotationViewerNotation extends PureComponent {
   }
 
   renderCollection() {
-    const { notation, additionalClasses, showTitle, neverCrop } = this.props;
-    let noCrop = false;
-    if (this.hasImage() && !neverCrop) noCrop = true;
+    const { notation, additionalClasses, showTitle } = this.props;
     return (
       <ResourceCollection.Thumbnail
         key={notation.id}
         resourceCollection={notation}
-        noCrop={noCrop}
         showTitle={showTitle}
         variant={this.variant()}
         additionalClasses={additionalClasses}

@@ -36,7 +36,7 @@ export default class CollectionPickerListItem extends PureComponent {
           <header>
             <figure className="cover">
               <div
-                className="collection-thumbnail-square bg-image icon-only"
+                className="collection-thumbnail-primary bg-image icon-only"
                 style={{ backgroundImage: "url(" + bgImage + ")" }}
               />
             </figure>

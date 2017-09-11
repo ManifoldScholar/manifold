@@ -78,11 +78,6 @@
       .resource-icon {
         display: none;
       }
-
-      &::before {
-        background-color: $accentPrimary;
-        opacity: 0;
-      }
     }
 
     .resource-icon {
