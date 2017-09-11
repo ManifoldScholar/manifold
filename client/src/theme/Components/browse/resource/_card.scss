@@ -1,18 +1,9 @@
 .resource-card {
   display: flex;
 
-  .resource-link {
+  .resource-link-wrapper {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     width: 37.8%;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    background-color: $neutral10;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
 
     @include respond($break40) {
       width: 155px;
@@ -25,6 +16,25 @@
     @include respond($break85) {
       width: 155px;
     }
+  }
+
+  .resource-preview-wrapper {
+    display: flex;
+    width: 100%;
+  }
+
+  .resource-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: $neutral10;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     &:hover {
       .preview-text {
@@ -41,21 +51,30 @@
       @include utilityPrimary;
       position: relative; // Required to rise above overlay
       // Padded relative to font-size
-      padding: 1em 10px 1.2em;
+      padding: 1em 6px 1.2em;
       font-size: 12px;
       line-height: 13px;
       color: $neutral50;
+      white-space: nowrap;
       background-color: $neutral20;
       transition: background-color $duration $timing;
+
+      @include respond($break50) {
+        padding: 1em 10px 1.2em;
+      }
 
       @include respond($break85) {
         font-size: 14px;
       }
 
       .manicon {
-        margin-left: 11px;
+        margin-left: 8px;
         font-size: 13px;
         vertical-align: middle;
+
+        @include respond($break50) {
+          margin-left: 11px;
+        }
       }
     }
   }

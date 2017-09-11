@@ -74,10 +74,17 @@ export default class ResourcePreview extends Component {
 
   render() {
     const PreviewComponent = this.getPreviewComponent(this.props.resource);
-    if (!PreviewComponent) return this.renderChildren(this.props.resource);
+    const linkWrapperClass = "resource-link-wrapper";
+
+    if (!PreviewComponent)
+      return (
+        <div className={linkWrapperClass}>
+          {this.renderChildren(this.props.resource)}
+        </div>
+      );
 
     return (
-      <div>
+      <div className={linkWrapperClass}>
         <ReactCSSTransitionGroup
           transitionName={"overlay-full"}
           transitionEnterTimeout={300}
@@ -92,9 +99,12 @@ export default class ResourcePreview extends Component {
               </GlobalOverlay>
             : null}
         </ReactCSSTransitionGroup>
-        <span onClick={this.handleOpenPreviewClick}>
+        <div
+          className="resource-preview-wrapper"
+          onClick={this.handleOpenPreviewClick}
+        >
           {this.renderChildren()}
-        </span>
+        </div>
       </div>
     );
   }

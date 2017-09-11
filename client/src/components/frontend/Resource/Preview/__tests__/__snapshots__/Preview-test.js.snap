@@ -1,14 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.Resource.Preview component renders correctly 1`] = `
-<div>
+<div
+  className="resource-link-wrapper"
+>
   <span />
-  <span
+  <div
+    className="resource-preview-wrapper"
     onClick={[Function]}
   >
     <div>
       Test Button
     </div>
-  </span>
+  </div>
 </div>
 `;

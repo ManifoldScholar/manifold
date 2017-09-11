@@ -4,9 +4,12 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
 <li
   className="resource-card"
 >
-  <div>
+  <div
+    className="resource-link-wrapper"
+  >
     <span />
-    <span
+    <div
+      className="resource-preview-wrapper"
       onClick={[Function]}
     >
       <div
@@ -61,7 +64,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
           </span>
         </div>
       </div>
-    </span>
+    </div>
   </div>
   <section
     className="resource-info"
