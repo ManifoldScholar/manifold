@@ -70,11 +70,6 @@ export class NotationCollectionDetailContainer extends PureComponent {
         appearance="overlay-full bg-neutral90"
       >
         <div className="notation-detail">
-          <div className="container">
-            <span className="notation-type">
-              {`Collection`}
-            </span>
-          </div>
           <Notation.Collection.Detail
             dispatch={this.props.dispatch}
             collection={this.props.collection}
