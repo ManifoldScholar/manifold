@@ -184,13 +184,7 @@ export default class AnnotationDetail extends PureComponent {
               </HigherOrder.RequireRole>
             </div>}
         {this.props.includeComments
-          ? <div>
-              <CommentContainer.Thread subject={annotation} />
-              <button className="comment-more">
-                <i className="manicon manicon-word-bubble-multiple" />
-                {`See all 36 replies`}
-              </button>
-            </div>
+          ? <CommentContainer.Thread subject={annotation} />
           : null}
       </li>
     );

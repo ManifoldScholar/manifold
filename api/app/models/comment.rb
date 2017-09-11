@@ -1,5 +1,7 @@
 # A comment is about a subject.
 class Comment < ApplicationRecord
+  # Closure Tree
+  has_closure_tree order: "sort_order", dependent: :destroy
 
   # Authority
   include Authority::Abilities

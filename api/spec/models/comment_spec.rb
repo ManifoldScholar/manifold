@@ -19,4 +19,25 @@ RSpec.describe Comment, type: :model do
       expect(comment).to_not be_valid
     end
   end
+
+  describe 'its hierarchical tree' do
+    it 'is ordered by :sort_order' do
+      is_expected.to be_a_closure_tree.ordered(:sort_order)
+    end
+
+    context 'assigning the sort order' do
+      before(:each) do
+        @comment = FactoryGirl.create(:comment)
+      end
+
+      it 'is correct when a root' do
+        expect(@comment.sort_order).to eq 0
+      end
+
+      it 'is correct when child' do
+        comment = FactoryGirl.create(:comment, parent: @comment)
+        expect(comment.sort_order).to eq 0
+      end
+    end
+  end
 end

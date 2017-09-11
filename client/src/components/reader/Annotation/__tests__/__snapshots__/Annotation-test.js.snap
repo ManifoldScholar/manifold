@@ -56,15 +56,5 @@ exports[`Reader.Annotation.Annotation component renders correctly 1`] = `
       </ul>
     </nav>
   </div>
-  <div>
-    <button
-      className="comment-more"
-    >
-      <i
-        className="manicon manicon-word-bubble-multiple"
-      />
-      See all 36 replies
-    </button>
-  </div>
 </li>
 `;
