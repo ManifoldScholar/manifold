@@ -59,9 +59,12 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
               className="resource-slide-figure"
             >
               <figure>
-                <div>
+                <div
+                  className="resource-link-wrapper"
+                >
                   <span />
-                  <span
+                  <div
+                    className="resource-preview-wrapper"
                     onClick={[Function]}
                   >
                     <div
@@ -72,7 +75,7 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
                         className="manicon manicon-magnify-plus"
                       />
                     </div>
-                  </span>
+                  </div>
                 </div>
                 <div
                   className="figure-image"

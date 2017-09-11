@@ -69,9 +69,12 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
         <span>
           <div>
             <figure>
-              <div>
+              <div
+                className="resource-link-wrapper"
+              >
                 <span />
-                <span
+                <div
+                  className="resource-preview-wrapper"
                   onClick={[Function]}
                 >
                   <div
@@ -82,7 +85,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                       className="manicon manicon-magnify-plus"
                     />
                   </div>
-                </span>
+                </div>
               </div>
               <div
                 className="figure-image"
@@ -340,9 +343,12 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
           <li
             className="resource-card"
           >
-            <div>
+            <div
+              className="resource-link-wrapper"
+            >
               <span />
-              <span
+              <div
+                className="resource-preview-wrapper"
                 onClick={[Function]}
               >
                 <div
@@ -397,7 +403,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                     </span>
                   </div>
                 </div>
-              </span>
+              </div>
             </div>
             <section
               className="resource-info"
