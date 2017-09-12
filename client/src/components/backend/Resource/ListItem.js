@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import FormattedDate from "components/global/FormattedDate";
-import { Resource } from "components/frontend";
+import { Resourceish } from "components/frontend";
 import lh from "helpers/linkHandler";
 
 export default class ResourceListItem extends PureComponent {
@@ -22,10 +22,10 @@ export default class ResourceListItem extends PureComponent {
         <Link to={lh.link("backendResource", this.props.entity.id)}>
           <header>
             <figure className="cover">
-              <Resource.Thumbnail
+              <Resourceish.Thumbnail
                 key={resource.id}
                 projectId={this.props.projectId}
-                resource={resource}
+                resourceish={resource}
                 showTitle={false}
                 showKind={false}
                 additionalClasses="icon-only"

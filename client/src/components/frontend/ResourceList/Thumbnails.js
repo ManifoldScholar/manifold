@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Resource } from "components/frontend";
+import { Resourceish } from "components/frontend";
 import lh from "helpers/linkHandler";
 
 export default class ResourceListThumbnails extends Component {
@@ -28,10 +28,10 @@ export default class ResourceListThumbnails extends Component {
                   )}
                   className="resource-link"
                 >
-                  <Resource.Thumbnail
+                  <Resourceish.Thumbnail
                     key={resource.id}
                     projectId={this.props.projectId}
-                    resource={resource}
+                    resourceish={resource}
                     showTitle
                   />
                 </Link>

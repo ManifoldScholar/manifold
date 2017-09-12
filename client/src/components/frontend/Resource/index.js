@@ -7,7 +7,6 @@ import Meta from "./Meta";
 import Preview from "./Preview/Preview";
 import TagList from "./TagList";
 import Title from "./Title";
-import Thumbnail from "./Thumbnail";
 import Player from "./Player";
 
 export default {
@@ -20,6 +19,5 @@ export default {
   Preview,
   TagList,
   Title,
-  Thumbnail,
   Player
 };
