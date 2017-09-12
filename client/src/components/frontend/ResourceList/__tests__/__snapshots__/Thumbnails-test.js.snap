@@ -12,7 +12,7 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
         onClick={[Function]}
       >
         <div
-          className="resource-thumbnail-primary title "
+          className="icon-thumbnail-primary title "
           style={
             Object {
               "backgroundImage": null,
@@ -23,13 +23,13 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
             className="wrapper"
           >
             <figure
-              className="asset-type"
+              className="icon-thumbnail-type"
             >
               <figcaption>
                 Image
               </figcaption>
               <i
-                className="resource-icon image"
+                className="icon-thumbnail-icon image"
               >
                 <svg
                   height="64px"
@@ -47,7 +47,7 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
               </i>
             </figure>
             <h4
-              className="asset-title"
+              className="icon-thumbnail-title"
               dangerouslySetInnerHTML={
                 Object {
                   "__html": "Image",
@@ -65,7 +65,7 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
         onClick={[Function]}
       >
         <div
-          className="resource-thumbnail-primary title "
+          className="icon-thumbnail-primary title "
           style={
             Object {
               "backgroundImage": null,
@@ -76,13 +76,13 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
             className="wrapper"
           >
             <figure
-              className="asset-type"
+              className="icon-thumbnail-type"
             >
               <figcaption>
                 Image
               </figcaption>
               <i
-                className="resource-icon image"
+                className="icon-thumbnail-icon image"
               >
                 <svg
                   height="64px"
@@ -100,7 +100,7 @@ exports[`Frontend.ResourceList.Thumbnails Component renders correctly 1`] = `
               </i>
             </figure>
             <h4
-              className="asset-title"
+              className="icon-thumbnail-title"
               dangerouslySetInnerHTML={
                 Object {
                   "__html": "Image",

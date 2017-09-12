@@ -21,11 +21,11 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                             <a className=\\"notation-single-link\\" onClick={[Function]} href=\\"/read/5/section/6/resource/2\\">
                               <div style={{...}} onMouseOver={[Function]} onMouseLeave={[Function]}>
                                 <NotationViewer.Notation notation={{...}} additionalClasses=\\"minimal right\\" showTitle={false} neverCrop={false}>
-                                  <Resource.Thumbnail resource={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal right\\">
-                                    <div className=\\"resource-thumbnail-primary minimal right\\" style={{...}}>
+                                  <Resourceish.Thumbnail resourceish={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal right\\">
+                                    <div className=\\"icon-thumbnail-primary minimal right\\" style={{...}}>
                                       <div className=\\"wrapper\\">
-                                        <figure className=\\"asset-type\\">
-                                          <i className=\\"resource-icon image\\">
+                                        <figure className=\\"icon-thumbnail-type\\">
+                                          <i className=\\"icon-thumbnail-icon image\\">
                                             <Resource.Icon.Composer kind=\\"image\\">
                                               <Resource.Icon.Image>
                                                 <svg version=\\"1.1\\" width=\\"85.11326px\\" height=\\"64px\\" viewBox=\\"0 0 85.11326 64\\">
@@ -38,7 +38,7 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                                         </figure>
                                       </div>
                                     </div>
-                                  </Resource.Thumbnail>
+                                  </Resourceish.Thumbnail>
                                 </NotationViewer.Notation>
                               </div>
                             </a>
@@ -59,11 +59,11 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                     <Link className={[undefined]} to=\\"/read/5/section/6/resource/2\\" replace={false}>
                       <a className={[undefined]} onClick={[Function]} href=\\"/read/5/section/6/resource/2\\">
                         <NotationViewer.Notation notation={{...}} additionalClasses=\\"minimal preview\\" showTitle={false} neverCrop={true}>
-                          <Resource.Thumbnail resource={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal preview\\">
-                            <div className=\\"resource-thumbnail-primary minimal preview\\" style={{...}}>
+                          <Resourceish.Thumbnail resourceish={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal preview\\">
+                            <div className=\\"icon-thumbnail-primary minimal preview\\" style={{...}}>
                               <div className=\\"wrapper\\">
-                                <figure className=\\"asset-type\\">
-                                  <i className=\\"resource-icon image\\">
+                                <figure className=\\"icon-thumbnail-type\\">
+                                  <i className=\\"icon-thumbnail-icon image\\">
                                     <Resource.Icon.Composer kind=\\"image\\">
                                       <Resource.Icon.Image>
                                         <svg version=\\"1.1\\" width=\\"85.11326px\\" height=\\"64px\\" viewBox=\\"0 0 85.11326 64\\">
@@ -76,7 +76,7 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                                 </figure>
                               </div>
                             </div>
-                          </Resource.Thumbnail>
+                          </Resourceish.Thumbnail>
                         </NotationViewer.Notation>
                       </a>
                     </Link>
@@ -91,11 +91,11 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                     <Link className={[undefined]} to=\\"/read/5/section/6/resource/4\\" replace={false}>
                       <a className={[undefined]} onClick={[Function]} href=\\"/read/5/section/6/resource/4\\">
                         <NotationViewer.Notation notation={{...}} additionalClasses=\\"minimal preview\\" showTitle={false} neverCrop={true}>
-                          <Resource.Thumbnail resource={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal preview\\">
-                            <div className=\\"resource-thumbnail-primary minimal preview\\" style={{...}}>
+                          <Resourceish.Thumbnail resourceish={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal preview\\">
+                            <div className=\\"icon-thumbnail-primary minimal preview\\" style={{...}}>
                               <div className=\\"wrapper\\">
-                                <figure className=\\"asset-type\\">
-                                  <i className=\\"resource-icon image\\">
+                                <figure className=\\"icon-thumbnail-type\\">
+                                  <i className=\\"icon-thumbnail-icon image\\">
                                     <Resource.Icon.Composer kind=\\"image\\">
                                       <Resource.Icon.Image>
                                         <svg version=\\"1.1\\" width=\\"85.11326px\\" height=\\"64px\\" viewBox=\\"0 0 85.11326 64\\">
@@ -108,7 +108,7 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                                 </figure>
                               </div>
                             </div>
-                          </Resource.Thumbnail>
+                          </Resourceish.Thumbnail>
                         </NotationViewer.Notation>
                       </a>
                     </Link>

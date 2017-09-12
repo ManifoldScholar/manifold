@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
 import FormattedDate from "components/global/FormattedDate";
-import { Resource } from "components/frontend";
+import { Resource, Resourceish } from "components/frontend";
 import { find } from "lodash";
 import lh from "helpers/linkHandler";
 
@@ -184,7 +184,7 @@ class ResourceCard extends Component {
       <li className="resource-card">
         <Resource.Preview resource={resource}>
           <div className="resource-link" onClick={this.handlePreviewClick}>
-            <Resource.Thumbnail resource={resource} />
+            <Resourceish.Thumbnail resourceish={resource} />
             <div className="preview-text">
               {this.getPreviewText(attr)}
             </div>

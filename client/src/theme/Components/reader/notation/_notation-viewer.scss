@@ -37,7 +37,7 @@
       }
 
       &:hover, &.highlighted, .highlighted & {
-        .resource-title {
+        .icon-thumbnail-title {
           color: $accentPrimary;
         }
 
@@ -45,7 +45,7 @@
           opacity: 0.5;
         }
 
-        .resource-icon {
+        .icon-thumbnail-icon {
           background-color: $accentPrimary;
         }
 
@@ -117,7 +117,7 @@
   &.highlight-leave {
     opacity: 1;
 
-    .resource-title {
+    .icon-thumbnail-title {
       opacity: 0;
     }
   }
@@ -131,7 +131,7 @@
   }
 
   .notation-viewer .viewer-list &.highlighted {
-    .resource-title {
+    .icon-thumbnail-title {
       color: $accentPrimary;
     }
 
@@ -225,11 +225,11 @@
       cursor: pointer;
 
       &.highlighted {
-        .resource-thumbnail-primary::before {
+        .icon-thumbnail-primary::before {
           opacity: 0.5;
         }
 
-        .resource-icon {
+        .icon-thumbnail-icon {
           background-color: $accentPrimary;
         }
 

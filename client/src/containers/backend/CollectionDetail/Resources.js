@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { List } from "components/backend";
-import { Resource as FrontendResource } from "components/frontend";
+import { Resourceish } from "components/frontend";
 import FormattedDate from "components/global/FormattedDate";
 import { collectionsAPI, projectsAPI, requests } from "api";
 import { connect } from "react-redux";
@@ -164,9 +164,9 @@ export class CollectionDetailResourcesContainer extends Component {
         <Link to={lh.link("backendResource", resource.id)}>
           <header>
             <figure className="cover">
-              <FrontendResource.Thumbnail
+              <Resourceish.Thumbnail
                 key={resource.id}
-                resource={resource}
+                resourceish={resource}
                 showTitle={false}
                 showKind={false}
                 additionalClasses="icon-only"

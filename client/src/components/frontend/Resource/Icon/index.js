@@ -1,4 +1,5 @@
 import Audio from "./Audio";
+import Collection from "./Collection";
 import Composer from "./Composer";
 import Document from "./Document";
 import File from "./File";
@@ -12,6 +13,7 @@ import Video from "./Video";
 
 export default {
   Audio,
+  Collection,
   Composer,
   Document,
   File,

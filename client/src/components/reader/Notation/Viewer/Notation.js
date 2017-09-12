@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Resource, ResourceCollection } from "components/frontend";
+import { Resourceish } from "components/frontend";
 import get from "lodash/get";
 
 // The Notation class is used to generate a notation thumbnail, which is currently either
@@ -23,10 +23,6 @@ export default class NotationViewerNotation extends PureComponent {
     neverCrop: false
   };
 
-  variant() {
-    return "smallLandscape";
-  }
-
   type() {
     return this.props.notation.type;
   }
@@ -37,51 +33,27 @@ export default class NotationViewerNotation extends PureComponent {
 
   hasImage() {
     const attribute = this.imageAttributeName();
-    const variant = this.variant();
-    return !!get(this.props.notation, `attributes.${attribute}.${variant}`);
+    return !!get(this.props.notation, `attributes.${attribute}.smallLandscape`);
   }
 
-  isResource() {
-    return this.type() === "resources";
-  }
-
-  isCollection() {
-    return this.type() === "collections";
-  }
-
-  renderResource() {
+  renderNotation() {
     const { notation, additionalClasses, showTitle, neverCrop } = this.props;
     let noCrop = false;
     if (this.hasImage() && !neverCrop) noCrop = true;
     return (
-      <Resource.Thumbnail
+      <Resourceish.Thumbnail
         key={notation.id}
-        resource={notation}
+        resourceish={notation}
         showKind={false}
         noCrop={noCrop}
         showTitle={showTitle}
-        variant={this.variant()}
-        additionalClasses={additionalClasses}
-      />
-    );
-  }
-
-  renderCollection() {
-    const { notation, additionalClasses, showTitle } = this.props;
-    return (
-      <ResourceCollection.Thumbnail
-        key={notation.id}
-        resourceCollection={notation}
-        showTitle={showTitle}
-        variant={this.variant()}
+        variant="smallLandscape"
         additionalClasses={additionalClasses}
       />
     );
   }
 
   render() {
-    if (this.isResource()) return this.renderResource();
-    if (this.isCollection()) return this.renderCollection();
-    return null;
+    return this.renderNotation();
   }
 }

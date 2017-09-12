@@ -103,7 +103,7 @@ exports[`Backend ProjectDetail Resource ResourcesList Container renders correctl
                   className="cover"
                 >
                   <div
-                    className="resource-thumbnail-primary icon-only"
+                    className="icon-thumbnail-primary icon-only"
                     style={
                       Object {
                         "backgroundImage": null,
@@ -114,10 +114,10 @@ exports[`Backend ProjectDetail Resource ResourcesList Container renders correctl
                       className="wrapper"
                     >
                       <figure
-                        className="asset-type"
+                        className="icon-thumbnail-type"
                       >
                         <i
-                          className="resource-icon image"
+                          className="icon-thumbnail-icon image"
                         >
                           <svg
                             height="64px"
@@ -172,7 +172,7 @@ exports[`Backend ProjectDetail Resource ResourcesList Container renders correctl
                   className="cover"
                 >
                   <div
-                    className="resource-thumbnail-primary icon-only"
+                    className="icon-thumbnail-primary icon-only"
                     style={
                       Object {
                         "backgroundImage": null,
@@ -183,10 +183,10 @@ exports[`Backend ProjectDetail Resource ResourcesList Container renders correctl
                       className="wrapper"
                     >
                       <figure
-                        className="asset-type"
+                        className="icon-thumbnail-type"
                       >
                         <i
-                          className="resource-icon image"
+                          className="icon-thumbnail-icon image"
                         >
                           <svg
                             height="64px"

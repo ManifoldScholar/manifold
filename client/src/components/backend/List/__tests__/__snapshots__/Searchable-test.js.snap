@@ -75,7 +75,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
                 className="cover"
               >
                 <div
-                  className="resource-thumbnail-primary icon-only"
+                  className="icon-thumbnail-primary icon-only"
                   style={
                     Object {
                       "backgroundImage": null,
@@ -86,10 +86,10 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
                     className="wrapper"
                   >
                     <figure
-                      className="asset-type"
+                      className="icon-thumbnail-type"
                     >
                       <i
-                        className="resource-icon image"
+                        className="icon-thumbnail-icon image"
                       >
                         <svg
                           height="64px"
@@ -144,7 +144,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
                 className="cover"
               >
                 <div
-                  className="resource-thumbnail-primary icon-only"
+                  className="icon-thumbnail-primary icon-only"
                   style={
                     Object {
                       "backgroundImage": null,
@@ -155,10 +155,10 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
                     className="wrapper"
                   >
                     <figure
-                      className="asset-type"
+                      className="icon-thumbnail-type"
                     >
                       <i
-                        className="resource-icon image"
+                        className="icon-thumbnail-icon image"
                       >
                         <svg
                           height="64px"

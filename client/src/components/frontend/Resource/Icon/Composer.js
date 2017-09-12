@@ -15,6 +15,7 @@ export default class ResourceIconComposer extends PureComponent {
     super();
     this.icons = {
       audio: Icon.Audio,
+      collection: Icon.Collection,
       document: Icon.Document,
       file: Icon.File,
       image: Icon.Image,

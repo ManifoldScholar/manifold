@@ -1,4 +1,4 @@
-@mixin assetThumbnailPrimary {
+.icon-thumbnail-primary {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -8,16 +8,29 @@
   background-color: $neutral10;
 
   &:hover {
-    .asset-title {
+    .icon-thumbnail-title {
       color: $accentPrimary;
     }
   }
 
   &.bg-image {
     color: $neutralWhite;
-    background-color: transparent;
     background-position: 0 0;
     background-size: cover;
+
+    &::before {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: transparentize($neutralOffBlack, 0.3);
+      content: '';
+    }
+
+    .icon-thumbnail-icon {
+      svg {
+        fill: $neutralWhite;
+      }
+    }
   }
 
   &.title {
@@ -25,8 +38,49 @@
       padding: 11% 7.6%;
     }
 
-    .asset-type {
+    .icon-thumbnail-type {
       font-size: 12px;
+    }
+
+    .icon-thumbnail-icon {
+      width: 27%;
+      padding: 14px 0 17px;
+
+      &.document, &.interactive, &.link, &.pdf {
+        max-width: 19%;
+      }
+    }
+  }
+
+  &.icon-only {
+    background-color: transparent;
+
+    &.bg-image {
+      &::before {
+        display: none;
+      }
+
+      .icon-thumbnail-icon {
+        display: none;
+      }
+
+      .wrapper {
+        padding-top: 105%;
+      }
+    }
+
+    // Override padding for standard thumbnail
+    .wrapper {
+      padding: 0;
+    }
+
+    .icon-thumbnail-icon {
+      width: 100%;
+      padding: 0;
+
+      &.document, &.interactive, &.link, &.pdf {
+        max-width: 100%;
+      }
     }
   }
 
@@ -39,16 +93,29 @@
       width: 37px;
       height: 37px;
       overflow: hidden;
+
+      .icon-thumbnail-icon {
+        width: 100%;
+        height: 37px;
+
+        svg {
+          max-width: 24px;
+        }
+      }
     }
 
     &.bg-image {
+      .icon-thumbnail-icon {
+        display: none;
+      }
+
       &::before {
         background-color: $accentPrimary;
         opacity: 0;
       }
     }
 
-    .asset-image {
+    .icon-thumbnail-image {
       position: relative;
       display: inline-block;
 
@@ -64,8 +131,33 @@
 
       img {
         display: block;
-        width: 80px;
+        width: auto;
         height: 50px;
+      }
+    }
+
+    .icon-thumbnail-icon {
+      display: flex;
+      width: 80px;
+      height: 50px;
+      padding: 0;
+      margin: 0 0 0 auto;
+      color: $neutral50;
+      text-align: center;
+      background-color: $neutral10;
+
+      svg {
+        max-width: 30px;
+        margin: auto;
+      }
+
+      &.document, &.interactive, &.link, &.pdf {
+        // OD
+        max-width: none;
+
+        svg {
+          max-width: 20px;
+        }
       }
     }
 
@@ -78,7 +170,8 @@
       }
     }
 
-    .asset-title {
+
+    .icon-thumbnail-title {
       @include templateHead;
       padding-top: 8px;
       font-size: 14px;
@@ -108,7 +201,7 @@
     }
   }
 
-  .asset-type {
+  .icon-thumbnail-type {
     @include templateHead;
     font-size: 14px;
 
@@ -117,10 +210,38 @@
     }
   }
 
-  .asset-title {
+  .icon-thumbnail-title {
     @include templateHead;
     margin: 0;
     font-size: 14px;
     transition: color $duration $timing;
+  }
+
+  .icon-thumbnail-icon {
+    display: block;
+    width: 36%;
+    padding: 18px 0 0;
+    margin: 0 auto;
+
+    &.document, &.interactive, &.link, &.pdf {
+      max-width: 25%;
+    }
+
+    // Hack to make the resource icons the same height on resource cards. --ZD
+    &.image {
+      margin-bottom: 7px;
+    }
+
+    &.audio {
+      margin-bottom: 12px;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+      fill: $neutral70;
+      transition: fill $duration $timing;
+    }
   }
 }

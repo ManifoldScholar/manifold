@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.Resource.Thumbnail component renders correctly 1`] = `
+exports[`Frontend.Resourceish.Thumbnail component renders correctly 1`] = `
 <div
-  className="resource-thumbnail-primary "
+  className="icon-thumbnail-primary "
   style={
     Object {
       "backgroundImage": null,
@@ -13,13 +13,13 @@ exports[`Frontend.Resource.Thumbnail component renders correctly 1`] = `
     className="wrapper"
   >
     <figure
-      className="asset-type"
+      className="icon-thumbnail-type"
     >
       <figcaption>
         Image
       </figcaption>
       <i
-        className="resource-icon image"
+        className="icon-thumbnail-icon image"
       >
         <svg
           height="64px"

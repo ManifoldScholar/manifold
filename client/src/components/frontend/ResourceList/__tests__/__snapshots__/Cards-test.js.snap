@@ -30,7 +30,7 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
               onClick={[Function]}
             >
               <div
-                className="resource-thumbnail-primary "
+                className="icon-thumbnail-primary "
                 style={
                   Object {
                     "backgroundImage": null,
@@ -41,13 +41,13 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
                   className="wrapper"
                 >
                   <figure
-                    className="asset-type"
+                    className="icon-thumbnail-type"
                   >
                     <figcaption>
                       Image
                     </figcaption>
                     <i
-                      className="resource-icon image"
+                      className="icon-thumbnail-icon image"
                     >
                       <svg
                         height="64px"
@@ -168,7 +168,7 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
               onClick={[Function]}
             >
               <div
-                className="resource-thumbnail-primary "
+                className="icon-thumbnail-primary "
                 style={
                   Object {
                     "backgroundImage": null,
@@ -179,13 +179,13 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
                   className="wrapper"
                 >
                   <figure
-                    className="asset-type"
+                    className="icon-thumbnail-type"
                   >
                     <figcaption>
                       Image
                     </figcaption>
                     <i
-                      className="resource-icon image"
+                      className="icon-thumbnail-icon image"
                     >
                       <svg
                         height="64px"
