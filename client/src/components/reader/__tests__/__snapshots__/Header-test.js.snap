@@ -83,9 +83,6 @@ exports[`Reader.Header Component renders correctly 1`] = `
     </nav>
   </nav>
   <div
-    className="banner-gradient"
-  />
-  <div
     className="edge-lock-scroll"
   >
     <div
