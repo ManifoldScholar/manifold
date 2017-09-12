@@ -14,10 +14,14 @@
   li a, li button {
     @include buttonUnstyled;
     @include templateHead;
-    font-size: 26px;
+    font-size: 22px;
     letter-spacing: 0.004em;
     color: $neutral75;
     text-decoration: none;
+
+    @include respond($break20) {
+      font-size: 26px;
+    }
 
     &:hover i {
       color: $accentPrimary;
