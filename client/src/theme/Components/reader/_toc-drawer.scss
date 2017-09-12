@@ -1,20 +1,17 @@
 .toc-drawer {
+  $drawerWidth: 565px;
+
   position: fixed;
-  width: 620px;
-  height: 100%;
+  width: $drawerWidth;
   max-width: 90vw;
-  padding: 20px 0 100px;
+  height: 100%;
   overflow-y: scroll;
-  -webkit-overflow-scrolling: auto;
   background-color: $neutral05;
   transition: left $duration $timing;
-
-  @include respond($break50) {
-    padding: 35px 0 100px;
-  }
+  -webkit-overflow-scrolling: auto;
 
   &.drawer-hidden {
-    left: -620px;
+    left: -$drawerWidth;
   }
 
   &.drawer-visible {
@@ -24,14 +21,19 @@
   // Scoped table of contents styles, some may be abstracted later
   // <nav> around nested uls
   @mixin tocBasePadding($nested: 0) {
+    padding-right: 20px;
     padding-left: 30px + $nested;
 
     @include respond($break30) {
       padding-left: calc(7.813vw + #{$nested}px);
     }
 
+    @include respond($break70) {
+      padding-right: 30px;
+    }
+
     @include respond($break95) {
-      padding-left: 80px + $nested;
+      padding-left: 96px + $nested;
     }
   }
 
@@ -42,31 +44,25 @@
     ul {
       @include listUnstyled;
       @include templateHead;
-    }
 
-    a {
-      display: block;
-      width: 100%;
-      color: $neutralOffBlack;
-      text-decoration: none;
+      a {
+        display: block;
+        width: 100%;
+        line-height: 1.2;
+        color: $neutral90;
+        text-decoration: none;
+        border-bottom: 1px solid $neutral40;
+        transition: color $duration $timing,
+          background-color $duration $timing;
 
-      &:hover {
-        color: $accentPrimaryMedium;
-        background-color: $neutral10;
-      }
-    }
+        &:hover {
+          color: $neutral75;
+          background-color: $accentPrimaryPale;
+        }
 
-    // Multi level lists have borders on top level links
-    &.multi-level > ul > li > a {
-      padding-top: 1.5em;
-      border-bottom: 1px solid $neutral40;
-
-      // Except on hover
-      &:hover {
-        margin-top: -1px;
-        // Pop above the border above it as well
-        border-top: 1px solid $neutral10;
-        border-color: $neutral10;
+        &.active {
+          background-color: $neutral10;
+        }
       }
     }
 
@@ -74,40 +70,38 @@
     > ul > li {
       > a {
         @include tocBasePadding();
-        padding-top: 0.6em;
-        padding-right: 3.068em;
-        padding-bottom: 0.556em;
+        padding-top: 1.091em;
+        padding-bottom: 1.136em;
         font-size: 18px;
 
         @include respond($break50) {
-          font-size: 20px;
+          font-size: 22px;
         }
       }
 
       > ul > li {
         // Secondary level globals
         a {
-          @include tocBasePadding($tocNestedPadding);
-          padding-top: 0.8em;
-          padding-right: 3.068em;
-          padding-bottom: 0.7em;
-          font-size: 14px;
+          @include tocBasePadding();
+          padding-top: 0.5em;
+          padding-bottom: 0.667em;
+          font-size: 16px;
 
           @include respond($break50) {
-            font-size: 16px;
+            font-size: 18px;
           }
         }
 
         // Third level indenting
         // scss-lint:disable SelectorDepth
         > ul > li > a {
-          @include tocBasePadding($tocNestedPadding * 2);
+          @include tocBasePadding($tocNestedPadding);
         }
 
         // Fourth level (and on) indenting
         // scss-lint:disable SelectorDepth
         > ul > li > ul > li > a {
-          @include tocBasePadding($tocNestedPadding * 3);
+          @include tocBasePadding($tocNestedPadding * 2);
         }
       }
     }
@@ -116,26 +110,28 @@
   .toc-footer {
     @include tocBasePadding();
     display: block;
-    padding-top: 35px;
+    padding-top: 30px;
+    padding-bottom: 200px;
 
     @include respond($break50) {
-      padding-top: 56.25px;
-    }
+      padding-top: 41px;
+    };
 
-    a:hover {
-      background-color: transparent; // OD
+    a {
+      color: $neutral50;
+      text-decoration: none;
     }
 
     h4 {
-      @include templateHead;
-      font-size: 19px;
-      font-weight: $regular;
+      @include utilityPrimary;
+      margin: 0;
+      font-size: 14px;
 
       i {
         display: inline-block;
         margin-top: -3px;
         margin-right: 16px;
-        font-size: 26px;
+        font-size: 2.286em;
         vertical-align: middle;
       }
     }
