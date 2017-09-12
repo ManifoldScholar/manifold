@@ -1,5 +1,6 @@
 namespace :db do
   task kill: :environment do
+    Manifold::Rake.logger.info "Killing all DB connections"
     # rubocop:disable Rails/FilePath
     db_name = "#{File.basename(Rails.root)}_#{Rails.env}"
     # rubocop:enable Rails/FilePath
