@@ -120,17 +120,13 @@ export default class Header extends Component {
   };
 
   render() {
-    const colorScheme = this.props.appearance.colors.colorScheme;
-
-    const bannerGradientClass = classNames({
-      "banner-gradient": true,
-      "scheme-light": colorScheme === "light",
-      "scheme-dark": colorScheme === "dark"
+    const containerClass = classNames("container-banner", {
+      border: this.props.scrollAware && !this.props.scrollAware.top
     });
 
     return (
       <header className="header-reader">
-        <nav className="container-banner">
+        <nav className={containerClass}>
           <ReturnMenu.Button
             toggleReaderMenu={this.handleReturnMenuButtonClick}
           />
@@ -176,7 +172,6 @@ export default class Header extends Component {
             </ul>
           </nav>
         </nav>
-        <div className={bannerGradientClass} />
         <TocDrawer
           text={this.props.text}
           visible={this.props.visibility.tocDrawer}
