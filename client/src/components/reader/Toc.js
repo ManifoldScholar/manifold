@@ -1,14 +1,17 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import lh from "helpers/linkHandler";
+import { withRouter } from "react-router-dom";
 
-export default class Toc extends Component {
+class Toc extends PureComponent {
   static propTypes = {
     text: PropTypes.object,
+    section: PropTypes.object,
     tocDrawerVisible: PropTypes.bool,
-    hideTocDrawer: PropTypes.func
+    hideTocDrawer: PropTypes.func,
+    history: PropTypes.object
   };
 
   constructor() {
@@ -17,7 +20,16 @@ export default class Toc extends Component {
     this.UIHideTocDrawer = this.UIHideTocDrawer.bind(this);
     this.hasChildren = this.hasChildren.bind(this);
     this.visitNode = this.visitNode.bind(this);
+    this.state = {
+      mounted: false
+    };
   }
+
+  /* eslint-disable react/no-did-mount-set-state */
+  componentDidMount() {
+    this.setState({ mounted: true });
+  }
+  /* eslint-enable react/no-did-mount-set-state */
 
   UIHideTocDrawer() {
     if (this.props.tocDrawerVisible) {
@@ -48,12 +60,16 @@ export default class Toc extends Component {
 
     let anchor = "";
     if (node.anchor) anchor = `#${node.anchor}`;
+
+    const active = this.isNodeActive(node);
+
     return (
       <li key={this.counter}>
         <Link
           to={lh.link("readerSection", this.props.text.id, node.id, anchor)}
           onClick={this.UIHideTocDrawer}
           data-id="hide-drawer"
+          className={active ? "active" : null}
         >
           {node.label}
         </Link>
@@ -62,26 +78,41 @@ export default class Toc extends Component {
     );
   }
 
+  isNodeActive(node) {
+    if (!this.props.section) return false;
+    if (!this.state.mounted) return false;
+    const { location } = this.props.history;
+    const nodeId = node.id;
+    const nodeHash = node.anchor ? `#${node.anchor}` : "";
+    return this.props.section.id === nodeId && location.hash === nodeHash;
+  }
+
   render() {
+    const text = this.props.text;
+
     const tocClass = classNames({
       "table-of-contents": true,
       "multi-level": this.hasChildren(this.props.text.attributes.toc)
     });
+
     return (
       <nav className={tocClass}>
         <ul className="toc-list">
-          {this.props.text.attributes.toc.map(this.visitNode)}
+          {text.attributes.toc.map(this.visitNode)}
         </ul>
-        {/* Commented out until functionality is working */}
-        {/* <div className="toc-footer">
-          <a href="#">
-            <h4>
-              <i className="manicon manicon-question-round"></i>
-              About This Text
-            </h4>
-          </a>
-        </div> */}
+        {/* Commented out until functionality is working
+          <div className="toc-footer">
+            <a href="#">
+              <h4>
+                <i className="manicon manicon-i-round" />
+                {"About this text"}
+              </h4>
+            </a>
+          </div>
+        */}
       </nav>
     );
   }
 }
+
+export default withRouter(Toc);
