@@ -1,4 +1,3 @@
-
 # Deploying the client
 namespace :client do
 
