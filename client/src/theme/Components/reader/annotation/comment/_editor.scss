@@ -2,6 +2,31 @@
   @include drawerIndent(padding-left);
   padding-top: 18px;
 
+  .editor-label {
+    @include utilityPrimary;
+    display: flex;
+    align-items: center;
+    margin: 0; // OD
+    margin-bottom: 1.313em;
+    font-size: 14px;
+    color: $neutral70;
+    
+    @include respond($break60) {
+      font-size: 16px;
+    }
+
+    .manicon {
+      margin-right: 13px;
+      font-size: 2em;
+      color: $neutral40;
+
+      @include respond($break60) {
+        margin-right: 15px;
+        font-size: 2.313em;
+      }
+    }
+  }
+
   textarea {
     @include templateHead;
     display: block;
@@ -30,12 +55,23 @@
     }
 
     .buttons {
-      display: inline-block;
+      display: flex;
+      justify-content: flex-end;
+      margin: 0;
     }
 
     .button-secondary, .button-secondary-dull {
       min-width: 98px;
       transition: background-color $duration $timing;
+    }
+
+    .button-secondary {
+      padding: 1.188em 1.875em 1em;
+
+      .manicon-word-bubble-lines {
+        margin-right: 0.469em;
+        font-size: 2em;
+      }
     }
 
     .button-secondary-dull {

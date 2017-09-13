@@ -34,6 +34,9 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
             className="button-secondary"
             disabled={false}
           >
+            <i
+              className="manicon manicon-word-bubble-lines"
+            />
             Update
           </button>
         </div>

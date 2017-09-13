@@ -22,6 +22,7 @@ export class CommentEditor extends PureComponent {
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    label: PropTypes.string,
     comment: PropTypes.object,
     placeholder: PropTypes.string,
     body: PropTypes.string,
@@ -159,6 +160,12 @@ export class CommentEditor extends PureComponent {
 
     return (
       <div className="comment-editor">
+        {this.props.label
+          ? <h3 className="editor-label">
+              <i className="manicon manicon-pencil" />
+              {this.props.label}
+            </h3>
+          : null}
         <HigherOrder.RequireRole requiredRole="none">
           <div className="placeholder">
             <button onClick={showLogin}>Login to post a comment</button>
@@ -192,6 +199,7 @@ export class CommentEditor extends PureComponent {
                     className="button-secondary"
                     disabled={!this.state.body}
                   >
+                    <i className="manicon manicon-word-bubble-lines" />
                     {this.buttonLabel(this.props)}
                   </button>
                 </div>
