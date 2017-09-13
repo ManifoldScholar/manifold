@@ -5,6 +5,8 @@ import isArray from "lodash/isArray";
 import forEach from "lodash/forEach";
 import findIndex from "lodash/findIndex";
 import intersection from "lodash/intersection";
+import unionWith from "lodash/unionWith";
+import isEqual from "lodash/isEqual";
 
 export const initialState = {
   responses: {},
@@ -68,6 +70,11 @@ function mergeEntities(stateEntities, payloadEntities) {
   return Object.assign({}, stateEntities, mergedEntities);
 }
 
+function mergeCollections(stateResponse, payloadResults) {
+  if (!get(stateResponse, "appends")) return payloadResults;
+  return unionWith(stateResponse.collection, payloadResults, isEqual);
+}
+
 function deriveType(entityOrCollection) {
   if (has(entityOrCollection, "type")) return entityOrCollection.type;
   if (
@@ -125,18 +132,26 @@ function successResponse(state, action) {
   const responses = Object.assign({}, baseResponses, {
     [meta]: {
       entity: isEntity ? payload.results : null,
-      collection: isCollection ? payload.results : null,
+      collection: isCollection
+        ? mergeCollections(baseResponses[meta], payload.results)
+        : null,
       meta: Object.assign({}, get(action.payload, "meta"), { modified: false }),
       links: get(action.payload, "links"),
       type: !isNull ? deriveType(payload.results) : null,
       request: get(action, "payload.request"),
-      loaded: true
+      loaded: true,
+      appends: get(baseResponses[meta], "appends", false)
     }
   });
   if (isNull) {
     return Object.assign({}, state, { responses });
   }
-  const entities = mergeEntities(state.entities, payload.entities);
+  const entities = responses[meta].appends
+    ? Object.assign(
+        state.entities,
+        mergeEntities(state.entities, payload.entities)
+      )
+    : mergeEntities(state.entities, payload.entities);
   return Object.assign({}, state, { responses, entities });
 }
 
@@ -153,7 +168,8 @@ function handleRequest(state, action) {
   const responses = Object.assign({}, state.responses, {
     [meta]: {
       entities: null,
-      loaded: false
+      loaded: false,
+      appends: action.payload.appends || false
     }
   });
   return Object.assign({}, state, { responses });
