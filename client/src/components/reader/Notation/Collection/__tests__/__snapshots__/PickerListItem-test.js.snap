@@ -26,7 +26,7 @@ exports[`Reader.Notation.Collection.PickerListItem component renders correctly 1
           className="name"
         >
           <span
-            className="collection-title"
+            className="collection-title truncate"
           >
             Rowan
           </span>
