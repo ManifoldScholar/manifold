@@ -96,22 +96,21 @@
   }
 
   .asset-status {
-    @include clearfix;
     margin-top: 20px;
   }
 
   // <ul> of icons or links
   .asset-interactions {
-    @include listHorizontal;
-    display: block;
-    float: left;
+    @include listUnstyled;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
     margin-top: -3px;
 
     li {
       @include utilityPrimary;
       font-size: 15px;
       color: $neutral40;
-      vertical-align: middle;
 
       + li {
         margin-left: 22px;
@@ -121,11 +120,15 @@
     .manicon {
       display: inline-block;
       margin-right: 8px;
-      font-size: 20px;
+      font-size: 22px;
       vertical-align: middle;
 
       @include respond($break60) {
-        font-size: 22px;
+        font-size: 24px;
+      }
+
+      &.manicon-pencil-simple {
+        margin-bottom: 0.042em;
       }
     }
 
