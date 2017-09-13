@@ -307,6 +307,14 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
               <div
                 className="comment-editor"
               >
+                <h3
+                  className="editor-label"
+                >
+                  <i
+                    className="manicon manicon-pencil"
+                  />
+                  Add Comment
+                </h3>
                 <div
                   className="placeholder"
                 >

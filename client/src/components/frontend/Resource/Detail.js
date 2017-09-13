@@ -70,6 +70,7 @@ export default class ResourceDetail extends Component {
                 <div className="resource-comments">
                   <CommentContainer.Thread subject={resource} />
                   <CommentContainer.Editor
+                    label={"Add Comment"}
                     subject={resource}
                     cancel={event => this.cancelComment(event)}
                   />
