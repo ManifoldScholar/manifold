@@ -94,7 +94,7 @@ export default class ResourceListFilters extends Component {
             placeholder="Search"
           />
         </div>
-        <div className="select-group">
+        <div className="select-group inline">
           <div className="select">
             <select
               onChange={event => this.setFilters(event, "kind")}
