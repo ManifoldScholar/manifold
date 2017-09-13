@@ -49,6 +49,7 @@
 
   .select-group {
     display: block;
+    width: 100%;
     margin-top: 12px;
     margin-left: -11px;
 
@@ -56,11 +57,13 @@
       margin-top: 14px;
     }
 
-    @include respond($break75) {
-      display: inline-block;
-      width: calc(60% + 11px);
-      padding-left: 12px;
-      margin-top: 0;
+    &.inline {
+      @include respond($break75) {
+        display: inline-block;
+        width: calc(60% + 11px);
+        padding-left: 12px;
+        margin-top: 0;
+      }
     }
 
     .select {
@@ -74,7 +77,7 @@
         @include utilityPrimary;
         width: 100%;
         height: $inputHeight;
-        padding-right: 16px;
+        padding-right: 32px;
         padding-left: 13px;
         font-size: 14px;
         color: $neutral50;

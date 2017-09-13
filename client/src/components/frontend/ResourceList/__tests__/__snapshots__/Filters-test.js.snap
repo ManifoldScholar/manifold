@@ -24,7 +24,7 @@ exports[`Frontend.ResourceList.Filters Component renders correctly 1`] = `
     />
   </div>
   <div
-    className="select-group"
+    className="select-group inline"
   >
     <div
       className="select"
