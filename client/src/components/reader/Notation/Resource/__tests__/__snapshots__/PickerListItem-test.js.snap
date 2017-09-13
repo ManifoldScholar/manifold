@@ -52,6 +52,7 @@ exports[`Reader.Notation.Resource.PickerListItem component renders correctly 1`]
           className="name"
         >
           <span
+            className="truncate"
             dangerouslySetInnerHTML={
               Object {
                 "__html": "Image",

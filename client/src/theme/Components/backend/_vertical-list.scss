@@ -130,11 +130,13 @@
 
     header {
       display: flex;
+      max-width: 100%;
     }
 
     figure {
       &.cover {
-        width: 50px;
+        min-width: 50px;
+        max-width: 50px;
 
         img {
           border: 1px solid transparent;
@@ -174,6 +176,7 @@
       display: flex;
       flex-flow: column;
       flex-grow: 1;
+      max-width: calc(100% - 50px);
       padding-right: 20px;
       padding-left: 15px;
       vertical-align: top;
@@ -205,11 +208,11 @@
 
     .name {
       @include templateHead;
+      max-width: 100%;
       margin: 0;
       font-size: 16px;
       line-height: 21px;
       letter-spacing: 0.015em;
-      white-space: nowrap;
       transition: color $duration $timing;
 
       @include respond($break80) {
@@ -222,6 +225,13 @@
         @include respond($break80) {
           font-size: 22px;
         }
+      }
+
+      .truncate {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .title-text {

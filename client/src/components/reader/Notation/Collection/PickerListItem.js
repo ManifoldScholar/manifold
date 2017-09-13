@@ -39,7 +39,7 @@ export default class CollectionPickerListItem extends PureComponent {
             </figure>
             <div className="meta">
               <h3 className="name">
-                <span className="collection-title">
+                <span className="collection-title truncate">
                   {attr.title}
                 </span>
                 <span className="subtitle">

@@ -141,6 +141,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                       className="name"
                     >
                       <span
+                        className="truncate"
                         dangerouslySetInnerHTML={
                           Object {
                             "__html": "Image",
@@ -210,6 +211,7 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
                       className="name"
                     >
                       <span
+                        className="truncate"
                         dangerouslySetInnerHTML={
                           Object {
                             "__html": "Image",

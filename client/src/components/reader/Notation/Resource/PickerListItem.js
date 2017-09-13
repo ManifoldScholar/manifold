@@ -43,6 +43,7 @@ export default class ResourcePickerListItem extends PureComponent {
             <div className="meta">
               <h3 className="name">
                 <span
+                  className="truncate"
                   dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
                 />
                 <span className="subtitle">
