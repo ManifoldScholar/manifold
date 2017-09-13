@@ -82,6 +82,20 @@
       color: $neutral50;
     }
 
+    .button-bare-primary {
+      // Scoped colors/hovers
+      color: $neutral75;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $neutral20;
+
+        .manicon {
+          color: $neutral20;
+        }
+      }
+    }
+
     button {
       font-size: 0;
 
@@ -106,6 +120,7 @@
         margin-left: 6px;
         color: $accentPrimary;
         vertical-align: middle;
+        transition: color $duration $timing;
 
         @include respond($break60) {
           margin-left: 11px;
