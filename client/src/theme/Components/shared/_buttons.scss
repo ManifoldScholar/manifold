@@ -562,13 +562,17 @@
   @include utilityPrimary;
   display: inline-block;
   padding: 20px 0 18px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.4;
   color: $neutral70;
   text-decoration: none;
   background-color: $neutral05;
   transition: color $duration $timing,
     background-color $duration $timing;
+
+  @include respond($break40) {
+    font-size: 14px;
+  }
 
   &.full {
     display: block;
@@ -593,7 +597,7 @@
     padding-left: calc(#{$containerPaddingResp} + 26px);
 
     @include respond($break100) {
-      padding-left: $containerPaddingFull;
+      padding-left: calc(#{$containerPaddingFull} + 26px);
     }
   }
 

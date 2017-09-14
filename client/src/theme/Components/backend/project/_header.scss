@@ -10,11 +10,17 @@
   }
 
   figure {
+    display: none;
     float: left;
     width: 68px;
+    margin-bottom: 15px;
 
     @include respond($break30) {
       width: 75px;
+    }
+
+    @include respond($break40) {
+      display: block;
     }
 
     @include respond($break65) {
@@ -43,11 +49,14 @@
     h1, h2, h3, h4, h5, h6 {
       @include templateHead;
       float: left;
-      max-width: calc(100% - 75px);
-      margin-top: 0;
-      font-size: 22px;
+      margin: 0 0 15px;
+      font-size: 21px;
       font-weight: $medium;
       color: $neutral20;
+
+      @include respond($break40) {
+        max-width: calc(100% - 75px);
+      }
 
       @include respond($break30) {
         max-width: calc(100% - 86px);
