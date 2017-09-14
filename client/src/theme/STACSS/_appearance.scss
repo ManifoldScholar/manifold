@@ -32,9 +32,9 @@
 @mixin tailUp($color: $neutral10) {
   width: 0;
   height: 0;
+  border-color: transparent transparent $neutral10;
   border-style: solid;
   border-width: 0 15.5px 17px;
-  border-color: transparent transparent $neutral10;
 }
 
 // Added to UI panels/dropdowns with tails
@@ -42,7 +42,7 @@
   position: absolute;
   top: -17px;
   right: 28px;
-  @include tailUp();
+  @include tailUp;
 }
 
 // Background color utility classes
@@ -87,8 +87,8 @@
   // changed in scope
   width: #{$size}px;
   height: #{$size}px;
-  text-align: center;
   overflow: hidden;
+  text-align: center;
   background-color: $backColor;
   border-radius: 100%;
 
@@ -134,8 +134,8 @@
   padding: 0.333em 8px;
   font-size: 12px;
   font-weight: $semibold;
-  letter-spacing: 0.075em;
   color: $neutralWhite;
+  letter-spacing: 0.075em;
   background-color: $sp20Primary;
   border-radius: 3px;
 }
@@ -146,13 +146,13 @@
 // Styled select
 // based on: https://github.com/mdo/wtf-forms/blob/master/wtf-forms.css
 @mixin unstyledSelect {
+  cursor: pointer;
   // Styled select prototype,
   // Ready for restyling
 
   // Must be applied to a <select>
   background: transparent;
   border-radius: 0;
-  cursor: pointer;
   outline: 0;
   appearance: none;
 
@@ -248,9 +248,9 @@
 
 @mixin inputPrimary {
   @include templateHead;
+  padding: 8px 13px 12px;
   font-size: $type70;
   color: $neutralOffBlack;
-  padding: 8px 13px 12px;
   background-color: $neutralWhite;
   border: 3px solid $neutralWhite;
   outline: none;
@@ -278,8 +278,8 @@
 @mixin inputQuaternary {
   @include templateHead;
   padding: 0.438em 1.125em 0.563em;
-  background: transparent;
   color: $neutral40;
+  background: transparent;
   border: 1px solid $neutral80;
   outline: none;
   transition: border-color $duration $timing;

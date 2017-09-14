@@ -7,7 +7,7 @@
     @include buttonAvatar(32);
 
     @include respond($break40) {
-      @include buttonAvatar();
+      @include buttonAvatar;
     }
   }
 }
