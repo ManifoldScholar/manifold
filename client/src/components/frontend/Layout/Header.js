@@ -31,6 +31,7 @@ export default class LayoutHeader extends PureComponent {
   };
 
   visiblePages(props) {
+    if (!props.pages) return [];
     return props.pages.filter(p => {
       return p.attributes.showInHeader && !p.attributes.hidden;
     });
