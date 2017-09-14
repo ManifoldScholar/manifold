@@ -125,11 +125,11 @@ Clamp do
     end
 
     def lint_client
-      autofix = autofix? ? "--fix" : ""
-      puts Paint["$ scss-lint -c .scss-lint.yml", :faint]
-      system "scss-lint -c .scss-lint.yml"
-      puts Paint["$ eslint . #{autofix}", :faint]
-      raise "Client lint failed" unless system "cd client && node_modules/.bin/eslint . #{autofix}"
+      if autofix?
+        raise "Client lint failed" unless system "cd client && yarn fix"
+      else
+        raise "Client lint failed" unless system "cd client && yarn lint"
+      end
     end
 
     def execute

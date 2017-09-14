@@ -40,14 +40,14 @@
   .header-border {
     position: absolute;
     width: 100%;
+    visibility: hidden;
     border-bottom: 1px solid $neutral40;
     opacity: 0;
-    visibility: hidden;
     transition: opacity $duration $timing, visibility $duration $timing;
 
     .not-top & {
-      opacity: 1;
       visibility: visible;
+      opacity: 1;
     }
   }
 
@@ -102,8 +102,8 @@
           display: block;
           width: 100%;
           height: 2px;
-          background-color: $neutral90;
           content: '';
+          background-color: $neutral90;
         }
       }
     }
@@ -172,7 +172,7 @@
       vertical-align: middle;
 
       &::after {
-        @include tailUp();
+        @include tailUp;
         position: absolute;
         bottom: 0;
         left: 50%;
@@ -231,16 +231,16 @@
     .search-menu, .user-menu {
       // Default state
       margin-top: -20px;
-      opacity: 0;
       visibility: hidden;
+      opacity: 0;
       transition: all, $duration, $timing;
     }
 
     // Panel active states
     .panel-visible .search-menu, .panel-visible .user-menu {
       margin-top: 0;
-      opacity: 1;
       visibility: visible;
+      opacity: 1;
     }
   }
 }
