@@ -11,8 +11,8 @@ export default class Breadcrumb extends PureComponent {
 
   render() {
     return (
-      <div className="container flush">
-        <nav className="breadcrumb-primary">
+      <nav className="breadcrumb-primary">
+        <div className="container flush">
           <Link to={this.props.links[0].path} className="initial">
             <i className="manicon manicon-arrow-left" />
             {"Back to:"}
@@ -28,8 +28,8 @@ export default class Breadcrumb extends PureComponent {
               );
             })}
           </ul>
-        </nav>
-      </div>
+        </div>
+      </nav>
     );
   }
 }
