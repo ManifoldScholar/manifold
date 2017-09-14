@@ -9,7 +9,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
   >
     <a
       className="logo"
-      href="/backend"
+      href="/"
       onClick={[Function]}
     >
       <figure

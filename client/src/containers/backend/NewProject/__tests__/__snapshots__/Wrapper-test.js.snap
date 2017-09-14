@@ -5,11 +5,11 @@ exports[`Backend NewProject Wrapper Container renders correctly 1`] = `
   <section
     className="bg-neutral95"
   >
-    <div
-      className="container flush"
+    <nav
+      className="breadcrumb-primary"
     >
-      <nav
-        className="breadcrumb-primary"
+      <div
+        className="container flush"
       >
         <a
           className="initial"
@@ -32,8 +32,8 @@ exports[`Backend NewProject Wrapper Container renders correctly 1`] = `
             </a>
           </li>
         </ul>
-      </nav>
-    </div>
+      </div>
+    </nav>
     <div
       className="container flush"
     >
