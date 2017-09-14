@@ -1,28 +1,43 @@
 .breadcrumb-primary {
   @include utilityPrimary;
-  display: inline-block;
+  display: block;
   padding: 20px 0 18px;
   font-size: 14px;
+  line-height: 1.4;
   color: $neutral70;
   text-decoration: none;
+
+  .container {
+    position: relative;
+    padding-left: calc(#{$containerPaddingResp} + 26px);
+
+    @include respond($break100) {
+      padding-left: $containerPaddingFull;
+    }
+  }
 
   .initial {
     color: $neutral70;
     text-decoration: none;
   }
 
+
   // Breadcrumb list
   ul {
     @include listHorizontal;
-    display: inline-block;
+    display: inline;
     padding-left: 8px;
 
-    li + li {
-      &::before {
+    li {
+      &::after {
         display: inline-block;
         padding: 0 11px;
         color: $neutral50;
         content: '/';
+      }
+
+      &:last-child::after {
+        display: none;
       }
     }
 
@@ -38,9 +53,13 @@
   }
 
   .manicon {
-    display: inline-block;
-    margin-right: 10px;
+    position: absolute;
+    top: 0.28em;
+    left: $containerPaddingResp;
     font-size: 13px;
-    vertical-align: middle;
+
+    @include respond($break100) {
+      left: $containerPaddingFull;
+    }
   }
 }
