@@ -16,6 +16,11 @@
 
     .logo {
       color: $neutral50;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $accentPrimary;
+      }
     }
 
     .text-nav .active {
