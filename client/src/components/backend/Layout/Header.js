@@ -40,7 +40,7 @@ export default class LayoutHeader extends Component {
     return (
       <header className={"header-app dark"}>
         <div className="header-container">
-          <Link to={lh.link("backend")} className="logo">
+          <Link to={lh.link("frontend")} className="logo">
             <PressLogo
               url={get(this.props.settings, "attributes.pressLogoStyles.small")}
             />

@@ -1,9 +1,13 @@
 .footer-browse {
-  padding: 40px 0 57px;
+  padding: 32px 0 57px;
   background-color: $neutral80;
 
+  @include respond($break50) {
+    padding: 40px 0 65px;
+  }
+
   @include respond($break65) {
-    padding: 67px 0 57px;
+    padding: 67px 0 65px;
   }
 
   // <a>
@@ -79,7 +83,11 @@
   }
 
   .footer-secondary {
-    padding-top: 60px;
+    padding-top: 30px;
+
+    @include respond($break50) {
+      padding-top: 60px;
+    }
 
     @include respond($break65) {
       padding-top: 90px;
