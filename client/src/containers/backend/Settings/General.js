@@ -30,7 +30,7 @@ export class SettingsGeneralContainer extends PureComponent {
         >
           <Form.TextInput
             focusOnMount
-            label="How do you refer you your Manifold installation?"
+            label="How do you refer to your Manifold installation?"
             name="attributes[general][installationName]"
             placeholder="Manifold"
             instructions={
