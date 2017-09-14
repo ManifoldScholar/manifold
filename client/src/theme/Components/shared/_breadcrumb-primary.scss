@@ -2,17 +2,21 @@
   @include utilityPrimary;
   display: block;
   padding: 20px 0 18px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.4;
   color: $neutral70;
   text-decoration: none;
+
+  @include respond($break40) {
+    font-size: 14px;
+  }
 
   .container {
     position: relative;
     padding-left: calc(#{$containerPaddingResp} + 26px);
 
     @include respond($break100) {
-      padding-left: $containerPaddingFull;
+      padding-left: calc(#{$containerPaddingFull} + 26px);
     }
   }
 
