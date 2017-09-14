@@ -563,6 +563,7 @@
   display: inline-block;
   padding: 20px 0 18px;
   font-size: 14px;
+  line-height: 1.4;
   color: $neutral70;
   text-decoration: none;
   background-color: $neutral05;
@@ -587,11 +588,24 @@
     background-color: $neutral10;
   }
 
+  .container {
+    position: relative;
+    padding-left: calc(#{$containerPaddingResp} + 26px);
+
+    @include respond($break100) {
+      padding-left: $containerPaddingFull;
+    }
+  }
+
   .manicon {
-    display: inline-block;
-    margin-right: 10px;
+    position: absolute;
+    top: 0.28em;
+    left: $containerPaddingResp;
     font-size: 13px;
-    vertical-align: middle;
+
+    @include respond($break100) {
+      left: $containerPaddingFull;
+    }
   }
 
   span {
