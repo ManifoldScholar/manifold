@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend.Navigation.Breadcrumb component renders correctly 1`] = `
-<div
-  className="container flush"
+<nav
+  className="breadcrumb-primary"
 >
-  <nav
-    className="breadcrumb-primary"
+  <div
+    className="container flush"
   >
     <a
       className="initial"
@@ -37,6 +37,6 @@ exports[`Backend.Navigation.Breadcrumb component renders correctly 1`] = `
         </a>
       </li>
     </ul>
-  </nav>
-</div>
+  </div>
+</nav>
 `;

@@ -13,8 +13,8 @@ exports[`Backend Backend Container renders correctly 1`] = `
                   <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} notifications={{...}} commonActions={{...}} settings={[undefined]} scrollAware={{...}}>
                     <header className=\\"header-app dark\\">
                       <div className=\\"header-container\\">
-                        <Link to=\\"/backend\\" className=\\"logo\\" replace={false}>
-                          <a className=\\"logo\\" onClick={[Function]} href=\\"/backend\\">
+                        <Link to=\\"/\\" className=\\"logo\\" replace={false}>
+                          <a className=\\"logo\\" onClick={[Function]} href=\\"/\\">
                             <PressLogo url={[undefined]}>
                               <figure className=\\"\\">
                                 <div>
