@@ -7,8 +7,9 @@ import { commonActions } from "actions/helpers";
 import { bindActionCreators } from "redux";
 import { uiFilterActions, entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
-import { projectsAPI, requests } from "api";
+import { projectsAPI, featuresAPI, requests } from "api";
 import get from "lodash/get";
+import isArray from "lodash/isArray";
 import lh from "helpers/linkHandler";
 import classNames from "classnames";
 
@@ -33,14 +34,17 @@ export class HomeContainer extends Component {
       projectsAPI.featured(),
       requests.feProjectsFeatured
     );
+    const featuresRequest = request(featuresAPI.index(), requests.feFeatures);
     const { promise: one } = dispatch(filteredRequest);
     const { promise: two } = dispatch(featuredRequest);
-    return Promise.all([one, two]);
+    const { promise: three } = dispatch(featuresRequest);
+    return Promise.all([one, two, three]);
   };
 
   static mapStateToProps = state => {
     return {
       projectFilters: state.ui.filters.project,
+      features: select(requests.feFeatures, state.entityStore),
       filteredProjects: select(requests.feProjectsFiltered, state.entityStore),
       featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
       subjects: select(requests.feSubjects, state.entityStore),
@@ -53,6 +57,7 @@ export class HomeContainer extends Component {
     authentication: PropTypes.object,
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
+    features: PropTypes.array,
     projectFilters: PropTypes.object,
     dispatch: PropTypes.func,
     subjects: PropTypes.array,
@@ -175,16 +180,23 @@ export class HomeContainer extends Component {
       "section-heading-utility-right": this.renderFeaturedProjects(),
       "section-heading-utility-under": !this.renderFeaturedProjects()
     });
+    const feature = isArray(this.props.features)
+      ? this.props.features[0]
+      : null;
+
     return (
       <div
         style={{
           overflowX: "hidden"
         }}
       >
-        <Layout.Splash
-          authenticated={this.props.authentication.authenticated}
-          toggleSignInUpOverlay={this.commonActions.toggleSignInUpOverlay}
-        />
+        {feature
+          ? <Layout.Splash
+              feature={feature}
+              authenticated={this.props.authentication.authenticated}
+              toggleSignInUpOverlay={this.commonActions.toggleSignInUpOverlay}
+            />
+          : null}
         {/*
           Note that this section will be used for "Recent Projects"
           once that list is available, this is currently using the

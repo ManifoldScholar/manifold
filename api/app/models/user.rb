@@ -70,6 +70,10 @@ class User < ApplicationRecord
     order(by)
   }
 
+  def self.cli_user
+    User.find_by(is_cli_user: true)
+  end
+
   def ensure_nickname
     self.nickname = first_name if nickname.blank?
   end

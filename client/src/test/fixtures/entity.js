@@ -266,6 +266,21 @@ const defaults = {
     relationships: {}
   },
 
+  feature: {
+    type: "features",
+    attributes: {
+      header: "Rowan, Top Dog",
+      headerFormatted: "Rowan, Top Dog",
+      subheader: "Blah blah blah",
+      subheaderFormatted: "Blah blah blah",
+      linkText: "Click it, dog",
+      linkUrl: "http://dogs.com",
+      body:
+        "Hands on your boxes, turn 'em up like seven notches." +
+        " Your Magnavoxes amplify my super conscious."
+    }
+  },
+
   annotation: {
     type: "annotations",
     attributes: {
@@ -385,6 +400,10 @@ const textSection = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("textSection", id, attributes, relationships);
 };
 
+const feature = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("feature", id, attributes, relationships);
+};
+
 export default {
   defaults,
   project,
@@ -401,5 +420,6 @@ export default {
   category,
   annotation,
   stylesheet,
-  textSection
+  textSection,
+  feature
 };

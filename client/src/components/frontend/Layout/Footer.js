@@ -20,6 +20,10 @@ export default class LayoutFooter extends Component {
     })
   };
 
+  static defaultProps = {
+    pages: []
+  };
+
   constructor() {
     super();
     this.handleLoginClick = this.handleLoginClick.bind(this);
@@ -40,20 +44,20 @@ export default class LayoutFooter extends Component {
     this.props.commonActions.toggleSignInUpOverlay();
   }
 
+  visiblePages(props) {
+    return props.pages.filter(p => {
+      return p.attributes.showInFooter && !p.attributes.hidden;
+    });
+  }
+
   buildContentPages() {
-    const pages = [];
-    if (this.props.pages) {
-      this.props.pages.forEach(page => {
-        if (page.attributes.showInFooter) {
-          pages.push(
-            <Link to={lh.link("frontendPage", page.attributes.slug)}>
-              {page.attributes.navTitle || page.attributes.title}
-            </Link>
-          );
-        }
-      });
-    }
-    return pages;
+    return this.visiblePages(this.props).map(page => {
+      return (
+        <Link to={lh.link("frontendPage", page.attributes.slug)}>
+          {page.attributes.navTitle || page.attributes.title}
+        </Link>
+      );
+    });
   }
 
   buildAuthLink() {

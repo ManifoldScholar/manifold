@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
   HeaderNotifications,
@@ -13,7 +13,7 @@ import get from "lodash/get";
 import HigherOrder from "containers/global/HigherOrder";
 import lh from "helpers/linkHandler";
 
-export default class LayoutHeader extends Component {
+export default class LayoutHeader extends PureComponent {
   static displayName = "Layout.Header";
 
   static propTypes = {
@@ -22,14 +22,25 @@ export default class LayoutHeader extends Component {
     authentication: PropTypes.object,
     notifications: PropTypes.object,
     commonActions: PropTypes.object,
-    settings: PropTypes.object
+    settings: PropTypes.object,
+    pages: PropTypes.array
   };
+
+  static defaultProps = {
+    pages: []
+  };
+
+  visiblePages(props) {
+    return props.pages.filter(p => {
+      return p.attributes.showInHeader && !p.attributes.hidden;
+    });
+  }
 
   render() {
     const path = this.props.location.pathname;
-    const active = startsWith(path, lh.link("frontendFollowing"))
-      ? "following"
-      : "browse";
+    const projectsActive = path === "/" || startsWith(path, "/project");
+    const followingActive = startsWith(path, "/following");
+
     return (
       <header className={"header-app"}>
         <div className="header-container">
@@ -41,18 +52,28 @@ export default class LayoutHeader extends Component {
           {/* Use show-50 utility class to hide text-nav on mobile */}
           <nav className="text-nav show-50">
             <ul>
-              <li className={active === "browse" ? "active" : ""}>
+              <li className={projectsActive ? "active" : ""}>
                 <Link to={lh.link("frontend")}>
                   {"Projects"}
                 </Link>
               </li>
               <HigherOrder.RequireRole requiredRole="any">
-                <li className={active === "following" ? "active" : ""}>
+                <li className={followingActive ? "active" : ""}>
                   <Link to={lh.link("frontendFollowing")}>
                     {"Following"}
                   </Link>
                 </li>
               </HigherOrder.RequireRole>
+              {this.visiblePages(this.props).map(page => {
+                const url = lh.link("frontendPage", page.attributes.slug);
+                return (
+                  <li key={page.id} className={path === url ? "active" : ""}>
+                    <Link to={url}>
+                      {page.attributes.navTitle || page.attributes.title}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 

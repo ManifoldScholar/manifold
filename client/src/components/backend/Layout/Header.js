@@ -64,6 +64,14 @@ export default class LayoutHeader extends Component {
               <li>
                 <NavLink
                   activeClassName="active"
+                  to={lh.link("backendContent")}
+                >
+                  {"Content"}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  activeClassName="active"
                   to={lh.link("backendSettings")}
                 >
                   {"Settings"}

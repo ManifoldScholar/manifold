@@ -52,6 +52,17 @@ exports[`Backend Backend Container renders correctly 1`] = `
                               </NavLink>
                             </li>
                             <li>
+                              <NavLink activeClassName=\\"active\\" to=\\"/backend/content\\">
+                                <Route path=\\"/backend/content\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
+                                  <Link to=\\"/backend/content\\" className={[undefined]} style={[undefined]} replace={false}>
+                                    <a className={[undefined]} style={[undefined]} onClick={[Function]} href=\\"/backend/content\\">
+                                      Content
+                                    </a>
+                                  </Link>
+                                </Route>
+                              </NavLink>
+                            </li>
+                            <li>
                               <NavLink activeClassName=\\"active\\" to=\\"/backend/settings\\">
                                 <Route path=\\"/backend/settings\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
                                   <Link to=\\"/backend/settings\\" className={[undefined]} style={[undefined]} replace={false}>
@@ -132,7 +143,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
               <main>
                 <Switch />
               </main>
-              <Layout.Footer pages={[undefined]} authentication={{...}} commonActions={{...}} settings={[undefined]}>
+              <Layout.Footer pages={{...}} authentication={{...}} commonActions={{...}} settings={[undefined]}>
                 <footer className=\\"footer-browse\\">
                   <div className=\\"container\\">
                     <div className=\\"rel\\">

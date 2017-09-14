@@ -44,6 +44,20 @@
   @include headingPrimary;
 }
 
+@mixin headingSecondary {
+
+  @include headingPrimary;
+  font-size: 20px;
+
+  @include respond($break60) {
+    font-size: 22px;
+  }
+}
+
+.heading-secondary {
+  @include headingSecondary;
+}
+
 @mixin headingTertiary {
   @include templateHead;
   margin-top: 0;

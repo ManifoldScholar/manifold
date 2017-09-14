@@ -15,5 +15,33 @@ export default {
       method: "GET",
       options: {}
     };
+  },
+
+  create(page) {
+    return {
+      endpoint: `/api/v1/pages`,
+      method: "POST",
+      options: {
+        body: JSON.stringify({ type: "pages", data: page })
+      }
+    };
+  },
+
+  update(id, page) {
+    return {
+      endpoint: `/api/v1/pages/${id}`,
+      method: "PUT",
+      options: {
+        body: JSON.stringify({ type: "pages", data: page })
+      }
+    };
+  },
+
+  destroy(id) {
+    return {
+      endpoint: `/api/v1/pages/${id}`,
+      method: "DELETE",
+      options: {}
+    };
   }
 };

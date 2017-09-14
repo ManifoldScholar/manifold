@@ -15,7 +15,12 @@
   margin-bottom: 15px;
   font-size: 18px;
   font-style: normal;
+  line-height: 1.4em;
   color: $neutral30;
+
+  &.margin-top {
+    margin-top: 30px;
+  }
 
   &.margin-bottom {
     margin-bottom: 30px;

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :test_mails, only: [:create]
       resources :pages
+      resources :features
       resources :subjects
       resources :categories, except: [:create, :index]
       resources :makers

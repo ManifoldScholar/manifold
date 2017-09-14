@@ -6,6 +6,7 @@ export eventsAPI from "./resources/events";
 export makersAPI from "./resources/makers";
 export meAPI from "./resources/me";
 export pagesAPI from "./resources/pages";
+export featuresAPI from "./resources/features";
 export passwordsAPI from "./resources/passwords";
 export projectsAPI from "./resources/projects";
 export resourcesAPI from "./resources/resources";
