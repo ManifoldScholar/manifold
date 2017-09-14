@@ -6,7 +6,14 @@ RSpec.describe FormattedAttributes::Methods do
   let(:definition) do
     instance_spy(FormattedAttributes::Definition,
                  attribute: attribute_name,
-                 :include_wrap? => true
+                 :include_wrap? => true,
+                 :renderer_options => {
+                   filter_html: true,
+                   no_images: true,
+                   no_links: true,
+                   no_styles: true,
+                   hard_wrap: true
+                 }
                 )
   end
 

@@ -167,12 +167,12 @@ export class CollectionDetailWrapperContainer extends PureComponent {
           ? <Dialog.Confirm {...this.state.confirmation} />
           : null}
         <Navigation.DetailHeader
-          type="resource"
+          type="collection"
           breadcrumb={[
             { path: lh.link("backend"), label: "ALL PROJECTS" },
             {
               path: lh.link(
-                "backendProjectResources",
+                "backendProjectCollections",
                 collection.relationships.project.id
               ),
               label: collection.relationships.project.attributes.title

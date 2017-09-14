@@ -1,17 +1,52 @@
 %splash-prototype {
   padding-bottom: 10px;
 
-  @include respond($break95) {
-    padding-top: 20px;
+  .splash-preview & {
+    font-size: 7px;
+  }
+
+  .heading-primary, .heading-secondary {
+    margin-bottom: 0;
+
+    .splash-preview & {
+      font-size: 17px;
+    }
+  }
+
+  .heading-secondary {
+    margin-top: 0.15em;
+
+    .splash-preview & {
+      font-size: 14px;
+    }
+  }
+
+  .splash-body {
+    margin-top: 1.5em;
+
+    .splash-preview & {
+      margin-top: 1em;
+      font-size: 11px;
+    }
   }
 
   .bg-accent-primary & {
-    .heading-primary {
+    .heading-primary, .heading-secondary {
       color: $neutralWhite;
     }
 
     .button-bare-primary {
       color: $neutralWhite;
+    }
+  }
+
+  .bg-accent-secondary & {
+    .heading-primary, .heading-secondary {
+      color: $accentPrimaryDark;
+    }
+
+    .button-bare-primary {
+      color: $accentPrimaryDark;
     }
   }
 
@@ -24,9 +59,27 @@
   .buttons {
     margin-top: 23px;
 
+    .splash-preview & {
+      margin-top: 15px;
+    }
+
     .button-bare-primary + .button-bare-primary {
       margin-left: 2.308em;
     }
+  }
+}
+
+
+section > .splash-preview .container:not(.flush) {
+  padding-top: 55px;
+  padding-bottom: 38px;
+}
+
+.splash-preview {
+  margin-bottom: 60px;
+
+  .button-bare-primary {
+    font-size: 8px;
   }
 }
 
@@ -53,9 +106,14 @@
 
     img {
       position: absolute;
-      bottom: -186px;
       left: 10px;
-      width: 661px;
+      max-width: 661px;
+
+      .splash-preview & {
+        left: 7px;
+        max-width: 442px;
+      }
+
     }
   }
 }

@@ -8,6 +8,7 @@ import ResourceDetail from "./ResourceDetail";
 import CollectionDetail from "./CollectionDetail";
 import TextDetail from "./TextDetail";
 import People from "./People";
+import Content from "./Content";
 import Settings from "./Settings";
 import Form from "./Form";
 import Ingestion from "./Ingestion";
@@ -26,6 +27,7 @@ export {
   CollectionDetail,
   TextDetail,
   People,
+  Content,
   Settings,
   Form,
   Ingestion,

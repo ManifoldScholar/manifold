@@ -21,7 +21,12 @@ export default class DetailHeader extends PureComponent {
 
   typeToManiconClass(type) {
     let segment = `${type}-placeholder`;
+    if (type === "user") segment = "person";
+    if (type === "project") segment = "project-placeholder";
+    if (type === "collection") segment = "file-box";
     if (type === "resource") segment = "cube-shine";
+    if (type === "page") segment = "document";
+    if (type === "feature") segment = "lamp";
     return `manicon-${segment}`;
   }
 

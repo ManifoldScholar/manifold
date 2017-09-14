@@ -34,7 +34,7 @@ exports[`Backend CollectionDetail Wrapper Container renders correctly 1`] = `
           <li>
             <a
               className="back-link-primary-segment"
-              href="/backend/project/4/resources"
+              href="/backend/project/4/collections"
               onClick={[Function]}
             >
               Rowan Test
@@ -51,7 +51,7 @@ exports[`Backend CollectionDetail Wrapper Container renders correctly 1`] = `
       >
         <figure>
           <i
-            className="manicon manicon-cube-shine"
+            className="manicon manicon-file-box"
           />
         </figure>
         <div

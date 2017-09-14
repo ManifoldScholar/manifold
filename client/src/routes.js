@@ -188,6 +188,89 @@ export default () => {
           ]
         },
         {
+          name: "backendContentPage",
+          component: Backend.Content.Pages.Detail,
+          path: "/backend/content/pages/:id",
+          exact: false,
+          helper: p => `/backend/content/pages/${p}`,
+          routes: [
+            {
+              name: "backendContentPageNew",
+              component: Backend.Content.Pages.New,
+              path: "/backend/content/pages/new",
+              helper: () => `/backend/content/pages/new`
+            },
+            {
+              name: "backendContentPageBody",
+              component: Backend.Content.Pages.Body,
+              path: "/backend/content/pages/:id/body",
+              helper: p => `/backend/content/pages/${p}/body`
+            },
+            {
+              name: "backendContentPageGeneral",
+              component: Backend.Content.Pages.General,
+              path: "/backend/content/pages/:id",
+              helper: p => `/backend/content/pages/${p}`
+            }
+          ]
+        },
+        {
+          name: "backendContentFeature",
+          component: Backend.Content.Features.Detail,
+          path: "/backend/content/features/:id",
+          exact: false,
+          helper: f => `/backend/content/features/${f}`,
+          routes: [
+            {
+              name: "backendContentFeatureNew",
+              component: Backend.Content.Features.New,
+              path: "/backend/content/features/new",
+              helper: () => `/backend/content/features/new`
+            },
+            {
+              name: "backendContentFeatureGeneral",
+              component: Backend.Content.Features.General,
+              path: "/backend/content/features/:id",
+              helper: p => `/backend/content/features/${p}`
+            }
+          ]
+        },
+        {
+          name: "backendContent",
+          exact: false,
+          component: Backend.Content.Wrapper,
+          path: "/backend/content",
+          helper: () => "/backend/content",
+          routes: [
+            {
+              name: "backendContentPages",
+              component: Backend.Content.Pages.List,
+              path: "/backend/content",
+              exact: true,
+              helper: () => `/backend/content`
+            },
+            {
+              name: "backendContentFeatures",
+              component: Backend.Content.Features.List,
+              exact: true,
+              path: "/backend/content/features",
+              helper: () => `/backend/content/features`
+            }
+          ]
+        },
+        {
+          name: "backendContentFeaturesNew",
+          component: Backend.Content.Features.New,
+          path: "/backend/features/new",
+          helper: () => `/backend/features/new`
+        },
+        {
+          name: "backendContentFeaturesEdit",
+          component: Backend.Content.Features.Edit,
+          path: "/backend/features/:id",
+          helper: f => `/backend/features/${f}`
+        },
+        {
           name: "backendPeople",
           exact: false,
           component: Backend.People.Wrapper,

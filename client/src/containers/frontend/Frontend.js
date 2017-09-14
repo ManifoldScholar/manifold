@@ -74,6 +74,7 @@ export class FrontendContainer extends Component {
         <div>
           <HigherOrder.ScrollAware>
             <Layout.Header
+              pages={this.props.pages}
               visibility={this.props.visibility}
               location={this.props.location}
               authentication={this.props.authentication}

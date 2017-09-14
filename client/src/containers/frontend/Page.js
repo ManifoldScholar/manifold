@@ -34,9 +34,12 @@ export class PageContainer extends Component {
     if (!this.props.page) return null;
     return (
       <section>
-        <div className="container">
-          {this.props.page.attributes.body}
-        </div>
+        <div
+          className="container page-content"
+          dangerouslySetInnerHTML={{
+            __html: this.props.page.attributes.bodyFormatted
+          }}
+        />
       </section>
     );
   }

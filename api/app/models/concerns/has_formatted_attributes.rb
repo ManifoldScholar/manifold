@@ -28,9 +28,8 @@ module Concerns
       # @param [Symbol] attribute
       # @param [Boolean] include_wrap
       # @return [void]
-      def has_formatted_attribute(attribute, include_wrap: true)
-        options = { include_wrap: include_wrap }
-
+      def has_formatted_attribute(attribute, include_wrap: true, renderer_options: nil)
+        options = { include_wrap: include_wrap, renderer_options: renderer_options }
         definition = FormattedAttributes::Definition.new attribute, options
 
         unless formatted_attributes.add?(definition)

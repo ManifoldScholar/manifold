@@ -3,6 +3,7 @@ module FormattedAttributes
     attr_reader :definition
 
     delegate :attribute, :include_wrap?, to: :definition
+    delegate :attribute, :renderer_options, to: :definition
 
     def initialize(definition)
       @definition = definition
@@ -56,7 +57,11 @@ module FormattedAttributes
           end
 
           def #{method_name(:format)}
-            SimpleFormatter.run! input: #{attribute}, include_wrap: #{include_wrap?}
+            SimpleFormatter.run!(
+              input: #{attribute},
+              include_wrap: #{include_wrap?},
+              renderer_options: #{renderer_options}
+            )
           end
 
           def #{method_name(:textify)}

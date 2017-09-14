@@ -15,7 +15,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
         <label
           className="has-instructions"
         >
-          How do you refer you your Manifold installation?
+          How do you refer to your Manifold installation?
         </label>
         <span
           className="instructions"

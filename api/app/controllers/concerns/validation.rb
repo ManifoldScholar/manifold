@@ -24,6 +24,26 @@ module Validation
     params.permit(param_config)
   end
 
+  def feature_params
+    params.require(:data)
+    attributes = [:header, :body, :link_text, :link_url, :link_target, :remove_background,
+                  attachment(:background), attachment(:foreground), :foreground_position,
+                  :position, :remove_foreground, :remove_background, :subheader, :style,
+                  :foreground_top_padding]
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def page_params
+    params.require(:data)
+    attributes = [:title, :slug, :nav_title, :body, :show_in_footer, :show_in_header,
+                  :hidden]
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def collaborator_params
     params.require(:data)
     attributes = [:role]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170910234415) do
+ActiveRecord::Schema.define(version: 20170913144218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,31 @@ ActiveRecord::Schema.define(version: 20170910234415) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "features", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "header"
+    t.string   "subheader"
+    t.string   "body"
+    t.string   "link_text"
+    t.string   "link_url"
+    t.string   "link_target"
+    t.string   "background_file_name"
+    t.string   "background_content_type"
+    t.integer  "background_file_size"
+    t.datetime "background_updated_at"
+    t.string   "foreground_file_name"
+    t.string   "foreground_content_type"
+    t.integer  "foreground_file_size"
+    t.datetime "foreground_updated_at"
+    t.integer  "foreground_position"
+    t.integer  "foreground_top_padding"
+    t.integer  "position"
+    t.text     "style",                   default: "dark"
+    t.boolean  "hidden",                  default: false
+    t.uuid     "creator_id"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
   create_table "flags", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "creator_id"
     t.uuid     "flaggable_id"
@@ -201,7 +226,7 @@ ActiveRecord::Schema.define(version: 20170910234415) do
     t.boolean  "show_in_footer",   default: false
     t.boolean  "show_in_header",   default: false
     t.string   "slug"
-    t.boolean  "hidden",           default: false
+    t.boolean  "hidden",           default: true
     t.text     "body"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false

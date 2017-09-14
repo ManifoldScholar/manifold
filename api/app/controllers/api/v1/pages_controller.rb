@@ -19,17 +19,18 @@ module Api
       end
 
       def create
-        @page = authorize_and_create_project(page_params)
+        @page = authorize_and_create_page(page_params)
         render_single_resource(@page)
       end
 
       def update
         @page = load_and_authorize_page
-        @page.update(page_params)
+        ::Updaters::Page.new(page_params).update(@page)
         render_single_resource(@page)
       end
 
       def destroy
+        @page = load_and_authorize_page
         @page.destroy
       end
     end
