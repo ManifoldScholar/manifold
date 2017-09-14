@@ -9,6 +9,7 @@ class FormSwitch extends Component {
   static propTypes = {
     label: PropTypes.string,
     labelPos: PropTypes.string,
+    className: PropTypes.string,
     labelClass: PropTypes.string,
     set: PropTypes.func,
     value: PropTypes.any,
@@ -60,7 +61,7 @@ class FormSwitch extends Component {
     });
 
     const labelClasses = classnames(this.props.labelPos, this.props.labelClass);
-
+    const wrapperClasses = classnames("form-input", this.props.className);
     const label = (
       <label className={labelClasses}>
         {this.props.label}
@@ -68,7 +69,7 @@ class FormSwitch extends Component {
     );
 
     return (
-      <div className="form-input">
+      <div className={wrapperClasses}>
         {this.props.labelPos === "above" ? label : null}
         <div className="toggle-indicator">
           {/* Add .checked to .boolean-primary to change visual state */}
