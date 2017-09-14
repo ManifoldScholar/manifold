@@ -45,6 +45,11 @@ export class FollowingContainer extends Component {
     subjects: PropTypes.array
   };
 
+  static defaultProps = {
+    featuredProjects: [],
+    followedProjects: []
+  };
+
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
@@ -113,7 +118,8 @@ export class FollowingContainer extends Component {
   }
 
   renderFeaturedProjects() {
-    if (!this.props.featuredProjects.length > 0) return null;
+    if (!this.props.featuredProjects || !this.props.featuredProjects.length > 0)
+      return null;
     return (
       <section>
         <div className="container">
