@@ -88,8 +88,8 @@
   // component to component
   font-size: 16px;
   font-weight: $semibold;
-  letter-spacing: 0.075em;
   text-transform: uppercase;
+  letter-spacing: 0.075em;
 }
 
 .utility-primary {
@@ -97,9 +97,9 @@
 }
 
 @mixin resetWordWrap {
-  overflow-wrap: normal;
-  word-wrap: normal;
   hyphens: none;
+  word-wrap: normal;
+  overflow-wrap: normal;
 }
 
 
@@ -150,8 +150,8 @@
   @include templateHead;
   font-size: 12px;
   font-weight: $semibold;
-  letter-spacing: 0.075em;
   text-transform: uppercase;
+  letter-spacing: 0.075em;
 }
 
 
@@ -167,8 +167,8 @@
 @mixin formInputSecondary {
   @include templateHead;
   font-size: $type40;
-  letter-spacing: 0.075em;
   text-transform: uppercase;
+  letter-spacing: 0.075em;
 }
 
 @mixin formInputMessage {

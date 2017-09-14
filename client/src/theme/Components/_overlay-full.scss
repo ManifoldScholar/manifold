@@ -86,7 +86,7 @@
   .login-form {
     @include loginFormPrimary;
 
-    input[type="text"], input[type="password"], input[type="submit"] {
+    input[type='text'], input[type='password'], input[type='submit'] {
       width: 100%;
     }
   }

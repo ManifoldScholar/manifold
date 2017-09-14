@@ -115,10 +115,10 @@
 @mixin containerFocus {
   // Default max width
   max-width: $containerWidthFocus;
-  margin-right: auto;
-  margin-left: auto;
   padding-right: $containerPaddingMin;
   padding-left: $containerPaddingMin;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .container {
@@ -225,8 +225,8 @@ $readerContainerWidths: (790px, 680px, 500px);
     .image {
       width: 32px;
       height: 32px;
-      background-position: 50% 50%;
       background-repeat: no-repeat;
+      background-position: 50% 50%;
       background-size: contain;
 
       @include respond($break40) {
@@ -311,7 +311,7 @@ $readerContainerWidths: (790px, 680px, 500px);
     @include inputLabelPrimary;
   }
 
-  input[type="text"], input[type="password"] {
+  input[type='text'], input[type='password'] {
     @include inputPrimary;
   }
 
