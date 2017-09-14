@@ -11,6 +11,22 @@
   z-index: 600;
 }
 
+.overlay-full {
+  z-index: 600;
+
+  .container {
+    z-index: 310;
+  }
+
+  .overlay-close {
+    z-index: 320;
+  }
+}
+
+.overlay-full-header {
+  z-index: 350;
+}
+
 .backend .header-app {
   z-index: 500;
 }
@@ -45,22 +61,6 @@
   .container-banner {
     z-index: 200;
   }
-}
-
-.overlay-full {
-  z-index: 300;
-
-  .container {
-    z-index: 310;
-  }
-
-  .overlay-close {
-    z-index: 320;
-  }
-}
-
-.overlay-full-header {
-  z-index: 350;
 }
 
 .footer-fixed {
