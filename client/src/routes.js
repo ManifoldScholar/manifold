@@ -8,7 +8,7 @@ export default () => {
     {
       name: "reader",
       component: Reader.Reader,
-      path: "/read/:textId",
+      path: "/read/:textId/:section(section)?/:sectionId?",
       helper: t => `/read/${t}`,
       routes: [
         {

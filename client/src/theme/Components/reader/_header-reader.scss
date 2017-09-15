@@ -13,9 +13,9 @@
       display: block;
       width: 100%;
       height: 1px;
-      background-color: $neutral50;
       content: '';
-      opacity: 0;
+      background-color: $neutral50;
+      opacity: 1; // Let's make the border permanently visible --ZD
       transition: opacity $duration $timing;
     }
 
@@ -95,11 +95,11 @@
       @include templateHead();
       position: relative;
       height: 100%;
-      padding: 19px 190px 0 27px;
+      padding: 10px 190px 0 18px;
       margin: 0;
       overflow: hidden;
-      font-size: $type80;
-      font-weight: $regular; // OD
+      font-size: $type70;
+      font-weight: $medium; // OD
       color: $neutral50;
       text-overflow: ellipsis;
       white-space: nowrap;
