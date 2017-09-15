@@ -41,6 +41,7 @@
 
 .row-1-p {
   @include clearfix;
+
   + .row-1-p {
     margin-top: 30px;
   }

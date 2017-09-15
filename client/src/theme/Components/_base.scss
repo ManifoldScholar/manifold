@@ -34,8 +34,8 @@ body {
   font-weight: $regular;
   hyphens: auto;
   line-height: $baseLineHeight;
-  overflow-wrap: break-word;
   word-wrap: break-word;
+  overflow-wrap: break-word;
   // color: $something;
   &.no-scroll {
     overflow: hidden;
