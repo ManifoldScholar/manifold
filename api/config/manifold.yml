@@ -101,8 +101,8 @@ common: &1
       :selectors:
         # Strip most universal selectors (while allowing the *= operator)
         - !ruby/regexp '/^\*$|\*:|\s\*$|\*\[/'
-        - !ruby/regexp '/html/'
-        - !ruby/regexp '/body/'
+        - !ruby/regexp '/^html/'
+        - !ruby/regexp '/^body/'
         # All the fonts belong to Manifold
         - !ruby/regexp '/@font-face/'
         # CSS at rules are extracted before selectors are validated, so we exclude them as a selector.

@@ -276,4 +276,11 @@ RSpec.describe Validator::Stylesheet do
     expect(results).to eq_ignoring_whitespace "#{valid}"
   end
 
+  it "allows classes that contain the word body" do
+    selector = ".bodytext { text-indent: 1em; }"
+    valid = "#{scope_selector} .bodytext { text-indent: 1em; }"
+    results = validator.validate(selector)
+    expect(results).to eq_ignoring_whitespace "#{valid}"
+  end
+
 end
