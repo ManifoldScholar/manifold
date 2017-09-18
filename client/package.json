@@ -13,22 +13,21 @@
   "scripts": {
     "precommit": "lint-staged",
     "build": "npm-run-all clean build:**",
+    "build:servers": "NODE_ENV=production webpack --config ./webpack/build-servers.config.js --colors && rimraf dist/manifold/chunk-*",
     "build:client": "NODE_ENV=production webpack --config ./webpack/build-client.config.js --colors --optimize-minimize",
-    "build:servers": "NODE_ENV=production webpack --config ./webpack/build-servers.config.js --colors",
     "build-tmp": "WEBPACK_BUILD_TARGET=../tmp/ npm-run-all clean-tmp build:**",
     "clean-tmp": "rimraf -r tmp/dist",
     "clean": "rimraf -r dist",
-    "serve": "NODE_ENV=production node dist/node/server-client.js",
-    "start": "NODE_ENV=production node dist/node/server-client.js",
+    "serve": "NODE_ENV=production node dist/manifold/server.js",
     "dev": "npm-run-all clean --parallel dev:build:** dev:serve:**",
-    "dev:build:servers": "NODE_ENV=development WEBPACK_DEV_SERVER=true webpack --config ./webpack/build-servers.config.js --colors",
+    "dev:build:servers": "NODE_ENV=development WEBPACK_DEV_SERVER=true webpack --config ./webpack/build-servers.config.js --colors  && rimraf dist/manifold/chunk-*",
     "dev:serve:bundle": "NODE_ENV=development WEBPACK_DEV_SERVER=true node webpack/servers/dev.js",
     "dev:serve:development": "npm-run-all wait:development dev:start:development",
     "dev:serve:client": "npm-run-all wait:client dev:start:client",
-    "dev:start:development": "NODE_ENV=development WEBPACK_DEV_SERVER=true node dist/node/server-development.js",
-    "dev:start:client": "NODE_ENV=development  WEBPACK_DEV_SERVER=true nodemon -q dist/node/server-client.js --watch dist/node/server-client.js",
-    "wait:development": "node script/wait.js --name=\"development\" --on=dist/node/server-development.js,dist/manifest/client.json",
-    "wait:client": "node script/wait.js --name=\"client\" --on=dist/node/server-client.js,dist/manifest/client.json",
+    "dev:start:development": "NODE_ENV=development WEBPACK_DEV_SERVER=true node dist/manifold/server-development.js",
+    "dev:start:client": "NODE_ENV=development  WEBPACK_DEV_SERVER=true nodemon -q dist/manifold/server.js --watch dist/manifold/server.js",
+    "wait:development": "node script/wait.js --name=\"development\" --on=dist/manifold/server-development.js,dist/manifold/manifest.json",
+    "wait:client": "node script/wait.js --name=\"client\" --on=dist/manifold/server.js,dist/manifold/manifest.json",
     "lint": "npm-run-all lint:**",
     "lint:js": "echo \"Linting Javascript.\" && eslint .",
     "lint:styles": "echo \"Linting Styles.\" && stylelint --config .stylelintrc src/theme/**/*.scss",
@@ -186,6 +185,6 @@
     "webpack-node-externals": "^1.6.0"
   },
   "engines": {
-    "node": "6.10.3"
+    "node": ">=6.10.3 <7.0.0"
   }
 }

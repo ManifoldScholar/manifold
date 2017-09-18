@@ -28,7 +28,7 @@ if (process.env.WEBPACK_DEV_SERVER) {
   socket = config.clientSocket;
   port = config.clientPort;
 }
-const stats = readStats();
+const stats = readStats("Client");
 
 const respondWithRedirect = (res, redirectLocation) => {
   res.redirect(redirectLocation);

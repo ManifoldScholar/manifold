@@ -1,7 +1,7 @@
 module Manifold
   module SearchTask
     def self.types
-      %w(Collection Event Maker Project Resource User)
+      %w(Collection Resource Event Maker Project User)
     end
   end
 end

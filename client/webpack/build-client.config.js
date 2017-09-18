@@ -29,7 +29,7 @@ const nameTemplate =
 const plugins = [];
 const devtool = process.env.WEBPACK_DEV_SERVER
   ? "cheap-module-eval-source-map"
-  : "source-map";
+  : "none"; // was source-map
 
 const config = {
   // Webpack mocks node's global "process". We don't want it to in this case, because
@@ -100,7 +100,7 @@ if (!process.env.WEBPACK_DEV_SERVER) {
 // the client, and it provides an environment of sorts for the browser code.
 copyEntries.push({
   from: "webpack/templates/www_env.ejs",
-  to: `${buildDir}/build/env.js`,
+  to: `${buildDir}/browser.config.js`,
   transform: compileEnv
 });
 
@@ -109,7 +109,7 @@ plugins.push(copyFiles);
 
 // We write a manifest with the names of the built client files. This allows the server-
 // side application to get the correct paths.
-const manifest = new ManifestPlugin({ fileName: "client.json" });
+const manifest = new ManifestPlugin({ fileName: "manifest.json" });
 plugins.push(manifest);
 
 const options = {

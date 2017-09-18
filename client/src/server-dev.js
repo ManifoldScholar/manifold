@@ -12,7 +12,7 @@ import readStats from "./servers/common/readStats";
 const socket = config.clientSocket;
 const port = config.clientPort;
 const clientFallbackPort = `http://localhost:${config.clientFallbackPort}`;
-const stats = readStats();
+const stats = readStats("Development");
 
 // Handle requests
 const requestHandler = (req, res) => {

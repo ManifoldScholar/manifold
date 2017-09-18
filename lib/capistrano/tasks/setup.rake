@@ -1,5 +1,4 @@
 namespace :setup do
-
   desc "Inspect environment"
   task :printenv do
     on roles(:app), in: :sequence, wait: 5 do
@@ -20,5 +19,4 @@ namespace :setup do
       end
     end
   end
-
 end
