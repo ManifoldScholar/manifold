@@ -14,15 +14,29 @@ export default function webApp(name, optionsIgnored = {}) {
   const app = new Express();
   const clientAssetPort = config.assetPort;
   const assetTarget = `http://localhost:${clientAssetPort}`;
-  const wwwPath = path.join(__dirname, "../www");
+  const wwwPath = path.join(__dirname, "www");
 
   ch.info(capitalize(`${name} server has been initialized.`));
 
   app.use(morgan(logStyle));
-  app.use(favicon(path.join(__dirname, "/../../static/favicon.ico")));
+
+  const faviconPath = path.join(__dirname, "www/static/favicon.ico");
+  try {
+    app.use(favicon(faviconPath));
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      ch.info(`No favicon found at ${faviconPath}`);
+    } else {
+      throw err;
+    }
+  }
+
   if (process.env.WEBPACK_DEV_SERVER) {
     const assetProxy = proxy({ target: assetTarget, logLevel: "silent" });
-    app.use(["/build", "/static", /.*hot-update.*$/], assetProxy);
+    app.use(
+      ["/browser.config.js", "/build", "/static", /.*hot-update.*$/],
+      assetProxy
+    );
     ch.info(
       capitalize(
         `${name} server will proxy /build requests to ${assetTarget}/build.`

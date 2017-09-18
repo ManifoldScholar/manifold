@@ -3,7 +3,7 @@ import path from "path";
 import ch from "../../helpers/consoleHelpers";
 
 export default function readStats(name) {
-  const statsPath = path.join(__dirname, "../manifest/client.json");
+  const statsPath = path.join(__dirname, "manifest.json");
 
   let stats;
   try {

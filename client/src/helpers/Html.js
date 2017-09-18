@@ -99,7 +99,7 @@ export default class Html extends Component {
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
 
-          <script src="/build/env.js" charSet="UTF-8" />
+          <script src="/browser.config.js" charSet="UTF-8" />
           <link rel="shortcut icon" href="/favicon.ico?client=true" />
 
           {this.stylesheets()}

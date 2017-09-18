@@ -32,12 +32,7 @@ statsPlugin.prototype.apply = function apply(compiler) {
     const targetDir = process.env.WEBPACK_BUILD_TARGET
       ? process.env.WEBPACK_BUILD_TARGET
       : "";
-    const base = path.resolve(
-      paths.root,
-      targetDir,
-      paths.relativeOutput,
-      "manifest"
-    );
+    const base = path.resolve(paths.root, targetDir, paths.relativeOutput);
     const writePath = `${base}/${this.options.fileName}`;
     mkdirp.sync(base);
     fs.writeFile(writePath, JSON.stringify(out, null, 2), done);

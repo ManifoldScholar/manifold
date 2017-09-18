@@ -9,8 +9,8 @@ set :rails_env, "production"
 
 # Linked Files
 set :linked_files, fetch(:linked_files, []).push(".env")
-set :linked_files, fetch(:linked_files, []).push("client/dist/www/build/env.js")
-set :linked_files, fetch(:linked_files, []).push("client/dist/node/env.js")
+set :linked_files, fetch(:linked_files, []).push("client/dist/manifold/server.config.js")
+set :linked_files, fetch(:linked_files, []).push("client/dist/manifold/www/browser.config.js")
 set :linked_dirs, fetch(:linked_dirs, []).push(
   "api/public/system", "client/node_modules", "import", "api/tmp", "config/keys"
 )
@@ -19,13 +19,23 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
 set :bundle_gemfile, -> { release_path.join("api").join("Gemfile") }
 set :rbenv_type, :user
 set :rbenv_ruby, File.read("api/.ruby-version").strip
+# rubocop:disable Metrics/LineLength
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+# rubocop:enable Metrics/LineLength
 
 # Yarn
 set :yarn_target_path, -> { release_path.join("client") }
 set :yarn_flags, "--production"
 
 namespace :deploy do
+  after :check, :make_pid_dir do
+    on roles(:app), in: :sequence, wait: 5 do
+      with path: "./bin:$PATH" do
+        execute :mkdir, "-p", "#{shared_path}/api/tmp/pids"
+      end
+    end
+  end
+
   after :updated, :deploy_client do
     invoke "client:deploy"
   end
