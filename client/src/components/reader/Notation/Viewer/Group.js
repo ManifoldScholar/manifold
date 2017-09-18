@@ -133,9 +133,11 @@ export default class NotationViewerGroup extends PureComponent {
           })}
         >
           <Link params={params} notation={activeEntry.notation}>
-            <span>
-              {activeEntry.notation.attributes.titleFormatted}
-            </span>
+            <span
+              dangerouslySetInnerHTML={{
+                __html: activeEntry.notation.attributes.titleFormatted
+              }}
+            />
           </Link>
         </h4>
       </div>
