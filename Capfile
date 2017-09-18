@@ -4,7 +4,6 @@ require 'capistrano/deploy'
 require 'capistrano/touch-linked-files'
 require 'capistrano/rbenv'
 require 'capistrano/bundler'
-require 'capistrano/rake'
 require 'capistrano/yarn'
 require 'capistrano/copy_files'
 
