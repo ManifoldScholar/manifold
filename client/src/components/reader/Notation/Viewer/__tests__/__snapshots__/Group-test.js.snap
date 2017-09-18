@@ -121,9 +121,7 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
             <NotationViewerLink params={{...}} notation={{...}}>
               <Link className={[undefined]} to=\\"/read/5/section/6/resource/2\\" replace={false}>
                 <a className={[undefined]} onClick={[Function]} href=\\"/read/5/section/6/resource/2\\">
-                  <span>
-                    Image
-                  </span>
+                  <span dangerouslySetInnerHTML={{...}} />
                 </a>
               </Link>
             </NotationViewerLink>
