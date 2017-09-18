@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/ManifoldScholar/capistrano-yarn.git
-  revision: 72f26e78c8b6ac5ed24b682c74958af9e173989e
+  revision: f828e5a63219b9898e2fa43bbf8d41e8be593efa
   specs:
     capistrano-yarn (1.0.0)
       capistrano (>= 3.0.0)
@@ -68,13 +68,9 @@ GEM
     rainbow (2.2.1)
     rake (12.0.0)
     retriable (2.1.0)
-    sass (3.4.23)
     sawyer (0.8.1)
       addressable (>= 2.3.5, < 2.6)
       faraday (~> 0.8, < 1.0)
-    scss_lint (0.52.0)
-      rake (>= 0.9, < 13)
-      sass (~> 3.4.20)
     sshkit (1.11.5)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -101,7 +97,6 @@ DEPENDENCIES
   gettext
   github_changelog_generator
   paint
-  scss_lint
 
 BUNDLED WITH
    1.15.4
