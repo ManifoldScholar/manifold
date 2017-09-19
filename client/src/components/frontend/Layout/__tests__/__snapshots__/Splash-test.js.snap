@@ -3,6 +3,7 @@
 exports[`Frontend.Layout.Splash component renders correctly 1`] = `
 <section
   className="feature feature-dark-style"
+  style={Object {}}
 >
   <div
     className="container flush rel"
