@@ -45,6 +45,7 @@ export default class LayoutFooter extends Component {
   }
 
   visiblePages(props) {
+    if (!props.pages) return [];
     return props.pages.filter(p => {
       return p.attributes.showInFooter && !p.attributes.hidden;
     });

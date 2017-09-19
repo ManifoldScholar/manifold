@@ -38,14 +38,6 @@ class FeaturesGeneralContainer extends PureComponent {
             name="attributes[subheader]"
             placeholder="Optionally, enter a subheader"
           />
-          <Form.Select
-            label="Style"
-            name="attributes[style]"
-            options={[
-              { label: "Dark Background", value: "dark" },
-              { label: "Light Background", value: "light" }
-            ]}
-          />
           <Form.TextArea
             label="Body"
             rows={200}
@@ -61,6 +53,39 @@ class FeaturesGeneralContainer extends PureComponent {
             label="Link URL"
             name="attributes[linkUrl]"
             placeholder="Enter Link URL"
+          />
+          <Form.Select
+            label="Style"
+            name="attributes[style]"
+            options={[
+              { label: "", value: "" },
+              { label: "Dark Background (default)", value: "dark" },
+              { label: "Light Background", value: "light" }
+            ]}
+          />
+          {/* <Form.Select*/}
+          {/* label="Layout"*/}
+          {/* name="attributes[layout]"*/}
+          {/* options={[*/}
+          {/* { label: "Text Left, Image Right (Default)", value: "two-col-img-right" },*/}
+          {/* { label: "Text Right, Image Left", value: "two-col-img-left" },*/}
+          {/* { label: "One Column", value: "one-col" }*/}
+          {/* ]}*/}
+          {/* />*/}
+          <Form.TextInput
+            label="Background Color"
+            name="attributes[backgroundColor]"
+            placeholder="#000000"
+          />
+          <Form.TextInput
+            label="Foreground Color"
+            name="attributes[foregroundColor]"
+            placeholder="#000000"
+          />
+          <Form.TextInput
+            label="Header Color"
+            name="attributes[headerColor]"
+            placeholder="#000000"
           />
           <Form.Upload
             layout="landscape"
@@ -81,16 +106,23 @@ class FeaturesGeneralContainer extends PureComponent {
             instructions="An image to display in the foreground"
           />
           <Form.TextInput
-            label="Foreground Image Position From Bottom"
-            name="attributes[foregroundPosition]"
-            placeholder="0"
-            instructions="Enter the position of the image, in pixels, from the bottom of the feature. A negative number will move the image down."
+            label="Foreground Image Top Position"
+            name="attributes[foregroundTop]"
+            placeholder="0em"
           />
           <Form.TextInput
-            label="Foreground Top Padding"
-            name="attributes[foregroundTopPadding]"
-            placeholder="0"
-            instructions="Set the padding, in pixels, that should be applied to the top of the feature."
+            label="Foreground Image Left Position"
+            name="attributes[foregroundLeft]"
+            placeholder="0em"
+          />
+          <Form.Select
+            label="Foreground Position Mode"
+            name="attributes[foregroundPosition]"
+            options={[
+              { label: "", value: "" },
+              { label: "Relative (default)", value: "relative" },
+              { label: "Absolute", value: "absolute" }
+            ]}
           />
           <Form.Save text="Save Feature" />
         </FormContainer.Form>

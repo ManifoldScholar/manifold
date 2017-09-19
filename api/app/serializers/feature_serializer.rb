@@ -2,8 +2,9 @@
 class FeatureSerializer < ActiveModel::Serializer
   meta(partial: false)
 
-  attributes :id, :background_styles, :foreground_styles, :header, :header_formatted,
-             :subheader, :subheader_formatted, :body, :body_formatted, :link_text,
-             :link_url, :link_target, :foreground_position, :position, :created_at,
-             :updated_at, :style, :foreground_top_padding
+  attributes :id, :header, :header_formatted, :subheader, :subheader_formatted,
+             :body, :body_formatted, :link_text, :link_url, :link_target, :style, :hidden,
+             :background_color, :foreground_color, :header_color, :layout, :created_at,
+             :updated_at, :foreground_top, :foreground_left, :foreground_styles,
+             :background_styles, :foreground_position, :position
 end

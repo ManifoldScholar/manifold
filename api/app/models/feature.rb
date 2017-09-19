@@ -12,7 +12,8 @@ class Feature < ApplicationRecord
   manifold_has_attached_file :background, :image
   manifold_has_attached_file :foreground, :image
 
-  has_formatted_attributes :header, :subheader, :body, include_wrap: false
+  has_formatted_attributes :header, :subheader, include_wrap: false
+  has_formatted_attribute :body
 
   acts_as_list
 
