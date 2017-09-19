@@ -130,6 +130,7 @@
 
     header {
       display: flex;
+      width: 100%;
       max-width: 100%;
     }
 
@@ -155,8 +156,8 @@
         .image {
           width: 30px;
           height: 30px;
-          background-position: 50% 50%;
           background-repeat: no-repeat;
+          background-position: 50% 50%;
           background-size: cover;
           border-radius: 100%;
         }
