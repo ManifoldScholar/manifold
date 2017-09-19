@@ -26,10 +26,11 @@ module Validation
 
   def feature_params
     params.require(:data)
-    attributes = [:header, :body, :link_text, :link_url, :link_target, :remove_background,
-                  attachment(:background), attachment(:foreground), :foreground_position,
-                  :position, :remove_foreground, :remove_background, :subheader, :style,
-                  :foreground_top_padding]
+    attributes = [:header, :subheader, :body, :link_text, :link_url, :link_target, :style,
+                  :hidden, :background_color, :foreground_color, :header_color, :layout,
+                  :foreground_top, :foreground_left, attachment(:background),
+                  :remove_background, attachment(:foreground), :remove_foreground,
+                  :foreground_position, :position]
     relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

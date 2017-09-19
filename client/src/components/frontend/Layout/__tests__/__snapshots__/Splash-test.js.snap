@@ -2,61 +2,61 @@
 
 exports[`Frontend.Layout.Splash component renders correctly 1`] = `
 <section
-  className="bg-accent-primary"
-  style={Object {}}
+  className="feature feature-dark-style"
 >
   <div
-    className="container rel"
+    className="container flush rel"
+    style={Object {}}
   >
-    <div
-      className="splash-50"
-      style={Object {}}
+    <figure
+      className="right"
     >
-      <div
-        className="left"
-      >
-        <h2
-          className="heading-primary"
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "Rowan, Top Dog",
-            }
+       
+    </figure>
+    <div
+      className="left"
+    >
+      <h2
+        className="heading-primary"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "Rowan, Top Dog",
           }
-        />
-        <h3
-          className="heading-secondary"
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "Blah blah blah",
-            }
-          }
-        />
-        <p
-          className="splash-body"
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": undefined,
-            }
-          }
-        />
-        <div
-          className="splash-content"
-        />
-        <nav
-          className="buttons"
-        >
-          <a
-            className="button-bare-primary"
-            href="http://dogs.com"
-            target="blank"
-          >
-            Click it, dog
-          </a>
-        </nav>
-      </div>
-      <figure
-        className="right"
+        }
+        style={Object {}}
       />
+      <h3
+        className="heading-secondary"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "Blah blah blah",
+          }
+        }
+        style={Object {}}
+      />
+      <div
+        className="feature-body"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "Hands on your boxes, turn 'em up like seven notches. Your Magnavoxes amplify my super conscious.",
+          }
+        }
+        style={Object {}}
+      />
+      <div
+        className="splash-content"
+      />
+      <nav
+        className="buttons"
+      >
+        <a
+          className="button-bare-primary"
+          href="http://dogs.com"
+          target="blank"
+        >
+          Click it, dog
+        </a>
+      </nav>
     </div>
   </div>
 </section>

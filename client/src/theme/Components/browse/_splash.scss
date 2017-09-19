@@ -1,119 +1,120 @@
-%splash-prototype {
-  padding-bottom: 10px;
+.feature {
+  position: relative;
+  font-size: 17px;
 
-  .splash-preview & {
-    font-size: 7px;
+  &.feature-preview {
+    margin-bottom: 40px;
+    font-size: 13px;
   }
 
-  .heading-primary, .heading-secondary {
-    margin-bottom: 0;
-
-    .splash-preview & {
-      font-size: 17px;
-    }
+  .container {
+    @include clearfix;
   }
 
-  .heading-secondary {
-    margin-top: 0.15em;
-
-    .splash-preview & {
-      font-size: 14px;
-    }
+  &.feature-dark-style {
+    background-color: $accentPrimary;
   }
 
-  .splash-body {
-    margin-top: 1.5em;
-
-    .splash-preview & {
-      margin-top: 1em;
-      font-size: 11px;
-    }
+  &.feature-light-style {
+    background-color: $accentPrimaryOffWhite;
   }
 
-  .bg-accent-primary & {
-    .heading-primary, .heading-secondary {
-      color: $neutralWhite;
+  .left {
+    top: 0;
+    left: 0;
+    float: right;
+    width: 100%;
+    padding-top: 4em;
+    padding-right: 4em;
+    padding-bottom: 4em;
+    hyphens: none;
+
+    @include respond($break75) {
+      width: 50%;
     }
 
-    .button-bare-primary {
-      color: $neutralWhite;
-    }
-  }
 
-  .bg-accent-secondary & {
-    .heading-primary, .heading-secondary {
-      color: $accentPrimaryDark;
+    p {
+      @include templateCopy;
+      line-height: 1.353em;
+
+      & + p {
+        margin-top: 1em;
+      }
     }
 
-    .button-bare-primary {
-      color: $accentPrimaryDark;
+    @include respond($break75) {
     }
   }
 
-  p {
-    @include templateCopy;
-    font-size: 17px;
-    line-height: 1.353;
+  .right {
+    position: relative;
+    top: 0;
+    right: 0;
+    display: none;
+    float: right;
+    width: 50%;
+    padding-left: 1.475em;
+
+    @include respond($break75) {
+      display: block;
+    }
+
+    img {
+      position: relative;
+      top: 4em;
+    }
   }
 
   .buttons {
-    margin-top: 23px;
+    margin-top: 1.5em;
 
-    .splash-preview & {
-      margin-top: 15px;
+    .button-bare-primary, .button-bare-primary {
+      font-size: .8em;
     }
 
     .button-bare-primary + .button-bare-primary {
       margin-left: 2.308em;
     }
   }
-}
 
-
-section > .splash-preview .container:not(.flush) {
-  padding-top: 55px;
-  padding-bottom: 38px;
-}
-
-.splash-preview {
-  margin-bottom: 60px;
-
-  .button-bare-primary {
-    font-size: 8px;
+  .heading-primary {
+    font-size: 1.5em;
   }
-}
 
-.splash-50 {
-  @extend %splash-prototype;
-  display: table;
+  .heading-secondary {
+    font-size: 1.29em;
+  }
 
-  .left {
-    display: table-cell;
-    width: 100%;
+  .heading-primary, .heading-secondary {
+    margin-bottom: 0;
+  }
 
-    @include respond($break75) {
-      width: 50%;
+  .heading-primary + .heading-secondary {
+    margin-top: .3em;
+  }
+
+  &.feature-dark-style {
+    .heading-primary, .heading-secondary {
+      color: $neutralWhite;
+    }
+
+    .button-bare-primary {
+      color: $neutralWhite;
     }
   }
 
-  .right {
-    position: relative;
-    display: none;
-
-    @include respond($break75) {
-      display: table-cell;
+  &.feature-light-style {
+    .heading-primary, .heading-secondary {
+      color: $accentPrimaryDark;
     }
 
-    img {
-      position: absolute;
-      left: 10px;
-      max-width: 661px;
-
-      .splash-preview & {
-        left: 7px;
-        max-width: 442px;
-      }
-
+    .button-bare-primary {
+      color: $accentPrimaryDark;
     }
+  }
+
+  .feature-body {
+    margin-top: 1.5em;
   }
 }

@@ -19,10 +19,11 @@ class Seed
       body: "With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works.",
       link_text: "Learn More",
       link_url: "http://manifold.umn.edu/",
+      style: "dark",
+      foreground_position: "absolute",
       foreground: File.open(Rails.root.join("app", "assets", "images", "seed-feature-foreground.png")),
       creator: creator,
-      foreground_position: -186,
-      foreground_top_padding: 20
+      foreground_top: "1.9em"
     )
     # rubocop:enable Metrics/LineLength
   end
