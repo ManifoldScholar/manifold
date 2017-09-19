@@ -17,13 +17,17 @@
 
   &.fixed {
     position: fixed;
-    bottom: 0;
+    bottom: 44px;
     left: 0;
     width: 100%;
+
+    @include respond($break50) {
+      bottom: 0;
+    }
   }
 
   &.hidden {
-    opacity: 0;
     visibility: hidden;
+    opacity: 0;
   }
 }

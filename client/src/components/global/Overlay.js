@@ -69,7 +69,7 @@ export default class Overlay extends Component {
 
   render() {
     return (
-      <HigherOrder.BodyClass className={"no-scroll"}>
+      <HigherOrder.BodyClass className={"no-scroll overlay"}>
         <div>
           {this.renderHeader(this.props)}
           <div className={this.overlayClass()} key={"globalOverlay"}>

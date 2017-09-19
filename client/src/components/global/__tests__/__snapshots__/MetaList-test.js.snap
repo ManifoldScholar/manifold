@@ -1,21 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Frontend.Project.Meta component renders correctly 1`] = `
+exports[`Global.MetaList component renders correctly 1`] = `
 <ul
   className="meta-list-primary"
 >
-  <li>
-    <span
-      className="meta-label"
-    >
-      title
-    </span>
-    <div
-      className="meta-value"
-    >
-      Southernplayalisticadillacmuzik
-    </div>
-  </li>
   <li>
     <span
       className="meta-label"
@@ -26,6 +14,18 @@ exports[`Frontend.Project.Meta component renders correctly 1`] = `
       className="meta-value"
     >
       April 26, 1994
+    </div>
+  </li>
+  <li>
+    <span
+      className="meta-label"
+    >
+      title
+    </span>
+    <div
+      className="meta-value"
+    >
+      Southernplayalisticadillacmuzik
     </div>
   </li>
 </ul>

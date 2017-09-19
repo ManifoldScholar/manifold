@@ -2,18 +2,26 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import humps from "humps";
 
-export default class ProjectMeta extends Component {
-  static displayName = "Project.Meta";
+export default class MetaList extends Component {
+  static displayName = "MetaList";
 
   static propTypes = {
-    metadata: PropTypes.object
+    metadata: PropTypes.object,
+    alphabetize: PropTypes.bool
+  };
+
+  static defaultProps = {
+    alphabetize: true
   };
 
   render() {
-    const keys = Object.keys(this.props.metadata);
+    const keys = this.alphabetize
+      ? Object.keys(this.props.metadata).sort()
+      : Object.keys(this.props.metadata);
+
     return (
       <ul className="meta-list-primary">
-        {keys.map(key => {
+        {keys.sort().map(key => {
           return (
             <li key={key}>
               <span className="meta-label">

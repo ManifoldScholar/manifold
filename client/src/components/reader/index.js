@@ -10,5 +10,6 @@ export ReturnMenu from "./ReturnMenu";
 export StaticTextSample from "./StaticTextSample";
 export TextTitles from "./TextTitles";
 export Toc from "./Toc";
+export TextMeta from "./TextMeta";
 export TocDrawer from "./TocDrawer";
 export VisibilityButton from "./VisibilityButton";
