@@ -1,0 +1,38 @@
+.reader-text-meta {
+  .overlay-full & {
+    padding-top: 85px;
+
+    @include respond($break65) {
+      padding-top: 150px;
+    }
+  }
+
+  .title {
+    display: block; // OD
+    margin-bottom: 0.3em;
+    color: $neutral80;
+    @include headingPrimary;
+  }
+
+  .subtitle {
+    @include subtitlePrimary;
+    font-size: 18px;
+    color: $neutral80;
+
+    @include respond($break60) {
+      font-size: 21px;
+    }
+  }
+
+  header {
+    padding-bottom: 28px;
+
+    @include respond($break40) {
+      padding-bottom: 45px;
+    }
+
+    @include respond($break75) {
+      padding-bottom: 80px;
+    }
+  }
+}

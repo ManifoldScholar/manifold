@@ -111,6 +111,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
             />
           </li>
         </ul>
+        <span />
       </nav>
     </div>
   </div>

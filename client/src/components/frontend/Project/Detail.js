@@ -13,6 +13,8 @@ import {
   Layout
 } from "components/frontend";
 
+import { MetaList } from "components/global";
+
 class Detail extends Component {
   static displayName = "Project.Detail";
 
@@ -75,7 +77,7 @@ class Detail extends Component {
               {"Metadata"}
             </h4>
           </header>
-          <Project.Meta metadata={project.attributes.metadata} />
+          <MetaList metadata={project.attributes.metadata} />
         </div>
       </section>
     );

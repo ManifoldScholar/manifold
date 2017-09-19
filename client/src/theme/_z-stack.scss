@@ -40,11 +40,11 @@
 }
 
 .reader-footer-menu {
-  z-index: 250;
+  z-index: 190;
 }
 
 .section-category-label.fixed {
-  z-index: 350;
+  z-index: 180;
 }
 
 .header-app {
@@ -60,6 +60,10 @@
 
   .container-banner {
     z-index: 200;
+  }
+
+  .toc-drawer {
+    z-index: 600;
   }
 }
 

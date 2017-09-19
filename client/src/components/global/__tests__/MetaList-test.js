@@ -1,16 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Meta from "../Meta";
-import build from "test/fixtures/build";
+import MetaList from "../MetaList";
 
-describe("Frontend.Project.Meta component", () => {
+describe("Global.MetaList component", () => {
   const metadata = {
     title: "Southernplayalisticadillacmuzik",
     releaseDate: "April 26, 1994"
   };
 
   it("renders correctly", () => {
-    const component = renderer.create(<Meta metadata={metadata} />);
+    const component = renderer.create(<MetaList metadata={metadata} />);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

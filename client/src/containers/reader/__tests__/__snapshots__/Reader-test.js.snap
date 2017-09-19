@@ -130,6 +130,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 />
               </li>
             </ul>
+            <span />
           </nav>
         </div>
       </div>
