@@ -13,7 +13,6 @@ import cookie from "cookie";
 import { currentUserActions } from "actions";
 import exceptionRenderer from "./helpers/exceptionRenderer";
 import Manifold from "containers/Manifold";
-import { authenticateWithToken } from "store/middleware/currentUserMiddleware";
 import { isPromise } from "utils/promise";
 import isFunction from "lodash/isFunction";
 import has from "lodash/has";
@@ -32,16 +31,6 @@ const stats = readStats("Client");
 
 const respondWithRedirect = (res, redirectLocation) => {
   res.redirect(redirectLocation);
-};
-
-const authenticateUser = (req, store) => {
-  if (req.headers.cookie) {
-    const manifoldCookie = cookie.parse(req.headers.cookie);
-    const authToken = manifoldCookie.authToken;
-    if (authToken) return authenticateWithToken(authToken, store.dispatch);
-    return Promise.resolve();
-  }
-  return Promise.resolve();
 };
 
 const render = (req, res, store) => {
@@ -123,11 +112,8 @@ const fetchRouteData = (req, store) => {
 };
 
 const bootstrap = (req, store) => {
-  const promises = [];
-  if (!has(store.getState(), "entityStore.entities.settings.0")) {
-    promises.push(Manifold.bootstrap(store.getState, store.dispatch));
-  }
-  return Promise.all(promises);
+  const manifoldCookie = cookie.parse(req.headers.cookie);
+  return Manifold.bootstrap(store.getState, store.dispatch, manifoldCookie);
 };
 
 // Handle requests
@@ -153,20 +139,10 @@ const requestHandler = (req, res) => {
     .then(
       () => {
         ch.info("App bootstrapped", "sparkles");
-        return authenticateUser(req, store);
-      },
-      () => {
-        ch.error("App bootstrap failed", "rain_cloud");
-        return authenticateUser(req, store);
-      }
-    )
-    .then(
-      () => {
-        ch.info("User authenticated", "sparkles");
         return fetchRouteData(req, store);
       },
       () => {
-        ch.info("Unable to authenticate user", "rain_cloud");
+        ch.error("App bootstrap failed", "rain_cloud");
         return fetchRouteData(req, store);
       }
     )

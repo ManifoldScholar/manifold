@@ -55,6 +55,7 @@ export class BackendContainer extends PureComponent {
   }
 
   setMinHeight() {
+    if (!this.mainContainer) return;
     const mainHeight = this.mainContainer.offsetHeight;
     const offsetHeight =
       this.mainContainer.parentNode.offsetHeight - mainHeight;

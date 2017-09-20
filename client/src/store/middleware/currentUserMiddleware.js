@@ -1,5 +1,6 @@
 import actions from "actions/currentUser";
 import { ApiClient, tokensAPI, meAPI, favoritesAPI } from "api";
+import { notificationActions } from "actions";
 
 function generateErrorPayload(status = 401) {
   const heading = "Login Failed";
@@ -22,6 +23,30 @@ function generateErrorPayload(status = 401) {
   return { id: "LOGIN_NOTIFICATION", level, heading, body };
 }
 
+function notifyLogin(dispatch) {
+  const notification = {
+    level: 0,
+    id: "AUTHENTICATION_STATE_CHANGE",
+    heading: "You have logged in successfully."
+  };
+  dispatch(notificationActions.addNotification(notification));
+  setTimeout(() => {
+    dispatch(notificationActions.removeNotification(notification.id));
+  }, 5000);
+}
+
+function notifyLogout(dispatch) {
+  const notification = {
+    level: 0,
+    id: "AUTHENTICATION_STATE_CHANGE",
+    heading: "You have logged out successfully."
+  };
+  dispatch(notificationActions.addNotification(notification));
+  setTimeout(() => {
+    dispatch(notificationActions.removeNotification(notification.id));
+  }, 5000);
+}
+
 function authenticateWithPassword(email, password, dispatch) {
   const promise = tokensAPI.createToken(email, password);
   promise.then(
@@ -29,6 +54,7 @@ function authenticateWithPassword(email, password, dispatch) {
       const authToken = response.meta.authToken;
       if (!authToken) {
         dispatch(actions.loginSetError(generateErrorPayload(500)));
+        dispatch(actions.loginComplete());
         return Promise.resolve();
       }
       const expireDate = new Date();
@@ -39,9 +65,11 @@ function authenticateWithPassword(email, password, dispatch) {
       dispatch(actions.setCurrentUser(response));
       dispatch(actions.setAuthToken(authToken));
       dispatch(actions.loginComplete());
+      notifyLogin(dispatch);
     },
     response => {
       dispatch(actions.loginSetError(generateErrorPayload(response.status)));
+      dispatch(actions.loginComplete());
     }
   );
 
@@ -65,6 +93,7 @@ export function authenticateWithToken(token, dispatch) {
     response => {
       dispatch(actions.setCurrentUser(response));
       dispatch(actions.setAuthToken(token));
+      dispatch(actions.loginComplete());
     },
     responseIgnored => {
       dispatch(actions.logout);
@@ -113,14 +142,14 @@ export default function currentUserMiddleware({ dispatch, getState }) {
     if (action.type === "LOGIN") {
       dispatch(actions.loginStart());
       if (payload.authToken) {
-        authenticateWithToken(payload.authToken, dispatch);
-      } else {
-        authenticateWithPassword(payload.email, payload.password, dispatch);
+        return authenticateWithToken(payload.authToken, dispatch);
       }
+      authenticateWithPassword(payload.email, payload.password, dispatch);
     }
 
     if (action.type === "LOGOUT") {
       destroyCookie();
+      notifyLogout(dispatch);
     }
 
     if (action.type === "FOLLOW") {
