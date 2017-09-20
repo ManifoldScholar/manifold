@@ -73,7 +73,6 @@
     "autolinker": "^1.2.1",
     "autoprefixer": "^7.1.2",
     "brackets2dots": "^1.1.0",
-    "chalk": "^1.1.3",
     "classnames": "^2.2.1",
     "compression": "^1.6.0",
     "cookie": "^0.3.1",
