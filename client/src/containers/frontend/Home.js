@@ -110,7 +110,7 @@ export class HomeContainer extends Component {
 
   fetchFilteredProjects = () => {
     const pagination = {
-      number: this.props.meta.pagination.currentPage,
+      number: get(this.props.meta, "pagination.currentPage"),
       size: perPage
     };
     const filteredRequest = request(
@@ -235,7 +235,7 @@ export class HomeContainer extends Component {
                   )}
                   dispatch={this.props.dispatch}
                   projects={this.props.filteredProjects}
-                  pagination={this.props.meta.pagination}
+                  pagination={get(this.props.meta, "pagination")}
                   paginationClickHandler={this.pageChangeHandlerCreator}
                   limit={perPage}
                 />
