@@ -16,10 +16,8 @@ const stats = readStats("Development");
 
 // Handle requests
 const requestHandler = (req, res) => {
-  const store = createStore();
   res.send(
-    "<!doctype html>\n" +
-      ReactDOM.renderToString(<Html stats={stats} store={store} />)
+    "<!doctype html>\n" + ReactDOM.renderToString(<Html stats={stats} />)
   );
 };
 

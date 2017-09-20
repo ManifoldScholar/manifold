@@ -10,9 +10,9 @@ import has from "lodash/has";
 import get from "lodash/get";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import {
-  notificationActions,
   uiVisibilityActions,
-  routingActions
+  routingActions,
+  currentUserActions
 } from "actions";
 import { meAPI, settingsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -22,6 +22,7 @@ import ReactGA from "react-ga";
 import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
 import getRoutes from "/routes";
+import ch from "../helpers/consoleHelpers";
 
 const routes = getRoutes();
 const { request } = entityStoreActions;
@@ -30,15 +31,45 @@ const { visibilityHide } = uiVisibilityActions;
 class ManifoldContainer extends PureComponent {
   // This method will bootstrap data into manifold. Nothing else is loaded into the
   // store at this point, including params and the authenticated user.
-  static bootstrap = (getState, dispatch) => {
-    // if (__CLIENT__) return;
+  static bootstrap = (getState, dispatch, cookie) => {
     const promises = [];
-    const loaded = has(getState(), "entityStore.entities.settings.0");
-    if (loaded) return Promise.all(promises);
-    const settingsRequest = request(settingsAPI.show(), requests.settings, {
-      oneTime: true
-    });
-    promises.push(dispatch(settingsRequest));
+    const state = getState();
+
+    // Load settings if they have not already been loaded.
+    const loaded = has(state, "entityStore.entities.settings.0");
+    if (!loaded) {
+      const settingsRequest = request(settingsAPI.show(), requests.settings, {
+        oneTime: true
+      });
+      const settingsPromise = dispatch(settingsRequest).promise;
+      settingsPromise.then(
+        () => {
+          ch.info("Settings loaded", "sparkles");
+        },
+        () => {
+          ch.error("Settings failed to load", "rain_cloud");
+        }
+      );
+      promises.push(settingsPromise);
+    }
+
+    // Authenticate from cookie.
+    if (cookie && !state.authentication.authenticated) {
+      const authToken = cookie.authToken;
+      if (authToken) {
+        const authPromise = dispatch(currentUserActions.login({ authToken }));
+        authPromise.then(
+          () => {
+            ch.info("User authenticated", "sparkles");
+          },
+          () => {
+            ch.info("Unable to authenticate user", "rain_cloud");
+          }
+        );
+        promises.push(authPromise);
+      }
+    }
+
     return Promise.all(promises);
   };
 
@@ -74,17 +105,12 @@ class ManifoldContainer extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if (
-      this.userJustLoggedIn(this.props.authentication, nextProps.authentication)
-    ) {
-      this.doPostLogin(nextProps);
-    }
-    if (
       this.userJustLoggedOut(
         this.props.authentication,
         nextProps.authentication
       )
     ) {
-      this.doPostLogout(nextProps);
+      this.doPostLogout();
     }
     if (this.receivedGaTrackingId(nextProps.settings) && !this.gaInitialized) {
       ReactGA.initialize(nextProps.settings.attributes.general.gaTrackingId);
@@ -105,20 +131,11 @@ class ManifoldContainer extends PureComponent {
     return has(nextSettings, path) && get(nextSettings, path) !== "";
   }
 
-  userJustLoggedIn(auth, nextAuth) {
-    return nextAuth.authenticated === true && auth.authenticated === false;
-  }
-
   userJustLoggedOut(auth, nextAuth) {
     return nextAuth.authenticated === false && auth.authenticated === true;
   }
 
-  doPostLogin(props) {
-    this.notifyLogin(props);
-  }
-
-  doPostLogout(props) {
-    this.notifyLogout(props);
+  doPostLogout() {
     this.redirectToHome();
   }
 
@@ -130,34 +147,6 @@ class ManifoldContainer extends PureComponent {
     this.props.dispatch(
       request(meAPI.show(), requests.gAuthenticatedUserUpdate)
     );
-  }
-
-  notifyLogin() {
-    const notification = {
-      level: 0,
-      id: "AUTHENTICATION_STATE_CHANGE",
-      heading: "You have logged in successfully."
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-    setTimeout(() => {
-      this.props.dispatch(
-        notificationActions.removeNotification(notification.id)
-      );
-    }, 5000);
-  }
-
-  notifyLogout() {
-    const notification = {
-      level: 0,
-      id: "AUTHENTICATION_STATE_CHANGE",
-      heading: "You have logged out successfully."
-    };
-    this.props.dispatch(notificationActions.addNotification(notification));
-    setTimeout(() => {
-      this.props.dispatch(
-        notificationActions.removeNotification(notification.id)
-      );
-    }, 5000);
   }
 
   handleGlobalClick(event) {
