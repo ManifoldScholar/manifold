@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import hoistStatics from "hoist-non-react-statics";
 import { isFunction } from "lodash";
 import { isPromise } from "utils/promise";
+import ch from "helpers/consoleHelpers";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -54,12 +55,11 @@ export default function fetchData(WrappedComponent) {
 
     log(props) {
       if (process.env.NODE_ENV === "development" && __CLIENT__) {
-        /* eslint-disable no-console */
-        console.log(
-          `💾 FetchData: ${getDisplayName(WrappedComponent)} [${props.location
-            .key}]`
+        ch.notice(
+          `FetchData: ${getDisplayName(WrappedComponent)} [${props.location
+            .key}]`,
+          "floppy_disk"
         );
-        /* eslint-enable no-console */
       }
     }
 
