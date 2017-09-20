@@ -41,8 +41,9 @@ const removeAllNotifications = state => {
 
 const notificationReducer = (state = initialState, action) => {
   if (
-    (action.type && action.type.startsWith("API_REQUEST")) ||
-    action.type === "ROUTE_UPDATE"
+    ((action.type && action.type.startsWith("API_REQUEST")) ||
+      action.type === "ROUTE_UPDATE") &&
+    state.fatalError
   ) {
     return clearFatalError(state, action);
   }

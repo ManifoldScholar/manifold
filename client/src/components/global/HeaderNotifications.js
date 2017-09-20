@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { HeaderNotification } from "components/global";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import classNames from "classnames";
 import get from "lodash/get";
 
-export default class HeaderNotifications extends Component {
+export default class HeaderNotifications extends PureComponent {
   static propTypes = {
     addNotification: PropTypes.func,
     removeNotification: PropTypes.func,
@@ -37,6 +37,10 @@ export default class HeaderNotifications extends Component {
         updating: false
       });
     }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return nextProps.notifications !== this.props.notifications;
   }
 
   componentDidUpdate() {
