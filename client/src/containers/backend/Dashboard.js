@@ -19,20 +19,26 @@ const perPage = 5;
 export class DashboardContainer extends PureComponent {
   static fetchData = (getState, dispatch) => {
     const projectsRequest = request(
-      projectsAPI.index({}, { size: perPage }),
+      projectsAPI.index({ order: "sort_title ASC" }, { size: perPage }),
       requests.beProjects
+    );
+    const recentProjectsRequest = request(
+      projectsAPI.index({ order: "updated_at DESC" }, { size: 2 }),
+      requests.beRecentProjects
     );
     const statsRequest = request(statisticsAPI.show(), requests.beStats);
     const { promise: one } = dispatch(projectsRequest);
-    const { promise: two } = dispatch(statsRequest);
-    return Promise.all([one, two]);
+    const { promise: two } = dispatch(recentProjectsRequest);
+    const { promise: three } = dispatch(statsRequest);
+    return Promise.all([one, two, three]);
   };
 
   static mapStateToProps = state => {
     return {
       statistics: select(requests.beStats, state.entityStore),
       projects: select(requests.beProjects, state.entityStore),
-      projectsMeta: meta(requests.beProjects, state.entityStore)
+      projectsMeta: meta(requests.beProjects, state.entityStore),
+      recentProjects: select(requests.beRecentProjects, state.entityStore)
     };
   };
 
@@ -40,12 +46,13 @@ export class DashboardContainer extends PureComponent {
     projects: PropTypes.array,
     statistics: PropTypes.object,
     dispatch: PropTypes.func,
-    projectsMeta: PropTypes.object
+    projectsMeta: PropTypes.object,
+    recentProjects: PropTypes.array
   };
 
   constructor() {
     super();
-    this.state = { filter: {} };
+    this.state = { filter: { order: "title ASC" } };
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
     this.updateHandlerCreator = this.updateHandlerCreator.bind(this);
     this.updateResults = debounce(this.updateResults.bind(this), 250);
@@ -101,16 +108,17 @@ export class DashboardContainer extends PureComponent {
               </div>
 
               <div className="right">
-                <section>
-                  <header className="section-heading-secondary">
-                    <h3>
-                      {"Notifications"}{" "}
-                      <i className="manicon manicon-bugle-small" />
-                    </h3>
-                  </header>
-                  <DashboardComponents.Notifications />
-                </section>
-
+                <nav className="vertical-list-primary flush">
+                  {this.props.recentProjects
+                    ? <List.SimpleList
+                        entities={this.props.recentProjects}
+                        entityComponent={Project.ListItem}
+                        title={"Recently Updated"}
+                        icon={"manicon-stack"}
+                        listClasses={"flush"}
+                      />
+                    : null}
+                </nav>
                 <section>
                   <header className="section-heading-secondary">
                     <h3>

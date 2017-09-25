@@ -5,7 +5,10 @@
 
   &.flush {
     padding-top: 0;
-    border-top: 1px solid $neutral80;
+
+    &.top-border {
+      border-top: 1px solid $neutral80;
+    }
   }
 
   .drawer-primary & {

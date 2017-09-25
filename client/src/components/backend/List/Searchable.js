@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Utility } from "components/global";
+import { List } from "components/backend";
 import { Link } from "react-router-dom";
 import get from "lodash/get";
 import classnames from "classnames";
@@ -41,7 +42,6 @@ export default class ListSearchable extends PureComponent {
     this.resetSearch = this.resetSearch.bind(this);
     this.toggleOptions = this.toggleOptions.bind(this);
     this.renderEntityList = this.renderEntityList.bind(this);
-    this.renderEntity = this.renderEntity.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -115,18 +115,6 @@ export default class ListSearchable extends PureComponent {
   handleSubmit(event) {
     event.preventDefault();
     this.updateResults();
-  }
-
-  // Can take either a builder function that returns JSX or
-  // a component class as this.props.entityComponent
-  renderEntity(entity) {
-    const props = Object.assign({}, this.props.entityComponentProps);
-    props.key = entity.id;
-    props.entity = entity;
-    if (this.props.destroyHandler) {
-      props.destroyHandler = this.props.destroyHandler;
-    }
-    return React.createElement(this.props.entityComponent, props);
   }
 
   renderOptionsText() {
@@ -205,11 +193,12 @@ export default class ListSearchable extends PureComponent {
             </div>
           : null}
         {entities.length > 0
-          ? <ul>
-              {entities.map(entity => {
-                return this.renderEntity(entity);
-              })}
-            </ul>
+          ? <List.SimpleList
+              entities={entities}
+              entityComponent={this.props.entityComponent}
+              entityComponentProps={this.props.entityComponentProps}
+              destroyHandler={this.props.destroyHandler}
+            />
           : <p className="list-total empty">Sorry, no results were found.</p>}
       </div>
     );

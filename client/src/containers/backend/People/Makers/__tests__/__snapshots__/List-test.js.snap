@@ -70,44 +70,46 @@ exports[`Backend People Makers List Container renders correctly 1`] = `
           </span>
            makers: 
         </p>
-        <ul>
-          <li
-            className=""
-          >
-            <a
-              href="/backend/people/makers/1"
-              onClick={[Function]}
+        <section>
+          <ul>
+            <li
+              className=""
             >
-              <header>
-                <figure
-                  className="avatar"
-                >
+              <a
+                href="/backend/people/makers/1"
+                onClick={[Function]}
+              >
+                <header>
+                  <figure
+                    className="avatar"
+                  >
+                    <div
+                      className="no-image"
+                    >
+                      <i
+                        className="manicon manicon-person"
+                      />
+                    </div>
+                  </figure>
                   <div
-                    className="no-image"
+                    className="meta"
                   >
-                    <i
-                      className="manicon manicon-person"
-                    />
+                    <h3
+                      className="name large"
+                    >
+                      Rowan
+                       
+                      Ida
+                    </h3>
                   </div>
-                </figure>
-                <div
-                  className="meta"
-                >
-                  <h3
-                    className="name large"
-                  >
-                    Rowan
-                     
-                    Ida
-                  </h3>
-                </div>
-              </header>
-              <span
-                className="label"
-              />
-            </a>
-          </li>
-        </ul>
+                </header>
+                <span
+                  className="label"
+                />
+              </a>
+            </li>
+          </ul>
+        </section>
       </div>
     </nav>
     <nav

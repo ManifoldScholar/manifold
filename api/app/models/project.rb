@@ -117,6 +117,10 @@ class Project < ApplicationRecord
     return all unless subject.present?
     joins(:project_subjects).where(project_subjects: { subject: subject })
   }
+  scope :with_order, lambda { |by|
+    return order(:created_at, :title) unless by.present?
+    order(by)
+  }
 
   scope :excluding_drafts, -> { where(draft: false) }
 

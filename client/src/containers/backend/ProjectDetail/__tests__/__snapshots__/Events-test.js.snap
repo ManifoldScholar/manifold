@@ -76,90 +76,92 @@ exports[`Backend ProjectDetail Events Container renders correctly 1`] = `
           </span>
            events: 
         </p>
-        <ul>
-          <li
-            className="list-item"
-          >
-            <div
-              className="event-tile"
+        <section>
+          <ul>
+            <li
+              className="list-item"
             >
               <div
-                className="event-data"
+                className="event-tile"
               >
-                <div>
-                  <i
-                    className="manicon manicon-book-opening"
-                  />
-                  <h5
-                    className="event-title"
-                    dangerouslySetInnerHTML={
-                      Object {
-                        "__html": "New Text",
+                <div
+                  className="event-data"
+                >
+                  <div>
+                    <i
+                      className="manicon manicon-book-opening"
+                    />
+                    <h5
+                      className="event-title"
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "New Text",
+                        }
                       }
-                    }
-                  />
-                  <datetime
-                    className="event-date"
-                  >
-                    <span>
-                      Text Added April 24th, 2017
-                    </span>
-                  </datetime>
+                    />
+                    <datetime
+                      className="event-date"
+                    >
+                      <span>
+                        Text Added April 24th, 2017
+                      </span>
+                    </datetime>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              className="utility"
-              data-id="destroy"
-              onClick={[Function]}
-            >
-              <i
-                className="manicon manicon-trashcan"
-              />
-            </div>
-          </li>
-          <li
-            className="list-item"
-          >
-            <div
-              className="event-tile"
+              <div
+                className="utility"
+                data-id="destroy"
+                onClick={[Function]}
+              >
+                <i
+                  className="manicon manicon-trashcan"
+                />
+              </div>
+            </li>
+            <li
+              className="list-item"
             >
               <div
-                className="event-data"
+                className="event-tile"
               >
-                <div>
-                  <i
-                    className="manicon manicon-book-opening"
-                  />
-                  <h5
-                    className="event-title"
-                    dangerouslySetInnerHTML={
-                      Object {
-                        "__html": "New Text",
+                <div
+                  className="event-data"
+                >
+                  <div>
+                    <i
+                      className="manicon manicon-book-opening"
+                    />
+                    <h5
+                      className="event-title"
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "New Text",
+                        }
                       }
-                    }
-                  />
-                  <datetime
-                    className="event-date"
-                  >
-                    <span>
-                      Text Added April 24th, 2017
-                    </span>
-                  </datetime>
+                    />
+                    <datetime
+                      className="event-date"
+                    >
+                      <span>
+                        Text Added April 24th, 2017
+                      </span>
+                    </datetime>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              className="utility"
-              data-id="destroy"
-              onClick={[Function]}
-            >
-              <i
-                className="manicon manicon-trashcan"
-              />
-            </div>
-          </li>
-        </ul>
+              <div
+                className="utility"
+                data-id="destroy"
+                onClick={[Function]}
+              >
+                <i
+                  className="manicon manicon-trashcan"
+                />
+              </div>
+            </li>
+          </ul>
+        </section>
       </div>
     </nav>
     <nav

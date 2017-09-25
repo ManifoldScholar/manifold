@@ -254,7 +254,7 @@ module Validation
   end
 
   def project_filter_params
-    params.permit(filter: [:featured, :subject, :keyword, :typeahead])[:filter]
+    params.permit(filter: [:featured, :subject, :keyword, :order, :typeahead])[:filter]
   end
 
   def maker_filter_params
