@@ -10,11 +10,16 @@ describe("Backend Dashboard Container", () => {
   const projectsMeta = {
     pagination: build.pagination()
   };
+  const recentProjects = [build.entity.project("3"), build.entity.project("4")];
 
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={build.store()}>
-        <DashboardContainer projects={projects} projectsMeta={projectsMeta} />
+        <DashboardContainer
+          projects={projects}
+          projectsMeta={projectsMeta}
+          recentProjects={recentProjects}
+        />
       </Provider>
     )
   );

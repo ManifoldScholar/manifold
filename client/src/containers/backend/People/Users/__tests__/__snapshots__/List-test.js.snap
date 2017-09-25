@@ -84,47 +84,49 @@ exports[`Backend People Users List Container renders correctly 1`] = `
             Add a New User
           </a>
         </div>
-        <ul>
-          <li
-            className=""
-          >
-            <a
-              href="/backend/people/users/1"
-              onClick={[Function]}
+        <section>
+          <ul>
+            <li
+              className=""
             >
-              <header>
-                <figure
-                  className="avatar"
-                >
-                  <div
-                    className="no-image"
-                  >
-                    <i
-                      className="manicon manicon-person"
-                    />
-                  </div>
-                </figure>
-                <div
-                  className="meta"
-                >
-                  <h3
-                    className="name large"
-                  >
-                    Rowan
-                     
-                    Ida
-                  </h3>
-                </div>
-              </header>
-              <span
-                className="label"
+              <a
+                href="/backend/people/users/1"
+                onClick={[Function]}
               >
-                
-                Admin
-              </span>
-            </a>
-          </li>
-        </ul>
+                <header>
+                  <figure
+                    className="avatar"
+                  >
+                    <div
+                      className="no-image"
+                    >
+                      <i
+                        className="manicon manicon-person"
+                      />
+                    </div>
+                  </figure>
+                  <div
+                    className="meta"
+                  >
+                    <h3
+                      className="name large"
+                    >
+                      Rowan
+                       
+                      Ida
+                    </h3>
+                  </div>
+                </header>
+                <span
+                  className="label"
+                >
+                  
+                  Admin
+                </span>
+              </a>
+            </li>
+          </ul>
+        </section>
       </div>
     </nav>
     <nav
