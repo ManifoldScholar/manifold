@@ -2,7 +2,7 @@ en:
   services:
     ingestor:
       logging:
-        ingestion_start: 'Ingesting %{name}!'
+        ingestion_start: 'Ingesting "%{name}"'
         text_found: 'Found existing Text model with ID of %{id}'
         text_not_found: 'No existing text model found for source ID %{id}'
         using_strategy: 'Using strategy %{strategy}'
@@ -23,7 +23,7 @@ en:
           set_desc: 'Setting description to "%{desc}"'
           find_start_section: 'Found text starting section: "%{source_identifier}"'
         fail:
-          missing_uid: 'Ingestion Failed: unable to find a unique identifier for this Markdown ingestion.'
+          missing_uid: 'Ingestion Failed: unable to find a unique identifier for this ingestion.'
           missing_method: '%{method} is not declared in the %{strategy} strategy'
           save_fail: 'Unable to save text due to ingestion errors.'
       inspector:

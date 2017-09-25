@@ -89,6 +89,12 @@ class Ingestion < ApplicationRecord
     valid?
   end
 
+  def strategy_label
+    return nil if strategy.blank?
+    klass = strategy.constantize
+    klass.respond_to?(:label) ? klass.label : klass.name
+  end
+
   def log_buffer
     @log_buffer ||= []
   end
@@ -127,7 +133,16 @@ class Ingestion < ApplicationRecord
   end
 
   # rubocop:disable Metrics/AbcSize
-  def begin_processing
+  # rubocop:disable Metrics/MethodLength
+  def begin_processing(processing_user = nil)
+    # Announce the new state of the ingestion.
+    serialization_options = { scope: processing_user }
+    serialization = ActiveModelSerializers::SerializableResource.new(
+      self,
+      serialization_options
+    )
+    IngestionChannel.broadcast_to self, type: "entity", payload: serialization
+
     Ingestor.logger = self
     begin
       if text
@@ -144,6 +159,7 @@ class Ingestion < ApplicationRecord
     Ingestor.reset_logger
   end
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   private
 

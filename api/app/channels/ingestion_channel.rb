@@ -31,7 +31,7 @@ class IngestionChannel < ApplicationCable::Channel
 
   def process
     send_start
-    ingestion.process
+    ingestion.process(current_user)
     ingestion.save
     send_model(ingestion)
     send_end
@@ -43,7 +43,7 @@ class IngestionChannel < ApplicationCable::Channel
     send_start
     ingestion.reset
     ingestion.analyze
-    ingestion.process
+    ingestion.process(current_user)
     ingestion.save
     send_model(ingestion)
     send_end

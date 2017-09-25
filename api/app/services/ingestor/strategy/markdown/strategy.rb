@@ -10,6 +10,10 @@ module Ingestor
       class Strategy < Ingestor::Strategy::Base
         include Ingestor::Loggable
 
+        def self.label
+          "Markdown"
+        end
+
         def self.can_ingest?(ingestion)
           i = inspector(ingestion)
           result = i.markdown?

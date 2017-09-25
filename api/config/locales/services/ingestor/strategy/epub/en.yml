@@ -6,9 +6,9 @@ en:
           log:
             version: 'EPUB version is %{version}'
             update_structures: 'Updating text structures. [id %{id}]'
-            transform_ts: 'Transforming text section "%{name}" body.'
+            transform_ts: 'Transforming text section "%{name}"'
             transforming_ts: 'Transforming text sections'
-            transform_ss: 'Transforming stylesheet "%{name}" styles'
+            transform_ss: 'Transforming stylesheet "%{name}"'
             transforming_ss: 'Transforming stylesheets'
             set_desc: 'Setting description to "%{desc}"'
             set_rights: 'Setting rights to "%{rights}"'
