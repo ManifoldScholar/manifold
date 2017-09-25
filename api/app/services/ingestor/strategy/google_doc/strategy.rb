@@ -18,6 +18,10 @@ module Ingestor
           @ingestion = ingestion
         end
 
+        def self.label
+          "Google Document"
+        end
+
         # Return true if the url is valid
         def self.can_ingest?(ingestion)
           return false unless ingestion.url?

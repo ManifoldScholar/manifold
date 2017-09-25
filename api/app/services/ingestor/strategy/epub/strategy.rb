@@ -10,6 +10,10 @@ module Ingestor
       class Strategy < Ingestor::Strategy::Base
         include Ingestor::Loggable
 
+        def self.label
+          "EPUB"
+        end
+
         # Return true if epub file or is a url to an EPUB file
         def self.can_ingest?(ingestion)
           ingestion.dir?("META-INF") || epub_url?(ingestion)

@@ -10,6 +10,10 @@ module Ingestor
       class Strategy < Ingestor::Strategy::Base
         include Ingestor::Loggable
 
+        def self.label
+          "HTML"
+        end
+
         # Return true if the file has .fld and .html
         def self.can_ingest?(ingestion)
           i = inspector(ingestion)

@@ -270,11 +270,11 @@ export class IngestionIngest extends PureComponent {
             <div className="item">
               <p className="label">Strategy</p>
               <p className="value">
-                {attr.strategy || "None"}
+                {attr.strategyLabel || "None"}
               </p>
             </div>
             <div className="item">
-              <p className="label">Text</p>
+              <p className="label">Text ID</p>
               <p className="value">
                 {attr.textId
                   ? attr.textId
@@ -295,13 +295,23 @@ export class IngestionIngest extends PureComponent {
           </div>
         </div>
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
-          {this.props.ingestion.attributes.state !== "finished"
+          {this.props.ingestion.attributes.state !== "finished" &&
+          this.props.ingestion.attributes.state !== "processing"
             ? <button
                 onClick={this.backToEdit}
                 className="button-icon-secondary dull"
               >
                 <i className="manicon manicon-x small" />
                 Back
+              </button>
+            : null}
+          {this.props.ingestion.attributes.state === "finished"
+            ? <button
+                onClick={this.backToEdit}
+                className="button-icon-secondary dull"
+              >
+                <i className="manicon manicon-check small" />
+                Ingestion Complete.
               </button>
             : null}
 
