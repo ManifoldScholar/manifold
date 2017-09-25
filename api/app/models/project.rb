@@ -82,6 +82,7 @@ class Project < ApplicationRecord
 
   # Callbacks
   after_commit :trigger_creation_event, on: [:create]
+  before_save :update_sort_title, if: :title_changed?
 
   # Delegations
   delegate :count, to: :collections, prefix: true
@@ -127,6 +128,11 @@ class Project < ApplicationRecord
   # Why is this here? --ZD
   def self.call
     all
+  end
+
+  def update_sort_title
+    return if title.blank?
+    self.sort_title = title[/^((a|the|an) )?(?<title>.*)$/i, :title]
   end
 
   def search_data

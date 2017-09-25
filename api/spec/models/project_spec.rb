@@ -5,6 +5,15 @@ RSpec.describe Project, type: :model do
     expect(FactoryGirl.build(:project)).to be_valid
   end
 
+  it "updates the sort_title when saved" do
+    project = FactoryGirl.build(:project, title: "A Hobbit's Journey")
+    project.save
+    expect(project.sort_title).to eq "Hobbit's Journey"
+    project.title = "The end of the world"
+    project.save
+    expect(project.sort_title).to eq "end of the world"
+  end
+
   it "has many collaborators" do
     project = Project.new
     5.times { project.collaborators << Collaborator.new }
