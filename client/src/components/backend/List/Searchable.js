@@ -24,7 +24,8 @@ export default class ListSearchable extends PureComponent {
     newButtonPath: PropTypes.string,
     filterOptions: PropTypes.object,
     destroyHandler: PropTypes.func,
-    filterChangeHandler: PropTypes.func
+    filterChangeHandler: PropTypes.func,
+    initialFilter: PropTypes.object
   };
 
   static defaultProps = {
@@ -108,7 +109,7 @@ export default class ListSearchable extends PureComponent {
       : { keyword: "" };
     return {
       inputs,
-      filter: {}
+      filter: this.props.initialFilter || {}
     };
   }
 

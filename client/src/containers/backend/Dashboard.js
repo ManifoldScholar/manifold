@@ -103,6 +103,7 @@ export class DashboardContainer extends PureComponent {
                       paginationClickHandler={this.updateHandlerCreator}
                       entityComponent={Project.ListItem}
                       filterChangeHandler={this.filterChangeHandler}
+                      initialFilter={{ order: "sort_title ASC" }}
                     />
                   : null}
               </div>
