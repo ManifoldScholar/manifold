@@ -52,7 +52,7 @@ export class DashboardContainer extends PureComponent {
 
   constructor() {
     super();
-    this.state = { filter: { order: "title ASC" } };
+    this.state = { filter: { order: "sort_title ASC" } };
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
     this.updateHandlerCreator = this.updateHandlerCreator.bind(this);
     this.updateResults = debounce(this.updateResults.bind(this), 250);
