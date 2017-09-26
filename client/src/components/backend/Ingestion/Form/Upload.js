@@ -65,8 +65,11 @@ class IngestionFormUpload extends PureComponent {
           ? <Form.FieldGroup {...this.props}>
               <Form.TextInput
                 label="URL"
-                name="attributes[externalSourceUrl]"
                 instructions="Manifold can ingest any publicly available Google doc by entering its URL."
+                value={this.props.getModelValue(
+                  "attributes[externalSourceUrl]"
+                )}
+                onChange={event => this.onUrlChange(event)}
               />
             </Form.FieldGroup>
           : null}
@@ -75,7 +78,6 @@ class IngestionFormUpload extends PureComponent {
               <Form.Upload
                 inlineStyle={{ width: "100%" }}
                 layout="landscape"
-                // name="attributes[source]"
                 readFrom="attributes[source]"
                 instructions="Manifold supports both v2 and v3 epub files."
                 label="Upload a file ending in .epub"
@@ -86,7 +88,6 @@ class IngestionFormUpload extends PureComponent {
               <div className="form-divider">or</div>
               <Form.TextInput
                 label="URL"
-                // name="attributes[externalSourceUrl]"
                 instructions="Manifold can also ingest epub files by entering a URL"
                 value={this.props.getModelValue(
                   "attributes[externalSourceUrl]"

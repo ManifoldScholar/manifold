@@ -305,16 +305,6 @@ export class IngestionIngest extends PureComponent {
                 Back
               </button>
             : null}
-          {this.props.ingestion.attributes.state === "finished"
-            ? <button
-                onClick={this.backToEdit}
-                className="button-icon-secondary dull"
-              >
-                <i className="manicon manicon-check small" />
-                Ingestion Complete.
-              </button>
-            : null}
-
           {this.canProcess
             ? <button onClick={this.ingest} className="button-icon-secondary">
                 <i className="manicon manicon-arrow-right small" />
