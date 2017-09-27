@@ -33,7 +33,16 @@ export default class NotationViewerNotation extends PureComponent {
 
   hasImage() {
     const attribute = this.imageAttributeName();
-    return !!get(this.props.notation, `attributes.${attribute}.smallLandscape`);
+    if (get(this.props.notation, `attributes.${attribute}.smallLandscape`))
+      return true;
+    if (
+      get(
+        this.props.notation,
+        `attributes.variantThumbnailStyles.smallLandscape`
+      )
+    )
+      return true;
+    return false;
   }
 
   renderNotation() {
