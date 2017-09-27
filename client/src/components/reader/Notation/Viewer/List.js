@@ -111,8 +111,7 @@ class NotationViewerList extends PureComponent {
     const annotation = props.annotations.find(a => a.id === aId);
     const notation = this.notationForAnnotation(props, annotation);
     if (!notation || !annotation) return null;
-    const top =
-      markerNode.getBoundingClientRect().top + document.body.scrollTop;
+    const top = markerNode.getBoundingClientRect().top + window.scrollY;
     const location = this.getNotationLocation(top);
     return { annotation, notation, location, key: annotation.id };
   }
