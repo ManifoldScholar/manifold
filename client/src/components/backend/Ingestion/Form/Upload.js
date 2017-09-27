@@ -78,10 +78,12 @@ class IngestionFormUpload extends PureComponent {
               <Form.Upload
                 inlineStyle={{ width: "100%" }}
                 layout="landscape"
-                readFrom="attributes[source]"
                 instructions="Manifold supports both v2 and v3 epub files."
                 label="Upload a file ending in .epub"
                 value={this.props.getModelValue("attributes[source]")}
+                initialValue={this.props.getModelValue(
+                  "attributes[sourceFileName]"
+                )}
                 set={this.onSourceChange}
                 accepts="epubs"
               />
@@ -101,8 +103,11 @@ class IngestionFormUpload extends PureComponent {
               <Form.Upload
                 inlineStyle={{ width: "100%" }}
                 layout="landscape"
-                name="attributes[source]"
-                readFrom="attributes[sourceFileName]"
+                value={this.props.getModelValue("attributes[source]")}
+                initialValue={this.props.getModelValue(
+                  "attributes[sourceFileName]"
+                )}
+                set={this.onSourceChange}
                 instructions="Create a zip archive with a .htm or .html file in the root."
                 label="Zip source file"
                 accepts="zips"
@@ -114,9 +119,12 @@ class IngestionFormUpload extends PureComponent {
               <Form.Upload
                 inlineStyle={{ width: "100%" }}
                 layout="landscape"
-                name="attributes[source]"
-                readFrom="attributes[sourceFileName]"
-                instructions="Upload a single markdown file, or a zipped collection of markdown files with a book.json file in root directory"
+                value={this.props.getModelValue("attributes[source]")}
+                initialValue={this.props.getModelValue(
+                  "attributes[sourceFileName]"
+                )}
+                set={this.onSourceChange}
+                instructions="Upload a zipped collection of markdown files with a book.json file in root directory"
                 label="Markdown or .zip source file"
                 accepts="zips"
               />
