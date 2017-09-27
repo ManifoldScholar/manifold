@@ -17,6 +17,7 @@ import { isPromise } from "utils/promise";
 import isFunction from "lodash/isFunction";
 import has from "lodash/has";
 import { matchRoutes } from "react-router-config";
+import { createLocation } from "history";
 import getRoutes from "/routes";
 
 let port;
@@ -85,7 +86,7 @@ const fetchRouteData = (req, store) => {
       const result = component.fetchData(
         store.getState,
         store.dispatch,
-        location,
+        createLocation(location, {}, "SSR", null),
         matchedRoute.match
       );
       if (isPromise(result)) {

@@ -4,38 +4,45 @@ import { Link } from "react-router-dom";
 import { ProjectList, Layout } from "components/frontend";
 import connectAndFetch from "utils/connectAndFetch";
 import { commonActions } from "actions/helpers";
-import { bindActionCreators } from "redux";
-import { uiFilterActions, entityStoreActions } from "actions";
+import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, featuresAPI, requests } from "api";
 import get from "lodash/get";
 import isArray from "lodash/isArray";
 import lh from "helpers/linkHandler";
+import queryString from "query-string";
 import classNames from "classnames";
 
-const { setProjectFilters } = uiFilterActions;
+// const { setProjectFilters } = uiFilterActions;
 const { request } = entityStoreActions;
 const featuredLimit = 4;
-const page = 1;
 const perPage = 20;
 
 export class HomeContainer extends Component {
-  static fetchData = (getState, dispatch, location, match) => {
-    const pageParam = match.params.page ? match.params.page : page;
-    const state = getState();
+  static fetchProjects = (dispatch, location) => {
+    const query = queryString.parse(location.search);
+    const filters = {
+      featured: query.featured,
+      subject: query.subject
+    };
+    const pagination = {
+      number: query.page || 1,
+      size: perPage
+    };
     const filteredRequest = request(
-      projectsAPI.index(state.ui.projectFilters, {
-        number: pageParam,
-        size: perPage
-      }),
+      projectsAPI.index(filters, pagination),
       requests.feProjectsFiltered
     );
+    return dispatch(filteredRequest);
+  };
+
+  static fetchData = (getState, dispatch, location) => {
     const featuredRequest = request(
       projectsAPI.featured(),
       requests.feProjectsFeatured
     );
     const featuresRequest = request(featuresAPI.index(), requests.feFeatures);
-    const { promise: one } = dispatch(filteredRequest);
+    const { promise: one } = HomeContainer.fetchProjects(dispatch, location);
     const { promise: two } = dispatch(featuredRequest);
     const { promise: three } = dispatch(featuresRequest);
     return Promise.all([one, two, three]);
@@ -43,7 +50,6 @@ export class HomeContainer extends Component {
 
   static mapStateToProps = state => {
     return {
-      projectFilters: state.ui.filters.project,
       features: select(requests.feFeatures, state.entityStore),
       filteredProjects: select(requests.feProjectsFiltered, state.entityStore),
       featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
@@ -58,66 +64,51 @@ export class HomeContainer extends Component {
     featuredProjects: PropTypes.array,
     filteredProjects: PropTypes.array,
     features: PropTypes.array,
-    projectFilters: PropTypes.object,
+    location: PropTypes.object,
+    history: PropTypes.object,
     dispatch: PropTypes.func,
     subjects: PropTypes.array,
     meta: PropTypes.object
   };
 
+  static defaultProps = {
+    location: {}
+  };
+
   constructor(props) {
     super(props);
-    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
-    this.handlePageChange = this.handlePageChange.bind(this);
-  }
-
-  componentWillMount() {
-    this.commonActions = commonActions(this.props.dispatch);
-  }
-
-  componentDidMount() {
-    window.scrollTo(0, 0);
+    this.commonActions = commonActions(props.dispatch);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.authentication !== this.props.authentication) {
-      this.fetchFeaturedProjects();
-      this.fetchFilteredProjects();
+    if (nextProps.location !== this.props.location) {
+      HomeContainer.fetchProjects(nextProps.dispatch, nextProps.location);
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.projectFilters !== this.props.projectFilters) {
-      this.fetchFilteredProjects();
-    }
+  currentQuery() {
+    return queryString.parse(this.props.location.search);
   }
 
-  handlePageChange(event, pageParam) {
-    event.preventDefault(); // Remove this to scroll back to top.  Will add #pagination-target to URL
-    const pagination = { number: pageParam, size: perPage };
-    const filter = this.props.projectFilters;
-    const action = request(
-      projectsAPI.index(filter, pagination),
-      requests.feProjectsFiltered
-    );
-    this.props.dispatch(action);
+  handleFilterChange = filter => {
+    return this.doQuery(filter);
+  };
+
+  handlePageChange = (event, page) => {
+    event.preventDefault();
+    const query = Object.assign({}, this.currentQuery(), { page });
+    this.doQuery(query);
+  };
+
+  doQuery(query) {
+    const url = lh.link("frontend", query);
+    this.props.history.push(url);
   }
 
-  pageChangeHandlerCreator(pageParam) {
+  pageChangeHandlerCreator = page => {
     return event => {
-      this.handlePageChange(event, pageParam);
+      this.handlePageChange(event, page);
     };
-  }
-
-  fetchFilteredProjects = () => {
-    const pagination = {
-      number: get(this.props.meta, "pagination.currentPage"),
-      size: perPage
-    };
-    const filteredRequest = request(
-      projectsAPI.index(this.props.projectFilters, pagination),
-      requests.feProjectsFiltered
-    );
-    this.props.dispatch(filteredRequest);
   };
 
   fetchFeaturedProjects = () => {
@@ -218,10 +209,8 @@ export class HomeContainer extends Component {
                  component needs to render (which is what keeps the child dumb)'
                  */}
                 <ProjectList.Filters
-                  updateAction={bindActionCreators(
-                    setProjectFilters,
-                    this.props.dispatch
-                  )}
+                  params={this.currentQuery()}
+                  updateAction={this.handleFilterChange}
                   subjects={this.props.subjects}
                 />
               </div>

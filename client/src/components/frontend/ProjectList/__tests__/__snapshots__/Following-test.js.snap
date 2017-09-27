@@ -25,6 +25,7 @@ exports[`Frontend.ProjectList.Following component renders correctly 1`] = `
           className="select-browse"
         >
           <select
+            defaultValue=""
             onChange={[Function]}
           >
             <option
