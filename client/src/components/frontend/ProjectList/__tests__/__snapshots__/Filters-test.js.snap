@@ -5,6 +5,7 @@ exports[`Frontend.ProjectList.Filters component renders correctly 1`] = `
   className="select-browse"
 >
   <select
+    defaultValue=""
     onChange={[Function]}
   >
     <option

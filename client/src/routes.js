@@ -1,5 +1,6 @@
 import * as Frontend from "containers/frontend";
 import * as Reader from "containers/reader";
+import queryString from "query-string";
 import * as Backend from "containers/backend";
 
 /* eslint-disable max-len */
@@ -567,8 +568,12 @@ export default () => {
           name: "frontend",
           exact: true,
           component: Frontend.Home,
-          path: "/",
-          helper: () => "/"
+          path: "/:pages(pages)?/:page?/:filters(filters)?/:filter?",
+          helper: (params = {}) => {
+            const query = queryString.stringify(params);
+            if (!query) return "/";
+            return `/?${query}`;
+          }
         },
         {
           component: Frontend.NotFound

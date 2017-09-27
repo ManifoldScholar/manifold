@@ -32,6 +32,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
             className="select-browse"
           >
             <select
+              defaultValue=""
               onChange={[Function]}
             >
               <option

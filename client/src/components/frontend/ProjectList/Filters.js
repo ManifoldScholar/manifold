@@ -6,6 +6,7 @@ export default class ProjectListFilters extends Component {
 
   static propTypes = {
     updateAction: PropTypes.func,
+    params: PropTypes.object,
     subjects: PropTypes.array,
     hideFeatured: PropTypes.bool
   };
@@ -45,10 +46,21 @@ export default class ProjectListFilters extends Component {
     return <option value="featured">Featured Projects</option>;
   }
 
+  defaultValue() {
+    if (!this.props.params) return "";
+    if (
+      this.props.params.featured === true ||
+      this.props.params.featured === "true"
+    )
+      return "featured";
+    if (this.props.params.subject) return this.props.params.subject;
+    return "";
+  }
+
   render() {
     return (
       <div className="select-browse">
-        <select onChange={this.filterChange}>
+        <select defaultValue={this.defaultValue()} onChange={this.filterChange}>
           <option value="">Show All</option>
           {this.featuredOptions()}
           {this.subjectOptions()}
