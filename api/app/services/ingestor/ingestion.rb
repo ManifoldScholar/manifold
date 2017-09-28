@@ -107,8 +107,12 @@ module Ingestor
       File.extname(basename(path)).split(".").last
     end
 
-    def root
+    def root_path
       File.join(WORKING_DIR_BASE, identifier)
+    end
+
+    def root
+      root_dir? ? top_level_entities[:dirs].first : root_path
     end
 
     def sources
@@ -150,12 +154,26 @@ module Ingestor
     def extract(path = source_path)
       Zip::File.open(path) do |zip_file|
         zip_file.each do |f|
-          fpath = File.join(root, f.name)
-          FileUtils.mkdir_p(File.dirname(fpath))
+          fpath = File.join(root_path, f.name)
+          FileUtils.mkdir_p(File.dirname(fpath)) unless root_dir?
           zip_file.extract(f, fpath) unless File.exist?(fpath)
         end
       end
       logger.debug("Unzipped archive to temporary directory: #{root}")
+    end
+
+    def root_dir?(path = root_path)
+      entities = top_level_entities(path)
+      entities[:dirs].count == 1 && entities[:files].count.zero?
+    end
+
+    def top_level_entities(path = root_path)
+      reject = /(^\..*|^_.*)/
+      entities = Dir.glob(File.join(path, "*"))
+                    .reject { |d| File.basename(d).match(reject) }
+      files = entities.select { |e| File.file?(e) }
+      dirs = entities.select { |e| File.directory?(e) }
+      { files: files, dirs: dirs }
     end
 
     def source?(path = source_path)

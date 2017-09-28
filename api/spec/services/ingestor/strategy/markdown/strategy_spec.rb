@@ -4,7 +4,7 @@ RSpec.describe Ingestor::Strategy::Markdown::Strategy do
 
   before(:all) {
     @creator = FactoryGirl.create(:user)
-    @source = Rails.root.join("spec", "data", "ingestion","markdown", "minimal" ).to_s
+    @source = Rails.root.join("spec", "data", "ingestion", "markdown", "minimal" ).to_s
     @strategy = Ingestor::Strategy::Markdown::Strategy
     @logger = NullLogger.new
     Ingestor.logger = @logger
@@ -106,6 +106,16 @@ RSpec.describe Ingestor::Strategy::Markdown::Strategy do
 
   context "when the source is a directory", :integration do
     before(:all) { @text = Ingestor.ingest(@source, @creator, @strategy) }
+    include_examples "output text assertions", @text
+  end
+
+  context "when the source is a zip", :integration do
+    before(:all) { @text = Ingestor.ingest("#{@source}.zip", @creator, @strategy) }
+    include_examples "output text assertions", @text
+  end
+
+  context "when the source is a zip without a root dir", :integration do
+    before(:all) { @text = Ingestor.ingest("#{@source}_no_root.zip", @creator, @strategy) }
     include_examples "output text assertions", @text
   end
 
