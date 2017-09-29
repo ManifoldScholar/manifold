@@ -1,18 +1,21 @@
 import { createAction } from "redux-actions";
 
-export const connect = createAction("WEBSOCKET_CONNECT", (channel, options) => {
-  return { channel, options };
-});
+export const subscribe = createAction(
+  "WEBSOCKET_SUBSCRIBE",
+  (channel, options) => {
+    return { channel, options };
+  }
+);
 
-export const connected = createAction("WEBSOCKET_CONNECTED", channel => {
+export const subscribed = createAction("WEBSOCKET_SUBSCRIBED", channel => {
   return { channel };
 });
 
-export const disconnect = createAction("WEBSOCKET_DISCONNECT", channel => {
+export const unsubscribe = createAction("WEBSOCKET_UNSUBSCRIBE", channel => {
   return { channel };
 });
 
-export const disconnected = createAction("WEBSOCKET_DISCONNECTED", channel => {
+export const unsubscribed = createAction("WEBSOCKET_UNSUBSCRIBED", channel => {
   return { channel };
 });
 

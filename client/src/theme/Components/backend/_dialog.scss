@@ -7,9 +7,9 @@
   height: 100%;
   padding-right: $containerPaddingResp;
   padding-left: $containerPaddingResp;
+  visibility: visible;
   background-color: transparentize($neutralWhite, 0.4);
   opacity: 1;
-  visibility: visible;
   transition: opacity $duration $timing,
     visibility $duration $timing;
 
@@ -19,8 +19,8 @@
   }
 
   &.dialog-appear {
-    opacity: 0;
     visibility: visible;
+    opacity: 0;
   }
 
   .dialog-overlay {
@@ -30,6 +30,31 @@
     width: 100%;
     height: 100%;
     background-color: transparentize($neutralWhite, 0.4);
+  }
+
+  .dialog-box.dialog-error {
+    max-width: 500px;
+    background-color: $sp30Tertiary;
+
+    header, .dialog-header-large, .dialog-header-small {
+      h1, h2, h3, h4, h5, h6 {
+        color: $neutralOffBlack;
+      }
+    }
+
+    p {
+      font-weight: $regular;
+      color: $neutralOffBlack;
+    }
+
+    .close-button-primary {
+      color: $neutralOffBlack;
+    }
+
+    .button-icon-secondary.dull {
+      color: $neutralOffBlack;
+      border-color: $neutralOffBlack;
+    }
   }
 
   .dialog-box {

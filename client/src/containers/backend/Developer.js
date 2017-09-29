@@ -26,14 +26,14 @@ export class DeveloperContainer extends PureComponent {
     event.preventDefault();
     const channel = "IngestionChannel";
     const options = {};
-    this.props.dispatch(websocketActions.connect(channel, options));
+    this.props.dispatch(websocketActions.subscribe(channel, options));
   }
 
   disconnect(event) {
     event.preventDefault();
     const channel = "IngestionChannel";
     const options = {};
-    this.props.dispatch(websocketActions.disconnect(channel, options));
+    this.props.dispatch(websocketActions.unsubscribe(channel, options));
   }
 
   messages() {

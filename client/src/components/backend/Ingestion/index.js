@@ -1,5 +1,7 @@
 import Form from "./Form";
+import ConnectionError from "./ConnectionError";
 
 export default {
-  Form
+  Form,
+  ConnectionError
 };

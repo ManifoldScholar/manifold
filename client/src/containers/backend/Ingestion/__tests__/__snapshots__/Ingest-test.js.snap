@@ -23,8 +23,8 @@ exports[`Backend Ingest Container when the ingestion state is analyzed renders c
           className="utility"
         >
           <button
-            className="button-bare-primary"
-            disabled={false}
+            className="button-bare-primary loading"
+            disabled={true}
             onClick={[Function]}
           >
             Reset
@@ -92,7 +92,7 @@ exports[`Backend Ingest Container when the ingestion state is analyzed renders c
       <div
         className="value"
       >
-        
+        Connecting to Manifold websocket...
       </div>
     </div>
   </div>
@@ -112,15 +112,6 @@ exports[`Backend Ingest Container when the ingestion state is analyzed renders c
         className="manicon manicon-x small"
       />
       Back
-    </button>
-    <button
-      className="button-icon-secondary"
-      onClick={[Function]}
-    >
-      <i
-        className="manicon manicon-arrow-right small"
-      />
-      Ingest
     </button>
   </div>
 </div>
@@ -149,8 +140,8 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
           className="utility"
         >
           <button
-            className="button-bare-primary"
-            disabled={false}
+            className="button-bare-primary loading"
+            disabled={true}
             onClick={[Function]}
           >
             Reset
@@ -218,7 +209,7 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
       <div
         className="value"
       >
-        
+        Connecting to Manifold websocket...
       </div>
     </div>
   </div>
@@ -335,7 +326,7 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
       <div
         className="value"
       >
-        
+        Connecting to Manifold websocket...
       </div>
     </div>
   </div>
@@ -355,15 +346,6 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
         className="manicon manicon-x small"
       />
       Back
-    </button>
-    <button
-      className="button-icon-secondary"
-      onClick={[Function]}
-    >
-      <i
-        className="manicon manicon-arrow-right small"
-      />
-      Analyze
     </button>
   </div>
 </div>

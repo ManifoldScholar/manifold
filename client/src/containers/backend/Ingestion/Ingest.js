@@ -10,6 +10,7 @@ import capitalize from "lodash/capitalize";
 import { websocketActions } from "actions";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
+import { Ingestion } from "components/backend";
 
 const { request, flush } = entityStoreActions;
 
@@ -24,7 +25,14 @@ export class IngestionIngest extends PureComponent {
     route: PropTypes.object.isRequired,
     refresh: PropTypes.func,
     text: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
+    setDialogClassName: PropTypes.func,
+    webSocketConnected: PropTypes.bool,
+    webSocketFailure: PropTypes.bool
+  };
+
+  static defaultProps = {
+    setDialogClassName: () => {} // noop
   };
 
   static fetchData = (getState, dispatch, location, match) => {
@@ -37,6 +45,9 @@ export class IngestionIngest extends PureComponent {
 
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
+      webSocketFailure: state.websocket.failure,
+      webSocketConnecting: state.websocket.connecting,
+      webSocketConnected: state.websocket.connected,
       channel: get(state.websocket.channels, "IngestionChannel"),
       ingestion: select(requests.beIngestionShow, state.entityStore)
     };
@@ -46,7 +57,7 @@ export class IngestionIngest extends PureComponent {
     super(props);
 
     this.state = {
-      textLog: "",
+      textLog: "Connecting to Manifold websocket...",
       loading: false
     };
 
@@ -55,29 +66,43 @@ export class IngestionIngest extends PureComponent {
 
   componentDidMount() {
     if (this.props.ingestion) this.openSocket(this.props.ingestion.id);
+    this.setDialogClassName();
   }
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.ingestion && nextProps.ingestion)
       this.openSocket(nextProps.ingestion.id);
     this.maybeProcessMessage(nextProps.channel, this.props.channel, nextProps);
+    if (
+      nextProps.webSocketConnected === true &&
+      this.props.webSocketConnected === false
+    ) {
+      this.appendToLog(["INFO", "Successfully connected to websocket."]);
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.webSocketFailure !== nextProps.webSocketFailure) return true;
     if (this.state.loading !== nextState.loading) return true;
     if (this.props.ingestion !== nextProps.ingestion) return true;
     if (this.state.textLog !== nextState.textLog) return true;
     return false;
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevPropsIgnored, prevState) {
     if (prevState.textLog !== this.state.textLog) this.scrollToLogBottom();
+    this.setDialogClassName();
   }
 
   componentWillUnmount() {
     this.closeSocket();
     this.props.dispatch(flush(requests.beIngestionShow));
     if (this.props.refresh) this.props.refresh();
+  }
+
+  setDialogClassName() {
+    const dialogClass = this.props.webSocketFailure ? "dialog-error" : "";
+    this.props.setDialogClassName(dialogClass);
   }
 
   analyze = () => {
@@ -154,11 +179,11 @@ export class IngestionIngest extends PureComponent {
 
   openSocket(ingestionId) {
     const options = { ingestion: ingestionId };
-    this.props.dispatch(websocketActions.connect(this.channelName, options));
+    this.props.dispatch(websocketActions.subscribe(this.channelName, options));
   }
 
   closeSocket() {
-    this.props.dispatch(websocketActions.disconnect(this.channelName));
+    this.props.dispatch(websocketActions.unsubscribe(this.channelName));
   }
 
   editUrl() {
@@ -191,20 +216,20 @@ export class IngestionIngest extends PureComponent {
   }
 
   get canProcess() {
-    const { ingestion } = this.props;
-    if (!ingestion) return false;
+    const { ingestion, webSocketConnected } = this.props;
+    if (!ingestion || !webSocketConnected) return false;
     return ingestion.attributes.availableEvents.includes("process");
   }
 
   get canAnalyze() {
-    const { ingestion } = this.props;
-    if (!ingestion) return false;
+    const { ingestion, webSocketConnected } = this.props;
+    if (!ingestion || !webSocketConnected) return false;
     return ingestion.attributes.availableEvents.includes("analyze");
   }
 
   get canReset() {
-    const { ingestion } = this.props;
-    if (!ingestion) return false;
+    const { ingestion, webSocketConnected } = this.props;
+    if (!ingestion || !webSocketConnected) return false;
     return ingestion.attributes.availableEvents.includes("reset");
   }
 
@@ -236,6 +261,10 @@ export class IngestionIngest extends PureComponent {
     const resetButtonClass = classnames("button-bare-primary", {
       loading: this.state.loading || !this.canReset
     });
+
+    if (this.props.webSocketFailure === true) {
+      return <Ingestion.ConnectionError close={this.complete} />;
+    }
 
     return (
       <div>
