@@ -28,7 +28,8 @@ class DialogWrapper extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      leaving: false
+      leaving: false,
+      additionaClassNames: ""
     };
 
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
@@ -43,6 +44,10 @@ class DialogWrapper extends PureComponent {
   componentWillUnmount() {
     window.removeEventListener("keyup", this.handleEscape);
   }
+
+  setDialogClassName = additionalClassNames => {
+    this.setState({ additionalClassNames });
+  };
 
   handleEscape(event) {
     if (event.keyCode === 27 && this.props.showCloseButton === true) {
@@ -94,7 +99,8 @@ class DialogWrapper extends PureComponent {
     if (React.Children.count(this.props.children) !== 1)
       return this.props.children;
     return React.cloneElement(this.props.children, {
-      triggerClose: this.handleCloseClick
+      triggerClose: this.handleCloseClick,
+      setDialogClassName: this.setDialogClassName
     });
   }
 
@@ -118,7 +124,11 @@ class DialogWrapper extends PureComponent {
                 onClick={this.handleOverlayClick}
               />
               <div
-                className={classnames("dialog-box", this.props.className)}
+                className={classnames(
+                  "dialog-box",
+                  this.props.className,
+                  this.state.additionalClassNames
+                )}
                 style={this.style()}
               >
                 {this.props.showCloseButton

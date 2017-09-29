@@ -2,6 +2,9 @@ import { handleActions } from "redux-actions";
 import has from "lodash/has";
 
 export const initialState = {
+  connected: false,
+  connecting: false,
+  failure: false,
   channels: {}
 };
 
@@ -62,11 +65,43 @@ function receiveMessage(currentState, action) {
   return _addMessage(state, channel, message);
 }
 
+function startConnecting(currentState) {
+  return Object.assign({}, currentState, {
+    connecting: true,
+    failure: false,
+    connected: false
+  });
+}
+
+function connect(currentState) {
+  return Object.assign({}, currentState, {
+    connected: true,
+    failure: false,
+    connecting: false
+  });
+}
+
+function disconnect(currentState) {
+  return Object.assign({}, currentState, { connected: false });
+}
+
+function handleFailure(currentState) {
+  return Object.assign({}, currentState, {
+    connected: false,
+    connecting: false,
+    failure: true
+  });
+}
+
 export default handleActions(
   {
-    WEBSOCKET_CONNECT: openChannel,
-    WEBSOCKET_CONNECTED: activateChannel,
-    WEBSOCKET_DISCONNECTED: closeChannel,
+    WEBSOCKET_CONNECTION_BEGIN: startConnecting,
+    WEBSOCKET_CONNECT: connect,
+    WEBSOCKET_CONNECTION_FAILURE: handleFailure,
+    WEBSOCKET_DISCONNECT: disconnect,
+    WEBSOCKET_SUBSCRIBE: openChannel,
+    WEBSOCKET_SUBSCRIBED: activateChannel,
+    WEBSOCKET_UNSUBSCRIBED: closeChannel,
     WEBSOCKET_MESSAGE_RECEIVED: receiveMessage
   },
   initialState

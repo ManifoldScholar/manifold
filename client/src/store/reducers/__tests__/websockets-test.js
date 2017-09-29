@@ -13,27 +13,31 @@ describe("store/reducers/websocket", () => {
   });
 
   it("should open a channel", () => {
-    const action = websocketActions.connected(channelName);
+    const action = websocketActions.subscribed(channelName);
     const state = websocketReducer(undefined, action);
-    expect(state).toEqual({
-      channels: {
-        [channelName]: {
-          active: true
+    expect(state).toEqual(
+      Object.assign({}, initialState, {
+        channels: {
+          [channelName]: {
+            active: true
+          }
         }
-      }
-    });
+      })
+    );
   });
 
   it("should close a channel", () => {
     let state;
     state = websocketReducer(
       undefined,
-      websocketActions.connected(channelName)
+      websocketActions.subscribed(channelName)
     );
-    state = websocketReducer(state, websocketActions.disconnected(channelName));
-    expect(state).toEqual({
-      channels: {}
-    });
+    state = websocketReducer(state, websocketActions.unsubscribed(channelName));
+    expect(state).toEqual(
+      Object.assign({}, initialState, {
+        channels: {}
+      })
+    );
   });
 
   describe("when adding a message it", () => {
@@ -41,18 +45,20 @@ describe("store/reducers/websocket", () => {
     let state = websocketReducer(undefined, action);
 
     it("should add a message to a channel", () => {
-      expect(state).toEqual({
-        channels: {
-          [channelName]: {
-            active: false,
-            message: {
-              type: sent.type,
-              payload: sent.payload,
-              id: 1
+      expect(state).toEqual(
+        Object.assign({}, initialState, {
+          channels: {
+            [channelName]: {
+              active: false,
+              message: {
+                type: sent.type,
+                payload: sent.payload,
+                id: 1
+              }
             }
           }
-        }
-      });
+        })
+      );
     });
 
     it("should increment the next message ID by 1", () => {
