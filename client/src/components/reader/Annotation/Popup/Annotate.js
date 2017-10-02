@@ -25,6 +25,9 @@ class AnnotationPopupAnnotate extends PureComponent {
         secondary={this.props.secondary}
         direction={this.props.direction}
       >
+        <div className="note">
+          {"You Highlighted"}
+        </div>
         <Button
           onClick={this.props.attachNotation}
           requiredRole="admin"
