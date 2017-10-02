@@ -127,10 +127,15 @@
   // Section can be abstracted to more specific section class (or body class) if necessary
   &:not(.flush) {
     section > & {
-      padding-top: 45px;
+      padding-top: 39px;
       padding-bottom: 45px;
 
-      @include respond($break75) {
+      @include respond($break60) {
+        padding-top: 45px;
+        padding-bottom: 45px;
+      };
+
+      @include                                      respond($break75) {
         padding-top: 74px;
         padding-bottom: 70px;
       }

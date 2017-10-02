@@ -159,9 +159,15 @@
 // --------------------------------------------------------
 @mixin formInputPrimary {
   @include templateHead;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: $regular;
   letter-spacing: 0.015em;
+  border-radius: 0;
+  appearance: none;
+
+  @include respond($break60) {
+    font-size: 20px;
+  }
 }
 
 @mixin formInputSecondary {
@@ -169,6 +175,8 @@
   font-size: $type40;
   text-transform: uppercase;
   letter-spacing: 0.075em;
+  border-radius: 0;
+  appearance: none;
 }
 
 @mixin formInputMessage {

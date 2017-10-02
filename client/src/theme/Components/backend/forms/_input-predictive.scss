@@ -35,10 +35,15 @@
   .submit {
     @include buttonUnstyled;
     @include utilityPrimary;
+    display: none;
     padding: 0.667em 15px;
     font-size: 12px;
     color: $accentPrimary;
     white-space: nowrap;
+
+    @include respond($break50) {
+      display: block;
+    }
   }
 }
 
@@ -49,14 +54,14 @@
   width: 100%;
   max-height: 210px;
   overflow: scroll;
+  visibility: hidden;
   background-color: $neutral90;
   border-color: $neutral80;
   border-style: solid;
   border-width: 0 1px 1px;
   opacity: 0;
-  visibility: hidden;
   transition: opacity $durationFast $timing
-  visibility $durationFast $timing;
+    visibility $durationFast $timing;
 
   ul {
     @include listUnstyled;
@@ -82,7 +87,7 @@
 
 .predictive-open {
   .predictive-list {
-    opacity: 1;
     visibility: visible;
+    opacity: 1;
   }
 }

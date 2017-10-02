@@ -59,11 +59,11 @@
     width: 100%;
     padding: 1.2em 1.5em;
     color: $neutral70;
+    resize: vertical;
     background-color: $neutral05;
     border: 1px solid transparent;
     outline: none;
     transition: border-color $duration $timing;
-    resize: vertical;
 
     &:focus {
       border-color: $accentPrimary;
@@ -218,9 +218,9 @@
     position: absolute;
     left: 0;
     display: block;
+    user-select: none;
     background-color: $neutral30;
     transition: background-color $duration $timing;
-    user-select: none;
 
     .bg-neutral90 &, .form-callout & {
       background-color: $neutralWhite;
@@ -261,9 +261,9 @@
         width: 10px;
         height: 10px;
         vertical-align: top;
+        content: '';
         background-color: $neutralOffBlack;
         border-radius: 100%;
-        content: '';
         opacity: 0;
         transition: opacity $duration $timing;
       }
@@ -295,25 +295,22 @@
 // Form Date Input
 // --------------------------
 .form-date {
-
   .input-day {
     margin-left: 15px;
   }
 
   .form-input {
-
     position: relative;
-    top: 1px;
     display: inline-block;
     margin-left: 15px;
+    vertical-align: bottom;
 
     .input-year {
-
       .form-secondary &, .form-primary & {
         display: inline;
         width: calc(91vw - 242px);
-        max-width: 100px;
         min-width: 49px;
+        max-width: 100px;
 
         @include respond($break40) {
           width: calc(91vw - 372px);

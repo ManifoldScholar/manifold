@@ -53,12 +53,12 @@
   position: relative;
   width: $height * 2;
   height: $height;
-  background-blend-mode: multiply;
+  cursor: pointer;
   // Disabled to use built-in function
   // scss-lint:disable NameFormat
   background: $neutral50 linear-gradient(90deg, transparentize($neutral90, 0.5), transparentize($neutral90, 1));
+  background-blend-mode: multiply;
   border-radius: $height;
-  cursor: pointer;
   transition: background $durationSlow $timing;
 
   &.checked {
@@ -77,13 +77,17 @@
     left: 0;
     width: $height;
     height: $height;
+    content: '';
     background-color: $neutral20;
     border-radius: $height;
-    content: '';
     transition: left $duration $timing;
   }
 }
 
 .boolean-primary {
-  @include booleanPrimary(30px);
+  @include booleanPrimary(26px);
+
+  @include respond($break60) {
+    @include booleanPrimary(30px);
+  }
 }

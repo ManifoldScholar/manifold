@@ -2,18 +2,25 @@
 // Outlined in 'form-inputs-primary', but change visually with this wrapper.
 @mixin formInputSecondary {
   @include formInputPrimary;
+  box-sizing: border-box;
   width: 100%;
   // Explicit height so that elements can line up
-  height: 33px;
+  height: 32px;
+
   // Declared in em as it should change with font size
-  padding: 0 0 0.65em;
+  padding: 0;
   color: $neutral40;
+  vertical-align: top;
   background-color: transparent;
   // Override border
   border: 0;
   border-bottom: 1px solid $neutral80;
   outline: 0;
   transition: border-color $duration $timing;
+
+  @include respond($break60) {
+    height: 41px;
+  }
 
   .bg-neutral90 & {
     &:-webkit-autofill {
@@ -34,7 +41,11 @@
   .form-input + .form-section,
   .form-section + .form-section,
   .form-section + .form-input {
-    margin-top: 40px;
+    margin-top: 32px;
+
+    @include respond($break60) {
+      margin-top: 40px;
+    }
   }
 
   .form-input + .form-header,
@@ -51,18 +62,21 @@
     @include templateCopy;
     display: block;
     margin-bottom: 1em;
-    font-size: 17px;
+    font-size: 15px;
     font-style: italic;
     color: $neutral50;
     text-transform: none;
+
+    @include respond($break60) {
+      font-size: 17px;
+    }
   }
 
   .form-input {
-
     label:not(.checkbox):not(.radio) {
       @include formLabelPrimary;
       display: block;
-      margin-bottom: 1.5em;
+      margin-bottom: 1.167em;
       color: $neutral75;
 
       &.below {
@@ -91,14 +105,19 @@
     textarea {
       @include templateCopy;
       width: 100%;
-      padding: 1.579em;
-      font-size: 19px;
+      padding: 1.2em;
+      font-size: 17px;
       color: $neutral30;
+      resize: vertical;
       background-color: transparent;
       border: 1px solid $neutral80;
       outline: none;
       transition: border-color $duration $timing;
-      resize: vertical;
+
+      @include respond($break70) {
+        padding: 1.579em;
+        font-size: 19px
+      }
     }
 
     .form-toggle {
@@ -130,14 +149,13 @@
 
   // Dropdown
   .form-select {
-    // Default width
     width: auto;
 
     .manicon-caret-down {
       position: absolute;
-      top: 40%;
+      top: 52%;
       right: 6px;
-      font-size: 12px;
+      font-size: 0.6em;
       color: $accentPrimary;
       pointer-events: none;
 
@@ -150,13 +168,19 @@
     select {
       @include formInputSecondary;
       height: auto;
-      padding: 0 42px 0.55em 0; // OD
+      padding: 0 42px 0 0; // OD
+      line-height: 1.8;
       text-transform: none; // OD
+
+      @include respond($break60) {
+        height: auto; // OD
+        padding-bottom: 3px;
+        line-height: 1.7;
+      }
 
       &:focus {
         border-color: $accentPrimaryLight;
       }
-
     }
   }
 
@@ -204,8 +228,8 @@
       .message {
         width: 100%;
         padding: 20px;
-        overflow-wrap: break-word;
         word-wrap: break-word;
+        overflow-wrap: break-word;
       }
 
       .manicon-document {
@@ -227,8 +251,8 @@
       .preview {
         position: absolute;
         z-index: 1;
-        background-position: center center;
         background-repeat: no-repeat;
+        background-position: center center;
         background-size: cover;
       }
 
@@ -307,8 +331,8 @@
 
     &.style-landscape {
       width: 477px;
-      height: 218px;
       max-width: 100%;
+      height: 218px;
 
       .preview {
         top: 0;
