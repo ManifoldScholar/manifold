@@ -18,7 +18,8 @@ class FormUpload extends Component {
     instructions: PropTypes.string,
     inlineStyle: PropTypes.object,
     name: PropTypes.string, // name of the model field: attributes[avatar]
-    layout: PropTypes.oneOf(["square", "portrait", "landscape"]),
+    layout: PropTypes.oneOf(["square", "portrait", "landscape", "embed"]),
+    placeholder: PropTypes.string, // Allows override of placeholder graphic
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
     accepts: PropTypes.string,
     value: PropTypes.any, // the current value of the field in the connected model
@@ -209,10 +210,15 @@ class FormUpload extends Component {
     const { extensions } = this.accepts(this.props);
     return (
       <div className="contents-empty">
-        <i className="manicon manicon-cloud-up" />
+        {this.props.placeholder === "cover"
+          ? <GlobalForm.CoverUploadPlaceholder />
+          : <i className="manicon manicon-cloud-up" />}
         <div className="message">
           <p className="primary">
-            {"Upload a file or"}
+            <span className="fake-link">
+              {"Upload a file"}
+            </span>
+            {" or"}
             <br />
             {"drag and drop here"}
             <br />
@@ -250,9 +256,11 @@ class FormUpload extends Component {
           errors={this.props.errors}
           label={this.props.label}
         >
-          <label className={labelClass}>
-            {this.props.label}
-          </label>
+          {this.props.label
+            ? <label className={labelClass}>
+                {this.props.label}
+              </label>
+            : null}
           {isString(this.props.instructions)
             ? <span className="instructions">
                 {this.props.instructions}

@@ -1,18 +1,21 @@
 .colors {
   display: flex;
-  align-items: center;
-  max-width: 140px;
-  min-height: 120px;
-  margin: 20px auto 16px;
 
-  .form-input {
-    margin-top: -6px;
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 83px;
+
+    @include respond($break60) {
+      width: 138px;
+    }
 
     .form-toggle {
-      display: inline-block;
-      width: 33px;
-      height: 33px;
-      margin: 6px;
+      display: block;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 13px;
 
       &.primary {
         background: $sp50Primary;
@@ -39,7 +42,7 @@
       }
 
       + .form-toggle {
-        margin-top: 0;
+        margin-top: 0; // OD
       }
 
       .toggle-indicator {
@@ -59,7 +62,6 @@
         &::before {
           display: none;
         }
-
       }
 
       .toggle-label {

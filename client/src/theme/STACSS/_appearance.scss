@@ -24,10 +24,14 @@
 // - Browser UI
 // - Tables
 
+// Utility
+// --------------------------------------------------------
+.fake-link {
+  text-decoration: underline;
+}
 
 // Layout
 // --------------------------------------------------------
-
 // Apply to a pseudo element to get a tail/triangle pointing up
 @mixin tailUp($color: $neutral10) {
   width: 0;

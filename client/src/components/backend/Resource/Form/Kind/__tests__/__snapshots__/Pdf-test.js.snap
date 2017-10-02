@@ -32,7 +32,12 @@ exports[`Backend.Resource.Form.Pdf component renders correctly 1`] = `
           <p
             className="primary"
           >
-            Upload a file or
+            <span
+              className="fake-link"
+            >
+              Upload a file
+            </span>
+             or
             <br />
             drag and drop here
             <br />

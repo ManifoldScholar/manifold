@@ -211,12 +211,14 @@
       a, a:visited {
         color: $neutral75;
       }
-
     }
 
-    .fake-link {
-      text-decoration: underline;
-      cursor: pointer;
+    a, .fake-link {
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $accentPrimary;
+      }
     }
 
     .contents-icon-preview {
@@ -261,6 +263,12 @@
 
         a, a:visited {
           color: $neutral70;
+
+          transition: color $duration $timing;
+
+          &:hover {
+            color: $accentPrimary;
+          }
         }
       }
 
@@ -287,6 +295,12 @@
       z-index: 2;
       font-size: 12px;
       color: $neutral50;
+    }
+
+    // Default height
+    .cover-upload-placeholder {
+      max-width: 118px;
+      height: auto;
     }
 
     .manicon-cloud-up {

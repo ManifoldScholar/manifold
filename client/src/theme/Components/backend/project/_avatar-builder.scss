@@ -1,62 +1,49 @@
 .avatar-builder {
-  position: relative;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.075em;
-  color: $neutral20;
-  text-transform: uppercase;
+  // These are local only mixin
+  @mixin sectionLabel {
+    @include templateHead;
+    font-size: 14px;
+    color: $neutral30;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
 
-  .color-picker {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-flow: column;
-    justify-content: space-between;
-
-    &::after {
-      position: absolute;
-      top: calc(50% - 50px - 10px);
-      right: -14px;
-      z-index: 1;
-      width: 26px;
-      height: 100px;
-      font-size: 14px;
-      line-height: 100px;
-      background-color: $neutral90;
-      content: 'Or';
+    @include respond($break50) {
+      font-size: 16px;
     }
   }
 
-  label {
-    font-size: 16px;
+  @mixin utilityMessage {
+    @include templateHead;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.533em;
+    color: $neutral70;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
 
-    &.section-header {
-      display: block;
-      margin-bottom: 5px;
+    @include respond($break50) {
       font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.075em;
-      color: $neutral75;
-      text-transform: uppercase;
     }
   }
+
+  position: relative;
 
   .grid {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     text-align: center;
 
     @include respond($break95) {
       display: flex;
+      flex-wrap: nowrap;
       justify-content: center;
     }
 
     .section {
-      display: block;
-      min-height: 280px;
-      padding: 28px 0;
-      margin: auto;
-      text-align: center;
-      vertical-align: top;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 25px 10px;
 
       @include respond($break95) {
         width: 33.33%;
@@ -66,80 +53,189 @@
       }
 
       + .section {
-        display: inline-block;
         width: 50%;
         border: 1px solid $neutral75;
 
         @include respond($break95) {
-          display: block;
           width: 33.33%;
           margin: 0;
         }
-      }
 
-      &.current {
-        .preview {
-          display: block;
-          width: 120px;
-          height: 120px;
-          margin: 20px auto;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: cover;
+        &.active {
+          border-color: $accentPrimary;
         }
       }
+    }
 
-      &.active {
-        border-color: $accentPrimary;
-      }
+    .label {
+      @include sectionLabel;
+      display: block;
+      margin-bottom: 1.625em;
+    }
 
-      .form-dropzone {
-        width: 100%;
-        min-height: 160px;
-        border: 0;
+    .current {
+      min-width: 100%;
+      margin-bottom: 28px;
 
-        .contents-image-preview, .secondary, .message, .message .primary {
-          padding-top: 0;
-          margin-top: 0;
-          font-size: 10px;
-          font-weight: 600;
-          line-height: 1.6em;
-          letter-spacing: 0.075em;
-        }
-
-        .message {
-          padding-top: 18px;
-          margin: 0;
-        }
-      }
-
-      .contents-empty {
-        margin-top: 0;
-
-        .manicon {
-          height: 120px;
-          padding: 38px 0 0;
-        }
+      @include respond($break95) {
+        min-width: inherit;
+        margin-bottom: 0;
       }
 
       .preview {
+        display: block;
         width: 120px;
         height: 120px;
+        margin: 0 auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
 
         svg {
           width: 100%;
           height: auto;
         }
       }
+    }
 
-      .default-description {
-        display: block;
-        // max-width: 50%;
+    .color {
+      position: relative;
+
+      .color-picker {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 2;
+        align-items: center;
+        justify-content: space-between;
+
+        &::after {
+          @include sectionLabel;
+          position: absolute;
+          top: calc(50% - 50px);
+          right: -13px;
+          z-index: 1;
+          width: 26px;
+          height: 100px;
+          font-size: 14px;
+          line-height: 100px;
+          content: 'Or';
+          background-color: $neutral90;
+        }
+
+        .colors {
+          padding-bottom: 8px;
+
+          @include respond($break60) {
+            padding-top: 16px;
+            padding-bottom: 0;
+          }
+        }
+
+        .default-description {
+          @include utilityMessage;
+
+          @include respond($break60) {
+            max-width: 150px;
+            margin-top: 34px;
+          }
+        }
+      }
+    }
+
+
+    .upload {
+      > .form-input {
+        display: flex;
+        flex-grow: 2;
+        width: 100%;
+
+        // TODO: Investigate nested form inputs
+        .form-input, .form-dropzone {
+          display: flex;
+          width: 100%;
+        }
+
+        .contents-image-preview {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0;
+        }
+
+        .preview {
+          // Slightly smaller preview, since it shares
+          // space with color picker
+          width: 100px;
+          height: 100px;
+
+          @include respond($break50) {
+            width: 120px;
+            height: 120px;
+          }
+
+          svg {
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        // SVG placeholder
+        .cover-upload-placeholder {
+          width: 90px;
+          height: auto;
+          margin: 0 auto 17px;
+
+          @include respond($break40) {
+            width: 100px;
+          }
+
+          @include respond($break50) {
+            width: 118px;
+          }
+        }
+      }
+    }
+
+    .form-dropzone {
+      width: 100%;
+      border: 0;
+
+      .contents-empty {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        margin: 0;
+      }
+
+      .contents-image-preview .message {
+        margin-bottom: 0;
+      }
+
+      .primary {
         font-size: 10px;
-        font-weight: 600;
-        line-height: 1.6em;
         color: $neutral70;
-        text-transform: uppercase;
+
+        @include respond($break50) {
+          font-size: 12px;
+        }
+      }
+
+      .secondary {
+        @include utilityMessage;
+        padding-top: 18px;
+        margin: 0;
+      }
+    }
+
+    .contents-empty {
+      margin-top: 0;
+
+      .manicon {
+        height: 120px;
+        padding: 38px 0 0;
       }
     }
   }
