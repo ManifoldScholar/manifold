@@ -144,15 +144,19 @@
 .button-icon-secondary {
   @include templateHead;
   @include buttonUnstyled;
-  padding: 12px 17px 14px;
-  font-size: 18px;
-  letter-spacing: 0.015em;
+  padding: 0.667em 17px 0.778em;
+  font-size: 16px;
   color: $accentPrimary;
   text-align: left;
   text-decoration: none;
+  letter-spacing: 0.015em;
   border: 1px solid $accentPrimary;
   transition: color $duration $timing,
-  background-color $duration $timing;
+    background-color $duration $timing;
+
+  @include respond($break60) {
+    font-size: 18px;
+  }
 
   &:disabled {
     color: $neutral80;
@@ -229,11 +233,11 @@
   padding: 1.214em 16px 1.286em;
   font-size: 12px;
   font-weight: $semibold;
-  letter-spacing: 0.075em;
   color: $neutral80;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  letter-spacing: 0.075em;
   background-color: $accentPrimary;
   transition: color $duration $timing,
     background-color $duration $timing;
@@ -407,8 +411,8 @@
   .tag {
     padding: 0 12px;
     font-size: 15px;
-    letter-spacing: 0; // OD
     color: $neutralWhite;
+    letter-spacing: 0; // OD
     vertical-align: middle;
     background-color: $neutral40;
     transition: background-color $duration $timing;
@@ -463,8 +467,8 @@
   position: absolute;
   left: 0;
   display: block;
-  height: 33px;
   max-width: 33px;
+  height: 33px;
   padding: 5px 13px 0 8px;
   overflow: hidden;
   font-size: 18px;
@@ -616,9 +620,9 @@
     margin-left: 0.733em;
     font-size: 14px;
     font-weight: $regular;
-    letter-spacing: 0.01em;
     color: $neutral50;
     text-transform: uppercase;
+    letter-spacing: 0.01em;
   }
 }
 

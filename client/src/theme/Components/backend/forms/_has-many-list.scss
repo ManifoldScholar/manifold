@@ -5,7 +5,11 @@
     li {
       display: table;
       width: 100%;
-      padding: 17px 0 9px;
+      padding: 10px 0 10px;
+
+      @include respond($break60) {
+        padding: 17px 0 9px;
+      }
 
       + li {
         border-top: 1px solid $neutral80;
@@ -50,10 +54,18 @@
       width: 100%;
       padding-left: 15px;
       margin: 0;
-      font-size: 22px;
+      font-size: 18px;
       line-height: 29px;
       color: $neutral40;
       vertical-align: middle;
+
+      @include respond($break60) {
+        font-size: 20px;
+      }
+
+      @include respond($break70) {
+        font-size: 22px;
+      }
     }
 
     .utility {
