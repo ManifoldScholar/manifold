@@ -111,10 +111,12 @@ class AvatarBuilder extends Component {
       this.props.getModelValue("attributes[avatarStyles][smallSquare]");
     const uploadClasses = classNames({
       section: true,
+      upload: true,
       active: image
     });
     const pickerClasses = classNames({
       section: true,
+      color: true,
       active: !image
     });
 
@@ -126,13 +128,13 @@ class AvatarBuilder extends Component {
         <label className="section-header">Project Thumbnail</label>
         <div className="grid">
           <div className="section current">
-            <label>Current</label>
+            <span className="label">Current</span>
             {image
               ? this.renderCoverImage(image)
               : this.renderPlaceholderImage()}
           </div>
           <div className={pickerClasses}>
-            <label>Default</label>
+            <span className="label">Default</span>
             <ColorPicker
               onChange={this.onColorChange}
               value={this.props.getModelValue("attributes[avatarColor]")}
@@ -140,14 +142,15 @@ class AvatarBuilder extends Component {
             />
           </div>
           <div className={uploadClasses}>
-            <label>Custom</label>
+            <span className="label">Custom</span>
             <Form.Upload
               set={this.onUploadChange}
               initialValue={this.props.getModelValue(
                 "attributes[avatarStyles][smallSquare]"
               )}
               value={this.props.getModelValue("attributes[avatar]")}
-              layout="square"
+              layout="embed"
+              placeholder="cover"
               accepts="images"
             />
           </div>

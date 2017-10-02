@@ -34,7 +34,12 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
             <p
               className="primary"
             >
-              Upload a file or
+              <span
+                className="fake-link"
+              >
+                Upload a file
+              </span>
+               or
               <br />
               drag and drop here
               <br />
@@ -74,7 +79,12 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
             <p
               className="primary"
             >
-              Upload a file or
+              <span
+                className="fake-link"
+              >
+                Upload a file
+              </span>
+               or
               <br />
               drag and drop here
               <br />
@@ -122,7 +132,12 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             <p
               className="primary"
             >
-              Upload a file or
+              <span
+                className="fake-link"
+              >
+                Upload a file
+              </span>
+               or
               <br />
               drag and drop here
               <br />
@@ -168,7 +183,12 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             <p
               className="primary"
             >
-              Upload a file or
+              <span
+                className="fake-link"
+              >
+                Upload a file
+              </span>
+               or
               <br />
               drag and drop here
               <br />
@@ -221,7 +241,12 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
             <p
               className="primary"
             >
-              Upload a file or
+              <span
+                className="fake-link"
+              >
+                Upload a file
+              </span>
+               or
               <br />
               drag and drop here
               <br />

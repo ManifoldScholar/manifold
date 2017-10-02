@@ -7,6 +7,7 @@ export default class ColorPicker extends Component {
 
   static propTypes = {
     onChange: PropTypes.func,
+    wrapperClass: PropTypes.string,
     getModelValue: PropTypes.func
   };
 
@@ -21,7 +22,7 @@ export default class ColorPicker extends Component {
     ];
 
     return (
-      <div className="form-input">
+      <div className="wrapper">
         {avatarColors.map(color => {
           const checked =
             this.props.getModelValue("attributes[avatarColor]") === color.value;
@@ -65,7 +66,7 @@ export default class ColorPicker extends Component {
           {this.renderColorPalette()}
         </div>
         <div className="default-description">
-          Select A Different<br />Background Color
+          Select A Different Background Color
         </div>
       </div>
     );
