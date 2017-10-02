@@ -19,15 +19,21 @@ class AnnotationPopupAnnotate extends PureComponent {
   };
 
   render() {
+    console.log(this.props.direction);
+
     return (
       <Panel
         primary
         secondary={this.props.secondary}
         direction={this.props.direction}
       >
-        <div className="note">
-          {"You Highlighted"}
-        </div>
+        {// Only show note if popup appears
+        // above the highlight
+        this.props.direction === "up"
+          ? <div className="note">
+              {"You Highlighted"}
+            </div>
+          : null}
         <Button
           onClick={this.props.attachNotation}
           requiredRole="admin"
