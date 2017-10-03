@@ -68,7 +68,12 @@
 @mixin headingQuaternary {
   @include templateHead;
   margin: 0;
-  font-size: 28px;
+  font-size: 25px;
+  
+  @include respond($break70) {
+    font-size: 28px;
+  }
+
 
   @include respond($break90) {
     font-size: 30px;

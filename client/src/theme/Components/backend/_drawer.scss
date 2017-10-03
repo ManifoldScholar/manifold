@@ -101,7 +101,11 @@
   }
 
   .drawer-header {
-    padding-bottom: 48px;
+    padding-bottom: 21px;
+
+    @include respond($break50) {
+      padding-bottom: 48px;
+    }
 
     @include respond($break90) {
       padding-bottom: 60px;
@@ -109,9 +113,13 @@
   }
 
   .heading-quaternary {
-    padding: 32px 0 1.1em;
+    padding: 5px 0 1em;
     color: $neutralWhite;
 
+    @include respond($break50) {
+      padding: 32px 0 1.1em;
+    }
+    
     @include respond($break90) {
       padding-top: 37px;
     }
