@@ -42,8 +42,10 @@
     padding: 0.7em 1em;
     background-color: $neutral05;
     border: 1px solid transparent;
+    border-radius: 0;
     outline: 0;
     transition: border-color $duration $timing;
+    appearance: none;
 
     &:focus {
       border-color: $accentPrimary;
