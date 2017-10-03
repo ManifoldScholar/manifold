@@ -51,10 +51,18 @@
     margin: 0 0 30px; // OD
 
     li {
-      display: table;
+      display: block;
       width: 100%;
-      padding: 19px 0 14px; // OD
+      padding: 13px 0 14px;
       margin: 0; // OD
+
+      @include respond($break60) {
+        padding: 19px 0 14px; // OD
+      }
+      
+      @include respond($break65) {
+        display: table;
+      }
 
       + li {
         border-top: 1px solid $neutral80;
@@ -73,9 +81,12 @@
     }
 
     .asset-thumb {
-      display: table-cell;
       width: 100%;
-      vertical-align: middle;
+
+      @include respond($break65) {
+        display: table-cell;
+        vertical-align: middle;
+      }
 
       &:hover {
         .asset-image svg path {
@@ -95,7 +106,16 @@
     }
 
     .asset-image {
-      width: 50px;
+      display: none;
+
+      @include respond($break75) {
+        display: block;
+        width: 42px;
+      }
+
+      @include respond($break85) {
+        width: 50px;
+      }
 
       svg path {
         fill: $neutral50;
@@ -104,14 +124,36 @@
     }
 
     .asset-description {
-      width: calc(100% - 50px);
-      padding-left: 20px;
+      width: 100%;
+      padding-left: 0; // OD
+      margin-bottom: 21px;
+
+      @include respond($break65) {
+        width: calc(100% - 50px);
+        margin-bottom: 0;
+      }
+
+      @include respond($break75) {
+        padding-left: 20px; // OD
+      }
 
       .asset-title {
-        margin-bottom: 1.055em;
-        font-size: 18px;
+        margin-bottom: 0.6em;
+        font-size: 17px;
         color: $neutral30;
         transition: color $duration $timing;
+
+        @include respond($break60) {
+          font-size: 18px;
+        }
+
+        @include respond($break65) {
+          margin-bottom: 0.8em;
+        }
+
+        @include respond($break85) {
+          margin-bottom: 1.055em;
+        };
 
         .subtitle {
           margin-top: 7px;
@@ -123,12 +165,20 @@
       .asset-date, .asset-state {
         @include utilityPrimary;
         display: inline-block;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: $medium;
         color: $neutral70;
 
-        + .asset-state {
-          margin-left: 28px;
+        @include respond($break60) {
+          font-size: 14px;
+        }
+      }
+
+      .asset-date {
+        margin-right: 17px;
+
+        @include respond($break85) {
+          margin-right: 28px;
         }
       }
     }
@@ -149,9 +199,9 @@
         margin-top: -4px;
         margin-right: 9px;
         vertical-align: middle;
+        content: '';
         background-color: $neutral70;
         border-radius: 100%;
-        content: '';
       }
     }
 

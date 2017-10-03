@@ -3,7 +3,7 @@
 exports[`Backend ProjectDetail Texts Container renders correctly 1`] = `
 <section>
   <div
-    className="buttons-icon-horizontal"
+    className="buttons-icon-horizontal maintain"
   >
     <a
       className="button-icon-secondary"
@@ -13,7 +13,16 @@ exports[`Backend ProjectDetail Texts Container renders correctly 1`] = `
       <i
         className="manicon manicon-plus"
       />
-      Add a new text
+      <span
+        className="full"
+      >
+        Add a new text
+      </span>
+      <span
+        className="abbreviated"
+      >
+        Text
+      </span>
     </a>
     <a
       className="button-icon-secondary"
@@ -23,7 +32,16 @@ exports[`Backend ProjectDetail Texts Container renders correctly 1`] = `
       <i
         className="manicon manicon-plus"
       />
-      Create a new category
+      <span
+        className="full"
+      >
+        Create a new category
+      </span>
+      <span
+        className="abbreviated"
+      >
+        Category
+      </span>
     </a>
   </div>
   <section
