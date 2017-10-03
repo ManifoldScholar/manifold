@@ -4,32 +4,43 @@
 
   ul {
     @include listUnstyled;
-    padding: 35px 69px 59px 42px;
+    min-width: 300px;
   }
 
   li + li {
-    margin-top: 32px;
+    border-top: 2px solid $neutral30;
   }
 
   li a, li button {
     @include buttonUnstyled;
     @include templateHead;
-    font-size: 22px;
-    letter-spacing: 0.004em;
+    display: block;
+    padding: 1.167em 1.5em 1.333em;
+    font-size: 18px;
     color: $neutral75;
     text-decoration: none;
+    letter-spacing: 0.004em;
+    transition: color $duration $timing;
 
-    @include respond($break20) {
-      font-size: 26px;
+    @include respond($break60) {
+      font-size: 21px;
     }
 
-    &:hover i {
+    &:hover {
       color: $accentPrimary;
+
+      i, span {
+        color: $accentPrimary;
+      }
+    }
+
+    &.flush-bottom {
+      padding-bottom: 0.38em;
     }
 
     i {
       display: inline-block;
-      width: 70px;
+      width: 60px;
       color: $neutral50;
       text-align: left;
       vertical-align: middle;
@@ -38,7 +49,7 @@
 
     .manicon-arrow-round-left {
       padding-left: 4px;
-      font-size: 1.423em;
+      font-size: 1.667em;
     }
 
     .manicon-books-with-glasses-simple {
@@ -53,35 +64,38 @@
 
     .manicon-manifold-logo {
       padding-left: 9px;
-      font-size: 33px;
+      font-size: 26px;
     }
 
     span {
       display: block;
-      padding-left: 70px;
-      margin-bottom: -4px;
-      font-size: 0.692em;
+      padding-top: 0.5em;
+      padding-left: 60px;
+      font-size: 16px;
       color: $neutral50;
+      text-decoration: underline;
+      transition: color $duration $timing;
     }
   }
 
   li .note {
-    @include utilityPrimary;
+    @include templateHead;
     display: block;
-    padding-left: 70px;
-    font-size: 12px;
+    padding: 0 1.688em 1.75em 88px;
+    font-size: 16px;
+    line-height: 1.5;
     color: $neutral50;
+    text-decoration: underline;
 
-    &:hover span {
-      color: $accentPrimary;
+    @include respond($break60) {
+      padding-left: 92px;
     }
+
 
     span {
       display: inline;
-      padding: 0; // OD
-      font-size: 1em; // OD
-      color: $neutral50;
-      transition: color $duration $timing;
+      padding-left: 0; // OD
+      color: $neutral75;
     }
   }
 }

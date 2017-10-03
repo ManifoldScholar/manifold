@@ -152,6 +152,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
           </li>
           <li>
             <button
+              className="flush-bottom"
               data-id="toggle-overlay"
               onClick={[Function]}
             >
@@ -166,6 +167,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
               target="_blank"
             >
               Learn More About 
+              <br />
               <span>
                 Manifold
               </span>
