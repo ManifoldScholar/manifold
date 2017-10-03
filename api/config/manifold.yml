@@ -109,7 +109,7 @@ common: &1
         - !ruby/regexp '/^@(.*);$/'
       :properties:
         -
-          :exclude: ['position', 'font-family', 'overflow', 'overflow-x', 'overflow-y', 'z-index', 'max-width', 'line-height']
+          :exclude: ['position', 'font-family', 'overflow', 'overflow-x', 'overflow-y', 'z-index', 'max-width', 'line-height', 'letter-spacing']
         -
           :condition:
             :match: !ruby/regexp '/\d+pt|\d+px/'
