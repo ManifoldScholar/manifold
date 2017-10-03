@@ -82,19 +82,15 @@ export default class Splash extends Component {
     return this.stripNullStyles({ top, left, position });
   }
 
-  backgroundImgStyle() {
-    const backgroundImage = this.wrapUrlValue(
-      get(this.props.feature, "attributes.backgroundStyles.original")
-    );
-    return this.stripNullStyles({ backgroundImage });
-  }
-
   backgroundStyle() {
     const backgroundColor = get(
       this.props.feature,
       "attributes.backgroundColor"
     );
-    return this.stripNullStyles({ backgroundColor });
+    const backgroundImage = this.wrapUrlValue(
+      get(this.props.feature, "attributes.backgroundStyles.original")
+    );
+    return this.stripNullStyles({ backgroundColor, backgroundImage });
   }
 
   wrapUrlValue(url) {
@@ -160,7 +156,7 @@ export default class Splash extends Component {
   render() {
     return (
       <section style={this.backgroundStyle()} className={this.wrapperClass()}>
-        <div className="container flush rel" style={this.backgroundImgStyle()}>
+        <div className="container flush rel">
           <figure ref={el => (this.rightEl = el)} className="right">
             {this.hasForeground()
               ? <img

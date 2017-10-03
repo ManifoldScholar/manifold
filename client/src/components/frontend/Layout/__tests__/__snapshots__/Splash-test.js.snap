@@ -7,7 +7,6 @@ exports[`Frontend.Layout.Splash component renders correctly 1`] = `
 >
   <div
     className="container flush rel"
-    style={Object {}}
   >
     <figure
       className="right"
