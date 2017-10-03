@@ -42,7 +42,6 @@
     }
 
     li {
-
       + li {
         margin-top: 2.375em;
         font-size: 16px;
@@ -82,14 +81,20 @@
     }
 
     .panel-nav {
-      padding-left: $containerPaddingResp;
-
       li {
         display: inline-block;
 
         + li {
           margin-top: 0; // OD
           margin-left: 20px;
+        }
+
+        &:first-child {
+          padding-left: $containerPaddingResp;
+        }
+
+        &:last-child {
+          padding-right: $containerPaddingResp;
         }
       }
 
