@@ -202,12 +202,25 @@
   }
 }
 
+// Button group, starts horizontal and drops
+// to vertical by default, can maintain horizontal
+// progress with class "maintain"
 .buttons-icon-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin-bottom: 45px;
+
+  &.maintain {
+    flex-wrap: nowrap;
+
+    .button-icon-secondary {
+      width: calc(50% - 8px);
+    }
+  }
 
   @include respond($break85) {
     margin-bottom: 45px;
-    margin-left: -17px;
     font-size: 0;
   }
 
@@ -219,7 +232,21 @@
     @include respond($break85) {
       display: inline-block;
       width: calc(50% - 17px);
-      margin-left: 17px;
+    }
+  }
+
+  // Swap full/abbreviated text if there is any
+  .full {
+    display: none;
+
+    @include respond($break85) {
+      display: inline;
+    }
+  }
+
+  .abbreviated {
+    @include respond($break85) {
+      display: none;
     }
   }
 }

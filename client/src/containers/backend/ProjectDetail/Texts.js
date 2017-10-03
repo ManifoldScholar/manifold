@@ -431,19 +431,23 @@ export class ProjectDetailTexts extends PureComponent {
 
         {this.renderRoutes()}
 
-        <div className="buttons-icon-horizontal">
+        <div className="buttons-icon-horizontal maintain">
           <Link
             to={lh.link("backendProjectTextsIngestionsNew", project.id)}
             className="button-icon-secondary"
           >
-            <i className="manicon manicon-plus" />Add a new text
+            <i className="manicon manicon-plus" />
+            <span className="full">Add a new text</span>
+            <span className="abbreviated">Text</span>
           </Link>
 
           <Link
             to={lh.link("backendProjectCategoriesNew", project.id)}
             className="button-icon-secondary"
           >
-            <i className="manicon manicon-plus" />Create a new category
+            <i className="manicon manicon-plus" />
+            <span className="full">Create a new category</span>
+            <span className="abbreviated">Category</span>
           </Link>
         </div>
 
