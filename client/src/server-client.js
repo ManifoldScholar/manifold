@@ -113,7 +113,7 @@ const fetchRouteData = (req, store) => {
 };
 
 const bootstrap = (req, store) => {
-  const manifoldCookie = cookie.parse(req.headers.cookie);
+  const manifoldCookie = cookie.parse(req.headers.cookie || "");
   return Manifold.bootstrap(store.getState, store.dispatch, manifoldCookie);
 };
 
@@ -122,7 +122,7 @@ const requestHandler = (req, res) => {
   const store = createStore();
 
   if (req.headers.cookie) {
-    const manifoldCookie = cookie.parse(req.headers.cookie);
+    const manifoldCookie = cookie.parse(req.headers.cookie || "");
     const authToken = manifoldCookie.authToken;
     if (authToken) store.dispatch(currentUserActions.login({ authToken }));
   }
