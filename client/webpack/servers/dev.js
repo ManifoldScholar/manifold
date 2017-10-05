@@ -20,11 +20,12 @@ compiler.plugin("compile", params => {
   ch.info("Client-side assets are being built.");
 });
 
+const isHot = !process.env.DISABLE_HMR;
 const serverOptions = {
   quiet: false,
   allowedHosts: ["manifold.dev", "localhost", "127.0.0.1"],
   noInfo: false,
-  hot: true,
+  hot: isHot,
   inline: true,
   lazy: false,
   headers: { "Access-Control-Allow-Origin": "*" },

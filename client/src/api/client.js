@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import qs from "qs";
 import isPlainObject from "lodash/isPlainObject";
+import config from "../config";
 
 require("isomorphic-fetch");
 
@@ -21,8 +22,7 @@ export class LowLevelApiClient {
   }
 
   _adjustedEndpoint(endpoint) {
-    const out = process.env.API_URL + endpoint;
-    return out;
+    return config.apiUrl + endpoint;
   }
 
   _endpointWithParams(endpoint, params) {

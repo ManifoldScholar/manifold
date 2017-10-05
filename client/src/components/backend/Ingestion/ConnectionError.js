@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import config from "../../../config";
 
 export default class IngestionConnectionError extends PureComponent {
   static propTypes = {
@@ -12,7 +13,7 @@ export default class IngestionConnectionError extends PureComponent {
         <header className="dialog-header-small">
           <h2>Fatal Ingestion Error</h2>
         </header>
-        {process.env.CABLE_URL
+        {config.cableUrl
           ? <p>
               {"The client application is unable to connect to the server's websocket. " +
                 'Please ensure that Manifold\'s "cable" service is available at the ' +
@@ -20,7 +21,7 @@ export default class IngestionConnectionError extends PureComponent {
               <br />
               <br />
               <em>
-                {process.env.CABLE_URL}
+                {config.cableUrl}
               </em>
             </p>
           : <p>

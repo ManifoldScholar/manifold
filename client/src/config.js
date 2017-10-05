@@ -9,16 +9,30 @@ const environmentConfiguration = {
   }
 }[process.env.NODE_ENV || "development"];
 
+const apiUrl = () => {
+  if (process.env.API_URL) return process.env.API_URL;
+  if (__SERVER__)
+    return `${process.env.USE_SSL ? "https" : "http"}://${process.env.DOMAIN}`;
+  return "";
+};
+
+const cableUrl = () => {
+  if (process.env.CABLE_URL) return process.env.CABLE_URL;
+  if (process.env.USE_SSL) return `wss://${process.env.DOMAIN}/cable`;
+  return "/cable";
+};
+
 // eslint-disable max-len
 const applicationConfiguration = {
+  // Used by server-side node applications
   clientPort: process.env.CLIENT_SERVER_PORT || 3010,
   clientFallbackPort: process.env.CLIENT_SERVER_FALLBACK_PORT || 3011,
   clientSocket: process.env.CLIENT_SERVER_SOCKET,
   assetPort: process.env.CLIENT_ASSET_PORT || 3012,
-  apiUrl: process.env.API_URL,
-  cableUrl: process.env.CABLE_URL,
-  assetProxyPaths: ["/dist"],
-  apiProxyPaths: ["/api", "/system"],
+  // Used by both server-side and client-side code
+  apiUrl: apiUrl(),
+  cableUrl: cableUrl(),
+  domain: process.env.DOMAIN,
   app: {
     head: {
       defaultTitle: "Manifold Scholarship",

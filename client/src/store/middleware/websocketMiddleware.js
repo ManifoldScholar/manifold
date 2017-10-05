@@ -2,6 +2,7 @@
 import ActionCable from "actioncable";
 import get from "lodash/get";
 import { websocketActions } from "actions";
+import config from "../../config";
 
 let actionCableMiddleware = ({ dispatchIgnored, getStateIgnored }) => {
   return next => action => {
@@ -85,7 +86,7 @@ if (__CLIENT__) {
       if (action.type === "WEBSOCKET_SUBSCRIBE") {
         if (cable === null || cable.connection.disconnected === true) {
           if (cable === null) {
-            cable = ActionCable.createConsumer(process.env.CABLE_URL);
+            cable = ActionCable.createConsumer(config.cableUrl);
           } else {
             cable.connect();
           }

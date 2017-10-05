@@ -7,7 +7,7 @@ class ApplicationMailer < ActionMailer::Base
   def assign_global_email_vars
     @settings = Settings.instance
     @closing = @settings.email[:closing]
-    @client_url = ENV["CLIENT_URL"]
+    @client_url = Rails.configuration.manifold.url
     @installation_name = @settings.general[:installation_name]
   end
 end

@@ -49,18 +49,20 @@ Clamp do
     option "--nocable", :flag, "do not start the websocket (action cable) server"
     option "--noclockwork", :flag, "do not start clockwork"
     option "--noclient", :flag, "do not start client"
+    option "--nohmr", :flag, "do not enable client HMR"
 
     self.default_subcommand = "all"
 
     subcommand ["all"], "Start all services" do
 
       def execute
+        env = nohmr? ? "DISABLE_HMR=1 " : ""
         api_num = noapi? ? 0 : 1
         worker_num = noworker? ? 0 : 1
         clockwork_num = noclockwork? ? 0 : 1
         client_num = noclient? ? 0 : 1
         cable_num = nocable? ? 0 : 1
-        exec "foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num},cable=#{cable_num}"
+        exec "#{env}foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num},cable=#{cable_num}"
       end
 
     end
@@ -91,8 +93,12 @@ Clamp do
     end
 
     subcommand ["client"], "Start Client service" do
+
+      option "--nohmr", :flag, "do not enable client HMR"
+
       def execute
-        exec "foreman start -m cable=0,api=0,worker=0,clockwork=0,client=1"
+        env = nohmr? ? "DISABLE_HMR=1 " : ""
+        exec "#{env}foreman start -m cable=0,api=0,worker=0,clockwork=0,client=1"
       end
     end
 

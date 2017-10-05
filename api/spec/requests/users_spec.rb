@@ -53,7 +53,7 @@ RSpec.describe "Users API", type: :request do
 
       it "accepts an avatar file upload and adds it to the user" do
         url = api_response["data"]["attributes"]["avatarStyles"]["original"]
-        expect(url.start_with?("http")).to be true
+        expect(url.blank?).to be false
       end
 
       it "sends a welcome message" do

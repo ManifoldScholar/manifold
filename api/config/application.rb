@@ -47,7 +47,8 @@ module ManifoldApi
     config.active_record.belongs_to_required_by_default = true
 
     config.action_cable.allowed_request_origins = [
-      ENV["CLIENT_URL"],
+      "http://#{ENV['DOMAIN']}",
+      "https://#{ENV['DOMAIN']}",
       "http://127.0.0.1:3030",
       "http://localhost:3030"
     ]
