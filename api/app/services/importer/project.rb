@@ -9,10 +9,16 @@ module Importer
       @logger = logger
       @path = path
       @project_json = read_json("project.json")
+    rescue StandardError => error
+      @logger.error "Unable to import project at #{@path}"
+      @logger.error(error)
     end
 
     def import(include_texts = true)
-      upsert_project(include_texts)
+      upsert_project(include_texts) if @project_json
+    rescue StandardError => error
+      @logger.error "Unable to import project at #{@path}"
+      @logger.error(error)
     end
 
     def resource_import_options
@@ -29,6 +35,10 @@ module Importer
       if @project_json[:attributes][:hashtag]
         ::Project.find_or_initialize_by(
           hashtag: @project_json[:attributes][:hashtag]
+        )
+      elsif @project_json[:attributes][:title]
+        ::Project.find_or_initialize_by(
+          title: @project_json[:attributes][:title]
         )
       else
         ::Project.new
