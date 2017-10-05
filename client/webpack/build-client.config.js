@@ -52,7 +52,7 @@ const config = {
 };
 
 // HMR
-if (process.env.WEBPACK_DEV_SERVER) {
+if (process.env.WEBPACK_DEV_SERVER && !process.env.DISABLE_HMR) {
   ch.info("Webpack dev server is running. Enabling HMR.");
 
   config.devServer = {
@@ -70,10 +70,10 @@ if (process.env.WEBPACK_DEV_SERVER) {
     `webpack-dev-server/client?http://0.0.0.0:${process.env.CLIENT_ASSET_PORT}`
   );
   config.entry["build/client"].unshift("react-hot-loader/patch");
-
   const hotPlugin = new webpack.HotModuleReplacementPlugin();
-  const namedModules = new webpack.NamedModulesPlugin();
   plugins.push(hotPlugin);
+
+  const namedModules = new webpack.NamedModulesPlugin();
   plugins.push(namedModules);
 }
 

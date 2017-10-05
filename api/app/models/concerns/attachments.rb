@@ -116,7 +116,7 @@ module Attachments
 
         def #{field}_url
           return nil unless #{field}.present?
-          Rails.configuration.manifold.api_url + #{field}.url
+          (Rails.configuration.manifold.api_url || "") + #{field}.url
         end
   
         def #{field}_extension
@@ -138,7 +138,7 @@ module Attachments
         def #{field}_styles
           styles = #{field}.styles.keys.map do |style|
             if #{field}.url(style).present? && can_process_#{field}_styles?
-              value = Rails.configuration.manifold.api_url + #{field}.url(style)
+              value = (Rails.configuration.manifold.api_url || "") + #{field}.url(style)
             else 
               value = nil
             end

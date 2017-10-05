@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { get } from "lodash";
 import { camelize } from "humps";
+import config from "../../config";
 
 export openPopup from "./popup";
 
@@ -28,7 +29,7 @@ export function providerSetting(provider) {
  * @return {String}
  */
 export function getUrl(provider) {
-  return `${process.env.API_URL}/auth/${providerSlug(provider)}`;
+  return `${config.apiUrl}/auth/${providerSlug(provider)}`;
 }
 
 /**
@@ -37,9 +38,9 @@ export function getUrl(provider) {
  */
 export function isOauthEvent(event) {
   if (get(event, "data.type") === "oauth") {
-    if (get(event, "origin") !== process.env.API_URL) {
+    const allowed = [`http://${config.domain}`, `https://${config.domain}`];
+    if (!allowed.includes(get(event, "origin"))) {
       console.error("Origin mismatch, %s is not API", event.origin);
-
       return false;
     }
 
