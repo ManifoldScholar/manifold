@@ -79,7 +79,7 @@ export default class ListSearchable extends PureComponent {
           inputs[label] = value;
           break;
       }
-      this.setState({ inputs, filter }, this.updateResults);
+      this.setState({ inputs, filter });
     }
   }
 
@@ -112,10 +112,9 @@ export default class ListSearchable extends PureComponent {
     };
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
-    this.updateResults();
-  }
+  };
 
   renderOptionsText() {
     if (this.state.showOptions) return `Hide Search Options`;
