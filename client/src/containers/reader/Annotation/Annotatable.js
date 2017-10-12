@@ -12,6 +12,7 @@ import { annotationsAPI, requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
 import isString from "lodash/isString";
 import lh from "helpers/linkHandler";
+// import ch from "helpers/consoleHelpers";
 
 const { request } = entityStoreActions;
 
@@ -41,35 +42,14 @@ class Annotatable extends Component {
 
   constructor() {
     super();
-    this.updateSelection = this.updateSelection.bind(this);
-    this.startSelection = this.startSelection.bind(this);
-    this.updateStateSelection = this.updateStateSelection.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.highlightSelection = this.highlightSelection.bind(this);
-    this.startAnnotateSelection = this.startAnnotateSelection.bind(this);
-    this.startNotationSelection = this.startNotationSelection.bind(this);
-    this.startShare = this.startShare.bind(this);
-    this.closeDrawer = this.closeDrawer.bind(this);
-    this.attachNotationToSelection = this.attachNotationToSelection.bind(this);
-    this.closestTextNode = this.closestTextNode.bind(this);
-    this.handlePossibleAnnotationClick = this.handlePossibleAnnotationClick.bind(
-      this
-    );
-    this.createAnnotation = this.createAnnotation.bind(this);
-
     this.state = this.defaultState();
-  }
-
-  componentDidMount() {
-    document.addEventListener("mousedown", this.startSelection, false);
-    document.addEventListener("keydown", this.handleKeyDown, false);
   }
 
   componentWillUnmount() {
     if (this.timer) clearTimeout(this.timer);
-    document.removeEventListener("mousedown", this.startSelection, false);
-    document.removeEventListener("mouseup", this.updateSelection, false);
-    document.removeEventListener("keydown", this.handleKeyDown, false);
+    // document.removeEventListener("mousedown", this.startSelection, false);
+    // document.removeEventListener("mouseup", this.updateSelection, false);
+    // document.removeEventListener("keydown", this.handleKeyDown, false);
   }
 
   defaultState() {
@@ -79,22 +59,24 @@ class Annotatable extends Component {
       drawerContents: null,
       selectionLocked: false,
       selectionClickEvent: null,
-      listAnnotations: null
+      textAnnotations: null,
+      selectedAnnotation: null,
+      showAnnotationsInDrawer: null
     };
   }
 
   // This method handles shift + arrow selection modification
-  handleKeyDown(event) {
+  handleKeyDown = event => {
     const key = event.keyCode;
     const isShift = event.shiftKey;
     if (isShift && (key >= 37 && key <= 40)) {
       this.updateSelection(event);
     }
-  }
+  };
 
   // The native selection is read only, so we'll map it to a similar selection object
   // that we have more control over.
-  updateStateSelection(nativeSelection, selectionClickEvent = null) {
+  updateStateSelection = (nativeSelection, selectionClickEvent = null) => {
     // if there is no native selection and we're not in a locked start, clear it.
     if (!nativeSelection && !this.state.selectionLocked)
       return this.clearSelection();
@@ -109,21 +91,10 @@ class Annotatable extends Component {
     if (this.didSelectionChange(selection)) return;
     // update the state
     this.setState({ selection, selectionClickEvent });
-  }
+  };
 
   didSelectionChange(selection) {
     return this.compareSelections(selection, this.state.selection) === true;
-  }
-
-  clearSelection() {
-    /* eslint-disable no-unused-vars */
-    const {
-      listAnnotations,
-      drawerContents,
-      ...newState
-    } = this.defaultState();
-    this.setState(newState);
-    /* eslint-enable no-unused-vars */
   }
 
   // Maps the browser selection object to component state
@@ -153,6 +124,9 @@ class Annotatable extends Component {
     // 2. Create a new range that ends with the start point of our existing range
     const startRange = document.createRange();
     startRange.setStart(startNode, 0);
+    let endOffset = range.startOffset + 1;
+    if (endOffset > range.startContainer.length)
+      endOffset = range.startContainer.length;
     startRange.setEnd(range.startContainer, range.startOffset + 1);
 
     // 3. Find the offset from the data-node-uuid start element
@@ -170,7 +144,7 @@ class Annotatable extends Component {
       endNode = startNode;
       endRange.setStart(endNode, 0);
       const endContainer = [...endNode.childNodes].find(
-        node => node.nodeType === 3
+        node => node.nodeType === Node.TEXT_NODE
       );
       endRange.setEnd(endContainer, endNode.textContent.length);
     } else {
@@ -223,7 +197,7 @@ class Annotatable extends Component {
     return element;
   }
 
-  // Returnst true if selection a and b should be considered the same selection.
+  // Returns true if selection a and b should be considered the same selection.
   compareSelections(a, b) {
     if (a === null && b === null) return true;
     if (a === null && b !== null) return false;
@@ -238,33 +212,49 @@ class Annotatable extends Component {
     return nativeSelection;
   }
 
-  updateSelection(event) {
-    // We can now remove the one-time event listener that was setup when selection
-    // started.
-    document.removeEventListener("mouseup", this.updateSelection, false);
-    // Selection events still only have varied support, so we need to depend on mouse
-    // events. In the case of deselection, the mouseUp event is fired before the previous
-    // selection has been cleared. We need to delay grabbing the selection until the
-    // default handlers for the mouseup event have fired, and and selected text has been
-    // deselected.
+  asyncUpdateSelection = event => {
+    event.persist();
     this.timer = setTimeout(() => {
-      this.updateStateSelection(
-        this.validateSelection(window.getSelection()),
-        event
-      );
+      this.updateSelection(event);
     }, 0);
-  }
+  };
 
-  startSelection(eventIgnored) {
-    // Once we start the selection, we'll wait for the mouseup to happen.
-    document.addEventListener("mouseup", this.updateSelection, false);
+  updateSelection = event => {
+    event.persist();
+    // ch.notice("Annotation: updating selection", "pencil2");
+    this.updateStateSelection(
+      this.validateSelection(window.getSelection()),
+      event
+    );
+  };
+
+  startSelection = event => {
+    if (event.ctrlKey || event.button === 2) return; // ignore right click & ctrl click.
+    // ch.notice('Annotation: starting selection', "pencil2");
+    this.clearSelection();
+  };
+
+  clearSelectedAnnotation() {
+    this.setState({ selectedAnnotation: null });
   }
 
   clearNativeSelection() {
     window.getSelection().removeAllRanges();
   }
 
-  createAnnotation(annotation, options = {}) {
+  clearSelection() {
+    // ch.notice("Annotation: clearing selection", "pencil2");
+    /* eslint-disable no-unused-vars */
+    const {
+      textAnnotations,
+      drawerContents,
+      ...newState
+    } = this.defaultState();
+    this.setState(newState);
+    /* eslint-enable no-unused-vars */
+  }
+
+  createAnnotation = (annotation, options = {}) => {
     const notation = options.notation || null;
     const call = annotationsAPI.create(
       this.props.sectionId,
@@ -282,27 +272,68 @@ class Annotatable extends Component {
       this.unlockSelection();
     });
     return res.promise;
-  }
+  };
 
-  startAnnotateSelection(eventIgnored) {
+  startAnnotateSelection = eventIgnored => {
     this.setState({ drawerContents: "annotate" });
     this.lockSelection();
-  }
+  };
 
-  highlightSelection(event) {
+  highlightSelection = event => {
     event.stopPropagation();
     const annotation = this.mapStateToAnnotation(
       this.state.selection,
       "highlight"
     );
     this.createAnnotation(annotation);
-  }
+  };
 
-  attachNotationToSelection(notation) {
+  destroySelected = eventIgnored => {
+    const annotation = this.state.selectedAnnotation;
+    if (!annotation) return;
+    const call = annotationsAPI.destroy(this.state.selectedAnnotation.id);
+    const options = { removes: annotation };
+    const res = this.props.dispatch(
+      request(call, requests.rAnnotationDestroy, options)
+    );
+    res.promise.then(() => {
+      this.updateStateSelection(null);
+      this.clearNativeSelection();
+      this.unlockSelection();
+    });
+    return res.promise;
+  };
+
+  attachNotationToSelection = notation => {
     const annotation = this.state.selectionLockedAnnotation;
     annotation.format = notation.type.slice(0, -1); // Type is a plural, so take the 's' off
     const closeOnSave = true;
     this.createAnnotation(annotation, { notation, closeOnSave });
+  };
+
+  /* Given an annotation ID, this will calculate the DOM range and select it using the
+     browser selection API. This will, in turn, cause the annotation popup to appear.
+   */
+  selectAnnotation(event, annotationId) {
+    // ch.notice("Selecting from existing annotation", "pencil2");
+    const annotation = this.props.annotations.find(a => a.id === annotationId);
+    if (annotation) this.setState({ selectedAnnotation: annotation });
+    const [first, last] = this.firstAndLastAnnotationNode(annotationId);
+    const sel = window.getSelection();
+    const range = document.createRange();
+    range.setStart(first, 0);
+    range.setEnd(last, last.length);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    this.updateSelection(event);
+  }
+
+  firstAndLastAnnotationNode(id) {
+    const nodes = document.querySelectorAll(`[data-annotation-ids*="${id}"]`);
+    const finder = n => n.nodeType === Node.TEXT_NODE;
+    const first = [...nodes[0].childNodes].find(finder);
+    const last = [...nodes[nodes.length - 1].childNodes].find(finder);
+    return [first, last];
   }
 
   lockSelection() {
@@ -328,21 +359,21 @@ class Annotatable extends Component {
     });
   }
 
-  startNotationSelection(eventIgnored) {
+  startNotationSelection = eventIgnored => {
     this.setState({ drawerContents: "notations" });
     this.lockSelection();
-  }
+  };
 
-  startShare(event, type) {
+  startShare = (eventIgnored, type) => {
     this.setState({ drawerContents: "share", shareType: type });
     this.lockSelection();
-  }
+  };
 
   startBookmark(eventIgnored) {
     // TOD: Implement bookmarks
   }
 
-  closeDrawer(event) {
+  closeDrawer = event => {
     this.setState({ drawerContents: null });
     // Keyboard event doesn't hide the popup by default,
     // so manually remove the selection
@@ -350,19 +381,66 @@ class Annotatable extends Component {
       this.setState({ selection: null });
     }
     this.unlockSelection();
+  };
+
+  doesElementContainAnnotation(el) {
+    if (!el) return false;
+    const { textAnnotationIds } = el.dataset;
+    return isString(textAnnotationIds) && textAnnotationIds.length > 0;
   }
 
-  handlePossibleAnnotationClick(event) {
-    if (!event || !event.target) return;
-    const { listableAnnotationIds } = event.target.dataset;
-    if (!isString(listableAnnotationIds) || listableAnnotationIds.length < 1)
-      return;
-    const listAnnotations = listableAnnotationIds.split(",");
-    const drawerContents = "annotations";
-    this.setState({ drawerContents, listAnnotations });
-    event.preventDefault();
-    event.stopPropagation();
+  doesElementContainRemovableHighlight(el) {
+    if (!el) return false;
+    const { removableHighlightId } = el.dataset;
+    return isString(removableHighlightId) && removableHighlightId.length > 0;
   }
+
+  doesElementContainAnnotationAndHighlight(el) {
+    return (
+      this.doesElementContainRemovableHighlight(el) &&
+      this.doesElementContainAnnotation(el)
+    );
+  }
+
+  elementAnnotationIds(el, type = "textAnnotationIds") {
+    if (!el) return null;
+    const ids = el.dataset[type];
+    return ids.split(",");
+  }
+
+  handleAnnotationClick(event, el) {
+    this.showAnnotationsInDrawer(this.elementAnnotationIds(el));
+  }
+
+  handleRemovableHighlightClick(event, el) {
+    const id = el.dataset.removableHighlightId;
+    this.selectAnnotation(event, id);
+  }
+
+  handleDisambiguationClick(eventIgnored, el) {
+    this.setState({
+      showAnnotationsInDrawer: event => {
+        this.clearNativeSelection();
+        this.handleAnnotationClick(event, el);
+      }
+    });
+  }
+
+  showAnnotationsInDrawer(textAnnotations) {
+    const drawerContents = "annotations";
+    this.setState({ drawerContents, textAnnotations });
+  }
+
+  handleAnnotatableClick = event => {
+    if (!event || !event.target) return;
+    const el = event.target;
+    if (this.doesElementContainAnnotationAndHighlight(el))
+      this.handleDisambiguationClick(event, el);
+    if (this.doesElementContainRemovableHighlight(el))
+      return this.handleRemovableHighlightClick(event, el);
+    if (this.doesElementContainAnnotation(el))
+      return this.handleAnnotationClick(event, el);
+  };
 
   /* eslint-disable no-unreachable */
   drawerProps() {
@@ -460,7 +538,7 @@ class Annotatable extends Component {
       <AnnotationContainers.List
         closeDrawer={this.closeDrawer}
         sectionId={this.props.sectionId}
-        annotationIds={this.state.listAnnotations}
+        annotationIds={this.state.textAnnotations}
         createHandler={this.createAnnotation}
       />
     );
@@ -498,8 +576,20 @@ class Annotatable extends Component {
       this.props.dispatch
     );
 
+    // We include a tabIndex on this div so that it correctly captures the handleKeyDown
+    // event, which is needed for key-based selection. Without it, the handleKeyDown event
+    // will not work. We realize this present a slight accessibility issue, but until we
+    // find a work-around, we're stuck with it. The following line disables the lint
+    // warning around this tabindex.
+    /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
-      <div>
+      <div
+        className="no-focus-outline"
+        onMouseDown={this.startSelection}
+        onMouseUp={this.asyncUpdateSelection}
+        onKeyDown={this.handleKeyDown}
+        tabIndex="0"
+      >
         {/* Children must precede the notation viewer, because the annotatable ref needs to
         be rendered prior to the notation viewer calculating where to put things. */}
         <div
@@ -507,7 +597,7 @@ class Annotatable extends Component {
           ref={a => {
             this.annotatable = a;
           }}
-          onClick={this.handlePossibleAnnotationClick}
+          onClick={this.handleAnnotatableClick}
         >
           {this.props.children ? Children.only(this.props.children) : null}
         </div>
@@ -525,7 +615,10 @@ class Annotatable extends Component {
             this.props.textId,
             this.props.sectionId
           )}
+          selectedAnnotation={this.state.selectedAnnotation}
+          showAnnotationsInDrawer={this.state.showAnnotationsInDrawer}
           highlight={this.highlightSelection}
+          destroySelected={this.destroySelected}
           annotate={this.startAnnotateSelection}
           bookmark={this.startBookmark}
           attachNotation={this.startNotationSelection}
@@ -552,6 +645,7 @@ class Annotatable extends Component {
           : null}
       </div>
     );
+    /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
   }
 }
 

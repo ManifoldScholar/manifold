@@ -11,6 +11,7 @@ describe("Reader.Annotation.Popup.Annotate Component", () => {
     const component = renderer.create(
       <Provider store={store}>
         <Annotate
+          destroySelected={() => {}}
           attachNotation={() => {}}
           highlight={() => {}}
           annotate={() => {}}

@@ -6,14 +6,14 @@
   position: absolute;
   margin-top: -30px;
   white-space: nowrap;
-  opacity: 0;
   visibility: hidden;
+  opacity: 0;
   transition: top $duration $timing, left $duration $timing,
     opacity $duration $timing;
 
   &.visible {
-    opacity: 1;
     visibility: visible;
+    opacity: 1;
   }
 
   .popup-page {
@@ -22,8 +22,8 @@
       visibility $duration $timing;
 
     &.hidden {
-      opacity: 0;
       visibility: hidden;
+      opacity: 0;
     }
   }
 
@@ -61,6 +61,15 @@
     }
   }
 
+  .note {
+    @include templateHead;
+    padding: 1em 22px 1.063em 17px;
+    font-size: 16px;
+    color: $neutralWhite;
+    letter-spacing: 0.005em;
+    background-color: $neutral90;
+  }
+
   button {
     @include buttonUnstyled;
     @include utilityPrimary;
@@ -84,7 +93,7 @@
       }
     }
 
-    &:hover {
+    &:hover, &.selected {
       color: $neutral80;
       background-color: $accentPrimary;
     }
