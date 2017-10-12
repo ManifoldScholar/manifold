@@ -3,6 +3,8 @@
 exports[`Reader.Annotation.Popup.Wrapper Component renders correctly when not logged in 1`] = `
 <div
   className="annotation-popup"
+  onClick={[Function]}
+  onMouseDown={[Function]}
   style={
     Object {
       "bottom": "auto",

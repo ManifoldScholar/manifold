@@ -12,11 +12,14 @@ export default class AnnotationPopup extends Component {
 
   static propTypes = {
     selection: PropTypes.object,
+    selectedAnnotation: PropTypes.object,
+    showAnnotationsInDrawer: PropTypes.func,
     selectionLocked: PropTypes.bool,
     selectionClickEvent: PropTypes.object,
     annotatableDomElement: PropTypes.object,
     shareUrl: PropTypes.string.isRequired,
     highlight: PropTypes.func.isRequired,
+    destroySelected: PropTypes.func.isRequired,
     annotate: PropTypes.func.isRequired,
     cite: PropTypes.func.isRequired,
     attachNotation: PropTypes.func.isRequired,
@@ -183,10 +186,19 @@ export default class AnnotationPopup extends Component {
     this.setState({ secondary: page });
   }
 
+  showShare = () => {
+    this.showSecondary("share");
+  };
+
   resetSecondary() {
     this.setState({
       secondary: null
     });
+  }
+
+  stopPropagation(event) {
+    event.nativeEvent.stopPropagation();
+    event.stopPropagation();
   }
 
   renderSecondaryShare() {
@@ -213,6 +225,8 @@ export default class AnnotationPopup extends Component {
 
     return (
       <div
+        onMouseDown={this.stopPropagation}
+        onClick={this.stopPropagation}
         className={popupClass}
         ref={a => {
           this.popupEl = a;
@@ -224,13 +238,14 @@ export default class AnnotationPopup extends Component {
         }}
       >
         <Annotate
+          showShare={this.showShare}
+          selectedAnnotation={this.props.selectedAnnotation}
+          showAnnotationsInDrawer={this.props.showAnnotationsInDrawer}
           attachNotation={this.props.attachNotation}
+          destroySelected={this.props.destroySelected}
           highlight={this.props.highlight}
           annotate={this.props.annotate}
           bookmark={this.props.bookmark}
-          showShare={() => {
-            this.showSecondary("share");
-          }}
           secondary={this.state.secondary}
           direction={this.state.direction}
           showLogin={this.props.showLogin}

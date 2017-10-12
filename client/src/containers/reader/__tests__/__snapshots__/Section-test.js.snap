@@ -6,7 +6,13 @@ exports[`Reader Section Container renders correctly 1`] = `
     <section
       className="reader-window"
     >
-      <div>
+      <div
+        className="no-focus-outline"
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        tabIndex="0"
+      >
         <div
           className="annotatable"
           onClick={[Function]}
@@ -29,6 +35,8 @@ exports[`Reader Section Container renders correctly 1`] = `
         <span />
         <div
           className="annotation-popup"
+          onClick={[Function]}
+          onMouseDown={[Function]}
           style={
             Object {
               "bottom": "auto",

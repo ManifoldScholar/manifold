@@ -133,15 +133,23 @@ export default class TextNode extends Component {
         "annotation-resource-end": notations && endingResources.length > 0
       });
 
-      const listableAnnotationIds = map[index]
+      const textAnnotationIds = map[index]
         .filter(a => a.type === "annotation")
         .map(a => a.id);
+
+      const removableHighlight = map[index].filter(
+        a => a.type === "highlight" && a.isCreator
+      )[0];
+      const removableHighlightId = removableHighlight
+        ? removableHighlight.id
+        : "";
 
       return (
         <span
           key={index} // eslint-disable-line react/no-array-index-key
           className={classes}
-          data-listable-annotation-ids={listableAnnotationIds}
+          data-removable-highlight-id={removableHighlightId}
+          data-text-annotation-ids={textAnnotationIds}
           data-annotation-ids={map[index].map(a => a.id)}
         >
           {chunk}

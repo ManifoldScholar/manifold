@@ -20,6 +20,7 @@ describe("Reader.Annotation.Popup.Wrapper Component", () => {
           annotate={() => {}}
           cite={() => {}}
           attachNotation={() => {}}
+          destroySelected={() => {}}
           bookmark={() => {}}
           showLogin={() => {}}
         />
