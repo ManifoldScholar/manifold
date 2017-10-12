@@ -108,6 +108,7 @@ export default class AnnotationPopup extends Component {
       return;
     }
     if (!rect) return;
+    if (!this.popupEl) return;
     const popupHeight = this.popupEl.offsetHeight;
     const popupWidth = this.popupEl.offsetWidth;
     const halfPopupWidth = popupWidth / 2;
@@ -116,7 +117,8 @@ export default class AnnotationPopup extends Component {
     const up = "up";
     const down = "down";
     const annotatable = this.props.annotatableDomElement;
-    const annotatableRect = annotatable.getBoundingClientRect();
+    const section = annotatable.querySelector(".manifold-text-section");
+    const annotatableRect = section.getBoundingClientRect();
     // Get crossbrowser document scrollTop
     const documentScrollTop =
       document.documentElement.scrollTop ||
@@ -131,13 +133,7 @@ export default class AnnotationPopup extends Component {
       popupBottomEdgeIfDown > bottomVisiblePosition;
     const margin = annotatableRect.left;
     const minLeft = Math.max(margin * -1 + 25, rect.left - halfPopupWidth);
-    const maxLeft =
-      popupWidth * -1 +
-      annotatableRect.width +
-      annotatableRect.left +
-      margin +
-      -25;
-
+    const maxLeft = margin + annotatableRect.width - popupWidth * 0.5;
     let left;
     let top;
     let bottom;
