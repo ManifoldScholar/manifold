@@ -1,9 +1,15 @@
 # A subject
 class Subject < ApplicationRecord
 
+  # Constants
+  TYPEAHEAD_ATTRIBUTES = [:name].freeze
+
   # Authority
   include Authority::Abilities
   include Filterable
+
+  # Search
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   # Associations
   has_many :text_subjects
@@ -15,12 +21,13 @@ class Subject < ApplicationRecord
     return all unless featured.present?
     joins(:projects).where("projects.featured = true")
   }
+  scope :unassociated, -> { where.not(id: ProjectSubject.select(:subject_id)) }
+  scope :created_more_than, ->(ago) { where(arel_table[:created_at].lteq(ago)) }
 
   # Validations
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   def to_s
     title
   end
-
 end

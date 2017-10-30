@@ -62,6 +62,7 @@ export default class ProjectPanelGeneral extends PureComponent {
             name="attributes[hashtag]"
             mask="hashtag"
           />
+          <Project.Form.Subjects project={project} {...this.props} />
           <Project.Form.AvatarBuilder project={project} {...this.props} />
           <Form.Save text="Save Project" />
         </FormContainer.Form>

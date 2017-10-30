@@ -46,13 +46,16 @@
         height: auto;
         border-radius: 100%;
       }
+
+      + .association-name {
+        padding-left: 15px;
+      }
     }
 
     .association-name {
       @include formInputPrimary;
       display: table-cell;
       width: 100%;
-      padding-left: 15px;
       margin: 0;
       font-size: 18px;
       line-height: 29px;

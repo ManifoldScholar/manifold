@@ -16,6 +16,7 @@ class ProjectSerializer < ProjectPartialSerializer
   has_many :events
   has_many :collections
   has_many :uncollected_resources
+  has_many :subjects
 
   def event_count
     object.events.count

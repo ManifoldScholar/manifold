@@ -10,9 +10,12 @@ module Clockwork
       ::QueueFetchProjectTweets.perform_later
     when "update_statistics"
       ::UpdateAnalyticsCache.perform_later
+    when "prune_unassociated_subjects"
+      ::Subjects::PruneUnassociatedJob.perform_later
     end
   end
 
   every(1.hour, "queue_fetch_project_tweets")
   every(4.hours, "update_statistics")
+  every(1.day, "prune_unassociated_subjects")
 end
