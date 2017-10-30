@@ -184,8 +184,7 @@ export default class FormMakers extends PureComponent {
             className="input-predictive"
             placeholder={this.props.placeholder}
             label={option => {
-              return `${option.attributes.firstName} ${option.attributes
-                .lastName}`;
+              return this.label(option, this.props);
             }}
             onNew={this.props.onNew ? this.onNew : null}
             onSelect={this.onSelect}

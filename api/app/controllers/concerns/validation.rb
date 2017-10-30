@@ -32,7 +32,7 @@ module Validation
                   :remove_avatar, attachment(:avatar), attachment(:hero),
                   attachment(:cover), :remove_hero, :draft, :remove_cover,
                   :publication_date, metadata(Project), :avatar_color]
-    relationships = [:collaborators, :creators, :contributors, :published_text]
+    relationships = [:collaborators, :creators, :contributors, :published_text, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
@@ -150,6 +150,15 @@ module Validation
     params.permit(param_config)
   end
 
+  def subject_params
+    params.require(:data)
+    attributes = [:name]
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+
   # rubocop:disable MethodLength
   def settings_params
     params.require(:data)
@@ -263,7 +272,7 @@ module Validation
   end
 
   def subject_filter_params
-    params.permit(filter: [:featured])[:filter]
+    params.permit(filter: [:featured, :keyword, :typeahead])[:filter]
   end
 
   def project_filter_params
