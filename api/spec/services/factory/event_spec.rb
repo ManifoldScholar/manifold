@@ -46,7 +46,10 @@ RSpec.describe Factory::Event do
   it "assigns the event_subtitle from the localized string" do
     project = FactoryGirl.create(:project)
     event = factory.create(Event::PROJECT_CREATED, subject: project)
-    match = I18n.t("services.factory.event.event_subtitle.project_created")
+    match = I18n.t(
+      "services.factory.event.event_subtitle.project_created",
+      global_installation_name: "Manifold"
+    )
     expect(event.event_subtitle).to eq match
   end
 

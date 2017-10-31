@@ -53,5 +53,5 @@ en:
           text_added: "Text Added"
           resource_added: "Resource Added"
         event_subtitle:
-          project_created: "A Manifold project is born!"
+          project_created: "A %{global_installation_name} project is born!"
 
