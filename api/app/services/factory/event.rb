@@ -1,6 +1,10 @@
 module Factory
   # Factory class for creating Event models
   class Event
+    def initialize
+      @settings = Settings.instance
+    end
+
     def create(event_type, subject_id: nil, subject_type: nil, subject: nil)
       subject = resolve_subject(subject_id, subject_type, subject)
       raise_no_subject unless subject
@@ -119,8 +123,8 @@ module Factory
 
     def t(path, type)
       key = "services.factory.event.#{path}.#{type.downcase}"
-      return I18n.t(key) if i18n_set?(key)
-      nil
+      return nil unless i18n_set?(key)
+      I18n.t(key, global_installation_name: @settings.general[:installation_name])
     end
 
     def i18n_set?(key)
