@@ -36,6 +36,11 @@ RSpec.describe Resource, type: :model do
     expect { resource.destroy }.to change { Annotation.count }.from(1).to(0)
   end
 
+  it "destroys associated creation event" do
+    resource = FactoryGirl.create(:resource)
+    expect { resource.destroy }.to change { Event.count }.from(1).to(0)
+  end
+
   context "thumbnail fetch" do
     it "queues the job when created" do
       resource = FactoryGirl.build(

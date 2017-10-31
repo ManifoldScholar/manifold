@@ -29,6 +29,10 @@ class Resource < ApplicationRecord
   # Associations
   belongs_to :project
   has_one :thumbnail_fetch_attempt, dependent: :destroy
+  has_one :resource_created_event, -> { where event_type: Event::RESOURCE_ADDED },
+          class_name: Event,
+          as: :subject,
+          dependent: :destroy
   has_many :collection_resources, dependent: :destroy
   has_many :collections, through: :collection_resources
   has_many :comments, as: :subject
