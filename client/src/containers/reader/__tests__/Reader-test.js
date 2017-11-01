@@ -35,7 +35,8 @@ describe("Reader Reader Container", () => {
     },
     notifications: {
       notifications: []
-    }
+    },
+    authentication: {}
   };
 
   const component = renderer.create(

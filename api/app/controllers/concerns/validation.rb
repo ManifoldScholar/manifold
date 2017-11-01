@@ -4,8 +4,21 @@ module Validation
 
   def user_params
     params.require(:data)
+    persistent_ui = {
+      persistent_ui: {
+        reader: {
+          colors: [:color_scheme],
+          typography: [
+            :font,
+            { font_size: [:current, :max, :min] },
+            { margins: [:current, :max, :min] }
+          ]
+        }
+      }
+    }
     attributes = [:first_name, :last_name, :nickname, :name, :email, :password,
-                  :password_confirmation, :remove_avatar, attachment(:avatar), :role]
+                  :password_confirmation, :remove_avatar, attachment(:avatar), :role,
+                  persistent_ui]
     relationships = [:makers]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

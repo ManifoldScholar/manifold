@@ -16,7 +16,7 @@ export class PageContainer extends Component {
 
   static mapStateToProps = state => {
     return {
-      loading: state.ui.loading.active,
+      loading: state.ui.transitory.loading.active,
       page: select(requests.gPage, state.entityStore)
     };
   };

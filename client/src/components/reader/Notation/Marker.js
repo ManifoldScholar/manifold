@@ -8,7 +8,7 @@ import lh from "helpers/linkHandler";
 class NotationMarker extends Component {
   static mapStateToProps = (state, ownProps) => {
     const newState = {
-      activeAnnotation: state.ui.reader.activeAnnotation
+      activeAnnotation: state.ui.transitory.reader.activeAnnotation
     };
     return Object.assign({}, newState, ownProps);
   };

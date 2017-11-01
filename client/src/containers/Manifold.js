@@ -76,8 +76,8 @@ class ManifoldContainer extends PureComponent {
   static mapStateToProps = state => {
     return {
       authentication: state.authentication,
-      visibility: state.ui.visibility,
-      loading: state.ui.loading.active,
+      visibility: state.ui.transitory.visibility,
+      loading: state.ui.transitory.loading.active,
       notifications: state.notifications,
       routing: state.routing,
       settings: select(requests.settings, state.entityStore)

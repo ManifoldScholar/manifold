@@ -1,16 +1,8 @@
 import { combineReducers } from "redux";
-import filters from "./ui/filters";
-import colors from "./ui/colors";
-import typography from "./ui/typography";
-import visibility from "./ui/visibility";
-import loading from "./ui/loading";
-import reader from "./ui/reader";
+import persistent from "./ui/persistent";
+import transitory from "./ui/transitory";
 
 export default combineReducers({
-  filters,
-  colors,
-  typography,
-  visibility,
-  loading,
-  reader
+  persistent,
+  transitory
 });
