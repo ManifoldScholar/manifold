@@ -18,6 +18,7 @@ import {
   uiTypographyActions,
   entityStoreActions
 } from "actions";
+import { setPersistentUI } from "../../actions/ui/persistent_ui";
 
 const {
   selectFont,
@@ -56,10 +57,7 @@ export class ReaderContainer extends Component {
   };
 
   static mapStateToProps = (state, ownProps) => {
-    const appearance = {
-      typography: state.ui.typography,
-      colors: state.ui.colors
-    };
+    const appearance = state.ui.persistent.reader;
     return {
       annotations: select(requests.rAnnotations, state.entityStore),
       section: grab(
@@ -71,8 +69,8 @@ export class ReaderContainer extends Component {
       resources: select(requests.rSectionResources, state.entityStore),
       collections: select(requests.rSectionCollections, state.entityStore),
       authentication: state.authentication,
-      visibility: state.ui.visibility,
-      loading: state.ui.loading.active,
+      visibility: state.ui.transitory.visibility,
+      loading: state.ui.transitory.loading.active,
       notifications: state.notifications,
       renderDevTools: state.developer.renderDevTools,
       appearance
@@ -103,11 +101,18 @@ export class ReaderContainer extends Component {
   componentWillMount() {
     this.readerActions = this.makeReaderActions(this.props.dispatch);
     this.commonActions = commonActions(this.props.dispatch);
+    this.setPersistentUI(this.props);
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.rText));
   }
+
+  setPersistentUI = props => {
+    const user = props.authentication.currentUser;
+    if (!user) return null;
+    this.readerActions.setPersistentUI(user.attributes.persistentUi.reader);
+  };
 
   shouldRedirect(props) {
     const matches = matchRoutes(
@@ -125,7 +130,8 @@ export class ReaderContainer extends Component {
       decrementFontSize: b(decrementFontSize, dispatch),
       incrementMargins: b(incrementMargins, dispatch),
       decrementMargins: b(decrementMargins, dispatch),
-      setColorScheme: b(el => setColorScheme(el), dispatch)
+      setColorScheme: b(el => setColorScheme(el), dispatch),
+      setPersistentUI: b(userUi => setPersistentUI(userUi), dispatch)
     };
   };
 

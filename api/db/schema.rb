@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925190220) do
+ActiveRecord::Schema.define(version: 20171103000221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -514,6 +514,7 @@ ActiveRecord::Schema.define(version: 20170925190220) do
     t.boolean  "is_cli_user",            default: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.jsonb    "raw_persistent_ui",      default: {},       null: false
   end
 
   add_foreign_key "identities", "users", on_delete: :cascade

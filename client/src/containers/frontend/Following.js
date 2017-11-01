@@ -22,7 +22,7 @@ export class FollowingContainer extends Component {
     const state = getState();
     if (state.authentication.authenticated) {
       const followedProjectsRequest = request(
-        favoriteProjectsAPI.index(state.ui.projectFilters),
+        favoriteProjectsAPI.index(state.ui.transitory.projectFilters),
         requests.feProjectsFollowed
       );
       const featuredRequest = request(
@@ -56,7 +56,7 @@ export class FollowingContainer extends Component {
 
   static mapStateToProps = state => {
     return {
-      projectFilters: state.ui.filters.project,
+      projectFilters: state.ui.transitory.filters.project,
       followedProjects: select(requests.feProjectsFollowed, state.entityStore),
       featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
       subjects: select(requests.feSubjects, state.entityStore),

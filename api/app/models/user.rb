@@ -58,6 +58,10 @@ class User < ApplicationRecord
   before_validation :ensure_nickname
 
   # Misc
+  composed_of :persistent_ui,
+              class_name: "PersistentUI",
+              mapping: [%i(raw_persistent_ui preferences)],
+              converter: ->(raw_persistent_ui) { PersistentUI.new(raw_persistent_ui) }
   has_secure_password
 
   # Scopes

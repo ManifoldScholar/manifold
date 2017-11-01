@@ -34,8 +34,13 @@ const decrementAttribute = (state, attribute) => {
   return Object.assign({}, state, { [attribute]: parameter });
 };
 
+const setPersistentUI = (state, action) => {
+  return Object.assign({}, initialState, action.payload.typography);
+};
+
 export default handleActions(
   {
+    SET_PERSISTENT_UI: setPersistentUI,
     SELECT_FONT: selectFont,
     INCREMENT_FONT_SIZE: state => {
       return incrementAttribute(state, "fontSize");

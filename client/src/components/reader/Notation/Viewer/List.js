@@ -20,8 +20,9 @@ class NotationViewerList extends PureComponent {
 
   static mapStateToProps = (state, ownProps) => {
     const newState = {
-      activeAnnotation: state.ui.reader.activeAnnotation || null,
-      activeAnnotationPassive: state.ui.reader.activeAnnotationPassive
+      activeAnnotation: state.ui.transitory.reader.activeAnnotation || null,
+      activeAnnotationPassive:
+        state.ui.transitory.reader.activeAnnotationPassive
     };
     return Object.assign({}, newState, ownProps);
   };
