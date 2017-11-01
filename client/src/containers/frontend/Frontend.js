@@ -43,8 +43,8 @@ export class FrontendContainer extends Component {
   static mapStateToProps = state => {
     return {
       authentication: state.authentication,
-      visibility: state.ui.visibility,
-      loading: state.ui.loading.active,
+      visibility: state.ui.transitory.visibility,
+      loading: state.ui.transitory.loading.active,
       notifications: state.notifications,
       pages: select(requests.gPages, state.entityStore),
       settings: select(requests.settings, state.entityStore)

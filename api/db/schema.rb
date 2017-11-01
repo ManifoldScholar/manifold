@@ -516,6 +516,7 @@ ActiveRecord::Schema.define(version: 20171115172119) do
     t.boolean  "is_cli_user",            default: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.jsonb    "raw_persistent_ui",      default: {},       null: false
   end
 
   add_foreign_key "identities", "users", on_delete: :cascade

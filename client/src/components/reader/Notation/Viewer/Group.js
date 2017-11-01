@@ -24,7 +24,7 @@ export default class NotationViewerGroup extends PureComponent {
   };
 
   static mapStateToProps = (state, ownProps) => {
-    const activeNotation = state.ui.reader.activeNotation;
+    const activeNotation = state.ui.transitory.reader.activeNotation;
     return Object.assign({}, { activeNotation }, ownProps);
   };
 

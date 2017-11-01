@@ -29,7 +29,7 @@ export class FeaturedContainer extends Component {
 
   static mapStateToProps = state => {
     return {
-      projectFilters: state.ui.filters.project,
+      projectFilters: state.ui.transitory.filters.project,
       featuredProjects: select(requests.feProjectsFeatured, state.entityStore),
       subjects: select(requests.feSubjectsFeatured, state.entityStore),
       authentication: state.authentication
