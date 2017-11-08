@@ -560,7 +560,7 @@ export default () => {
           name: "frontend",
           exact: true,
           component: Frontend.Home,
-          path: "/:pages(pages)?/:page?/:filters(filters)?/:filter?",
+          path: "/",
           helper: (params = {}) => {
             const query = queryString.stringify(params);
             if (!query) return "/";
