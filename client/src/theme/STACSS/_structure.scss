@@ -133,9 +133,9 @@
       @include respond($break60) {
         padding-top: 45px;
         padding-bottom: 45px;
-      };
+      }
 
-      @include                                                                                                                                                              respond($break75) {
+      @include respond($break75) {
         padding-top: 74px;
         padding-bottom: 70px;
       }
