@@ -12,7 +12,6 @@ import Page from "./Page";
 import ResourceDetail from "./ResourceDetail";
 import EventList from "./EventList";
 import CollectionResourceDetail from "./CollectionResourceDetail";
-import Test from "./Test";
 
 export {
   CollectionDetail,
@@ -28,6 +27,5 @@ export {
   Page,
   ResourceDetail,
   EventList,
-  CollectionResourceDetail,
-  Test
+  CollectionResourceDetail
 };
