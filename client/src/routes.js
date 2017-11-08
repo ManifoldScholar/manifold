@@ -476,14 +476,6 @@ export default () => {
       path: "/",
       routes: [
         {
-          name: "frontendTest",
-          exact: true,
-          component: Frontend.Test,
-          path: "/test",
-          helper: () => `/test`
-        },
-
-        {
           name: "frontendProject",
           exact: true,
           component: Frontend.ProjectDetail,
