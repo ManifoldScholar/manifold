@@ -113,7 +113,12 @@ class Detail extends Component {
             </div>
           </header>
           {/* NB: CSS limits the event list from showing more than 2 events on mobile */}
-          <Event.List events={events} limit={6} columns={3} />
+          <Event.List
+            project={this.props.project}
+            events={events}
+            limit={6}
+            columns={3}
+          />
         </div>
       </section>
     );
