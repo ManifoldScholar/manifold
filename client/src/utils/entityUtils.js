@@ -31,6 +31,14 @@ function hydrateEntity({ id, type }, entities, hydrationMap = {}) {
   return entity;
 }
 
+function idOrSlugToId(type, idOrSlug, entityStore) {
+  let id = idOrSlug;
+  if (entityStore.slugMap[type] && entityStore.slugMap[type][idOrSlug]) {
+    id = entityStore.slugMap[type][idOrSlug];
+  }
+  return id;
+}
+
 function hydrateRelationships(entity, entities, hydrationMap) {
   const relationships = {};
   if (has(entity, "relationships")) {
@@ -98,7 +106,8 @@ export function isLoaded(request, state) {
   return l === true;
 }
 
-export function isEntityLoaded(type, id, state) {
+export function isEntityLoaded(type, idOrSlug, state) {
+  const id = idOrSlugToId(type, idOrSlug, state.entityStore);
   const path = `entityStore.entities.${type}.${id}`;
   const entity = get(state, path);
   if (!isObject(entity)) return false;
@@ -115,7 +124,8 @@ export function select(requestMeta, entityStore) {
   return selectEntity(response, entityStore.entities);
 }
 
-export function grab(type, id, entityStore) {
+export function grab(type, idOrSlug, entityStore) {
+  const id = idOrSlugToId(type, idOrSlug, entityStore);
   const entityPath = `${type}.${id}`;
   const source = get(entityStore.entities, entityPath);
   if (!source) return null;

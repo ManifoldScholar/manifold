@@ -10,20 +10,28 @@ import isEqual from "lodash/isEqual";
 
 export const initialState = {
   responses: {},
-  entities: {}
+  entities: {},
+  slugMap: {}
 };
 
 function normalizeCollection(payload) {
   const entities = {};
+  const slugMap = {};
   const results = [];
   payload.data.forEach(entity => {
     if (!entities.hasOwnProperty(entity.type)) {
       entities[entity.type] = {};
     }
+    if (!slugMap.hasOwnProperty(entity.type)) {
+      slugMap[entity.type] = {};
+    }
     entities[entity.type][entity.id] = entity;
+    if (entity.attributes && entity.attributes.slug) {
+      slugMap[entity.type][entity.attributes.slug] = entity.id;
+    }
     results.push({ id: entity.id, type: entity.type });
   });
-  return { entities, results };
+  return { entities, results, slugMap };
 }
 
 function normalizeEntity(payload) {
@@ -31,9 +39,15 @@ function normalizeEntity(payload) {
   const entities = {
     [entity.type]: {}
   };
+  const slugMap = {
+    [entity.type]: {}
+  };
   const results = { id: entity.id, type: entity.type };
   entities[entity.type][entity.id] = entity;
-  return { entities, results };
+  if (entity.attributes && entity.attributes.slug) {
+    slugMap[entity.type][entity.attributes.slug] = entity.id;
+  }
+  return { entities, results, slugMap };
 }
 
 function normalizePayload(payload) {
@@ -54,6 +68,19 @@ function normalizePayload(payload) {
     }
   });
   return out;
+}
+
+function mergeSlugMap(stateSlugMap, payloadSlugMap) {
+  if (!payloadSlugMap) return stateSlugMap;
+  const mergedSlugMap = {};
+  Object.keys(payloadSlugMap).forEach(type => {
+    mergedSlugMap[type] = Object.assign(
+      {},
+      stateSlugMap[type],
+      payloadSlugMap[type]
+    );
+  });
+  return Object.assign({}, stateSlugMap, mergedSlugMap);
 }
 
 function mergeEntities(stateEntities, payloadEntities) {
@@ -152,7 +179,8 @@ function successResponse(state, action) {
         mergeEntities(state.entities, payload.entities)
       )
     : mergeEntities(state.entities, payload.entities);
-  return Object.assign({}, state, { responses, entities });
+  const slugMap = mergeSlugMap(state.slugMap, payload.slugMap);
+  return Object.assign({}, state, { responses, entities, slugMap });
 }
 
 function handleResponse(state, action) {
