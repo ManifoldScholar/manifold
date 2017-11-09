@@ -5,14 +5,18 @@ import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.ResourceCollection.Cover component", () => {
-  const resourceCollection = build.entity.collection("1");
-  resourceCollection.relationships.resources.push(build.entity.resource("2"));
-  resourceCollection.relationships.resources.push(build.entity.resource("3"));
+  const collection = build.entity.collection("1");
+  collection.relationships.resources.push(build.entity.resource("2"));
+  collection.relationships.resources.push(build.entity.resource("3"));
 
   it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
-        <Cover resourceCollection={resourceCollection} projectId="1" />
+        <Cover
+          collection={collection}
+          urlCreator={collection =>
+            `/project/slug-1/${collection.attributes.slug}`}
+        />
       )
     );
     let tree = component.toJSON();

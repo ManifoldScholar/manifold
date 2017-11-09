@@ -4,7 +4,7 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
 <div>
   <a
     className="back-link-primary full"
-    href="/project/1/collection/2"
+    href="/project/slug-1/collection/slug-2"
     onClick={[Function]}
   >
     <div
@@ -339,7 +339,7 @@ exports[`Frontend CollectionResourceDetail Container renders correctly 1`] = `
     >
       <a
         className="back-link-secondary"
-        href="/project/1/collection/2"
+        href="/project/slug-1/collection/slug-2"
         onClick={[Function]}
       >
         <i

@@ -5,14 +5,16 @@ import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend.ResourceCollectionList.Grid component", () => {
+  const project = build.entity.project("1");
   const collections = [
     build.entity.collection("1"),
     build.entity.collection("2")
   ];
+  project.relationships.collections = collections;
 
   it("renders correctly", () => {
     const component = renderer.create(
-      wrapWithRouter(<Grid resourceCollections={collections} projectId="1" />)
+      wrapWithRouter(<Grid project={project} />)
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

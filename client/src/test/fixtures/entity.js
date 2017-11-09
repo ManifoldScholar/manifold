@@ -120,6 +120,7 @@ const defaults = {
     type: "collections",
     attributes: {
       title: "Rowan",
+      slug: "",
       createdAt: "2017-04-24T23:25:50.161Z",
       resourceKinds: ["image", "video"],
       resourceTags: ["dog"],

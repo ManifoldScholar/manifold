@@ -222,7 +222,7 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
               <br />
               <a
                 className="button-secondary outlined"
-                href="/project/2/collection/1"
+                href="/project/slug-2/collection/slug-1"
                 onClick={[Function]}
               >
                 Visit Collection Page

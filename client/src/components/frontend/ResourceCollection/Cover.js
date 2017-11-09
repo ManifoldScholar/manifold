@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 
 export default class ResourceCollectionCover extends Component {
   static displayName = "ResourceCollection.Cover";
 
   static propTypes = {
-    resourceCollection: PropTypes.object,
-    projectId: PropTypes.string
+    collection: PropTypes.object.isRequired,
+    urlCreator: PropTypes.func.isRequired
   };
 
   render() {
     const collectionsBackground = "/static/images/resource-collection.jpg";
-    const collection = this.props.resourceCollection;
+    const collection = this.props.collection;
     const attr = collection.attributes;
     const bgImage = attr.thumbnailStyles.medium
       ? attr.thumbnailStyles.medium
@@ -21,11 +20,7 @@ export default class ResourceCollectionCover extends Component {
     return (
       <li>
         <Link
-          to={lh.link(
-            "frontendProjectCollection",
-            this.props.projectId,
-            collection.id
-          )}
+          to={this.props.urlCreator(collection)}
           style={{ backgroundImage: "url(" + bgImage + ")" }}
         >
           <div className="title-overlay">
