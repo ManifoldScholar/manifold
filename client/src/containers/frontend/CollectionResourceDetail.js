@@ -52,8 +52,10 @@ export class CollectionResourceDetailContainer extends PureComponent {
   }
 
   projectUrl() {
-    const pid = this.props.collection.attributes.projectId;
-    return lh.link("frontendProjectResources", pid);
+    return lh.link(
+      "frontendProjectResources",
+      this.props.collection.relationships.project.attributes.slug
+    );
   }
 
   collectionUrl() {

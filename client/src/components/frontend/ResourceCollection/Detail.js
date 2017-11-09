@@ -57,7 +57,7 @@ export default class ResourceCollectionDetail extends PureComponent {
           <ResourceList.Totals
             belongsTo="collection"
             count={count}
-            projectId={project.id}
+            project={project}
           />
           <ResourceList.Filters
             kinds={collection.attributes.resourceKinds}

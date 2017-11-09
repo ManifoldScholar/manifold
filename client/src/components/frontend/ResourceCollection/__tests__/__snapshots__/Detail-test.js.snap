@@ -234,7 +234,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
       data-id="total-container"
     >
       <a
-        href="/project/1/resources"
+        href="/project/slug-1/resources"
         onClick={[Function]}
       >
         View All Project Resources

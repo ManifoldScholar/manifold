@@ -4,7 +4,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
 <div>
   <a
     className="back-link-primary full"
-    href="/project/1/resources"
+    href="/project/slug-1/resources"
     onClick={[Function]}
   >
     <div
@@ -339,7 +339,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
     >
       <a
         className="back-link-secondary"
-        href="/project/1/resources"
+        href="/project/slug-1/resources"
         onClick={[Function]}
       >
         <i

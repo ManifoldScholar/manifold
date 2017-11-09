@@ -43,8 +43,10 @@ export class ResourceDetailContainer extends PureComponent {
   }
 
   projectUrl() {
-    const pid = this.props.project.id;
-    return lh.link("frontendProjectResources", pid);
+    return lh.link(
+      "frontendProjectResources",
+      this.props.project.attributes.slug
+    );
   }
 
   resourceUrl() {
