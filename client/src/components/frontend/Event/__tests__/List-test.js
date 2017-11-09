@@ -5,22 +5,27 @@ import List from "../List";
 import build from "test/fixtures/build";
 
 const events = [build.entity.event("1"), build.entity.event("2")];
+const project = build.entity.project("1");
 
 describe("Frontend.Event.List Component", () => {
   it("renders correctly", () => {
-    const component = renderer.create(<List events={events} />);
+    const component = renderer.create(
+      <List project={project} events={events} />
+    );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("has the event-list-primary class", () => {
     expect(
-      shallow(<List events={[]} />).find("ul").is(".event-list-primary")
+      shallow(<List project={project} events={[]} />)
+        .find("ul")
+        .is(".event-list-primary")
     ).toBe(true);
   });
 
   it("renders a ProjectEvent for each event", () => {
-    const wrapper = shallow(<List events={events} />);
+    const wrapper = shallow(<List project={project} events={events} />);
     expect(wrapper.find("Teaser").length).toBe(events.length);
   });
 });

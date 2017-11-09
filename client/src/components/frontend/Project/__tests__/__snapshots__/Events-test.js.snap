@@ -123,7 +123,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
               }
             >
               <a
-                href="/project/1/events/0"
+                href="/project/slug-1/events/0"
                 onClick={[Function]}
               >
                 <i
@@ -138,7 +138,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
               className="active ordinal"
             >
               <a
-                href="/project/1/events/1"
+                href="/project/slug-1/events/1"
                 onClick={[Function]}
               >
                 1
@@ -148,7 +148,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
               className="ordinal"
             >
               <a
-                href="/project/1/events/2"
+                href="/project/slug-1/events/2"
                 onClick={[Function]}
               >
                 2
@@ -159,7 +159,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
               style={Object {}}
             >
               <a
-                href="/project/1/events/2"
+                href="/project/slug-1/events/2"
                 onClick={[Function]}
               >
                 <span>

@@ -9,9 +9,9 @@ export default class EventList extends Component {
   static displayName = "Event.List";
 
   static propTypes = {
-    events: PropTypes.array,
-    project: PropTypes.object,
-    columns: PropTypes.number,
+    events: PropTypes.array.isRequired,
+    project: PropTypes.object.isRequired,
+    columns: PropTypes.number.isRequired,
     pagination: PropTypes.object
   };
 
@@ -26,7 +26,11 @@ export default class EventList extends Component {
   }
 
   paginationClickHandler(page) {
-    return lh.link("frontendProjectEventsPage", this.props.project.id, page);
+    return lh.link(
+      "frontendProjectEventsPage",
+      this.props.project.attributes.slug,
+      page
+    );
   }
 
   render() {
