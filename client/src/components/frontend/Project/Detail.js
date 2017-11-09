@@ -184,7 +184,7 @@ class Detail extends Component {
           <ResourceCollectionList.Grid project={project} />
           <ResourceList.Totals
             count={project.attributes.resourcesCount}
-            projectId={project.id}
+            project={project}
           />
         </div>
       </section>
@@ -214,7 +214,7 @@ class Detail extends Component {
           />
           <ResourceList.Totals
             count={project.attributes.uncollectedResourcesCount}
-            projectId={project.id}
+            project={project}
           />
         </div>
       </section>

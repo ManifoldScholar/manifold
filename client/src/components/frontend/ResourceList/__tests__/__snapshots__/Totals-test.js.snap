@@ -17,7 +17,7 @@ exports[`Frontend.ResourceList.Totals Component renders correctly 1`] = `
      total resources
   </div>
   <a
-    href="/project/1/resources"
+    href="/project/slug-1/resources"
     onClick={[Function]}
   >
     View All Project Resources

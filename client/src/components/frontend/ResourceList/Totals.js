@@ -8,7 +8,7 @@ export default class ResourceListTotals extends Component {
 
   static propTypes = {
     count: PropTypes.number,
-    projectId: PropTypes.string,
+    project: PropTypes.object.isRequired,
     belongsTo: PropTypes.string
   };
 
@@ -33,7 +33,12 @@ export default class ResourceListTotals extends Component {
     return (
       <div className="resource-totals" data-id="total-container">
         {this.renderResourceCount()}
-        <Link to={lh.link("frontendProjectResources", this.props.projectId)}>
+        <Link
+          to={lh.link(
+            "frontendProjectResources",
+            this.props.project.attributes.slug
+          )}
+        >
           View All Project Resources{" "}
           <i className="manicon manicon-arrow-right" />
         </Link>
