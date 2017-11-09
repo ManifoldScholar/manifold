@@ -7,7 +7,7 @@ exports[`Frontend.ProjectList.SummaryGrid component renders correctly 1`] = `
   <ul>
     <li>
       <a
-        href="/project/undefined"
+        href="/project/slug-1"
         onClick={[Function]}
       >
         <div
@@ -65,7 +65,7 @@ exports[`Frontend.ProjectList.SummaryGrid component renders correctly 1`] = `
     </li>
     <li>
       <a
-        href="/project/undefined"
+        href="/project/slug-2"
         onClick={[Function]}
       >
         <div

@@ -7,7 +7,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
   >
     <a
       className="back-link-primary full"
-      href="/project/1"
+      href="/project/slug-1"
       onClick={[Function]}
     >
       <div

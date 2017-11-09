@@ -131,7 +131,7 @@ class ProjectResourcesContainer extends Component {
       <div>
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
-            link={lh.link("frontendProject", project.id)}
+            link={lh.link("frontendProject", project.attributes.slug)}
             title={project.attributes.title}
           />
         </section>
@@ -147,7 +147,7 @@ class ProjectResourcesContainer extends Component {
           : null}
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
-            link={lh.link("frontendProject", project.id)}
+            link={lh.link("frontendProject", project.attributes.slug)}
             title={project.attributes.title}
           />
         </section>

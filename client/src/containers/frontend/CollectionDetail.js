@@ -161,14 +161,14 @@ export class CollectionDetailContainer extends PureComponent {
     if (!project || !collection) return null;
     const collectionUrl = lh.link(
       "frontendProjectCollection",
-      project.id,
-      collection.id
+      project.attributes.slug,
+      collection.attributes.slug
     );
 
     return (
       <div>
         <Utility.BackLinkPrimary
-          link={lh.link("frontendProject", project.id)}
+          link={lh.link("frontendProject", project.attributes.slug)}
           title={project.attributes.title}
         />
         {this.props.slideshowResources && this.props.resources
@@ -188,7 +188,7 @@ export class CollectionDetailContainer extends PureComponent {
           : null}
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
-            link={lh.link("frontendProject", project.id)}
+            link={lh.link("frontendProject", project.attributes.slug)}
             title={project.attributes.title}
           />
         </section>

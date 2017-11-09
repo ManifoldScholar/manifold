@@ -127,7 +127,7 @@ exports[`Reader.Header Component renders correctly 1`] = `
         <ul>
           <li>
             <a
-              href="/project/2"
+              href="/project/slug-2"
               onClick={[Function]}
             >
               <i

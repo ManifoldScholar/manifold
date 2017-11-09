@@ -1,4 +1,5 @@
 import uuid from "uuid";
+import has from "lodash/has";
 
 // Must be constant for comment snapshot 'days ago' rendering
 const commentDate = new Date();
@@ -101,6 +102,7 @@ const defaults = {
     type: "projects",
     attributes: {
       metadataProperties,
+      slug: "",
       title: "Rowan Test",
       subtitle: "World's Greatest Dog",
       heroStyles: {},
@@ -332,12 +334,14 @@ const defaults = {
 
 const buildEntity = (entityType, id = null, attributes, relationships) => {
   const entity = defaults[entityType];
-  return {
+  const out = {
     type: entity.type,
     id: id || uuid.v1(),
     attributes: Object.assign({}, entity.attributes, attributes),
     relationships: Object.assign({}, entity.relationships, relationships)
   };
+  if (has(out.attributes, "slug")) out.attributes.slug = `slug-${out.id}`;
+  return out;
 };
 
 const project = (id = null, attributes = {}, relationships = {}) => {

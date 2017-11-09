@@ -7,7 +7,7 @@ exports[`Reader.ReturnMenu.Body component renders correctly 1`] = `
   <ul>
     <li>
       <a
-        href="/project/1"
+        href="/some/back/url"
         onClick={[Function]}
       >
         <i

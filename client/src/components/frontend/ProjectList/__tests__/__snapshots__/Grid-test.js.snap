@@ -7,7 +7,7 @@ exports[`Frontend.ProjectList.Grid component renders correctly 1`] = `
   <ul>
     <li>
       <a
-        href="/project/undefined"
+        href="/project/slug-1"
         onClick={[Function]}
       >
         <div

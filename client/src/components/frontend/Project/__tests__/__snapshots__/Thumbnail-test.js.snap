@@ -2,7 +2,7 @@
 
 exports[`Frontend.Project.Thumbnail component renders correctly 1`] = `
 <a
-  href="/project/undefined"
+  href="/project/slug-1"
   onClick={[Function]}
 >
   <div
