@@ -16,7 +16,9 @@ describe("store/reducers/entityStore", () => {
       {
         id: "1",
         type: "texts",
-        attributes: {},
+        attributes: {
+          slug: "slug-1"
+        },
         meta: {
           partial: true
         }
@@ -24,7 +26,9 @@ describe("store/reducers/entityStore", () => {
       {
         id: "2",
         type: "texts",
-        attributes: {},
+        attributes: {
+          slug: "slug-2"
+        },
         meta: {
           partial: true
         }
@@ -69,6 +73,43 @@ describe("store/reducers/entityStore", () => {
     });
     expect(state.entities.texts["1"]).toEqual(apiCollectionResponse.data[0]);
     expect(state.entities.texts["2"]).toEqual(apiCollectionResponse.data[1]);
+  });
+
+  it("should maintain a map of slugs to IDs", () => {
+    const state = entityStoreReducer(undefined, {
+      meta: "test-response",
+      payload: apiCollectionResponse,
+      type: "API_RESPONSE"
+    });
+    expect(state.slugMap.texts["slug-1"]).toEqual("1");
+    expect(state.slugMap.texts["slug-2"]).toEqual("2");
+  });
+
+  it("should update the slug map if a slug changes", () => {
+    let state = entityStoreReducer(undefined, {
+      meta: "test-response",
+      payload: apiCollectionResponse,
+      type: "API_RESPONSE"
+    });
+    state = entityStoreReducer(state, {
+      meta: "test-response",
+      payload: {
+        data: [
+          {
+            id: "1",
+            type: "texts",
+            attributes: {
+              slug: "adjusted-slug-1"
+            },
+            meta: {
+              partial: true
+            }
+          }
+        ]
+      },
+      type: "API_RESPONSE"
+    });
+    expect(state.slugMap.texts["adjusted-slug-1"]).toEqual("1");
   });
 
   it("should not overwrite an existing entity with a partial entity", () => {
