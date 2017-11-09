@@ -36,8 +36,11 @@ export default class CollectionDetail extends PureComponent {
 
   buildRedirectUrl(collection) {
     if (!collection) return null;
-    const pId = collection.relationships.project.id;
-    return lh.link("frontendProjectCollection", pId, collection.id);
+    return lh.link(
+      "frontendProjectCollection",
+      collection.relationships.project.attributes.slug,
+      collection.attributes.slug
+    );
   }
 
   render() {

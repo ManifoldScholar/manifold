@@ -58,11 +58,10 @@ export class CollectionDetailWrapperContainer extends PureComponent {
 
   doPreview(event) {
     event.preventDefault();
-    const projectId = this.props.collection.relationships.project.id;
     const previewUrl = lh.link(
       "frontendProjectCollection",
-      projectId,
-      this.props.collection.id
+      this.props.collection.relationships.project.attributes.slug,
+      this.props.collection.attributes.slug
     );
     const win = window.open(previewUrl, "_blank");
     win.focus();

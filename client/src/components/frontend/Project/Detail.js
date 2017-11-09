@@ -176,10 +176,7 @@ class Detail extends Component {
               {"Resources"}
             </h4>
           </header>
-          <ResourceCollectionList.Grid
-            resourceCollections={project.relationships.collections}
-            projectId={project.id}
-          />
+          <ResourceCollectionList.Grid project={project} />
           <ResourceList.Totals
             count={project.attributes.resourcesCount}
             projectId={project.id}
