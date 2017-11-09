@@ -6,7 +6,7 @@ exports[`Frontend.Event.AllLink Component renders correctly 1`] = `
 >
   <a
     className="button-primary"
-    href="/project/1/events"
+    href="/project/slug-1/events"
     onClick={[Function]}
   >
     See all Activity

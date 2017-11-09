@@ -101,14 +101,14 @@ class Detail extends Component {
               <Event.AllLink
                 count={attr.eventCount}
                 threshold={2}
-                projectId={project.id}
+                project={this.props.project}
               />
             </div>
             <div className="show-60">
               <Event.AllLink
                 count={attr.eventCount}
                 threshold={6}
-                projectId={project.id}
+                project={this.props.project}
               />
             </div>
           </header>
