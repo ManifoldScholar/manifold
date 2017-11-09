@@ -94,10 +94,34 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
         </h4>
         <div
           className="hide-60"
-        />
+        >
+          <div
+            className="section-heading-utility-right"
+          >
+            <a
+              className="button-primary"
+              href="/project/slug-1/events"
+              onClick={[Function]}
+            >
+              See all Activity
+            </a>
+          </div>
+        </div>
         <div
           className="show-60"
-        />
+        >
+          <div
+            className="section-heading-utility-right"
+          >
+            <a
+              className="button-primary"
+              href="/project/slug-1/events"
+              onClick={[Function]}
+            >
+              See all Activity
+            </a>
+          </div>
+        </div>
       </header>
       <div>
         <ul

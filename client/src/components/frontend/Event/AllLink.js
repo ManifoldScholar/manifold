@@ -9,29 +9,21 @@ export default class EventAllLink extends Component {
   static propTypes = {
     count: PropTypes.number,
     threshold: PropTypes.number,
-    projectId: PropTypes.string
+    project: PropTypes.object.isRequired
   };
 
-  getAllLink() {
-    let allLink = null;
-
-    if (this.props.count > this.props.threshold) {
-      allLink = (
-        <div className="section-heading-utility-right">
-          <Link
-            to={lh.link("frontendProjectEvents", this.props.projectId)}
-            className="button-primary"
-          >
-            See all Activity
-          </Link>
-        </div>
-      );
-    }
-
-    return allLink;
-  }
-
   render() {
-    return this.getAllLink();
+    const { project } = this.props;
+    if (this.props.count <= this.props.threshold) return null;
+    return (
+      <div className="section-heading-utility-right">
+        <Link
+          to={lh.link("frontendProjectEvents", project.attributes.slug)}
+          className="button-primary"
+        >
+          See all Activity
+        </Link>
+      </div>
+    );
   }
 }
