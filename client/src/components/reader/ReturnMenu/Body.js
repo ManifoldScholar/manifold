@@ -8,7 +8,7 @@ export default class ReturnMenuBody extends PureComponent {
   static displayName = "ReturnMenuBody";
 
   static propTypes = {
-    projectId: PropTypes.string,
+    returnUrl: PropTypes.string.isRequired,
     projectTitle: PropTypes.string.isRequired,
     toggleSignInUpOverlay: PropTypes.func.isRequired,
     moreLink: PropTypes.string
@@ -19,7 +19,7 @@ export default class ReturnMenuBody extends PureComponent {
       <nav className="reader-return-menu">
         <ul>
           <li>
-            <Link to={lh.link("frontendProject", this.props.projectId)}>
+            <Link to={this.props.returnUrl}>
               <i className="manicon manicon-arrow-round-left" />
               {"Project Home"}
               <span>

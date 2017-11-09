@@ -27,7 +27,7 @@ export default class ProjectEvents extends Component {
         />
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
-            link={lh.link("frontendProject", project.id)}
+            link={lh.link("frontendProject", project.attributes.slug)}
             title={project.attributes.title}
           />
         </section>

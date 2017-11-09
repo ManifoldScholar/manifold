@@ -7,7 +7,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
   >
     <a
       className="back-link-primary full"
-      href="/project/1"
+      href="/project/slug-1"
       onClick={[Function]}
     >
       <div
@@ -361,7 +361,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
     >
       <a
         className="back-link-secondary"
-        href="/project/1"
+        href="/project/slug-1"
         onClick={[Function]}
       >
         <i

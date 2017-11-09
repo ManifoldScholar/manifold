@@ -104,7 +104,7 @@ export class ProjectDetailWrapperContainer extends PureComponent {
   doPreview(event) {
     event.preventDefault();
     const win = window.open(
-      lh.link("frontendProject", this.props.project.id),
+      lh.link("frontendProject", this.props.project.attributes.slug),
       "_blank"
     );
     win.focus();

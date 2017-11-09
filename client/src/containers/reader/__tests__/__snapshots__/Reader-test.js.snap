@@ -146,7 +146,7 @@ exports[`Reader Reader Container renders correctly 1`] = `
             <ul>
               <li>
                 <a
-                  href="/project/3"
+                  href="/project/slug-3"
                   onClick={[Function]}
                 >
                   <i

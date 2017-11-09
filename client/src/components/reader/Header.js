@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import lh from "helpers/linkHandler";
 import {
   AppearanceMenuButton,
   AppearanceMenuBody,
@@ -183,7 +184,10 @@ export default class Header extends Component {
             id="readerReturn"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={ReturnMenu.Body}
-            // Props required by body component
+            returnUrl={lh.link(
+              "frontendProject",
+              this.props.text.relationships.project.attributes.slug
+            )}
             projectId={this.props.text.relationships.project.id}
             projectTitle={
               this.props.text.relationships.project.attributes.title

@@ -14,7 +14,7 @@ describe("Reader.ReturnMenu.Body component", () => {
   const root = wrapWithRouter(
     <Provider store={store}>
       <Body
-        projectId={project.id}
+        returnUrl="/some/back/url"
         projectTitle={project.attributes.title}
         toggleSignInUpOverlay={toggleMock}
       />
