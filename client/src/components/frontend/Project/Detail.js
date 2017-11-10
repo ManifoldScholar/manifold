@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
-import { HeadContent } from "components/global";
+import { HeadContent, LoadingBlock } from "components/global";
 
 import {
   Event,
@@ -218,8 +218,7 @@ class Detail extends Component {
   }
 
   render() {
-    if (!this.props.project) return null;
-
+    if (!this.props.project) return <LoadingBlock />;
     return (
       <div>
         <HeadContent
