@@ -62,12 +62,11 @@ export default class CollectionDetail extends PureComponent {
           </div>
         </div>
         <ResourceList.Slideshow
-          collectionId={collection.id}
+          collection={collection}
           collectionResources={this.props.slideshowResources}
           dispatch={this.props.dispatch}
           pagination={this.props.slideshowPagination}
           slideOptions={{ enableZoom: false }}
-          hideDetailUrl
         />
         <div className="container">
           <nav className="button-nav">

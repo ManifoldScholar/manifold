@@ -16,7 +16,7 @@ export default class ResourceListSlideshow extends PureComponent {
     collectionResources: PropTypes.array,
     pagination: PropTypes.object,
     dispatch: PropTypes.func,
-    collectionId: PropTypes.string,
+    collection: PropTypes.object.isRequired,
     hideDetailUrl: PropTypes.bool,
     hideDownload: PropTypes.bool,
     slideOptions: PropTypes.object
@@ -92,7 +92,7 @@ export default class ResourceListSlideshow extends PureComponent {
     const page = this.positionToPage(position, this.props.pagination.perPage);
     if (!this.isPageLoaded(page)) {
       const fetch = collectionsAPI.collectionResources(
-        this.props.collectionId,
+        this.props.collection.id,
         {},
         { number: page, size: this.props.pagination.perPage }
       );
@@ -228,7 +228,7 @@ export default class ResourceListSlideshow extends PureComponent {
             {this.isLoaded(position)
               ? <ResourceList.Slide.Caption
                   resource={collectionResource}
-                  collectionId={this.props.collectionId}
+                  collection={this.props.collection}
                   hideDetailUrl={this.props.hideDetailUrl}
                   hideDownload={this.props.hideDownload}
                 />

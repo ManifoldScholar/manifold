@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import classNames from "classnames";
 import FormattedDate from "components/global/FormattedDate";
 import { Resource, Resourceish } from "components/frontend";
-import { find } from "lodash";
 import lh from "helpers/linkHandler";
 
 class ResourceCard extends Component {
@@ -13,7 +12,8 @@ class ResourceCard extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
     resource: PropTypes.object,
-    context: PropTypes.object
+    project: PropTypes.object.isRequired,
+    collection: PropTypes.object
   };
 
   constructor() {
@@ -47,35 +47,20 @@ class ResourceCard extends Component {
     return text;
   }
 
-  getCollectionResourceId(resource) {
-    if (!resource) return null;
-    const collectionResources = resource.relationships.collectionResources;
-    const out = find(collectionResources, obj => {
-      return obj.attributes.collectionId === this.props.context.id;
-    });
-    if (!out) return null;
-    return out.id;
-  }
-
   detailUrl() {
-    const context = this.props.context;
-    if (context.type === "collections") {
-      const pid = context.attributes.projectId;
-      const cid = context.id;
-      const crid = this.getCollectionResourceId(this.props.resource);
+    if (this.props.collection) {
       return lh.link(
-        "frontendProjectCollectionCollectionResource",
-        pid,
-        cid,
-        crid
+        "frontendProjectCollectionResource",
+        this.props.project.attributes.slug,
+        this.props.collection.attributes.slug,
+        this.props.resource.attributes.slug
       );
     }
-    if (context.type === "projects") {
-      const resource = this.resource();
-      const pid = context.id;
-      const rid = resource.id;
-      return lh.link("frontendProjectResource", pid, rid);
-    }
+    return lh.link(
+      "frontendProjectResource",
+      this.props.project.attributes.slug,
+      this.props.resource.attributes.slug
+    );
   }
 
   previewable(resource) {
@@ -100,7 +85,7 @@ class ResourceCard extends Component {
 
   handlePreviewClick(event) {
     event.preventDefault();
-    const resource = this.resource();
+    const resource = this.props.resource;
     if (this.previewable(resource)) return;
     if (this.downloadable(resource)) return this.doDownload(resource);
     if (this.linkable(resource)) return this.openLink(resource);
@@ -122,13 +107,6 @@ class ResourceCard extends Component {
 
   handleInfoClick() {
     this.props.history.push(this.detailUrl());
-  }
-
-  resource() {
-    if (this.props.resource.type === "collectionResources") {
-      return this.props.resource.relationships.resource;
-    }
-    return this.props.resource;
   }
 
   renderDownloadablePreview(type) {
@@ -172,7 +150,7 @@ class ResourceCard extends Component {
   }
 
   render() {
-    const resource = this.resource();
+    const resource = this.props.resource;
     if (!resource) return null;
     const attr = resource.attributes;
 

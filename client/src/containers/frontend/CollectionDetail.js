@@ -164,7 +164,6 @@ export class CollectionDetailContainer extends PureComponent {
       project.attributes.slug,
       collection.attributes.slug
     );
-
     return (
       <div>
         <Utility.BackLinkPrimary

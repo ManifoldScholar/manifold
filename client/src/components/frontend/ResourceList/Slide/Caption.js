@@ -12,7 +12,7 @@ export default class ResourceListSlideCaption extends Component {
 
   static propTypes = {
     resource: PropTypes.object,
-    collectionId: PropTypes.string,
+    collection: PropTypes.object,
     hideDetailUrl: PropTypes.bool,
     hideDownload: PropTypes.bool
   };
@@ -112,24 +112,20 @@ export default class ResourceListSlideCaption extends Component {
   }
 
   detailUrl() {
-    const { resource } = this.props;
-    const pid = resource.attributes.projectId;
-    const cid = this.props.collectionId;
-    if (cid) {
-      const crs = get(resource, "relationships.collectionResources");
-      const cr = crs.find(cmpr => cmpr.attributes.collectionId === cid);
-      if (cr) {
-        const crid = cr.id;
-        return lh.link(
-          "frontendProjectCollectionCollectionResource",
-          pid,
-          cid,
-          crid
-        );
-      }
+    const { resource, collection } = this.props;
+    if (collection) {
+      return lh.link(
+        "frontendProjectCollectionResource",
+        resource.attributes.projectSlug,
+        collection.attributes.slug,
+        resource.attributes.slug
+      );
     }
-    const rid = resource.id;
-    return lh.link("frontendProjectResource", pid, rid);
+    return lh.link(
+      "frontendProjectResource",
+      resource.attributes.projectSlug,
+      resource.attributes.slug
+    );
   }
 
   render() {

@@ -33,8 +33,11 @@ export default class ResourceDetail extends PureComponent {
 
   buildRedirectUrl(resource) {
     if (!resource) return null;
-    const pId = resource.relationships.project.id;
-    return lh.link("frontendProjectResource", pId, resource.id);
+    return lh.link(
+      "frontendProjectResource",
+      resource.attributes.projectSlug,
+      resource.attributes.slug
+    );
   }
 
   render() {

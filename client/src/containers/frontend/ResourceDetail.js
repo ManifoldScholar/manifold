@@ -4,9 +4,10 @@ import connectAndFetch from "utils/connectAndFetch";
 import { Resource, Utility } from "components/frontend";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
-import { projectsAPI, resourcesAPI, requests } from "api";
+import { projectsAPI, resourcesAPI, collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { HeadContent } from "components/global";
+import some from 'lodash/some';
 
 const { request, flush } = entityStoreActions;
 
@@ -18,11 +19,19 @@ export class ResourceDetailContainer extends PureComponent {
     const resourceAction = request(resourceFetch, requests.feResource);
     const { promise: one } = dispatch(projectAction);
     const { promise: two } = dispatch(resourceAction);
-    return Promise.all([one, two]);
+    const promises = [one, two];
+    if (match.params.collectionId) {
+      const collectionFetch = collectionsAPI.show(match.params.collectionId);
+      const collectionAction = request(collectionFetch, requests.feCollection);
+      const { promise: three } = dispatch(collectionAction);
+      promises.push(three);
+    }
+    return Promise.all(promises);
   };
 
   static mapStateToProps = state => {
     const props = {
+      collection: select(requests.feCollection, state.entityStore),
       project: select(requests.feProject, state.entityStore),
       resource: select(requests.feResource, state.entityStore),
       visibility: state.ui.visibility
@@ -32,14 +41,43 @@ export class ResourceDetailContainer extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object,
+    collection: PropTypes.object,
     resource: PropTypes.object,
     dispatch: PropTypes.func,
     visibility: PropTypes.object
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.resource && nextProps.collection) {
+      if (
+        !this.collectionIncludesResource(
+          nextProps.resource,
+          nextProps.collection
+        )
+      ) {
+        // TODO: Render the NotFound component.
+        // Let's upgrade to React 16 for error boundaries first.
+        // throw new Error("Page not found");
+      }
+    }
+  }
   componentWillUnmount() {
     this.props.dispatch(flush(requests.feProject));
     this.props.dispatch(flush(requests.feResource));
+  }
+
+  collectionIncludesResource(collection, resource) {
+    return some(collection.relationships.resources, collectionResource => {
+      return collectionResource.id === resource.id;
+    });
+  }
+
+  collectionUrl() {
+    return lh.link(
+      "frontendProjectCollection",
+      this.props.project.attributes.slug,
+      this.props.collection.attributes.slug
+    );
   }
 
   projectUrl() {
@@ -50,8 +88,11 @@ export class ResourceDetailContainer extends PureComponent {
   }
 
   resourceUrl() {
-    const pid = this.props.project.id;
-    return lh.link("frontendProjectResource", pid);
+    return lh.link(
+      "frontendProjectResource",
+      this.props.project.attributes.slug,
+      this.props.resource.attributes.slug
+    );
   }
 
   render() {
@@ -70,16 +111,20 @@ export class ResourceDetailContainer extends PureComponent {
             resource.attributes.variantThumbnailStyles.mediumSquare
           }
         />
-        {this.props.project
+        {this.props.collection
           ? <Utility.BackLinkPrimary
+              backText="Back to Collection"
+              link={this.collectionUrl()}
+              title={this.props.collection.attributes.title}
+            />
+          : <Utility.BackLinkPrimary
               backText="Back to Project Resources"
               link={this.projectUrl()}
               title={this.props.project.attributes.title}
-            />
-          : null}
+            />}
         {this.props.resource
           ? <Resource.Detail
-              projectId={projectId}
+              projectId={project.id}
               projectUrl={this.projectUrl()}
               resourceUrl={this.resourceUrl()}
               resource={this.props.resource}

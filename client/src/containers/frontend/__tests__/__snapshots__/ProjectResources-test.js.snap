@@ -240,7 +240,7 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
                   </span>
                   <div
                     className="arrow-link"
-                    to="/project/1/resource/2"
+                    to="/project/slug-1/resource/slug-2"
                   >
                     <i
                       className="manicon manicon-arrow-right"

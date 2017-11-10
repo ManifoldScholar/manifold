@@ -202,7 +202,7 @@ class Detail extends Component {
           </header>
           <ResourceList.Thumbnails
             resources={project.relationships.uncollectedResources}
-            projectId={project.id}
+            project={project}
           />
           <ResourceList.Totals
             count={project.attributes.uncollectedResourcesCount}

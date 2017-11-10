@@ -148,6 +148,13 @@ exports[`Reader Notation Collection Detail Container renders correctly 1`] = `
                           className="manicon manicon-arrow-down"
                         />
                       </a>
+                      <a
+                        className="detail-link"
+                        href="/project/delegated-project-slug/collection/slug-1/resource/slug-3"
+                        onClick={[Function]}
+                      >
+                        View Resource
+                      </a>
                     </div>
                   </div>
                 </div>

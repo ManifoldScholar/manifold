@@ -10,7 +10,7 @@ describe("Frontend.Resource.Card component", () => {
 
   it("renders correctly", () => {
     const component = renderer.create(
-      wrapWithRouter(<Card resource={resource} context={project} />)
+      wrapWithRouter(<Card resource={resource} project={project} />)
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

@@ -39,10 +39,9 @@ export default class ProjectResources extends Component {
             initialFilterState={this.props.initialFilterState}
           />
           <ResourceList.Cards
-            context={project}
+            project={project}
             pagination={this.props.pagination}
             resources={this.props.resources}
-            projectId={project.id}
             paginationClickHandler={this.props.paginationClickHandler}
           />
         </div>
