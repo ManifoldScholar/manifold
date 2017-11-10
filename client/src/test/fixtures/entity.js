@@ -147,6 +147,8 @@ const defaults = {
     type: "resources",
     attributes: {
       title: "Image",
+      slug: "",
+      projectSlug: "delegated-project-slug",
       titleFormatted: "Image",
       kind: "image",
       attachmentStyles: {

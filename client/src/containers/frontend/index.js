@@ -11,7 +11,6 @@ import ProjectResources from "./ProjectResources";
 import Page from "./Page";
 import ResourceDetail from "./ResourceDetail";
 import EventList from "./EventList";
-import CollectionResourceDetail from "./CollectionResourceDetail";
 
 export {
   CollectionDetail,
@@ -26,6 +25,5 @@ export {
   ProjectResources,
   Page,
   ResourceDetail,
-  EventList,
-  CollectionResourceDetail
+  EventList
 };

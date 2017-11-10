@@ -5,11 +5,12 @@ import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.ResourceList.Thumbnails Component", () => {
+  const project = build.entity.project("3");
   const resources = [build.entity.resource("1"), build.entity.resource("2")];
 
   it("renders correctly", () => {
     const component = renderer.create(
-      wrapWithRouter(<Thumbnails resources={resources} projectId="1" />)
+      wrapWithRouter(<Thumbnails resources={resources} project={project} />)
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

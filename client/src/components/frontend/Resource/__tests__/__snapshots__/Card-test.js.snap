@@ -95,7 +95,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
       </span>
       <div
         className="arrow-link"
-        to="/project/2/resource/1"
+        to="/project/slug-2/resource/slug-1"
       >
         <i
           className="manicon manicon-arrow-right"

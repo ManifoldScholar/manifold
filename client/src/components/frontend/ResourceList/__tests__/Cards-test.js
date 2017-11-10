@@ -24,7 +24,7 @@ describe("Frontend.ResourceList.Cards Component", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Cards
-          context={project}
+          project={project}
           resources={resources}
           pagination={pagination}
           paginationClickHandler={() => pageChangeMock}

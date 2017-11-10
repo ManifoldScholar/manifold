@@ -58,11 +58,11 @@ export class ResourceDetailWrapperContainer extends PureComponent {
 
   doPreview(event) {
     event.preventDefault();
-    const projectId = this.props.resource.relationships.project.id;
+    const project = this.props.resource.relationships.project;
     const previewUrl = lh.link(
       "frontendProjectResource",
-      projectId,
-      this.props.resource.id
+      project.attributes.slug,
+      this.props.resource.attributes.slug
     );
     const win = window.open(previewUrl, "_blank");
     win.focus();

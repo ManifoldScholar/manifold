@@ -538,13 +538,11 @@ export default () => {
             `/project/${p}/resources${pg ? `/${pg}` : ""}`
         },
         {
-          name: "frontendProjectCollectionCollectionResource",
+          name: "frontendProjectCollectionResource",
           exact: true,
-          component: Frontend.CollectionResourceDetail,
-          path:
-            "/project/:id/collection/:collectionId/collection_resource/:collectionResourceId",
-          helper: (p, c, cr) =>
-            `/project/${p}/collection/${c}/collection_resource/${cr}`
+          component: Frontend.ResourceDetail,
+          path: "/project/:id/collection/:collectionId/resource/:resourceId",
+          helper: (p, c, r) => `/project/${p}/collection/${c}/resource/${r}`
         },
         {
           name: "frontendProjectResource",

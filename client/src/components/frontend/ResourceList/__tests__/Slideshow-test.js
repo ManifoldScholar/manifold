@@ -5,6 +5,7 @@ import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.ResourceList.Slideshow Component", () => {
+  const collection = build.entity.collection("3");
   const collectionResources = [
     build.entity.resource("1"),
     build.entity.resource("2")
@@ -24,6 +25,7 @@ describe("Frontend.ResourceList.Slideshow Component", () => {
       wrapWithRouter(
         <Slideshow
           collectionResources={collectionResources}
+          collection={collection}
           pagination={pagination}
           count={5}
           dispatch={dispatchMock}
@@ -40,6 +42,7 @@ describe("Frontend.ResourceList.Slideshow Component", () => {
       wrapWithRouter(
         <Slideshow
           collectionResources={[]}
+          collection={collection}
           pagination={pagination}
           count={5}
           dispatch={dispatchMock}

@@ -47,7 +47,7 @@ export default class ResourceCollectionDetail extends PureComponent {
           </div>
         </div>
         <ResourceList.Slideshow
-          collectionId={this.props.collection.id}
+          collection={this.props.collection}
           collectionResources={this.props.slideshowResources}
           count={project.attributes.resourcesCount}
           pagination={this.props.slideshowPagination}
@@ -66,7 +66,8 @@ export default class ResourceCollectionDetail extends PureComponent {
             filterChangeHandler={this.props.filterChange}
           />
           <ResourceList.Cards
-            context={this.props.collection}
+            collection={this.props.collection}
+            project={this.props.project}
             resources={this.props.collectionResources}
             pagination={this.props.collectionPagination}
             paginationClickHandler={this.props.collectionPaginationHandler}

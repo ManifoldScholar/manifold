@@ -8,7 +8,7 @@ export default class ResourceListThumbnails extends Component {
   static displayName = "ResourceList.Thumbnails";
 
   static propTypes = {
-    projectId: PropTypes.string,
+    project: PropTypes.object.isRequired,
     resources: PropTypes.array
   };
 
@@ -23,14 +23,13 @@ export default class ResourceListThumbnails extends Component {
                 <Link
                   to={lh.link(
                     "frontendProjectResource",
-                    this.props.projectId,
-                    resource.id
+                    this.props.project.attributes.slug,
+                    resource.attributes.slug
                   )}
                   className="resource-link"
                 >
                   <Resourceish.Thumbnail
                     key={resource.id}
-                    projectId={this.props.projectId}
                     resourceish={resource}
                     showTitle
                   />
