@@ -27,7 +27,7 @@ export default class ResourceListSlideFigure extends Component {
             </span>
             <span className="resource-date">
               <FormattedDate
-                prefix="Uploaded"
+                prefix="Added"
                 format="MMMM, YYYY"
                 date={attr.createdAt}
               />
