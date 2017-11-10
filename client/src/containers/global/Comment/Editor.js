@@ -29,7 +29,12 @@ export class CommentEditor extends PureComponent {
     cancel: PropTypes.func.isRequired,
     onSuccess: PropTypes.func,
     subject: PropTypes.object.isRequired,
-    parentId: PropTypes.string
+    parentId: PropTypes.string,
+    focus: PropTypes.bool
+  };
+
+  static defaultProps = {
+    focus: true
   };
 
   constructor(props) {
@@ -45,7 +50,9 @@ export class CommentEditor extends PureComponent {
 
   componentDidMount() {
     if (!this.ci) return null;
-    this.ci.focus();
+    if (this.props.focus) {
+      this.ci.focus();
+    }
   }
 
   initialState() {
