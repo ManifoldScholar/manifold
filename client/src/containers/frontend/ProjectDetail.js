@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Project } from "components/frontend";
 import { entityStoreActions } from "actions";
-import { select } from "utils/entityUtils";
+import { grab } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import { Redirect } from "react-router-dom";
 import get from "lodash/get";
@@ -21,9 +21,9 @@ export class ProjectDetailContainer extends Component {
     return Promise.all([one]);
   };
 
-  static mapStateToProps = state => {
+  static mapStateToProps = (state, ownProps) => {
     return {
-      project: select(requests.feProject, state.entityStore),
+      project: grab("projects", ownProps.match.params.id, state.entityStore),
       projectResponse: get(state.entityStore.responses, requests.feProject)
     };
   };
