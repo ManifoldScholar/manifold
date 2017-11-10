@@ -55,18 +55,6 @@ export class FrontendContainer extends Component {
     this.commonActions = commonActions(this.props.dispatch);
   }
 
-  componentDidMount() {
-    this.setMinHeight();
-  }
-
-  setMinHeight() {
-    if (!this.mainContainer) return;
-    const mainHeight = this.mainContainer.offsetHeight;
-    const offsetHeight =
-      this.mainContainer.parentNode.offsetHeight - mainHeight;
-    this.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
-  }
-
   render() {
     const fatalError = this.props.notifications.fatalError;
     return (

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Utility, Project } from "components/frontend";
+import { LoadingBlock } from "components/global";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
@@ -122,7 +123,7 @@ class ProjectResourcesContainer extends Component {
 
   render() {
     const project = this.props.project;
-    if (!project) return null;
+    if (!project) return <LoadingBlock />;
 
     const filter = this.state.filter;
     const initialFilter = filter || null;

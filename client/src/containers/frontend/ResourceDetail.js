@@ -6,8 +6,8 @@ import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, resourcesAPI, collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { HeadContent } from "components/global";
-import some from 'lodash/some';
+import { HeadContent, LoadingBlock } from "components/global";
+import some from "lodash/some";
 
 const { request, flush } = entityStoreActions;
 
@@ -96,9 +96,10 @@ export class ResourceDetailContainer extends PureComponent {
   }
 
   render() {
-    const projectId = this.props.project ? this.props.project.id : null;
-    if (!projectId) return null;
     const { project, resource } = this.props;
+    if (!project || !resource) {
+      return <LoadingBlock />;
+    }
 
     return (
       <div>
@@ -130,7 +131,7 @@ export class ResourceDetailContainer extends PureComponent {
               resource={this.props.resource}
               dispatch={this.props.dispatch}
             />
-          : null}
+          : <LoadingBlock />}
         {this.props.project
           ? <section className="bg-neutral05">
               <Utility.BackLinkSecondary
