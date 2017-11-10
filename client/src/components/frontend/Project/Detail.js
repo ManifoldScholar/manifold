@@ -34,14 +34,6 @@ class Detail extends Component {
     window.scrollTo(0, 0);
   }
 
-  onlyShowingMeta() {
-    const texts = this.shouldShowTexts();
-    const resources = this.shouldShowResources();
-    const activity = this.shouldShowActivity();
-    const result = !texts && !resources && !activity;
-    return result;
-  }
-
   shouldShowResources() {
     const project = this.props.project;
     const collectionCount = project.attributes.collectionsCount;
