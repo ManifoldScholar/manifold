@@ -34,6 +34,8 @@ class Resource < ApplicationRecord
   has_many :comments, as: :subject
   has_many :annotations, dependent: :destroy
 
+  delegate :slug, to: :project, prefix: true
+
   manifold_has_attached_file :attachment, :resource
   manifold_has_attached_file :high_res, :image, no_styles: true
   manifold_has_attached_file :variant_thumbnail, :image
