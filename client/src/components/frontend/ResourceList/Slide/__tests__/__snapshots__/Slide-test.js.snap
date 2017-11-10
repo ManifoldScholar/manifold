@@ -25,7 +25,7 @@ exports[`Frontend.ResourceList.Slide.Slide component renders correctly 1`] = `
         className="resource-date"
       >
         <span>
-          Uploaded April, 2017
+          Added April, 2017
         </span>
       </span>
     </div>
