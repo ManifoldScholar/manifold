@@ -23,14 +23,14 @@ export default class AppearanceMenuBody extends Component {
     this.props.selectFont(font);
   };
 
-  incrementSizeHandler = (event, enabeled) => {
+  incrementSizeHandler = (event, enabled) => {
     event.stopPropagation();
-    if (enabeled) this.props.incrementFontSize();
+    if (enabled) this.props.incrementFontSize();
   };
 
-  decrementSizeHandler = (event, enabeled) => {
+  decrementSizeHandler = (event, enabled) => {
     event.stopPropagation();
-    if (enabeled) this.props.decrementFontSize();
+    if (enabled) this.props.decrementFontSize();
   };
 
   incrementMarginsHandler = event => {

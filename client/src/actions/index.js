@@ -7,6 +7,7 @@ export * as uiFilterActions from "./ui/filter";
 export * as uiTypographyActions from "./ui/typography";
 export * as uiVisibilityActions from "./ui/visibility";
 export * as uiReaderActions from "./ui/reader";
+export * as persistentUI from "./ui/persistent_ui";
 export * as entityEditorActions from "./entityEditor";
 export * as websocketActions from "./websocket";
 export * as oauthActions from "./oauth";

@@ -25,7 +25,7 @@ export class ResourceDetailContainer extends PureComponent {
     const props = {
       project: select(requests.feProject, state.entityStore),
       resource: select(requests.feResource, state.entityStore),
-      visibility: state.ui.visibility
+      visibility: state.ui.transitory.visibility
     };
     return props;
   };
