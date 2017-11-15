@@ -36,6 +36,14 @@ export default class LayoutHeader extends Component {
     return false;
   }
 
+  isSubjects(match, location) {
+    if (!match) {
+      return false;
+    }
+    const { pathname } = location;
+    if (startsWith(pathname, "/backend/subjects")) return true;
+  }
+
   render() {
     return (
       <header className={"header-app dark"}>

@@ -158,7 +158,6 @@ module Validation
     params.permit(param_config)
   end
 
-
   # rubocop:disable MethodLength
   def settings_params
     params.require(:data)

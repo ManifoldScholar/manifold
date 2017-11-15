@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Settings Subjects Edit Container renders correctly 1`] = `
+<div>
+  <header
+    className="drawer-header"
+  >
+    <h2
+      className="heading-quaternary"
+    >
+      Hip Hop
+    </h2>
+    <div
+      className="buttons-bare-vertical"
+    >
+      <button
+        className="button-bare-primary"
+        onClick={[Function]}
+      >
+        Delete Subject
+        <i
+          className="manicon manicon-trashcan"
+        />
+      </button>
+    </div>
+  </header>
+  <section
+    className="form-section"
+  >
+    <div>
+      <form
+        className="form-secondary"
+        data-id="submit"
+        onSubmit={[Function]}
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Name
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Name"
+            type="text"
+            value="Hip Hop"
+          />
+        </div>
+        <div
+          className="form-input submit"
+        >
+          <input
+            className="button-secondary outlined"
+            type="submit"
+            value="Save Subject"
+          />
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+`;

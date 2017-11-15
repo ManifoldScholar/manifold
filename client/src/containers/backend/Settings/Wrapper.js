@@ -20,6 +20,11 @@ export class SettingsWrapperContainer extends PureComponent {
         key: "integrations"
       },
       {
+        path: lh.link("backendSettingsSubjects"),
+        label: "Subjects",
+        key: "subjects"
+      },
+      {
         path: lh.link("backendSettingsEmail"),
         label: "Email",
         key: "email"

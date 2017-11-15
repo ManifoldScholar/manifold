@@ -236,6 +236,57 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </div>
                         </Form.MaskedTextInput>
                       </Form.Setter('Form.MaskedTextInput)>
+                      <Connect(Project.Form.Subjects) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                        <Project.Form.Subjects project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} createSubject={[undefined]} updateSubjects={[undefined]} dispatch={[Function]}>
+                          <Form.HasMany label=\\"Subjects\\" placeholder=\\"Add a Subject\\" onNew={[Function]} onChange={[Function]} optionsFetch={[Function]} entities={{...}} entityBuilder={[undefined]} entityLabelAttribute=\\"name\\" errors={[undefined]}>
+                            <Errorable className=\\"form-input\\" name=\\"*\\" errors={[undefined]} label=\\"Subjects\\" containerStyle={{...}}>
+                              <div style={{...}} className=\\"form-input\\">
+                                <label>
+                                  Subjects
+                                </label>
+                                <nav className=\\"has-many-list\\">
+                                  <ul>
+                                    <li>
+                                      <div className=\\"association\\">
+                                        <h4 className=\\"association-name\\">
+                                          Hip Hop
+                                        </h4>
+                                      </div>
+                                      <div className=\\"utility\\">
+                                        <button onClick={[Function]} className=\\"manicon manicon-x\\">
+                                          <span className=\\"screen-reader-text\\">
+                                            Click to remove 
+                                            Hip Hop
+                                            from the 
+                                            Subjects
+                                             list.
+                                          </span>
+                                        </button>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                  <Connect(Form.PredictiveInput) className=\\"input-predictive\\" placeholder=\\"Add a Subject\\" label={[Function]} onNew={[Function]} onSelect={[Function]} fetch={[Function]}>
+                                    <Form.PredictiveInput className=\\"input-predictive\\" placeholder=\\"Add a Subject\\" label={[Function]} onNew={[Function]} onSelect={[Function]} fetch={[Function]} authToken={{...}} dispatch={[Function]}>
+                                      <div className=\\"input-predictive\\">
+                                        <div className=\\"input\\">
+                                          <button className=\\"manicon manicon-plus\\" />
+                                          <input className=\\"text-input\\" type=\\"text\\" onChange={[Function]} value=\\"\\" placeholder=\\"Add a Subject\\" onBlur={[Function]} onFocus={[Function]} onKeyPress={[Function]} onKeyDown={[Function]} />
+                                          <button className=\\"submit\\" onClick={[Function]}>
+                                            Create New
+                                          </button>
+                                        </div>
+                                        <nav className=\\"predictive-list\\">
+                                          <ul />
+                                        </nav>
+                                      </div>
+                                    </Form.PredictiveInput>
+                                  </Connect(Form.PredictiveInput)>
+                                </nav>
+                              </div>
+                            </Errorable>
+                          </Form.HasMany>
+                        </Project.Form.Subjects>
+                      </Connect(Project.Form.Subjects)>
                       <Form.Setter('Project.Form.AvatarBuilder) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
                         <Project.Form.AvatarBuilder setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
                           <div className=\\"form-input avatar-builder\\">

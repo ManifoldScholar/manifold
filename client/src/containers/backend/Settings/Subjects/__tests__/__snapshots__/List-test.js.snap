@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Settings Subjects List Container renders correctly 1`] = `
+<div>
+  <header
+    className="section-heading-secondary"
+  >
+    <h3>
+      Subjects
+       
+      <i
+        className="manicon"
+      />
+    </h3>
+  </header>
+  <span />
+  <div>
+    <form
+      className="form-search-filter"
+      onSubmit={[Function]}
+    >
+      <div
+        className="search"
+      >
+        <button>
+          <i
+            className="manicon manicon-magnify"
+          />
+          <span
+            className="screen-reader-text"
+          >
+            Click to search
+          </span>
+        </button>
+        <input
+          onChange={[Function]}
+          placeholder="Search..."
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-list-filter"
+      >
+        <div
+          className="select-group"
+        />
+      </div>
+      <button
+        className="button-bare-primary reset"
+        onClick={[Function]}
+      >
+        Reset Search
+      </button>
+    </form>
+    <nav
+      className="vertical-list-primary"
+    >
+      <div>
+        <p
+          className="list-total"
+        >
+          Showing 
+          <span>
+            1-1
+          </span>
+           of 
+          <span>
+            2
+          </span>
+           subjects: 
+        </p>
+        <div
+          className="buttons-icon-horizontal"
+        >
+          <a
+            className="button-icon-secondary"
+            href="/backend/settings/subjects/new"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-plus"
+            />
+            Add a New Subject
+          </a>
+        </div>
+        <section>
+          <ul>
+            <li
+              className=""
+            >
+              <a
+                href="/backend/settings/subjects/1"
+                onClick={[Function]}
+              >
+                <header>
+                  <div
+                    className="meta"
+                  >
+                    <h3
+                      className="name large"
+                    >
+                      Hip Hop
+                    </h3>
+                  </div>
+                </header>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </nav>
+    <nav
+      className="list-pagination-primary"
+    >
+      <ul>
+        <li
+          className="pagination-previous"
+          style={
+            Object {
+              "visibility": "hidden",
+            }
+          }
+        >
+          <a
+            data-id="page-prev"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-arrow-long-left"
+            />
+            <span>
+              Prev
+            </span>
+          </a>
+        </li>
+        <li
+          className="active ordinal"
+        >
+          <a
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            1
+          </a>
+        </li>
+        <li
+          className="ordinal"
+        >
+          <a
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            2
+          </a>
+        </li>
+        <li
+          className="pagination-next"
+          style={Object {}}
+        >
+          <a
+            data-id="page-next"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <span>
+              Next
+            </span>
+            <i
+              className="manicon manicon-arrow-long-right"
+            />
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+`;

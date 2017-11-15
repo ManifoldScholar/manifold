@@ -1,31 +1,30 @@
 import React from "react";
-import { mount } from "enzyme";
-import ProjectPanelGeneral from "../General";
+import renderer from "react-test-renderer";
+import { ProjectSubjects } from "../Subjects";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 
-describe("Backend ProjectDetail General Container", () => {
+describe("Backend Project Form Subjects Component", () => {
   const store = build.store();
   const project = build.entity.project("1");
-  const subject = build.entity.subject("2");
-  project.relationships.subjects = [subject];
+  project.relationships.subjects = [build.entity.subject("2")];
 
-  const component = mount(
+  const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <ProjectPanelGeneral project={project} />
+        <ProjectSubjects project={project} />
       </Provider>
     )
   );
 
   it("renders correctly", () => {
-    let tree = component.debug();
+    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("doesn't render to null", () => {
-    let tree = component.debug();
+    const tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
 });

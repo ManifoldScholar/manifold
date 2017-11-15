@@ -6,7 +6,7 @@ import { Form as GlobalForm } from "components/global";
 import indexOf from "lodash/indexOf";
 import get from "lodash/get";
 
-export default class FormMakers extends PureComponent {
+export default class FormHasMany extends PureComponent {
   static displayName = "Form.HasMany";
 
   static propTypes = {
@@ -98,7 +98,7 @@ export default class FormMakers extends PureComponent {
         >
           <span className="screen-reader-text">
             Click to move {this.label(entity, this.props)} up in the order of
-            makers.
+            {this.props.label}.
           </span>
         </button>
       );
@@ -171,7 +171,7 @@ export default class FormMakers extends PureComponent {
                     >
                       <span className="screen-reader-text">
                         Click to remove {this.label(entity, this.props)}
-                        from the makers list.
+                        from the {this.props.label} list.
                       </span>
                     </button>
                   </div>

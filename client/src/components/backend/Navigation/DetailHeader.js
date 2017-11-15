@@ -27,6 +27,7 @@ export default class DetailHeader extends PureComponent {
     if (type === "resource") segment = "cube-shine";
     if (type === "page") segment = "document";
     if (type === "feature") segment = "lamp";
+    if (type === "subject") segment = "books-on-shelf";
     return `manicon-${segment}`;
   }
 
