@@ -336,6 +336,13 @@ const defaults = {
         }
       }
     }
+  },
+
+  subject: {
+    type: "subjects",
+    attributes: {
+      name: "Hip Hop"
+    }
   }
 };
 
@@ -415,6 +422,10 @@ const feature = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("feature", id, attributes, relationships);
 };
 
+const subject = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("subject", id, attributes, relationships);
+};
+
 export default {
   defaults,
   project,
@@ -432,5 +443,6 @@ export default {
   annotation,
   stylesheet,
   textSection,
-  feature
+  feature,
+  subject
 };

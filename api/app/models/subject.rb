@@ -21,8 +21,6 @@ class Subject < ApplicationRecord
     return all unless featured.present?
     joins(:projects).where("projects.featured = true")
   }
-  scope :unassociated, -> { where.not(id: ProjectSubject.select(:subject_id)) }
-  scope :created_more_than, ->(ago) { where(arel_table[:created_at].lteq(ago)) }
 
   # Validations
   validates :name, presence: true, uniqueness: true

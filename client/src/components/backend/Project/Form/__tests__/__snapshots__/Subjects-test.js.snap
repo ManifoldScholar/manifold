@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Project Form Subjects Component renders correctly 1`] = `
+<div
+  className="form-input"
+  style={Object {}}
+>
+  <label>
+    Subjects
+  </label>
+  <nav
+    className="has-many-list"
+  >
+    <ul>
+      <li>
+        <div
+          className="association"
+        >
+          <h4
+            className="association-name"
+          >
+            Hip Hop
+          </h4>
+        </div>
+        <div
+          className="utility"
+        >
+          <button
+            className="manicon manicon-x"
+            onClick={[Function]}
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Click to remove 
+              Hip Hop
+              from the 
+              Subjects
+               list.
+            </span>
+          </button>
+        </div>
+      </li>
+    </ul>
+    <div
+      className="input-predictive"
+    >
+      <div
+        className="input"
+      >
+        <button
+          className="manicon manicon-plus"
+        />
+        <input
+          className="text-input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          placeholder="Add a Subject"
+          type="text"
+          value=""
+        />
+        <button
+          className="submit"
+          onClick={[Function]}
+        >
+          Create New
+        </button>
+      </div>
+      <nav
+        className="predictive-list"
+      >
+        <ul />
+      </nav>
+    </div>
+  </nav>
+</div>
+`;

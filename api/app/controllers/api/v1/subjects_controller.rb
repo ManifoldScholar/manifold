@@ -32,6 +32,7 @@ module Api
       end
 
       def destroy
+        @subject = load_and_authorize_subject
         @subject.destroy
       end
 

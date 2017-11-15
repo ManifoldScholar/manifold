@@ -432,6 +432,13 @@ export default () => {
           ]
         },
         {
+          name: "backendSettingsSubjectsNew",
+          exact: true,
+          component: Backend.Settings.Subjects.New,
+          path: "/backend/settings/subjects/new",
+          helper: () => "/backend/settings/subjects/new"
+        },
+        {
           exact: false,
           component: Backend.Settings.Wrapper,
           path: "/backend/settings",
@@ -449,6 +456,21 @@ export default () => {
               component: Backend.Settings.Integrations,
               path: "/backend/settings/integrations",
               helper: () => "/backend/settings/integrations"
+            },
+            {
+              name: "backendSettingsSubjects",
+              exact: true,
+              component: Backend.Settings.Subjects.List,
+              path: "/backend/settings/subjects/:id?",
+              helper: () => "/backend/settings/subjects",
+              routes: [
+                {
+                  name: "backendSettingsSubject",
+                  component: Backend.Settings.Subjects.Edit,
+                  path: "/backend/settings/subjects/:id?",
+                  helper: s => `/backend/settings/subjects/${s}`
+                }
+              ]
             },
             {
               name: "backendSettingsEmail",

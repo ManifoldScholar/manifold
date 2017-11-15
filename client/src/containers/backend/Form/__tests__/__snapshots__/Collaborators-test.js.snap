@@ -47,7 +47,9 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
                 >
                   Click to remove 
                   Rowan Ida
-                  from the makers list.
+                  from the 
+                  Authors
+                   list.
                 </span>
               </button>
             </div>
@@ -130,7 +132,9 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
                 >
                   Click to remove 
                   Rowan Ida
-                  from the makers list.
+                  from the 
+                  Contributors
+                   list.
                 </span>
               </button>
             </div>

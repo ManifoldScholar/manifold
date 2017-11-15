@@ -11,7 +11,7 @@ describe("Backend.Form.HasMany component", () => {
     const component = renderer.create(
       <Provider store={store}>
         <Form.HasMany
-          label="A form label"
+          label="makers"
           entities={[
             { id: 1, attributes: { name: "John" } },
             { id: 2, attributes: { name: "Jane" } }
