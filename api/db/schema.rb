@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925190220) do
+ActiveRecord::Schema.define(version: 20171115172119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,8 @@ ActiveRecord::Schema.define(version: 20170925190220) do
     t.string   "event_subtitle"
     t.string   "external_subject_id"
     t.string   "external_subject_type"
+    t.string   "subject_slug"
+    t.string   "project_slug"
   end
 
   create_table "favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
