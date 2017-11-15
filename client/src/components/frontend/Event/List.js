@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Teaser from "./Teaser";
+import Event from "./Event";
 import classNames from "classnames";
 import { Utility } from "components/global";
 import lh from "helpers/linkHandler";
@@ -50,11 +50,7 @@ export default class EventList extends Component {
           }}
         >
           {this.props.events.map(event => {
-            return (
-              <li key={event.id}>
-                <Teaser event={event} />
-              </li>
-            );
+            return <Event event={event} key={event.id} />;
           })}
         </ul>
         {this.props.pagination

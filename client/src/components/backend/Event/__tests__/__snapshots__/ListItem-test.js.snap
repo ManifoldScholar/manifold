@@ -19,6 +19,7 @@ exports[`Event.ListItem component renders correctly 1`] = `
         >
           <a
             href="https://twitter.com/undefined"
+            target="_blank"
           >
             @undefined
           </a>
@@ -34,9 +35,6 @@ exports[`Event.ListItem component renders correctly 1`] = `
             }
           />
         </div>
-        <datetime
-          className="event-date"
-        />
       </div>
     </div>
   </div>
