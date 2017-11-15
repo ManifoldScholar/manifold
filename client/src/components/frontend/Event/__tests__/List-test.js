@@ -24,8 +24,8 @@ describe("Frontend.Event.List Component", () => {
     ).toBe(true);
   });
 
-  it("renders a ProjectEvent for each event", () => {
-    const wrapper = shallow(<List project={project} events={events} />);
-    expect(wrapper.find("Teaser").length).toBe(events.length);
+  it("renders a Tile for each event", () => {
+    const wrapper = mount(<List project={project} events={events} />);
+    expect(wrapper.find(".event-tile").length).toBe(events.length);
   });
 });

@@ -24,16 +24,12 @@ export default class EventListItem extends PureComponent {
     const event = this.props.entity;
     if (!event) return null;
     return (
-      <li key={event.id} className="list-item">
-        <Event.Teaser event={event} showLink={false} />
-        <div
-          className="utility"
-          data-id={"destroy"}
-          onClick={this.triggerDestroy}
-        >
-          <i className="manicon manicon-trashcan" />
-        </div>
-      </li>
+      <Event.Event
+        itemClass="list-item"
+        event={event}
+        hideLink
+        destroyCallback={this.triggerDestroy}
+      />
     );
   }
 }

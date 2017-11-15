@@ -127,7 +127,9 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
         <ul
           className="event-list-secondary"
         >
-          <li>
+          <li
+            className=""
+          >
             <div
               className="event-tile"
             >
@@ -157,10 +159,22 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
               </div>
               <div
                 className="event-prompt"
-              />
+              >
+                <a
+                  href="/read/subject-slug"
+                  target="_self"
+                >
+                  Start Reading
+                  <i
+                    className="manicon manicon-arrow-long-right"
+                  />
+                </a>
+              </div>
             </div>
           </li>
-          <li>
+          <li
+            className=""
+          >
             <div
               className="event-tile tweet"
             >
@@ -176,6 +190,7 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
                   >
                     <a
                       href="https://twitter.com/ManifoldScholar"
+                      target="_blank"
                     >
                       @ManifoldScholar
                     </a>

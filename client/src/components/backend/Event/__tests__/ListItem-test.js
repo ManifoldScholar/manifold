@@ -1,6 +1,6 @@
 import React from "react";
 import ListItem from "../ListItem";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import renderer from "react-test-renderer";
 
 describe("Event.ListItem component", () => {
@@ -31,7 +31,7 @@ describe("Event.ListItem component", () => {
   });
 
   it("triggers the destroyHandler callback when destroy is clicked", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ListItem entity={entity} destroyHandler={handleDestroyMock} />
     );
     handleDestroyMock.mockClear();

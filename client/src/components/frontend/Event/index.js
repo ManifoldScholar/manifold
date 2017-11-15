@@ -1,11 +1,13 @@
 import AllLink from "./AllLink";
 import List from "./List";
-import Teaser from "./Teaser";
 import Thumbnail from "./Thumbnail";
+import Event from "./Event";
+import Tile from "./Tile";
 
 export default {
   AllLink,
   List,
-  Teaser,
-  Thumbnail
+  Thumbnail,
+  Event,
+  Tile
 };

@@ -210,7 +210,9 @@ const defaults = {
       eventSubtitle: "It was added",
       subjectType: "Text",
       subjectTitle: "New Text",
-      createdAt: "2017-04-24T23:25:50.161Z"
+      createdAt: "2017-04-24T23:25:50.161Z",
+      subjectSlug: "subject-slug",
+      projectSlug: "project-slug"
     }
   },
 
