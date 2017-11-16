@@ -24,10 +24,6 @@ class Detail extends Component {
 
   constructor() {
     super();
-    this.renderActivity = this.renderActivity.bind(this);
-    this.renderTexts = this.renderTexts.bind(this);
-    this.renderResources = this.renderResources.bind(this);
-    this.renderMeta = this.renderMeta.bind(this);
   }
 
   componentDidMount() {
@@ -52,13 +48,13 @@ class Detail extends Component {
     return events && events.length > 0;
   }
 
-  renderMeta() {
+  renderMeta = () => {
     const project = this.props.project;
     if (!project.attributes.metadata || isEmpty(project.attributes.metadata))
       return null;
     const containerClass = classNames({
       container: true,
-      "flush-top": !this.shouldShowResources() || !this.shouldShowResources()
+      "flush-top": !this.shouldShowResources(),
     });
     return (
       <section>
@@ -66,16 +62,16 @@ class Detail extends Component {
           <header className="section-heading">
             <h4 className="title">
               <i className="manicon manicon-tag" />
-              {"Metadata"}
+              {"About"}
             </h4>
           </header>
           <MetaList metadata={project.attributes.metadata} />
         </div>
       </section>
     );
-  }
+  };
 
-  renderActivity() {
+  renderActivity = () => {
     if (!this.shouldShowActivity()) return null;
     const project = this.props.project;
     const attr = project.attributes;
@@ -114,9 +110,9 @@ class Detail extends Component {
         </div>
       </section>
     );
-  }
+  };
 
-  renderTexts() {
+  renderTexts = () => {
     if (!this.shouldShowTexts()) return null;
     const project = this.props.project;
     const containerClass = classNames({
@@ -151,7 +147,7 @@ class Detail extends Component {
         </div>
       </section>
     );
-  }
+  };
 
   renderCollectionsOrResources() {
     if (!this.shouldShowResources()) return null;
@@ -162,7 +158,7 @@ class Detail extends Component {
     return null;
   }
 
-  renderCollections() {
+  renderCollections = () => {
     const project = this.props.project;
     return (
       <section className="bg-neutral05">
@@ -181,9 +177,9 @@ class Detail extends Component {
         </div>
       </section>
     );
-  }
+  };
 
-  renderResources() {
+  renderResources = () => {
     // Currently returns static resource section
     // Logic to check for existing resources should be here
 
@@ -211,7 +207,7 @@ class Detail extends Component {
         </div>
       </section>
     );
-  }
+  };
 
   renderNavButtons() {
     return <Layout.ButtonNavigation />;
