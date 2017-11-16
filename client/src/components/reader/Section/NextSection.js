@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default class NextSection extends PureComponent {
   static propTypes = {
     sectionsMap: PropTypes.array.isRequired,
-    textId: PropTypes.string.isRequired,
+    text: PropTypes.object.isRequired,
     sectionId: PropTypes.string.isRequired,
     typography: PropTypes.object
   };
@@ -18,7 +18,7 @@ export default class NextSection extends PureComponent {
   }
 
   getSectionPath(id) {
-    return lh.link("readerSection", this.props.textId, id);
+    return lh.link("readerSection", this.props.text.attributes.slug, id);
   }
 
   renderSectionLink() {

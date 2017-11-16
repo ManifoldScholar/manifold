@@ -9,7 +9,7 @@ exports[`Reader.Section.Pagination component renders correctly 1`] = `
   >
     <a
       className="pagination-next"
-      href="/read/1/section/1234"
+      href="/read/slug-1/section/1234"
       onClick={[Function]}
     >
       <span

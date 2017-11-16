@@ -137,7 +137,7 @@ export class ReaderContainer extends Component {
 
   renderRedirect(props) {
     const startTextSectionId = props.text.attributes.startTextSectionId;
-    const path = lh.link("readerSection", props.text.id, startTextSectionId);
+    const path = lh.link("readerSection", props.text.attributes.slug, startTextSectionId);
     return <Redirect to={path} />;
   }
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default class Pagination extends Component {
   static propTypes = {
-    textId: PropTypes.string,
+    text: PropTypes.object.isRequired,
     sectionId: PropTypes.string,
     spine: PropTypes.array
   };
@@ -22,7 +22,7 @@ export default class Pagination extends Component {
   }
 
   getSectionPath(id) {
-    return lh.link("readerSection", this.props.textId, id);
+    return lh.link("readerSection", this.props.text.attributes.slug, id);
   }
 
   getPreviousLink() {

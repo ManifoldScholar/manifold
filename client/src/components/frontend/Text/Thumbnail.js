@@ -56,7 +56,7 @@ export default class TextThumbnail extends Component {
     return (
       <div className="asset-thumb">
         <div className="asset-link">
-          <Link to={lh.link("reader", this.props.text.id)}>
+          <Link to={lh.link("reader", this.props.text.attributes.slug)}>
             <figure className="asset-image">
               {text.attributes.age <= 30
                 ? <i className="manicon manicon-new" />
@@ -66,7 +66,7 @@ export default class TextThumbnail extends Component {
           </Link>
 
           <div className="asset-description">
-            <Link to={lh.link("reader", this.props.text.id)}>
+            <Link to={lh.link("reader", this.props.text.attributes.slug)}>
               <h3 className="asset-title">
                 {text.attributes.title}
                 {this.renderSubtitle(text)}

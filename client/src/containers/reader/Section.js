@@ -172,12 +172,12 @@ export class SectionContainer extends Component {
         <div>
           <Section.NextSection
             sectionsMap={text.attributes.sectionsMap}
-            textId={text.id}
+            text={text}
             sectionId={this.props.section.id}
             typography={this.props.appearance.typography}
           />
           <Section.Pagination
-            textId={text.id}
+            text={text}
             sectionId={this.props.section.id}
             spine={text.attributes.spine}
           />
