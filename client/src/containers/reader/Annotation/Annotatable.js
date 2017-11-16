@@ -612,7 +612,7 @@ class Annotatable extends Component {
           currentUser={this.props.currentUser}
           shareUrl={lh.link(
             "readerSection",
-            this.props.textId,
+            this.props.text.attributes.slug,
             this.props.sectionId
           )}
           selectedAnnotation={this.state.selectedAnnotation}

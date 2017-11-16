@@ -72,7 +72,7 @@ class Toc extends PureComponent {
     return (
       <li key={this.counter}>
         <Link
-          to={lh.link("readerSection", this.props.text.id, node.id, anchor)}
+          to={lh.link("readerSection", this.props.text.attributes.slug, node.id, anchor)}
           onClick={this.UIHideTocDrawer}
           data-id="hide-drawer"
           className={active ? "active" : null}

@@ -8,7 +8,7 @@ exports[`Frontend.Text.Thumbnail component renders correctly 1`] = `
     className="asset-link"
   >
     <a
-      href="/read/1"
+      href="/read/slug-1"
       onClick={[Function]}
     >
       <figure
@@ -58,7 +58,7 @@ exports[`Frontend.Text.Thumbnail component renders correctly 1`] = `
       className="asset-description"
     >
       <a
-        href="/read/1"
+        href="/read/slug-1"
         onClick={[Function]}
       >
         <h3

@@ -200,7 +200,7 @@ export default class ProjectHero extends Component {
     return (
       <section className={"project-entry " + position}>
         <Link
-          to={lh.link("reader", publishedText.id)}
+          to={lh.link("reader", publishedText.attributes.slug)}
           className="button-secondary"
         >
           <i className="manicon manicon-glasses" />
@@ -210,7 +210,7 @@ export default class ProjectHero extends Component {
           ? <Link
               to={lh.link(
                 "readerSection",
-                publishedText.id,
+                publishedText.attributes.slug,
                 publishedTextTocId
               )}
               className="button-secondary dull"

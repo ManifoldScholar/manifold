@@ -21,7 +21,7 @@ exports[`Frontend.TextList.Grouped component renders correctly 1`] = `
             className="asset-link"
           >
             <a
-              href="/read/1"
+              href="/read/slug-1"
               onClick={[Function]}
             >
               <figure
@@ -71,7 +71,7 @@ exports[`Frontend.TextList.Grouped component renders correctly 1`] = `
               className="asset-description"
             >
               <a
-                href="/read/1"
+                href="/read/slug-1"
                 onClick={[Function]}
               >
                 <h3
@@ -134,7 +134,7 @@ exports[`Frontend.TextList.Grouped component renders correctly 1`] = `
             className="asset-link"
           >
             <a
-              href="/read/2"
+              href="/read/slug-2"
               onClick={[Function]}
             >
               <figure
@@ -184,7 +184,7 @@ exports[`Frontend.TextList.Grouped component renders correctly 1`] = `
               className="asset-description"
             >
               <a
-                href="/read/2"
+                href="/read/slug-2"
                 onClick={[Function]}
               >
                 <h3

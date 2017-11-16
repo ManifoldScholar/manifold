@@ -120,7 +120,7 @@ export class TextDetailWrapperContainer extends PureComponent {
 
   doPreview(event) {
     event.preventDefault();
-    const win = window.open(lh.link("reader", this.props.text.id), "_blank");
+    const win = window.open(lh.link("reader", this.props.text.attributes.slug), "_blank");
     win.focus();
   }
 
