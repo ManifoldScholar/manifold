@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { bindActionCreators } from "redux";
-import { HigherOrder, HeadContent, Overlay } from "components/global";
+import { HigherOrder, Overlay } from "components/global";
 import { Header, Footer, FooterMenu } from "components/reader";
 import { Annotation } from "containers/reader";
 import { select, grab, isEntityLoaded } from "utils/entityUtils";
@@ -146,7 +146,11 @@ export class ReaderContainer extends Component {
 
   renderRedirect(props) {
     const startTextSectionId = props.text.attributes.startTextSectionId;
-    const path = lh.link("readerSection", props.text.attributes.slug, startTextSectionId);
+    const path = lh.link(
+      "readerSection",
+      props.text.attributes.slug,
+      startTextSectionId
+    );
     return <Redirect to={path} />;
   }
 
@@ -186,20 +190,10 @@ export class ReaderContainer extends Component {
     if (!this.props.text) return null;
     if (this.shouldRedirect(this.props)) return this.renderRedirect(this.props);
     if (!this.props.text) return null;
-    const project = this.props.text.relationships.project;
-    const projectImage = project
-      ? project.attributes.avatarStyles.mediumSquare
-      : null;
-    const projectDesc = project ? project.attributes.description : null;
 
     return (
       <HigherOrder.BodyClass className="reader">
         <div>
-          <HeadContent
-            title={`Manifold Scholarship | ${this.props.text.attributes.title}`}
-            image={projectImage}
-            description={projectDesc}
-          />
           {this.renderStyles()}
           <HigherOrder.ScrollAware>
             {/* Header inside scroll-aware HOC */}

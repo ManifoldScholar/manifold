@@ -9,6 +9,10 @@ const environmentConfiguration = {
   }
 }[process.env.NODE_ENV || "development"];
 
+const clientUrl = () => {
+  return `${process.env.USE_SSL ? "https" : "http"}://${process.env.DOMAIN}`;
+};
+
 const apiUrl = () => {
   if (process.env.API_URL) return process.env.API_URL;
   if (__SERVER__)
@@ -32,6 +36,7 @@ const applicationConfiguration = {
   // Used by both server-side and client-side code
   apiUrl: apiUrl(),
   cableUrl: cableUrl(),
+  clientUrl: clientUrl(),
   domain: process.env.DOMAIN,
   app: {
     head: {
@@ -46,7 +51,7 @@ const applicationConfiguration = {
         { property: "og:site_name", content: "Manifold Scholarship" },
         {
           property: "og:image",
-          content: "http://manifold.umn.edu/logo/manifold_avatar-01.png"
+          content: `${clientUrl()}/static/logo.jpg`
         },
         { property: "og:locale", content: "en_US" },
         { property: "og:title", content: "Manifold Scholarship" },
@@ -55,20 +60,8 @@ const applicationConfiguration = {
           content:
             "Transforming scholarly publications into living digital works"
         },
-        { property: "twitter:card", content: "summary" },
-        { property: "twitter:site", content: "@manifoldscholar" },
-        { property: "twitter:creator", content: "@manifoldscholar" },
-        {
-          property: "twitter:description",
-          content:
-            "Transforming scholarly publications into living digital works"
-        },
-        {
-          property: "twitter:image",
-          content: "http://manifold.umn.edu/logo/manifold_avatar-01.png"
-        },
-        { property: "twitter:image:width", content: "200" },
-        { property: "twitter:image:height", content: "200" }
+        { property: "twitter:card", content: "summary_large_image" },
+        { property: "twitter:site", content: "@manifoldscholar" }
       ]
     },
     locale: {

@@ -8,6 +8,7 @@ import { projectsAPI, resourcesAPI, collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { HeadContent, LoadingBlock } from "components/global";
 import some from "lodash/some";
+import HigherOrder from "containers/global/HigherOrder";
 
 const { request, flush } = entityStoreActions;
 
@@ -42,6 +43,7 @@ export class ResourceDetailContainer extends PureComponent {
   static propTypes = {
     project: PropTypes.object,
     collection: PropTypes.object,
+    settings: PropTypes.object.isRequired,
     resource: PropTypes.object,
     dispatch: PropTypes.func,
     visibility: PropTypes.object
@@ -96,7 +98,7 @@ export class ResourceDetailContainer extends PureComponent {
   }
 
   render() {
-    const { project, resource } = this.props;
+    const { project, resource, settings, collection } = this.props;
     if (!project || !resource) {
       return <LoadingBlock />;
     }
@@ -104,35 +106,36 @@ export class ResourceDetailContainer extends PureComponent {
     return (
       <div>
         <HeadContent
-          title={`Manifold Scholarship | ${project.attributes
-            .title} | ${resource.attributes.titlePlaintext}`}
+          title={`\u201c${resource.attributes
+            .titlePlaintext}\u201d Resource on ${settings.attributes.general
+            .installationName}`}
           description={resource.attributes.captionPlaintext}
           image={
             resource.attributes.attachmentStyles.mediumSquare ||
             resource.attributes.variantThumbnailStyles.mediumSquare
           }
         />
-        {this.props.collection
+        {collection
           ? <Utility.BackLinkPrimary
               backText="Back to Collection"
               link={this.collectionUrl()}
-              title={this.props.collection.attributes.title}
+              title={collection.attributes.title}
             />
           : <Utility.BackLinkPrimary
               backText="Back to Project Resources"
               link={this.projectUrl()}
-              title={this.props.project.attributes.title}
+              title={project.attributes.title}
             />}
-        {this.props.resource
+        {resource
           ? <Resource.Detail
               projectId={project.id}
               projectUrl={this.projectUrl()}
               resourceUrl={this.resourceUrl()}
-              resource={this.props.resource}
+              resource={resource}
               dispatch={this.props.dispatch}
             />
           : <LoadingBlock />}
-        {this.props.project
+        {project
           ? <section className="bg-neutral05">
               <Utility.BackLinkSecondary
                 backText="Back to Project Resources"
@@ -145,4 +148,6 @@ export class ResourceDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ResourceDetailContainer);
+export default connectAndFetch(
+  HigherOrder.withSettings(ResourceDetailContainer)
+);
