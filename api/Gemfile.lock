@@ -341,7 +341,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
-    rubyzip (1.2.0)
+    rubyzip (1.2.1)
     safe_yaml (1.0.4)
     searchkick (2.1.1)
       activemodel (>= 4.1)
@@ -469,7 +469,7 @@ DEPENDENCIES
   rspec-rails (~> 3.5.0)
   rspec-support (~> 3.5.0)
   rubocop
-  rubyzip (>= 1.2.0)
+  rubyzip (>= 1.2.1)
   searchkick
   sidekiq (= 4.2.3)
   signet
@@ -482,4 +482,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.14.6
+   1.15.4
