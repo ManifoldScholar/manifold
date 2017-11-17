@@ -29,6 +29,9 @@ class Collection < ApplicationRecord
   # Attachments
   manifold_has_attached_file :thumbnail, :image
 
+  # Validations
+  validates :title, presence: true
+
   def resource_kinds
     resources
       .select("resources.kind, collection_resources.position")

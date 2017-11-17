@@ -11,6 +11,11 @@ RSpec.describe Collection, type: :model do
     expect(collection.project).to be_a Project
   end
 
+  it "is invalid without a title" do
+    collection = FactoryGirl.build(:collection, title: "")
+    expect(collection).to_not be_valid
+  end
+
   it "destroys associated annotations" do
     collection = FactoryGirl.create(:collection)
     FactoryGirl.create(:annotation, collection: collection)
