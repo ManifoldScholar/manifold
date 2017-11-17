@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Utility, ResourceList, ResourceCollection } from "components/frontend";
-import { HeadContent } from "components/global";
 
 export default class ResourceCollectionDetail extends PureComponent {
   static displayName = "ResourceCollection.Detail";
@@ -27,14 +26,8 @@ export default class ResourceCollectionDetail extends PureComponent {
 
     const attr = collection.attributes;
     const count = attr.collectionResourcesCount;
-
     return (
       <section>
-        <HeadContent
-          title={`Manifold Scholarship | ${collection.attributes.title}`}
-          description={collection.attributes.description}
-          image={collection.attributes.thumbnailStyles.mediumSquare}
-        />
         <div className="container flush-top flush-bottom">
           <div className="collection-detail">
             <ResourceCollection.Title collection={collection} showCreatedAt />
