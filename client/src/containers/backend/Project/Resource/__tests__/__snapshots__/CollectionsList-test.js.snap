@@ -1,0 +1,294 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Project Resource CollectionList Container renders correctly 1`] = `
+<div
+  className="project-resource-list"
+>
+  <header
+    className="section-heading-secondary"
+  >
+    <h3>
+      Collections
+       
+      <i
+        className="manicon manicon-file-box"
+      />
+    </h3>
+  </header>
+  <div>
+    <form
+      className="form-search-filter"
+      onSubmit={[Function]}
+    >
+      <div
+        className="search"
+      >
+        <button>
+          <i
+            className="manicon manicon-magnify"
+          />
+          <span
+            className="screen-reader-text"
+          >
+            Click to search
+          </span>
+        </button>
+        <input
+          onChange={[Function]}
+          placeholder="Search..."
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-list-filter"
+      >
+        <div
+          className="select-group"
+        />
+      </div>
+      <button
+        className="button-bare-primary reset"
+        onClick={[Function]}
+      >
+        Reset Search
+      </button>
+    </form>
+    <nav
+      className="vertical-list-primary"
+    >
+      <div>
+        <p
+          className="list-total"
+        >
+          Showing 
+          <span>
+            1-1
+          </span>
+           of 
+          <span>
+            2
+          </span>
+           collections: 
+        </p>
+        <div
+          className="buttons-icon-horizontal"
+        >
+          <a
+            className="button-icon-secondary"
+            href="/backend/project/1/collections/new"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-plus"
+            />
+            Add a New Collection
+          </a>
+        </div>
+        <section>
+          <ul>
+            <li>
+              <a
+                href="/backend/collection/2"
+                onClick={[Function]}
+              >
+                <header>
+                  <figure
+                    className="cover"
+                  >
+                    <div
+                      className="icon-thumbnail-primary icon-only"
+                      style={
+                        Object {
+                          "backgroundImage": null,
+                        }
+                      }
+                    >
+                      <div
+                        className="wrapper"
+                      >
+                        <figure
+                          className="icon-thumbnail-type"
+                        >
+                          <i
+                            className="icon-thumbnail-icon collection"
+                          >
+                            <svg
+                              height="64px"
+                              version="1.1"
+                              viewBox="0 0 78.3019 64"
+                              width="78.3019px"
+                            >
+                              <path
+                                d="M53.98667,52.73626H24.31523V37.55347h29.67145V52.73626z M27.38334,49.66814h23.53521v-9.04655H27.38334V49.66814z"
+                              />
+                              <path
+                                d="M78.3019,10.71744h-0.99549L63.92609,0H14.3778L0.99549,10.71744H0v12.85873h3.27486V64h71.41561V23.57616h3.61143V10.71744z M15.45444,3.06812h47.39302l9.55104,7.64932H5.9034L15.45444,3.06812z M71.62235,60.93188H6.34297V23.57616h25.90908c0.70261,3.10519,3.4731,5.43612,6.78853,5.43612s6.08517-2.33092,6.78754-5.43612h25.79423V60.93188z M35.45388,23.57616h7.17267c-0.59712,1.39061-1.97862,2.368-3.58596,2.368C37.43325,25.94416,36.05137,24.96678,35.45388,23.57616z M75.23378,20.50805H3.06812v-6.72249h72.16566V20.50805z"
+                              />
+                            </svg>
+                          </i>
+                        </figure>
+                      </div>
+                    </div>
+                  </figure>
+                  <div
+                    className="meta"
+                  >
+                    <h3
+                      className="name"
+                    >
+                      <span
+                        className="collection-title"
+                      >
+                        Rowan
+                      </span>
+                      <span
+                        className="subtitle"
+                      >
+                        <span>
+                          April 24, 2017
+                        </span>
+                      </span>
+                    </h3>
+                  </div>
+                </header>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/backend/collection/3"
+                onClick={[Function]}
+              >
+                <header>
+                  <figure
+                    className="cover"
+                  >
+                    <div
+                      className="icon-thumbnail-primary icon-only"
+                      style={
+                        Object {
+                          "backgroundImage": null,
+                        }
+                      }
+                    >
+                      <div
+                        className="wrapper"
+                      >
+                        <figure
+                          className="icon-thumbnail-type"
+                        >
+                          <i
+                            className="icon-thumbnail-icon collection"
+                          >
+                            <svg
+                              height="64px"
+                              version="1.1"
+                              viewBox="0 0 78.3019 64"
+                              width="78.3019px"
+                            >
+                              <path
+                                d="M53.98667,52.73626H24.31523V37.55347h29.67145V52.73626z M27.38334,49.66814h23.53521v-9.04655H27.38334V49.66814z"
+                              />
+                              <path
+                                d="M78.3019,10.71744h-0.99549L63.92609,0H14.3778L0.99549,10.71744H0v12.85873h3.27486V64h71.41561V23.57616h3.61143V10.71744z M15.45444,3.06812h47.39302l9.55104,7.64932H5.9034L15.45444,3.06812z M71.62235,60.93188H6.34297V23.57616h25.90908c0.70261,3.10519,3.4731,5.43612,6.78853,5.43612s6.08517-2.33092,6.78754-5.43612h25.79423V60.93188z M35.45388,23.57616h7.17267c-0.59712,1.39061-1.97862,2.368-3.58596,2.368C37.43325,25.94416,36.05137,24.96678,35.45388,23.57616z M75.23378,20.50805H3.06812v-6.72249h72.16566V20.50805z"
+                              />
+                            </svg>
+                          </i>
+                        </figure>
+                      </div>
+                    </div>
+                  </figure>
+                  <div
+                    className="meta"
+                  >
+                    <h3
+                      className="name"
+                    >
+                      <span
+                        className="collection-title"
+                      >
+                        Rowan
+                      </span>
+                      <span
+                        className="subtitle"
+                      >
+                        <span>
+                          April 24, 2017
+                        </span>
+                      </span>
+                    </h3>
+                  </div>
+                </header>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </nav>
+    <nav
+      className="list-pagination-primary"
+    >
+      <ul>
+        <li
+          className="pagination-previous"
+          style={
+            Object {
+              "visibility": "hidden",
+            }
+          }
+        >
+          <a
+            data-id="page-prev"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-arrow-long-left"
+            />
+            <span>
+              Prev
+            </span>
+          </a>
+        </li>
+        <li
+          className="active ordinal"
+        >
+          <a
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            1
+          </a>
+        </li>
+        <li
+          className="ordinal"
+        >
+          <a
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            2
+          </a>
+        </li>
+        <li
+          className="pagination-next"
+          style={Object {}}
+        >
+          <a
+            data-id="page-next"
+            href="#pagination-target"
+            onClick={[Function]}
+          >
+            <span>
+              Next
+            </span>
+            <i
+              className="manicon manicon-arrow-long-right"
+            />
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+`;

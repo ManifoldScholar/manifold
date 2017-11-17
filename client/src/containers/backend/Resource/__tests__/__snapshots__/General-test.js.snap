@@ -1,0 +1,247 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Resource General Container renders correctly 1`] = `
+<section>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="resource-kind-picker form-secondary"
+      >
+        <div
+          className="form-input"
+        >
+          <label>
+            Kind
+          </label>
+          <div
+            className="picker-select select-only"
+          >
+            <div
+              className="form-select"
+            >
+              <i
+                className="manicon manicon-caret-down"
+              />
+              <select
+                onChange={[Function]}
+                value="image"
+              >
+                <option
+                  id="image"
+                  value="image"
+                >
+                  Image
+                </option>
+                <option
+                  id="video"
+                  value="video"
+                >
+                  Video
+                </option>
+                <option
+                  id="audio"
+                  value="audio"
+                >
+                  Audio
+                </option>
+                <option
+                  id="file"
+                  value="file"
+                >
+                  File
+                </option>
+                <option
+                  id="link"
+                  value="link"
+                >
+                  Link
+                </option>
+                <option
+                  id="pdf"
+                  value="pdf"
+                >
+                  PDF
+                </option>
+                <option
+                  id="document"
+                  value="document"
+                >
+                  Document
+                </option>
+                <option
+                  id="spreadsheet"
+                  value="spreadsheet"
+                >
+                  Spreadsheet
+                </option>
+                <option
+                  id="presentation"
+                  value="presentation"
+                >
+                  Presentation
+                </option>
+                <option
+                  id="interactive"
+                  value="interactive"
+                >
+                  Interactive
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Title
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter a title"
+          type="text"
+          value="Image"
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Tags
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter tags separated by ,"
+          type="text"
+          value={
+            Array [
+              "dog",
+              "puppy",
+              "GOAT",
+            ]
+          }
+        />
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Description
+          </label>
+          <textarea
+            onChange={[Function]}
+            placeholder="Enter a description"
+            style={
+              Object {
+                "height": 100,
+              }
+            }
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Caption
+          </label>
+          <textarea
+            onChange={[Function]}
+            placeholder="Enter a short description"
+            style={
+              Object {
+                "height": 100,
+              }
+            }
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Image File
+          </label>
+          <Dropzone
+            accept="image/*"
+            className="form-dropzone style-square"
+            multiple={false}
+            onDrop={[Function]}
+            style={undefined}
+          >
+            <div
+              className="contents-empty"
+            >
+              <i
+                className="manicon manicon-cloud-up"
+              />
+              <div
+                className="message"
+              >
+                <p
+                  className="primary"
+                >
+                  <span
+                    className="fake-link"
+                  >
+                    Upload a file
+                  </span>
+                   or
+                  <br />
+                  drag and drop here
+                  <br />
+                </p>
+                <p
+                  className="secondary"
+                >
+                  jpeg, tiff, gif, png
+                </p>
+              </div>
+            </div>
+          </Dropzone>
+        </div>
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Resource"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;

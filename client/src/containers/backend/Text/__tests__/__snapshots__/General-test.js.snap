@@ -1,0 +1,292 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Text General Container renders correctly 1`] = `
+<section>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Title
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter Text Title"
+          type="text"
+          value="Ain't No Thang"
+        />
+      </div>
+      <div
+        className="form-input"
+      >
+        <label>
+          Publication Date
+        </label>
+        <div
+          className="form-date"
+        >
+          <div
+            className="form-select input-month"
+          >
+            <i
+              className="manicon manicon-caret-down"
+            />
+            <select
+              onChange={[Function]}
+              value="11"
+            >
+              <option />
+              <option
+                value={0}
+              >
+                January
+              </option>
+              <option
+                value={1}
+              >
+                February
+              </option>
+              <option
+                value={2}
+              >
+                March
+              </option>
+              <option
+                value={3}
+              >
+                April
+              </option>
+              <option
+                value={4}
+              >
+                May
+              </option>
+              <option
+                value={5}
+              >
+                June
+              </option>
+              <option
+                value={6}
+              >
+                July
+              </option>
+              <option
+                value={7}
+              >
+                August
+              </option>
+              <option
+                value={8}
+              >
+                September
+              </option>
+              <option
+                value={9}
+              >
+                October
+              </option>
+              <option
+                value={10}
+              >
+                November
+              </option>
+              <option
+                value={11}
+              >
+                December
+              </option>
+            </select>
+          </div>
+          <div
+            className="form-select input-day"
+          >
+            <i
+              className="manicon manicon-caret-down"
+            />
+            <select
+              onChange={[Function]}
+              value="4"
+            >
+              <option />
+              <option>
+                1
+              </option>
+              <option>
+                2
+              </option>
+              <option>
+                3
+              </option>
+              <option>
+                4
+              </option>
+              <option>
+                5
+              </option>
+              <option>
+                6
+              </option>
+              <option>
+                7
+              </option>
+              <option>
+                8
+              </option>
+              <option>
+                9
+              </option>
+              <option>
+                10
+              </option>
+              <option>
+                11
+              </option>
+              <option>
+                12
+              </option>
+              <option>
+                13
+              </option>
+              <option>
+                14
+              </option>
+              <option>
+                15
+              </option>
+              <option>
+                16
+              </option>
+              <option>
+                17
+              </option>
+              <option>
+                18
+              </option>
+              <option>
+                19
+              </option>
+              <option>
+                20
+              </option>
+              <option>
+                21
+              </option>
+              <option>
+                22
+              </option>
+              <option>
+                23
+              </option>
+              <option>
+                24
+              </option>
+              <option>
+                25
+              </option>
+              <option>
+                26
+              </option>
+              <option>
+                27
+              </option>
+              <option>
+                28
+              </option>
+              <option>
+                29
+              </option>
+              <option>
+                30
+              </option>
+              <option>
+                31
+              </option>
+            </select>
+          </div>
+          <div
+            className="form-input"
+          >
+            <ReactTextMask
+              className="input-year"
+              mask={
+                Array [
+                  /\\\\d/,
+                  /\\\\d/,
+                  /\\\\d/,
+                  /\\\\d/,
+                ]
+              }
+              onChange={[Function]}
+              type="text"
+              value="2001"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Description
+          </label>
+          <textarea
+            onChange={[Function]}
+            placeholder="Enter a Brief Description"
+            style={
+              Object {
+                "height": 100,
+              }
+            }
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Section Label
+        </label>
+        <span
+          className="instructions"
+        >
+          This field is used in reader next/previous links. For example, “chapter” for books or “article” for journals
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Enter a label for sections in this text"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Text"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;

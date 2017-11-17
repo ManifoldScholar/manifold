@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Text Ingestion New Container renders correctly 1`] = `
+<div>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-section"
+      >
+        <div
+          className="form-input"
+        >
+          <label>
+            Text Format
+          </label>
+          <label
+            className="form-toggle radio"
+            htmlFor="epub"
+          >
+            <input
+              checked={false}
+              id="epub"
+              onChange={[Function]}
+              type="radio"
+              value="epub"
+            />
+            <span
+              className="toggle-indicator"
+            />
+            <span
+              className="toggle-label"
+            >
+              EPUB v2 or v3
+            </span>
+          </label>
+          <label
+            className="form-toggle radio"
+            htmlFor="markdown"
+          >
+            <input
+              checked={false}
+              id="markdown"
+              onChange={[Function]}
+              type="radio"
+              value="markdown"
+            />
+            <span
+              className="toggle-indicator"
+            />
+            <span
+              className="toggle-label"
+            >
+              Markdown document(s)
+            </span>
+          </label>
+          <label
+            className="form-toggle radio"
+            htmlFor="googledoc"
+          >
+            <input
+              checked={false}
+              id="googledoc"
+              onChange={[Function]}
+              type="radio"
+              value="googledoc"
+            />
+            <span
+              className="toggle-indicator"
+            />
+            <span
+              className="toggle-label"
+            >
+              Google Doc
+            </span>
+          </label>
+          <label
+            className="form-toggle radio"
+            htmlFor="html"
+          >
+            <input
+              checked={false}
+              id="html"
+              onChange={[Function]}
+              type="radio"
+              value="html"
+            />
+            <span
+              className="toggle-indicator"
+            />
+            <span
+              className="toggle-label"
+            >
+              HTML document
+            </span>
+          </label>
+        </div>
+        <div
+          className="buttons-icon-horizontal"
+          style={
+            Object {
+              "marginTop": 30,
+            }
+          }
+        >
+          <button
+            className="button-icon-secondary"
+            disabled={true}
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-check small"
+            />
+            Continue
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+`;

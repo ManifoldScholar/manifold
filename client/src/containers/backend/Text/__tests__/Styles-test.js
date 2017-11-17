@@ -1,19 +1,21 @@
-jest.mock("components/backend/Form/CodeArea");
 import React from "react";
 import { mount } from "enzyme";
-import StylesheetEditContainer from "../Edit";
+import TextStylesContainer from "../Styles";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 
-describe("Backend Stylesheet Edit Container", () => {
+describe("Backend Text Styles Container", () => {
   const store = build.store();
-  const stylesheet = build.entity.stylesheet("2");
+  const text = build.entity.text("1");
+  const stylesheetOne = build.entity.stylesheet("2");
+  const stylesheetTwo = build.entity.stylesheet("3");
+  text.relationships.stylesheets = [stylesheetOne, stylesheetTwo];
 
   const component = mount(
     wrapWithRouter(
       <Provider store={store}>
-        <StylesheetEditContainer stylesheet={stylesheet} />
+        <TextStylesContainer text={text} />
       </Provider>
     )
   );

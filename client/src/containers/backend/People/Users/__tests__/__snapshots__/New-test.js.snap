@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Users New Container renders correctly 1`] = `
+<div>
+  <section
+    className="bg-neutral95"
+  >
+    <nav
+      className="breadcrumb-primary"
+    >
+      <div
+        className="container flush"
+      >
+        <a
+          className="initial"
+          href="/backend/people"
+          onClick={[Function]}
+        >
+          <i
+            className="manicon manicon-arrow-left"
+          />
+          Back to:
+        </a>
+        <ul>
+          <li>
+            <a
+              className="back-link-primary-segment"
+              href="/backend/people"
+              onClick={[Function]}
+            >
+              ALL USERS
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div
+      className="container flush"
+    >
+      <header
+        className="entity-header-primary"
+      >
+        <div
+          className="title"
+        >
+          <h1>
+            New User
+            <span
+              className="subtitle"
+            />
+          </h1>
+          <div
+            className="utility"
+          >
+            <span
+              className="notes"
+            >
+              Enter the user details. Press save to continue.
+            </span>
+          </div>
+        </div>
+      </header>
+    </div>
+  </section>
+  <section
+    className="backend-panel"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="panel"
+      >
+        <section>
+          <div>
+            <form
+              className="form-secondary"
+              data-id="submit"
+              onSubmit={[Function]}
+            >
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className=""
+                >
+                  Email
+                </label>
+                <input
+                  onChange={[Function]}
+                  placeholder="Email"
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="form-input"
+              >
+                <div
+                  className="form-input"
+                  style={Object {}}
+                >
+                  <label>
+                    Role
+                  </label>
+                  <div
+                    className="form-select"
+                  >
+                    <i
+                      className="manicon manicon-caret-down"
+                    />
+                    <select
+                      onChange={[Function]}
+                      value="reader"
+                    >
+                      <option
+                        value="admin"
+                      >
+                        Admin
+                      </option>
+                      <option
+                        value="author"
+                      >
+                        Author
+                      </option>
+                      <option
+                        value="reader"
+                      >
+                        Reader
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className=""
+                >
+                  First Name
+                </label>
+                <input
+                  onChange={[Function]}
+                  placeholder="First Name"
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="form-input"
+                style={Object {}}
+              >
+                <label
+                  className=""
+                >
+                  Last Name
+                </label>
+                <input
+                  onChange={[Function]}
+                  placeholder="Last Name"
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div
+                className="form-input password-input"
+                style={Object {}}
+              >
+                <label>
+                  Password
+                </label>
+                <span
+                  className="password-visibility-toggle"
+                  onClick={[Function]}
+                >
+                  <i
+                    className="manicon manicon-eye-outline"
+                  />
+                </span>
+                <input
+                  onChange={[Function]}
+                  placeholder="Enter a password"
+                  type="password"
+                  value="testtest123"
+                />
+              </div>
+              <div
+                className="form-input submit"
+              >
+                <a
+                  className="button-secondary outlined dull"
+                  href="/backend/people"
+                  onClick={[Function]}
+                >
+                  Cancel
+                </a>
+                <input
+                  className="button-secondary outlined"
+                  type="submit"
+                  value="Save and Continue"
+                />
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+`;

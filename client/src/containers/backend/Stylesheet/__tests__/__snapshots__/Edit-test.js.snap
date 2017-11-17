@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend TextDetail Styles Container renders correctly 1`] = `
+exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
     <Provider store={{...}}>
