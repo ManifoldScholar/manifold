@@ -13,7 +13,7 @@ import get from "lodash/get";
 
 const { request } = entityStoreActions;
 
-export class StylesheetEdit extends PureComponent {
+export class StylesheetEditContainer extends PureComponent {
   static displayName = "Stylesheet.Edit";
 
   static fetchData = (getState, dispatch, location, match) => {
@@ -147,4 +147,4 @@ export class StylesheetEdit extends PureComponent {
   }
 }
 
-export default connectAndFetch(StylesheetEdit);
+export default connectAndFetch(StylesheetEditContainer);

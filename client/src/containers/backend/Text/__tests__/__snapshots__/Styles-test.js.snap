@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Text Styles Container renders correctly 1`] = `
+"<MemoryRouter>
+  <Router history={{...}}>
+    <Provider store={{...}}>
+      <Text.Styles text={{...}}>
+        <div>
+          <section className=\\"text-category-list-secondary\\">
+            <div className=\\"instructional-copy\\">
+              <p>
+                Stylesheets are applied to texts in the order listed below.
+                              &quot;Ingested&quot; stylesheets are part of the source document and are
+                              copied into Manifold (with some modification) during text
+                              ingestion. &quot;User&quot; stylesheets are those that have been created
+                              after the initial ingestion. To override styles in the source
+                              document, create a new stylesheet and move it to the bottom of the
+                              list.
+              </p>
+            </div>
+            <div className=\\"text-category\\">
+              <header>
+                <h4 className=\\"category-title highlight\\">
+                  Stylesheets
+                </h4>
+              </header>
+              <ul className=\\"texts-group\\">
+                <li>
+                  <div>
+                    <Link className=\\"asset-thumb\\" to=\\"/backend/text/1/styles/2\\" replace={false}>
+                      <a className=\\"asset-thumb\\" onClick={[Function]} href=\\"/backend/text/1/styles/2\\">
+                        <figure className=\\"asset-image\\">
+                          <div className=\\"asset-image-placeholder\\">
+                            <Resource.Icon.Document>
+                              <svg version=\\"1.1\\" width=\\"47.22322px\\" height=\\"64px\\" viewBox=\\"0 0 47.22322 64\\">
+                                <path d=\\"M46.32474,13.24384c-0.00254-0.00259-0.00322-0.00615-0.00575-0.00869l-12.3427-12.3405c-0.00316-0.00316-0.00615-0.00615-0.00931-0.00931l-0.06103-0.06097c-0.01952-0.01952-0.04529-0.02651-0.06605-0.04388C33.30312,0.30068,32.60266,0,31.82763,0H0.9241C0.41377,0,0,0.41377,0,0.9241V63.0759C0,63.58669,0.41377,64,0.9241,64h45.37503c0.51078,0,0.9241-0.41331,0.9241-0.9241V15.39559C47.22322,14.55491,46.87889,13.79388,46.32474,13.24384z M34.86163,4.39312l7.96994,7.96847h-7.96994V4.39312z M45.37503,62.15181H1.84819V1.84819h29.97944c0.32465,0,0.61828,0.13204,0.83256,0.34389l0.00953,0.00953c0.21185,0.21433,0.34372,0.50796,0.34372,0.83239v10.2517c0,0.51033,0.41331,0.9241,0.9241,0.9241h10.2517c0.65427,0,1.1858,0.53199,1.1858,1.1858V62.15181z\\" />
+                                <path d=\\"M35.62419,23.13355H10.02744c-0.51033,0-0.9241-0.41377-0.9241-0.9241s0.41377-0.9241,0.9241-0.9241h25.59675c0.51078,0,0.9241,0.41377,0.9241,0.9241S36.13497,23.13355,35.62419,23.13355z\\" />
+                                <path d=\\"M35.62419,34.93969H10.02744c-0.51033,0-0.9241-0.41332-0.9241-0.9241s0.41377-0.9241,0.9241-0.9241h25.59675c0.51078,0,0.9241,0.41331,0.9241,0.9241S36.13497,34.93969,35.62419,34.93969z\\" />
+                                <path d=\\"M35.62419,46.74538H10.02744c-0.51033,0-0.9241-0.41331-0.9241-0.9241s0.41377-0.9241,0.9241-0.9241h25.59675c0.51078,0,0.9241,0.41331,0.9241,0.9241S36.13497,46.74538,35.62419,46.74538z\\" />
+                                <path d=\\"M31.52893,28.8347H10.02744c-0.51033,0-0.9241-0.41377-0.9241-0.9241s0.41377-0.9241,0.9241-0.9241h21.50149c0.51078,0,0.9241,0.41377,0.9241,0.9241S32.03971,28.8347,31.52893,28.8347z\\" />
+                                <path d=\\"M31.52893,40.65303H10.02744c-0.51033,0-0.9241-0.41331-0.9241-0.9241s0.41377-0.9241,0.9241-0.9241h21.50149c0.51078,0,0.9241,0.41332,0.9241,0.9241S32.03971,40.65303,31.52893,40.65303z\\" />
+                              </svg>
+                            </Resource.Icon.Document>
+                          </div>
+                        </figure>
+                        <div className=\\"asset-description\\">
+                          <h3 className=\\"asset-title\\">
+                            Slarmbo
+                            <span className=\\"subtitle\\" />
+                          </h3>
+                          <datetime className=\\"asset-date\\">
+                            <FormattedDate prefix=\\"Added\\" format=\\"MMMM, YYYY\\" date={[undefined]} />
+                          </datetime>
+                          <span className=\\"asset-state\\">
+                            User
+                          </span>
+                        </div>
+                      </a>
+                    </Link>
+                    <div className=\\"text-category-list-utility\\">
+                      <Link className=\\"button\\" to=\\"/backend/text/1/styles/2\\" replace={false}>
+                        <a className=\\"button\\" onClick={[Function]} href=\\"/backend/text/1/styles/2\\">
+                          Edit
+                        </a>
+                      </Link>
+                      <button style={{...}} onClick={[Function]}>
+                        <i className=\\"manicon manicon-arrow-up\\" />
+                      </button>
+                      <button onClick={[Function]}>
+                        <i className=\\"manicon manicon-arrow-down\\" />
+                      </button>
+                      <button onClick={[Function]}>
+                        <i className=\\"manicon manicon-x\\" />
+                      </button>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <Link className=\\"asset-thumb\\" to=\\"/backend/text/1/styles/3\\" replace={false}>
+                      <a className=\\"asset-thumb\\" onClick={[Function]} href=\\"/backend/text/1/styles/3\\">
+                        <figure className=\\"asset-image\\">
+                          <div className=\\"asset-image-placeholder\\">
+                            <Resource.Icon.Document>
+                              <svg version=\\"1.1\\" width=\\"47.22322px\\" height=\\"64px\\" viewBox=\\"0 0 47.22322 64\\">
+                                <path d=\\"M46.32474,13.24384c-0.00254-0.00259-0.00322-0.00615-0.00575-0.00869l-12.3427-12.3405c-0.00316-0.00316-0.00615-0.00615-0.00931-0.00931l-0.06103-0.06097c-0.01952-0.01952-0.04529-0.02651-0.06605-0.04388C33.30312,0.30068,32.60266,0,31.82763,0H0.9241C0.41377,0,0,0.41377,0,0.9241V63.0759C0,63.58669,0.41377,64,0.9241,64h45.37503c0.51078,0,0.9241-0.41331,0.9241-0.9241V15.39559C47.22322,14.55491,46.87889,13.79388,46.32474,13.24384z M34.86163,4.39312l7.96994,7.96847h-7.96994V4.39312z M45.37503,62.15181H1.84819V1.84819h29.97944c0.32465,0,0.61828,0.13204,0.83256,0.34389l0.00953,0.00953c0.21185,0.21433,0.34372,0.50796,0.34372,0.83239v10.2517c0,0.51033,0.41331,0.9241,0.9241,0.9241h10.2517c0.65427,0,1.1858,0.53199,1.1858,1.1858V62.15181z\\" />
+                                <path d=\\"M35.62419,23.13355H10.02744c-0.51033,0-0.9241-0.41377-0.9241-0.9241s0.41377-0.9241,0.9241-0.9241h25.59675c0.51078,0,0.9241,0.41377,0.9241,0.9241S36.13497,23.13355,35.62419,23.13355z\\" />
+                                <path d=\\"M35.62419,34.93969H10.02744c-0.51033,0-0.9241-0.41332-0.9241-0.9241s0.41377-0.9241,0.9241-0.9241h25.59675c0.51078,0,0.9241,0.41331,0.9241,0.9241S36.13497,34.93969,35.62419,34.93969z\\" />
+                                <path d=\\"M35.62419,46.74538H10.02744c-0.51033,0-0.9241-0.41331-0.9241-0.9241s0.41377-0.9241,0.9241-0.9241h25.59675c0.51078,0,0.9241,0.41331,0.9241,0.9241S36.13497,46.74538,35.62419,46.74538z\\" />
+                                <path d=\\"M31.52893,28.8347H10.02744c-0.51033,0-0.9241-0.41377-0.9241-0.9241s0.41377-0.9241,0.9241-0.9241h21.50149c0.51078,0,0.9241,0.41377,0.9241,0.9241S32.03971,28.8347,31.52893,28.8347z\\" />
+                                <path d=\\"M31.52893,40.65303H10.02744c-0.51033,0-0.9241-0.41331-0.9241-0.9241s0.41377-0.9241,0.9241-0.9241h21.50149c0.51078,0,0.9241,0.41332,0.9241,0.9241S32.03971,40.65303,31.52893,40.65303z\\" />
+                              </svg>
+                            </Resource.Icon.Document>
+                          </div>
+                        </figure>
+                        <div className=\\"asset-description\\">
+                          <h3 className=\\"asset-title\\">
+                            Slarmbo
+                            <span className=\\"subtitle\\" />
+                          </h3>
+                          <datetime className=\\"asset-date\\">
+                            <FormattedDate prefix=\\"Added\\" format=\\"MMMM, YYYY\\" date={[undefined]} />
+                          </datetime>
+                          <span className=\\"asset-state\\">
+                            User
+                          </span>
+                        </div>
+                      </a>
+                    </Link>
+                    <div className=\\"text-category-list-utility\\">
+                      <Link className=\\"button\\" to=\\"/backend/text/1/styles/3\\" replace={false}>
+                        <a className=\\"button\\" onClick={[Function]} href=\\"/backend/text/1/styles/3\\">
+                          Edit
+                        </a>
+                      </Link>
+                      <button onClick={[Function]}>
+                        <i className=\\"manicon manicon-arrow-up\\" />
+                      </button>
+                      <button onClick={[Function]} style={{...}}>
+                        <i className=\\"manicon manicon-arrow-down\\" />
+                      </button>
+                      <button onClick={[Function]}>
+                        <i className=\\"manicon manicon-x\\" />
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+          <div className=\\"buttons-icon-horizontal\\">
+            <Link className=\\"button-icon-secondary\\" to=\\"/backend/text/1/styles/new\\" replace={false}>
+              <a className=\\"button-icon-secondary\\" onClick={[Function]} href=\\"/backend/text/1/styles/new\\">
+                <i className=\\"manicon manicon-plus\\" />
+                Add a New Stylesheet
+              </a>
+            </Link>
+          </div>
+        </div>
+      </Text.Styles>
+    </Provider>
+  </Router>
+</MemoryRouter>"
+`;

@@ -1,0 +1,636 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Project Metadata Container renders correctly 1`] = `
+<section>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-section"
+      >
+        <header
+          className="form-section-label"
+        >
+          <span>
+            Identity
+          </span>
+        </header>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            isbn
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="International Standard Book Number"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            issn
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="International Standard Serial Number"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-section"
+      >
+        <header
+          className="form-section-label"
+        >
+          <span>
+            Publisher
+          </span>
+        </header>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            publisher
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="The Publisher"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            publisher place
+          </label>
+          <span
+            className="instructions"
+          >
+            e.g "Minnesota, MN"
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder="Geographic location of the publisher"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            original publisher
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Original publisher, for items that have been republished by a different publisher"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            original publisher place
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Geographic location of the original publisher"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-section"
+      >
+        <header
+          className="form-section-label"
+        >
+          <span>
+            Bibliographic
+          </span>
+        </header>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            container title
+          </label>
+          <span
+            className="instructions"
+          >
+            e.g. the book title for a book chapter, the journal title for a journal article
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder="Title of the container holding the item"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            version
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Version of the item"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            edition
+          </label>
+          <span
+            className="instructions"
+          >
+            e.g. "3" when citing a chapter in the third edition of a book
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder="(Container) edition holding the item"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            issue
+          </label>
+          <span
+            className="instructions"
+          >
+            e.g. "5" when citing a journal article from journal volume 2, issue 5
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder="(Container) issue holding the item"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className="has-instructions"
+          >
+            volume
+          </label>
+          <span
+            className="instructions"
+          >
+            e.g. “2” when citing a chapter from book volume 2
+          </span>
+          <input
+            onChange={[Function]}
+            placeholder="(Container) volume holding the item "
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            original title
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Title of the original version"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-section"
+      >
+        <header
+          className="form-section-label"
+        >
+          <span>
+            Other
+          </span>
+        </header>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            abstract
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            archive
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            archive location
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            archive place
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            authority
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            call number
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            chapter number
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            collection number
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            collection title
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            dimensions
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            event
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            event place
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            jurisdiction
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            medium
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            number
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            number of pages
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            number of volumes
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            pmcid
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            pmid
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            reviewed title
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            section
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            year suffix
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={null}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Metadata"
+        />
+      </div>
+    </form>
+  </div>
+</section>
+`;

@@ -1,19 +1,20 @@
-jest.mock("components/backend/Form/CodeArea");
 import React from "react";
 import { mount } from "enzyme";
-import StylesheetEditContainer from "../Edit";
+import ProjectGeneralContainer from "../General";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 
-describe("Backend Stylesheet Edit Container", () => {
+describe("Backend Project General Container", () => {
   const store = build.store();
-  const stylesheet = build.entity.stylesheet("2");
+  const project = build.entity.project("1");
+  const subject = build.entity.subject("2");
+  project.relationships.subjects = [subject];
 
   const component = mount(
     wrapWithRouter(
       <Provider store={store}>
-        <StylesheetEditContainer stylesheet={stylesheet} />
+        <ProjectGeneralContainer project={project} />
       </Provider>
     )
   );
