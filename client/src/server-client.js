@@ -77,7 +77,7 @@ const render = (req, res, store) => {
 };
 
 const fetchRouteData = (req, store) => {
-  const location = req.url;
+  const location = req.path;
   const routes = getRoutes();
   const branch = matchRoutes(routes, location);
   const promises = branch.reduce((allPromises, matchedRoute) => {
