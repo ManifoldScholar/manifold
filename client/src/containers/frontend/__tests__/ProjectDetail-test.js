@@ -8,6 +8,7 @@ import build from "test/fixtures/build";
 describe("Frontend ProjectDetail Container", () => {
   const store = build.store();
   const project = build.entity.project("1");
+  const settings = build.entity.settings();
 
   const component = renderer.create(
     wrapWithRouter(
@@ -15,6 +16,7 @@ describe("Frontend ProjectDetail Container", () => {
         <ProjectDetailContainer
           dispatch={store.dispatch}
           project={project}
+          settings={settings}
           projectResponse={{}}
         />
       </Provider>

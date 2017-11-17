@@ -2,7 +2,7 @@
 class TextSerializer < TextPartialSerializer
   meta(partial: false)
 
-  attributes :toc, :metadata, :metadata_properties, :citations
+  attributes :toc, :metadata, :metadata_properties, :citations, :description
 
   belongs_to :project
   has_many :stylesheets, serializer: StylesheetPartialSerializer

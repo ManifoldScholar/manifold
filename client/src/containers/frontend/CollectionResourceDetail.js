@@ -7,6 +7,7 @@ import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { collectionsAPI, requests } from "api";
 import { HeadContent } from "components/global";
+import HigherOrder from "containers/global/HigherOrder";
 
 const { request, flush } = entityStoreActions;
 
@@ -42,6 +43,7 @@ export class CollectionResourceDetailContainer extends PureComponent {
     resource: PropTypes.object,
     dispatch: PropTypes.func,
     collection: PropTypes.object,
+    settings: PropTypes.object.isRequired,
     collectionResource: PropTypes.object,
     match: PropTypes.object
   };
@@ -77,25 +79,26 @@ export class CollectionResourceDetailContainer extends PureComponent {
   render() {
     if (!this.props.collectionResource) return null;
     if (!this.props.collection) return null;
-    const { collection, collectionResource } = this.props;
+    const { collection, collectionResource, settings } = this.props;
     const resource = collectionResource.relationships.resource;
 
     return (
       <div>
         <HeadContent
-          title={`Manifold Scholarship | ${collection.attributes
-            .title} | ${resource.attributes.titlePlaintext}`}
+          title={`\u201c${resource.attributes
+            .titlePlaintext}\u201d Resource on ${settings.attributes.general
+            .installationName}`}
           description={resource.attributes.captionPlaintext}
           image={
             resource.attributes.attachmentStyles.mediumSquare ||
             resource.attributes.variantThumbnailStyles.mediumSquare
           }
         />
-        {this.props.collection
+        {collection
           ? <Utility.BackLinkPrimary
               backText="Back to Collection"
               link={this.collectionUrl()}
-              title={this.props.collection.attributes.title}
+              title={collection.attributes.title}
             />
           : null}
         {this.props.collectionResource
@@ -103,10 +106,10 @@ export class CollectionResourceDetailContainer extends PureComponent {
               projectId={this.props.match.params.id}
               projectUrl={this.projectUrl()}
               resourceUrl={this.resourceUrl()}
-              resource={this.props.collectionResource.relationships.resource}
+              resource={collectionResource.relationships.resource}
             />
           : null}
-        {this.props.collection
+        {collection
           ? <section className="bg-neutral05">
               <Utility.BackLinkSecondary
                 link={this.collectionUrl()}
@@ -119,4 +122,6 @@ export class CollectionResourceDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(CollectionResourceDetailContainer);
+export default connectAndFetch(
+  HigherOrder.withSettings(CollectionResourceDetailContainer)
+);

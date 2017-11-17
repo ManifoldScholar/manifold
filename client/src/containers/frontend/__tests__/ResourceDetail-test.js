@@ -7,6 +7,7 @@ import build from "test/fixtures/build";
 
 describe("Frontend ResourceDetail Container", () => {
   const store = build.store();
+  const settings = build.entity.settings("1");
   const project = build.entity.project("1");
   const resource = build.entity.resource("2", { projectId: "1" });
   resource.relationships.project = project;
@@ -15,6 +16,7 @@ describe("Frontend ResourceDetail Container", () => {
     wrapWithRouter(
       <Provider store={store}>
         <ResourceDetailContainer
+          settings={settings}
           dispatch={store.dispatch}
           project={project}
           resource={resource}

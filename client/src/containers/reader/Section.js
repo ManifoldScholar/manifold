@@ -14,9 +14,12 @@ import { entityStoreActions } from "actions";
 import uniq from "lodash/uniq";
 import difference from "lodash/difference";
 import get from "lodash/get";
+import isNil from "lodash/isNil";
+import remove from "lodash/remove";
 import some from "lodash/some";
 import { renderRoutes } from "helpers/routing";
 import { HeadContent } from "components/global";
+import HigherOrder from "containers/global/HigherOrder";
 
 const { request, flush } = entityStoreActions;
 
@@ -53,6 +56,7 @@ export class SectionContainer extends Component {
     section: PropTypes.object,
     route: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
+    settings: PropTypes.object.isRequired,
     annotations: PropTypes.array,
     resources: PropTypes.array,
     collections: PropTypes.array,
@@ -152,20 +156,32 @@ export class SectionContainer extends Component {
 
   render() {
     if (!this.props.section || !this.props.text) return null;
-    const text = this.props.text;
-    const project = text.relationships.project;
-    const projectImage = project
-      ? project.attributes.avatarStyles.mediumSquare
-      : null;
-    const projectDesc = project ? project.attributes.description : null;
+    const { text, section, settings } = this.props;
+    const { project } = text.relationships;
+    const projectImage = project ? project.attributes.heroStyles.medium : null;
+    const textTitle = text.attributes.title;
+    const sectionTitle = section.attributes.name;
+    const projectTitle = project.attributes.title;
+
+    const parts = remove(
+      uniq([sectionTitle, textTitle, projectTitle]),
+      v => !isNil(v)
+    );
+    const append = settings.attributes.general.installationName;
+    let metaTitle = "";
+    if (parts.length === 1) metaTitle = `\u201c${parts[0]}\u201d on ${append}`;
+    if (parts.length === 2 || parts.length === 3)
+      metaTitle = `\u201c${parts[0]}\u201d in \u201c${parts[1]}\u201d on ${append}`;
+    let sectionDescription = text.attributes.description;
+    if (!sectionDescription)
+      sectionDescription = `Start reading this text on ${append}.`;
 
     return (
       <div>
         <HeadContent
-          title={`Manifold Scholarship | ${text.attributes.title} | ${this.props
-            .section.attributes.name}`}
+          title={metaTitle}
           image={projectImage}
-          description={projectDesc}
+          description={sectionDescription}
         />
         {renderRoutes(this.props.route.routes)}
         <Section.Text {...this.props} />
@@ -192,4 +208,4 @@ export class SectionContainer extends Component {
   }
 }
 
-export default connectAndFetch(SectionContainer);
+export default connectAndFetch(HigherOrder.withSettings(SectionContainer));
