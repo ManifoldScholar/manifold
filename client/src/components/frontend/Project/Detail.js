@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
-import { HeadContent } from "components/global";
 
 import {
   Event,
@@ -19,7 +18,8 @@ class Detail extends Component {
   static displayName = "Project.Detail";
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    settings: PropTypes.object
   };
 
   constructor() {
@@ -228,12 +228,6 @@ class Detail extends Component {
 
     return (
       <div>
-        <HeadContent
-          title={`Manifold Scholarship | ${this.props.project.attributes
-            .title}`}
-          description={this.props.project.attributes.description}
-          image={this.props.project.attributes.avatarStyles.mediumSquare}
-        />
         <Project.Hero project={this.props.project} />
         {this.renderActivity()}
         {this.renderTexts()}

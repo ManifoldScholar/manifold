@@ -7,6 +7,7 @@ import { select } from "utils/entityUtils";
 import { projectsAPI, resourcesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { HeadContent } from "components/global";
+import HigherOrder from "containers/global/HigherOrder";
 
 const { request, flush } = entityStoreActions;
 
@@ -32,6 +33,7 @@ export class ResourceDetailContainer extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object,
+    settings: PropTypes.object.isRequired,
     resource: PropTypes.object,
     dispatch: PropTypes.func,
     visibility: PropTypes.object
@@ -55,24 +57,26 @@ export class ResourceDetailContainer extends PureComponent {
   render() {
     const projectId = this.props.project ? this.props.project.id : null;
     if (!projectId) return null;
-    const { project, resource } = this.props;
+    const { project, resource, settings } = this.props;
+    if (!resource) return null;
 
     return (
       <div>
         <HeadContent
-          title={`Manifold Scholarship | ${project.attributes
-            .title} | ${resource.attributes.titlePlaintext}`}
+          title={`\u201c${resource.attributes
+            .titlePlaintext}\u201d Resource on ${settings.attributes.general
+            .installationName}`}
           description={resource.attributes.captionPlaintext}
           image={
             resource.attributes.attachmentStyles.mediumSquare ||
             resource.attributes.variantThumbnailStyles.mediumSquare
           }
         />
-        {this.props.project
+        {project
           ? <Utility.BackLinkPrimary
               backText="Back to Project Resources"
               link={this.projectUrl()}
-              title={this.props.project.attributes.title}
+              title={project.attributes.title}
             />
           : null}
         {this.props.resource
@@ -84,7 +88,7 @@ export class ResourceDetailContainer extends PureComponent {
               dispatch={this.props.dispatch}
             />
           : null}
-        {this.props.project
+        {project
           ? <section className="bg-neutral05">
               <Utility.BackLinkSecondary
                 backText="Back to Project Resources"
@@ -97,4 +101,6 @@ export class ResourceDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(ResourceDetailContainer);
+export default connectAndFetch(
+  HigherOrder.withSettings(ResourceDetailContainer)
+);

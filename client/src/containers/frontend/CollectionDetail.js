@@ -5,6 +5,8 @@ import { Utility, ResourceCollection } from "components/frontend";
 import { entityStoreActions } from "actions";
 import { select, grab, meta, loaded, isEntityLoaded } from "utils/entityUtils";
 import { projectsAPI, collectionsAPI, requests } from "api";
+import { HeadContent } from "components/global";
+import HigherOrder from "containers/global/HigherOrder";
 import queryString from "query-string";
 import debounce from "lodash/debounce";
 import omitBy from "lodash/omitBy";
@@ -74,6 +76,7 @@ export class CollectionDetailContainer extends PureComponent {
     slideshowResourcesMeta: PropTypes.object,
     project: PropTypes.object,
     collection: PropTypes.object,
+    settings: PropTypes.object.isRequired,
     resources: PropTypes.array,
     resourcesMeta: PropTypes.object,
     history: PropTypes.object
@@ -152,21 +155,24 @@ export class CollectionDetailContainer extends PureComponent {
   }
 
   render() {
-    const project = this.props.project;
-    const collection = this.props.collection;
-
+    const { project, collection, settings } = this.props;
     const filter = this.state.filter;
     const initialFilter = filter || null;
-
     if (!project || !collection) return null;
+
     const collectionUrl = lh.link(
       "frontendProjectCollection",
       project.id,
       collection.id
     );
-
     return (
       <div>
+        <HeadContent
+          title={`\u201c${collection.attributes.title}\u201d on ${settings
+            .attributes.general.installationName}`}
+          description={collection.attributes.description}
+          image={collection.attributes.thumbnailStyles.medium}
+        />
         <Utility.BackLinkPrimary
           link={lh.link("frontendProject", project.id)}
           title={project.attributes.title}
@@ -197,4 +203,6 @@ export class CollectionDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(CollectionDetailContainer);
+export default connectAndFetch(
+  HigherOrder.withSettings(CollectionDetailContainer)
+);

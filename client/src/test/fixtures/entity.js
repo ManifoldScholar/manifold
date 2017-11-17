@@ -46,6 +46,7 @@ const defaults = {
     type: "settings",
     attributes: {
       general: {
+        installationName: "Manifold",
         contactUrl: "http://www.dailyrowan.com",
         copyright: "2015-2016 6 University of Minnesota Press"
       },

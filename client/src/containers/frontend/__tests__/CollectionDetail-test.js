@@ -9,6 +9,7 @@ describe("Frontend CollectionDetail Container", () => {
   const pagination = build.pagination();
   const store = build.store();
 
+  const settings = build.entity.settings();
   const project = build.entity.project("1");
   const collection = build.entity.collection("2");
   const resource = build.entity.resource("3", { projectId: "1" });
@@ -22,6 +23,7 @@ describe("Frontend CollectionDetail Container", () => {
   const filterChangeMock = jest.fn();
 
   const props = {
+    settings,
     project,
     collection,
     params: { id: "2" },

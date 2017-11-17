@@ -10,6 +10,8 @@ import debounce from "lodash/debounce";
 import omitBy from "lodash/omitBy";
 import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
+import { HeadContent } from "components/global";
+import HigherOrder from "containers/global/HigherOrder";
 
 const { request, flush } = entityStoreActions;
 const page = 1;
@@ -38,6 +40,7 @@ class ProjectResourcesContainer extends Component {
 
   static propTypes = {
     project: PropTypes.object,
+    settings: PropTypes.object.isRequired,
     resources: PropTypes.array,
     meta: PropTypes.object,
     dispatch: PropTypes.func,
@@ -121,7 +124,7 @@ class ProjectResourcesContainer extends Component {
   }
 
   render() {
-    const project = this.props.project;
+    const { project, settings } = this.props;
     if (!project) return null;
 
     const filter = this.state.filter;
@@ -129,6 +132,13 @@ class ProjectResourcesContainer extends Component {
 
     return (
       <div>
+        <HeadContent
+          title={`View \u201c${project.attributes
+            .title}\u201d Resources on ${settings.attributes.general
+            .installationName}`}
+          description={project.attributes.description}
+          image={project.attributes.heroStyles.medium}
+        />
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary
             link={lh.link("frontendProject", project.id)}
@@ -156,4 +166,6 @@ class ProjectResourcesContainer extends Component {
   }
 }
 
-export default connectAndFetch(ProjectResourcesContainer);
+export default connectAndFetch(
+  HigherOrder.withSettings(ProjectResourcesContainer)
+);

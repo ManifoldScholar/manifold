@@ -2,19 +2,42 @@
 
 exports[`Frontend ProjectDetail Container renders correctly 1`] = `
 <div>
-  <div
-    className="project-detail-hero"
-    style={Object {}}
-  >
+  <div>
     <div
-      className="container"
+      className="project-detail-hero"
+      style={Object {}}
     >
       <div
-        className="project-figure"
+        className="container"
       >
-        
         <div
-          className="project-figure-caption"
+          className="project-figure"
+        >
+          
+          <div
+            className="project-figure-caption"
+          >
+            <h1
+              className="project-title"
+            >
+              <span
+                className="title-text"
+              >
+                Rowan Test
+              </span>
+              <span
+                className="subtitle"
+              >
+                World's Greatest Dog
+              </span>
+            </h1>
+            <section
+              className="project-maker"
+            />
+          </div>
+        </div>
+        <div
+          className="project-info"
         >
           <h1
             className="project-title"
@@ -33,73 +56,52 @@ exports[`Frontend ProjectDetail Container renders correctly 1`] = `
           <section
             className="project-maker"
           />
+          <section
+            className="project-social"
+          >
+            <nav
+              className="networks"
+            >
+              <ul />
+            </nav>
+            <span
+              className="hashtag"
+            >
+              ##cute_dog
+            </span>
+          </section>
+        </div>
+        <div
+          className="project-aside"
+        >
+          
         </div>
       </div>
-      <div
-        className="project-info"
-      >
-        <h1
-          className="project-title"
-        >
-          <span
-            className="title-text"
-          >
-            Rowan Test
-          </span>
-          <span
-            className="subtitle"
-          >
-            World's Greatest Dog
-          </span>
-        </h1>
-        <section
-          className="project-maker"
-        />
-        <section
-          className="project-social"
-        >
-          <nav
-            className="networks"
-          >
-            <ul />
-          </nav>
-          <span
-            className="hashtag"
-          >
-            ##cute_dog
-          </span>
-        </section>
-      </div>
-      <div
-        className="project-aside"
-      >
-        
-      </div>
     </div>
-  </div>
-  <section
-    className="bg-neutral05"
-  >
-    <div
-      className="container"
+    <section
+      className="bg-neutral05"
     >
-      <nav
-        className="button-nav"
+      <div
+        className="container"
       >
-        <a
-          className="button-icon-primary"
-          href="/"
-          onClick={[Function]}
+        <nav
+          className="button-nav"
         >
-          <span>
-            <i
-              className="manicon manicon-books-on-shelf"
-            />
-            See more projects
-          </span>
-        </a>
-      </nav>
-    </div>
-  </section>
+          <a
+            className="button-icon-primary"
+            href="/"
+            onClick={[Function]}
+          >
+            <span>
+              <i
+                className="manicon manicon-books-on-shelf"
+              />
+              See more projects
+            </span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </div>
 </div>
 `;

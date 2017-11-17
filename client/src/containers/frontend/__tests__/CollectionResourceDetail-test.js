@@ -8,6 +8,7 @@ import { wrapWithRouter } from "test/helpers/routing";
 describe("Frontend CollectionResourceDetail Container", () => {
   const store = build.store();
 
+  const settings = build.entity.settings();
   const project = build.entity.project("1");
   const collection = build.entity.collection("2", { projectId: "1" });
   const resource = build.entity.resource("3", { projectId: "1" });
@@ -21,6 +22,7 @@ describe("Frontend CollectionResourceDetail Container", () => {
     wrapWithRouter(
       <Provider store={store}>
         <CollectionResourceDetailContainer
+          settings={settings}
           collection={collection}
           collectionResource={collectionResource}
           resource={resource}
