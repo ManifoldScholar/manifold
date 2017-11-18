@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { HigherOrder, FatalError } from "components/global";
+import { HigherOrder, FatalError, Utility } from "components/global";
 import HigherOrderContainers from "containers/global/HigherOrder";
 import { Layout } from "components/frontend";
 import { commonActions } from "actions/helpers";
@@ -60,6 +60,7 @@ export class FrontendContainer extends Component {
     return (
       <HigherOrder.BodyClass className={"browse"}>
         <div>
+          <Utility.ScrollToTop />
           <HigherOrder.ScrollAware>
             <Layout.Header
               pages={this.props.pages}

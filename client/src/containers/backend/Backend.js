@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { HigherOrder, FatalError } from "components/global";
+import { HigherOrder, FatalError, Utility } from "components/global";
 import { Layout as LayoutFrontend } from "components/frontend";
 import { Layout as LayoutBackend } from "components/backend";
 import { commonActions } from "actions/helpers";
@@ -97,6 +97,7 @@ export class BackendContainer extends PureComponent {
     return (
       <HigherOrder.BodyClass className={"backend bg-neutral90"}>
         <div>
+          <Utility.ScrollToTop />
           <HigherOrder.ScrollAware>
             <LayoutBackend.Header
               visibility={this.props.visibility}
