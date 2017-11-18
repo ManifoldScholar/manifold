@@ -8,6 +8,11 @@ exports[`Backend Backend Container renders correctly 1`] = `
         <SideEffect(BodyClass) className=\\"backend bg-neutral90\\">
           <BodyClass className=\\"backend bg-neutral90\\">
             <div>
+              <withRouter(ScrollToTop)>
+                <Route render={[Function]}>
+                  <ScrollToTop match={{...}} location={{...}} history={{...}} staticContext={[undefined]} />
+                </Route>
+              </withRouter(ScrollToTop)>
               <ScrollAware threshold={200} topClass=\\"top\\" notTopClass=\\"not-top\\" startPinned={true} pinnedClass=\\"pinned\\" notPinnedClass=\\"not-pinned\\" pinThreshold={50}>
                 <div className=\\"scroll-aware top pinned\\">
                   <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} notifications={{...}} commonActions={{...}} settings={[undefined]} scrollAware={{...}}>

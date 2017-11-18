@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import Helmet from "react-helmet";
-import { SignInUp, LoadingBar, Utility } from "components/global";
+import { SignInUp, LoadingBar } from "components/global";
 import config from "../config";
 import has from "lodash/has";
 import get from "lodash/get";
@@ -172,7 +172,6 @@ class ManifoldContainer extends PureComponent {
       <div onClick={this.handleGlobalClick} className="global-container">
         {this.renderTypekit()}
         {this.props.confirm}
-        <Utility.ScrollToTop />
         <Helmet {...config.app.head} />
         <LoadingBar loading={this.props.loading} />
         <ReactCSSTransitionGroup
