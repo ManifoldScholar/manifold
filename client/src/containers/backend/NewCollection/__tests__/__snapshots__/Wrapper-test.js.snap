@@ -42,7 +42,7 @@ exports[`Backend NewCollection Wrapper Container renders correctly 1`] = `
       >
         <figure>
           <i
-            className="manicon manicon-file-box"
+            className="manicon manicon-file-box-border"
           />
         </figure>
         <div
