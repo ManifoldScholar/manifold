@@ -11,7 +11,7 @@ exports[`Backend ProjectDetail Resource CollectionList Container renders correct
       Collections
        
       <i
-        className="manicon manicon-cube-shine"
+        className="manicon manicon-file-box"
       />
     </h3>
   </header>
