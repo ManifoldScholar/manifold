@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115172119) do
+ActiveRecord::Schema.define(version: 20171120190035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -481,6 +481,7 @@ ActiveRecord::Schema.define(version: 20171115172119) do
     t.jsonb    "metadata",              default: {}
     t.string   "slug"
     t.jsonb    "citations",             default: {}
+    t.string   "section_kind"
     t.index ["created_at"], name: "index_texts_on_created_at", using: :brin
     t.index ["slug"], name: "index_texts_on_slug", unique: true, using: :btree
   end

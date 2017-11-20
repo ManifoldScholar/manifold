@@ -26,11 +26,15 @@ export default class NextSection extends PureComponent {
       this.props.sectionsMap,
       this.props.sectionId
     );
+    const { text } = this.props;
     if (!nextSection || !nextSection.name) return null;
     return (
       <Link to={this.getSectionPath(nextSection.id)}>
         <header>
-          {"Next"}
+          {text.attributes.sectionKind
+            ? `Next ${text.attributes.sectionKind}`
+            : 'Next Chapter'
+          }
         </header>
         <h3>
           <div>

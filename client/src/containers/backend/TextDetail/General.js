@@ -37,6 +37,12 @@ export default class TextDetailGeneralContainer extends PureComponent {
             name="attributes[language]"
             placeholder="Enter the Language"
           />
+          <Form.TextInput
+            label="Section Label"
+            name="attributes[sectionKind]"
+            placeholder="Enter a label for sections in this text"
+            instructions="This field is used in reader next/previous links. For example, “chapter” for books or “article” for journals"
+          />
           <Form.TextArea
             label="Rights"
             name="attributes[rights]"
