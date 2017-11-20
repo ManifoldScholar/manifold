@@ -24,3 +24,28 @@ exports[`Reader.Section.Pagination component renders correctly 1`] = `
   </div>
 </nav>
 `;
+
+exports[`Reader.Section.Pagination component renders correctly with text section kind 1`] = `
+<nav
+  className="section-pagination"
+>
+  <div
+    className="container"
+  >
+    <a
+      className="pagination-next"
+      href="/read/slug-1/section/1234"
+      onClick={[Function]}
+    >
+      <span
+        className="text"
+      >
+        Next
+      </span>
+      <i
+        className="manicon manicon-arrow-round-right"
+      />
+    </a>
+  </div>
+</nav>
+`;

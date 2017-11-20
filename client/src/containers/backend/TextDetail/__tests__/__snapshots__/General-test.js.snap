@@ -58,6 +58,27 @@ exports[`Backend TextDetail General Container renders correctly 1`] = `
       </div>
       <div
         className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Section Label
+        </label>
+        <span
+          className="instructions"
+        >
+          This field is used in reader next/previous links. For example, “chapter” for books or “article” for journals
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Enter a label for sections in this text"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
       >
         <div
           className="form-input"
