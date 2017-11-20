@@ -77,7 +77,7 @@ export class ProjectDetailCollectionsList extends PureComponent {
       <div className="project-resource-list">
         <header className="section-heading-secondary">
           <h3>
-            {"Collections"} <i className="manicon manicon-cube-shine" />
+            {"Collections"} <i className="manicon manicon-file-box" />
           </h3>
         </header>
         <List.Searchable
