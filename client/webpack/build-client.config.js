@@ -29,7 +29,7 @@ const nameTemplate =
 const plugins = [];
 const devtool = process.env.WEBPACK_DEV_SERVER
   ? "cheap-module-eval-source-map"
-  : "none"; // was source-map
+  : "source-map";
 
 const config = {
   // Webpack mocks node's global "process". We don't want it to in this case, because
