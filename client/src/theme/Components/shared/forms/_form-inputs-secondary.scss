@@ -30,6 +30,10 @@
       -webkit-text-fill-color: $accentPrimaryPale !important;
     }
   }
+
+  &::placeholder {
+    color: $neutral75;
+  }
 }
 
 .form-secondary {
@@ -61,7 +65,7 @@
   .instructions {
     @include templateCopy;
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: .5em;
     font-size: 15px;
     font-style: italic;
     color: $neutral50;
@@ -76,21 +80,22 @@
     label:not(.checkbox):not(.radio) {
       @include formLabelPrimary;
       display: block;
-      margin-bottom: 1.167em;
+      margin-bottom: .5em;
       color: $neutral75;
 
       &.below {
-        margin-top: 0.75em;
+        margin-top: .6em;
         margin-bottom: 0;
       }
 
       &.has-instructions {
-        margin-bottom: 1em;
+        margin-bottom: .5em;
       }
 
       &.secondary {
         font-weight: normal;
       }
+
     }
 
     input[type="text"], input[type="password"] {
