@@ -154,7 +154,7 @@ Clamp do
     def test_api
       integration = integration? ? " --tag integration" : ""
       puts Paint["rspec -fd #{integration}", :faint]
-      raise "API test failed" unless system "cd api && rspec -fd #{integration}"
+      raise "API test failed" unless system "cd api && ./bin/rspec -fd #{integration}"
     end
 
     def test_client
