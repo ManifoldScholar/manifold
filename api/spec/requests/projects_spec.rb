@@ -46,7 +46,7 @@ RSpec.describe "Projects API", type: :request do
         "isbn" => "1234",
         "publisher" => "Someone",
         "publisherPlace" => "Somewhere",
-        "collectionTitle" => "The Hardy Boys"
+        "containerTitle" => "The Hardy Boys"
       }
     }
     context "when the user is an admin" do

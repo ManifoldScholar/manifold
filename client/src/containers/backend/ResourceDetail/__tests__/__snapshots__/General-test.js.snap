@@ -113,6 +113,28 @@ exports[`Backend ResourceDetail General Container renders correctly 1`] = `
       </div>
       <div
         className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Tags
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter tags separated by ,"
+          type="text"
+          value={
+            Array [
+              "dog",
+              "puppy",
+              "GOAT",
+            ]
+          }
+        />
+      </div>
+      <div
+        className="form-input"
       >
         <div
           className="form-input"

@@ -27,31 +27,20 @@ export default class TextDetailGeneralContainer extends PureComponent {
             name="attributes[title]"
             placeholder="Enter Text Title"
           />
-          <Form.TextInput
-            label="Unique Identifier"
-            name="attributes[uniqueIdentifier]"
-            placeholder="Enter the Unique Identifier"
+          <Form.Date
+            label="Publication Date"
+            name="attributes[publicationDate]"
           />
-          <Form.TextInput
-            label="Language"
-            name="attributes[language]"
-            placeholder="Enter the Language"
+          <Form.TextArea
+            label="Description"
+            name="attributes[description]"
+            placeholder="Enter a Brief Description"
           />
           <Form.TextInput
             label="Section Label"
             name="attributes[sectionKind]"
             placeholder="Enter a label for sections in this text"
             instructions="This field is used in reader next/previous links. For example, “chapter” for books or “article” for journals"
-          />
-          <Form.TextArea
-            label="Rights"
-            name="attributes[rights]"
-            placeholder="Enter Text Rights"
-          />
-          <Form.TextArea
-            label="Description"
-            name="attributes[description]"
-            placeholder="Enter a Brief Description"
           />
           <Form.Save text="Save Text" />
         </FormContainer.Form>

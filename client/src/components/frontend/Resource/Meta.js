@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Resource } from "components/frontend";
 import filesize from "filesize";
+import pickBy from "lodash/pickBy";
+import isNull from "lodash/isNull";
 import FormattedDate from "components/global/FormattedDate";
+import humps from "humps";
 
 export default class ResourceMeta extends Component {
   static displayName = "Resource.Meta";
@@ -21,6 +24,12 @@ export default class ResourceMeta extends Component {
 
   render() {
     const attr = this.props.resource.attributes;
+    const exclude = ["credit", "altText"];
+    const filteredMetadata = pickBy(
+      attr.metadata,
+      (v, k) => !exclude.includes(k) && !isNull(v) && v.length > 0
+    );
+    const keys = Object.keys(filteredMetadata).sort();
 
     return (
       <section className="resource-meta">
@@ -66,26 +75,6 @@ export default class ResourceMeta extends Component {
               <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
             </span>
           </li>
-          {attr.copyrightStatus
-            ? <li>
-                <span className="meta-label">
-                  {"Copyright Status"}
-                </span>
-                <span className="meta-value">
-                  {attr.copyrightStatus}
-                </span>
-              </li>
-            : null}
-          {attr.copyrightHolder
-            ? <li>
-                <span className="meta-label">
-                  {"Copyright Holder"}
-                </span>
-                <span className="meta-value">
-                  {attr.copyrightHolder}
-                </span>
-              </li>
-            : null}
           {attr.creditFormatted
             ? <li>
                 <span className="meta-label">
@@ -97,8 +86,19 @@ export default class ResourceMeta extends Component {
                 />
               </li>
             : null}
+          {keys.sort().map(key => {
+            return (
+              <li key={key}>
+                <span className="meta-label">
+                  {humps.decamelize(key, { separator: " " })}
+                </span>
+                <span className="meta-value">
+                  {attr.metadata[key]}
+                </span>
+              </li>
+            );
+          })}
         </ul>
-
         {this.props.showTags
           ? <Resource.TagList resource={this.props.resource} />
           : null}

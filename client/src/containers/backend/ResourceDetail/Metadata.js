@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Form } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
+import { Metadata } from "components/backend";
 import { resourcesAPI } from "api";
 
 export default class ResourceDetailMetadataContainer extends PureComponent {
@@ -13,50 +12,14 @@ export default class ResourceDetailMetadataContainer extends PureComponent {
   };
 
   render() {
-    // See https://github.com/ReactTraining/react-router/issues/3753
     return (
-      <section>
-        <FormContainer.Form
-          model={this.props.resource}
-          name="backend-project-general"
-          update={resourcesAPI.update}
-          create={model =>
-            resourcesAPI.create(this.props.params.projectId, model)}
-          className="form-secondary"
-        >
-          <Form.TextInput
-            focusOnMount
-            label="Tags"
-            name="attributes[keywords]"
-            placeholder="Enter tags separated by ,"
-          />
-          <Form.TextInput
-            focusOnMount
-            label="Alt Text"
-            name="attributes[altText]"
-            placeholder="Alt Text"
-          />
-          <Form.TextInput
-            focusOnMount
-            label="Copyright Status"
-            name="attributes[copyrightStatus]"
-            placeholder="Copyright Status"
-          />
-          <Form.TextInput
-            focusOnMount
-            label="Copyright Holder"
-            name="attributes[copyrightHolder]"
-            placeholder="Copyright Holder"
-          />
-          <Form.TextInput
-            focusOnMount
-            label="Credit"
-            name="attributes[credit]"
-            placeholder="Credit"
-          />
-          <Form.Save text="Save Metadata" />
-        </FormContainer.Form>
-      </section>
+      <Metadata.Form
+        model={this.props.resource}
+        name="backend-resource-metadata"
+        update={resourcesAPI.update}
+        create={resourcesAPI.create}
+        className="form-secondary"
+      />
     );
   }
 }

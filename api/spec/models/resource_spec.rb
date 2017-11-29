@@ -18,7 +18,7 @@ RSpec.describe Resource, type: :model do
 
   it "has a list of tags" do
     resource = FactoryGirl.create(:resource)
-    resource.keywords = "one, two; three"
+    resource.tag_list = "one, two; three"
     resource.save
     expect(resource.tag_list.count).to eq(3)
   end
@@ -99,7 +99,7 @@ RSpec.describe Resource, type: :model do
       @collection_b = FactoryGirl.create(:collection, title: "collection_b", project: @project_a)
       @resource_a = FactoryGirl.create(:resource, title: "resource_a", project: @project_a)
       @resource_b = FactoryGirl.create(:resource, title: "resource_b", project: @project_a)
-      @resource_c = FactoryGirl.create(:resource, title: "resource_c", project: @project_b, keywords: "test")
+      @resource_c = FactoryGirl.create(:resource, title: "resource_c", project: @project_b, tag_list: "test")
     end
 
     it "and ordered by collection order" do

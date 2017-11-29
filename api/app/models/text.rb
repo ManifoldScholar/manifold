@@ -19,12 +19,10 @@ class Text < ApplicationRecord
 
   # Magic
   with_metadata %w(
-    abstract archive archive_location archive_place authority call_number collection_title
-    container_title dimensions event event_place isbn issn jurisdiction medium
-    original_publisher original_publisher_place original_title pmcid pmid publisher
-    publisher_place reviewed_title section version year_suffix chapter_number
-    collection_number edition issue number number_of_pages number_of_volumes volume
-    issued
+    series_title container_title isbn issn doi unique_identifier language
+    original_publisher original_publisher_place original_title publisher publisher_place
+    version series_number edition issue volume rights rights_territory restrictions
+    rights_holder
   )
 
   with_citation do |text|
@@ -75,7 +73,6 @@ class Text < ApplicationRecord
   delegate :publication_date, to: :project, prefix: true, allow_nil: true
 
   # Validation
-  validates :unique_identifier, presence: true
   validates :spine,
             presence: true, unless: proc { |x| x.spine.is_a?(Array) && x.spine.empty? }
 

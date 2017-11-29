@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120190035) do
+ActiveRecord::Schema.define(version: 20171128173833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -314,11 +314,6 @@ ActiveRecord::Schema.define(version: 20171120190035) do
     t.text     "caption"
     t.text     "description"
     t.string   "fingerprint"
-    t.text     "keywords"
-    t.string   "alt_text"
-    t.string   "copyright_status"
-    t.string   "copyright_holder"
-    t.string   "credit"
     t.string   "external_url"
     t.string   "external_id"
     t.string   "external_type"
@@ -326,7 +321,6 @@ ActiveRecord::Schema.define(version: 20171120190035) do
     t.boolean  "allow_download",                  default: true
     t.boolean  "doi_requested",                   default: false
     t.datetime "doi_added"
-    t.string   "doi",                             default: "f"
     t.string   "high_res_checksum"
     t.string   "transcript_checksum"
     t.string   "translation_checksum"
@@ -364,6 +358,7 @@ ActiveRecord::Schema.define(version: 20171120190035) do
     t.string   "sub_kind"
     t.string   "slug"
     t.integer  "comments_count",                  default: 0
+    t.jsonb    "metadata",                        default: {}
     t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
 
@@ -463,10 +458,7 @@ ActiveRecord::Schema.define(version: 20171120190035) do
     t.string   "title"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.string   "unique_identifier"
-    t.string   "language"
     t.date     "publication_date"
-    t.string   "rights"
     t.string   "description"
     t.text     "toc"
     t.text     "page_list"

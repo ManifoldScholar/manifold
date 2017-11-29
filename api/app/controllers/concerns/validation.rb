@@ -2,6 +2,7 @@
 module Validation
   extend ActiveSupport::Concern
 
+  # rubocop:disable Metrics/MethodLength
   def user_params
     params.require(:data)
     persistent_ui = {
@@ -23,6 +24,7 @@ module Validation
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
+  # rubocop:enable Metrics/MethodLength
 
   def project_params
     params.require(:data)
@@ -85,7 +87,7 @@ module Validation
                   :title, :caption, :description, :tag_list, :kind, :sub_kind,
                   :alt_text, :copyright_status, :copyright_holder, :credit, :keywords,
                   :allow_download, :external_type, :external_url, :external_id,
-                  :iframe_dimensions, :embed_code, :subject]
+                  :iframe_dimensions, :embed_code, :subject, metadata(Resource)]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
