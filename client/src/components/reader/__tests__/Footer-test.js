@@ -5,14 +5,18 @@ import { Footer } from "components/reader";
 describe("Reader.Footer component", () => {
   const text = {
     attributes: {
-      rights: "All rights reserved"
+      metadata: {
+        rights: "All rights reserved"        
+      }
     }
   };
 
   const text_multiline = {
     attributes: {
-      rights: `line one
-      line two`
+      metadata: {
+        rights: `line one
+        line two`        
+      }
     }
   };
 

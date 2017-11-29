@@ -23,7 +23,7 @@ exports[`Reader.Footer component adds a line break between lines 1`] = `
               <br />
             </span>
             <span>
-                    line two
+                      line two
             </span>
           </p>
         </div>

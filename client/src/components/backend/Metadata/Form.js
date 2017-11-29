@@ -4,6 +4,10 @@ import { Form as FormContainer } from "containers/backend";
 import { Form } from "components/backend";
 import config from "../../../config";
 import humps from "humps";
+import intersection from "lodash/intersection";
+import reduce from "lodash/reduce";
+import concat from "lodash/concat";
+import difference from "lodash/difference";
 
 export default class FormMakers extends PureComponent {
   static displayName = "Metadata.Form";
@@ -19,6 +23,88 @@ export default class FormMakers extends PureComponent {
   get metadataProperties() {
     if (!this.attributes || !this.attributes.metadataProperties) return [];
     return this.attributes.metadataProperties.sort();
+  }
+
+  get baseStructure() {
+    const keys = this.metadataProperties;
+    return [
+      {
+        label: "Copyright",
+        children: intersection(
+          [
+            "creator",
+            "rights",
+            "rightsHolder",
+            "rightsTerritory",
+            "restrictions",
+            "credit"
+          ],
+          keys
+        )
+      },
+      {
+        label: "Identity",
+        children: intersection(
+          ["isbn", "issn", "doi", "uniqueIdentifier"],
+          keys
+        )
+      },
+      {
+        label: "Publisher",
+        children: intersection(
+          [
+            "publisher",
+            "publisherPlace",
+            "originalPublisher",
+            "originalPublisherPlace",
+            "status"
+          ],
+          keys
+        )
+      },
+      {
+        label: "Bibliographic",
+        children: intersection(
+          [
+            "containerTitle",
+            "version",
+            "seriesTitle",
+            "seriesNumber",
+            "edition",
+            "issue",
+            "volume",
+            "originalTitle"
+          ],
+          keys
+        )
+      },
+      {
+        label: "Accessibility",
+        children: intersection(["altText"], keys)
+      }
+    ];
+  }
+
+  get structure() {
+    const keys = this.metadataProperties;
+    const filteredStructure = this.baseStructure.filter(
+      group => group.children.length > 0
+    );
+    const leftovers = difference(
+      keys,
+      reduce(
+        filteredStructure,
+        (used, group) => concat(used, group.children),
+        []
+      )
+    );
+    if (leftovers.length > 0) {
+      filteredStructure.push({
+        label: "Other",
+        children: leftovers
+      });
+    }
+    return filteredStructure;
   }
 
   get config() {
@@ -43,6 +129,12 @@ export default class FormMakers extends PureComponent {
     return this.configValueFor(prop, "placeholder");
   }
 
+  componentFor(prop) {
+    const key = this.configValueFor(prop, "type");
+    const component = Form[key];
+    return component || Form.TextInput;
+  }
+
   instructionsFor(prop) {
     return this.configValueFor(prop, "instructions");
   }
@@ -51,17 +143,24 @@ export default class FormMakers extends PureComponent {
     return (
       <section>
         <FormContainer.Form {...this.props}>
-          {this.metadataProperties.map((prop, i) => {
-            const focus = i === 0;
+          {this.structure.map((group, gi) => {
             return (
-              <Form.TextInput
-                key={prop}
-                focusOnMount={focus}
-                placeholder={this.placeholderFor(prop)}
-                instructions={this.instructionsFor(prop)}
-                label={this.labelize(prop)}
-                name={`attributes[metadata][${prop}]`}
-              />
+              <Form.FieldGroup label={group.label} key={group.label}>
+                {group.children.map((prop, i) => {
+                  const InputComponent = this.componentFor(prop);
+                  const focus = gi === 0 && i === 0;
+                  return (
+                    <InputComponent
+                      key={prop}
+                      focusOnMount={focus}
+                      placeholder={this.placeholderFor(prop)}
+                      instructions={this.instructionsFor(prop)}
+                      label={this.labelize(prop)}
+                      name={`attributes[metadata][${prop}]`}
+                    />
+                  );
+                })}
+              </Form.FieldGroup>
             );
           })}
           <Form.Save text="Save Metadata" />
@@ -70,34 +169,3 @@ export default class FormMakers extends PureComponent {
     );
   }
 }
-
-//
-// <Form.TextInput
-//   label="ISBN"
-//   name="attributes[metadata][isbn]"
-//   placeholder="Enter ISBN Number"
-// />
-// <Form.TextInput
-// label="Publisher"
-// name="attributes[metadata][publisher]"
-// placeholder="Enter Publisher Name"
-//   />
-//   <Form.TextInput
-// label="Place of Publication"
-// name="attributes[metadata][placeOfPublication]"
-// placeholder="Enter Place of Publication"
-//   />
-//   <Form.Date
-// label="Publication Date"
-// name="attributes[publicationDate]"
-//   />
-//   <Form.TextInput
-// label="Digital Object Identifier (DOI)"
-// name="attributes[metadata][doi]"
-// placeholder="Enter DOI"
-//   />
-//   <Form.TextInput
-// label="Series"
-// name="attributes[metadata][series]"
-// placeholder="Enter Series Name"
-//   />

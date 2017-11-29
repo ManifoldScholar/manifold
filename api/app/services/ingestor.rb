@@ -51,7 +51,7 @@ module Ingestor
       _basename, ingestion, strategy = start(path, creator)
       validate_strategy(strategy)
       id = strategy.unique_id(ingestion)
-      ingestion.text.unique_identifier = id
+      ingestion.text.metadata["unique_identifier"] = id
       res = do_ingestion(strategy, ingestion)
       ingestion.teardown
       res
@@ -108,13 +108,13 @@ module Ingestor
 
     def set_ingestion_text(strategy, ingestion)
       id = strategy.unique_id(ingestion)
-      text = Text.where(unique_identifier: id).first
+      text = Text.where("metadata @> ?", { unique_identifier: id }.to_json).first
       if text
         info "services.ingestor.logging.text_found", id: text.id
         ingestion.text = text if text
       else
         info "services.ingestor.logging.text_not_found", id: id
-        ingestion.text.unique_identifier = id
+        ingestion.text.metadata["unique_identifier"] = id
       end
     end
   end

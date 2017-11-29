@@ -1,5 +1,7 @@
 # Provides a partial serialization of a project model.
 class ProjectSerializer < ProjectPartialSerializer
+  include SerializedMetadata
+
   meta(partial: false)
 
   attributes :event_count, :metadata, :collections_count, :resources_count,
@@ -40,10 +42,6 @@ class ProjectSerializer < ProjectPartialSerializer
 
   def published_text_toc_id
     object.published_text.try(:toc_section).try(:id)
-  end
-
-  def metadata_properties
-    object.metadata_properties.map { |p| p.camelize(:lower) }
   end
 
 end

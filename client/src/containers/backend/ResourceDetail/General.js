@@ -51,6 +51,12 @@ export class ResourceDetailGeneralContainer extends PureComponent {
             placeholder="Enter a title"
             {...this.props}
           />
+          <Form.TextInput
+            focusOnMount
+            label="Tags"
+            name="attributes[tagList]"
+            placeholder="Enter tags separated by ,"
+          />
           <Form.TextArea
             label="Description"
             name="attributes[description]"

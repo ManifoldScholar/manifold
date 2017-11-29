@@ -228,7 +228,7 @@ module Ingestor
           msg = I18n.t("services.ingestor.strategy.fail.missing_uid")
           raise IngestionFailed, msg
         end
-        text.unique_identifier = unique_id_inspector.unique_id
+        text.metadata["unique_identifier"] = unique_id_inspector.unique_id
       end
 
       #
@@ -256,8 +256,8 @@ module Ingestor
       end
 
       def update_language!(text)
-        text.language = language_inspector.language
-        info "services.ingestor.strategy.log.set_lang", lang: text.language
+        text.metadata["language"] = language_inspector.language
+        info "services.ingestor.strategy.log.set_lang", lang: text.metadata["language"]
       end
 
       def update_date!(text)
@@ -267,9 +267,9 @@ module Ingestor
       end
 
       def update_rights!(text)
-        text.rights = rights_inspector.rights
+        text.metadata["rights"] = rights_inspector.rights
         info "services.ingestor.strategy.log.set_rights",
-             rights: text.rights
+             rights: text.metadata["rights"]
       end
 
       def update_description!(text)

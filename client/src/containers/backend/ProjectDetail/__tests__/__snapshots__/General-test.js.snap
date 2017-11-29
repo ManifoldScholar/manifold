@@ -13,11 +13,46 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                   <div>
                     <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
                     <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
-                      <FieldGroup horizontal={true} label=\\"Project States\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                      <FieldGroup label=\\"Title\\" horizontal={false} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                        <div className=\\"form-section\\">
+                          <header className=\\"form-section-label\\">
+                            <span>
+                              Title
+                            </span>
+                          </header>
+                          <Form.Setter('Form.TextInput) validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                            <Form.TextInput validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"Rowan Test\\" initialValue=\\"Rowan Test\\" password={false}>
+                              <Errorable className=\\"form-input\\" name=\\"attributes[title]\\" errors={{...}} label=\\"Title\\" containerStyle={{...}}>
+                                <div style={{...}} className=\\"form-input\\">
+                                  <label className=\\"\\">
+                                    Title
+                                  </label>
+                                  <input type=\\"text\\" placeholder=\\"Enter Project Title\\" onChange={[Function]} value=\\"Rowan Test\\" />
+                                </div>
+                              </Errorable>
+                            </Form.TextInput>
+                          </Form.Setter('Form.TextInput)>
+                          <Form.Setter('Form.TextInput) label=\\"Subtitle\\" name=\\"attributes[subtitle]\\" placeholder=\\"Enter Project Subtitle\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                            <Form.TextInput label=\\"Subtitle\\" name=\\"attributes[subtitle]\\" placeholder=\\"Enter Project Subtitle\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"World's Greatest Dog\\" initialValue=\\"World's Greatest Dog\\" focusOnMount={false} password={false}>
+                              <Errorable className=\\"form-input\\" name=\\"attributes[subtitle]\\" errors={{...}} label=\\"Subtitle\\" containerStyle={{...}}>
+                                <div style={{...}} className=\\"form-input\\">
+                                  <label className=\\"\\">
+                                    Subtitle
+                                  </label>
+                                  <input type=\\"text\\" placeholder=\\"Enter Project Subtitle\\" onChange={[Function]} value=\\"World's Greatest Dog\\" />
+                                </div>
+                              </Errorable>
+                            </Form.TextInput>
+                          </Form.Setter('Form.TextInput)>
+                        </div>
+                      </FieldGroup>
+                      <FieldGroup horizontal={true} label=\\"Visibility\\" instructions=\\"Draft projects are only visible to admins. Featured projects are highlighted on the home page.\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
                         <div className=\\"form-section horizontal\\">
-                          <span className=\\"form-section-label\\">
-                            Project States
-                          </span>
+                          <header className=\\"form-section-label\\">
+                            <span>
+                              Visibility
+                            </span>
+                          </header>
                           <span className=\\"instructions\\">
                             Draft projects are only visible to admins. Featured projects are highlighted on the home page.
                           </span>
@@ -47,370 +82,367 @@ exports[`Backend ProjectDetail General Container renders correctly 1`] = `
                           </Form.Setter('Form.Switch)>
                         </div>
                       </FieldGroup>
-                      <Form.Setter('Form.TextInput) validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput validation={{...}} focusOnMount={true} label=\\"Title\\" name=\\"attributes[title]\\" placeholder=\\"Enter Project Title\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"Rowan Test\\" initialValue=\\"Rowan Test\\" password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[title]\\" errors={{...}} label=\\"Title\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Title
-                              </label>
-                              <input type=\\"text\\" placeholder=\\"Enter Project Title\\" onChange={[Function]} value=\\"Rowan Test\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Subtitle\\" name=\\"attributes[subtitle]\\" placeholder=\\"Enter Project Subtitle\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Subtitle\\" name=\\"attributes[subtitle]\\" placeholder=\\"Enter Project Subtitle\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"World's Greatest Dog\\" initialValue=\\"World's Greatest Dog\\" focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[subtitle]\\" errors={{...}} label=\\"Subtitle\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Subtitle
-                              </label>
-                              <input type=\\"text\\" placeholder=\\"Enter Project Subtitle\\" onChange={[Function]} value=\\"World's Greatest Dog\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.Date) label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
-                        <Form.Date label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
-                          <div className=\\"form-input\\">
-                            <label>
-                              Publication Date
-                            </label>
-                            <div className=\\"form-date\\">
-                              <div className=\\"form-select input-month\\">
-                                <i className=\\"manicon manicon-caret-down\\" />
-                                <select onChange={[Function]} value=\\"NaN\\">
-                                  <option />
-                                  <option value={0}>
-                                    January
-                                  </option>
-                                  <option value={1}>
-                                    February
-                                  </option>
-                                  <option value={2}>
-                                    March
-                                  </option>
-                                  <option value={3}>
-                                    April
-                                  </option>
-                                  <option value={4}>
-                                    May
-                                  </option>
-                                  <option value={5}>
-                                    June
-                                  </option>
-                                  <option value={6}>
-                                    July
-                                  </option>
-                                  <option value={7}>
-                                    August
-                                  </option>
-                                  <option value={8}>
-                                    September
-                                  </option>
-                                  <option value={9}>
-                                    October
-                                  </option>
-                                  <option value={10}>
-                                    November
-                                  </option>
-                                  <option value={11}>
-                                    December
-                                  </option>
-                                </select>
-                              </div>
-                              <div className=\\"form-select input-day\\">
-                                <i className=\\"manicon manicon-caret-down\\" />
-                                <select onChange={[Function]} value=\\"NaN\\">
-                                  <option />
-                                  <option>
-                                    1
-                                  </option>
-                                  <option>
-                                    2
-                                  </option>
-                                  <option>
-                                    3
-                                  </option>
-                                  <option>
-                                    4
-                                  </option>
-                                  <option>
-                                    5
-                                  </option>
-                                  <option>
-                                    6
-                                  </option>
-                                  <option>
-                                    7
-                                  </option>
-                                  <option>
-                                    8
-                                  </option>
-                                  <option>
-                                    9
-                                  </option>
-                                  <option>
-                                    10
-                                  </option>
-                                  <option>
-                                    11
-                                  </option>
-                                  <option>
-                                    12
-                                  </option>
-                                  <option>
-                                    13
-                                  </option>
-                                  <option>
-                                    14
-                                  </option>
-                                  <option>
-                                    15
-                                  </option>
-                                  <option>
-                                    16
-                                  </option>
-                                  <option>
-                                    17
-                                  </option>
-                                  <option>
-                                    18
-                                  </option>
-                                  <option>
-                                    19
-                                  </option>
-                                  <option>
-                                    20
-                                  </option>
-                                  <option>
-                                    21
-                                  </option>
-                                  <option>
-                                    22
-                                  </option>
-                                  <option>
-                                    23
-                                  </option>
-                                  <option>
-                                    24
-                                  </option>
-                                  <option>
-                                    25
-                                  </option>
-                                  <option>
-                                    26
-                                  </option>
-                                  <option>
-                                    27
-                                  </option>
-                                  <option>
-                                    28
-                                  </option>
-                                  <option>
-                                    29
-                                  </option>
-                                  <option>
-                                    30
-                                  </option>
-                                  <option>
-                                    31
-                                  </option>
-                                </select>
-                              </div>
+                      <FieldGroup label=\\"Other\\" horizontal={false} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                        <div className=\\"form-section\\">
+                          <header className=\\"form-section-label\\">
+                            <span>
+                              Other
+                            </span>
+                          </header>
+                          <Form.Setter('Form.TextInput) label=\\"Publisher\\" name=\\"attributes[metadata][publisher]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                            <Form.TextInput label=\\"Publisher\\" name=\\"attributes[metadata][publisher]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} focusOnMount={false} password={false}>
+                              <Errorable className=\\"form-input\\" name=\\"attributes[metadata][publisher]\\" errors={{...}} label=\\"Publisher\\" containerStyle={{...}}>
+                                <div style={{...}} className=\\"form-input\\">
+                                  <label className=\\"\\">
+                                    Publisher
+                                  </label>
+                                  <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
+                                </div>
+                              </Errorable>
+                            </Form.TextInput>
+                          </Form.Setter('Form.TextInput)>
+                          <Form.Setter('Form.Date) label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                            <Form.Date label=\\"Publication Date\\" name=\\"attributes[publicationDate]\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
                               <div className=\\"form-input\\">
-                                <ReactTextMask type=\\"text\\" mask={{...}} className=\\"input-year\\" onChange={[Function]} value=\\"NaN\\" />
-                              </div>
-                            </div>
-                          </div>
-                        </Form.Date>
-                      </Form.Setter('Form.Date)>
-                      <Form.Setter('Form.MaskedTextInput) label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
-                        <Form.MaskedTextInput label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"#cute_dog\\" initialValue=\\"#cute_dog\\">
-                          <div className=\\"form-input\\">
-                            <label className=\\"\\">
-                              Hashtag
-                            </label>
-                            <ReactTextMask onChange={[Function]} value=\\"#cute_dog\\" type=\\"text\\" mask={[Function]} placeholder={[undefined]} />
-                          </div>
-                        </Form.MaskedTextInput>
-                      </Form.Setter('Form.MaskedTextInput)>
-                      <Connect(Project.Form.Subjects) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
-                        <Project.Form.Subjects project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} createSubject={[undefined]} updateSubjects={[undefined]} dispatch={[Function]}>
-                          <Form.HasMany label=\\"Subjects\\" placeholder=\\"Add a Subject\\" onNew={[Function]} onChange={[Function]} optionsFetch={[Function]} entities={{...}} entityBuilder={[undefined]} entityLabelAttribute=\\"name\\" errors={[undefined]}>
-                            <Errorable className=\\"form-input\\" name=\\"*\\" errors={[undefined]} label=\\"Subjects\\" containerStyle={{...}}>
-                              <div style={{...}} className=\\"form-input\\">
                                 <label>
-                                  Subjects
+                                  Publication Date
                                 </label>
-                                <nav className=\\"has-many-list\\">
-                                  <ul>
-                                    <li>
-                                      <div className=\\"association\\">
-                                        <h4 className=\\"association-name\\">
-                                          Hip Hop
-                                        </h4>
-                                      </div>
-                                      <div className=\\"utility\\">
-                                        <button onClick={[Function]} className=\\"manicon manicon-x\\">
-                                          <span className=\\"screen-reader-text\\">
-                                            Click to remove 
-                                            Hip Hop
-                                            from the 
-                                            Subjects
-                                             list.
-                                          </span>
-                                        </button>
-                                      </div>
-                                    </li>
-                                  </ul>
-                                  <Connect(Form.PredictiveInput) className=\\"input-predictive\\" placeholder=\\"Add a Subject\\" label={[Function]} onNew={[Function]} onSelect={[Function]} fetch={[Function]}>
-                                    <Form.PredictiveInput className=\\"input-predictive\\" placeholder=\\"Add a Subject\\" label={[Function]} onNew={[Function]} onSelect={[Function]} fetch={[Function]} authToken={{...}} dispatch={[Function]}>
-                                      <div className=\\"input-predictive\\">
-                                        <div className=\\"input\\">
-                                          <button className=\\"manicon manicon-plus\\" />
-                                          <input className=\\"text-input\\" type=\\"text\\" onChange={[Function]} value=\\"\\" placeholder=\\"Add a Subject\\" onBlur={[Function]} onFocus={[Function]} onKeyPress={[Function]} onKeyDown={[Function]} />
-                                          <button className=\\"submit\\" onClick={[Function]}>
-                                            Create New
-                                          </button>
-                                        </div>
-                                        <nav className=\\"predictive-list\\">
-                                          <ul />
-                                        </nav>
-                                      </div>
-                                    </Form.PredictiveInput>
-                                  </Connect(Form.PredictiveInput)>
-                                </nav>
-                              </div>
-                            </Errorable>
-                          </Form.HasMany>
-                        </Project.Form.Subjects>
-                      </Connect(Project.Form.Subjects)>
-                      <Form.Setter('Project.Form.AvatarBuilder) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
-                        <Project.Form.AvatarBuilder setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
-                          <div className=\\"form-input avatar-builder\\">
-                            <label className=\\"section-header\\">
-                              Project Thumbnail
-                            </label>
-                            <div className=\\"grid\\">
-                              <div className=\\"section current\\">
-                                <span className=\\"label\\">
-                                  Current
-                                </span>
-                              </div>
-                              <div className=\\"section color active\\">
-                                <span className=\\"label\\">
-                                  Default
-                                </span>
-                                <Project.Form.ColorPicker onChange={[Function]} value={{...}} setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
-                                  <div className=\\"color-picker\\">
-                                    <div className=\\"colors\\">
-                                      <div className=\\"wrapper\\">
-                                        <label htmlFor=\\"primary\\" className=\\"form-toggle radio primary\\">
-                                          <input type=\\"radio\\" value=\\"primary\\" id=\\"primary\\" checked={false} onChange={[Function]} />
-                                          <span className=\\"toggle-indicator\\" />
-                                          <span className=\\"toggle-label\\" />
-                                        </label>
-                                        <label htmlFor=\\"secondary\\" className=\\"form-toggle radio secondary\\">
-                                          <input type=\\"radio\\" value=\\"secondary\\" id=\\"secondary\\" checked={false} onChange={[Function]} />
-                                          <span className=\\"toggle-indicator\\" />
-                                          <span className=\\"toggle-label\\" />
-                                        </label>
-                                        <label htmlFor=\\"tertiary\\" className=\\"form-toggle radio tertiary\\">
-                                          <input type=\\"radio\\" value=\\"tertiary\\" id=\\"tertiary\\" checked={false} onChange={[Function]} />
-                                          <span className=\\"toggle-indicator\\" />
-                                          <span className=\\"toggle-label\\" />
-                                        </label>
-                                        <label htmlFor=\\"quaternary\\" className=\\"form-toggle radio quaternary\\">
-                                          <input type=\\"radio\\" value=\\"quaternary\\" id=\\"quaternary\\" checked={false} onChange={[Function]} />
-                                          <span className=\\"toggle-indicator\\" />
-                                          <span className=\\"toggle-label\\" />
-                                        </label>
-                                        <label htmlFor=\\"quinary\\" className=\\"form-toggle radio quinary\\">
-                                          <input type=\\"radio\\" value=\\"quinary\\" id=\\"quinary\\" checked={false} onChange={[Function]} />
-                                          <span className=\\"toggle-indicator\\" />
-                                          <span className=\\"toggle-label\\" />
-                                        </label>
-                                        <label htmlFor=\\"sentary\\" className=\\"form-toggle radio sentary\\">
-                                          <input type=\\"radio\\" value=\\"sentary\\" id=\\"sentary\\" checked={false} onChange={[Function]} />
-                                          <span className=\\"toggle-indicator\\" />
-                                          <span className=\\"toggle-label\\" />
-                                        </label>
-                                      </div>
-                                    </div>
-                                    <div className=\\"default-description\\">
-                                      Select A Different Background Color
-                                    </div>
+                                <div className=\\"form-date\\">
+                                  <div className=\\"form-select input-month\\">
+                                    <i className=\\"manicon manicon-caret-down\\" />
+                                    <select onChange={[Function]} value=\\"NaN\\">
+                                      <option />
+                                      <option value={0}>
+                                        January
+                                      </option>
+                                      <option value={1}>
+                                        February
+                                      </option>
+                                      <option value={2}>
+                                        March
+                                      </option>
+                                      <option value={3}>
+                                        April
+                                      </option>
+                                      <option value={4}>
+                                        May
+                                      </option>
+                                      <option value={5}>
+                                        June
+                                      </option>
+                                      <option value={6}>
+                                        July
+                                      </option>
+                                      <option value={7}>
+                                        August
+                                      </option>
+                                      <option value={8}>
+                                        September
+                                      </option>
+                                      <option value={9}>
+                                        October
+                                      </option>
+                                      <option value={10}>
+                                        November
+                                      </option>
+                                      <option value={11}>
+                                        December
+                                      </option>
+                                    </select>
                                   </div>
-                                </Project.Form.ColorPicker>
+                                  <div className=\\"form-select input-day\\">
+                                    <i className=\\"manicon manicon-caret-down\\" />
+                                    <select onChange={[Function]} value=\\"NaN\\">
+                                      <option />
+                                      <option>
+                                        1
+                                      </option>
+                                      <option>
+                                        2
+                                      </option>
+                                      <option>
+                                        3
+                                      </option>
+                                      <option>
+                                        4
+                                      </option>
+                                      <option>
+                                        5
+                                      </option>
+                                      <option>
+                                        6
+                                      </option>
+                                      <option>
+                                        7
+                                      </option>
+                                      <option>
+                                        8
+                                      </option>
+                                      <option>
+                                        9
+                                      </option>
+                                      <option>
+                                        10
+                                      </option>
+                                      <option>
+                                        11
+                                      </option>
+                                      <option>
+                                        12
+                                      </option>
+                                      <option>
+                                        13
+                                      </option>
+                                      <option>
+                                        14
+                                      </option>
+                                      <option>
+                                        15
+                                      </option>
+                                      <option>
+                                        16
+                                      </option>
+                                      <option>
+                                        17
+                                      </option>
+                                      <option>
+                                        18
+                                      </option>
+                                      <option>
+                                        19
+                                      </option>
+                                      <option>
+                                        20
+                                      </option>
+                                      <option>
+                                        21
+                                      </option>
+                                      <option>
+                                        22
+                                      </option>
+                                      <option>
+                                        23
+                                      </option>
+                                      <option>
+                                        24
+                                      </option>
+                                      <option>
+                                        25
+                                      </option>
+                                      <option>
+                                        26
+                                      </option>
+                                      <option>
+                                        27
+                                      </option>
+                                      <option>
+                                        28
+                                      </option>
+                                      <option>
+                                        29
+                                      </option>
+                                      <option>
+                                        30
+                                      </option>
+                                      <option>
+                                        31
+                                      </option>
+                                    </select>
+                                  </div>
+                                  <div className=\\"form-input\\">
+                                    <ReactTextMask type=\\"text\\" mask={{...}} className=\\"input-year\\" onChange={[Function]} value=\\"NaN\\" />
+                                  </div>
+                                </div>
                               </div>
-                              <div className=\\"section upload\\">
-                                <span className=\\"label\\">
-                                  Custom
-                                </span>
-                                <Form.Setter('Form.Upload) set={[Function]} initialValue={{...}} value={{...}} layout=\\"embed\\" placeholder=\\"cover\\" accepts=\\"images\\" actions={{...}}>
-                                  <Form.Upload setOther={[Function]} set={[Function]} initialValue={{...}} value={{...}} layout=\\"embed\\" placeholder=\\"cover\\" accepts=\\"images\\">
-                                    <div className=\\"form-input\\">
-                                      <Errorable className=\\"form-input\\" name={[undefined]} errors={[undefined]} label={[undefined]} containerStyle={{...}}>
-                                        <div style={{...}} className=\\"form-input\\">
-                                          <Dropzone style={[undefined]} className=\\"form-dropzone style-embed\\" multiple={false} onDrop={[Function]} accept=\\"image/*\\">
-                                            <div className=\\"contents-empty\\">
-                                              <Form.CoverUploadPlaceholder>
-                                                <svg version=\\"1.1\\" className=\\"cover-upload-placeholder\\" x=\\"0px\\" y=\\"0px\\" width=\\"126px\\" height=\\"126px\\" viewBox=\\"0 0 126.03632 126.25824\\">
-                                                  <g>
-                                                    <g>
-                                                      <path className=\\"background\\" d=\\"M125.53632,126.25824H8.06415c-0.27637,0-0.5-0.22363-0.5-0.5s0.22363-0.5,0.5-0.5h116.97217V8.28656c0-0.27637,0.22363-0.5,0.5-0.5s0.5,0.22363,0.5,0.5v117.47168C126.03632,126.03461,125.81268,126.25824,125.53632,126.25824z\\" />
-                                                    </g>
-                                                  </g>
-                                                  <g>
-                                                    <g>
-                                                      <path className=\\"background\\" d=\\"M121.50409,122.11469H4.03192c-0.27637,0-0.5-0.22363-0.5-0.5s0.22363-0.5,0.5-0.5h116.97217V4.14349c0-0.27637,0.22363-0.5,0.5-0.5s0.5,0.22363,0.5,0.5v117.47119C122.00409,121.89105,121.78046,122.11469,121.50409,122.11469z\\" />
-                                                    </g>
-                                                  </g>
-                                                  <g>
-                                                    <g>
+                            </Form.Date>
+                          </Form.Setter('Form.Date)>
+                          <Form.Setter('Form.MaskedTextInput) label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                            <Form.MaskedTextInput label=\\"Hashtag\\" name=\\"attributes[hashtag]\\" mask=\\"hashtag\\" getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value=\\"#cute_dog\\" initialValue=\\"#cute_dog\\">
+                              <div className=\\"form-input\\">
+                                <label className=\\"\\">
+                                  Hashtag
+                                </label>
+                                <ReactTextMask onChange={[Function]} value=\\"#cute_dog\\" type=\\"text\\" mask={[Function]} placeholder={[undefined]} />
+                              </div>
+                            </Form.MaskedTextInput>
+                          </Form.Setter('Form.MaskedTextInput)>
+                          <Connect(Project.Form.Subjects) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                            <Project.Form.Subjects project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}} createSubject={[undefined]} updateSubjects={[undefined]} dispatch={[Function]}>
+                              <Form.HasMany label=\\"Subjects\\" placeholder=\\"Add a Subject\\" onNew={[Function]} onChange={[Function]} optionsFetch={[Function]} entities={{...}} entityBuilder={[undefined]} entityLabelAttribute=\\"name\\" errors={[undefined]}>
+                                <Errorable className=\\"form-input\\" name=\\"*\\" errors={[undefined]} label=\\"Subjects\\" containerStyle={{...}}>
+                                  <div style={{...}} className=\\"form-input\\">
+                                    <label>
+                                      Subjects
+                                    </label>
+                                    <nav className=\\"has-many-list\\">
+                                      <ul>
+                                        <li>
+                                          <div className=\\"association\\">
+                                            <h4 className=\\"association-name\\">
+                                              Hip Hop
+                                            </h4>
+                                          </div>
+                                          <div className=\\"utility\\">
+                                            <button onClick={[Function]} className=\\"manicon manicon-x\\">
+                                              <span className=\\"screen-reader-text\\">
+                                                Click to remove 
+                                                Hip Hop
+                                                from the 
+                                                Subjects
+                                                 list.
+                                              </span>
+                                            </button>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                      <Connect(Form.PredictiveInput) className=\\"input-predictive\\" placeholder=\\"Add a Subject\\" label={[Function]} onNew={[Function]} onSelect={[Function]} fetch={[Function]}>
+                                        <Form.PredictiveInput className=\\"input-predictive\\" placeholder=\\"Add a Subject\\" label={[Function]} onNew={[Function]} onSelect={[Function]} fetch={[Function]} authToken={{...}} dispatch={[Function]}>
+                                          <div className=\\"input-predictive\\">
+                                            <div className=\\"input\\">
+                                              <button className=\\"manicon manicon-plus\\" />
+                                              <input className=\\"text-input\\" type=\\"text\\" onChange={[Function]} value=\\"\\" placeholder=\\"Add a Subject\\" onBlur={[Function]} onFocus={[Function]} onKeyPress={[Function]} onKeyDown={[Function]} />
+                                              <button className=\\"submit\\" onClick={[Function]}>
+                                                Create New
+                                              </button>
+                                            </div>
+                                            <nav className=\\"predictive-list\\">
+                                              <ul />
+                                            </nav>
+                                          </div>
+                                        </Form.PredictiveInput>
+                                      </Connect(Form.PredictiveInput)>
+                                    </nav>
+                                  </div>
+                                </Errorable>
+                              </Form.HasMany>
+                            </Project.Form.Subjects>
+                          </Connect(Project.Form.Subjects)>
+                          <Form.Setter('Project.Form.AvatarBuilder) project={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                            <Project.Form.AvatarBuilder setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                              <div className=\\"form-input avatar-builder\\">
+                                <label className=\\"section-header\\">
+                                  Project Thumbnail
+                                </label>
+                                <div className=\\"grid\\">
+                                  <div className=\\"section current\\">
+                                    <span className=\\"label\\">
+                                      Current
+                                    </span>
+                                  </div>
+                                  <div className=\\"section color active\\">
+                                    <span className=\\"label\\">
+                                      Default
+                                    </span>
+                                    <Project.Form.ColorPicker onChange={[Function]} value={{...}} setOther={[Function]} project={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
+                                      <div className=\\"color-picker\\">
+                                        <div className=\\"colors\\">
+                                          <div className=\\"wrapper\\">
+                                            <label htmlFor=\\"primary\\" className=\\"form-toggle radio primary\\">
+                                              <input type=\\"radio\\" value=\\"primary\\" id=\\"primary\\" checked={false} onChange={[Function]} />
+                                              <span className=\\"toggle-indicator\\" />
+                                              <span className=\\"toggle-label\\" />
+                                            </label>
+                                            <label htmlFor=\\"secondary\\" className=\\"form-toggle radio secondary\\">
+                                              <input type=\\"radio\\" value=\\"secondary\\" id=\\"secondary\\" checked={false} onChange={[Function]} />
+                                              <span className=\\"toggle-indicator\\" />
+                                              <span className=\\"toggle-label\\" />
+                                            </label>
+                                            <label htmlFor=\\"tertiary\\" className=\\"form-toggle radio tertiary\\">
+                                              <input type=\\"radio\\" value=\\"tertiary\\" id=\\"tertiary\\" checked={false} onChange={[Function]} />
+                                              <span className=\\"toggle-indicator\\" />
+                                              <span className=\\"toggle-label\\" />
+                                            </label>
+                                            <label htmlFor=\\"quaternary\\" className=\\"form-toggle radio quaternary\\">
+                                              <input type=\\"radio\\" value=\\"quaternary\\" id=\\"quaternary\\" checked={false} onChange={[Function]} />
+                                              <span className=\\"toggle-indicator\\" />
+                                              <span className=\\"toggle-label\\" />
+                                            </label>
+                                            <label htmlFor=\\"quinary\\" className=\\"form-toggle radio quinary\\">
+                                              <input type=\\"radio\\" value=\\"quinary\\" id=\\"quinary\\" checked={false} onChange={[Function]} />
+                                              <span className=\\"toggle-indicator\\" />
+                                              <span className=\\"toggle-label\\" />
+                                            </label>
+                                            <label htmlFor=\\"sentary\\" className=\\"form-toggle radio sentary\\">
+                                              <input type=\\"radio\\" value=\\"sentary\\" id=\\"sentary\\" checked={false} onChange={[Function]} />
+                                              <span className=\\"toggle-indicator\\" />
+                                              <span className=\\"toggle-label\\" />
+                                            </label>
+                                          </div>
+                                        </div>
+                                        <div className=\\"default-description\\">
+                                          Select A Different Background Color
+                                        </div>
+                                      </div>
+                                    </Project.Form.ColorPicker>
+                                  </div>
+                                  <div className=\\"section upload\\">
+                                    <span className=\\"label\\">
+                                      Custom
+                                    </span>
+                                    <Form.Setter('Form.Upload) set={[Function]} initialValue={{...}} value={{...}} layout=\\"embed\\" placeholder=\\"cover\\" accepts=\\"images\\" actions={{...}}>
+                                      <Form.Upload setOther={[Function]} set={[Function]} initialValue={{...}} value={{...}} layout=\\"embed\\" placeholder=\\"cover\\" accepts=\\"images\\">
+                                        <div className=\\"form-input\\">
+                                          <Errorable className=\\"form-input\\" name={[undefined]} errors={[undefined]} label={[undefined]} containerStyle={{...}}>
+                                            <div style={{...}} className=\\"form-input\\">
+                                              <Dropzone style={[undefined]} className=\\"form-dropzone style-embed\\" multiple={false} onDrop={[Function]} accept=\\"image/*\\">
+                                                <div className=\\"contents-empty\\">
+                                                  <Form.CoverUploadPlaceholder>
+                                                    <svg version=\\"1.1\\" className=\\"cover-upload-placeholder\\" x=\\"0px\\" y=\\"0px\\" width=\\"126px\\" height=\\"126px\\" viewBox=\\"0 0 126.03632 126.25824\\">
                                                       <g>
                                                         <g>
-                                                          <path className=\\"background\\" d=\\"M116.4718,1v115.4718H1V1H116.4718 M117.4718,0H0v117.4718h117.4718V0L117.4718,0z\\" />
+                                                          <path className=\\"background\\" d=\\"M125.53632,126.25824H8.06415c-0.27637,0-0.5-0.22363-0.5-0.5s0.22363-0.5,0.5-0.5h116.97217V8.28656c0-0.27637,0.22363-0.5,0.5-0.5s0.5,0.22363,0.5,0.5v117.47168C126.03632,126.03461,125.81268,126.25824,125.53632,126.25824z\\" />
                                                         </g>
                                                       </g>
-                                                    </g>
-                                                  </g>
-                                                  <g>
-                                                    <path className=\\"background\\" d=\\"M67.42499,60.83441l-7.56659-7.5661c-0.09216-0.09229-0.20282-0.16534-0.3252-0.21606c-0.24451-0.10114-0.51978-0.10114-0.76428,0c-0.12238,0.05072-0.23303,0.12378-0.3252,0.21606l-7.5661,7.5661c-0.39062,0.39062-0.39062,1.02344,0,1.41406s1.02344,0.39062,1.41406,0l5.85938-5.85938v12.71875c0,0.55273,0.44775,1,1,1s1-0.44727,1-1V56.38904l5.85986,5.85944c0.19531,0.19531,0.45117,0.29297,0.70703,0.29297s0.51172-0.09766,0.70703-0.29297C67.81561,61.85785,67.81561,61.22504,67.42499,60.83441z\\" />
-                                                  </g>
-                                                  <g>
-                                                    <path className=\\"background\\" d=\\"M6.01068,6.12183v105.00281h105.56836V6.12183H6.01068z M90.21796,72.24164c-2.44336,3.10938-6.09082,5.12891-10.00684,5.54199l-0.10352,0.00586l-44.97559,0.04004c-3.32471-0.2168-6.52832-2.3125-8.85547-5.75098c-2.7251-4.02637-2.89355-9.18896-0.43945-13.47412c2.30811-4.03027,6.37549-6.25879,10.88086-5.97266c2.10547,0.13623,4.15332,0.81396,5.93555,1.94482c0.38672-8.59277,7.49854-15.46387,16.18506-15.46387c6.66064,0,12.57275,4.04053,15.02588,10.15771c2.20117-0.75879,4.57324-0.98438,6.92285-0.6499c6.34863,0.90088,11.57617,6.16504,12.42969,12.51709C93.75604,65.15179,92.69061,69.09613,90.21796,72.24164z\\" />
-                                                  </g>
-                                                </svg>
-                                              </Form.CoverUploadPlaceholder>
-                                              <div className=\\"message\\">
-                                                <p className=\\"primary\\">
-                                                  <span className=\\"fake-link\\">
-                                                    Upload a file
-                                                  </span>
-                                                   or
-                                                  <br />
-                                                  drag and drop here
-                                                  <br />
-                                                </p>
-                                                <p className=\\"secondary\\">
-                                                  jpeg, tiff, gif, png
-                                                </p>
-                                              </div>
+                                                      <g>
+                                                        <g>
+                                                          <path className=\\"background\\" d=\\"M121.50409,122.11469H4.03192c-0.27637,0-0.5-0.22363-0.5-0.5s0.22363-0.5,0.5-0.5h116.97217V4.14349c0-0.27637,0.22363-0.5,0.5-0.5s0.5,0.22363,0.5,0.5v117.47119C122.00409,121.89105,121.78046,122.11469,121.50409,122.11469z\\" />
+                                                        </g>
+                                                      </g>
+                                                      <g>
+                                                        <g>
+                                                          <g>
+                                                            <g>
+                                                              <path className=\\"background\\" d=\\"M116.4718,1v115.4718H1V1H116.4718 M117.4718,0H0v117.4718h117.4718V0L117.4718,0z\\" />
+                                                            </g>
+                                                          </g>
+                                                        </g>
+                                                      </g>
+                                                      <g>
+                                                        <path className=\\"background\\" d=\\"M67.42499,60.83441l-7.56659-7.5661c-0.09216-0.09229-0.20282-0.16534-0.3252-0.21606c-0.24451-0.10114-0.51978-0.10114-0.76428,0c-0.12238,0.05072-0.23303,0.12378-0.3252,0.21606l-7.5661,7.5661c-0.39062,0.39062-0.39062,1.02344,0,1.41406s1.02344,0.39062,1.41406,0l5.85938-5.85938v12.71875c0,0.55273,0.44775,1,1,1s1-0.44727,1-1V56.38904l5.85986,5.85944c0.19531,0.19531,0.45117,0.29297,0.70703,0.29297s0.51172-0.09766,0.70703-0.29297C67.81561,61.85785,67.81561,61.22504,67.42499,60.83441z\\" />
+                                                      </g>
+                                                      <g>
+                                                        <path className=\\"background\\" d=\\"M6.01068,6.12183v105.00281h105.56836V6.12183H6.01068z M90.21796,72.24164c-2.44336,3.10938-6.09082,5.12891-10.00684,5.54199l-0.10352,0.00586l-44.97559,0.04004c-3.32471-0.2168-6.52832-2.3125-8.85547-5.75098c-2.7251-4.02637-2.89355-9.18896-0.43945-13.47412c2.30811-4.03027,6.37549-6.25879,10.88086-5.97266c2.10547,0.13623,4.15332,0.81396,5.93555,1.94482c0.38672-8.59277,7.49854-15.46387,16.18506-15.46387c6.66064,0,12.57275,4.04053,15.02588,10.15771c2.20117-0.75879,4.57324-0.98438,6.92285-0.6499c6.34863,0.90088,11.57617,6.16504,12.42969,12.51709C93.75604,65.15179,92.69061,69.09613,90.21796,72.24164z\\" />
+                                                      </g>
+                                                    </svg>
+                                                  </Form.CoverUploadPlaceholder>
+                                                  <div className=\\"message\\">
+                                                    <p className=\\"primary\\">
+                                                      <span className=\\"fake-link\\">
+                                                        Upload a file
+                                                      </span>
+                                                       or
+                                                      <br />
+                                                      drag and drop here
+                                                      <br />
+                                                    </p>
+                                                    <p className=\\"secondary\\">
+                                                      jpeg, tiff, gif, png
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </Dropzone>
                                             </div>
-                                          </Dropzone>
+                                          </Errorable>
                                         </div>
-                                      </Errorable>
-                                    </div>
-                                  </Form.Upload>
-                                </Form.Setter('Form.Upload)>
+                                      </Form.Upload>
+                                    </Form.Setter('Form.Upload)>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </Project.Form.AvatarBuilder>
-                      </Form.Setter('Project.Form.AvatarBuilder)>
+                            </Project.Form.AvatarBuilder>
+                          </Form.Setter('Project.Form.AvatarBuilder)>
+                        </div>
+                      </FieldGroup>
                       <Form.Save text=\\"Save Project\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-update\\" submitKey={{...}} errors={{...}}>
                         <div className=\\"form-input submit\\">
                           <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Project\\" />

@@ -8,8 +8,8 @@ export default class Footer extends Component {
   };
 
   getFooterText(text) {
-    if (!text.attributes.rights) return null;
-    return <Helper.SimpleFormat text={text.attributes.rights} />;
+    if (!text.attributes.metadata.rights) return null;
+    return <Helper.SimpleFormat text={text.attributes.metadata.rights} />;
   }
 
   render() {

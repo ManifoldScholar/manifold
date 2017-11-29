@@ -22,7 +22,16 @@ class Resource < ApplicationRecord
   include ResourceAttachmentValidation
   include ResourceAttributeResets
   include Concerns::HasFormattedAttributes
+  include Metadata
   extend FriendlyId
+
+  # Magic
+  with_metadata %w(
+    series_title container_title isbn issn doi original_publisher
+    original_publisher_place original_title publisher publisher_place version
+    series_number edition issue volume rights rights_territory restrictions rights_holder
+    creator alt_text credit
+  )
 
   friendly_id :title, use: :slugged
 
@@ -94,7 +103,7 @@ class Resource < ApplicationRecord
   # Callbacks
   before_validation :update_kind
   before_update :reset_stale_fields
-  before_save :update_tags
+  # before_save :update_tags
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_create :resource_to_event
 
@@ -165,10 +174,10 @@ class Resource < ApplicationRecord
   # rubocop:enable Metrics/AbcSize, Metrics/PerceivedComplexity
   # rubocop:enable Metrics/CyclomaticComplexity
 
-  def update_tags
-    return unless keywords
-    self.tag_list = keywords
-  end
+  # def update_tags
+  #   return unless keywords
+  #   self.tag_list = keywords
+  # end
 
   # Why is this here? --ZD
   def self.call
@@ -187,6 +196,24 @@ class Resource < ApplicationRecord
 
   def to_s
     title
+  end
+
+  def alt_text
+    metadata["alt_text"]
+  end
+
+  # rubocop:disable Style/RedundantSelf
+  def alt_text=(value)
+    self.metadata["alt_text"] = value
+  end
+  # rubocop:enable Style/RedundantSelf
+
+  def credit_changed?
+    metadata_changed? && metadata_was.dig("credit") != metadata.dig("credit")
+  end
+
+  def credit
+    metadata["credit"]
   end
 
   def downloadable_kind?
