@@ -23,10 +23,6 @@ class Detail extends Component {
     settings: PropTypes.object
   };
 
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -55,7 +51,7 @@ class Detail extends Component {
       return null;
     const containerClass = classNames({
       container: true,
-      "flush-top": !this.shouldShowResources(),
+      "flush-top": !this.shouldShowResources()
     });
     return (
       <section>
