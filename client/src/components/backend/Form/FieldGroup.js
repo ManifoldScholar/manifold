@@ -34,9 +34,11 @@ export default class FieldGroup extends PureComponent {
     return (
       <div className={classes} key="group">
         {isString(this.props.label)
-          ? <span className="form-section-label">
-              {this.props.label}
-            </span>
+          ? <header className="form-section-label">
+              <span>
+                {this.props.label}
+              </span>
+            </header>
           : null}
         {isString(this.props.instructions)
           ? <span className="instructions">

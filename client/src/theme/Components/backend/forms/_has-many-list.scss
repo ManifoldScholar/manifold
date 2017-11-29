@@ -1,4 +1,6 @@
 .has-many-list {
+  margin-top: 1em;
+
   > ul {
     @include listUnstyled;
 

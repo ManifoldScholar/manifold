@@ -9,10 +9,20 @@
   }
 
   .form-section-label {
-    @include formLabelPrimary;
-    display: block;
-    margin-bottom: 1.5em;
-    color: $neutral75;
+    display: table;
+    width: 100%;
+    padding: 1.063em 19px 0.938em;
+    margin-bottom: 19px;
+    font-size: 16px;
+    background-color: $neutral95;
+
+    span {
+      @include utilityPrimary;
+      display: table-cell;
+      width: 100%;
+      font-weight: $medium;
+      color: $accentPrimary;
+    }
   }
 
   &.horizontal {
