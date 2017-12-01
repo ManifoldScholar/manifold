@@ -1,15 +1,16 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Annotation from "components/reader/Annotation";
-import { meAPI, annotationsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
+import { meAPI, requests } from "api";
 import { select } from "utils/entityUtils";
 import HigherOrder from "containers/global/HigherOrder";
 import connectAndFetch from "utils/connectAndFetch";
+import { entityStoreActions } from "actions";
+import { MineForText as MineForTextComponents } from "components/reader";
+import groupBy from "lodash/groupBy";
 
 const { request } = entityStoreActions;
 
-export class MineForText extends PureComponent {
+class MineForText extends PureComponent {
   static displayName = "Annotation.MineForText";
 
   static propTypes = {
@@ -32,14 +33,15 @@ export class MineForText extends PureComponent {
     return Object.assign({}, newState, ownProps);
   };
 
-  constructor(props) {
-    super(props);
-    this.updateAnnotation = this.updateAnnotation.bind(this);
-    this.deleteAnnotation = this.deleteAnnotation.bind(this);
-  }
-
   componentDidMount() {
     this.fetchAnnotations(this.props);
+  }
+
+  getSectionName(text, sectionId) {
+    const attrs = text.attributes;
+    const section = attrs.sectionsMap.find(s => s.id === sectionId);
+    if (!section) return null;
+    return section.name;
   }
 
   fetchAnnotations(props) {
@@ -50,79 +52,25 @@ export class MineForText extends PureComponent {
     props.dispatch(request(annotationsCall, requests.rMyAnnotationsForText));
   }
 
-  updateAnnotation(annotation) {
-    const call = annotationsAPI.update(annotation.id, annotation);
-    const res = this.props.dispatch(request(call, requests.rAnnotationUpdate));
-    return res.promise;
-  }
-
-  deleteAnnotation(annotation) {
-    const call = annotationsAPI.destroy(annotation.id);
-    const options = { removes: { type: "annotations", id: annotation.id } };
-    const res = this.props.dispatch(
-      request(call, requests.rAnnotationDestroy, options)
-    );
-    return res.promise;
-  }
-
-  renderHighlight(annotation) {
-    return (
-      <li key={annotation.id}>
-        <Annotation.Highlight
-          deleteHandler={this.deleteAnnotation}
-          annotation={annotation}
-        />
-      </li>
-    );
-  }
-
-  renderAnnotation(annotation) {
-    return (
-      <li key={annotation.id} className="annotation-detail">
-        <Annotation.Selection.Wrapper
-          {...annotation.attributes}
-          truncate={250}
-          includeEditor={false}
-          closeOnSave={false}
-        />
-        <div className="container">
-          <ul className="annotation-list">
-            <Annotation.Annotation
-              saveHandler={this.updateAnnotation}
-              deleteHandler={this.deleteAnnotation}
-              key={annotation.id}
-              creator={annotation.relationships.creator}
-              annotation={annotation}
-              includeComments={false}
-            />
-          </ul>
-        </div>
-      </li>
-    );
-  }
-
   render() {
+    const text = this.props.text;
+    const annotationGroups = groupBy(
+      this.props.annotations,
+      "attributes.textSectionId"
+    );
     return (
       <div>
-        <ul className="selection-list separated">
-          {/*
-            Heading markup
-            <li className="selection-group-heading">
-              <h2>
-                Section title for this Particular Text's Section
-              </h2>
-            </li>
-          */}
-          {this.props.annotations.map(annotation => {
-            const format = annotation.attributes.format;
-            if (format === "annotation") {
-              return this.renderAnnotation(annotation);
-            } else if (format === "highlight") {
-              return this.renderHighlight(annotation);
-            }
-            return null;
-          })}
-        </ul>
+        {text.attributes.spine.map(sectionId => {
+          if (!annotationGroups[sectionId]) return null;
+          return (
+            <MineForTextComponents.List
+              key={sectionId}
+              annotations={annotationGroups[sectionId]}
+              header={this.getSectionName(this.props.text, sectionId)}
+              dispatch={this.props.dispatch}
+            />
+          );
+        })}
       </div>
     );
   }

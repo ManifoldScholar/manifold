@@ -12,6 +12,17 @@
     text-align: center;
   }
 
+  .manicon {
+    &.manicon-notepad {
+      font-size: 26px;
+      margin-right: 14px;
+
+      &:before {
+        vertical-align: bottom;
+      }
+    }
+  }
+
   .overlay-title {
     @include templateHead;
     padding: 0.85em 0;

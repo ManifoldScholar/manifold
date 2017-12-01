@@ -49,11 +49,17 @@
 }
 
 .selection-group-heading {
+  margin-bottom: 26px;
+
   h2 {
     @include templateHead;
     margin: 0;
-    font-size: 32px;
+    font-size: 24px;
     color: $neutral70;
+
+    @include respond($break65) {
+      font-size: 32px;
+    }
   }
 }
 

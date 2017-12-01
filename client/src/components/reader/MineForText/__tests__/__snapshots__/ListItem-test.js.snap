@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.MineForText.ListItem component renders correctly 1`] = `
+<li>
+  <div
+    className="annotation-highlight-detail"
+  >
+    <span
+      className="annotation-selection"
+    >
+      Gods, Earths, and 85ers
+    </span>
+    <nav
+      className="utility"
+    >
+      <ul>
+        <li>
+          <button
+            onClick={[Function]}
+          >
+            View In Text
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</li>
+`;

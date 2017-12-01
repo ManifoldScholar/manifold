@@ -70,6 +70,7 @@ class Annotation < ApplicationRecord
 
   # Delegations
   delegate :text, to: :text_section
+  delegate :name, to: :text_section, prefix: true
   delegate :project, to: :text
 
   def to_s

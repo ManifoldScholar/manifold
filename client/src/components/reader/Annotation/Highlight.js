@@ -6,18 +6,19 @@ export default class HighlightDetail extends PureComponent {
 
   static propTypes = {
     annotation: PropTypes.object.isRequired,
-    deleteHandler: PropTypes.func
+    deleteHandler: PropTypes.func,
+    visitHandler: PropTypes.func
   };
 
-  constructor() {
-    super();
-    this.handleDelete = this.handleDelete.bind(this);
-  }
-
-  handleDelete(event) {
+  handleDelete = event => {
     event.preventDefault();
     this.props.deleteHandler(this.props.annotation);
-  }
+  };
+
+  handleVisitHighlight = event => {
+    event.preventDefault();
+    this.props.visitHandler(this.props.annotation);
+  };
 
   render() {
     const annotation = this.props.annotation;
@@ -29,6 +30,13 @@ export default class HighlightDetail extends PureComponent {
 
         <nav className="utility">
           <ul>
+            {this.props.visitHandler
+              ? <li>
+                  <button onClick={this.handleVisitHighlight}>
+                    {"View In Text"}
+                  </button>
+                </li>
+              : null}
             {this.props.deleteHandler && annotation.attributes.canUpdateObject
               ? <li>
                   <button onClick={this.handleDelete}>

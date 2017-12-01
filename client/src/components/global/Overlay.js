@@ -46,15 +46,22 @@ export default class Overlay extends Component {
     });
   }
 
+  renderTitle(icon, title) {
+    return (
+      <div className="container">
+        <h3 className="overlay-title">
+          <i className={`manicon manicon-${icon}`} />
+          {title}
+        </h3>
+      </div>
+    );
+  }
+
   renderHeader(props) {
     if (!props.title) return null;
     return (
       <header className="overlay-full-header" key={"globalOverlayHeader"}>
-        <div className="container">
-          <h3 className="overlay-title">
-            {this.props.title}
-          </h3>
-        </div>
+        {this.renderTitle(this.props.icon, this.props.title)}
         <button
           onClick={this.handleCloseEvent}
           className="overlay-close"

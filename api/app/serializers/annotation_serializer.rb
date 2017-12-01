@@ -5,8 +5,9 @@ class AnnotationSerializer < ActiveModel::Serializer
 
   has_one :creator
   attributes :created_at, :end_char, :end_node, :id, :start_char, :start_node,
-             :text_section_id, :updated_at, :format, :resource_id, :creator_id,
-             :body, :private, :subject, :current_user_is_creator, :can_update_object,
+             :text_section_id, :text_section_name, :updated_at, :format,
+             :resource_id, :creator_id, :body, :private, :subject,
+             :current_user_is_creator, :can_update_object,
              :can_delete_object, :comments_count, :collection_id
 
   def current_user_is_creator
