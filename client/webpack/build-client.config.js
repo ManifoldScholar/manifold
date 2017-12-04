@@ -70,6 +70,13 @@ if (process.env.WEBPACK_DEV_SERVER && !process.env.DISABLE_HMR) {
     `webpack-dev-server/client?http://0.0.0.0:${process.env.CLIENT_ASSET_PORT}`
   );
   config.entry["build/client"].unshift("react-hot-loader/patch");
+
+  config.entry["build/theme"].unshift("webpack/hot/only-dev-server");
+  config.entry["build/theme"].unshift(
+    `webpack-dev-server/client?http://0.0.0.0:${process.env.CLIENT_ASSET_PORT}`
+  );
+  config.entry["build/theme"].unshift("react-hot-loader/patch");
+
   const hotPlugin = new webpack.HotModuleReplacementPlugin();
   plugins.push(hotPlugin);
 
