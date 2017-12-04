@@ -28,6 +28,9 @@ set :yarn_target_path, -> { release_path.join("client") }
 set :yarn_flags, "--production"
 
 namespace :deploy do
+
+  before :deploy, 'deploy:check_revision'
+
   after :check, :make_pid_dir do
     on roles(:app), in: :sequence, wait: 5 do
       with path: "./bin:$PATH" do
