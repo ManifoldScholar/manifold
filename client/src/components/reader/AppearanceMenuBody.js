@@ -95,120 +95,125 @@ export default class AppearanceMenuBody extends Component {
 
     return (
       <nav className="appearance-menu">
-        <div className="control-font">
-          <button
-            className={serifButtonClass}
-            onClick={this.serifButtonHandler}
-          >
-            {"Serif"}
-          </button>
+        <ul>
+          <li>
+            <div className="control-font">
+              <button
+                className={serifButtonClass}
+                onClick={this.serifButtonHandler}
+              >
+                {"Serif"}
+              </button>
+              <div className="font-size">
+                <button
+                  disabled={!serifDecreasable}
+                  onClick={event => {
+                    this.decrementSizeHandler(event, serifDecreasable);
+                  }}
+                >
+                  <i className="manicon manicon-dash" />
+                  <span className="screen-reader-text">
+                    {"Click to decrease font-size"}
+                  </span>
+                </button>
+                <button
+                  disabled={!serifIncreasable}
+                  onClick={event => {
+                    this.incrementSizeHandler(event, serifIncreasable);
+                  }}
+                >
+                  <i className="manicon manicon-plus" />
+                  <span className="screen-reader-text">
+                    {"Click to increase font-size"}
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div className="control-font">
+              <button
+                className={sansSerifButtonClass}
+                onClick={this.sansSerifButtonHandler}
+              >
+                {"Sans-serif"}
+              </button>
 
-          <div className="font-size">
-            <button
-              disabled={!serifDecreasable}
-              onClick={event => {
-                this.decrementSizeHandler(event, serifDecreasable);
-              }}
-            >
-              <i className="manicon manicon-dash" />
-              <span className="screen-reader-text">
-                {"Click to decrease font-size"}
-              </span>
-            </button>
-            <button
-              disabled={!serifIncreasable}
-              onClick={event => {
-                this.incrementSizeHandler(event, serifIncreasable);
-              }}
-            >
-              <i className="manicon manicon-plus" />
-              <span className="screen-reader-text">
-                {"Click to increase font-size"}
-              </span>
-            </button>
-          </div>
-        </div>
-        <div className="control-font">
-          <button
-            className={sansSerifButtonClass}
-            onClick={this.sansSerifButtonHandler}
-          >
-            {"Sans Serif"}
-          </button>
-
-          <div className="font-size">
-            <button
-              disabled={!sansDecreasable}
-              onClick={event => {
-                this.decrementSizeHandler(event, sansDecreasable);
-              }}
-            >
-              <i className="manicon manicon-dash" />
-              <span className="screen-reader-text">
-                {"Click to decrease font-size"}
-              </span>
-            </button>
-            <button
-              disabled={!sansIncreasable}
-              onClick={event => {
-                this.incrementSizeHandler(event, sansIncreasable);
-              }}
-            >
-              <i className="manicon manicon-plus" />
-              <span className="screen-reader-text">
-                {"Click to increase font-size"}
-              </span>
-            </button>
-          </div>
-        </div>
-
-        <div className="control-colors">
-          <button
-            className={lightSchemeButtonClass}
-            onClick={this.handleLightButtonClick}
-          >
-            <i className="manicon manicon-check" />
-            <span className="screen-reader-text">
-              {"Click to use light color scheme in reader"}
-            </span>
-          </button>
-          <button
-            className={darkSchemeButtonClass}
-            onClick={this.handleDarkButtonClick}
-          >
-            <i className="manicon manicon-check" />
-            <span className="screen-reader-text">
-              {"Click to use dark color scheme in reader"}
-            </span>
-          </button>
-        </div>
-
-        <div className="control-margins">
-          <button
-            className="margin-increase"
-            onClick={this.incrementMarginsHandler}
-          >
-            <i className="compound-icon">
-              <i className="manicon manicon-margins-narrow-arrows" />
-              <i className="manicon manicon-margins-narrow-text" />
-            </i>
-            <span className="screen-reader-text">
-              {"Click to increase text margins"}
-            </span>
-          </button>
-          <button
-            className="margin-decrease"
-            onClick={this.decrementMarginsHandler}
-          >
-            <i className="compound-icon">
-              <i className="manicon manicon-margins-wide-arrows" />
-              <i className="manicon manicon-margins-wide-text" />
-            </i>
-            <span className="screen-reader-text">
-              {"Click to increase text margins"}
-            </span>
-          </button>
-        </div>
+              <div className="font-size">
+                <button
+                  disabled={!sansDecreasable}
+                  onClick={event => {
+                    this.decrementSizeHandler(event, sansDecreasable);
+                  }}
+                >
+                  <i className="manicon manicon-dash" />
+                  <span className="screen-reader-text">
+                    {"Click to decrease font-size"}
+                  </span>
+                </button>
+                <button
+                  disabled={!sansIncreasable}
+                  onClick={event => {
+                    this.incrementSizeHandler(event, sansIncreasable);
+                  }}
+                >
+                  <i className="manicon manicon-plus" />
+                  <span className="screen-reader-text">
+                    {"Click to increase font-size"}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div className="control-colors">
+              <button
+                className={lightSchemeButtonClass}
+                onClick={this.handleLightButtonClick}
+              >
+                <i className="manicon manicon-check" />
+                <span className="screen-reader-text">
+                  {"Click to use light color scheme in reader"}
+                </span>
+              </button>
+              <button
+                className={darkSchemeButtonClass}
+                onClick={this.handleDarkButtonClick}
+              >
+                <i className="manicon manicon-check" />
+                <span className="screen-reader-text">
+                  {"Click to use dark color scheme in reader"}
+                </span>
+              </button>
+            </div>
+          </li>
+          <li>
+            <div className="control-margins">
+              <button
+                className="margin-increase"
+                onClick={this.incrementMarginsHandler}
+              >
+                <i className="compound-icon">
+                  <i className="manicon manicon-margins-narrow-arrows" />
+                  <i className="manicon manicon-margins-narrow-text" />
+                </i>
+                <span className="screen-reader-text">
+                  {"Click to increase text margins"}
+                </span>
+              </button>
+              <button
+                className="margin-decrease"
+                onClick={this.decrementMarginsHandler}
+              >
+                <i className="compound-icon">
+                  <i className="manicon manicon-margins-wide-arrows" />
+                  <i className="manicon manicon-margins-wide-text" />
+                </i>
+                <span className="screen-reader-text">
+                  {"Click to increase text margins"}
+                </span>
+              </button>
+            </div>
+          </li>
+        </ul>
       </nav>
     );
   }

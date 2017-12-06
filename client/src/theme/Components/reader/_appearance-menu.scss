@@ -19,7 +19,6 @@
   right: 0;
   bottom: -390px;
   width: 100%;
-  padding: 32px $containerPaddingResp;
   background-color: $neutral10;
   transition: right $duration $timing,
     bottom $duration $timing;
@@ -29,7 +28,27 @@
     right: -350px;
     bottom: auto;
     width: auto;
-    padding: 40px;
+  }
+
+  ul {
+    @include listUnstyled;
+
+    li {
+      padding: 32px 30px;
+
+      + li {
+        border-top: 2px solid $neutral30;
+        &:last-child {
+          border-top: none;
+          padding: 0;
+
+          @include respond($break40) {
+            border-top: 2px solid $neutral30;
+            padding: 30px 28px;
+          }
+        }
+      }
+    }
   }
 
   .panel-visible & {
@@ -45,10 +64,13 @@
 
   .control-font {
     @include clearfix;
-    padding-bottom: 23px;
 
-    @include respond($break50) {
-      padding-bottom: 40px;
+    + .control-font {
+      margin-top: 23px;
+
+      @include respond($break50) {
+        margin-top: 40px;
+      }
     }
   }
 
@@ -73,19 +95,19 @@
 
     &.serif {
       @include templateCopy;
-      font-size: 24px;
+      font-size: 25px;
 
       @include respond($break50) {
-        font-size: 28px;
+        font-size: 22px;
       }
     }
 
     &.sans-serif {
       @include templateHead;
-      font-size: 22px;
+      font-size: 24px;
 
       @include respond($break50) {
-        font-size: 26px;
+        font-size: 21px;
       }
     }
   }
@@ -96,16 +118,16 @@
 
     button {
       @include buttonUnstyled;
-      width: 38px;
-      height: 38px;
+      width: 44px;
+      height: 44px;
       vertical-align: top;
       background-color: $neutral05;
       border-radius: 100%;
       transition: color $durationFast $timing, background-color $durationFast $timing;
 
       @include respond($break50) {
-        width: 44px;
-        height: 44px;
+        width: 35px;
+        height: 35px;
       }
 
       &:hover {
@@ -120,42 +142,36 @@
 
       .manicon-plus {
         font-size: 17px;
-        line-height: 38px;
+        line-height: 44px;
 
         @include respond($break50) {
-          line-height: 44px;
+          line-height: 35px;
         }
       }
 
       .manicon-dash {
         font-size: 2px;
-        line-height: 38px;
+        line-height: 44px;
 
         @include respond($break50) {
-          line-height: 44px;
+          line-height: 35px;
         }
       }
 
       + button {
-        margin-left: 21px;
+        margin-left: 15px;
       }
-    }
-  }
-
-  .control-colors {
-    @include respond($break50) {
-      margin-bottom: 40px;
     }
   }
 
   .color-scheme {
     @include buttonUnstyled;
     width: calc(50% - 10px);
-    height: 42px;
+    height: 39px;
     border: 4px solid transparent;
 
-    @include respond($break40) {
-      width: 120px;
+    @include respond($break50) {
+      width: 96px;
     }
 
     .manicon {
@@ -193,6 +209,7 @@
 
   .control-margins {
     display: none;
+    border-top: none;
 
     @include respond($break50) {
       display: block;
@@ -201,12 +218,12 @@
     button {
       @include buttonUnstyled();
       width: calc(50% - 10px);
-      height: 60px;
+      height: 46px;
       background-color: $neutralWhite;
       transition: color $duration $timing, background-color $duration $timing;
 
-      @include respond($break40) {
-        width: 120px;
+      @include respond($break50) {
+        width: 96px;
       }
 
       &.margin-increase .compound-icon {
