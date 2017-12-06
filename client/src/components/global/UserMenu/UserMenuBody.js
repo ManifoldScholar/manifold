@@ -39,10 +39,10 @@ export default class UserMenuBody extends Component {
         <i className="tail" />
         <ul>
           <li>
-            <a href="#" onClick={this.handleProfileClick}>
-              <i className="manicon manicon-person-pencil" />
+            <button onClick={this.handleProfileClick}>
+              <i className="manicon manicon-person-pencil-simple" />
               {"Edit Profile"}
-            </a>
+            </button>
           </li>
           <li>
             <button onClick={this.logout}>

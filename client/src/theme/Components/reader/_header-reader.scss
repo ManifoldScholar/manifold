@@ -132,7 +132,7 @@
 
     .button-search {
       padding: 0 10px;
-      font-size: 19px;
+      font-size: 23px;
 
       @include respond($break70) {
         padding: 0 18px;
@@ -190,6 +190,7 @@
 
       .avatar {
         @include buttonAvatar(32);
+        height: 31px;
       }
     }
   }
@@ -236,6 +237,14 @@
       position: absolute;
       right: -300px;
       transition: right $duration $timing;
+
+      li {
+        button, a {
+          @include respond($break40) {
+            padding-right: 76px;
+          }
+        }
+      }
     }
 
     .panel-visible .user-menu {

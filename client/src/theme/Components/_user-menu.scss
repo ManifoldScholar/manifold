@@ -14,12 +14,7 @@
 
 // Global styles
 .user-menu {
-  padding: 23px;
   background-color: $neutral10;
-
-  @include respond($break40) {
-    padding: 30px;
-  }
 
   .tail {
     @include panelTail;
@@ -31,34 +26,45 @@
 
     li {
       @include templateHead;
-      font-size: 18px;
+      font-size: 20px;
 
       @include respond($break40) {
-        font-size: 20px;
+        font-size: 22px;
       }
     }
 
     // Menu items can be buttons or links
-    li, button, a {
-      @include buttonUnstyled;
-      color: $neutral80;
-      text-decoration: none;
+    li {
+      button, a {
+        @include buttonUnstyled;
+        min-height: 66px;
+        padding: 15px 30px;
+        color: $neutral80;
+        text-decoration: none;
 
-      &:hover {
-        color: $accentPrimary;
+        i {
+          color: $neutral50;
+        }
+
+        &:hover {
+          color: $accentPrimary;
+
+          i {
+            color: $accentPrimary;
+          }
+        }
       }
 
       + li {
-        margin-top: 20px;
+        border-top: 2px solid $neutral30;
       }
     }
-
   }
 
   // Icons used in menu
   .manicon {
     display: inline-block;
-    width: 25px;
+    width: 32px;
     margin-right: 18px;
     text-align: right;
     vertical-align: middle;
@@ -75,20 +81,20 @@
   }
 
 
-  .manicon-person-pencil {
-    font-size: 29px;
+  .manicon-person-pencil-simple {
+    font-size: 38px;
 
     @include respond($break40) {
-      font-size: 32px;
+      font-size: 42px;
     }
   }
 
   .manicon-circle-arrow-out-right {
     padding-right: 6px; // NP
-    font-size: 25px;
+    font-size: 28px;
 
     @include respond($break40) {
-      font-size: 28px;
+      font-size: 31px;
     }
   }
 }

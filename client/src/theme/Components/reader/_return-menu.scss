@@ -1,10 +1,14 @@
 .reader-return-menu {
-  max-width: 390px;
+  max-width: 330px;
   background-color: $neutral10;
+
+  @include respond($break60) {
+    max-width: 390px;
+  }
 
   ul {
     @include listUnstyled;
-    min-width: 300px;
+    min-width: 260px;
   }
 
   li + li {
@@ -15,15 +19,16 @@
     @include buttonUnstyled;
     @include templateHead;
     display: block;
-    padding: 1.167em 1.5em 1.333em;
     font-size: 18px;
+    padding: 22px 20px;
     color: $neutral75;
     text-decoration: none;
     letter-spacing: 0.004em;
     transition: color $duration $timing;
 
     @include respond($break60) {
-      font-size: 21px;
+      padding: 26px 26px;
+      font-size: 22px;
     }
 
     &:hover {
@@ -71,7 +76,7 @@
       display: block;
       padding-top: 0.5em;
       padding-left: 60px;
-      font-size: 16px;
+      font-size: 17px;
       color: $neutral50;
       text-decoration: underline;
       transition: color $duration $timing;
