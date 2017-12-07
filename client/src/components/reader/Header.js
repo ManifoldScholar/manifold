@@ -6,7 +6,6 @@ import {
   AppearanceMenuBody,
   ReturnMenu,
   TextTitles,
-  TocDrawer,
   VisibilityButton
 } from "components/reader";
 import {
@@ -173,12 +172,6 @@ export default class Header extends Component {
             </ul>
           </nav>
         </nav>
-        <TocDrawer
-          text={this.props.text}
-          section={this.props.section}
-          visible={this.props.visibility.tocDrawer}
-          hideTocDrawer={this.triggerHideToc}
-        />
         <nav className="menu-panels-left">
           <UIPanel
             id="readerReturn"

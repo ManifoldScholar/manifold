@@ -1,34 +1,18 @@
 .toc-drawer {
-  $drawerWidth: 565px;
+  .drawer-frontend {
+    $drawerWidth: 565px;
+    padding: 47px 0 76px;
+    height: 100%;
+    width: $drawerWidth;
+    max-width: 90vw;
 
-  position: fixed;
-  width: $drawerWidth;
-  max-width: 90vw;
-  height: 100%;
-  padding: 20px 0 130px;
-  overflow-y: scroll;
-  background-color: $neutral05;
-  transition: left $duration $timing;
-  -webkit-overflow-scrolling: auto;
-
-  @include respond($break50) {
-    padding-top: 35px;
-  }
-
-  @include respond($break60) {
-    padding-bottom: 200px;
+    @include respond($break50) {
+      padding-bottom: 47px;
+    }
   }
 
   .no-scroll.overlay & {
     overflow: hidden;
-  }
-
-  &.drawer-hidden {
-    left: -$drawerWidth;
-  }
-
-  &.drawer-visible {
-    left: 0;
   }
 
   // Scoped table of contents styles, some may be abstracted later
@@ -46,7 +30,7 @@
     }
 
     @include respond($break95) {
-      padding-left: 96px + $nested;
+      padding-left: 84px + $nested;
     }
   }
 
