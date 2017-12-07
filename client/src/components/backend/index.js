@@ -5,7 +5,6 @@ export Project from "./Project";
 export List from "./List";
 export Resource from "./Resource";
 export User from "./User";
-export Drawer from "./Drawer";
 export Dialog from "./Dialog";
 export Navigation from "./Navigation";
 export Category from "./Category";
