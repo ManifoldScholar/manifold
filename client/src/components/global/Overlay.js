@@ -71,8 +71,8 @@ export default class Overlay extends Component {
     return (
       <HigherOrder.BodyClass className={"no-scroll overlay"}>
         <div>
-          {this.renderHeader(this.props)}
           <div className={this.overlayClass()} key={"globalOverlay"}>
+            {this.renderHeader(this.props)}
             {!this.props.title
               ? <button
                   onClick={this.handleCloseEvent}

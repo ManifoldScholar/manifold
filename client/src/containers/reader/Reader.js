@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { bindActionCreators } from "redux";
 import { HigherOrder, Overlay } from "components/global";
-import { Header, Footer, FooterMenu } from "components/reader";
+import { Header, Footer, FooterMenu, Toc } from "components/reader";
 import { Annotation } from "containers/reader";
 import { select, grab, isEntityLoaded } from "utils/entityUtils";
 import { commonActions } from "actions/helpers";
@@ -90,7 +90,8 @@ export class ReaderContainer extends Component {
     history: PropTypes.object,
     loading: PropTypes.bool,
     notifications: PropTypes.object,
-    route: PropTypes.object.isRequired
+    route: PropTypes.object.isRequired,
+    hideTocDrawer: PropTypes.func
   };
 
   constructor() {
@@ -136,6 +137,10 @@ export class ReaderContainer extends Component {
       setColorScheme: b(el => setColorScheme(el), dispatch),
       setPersistentUI: b(userUi => setPersistentUI(userUi), dispatch)
     };
+  };
+
+  hideTocDrawer = () => {
+    this.commonActions.visibilityHide("tocDrawer");
   };
 
   maybeRenderOverlay() {
@@ -209,6 +214,12 @@ export class ReaderContainer extends Component {
               {...this.readerActions}
             />
           </HigherOrder.ScrollAware>
+          <Toc
+            text={this.props.text}
+            section={this.props.section}
+            tocDrawerVisible={this.props.visibility.tocDrawer}
+            hideTocDrawer={this.hideTocDrawer}
+          />
           <main>
             {this.maybeRenderOverlay()}
             {this.renderRoutes()}

@@ -5,7 +5,7 @@ import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
-import { Overlay } from "components/global";
+import { Overlay, Drawer } from "components/global";
 import { TextMeta } from "components/reader";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 
@@ -119,37 +119,49 @@ class Toc extends PureComponent {
       "multi-level": this.hasChildren(text.attributes.toc)
     });
 
+    const drawerProps = {
+      open: this.props.tocDrawerVisible,
+      style: "reader",
+      identifier: "toc-drawer",
+      entrySide: "left"
+    };
+
     return (
-      <nav className={tocClass}>
-        <ul className="toc-list">
-          {text.attributes.toc.map(this.visitNode)}
-        </ul>
-        {!isEmpty(metadata)
-          ? <div className="toc-footer">
-              <button onClick={this.showMeta}>
-                <h4>
-                  <i className="manicon manicon-i-round" />
-                  About This Text
-                </h4>
-              </button>
-            </div>
-          : null}
-        <ReactCSSTransitionGroup
-          transitionName="overlay-full"
-          transitionEnterTimeout={200}
-          transitionLeaveTimeout={200}
-        >
-          {this.state.metaVisible
-            ? <Overlay closeCallback={this.hideMeta} appearance="overlay-full">
-                <TextMeta
-                  title={text.attributes.title}
-                  subtitle={text.attributes.subtitle}
-                  meta={text.attributes.metadata}
-                />
-              </Overlay>
+      <Drawer.Wrapper {...drawerProps}>
+        <nav className={tocClass}>
+          <ul className="toc-list">
+            {text.attributes.toc.map(this.visitNode)}
+          </ul>
+          {!isEmpty(metadata)
+            ? <div className="toc-footer">
+                <button onClick={this.showMeta}>
+                  <h4>
+                    <i className="manicon manicon-i-round" />
+                    About This Text
+                  </h4>
+                </button>
+              </div>
             : null}
-        </ReactCSSTransitionGroup>
-      </nav>
+          <ReactCSSTransitionGroup
+            transitionName="overlay-full"
+            transitionEnterTimeout={200}
+            transitionLeaveTimeout={200}
+          >
+            {this.state.metaVisible
+              ? <Overlay
+                  closeCallback={this.hideMeta}
+                  appearance="overlay-full"
+                >
+                  <TextMeta
+                    title={text.attributes.title}
+                    subtitle={text.attributes.subtitle}
+                    meta={text.attributes.metadata}
+                  />
+                </Overlay>
+              : null}
+          </ReactCSSTransitionGroup>
+        </nav>
+      </Drawer.Wrapper>
     );
   }
 }

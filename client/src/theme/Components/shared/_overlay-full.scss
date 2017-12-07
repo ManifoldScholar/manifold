@@ -13,8 +13,8 @@
     background-color: $neutralWhite;
   }
 
-  .overlay-full-header + & {
-    padding-top: 135px;
+  .overlay-full-header + .container {
+    padding-top: 195px;
   }
 
   .overlay-full-enter & {
