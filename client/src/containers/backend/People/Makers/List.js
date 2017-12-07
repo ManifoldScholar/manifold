@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Drawer } from "components/backend";
+import { Drawer } from "components/global";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { makersAPI, requests } from "api";

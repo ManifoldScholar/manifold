@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
-import classNames from "classnames";
 import Utility from "components/global/Utility";
 import isString from "lodash/isString";
 import { withRouter } from "react-router-dom";
@@ -14,9 +13,11 @@ class DrawerWrapper extends PureComponent {
     children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     title: PropTypes.string,
     icon: PropTypes.string,
+    identifier: PropTypes.string,
     closeUrl: PropTypes.string,
     closeCallback: PropTypes.func,
     lockScroll: PropTypes.string,
+    entrySide: PropTypes.string,
     style: PropTypes.string,
     history: PropTypes.object
   };
@@ -29,7 +30,8 @@ class DrawerWrapper extends PureComponent {
   static defaultProps = {
     lockScroll: "hover",
     open: false,
-    style: "backend"
+    style: "backend",
+    entrySide: "right"
   };
 
   static childContextTypes = {
@@ -101,35 +103,41 @@ class DrawerWrapper extends PureComponent {
     }
   }
 
-  renderDrawerFrontMatter() {
-    if (!this.props.title && !this.props.icon) return null;
+  renderDrawerFrontMatter(props) {
+    const hasTitle = props.icon || props.title;
+    const hasClose = props.closeCallback || props.closeUrl;
+    if (!hasTitle && !hasClose) return null;
     return (
-      <div className="drawer-title">
-        {this.props.icon
-          ? <i className={`manicon manicon-${this.props.icon}`} />
+      <div className="drawer-bar">
+        <div className="drawer-title">
+          {props.icon
+            ? <i className={`manicon manicon-${props.icon}`} />
+            : null}
+          {props.title ? props.title : null}
+        </div>
+        {hasClose
+          ? <div
+              onClick={this.handleLeaveEvent}
+              className="close-button-primary"
+            >
+              <span className="close-text">Close</span>
+              <i className="manicon manicon-x" />
+              <span className="screen-reader-text">Close Drawer</span>
+            </div>
           : null}
-        {this.props.title ? this.props.title : null}
       </div>
     );
   }
 
   renderDrawer() {
-    const drawerStyleClass = classNames({
-      "drawer-backend": this.props.style === "backend",
-      "drawer-backend wide": this.props.style === "backend-wide",
-      "drawer-frontend": this.props.style === "frontend"
-    });
-
+    const entrySideClass =
+      this.props.entrySide === "left" ? this.props.entrySide : "";
     return (
-      <div key="drawer" className={drawerStyleClass}>
-        <div className="drawer-bar">
-          {this.renderDrawerFrontMatter()}
-          <div onClick={this.handleLeaveEvent} className="close-button-primary">
-            <span className="close-text">Close</span>
-            <i className="manicon manicon-x" />
-            <span className="screen-reader-text">Close Drawer</span>
-          </div>
-        </div>
+      <div
+        key="drawer"
+        className={`drawer-${this.props.style} ${entrySideClass}`}
+      >
+        {this.renderDrawerFrontMatter(this.props)}
         {/* Render children without props if they aren't a component */}
         {this.renderChildren()}
       </div>
@@ -147,7 +155,7 @@ class DrawerWrapper extends PureComponent {
   renderDrawerWrapper() {
     if (this.props.lockScroll === "hover") {
       return (
-        <div>
+        <div className={this.props.identifier}>
           <Utility.EdgeLockScroll>
             {this.renderDrawer()}
           </Utility.EdgeLockScroll>
@@ -159,7 +167,7 @@ class DrawerWrapper extends PureComponent {
       return (
         <div>
           <Utility.LockBodyScroll>
-            <div>
+            <div className={this.props.identifier}>
               <div className="drawer-overlay" onClick={this.handleLeaveEvent} />
               {this.renderDrawer()}
             </div>

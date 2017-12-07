@@ -4,7 +4,7 @@ import has from "lodash/has";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Annotation from "components/reader/Annotation";
-import { Drawer } from "components/backend";
+import { Drawer } from "components/global";
 import { Notation } from "containers/reader";
 import AnnotationContainers from "containers/reader/Annotation";
 import { Notation as NotationComponents } from "components/reader";
