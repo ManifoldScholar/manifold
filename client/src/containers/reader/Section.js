@@ -17,6 +17,7 @@ import get from "lodash/get";
 import isNil from "lodash/isNil";
 import remove from "lodash/remove";
 import some from "lodash/some";
+import isEqual from "lodash/isEqual";
 import { renderRoutes } from "helpers/routing";
 import { HeadContent } from "components/global";
 import HigherOrder from "containers/global/HigherOrder";
@@ -83,7 +84,8 @@ export class SectionContainer extends Component {
       this.fetchCollections(nextProps);
     }
     // Check if we need to fetch more resources when annotations change
-    if (nextProps.annotations !== this.props.annotations) {
+    // Needs to be deep comparison
+    if (!isEqual(nextProps.annotations, this.props.annotations)) {
       const missing = this.hasMissingResourcesOrCollections(
         nextProps.annotations,
         nextProps.resources,
