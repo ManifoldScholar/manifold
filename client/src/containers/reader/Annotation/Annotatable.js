@@ -74,6 +74,28 @@ class Annotatable extends Component {
     }
   };
 
+  nodeContainNode(parent, child) {
+    if (
+      child.anchorNode instanceof HTMLElement &&
+      child.focusNode instanceof HTMLElement
+    ) {
+      if (parent.contains(child.anchorNode)) return true;
+      if (parent.contains(child.focusNode)) return true;
+    } else if (
+      child.anchorNode instanceof Node &&
+      child.focusNode instanceof Node
+    ) {
+      if (parent.compareDocumentPosition(child.anchorNode) & 16) {
+        return true;
+      }
+      if (parent.compareDocumentPosition(child.focusNode) & 16) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
   // The native selection is read only, so we'll map it to a similar selection object
   // that we have more control over.
   updateStateSelection = (nativeSelection, selectionClickEvent = null) => {
@@ -83,8 +105,7 @@ class Annotatable extends Component {
     // if there's no native selection, return
     if (!nativeSelection) return;
     // does the native selection start and end in our document?
-    if (!this.annotatable.contains(nativeSelection.anchorNode)) return;
-    if (!this.annotatable.contains(nativeSelection.focusNode)) return;
+    if (!this.nodeContainNode(this.annotatable, nativeSelection)) return;
     // normalize the native selection
     const selection = this.mapNativeSelectionToState(nativeSelection);
     // if it changed, return
