@@ -82,6 +82,7 @@
     color: $neutralWhite;
     text-align: left;
     background-color: $neutral80;
+    background-clip: padding-box;
     transition: color $duration $timing, background-color $duration $timing;
 
     &.dark {
