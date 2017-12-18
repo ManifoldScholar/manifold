@@ -3,8 +3,16 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { bindActionCreators } from "redux";
 import { HigherOrder, Overlay } from "components/global";
-import { Header, Footer, FooterMenu, Toc } from "components/reader";
-import { Annotation } from "containers/reader";
+import {
+  Header,
+  Footer,
+  FooterMenu,
+  Toc,
+  Notes,
+  TextMeta
+} from "components/reader";
+import { HigherOrder as HigherOrderContainer } from "containers/global";
+import { ReaderNotes } from "containers/reader";
 import { select, grab, isEntityLoaded } from "utils/entityUtils";
 import { commonActions } from "actions/helpers";
 import { textsAPI, sectionsAPI, requests } from "api";
@@ -19,6 +27,7 @@ import {
   entityStoreActions
 } from "actions";
 import { setPersistentUI } from "../../actions/ui/persistent_ui";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 
 const {
   selectFont,
@@ -97,6 +106,9 @@ export class ReaderContainer extends Component {
   constructor() {
     super();
     this.counter = 0;
+    this.state = {
+      showMeta: false
+    };
   }
 
   componentWillMount() {
@@ -110,6 +122,8 @@ export class ReaderContainer extends Component {
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.rText));
+    this.props.dispatch(flush(requests.rMyAnnotationsForText));
+    this.props.dispatch(flush(requests.rMyFilteredAnnotationsForText));
   }
 
   setPersistentUI = props => {
@@ -143,10 +157,45 @@ export class ReaderContainer extends Component {
     this.commonActions.visibilityHide("tocDrawer");
   };
 
-  maybeRenderOverlay() {
-    if (this.props.location.hash === "#my-annotations")
-      return this.renderMyAnnotations();
+  toggleMeta = () => {
+    this.setState({ showMeta: !this.state.showMeta });
+  };
+
+  maybeRenderOverlay(props) {
+    if (this.state.showMeta) return this.renderTextMetaOverlay();
+    if (props.location.hash === "#my-annotations")
+      return this.renderNotesOverlay();
     return null;
+  }
+
+  renderTextMetaOverlay() {
+    const text = this.props.text;
+    return (
+      <Overlay closeCallback={this.toggleMeta} appearance="overlay-full">
+        <TextMeta
+          title={text.attributes.title}
+          subtitle={text.attributes.subtitle}
+          meta={text.attributes.metadata}
+        />
+      </Overlay>
+    );
+  }
+
+  renderNotesOverlay() {
+    return (
+      <HigherOrderContainer.RequireRole requiredRole="any">
+        <Overlay
+          closeCallback={this.props.history.goBack}
+          title={"Your Notes"}
+          icon={"notepad"}
+          contentWidth={850}
+        >
+          <ReaderNotes>
+            <Notes.DetailedList />
+          </ReaderNotes>
+        </Overlay>
+      </HigherOrderContainer.RequireRole>
+    );
   }
 
   renderRedirect(props) {
@@ -179,18 +228,6 @@ export class ReaderContainer extends Component {
     return childRoutes;
   }
 
-  renderMyAnnotations() {
-    return (
-      <Overlay
-        closeCallback={this.props.history.goBack}
-        title={"Your Highlights + Annotations"}
-        contentWidth={850}
-      >
-        <Annotation.MineForText text={this.props.text} />
-      </Overlay>
-    );
-  }
-
   render() {
     if (!this.props.text) return null;
     if (this.shouldRedirect(this.props)) return this.renderRedirect(this.props);
@@ -211,6 +248,8 @@ export class ReaderContainer extends Component {
               appearance={this.props.appearance}
               notifications={this.props.notifications}
               commonActions={this.commonActions}
+              history={this.props.history}
+              match={this.props.match}
               {...this.readerActions}
             />
           </HigherOrder.ScrollAware>
@@ -219,9 +258,16 @@ export class ReaderContainer extends Component {
             section={this.props.section}
             tocDrawerVisible={this.props.visibility.tocDrawer}
             hideTocDrawer={this.hideTocDrawer}
+            showMeta={this.toggleMeta}
           />
           <main>
-            {this.maybeRenderOverlay()}
+            <ReactCSSTransitionGroup
+              transitionName="overlay-full"
+              transitionEnterTimeout={200}
+              transitionLeaveTimeout={200}
+            >
+              {this.maybeRenderOverlay(this.props)}
+            </ReactCSSTransitionGroup>
             {this.renderRoutes()}
           </main>
           <Footer text={this.props.text} />

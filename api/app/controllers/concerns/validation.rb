@@ -271,7 +271,10 @@ module Validation
     if params.dig(:filter, :ids).respond_to? :values
       params[:filter][:ids] = params[:filter][:ids].values
     end
-    params.permit(filter: [{ ids: [] }, :text, :text_section])[:filter]
+    if params.dig(:filter, :formats).respond_to? :values
+      params[:filter][:formats] = params[:filter][:formats].values
+    end
+    params.permit(filter: [{ ids: [] }, [{ formats: [] }], :text, :text_section])[:filter]
   end
 
   def subject_filter_params

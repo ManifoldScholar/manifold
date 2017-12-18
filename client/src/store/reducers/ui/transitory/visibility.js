@@ -6,6 +6,7 @@ export const initialState = {
   userMenu: false,
   tocDrawer: false,
   annotation: 2,
+  notesDrawer: false,
   uiPanels: {
     readerReturn: false,
     user: false,

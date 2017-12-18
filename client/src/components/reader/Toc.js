@@ -5,9 +5,7 @@ import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
-import { Overlay, Drawer } from "components/global";
-import { TextMeta } from "components/reader";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import { Drawer } from "components/global";
 
 class Toc extends PureComponent {
   static propTypes = {
@@ -15,6 +13,7 @@ class Toc extends PureComponent {
     section: PropTypes.object,
     tocDrawerVisible: PropTypes.bool,
     hideTocDrawer: PropTypes.func,
+    showMeta: PropTypes.func,
     history: PropTypes.object
   };
 
@@ -26,8 +25,7 @@ class Toc extends PureComponent {
     this.visitNode = this.visitNode.bind(this);
 
     this.state = {
-      mounted: false,
-      metaVisible: false
+      mounted: false
     };
   }
 
@@ -99,15 +97,7 @@ class Toc extends PureComponent {
   }
 
   showMeta = () => {
-    this.setState({
-      metaVisible: true
-    });
-  };
-
-  hideMeta = () => {
-    this.setState({
-      metaVisible: false
-    });
+    this.props.showMeta();
   };
 
   render() {
@@ -142,24 +132,6 @@ class Toc extends PureComponent {
                 </button>
               </div>
             : null}
-          <ReactCSSTransitionGroup
-            transitionName="overlay-full"
-            transitionEnterTimeout={200}
-            transitionLeaveTimeout={200}
-          >
-            {this.state.metaVisible
-              ? <Overlay
-                  closeCallback={this.hideMeta}
-                  appearance="overlay-full"
-                >
-                  <TextMeta
-                    title={text.attributes.title}
-                    subtitle={text.attributes.subtitle}
-                    meta={text.attributes.metadata}
-                  />
-                </Overlay>
-              : null}
-          </ReactCSSTransitionGroup>
         </nav>
       </Drawer.Wrapper>
     );

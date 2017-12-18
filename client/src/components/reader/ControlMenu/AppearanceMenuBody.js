@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 export default class AppearanceMenuBody extends Component {
+  static displayName = "ControlMenu.AppearanceMenuBody";
+
   static propTypes = {
     appearance: PropTypes.object,
     selectFont: PropTypes.func,

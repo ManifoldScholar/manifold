@@ -20,6 +20,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     closeDrawer: PropTypes.func,
     truncate: PropTypes.number,
     showLogin: PropTypes.func,
+    visitHandler: PropTypes.func,
     includeEditor: PropTypes.bool.isRequired
   };
 
@@ -51,6 +52,11 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     });
   }
 
+  handleVisitAnnotation = event => {
+    event.preventDefault();
+    this.props.visitHandler();
+  };
+
   maybeTruncateSelection() {
     if (
       this.props.truncate &&
@@ -79,6 +85,11 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             <i className="manicon manicon-quote" />
             {this.maybeTruncateSelection()}
           </div>
+          {this.props.visitHandler
+            ? <button className="annotate-button" onClick={this.handleVisitAnnotation}>
+              {"View In Text"}
+            </button>
+            : null}
           {this.props.includeEditor
             ? <HigherOrder.RequireRole requiredRole="any">
                 {this.state.editorOpen

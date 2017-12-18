@@ -1,14 +1,10 @@
 .toc-drawer {
-  .drawer-frontend {
+  .drawer-reader {
     $drawerWidth: 565px;
-    padding: 47px 0 76px;
+    padding: 47px 0 0;
     height: 100%;
     width: $drawerWidth;
     max-width: 90vw;
-
-    @include respond($break50) {
-      padding-bottom: 47px;
-    }
   }
 
   .no-scroll.overlay & {
@@ -108,9 +104,11 @@
     @include tocBasePadding();
     display: block;
     padding-top: 30px;
+    padding-bottom: 71px;
 
     @include respond($break50) {
       padding-top: 41px;
+      padding-bottom: 41px;
     };
 
     button {

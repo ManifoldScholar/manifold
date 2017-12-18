@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 export default class VisibilityButton extends PureComponent {
-  static displayName = "VisibilityButton";
+  static displayName = "ControlMenu.VisibilityButton";
 
   static propTypes = {
     toggle: PropTypes.func,

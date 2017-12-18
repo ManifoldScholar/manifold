@@ -1,0 +1,179 @@
+.button-notes {
+  @include buttonUnstyled;
+  height: 100%;
+  color: $neutral50;
+  transition: background-color $duration $timing;
+
+  &.button-active {
+    background-color: $neutral10;
+  }
+
+  .manicon-notepad::before {
+    font-size: 25px;
+  }
+}
+
+.notes-list {
+  padding: 0;
+
+  ul {
+    @include listUnstyled;
+  }
+}
+
+.notes-drawer {
+  .drawer-overlay {
+    z-index: 150;
+  }
+
+  .drawer-reader {
+    padding-top: 47px;
+    background-color: $neutral10;
+
+    .drawer-title {
+      font-size: 22px;
+      color: $neutral90;
+      text-transform: none;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $neutral70;
+        cursor: pointer;
+      }
+    }
+
+    .drawer-bar {
+      padding: 6px 32px;
+
+      button {
+        font-size: 14px;
+      }
+    }
+
+    ul {
+      @include listUnstyled;
+
+      .item {
+        display: flex;
+        align-items: center;
+        padding: 18px 32px;
+        max-height: 52px;
+        justify-content: flex-start;
+        color: $neutral90;
+        border-bottom: 2px solid $neutral40;
+        transition: color $duration $timing,
+        background-color $duration $timing;
+
+        &.open {
+          i {
+            transform: rotate(0);
+          }
+        }
+
+        i {
+          font-size: 8px;
+          transform: rotate(-.25turn);
+          transition: transform $duration $timing;
+        }
+
+        label, span {
+          @include utilityPrimary;
+          margin-top: -2px;
+          margin-left: 20px;
+          color: inherit;
+          cursor: inherit;
+          text-transform: none;
+          font-size: 16px;
+          letter-spacing: 0;
+
+          @include respond($break50) {
+            font-size: 18px;
+          }
+        }
+
+        &:hover {
+          cursor: pointer;
+          color: $neutral75;
+          background-color: $accentPrimaryLight;
+        }
+      }
+
+      ul {
+        overflow: hidden;
+
+        .item {
+          padding: 18px 32px 18px 60px;
+          justify-content: flex-start;
+          color: $neutral90;
+          border-bottom: none;
+          transition: color $duration $timing,
+          background-color $duration $timing;
+
+          i {
+            font-size: 20px;
+            transform: rotate(0);
+            color: $neutral50;
+
+            @include respond($break50) {
+              font-size: 21px;
+            }
+          }
+
+          span {
+            font-weight: 400;
+          }
+
+          &:hover {
+            color: $neutral75;
+          }
+
+          &:nth-child(odd) {
+            background-color: $neutral20;
+
+            &:hover {
+              background-color: $accentPrimaryLight;
+            }
+          }
+
+          &:last-child {
+            border-bottom: 2px solid $neutral40;
+          }
+        }
+      }
+    }
+
+    .search-menu {
+      padding: 13px 32px;
+      background-color: $neutral20;
+      border-bottom: 2px solid $neutral40;
+
+      @include respond($break50) {
+        display: flex;
+        align-items: center;
+      }
+
+      label {
+        font-size: $type40;
+
+        @include respond($break50) {
+          font-size: $type60;
+        }
+      }
+
+      .filters {
+        padding-top: 0;
+
+        label.checkbox {
+          color: $neutral80;
+        }
+      }
+    }
+
+    .drawer-list-horizontal {
+      @include listUnstyled;
+      display: flex;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+  }
+}

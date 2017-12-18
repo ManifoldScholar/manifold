@@ -48,9 +48,8 @@
 }
 
 .reader-footer-menu {
-  z-index: 190;
+  z-index: 200;
 }
-
 
 .section-category-label.fixed {
   z-index: 180;
@@ -74,6 +73,10 @@
   .toc-drawer {
     z-index: 600;
   }
+}
+
+.toc-drawer {
+  z-index: 350;
 }
 
 .footer-fixed {

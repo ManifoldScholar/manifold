@@ -68,6 +68,7 @@ export default {
   rSection: "reader-section",
   rAnnotations: "reader-annotations",
   rMyAnnotationsForText: "reader-my-annotations-for-text",
+  rMyFilteredAnnotationsForText: "reader-my-filtered-annotations-for-text",
   rResources: "reader-resources",
   rSectionResources: "reader-section-resources",
   rSectionCollections: "reader-section-collections",
