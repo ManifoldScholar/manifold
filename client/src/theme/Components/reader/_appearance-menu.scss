@@ -14,29 +14,14 @@
 }
 
 .appearance-menu {
-  position: fixed;
-  // Off screen by default
-  right: 0;
-  bottom: -390px;
-  width: 100%;
-  background-color: $neutral10;
-  transition: right $duration $timing,
-    bottom $duration $timing;
+  @include uiPanelMenu;
 
-  @include respond($break50) {
-    position: absolute;
-    right: -350px;
-    bottom: auto;
-    width: auto;
-  }
+  ul li {
+    &:last-child {
+      border-top: none;
+      padding: 0;
 
-  ul {
-    @include listUnstyled;
-
-    li {
-      padding: 32px 30px;
-
-      + li {
+      @include respond($break50) {
         border-top: 2px solid $neutral30;
         &:last-child {
           border-top: none;
@@ -48,17 +33,6 @@
           }
         }
       }
-    }
-  }
-
-  .panel-visible & {
-    // NB: This will be '52' when there is
-    // a full set of functional icons
-    bottom: 42px;
-
-    @include respond($break50) {
-      right: 0;
-      bottom: auto;
     }
   }
 

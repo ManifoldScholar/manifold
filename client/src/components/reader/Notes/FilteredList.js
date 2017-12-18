@@ -37,7 +37,10 @@ export default class FilteredList extends PureComponent {
     return (
       <div>
         {this.renderHeading()}
-        <Notes.Partial.Filters filterChangeHandler={this.props.handleFilterChange} filter={this.props.filter} />
+        <Notes.Partial.Filters
+          filterChangeHandler={this.props.handleFilterChange}
+          filter={this.props.filter}
+        />
         <nav>
           <ul>
             {this.props.sortedAnnotations.map(group => {

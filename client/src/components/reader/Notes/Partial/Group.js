@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Utility } from "components/global";
 import { Notes } from "components/reader";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -62,18 +61,10 @@ export default class Group extends Component {
     return this.setState({ expanded: !this.state.expanded });
   };
 
-  getFullGroupHeight() {
-    if (!this._group) return;
-    this._group.style.height = "auto";
-    const measuredHeight = this._group.offsetHeight;
-    this._group.style.height = "1em";
-    return measuredHeight + "px";
-  }
-
   renderGroupItems(annotations) {
     const animation = {
       animation: {
-        height: this.state.expanded ? this.state.targetHeight : ''
+        height: this.state.expanded ? this.state.targetHeight : ""
       },
       duration: 250,
       complete: () => {
@@ -84,7 +75,7 @@ export default class Group extends Component {
     };
 
     const classes = classNames({
-      "open": this.state.expanded
+      open: this.state.expanded
     });
 
     if (!this.state.Velocity) return null;
@@ -112,14 +103,16 @@ export default class Group extends Component {
 
   render() {
     const classes = classNames({
-      "item": true,
-      "open": this.state.expanded
+      item: true,
+      open: this.state.expanded
     });
     return (
       <li>
         <div className={classes} onClick={this.handleClick}>
           <i className={`manicon manicon-caret-down`} />
-          <label>{this.props.sectionName}</label>
+          <label>
+            {this.props.sectionName}
+          </label>
         </div>
         {this.renderGroupItems(this.props.annotations)}
       </li>

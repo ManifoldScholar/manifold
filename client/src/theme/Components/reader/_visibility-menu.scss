@@ -1,0 +1,50 @@
+.button-visibility {
+  @include buttonUnstyled;
+  position: relative;
+  height: 100%;
+  padding: 0 14px;
+  color: $neutral50;
+  transition: color $durationFast $timing;
+
+  .manicon {
+    display: inline-block;
+    padding-top: 0.235em;
+    font-size: 17px;
+  }
+}
+
+.visibility-menu {
+  @include uiPanelMenu;
+
+  ul li {
+    padding: 30px 35px;
+  }
+
+  ul li > i {
+    font-size: 23px;
+    color: $neutral75;
+    margin-right: 10px;
+
+    &::before {
+      vertical-align: middle;
+    }
+  }
+
+  label, span {
+    @include utilityPrimary;
+    color: $neutral75;
+    font-size: 14px;
+  }
+
+  .filters {
+    padding-top: 22px;
+    display: flex;
+    justify-content: space-between;
+
+    .checkbox {
+      text-transform: none;
+      font-size: 17px;
+      font-weight: 400;
+    }
+  }
+}

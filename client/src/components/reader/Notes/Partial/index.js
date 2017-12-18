@@ -6,4 +6,4 @@ export default {
   Filters,
   Group,
   GroupItem
-}
+};

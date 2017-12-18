@@ -45,11 +45,12 @@ export default class Text extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      nextProps.visibility.annotation !== this.props.visibility.annotation ||
+      nextProps.visibility.visibilityFilters !==
+        this.props.visibility.visibilityFilters ||
       nextProps.annotations !== this.props.annotations
     ) {
       const filteredAnnotations = this.filterAnnotations(
-        nextProps.visibility.annotation,
+        nextProps.visibility.visibilityFilters,
         nextProps.annotations,
         this.props.authentication.currentUser
       );
@@ -119,17 +120,42 @@ export default class Text extends Component {
     this.setState({ lockedSelection });
   }
 
-  filterAnnotations(visibility, annotations, currentUserIgnored) {
-    if (visibility === 0) return [];
-    if (visibility === 1) {
-      return annotations.filter(a => {
-        return (
-          a.attributes.format === "resource" ||
-          a.attributes.currentUserIsCreator === true
-        );
-      });
-    }
-    return annotations;
+  filterAnnotations(visibilityFilters, annotations, currentUserIgnored) {
+    if (!visibilityFilters) return annotations;
+
+    const filterEntity = (list, format) => {
+      return this.filterBy(list, visibilityFilters, format);
+    };
+
+    return Object.keys(visibilityFilters).reduce(filterEntity, annotations);
+  }
+
+  filterBy(list, visibilityFilters, format) {
+    const filter = visibilityFilters[format];
+    let filtered = list;
+
+    Object.keys(filter).forEach(key => {
+      switch (key) {
+        case "all": {
+          if (filter[key] === true) return filtered;
+          return (filtered = filtered.filter(a => {
+            return a.attributes.format !== format;
+          }));
+        }
+        default: {
+          if (filter[key] === true) return filtered;
+          const value = key === "yours" ? filter[key] : !filter[key];
+          return (filtered = filtered.filter(a => {
+            return (
+              a.attributes.format !== format ||
+              a.attributes.currentUserIsCreator === value
+            );
+          }));
+        }
+      }
+    });
+
+    return filtered;
   }
 
   render() {

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { Utility } from "components/global";
 import PropTypes from "prop-types";
-import { Notes } from "components/reader";
-import { Overlay } from "components/global";
 import lh from "helpers/linkHandler";
 import { annotationsAPI, meAPI, requests } from "api";
 import { select, grab } from "utils/entityUtils";
@@ -71,11 +68,6 @@ export class ReaderNotesContainer extends Component {
   getRequestName(props) {
     if (props.filterable) return requests.rMyFilteredAnnotationsForText;
     return requests.rMyAnnotationsForText;
-  }
-
-  fetchAnnotations(state, props) {
-    const annotationsCall = meAPI.annotations(state.filter);
-    props.dispatch(request(annotationsCall, requests.rMyAnnotationsForText));
   }
 
   getSectionName(text, sectionId) {
@@ -148,21 +140,20 @@ export class ReaderNotesContainer extends Component {
   handleFilterChange = (key, filters) => {
     const filter = Object.assign({}, this.state.filter);
     filter[key] = filters;
-    this.setState({ filter }, () => this.fetchAnnotations(this.state, this.props));
+    this.setState({ filter }, () =>
+      this.fetchAnnotations(this.state, this.props)
+    );
   };
 
   mapAnnotationsToSections(props) {
     const { text, myAnnotations } = props;
-    const annotationGroups = groupBy(
-      myAnnotations,
-      "attributes.textSectionId"
-    );
-    let out = [];
+    const annotationGroups = groupBy(myAnnotations, "attributes.textSectionId");
+    const out = [];
 
     text.attributes.spine.map(sectionId => {
       if (!annotationGroups[sectionId]) return null;
       return out.push({
-        sectionId: sectionId,
+        sectionId,
         name: this.getSectionName(text, sectionId),
         annotations: annotationGroups[sectionId]
       });
@@ -185,7 +176,7 @@ export class ReaderNotesContainer extends Component {
       handleSeeAllClick: this.handleSeeAllClick,
       visible: props.visible,
       filter: this.state.filter
-    }
+    };
   }
 
   renderChildren() {
