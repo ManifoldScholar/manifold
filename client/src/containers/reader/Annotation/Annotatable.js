@@ -282,7 +282,13 @@ class Annotatable extends Component {
       annotation,
       notation
     );
-    const requestOptions = { adds: requests.rAnnotations };
+    const requestOptions = {
+      adds: requests.rAnnotations,
+      clears: [
+        requests.rMyAnnotationsForText,
+        requests.rMyFilteredAnnotationsForText
+      ]
+    };
     const res = this.props.dispatch(
       request(call, requests.rAnnotationCreate, requestOptions)
     );

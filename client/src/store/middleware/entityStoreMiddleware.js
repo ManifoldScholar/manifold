@@ -20,6 +20,11 @@ function buildRemovesAction(entity) {
   return { type, payload: { entity } };
 }
 
+function buildClearsAction(requests) {
+  const type = `ENTITY_STORE_FLUSH`;
+  return { type, payload: requests };
+}
+
 function buildAddsAction(meta, entity) {
   const type = `ENTITY_STORE_ADD`;
   return { type, payload: { meta, entity } };
@@ -131,6 +136,19 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
           }
           const { type, id } = response.data;
           dispatch(buildAddsAction(requestPayload.adds, { type, id }));
+        },
+        () => {
+          // noop
+        }
+      );
+    }
+
+    // Takes an array of request identifiers and flushes
+    // them from the store.
+    if (requestPayload.clears) {
+      requestPromise.then(
+        () => {
+          dispatch(buildClearsAction(requestPayload.clears));
         },
         () => {
           // noop
