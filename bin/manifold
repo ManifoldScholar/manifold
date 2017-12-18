@@ -111,7 +111,7 @@ Clamp do
         parameter "PASSWORD", "user password"
 
         def execute
-          cmd = "cd api && rails create:admin[\"#{email}\",\"#{password}\"]"
+          cmd = "cd api && rails manifold:user:create:admin[\"#{email}\",\"#{password}\"]"
           puts Paint[cmd, :faint]
           system cmd
         end
@@ -199,7 +199,7 @@ Clamp do
 
     def execute
       relative_path = File.join("..", path)
-      system "cd api && rails ingest:text[\"#{relative_path}\",\"debug\"]"
+      system "cd api && rails manifold:project:ingest[\"#{relative_path}\",\"debug\"]"
     end
   end
 
@@ -208,7 +208,7 @@ Clamp do
 
     def execute
       relative_path = File.join("..", path)
-      system "cd api && rails import:project[\"#{relative_path}\",\"debug\"]"
+      system "cd api && rails manifold:project:import[\"#{relative_path}\",\"debug\"]"
     end
   end
 
@@ -217,7 +217,7 @@ Clamp do
     subcommand ["load"], "Reset database and load sample data from ./import dir" do
 
       def execute
-        system "cd api && rails development:load"
+        system "cd api && rails manifold:dev:seed"
       end
 
     end
