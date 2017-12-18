@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { AppearanceMenuButton, VisibilityButton } from "components/reader";
+import { ControlMenu } from "components/reader";
 
 export default class Footer extends Component {
   static propTypes = {
@@ -8,23 +8,17 @@ export default class Footer extends Component {
     commonActions: PropTypes.object
   };
 
-  constructor() {
-    super();
-    this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(
-      this
-    );
-    this.handleVisibilityButtonClick = this.handleVisibilityButtonClick.bind(
-      this
-    );
-  }
-
-  handleAppearanceMenuButtonClick() {
+  handleAppearanceMenuButtonClick = () => {
     this.props.commonActions.panelToggle("appearance");
   }
 
-  handleVisibilityButtonClick() {
+  handleVisibilityButtonClick = () => {
     this.props.commonActions.visibilityToggle("annotation");
   }
+
+  handleNotesButtonClick = () => {
+    this.props.commonActions.visibilityToggle("notesDrawer");
+  };
 
   render() {
     return (
@@ -42,14 +36,20 @@ export default class Footer extends Component {
                   </button>
                 </li>
                */}
+               <li>
+                 <ControlMenu.NotesButton
+                   toggle={this.handleNotesButtonClick}
+                   active={this.props.visibility.notesDrawer}
+                 />
+               </li>
               <li>
-                <AppearanceMenuButton
+                <ControlMenu.AppearanceMenuButton
                   toggleAppearanceMenu={this.handleAppearanceMenuButtonClick}
                   active={this.props.visibility.uiPanels.appearance}
                 />
               </li>
               <li>
-                <VisibilityButton
+                <ControlMenu.VisibilityButton
                   toggle={this.handleVisibilityButtonClick}
                   state={this.props.visibility.annotation}
                 />

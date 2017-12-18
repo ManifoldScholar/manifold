@@ -1,20 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import {
-  AppearanceMenuButton,
-  AppearanceMenuBody,
-  ReturnMenu,
-  TextTitles,
-  VisibilityButton
-} from "components/reader";
+import { ReturnMenu, TextTitles, Notes } from "components/reader";
+import { ControlMenu } from "components/reader";
 import {
   HeaderNotifications,
+  SearchMenuButton,
   SearchMenuBody,
   UIPanel,
   UserMenuButton,
   UserMenuBody
 } from "components/global";
+import { HigherOrder } from "containers/global";
 import classNames from "classnames";
 
 export default class Header extends Component {
@@ -32,31 +29,10 @@ export default class Header extends Component {
     decrementMargins: PropTypes.func,
     setColorScheme: PropTypes.func,
     scrollAware: PropTypes.object,
-    commonActions: PropTypes.object
+    commonActions: PropTypes.object,
+    history: PropTypes.object,
+    match: PropTypes.object
   };
-
-  constructor() {
-    super();
-    this.handleContentsButtonClick = this.handleContentsButtonClick.bind(this);
-    this.handleReturnMenuButtonClick = this.handleReturnMenuButtonClick.bind(
-      this
-    );
-    this.handleSearchMenuButtonClick = this.handleSearchMenuButtonClick.bind(
-      this
-    );
-    this.handleVisibilityButtonClick = this.handleVisibilityButtonClick.bind(
-      this
-    );
-    this.handleAppearanceMenuButtonClick = this.handleAppearanceMenuButtonClick.bind(
-      this
-    );
-    this.triggerShowSignInUpOverlay = this.triggerShowSignInUpOverlay.bind(
-      this
-    );
-    this.triggerToggleUserMenu = this.triggerToggleUserMenu.bind(this);
-    this.triggerHideToc = this.triggerHideToc.bind(this);
-    this.renderContentsButton = this.renderContentsButton.bind(this);
-  }
 
   componentWillUnmount() {
     this.resetHeaderState();
@@ -64,39 +40,48 @@ export default class Header extends Component {
 
   resetHeaderState() {
     this.triggerHideToc();
+    this.triggerHideNotes();
   }
 
-  handleContentsButtonClick() {
+  handleContentsButtonClick = () => {
     this.props.commonActions.visibilityToggle("tocDrawer");
-  }
+  };
 
-  handleReturnMenuButtonClick() {
+  handleReturnMenuButtonClick = () => {
     this.props.commonActions.panelToggle("readerReturn");
-  }
+  };
 
-  handleSearchMenuButtonClick() {
+  handleSearchMenuButtonClick = () => {
     this.props.commonActions.panelToggle("search");
-  }
+  };
 
-  handleVisibilityButtonClick() {
+  handleVisibilityButtonClick = () => {
     this.props.commonActions.visibilityToggle("annotation");
-  }
+  };
 
-  handleAppearanceMenuButtonClick() {
+  handleAppearanceMenuButtonClick = () => {
     this.props.commonActions.panelToggle("appearance");
-  }
+  };
 
-  triggerShowSignInUpOverlay() {
+  triggerShowSignInUpOverlay = () => {
     this.props.commonActions.visibilityShow("signInUpOverlay");
-  }
+  };
 
-  triggerToggleUserMenu() {
+  triggerToggleUserMenu = () => {
     this.props.commonActions.panelToggle("user");
-  }
+  };
 
-  triggerHideToc() {
+  triggerHideToc = () => {
     this.props.commonActions.visibilityHide("tocDrawer");
-  }
+  };
+
+  triggerHideNotes = () => {
+    this.props.commonActions.visibilityHide("notesDrawer");
+  };
+
+  handleNotesButtonClick = () => {
+    this.props.commonActions.visibilityToggle("notesDrawer");
+  };
 
   renderContentsButton = contents => {
     if (contents.length <= 0) {
@@ -140,27 +125,32 @@ export default class Header extends Component {
             : null}
           <nav className="menu-buttons">
             <ul>
-              {/*
-               Hiding search markup until functionality is available
+              <HigherOrder.RequireRole requiredRole={"any"}>
                 <li>
-                  <SearchMenuButton
-                    toggleSearchMenu={this.handleSearchMenuButtonClick}
-                    active={this.props.visibility.uiPanels.search}
+                  <ControlMenu.NotesButton
+                    toggle={this.handleNotesButtonClick}
+                    active={this.props.visibility.notesDrawer}
                   />
                 </li>
-              */}
+              </HigherOrder.RequireRole>
               <li>
-                <VisibilityButton
+                <ControlMenu.VisibilityButton
                   toggle={this.handleVisibilityButtonClick}
                   state={this.props.visibility.annotation}
                 />
               </li>
               <li>
-                <AppearanceMenuButton
+                <ControlMenu.AppearanceMenuButton
                   toggleAppearanceMenu={this.handleAppearanceMenuButtonClick}
                   active={this.props.visibility.uiPanels.appearance}
                 />
               </li>
+              {/*<li>
+                <SearchMenuButton
+                  toggleSearchMenu={this.handleSearchMenuButtonClick}
+                  active={this.props.visibility.uiPanels.search}
+                />
+              </li>*/}
               <li>
                 <UserMenuButton
                   authentication={this.props.authentication}
@@ -195,6 +185,12 @@ export default class Header extends Component {
 
         <nav className="menu-panels-right">
           <UIPanel
+            id="notes"
+            visibility={this.props.visibility.uiPanels}
+            visible={this.props.visibility.uiPanels.notes}
+            bodyComponent={Notes.ReaderDrawer}
+          />
+          <UIPanel
             id="search"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={SearchMenuBody}
@@ -202,7 +198,7 @@ export default class Header extends Component {
           <UIPanel
             id="appearance"
             visibility={this.props.visibility.uiPanels}
-            bodyComponent={AppearanceMenuBody}
+            bodyComponent={ControlMenu.AppearanceMenuBody}
             // Props required by body component
             appearance={this.props.appearance}
             selectFont={this.props.selectFont}

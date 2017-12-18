@@ -135,14 +135,16 @@ export default class AnnotationDetail extends PureComponent {
               <HigherOrder.RequireRole requiredRole="any">
                 <nav className="utility">
                   <ul>
-                    <li>
-                      <button
-                        className={replyButtonClass}
-                        onClick={this.startReply}
-                      >
-                        {"Reply"}
-                      </button>
-                    </li>
+                    {this.props.includeComments
+                      ? <li>
+                          <button
+                            className={replyButtonClass}
+                            onClick={this.startReply}
+                          >
+                            {"Reply"}
+                          </button>
+                        </li>
+                      : null}
                     {this.props.saveHandler &&
                     annotation.attributes.canUpdateObject
                       ? <li>

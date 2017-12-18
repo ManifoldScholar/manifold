@@ -1,32 +1,34 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-export default class AppearanceMenuButton extends Component {
+export default class NotesButton extends PureComponent {
+  static displayName = "ControlMenu.NotesButton";
+
   static propTypes = {
-    toggleAppearanceMenu: PropTypes.func,
+    toggle: PropTypes.func,
     active: PropTypes.bool
   };
 
   clickHandler = event => {
     event.stopPropagation();
-    this.props.toggleAppearanceMenu();
+    this.props.toggle();
   };
 
   render() {
     const buttonClass = classNames({
-      "button-appearance": true,
+      "button-notes": true,
       "button-active": this.props.active
     });
     return (
       <button
         className={buttonClass}
         onClick={this.clickHandler}
-        data-id="toggle-appearance"
+        data-id="toggle"
       >
-        <i className="manicon manicon-aa" />
+        <i className="manicon manicon-notepad" />
         <span className="screen-reader-text">
-          {"Click to open reader appearance menu"}
+          Click to hide or show user annotations overlay
         </span>
       </button>
     );

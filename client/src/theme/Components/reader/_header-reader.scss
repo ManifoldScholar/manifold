@@ -173,6 +173,19 @@
       }
     }
 
+    .button-notes {
+      display: none;
+      padding: 0 10px;
+
+      @include respond($break50) {
+        display: inline-block;
+      }
+
+      @include respond($break70) {
+        padding: 0 13px;
+      }
+    }
+
     .button-avatar {
       position: relative;
       height: 100%;

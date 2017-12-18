@@ -30,6 +30,10 @@ class Annotation < ApplicationRecord
     return all unless creator.present?
     where("(private = true AND creator_id = ?) OR (private = false)", creator.id)
   }
+  scope :by_formats, lambda { |formats|
+    return all unless formats.present?
+    where(format: formats)
+  }
 
   # Constants
   TYPE_ANNOTATION = "annotation".freeze
