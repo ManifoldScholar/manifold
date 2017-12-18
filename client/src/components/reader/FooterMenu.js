@@ -8,16 +8,8 @@ export default class Footer extends Component {
     commonActions: PropTypes.object
   };
 
-  handleAppearanceMenuButtonClick = () => {
-    this.props.commonActions.panelToggle("appearance");
-  };
-
-  handleVisibilityButtonClick = () => {
-    this.props.commonActions.panelToggle("visibility");
-  };
-
-  handleNotesButtonClick = () => {
-    this.props.commonActions.visibilityToggle("notesDrawer");
+  handlePanelToggle = panel => {
+    this.props.commonActions.panelToggle(panel);
   };
 
   render() {
@@ -38,19 +30,19 @@ export default class Footer extends Component {
                */}
               <li>
                 <ControlMenu.NotesButton
-                  toggle={this.handleNotesButtonClick}
-                  active={this.props.visibility.notesDrawer}
+                  toggle={() => this.handlePanelToggle("notes")}
+                  active={this.props.visibility.uiPanels.notes}
                 />
               </li>
               <li>
                 <ControlMenu.VisibilityMenuButton
-                  toggle={this.handleVisibilityButtonClick}
+                  toggle={() => this.handlePanelToggle("visibility")}
                   active={this.props.visibility.uiPanels.visibility}
                 />
               </li>
               <li>
                 <ControlMenu.AppearanceMenuButton
-                  toggleAppearanceMenu={this.handleAppearanceMenuButtonClick}
+                  toggleAppearanceMenu={() => this.handlePanelToggle("appearance")}
                   active={this.props.visibility.uiPanels.appearance}
                 />
               </li>
