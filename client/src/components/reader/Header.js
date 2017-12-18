@@ -5,8 +5,6 @@ import { ReturnMenu, TextTitles, Notes } from "components/reader";
 import { ControlMenu } from "components/reader";
 import {
   HeaderNotifications,
-  SearchMenuButton,
-  SearchMenuBody,
   UIPanel,
   UserMenuButton,
   UserMenuBody
@@ -56,7 +54,7 @@ export default class Header extends Component {
   };
 
   handleVisibilityButtonClick = () => {
-    this.props.commonActions.visibilityToggle("annotation");
+    this.props.commonActions.panelToggle("visibility");
   };
 
   handleAppearanceMenuButtonClick = () => {
@@ -81,6 +79,10 @@ export default class Header extends Component {
 
   handleNotesButtonClick = () => {
     this.props.commonActions.visibilityToggle("notesDrawer");
+  };
+
+  handleVisibilityFilterChange = filters => {
+    this.props.commonActions.visibilityChange({ visibilityFilters: filters });
   };
 
   renderContentsButton = contents => {
@@ -134,9 +136,9 @@ export default class Header extends Component {
                 </li>
               </HigherOrder.RequireRole>
               <li>
-                <ControlMenu.VisibilityButton
+                <ControlMenu.VisibilityMenuButton
                   toggle={this.handleVisibilityButtonClick}
-                  state={this.props.visibility.annotation}
+                  active={this.props.visibility.uiPanels.visibility}
                 />
               </li>
               <li>
@@ -145,7 +147,7 @@ export default class Header extends Component {
                   active={this.props.visibility.uiPanels.appearance}
                 />
               </li>
-              {/*<li>
+              {/* <li>
                 <SearchMenuButton
                   toggleSearchMenu={this.handleSearchMenuButtonClick}
                   active={this.props.visibility.uiPanels.search}
@@ -191,9 +193,11 @@ export default class Header extends Component {
             bodyComponent={Notes.ReaderDrawer}
           />
           <UIPanel
-            id="search"
+            id="visibility"
             visibility={this.props.visibility.uiPanels}
-            bodyComponent={SearchMenuBody}
+            filter={this.props.visibility.visibilityFilters}
+            filterChangeHandler={this.handleVisibilityFilterChange}
+            bodyComponent={ControlMenu.VisibilityMenuBody}
           />
           <UIPanel
             id="appearance"
@@ -208,6 +212,11 @@ export default class Header extends Component {
             incrementMargins={this.props.incrementMargins}
             decrementMargins={this.props.decrementMargins}
           />
+          {/* <UIPanel
+            id="search"
+            visibility={this.props.visibility.uiPanels}
+            bodyComponent={SearchMenuBody}
+          />*/}
           <UIPanel
             id="user"
             visibility={this.props.visibility.uiPanels}

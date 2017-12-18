@@ -1,0 +1,52 @@
+.checkbox {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  transition: color $duration $timing;
+
+  &:hover {
+    color: $accentPrimary;
+  }
+
+  @include respond($break20) {
+    display: inline-block;
+  }
+
+  @include respond($break50) {
+    + .checkbox {
+      margin-left: 32px;
+    }
+  }
+
+  .control-indicator {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    padding-top: 6px;
+    margin-right: 12px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: $neutralWhite;
+
+    // Styled, but hidden until checked
+    .manicon-check {
+      font-size: 11px;
+      color: $neutralWhite;
+      visibility: hidden;
+    }
+  }
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  input:checked ~ .control-indicator {
+    background-color: $accentPrimary;
+
+    .manicon-check {
+      visibility: visible;
+    }
+  }
+}

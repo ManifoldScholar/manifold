@@ -1,6 +1,7 @@
 // Reader Component Manifest
 // -------------------------
 
+@import './ui-panel-menu';
 @import './annotation/index';
 @import './annotation-markers';
 @import './annotation-popup';
@@ -16,5 +17,5 @@
 @import './text-meta';
 @import './text-section';
 @import './toc-drawer';
-@import './visibility-button';
+@import './visibility-menu';
 @import './notes';

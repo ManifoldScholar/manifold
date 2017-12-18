@@ -4,4 +4,4 @@ import GroupItem from "./GroupItem";
 export default {
   Group,
   GroupItem
-}
+};

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Utility } from "components/global";
 import PropTypes from "prop-types";
 
 export default class GroupItem extends Component {
@@ -22,6 +21,8 @@ export default class GroupItem extends Component {
       case "bookmark":
         icon = "bookmark-outline";
         break;
+      default:
+        break;
     }
     return `manicon manicon-${icon}`;
   }
@@ -32,17 +33,19 @@ export default class GroupItem extends Component {
   };
 
   maybeTruncateText(text) {
-    return text.length > 58
-      ? text.slice(0, 58) + '...'
-      : text
+    return text.length > 58 ? text.slice(0, 58) + "..." : text;
   }
 
   render() {
-    const iconClasses = this.getIconClasses(this.props.annotation.attributes.format);
+    const iconClasses = this.getIconClasses(
+      this.props.annotation.attributes.format
+    );
     return (
       <li className="item" onClick={this.handleVisitAnnotation}>
         <i className={iconClasses} />
-        <span>{this.maybeTruncateText(this.props.annotation.attributes.subject)}</span>
+        <span>
+          {this.maybeTruncateText(this.props.annotation.attributes.subject)}
+        </span>
       </li>
     );
   }

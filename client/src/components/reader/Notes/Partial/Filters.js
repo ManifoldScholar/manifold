@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Utility } from "components/global";
 import PropTypes from "prop-types";
 
 export default class Filters extends Component {
@@ -10,21 +9,19 @@ export default class Filters extends Component {
     filter: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   filteredBy(filter, format) {
     return filter.indexOf(format) > -1;
   }
 
   toggleFormat = (event, format) => {
     event.preventDefault();
-    let formatsFilter = this.props.filter.formats;
-    this.filteredBy(formatsFilter, format)
-      ? formatsFilter.splice(formatsFilter.indexOf(format), 1)
-      : formatsFilter.push(format);
-    this.props.filterChangeHandler('formats', formatsFilter);
+    const formatsFilter = this.props.filter.formats;
+    if (this.filteredBy(formatsFilter, format)) {
+      formatsFilter.splice(formatsFilter.indexOf(format), 1);
+    } else {
+      formatsFilter.push(format);
+    }
+    this.props.filterChangeHandler("formats", formatsFilter);
   };
 
   renderCheckBox(label, format) {
@@ -33,7 +30,11 @@ export default class Filters extends Component {
 
     return (
       <label className="checkbox">
-        <input type="checkbox" checked={checked} onChange={(e) => this.toggleFormat(e, format)} />
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={e => this.toggleFormat(e, format)}
+        />
         <div className="control-indicator">
           <i className="manicon manicon-check" />
         </div>

@@ -163,8 +163,12 @@
       .filters {
         padding-top: 0;
 
-        label.checkbox {
+        .checkbox {
           color: $neutral80;
+
+          &:hover {
+            color: $accentPrimary;
+          }
         }
       }
     }

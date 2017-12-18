@@ -1,0 +1,40 @@
+@mixin uiPanelMenu {
+  position: fixed;
+  // Off screen by default
+  right: 0;
+  bottom: -420px;
+  width: 100%;
+  background-color: $neutral10;
+  transition: right $duration $timing,
+  bottom $duration $timing;
+
+  @include respond($break50) {
+    position: absolute;
+    right: -350px;
+    bottom: auto;
+    width: auto;
+  }
+
+  ul {
+    @include listUnstyled;
+
+    li {
+      padding: 32px 30px;
+
+      + li {
+        border-top: 2px solid $neutral30;
+      }
+    }
+  }
+
+  .panel-visible & {
+    // NB: This will be '52' when there is
+    // a full set of functional icons
+    bottom: 44px;
+
+    @include respond($break50) {
+      right: 0;
+      bottom: auto;
+    }
+  }
+}

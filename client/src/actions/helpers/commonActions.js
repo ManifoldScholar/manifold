@@ -6,6 +6,7 @@ import {
 import { bindActionCreators } from "redux";
 
 const {
+  visibilityChange,
   visibilityToggle,
   visibilityHide,
   visibilityShow,
@@ -35,6 +36,7 @@ const commonActions = dispatch => {
     removeNotification: b(opts => removeNotification(opts), dispatch),
     clearNotifications: b(removeAllNotifications, dispatch),
     logout: b(currentUserActions.logout, dispatch),
+    visibilityChange: b(el => visibilityChange(el), dispatch),
     visibilityToggle: b(el => visibilityToggle(el), dispatch),
     visibilityHide: b(el => visibilityHide(el), dispatch),
     visibilityShow: b(el => visibilityShow(el), dispatch),

@@ -93,51 +93,5 @@
         white-space: nowrap;
       }
     }
-
-    .checkbox {
-      position: relative;
-      display: block;
-      margin-right: 20px;
-      margin-bottom: 10px;
-      cursor: pointer;
-
-      @include respond($break20) {
-        display: inline-block;
-      }
-
-      @include respond($break70) {
-        margin-right: 32px;
-      }
-
-      .control-indicator {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        padding-top: 6px;
-        margin-right: 12px;
-        text-align: center;
-        vertical-align: middle;
-        background-color: $neutralWhite;
-
-        // Styled, but hidden until checked
-        .manicon-check {
-          font-size: 11px;
-          color: $neutralOffBlack;
-          visibility: hidden;
-        }
-      }
-
-      input {
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-      }
-
-      input:checked ~ .control-indicator {
-        .manicon-check {
-          visibility: visible;
-        }
-      }
-    }
   }
 }

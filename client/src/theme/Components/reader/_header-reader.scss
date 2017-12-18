@@ -127,43 +127,39 @@
         position: relative;
         height: 100%;
         vertical-align: middle;
+
+        button {
+          display: none;
+          padding: 0 10px;
+
+          @include respond($break50) {
+            display: inline-block;
+          }
+
+          &.button-active {
+            background-color: $neutral10;
+          }
+        }
       }
     }
 
     .button-search {
-      padding: 0 10px;
-      font-size: 23px;
-
       @include respond($break70) {
         padding: 0 18px;
       }
 
-      &.button-active {
-        background-color: $neutral10;
+      .manicon-magnify::before{
+        font-size: 25px;
       }
     }
 
-    .annotation-visibility-button {
-      display: none;
-      padding: 0 10px;
-
-      @include respond($break50) {
-        display: inline-block;
-      }
-
+    .button-visibility {
       @include respond($break70) {
         padding: 0 13px;
       }
     }
 
     .button-appearance {
-      display: none;
-      padding: 0 10px;
-
-      @include respond($break50) {
-        display: inline-block;
-      }
-
       @include respond($break70) {
         padding: 0 13px;
       }
@@ -174,13 +170,6 @@
     }
 
     .button-notes {
-      display: none;
-      padding: 0 10px;
-
-      @include respond($break50) {
-        display: inline-block;
-      }
-
       @include respond($break70) {
         padding: 0 13px;
       }

@@ -266,14 +266,8 @@ module Validation
   end
 
   def annotation_filter_params
-    # Client tends to pass indexes in the array of values, which makes rails reader it
-    # as a hash. We're coercing the hash to an array here, before it hits strong params.
-    if params.dig(:filter, :ids).respond_to? :values
-      params[:filter][:ids] = params[:filter][:ids].values
-    end
-    if params.dig(:filter, :formats).respond_to? :values
-      params[:filter][:formats] = params[:filter][:formats].values
-    end
+    coerce_filter_to_hash(:filter, :ids)
+    coerce_filter_to_hash(:filter, :formats)
     params.permit(filter: [{ ids: [] }, [{ formats: [] }], :text, :text_section])[:filter]
   end
 
@@ -310,6 +304,13 @@ module Validation
     [
       :created_by_admin
     ]
+  end
+
+  # Client tends to pass indexes in the array of values, which makes rails reader it
+  # as a hash. We're coercing the hash to an array here, before it hits strong params.
+  def coerce_filter_to_hash(param, key)
+    return unless params.dig(param, key).respond_to? :values
+    params[param][key] = params[param][key].values
   end
 
   def structure_params(attributes: nil, relationships: nil)

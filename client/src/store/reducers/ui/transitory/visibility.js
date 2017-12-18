@@ -5,14 +5,19 @@ export const initialState = {
   loginOverlay: false,
   userMenu: false,
   tocDrawer: false,
-  annotation: 2,
   notesDrawer: false,
+  visibilityFilters: {
+    highlight: { yours: true, others: true },
+    annotation: { yours: true, others: true },
+    resource: { all: true }
+  },
   uiPanels: {
     readerReturn: false,
     user: false,
     appearance: false,
     layers: false,
-    search: false
+    search: false,
+    visibility: false
   }
 };
 
@@ -21,17 +26,16 @@ const panelSolo = {
   user: true,
   appearance: true,
   layers: true,
-  search: true
+  search: true,
+  visibility: true
+};
+
+const visibilityChange = (state, action) => {
+  return Object.assign({}, state, action.payload);
 };
 
 const visibilityToggle = (state, action) => {
-  let result;
-  if (action.payload === "annotation") {
-    result = state[action.payload] + 1 > 2 ? 0 : state[action.payload] + 1;
-  } else {
-    result = !state[action.payload];
-  }
-  return Object.assign({}, state, { [action.payload]: result });
+  return Object.assign({}, state, { [action.payload]: !state[action.payload] });
 };
 
 const visibilityShow = (state, action) => {
@@ -85,6 +89,7 @@ const allPanelsHide = state => {
 
 export default handleActions(
   {
+    VISIBILITY_CHANGE: visibilityChange,
     VISIBILITY_TOGGLE: visibilityToggle,
     VISIBILITY_SHOW: visibilityShow,
     VISIBILITY_HIDE: visibilityHide,

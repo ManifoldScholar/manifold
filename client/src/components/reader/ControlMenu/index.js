@@ -1,11 +1,13 @@
 import AppearanceMenuBody from "./AppearanceMenuBody";
 import AppearanceMenuButton from "./AppearanceMenuButton";
-import VisibilityButton from "./VisibilityButton";
+import VisibilityMenuBody from "./VisibilityMenuBody";
+import VisibilityMenuButton from "./VisibilityMenuButton";
 import NotesButton from "./NotesButton";
 
 export default {
   AppearanceMenuBody,
   AppearanceMenuButton,
-  VisibilityButton,
+  VisibilityMenuBody,
+  VisibilityMenuButton,
   NotesButton
 };
