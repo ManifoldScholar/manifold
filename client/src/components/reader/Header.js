@@ -38,51 +38,27 @@ export default class Header extends Component {
 
   resetHeaderState() {
     this.triggerHideToc();
-    this.triggerHideNotes();
   }
 
   handleContentsButtonClick = () => {
     this.props.commonActions.visibilityToggle("tocDrawer");
   };
 
-  handleReturnMenuButtonClick = () => {
-    this.props.commonActions.panelToggle("readerReturn");
-  };
-
-  handleSearchMenuButtonClick = () => {
-    this.props.commonActions.panelToggle("search");
-  };
-
-  handleVisibilityButtonClick = () => {
-    this.props.commonActions.panelToggle("visibility");
-  };
-
-  handleAppearanceMenuButtonClick = () => {
-    this.props.commonActions.panelToggle("appearance");
+  triggerHideToc = () => {
+    this.props.commonActions.visibilityHide("tocDrawer");
   };
 
   triggerShowSignInUpOverlay = () => {
     this.props.commonActions.visibilityShow("signInUpOverlay");
   };
 
-  triggerToggleUserMenu = () => {
-    this.props.commonActions.panelToggle("user");
-  };
-
-  triggerHideToc = () => {
-    this.props.commonActions.visibilityHide("tocDrawer");
-  };
-
-  triggerHideNotes = () => {
-    this.props.commonActions.visibilityHide("notesDrawer");
-  };
-
-  handleNotesButtonClick = () => {
-    this.props.commonActions.visibilityToggle("notesDrawer");
-  };
-
   handleVisibilityFilterChange = filters => {
     this.props.commonActions.visibilityChange({ visibilityFilters: filters });
+  };
+
+  handlePanelToggle = panel => {
+    this.triggerHideToc();
+    this.props.commonActions.panelToggle(panel);
   };
 
   renderContentsButton = contents => {
@@ -115,7 +91,7 @@ export default class Header extends Component {
       <header className="header-reader">
         <nav className={containerClass}>
           <ReturnMenu.Button
-            toggleReaderMenu={this.handleReturnMenuButtonClick}
+            toggleReaderMenu={() => this.handlePanelToggle("readerReturn")}
           />
           {this.renderContentsButton(this.props.text.attributes.toc)}
           {this.props.section
@@ -130,20 +106,20 @@ export default class Header extends Component {
               <HigherOrder.RequireRole requiredRole={"any"}>
                 <li>
                   <ControlMenu.NotesButton
-                    toggle={this.handleNotesButtonClick}
-                    active={this.props.visibility.notesDrawer}
+                    toggle={() => this.handlePanelToggle("notes")}
+                    active={this.props.visibility.uiPanels.notes}
                   />
                 </li>
               </HigherOrder.RequireRole>
               <li>
                 <ControlMenu.VisibilityMenuButton
-                  toggle={this.handleVisibilityButtonClick}
+                  toggle={() => this.handlePanelToggle("visibility")}
                   active={this.props.visibility.uiPanels.visibility}
                 />
               </li>
               <li>
                 <ControlMenu.AppearanceMenuButton
-                  toggleAppearanceMenu={this.handleAppearanceMenuButtonClick}
+                  toggleAppearanceMenu={() => this.handlePanelToggle("appearance")}
                   active={this.props.visibility.uiPanels.appearance}
                 />
               </li>
@@ -158,7 +134,7 @@ export default class Header extends Component {
                   authentication={this.props.authentication}
                   active={this.props.visibility.uiPanels.user}
                   showLoginOverlay={this.triggerShowSignInUpOverlay}
-                  toggleUserMenu={this.triggerToggleUserMenu}
+                  toggleUserMenu={() => this.handlePanelToggle("user")}
                 />
               </li>
             </ul>

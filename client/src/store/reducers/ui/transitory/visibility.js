@@ -5,7 +5,6 @@ export const initialState = {
   loginOverlay: false,
   userMenu: false,
   tocDrawer: false,
-  notesDrawer: false,
   visibilityFilters: {
     highlight: { yours: true, others: true },
     annotation: { yours: true, others: true },
@@ -17,7 +16,8 @@ export const initialState = {
     appearance: false,
     layers: false,
     search: false,
-    visibility: false
+    visibility: false,
+    notes: false
   }
 };
 
@@ -27,7 +27,8 @@ const panelSolo = {
   appearance: true,
   layers: true,
   search: true,
-  visibility: true
+  visibility: true,
+  notes: true
 };
 
 const visibilityChange = (state, action) => {
