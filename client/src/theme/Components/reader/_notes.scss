@@ -30,6 +30,10 @@
     padding-top: 47px;
     background-color: $neutral10;
 
+    @include respond($break100) {
+      width: 50%;
+    }
+
     .drawer-title {
       font-size: 22px;
       color: $neutral90;
@@ -44,6 +48,7 @@
 
     .drawer-bar {
       padding: 6px 32px;
+      border-bottom: 2px solid $neutral40;
 
       button {
         font-size: 14px;
@@ -142,33 +147,58 @@
       }
     }
 
-    .search-menu {
-      padding: 13px 32px;
+    .filters {
+      padding: 21px 32px 18px;
       background-color: $neutral20;
       border-bottom: 2px solid $neutral40;
 
-      @include respond($break50) {
+      @include respond($break90) {
         display: flex;
         align-items: center;
       }
 
       label {
-        font-size: $type40;
-
-        @include respond($break50) {
-          font-size: $type60;
-        }
+        @include utilityPrimary;
+        font-size: 14px;
       }
 
-      .filters {
-        padding-top: 0;
+      .label {
+        color: $neutral70;
+        padding-right: 18px;
+        margin-top: -2px;
+      }
+
+      .checkbox-group {
+        padding-top: 8px;
+
+        @include respond($break50) {
+          display: flex;
+        }
 
         .checkbox {
-          color: $neutral80;
+          display: block;
 
-          &:hover {
-            color: $accentPrimary;
+          .control-indicator {
+            margin-top: -3px;
           }
+        }
+
+        .checkbox + .checkbox {
+          margin-top: 8px;
+          margin-left: 0;
+
+          @include respond($break50) {
+            margin-top: 0;
+            margin-left: 28px;
+          }
+
+          @include respond($break65) {
+            margin-left: 32px;
+          }
+        }
+
+        @include respond($break90) {
+          padding-top: 0;
         }
       }
     }
