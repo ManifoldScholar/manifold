@@ -151,37 +151,37 @@ common: &1
           - "application/zip"
           - "application/epub+zip"
         :allowed_ext:
-          - !ruby/regexp '/md\Z/'
-          - !ruby/regexp '/zip\Z/'
-          - !ruby/regexp '/epub\Z/'
+          - !ruby/regexp '/md\Z/i'
+          - !ruby/regexp '/zip\Z/i'
+          - !ruby/regexp '/epub\Z/i'
       :image:
         :allowed_mime:
           - !ruby/regexp '/image\/.*/'
         :allowed_ext:
-          - !ruby/regexp '/gif\Z/'
-          - !ruby/regexp '/jpe?g\Z/'
-          - !ruby/regexp '/png\Z/'
-          - !ruby/regexp '/svg\Z/'
+          - !ruby/regexp '/gif\Z/i'
+          - !ruby/regexp '/jpe?g\Z/i'
+          - !ruby/regexp '/png\Z/i'
+          - !ruby/regexp '/svg\Z/i'
       :video:
         :allowed_mime:
           - !ruby/regexp '/video\/.*/'
         :allowed_ext:
-          - !ruby/regexp '/mp4\Z/'
-          - !ruby/regexp '/webm\Z/'
-          - !ruby/regexp '/flv\Z/'
-          - !ruby/regexp '/wmv\Z/'
-          - !ruby/regexp '/mov\Z/'
-          - !ruby/regexp '/avi\Z/'
+          - !ruby/regexp '/mp4\Z/i'
+          - !ruby/regexp '/webm\Z/i'
+          - !ruby/regexp '/flv\Z/i'
+          - !ruby/regexp '/wmv\Z/i'
+          - !ruby/regexp '/mov\Z/i'
+          - !ruby/regexp '/avi\Z/i'
       :audio:
         :allowed_mime:
           - !ruby/regexp '/audio\/.*/'
         :allowed_ext:
-          - !ruby/regexp '/flac\Z/'
-          - !ruby/regexp '/mp3\Z/'
-          - !ruby/regexp '/wma\Z/'
-          - !ruby/regexp '/wav\Z/'
-          - !ruby/regexp '/mid\Z/'
-          - !ruby/regexp '/ogg\Z/'
+          - !ruby/regexp '/flac\Z/i'
+          - !ruby/regexp '/mp3\Z/i'
+          - !ruby/regexp '/wma\Z/i'
+          - !ruby/regexp '/wav\Z/i'
+          - !ruby/regexp '/mid\Z/i'
+          - !ruby/regexp '/ogg\Z/i'
       :excel:
         :allowed_mime:
           - "application/vnd.ms-excel"
@@ -195,16 +195,16 @@ common: &1
           - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           - "application/zip"
         :allowed_ext:
-          - !ruby/regexp '/xls\Z/'
-          - !ruby/regexp '/xlt\Z/'
-          - !ruby/regexp '/xlm\Z/'
-          - !ruby/regexp '/xlsx\Z/'
-          - !ruby/regexp '/xlsm\Z/'
-          - !ruby/regexp '/xltx\Z/'
-          - !ruby/regexp '/xltm\Z/'
-          - !ruby/regexp '/xlsb\Z/'
-          - !ruby/regexp '/xla\Z/'
-          - !ruby/regexp '/xlw\Z/'
+          - !ruby/regexp '/xls\Z/i'
+          - !ruby/regexp '/xlt\Z/i'
+          - !ruby/regexp '/xlm\Z/i'
+          - !ruby/regexp '/xlsx\Z/i'
+          - !ruby/regexp '/xlsm\Z/i'
+          - !ruby/regexp '/xltx\Z/i'
+          - !ruby/regexp '/xltm\Z/i'
+          - !ruby/regexp '/xlsb\Z/i'
+          - !ruby/regexp '/xla\Z/i'
+          - !ruby/regexp '/xlw\Z/i'
       :text_document:
         :allowed_mime:
           - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -214,13 +214,13 @@ common: &1
           - "application/vnd.ms-word.template.macroEnabled.12"
           - !ruby/regexp '/text\/.*/'
         :allowed_ext:
-          - !ruby/regexp '/doc\Z/'
-          - !ruby/regexp '/docx\Z/'
-          - !ruby/regexp '/docm\Z/'
-          - !ruby/regexp '/dotx\Z/'
-          - !ruby/regexp '/dotm\Z/'
-          - !ruby/regexp '/docb\Z/'
-          - !ruby/regexp '/txt\Z/'
+          - !ruby/regexp '/doc\Z/i'
+          - !ruby/regexp '/docx\Z/i'
+          - !ruby/regexp '/docm\Z/i'
+          - !ruby/regexp '/dotx\Z/i'
+          - !ruby/regexp '/dotm\Z/i'
+          - !ruby/regexp '/docb\Z/i'
+          - !ruby/regexp '/txt\Z/i'
       :powerpoint:
         :allowed_mime:
           - "application/vnd.ms-powerpoint"
@@ -228,16 +228,16 @@ common: &1
           - "application/vnd.openxmlformats-officedocument.presentationml.template"
           - "application/vnd.openxmlformats-officedocument.presentationml.slideshow"
         :allowed_ext:
-          - !ruby/regexp '/ppt\Z/'
-          - !ruby/regexp '/pptx\Z/'
-          - !ruby/regexp '/pptm\Z/'
-          - !ruby/regexp '/potx\Z/'
-          - !ruby/regexp '/potm\Z/'
-          - !ruby/regexp '/ppam\Z/'
-          - !ruby/regexp '/ppsx\Z/'
-          - !ruby/regexp '/ppsm\Z/'
-          - !ruby/regexp '/sldx\Z/'
-          - !ruby/regexp '/sldm\Z/'
+          - !ruby/regexp '/ppt\Z/i'
+          - !ruby/regexp '/pptx\Z/i'
+          - !ruby/regexp '/pptm\Z/i'
+          - !ruby/regexp '/potx\Z/i'
+          - !ruby/regexp '/potm\Z/i'
+          - !ruby/regexp '/ppam\Z/i'
+          - !ruby/regexp '/ppsx\Z/i'
+          - !ruby/regexp '/ppsm\Z/i'
+          - !ruby/regexp '/sldx\Z/i'
+          - !ruby/regexp '/sldm\Z/i'
       :pdf:
         :allowed_mime:
           - "application/pdf"
@@ -270,33 +270,33 @@ common: &1
           - !ruby/regexp '/video\/.*/'
           - !ruby/regexp '/image\/.*/'
         :allowed_ext:
-          - !ruby/regexp '/gif\Z/'
-          - !ruby/regexp '/jpe?g\Z/'
-          - !ruby/regexp '/png\Z/'
-          - !ruby/regexp '/svg\Z/'
-          - !ruby/regexp '/x?html?\Z/'
-          - !ruby/regexp '/ttf\Z/'
-          - !ruby/regexp '/otf\Z/'
-          - !ruby/regexp '/woff\Z/'
-          - !ruby/regexp '/mp3\Z/'
-          - !ruby/regexp '/pls\Z/'
-          - !ruby/regexp '/smil\Z/'
-          - !ruby/regexp '/xml\Z/'
-          - !ruby/regexp '/mp3\Z/'
-          - !ruby/regexp '/mp4\Z/'
-          - !ruby/regexp '/css\Z/'
-          - !ruby/regexp '/ncx\Z/'
-          - !ruby/regexp '/js\Z/'
-          - !ruby/regexp '/webm\Z/'
-          - !ruby/regexp '/pdf\Z/'
-          - !ruby/regexp '/zip\Z/'
-          - !ruby/regexp '/docx\Z/'
-          - !ruby/regexp '/xlsx\Z/'
-          - !ruby/regexp '/ppt?x\Z/'
-          - !ruby/regexp '/md\Z/'
-          - !ruby/regexp '/dmg\Z/'
-          - !ruby/regexp '/txt\Z/'
-          - !ruby/regexp '/epub\Z/'
+          - !ruby/regexp '/gif\Z/i'
+          - !ruby/regexp '/jpe?g\Z/i'
+          - !ruby/regexp '/png\Z/i'
+          - !ruby/regexp '/svg\Z/i'
+          - !ruby/regexp '/x?html?\Z/i'
+          - !ruby/regexp '/ttf\Z/i'
+          - !ruby/regexp '/otf\Z/i'
+          - !ruby/regexp '/woff\Z/i'
+          - !ruby/regexp '/mp3\Z/i'
+          - !ruby/regexp '/pls\Z/i'
+          - !ruby/regexp '/smil\Z/i'
+          - !ruby/regexp '/xml\Z/i'
+          - !ruby/regexp '/mp3\Z/i'
+          - !ruby/regexp '/mp4\Z/i'
+          - !ruby/regexp '/css\Z/i'
+          - !ruby/regexp '/ncx\Z/i'
+          - !ruby/regexp '/js\Z/i'
+          - !ruby/regexp '/webm\Z/i'
+          - !ruby/regexp '/pdf\Z/i'
+          - !ruby/regexp '/zip\Z/i'
+          - !ruby/regexp '/docx\Z/i'
+          - !ruby/regexp '/xlsx\Z/i'
+          - !ruby/regexp '/ppt?x\Z/i'
+          - !ruby/regexp '/md\Z/i'
+          - !ruby/regexp '/dmg\Z/i'
+          - !ruby/regexp '/txt\Z/i'
+          - !ruby/regexp '/epub\Z/i'
 production: *1
 development: *1
 test: *1
