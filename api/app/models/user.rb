@@ -44,9 +44,8 @@ class User < ApplicationRecord
   has_many :makers, through: :user_claims
 
   # Validation
-  validates :password, length: { minimum: 8 }, allow_nil: true
-  validates :password, confirmation: true,
-                       unless: proc { |user| user.password.blank? }
+  validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
+  validate :password_not_blank!
   validates :nickname, :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
   validates :role, inclusion: { in: ROLE_KEYS }, presence: true
@@ -121,5 +120,12 @@ class User < ApplicationRecord
 
   def send_welcome_email
     AccountMailer.welcome(self, false).deliver
+  end
+
+  private
+
+  def password_not_blank!
+    return if password.nil?
+    errors.add(:password, "can't be blank") if password.blank?
   end
 end
