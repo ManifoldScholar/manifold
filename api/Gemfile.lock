@@ -397,6 +397,8 @@ GEM
     validate_url (1.0.2)
       activemodel (>= 3.0.0)
       addressable
+    validates_email_format_of (1.6.3)
+      i18n
     webmock (2.3.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -481,6 +483,7 @@ DEPENDENCIES
   twitter (= 5.16.0)
   uber
   validate_url
+  validates_email_format_of
   webmock
 
 BUNDLED WITH

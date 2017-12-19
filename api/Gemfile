@@ -59,6 +59,7 @@ gem "signet"
 gem "twitter", "5.16.0"
 gem "uber", require: %w(uber/inheritable_attr)
 gem "validate_url"
+gem "validates_email_format_of"
 
 group :development, :test do
   gem "factory_girl_rails", "~> 4.7"

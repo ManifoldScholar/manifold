@@ -47,8 +47,8 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
   validate :password_not_blank!
   validates :nickname, :first_name, :last_name, :email, presence: true
-  validates :email, uniqueness: true
   validates :role, inclusion: { in: ROLE_KEYS }, presence: true
+  validates :email, uniqueness: true, email_format: { message: "is not valid" }
 
   # Attachments
   manifold_has_attached_file :avatar, :image
