@@ -201,49 +201,58 @@ class UpdateFormContainer extends Component {
                 : <p className="overlay-copy">
                     {"While you're here, why not upload a profile image?"}
                   </p>}
-              <Dropzone
-                className="form-dropzone"
-                style={{}}
-                activeStyle={{}}
-                accept="image/*"
-                multiple={false}
-                ref={dropzone => {
-                  this.dropzone = dropzone;
-                }}
-                onDrop={this.handleFileDrop}
+              <Form.Errorable
+                className="form-input"
+                name="attributes[avatar]"
+                errors={errors}
               >
-                <div
-                  style={{ position: "relative" }}
-                  className="dropzone-button dropzone-button-dotted"
+                <Dropzone
+                  className="form-dropzone"
+                  style={{}}
+                  activeStyle={{}}
+                  accept="image/*"
+                  multiple={false}
+                  ref={dropzone => {
+                    this.dropzone = dropzone;
+                  }}
+                  onDrop={this.handleFileDrop}
                 >
                   <div
-                    style={{
-                      top: "50%",
-                      marginTop: -33,
-                      height: 66,
-                      width: 66,
-                      position: "absolute"
-                    }}
+                    style={{ position: "relative" }}
+                    className="dropzone-button dropzone-button-dotted"
                   >
-                    {this.hasAvatar()
-                      ? <i
-                          onClick={this.handleRemoveAvatar}
-                          style={{
-                            position: "absolute",
-                            top: 0,
-                            right: -8,
-                            fontSize: 10
-                          }}
-                          className="manicon manicon-x"
-                        />
-                      : null}
-                    <Avatar style={{ margin: 0 }} url={this.displayAvatar()} />
+                    <div
+                      style={{
+                        top: "50%",
+                        marginTop: -33,
+                        height: 66,
+                        width: 66,
+                        position: "absolute"
+                      }}
+                    >
+                      {this.hasAvatar()
+                        ? <i
+                            onClick={this.handleRemoveAvatar}
+                            style={{
+                              position: "absolute",
+                              top: 0,
+                              right: -8,
+                              fontSize: 10
+                            }}
+                            className="manicon manicon-x"
+                          />
+                        : null}
+                      <Avatar
+                        style={{ margin: 0 }}
+                        url={this.displayAvatar()}
+                      />
+                    </div>
+                    <span className="dropzone-button-text">
+                      Click to browse or<br />drag and drop
+                    </span>
                   </div>
-                  <span className="dropzone-button-text">
-                    Click to browse or<br />drag and drop
-                  </span>
-                </div>
-              </Dropzone>
+                </Dropzone>
+              </Form.Errorable>
             </div>
           : null}
         <div className="row-1-p">
