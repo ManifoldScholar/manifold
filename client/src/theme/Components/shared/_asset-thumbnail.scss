@@ -179,14 +179,14 @@
         margin: auto;
       }
 
-      &.document, &.interactive, &.link, &.pdf {
-        // OD
-        max-width: none;
-
-        svg {
-          max-width: 20px;
-        }
-      }
+      // &.document, &.interactive, &.link, &.pdf {
+      //   // OD
+      //   max-width: none;
+      //
+      //   svg {
+      //     max-width: 20px;
+      //   }
+      // }
     }
 
     .wrapper {
@@ -251,23 +251,10 @@
     padding: 18px 0 0;
     margin: 0 auto;
 
-    // &.document, &.interactive, &.link, &.pdf {
-    //   max-width: 25%;
-    // }
-
-    // Hack to make the resource icons the same height on resource cards. --ZD
-    // &.image {
-    //   margin-bottom: 7px;
-    // }
-    //
-    // &.audio {
-    //   margin-bottom: 12px;
-    // }
-
     svg {
       width: 100%;
       height: auto;
-      max-height: 100%;
+      max-height: 55.797px;
       fill: $neutral70;
       transition: fill $duration $timing;
     }
