@@ -35,7 +35,23 @@
 
   &.title {
     .wrapper {
-      padding: 11% 7.6%;
+      padding: 4.818vw 3.329vw;
+
+      @include respond($break60) {
+        padding: 3.141vw 2.169vw;
+      }
+
+      @include respond($break75) {
+        padding: 2.329vw 1.609vw;
+      }
+
+      @include respond($break90) {
+        padding: 1.858vw 1.283vw;
+      }
+
+      @include respond($break100) {
+        padding: 22.938px 15.844px;
+      }
     }
 
     .icon-thumbnail-type {
@@ -46,8 +62,20 @@
       width: 27%;
       padding: 14px 0 17px;
 
-      &.document, &.interactive, &.link, &.pdf {
-        max-width: 19%;
+      svg {
+        max-height: 62.219px;
+
+        @include respond($break60) {
+          max-height: 49.672px;
+        }
+
+        @include respond($break75) {
+          max-height: 46.516px;
+        }
+
+        @include respond($break90) {
+          max-height: 48.406px;
+        }
       }
     }
   }
