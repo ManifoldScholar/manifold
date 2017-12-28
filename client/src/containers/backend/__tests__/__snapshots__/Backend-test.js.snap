@@ -20,7 +20,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                       <div className=\\"header-container\\">
                         <Link to=\\"/\\" className=\\"logo\\" replace={false}>
                           <a className=\\"logo\\" onClick={[Function]} href=\\"/\\">
-                            <PressLogo url={[undefined]}>
+                            <PressLogo>
                               <figure className=\\"\\">
                                 <div>
                                   <i className=\\"manicon manicon-manifold-logo\\" />

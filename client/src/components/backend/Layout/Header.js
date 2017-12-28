@@ -9,7 +9,6 @@ import {
 } from "components/global";
 import { Link, NavLink } from "react-router-dom";
 import startsWith from "lodash/startsWith";
-import get from "lodash/get";
 import lh from "helpers/linkHandler";
 
 export default class LayoutHeader extends Component {
@@ -49,9 +48,7 @@ export default class LayoutHeader extends Component {
       <header className={"header-app dark"}>
         <div className="header-container">
           <Link to={lh.link("frontend")} className="logo">
-            <PressLogo
-              url={get(this.props.settings, "attributes.pressLogoStyles.small")}
-            />
+            <PressLogo />
           </Link>
           <nav className="text-nav">
             <ul>

@@ -221,22 +221,30 @@ $readerContainerWidths: (790px, 680px, 500px);
     font-size: 32px;
 
     @include respond($break40) {
-      font-size: 39px;
+      font-size: 40px;
     }
   }
 
   // Image handling
   .logo-square {
+    width: 32px;
+    height: 32px;
+    @include respond($break40) {
+      width: 40px;
+      height: 40px;
+    }
+
     .image {
+      position: relative;
+      left: -1px;
       width: 32px;
-      height: 32px;
       background-repeat: no-repeat;
       background-position: 50% 50%;
       background-size: contain;
+      border: 1px solid $neutralWhite;
 
       @include respond($break40) {
-        width: 39px;
-        height: 39px;
+        width: 40px;
       }
     }
   }

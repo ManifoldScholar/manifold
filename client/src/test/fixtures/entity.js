@@ -52,7 +52,8 @@ const defaults = {
         copyright: "2015-2016 6 University of Minnesota Press"
       },
       theme: {
-        typekitId: "typekitId"
+        typekitId: "typekitId",
+        logoStyles: `{"left": -1}`
       },
       integrations: {
         gaProfileId: null,

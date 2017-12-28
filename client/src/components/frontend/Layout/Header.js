@@ -47,7 +47,11 @@ export default class LayoutHeader extends PureComponent {
         <div className="header-container">
           <Link to={lh.link("frontend")} className="logo">
             <PressLogo
-              url={get(this.props.settings, "attributes.pressLogoStyles.small")}
+              url={get(
+                this.props.settings,
+                "attributes.pressLogoStyles.original"
+              )}
+              styles={get(this.props.settings, "attributes.theme.logoStyles")}
             />
           </Link>
           {/* Use show-50 utility class to hide text-nav on mobile */}

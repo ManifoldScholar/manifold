@@ -4,13 +4,11 @@ exports[`Global.PressLogo component renders correctly 1`] = `
 <figure
   className="logo-square"
 >
-  <div
+  <img
+    alt="Logo"
     className="image"
-    style={
-      Object {
-        "backgroundImage": "url(some/url)",
-      }
-    }
+    src="some/url"
+    style={Object {}}
   />
 </figure>
 `;
