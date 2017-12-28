@@ -174,16 +174,16 @@ Clamp do
     parameter "[SUBJECT]", "api or client"
 
     def check_client
-      puts Paint["mainfold lint client", :faint]
+      puts Paint["manifold lint client", :faint]
       raise "Client lint failed" unless system "manifold lint client"
-      puts Paint["mainfold test client", :faint]
+      puts Paint["manifold test client", :faint]
       raise "Client test failed" unless system "manifold test client"
     end
 
     def check_api
-      puts Paint["mainfold lint api", :faint]
+      puts Paint["manifold lint api", :faint]
       raise "API lint failed" unless system "manifold lint api"
-      puts Paint["mainfold test api", :faint]
+      puts Paint["manifold test api", :faint]
       raise "API test failed" unless system "manifold test api"
     end
 
