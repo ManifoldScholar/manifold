@@ -41,7 +41,7 @@ module Validator
 
     def maybe_transform_font_sizes(value)
       match = !(value =~ /\d+pt|\d+px/).nil?
-      return "#{value.to_f / 11}rem" if match
+      return "#{value.to_f / 16}rem" if match
       match = !(value =~ /\d+em/).nil?
       return "#{value.to_f}rem" if match
       value
