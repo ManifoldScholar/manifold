@@ -4,7 +4,8 @@ import classNames from "classnames";
 
 export default class PressLogo extends Component {
   static propTypes = {
-    url: PropTypes.string
+    url: PropTypes.string,
+    styles: PropTypes.string
   };
 
   getDefaultIcon() {
@@ -19,11 +20,18 @@ export default class PressLogo extends Component {
   }
 
   getPressImage() {
+    let style = {};
+    if (this.props.styles) {
+      try {
+        style = JSON.parse(this.props.styles);
+      } catch (e) {
+        /* eslint-disable no-console */
+        console.log("Error: Invalid press logo styles");
+        /* eslint-enable no-console */
+      }
+    }
     return (
-      <div
-        className="image"
-        style={{ backgroundImage: `url(${this.props.url})` }}
-      />
+      <img src={this.props.url} alt="Logo" className="image" style={style} />
     );
   }
 

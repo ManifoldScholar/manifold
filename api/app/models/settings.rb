@@ -4,7 +4,7 @@ class Settings < ApplicationRecord
   include Authority::Abilities
   include Attachments
 
-  SECTIONS = [:general, :integrations, :secrets, :email].freeze
+  SECTIONS = [:general, :integrations, :secrets, :email, :theme].freeze
 
   DEFAULTS = {
     general: {

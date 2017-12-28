@@ -37,6 +37,13 @@ export class SettingsThemeContainer extends PureComponent {
             readFrom="attributes[pressLogoStyles][smallSquare]"
             name="attributes[pressLogo]"
             remove="attributes[removePressLogo]"
+            instructions="Logos are constrained at 40px wide with flexible height. For retina displays, upload logos that are 80px wide."
+          />
+          <Form.TextInput
+            label="Logo Styles"
+            name="attributes[theme][logoStyles]"
+            placeholder="Additional Logo CSS"
+            instructions={`Enter a JSON style object, which will be applied to the logo image. For example: {"left": -1}`}
           />
           <Form.TextInput
             focusOnMount

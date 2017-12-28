@@ -190,6 +190,7 @@ module Validation
       },
       {
         theme: [
+          :logo_styles,
           :typekit_id
         ]
       },
