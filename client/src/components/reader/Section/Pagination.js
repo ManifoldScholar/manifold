@@ -25,7 +25,7 @@ export default class Pagination extends Component {
     return lh.link("readerSection", this.props.text.attributes.slug, id);
   }
 
-  getPreviousLink(text) {
+  getPreviousLink() {
     let previousLink = null;
     const previousNode = this.getSiblingSection(this.props.sectionId, -1);
     if (previousNode) {
@@ -33,25 +33,21 @@ export default class Pagination extends Component {
       previousLink = (
         <Link to={previousPath} className="pagination-previous">
           <i className="manicon manicon-arrow-round-left" />
-          <span className="text">
-            Previous
-          </span>
+          <span className="text">Previous</span>
         </Link>
       );
     }
     return previousLink;
   }
 
-  getNextLink(text) {
+  getNextLink() {
     let nextLink = null;
     const nextNode = this.getSiblingSection(this.props.sectionId, 1);
     if (nextNode) {
       const nextPath = this.getSectionPath(nextNode);
       nextLink = (
         <Link to={nextPath} className="pagination-next">
-          <span className="text">
-            Next
-          </span>
+          <span className="text">Next</span>
           <i className="manicon manicon-arrow-round-right" />
         </Link>
       );

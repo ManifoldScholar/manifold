@@ -33,8 +33,7 @@ export default class NextSection extends PureComponent {
         <header>
           {text.attributes.sectionKind
             ? `Next ${text.attributes.sectionKind}`
-            : 'Next Chapter'
-          }
+            : "Next Chapter"}
         </header>
         <h3>
           <div>

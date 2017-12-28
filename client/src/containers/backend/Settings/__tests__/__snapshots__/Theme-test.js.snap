@@ -16,10 +16,15 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           style={Object {}}
         >
           <label
-            className=""
+            className="has-instructions"
           >
             Press Logo
           </label>
+          <span
+            className="instructions"
+          >
+            Logos are constrained at 40px wide with flexible height. For retina displays, upload logos that are 80px wide.
+          </span>
           <Dropzone
             accept="image/*"
             className="form-dropzone style-square"
