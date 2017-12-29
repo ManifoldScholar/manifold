@@ -1,0 +1,28 @@
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  label {
+    @include utilityPrimary;
+    color: $neutral80;
+  }
+
+  button {
+    @include buttonUnstyled;
+    transition: color $duration $timing;
+    margin-top: 5px;
+
+    &.confirm {
+      &:hover {
+        color: $accentPrimaryDark;
+      }
+    }
+
+    &.deny {
+      &:hover {
+        color: $sp40Tertiary;
+      }
+    }
+  }
+}

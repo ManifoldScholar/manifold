@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Helper } from "components/global";
 import { FormattedDate } from "components/global";
+import { Utility } from "components/frontend";
 import Editor from "./Editor";
 import { Comment as CommentContainer } from "containers/global";
 import classNames from "classnames";
@@ -54,10 +55,10 @@ export default class AnnotationDetail extends PureComponent {
     });
   }
 
-  handleDelete(event) {
-    event.preventDefault();
+  handleDelete = event => {
+    if (event) event.preventDefault();
     this.props.deleteHandler(this.props.annotation);
-  }
+  };
 
   render() {
     const replyButtonClass = classNames({
@@ -159,9 +160,10 @@ export default class AnnotationDetail extends PureComponent {
                     {this.props.deleteHandler &&
                     annotation.attributes.canDeleteObject
                       ? <li>
-                          <button onClick={this.handleDelete}>
-                            {"Delete"}
-                          </button>
+                        <Utility.ConfirmableButton
+                          label="Delete"
+                          confirmHandler={this.handleDelete}
+                        />
                         </li>
                       : null}
                   </ul>
