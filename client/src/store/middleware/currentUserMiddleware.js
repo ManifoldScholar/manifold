@@ -23,18 +23,6 @@ function generateErrorPayload(status = 401) {
   return { id: "LOGIN_NOTIFICATION", level, heading, body };
 }
 
-function notifyLogin(dispatch) {
-  const notification = {
-    level: 0,
-    id: "AUTHENTICATION_STATE_CHANGE",
-    heading: "You have logged in successfully."
-  };
-  dispatch(notificationActions.addNotification(notification));
-  setTimeout(() => {
-    dispatch(notificationActions.removeNotification(notification.id));
-  }, 5000);
-}
-
 function notifyLogout(dispatch) {
   const notification = {
     level: 0,
@@ -65,7 +53,6 @@ function authenticateWithPassword(email, password, dispatch) {
       dispatch(actions.setCurrentUser(response));
       dispatch(actions.setAuthToken(authToken));
       dispatch(actions.loginComplete());
-      notifyLogin(dispatch);
     },
     response => {
       dispatch(actions.loginSetError(generateErrorPayload(response.status)));
