@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { Utility } from "components/frontend";
 import PropTypes from "prop-types";
 
 export default class HighlightDetail extends PureComponent {
@@ -11,7 +12,7 @@ export default class HighlightDetail extends PureComponent {
   };
 
   handleDelete = event => {
-    event.preventDefault();
+    if (event) event.preventDefault();
     this.props.deleteHandler(this.props.annotation);
   };
 
@@ -39,9 +40,10 @@ export default class HighlightDetail extends PureComponent {
               : null}
             {this.props.deleteHandler && annotation.attributes.canUpdateObject
               ? <li>
-                  <button onClick={this.handleDelete}>
-                    {"Delete"}
-                  </button>
+                  <Utility.ConfirmableButton
+                    label="Delete"
+                    confirmHandler={this.handleDelete}
+                  />
                 </li>
               : null}
           </ul>

@@ -32,6 +32,12 @@
   .utility {
     padding-top: 25px;
 
+    .confirmation {
+      label {
+        font-size: 14px;
+      }
+    }
+
     ul {
       @include listHorizontal;
       li {
@@ -49,6 +55,10 @@
 
         &:hover, &.active {
           color: $accentPrimaryDark;
+        }
+
+        &.deny:hover {
+          color: $sp40Tertiary;
         }
       }
     }

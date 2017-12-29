@@ -123,6 +123,12 @@
         }
       }
 
+      .confirmation {
+        label {
+          font-size: 14px;
+        }
+      }
+
       a, button {
         @include buttonUnstyled;
         @include utilityPrimary;
@@ -136,6 +142,10 @@
 
         &:hover, &.active {
           color: $accentPrimaryDark;
+        }
+
+        &.deny:hover {
+          color: $sp40Tertiary;
         }
       }
     }
