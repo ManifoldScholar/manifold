@@ -46,6 +46,11 @@
     outline: 0;
     transition: border-color $duration $timing;
     appearance: none;
+    color: $neutral80;
+
+    &::placeholder {
+      color: $neutral50;
+    }
 
     &:focus {
       border-color: $accentPrimary;
