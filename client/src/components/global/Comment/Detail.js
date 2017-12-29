@@ -257,7 +257,7 @@ export default class CommentDetail extends PureComponent {
             {this.renderEditor()}
           </nav>
         </HigherOrder.RequireRole>
-        <HigherOrder.RequireRole requiredRole="none">
+        <HigherOrder.RequireRole requiredRole="unauthenticated">
           <nav className="utility">
             <ul>
               <li>

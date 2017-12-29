@@ -25,27 +25,6 @@ exports[`Reader Annotation Annotatable Container renders correctly 1`] = `
       }
     }
   >
-    <section
-      className="popup-page bottom"
-      style={
-        Object {
-          "marginLeft": null,
-        }
-      }
-    >
-      <button
-        className={undefined}
-        onClick={[Function]}
-      >
-        <i
-          className="manicon manicon-person-pencil"
-        />
-        Login to Annotate
-      </button>
-      <div
-        className="tail tail-down"
-      />
-    </section>
     <div
       className="popup-page-secondary-group"
     />

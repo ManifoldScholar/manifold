@@ -41,7 +41,7 @@ export default class ReturnMenuBody extends PureComponent {
               </Link>
             </li>
           </HigherOrder.RequireRole>
-          <HigherOrder.RequireRole requiredRole="none">
+          <HigherOrder.RequireRole requiredRole="unauthenticated">
             <li>
               <button
                 onClick={this.props.toggleSignInUpOverlay}

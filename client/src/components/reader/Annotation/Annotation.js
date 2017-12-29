@@ -133,7 +133,7 @@ export default class AnnotationDetail extends PureComponent {
                     : null}
                 </nav>
               </HigherOrder.RequireRole>
-              <HigherOrder.RequireRole requiredRole="none">
+              <HigherOrder.RequireRole requiredRole="unauthenticated">
                 <nav className="utility">
                   <ul>
                     <li>

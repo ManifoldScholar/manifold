@@ -2,16 +2,15 @@ import React, { Children, Component } from "react";
 import PropTypes from "prop-types";
 import has from "lodash/has";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import Annotation from "components/reader/Annotation";
+import Menu from "components/reader/Annotation/Popup/Menu";
 import { Drawer } from "components/global";
 import { Notation } from "containers/reader";
 import AnnotationContainers from "containers/reader/Annotation";
 import { Notation as NotationComponents } from "components/reader";
 import { annotationsAPI, requests } from "api";
-import { entityStoreActions, uiVisibilityActions } from "actions";
+import { entityStoreActions } from "actions";
 import isString from "lodash/isString";
-import lh from "helpers/linkHandler";
 import locationHelper from "helpers/location";
 
 const { request } = entityStoreActions;
@@ -60,7 +59,7 @@ class Annotatable extends Component {
       selectionClickEvent: null,
       textAnnotations: null,
       selectedAnnotation: null,
-      showAnnotationsInDrawer: null
+      popupContents: null
     };
   }
 
@@ -110,7 +109,11 @@ class Annotatable extends Component {
     // if it changed, return
     if (this.didSelectionChange(selection)) return;
     // update the state
-    this.setState({ selection, selectionClickEvent });
+    this.setState({
+      popupContents: "annotation",
+      selection,
+      selectionClickEvent
+    });
   };
 
   didSelectionChange(selection) {
@@ -268,6 +271,7 @@ class Annotatable extends Component {
     const {
       textAnnotations,
       drawerContents,
+      popupContents,
       ...newState
     } = this.defaultState();
     this.setState(newState);
@@ -301,7 +305,7 @@ class Annotatable extends Component {
   };
 
   startAnnotateSelection = eventIgnored => {
-    this.setState({ drawerContents: "annotate" });
+    this.setState({ drawerContents: "annotate", popupContents: null });
     this.lockSelection();
   };
 
@@ -443,7 +447,11 @@ class Annotatable extends Component {
   }
 
   handleAnnotationClick(event, el) {
-    this.showAnnotationsInDrawer(this.elementAnnotationIds(el));
+    event.preventDefault();
+    const link = this.closest(el, "a");
+    const annotationIds = this.elementAnnotationIds(el);
+    if (link) return this.showAnnotationPopup(event, annotationIds, link);
+    this.showAnnotationsInDrawer(annotationIds);
   }
 
   handleRemovableHighlightClick(event, el) {
@@ -460,10 +468,17 @@ class Annotatable extends Component {
     });
   }
 
-  showAnnotationsInDrawer(textAnnotations) {
-    const drawerContents = "annotations";
-    this.setState({ drawerContents, textAnnotations });
+  showAnnotationPopup(event, textAnnotations, link) {
+    this.setState(
+      { popupContents: "link", selectedLink: link, textAnnotations },
+      this.selectAnnotation(event, textAnnotations[0])
+    );
   }
+
+  showAnnotationsInDrawer = textAnnotations => {
+    const drawerContents = "annotations";
+    this.setState({ drawerContents, textAnnotations, popupContents: null });
+  };
 
   handleAnnotatableClick = event => {
     if (!event || !event.target) return;
@@ -535,6 +550,32 @@ class Annotatable extends Component {
   }
   /* eslint-enable no-unreachable */
 
+  renderPopupContents() {
+    switch (this.state.popupContents) {
+      case "annotation":
+        return (
+          <Menu.Annotate
+            selectedAnnotation={this.state.selectedAnnotation}
+            showAnnotationsInDrawer={this.showAnnotationsInDrawer}
+            attachNotation={this.startNotationSelection}
+            destroySelected={this.destroySelected}
+            highlight={this.highlightSelection}
+            annotate={this.startAnnotateSelection}
+          />
+        );
+      case "link":
+        return (
+          <Menu.Link
+            showAnnotationsInDrawer={this.showAnnotationsInDrawer}
+            textAnnotations={this.state.textAnnotations}
+            selectedLink={this.state.selectedLink}
+          />
+        );
+      default:
+        return null;
+    }
+  }
+
   renderDrawerNotations() {
     return (
       <Notation.Picker
@@ -605,11 +646,6 @@ class Annotatable extends Component {
   }
 
   render() {
-    const showLogin = bindActionCreators(
-      () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
-      this.props.dispatch
-    );
-
     // We include a tabIndex on this div so that it correctly captures the handleKeyDown
     // event, which is needed for key-based selection. Without it, the handleKeyDown event
     // will not work. We realize this present a slight accessibility issue, but until we
@@ -643,29 +679,17 @@ class Annotatable extends Component {
 
         {/* Render the annotation popup interface */}
         <Annotation.Popup.Wrapper
-          currentUser={this.props.currentUser}
-          shareUrl={lh.link(
-            "readerSection",
-            this.props.text.attributes.slug,
-            this.props.sectionId
-          )}
-          selectedAnnotation={this.state.selectedAnnotation}
-          showAnnotationsInDrawer={this.state.showAnnotationsInDrawer}
-          highlight={this.highlightSelection}
-          destroySelected={this.destroySelected}
-          annotate={this.startAnnotateSelection}
-          bookmark={this.startBookmark}
-          attachNotation={this.startNotationSelection}
-          cite={event => this.startShare(event, "citation")}
           selection={this.state.selection}
-          selectionClickEvent={this.state.selectionClickEvent}
           selectionLocked={this.state.selectionLocked}
+          selectionClickEvent={this.state.selectionClickEvent}
           annotatableDomElement={this.annotatable}
-          showLogin={showLogin}
-          text={this.props.text}
+          cite={event => this.startShare(event, "citation")}
+          dispatch={this.props.dispatch}
           section={this.props.section}
-        />
-
+          text={this.props.text}
+        >
+          {this.renderPopupContents()}
+        </Annotation.Popup.Wrapper>
         {/* Render the margin notations */}
         {this.props.notations
           ? <NotationComponents.Viewer.List

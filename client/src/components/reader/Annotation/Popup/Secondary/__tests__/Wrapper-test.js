@@ -1,10 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Wrapper from "../Wrapper";
+import Wrapper from "../../Wrapper";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 
-describe("Reader.Annotation.Popup.Wrapper Component", () => {
+describe("Reader.Annotation.Popup.Secondary.Wrapper Component", () => {
   const store = build.store();
   const text = build.entity.text(1);
   const section = build.entity.textSection(2);
@@ -15,13 +15,10 @@ describe("Reader.Annotation.Popup.Wrapper Component", () => {
         <Wrapper
           text={text}
           section={section}
-          highlight={() => {}}
-          annotate={() => {}}
+          direction="up"
           cite={() => {}}
-          attachNotation={() => {}}
-          destroySelected={() => {}}
-          bookmark={() => {}}
-          showLogin={() => {}}
+          back={() => {}}
+          selection={{ text: "I selected this text." }}
         />
       </Provider>
     );

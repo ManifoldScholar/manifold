@@ -50,7 +50,11 @@ class RequireRole extends PureComponent {
   }
 
   roleMatch(props) {
-    if (props.requiredRole === "none" && !this.isAuthenticated(props))
+    if (props.requiredRole === "none") return true;
+    if (
+      props.requiredRole === "unauthenticated" &&
+      !this.isAuthenticated(props)
+    )
       return true;
     if (!this.isAuthenticated(props)) return false;
     if (props.requiredRole === "any" && this.isAuthenticated(props))

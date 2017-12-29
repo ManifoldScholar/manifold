@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.Annotation.Popup.Wrapper Component renders correctly when not logged in 1`] = `
+exports[`Reader.Annotation.Popup.Secondary.Wrapper Component renders correctly when not logged in 1`] = `
 <div
   className="annotation-popup"
   onClick={[Function]}

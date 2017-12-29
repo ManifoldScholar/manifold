@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.Annotation.Popup.Share Component renders correctly 1`] = `
+exports[`Reader.Annotation.Popup.Secondary.Share Component renders correctly 1`] = `
 <section
-  className="popup-page-secondary hidden"
+  className="popup-page-secondary hidden bottom"
   style={
     Object {
       "marginLeft": null,
@@ -11,8 +11,6 @@ exports[`Reader.Annotation.Popup.Share Component renders correctly 1`] = `
 >
   <button
     onClick={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
     target="_blank"
   >
     <i
@@ -21,7 +19,7 @@ exports[`Reader.Annotation.Popup.Share Component renders correctly 1`] = `
     Twitter
   </button>
   <div
-    className="tail"
+    className="tail tail-down"
   />
 </section>
 `;

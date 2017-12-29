@@ -173,7 +173,7 @@ export class CommentEditor extends PureComponent {
               {this.props.label}
             </h3>
           : null}
-        <HigherOrder.RequireRole requiredRole="none">
+        <HigherOrder.RequireRole requiredRole="unauthenticated">
           <div className="placeholder">
             <button onClick={showLogin}>Login to post a comment</button>
           </div>

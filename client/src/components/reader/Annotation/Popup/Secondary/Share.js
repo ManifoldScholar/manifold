@@ -2,15 +2,15 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import HigherOrder from "containers/global/HigherOrder";
 import { TwitterButton, FacebookButton } from "react-sociable";
-import Button from "./Button";
-import Panel from "./Panel";
+import Button from "../Button";
+import Panel from "../Panel";
+import lh from "helpers/linkHandler";
 
-class AnnotationPopupShare extends PureComponent {
-  static displayName = "Annotation.Popup.Share";
+class AnnotationPopupSecondaryShare extends PureComponent {
+  static displayName = "Annotation.Popup.Secondary.Share";
 
   static propTypes = {
-    selectionText: PropTypes.string.isRequired,
-    shareUrl: PropTypes.string,
+    selection: PropTypes.object,
     back: PropTypes.func.isRequired,
     secondary: PropTypes.string,
     direction: PropTypes.string,
@@ -45,16 +45,22 @@ class AnnotationPopupShare extends PureComponent {
 
   url() {
     if (!this.state.inBrowser) return null;
-    return location.hostname + this.props.shareUrl;
+    const url = lh.link(
+      "readerSection",
+      this.props.text.attributes.slug,
+      this.props.section.id
+    );
+    return location.hostname + url;
   }
 
   message() {
-    return `"${this.props.selectionText}" from Manifold:`;
+    if (!this.props.selection) return null;
+    return `"${this.props.selection.text}" from Manifold:`;
   }
 
   canCite() {
     if (!this.props.section) return false;
-    const attr = this.props.text.attributes;
+    const attr = this.props.section.attributes;
     const citations = Object.keys(attr.citations);
     return citations.length > 0;
   }
@@ -106,4 +112,4 @@ class AnnotationPopupShare extends PureComponent {
   }
 }
 
-export default HigherOrder.withSettings(AnnotationPopupShare);
+export default HigherOrder.withSettings(AnnotationPopupSecondaryShare);

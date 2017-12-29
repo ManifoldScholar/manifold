@@ -4,7 +4,7 @@ import Annotate from "../Annotate";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
 
-describe("Reader.Annotation.Popup.Annotate Component", () => {
+describe("Reader.Annotation.Popup.Menu.Annotate Component", () => {
   const store = build.store();
 
   it("renders correctly when not logged in", () => {

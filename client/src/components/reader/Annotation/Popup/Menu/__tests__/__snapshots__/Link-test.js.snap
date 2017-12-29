@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Annotation.Popup.Menu.Link Component renders correctly 1`] = `
+<section
+  className="popup-page bottom"
+  style={
+    Object {
+      "marginLeft": null,
+    }
+  }
+>
+  <button
+    className={undefined}
+    onClick={[Function]}
+  >
+    <i
+      className="manicon manicon-arrow-right"
+    />
+    Follow Link
+  </button>
+  <button
+    className={undefined}
+    onClick={[Function]}
+  >
+    <i
+      className="manicon manicon-word-bubble"
+    />
+    View Annotation
+  </button>
+  <div
+    className="tail tail-down"
+  />
+</section>
+`;
