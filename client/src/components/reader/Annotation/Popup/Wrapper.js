@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import { throttle } from "lodash";
 import classNames from "classnames";
 import get from "lodash/get";
-import Annotate from "./Annotate";
-import Share from "./Share";
+import Secondary from "./Secondary";
+import { bindActionCreators } from "redux";
+import { uiVisibilityActions } from "actions";
 
 export default class AnnotationPopup extends Component {
   static displayName = "Annotation.Popup.Wrapper";
@@ -17,16 +17,15 @@ export default class AnnotationPopup extends Component {
     selectionLocked: PropTypes.bool,
     selectionClickEvent: PropTypes.object,
     annotatableDomElement: PropTypes.object,
-    shareUrl: PropTypes.string.isRequired,
-    highlight: PropTypes.func.isRequired,
-    destroySelected: PropTypes.func.isRequired,
-    annotate: PropTypes.func.isRequired,
-    cite: PropTypes.func.isRequired,
-    attachNotation: PropTypes.func.isRequired,
-    bookmark: PropTypes.func.isRequired,
-    showLogin: PropTypes.func.isRequired,
-    text: PropTypes.object.isRequired,
-    section: PropTypes.object.isRequired
+    cite: PropTypes.func,
+    section: PropTypes.object,
+    children: PropTypes.object,
+    text: PropTypes.object,
+    dispatch: PropTypes.func
+  };
+
+  static defaultProps = {
+    contents: "annotation"
   };
 
   constructor() {
@@ -39,8 +38,6 @@ export default class AnnotationPopup extends Component {
       direction: "up",
       secondary: null
     };
-
-    this.secondaryPageTransitionTime = 300;
 
     this.showSecondary = this.showSecondary.bind(this);
     this.resetSecondary = this.resetSecondary.bind(this);
@@ -55,8 +52,8 @@ export default class AnnotationPopup extends Component {
     );
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.maybeShowPopup(this.props, nextProps);
+  componentDidUpdate(prevProps) {
+    this.maybeShowPopup(prevProps, this.props);
   }
 
   componentWillUnmount() {
@@ -69,14 +66,14 @@ export default class AnnotationPopup extends Component {
     return locked.getBoundingClientRect();
   }
 
-  maybeShowPopup(prevProps, nextProps) {
-    if (nextProps && prevProps.selection !== nextProps.selection) {
+  maybeShowPopup(prevProps, props) {
+    if (props && prevProps.selection !== props.selection) {
       // Locked?
-      if (nextProps.selectionLocked) {
+      if (props.selectionLocked) {
         return;
       }
       // Update popup
-      if (!nextProps.selection) {
+      if (!props.selection) {
         // Hide the popup if there is no "Range"
         this.setState({
           visible: false,
@@ -84,7 +81,7 @@ export default class AnnotationPopup extends Component {
         });
       } else {
         // Calculate the position for the popup
-        this.positionPopup(nextProps.selection, nextProps.selectionClickEvent);
+        this.positionPopup(props.selection, props.selectionClickEvent);
 
         // Otherwise show the popup and set it's (new) position
         this.setState({ visible: true });
@@ -182,12 +179,8 @@ export default class AnnotationPopup extends Component {
     this.setState({ top, bottom, left, direction });
   }
 
-  showSecondary(page) {
+  showSecondary = page => {
     this.setState({ secondary: page });
-  }
-
-  showShare = () => {
-    this.showSecondary("share");
   };
 
   resetSecondary() {
@@ -201,20 +194,29 @@ export default class AnnotationPopup extends Component {
     event.stopPropagation();
   }
 
-  renderSecondaryShare() {
-    if (this.state.secondary !== "share") return null;
-
-    return (
-      <Share
-        selectionText={this.props.selection.text}
-        shareUrl={this.props.shareUrl}
-        direction={this.state.direction}
-        back={this.resetSecondary}
-        cite={this.props.cite}
-        text={this.props.text}
-        section={this.props.section}
-      />
+  childProps() {
+    const showLogin = bindActionCreators(
+      () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
+      this.props.dispatch
     );
+
+    return {
+      secondary: this.state.secondary,
+      direction: this.state.direction,
+      back: this.resetSecondary,
+      cite: this.props.cite,
+      text: this.props.text,
+      section: this.props.section,
+      selection: this.props.selection,
+      showSecondary: this.showSecondary,
+      showLogin
+    };
+  }
+
+  renderChildren() {
+    if (!this.props.children) return null;
+    const props = this.childProps();
+    return React.cloneElement(this.props.children, props);
   }
 
   render() {
@@ -237,28 +239,8 @@ export default class AnnotationPopup extends Component {
           left: this.state.left
         }}
       >
-        <Annotate
-          showShare={this.showShare}
-          selectedAnnotation={this.props.selectedAnnotation}
-          showAnnotationsInDrawer={this.props.showAnnotationsInDrawer}
-          attachNotation={this.props.attachNotation}
-          destroySelected={this.props.destroySelected}
-          highlight={this.props.highlight}
-          annotate={this.props.annotate}
-          bookmark={this.props.bookmark}
-          secondary={this.state.secondary}
-          direction={this.state.direction}
-          showLogin={this.props.showLogin}
-        />
-        <ReactCSSTransitionGroup
-          transitionName="page"
-          transitionEnterTimeout={this.secondaryPageTransitionTime}
-          transitionLeaveTimeout={this.secondaryPageTransitionTime}
-          component="div"
-          className="popup-page-secondary-group"
-        >
-          {this.renderSecondaryShare()}
-        </ReactCSSTransitionGroup>
+        {this.renderChildren()}
+        <Secondary.Wrapper {...this.childProps()} />
       </div>
     );
   }

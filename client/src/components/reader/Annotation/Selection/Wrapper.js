@@ -106,7 +106,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
               </HigherOrder.RequireRole>
             : null}
           {this.props.includeEditor
-            ? <HigherOrder.RequireRole requiredRole="none">
+            ? <HigherOrder.RequireRole requiredRole="unauthenticated">
                 <button
                   className="annotate-button"
                   onClick={this.props.showLogin}

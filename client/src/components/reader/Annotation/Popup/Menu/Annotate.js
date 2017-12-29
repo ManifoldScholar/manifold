@@ -1,11 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import HigherOrder from "containers/global/HigherOrder";
-import Button from "./Button";
-import Panel from "./Panel";
+import Button from "../Button";
+import Panel from "../Panel";
 import classNames from "classnames";
 
-class AnnotationPopupAnnotate extends PureComponent {
+export default class AnnotationPopupAnnotate extends PureComponent {
   static displayName = "Annotation.Popup.Annotate";
 
   static propTypes = {
@@ -16,10 +15,17 @@ class AnnotationPopupAnnotate extends PureComponent {
     highlight: PropTypes.func.isRequired,
     annotate: PropTypes.func.isRequired,
     // bookmark: PropTypes.func.isRequired,
-    showShare: PropTypes.func.isRequired,
+    showSecondary: PropTypes.func.isRequired,
     secondary: PropTypes.string,
     direction: PropTypes.string,
     showLogin: PropTypes.func.isRequired
+  };
+
+  // https://github.com/facebook/react/issues/6653
+  // showLogin is undefined at element creation (when prop validation is done).
+  static defaultProps = {
+    showSecondary: () => {},
+    showLogin: () => {}
   };
 
   highlightSelected() {
@@ -86,7 +92,7 @@ class AnnotationPopupAnnotate extends PureComponent {
     return (
       <Button
         key={"share"}
-        onClick={this.props.showShare}
+        onClick={() => this.props.showSecondary("share")}
         requiredRole="any"
         label="Share"
         iconClass="manicon-nodes"
@@ -99,7 +105,7 @@ class AnnotationPopupAnnotate extends PureComponent {
       <Button
         key={"login"}
         onClick={this.props.showLogin}
-        requiredRole="none"
+        requiredRole="unauthenticated"
         label="Login to Annotate"
         iconClass="manicon-person-pencil"
       />
@@ -110,7 +116,7 @@ class AnnotationPopupAnnotate extends PureComponent {
     if (!this.props.showAnnotationsInDrawer) return null;
     return (
       <Button
-        key={"login"}
+        key={"annotations"}
         onClick={this.props.showAnnotationsInDrawer}
         label="View Annotations"
         iconClass="manicon-word-bubble"
@@ -122,7 +128,7 @@ class AnnotationPopupAnnotate extends PureComponent {
     const rows = [];
     rows.push(this.rowHighlighted());
     rows.push(this.rowHighlight());
-    rows.push(this.rowAnnotations());
+    // rows.push(this.rowAnnotations());
     rows.push(this.rowAnnotate());
     rows.push(this.rowNotate());
     rows.push(this.rowShare());
@@ -143,5 +149,3 @@ class AnnotationPopupAnnotate extends PureComponent {
     );
   }
 }
-
-export default HigherOrder.withCurrentUser(AnnotationPopupAnnotate);
