@@ -37,7 +37,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
         id="update-nickname"
         name="nickname"
         onChange={[Function]}
-        placeholder="Nickname"
+        placeholder="nickname"
         type="text"
         value=""
       />
@@ -62,9 +62,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
         id="update-firstName"
         name="firstName"
         onChange={[Function]}
-        placeholder="Rowan"
+        placeholder="First name"
         type="text"
-        value=""
+        value="Rowan"
       />
     </div>
     <div
@@ -78,9 +78,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
         id="update-lastName"
         name="lastName"
         onChange={[Function]}
-        placeholder="Ida"
+        placeholder="Last name"
         type="text"
-        value=""
+        value="Ida"
       />
     </div>
     <div
@@ -94,9 +94,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
         id="update-email"
         name="email"
         onChange={[Function]}
-        placeholder="test@cic-fake.gotcha"
+        placeholder="Email"
         type="text"
-        value=""
+        value="test@cic-fake.gotcha"
       />
     </div>
     <div
@@ -189,7 +189,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
         id="update-nickname"
         name="nickname"
         onChange={[Function]}
-        placeholder="Nickname"
+        placeholder="nickname"
         type="text"
         value=""
       />
@@ -214,9 +214,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
         id="update-firstName"
         name="firstName"
         onChange={[Function]}
-        placeholder="Rowan"
+        placeholder="First name"
         type="text"
-        value=""
+        value="Rowan"
       />
     </div>
     <div
@@ -230,9 +230,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
         id="update-lastName"
         name="lastName"
         onChange={[Function]}
-        placeholder="Ida"
+        placeholder="Last name"
         type="text"
-        value=""
+        value="Ida"
       />
     </div>
     <div
@@ -246,9 +246,9 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
         id="update-email"
         name="email"
         onChange={[Function]}
-        placeholder="test@cic-fake.gotcha"
+        placeholder="Email"
         type="text"
-        value=""
+        value="test@cic-fake.gotcha"
       />
     </div>
     <div

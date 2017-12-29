@@ -6,7 +6,6 @@ import { entityStoreActions } from "actions";
 import { Avatar, Form } from "components/global";
 import get from "lodash/get";
 import hasIn from "lodash/hasIn";
-import startCase from "lodash/startCase";
 import Dropzone from "react-dropzone";
 
 const { request } = entityStoreActions;
@@ -26,28 +25,19 @@ class UpdateFormContainer extends Component {
     mode: PropTypes.string
   };
 
-  constructor() {
-    super();
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.updateUser = this.updateUser.bind(this);
-    this.handleFileDrop = this.handleFileDrop.bind(this);
-    this.handleRemoveAvatar = this.handleRemoveAvatar.bind(this);
-    this.doUpdateRequest = this.doUpdateRequest.bind(this);
-    this.displayAvatar = this.displayAvatar.bind(this);
-    this.displayNickname = this.displayNickname.bind(this);
-    this.placeholderAttribute = this.placeholderAttribute.bind(this);
-    this.hasAvatar = this.hasAvatar.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = this.initialState(props);
+  }
 
-    this.state = {
-      nickname: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-      removeAvatar: false,
-      avatar: null
-    };
+  componentWillReceiveProps(nextProps) {
+    // If user is newly created, set state after authentication is complete in store
+    if (
+      this.props.authentication.authenticating &&
+      !nextProps.authentication.authenticating
+    ) {
+      this.setState(this.initialState(nextProps));
+    }
   }
 
   setParams() {
@@ -55,16 +45,29 @@ class UpdateFormContainer extends Component {
     Object.keys(this.state).forEach(key => {
       if (key === "removeAvatar" || key === "avatar") return null;
       if (key === "password" && this.state.password === "") return null;
-      params[key] = this.placeholderAttribute(key);
+      params[key] = this.state[key];
     });
     return params;
   }
 
-  handleInputChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+  initialState(props) {
+    return {
+      nickname: this.currentUserAttribute(props, "nickname"),
+      firstName: this.currentUserAttribute(props, "firstName"),
+      lastName: this.currentUserAttribute(props, "lastName"),
+      email: this.currentUserAttribute(props, "email"),
+      password: "",
+      passwordConfirmation: "",
+      removeAvatar: false,
+      avatar: null
+    };
   }
 
-  doUpdateRequest(avatarData = null) {
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  doUpdateRequest = (avatarData = null) => {
     const params = this.setParams();
     params.removeAvatar = this.state.removeAvatar;
     if (avatarData) {
@@ -80,9 +83,9 @@ class UpdateFormContainer extends Component {
     promise.then(() => {
       this.props.hideSignInUpOverlay();
     });
-  }
+  };
 
-  updateUser(event) {
+  updateUser = event => {
     event.preventDefault();
     if (this.state.avatar) {
       const reader = new FileReader();
@@ -94,23 +97,23 @@ class UpdateFormContainer extends Component {
     } else {
       this.doUpdateRequest();
     }
-  }
+  };
 
-  hasAvatar() {
+  hasAvatar = () => {
     return !!this.displayAvatar();
-  }
+  };
 
-  handleRemoveAvatar(event) {
+  handleRemoveAvatar = event => {
     event.preventDefault();
     event.stopPropagation();
     this.setState({ avatar: null, removeAvatar: true });
-  }
+  };
 
-  handleFileDrop(file) {
+  handleFileDrop = file => {
     this.setState({ avatar: file[0], removeAvatar: false });
-  }
+  };
 
-  displayAvatar() {
+  displayAvatar = () => {
     if (this.state.removeAvatar) return null;
     if (hasIn(this.state, "avatar.preview")) return this.state.avatar.preview;
     if (
@@ -123,9 +126,9 @@ class UpdateFormContainer extends Component {
         .smallSquare;
     }
     return null;
-  }
+  };
 
-  displayNickname() {
+  displayNickname = () => {
     if (this.state.nickname) return this.state.nickname;
     if (hasIn(this.props.authentication, "currentUser.attributes.nickname")) {
       return this.props.authentication.currentUser.attributes.nickname;
@@ -133,17 +136,15 @@ class UpdateFormContainer extends Component {
     if (hasIn(this.props.authentication, "currentUser.attributes.firstName")) {
       return this.props.authentication.currentUser.attributes.firstName;
     }
-  }
+  };
 
-  placeholderAttribute(attribute) {
-    if (this.state[attribute].length) return this.state[attribute];
-    if (
-      hasIn(this.props.authentication, `currentUser.attributes[${attribute}]`)
-    ) {
-      return this.props.authentication.currentUser.attributes[attribute];
+  currentUserAttribute = (props, attribute) => {
+    if (!props.authentication.currentUser) return "";
+    if (hasIn(props.authentication, `currentUser.attributes[${attribute}]`)) {
+      return props.authentication.currentUser.attributes[attribute];
     }
-    return startCase(attribute);
-  }
+    return "";
+  };
 
   render() {
     const errors = get(this.props.response, "errors") || [];
@@ -190,7 +191,7 @@ class UpdateFormContainer extends Component {
               name="nickname"
               id="update-nickname"
               onChange={this.handleInputChange}
-              placeholder={this.placeholderAttribute("nickname")}
+              placeholder="nickname"
             />
           </Form.Errorable>
         </div>
@@ -271,7 +272,7 @@ class UpdateFormContainer extends Component {
               name="firstName"
               id="update-firstName"
               onChange={this.handleInputChange}
-              placeholder={this.placeholderAttribute("firstName")}
+              placeholder="First name"
             />
           </Form.Errorable>
           <Form.Errorable
@@ -286,7 +287,7 @@ class UpdateFormContainer extends Component {
               name="lastName"
               id="update-lastName"
               onChange={this.handleInputChange}
-              placeholder={this.placeholderAttribute("lastName")}
+              placeholder="Last name"
             />
           </Form.Errorable>
           <Form.Errorable
@@ -301,7 +302,7 @@ class UpdateFormContainer extends Component {
               name="email"
               id="update-email"
               onChange={this.handleInputChange}
-              placeholder={this.placeholderAttribute("email")}
+              placeholder="Email"
             />
           </Form.Errorable>
           <Form.Errorable
