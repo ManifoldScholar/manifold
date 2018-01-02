@@ -28,7 +28,8 @@ class Event < ApplicationRecord
   has_formatted_attributes :subject_title
 
   # Associations
-  belongs_to :subject, polymorphic: true
+  belongs_to :subject, polymorphic: true, counter_cache: true
+  belongs_to :twitter_query, optional: true
   belongs_to :project
 
   # Scopes

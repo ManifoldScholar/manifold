@@ -32,7 +32,8 @@ export class FormContainer extends PureComponent {
     session: PropTypes.object,
     errors: PropTypes.array,
     response: PropTypes.object,
-    className: PropTypes.string
+    className: PropTypes.string,
+    options: PropTypes.object
   };
 
   static defaultProps = {
@@ -41,7 +42,8 @@ export class FormContainer extends PureComponent {
       attributes: {}
     },
     debug: false,
-    groupErrors: false
+    groupErrors: false,
+    options: {}
   };
 
   static mapStateToProps = (state, ownProps) => {
@@ -132,7 +134,8 @@ export class FormContainer extends PureComponent {
   create() {
     const dirty = this.props.session.dirty;
     const call = this.props.create({ attributes: dirty.attributes });
-    const action = request(call, this.props.name);
+    const options = this.props.options;
+    const action = request(call, this.props.name, options);
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty("promise") && this.props.onSuccess) {
       res.promise.then(() => {

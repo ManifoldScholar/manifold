@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.TwitterQuery.ListItem Component renders correctly 1`] = `
+<li
+  className=""
+>
+  <a
+    href="/backend/project/2/social/twitter-query/2"
+    onClick={[Function]}
+  >
+    <header>
+      <figure>
+        <i
+          className="manicon manicon-twitter"
+        />
+      </figure>
+      <h3
+        className="name large"
+      >
+        from:manifoldscholar
+      </h3>
+    </header>
+    <span
+      className="label"
+    >
+      <span
+        className="specifier dull"
+      >
+        0
+         EVENTS
+         
+      </span>
+      Active
+    </span>
+  </a>
+</li>
+`;

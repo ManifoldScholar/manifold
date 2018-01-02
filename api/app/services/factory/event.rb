@@ -25,13 +25,14 @@ module Factory
 
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
-    def create_from_tweet(tweet, project)
-      subject = project
+    def create_from_tweet(tweet, query)
+      subject = query
       raise_no_subject unless subject
+      project = subject_project(subject)
       event = ::Event.find_or_create_by(
         event_type: ::Event::TWEET,
         project: project,
-        subject: project,
+        subject: query,
         external_subject_id: tweet.id,
         external_subject_type: "Tweet"
       )

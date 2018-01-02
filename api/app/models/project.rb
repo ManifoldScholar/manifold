@@ -71,6 +71,7 @@ class Project < ApplicationRecord
   has_many :project_subjects
   has_many :subjects, through: :project_subjects
   has_many :ingestions
+  has_many :twitter_queries
 
   # rubocop:disable Style/Lambda
   has_many :uncollected_resources, ->(object) {
@@ -157,15 +158,8 @@ class Project < ApplicationRecord
       .pluck(:name)
   end
 
-  def twitter_following
-    return [] unless tweet_fetch_config && tweet_fetch_config["following"].is_a?(Array)
-    tweet_fetch_config["following"].map do |h|
-      ActiveSupport::HashWithIndifferentAccess.new(h)
-    end
-  end
-
   def following_twitter_accounts?
-    twitter_following.length.positive?
+    twitter_queries.length.positive?
   end
 
   def to_s

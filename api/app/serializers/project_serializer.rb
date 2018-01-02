@@ -6,7 +6,7 @@ class ProjectSerializer < ProjectPartialSerializer
 
   attributes :event_count, :metadata, :collections_count, :resources_count,
              :uncollected_resources_count, :published_text_toc_id, :event_types,
-             :metadata_properties, :citations, :hide_activity
+             :metadata_properties, :citations, :hide_activity, :tweet_fetch_config
 
   link :self do
     "https://manifold-api.dev/api/v1/projects/#{object.id}"
@@ -19,6 +19,7 @@ class ProjectSerializer < ProjectPartialSerializer
   has_many :collections
   has_many :uncollected_resources
   has_many :subjects
+  has_many :twitter_queries
 
   def event_count
     object.events.count

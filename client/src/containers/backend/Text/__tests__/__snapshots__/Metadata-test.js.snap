@@ -10,11 +10,11 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
             <withRouter(Connect(Form.Form)) model={{...}} name=\\"backend-project-general\\" update={[Function]} create={[Function]} className=\\"form-secondary\\">
               <Route render={[Function]}>
                 <Connect(Form.Form) model={{...}} name=\\"backend-project-general\\" update={[Function]} create={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
-                  <Form.Form model={{...}} name=\\"backend-project-general\\" update={[Function]} create={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} session={{...}} response={[undefined]} errors={[undefined]} dispatch={[Function]} doNotWarn={false} debug={false} groupErrors={false}>
+                  <Form.Form model={{...}} name=\\"backend-project-general\\" update={[Function]} create={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} session={{...}} response={[undefined]} errors={[undefined]} dispatch={[Function]} doNotWarn={false} debug={false} groupErrors={false} options={{...}}>
                     <div>
                       <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
                       <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
-                        <FieldGroup label=\\"Identity\\" horizontal={false} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                        <FieldGroup label=\\"Identity\\" horizontal={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                           <div className=\\"form-section\\">
                             <header className=\\"form-section-label\\">
                               <span>
@@ -50,7 +50,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                             </Form.Setter('Form.TextInput)>
                           </div>
                         </FieldGroup>
-                        <FieldGroup label=\\"Publisher\\" horizontal={false} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                        <FieldGroup label=\\"Publisher\\" horizontal={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                           <div className=\\"form-section\\">
                             <header className=\\"form-section-label\\">
                               <span>
@@ -116,7 +116,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                             </Form.Setter('Form.TextInput)>
                           </div>
                         </FieldGroup>
-                        <FieldGroup label=\\"Bibliographic\\" horizontal={false} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                        <FieldGroup label=\\"Bibliographic\\" horizontal={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                           <div className=\\"form-section\\">
                             <header className=\\"form-section-label\\">
                               <span>
@@ -220,7 +220,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                             </Form.Setter('Form.TextInput)>
                           </div>
                         </FieldGroup>
-                        <FieldGroup label=\\"Other\\" horizontal={false} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                        <FieldGroup label=\\"Other\\" horizontal={false} instructions={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                           <div className=\\"form-section\\">
                             <header className=\\"form-section-label\\">
                               <span>

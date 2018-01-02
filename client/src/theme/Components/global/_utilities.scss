@@ -18,6 +18,13 @@
   line-height: 1.4em;
   color: $neutral30;
 
+  a {
+    color: $neutral30;
+    &:hover {
+      color: $neutral20;
+    }
+  }
+
   &.margin-top {
     margin-top: 30px;
   }

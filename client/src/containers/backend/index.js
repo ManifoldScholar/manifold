@@ -11,6 +11,7 @@ import Form from "./Form";
 import Ingestion from "./Ingestion";
 import Stylesheet from "./Stylesheet";
 import Developer from "./Developer";
+import TwitterQuery from "./TwitterQuery";
 
 export {
   Backend,
@@ -25,5 +26,6 @@ export {
   Form,
   Ingestion,
   Stylesheet,
-  Developer
+  Developer,
+  TwitterQuery
 };

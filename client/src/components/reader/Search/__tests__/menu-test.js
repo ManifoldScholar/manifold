@@ -3,13 +3,11 @@ import renderer from "react-test-renderer";
 import { ReaderSearchMenu } from "../Menu";
 
 describe("Reader.Search.Menu component", () => {
-
   const historyMock = {
     push: () => {}
-  }
+  };
 
-  const matchMock = {
-  }
+  const matchMock = {};
 
   it("renders correctly when search is visibile", () => {
     const component = renderer.create(
@@ -36,5 +34,4 @@ describe("Reader.Search.Menu component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

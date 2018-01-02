@@ -85,6 +85,16 @@ export default {
     };
   },
 
+  twitterQueries(id, page = {}) {
+    return {
+      endpoint: `/api/v1/projects/${id}/relationships/twitter_queries`,
+      method: "GET",
+      options: {
+        params: { page }
+      }
+    };
+  },
+
   featured(limit = 6, filterParams = {}) {
     const filter = filterParams;
     filter.featured = true;

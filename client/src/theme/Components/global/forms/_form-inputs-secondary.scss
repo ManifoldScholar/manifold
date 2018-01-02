@@ -74,6 +74,10 @@
     @include respond($break60) {
       font-size: 17px;
     }
+
+    a:visited {
+      color: inherit;
+    }
   }
 
   .form-input {

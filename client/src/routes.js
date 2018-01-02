@@ -189,6 +189,29 @@ export default () => {
               helper: p => `/backend/project/${p}/metadata`
             },
             {
+              name: "backendProjectSocial",
+              exact: false,
+              component: Backend.Project.Social.Wrapper,
+              path: "/backend/project/:pId/social/:type(twitter-query)?/:qId?",
+              helper: p => `/backend/project/${p}/social`,
+              routes: [
+                {
+                  name: "backendProjectSocialTwitterQueryNew",
+                  component: Backend.TwitterQuery.New,
+                  path: "/backend/project/:pId/social/twitter-query/new",
+                  helper: pId =>
+                    `/backend/project/${pId}/social/twitter-query/new`
+                },
+                {
+                  name: "backendProjectSocialTwitterQuery",
+                  component: Backend.TwitterQuery.Edit,
+                  path: "/backend/project/:pId/social/twitter-query/:id",
+                  helper: (pId, id) =>
+                    `/backend/project/${pId}/social/twitter-query/${id}`
+                }
+              ]
+            },
+            {
               name: "backendProjectProjectPage",
               exact: true,
               component: Backend.Project.ProjectPage,

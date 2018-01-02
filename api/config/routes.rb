@@ -78,9 +78,18 @@ Rails.application.routes.draw do
             resources :resources, only: [:index, :create]
             resources :collections, only: [:index, :create]
             resources :events, only: [:index]
+            resources :twitter_queries, only: [:index, :create]
             resources :collaborators
-            resources :text_categories, only: [:index, :create]
+            resources :text_categories, only: [:index, :create, :show]
             resources :ingestions, only: [:create], controller: "/api/v1/ingestions"
+          end
+        end
+      end
+
+      resources :twitter_queries, only: [:show, :update, :destroy], controller: "projects/relationships/twitter_queries" do
+        scope module: :twitter_queries do
+          namespace :relationships do
+            resource :fetch, controller: "twitter_query_fetch", only: [:create]
           end
         end
       end

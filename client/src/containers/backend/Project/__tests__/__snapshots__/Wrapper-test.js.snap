@@ -177,6 +177,16 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
                 Metadata
               </a>
             </li>
+            <li>
+              <a
+                className={undefined}
+                href="/backend/project/1/social"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Social
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -269,6 +279,16 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
                 style={undefined}
               >
                 Metadata
+              </a>
+            </li>
+            <li>
+              <a
+                className={undefined}
+                href="/backend/project/1/social"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Social
               </a>
             </li>
           </ul>

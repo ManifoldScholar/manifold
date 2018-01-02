@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Project Social Twitter Queries Container renders correctly 1`] = `
+<div
+  className="form-section"
+>
+  <header
+    className="form-section-label"
+  >
+    <span>
+      Twitter Queries
+    </span>
+  </header>
+  <p
+    className="instructional-copy"
+  >
+    Manifold will periodically fetch tweets according to the queries specified below.
+  </p>
+  <nav
+    className="vertical-list-primary flush"
+  >
+    <div
+      className="buttons-icon-horizontal"
+    >
+      <a
+        className="button-icon-secondary"
+        href="/backend/project/1/social/twitter-query/new"
+        onClick={[Function]}
+      >
+        <i
+          className="manicon manicon-plus"
+        />
+        Add a New Twitter Query
+      </a>
+    </div>
+    <section>
+      <ul>
+        <li
+          className="active"
+        >
+          <a
+            href="/backend/project/1/social/twitter-query/2"
+            onClick={[Function]}
+          >
+            <header>
+              <figure>
+                <i
+                  className="manicon manicon-twitter"
+                />
+              </figure>
+              <h3
+                className="name large"
+              >
+                from:manifoldscholar
+              </h3>
+            </header>
+            <span
+              className="label"
+            >
+              <span
+                className="specifier dull"
+              >
+                0
+                 EVENTS
+                 
+              </span>
+              Active
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </nav>
+  <nav
+    className="list-pagination-primary"
+  >
+    <ul>
+      <li
+        className="pagination-previous"
+        style={
+          Object {
+            "visibility": "hidden",
+          }
+        }
+      >
+        <a
+          data-id="page-prev"
+          href="#pagination-target"
+          onClick={[Function]}
+        >
+          <i
+            className="manicon manicon-arrow-long-left"
+          />
+          <span>
+            Prev
+          </span>
+        </a>
+      </li>
+      <li
+        className="active ordinal"
+      >
+        <a
+          href="#pagination-target"
+          onClick={[Function]}
+        >
+          1
+        </a>
+      </li>
+      <li
+        className="ordinal"
+      >
+        <a
+          href="#pagination-target"
+          onClick={[Function]}
+        >
+          2
+        </a>
+      </li>
+      <li
+        className="pagination-next"
+        style={Object {}}
+      >
+        <a
+          data-id="page-next"
+          href="#pagination-target"
+          onClick={[Function]}
+        >
+          <span>
+            Next
+          </span>
+          <i
+            className="manicon manicon-arrow-long-right"
+          />
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

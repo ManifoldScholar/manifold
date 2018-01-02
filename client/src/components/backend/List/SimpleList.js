@@ -10,7 +10,9 @@ export default class ListSimpleList extends PureComponent {
     entityComponentProps: PropTypes.object,
     destroyHandler: PropTypes.func,
     title: PropTypes.string,
-    icon: PropTypes.string
+    icon: PropTypes.string,
+    pagination: PropTypes.object,
+    paginationClickHandler: PropTypes.func
   };
 
   // Can take either a builder function that returns JSX or
