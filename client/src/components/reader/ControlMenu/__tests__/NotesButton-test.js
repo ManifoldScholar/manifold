@@ -1,12 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { mount } from "enzyme";
-import VisibilityButton from "../VisibilityButton";
+import NotesButton from "../NotesButton";
 
-describe("Reader.VisibilityButton Component", () => {
+describe("Reader.ControlMenu.NotesButton Component", () => {
   const toggleMock = jest.fn();
 
-  const root = <VisibilityButton state={1} toggle={toggleMock} />;
+  const root = <NotesButton toggle={toggleMock} />;
 
   it("renders correctly", () => {
     const component = renderer.create(root);
@@ -17,7 +17,7 @@ describe("Reader.VisibilityButton Component", () => {
   it("should trigger toggle callback when toggle is clicked", () => {
     const wrapper = mount(root);
     toggleMock.mockClear();
-    wrapper.find('[data-id="toggle"]').first().simulate("click");
+    wrapper.find('[data-id="toggle-notes"]').simulate("click");
     expect(toggleMock).toHaveBeenCalled();
   });
 });

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Notes.DetailedList Component renders correctly 1`] = `
+<ul
+  className="notes-list"
+>
+  <li
+    className="selection-list separated"
+  >
+    <div
+      className="selection-group-heading"
+    >
+      <h2>
+        Test
+      </h2>
+    </div>
+    <ul>
+      <li>
+        <div
+          className="annotation-highlight-detail"
+        >
+          <span
+            className="annotation-selection"
+          >
+            Gods, Earths, and 85ers
+          </span>
+          <nav
+            className="utility"
+          >
+            <ul>
+              <li>
+                <button
+                  onClick={[Function]}
+                >
+                  View In Text
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+      <li>
+        <div
+          className="annotation-highlight-detail"
+        >
+          <span
+            className="annotation-selection"
+          >
+            Gods, Earths, and 85ers
+          </span>
+          <nav
+            className="utility"
+          >
+            <ul>
+              <li>
+                <button
+                  onClick={[Function]}
+                >
+                  View In Text
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+`;

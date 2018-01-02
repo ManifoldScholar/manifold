@@ -24,7 +24,7 @@ export default class NotesButton extends PureComponent {
       <button
         className={buttonClass}
         onClick={this.clickHandler}
-        data-id="toggle"
+        data-id="toggle-notes"
       >
         <i className="manicon manicon-notepad" />
         <span className="screen-reader-text">

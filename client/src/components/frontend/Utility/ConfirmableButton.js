@@ -9,8 +9,7 @@ export default class ConfirmableButton extends Component {
     confirmHandler: PropTypes.func.isRequired
   };
 
-  static defaultProps = {
-  };
+  static defaultProps = {};
 
   constructor() {
     super();
@@ -28,11 +27,17 @@ export default class ConfirmableButton extends Component {
   renderConfirmation() {
     return (
       <div className="confirmation">
-        <label>{this.props.label}</label>
-        <button className="confirm" onClick={this.handleConfirm}>Confirm</button>
-        <button className="deny" onClick={this.toggleConfirmation}>Cancel</button>
+        <label>
+          {this.props.label}
+        </label>
+        <button className="confirm" onClick={this.handleConfirm}>
+          Confirm
+        </button>
+        <button className="deny" onClick={this.toggleConfirmation}>
+          Cancel
+        </button>
       </div>
-    )
+    );
   }
 
   renderButton() {
@@ -40,10 +45,12 @@ export default class ConfirmableButton extends Component {
       <button onClick={this.toggleConfirmation}>
         {this.props.label}
       </button>
-    )
+    );
   }
 
   render() {
-    return this.state.confirmation ? this.renderConfirmation() : this.renderButton();
+    return this.state.confirmation
+      ? this.renderConfirmation()
+      : this.renderButton();
   }
 }

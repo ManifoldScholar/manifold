@@ -9,15 +9,14 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
   />
   <ul>
     <li>
-      <a
-        href="#"
+      <button
         onClick={[Function]}
       >
         <i
-          className="manicon manicon-person-pencil"
+          className="manicon manicon-person-pencil-simple"
         />
         Edit Profile
-      </a>
+      </button>
     </li>
     <li>
       <button

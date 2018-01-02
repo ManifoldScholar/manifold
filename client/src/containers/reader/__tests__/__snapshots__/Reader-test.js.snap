@@ -48,12 +48,12 @@ exports[`Reader Reader Container renders correctly 1`] = `
           <ul>
             <li>
               <button
-                className="annotation-visibility-button"
-                data-id="toggle"
+                className="button-visibility"
+                data-id="toggle-visibility"
                 onClick={[Function]}
               >
                 <i
-                  className="manicon manicon-eye-fill"
+                  className="manicon manicon-eye-outline"
                 />
                 <span
                   className="screen-reader-text"
@@ -101,39 +101,6 @@ exports[`Reader Reader Container renders correctly 1`] = `
           </ul>
         </nav>
       </nav>
-      <div
-        className="edge-lock-scroll"
-      >
-        <div
-          className="toc-drawer drawer-hidden"
-        >
-          <nav
-            className="table-of-contents"
-          >
-            <ul
-              className="toc-list"
-            >
-              <li>
-                <a
-                  className={null}
-                  data-id="hide-drawer"
-                  href="/read/slug-1/section/undefined#function%20anchor()%20%7B%20%5Bnative%20code%5D%20%7D"
-                  onClick={[Function]}
-                />
-              </li>
-              <li>
-                <a
-                  className={null}
-                  data-id="hide-drawer"
-                  href="/read/slug-1/section/undefined#function%20anchor()%20%7B%20%5Bnative%20code%5D%20%7D"
-                  onClick={[Function]}
-                />
-              </li>
-            </ul>
-            <span />
-          </nav>
-        </div>
-      </div>
       <nav
         className="menu-panels-left"
       >
@@ -202,78 +169,15 @@ exports[`Reader Reader Container renders correctly 1`] = `
         <div
           className="panel-hidden"
         >
+          <span />
+        </div>
+        <div
+          className="panel-hidden"
+        >
           <nav
-            className="search-menu"
+            className="visibility-menu"
           >
-            <form>
-              <div
-                className="input-magnify"
-              >
-                <input
-                  placeholder="Search for..."
-                  type="text"
-                />
-                <button
-                  className="manicon manicon-magnify"
-                />
-              </div>
-              <div
-                className="filters"
-              >
-                <label>
-                  Search within:
-                </label>
-                <div
-                  className="checkbox-group"
-                >
-                  <label
-                    className="checkbox"
-                  >
-                    <input
-                      type="checkbox"
-                    />
-                    <div
-                      className="control-indicator"
-                    >
-                      <i
-                        className="manicon manicon-check"
-                      />
-                    </div>
-                    Chapter
-                  </label>
-                  <label
-                    className="checkbox"
-                  >
-                    <input
-                      type="checkbox"
-                    />
-                    <div
-                      className="control-indicator"
-                    >
-                      <i
-                        className="manicon manicon-check"
-                      />
-                    </div>
-                    Text
-                  </label>
-                  <label
-                    className="checkbox"
-                  >
-                    <input
-                      type="checkbox"
-                    />
-                    <div
-                      className="control-indicator"
-                    >
-                      <i
-                        className="manicon manicon-check"
-                      />
-                    </div>
-                    Project
-                  </label>
-                </div>
-              </div>
-            </form>
+            <ul />
           </nav>
         </div>
         <div
@@ -282,160 +186,168 @@ exports[`Reader Reader Container renders correctly 1`] = `
           <nav
             className="appearance-menu"
           >
-            <div
-              className="control-font"
-            >
-              <button
-                className="font-type serif"
-                onClick={[Function]}
-              >
-                Serif
-              </button>
-              <div
-                className="font-size"
-              >
-                <button
-                  disabled={true}
-                  onClick={[Function]}
+            <ul>
+              <li>
+                <div
+                  className="control-font"
                 >
-                  <i
-                    className="manicon manicon-dash"
-                  />
-                  <span
-                    className="screen-reader-text"
+                  <button
+                    className="font-type serif"
+                    onClick={[Function]}
                   >
-                    Click to decrease font-size
-                  </span>
-                </button>
-                <button
-                  disabled={true}
-                  onClick={[Function]}
-                >
-                  <i
-                    className="manicon manicon-plus"
-                  />
-                  <span
-                    className="screen-reader-text"
+                    Serif
+                  </button>
+                  <div
+                    className="font-size"
                   >
-                    Click to increase font-size
-                  </span>
-                </button>
-              </div>
-            </div>
-            <div
-              className="control-font"
-            >
-              <button
-                className="font-type sans-serif"
-                onClick={[Function]}
-              >
-                Sans Serif
-              </button>
-              <div
-                className="font-size"
-              >
-                <button
-                  disabled={true}
-                  onClick={[Function]}
+                    <button
+                      disabled={true}
+                      onClick={[Function]}
+                    >
+                      <i
+                        className="manicon manicon-dash"
+                      />
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Click to decrease font-size
+                      </span>
+                    </button>
+                    <button
+                      disabled={true}
+                      onClick={[Function]}
+                    >
+                      <i
+                        className="manicon manicon-plus"
+                      />
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Click to increase font-size
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="control-font"
                 >
-                  <i
-                    className="manicon manicon-dash"
-                  />
-                  <span
-                    className="screen-reader-text"
+                  <button
+                    className="font-type sans-serif"
+                    onClick={[Function]}
                   >
-                    Click to decrease font-size
-                  </span>
-                </button>
-                <button
-                  disabled={true}
-                  onClick={[Function]}
-                >
-                  <i
-                    className="manicon manicon-plus"
-                  />
-                  <span
-                    className="screen-reader-text"
+                    Sans-serif
+                  </button>
+                  <div
+                    className="font-size"
                   >
-                    Click to increase font-size
-                  </span>
-                </button>
-              </div>
-            </div>
-            <div
-              className="control-colors"
-            >
-              <button
-                className="color-scheme light"
-                onClick={[Function]}
-              >
-                <i
-                  className="manicon manicon-check"
-                />
-                <span
-                  className="screen-reader-text"
+                    <button
+                      disabled={true}
+                      onClick={[Function]}
+                    >
+                      <i
+                        className="manicon manicon-dash"
+                      />
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Click to decrease font-size
+                      </span>
+                    </button>
+                    <button
+                      disabled={true}
+                      onClick={[Function]}
+                    >
+                      <i
+                        className="manicon manicon-plus"
+                      />
+                      <span
+                        className="screen-reader-text"
+                      >
+                        Click to increase font-size
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div
+                  className="control-colors"
                 >
-                  Click to use light color scheme in reader
-                </span>
-              </button>
-              <button
-                className="color-scheme dark"
-                onClick={[Function]}
-              >
-                <i
-                  className="manicon manicon-check"
-                />
-                <span
-                  className="screen-reader-text"
+                  <button
+                    className="color-scheme light"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="manicon manicon-check"
+                    />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Click to use light color scheme in reader
+                    </span>
+                  </button>
+                  <button
+                    className="color-scheme dark"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="manicon manicon-check"
+                    />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Click to use dark color scheme in reader
+                    </span>
+                  </button>
+                </div>
+              </li>
+              <li>
+                <div
+                  className="control-margins"
                 >
-                  Click to use dark color scheme in reader
-                </span>
-              </button>
-            </div>
-            <div
-              className="control-margins"
-            >
-              <button
-                className="margin-increase"
-                onClick={[Function]}
-              >
-                <i
-                  className="compound-icon"
-                >
-                  <i
-                    className="manicon manicon-margins-narrow-arrows"
-                  />
-                  <i
-                    className="manicon manicon-margins-narrow-text"
-                  />
-                </i>
-                <span
-                  className="screen-reader-text"
-                >
-                  Click to increase text margins
-                </span>
-              </button>
-              <button
-                className="margin-decrease"
-                onClick={[Function]}
-              >
-                <i
-                  className="compound-icon"
-                >
-                  <i
-                    className="manicon manicon-margins-wide-arrows"
-                  />
-                  <i
-                    className="manicon manicon-margins-wide-text"
-                  />
-                </i>
-                <span
-                  className="screen-reader-text"
-                >
-                  Click to increase text margins
-                </span>
-              </button>
-            </div>
+                  <button
+                    className="margin-increase"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="compound-icon"
+                    >
+                      <i
+                        className="manicon manicon-margins-narrow-arrows"
+                      />
+                      <i
+                        className="manicon manicon-margins-narrow-text"
+                      />
+                    </i>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Click to increase text margins
+                    </span>
+                  </button>
+                  <button
+                    className="margin-decrease"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="compound-icon"
+                    >
+                      <i
+                        className="manicon manicon-margins-wide-arrows"
+                      />
+                      <i
+                        className="manicon manicon-margins-wide-text"
+                      />
+                    </i>
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Click to increase text margins
+                    </span>
+                  </button>
+                </div>
+              </li>
+            </ul>
           </nav>
         </div>
         <div
@@ -449,15 +361,14 @@ exports[`Reader Reader Container renders correctly 1`] = `
             />
             <ul>
               <li>
-                <a
-                  href="#"
+                <button
                   onClick={[Function]}
                 >
                   <i
-                    className="manicon manicon-person-pencil"
+                    className="manicon manicon-person-pencil-simple"
                   />
                   Edit Profile
-                </a>
+                </button>
               </li>
               <li>
                 <button
@@ -484,7 +395,10 @@ exports[`Reader Reader Container renders correctly 1`] = `
       </section>
     </header>
   </div>
-  <main />
+  <span />
+  <main>
+    <span />
+  </main>
   <footer
     className="footer-reader"
   >
@@ -517,6 +431,38 @@ exports[`Reader Reader Container renders correctly 1`] = `
         <ul>
           <li>
             <button
+              className="button-notes"
+              data-id="toggle-notes"
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-notepad"
+              />
+              <span
+                className="screen-reader-text"
+              >
+                Click to hide or show user annotations overlay
+              </span>
+            </button>
+          </li>
+          <li>
+            <button
+              className="button-visibility"
+              data-id="toggle-visibility"
+              onClick={[Function]}
+            >
+              <i
+                className="manicon manicon-eye-outline"
+              />
+              <span
+                className="screen-reader-text"
+              >
+                Click to hide or show annotation/resources in the reader
+              </span>
+            </button>
+          </li>
+          <li>
+            <button
               className="button-appearance"
               data-id="toggle-appearance"
               onClick={[Function]}
@@ -528,22 +474,6 @@ exports[`Reader Reader Container renders correctly 1`] = `
                 className="screen-reader-text"
               >
                 Click to open reader appearance menu
-              </span>
-            </button>
-          </li>
-          <li>
-            <button
-              className="annotation-visibility-button"
-              data-id="toggle"
-              onClick={[Function]}
-            >
-              <i
-                className="manicon manicon-eye-fill"
-              />
-              <span
-                className="screen-reader-text"
-              >
-                Click to hide or show annotation/resources in the reader
               </span>
             </button>
           </li>

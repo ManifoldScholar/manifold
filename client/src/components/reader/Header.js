@@ -119,7 +119,8 @@ export default class Header extends Component {
               </li>
               <li>
                 <ControlMenu.AppearanceMenuButton
-                  toggleAppearanceMenu={() => this.handlePanelToggle("appearance")}
+                  toggleAppearanceMenu={() =>
+                    this.handlePanelToggle("appearance")}
                   active={this.props.visibility.uiPanels.appearance}
                 />
               </li>

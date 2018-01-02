@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.ControlMenu.VisibilityMenuBody Component renders correctly 1`] = `
+<nav
+  className="visibility-menu"
+>
+  <ul>
+    <li>
+      <i
+        className=""
+      />
+      <span>
+        Highlightss
+      </span>
+      <div
+        className="filters"
+      >
+        <label
+          className="checkbox"
+        >
+          <input
+            checked={true}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="control-indicator"
+          >
+            <i
+              className="manicon manicon-check"
+            />
+          </div>
+          Yours
+        </label>
+        <label
+          className="checkbox"
+        >
+          <input
+            checked={true}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="control-indicator"
+          >
+            <i
+              className="manicon manicon-check"
+            />
+          </div>
+          Others
+        </label>
+      </div>
+    </li>
+    <li>
+      <i
+        className=""
+      />
+      <span>
+        Annotationss
+      </span>
+      <div
+        className="filters"
+      >
+        <label
+          className="checkbox"
+        >
+          <input
+            checked={true}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="control-indicator"
+          >
+            <i
+              className="manicon manicon-check"
+            />
+          </div>
+          Yours
+        </label>
+        <label
+          className="checkbox"
+        >
+          <input
+            checked={true}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="control-indicator"
+          >
+            <i
+              className="manicon manicon-check"
+            />
+          </div>
+          Others
+        </label>
+      </div>
+    </li>
+    <li>
+      <i
+        className=""
+      />
+      <span>
+        Resourcess
+      </span>
+      <div
+        className="filters"
+      >
+        <label
+          className="checkbox"
+        >
+          <input
+            checked={true}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="control-indicator"
+          >
+            <i
+              className="manicon manicon-check"
+            />
+          </div>
+          Show All
+        </label>
+      </div>
+    </li>
+  </ul>
+</nav>
+`;

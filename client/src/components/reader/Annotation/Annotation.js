@@ -160,10 +160,10 @@ export default class AnnotationDetail extends PureComponent {
                     {this.props.deleteHandler &&
                     annotation.attributes.canDeleteObject
                       ? <li>
-                        <Utility.ConfirmableButton
-                          label="Delete"
-                          confirmHandler={this.handleDelete}
-                        />
+                          <Utility.ConfirmableButton
+                            label="Delete"
+                            confirmHandler={this.handleDelete}
+                          />
                         </li>
                       : null}
                   </ul>
