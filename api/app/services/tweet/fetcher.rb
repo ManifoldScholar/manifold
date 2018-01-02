@@ -3,43 +3,45 @@ module Tweet
   class Fetcher
     def fetch(project)
       return unless project.following_twitter_accounts?
-      project.twitter_following.each do |following|
-        fetch_one(following, project)
+      project.twitter_queries.find_each do |query|
+        fetch_one(query)
       end
+    end
+
+    # Following is a string query
+    def fetch_one(query)
+      limit = 60
+      options = {
+        count: limit,
+        result_type: query.result_type
+      }
+      options[:since_id] = query.most_recent_tweet_id.to_i if query.most_recent_tweet_id
+
+      results = client.search(query, options).take(limit)
+      results.each do |tweet|
+        tweet_to_event(tweet, query)
+      end
+
+      max = results.max_by(&:id)&.id
+      update_query_most_recent(query, max)
     end
 
     private
 
-    def fetch_one(following, project)
-      query = build_query(following)
-      client.search(query).each do |tweet|
-        tweet_to_event(tweet, project)
-      end
-    end
-
-    def tweet_to_event(tweet, project)
+    def tweet_to_event(tweet, query)
       factory = Factory::Event.new
-      event = factory.create_from_tweet(tweet, project)
+      event = factory.create_from_tweet(tweet, query)
       return if event.valid?
       Rails.logger.info(
         "#tweet_to_event created an invalid event: #{event.errors.full_messages}"
       )
     end
 
-    # rubocop:disable Metrics/AbcSize
-    def build_query(following)
-      user, hashtag, since, keyword = following.values_at(:user,
-                                                          :hashtag,
-                                                          :since,
-                                                          :keyword)
-      parts = []
-      parts.push "from:#{user.strip}" unless user.blank?
-      parts.push "##{hashtag.strip}" unless hashtag.blank?
-      parts.push "since:#{since.strip}" unless since.blank?
-      parts.push keyword.strip unless keyword.blank?
-      parts.join(" ")
+    def update_query_most_recent(query, id)
+      return unless id
+      query.most_recent_tweet_id = id
+      query.save
     end
-    # rubocop:enable Metrics/AbcSize
 
     def client
       settings = Settings.instance

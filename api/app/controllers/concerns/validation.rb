@@ -60,6 +60,14 @@ module Validation
     params.permit(param_config)
   end
 
+  def twitter_query_params
+    params.require(:data)
+    attributes = [:query, :active, :result_type]
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def collaborator_params
     params.require(:data)
     attributes = [:role]

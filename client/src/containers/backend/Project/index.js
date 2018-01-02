@@ -8,6 +8,7 @@ import New from "./New";
 import ProjectPage from "./ProjectPage";
 import Resource from "./Resource";
 import Resources from "./Resources";
+import Social from "./Social";
 import Text from "./Text";
 import Texts from "./Texts";
 import Wrapper from "./Wrapper";
@@ -23,6 +24,7 @@ export default {
   ProjectPage,
   Resource,
   Resources,
+  Social,
   Text,
   Texts,
   Wrapper

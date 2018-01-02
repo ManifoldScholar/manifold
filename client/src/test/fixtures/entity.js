@@ -264,7 +264,7 @@ const defaults = {
       styles: ".manifold-text-section .some-class { font-weight: bold }"
     },
     relationships: {
-      texet: null
+      text: null
     }
   },
 
@@ -344,6 +344,16 @@ const defaults = {
     type: "subjects",
     attributes: {
       name: "Hip Hop"
+    }
+  },
+
+  twitterQuery: {
+    type: "twitterQueries",
+    attributes: {
+      query: "from:manifoldscholar",
+      active: true,
+      resultsType: "most_recent",
+      eventsCount: 0
     }
   }
 };
@@ -428,6 +438,10 @@ const subject = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("subject", id, attributes, relationships);
 };
 
+const twitterQuery = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("twitterQuery", id, attributes, relationships);
+};
+
 export default {
   defaults,
   project,
@@ -446,5 +460,6 @@ export default {
   stylesheet,
   textSection,
   feature,
-  subject
+  subject,
+  twitterQuery
 };

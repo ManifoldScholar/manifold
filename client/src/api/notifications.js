@@ -180,5 +180,13 @@ export default {
       body: `${payload.data.attributes.title} has been updated`,
       expiration: 5000
     };
+  },
+  [r.beTwitterQueryFetch]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Success",
+      body: `Tweets have been fetched`,
+      expiration: 5000
+    };
   }
 };

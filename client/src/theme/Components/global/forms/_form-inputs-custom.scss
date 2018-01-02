@@ -91,3 +91,38 @@
     @include booleanPrimary(30px);
   }
 }
+
+.repeater-primary {
+
+  .buttons-icon-horizontal {
+    margin-bottom: 0px;
+  }
+
+  .repeatable-input {
+    position: relative;
+
+    .manicon-x {
+      position: absolute;
+      right: 7px;
+      top: 7px;
+      color: $sp40Tertiary;
+
+      @include respond($break60) {
+        top: 11px;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    + .repeatable-input {
+      margin-top: 24px;
+
+      @include respond($break60) {
+        margin-top: 24px;
+      }
+    }
+  }
+
+}

@@ -91,31 +91,13 @@ RSpec.describe Project, type: :model do
     expect(project).to_not be_valid
   end
 
-  it "returns an array when tweet_fetch_config is not configured" do
-    project = FactoryGirl.build(:project, tweet_fetch_config: {})
-    expect(project.twitter_following).to be_a Array
-  end
-
-  it "transforms twitter_following to HashWIthIndifferentAccess" do
-    project = FactoryGirl.build(:project, tweet_fetch_config: {
-      following: [
-        {user: "someUser", hashtag: "SomeHashTag"}
-      ]
-    })
-    following = project.twitter_following
-    expect(following[0][:user]).to be_a String
-  end
-
-  it "reports that it's not following twitter accounts if none are configured" do
-    project = FactoryGirl.build(:project, tweet_fetch_config: {
-      following: [
-        {user: "someUser", hashtag: "SomeHashTag"}
-      ]
-    })
+  it "reports that it's following twitter accounts if at least one twitter_query association" do
+    project = FactoryGirl.build(:project)
+    FactoryGirl.create(:twitter_query, project: project)
     expect(project.following_twitter_accounts?).to be true
   end
 
-  it "reports that it's not following twitter accounts if at least one isconfigured" do
+  it "reports that it's not following twitter accounts if none are configured" do
     project = FactoryGirl.build(:project, tweet_fetch_config: {})
     expect(project.following_twitter_accounts?).to be false
   end

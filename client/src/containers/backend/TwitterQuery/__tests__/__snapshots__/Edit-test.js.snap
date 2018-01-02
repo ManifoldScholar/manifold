@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend TwitterQuery Edit Container renders correctly 1`] = `
+<div>
+  <header
+    className="drawer-header"
+  >
+    <h2
+      className="heading-quaternary"
+    >
+      <i
+        className="manicon manicon-twitter"
+      />
+      <span />
+    </h2>
+    <div
+      className="buttons-bare-vertical"
+    >
+      <button
+        className="button-bare-primary"
+        onClick={[Function]}
+      >
+        Fetch Tweets
+        <i
+          className="manicon manicon-check"
+        />
+      </button>
+      <br />
+      <button
+        className="button-bare-primary"
+        onClick={[Function]}
+      >
+        Delete Query
+        <i
+          className="manicon manicon-trashcan"
+        />
+      </button>
+    </div>
+  </header>
+  <section
+    className="form-section"
+  >
+    <div>
+      <form
+        className="form-secondary"
+        data-id="submit"
+        onSubmit={[Function]}
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Query
+          </label>
+          <p
+            className="instructions"
+          >
+            Learn more about Twitter
+             
+            <a
+              href="https://developer.twitter.com/en/docs/tweets/search/guides/standard-operators"
+              target="_blank"
+            >
+              search operators
+            </a>
+            .
+          </p>
+          <input
+            onChange={[Function]}
+            placeholder="Enter query"
+            type="text"
+            value="from:manifoldscholar"
+          />
+        </div>
+        <div
+          className="form-input"
+        >
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label>
+              Fetch tweets by:
+            </label>
+            <div
+              className="form-select"
+            >
+              <i
+                className="manicon manicon-caret-down"
+              />
+              <select
+                onChange={[Function]}
+                value={undefined}
+              >
+                <option
+                  value="most_recent"
+                >
+                  Most Recent
+                </option>
+                <option
+                  value="popular"
+                >
+                  Most Popular
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-input"
+        >
+          <label
+            className="above"
+          >
+            Active
+          </label>
+          <div
+            className="toggle-indicator"
+          >
+            <div
+              className="boolean-primary checked"
+              onClick={[Function]}
+            />
+          </div>
+        </div>
+        <div
+          className="form-input submit"
+        >
+          <input
+            className="button-secondary outlined"
+            type="submit"
+            value="Save Twitter Query"
+          />
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+`;

@@ -25,7 +25,7 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                       <withRouter(Connect(Form.Form)) model={[undefined]} name=\\"backend-edit-stylesheet\\" update={[Function]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\">
                         <Route render={[Function]}>
                           <Connect(Form.Form) model={[undefined]} name=\\"backend-edit-stylesheet\\" update={[Function]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
-                            <Form.Form model={{...}} name=\\"backend-edit-stylesheet\\" update={[Function]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} session={{...}} response={[undefined]} errors={[undefined]} dispatch={[Function]} doNotWarn={false} debug={false} groupErrors={false}>
+                            <Form.Form model={{...}} name=\\"backend-edit-stylesheet\\" update={[Function]} create={[Function]} onSuccess={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} session={{...}} response={[undefined]} errors={[undefined]} dispatch={[Function]} doNotWarn={false} debug={false} groupErrors={false} options={{...}}>
                               <div>
                                 <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
                                 <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">

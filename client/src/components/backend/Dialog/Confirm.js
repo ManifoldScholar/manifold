@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Dialog } from "components/backend";
+import isString from "lodash/isString";
 
 export default class DialogConfirm extends PureComponent {
   static displayName = "Dialog.Confirm";
@@ -9,7 +10,7 @@ export default class DialogConfirm extends PureComponent {
     resolve: PropTypes.func.isRequired,
     reject: PropTypes.func.isRequired,
     heading: PropTypes.string,
-    message: PropTypes.string
+    message: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
   static defaultProps = {
@@ -69,11 +70,11 @@ export default class DialogConfirm extends PureComponent {
           </h2>
         </header>
 
-        {this.props.message
+        {isString(this.props.message)
           ? <p>
               {this.props.message}
             </p>
-          : null}
+          : this.props.message}
 
         <div className="buttons-icon-horizontal">
           <button

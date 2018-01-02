@@ -97,6 +97,11 @@ export class ProjectWrapperContainer extends PureComponent {
         path: lh.link("backendProjectMetadata", project.id),
         label: "Metadata",
         key: "metadata"
+      },
+      {
+        path: lh.link("backendProjectSocial", project.id),
+        label: "Social",
+        key: "social"
       }
     ];
   }

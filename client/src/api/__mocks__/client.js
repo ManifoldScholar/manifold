@@ -5,6 +5,7 @@ export default class ApiClient {
   call = (endpoint, methodIgnored, optionsIgnored) => {
     const collectionEndpoints = [
       /\/api\/v1\/projects\/\w*\/relationships\/resources/,
+      /\/api\/v1\/projects\/\w*\/relationships\/twitter_queries/,
       /\/api\/v1\/annotations\/\w*\/relationships\/comments/,
       /\/api\/v1\/resources\/\w*\/relationships\/comments/
     ];

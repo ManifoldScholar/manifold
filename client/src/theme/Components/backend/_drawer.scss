@@ -110,18 +110,41 @@
     @include respond($break90) {
       padding-bottom: 60px;
     }
+
+    .subtitle {
+      @include subtitlePrimary;
+      padding: 5px 0;
+      color: $neutralWhite;
+    }
   }
 
   .heading-quaternary {
     padding: 5px 0 1em;
     color: $neutralWhite;
+    display: flex;
+    align-items: center;
+    min-width: 0;
 
     @include respond($break50) {
       padding: 32px 0 1.1em;
     }
-    
+
     @include respond($break90) {
       padding-top: 37px;
+    }
+
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .manicon {
+      padding-right: 10px;
+
+      &.manicon-twitter {
+        font-size: 24px;
+      }
     }
   }
 

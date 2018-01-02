@@ -7,12 +7,13 @@ import Instructions from "./Instructions";
 export default class FieldGroup extends PureComponent {
   static propTypes = {
     horizontal: PropTypes.bool,
-    instructions: PropTypes.string,
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     label: PropTypes.string
   };
 
   static defaultProps = {
-    horizontal: false
+    horizontal: false,
+    instructions: null
   };
 
   renderChildren(props) {
@@ -21,7 +22,7 @@ export default class FieldGroup extends PureComponent {
       if (isString(child.type)) {
         return child;
       }
-      const { horizontal, label, ...childProps } = this.props;
+      const { horizontal, label, instructions, ...childProps } = this.props;
       return React.cloneElement(child, childProps);
     });
   }

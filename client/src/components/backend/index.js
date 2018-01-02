@@ -14,3 +14,4 @@ export Metadata from "./Metadata";
 export Ingestion from "./Ingestion";
 export ResourceCollection from "./ResourceCollection";
 export Subject from "./Subject";
+export TwitterQuery from "./TwitterQuery";
