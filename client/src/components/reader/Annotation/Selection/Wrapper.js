@@ -86,9 +86,12 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             {this.maybeTruncateSelection()}
           </div>
           {this.props.visitHandler
-            ? <button className="annotate-button" onClick={this.handleVisitAnnotation}>
-              {"View In Text"}
-            </button>
+            ? <button
+                className="annotate-button"
+                onClick={this.handleVisitAnnotation}
+              >
+                {"View In Text"}
+              </button>
             : null}
           {this.props.includeEditor
             ? <HigherOrder.RequireRole requiredRole="any">

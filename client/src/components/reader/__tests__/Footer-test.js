@@ -6,7 +6,7 @@ describe("Reader.Footer component", () => {
   const text = {
     attributes: {
       metadata: {
-        rights: "All rights reserved"        
+        rights: "All rights reserved"
       }
     }
   };
@@ -15,7 +15,7 @@ describe("Reader.Footer component", () => {
     attributes: {
       metadata: {
         rights: `line one
-        line two`        
+        line two`
       }
     }
   };

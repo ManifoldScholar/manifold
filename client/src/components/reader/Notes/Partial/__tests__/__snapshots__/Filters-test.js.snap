@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
+<nav
+  className="filters"
+>
+  <label
+    className="label"
+  >
+    Show your:
+  </label>
+  <div
+    className="checkbox-group"
+  >
+    <label
+      className="checkbox"
+    >
+      <input
+        checked={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <div
+        className="control-indicator"
+      >
+        <i
+          className="manicon manicon-check"
+        />
+      </div>
+      Highlights
+    </label>
+    <label
+      className="checkbox"
+    >
+      <input
+        checked={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <div
+        className="control-indicator"
+      >
+        <i
+          className="manicon manicon-check"
+        />
+      </div>
+      Annotations
+    </label>
+  </div>
+</nav>
+`;

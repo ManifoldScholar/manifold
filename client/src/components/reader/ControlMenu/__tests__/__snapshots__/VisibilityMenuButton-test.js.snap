@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reader.VisibilityButton Component renders correctly 1`] = `
+exports[`Reader.ControlMenu.VisibilityMenuButton Component renders correctly 1`] = `
 <button
-  className="primary annotation-visibility-button"
-  data-id="toggle"
+  className="button-visibility"
+  data-id="toggle-visibility"
   onClick={[Function]}
 >
   <i
-    className="manicon manicon-eye-fill"
+    className="manicon manicon-eye-outline"
   />
   <span
     className="screen-reader-text"

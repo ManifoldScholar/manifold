@@ -19,6 +19,7 @@ describe("Reader.Header Component", () => {
     colors: {}
   };
   const visibility = {
+    visibilityFilters: {},
     uiPanels: {}
   };
   const commonActions = {

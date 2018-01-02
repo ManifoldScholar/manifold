@@ -1,12 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { mount } from "enzyme";
-import AppearanceMenuButton from "../AppearanceMenuButton";
+import VisibilityMenuButton from "../VisibilityMenuButton";
 
-describe("Reader.AppearanceMenuButton Component", () => {
+describe("Reader.ControlMenu.VisibilityMenuButton Component", () => {
   const toggleMock = jest.fn();
 
-  const root = <AppearanceMenuButton toggleAppearanceMenu={toggleMock} />;
+  const root = <VisibilityMenuButton active={false} toggle={toggleMock} />;
 
   it("renders correctly", () => {
     const component = renderer.create(root);
@@ -14,10 +14,10 @@ describe("Reader.AppearanceMenuButton Component", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("should trigger toggleAppearanceMenu callback when toggle is clicked", () => {
+  it("should trigger toggle callback when toggle is clicked", () => {
     const wrapper = mount(root);
     toggleMock.mockClear();
-    wrapper.find('[data-id="toggle-appearance"]').simulate("click");
+    wrapper.find('[data-id="toggle-visibility"]').first().simulate("click");
     expect(toggleMock).toHaveBeenCalled();
   });
 });

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Notes.Partial.GroupItem Component renders correctly 1`] = `
+<li
+  className="item"
+  onClick={[Function]}
+>
+  <i
+    className="manicon manicon-null"
+  />
+  <span>
+    Gods, Earths, and 85ers
+  </span>
+</li>
+`;

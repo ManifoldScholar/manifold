@@ -1,49 +1,41 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { ReaderContainer } from "../Reader";
+import { ReaderNotesContainer } from "../ReaderNotes";
+import { Notes } from "../../../components/reader";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
 
-describe("Reader Reader Container", () => {
+describe("Reader ReaderNotes Container", () => {
   const store = build.store();
   const text = build.entity.text("1");
   text.relationships.project = build.entity.project("3");
+  const section = build.entity.textSection("2");
+  text.attributes.spine = [section.id];
+  text.attributes.sectionsMap = [section];
+  const myAnnotations = [
+    build.entity.annotation("4", { textSectionId: section.id }),
+    build.entity.annotation("5", { textSectionId: section.id })
+  ];
+
   const props = {
     text,
-    section: build.entity.textSection("2"),
-    route: {
-      routes: [
-        {
-          name: "ReaderSection",
-          path: "/read/:textId/section/:sectionId"
-        }
-      ]
-    },
+    myAnnotations,
+    filterable: false,
     dispatch: store.dispatch,
-    location: {
-      pathname: `/read/1/section/2`
-    },
-    visibility: {
-      visibilityFilters: {},
-      uiPanels: {}
-    },
-    appearance: {
-      colors: {},
-      typography: {
-        fontSize: {}
+    match: {
+      params: {
+        sectionId: section.id
       }
-    },
-    notifications: {
-      notifications: []
-    },
-    authentication: {}
+    }
   };
 
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <ReaderContainer {...props} />
+        <ReaderNotesContainer {...props}>
+          <Notes.DetailedList />
+        </ReaderNotesContainer>
       </Provider>
     )
   );

@@ -9,7 +9,11 @@ describe("Reader.Section.Pagination component", () => {
 
   it("renders correctly", () => {
     const root = wrapWithRouter(
-      <Pagination text={text} sectionId={"2"} spine={["1234", "5678", "0000"]} />
+      <Pagination
+        text={text}
+        sectionId={"2"}
+        spine={["1234", "5678", "0000"]}
+      />
     );
     const component = renderer.create(root);
     let tree = component.toJSON();
@@ -17,9 +21,13 @@ describe("Reader.Section.Pagination component", () => {
   });
 
   it("renders correctly with text section kind", () => {
-    text.attributes.sectionKind = 'Section';
+    text.attributes.sectionKind = "Section";
     const root = wrapWithRouter(
-      <Pagination text={text} sectionId={"2"} spine={["1234", "5678", "0000"]} />
+      <Pagination
+        text={text}
+        sectionId={"2"}
+        spine={["1234", "5678", "0000"]}
+      />
     );
     const component = renderer.create(root);
     let tree = component.toJSON();

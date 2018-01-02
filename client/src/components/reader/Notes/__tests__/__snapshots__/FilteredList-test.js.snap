@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
+<div>
+  <div
+    className="drawer-bar"
+  >
+    <h2
+      className="drawer-title"
+      onClick={[Function]}
+    >
+      Your Notes
+    </h2>
+    <button
+      className="button-primary"
+      onClick={[Function]}
+    >
+      See all
+    </button>
+  </div>
+  <nav
+    className="filters"
+  >
+    <label
+      className="label"
+    >
+      Show your:
+    </label>
+    <div
+      className="checkbox-group"
+    >
+      <label
+        className="checkbox"
+      >
+        <input
+          checked={true}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <div
+          className="control-indicator"
+        >
+          <i
+            className="manicon manicon-check"
+          />
+        </div>
+        Highlights
+      </label>
+      <label
+        className="checkbox"
+      >
+        <input
+          checked={true}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <div
+          className="control-indicator"
+        >
+          <i
+            className="manicon manicon-check"
+          />
+        </div>
+        Annotations
+      </label>
+    </div>
+  </nav>
+  <nav>
+    <ul>
+      <li>
+        <div
+          className="item"
+          onClick={[Function]}
+        >
+          <i
+            className="manicon manicon-caret-down"
+          />
+          <label>
+            Test
+          </label>
+        </div>
+        <ul
+          className=""
+        >
+          <li
+            className="item"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-null"
+            />
+            <span>
+              Gods, Earths, and 85ers
+            </span>
+          </li>
+          <li
+            className="item"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-null"
+            />
+            <span>
+              Gods, Earths, and 85ers
+            </span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

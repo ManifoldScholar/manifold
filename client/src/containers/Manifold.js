@@ -150,8 +150,10 @@ class ManifoldContainer extends PureComponent {
   }
 
   handleGlobalClick(event) {
-    if (!closest(event.target, ".panel-visible")) return this.props.dispatch(uiVisibilityActions.panelHideAll());
-    if (event.target.classList.contains("drawer-overlay")) return this.props.dispatch(uiVisibilityActions.panelHideAll());
+    if (!closest(event.target, ".panel-visible"))
+      return this.props.dispatch(uiVisibilityActions.panelHideAll());
+    if (event.target.classList.contains("drawer-overlay"))
+      return this.props.dispatch(uiVisibilityActions.panelHideAll());
     return null;
   }
 

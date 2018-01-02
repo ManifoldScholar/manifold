@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.ControlMenu.NotesButton Component renders correctly 1`] = `
+<button
+  className="button-notes"
+  data-id="toggle-notes"
+  onClick={[Function]}
+>
+  <i
+    className="manicon manicon-notepad"
+  />
+  <span
+    className="screen-reader-text"
+  >
+    Click to hide or show user annotations overlay
+  </span>
+</button>
+`;

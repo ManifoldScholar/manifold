@@ -6,7 +6,14 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 describe("Backend.Drawer.Wrapper Component", () => {
   it("renders correctly", () => {
     const component = mount(
-      wrapWithRouter(<Wrapper open={true} style="backend" />)
+      wrapWithRouter(
+        <Wrapper
+          open={true}
+          style="backend"
+          title="wrapper"
+          closeCallback={jest.fn()}
+        />
+      )
     );
 
     // Wrapper has event listeners attached to document,

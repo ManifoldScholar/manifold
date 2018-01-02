@@ -109,10 +109,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                       <i className=\\"tail\\" />
                                       <ul>
                                         <li>
-                                          <a href=\\"#\\" onClick={[Function]}>
-                                            <i className=\\"manicon manicon-person-pencil\\" />
+                                          <button onClick={[Function]}>
+                                            <i className=\\"manicon manicon-person-pencil-simple\\" />
                                             Edit Profile
-                                          </a>
+                                          </button>
                                         </li>
                                         <li>
                                           <button onClick={[Function]}>

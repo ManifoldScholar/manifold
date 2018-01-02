@@ -46,11 +46,11 @@ export default class Filters extends Component {
   render() {
     return (
       <nav className="filters">
-          <label className="label">Show your:</label>
-          <div className="checkbox-group">
-            {this.renderCheckBox('Highlights', 'highlight')}
-            {this.renderCheckBox('Annotations', 'annotation')}
-          </div>
+        <label className="label">Show your:</label>
+        <div className="checkbox-group">
+          {this.renderCheckBox("Highlights", "highlight")}
+          {this.renderCheckBox("Annotations", "annotation")}
+        </div>
       </nav>
     );
   }

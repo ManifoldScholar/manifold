@@ -13,6 +13,38 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
       <ul>
         <li>
           <button
+            className="button-notes"
+            data-id="toggle-notes"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-notepad"
+            />
+            <span
+              className="screen-reader-text"
+            >
+              Click to hide or show user annotations overlay
+            </span>
+          </button>
+        </li>
+        <li>
+          <button
+            className="button-visibility"
+            data-id="toggle-visibility"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-eye-outline"
+            />
+            <span
+              className="screen-reader-text"
+            >
+              Click to hide or show annotation/resources in the reader
+            </span>
+          </button>
+        </li>
+        <li>
+          <button
             className="button-appearance"
             data-id="toggle-appearance"
             onClick={[Function]}
@@ -24,22 +56,6 @@ exports[`Reader.FooterMenu Component renders correctly 1`] = `
               className="screen-reader-text"
             >
               Click to open reader appearance menu
-            </span>
-          </button>
-        </li>
-        <li>
-          <button
-            className="annotation-visibility-button"
-            data-id="toggle"
-            onClick={[Function]}
-          >
-            <i
-              className="manicon manicon-eye-fill"
-            />
-            <span
-              className="screen-reader-text"
-            >
-              Click to hide or show annotation/resources in the reader
             </span>
           </button>
         </li>
