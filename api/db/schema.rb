@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128173833) do
+ActiveRecord::Schema.define(version: 20180102232442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -484,6 +484,12 @@ ActiveRecord::Schema.define(version: 20171128173833) do
     t.string  "reference"
     t.uuid    "resource_id"
     t.index ["resource_id"], name: "index_thumbnail_fetch_attempts_on_resource_id", using: :btree
+  end
+
+  create_table "upgrade_results", primary_key: "version", id: :string, force: :cascade do |t|
+    t.text     "output",     default: "", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "user_claims", force: :cascade do |t|
