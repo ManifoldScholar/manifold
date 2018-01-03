@@ -9,6 +9,7 @@ require "paperclip/matchers"
 require "webmock/rspec"
 require "database_cleaner"
 require 'closure_tree/test/matcher'
+require "scanf"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
