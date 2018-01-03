@@ -9,6 +9,7 @@ class AnnotationPopupShare extends PureComponent {
   static displayName = "Annotation.Popup.Share";
 
   static propTypes = {
+    selectionText: PropTypes.string.isRequired,
     shareUrl: PropTypes.string,
     back: PropTypes.func.isRequired,
     secondary: PropTypes.string,
@@ -48,7 +49,7 @@ class AnnotationPopupShare extends PureComponent {
   }
 
   message() {
-    return `"${this.props.text}" from Manifold:`;
+    return `"${this.props.selectionText}" from Manifold:`;
   }
 
   canCite() {
