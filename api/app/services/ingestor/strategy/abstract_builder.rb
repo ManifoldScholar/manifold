@@ -38,6 +38,7 @@ module Ingestor
         update_ingestion_sources!(text)
         update_stylesheets!(text)
         update_text_sections!(text)
+        reset_slug!(text)
         attempt_save!(text)
         update_spine!(text)
         update_cover_image!(text)
@@ -151,6 +152,12 @@ module Ingestor
 
       def raise_missing_inspector(name)
         raise NotImplementedError, "Builder should implement '#{name}'"
+      end
+
+      # The slug is created before associated TextTitles are saved. Reset it once
+      # we know there are titles so it will regenerate.
+      def reset_slug!(text)
+        text.slug = nil
       end
 
       def update_start_section!(text)
