@@ -70,9 +70,15 @@ export class SettingsIntegrationsContainer extends PureComponent {
 
           <div className="form-header">
             <header className="section-heading-secondary">
-              <h3>Google Drive Import Configuration</h3>
+              <h3>Google Configuration</h3>
             </header>
           </div>
+          <Form.Upload
+            layout="square"
+            accepts="json"
+            label="Google Service Config File"
+            name="attributes[googleService]"
+          />
           <Form.TextInput
             label="Google Project Id"
             name="attributes[integrations][googleProjectId]"
@@ -80,10 +86,6 @@ export class SettingsIntegrationsContainer extends PureComponent {
           <Form.TextInput
             label="Google Private Key ID"
             name="attributes[integrations][googlePrivateKeyId]"
-          />
-          <Form.TextArea
-            label="Google Private Key"
-            name="attributes[secrets][googlePrivateKey]"
           />
           <Form.TextInput
             label="Google Client Email"
@@ -99,7 +101,7 @@ export class SettingsIntegrationsContainer extends PureComponent {
             </header>
           </div>
           <Form.TextInput
-            label="Google Client ID"
+            label="Google OAuth Client ID"
             name="attributes[integrations][googleOauthClientId]"
           />
           <Form.TextInput

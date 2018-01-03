@@ -15,7 +15,7 @@ module Factory
         "auth_uri": Rails.configuration.manifold.google.auth_uri,
         "token_uri": Rails.configuration.manifold.google.token_uri,
         "auth_provider_x509_cert_url": Rails.configuration.manifold.google.auth_provider_x509_cert_url,
-        "client_x509_cert_url": Rails.configuration.manifold.google.client_x509_cert_url
+        "client_x509_cert_url": Rails.configuration.manifold.google.client_x509_cert_url + settings.integrations.dig(:google_client_email)
       }
     end
 

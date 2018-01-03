@@ -8,7 +8,7 @@ common: &1
     :auth_uri: "https://accounts.google.com/o/oauth2/auth"
     :token_uri: "https://accounts.google.com/o/oauth2/token"
     :auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
-    :client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/manifold-service%40appspot.gserviceaccount.com"
+    :client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/"
   :html_validator:
     # The order of these transforms matters. They will be applied in the order listed here.
     # So, you'll want a transform that changes an attribute value to be applied before
