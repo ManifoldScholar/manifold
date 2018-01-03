@@ -19,10 +19,12 @@ class Settings < ApplicationRecord
 
         value = parse_value(section, setting, value)
 
-        unless value.nil?
-          hsh[section] ||= {}
-          hsh[section][setting] = value
-        end
+        next if value.nil?
+
+        next hsh.deep_merge! value if section == :config
+
+        hsh[section] ||= {}
+        hsh[section][setting] = value
       end
     end
     # rubocop:enable Metrics/AbcSize
@@ -34,8 +36,8 @@ class Settings < ApplicationRecord
     # @param [String] value
     # @return [String]
     def parse_value(section, setting, value)
-      if section == :secrets
-        parse_secret_value setting, value
+      if section == :config
+        read_from_file setting, value
       else
         value
       end
@@ -44,17 +46,15 @@ class Settings < ApplicationRecord
     # @param [String] setting
     # @param [String] value
     # @return [String]
-    def parse_secret_value(setting, value)
-      case setting
-      when :google_private_key
-        # The value is potentially stored in the filesystem.
-        key_path = Rails.application.root.join("..", value)
+    # The value is potentially stored in the filesystem.
+    def read_from_file(setting, value)
+      config_path = Rails.application.root.join("..", value)
+      return unless config_path.file?
 
-        # If it is not found, we do not want to store anything
-        # under this key.
-        key_path.file? ? key_path.read : nil
-      else
-        value
+      case setting
+      when :google_service
+        data = JSON.parse(File.read(config_path)).to_h
+        Settings::AdjustGoogleConfig.run! config: data
       end
     end
   end

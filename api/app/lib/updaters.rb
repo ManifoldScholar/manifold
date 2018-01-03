@@ -14,8 +14,8 @@ module Updaters
   end
 
   def initialize(params)
-    @attributes = params[:data][:attributes] || {}
-    @relationships = params[:data][:relationships]
+    @attributes = params.dig(:data, :attributes)&.to_h || {}
+    @relationships = params.dig(:data, :relationships)&.to_h || {}
   end
 
   def update_without_save(model)

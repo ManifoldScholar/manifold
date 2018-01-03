@@ -8,8 +8,21 @@ module Updaters
     end
 
     def adjusted_attributes
-      return {} unless attributes
-      attributes
+      attributes.deep_dup.with_indifferent_access.tap do |attrs|
+        attrs.deep_merge! adjust_google_config attrs if attrs[:google_service].present?
+      end
     end
+
+    def adjust_google_config(attrs)
+      return attrs unless attrs[:google_service]
+      service_config = attrs.delete(:google_service)
+      raw_data = service_config[:data]
+      return unless raw_data.present?
+
+      data = JSON.parse(URI::Data.new(raw_data).data)
+
+      ::Settings::AdjustGoogleConfig.run! config: data
+    end
+
   end
 end
