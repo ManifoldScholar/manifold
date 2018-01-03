@@ -217,7 +217,8 @@ module Validation
           :typekit_id
         ]
       },
-      :remove_press_logo, attachment(:press_logo)
+      :remove_press_logo, attachment(:press_logo),
+      google_service: [:data]
     ]
     param_config = structure_params(attributes: attributes)
     params.permit(param_config)
