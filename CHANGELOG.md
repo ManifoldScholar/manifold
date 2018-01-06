@@ -1,5 +1,39 @@
 # Change Log
 
+## [v0.3.4](https://github.com/ManifoldScholar/manifold/tree/v0.3.4) (1/6/2018)
+[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.3.3...v0.3.4)
+
+**Features**
+
+- Set Google service credentials from file
+
+## [v0.3.3](https://github.com/ManifoldScholar/manifold/tree/v0.3.3) (12/28/2017)
+[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.3.2...v0.3.3)
+
+**Bugs**
+
+- Improve custom logo layout
+- Align project figures to grid
+
+## [v0.3.2](https://github.com/ManifoldScholar/manifold/tree/v0.3.2) (12/06/2017)
+[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.3.1...v0.3.2)
+
+**Bugs**
+
+- Update redis-rails to address CVE-2017-1000248
+- Check revision before deploy
+- Restore source maps to production build
+
+## [v0.3.1](https://github.com/ManifoldScholar/manifold/tree/v0.3.1) (11/17/2017)
+[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.3.0...v0.3.1)
+
+**Bugs**
+
+- Update rubyzip dependency to address CVE-2017-5946 [\#664](https://github.com/ManifoldScholar/manifold/issues/664)
+- Improve Open Graph tags in multiple containers
+- Pass path rather than URL to router on SSR
+- Adjust production log level
+
 ## [v0.3.0](https://github.com/ManifoldScholar/manifold/tree/v0.3.0) (10/13/2017)
 [Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.2.0...v0.3.0)
 
