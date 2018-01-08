@@ -1,11 +1,84 @@
 # Change Log
 
+## [Unreleased (v0.4.0)](https://github.com/ManifoldScholar/manifold/tree/Unreleased (v0.4.0)) (01/07/2018)
+
+[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.3.0...Unreleased (v0.4.0))
+
+**Enhancements**
+
+- Update redis-rails to address CVE-2017-1000248 [\#720](https://github.com/ManifoldScholar/manifold/issues/720)
+- Admin users can set google service credentials from config file [\#719](https://github.com/ManifoldScholar/manifold/issues/719)
+- Update rubyzip dependency to address CVE-2017-5946 [\#664](https://github.com/ManifoldScholar/manifold/issues/664)
+- Widespread adjustments to record metadata fields [\#649](https://github.com/ManifoldScholar/manifold/issues/649)
+- Finalize the "rights" field rendering on projects and text. [\#647](https://github.com/ManifoldScholar/manifold/issues/647)
+- Implement interface for managing/assign project subjects [\#612](https://github.com/ManifoldScholar/manifold/issues/612)
+- Persist reader settings in user preferences [\#516](https://github.com/ManifoldScholar/manifold/issues/516)
+- Allow admins to choose a name for the sections within a text. [\#503](https://github.com/ManifoldScholar/manifold/issues/503)
+- Implement semantic URLs [\#275](https://github.com/ManifoldScholar/manifold/issues/275)
+
+**Bugs**
+
+- Manifold sends a sign-up email even if registration fails [\#700](https://github.com/ManifoldScholar/manifold/issues/700)
+- Reader code block font-size is massive [\#692](https://github.com/ManifoldScholar/manifold/issues/692)
+- Resource card grid layout should be consistent across modern browsers [\#690](https://github.com/ManifoldScholar/manifold/issues/690)
+- Resource link grid layout \(on the project detail page\) should be consistent across modern browsers [\#689](https://github.com/ManifoldScholar/manifold/issues/689)
+- Welcome email is sent before account is created [\#684](https://github.com/ManifoldScholar/manifold/issues/684)
+- User validations are broken [\#683](https://github.com/ManifoldScholar/manifold/issues/683)
+- Adding a profile picture with an upper case attachment fails silently [\#682](https://github.com/ManifoldScholar/manifold/issues/682)
+- In IE11 selecting text should pop up annotation menu [\#678](https://github.com/ManifoldScholar/manifold/issues/678)
+- Collections can be saved blank [\#660](https://github.com/ManifoldScholar/manifold/issues/660)
+- Correct twitter share image; use project images when texts are shared [\#658](https://github.com/ManifoldScholar/manifold/issues/658)
+- Resource detail view scrolls to bottom after load [\#656](https://github.com/ManifoldScholar/manifold/issues/656)
+- /foo/bar shows home page instead of 404 [\#654](https://github.com/ManifoldScholar/manifold/issues/654)
+- Change "metadata" label on project detail blade to "about" [\#648](https://github.com/ManifoldScholar/manifold/issues/648)
+- Correct the backend collection header icon [\#642](https://github.com/ManifoldScholar/manifold/issues/642)
+- Improve margin between label and input on all backend form fields [\#641](https://github.com/ManifoldScholar/manifold/issues/641)
+- Use settings.installationName in the new project event text [\#640](https://github.com/ManifoldScholar/manifold/issues/640)
+- Destroying a resource should destroy the associated event. [\#638](https://github.com/ManifoldScholar/manifold/issues/638)
+- Edge: Hover state artifact in annotation popup [\#637](https://github.com/ManifoldScholar/manifold/issues/637)
+- Scrolling should not occur on all route changes [\#617](https://github.com/ManifoldScholar/manifold/issues/617)
+- Weird link hover state in reader about [\#596](https://github.com/ManifoldScholar/manifold/issues/596)
+- Rendering and display inconsistencies in resource icons [\#557](https://github.com/ManifoldScholar/manifold/issues/557)
+- Resource list item thumbnails aren't showing in Firefox & IE Edge [\#483](https://github.com/ManifoldScholar/manifold/issues/483)
+
+Other Revisions
+
+- Refactor resource overlay classes to be generic [\#283](https://github.com/ManifoldScholar/manifold/issues/283)
+
+**Accepted Pull Requests**
+
+- \[F\] Set Google service credentials from file [\#717](https://github.com/ManifoldScholar/manifold/pull/717) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[C\] Adjust base font-size used in stylesheet validator [\#696](https://github.com/ManifoldScholar/manifold/pull/696) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[C\] Fix typos in manifold task output [\#695](https://github.com/ManifoldScholar/manifold/pull/695) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[B\] Address inconsistent icon sizes [\#691](https://github.com/ManifoldScholar/manifold/pull/691) ([blnkt](https://github.com/blnkt))
+- \[B\] Don't send welcome email if user validation fails [\#687](https://github.com/ManifoldScholar/manifold/pull/687) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[B\] Fix attachment extension validation [\#686](https://github.com/ManifoldScholar/manifold/pull/686) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[B\] User validation fixes [\#685](https://github.com/ManifoldScholar/manifold/pull/685) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[C\] Update manifold CLI rake task references [\#681](https://github.com/ManifoldScholar/manifold/pull/681) ([blnkt](https://github.com/blnkt))
+- \[C\] Switch manifold tld in client allowedHosts [\#680](https://github.com/ManifoldScholar/manifold/pull/680) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[B\] Fix annotation popup bugs in ie [\#679](https://github.com/ManifoldScholar/manifold/pull/679) ([blnkt](https://github.com/blnkt))
+- \[F\] Improve project, text, & resource metadata [\#673](https://github.com/ManifoldScholar/manifold/pull/673) ([zdavis](https://github.com/zdavis))
+- \[B\] Backend collection icon fixes [\#670](https://github.com/ManifoldScholar/manifold/pull/670) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[F\] Allow text section type to be changed [\#669](https://github.com/ManifoldScholar/manifold/pull/669) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[B\] Prevent scroll to top on reader route change [\#668](https://github.com/ManifoldScholar/manifold/pull/668) ([zdavis](https://github.com/zdavis))
+- \[C\] Restructure backend containers [\#667](https://github.com/ManifoldScholar/manifold/pull/667) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[C\] Update rubyzip to address CVE-2017-5946 [\#666](https://github.com/ManifoldScholar/manifold/pull/666) ([zdavis](https://github.com/zdavis))
+- \[B\] Improve Open Graph tags in multiple containers [\#663](https://github.com/ManifoldScholar/manifold/pull/663) ([zdavis](https://github.com/zdavis))
+- \[B\] Add title validation to collections [\#661](https://github.com/ManifoldScholar/manifold/pull/661) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[B\] Rename project detail metadata section label [\#659](https://github.com/ManifoldScholar/manifold/pull/659) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[F\] Make reader UI settings persistent for user [\#657](https://github.com/ManifoldScholar/manifold/pull/657) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[F\] Fully implement semantic URLs on frontend [\#655](https://github.com/ManifoldScholar/manifold/pull/655) ([zdavis](https://github.com/zdavis))
+- \[B\] Resources should destroy associated added event [\#652](https://github.com/ManifoldScholar/manifold/pull/652) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[B\] Use installation name in project created event [\#651](https://github.com/ManifoldScholar/manifold/pull/651) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[F\] Implement interface to manage/assign subjects [\#650](https://github.com/ManifoldScholar/manifold/pull/650) ([SMaxOwok](https://github.com/SMaxOwok))
+- \[B\] Highlight "learn more..." in reader menu [\#628](https://github.com/ManifoldScholar/manifold/pull/628) ([naomiyaki](https://github.com/naomiyaki))
+
 ## [v0.3.4](https://github.com/ManifoldScholar/manifold/tree/v0.3.4) (1/6/2018)
 [Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.3.3...v0.3.4)
 
-**Features**
+**Enhancements**
 
-- Set Google service credentials from file
+- Set Google service credentials from file [\#719](https://github.com/ManifoldScholar/manifold/issues/719)
 
 ## [v0.3.3](https://github.com/ManifoldScholar/manifold/tree/v0.3.3) (12/28/2017)
 [Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.3.2...v0.3.3)
@@ -20,7 +93,7 @@
 
 **Bugs**
 
-- Update redis-rails to address CVE-2017-1000248
+- Update redis-rails to address CVE-2017-1000248 [\#720](https://github.com/ManifoldScholar/manifold/issues/720)
 - Check revision before deploy
 - Restore source maps to production build
 
