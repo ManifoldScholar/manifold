@@ -1,3 +1,15 @@
 cd ~/src/manifold
-github_changelog_generator --enhancement-labels=feature --exclude-labels=wontfix --include-labels=feature,chore,bug --enhancement-label="**Features**" --bugs-label="**Bugs**" --date-format="%m/%d/%Y" --pr-label="**Accepted Pull Requests**" --issues-label="Other Revisions"
-
+github_changelog_generator \
+--user="ManifoldScholar" \
+--project="manifold" \
+--future-release="Unreleased (v0.4.0)" \
+--since-tag="v0.3.0" \
+--enhancement-labels="feature,enhancements" \
+--exclude-labels="wontfix,ignore" \
+--enhancement-label="**Enhancements**" \
+--bugs-label="**Bugs**" \
+--date-format="%m/%d/%Y" \
+--pr-label="**Accepted Pull Requests**" \
+--issues-label="Other Revisions" \
+--exclude-tags-regex="v\d.\d.[^0]$" \
+#--unreleased-only
