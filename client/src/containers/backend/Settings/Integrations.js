@@ -79,6 +79,10 @@ export class SettingsIntegrationsContainer extends PureComponent {
             label="Google Service Config File"
             name="attributes[googleService]"
           />
+          <Form.TextArea
+            label="Google Private Key"
+            name="attributes[secrets][googlePrivateKey]"
+          />
           <Form.TextInput
             label="Google Project Id"
             name="attributes[integrations][googleProjectId]"
