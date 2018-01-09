@@ -138,6 +138,20 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                           </div>
                         </Form.Upload>
                       </Form.Setter('Form.Upload)>
+                      <Form.Setter('Form.TextArea) label=\\"Google Private Key\\" name=\\"attributes[secrets][googlePrivateKey]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
+                        <Form.TextArea label=\\"Google Private Key\\" name=\\"attributes[secrets][googlePrivateKey]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} height={100}>
+                          <div className=\\"form-input\\">
+                            <Errorable className=\\"form-input\\" name=\\"attributes[secrets][googlePrivateKey]\\" errors={{...}} label=\\"Google Private Key\\" containerStyle={{...}}>
+                              <div style={{...}} className=\\"form-input\\">
+                                <label className=\\"\\">
+                                  Google Private Key
+                                </label>
+                                <textarea style={{...}} placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
+                              </div>
+                            </Errorable>
+                          </div>
+                        </Form.TextArea>
+                      </Form.Setter('Form.TextArea)>
                       <Form.Setter('Form.TextInput) label=\\"Google Project Id\\" name=\\"attributes[integrations][googleProjectId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
                         <Form.TextInput label=\\"Google Project Id\\" name=\\"attributes[integrations][googleProjectId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
                           <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googleProjectId]\\" errors={{...}} label=\\"Google Project Id\\" containerStyle={{...}}>
