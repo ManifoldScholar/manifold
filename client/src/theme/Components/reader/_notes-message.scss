@@ -1,0 +1,25 @@
+.notes-message {
+  padding: 18px 20px;
+  color: $neutral80;
+  @include respond($break65) {
+    max-width: 600px;
+    padding: 32px;
+  }
+
+  .heading-primary {
+    margin-bottom: .8em;
+  }
+
+  p {
+    @include templateCopy;
+    font-size: 19px;
+  }
+
+  .overlay-full & {
+    max-width: none;
+    padding: 0 60px;
+    text-align: center;
+  }
+
+}
+

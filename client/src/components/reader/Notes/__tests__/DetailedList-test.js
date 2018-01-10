@@ -1,7 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import DetailedList from "../DetailedList";
+import EmptyMessage from "../EmptyMessage";
 import build from "test/fixtures/build";
+import { shallow } from "enzyme";
 
 describe("Reader.Notes.DetailedList Component", () => {
   const sortedAnnotations = [
@@ -29,5 +31,12 @@ describe("Reader.Notes.DetailedList Component", () => {
   it("doesn't render to null", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
+  });
+
+  it("renders an empty message when there are no annotations", () => {
+    const wrapper = shallow(
+      <DetailedList sortedAnnotations={[]} handleVisitAnnotation={clickMock} />
+    );
+    expect(wrapper.find(EmptyMessage).length).toBe(1);
   });
 });
