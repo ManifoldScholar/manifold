@@ -23,18 +23,40 @@ module Importer
 
     RESOURCE_SIMPLE_ATTRIBUTES = {
       "Title" => :title,
-      "Copyright Status" => :copyright_status,
-      "Copyright Holder" => :copyright_holder,
-      "Credit Line" => :credit,
-      "Keywords" => :keywords,
       "Caption" => :caption,
       "Description" => :description,
-      "Alt-Text" => :alt_text,
       "URL" => :external_url,
       "Host Name" => :external_type,
       "File ID" => :external_id,
       "Type" => :kind,
       "Sub Type" => :sub_kind
+    }.freeze
+    RESOURCE_METADATA_ATTRIBUTES = {
+      "Alt-Text" => :alt_text,
+      "Keywords" => :keywords,
+      "Copyright Status" => :copyright_status,
+      "Copyright Holder" => :copyright_holder,
+      "Credit Line" => :credit,
+      "Series Title" => :series_title,
+      "Container Title" => :container_title,
+      "ISBN" => :isbn,
+      "ISSN" => :issn,
+      "DOI" => :doi,
+      "Original Publisher" => :original_publisher,
+      "Original Publisher Place" => :original_publisher_place,
+      "Original Title" => :original_title,
+      "Publisher" => :publisher,
+      "Publisher Place" => :publisher_place,
+      "Version" => :version,
+      "Series Number" => :series_number,
+      "Edition" => :edition,
+      "Issue" => :issue,
+      "Volume" => :volume,
+      "Rights" => :rights,
+      "Rights Territory" => :rights_territory,
+      "Restrictions" => :restrictions,
+      "Rights Holder" => :rights_holder,
+      "Creator" => :creator
     }.freeze
     RESOURCE_BOOLEAN_ATTRIBUTES = {
       "Allow High-Res Download" => :allow_high_res
@@ -96,6 +118,7 @@ module Importer
       resource = find_or_initialize_resource(fingerprint(row))
       resource.creator = @creator
       update_simple_attributes(resource, row, RESOURCE_SIMPLE_ATTRIBUTES)
+      update_metadata_attributes(resource, row, RESOURCE_METADATA_ATTRIBUTES)
       update_boolean_attributes(resource, row, RESOURCE_BOOLEAN_ATTRIBUTES)
       update_attachment_attributes(resource, row, RESOURCE_ATTACHMENT_ATTRIBUTES)
       create_tag_list(resource, row)
@@ -146,8 +169,13 @@ module Importer
     end
 
     def update_simple_attributes(model, row, simple_attributes)
-      attr = simple_attributes_from_row(row, simple_attributes)
+      attr = attributes_from_row(row, simple_attributes)
       model.assign_attributes(attr)
+    end
+
+    def update_metadata_attributes(model, row, simple_attributes)
+      attr = attributes_from_row(row, simple_attributes)
+      model.assign_attributes(metadata: attr)
     end
 
     def update_attachment_attributes(model, row, attachment_attributes)
@@ -217,9 +245,14 @@ module Importer
       true
     end
 
-    def simple_attributes_from_row(row, attr_list)
+    def attributes_from_row(row, attr_list)
       attr_list.each_with_object({}) do |pair, out|
-        out[pair[1]] = row[pair[0]]
+        begin
+          out[pair[1]] = row[pair[0]]
+        rescue GoogleDrive::Error => e
+          @logger.log_google_drive_error e
+          next
+        end
       end
     end
 
