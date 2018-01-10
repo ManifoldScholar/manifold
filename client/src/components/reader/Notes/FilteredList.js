@@ -25,12 +25,14 @@ export default class FilteredList extends PureComponent {
         <h2 className="drawer-title" onClick={this.props.handleSeeAllClick}>
           Your Notes
         </h2>
-        <button
-          onClick={this.props.handleSeeAllClick}
-          className="button-primary"
-        >
-          See all
-        </button>
+        {this.props.sortedAnnotations.length > 0
+          ? <button
+              onClick={this.props.handleSeeAllClick}
+              className="button-primary"
+            >
+              See all
+            </button>
+          : null}
       </div>
     );
   }
@@ -44,19 +46,21 @@ export default class FilteredList extends PureComponent {
           filter={this.props.filter}
         />
         <nav>
-          <ul>
-            {this.props.sortedAnnotations.map(group => {
-              return (
-                <Notes.Partial.Group
-                  key={group.sectionId}
-                  annotations={group.annotations}
-                  sectionName={group.name}
-                  readerSection={this.props.section}
-                  visitHandler={this.props.handleVisitAnnotation}
-                />
-              );
-            })}
-          </ul>
+          {this.props.sortedAnnotations.length > 0
+            ? <ul>
+                {this.props.sortedAnnotations.map(group => {
+                  return (
+                    <Notes.Partial.Group
+                      key={group.sectionId}
+                      annotations={group.annotations}
+                      sectionName={group.name}
+                      readerSection={this.props.section}
+                      visitHandler={this.props.handleVisitAnnotation}
+                    />
+                  );
+                })}
+              </ul>
+            : <Notes.EmptyMessage />}
         </nav>
       </div>
     );

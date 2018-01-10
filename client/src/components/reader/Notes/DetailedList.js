@@ -17,6 +17,8 @@ export default class DetailedList extends PureComponent {
   };
 
   render() {
+    if (this.props.sortedAnnotations.length === 0)
+      return <Notes.EmptyMessage />;
     return (
       <ul className="notes-list">
         {this.props.sortedAnnotations.map(group => {

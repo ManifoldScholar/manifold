@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import FilteredList from "../FilteredList";
 import build from "test/fixtures/build";
+import { shallow } from "enzyme/build/index";
+import EmptyMessage from "../EmptyMessage";
 
 describe("Reader.Notes.FilteredList Component", () => {
   const sortedAnnotations = [
@@ -38,5 +40,18 @@ describe("Reader.Notes.FilteredList Component", () => {
   it("doesn't render to null", () => {
     let tree = component.toJSON();
     expect(tree).not.toBe(null);
+  });
+
+  it("renders an empty message when there are no annotations", () => {
+    const wrapper = shallow(
+      <FilteredList
+        sortedAnnotations={[]}
+        handleSeeAllClick={clickMock}
+        handleFilterChange={clickMock}
+        section={section}
+        filter={filter}
+      />
+    );
+    expect(wrapper.find(EmptyMessage).length).toBe(1);
   });
 });
