@@ -42,7 +42,7 @@ class Seed
       role: User::ROLE_CLI
     )
     if cli_user.new_record?
-      logger.info("Potentially updating settings from the environment".green)
+      logger.info("Creating CLI user: #{cli_user.email}".green)
       pw = SecureRandom.hex
       cli_user.password = pw
       cli_user.password_confirmation = pw
