@@ -10,9 +10,7 @@ namespace :manifold do
   namespace :search do
     desc "Reindex searchable models."
     task reindex: :environment do
-      Manifold::SearchTask.types.each do |class_name|
-        Rake::Task["manifold:search:reindex:#{class_name.downcase}"].invoke
-      end
+      Rake::Task["searchkick:reindex:all"].invoke
     end
 
     namespace :reindex do
