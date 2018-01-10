@@ -25,11 +25,16 @@
 
   .overlay-title {
     @include templateHead;
+    text-align: left;
     padding: 0.85em 0;
     margin: 0;
     font-size: 22px;
     font-weight: $medium;
     color: $neutral75;
+
+    @include respond($break65) {
+      text-align: center;
+    }
   }
 
   .overlay-close {
@@ -37,10 +42,11 @@
     position: absolute;
     top: 50%;
     right: 17px;
-    margin-top: -16px;
+    margin-top: -8px;
     color: $neutral75;
 
     @include respond($break65) {
+      margin-top: -16px;
       font-size: 17px;
     }
   }

@@ -14,7 +14,11 @@
   }
 
   .overlay-full-header + .container {
-    padding-top: 195px;
+    padding-top: 97px;
+
+    @include respond($break70) {
+      padding-top: 195px;
+    }
   }
 
   .overlay-full-enter & {

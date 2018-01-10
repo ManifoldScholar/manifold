@@ -47,8 +47,12 @@
     }
 
     .drawer-bar {
-      padding: 6px 32px;
+      padding: 6px 20px;
       border-bottom: 2px solid $neutral40;
+
+      @include respond($break65) {
+        padding: 6px 32px;
+      }
 
       button {
         font-size: 14px;
@@ -61,13 +65,18 @@
       .item {
         display: flex;
         align-items: center;
-        padding: 18px 32px;
+        padding: 18px 20px;
         max-height: 52px;
         justify-content: flex-start;
         color: $neutral90;
         border-bottom: 2px solid $neutral40;
         transition: color $duration $timing,
         background-color $duration $timing;
+
+        @include respond($break65) {
+          padding: 18px 32px;
+        }
+
 
         &.open {
           i {
@@ -107,12 +116,16 @@
         overflow: hidden;
 
         .item {
-          padding: 18px 32px 18px 60px;
+          padding: 18px 20px 18px 20px;
           justify-content: flex-start;
           color: $neutral90;
           border-bottom: none;
           transition: color $duration $timing,
           background-color $duration $timing;
+
+          @include respond($break65) {
+            padding: 18px 32px 18px 60px;
+          }
 
           i {
             font-size: 20px;
@@ -148,9 +161,13 @@
     }
 
     .filters {
-      padding: 21px 32px 18px;
+      padding: 15px 20px;
       background-color: $neutral20;
       border-bottom: 2px solid $neutral40;
+
+      @include respond($break65) {
+        padding: 21px 32px 18px;
+      }
 
       @include respond($break90) {
         display: flex;
