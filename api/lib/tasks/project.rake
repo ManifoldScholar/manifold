@@ -24,26 +24,26 @@ namespace :manifold do
     desc "Fetch the project's tweets"
     task :fetch_tweets, [:project_id] => :environment do |_t, args|
       ::FetchProjectTweets.perform_now(args[:project_id])
-      Manifold::Rake.logger.info "Tweets fetched for #{project_id}"
+      Manifold::Rake.logger.info "Tweets fetched for #{args[:project_id]}"
     end
 
     desc "Ingest a project text"
     task :ingest, [:project_id, :path] => :environment do |_t, args|
-      Manifold::Rake.logger.info "Ingesting #{path}"
-      Manifold::IngestTask.ingest(args.path, "debug")
+      Manifold::Rake.logger.info "Ingesting #{args[:path]}"
+      Manifold::IngestTask.ingest(args[:path], "debug")
     end
 
     desc "Reingest a project text"
     task :reingest, [:project_id, :text_id, :path] => :environment do |_t, args|
-      Manifold::Rake.logger.info "Reingesting #{path} for #{text_id}"
-      Manifold::IngestTask.ingest(args.path, "debug", text_id)
+      Manifold::Rake.logger.info "Reingesting #{args[:path]} for #{arg[:text_id]}"
+      Manifold::IngestTask.ingest(args[:path], "debug", args[:text_id])
     end
 
     desc "Import a project form a JSON definition"
     task :import, [:path, :include_texts] => :environment do |_t, args|
       cli_user = Manifold::Rake.cli_user
       include_texts = args[:include_texts] == "no" ? false : true
-      Manifold::Rake.logger.info "Importing project from #{path}"
+      Manifold::Rake.logger.info "Importing project from #{args[:path]}"
       Importer::Project.new(
         args[:path],
         cli_user,
@@ -57,7 +57,7 @@ namespace :manifold do
         task :resources,
              [:project_id, :drive_sheet, :drive_dir] => :environment do |_t, args|
           cli_user = Manifold::Rake.cli_user
-          Manifold::Rake.logger.info "Importing drive resource for #{project_id}"
+          Manifold::Rake.logger.info "Importing drive resource for #{args[:project_id]}"
           importer = Importer::DriveResources.new(args[:project_id], args[:drive_sheet],
                                                   args[:drive_dir], cli_user,
                                                   Manifold::Rake.logger)
