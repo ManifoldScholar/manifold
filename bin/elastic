@@ -1,0 +1,38 @@
+#!/bin/bash
+
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+bold=`tput bold`
+ul=`tput smul`
+
+if [[ ! -f services/elasticsearch-5.6.5/bin/elasticsearch ]] ; then
+    echo "${red}${bold}#################################################################"
+    echo "${red}${bold}Oh dang. Elasticsearch hasn't been installed for this development${reset}"
+    echo "${red}${bold}environment.${reset}"
+    echo "${red}${bold}#################################################################"
+    echo ""
+    echo "${red}${ul}Solution #1:${reset}"
+    echo "${red}  Run Manifold without it using the --no-elasticsearch flag.${reset}"
+    echo ""
+    echo "${red}${ul}Solution #2:${reset}"
+    echo "${red}  Setup a manifold-specific instance of Elasticsearch by${reset}"
+    echo "${red}  following the steps below.${reset}"
+    echo ""
+    echo "${red}  1. Install it into ./services:"
+    echo "     m install elasticsearch"
+    echo ""
+    echo "${red}  2. Update .env to point at it:"
+    echo "     ELASTICSEARCH_URL=http://127.0.0.1:29200"
+    echo ""
+    echo "${red}  3. Start Manifold:"
+    echo "     m start"
+    echo ""
+    echo "${red}  4. Once Elasticsearch is running, reindex API models:"
+    echo "     cd api && rails manifold:search:reindex${reset}"
+    echo ""
+    exit
+fi
+
+cd services/elasticsearch-5.6.5
+./bin/elasticsearch -E http.port=29200

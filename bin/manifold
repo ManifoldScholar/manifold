@@ -44,61 +44,74 @@ Clamp do
 
   subcommand ["start", "s"], "Start development services" do
 
-    option "--noapi", :flag, "do not start API"
-    option "--noworker", :flag, "do not start background worker"
-    option "--nocable", :flag, "do not start the websocket (action cable) server"
-    option "--noclockwork", :flag, "do not start clockwork"
-    option "--noclient", :flag, "do not start client"
-    option "--nohmr", :flag, "do not enable client HMR"
+    option "--no-api", :flag, "do not start API"
+    option "--no-worker", :flag, "do not start background worker"
+    option "--no-cable", :flag, "do not start the websocket (action cable) server"
+    option "--no-clockwork", :flag, "do not start clockwork"
+    option "--no-client", :flag, "do not start client"
+    option "--no-hmr", :flag, "do not enable client HMR"
+    option "--no-elasticsearch", :flag, "do not enable Elasticsearch"
 
     self.default_subcommand = "all"
 
     subcommand ["all"], "Start all services" do
 
       def execute
-        env = nohmr? ? "DISABLE_HMR=1 " : ""
-        api_num = noapi? ? 0 : 1
-        worker_num = noworker? ? 0 : 1
-        clockwork_num = noclockwork? ? 0 : 1
-        client_num = noclient? ? 0 : 1
-        cable_num = nocable? ? 0 : 1
-        exec "#{env}foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num},cable=#{cable_num}"
+        env = no_hmr? ? "DISABLE_HMR=1 " : ""
+        api_num = no_api? ? 0 : 1
+        worker_num = no_worker? ? 0 : 1
+        clockwork_num = no_clockwork? ? 0 : 1
+        client_num = no_client? ? 0 : 1
+        cable_num = no_cable? ? 0 : 1
+        elastic = no_elasticsearch? ? 0 : 1
+        exec "#{env}foreman start -m api=#{api_num},worker=#{worker_num},clockwork=#{clockwork_num},client=#{client_num},cable=#{cable_num},elastic=#{elastic}"
       end
 
     end
 
+    subcommand ["backend"], "Start all backend services" do
+      def execute
+        exec "foreman start -m elastic=1,cable=1,api=1,worker=1,clockwork=1,client=0"
+      end
+    end
+
     subcommand ["api"], "Start API service" do
       def execute
-        exec "foreman start -m cable=0,api=1,worker=0,clockwork=0,client=0"
+        exec "foreman start -m cable=0,api=1,worker=0,clockwork=0,client=0,elastic=0"
       end
     end
 
     subcommand ["cable"], "Start Action Cable service" do
       def execute
-        exec "foreman start -m cable=1,api=0,worker=0,clockwork=0,client=0"
+        exec "foreman start -m cable=1,api=0,worker=0,clockwork=0,client=0,elastic=0"
       end
     end
 
 
     subcommand ["worker"], "Start Worker service" do
       def execute
-        exec "foreman start -m cable=0,api=0,worker=1,clockwork=0,client=0"
+        exec "foreman start -m cable=0,api=0,worker=1,clockwork=0,client=0,elastic=0"
       end
     end
 
     subcommand ["clockwork"], "Start Clockwork service" do
       def execute
-        exec "foreman start -m cable=0,api=0,worker=0,clockwork=1,client=0"
+        exec "foreman start -m cable=0,api=0,worker=0,clockwork=1,client=0,elastic=0"
       end
     end
 
-    subcommand ["client"], "Start Client service" do
+    subcommand ["elasticsearch"], "Start Elasticsearch service" do
+      def execute
+        exec "foreman start -m cable=0,api=0,worker=0,clockwork=0,client=0,elastic=1"
+      end
+    end
+    subcommand ["client", "frontend"], "Start Client service" do
 
       option "--nohmr", :flag, "do not enable client HMR"
 
       def execute
         env = nohmr? ? "DISABLE_HMR=1 " : ""
-        exec "#{env}foreman start -m cable=0,api=0,worker=0,clockwork=0,client=1"
+        exec "#{env}foreman start -m cable=0,api=0,worker=0,clockwork=0,client=1,elastic=0"
       end
     end
 
@@ -215,13 +228,20 @@ Clamp do
   subcommand ["development"], "Developer tasks" do
 
     subcommand ["load"], "Reset database and load sample data from ./import dir" do
-
       def execute
         system "cd api && rails manifold:dev:seed"
       end
-
     end
 
+  end
+
+  subcommand ["install"], "Install development dependencies" do
+
+    subcommand ["elasticsearch"], "Install ElasticSearch for development" do
+      def execute
+        system "./bin/install_es"
+      end
+    end
   end
 
 
