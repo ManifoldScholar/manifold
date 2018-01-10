@@ -37,7 +37,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
         id="update-nickname"
         name="nickname"
         onChange={[Function]}
-        placeholder="nickname"
+        placeholder="Nickname"
         type="text"
         value=""
       />
@@ -189,7 +189,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is new
         id="update-nickname"
         name="nickname"
         onChange={[Function]}
-        placeholder="nickname"
+        placeholder="Nickname"
         type="text"
         value=""
       />

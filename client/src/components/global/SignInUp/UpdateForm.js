@@ -191,7 +191,7 @@ class UpdateFormContainer extends Component {
               name="nickname"
               id="update-nickname"
               onChange={this.handleInputChange}
-              placeholder="nickname"
+              placeholder="Nickname"
             />
           </Form.Errorable>
         </div>
