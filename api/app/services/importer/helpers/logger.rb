@@ -81,6 +81,10 @@ module Importer
         nil
       end
 
+      def log_google_drive_error(error)
+        @logger.warn "        GoogleDrive::Error #{error}"
+      end
+
     end
   end
 end

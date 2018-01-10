@@ -30,7 +30,7 @@ class Resource < ApplicationRecord
     series_title container_title isbn issn doi original_publisher
     original_publisher_place original_title publisher publisher_place version
     series_number edition issue volume rights rights_territory restrictions rights_holder
-    creator alt_text credit
+    creator alt_text credit copyright_status keywords
   )
 
   friendly_id :title, use: :slugged
