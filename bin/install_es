@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'logger'
+
+url = "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.5.tar.gz"
+archive_filename = "elasticsearch-5.6.5.tar.gz"
+es_dir_name = "elasticsearch-5.6.5"
+
+logger = Logger.new(STDOUT)
+root = File.expand_path(File.join(__dir__, ".."))
+services_dir = File.join(root, "services")
+es_dir = File.join(services_dir, es_dir_name)
+
+if File.directory? es_dir
+    logger.warn "ElasticSearch directory already exists at #{es_dir}"
+    exit(0)
+else
+    logger.info "ElasticSearch directory does not exist"
+end
+
+unless File.directory? services_dir
+    logger.info "Creating services dir at #{services_dir}"
+    Dir.mkdir(services_dir)
+end
+
+Dir.chdir services_dir
+system "curl -L -O #{url}"
+system "tar -xvf #{archive_filename}"

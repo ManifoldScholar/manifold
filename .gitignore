@@ -12,27 +12,7 @@
 ### IntelliJ ###
 *.iml
 .idea
-
-
-# User-specific stuff:
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/codeStyleSettings.xml
-.idea/dictionaries
-.idea/dataSources
-.idea/jsLinters
-
-# Sensitive or high-churn files:
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/dataSources.local.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/uiDesigner.xml
-.idea/inspectionProfiles
-.idea/libraries
-.idea/jsLibraryMappings.xml
-.idea/misc.xml
+.idea/*
 
 # File-based project format:
 *.ipr
@@ -59,3 +39,6 @@ doc
 
 ### Environments ###
 /.env
+
+## Development services ###
+/services/*
