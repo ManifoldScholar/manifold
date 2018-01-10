@@ -37,7 +37,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
         id="update-nickname"
         name="nickname"
         onChange={[Function]}
-        placeholder="nickname"
+        placeholder="Nickname"
         type="text"
         value=""
       />

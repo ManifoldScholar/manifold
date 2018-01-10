@@ -18,7 +18,7 @@ exports[`Global.SignInUp.Login component renders correctly 1`] = `
         <input
           id="login-email"
           onChange={[Function]}
-          placeholder="Username"
+          placeholder="Email"
           type="text"
           value=""
         />

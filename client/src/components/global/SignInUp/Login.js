@@ -77,7 +77,7 @@ export default class Login extends Component {
                 value={this.state.email}
                 onChange={this.updateEmail}
                 id="login-email"
-                placeholder="Username"
+                placeholder="Email"
               />
             </div>
           </div>
