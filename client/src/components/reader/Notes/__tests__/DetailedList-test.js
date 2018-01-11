@@ -20,6 +20,7 @@ describe("Reader.Notes.DetailedList Component", () => {
     <DetailedList
       sortedAnnotations={sortedAnnotations}
       handleVisitAnnotation={clickMock}
+      loaded
     />
   );
 
@@ -35,7 +36,11 @@ describe("Reader.Notes.DetailedList Component", () => {
 
   it("renders an empty message when there are no annotations", () => {
     const wrapper = shallow(
-      <DetailedList sortedAnnotations={[]} handleVisitAnnotation={clickMock} />
+      <DetailedList 
+        sortedAnnotations={[]} 
+        handleVisitAnnotation={clickMock} 
+        loaded
+      />
     );
     expect(wrapper.find(EmptyMessage).length).toBe(1);
   });

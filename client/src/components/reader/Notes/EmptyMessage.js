@@ -37,6 +37,8 @@ export default class EmptyMessage extends PureComponent {
   }
 
   render() {
-    return this.props.annotated ? this.renderNoResults() : this.renderNotYetAnnotated();
+    return this.props.annotated
+      ? this.renderNoResults()
+      : this.renderNotYetAnnotated();
   }
 }

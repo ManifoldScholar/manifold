@@ -29,6 +29,7 @@ describe("Reader.Notes.FilteredList Component", () => {
       handleFilterChange={clickMock}
       section={section}
       filter={filter}
+      loaded
     />
   );
 
@@ -50,6 +51,7 @@ describe("Reader.Notes.FilteredList Component", () => {
         handleFilterChange={clickMock}
         section={section}
         filter={filter}
+	    loaded
       />
     );
     expect(wrapper.find(EmptyMessage).length).toBe(1);

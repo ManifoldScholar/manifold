@@ -23,6 +23,7 @@ describe("Reader ReaderNotes Container", () => {
     myAnnotations,
     filterable: false,
     dispatch: store.dispatch,
+    loaded: true,
     match: {
       params: {
         sectionId: section.id
