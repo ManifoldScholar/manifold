@@ -7,10 +7,7 @@ module Api
 
           resourceful! Annotation do
             scope = Annotation.created_by(current_user)
-            Annotation.filter(
-              with_pagination!(annotation_filter_params),
-              scope: scope
-            )
+            Annotation.filter(annotation_filter_params, scope: scope)
           end
 
           def index
