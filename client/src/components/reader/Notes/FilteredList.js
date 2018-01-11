@@ -12,7 +12,9 @@ export default class FilteredList extends PureComponent {
     handleFilterChange: PropTypes.func,
     handleVisitAnnotation: PropTypes.func,
     currentSectionId: PropTypes.string,
-    filter: PropTypes.object
+    filter: PropTypes.object,
+    annotated: PropTypes.bool,
+    loaded: PropTypes.bool
   };
 
   static defaultProps = {
@@ -37,6 +39,27 @@ export default class FilteredList extends PureComponent {
     );
   }
 
+  renderList() {
+    if (this.props.sortedAnnotations.length === 0) {
+      return <Notes.EmptyMessage annotated={this.props.annotated} />;
+    }
+    return (
+      <ul>
+        {this.props.sortedAnnotations.map(group => {
+          return (
+            <Notes.Partial.Group
+              key={group.sectionId}
+              annotations={group.annotations}
+              sectionName={group.name}
+              readerSection={this.props.section}
+              visitHandler={this.props.handleVisitAnnotation}
+            />
+          );
+        })}
+      </ul>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -46,21 +69,9 @@ export default class FilteredList extends PureComponent {
           filter={this.props.filter}
         />
         <nav>
-          {this.props.sortedAnnotations.length > 0
-            ? <ul>
-                {this.props.sortedAnnotations.map(group => {
-                  return (
-                    <Notes.Partial.Group
-                      key={group.sectionId}
-                      annotations={group.annotations}
-                      sectionName={group.name}
-                      readerSection={this.props.section}
-                      visitHandler={this.props.handleVisitAnnotation}
-                    />
-                  );
-                })}
-              </ul>
-            : <Notes.EmptyMessage />}
+          {this.props.loaded ?
+          this.renderList()
+          : null }
         </nav>
       </div>
     );

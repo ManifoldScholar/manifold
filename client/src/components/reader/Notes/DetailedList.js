@@ -9,7 +9,9 @@ export default class DetailedList extends PureComponent {
     sortedAnnotations: PropTypes.array,
     handleVisitAnnotation: PropTypes.func,
     handleUpdateAnnotation: PropTypes.func,
-    handleDeleteAnnotation: PropTypes.func
+    handleDeleteAnnotation: PropTypes.func,
+    annotated: PropTypes.bool,
+    loaded: PropTypes.bool
   };
 
   static defaultProps = {
@@ -17,8 +19,9 @@ export default class DetailedList extends PureComponent {
   };
 
   render() {
+    if (!this.props.loaded) return null;
     if (this.props.sortedAnnotations.length === 0)
-      return <Notes.EmptyMessage />;
+      return <Notes.EmptyMessage annotated={this.props.annotated} />;
     return (
       <ul className="notes-list">
         {this.props.sortedAnnotations.map(group => {
