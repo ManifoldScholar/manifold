@@ -1,5 +1,6 @@
 import visibilityReducer from "../visibility";
 import { initialState } from "../visibility";
+import cloneDeep from "lodash/cloneDeep";
 
 describe("store/reducers/ui/visibility", () => {
   it("should return the initial state", () => {
@@ -145,5 +146,17 @@ describe("store/reducers/ui/visibility/panelHide", () => {
         appearance: false
       }
     });
+  });
+});
+
+describe("store/reducers/ui/visibility/panelHide", () => {
+  const inState = cloneDeep(initialState);
+  inState.visibilityFilters.highlight.yours = false;
+  inState.visibilityFilters.annotation.yours = false;
+  it("should show annotations for the current user", () => {
+    const action = { type: "SHOW_MY_NOTES", payload: "appearance" };
+    const outState = visibilityReducer(inState, action);
+    expect(outState.visibilityFilters.highlight.yours).toEqual(true);
+    expect(outState.visibilityFilters.annotation.yours).toEqual(true);
   });
 });
