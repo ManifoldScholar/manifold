@@ -4,7 +4,8 @@ module Api
       module Relationships
         # Annotations controller
         class AnnotationsController < ApplicationController
-          resourceful! Annotation, authorize_options: { except: [:index] } do
+
+          resourceful! Annotation do
             scope = Annotation.created_by(current_user)
             Annotation.filter(
               with_pagination!(annotation_filter_params),
