@@ -18,6 +18,7 @@ import { commonActions } from "actions/helpers";
 import { textsAPI, sectionsAPI, requests } from "api";
 import values from "lodash/values";
 import lh from "helpers/linkHandler";
+import locationHelper from "helpers/location";
 import { renderRoutes } from "helpers/routing";
 import { Redirect } from "react-router-dom";
 import { matchRoutes } from "react-router-config";
@@ -28,6 +29,7 @@ import {
 } from "actions";
 import { setPersistentUI } from "../../actions/ui/persistent_ui";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
+import get from "lodash/get";
 
 const {
   selectFont,
@@ -118,6 +120,17 @@ export class ReaderContainer extends Component {
 
   componentDidMount() {
     this.setPersistentUI(this.props);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      locationHelper.triggersScrollToTop(
+        this.props.location,
+        prevProps.location
+      )
+    ) {
+      window.scrollTo(0, 0);
+    }
   }
 
   componentWillUnmount() {

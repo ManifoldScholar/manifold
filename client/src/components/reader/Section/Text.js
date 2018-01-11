@@ -5,6 +5,8 @@ import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-
 import classNames from "classnames";
 import { Section } from "components/reader";
 import Annotation from "containers/reader/Annotation";
+import startsWith from "lodash/startsWith";
+import locationHelper from "helpers/location";
 
 export default class Text extends Component {
   static propTypes = {
@@ -18,7 +20,8 @@ export default class Text extends Component {
     location: PropTypes.object,
     match: PropTypes.object,
     children: PropTypes.object,
-    visibility: PropTypes.object
+    visibility: PropTypes.object,
+    history: PropTypes.object.isRequired
   };
 
   static contextTypes = {
@@ -53,13 +56,24 @@ export default class Text extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      !this.props.location.hash &&
-      this.props.location.key !== prevProps.location.key
-    ) {
-      window.scrollTo(0, 0);
-    }
+  componentDidUpdate() {
+    this.checkRequestAnnotationHash();
+  }
+
+  // If the URL points to annotation that's not currently visible (not in
+  // filteredAnnotations), but is in the unfiltered collection, then we can remove
+  // it from the URL because the user has filtered it off the screen for now.
+  checkRequestAnnotationHash() {
+    if (!this.state.filteredAnnotations) return;
+    if (!locationHelper.hashed(location)) return;
+    if (!locationHelper.hashTypeMatch(location, "annotation")) return;
+    const hashId = locationHelper.hashId(location, "annotation");
+    const finder = a => a.id === hashId;
+    const filteredMatch = this.state.filteredAnnotations.find(finder);
+    if (filteredMatch) return;
+    const collectionMatch = this.props.annotations.find(finder);
+    if (!collectionMatch) return;
+    this.props.history.push({ hash: "", state: { noScroll: true } });
   }
 
   // Store the current locked selection in the section, which wraps the annotator and
@@ -169,6 +183,7 @@ export default class Text extends Component {
               containerSize={typography.margins.current}
               bodySelector="[data-id=&quot;body&quot;]"
               text={this.props.text}
+              location={this.props.location}
               section={this.props.section}
             >
               <div className={containerClass}>

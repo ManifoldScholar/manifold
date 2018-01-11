@@ -7,6 +7,7 @@ import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Reader Section Container", () => {
   const store = build.store();
+  const history = build.history();
   const text = build.entity.text("1");
   const settings = build.entity.settings();
   text.relationships.project = build.entity.project("3");
@@ -16,6 +17,7 @@ describe("Reader Section Container", () => {
   const props = {
     text,
     section,
+    history,
     settings,
     route: {
       routes: [
