@@ -5,14 +5,31 @@ import isEmpty from "lodash/isEmpty";
 import values from "lodash/values";
 import union from "lodash/union";
 import { Notation } from "components/reader";
+import smoothScroll from "../../../../utils/smoothScroll";
 
 export default class TextNode extends Component {
   static propTypes = {
     content: PropTypes.string,
     openAnnotations: PropTypes.object,
     nodeUuid: PropTypes.string,
-    textDigest: PropTypes.string
+    textDigest: PropTypes.string,
+    scrollToView: PropTypes.bool,
+    scrollKey: PropTypes.string,
+    scrollAnnotation: PropTypes.string
   };
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.scrollToView &&
+      this.props.scrollKey !== prevProps.scrollKey
+    ) {
+      const { scrollAnnotation } = this.props;
+      const target =
+        document.querySelector(`[data-annotation-ids="${scrollAnnotation}"]`) ||
+        this.el;
+      smoothScroll(target || this.el, 100);
+    }
+  }
 
   containsAnnotations() {
     return !isEmpty(this.props.openAnnotations);
@@ -189,7 +206,12 @@ export default class TextNode extends Component {
     }
 
     return (
-      <span {...props}>
+      <span
+        {...props}
+        ref={el => {
+          this.el = el;
+        }}
+      >
         {content}
       </span>
     );

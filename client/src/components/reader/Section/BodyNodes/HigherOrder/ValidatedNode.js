@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import mapKeys from "lodash/mapKeys";
 import humps from "humps";
 import startsWith from "lodash/startsWith";
+import smoothScroll from "../../../../../utils/smoothScroll";
 
 export default RenderComponent => {
   class ValidatedNode extends Component {
@@ -12,8 +13,29 @@ export default RenderComponent => {
       tag: PropTypes.string,
       textDigest: PropTypes.string,
       nodeUuid: PropTypes.string,
-      openAnnotations: PropTypes.object
+      openAnnotations: PropTypes.object,
+      scrollToView: PropTypes.bool,
+      scrollKey: PropTypes.string
     };
+
+    componentDidMount() {
+      if (this.props.scrollToView) {
+        this.scrollToEl();
+      }
+    }
+
+    componentDidUpdate(prevProps) {
+      if (
+        this.props.scrollToView &&
+        this.props.scrollKey !== prevProps.scrollKey
+      ) {
+        this.scrollToEl();
+      }
+    }
+
+    scrollToEl() {
+      if (this.el) smoothScroll(this.el, 100);
+    }
 
     styleStringToObject(stylesString) {
       const declarations = stylesString.split(";");
@@ -49,9 +71,14 @@ export default RenderComponent => {
     }
 
     render() {
+      const attributes = this.cleanAttributes(this.props.attributes);
+
+      // We need to keep track of the child's dom element so that we can scroll to it.
+      attributes.ref = el => (this.el = el);
+
       return (
         <RenderComponent
-          attributes={this.cleanAttributes(this.props.attributes)}
+          attributes={attributes}
           tag={this.props.tag}
           textDigest={this.props.textDigest}
           nodeUuid={this.props.nodeUuid}

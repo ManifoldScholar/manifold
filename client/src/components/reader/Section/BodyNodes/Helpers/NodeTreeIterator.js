@@ -2,9 +2,15 @@ import React from "react";
 import TextNode from "../TextNode";
 import DefaultNode from "../DefaultNode";
 import LinkNode from "../LinkNode";
+import has from "lodash/has";
 
 export default class NodeTreeIterator {
   constructor(bodyProps) {
+    this.setupAnnotations(bodyProps);
+    this.setScrollTargetNode(bodyProps);
+  }
+
+  setupAnnotations(bodyProps) {
     const { annotations, lockedSelection } = bodyProps;
     this.annotations = annotations ? annotations.slice(0) : [];
     if (lockedSelection) this.annotations.push(lockedSelection);
@@ -25,6 +31,26 @@ export default class NodeTreeIterator {
       }
     });
     this.openAnnotations = {};
+  }
+
+  setScrollTargetNode(bodyProps) {
+    const hash = bodyProps.location.hash;
+    if (!hash) return;
+    const annotationUuid = new RegExp(
+      /^#(annotation)-([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12})/
+    );
+    const nodeHexDigest = new RegExp(/^#(node)-([a-f0-9]{40})/);
+    const match = hash.match(annotationUuid) || hash.match(nodeHexDigest);
+    const identifier = match ? match[1] : hash;
+    const id = match ? match[2] : null;
+    this.scrollKey = bodyProps.location.key;
+    if (identifier === "node") {
+      this.nodeScrollTarget = id;
+    } else if (identifier === "annotation") {
+      this.annotationScrollTarget = id;
+    } else {
+      this.elementScrollTarget = identifier.substring(1);
+    }
   }
 
   visitChildren(node) {
@@ -50,9 +76,6 @@ export default class NodeTreeIterator {
       case "a":
         ComponentClass = LinkNode;
         break;
-      // case 'code':
-      //   ComponentClass = CodeNode;
-      //   break;
       default:
         ComponentClass = DefaultNode;
         break;
@@ -82,7 +105,6 @@ export default class NodeTreeIterator {
       "thead",
       "tr"
     ];
-
     if (
       !parent ||
       parent.nodeType !== "element" ||
@@ -114,7 +136,29 @@ export default class NodeTreeIterator {
     }
 
     const openAnnotations = Object.assign({}, this.openAnnotations);
-    const adjustedNode = Object.assign({}, node, { openAnnotations });
+    const scrollElement = !!(
+      this.elementScrollTarget &&
+      node.nodeType === "element" &&
+      node.attributes &&
+      node.attributes.id &&
+      node.attributes.id === this.elementScrollTarget
+    );
+    const scrollAnnotation =
+      node.nodeType === "text" &&
+      has(openAnnotations, this.annotationScrollTarget)
+        ? this.annotationScrollTarget
+        : null;
+    const scrollNode =
+      node.nodeType === "text" && this.nodeScrollTarget === node.nodeUuid;
+    const scrollToView = !!(scrollAnnotation || scrollNode || scrollElement);
+    const scrollKey = scrollToView ? this.scrollKey : null;
+    const adjustedNode = Object.assign({}, node, {
+      openAnnotations,
+      scrollAnnotation,
+      scrollNode,
+      scrollToView,
+      scrollKey
+    });
     let out;
 
     switch (node.nodeType) {

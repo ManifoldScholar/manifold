@@ -14,7 +14,13 @@ const position = (start, end, elapsed, duration) => {
   return start + (end - start) * easeInOutCubic(elapsed / duration);
 };
 
-export default function smoothScroll(el, duration, callback, context) {
+export default function smoothScroll(
+  el,
+  offset = 0,
+  duration,
+  callback,
+  context
+) {
   const adjustedDuration = duration || 500;
   const adjustedContext = context || window;
   const start = window.pageYOffset;
@@ -25,7 +31,7 @@ export default function smoothScroll(el, duration, callback, context) {
   } else {
     end = getTop(el);
   }
-
+  end -= offset;
   const clock = Date.now();
   const requestAnimationFrame =
     window.requestAnimationFrame ||
