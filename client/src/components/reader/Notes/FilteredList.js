@@ -69,9 +69,7 @@ export default class FilteredList extends PureComponent {
           filter={this.props.filter}
         />
         <nav>
-          {this.props.loaded ?
-          this.renderList()
-          : null }
+          {this.props.loaded ? this.renderList() : null}
         </nav>
       </div>
     );
