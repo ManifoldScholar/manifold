@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { HigherOrder } from "components/global";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import classNames from "classnames";
-import smoothScroll from "../../../utils/smoothScroll";
 import { Section } from "components/reader";
 import Annotation from "containers/reader/Annotation";
 
@@ -39,10 +38,6 @@ export default class Text extends Component {
     this.lockSelection = this.lockSelection.bind(this);
   }
 
-  componentDidMount() {
-    this.maybeScrollToAnchor(null, this.props.location.hash);
-  }
-
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.visibility.visibilityFilters !==
@@ -59,52 +54,12 @@ export default class Text extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    this.maybeScrollToTop(prevProps.section, this.props.section);
-    this.maybeScrollToAnchor(prevProps.location.hash, this.props.location.hash);
-  }
-
-  /* eslint-disable no-unreachable */
-  getScrollTargetNode(hash) {
-    const annotationUuid = new RegExp(
-      /^#(annotation)-([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12})/
-    );
-    const nodeHexidigest = new RegExp(/^#(node)-([a-f0-9]{40})/);
-    const match = hash.match(annotationUuid) || hash.match(nodeHexidigest);
-    const identifier = match ? match[1] : hash;
-    const id = match ? match[2] : null;
-    switch (identifier) {
-      case "node": // Text Node
-        return document.querySelector(`[data-node-uuid="${id}"]`);
-        break;
-      case "annotation": // Annotation, Highlight, or Resource
-        return document.querySelector(`[data-annotation-ids="${id}"]`);
-        break;
-      default:
-        return document.querySelector(identifier);
-        break;
+    if (
+      !this.props.location.hash &&
+      this.props.location.key !== prevProps.location.key
+    ) {
+      window.scrollTo(0, 0);
     }
-  }
-  /* eslint-enable no-unreachable */
-
-  maybeScrollToTop(previousSection, thisSection) {
-    if (previousSection.id === thisSection.id) return;
-    window.scrollTo(0, 0);
-  }
-
-  maybeScrollToAnchor(previousHash, currentHash) {
-    if (!currentHash) return;
-    if (previousHash === currentHash) return;
-    const scrollTarget = this.getScrollTargetNode(currentHash);
-    if (!scrollTarget) return false;
-    this.scrollToAnchor(scrollTarget);
-  }
-
-  scrollToAnchor(scrollTarget) {
-    const position =
-      scrollTarget.getBoundingClientRect().top + window.pageYOffset;
-    setTimeout(() => {
-      smoothScroll(position - 150);
-    }, 0);
   }
 
   // Store the current locked selection in the section, which wraps the annotator and
@@ -197,7 +152,11 @@ export default class Text extends Component {
 
     return (
       <HigherOrder.HtmlClass className={fontSizeClass}>
-        <div>
+        <div
+          ref={el => {
+            this.el = el;
+          }}
+        >
           <section className={readerAppearanceClass}>
             <Annotation.Annotatable
               currentUser={this.props.authentication.currentUser}
@@ -215,6 +174,7 @@ export default class Text extends Component {
               <div className={containerClass}>
                 <div data-id="body" className={textSectionClass}>
                   <Section.Body
+                    location={this.props.location}
                     lockedSelection={this.state.lockedSelection}
                     annotations={this.state.filteredAnnotations}
                     section={this.props.section}

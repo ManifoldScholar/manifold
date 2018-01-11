@@ -10,7 +10,7 @@ describe("Reader.Section.Body component", () => {
     build.entity.annotation("3")
   ];
 
-  const root = <Body section={section} annotations={annotations} />;
+  const root = <Body section={section} location={{ hash: "" }} annotations={annotations} />;
 
   it("renders correctly", () => {
     const component = renderer.create(root);
