@@ -31,6 +31,21 @@ const panelSolo = {
   notes: true
 };
 
+const showMyNotes = state => {
+  const yours = true;
+  const highlight = Object.assign({}, state.visibilityFilters.highlight, {
+    yours
+  });
+  const annotation = Object.assign({}, state.visibilityFilters.highlight, {
+    yours
+  });
+  const visibilityFilters = Object.assign({}, state.visibilityFilters, {
+    highlight,
+    annotation
+  });
+  return Object.assign({}, state, { visibilityFilters });
+};
+
 const visibilityChange = (state, action) => {
   return Object.assign({}, state, action.payload);
 };
@@ -98,6 +113,7 @@ export default handleActions(
     PANEL_SHOW: panelShow,
     PANEL_HIDE: panelHide,
     PANEL_HIDE_ALL: allPanelsHide,
+    SHOW_MY_NOTES: showMyNotes,
     "@@reduxReactRouter/routerDidChange": allPanelsHide
   },
   initialState

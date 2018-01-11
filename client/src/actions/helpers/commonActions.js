@@ -12,7 +12,8 @@ const {
   visibilityShow,
   panelToggle,
   panelHide,
-  panelShow
+  panelShow,
+  showMyNotes
 } = uiVisibilityActions;
 const {
   addNotification,
@@ -40,6 +41,7 @@ const commonActions = dispatch => {
     visibilityToggle: b(el => visibilityToggle(el), dispatch),
     visibilityHide: b(el => visibilityHide(el), dispatch),
     visibilityShow: b(el => visibilityShow(el), dispatch),
+    showMyNotes: b(showMyNotes, dispatch),
     panelToggle: b(el => panelToggle(el), dispatch),
     panelHide: b(el => panelHide(el), dispatch),
     panelShow: b(el => panelShow(el), dispatch)

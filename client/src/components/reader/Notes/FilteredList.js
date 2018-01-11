@@ -18,6 +18,11 @@ export default class FilteredList extends PureComponent {
   };
 
   static defaultProps = {
+    annotated: false,
+    loaded: false
+  };
+
+  static defaultProps = {
     annotations: []
   };
 

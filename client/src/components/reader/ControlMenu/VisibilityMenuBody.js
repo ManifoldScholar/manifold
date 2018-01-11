@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
 
-export default class VisibilityMenBody extends PureComponent {
+export default class VisibilityMenuBody extends PureComponent {
   static displayName = "ControlMenu.VisibilityMenuBody";
 
   static propTypes = {

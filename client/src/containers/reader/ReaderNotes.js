@@ -42,7 +42,6 @@ export class ReaderNotesContainer extends Component {
     filterable: PropTypes.bool,
     section: PropTypes.object,
     text: PropTypes.object,
-    visible: PropTypes.bool,
     match: PropTypes.object,
     history: PropTypes.object,
     dispatch: PropTypes.func,
@@ -57,10 +56,7 @@ export class ReaderNotesContainer extends Component {
     super(props);
     this.state = this.setInitialState(props);
     this.requestName = this.getRequestName(props);
-  }
-
-  componentWillMount() {
-    this.commonActions = commonActions(this.props.dispatch);
+    this.commonActions = commonActions(props.dispatch);
   }
 
   componentDidMount() {
@@ -109,6 +105,7 @@ export class ReaderNotesContainer extends Component {
     );
 
     this.triggerHideNotes();
+    this.commonActions.showMyNotes();
     return history.push(url);
   };
 
@@ -177,7 +174,6 @@ export class ReaderNotesContainer extends Component {
       handleVisitAnnotation: this.handleVisitAnnotation,
       handleFilterChange: this.handleFilterChange,
       handleSeeAllClick: this.handleSeeAllClick,
-      visible: props.visible,
       annotated: props.annotated,
       loaded: props.loaded,
       filter: this.state.filter
