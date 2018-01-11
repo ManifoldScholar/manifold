@@ -17,11 +17,22 @@ module Api
               @annotations,
               each_serializer: AnnotationSerializer,
               include: [:creator],
-              location: location
+              location: location,
+              meta: meta(@annotations)
             )
           end
 
           private
+
+          def meta(models)
+            meta = build_meta_for models
+            if params[:filter][:text]
+              meta[:annotated] = Annotation.created_by(current_user)
+                                           .by_text(params[:filter][:text])
+                                           .exists?
+            end
+            meta
+          end
 
           def location
             api_v1_text_section_relationships_annotations_url(

@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { annotationsAPI, meAPI, requests } from "api";
-import { select, grab } from "utils/entityUtils";
+import { select, grab, meta, loaded } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
 import { commonActions } from "actions/helpers";
 import groupBy from "lodash/groupBy";
+import get from "lodash/get";
 import isString from "lodash/isString";
 
 const { request } = entityStoreActions;
@@ -23,6 +24,8 @@ export class ReaderNotesContainer extends Component {
 
     const newState = {
       myAnnotations: select(requestName, state.entityStore) || null,
+      loaded: loaded(requestName, state.entityStore),
+      annotated: get(meta(requestName, state.entityStore), "annotated"),
       text: grab("texts", ownProps.match.params.textId, state.entityStore),
       section: grab(
         "textSections",
@@ -175,6 +178,8 @@ export class ReaderNotesContainer extends Component {
       handleFilterChange: this.handleFilterChange,
       handleSeeAllClick: this.handleSeeAllClick,
       visible: props.visible,
+      annotated: props.annotated,
+      loaded: props.loaded,
       filter: this.state.filter
     };
   }
