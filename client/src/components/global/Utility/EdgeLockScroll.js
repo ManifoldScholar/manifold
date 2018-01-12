@@ -38,15 +38,27 @@ export default class EdgeLockScroll extends PureComponent {
       });
     };
 
-    this.scroller.addEventListener("mousewheel", this.handleWheel);
-    this.scroller.addEventListener("touchmove", this.handleTouch);
-    this.scroller.addEventListener("touchstart", this.setTouchStart);
+    this.scroller.addEventListener("mousewheel", this.handleWheel, {
+      passive: false
+    });
+    this.scroller.addEventListener("touchmove", this.handleTouch, {
+      passive: false
+    });
+    this.scroller.addEventListener("touchstart", this.setTouchStart, {
+      passive: true
+    });
   }
 
   componentWillUnmount() {
-    this.scroller.removeEventListener("mousewheel", this.handleWheel);
-    this.scroller.removeEventListener("touchmove", this.handleTouch);
-    this.scroller.removeEventListener("touchstart", this.setTouchStart);
+    this.scroller.removeEventListener("mousewheel", this.handleWheel, {
+      passive: false
+    });
+    this.scroller.removeEventListener("touchmove", this.handleTouch, {
+      passive: false
+    });
+    this.scroller.removeEventListener("touchstart", this.setTouchStart, {
+      passive: true
+    });
   }
 
   edgeLock(scroller, event, touchDelta) {
