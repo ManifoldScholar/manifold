@@ -27,8 +27,17 @@ export default class TextNode extends Component {
       const target =
         document.querySelector(`[data-annotation-ids="${scrollAnnotation}"]`) ||
         this.el;
-      smoothScroll(target || this.el, 100);
+      smoothScroll(target || this.el, 100, 500, () => {
+        const annotation = this.getAnnotation(scrollAnnotation);
+        if (annotation && annotation.attributes.format === "annotation") {
+          target.click();
+        }
+      });
     }
+  }
+
+  getAnnotation(id) {
+    return this.props.openAnnotations[id];
   }
 
   containsAnnotations() {
