@@ -12,7 +12,6 @@ import { annotationsAPI, requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
 import isString from "lodash/isString";
 import lh from "helpers/linkHandler";
-// import ch from "helpers/consoleHelpers";
 
 const { request } = entityStoreActions;
 
@@ -47,9 +46,6 @@ class Annotatable extends Component {
 
   componentWillUnmount() {
     if (this.timer) clearTimeout(this.timer);
-    // document.removeEventListener("mousedown", this.startSelection, false);
-    // document.removeEventListener("mouseup", this.updateSelection, false);
-    // document.removeEventListener("keydown", this.handleKeyDown, false);
   }
 
   defaultState() {
