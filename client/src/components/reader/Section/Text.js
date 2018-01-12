@@ -5,7 +5,6 @@ import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-
 import classNames from "classnames";
 import { Section } from "components/reader";
 import Annotation from "containers/reader/Annotation";
-import startsWith from "lodash/startsWith";
 import locationHelper from "helpers/location";
 
 export default class Text extends Component {
@@ -184,6 +183,7 @@ export default class Text extends Component {
               bodySelector="[data-id=&quot;body&quot;]"
               text={this.props.text}
               location={this.props.location}
+              history={this.props.history}
               section={this.props.section}
             >
               <div className={containerClass}>

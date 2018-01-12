@@ -12,6 +12,7 @@ import { annotationsAPI, requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
 import isString from "lodash/isString";
 import lh from "helpers/linkHandler";
+import locationHelper from "helpers/location";
 
 const { request } = entityStoreActions;
 
@@ -31,7 +32,9 @@ class Annotatable extends Component {
     notations: PropTypes.array,
     annotations: PropTypes.array,
     text: PropTypes.object,
-    section: PropTypes.object
+    section: PropTypes.object,
+    history: PropTypes.object,
+    location: PropTypes.object
   };
 
   static defaultProps = {
@@ -396,8 +399,16 @@ class Annotatable extends Component {
     // TOD: Implement bookmarks
   }
 
+  maybeRemoveAnnotationHashFromUrl() {
+    if (!this.props.history) return;
+    if (!locationHelper.hashTypeMatch(this.props.location, "annotation"))
+      return;
+    this.props.history.push({ hash: "", state: { noScroll: true } });
+  }
+
   closeDrawer = event => {
     this.setState({ drawerContents: null });
+    this.maybeRemoveAnnotationHashFromUrl();
     // Keyboard event doesn't hide the popup by default,
     // so manually remove the selection
     if (event && event.type === "keyup") {
