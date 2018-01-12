@@ -29,7 +29,6 @@ import {
 } from "actions";
 import { setPersistentUI } from "../../actions/ui/persistent_ui";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
-import get from "lodash/get";
 
 const {
   selectFont,
