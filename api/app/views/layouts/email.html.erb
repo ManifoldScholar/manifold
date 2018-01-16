@@ -10,48 +10,65 @@
 
 <body>
 <!-- <style> -->
-<table class="body">
+<table class="body" width="100%" align="center">
   <tr>
-    <td class="float-center" align="center" valign="top">
-      <table align="center" class="container">
-        <tbody>
+    <td>
+      <table class="container" width="700">
+        <tr class="header">
+          <td class="logo">
+            <img width="120" src="<%= @client_url %>/static/images/manifold-mail-logo-primary.jpg" alt="Manifold logo and text: Manifold"/>
+          </td>
+        </tr>
         <tr>
-          <td class="container-cell">
-            <table class="row">
-              <tbody>
+          <td align="left">
+            <p>
+              Hi <%= @user.nickname %>,
+            </p>
+            <%= yield %>
+            <p>
+              <%= simple_format @closing %>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="hr"></td>
+        </tr>
+        <tr>
+          <td>
+            <table class="footer-nav">
               <tr>
-                <th class="columns small-12 large-12 first last">
+                <td class="logo">
+                  <a href="http://manifoldapp.org">
+                    <img width="163" src="<%= @client_url %>/static/images/manifold-mail-logo-secondary.jpg" alt="Manifold logo and text: Manifold Scholarship. Click to visit manifoldapp.org"/>
+                    Manifold logo and text: Manifold Scholarship. Click to visit manifoldapp.org
+                  </a>
+                </td>
+                <td class="external" width="71">
                   <table>
                     <tr>
-                      <th>
-                        <h4>Hi <%= @user.nickname %>,</h4>
-                        <%= render :partial => "partials/email/spacer", locals: { height: 5 } %>
-                        <%= yield %>
-                        <%= render :partial => "partials/email/spacer", locals: { height: 5 } %>
-                        <p>
-                          <%= simple_format @closing %>
-                        </p>
-                      </th>
-                      <th class="expander"></th>
+                      <td width="50%">
+                        <a href="https://twitter.com/manifoldscholar">
+                          <img width="21" src="<%= @client_url %>/static/images/manifold-mail-twitter.jpg" alt="Twitter logo. Click to visit Manifold on Twitter"/>
+                          Twitter logo. Click to visit Manifold on Twitter
+                        </a>
+                      </td>
+                      <td width="50%">
+                        <a href="https://github.com/ManifoldScholar/manifold">
+                          <img width="21" src="<%= @client_url %>/static/images/manifold-mail-github.jpg" alt="Github Logo. Click to visit Manifold Source on Github"/>
+                          Github Logo. Click to visit Manifold Source on Github
+                        </a>
+                      </td>
                     </tr>
                   </table>
-                </th>
+                </td>
               </tr>
-              </tbody>
             </table>
           </td>
         </tr>
-        </tbody>
-      </table>
-      <table>
-        <tbody>
-          <tr>
-            <td class="footer">Powered by <a href="http://manifoldapp.org">Manifold Scholarship</a></td>
-          </tr>
-        </tbody>
       </table>
     </td>
   </tr>
 </table>
+
 </body>
 </html>
