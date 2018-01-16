@@ -153,6 +153,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                                 <label className=\\"\\">
                                   Google Private Key
                                 </label>
+                                <Instructions instructions={{...}} />
                                 <textarea style={{...}} placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                               </div>
                             </Errorable>
