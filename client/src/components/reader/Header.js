@@ -10,6 +10,7 @@ import {
   UserMenuBody
 } from "components/global";
 import { HigherOrder } from "containers/global";
+import memoize from "lodash/memoize";
 import classNames from "classnames";
 
 export default class Header extends Component {
@@ -56,10 +57,12 @@ export default class Header extends Component {
     this.props.commonActions.visibilityChange({ visibilityFilters: filters });
   };
 
-  handlePanelToggle = panel => {
-    this.triggerHideToc();
-    this.props.commonActions.panelToggle(panel);
-  };
+  panelToggleHandler = memoize(panel => {
+    return () => {
+      this.triggerHideToc();
+      this.props.commonActions.panelToggle(panel);
+    };
+  });
 
   renderContentsButton = contents => {
     if (contents.length <= 0) {
@@ -91,7 +94,7 @@ export default class Header extends Component {
       <header className="header-reader">
         <nav className={containerClass}>
           <ReturnMenu.Button
-            toggleReaderMenu={() => this.handlePanelToggle("readerReturn")}
+            toggleReaderMenu={this.panelToggleHandler("readerReturn")}
           />
           {this.renderContentsButton(this.props.text.attributes.toc)}
           {this.props.section
@@ -106,21 +109,20 @@ export default class Header extends Component {
               <HigherOrder.RequireRole requiredRole={"any"}>
                 <li>
                   <ControlMenu.NotesButton
-                    toggle={() => this.handlePanelToggle("notes")}
+                    toggle={this.panelToggleHandler("notes")}
                     active={this.props.visibility.uiPanels.notes}
                   />
                 </li>
               </HigherOrder.RequireRole>
               <li>
                 <ControlMenu.VisibilityMenuButton
-                  toggle={() => this.handlePanelToggle("visibility")}
+                  toggle={this.panelToggleHandler("visibility")}
                   active={this.props.visibility.uiPanels.visibility}
                 />
               </li>
               <li>
                 <ControlMenu.AppearanceMenuButton
-                  toggleAppearanceMenu={() =>
-                    this.handlePanelToggle("appearance")}
+                  toggleAppearanceMenu={this.panelToggleHandler("appearance")}
                   active={this.props.visibility.uiPanels.appearance}
                 />
               </li>
@@ -135,7 +137,7 @@ export default class Header extends Component {
                   authentication={this.props.authentication}
                   active={this.props.visibility.uiPanels.user}
                   showLoginOverlay={this.triggerShowSignInUpOverlay}
-                  toggleUserMenu={() => this.handlePanelToggle("user")}
+                  toggleUserMenu={this.panelToggleHandler("user")}
                 />
               </li>
             </ul>
