@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Drawer } from "components/global";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { usersAPI, requests } from "api";
@@ -9,7 +8,7 @@ import debounce from "lodash/debounce";
 import get from "lodash/get";
 import { User, List } from "components/backend";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -90,16 +89,16 @@ export class UsersListContainer extends PureComponent {
     };
   }
 
-  isDrawerOpen() {
-    return !!this.props.match.params.id;
-  }
-
   render() {
     const { match } = this.props;
 
     if (!this.props.users) return null;
     const { users, usersMeta, currentUserId } = this.props;
     const active = match.params.id;
+
+    const drawerProps = {
+      closeUrl: lh.link("backendPeopleUsers")
+    };
 
     return (
       <div>
@@ -108,12 +107,7 @@ export class UsersListContainer extends PureComponent {
             {"Users"} <i className="manicon manicon-users" />
           </h3>
         </header>
-        <Drawer.Wrapper
-          open={this.isDrawerOpen()}
-          closeUrl={lh.link("backendPeopleUsers")}
-        >
-          {renderRoutes(this.props.route.routes)}
-        </Drawer.Wrapper>
+        {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {users
           ? <List.Searchable
               newButtonVisible

@@ -1,0 +1,1 @@
+export childRoutes from "./childRoutes";
