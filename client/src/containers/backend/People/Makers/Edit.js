@@ -110,11 +110,6 @@ export class MakersEditContainer extends PureComponent {
     const attr = this.props.maker.attributes;
     const maker = this.props.maker;
 
-    /*
-     Edit dialog(s) can be wrapped in either
-     <Drawer.Wrapper>: Right-hand pop-in panel
-     <Dialog.Wrapper> Overlay with dialog box
-     */
     return (
       <div>
         {this.state.confirmation

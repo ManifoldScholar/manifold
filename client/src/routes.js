@@ -287,14 +287,15 @@ export default () => {
                 {
                   name: "backendPeopleMaker",
                   component: Backend.People.Makers.Edit,
-                  path: "/backend/people/makers/:id?",
+                  exact: true,
+                  path: "/backend/people/makers/:id",
                   helper: m => `/backend/people/makers/${m}`
                 }
               ]
             },
             {
               name: "backendPeopleUsers",
-              exact: true,
+              exact: false,
               component: Backend.People.Users.List,
               path: "/backend/people/:users(users)?/:id?",
               helper: () => "/backend/people/users",
@@ -302,7 +303,7 @@ export default () => {
                 {
                   name: "backendPeopleUser",
                   component: Backend.People.Users.Edit,
-                  path: "/backend/people/users/:id?",
+                  path: "/backend/people/users/:id",
                   helper: u => `/backend/people/users/${u}`
                 }
               ]
@@ -467,7 +468,7 @@ export default () => {
                 {
                   name: "backendSettingsSubject",
                   component: Backend.Settings.Subjects.Edit,
-                  path: "/backend/settings/subjects/:id?",
+                  path: "/backend/settings/subjects/:id",
                   helper: s => `/backend/settings/subjects/${s}`
                 }
               ]

@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Drawer } from "components/global";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { subjectsAPI, requests } from "api";
@@ -9,7 +8,7 @@ import debounce from "lodash/debounce";
 import get from "lodash/get";
 import { Subject, List } from "components/backend";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -95,6 +94,10 @@ export class SettingsSubjectsListContainer extends PureComponent {
     const { subjects, subjectsMeta } = this.props;
     const active = match.params.id;
 
+    const drawerProps = {
+      closeUrl: lh.link("backendSettingsSubjects")
+    };
+
     return (
       <div>
         <header className="section-heading-secondary">
@@ -102,12 +105,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
             {"Subjects"} <i className="manicon" />
           </h3>
         </header>
-        <Drawer.Wrapper
-          open={this.isDrawerOpen()}
-          closeUrl={lh.link("backendSettingsSubjects")}
-        >
-          {renderRoutes(this.props.route.routes)}
-        </Drawer.Wrapper>
+        {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {subjects
           ? <List.Searchable
               newButtonVisible

@@ -152,11 +152,7 @@ export class UsersEditContainer extends PureComponent {
     if (!this.props.user) return null;
     const attr = this.props.user.attributes;
     const user = this.props.user;
-    /*
-      Edit dialog(s) can be wrapped in either
-      <Drawer.Wrapper>: Right-hand pop-in panel
-      <Dialog.Wrapper> Overlay with dialog box
-    */
+
     return (
       <div>
         {this.state.confirmation

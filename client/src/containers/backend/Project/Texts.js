@@ -9,7 +9,7 @@ import { entityStoreActions } from "actions";
 import { projectsAPI, textsAPI, textCategoriesAPI, requests } from "api";
 import FormattedDate from "components/global/FormattedDate";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 const { request } = entityStoreActions;
 
@@ -309,6 +309,24 @@ export class ProjectTextsContainer extends PureComponent {
     this.setState({ confirmation: null });
   }
 
+  childRoutes() {
+    const factory = component => {
+      return (
+        <Dialog.Wrapper
+          closeOnOverlayClick={false}
+          closeUrl={lh.link("backendProjectTexts", this.props.project.id)}
+        >
+          {component}
+        </Dialog.Wrapper>
+      );
+    };
+    const { refresh, project } = this.props;
+    return childRoutes(this.props.route, {
+      childProps: { refresh, project },
+      factory
+    });
+  }
+
   renderTexts(texts) {
     let renderedTexts;
     if (texts.length === 0) {
@@ -396,26 +414,6 @@ export class ProjectTextsContainer extends PureComponent {
     );
   }
 
-  renderRoutes() {
-    const { refresh, project } = this.props;
-    const factory = component => {
-      return (
-        <Dialog.Wrapper
-          closeOnOverlayClick={false}
-          closeUrl={lh.link("backendProjectTexts", this.props.project.id)}
-        >
-          {component}
-        </Dialog.Wrapper>
-      );
-    };
-    const childRoutes = renderRoutes(
-      this.props.route.routes,
-      { refresh, project },
-      factory
-    );
-    return childRoutes;
-  }
-
   render() {
     const categories = this.categories();
     /* eslint-disable no-unused-vars */
@@ -429,7 +427,7 @@ export class ProjectTextsContainer extends PureComponent {
           ? <Dialog.Confirm {...this.state.confirmation} />
           : null}
 
-        {this.renderRoutes()}
+        {this.childRoutes()}
 
         <div className="buttons-icon-horizontal maintain">
           <Link

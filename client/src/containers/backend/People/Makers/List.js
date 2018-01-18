@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Drawer } from "components/global";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { makersAPI, requests } from "api";
@@ -9,7 +8,7 @@ import debounce from "lodash/debounce";
 import get from "lodash/get";
 import { Maker, List } from "components/backend";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -86,14 +85,15 @@ export class MakersListContainer extends PureComponent {
     };
   }
 
-  isDrawerOpen() {
-    return !!this.props.match.params.id;
-  }
-
   render() {
     const { makers, makersMeta, match } = this.props;
     if (!makers) return null;
     const active = match.params.id;
+
+    const drawerProps = {
+      closeUrl: lh.link("backendPeopleMakers")
+    };
+
     return (
       <div>
         <header className="section-heading-secondary">
@@ -101,12 +101,7 @@ export class MakersListContainer extends PureComponent {
             {"Makers"} <i className="manicon manicon-users" />
           </h3>
         </header>
-        <Drawer.Wrapper
-          open={this.isDrawerOpen()}
-          closeUrl={lh.link("backendPeopleMakers")}
-        >
-          {renderRoutes(this.props.route.routes)}
-        </Drawer.Wrapper>
+        {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {makers
           ? <List.Searchable
               entities={makers}
