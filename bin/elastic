@@ -1,12 +1,19 @@
 #!/bin/bash
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR/..";
+MANIFOLD_ROOT=$(pwd);
+ELASTIC_BIN="$MANIFOLD_ROOT/services/elasticsearch-5.6.5/bin/elasticsearch";
+PID_FILE="$MANIFOLD_ROOT/api/tmp/pids/elastic.pid";
+ELASTIC_PORT=29200
+
 red=`tput setaf 1`
 green=`tput setaf 2`
 reset=`tput sgr0`
 bold=`tput bold`
 ul=`tput smul`
 
-if [[ ! -f services/elasticsearch-5.6.5/bin/elasticsearch ]] ; then
+if [[ ! -f $ELASTIC_BIN ]] ; then
     echo "${red}${bold}#################################################################"
     echo "${red}${bold}Oh dang. Elasticsearch hasn't been installed for this development${reset}"
     echo "${red}${bold}environment.${reset}"
@@ -34,5 +41,5 @@ if [[ ! -f services/elasticsearch-5.6.5/bin/elasticsearch ]] ; then
     exit
 fi
 
-cd services/elasticsearch-5.6.5
-./bin/elasticsearch -E http.port=29200
+cd $MANIFOLD_ROOT;
+$ELASTIC_BIN -E http.port=$ELASTIC_PORT -p $PID_FILE
