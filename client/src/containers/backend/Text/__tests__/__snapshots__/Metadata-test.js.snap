@@ -21,6 +21,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                 Identity
                               </span>
                             </header>
+                            <Instructions instructions={{...}} />
                             <Form.Setter('Form.TextInput) focusOnMount={true} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                               <Form.TextInput focusOnMount={true} placeholder=\\"International Standard Book Number\\" instructions={[undefined]} label=\\"isbn\\" name=\\"attributes[metadata][isbn]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                                 <Errorable className=\\"form-input\\" name=\\"attributes[metadata][isbn]\\" errors={{...}} label=\\"isbn\\" containerStyle={{...}}>
@@ -28,6 +29,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       isbn
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder=\\"International Standard Book Number\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -40,6 +42,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       issn
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder=\\"International Standard Serial Number\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -54,6 +57,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                 Publisher
                               </span>
                             </header>
+                            <Instructions instructions={{...}} />
                             <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                               <Form.TextInput focusOnMount={false} placeholder=\\"The Publisher\\" instructions={[undefined]} label=\\"publisher\\" name=\\"attributes[metadata][publisher]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                                 <Errorable className=\\"form-input\\" name=\\"attributes[metadata][publisher]\\" errors={{...}} label=\\"publisher\\" containerStyle={{...}}>
@@ -61,6 +65,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       publisher
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder=\\"The Publisher\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -73,9 +78,11 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"has-instructions\\">
                                       publisher place
                                     </label>
-                                    <span className=\\"instructions\\">
-                                      e.g &quot;Minnesota, MN&quot;
-                                    </span>
+                                    <Instructions instructions=\\"e.g \\"Minnesota, MN\\"\\">
+                                      <span className=\\"instructions\\">
+                                        e.g &quot;Minnesota, MN&quot;
+                                      </span>
+                                    </Instructions>
                                     <input type=\\"text\\" placeholder=\\"Geographic location of the publisher\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -88,6 +95,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       original publisher
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder=\\"Original publisher, for items that have been republished by a different publisher\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -100,6 +108,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       original publisher place
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder=\\"Geographic location of the original publisher\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -114,6 +123,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                 Bibliographic
                               </span>
                             </header>
+                            <Instructions instructions={{...}} />
                             <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                               <Form.TextInput focusOnMount={false} placeholder=\\"Title of the container holding the item\\" instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\" label=\\"container title\\" name=\\"attributes[metadata][containerTitle]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                                 <Errorable className=\\"form-input\\" name=\\"attributes[metadata][containerTitle]\\" errors={{...}} label=\\"container title\\" containerStyle={{...}}>
@@ -121,9 +131,11 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"has-instructions\\">
                                       container title
                                     </label>
-                                    <span className=\\"instructions\\">
-                                      e.g. the book title for a book chapter, the journal title for a journal article
-                                    </span>
+                                    <Instructions instructions=\\"e.g. the book title for a book chapter, the journal title for a journal article\\">
+                                      <span className=\\"instructions\\">
+                                        e.g. the book title for a book chapter, the journal title for a journal article
+                                      </span>
+                                    </Instructions>
                                     <input type=\\"text\\" placeholder=\\"Title of the container holding the item\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -136,6 +148,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       version
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder=\\"Version of the item\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -148,9 +161,11 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"has-instructions\\">
                                       edition
                                     </label>
-                                    <span className=\\"instructions\\">
-                                      e.g. &quot;3&quot; when citing a chapter in the third edition of a book
-                                    </span>
+                                    <Instructions instructions=\\"e.g. \\"3\\" when citing a chapter in the third edition of a book\\">
+                                      <span className=\\"instructions\\">
+                                        e.g. &quot;3&quot; when citing a chapter in the third edition of a book
+                                      </span>
+                                    </Instructions>
                                     <input type=\\"text\\" placeholder=\\"(Container) edition holding the item\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -163,9 +178,11 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"has-instructions\\">
                                       issue
                                     </label>
-                                    <span className=\\"instructions\\">
-                                      e.g. &quot;5&quot; when citing a journal article from journal volume 2, issue 5
-                                    </span>
+                                    <Instructions instructions=\\"e.g. \\"5\\" when citing a journal article from journal volume 2, issue 5\\">
+                                      <span className=\\"instructions\\">
+                                        e.g. &quot;5&quot; when citing a journal article from journal volume 2, issue 5
+                                      </span>
+                                    </Instructions>
                                     <input type=\\"text\\" placeholder=\\"(Container) issue holding the item\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -178,9 +195,11 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"has-instructions\\">
                                       volume
                                     </label>
-                                    <span className=\\"instructions\\">
-                                      e.g. “2” when citing a chapter from book volume 2
-                                    </span>
+                                    <Instructions instructions=\\"e.g. “2” when citing a chapter from book volume 2\\">
+                                      <span className=\\"instructions\\">
+                                        e.g. “2” when citing a chapter from book volume 2
+                                      </span>
+                                    </Instructions>
                                     <input type=\\"text\\" placeholder=\\"(Container) volume holding the item \\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -193,6 +212,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       original title
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder=\\"Title of the original version\\" onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -207,6 +227,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                 Other
                               </span>
                             </header>
+                            <Instructions instructions={{...}} />
                             <Form.Setter('Form.TextInput) focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
                               <Form.TextInput focusOnMount={false} placeholder={{...}} instructions={{...}} label=\\"abstract\\" name=\\"attributes[metadata][abstract]\\" getModelValue={[Function]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false}>
                                 <Errorable className=\\"form-input\\" name=\\"attributes[metadata][abstract]\\" errors={{...}} label=\\"abstract\\" containerStyle={{...}}>
@@ -214,6 +235,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       abstract
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -226,6 +248,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       archive
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -238,6 +261,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       archive location
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -250,6 +274,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       archive place
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -262,6 +287,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       authority
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -274,6 +300,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       call number
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -286,6 +313,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       chapter number
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -298,6 +326,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       collection number
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -310,6 +339,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       collection title
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -322,6 +352,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       dimensions
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -334,6 +365,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       event
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -346,6 +378,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       event place
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -358,6 +391,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       jurisdiction
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -370,6 +404,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       medium
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -382,6 +417,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       number
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -394,6 +430,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       number of pages
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -406,6 +443,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       number of volumes
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -418,6 +456,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       pmcid
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -430,6 +469,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       pmid
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -442,6 +482,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       reviewed title
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -454,6 +495,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       section
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>
@@ -466,6 +508,7 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                     <label className=\\"\\">
                                       year suffix
                                     </label>
+                                    <Instructions instructions={{...}} />
                                     <input type=\\"text\\" placeholder={{...}} onChange={[Function]} value=\\"\\" />
                                   </div>
                                 </Errorable>

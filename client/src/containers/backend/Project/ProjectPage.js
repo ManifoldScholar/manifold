@@ -12,6 +12,15 @@ export default class ProjectProjectPageContainer extends PureComponent {
   };
 
   render() {
+    const heroInstructions = (
+      <div>
+        <p className="instructions">
+          The Hero Image is displayed at the top of the project landing page.<br />
+          Images will be resized to 1280x800 and cropped along the bottom edge.
+        </p>
+      </div>
+    );
+
     return (
       <section>
         <FormContainer.Form
@@ -33,7 +42,7 @@ export default class ProjectProjectPageContainer extends PureComponent {
             readFrom="attributes[heroStyles][mediumLandscape]"
             name="attributes[hero]"
             remove="attributes[removeHero]"
-            instructions="The Hero Image is displayed at the top of the project landing page."
+            instructions={heroInstructions}
           />
           <Form.Upload
             layout="portrait"

@@ -27,6 +27,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Facebook App ID
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -39,6 +40,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Facebook App Secret
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"password\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -58,6 +60,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Twitter Consumer Key
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -70,6 +73,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Twitter Consumer Secret
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"password\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -82,6 +86,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Twitter Access Token
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -94,6 +99,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Twitter Access Token Secret
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"password\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -114,6 +120,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                                 <label className=\\"\\">
                                   Google Service Config File
                                 </label>
+                                <Instructions instructions={{...}} />
                                 <Dropzone style={[undefined]} className=\\"form-dropzone style-square\\" multiple={false} onDrop={[Function]} accept=\\"application/json\\">
                                   <div className=\\"contents-empty\\">
                                     <i className=\\"manicon manicon-cloud-up\\" />
@@ -145,6 +152,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Google Project Id
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -157,6 +165,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Google Private Key ID
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -169,6 +178,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Google Client Email
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -181,6 +191,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Google Client ID
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -200,6 +211,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Google OAuth Client ID
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -212,6 +224,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Google Client Secret
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"password\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
@@ -230,6 +243,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                             <label className=\\"\\">
                               Google Analytics Profile ID
                             </label>
+                            <Instructions instructions={{...}} />
                             <ReactTextMask onChange={[Function]} value={{...}} type=\\"text\\" mask={{...}} placeholder=\\"ga:123456789\\" />
                           </div>
                         </Form.MaskedTextInput>
@@ -241,6 +255,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                               <label className=\\"\\">
                                 Google Analytics Tracking ID
                               </label>
+                              <Instructions instructions={{...}} />
                               <input type=\\"text\\" placeholder=\\"UA-000000-00\\" onChange={[Function]} value=\\"\\" />
                             </div>
                           </Errorable>
