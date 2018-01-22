@@ -43,7 +43,7 @@ export default class NodeTreeIterator {
     const match = hash.match(annotationUuid) || hash.match(nodeHexDigest);
     const identifier = match ? match[1] : hash;
     const id = match ? match[2] : null;
-    this.scrollKey = bodyProps.location.key;
+    this.scrollKey = bodyProps.location.key || "INIT";
     if (identifier === "node") {
       this.nodeScrollTarget = id;
     } else if (identifier === "annotation") {
