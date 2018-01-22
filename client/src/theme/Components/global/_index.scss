@@ -1,6 +1,6 @@
 // Shared Components Manifest
 // --------------------------
-
+@import './forms/index';
 @import './404';
 @import './asset-thumbnail';
 @import './breadcrumb-primary';
@@ -8,20 +8,23 @@
 @import './confirmable-buttons';
 @import './drawer';
 @import './footer-fixed';
-@import './forms/index';
+@import './header-app';
+@import './header-notification';
 @import './key-value-list';
-@import './section-heading';
-@import './section-heading-secondary';
-@import './utilities';
 @import './list-pagination-primary';
 @import './list-pagination-secondary';
-@import './overlay-full-primary';
+@import './loading-bar';
 @import './overlay-full';
 @import './overlay-full-header';
+@import './overlay-full-primary';
 @import './table-single-value';
 @import './checkboxes';
 @import './header-app';
 @import './header-notification';
 @import './loading-bar';
+@import './section-heading';
+@import './section-heading-secondary';
 @import './share-nav-primary';
+@import './table-single-value';
 @import './user-menu';
+@import './utilities';

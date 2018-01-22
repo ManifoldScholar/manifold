@@ -5,7 +5,7 @@ exports[`Reader.Annotation.Annotation component renders correctly 1`] = `
   className="annotation-annotation"
 >
   <section
-    className="meta"
+    className="annotation-meta"
   >
     <div>
       <figure

@@ -14,23 +14,34 @@
 
   .manicon {
     &.manicon-notepad {
-      font-size: 26px;
       margin-right: 14px;
+      font-size: 26px;
 
       &:before {
         vertical-align: bottom;
+      }
+    }
+
+    &.manicon-magnify {
+      position: relative;
+      margin-right: 30px;
+      font-size: 18px;
+
+      &:before {
+        position: absolute;
+        top: 3px;
       }
     }
   }
 
   .overlay-title {
     @include templateHead;
-    text-align: left;
     padding: 0.85em 0;
     margin: 0;
     font-size: 22px;
     font-weight: $medium;
     color: $neutral75;
+    text-align: left;
 
     @include respond($break65) {
       text-align: center;

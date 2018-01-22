@@ -1,0 +1,96 @@
+.annotation-meta {
+  @include drawerIndent(padding-left);
+  position: relative;
+  margin-bottom: 10px;
+
+  @include respond($break50) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .author-avatar {
+    @include buttonAvatar(32);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid $neutral50;
+
+    &.dull {
+      @include buttonAvatar(32, $neutral50, $neutral20);
+      border: 1px solid $neutral50;
+    }
+
+    .image {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 100%;
+      background-position: 50% 50%;
+      background-size: cover;
+    }
+  }
+
+  .author-name {
+    @include templateHead;
+    margin: 0;
+    font-weight: $semibold;
+
+    .reply-to {
+      display: inline-block;
+      margin-left: 6px;
+      color: $neutral40;
+
+      .manicon {
+        display: inline-block;
+        margin-right: 4px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .deleted-notification {
+    @include subtitlePrimary;
+    margin-top: 0;
+    color: $neutral70;
+  }
+
+  datetime, .subtitle {
+    @include subtitlePrimary;
+    margin-top: 2px;
+    color: $neutral70;
+  }
+
+  .markers {
+    display: flex;
+    padding-top: 6px;
+
+    @include respond($break50) {
+      padding: 0;
+    }
+  }
+
+  .marker {
+    @include utilityPrimary;
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    font-size: 11px;
+    hyphens: none;
+    color: $accentPrimaryDark;
+    text-align: center;
+    background-color: $neutral10;
+
+    &.secondary {
+      color: $sp40Tertiary;
+    }
+
+    &.tertiary {
+      color: $neutral75;
+    }
+
+    + .marker {
+      margin-left: 8px;
+    }
+  }
+}

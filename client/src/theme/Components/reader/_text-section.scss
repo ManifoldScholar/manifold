@@ -99,6 +99,17 @@
     }
   }
 
+  .node-flash {
+    background-color: transparent;
+    transition: background-color 1s ease;
+  }
+
+  .node-flash-active {
+    background-color: $sp20SecondaryLight;
+    transition: background-color 1s ease;
+  }
+
+
   //h2 {
   //  @include chapterHeading;
   //

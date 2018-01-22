@@ -7,7 +7,13 @@ exports[`Backend.Ingestion.Form.Type component renders cancel button when passed
   <div
     className="form-input"
   >
-    <label>
+    <label
+      style={
+        Object {
+          "marginBottom": "1.5em",
+        }
+      }
+    >
       Text Format
     </label>
     <label
@@ -129,7 +135,13 @@ exports[`Backend.Ingestion.Form.Type component renders correctly 1`] = `
   <div
     className="form-input"
   >
-    <label>
+    <label
+      style={
+        Object {
+          "marginBottom": "1.5em",
+        }
+      }
+    >
       Text Format
     </label>
     <label

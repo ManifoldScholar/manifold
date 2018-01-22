@@ -4,6 +4,7 @@ import Highlight from "./Highlight";
 import Popup from "./Popup";
 import Selection from "./Selection";
 import Share from "./Share";
+import Meta from "./Meta";
 
 export default {
   Annotation,
@@ -11,5 +12,6 @@ export default {
   Highlight,
   Popup,
   Selection,
-  Share
+  Share,
+  Meta
 };

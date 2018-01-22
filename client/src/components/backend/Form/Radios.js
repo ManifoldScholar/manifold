@@ -24,7 +24,7 @@ class FormRadios extends Component {
     return (
       <div className="form-input">
         {this.props.label
-          ? <label>
+          ? <label style={{ marginBottom: "1.5em" }}>
               {this.props.label}
             </label>
           : null}

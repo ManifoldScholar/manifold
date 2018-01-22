@@ -1,11 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SearchMenuBody from "../SearchMenuBody";
+import NoResults from "../NoResults";
 
-describe("Global.SearchMenuBody component", () => {
+describe("Reader.Search.NoResults component", () => {
+
   it("renders correctly", () => {
-    const component = renderer.create(<SearchMenuBody />);
+    const component = renderer.create(
+      <NoResults/>
+    );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
 });

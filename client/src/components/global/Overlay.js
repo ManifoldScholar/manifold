@@ -13,7 +13,8 @@ export default class Overlay extends Component {
     closeUrl: PropTypes.string,
     closeCallback: PropTypes.func,
     contentWidth: PropTypes.number,
-    appearance: PropTypes.string
+    appearance: PropTypes.string,
+    triggerScrollToTop: PropTypes.any
   };
 
   constructor() {
@@ -21,6 +22,12 @@ export default class Overlay extends Component {
     this.state = {
       view: null
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.triggerScrollToTop !== this.props.triggerScrollToTop) {
+      this.scrollableEl.scrollTo(0, 0);
+    }
   }
 
   handleCloseEvent = event => {
@@ -78,7 +85,13 @@ export default class Overlay extends Component {
     return (
       <HigherOrder.BodyClass className={"no-scroll overlay"}>
         <div>
-          <div className={this.overlayClass()} key={"globalOverlay"}>
+          <div
+            className={this.overlayClass()}
+            key={"globalOverlay"}
+            ref={el => {
+              this.scrollableEl = el;
+            }}
+          >
             {this.renderHeader(this.props)}
             {!this.props.title
               ? <button

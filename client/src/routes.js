@@ -9,12 +9,26 @@ export default () => {
     {
       name: "reader",
       component: Reader.Reader,
-      path: "/read/:textId/:section(section)?/:sectionId?",
+      path: "/read/:textId/:ignore(section|search)?/:sectionId?",
       helper: t => `/read/${t}`,
       routes: [
         {
+          name: "readerSearchResults",
+          component: Reader.Search,
+          path: "/read/:textId/search",
+          helper: t => `/read/${t}/search`
+        },
+        {
+          name: "readerSectionSearchResults",
+          component: Reader.Search,
+          transition: "overlay-full",
+          path: "/read/:textId/section/:sectionId/search",
+          helper: (t, ts) => `/read/${t}/section/${ts}/search`
+        },
+        {
           name: "readerSection",
           component: Reader.Section,
+          exact: false,
           path: "/read/:textId/section/:sectionId",
           helper: (t, s, anchor = "") => `/read/${t}/section/${s}${anchor}`,
           routes: [

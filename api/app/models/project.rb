@@ -107,6 +107,8 @@ class Project < ApplicationRecord
   manifold_has_attached_file :avatar, :image
 
   # Scopes
+  scope :search_import, -> { includes(:collaborators, :makers) }
+
   scope :by_featured, lambda { |featured|
     return all if featured.nil?
     where(featured: to_boolean(featured))
@@ -136,8 +138,9 @@ class Project < ApplicationRecord
   def search_data
     {
       title: title,
-      description: description,
-      makers: makers.map(&:name)
+      body: description,
+      makers: makers.map(&:name),
+      project_slug: slug
     }
   end
 

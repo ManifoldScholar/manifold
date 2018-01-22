@@ -8,6 +8,12 @@ end
 
 namespace :manifold do
   namespace :search do
+    desc "Update searchable text nodes."
+    task update_text_indexes: :environment do
+      logger = Manifold::Rake.logger
+      TextSection.update_text_indexes(logger)
+    end
+
     desc "Reindex searchable models."
     task reindex: :environment do
       Rake::Task["searchkick:reindex:all"].invoke

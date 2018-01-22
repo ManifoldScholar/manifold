@@ -14,7 +14,13 @@ exports[`Backend Text Ingestion Edit Container renders correctly 1`] = `
         <div
           className="form-input"
         >
-          <label>
+          <label
+            style={
+              Object {
+                "marginBottom": "1.5em",
+              }
+            }
+          >
             Text Format
           </label>
           <label
