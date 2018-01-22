@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import DrawerSwitch from "./DrawerSwitch";
 import Passthrough from "./Passthrough";
+import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 
 const renderChildRoutes = (route, renderOptions) => {
   const defaultOptions = {
@@ -9,8 +10,6 @@ const renderChildRoutes = (route, renderOptions) => {
     childProps: {},
     drawer: false,
     drawerProps: {},
-    dialog: false,
-    dialogProps: {},
     factory: null
   };
   const routeOptions = route.options || {};
@@ -22,12 +21,30 @@ const renderChildRoutes = (route, renderOptions) => {
   );
   const childRoutes = route.routes;
 
-  const defaultRender = childRoute => props =>
-    <childRoute.component
-      {...props}
-      {...options.childProps}
-      route={childRoute}
-    />;
+  const defaultRender = childRoute => props => {
+    let rendered = (
+      <childRoute.component
+        {...props}
+        {...options.childProps}
+        route={childRoute}
+      />
+    );
+
+    if (childRoute.transition) {
+      rendered = (
+        <ReactCSSTransitionGroup
+          transitionName={childRoute.transition}
+          transitionAppear
+          transitionAppearTimeout={500}
+          transitionLeaveTimeout={500}
+          transitionEnterTimeout={250}
+        >
+          {rendered}
+        </ReactCSSTransitionGroup>
+      );
+    }
+    return rendered;
+  };
 
   const factoryRender = childRoute => props =>
     options.factory(defaultRender(childRoute)(props));
