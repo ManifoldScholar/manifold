@@ -8,7 +8,7 @@ import { commonActions } from "actions/helpers";
 import { pagesAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import entityUtils from "utils/entityUtils";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 const { request } = entityStoreActions;
 
@@ -113,7 +113,7 @@ export class BackendContainer extends PureComponent {
               this.mainContainer = mainContainer;
             }}
           >
-            {renderRoutes(this.props.route.routes)}
+            {childRoutes(this.props.route)}
           </main>
           <LayoutFrontend.Footer
             pages={this.props.pages}

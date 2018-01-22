@@ -5,7 +5,7 @@ import { Dialog, Navigation } from "components/backend";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
@@ -160,11 +160,7 @@ export class ProjectWrapperContainer extends PureComponent {
   renderRoutes() {
     const { project } = this.props;
     const refresh = this.fetchProject;
-    const childRoutes = renderRoutes(this.props.route.routes, {
-      refresh,
-      project
-    });
-    return childRoutes;
+    return childRoutes(this.props.route, { childProps: { refresh, project } });
   }
 
   render() {

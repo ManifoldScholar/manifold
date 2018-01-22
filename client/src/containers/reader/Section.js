@@ -18,7 +18,7 @@ import isNil from "lodash/isNil";
 import remove from "lodash/remove";
 import some from "lodash/some";
 import isEqual from "lodash/isEqual";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 import { HeadContent } from "components/global";
 import HigherOrder from "containers/global/HigherOrder";
 
@@ -185,7 +185,7 @@ export class SectionContainer extends Component {
           image={projectImage}
           description={sectionDescription}
         />
-        {renderRoutes(this.props.route.routes)}
+        {childRoutes(this.props.route)}
         <Section.Text {...this.props} />
         <div>
           <Section.NextSection

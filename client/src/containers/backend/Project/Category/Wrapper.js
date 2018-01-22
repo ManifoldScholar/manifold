@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 class ProjectCategoryWrapperContainer extends Component {
   static displayName = "Project.Category.Wrapper";
@@ -13,7 +13,7 @@ class ProjectCategoryWrapperContainer extends Component {
   render() {
     return (
       <div>
-        {renderRoutes(this.props.route.routes, this.props)}
+        {childRoutes(this.props.route, { childProps: this.props })}
       </div>
     );
   }

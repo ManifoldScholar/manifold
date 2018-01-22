@@ -6,7 +6,7 @@ import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { resourcesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 const { request, flush } = entityStoreActions;
 
@@ -161,8 +161,7 @@ export class ResourceWrapperContainer extends PureComponent {
 
   renderRoutes() {
     const { resource } = this.props;
-    const childRoutes = renderRoutes(this.props.route.routes, { resource });
-    return childRoutes;
+    return childRoutes(this.props.route, { childProps: { resource } });
   }
 
   render() {

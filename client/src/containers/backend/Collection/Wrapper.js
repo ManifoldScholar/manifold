@@ -6,7 +6,7 @@ import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 const { request, flush } = entityStoreActions;
 
@@ -150,8 +150,7 @@ export class CollectionWrapperContainer extends PureComponent {
 
   renderRoutes() {
     const { collection } = this.props;
-    const childRoutes = renderRoutes(this.props.route.routes, { collection });
-    return childRoutes;
+    return childRoutes(this.props.route, { childProps: { collection } });
   }
 
   render() {

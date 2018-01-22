@@ -5,7 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import entityUtils from "utils/entityUtils";
 import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 import { Dialog, Navigation } from "components/backend";
 import { Layout } from "components/frontend";
 import get from "lodash/get";
@@ -193,11 +193,9 @@ class FeatureDetailContainer extends PureComponent {
 
   renderRoutes() {
     const { feature } = this.props;
-    const childRoutes = renderRoutes(this.props.route.routes, {
-      feature,
-      sessionName: "backend-feature-update"
+    return childRoutes(this.props.route, {
+      childProps: { feature, sessionName: "backend-feature-update" }
     });
-    return childRoutes;
   }
 
   render() {
