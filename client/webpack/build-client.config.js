@@ -37,8 +37,8 @@ const config = {
   node: { process: false },
 
   entry: {
-    "build/client": ["./src/client.js"],
-    "build/theme": ["./src/theme/theme.js"]
+    "build/theme": ["./src/theme/theme.js"],
+    "build/client": ["./src/client.js"]
   },
 
   output: {

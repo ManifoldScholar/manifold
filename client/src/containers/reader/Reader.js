@@ -19,7 +19,7 @@ import { textsAPI, sectionsAPI, requests } from "api";
 import values from "lodash/values";
 import lh from "helpers/linkHandler";
 import locationHelper from "helpers/location";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 import { Redirect } from "react-router-dom";
 import { matchRoutes } from "react-router-config";
 import {
@@ -235,9 +235,8 @@ export class ReaderContainer extends Component {
     /* eslint-disable no-unused-vars */
     const { route, ...otherProps } = this.props;
     /* eslint-enable no-unused-vars */
-    const injectProps = { ...otherProps, ...this.readerActions };
-    const childRoutes = renderRoutes(this.props.route.routes, injectProps);
-    return childRoutes;
+    const childProps = { ...otherProps, ...this.readerActions };
+    return childRoutes(this.props.route, { childProps, switch: false });
   }
 
   render() {
