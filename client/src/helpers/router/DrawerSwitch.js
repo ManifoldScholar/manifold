@@ -7,7 +7,7 @@ class DrawerSwitch extends React.PureComponent {
   static propTypes = {
     history: PropTypes.object.isRequired,
     wrapperProps: PropTypes.object.isRequired,
-    match: PropTypes.object.isRequired,
+    match: PropTypes.object,
     children: PropTypes.any
   };
 
