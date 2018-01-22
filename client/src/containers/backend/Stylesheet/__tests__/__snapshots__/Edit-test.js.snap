@@ -39,6 +39,7 @@ exports[`Backend Stylesheet Edit Container renders correctly 1`] = `
                                           <label className=\\"\\">
                                             Name
                                           </label>
+                                          <Instructions instructions={{...}} />
                                           <input type=\\"text\\" placeholder=\\"Name\\" onChange={[Function]} value=\\"\\" />
                                         </div>
                                       </Errorable>
