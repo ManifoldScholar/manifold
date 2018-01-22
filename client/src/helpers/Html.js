@@ -72,6 +72,10 @@ export default class Html extends Component {
   javascripts() {
     if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
     const scripts = this.reduceAssets(".js");
+    scripts.sort(a => {
+      if (a === "build/theme.js") return -1;
+      return 1;
+    });
     return scripts.map(script =>
       <script src={`/${script}`} key={script} charSet="UTF-8" />
     );
