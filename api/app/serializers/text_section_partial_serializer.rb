@@ -2,7 +2,7 @@
 class TextSectionPartialSerializer < ActiveModel::Serializer
   meta(partial: true)
 
-  attributes :id, :name, :body_json, :source_identifier, :kind
-
+  attributes :id, :text_slug, :text_title, :name, :source_identifier, :kind
   belongs_to :text
+
 end
