@@ -4,6 +4,7 @@ import setter from "./setter";
 import { Form as GlobalForm } from "components/global";
 import isString from "lodash/isString";
 import classnames from "classnames";
+import Instructions from "./Instructions";
 
 class FormTextArea extends Component {
   static displayName = "Form.TextArea";
@@ -16,7 +17,7 @@ class FormTextArea extends Component {
     value: PropTypes.string,
     errors: PropTypes.array,
     name: PropTypes.string,
-    instructions: PropTypes.string
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
   static defaultProps = {
@@ -39,11 +40,7 @@ class FormTextArea extends Component {
           <label className={labelClass}>
             {this.props.label}
           </label>
-          {isString(this.props.instructions)
-            ? <span className="instructions">
-                {this.props.instructions}
-              </span>
-            : null}
+          <Instructions instructions={this.props.instructions} />
           <textarea
             style={{ height: this.props.height }}
             placeholder={this.props.placeholder}

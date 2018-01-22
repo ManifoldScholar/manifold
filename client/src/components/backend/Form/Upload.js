@@ -7,6 +7,7 @@ import isString from "lodash/isString";
 import isObject from "lodash/isObject";
 import get from "lodash/get";
 import setter from "./setter";
+import Instructions from "./Instructions";
 
 class FormUpload extends Component {
   static displayName = "Form.Upload";
@@ -15,7 +16,7 @@ class FormUpload extends Component {
     set: PropTypes.func.isRequired, // set is called when the value changes
     setOther: PropTypes.func, // used to set another prop, eg removed, in session
     label: PropTypes.string,
-    instructions: PropTypes.string,
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     inlineStyle: PropTypes.object,
     name: PropTypes.string, // name of the model field: attributes[avatar]
     layout: PropTypes.oneOf(["square", "portrait", "landscape", "embed"]),
@@ -261,11 +262,7 @@ class FormUpload extends Component {
                 {this.props.label}
               </label>
             : null}
-          {isString(this.props.instructions)
-            ? <span className="instructions">
-                {this.props.instructions}
-              </span>
-            : null}
+          <Instructions instructions={this.props.instructions} />
           <Dropzone
             style={this.props.inlineStyle}
             className={`form-dropzone style-${this.props.layout}`}

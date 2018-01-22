@@ -14,6 +14,7 @@ import setter from "./setter";
 import FieldGroup from "./FieldGroup";
 import CodeArea from "./CodeArea";
 import GeneratedPasswordInput from "./GeneratedPasswordInput";
+import Instructions from "./Instructions";
 
 export default {
   HasMany,
@@ -31,5 +32,6 @@ export default {
   FieldGroup,
   CodeArea,
   GeneratedPasswordInput,
+  Instructions,
   setter
 };
