@@ -21,6 +21,7 @@ export usersAPI from "./resources/users";
 export commentsAPI from "./resources/comments";
 export ingestionsAPI from "./resources/ingestions";
 export stylesheetsAPI from "./resources/stylesheets";
+export readerSearchResultsAPI from "./resources/readerSearchResults";
 export testMailsAPI from "./resources/testMails";
 export requests from "./requests";
 export ApiClient from "./client";

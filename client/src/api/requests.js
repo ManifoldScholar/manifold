@@ -83,6 +83,7 @@ export default {
   rCommentFlag: "reader-comment-flag",
   rCommentUnflag: "reader-comment-unflag",
   rDrawerAnnotations: "reader-drawer-annotations",
+  rSearchResults: "reader-search-results",
   feResourceAnnotationDestroy: "reader-resource-annotation-destroy",
   feCollectionAnnotationDestroy: "reader-collection-annotation-destroy",
   gAuthenticatedUserUpdate: "global-authenticated-user-update",

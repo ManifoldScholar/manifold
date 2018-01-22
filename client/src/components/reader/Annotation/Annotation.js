@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Helper } from "components/global";
-import { FormattedDate } from "components/global";
 import { Utility } from "components/frontend";
 import Editor from "./Editor";
+import Meta from "./Meta";
 import { Comment as CommentContainer } from "containers/global";
 import classNames from "classnames";
 import HigherOrder from "containers/global/HigherOrder";
@@ -71,51 +71,9 @@ export default class AnnotationDetail extends PureComponent {
     const creator = this.props.creator;
     const annotation = this.props.annotation;
 
-    const avatarClass = classNames({
-      "author-avatar": true,
-      dull: !creator.attributes.isCurrentUser
-    });
-
     return (
       <li className="annotation-annotation">
-        <section className="meta">
-          {/* NB: Empty div required for flex-positioning of private/author marker */}
-          <div>
-            <figure className={avatarClass}>
-              {creator.attributes.avatarStyles.smallSquare
-                ? <div
-                    className="image"
-                    style={{
-                      backgroundImage: `url(${creator.attributes.avatarStyles
-                        .smallSquare})`
-                    }}
-                  >
-                    <span className="screen-reader-text">
-                      Profile image for {creator.attributes.fullName}
-                    </span>
-                  </div>
-                : <div className="no-image">
-                    <i className="manicon manicon-person" />
-                  </div>}
-            </figure>
-            <h4 className="author-name">
-              {creator.attributes.fullName}
-            </h4>
-            <datetime>
-              <FormattedDate
-                format="distanceInWords"
-                date={annotation.attributes.createdAt}
-              />{" "}
-              ago
-            </datetime>
-          </div>
-          {annotation.attributes.private
-            ? <div className="marker secondary">
-                {"Private"}
-              </div>
-            : null}
-        </section>
-
+        <Meta annotation={annotation} creator={creator} />
         {this.state.action === "editing"
           ? <Editor
               id={annotation.id}

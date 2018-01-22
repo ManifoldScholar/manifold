@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102232442) do
+ActiveRecord::Schema.define(version: 20180113140606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20180102232442) do
     t.string   "external_subject_type"
     t.string   "subject_slug"
     t.string   "project_slug"
+    t.uuid     "twitter_query_id"
   end
 
   create_table "favorites", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -362,6 +363,16 @@ ActiveRecord::Schema.define(version: 20180102232442) do
     t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
 
+  create_table "searchable_nodes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "text_section_id"
+    t.string   "node_uuid"
+    t.text     "content"
+    t.integer  "position"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.text     "contains",        default: [],              array: true
+  end
+
   create_table "settings", force: :cascade do |t|
     t.jsonb    "general",                 default: {}
     t.jsonb    "theme",                   default: {}
@@ -484,6 +495,16 @@ ActiveRecord::Schema.define(version: 20180102232442) do
     t.string  "reference"
     t.uuid    "resource_id"
     t.index ["resource_id"], name: "index_thumbnail_fetch_attempts_on_resource_id", using: :btree
+  end
+
+  create_table "twitter_queries", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.uuid     "project_id"
+    t.uuid     "creator_id"
+    t.string   "query"
+    t.boolean  "active",       default: true, null: false
+    t.integer  "events_count"
   end
 
   create_table "upgrade_results", primary_key: "version", id: :string, force: :cascade do |t|

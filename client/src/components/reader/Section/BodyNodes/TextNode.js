@@ -18,26 +18,44 @@ export default class TextNode extends Component {
     scrollAnnotation: PropTypes.string
   };
 
+  componentDidMount() {
+    if (this.props.scrollToView && this.props.scrollKey) {
+      this.doScroll(true);
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (
       this.props.scrollToView &&
       this.props.scrollKey !== prevProps.scrollKey
     ) {
-      const { scrollAnnotation } = this.props;
-      const target =
-        document.querySelector(`[data-annotation-ids="${scrollAnnotation}"]`) ||
-        this.el;
-      smoothScroll(target || this.el, 100, 500, () => {
-        const annotation = this.getAnnotation(scrollAnnotation);
-        if (annotation && annotation.attributes.format === "annotation") {
-          target.click();
-        }
-      });
+      this.doScroll(false);
     }
   }
 
   getAnnotation(id) {
     return this.props.openAnnotations[id];
+  }
+
+  doScroll(withTimeout = false) {
+    const { scrollAnnotation } = this.props;
+    const target = scrollAnnotation
+      ? document.querySelector(`[data-annotation-ids="${scrollAnnotation}"]`)
+      : this.el;
+    const annotation = scrollAnnotation
+      ? this.getAnnotation(scrollAnnotation)
+      : null;
+    const doClick = annotation && annotation.attributes.format === "annotation";
+    const scroll = () => {
+      smoothScroll(target, 100, 500, () => {
+        if (doClick) target.click();
+      });
+    };
+    if (withTimeout) {
+      setTimeout(scroll, 0);
+    } else {
+      scroll();
+    }
   }
 
   containsAnnotations() {

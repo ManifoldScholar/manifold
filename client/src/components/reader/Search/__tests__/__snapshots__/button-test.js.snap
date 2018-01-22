@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Search.Button component renders correctly when active 1`] = `
+<button
+  className="button-search button-active"
+  data-id="toggle-menu"
+  onClick={[Function]}
+>
+  <i
+    className="manicon manicon-magnify"
+  />
+  <span
+    className="screen-reader-text"
+  >
+    Click to open search
+  </span>
+</button>
+`;
+
+exports[`Reader.Search.Button component renders correctly when inactive 1`] = `
+<button
+  className="button-search"
+  data-id="toggle-menu"
+  onClick={[Function]}
+>
+  <i
+    className="manicon manicon-magnify"
+  />
+  <span
+    className="screen-reader-text"
+  >
+    Click to open search
+  </span>
+</button>
+`;

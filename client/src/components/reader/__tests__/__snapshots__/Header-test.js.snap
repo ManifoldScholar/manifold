@@ -61,6 +61,22 @@ exports[`Reader.Header Component renders correctly 1`] = `
         </li>
         <li>
           <button
+            className="button-search"
+            data-id="toggle-menu"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-magnify"
+            />
+            <span
+              className="screen-reader-text"
+            >
+              Click to open search
+            </span>
+          </button>
+        </li>
+        <li>
+          <button
             className="button-avatar"
             onClick={[Function]}
           >
@@ -159,6 +175,15 @@ exports[`Reader.Header Component renders correctly 1`] = `
         className="visibility-menu"
       >
         <ul />
+      </nav>
+    </div>
+    <div
+      className="panel-hidden"
+    >
+      <nav
+        className="search-menu"
+      >
+        <span />
       </nav>
     </div>
     <div

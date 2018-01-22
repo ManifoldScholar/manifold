@@ -1,0 +1,155 @@
+.search-query {
+
+  // Input defaults
+  input[type='text'] {
+    @include templateHead;
+    width: 100%;
+    padding: 13px 25px 14px;
+    font-size: $type50;
+    color: $neutralOffBlack;
+    background-color: $neutral05;
+    border: 3px solid transparent;
+    outline: none;
+    appearance: none;
+
+    .search-menu & {
+      background-color: $neutralWhite;
+    }
+
+    @include respond($break70) {
+      font-size: $type70;
+    }
+  }
+
+  // Can be abstracted to shared if used elsewhere
+  .input-magnify {
+    position: relative;
+    width: 100%;
+
+    @include respond($break40) {
+      min-width: 300px;
+    }
+
+    input {
+      padding-left: 54px;
+    }
+
+    // Can be button or a simple icon
+    .manicon-magnify {
+      @include buttonUnstyled;
+      position: absolute;
+      top: 25px;
+      left: 23px;
+      font-size: 18px;
+      color: $neutral50;
+    }
+
+    input:focus + .manicon-magnify {
+      color: $accentPrimary;
+    }
+  }
+
+  .filters {
+    padding-top: 20px;
+
+    .filter + .filter {
+      margin-top: 40px;
+    }
+
+    label {
+      @include utilityPrimary;
+      font-size: 13px;
+      font-weight: $semibold;
+      color: $neutral70;
+      text-transform: uppercase;
+
+      @include respond($break40) {
+        font-size: 14px;
+      }
+
+      &.group-label {
+        display: block;
+        padding-bottom: 10px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid $neutral40;
+
+        .search-menu & {
+          display: inline;
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+      }
+
+
+    }
+
+    .checkbox-group {
+      display: block;
+      white-space: normal;
+
+      .search-menu & {
+        padding-top: 8px;
+      }
+
+      @include respond($break70) {
+        display: inline-block;
+        white-space: nowrap;
+
+        .search-menu & {
+          padding-left: 32px;
+        }
+      }
+    }
+
+    .checkbox {
+      position: relative;
+      display: block;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      cursor: pointer;
+
+      @include respond($break20) {
+        display: inline-block;
+      }
+
+      @include respond($break70) {
+        margin-right: 32px;
+      }
+
+      .control-indicator {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        padding-top: 6px;
+        margin-right: 12px;
+        text-align: center;
+        vertical-align: middle;
+        background-color: $neutral20;
+
+        .search-menu & {
+          background-color: $neutralWhite;
+        }
+
+        // Styled, but hidden until checked
+        .manicon-check {
+          font-size: 11px;
+          color: $neutralOffBlack;
+          visibility: hidden;
+        }
+      }
+
+      input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+      }
+
+      input:checked ~ .control-indicator {
+        .manicon-check {
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+}

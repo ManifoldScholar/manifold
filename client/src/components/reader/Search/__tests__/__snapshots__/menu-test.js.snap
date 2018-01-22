@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Search.Menu component renders correctly when search is not visibile 1`] = `
+<nav
+  className="search-menu"
+>
+  <span />
+</nav>
+`;
+
+exports[`Reader.Search.Menu component renders correctly when search is visibile 1`] = `
+<nav
+  className="search-menu"
+>
+  <span>
+    <form
+      className="search-query"
+      onSubmit={[Function]}
+    >
+      <div
+        className="input-magnify"
+      >
+        <input
+          autoFocus={true}
+          onChange={[Function]}
+          placeholder="Search for..."
+          type="text"
+          value=""
+        />
+        <button
+          className="manicon manicon-magnify"
+        />
+      </div>
+      <div
+        className="filters"
+      >
+        <div
+          className="filter"
+        >
+          <label
+            className="group-label"
+          >
+            Search within:
+          </label>
+          <div
+            className="checkbox-group"
+          >
+            <label
+              className="checkbox"
+            >
+              <input
+                checked={false}
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <div
+                className="control-indicator"
+              >
+                <i
+                  className="manicon manicon-check"
+                />
+              </div>
+              Chapter
+            </label>
+            <label
+              className="checkbox"
+            >
+              <input
+                checked={true}
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <div
+                className="control-indicator"
+              >
+                <i
+                  className="manicon manicon-check"
+                />
+              </div>
+              Text
+            </label>
+            <label
+              className="checkbox"
+            >
+              <input
+                checked={false}
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <div
+                className="control-indicator"
+              >
+                <i
+                  className="manicon manicon-check"
+                />
+              </div>
+              Project
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </span>
+</nav>
+`;

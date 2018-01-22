@@ -10,8 +10,6 @@ export LoadingBlock from "./LoadingBlock";
 export MetaList from "./MetaList";
 export Project from "./Project";
 export PressLogo from "./PressLogo";
-export SearchMenuBody from "./SearchMenuBody";
-export SearchMenuButton from "./SearchMenuButton";
 export Text from "./Text";
 export UIPanel from "./UIPanel";
 export UserMenuBody from "./UserMenu/UserMenuBody";

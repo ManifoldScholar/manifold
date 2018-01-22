@@ -40,7 +40,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
             className="annotation-annotation"
           >
             <section
-              className="meta"
+              className="annotation-meta"
             >
               <div>
                 <figure
@@ -96,7 +96,7 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
             className="annotation-annotation"
           >
             <section
-              className="meta"
+              className="annotation-meta"
             >
               <div>
                 <figure

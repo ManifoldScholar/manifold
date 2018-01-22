@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { ReturnMenu, TextTitles, Notes } from "components/reader";
-import { ControlMenu } from "components/reader";
+import {
+  ReturnMenu,
+  TextTitles,
+  Notes,
+  Search,
+  ControlMenu
+} from "components/reader";
 import {
   HeaderNotifications,
   UIPanel,
@@ -126,12 +131,12 @@ export default class Header extends Component {
                   active={this.props.visibility.uiPanels.appearance}
                 />
               </li>
-              {/* <li>
-                <SearchMenuButton
-                  toggleSearchMenu={this.handleSearchMenuButtonClick}
+              <li>
+                <Search.Button
+                  toggleSearchMenu={this.panelToggleHandler("search")}
                   active={this.props.visibility.uiPanels.search}
                 />
-              </li>*/}
+              </li>
               <li>
                 <UserMenuButton
                   authentication={this.props.authentication}
@@ -179,6 +184,12 @@ export default class Header extends Component {
             bodyComponent={ControlMenu.VisibilityMenuBody}
           />
           <UIPanel
+            id="search"
+            visibility={this.props.visibility.uiPanels}
+            toggleVisibility={this.panelToggleHandler("search")}
+            bodyComponent={Search.Menu}
+          />
+          <UIPanel
             id="appearance"
             visibility={this.props.visibility.uiPanels}
             bodyComponent={ControlMenu.AppearanceMenuBody}
@@ -191,11 +202,6 @@ export default class Header extends Component {
             incrementMargins={this.props.incrementMargins}
             decrementMargins={this.props.decrementMargins}
           />
-          {/* <UIPanel
-            id="search"
-            visibility={this.props.visibility.uiPanels}
-            bodyComponent={SearchMenuBody}
-          />*/}
           <UIPanel
             id="user"
             visibility={this.props.visibility.uiPanels}

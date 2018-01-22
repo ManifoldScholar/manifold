@@ -21,6 +21,15 @@
     }
   }
 
+  .overlay-full-appear & {
+    opacity: 0.01;
+  }
+
+  .overlay-full-appear.overlay-full-appear-active & {
+    opacity: 1;
+    transition: opacity $duration $timing;
+  }
+
   .overlay-full-enter & {
     opacity: 0.01;
   }

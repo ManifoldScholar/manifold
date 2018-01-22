@@ -265,6 +265,21 @@ module Validation
     params.permit(filter: [:keyword, :typeahead, :type])[:filter]
   end
 
+  def reader_search_params
+    if params.dig(:facets).respond_to? :values
+      params[:facets] = params[:facets].values
+    end
+    params.permit(
+      :keyword,
+      :project,
+      :text,
+      :text_section,
+      :raw,
+      facets: [],
+      page: [:number]
+    )
+  end
+
   def annotation_filter_params
     coerce_filter_to_hash(:filter, :ids)
     coerce_filter_to_hash(:filter, :formats)

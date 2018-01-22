@@ -10,8 +10,8 @@
 
   button {
     @include buttonUnstyled;
-    transition: color $duration $timing;
     margin-top: 5px;
+    transition: color $duration $timing;
 
     &.confirm {
       &:hover {

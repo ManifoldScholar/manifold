@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-export default class SearchMenuButton extends Component {
+export default class SearchMenuButton extends PureComponent {
   static propTypes = {
     toggleSearchMenu: PropTypes.func,
     active: PropTypes.bool
