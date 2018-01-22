@@ -4,13 +4,14 @@ import setter from "./setter";
 import { Form as GlobalForm } from "components/global";
 import classnames from "classnames";
 import isString from "lodash/isString";
+import Instructions from "./Instructions";
 
 class FormTextInput extends Component {
   static displayName = "Form.TextInput";
 
   static propTypes = {
     placeholder: PropTypes.string,
-    instructions: PropTypes.string,
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     label: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -46,11 +47,7 @@ class FormTextInput extends Component {
         <label className={labelClass}>
           {this.props.label}
         </label>
-        {isString(this.props.instructions)
-          ? <span className="instructions">
-              {this.props.instructions}
-            </span>
-          : null}
+        <Instructions instructions={this.props.instructions} />
         <input
           ref={input => {
             this.inputElement = input;

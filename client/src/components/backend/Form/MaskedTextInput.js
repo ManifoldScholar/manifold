@@ -6,6 +6,7 @@ import fill from "lodash/fill";
 import setter from "./setter";
 import classnames from "classnames";
 import isString from "lodash/isString";
+import Instructions from "./Instructions";
 
 class FormMaskedTextInput extends Component {
   static displayName = "Form.MaskedTextInput";
@@ -19,7 +20,7 @@ class FormMaskedTextInput extends Component {
     label: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.string,
-    instructions: PropTypes.string
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
   currencyMask() {
@@ -64,11 +65,7 @@ class FormMaskedTextInput extends Component {
         <label className={labelClass}>
           {this.props.label}
         </label>
-        {isString(this.props.instructions)
-          ? <span className="instructions">
-              {this.props.instructions}
-            </span>
-          : null}
+        <Instructions instructions={this.props.instructions} />
         <MaskedInput
           onChange={this.props.onChange}
           value={this.props.value}

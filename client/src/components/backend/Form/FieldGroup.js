@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isString from "lodash/isString";
 import classNames from "classnames";
+import Instructions from "./Instructions";
 
 export default class FieldGroup extends PureComponent {
   static propTypes = {
@@ -40,11 +41,7 @@ export default class FieldGroup extends PureComponent {
               </span>
             </header>
           : null}
-        {isString(this.props.instructions)
-          ? <span className="instructions">
-              {this.props.instructions}
-            </span>
-          : null}
+        <Instructions instructions={this.props.instructions} />
         {this.renderChildren(this.props)}
       </div>
     );
