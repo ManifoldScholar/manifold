@@ -3,6 +3,7 @@ module SystemUpgrades
     include SystemUpgrades::HasLogger
 
     boolean :force, default: false
+    boolean :stdout, default: false
 
     delegate :version, :version_string, to: :class
 
