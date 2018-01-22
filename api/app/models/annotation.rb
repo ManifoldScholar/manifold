@@ -76,6 +76,22 @@ class Annotation < ApplicationRecord
   delegate :text, to: :text_section
   delegate :project, to: :text
 
+  # Search
+  searchkick callbacks: :async, batch_size: 500, highlight: [:body]
+
+  def search_data
+    {
+      body: body,
+      node_uuid: start_node,
+      creator_id: creator_id,
+      text_section_id: text_section_id
+    }
+  end
+
+  def should_index?
+    !private
+  end
+
   def to_s
     "annotation #{id}"
   end
