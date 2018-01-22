@@ -78,8 +78,8 @@ class Text < ApplicationRecord
   after_commit :trigger_text_added_event, on: [:create, :update]
 
   def title
-    main_title = if new_record?
-                   titles.to_ary.find { |a_title| a_title.kind == TextTitle::KIND_MAIN }
+    main_title = if association(:titles).loaded?
+                   titles.detect { |t| t.kind == TextTitle::KIND_MAIN }
                  else
                    titles.find_by(kind: TextTitle::KIND_MAIN)
                  end
