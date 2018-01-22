@@ -45,6 +45,10 @@ module Ingestor
 
         def self.pointer(ingestion)
           session.file_by_url(ingestion.source_url)
+        rescue Google::Apis::ClientError
+          raise IngestionFailed, "Unable to fetch google doc. Double check the share URL
+          and make sure the doc is publically available or available to the Manifold
+          google service user."
         end
 
         def self.inspector(ingestion, pointer)
