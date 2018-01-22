@@ -5,7 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import entityUtils from "utils/entityUtils";
 import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 import { Dialog, Navigation } from "components/backend";
 
 const { select } = entityUtils;
@@ -198,10 +198,7 @@ class PageDetailContainer extends PureComponent {
 
   renderRoutes() {
     const { page } = this.props;
-    const childRoutes = renderRoutes(this.props.route.routes, {
-      page
-    });
-    return childRoutes;
+    return childRoutes(this.props.route, { childProps: { page } });
   }
 
   render() {

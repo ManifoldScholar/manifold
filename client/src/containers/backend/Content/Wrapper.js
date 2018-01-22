@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Navigation } from "components/backend";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 export class PagesWrapperContainer extends PureComponent {
   static displayName = "Pages.Wrapper";
@@ -41,7 +41,7 @@ export class PagesWrapperContainer extends PureComponent {
               <Navigation.Secondary links={this.secondaryNavigationLinks()} />
             </aside>
             <div className="panel">
-              {renderRoutes(this.props.route.routes)}
+              {childRoutes(this.props.route)}
             </div>
           </div>
         </section>

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Navigation } from "components/backend";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 export class SettingsWrapperContainer extends PureComponent {
   static propTypes = {
@@ -45,7 +45,7 @@ export class SettingsWrapperContainer extends PureComponent {
             <Navigation.Secondary links={this.secondaryNavigationLinks()} />
           </aside>
           <div className="panel">
-            {renderRoutes(this.props.route.routes)}
+            {childRoutes(this.props.route)}
           </div>
         </div>
       </section>

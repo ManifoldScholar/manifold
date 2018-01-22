@@ -6,7 +6,7 @@ import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { textsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { renderRoutes } from "helpers/routing";
+import { childRoutes } from "helpers/router";
 
 const { request } = entityStoreActions;
 
@@ -148,8 +148,7 @@ export class TextWrapperContainer extends PureComponent {
     const { match, history, location, ...otherProps } = this.props;
     /* eslint-enable no-unused-vars */
     otherProps.refresh = this.fetchText;
-    const childRoutes = renderRoutes(this.props.route.routes, otherProps);
-    return childRoutes;
+    return childRoutes(this.props.route, { childProps: otherProps });
   }
 
   render() {
