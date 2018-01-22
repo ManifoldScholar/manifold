@@ -53,15 +53,13 @@ class Text < ApplicationRecord
   belongs_to :category, optional: true
   has_one :publishing_project, class_name: "Project", foreign_key: "published_text_id"
   belongs_to :start_text_section, optional: true, class_name: "TextSection"
-  has_many :titles, class_name: "TextTitle"
+  has_many :titles, class_name: "TextTitle", dependent: :destroy
   has_many :text_subjects
   has_many :subjects, through: :text_subjects
-  has_many :ingestion_sources
-  has_many :source_resources, through: :ingestion_sources, source: :resource
-  has_many :text_sections, -> { order(position: :asc) }
-  has_many :stylesheets, -> { order(position: :asc) }
-  has_many :favorites, as: :favoritable
-  has_many :annotations, through: :text_sections
+  has_many :ingestion_sources, dependent: :destroy
+  has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy
+  has_many :stylesheets, -> { order(position: :asc) }, dependent: :destroy
+  has_many :favorites, as: :favoritable, dependent: :destroy
   has_many :annotations, through: :text_sections
   has_one :text_created_event, -> { where event_type: Event::TEXT_ADDED },
           class_name: Event,
