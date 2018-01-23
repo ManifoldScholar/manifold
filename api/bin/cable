@@ -1,2 +1,15 @@
 #!/bin/bash
+
+PIDFILE="tmp/pids/puma_cable.pid"
+echo "Checking for cable pidfile at $PIDFILE"
+
+if [ -f $PIDFILE ]
+then
+    if ps -p $(cat $PIDFILE) > /dev/null 2>&1
+    then
+        echo "Cable is already running. Restarting."
+        kill -INT $(cat $PIDFILE)
+    fi
+fi
+
 bundle exec puma  -C config/puma_cable.rb cable/config.ru

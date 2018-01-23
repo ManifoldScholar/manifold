@@ -42,4 +42,14 @@ if [[ ! -f $ELASTIC_BIN ]] ; then
 fi
 
 cd $MANIFOLD_ROOT;
+
+echo "Checking for Elasticsearch pidfile at $PID_FILE"
+if [ -f $PID_FILE ]
+then
+    if ps -p $(cat $PID_FILE) > /dev/null 2>&1
+    then
+        echo "Elasticsearch is already running. Restarting."
+        kill -SIGTERM $(cat $PID_FILE)
+    fi
+fi
 $ELASTIC_BIN -E http.port=$ELASTIC_PORT -p $PID_FILE
