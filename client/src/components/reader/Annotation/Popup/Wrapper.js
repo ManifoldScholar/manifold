@@ -6,6 +6,8 @@ import get from "lodash/get";
 import Secondary from "./Secondary";
 import { bindActionCreators } from "redux";
 import { uiVisibilityActions } from "actions";
+import mapValues from "lodash/mapValues";
+import isString from "lodash/isString";
 
 export default class AnnotationPopup extends Component {
   static displayName = "Annotation.Popup.Wrapper";
@@ -176,7 +178,15 @@ export default class AnnotationPopup extends Component {
       bottom = "auto";
     }
 
-    this.setState({ top, bottom, left, direction });
+    const positions = this.roundPositions({ top, left, bottom });
+    this.setState({ ...positions, direction });
+  }
+
+  roundPositions(positions) {
+    return mapValues(positions, pos => {
+      if (!isString(pos)) return Math.round(pos);
+      return pos;
+    });
   }
 
   showSecondary = page => {
