@@ -6,6 +6,10 @@ Paperclip.options[:content_type_mappings] = {
   webm: ["video/webm", "audio/webm"]
 }
 
+# We need to accept dataURIs.
+# See https://github.com/thoughtbot/paperclip/pull/2435 for background on this change.
+Paperclip::DataUriAdapter.register
+
 Paperclip.interpolates :uuid_partition do |attachment, _style|
   id = attachment.instance.id
   return id unless id.is_a? String
