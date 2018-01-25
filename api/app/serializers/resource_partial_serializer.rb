@@ -5,7 +5,7 @@ class ResourcePartialSerializer < ActiveModel::Serializer
   attributes :title, :title_plaintext, :title_formatted, :kind, :sub_kind, :caption,
              :caption_formatted, :caption_plaintext, :project_id, :alt_text,
              :attachment_styles, :variant_thumbnail_styles, :credit_formatted,
-             :credit, :external_type, :external_id, :external_url, :slug, :downloadable,
+             :external_type, :external_id, :external_url, :slug, :downloadable,
              :created_at, :minimum_width, :minimum_height, :tag_list, :project_slug,
              :variant_poster_styles
 

@@ -25,7 +25,7 @@ class Event < ApplicationRecord
   include Filterable
   include Concerns::HasFormattedAttributes
 
-  has_formatted_attributes :subject_title
+  has_formatted_attribute :subject_title
 
   # Associations
   belongs_to :subject, polymorphic: true, counter_cache: true

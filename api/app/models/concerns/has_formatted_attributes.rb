@@ -20,7 +20,7 @@ module Concerns
       # @see [.has_formatted_attribute]
       # @return [void]
       def has_formatted_attributes(*attributes, **shared_options)
-        attributes.each do |attribute|
+        attributes.flatten.each do |attribute|
           has_formatted_attribute attribute, **shared_options
         end
       end
@@ -28,8 +28,15 @@ module Concerns
       # @param [Symbol] attribute
       # @param [Boolean] include_wrap
       # @return [void]
-      def has_formatted_attribute(attribute, include_wrap: true, renderer_options: nil)
-        options = { include_wrap: include_wrap, renderer_options: renderer_options }
+      def has_formatted_attribute(attribute,
+                                  include_wrap: true,
+                                  renderer_options: nil,
+                                  container: nil)
+        options = {
+          include_wrap: include_wrap,
+          renderer_options: renderer_options,
+          container: container
+        }
         definition = FormattedAttributes::Definition.new attribute, options
 
         unless formatted_attributes.add?(definition)

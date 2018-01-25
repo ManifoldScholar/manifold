@@ -4,6 +4,7 @@ module FormattedAttributes
 
     delegate :attribute, :include_wrap?, to: :definition
     delegate :attribute, :renderer_options, to: :definition
+    delegate :attribute, :container, to: :definition
 
     def initialize(definition)
       @definition = definition
@@ -15,7 +16,8 @@ module FormattedAttributes
         formatted: :"#{attribute}_formatted",
         plaintext: :"#{attribute}_plaintext",
         refresh: :"refresh_formatted_#{attribute}",
-        textify: :"textify_#{attribute}"
+        textify: :"textify_#{attribute}",
+        changed?: :"#{attribute}_changed?"
       }
 
       initialize_methods!
@@ -33,7 +35,11 @@ module FormattedAttributes
           extend ActiveSupport::Concern
 
           included do
-            after_save :#{method_name(:refresh)}, if: :#{attribute}_changed?
+            after_save :#{method_name(:refresh)}, if: :#{method_name(:changed?)}
+          end
+
+          def #{method_name(:changed?)}
+            #{container.present? ? "#{container}_was.dig('#{attribute}') != #{container}.dig('#{attribute}')" : :super}
           end
 
           def #{method_name(:formatted)}
@@ -57,8 +63,9 @@ module FormattedAttributes
           end
 
           def #{method_name(:format)}
+            value = #{container.present? ? "#{container}.dig('#{attribute}')" : attribute.to_s}
             SimpleFormatter.run!(
-              input: #{attribute},
+              input: value,
               include_wrap: #{include_wrap?},
               renderer_options: #{renderer_options}
             )

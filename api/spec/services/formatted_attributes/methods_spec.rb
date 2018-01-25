@@ -31,6 +31,7 @@ RSpec.describe FormattedAttributes::Methods do
     specify { is_expected.to include method_name_for(:textify) }
     specify { is_expected.to include method_name_for(:formatted) }
     specify { is_expected.to include method_name_for(:plaintext) }
+    specify { is_expected.to include method_name_for(:changed?) }
   end
 
   describe 'private instance methods' do
