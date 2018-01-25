@@ -1,12 +1,22 @@
+import isFunction from "lodash/isFunction";
+
 export function closest(el, selector) {
   let output = el;
-  const matchesSelector =
-    output.matches ||
-    output.webkitMatchesSelector ||
-    output.mozMatchesSelector ||
-    output.msMatchesSelector;
+  let check;
+  if (isFunction(selector)) {
+    check = selector;
+  } else {
+    const matchesSelector =
+      output.matches ||
+      output.webkitMatchesSelector ||
+      output.mozMatchesSelector ||
+      output.msMatchesSelector;
+    check = toCheck => {
+      return matchesSelector.call(toCheck, selector);
+    };
+  }
   while (output) {
-    if (matchesSelector.call(output, selector)) {
+    if (check(output)) {
       break;
     }
     output = output.parentElement;
