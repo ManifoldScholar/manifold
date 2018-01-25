@@ -5,6 +5,7 @@ import SlidePlaceholder from "./SlidePlaceholder";
 import SlideImage from "./SlideImage";
 import SlideVideo from "./SlideVideo";
 import SlideLoading from "./Loading";
+import SlideInteractive from "./SlideInteractive";
 
 export default {
   Caption,
@@ -13,5 +14,6 @@ export default {
   SlidePlaceholder,
   SlideImage,
   SlideVideo,
+  SlideInteractive,
   SlideLoading
 };

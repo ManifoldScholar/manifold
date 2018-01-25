@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122200750) do
+ActiveRecord::Schema.define(version: 20180124162413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,12 +148,12 @@ ActiveRecord::Schema.define(version: 20180122200750) do
     t.string   "foreground_content_type"
     t.integer  "foreground_file_size"
     t.datetime "foreground_updated_at"
-    t.integer  "position"
     t.text     "style",                   default: "dark"
     t.boolean  "hidden",                  default: false
     t.uuid     "creator_id"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.integer  "position"
     t.string   "background_color"
     t.string   "foreground_color"
     t.string   "header_color"
@@ -356,13 +356,15 @@ ActiveRecord::Schema.define(version: 20180122200750) do
     t.string   "variant_poster_content_type"
     t.integer  "variant_poster_file_size"
     t.datetime "variant_poster_updated_at"
-    t.string   "iframe_dimensions"
     t.text     "embed_code"
     t.string   "sub_kind"
     t.string   "slug"
     t.integer  "comments_count",                  default: 0
     t.jsonb    "metadata",                        default: {}
     t.integer  "events_count",                    default: 0
+    t.integer  "minimum_width"
+    t.integer  "minimum_height"
+    t.boolean  "iframe_allow_fullscreen",         default: true
     t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
 

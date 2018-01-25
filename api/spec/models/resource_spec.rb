@@ -157,21 +157,8 @@ RSpec.describe Resource, type: :model do
     end
 
     context "when resource is an iframe" do
-      it "is invalid without dimensions" do
-        resource = FactoryGirl.build(:resource, kind: "interactive", sub_kind: "iframe")
-        expect(resource).to_not be_valid
-      end
-
       it "is invalid without an external url" do
-        resource = FactoryGirl.build(:resource, kind: "interactive", sub_kind: "iframe",
-                                     iframe_dimensions: "640x480", external_url: nil)
-        expect(resource).to_not be_valid
-      end
-    end
-
-    context "when resource is an embed" do
-      it "is invalid without the embed code" do
-        resource = FactoryGirl.build(:resource, kind: "interactive")
+        resource = FactoryGirl.build(:resource, kind: "interactive", external_url: nil)
         expect(resource).to_not be_valid
       end
     end

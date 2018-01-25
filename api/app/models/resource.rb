@@ -5,7 +5,7 @@ class Resource < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
   ALLOWED_KINDS = %w(image video audio link pdf document file spreadsheet presentation
                      interactive).freeze
-  ALLOWED_SUB_KINDS = %w(external_video iframe embed).freeze
+  ALLOWED_SUB_KINDS = %w(external_video).freeze
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
@@ -164,7 +164,6 @@ class Resource < ApplicationRecord
     return :video if %w(mp4 webm).include?(ext)
     return :video if sub_kind == "external_video"
     return :audio if ["mp3"].include?(ext)
-    return :interactive if sub_kind == "iframe" || sub_kind == "embed"
     return :link if !attachment.present? && !external_url.blank?
     # We return a default because we always want the resource kind to be valid. If it's
     # not valid, we have a problem because it will prevent Paperclip from processing
@@ -234,19 +233,6 @@ class Resource < ApplicationRecord
 
   def vimeo?
     external_video? && external_type == "vimeo"
-  end
-
-  def iframe?
-    kind == "interactive" && sub_kind == "iframe"
-  end
-
-  def embed?
-    kind == "interactive" && sub_kind == "embed"
-  end
-
-  def split_iframe_dimensions
-    return nil unless iframe_dimensions
-    iframe_dimensions.split("x")
   end
 
   def variant_thumbnail_remote_url=(url_value)

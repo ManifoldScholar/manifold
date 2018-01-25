@@ -132,6 +132,7 @@ export class ResourceWrapperContainer extends PureComponent {
       kind === "image" ||
       kind === "audio" ||
       kind === "pdf" ||
+      kind === "interactive" ||
       (kind === "video" && !externalVideo)
     ) {
       out.splice(1, 0, {

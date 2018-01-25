@@ -6,48 +6,51 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is embed rend
 >
   <div
     className="form-input"
+    style={Object {}}
   >
     <label
-      className="above"
+      className=""
     >
-      Is this an iFrame?
+      Minimum Width
     </label>
-    <div
-      className="toggle-indicator"
-    >
-      <div
-        className="boolean-primary"
-        onClick={[Function]}
-      />
-    </div>
+    <input
+      onChange={[Function]}
+      placeholder="The minimum display width"
+      type="text"
+      value=""
+    />
   </div>
   <div
-    className="form-section"
+    className="form-input"
+    style={Object {}}
   >
-    <div
-      className="form-input"
+    <label
+      className=""
     >
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <label
-          className=""
-        >
-          Embed Code
-        </label>
-        <textarea
-          onChange={[Function]}
-          placeholder="Enter HTML embed code"
-          style={
-            Object {
-              "height": 100,
-            }
-          }
-          value=""
-        />
-      </div>
-    </div>
+      Minimum Height
+    </label>
+    <input
+      onChange={[Function]}
+      placeholder="The minimum display height"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+    >
+      iFrame URL
+    </label>
+    <input
+      onChange={[Function]}
+      placeholder="Enter iFrame URL"
+      type="text"
+      value=""
+    />
   </div>
 </div>
 `;
@@ -58,56 +61,51 @@ exports[`Backend.Resource.Form.Interactive component when sub kind is iframe ren
 >
   <div
     className="form-input"
+    style={Object {}}
   >
     <label
-      className="above"
+      className=""
     >
-      Is this an iFrame?
+      Minimum Width
     </label>
-    <div
-      className="toggle-indicator"
-    >
-      <div
-        className="boolean-primary"
-        onClick={[Function]}
-      />
-    </div>
+    <input
+      onChange={[Function]}
+      placeholder="The minimum display width"
+      type="text"
+      value=""
+    />
   </div>
   <div
-    className="form-section"
+    className="form-input"
+    style={Object {}}
   >
-    <div
-      className="form-input"
-      style={Object {}}
+    <label
+      className=""
     >
-      <label
-        className=""
-      >
-        Dimensions
-      </label>
-      <input
-        onChange={[Function]}
-        placeholder="Enter length and height (e.g., 1440x900)"
-        type="text"
-        value=""
-      />
-    </div>
-    <div
-      className="form-input"
-      style={Object {}}
+      Minimum Height
+    </label>
+    <input
+      onChange={[Function]}
+      placeholder="The minimum display height"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
     >
-      <label
-        className=""
-      >
-        iFrame URL
-      </label>
-      <input
-        onChange={[Function]}
-        placeholder="Enter iFrame URL"
-        type="text"
-        value=""
-      />
-    </div>
+      iFrame URL
+    </label>
+    <input
+      onChange={[Function]}
+      placeholder="Enter iFrame URL"
+      type="text"
+      value=""
+    />
   </div>
 </div>
 `;
