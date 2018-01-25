@@ -275,9 +275,7 @@ module Validation
   end
 
   def reader_search_params
-    if params.dig(:facets).respond_to? :values
-      params[:facets] = params[:facets].values
-    end
+    params[:facets] = params[:facets].values if params.dig(:facets).respond_to? :values
     params.permit(
       :keyword,
       :project,

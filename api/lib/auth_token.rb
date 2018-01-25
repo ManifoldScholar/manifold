@@ -10,6 +10,6 @@ class AuthToken
   # If will throw an error if expired or invalid. See the docs for the JWT gem.
   def self.decode(token, leeway = nil)
     decoded = JWT.decode(token, Rails.application.secrets.secret_key_base, leeway: leeway)
-    HashWithIndifferentAccess.new(decoded[0])
+    ActiveSupport::HashWithIndifferentAccess.new(decoded[0])
   end
 end

@@ -22,12 +22,8 @@ module Filterable
         by_method = "by_#{key}"
         with_method = "with_#{key}"
         containing_methods = %W(excluding_#{key} including_#{key})
-        if results.respond_to?(by_method)
-          results = results.send(by_method, value)
-        end
-        if results.respond_to?(with_method)
-          results = results.send(with_method, value)
-        end
+        results = results.send(by_method, value) if results.respond_to?(by_method)
+        results = results.send(with_method, value) if results.respond_to?(with_method)
         containing_methods.each do |containing_method|
           if results.respond_to?(containing_method)
             results = results.send(containing_method)
