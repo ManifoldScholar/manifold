@@ -2,6 +2,7 @@
 # rubocop:disable Rails/ReadWriteAttribute
 module Metadata
   extend ActiveSupport::Concern
+  include Concerns::HasFormattedAttributes
 
   def validate_metadata(properties)
     write_attribute(:metadata, metadata.slice(*properties))
@@ -22,6 +23,9 @@ module Metadata
       attr_reader :metadata_properties
 
       @metadata_properties = properties
+      has_formatted_attributes(properties&.map(&:to_sym),
+                               include_wrap: false,
+                               container: :metadata)
 
       after_initialize do
         @metadata_properties = properties

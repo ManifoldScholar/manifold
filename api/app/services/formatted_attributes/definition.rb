@@ -5,7 +5,7 @@ module FormattedAttributes
     attr_reader :attribute
     attr_reader :methods_module
 
-    def initialize(attribute, include_wrap: true, renderer_options: nil)
+    def initialize(attribute, include_wrap: true, renderer_options: nil, container: nil)
       @attribute = attribute
       @renderer_options = renderer_options || {
         filter_html: true,
@@ -15,6 +15,7 @@ module FormattedAttributes
         hard_wrap: true
       }
       @include_wrap = include_wrap
+      @container = container
       @methods_module = FormattedAttributes::Methods.new(self)
     end
 
@@ -22,7 +23,7 @@ module FormattedAttributes
       @include_wrap.present?
     end
 
-    attr_reader :renderer_options
+    attr_reader :renderer_options, :container
 
   end
 end

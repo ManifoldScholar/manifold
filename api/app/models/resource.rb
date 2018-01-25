@@ -56,8 +56,8 @@ class Resource < ApplicationRecord
   manifold_has_attached_file :variant_format_one, :resource, no_styles: true
   manifold_has_attached_file :variant_format_two, :resource, no_styles: true
 
-  has_formatted_attributes :title, :caption, :credit, include_wrap: false
-  has_formatted_attributes :description
+  has_formatted_attributes :title, :caption, include_wrap: false
+  has_formatted_attribute :description
 
   # Paperclip direct image from URL
   attr_reader :variant_thumbnail_remote_url
@@ -206,14 +206,6 @@ class Resource < ApplicationRecord
     self.metadata["alt_text"] = value
   end
   # rubocop:enable Style/RedundantSelf
-
-  def credit_changed?
-    metadata_changed? && metadata_was.dig("credit") != metadata.dig("credit")
-  end
-
-  def credit
-    metadata["credit"]
-  end
 
   def downloadable_kind?
     attachment.exists? && !external_video?
