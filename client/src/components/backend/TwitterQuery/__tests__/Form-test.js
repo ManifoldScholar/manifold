@@ -13,7 +13,11 @@ describe("Backend.TwitterQuery.Form Component", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <Form projectId="1" twitterQuery={twitterQuery} name="twitter-query" />
+          <Form
+            projectId="1"
+            twitterQuery={twitterQuery}
+            name="twitter-query"
+          />
         </Provider>
       )
     );
