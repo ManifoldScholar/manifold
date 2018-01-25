@@ -74,13 +74,6 @@ export default () => {
           helper: p => `/backend/project/${p}/collections/new`
         },
         {
-          name: "backendPeopleUsersNew",
-          exact: true,
-          component: Backend.People.Users.New,
-          path: "/backend/people/users/new",
-          helper: () => "/backend/people/users/new"
-        },
-        {
           name: "backendProjectsNew",
           exact: true,
           component: Backend.Project.New,
@@ -337,6 +330,13 @@ export default () => {
               path: "/backend/people/:users(users)?/:id?",
               helper: () => "/backend/people/users",
               routes: [
+                {
+                  name: "backendPeopleUsersNew",
+                  exact: true,
+                  component: Backend.People.Users.New,
+                  path: "/backend/people/users/new",
+                  helper: () => "/backend/people/users/new"
+                },
                 {
                   name: "backendPeopleUser",
                   component: Backend.People.Users.Edit,
