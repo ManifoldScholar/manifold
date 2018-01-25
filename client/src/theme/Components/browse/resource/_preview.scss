@@ -18,5 +18,14 @@
 .resource-preview-video {
   position: relative;
   height: 500px;
+}
+
+.resource-preview-interactive {
+  position: relative;
+
+  iframe {
+    border: 0;
+  }
 
 }
+

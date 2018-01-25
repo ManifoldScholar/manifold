@@ -22,26 +22,15 @@ class ResourceSerializer < ResourcePartialSerializer
              :variant_poster_content_type, :variant_poster_file_size,
              :variant_poster_updated_at, :transcript_file_name,
              :transcript_content_type, :transcript_file_size, :transcript_updated_at,
-             :translation_file_name, :translation_content_type,
-             :translation_file_size, :translation_updated_at, :embed_code,
-             :iframe_dimensions, :iframe_length, :iframe_width,
-             :downloadable_kind, :metadata, :metadata_properties
+             :translation_file_name, :translation_content_type, :translation_file_size,
+             :translation_updated_at, :embed_code, :minimum_width, :minimum_height,
+             :iframe_allow_fullscreen, :downloadable_kind, :metadata, :metadata_properties
 
   has_many :collections
   belongs_to :project, serializer: ProjectPartialSerializer
 
   def sub_kind
     object.sub_kind ||= false
-  end
-
-  def iframe_length
-    return nil unless object.iframe_dimensions
-    object.split_iframe_dimensions[0]
-  end
-
-  def iframe_width
-    return nil unless object.iframe_dimensions
-    object.split_iframe_dimensions[1]
   end
 
   def downloadable_kind

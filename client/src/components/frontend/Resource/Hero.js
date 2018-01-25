@@ -42,6 +42,17 @@ export default class ResourceHero extends Component {
           </div>
         );
         break;
+      case "interactive":
+        output = (
+          <div className="resource-slide-figure resource-slide-interactive">
+            <ResourceList.Slide.SlideInteractive
+              resource={resource}
+              noPlaceholder
+              {...this.props.slideOptions}
+            />
+          </div>
+        );
+        break;
       default:
     }
 

@@ -9,13 +9,19 @@ export default class ResourceFormKindInteractive extends PureComponent {
     getModelValue: PropTypes.func
   };
 
-  renderIframeForm() {
+  render() {
     return (
       <div className="form-section">
         <Form.TextInput
-          label="Dimensions"
-          name="attributes[iframeDimensions]"
-          placeholder="Enter length and height (e.g., 1440x900)"
+          label="Minimum Width"
+          placeholder="The minimum display width"
+          name="attributes[minimumWidth]"
+          {...this.props}
+        />
+        <Form.TextInput
+          label="Minimum Height"
+          placeholder="The minimum display height"
+          name="attributes[minimumHeight]"
           {...this.props}
         />
         <Form.TextInput
@@ -24,38 +30,6 @@ export default class ResourceFormKindInteractive extends PureComponent {
           placeholder="Enter iFrame URL"
           {...this.props}
         />
-      </div>
-    );
-  }
-
-  renderEmbedForm() {
-    return (
-      <div className="form-section">
-        <Form.TextArea
-          label="Embed Code"
-          name="attributes[embedCode]"
-          placeholder="Enter HTML embed code"
-          {...this.props}
-        />
-      </div>
-    );
-  }
-
-  render() {
-    return (
-      <div className="form-section">
-        <Form.Switch
-          label="Is this an iFrame?"
-          name="attributes[subKind]"
-          customValues={{
-            true: "iframe",
-            false: "embed"
-          }}
-          {...this.props}
-        />
-        {this.props.getModelValue("attributes[subKind]") === "iframe"
-          ? this.renderIframeForm()
-          : this.renderEmbedForm()}
       </div>
     );
   }

@@ -77,6 +77,8 @@ export default class ResourceListSlideshow extends PureComponent {
       Slide = ResourceList.Slide.SlideImage;
     if (resource.attributes.kind === "video")
       Slide = ResourceList.Slide.SlideVideo;
+    if (resource.attributes.kind === "interactive")
+      Slide = ResourceList.Slide.SlideInteractive;
     return <Slide resource={resource} {...this.props.slideOptions} />;
   }
 

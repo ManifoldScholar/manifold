@@ -95,7 +95,8 @@ module Validation
                   :title, :caption, :description, :tag_list, :kind, :sub_kind,
                   :alt_text, :copyright_status, :copyright_holder, :credit, :keywords,
                   :allow_download, :external_type, :external_url, :external_id,
-                  :iframe_dimensions, :embed_code, :subject, metadata(Resource)]
+                  :embed_code, :subject, :minimum_width, :maximum_width, :minimum_height,
+                  :maximum_height, :iframe_allow_fullscreen, metadata(Resource)]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

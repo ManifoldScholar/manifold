@@ -2,22 +2,19 @@ module ResourceAttributeResets
   extend ActiveSupport::Concern
 
   def reset_non_image_attributes
-    attributes = %w(external_url external_id external_type sub_kind
-                    embed_code iframe_dimensions)
+    attributes = %w(external_url external_id external_type sub_kind)
     attachments = %w(variant_format_one variant_format_two variant_poster)
     reset_attributes(attributes, attachments)
   end
 
   def reset_non_audio_attributes
-    attributes = %w(external_url external_id external_type sub_kind
-                    embed_code iframe_dimensions)
+    attributes = %w(external_url external_id external_type sub_kind)
     attachments = %w(high_res variant_thumbnail variant_poster)
     reset_attributes(attributes, attachments)
   end
 
   def reset_non_pdf_attributes
-    attributes = %w(external_url external_id external_type sub_kind
-                    embed_code iframe_dimensions)
+    attributes = %w(external_url external_id external_type sub_kind)
     attachments = %w(variant_format_one variant_format_two high_res
                      variant_poster)
     reset_attributes(attributes, attachments)
@@ -44,49 +41,35 @@ module ResourceAttributeResets
   end
 
   def reset_non_interactive_attributes
-    iframe? ? reset_non_iframe_attributes : reset_non_embed_attributes
+    attributes = %w(external_id external_type)
+    attachments = %w(attachment variant_format_one variant_format_two
+                     high_res)
+    reset_attributes(attributes, attachments)
   end
 
   def reset_non_link_attributes
-    attributes = %w(external_id external_type sub_kind embed_code
-                    iframe_dimensions)
+    attributes = %w(external_id external_type sub_kind)
     attachments = %w(attachment variant_format_one variant_format_two
                      high_res variant_thumbnail variant_poster)
     reset_attributes(attributes, attachments)
   end
 
   def reset_file_attributes
-    attributes = %w(external_url external_id external_type sub_kind
-                    embed_code iframe_dimensions)
+    attributes = %w(external_url external_id external_type sub_kind)
     attachments = %w(variant_format_one variant_format_two high_res
                      variant_thumbnail variant_poster)
     reset_attributes(attributes, attachments)
   end
 
-  def reset_non_iframe_attributes
-    attributes = %w(external_id external_type embed_code)
-    attachments = %w(attachment variant_format_one variant_format_two
-                     high_res variant_thumbnail variant_poster)
-    reset_attributes(attributes, attachments)
-  end
-
-  def reset_non_embed_attributes
-    attributes = %w(external_id external_type external_url iframe_dimensions)
-    attachments = %w(attachment variant_format_one variant_format_two
-                     high_res variant_thumbnail variant_poster)
-    reset_attributes(attributes, attachments)
-  end
-
   def reset_non_external_video_attributes
-    attributes = %w(embed_code iframe_dimensions)
+    attributes = %w()
     attachments = %w(attachment variant_format_one variant_format_two
                      high_res variant_poster)
     reset_attributes(attributes, attachments)
   end
 
   def reset_video_attributes
-    attributes = %w(external_url external_id external_type
-                    embed_code iframe_dimensions sub_kind)
+    attributes = %w(external_url external_id external_type sub_kind)
     attachments = %w(high_res variant_thumbnail)
     reset_attributes(attributes, attachments)
   end

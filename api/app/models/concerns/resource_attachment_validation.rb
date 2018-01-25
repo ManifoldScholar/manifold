@@ -59,12 +59,7 @@ module ResourceAttachmentValidation
 
   # rubocop:disable Metrics/AbcSize
   def validate_interactive_fields
-    if iframe?
-      errors.add(:iframe_dimensions, "can't be blank") unless iframe_dimensions.present?
-      errors.add(:external_url, "can't be blank") unless external_url.present?
-    else
-      errors.add(:embed_code, "can't be blank") unless embed_code.present?
-    end
+    errors.add(:external_url, "can't be blank") unless external_url.present?
     errors.empty?
   end
   # rubocop:enable Metrics/AbcSize

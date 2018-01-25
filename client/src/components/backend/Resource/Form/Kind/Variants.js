@@ -9,6 +9,31 @@ export default class ResourceFormKindVariants extends PureComponent {
     kind: PropTypes.string.isRequired
   };
 
+  renderInteractiveFields() {
+    return (
+      <div className="form-section">
+        <Form.Upload
+          layout="landscape"
+          label="Poster Image"
+          accepts="images"
+          readFrom="attributes[variantPosterStyles][mediumLandscape]"
+          name="attributes[variantPoster]"
+          remove="attributes[removeVariantPoster]"
+          {...this.props}
+        />
+        <Form.Upload
+          layout="square"
+          label="Thumbnail Image"
+          accepts="images"
+          readFrom="attributes[variantThumbnailStyles][smallSquare]"
+          name="attributes[variantThumbnail]"
+          remove="attributes[removeVariantThumbnail]"
+          {...this.props}
+        />
+      </div>
+    );
+  }
+
   renderImageFields() {
     return (
       <div className="form-section">
@@ -16,7 +41,7 @@ export default class ResourceFormKindVariants extends PureComponent {
           layout="square"
           label="High Resolution Image"
           accepts="images"
-          readfrom="attributes[highResUrl]"
+          readFrom="attributes[highResUrl]"
           name="attributes[highRes]"
           remove="attributes[removeHighRes]"
           {...this.props}
@@ -89,6 +114,8 @@ export default class ResourceFormKindVariants extends PureComponent {
   render() {
     if (this.props.kind === "image") return this.renderImageFields();
     if (this.props.kind === "pdf") return this.renderPdfFields();
+    if (this.props.kind === "interactive")
+      return this.renderInteractiveFields();
     return this.renderVariantFields();
   }
 }
