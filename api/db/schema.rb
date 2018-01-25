@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124162413) do
+ActiveRecord::Schema.define(version: 20180125215003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -363,7 +363,9 @@ ActiveRecord::Schema.define(version: 20180124162413) do
     t.jsonb    "metadata",                        default: {}
     t.integer  "events_count",                    default: 0
     t.integer  "minimum_width"
+    t.integer  "maximum_width"
     t.integer  "minimum_height"
+    t.integer  "maximum_height"
     t.boolean  "iframe_allow_fullscreen",         default: true
     t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
@@ -510,7 +512,7 @@ ActiveRecord::Schema.define(version: 20180124162413) do
     t.uuid     "creator_id"
     t.string   "query"
     t.boolean  "active",               default: true,          null: false
-    t.integer  "events_count",         default: 0
+    t.integer  "events_count"
     t.string   "result_type",          default: "most_recent"
     t.string   "most_recent_tweet_id"
   end

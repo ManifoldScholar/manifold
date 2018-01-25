@@ -140,7 +140,7 @@ Clamp do
     def lint_api
       autofix = autofix? ? "-a" : ""
       puts Paint["$ rubocop . #{autofix}", :faint]
-      raise "API lint failed" unless system "cd api && rubocop #{autofix}"
+      raise "API lint failed" unless system "cd api && ./bin/rubocop #{autofix}"
     end
 
     def lint_client
