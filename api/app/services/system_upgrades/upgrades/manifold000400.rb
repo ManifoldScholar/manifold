@@ -23,8 +23,12 @@ module SystemUpgrades
         Rails.application.eager_load!
         begin
           Searchkick.models.each do |model|
-            logger.info("Reindexing #{model.name}...")
-            model.reindex
+            if model.name == "SearchableNode"
+              logger.info("Skipping #{model.name}...")
+            else
+              logger.info("Reindexing #{model.name}...")
+              model.reindex
+            end
           end
         rescue Faraday::ConnectionFailed
           elastic_connection_error
@@ -41,8 +45,8 @@ module SystemUpgrades
         logger.info("upgrade, Manifold will examine each text section and extract the   ")
         logger.info("text nodes. This may take a few minutes, so please be patient.     ")
         logger.info("===================================================================")
+
         TextSection.update_text_indexes(logger)
-        logger.info("===================================================================")
       end
 
       def elastic_connection_error
@@ -55,6 +59,7 @@ module SystemUpgrades
       end
 
       def create_twitter_queries
+        logger.info("===================================================================")
         logger.info("Create Twitter Queries                                             ")
         logger.info("===================================================================")
         logger.info("Manifold 0.4.0 uses Twitter Query records to fetch tweets instead  ")

@@ -88,8 +88,10 @@ class TextSection < ApplicationRecord
   end
 
   def update_text_index
+    SearchableNode.searchkick_index.bulk_delete(searchable_nodes)
     searchable_nodes.clear
     SearchableNode.import(properties_for_searchable_nodes)
+    searchable_nodes.reload.reindex
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
