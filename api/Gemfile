@@ -57,9 +57,11 @@ gem "omniauth-twitter", "~> 1.4.0"
 # This can go to 3.0 when we're ready to upgrade Rubocop to 0.52
 gem "rainbow", "~> 2.0"
 gem "redcarpet", "~> 3.0"
-gem "redis", "~> 4.0"
+# As of Jan 28, 2018, ActionCable requires redis ~> 3.0
+# See https://github.com/rails/rails/issues/30527
+gem "redis", "~> 3.0"
+gem "redis-objects", "~> 1.3.0"
 gem "redis-namespace", "~> 1.0"
-gem "redis-objects", "~> 1.0"
 gem "redis-rails", "~> 5.0"
 gem "rubyzip", "~> 1.0"
 gem "searchkick", "~> 2.0"
