@@ -187,7 +187,7 @@ export class ReaderContainer extends Component {
         <TextMeta
           title={text.attributes.title}
           subtitle={text.attributes.subtitle}
-          meta={text.attributes.metadata}
+          meta={text.attributes.metadataFormatted}
         />
       </Overlay>
     );

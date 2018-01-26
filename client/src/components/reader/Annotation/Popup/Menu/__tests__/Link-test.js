@@ -12,7 +12,7 @@ describe("Reader.Annotation.Popup.Menu.Link Component", () => {
       <Provider store={store}>
         <Link
           direction="up"
-          selectedLink={<a href="www.dailyrowan.com"/>}
+          selectedLink={<a href="www.dailyrowan.com" />}
           textAnnotations={[]}
           showAnnotationsInDrawer={() => {}}
         />
