@@ -1,0 +1,502 @@
+@charset "utf-8";
+/* Apex Podium 2.0 Responsive CSS Document Rev 1.0 combines with stylesheet.css 
+	- February 19, 2013/G. Suprock
+    - Apex CoVantage, LLC 2013
+    
+      Proprietary and Confidential
+
+PROJECT METADATA
+Job Name: [Job name here]
+Batch: [apex batch number here]
+Project CSS Version: [Version of css created by the team for the project]
+
+
+    */
+
+/*smartphone*/
+@media (max-width:480px) {
+    body {
+        padding: 1em 1em 1em 1em;
+        } 
+    
+    .banner {
+        font-size: 2.0em;
+        }
+        
+
+    .img_table {
+        display: block;
+        text-align: center;
+        max-width: 95%;
+        height:auto;
+        }
+    .table1 {
+            display:none;
+            }
+    .table2 {
+        display: block;
+        }
+    .aside_h1 {
+        font-size: 1.2em;
+        color: #561712;
+		margin-top : 1em;
+		margin-bottom: 0.5em;
+		word-break:hyphenate;
+        }
+
+    aside p {
+        margin-bottom: 0.5em;
+        font-size: 0.7em;
+        text-align: left;
+        font-family: arial, helvetica, sans-serif;
+        }
+
+    .aside_center {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.5em;
+        display: block;
+        }
+            
+    .aside_left {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.0em;
+        display: block;
+        }
+
+    .aside_right {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.5em;
+        display: block;
+        }
+
+    .float_right {
+        display:block;
+        }
+
+    .float_left {
+        display:block;
+        }
+    
+    .clear {
+        clear:both;
+        }
+    
+    .float7 {
+        width: 100%;
+        }
+    }
+/*small tablet*/
+@media (min-width:481px) and (max-width:550px)  {
+    body {
+        padding: 1em 1em 1em 1em;
+        } 
+    
+    .banner {
+        font-size: 2.0em;
+        }
+          
+    .img_table {
+        display: block;
+        text-align: center;
+        max-width: 95%;
+        height:auto;
+        }
+    .table1 {
+        display:none;
+        }
+    .table2 {
+        display: block;
+        }
+    .aside_h1 {
+        font-size: 1.2em;
+        color: #561712;
+		margin-top : 1em;
+		margin-bottom: 0.5em;
+		word-break:hyphenate;
+        }
+
+    aside p {
+        margin-bottom: 0.5em;
+        font-size: 0.7em;
+        text-align: left;
+        font-family: arial, helvetica, sans-serif;
+        }
+
+    .aside_center {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.5em;
+        display: block;
+        }
+            
+    .aside_left {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.0em;
+        display: block;
+        }
+
+    .aside_right {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.5em;
+        display: block;
+        }
+
+    .float_right {
+        display:block;
+        }
+
+    .float_left {
+        display:block;
+        }
+
+    .clear {
+        clear:both;
+        }
+
+    .float7 {
+        width: 100%;
+        }
+}
+
+/*medium tablet*/
+@media (min-width:769px) and (max-width:1000px) {
+    body {
+        padding: 1em 1em 1em 1em;
+        } 
+    
+    .banner {
+        font-size: 2.0em;
+        }
+        
+
+    .img_table {
+        display: block;
+        text-align: center;
+        max-width: 95%;
+        height:auto;
+        }
+    .table1 {
+        display:none;
+        }
+     .table2 {
+        display: block;
+        }           
+     .aside_h1 {
+        font-size: 1.2em;
+        color: #561712;
+		margin-top : 1em;
+		margin-bottom: 0.5em;
+		word-break:hyphenate;
+        }
+
+    aside p {
+        margin-bottom: 0.5em;
+        font-size: 0.7em;
+        text-align: left;
+        font-family: arial, helvetica, sans-serif;
+        }
+
+    .aside_center {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.5em;
+        display: block;
+        }
+            
+    .aside_left {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.0em;
+        display: block;
+        }
+
+    .aside_right {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.5em;
+        display: block;
+    }
+
+    .float_right {
+        display:block;
+    }
+
+    .float_left {
+        display:block;
+        }
+
+    .clear {
+        clear:both;
+        }
+
+    .float7 {
+        width: 100%;
+        }
+    }
+
+/*large table portrait*/
+@media (min-width:551px) and (max-width:768px) {
+    body {
+        padding: 1em 1em 1em 1em;
+        } 
+    
+    .banner {
+        font-size: 2.0em;
+        }
+        
+    .img_table {
+        display:none;
+        }
+    .table1 {
+        display: block;
+        width: 96%;
+        margin-top: 3em;
+        margin-bottom: 1.0em;
+        }
+    .table2 {
+        display: none;
+        }
+    .aside_h1 {
+        font-size: 1.2em;
+        color: #561712;
+		margin-top : 1em;
+		margin-bottom: 0.5em;
+		word-break:hyphenate;
+        }
+
+        aside p {
+            margin-bottom: 0.5em;
+            font-size: 0.7em;
+            text-align: left;
+            font-family: arial, helvetica, sans-serif;
+            }
+
+    .aside_center {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.5em;
+        display: block;
+        }
+            
+    .aside_left {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:25%;
+        margin-top: 0.5em;
+        margin-bottom: 1.0em;
+        margin-left: 0em;
+        margin-right: 1.0em;
+        display: block;
+        float: left;
+        }
+
+    .aside_right {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:25%;
+        margin-top: 0.5em;
+        margin-bottom: 1.5em;
+        margin-left: 1.0em;
+        display: block;
+        float: right;
+        }
+
+    .float_right {
+        display:block;
+        float: right;
+        width: 65%;
+        }
+
+    .float_left {
+        display:block;
+        float: left;
+        width: 65%;
+        }
+
+    .clear {
+        clear:both;
+        }
+    }
+/*large tablet portrait or computer screen*/
+@media (min-width:1001px) {
+    body {
+        padding: 1em 1em 1em 1em;
+        } 
+    
+    .banner {
+        font-size: 2.0em;
+        }
+        
+     .img_table {
+        display:none;
+        }
+        
+     .table1 {
+        display:block;
+        width: 96%;
+        margin-top: 3em;
+        margin-bottom: 1.0em;
+        }
+    .table2 {
+        display: none;
+        }
+    .aside_h1 {
+        font-size: 1.5em;
+        color: #561712;
+		margin-top : 1em;
+		margin-bottom: 0.5em;
+ 		word-break:hyphenate;
+ 		}
+
+    aside p {
+        margin-bottom: 0.5em;
+        font-size: 0.7em;
+        text-align: left;
+        font-family: arial, helvetica, sans-serif;
+        }
+
+    .aside_center {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:50%;
+        margin-left: 23%;
+        margin-top: 1.0em;
+        margin-bottom: 1.5em;
+        display: block;
+        }
+            
+    .aside_left {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+    /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:25%;
+        margin-top: 0.5em;
+        margin-bottom: 1.0em;
+        margin-left: 0em;
+        margin-right: 1.0em;
+        display: block;
+        float: left;
+    }
+
+    .aside_right {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #373737;
+        border-radius: 5px;
+        /*background-color: #efefef;*/
+        padding: 0.5em;
+        width:25%;
+        margin-top: 0.5em;
+        margin-bottom: 1.5em;
+        margin-left: 1.0em;
+        display: block;
+        float: right;
+    }
+
+    .float_right {
+        display:block;
+        float: right;
+        width: 65%;
+        }
+
+    .float_left {
+        display:block;
+        float: left;
+        width: 65%;
+        }
+
+    .clear {
+        clear:both;
+        }       
+    }
+

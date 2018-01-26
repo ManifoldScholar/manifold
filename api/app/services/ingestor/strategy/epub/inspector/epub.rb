@@ -277,7 +277,7 @@ module Ingestor
           end
 
           def xml_parse(rel_path, remove_namespaces: false)
-            doc = Nokogiri::XML(ingestion.open(rel_path), nil, "utf-8")
+            doc = Nokogiri::XML(ingestion.open(rel_path), nil)
             doc.remove_namespaces! if remove_namespaces
             doc
           end

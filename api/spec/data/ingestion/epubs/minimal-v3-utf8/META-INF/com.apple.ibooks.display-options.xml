@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display_options>
+    <platform name="*">
+        <option name="specified-fonts">true</option>
+        <option name="interactive">false</option>
+        <option name="fixed-layout">false</option>
+        <option name="open-to-spread">false</option>
+    </platform>
+    <platform name="iphone">
+        <option name="orientation-lock">landscape-only</option>
+    </platform>
+</display_options>

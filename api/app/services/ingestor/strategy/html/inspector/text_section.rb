@@ -32,7 +32,7 @@ module Ingestor
           end
 
           def source_body
-            contents = Nokogiri::HTML(ingestion.open(rel_path), nil, "utf-8")
+            contents = Nokogiri::HTML(ingestion.open(rel_path), nil)
             body = contents.at("//body").to_html
             body = body.mb_chars.tidy_bytes unless body.valid_encoding?
             body

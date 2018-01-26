@@ -1,0 +1,88 @@
+/* Fonts */
+@font-face{font-family: "MSGothic"; src: url(../Fonts/MSGothic.otf); font-style: normal; font-weight: normal;}
+@font-face{font-family: "MSMincho"; src: url(../Fonts/MSMincho.otf); font-style: normal; font-weight: normal;}
+@font-face{font-family: "ScalaPro-Ita"; src: url(../Fonts/ScalaPro-Ita.otf); font-style: italic; font-weight: normal;}
+@font-face{font-family: "ScalaPro"; src: url(../Fonts/ScalaPro.otf); font-style: normal; font-weight: normal;}
+@font-face{font-family: "Verlag-Bold"; src: url(../Fonts/Verlag-Bold.otf); font-style: normal; font-weight: bold;}
+@font-face{font-family: "Verlag-Book"; src: url(../Fonts/Verlag-Book.otf); font-style: normal; font-weight: normal;}
+
+
+/* Cover Page */
+div.cover_image{text-align: center;}
+
+
+.frn{font-family: "Verlag-Book";font-size: 130%; margin-top: 5em; text-align: center;}
+
+.copyright{font-family:"ScalaPro";font-size:105%; margin-top:1em; margin-left:0em; margin-bottom:0em; font-weight: normal; text-align: left; line-height:130%;}
+
+/* Body */
+
+body{font-family: "ScalaPro";line-height: 130%; margin-left: 1em; margin-right: 1.5em;}
+
+
+/* Title Page */
+
+.title{font-family:"Verlag-Bold"; font-size: 180%; font-style: normal; font-weight: bold; margin-top: 2em; margin-bottom: 0.2em; text-align: center; margin-right: 0em; line-height:120%;}
+.subtitle{font-family:"Verlag-Book";font-size: 170%; font-style: normal; font-weight: normal; margin-top: 1em; margin-bottom: 2em; text-align: center; margin-right: 0em; line-height:120%;}
+.author{font-family:"Verlag-Bold";font-size: 140%; font-style: normal; font-weight: bold; margin-top: 3em; margin-bottom: 0.2em; text-align: center; margin-right: 0em;}
+.p1{font-family:"Verlag-Book";font-size: 80%; font-style: normal; font-weight: normal; margin-top: 0em; margin-bottom: 3em; text-align: center; margin-right: 0em;}
+.p2{font-family:"Verlag-Book";font-size: 100%; font-style: normal; font-weight: normal; margin-top: 0em; margin-bottom: 0em; text-align: center; margin-right: 0em;}
+.p3{font-family:"Verlag-Bold";font-size: 110%; font-style: normal; font-weight: bold; margin-top: 4em; margin-bottom: 0em; text-align: center; margin-right: 0em;}
+.p4{font-family:"Verlag-Book";font-size: 90%; font-style: normal; font-weight: normal; margin-top: 4em; margin-bottom: 0em; text-align: center; margin-right: 0em;}
+.p5{font-family:"Verlag-Book";font-size: 90%; font-style: normal; font-weight: normal; margin-top: 0em; margin-bottom: 0em; text-align: center; margin-right: 0em;}
+
+/* Title Page 2 */
+
+.title1{font-family:"MSGothic"; font-size: 180%; font-style: normal; font-weight: normal; margin-top: 2em; margin-bottom: 0.2em; text-align: center; margin-right: 0em; line-height:120%;}
+.author11{font-family:"MSGothic";font-size: 140%; font-style: normal; font-weight: normal; margin-top: 6em; margin-bottom: 0.2em; text-align: center; margin-right: 0em;}
+.pr1{font-family:"MSMincho";font-size: 80%; font-style: normal; font-weight: normal; margin-top: 0em; margin-bottom: 1em; text-align: center; margin-right: 0em;}
+.pr2{font-family:"MSMincho";font-size: 100%; font-style: normal; font-weight: normal; margin-top: 3em; margin-bottom: 0em; text-align: center; margin-right: 0em;}
+.pr3{font-family:"MSMincho";font-size: 100%; font-style: normal; font-weight: normal; margin-top: 1em; margin-bottom: 0em; text-align: center; margin-right: 0em;}
+
+
+/* front */
+
+.front1{font-family:"Verlag-Book";font-size: 90%; margin-left:2em; margin-top:5em; margin-bottom:0em; text-align: left;}
+
+/* Contents Page */
+
+.content{text-indent: -1.5em; margin-left:2em; margin-top:0em; margin-bottom:0em; text-align: left;}
+
+/* Chapter Headings */
+.h2_1{font-family:"Verlag-Book";font-size: 105%; font-style: normal; font-weight: bold; margin-top: 5em; margin-bottom: 1em; margin-right: 0em; margin-left: 0em; text-align: left; line-height:130%;text-decoration: underline;}
+.h2_1a{font-family:"Verlag-Book";font-size: 105%; font-style: normal; font-weight: bold; margin-top: 2.5em; margin-bottom: 1em; margin-right: 0em; margin-left: 0em; text-align: left; line-height:130%;text-decoration: underline;}
+.h2_1{font-family:"Verlag-Book";font-size: 105%; font-style: normal; font-weight: bold; margin-top: 5em; margin-bottom: 1.5em; margin-right: 0em; margin-left: 0em; text-align: left; line-height:130%;text-decoration: underline;}
+.h2_2{font-family:"MSMincho";font-size: 105%; font-style: normal; font-weight: bold; margin-top: 5em; margin-bottom: 1.5em; margin-right: 0em; margin-left: 0em; text-align: left; line-height:130%;text-decoration: underline;}
+.h3_1{font-family:"Verlag-Bold";font-size: 110%; font-style: normal; font-weight: bold; margin-top: 3em; margin-bottom: 2em; margin-right: 0em; margin-left: 0em; text-align: left; line-height:130%;}
+.h3_2{font-family:"MSMincho"; font-size: 110%; font-style: normal; font-weight: bold; margin-top: 3em; margin-bottom: 2em; margin-right: 0em; margin-left: 0em; text-align: left; line-height:130%;}
+
+/* Chapter Text */
+.t1{font-family: "Verlag-Bold";font-size: 105%; font-weight: bold;}
+.text_noindent{font-family: "ScalaPro";font-size: 105%; text-align: justify; margin-top: 1em; margin-bottom: 0em;}
+.text_noindent1{font-family: "MSMincho";font-size: 110%; text-align: justify; margin-top: 1em; margin-bottom: 0em;}
+.text_noindent .italic{font-family: "ScalaPro-Ita"; font-style: italic;}
+.text_indent .italic{font-family: "ScalaPro-Ita"; font-style: italic;}
+.text_noindent .bold{font-family: "Verlag-Bold"; font-weight: bold;}
+.text_indent .bold{font-family: "Verlag-Bold"; font-weight: bold;}
+.text_indent{font-family: "ScalaPro";font-size: 105%; text-align: justify; margin-top: 0em; margin-bottom: 0em; text-indent:1em;}
+.text_indent1{font-family: "MSMincho";font-size: 105%; text-align: justify; margin-top: 0em; margin-bottom: 0em; text-indent:1em;}
+.quotes{margin-left:1em; margin-right:1em;}
+
+
+.text_left{text-align: left;}
+.text_center{text-align: center;}
+.text_right{text-align: right;}
+
+.mrg-top {margin-top:1em;}
+.mrg-bot {margin-bottom:1em;}
+.mrg-left {margin-left:1em;}
+.mrg-right {margin-right:1em;}
+
+.pagebreak {page-break-before:always;}
+
+sup{vertical-align: super;font-size: 70%; line-height: 0%;}
+
+/* Figure */
+
+div.fig{font-size: 100%; text-align: center; margin-top: 1em; margin-bottom: 1em;}
+img{max-width: 100%;}
