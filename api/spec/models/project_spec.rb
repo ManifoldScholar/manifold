@@ -97,8 +97,8 @@ RSpec.describe Project, type: :model do
     expect(project.following_twitter_accounts?).to be true
   end
 
-  it "reports that it's not following twitter accounts if none are configured" do
-    project = FactoryGirl.build(:project, tweet_fetch_config: {})
+  it "reports that it's not following twitter accounts if none are associated" do
+    project = FactoryGirl.build(:project)
     expect(project.following_twitter_accounts?).to be false
   end
 

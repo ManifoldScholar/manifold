@@ -3,7 +3,8 @@ class QueueFetchProjectTweets < ApplicationJob
   queue_as :default
 
   def perform
-    Project.where.not(tweet_fetch_config: "{}").each do |project|
+    Project.find_each do |project|
+      next unless project.following_twitter_accounts?
       FetchProjectTweets.perform_later(project.id)
     end
   end

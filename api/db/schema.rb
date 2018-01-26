@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125215003) do
+ActiveRecord::Schema.define(version: 20180126181358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,12 +148,12 @@ ActiveRecord::Schema.define(version: 20180125215003) do
     t.string   "foreground_content_type"
     t.integer  "foreground_file_size"
     t.datetime "foreground_updated_at"
+    t.integer  "position"
     t.text     "style",                   default: "dark"
     t.boolean  "hidden",                  default: false
     t.uuid     "creator_id"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.integer  "position"
     t.string   "background_color"
     t.string   "foreground_color"
     t.string   "header_color"
@@ -290,7 +290,6 @@ ActiveRecord::Schema.define(version: 20180125215003) do
     t.datetime "avatar_updated_at"
     t.jsonb    "metadata",                default: {}
     t.uuid     "creator_id"
-    t.jsonb    "tweet_fetch_config",      default: {}
     t.date     "publication_date"
     t.string   "slug"
     t.string   "avatar_color",            default: "primary"
@@ -363,9 +362,7 @@ ActiveRecord::Schema.define(version: 20180125215003) do
     t.jsonb    "metadata",                        default: {}
     t.integer  "events_count",                    default: 0
     t.integer  "minimum_width"
-    t.integer  "maximum_width"
     t.integer  "minimum_height"
-    t.integer  "maximum_height"
     t.boolean  "iframe_allow_fullscreen",         default: true
     t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
@@ -512,7 +509,7 @@ ActiveRecord::Schema.define(version: 20180125215003) do
     t.uuid     "creator_id"
     t.string   "query"
     t.boolean  "active",               default: true,          null: false
-    t.integer  "events_count"
+    t.integer  "events_count",         default: 0
     t.string   "result_type",          default: "most_recent"
     t.string   "most_recent_tweet_id"
   end
