@@ -2,179 +2,210 @@
 
 exports[`Backend Project Collaborators Container renders correctly 1`] = `
 <section>
-  <form
-    className="form-secondary"
-  >
-    <div
-      className="form-input"
-      style={Object {}}
+  <section>
+    <form
+      className="form-secondary"
     >
-      <label>
-        Authors
-      </label>
-      <nav
-        className="has-many-list"
+      <div
+        className="form-input"
+        style={Object {}}
       >
-        <ul>
-          <li>
-            <div
-              className="association"
-            >
-              <figure>
-                <div
-                  className="no-image"
-                >
-                  <i
-                    className="manicon manicon-person"
-                  />
-                </div>
-              </figure>
-              <h4
-                className="association-name"
+        <label>
+          Authors
+        </label>
+        <nav
+          className="has-many-list"
+        >
+          <ul>
+            <li>
+              <div
+                className="association"
               >
-                Rowan Ida
-              </h4>
-            </div>
+                <figure>
+                  <div
+                    className="no-image"
+                  >
+                    <i
+                      className="manicon manicon-person"
+                    />
+                  </div>
+                </figure>
+                <h4
+                  className="association-name"
+                >
+                  Rowan Ida
+                </h4>
+              </div>
+              <div
+                className="utility"
+              >
+                <button
+                  className="manicon manicon-pencil-simple"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Click to edit 
+                    Rowan Ida
+                    from the 
+                    Authors
+                     list.
+                  </span>
+                </button>
+                <button
+                  className="manicon manicon-x"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Click to remove 
+                    Rowan Ida
+                    from the 
+                    Authors
+                     list.
+                  </span>
+                </button>
+              </div>
+            </li>
+          </ul>
+          <div
+            className="input-predictive"
+          >
             <div
-              className="utility"
+              className="input"
             >
               <button
-                className="manicon manicon-x"
+                className="manicon manicon-plus"
+              />
+              <input
+                className="text-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyPress={[Function]}
+                placeholder="Add an Author"
+                type="text"
+                value=""
+              />
+              <button
+                className="submit"
                 onClick={[Function]}
               >
-                <span
-                  className="screen-reader-text"
-                >
-                  Click to remove 
-                  Rowan Ida
-                  from the 
-                  Authors
-                   list.
-                </span>
+                Create New
               </button>
             </div>
-          </li>
-        </ul>
-        <div
-          className="input-predictive"
-        >
-          <div
-            className="input"
-          >
-            <button
-              className="manicon manicon-plus"
-            />
-            <input
-              className="text-input"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyPress={[Function]}
-              placeholder="Add an Author"
-              type="text"
-              value=""
-            />
-            <button
-              className="submit"
-              onClick={[Function]}
+            <nav
+              className="predictive-list"
             >
-              Create New
-            </button>
+              <ul />
+            </nav>
           </div>
-          <nav
-            className="predictive-list"
-          >
-            <ul />
-          </nav>
-        </div>
-      </nav>
-    </div>
-    <div
-      className="form-input"
-      style={Object {}}
-    >
-      <label>
-        Contributors
-      </label>
-      <nav
-        className="has-many-list"
+        </nav>
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
       >
-        <ul>
-          <li>
-            <div
-              className="association"
-            >
-              <figure>
-                <div
-                  className="no-image"
-                >
-                  <i
-                    className="manicon manicon-person"
-                  />
-                </div>
-              </figure>
-              <h4
-                className="association-name"
+        <label>
+          Contributors
+        </label>
+        <nav
+          className="has-many-list"
+        >
+          <ul>
+            <li>
+              <div
+                className="association"
               >
-                Rowan Ida
-              </h4>
-            </div>
+                <figure>
+                  <div
+                    className="no-image"
+                  >
+                    <i
+                      className="manicon manicon-person"
+                    />
+                  </div>
+                </figure>
+                <h4
+                  className="association-name"
+                >
+                  Rowan Ida
+                </h4>
+              </div>
+              <div
+                className="utility"
+              >
+                <button
+                  className="manicon manicon-pencil-simple"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Click to edit 
+                    Rowan Ida
+                    from the 
+                    Contributors
+                     list.
+                  </span>
+                </button>
+                <button
+                  className="manicon manicon-x"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="screen-reader-text"
+                  >
+                    Click to remove 
+                    Rowan Ida
+                    from the 
+                    Contributors
+                     list.
+                  </span>
+                </button>
+              </div>
+            </li>
+          </ul>
+          <div
+            className="input-predictive"
+          >
             <div
-              className="utility"
+              className="input"
             >
               <button
-                className="manicon manicon-x"
+                className="manicon manicon-plus"
+              />
+              <input
+                className="text-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyPress={[Function]}
+                placeholder="Add a Contributor"
+                type="text"
+                value=""
+              />
+              <button
+                className="submit"
                 onClick={[Function]}
               >
-                <span
-                  className="screen-reader-text"
-                >
-                  Click to remove 
-                  Rowan Ida
-                  from the 
-                  Contributors
-                   list.
-                </span>
+                Create New
               </button>
             </div>
-          </li>
-        </ul>
-        <div
-          className="input-predictive"
-        >
-          <div
-            className="input"
-          >
-            <button
-              className="manicon manicon-plus"
-            />
-            <input
-              className="text-input"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyPress={[Function]}
-              placeholder="Add a Contributor"
-              type="text"
-              value=""
-            />
-            <button
-              className="submit"
-              onClick={[Function]}
+            <nav
+              className="predictive-list"
             >
-              Create New
-            </button>
+              <ul />
+            </nav>
           </div>
-          <nav
-            className="predictive-list"
-          >
-            <ul />
-          </nav>
-        </div>
-      </nav>
-    </div>
-  </form>
+        </nav>
+      </div>
+    </form>
+  </section>
+  <span />
 </section>
 `;

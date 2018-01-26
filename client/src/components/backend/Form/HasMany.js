@@ -15,6 +15,7 @@ export default class FormHasMany extends PureComponent {
     onNew: PropTypes.func,
     orderable: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
+    editClickHandler: PropTypes.func,
     optionsFetch: PropTypes.func.isRequired,
     entities: PropTypes.array.isRequired,
     entityLabelAttribute: PropTypes.string.isRequired,
@@ -23,15 +24,7 @@ export default class FormHasMany extends PureComponent {
     errors: PropTypes.array
   };
 
-  constructor() {
-    super();
-    this.onNew = this.onNew.bind(this);
-    this.onSelect = this.onSelect.bind(this);
-    this.onRemove = this.onRemove.bind(this);
-    this.onMove = this.onMove.bind(this);
-  }
-
-  onMove(event, entity, direction) {
+  onMove = (event, entity, direction) => {
     event.preventDefault();
     const newEntities = this.props.entities.slice(0);
     const index = indexOf(newEntities, entity);
@@ -42,9 +35,9 @@ export default class FormHasMany extends PureComponent {
     newEntities[target] = entity;
     newEntities[index] = tmp;
     this.props.onChange(newEntities, "move");
-  }
+  };
 
-  onNew(value) {
+  onNew = value => {
     if (!this.props.onNew) return null;
     this.props.onNew(value).then(newEntity => {
       const newEntities = this.props.entities.slice(0);
@@ -55,24 +48,44 @@ export default class FormHasMany extends PureComponent {
       newEntities.push(newRelationship);
       this.props.onChange(newEntities, "select");
     });
-  }
+  };
 
-  onSelect(entity) {
+  onSelect = entity => {
     const newEntities = this.props.entities.slice(0);
     newEntities.push(entity);
     this.props.onChange(newEntities, "select");
-  }
+  };
 
-  onRemove(entity, event) {
+  onRemove = (entity, event) => {
     event.preventDefault();
     const newEntities = this.props.entities.filter(compare => {
       return compare !== entity;
     });
     this.props.onChange(newEntities, "remove");
-  }
+  };
+
+  onEdit = (event, entity) => {
+    event.preventDefault();
+    return this.props.editClickHandler(entity);
+  };
 
   label(entity, props) {
     return entity.attributes[props.entityLabelAttribute];
+  }
+
+  renderEditButton(entity) {
+    if (!this.props.editClickHandler) return null;
+    return (
+      <button
+        className="manicon manicon-pencil-simple"
+        onClick={e => this.onEdit(e, entity)}
+      >
+        <span className="screen-reader-text">
+          Click to edit {this.label(entity, this.props)}
+          from the {this.props.label} list.
+        </span>
+      </button>
+    );
   }
 
   renderOrderButton(direction, ordinal, entity) {
@@ -161,6 +174,7 @@ export default class FormHasMany extends PureComponent {
                   </div>
 
                   <div className="utility">
+                    {this.renderEditButton(entity)}
                     {this.renderOrderButton("up", index, entity)}
                     {this.renderOrderButton("down", index, entity)}
                     <button

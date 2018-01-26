@@ -26,14 +26,10 @@ export class FormCollaborators extends Component {
   static propTypes = {
     entity: PropTypes.object,
     dispatch: PropTypes.func,
-    api: PropTypes.object
+    api: PropTypes.object,
+    history: PropTypes.object,
+    route: PropTypes.object
   };
-
-  constructor(props) {
-    super(props);
-    this.updateMakers = this.updateMakers.bind(this);
-    this.newMaker = this.newMaker.bind(this);
-  }
 
   componentWillUnmount() {
     this.props.dispatch(
@@ -46,7 +42,7 @@ export class FormCollaborators extends Component {
     );
   }
 
-  updateMakers(makers, changeType, key) {
+  updateMakers = (makers, changeType, key) => {
     const adjustedMakers = makers.map(e => {
       return {
         id: e.id,
@@ -61,9 +57,9 @@ export class FormCollaborators extends Component {
     const call = this.props.api.update(entity.id, entity);
     const entityRequest = request(call, `update-${key}`);
     this.props.dispatch(entityRequest);
-  }
+  };
 
-  newMaker(value, key) {
+  newMaker = (value, key) => {
     const parts = value.split(" ");
     const maker = {
       type: "makers",
@@ -76,7 +72,12 @@ export class FormCollaborators extends Component {
     const makerRequest = request(call, `create-${key}`);
     const { promise } = this.props.dispatch(makerRequest);
     return promise;
-  }
+  };
+
+  handleEditClick = collaborator => {
+    const location = this.props.history.location.pathname;
+    return this.props.history.push(`${location}/${collaborator.id}`);
+  };
 
   render() {
     const entity = this.props.entity;
@@ -99,6 +100,7 @@ export class FormCollaborators extends Component {
             entityLabelAttribute="fullName"
             entityAvatarAttribute="avatarStyles"
             errors={get(this.props, "createCreator.errors")}
+            editClickHandler={this.handleEditClick}
             orderable
           />
           <Form.HasMany
@@ -116,6 +118,7 @@ export class FormCollaborators extends Component {
             entityLabelAttribute="fullName"
             entityAvatarAttribute="avatarStyles"
             errors={get(this.props, "createContributor.errors")}
+            editClickHandler={this.handleEditClick}
             orderable
           />
         </form>

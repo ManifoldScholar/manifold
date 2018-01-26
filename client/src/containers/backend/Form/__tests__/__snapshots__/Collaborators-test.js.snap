@@ -39,6 +39,20 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
               className="utility"
             >
               <button
+                className="manicon manicon-pencil-simple"
+                onClick={[Function]}
+              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Click to edit 
+                  Rowan Ida
+                  from the 
+                  Authors
+                   list.
+                </span>
+              </button>
+              <button
                 className="manicon manicon-x"
                 onClick={[Function]}
               >
@@ -123,6 +137,20 @@ exports[`Backend Form FormCollaborators Container renders correctly 1`] = `
             <div
               className="utility"
             >
+              <button
+                className="manicon manicon-pencil-simple"
+                onClick={[Function]}
+              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Click to edit 
+                  Rowan Ida
+                  from the 
+                  Contributors
+                   list.
+                </span>
+              </button>
               <button
                 className="manicon manicon-x"
                 onClick={[Function]}

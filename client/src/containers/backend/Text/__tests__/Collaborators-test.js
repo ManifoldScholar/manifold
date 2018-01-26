@@ -10,11 +10,15 @@ describe("Backend Text Collaborators Container", () => {
   const text = build.entity.text("1");
   text.relationships.creators = [build.entity.user("2")];
   text.relationships.contributors = [build.entity.user("3")];
+  const route = {
+    routes: [],
+    options: {}
+  };
 
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <TextCollaboratorsContainer text={text} />
+        <TextCollaboratorsContainer text={text} route={route} />
       </Provider>
     )
   );
