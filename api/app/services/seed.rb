@@ -8,6 +8,7 @@ class Seed
     maybe_update_settings(logger)
     cli_user = make_cli_user(logger)
     make_feature(logger, cli_user)
+    upgrade_system(logger)
   end
 
   def self.make_feature(logger, creator)
@@ -51,6 +52,11 @@ class Seed
       logger.info("CLI User exists: #{cli_user.id}".green)
     end
     cli_user
+  end
+
+  def self.upgrade_system(logger)
+    SystemUpgrades::Perform.run force: true, stdout: false
+    logger.info("Running system upgrades".green)
   end
 
   # rubocop:enable Metrics/MethodLength
