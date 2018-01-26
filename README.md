@@ -1,20 +1,30 @@
-<a href="http://manifold.umn.edu/">
-    <img width="150" src="http://manifold.umn.edu/logo/manifold_avatar-01.png" alt="Manifold Scholarship" />
-</a>
+<div align="right">
+    <a href="https://travis-ci.org/ManifoldScholar/manifold"><img src="https://travis-ci.org/ManifoldScholar/manifold.svg?branch=master" /></a> 
+</div>
+<div align="center">
+    <img src="https://storage.googleapis.com/manifold-assets/readme-art.gif" width="400" /><br />
+    <h1>
+        Manifold Scholarship
+    </h1>
+</div>
 
-Manifold is an intuitive, collaborative platform for scholarly publishing. With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works.
+<p align="center">
+    Manifold is an intuitive, collaborative platform for scholarly publishing. With iterative texts, powerful annotation tools, rich media support, and robust community dialogue, Manifold transforms scholarly publications into living digital works. 
+</p>
 
-#### Build Status
+<p align="center">
+    Learn more at <a href="https://manifoldapp.org">manifoldapp.org</a>.<br />
+    See it in action at <a href="https://manifold.umn.edu">manifold.umn.edu</a>.
+</p>
 
-Branch       | Passing?
------------- | -------------
-Development  | [![Build Status](https://travis-ci.org/ManifoldScholar/manifold.svg?branch=development)](https://travis-ci.org/ManifoldScholar/manifold)
-Master       |[![Build Status](https://travis-ci.org/ManifoldScholar/manifold.svg?branch=master)](https://travis-ci.org/ManifoldScholar/manifold)
+## Watch the Video
+
+[![What is Manifold](https://i.vimeocdn.com/video/674811296.webp?mw=960&mh=540)](https://vimeo.com/249096229)
 
 ## Overview
 
-#### Manifold is Beta Software.
-Manifold is still very much in a beta state, and has another year of development ahead of it. More to the point, our documentation is still a work in progress.
+#### Manifold is Beta Software
+Manifold is currently beta, but is nearing the end of the first phase of development. The current version is v0.4.0. v0.5.0 will come out in late February 2018. We expect to release the stable version, v1.0.0, in late March 2018. 
 
 #### Manifold is a collaboration, funded by the Andrew W. Mellon Mellon Foundation.
 
@@ -22,7 +32,7 @@ The [University of Minnesota Press](https://www.upress.umn.edu) in partnership w
 
 #### Manifold is Open Source
 
-Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us on our [Building Manifold Development Blog](http://manifold.umn.edu). Early adopters of Manifold are encouraged to download the source code, experiment, and submit fixes and features in the form of pull requests.
+Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us on our [Building Manifold Development Blog](http://blog.manifoldapp.org). Early adopters of Manifold are encouraged to download the source code, experiment, and submit fixes and features in the form of pull requests.
 
 ## About Manifold
 
@@ -36,7 +46,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 #### Documentation
 
-Visit [our documentation repository](https://github.com/ManifoldScholar/manifold-docs) for current documentation.
+Visit [our website](https://manifoldapp.org/docs/README) for current documentation. Be sure to check out the [getting started guide](https://manifoldapp.org/docs/contents/getting_started/README) for installation instructions.
 
 #### News
 
