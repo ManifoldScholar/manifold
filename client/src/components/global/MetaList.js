@@ -27,9 +27,10 @@ export default class MetaList extends Component {
               <span className="meta-label">
                 {humps.decamelize(key, { separator: " " })}
               </span>
-              <div className="meta-value">
-                {this.props.metadata[key]}
-              </div>
+              <div
+                className="meta-value"
+                dangerouslySetInnerHTML={{ __html: this.props.metadata[key] }}
+              />
             </li>
           );
         })}

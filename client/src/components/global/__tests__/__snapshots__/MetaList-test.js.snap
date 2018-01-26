@@ -12,9 +12,12 @@ exports[`Global.MetaList component renders correctly 1`] = `
     </span>
     <div
       className="meta-value"
-    >
-      April 26, 1994
-    </div>
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "April 26, 1994",
+        }
+      }
+    />
   </li>
   <li>
     <span
@@ -24,9 +27,12 @@ exports[`Global.MetaList component renders correctly 1`] = `
     </span>
     <div
       className="meta-value"
-    >
-      Southernplayalisticadillacmuzik
-    </div>
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Southernplayalisticadillacmuzik",
+        }
+      }
+    />
   </li>
 </ul>
 `;

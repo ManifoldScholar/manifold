@@ -3,7 +3,8 @@ class TextSerializer < TextPartialSerializer
   include SerializedMetadata
   meta(partial: false)
 
-  attributes :toc, :metadata, :metadata_properties, :citations, :description
+  attributes :toc, :metadata, :metadata_properties, :metadata_formatted,
+             :citations, :description
 
   belongs_to :project
   has_many :stylesheets, serializer: StylesheetPartialSerializer

@@ -62,7 +62,7 @@ class Detail extends Component {
               {"About"}
             </h4>
           </header>
-          <MetaList metadata={project.attributes.metadata} />
+          <MetaList metadata={project.attributes.metadataFormatted} />
         </div>
       </section>
     );

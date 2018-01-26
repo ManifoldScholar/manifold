@@ -14,6 +14,10 @@ module Metadata
     write_attribute(:metadata, new)
   end
 
+  def metadata_formatted
+    metadata.each_with_object({}) { |(k, _v), out| out[k] = send("#{k}_formatted") }
+  end
+
   class_methods do
     def metadata_properties
       @metadata_properties

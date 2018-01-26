@@ -24,9 +24,9 @@ export default class ResourceMeta extends Component {
 
   render() {
     const attr = this.props.resource.attributes;
-    const exclude = ["credit", "altText"];
+    const exclude = ["altText"];
     const filteredMetadata = pickBy(
-      attr.metadata,
+      attr.metadataFormatted,
       (v, k) => !exclude.includes(k) && !isNull(v) && v.length > 0
     );
     const keys = Object.keys(filteredMetadata).sort();
@@ -75,26 +75,18 @@ export default class ResourceMeta extends Component {
               <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
             </span>
           </li>
-          {attr.creditFormatted
-            ? <li>
-                <span className="meta-label">
-                  {"Credit"}
-                </span>
-                <span
-                  className="meta-value"
-                  dangerouslySetInnerHTML={{ __html: attr.creditFormatted }}
-                />
-              </li>
-            : null}
           {keys.sort().map(key => {
             return (
               <li key={key}>
                 <span className="meta-label">
                   {humps.decamelize(key, { separator: " " })}
                 </span>
-                <span className="meta-value">
-                  {attr.metadata[key]}
-                </span>
+                <span
+                  className="meta-value"
+                  dangerouslySetInnerHTML={{
+                    __html: attr.metadataFormatted[key]
+                  }}
+                />
               </li>
             );
           })}
