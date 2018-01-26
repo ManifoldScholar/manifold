@@ -5,7 +5,7 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
   className="annotation-comment"
 >
   <section
-    className="meta"
+    className="annotation-meta"
   >
     <div>
       <figure

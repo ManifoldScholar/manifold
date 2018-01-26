@@ -153,7 +153,7 @@ export default class CommentDetail extends PureComponent {
 
     return (
       <li className="annotation-comment">
-        <section className="meta">
+        <section className="annotation-meta">
           <div>
             <figure className={avatarClass}>
               {creator.attributes.avatarStyles.smallSquare
