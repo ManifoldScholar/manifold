@@ -162,10 +162,18 @@ export default () => {
             },
             {
               name: "backendProjectCollaborators",
-              exact: true,
               component: Backend.Project.Collaborators,
               path: "/backend/project/:id/collaborators",
-              helper: p => `/backend/project/${p}/collaborators`
+              helper: p => `/backend/project/${p}/collaborators`,
+              routes: [
+                {
+                  name: "backendProjectCollaborator",
+                  component: Backend.People.Makers.Edit,
+                  path: "/backend/project/:pId/collaborators/:id",
+                  helper: (pId, id) =>
+                    `/backend/project/${pId}/collaborators/${id}`
+                }
+              ]
             },
             {
               name: "backendProjectEvents",
@@ -382,10 +390,19 @@ export default () => {
             },
             {
               name: "backendTextCollaborators",
-              exact: true,
+              exact: false,
               component: Backend.Text.Collaborators,
               path: "/backend/text/:id/collaborators",
-              helper: t => `/backend/text/${t}/collaborators`
+              helper: t => `/backend/text/${t}/collaborators`,
+              routes: [
+                {
+                  name: "backendTextCollaborator",
+                  component: Backend.People.Makers.Edit,
+                  path: "/backend/text/:tId/collaborators/:id",
+                  helper: (tId, id) =>
+                    `/backend/text/${tId}/collaborators/${id}`
+                }
+              ]
             },
             {
               name: "backendTextIngestionsNew",

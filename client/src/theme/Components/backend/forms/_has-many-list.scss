@@ -87,7 +87,7 @@
         transition: color $duration $timing;
       }
 
-      .manicon-arrow-up, .manicon-arrow-down {
+      .manicon-arrow-up, .manicon-arrow-down, .manicon-pencil-simple {
         &:hover {
           color: $accentPrimary;
         }

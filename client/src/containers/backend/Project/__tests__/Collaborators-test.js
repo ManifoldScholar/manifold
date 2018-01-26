@@ -10,11 +10,15 @@ describe("Backend Project Collaborators Container", () => {
   const project = build.entity.project("1");
   project.relationships.creators = [build.entity.user("2")];
   project.relationships.contributors = [build.entity.user("3")];
+  const route = {
+    routes: [],
+    options: {}
+  };
 
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <ProjectCollaboratorsContainer project={project} />
+        <ProjectCollaboratorsContainer project={project} route={route} />
       </Provider>
     )
   );
