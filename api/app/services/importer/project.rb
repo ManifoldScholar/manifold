@@ -63,6 +63,7 @@ module Importer
       raise "Invalid project: #{project.errors.full_messages}" unless project.valid?
       project.draft = false
       project.save
+      create_twitter_queries(project)
       import_collaborators(project)
       import_subject(project)
       import_published_text(project, @project_json[:published_text]) if include_texts
@@ -158,6 +159,15 @@ module Importer
       project.published_text = text
       text.save
       project.save
+    end
+
+    def create_twitter_queries(project)
+      twitter_queries = @project_json[:twitter_queries]
+      return unless twitter_queries.present?
+      @logger.info "  Creating project twitter queries"
+      twitter_queries.each do |query|
+        TwitterQuery.create(project: project, query: query, creator: @creator)
+      end
     end
 
     def unset_untouched(model, attributes, exclude = [])
