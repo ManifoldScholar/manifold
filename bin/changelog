@@ -2,7 +2,7 @@ cd ~/src/manifold
 github_changelog_generator \
 --user="ManifoldScholar" \
 --project="manifold" \
---future-release="Unreleased (v0.4.0)" \
+--future-release="v0.4.0" \
 --since-tag="v0.3.0" \
 --enhancement-labels="feature,enhancements" \
 --exclude-labels="wontfix,ignore" \
@@ -10,6 +10,6 @@ github_changelog_generator \
 --bugs-label="**Bugs**" \
 --date-format="%m/%d/%Y" \
 --pr-label="**Accepted Pull Requests**" \
---issues-label="Other Revisions" \
+--issues-label="**Other Revisions**" \
 --exclude-tags-regex="v\d.\d.[^0]$" \
 #--unreleased-only
