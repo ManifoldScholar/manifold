@@ -47,7 +47,7 @@ class Maker < ApplicationRecord
   end
 
   def full_name
-    [first_name, middle_name, last_name].reject(&:blank?).join(" ")
+    [first_name, middle_name, last_name, suffix].reject(&:blank?).join(" ")
   end
 
   def to_s

@@ -145,9 +145,19 @@ export class MakersEditContainer extends PureComponent {
               placeholder="First Name"
             />
             <Form.TextInput
+              label="Middle Name"
+              name="attributes[middleName]"
+              placeholder="Middle Name"
+            />
+            <Form.TextInput
               label="Last Name"
               name="attributes[lastName]"
               placeholder="Last Name"
+            />
+            <Form.TextInput
+              label="Suffix"
+              name="attributes[suffix]"
+              placeholder="Suffix"
             />
             <Form.Upload
               layout="square"

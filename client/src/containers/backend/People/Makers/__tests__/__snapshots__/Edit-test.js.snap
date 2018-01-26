@@ -56,6 +56,22 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
           <label
             className=""
           >
+            Middle Name
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Middle Name"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
             Last Name
           </label>
           <input
@@ -63,6 +79,22 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
             placeholder="Last Name"
             type="text"
             value="Ida"
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Suffix
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Suffix"
+            type="text"
+            value=""
           />
         </div>
         <div
