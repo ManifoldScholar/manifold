@@ -96,7 +96,7 @@ module Ingestor
           protected
 
           def index_parsed
-            Nokogiri::HTML(ingestion.open(index_path), nil, "utf-8")
+            Nokogiri::HTML(ingestion.open(index_path), nil)
           end
 
           def first_tag_attribute_value(tag, attribute)
