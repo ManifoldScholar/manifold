@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.3.5](https://github.com/ManifoldScholar/manifold/tree/v0.3.5) (1/26/2018)
+[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.3.4...v0.3.5)
+
+**Bugs**
+
+- Do not force UTF8 epub source encoding during ingestion
+
 ## [v0.3.4](https://github.com/ManifoldScholar/manifold/tree/v0.3.4) (1/6/2018)
 [Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.3.3...v0.3.4)
 
