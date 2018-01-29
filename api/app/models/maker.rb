@@ -8,7 +8,7 @@ class Maker < ApplicationRecord
   include Filterable
   include Attachments
   include Authority::Abilities
-  include Attachments
+  include WithParsedName
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
@@ -21,34 +21,8 @@ class Maker < ApplicationRecord
   # Attachments
   manifold_has_attached_file :avatar, :image
 
-  # Validation
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-
-  def self.parse_name(name)
-    parts = {}
-    parts[:first_name] = if name.split.count > 1
-                           name.split[0..-2].join(" ")
-                         else
-                           name
-                         end
-    parts[:last_name] = name.split.last if name.split.count > 1
-    parts
-  end
-
-  def name=(name)
-    parts = Maker.parse_name(name)
-    self.first_name = parts[:first_name]
-    self.last_name = parts[:last_name]
-  end
-
-  def name
-    "#{first_name} #{last_name}"
-  end
-
-  def full_name
-    [first_name, middle_name, last_name, suffix].reject(&:blank?).join(" ")
-  end
+  # Misc
+  with_parsed_name :first_name, :middle_name, :last_name, :suffix
 
   def to_s
     full_name

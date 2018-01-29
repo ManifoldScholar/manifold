@@ -461,6 +461,7 @@ DEPENDENCIES
   memoist (~> 0.16.0)
   metadown (~> 1.0)
   money (~> 6.0)
+  namae (~> 1.0)
   naught (~> 1.0)
   nokogiri (~> 1.0)
   oauth2 (~> 1.3.1)

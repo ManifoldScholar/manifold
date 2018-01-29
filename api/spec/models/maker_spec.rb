@@ -12,16 +12,9 @@ RSpec.describe Maker, type: :model do
     expect(maker.collaborators.length).to be 5
   end
 
-  it "derives first and last name from full name during creation" do
-    maker = Maker.create(name: "Stubblin Champflin")
-    expect(maker.valid?).to be true
-    expect(maker.first_name).to eq "Stubblin"
-    expect(maker.last_name).to eq "Champflin"
-  end
-
-  it "returns full name" do
-    maker = Maker.create(first_name: "Stubblin", last_name: "Champflin")
-    expect(maker.name).to eq "Stubblin Champflin"
+  it "has a correctly formatted full name" do
+    maker = Maker.create(first_name: "Stubblin", middle_name: "Bumblin", last_name: "Champflin", suffix: "III")
+    expect(maker.full_name).to eq "Stubblin Bumblin Champflin III"
   end
 
   it "has a collection of associated makers" do
