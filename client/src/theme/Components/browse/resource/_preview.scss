@@ -18,6 +18,20 @@
 .resource-preview-video {
   position: relative;
   height: 500px;
+
+  &.external-video {
+    height: 620px;
+
+    .figure-video {
+      height: 100%;
+      width: 100%;
+
+      iframe {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
 }
 
 .resource-preview-interactive {
