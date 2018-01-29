@@ -528,6 +528,8 @@ ActiveRecord::Schema.define(version: 20180126230432) do
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "password_digest"
     t.string   "password"
     t.string   "password_confirmation"
@@ -543,8 +545,6 @@ ActiveRecord::Schema.define(version: 20180126230432) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.jsonb    "raw_persistent_ui",      default: {},       null: false
-    t.string   "first_name"
-    t.string   "last_name"
   end
 
   add_foreign_key "identities", "users", on_delete: :cascade
