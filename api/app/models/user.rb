@@ -20,7 +20,7 @@ class User < ApplicationRecord
   include Filterable
   include Recoverable
   include Attachments
-  include Attachments
+  include WithParsedName
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
@@ -46,21 +46,19 @@ class User < ApplicationRecord
   # Validation
   validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
   validate :password_not_blank!
-  validates :nickname, :first_name, :last_name, :email, presence: true
+  validates :email, presence: true
   validates :role, inclusion: { in: ROLE_KEYS }, presence: true
   validates :email, uniqueness: true, email_format: { message: "is not valid" }
 
   # Attachments
   manifold_has_attached_file :avatar, :image
 
-  # Callbacks
-  before_validation :ensure_nickname
-
   # Misc
   composed_of :persistent_ui,
               class_name: "PersistentUI",
               mapping: [%i(raw_persistent_ui preferences)],
               converter: ->(raw_persistent_ui) { PersistentUI.new(raw_persistent_ui) }
+  with_parsed_name :first_name, :last_name
   has_secure_password
 
   # Scopes
@@ -77,23 +75,6 @@ class User < ApplicationRecord
     User.find_by(is_cli_user: true)
   end
 
-  def ensure_nickname
-    self.nickname = first_name if nickname.blank?
-  end
-
-  # Transform a name into first and last names
-  def name=(name)
-    parts = name.try(:split) || []
-    first = parts.length > 1 ? parts.take(parts.size - 1).join(" ") : parts.first
-    last = parts.length > 1 ? parts.last : nil
-    self.first_name = first
-    self.last_name = last
-  end
-
-  def name
-    "#{first_name} #{last_name}"
-  end
-
   def favorite(favoritable)
     favorites.create(favoritable: favoritable)
   end
@@ -108,10 +89,6 @@ class User < ApplicationRecord
 
   def to_s
     name
-  end
-
-  def full_name
-    [first_name, last_name].reject(&:blank?).join(" ")
   end
 
   def force_reset_password

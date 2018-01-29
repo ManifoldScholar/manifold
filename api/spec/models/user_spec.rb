@@ -68,15 +68,9 @@ RSpec.describe User, type: :model do
     expect(user).to_not be_valid
   end
 
-  it "should split split name and assign to first and last name" do
+  it "has a correctly formatted full name" do
     user = FactoryGirl.build(:user, name: "John Rambo")
-    expect(user.first_name).to eq("John")
-    expect(user.last_name).to eq("Rambo")
-  end
-
-  it "returns the user's name" do
-    user = FactoryGirl.build(:user, name: "John Rambo")
-    expect(user.name).to eq("John Rambo")
+    expect(user.full_name).to eq("John Rambo")
   end
 
   it "has a collection of associated makers" do
