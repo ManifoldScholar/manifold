@@ -46,6 +46,7 @@ class Project < ApplicationRecord
       issued: project.publication_date
     }
   end
+  with_citable_children :texts
 
   # URLs
   friendly_id :title, use: :slugged

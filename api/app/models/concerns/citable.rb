@@ -5,18 +5,6 @@ module Citable
     before_save :update_citations if respond_to? :before_save
   end
 
-  # rubocop:disable Metrics/BlockLength
-  class_methods do
-    def with_citation(method = nil, &block)
-      @generate_citation = block_given? ? block : method
-    end
-
-    def generate_citation(model)
-      return model.send(@generate_citation) if @generate_citation.is_a? Symbol
-      return @generate_citation.call(model) if @generate_citation.is_a? Proc
-    end
-  end
-
   def citation_styles
     Rails.configuration.manifold.citation_styles
   end
@@ -37,9 +25,43 @@ module Citable
     self.citations = {}
   end
 
+  def citations_changed?(generated)
+    citations != generated
+  end
+
   def update_citations
     return clear_citations unless citable?
     generator = Citation::Generator.new
-    self.citations = generator.cite(self, citation_styles)
+    generated_citations = generator.cite(self, citation_styles)
+    return unless citations_changed?(generated_citations)
+    self.citations = generated_citations
+  end
+
+  def update_citable_children
+    return unless citations != citations_was
+    citable_children.each { |child| send(child).each(&:save) }
+  end
+
+  # rubocop:disable Metrics/BlockLength
+  class_methods do
+    def with_citation(method = nil, &block)
+      @generate_citation = block_given? ? block : method
+    end
+
+    def with_citable_children(*children)
+      attr_reader :citable_children
+      after_save :update_citable_children if respond_to? :after_save
+
+      @citable_children = children
+
+      after_initialize do
+        @citable_children = children
+      end
+    end
+
+    def generate_citation(model)
+      return model.send(@generate_citation) if @generate_citation.is_a? Symbol
+      return @generate_citation.call(model) if @generate_citation.is_a? Proc
+    end
   end
 end
