@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+
+build_images() {
+# TODO: build manifold_api image using version which will be pulled from git in the Dockerfile
+#    if [[ -z $2 ]]
+#    then
+#        echo "You must specify the version of Manifold to build."
+#        echo $"Usage: $0 build_images x.x.x"
+#        exit 1
+#    fi
+    output "Attempting to remove old manifold images..."
+    docker image rm manifold_proxy
+    docker image rm manifold_api
+    cleanup
+    docker build -t manifold_proxy -f docker/Dockerfiles/manifold_proxy/Dockerfile .
+    docker build -t manifold_api -f docker/Dockerfiles/manifold_api/Dockerfile .
+}
+
+create_volumes() {
+    docker volume create manifold_data
+    docker volume create manifold_sockets
+}
+
+run_containers() {
+    docker run -d -v manifold_data:/manifold_data -v manifold_sockets:/manifold_sockets manifold_api:latest
+    docker run -d -p 4000:80 -v manifold_data:/manifold_data -v manifold_sockets:/manifold_sockets manifold_proxy:latest
+}
+
+compose_up() {
+    pull_dependencies
+    docker swarm init
+    docker stack deploy -c docker-compose.yml manifold
+
+    output "View stack: docker stack ls\nView containers: docker service ls"
+    output "Logs: docker logs CONTAINER"
+    output "Visualizer: localhost:8084\nAPI: docker.manifold.lvh:4000/api"
+    output "Teardown command: ./bin/docker-helper compose_teardown"
+}
+
+compose_down() {
+    docker stack rm manifold
+    docker swarm leave --force
+}
+
+cleanup() {
+    output "Cleaning up stale volumes."
+    docker volume prune
+    output "Cleaning up stale images."
+    docker image prune
+}
+
+# Private
+
+pull_dependencies() {
+    docker pull dockersamples/visualizer:stable
+    docker pull postgres:alpine
+}
+
+output() {
+    echo -e "\n$1\n"
+}
+
+check_rundir() {
+    if [ ! -f "docker-compose.yml" ]
+    then
+        echo "Error! Can't locate: $(pwd)/docker-compose.yml"
+        echo "Please run from the root of manifold project."
+        help
+    fi
+}
+
+help() {
+    echo $"Usage: $0 {build_images|create_volumes|run_containers|compose_up|compose_down|cleanup}"
+    exit 1
+}
+
+
+check_rundir
+
+case "$1" in
+    build_images)
+        build_images $2
+        ;;
+    create_volumes)
+        create_volumes
+        ;;
+    run_containers)
+        run_containers
+        ;;
+    compose_up)
+        compose_up
+        ;;
+    compose_down)
+        compose_down
+        ;;
+    *)
+        help
+esac
+
