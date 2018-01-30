@@ -117,7 +117,7 @@ export class MakersEditContainer extends PureComponent {
           : null}
         <header className="drawer-header">
           <h2 className="heading-quaternary">
-            {`${attr.firstName} ${attr.lastName}`}
+            {attr.fullName}
           </h2>
           <div className="buttons-bare-vertical">
             <button
