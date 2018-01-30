@@ -237,7 +237,7 @@ module Validation
   def maker_params
     params.require(:data)
     attributes = [:first_name, :last_name, :middle_name, :suffix, attachment(:avatar),
-                  :remove_avatar]
+                  :remove_avatar, :name]
     relationships = [:users]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
