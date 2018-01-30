@@ -26,9 +26,7 @@ exports[`Backend.Maker.ListItem component renders correctly 1`] = `
         <h3
           className="name large"
         >
-          Rowan
-           
-          Ida
+          Rowan Ida
         </h3>
       </div>
     </header>

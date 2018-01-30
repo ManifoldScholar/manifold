@@ -60,12 +60,10 @@ export class FormCollaborators extends Component {
   };
 
   newMaker = (value, key) => {
-    const parts = value.split(" ");
     const maker = {
       type: "makers",
       attributes: {
-        firstName: parts[0],
-        lastName: parts[1]
+        name: value
       }
     };
     const call = makersAPI.create(maker);

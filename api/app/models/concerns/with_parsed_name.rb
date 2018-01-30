@@ -3,6 +3,7 @@ module WithParsedName
 
   KEY_MAP = {
     given: :first_name,
+    particle: :middle_name,
     family: :last_name,
     suffix: :suffix
   }.freeze
