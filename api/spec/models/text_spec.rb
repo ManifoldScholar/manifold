@@ -66,4 +66,13 @@ RSpec.describe Text, type: :model do
     expect(text.category).to be category
   end
 
+  context "when citations are updated" do
+    before(:each) do
+      @calling_class = FactoryGirl.create(:text, title: "A Title")
+      @child_class = FactoryGirl.create(:text_section, text: @calling_class, name: "Section Name")
+    end
+
+    include_examples "a citable class with_citable_children"
+  end
+
 end
