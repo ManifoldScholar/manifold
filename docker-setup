@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+docker volume create manifold_data
+docker volume create manifold_sockets
+
+docker build -t manifold_proxy -f docker/Dockerfiles/manifold_proxy/Dockerfile .
+docker build -t manifold_api -f docker/Dockerfiles/manifold_api/Dockerfile .
+
+docker run -d -v manifold_data:/manifold_data -v manifold_sockets:/manifold_sockets manifold_api:latest
+docker run -d -p 4000:80 -v manifold_data:/manifold_data -v manifold_sockets:/manifold_sockets manifold_proxy:latest
