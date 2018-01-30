@@ -78,6 +78,18 @@
     font-size: 18px;
     color: $neutral80;
 
+    a {
+      color: $neutral80;
+
+      &:visited {
+        color: $neutral80;
+      }
+
+      &:hover {
+        color: $neutral90;
+      }
+    }
+
     .bg-neutral90 & {
       color: $neutral40;
     }
