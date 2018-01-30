@@ -15,7 +15,10 @@ module Metadata
   end
 
   def metadata_formatted
-    metadata.each_with_object({}) { |(k, _v), out| out[k] = send("#{k}_formatted") }
+    metadata.each_with_object({}) do |(k, _v), out|
+      next unless respond_to? "#{k}_formatted".to_sym
+      out[k] = send("#{k}_formatted")
+    end
   end
 
   class_methods do
