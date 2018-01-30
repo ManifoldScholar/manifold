@@ -32,6 +32,7 @@ module Metadata
       @metadata_properties = properties
       has_formatted_attributes(properties&.map(&:to_sym),
                                include_wrap: false,
+                               renderer_options: { no_links: false },
                                container: :metadata)
 
       after_initialize do
