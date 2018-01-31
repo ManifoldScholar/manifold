@@ -1,7 +1,7 @@
 require "rails_helper"
 RSpec.describe Ingestor do
 
-  let(:creator) { FactoryGirl.create(:user) }
+  let(:creator) { FactoryBot.create(:user) }
 
   it "should allow assignment of a logger object" do
     logger = Logger.new(STDOUT)

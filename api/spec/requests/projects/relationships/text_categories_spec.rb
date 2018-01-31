@@ -5,8 +5,8 @@ RSpec.describe "Project Text Categories API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:project) { FactoryGirl.create(:project) }
-  let(:text_category) { FactoryGirl.create(:text_category) }
+  let(:project) { FactoryBot.create(:project) }
+  let(:text_category) { FactoryBot.create(:text_category) }
   let(:path) { api_v1_project_relationships_text_categories_path(project) }
 
   describe "sends project text categories" do

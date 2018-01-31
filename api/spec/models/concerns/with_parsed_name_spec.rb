@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe WithParsedName do
-  let(:user) { FactoryGirl.create(:user, name: "Rowan Puppy") }
-  let(:maker) { FactoryGirl.create(:maker, name: "Ida Dog III") }
+  let(:user) { FactoryBot.create(:user, name: "Rowan Puppy") }
+  let(:maker) { FactoryBot.create(:maker, name: "Ida Dog III") }
 
   it "parses and sets the first name" do
     expect(user.first_name).to eq "Rowan"

@@ -4,7 +4,7 @@ RSpec.describe "Project Resources API", type: :request do
 
   include_context("authenticated request")
   include_context("param helpers")
-  let(:project) { FactoryGirl.create(:project) }
+  let(:project) { FactoryBot.create(:project) }
 
   describe "sends a list of project resources" do
     let(:path) { api_v1_project_relationships_resources_path(project) }

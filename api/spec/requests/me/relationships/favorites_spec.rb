@@ -5,9 +5,9 @@ RSpec.describe "My Favorites API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:another_user) { FactoryGirl.create(:user) }
-  let(:unfavorited_project) { FactoryGirl.create(:project) }
-  let(:favorite_project) { FactoryGirl.create(:project) }
+  let(:another_user) { FactoryBot.create(:user) }
+  let(:unfavorited_project) { FactoryBot.create(:project) }
+  let(:favorite_project) { FactoryBot.create(:project) }
   let(:reader_favorite) { reader.favorite(favorite_project) }
   let(:not_my_favorite) { another_user.favorite(favorite_project) }
   let(:params) {

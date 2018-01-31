@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe FavoriteAuthorizer, :authorizer do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:user, role: User::ROLE_ADMIN) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:admin) { FactoryBot.create(:user, role: User::ROLE_ADMIN) }
 
   describe 'instance authorization' do
-    let(:owner) { FactoryGirl.create(:user) }
-    let(:favorite_resource) { FactoryGirl.create(:favorite, user: owner) }
+    let(:owner) { FactoryBot.create(:user) }
+    let(:favorite_resource) { FactoryBot.create(:favorite, user: owner) }
 
     context 'when reading' do
       it 'is true for admin' do

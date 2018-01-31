@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Maker, type: :model do
 
   it "has a valid factory" do
-    expect(FactoryGirl.build(:maker)).to be_valid
+    expect(FactoryBot.build(:maker)).to be_valid
   end
 
   it "has many collaborators" do
@@ -18,8 +18,8 @@ RSpec.describe Maker, type: :model do
   end
 
   it "has a collection of associated makers" do
-    maker = FactoryGirl.create(:maker)
-    2.times { maker.users << FactoryGirl.create(:user) }
+    maker = FactoryBot.create(:maker)
+    2.times { maker.users << FactoryBot.create(:user) }
     expect(maker.users.count).to eq(2)
   end
 

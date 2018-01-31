@@ -5,10 +5,10 @@ RSpec.describe "My Annotations API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:another_user) { FactoryGirl.create(:user) }
-  let(:text) { FactoryGirl.create(:text) }
-  let(:text_section) { FactoryGirl.create(:text_section, text: text) }
-  let(:annotation) { FactoryGirl.create(:annotation, creator: reader, text_section: text_section) }
+  let(:another_user) { FactoryBot.create(:user) }
+  let(:text) { FactoryBot.create(:text) }
+  let(:text_section) { FactoryBot.create(:text_section, text: text) }
+  let(:annotation) { FactoryBot.create(:annotation, creator: reader, text_section: text_section) }
 
   describe "sends my annotations" do
 

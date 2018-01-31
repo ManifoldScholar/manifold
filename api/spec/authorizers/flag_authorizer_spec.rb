@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe FlagAuthorizer, :authorizer do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:user, role: User::ROLE_ADMIN) }
-  let(:creator) { FactoryGirl.create(:user) }
-  let(:flag_resource) { FactoryGirl.create(:flag, creator: creator) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:admin) { FactoryBot.create(:user, role: User::ROLE_ADMIN) }
+  let(:creator) { FactoryBot.create(:user) }
+  let(:flag_resource) { FactoryBot.create(:flag, creator: creator) }
 
   describe 'instance authorization' do
     context 'when deleting' do

@@ -107,7 +107,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
 
   it "can ingest an epub with an invalid ingestion source in the manifest" do
     Ingestor.logger = NullLogger.new
-    @creator = FactoryGirl.create(:user)
+    @creator = FactoryBot.create(:user)
     @epub = Rails.root.join("spec", "data", "ingestion", "epubs", "broken-v3" )
     @text = Ingestor.ingest(@epub, @creator, Ingestor::Strategy::EPUB::Strategy)
     expect(@text).to_not be nil
@@ -116,7 +116,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
   context "when ingesting a V3 EPUB", :integration do
     before(:all) {
       Ingestor.logger = NullLogger.new
-      @creator = FactoryGirl.create(:user)
+      @creator = FactoryBot.create(:user)
       @epub = Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3" )
       @text = Ingestor.ingest(@epub, @creator, Ingestor::Strategy::EPUB::Strategy)
     }
@@ -141,7 +141,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
   context "when ingesting a V2 EPUB", :integration do
     before(:all) {
       Ingestor.logger = NullLogger.new
-      @creator = FactoryGirl.create(:user)
+      @creator = FactoryBot.create(:user)
       @epub = Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2" )
       @text = Ingestor.ingest(@epub, @creator, Ingestor::Strategy::EPUB::Strategy)
     }
@@ -169,7 +169,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
       logger = NullLogger.new
       Ingestor.logger = logger
       Settings.potentially_update_from_environment!
-      @creator = FactoryGirl.create(:user)
+      @creator = FactoryBot.create(:user)
       WebMock.allow_net_connect!
       @epub_source = "https://standardebooks.org/ebooks/e-t-a-hoffmann/master-flea/george-soane/dist/e-t-a-hoffmann_master-flea.epub3"
       @text = Ingestor.ingest(@epub_source, @creator, Ingestor::Strategy::EPUB::Strategy)

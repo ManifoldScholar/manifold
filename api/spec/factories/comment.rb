@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :comment do
     body "This is the body"
     association :creator, factory: :user

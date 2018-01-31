@@ -5,7 +5,7 @@ RSpec.describe "Collections API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:collection) { FactoryGirl.create(:collection) }
+  let(:collection) { FactoryBot.create(:collection) }
 
   describe "sends a list of collections" do
     describe "the response" do

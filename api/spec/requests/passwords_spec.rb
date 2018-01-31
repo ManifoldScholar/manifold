@@ -4,7 +4,7 @@ RSpec.describe "Passwords API", type: :request do
 
   include_context("param helpers")
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe "reset password request" do
     describe "the response" do

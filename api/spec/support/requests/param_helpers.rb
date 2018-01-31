@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.shared_context "param helpers" do
 
   def json_for(model)
-    attributes = FactoryGirl::attributes_for(model)
+    attributes = FactoryBot::attributes_for(model)
     json_structure(attributes: attributes)
   end
 

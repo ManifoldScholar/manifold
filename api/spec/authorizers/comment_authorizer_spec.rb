@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe CommentAuthorizer, :authorizer do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:user, role: User::ROLE_ADMIN) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:admin) { FactoryBot.create(:user, role: User::ROLE_ADMIN) }
 
   describe 'instance authorization' do
-    let(:creator) { FactoryGirl.create(:user) }
-    let(:comment_resource) { FactoryGirl.create(:comment, creator: creator) }
+    let(:creator) { FactoryBot.create(:user) }
+    let(:comment_resource) { FactoryBot.create(:comment, creator: creator) }
 
     context 'when updating' do
       it 'is true for admin' do

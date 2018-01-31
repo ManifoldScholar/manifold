@@ -66,7 +66,7 @@ RSpec.describe Ingestor::Strategy::GoogleDoc::Strategy, :integration do
       logger = NullLogger.new
       Ingestor.logger = logger
       Settings.potentially_update_from_environment!
-      @creator = FactoryGirl.create(:user)
+      @creator = FactoryBot.create(:user)
       WebMock.allow_net_connect!
       @google_doc_source = "https://docs.google.com/document/d/1G053ixdCuaNI_2JyrtBm0-ph_0RDAtPtUxDDCmfFeX4/edit?usp=sharing"
       @text = Ingestor.ingest(@google_doc_source, @creator, Ingestor::Strategy::GoogleDoc::Strategy)

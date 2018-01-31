@@ -11,7 +11,7 @@ RSpec.describe Ingestor::Creator::IngestionSources do
     )
   end
 
-  let(:text) { FactoryGirl.create(:text) }
+  let(:text) { FactoryBot.create(:text) }
   let(:creator) { Ingestor::Creator::IngestionSources.new(Rails.logger, text) }
   let(:inspectors) { [
     double_builder("/1"),
@@ -41,9 +41,9 @@ RSpec.describe Ingestor::Creator::IngestionSources do
   end
 
   it "updates existing objects rather than create new ones" do
-    FactoryGirl.create(:ingestion_source, text: text, source_identifier: "/1")
-    FactoryGirl.create(:ingestion_source, text: text, source_identifier: "/2")
-    FactoryGirl.create(:ingestion_source, text: text, source_identifier: "/3")
+    FactoryBot.create(:ingestion_source, text: text, source_identifier: "/1")
+    FactoryBot.create(:ingestion_source, text: text, source_identifier: "/2")
+    FactoryBot.create(:ingestion_source, text: text, source_identifier: "/3")
     models = creator.create(inspectors, text.ingestion_sources)
     models.each(&:save)
     expect(text.ingestion_sources.count).to eq 3

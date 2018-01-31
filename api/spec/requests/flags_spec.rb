@@ -5,7 +5,7 @@ RSpec.describe "Flags API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:comment) { FactoryGirl.create(:comment, creator: reader) }
+  let(:comment) { FactoryBot.create(:comment, creator: reader) }
 
   describe "flags a comment" do
     let(:path) { api_v1_comment_relationships_flags_path(comment) }
@@ -39,7 +39,7 @@ RSpec.describe "Flags API", type: :request do
 
   describe "unflags a comment" do
     let(:path) { api_v1_comment_relationships_flags_path(comment) }
-    let(:flag) { FactoryGirl.create(:flag, creator: reader, flaggable: comment) }
+    let(:flag) { FactoryBot.create(:flag, creator: reader, flaggable: comment) }
 
     context "when the user is a reader" do
       let(:headers) { reader_headers }

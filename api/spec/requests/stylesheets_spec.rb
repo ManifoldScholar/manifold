@@ -16,7 +16,7 @@ RSpec.describe "Stylesheets API", type: :request do
     json_payload(attributes: attributes)
   }
 
-  let(:text) { FactoryGirl.create(:text) }
+  let(:text) { FactoryBot.create(:text) }
 
   describe "creates an stylesheet" do
 
@@ -44,7 +44,7 @@ RSpec.describe "Stylesheets API", type: :request do
 
   describe "updates a stylesheet" do
 
-    let(:stylesheet) { FactoryGirl.create(:stylesheet, text: text, creator: admin)}
+    let(:stylesheet) { FactoryBot.create(:stylesheet, text: text, creator: admin)}
     let(:path) { api_v1_stylesheet_path(stylesheet.id) }
     let(:api_response) { JSON.parse(response.body) }
 
@@ -56,8 +56,8 @@ RSpec.describe "Stylesheets API", type: :request do
 
     context "when the position attribute is set to" do
 
-      let(:stylesheet_1) { FactoryGirl.create(:stylesheet, text: text, creator: admin, position: 1) }
-      let(:stylesheet_2) { FactoryGirl.create(:stylesheet, text: text, creator: admin, position: 2) }
+      let(:stylesheet_1) { FactoryBot.create(:stylesheet, text: text, creator: admin, position: 1) }
+      let(:stylesheet_2) { FactoryBot.create(:stylesheet, text: text, creator: admin, position: 2) }
 
       before(:each) do
         stylesheet_1
@@ -83,7 +83,7 @@ RSpec.describe "Stylesheets API", type: :request do
 
   describe "destroys a stylesheet" do
 
-    let(:stylesheet) { FactoryGirl.create(:stylesheet, text: text, creator: admin, position: 1) }
+    let(:stylesheet) { FactoryBot.create(:stylesheet, text: text, creator: admin, position: 1) }
     let(:path) { api_v1_stylesheet_path(stylesheet) }
 
     context "when the user is an admin" do
@@ -109,7 +109,7 @@ RSpec.describe "Stylesheets API", type: :request do
 
   describe "sends a single stylesheet" do
 
-    let(:stylesheet) { FactoryGirl.create(:stylesheet, text: text, creator: admin, position: 1) }
+    let(:stylesheet) { FactoryBot.create(:stylesheet, text: text, creator: admin, position: 1) }
     let(:path) { api_v1_stylesheet_path(stylesheet) }
 
     context "when the user is an reader" do

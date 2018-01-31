@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :event do
     event_type Event::PROJECT_CREATED
     event_url "MyString"

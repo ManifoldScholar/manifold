@@ -4,7 +4,7 @@ require "rails_helper"
 RSpec.describe Ingestor::Strategy::EPUB::Inspector::EPUB do
 
   before(:all) do
-    @creator = FactoryGirl.create(:user)
+    @creator = FactoryBot.create(:user)
   end
 
   describe "when the source is not utf-8 encoded" do

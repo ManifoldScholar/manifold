@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe IngestionSource, type: :model do
   it "has a valid factory" do
-    expect(FactoryGirl.build(:text_section)).to be_valid
+    expect(FactoryBot.build(:text_section)).to be_valid
   end
 
   it "belongs to a text" do
@@ -13,7 +13,7 @@ RSpec.describe IngestionSource, type: :model do
   end
 
   it "belongs to a project" do
-    ingestion_source = FactoryGirl.create(:ingestion_source)
+    ingestion_source = FactoryBot.create(:ingestion_source)
     expect(ingestion_source.project).to be_a Project
   end
 

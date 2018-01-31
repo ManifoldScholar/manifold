@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :text_section do
     sequence(:position)
     kind TextSection::KIND_SECTION

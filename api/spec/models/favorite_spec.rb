@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Favorite, type: :model do
   it "has a valid factory" do
-    favorite = FactoryGirl.build(:favorite)
+    favorite = FactoryBot.build(:favorite)
     expect(favorite).to be_valid
   end
 
@@ -22,16 +22,16 @@ RSpec.describe Favorite, type: :model do
   end
 
   it "should be unique" do
-    user = FactoryGirl.create(:user)
-    project = FactoryGirl.create(:project)
-    FactoryGirl.create(:favorite, favoritable: project, user: user)
-    duplicate_favorite = FactoryGirl.build(:favorite,
+    user = FactoryBot.create(:user)
+    project = FactoryBot.create(:project)
+    FactoryBot.create(:favorite, favoritable: project, user: user)
+    duplicate_favorite = FactoryBot.build(:favorite,
                                            favoritable: project, user: user)
     expect(duplicate_favorite).to_not be_valid
   end
 
   it "knows what project it belongs to" do
-    favorite = FactoryGirl.build(:favorite)
+    favorite = FactoryBot.build(:favorite)
     expect(favorite.project).to be_a Project
   end
 end

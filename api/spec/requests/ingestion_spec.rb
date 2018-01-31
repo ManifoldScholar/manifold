@@ -17,7 +17,7 @@ RSpec.describe "Ingestions API", type: :request do
 
   describe "creates an ingestion" do
 
-    let(:project) { FactoryGirl.create(:project) }
+    let(:project) { FactoryBot.create(:project) }
     let(:path) { api_v1_project_relationships_ingestions_path(project) }
     let(:api_response) { JSON.parse(response.body) }
 

@@ -2,10 +2,10 @@ require "rails_helper"
 
 RSpec.describe "Project Collaborators API", type: :request do
 
-  let(:project) { FactoryGirl.create(:project) }
-  let(:maker) { FactoryGirl.create(:maker) }
+  let(:project) { FactoryBot.create(:project) }
+  let(:maker) { FactoryBot.create(:maker) }
   let(:collaborator) {
-    FactoryGirl.create(:collaborator, maker: maker, collaboratable: project)
+    FactoryBot.create(:collaborator, maker: maker, collaboratable: project)
   }
 
   describe "sends project collaborators" do

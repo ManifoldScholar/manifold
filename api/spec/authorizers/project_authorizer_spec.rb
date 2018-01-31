@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ProjectAuthorizer, :authorizer do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:user, role: User::ROLE_ADMIN) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:admin) { FactoryBot.create(:user, role: User::ROLE_ADMIN) }
 
   describe 'class authorization' do
     context 'when creating' do
@@ -37,7 +37,7 @@ RSpec.describe ProjectAuthorizer, :authorizer do
   end
 
   describe 'instance authorization' do
-    let(:project_resource) { FactoryGirl.create(:project, draft: true) }
+    let(:project_resource) { FactoryBot.create(:project, draft: true) }
 
     context 'when reading' do
       context 'when draft' do

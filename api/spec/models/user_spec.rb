@@ -3,7 +3,7 @@ require "rails_helper"
 # rubocop:disable Metrics/LineLength
 RSpec.describe User, type: :model do
   it "has a valid factory" do
-    expect(FactoryGirl.build(:user)).to be_valid
+    expect(FactoryBot.build(:user)).to be_valid
   end
 
   it "has many favorites" do
@@ -13,69 +13,69 @@ RSpec.describe User, type: :model do
   end
 
   it "reports whether or not a favoritable is among its favorites" do
-    user = FactoryGirl.create(:user)
-    project = FactoryGirl.create(:project)
+    user = FactoryBot.create(:user)
+    project = FactoryBot.create(:project)
     user.favorite(project)
     expect(user.favorite?(project)).to be true
   end
 
   it "distinguishes favorite projects from all favorites" do
-    user = FactoryGirl.create(:user)
-    project = FactoryGirl.create(:project)
-    text = FactoryGirl.create(:text)
+    user = FactoryBot.create(:user)
+    project = FactoryBot.create(:project)
+    text = FactoryBot.create(:text)
     user.favorites.create(favoritable: project)
     user.favorites.create(favoritable: text)
     expect(user.favorite_projects.length).to be(1)
   end
 
   it "should not be valid without a password" do
-    user = FactoryGirl.build(:user, password: nil, password_confirmation: nil)
+    user = FactoryBot.build(:user, password: nil, password_confirmation: nil)
     expect(user).to_not be_valid
   end
 
   it "should be not be valid with a short password" do
-    user = FactoryGirl.build(:user, password: "short", password_confirmation: "short")
+    user = FactoryBot.build(:user, password: "short", password_confirmation: "short")
     expect(user).to_not be_valid
   end
 
   it "should not be valid with a confirmation mismatch" do
-    user = FactoryGirl.build(:user, password: "short", password_confirmation: "long")
+    user = FactoryBot.build(:user, password: "short", password_confirmation: "long")
     expect(user).to_not be_valid
   end
 
   it "should not be valid without email" do
-    user = FactoryGirl.build(:user, email: nil)
+    user = FactoryBot.build(:user, email: nil)
     expect(user).to_not be_valid
   end
 
   it "should not be valid without first_name" do
-    user = FactoryGirl.build(:user, first_name: nil)
+    user = FactoryBot.build(:user, first_name: nil)
     expect(user).to_not be_valid
   end
 
   it "should not be valid without last_name" do
-    user = FactoryGirl.build(:user, last_name: nil)
+    user = FactoryBot.build(:user, last_name: nil)
     expect(user).to_not be_valid
   end
 
   it "should not be valid without a role" do
-    user = FactoryGirl.build(:user, role: nil)
+    user = FactoryBot.build(:user, role: nil)
     expect(user).to_not be_valid
   end
 
   it "should not be valid with an invalid role" do
-    user = FactoryGirl.build(:user, role: "dog")
+    user = FactoryBot.build(:user, role: "dog")
     expect(user).to_not be_valid
   end
 
   it "has a correctly formatted full name" do
-    user = FactoryGirl.build(:user, name: "John Rambo")
+    user = FactoryBot.build(:user, name: "John Rambo")
     expect(user.full_name).to eq("John Rambo")
   end
 
   it "has a collection of associated makers" do
-    user = FactoryGirl.create(:user)
-    2.times { user.makers << FactoryGirl.create(:maker) }
+    user = FactoryBot.create(:user)
+    2.times { user.makers << FactoryBot.create(:maker) }
     expect(user.makers.count).to eq(2)
   end
 
@@ -86,7 +86,7 @@ RSpec.describe User, type: :model do
     let(:email) { "#{first}@#{last}.com"}
 
     before(:each) do
-      user = FactoryGirl.create(:user, first_name: first, last_name: last, email: email)
+      user = FactoryBot.create(:user, first_name: first, last_name: last, email: email)
       User.reindex
       User.searchkick_index.refresh
     end
@@ -111,7 +111,7 @@ RSpec.describe User, type: :model do
   context "when resetting password" do
 
     let(:user) do
-      u = FactoryGirl.create(:user, password: "password", password_confirmation: "password")
+      u = FactoryBot.create(:user, password: "password", password_confirmation: "password")
       User.find u.id
     end
 
@@ -146,7 +146,7 @@ RSpec.describe User, type: :model do
 
   context "already exists" do
     let(:user) do
-      u = FactoryGirl.create(:user, password: "password", password_confirmation: "password")
+      u = FactoryBot.create(:user, password: "password", password_confirmation: "password")
       User.find u.id
     end
 
