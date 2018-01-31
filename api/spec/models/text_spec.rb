@@ -3,17 +3,17 @@ require "rails_helper"
 RSpec.describe Text, type: :model do
   let(:new_text) { Text.new }
   let(:text_with_sections) do
-    text = FactoryGirl.create(:text)
-    text.text_sections << FactoryGirl.create(:text_section, position: 1)
-    text.text_sections << FactoryGirl.create(:text_section, position: 2)
-    text.text_sections << FactoryGirl.create(:text_section, position: 3)
-    text.text_sections << FactoryGirl.create(:text_section, position: 4)
-    text.text_sections << FactoryGirl.create(:text_section, position: 5)
+    text = FactoryBot.create(:text)
+    text.text_sections << FactoryBot.create(:text_section, position: 1)
+    text.text_sections << FactoryBot.create(:text_section, position: 2)
+    text.text_sections << FactoryBot.create(:text_section, position: 3)
+    text.text_sections << FactoryBot.create(:text_section, position: 4)
+    text.text_sections << FactoryBot.create(:text_section, position: 5)
     text
   end
 
   it "has a valid factory" do
-    expect(FactoryGirl.build(:text)).to be_valid
+    expect(FactoryBot.build(:text)).to be_valid
   end
 
   it "correctly returns the section at a certain position" do

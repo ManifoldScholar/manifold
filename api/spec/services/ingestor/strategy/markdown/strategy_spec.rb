@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Ingestor::Strategy::Markdown::Strategy do
 
   before(:all) {
-    @creator = FactoryGirl.create(:user)
+    @creator = FactoryBot.create(:user)
     @source = Rails.root.join("spec", "data", "ingestion", "markdown", "minimal" ).to_s
     @strategy = Ingestor::Strategy::Markdown::Strategy
     @logger = NullLogger.new

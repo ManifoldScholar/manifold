@@ -5,13 +5,13 @@ RSpec.describe "Text Section Annotations API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:text_section) { FactoryGirl.create(:text_section) }
-  let(:resource) { FactoryGirl.create(:resource, project: text_section.project) }
-  let(:collection) { FactoryGirl.create(:collection, project: text_section.project) }
-  let(:annotation_params) { { attributes: FactoryGirl.attributes_for(:annotation) } }
+  let(:text_section) { FactoryBot.create(:text_section) }
+  let(:resource) { FactoryBot.create(:resource, project: text_section.project) }
+  let(:collection) { FactoryBot.create(:collection, project: text_section.project) }
+  let(:annotation_params) { { attributes: FactoryBot.attributes_for(:annotation) } }
   let(:resource_params) do
     {
-      attributes: FactoryGirl.build(:resource_annotation).attributes,
+      attributes: FactoryBot.build(:resource_annotation).attributes,
       relationships: {
         resource: {
           data: {
@@ -24,7 +24,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
   end
   let(:collection_params) do
     {
-      attributes: FactoryGirl.build(:collection_annotation).attributes,
+      attributes: FactoryBot.build(:collection_annotation).attributes,
       relationships: {
         collection: {
           data: {
@@ -47,7 +47,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
   end
 
   describe "destroys an annotation" do
-    let(:annotation) { FactoryGirl.create(:annotation, creator: reader) }
+    let(:annotation) { FactoryBot.create(:annotation, creator: reader) }
     let(:path) { api_v1_annotation_path(annotation) }
     context "when the user is the author of the annotation" do
       describe "the response" do
@@ -60,7 +60,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     context "when the user is not the author of the annotation" do
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
-          annotation = FactoryGirl.create(:annotation, creator: author)
+          annotation = FactoryBot.create(:annotation, creator: author)
           delete api_v1_annotation_path(annotation), headers: reader_headers
           expect(response).to have_http_status(403)
         end

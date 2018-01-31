@@ -2,12 +2,12 @@ require "rails_helper"
 
 RSpec.describe TwitterQuery, type: :model do
   it "has a valid factory" do
-    expect(FactoryGirl.build(:twitter_query)).to be_valid
+    expect(FactoryBot.build(:twitter_query)).to be_valid
   end
 
   context "its most_recent_tweet_id" do
     before(:context) do
-      @query = FactoryGirl.build(:twitter_query, most_recent_tweet_id: 5)
+      @query = FactoryBot.build(:twitter_query, most_recent_tweet_id: 5)
     end
 
     it "is reset when query is changed" do
@@ -22,7 +22,7 @@ RSpec.describe TwitterQuery, type: :model do
   end
 
   it "has a truncated, single search param display name" do
-    query = FactoryGirl.create(:twitter_query, query: "from:manifoldscholar #celtics")
+    query = FactoryBot.create(:twitter_query, query: "from:manifoldscholar #celtics")
     expect(query.display_name).to eq "from:manifoldscholar..."
   end
 end

@@ -2,11 +2,11 @@ require "rails_helper"
 
 RSpec.describe Project, type: :model do
   it "has a valid factory" do
-    expect(FactoryGirl.build(:project)).to be_valid
+    expect(FactoryBot.build(:project)).to be_valid
   end
 
   it "updates the sort_title when saved" do
-    project = FactoryGirl.build(:project, title: "A Hobbit's Journey")
+    project = FactoryBot.build(:project, title: "A Hobbit's Journey")
     project.save
     expect(project.sort_title).to eq "Hobbit's Journey"
     project.title = "The end of the world"
@@ -59,56 +59,56 @@ RSpec.describe Project, type: :model do
   end
 
   it "is valid with a creator" do
-    creator = FactoryGirl.create(:user)
-    project = FactoryGirl.create(:project, creator: creator)
+    creator = FactoryBot.create(:user)
+    project = FactoryBot.create(:project, creator: creator)
     expect(project).to be_valid
   end
 
   it "is invalid without a creator" do
-    project = FactoryGirl.build(:project, creator: nil)
+    project = FactoryBot.build(:project, creator: nil)
     expect(project).to_not be_valid
   end
 
   it "triggers an event on create" do
     expect {
-      project = FactoryGirl.create(:project)
+      project = FactoryBot.create(:project)
     }.to have_enqueued_job(CreateEventJob)
   end
 
   it "does not trigger an event on new" do
     expect {
-      project = FactoryGirl.build(:project)
+      project = FactoryBot.build(:project)
     }.to_not have_enqueued_job(CreateEventJob)
   end
 
   it "is created as a draft" do
-    project = FactoryGirl.build(:project)
+    project = FactoryBot.build(:project)
     expect(project.draft).to be(true)
   end
 
   it "is invalid without draft state" do
-    project = FactoryGirl.build(:project, draft: nil)
+    project = FactoryBot.build(:project, draft: nil)
     expect(project).to_not be_valid
   end
 
   it "reports that it's following twitter accounts if at least one twitter_query association" do
-    project = FactoryGirl.build(:project)
-    FactoryGirl.create(:twitter_query, project: project)
+    project = FactoryBot.build(:project)
+    FactoryBot.create(:twitter_query, project: project)
     expect(project.following_twitter_accounts?).to be true
   end
 
   it "reports that it's not following twitter accounts if none are associated" do
-    project = FactoryGirl.build(:project)
+    project = FactoryBot.build(:project)
     expect(project.following_twitter_accounts?).to be false
   end
 
   it "correctly returns the uncollected resource count" do
-    project = FactoryGirl.create(:project)
-    collection = FactoryGirl.create(:collection, project: project)
-    resource_1 = FactoryGirl.create(:resource, project: project)
-    resource_2 = FactoryGirl.create(:resource, project: project)
-    resource_3 = FactoryGirl.create(:resource, project: project)
-    collection_resource = FactoryGirl.create(
+    project = FactoryBot.create(:project)
+    collection = FactoryBot.create(:collection, project: project)
+    resource_1 = FactoryBot.create(:resource, project: project)
+    resource_2 = FactoryBot.create(:resource, project: project)
+    resource_3 = FactoryBot.create(:resource, project: project)
+    collection_resource = FactoryBot.create(
       :collection_resource,
       resource: resource_1,
       collection: collection
@@ -119,8 +119,8 @@ RSpec.describe Project, type: :model do
   context "can be searched", :slow, :elasticsearch do
 
     it "by title" do
-      @project_a = FactoryGirl.create(:project, title: "Bartholomew Smarts", featured: true)
-      @project_b = FactoryGirl.create(:project, title: "Rambo Smarts", featured: true)
+      @project_a = FactoryBot.create(:project, title: "Bartholomew Smarts", featured: true)
+      @project_b = FactoryBot.create(:project, title: "Rambo Smarts", featured: true)
       Project.reindex
       Project.searchkick_index.refresh
       results = Project.filter({keyword: "Bartholomew"})
@@ -133,10 +133,10 @@ RSpec.describe Project, type: :model do
   context "can be filtered" do
 
     before(:each) do
-      @subject_a = FactoryGirl.create(:subject, name: "subject_a")
-      @subject_b = FactoryGirl.create(:subject, name: "subject_b")
-      @project_a = FactoryGirl.create(:project, title: "project_a", featured: true)
-      @project_b = FactoryGirl.create(:project, title: "project_b", featured: false)
+      @subject_a = FactoryBot.create(:subject, name: "subject_a")
+      @subject_b = FactoryBot.create(:subject, name: "subject_b")
+      @project_a = FactoryBot.create(:project, title: "project_a", featured: true)
+      @project_b = FactoryBot.create(:project, title: "project_b", featured: false)
       @project_a.subjects = [@subject_a]
       @project_b.subjects = [@subject_b]
       @project_a.save
@@ -184,21 +184,21 @@ RSpec.describe Project, type: :model do
   describe "its metadata" do
 
     it "can be set" do
-      p = FactoryGirl.build(:project)
+      p = FactoryBot.build(:project)
       p.metadata = { "isbn" => "1234" }
       p.save
       expect(p.metadata["isbn"]).to eq "1234"
     end
 
     it "filters out invalid metadata" do
-      p = FactoryGirl.build(:project)
+      p = FactoryBot.build(:project)
       p.metadata = { "isbn" => "1234", "foo" => "bar" }
       p.save
       expect(p.metadata).to eq({ "isbn" => "1234" })
     end
 
     it "filters out blank metadata" do
-      p = FactoryGirl.build(:project)
+      p = FactoryBot.build(:project)
       p.metadata = { "isbn" => "1234", "foo" => "" }
       p.save
       expect(p.metadata).to eq({ "isbn" => "1234" })
@@ -211,19 +211,19 @@ RSpec.describe Project, type: :model do
     let(:avatar) { File.new(avatar_path) }
 
     it "is valid without avatar color" do
-      project = FactoryGirl.build(:project, avatar: avatar)
+      project = FactoryBot.build(:project, avatar: avatar)
       expect(project).to be_valid
     end
   end
 
   context "when avatar is not present" do
     it "is invalid without an avatar color" do
-      project = FactoryGirl.build(:project, avatar_color: nil)
+      project = FactoryBot.build(:project, avatar_color: nil)
       expect(project).to_not be_valid
     end
 
     it "is invalid with an avatar color not in list" do
-      project = FactoryGirl.build(:project, avatar_color: "none more black")
+      project = FactoryBot.build(:project, avatar_color: "none more black")
       expect(project).to_not be_valid
     end
   end

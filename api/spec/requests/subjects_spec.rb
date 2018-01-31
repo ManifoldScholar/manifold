@@ -5,8 +5,8 @@ RSpec.describe "Subject API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:subject_a) { FactoryGirl.create(:subject) }
-  let(:subject_b) { FactoryGirl.create(:subject, name: "Rowan") }
+  let(:subject_a) { FactoryBot.create(:subject) }
+  let(:subject_b) { FactoryBot.create(:subject, name: "Rowan") }
 
   describe "responds with a list of subjects" do
     describe "the response" do
@@ -27,8 +27,8 @@ RSpec.describe "Subject API", type: :request do
         }
       }
       it "has a 200 status code" do
-        FactoryGirl.create(:project, subjects: [subject_a])
-        FactoryGirl.create(:project, featured: true, subjects: [subject_b])
+        FactoryBot.create(:project, subjects: [subject_a])
+        FactoryBot.create(:project, featured: true, subjects: [subject_b])
         get api_v1_subjects_path(params: params)
         entities = JSON.parse(response.body)["data"]
         expect(entities.count).to eq(1)

@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Collaborator, type: :model do
 
   it "has a valid factory" do
-    expect(FactoryGirl.build(:collaborator)).to be_valid
+    expect(FactoryBot.build(:collaborator)).to be_valid
   end
 
   it "optionally belongs to a text" do

@@ -44,7 +44,6 @@ gem "pg", "~> 0.21.0"
 gem "premailer-rails", "~> 1.0"
 gem "pry-rails", "~> 0.3.0"
 gem "puma", "~> 3.0"
-gem "rack-cors", "~> 1.0"
 # We can't upgrade to rails 5.1 until this is addressed:
 # https://github.com/mbleigh/acts-as-taggable-on/issues/836
 gem "elasticsearch", "~> 5.0"
@@ -54,6 +53,7 @@ gem "omniauth", "~> 1.6.1"
 gem "omniauth-facebook", "~> 4.0.0"
 gem "omniauth-google-oauth2", "~> 0.4.1"
 gem "omniauth-twitter", "~> 1.4.0"
+gem "rack-cors", "~> 1.0"
 gem "rails", "~> 5.0.0"
 # This can go to 3.0 when we're ready to upgrade Rubocop to 0.52
 gem "rainbow", "~> 2.0"
@@ -74,7 +74,7 @@ gem "validate_url", "~> 1.0"
 gem "validates_email_format_of", "~> 1.0"
 
 group :development, :test do
-  gem "factory_girl_rails", "~> 4.0"
+  gem "factory_bot_rails", "~> 4.0"
   gem "rspec-core", "~> 3.0"
   gem "rspec-expectations", "~> 3.0"
   gem "rspec-json_expectations", "~> 2.0"

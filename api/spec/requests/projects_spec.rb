@@ -5,7 +5,7 @@ RSpec.describe "Projects API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:project) { FactoryGirl.create(:project, draft: false) }
+  let(:project) { FactoryBot.create(:project, draft: false) }
 
   describe "responds with a list of projects" do
     before(:each) { get api_v1_projects_path, headers: reader_headers }
@@ -53,9 +53,9 @@ RSpec.describe "Projects API", type: :request do
 
       let(:headers) { admin_headers }
 
-      let(:john) { FactoryGirl.create(:maker, first_name: "John") }
-      let(:jim) { FactoryGirl.create(:maker, first_name: "Jim") }
-      let(:jenny) { FactoryGirl.create(:maker, first_name: "Jenny") }
+      let(:john) { FactoryBot.create(:maker, first_name: "John") }
+      let(:jim) { FactoryBot.create(:maker, first_name: "Jim") }
+      let(:jenny) { FactoryBot.create(:maker, first_name: "Jenny") }
 
       describe "its creator association" do
 

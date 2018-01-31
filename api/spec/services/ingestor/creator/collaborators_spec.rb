@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Ingestor::Creator::Collaborators do
 
-  let(:text) { FactoryGirl.create(:text) }
+  let(:text) { FactoryBot.create(:text) }
   let(:creator) { Ingestor::Creator::Collaborators.new(Rails.logger, text) }
   let(:inspector) {
     double("Inspector", name: "name", sort_name: "name", role: "creator")
@@ -22,13 +22,13 @@ RSpec.describe Ingestor::Creator::Collaborators do
   end
 
   it "updates existing objects rather than create new ones" do
-    text = FactoryGirl.create(:text)
+    text = FactoryBot.create(:text)
     creator = Ingestor::Creator::Collaborators.new(Rails.logger, text)
-    alfred = FactoryGirl.create(:maker, name: "Alfred Hitchcock")
-    wim = FactoryGirl.create(:maker, name: "Wim Wenders")
+    alfred = FactoryBot.create(:maker, name: "Alfred Hitchcock")
+    wim = FactoryBot.create(:maker, name: "Wim Wenders")
 
-    FactoryGirl.create(:collaborator, maker: wim, collaboratable: text)
-    FactoryGirl.create(:collaborator, maker: alfred, collaboratable: text)
+    FactoryBot.create(:collaborator, maker: wim, collaboratable: text)
+    FactoryBot.create(:collaborator, maker: alfred, collaboratable: text)
 
     inspectors = [
       double("Inspector", name: "Alfred Hitchcock", sort_name: "", role: "creator"),

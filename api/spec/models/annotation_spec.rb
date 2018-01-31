@@ -3,15 +3,15 @@ require "rails_helper"
 RSpec.describe Annotation, type: :model do
 
   before(:each) do
-    @annotation = FactoryGirl.build(:annotation)
+    @annotation = FactoryBot.build(:annotation)
   end
 
   it "has a valid annotation factory" do
-    expect(FactoryGirl.build(:annotation)).to be_valid
+    expect(FactoryBot.build(:annotation)).to be_valid
   end
 
   it "has a valid resource annotation factory" do
-    expect(FactoryGirl.build(:resource_annotation)).to be_valid
+    expect(FactoryBot.build(:resource_annotation)).to be_valid
   end
 
   it "knows what project it belongs to" do
@@ -91,7 +91,7 @@ RSpec.describe Annotation, type: :model do
     end
 
     it "is valid with a resource if format is resource" do
-      resource = FactoryGirl.create(:resource)
+      resource = FactoryBot.create(:resource)
       @annotation.format = "resource"
       @annotation.resource = resource
       expect(@annotation).to be_valid
@@ -103,7 +103,7 @@ RSpec.describe Annotation, type: :model do
     end
 
     it "is valid with a collection if format is collection" do
-      collection = FactoryGirl.create(:collection)
+      collection = FactoryBot.create(:collection)
       @annotation.format = "collection"
       @annotation.collection = collection
       expect(@annotation).to be_valid

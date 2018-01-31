@@ -11,7 +11,7 @@ RSpec.describe Ingestor::Creator::Stylesheets do
     )
   end
 
-  let(:text) { FactoryGirl.create(:text) }
+  let(:text) { FactoryBot.create(:text) }
   let(:creator) { Ingestor::Creator::Stylesheets.new(Rails.logger, text) }
   let(:inspectors) { [
     double_builder("1"),
@@ -38,9 +38,9 @@ RSpec.describe Ingestor::Creator::Stylesheets do
   end
 
   it "updates existing objects rather than create new ones" do
-    FactoryGirl.create(:stylesheet, text: text, source_identifier: "1")
-    FactoryGirl.create(:stylesheet, text: text, source_identifier: "2")
-    FactoryGirl.create(:stylesheet, text: text, source_identifier: "3")
+    FactoryBot.create(:stylesheet, text: text, source_identifier: "1")
+    FactoryBot.create(:stylesheet, text: text, source_identifier: "2")
+    FactoryBot.create(:stylesheet, text: text, source_identifier: "3")
     models = creator.create(inspectors, text.stylesheets)
     models.each(&:save)
     expect(text.stylesheets.count).to eq 3
@@ -48,7 +48,7 @@ RSpec.describe Ingestor::Creator::Stylesheets do
   end
 
   it "sets the ingeseted property on existing stylesheets correctly" do
-    FactoryGirl.create(:stylesheet, text: text, source_identifier: "1", ingested: false)
+    FactoryBot.create(:stylesheet, text: text, source_identifier: "1", ingested: false)
     models = creator.create([double_builder("1")], text.stylesheets)
     models.each(&:save)
     expect(models.first.ingested).to eq true

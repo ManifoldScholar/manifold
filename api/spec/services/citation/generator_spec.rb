@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe Citation::Generator do
 
   let(:generator) { Citation::Generator.new }
-  let(:author_1) { FactoryGirl.create(:maker)}
-  let(:author_2) { FactoryGirl.create(:maker)}
+  let(:author_1) { FactoryBot.create(:maker)}
+  let(:author_2) { FactoryBot.create(:maker)}
 
   let(:text) do
-    text = FactoryGirl.create(:text)
+    text = FactoryBot.create(:text)
     text.metadata = {
       publisher: "University of Minnesota Press",
       issued: Date.today,
@@ -19,7 +19,7 @@ RSpec.describe Citation::Generator do
   end
 
   let(:text_section) do
-    text_section = FactoryGirl.create(:text_section, text: text, name: "Chapter One")
+    text_section = FactoryBot.create(:text_section, text: text, name: "Chapter One")
     text_section
   end
 
@@ -62,7 +62,7 @@ RSpec.describe Citation::Generator do
 
   context "when the subject is not citable" do
 
-    let(:maker) { FactoryGirl.create(:maker) }
+    let(:maker) { FactoryBot.create(:maker) }
     let(:citations) { citations = generator.cite(maker, []) }
 
     it "returns a hash" do

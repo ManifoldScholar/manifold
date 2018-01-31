@@ -5,7 +5,7 @@ RSpec.describe "Makers API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:maker) { FactoryGirl.create(:maker) }
+  let(:maker) { FactoryBot.create(:maker) }
 
   describe "sends a list of makers" do
     before(:each) { get api_v1_makers_path, headers: reader_headers }

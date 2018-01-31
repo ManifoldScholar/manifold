@@ -58,7 +58,7 @@ RSpec.describe Ingestor::Strategy::Html::Inspector::Html do
 
   let(:inspector) {
     path = '/path/to/ingestion'
-    ingestion = Ingestor::Ingestion.new(path, FactoryGirl.create(:user), NullLogger.new )
+    ingestion = Ingestor::Ingestion.new(path, FactoryBot.create(:user), NullLogger.new )
     inspector = Ingestor::Strategy::Html::Inspector::Html.new(ingestion)
     allow(inspector).to receive(:index_path).and_return("index.html")
     allow(inspector).to receive(:index_parsed).and_return(Nokogiri::HTML(document_contents, nil, "utf-8"))

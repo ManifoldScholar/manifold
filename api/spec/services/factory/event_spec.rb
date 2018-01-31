@@ -5,7 +5,7 @@ RSpec.describe Factory::Event do
   let(:factory) { Factory::Event.new }
 
   it "resolves a subject keyword argument to an event subject" do
-    project = FactoryGirl.create(:project)
+    project = FactoryBot.create(:project)
     event = factory.create(Event::PROJECT_CREATED, subject: project)
     expect(event.subject_id).to eq(project.id)
     expect(event.subject_type).to eq("Project")
@@ -13,7 +13,7 @@ RSpec.describe Factory::Event do
   end
 
   it "resolves subject_type and subject_id keyword arguments to an event subject" do
-    project = FactoryGirl.create(:project)
+    project = FactoryBot.create(:project)
     event = factory.create(
       Event::PROJECT_CREATED,
       subject_type: "Project",
@@ -30,21 +30,21 @@ RSpec.describe Factory::Event do
   end
 
   it "creates a valid event" do
-    project = FactoryGirl.create(:project)
+    project = FactoryBot.create(:project)
     event = factory.create(Event::PROJECT_CREATED, subject: project)
     match = I18n.t("services.factory.event.event_title.project_created")
     expect(event).to be_valid
   end
 
   it "assigns the event_title from the localized string" do
-    project = FactoryGirl.create(:project)
+    project = FactoryBot.create(:project)
     event = factory.create(Event::PROJECT_CREATED, subject: project)
     match = I18n.t("services.factory.event.event_title.project_created")
     expect(event.event_title).to eq match
   end
 
   it "assigns the event_subtitle from the localized string" do
-    project = FactoryGirl.create(:project)
+    project = FactoryBot.create(:project)
     event = factory.create(Event::PROJECT_CREATED, subject: project)
     match = I18n.t(
       "services.factory.event.event_subtitle.project_created",
@@ -54,31 +54,31 @@ RSpec.describe Factory::Event do
   end
 
   it "assigns the subject title to the event" do
-    project = FactoryGirl.create(:project, title: "a title")
+    project = FactoryBot.create(:project, title: "a title")
     event = factory.create(Event::PROJECT_CREATED, subject: project)
     expect(event.subject_title).to eq project.title
   end
 
   it "assigns the subject subtitle to the event" do
-    project = FactoryGirl.create(:project, subtitle: "a subtitle")
+    project = FactoryBot.create(:project, subtitle: "a subtitle")
     event = factory.create(Event::PROJECT_CREATED, subject: project)
     expect(event.subject_subtitle).to eq project.subtitle
   end
 
   it "assigns the project from the subject for project_created event" do
-    project = FactoryGirl.create(:project, subtitle: "a subtitle")
+    project = FactoryBot.create(:project, subtitle: "a subtitle")
     event = factory.create(Event::PROJECT_CREATED, subject: project)
     expect(event.project).to eq project
   end
 
   it "assigns the project from the subject for TEXT_ADDED event" do
-    text = FactoryGirl.create(:text)
+    text = FactoryBot.create(:text)
     event = factory.create(Event::TEXT_ADDED, subject: text)
     expect(event.project).to eq text.project
   end
 
   it "raises an exception if the subject can't be resolved to a project" do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     expect{
       factory.create(Event::TEXT_ADDED, subject: user)
     }.to raise_error(Factory::Errors::NoEventProject)
@@ -92,8 +92,8 @@ RSpec.describe Factory::Event do
   end
 
   it "correctly records the attribution_name from the subject creator" do
-    user = FactoryGirl.create(:user, first_name: "Alexander", last_name: "Hamilton")
-    annotation = FactoryGirl.create(:annotation, creator: user)
+    user = FactoryBot.create(:user, first_name: "Alexander", last_name: "Hamilton")
+    annotation = FactoryBot.create(:annotation, creator: user)
     event = factory.create(Event::TEXT_ANNOTATED, subject: annotation)
     expect(event.attribution_name).to eq "Alexander Hamilton"
   end

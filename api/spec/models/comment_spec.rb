@@ -3,11 +3,11 @@ require "rails_helper"
 RSpec.describe Comment, type: :model do
 
   it "has a valid comment factory" do
-    expect(FactoryGirl.build(:comment)).to be_valid
+    expect(FactoryBot.build(:comment)).to be_valid
   end
 
   describe "is invalid when" do
-    let(:comment) { FactoryGirl.build(:comment) }
+    let(:comment) { FactoryBot.build(:comment) }
 
     it "body is blank" do
       comment.body = ""
@@ -27,7 +27,7 @@ RSpec.describe Comment, type: :model do
 
     context 'assigning the sort order' do
       before(:each) do
-        @comment = FactoryGirl.create(:comment)
+        @comment = FactoryBot.create(:comment)
       end
 
       it 'is correct when a root' do
@@ -35,7 +35,7 @@ RSpec.describe Comment, type: :model do
       end
 
       it 'is correct when child' do
-        comment = FactoryGirl.create(:comment, parent: @comment)
+        comment = FactoryBot.create(:comment, parent: @comment)
         expect(comment.sort_order).to eq 0
       end
     end
