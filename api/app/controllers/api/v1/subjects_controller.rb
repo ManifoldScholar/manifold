@@ -4,7 +4,7 @@ module Api
     class SubjectsController < ApplicationController
 
       resourceful! Subject, authorize_options: { except: [:index, :show] } do
-        Subject.filter(with_pagination!(subject_filter_params))
+        Subject.filter(filter_options)
       end
 
       def index
@@ -34,6 +34,13 @@ module Api
       def destroy
         @subject = load_and_authorize_subject
         @subject.destroy
+      end
+
+      private
+
+      def filter_options
+        return subject_filter_params if params&.dig(:unpaginated)
+        with_pagination!(subject_filter_params)
       end
 
     end
