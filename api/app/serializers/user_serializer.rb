@@ -1,6 +1,5 @@
 # Serializes a User model
-class UserSerializer < ActiveModel::Serializer
-  include Authorization
+class UserSerializer < ApplicationSerializer
   include AttributesForUser
   meta(partial: false)
 
