@@ -83,10 +83,6 @@ export class SettingsSubjectsListContainer extends PureComponent {
     };
   };
 
-  isDrawerOpen() {
-    return !!this.props.match.params.id;
-  }
-
   render() {
     const { match } = this.props;
 
