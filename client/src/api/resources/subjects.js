@@ -1,10 +1,10 @@
 export default {
-  index(filter = {}) {
+  index(filter = {}, page = {}) {
     return {
       endpoint: "/api/v1/subjects",
       method: "GET",
       options: {
-        params: { filter }
+        params: { filter, page }
       }
     };
   },
