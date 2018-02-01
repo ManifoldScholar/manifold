@@ -197,6 +197,7 @@ export class CommentEditor extends PureComponent {
               <div className="utility">
                 <div className="buttons">
                   <button
+                    type="button"
                     onClick={this.props.cancel}
                     className="button-secondary-dull"
                   >

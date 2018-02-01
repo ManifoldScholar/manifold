@@ -91,7 +91,7 @@ export default class AnnotationDetail extends PureComponent {
               <section className="body">
                 <Helper.SimpleFormat text={annotation.attributes.body} />
               </section>
-              <HigherOrder.RequireKind requiredKind="any">
+              <HigherOrder.RequireKind requiredKind={"any"}>
                 <nav className="utility">
                   <ul>
                     {this.props.includeComments
@@ -104,26 +104,34 @@ export default class AnnotationDetail extends PureComponent {
                           </button>
                         </li>
                       : null}
-                    {this.props.saveHandler &&
-                    annotation.attributes.canUpdateObject
-                      ? <li>
-                          <button
-                            className={editButtonClass}
-                            onClick={this.startEdit}
-                          >
-                            {"Edit"}
-                          </button>
-                        </li>
-                      : null}
-                    {this.props.deleteHandler &&
-                    annotation.attributes.canDeleteObject
-                      ? <li>
-                          <Utility.ConfirmableButton
-                            label="Delete"
-                            confirmHandler={this.handleDelete}
-                          />
-                        </li>
-                      : null}
+                    <HigherOrder.RequireAbility
+                      entity={annotation}
+                      requiredAbility={"update"}
+                    >
+                      {this.props.saveHandler
+                        ? <li>
+                            <button
+                              className={editButtonClass}
+                              onClick={this.startEdit}
+                            >
+                              {"Edit"}
+                            </button>
+                          </li>
+                        : null}
+                    </HigherOrder.RequireAbility>
+                    <HigherOrder.RequireAbility
+                      entity={annotation}
+                      requiredAbility={"delete"}
+                    >
+                      {this.props.deleteHandler
+                        ? <li>
+                            <Utility.ConfirmableButton
+                              label="Delete"
+                              confirmHandler={this.handleDelete}
+                            />
+                          </li>
+                        : null}
+                    </HigherOrder.RequireAbility>
                   </ul>
                   {this.state.action === "replying"
                     ? <CommentContainer.Editor

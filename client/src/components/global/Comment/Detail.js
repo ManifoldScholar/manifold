@@ -206,7 +206,7 @@ export default class CommentDetail extends PureComponent {
         <section className="body">
           <Helper.SimpleFormat text={comment.attributes.body} />
         </section>
-        <HigherOrder.RequireKind requiredKind="any">
+        <HigherOrder.RequireKind requiredKind={"any"}>
           <nav className="utility">
             <ul>
               <li>
@@ -214,20 +214,28 @@ export default class CommentDetail extends PureComponent {
                   {"Reply"}
                 </button>
               </li>
-              {comment.attributes.canUpdateObject
-                ? <li>
-                    <button onClick={this.startEdit}>
-                      {"Edit"}
-                    </button>
-                  </li>
-                : null}
-              {comment.attributes.canDeleteObject && !comment.attributes.deleted
-                ? <li>
-                    <button onClick={this.handleDelete}>
-                      {"Delete"}
-                    </button>
-                  </li>
-                : null}
+              <HigherOrder.RequireAbility
+                entity={comment}
+                requiredAbility={"update"}
+              >
+                <li>
+                  <button onClick={this.startEdit}>
+                    {"Edit"}
+                  </button>
+                </li>
+              </HigherOrder.RequireAbility>
+              <HigherOrder.RequireAbility
+                entity={comment}
+                requiredAbility={"delete"}
+              >
+                {!comment.attributes.deleted
+                  ? <li>
+                      <button onClick={this.handleDelete}>
+                        {"Delete"}
+                      </button>
+                    </li>
+                  : null}
+              </HigherOrder.RequireAbility>
               {comment.attributes.deleted
                 ? <li>
                     <button onClick={this.handleRestore}>
@@ -280,7 +288,7 @@ export default class CommentDetail extends PureComponent {
   render() {
     const { comment } = this.props;
     const { attributes } = comment;
-    if (attributes.deleted && !attributes.canReadDeleted) {
+    if (attributes.deleted && !attributes.abilities.readIfDeleted) {
       return this.renderDeletedComment();
     }
     return this.renderComment();

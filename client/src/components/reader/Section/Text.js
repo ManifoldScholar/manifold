@@ -116,7 +116,7 @@ export default class Text extends Component {
           return (filtered = filtered.filter(a => {
             return (
               a.attributes.format !== format ||
-              a.attributes.currentUserIsCreator === value
+              a.attributes.abilities.creator === value
             );
           }));
         }
