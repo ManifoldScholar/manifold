@@ -1,10 +1,10 @@
 # Provides a serialization of a resource model.
-class ReaderSearchResultSerializer < ActiveModel::Serializer
-  include Authorization
+class ReaderSearchResultSerializer < ApplicationSerializer
+  include Abilities
   meta(partial: false)
 
   attributes :score, :searchable_type, :searchable_id, :body, :highlighted_body,
-             :node_uuid, :current_user_is_creator
+             :node_uuid, :abilities
 
   has_one :creator, serializer: UserSerializer
   has_one :text_section, serializer: TextSectionPartialSerializer

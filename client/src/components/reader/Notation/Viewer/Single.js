@@ -40,14 +40,17 @@ export default class NotationViewerSingle extends PureComponent {
 
     return (
       <div className="notation-preview-single">
-        <HigherOrder.RequireKind requiredKind="admin">
+        <HigherOrder.RequireAbility
+          entity={annotation}
+          requiredAbility="delete"
+        >
           <button
             onClick={() => actions.startDestroy(entry)}
             className="notation-delete"
           >
             <i className="manicon manicon-x" />
           </button>
-        </HigherOrder.RequireKind>
+        </HigherOrder.RequireAbility>
         <Link notation={notation} params={params} className={linkClass}>
           <div
             style={{ maxHeight: height }}

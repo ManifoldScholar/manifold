@@ -42,6 +42,14 @@ const metadataProperties = [
   "volume"
 ];
 
+const abilities = {
+  read: true,
+  create: true,
+  update: true,
+  delete: true,
+  readIfDeleted: true
+};
+
 const defaults = {
   settings: {
     type: "settings",
@@ -184,7 +192,8 @@ const defaults = {
     type: "comments",
     attributes: {
       body: "Plaid clash with polka dots, I hope you ain't mad.",
-      createdAt: commentDate
+      createdAt: commentDate,
+      abilities
     },
     relationships: {
       creator: null
@@ -199,8 +208,10 @@ const defaults = {
       lastName: "Ida",
       fullName: "Rowan Ida",
       role: "Admin",
+      kind: "Admin",
       avatarStyles: {},
-      isCurrentUser: true
+      isCurrentUser: true,
+      abilities
     }
   },
 
@@ -302,7 +313,8 @@ const defaults = {
       startNode: "some-node",
       endNode: "another-node",
       startChar: 4,
-      endChar: 13
+      endChar: 13,
+      abilities
     }
   },
 

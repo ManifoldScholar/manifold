@@ -24,7 +24,7 @@ export default class AnnotationDetail extends PureComponent {
 
   name() {
     const { creator, annotation } = this.props;
-    const isCreator = annotation.attributes.currentUserIsCreator;
+    const isCreator = annotation.attributes.abilities.creator;
     let name = creator.attributes.fullName;
     if (isCreator) name = "Me";
     return (
