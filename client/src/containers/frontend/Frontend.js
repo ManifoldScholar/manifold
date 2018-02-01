@@ -19,7 +19,7 @@ export class FrontendContainer extends Component {
         oneTime: true
       });
       const subjects = request(
-        subjectsAPI.index({ used: true }),
+        subjectsAPI.index({ used: true }, {}, true),
         requests.feSubjects,
         { oneTime: true }
       );
