@@ -1,10 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Comment as CommentContainer } from "containers/global";
-import { Helper } from "components/global";
+import { Helper, Comment } from "components/global";
 import classNames from "classnames";
-import { FormattedDate } from "components/global";
-import isObject from "lodash/isObject";
 import HigherOrder from "containers/global/HigherOrder";
 
 export default class CommentDetail extends PureComponent {
@@ -91,28 +89,6 @@ export default class CommentDetail extends PureComponent {
     });
   }
 
-  renderDeletedComment() {
-    const { comment } = this.props;
-    return (
-      <li className="annotation-comment">
-        <section className="meta">
-          <div>
-            <figure className="author-avatar dull">
-              <div className="no-image">
-                <i className="manicon manicon-person" />
-              </div>
-            </figure>
-            <h4 className="deleted-notification">This comment was deleted.</h4>
-          </div>
-        </section>
-        <CommentContainer.Thread
-          subject={this.props.subject}
-          parentId={comment.id}
-        />
-      </li>
-    );
-  }
-
   renderEditor() {
     if (!this.state.editor) return null;
     if (this.state.editor === "reply") return this.renderReplyEditor();
@@ -146,63 +122,10 @@ export default class CommentDetail extends PureComponent {
     });
     const { comment, parent } = this.props;
     const { creator } = comment.relationships;
-    const avatarClass = classNames({
-      "author-avatar": true,
-      dull: creator && !creator.attributes.isCurrentUser
-    });
 
     return (
       <li className="annotation-comment">
-        <section className="annotation-meta">
-          <div>
-            <figure className={avatarClass}>
-              {creator.attributes.avatarStyles.smallSquare
-                ? <div
-                    className="image"
-                    style={{
-                      backgroundImage: `url(${creator.attributes.avatarStyles
-                        .smallSquare})`
-                    }}
-                  >
-                    <span className="screen-reader-text">
-                      Profile image for {creator.attributes.fullName}
-                    </span>
-                  </div>
-                : <div className="no-image">
-                    <i className="manicon manicon-person" />
-                  </div>}
-            </figure>
-            <h4 className="author-name">
-              {creator.attributes.fullName}
-              {isObject(parent)
-                ? <span className="reply-to">
-                    <i className="manicon manicon-arrow-curved-right" />
-                    Reply to {parent.relationships.creator.attributes.fullName}
-                  </span>
-                : null}
-            </h4>
-            <datetime>
-              <FormattedDate
-                format="distanceInWords"
-                date={comment.attributes.createdAt}
-              />{" "}
-              ago
-            </datetime>
-          </div>
-          <div className="markers">
-            {comment.attributes.deleted
-              ? <div className="marker secondary">Deleted</div>
-              : null}
-            <HigherOrder.RequireKind requiredKind="admin">
-              {comment.attributes.flagsCount > 0
-                ? <div className="marker secondary">
-                    {comment.attributes.flagsCount}
-                    {comment.attributes.flagsCount === 1 ? " flag" : " flags"}
-                  </div>
-                : null}
-            </HigherOrder.RequireKind>
-          </div>
-        </section>
+        <Comment.Meta comment={comment} creator={creator} parent={parent} />
         <section className="body">
           <Helper.SimpleFormat text={comment.attributes.body} />
         </section>
@@ -289,7 +212,7 @@ export default class CommentDetail extends PureComponent {
     const { comment } = this.props;
     const { attributes } = comment;
     if (attributes.deleted && !attributes.abilities.readIfDeleted) {
-      return this.renderDeletedComment();
+      return <Comment.Deleted comment={comment} subject={this.props.subject} />;
     }
     return this.renderComment();
   }

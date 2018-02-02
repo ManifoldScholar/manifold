@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Comment.Deleted component renders correctly 1`] = `
+<li
+  className="annotation-comment"
+>
+  <section
+    className="annotation-meta"
+  >
+    <div>
+      <figure
+        className="author-avatar dull"
+      >
+        <div
+          className="no-image"
+        >
+          <i
+            className="manicon manicon-person"
+          />
+        </div>
+      </figure>
+      <h4
+        className="deleted-notification"
+      >
+        This comment was deleted.
+      </h4>
+    </div>
+  </section>
+</li>
+`;
