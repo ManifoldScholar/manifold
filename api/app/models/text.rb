@@ -144,12 +144,6 @@ class Text < ApplicationRecord
     cover_source.try(:attachment_styles)
   end
 
-  def covenor_url
-    cover_source = ingestion_sources.find_by(kind: IngestionSource::KIND_COVER_IMAGE)
-    return nil unless cover_source
-    cover_source.try(:attachment_url)
-  end
-
   def toc_section
     text_sections.find_by(kind: TextSection::KIND_NAVIGATION)
   end
