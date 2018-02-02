@@ -17,7 +17,7 @@
 RSpec.configure do |config|
 
   config.before(:suite) do
-    FactoryGirl.reload
+    FactoryBot.reload
   end
 
   config.example_status_persistence_file_path = "examples.txt"

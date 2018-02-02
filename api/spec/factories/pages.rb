@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :page do
     title "MyString"
     nav_title "MyString"

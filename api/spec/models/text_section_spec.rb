@@ -4,7 +4,7 @@ require "models/concerns/citable_spec.rb"
 RSpec.describe TextSection, type: :model do
 
   it "has a valid factory" do
-    expect(FactoryGirl.build(:text_section)).to be_valid
+    expect(FactoryBot.build(:text_section)).to be_valid
   end
 
   it "belongs to a text" do
@@ -15,7 +15,7 @@ RSpec.describe TextSection, type: :model do
   end
 
   it "belongs to a project" do
-    text_section = FactoryGirl.create(:text_section)
+    text_section = FactoryBot.create(:text_section)
     expect(text_section.project).to be_a Project
   end
 
@@ -77,7 +77,7 @@ RSpec.describe TextSection, type: :model do
           }
         ]
       }
-      FactoryGirl.create(:text_section, body_json: body_json)
+      FactoryBot.create(:text_section, body_json: body_json)
     }
 
     it "collapses text nodes wrapped in inline tags into larger block-level chunks" do

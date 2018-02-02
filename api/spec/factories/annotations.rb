@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :annotation do
     start_node "start"
     end_node "end"

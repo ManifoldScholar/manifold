@@ -4,7 +4,7 @@ class SettingsAuthorizer < ApplicationAuthorizer
     user.admin?
   end
 
-  def self.readable_by?(_user)
+  def self.readable_by?(user)
     user.admin?
   end
 

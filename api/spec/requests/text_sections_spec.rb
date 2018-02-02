@@ -5,7 +5,7 @@ RSpec.describe "Text Section API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:text_section) { FactoryGirl.create(:text_section) }
+  let(:text_section) { FactoryBot.create(:text_section) }
 
   describe "sends a text section" do
     let(:path) { api_v1_text_section_path(text_section) }

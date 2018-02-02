@@ -7,7 +7,7 @@ RSpec.describe "Categories API", type: :request do
 
   describe "sends a category" do
 
-    let(:category) { FactoryGirl.create(:category, role: Category::ROLE_TEXT) }
+    let(:category) { FactoryBot.create(:category, role: Category::ROLE_TEXT) }
 
     describe "the response" do
       it "has a 200 status code" do

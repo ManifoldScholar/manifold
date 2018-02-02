@@ -14,7 +14,7 @@ RSpec.describe Ingestor::Ingestion do
 
     subject do
       path = Rails.root.join("spec","data","ingestion", "epubs","minimal-v3")
-      Ingestor::Ingestion.new(path, FactoryGirl.create(:user), NullLogger.new)
+      Ingestor::Ingestion.new(path, FactoryBot.create(:user), NullLogger.new)
     end
 
     after(:each) do

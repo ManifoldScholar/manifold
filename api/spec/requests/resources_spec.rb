@@ -5,7 +5,7 @@ RSpec.describe "Resources API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:resource) { FactoryGirl.create(:resource) }
+  let(:resource) { FactoryBot.create(:resource) }
 
   describe "sends a list of resources" do
     describe "the response" do

@@ -52,7 +52,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Inspector::TOC do
 
     let(:path) { "some/dumb/path" }
     let(:epub_inspector) do
-      ingestion = Ingestor::Ingestion.new(path, FactoryGirl.create(:user), NullLogger.new )
+      ingestion = Ingestor::Ingestion.new(path, FactoryBot.create(:user), NullLogger.new )
       inspector = Ingestor::Strategy::EPUB::Inspector::EPUB.new(ingestion)
       allow(inspector).to receive(:v2?).and_return(true)
       allow(inspector).to receive(:nav_parsed).and_return(Nokogiri::XML(ncx_content))

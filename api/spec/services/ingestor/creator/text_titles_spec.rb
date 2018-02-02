@@ -10,7 +10,7 @@ RSpec.describe Ingestor::Creator::TextTitles do
     )
   end
 
-  let(:text) { FactoryGirl.create(:text) }
+  let(:text) { FactoryBot.create(:text) }
   let(:creator) { Ingestor::Creator::TextTitles.new(Rails.logger, text) }
   let(:inspectors) { [
     double_builder("1"),
@@ -31,9 +31,9 @@ RSpec.describe Ingestor::Creator::TextTitles do
   end
 
   it "updates existing objects rather than create new ones" do
-    FactoryGirl.create(:text_title, value: "1")
-    FactoryGirl.create(:text_title, value: "1")
-    FactoryGirl.create(:text_title, value: "1")
+    FactoryBot.create(:text_title, value: "1")
+    FactoryBot.create(:text_title, value: "1")
+    FactoryBot.create(:text_title, value: "1")
     models = creator.create(inspectors, text.titles)
     models.each(&:save)
     expect(text.titles.count).to eq 3

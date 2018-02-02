@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Ingestor::Strategy::Html::Strategy do
 
-  let(:creator) { FactoryGirl.create(:user) }
+  let(:creator) { FactoryBot.create(:user) }
 
   before(:all) do
     logger = NullLogger.new
@@ -73,7 +73,7 @@ RSpec.describe Ingestor::Strategy::Html::Strategy do
 
   context "when the source is a zip file", :integration do
     before(:all) {
-      @creator = FactoryGirl.create(:user)
+      @creator = FactoryBot.create(:user)
       @html_source = Rails.root.join("spec", "data", "ingestion", "html", "minimal.zip" )
       @text = Ingestor.ingest(@html_source, @creator, Ingestor::Strategy::Html::Strategy)
     }
@@ -82,7 +82,7 @@ RSpec.describe Ingestor::Strategy::Html::Strategy do
 
   context "when the source is a directory", :integration do
     before(:all) {
-      @creator = FactoryGirl.create(:user)
+      @creator = FactoryBot.create(:user)
       @html_source = Rails.root.join("spec", "data", "ingestion", "html", "minimal" ).to_s
       @text = Ingestor.ingest(@html_source, @creator, Ingestor::Strategy::Html::Strategy)
     }

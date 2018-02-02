@@ -5,10 +5,10 @@ RSpec.describe "Comments API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:annotation) { FactoryGirl.create(:annotation) }
-  let(:resource) { FactoryGirl.create(:resource) }
-  let(:comment_a) { FactoryGirl.create(:comment, creator: reader, subject: annotation) }
-  let(:comment_b) { FactoryGirl.create(:comment, creator: reader, subject: resource) }
+  let(:annotation) { FactoryBot.create(:annotation) }
+  let(:resource) { FactoryBot.create(:resource) }
+  let(:comment_a) { FactoryBot.create(:comment, creator: reader, subject: annotation) }
+  let(:comment_b) { FactoryBot.create(:comment, creator: reader, subject: resource) }
 
   context "when subject is an annotation" do
     describe "sends a list of comments" do

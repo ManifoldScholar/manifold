@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :resource do
     title "Rowan"
     external_url "http://www.dailyrowan.com"

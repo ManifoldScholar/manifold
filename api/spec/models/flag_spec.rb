@@ -3,11 +3,11 @@ require "rails_helper"
 RSpec.describe Flag, type: :model do
 
   it "has a valid flag factory" do
-    expect(FactoryGirl.build(:flag)).to be_valid
+    expect(FactoryBot.build(:flag)).to be_valid
   end
 
   describe "is invalid when" do
-    let(:flag) { FactoryGirl.build(:flag) }
+    let(:flag) { FactoryBot.build(:flag) }
 
     it "creator is nil" do
       flag.creator = nil

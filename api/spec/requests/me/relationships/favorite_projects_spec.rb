@@ -19,7 +19,7 @@ RSpec.describe "My Favorite Projects API", type: :request do
 
     context "when the user is authenticated" do
 
-      let(:favorite_project) { FactoryGirl.create(:project) }
+      let(:favorite_project) { FactoryBot.create(:project) }
       let(:favorite) { reader.favorite(favorite_project) }
 
       before(:each) { favorite }

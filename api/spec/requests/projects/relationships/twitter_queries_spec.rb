@@ -4,7 +4,7 @@ RSpec.describe "Project Twitter Queriees API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:project) { FactoryGirl.create(:project) }
+  let(:project) { FactoryBot.create(:project) }
 
   describe "sends a list of a project's twitter queries" do
     let(:path) { api_v1_project_relationships_twitter_queries_path(project) }
@@ -32,7 +32,7 @@ RSpec.describe "Project Twitter Queriees API", type: :request do
 
   describe "sends a single project twitter query" do
     before(:each) do
-      @twitter_query = FactoryGirl.create(:twitter_query, project: project)
+      @twitter_query = FactoryBot.create(:twitter_query, project: project)
     end
     let(:path) { api_v1_twitter_query_path(@twitter_query) }
 
@@ -87,7 +87,7 @@ RSpec.describe "Project Twitter Queriees API", type: :request do
 
   describe "updates a twitter query" do
     before(:each) do
-      @twitter_query = FactoryGirl.create(:twitter_query, project: project)
+      @twitter_query = FactoryBot.create(:twitter_query, project: project)
     end
     let(:path) { api_v1_twitter_query_path(@twitter_query) }
     let(:valid_params) { json_payload(attributes: { query: "from:rambostoolz" }) }
@@ -118,7 +118,7 @@ RSpec.describe "Project Twitter Queriees API", type: :request do
 
   describe "updates a twitter query" do
     before(:each) do
-      @twitter_query = FactoryGirl.create(:twitter_query, project: project)
+      @twitter_query = FactoryBot.create(:twitter_query, project: project)
     end
     let(:path) { api_v1_twitter_query_path(@twitter_query) }
     let(:valid_params) { json_payload(attributes: { query: "from:rambostoolz" }) }
@@ -149,7 +149,7 @@ RSpec.describe "Project Twitter Queriees API", type: :request do
 
   describe "destroys a twitter query" do
     before(:each) do
-      @twitter_query = FactoryGirl.create(:twitter_query, project: project)
+      @twitter_query = FactoryBot.create(:twitter_query, project: project)
     end
     let(:path) { api_v1_twitter_query_path(@twitter_query) }
 

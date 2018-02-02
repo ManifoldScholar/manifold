@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :stylesheet  do
     text
     association :creator, factory: :user
