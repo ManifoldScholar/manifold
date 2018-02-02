@@ -5,6 +5,6 @@ FactoryBot.define do
     sequence(:email) { |n| "john#{SecureRandom.uuid}-@rambo.com" }
     password "bananarambo"
     password_confirmation "bananarambo"
-    role User::ROLE_READER
+    role Role::ROLE_READER
   end
 end

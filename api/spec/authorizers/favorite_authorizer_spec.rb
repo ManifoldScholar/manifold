@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe FavoriteAuthorizer, :authorizer do
   let(:user) { FactoryBot.create(:user) }
-  let(:admin) { FactoryBot.create(:user, role: User::ROLE_ADMIN) }
+  let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
 
   describe 'instance authorization' do
     let(:owner) { FactoryBot.create(:user) }

@@ -72,9 +72,9 @@ export class FrontendContainer extends Component {
               settings={this.props.settings}
             />
           </HigherOrder.ScrollAware>
-          <HigherOrderContainers.RequireRole requiredRole="any">
+          <HigherOrderContainers.RequireKind requiredKind="any">
             <Layout.MobileNav location={this.props.location} />
-          </HigherOrderContainers.RequireRole>
+          </HigherOrderContainers.RequireKind>
           <main
             ref={mainContainer => {
               this.mainContainer = mainContainer;

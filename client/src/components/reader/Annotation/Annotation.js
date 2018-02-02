@@ -91,7 +91,7 @@ export default class AnnotationDetail extends PureComponent {
               <section className="body">
                 <Helper.SimpleFormat text={annotation.attributes.body} />
               </section>
-              <HigherOrder.RequireRole requiredRole="any">
+              <HigherOrder.RequireKind requiredKind="any">
                 <nav className="utility">
                   <ul>
                     {this.props.includeComments
@@ -132,8 +132,8 @@ export default class AnnotationDetail extends PureComponent {
                       />
                     : null}
                 </nav>
-              </HigherOrder.RequireRole>
-              <HigherOrder.RequireRole requiredRole="unauthenticated">
+              </HigherOrder.RequireKind>
+              <HigherOrder.RequireKind requiredKind="unauthenticated">
                 <nav className="utility">
                   <ul>
                     <li>
@@ -143,7 +143,7 @@ export default class AnnotationDetail extends PureComponent {
                     </li>
                   </ul>
                 </nav>
-              </HigherOrder.RequireRole>
+              </HigherOrder.RequireKind>
             </div>}
         {this.props.includeComments
           ? <CommentContainer.Thread subject={annotation} />

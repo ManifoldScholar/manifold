@@ -62,13 +62,13 @@ export default class LayoutHeader extends PureComponent {
                   {"Projects"}
                 </Link>
               </li>
-              <HigherOrder.RequireRole requiredRole="any">
+              <HigherOrder.RequireKind requiredKind="any">
                 <li className={followingActive ? "active" : ""}>
                   <Link to={lh.link("frontendFollowing")}>
                     {"Following"}
                   </Link>
                 </li>
-              </HigherOrder.RequireRole>
+              </HigherOrder.RequireKind>
               {this.visiblePages(this.props).map(page => {
                 const url = lh.link("frontendPage", page.attributes.slug);
                 return (
@@ -84,13 +84,13 @@ export default class LayoutHeader extends PureComponent {
 
           <nav className="menu-dropdowns">
             <ul>
-              <HigherOrder.RequireRole requiredRole="admin">
+              <HigherOrder.RequireKind requiredKind={"admin"}>
                 <li>
                   <Link className="button-mode" to={lh.link("backend")}>
                     Admin Mode
                   </Link>
                 </li>
-              </HigherOrder.RequireRole>
+              </HigherOrder.RequireKind>
 
               {/*
                 Hiding search markup until functionality is available

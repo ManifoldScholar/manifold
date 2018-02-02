@@ -58,7 +58,6 @@ export class UsersNewContainer extends PureComponent {
             name="attributes[role]"
             options={[
               { label: "Admin", value: "admin" },
-              { label: "Author", value: "author" },
               { label: "Reader", value: "reader" }
             ]}
           />
