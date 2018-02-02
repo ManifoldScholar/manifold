@@ -32,6 +32,8 @@ class Event < ApplicationRecord
   belongs_to :twitter_query, optional: true
   belongs_to :project
 
+  delegate :slug, to: :project, prefix: true
+
   # Scopes
   scope :by_type, lambda { |type|
     return all unless type.present?
@@ -63,6 +65,13 @@ class Event < ApplicationRecord
       project: project,
       subject: project
     ).nil?
+  end
+
+  def subject_slug
+    sluggables = %w(Project Resource Text ResourceCollection)
+    return nil unless sluggables.include? subject_type
+    return subject.slug if subject && subject.respond_to?(:slug)
+    nil
   end
 
   def to_s
