@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Comment.Detail component renders correctly 1`] = `
+<section
+  className="annotation-meta"
+>
+  <div>
+    <figure
+      className="author-avatar"
+    >
+      <div
+        className="no-image"
+      >
+        <i
+          className="manicon manicon-person"
+        />
+      </div>
+    </figure>
+    <h4
+      className="author-name"
+    >
+      Rowan Ida
+    </h4>
+    <datetime>
+      <span>
+        4 days
+      </span>
+       
+      ago
+    </datetime>
+  </div>
+  <div
+    className="markers"
+  />
+</section>
+`;
