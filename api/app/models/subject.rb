@@ -22,6 +22,11 @@ class Subject < ApplicationRecord
     joins(:projects).where("projects.featured = true")
   }
 
+  scope :by_used, lambda { |used|
+    return all unless used.present?
+    joins(:project_subjects).where("project_subjects.id IS NOT NULL")
+  }
+
   # Validations
   validates :name, presence: true, uniqueness: true
 

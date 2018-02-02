@@ -1,11 +1,13 @@
 export default {
-  index(filter = {}) {
+  index(filter = {}, page = {}, unpaginated = null) {
+    const params = { filter, page };
+    if (unpaginated) {
+      params.unpaginated = unpaginated;
+    }
     return {
       endpoint: "/api/v1/subjects",
       method: "GET",
-      options: {
-        params: { filter }
-      }
+      options: { params }
     };
   },
 
