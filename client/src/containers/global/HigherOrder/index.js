@@ -1,11 +1,11 @@
-import RequireRole from "./RequireRole";
+import RequireKind from "./RequireKind";
 import withSettings from "./withSettings";
 import withCurrentUser from "./withCurrentUser";
 import withDispatch from "./withDispatch";
 import withFormSession from "./withFormSession";
 
 export default {
-  RequireRole,
+  RequireKind,
   withSettings,
   withCurrentUser,
   withDispatch,

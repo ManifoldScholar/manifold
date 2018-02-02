@@ -27,6 +27,7 @@ exports[`Global Comment Editor Container renders correctly when logged in 1`] = 
           <button
             className="button-secondary-dull"
             onClick={[Function]}
+            type="button"
           >
             Cancel
           </button>

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe FlagAuthorizer, :authorizer do
   let(:user) { FactoryBot.create(:user) }
-  let(:admin) { FactoryBot.create(:user, role: User::ROLE_ADMIN) }
+  let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
   let(:creator) { FactoryBot.create(:user) }
   let(:flag_resource) { FactoryBot.create(:flag, creator: creator) }
 

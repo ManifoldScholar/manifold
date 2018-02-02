@@ -73,6 +73,36 @@ RSpec.describe User, type: :model do
     expect(user.full_name).to eq("John Rambo")
   end
 
+  it "has a default role 'reader'" do
+    user = FactoryBot.create(:user)
+    expect(user.has_role? :reader).to eq true
+  end
+
+  it "sets a role correctly" do
+    user = FactoryBot.create(:user, role: "admin")
+    expect(user.has_role? :admin).to eq true
+  end
+
+  context "its kind" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:project) { FactoryBot.create(:project) }
+
+    it "is correct when reader" do
+      expect(user.kind).to eq "reader"
+    end
+
+    it "is correct when author" do
+      user.add_role :author, project
+      expect(user.kind).to eq "author"
+    end
+
+    it "is correct when admin" do
+      user.role = "admin"
+      user.save
+      expect(user.kind).to eq "admin"
+    end
+  end
+
   it "has a collection of associated makers" do
     user = FactoryBot.create(:user)
     2.times { user.makers << FactoryBot.create(:maker) }

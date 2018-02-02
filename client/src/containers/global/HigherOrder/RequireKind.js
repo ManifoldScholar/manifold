@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import isString from "lodash/isString";
 
-class RequireRole extends PureComponent {
+class RequireKind extends PureComponent {
   static mapStateToProps = state => {
     return {
       authentication: state.authentication
@@ -12,14 +12,14 @@ class RequireRole extends PureComponent {
   };
 
   static propTypes = {
-    requiredRole: PropTypes.string.isRequired,
-    roleMatchBehavior: PropTypes.oneOf(["hide", "show"]).isRequired,
+    requiredKind: PropTypes.string.isRequired,
+    kindMatchBehavior: PropTypes.oneOf(["hide", "show"]).isRequired,
     redirect: PropTypes.string,
     children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
 
   static defaultProps = {
-    roleMatchBehavior: "show"
+    kindMatchBehavior: "show"
   };
 
   constructor() {
@@ -28,7 +28,7 @@ class RequireRole extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.canRedirect(nextProps) && !this.roleMatch(nextProps)) {
+    if (this.canRedirect(nextProps) && !this.kindMatch(nextProps)) {
       return this.setState({ redirect: true });
     }
   }
@@ -49,30 +49,30 @@ class RequireRole extends PureComponent {
     return <Redirect to={props.redirect} />;
   }
 
-  roleMatch(props) {
-    if (props.requiredRole === "none") return true;
+  kindMatch(props) {
+    if (props.requiredKind === "none") return true;
     if (
-      props.requiredRole === "unauthenticated" &&
+      props.requiredKind === "unauthenticated" &&
       !this.isAuthenticated(props)
     )
       return true;
     if (!this.isAuthenticated(props)) return false;
-    if (props.requiredRole === "any" && this.isAuthenticated(props))
+    if (props.requiredKind === "any" && this.isAuthenticated(props))
       return true;
-    return props.requiredRole === this.user(props).attributes.role;
+    return props.requiredKind === this.user(props).attributes.kind;
   }
 
   behavior(props) {
-    return props.roleMatchBehavior;
+    return props.kindMatchBehavior;
   }
 
   renderHide(props) {
-    if (!this.roleMatch(props)) return Children.only(this.props.children);
+    if (!this.kindMatch(props)) return Children.only(this.props.children);
     return null;
   }
 
   renderShow(props) {
-    if (this.roleMatch(props)) return Children.only(this.props.children);
+    if (this.kindMatch(props)) return Children.only(this.props.children);
     return null;
   }
 
@@ -86,5 +86,5 @@ class RequireRole extends PureComponent {
   }
 }
 
-export { RequireRole as RequireRoleWrapper }; // unconnected for testing
-export default connect(RequireRole.mapStateToProps)(RequireRole);
+export { RequireKind as RequireKindWrapper }; // unconnected for testing
+export default connect(RequireKind.mapStateToProps)(RequireKind);

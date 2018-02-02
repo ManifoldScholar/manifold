@@ -1,18 +1,7 @@
 # The User model
 class User < ApplicationRecord
-
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:email, :first_name, :last_name].freeze
-  ROLE_ADMIN = "admin".freeze
-  ROLE_AUTHOR = "author".freeze
-  ROLE_CLI = "cli".freeze
-  ROLE_READER = "reader".freeze
-  ROLE_KEYS = [
-    ROLE_ADMIN,
-    ROLE_AUTHOR,
-    ROLE_CLI,
-    ROLE_READER
-  ].freeze
 
   # Concerns
   include Authority::UserAbilities
@@ -24,6 +13,10 @@ class User < ApplicationRecord
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
+
+  # Rolify
+  rolify
+  attr_reader :pending_role
 
   # Associations
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
@@ -47,8 +40,11 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
   validate :password_not_blank!
   validates :email, presence: true
-  validates :role, inclusion: { in: ROLE_KEYS }, presence: true
   validates :email, uniqueness: true, email_format: { message: "is not valid" }
+  validates :pending_role, inclusion: { in: Role::ALLOWED_ROLES }, allow_nil: true
+
+  # Callbacks
+  after_save :sync_pending_role!
 
   # Attachments
   manifold_has_attached_file :avatar, :image
@@ -83,10 +79,6 @@ class User < ApplicationRecord
     favorites.where(favoritable_id: favoritable.id).count.positive?
   end
 
-  def admin?
-    role == "admin"
-  end
-
   def to_s
     name
   end
@@ -99,7 +91,34 @@ class User < ApplicationRecord
     AccountMailer.welcome(self, false).deliver
   end
 
+  def role=(new_role)
+    @pending_role = new_role.to_s
+  end
+
+  def role
+    admin? ? "admin" : "reader"
+  end
+
+  def admin?
+    kind == "admin"
+  end
+
+  def kind
+    return "admin" if has_cached_role? :admin
+    return "author" if has_cached_role? :author, :any
+    "reader"
+  end
+
   private
+
+  def sync_pending_role!
+    return if pending_role.blank?
+
+    roles_to_remove = Role::ALLOWED_ROLES.without(pending_role.to_s)
+    roles_to_remove.each { |role| remove_role role }
+
+    add_role pending_role
+  end
 
   def password_not_blank!
     return if password.nil?

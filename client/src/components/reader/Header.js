@@ -111,14 +111,14 @@ export default class Header extends Component {
             : null}
           <nav className="menu-buttons">
             <ul>
-              <HigherOrder.RequireRole requiredRole={"any"}>
+              <HigherOrder.RequireKind requiredKind={"any"}>
                 <li>
                   <ControlMenu.NotesButton
                     toggle={this.panelToggleHandler("notes")}
                     active={this.props.visibility.uiPanels.notes}
                   />
                 </li>
-              </HigherOrder.RequireRole>
+              </HigherOrder.RequireKind>
               <li>
                 <ControlMenu.VisibilityMenuButton
                   toggle={this.panelToggleHandler("visibility")}

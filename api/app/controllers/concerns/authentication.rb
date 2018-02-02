@@ -65,6 +65,7 @@ module Authentication
   def render_authenticated_user(user)
     if user
       render json: user,
+             serializer: CurrentUserSerializer,
              meta: { authToken: AuthToken.encode(user_id: user.id) },
              include: %w(favorites)
     else

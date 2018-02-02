@@ -39,8 +39,7 @@ class Seed
       email: "cli@manifold.app",
       first_name: "CLI",
       last_name: "User",
-      is_cli_user: true,
-      role: User::ROLE_CLI
+      is_cli_user: true
     )
     if cli_user.new_record?
       logger.info("Creating CLI user: #{cli_user.email}".green)

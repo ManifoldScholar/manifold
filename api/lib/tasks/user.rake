@@ -23,7 +23,7 @@ namespace :manifold do
       desc "Create a new manifold admin user"
       task :admin, Manifold::UserTask.user_args => :environment do |_t, args|
         attributes = args.to_hash
-        attributes[:role] = User::ROLE_ADMIN
+        attributes[:role] = Role::ROLE_ADMIN
         Manifold::Rake.report_created_model(Manifold::UserTask.create_user(attributes))
       end
     end
