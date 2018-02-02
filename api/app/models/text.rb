@@ -35,6 +35,7 @@ class Text < ApplicationRecord
       issued: issued
     }
   end
+  with_citable_children :text_sections
 
   # URLs
   friendly_id :title, use: :slugged

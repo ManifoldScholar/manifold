@@ -1,5 +1,4 @@
 require "rails_helper"
-require "models/concerns/citable_spec.rb"
 
 RSpec.describe TextSection, type: :model do
 
