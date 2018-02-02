@@ -40,7 +40,7 @@ exports[`Frontend.Event.List Component renders correctly 1`] = `
         >
           <a
             href="/read/subject-slug"
-            target="_self"
+            onClick={[Function]}
           >
             Start Reading
             <i
@@ -85,7 +85,7 @@ exports[`Frontend.Event.List Component renders correctly 1`] = `
         >
           <a
             href="/read/subject-slug"
-            target="_self"
+            onClick={[Function]}
           >
             Start Reading
             <i

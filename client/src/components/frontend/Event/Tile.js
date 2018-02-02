@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import FormattedDate from "components/global/FormattedDate";
+import { Link } from "react-router-dom";
 
 export default class Tile extends Component {
   static displayName = "Event.Tile";
@@ -32,6 +33,25 @@ export default class Tile extends Component {
     visible: true,
     itemClass: ""
   };
+
+  renderLink() {
+    const { linkHref, linkPrompt, linkTarget } = this.props;
+    if (!linkHref) return null;
+    if (linkTarget && linkTarget !== "_self") {
+      return (
+        <a href={linkHref} target={linkTarget}>
+          {linkPrompt}
+          <i className="manicon manicon-arrow-long-right" />
+        </a>
+      );
+    }
+    return (
+      <Link to={linkHref}>
+        {linkPrompt}
+        <i className="manicon manicon-arrow-long-right" />
+      </Link>
+    );
+  }
 
   render() {
     if (!this.props.visible) return null;
@@ -84,15 +104,7 @@ export default class Tile extends Component {
           </div>
           {!this.props.hideLink
             ? <div className="event-prompt">
-                {this.props.linkHref
-                  ? <a
-                      target={this.props.linkTarget}
-                      href={this.props.linkHref}
-                    >
-                      {this.props.linkPrompt}
-                      <i className="manicon manicon-arrow-long-right" />
-                    </a>
-                  : null}
+                {this.renderLink()}
               </div>
             : null}
         </div>
