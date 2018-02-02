@@ -78,7 +78,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
               >
                 <a
                   href="/read/subject-slug"
-                  target="_self"
+                  onClick={[Function]}
                 >
                   Start Reading
                   <i
@@ -123,7 +123,7 @@ exports[`Frontend EventList Container renders correctly 1`] = `
               >
                 <a
                   href="/read/subject-slug"
-                  target="_self"
+                  onClick={[Function]}
                 >
                   Start Reading
                   <i

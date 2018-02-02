@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126230432) do
+ActiveRecord::Schema.define(version: 20180202211536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,8 +120,6 @@ ActiveRecord::Schema.define(version: 20180126230432) do
     t.string   "event_subtitle"
     t.string   "external_subject_id"
     t.string   "external_subject_type"
-    t.string   "subject_slug"
-    t.string   "project_slug"
     t.uuid     "twitter_query_id"
   end
 
@@ -452,6 +450,7 @@ ActiveRecord::Schema.define(version: 20180126230432) do
     t.uuid     "ingestion_source_id"
     t.jsonb    "body_json",           default: "{}", null: false
     t.jsonb    "citations",           default: {}
+    t.index ["text_id"], name: "index_text_sections_on_text_id", using: :btree
   end
 
   create_table "text_subjects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
