@@ -193,20 +193,20 @@ export default class CommentDetail extends PureComponent {
             {comment.attributes.deleted
               ? <div className="marker secondary">Deleted</div>
               : null}
-            <HigherOrder.RequireRole requiredRole="admin">
+            <HigherOrder.RequireKind requiredKind="admin">
               {comment.attributes.flagsCount > 0
                 ? <div className="marker secondary">
                     {comment.attributes.flagsCount}
                     {comment.attributes.flagsCount === 1 ? " flag" : " flags"}
                   </div>
                 : null}
-            </HigherOrder.RequireRole>
+            </HigherOrder.RequireKind>
           </div>
         </section>
         <section className="body">
           <Helper.SimpleFormat text={comment.attributes.body} />
         </section>
-        <HigherOrder.RequireRole requiredRole="any">
+        <HigherOrder.RequireKind requiredKind="any">
           <nav className="utility">
             <ul>
               <li>
@@ -256,8 +256,8 @@ export default class CommentDetail extends PureComponent {
             </ul>
             {this.renderEditor()}
           </nav>
-        </HigherOrder.RequireRole>
-        <HigherOrder.RequireRole requiredRole="unauthenticated">
+        </HigherOrder.RequireKind>
+        <HigherOrder.RequireKind requiredKind="unauthenticated">
           <nav className="utility">
             <ul>
               <li>
@@ -267,7 +267,7 @@ export default class CommentDetail extends PureComponent {
               </li>
             </ul>
           </nav>
-        </HigherOrder.RequireRole>
+        </HigherOrder.RequireKind>
         <CommentContainer.Thread
           subject={this.props.subject}
           parent={this.props.comment}

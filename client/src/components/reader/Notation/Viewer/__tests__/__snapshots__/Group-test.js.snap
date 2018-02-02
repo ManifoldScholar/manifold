@@ -13,9 +13,11 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                   <CSSTransitionGroupChild name=\\"highlight\\" appear={false} enter={true} leave={true} appearTimeout={[undefined]} enterTimeout={200} leaveTimeout={200}>
                     <NotationViewer.Single entry={{...}} params={{...}} actions={{...}} showTitle={false} active={false}>
                       <div className=\\"notation-preview-single\\">
-                        <Connect(RequireRole) requiredRole=\\"admin\\">
-                          <RequireRole requiredRole=\\"admin\\" authentication={{...}} dispatch={[Function]} roleMatchBehavior=\\"show\\" />
-                        </Connect(RequireRole)>
+                        <RequireAbility entity={{...}} requiredAbility=\\"delete\\" hasAbilityBehavior=\\"show\\">
+                          <button onClick={[Function]} className=\\"notation-delete\\">
+                            <i className=\\"manicon manicon-x\\" />
+                          </button>
+                        </RequireAbility>
                         <NotationViewerLink notation={{...}} params={{...}} className=\\"notation-single-link\\">
                           <Link className=\\"notation-single-link\\" to=\\"/read/5/section/6/resource/2\\" replace={false}>
                             <a className=\\"notation-single-link\\" onClick={[Function]} href=\\"/read/5/section/6/resource/2\\">

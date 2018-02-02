@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202211536) do
+ActiveRecord::Schema.define(version: 20180202214000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -366,6 +366,17 @@ ActiveRecord::Schema.define(version: 20180202211536) do
     t.index ["slug"], name: "index_resources_on_slug", unique: true, using: :btree
   end
 
+  create_table "roles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "name",          null: false
+    t.string   "resource_type"
+    t.uuid     "resource_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true, using: :btree
+    t.index ["name"], name: "index_roles_on_name", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
+  end
+
   create_table "searchable_nodes", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "text_section_id"
     t.string   "node_uuid"
@@ -534,7 +545,6 @@ ActiveRecord::Schema.define(version: 20180202211536) do
     t.string   "password_confirmation"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role",                   default: "reader"
     t.text     "nickname"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
@@ -543,8 +553,18 @@ ActiveRecord::Schema.define(version: 20180202211536) do
     t.boolean  "is_cli_user",            default: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.jsonb    "raw_persistent_ui",      default: {},       null: false
+    t.jsonb    "raw_persistent_ui",      default: {},    null: false
+  end
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "role_id", null: false
+    t.index ["role_id"], name: "index_users_roles_on_role_id", using: :btree
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_users_roles_on_user_id", using: :btree
   end
 
   add_foreign_key "identities", "users", on_delete: :cascade
+  add_foreign_key "users_roles", "roles", on_delete: :cascade
+  add_foreign_key "users_roles", "users", on_delete: :cascade
 end

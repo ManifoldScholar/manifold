@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global HigherOrder RequireKind Container renders correctly to null when role doesn't match 1`] = `null`;
+
+exports[`Global HigherOrder RequireKind Container renders correctly when role matches 1`] = `
+<div>
+  How is babby formed?
+</div>
+`;

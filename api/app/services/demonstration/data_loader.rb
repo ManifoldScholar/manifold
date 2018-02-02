@@ -52,7 +52,6 @@ module Demonstration
         last_name = Faker::Name.last_name
         email = Faker::Internet.safe_email("#{first_name}_#{last_name}")
         u = User.find_or_create_by(email: email)
-        u.role = "reader"
         u.first_name = first_name
         u.last_name = last_name
         u.password = "manifold"
@@ -94,12 +93,12 @@ module Demonstration
 
     def create_admin_user
       u = User.find_or_create_by(email: "admin@manifold.app")
-      u.role = "admin"
       u.first_name = "Admin"
       u.last_name = "User"
       u.password = "manifold"
       u.password_confirmation = "manifold"
       u.save
+      u.add_role :admin
       @logger.info("Creating admin user: #{u.email}".green)
     end
   end

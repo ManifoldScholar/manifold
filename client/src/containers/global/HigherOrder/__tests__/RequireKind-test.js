@@ -1,11 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { RequireRoleWrapper } from "../RequireRole";
+import { RequireKindWrapper } from "../RequireKind";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter } from "test/helpers/routing";
 
-describe("Global HigherOrder RequireRole Container", () => {
+describe("Global HigherOrder RequireKind Container", () => {
   const store = build.store();
   const authentication = {
     authenticated: true,
@@ -17,9 +17,9 @@ describe("Global HigherOrder RequireRole Container", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <RequireRoleWrapper
+          <RequireKindWrapper
             roleMatchBehavior="show"
-            requiredRole="any"
+            requiredKind="any"
             authentication={authentication}
             children={child}
           />
@@ -34,9 +34,9 @@ describe("Global HigherOrder RequireRole Container", () => {
     const component = renderer.create(
       wrapWithRouter(
         <Provider store={store}>
-          <RequireRoleWrapper
+          <RequireKindWrapper
             roleMatchBehavior="show"
-            requiredRole="any"
+            requiredKind="any"
             authentication={{}}
             children={child}
           />

@@ -195,7 +195,7 @@ export class ReaderContainer extends Component {
 
   renderNotesOverlay() {
     return (
-      <HigherOrderContainer.RequireRole requiredRole="any">
+      <HigherOrderContainer.RequireKind requiredKind="any">
         <Overlay
           closeCallback={this.props.history.goBack}
           title={"Your Notes"}
@@ -206,7 +206,7 @@ export class ReaderContainer extends Component {
             <Notes.DetailedList />
           </ReaderNotes>
         </Overlay>
-      </HigherOrderContainer.RequireRole>
+      </HigherOrderContainer.RequireKind>
     );
   }
 

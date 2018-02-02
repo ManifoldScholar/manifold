@@ -38,7 +38,6 @@ class Project < ApplicationRecord
     original_publisher_place original_title publisher publisher_place version
     series_number edition issue volume rights rights_territory restrictions rights_holder
   )
-
   with_citation do |project|
     {
       title: project.title,
@@ -47,6 +46,7 @@ class Project < ApplicationRecord
     }
   end
   with_citable_children :texts
+  has_formatted_attribute :description
 
   # URLs
   friendly_id :title, use: :slugged
@@ -54,7 +54,8 @@ class Project < ApplicationRecord
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
-  has_formatted_attribute :description
+  # Rolify
+  resourcify
 
   # Associations
   belongs_to :published_text, class_name: "Text", optional: true

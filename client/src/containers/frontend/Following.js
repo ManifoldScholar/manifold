@@ -154,8 +154,8 @@ export class FollowingContainer extends Component {
     );
 
     return (
-      <HigherOrder.RequireRole
-        requiredRole="any"
+      <HigherOrder.RequireKind
+        requiredKind="any"
         redirect={lh.link("frontend")}
         {...this.props}
       >
@@ -178,7 +178,7 @@ export class FollowingContainer extends Component {
               />
             : null}
         </div>
-      </HigherOrder.RequireRole>
+      </HigherOrder.RequireKind>
     );
   }
 }
