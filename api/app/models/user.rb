@@ -34,7 +34,6 @@ class User < ApplicationRecord
                                source_type: "Project"
   has_many :favorite_texts, through: :favorites, source: :favoritable,
                             source_type: "Text"
-
   has_many :created_texts, class_name: "Text", foreign_key: "creator_id"
   has_many :created_projects, class_name: "Project", foreign_key: "creator_id"
   has_many :created_resources, class_name: "Resource", foreign_key: "creator_id"

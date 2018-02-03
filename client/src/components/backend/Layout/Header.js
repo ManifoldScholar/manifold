@@ -7,6 +7,7 @@ import {
   UserMenuButton,
   PressLogo
 } from "components/global";
+import HigherOrder from "containers/global/HigherOrder";
 import { Link, NavLink } from "react-router-dom";
 import startsWith from "lodash/startsWith";
 import lh from "helpers/linkHandler";
@@ -61,37 +62,55 @@ export default class LayoutHeader extends Component {
                   {"Projects"}
                 </NavLink>
               </li>
-              <li>
-                <NavLink activeClassName="active" to={lh.link("backendPeople")}>
-                  {"People"}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  activeClassName="active"
-                  to={lh.link("backendContent")}
-                >
-                  {"Content"}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  activeClassName="active"
-                  to={lh.link("backendSettings")}
-                >
-                  {"Settings"}
-                </NavLink>
-              </li>
+              <HigherOrder.RequireKind requiredKind="admin">
+                <li>
+                  <NavLink
+                    activeClassName="active"
+                    to={lh.link("backendPeople")}
+                  >
+                    {"People"}
+                  </NavLink>
+                </li>
+              </HigherOrder.RequireKind>
+              <HigherOrder.RequireKind requiredKind="admin">
+                <li>
+                  <NavLink
+                    activeClassName="active"
+                    to={lh.link("backendContent")}
+                  >
+                    {"Content"}
+                  </NavLink>
+                </li>
+              </HigherOrder.RequireKind>
+              <HigherOrder.RequireKind requiredKind="admin">
+                <li>
+                  <NavLink
+                    activeClassName="active"
+                    to={lh.link("backendSettings")}
+                  >
+                    {"Settings"}
+                  </NavLink>
+                </li>
+              </HigherOrder.RequireKind>
             </ul>
           </nav>
 
           <nav className="menu-dropdowns">
             <ul>
-              <li className="show-60">
-                <Link className="button-mode" to={lh.link("frontend")}>
-                  Exit Admin Mode
-                </Link>
-              </li>
+              <HigherOrder.RequireRole requiredRole="author">
+                <li>
+                  <Link className="button-mode" to={lh.link("frontend")}>
+                    Exit Manage Mode
+                  </Link>
+                </li>
+              </HigherOrder.RequireRole>
+              <HigherOrder.RequireRole requiredRole="admin">
+                <li>
+                  <Link className="button-mode" to={lh.link("frontend")}>
+                    Exit Admin Mode
+                  </Link>
+                </li>
+              </HigherOrder.RequireRole>
               <li>
                 <UserMenuButton
                   authentication={this.props.authentication}

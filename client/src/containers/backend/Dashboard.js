@@ -2,15 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { entityStoreActions } from "actions";
-import {
-  List,
-  Project,
-  Dashboard as DashboardComponents
-} from "components/backend";
+import { Dashboard as DashboardComponents } from "components/backend";
+import HigherOrder from "containers/global/HigherOrder";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, statisticsAPI, requests } from "api";
 import debounce from "lodash/debounce";
-import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
@@ -82,57 +78,20 @@ export class DashboardContainer extends PureComponent {
   render() {
     return (
       <div>
-        <section>
-          <div className="container">
-            <section className="backend-dashboard">
-              <div className="left">
-                <header className="section-heading-secondary">
-                  <h3>
-                    {"Projects"} <i className="manicon manicon-stack" />
-                  </h3>
-                </header>
-                {this.props.projects && this.props.projectsMeta
-                  ? <List.Searchable
-                      newButtonVisible
-                      newButtonPath={lh.link("backendProjectsNew")}
-                      newButtonText="Add a New Project"
-                      entities={this.props.projects}
-                      singularUnit="project"
-                      pluralUnit="projects"
-                      pagination={this.props.projectsMeta.pagination}
-                      paginationClickHandler={this.updateHandlerCreator}
-                      entityComponent={Project.ListItem}
-                      filterChangeHandler={this.filterChangeHandler}
-                    />
-                  : null}
-              </div>
-
-              <div className="right">
-                <nav className="vertical-list-primary flush">
-                  {this.props.recentProjects
-                    ? <List.SimpleList
-                        entities={this.props.recentProjects}
-                        entityComponent={Project.ListItem}
-                        title={"Recently Updated"}
-                        icon={"manicon-stack"}
-                        listClasses={"flush"}
-                      />
-                    : null}
-                </nav>
-                <section>
-                  <header className="section-heading-secondary">
-                    <h3>
-                      {"Activity"} <i className="manicon manicon-pulse-small" />
-                    </h3>
-                  </header>
-                  <DashboardComponents.Activity
-                    statistics={this.props.statistics}
-                  />
-                </section>
-              </div>
-            </section>
-          </div>
-        </section>
+        <HigherOrder.RequireRole requiredRole="author">
+          <DashboardComponents.Author
+            filterChangeHandler={this.filterChangeHandler}
+            updateHandlerCreator={this.updateHandlerCreator}
+            {...this.props}
+          />
+        </HigherOrder.RequireRole>
+        <HigherOrder.RequireRole requiredRole="admin">
+          <DashboardComponents.Admin
+            filterChangeHandler={this.filterChangeHandler}
+            updateHandlerCreator={this.updateHandlerCreator}
+            {...this.props}
+          />
+        </HigherOrder.RequireRole>
       </div>
     );
   }

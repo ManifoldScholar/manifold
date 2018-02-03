@@ -84,7 +84,14 @@ export default class LayoutHeader extends PureComponent {
 
           <nav className="menu-dropdowns">
             <ul>
-              <HigherOrder.RequireRole requiredRole="admin">
+              <HigherOrder.RequireKind requiredRole="author">
+                <li>
+                  <Link className="button-mode" to={lh.link("backend")}>
+                    Manage Projects
+                  </Link>
+                </li>
+              </HigherOrder.RequireKind>
+              <HigherOrder.RequireKind requiredRole="admin">
                 <li>
                   <Link className="button-mode" to={lh.link("backend")}>
                     Admin Mode
