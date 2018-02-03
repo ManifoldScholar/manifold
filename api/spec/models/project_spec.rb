@@ -230,8 +230,8 @@ RSpec.describe Project, type: :model do
 
   context "when citations are updated" do
     before(:each) do
-      @calling_class = FactoryGirl.create(:project, title: "A Title")
-      @child_class = FactoryGirl.create(:text, project: @calling_class)
+      @calling_class = FactoryBot.create(:project, title: "A Title")
+      @child_class = FactoryBot.create(:text, project: @calling_class)
     end
 
     include_examples "a citable class with_citable_children"
