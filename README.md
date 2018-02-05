@@ -14,7 +14,10 @@
 
 <p align="center">
     Learn more at <a href="https://manifoldapp.org">manifoldapp.org</a>.<br />
-    See it in action at <a href="https://manifold.umn.edu">manifold.umn.edu</a>.
+    See it in action at <a href="https://manifold.umn.edu">manifold.umn.edu</a>.<br />
+    Join our <a href="https://manifold-slackin.herokuapp.com/">Slack Channel</a><br />
+    <a href="https://github.com/ManifoldScholar/manifold/issues/new?template=bugs.md">Report a bug</a>.<br />
+    <a href="https://github.com/ManifoldScholar/manifold/issues/new?template=features.md">Request a feature</a>.
 </p>
 
 ## Watch the Video
