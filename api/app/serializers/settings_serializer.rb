@@ -1,5 +1,5 @@
 # Provides a serialization of a page model.
-class SettingsSerializer < ActiveModel::Serializer
+class SettingsSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :general, :theme, :integrations, :secrets, :email,

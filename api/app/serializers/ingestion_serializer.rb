@@ -1,5 +1,5 @@
 # Provides a serialization of an ingestion model.
-class IngestionSerializer < ActiveModel::Serializer
+class IngestionSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :id, :state, :external_source_url, :log, :source_file_name, :ingestion_type,

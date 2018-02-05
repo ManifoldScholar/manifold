@@ -1,5 +1,5 @@
 # Provides a serialization of a page model.
-class PagePartialSerializer < ActiveModel::Serializer
+class PagePartialSerializer < ApplicationSerializer
   meta(partial: true)
 
   attributes :id, :slug, :title, :nav_title, :show_in_footer, :show_in_header,

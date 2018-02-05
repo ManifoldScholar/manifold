@@ -1,4 +1,4 @@
-class StatisticsSerializer < ActiveModel::Serializer
+class StatisticsSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :readers_this_week, :reader_increase, :new_highlights_count,

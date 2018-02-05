@@ -1,5 +1,5 @@
 # Provides a serialization of a page model.
-class SubjectSerializer < ActiveModel::Serializer
+class SubjectSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :name

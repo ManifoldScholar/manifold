@@ -1,5 +1,5 @@
 # Provides a serialization of a page model.
-class FeatureSerializer < ActiveModel::Serializer
+class FeatureSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :id, :header, :header_formatted, :subheader, :subheader_formatted,
