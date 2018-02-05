@@ -1,5 +1,5 @@
 # Provides a partial serialization of a text model.
-class TextPartialSerializer < ActiveModel::Serializer
+class TextPartialSerializer < ApplicationSerializer
   meta(partial: true)
 
   attributes :title, :creator_names, :created_at, :start_text_section_id,
@@ -20,13 +20,13 @@ class TextPartialSerializer < ActiveModel::Serializer
   end
 
   def annotations_count
-    return object.annotations.only_annotations.count unless scope.try(:authenticated_as)
-    object.annotations.only_annotations.created_by(scope.try(:authenticated_as)).count
+    return object.annotations.only_annotations.count unless authenticated?
+    object.annotations.only_annotations.created_by(current_user).count
   end
 
   def highlights_count
-    return object.annotations.only_highlights.count unless scope.try(:authenticated_as)
-    object.annotations.only_highlights.created_by(scope.try(:authenticated_as)).count
+    return object.annotations.only_highlights.count unless authenticated?
+    object.annotations.only_highlights.created_by(current_user).count
   end
 
   # TODO: Implement bookmarks

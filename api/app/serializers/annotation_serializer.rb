@@ -11,10 +11,9 @@ class AnnotationSerializer < ActiveModel::Serializer
              :can_delete_object, :comments_count, :collection_id
 
   def current_user_is_creator
-    user_id = scope.try(:authenticated_as).try(:id)
-    return false unless user_id
+    return false unless current_user
     return false unless object.creator_id
-    user_id == object.creator_id
+    current_user.id == object.creator_id
   end
 
 end

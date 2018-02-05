@@ -1,5 +1,5 @@
 # Provides a serialization of a resource model.
-class ResourcePartialSerializer < ActiveModel::Serializer
+class ResourcePartialSerializer < ApplicationSerializer
   meta(partial: true)
 
   attributes :title, :title_plaintext, :title_formatted, :kind, :sub_kind, :caption,

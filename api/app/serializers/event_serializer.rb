@@ -1,5 +1,5 @@
 # Provides a serialization of an event model.
-class EventSerializer < ActiveModel::Serializer
+class EventSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :event_type, :event_url, :subject_id, :subject_type, :subject_slug,

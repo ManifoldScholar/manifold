@@ -1,5 +1,5 @@
 # Provides a serialization of a favorite model.
-class FavoriteSerializer < ActiveModel::Serializer
+class FavoriteSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :id, :favoritable_type, :favoritable_id, :subject_ids
