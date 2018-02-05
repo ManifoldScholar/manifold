@@ -1,5 +1,5 @@
 # Provides a serialization of a collection model.
-class CollectionSerializer < ActiveModel::Serializer
+class CollectionSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :id, :title, :title_formatted, :created_at, :description, :project_id,

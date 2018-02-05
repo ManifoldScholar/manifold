@@ -1,5 +1,5 @@
 # Provides a serialization of a collaborator model.
-class CollaboratorSerializer < ActiveModel::Serializer
+class CollaboratorSerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :id, :role

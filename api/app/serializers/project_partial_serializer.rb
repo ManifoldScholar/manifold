@@ -1,5 +1,5 @@
 # Provides a partial serialization of a project model.
-class ProjectPartialSerializer < ActiveModel::Serializer
+class ProjectPartialSerializer < ApplicationSerializer
   meta(partial: true)
 
   attributes :title, :subtitle, :hashtag, :publication_date, :description,

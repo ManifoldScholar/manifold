@@ -7,9 +7,8 @@ class UserSerializer < ActiveModel::Serializer
              :updated_at, :full_name, :avatar_styles, :is_current_user, :persistent_ui
 
   def current_user?
-    user_id = scope.try(:authenticated_as).try(:id)
-    return false unless user_id
-    object.id == user_id
+    return false unless authenticated?
+    object.id == current_user.id
   end
   alias is_current_user current_user?
 

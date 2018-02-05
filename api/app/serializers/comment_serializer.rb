@@ -10,9 +10,8 @@ class CommentSerializer < ActiveModel::Serializer
   belongs_to :creator
 
   def flagged
-    user = scope.try(:authenticated_as)
-    return 0 unless user
-    object.flags.where(creator: user).count.positive?
+    return 0 unless authenticated?
+    object.flags.where(creator: current_user).count.positive?
   end
 
   def deleted_body

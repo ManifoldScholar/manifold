@@ -1,5 +1,5 @@
 # Serializes a Text Section model
-class TextSectionPartialSerializer < ActiveModel::Serializer
+class TextSectionPartialSerializer < ApplicationSerializer
   meta(partial: true)
 
   attributes :id, :text_slug, :text_title, :name, :source_identifier, :kind

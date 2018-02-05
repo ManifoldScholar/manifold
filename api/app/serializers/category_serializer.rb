@@ -1,5 +1,5 @@
 # Provides a serialization of a category model.
-class CategorySerializer < ActiveModel::Serializer
+class CategorySerializer < ApplicationSerializer
   meta(partial: false)
 
   attributes :id, :title, :position
