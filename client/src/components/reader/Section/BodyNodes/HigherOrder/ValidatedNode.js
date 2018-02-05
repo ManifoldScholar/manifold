@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import mapKeys from "lodash/mapKeys";
 import humps from "humps";
@@ -33,9 +34,17 @@ export default RenderComponent => {
       }
     }
 
+    /* eslint-disable react/no-find-dom-node */
     scrollToEl() {
-      if (this.el) smoothScroll(this.el, 100);
+      // Normally we want to avoid finding the DOM node for an element. However, we can't
+      // rely on every child node to return the dom node instead of a ref to a react
+      // component, so we're going to do a double check here.
+      if (this.el) {
+        const domEl = ReactDOM.findDOMNode(this.el);
+        if (domEl) smoothScroll(domEl, 100);
+      }
     }
+    /* eslint-enabnle react/no-find-dom-node */
 
     styleStringToObject(stylesString) {
       const declarations = stylesString.split(";");
