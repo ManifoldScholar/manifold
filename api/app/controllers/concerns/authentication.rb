@@ -13,10 +13,12 @@ module Authentication
     rescue_from Authority::MissingUser, with: :user_not_authenticated
   end
 
+  CURRENT_USER_PRELOADS = %w(roles makers favorites).freeze
+
   protected
 
   def load_current_user
-    @current_user = User.find(decoded_auth_token[:user_id])
+    @current_user = User.preload(CURRENT_USER_PRELOADS).find(decoded_auth_token[:user_id])
   rescue JWT::DecodeError
     nil
   end
@@ -32,7 +34,7 @@ module Authentication
   # within the action method itself
   def authenticate_request!
     raise NotAuthenticatedError unless user_id_included_in_auth_token?
-    @current_user = User.find(decoded_auth_token[:user_id])
+    @current_user = User.preload(CURRENT_USER_PRELOADS).find(decoded_auth_token[:user_id])
   rescue JWT::ExpiredSignature
     raise AuthenticationTimeoutError
   rescue JWT::VerificationError, JWT::DecodeError
