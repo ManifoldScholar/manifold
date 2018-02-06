@@ -7,7 +7,7 @@ import notificationMiddleware from "./middleware/notificationMiddleware";
 import apiErrorMiddleware from "./middleware/apiErrorMiddleware";
 import websocketMiddleware from "./middleware/websocketMiddleware";
 import onPersistentUIChange from "./subscriptions/onPersistentUIChange";
-
+import onUserIsCurrentUserUpdate from "./subscriptions/onUserIsCurrentUserUpdate";
 import promiseMiddleware from "redux-promise";
 import reducers from "./reducers";
 
@@ -44,6 +44,7 @@ export default function createStore(data) {
 
   const store = finalCreateStore(reducers, data);
   store.subscribe(onPersistentUIChange(store));
+  store.subscribe(onUserIsCurrentUserUpdate(store));
 
   return store;
 }
