@@ -103,12 +103,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  it "has a collection of associated makers" do
-    user = FactoryBot.create(:user)
-    2.times { user.makers << FactoryBot.create(:maker) }
-    expect(user.makers.count).to eq(2)
-  end
-
   context "can be searched", :elasticsearch do
 
     let(:first) { "189274891457612" }

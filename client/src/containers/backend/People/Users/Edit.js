@@ -226,19 +226,6 @@ export class UsersEditContainer extends PureComponent {
             <Form.Save text="Save User" />
           </FormContainer.Form>
         </section>
-        <section className="form-section">
-          <form className="form-secondary">
-            <FormContainer.UserClaims
-              label="Makers"
-              placeholder="Add or create a maker"
-              onNew={this.newMaker}
-              onChange={this.updateMakers}
-              api={usersAPI}
-              entity={user}
-              errors={get(this.props, "createMakerResponse.errors")}
-            />
-          </form>
-        </section>
       </div>
     );
   }

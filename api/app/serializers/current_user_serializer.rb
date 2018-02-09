@@ -6,5 +6,4 @@ class CurrentUserSerializer < ApplicationSerializer
   attributes :class_abilities
 
   has_many :favorites, serializer: FavoriteSerializer
-  has_many :makers
 end

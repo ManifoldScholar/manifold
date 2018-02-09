@@ -15,8 +15,6 @@ class Maker < ApplicationRecord
 
   # Associations
   has_many :collaborators
-  has_many :user_claims
-  has_many :users, through: :user_claims
 
   # Attachments
   manifold_has_attached_file :avatar, :image
