@@ -13,7 +13,7 @@ module Authentication
     rescue_from Authority::MissingUser, with: :user_not_authenticated
   end
 
-  CURRENT_USER_PRELOADS = %w(roles makers favorites).freeze
+  CURRENT_USER_PRELOADS = %w(roles favorites).freeze
 
   protected
 

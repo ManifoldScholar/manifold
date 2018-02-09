@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202214000) do
+ActiveRecord::Schema.define(version: 20180209231903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -531,11 +531,6 @@ ActiveRecord::Schema.define(version: 20180202214000) do
     t.datetime "updated_at",              null: false
   end
 
-  create_table "user_claims", force: :cascade do |t|
-    t.uuid "user_id"
-    t.uuid "maker_id"
-  end
-
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "email"
     t.string   "first_name"
@@ -545,6 +540,7 @@ ActiveRecord::Schema.define(version: 20180202214000) do
     t.string   "password_confirmation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role",                   default: "reader"
     t.text     "nickname"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
@@ -553,7 +549,7 @@ ActiveRecord::Schema.define(version: 20180202214000) do
     t.boolean  "is_cli_user",            default: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.jsonb    "raw_persistent_ui",      default: {},    null: false
+    t.jsonb    "raw_persistent_ui",      default: {},       null: false
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -566,5 +562,4 @@ ActiveRecord::Schema.define(version: 20180202214000) do
 
   add_foreign_key "identities", "users", on_delete: :cascade
   add_foreign_key "users_roles", "roles", on_delete: :cascade
-  add_foreign_key "users_roles", "users", on_delete: :cascade
 end

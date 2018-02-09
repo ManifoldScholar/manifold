@@ -160,57 +160,5 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
       </form>
     </div>
   </section>
-  <section
-    className="form-section"
-  >
-    <form
-      className="form-secondary"
-    >
-      <div
-        className="form-input"
-        style={Object {}}
-      >
-        <header
-          className="section-heading-secondary"
-        >
-          <h3>
-            Users
-          </h3>
-        </header>
-        <nav
-          className="has-many-list"
-        >
-          <ul />
-          <div
-            className="input-predictive"
-          >
-            <div
-              className="input"
-            >
-              <button
-                className="manicon manicon-plus"
-              />
-              <input
-                className="text-input"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                placeholder="Add an associated user"
-                type="text"
-                value=""
-              />
-            </div>
-            <nav
-              className="predictive-list"
-            >
-              <ul />
-            </nav>
-          </div>
-        </nav>
-      </div>
-    </form>
-  </section>
 </div>
 `;

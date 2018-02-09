@@ -169,17 +169,6 @@ export class MakersEditContainer extends PureComponent {
             <Form.Save text="Save Maker" />
           </FormContainer.Form>
         </section>
-        <section className="form-section">
-          <form className="form-secondary">
-            <FormContainer.UserClaims
-              label="Users"
-              placeholder="Add an associated user"
-              api={makersAPI}
-              entity={maker}
-              onChange={this.updateUsers}
-            />
-          </form>
-        </section>
       </div>
     );
   }

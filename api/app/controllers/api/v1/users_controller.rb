@@ -3,14 +3,7 @@ module Api
     # User controller
     class UsersController < ApplicationController
 
-      INCLUDES = %w(
-        makers
-      ).freeze
-
-      PRELOADS = %w(
-        roles
-        makers
-      ).freeze
+      PRELOADS = %w(roles).freeze
 
       resourceful! User, authorize_options: { except: [:create, :show, :whoami] } do
         User.preload(PRELOADS).filter(with_pagination!(user_filter_params))
@@ -30,7 +23,7 @@ module Api
 
       def show
         @user = load_and_authorize_user
-        render_single_resource(@user, include: INCLUDES)
+        render_single_resource @user
       end
 
       def create
@@ -43,7 +36,7 @@ module Api
       def update
         @user = load_and_authorize_user
         ::Updaters::User.new(user_params).update(@user)
-        render_single_resource(@user, include: INCLUDES)
+        render_single_resource @user
       end
 
       def destroy

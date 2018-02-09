@@ -5,8 +5,6 @@ class UserSerializer < ApplicationSerializer
 
   attributes :is_current_user
 
-  has_many :makers, if: :can_update_object?
-
   def current_user?
     return false unless authenticated?
     object.id == current_user.id

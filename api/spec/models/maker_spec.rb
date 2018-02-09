@@ -17,10 +17,4 @@ RSpec.describe Maker, type: :model do
     expect(maker.full_name).to eq "Stubblin Bumblin Champflin III"
   end
 
-  it "has a collection of associated makers" do
-    maker = FactoryBot.create(:maker)
-    2.times { maker.users << FactoryBot.create(:user) }
-    expect(maker.users.count).to eq(2)
-  end
-
 end

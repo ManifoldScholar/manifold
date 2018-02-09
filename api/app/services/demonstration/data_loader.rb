@@ -37,7 +37,7 @@ module Demonstration
 
     def clear_db
       clear = %w(Project Collaborator Maker Text TextSection IngestionSource Resource
-                 Subject TextSubject TextTitle User Category Page UserClaim Annotation
+                 Subject TextSubject TextTitle User Category Page Annotation
                  CollectionResource Collection Comment Event Favorite Flag ProjectSubject
                  Stylesheet Subject SearchableNode TwitterQuery UpgradeResult)
       clear.each do |model_name|

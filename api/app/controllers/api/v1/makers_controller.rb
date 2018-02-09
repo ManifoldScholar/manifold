@@ -3,10 +3,6 @@ module Api
     # makers controller
     class MakersController < ApplicationController
 
-      INCLUDES = %w(
-        users
-      ).freeze
-
       resourceful! Maker, authorize_options: { except: [:index, :show] } do
         Maker.filter(with_pagination!(maker_filter_params))
       end
@@ -21,7 +17,7 @@ module Api
 
       def show
         @maker = load_maker
-        render_single_resource(@maker, include: INCLUDES)
+        render_single_resource @maker
       end
 
       def create
@@ -32,7 +28,7 @@ module Api
       def update
         @maker = load_and_authorize_maker
         ::Updaters::Maker.new(maker_params).update(@maker)
-        render_single_resource(@maker, include: INCLUDES)
+        render_single_resource @maker
       end
 
       def destroy
