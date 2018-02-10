@@ -1,0 +1,55 @@
+.permissions-form {
+
+  .user {
+    display: flex;
+    align-items: center;
+
+    + .form-input {
+      margin-top: 20px;
+    }
+
+    .meta {
+      .name {
+        @include templateHead;
+        max-width: 100%;
+        margin: 0;
+        font-size: 16px;
+        line-height: 21px;
+        letter-spacing: 0.015em;
+        transition: color $duration $timing;
+        color: $neutral30;
+
+        @include respond($break80) {
+          font-size: 18px;
+        }
+
+        &.large {
+          font-size: 18px;
+
+          @include respond($break80) {
+            font-size: 22px;
+          }
+        }
+      }
+    }
+
+    figure {
+      &.avatar {
+        margin-right: 15px;
+
+        .image {
+          width: 50px;
+          height: 50px;
+          background-repeat: no-repeat;
+          background-position: 50% 50%;
+          background-size: cover;
+          border-radius: 100%;
+        }
+
+        .no-image {
+          @include buttonAvatar(50);
+        }
+      }
+    }
+  }
+}

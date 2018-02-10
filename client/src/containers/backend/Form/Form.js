@@ -143,7 +143,10 @@ export class FormContainer extends PureComponent {
 
   create() {
     const dirty = this.props.session.dirty;
-    const call = this.props.create({ attributes: dirty.attributes });
+    const call = this.props.create({
+      attributes: dirty.attributes,
+      relationships: dirty.relationships
+    });
     const action = request(call, this.props.name, this.requestOptions());
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty("promise") && this.props.onSuccess) {

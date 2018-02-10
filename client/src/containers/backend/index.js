@@ -12,6 +12,7 @@ import Ingestion from "./Ingestion";
 import Stylesheet from "./Stylesheet";
 import Developer from "./Developer";
 import TwitterQuery from "./TwitterQuery";
+import Permission from "./Permission";
 
 export {
   Backend,
@@ -27,5 +28,6 @@ export {
   Ingestion,
   Stylesheet,
   Developer,
-  TwitterQuery
+  TwitterQuery,
+  Permission
 };

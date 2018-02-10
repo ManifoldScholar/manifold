@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209231903) do
+ActiveRecord::Schema.define(version: 20180214201011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -540,7 +540,6 @@ ActiveRecord::Schema.define(version: 20180209231903) do
     t.string   "password_confirmation"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role",                   default: "reader"
     t.text     "nickname"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
@@ -549,7 +548,7 @@ ActiveRecord::Schema.define(version: 20180209231903) do
     t.boolean  "is_cli_user",            default: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.jsonb    "raw_persistent_ui",      default: {},       null: false
+    t.jsonb    "raw_persistent_ui",      default: {},    null: false
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -562,4 +561,18 @@ ActiveRecord::Schema.define(version: 20180209231903) do
 
   add_foreign_key "identities", "users", on_delete: :cascade
   add_foreign_key "users_roles", "roles", on_delete: :cascade
+  add_foreign_key "users_roles", "users", on_delete: :cascade
+
+  create_view "permissions",  sql_definition: <<-SQL
+      SELECT ((((ur.user_id || ':'::text) || r.resource_id) || ':'::text) || (r.resource_type)::text) AS id,
+      ur.user_id,
+      r.resource_id,
+      r.resource_type,
+      array_agg(r.name) AS role_names
+     FROM (roles r
+       JOIN users_roles ur ON ((ur.role_id = r.id)))
+    GROUP BY ur.user_id, r.resource_id, r.resource_type
+   HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
+  SQL
+
 end

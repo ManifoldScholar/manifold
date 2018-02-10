@@ -236,5 +236,29 @@ export default {
       body: `Tweets have been fetched.`,
       expiration: defaultExpiration
     };
+  },
+  [r.bePermissionCreate]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `The selected permissions have been granted.`,
+      expiration: defaultExpiration
+    };
+  },
+  [r.bePermissionDestroy]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `The selected permissions have been revoked.`,
+      expiration: defaultExpiration
+    };
+  },
+  [r.bePermissionUpdate]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `The selected permissions have been updated.`,
+      expiration: defaultExpiration
+    };
   }
 };

@@ -24,6 +24,7 @@ export stylesheetsAPI from "./resources/stylesheets";
 export readerSearchResultsAPI from "./resources/readerSearchResults";
 export testMailsAPI from "./resources/testMails";
 export twitterQueriesAPI from "./resources/twitterQueries";
+export permissionsAPI from "./resources/permissions";
 export requests from "./requests";
 export ApiClient from "./client";
 export notifications from "./notifications";

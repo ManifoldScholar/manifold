@@ -14,7 +14,7 @@ export default class Errorable extends PureComponent {
     className: PropTypes.string,
     name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    label: PropTypes.string
+    nameForError: PropTypes.string
   };
 
   static defaultProps = {
@@ -60,7 +60,7 @@ export default class Errorable extends PureComponent {
 
   render() {
     /* eslint-disable no-unused-vars */
-    const { className, children, errors, label } = this.props;
+    const { className, children, nameForError } = this.props;
     /* eslint-enable no-unused-vars */
     const fieldErrors = this.fieldErrors();
     const hasErrors = fieldErrors.length > 0;
@@ -72,7 +72,9 @@ export default class Errorable extends PureComponent {
     return (
       <div style={this.props.containerStyle} className={wrapperClass}>
         {children}
-        {hasErrors ? <Form.InputError errors={fieldErrors} /> : null}
+        {hasErrors ? (
+          <Form.InputError errors={fieldErrors} name={nameForError} />
+        ) : null}
       </div>
     );
   }

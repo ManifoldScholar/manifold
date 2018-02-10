@@ -121,7 +121,7 @@ export class MakersEditContainer extends PureComponent {
             <button
               className="button-bare-primary"
               onClick={event => {
-                this.handleMakerDestroy(event, this.props.maker);
+                this.handleMakerDestroy(event, maker);
               }}
             >
               {"Delete Maker"}
@@ -131,7 +131,7 @@ export class MakersEditContainer extends PureComponent {
         </header>
         <section className="form-section">
           <FormContainer.Form
-            model={this.props.maker}
+            model={maker}
             name="backend-maker-update"
             update={makersAPI.update}
             create={makersAPI.create}

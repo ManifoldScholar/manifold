@@ -5,7 +5,8 @@ module Api
 
       INCLUDES = [
         :creators, :contributors, :texts, :text_categories, :events,
-        :collections, :uncollected_resources, :subjects, :twitter_queries
+        :collections, :uncollected_resources, :subjects, :twitter_queries,
+        :permitted_users
       ].freeze
 
       resourceful! Project, authorize_options: { except: [:index, :show] } do

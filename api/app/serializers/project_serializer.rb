@@ -20,6 +20,7 @@ class ProjectSerializer < ProjectPartialSerializer
   has_many :uncollected_resources
   has_many :subjects
   has_many :twitter_queries
+  has_many :permitted_users
 
   def event_count
     object.events.count
