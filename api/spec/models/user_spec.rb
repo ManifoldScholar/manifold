@@ -83,6 +83,17 @@ RSpec.describe User, type: :model do
     expect(user.has_role? :admin).to eq true
   end
 
+  # TODO: Improve this test
+  it "preserves permissions when changing role" do
+    user = FactoryBot.create(:user, role: Role::ROLE_EDITOR)
+    project = FactoryBot.create(:project)
+    user.add_role :owner, project
+    permissions = Array.new user.permissions
+    user.role = Role::ROLE_EDITOR
+    user.save
+    expect(user.reload.permissions).to eq permissions
+  end
+
   context "its kind" do
     let(:user) { FactoryBot.create(:user) }
     let(:project) { FactoryBot.create(:project) }
@@ -129,7 +140,6 @@ RSpec.describe User, type: :model do
       results = User.filter({keyword: email, typeahead: true})
       expect(results.length).to be 1
     end
-
   end
 
   context "when resetting password" do

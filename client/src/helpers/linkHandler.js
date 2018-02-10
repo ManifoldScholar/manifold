@@ -45,6 +45,13 @@ class LinkHandler {
       }
     }
   }
+
+  nameFromType(prefix, suffix, entity) {
+    const adjustedType = `${entity.type
+      .charAt(0)
+      .toUpperCase()}${entity.type.slice(1, -1)}`;
+    return `${prefix}${adjustedType}${suffix}`;
+  }
 }
 
 export default new LinkHandler();

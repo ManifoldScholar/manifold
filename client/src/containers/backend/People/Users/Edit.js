@@ -220,6 +220,7 @@ export class UsersEditContainer extends PureComponent {
               selected={user.attributes.role}
               options={[
                 { label: "Admin", value: "admin" },
+                { label: "Editor", value: "editor" },
                 { label: "Reader", value: "reader" }
               ]}
             />

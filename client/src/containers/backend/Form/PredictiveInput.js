@@ -21,8 +21,13 @@ class PredictiveInput extends PureComponent {
     onSelect: PropTypes.func.isRequired,
     label: PropTypes.func.isRequired,
     fetch: PropTypes.func.isRequired,
+    fetchOptions: PropTypes.object,
     placeholder: PropTypes.string,
     authToken: PropTypes.string
+  };
+
+  static defaultProps = {
+    fetchOptions: null
   };
 
   constructor(props) {
@@ -134,7 +139,8 @@ class PredictiveInput extends PureComponent {
     }
     const { endpoint, method, options } = fetch({
       keyword: value,
-      typeahead: true
+      typeahead: true,
+      ...this.props.fetchOptions
     });
     options.authToken = this.props.authToken;
     const client = new ApiClient();

@@ -30,6 +30,7 @@ class Project < ApplicationRecord
   include Attachments
   include Metadata
   include Concerns::HasFormattedAttributes
+  include WithPermittedUsers
   extend FriendlyId
 
   # Magic
@@ -74,6 +75,7 @@ class Project < ApplicationRecord
   has_many :subjects, through: :project_subjects
   has_many :ingestions
   has_many :twitter_queries
+  has_many :permissions, as: :resource
 
   # rubocop:disable Style/Lambda
   has_many :uncollected_resources, ->(object) {

@@ -2,6 +2,10 @@ require "sidekiq/web"
 
 # rubocop:disable Metrics/BlockLength, Metrics/LineLength
 Rails.application.routes.draw do
+  concern :permissible do
+    resources :permissions, only: [:create, :index, :show, :update, :destroy]
+  end
+
   mount Sidekiq::Web => "/sidekiq" if Rails.env.development?
 
   get "auth/:provider/callback", to: "oauth#authorize"
@@ -82,6 +86,7 @@ Rails.application.routes.draw do
             resources :collaborators
             resources :text_categories, only: [:index, :create, :show]
             resources :ingestions, only: [:create], controller: "/api/v1/ingestions"
+            concerns [:permissible]
           end
         end
       end

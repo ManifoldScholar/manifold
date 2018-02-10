@@ -5,6 +5,7 @@ import Events from "./Events";
 import General from "./General";
 import Metadata from "./Metadata";
 import New from "./New";
+import Permissions from "./Permissions";
 import ProjectPage from "./ProjectPage";
 import Resource from "./Resource";
 import Resources from "./Resources";
@@ -21,6 +22,7 @@ export default {
   General,
   Metadata,
   New,
+  Permissions,
   ProjectPage,
   Resource,
   Resources,

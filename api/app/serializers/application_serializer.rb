@@ -1,4 +1,6 @@
 class ApplicationSerializer < ActiveModel::Serializer
+  meta(partial: false)
+
   def authenticated?
     current_user.present?
   end

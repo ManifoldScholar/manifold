@@ -250,6 +250,14 @@ module Validation
     params.permit(param_config)
   end
 
+  def permission_params
+    params.require(:data)
+    attributes = [{ role_names: [] }]
+    relationships = [:user]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def favoritable_params
     structure_params
   end
@@ -268,7 +276,7 @@ module Validation
   end
 
   def user_filter_params
-    params.permit(filter: [:keyword, :typeahead])[:filter]
+    params.permit(filter: [:keyword, :typeahead, :role])[:filter]
   end
 
   def event_filter_params

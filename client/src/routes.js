@@ -161,6 +161,27 @@ export default () => {
               helper: p => `/backend/project/${p}/collections`
             },
             {
+              name: "backendProjectPermissions",
+              component: Backend.Project.Permissions,
+              path: "/backend/project/:projectId/permissions/:id?",
+              helper: p => `/backend/project/${p}/permissions`,
+              routes: [
+                {
+                  name: "backendProjectPermissionsNew",
+                  component: Backend.Permission.New,
+                  path: "/backend/project/:pId/permissions/new",
+                  helper: pId => `/backend/project/${pId}/permissions/new`
+                },
+                {
+                  name: "backendProjectPermission",
+                  component: Backend.Permission.Edit,
+                  path: "/backend/project/:pId/permissions/:id",
+                  helper: (pId, id) =>
+                    `/backend/project/${pId}/permissions/${id}`
+                }
+              ]
+            },
+            {
               name: "backendProjectCollaborators",
               component: Backend.Project.Collaborators,
               path: "/backend/project/:id/collaborators",

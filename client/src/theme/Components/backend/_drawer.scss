@@ -139,6 +139,10 @@
       text-overflow: ellipsis;
     }
 
+    &.less-space-bottom {
+      padding-bottom: 0;
+    }
+
     .manicon {
       padding-right: 10px;
 

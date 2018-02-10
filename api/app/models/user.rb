@@ -33,6 +33,7 @@ class User < ApplicationRecord
   has_many :created_resources, class_name: "Resource", foreign_key: "creator_id"
   has_many :created_pages, class_name: "Page", foreign_key: "creator_id"
   has_many :created_flags, class_name: "Flag", foreign_key: "creator_id"
+  has_many :permissions
 
   # Validation
   validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
@@ -64,6 +65,10 @@ class User < ApplicationRecord
     return order(:first_name, :last_name) unless by.present?
     order(by)
   }
+  scope :by_role, lambda { |role|
+    return all unless role.present?
+    with_role role.to_sym
+  }
 
   def self.cli_user
     User.find_by(is_cli_user: true)
@@ -93,16 +98,28 @@ class User < ApplicationRecord
     @pending_role = new_role.to_s
   end
 
-  def role
-    admin? ? "admin" : "reader"
+  def admin?
+    role == "admin"
   end
 
-  def admin?
-    kind == "admin"
+  def editor?
+    role == "editor"
+  end
+
+  def owner_of(resource)
+    has_role? :owner, resource
+  end
+
+  # Global roles
+  def role
+    return "admin" if has_cached_role? :admin
+    return "editor" if has_cached_role? :editor
+    "reader"
   end
 
   def kind
     return "admin" if has_cached_role? :admin
+    return "editor" if has_cached_role? :editor
     return "author" if has_cached_role? :author, :any
     "reader"
   end
@@ -112,7 +129,7 @@ class User < ApplicationRecord
   def sync_pending_role!
     return if pending_role.blank?
 
-    roles_to_remove = Role::ALLOWED_ROLES.without(pending_role.to_s)
+    roles_to_remove = Role::GLOBAL_ROLES.without(pending_role.to_s)
     roles_to_remove.each { |role| remove_role role }
 
     add_role pending_role

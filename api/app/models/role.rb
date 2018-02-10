@@ -1,11 +1,24 @@
 class Role < ApplicationRecord
+  include Authority::Abilities
+
   ROLE_ADMIN = "admin".freeze
   ROLE_READER = "reader".freeze
   ROLE_AUTHOR = "author".freeze
+  ROLE_EDITOR = "editor".freeze
+  ROLE_OWNER = "owner".freeze
+
+  GLOBAL_ROLES = [
+    ROLE_ADMIN,
+    ROLE_EDITOR,
+    ROLE_READER
+  ].freeze
+
   ALLOWED_ROLES = [
     ROLE_ADMIN,
     ROLE_AUTHOR,
-    ROLE_READER
+    ROLE_READER,
+    ROLE_EDITOR,
+    ROLE_OWNER
   ].freeze
 
   scopify

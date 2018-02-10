@@ -6,7 +6,8 @@ import humps from "humps";
 
 export default class InputError extends Component {
   static propTypes = {
-    errors: PropTypes.array
+    errors: PropTypes.array,
+    name: PropTypes.string
   };
 
   constructor() {
@@ -25,8 +26,8 @@ export default class InputError extends Component {
   errorString(error) {
     const param = get(error, "source.param");
     const pointer = get(error, "source.pointer");
-    const name = param || this.nameFromPointer(pointer);
-    return capitalize(`${name} ${error.detail}.  `);
+    const name = this.props.name || param || this.nameFromPointer(pointer);
+    return `${capitalize(name)} ${error.detail}.  `;
   }
 
   /* eslint-disable react/no-array-index-key */
