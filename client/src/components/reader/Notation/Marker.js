@@ -83,8 +83,8 @@ class NotationMarker extends Component {
                 if (!touch) this.setActiveAnnotation(null);
               }}
             >
-              <i className="manicon notation-cube-fill">
-                &nbsp;&nbsp;&nbsp;&nbsp;
+              <i className="manicon manicon-cube-fill">
+
               </i>
             </span>
           );

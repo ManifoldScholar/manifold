@@ -93,9 +93,15 @@
   // Link with notation marker cube
   .notation-marker {
     cursor: pointer;
-
+    font-size: 1em;
+    display: inline-flex;
+    align-self: center;
+    margin: 0 0.18em;
+    text-decoration: none;
+    letter-spacing: normal;
+    text-indent: 0;
     i {
-      display: inline;
+      position: relative;
     }
   }
 
