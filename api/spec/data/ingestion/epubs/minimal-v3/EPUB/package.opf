@@ -15,7 +15,7 @@
     <item id="section0001.xhtml" href="xhtml/section0001.xhtml" media-type="application/xhtml+xml" />
     <item id="section0002.xhtml" href="xhtml/section0002.xhtml" media-type="application/xhtml+xml" />
     <item id="section0002a.xhtml" href="xhtml/section0002a.xhtml" media-type="application/xhtml+xml" />
-    <item id="section0003.xhtml" href="xhtml/section0003.xhtml" media-type="application/xhtml+xml" />
+    <item id="section0003.xhtml" href="xhtml/an%20item%20with%20spaces.xhtml" media-type="application/xhtml+xml" />
     <item id="css" href="stylesheet.css" media-type="text/css" />
   </manifest>
   <spine>
