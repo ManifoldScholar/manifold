@@ -177,7 +177,7 @@ module Ingestor
           memoize :guide_node
 
           def rendition_href_to_path(href)
-            ingestion.derelativize_ingestion_path(rendition_path, href)
+            ingestion.derelativize_ingestion_path(rendition_path, CGI.unescape(href))
           end
           memoize :rendition_href_to_path
 
