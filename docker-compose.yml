@@ -1,0 +1,63 @@
+version: "3"
+services:
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8084:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - webnet
+  api:
+    image: manifold_api:latest
+    volumes:
+      - manifold_data:/manifold_data
+      - manifold_sockets:/manifold_sockets
+    environment:
+      - RAILS_DB_USER=postgres
+      - RAILS_DB_HOST=postgres
+      - BOXEN_POSTGRESQL_PORT=5432
+      - RAILS_SECRET_KEY=f673814a9129dd345a9d3b0b34847eac04d25dc1127f21292c7d4bada6c3bdc2d83709f0ba8ec510efc9ee22b5993f1429259934aa71c5db8f64a4325af107a9
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 128M
+      restart_policy:
+        condition: on-failure
+    networks:
+      - webnet
+  proxy:
+    image: manifold_proxy:latest
+    volumes:
+      - manifold_data:/manifold_data
+      - manifold_sockets:/manifold_sockets
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 128M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "4000:80"
+    networks:
+      - webnet
+  postgres:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    networks:
+      - webnet
+
+volumes:
+  manifold_data:
+  manifold_sockets:
+
+networks:
+  webnet:
