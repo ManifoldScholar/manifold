@@ -11,10 +11,8 @@ exports[`Reader.Notation.Marker component renders correctly 1`] = `
     title="1"
   >
     <i
-      className="manicon notation-cube-fill"
-    >
-          
-    </i>
+      className="manicon manicon-cube-fill"
+    />
   </span>
 </span>
 `;
