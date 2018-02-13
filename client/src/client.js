@@ -15,7 +15,7 @@ import ch from "./helpers/consoleHelpers";
 const rootElement = document.getElementById("content");
 
 const render = Component => {
-  ReactDOM.render(
+  ReactDOM.hydrate(
     <AppContainer>
       <Component />
     </AppContainer>,
@@ -37,16 +37,6 @@ if (process.env.NODE_ENV === "development") {
   window.React = React; // enable debugger
   if (rootElement && rootElement.hasAttribute("data-ssr-render") === true) {
     ch.info("Server-side rendering service is present.", "rainbow");
-    if (
-      !rootElement ||
-      !rootElement.firstChild ||
-      !rootElement.firstChild.attributes ||
-      !rootElement.firstChild.attributes["data-react-checksum"]
-    ) {
-      ch.error("Server-side rendering service does not match.", "rain_cloud");
-    } else {
-      ch.info("Server-side rendering service response matches.", "rainbow");
-    }
   } else {
     ch.error("Server-side rendering service is missing.", "rain_cloud");
   }
