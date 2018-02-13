@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import renderer from "react-test-renderer";
 import { Form } from "components/backend";
-import { shallow, mount, render } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+Enzyme.configure({ adapter: new Adapter() });
 
 import setter from "../setter";
 
@@ -41,7 +43,7 @@ describe("setter higher order component", () => {
   describe("applied to a component with a name prop", () => {
     const component = renderer.create(settable);
     const tree = component.toJSON();
-    const wrapper = shallow(settable).first().shallow();
+    const wrapper = Enzyme.shallow(settable).first().shallow();
     const instance = wrapper.instance();
     const props = instance.props;
 

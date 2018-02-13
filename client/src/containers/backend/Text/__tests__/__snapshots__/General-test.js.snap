@@ -215,7 +215,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
           <div
             className="form-input"
           >
-            <ReactTextMask
+            <react-text-mask
               className="input-year"
               mask={
                 Array [

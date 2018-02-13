@@ -1,9 +1,235 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Form.Upload component when the upload input does not have a value renders correctly 1`] = `"<div class=\\"form-input\\"><div class=\\"form-input\\"><label class=\\"\\">Cover</label><Dropzone class=\\"form-dropzone style-portrait\\" accept=\\"image/*\\"><div class=\\"contents-empty\\"><i class=\\"manicon manicon-cloud-up\\"></i><div class=\\"message\\"><p class=\\"primary\\"><span class=\\"fake-link\\">Upload a file</span> or<br/>drag and drop here<br/></p><p class=\\"secondary\\">jpeg, tiff, gif, png</p></div></div></Dropzone></div></div>"`;
+exports[`Backend.Form.Upload component when the upload input does not have a value renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+    >
+      Cover
+    </label>
+    <react-dropzone
+      accept="image/*"
+      className="form-dropzone style-portrait"
+      multiple={false}
+      onDrop={[Function]}
+      style={undefined}
+    >
+      <div
+        className="contents-empty"
+      >
+        <i
+          className="manicon manicon-cloud-up"
+        />
+        <div
+          className="message"
+        >
+          <p
+            className="primary"
+          >
+            <span
+              className="fake-link"
+            >
+              Upload a file
+            </span>
+             or
+            <br />
+            drag and drop here
+            <br />
+          </p>
+          <p
+            className="secondary"
+          >
+            jpeg, tiff, gif, png
+          </p>
+        </div>
+      </div>
+    </react-dropzone>
+  </div>
+</div>
+`;
 
-exports[`Backend.Form.Upload component when the upload input doesn't have a remove prop renders correctly 1`] = `"<div class=\\"form-input\\"><div class=\\"form-input\\"><label class=\\"\\">Cover</label><Dropzone class=\\"form-dropzone style-portrait\\" accept=\\"image/*\\"><div class=\\"contents-image-preview\\"><div data-id=\\"preview\\" class=\\"preview\\" style=\\"background-image:url(/some/image.jpg);\\"></div><div class=\\"message\\"><p class=\\"secondary\\"><a data-id=\\"remove\\" href=\\"#\\">Remove this image</a><br/>or <span class=\\"fake-link\\">Upload an image</span></p></div></div></Dropzone></div></div>"`;
+exports[`Backend.Form.Upload component when the upload input doesn't have a remove prop renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+    >
+      Cover
+    </label>
+    <react-dropzone
+      accept="image/*"
+      className="form-dropzone style-portrait"
+      multiple={false}
+      onDrop={[Function]}
+      style={undefined}
+    >
+      <div
+        className="contents-image-preview"
+      >
+        <div
+          className="preview"
+          data-id="preview"
+          style={
+            Object {
+              "backgroundImage": "url(/some/image.jpg)",
+            }
+          }
+        />
+        <div
+          className="message"
+        >
+          <p
+            className="secondary"
+          >
+            <a
+              data-id="remove"
+              href="#"
+              onClick={[Function]}
+            >
+              Remove this image
+            </a>
+            <br />
+            or 
+            <span
+              className="fake-link"
+            >
+              Upload an image
+            </span>
+          </p>
+        </div>
+      </div>
+    </react-dropzone>
+  </div>
+</div>
+`;
 
-exports[`Backend.Form.Upload component when the upload input doesn't have set and setOther methods renders correctly 1`] = `"<div class=\\"form-input\\"><div class=\\"form-input\\"><label class=\\"\\">Cover</label><Dropzone class=\\"form-dropzone style-portrait\\" accept=\\"image/*\\"><div class=\\"contents-image-preview\\"><div data-id=\\"preview\\" class=\\"preview\\" style=\\"background-image:url(/some/image.jpg);\\"></div><div class=\\"message\\"><p class=\\"secondary\\"><a data-id=\\"remove\\" href=\\"#\\">Remove this image</a><br/>or <span class=\\"fake-link\\">Upload an image</span></p></div></div></Dropzone></div></div>"`;
+exports[`Backend.Form.Upload component when the upload input doesn't have set and setOther methods renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+    >
+      Cover
+    </label>
+    <react-dropzone
+      accept="image/*"
+      className="form-dropzone style-portrait"
+      multiple={false}
+      onDrop={[Function]}
+      style={undefined}
+    >
+      <div
+        className="contents-image-preview"
+      >
+        <div
+          className="preview"
+          data-id="preview"
+          style={
+            Object {
+              "backgroundImage": "url(/some/image.jpg)",
+            }
+          }
+        />
+        <div
+          className="message"
+        >
+          <p
+            className="secondary"
+          >
+            <a
+              data-id="remove"
+              href="#"
+              onClick={[Function]}
+            >
+              Remove this image
+            </a>
+            <br />
+            or 
+            <span
+              className="fake-link"
+            >
+              Upload an image
+            </span>
+          </p>
+        </div>
+      </div>
+    </react-dropzone>
+  </div>
+</div>
+`;
 
-exports[`Backend.Form.Upload component when the upload input has a value renders correctly 1`] = `"<div class=\\"form-input\\"><div class=\\"form-input\\"><label class=\\"\\">Cover</label><Dropzone class=\\"form-dropzone style-portrait\\" accept=\\"image/*\\"><div class=\\"contents-image-preview\\"><div data-id=\\"preview\\" class=\\"preview\\" style=\\"background-image:url(/some/image.jpg);\\"></div><div class=\\"message\\"><p class=\\"secondary\\"><a data-id=\\"remove\\" href=\\"#\\">Remove this image</a><br/>or <span class=\\"fake-link\\">Upload an image</span></p></div></div></Dropzone></div></div>"`;
+exports[`Backend.Form.Upload component when the upload input has a value renders correctly 1`] = `
+<div
+  className="form-input"
+>
+  <div
+    className="form-input"
+    style={Object {}}
+  >
+    <label
+      className=""
+    >
+      Cover
+    </label>
+    <react-dropzone
+      accept="image/*"
+      className="form-dropzone style-portrait"
+      multiple={false}
+      onDrop={[Function]}
+      style={undefined}
+    >
+      <div
+        className="contents-image-preview"
+      >
+        <div
+          className="preview"
+          data-id="preview"
+          style={
+            Object {
+              "backgroundImage": "url(/some/image.jpg)",
+            }
+          }
+        />
+        <div
+          className="message"
+        >
+          <p
+            className="secondary"
+          >
+            <a
+              data-id="remove"
+              href="#"
+              onClick={[Function]}
+            >
+              Remove this image
+            </a>
+            <br />
+            or 
+            <span
+              className="fake-link"
+            >
+              Upload an image
+            </span>
+          </p>
+        </div>
+      </div>
+    </react-dropzone>
+  </div>
+</div>
+`;

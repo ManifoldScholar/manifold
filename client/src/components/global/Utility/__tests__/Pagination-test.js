@@ -1,7 +1,10 @@
 import React from "react";
-import { mount } from "enzyme";
 import renderer from "react-test-renderer";
 import Pagination from "../Pagination";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Global.Utility.Pagination component", () => {
   const pageChangeMock = jest.fn();
@@ -38,7 +41,7 @@ describe("Global.Utility.Pagination component", () => {
   });
 
   it("should trigger paginationClickHandler callback when pagination target is clicked", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     pageChangeMock.mockClear();
     wrapper
       .find('[href="#pagination-target"]')

@@ -3,16 +3,16 @@
 exports[`Backend.Dialog.Confirm Component renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
-    <Dialog.Confirm heading=\\"Player's Ball\\" message=\\"All the players came from far and wide\\" reject={[Function]} resolve={[Function]}>
+    <Dialog.Confirm heading=\\"Player\\\\'s Ball\\" message=\\"All the players came from far and wide\\" reject={[Function: mockConstructor]} resolve={[Function: mockConstructor]}>
       <withRouter(Dialog.Wrapper) className=\\"dialog-confirm\\" maxWidth={400} showCloseButton={false} closeOnOverlayClick={false}>
-        <Route render={[Function]}>
+        <Route render={[Function: render]}>
           <Dialog.Wrapper className=\\"dialog-confirm\\" maxWidth={400} showCloseButton={false} closeOnOverlayClick={false} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
             <CSSTransitionGroup transitionName=\\"dialog\\" transitionAppear={true} transitionEnter={false} transitionAppearTimeout={1} transitionLeaveTimeout={200} transitionLeave={true}>
               <TransitionGroup transitionName=\\"dialog\\" transitionAppear={true} transitionEnter={false} transitionAppearTimeout={1} transitionLeaveTimeout={200} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
                 <span>
                   <CSSTransitionGroupChild name=\\"dialog\\" appear={true} enter={false} leave={true} appearTimeout={1} enterTimeout={[undefined]} leaveTimeout={200}>
                     <div className=\\"dialog-primary dialog-appear\\">
-                      <div className=\\"dialog-overlay\\" onClick={[Function]} />
+                      <div className=\\"dialog-overlay\\" onClick={[Function: bound handleOverlayClick]} />
                       <div className=\\"dialog-box dialog-confirm\\" style={{...}}>
                         <header className=\\"dialog-header-small\\">
                           <h2>
@@ -23,11 +23,11 @@ exports[`Backend.Dialog.Confirm Component renders correctly 1`] = `
                           All the players came from far and wide
                         </p>
                         <div className=\\"buttons-icon-horizontal\\">
-                          <button onClick={[Function]} className=\\"button-icon-secondary\\" data-id=\\"accept\\">
+                          <button onClick={[Function: bound handleResolveClick]} className=\\"button-icon-secondary\\" data-id=\\"accept\\">
                             <i className=\\"manicon manicon-check small\\" />
                             Yes
                           </button>
-                          <button className=\\"button-icon-secondary dull\\" onClick={[Function]} data-id=\\"reject\\">
+                          <button className=\\"button-icon-secondary dull\\" onClick={[Function: bound handleRejectClick]} data-id=\\"reject\\">
                             <i className=\\"manicon manicon-x small\\" />
                             No
                           </button>

@@ -106,6 +106,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
           <ul>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/text/1"
                 onClick={[Function]}
@@ -116,6 +117,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/text/1/collaborators"
                 onClick={[Function]}
@@ -126,6 +128,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/text/1/metadata"
                 onClick={[Function]}
@@ -136,6 +139,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/text/1/styles"
                 onClick={[Function]}
@@ -146,6 +150,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/text/1/ingestions/new"
                 onClick={[Function]}
@@ -170,6 +175,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
           <ul>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/text/1"
                 onClick={[Function]}
@@ -180,6 +186,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/text/1/collaborators"
                 onClick={[Function]}
@@ -190,6 +197,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/text/1/metadata"
                 onClick={[Function]}
@@ -200,6 +208,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/text/1/styles"
                 onClick={[Function]}
@@ -210,6 +219,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/text/1/ingestions/new"
                 onClick={[Function]}

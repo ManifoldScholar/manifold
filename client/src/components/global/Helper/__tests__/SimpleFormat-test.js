@@ -1,7 +1,10 @@
 import React from "react";
-import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 import SimpleFormat from "../SimpleFormat";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Global.Helper.SimpleFormat component", () => {
   it("renders correctly", () => {
@@ -14,7 +17,7 @@ describe("Global.Helper.SimpleFormat component", () => {
   });
 
   it("removes line breaks", () => {
-    const component = shallow(
+    const component = Enzyme.shallow(
       <SimpleFormat text="Basketball is my favorite sport.
         I like the way they dribble up and down the court." />
     );

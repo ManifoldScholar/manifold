@@ -144,13 +144,13 @@ export default class TextStylesContainer extends PureComponent {
                             {stylesheet.attributes.name}
                             <span className="subtitle" />
                           </h3>
-                          <datetime className="asset-date">
+                          <span className="asset-date">
                             <FormattedDate
                               prefix="Added"
                               format="MMMM, YYYY"
                               date={stylesheet.attributes.createdAt}
                             />
-                          </datetime>
+                          </span>
                           <span className="asset-state">
                             {stylesheet.attributes.ingested
                               ? "Ingested"

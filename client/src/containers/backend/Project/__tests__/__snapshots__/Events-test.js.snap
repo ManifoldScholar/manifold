@@ -99,13 +99,13 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                         }
                       }
                     />
-                    <datetime
+                    <span
                       className="event-date"
                     >
                       <span>
                         Text Added April 24th, 2017
                       </span>
-                    </datetime>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -140,13 +140,13 @@ exports[`Backend Project Events Container renders correctly 1`] = `
                         }
                       }
                     />
-                    <datetime
+                    <span
                       className="event-date"
                     >
                       <span>
                         Text Added April 24th, 2017
                       </span>
-                    </datetime>
+                    </span>
                   </div>
                 </div>
               </div>

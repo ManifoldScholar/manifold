@@ -48,9 +48,9 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                             Slarmbo
                             <span className=\\"subtitle\\" />
                           </h3>
-                          <datetime className=\\"asset-date\\">
+                          <span className=\\"asset-date\\">
                             <FormattedDate prefix=\\"Added\\" format=\\"MMMM, YYYY\\" date={[undefined]} />
-                          </datetime>
+                          </span>
                           <span className=\\"asset-state\\">
                             User
                           </span>
@@ -63,13 +63,13 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                           Edit
                         </a>
                       </Link>
-                      <button style={{...}} onClick={[Function]}>
+                      <button style={{...}} onClick={[Function: onClick]}>
                         <i className=\\"manicon manicon-arrow-up\\" />
                       </button>
-                      <button onClick={[Function]}>
+                      <button onClick={[Function: onClick]}>
                         <i className=\\"manicon manicon-arrow-down\\" />
                       </button>
-                      <button onClick={[Function]}>
+                      <button onClick={[Function: onClick]}>
                         <i className=\\"manicon manicon-x\\" />
                       </button>
                     </div>
@@ -98,9 +98,9 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                             Slarmbo
                             <span className=\\"subtitle\\" />
                           </h3>
-                          <datetime className=\\"asset-date\\">
+                          <span className=\\"asset-date\\">
                             <FormattedDate prefix=\\"Added\\" format=\\"MMMM, YYYY\\" date={[undefined]} />
-                          </datetime>
+                          </span>
                           <span className=\\"asset-state\\">
                             User
                           </span>
@@ -113,13 +113,13 @@ exports[`Backend Text Styles Container renders correctly 1`] = `
                           Edit
                         </a>
                       </Link>
-                      <button onClick={[Function]}>
+                      <button onClick={[Function: onClick]}>
                         <i className=\\"manicon manicon-arrow-up\\" />
                       </button>
-                      <button onClick={[Function]} style={{...}}>
+                      <button onClick={[Function: onClick]} style={{...}}>
                         <i className=\\"manicon manicon-arrow-down\\" />
                       </button>
-                      <button onClick={[Function]}>
+                      <button onClick={[Function: onClick]}>
                         <i className=\\"manicon manicon-x\\" />
                       </button>
                     </div>

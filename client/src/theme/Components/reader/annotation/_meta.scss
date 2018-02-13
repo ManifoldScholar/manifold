@@ -55,7 +55,7 @@
     color: $neutral70;
   }
 
-  datetime, .subtitle {
+  .datetime, .subtitle {
     @include subtitlePrimary;
     margin-top: 2px;
     color: $neutral70;

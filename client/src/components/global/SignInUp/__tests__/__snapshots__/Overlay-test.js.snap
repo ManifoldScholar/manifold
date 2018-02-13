@@ -23,7 +23,7 @@ exports[`Global.SignInUp.Overlay component renders correctly 1`] = `
         <button
           className="overlay-close"
           data-id="overlay-close"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           Cancel
           <i

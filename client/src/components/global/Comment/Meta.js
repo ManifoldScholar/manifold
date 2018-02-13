@@ -48,13 +48,13 @@ export default class CommentMeta extends PureComponent {
                 </span>
               : null}
           </h4>
-          <datetime>
+          <span className="datetime">
             <FormattedDate
               format="distanceInWords"
               date={comment.attributes.createdAt}
             />{" "}
             ago
-          </datetime>
+          </span>
         </div>
         <div className="markers">
           {comment.attributes.deleted

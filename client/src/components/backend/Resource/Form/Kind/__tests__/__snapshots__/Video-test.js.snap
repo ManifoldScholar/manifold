@@ -33,7 +33,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
       >
         Video File
       </label>
-      <Dropzone
+      <react-dropzone
         accept="video/*"
         className="form-dropzone style-square"
         multiple={false}
@@ -69,7 +69,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
             </p>
           </div>
         </div>
-      </Dropzone>
+      </react-dropzone>
     </div>
   </div>
 </div>

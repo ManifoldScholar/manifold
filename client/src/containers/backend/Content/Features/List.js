@@ -153,13 +153,13 @@ class ContentFeaturesList extends PureComponent {
                             )}
                             <span className="subtitle" />
                           </h3>
-                          <datetime className="asset-date">
+                          <span className="asset-date">
                             <FormattedDate
                               prefix="Added"
                               format="MMMM, YYYY"
                               date={feature.attributes.createdAt}
                             />
-                          </datetime>
+                          </span>
                           {index === 0
                             ? <span className="asset-state">Live</span>
                             : null}

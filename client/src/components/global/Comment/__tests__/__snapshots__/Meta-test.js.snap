@@ -21,13 +21,15 @@ exports[`Global.Comment.Detail component renders correctly 1`] = `
     >
       Rowan Ida
     </h4>
-    <datetime>
+    <span
+      className="datetime"
+    >
       <span>
         4 days
       </span>
        
       ago
-    </datetime>
+    </span>
   </div>
   <div
     className="markers"

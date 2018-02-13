@@ -1,10 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { mount } from "enzyme";
 import PasswordForgot from "../PasswordForgot";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Global.SignInUp.PasswordForgot component", () => {
   const store = build.store();
@@ -27,14 +30,14 @@ describe("Global.SignInUp.PasswordForgot component", () => {
   });
 
   it("should trigger handleViewChange callback when show login is clicked", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     handleViewChange.mockClear();
     wrapper.find('[data-id="show-login"]').first().simulate("click");
     expect(handleViewChange).toHaveBeenCalled();
   });
 
   it("should trigger handleViewChange callback when show create is clicked", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     handleViewChange.mockClear();
     wrapper.find('[data-id="show-create"]').first().simulate("click");
     expect(handleViewChange).toHaveBeenCalled();

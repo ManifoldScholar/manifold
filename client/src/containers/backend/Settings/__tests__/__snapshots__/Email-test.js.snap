@@ -127,7 +127,7 @@ exports[`Backend Settings Email Container when delivery method is sendmail rende
           <textarea
             onChange={[Function]}
             placeholder="Sincerely,
-          The Manifold Team"
+The Manifold Team"
             style={
               Object {
                 "height": 100,
@@ -363,7 +363,7 @@ exports[`Backend Settings Email Container when delivery method is smtp renders c
           <textarea
             onChange={[Function]}
             placeholder="Sincerely,
-          The Manifold Team"
+The Manifold Team"
             style={
               Object {
                 "height": 100,

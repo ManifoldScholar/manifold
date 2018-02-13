@@ -109,7 +109,7 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
             >
               Avatar Image
             </label>
-            <Dropzone
+            <react-dropzone
               accept="image/*"
               className="form-dropzone style-square"
               multiple={false}
@@ -145,7 +145,7 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
                   </p>
                 </div>
               </div>
-            </Dropzone>
+            </react-dropzone>
           </div>
         </div>
         <div

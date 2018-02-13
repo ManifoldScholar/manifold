@@ -21,7 +21,7 @@ exports[`Reader.Toc Component renders correctly 1`] = `
               <a
                 className={null}
                 data-id="hide-drawer"
-                href="/read/slug-1/section/undefined#function%20anchor()%20%7B%20%5Bnative%20code%5D%20%7D"
+                href="/read/slug-1/section/undefined#function anchor() { [native code] }"
                 onClick={[Function]}
               />
             </li>
@@ -29,7 +29,7 @@ exports[`Reader.Toc Component renders correctly 1`] = `
               <a
                 className={null}
                 data-id="hide-drawer"
-                href="/read/slug-1/section/undefined#function%20anchor()%20%7B%20%5Bnative%20code%5D%20%7D"
+                href="/read/slug-1/section/undefined#function anchor() { [native code] }"
                 onClick={[Function]}
               />
             </li>

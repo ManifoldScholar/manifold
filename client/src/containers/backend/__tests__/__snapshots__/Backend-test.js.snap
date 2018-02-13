@@ -9,7 +9,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
           <BodyClass className=\\"backend bg-neutral90\\">
             <div>
               <withRouter(ScrollToTop)>
-                <Route render={[Function]}>
+                <Route render={[Function: render]}>
                   <ScrollToTop match={{...}} location={{...}} history={{...}} staticContext={[undefined]} />
                 </Route>
               </withRouter(ScrollToTop)>
@@ -35,10 +35,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                         <nav className=\\"text-nav\\">
                           <ul>
                             <li>
-                              <NavLink isActive={[Function]} activeClassName=\\"active\\" to=\\"/backend\\">
+                              <NavLink isActive={[Function: isProjects]} activeClassName=\\"active\\" to=\\"/backend\\" ariaCurrent=\\"true\\">
                                 <Route path=\\"/backend\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
-                                  <Link to=\\"/backend\\" className={[undefined]} style={[undefined]} replace={false}>
-                                    <a className={[undefined]} style={[undefined]} onClick={[Function]} href=\\"/backend\\">
+                                  <Link to=\\"/backend\\" className={[undefined]} style={[undefined]} aria-current={false} replace={false}>
+                                    <a className={[undefined]} style={[undefined]} aria-current={false} onClick={[Function]} href=\\"/backend\\">
                                       Projects
                                     </a>
                                   </Link>
@@ -46,10 +46,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                               </NavLink>
                             </li>
                             <li>
-                              <NavLink activeClassName=\\"active\\" to=\\"/backend/people\\">
+                              <NavLink activeClassName=\\"active\\" to=\\"/backend/people\\" ariaCurrent=\\"true\\">
                                 <Route path=\\"/backend/people\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
-                                  <Link to=\\"/backend/people\\" className={[undefined]} style={[undefined]} replace={false}>
-                                    <a className={[undefined]} style={[undefined]} onClick={[Function]} href=\\"/backend/people\\">
+                                  <Link to=\\"/backend/people\\" className={[undefined]} style={[undefined]} aria-current={false} replace={false}>
+                                    <a className={[undefined]} style={[undefined]} aria-current={false} onClick={[Function]} href=\\"/backend/people\\">
                                       People
                                     </a>
                                   </Link>
@@ -57,10 +57,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                               </NavLink>
                             </li>
                             <li>
-                              <NavLink activeClassName=\\"active\\" to=\\"/backend/content\\">
+                              <NavLink activeClassName=\\"active\\" to=\\"/backend/content\\" ariaCurrent=\\"true\\">
                                 <Route path=\\"/backend/content\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
-                                  <Link to=\\"/backend/content\\" className={[undefined]} style={[undefined]} replace={false}>
-                                    <a className={[undefined]} style={[undefined]} onClick={[Function]} href=\\"/backend/content\\">
+                                  <Link to=\\"/backend/content\\" className={[undefined]} style={[undefined]} aria-current={false} replace={false}>
+                                    <a className={[undefined]} style={[undefined]} aria-current={false} onClick={[Function]} href=\\"/backend/content\\">
                                       Content
                                     </a>
                                   </Link>
@@ -68,10 +68,10 @@ exports[`Backend Backend Container renders correctly 1`] = `
                               </NavLink>
                             </li>
                             <li>
-                              <NavLink activeClassName=\\"active\\" to=\\"/backend/settings\\">
+                              <NavLink activeClassName=\\"active\\" to=\\"/backend/settings\\" ariaCurrent=\\"true\\">
                                 <Route path=\\"/backend/settings\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
-                                  <Link to=\\"/backend/settings\\" className={[undefined]} style={[undefined]} replace={false}>
-                                    <a className={[undefined]} style={[undefined]} onClick={[Function]} href=\\"/backend/settings\\">
+                                  <Link to=\\"/backend/settings\\" className={[undefined]} style={[undefined]} aria-current={false} replace={false}>
+                                    <a className={[undefined]} style={[undefined]} aria-current={false} onClick={[Function]} href=\\"/backend/settings\\">
                                       Settings
                                     </a>
                                   </Link>
@@ -91,7 +91,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                             </li>
                             <li>
                               <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
-                                <button onClick={[Function]} className=\\"button-avatar\\">
+                                <button onClick={[Function: bound clickHandler]} className=\\"button-avatar\\">
                                   <span className=\\"screen-reader-text\\">
                                     Click to login or open user settings
                                   </span>
@@ -102,20 +102,20 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                   </Avatar>
                                 </button>
                               </UserMenuButton>
-                              <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]}>
+                              <UIPanel id=\\"user\\" visibility={{...}} bodyComponent={[Function: UserMenuBody]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]}>
                                 <div className=\\"panel-hidden\\">
-                                  <UserMenuBody id=\\"user\\" visibility={{...}} bodyComponent={[Function]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]}>
+                                  <UserMenuBody id=\\"user\\" visibility={{...}} bodyComponent={[Function: UserMenuBody]} showLoginOverlay={[Function]} startLogout={[Function]} hideUserMenu={[Function]}>
                                     <nav className=\\"user-menu menu-hidden\\">
                                       <i className=\\"tail\\" />
                                       <ul>
                                         <li>
-                                          <button onClick={[Function]}>
+                                          <button onClick={[Function: bound handleProfileClick]}>
                                             <i className=\\"manicon manicon-person-pencil-simple\\" />
                                             Edit Profile
                                           </button>
                                         </li>
                                         <li>
-                                          <button onClick={[Function]}>
+                                          <button onClick={[Function: bound logout]}>
                                             <i className=\\"manicon manicon-circle-arrow-out-right\\" />
                                             Logout
                                           </button>
@@ -164,7 +164,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                         <li>
                           <ul>
                             <li>
-                              <a onClick={[Function]} href=\\"#\\">
+                              <a onClick={[Function: bound handleLogoutClick]} href=\\"#\\">
                                 Log Out
                               </a>
                             </li>

@@ -7,11 +7,11 @@ exports[`Backend Project Social Wrapper Container renders correctly 1`] = `
       <Project.Social.Wrapper route={{...}} project={{...}}>
         <section>
           <withRouter(Router.Switch('DrawerSwitch)) closeUrl=\\"/backend/project/1/social\\">
-            <Route render={[Function]}>
+            <Route render={[Function: render]}>
               <Router.Switch('DrawerSwitch) closeUrl=\\"/backend/project/1/social\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
                 <DrawerSwitch closeUrl=\\"/backend/project/1/social\\" match={[undefined]} location={{...}} history={{...}} staticContext={[undefined]} wrapperProps={{...}}>
                   <withRouter(Drawer.Wrapper) open={false} closeUrl=\\"/backend/project/1/social\\">
-                    <Route render={[Function]}>
+                    <Route render={[Function: render]}>
                       <Drawer.Wrapper open={false} closeUrl=\\"/backend/project/1/social\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" style=\\"backend\\" entrySide=\\"right\\">
                         <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
                           <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
@@ -26,7 +26,7 @@ exports[`Backend Project Social Wrapper Container renders correctly 1`] = `
             </Route>
           </withRouter(Router.Switch('DrawerSwitch))>
           <Connect(Project.Social.TwitterQueries) project={{...}} match={[undefined]}>
-            <Project.Social.TwitterQueries project={{...}} match={[undefined]} twitterQueries={{...}} twitterQueriesMeta={{...}} dispatch={[Function]} />
+            <Project.Social.TwitterQueries project={{...}} match={[undefined]} twitterQueries={{...}} twitterQueriesMeta={[undefined]} dispatch={[Function]} />
           </Connect(Project.Social.TwitterQueries)>
         </section>
       </Project.Social.Wrapper>

@@ -1,7 +1,9 @@
 import React from "react";
 import ListItem from "../ListItem";
-import { shallow, mount } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
 import renderer from "react-test-renderer";
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Event.ListItem component", () => {
   const entity = {
@@ -26,12 +28,12 @@ describe("Event.ListItem component", () => {
   });
 
   it("renders null without an event", () => {
-    const wrapper = shallow(<ListItem />);
+    const wrapper = Enzyme.shallow(<ListItem />);
     expect(wrapper.type()).toBe(null);
   });
 
   it("triggers the destroyHandler callback when destroy is clicked", () => {
-    const wrapper = mount(
+    const wrapper = Enzyme.mount(
       <ListItem entity={entity} destroyHandler={handleDestroyMock} />
     );
     handleDestroyMock.mockClear();

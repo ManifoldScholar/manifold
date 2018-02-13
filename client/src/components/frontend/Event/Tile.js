@@ -92,13 +92,13 @@ export default class Tile extends Component {
                   </div>
                 : null}
               {this.props.date
-                ? <datetime className="event-date">
+                ? <span className="event-date">
                     <FormattedDate
                       prefix={this.props.datePrefix}
                       format={this.props.dateFormat}
                       date={this.props.date}
                     />
-                  </datetime>
+                  </span>
                 : null}
             </div>
           </div>

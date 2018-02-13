@@ -112,6 +112,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
           <ul>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/resource/1"
                 onClick={[Function]}
@@ -122,6 +123,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/resource/1/variants"
                 onClick={[Function]}
@@ -132,6 +134,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/resource/1/metadata"
                 onClick={[Function]}
@@ -156,6 +159,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
           <ul>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/resource/1"
                 onClick={[Function]}
@@ -166,6 +170,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/resource/1/variants"
                 onClick={[Function]}
@@ -176,6 +181,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/resource/1/metadata"
                 onClick={[Function]}

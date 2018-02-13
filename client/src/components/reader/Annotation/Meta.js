@@ -46,13 +46,13 @@ export default class AnnotationDetail extends PureComponent {
   dateSubtitle() {
     const { annotation } = this.props;
     return (
-      <datetime>
+      <span className="datetime">
         <FormattedDate
           format="distanceInWords"
           date={annotation.attributes.createdAt}
         />{" "}
         ago
-      </datetime>
+      </span>
     );
   }
 

@@ -1,8 +1,10 @@
+jest.mock("react-text-mask", () => () => "ReactTextMask");
+
 import React from "react";
-import { mount } from "enzyme";
 import ProjectGeneralContainer from "../General";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
+import renderer from "react-test-renderer";
 import build from "test/fixtures/build";
 
 describe("Backend Project General Container", () => {
@@ -11,21 +13,19 @@ describe("Backend Project General Container", () => {
   const subject = build.entity.subject("2");
   project.relationships.subjects = [subject];
 
-  const component = mount(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectGeneralContainer project={project} />
-      </Provider>
-    )
+  const component = wrapWithRouter(
+    <Provider store={store}>
+      <ProjectGeneralContainer project={project} />
+    </Provider>
   );
 
+  const snapshot = renderer.create(component).toJSON();
+
   it("renders correctly", () => {
-    let tree = component.debug();
-    expect(tree).toMatchSnapshot();
+    expect(snapshot).toMatchSnapshot();
   });
 
   it("doesn't render to null", () => {
-    let tree = component.debug();
-    expect(tree).not.toBe(null);
+    expect(snapshot).not.toBe(null);
   });
 });

@@ -193,7 +193,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
           >
             Image File
           </label>
-          <Dropzone
+          <react-dropzone
             accept="image/*"
             className="form-dropzone style-square"
             multiple={false}
@@ -229,7 +229,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
                 </p>
               </div>
             </div>
-          </Dropzone>
+          </react-dropzone>
         </div>
       </div>
       <div

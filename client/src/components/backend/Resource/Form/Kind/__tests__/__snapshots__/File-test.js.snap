@@ -13,7 +13,7 @@ exports[`Backend.Resource.Form.File component renders correctly 1`] = `
     >
       File
     </label>
-    <Dropzone
+    <react-dropzone
       className="form-dropzone style-square"
       multiple={false}
       onDrop={[Function]}
@@ -43,7 +43,7 @@ exports[`Backend.Resource.Form.File component renders correctly 1`] = `
           </p>
         </div>
       </div>
-    </Dropzone>
+    </react-dropzone>
   </div>
 </div>
 `;

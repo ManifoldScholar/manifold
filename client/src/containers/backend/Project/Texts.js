@@ -357,13 +357,13 @@ export class ProjectTextsContainer extends PureComponent {
                       {text.attributes.subtitle}
                     </span>
                   </h3>
-                  <datetime className="asset-date">
+                  <span className="asset-date">
                     <FormattedDate
                       prefix="Added"
                       format="MMMM, YYYY"
                       date={text.attributes.createdAt}
                     />
-                  </datetime>
+                  </span>
                   <span className="asset-state">Hidden</span>
                 </div>
               </Link>

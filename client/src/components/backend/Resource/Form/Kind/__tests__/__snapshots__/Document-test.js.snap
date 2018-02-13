@@ -13,7 +13,7 @@ exports[`Backend.Resource.Form.Document component renders correctly 1`] = `
     >
       Document File
     </label>
-    <Dropzone
+    <react-dropzone
       accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,text/*"
       className="form-dropzone style-square"
       multiple={false}
@@ -49,7 +49,7 @@ exports[`Backend.Resource.Form.Document component renders correctly 1`] = `
           </p>
         </div>
       </div>
-    </Dropzone>
+    </react-dropzone>
   </div>
 </div>
 `;
