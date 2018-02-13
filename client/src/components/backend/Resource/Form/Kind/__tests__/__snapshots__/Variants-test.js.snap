@@ -16,7 +16,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
       >
         Variant
       </label>
-      <Dropzone
+      <react-dropzone
         className="form-dropzone style-square"
         multiple={false}
         onDrop={[Function]}
@@ -46,7 +46,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
             </p>
           </div>
         </div>
-      </Dropzone>
+      </react-dropzone>
     </div>
   </div>
   <div
@@ -61,7 +61,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
       >
         Variant
       </label>
-      <Dropzone
+      <react-dropzone
         className="form-dropzone style-square"
         multiple={false}
         onDrop={[Function]}
@@ -91,7 +91,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
             </p>
           </div>
         </div>
-      </Dropzone>
+      </react-dropzone>
     </div>
   </div>
 </div>
@@ -113,7 +113,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
       >
         High Resolution Image
       </label>
-      <Dropzone
+      <react-dropzone
         accept="image/*"
         className="form-dropzone style-square"
         multiple={false}
@@ -149,7 +149,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             </p>
           </div>
         </div>
-      </Dropzone>
+      </react-dropzone>
     </div>
   </div>
   <div
@@ -164,7 +164,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
       >
         Thumbnail Image
       </label>
-      <Dropzone
+      <react-dropzone
         accept="image/*"
         className="form-dropzone style-square"
         multiple={false}
@@ -200,7 +200,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             </p>
           </div>
         </div>
-      </Dropzone>
+      </react-dropzone>
     </div>
   </div>
 </div>
@@ -222,7 +222,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
       >
         Thumbnail Image
       </label>
-      <Dropzone
+      <react-dropzone
         accept="image/*"
         className="form-dropzone style-square"
         multiple={false}
@@ -258,7 +258,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
             </p>
           </div>
         </div>
-      </Dropzone>
+      </react-dropzone>
     </div>
   </div>
 </div>

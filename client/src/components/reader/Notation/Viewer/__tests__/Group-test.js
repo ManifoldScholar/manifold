@@ -1,9 +1,11 @@
 import React from "react";
 import Group from "../Group";
-import { mount } from "enzyme";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Reader.Notation.Viewer.Group component", () => {
   const actions = {
@@ -38,7 +40,7 @@ describe("Reader.Notation.Viewer.Group component", () => {
   );
 
   it("renders correctly", () => {
-    const component = mount(root);
+    const component = Enzyme.mount(root);
     let tree = component.debug();
     expect(tree).toMatchSnapshot();
   });

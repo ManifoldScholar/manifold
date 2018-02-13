@@ -70,13 +70,13 @@ exports[`Frontend.Text.Thumbnail component renders correctly 1`] = `
           />
         </h3>
       </a>
-      <datetime
+      <span
         className="asset-date"
       >
         <span>
           Added April, 2017
         </span>
-      </datetime>
+      </span>
       <div
         className="asset-status"
       >

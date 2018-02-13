@@ -3,7 +3,10 @@ import renderer from "react-test-renderer";
 import DetailedList from "../DetailedList";
 import EmptyMessage from "../EmptyMessage";
 import build from "test/fixtures/build";
-import { shallow } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Reader.Notes.DetailedList Component", () => {
   const sortedAnnotations = [
@@ -35,7 +38,7 @@ describe("Reader.Notes.DetailedList Component", () => {
   });
 
   it("renders an empty message when there are no annotations", () => {
-    const wrapper = shallow(
+    const wrapper = Enzyme.shallow(
       <DetailedList
         sortedAnnotations={[]}
         handleVisitAnnotation={clickMock}

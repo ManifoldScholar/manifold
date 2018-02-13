@@ -64,13 +64,13 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
                       }
                     }
                   />
-                  <datetime
+                  <span
                     className="event-date"
                   >
                     <span>
                       Text Added April 24th, 2017
                     </span>
-                  </datetime>
+                  </span>
                 </div>
               </div>
               <div
@@ -109,13 +109,13 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
                       }
                     }
                   />
-                  <datetime
+                  <span
                     className="event-date"
                   >
                     <span>
                       Text Added April 24th, 2017
                     </span>
-                  </datetime>
+                  </span>
                 </div>
               </div>
               <div

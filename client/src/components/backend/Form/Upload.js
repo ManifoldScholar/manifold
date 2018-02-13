@@ -9,7 +9,7 @@ import get from "lodash/get";
 import setter from "./setter";
 import Instructions from "./Instructions";
 
-class FormUpload extends Component {
+export class FormUpload extends Component {
   static displayName = "Form.Upload";
 
   static propTypes = {

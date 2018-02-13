@@ -1,7 +1,10 @@
 import React from "react";
-import { mount } from "enzyme";
 import renderer from "react-test-renderer";
 import HeaderNotification from "../HeaderNotification";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Global.HeaderNotification component", () => {
   const removeMock = jest.fn();
@@ -22,7 +25,7 @@ describe("Global.HeaderNotification component", () => {
   });
 
   it("should trigger removeNotification callback when close is clicked", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     removeMock.mockClear();
     wrapper.find('[data-id="close"]').first().simulate("click");
     expect(removeMock).toHaveBeenCalled();

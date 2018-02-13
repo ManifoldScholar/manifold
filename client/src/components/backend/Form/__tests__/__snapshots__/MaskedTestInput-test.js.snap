@@ -1,15 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend.Form.MaskedTextInput component renders correctly 1`] = `
-"<Form.Setter('Form.MaskedTextInput) mask={{...}} placeholder=\\"Hold my place\\" onChange={[Function]} label=\\"Label this\\" value=\\"attributes[fake]\\" actions={{...}}>
-  <Form.MaskedTextInput setOther={[Function]} mask={{...}} placeholder=\\"Hold my place\\" onChange={[Function]} label=\\"Label this\\" value=\\"attributes[fake]\\">
-    <div className=\\"form-input\\">
-      <label className=\\"\\">
-        Label this
-      </label>
-      <Instructions instructions={{...}} />
-      <ReactTextMask onChange={[Function]} value=\\"attributes[fake]\\" type=\\"text\\" mask={{...}} placeholder=\\"Hold my place\\" />
-    </div>
-  </Form.MaskedTextInput>
-</Form.Setter('Form.MaskedTextInput)>"
-`;
+exports[`Backend.Form.MaskedTextInput component renders correctly 1`] = `"<div class=\\"form-input\\"><label class=\\"\\">Label this</label>ReactTextMask</div>"`;

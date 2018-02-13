@@ -58,7 +58,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
               Images will be resized to 1280x800 and cropped along the bottom edge.
             </p>
           </div>
-          <Dropzone
+          <react-dropzone
             accept="image/*"
             className="form-dropzone style-landscape"
             multiple={false}
@@ -94,7 +94,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 </p>
               </div>
             </div>
-          </Dropzone>
+          </react-dropzone>
         </div>
       </div>
       <div
@@ -114,7 +114,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           >
             If a cover is set for the project, it will appear over the hero, to the right of the description on the landing page.
           </span>
-          <Dropzone
+          <react-dropzone
             accept="image/*"
             className="form-dropzone style-portrait"
             multiple={false}
@@ -150,7 +150,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
                 </p>
               </div>
             </div>
-          </Dropzone>
+          </react-dropzone>
         </div>
       </div>
       <div
@@ -208,7 +208,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
         >
           The cost of the published edition
         </span>
-        <ReactTextMask
+        <react-text-mask
           mask={[Function]}
           onChange={[Function]}
           placeholder={undefined}

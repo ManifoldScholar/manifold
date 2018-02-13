@@ -59,10 +59,12 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                 >
                   Rowan Ida
                 </h4>
-                <datetime>
+                <span
+                  className="datetime"
+                >
                    
                   ago
-                </datetime>
+                </span>
               </div>
             </section>
             <div>
@@ -115,10 +117,12 @@ exports[`Reader Annotation List Container renders correctly 1`] = `
                 >
                   Rowan Ida
                 </h4>
-                <datetime>
+                <span
+                  className="datetime"
+                >
                    
                   ago
-                </datetime>
+                </span>
               </div>
             </section>
             <div>

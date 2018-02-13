@@ -120,13 +120,13 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
                     className="subtitle"
                   />
                 </h3>
-                <datetime
+                <span
                   className="asset-date"
                 >
                   <span>
                     Added April, 2017
                   </span>
-                </datetime>
+                </span>
                 <span
                   className="asset-state"
                 >

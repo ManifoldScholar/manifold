@@ -123,13 +123,13 @@ class PagesDashboardContainer extends PureComponent {
                             {page.attributes.title}
                             <span className="subtitle" />
                           </h3>
-                          <datetime className="asset-date">
+                          <span className="asset-date">
                             <FormattedDate
                               prefix="Updated"
                               format="MM/DD/YYYY"
                               date={page.attributes.updatedAt}
                             />
-                          </datetime>
+                          </span>
                           {page.attributes.hidden
                             ? <span className="asset-state">
                                 {"hidden"}

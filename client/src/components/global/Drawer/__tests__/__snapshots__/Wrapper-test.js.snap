@@ -3,9 +3,9 @@
 exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
-    <withRouter(Drawer.Wrapper) open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function]}>
-      <Route render={[Function]}>
-        <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function]} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" entrySide=\\"right\\">
+    <withRouter(Drawer.Wrapper) open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]}>
+      <Route render={[Function: render]}>
+        <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" entrySide=\\"right\\">
           <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
             <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
               <span>
@@ -18,7 +18,7 @@ exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
                             <div className=\\"drawer-title\\">
                               wrapper
                             </div>
-                            <div onClick={[Function]} className=\\"close-button-primary\\">
+                            <div onClick={[Function: bound handleLeaveEvent]} className=\\"close-button-primary\\">
                               <span className=\\"close-text\\">
                                 Close
                               </span>

@@ -16,7 +16,7 @@ exports[`Backend.Resource.Form.Audio component renders correctly 1`] = `
       >
         Audio File
       </label>
-      <Dropzone
+      <react-dropzone
         accept="audio/*"
         className="form-dropzone style-square"
         multiple={false}
@@ -52,7 +52,7 @@ exports[`Backend.Resource.Form.Audio component renders correctly 1`] = `
             </p>
           </div>
         </div>
-      </Dropzone>
+      </react-dropzone>
     </div>
   </div>
 </div>

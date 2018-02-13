@@ -306,7 +306,7 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
           <a
             data-id="page-prev"
             href="#pagination-target"
-            onClick={[Function]}
+            onClick={[MockFunction]}
           >
             <i
               className="manicon manicon-arrow-long-left"
@@ -321,7 +321,7 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
         >
           <a
             href="#pagination-target"
-            onClick={[Function]}
+            onClick={[MockFunction]}
           >
             1
           </a>
@@ -331,7 +331,7 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
         >
           <a
             href="#pagination-target"
-            onClick={[Function]}
+            onClick={[MockFunction]}
           >
             2
           </a>
@@ -343,7 +343,7 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
           <a
             data-id="page-next"
             href="#pagination-target"
-            onClick={[Function]}
+            onClick={[MockFunction]}
           >
             <span>
               Next

@@ -1,9 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { mount, shallow } from "enzyme";
 import Overlay from "../Overlay";
 import build from "test/fixtures/build";
 import { Provider } from "react-redux";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Global.SignInUp.Overlay component", () => {
   const store = build.store();
@@ -35,7 +38,7 @@ describe("Global.SignInUp.Overlay component", () => {
   });
 
   it("should trigger hideSignInUpOverlay callback when close overlay is clicked", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     hideOverlayMock.mockClear();
     wrapper
       .find('[data-id="overlay-close"]')

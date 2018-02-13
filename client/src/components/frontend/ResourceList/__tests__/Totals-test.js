@@ -22,7 +22,6 @@ describe("Frontend.ResourceList.Totals Component", () => {
 
   it("doesn't render the count when there is no count", () => {
     const wrapper = renderWithRouter(<Totals count={null} project={project} />);
-    expect(wrapper.find('[data-id="total-container"]')).toHaveLength(1);
     expect(wrapper.find('[data-id="count"]')).toHaveLength(0);
   });
 });

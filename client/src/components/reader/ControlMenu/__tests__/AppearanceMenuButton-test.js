@@ -1,7 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { mount } from "enzyme";
 import AppearanceMenuButton from "../AppearanceMenuButton";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Reader.ControlMenu.AppearanceMenuButton Component", () => {
   const toggleMock = jest.fn();
@@ -15,7 +18,7 @@ describe("Reader.ControlMenu.AppearanceMenuButton Component", () => {
   });
 
   it("should trigger toggleAppearanceMenu callback when toggle is clicked", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     toggleMock.mockClear();
     wrapper.find('[data-id="toggle-appearance"]').simulate("click");
     expect(toggleMock).toHaveBeenCalled();

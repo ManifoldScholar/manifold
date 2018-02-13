@@ -5,7 +5,7 @@ exports[`Backend.Form.Hidden component renders correctly 1`] = `
   className="form-input"
 >
   <input
-    onChange={[Function]}
+    onChange={[MockFunction]}
     type="hidden"
     value="attributes[fake]"
   />

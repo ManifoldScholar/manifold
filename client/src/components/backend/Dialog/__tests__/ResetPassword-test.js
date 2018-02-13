@@ -1,9 +1,12 @@
 import React from "react";
-import { mount } from "enzyme";
 import ResetPassword from "../ResetPassword";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Backend.Dialog.ResetPassword Component", () => {
   const resolveMock = jest.fn();
@@ -16,7 +19,7 @@ describe("Backend.Dialog.ResetPassword Component", () => {
   };
 
   it("renders correctly", () => {
-    const component = mount(
+    const component = Enzyme.mount(
       wrapWithRouter(
         <Provider store={build.store()}>
           <ResetPassword uiProps={uiProps} />

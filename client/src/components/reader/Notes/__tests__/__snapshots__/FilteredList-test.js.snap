@@ -7,13 +7,13 @@ exports[`Reader.Notes.FilteredList Component renders correctly 1`] = `
   >
     <h2
       className="drawer-title"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
       Your Notes
     </h2>
     <button
       className="button-primary"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
       See all
     </button>

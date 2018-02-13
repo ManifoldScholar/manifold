@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { ingestionsAPI, requests } from "api";
@@ -14,7 +14,7 @@ import { Ingestion } from "components/backend";
 
 const { request, flush } = entityStoreActions;
 
-export class IngestionIngest extends PureComponent {
+export class IngestionIngest extends Component {
   static displayName = "ProjectDetail.Text.Ingest";
 
   static propTypes = {

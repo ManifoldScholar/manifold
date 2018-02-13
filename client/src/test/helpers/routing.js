@@ -1,6 +1,9 @@
 import React from "react";
-import { render } from "enzyme";
 import { MemoryRouter } from "react-router-dom";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 export function wrapWithRouter(component) {
   return (
@@ -11,7 +14,7 @@ export function wrapWithRouter(component) {
 }
 
 export function renderWithRouter(component) {
-  return render(wrapWithRouter(component));
+  return Enzyme.render(wrapWithRouter(component));
 }
 
 export default {

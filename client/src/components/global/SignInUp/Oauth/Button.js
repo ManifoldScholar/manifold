@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { oauthActions } from "actions";
 import { get } from "lodash";
 import { providerSetting } from "utils/oauth";
 import HigherOrder from "containers/global/HigherOrder";
 
-class Button extends PureComponent {
+class Button extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     provider: PropTypes.string.isRequired,

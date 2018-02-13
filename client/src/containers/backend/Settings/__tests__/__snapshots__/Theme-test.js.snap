@@ -25,7 +25,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
           >
             Logos are constrained at 40px wide with flexible height. For retina displays, upload logos that are 80px wide.
           </span>
-          <Dropzone
+          <react-dropzone
             accept="image/*"
             className="form-dropzone style-square"
             multiple={false}
@@ -61,7 +61,7 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
                 </p>
               </div>
             </div>
-          </Dropzone>
+          </react-dropzone>
         </div>
       </div>
       <div

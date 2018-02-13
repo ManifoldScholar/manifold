@@ -72,13 +72,13 @@ export default class TextThumbnail extends Component {
                 {this.renderSubtitle(text)}
               </h3>
             </Link>
-            <datetime className="asset-date">
+            <span className="asset-date">
               <FormattedDate
                 prefix="Added"
                 format="MMMM, YYYY"
                 date={text.attributes.createdAt}
               />
-            </datetime>
+            </span>
 
             <div className="asset-status">
               <ul className="asset-interactions">

@@ -223,7 +223,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
         <a
           data-id="page-prev"
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           <i
             className="manicon manicon-arrow-long-left"
@@ -238,7 +238,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
       >
         <a
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           1
         </a>
@@ -248,7 +248,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
       >
         <a
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           2
         </a>
@@ -258,7 +258,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
       >
         <a
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           3
         </a>
@@ -268,7 +268,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
       >
         <a
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           4
         </a>
@@ -280,7 +280,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
         <a
           data-id="page-next"
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           <span>
             Next
@@ -396,7 +396,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
         <a
           data-id="page-prev"
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           <i
             className="manicon manicon-arrow-long-left"
@@ -411,7 +411,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
       >
         <a
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           1
         </a>
@@ -421,7 +421,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
       >
         <a
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           2
         </a>
@@ -431,7 +431,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
       >
         <a
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           3
         </a>
@@ -441,7 +441,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
       >
         <a
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           4
         </a>
@@ -453,7 +453,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
         <a
           data-id="page-next"
           href="#pagination-target"
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           <span>
             Next
