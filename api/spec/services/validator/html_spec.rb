@@ -16,6 +16,14 @@ RSpec.describe Validator::Html do
 
   let(:validator) { Validator::Html.new }
 
+  it "handles ASCII encoding" do
+    pointer = File.open(Rails.root.join('spec','data','ingestion','fragments','ascii_section.html'))
+    doc = Nokogiri::XML(pointer, nil)
+    fragment = doc.css("body").children.to_s.strip
+    expect(fragment.encoding).to be(Encoding::ASCII_8BIT)
+    expect(validator.validate(fragment)).to_not eq ""
+  end
+
   it "should wrap top level siblings in a div element" do
     fragment = "<p>AAA</p><p>BBB</p>"
     valid = "<div><p>AAA</p><p>BBB</p></div>"
