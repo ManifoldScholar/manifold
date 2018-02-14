@@ -76,11 +76,7 @@ const renderChildRoutes = (route, renderOptions) => {
     wrapperProps = Object.assign({}, wrapperProps, options.drawerProps);
   }
 
-  return (
-    <Wrapper {...wrapperProps}>
-      {mapped}
-    </Wrapper>
-  );
+  return <Wrapper {...wrapperProps}>{mapped}</Wrapper>;
 };
 
 export default renderChildRoutes;

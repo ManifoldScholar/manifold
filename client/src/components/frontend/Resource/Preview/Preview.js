@@ -90,14 +90,14 @@ export default class ResourcePreview extends Component {
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}
         >
-          {this.state.overlayOpen
-            ? <GlobalOverlay
-                appearance="overlay-full bg-neutral90"
-                closeCallback={this.closeOverlay}
-              >
-                <PreviewComponent resource={this.props.resource} />
-              </GlobalOverlay>
-            : null}
+          {this.state.overlayOpen ? (
+            <GlobalOverlay
+              appearance="overlay-full bg-neutral90"
+              closeCallback={this.closeOverlay}
+            >
+              <PreviewComponent resource={this.props.resource} />
+            </GlobalOverlay>
+          ) : null}
         </ReactCSSTransitionGroup>
         <div
           className="resource-preview-wrapper"

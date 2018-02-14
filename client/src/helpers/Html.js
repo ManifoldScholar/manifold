@@ -57,7 +57,7 @@ export default class Html extends Component {
   stylesheets() {
     if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
     const stylesheets = this.reduceAssets(".css");
-    return stylesheets.map(stylesheet =>
+    return stylesheets.map(stylesheet => (
       <link
         href={`/${stylesheet}`}
         key={stylesheet}
@@ -66,7 +66,7 @@ export default class Html extends Component {
         type="text/css"
         charSet="UTF-8"
       />
-    );
+    ));
   }
 
   javascripts() {
@@ -76,9 +76,9 @@ export default class Html extends Component {
       if (a === "build/theme.js") return -1;
       return 1;
     });
-    return scripts.map(script =>
+    return scripts.map(script => (
       <script src={`/${script}`} key={script} charSet="UTF-8" />
-    );
+    ));
   }
 
   render() {
@@ -111,16 +111,16 @@ export default class Html extends Component {
         </head>
         <body className={bodyClass}>
           <div id="content" {...contentProps} />
-          {store
-            ? <script
-                dangerouslySetInnerHTML={{
-                  __html: `window.__INITIAL_STATE__=${serialize(
-                    store.getState()
-                  )};`
-                }}
-                charSet="UTF-8"
-              />
-            : null}
+          {store ? (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.__INITIAL_STATE__=${serialize(
+                  store.getState()
+                )};`
+              }}
+              charSet="UTF-8"
+            />
+          ) : null}
           {this.javascripts()}
         </body>
       </html>

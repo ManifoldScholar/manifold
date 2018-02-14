@@ -32,9 +32,7 @@ class KindPicker extends PureComponent {
                 className={buttonClass}
               >
                 <figure>
-                  <figcaption>
-                    {kind}
-                  </figcaption>
+                  <figcaption>{kind}</figcaption>
                   <div className={`resource-icon ${safeKind}`}>
                     <Resource.Icon.Composer kind={safeKind} />
                   </div>

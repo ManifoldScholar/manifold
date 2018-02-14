@@ -21,9 +21,7 @@ export default class UtilityBackLinkPrimary extends Component {
         <div className="container flush">
           <i className="manicon manicon-arrow-left" />
           {this.props.backText}
-          <span>
-            {this.props.title}
-          </span>
+          <span>{this.props.title}</span>
         </div>
       </Link>
     );

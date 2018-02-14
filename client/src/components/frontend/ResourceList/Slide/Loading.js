@@ -26,12 +26,8 @@ export default class ResourceListSlideFigureLoading extends Component {
         >
           <div className="resource-info">
             <i className={`manicon manicon-resource-file`} />
-            <span className="resource-type">
-              {"loading"}
-            </span>
-            <span className="resource-date">
-              {"loading"}
-            </span>
+            <span className="resource-type">{"loading"}</span>
+            <span className="resource-date">{"loading"}</span>
           </div>
         </div>
       </figure>

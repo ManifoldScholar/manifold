@@ -43,11 +43,7 @@ export default class ProjectHero extends Component {
       <div className="project-creator-list">
         <ul>
           {creators.map(creator => {
-            return (
-              <li key={creator.id}>
-                {creator.attributes.fullName}
-              </li>
-            );
+            return <li key={creator.id}>{creator.attributes.fullName}</li>;
           })}
         </ul>
       </div>
@@ -60,16 +56,10 @@ export default class ProjectHero extends Component {
 
     return (
       <div className="project-contributor-list">
-        <span className="label">
-          {"Contributors: "}
-        </span>
+        <span className="label">{"Contributors: "}</span>
         <ul>
           {contributors.map(creator => {
-            return (
-              <li key={creator.id}>
-                {creator.attributes.fullName}
-              </li>
-            );
+            return <li key={creator.id}>{creator.attributes.fullName}</li>;
           })}
         </ul>
       </div>
@@ -111,11 +101,7 @@ export default class ProjectHero extends Component {
     let marker = null;
 
     if (project.attributes.draft) {
-      marker = (
-        <div className="block-label">
-          {"Draft"}
-        </div>
-      );
+      marker = <div className="block-label">{"Draft"}</div>;
     }
 
     return marker;
@@ -148,11 +134,7 @@ export default class ProjectHero extends Component {
       output = <img src={attr.coverStyles.medium} alt="project-cover" />;
 
       if (wrapperClass) {
-        output = (
-          <div className={wrapperClass}>
-            {output}
-          </div>
-        );
+        output = <div className={wrapperClass}>{output}</div>;
       }
     }
 
@@ -186,9 +168,7 @@ export default class ProjectHero extends Component {
             })}
           </ul>
         </nav>
-        <span className="hashtag">
-          {hashtag}
-        </span>
+        <span className="hashtag">{hashtag}</span>
       </section>
     );
   }
@@ -206,19 +186,19 @@ export default class ProjectHero extends Component {
           <i className="manicon manicon-glasses" />
           {"Start Reading"}
         </Link>
-        {publishedTextTocId
-          ? <Link
-              to={lh.link(
-                "readerSection",
-                publishedText.attributes.slug,
-                publishedTextTocId
-              )}
-              className="button-secondary dull"
-            >
-              <i className="manicon manicon-bullet-list" />
-              {"View Contents"}
-            </Link>
-          : null}
+        {publishedTextTocId ? (
+          <Link
+            to={lh.link(
+              "readerSection",
+              publishedText.attributes.slug,
+              publishedTextTocId
+            )}
+            className="button-secondary dull"
+          >
+            <i className="manicon manicon-bullet-list" />
+            {"View Contents"}
+          </Link>
+        ) : null}
       </section>
     );
   }
@@ -235,9 +215,7 @@ export default class ProjectHero extends Component {
         <span className="text">
           {attr.purchaseCallToAction || "Buy Print Version"}
         </span>
-        <span className="tag">
-          {attr.purchasePriceMoney}
-        </span>
+        <span className="tag">{attr.purchasePriceMoney}</span>
       </a>
     );
   }
@@ -260,13 +238,9 @@ export default class ProjectHero extends Component {
             {this.renderProjectImage("image")}
             <div className="project-figure-caption">
               <h1 className="project-title">
-                <span className="title-text">
-                  {attr.title}
-                </span>
+                <span className="title-text">{attr.title}</span>
                 {this.renderProjectStatusMarker()}
-                <span className="subtitle">
-                  {attr.subtitle}
-                </span>
+                <span className="subtitle">{attr.subtitle}</span>
               </h1>
               {this.listMakers()}
             </div>
@@ -274,13 +248,9 @@ export default class ProjectHero extends Component {
           <div className="project-info">
             {this.renderPublishedText("top")}
             <h1 className="project-title">
-              <span className="title-text">
-                {attr.title}
-              </span>
+              <span className="title-text">{attr.title}</span>
               {this.renderProjectStatusMarker()}
-              <span className="subtitle">
-                {attr.subtitle}
-              </span>
+              <span className="subtitle">{attr.subtitle}</span>
             </h1>
             {this.listMakers()}
             {this.renderDescription()}

@@ -58,15 +58,11 @@ export default class LayoutHeader extends PureComponent {
           <nav className="text-nav show-50">
             <ul>
               <li className={projectsActive ? "active" : ""}>
-                <Link to={lh.link("frontend")}>
-                  {"Projects"}
-                </Link>
+                <Link to={lh.link("frontend")}>{"Projects"}</Link>
               </li>
               <HigherOrder.RequireKind requiredKind="any">
                 <li className={followingActive ? "active" : ""}>
-                  <Link to={lh.link("frontendFollowing")}>
-                    {"Following"}
-                  </Link>
+                  <Link to={lh.link("frontendFollowing")}>{"Following"}</Link>
                 </li>
               </HigherOrder.RequireKind>
               {this.visiblePages(this.props).map(page => {

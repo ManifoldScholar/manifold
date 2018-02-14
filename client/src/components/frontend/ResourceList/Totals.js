@@ -21,9 +21,7 @@ export default class ResourceListTotals extends Component {
     return (
       <div className="total-count">
         {`This ${this.props.belongsTo} features `}
-        <span data-id="count">
-          {this.props.count.toLocaleString()}
-        </span>
+        <span data-id="count">{this.props.count.toLocaleString()}</span>
         {" total resources"}
       </div>
     );

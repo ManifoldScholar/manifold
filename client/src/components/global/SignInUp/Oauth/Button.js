@@ -23,10 +23,6 @@ class Button extends Component {
     return this.props.settings !== nextProps.settings;
   }
 
-  openWindow = eventIgnored => {
-    this.props.dispatch(oauthActions.prompt(this.props.provider));
-  };
-
   get oauthSettings() {
     const settingsKey = providerSetting(this.props.provider);
 
@@ -45,20 +41,24 @@ class Button extends Component {
     return `manicon-${this.props.provider}`;
   }
 
+  openWindow = eventIgnored => {
+    this.props.dispatch(oauthActions.prompt(this.props.provider));
+  };
+
   render() {
     if (!this.isEnabled) {
       return null;
     }
 
-    const icon = this.props.hasIcon
-      ? <i className={`manicon ${this.iconClass}`} />
-      : null;
+    const icon = this.props.hasIcon ? (
+      <i className={`manicon ${this.iconClass}`} />
+    ) : null;
 
-    const label = this.props.children
-      ? this.props.children
-      : <span>
-          Log in with {this.props.provider}
-        </span>;
+    const label = this.props.children ? (
+      this.props.children
+    ) : (
+      <span>Log in with {this.props.provider}</span>
+    );
 
     return (
       <button className="button-secondary-dark" onClick={this.openWindow}>

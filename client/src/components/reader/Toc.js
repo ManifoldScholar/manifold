@@ -122,16 +122,16 @@ class Toc extends PureComponent {
           <ul className="toc-list">
             {text.attributes.toc.map(this.visitNode)}
           </ul>
-          {!isEmpty(metadata)
-            ? <div className="toc-footer">
-                <button onClick={this.showMeta}>
-                  <h4>
-                    <i className="manicon manicon-i-round" />
-                    About This Text
-                  </h4>
-                </button>
-              </div>
-            : null}
+          {!isEmpty(metadata) ? (
+            <div className="toc-footer">
+              <button onClick={this.showMeta}>
+                <h4>
+                  <i className="manicon manicon-i-round" />
+                  About This Text
+                </h4>
+              </button>
+            </div>
+          ) : null}
         </nav>
       </Drawer.Wrapper>
     );

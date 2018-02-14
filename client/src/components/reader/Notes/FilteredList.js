@@ -32,14 +32,14 @@ export default class FilteredList extends PureComponent {
         <h2 className="drawer-title" onClick={this.props.handleSeeAllClick}>
           Your Notes
         </h2>
-        {this.props.sortedAnnotations.length > 0
-          ? <button
-              onClick={this.props.handleSeeAllClick}
-              className="button-primary"
-            >
-              See all
-            </button>
-          : null}
+        {this.props.sortedAnnotations.length > 0 ? (
+          <button
+            onClick={this.props.handleSeeAllClick}
+            className="button-primary"
+          >
+            See all
+          </button>
+        ) : null}
       </div>
     );
   }
@@ -73,9 +73,7 @@ export default class FilteredList extends PureComponent {
           filterChangeHandler={this.props.handleFilterChange}
           filter={this.props.filter}
         />
-        <nav>
-          {this.props.loaded ? this.renderList() : null}
-        </nav>
+        <nav>{this.props.loaded ? this.renderList() : null}</nav>
       </div>
     );
   }

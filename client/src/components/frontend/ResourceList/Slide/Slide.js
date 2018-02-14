@@ -34,14 +34,14 @@ export default class ResourceListSlideFigure extends Component {
 
     return (
       <figure>
-        {this.props.enableZoom
-          ? <Resource.Preview resource={this.props.resource}>
-              <div className="zoom-indicator">
-                {this.props.zoomLabel}
-                <i className="manicon manicon-magnify-plus" />
-              </div>
-            </Resource.Preview>
-          : null}
+        {this.props.enableZoom ? (
+          <Resource.Preview resource={this.props.resource}>
+            <div className="zoom-indicator">
+              {this.props.zoomLabel}
+              <i className="manicon manicon-magnify-plus" />
+            </div>
+          </Resource.Preview>
+        ) : null}
         <div
           ref={c => {
             this._figure = c;
@@ -51,9 +51,7 @@ export default class ResourceListSlideFigure extends Component {
         >
           <div className={infoClassNames}>
             <i className={`manicon manicon-resource-${attr.kind}`} />
-            <span className="resource-type">
-              {attr.kind}
-            </span>
+            <span className="resource-type">{attr.kind}</span>
             <span className="resource-date">
               <FormattedDate
                 prefix="Added"

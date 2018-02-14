@@ -13,10 +13,7 @@ describe("Global.Comment.Detail component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
       <Provider store={store}>
-        <Meta
-          creator={creator}
-          comment={comment}
-        />
+        <Meta creator={creator} comment={comment} />
       </Provider>
     );
     let tree = component.toJSON();

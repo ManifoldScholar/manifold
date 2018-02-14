@@ -87,9 +87,9 @@ class PagesDashboardContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
 
         <section className="text-category-list-secondary">
           <div className="text-category">
@@ -130,11 +130,9 @@ class PagesDashboardContainer extends PureComponent {
                               date={page.attributes.updatedAt}
                             />
                           </span>
-                          {page.attributes.hidden
-                            ? <span className="asset-state">
-                                {"hidden"}
-                              </span>
-                            : null}
+                          {page.attributes.hidden ? (
+                            <span className="asset-state">{"hidden"}</span>
+                          ) : null}
                         </div>
                       </Link>
                       <div className="text-category-list-utility">

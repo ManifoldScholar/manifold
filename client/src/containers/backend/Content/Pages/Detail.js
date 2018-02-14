@@ -207,35 +207,33 @@ class PageDetailContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         {isNew ? this.renderNewHeader() : this.renderExistingHeader(page)}
         <section className="backend-panel">
-          {isNew
-            ? null
-            : <aside className="scrollable">
-                <div className="wrapper">
-                  <Navigation.Secondary
-                    links={this.secondaryNavigationLinks(this.props)}
-                  />
-                </div>
-              </aside>}
+          {isNew ? null : (
+            <aside className="scrollable">
+              <div className="wrapper">
+                <Navigation.Secondary
+                  links={this.secondaryNavigationLinks(this.props)}
+                />
+              </div>
+            </aside>
+          )}
           <div className="container">
-            {isNew
-              ? null
-              : <aside className="aside">
-                  <Navigation.Secondary
-                    links={this.secondaryNavigationLinks(this.props)}
-                  />
-                </aside>}
-            {page || isNew
-              ? <div className="panel">
-                  <section>
-                    {this.renderRoutes()}
-                  </section>
-                </div>
-              : null}
+            {isNew ? null : (
+              <aside className="aside">
+                <Navigation.Secondary
+                  links={this.secondaryNavigationLinks(this.props)}
+                />
+              </aside>
+            )}
+            {page || isNew ? (
+              <div className="panel">
+                <section>{this.renderRoutes()}</section>
+              </div>
+            ) : null}
           </div>
         </section>
       </div>

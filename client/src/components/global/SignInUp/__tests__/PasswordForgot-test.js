@@ -32,14 +32,20 @@ describe("Global.SignInUp.PasswordForgot component", () => {
   it("should trigger handleViewChange callback when show login is clicked", () => {
     const wrapper = Enzyme.mount(root);
     handleViewChange.mockClear();
-    wrapper.find('[data-id="show-login"]').first().simulate("click");
+    wrapper
+      .find('[data-id="show-login"]')
+      .first()
+      .simulate("click");
     expect(handleViewChange).toHaveBeenCalled();
   });
 
   it("should trigger handleViewChange callback when show create is clicked", () => {
     const wrapper = Enzyme.mount(root);
     handleViewChange.mockClear();
-    wrapper.find('[data-id="show-create"]').first().simulate("click");
+    wrapper
+      .find('[data-id="show-create"]')
+      .first()
+      .simulate("click");
     expect(handleViewChange).toHaveBeenCalled();
   });
 });

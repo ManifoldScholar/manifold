@@ -37,13 +37,13 @@ export class ReaderSearchMenu extends PureComponent {
           transitionEnterTimeout={500}
           transitionLeaveTimeout={500}
         >
-          {this.props.visibility.search
-            ? <Query
-                setQueryState={this.setQueryState}
-                doSearch={this.doSearch}
-                includeSection
-              />
-            : null}
+          {this.props.visibility.search ? (
+            <Query
+              setQueryState={this.setQueryState}
+              doSearch={this.doSearch}
+              includeSection
+            />
+          ) : null}
         </ReactCSSTransitionGroup>
       </nav>
     );

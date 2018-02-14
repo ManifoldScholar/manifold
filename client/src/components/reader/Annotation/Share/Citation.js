@@ -80,9 +80,7 @@ export default class AnnotationShareEditor extends PureComponent {
         <div>
           <nav className="utility styles">
             <label>Citation Style:</label>
-            <ul>
-              {this.renderStyleButtons()}
-            </ul>
+            <ul>{this.renderStyleButtons()}</ul>
           </nav>
           <div
             className="copyable"
@@ -93,9 +91,7 @@ export default class AnnotationShareEditor extends PureComponent {
             dangerouslySetInnerHTML={{ __html: citations[this.state.style] }}
           />
           <div className="utility">
-            <span className="notice">
-              {copiedText}
-            </span>
+            <span className="notice">{copiedText}</span>
             <div className="buttons">
               <button
                 onClick={this.handleCancel}

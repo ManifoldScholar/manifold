@@ -60,8 +60,9 @@ export default function fetchData(WrappedComponent) {
     log(props) {
       if (process.env.NODE_ENV === "development" && __CLIENT__) {
         ch.notice(
-          `FetchData: ${getDisplayName(WrappedComponent)} [${props.location
-            .key}]`,
+          `FetchData: ${getDisplayName(WrappedComponent)} [${
+            props.location.key
+          }]`,
           "floppy_disk"
         );
       }

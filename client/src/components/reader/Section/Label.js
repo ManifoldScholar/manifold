@@ -47,9 +47,7 @@ export default class Label extends PureComponent {
       <div>
         <div className={fixedLabelClass}>
           <div className="container">
-            <div className="label">
-              {this.props.label}
-            </div>
+            <div className="label">{this.props.label}</div>
           </div>
         </div>
         <div
@@ -59,9 +57,7 @@ export default class Label extends PureComponent {
           }}
         >
           <div className="container">
-            <div className="label">
-              {this.props.label}
-            </div>
+            <div className="label">{this.props.label}</div>
           </div>
         </div>
       </div>

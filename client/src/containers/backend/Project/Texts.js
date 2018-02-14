@@ -147,11 +147,11 @@ export class ProjectTextsContainer extends PureComponent {
   positionInCategory(text) {
     if (this.isPublishedText(text)) return 1;
     if (text.relationships.category) {
-      const index = this.categoryTexts(
-        text.relationships.category
-      ).findIndex(compare => {
-        return compare.id === text.id;
-      });
+      const index = this.categoryTexts(text.relationships.category).findIndex(
+        compare => {
+          return compare.id === text.id;
+        }
+      );
       return index + 1;
     }
     const index = this.uncategorizedTexts().findIndex(compare => {
@@ -353,9 +353,7 @@ export class ProjectTextsContainer extends PureComponent {
                 <div className="asset-description">
                   <h3 className="asset-title">
                     {text.attributes.title}
-                    <span className="subtitle">
-                      {text.attributes.subtitle}
-                    </span>
+                    <span className="subtitle">{text.attributes.subtitle}</span>
                   </h3>
                   <span className="asset-date">
                     <FormattedDate
@@ -372,28 +370,32 @@ export class ProjectTextsContainer extends PureComponent {
                 <Link className="button" to={lh.link("backendText", text.id)}>
                   {"Edit"}
                 </Link>
-                {this.canShowTextUp(text)
-                  ? <button
-                      onClick={event => {
-                        this.handleTextUp(event, text);
-                      }}
-                    >
-                      <i className="manicon manicon-arrow-up" />
-                    </button>
-                  : <button style={{ visibility: "hidden" }}>
-                      <i className="manicon manicon-arrow-up" />
-                    </button>}
-                {this.canShowTextDown(text)
-                  ? <button
-                      onClick={event => {
-                        this.handleTextDown(event, text);
-                      }}
-                    >
-                      <i className="manicon manicon-arrow-down" />
-                    </button>
-                  : <button style={{ visibility: "hidden" }}>
-                      <i className="manicon manicon-arrow-down" />
-                    </button>}
+                {this.canShowTextUp(text) ? (
+                  <button
+                    onClick={event => {
+                      this.handleTextUp(event, text);
+                    }}
+                  >
+                    <i className="manicon manicon-arrow-up" />
+                  </button>
+                ) : (
+                  <button style={{ visibility: "hidden" }}>
+                    <i className="manicon manicon-arrow-up" />
+                  </button>
+                )}
+                {this.canShowTextDown(text) ? (
+                  <button
+                    onClick={event => {
+                      this.handleTextDown(event, text);
+                    }}
+                  >
+                    <i className="manicon manicon-arrow-down" />
+                  </button>
+                ) : (
+                  <button style={{ visibility: "hidden" }}>
+                    <i className="manicon manicon-arrow-down" />
+                  </button>
+                )}
                 <button
                   onClick={event => {
                     this.handleTextDestroy(event, text);
@@ -407,11 +409,7 @@ export class ProjectTextsContainer extends PureComponent {
         );
       });
     }
-    return (
-      <ul className="texts-group">
-        {renderedTexts}
-      </ul>
-    );
+    return <ul className="texts-group">{renderedTexts}</ul>;
   }
 
   render() {
@@ -423,9 +421,9 @@ export class ProjectTextsContainer extends PureComponent {
 
     return (
       <section>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
 
         {this.childRoutes()}
 
@@ -475,28 +473,32 @@ export class ProjectTextsContainer extends PureComponent {
                     >
                       {"edit"}
                     </Link>
-                    {this.canShowCategoryUp(category)
-                      ? <button
-                          onClick={event => {
-                            this.handleCategoryUp(event, category);
-                          }}
-                        >
-                          <i className="manicon manicon-arrow-up" />
-                        </button>
-                      : <button style={{ visibility: "hidden" }}>
-                          <i className="manicon manicon-arrow-up" />
-                        </button>}
-                    {this.canShowCategoryDown(category)
-                      ? <button
-                          onClick={event => {
-                            this.handleCategoryDown(event, category);
-                          }}
-                        >
-                          <i className="manicon manicon-arrow-down" />
-                        </button>
-                      : <button style={{ visibility: "hidden" }}>
-                          <i className="manicon manicon-arrow-down" />
-                        </button>}
+                    {this.canShowCategoryUp(category) ? (
+                      <button
+                        onClick={event => {
+                          this.handleCategoryUp(event, category);
+                        }}
+                      >
+                        <i className="manicon manicon-arrow-up" />
+                      </button>
+                    ) : (
+                      <button style={{ visibility: "hidden" }}>
+                        <i className="manicon manicon-arrow-up" />
+                      </button>
+                    )}
+                    {this.canShowCategoryDown(category) ? (
+                      <button
+                        onClick={event => {
+                          this.handleCategoryDown(event, category);
+                        }}
+                      >
+                        <i className="manicon manicon-arrow-down" />
+                      </button>
+                    ) : (
+                      <button style={{ visibility: "hidden" }}>
+                        <i className="manicon manicon-arrow-down" />
+                      </button>
+                    )}
                     <button
                       onClick={event => {
                         this.handleCategoryDestroy(event, category);

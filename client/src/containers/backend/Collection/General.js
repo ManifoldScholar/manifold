@@ -24,7 +24,8 @@ export class CollectionGeneralContainer extends PureComponent {
           name="backend-collection-update"
           update={collectionsAPI.update}
           create={model =>
-            collectionsAPI.create(this.props.params.projectId, model)}
+            collectionsAPI.create(this.props.params.projectId, model)
+          }
           className="form-secondary"
         >
           <Form.TextInput

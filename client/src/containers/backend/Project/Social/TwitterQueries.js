@@ -82,13 +82,13 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
               Add a New Twitter Query
             </Link>
           </div>
-          {twitterQueries
-            ? <List.SimpleList
-                entities={twitterQueries}
-                entityComponent={TwitterQuery.ListItem}
-                entityComponentProps={{ active }}
-              />
-            : null}
+          {twitterQueries ? (
+            <List.SimpleList
+              entities={twitterQueries}
+              entityComponent={TwitterQuery.ListItem}
+              entityComponentProps={{ active }}
+            />
+          ) : null}
         </nav>
         <Utility.Pagination
           pagination={twitterQueriesMeta.pagination}

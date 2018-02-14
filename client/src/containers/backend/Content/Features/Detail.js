@@ -204,32 +204,32 @@ class FeatureDetailContainer extends PureComponent {
     const previewFeature = this.previewableFeature(this.props);
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         {isNew ? this.newHeader() : this.featureHeader(feature)}
         <section className="backend-panel">
           <div className="container">
-            {feature || isNew
-              ? <div className="panel">
-                  <section>
-                    {previewFeature
-                      ? <div className="form-secondary">
-                          <div className="form-input">
-                            <label>Feature Preview</label>
-                            <span className="instructions">
-                              This is an approximate preview of your feature.
-                              Foreground, background, and markdown will not be
-                              displayed until the feature is saved.
-                            </span>
-                            <Layout.Splash feature={previewFeature} preview />
-                          </div>
-                        </div>
-                      : null}
-                    {this.renderRoutes()}
-                  </section>
-                </div>
-              : null}
+            {feature || isNew ? (
+              <div className="panel">
+                <section>
+                  {previewFeature ? (
+                    <div className="form-secondary">
+                      <div className="form-input">
+                        <label>Feature Preview</label>
+                        <span className="instructions">
+                          This is an approximate preview of your feature.
+                          Foreground, background, and markdown will not be
+                          displayed until the feature is saved.
+                        </span>
+                        <Layout.Splash feature={previewFeature} preview />
+                      </div>
+                    </div>
+                  ) : null}
+                  {this.renderRoutes()}
+                </section>
+              </div>
+            ) : null}
           </div>
         </section>
       </div>

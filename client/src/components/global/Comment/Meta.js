@@ -23,30 +23,33 @@ export default class CommentMeta extends PureComponent {
       <section className="annotation-meta">
         <div>
           <figure className={avatarClass}>
-            {creator.attributes.avatarStyles.smallSquare
-              ? <div
-                  className="image"
-                  style={{
-                    backgroundImage: `url(${creator.attributes.avatarStyles
-                      .smallSquare})`
-                  }}
-                >
-                  <span className="screen-reader-text">
-                    Profile image for {creator.attributes.fullName}
-                  </span>
-                </div>
-              : <div className="no-image">
-                  <i className="manicon manicon-person" />
-                </div>}
+            {creator.attributes.avatarStyles.smallSquare ? (
+              <div
+                className="image"
+                style={{
+                  backgroundImage: `url(${
+                    creator.attributes.avatarStyles.smallSquare
+                  })`
+                }}
+              >
+                <span className="screen-reader-text">
+                  Profile image for {creator.attributes.fullName}
+                </span>
+              </div>
+            ) : (
+              <div className="no-image">
+                <i className="manicon manicon-person" />
+              </div>
+            )}
           </figure>
           <h4 className="author-name">
             {creator.attributes.fullName}
-            {isObject(parent)
-              ? <span className="reply-to">
-                  <i className="manicon manicon-arrow-curved-right" />
-                  Reply to {parent.relationships.creator.attributes.fullName}
-                </span>
-              : null}
+            {isObject(parent) ? (
+              <span className="reply-to">
+                <i className="manicon manicon-arrow-curved-right" />
+                Reply to {parent.relationships.creator.attributes.fullName}
+              </span>
+            ) : null}
           </h4>
           <span className="datetime">
             <FormattedDate
@@ -57,16 +60,16 @@ export default class CommentMeta extends PureComponent {
           </span>
         </div>
         <div className="markers">
-          {comment.attributes.deleted
-            ? <div className="marker secondary">Deleted</div>
-            : null}
+          {comment.attributes.deleted ? (
+            <div className="marker secondary">Deleted</div>
+          ) : null}
           <HigherOrder.RequireKind requiredKind="admin">
-            {comment.attributes.flagsCount > 0
-              ? <div className="marker secondary">
-                  {comment.attributes.flagsCount}
-                  {comment.attributes.flagsCount === 1 ? " flag" : " flags"}
-                </div>
-              : null}
+            {comment.attributes.flagsCount > 0 ? (
+              <div className="marker secondary">
+                {comment.attributes.flagsCount}
+                {comment.attributes.flagsCount === 1 ? " flag" : " flags"}
+              </div>
+            ) : null}
           </HigherOrder.RequireKind>
         </div>
       </section>

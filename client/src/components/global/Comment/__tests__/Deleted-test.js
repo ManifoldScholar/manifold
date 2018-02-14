@@ -12,10 +12,7 @@ describe("Global.Comment.Deleted component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
       <Provider store={store}>
-        <Deleted
-          subject={subject}
-          comment={comment}
-        />
+        <Deleted subject={subject} comment={comment} />
       </Provider>
     );
     let tree = component.toJSON();

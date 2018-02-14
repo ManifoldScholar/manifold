@@ -80,13 +80,13 @@ export class FrontendContainer extends Component {
               this.mainContainer = mainContainer;
             }}
           >
-            {fatalError
-              ? <div className="global-container">
-                  <FatalError error={fatalError} />
-                </div>
-              : <div>
-                  {renderRoutes(this.props.route.routes)}
-                </div>}
+            {fatalError ? (
+              <div className="global-container">
+                <FatalError error={fatalError} />
+              </div>
+            ) : (
+              <div>{renderRoutes(this.props.route.routes)}</div>
+            )}
           </main>
           <Layout.Footer
             pages={this.props.pages}

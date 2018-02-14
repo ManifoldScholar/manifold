@@ -33,14 +33,13 @@ export default class ListSimpleList extends PureComponent {
 
     return (
       <section>
-        {this.props.title
-          ? <header className="section-heading-secondary">
-              <h3>
-                {this.props.title}{" "}
-                <i className={`manicon ${this.props.icon}`} />
-              </h3>
-            </header>
-          : null}
+        {this.props.title ? (
+          <header className="section-heading-secondary">
+            <h3>
+              {this.props.title} <i className={`manicon ${this.props.icon}`} />
+            </h3>
+          </header>
+        ) : null}
         <ul>
           {entities.map(entity => {
             return this.renderEntity(entity);

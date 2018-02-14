@@ -36,9 +36,7 @@ export default class NextSection extends PureComponent {
             : "Next Chapter"}
         </header>
         <h3>
-          <div>
-            {nextSection.name}
-          </div>
+          <div>{nextSection.name}</div>
         </h3>
       </Link>
     );
@@ -48,16 +46,15 @@ export default class NextSection extends PureComponent {
     const typography = this.props.typography;
 
     // Apply a conditional container class that maps to a size in CSS
-    const containerClass = `container-focus container-width-${typography.margins
-      .current}`;
+    const containerClass = `container-focus container-width-${
+      typography.margins.current
+    }`;
 
     if (!this.props.sectionsMap) return null;
     if (!this.props.sectionId) return null;
     return (
       <section className="section-next-section">
-        <div className={containerClass}>
-          {this.renderSectionLink()}
-        </div>
+        <div className={containerClass}>{this.renderSectionLink()}</div>
       </section>
     );
   }

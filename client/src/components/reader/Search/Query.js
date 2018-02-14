@@ -129,102 +129,95 @@ export default class SearchQuery extends PureComponent {
           <button className="manicon manicon-magnify" />
         </div>
         <div className="filters">
-          {showScopeFilter
-            ? <div className="filter">
-                <label className="group-label">
-                  {"Search within:"}
+          {showScopeFilter ? (
+            <div className="filter">
+              <label className="group-label">{"Search within:"}</label>
+              <div className="checkbox-group">
+                {this.props.includeSection ? (
+                  <label className="checkbox">
+                    <input
+                      type="checkbox"
+                      checked={this.state.scope === "section"}
+                      onChange={this.makeScopeHandler("section")}
+                    />
+                    {/* Fake control to allow for custom checkbox styles */}
+                    <div className="control-indicator">
+                      <i className="manicon manicon-check" />
+                    </div>
+                    {"Chapter"}
+                  </label>
+                ) : null}
+                <label className="checkbox">
+                  <input
+                    type="checkbox"
+                    checked={this.state.scope === "text"}
+                    onChange={this.makeScopeHandler("text")}
+                  />
+                  {/* Fake control to allow for custom checkbox styles */}
+                  <div className="control-indicator">
+                    <i className="manicon manicon-check" />
+                  </div>
+                  {"Text"}
                 </label>
-                <div className="checkbox-group">
-                  {this.props.includeSection
-                    ? <label className="checkbox">
-                        <input
-                          type="checkbox"
-                          checked={this.state.scope === "section"}
-                          onChange={this.makeScopeHandler("section")}
-                        />
-                        {/* Fake control to allow for custom checkbox styles */}
-                        <div className="control-indicator">
-                          <i className="manicon manicon-check" />
-                        </div>
-                        {"Chapter"}
-                      </label>
-                    : null}
-                  <label className="checkbox">
-                    <input
-                      type="checkbox"
-                      checked={this.state.scope === "text"}
-                      onChange={this.makeScopeHandler("text")}
-                    />
-                    {/* Fake control to allow for custom checkbox styles */}
-                    <div className="control-indicator">
-                      <i className="manicon manicon-check" />
-                    </div>
-                    {"Text"}
-                  </label>
-                  <label className="checkbox">
-                    <input
-                      type="checkbox"
-                      checked={this.state.scope === "project"}
-                      onChange={this.makeScopeHandler("project")}
-                    />
-                    {/* Fake control to allow for custom checkbox styles */}
-                    <div className="control-indicator">
-                      <i className="manicon manicon-check" />
-                    </div>
-                    {"Project"}
-                  </label>
-                </div>
+                <label className="checkbox">
+                  <input
+                    type="checkbox"
+                    checked={this.state.scope === "project"}
+                    onChange={this.makeScopeHandler("project")}
+                  />
+                  {/* Fake control to allow for custom checkbox styles */}
+                  <div className="control-indicator">
+                    <i className="manicon manicon-check" />
+                  </div>
+                  {"Project"}
+                </label>
               </div>
-            : null}
+            </div>
+          ) : null}
 
-          {showFacetFilter
-            ? <div className="filter">
-                <label className="group-label">
-                  {"Show Results For:"}
+          {showFacetFilter ? (
+            <div className="filter">
+              <label className="group-label">{"Show Results For:"}</label>
+              <div className="checkbox-group">
+                <label className="checkbox">
+                  <input
+                    type="checkbox"
+                    checked={this.existsInState("facets", "All")}
+                    onChange={this.makeFacetHandler("facets", "All")}
+                  />
+                  {/* Fake control to allow for custom checkbox styles */}
+                  <div className="control-indicator">
+                    <i className="manicon manicon-check" />
+                  </div>
+                  {"Everything"}
                 </label>
-                <div className="checkbox-group">
-                  <label className="checkbox">
-                    <input
-                      type="checkbox"
-                      checked={this.existsInState("facets", "All")}
-                      onChange={this.makeFacetHandler("facets", "All")}
-                    />
-                    {/* Fake control to allow for custom checkbox styles */}
-                    <div className="control-indicator">
-                      <i className="manicon manicon-check" />
-                    </div>
-                    {"Everything"}
-                  </label>
-                  <label className="checkbox">
-                    <input
-                      type="checkbox"
-                      checked={this.existsInState("facets", "SearchableNode")}
-                      onChange={this.makeFacetHandler(
-                        "facets",
-                        "SearchableNode"
-                      )}
-                    />
-                    {/* Fake control to allow for custom checkbox styles */}
-                    <div className="control-indicator">
-                      <i className="manicon manicon-check" />
-                    </div>
-                    {"Texts"}
-                  </label>
-                  <label className="checkbox">
-                    <input
-                      type="checkbox"
-                      checked={this.existsInState("facets", "Annotation")}
-                      onChange={this.makeFacetHandler("facets", "Annotation")}
-                    />
-                    {/* Fake control to allow for custom checkbox styles */}
-                    <div className="control-indicator">
-                      <i className="manicon manicon-check" />
-                    </div>
-                    {"Annotations"}
-                  </label>
-                </div>
+                <label className="checkbox">
+                  <input
+                    type="checkbox"
+                    checked={this.existsInState("facets", "SearchableNode")}
+                    onChange={this.makeFacetHandler("facets", "SearchableNode")}
+                  />
+                  {/* Fake control to allow for custom checkbox styles */}
+                  <div className="control-indicator">
+                    <i className="manicon manicon-check" />
+                  </div>
+                  {"Texts"}
+                </label>
+                <label className="checkbox">
+                  <input
+                    type="checkbox"
+                    checked={this.existsInState("facets", "Annotation")}
+                    onChange={this.makeFacetHandler("facets", "Annotation")}
+                  />
+                  {/* Fake control to allow for custom checkbox styles */}
+                  <div className="control-indicator">
+                    <i className="manicon manicon-check" />
+                  </div>
+                  {"Annotations"}
+                </label>
               </div>
-            : null}
+            </div>
+          ) : null}
         </div>
       </form>
     );

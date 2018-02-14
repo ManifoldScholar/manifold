@@ -314,14 +314,15 @@ class NotationViewerList extends PureComponent {
     if (!this.state.entries) return null;
 
     const { textId, sectionId } = this.props;
-    const viewerClass = `notation-viewer container-width-${this.props
-      .containerSize}`;
+    const viewerClass = `notation-viewer container-width-${
+      this.props.containerSize
+    }`;
 
     return (
       <nav className={viewerClass}>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         <ul className="viewer-list" ref={el => (this.listEl = el)}>
           {this.state.entries.map(entry => {
             return (
@@ -338,13 +339,13 @@ class NotationViewerList extends PureComponent {
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}
         >
-          {this.state.previewEntry
-            ? <Notation.Viewer.Preview
-                entry={this.state.previewEntry}
-                actions={this.actions}
-                params={{ textId, sectionId }}
-              />
-            : null}
+          {this.state.previewEntry ? (
+            <Notation.Viewer.Preview
+              entry={this.state.previewEntry}
+              actions={this.actions}
+              params={{ textId, sectionId }}
+            />
+          ) : null}
         </ReactCSSTransitionGroup>
       </nav>
     );

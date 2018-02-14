@@ -49,14 +49,14 @@ export default class ProjectListFollowing extends Component {
               />
             </div>
           </header>
-          {this.props.followedProjects
-            ? <ProjectList.Grid
-                authenticated={this.props.authentication.authenticated}
-                favorites={this.props.authentication.currentUser.favorites}
-                dispatch={this.props.dispatch}
-                projects={this.props.followedProjects}
-              />
-            : null}
+          {this.props.followedProjects ? (
+            <ProjectList.Grid
+              authenticated={this.props.authentication.authenticated}
+              favorites={this.props.authentication.currentUser.favorites}
+              dispatch={this.props.dispatch}
+              projects={this.props.followedProjects}
+            />
+          ) : null}
         </div>
       </section>
     );

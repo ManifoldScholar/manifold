@@ -21,7 +21,10 @@ describe("Global.Overlay component", () => {
   it("should trigger closeCallback callback when close is clicked", () => {
     const wrapper = Enzyme.mount(root);
     closeMock.mockClear();
-    wrapper.find('[data-id="overlay-close"]').first().simulate("click");
+    wrapper
+      .find('[data-id="overlay-close"]')
+      .first()
+      .simulate("click");
     expect(closeMock).toHaveBeenCalled();
   });
 });

@@ -113,7 +113,9 @@ export class FormContainer extends PureComponent {
 
   createKey() {
     const keyLength = 6;
-    return Math.random().toString(36).substr(2, keyLength);
+    return Math.random()
+      .toString(36)
+      .substr(2, keyLength);
   }
 
   update() {
@@ -214,14 +216,14 @@ export class FormContainer extends PureComponent {
           message="You may have unsaved changes. Do you want to leave without saving your changes?"
         />
 
-        {this.props.groupErrors === true && this.props.errors
-          ? <GlobalForm.Errorable
-              containerStyle={this.props.groupErrorsStyle}
-              className="form-input form-error-grouped"
-              name="*"
-              errors={this.props.errors}
-            />
-          : null}
+        {this.props.groupErrors === true && this.props.errors ? (
+          <GlobalForm.Errorable
+            containerStyle={this.props.groupErrorsStyle}
+            className="form-input form-error-grouped"
+            name="*"
+            errors={this.props.errors}
+          />
+        ) : null}
         <form
           onSubmit={this.handleSubmit}
           className={this.props.className}

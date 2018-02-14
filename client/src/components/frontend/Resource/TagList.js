@@ -58,9 +58,7 @@ export default class ResourceTagList extends Component {
         onMouseOver={this.stopPropagation}
         onClick={this.stopPropagation}
       >
-        <ul>
-          {this.mapTagsToLinks(this.props.resource)}
-        </ul>
+        <ul>{this.mapTagsToLinks(this.props.resource)}</ul>
       </nav>
     );
   }

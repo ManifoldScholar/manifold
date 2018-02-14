@@ -102,13 +102,13 @@ export default class Header extends Component {
             toggleReaderMenu={this.panelToggleHandler("readerReturn")}
           />
           {this.renderContentsButton(this.props.text.attributes.toc)}
-          {this.props.section
-            ? <TextTitles
-                textTitle={this.props.text.attributes.title}
-                sectionTitle={this.props.section.attributes.name}
-                showSection={!this.props.scrollAware.top}
-              />
-            : null}
+          {this.props.section ? (
+            <TextTitles
+              textTitle={this.props.text.attributes.title}
+              sectionTitle={this.props.section.attributes.name}
+              showSection={!this.props.scrollAware.top}
+            />
+          ) : null}
           <nav className="menu-buttons">
             <ul>
               <HigherOrder.RequireKind requiredKind={"any"}>

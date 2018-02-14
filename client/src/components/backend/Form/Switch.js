@@ -62,11 +62,7 @@ class FormSwitch extends Component {
 
     const labelClasses = classnames(this.props.labelPos, this.props.labelClass);
     const wrapperClasses = classnames("form-input", this.props.className);
-    const label = (
-      <label className={labelClasses}>
-        {this.props.label}
-      </label>
-    );
+    const label = <label className={labelClasses}>{this.props.label}</label>;
 
     return (
       <div className={wrapperClasses}>

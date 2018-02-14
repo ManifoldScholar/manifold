@@ -73,14 +73,14 @@ class AnnotationPopupSecondaryShare extends PureComponent {
         secondary={this.props.secondary}
         direction={this.props.direction}
       >
-        {this.canCite()
-          ? <Button
-              onClick={this.props.cite}
-              requiredKind="any"
-              label="Cite"
-              iconClass="manicon-quotes-left"
-            />
-          : null}
+        {this.canCite() ? (
+          <Button
+            onClick={this.props.cite}
+            requiredKind="any"
+            label="Cite"
+            iconClass="manicon-quotes-left"
+          />
+        ) : null}
         <TwitterButton
           url={this.url()}
           message={this.message()}
@@ -89,17 +89,17 @@ class AnnotationPopupSecondaryShare extends PureComponent {
           <i className="manicon manicon-twitter" />
           {"Twitter"}
         </TwitterButton>
-        {this.facebookAppId()
-          ? <FacebookButton
-              url={this.url()}
-              message={this.message()}
-              windowOptions={this.twitterWindowOptions}
-              appId={this.facebookAppId()}
-            >
-              <i className="manicon manicon-facebook" />
-              {"Facebook"}
-            </FacebookButton>
-          : null}
+        {this.facebookAppId() ? (
+          <FacebookButton
+            url={this.url()}
+            message={this.message()}
+            windowOptions={this.twitterWindowOptions}
+            appId={this.facebookAppId()}
+          >
+            <i className="manicon manicon-facebook" />
+            {"Facebook"}
+          </FacebookButton>
+        ) : null}
         <Button
           onClick={this.props.back}
           requiredKind="any"

@@ -156,9 +156,9 @@ export class TextWrapperContainer extends PureComponent {
     if (!text) return null;
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         <Navigation.DetailHeader
           type="text"
           breadcrumb={[
@@ -189,9 +189,7 @@ export class TextWrapperContainer extends PureComponent {
                 links={this.secondaryNavigationLinks(text)}
               />
             </aside>
-            <div className="panel">
-              {this.renderRoutes()}
-            </div>
+            <div className="panel">{this.renderRoutes()}</div>
           </div>
         </section>
       </div>

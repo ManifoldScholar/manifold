@@ -62,9 +62,7 @@ class FormMaskedTextInput extends Component {
 
     return (
       <div className="form-input">
-        <label className={labelClass}>
-          {this.props.label}
-        </label>
+        <label className={labelClass}>{this.props.label}</label>
         <Instructions instructions={this.props.instructions} />
         <MaskedInput
           onChange={this.props.onChange}

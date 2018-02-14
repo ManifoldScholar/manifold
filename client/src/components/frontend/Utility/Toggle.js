@@ -34,9 +34,9 @@ export default class Toggle extends Component {
 
     return (
       <div key={option.label} className={optionClasses}>
-        {option.iconClass
-          ? <i className={`manicon ${option.iconClass}`} />
-          : null}
+        {option.iconClass ? (
+          <i className={`manicon ${option.iconClass}`} />
+        ) : null}
         {option.label}
       </div>
     );

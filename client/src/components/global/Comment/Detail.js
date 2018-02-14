@@ -142,48 +142,40 @@ export default class CommentDetail extends PureComponent {
                 requiredAbility={"update"}
               >
                 <li>
-                  <button onClick={this.startEdit}>
-                    {"Edit"}
-                  </button>
+                  <button onClick={this.startEdit}>{"Edit"}</button>
                 </li>
               </HigherOrder.RequireAbility>
               <HigherOrder.RequireAbility
                 entity={comment}
                 requiredAbility={"delete"}
               >
-                {!comment.attributes.deleted
-                  ? <li>
-                      <button onClick={this.handleDelete}>
-                        {"Delete"}
-                      </button>
-                    </li>
-                  : null}
+                {!comment.attributes.deleted ? (
+                  <li>
+                    <button onClick={this.handleDelete}>{"Delete"}</button>
+                  </li>
+                ) : null}
               </HigherOrder.RequireAbility>
-              {comment.attributes.deleted
-                ? <li>
-                    <button onClick={this.handleRestore}>
-                      {"Restore"}
-                    </button>
-                  </li>
-                : null}
-              {comment.attributes.deleted
-                ? <li>
-                    <button onClick={this.handleDestroy}>
-                      {"Destroy"}
-                    </button>
-                  </li>
-                : null}
-              {comment.attributes.flagged
-                ? <li>
-                    <button className="secondary" onClick={this.handleUnflag}>
-                      {"Unflag"}
-                    </button>
-                  </li>
-                : <li>
-                    <button onClick={this.handleFlag}>
-                      {"Flag"}
-                    </button>
-                  </li>}
+              {comment.attributes.deleted ? (
+                <li>
+                  <button onClick={this.handleRestore}>{"Restore"}</button>
+                </li>
+              ) : null}
+              {comment.attributes.deleted ? (
+                <li>
+                  <button onClick={this.handleDestroy}>{"Destroy"}</button>
+                </li>
+              ) : null}
+              {comment.attributes.flagged ? (
+                <li>
+                  <button className="secondary" onClick={this.handleUnflag}>
+                    {"Unflag"}
+                  </button>
+                </li>
+              ) : (
+                <li>
+                  <button onClick={this.handleFlag}>{"Flag"}</button>
+                </li>
+              )}
             </ul>
             {this.renderEditor()}
           </nav>

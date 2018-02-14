@@ -1,4 +1,5 @@
 export default {
+  /* eslint-disable no-unused-vars */
   update(id = null, settings) {
     return {
       endpoint: `/api/v1/settings`,
@@ -8,6 +9,7 @@ export default {
       }
     };
   },
+  /* eslint-enable no-unused-vars */
 
   show() {
     return {

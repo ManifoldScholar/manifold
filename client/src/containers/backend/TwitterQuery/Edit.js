@@ -114,15 +114,13 @@ export class TwitterQueryEditContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         <header className="drawer-header">
           <h2 className="heading-quaternary">
             <i className="manicon manicon-twitter" />
-            <span>
-              {twitterQuery.attributes.displayName}
-            </span>
+            <span>{twitterQuery.attributes.displayName}</span>
           </h2>
           <div className="buttons-bare-vertical">
             <button

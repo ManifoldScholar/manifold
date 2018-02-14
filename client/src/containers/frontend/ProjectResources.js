@@ -134,9 +134,9 @@ class ProjectResourcesContainer extends Component {
     return (
       <div>
         <HeadContent
-          title={`View \u201c${project.attributes
-            .title}\u201d Resources on ${settings.attributes.general
-            .installationName}`}
+          title={`View \u201c${project.attributes.title}\u201d Resources on ${
+            settings.attributes.general.installationName
+          }`}
           description={project.attributes.description}
           image={project.attributes.heroStyles.medium}
         />
@@ -146,16 +146,16 @@ class ProjectResourcesContainer extends Component {
             title={project.attributes.title}
           />
         </section>
-        {this.props.resources
-          ? <Project.Resources
-              project={project}
-              resources={this.props.resources}
-              pagination={this.props.meta.pagination}
-              paginationClickHandler={this.pageChangeHandlerCreator}
-              filterChange={this.filterChange}
-              initialFilterState={initialFilter}
-            />
-          : null}
+        {this.props.resources ? (
+          <Project.Resources
+            project={project}
+            resources={this.props.resources}
+            pagination={this.props.meta.pagination}
+            paginationClickHandler={this.pageChangeHandlerCreator}
+            filterChange={this.filterChange}
+            initialFilterState={initialFilter}
+          />
+        ) : null}
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
             link={lh.link("frontendProject", project.attributes.slug)}

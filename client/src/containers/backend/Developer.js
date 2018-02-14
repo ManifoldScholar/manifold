@@ -39,11 +39,7 @@ export class DeveloperContainer extends PureComponent {
   messages() {
     if (!this.props.messages) return null;
     return this.props.messages.map(msg => {
-      return (
-        <div key={msg}>
-          {JSON.stringify(msg)}
-        </div>
-      );
+      return <div key={msg}>{JSON.stringify(msg)}</div>;
     });
   }
 
@@ -68,9 +64,7 @@ export class DeveloperContainer extends PureComponent {
                 Close websocket connection
               </button>
             </div>
-            <div style={{ border: "1px solid red" }}>
-              {this.messages()}
-            </div>
+            <div style={{ border: "1px solid red" }}>{this.messages()}</div>
           </div>
         </section>
       </div>

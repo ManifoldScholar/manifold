@@ -21,11 +21,7 @@ export default class TextThumbnail extends Component {
 
   renderSubtitle(text) {
     // if (!text.attributes.subtitle) return null;
-    return (
-      <span className="subtitle">
-        {text.attributes.subtitle}
-      </span>
-    );
+    return <span className="subtitle">{text.attributes.subtitle}</span>;
   }
 
   // Since we only have demo icons at this point, thumbnail can either be an image or a
@@ -58,9 +54,9 @@ export default class TextThumbnail extends Component {
         <div className="asset-link">
           <Link to={lh.link("reader", this.props.text.attributes.slug)}>
             <figure className="asset-image">
-              {text.attributes.age <= 30
-                ? <i className="manicon manicon-new" />
-                : null}
+              {text.attributes.age <= 30 ? (
+                <i className="manicon manicon-new" />
+              ) : null}
               {this.renderThumbnail(text)}
             </figure>
           </Link>

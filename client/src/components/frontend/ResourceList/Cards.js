@@ -21,9 +21,7 @@ export default class ResourceListCards extends PureComponent {
       <div>
         <nav className="resource-list">
           <div className="resource-count">
-            <span>
-              {this.props.resources.length.toLocaleString()}
-            </span>
+            <span>{this.props.resources.length.toLocaleString()}</span>
             {" Resources Shown"}
           </div>
           <ul>
@@ -38,12 +36,12 @@ export default class ResourceListCards extends PureComponent {
               );
             })}
           </ul>
-          {this.props.pagination
-            ? <Utility.Pagination
-                paginationClickHandler={this.props.paginationClickHandler}
-                pagination={this.props.pagination}
-              />
-            : null}
+          {this.props.pagination ? (
+            <Utility.Pagination
+              paginationClickHandler={this.props.paginationClickHandler}
+              pagination={this.props.pagination}
+            />
+          ) : null}
         </nav>
       </div>
     );

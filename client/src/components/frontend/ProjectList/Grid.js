@@ -81,12 +81,12 @@ export default class ProjectListGrid extends Component {
             );
           })}
         </ReactCSSTransitionGroup>
-        {this.props.pagination
-          ? <Utility.Pagination
-              paginationClickHandler={this.props.paginationClickHandler}
-              pagination={this.props.pagination}
-            />
-          : null}
+        {this.props.pagination ? (
+          <Utility.Pagination
+            paginationClickHandler={this.props.paginationClickHandler}
+            pagination={this.props.pagination}
+          />
+        ) : null}
       </nav>
     );
   }

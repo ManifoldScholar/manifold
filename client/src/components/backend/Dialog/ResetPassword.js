@@ -159,40 +159,36 @@ class ResetPasswordWrapper extends PureComponent {
     return (
       <div>
         <header className="dialog-header-small">
-          <h2>
-            {this.props.uiProps.heading}
-          </h2>
+          <h2>{this.props.uiProps.heading}</h2>
         </header>
 
-        {this.props.uiProps.message
-          ? <p>
-              {this.props.uiProps.message}
-            </p>
-          : null}
-        {this.state.editing
-          ? this.renderResetForm()
-          : <div className="form-input">
-              <button
-                onClick={event =>
-                  this.handleStateChange(event, "confirm", true)}
-                className="button-secondary outlined"
-              >
-                Generate new password
-              </button>
-              <button
-                onClick={event =>
-                  this.handleStateChange(event, "editing", true)}
-                className="button-secondary outlined"
-              >
-                Set new password
-              </button>
-              <button
-                className="button-secondary dull outlined"
-                onClick={event => this.handleRejectClick(event)}
-              >
-                Cancel
-              </button>
-            </div>}
+        {this.props.uiProps.message ? (
+          <p>{this.props.uiProps.message}</p>
+        ) : null}
+        {this.state.editing ? (
+          this.renderResetForm()
+        ) : (
+          <div className="form-input">
+            <button
+              onClick={event => this.handleStateChange(event, "confirm", true)}
+              className="button-secondary outlined"
+            >
+              Generate new password
+            </button>
+            <button
+              onClick={event => this.handleStateChange(event, "editing", true)}
+              className="button-secondary outlined"
+            >
+              Set new password
+            </button>
+            <button
+              className="button-secondary dull outlined"
+              onClick={event => this.handleRejectClick(event)}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
     );
   }

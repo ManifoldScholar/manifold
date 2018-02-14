@@ -18,9 +18,7 @@ export default class Group extends PureComponent {
     return (
       <li className="selection-list separated">
         <div className="selection-group-heading">
-          <h2>
-            {this.props.header}
-          </h2>
+          <h2>{this.props.header}</h2>
         </div>
         <ul>
           {this.props.annotations.map(annotation => {

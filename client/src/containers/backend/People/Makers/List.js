@@ -102,18 +102,18 @@ export class MakersListContainer extends PureComponent {
           </h3>
         </header>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
-        {makers
-          ? <List.Searchable
-              entities={makers}
-              singularUnit="maker"
-              pluralUnit="makers"
-              pagination={makersMeta.pagination}
-              paginationClickHandler={this.pageChangeHandlerCreator}
-              entityComponent={Maker.ListItem}
-              entityComponentProps={{ active }}
-              filterChangeHandler={this.filterChangeHandler}
-            />
-          : null}
+        {makers ? (
+          <List.Searchable
+            entities={makers}
+            singularUnit="maker"
+            pluralUnit="makers"
+            pagination={makersMeta.pagination}
+            paginationClickHandler={this.pageChangeHandlerCreator}
+            entityComponent={Maker.ListItem}
+            entityComponentProps={{ active }}
+            filterChangeHandler={this.filterChangeHandler}
+          />
+        ) : null}
       </div>
     );
   }

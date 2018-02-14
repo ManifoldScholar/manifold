@@ -62,61 +62,51 @@ export default class Tile extends Component {
         <div className={tileClass}>
           <div className="event-data">
             <div>
-              {this.props.iconClass
-                ? <i className={this.props.iconClass} />
-                : null}
-              {this.props.title
-                ? <h5
-                    className="event-title"
-                    dangerouslySetInnerHTML={{ __html: this.props.title }}
+              {this.props.iconClass ? (
+                <i className={this.props.iconClass} />
+              ) : null}
+              {this.props.title ? (
+                <h5
+                  className="event-title"
+                  dangerouslySetInnerHTML={{ __html: this.props.title }}
+                />
+              ) : null}
+              {this.props.subtitle ? (
+                <span className="event-subtitle">{this.props.subtitle}</span>
+              ) : null}
+              {this.props.preAttribution ? (
+                <div className="event-user">{this.props.preAttribution}</div>
+              ) : null}
+              {this.props.content ? (
+                <div className="event-content">{this.props.content}</div>
+              ) : null}
+              {this.props.postAttribution ? (
+                <div className="event-user">{this.props.postAttribution}</div>
+              ) : null}
+              {this.props.date ? (
+                <span className="event-date">
+                  <FormattedDate
+                    prefix={this.props.datePrefix}
+                    format={this.props.dateFormat}
+                    date={this.props.date}
                   />
-                : null}
-              {this.props.subtitle
-                ? <span className="event-subtitle">
-                    {this.props.subtitle}
-                  </span>
-                : null}
-              {this.props.preAttribution
-                ? <div className="event-user">
-                    {this.props.preAttribution}
-                  </div>
-                : null}
-              {this.props.content
-                ? <div className="event-content">
-                    {this.props.content}
-                  </div>
-                : null}
-              {this.props.postAttribution
-                ? <div className="event-user">
-                    {this.props.postAttribution}
-                  </div>
-                : null}
-              {this.props.date
-                ? <span className="event-date">
-                    <FormattedDate
-                      prefix={this.props.datePrefix}
-                      format={this.props.dateFormat}
-                      date={this.props.date}
-                    />
-                  </span>
-                : null}
+                </span>
+              ) : null}
             </div>
           </div>
-          {!this.props.hideLink
-            ? <div className="event-prompt">
-                {this.renderLink()}
-              </div>
-            : null}
+          {!this.props.hideLink ? (
+            <div className="event-prompt">{this.renderLink()}</div>
+          ) : null}
         </div>
-        {this.props.destroyCallback
-          ? <div
-              className="utility"
-              data-id={"destroy"}
-              onClick={this.props.destroyCallback}
-            >
-              <i className="manicon manicon-trashcan" />
-            </div>
-          : null}
+        {this.props.destroyCallback ? (
+          <div
+            className="utility"
+            data-id={"destroy"}
+            onClick={this.props.destroyCallback}
+          >
+            <i className="manicon manicon-trashcan" />
+          </div>
+        ) : null}
       </li>
     );
   }

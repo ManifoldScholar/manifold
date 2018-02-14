@@ -34,9 +34,7 @@ export default class TwitterQueryListItem extends PureComponent {
             <figure>
               <i className="manicon manicon-twitter" />
             </figure>
-            <h3 className="name large">
-              {query.attributes.query}
-            </h3>
+            <h3 className="name large">{query.attributes.query}</h3>
           </header>
           <span className={labelClasses}>
             <span className="specifier dull">

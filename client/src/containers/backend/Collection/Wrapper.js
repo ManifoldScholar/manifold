@@ -92,8 +92,9 @@ export class CollectionWrapperContainer extends PureComponent {
       level: 0,
       id: `COLLECTION_DESTROYED_${this.props.collection.id}`,
       heading: "The collection has been destroyed.",
-      body: `${this.props.collection.attributes
-        .title} has passed into the endless night.`,
+      body: `${
+        this.props.collection.attributes.title
+      } has passed into the endless night.`,
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -161,9 +162,9 @@ export class CollectionWrapperContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         <Navigation.DetailHeader
           type="collection"
           breadcrumb={[
@@ -194,9 +195,7 @@ export class CollectionWrapperContainer extends PureComponent {
                 links={this.secondaryNavigationLinks(collection)}
               />
             </aside>
-            <div className="panel">
-              {this.renderRoutes()}
-            </div>
+            <div className="panel">{this.renderRoutes()}</div>
           </div>
         </section>
       </div>

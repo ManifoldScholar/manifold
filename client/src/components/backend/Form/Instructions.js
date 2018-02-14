@@ -14,11 +14,7 @@ export default class Instructions extends PureComponent {
   renderInstructions() {
     const { instructions } = this.props;
     if (isString(instructions)) {
-      return (
-        <span className="instructions">
-          {instructions}
-        </span>
-      );
+      return <span className="instructions">{instructions}</span>;
     }
     return instructions;
   }

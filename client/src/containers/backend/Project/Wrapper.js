@@ -174,9 +174,9 @@ export class ProjectWrapperContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         <Navigation.DetailHeader
           type="project"
           breadcrumb={[{ path: lh.link("backend"), label: "ALL PROJECTS" }]}
@@ -198,9 +198,7 @@ export class ProjectWrapperContainer extends PureComponent {
                 links={this.secondaryNavigationLinks(project)}
               />
             </aside>
-            <div className="panel">
-              {this.renderRoutes()}
-            </div>
+            <div className="panel">{this.renderRoutes()}</div>
           </div>
         </section>
       </div>
