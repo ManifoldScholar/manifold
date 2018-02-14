@@ -5,7 +5,8 @@ module Validator
   # structure will work with ReactDom.
   class Html
     def validate(html)
-      fragment = Nokogiri::HTML.fragment(html)
+      source = html.encoding == Encoding::ASCII_8BIT ? html.encode("UTF-8") : html
+      fragment = Nokogiri::HTML.fragment(source)
       fragment = ensure_one_parent_node(fragment)
       ensure_valid_parent_nodes(fragment)
       strip_invalid_children(fragment)
