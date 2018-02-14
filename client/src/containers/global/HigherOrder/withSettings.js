@@ -9,13 +9,10 @@ function getDisplayName(WrappedComponent) {
 }
 
 export default function withSettings(WrappedComponent) {
-  const displayName = `HigherOrder.WithSettings('${getDisplayName(
-    WrappedComponent
-  )})`;
+  const displayName = `WithSettings('${getDisplayName(WrappedComponent)})`;
 
   class WithSettings extends React.PureComponent {
     static displayName = displayName;
-
     static WrappedComponent = WrappedComponent;
 
     static mapStateToProps = state => {
