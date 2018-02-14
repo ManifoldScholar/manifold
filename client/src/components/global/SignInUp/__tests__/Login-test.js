@@ -36,14 +36,20 @@ describe("Global.SignInUp.Login component", () => {
   it("should trigger handleViewChange callback when show forgot is clicked", () => {
     const wrapper = Enzyme.mount(root);
     handleViewChange.mockClear();
-    wrapper.find('[data-id="show-forgot"]').first().simulate("click");
+    wrapper
+      .find('[data-id="show-forgot"]')
+      .first()
+      .simulate("click");
     expect(handleViewChange).toHaveBeenCalled();
   });
 
   it("should trigger handleViewChange callback when show create is clicked", () => {
     const wrapper = Enzyme.mount(root);
     handleViewChange.mockClear();
-    wrapper.find('[data-id="show-create"]').first().simulate("click");
+    wrapper
+      .find('[data-id="show-create"]')
+      .first()
+      .simulate("click");
     expect(handleViewChange).toHaveBeenCalled();
   });
 });

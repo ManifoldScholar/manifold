@@ -6,11 +6,7 @@ import Enzyme from "enzyme";
 Enzyme.configure({ adapter: new Adapter() });
 
 export function wrapWithRouter(component) {
-  return (
-    <MemoryRouter>
-      {component}
-    </MemoryRouter>
-  );
+  return <MemoryRouter>{component}</MemoryRouter>;
 }
 
 export function renderWithRouter(component) {

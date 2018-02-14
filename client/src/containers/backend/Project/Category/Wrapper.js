@@ -12,9 +12,7 @@ class ProjectCategoryWrapperContainer extends Component {
 
   render() {
     return (
-      <div>
-        {childRoutes(this.props.route, { childProps: this.props })}
-      </div>
+      <div>{childRoutes(this.props.route, { childProps: this.props })}</div>
     );
   }
 }

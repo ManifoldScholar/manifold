@@ -22,7 +22,8 @@ export class ResourceVariantsContainer extends PureComponent {
           name="backend-resource-update"
           update={resourcesAPI.update}
           create={model =>
-            resourcesAPI.create(this.props.params.projectId, model)}
+            resourcesAPI.create(this.props.params.projectId, model)
+          }
           className="form-secondary"
         >
           <Resource.Form.Kind.Variants

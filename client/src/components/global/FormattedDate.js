@@ -34,10 +34,6 @@ export default class FormattedDate extends Component {
 
   render() {
     if (!this.props.date) return null;
-    return (
-      <span>
-        {this.value()}
-      </span>
-    );
+    return <span>{this.value()}</span>;
   }
 }

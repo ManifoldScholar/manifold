@@ -30,6 +30,10 @@ export class IngestionNewContainer extends PureComponent {
     }
   }
 
+  get textId() {
+    return this.props.text.id;
+  }
+
   redirectToIngestion(ingestionId) {
     const path = lh.link(
       "backendTextIngestionIngest",
@@ -37,10 +41,6 @@ export class IngestionNewContainer extends PureComponent {
       ingestionId
     );
     this.props.history.push(path, { back: this.props.match.url });
-  }
-
-  get textId() {
-    return this.props.text.id;
   }
 
   render() {

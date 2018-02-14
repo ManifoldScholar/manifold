@@ -43,7 +43,9 @@ describe("setter higher order component", () => {
   describe("applied to a component with a name prop", () => {
     const component = renderer.create(settable);
     const tree = component.toJSON();
-    const wrapper = Enzyme.shallow(settable).first().shallow();
+    const wrapper = Enzyme.shallow(settable)
+      .first()
+      .shallow();
     const instance = wrapper.instance();
     const props = instance.props;
 

@@ -116,33 +116,30 @@ class DialogWrapper extends PureComponent {
         transitionAppearTimeout={1}
         transitionLeaveTimeout={200}
       >
-        {this.state.leaving
-          ? null
-          : <div key="dialog" className="dialog-primary dialog-appear">
-              <div
-                className="dialog-overlay"
-                onClick={this.handleOverlayClick}
-              />
-              <div
-                className={classnames(
-                  "dialog-box",
-                  this.props.className,
-                  this.state.additionalClassNames
-                )}
-                style={this.style()}
-              >
-                {this.props.showCloseButton
-                  ? <div
-                      onClick={this.handleCloseClick}
-                      className="close-button-primary"
-                    >
-                      <i className="manicon manicon-x" />
-                      <span className="screen-reader-text">Close Dialog</span>
-                    </div>
-                  : null}
-                {this.renderChildren()}
-              </div>
-            </div>}
+        {this.state.leaving ? null : (
+          <div key="dialog" className="dialog-primary dialog-appear">
+            <div className="dialog-overlay" onClick={this.handleOverlayClick} />
+            <div
+              className={classnames(
+                "dialog-box",
+                this.props.className,
+                this.state.additionalClassNames
+              )}
+              style={this.style()}
+            >
+              {this.props.showCloseButton ? (
+                <div
+                  onClick={this.handleCloseClick}
+                  className="close-button-primary"
+                >
+                  <i className="manicon manicon-x" />
+                  <span className="screen-reader-text">Close Dialog</span>
+                </div>
+              ) : null}
+              {this.renderChildren()}
+            </div>
+          </div>
+        )}
       </ReactCSSTransitionGroup>
     );
   }

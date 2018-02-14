@@ -23,18 +23,16 @@ export default class ResourceCollectionTitle extends Component {
           <div>
             <i className="manicon manicon-file-box" />
             <div>
-              <h1>
-                {attr.title}
-              </h1>
-              {this.props.showCreatedAt
-                ? <span className="collection-date">
-                    <FormattedDate
-                      prefix="Collection created"
-                      format="MMMM, YYYY"
-                      date={attr.createdAt}
-                    />
-                  </span>
-                : null}
+              <h1>{attr.title}</h1>
+              {this.props.showCreatedAt ? (
+                <span className="collection-date">
+                  <FormattedDate
+                    prefix="Collection created"
+                    format="MMMM, YYYY"
+                    date={attr.createdAt}
+                  />
+                </span>
+              ) : null}
             </div>
           </div>
         </div>

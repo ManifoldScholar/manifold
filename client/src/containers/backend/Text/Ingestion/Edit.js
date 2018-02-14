@@ -33,6 +33,10 @@ export class IngestionEditContainer extends PureComponent {
     location: PropTypes.object
   };
 
+  get textId() {
+    return this.props.text.id;
+  }
+
   handleSuccess = () => {
     this.redirectToIngestion(this.props.ingestion.id);
   };
@@ -44,10 +48,6 @@ export class IngestionEditContainer extends PureComponent {
       ingestionId
     );
     this.props.history.push(path, { back: this.props.match.url });
-  }
-
-  get textId() {
-    return this.props.text.id;
   }
 
   render() {

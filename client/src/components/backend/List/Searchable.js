@@ -96,8 +96,8 @@ export default class ListSearchable extends PureComponent {
   initialInputs() {
     const out = { keyword: "" };
     const keys = Object.keys(this.props.filterOptions);
-    keys.map(key => {
-      return (out[key] = false);
+    keys.forEach(key => {
+      out[key] = false;
     });
     return out;
   }
@@ -138,9 +138,7 @@ export default class ListSearchable extends PureComponent {
           value={this.state.inputs[filter]}
           data-id={"filter"}
         >
-          <option value="default">
-            {`${filter}:`}
-          </option>
+          <option value="default">{`${filter}:`}</option>
           {this.renderFilterOptions(this.props.filterOptions[filter])}
         </select>
         <i className="manicon manicon-caret-down" />
@@ -180,25 +178,27 @@ export default class ListSearchable extends PureComponent {
           singularUnit={this.props.singularUnit}
           pluralUnit={this.props.pluralUnit}
         />
-        {this.props.newButtonVisible
-          ? <div className="buttons-icon-horizontal">
-              <Link
-                to={this.props.newButtonPath}
-                className="button-icon-secondary"
-              >
-                <i className="manicon manicon-plus" />
-                {this.props.newButtonText}
-              </Link>
-            </div>
-          : null}
-        {entities.length > 0
-          ? <List.SimpleList
-              entities={entities}
-              entityComponent={this.props.entityComponent}
-              entityComponentProps={this.props.entityComponentProps}
-              destroyHandler={this.props.destroyHandler}
-            />
-          : <p className="list-total empty">Sorry, no results were found.</p>}
+        {this.props.newButtonVisible ? (
+          <div className="buttons-icon-horizontal">
+            <Link
+              to={this.props.newButtonPath}
+              className="button-icon-secondary"
+            >
+              <i className="manicon manicon-plus" />
+              {this.props.newButtonText}
+            </Link>
+          </div>
+        ) : null}
+        {entities.length > 0 ? (
+          <List.SimpleList
+            entities={entities}
+            entityComponent={this.props.entityComponent}
+            entityComponentProps={this.props.entityComponentProps}
+            destroyHandler={this.props.destroyHandler}
+          />
+        ) : (
+          <p className="list-total empty">Sorry, no results were found.</p>
+        )}
       </div>
     );
 
@@ -227,19 +227,17 @@ export default class ListSearchable extends PureComponent {
             />
           </div>
           <div className="form-list-filter">
-            <div className="select-group">
-              {this.renderFilterList()}
-            </div>
+            <div className="select-group">{this.renderFilterList()}</div>
           </div>
-          {this.props.filterOptions
-            ? <button
-                onClick={this.toggleOptions}
-                className="button-bare-primary"
-                data-id={"filter-toggle"}
-              >
-                {this.renderOptionsText()}
-              </button>
-            : null}
+          {this.props.filterOptions ? (
+            <button
+              onClick={this.toggleOptions}
+              className="button-bare-primary"
+              data-id={"filter-toggle"}
+            >
+              {this.renderOptionsText()}
+            </button>
+          ) : null}
           <button
             onClick={this.resetSearch}
             className="button-bare-primary reset"
@@ -247,9 +245,7 @@ export default class ListSearchable extends PureComponent {
             {"Reset Search"}
           </button>
         </form>
-        <nav className={listClassName}>
-          {this.renderEntityList()}
-        </nav>
+        <nav className={listClassName}>{this.renderEntityList()}</nav>
         <Utility.Pagination
           pagination={this.props.pagination}
           padding={this.props.paginationPadding}

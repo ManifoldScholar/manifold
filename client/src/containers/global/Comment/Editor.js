@@ -167,12 +167,12 @@ export class CommentEditor extends PureComponent {
 
     return (
       <div className="comment-editor">
-        {this.props.label
-          ? <h3 className="editor-label">
-              <i className="manicon manicon-pencil" />
-              {this.props.label}
-            </h3>
-          : null}
+        {this.props.label ? (
+          <h3 className="editor-label">
+            <i className="manicon manicon-pencil" />
+            {this.props.label}
+          </h3>
+        ) : null}
         <HigherOrder.RequireKind requiredKind="unauthenticated">
           <div className="placeholder">
             <button onClick={showLogin}>Login to post a comment</button>

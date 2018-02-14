@@ -203,7 +203,8 @@ class CreateContainer extends Component {
           <a
             href="#"
             onClick={event =>
-              this.props.handleViewChange("account-login", event)}
+              this.props.handleViewChange("account-login", event)
+            }
             data-id="show-login"
           >
             {"Already have an account?"}

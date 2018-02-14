@@ -156,29 +156,28 @@ class UpdateFormContainer extends Component {
         method="post"
         onSubmit={this.updateUser}
       >
-        {this.props.mode === "new"
-          ? <div>
-              <h4 className="form-heading">Congratulations!</h4>
-              <p className="overlay-copy">
-                {`Your account has been successfully created and you are now
+        {this.props.mode === "new" ? (
+          <div>
+            <h4 className="form-heading">Congratulations!</h4>
+            <p className="overlay-copy">
+              {`Your account has been successfully created and you are now
                 logged in to Manifold. From now on, I'm going to call you`}
-              </p>
-              <h4 className="nickname">
-                {this.displayNickname()}
-              </h4>
-              <p className="overlay-copy">
-                Would you like me to call you something else?
-              </p>
-            </div>
-          : <div>
-              <h4 className="form-heading">
-                Hello,{" "}
-                <span className="nickname">{this.displayNickname()}</span>.
-              </h4>
-              <p className="overlay-copy">
-                Would you like to update your Nickname?
-              </p>
-            </div>}
+            </p>
+            <h4 className="nickname">{this.displayNickname()}</h4>
+            <p className="overlay-copy">
+              Would you like me to call you something else?
+            </p>
+          </div>
+        ) : (
+          <div>
+            <h4 className="form-heading">
+              Hello, <span className="nickname">{this.displayNickname()}</span>.
+            </h4>
+            <p className="overlay-copy">
+              Would you like to update your Nickname?
+            </p>
+          </div>
+        )}
         <div className="row-1-p">
           <Form.Errorable
             className="form-input"
@@ -195,67 +194,64 @@ class UpdateFormContainer extends Component {
             />
           </Form.Errorable>
         </div>
-        {__CLIENT__
-          ? <div className="row-1-p">
-              {this.displayAvatar()
-                ? null
-                : <p className="overlay-copy">
-                    {"While you're here, why not upload a profile image?"}
-                  </p>}
-              <Form.Errorable
-                className="form-input"
-                name="attributes[avatar]"
-                errors={errors}
+        {__CLIENT__ ? (
+          <div className="row-1-p">
+            {this.displayAvatar() ? null : (
+              <p className="overlay-copy">
+                {"While you're here, why not upload a profile image?"}
+              </p>
+            )}
+            <Form.Errorable
+              className="form-input"
+              name="attributes[avatar]"
+              errors={errors}
+            >
+              <Dropzone
+                className="form-dropzone"
+                style={{}}
+                activeStyle={{}}
+                accept="image/*"
+                multiple={false}
+                ref={dropzone => {
+                  this.dropzone = dropzone;
+                }}
+                onDrop={this.handleFileDrop}
               >
-                <Dropzone
-                  className="form-dropzone"
-                  style={{}}
-                  activeStyle={{}}
-                  accept="image/*"
-                  multiple={false}
-                  ref={dropzone => {
-                    this.dropzone = dropzone;
-                  }}
-                  onDrop={this.handleFileDrop}
+                <div
+                  style={{ position: "relative" }}
+                  className="dropzone-button dropzone-button-dotted"
                 >
                   <div
-                    style={{ position: "relative" }}
-                    className="dropzone-button dropzone-button-dotted"
+                    style={{
+                      top: "50%",
+                      marginTop: -33,
+                      height: 66,
+                      width: 66,
+                      position: "absolute"
+                    }}
                   >
-                    <div
-                      style={{
-                        top: "50%",
-                        marginTop: -33,
-                        height: 66,
-                        width: 66,
-                        position: "absolute"
-                      }}
-                    >
-                      {this.hasAvatar()
-                        ? <i
-                            onClick={this.handleRemoveAvatar}
-                            style={{
-                              position: "absolute",
-                              top: 0,
-                              right: -8,
-                              fontSize: 10
-                            }}
-                            className="manicon manicon-x"
-                          />
-                        : null}
-                      <Avatar
-                        style={{ margin: 0 }}
-                        url={this.displayAvatar()}
+                    {this.hasAvatar() ? (
+                      <i
+                        onClick={this.handleRemoveAvatar}
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          right: -8,
+                          fontSize: 10
+                        }}
+                        className="manicon manicon-x"
                       />
-                    </div>
-                    <span className="dropzone-button-text">
-                      Click to browse or<br />drag and drop
-                    </span>
+                    ) : null}
+                    <Avatar style={{ margin: 0 }} url={this.displayAvatar()} />
                   </div>
-                </Dropzone>
-              </Form.Errorable>
-            </div>
-          : null}
+                  <span className="dropzone-button-text">
+                    Click to browse or<br />drag and drop
+                  </span>
+                </div>
+              </Dropzone>
+            </Form.Errorable>
+          </div>
+        ) : null}
         <div className="row-1-p">
           <p className="overlay-copy">
             Do you want to edit your account information?

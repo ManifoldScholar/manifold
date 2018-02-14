@@ -16,11 +16,7 @@ export default class UserListItem extends PureComponent {
   isCurrentUser(id) {
     let output = "";
     if (this.props.currentUserId === id) {
-      output = (
-        <span className="specifier">
-          {"You"}
-        </span>
-      );
+      output = <span className="specifier">{"You"}</span>;
     }
     return output;
   }
@@ -41,16 +37,18 @@ export default class UserListItem extends PureComponent {
         <Link to={lh.link("backendPeopleUser", user.id)}>
           <header>
             <figure className="avatar">
-              {attr.avatarStyles.smallSquare
-                ? <div
-                    className="image"
-                    style={{
-                      backgroundImage: `url(${attr.avatarStyles.smallSquare})`
-                    }}
-                  />
-                : <div className="no-image">
-                    <i className="manicon manicon-person" />
-                  </div>}
+              {attr.avatarStyles.smallSquare ? (
+                <div
+                  className="image"
+                  style={{
+                    backgroundImage: `url(${attr.avatarStyles.smallSquare})`
+                  }}
+                />
+              ) : (
+                <div className="no-image">
+                  <i className="manicon manicon-person" />
+                </div>
+              )}
             </figure>
             <div className="meta">
               <h3 className="name large">

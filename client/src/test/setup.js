@@ -1,6 +1,6 @@
 // We mock 3rd party libraries that depend on the refs because react-test-renderer doesn't
 // support DOM refs, which breaks our tests.
-jest.mock('react-dropzone', () => 'react-dropzone');
+jest.mock("react-dropzone", () => "react-dropzone");
 jest.mock("react-text-mask", () => "react-text-mask");
 jest.mock("helpers/passwordGenerator", () => {
   return jest.fn(() => "testtest123");

@@ -22,7 +22,10 @@ describe("Reader.Toc Component", () => {
   it("should trigger hideTocDrawer callback when toggle is clicked", () => {
     const wrapper = mount(root);
     hideTocMock.mockClear();
-    wrapper.find('[data-id="hide-drawer"]').first().simulate("click");
+    wrapper
+      .find('[data-id="hide-drawer"]')
+      .first()
+      .simulate("click");
     expect(hideTocMock).toHaveBeenCalled();
   });
 });

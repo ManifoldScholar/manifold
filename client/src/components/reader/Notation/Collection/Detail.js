@@ -54,11 +54,11 @@ export default class CollectionDetail extends PureComponent {
         <div className="collection-detail">
           <div className="container">
             <ResourceCollection.Title collection={collection} />
-            {!isEmpty(attr.description)
-              ? <div className="collection-description">
-                  <p dangerouslySetInnerHTML={{ __html: attr.description }} />
-                </div>
-              : null}
+            {!isEmpty(attr.description) ? (
+              <div className="collection-description">
+                <p dangerouslySetInnerHTML={{ __html: attr.description }} />
+              </div>
+            ) : null}
           </div>
         </div>
         <ResourceList.Slideshow

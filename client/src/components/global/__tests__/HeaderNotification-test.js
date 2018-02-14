@@ -27,7 +27,10 @@ describe("Global.HeaderNotification component", () => {
   it("should trigger removeNotification callback when close is clicked", () => {
     const wrapper = Enzyme.mount(root);
     removeMock.mockClear();
-    wrapper.find('[data-id="close"]').first().simulate("click");
+    wrapper
+      .find('[data-id="close"]')
+      .first()
+      .simulate("click");
     expect(removeMock).toHaveBeenCalled();
   });
 });

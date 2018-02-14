@@ -130,18 +130,18 @@ export class FollowingContainer extends Component {
             </h4>
             {this.renderFeaturedButton(featuredLimit)}
           </header>
-          {this.props.featuredProjects
-            ? <ProjectList.Grid
-                authenticated={this.props.authentication.authenticated}
-                favorites={get(
-                  this.props.authentication,
-                  "currentUser.favorites"
-                )}
-                dispatch={this.props.dispatch}
-                projects={this.props.featuredProjects}
-                limit={featuredLimit}
-              />
-            : null}
+          {this.props.featuredProjects ? (
+            <ProjectList.Grid
+              authenticated={this.props.authentication.authenticated}
+              favorites={get(
+                this.props.authentication,
+                "currentUser.favorites"
+              )}
+              dispatch={this.props.dispatch}
+              projects={this.props.featuredProjects}
+              limit={featuredLimit}
+            />
+          ) : null}
         </div>
       </section>
     );
@@ -170,13 +170,14 @@ export class FollowingContainer extends Component {
             dispatch={this.props.dispatch}
           />
           {this.renderFeaturedProjects()}
-          {this.props.followedProjects && this.props.followedProjects.length > 0
-            ? <Layout.ButtonNavigation
-                hideAtNarrow
-                grayBg
-                showFollowing={false}
-              />
-            : null}
+          {this.props.followedProjects &&
+          this.props.followedProjects.length > 0 ? (
+            <Layout.ButtonNavigation
+              hideAtNarrow
+              grayBg
+              showFollowing={false}
+            />
+          ) : null}
         </div>
       </HigherOrder.RequireKind>
     );

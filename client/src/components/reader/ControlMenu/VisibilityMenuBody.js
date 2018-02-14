@@ -42,9 +42,7 @@ export default class VisibilityMenuBody extends PureComponent {
     return (
       <li key={`visibility-${format}`}>
         <i className={this.iconClasses(format)} />
-        <span>
-          {label}
-        </span>
+        <span>{label}</span>
         <div className="filters">
           {Object.keys(filterState).map(key => {
             return this.renderCheckbox(key, filterState, format);

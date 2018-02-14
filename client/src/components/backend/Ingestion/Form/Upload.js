@@ -61,75 +61,71 @@ class IngestionFormUpload extends PureComponent {
     /* eslint-disable max-len */
     return (
       <div>
-        {ingestionType === "googledoc"
-          ? <Form.FieldGroup {...this.props}>
-              <Form.TextInput
-                label="URL"
-                instructions="Manifold can ingest any publicly available Google doc by entering its URL."
-                value={this.props.getModelValue(
-                  "attributes[externalSourceUrl]"
-                )}
-                onChange={event => this.onUrlChange(event)}
-              />
-            </Form.FieldGroup>
-          : null}
-        {ingestionType === "epub"
-          ? <Form.FieldGroup {...this.props}>
-              <Form.Upload
-                inlineStyle={{ width: "100%" }}
-                layout="landscape"
-                instructions="Manifold supports both v2 and v3 epub files."
-                label="Upload a file ending in .epub"
-                value={this.props.getModelValue("attributes[source]")}
-                initialValue={this.props.getModelValue(
-                  "attributes[sourceFileName]"
-                )}
-                set={this.onSourceChange}
-                accepts="epubs"
-              />
-              <div className="form-divider">or</div>
-              <Form.TextInput
-                label="URL"
-                instructions="Manifold can also ingest epub files by entering a URL"
-                value={this.props.getModelValue(
-                  "attributes[externalSourceUrl]"
-                )}
-                onChange={event => this.onUrlChange(event)}
-              />
-            </Form.FieldGroup>
-          : null}
-        {ingestionType === "html"
-          ? <Form.FieldGroup {...this.props}>
-              <Form.Upload
-                inlineStyle={{ width: "100%" }}
-                layout="landscape"
-                value={this.props.getModelValue("attributes[source]")}
-                initialValue={this.props.getModelValue(
-                  "attributes[sourceFileName]"
-                )}
-                set={this.onSourceChange}
-                instructions="Create a zip archive with a .htm or .html file in the root."
-                label="Zip source file"
-                accepts="zips"
-              />
-            </Form.FieldGroup>
-          : null}
-        {ingestionType === "markdown"
-          ? <Form.FieldGroup {...this.props}>
-              <Form.Upload
-                inlineStyle={{ width: "100%" }}
-                layout="landscape"
-                value={this.props.getModelValue("attributes[source]")}
-                initialValue={this.props.getModelValue(
-                  "attributes[sourceFileName]"
-                )}
-                set={this.onSourceChange}
-                instructions="Upload a zipped collection of markdown files with a book.json file in root directory"
-                label="Markdown or .zip source file"
-                accepts="zips"
-              />
-            </Form.FieldGroup>
-          : null}
+        {ingestionType === "googledoc" ? (
+          <Form.FieldGroup {...this.props}>
+            <Form.TextInput
+              label="URL"
+              instructions="Manifold can ingest any publicly available Google doc by entering its URL."
+              value={this.props.getModelValue("attributes[externalSourceUrl]")}
+              onChange={event => this.onUrlChange(event)}
+            />
+          </Form.FieldGroup>
+        ) : null}
+        {ingestionType === "epub" ? (
+          <Form.FieldGroup {...this.props}>
+            <Form.Upload
+              inlineStyle={{ width: "100%" }}
+              layout="landscape"
+              instructions="Manifold supports both v2 and v3 epub files."
+              label="Upload a file ending in .epub"
+              value={this.props.getModelValue("attributes[source]")}
+              initialValue={this.props.getModelValue(
+                "attributes[sourceFileName]"
+              )}
+              set={this.onSourceChange}
+              accepts="epubs"
+            />
+            <div className="form-divider">or</div>
+            <Form.TextInput
+              label="URL"
+              instructions="Manifold can also ingest epub files by entering a URL"
+              value={this.props.getModelValue("attributes[externalSourceUrl]")}
+              onChange={event => this.onUrlChange(event)}
+            />
+          </Form.FieldGroup>
+        ) : null}
+        {ingestionType === "html" ? (
+          <Form.FieldGroup {...this.props}>
+            <Form.Upload
+              inlineStyle={{ width: "100%" }}
+              layout="landscape"
+              value={this.props.getModelValue("attributes[source]")}
+              initialValue={this.props.getModelValue(
+                "attributes[sourceFileName]"
+              )}
+              set={this.onSourceChange}
+              instructions="Create a zip archive with a .htm or .html file in the root."
+              label="Zip source file"
+              accepts="zips"
+            />
+          </Form.FieldGroup>
+        ) : null}
+        {ingestionType === "markdown" ? (
+          <Form.FieldGroup {...this.props}>
+            <Form.Upload
+              inlineStyle={{ width: "100%" }}
+              layout="landscape"
+              value={this.props.getModelValue("attributes[source]")}
+              initialValue={this.props.getModelValue(
+                "attributes[sourceFileName]"
+              )}
+              set={this.onSourceChange}
+              instructions="Upload a zipped collection of markdown files with a book.json file in root directory"
+              label="Markdown or .zip source file"
+              accepts="zips"
+            />
+          </Form.FieldGroup>
+        ) : null}
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
           <button
             onClick={this.handleBackClick}

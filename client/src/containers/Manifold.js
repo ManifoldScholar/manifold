@@ -181,15 +181,15 @@ class ManifoldContainer extends PureComponent {
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}
         >
-          {this.props.visibility.signInUpOverlay
-            ? <SignInUp.Overlay
-                key="signInUpOverlay"
-                hideSignInUpOverlay={hideSignInUpOverlay}
-                authentication={this.props.authentication}
-                dispatch={this.props.dispatch}
-                hash={get(this, "props.routing.locationBeforeTransitions.hash")}
-              />
-            : null}
+          {this.props.visibility.signInUpOverlay ? (
+            <SignInUp.Overlay
+              key="signInUpOverlay"
+              hideSignInUpOverlay={hideSignInUpOverlay}
+              authentication={this.props.authentication}
+              dispatch={this.props.dispatch}
+              hash={get(this, "props.routing.locationBeforeTransitions.hash")}
+            />
+          ) : null}
         </ReactCSSTransitionGroup>
         {renderRoutes(routes)}
       </div>

@@ -15,7 +15,8 @@ describe("Frontend.ResourceCollection.Cover component", () => {
         <Cover
           collection={collection}
           urlCreator={collection =>
-            `/project/slug-1/${collection.attributes.slug}`}
+            `/project/slug-1/${collection.attributes.slug}`
+          }
         />
       )
     );

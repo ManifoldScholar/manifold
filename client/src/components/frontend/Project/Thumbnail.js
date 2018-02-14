@@ -44,11 +44,7 @@ export default class ProjectThumbnail extends Component {
 
   renderProjectDesc(project) {
     if (this.props.hideDesc || !project.attributes.subtitle) return null;
-    return (
-      <p className="description">
-        {project.attributes.subtitle}
-      </p>
-    );
+    return <p className="description">{project.attributes.subtitle}</p>;
   }
 
   renderProjectStatusMarker(project) {
@@ -56,11 +52,7 @@ export default class ProjectThumbnail extends Component {
     let marker = null;
 
     if (project.attributes.draft) {
-      marker = (
-        <div className="block-label">
-          {"Draft"}
-        </div>
-      );
+      marker = <div className="block-label">{"Draft"}</div>;
     }
 
     return marker;
@@ -102,9 +94,7 @@ export default class ProjectThumbnail extends Component {
     if (!this.props.hideMeta) {
       projectMeta = (
         <div className="meta">
-          <h3 className="title">
-            {project.attributes.title}
-          </h3>
+          <h3 className="title">{project.attributes.title}</h3>
           {this.renderProjectMakers(project)}
           {this.renderProjectStatusMarker(project)}
           {project.attributes.updated

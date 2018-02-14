@@ -68,21 +68,11 @@ class Monitor extends Component {
 
     if (this.hasErrors()) {
       errorList = (
-        <ul>
-          {this.errors.map(error =>
-            <li key={error}>
-              {error}
-            </li>
-          )}
-        </ul>
+        <ul>{this.errors.map(error => <li key={error}>{error}</li>)}</ul>
       );
     }
 
-    return (
-      <div>
-        {errorList}
-      </div>
-    );
+    return <div>{errorList}</div>;
   }
 }
 

@@ -11,8 +11,7 @@ exports[`Global.SignInUp.Update component renders correctly 1`] = `
     <h4
       className="form-heading"
     >
-      Hello,
-       
+      Hello, 
       <span
         className="nickname"
       >

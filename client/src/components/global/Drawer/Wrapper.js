@@ -110,21 +110,18 @@ class DrawerWrapper extends PureComponent {
     return (
       <div className="drawer-bar">
         <div className="drawer-title">
-          {props.icon
-            ? <i className={`manicon manicon-${props.icon}`} />
-            : null}
+          {props.icon ? (
+            <i className={`manicon manicon-${props.icon}`} />
+          ) : null}
           {props.title ? props.title : null}
         </div>
-        {hasClose
-          ? <div
-              onClick={this.handleLeaveEvent}
-              className="close-button-primary"
-            >
-              <span className="close-text">Close</span>
-              <i className="manicon manicon-x" />
-              <span className="screen-reader-text">Close Drawer</span>
-            </div>
-          : null}
+        {hasClose ? (
+          <div onClick={this.handleLeaveEvent} className="close-button-primary">
+            <span className="close-text">Close</span>
+            <i className="manicon manicon-x" />
+            <span className="screen-reader-text">Close Drawer</span>
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -156,9 +153,7 @@ class DrawerWrapper extends PureComponent {
     if (this.props.lockScroll === "hover") {
       return (
         <div className={this.props.identifier}>
-          <Utility.EdgeLockScroll>
-            {this.renderDrawer()}
-          </Utility.EdgeLockScroll>
+          <Utility.EdgeLockScroll>{this.renderDrawer()}</Utility.EdgeLockScroll>
         </div>
       );
     }

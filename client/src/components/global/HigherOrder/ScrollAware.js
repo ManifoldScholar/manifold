@@ -59,9 +59,11 @@ export default class ScrollAware extends Component {
     if (window.pageYOffset !== undefined) {
       scrollTop = window.pageYOffset;
     } else {
-      scrollTop = (document.documentElement ||
+      scrollTop = (
+        document.documentElement ||
         document.body.parentNode ||
-        document.body).scrollTop;
+        document.body
+      ).scrollTop;
     }
     return scrollTop;
   }
@@ -139,10 +141,6 @@ export default class ScrollAware extends Component {
 
     const scrollClass = classNames(scrollClasses);
 
-    return (
-      <div className={scrollClass}>
-        {this.renderChildren()}
-      </div>
-    );
+    return <div className={scrollClass}>{this.renderChildren()}</div>;
   }
 }

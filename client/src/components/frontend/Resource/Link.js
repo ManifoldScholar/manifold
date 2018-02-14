@@ -28,15 +28,15 @@ export default class ResourceDetail extends Component {
         );
         break;
       default:
-        button = attr.downloadable
-          ? <a
-              href={attr.attachmentStyles.original}
-              className={this.props.buttonClass}
-              target="_blank"
-            >
-              Download <i className="manicon manicon-arrow-down" />
-            </a>
-          : null;
+        button = attr.downloadable ? (
+          <a
+            href={attr.attachmentStyles.original}
+            className={this.props.buttonClass}
+            target="_blank"
+          >
+            Download <i className="manicon manicon-arrow-down" />
+          </a>
+        ) : null;
         break;
     }
 

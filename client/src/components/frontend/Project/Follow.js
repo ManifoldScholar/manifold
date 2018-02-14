@@ -157,29 +157,30 @@ export default class ProjectFollow extends Component {
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}
           >
-            {this.state.view === "follow" || this.state.view === "follow-active"
-              ? <span key="follow" className="follow-text">
-                  Follow
-                </span>
-              : null}
+            {this.state.view === "follow" ||
+            this.state.view === "follow-active" ? (
+              <span key="follow" className="follow-text">
+                Follow
+              </span>
+            ) : null}
             {this.state.view === "unfollow" ||
-            this.state.view === "unfollow-active"
-              ? <span
-                  key="unfollow"
-                  className="follow-text follow-text-hide-immediately"
-                >
-                  Unfollow
-                </span>
-              : null}
+            this.state.view === "unfollow-active" ? (
+              <span
+                key="unfollow"
+                className="follow-text follow-text-hide-immediately"
+              >
+                Unfollow
+              </span>
+            ) : null}
             {this.state.view === "unfollow-confirm" ||
-            this.state.view === "unfollow-confirm-active"
-              ? <span
-                  key="unfollow-confirm"
-                  className="follow-text follow-text-show-immediately"
-                >
-                  Are You Sure?
-                </span>
-              : null}
+            this.state.view === "unfollow-confirm-active" ? (
+              <span
+                key="unfollow-confirm"
+                className="follow-text follow-text-show-immediately"
+              >
+                Are You Sure?
+              </span>
+            ) : null}
           </ReactCSSTransitionGroup>
         </div>
       </div>

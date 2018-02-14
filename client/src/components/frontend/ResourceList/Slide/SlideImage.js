@@ -16,14 +16,14 @@ export default class ResourceListSlideFigureImage extends Component {
     const attr = this.props.resource.attributes;
     return (
       <figure>
-        {this.props.enableZoom
-          ? <Resource.Preview resource={this.props.resource}>
-              <div className="zoom-indicator">
-                Zoom
-                <i className="manicon manicon-magnify-plus" />
-              </div>
-            </Resource.Preview>
-          : null}
+        {this.props.enableZoom ? (
+          <Resource.Preview resource={this.props.resource}>
+            <div className="zoom-indicator">
+              Zoom
+              <i className="manicon manicon-magnify-plus" />
+            </div>
+          </Resource.Preview>
+        ) : null}
         <div
           className="figure-image"
           ref={c => {

@@ -112,13 +112,11 @@ export class MakersEditContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         <header className="drawer-header">
-          <h2 className="heading-quaternary">
-            {attr.fullName}
-          </h2>
+          <h2 className="heading-quaternary">{attr.fullName}</h2>
           <div className="buttons-bare-vertical">
             <button
               className="button-bare-primary"

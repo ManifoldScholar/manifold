@@ -24,11 +24,7 @@ export default class HeaderNotification extends Component {
   bodyCopy() {
     let output = null;
     if (this.props.body) {
-      output = (
-        <p className="notification-body">
-          {this.props.body}
-        </p>
-      );
+      output = <p className="notification-body">{this.props.body}</p>;
     }
 
     return output;
@@ -45,9 +41,7 @@ export default class HeaderNotification extends Component {
       <div className={notificationClass} key={this.props.id}>
         <div className="container">
           <header>
-            <h5 className="notification-heading">
-              {this.props.heading}
-            </h5>
+            <h5 className="notification-heading">{this.props.heading}</h5>
           </header>
           {this.bodyCopy()}
 

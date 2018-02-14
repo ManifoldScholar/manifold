@@ -30,7 +30,7 @@ describe("Backend.Form.Upload component", () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = Enzyme.mount(root)
+      wrapper = Enzyme.mount(root);
     });
 
     it("renders correctly", () => {
@@ -98,7 +98,7 @@ describe("Backend.Form.Upload component", () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = Enzyme.mount(root)
+      wrapper = Enzyme.mount(root);
     });
 
     it("renders correctly", () => {
@@ -134,7 +134,7 @@ describe("Backend.Form.Upload component", () => {
 
     let wrapper;
     beforeEach(() => {
-      wrapper = Enzyme.mount(root)
+      wrapper = Enzyme.mount(root);
     });
 
     it("renders correctly", () => {
@@ -171,7 +171,7 @@ describe("Backend.Form.Upload component", () => {
 
     let wrapper;
     beforeEach(() => {
-      wrapper = Enzyme.mount(root)
+      wrapper = Enzyme.mount(root);
     });
 
     it("should trigger set callback when remove is clicked with null value", () => {
@@ -200,7 +200,7 @@ describe("Backend.Form.Upload component", () => {
 
     let wrapper;
     beforeEach(() => {
-      wrapper = Enzyme.mount(root)
+      wrapper = Enzyme.mount(root);
     });
 
     it("renders correctly", () => {

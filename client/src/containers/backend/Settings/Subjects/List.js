@@ -102,21 +102,21 @@ export class SettingsSubjectsListContainer extends PureComponent {
           </h3>
         </header>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
-        {subjects
-          ? <List.Searchable
-              newButtonVisible
-              newButtonPath={lh.link("backendSettingsSubjectsNew")}
-              newButtonText="Add a New Subject"
-              entities={subjects}
-              singularUnit="subject"
-              pluralUnit="subjects"
-              pagination={subjectsMeta.pagination}
-              paginationClickHandler={this.subjectsPageChangeHandlerCreator}
-              entityComponent={Subject.ListItem}
-              entityComponentProps={{ active }}
-              filterChangeHandler={this.filterChangeHandler}
-            />
-          : null}
+        {subjects ? (
+          <List.Searchable
+            newButtonVisible
+            newButtonPath={lh.link("backendSettingsSubjectsNew")}
+            newButtonText="Add a New Subject"
+            entities={subjects}
+            singularUnit="subject"
+            pluralUnit="subjects"
+            pagination={subjectsMeta.pagination}
+            paginationClickHandler={this.subjectsPageChangeHandlerCreator}
+            entityComponent={Subject.ListItem}
+            entityComponentProps={{ active }}
+            filterChangeHandler={this.filterChangeHandler}
+          />
+        ) : null}
       </div>
     );
   }

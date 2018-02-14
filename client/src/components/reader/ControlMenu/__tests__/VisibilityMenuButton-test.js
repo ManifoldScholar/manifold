@@ -20,7 +20,10 @@ describe("Reader.ControlMenu.VisibilityMenuButton Component", () => {
   it("should trigger toggle callback when toggle is clicked", () => {
     const wrapper = Enzyme.mount(root);
     toggleMock.mockClear();
-    wrapper.find('[data-id="toggle-visibility"]').first().simulate("click");
+    wrapper
+      .find('[data-id="toggle-visibility"]')
+      .first()
+      .simulate("click");
     expect(toggleMock).toHaveBeenCalled();
   });
 });

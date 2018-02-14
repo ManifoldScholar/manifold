@@ -17,14 +17,14 @@ export default class FormSave extends Component {
   render() {
     return (
       <div className="form-input submit">
-        {this.props.cancelRoute
-          ? <Link
-              to={this.props.cancelRoute}
-              className="button-secondary outlined dull"
-            >
-              {"Cancel"}
-            </Link>
-          : null}
+        {this.props.cancelRoute ? (
+          <Link
+            to={this.props.cancelRoute}
+            className="button-secondary outlined dull"
+          >
+            {"Cancel"}
+          </Link>
+        ) : null}
         <input
           className="button-secondary outlined"
           type="submit"

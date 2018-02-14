@@ -21,12 +21,8 @@ export default class UtilityBackLinkSecondary extends Component {
         <Link to={this.props.link} className="back-link-secondary">
           <i className="manicon manicon-arrow-round-left" />
           <div>
-            <span className="back-text">
-              {this.props.backText}
-            </span>
-            <span className="project-title">
-              {this.props.title}
-            </span>
+            <span className="back-text">{this.props.backText}</span>
+            <span className="project-title">{this.props.title}</span>
           </div>
         </Link>
       </div>

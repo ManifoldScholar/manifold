@@ -58,7 +58,7 @@ export class DashboardContainer extends PureComponent {
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
-  updateResults(event = null, page = 1) {
+  updateResults(eventIgnored = null, page = 1) {
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.index(this.state.filter, pagination),
@@ -91,33 +91,33 @@ export class DashboardContainer extends PureComponent {
                     {"Projects"} <i className="manicon manicon-stack" />
                   </h3>
                 </header>
-                {this.props.projects && this.props.projectsMeta
-                  ? <List.Searchable
-                      newButtonVisible
-                      newButtonPath={lh.link("backendProjectsNew")}
-                      newButtonText="Add a New Project"
-                      entities={this.props.projects}
-                      singularUnit="project"
-                      pluralUnit="projects"
-                      pagination={this.props.projectsMeta.pagination}
-                      paginationClickHandler={this.updateHandlerCreator}
-                      entityComponent={Project.ListItem}
-                      filterChangeHandler={this.filterChangeHandler}
-                    />
-                  : null}
+                {this.props.projects && this.props.projectsMeta ? (
+                  <List.Searchable
+                    newButtonVisible
+                    newButtonPath={lh.link("backendProjectsNew")}
+                    newButtonText="Add a New Project"
+                    entities={this.props.projects}
+                    singularUnit="project"
+                    pluralUnit="projects"
+                    pagination={this.props.projectsMeta.pagination}
+                    paginationClickHandler={this.updateHandlerCreator}
+                    entityComponent={Project.ListItem}
+                    filterChangeHandler={this.filterChangeHandler}
+                  />
+                ) : null}
               </div>
 
               <div className="right">
                 <nav className="vertical-list-primary flush">
-                  {this.props.recentProjects
-                    ? <List.SimpleList
-                        entities={this.props.recentProjects}
-                        entityComponent={Project.ListItem}
-                        title={"Recently Updated"}
-                        icon={"manicon-stack"}
-                        listClasses={"flush"}
-                      />
-                    : null}
+                  {this.props.recentProjects ? (
+                    <List.SimpleList
+                      entities={this.props.recentProjects}
+                      entityComponent={Project.ListItem}
+                      title={"Recently Updated"}
+                      icon={"manicon-stack"}
+                      listClasses={"flush"}
+                    />
+                  ) : null}
                 </nav>
                 <section>
                   <header className="section-heading-secondary">

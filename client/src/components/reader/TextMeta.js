@@ -15,14 +15,10 @@ export default class TextMeta extends PureComponent {
     return (
       <div className="reader-text-meta">
         <header>
-          <h2 className="title">
-            {this.props.title}
-          </h2>
-          {this.props.subtitle
-            ? <p className="subtitle">
-                {this.props.subtitle}
-              </p>
-            : null}
+          <h2 className="title">{this.props.title}</h2>
+          {this.props.subtitle ? (
+            <p className="subtitle">{this.props.subtitle}</p>
+          ) : null}
         </header>
         <MetaList metadata={this.props.meta} />
       </div>

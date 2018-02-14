@@ -129,11 +129,14 @@ export default class TextNode extends Component {
 
     // starts
     const starts = {};
-    map.slice().reverse().forEach((chunk, index) => {
-      chunk.forEach(annotation => {
-        starts[annotation.id] = index;
+    map
+      .slice()
+      .reverse()
+      .forEach((chunk, index) => {
+        chunk.forEach(annotation => {
+          starts[annotation.id] = index;
+        });
       });
-    });
 
     // split the string into chunks for each difference and intersection between the ranges
     const chunks = splits.map((split, index) => {
@@ -197,9 +200,9 @@ export default class TextNode extends Component {
           data-annotation-ids={map[index].map(a => a.id)}
         >
           {chunk}
-          {endingResources.length > 0
-            ? <Notation.Marker annotations={endingResources} />
-            : null}
+          {endingResources.length > 0 ? (
+            <Notation.Marker annotations={endingResources} />
+          ) : null}
         </span>
       );
     });

@@ -13,21 +13,21 @@ export default class IngestionConnectionError extends PureComponent {
         <header className="dialog-header-small">
           <h2>Fatal Ingestion Error</h2>
         </header>
-        {config.cableUrl
-          ? <p>
-              {"The client application is unable to connect to the server's websocket. " +
-                'Please ensure that Manifold\'s "cable" service is available at the ' +
-                "following location:"}
-              <br />
-              <br />
-              <em>
-                {config.cableUrl}
-              </em>
-            </p>
-          : <p>
-              {"The CABLE_URL environment variable has not been set correctly. Please " +
-                "contact the administrator of this Manifold instance to correct this."}
-            </p>}
+        {config.cableUrl ? (
+          <p>
+            {"The client application is unable to connect to the server's websocket. " +
+              'Please ensure that Manifold\'s "cable" service is available at the ' +
+              "following location:"}
+            <br />
+            <br />
+            <em>{config.cableUrl}</em>
+          </p>
+        ) : (
+          <p>
+            {"The CABLE_URL environment variable has not been set correctly. Please " +
+              "contact the administrator of this Manifold instance to correct this."}
+          </p>
+        )}
         <p>
           {"After the problem has been corrected, this ingestion can be resumed at the " +
             "current URL."}

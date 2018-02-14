@@ -21,9 +21,7 @@ export default class SubjectListItem extends PureComponent {
         <Link to={lh.link("backendSettingsSubject", subject.id)}>
           <header>
             <div className="meta">
-              <h3 className="name large">
-                {attr.name}
-              </h3>
+              <h3 className="name large">{attr.name}</h3>
             </div>
           </header>
         </Link>

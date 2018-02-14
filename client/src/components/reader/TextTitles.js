@@ -46,12 +46,8 @@ export default class TextTitles extends Component {
 
     return (
       <header className={titleClass} onClick={this.handleTitleClick}>
-        <h3 className="text-title">
-          {this.props.textTitle}
-        </h3>
-        <h2 className="section-title">
-          {this.props.sectionTitle}
-        </h2>
+        <h3 className="text-title">{this.props.textTitle}</h3>
+        <h2 className="section-title">{this.props.sectionTitle}</h2>
       </header>
     );
   }

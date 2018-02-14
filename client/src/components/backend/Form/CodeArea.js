@@ -64,14 +64,10 @@ class FormCodeArea extends Component {
           errors={this.props.errors}
           label={this.props.label}
         >
-          <label>
-            {this.props.label}
-          </label>
-          {isString(this.props.instructions)
-            ? <span className="instructions">
-                {this.props.instructions}
-              </span>
-            : null}
+          <label>{this.props.label}</label>
+          {isString(this.props.instructions) ? (
+            <span className="instructions">{this.props.instructions}</span>
+          ) : null}
           <Editor
             mode={this.props.mode}
             theme="idle_fingers"

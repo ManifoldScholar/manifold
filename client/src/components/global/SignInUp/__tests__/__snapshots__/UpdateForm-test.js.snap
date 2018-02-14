@@ -11,8 +11,7 @@ exports[`Global.SignInUp.UpdateForm component renders correctly when mode is exi
     <h4
       className="form-heading"
     >
-      Hello,
-       
+      Hello, 
       <span
         className="nickname"
       >

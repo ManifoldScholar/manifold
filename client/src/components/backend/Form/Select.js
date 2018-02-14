@@ -40,9 +40,7 @@ class FormSelect extends Component {
           errors={this.props.errors}
           label={this.props.label}
         >
-          <label>
-            {this.props.label}
-          </label>
+          <label>{this.props.label}</label>
           <div className="form-select">
             <i className="manicon manicon-caret-down" />
             <select onChange={this.props.onChange} value={value}>

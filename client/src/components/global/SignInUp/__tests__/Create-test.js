@@ -31,7 +31,10 @@ describe("Global.SignInUp.Create component", () => {
   it("should trigger handleViewChange callback when show login is clicked", () => {
     const wrapper = mount(wrapWithRouter(root));
     handleViewChange.mockClear();
-    wrapper.find('[data-id="show-login"]').first().simulate("click");
+    wrapper
+      .find('[data-id="show-login"]')
+      .first()
+      .simulate("click");
     expect(handleViewChange).toHaveBeenCalled();
   });
 });

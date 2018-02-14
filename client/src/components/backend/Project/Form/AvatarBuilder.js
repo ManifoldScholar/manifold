@@ -122,9 +122,9 @@ class AvatarBuilder extends Component {
 
     return (
       <div className="form-input avatar-builder">
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         <label className="section-header">Project Thumbnail</label>
         <div className="grid">
           <div className="section current">

@@ -61,11 +61,7 @@ class ShareBar extends Component {
 
     return (
       <nav className="share-nav-primary">
-        {this.props.label
-          ? <span>
-              {this.props.label}
-            </span>
-          : null}
+        {this.props.label ? <span>{this.props.label}</span> : null}
         <ul>
           <li>
             <TwitterButton
@@ -77,18 +73,18 @@ class ShareBar extends Component {
             </TwitterButton>
           </li>
           {/* Facebook App Id is required for this component to load */}
-          {this.facebookAppId()
-            ? <li>
-                <FacebookButton
-                  url={this.url()}
-                  appId={this.facebookAppId()}
-                  message={this.message()}
-                  windowOptions={twitterWindowOptions}
-                >
-                  <i className="manicon manicon-facebook" />
-                </FacebookButton>
-              </li>
-            : null}
+          {this.facebookAppId() ? (
+            <li>
+              <FacebookButton
+                url={this.url()}
+                appId={this.facebookAppId()}
+                message={this.message()}
+                windowOptions={twitterWindowOptions}
+              >
+                <i className="manicon manicon-facebook" />
+              </FacebookButton>
+            </li>
+          ) : null}
           {/*
             Hiding email share button until we have more robust
             functionality for custom mailing

@@ -93,19 +93,19 @@ export default class Debugger extends PureComponent {
           marginBottom: 15
         }}
       >
-        {this.props.hideLabel
-          ? <div
-              style={{
-                backgroundColor: "rgb(0, 17, 0)",
-                color: "rgb(0, 153, 0)",
-                margin: 0,
-                padding: "10px 20px",
-                display: "inline-block"
-              }}
-            >
-              {this.props.label}
-            </div>
-          : null}
+        {this.props.hideLabel ? (
+          <div
+            style={{
+              backgroundColor: "rgb(0, 17, 0)",
+              color: "rgb(0, 153, 0)",
+              margin: 0,
+              padding: "10px 20px",
+              display: "inline-block"
+            }}
+          >
+            {this.props.label}
+          </div>
+        ) : null}
         <JSONTree
           hideRoot
           shouldExpandNode={this.props.shouldExpandNode}

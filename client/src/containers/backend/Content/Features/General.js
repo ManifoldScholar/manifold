@@ -63,15 +63,15 @@ class FeaturesGeneralContainer extends PureComponent {
               { label: "Light Background", value: "light" }
             ]}
           />
-          {/* <Form.Select*/}
-          {/* label="Layout"*/}
-          {/* name="attributes[layout]"*/}
-          {/* options={[*/}
-          {/* { label: "Text Left, Image Right (Default)", value: "two-col-img-right" },*/}
-          {/* { label: "Text Right, Image Left", value: "two-col-img-left" },*/}
-          {/* { label: "One Column", value: "one-col" }*/}
-          {/* ]}*/}
-          {/* />*/}
+          {/* <Form.Select */}
+          {/* label="Layout" */}
+          {/* name="attributes[layout]" */}
+          {/* options={[ */}
+          {/* { label: "Text Left, Image Right (Default)", value: "two-col-img-right" }, */}
+          {/* { label: "Text Right, Image Left", value: "two-col-img-left" }, */}
+          {/* { label: "One Column", value: "one-col" } */}
+          {/* ]} */}
+          {/* /> */}
           <Form.TextInput
             label="Background Color"
             name="attributes[backgroundColor]"

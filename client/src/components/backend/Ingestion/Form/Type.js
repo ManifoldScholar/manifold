@@ -65,15 +65,12 @@ export default class IngestionFormType extends PureComponent {
           options={this.ingestionTypeOptions}
         />
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
-          {this.props.triggerClose
-            ? <button
-                onClick={this.close}
-                className="button-icon-secondary dull"
-              >
-                <i className="manicon manicon-x small" />
-                Cancel
-              </button>
-            : null}
+          {this.props.triggerClose ? (
+            <button onClick={this.close} className="button-icon-secondary dull">
+              <i className="manicon manicon-x small" />
+              Cancel
+            </button>
+          ) : null}
           <button
             onClick={this.handleProceedClick}
             className="button-icon-secondary"

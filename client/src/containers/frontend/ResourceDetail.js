@@ -106,43 +106,47 @@ export class ResourceDetailContainer extends PureComponent {
     return (
       <div>
         <HeadContent
-          title={`\u201c${resource.attributes
-            .titlePlaintext}\u201d Resource on ${settings.attributes.general
-            .installationName}`}
+          title={`\u201c${
+            resource.attributes.titlePlaintext
+          }\u201d Resource on ${settings.attributes.general.installationName}`}
           description={resource.attributes.captionPlaintext}
           image={
             resource.attributes.attachmentStyles.mediumSquare ||
             resource.attributes.variantThumbnailStyles.mediumSquare
           }
         />
-        {collection
-          ? <Utility.BackLinkPrimary
-              backText="Back to Collection"
-              link={this.collectionUrl()}
-              title={collection.attributes.title}
-            />
-          : <Utility.BackLinkPrimary
+        {collection ? (
+          <Utility.BackLinkPrimary
+            backText="Back to Collection"
+            link={this.collectionUrl()}
+            title={collection.attributes.title}
+          />
+        ) : (
+          <Utility.BackLinkPrimary
+            backText="Back to Project Resources"
+            link={this.projectUrl()}
+            title={project.attributes.title}
+          />
+        )}
+        {resource ? (
+          <Resource.Detail
+            projectId={project.id}
+            projectUrl={this.projectUrl()}
+            resourceUrl={this.resourceUrl()}
+            resource={resource}
+            dispatch={this.props.dispatch}
+          />
+        ) : (
+          <LoadingBlock />
+        )}
+        {project ? (
+          <section className="bg-neutral05">
+            <Utility.BackLinkSecondary
               backText="Back to Project Resources"
               link={this.projectUrl()}
-              title={project.attributes.title}
-            />}
-        {resource
-          ? <Resource.Detail
-              projectId={project.id}
-              projectUrl={this.projectUrl()}
-              resourceUrl={this.resourceUrl()}
-              resource={resource}
-              dispatch={this.props.dispatch}
             />
-          : <LoadingBlock />}
-        {project
-          ? <section className="bg-neutral05">
-              <Utility.BackLinkSecondary
-                backText="Back to Project Resources"
-                link={this.projectUrl()}
-              />
-            </section>
-          : null}
+          </section>
+        ) : null}
       </div>
     );
   }

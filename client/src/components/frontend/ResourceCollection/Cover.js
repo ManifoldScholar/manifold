@@ -24,14 +24,10 @@ export default class ResourceCollectionCover extends Component {
           style={{ backgroundImage: "url(" + bgImage + ")" }}
         >
           <div className="title-overlay">
-            <h4 className="collection-title">
-              {attr.title}
-            </h4>
+            <h4 className="collection-title">{attr.title}</h4>
             <div className="icon">
               <i className="manicon manicon-file-box" />
-              <span>
-                {"Collection"}
-              </span>
+              <span>{"Collection"}</span>
             </div>
           </div>
         </Link>

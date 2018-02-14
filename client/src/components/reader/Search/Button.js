@@ -25,9 +25,7 @@ export default class SearchMenuButton extends PureComponent {
         data-id="toggle-menu"
       >
         <i className="manicon manicon-magnify" />
-        <span className="screen-reader-text">
-          {"Click to open search"}
-        </span>
+        <span className="screen-reader-text">{"Click to open search"}</span>
       </button>
     );
   }

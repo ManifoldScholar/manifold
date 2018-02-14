@@ -181,13 +181,13 @@ export class HomeContainer extends Component {
           overflowX: "hidden"
         }}
       >
-        {feature
-          ? <Layout.Splash
-              feature={feature}
-              authenticated={this.props.authentication.authenticated}
-              toggleSignInUpOverlay={this.commonActions.toggleSignInUpOverlay}
-            />
-          : null}
+        {feature ? (
+          <Layout.Splash
+            feature={feature}
+            authenticated={this.props.authentication.authenticated}
+            toggleSignInUpOverlay={this.commonActions.toggleSignInUpOverlay}
+          />
+        ) : null}
         {/*
           Note that this section will be used for "Recent Projects"
           once that list is available, this is currently using the
@@ -215,20 +215,20 @@ export class HomeContainer extends Component {
                 />
               </div>
             </header>
-            {this.props.filteredProjects
-              ? <ProjectList.Grid
-                  authenticated={this.props.authentication.authenticated}
-                  favorites={get(
-                    this.props.authentication,
-                    "currentUser.favorites"
-                  )}
-                  dispatch={this.props.dispatch}
-                  projects={this.props.filteredProjects}
-                  pagination={get(this.props.meta, "pagination")}
-                  paginationClickHandler={this.pageChangeHandlerCreator}
-                  limit={perPage}
-                />
-              : null}
+            {this.props.filteredProjects ? (
+              <ProjectList.Grid
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(
+                  this.props.authentication,
+                  "currentUser.favorites"
+                )}
+                dispatch={this.props.dispatch}
+                projects={this.props.filteredProjects}
+                pagination={get(this.props.meta, "pagination")}
+                paginationClickHandler={this.pageChangeHandlerCreator}
+                limit={perPage}
+              />
+            ) : null}
           </div>
         </section>
         <Layout.ButtonNavigation
