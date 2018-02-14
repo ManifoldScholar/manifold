@@ -3,11 +3,14 @@ import { usersAPI, requests } from "api";
 import onUserIsCurrentUserUpdate from "../onUserIsCurrentUserUpdate";
 
 describe("store/subscribers/onUserIsCurrentUserUpdate", () => {
-  const user = build.entity.user("1");
+  const user = build.entity.user("1", {
+    updatedAt: "1"
+  });
   const updatedUser = build.entity.user("2", {
     firstName: "Something",
     lastName: "New",
-    fullName: "Something New"
+    fullName: "Something New",
+    updatedAt: "2"
   });
   const updatedAttributes = updatedUser.attributes;
   const initialState = {
