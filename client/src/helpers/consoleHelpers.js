@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const emoji = require("node-emoji");
+const endsWith = require("lodash/endsWith");
 
 function baseString(emojiKey) {
   let out = "";
@@ -10,7 +11,7 @@ function baseString(emojiKey) {
 }
 
 function log(string, color, bold) {
-  if (process.title === "node") {
+  if (endsWith(process.title, "node")) {
     let colorCode = "";
     if (color === "blue") colorCode = "\x1b[34m";
     if (color === "green") colorCode = "\x1b[32m";
