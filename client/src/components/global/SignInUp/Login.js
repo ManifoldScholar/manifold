@@ -95,11 +95,11 @@ export default class Login extends Component {
           </div>
           <div className="row-1-p">
             <div className={submitClass}>
-              {this.authenticationError()
-                ? <span style={{ marginTop: 0 }} className="error">
-                    {this.authenticationError()}
-                  </span>
-                : null}
+              {this.authenticationError() ? (
+                <span style={{ marginTop: 0 }} className="error">
+                  {this.authenticationError()}
+                </span>
+              ) : null}
               <input
                 className="button-secondary button-with-room"
                 type="submit"
@@ -112,7 +112,8 @@ export default class Login extends Component {
           <a
             href="#"
             onClick={event =>
-              this.props.handleViewChange("account-password-forgot", event)}
+              this.props.handleViewChange("account-password-forgot", event)
+            }
             data-id="show-forgot"
           >
             {"Forgot your password?"}
@@ -120,7 +121,8 @@ export default class Login extends Component {
           <a
             href="#"
             onClick={event =>
-              this.props.handleViewChange("account-create", event)}
+              this.props.handleViewChange("account-create", event)
+            }
             data-id="show-create"
           >
             {"Need to sign up?"}

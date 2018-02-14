@@ -125,17 +125,11 @@ export default class FormHasMany extends PureComponent {
     if (this.props.labelHeader) {
       out = (
         <header className="section-heading-secondary">
-          <h3>
-            {this.props.label}
-          </h3>
+          <h3>{this.props.label}</h3>
         </header>
       );
     } else {
-      out = (
-        <label>
-          {this.props.label}
-        </label>
-      );
+      out = <label>{this.props.label}</label>;
     }
     return out;
   }
@@ -159,15 +153,17 @@ export default class FormHasMany extends PureComponent {
               return (
                 <li key={entity.id}>
                   <div className="association">
-                    {this.props.entityAvatarAttribute
-                      ? <figure>
-                          {avatar
-                            ? <img src={avatar} alt="user-avatar" />
-                            : <div className="no-image">
-                                <i className="manicon manicon-person" />
-                              </div>}
-                        </figure>
-                      : null}
+                    {this.props.entityAvatarAttribute ? (
+                      <figure>
+                        {avatar ? (
+                          <img src={avatar} alt="user-avatar" />
+                        ) : (
+                          <div className="no-image">
+                            <i className="manicon manicon-person" />
+                          </div>
+                        )}
+                      </figure>
+                    ) : null}
                     <h4 className="association-name">
                       {this.label(entity, this.props)}
                     </h4>

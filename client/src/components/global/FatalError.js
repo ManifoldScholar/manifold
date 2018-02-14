@@ -40,43 +40,35 @@ export default class FatalError extends Component {
               <h1>
                 {statusMessage} {title}
               </h1>
-              {process.env.NODE_ENV === "development" && error.exception
-                ? <h1>
-                    {error.exception}
-                  </h1>
-                : null}
-              {detail
-                ? <p>
-                    {detail}
-                  </p>
-                : null}
+              {process.env.NODE_ENV === "development" && error.exception ? (
+                <h1>{error.exception}</h1>
+              ) : null}
+              {detail ? <p>{detail}</p> : null}
             </div>
           </div>
-          {error.traces && process.env.NODE_ENV === "development"
-            ? <div
-                style={{
-                  textAlign: "left",
-                  marginTop: 25,
-                  paddingBottom: "1vh",
-                  backgroundColor: "rgb(248,248,248)",
-                  position: "relative",
-                  marginBottom: "-10vh"
+          {error.traces && process.env.NODE_ENV === "development" ? (
+            <div
+              style={{
+                textAlign: "left",
+                marginTop: 25,
+                paddingBottom: "1vh",
+                backgroundColor: "rgb(248,248,248)",
+                position: "relative",
+                marginBottom: "-10vh"
+              }}
+            >
+              <Developer.Debugger
+                label="Traces"
+                theme="light"
+                shouldExpandNode={(keyNameIgnored, dataIgnored, levelIgnored) =>
+                  true
+                }
+                object={{
+                  ApplicationTrace: error.traces["Application Trace"]
                 }}
-              >
-                <Developer.Debugger
-                  label="Traces"
-                  theme="light"
-                  shouldExpandNode={(
-                    keyNameIgnored,
-                    dataIgnored,
-                    levelIgnored
-                  ) => true}
-                  object={{
-                    ApplicationTrace: error.traces["Application Trace"]
-                  }}
-                />
-              </div>
-            : null}
+              />
+            </div>
+          ) : null}
         </div>
       </section>
     );

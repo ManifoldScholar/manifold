@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Utility } from "components/global";
 import lh from "helpers/linkHandler";
 import { connect } from "react-redux";
+import get from "lodash/get";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -58,7 +59,7 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
     const { twitterQueries, twitterQueriesMeta } = this.props;
     if (!twitterQueriesMeta || !twitterQueries) return null;
 
-    const active = this.props.match.params.qId;
+    const active = get(this.props.match, "params.qId");
     const instructions = (
       <p className="instructional-copy">
         Manifold will periodically fetch tweets according to the queries
@@ -81,13 +82,13 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
               Add a New Twitter Query
             </Link>
           </div>
-          {twitterQueries
-            ? <List.SimpleList
-                entities={twitterQueries}
-                entityComponent={TwitterQuery.ListItem}
-                entityComponentProps={{ active }}
-              />
-            : null}
+          {twitterQueries ? (
+            <List.SimpleList
+              entities={twitterQueries}
+              entityComponent={TwitterQuery.ListItem}
+              entityComponentProps={{ active }}
+            />
+          ) : null}
         </nav>
         <Utility.Pagination
           pagination={twitterQueriesMeta.pagination}

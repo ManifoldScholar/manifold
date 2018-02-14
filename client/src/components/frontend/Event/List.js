@@ -53,12 +53,12 @@ export default class EventList extends Component {
             return <Event event={event} key={event.id} />;
           })}
         </ul>
-        {this.props.pagination
-          ? <Utility.Pagination
-              paginationClickHandler={this.paginationClickHandler}
-              pagination={this.props.pagination}
-            />
-          : null}
+        {this.props.pagination ? (
+          <Utility.Pagination
+            paginationClickHandler={this.paginationClickHandler}
+            pagination={this.props.pagination}
+          />
+        ) : null}
       </div>
     );
   }

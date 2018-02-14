@@ -44,7 +44,8 @@ export default class StaticTextSample extends Component {
             <span>1</span>
           </a>
           <span>
-            {" "}As the hulking presence of Globomegacorp makes clear, the legal
+            {" "}
+            As the hulking presence of Globomegacorp makes clear, the legal
             recognition and constitutional protection of the corporation
             constitute an{" "}
             <span className="annotation-comment">
@@ -62,23 +63,25 @@ export default class StaticTextSample extends Component {
             <span>Citizens United v. The Federal Election Commission</span>
           </i>
           <span>
-            {" "}expanded the constitutional protections given to corporations
-            as legal persons.
+            {" "}
+            expanded the constitutional protections given to corporations as
+            legal persons.
           </span>
           <a className="enref" href="/read/15/section/229#en03002">
             <span>2</span>
           </a>
           <span>
-            {" "}That case considered the constitutionality of prohibitions
-            directed at corporate and union participation in elections
-            established under the McCain–Feingold Bipartisan Campaign Finance
-            Act of 2002. In an expansive ruling that overturned long-standing
-            court precedents, the Court held that such limitations on corporate
-            “speech” in elections were prohibited. That the ruling hinged on the
-            treatment of corporations as legal persons was made evident by newly
-            appointed Justice Sonia Sotomayor’s comments during the oral
-            presentation of the case. Sotomayor noted that the Court “gave
-            birth” to corporations, endowing “a creature of state law with human
+            {" "}
+            That case considered the constitutionality of prohibitions directed
+            at corporate and union participation in elections established under
+            the McCain–Feingold Bipartisan Campaign Finance Act of 2002. In an
+            expansive ruling that overturned long-standing court precedents, the
+            Court held that such limitations on corporate “speech” in elections
+            were prohibited. That the ruling hinged on the treatment of
+            corporations as legal persons was made evident by newly appointed
+            Justice Sonia Sotomayor’s comments during the oral presentation of
+            the case. Sotomayor noted that the Court “gave birth” to
+            corporations, endowing “a creature of state law with human
             characteristics,” and thus “there could be an argument made that
             that was the court’s error to start with.”
           </span>
@@ -108,7 +111,8 @@ export default class StaticTextSample extends Component {
               </b>
             </a>
             <span>
-              {" "}Matt Wuerker, “Corpenstein.” Wuerker’s cartoon captures the
+              {" "}
+              Matt Wuerker, “Corpenstein.” Wuerker’s cartoon captures the
               longstanding criticism that the treatment of corporations as
               persons in Anglo-American law weakens the rights of citizens and
               undermines democratic government. Image courtesy of the artist.
@@ -134,16 +138,17 @@ export default class StaticTextSample extends Component {
             <span>4</span>
           </a>
           <span>
-            {" "}Nonprofit and political advocacy groups (such as the
-            International Forum on Globalization [IFG], the Community
-            Environment Legal Defense Fund, Ralph Nader’s Multinational Monitor,
-            and the Alliance for Justice) reiterate elements of this argument,
-            voicing concerns that legal personhood helps consolidate corporate
-            economic and political power. The IFG has advocated charter reform
-            to end corporate personhood as part of its 2002 report on
-            alternatives to economic globalization, and Nader has recently
-            suggested impeachment of the conservative wing of the Supreme Court
-            as a necessary response to “judicial dictatorship.”
+            {" "}
+            Nonprofit and political advocacy groups (such as the International
+            Forum on Globalization [IFG], the Community Environment Legal
+            Defense Fund, Ralph Nader’s Multinational Monitor, and the Alliance
+            for Justice) reiterate elements of this argument, voicing concerns
+            that legal personhood helps consolidate corporate economic and
+            political power. The IFG has advocated charter reform to end
+            corporate personhood as part of its 2002 report on alternatives to
+            economic globalization, and Nader has recently suggested impeachment
+            of the conservative wing of the Supreme Court as a necessary
+            response to “judicial dictatorship.”
           </span>
           <a className="enref" href="/read/15/section/229#en03005">
             <span>5</span>
@@ -187,18 +192,20 @@ export default class StaticTextSample extends Component {
             <span>Santa Clara v. Southern Pacific Railroad Co.,</span>
           </i>
           <span>
-            {" "}conventionally credited with granting corporations equal
-            protection of the law and due process rights under the Fourteenth
-            Amendment of the U.S. Constitution.
+            {" "}
+            conventionally credited with granting corporations equal protection
+            of the law and due process rights under the Fourteenth Amendment of
+            the U.S. Constitution.
           </span>
           <a className="enref" href="/read/15/section/229#en03007">
             <span>7</span>
           </a>
           <span>
-            {" "}Although the Fourteenth Amendment was passed in the aftermath
-            of the Civil War to protect the rights of freed slaves, early
-            applications of the amendment considered its implications for other
-            legal “persons,” including both corporations and aliens. These legal
+            {" "}
+            Although the Fourteenth Amendment was passed in the aftermath of the
+            Civil War to protect the rights of freed slaves, early applications
+            of the amendment considered its implications for other legal
+            “persons,” including both corporations and aliens. These legal
             proceedings touched off a wide-ranging discussion among legal
             scholars, jurists, politicians, and philosophers, resulting in a
             prodigious outpouring of research and analysis on personhood through
@@ -225,31 +232,34 @@ export default class StaticTextSample extends Component {
             <span>money,</span>
           </i>
           <span>
-            {" "}which the Court confuses with speech. Furthermore, the argument
-            that challenging corporate personhood is neither the paramount issue
-            in corporate governance nor a particularly effective legal strategy
-            has an impressive intellectual pedigree in its own right. John
-            Dewey, the progressive educational reformer, philosopher, and public
+            {" "}
+            which the Court confuses with speech. Furthermore, the argument that
+            challenging corporate personhood is neither the paramount issue in
+            corporate governance nor a particularly effective legal strategy has
+            an impressive intellectual pedigree in its own right. John Dewey,
+            the progressive educational reformer, philosopher, and public
             intellectual, argued in an important 1926{" "}
           </span>
           <i>
             <span>Yale Law Journal</span>
           </i>
           <span>
-            {" "}article that the conception of the corporation as a person does
-            not, by itself, determine the scope of corporate powers. Writing at
-            the height of this earlier debate over corporate personality, he
-            argued that, as a legal category, “‘person’ signifies what law makes
-            it signify.”
+            {" "}
+            article that the conception of the corporation as a person does not,
+            by itself, determine the scope of corporate powers. Writing at the
+            height of this earlier debate over corporate personality, he argued
+            that, as a legal category, “‘person’ signifies what law makes it
+            signify.”
           </span>
           <a className="enref" href="/read/15/section/229#en03008">
             <span>8</span>
           </a>
           <span>
-            {" "}Conceived as either quasi-public entities created by state
-            power or legal persons, Dewey suggested that resolving problems with
-            the scope of corporate power was a political issue rather than one
-            of legal form. Bringing corporations in line with democracy meant
+            {" "}
+            Conceived as either quasi-public entities created by state power or
+            legal persons, Dewey suggested that resolving problems with the
+            scope of corporate power was a political issue rather than one of
+            legal form. Bringing corporations in line with democracy meant
             asserting political control over what corporations do, not what they
             are.
           </span>
@@ -269,7 +279,8 @@ export default class StaticTextSample extends Component {
             <span>uniquely</span>
           </i>
           <span>
-            {" "}created and consolidated corporate power. Instead, corporate
+            {" "}
+            created and consolidated corporate power. Instead, corporate
             personhood can be better understood as a retroactive attempt to
             rationalize an institution closely connected with early modern
             models of sovereignty and police within the juridical framework of a

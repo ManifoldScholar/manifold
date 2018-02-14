@@ -1,7 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { mount } from "enzyme";
 import VisibilityMenuButton from "../VisibilityMenuButton";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Reader.ControlMenu.VisibilityMenuButton Component", () => {
   const toggleMock = jest.fn();
@@ -15,9 +18,12 @@ describe("Reader.ControlMenu.VisibilityMenuButton Component", () => {
   });
 
   it("should trigger toggle callback when toggle is clicked", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     toggleMock.mockClear();
-    wrapper.find('[data-id="toggle-visibility"]').first().simulate("click");
+    wrapper
+      .find('[data-id="toggle-visibility"]')
+      .first()
+      .simulate("click");
     expect(toggleMock).toHaveBeenCalled();
   });
 });

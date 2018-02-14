@@ -1,6 +1,6 @@
 import { requests, meAPI } from "api";
 import { entityStoreActions } from "actions";
-import isEqual from "lodash/isEqual";
+import get from "lodash/get";
 
 const { request } = entityStoreActions;
 
@@ -10,18 +10,18 @@ export default function onUserIsCurrentUserUpdate(store) {
   return () => {
     lastState = currentState;
     currentState = store.getState();
-    const currentUser = currentState.authentication.currentUser;
-    if (!currentUser) return;
-    if (
-      !lastState.entityStore.entities.users ||
-      !currentState.entityStore.entities.users
-    )
-      return;
-    const lastStateUser = lastState.entityStore.entities.users[currentUser.id];
-    const currentStateUser =
-      currentState.entityStore.entities.users[currentUser.id];
-    if (!lastStateUser || !currentStateUser) return;
-    if (isEqual(lastStateUser.attributes, currentStateUser.attributes)) return;
+    const authUser = currentState.authentication.currentUser;
+    if (!authUser) return;
+    const lookup = `entityStore.entities.users.${authUser.id}`;
+    const lastUserEntity = get(lastState, lookup);
+    if (!lastUserEntity) return;
+    const currentUserEntity = get(currentState, lookup);
+    if (!currentUserEntity) return;
+    const lastUserEntityUpdatedAt = lastUserEntity.attributes.updatedAt;
+    const curentUserEntityUpdatedAt = currentUserEntity.attributes.updatedAt;
+    const authUserUpdatedAt = authUser.attributes.updatedAt;
+    if (lastUserEntityUpdatedAt === curentUserEntityUpdatedAt) return;
+    if (curentUserEntityUpdatedAt === authUserUpdatedAt) return;
     store.dispatch(request(meAPI.show(), requests.gAuthenticatedUserUpdate));
   };
 }

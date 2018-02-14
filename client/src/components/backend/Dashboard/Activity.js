@@ -37,37 +37,27 @@ export default class Activity extends Component {
         <tbody>
           <tr>
             <td>Texts added this week</td>
-            <td>
-              {stats.newTextsCount}
-            </td>
+            <td>{stats.newTextsCount}</td>
           </tr>
-          {stats.readersThisWeek !== null
-            ? <tr>
-                <td>Readers this week</td>
-                <td>
-                  {stats.readersThisWeek}
-                </td>
-              </tr>
-            : null}
-          {stats.readerIncrease != null
-            ? <tr>
-                <td>Change from last week</td>
-                <td>
-                  {this.formatReaderIncrease(stats)}
-                </td>
-              </tr>
-            : null}
+          {stats.readersThisWeek !== null ? (
+            <tr>
+              <td>Readers this week</td>
+              <td>{stats.readersThisWeek}</td>
+            </tr>
+          ) : null}
+          {stats.readerIncrease != null ? (
+            <tr>
+              <td>Change from last week</td>
+              <td>{this.formatReaderIncrease(stats)}</td>
+            </tr>
+          ) : null}
           <tr>
             <td>Highlights in the past week</td>
-            <td>
-              {stats.newHighlightsCount}
-            </td>
+            <td>{stats.newHighlightsCount}</td>
           </tr>
           <tr>
             <td>Annotations in the past week</td>
-            <td>
-              {stats.newAnnotationsCount}
-            </td>
+            <td>{stats.newAnnotationsCount}</td>
           </tr>
         </tbody>
       </table>

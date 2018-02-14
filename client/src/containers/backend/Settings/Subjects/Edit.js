@@ -90,13 +90,11 @@ export class SettingsSubjectsEditContainer extends PureComponent {
     const attr = subject.attributes;
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         <header className="drawer-header">
-          <h2 className="heading-quaternary">
-            {attr.name}
-          </h2>
+          <h2 className="heading-quaternary">{attr.name}</h2>
           <div className="buttons-bare-vertical">
             <button
               className="button-bare-primary"

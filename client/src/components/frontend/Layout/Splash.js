@@ -162,15 +162,15 @@ export default class Splash extends Component {
       <section style={this.backgroundStyle()} className={this.wrapperClass()}>
         <div className="container flush rel">
           <figure ref={el => (this.rightEl = el)} className="right">
-            {this.hasForeground()
-              ? <img
-                  ref={el => (this.imgEl = el)}
-                  style={this.foregroundStyle()}
-                  onLoad={this.sizeForeground}
-                  src={this.attribute("foregroundStyles.original")}
-                  alt={this.header(false)}
-                />
-              : null}
+            {this.hasForeground() ? (
+              <img
+                ref={el => (this.imgEl = el)}
+                style={this.foregroundStyle()}
+                onLoad={this.sizeForeground}
+                src={this.attribute("foregroundStyles.original")}
+                alt={this.header(false)}
+              />
+            ) : null}
             &nbsp;
           </figure>
           <div className="left">
@@ -190,27 +190,27 @@ export default class Splash extends Component {
               dangerouslySetInnerHTML={{ __html: this.body() }}
             />
             <div className="splash-content" />
-            {this.hasLink()
-              ? <nav className="buttons">
+            {this.hasLink() ? (
+              <nav className="buttons">
+                <a
+                  href={this.attribute("linkUrl")}
+                  target="blank"
+                  className="button-bare-primary"
+                >
+                  {this.attribute("linkText")}
+                </a>
+                {!this.props.authenticated ? (
                   <a
-                    href={this.attribute("linkUrl")}
+                    href="#"
+                    onClick={this.handleSignUp}
                     target="blank"
                     className="button-bare-primary"
                   >
-                    {this.attribute("linkText")}
+                    {"Sign Up"}
                   </a>
-                  {!this.props.authenticated
-                    ? <a
-                        href="#"
-                        onClick={this.handleSignUp}
-                        target="blank"
-                        className="button-bare-primary"
-                      >
-                        {"Sign Up"}
-                      </a>
-                    : null}
-                </nav>
-              : null}
+                ) : null}
+              </nav>
+            ) : null}
           </div>
         </div>
       </section>

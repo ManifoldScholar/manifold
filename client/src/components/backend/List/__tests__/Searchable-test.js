@@ -1,10 +1,13 @@
 import React from "react";
 import Searchable from "../Searchable";
-import { shallow, render, mount } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
 import renderer from "react-test-renderer";
 import ListItem from "components/backend/Resource/ListItem";
 import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Backend.List.Searchable component", () => {
   const entities = [build.entity.resource("1"), build.entity.resource("2")];
@@ -74,19 +77,19 @@ describe("Backend.List.Searchable component", () => {
   });
 
   it("should render the correct number of ListItems", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     expect(wrapper.find(ListItem)).toHaveLength(2);
   });
 
   it("should show filter options when toggle is clicked", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     expect(wrapper.find('[data-id="filter"]')).toHaveLength(0);
     wrapper.find('[data-id="filter-toggle"]').simulate("click", fakeClick);
     expect(wrapper.find('[data-id="filter"]')).toHaveLength(1);
   });
 
   it("should trigger filterChangeMock callback when filter is changed", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     const filterEvent = {
       preventDefault: () => true,
       target: {
@@ -99,7 +102,7 @@ describe("Backend.List.Searchable component", () => {
   });
 
   it("should trigger paginationClickHandler callback when page change is clicked", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     pageChangeMock.mockClear();
     wrapper.find('[data-id="page-next"]').simulate("click", fakeClick);
     expect(pageChangeMock).toHaveBeenCalled();

@@ -14,14 +14,14 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                     <NotationViewer.Single entry={{...}} params={{...}} actions={{...}} showTitle={false} active={false}>
                       <div className=\\"notation-preview-single\\">
                         <RequireAbility entity={{...}} requiredAbility=\\"delete\\" hasAbilityBehavior=\\"show\\">
-                          <button onClick={[Function]} className=\\"notation-delete\\">
+                          <button onClick={[Function: onClick]} className=\\"notation-delete\\">
                             <i className=\\"manicon manicon-x\\" />
                           </button>
                         </RequireAbility>
                         <NotationViewerLink notation={{...}} params={{...}} className=\\"notation-single-link\\">
                           <Link className=\\"notation-single-link\\" to=\\"/read/5/section/6/resource/2\\" replace={false}>
                             <a className=\\"notation-single-link\\" onClick={[Function]} href=\\"/read/5/section/6/resource/2\\">
-                              <div style={{...}} onMouseOver={[Function]} onMouseLeave={[Function]}>
+                              <div style={{...}} onMouseOver={[Function: onMouseOver]} onMouseLeave={[Function: onMouseLeave]}>
                                 <NotationViewer.Notation notation={{...}} additionalClasses=\\"minimal right\\" showTitle={false} neverCrop={false}>
                                   <Resourceish.Thumbnail resourceish={{...}} showKind={false} noCrop={false} showTitle={false} variant=\\"smallLandscape\\" additionalClasses=\\"minimal right\\">
                                     <div className=\\"icon-thumbnail-primary minimal right\\" style={{...}}>
@@ -55,7 +55,7 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
           </div>
           <ul className=\\"group-thumbnails\\">
             <li>
-              <div onMouseOver={[Function]} onMouseLeave={[Function]}>
+              <div onMouseOver={[Function: onMouseOver]} onMouseLeave={[Function: onMouseLeave]}>
                 <div className=\\"group-thumbnail\\">
                   <NotationViewerLink params={{...}} notation={{...}}>
                     <Link className={[undefined]} to=\\"/read/5/section/6/resource/2\\" replace={false}>
@@ -87,7 +87,7 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
               </div>
             </li>
             <li>
-              <div onMouseOver={[Function]} onMouseLeave={[Function]}>
+              <div onMouseOver={[Function: onMouseOver]} onMouseLeave={[Function: onMouseLeave]}>
                 <div className=\\"group-thumbnail\\">
                   <NotationViewerLink params={{...}} notation={{...}}>
                     <Link className={[undefined]} to=\\"/read/5/section/6/resource/4\\" replace={false}>
@@ -119,7 +119,7 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
               </div>
             </li>
           </ul>
-          <h4 onMouseOver={[Function]} onMouseLeave={[Function]} className=\\"group-active-title\\">
+          <h4 onMouseOver={[Function: onMouseOver]} onMouseLeave={[Function: onMouseLeave]} className=\\"group-active-title\\">
             <NotationViewerLink params={{...}} notation={{...}}>
               <Link className={[undefined]} to=\\"/read/5/section/6/resource/2\\" replace={false}>
                 <a className={[undefined]} onClick={[Function]} href=\\"/read/5/section/6/resource/2\\">

@@ -151,13 +151,13 @@ class SearchContainer extends PureComponent {
             doSearch={this.doSearch}
             setQueryState={this.setQueryState}
           />
-          {this.props.results
-            ? <Search.Results
-                pagination={this.props.resultsMeta.pagination}
-                paginationClickHandler={this.setPage}
-                results={this.props.results}
-              />
-            : null}
+          {this.props.results ? (
+            <Search.Results
+              pagination={this.props.resultsMeta.pagination}
+              paginationClickHandler={this.setPage}
+              results={this.props.results}
+            />
+          ) : null}
         </div>
       </Overlay>
     );

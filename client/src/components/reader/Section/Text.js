@@ -150,8 +150,9 @@ export default class Text extends Component {
     textSectionClass += " " + fontSizeClass;
 
     // Apply a conditional container class that maps to a size in CSS
-    const containerClass = `container-focus container-width-${typography.margins
-      .current}`;
+    const containerClass = `container-focus container-width-${
+      typography.margins.current
+    }`;
 
     const section = this.props.section;
 

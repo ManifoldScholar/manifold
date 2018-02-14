@@ -74,88 +74,90 @@ export default class AnnotationDetail extends PureComponent {
     return (
       <li className="annotation-annotation">
         <Meta annotation={annotation} creator={creator} />
-        {this.state.action === "editing"
-          ? <Editor
-              id={annotation.id}
-              body={annotation.attributes.body}
-              private={annotation.attributes.private}
-              subject={annotation.attributes.subject}
-              startNode={annotation.attributes.startNode}
-              startChar={annotation.attributes.startChar}
-              endNode={annotation.attributes.endNode}
-              endChar={annotation.attributes.endChar}
-              saveHandler={this.props.saveHandler}
-              cancel={this.stopAction}
-            />
-          : <div>
-              <section className="body">
-                <Helper.SimpleFormat text={annotation.attributes.body} />
-              </section>
-              <HigherOrder.RequireKind requiredKind={"any"}>
-                <nav className="utility">
-                  <ul>
-                    {this.props.includeComments
-                      ? <li>
-                          <button
-                            className={replyButtonClass}
-                            onClick={this.startReply}
-                          >
-                            {"Reply"}
-                          </button>
-                        </li>
-                      : null}
-                    <HigherOrder.RequireAbility
-                      entity={annotation}
-                      requiredAbility={"update"}
-                    >
-                      {this.props.saveHandler
-                        ? <li>
-                            <button
-                              className={editButtonClass}
-                              onClick={this.startEdit}
-                            >
-                              {"Edit"}
-                            </button>
-                          </li>
-                        : null}
-                    </HigherOrder.RequireAbility>
-                    <HigherOrder.RequireAbility
-                      entity={annotation}
-                      requiredAbility={"delete"}
-                    >
-                      {this.props.deleteHandler
-                        ? <li>
-                            <Utility.ConfirmableButton
-                              label="Delete"
-                              confirmHandler={this.handleDelete}
-                            />
-                          </li>
-                        : null}
-                    </HigherOrder.RequireAbility>
-                  </ul>
-                  {this.state.action === "replying"
-                    ? <CommentContainer.Editor
-                        subject={annotation}
-                        cancel={this.stopAction}
-                      />
-                    : null}
-                </nav>
-              </HigherOrder.RequireKind>
-              <HigherOrder.RequireKind requiredKind="unauthenticated">
-                <nav className="utility">
-                  <ul>
+        {this.state.action === "editing" ? (
+          <Editor
+            id={annotation.id}
+            body={annotation.attributes.body}
+            private={annotation.attributes.private}
+            subject={annotation.attributes.subject}
+            startNode={annotation.attributes.startNode}
+            startChar={annotation.attributes.startChar}
+            endNode={annotation.attributes.endNode}
+            endChar={annotation.attributes.endChar}
+            saveHandler={this.props.saveHandler}
+            cancel={this.stopAction}
+          />
+        ) : (
+          <div>
+            <section className="body">
+              <Helper.SimpleFormat text={annotation.attributes.body} />
+            </section>
+            <HigherOrder.RequireKind requiredKind={"any"}>
+              <nav className="utility">
+                <ul>
+                  {this.props.includeComments ? (
                     <li>
-                      <button onClick={this.props.showLogin}>
-                        {"Login to reply"}
+                      <button
+                        className={replyButtonClass}
+                        onClick={this.startReply}
+                      >
+                        {"Reply"}
                       </button>
                     </li>
-                  </ul>
-                </nav>
-              </HigherOrder.RequireKind>
-            </div>}
-        {this.props.includeComments
-          ? <CommentContainer.Thread subject={annotation} />
-          : null}
+                  ) : null}
+                  <HigherOrder.RequireAbility
+                    entity={annotation}
+                    requiredAbility={"update"}
+                  >
+                    {this.props.saveHandler ? (
+                      <li>
+                        <button
+                          className={editButtonClass}
+                          onClick={this.startEdit}
+                        >
+                          {"Edit"}
+                        </button>
+                      </li>
+                    ) : null}
+                  </HigherOrder.RequireAbility>
+                  <HigherOrder.RequireAbility
+                    entity={annotation}
+                    requiredAbility={"delete"}
+                  >
+                    {this.props.deleteHandler ? (
+                      <li>
+                        <Utility.ConfirmableButton
+                          label="Delete"
+                          confirmHandler={this.handleDelete}
+                        />
+                      </li>
+                    ) : null}
+                  </HigherOrder.RequireAbility>
+                </ul>
+                {this.state.action === "replying" ? (
+                  <CommentContainer.Editor
+                    subject={annotation}
+                    cancel={this.stopAction}
+                  />
+                ) : null}
+              </nav>
+            </HigherOrder.RequireKind>
+            <HigherOrder.RequireKind requiredKind="unauthenticated">
+              <nav className="utility">
+                <ul>
+                  <li>
+                    <button onClick={this.props.showLogin}>
+                      {"Login to reply"}
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </HigherOrder.RequireKind>
+          </div>
+        )}
+        {this.props.includeComments ? (
+          <CommentContainer.Thread subject={annotation} />
+        ) : null}
       </li>
     );
   }

@@ -10,26 +10,26 @@ describe("Frontend ProjectDetail Container", () => {
   const project = build.entity.project("1");
   const settings = build.entity.settings();
 
-  const component = renderer.create(
-    wrapWithRouter(
-      <Provider store={store}>
-        <ProjectDetailContainer
-          dispatch={store.dispatch}
-          project={project}
-          settings={settings}
-          projectResponse={{}}
-        />
-      </Provider>
+  const tree = renderer
+    .create(
+      wrapWithRouter(
+        <Provider store={store}>
+          <ProjectDetailContainer
+            dispatch={store.dispatch}
+            project={project}
+            settings={settings}
+            projectResponse={{}}
+          />
+        </Provider>
+      )
     )
-  );
+    .toJSON();
 
   it("renders correctly", () => {
-    let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("doesn't render to null", () => {
-    let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
 });

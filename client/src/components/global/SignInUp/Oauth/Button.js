@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { oauthActions } from "actions";
 import { get } from "lodash";
 import { providerSetting } from "utils/oauth";
 import HigherOrder from "containers/global/HigherOrder";
 
-class Button extends PureComponent {
+class Button extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     provider: PropTypes.string.isRequired,
@@ -22,10 +22,6 @@ class Button extends PureComponent {
   shouldComponentUpdate(nextProps) {
     return this.props.settings !== nextProps.settings;
   }
-
-  openWindow = eventIgnored => {
-    this.props.dispatch(oauthActions.prompt(this.props.provider));
-  };
 
   get oauthSettings() {
     const settingsKey = providerSetting(this.props.provider);
@@ -45,20 +41,24 @@ class Button extends PureComponent {
     return `manicon-${this.props.provider}`;
   }
 
+  openWindow = eventIgnored => {
+    this.props.dispatch(oauthActions.prompt(this.props.provider));
+  };
+
   render() {
     if (!this.isEnabled) {
       return null;
     }
 
-    const icon = this.props.hasIcon
-      ? <i className={`manicon ${this.iconClass}`} />
-      : null;
+    const icon = this.props.hasIcon ? (
+      <i className={`manicon ${this.iconClass}`} />
+    ) : null;
 
-    const label = this.props.children
-      ? this.props.children
-      : <span>
-          Log in with {this.props.provider}
-        </span>;
+    const label = this.props.children ? (
+      this.props.children
+    ) : (
+      <span>Log in with {this.props.provider}</span>
+    );
 
     return (
       <button className="button-secondary-dark" onClick={this.openWindow}>

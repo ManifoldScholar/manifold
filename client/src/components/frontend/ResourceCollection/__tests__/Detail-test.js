@@ -36,7 +36,9 @@ describe("Frontend.ResourceCollection.Detail Component", () => {
             collectionPagination={pagination}
             collectionPaginationHandler={pageChangeMock}
             collection={collection}
-            collectionUrl={`/browse/project/${project.id}/collection/${collection.id}`}
+            collectionUrl={`/browse/project/${project.id}/collection/${
+              collection.id
+            }`}
             filterChange={filterChangeMock}
             initialFilterState={null}
           />

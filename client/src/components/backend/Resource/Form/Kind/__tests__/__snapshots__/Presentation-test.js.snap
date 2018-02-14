@@ -13,7 +13,7 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
     >
       Presentation File
     </label>
-    <Dropzone
+    <react-dropzone
       accept="application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint"
       className="form-dropzone style-square"
       multiple={false}
@@ -49,7 +49,7 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
           </p>
         </div>
       </div>
-    </Dropzone>
+    </react-dropzone>
   </div>
 </div>
 `;

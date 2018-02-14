@@ -1,295 +1,392 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend Settings Integrations Container renders correctly 1`] = `
-"<MemoryRouter>
-  <Router history={{...}}>
-    <Provider store={{...}}>
-      <SettingsIntegrationsContainer settings={{...}}>
-        <section>
-          <withRouter(Connect(Form.Form)) model={{...}} name=\\"backend-settings\\" update={[Function]} create={[Function]} className=\\"form-secondary\\">
-            <Route render={[Function]}>
-              <Connect(Form.Form) model={{...}} name=\\"backend-settings\\" update={[Function]} create={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
-                <Form.Form model={{...}} name=\\"backend-settings\\" update={[Function]} create={[Function]} className=\\"form-secondary\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} session={{...}} response={[undefined]} errors={[undefined]} dispatch={[Function]} doNotWarn={false} debug={false} groupErrors={false} options={{...}}>
-                  <div>
-                    <Prompt when={false} message=\\"You may have unsaved changes. Do you want to leave without saving your changes?\\" />
-                    <form onSubmit={[Function]} className=\\"form-secondary\\" data-id=\\"submit\\">
-                      <div className=\\"form-header\\">
-                        <header className=\\"section-heading-secondary\\">
-                          <h3>
-                            Facebook Configuration
-                          </h3>
-                        </header>
-                      </div>
-                      <Form.Setter('Form.TextInput) focusOnMount={true} label=\\"Facebook App ID\\" name=\\"attributes[integrations][facebookAppId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput focusOnMount={true} label=\\"Facebook App ID\\" name=\\"attributes[integrations][facebookAppId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[integrations][facebookAppId]\\" errors={{...}} label=\\"Facebook App ID\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Facebook App ID
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Facebook App Secret\\" name=\\"attributes[secrets][facebookAppSecret]\\" password={true} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Facebook App Secret\\" name=\\"attributes[secrets][facebookAppSecret]\\" password={true} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[secrets][facebookAppSecret]\\" errors={{...}} label=\\"Facebook App Secret\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Facebook App Secret
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"password\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <div className=\\"form-header\\">
-                        <header className=\\"section-heading-secondary\\">
-                          <h3>
-                            Twitter Configuration
-                          </h3>
-                        </header>
-                      </div>
-                      <Form.Setter('Form.TextInput) label=\\"Twitter Consumer Key\\" name=\\"attributes[integrations][twitterAppId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Twitter Consumer Key\\" name=\\"attributes[integrations][twitterAppId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[integrations][twitterAppId]\\" errors={{...}} label=\\"Twitter Consumer Key\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Twitter Consumer Key
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) password={true} label=\\"Twitter Consumer Secret\\" name=\\"attributes[secrets][twitterAppSecret]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput password={true} label=\\"Twitter Consumer Secret\\" name=\\"attributes[secrets][twitterAppSecret]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[secrets][twitterAppSecret]\\" errors={{...}} label=\\"Twitter Consumer Secret\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Twitter Consumer Secret
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"password\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Twitter Access Token\\" name=\\"attributes[integrations][twitterAccessToken]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Twitter Access Token\\" name=\\"attributes[integrations][twitterAccessToken]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[integrations][twitterAccessToken]\\" errors={{...}} label=\\"Twitter Access Token\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Twitter Access Token
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) password={true} label=\\"Twitter Access Token Secret\\" name=\\"attributes[secrets][twitterAccessTokenSecret]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput password={true} label=\\"Twitter Access Token Secret\\" name=\\"attributes[secrets][twitterAccessTokenSecret]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[secrets][twitterAccessTokenSecret]\\" errors={{...}} label=\\"Twitter Access Token Secret\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Twitter Access Token Secret
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"password\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <div className=\\"form-header\\">
-                        <header className=\\"section-heading-secondary\\">
-                          <h3>
-                            Google Configuration
-                          </h3>
-                        </header>
-                      </div>
-                      <Form.Setter('Form.Upload) layout=\\"square\\" accepts=\\"json\\" label=\\"Google Service Config File\\" name=\\"attributes[googleService]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.Upload layout=\\"square\\" accepts=\\"json\\" label=\\"Google Service Config File\\" name=\\"attributes[googleService]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]}>
-                          <div className=\\"form-input\\">
-                            <Errorable className=\\"form-input\\" name=\\"attributes[googleService]\\" errors={{...}} label=\\"Google Service Config File\\" containerStyle={{...}}>
-                              <div style={{...}} className=\\"form-input\\">
-                                <label className=\\"\\">
-                                  Google Service Config File
-                                </label>
-                                <Instructions instructions={{...}} />
-                                <Dropzone style={[undefined]} className=\\"form-dropzone style-square\\" multiple={false} onDrop={[Function]} accept=\\"application/json\\">
-                                  <div className=\\"contents-empty\\">
-                                    <i className=\\"manicon manicon-cloud-up\\" />
-                                    <div className=\\"message\\">
-                                      <p className=\\"primary\\">
-                                        <span className=\\"fake-link\\">
-                                          Upload a file
-                                        </span>
-                                         or
-                                        <br />
-                                        drag and drop here
-                                        <br />
-                                      </p>
-                                      <p className=\\"secondary\\">
-                                        .json
-                                      </p>
-                                    </div>
-                                  </div>
-                                </Dropzone>
-                              </div>
-                            </Errorable>
-                          </div>
-                        </Form.Upload>
-                      </Form.Setter('Form.Upload)>
-                      <Form.Setter('Form.TextArea) label=\\"Google Private Key\\" name=\\"attributes[secrets][googlePrivateKey]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextArea label=\\"Google Private Key\\" name=\\"attributes[secrets][googlePrivateKey]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} height={100}>
-                          <div className=\\"form-input\\">
-                            <Errorable className=\\"form-input\\" name=\\"attributes[secrets][googlePrivateKey]\\" errors={{...}} label=\\"Google Private Key\\" containerStyle={{...}}>
-                              <div style={{...}} className=\\"form-input\\">
-                                <label className=\\"\\">
-                                  Google Private Key
-                                </label>
-                                <Instructions instructions={{...}} />
-                                <textarea style={{...}} placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                              </div>
-                            </Errorable>
-                          </div>
-                        </Form.TextArea>
-                      </Form.Setter('Form.TextArea)>
-                      <Form.Setter('Form.TextInput) label=\\"Google Project Id\\" name=\\"attributes[integrations][googleProjectId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Google Project Id\\" name=\\"attributes[integrations][googleProjectId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googleProjectId]\\" errors={{...}} label=\\"Google Project Id\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Google Project Id
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Google Private Key ID\\" name=\\"attributes[integrations][googlePrivateKeyId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Google Private Key ID\\" name=\\"attributes[integrations][googlePrivateKeyId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googlePrivateKeyId]\\" errors={{...}} label=\\"Google Private Key ID\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Google Private Key ID
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Google Client Email\\" name=\\"attributes[integrations][googleClientEmail]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Google Client Email\\" name=\\"attributes[integrations][googleClientEmail]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googleClientEmail]\\" errors={{...}} label=\\"Google Client Email\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Google Client Email
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Google Client ID\\" name=\\"attributes[integrations][googleClientId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Google Client ID\\" name=\\"attributes[integrations][googleClientId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googleClientId]\\" errors={{...}} label=\\"Google Client ID\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Google Client ID
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <div className=\\"form-header\\">
-                        <header className=\\"section-heading-secondary\\">
-                          <h3>
-                            Google OAuth Configuration
-                          </h3>
-                        </header>
-                      </div>
-                      <Form.Setter('Form.TextInput) label=\\"Google OAuth Client ID\\" name=\\"attributes[integrations][googleOauthClientId]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Google OAuth Client ID\\" name=\\"attributes[integrations][googleOauthClientId]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[integrations][googleOauthClientId]\\" errors={{...}} label=\\"Google OAuth Client ID\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Google OAuth Client ID
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"text\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Google Client Secret\\" password={true} name=\\"attributes[secrets][googleOauthClientSecret]\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Google Client Secret\\" password={true} name=\\"attributes[secrets][googleOauthClientSecret]\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[secrets][googleOauthClientSecret]\\" errors={{...}} label=\\"Google Client Secret\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Google Client Secret
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"password\\" placeholder={[undefined]} onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <div className=\\"form-header\\">
-                        <header className=\\"section-heading-secondary\\">
-                          <h3>
-                            Google Analytics Configuration
-                          </h3>
-                        </header>
-                      </div>
-                      <Form.Setter('Form.MaskedTextInput) label=\\"Google Analytics Profile ID\\" name=\\"attributes[integrations][gaProfileId]\\" placeholder=\\"ga:123456789\\" mask={{...}} actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.MaskedTextInput label=\\"Google Analytics Profile ID\\" name=\\"attributes[integrations][gaProfileId]\\" placeholder=\\"ga:123456789\\" mask={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}}>
-                          <div className=\\"form-input\\">
-                            <label className=\\"\\">
-                              Google Analytics Profile ID
-                            </label>
-                            <Instructions instructions={{...}} />
-                            <ReactTextMask onChange={[Function]} value={{...}} type=\\"text\\" mask={{...}} placeholder=\\"ga:123456789\\" />
-                          </div>
-                        </Form.MaskedTextInput>
-                      </Form.Setter('Form.MaskedTextInput)>
-                      <Form.Setter('Form.TextInput) label=\\"Google Analytics Tracking ID\\" name=\\"attributes[integrations][gaTrackingId]\\" placeholder=\\"UA-000000-00\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <Form.TextInput label=\\"Google Analytics Tracking ID\\" name=\\"attributes[integrations][gaTrackingId]\\" placeholder=\\"UA-000000-00\\" getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={{...}} initialValue={{...}} focusOnMount={false} password={false}>
-                          <Errorable className=\\"form-input\\" name=\\"attributes[integrations][gaTrackingId]\\" errors={{...}} label=\\"Google Analytics Tracking ID\\" containerStyle={{...}}>
-                            <div style={{...}} className=\\"form-input\\">
-                              <label className=\\"\\">
-                                Google Analytics Tracking ID
-                              </label>
-                              <Instructions instructions={{...}} />
-                              <input type=\\"text\\" placeholder=\\"UA-000000-00\\" onChange={[Function]} value=\\"\\" />
-                            </div>
-                          </Errorable>
-                        </Form.TextInput>
-                      </Form.Setter('Form.TextInput)>
-                      <Form.Save text=\\"Save Settings\\" actions={{...}} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function]} sessionKey=\\"backend-settings\\" submitKey={{...}} errors={{...}}>
-                        <div className=\\"form-input submit\\">
-                          <input className=\\"button-secondary outlined\\" type=\\"submit\\" value=\\"Save Settings\\" />
-                        </div>
-                      </Form.Save>
-                    </form>
-                  </div>
-                </Form.Form>
-              </Connect(Form.Form)>
-            </Route>
-          </withRouter(Connect(Form.Form))>
-        </section>
-      </SettingsIntegrationsContainer>
-    </Provider>
-  </Router>
-</MemoryRouter>"
+<section>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-header"
+      >
+        <header
+          className="section-heading-secondary"
+        >
+          <h3>
+            Facebook Configuration
+          </h3>
+        </header>
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Facebook App ID
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Facebook App Secret
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="form-header"
+      >
+        <header
+          className="section-heading-secondary"
+        >
+          <h3>
+            Twitter Configuration
+          </h3>
+        </header>
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Twitter Consumer Key
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Twitter Consumer Secret
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Twitter Access Token
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Twitter Access Token Secret
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="form-header"
+      >
+        <header
+          className="section-heading-secondary"
+        >
+          <h3>
+            Google Configuration
+          </h3>
+        </header>
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Google Service Config File
+          </label>
+          <react-dropzone
+            accept="application/json"
+            className="form-dropzone style-square"
+            multiple={false}
+            onDrop={[Function]}
+            style={undefined}
+          >
+            <div
+              className="contents-empty"
+            >
+              <i
+                className="manicon manicon-cloud-up"
+              />
+              <div
+                className="message"
+              >
+                <p
+                  className="primary"
+                >
+                  <span
+                    className="fake-link"
+                  >
+                    Upload a file
+                  </span>
+                   or
+                  <br />
+                  drag and drop here
+                  <br />
+                </p>
+                <p
+                  className="secondary"
+                >
+                  .json
+                </p>
+              </div>
+            </div>
+          </react-dropzone>
+        </div>
+      </div>
+      <div
+        className="form-input"
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Google Private Key
+          </label>
+          <textarea
+            onChange={[Function]}
+            placeholder={undefined}
+            style={
+              Object {
+                "height": 100,
+              }
+            }
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Google Project Id
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Google Private Key ID
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Google Client Email
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Google Client ID
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-header"
+      >
+        <header
+          className="section-heading-secondary"
+        >
+          <h3>
+            Google OAuth Configuration
+          </h3>
+        </header>
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Google OAuth Client ID
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Google Client Secret
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder={undefined}
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="form-header"
+      >
+        <header
+          className="section-heading-secondary"
+        >
+          <h3>
+            Google Analytics Configuration
+          </h3>
+        </header>
+      </div>
+      <div
+        className="form-input"
+      >
+        <label
+          className=""
+        >
+          Google Analytics Profile ID
+        </label>
+        <react-text-mask
+          mask={
+            Array [
+              "g",
+              "a",
+              ":",
+              /\\\\d/,
+              /\\\\d/,
+              /\\\\d/,
+              /\\\\d/,
+              /\\\\d/,
+              /\\\\d/,
+              /\\\\d/,
+              /\\\\d/,
+              /\\\\d/,
+            ]
+          }
+          onChange={[Function]}
+          placeholder="ga:123456789"
+          type="text"
+          value={null}
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Google Analytics Tracking ID
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="UA-000000-00"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input submit"
+      >
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save Settings"
+        />
+      </div>
+    </form>
+  </div>
+</section>
 `;

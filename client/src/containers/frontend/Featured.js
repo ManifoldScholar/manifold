@@ -97,17 +97,17 @@ export class FeaturedContainer extends Component {
                 />
               </div>
             </header>
-            {this.props.featuredProjects
-              ? <ProjectList.Grid
-                  authenticated={this.props.authentication.authenticated}
-                  favorites={get(
-                    this.props.authentication,
-                    "currentUser.favorites"
-                  )}
-                  dispatch={this.props.dispatch}
-                  projects={this.props.featuredProjects}
-                />
-              : null}
+            {this.props.featuredProjects ? (
+              <ProjectList.Grid
+                authenticated={this.props.authentication.authenticated}
+                favorites={get(
+                  this.props.authentication,
+                  "currentUser.favorites"
+                )}
+                dispatch={this.props.dispatch}
+                projects={this.props.featuredProjects}
+              />
+            ) : null}
           </div>
         </section>
         <Layout.ButtonNavigation

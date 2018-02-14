@@ -1,7 +1,10 @@
 import React from "react";
-import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 import Avatar from "../Avatar";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Global.Avatar component", () => {
   it("renders correctly", () => {
@@ -11,7 +14,7 @@ describe("Global.Avatar component", () => {
   });
 
   it("renders a placeholder when no url specified", () => {
-    const component = shallow(<Avatar />);
+    const component = Enzyme.shallow(<Avatar />);
     expect(component.find("i")).toHaveLength(1);
   });
 });

@@ -163,25 +163,25 @@ export default class ResourceListSlideCaption extends Component {
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
           />
         </header>
-        {this.state.Velocity && this.hasCaption(resource)
-          ? <this.state.Velocity.VelocityComponent {...animation}>
+        {this.state.Velocity && this.hasCaption(resource) ? (
+          <this.state.Velocity.VelocityComponent {...animation}>
+            <div
+              className="resource-description"
+              ref={e => {
+                this._description = e;
+              }}
+            >
               <div
-                className="resource-description"
                 ref={e => {
-                  this._description = e;
+                  this._descriptionContents = e;
                 }}
-              >
-                <div
-                  ref={e => {
-                    this._descriptionContents = e;
-                  }}
-                  dangerouslySetInnerHTML={this.createDescription(
-                    attr.captionFormatted
-                  )}
-                />
-              </div>
-            </this.state.Velocity.VelocityComponent>
-          : null}
+                dangerouslySetInnerHTML={this.createDescription(
+                  attr.captionFormatted
+                )}
+              />
+            </div>
+          </this.state.Velocity.VelocityComponent>
+        ) : null}
         <div
           className={utilityClass}
           ref={e => {
@@ -190,28 +190,24 @@ export default class ResourceListSlideCaption extends Component {
         >
           <div className="wrapper">
             <button className={moreLinkClass} onClick={this.handleReadMore}>
-              <span className="open-text">
-                {"Read More"}
-              </span>
-              <span className="close-text">
-                {"Hide Description"}
-              </span>
+              <span className="open-text">{"Read More"}</span>
+              <span className="close-text">{"Hide Description"}</span>
             </button>
-            {this.canDownload(resource)
-              ? <a
-                  href={attr.attachmentStyles.original}
-                  target="_blank"
-                  className="download-link"
-                >
-                  {"Download"}
-                  <i className="manicon manicon-arrow-down" />
-                </a>
-              : null}
-            {detailUrl && !this.props.hideDetailUrl
-              ? <Link className="detail-link" to={detailUrl}>
-                  {"View Resource"}
-                </Link>
-              : null}
+            {this.canDownload(resource) ? (
+              <a
+                href={attr.attachmentStyles.original}
+                target="_blank"
+                className="download-link"
+              >
+                {"Download"}
+                <i className="manicon manicon-arrow-down" />
+              </a>
+            ) : null}
+            {detailUrl && !this.props.hideDetailUrl ? (
+              <Link className="detail-link" to={detailUrl}>
+                {"View Resource"}
+              </Link>
+            ) : null}
           </div>
         </div>
       </div>

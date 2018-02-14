@@ -691,16 +691,16 @@ class Annotatable extends Component {
           {this.renderPopupContents()}
         </Annotation.Popup.Wrapper>
         {/* Render the margin notations */}
-        {this.props.notations
-          ? <NotationComponents.Viewer.List
-              sectionId={this.props.sectionId}
-              textId={this.props.textId}
-              notations={this.props.notations}
-              annotations={this.props.annotations}
-              containerSize={this.props.containerSize}
-              bodySelector={this.props.bodySelector}
-            />
-          : null}
+        {this.props.notations ? (
+          <NotationComponents.Viewer.List
+            sectionId={this.props.sectionId}
+            textId={this.props.textId}
+            notations={this.props.notations}
+            annotations={this.props.annotations}
+            containerSize={this.props.containerSize}
+            bodySelector={this.props.bodySelector}
+          />
+        ) : null}
       </div>
     );
     /* eslint-enable jsx-a11y/no-noninteractive-tabindex */

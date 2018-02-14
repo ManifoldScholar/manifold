@@ -42,34 +42,30 @@ export default class DetailHeader extends PureComponent {
     const breadcrumb = this.props.breadcrumb;
     return (
       <section className="bg-neutral95">
-        {breadcrumb && breadcrumb.length > 0
-          ? <Navigation.Breadcrumb links={this.props.breadcrumb} />
-          : null}
+        {breadcrumb && breadcrumb.length > 0 ? (
+          <Navigation.Breadcrumb links={this.props.breadcrumb} />
+        ) : null}
         <div className="container flush">
           <header className="entity-header-primary">
-            {this.props.type === "user"
-              ? null
-              : <figure>
-                  <i
-                    className={`manicon ${this.typeToManiconClass(
-                      this.props.type
-                    )}`}
-                  />
-                </figure>}
+            {this.props.type === "user" ? null : (
+              <figure>
+                <i
+                  className={`manicon ${this.typeToManiconClass(
+                    this.props.type
+                  )}`}
+                />
+              </figure>
+            )}
             <div className="title">
               <h1>
                 {this.renderTitle()}
-                <span className="subtitle">
-                  {this.props.subtitle}
-                </span>
+                <span className="subtitle">{this.props.subtitle}</span>
               </h1>
               <div className="utility">
                 {this.props.utility ? this.props.utility : null}
-                {this.props.note
-                  ? <span className="notes">
-                      {this.props.note}
-                    </span>
-                  : null}
+                {this.props.note ? (
+                  <span className="notes">{this.props.note}</span>
+                ) : null}
               </div>
             </div>
           </header>

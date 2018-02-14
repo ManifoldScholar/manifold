@@ -28,21 +28,21 @@ export default class MakerListItem extends PureComponent {
         <Link to={lh.link("backendPeopleMaker", maker.id)}>
           <header>
             <figure className="avatar">
-              {attr.avatarStyles.smallSquare
-                ? <div
-                    className="image"
-                    style={{
-                      backgroundImage: `url(${attr.avatarStyles.smallSquare})`
-                    }}
-                  />
-                : <div className="no-image">
-                    <i className="manicon manicon-person" />
-                  </div>}
+              {attr.avatarStyles.smallSquare ? (
+                <div
+                  className="image"
+                  style={{
+                    backgroundImage: `url(${attr.avatarStyles.smallSquare})`
+                  }}
+                />
+              ) : (
+                <div className="no-image">
+                  <i className="manicon manicon-person" />
+                </div>
+              )}
             </figure>
             <div className="meta">
-              <h3 className="name large">
-                {attr.fullName}
-              </h3>
+              <h3 className="name large">{attr.fullName}</h3>
             </div>
           </header>
           <span className="label" />

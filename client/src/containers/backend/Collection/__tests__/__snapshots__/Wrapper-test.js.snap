@@ -112,6 +112,7 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
           <ul>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/collection/1"
                 onClick={[Function]}
@@ -122,6 +123,7 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/collection/1/resources"
                 onClick={[Function]}
@@ -146,6 +148,7 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
           <ul>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/collection/1"
                 onClick={[Function]}
@@ -156,6 +159,7 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
             </li>
             <li>
               <a
+                aria-current={false}
                 className={undefined}
                 href="/backend/collection/1/resources"
                 onClick={[Function]}

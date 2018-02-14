@@ -100,9 +100,9 @@ export default class TextStylesContainer extends PureComponent {
     const { stylesheets } = this.props.text.relationships;
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
 
         <section className="text-category-list-secondary">
           <div className="instructional-copy">
@@ -144,13 +144,13 @@ export default class TextStylesContainer extends PureComponent {
                             {stylesheet.attributes.name}
                             <span className="subtitle" />
                           </h3>
-                          <datetime className="asset-date">
+                          <span className="asset-date">
                             <FormattedDate
                               prefix="Added"
                               format="MMMM, YYYY"
                               date={stylesheet.attributes.createdAt}
                             />
-                          </datetime>
+                          </span>
                           <span className="asset-state">
                             {stylesheet.attributes.ingested
                               ? "Ingested"
@@ -169,38 +169,42 @@ export default class TextStylesContainer extends PureComponent {
                         >
                           Edit
                         </Link>
-                        {index !== 0
-                          ? <button
-                              onClick={event => {
-                                this.handleMoveUp(event, stylesheet);
-                              }}
-                            >
-                              <i className="manicon manicon-arrow-up" />
-                            </button>
-                          : <button
-                              style={{ visibility: "hidden" }}
-                              onClick={event => {
-                                this.handleMoveUp(event, stylesheet);
-                              }}
-                            >
-                              <i className="manicon manicon-arrow-up" />
-                            </button>}
-                        {index + 1 < collection.length
-                          ? <button
-                              onClick={event => {
-                                this.handleMoveDown(event, stylesheet);
-                              }}
-                            >
-                              <i className="manicon manicon-arrow-down" />
-                            </button>
-                          : <button
-                              onClick={event => {
-                                this.handleMoveDown(event, stylesheet);
-                              }}
-                              style={{ visibility: "hidden" }}
-                            >
-                              <i className="manicon manicon-arrow-down" />
-                            </button>}
+                        {index !== 0 ? (
+                          <button
+                            onClick={event => {
+                              this.handleMoveUp(event, stylesheet);
+                            }}
+                          >
+                            <i className="manicon manicon-arrow-up" />
+                          </button>
+                        ) : (
+                          <button
+                            style={{ visibility: "hidden" }}
+                            onClick={event => {
+                              this.handleMoveUp(event, stylesheet);
+                            }}
+                          >
+                            <i className="manicon manicon-arrow-up" />
+                          </button>
+                        )}
+                        {index + 1 < collection.length ? (
+                          <button
+                            onClick={event => {
+                              this.handleMoveDown(event, stylesheet);
+                            }}
+                          >
+                            <i className="manicon manicon-arrow-down" />
+                          </button>
+                        ) : (
+                          <button
+                            onClick={event => {
+                              this.handleMoveDown(event, stylesheet);
+                            }}
+                            style={{ visibility: "hidden" }}
+                          >
+                            <i className="manicon manicon-arrow-down" />
+                          </button>
+                        )}
                         <button
                           onClick={() => {
                             this.handleDestroy(stylesheet);

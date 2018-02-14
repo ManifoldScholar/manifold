@@ -24,7 +24,7 @@ class Detail extends Component {
   };
 
   componentDidMount() {
-    window.scrollTo(0, 0);
+    if (window && window.ScrollTo) window.scrollTo(0, 0);
   }
 
   shouldShowResources() {
@@ -130,11 +130,9 @@ class Detail extends Component {
                 {"Texts"}
               </h4>
             </header>
-            {project.relationships.publishedText
-              ? <TextList.Published
-                  text={project.relationships.publishedText}
-                />
-              : null}
+            {project.relationships.publishedText ? (
+              <TextList.Published text={project.relationships.publishedText} />
+            ) : null}
             <TextList.Grouped
               excludeIds={excludes}
               categories={project.relationships.textCategories}

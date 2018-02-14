@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { ingestionsAPI, requests } from "api";
@@ -14,7 +14,7 @@ import { Ingestion } from "components/backend";
 
 const { request, flush } = entityStoreActions;
 
-export class IngestionIngest extends PureComponent {
+export class IngestionIngest extends Component {
   static displayName = "ProjectDetail.Text.Ingest";
 
   static propTypes = {
@@ -103,6 +103,28 @@ export class IngestionIngest extends PureComponent {
   setDialogClassName() {
     const dialogClass = this.props.webSocketFailure ? "dialog-error" : "";
     this.props.setDialogClassName(dialogClass);
+  }
+
+  get canProcess() {
+    const { ingestion, webSocketConnected } = this.props;
+    if (!ingestion || !webSocketConnected) return false;
+    return ingestion.attributes.availableEvents.includes("process");
+  }
+
+  get canAnalyze() {
+    const { ingestion, webSocketConnected } = this.props;
+    if (!ingestion || !webSocketConnected) return false;
+    return ingestion.attributes.availableEvents.includes("analyze");
+  }
+
+  get canReset() {
+    const { ingestion, webSocketConnected } = this.props;
+    if (!ingestion || !webSocketConnected) return false;
+    return ingestion.attributes.availableEvents.includes("reset");
+  }
+
+  get isModal() {
+    return this.props.route.modal;
   }
 
   analyze = () => {
@@ -215,28 +237,6 @@ export class IngestionIngest extends PureComponent {
     this.setState({ textLog });
   }
 
-  get canProcess() {
-    const { ingestion, webSocketConnected } = this.props;
-    if (!ingestion || !webSocketConnected) return false;
-    return ingestion.attributes.availableEvents.includes("process");
-  }
-
-  get canAnalyze() {
-    const { ingestion, webSocketConnected } = this.props;
-    if (!ingestion || !webSocketConnected) return false;
-    return ingestion.attributes.availableEvents.includes("analyze");
-  }
-
-  get canReset() {
-    const { ingestion, webSocketConnected } = this.props;
-    if (!ingestion || !webSocketConnected) return false;
-    return ingestion.attributes.availableEvents.includes("reset");
-  }
-
-  get isModal() {
-    return this.props.route.modal;
-  }
-
   title(attr) {
     const title = attr.sourceFileName || attr.externalSourceUrl;
     if (!title) return "";
@@ -274,9 +274,7 @@ export class IngestionIngest extends PureComponent {
               <i className="manicon manicon-text-placeholder" />
             </figure>
             <div className="title">
-              <h1>
-                {this.title(attr)}
-              </h1>
+              <h1>{this.title(attr)}</h1>
               <div className="utility">
                 <button
                   className={resetButtonClass}
@@ -292,15 +290,11 @@ export class IngestionIngest extends PureComponent {
           <div className="properties">
             <div className="item">
               <p className="label">Current state</p>
-              <p className="value">
-                {capitalize(attr.state)}
-              </p>
+              <p className="value">{capitalize(attr.state)}</p>
             </div>
             <div className="item">
               <p className="label">Strategy</p>
-              <p className="value">
-                {attr.strategyLabel || "None"}
-              </p>
+              <p className="value">{attr.strategyLabel || "None"}</p>
             </div>
             <div className="item">
               <p className="label">Text ID</p>
@@ -325,27 +319,27 @@ export class IngestionIngest extends PureComponent {
         </div>
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
           {this.props.ingestion.attributes.state !== "finished" &&
-          this.props.ingestion.attributes.state !== "processing"
-            ? <button
-                onClick={this.backToEdit}
-                className="button-icon-secondary dull"
-              >
-                <i className="manicon manicon-x small" />
-                Back
-              </button>
-            : null}
-          {this.canProcess
-            ? <button onClick={this.ingest} className="button-icon-secondary">
-                <i className="manicon manicon-arrow-right small" />
-                {"Ingest"}
-              </button>
-            : null}
-          {this.canAnalyze
-            ? <button onClick={this.analyze} className="button-icon-secondary">
-                <i className="manicon manicon-arrow-right small" />
-                {"Analyze"}
-              </button>
-            : null}
+          this.props.ingestion.attributes.state !== "processing" ? (
+            <button
+              onClick={this.backToEdit}
+              className="button-icon-secondary dull"
+            >
+              <i className="manicon manicon-x small" />
+              Back
+            </button>
+          ) : null}
+          {this.canProcess ? (
+            <button onClick={this.ingest} className="button-icon-secondary">
+              <i className="manicon manicon-arrow-right small" />
+              {"Ingest"}
+            </button>
+          ) : null}
+          {this.canAnalyze ? (
+            <button onClick={this.analyze} className="button-icon-secondary">
+              <i className="manicon manicon-arrow-right small" />
+              {"Analyze"}
+            </button>
+          ) : null}
           {this.props.ingestion.attributes.state === "finished"
             ? this.renderFinished()
             : null}

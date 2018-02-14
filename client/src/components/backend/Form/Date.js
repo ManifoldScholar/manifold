@@ -174,9 +174,7 @@ class FormDate extends Component {
   render() {
     return (
       <div className="form-input">
-        <label>
-          {this.props.label}
-        </label>
+        <label>{this.props.label}</label>
         <div className="form-date">
           <div className="form-select input-month">
             <i className="manicon manicon-caret-down" />
@@ -199,11 +197,7 @@ class FormDate extends Component {
             <select onChange={this.setInputDay} value={this.state.input.day}>
               <option />
               {this.days().map(day => {
-                return (
-                  <option key={day}>
-                    {day}
-                  </option>
-                );
+                return <option key={day}>{day}</option>;
               })}
             </select>
           </div>

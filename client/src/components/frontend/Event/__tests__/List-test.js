@@ -11,9 +11,7 @@ const project = build.entity.project("1");
 describe("Frontend.Event.List Component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
-      wrapWithRouter(
-        <List project={project} events={events} />
-      )
+      wrapWithRouter(<List project={project} events={events} />)
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -28,7 +26,9 @@ describe("Frontend.Event.List Component", () => {
   });
 
   it("renders a Tile for each event", () => {
-    const wrapper = mount(wrapWithRouter(<List project={project} events={events} />));
+    const wrapper = mount(
+      wrapWithRouter(<List project={project} events={events} />)
+    );
     expect(wrapper.find(".event-tile").length).toBe(events.length);
   });
 });

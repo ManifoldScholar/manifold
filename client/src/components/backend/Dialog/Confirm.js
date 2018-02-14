@@ -65,16 +65,14 @@ export default class DialogConfirm extends PureComponent {
         closeOnOverlayClick={false}
       >
         <header className="dialog-header-small">
-          <h2>
-            {this.props.heading}
-          </h2>
+          <h2>{this.props.heading}</h2>
         </header>
 
-        {isString(this.props.message)
-          ? <p>
-              {this.props.message}
-            </p>
-          : this.props.message}
+        {isString(this.props.message) ? (
+          <p>{this.props.message}</p>
+        ) : (
+          this.props.message
+        )}
 
         <div className="buttons-icon-horizontal">
           <button

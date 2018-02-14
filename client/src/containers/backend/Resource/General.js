@@ -40,7 +40,8 @@ export class ResourceGeneralContainer extends PureComponent {
           name="backend-resource-update"
           update={resourcesAPI.update}
           create={model =>
-            resourcesAPI.create(this.props.params.projectId, model)}
+            resourcesAPI.create(this.props.params.projectId, model)
+          }
           onSuccess={this.handleSuccess}
           className="form-secondary"
         >
@@ -69,12 +70,12 @@ export class ResourceGeneralContainer extends PureComponent {
             placeholder="Enter a short description"
             {...this.props}
           />
-          {resource.downloadableKind
-            ? <Form.Switch
-                label="Allow download?"
-                name="attributes[allowDownload]"
-              />
-            : null}
+          {resource.downloadableKind ? (
+            <Form.Switch
+              label="Allow download?"
+              name="attributes[allowDownload]"
+            />
+          ) : null}
           <Resource.Form.KindAttributes />
           <Form.Save text="Save Resource" />
         </FormContainer.Form>

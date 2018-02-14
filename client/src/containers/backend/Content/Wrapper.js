@@ -40,9 +40,7 @@ export class PagesWrapperContainer extends PureComponent {
             <aside className="aside">
               <Navigation.Secondary links={this.secondaryNavigationLinks()} />
             </aside>
-            <div className="panel">
-              {childRoutes(this.props.route)}
-            </div>
+            <div className="panel">{childRoutes(this.props.route)}</div>
           </div>
         </section>
       </div>

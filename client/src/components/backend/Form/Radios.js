@@ -23,11 +23,9 @@ class FormRadios extends Component {
   render() {
     return (
       <div className="form-input">
-        {this.props.label
-          ? <label style={{ marginBottom: "1.5em" }}>
-              {this.props.label}
-            </label>
-          : null}
+        {this.props.label ? (
+          <label style={{ marginBottom: "1.5em" }}>{this.props.label}</label>
+        ) : null}
         {this.props.options.map(option => {
           const checked = this.props.value === option.value;
           const optionalClass = option.className ? option.className : "";
@@ -56,9 +54,7 @@ class FormRadios extends Component {
               <span className="toggle-indicator">
                 {checked ? <i className={iconClassNames} /> : null}
               </span>
-              <span className="toggle-label">
-                {option.label}
-              </span>
+              <span className="toggle-label">{option.label}</span>
             </label>
           );
         })}

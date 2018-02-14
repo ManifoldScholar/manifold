@@ -9,7 +9,7 @@ import get from "lodash/get";
 import setter from "./setter";
 import Instructions from "./Instructions";
 
-class FormUpload extends Component {
+export class FormUpload extends Component {
   static displayName = "Form.Upload";
 
   static propTypes = {
@@ -211,24 +211,20 @@ class FormUpload extends Component {
     const { extensions } = this.accepts(this.props);
     return (
       <div className="contents-empty">
-        {this.props.placeholder === "cover"
-          ? <GlobalForm.CoverUploadPlaceholder />
-          : <i className="manicon manicon-cloud-up" />}
+        {this.props.placeholder === "cover" ? (
+          <GlobalForm.CoverUploadPlaceholder />
+        ) : (
+          <i className="manicon manicon-cloud-up" />
+        )}
         <div className="message">
           <p className="primary">
-            <span className="fake-link">
-              {"Upload a file"}
-            </span>
+            <span className="fake-link">{"Upload a file"}</span>
             {" or"}
             <br />
             {"drag and drop here"}
             <br />
           </p>
-          {extensions
-            ? <p className="secondary">
-                {extensions}
-              </p>
-            : null}
+          {extensions ? <p className="secondary">{extensions}</p> : null}
         </div>
       </div>
     );
@@ -257,11 +253,9 @@ class FormUpload extends Component {
           errors={this.props.errors}
           label={this.props.label}
         >
-          {this.props.label
-            ? <label className={labelClass}>
-                {this.props.label}
-              </label>
-            : null}
+          {this.props.label ? (
+            <label className={labelClass}>{this.props.label}</label>
+          ) : null}
           <Instructions instructions={this.props.instructions} />
           <Dropzone
             style={this.props.inlineStyle}

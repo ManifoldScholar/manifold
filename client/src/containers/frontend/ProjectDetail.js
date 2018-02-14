@@ -51,8 +51,9 @@ export class ProjectDetailContainer extends Component {
     return (
       <div>
         <HeadContent
-          title={`\u201c${this.props.project.attributes
-            .title}\u201d on ${settings.attributes.general.installationName}`}
+          title={`\u201c${this.props.project.attributes.title}\u201d on ${
+            settings.attributes.general.installationName
+          }`}
           description={this.props.project.attributes.description}
           image={this.props.project.attributes.heroStyles.medium}
         />

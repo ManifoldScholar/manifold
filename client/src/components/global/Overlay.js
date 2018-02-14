@@ -93,16 +93,16 @@ export default class Overlay extends Component {
             }}
           >
             {this.renderHeader(this.props)}
-            {!this.props.title
-              ? <button
-                  onClick={this.handleCloseEvent}
-                  className="overlay-close"
-                  data-id="overlay-close"
-                >
-                  Close
-                  <i className="manicon manicon-x" />
-                </button>
-              : null}
+            {!this.props.title ? (
+              <button
+                onClick={this.handleCloseEvent}
+                className="overlay-close"
+                data-id="overlay-close"
+              >
+                Close
+                <i className="manicon manicon-x" />
+              </button>
+            ) : null}
             <div
               style={{ maxWidth: this.props.contentWidth }}
               className="container"

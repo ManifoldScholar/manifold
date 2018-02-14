@@ -64,8 +64,9 @@ class PasswordForgotContainer extends Component {
     const notification = {
       level: 0,
       id: "PASSWORD_RESET_SENT",
-      heading: `Email sent to ${this.state
-        .email} with instructions to reset your password.`
+      heading: `Email sent to ${
+        this.state.email
+      } with instructions to reset your password.`
     };
     this.props.dispatch(notificationActions.addNotification(notification));
     setTimeout(() => {
@@ -139,7 +140,8 @@ class PasswordForgotContainer extends Component {
           <a
             href="#"
             onClick={event =>
-              this.props.handleViewChange("account-login", event)}
+              this.props.handleViewChange("account-login", event)
+            }
             data-id="show-login"
           >
             {"Remember your password?"}
@@ -147,7 +149,8 @@ class PasswordForgotContainer extends Component {
           <a
             href="#"
             onClick={event =>
-              this.props.handleViewChange("account-create", event)}
+              this.props.handleViewChange("account-create", event)
+            }
             data-id="show-create"
           >
             {"Need to sign up?"}

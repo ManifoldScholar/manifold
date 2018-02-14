@@ -241,11 +241,11 @@ class PredictiveInput extends PureComponent {
             onKeyPress={this.handleKeyPress}
             onKeyDown={this.handleKeyDown}
           />
-          {this.props.onNew
-            ? <button className="submit" onClick={this.handleNew}>
-                {"Create New"}
-              </button>
-            : null}
+          {this.props.onNew ? (
+            <button className="submit" onClick={this.handleNew}>
+              {"Create New"}
+            </button>
+          ) : null}
         </div>
         <nav className="predictive-list">
           <ul>

@@ -43,19 +43,21 @@ export default class UtilityPagination extends PureComponent {
     const style = pagination.prevPage ? {} : { visibility: "hidden" };
     return (
       <li style={style} className="pagination-previous" key="previous">
-        {isString(handler)
-          ? <Link to={handler}>
-              <i className="manicon manicon-arrow-long-left" />
-              <span>Prev</span>
-            </Link>
-          : <a
-              href={this.props.paginationTarget}
-              onClick={handler}
-              data-id={"page-prev"}
-            >
-              <i className="manicon manicon-arrow-long-left" />
-              <span>Prev</span>
-            </a>}
+        {isString(handler) ? (
+          <Link to={handler}>
+            <i className="manicon manicon-arrow-long-left" />
+            <span>Prev</span>
+          </Link>
+        ) : (
+          <a
+            href={this.props.paginationTarget}
+            onClick={handler}
+            data-id={"page-prev"}
+          >
+            <i className="manicon manicon-arrow-long-left" />
+            <span>Prev</span>
+          </a>
+        )}
       </li>
     );
   }
@@ -65,19 +67,21 @@ export default class UtilityPagination extends PureComponent {
     const style = pagination.nextPage ? {} : { visibility: "hidden" };
     return (
       <li style={style} className="pagination-next" key="next">
-        {isString(handler)
-          ? <Link to={handler}>
-              <span>Next</span>
-              <i className="manicon manicon-arrow-long-right" />
-            </Link>
-          : <a
-              href={this.props.paginationTarget}
-              onClick={handler}
-              data-id={"page-next"}
-            >
-              <span>Next</span>
-              <i className="manicon manicon-arrow-long-right" />
-            </a>}
+        {isString(handler) ? (
+          <Link to={handler}>
+            <span>Next</span>
+            <i className="manicon manicon-arrow-long-right" />
+          </Link>
+        ) : (
+          <a
+            href={this.props.paginationTarget}
+            onClick={handler}
+            data-id={"page-next"}
+          >
+            <span>Next</span>
+            <i className="manicon manicon-arrow-long-right" />
+          </a>
+        )}
       </li>
     );
   }
@@ -85,13 +89,13 @@ export default class UtilityPagination extends PureComponent {
   number(page, handler) {
     return (
       <li key={page.key} className="ordinal">
-        {isString(handler)
-          ? <Link to={handler}>
-              {page.number}
-            </Link>
-          : <a href={this.props.paginationTarget} onClick={handler}>
-              {page.number}
-            </a>}
+        {isString(handler) ? (
+          <Link to={handler}>{page.number}</Link>
+        ) : (
+          <a href={this.props.paginationTarget} onClick={handler}>
+            {page.number}
+          </a>
+        )}
       </li>
     );
   }
@@ -99,13 +103,13 @@ export default class UtilityPagination extends PureComponent {
   current(page, handler) {
     return (
       <li className="active ordinal" key={page.key}>
-        {isString(handler)
-          ? <Link to={handler}>
-              {page.number}
-            </Link>
-          : <a href={this.props.paginationTarget} onClick={handler}>
-              {page.number}
-            </a>}
+        {isString(handler) ? (
+          <Link to={handler}>{page.number}</Link>
+        ) : (
+          <a href={this.props.paginationTarget} onClick={handler}>
+            {page.number}
+          </a>
+        )}
       </li>
     );
   }

@@ -85,40 +85,40 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             <i className="manicon manicon-quote" />
             {this.maybeTruncateSelection()}
           </div>
-          {this.props.visitHandler
-            ? <button
-                className="annotate-button"
-                onClick={this.handleVisitAnnotation}
-              >
-                {"View In Text"}
-              </button>
-            : null}
-          {this.props.includeEditor
-            ? <HigherOrder.RequireKind requiredKind="any">
-                {this.state.editorOpen
-                  ? null
-                  : <button
-                      className="annotate-button"
-                      onClick={this.handleOpenEditor}
-                    >
-                      Annotate
-                    </button>}
-              </HigherOrder.RequireKind>
-            : null}
-          {this.props.includeEditor
-            ? <HigherOrder.RequireKind requiredKind="unauthenticated">
+          {this.props.visitHandler ? (
+            <button
+              className="annotate-button"
+              onClick={this.handleVisitAnnotation}
+            >
+              {"View In Text"}
+            </button>
+          ) : null}
+          {this.props.includeEditor ? (
+            <HigherOrder.RequireKind requiredKind="any">
+              {this.state.editorOpen ? null : (
                 <button
                   className="annotate-button"
-                  onClick={this.props.showLogin}
+                  onClick={this.handleOpenEditor}
                 >
-                  {"Login to annotate"}
+                  Annotate
                 </button>
-              </HigherOrder.RequireKind>
-            : null}
+              )}
+            </HigherOrder.RequireKind>
+          ) : null}
+          {this.props.includeEditor ? (
+            <HigherOrder.RequireKind requiredKind="unauthenticated">
+              <button
+                className="annotate-button"
+                onClick={this.props.showLogin}
+              >
+                {"Login to annotate"}
+              </button>
+            </HigherOrder.RequireKind>
+          ) : null}
         </div>
-        {this.state.editorOpen
-          ? <Editor {...this.props} cancel={cancelFunction} />
-          : null}
+        {this.state.editorOpen ? (
+          <Editor {...this.props} cancel={cancelFunction} />
+        ) : null}
       </div>
     );
   }

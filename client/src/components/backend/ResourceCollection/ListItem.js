@@ -34,9 +34,7 @@ export default class ResourceCollectionListItem extends PureComponent {
             </figure>
             <div className="meta">
               <h3 className="name">
-                <span className="collection-title">
-                  {attr.title}
-                </span>
+                <span className="collection-title">{attr.title}</span>
                 <span className="subtitle">
                   <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
                 </span>

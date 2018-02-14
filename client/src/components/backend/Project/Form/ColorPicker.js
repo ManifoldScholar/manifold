@@ -49,9 +49,7 @@ export default class ColorPicker extends Component {
               <span className="toggle-indicator">
                 {checked ? <i className="manicon manicon-check" /> : null}
               </span>
-              <span className="toggle-label">
-                {color.label}
-              </span>
+              <span className="toggle-label">{color.label}</span>
             </label>
           );
         })}
@@ -62,9 +60,7 @@ export default class ColorPicker extends Component {
   render() {
     return (
       <div className="color-picker">
-        <div className="colors">
-          {this.renderColorPalette()}
-        </div>
+        <div className="colors">{this.renderColorPalette()}</div>
         <div className="default-description">
           Select A Different Background Color
         </div>

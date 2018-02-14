@@ -29,7 +29,10 @@ class ResourceCard extends Component {
 
   getResourceType(type) {
     let formattedType =
-      type.toLowerCase().charAt(0).toUpperCase() + type.slice(1);
+      type
+        .toLowerCase()
+        .charAt(0)
+        .toUpperCase() + type.slice(1);
     if (type.toLowerCase() === "pdf") {
       formattedType = "PDF";
     }
@@ -38,12 +41,14 @@ class ResourceCard extends Component {
 
   getPreviewText(attr) {
     const type = attr.kind;
-    const text = attr.downloadable
-      ? this.renderDownloadablePreview(type)
-      : <span>
-          {"View"}
-          <i className="manicon manicon-arrow-right" />
-        </span>;
+    const text = attr.downloadable ? (
+      this.renderDownloadablePreview(type)
+    ) : (
+      <span>
+        {"View"}
+        <i className="manicon manicon-arrow-right" />
+      </span>
+    );
     return text;
   }
 
@@ -163,9 +168,7 @@ class ResourceCard extends Component {
         <Resource.Preview resource={resource}>
           <div className="resource-link" onClick={this.handlePreviewClick}>
             <Resourceish.Thumbnail resourceish={resource} />
-            <div className="preview-text">
-              {this.getPreviewText(attr)}
-            </div>
+            <div className="preview-text">{this.getPreviewText(attr)}</div>
           </div>
         </Resource.Preview>
         <section

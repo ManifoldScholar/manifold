@@ -44,9 +44,7 @@ class FormTextInput extends Component {
         errors={this.props.errors}
         label={this.props.label}
       >
-        <label className={labelClass}>
-          {this.props.label}
-        </label>
+        <label className={labelClass}>{this.props.label}</label>
         <Instructions instructions={this.props.instructions} />
         <input
           ref={input => {

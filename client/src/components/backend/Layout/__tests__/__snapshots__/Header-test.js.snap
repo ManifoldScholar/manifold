@@ -33,6 +33,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
       <ul>
         <li>
           <a
+            aria-current={false}
             className={undefined}
             href="/backend"
             onClick={[Function]}
@@ -43,6 +44,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
         </li>
         <li>
           <a
+            aria-current={false}
             className={undefined}
             href="/backend/people"
             onClick={[Function]}
@@ -53,6 +55,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
         </li>
         <li>
           <a
+            aria-current={false}
             className={undefined}
             href="/backend/content"
             onClick={[Function]}
@@ -63,6 +66,7 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
         </li>
         <li>
           <a
+            aria-current={false}
             className={undefined}
             href="/backend/settings"
             onClick={[Function]}

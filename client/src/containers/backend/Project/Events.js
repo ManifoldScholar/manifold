@@ -121,9 +121,9 @@ export class ProjectEventsContainer extends PureComponent {
 
     return (
       <section>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         <header className="section-heading-secondary">
           <h3>
             {"Events"} <i className="manicon manicon-bugle" />

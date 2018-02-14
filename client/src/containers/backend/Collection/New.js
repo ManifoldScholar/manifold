@@ -56,7 +56,8 @@ export class CollectionNewContainer extends PureComponent {
                 name="backend-collection-create"
                 update={collectionsAPI.update}
                 create={model =>
-                  collectionsAPI.create(match.params.projectId, model)}
+                  collectionsAPI.create(match.params.projectId, model)
+                }
                 onSuccess={this.handleSuccess}
                 className="form-secondary"
               >

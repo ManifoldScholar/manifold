@@ -112,47 +112,47 @@ export class SettingsEmailContainer extends PureComponent {
           />
           {this.props.form.getModelValue(
             "attributes[email][deliveryMethod]"
-          ) === "smtp"
-            ? <Form.FieldGroup>
-                <Form.TextInput
-                  label="SMTP Address"
-                  name="attributes[email][smtpSettingsAddress]"
-                  instructions="Allows you to use a remote mail server."
-                />
-                <Form.TextInput
-                  label="SMTP Port"
-                  name="attributes[email][smtpSettingsPort]"
-                  instructions="On the off chance that your mail server doesn't run on port 25, you can change it."
-                />
-                <Form.TextInput
-                  label="SMTP Username"
-                  name="attributes[email][smtpSettingsUserName]"
-                  instructions="If your mail server requires authentication, set the username in this setting."
-                />
-                <Form.TextInput
-                  password
-                  label="SMTP Password"
-                  name="attributes[secrets][smtpSettingsPassword]"
-                  instructions="If your mail server requires authentication, set the password in this setting."
-                />
-              </Form.FieldGroup>
-            : null}
+          ) === "smtp" ? (
+            <Form.FieldGroup>
+              <Form.TextInput
+                label="SMTP Address"
+                name="attributes[email][smtpSettingsAddress]"
+                instructions="Allows you to use a remote mail server."
+              />
+              <Form.TextInput
+                label="SMTP Port"
+                name="attributes[email][smtpSettingsPort]"
+                instructions="On the off chance that your mail server doesn't run on port 25, you can change it."
+              />
+              <Form.TextInput
+                label="SMTP Username"
+                name="attributes[email][smtpSettingsUserName]"
+                instructions="If your mail server requires authentication, set the username in this setting."
+              />
+              <Form.TextInput
+                password
+                label="SMTP Password"
+                name="attributes[secrets][smtpSettingsPassword]"
+                instructions="If your mail server requires authentication, set the password in this setting."
+              />
+            </Form.FieldGroup>
+          ) : null}
           {this.props.form.getModelValue(
             "attributes[email][deliveryMethod]"
-          ) === "sendmail"
-            ? <Form.FieldGroup>
-                <Form.TextInput
-                  label="Sendmail Location"
-                  name="attributes[email][sendmailSettingsLocation]"
-                  instructions="The location of the sendmail executable. Defaults to /usr/sbin/sendmail."
-                />
-                <Form.TextInput
-                  label="Sendmail Arguments"
-                  name="attributes[email][sendmailSettingsArguments]"
-                  instructions="The command line arguments. Defaults to -i with -f sender@address added automatically before the message is sent."
-                />
-              </Form.FieldGroup>
-            : null}
+          ) === "sendmail" ? (
+            <Form.FieldGroup>
+              <Form.TextInput
+                label="Sendmail Location"
+                name="attributes[email][sendmailSettingsLocation]"
+                instructions="The location of the sendmail executable. Defaults to /usr/sbin/sendmail."
+              />
+              <Form.TextInput
+                label="Sendmail Arguments"
+                name="attributes[email][sendmailSettingsArguments]"
+                instructions="The command line arguments. Defaults to -i with -f sender@address added automatically before the message is sent."
+              />
+            </Form.FieldGroup>
+          ) : null}
           <Form.Save text="Save Settings" />
         </FormContainer.Form>
       </section>

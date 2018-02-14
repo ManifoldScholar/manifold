@@ -27,11 +27,7 @@ export default class AnnotationDetail extends PureComponent {
     const isCreator = annotation.attributes.abilities.creator;
     let name = creator.attributes.fullName;
     if (isCreator) name = "Me";
-    return (
-      <h4 className="author-name">
-        {name}
-      </h4>
-    );
+    return <h4 className="author-name">{name}</h4>;
   }
 
   subjectSubtitle() {
@@ -46,13 +42,13 @@ export default class AnnotationDetail extends PureComponent {
   dateSubtitle() {
     const { annotation } = this.props;
     return (
-      <datetime>
+      <span className="datetime">
         <FormattedDate
           format="distanceInWords"
           date={annotation.attributes.createdAt}
         />{" "}
         ago
-      </datetime>
+      </span>
     );
   }
 
@@ -68,35 +64,34 @@ export default class AnnotationDetail extends PureComponent {
         {/* NB: Empty div required for flex-positioning of private/author marker */}
         <div>
           <figure className={avatarClass}>
-            {creator.attributes.avatarStyles.smallSquare
-              ? <div
-                  className="image"
-                  style={{
-                    backgroundImage: `url(${creator.attributes.avatarStyles
-                      .smallSquare})`
-                  }}
-                >
-                  <span className="screen-reader-text">
-                    Profile image for {creator.attributes.fullName}
-                  </span>
-                </div>
-              : <div className="no-image">
-                  <i className="manicon manicon-person" />
-                </div>}
+            {creator.attributes.avatarStyles.smallSquare ? (
+              <div
+                className="image"
+                style={{
+                  backgroundImage: `url(${
+                    creator.attributes.avatarStyles.smallSquare
+                  })`
+                }}
+              >
+                <span className="screen-reader-text">
+                  Profile image for {creator.attributes.fullName}
+                </span>
+              </div>
+            ) : (
+              <div className="no-image">
+                <i className="manicon manicon-person" />
+              </div>
+            )}
           </figure>
           {this.name()}
           {this.subtitle()}
         </div>
-        {annotation.attributes.private
-          ? <div className="marker secondary">
-              {"Private"}
-            </div>
-          : null}
-        {this.props.showAnnotationLabel
-          ? <div className="marker tertiary">
-              {"Annotation"}
-            </div>
-          : null}
+        {annotation.attributes.private ? (
+          <div className="marker secondary">{"Private"}</div>
+        ) : null}
+        {this.props.showAnnotationLabel ? (
+          <div className="marker tertiary">{"Annotation"}</div>
+        ) : null}
       </section>
     );
   }

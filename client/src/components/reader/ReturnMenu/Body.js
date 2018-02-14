@@ -22,9 +22,7 @@ export default class ReturnMenuBody extends PureComponent {
             <Link to={this.props.returnUrl}>
               <i className="manicon manicon-arrow-round-left" />
               {"Project Home"}
-              <span>
-                {this.props.projectTitle}
-              </span>
+              <span>{this.props.projectTitle}</span>
             </Link>
           </li>
           <li>
@@ -51,16 +49,12 @@ export default class ReturnMenuBody extends PureComponent {
                 <i className="manicon manicon-manifold-logo" />
                 Sign-in
               </button>
-              {this.props.moreLink
-                ? <a
-                    href={this.props.moreLink}
-                    target="_blank"
-                    className="note"
-                  >
-                    Learn More About <br />
-                    <span>Manifold</span>
-                  </a>
-                : null}
+              {this.props.moreLink ? (
+                <a href={this.props.moreLink} target="_blank" className="note">
+                  Learn More About <br />
+                  <span>Manifold</span>
+                </a>
+              ) : null}
             </li>
           </HigherOrder.RequireKind>
         </ul>

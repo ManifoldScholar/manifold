@@ -26,12 +26,14 @@ export default class DefaultButton extends PureComponent {
     const iconClassName = classNames("manicon", iconClass);
     return (
       <HigherOrder.RequireKind requiredKind={requiredKind}>
-        {this.props.children
-          ? this.renderChild()
-          : <button className={className} onClick={onClick}>
-              {iconClass ? <i className={iconClassName} /> : null}
-              {label}
-            </button>}
+        {this.props.children ? (
+          this.renderChild()
+        ) : (
+          <button className={className} onClick={onClick}>
+            {iconClass ? <i className={iconClassName} /> : null}
+            {label}
+          </button>
+        )}
       </HigherOrder.RequireKind>
     );
   }

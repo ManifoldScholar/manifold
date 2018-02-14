@@ -32,6 +32,10 @@ export class IngestionEditContainer extends PureComponent {
     location: PropTypes.object
   };
 
+  get projectId() {
+    return this.props.project.id;
+  }
+
   handleSuccess = () => {
     this.redirectToIngestion(this.props.ingestion.id);
   };
@@ -43,10 +47,6 @@ export class IngestionEditContainer extends PureComponent {
       ingestionId
     );
     this.props.history.push(path);
-  }
-
-  get projectId() {
-    return this.props.project.id;
   }
 
   render() {

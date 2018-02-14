@@ -43,6 +43,8 @@
     // Unused expressions are OK if ternary
     "no-unused-expressions": [1, {"allowTernary": true }],
 
+    "no-return-assign": [2, "except-parens"],
+
     // We don't need a jsx extension.
     "react/jsx-filename-extension": 0,
 

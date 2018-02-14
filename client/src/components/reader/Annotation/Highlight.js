@@ -31,21 +31,22 @@ export default class HighlightDetail extends PureComponent {
 
         <nav className="utility">
           <ul>
-            {this.props.visitHandler
-              ? <li>
-                  <button onClick={this.handleVisitHighlight}>
-                    {"View In Text"}
-                  </button>
-                </li>
-              : null}
-            {this.props.deleteHandler && annotation.attributes.canUpdateObject
-              ? <li>
-                  <Utility.ConfirmableButton
-                    label="Delete"
-                    confirmHandler={this.handleDelete}
-                  />
-                </li>
-              : null}
+            {this.props.visitHandler ? (
+              <li>
+                <button onClick={this.handleVisitHighlight}>
+                  {"View In Text"}
+                </button>
+              </li>
+            ) : null}
+            {this.props.deleteHandler &&
+            annotation.attributes.canUpdateObject ? (
+              <li>
+                <Utility.ConfirmableButton
+                  label="Delete"
+                  confirmHandler={this.handleDelete}
+                />
+              </li>
+            ) : null}
           </ul>
         </nav>
       </div>

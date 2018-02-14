@@ -33,11 +33,7 @@ export default class ProjectListItem extends PureComponent {
     let marker = null;
 
     if (attr.draft) {
-      marker = (
-        <div className="block-label">
-          {"Draft"}
-        </div>
-      );
+      marker = <div className="block-label">{"Draft"}</div>;
     }
 
     return marker;
@@ -75,13 +71,9 @@ export default class ProjectListItem extends PureComponent {
             </figure>
             <div className="meta">
               <h3 className="name">
-                <span className="title-text">
-                  {attr.title}
-                </span>
+                <span className="title-text">{attr.title}</span>
                 {this.renderProjectStatusMarker(attr)}
-                <span className="subtitle">
-                  {attr.subtitle}
-                </span>
+                <span className="subtitle">{attr.subtitle}</span>
               </h3>
               {this.renderProjectMakers(project.relationships.creators)}
             </div>

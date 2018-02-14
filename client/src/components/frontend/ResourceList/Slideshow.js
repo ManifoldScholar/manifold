@@ -186,9 +186,11 @@ export default class ResourceListSlideshow extends PureComponent {
 
     return (
       <div key={position}>
-        {this.isLoaded(position)
-          ? this.getFigureByType(collectionResource)
-          : <ResourceList.Slide.SlideLoading />}
+        {this.isLoaded(position) ? (
+          this.getFigureByType(collectionResource)
+        ) : (
+          <ResourceList.Slide.SlideLoading />
+        )}
       </div>
     );
   }
@@ -227,47 +229,49 @@ export default class ResourceListSlideshow extends PureComponent {
             </div>
           </Swipeable>
           <div className="slide-footer">
-            {this.isLoaded(position)
-              ? <ResourceList.Slide.Caption
-                  resource={collectionResource}
-                  collection={this.props.collection}
-                  hideDetailUrl={this.props.hideDetailUrl}
-                  hideDownload={this.props.hideDownload}
-                />
-              : <ResourceList.Slide.LoadingCaption />}
-            {this.props.collectionResources.length > 0
-              ? <div className="slide-pagination">
-                  <span className="slide-ordinal">
-                    {position} {"/"} {totalCount}
-                  </span>
-                  <div>
-                    <button
-                      className="slide-previous"
-                      onClick={this.handleSlidePrev}
-                      disabled={position === 1}
-                    >
-                      <i className="manicon manicon-arrow-left" />
-                      <i className="manicon manicon-arrow-round-left" />
-                      <span className="text">Prev</span>
-                      <span className="screen-reader-text">
-                        {"Click to load previous slide"}
-                      </span>
-                    </button>
-                    <button
-                      className="slide-next"
-                      onClick={this.handleSlideNext}
-                      disabled={position === totalCount}
-                    >
-                      <span className="text">Next</span>
-                      <span className="screen-reader-text">
-                        {"Click to load next slide"}
-                      </span>
-                      <i className="manicon manicon-arrow-round-right" />
-                      <i className="manicon manicon-arrow-right" />
-                    </button>
-                  </div>
+            {this.isLoaded(position) ? (
+              <ResourceList.Slide.Caption
+                resource={collectionResource}
+                collection={this.props.collection}
+                hideDetailUrl={this.props.hideDetailUrl}
+                hideDownload={this.props.hideDownload}
+              />
+            ) : (
+              <ResourceList.Slide.LoadingCaption />
+            )}
+            {this.props.collectionResources.length > 0 ? (
+              <div className="slide-pagination">
+                <span className="slide-ordinal">
+                  {position} {"/"} {totalCount}
+                </span>
+                <div>
+                  <button
+                    className="slide-previous"
+                    onClick={this.handleSlidePrev}
+                    disabled={position === 1}
+                  >
+                    <i className="manicon manicon-arrow-left" />
+                    <i className="manicon manicon-arrow-round-left" />
+                    <span className="text">Prev</span>
+                    <span className="screen-reader-text">
+                      {"Click to load previous slide"}
+                    </span>
+                  </button>
+                  <button
+                    className="slide-next"
+                    onClick={this.handleSlideNext}
+                    disabled={position === totalCount}
+                  >
+                    <span className="text">Next</span>
+                    <span className="screen-reader-text">
+                      {"Click to load next slide"}
+                    </span>
+                    <i className="manicon manicon-arrow-round-right" />
+                    <i className="manicon manicon-arrow-right" />
+                  </button>
                 </div>
-              : null}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

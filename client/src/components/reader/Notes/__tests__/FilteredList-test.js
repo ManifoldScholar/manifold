@@ -2,8 +2,11 @@ import React from "react";
 import renderer from "react-test-renderer";
 import FilteredList from "../FilteredList";
 import build from "test/fixtures/build";
-import { shallow } from "enzyme/build/index";
 import EmptyMessage from "../EmptyMessage";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("Reader.Notes.FilteredList Component", () => {
   const sortedAnnotations = [
@@ -44,7 +47,7 @@ describe("Reader.Notes.FilteredList Component", () => {
   });
 
   it("renders an empty message when there are no annotations", () => {
-    const wrapper = shallow(
+    const wrapper = Enzyme.shallow(
       <FilteredList
         sortedAnnotations={[]}
         handleSeeAllClick={clickMock}

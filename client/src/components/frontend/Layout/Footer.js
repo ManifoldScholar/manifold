@@ -90,11 +90,7 @@ export default class LayoutFooter extends Component {
   buildPagesArray() {
     const pages = [];
     pages.push(this.buildAuthLink());
-    pages.push(
-      <Link to={lh.link("frontend")}>
-        {"Projects"}
-      </Link>
-    );
+    pages.push(<Link to={lh.link("frontend")}>{"Projects"}</Link>);
     pages.push(...this.buildContentPages());
     pages.push(this.buildContactLink());
     pages.push(
@@ -106,11 +102,7 @@ export default class LayoutFooter extends Component {
         {"Twitter"}
       </a>
     );
-    pages.push(
-      <a href="mailto:webbook@umn.edu">
-        {"Email"}
-      </a>
-    );
+    pages.push(<a href="mailto:webbook@umn.edu">{"Email"}</a>);
     return pages;
   }
 
@@ -139,17 +131,15 @@ export default class LayoutFooter extends Component {
           <nav className="text-nav">
             <ul>
               {/* eslint-disable react/no-array-index-key */}
-              {chunkedPages.map((pageGroup, pageGroupIndex) =>
+              {chunkedPages.map((pageGroup, pageGroupIndex) => (
                 <li key={pageGroupIndex}>
                   <ul>
-                    {pageGroup.map((page, pageIndex) =>
-                      <li key={pageIndex}>
-                        {page}
-                      </li>
-                    )}
+                    {pageGroup.map((page, pageIndex) => (
+                      <li key={pageIndex}>{page}</li>
+                    ))}
                   </ul>
                 </li>
-              )}
+              ))}
               {/* eslint-enable react/no-array-index-key */}
             </ul>
           </nav>

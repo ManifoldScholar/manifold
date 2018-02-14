@@ -155,15 +155,15 @@ export class UsersEditContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
-        {this.state.resetPassword
-          ? <Dialog.ResetPassword
-              uiProps={this.state.resetPassword}
-              {...this.props}
-            />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
+        {this.state.resetPassword ? (
+          <Dialog.ResetPassword
+            uiProps={this.state.resetPassword}
+            {...this.props}
+          />
+        ) : null}
         <header className="drawer-header">
           <h2 className="heading-quaternary">
             {`${attr.firstName} ${attr.lastName}`}
@@ -172,7 +172,8 @@ export class UsersEditContainer extends PureComponent {
             <button
               className="button-bare-primary"
               onClick={event =>
-                this.handleResetPasswordClick(event, this.props.user)}
+                this.handleResetPasswordClick(event, this.props.user)
+              }
             >
               {"Reset Password"}
               <i className="manicon manicon-key" />

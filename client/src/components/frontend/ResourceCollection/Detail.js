@@ -32,9 +32,7 @@ export default class ResourceCollectionDetail extends PureComponent {
           <div className="collection-detail">
             <ResourceCollection.Title collection={collection} showCreatedAt />
             <div className="collection-description">
-              <p>
-                {attr.description}
-              </p>
+              <p>{attr.description}</p>
             </div>
             <Utility.ShareBar url={this.props.collectionUrl} />
           </div>

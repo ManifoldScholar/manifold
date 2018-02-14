@@ -114,9 +114,9 @@ class ContentFeaturesList extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
 
         <section className="text-category-list-secondary">
           <div className="text-category">
@@ -153,16 +153,16 @@ class ContentFeaturesList extends PureComponent {
                             )}
                             <span className="subtitle" />
                           </h3>
-                          <datetime className="asset-date">
+                          <span className="asset-date">
                             <FormattedDate
                               prefix="Added"
                               format="MMMM, YYYY"
                               date={feature.attributes.createdAt}
                             />
-                          </datetime>
-                          {index === 0
-                            ? <span className="asset-state">Live</span>
-                            : null}
+                          </span>
+                          {index === 0 ? (
+                            <span className="asset-state">Live</span>
+                          ) : null}
                         </div>
                       </Link>
                       <div className="text-category-list-utility">
@@ -172,38 +172,42 @@ class ContentFeaturesList extends PureComponent {
                         >
                           Edit
                         </Link>
-                        {index !== 0
-                          ? <button
-                              onClick={event => {
-                                this.handleMoveUp(event, feature);
-                              }}
-                            >
-                              <i className="manicon manicon-arrow-up" />
-                            </button>
-                          : <button
-                              style={{ visibility: "hidden" }}
-                              onClick={event => {
-                                this.handleMoveUp(event, feature);
-                              }}
-                            >
-                              <i className="manicon manicon-arrow-up" />
-                            </button>}
-                        {index + 1 < collection.length
-                          ? <button
-                              onClick={event => {
-                                this.handleMoveDown(event, feature);
-                              }}
-                            >
-                              <i className="manicon manicon-arrow-down" />
-                            </button>
-                          : <button
-                              onClick={event => {
-                                this.handleMoveDown(event, feature);
-                              }}
-                              style={{ visibility: "hidden" }}
-                            >
-                              <i className="manicon manicon-arrow-down" />
-                            </button>}
+                        {index !== 0 ? (
+                          <button
+                            onClick={event => {
+                              this.handleMoveUp(event, feature);
+                            }}
+                          >
+                            <i className="manicon manicon-arrow-up" />
+                          </button>
+                        ) : (
+                          <button
+                            style={{ visibility: "hidden" }}
+                            onClick={event => {
+                              this.handleMoveUp(event, feature);
+                            }}
+                          >
+                            <i className="manicon manicon-arrow-up" />
+                          </button>
+                        )}
+                        {index + 1 < collection.length ? (
+                          <button
+                            onClick={event => {
+                              this.handleMoveDown(event, feature);
+                            }}
+                          >
+                            <i className="manicon manicon-arrow-down" />
+                          </button>
+                        ) : (
+                          <button
+                            onClick={event => {
+                              this.handleMoveDown(event, feature);
+                            }}
+                            style={{ visibility: "hidden" }}
+                          >
+                            <i className="manicon manicon-arrow-down" />
+                          </button>
+                        )}
                         <button
                           onClick={() => {
                             this.handleDestroy(feature);

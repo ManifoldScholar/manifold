@@ -56,7 +56,8 @@ export class ResourceNewContainer extends PureComponent {
                 name="backend-resource-create"
                 update={resourcesAPI.update}
                 create={model =>
-                  resourcesAPI.create(match.params.projectId, model)}
+                  resourcesAPI.create(match.params.projectId, model)
+                }
                 onSuccess={this.handleSuccess}
                 className="form-secondary"
               >

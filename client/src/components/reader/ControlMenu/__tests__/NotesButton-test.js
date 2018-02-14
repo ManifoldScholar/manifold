@@ -1,6 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { mount } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme from "enzyme";
+Enzyme.configure({ adapter: new Adapter() });
+
 import NotesButton from "../NotesButton";
 
 describe("Reader.ControlMenu.NotesButton Component", () => {
@@ -15,7 +18,7 @@ describe("Reader.ControlMenu.NotesButton Component", () => {
   });
 
   it("should trigger toggle callback when toggle is clicked", () => {
-    const wrapper = mount(root);
+    const wrapper = Enzyme.mount(root);
     toggleMock.mockClear();
     wrapper.find('[data-id="toggle-notes"]').simulate("click");
     expect(toggleMock).toHaveBeenCalled();

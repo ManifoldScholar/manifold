@@ -89,8 +89,9 @@ export class ResourceWrapperContainer extends PureComponent {
       level: 0,
       id: `RESOURCE_DESTROYED_${this.props.resource.id}`,
       heading: "The resource has been destroyed.",
-      body: `${this.props.resource.attributes
-        .title} has passed into the endless night.`,
+      body: `${
+        this.props.resource.attributes.title
+      } has passed into the endless night.`,
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -173,9 +174,9 @@ export class ResourceWrapperContainer extends PureComponent {
 
     return (
       <div>
-        {this.state.confirmation
-          ? <Dialog.Confirm {...this.state.confirmation} />
-          : null}
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
         <Navigation.DetailHeader
           type="resource"
           breadcrumb={[
@@ -213,9 +214,7 @@ export class ResourceWrapperContainer extends PureComponent {
                 )}
               />
             </aside>
-            <div className="panel">
-              {this.renderRoutes()}
-            </div>
+            <div className="panel">{this.renderRoutes()}</div>
           </div>
         </section>
       </div>

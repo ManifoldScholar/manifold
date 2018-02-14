@@ -28,7 +28,11 @@ export default class ResourceishThumbnail extends Component {
     switch (this.type()) {
       case "resources":
         if (!kind) break;
-        out = kind.toLowerCase().charAt(0).toUpperCase() + kind.slice(1);
+        out =
+          kind
+            .toLowerCase()
+            .charAt(0)
+            .toUpperCase() + kind.slice(1);
         break;
       case "collections":
         out = "Collection";
@@ -76,9 +80,9 @@ export default class ResourceishThumbnail extends Component {
       case "resources":
         out = (
           <i className={`icon-thumbnail-icon ${resourceish.attributes.kind}`}>
-            {resourceish.attributes.kind
-              ? <Resource.Icon.Composer kind={resourceish.attributes.kind} />
-              : null}
+            {resourceish.attributes.kind ? (
+              <Resource.Icon.Composer kind={resourceish.attributes.kind} />
+            ) : null}
           </i>
         );
         break;
@@ -118,29 +122,31 @@ export default class ResourceishThumbnail extends Component {
       >
         <div className="wrapper">
           <figure className="icon-thumbnail-type">
-            {this.props.showKind
-              ? <figcaption>
-                  {this.getResourceKind(resourceish.attributes.kind)}
-                </figcaption>
-              : null}
-            {this.props.noCrop
-              ? <div className="icon-thumbnail-image">
-                  <img
-                    src={this.getImage(resourceish)}
-                    alt={resourceish.attributes.title}
-                  />
-                  <div className="image-overlay" />
-                </div>
-              : this.renderIcon(resourceish)}
+            {this.props.showKind ? (
+              <figcaption>
+                {this.getResourceKind(resourceish.attributes.kind)}
+              </figcaption>
+            ) : null}
+            {this.props.noCrop ? (
+              <div className="icon-thumbnail-image">
+                <img
+                  src={this.getImage(resourceish)}
+                  alt={resourceish.attributes.title}
+                />
+                <div className="image-overlay" />
+              </div>
+            ) : (
+              this.renderIcon(resourceish)
+            )}
           </figure>
-          {this.props.showTitle
-            ? <h4
-                className="icon-thumbnail-title"
-                dangerouslySetInnerHTML={{
-                  __html: resourceish.attributes.titleFormatted
-                }}
-              />
-            : null}
+          {this.props.showTitle ? (
+            <h4
+              className="icon-thumbnail-title"
+              dangerouslySetInnerHTML={{
+                __html: resourceish.attributes.titleFormatted
+              }}
+            />
+          ) : null}
         </div>
       </div>
     );

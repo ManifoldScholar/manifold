@@ -35,7 +35,9 @@ describe("Reader.Notation.Collection.Detail component", () => {
         collectionPagination={pagination}
         collectionPaginationHandler={pageChangeMock}
         collection={collection}
-        collectionUrl={`/browse/project/${project.id}/collection/${collection.id}`}
+        collectionUrl={`/browse/project/${project.id}/collection/${
+          collection.id
+        }`}
         filterChange={filterChangeMock}
         handleClose={closeMock}
         initialFilterState={null}

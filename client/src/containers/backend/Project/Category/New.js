@@ -25,9 +25,7 @@ export default class ProjectCategoryNewContainer extends Component {
     return (
       <div>
         <header className="dialog-header-large">
-          <h2>
-            {"Create Category"}
-          </h2>
+          <h2>{"Create Category"}</h2>
         </header>
         <Category.Form
           projectId={this.props.project.id}

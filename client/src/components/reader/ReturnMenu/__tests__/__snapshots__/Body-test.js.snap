@@ -34,7 +34,7 @@ exports[`Reader.ReturnMenu.Body component renders correctly 1`] = `
       <button
         className="flush-bottom"
         data-id="toggle-overlay"
-        onClick={[Function]}
+        onClick={[MockFunction]}
       >
         <i
           className="manicon manicon-manifold-logo"

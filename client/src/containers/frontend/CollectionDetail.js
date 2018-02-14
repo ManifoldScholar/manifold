@@ -168,8 +168,9 @@ export class CollectionDetailContainer extends PureComponent {
     return (
       <div>
         <HeadContent
-          title={`\u201c${collection.attributes.title}\u201d on ${settings
-            .attributes.general.installationName}`}
+          title={`\u201c${collection.attributes.title}\u201d on ${
+            settings.attributes.general.installationName
+          }`}
           description={collection.attributes.description}
           image={collection.attributes.thumbnailStyles.medium}
         />
@@ -177,21 +178,21 @@ export class CollectionDetailContainer extends PureComponent {
           link={lh.link("frontendProject", project.attributes.slug)}
           title={project.attributes.title}
         />
-        {this.props.slideshowResources && this.props.resources
-          ? <ResourceCollection.Detail
-              dispatch={this.props.dispatch}
-              project={this.props.project}
-              slideshowResources={this.props.slideshowResources}
-              slideshowPagination={this.props.slideshowResourcesMeta.pagination}
-              collectionResources={this.props.resources}
-              collectionPagination={this.props.resourcesMeta.pagination}
-              collectionPaginationHandler={this.pageChangeHandlerCreator}
-              collection={this.props.collection}
-              collectionUrl={collectionUrl}
-              filterChange={this.filterChange}
-              initialFilterState={initialFilter}
-            />
-          : null}
+        {this.props.slideshowResources && this.props.resources ? (
+          <ResourceCollection.Detail
+            dispatch={this.props.dispatch}
+            project={this.props.project}
+            slideshowResources={this.props.slideshowResources}
+            slideshowPagination={this.props.slideshowResourcesMeta.pagination}
+            collectionResources={this.props.resources}
+            collectionPagination={this.props.resourcesMeta.pagination}
+            collectionPaginationHandler={this.pageChangeHandlerCreator}
+            collection={this.props.collection}
+            collectionUrl={collectionUrl}
+            filterChange={this.filterChange}
+            initialFilterState={initialFilter}
+          />
+        ) : null}
         <section className="bg-neutral05">
           <Utility.BackLinkSecondary
             link={lh.link("frontendProject", project.attributes.slug)}

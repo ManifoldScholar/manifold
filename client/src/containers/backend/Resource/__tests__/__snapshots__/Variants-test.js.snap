@@ -23,7 +23,7 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
             >
               High Resolution Image
             </label>
-            <Dropzone
+            <react-dropzone
               accept="image/*"
               className="form-dropzone style-square"
               multiple={false}
@@ -59,7 +59,7 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
                   </p>
                 </div>
               </div>
-            </Dropzone>
+            </react-dropzone>
           </div>
         </div>
         <div
@@ -74,7 +74,7 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
             >
               Thumbnail Image
             </label>
-            <Dropzone
+            <react-dropzone
               accept="image/*"
               className="form-dropzone style-square"
               multiple={false}
@@ -110,7 +110,7 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
                   </p>
                 </div>
               </div>
-            </Dropzone>
+            </react-dropzone>
           </div>
         </div>
       </div>
