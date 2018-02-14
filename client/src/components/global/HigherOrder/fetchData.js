@@ -6,7 +6,11 @@ import { isPromise } from "utils/promise";
 import ch from "helpers/consoleHelpers";
 
 function getDisplayName(WrappedComponent) {
-  return WrappedComponent.displayName || WrappedComponent.name || "Component";
+  let Wrapped = WrappedComponent;
+  if (WrappedComponent.WrappedComponent) {
+    Wrapped = WrappedComponent.WrappedComponent;
+  }
+  return Wrapped.displayName || Wrapped.name || "Component";
 }
 
 export default function fetchData(WrappedComponent) {
