@@ -1,0 +1,6 @@
+# ======================== Elasticsearch Configuration =========================
+
+cluster.name: manifold
+cluster.routing.allocation.disk.watermark.low: 500mb
+node.name: manifold-es
+transport.type: local

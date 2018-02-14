@@ -4,6 +4,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR/..";
 MANIFOLD_ROOT=$(pwd);
 ELASTIC_BIN="$MANIFOLD_ROOT/services/elasticsearch-5.6.5/bin/elasticsearch";
+ES_PATH_CONF="$MANIFOLD_ROOT/config/elasticsearch";
 PID_FILE="$MANIFOLD_ROOT/api/tmp/pids/elastic.pid";
 ELASTIC_PORT=29200
 
@@ -52,4 +53,4 @@ then
         kill -SIGTERM $(cat $PID_FILE)
     fi
 fi
-$ELASTIC_BIN -E http.port=$ELASTIC_PORT -p $PID_FILE
+$ELASTIC_BIN -E http.port=$ELASTIC_PORT -E path.conf=$ES_PATH_CONF -p $PID_FILE
