@@ -25,7 +25,12 @@ module Api
             updater = ::Updaters::Default.new(favorite_params)
             @favorite = updater.update(@current_user.favorites.build)
             if @favorite.valid?
-              render_single_resource(@current_user, include: INCLUDES, location: LOCATION)
+              render_single_resource(
+                @current_user,
+                include: INCLUDES,
+                location: LOCATION,
+                serializer: CurrentUserSerializer
+              )
             else
               render_single_resource(@favorite, location: LOCATION)
             end
