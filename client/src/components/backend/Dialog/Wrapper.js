@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import { withRouter } from "react-router-dom";
@@ -105,7 +106,7 @@ class DialogWrapper extends PureComponent {
   }
 
   render() {
-    return (
+    const output = (
       <ReactCSSTransitionGroup
         transitionName="dialog"
         // True value required to enable transform
@@ -142,6 +143,16 @@ class DialogWrapper extends PureComponent {
         )}
       </ReactCSSTransitionGroup>
     );
+
+    // Because this renders in a portal, it cannot render on the server. We probably never
+    // render a dialog in a SSR render, but we do render it in tests. Not rendering in a
+    // portal on the server makes it easier to test this component.
+    if (__SERVER__) return output;
+
+    // If we're in the client, render it into a portal so we can keep it at the top of the
+    // z-index stack.
+    const domTarget = document.getElementById("global-overlay-container");
+    return ReactDOM.createPortal(output, domTarget);
   }
 }
 
