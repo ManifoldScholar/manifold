@@ -66,7 +66,8 @@ export default class TextNode extends Component {
     return values(openAnnotations).map(a => {
       const id = a.id;
       const type = a.attributes.format;
-      const isCreator = a.attributes.abilities.creator;
+      const isCreator =
+        a.id === "selection" ? true : a.attributes.abilities.creator;
       const start =
         a.attributes.startNode === this.props.nodeUuid
           ? a.attributes.startChar
