@@ -32,7 +32,7 @@
 }
 
 .drawer-backend, .drawer-frontend, .drawer-overlay {
-  z-index: 500;
+  z-index: 400;
 }
 
 .drawer-reader {
@@ -40,7 +40,7 @@
 }
 
 .dialog-primary {
-  z-index: 500;
+  z-index: 600;
 }
 
 .notation-preview-footer {
