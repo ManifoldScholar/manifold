@@ -15,7 +15,7 @@
     position: relative;
     padding-left: calc(#{$containerPaddingResp} + 26px);
 
-    @include respond($break100) {
+    @include respond($break120) {
       padding-left: calc(#{$containerPaddingFull} + 26px);
     }
   }
@@ -62,7 +62,7 @@
     left: $containerPaddingResp;
     font-size: 13px;
 
-    @include respond($break100) {
+    @include respond($break120) {
       left: $containerPaddingFull;
     }
   }

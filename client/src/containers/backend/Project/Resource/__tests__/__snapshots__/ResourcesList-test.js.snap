@@ -82,7 +82,7 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
           className="buttons-icon-horizontal"
         >
           <a
-            className="button-icon-secondary"
+            className="button-icon-secondary undefined"
             href="/backend/project/1/resources/new"
             onClick={[Function]}
           >
@@ -90,6 +90,16 @@ exports[`Backend Project Resource ResourcesList Container renders correctly 1`] 
               className="manicon manicon-plus"
             />
             Add a New Resource
+          </a>
+          <a
+            className="button-icon-secondary narrow"
+            href="/backend/project/1/resources/bulk"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-cube-multiple"
+            />
+            Bulk Add Resources
           </a>
         </div>
         <section>

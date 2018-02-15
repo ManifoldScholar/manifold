@@ -188,9 +188,13 @@
   display: block;
   padding-left: 33px;
   margin-bottom: 0; // OD
-  font-size: 16px;
+  font-size: 13px;
   color: $neutral70;
   cursor: pointer;
+
+  @include respond($break60) {
+    font-size: 16px;
+  }
 
   .bg-neutral90 & {
     color: $neutral50;
@@ -240,16 +244,16 @@
 
   &.checkbox {
     // To match indicator
-    line-height: 25px;
+    line-height: 1.563em;
 
     .toggle-indicator {
-      width: 25px;
-      height: 25px;
-      padding: 7px 6px;
+      width: 1.563em;
+      height: 1.563em;
+      padding: 0.438em 0.375em;
 
       // If check icon exists, hide it until selected
       .manicon-check {
-        font-size: 11px;
+        font-size: 0.688em;
         color: $neutralOffBlack;
         opacity: 0;
         transition: opacity $duration $timing;
@@ -258,19 +262,19 @@
   }
 
   &.radio {
-    line-height: 20px;
+    line-height: 1.25em;
 
     .toggle-indicator {
-      width: 20px;
-      height: 20px;
-      padding-top: 5px;
+      width: 1.25em;
+      height: 1.25em;
+      padding-top: 0.313em;
       text-align: center;
       border-radius: 100%;
 
       &::before {
         display: inline-block;
-        width: 10px;
-        height: 10px;
+        width: 0.625em;
+        height: 0.625em;
         vertical-align: top;
         content: '';
         background-color: $neutralOffBlack;
@@ -352,5 +356,296 @@
 
   + .form-input {
     margin-top: 40px;
+  }
+}
+
+// Form Column Mapping (used for mapping CSV, Spreadsheet assets)
+// --------------------------
+.form-column-map {
+  @include respond($break80) {
+    display: flex;
+    margin-left: -35px;
+  }
+
+  .column {
+    @include respond($break80) {
+      padding-left: 35px;
+    }
+
+    + .column {
+      margin-top: 30px;
+
+      @include respond($break80) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .column-mappable {
+    width: 100%;
+  }
+
+  // Group of draggable, available columns
+  .available {
+    background-color: $neutral85;
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 0.8em 0.8em;
+    max-height: 500px;
+    overflow-y: scroll;
+
+    @include respond($break50) {
+      margin-top: 15px;
+    }
+
+    @include respond($break90) {
+      font-size: 16px;
+    }
+
+    .form-column-listing + .form-column-listing {
+      margin-top: 0.8em;
+    }
+  }
+
+  // <ul> of dragging wells with labels
+  .mappable {
+    @include listUnstyled;
+    margin-top: 10px;
+    font-size: 14px;
+
+    @include respond($break50) {
+      margin-top: 15px;
+    }
+
+    @include respond($break80) {
+      margin-top: calc(15px + 0.8em);
+    }
+
+    @include respond($break90) {
+      font-size: 16px;
+    }
+
+    li + li {
+      margin-top: calc(0.8em - 2px);
+    }
+
+    .mapping {
+      @include clearfix;
+      @include templateHead;
+      position: relative;
+      width: 100%;
+
+      .column-label {
+        position: relative;
+        float: left;
+        width: 50%;
+        background-color: $neutral50;
+        color: $neutral85;
+        font-weight: $light;
+        padding: 0.6em 0.8em;
+
+        @include respond($break80) {
+          width: calc(100% - 21vw);
+        }
+
+        @include respond($break85) {
+          width: calc(100% - 23vw);
+        }
+
+        @include respond($break110) {
+          width: calc(100% - 300px);
+        }
+
+        .truncate {
+          display: block;
+          max-width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -1em;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 1.2em 0 1.2em 1em;
+            border-color: transparent transparent transparent $neutral50;
+            z-index: 10; // Local z-index
+        }
+      }
+    }
+
+    .well {
+      width: 50%;
+      float: left;
+
+      @include respond($break80) {
+        width: 21vw;
+      }
+
+      @include respond($break85) {
+        width: 23vw;
+      }
+
+      @include respond($break110) {
+        width: 300px;
+      }
+
+      &::before {
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        border: 2px solid $neutral85;
+        background: transparent;
+        pointer-events: none;
+        content: '';
+      }
+
+      &.drag-over::before {
+        border-color: $accentPrimary;
+      }
+
+      &.matched {
+        .placeholder {
+          position: absolute;
+        }
+      }
+
+      @keyframes cancelAppear {
+        0% {
+          opacity: 0;
+          visibility: hidden;
+        }
+        1% {
+          opacity: 0;
+          visibility: visible;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      // Show cancel buttons inside mappings
+      .cancel {
+        animation: cancelAppear $durationFast $timing 0s 1;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .placeholder {
+      display: block;
+      color: $neutral80;
+      padding: 0.6em 0.8em 0.6em 1.6em;
+      top: 0;
+      z-index: -1;
+    }
+  }
+}
+
+.form-column-listing {
+  position: relative;
+
+  .cancel {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    padding-top: 2px; // NP
+    margin-top: -8px;
+    font-size: 8px;
+    color: $neutralWhite;
+    background-color: $neutral70;
+    border-radius: 100%;
+    width: 17px;
+    height: 17px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $duration $timing,
+      visibility $duration $timing;
+
+    &:hover {
+      background-color: $sp40Tertiary;
+    }
+  }
+}
+
+// Declared globally so it can be used during drag
+.form-column-available {
+  position: relative;
+  width: 100%;
+  padding-left: calc(1em - 1px);
+  list-style: none;
+  outline: none;
+
+  @include respond($break80) {
+    width: 21vw;
+  }
+
+  @include respond($break85) {
+    width: 23vw;
+  }
+
+  @include respond($break110) {
+    width: 300px;
+  }
+
+  .text {
+    @include templateHead;
+    background-color: $neutral20;
+    color: $neutral90;
+    font-weight: $semibold;
+    display: block;
+    padding: 0.6em 0.8em;
+    transition: background-color $duration $timing;
+  }
+
+  &:hover {
+    .text {
+      background-color: $neutral05;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &::before {
+      border-color: $neutral05 transparent transparent transparent;
+    }
+
+    &::after {
+      border-color: transparent transparent $neutral05 transparent;
+    }
+  }
+
+  // Flag edge
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0em;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 1.2em 0 1.2em 1em;
+    border-color: $neutral20 transparent transparent transparent;
+    transition: border-color $duration $timing;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0em;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 1.2em 0 1.2em 1em;
+    border-color: transparent transparent $neutral20 transparent;
+    transition: border-color $duration $timing;
   }
 }

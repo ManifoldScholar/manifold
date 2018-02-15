@@ -39,7 +39,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
               >
                 Upload a file
               </span>
-               or
+               or 
               <br />
               drag and drop here
               <br />
@@ -84,7 +84,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
               >
                 Upload a file
               </span>
-               or
+               or 
               <br />
               drag and drop here
               <br />
@@ -137,7 +137,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
               >
                 Upload a file
               </span>
-               or
+               or 
               <br />
               drag and drop here
               <br />
@@ -188,7 +188,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
               >
                 Upload a file
               </span>
-               or
+               or 
               <br />
               drag and drop here
               <br />
@@ -246,7 +246,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
               >
                 Upload a file
               </span>
-               or
+               or 
               <br />
               drag and drop here
               <br />

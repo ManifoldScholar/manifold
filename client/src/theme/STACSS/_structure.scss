@@ -106,7 +106,7 @@
   margin-right: auto;
   margin-left: auto;
 
-  @include respond($break100) {
+  @include respond($break120) {
     padding-right: $containerPaddingFull;
     padding-left: $containerPaddingFull;
   }
@@ -281,7 +281,7 @@ $readerContainerWidths: (790px, 680px, 500px);
     }
   }
 
-  @include respond($break100) {
+  @include respond($break120) {
     @if ($weight == 'heavy') {
       #{$parameter}: 117px;
     } @else {

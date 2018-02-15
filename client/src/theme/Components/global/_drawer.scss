@@ -21,7 +21,7 @@
       left: -100%;
     }
 
-    @include respond($break100) {
+    @include respond($break120) {
       width: 850px;
 
       .drawer-enter & {
@@ -73,7 +73,7 @@
     }
   }
 
-  @include respond($break100) {
+  @include respond($break120) {
     width: 850px;
 
     .drawer-enter & {
