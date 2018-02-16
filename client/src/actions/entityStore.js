@@ -24,4 +24,4 @@ export const request = createAction(
     return meta || uuid.v1();
   }
 );
-/* eslint-enableno-unused-vars */
+/* eslint-enable no-unused-vars */
