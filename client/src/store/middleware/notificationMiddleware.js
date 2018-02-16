@@ -14,7 +14,12 @@ function isApiResponseAction(action) {
 
 function handleAddNotificationAction(dispatch, action) {
   const notification = action.payload;
-  if (notification.expiration && notification.id) {
+  if (!notification.scope) notification.scope = "global";
+  if (
+    notification.expiration &&
+    notification.id &&
+    notification.scope !== "drawer"
+  ) {
     let expire = parseInt(notification.expiration, 10);
     if (isNaN(expire)) expire = 5000;
     setTimeout(() => {
@@ -31,6 +36,10 @@ function handleApiResponseAction(dispatch, action) {
   const notification = Object.assign({}, notifications[key](action.payload), {
     id: action.meta
   });
+  let scope = "global";
+  if (action.payload && action.payload.notificationScope)
+    scope = action.payload.notificationScope;
+  notification.scope = scope;
   dispatch(notificationActions.addNotification(notification));
 }
 

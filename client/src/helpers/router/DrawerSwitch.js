@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Drawer } from "components/global";
+import { Drawer } from "containers/global";
 import switchFactory from "./switchFactory";
 
 class DrawerSwitch extends React.PureComponent {

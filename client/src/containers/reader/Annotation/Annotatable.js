@@ -4,7 +4,7 @@ import has from "lodash/has";
 import { connect } from "react-redux";
 import Annotation from "components/reader/Annotation";
 import Menu from "components/reader/Annotation/Popup/Menu";
-import { Drawer } from "components/global";
+import { Drawer } from "containers/global";
 import { Notation } from "containers/reader";
 import AnnotationContainers from "containers/reader/Annotation";
 import { Notation as NotationComponents } from "components/reader";

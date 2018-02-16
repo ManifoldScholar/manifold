@@ -147,6 +147,7 @@ export class TwitterQueryEditContainer extends PureComponent {
             name={requests.beTwitterQueryUpdate}
             twitterQuery={twitterQuery}
             projectId={projectId}
+            notificationScope="drawer"
           />
         </section>
       </div>

@@ -5,7 +5,7 @@ import classNames from "classnames";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
-import { Drawer } from "components/global";
+import Drawer from "components/global/Drawer";
 
 class Toc extends PureComponent {
   static propTypes = {

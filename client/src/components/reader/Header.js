@@ -9,10 +9,10 @@ import {
   ControlMenu
 } from "components/reader";
 import {
-  HeaderNotifications,
   UIPanel,
   UserMenuButton,
-  UserMenuBody
+  UserMenuBody,
+  HeaderNotifications
 } from "components/global";
 import { HigherOrder } from "containers/global";
 import memoize from "lodash/memoize";
@@ -212,12 +212,7 @@ export default class Header extends Component {
             hideUserMenu={this.props.commonActions.toggleUserPanel}
           />
         </nav>
-        <HeaderNotifications
-          notifications={this.props.notifications}
-          addNotification={this.props.commonActions.addNotification}
-          removeNotification={this.props.commonActions.removeNotification}
-          removeAllNotifications={this.props.commonActions.clearNotifications}
-        />
+        <HeaderNotifications />
       </header>
     );
   }

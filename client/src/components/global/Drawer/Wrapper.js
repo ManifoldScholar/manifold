@@ -2,13 +2,16 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { CSSTransitionGroup as ReactCSSTransitionGroup } from "react-transition-group";
 import Utility from "components/global/Utility";
+import { Notifications } from "containers/global";
 import isString from "lodash/isString";
-import { withRouter } from "react-router-dom";
+import { notificationActions } from "actions";
 
-class DrawerWrapper extends PureComponent {
+export default class DrawerWrapper extends PureComponent {
   static displayName = "Drawer.Wrapper";
 
   static propTypes = {
+    dispatch: PropTypes.func,
+    connected: PropTypes.bool.isRequired,
     open: PropTypes.bool,
     children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     title: PropTypes.string,
@@ -22,12 +25,19 @@ class DrawerWrapper extends PureComponent {
     history: PropTypes.object
   };
 
+  static mapStateToProps() {
+    return {
+      connected: true
+    };
+  }
+
   // NB lockScroll can be:
   // Hover (default): User can scroll the drawer on hover, but it doesn't effect body scroll
   // unless they intentionally do so.
   // Always: Having the drawer open locks the body scroll until it is closed
   // None: Scrolling the drawer invokes default browser behavior
   static defaultProps = {
+    connected: false,
     lockScroll: "hover",
     open: false,
     style: "backend",
@@ -45,7 +55,9 @@ class DrawerWrapper extends PureComponent {
       leaving: false,
       keyboardEventsPaused: false
     };
-
+    if (props.open === true) {
+      this.onOpen();
+    }
     this.handleLeaveEvent = this.handleLeaveEvent.bind(this);
     this.handleLeaveKey = this.handleLeaveKey.bind(this);
     this.pauseKeyboardEvents = this.pauseKeyboardEvents.bind(this);
@@ -63,8 +75,26 @@ class DrawerWrapper extends PureComponent {
     document.addEventListener("keyup", this.handleLeaveKey);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.open === false && nextProps.open === true) this.onOpen();
+  }
+
   componentWillUnmount() {
     document.removeEventListener("keyup", this.handleLeaveKey);
+  }
+
+  onOpen() {
+    this.clearGlobalNotifications();
+  }
+
+  clearDrawerNotifications() {
+    if (this.props.dispatch)
+      this.props.dispatch(notificationActions.removeNotifications("drawer"));
+  }
+
+  clearGlobalNotifications() {
+    if (this.props.dispatch)
+      this.props.dispatch(notificationActions.removeAllNotifications());
   }
 
   handleLeaveKey(event) {
@@ -86,6 +116,8 @@ class DrawerWrapper extends PureComponent {
     this.setState({
       leaving: true
     });
+
+    this.clearDrawerNotifications();
 
     /*
       NB: Running this callback without a timeout causes the drawer
@@ -135,6 +167,9 @@ class DrawerWrapper extends PureComponent {
         className={`drawer-${this.props.style} ${entrySideClass}`}
       >
         {this.renderDrawerFrontMatter(this.props)}
+        {this.props.connected && (
+          <Notifications scope="drawer" style="drawer" animate={false} />
+        )}
         {/* Render children without props if they aren't a component */}
         {this.renderChildren()}
       </div>
@@ -157,7 +192,6 @@ class DrawerWrapper extends PureComponent {
         </div>
       );
     }
-
     if (this.props.lockScroll === "always") {
       return (
         <div>
@@ -187,5 +221,3 @@ class DrawerWrapper extends PureComponent {
     );
   }
 }
-
-export default withRouter(DrawerWrapper);

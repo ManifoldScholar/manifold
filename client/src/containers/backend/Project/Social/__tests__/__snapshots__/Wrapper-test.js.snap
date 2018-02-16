@@ -10,17 +10,19 @@ exports[`Backend Project Social Wrapper Container renders correctly 1`] = `
             <Route render={[Function: render]}>
               <Router.Switch('DrawerSwitch) closeUrl=\\"/backend/project/1/social\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
                 <DrawerSwitch closeUrl=\\"/backend/project/1/social\\" match={[undefined]} location={{...}} history={{...}} staticContext={[undefined]} wrapperProps={{...}}>
-                  <withRouter(Drawer.Wrapper) open={false} closeUrl=\\"/backend/project/1/social\\">
-                    <Route render={[Function: render]}>
-                      <Drawer.Wrapper open={false} closeUrl=\\"/backend/project/1/social\\" match={{...}} location={{...}} history={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" style=\\"backend\\" entrySide=\\"right\\">
-                        <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-                          <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                            <span />
-                          </TransitionGroup>
-                        </CSSTransitionGroup>
-                      </Drawer.Wrapper>
-                    </Route>
-                  </withRouter(Drawer.Wrapper)>
+                  <Connect(withRouter(Drawer.Wrapper)) open={false} closeUrl=\\"/backend/project/1/social\\">
+                    <withRouter(Drawer.Wrapper) open={false} closeUrl=\\"/backend/project/1/social\\" connected={true} dispatch={[Function]}>
+                      <Route render={[Function: render]}>
+                        <Drawer.Wrapper open={false} closeUrl=\\"/backend/project/1/social\\" connected={true} dispatch={[Function]} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" style=\\"backend\\" entrySide=\\"right\\">
+                          <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+                            <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                              <span />
+                            </TransitionGroup>
+                          </CSSTransitionGroup>
+                        </Drawer.Wrapper>
+                      </Route>
+                    </withRouter(Drawer.Wrapper)>
+                  </Connect(withRouter(Drawer.Wrapper))>
                 </DrawerSwitch>
               </Router.Switch('DrawerSwitch)>
             </Route>

@@ -27,8 +27,8 @@ export class BackendContainer extends PureComponent {
     location: PropTypes.object,
     dispatch: PropTypes.func,
     authentication: PropTypes.object,
-    visibility: PropTypes.object,
     notifications: PropTypes.object,
+    visibility: PropTypes.object,
     pages: PropTypes.array,
     settings: PropTypes.object,
     route: PropTypes.object
@@ -103,7 +103,6 @@ export class BackendContainer extends PureComponent {
               visibility={this.props.visibility}
               location={this.props.location}
               authentication={this.props.authentication}
-              notifications={this.props.notifications}
               commonActions={this.commonActions}
               settings={this.props.settings}
             />
