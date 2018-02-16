@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
-  HeaderNotifications,
   UIPanel,
   UserMenuBody,
   UserMenuButton,
+  HeaderNotifications,
   PressLogo
 } from "components/global";
 import { Link, NavLink } from "react-router-dom";
@@ -18,7 +18,6 @@ export default class LayoutHeader extends Component {
     visibility: PropTypes.object,
     location: PropTypes.object,
     authentication: PropTypes.object,
-    notifications: PropTypes.object,
     commonActions: PropTypes.object,
     settings: PropTypes.object
   };
@@ -117,13 +116,7 @@ export default class LayoutHeader extends Component {
         </div>
 
         <div className="header-border" />
-
-        <HeaderNotifications
-          notifications={this.props.notifications}
-          addNotification={this.props.commonActions.addNotification}
-          removeNotification={this.props.commonActions.removeNotification}
-          removeAllNotifications={this.props.commonActions.clearNotifications}
-        />
+        <HeaderNotifications scope="global" />
       </header>
     );
   }

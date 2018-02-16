@@ -193,10 +193,11 @@ export class UsersEditContainer extends PureComponent {
         <section className="form-section">
           <FormContainer.Form
             model={this.props.user}
-            name="backend-edit-user"
+            name="backend-user-update"
             update={usersAPI.update}
             create={usersAPI.create}
             className="form-secondary"
+            notificationScope="drawer"
           >
             <Form.TextInput
               label="Email"

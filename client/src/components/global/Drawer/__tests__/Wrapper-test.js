@@ -1,3 +1,4 @@
+jest.mock("containers/global/Drawer/Wrapper", () => "wrapper");
 import React from "react";
 import Wrapper from "../Wrapper";
 import { mount } from "enzyme";

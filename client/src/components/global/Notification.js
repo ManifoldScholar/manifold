@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-export default class HeaderNotification extends Component {
+export default class Notification extends Component {
   static propTypes = {
     id: PropTypes.string,
     heading: PropTypes.string,
@@ -32,11 +32,12 @@ export default class HeaderNotification extends Component {
 
   render() {
     const notificationClass = classNames({
-      "header-notification": true,
+      notification: true,
       notice: this.props.level === 0,
       warning: this.props.level === 1,
       error: this.props.level === 2
     });
+
     return (
       <div className={notificationClass} key={this.props.id}>
         <div className="container">
@@ -51,9 +52,7 @@ export default class HeaderNotification extends Component {
             data-id="close"
           >
             <i className="manicon manicon-x" />
-            <span className="screen-reader-text">
-              {"Click to close this notification"}
-            </span>
+            <span className="screen-reader-text">{"Dismiss"}</span>
           </button>
         </div>
       </div>

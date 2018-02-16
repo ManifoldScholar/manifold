@@ -2,7 +2,7 @@ export Form from "./Form";
 export HigherOrder from "./HigherOrder";
 export SignInUp from "./SignInUp";
 export Dropdown from "./Dropdown";
-export HeaderNotification from "./HeaderNotification";
+export Notification from "./Notification";
 export HeaderNotifications from "./HeaderNotifications";
 export FormattedDate from "./FormattedDate";
 export LoadingBar from "./LoadingBar";

@@ -38,6 +38,7 @@ export class TwitterQueryNewContainer extends Component {
           projectId={pId}
           twitterQuery={this.defaultQuery}
           successHandler={this.handleSuccess}
+          notificationScope="global"
         />
       </section>
     );

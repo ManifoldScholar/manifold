@@ -111,10 +111,10 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
         className="header-border"
       />
       <section
-        className="header-notifications-container"
+        className="notifications-container"
       >
         <div
-          className="header-notifications-list"
+          className="notifications-list-header notifications-list"
         >
           <span />
         </div>

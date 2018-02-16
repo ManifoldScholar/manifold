@@ -33,11 +33,13 @@ export class FormContainer extends PureComponent {
     errors: PropTypes.array,
     response: PropTypes.object,
     className: PropTypes.string,
-    options: PropTypes.object
+    options: PropTypes.object,
+    notificationScope: PropTypes.string
   };
 
   static defaultProps = {
     doNotWarn: false,
+    notificationScope: "global",
     model: {
       attributes: {}
     },
@@ -122,7 +124,7 @@ export class FormContainer extends PureComponent {
     const dirty = this.props.session.dirty;
     const source = this.props.session.source;
     const call = this.props.update(source.id, { attributes: dirty.attributes });
-    const action = request(call, this.props.name);
+    const action = request(call, this.props.name, this.requestOptions());
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty("promise") && this.props.onSuccess) {
       res.promise.then(() => {
@@ -133,11 +135,16 @@ export class FormContainer extends PureComponent {
     }
   }
 
+  requestOptions() {
+    return Object.assign({}, this.props.options, {
+      notificationScope: this.props.notificationScope
+    });
+  }
+
   create() {
     const dirty = this.props.session.dirty;
     const call = this.props.create({ attributes: dirty.attributes });
-    const options = this.props.options;
-    const action = request(call, this.props.name, options);
+    const action = request(call, this.props.name, this.requestOptions());
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty("promise") && this.props.onSuccess) {
       res.promise.then(() => {

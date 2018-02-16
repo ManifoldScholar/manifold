@@ -1,0 +1,188 @@
+.notifications-list {
+  top: 100px;
+  width: 100%;
+
+  .notification {
+    width: 100%;
+    color: $neutralOffBlack;
+
+    .container {
+      position: relative;
+      // Adjusted container size
+      padding-top: 23px;
+      padding-bottom: 25px;
+      background-color: $sp30Primary;
+
+      @include respond($break100) {
+        max-width: $containerWidthFull - 50px;
+        padding: 23px 26px 25px;
+      }
+    }
+
+    .notification-heading {
+      @include headingTertiary;
+      padding-right: 67px;
+      margin: 0;
+      font-size: 18px;
+      font-weight: $semibold;
+
+      @include respond($break70) {
+        font-size: 20px;
+      }
+    }
+
+    .notification-body {
+      @include templateCopy;
+      padding-right: 67px;
+      margin-top: 10px;
+      font-size: 16px;
+
+      @include respond($break70) {
+        font-size: 20px;
+      }
+    }
+
+    .notification-close {
+      @include buttonUnstyled;
+      position: absolute;
+      top: 50%;
+      right: $containerPaddingResp;
+      margin-top: -14px;
+      font-size: 24px;
+
+      @include respond($break70) {
+        font-size: 28px;
+      }
+
+      @include respond($break100) {
+        right: 26px;
+      }
+    }
+
+    &.notice .container {
+      background-color: $sp30Primary;
+    }
+
+    &.warning .container {
+      background-color: $sp30Secondary;
+    }
+
+    &.error .container {
+      background-color: $sp30Tertiary;
+    }
+  }
+}
+
+.notifications-list.notifications-list-drawer {
+  .notification-container {
+    transition: transform $duration ease-out;
+
+    &.notification-leave {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0s linear;
+    }
+
+    &.notification-leave-active {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 0.5s, opacity 0.5s linear;
+    }
+  }
+
+  .notification {
+    .container {
+      padding: 18px;
+      background-color: $neutral90;
+    }
+
+    &.error .container, &.warning .container, &.notice .container {
+      background-color: $neutral90;
+    }
+
+    &.notice .container {
+      color: $sp20Primary;
+    }
+
+    &.warning .container {
+      color: $sp20Quaternary;
+    }
+
+    &.error.container {
+      color: $sp40Tertiary;
+    }
+
+    .notification-heading {
+      font-size: 20px;
+    }
+
+    .notification-body {
+      @include headingTertiary;
+      padding-right: 0;
+      margin-top: 8px;
+      font-size: 16px;
+      font-weight: normal;
+      color: $neutral30;
+    }
+
+    .notification-close {
+      @include buttonUnstyled;
+      position: relative;
+      top: auto;
+      right: auto;
+      margin: 8px 0 0;
+      font-size: inherit;
+
+      .manicon {
+        display: none;
+      }
+
+      .screen-reader-text {
+        @include utilityPrimary;
+        position: relative;
+        overflow: visible;
+        font-size: 12px;
+        color: $neutral50;
+
+        &:hover {
+          color: $accentPrimary;
+        }
+      }
+    }
+  }
+}
+
+.notifications-list.notifications-list-header {
+  position: absolute;
+  top: 60px;
+
+  @include respond($break40) {
+    top: 80px;
+  }
+
+  // React Animation classes
+  &.updating {
+    transition: transform $duration ease-out;
+  }
+
+  .notification-container {
+    // React Animation classes
+    &.notification-leave {
+      max-height: 200px;
+      transition: transform 0.3s ease-in-out, max-height 0.2s ease-out 0.15s;
+    }
+
+    &.notification-leave-active {
+      max-height: 0;
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    + .notification-container {
+      .notification .container {
+        border-top: 1px solid $neutral50;
+      }
+    }
+  }
+
+}
+
