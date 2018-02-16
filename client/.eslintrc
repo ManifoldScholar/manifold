@@ -51,6 +51,9 @@
     // Sometimes it's required.
     "react/no-danger": 0,
 
+    // We should refactor and enable this rule.
+    "react/style-prop-object": 0,
+
     // Prettier does it differently.
     "react/jsx-closing-bracket-location": 0,
     "react/jsx-indent-props": 0,
