@@ -3,42 +3,38 @@
 exports[`Backend.Drawer.Wrapper Component renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
-    <withRouter(Drawer.Wrapper) open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]}>
-      <Route render={[Function: render]}>
-        <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} match={{...}} location={{...}} history={{...}} staticContext={[undefined]} lockScroll=\\"hover\\" entrySide=\\"right\\">
-          <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-            <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-              <span>
-                <CSSTransitionGroupChild name=\\"drawer\\" appear={false} enter={true} leave={true} appearTimeout={[undefined]} enterTimeout={500} leaveTimeout={300}>
-                  <div className={[undefined]}>
-                    <Utility.EdgeLockScroll>
-                      <div className=\\"edge-lock-scroll\\">
-                        <div className=\\"drawer-backend \\">
-                          <div className=\\"drawer-bar\\">
-                            <div className=\\"drawer-title\\">
-                              wrapper
-                            </div>
-                            <div onClick={[Function: bound handleLeaveEvent]} className=\\"close-button-primary\\">
-                              <span className=\\"close-text\\">
-                                Close
-                              </span>
-                              <i className=\\"manicon manicon-x\\" />
-                              <span className=\\"screen-reader-text\\">
-                                Close Drawer
-                              </span>
-                            </div>
-                          </div>
+    <Drawer.Wrapper open={true} style=\\"backend\\" title=\\"wrapper\\" closeCallback={[Function: mockConstructor]} connected={false} lockScroll=\\"hover\\" entrySide=\\"right\\">
+      <CSSTransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+        <TransitionGroup transitionName=\\"drawer\\" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+          <span>
+            <CSSTransitionGroupChild name=\\"drawer\\" appear={false} enter={true} leave={true} appearTimeout={[undefined]} enterTimeout={500} leaveTimeout={300}>
+              <div className={[undefined]}>
+                <Utility.EdgeLockScroll>
+                  <div className=\\"edge-lock-scroll\\">
+                    <div className=\\"drawer-backend \\">
+                      <div className=\\"drawer-bar\\">
+                        <div className=\\"drawer-title\\">
+                          wrapper
+                        </div>
+                        <div onClick={[Function: bound handleLeaveEvent]} className=\\"close-button-primary\\">
+                          <span className=\\"close-text\\">
+                            Close
+                          </span>
+                          <i className=\\"manicon manicon-x\\" />
+                          <span className=\\"screen-reader-text\\">
+                            Close Drawer
+                          </span>
                         </div>
                       </div>
-                    </Utility.EdgeLockScroll>
+                    </div>
                   </div>
-                </CSSTransitionGroupChild>
-              </span>
-            </TransitionGroup>
-          </CSSTransitionGroup>
-        </Drawer.Wrapper>
-      </Route>
-    </withRouter(Drawer.Wrapper)>
+                </Utility.EdgeLockScroll>
+              </div>
+            </CSSTransitionGroupChild>
+          </span>
+        </TransitionGroup>
+      </CSSTransitionGroup>
+    </Drawer.Wrapper>
   </Router>
 </MemoryRouter>"
 `;

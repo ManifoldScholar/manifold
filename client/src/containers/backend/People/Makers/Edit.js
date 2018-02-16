@@ -136,6 +136,7 @@ export class MakersEditContainer extends PureComponent {
             update={makersAPI.update}
             create={makersAPI.create}
             className="form-secondary"
+            notificationScope="drawer"
           >
             <Form.TextInput
               label="First Name"

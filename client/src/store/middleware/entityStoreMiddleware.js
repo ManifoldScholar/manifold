@@ -10,8 +10,14 @@ function sendRequest(request, authToken) {
   return client.call(endpoint, method, options);
 }
 
-function buildResponseAction(payload, meta, error) {
+function buildResponseAction(requestAction, payload, meta, error) {
   const type = `API_RESPONSE/${constantizeMeta(meta)}`;
+  /* eslint-disable no-param-reassign */
+  if (payload) {
+    payload.notificationScope =
+      get(requestAction, "payload.notificationScope") || "global";
+  }
+  /* eslint-enable no-param-reassign */
   return { type, error, payload, meta };
 }
 
@@ -97,14 +103,14 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
         newMeta.forEach(meta => {
           const payload = response || {};
           payload.request = action.payload.request;
-          dispatch(buildResponseAction(response, meta, false));
+          dispatch(buildResponseAction(action, response, meta, false));
         });
       },
       response => {
         newMeta.forEach(meta => {
           const payload = response || {};
           payload.request = action.payload.request;
-          dispatch(buildResponseAction(response, meta, true));
+          dispatch(buildResponseAction(action, response, meta, true));
         });
       }
     );

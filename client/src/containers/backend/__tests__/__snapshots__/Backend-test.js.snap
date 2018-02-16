@@ -15,7 +15,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
               </withRouter(ScrollToTop)>
               <ScrollAware threshold={200} topClass=\\"top\\" notTopClass=\\"not-top\\" startPinned={true} pinnedClass=\\"pinned\\" notPinnedClass=\\"not-pinned\\" pinThreshold={50}>
                 <div className=\\"scroll-aware top pinned\\">
-                  <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} notifications={{...}} commonActions={{...}} settings={[undefined]} scrollAware={{...}}>
+                  <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} commonActions={{...}} settings={[undefined]} scrollAware={{...}}>
                     <header className=\\"header-app dark\\">
                       <div className=\\"header-container\\">
                         <Link to=\\"/\\" className=\\"logo\\" replace={false}>
@@ -130,17 +130,21 @@ exports[`Backend Backend Container renders correctly 1`] = `
                         </nav>
                       </div>
                       <div className=\\"header-border\\" />
-                      <HeaderNotifications notifications={{...}} addNotification={[Function]} removeNotification={[Function]} removeAllNotifications={[Function]}>
-                        <section className=\\"header-notifications-container\\">
-                          <div className=\\"header-notifications-list\\">
-                            <CSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
-                              <TransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
-                                <span />
-                              </TransitionGroup>
-                            </CSSTransitionGroup>
-                          </div>
-                        </section>
-                      </HeaderNotifications>
+                      <HeaderNotification scope=\\"global\\">
+                        <Connect(NotificationsComponent) scope=\\"global\\">
+                          <NotificationsComponent scope=\\"global\\" notifications={{...}} dispatch={[Function]} animate={true} style=\\"header\\">
+                            <section className=\\"notifications-container\\">
+                              <div className=\\"notifications-list-header notifications-list\\">
+                                <CSSTransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true}>
+                                  <TransitionGroup transitionName=\\"notification\\" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={false} transitionEnter={true} transitionLeave={true} childFactory={[Function]} component=\\"span\\">
+                                    <span />
+                                  </TransitionGroup>
+                                </CSSTransitionGroup>
+                              </div>
+                            </section>
+                          </NotificationsComponent>
+                        </Connect(NotificationsComponent)>
+                      </HeaderNotification>
                     </header>
                   </Layout.Header>
                 </div>

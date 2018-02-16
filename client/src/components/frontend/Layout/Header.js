@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
-  HeaderNotifications,
   UIPanel,
   UserMenuBody,
   UserMenuButton,
-  PressLogo
+  PressLogo,
+  HeaderNotifications
 } from "components/global";
 import { Link } from "react-router-dom";
 import startsWith from "lodash/startsWith";
@@ -128,12 +128,7 @@ export default class LayoutHeader extends PureComponent {
 
         <div className="header-border" />
 
-        <HeaderNotifications
-          notifications={this.props.notifications}
-          addNotification={this.props.commonActions.addNotification}
-          removeNotification={this.props.commonActions.removeNotification}
-          removeAllNotifications={this.props.commonActions.clearNotifications}
-        />
+        <HeaderNotifications scope="global" />
       </header>
     );
   }

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Notes } from "components/reader";
 import { ReaderNotes } from "containers/reader";
-import { Drawer as BackendDrawer } from "components/global";
+import { Drawer as BackendDrawer } from "containers/global";
 
 export default class ReaderDrawer extends PureComponent {
   static displayName = "Notes.ReaderDrawer";

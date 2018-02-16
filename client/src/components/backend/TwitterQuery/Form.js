@@ -11,7 +11,12 @@ export default class TwitterQueryForm extends PureComponent {
     projectId: PropTypes.string,
     twitterQuery: PropTypes.object,
     successHandler: PropTypes.func,
+    notificationScope: PropTypes.string,
     name: PropTypes.string.isRequired
+  };
+
+  static defaultProps = {
+    notificationScope: "drawer"
   };
 
   handleSuccess = () => {
@@ -41,6 +46,7 @@ export default class TwitterQueryForm extends PureComponent {
         options={{ adds: requests.beTwitterQueries }}
         onSuccess={this.handleSuccess}
         className="form-secondary"
+        notificationScope={this.props.notificationScope}
       >
         <Form.TextInput
           validation={["required"]}

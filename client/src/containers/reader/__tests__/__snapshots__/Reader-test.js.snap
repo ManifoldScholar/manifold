@@ -410,10 +410,10 @@ exports[`Reader Reader Container renders correctly 1`] = `
         </div>
       </nav>
       <section
-        className="header-notifications-container"
+        className="notifications-container"
       >
         <div
-          className="header-notifications-list"
+          className="notifications-list-header notifications-list"
         >
           <span />
         </div>

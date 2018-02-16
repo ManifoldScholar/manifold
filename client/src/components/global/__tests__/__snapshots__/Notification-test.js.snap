@@ -2,7 +2,7 @@
 
 exports[`Global.HeaderNotification component renders correctly 1`] = `
 <div
-  className="header-notification error"
+  className="notification error"
 >
   <div
     className="container"
@@ -30,7 +30,7 @@ exports[`Global.HeaderNotification component renders correctly 1`] = `
       <span
         className="screen-reader-text"
       >
-        Click to close this notification
+        Dismiss
       </span>
     </button>
   </div>
