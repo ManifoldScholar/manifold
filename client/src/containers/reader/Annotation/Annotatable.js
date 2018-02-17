@@ -183,7 +183,7 @@ class Annotatable extends Component {
       startChar,
       endNode: endNode.dataset.nodeUuid,
       endChar,
-      subject: selection.text,
+      subject: selection.text.replace(/\n/g, ""),
       format
     };
     return annotation;
