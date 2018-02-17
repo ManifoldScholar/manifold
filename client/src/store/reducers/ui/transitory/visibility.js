@@ -100,6 +100,7 @@ const panelHide = (state, action) => {
 };
 
 const allPanelsHide = state => {
+  if (!Object.values(state.uiPanels).includes(true)) return state;
   return Object.assign({}, state, { uiPanels: initialState.uiPanels });
 };
 
