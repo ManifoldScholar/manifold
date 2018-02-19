@@ -55,7 +55,7 @@
     }
   }
 
-  @include respond($break100 + (500 * 2)) {
+  @include respond($break120 + (500 * 2)) {
     width: calc((100vw - #{$containerWidthInner})/2);
     padding: 33px 70px;
 

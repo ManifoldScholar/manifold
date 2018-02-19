@@ -115,7 +115,7 @@
     right: $containerPaddingResp;
     height: 100%;
 
-    @include respond($break100) {
+    @include respond($break120) {
       right: $containerPaddingFull;
     }
 
@@ -201,7 +201,7 @@
       max-width: 100vw;
       white-space: nowrap;
 
-      @include respond($break100) {
+      @include respond($break120) {
         right: -$containerPaddingFull;
       }
     }

@@ -13,7 +13,7 @@
   transition: opacity $duration $timing,
     visibility $duration $timing;
 
-  @include respond($break100) {
+  @include respond($break120) {
     padding-right: $containerPaddingFull;
     padding-left: $containerPaddingFull;
   }

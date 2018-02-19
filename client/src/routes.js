@@ -67,6 +67,13 @@ export default () => {
           helper: p => `/backend/project/${p}/resources/new`
         },
         {
+          name: "backendProjectResourcesBulk",
+          exact: true,
+          component: Backend.Resource.Bulk,
+          path: "/backend/project/:projectId/resources/bulk",
+          helper: p => `/backend/project/${p}/resources/bulk`
+        },
+        {
           name: "backendProjectCollectionsNew",
           exact: true,
           component: Backend.Collection.New,

@@ -74,7 +74,7 @@ exports[`Backend Settings Subjects List Container renders correctly 1`] = `
           className="buttons-icon-horizontal"
         >
           <a
-            className="button-icon-secondary"
+            className="button-icon-secondary undefined"
             href="/backend/settings/subjects/new"
             onClick={[Function]}
           >

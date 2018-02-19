@@ -74,7 +74,7 @@ exports[`Backend People Users List Container renders correctly 1`] = `
           className="buttons-icon-horizontal"
         >
           <a
-            className="button-icon-secondary"
+            className="button-icon-secondary undefined"
             href="/backend/people/users/new"
             onClick={[Function]}
           >

@@ -169,6 +169,9 @@ export default class ListSearchable extends PureComponent {
     const entities = this.props.entities;
     if (!entities) return;
 
+    const secondaryButtonIcon = this.props.secondaryButtonIcon ?
+      this.props.secondaryButtonIcon : 'manicon-plus';
+
     let output = null;
 
     output = (
@@ -178,27 +181,34 @@ export default class ListSearchable extends PureComponent {
           singularUnit={this.props.singularUnit}
           pluralUnit={this.props.pluralUnit}
         />
-        {this.props.newButtonVisible ? (
-          <div className="buttons-icon-horizontal">
-            <Link
-              to={this.props.newButtonPath}
-              className="button-icon-secondary"
-            >
-              <i className="manicon manicon-plus" />
-              {this.props.newButtonText}
-            </Link>
-          </div>
-        ) : null}
-        {entities.length > 0 ? (
-          <List.SimpleList
-            entities={entities}
-            entityComponent={this.props.entityComponent}
-            entityComponentProps={this.props.entityComponentProps}
-            destroyHandler={this.props.destroyHandler}
-          />
-        ) : (
-          <p className="list-total empty">Sorry, no results were found.</p>
-        )}
+        <div className="buttons-icon-horizontal">
+          {this.props.newButtonVisible
+            ? <Link
+                to={this.props.newButtonPath}
+                className={`button-icon-secondary ${this.props.newButtonType}`}
+              >
+                <i className="manicon manicon-plus" />
+                {this.props.newButtonText}
+              </Link>
+            : null}
+          {this.props.secondaryButtonVisible
+            ? <Link
+                to={this.props.secondaryButtonPath}
+                className={`button-icon-secondary ${this.props.secondaryButtonType}`}
+              >
+                <i className={`manicon ${secondaryButtonIcon}`}/>
+                {this.props.secondaryButtonText}
+              </Link>
+            : null}
+        </div>
+        {entities.length > 0
+          ? <List.SimpleList
+              entities={entities}
+              entityComponent={this.props.entityComponent}
+              entityComponentProps={this.props.entityComponentProps}
+              destroyHandler={this.props.destroyHandler}
+            />
+          : <p className="list-total empty">Sorry, no results were found.</p>}
       </div>
     );
 

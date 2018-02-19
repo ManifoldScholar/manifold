@@ -70,6 +70,9 @@ exports[`Backend People Makers List Container renders correctly 1`] = `
           </span>
            makers: 
         </p>
+        <div
+          className="buttons-icon-horizontal"
+        />
         <section>
           <ul>
             <li
