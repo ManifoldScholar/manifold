@@ -116,37 +116,6 @@ RSpec.describe "Project Twitter Queriees API", type: :request do
     end
   end
 
-  describe "updates a twitter query" do
-    before(:each) do
-      @twitter_query = FactoryBot.create(:twitter_query, project: project)
-    end
-    let(:path) { api_v1_twitter_query_path(@twitter_query) }
-    let(:valid_params) { json_payload(attributes: { query: "from:rambostoolz" }) }
-
-    context "when the user is an admin" do
-      let(:headers) { admin_headers }
-
-      it "has a 200 OK status code" do
-        put path, headers: headers, params: valid_params
-        expect(response).to have_http_status(200)
-      end
-
-      it "updates a twitter query successfully" do
-        put path, headers: headers, params: valid_params
-        @twitter_query.reload
-        expect(@twitter_query.query).to eq "from:rambostoolz"
-      end
-    end
-
-    context "when the user is a reader" do
-      let(:headers) { reader_headers }
-      it "has a 403 FORBIDDEN status code" do
-        put path, headers: headers, params: valid_params
-        expect(response).to have_http_status(403)
-      end
-    end
-  end
-
   describe "destroys a twitter query" do
     before(:each) do
       @twitter_query = FactoryBot.create(:twitter_query, project: project)
