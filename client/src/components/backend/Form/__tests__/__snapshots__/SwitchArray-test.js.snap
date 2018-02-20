@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Form.SwitchArray component renders correctly 1`] = `
+<div
+  className="form-input"
+  style={Object {}}
+>
+  <div
+    className="form-section horizontal"
+  >
+    <header
+      className="form-section-label"
+    >
+      <span>
+        Label this
+      </span>
+    </header>
+    <div
+      className="form-input"
+    >
+      <label
+        className="above"
+      >
+        Option one
+      </label>
+      <div
+        className="toggle-indicator"
+      >
+        <div
+          className="boolean-primary"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+    <div
+      className="form-input"
+    >
+      <label
+        className="above"
+      >
+        Option two
+      </label>
+      <div
+        className="toggle-indicator"
+      >
+        <div
+          className="boolean-primary"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

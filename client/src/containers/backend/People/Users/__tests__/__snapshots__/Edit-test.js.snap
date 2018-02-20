@@ -117,6 +117,11 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
                   Admin
                 </option>
                 <option
+                  value="editor"
+                >
+                  Editor
+                </option>
+                <option
                   value="reader"
                 >
                   Reader
