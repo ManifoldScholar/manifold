@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Permission New Container renders correctly 1`] = `
+<section>
+  <header
+    className="drawer-header"
+  >
+    <h2
+      className="heading-quaternary less-space-bottom"
+    >
+      Grant Permissions
+    </h2>
+  </header>
+  <section>
+    <div>
+      <form
+        className="form-secondary permissions-form"
+        data-id="submit"
+        onSubmit={[Function]}
+      >
+        <div
+          className="form-input"
+        >
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <div
+              className="input-predictive"
+            >
+              <div
+                className="input"
+              >
+                <button
+                  className="manicon manicon-plus"
+                />
+                <input
+                  className="text-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyPress={[Function]}
+                  placeholder="Select User"
+                  type="text"
+                  value=""
+                />
+              </div>
+              <nav
+                className="predictive-list"
+              >
+                <ul />
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <div
+            className="form-section horizontal"
+          >
+            <header
+              className="form-section-label"
+            >
+              <span>
+                Permissions
+              </span>
+            </header>
+            <div
+              className="form-input"
+            >
+              <label
+                className="above"
+              >
+                Owner?
+              </label>
+              <div
+                className="toggle-indicator"
+              >
+                <div
+                  className="boolean-primary"
+                  onClick={[Function]}
+                />
+              </div>
+            </div>
+            <div
+              className="form-input"
+            >
+              <label
+                className="above"
+              >
+                Author?
+              </label>
+              <div
+                className="toggle-indicator"
+              >
+                <div
+                  className="boolean-primary"
+                  onClick={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-input submit"
+        >
+          <input
+            className="button-secondary outlined"
+            type="submit"
+            value="Save Permissions"
+          />
+        </div>
+      </form>
+    </div>
+  </section>
+</section>
+`;

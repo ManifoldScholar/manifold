@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend.Permission.ListItem component renders correctly 1`] = `
+<li
+  className=""
+>
+  <a
+    href="/backend/project/1/permissions"
+    onClick={[Function]}
+  >
+    <header>
+      <figure
+        className="avatar"
+      >
+        <div
+          className="no-image"
+        >
+          <i
+            className="manicon manicon-person"
+          />
+        </div>
+      </figure>
+      <div
+        className="meta"
+      >
+        <h3
+          className="name large"
+        >
+          Rowan
+           
+          Ida
+        </h3>
+      </div>
+    </header>
+    <span
+      className="label"
+    >
+      <span
+        className="specifier"
+      >
+        author
+      </span>
+    </span>
+  </a>
+</li>
+`;

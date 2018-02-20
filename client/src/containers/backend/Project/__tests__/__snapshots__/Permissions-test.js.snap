@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Project Permissions Container renders correctly 1`] = `
+<section>
+  <withRouter(Connect(PermissionContainer))
+    entity={
+      Object {
+        "attributes": Object {
+          "avatarStyles": Object {},
+          "coverStyles": Object {},
+          "hashtag": "#cute_dog",
+          "heroStyles": Object {},
+          "hideActivity": false,
+          "metadataProperties": Array [
+            "abstract",
+            "archive",
+            "archiveLocation",
+            "archivePlace",
+            "authority",
+            "callNumber",
+            "collectionTitle",
+            "containerTitle",
+            "dimensions",
+            "event",
+            "eventPlace",
+            "isbn",
+            "issn",
+            "jurisdiction",
+            "medium",
+            "originalPublisher",
+            "originalPublisherPlace",
+            "originalTitle",
+            "pmcid",
+            "pmid",
+            "publisher",
+            "publisherPlace",
+            "reviewedTitle",
+            "section",
+            "version",
+            "yearSuffix",
+            "chapterNumber",
+            "collectionNumber",
+            "edition",
+            "issue",
+            "number",
+            "numberOfPages",
+            "numberOfVolumes",
+            "volume",
+          ],
+          "slug": "slug-1",
+          "subtitle": "World's Greatest Dog",
+          "title": "Rowan Test",
+        },
+        "id": "1",
+        "relationships": Object {
+          "resources": Array [],
+        },
+        "type": "projects",
+      }
+    }
+  />
+  <withRouter(Router.Switch('DrawerSwitch))
+    closeUrl="/backend/project/1/permissions"
+  />
+</section>
+`;

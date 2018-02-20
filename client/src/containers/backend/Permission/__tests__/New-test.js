@@ -1,33 +1,29 @@
 import React from "react";
-import { mount } from "enzyme";
-import ProjectSocialWrapperContainer from "../Wrapper";
+import renderer from "react-test-renderer";
+import PermissionNew from "../New";
 import { wrapWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 
-describe("Backend Project Social Wrapper Container", () => {
+describe("Backend Permission New Container", () => {
   const store = build.store();
   const project = build.entity.project("1");
-  const route = {
-    routes: [],
-    options: {}
-  };
 
-  const component = mount(
+  const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <ProjectSocialWrapperContainer route={route} project={project} />
+        <PermissionNew entity={project} />
       </Provider>
     )
   );
 
   it("renders correctly", () => {
-    let tree = component.debug();
+    let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("doesn't render to null", () => {
-    let tree = component.debug();
+    let tree = component.toJSON();
     expect(tree).not.toBe(null);
   });
 });

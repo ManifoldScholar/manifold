@@ -123,6 +123,17 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <a
                 aria-current={false}
                 className={undefined}
+                href="/backend/project/1/permissions"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Permissions
+              </a>
+            </li>
+            <li>
+              <a
+                aria-current={false}
+                className={undefined}
                 href="/backend/project/1/collaborators"
                 onClick={[Function]}
                 style={undefined}
@@ -230,6 +241,17 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
                 style={undefined}
               >
                 Appearance
+              </a>
+            </li>
+            <li>
+              <a
+                aria-current={false}
+                className={undefined}
+                href="/backend/project/1/permissions"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Permissions
               </a>
             </li>
             <li>

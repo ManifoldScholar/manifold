@@ -367,6 +367,17 @@ const defaults = {
       resultsType: "most_recent",
       eventsCount: 0
     }
+  },
+
+  permission: {
+    type: "permissions",
+    attributes: {
+      roleNames: ["author"]
+    },
+    relationships: {
+      resource: null,
+      user: null
+    }
   }
 };
 
@@ -454,6 +465,10 @@ const twitterQuery = (id = null, attributes = {}, relationships = {}) => {
   return buildEntity("twitterQuery", id, attributes, relationships);
 };
 
+const permission = (id = null, attributes = {}, relationships = {}) => {
+  return buildEntity("permission", id, attributes, relationships);
+};
+
 export default {
   defaults,
   project,
@@ -473,5 +488,6 @@ export default {
   textSection,
   feature,
   subject,
-  twitterQuery
+  twitterQuery,
+  permission
 };
