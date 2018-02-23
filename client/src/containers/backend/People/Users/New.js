@@ -41,12 +41,13 @@ export class UsersNewContainer extends PureComponent {
         </header>
         <FormContainer.Form
           model={this.defaultUser}
-          name="backend-create-user"
+          name={requests.beUserCreate}
           update={usersAPI.update}
           create={this.createUser}
           onSuccess={this.handleSuccess}
           options={{ adds: requests.beUsers }}
           className="form-secondary"
+          notificationScope="drawer"
         >
           <Form.TextInput
             focusOnMount
