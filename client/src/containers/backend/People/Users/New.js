@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Form } from "components/backend";
 import { Form as FormContainer } from "containers/backend";
-import { usersAPI } from "api";
+import { usersAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 
 export class UsersNewContainer extends PureComponent {
@@ -45,6 +45,7 @@ export class UsersNewContainer extends PureComponent {
           update={usersAPI.update}
           create={this.createUser}
           onSuccess={this.handleSuccess}
+          options={{ adds: requests.beUsers }}
           className="form-secondary"
         >
           <Form.TextInput
