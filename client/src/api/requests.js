@@ -24,6 +24,7 @@ export default {
   beMakerDestroy: "backend-maker-destroy",
   beUser: "backend-user",
   beUsers: "backend-users",
+  beUserCreate: "backend-user-create",
   beUserUpdate: "backend-user-update",
   beUserDestroy: "backend-user-destroy",
   beTextUpdate: "backend-text-update",

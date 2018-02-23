@@ -106,6 +106,16 @@ export default {
       expiration: defaultExpiration
     };
   },
+  [r.beUserCreate]: payload => {
+    return {
+      level: 0,
+      heading: "New user record created",
+      body: `${possessivize(
+        payload.data.attributes.fullName
+      )} account created.`,
+      expiration: defaultExpiration
+    };
+  },
   [r.beUserDestroy]: () => {
     return {
       level: 0,

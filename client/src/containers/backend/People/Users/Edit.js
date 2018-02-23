@@ -193,7 +193,7 @@ export class UsersEditContainer extends PureComponent {
         <section className="form-section">
           <FormContainer.Form
             model={this.props.user}
-            name="backend-user-update"
+            name={requests.beUserUpdate}
             update={usersAPI.update}
             create={usersAPI.create}
             className="form-secondary"
