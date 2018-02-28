@@ -9,8 +9,9 @@ import Manifold from "containers/Manifold";
 import cookie from "cookie";
 import get from "lodash/get";
 import ch from "./helpers/consoleHelpers";
+import { hot } from "react-hot-loader";
 
-export default class App extends Component {
+class App extends Component {
   static propTypes = {
     store: PropTypes.object,
     staticContext: PropTypes.object,
@@ -139,3 +140,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default hot(module)(App);
