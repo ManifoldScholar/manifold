@@ -29,7 +29,6 @@ export default class AnnotationSelectionEditor extends PureComponent {
     this.handlePrivacyChange = this.handlePrivacyChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
-    this.focusTimeout = setTimeout(() => this.ci.focus(), 0);
 
     this.state = {
       body: "",
@@ -39,6 +38,14 @@ export default class AnnotationSelectionEditor extends PureComponent {
 
     if (props.body) this.state.body = props.body;
     if (props.private) this.state.isPrivate = props.private;
+  }
+
+  componentDidMount() {
+    this.focusTimeout = setTimeout(() => {
+      if (this.ci) {
+        this.ci.focus();
+      }
+    }, 0);
   }
 
   componentWillUnmount() {
