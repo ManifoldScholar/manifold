@@ -7,29 +7,13 @@ require("es6-promise").polyfill();
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { AppContainer } from "react-hot-loader";
 import App from "./App";
 import ch from "./helpers/consoleHelpers";
 
 // The DOM element into which we're rendering the client-side SPA
 const rootElement = document.getElementById("content");
 
-const render = Component => {
-  ReactDOM.hydrate(
-    <AppContainer>
-      <Component />
-    </AppContainer>,
-    rootElement
-  );
-};
-
-render(App);
-
-if (module.hot) {
-  module.hot.accept("./App", () => {
-    render(App);
-  });
-}
+ReactDOM.hydrate(<App />, rootElement);
 
 if (process.env.NODE_ENV === "development") {
   // If we're in development mode, we want to check for the server-side render being
