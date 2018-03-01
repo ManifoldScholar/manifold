@@ -13,6 +13,13 @@ describe("Backend Collection Wrapper Container", () => {
     build.entity.resource("3")
   ];
   collection.relationships.project = build.entity.project("4");
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: build.entity.user("1")
+    }
+  });
 
   const component = renderer.create(
     wrapWithRouter(

@@ -109,7 +109,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
               />
               <select
                 onChange={[Function]}
-                value="Admin"
+                value="admin"
               >
                 <option
                   value="admin"
@@ -120,6 +120,16 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
                   value="editor"
                 >
                   Editor
+                </option>
+                <option
+                  value="project_creator"
+                >
+                  Project Creator
+                </option>
+                <option
+                  value="marketeer"
+                >
+                  Marketeer
                 </option>
                 <option
                   value="reader"

@@ -6,6 +6,20 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
     entity={
       Object {
         "attributes": Object {
+          "abilities": Object {
+            "create": true,
+            "delete": true,
+            "read": true,
+            "readDeleted": true,
+            "readDrafts": true,
+            "readLog": true,
+            "readSecrets": true,
+            "update": true,
+            "updateLimitedToResourceMetadata": false,
+            "updateMakers": true,
+            "updatePermissions": true,
+            "updateResources": true,
+          },
           "avatarStyles": Object {},
           "coverStyles": Object {},
           "hashtag": "#cute_dog",

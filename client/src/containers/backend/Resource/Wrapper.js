@@ -2,11 +2,12 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Navigation, Dialog } from "components/backend";
+import { HigherOrder } from "containers/global";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { resourcesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
 
 const { request, flush } = entityStoreActions;
 
@@ -117,16 +118,21 @@ export class ResourceWrapperContainer extends PureComponent {
 
   secondaryNavigationLinks(resource, kind) {
     const externalVideo = resource.attributes.externalVideo;
+    const project = resource.relationships.project;
     const out = [
       {
-        path: lh.link("backendResource", resource.id),
+        path: lh.link("backendResourceGeneral", resource.id),
         label: "General",
-        key: "general"
+        key: "general",
+        entity: project,
+        ability: "update"
       },
       {
         path: lh.link("backendResourceMetadata", resource.id),
         label: "Metadata",
-        key: "metadata"
+        key: "metadata",
+        entity: project,
+        ability: "updateResources"
       }
     ];
     if (
@@ -139,24 +145,28 @@ export class ResourceWrapperContainer extends PureComponent {
       out.splice(1, 0, {
         path: lh.link("backendResourceVariants", resource.id),
         label: "Variants",
-        key: "variants"
+        key: "variants",
+        entity: project,
+        ability: "update"
       });
     }
     return out;
   }
 
-  renderUtility() {
+  renderUtility(resource) {
     return (
       <div>
         <button onClick={this.doPreview} className="button-bare-primary">
           Preview <i className="manicon manicon-eye-outline" />
         </button>
-        <button
-          onClick={this.handleResourceDestroy}
-          className="button-bare-primary"
-        >
-          Delete <i className="manicon manicon-trashcan" />
-        </button>
+        <HigherOrder.Authorize entity={resource} ability={"delete"}>
+          <button
+            onClick={this.handleResourceDestroy}
+            className="button-bare-primary"
+          >
+            Delete <i className="manicon manicon-trashcan" />
+          </button>
+        </HigherOrder.Authorize>
       </div>
     );
   }
@@ -173,7 +183,27 @@ export class ResourceWrapperContainer extends PureComponent {
     if (!resource) return null;
 
     return (
-      <div>
+      <HigherOrder.Authorize
+        entity={resource}
+        failureFatalError={{
+          detail: "You are not allowed to edit this resource."
+        }}
+        ability="update"
+      >
+        <RedirectIfNoChildRouteMatches
+          entity={resource}
+          successBehavior="show"
+          ability={"updateLimitedToResourceMetadata"}
+          route={this.props.route}
+          to={lh.link("backendResourceMetadata", resource.id)}
+        />
+        <RedirectIfNoChildRouteMatches
+          entity={resource}
+          successBehavior="hide"
+          ability={"updateLimitedToResourceMetadata"}
+          route={this.props.route}
+          to={lh.link("backendResourceGeneral", resource.id)}
+        />
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}
@@ -189,7 +219,7 @@ export class ResourceWrapperContainer extends PureComponent {
               label: resource.relationships.project.attributes.title
             }
           ]}
-          utility={this.renderUtility()}
+          utility={this.renderUtility(resource)}
           title={resource.attributes.titleFormatted}
           titleHtml
           subtitle={resource.attributes.subtitle}
@@ -217,7 +247,7 @@ export class ResourceWrapperContainer extends PureComponent {
             <div className="panel">{this.renderRoutes()}</div>
           </div>
         </section>
-      </div>
+      </HigherOrder.Authorize>
     );
   }
 }

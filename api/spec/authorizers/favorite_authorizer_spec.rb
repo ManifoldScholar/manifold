@@ -1,68 +1,24 @@
 require 'rails_helper'
 
-RSpec.describe FavoriteAuthorizer, :authorizer do
-  let(:user) { FactoryBot.create(:user) }
-  let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+RSpec.describe "Favorite Abilities", :authorizer do
+  let(:owner) { FactoryBot.create(:user) }
+  let(:object) { FactoryBot.create(:favorite, user: owner) }
 
-  describe 'instance authorization' do
-    let(:owner) { FactoryBot.create(:user) }
-    let(:favorite_resource) { FactoryBot.create(:favorite, user: owner) }
+  context 'when the subject is an admin' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
 
-    context 'when reading' do
-      it 'is true for admin' do
-        expect(favorite_resource).to be_readable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(favorite_resource).to_not be_readable_by(user)
-      end
-
-      it 'is true for owner' do
-        expect(favorite_resource).to be_readable_by(owner)
-      end
-    end
-
-    context 'when creating' do
-      it 'is true for admin' do
-        expect(favorite_resource).to be_creatable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(favorite_resource).to_not be_creatable_by(user)
-      end
-
-      it 'is true for owner' do
-        expect(favorite_resource).to be_creatable_by(owner)
-      end
-    end
-
-    context 'when updating' do
-      it 'is true for admin' do
-        expect(favorite_resource).to be_updatable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(favorite_resource).to_not be_updatable_by(user)
-      end
-
-      it 'is true for owner' do
-        expect(favorite_resource).to be_updatable_by(owner)
-      end
-    end
-
-    context 'when deleting' do
-      it 'is true for admin' do
-        expect(favorite_resource).to be_deletable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(favorite_resource).to_not be_deletable_by(user)
-      end
-
-      it 'is true for owner' do
-        expect(favorite_resource).to be_deletable_by(owner)
-      end
-    end
+    the_subject_behaves_like "instance abilities", Favorite, all: true
   end
 
+  context 'when the subject is a reader' do
+    let(:subject) { FactoryBot.create(:user) }
+
+    the_subject_behaves_like "instance abilities", Favorite, none: true
+  end
+
+  context 'when the favorite belongs to the subject' do
+    let(:subject) { owner }
+
+    the_subject_behaves_like "instance abilities", Favorite, all: true
+  end
 end

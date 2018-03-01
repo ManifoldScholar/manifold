@@ -108,8 +108,12 @@ export class PermissionForm extends PureComponent {
             name="attributes[roleNames]"
             label="Permissions"
             options={[
-              { label: "Owner?", value: "owner" },
-              { label: "Author?", value: "author" }
+              { label: "Can modify project?", value: "project_editor" },
+              {
+                label: "Can modify metadata?",
+                value: "project_resource_editor"
+              },
+              { label: "Is a project author?", value: "project_author" }
             ]}
           />
           <Form.Save text="Save Permissions" />

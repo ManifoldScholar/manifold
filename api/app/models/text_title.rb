@@ -31,6 +31,8 @@ class TextTitle < ApplicationRecord
 
   # Authority
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
+  self.authorizer_name = "ProjectChildAuthorizer"
 
   # Associations
   belongs_to :text

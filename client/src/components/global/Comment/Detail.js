@@ -129,7 +129,7 @@ export default class CommentDetail extends PureComponent {
         <section className="body">
           <Helper.SimpleFormat text={comment.attributes.body} />
         </section>
-        <HigherOrder.RequireKind requiredKind={"any"}>
+        <HigherOrder.Authorize kind={"any"}>
           <nav className="utility">
             <ul>
               <li>
@@ -137,24 +137,18 @@ export default class CommentDetail extends PureComponent {
                   {"Reply"}
                 </button>
               </li>
-              <HigherOrder.RequireAbility
-                entity={comment}
-                requiredAbility={"update"}
-              >
+              <HigherOrder.Authorize entity={comment} ability={"update"}>
                 <li>
                   <button onClick={this.startEdit}>{"Edit"}</button>
                 </li>
-              </HigherOrder.RequireAbility>
-              <HigherOrder.RequireAbility
-                entity={comment}
-                requiredAbility={"delete"}
-              >
+              </HigherOrder.Authorize>
+              <HigherOrder.Authorize entity={comment} ability={"delete"}>
                 {!comment.attributes.deleted ? (
                   <li>
                     <button onClick={this.handleDelete}>{"Delete"}</button>
                   </li>
                 ) : null}
-              </HigherOrder.RequireAbility>
+              </HigherOrder.Authorize>
               {comment.attributes.deleted ? (
                 <li>
                   <button onClick={this.handleRestore}>{"Restore"}</button>
@@ -179,8 +173,8 @@ export default class CommentDetail extends PureComponent {
             </ul>
             {this.renderEditor()}
           </nav>
-        </HigherOrder.RequireKind>
-        <HigherOrder.RequireKind requiredKind="unauthenticated">
+        </HigherOrder.Authorize>
+        <HigherOrder.Authorize kind="unauthenticated">
           <nav className="utility">
             <ul>
               <li>
@@ -190,7 +184,7 @@ export default class CommentDetail extends PureComponent {
               </li>
             </ul>
           </nav>
-        </HigherOrder.RequireKind>
+        </HigherOrder.Authorize>
         <CommentContainer.Thread
           subject={this.props.subject}
           parent={this.props.comment}
@@ -203,7 +197,7 @@ export default class CommentDetail extends PureComponent {
   render() {
     const { comment } = this.props;
     const { attributes } = comment;
-    if (attributes.deleted && !attributes.abilities.readIfDeleted) {
+    if (attributes.deleted && !attributes.abilities.readDeleted) {
       return <Comment.Deleted comment={comment} subject={this.props.subject} />;
     }
     return this.renderComment();

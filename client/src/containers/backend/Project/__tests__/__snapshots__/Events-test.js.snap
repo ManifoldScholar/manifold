@@ -172,12 +172,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
     >
       <ul>
         <li
-          className="pagination-previous"
-          style={
-            Object {
-              "visibility": "hidden",
-            }
-          }
+          className="pagination-previous disabled"
         >
           <a
             data-id="page-prev"
@@ -213,8 +208,7 @@ exports[`Backend Project Events Container renders correctly 1`] = `
           </a>
         </li>
         <li
-          className="pagination-next"
-          style={Object {}}
+          className="pagination-next "
         >
           <a
             data-id="page-next"

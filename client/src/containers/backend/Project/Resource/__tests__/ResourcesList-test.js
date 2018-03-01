@@ -9,6 +9,13 @@ describe("Backend Project Resource ResourcesList Container", () => {
   const store = build.store();
   const project = build.entity.project("1");
   const resources = [build.entity.resource("2"), build.entity.resource("3")];
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: build.entity.user("1")
+    }
+  });
 
   const component = renderer.create(
     wrapWithRouter(

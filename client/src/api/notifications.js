@@ -59,7 +59,7 @@ export default {
   "update-creators": payloadIgnored => {
     return {
       level: 0,
-      heading: "Project authors has been updated",
+      heading: "Collaborators have been updated",
       expiration: defaultExpiration
     };
   },

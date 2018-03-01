@@ -2,10 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Navigation } from "components/backend";
+import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import { resourceImportsAPI, requests } from "api";
-import { grab, isEntityLoaded } from "utils/entityUtils";
+import { resourceImportsAPI, projectsAPI, requests } from "api";
+import { grab, isEntityLoaded, select } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;
@@ -38,7 +39,8 @@ export class ResourceImportWrapper extends PureComponent {
         "resourceImports",
         ownProps.match.params.id,
         state.entityStore
-      )
+      ),
+      project: select(requests.feProject, state.entityStore)
     };
   };
 
@@ -47,6 +49,16 @@ export class ResourceImportWrapper extends PureComponent {
     this.state = {
       fileLoaded: false
     };
+  }
+
+  componentWillMount() {
+    this.fetchProject();
+  }
+
+  fetchProject() {
+    const call = projectsAPI.show(this.props.match.params.projectId);
+    const projectRequest = request(call, requests.feProject);
+    this.props.dispatch(projectRequest);
   }
 
   fetch = () => {
@@ -95,10 +107,17 @@ export class ResourceImportWrapper extends PureComponent {
   }
 
   render() {
-    const { match } = this.props;
+    const { project, match } = this.props;
+    if (!project) return null;
 
     return (
-      <div>
+      <HigherOrder.Authorize
+        entity={project}
+        failureFatalError={{
+          detail: "You are not allowed to import resources for this project."
+        }}
+        ability={["update"]}
+      >
         <Navigation.DetailHeader
           type="resources"
           breadcrumb={[
@@ -117,7 +136,7 @@ export class ResourceImportWrapper extends PureComponent {
             <div className="">{this.renderRoutes()}</div>
           </div>
         </section>
-      </div>
+      </HigherOrder.Authorize>
     );
   }
 }

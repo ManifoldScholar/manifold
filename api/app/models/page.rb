@@ -3,6 +3,7 @@ class Page < ApplicationRecord
 
   # Authority
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
 
   # Concerns
   include FriendlyId

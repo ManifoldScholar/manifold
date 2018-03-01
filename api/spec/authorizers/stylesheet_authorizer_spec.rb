@@ -1,38 +1,37 @@
 require 'rails_helper'
 
-RSpec.describe StylesheetAuthorizer, :authorizer do
-  let(:user) { FactoryBot.create(:user) }
-  let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
-
-  describe 'class authorization' do
-    context 'when creating' do
-      it 'is true for admin' do
-        expect(StylesheetAuthorizer).to be_creatable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(StylesheetAuthorizer).to_not be_creatable_by(user)
-      end
-    end
-
-    context 'when updating' do
-      it 'is true for admin' do
-        expect(StylesheetAuthorizer).to be_updatable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(StylesheetAuthorizer).to_not be_updatable_by(user)
-      end
-    end
-
-    context 'when deleting' do
-      it 'is true for admin' do
-        expect(StylesheetAuthorizer).to be_deletable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(StylesheetAuthorizer).to_not be_deletable_by(user)
-      end
-    end
+RSpec.describe "Stylesheet Abilities", :authorizer do
+  context 'when the subject is an admin' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    the_subject_behaves_like "class abilities", Stylesheet, all: true
   end
+
+  context 'when the subject is a reader' do
+    let(:subject) { FactoryBot.create(:user) }
+    the_subject_behaves_like "class abilities", Stylesheet, all: true
+  end
+
+  context 'when the subject is a reader and project_editor of the stylesheet\'s project' do
+    before(:each) do
+      @maintainer = FactoryBot.create(:user)
+      @text = FactoryBot.create(:text)
+      @stylesheet = FactoryBot.create(:stylesheet, text: @text)
+      @maintainer.add_role Role::ROLE_PROJECT_EDITOR, @text.project
+    end
+    let(:subject) { @maintainer }
+    let(:object) { @stylesheet }
+    the_subject_behaves_like "instance abilities", Resource, all: true
+  end
+
+  context 'when the subject is a reader with no relation to the stylesheet\'s project' do
+    before(:each) do
+      @maintainer = FactoryBot.create(:user)
+      @text = FactoryBot.create(:text)
+      @stylesheet = FactoryBot.create(:stylesheet, text: @text)
+    end
+    let(:subject) { @maintainer }
+    let(:object) { @stylesheet }
+    the_subject_behaves_like "instance abilities", Resource, read_only: true
+  end
+
 end

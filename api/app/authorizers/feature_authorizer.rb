@@ -1,22 +1,10 @@
 class FeatureAuthorizer < ApplicationAuthorizer
 
-  def self.updatable_by?(user)
-    user.admin?
+  def self.default(_able, user, _options = {})
+    marketeer_permissions?(user)
   end
 
-  def self.creatable_by?(user)
-    user.admin?
-  end
-
-  def self.readable_by?(_user)
-    true
-  end
-
-  def self.deletable_by?(user)
-    user.admin?
-  end
-
-  def readable_by?(_user)
+  def self.readable_by?(_user, _options = {})
     true
   end
 

@@ -3,6 +3,8 @@ class ProjectSubject < ApplicationRecord
 
   # Authority
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
+  self.authorizer_name = "ProjectChildAuthorizer"
 
   # Association
   belongs_to :project

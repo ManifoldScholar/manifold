@@ -1,7 +1,17 @@
 .results-list {
   margin-top: 1em;
 
-  > ul {
+  &.flush {
+    margin-top: 0;
+  }
+
+  .no-results {
+    @include utilityPrimary;
+    font-size: 15px;
+    color: $neutral70;
+  }
+
+  ul {
     @include listUnstyled;
 
     li {
@@ -11,7 +21,7 @@
       align-items: flext-start;
       width: 100%;
       padding: 10px 0 14px;
-      color: $neutral40;
+      color: $neutral30;
 
       @include respond($break60) {
         flex-direction: row;
@@ -24,6 +34,10 @@
 
       &:last-child {
         padding-bottom: 24px;
+      }
+
+      &.no-icon {
+        padding: 6px 0 14px;
       }
 
       &.state-pending{
@@ -61,6 +75,10 @@
       @include respond($break60) {
         order: 0;
       }
+
+      a {
+        color: $accentPrimary;
+      }
     }
 
     .results-header {
@@ -78,6 +96,17 @@
         font-size: 22px;
       }
 
+      .subtitle {
+        @include headingSecondary;
+        line-height: 1.4;
+        font-size: 16px;
+        margin: 5px 0;
+
+        @include respond($break60) {
+          font-size: 18px;
+        }
+      }
+
       .manicon {
         position: relative;
         top: 8px;
@@ -90,7 +119,16 @@
       @include subtitlePrimary;
       padding-left: 25px;
       margin-top: 5px;
-      color: $neutral70;
+      color: $neutral50;
+
+      &.flush {
+        padding-left: 0;
+      }
+
+      .specifier {
+        color: $neutral30;
+        padding-left: 5px;
+      }
     }
 
     .results-secondary {

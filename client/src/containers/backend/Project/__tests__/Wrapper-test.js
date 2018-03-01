@@ -8,6 +8,13 @@ import build from "test/fixtures/build";
 describe("Backend Project Wrapper Container", () => {
   const store = build.store();
   const project = build.entity.project("1");
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: build.entity.user("2")
+    }
+  });
 
   const component = renderer.create(
     wrapWithRouter(
@@ -15,6 +22,7 @@ describe("Backend Project Wrapper Container", () => {
         <ProjectWrapperContainer
           project={project}
           dispatch={store.dispatch}
+          location={{ pathname: "/projects/1" }}
           route={{
             routes: []
           }}

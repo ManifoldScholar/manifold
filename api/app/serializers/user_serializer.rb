@@ -1,9 +1,9 @@
 # Serializes a User model
 class UserSerializer < ApplicationSerializer
-  include AttributesForUser
-  meta(partial: false)
 
-  attributes :is_current_user
+  meta(partial: false)
+  attributes :id, :email, :nickname, :first_name, :last_name, :kind, :created_at,
+             :role, :updated_at, :full_name, :avatar_styles, :abilities, :is_current_user
 
   def current_user?
     return false unless authenticated?

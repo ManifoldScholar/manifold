@@ -1,10 +1,10 @@
 # Provides a serialization of a resource model.
 class ReaderSearchResultSerializer < ApplicationSerializer
-  include Abilities
+
   meta(partial: false)
 
   attributes :score, :searchable_type, :searchable_id, :body, :highlighted_body,
-             :node_uuid, :abilities
+             :node_uuid
 
   has_one :creator, serializer: UserSerializer
   has_one :text_section, serializer: TextSectionPartialSerializer

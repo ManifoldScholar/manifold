@@ -6,11 +6,14 @@ module Api
         class TwitterQueriesController < ApplicationController
           before_action :set_project, only: [:create, :index]
 
-          resourceful! TwitterQuery do
+          resourceful! TwitterQuery, authorize_options: {
+            except: [:index, :create, :show, :update, :destroy]
+          } do
             @project.nil? ? TwitterQuery : @project.twitter_queries
           end
 
           def index
+            authorize_action_for TwitterQuery, for: @project
             @twitter_queries = load_twitter_queries
             location = api_v1_project_relationships_twitter_queries_url(@project.id)
             render_multiple_resources(
@@ -25,8 +28,8 @@ module Api
               ::Updaters::Default.new(twitter_query_params)
                                  .update_without_save(@project.twitter_queries.new)
             @twitter_query.creator = @current_user
-            @twitter_query.save
             authorize_action_for @twitter_query
+            @twitter_query.save
             render_single_resource(
               @twitter_query,
               location: location
@@ -35,6 +38,7 @@ module Api
 
           def show
             @twitter_query = load_twitter_query
+            authorize_action_for @twitter_query
             render_single_resource(
               @twitter_query,
               location: location

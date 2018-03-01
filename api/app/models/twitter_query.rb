@@ -2,9 +2,13 @@
 class TwitterQuery < ApplicationRecord
   ALLOWED_RESULT_TYPES = %w(most_recent popular).freeze
 
-  # Authority
-  include Authority::Abilities
+  # Misc. Concerns
   include TrackedCreator
+
+  # Authorization
+  include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
+  self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   # Association
   belongs_to :project

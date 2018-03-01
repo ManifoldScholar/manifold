@@ -8,13 +8,18 @@ class Maker < ApplicationRecord
   include Filterable
   include Attachments
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
   include WithParsedName
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   # Associations
-  has_many :collaborators
+  has_many :collaborators, dependent: :destroy
+  has_many :projects,
+           through: :collaborators,
+           source_type: "Project",
+           source: :collaboratable
 
   # Attachments
   manifold_has_attached_file :avatar, :image

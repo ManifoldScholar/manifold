@@ -110,9 +110,11 @@ export class UsersListContainer extends PureComponent {
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {users ? (
           <List.Searchable
-            newButtonVisible
-            newButtonPath={lh.link("backendPeopleUsersNew")}
-            newButtonText="Add a New User"
+            newButton={{
+              path: lh.link("backendPeopleUsersNew"),
+              text: "Add a New User",
+              authorizedFor: "user"
+            }}
             entities={users}
             singularUnit="user"
             pluralUnit="users"

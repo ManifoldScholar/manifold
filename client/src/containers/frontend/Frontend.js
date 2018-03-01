@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { HigherOrder, FatalError, Utility } from "components/global";
-import HigherOrderContainers from "containers/global/HigherOrder";
+import HigherOrderContainer from "containers/global/HigherOrder";
 import { Layout } from "components/frontend";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, subjectsAPI, requests } from "api";
@@ -83,9 +83,9 @@ export class FrontendContainer extends Component {
               settings={this.props.settings}
             />
           </HigherOrder.ScrollAware>
-          <HigherOrderContainers.RequireKind requiredKind="any">
+          <HigherOrderContainer.Authorize kind="any">
             <Layout.MobileNav location={this.props.location} />
-          </HigherOrderContainers.RequireKind>
+          </HigherOrderContainer.Authorize>
           <main
             ref={mainContainer => {
               this.mainContainer = mainContainer;

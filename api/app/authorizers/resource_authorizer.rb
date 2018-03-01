@@ -1,19 +1,14 @@
-class ResourceAuthorizer < ApplicationAuthorizer
+class ResourceAuthorizer < ProjectChildAuthorizer
 
-  def self.updatable_by?(user)
-    user.admin?
+  expose_abilities [:update_limited_to_resource_metadata]
+
+  def updatable_by?(user, _options = {})
+    resource.project.resources_updatable_by? user
   end
 
-  def self.readable_by?(_user)
-    true
-  end
-
-  def self.creatable_by?(user)
-    user.admin?
-  end
-
-  def self.deletable_by?(user)
-    user.admin?
+  def only_resource_metadata_updatable_by?(user, _options = {})
+    !resource.project.updatable_by?(user) &&
+      user.project_resource_editor_of?(resource.project)
   end
 
 end

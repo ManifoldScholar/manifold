@@ -31,15 +31,15 @@ export default class ReturnMenuBody extends PureComponent {
               {"Projects"}
             </Link>
           </li>
-          <HigherOrder.RequireKind requiredKind="any">
+          <HigherOrder.Authorize kind="any">
             <li>
               <Link to={lh.link("frontendFollowing")}>
                 <i className="manicon manicon-books-on-shelf-simple" />
                 {"Following"}
               </Link>
             </li>
-          </HigherOrder.RequireKind>
-          <HigherOrder.RequireKind requiredKind="unauthenticated">
+          </HigherOrder.Authorize>
+          <HigherOrder.Authorize kind="unauthenticated">
             <li>
               <button
                 onClick={this.props.toggleSignInUpOverlay}
@@ -56,7 +56,7 @@ export default class ReturnMenuBody extends PureComponent {
                 </a>
               ) : null}
             </li>
-          </HigherOrder.RequireKind>
+          </HigherOrder.Authorize>
         </ul>
       </nav>
     );

@@ -95,6 +95,16 @@ export default {
     };
   },
 
+  versions(id, filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/projects/${id}/relationships/versions`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   featured(limit = 6, filterParams = {}) {
     const filter = filterParams;
     filter.featured = true;

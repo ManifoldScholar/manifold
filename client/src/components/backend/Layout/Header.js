@@ -7,6 +7,7 @@ import {
   HeaderNotifications,
   PressLogo
 } from "components/global";
+import HigherOrder from "containers/global/HigherOrder";
 import { Link, NavLink } from "react-router-dom";
 import startsWith from "lodash/startsWith";
 import lh from "helpers/linkHandler";
@@ -30,8 +31,7 @@ export default class LayoutHeader extends Component {
     if (pathname === "/backend") return true;
     if (startsWith(pathname, "/backend/project")) return true;
     if (startsWith(pathname, "/backend/resource")) return true;
-    if (startsWith(pathname, "/backend/text")) return true;
-    return false;
+    return startsWith(pathname, "/backend/text");
   }
 
   isSubjects(match, location) {
@@ -42,7 +42,16 @@ export default class LayoutHeader extends Component {
     if (startsWith(pathname, "/backend/subjects")) return true;
   }
 
+  exitLabel(kind) {
+    if (kind === "project_editor" || kind === "project_resource_editor")
+      return "Exit Editor Mode";
+    if (kind === "project_author") return "Exit Author Mode";
+    return "Exit Admin Mode";
+  }
+
   render() {
+    const currentUser = this.props.authentication.currentUser;
+
     return (
       <header className={"header-app dark"}>
         <div className="header-container">
@@ -60,27 +69,42 @@ export default class LayoutHeader extends Component {
                   {"Projects"}
                 </NavLink>
               </li>
-              <li>
-                <NavLink activeClassName="active" to={lh.link("backendPeople")}>
-                  {"People"}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  activeClassName="active"
-                  to={lh.link("backendContent")}
-                >
-                  {"Content"}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  activeClassName="active"
-                  to={lh.link("backendSettings")}
-                >
-                  {"Settings"}
-                </NavLink>
-              </li>
+              <HigherOrder.Authorize
+                entity={["user", "maker"]}
+                ability="update"
+              >
+                <li>
+                  <NavLink
+                    activeClassName="active"
+                    to={lh.link("backendPeople")}
+                  >
+                    {"People"}
+                  </NavLink>
+                </li>
+              </HigherOrder.Authorize>
+              <HigherOrder.Authorize
+                entity={["page", "feature"]}
+                ability="update"
+              >
+                <li>
+                  <NavLink
+                    activeClassName="active"
+                    to={lh.link("backendContent")}
+                  >
+                    {"Content"}
+                  </NavLink>
+                </li>
+              </HigherOrder.Authorize>
+              <HigherOrder.Authorize entity="settings" ability="update">
+                <li>
+                  <NavLink
+                    activeClassName="active"
+                    to={lh.link("backendSettings")}
+                  >
+                    {"Settings"}
+                  </NavLink>
+                </li>
+              </HigherOrder.Authorize>
             </ul>
           </nav>
 
@@ -88,7 +112,7 @@ export default class LayoutHeader extends Component {
             <ul>
               <li className="show-60">
                 <Link className="button-mode" to={lh.link("frontend")}>
-                  Exit Admin Mode
+                  {this.exitLabel(currentUser.attributes.kind)}
                 </Link>
               </li>
               <li>

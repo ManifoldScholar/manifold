@@ -94,7 +94,7 @@ export default class AnnotationSelectionWrapper extends PureComponent {
             </button>
           ) : null}
           {this.props.includeEditor ? (
-            <HigherOrder.RequireKind requiredKind="any">
+            <HigherOrder.Authorize kind="any">
               {this.state.editorOpen ? null : (
                 <button
                   className="annotate-button"
@@ -103,17 +103,17 @@ export default class AnnotationSelectionWrapper extends PureComponent {
                   Annotate
                 </button>
               )}
-            </HigherOrder.RequireKind>
+            </HigherOrder.Authorize>
           ) : null}
           {this.props.includeEditor ? (
-            <HigherOrder.RequireKind requiredKind="unauthenticated">
+            <HigherOrder.Authorize kind="unauthenticated">
               <button
                 className="annotate-button"
                 onClick={this.props.showLogin}
               >
                 {"Login to annotate"}
               </button>
-            </HigherOrder.RequireKind>
+            </HigherOrder.Authorize>
           ) : null}
         </div>
         {this.state.editorOpen ? (

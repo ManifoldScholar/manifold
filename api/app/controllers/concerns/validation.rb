@@ -18,8 +18,9 @@ module Validation
       }
     }
     attributes = [:first_name, :last_name, :nickname, :name, :email, :password,
-                  :password_confirmation, :remove_avatar, attachment(:avatar), :role,
+                  :password_confirmation, :remove_avatar, attachment(:avatar),
                   persistent_ui]
+    attributes << :role if current_user&.admin?
     relationships = [:makers]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -99,6 +100,12 @@ module Validation
                   :maximum_height, :iframe_allow_fullscreen, metadata(Resource)]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def resource_metadata_params
+    params.require(:data)
+    param_config = structure_params(attributes: [metadata(Resource)], relationships: [])
     params.permit(param_config)
   end
 
@@ -285,6 +292,10 @@ module Validation
     params.permit(filter: [])[:filter]
   end
 
+  def version_filter_params
+    params.permit(filter: [])[:filter]
+  end
+
   def user_filter_params
     params.permit(filter: [:keyword, :typeahead, :role])[:filter]
   end
@@ -317,7 +328,9 @@ module Validation
   end
 
   def project_filter_params
-    params.permit(filter: [:featured, :subject, :keyword, :order, :typeahead])[:filter]
+    params.permit(
+      filter: [:featured, :subject, :keyword, :order, :typeahead, :with_update_ability]
+    )[:filter]
   end
 
   def maker_filter_params
@@ -359,9 +372,8 @@ module Validation
     data << { meta: allowed_meta }
     data << { attributes: attributes } unless attributes.nil?
     unless relationships.nil?
-      relationships_config = {}
-      relationships.each do |relationship|
-        relationships_config[relationship] = { data: [:type, :id] }
+      relationships_config = relationships.each_with_object({}) do |relationship, config|
+        config[relationship] = { data: [:type, :id] }
       end
       data << { relationships: relationships_config }
     end

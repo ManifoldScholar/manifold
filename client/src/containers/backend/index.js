@@ -1,5 +1,6 @@
 import Backend from "./Backend";
 import Dashboard from "./Dashboard";
+import Dashboards from "./Dashboards";
 import Project from "./Project";
 import Resource from "./Resource";
 import ResourceImport from "./ResourceImport";
@@ -18,6 +19,7 @@ import Permission from "./Permission";
 export {
   Backend,
   Dashboard,
+  Dashboards,
   Project,
   Resource,
   ResourceImport,

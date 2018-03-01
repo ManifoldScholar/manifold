@@ -4,7 +4,8 @@ import { Dialog } from "components/backend";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { Resource } from "components/frontend";
-import FormattedDate from "components/global/FormattedDate";
+import { FormattedDate } from "components/global";
+import { HigherOrder } from "containers/global";
 import { pagesAPI, requests } from "api";
 import { notificationActions, entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";
@@ -136,19 +137,23 @@ class PagesDashboardContainer extends PureComponent {
                         </div>
                       </Link>
                       <div className="text-category-list-utility">
-                        <Link
-                          className="button"
-                          to={lh.link("backendContentPage", page.id)}
-                        >
-                          Edit
-                        </Link>
-                        <button
-                          onClick={() => {
-                            this.handleDestroy(page);
-                          }}
-                        >
-                          <i className="manicon manicon-x" />
-                        </button>
+                        <HigherOrder.Authorize entity={page} ability="update">
+                          <Link
+                            className="button"
+                            to={lh.link("backendContentPage", page.id)}
+                          >
+                            Edit
+                          </Link>
+                        </HigherOrder.Authorize>
+                        <HigherOrder.Authorize entity={page} ability="delete">
+                          <button
+                            onClick={() => {
+                              this.handleDestroy(page);
+                            }}
+                          >
+                            <i className="manicon manicon-x" />
+                          </button>
+                        </HigherOrder.Authorize>
                       </div>
                     </div>
                   </li>
@@ -158,15 +163,17 @@ class PagesDashboardContainer extends PureComponent {
           </div>
         </section>
 
-        <div className="buttons-icon-horizontal">
-          <Link
-            className="button-icon-secondary"
-            to={lh.link("backendContentPageNew")}
-          >
-            <i className="manicon manicon-plus" />
-            Add a New Page
-          </Link>
-        </div>
+        <HigherOrder.Authorize entity="page" ability="create">
+          <div className="buttons-icon-horizontal">
+            <Link
+              className="button-icon-secondary"
+              to={lh.link("backendContentPageNew")}
+            >
+              <i className="manicon manicon-plus" />
+              Add a New Page
+            </Link>
+          </div>
+        </HigherOrder.Authorize>
       </div>
     );
   }

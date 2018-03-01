@@ -5,6 +5,7 @@ import { projectsAPI, subjectsAPI } from "api";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
 import get from "lodash/get";
+import UserAbilities from "helpers/userAbilities";
 
 const { request, flush } = entityStoreActions;
 
@@ -14,14 +15,21 @@ export class ProjectSubjects extends PureComponent {
   static mapStateToProps = state => {
     return {
       createSubject: get(state.entityStore.responses, "create-subject"),
-      updateSubjects: get(state.entityStore.responses, "update-subjects")
+      updateSubjects: get(state.entityStore.responses, "update-subjects"),
+      authentication: state.authentication
     };
   };
 
   static propTypes = {
     project: PropTypes.object,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    authentication: PropTypes.object
   };
+
+  constructor(props) {
+    super(props);
+    this.userAbilities = new UserAbilities(props.authentication.currentUser);
+  }
 
   componentWillUnmount() {
     this.props.dispatch(flush(["update-subjects", "create-subject"]));
@@ -57,6 +65,11 @@ export class ProjectSubjects extends PureComponent {
     this.props.dispatch(entityRequest);
   };
 
+  maybeHandleNew() {
+    if (!this.userAbilities.hasClassAbility("subject", "create")) return null;
+    return this.newSubject;
+  }
+
   render() {
     const project = this.props.project;
 
@@ -64,9 +77,7 @@ export class ProjectSubjects extends PureComponent {
       <Form.HasMany
         label="Subjects"
         placeholder="Add a Subject"
-        onNew={value => {
-          return this.newSubject(value);
-        }}
+        onNew={this.maybeHandleNew()}
         onChange={subjects => {
           this.updateSubjects(subjects);
         }}

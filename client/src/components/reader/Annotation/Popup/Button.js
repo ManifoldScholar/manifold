@@ -5,7 +5,7 @@ import HigherOrder from "containers/global/HigherOrder";
 
 export default class DefaultButton extends PureComponent {
   static propTypes = {
-    requiredKind: PropTypes.string.isRequired,
+    kind: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
     iconClass: PropTypes.string,
@@ -14,7 +14,7 @@ export default class DefaultButton extends PureComponent {
   };
 
   static defaultProps = {
-    requiredKind: "any"
+    kind: "any"
   };
 
   renderChild() {
@@ -22,10 +22,10 @@ export default class DefaultButton extends PureComponent {
   }
 
   render() {
-    const { requiredKind, className, onClick, iconClass, label } = this.props;
+    const { kind, className, onClick, iconClass, label } = this.props;
     const iconClassName = classNames("manicon", iconClass);
     return (
-      <HigherOrder.RequireKind requiredKind={requiredKind}>
+      <HigherOrder.Authorize kind={kind}>
         {this.props.children ? (
           this.renderChild()
         ) : (
@@ -34,7 +34,7 @@ export default class DefaultButton extends PureComponent {
             {label}
           </button>
         )}
-      </HigherOrder.RequireKind>
+      </HigherOrder.Authorize>
     );
   }
 }

@@ -61,6 +61,8 @@ export class UsersNewContainer extends PureComponent {
             options={[
               { label: "Admin", value: "admin" },
               { label: "Editor", value: "editor" },
+              { label: "Project Creator", value: "project_creator" },
+              { label: "Marketeer", value: "marketeer" },
               { label: "Reader", value: "reader" }
             ]}
           />

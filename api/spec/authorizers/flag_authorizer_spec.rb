@@ -1,24 +1,27 @@
 require 'rails_helper'
 
-RSpec.describe FlagAuthorizer, :authorizer do
-  let(:user) { FactoryBot.create(:user) }
-  let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
-  let(:creator) { FactoryBot.create(:user) }
-  let(:flag_resource) { FactoryBot.create(:flag, creator: creator) }
+RSpec.describe "Flag Abilities", :authorizer do
+  let(:creator) { FactoryBot.create(:user, role: Role::ROLE_READER) }
+  let(:object) { FactoryBot.create(:flag, creator: creator) }
 
-  describe 'instance authorization' do
-    context 'when deleting' do
-      it 'is true for admin' do
-        expect(flag_resource).to be_deletable_by(admin)
-      end
+  context 'when the subject is an admin' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
 
-      it 'is false for user' do
-        expect(flag_resource).to_not be_deletable_by(user)
-      end
+    abilities = { create: true, read: false, update: false, delete: true }
+    the_subject_behaves_like "instance abilities", Flag, abilities
+  end
 
-      it 'is true for creator' do
-        expect(flag_resource).to be_deletable_by(creator)
-      end
-    end
+  context 'when the subject is a reader' do
+    let(:subject) { FactoryBot.create(:user) }
+
+    abilities = { create: true, read: false, update: false, delete: false }
+    the_subject_behaves_like "instance abilities", Flag, abilities
+  end
+
+  context 'when the subject is the resource creator' do
+    let(:subject) { creator }
+
+    abilities = { create: true, read: false, update: false, delete: true }
+    the_subject_behaves_like "instance abilities", Flag, abilities
   end
 end

@@ -216,12 +216,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
   >
     <ul>
       <li
-        className="pagination-previous"
-        style={
-          Object {
-            "visibility": "hidden",
-          }
-        }
+        className="pagination-previous disabled"
       >
         <a
           data-id="page-prev"
@@ -277,8 +272,7 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
         </a>
       </li>
       <li
-        className="pagination-next"
-        style={Object {}}
+        className="pagination-next "
       >
         <a
           data-id="page-next"
@@ -392,12 +386,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
   >
     <ul>
       <li
-        className="pagination-previous"
-        style={
-          Object {
-            "visibility": "hidden",
-          }
-        }
+        className="pagination-previous disabled"
       >
         <a
           data-id="page-prev"
@@ -453,8 +442,7 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
         </a>
       </li>
       <li
-        className="pagination-next"
-        style={Object {}}
+        className="pagination-next "
       >
         <a
           data-id="page-next"

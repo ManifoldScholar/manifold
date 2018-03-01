@@ -4,7 +4,8 @@ module Metadata
   extend ActiveSupport::Concern
   include Concerns::HasFormattedAttributes
 
-  def validate_metadata(properties)
+  def filter_metadata(properties)
+    return unless metadata_changed?
     write_attribute(:metadata, metadata.slice(*properties))
   end
 
@@ -40,7 +41,7 @@ module Metadata
       end
 
       before_save do
-        validate_metadata(properties)
+        filter_metadata(properties)
       end
     end
   end

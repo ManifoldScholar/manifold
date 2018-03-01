@@ -12,7 +12,7 @@ module Api
           end
 
           def show
-            @resource_import = load_resource_import
+            @resource_import = load_and_authorize_resource_import
             render_single_resource(
               @resource_import,
               location: resource_import_location

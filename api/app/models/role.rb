@@ -1,25 +1,34 @@
 class Role < ApplicationRecord
-  include Authority::Abilities
+
+  include Concerns::SerializedAbilitiesFor
 
   ROLE_ADMIN = "admin".freeze
-  ROLE_READER = "reader".freeze
-  ROLE_AUTHOR = "author".freeze
+  ROLE_MARKETEER = "marketeer".freeze
   ROLE_EDITOR = "editor".freeze
-  ROLE_OWNER = "owner".freeze
+  ROLE_PROJECT_CREATOR = "project_creator".freeze
+  ROLE_PROJECT_EDITOR = "project_editor".freeze
+  ROLE_PROJECT_RESOURCE_EDITOR = "project_resource_editor".freeze
+  ROLE_PROJECT_AUTHOR = "project_author".freeze
+  ROLE_READER = "reader".freeze
 
   GLOBAL_ROLES = [
     ROLE_ADMIN,
     ROLE_EDITOR,
+    ROLE_MARKETEER,
+    ROLE_PROJECT_CREATOR,
     ROLE_READER
   ].freeze
 
-  ALLOWED_ROLES = [
-    ROLE_ADMIN,
-    ROLE_AUTHOR,
-    ROLE_READER,
-    ROLE_EDITOR,
-    ROLE_OWNER
+  SCOPED_ROLES = [
+    ROLE_PROJECT_EDITOR,
+    ROLE_PROJECT_RESOURCE_EDITOR,
+    ROLE_PROJECT_AUTHOR
   ].freeze
+
+  ALLOWED_ROLES = [
+    GLOBAL_ROLES,
+    SCOPED_ROLES
+  ].flatten.freeze
 
   scopify
 

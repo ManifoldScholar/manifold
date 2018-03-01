@@ -24,7 +24,8 @@ class ResourceSerializer < ResourcePartialSerializer
              :transcript_content_type, :transcript_file_size, :transcript_updated_at,
              :translation_file_name, :translation_content_type, :translation_file_size,
              :translation_updated_at, :embed_code, :minimum_width, :minimum_height,
-             :iframe_allow_fullscreen, :downloadable_kind, :metadata, :metadata_properties
+             :iframe_allow_fullscreen, :downloadable_kind, :metadata,
+             :metadata_properties, :abilities, :tag_list
 
   has_many :collections
   belongs_to :project, serializer: ProjectPartialSerializer

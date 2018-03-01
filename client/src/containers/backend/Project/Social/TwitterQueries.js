@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { List, TwitterQuery, Form } from "components/backend";
+import { HigherOrder } from "containers/global";
 import { entityStoreActions } from "actions";
 import { projectsAPI, requests } from "api";
 import { select, meta } from "utils/entityUtils";
@@ -70,18 +71,20 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
     return (
       <Form.FieldGroup label="Twitter Queries" instructions={instructions}>
         <nav className="vertical-list-primary flush">
-          <div className="buttons-icon-horizontal">
-            <Link
-              to={lh.link(
-                "backendProjectSocialTwitterQueryNew",
-                this.props.project.id
-              )}
-              className="button-icon-secondary"
-            >
-              <i className="manicon manicon-plus" />
-              Add a New Twitter Query
-            </Link>
-          </div>
+          <HigherOrder.Authorize entity={this.props.project} ability="update">
+            <div className="buttons-icon-horizontal">
+              <Link
+                to={lh.link(
+                  "backendProjectSocialTwitterQueryNew",
+                  this.props.project.id
+                )}
+                className="button-icon-secondary"
+              >
+                <i className="manicon manicon-plus" />
+                Add a New Twitter Query
+              </Link>
+            </div>
+          </HigherOrder.Authorize>
           {twitterQueries ? (
             <List.SimpleList
               entities={twitterQueries}

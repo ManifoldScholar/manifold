@@ -280,9 +280,18 @@ export default () => {
               helper: p => `/backend/project/${p}/project-page`
             },
             {
+              name: "backendProjectLog",
+              exact: true,
+              component: Backend.Project.Log,
+              path: "/backend/project/:id/log",
+              helper: p => `/backend/project/${p}/log`
+            },
+            {
+              name: "backendProjectGeneral",
               exact: true,
               component: Backend.Project.General,
-              path: "/backend/project/:id"
+              path: "/backend/project/:id/general",
+              helper: p => `/backend/project/${p}/general`
             }
           ]
         },
@@ -377,25 +386,10 @@ export default () => {
           helper: () => "/backend/people",
           routes: [
             {
-              name: "backendPeopleMakers",
-              component: Backend.People.Makers.List,
-              path: "/backend/people/makers/:id?",
-              helper: () => `/backend/people/makers`,
-              routes: [
-                {
-                  name: "backendPeopleMaker",
-                  component: Backend.People.Makers.Edit,
-                  exact: true,
-                  path: "/backend/people/makers/:id",
-                  helper: m => `/backend/people/makers/${m}`
-                }
-              ]
-            },
-            {
               name: "backendPeopleUsers",
-              exact: false,
+              exact: true,
               component: Backend.People.Users.List,
-              path: "/backend/people/:users(users)?/:id?",
+              path: "/backend/people/users/:id?",
               helper: () => "/backend/people/users",
               routes: [
                 {
@@ -410,6 +404,21 @@ export default () => {
                   component: Backend.People.Users.Edit,
                   path: "/backend/people/users/:id",
                   helper: u => `/backend/people/users/${u}`
+                }
+              ]
+            },
+            {
+              name: "backendPeopleMakers",
+              component: Backend.People.Makers.List,
+              path: "/backend/people/:makers(makers)?/:id?",
+              helper: () => `/backend/people/makers`,
+              routes: [
+                {
+                  name: "backendPeopleMaker",
+                  component: Backend.People.Makers.Edit,
+                  exact: true,
+                  path: "/backend/people/makers/:id",
+                  helper: m => `/backend/people/makers/${m}`
                 }
               ]
             }
@@ -499,7 +508,9 @@ export default () => {
         },
         {
           exact: false,
+          name: "backendResource",
           component: Backend.Resource.Wrapper,
+          helper: r => `/backend/resource/${r}`,
           path: "/backend/resource/:id",
           routes: [
             {
@@ -517,11 +528,11 @@ export default () => {
               helper: r => `/backend/resource/${r}/metadata`
             },
             {
-              name: "backendResource",
+              name: "backendResourceGeneral",
               exact: true,
               component: Backend.Resource.General,
-              path: "/backend/resource/:id",
-              helper: r => `/backend/resource/${r}`
+              path: "/backend/resource/:id/general",
+              helper: r => `/backend/resource/${r}/general`
             }
           ]
         },

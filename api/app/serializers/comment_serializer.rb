@@ -1,6 +1,6 @@
 # Provides a serialization of a comment  model.
 class CommentSerializer < ApplicationSerializer
-  include Abilities
+
   meta(partial: false)
 
   attributes :id, :body, :parent_id, :created_at, :flags_count, :flagged,
@@ -14,7 +14,7 @@ class CommentSerializer < ApplicationSerializer
   end
 
   def deleted_body
-    return object.body if can_read_deleted?
+    return object.body if current_user&.can_read_deleted? object
     nil
   end
 

@@ -7,10 +7,18 @@ import build from "test/fixtures/build";
 
 describe("Backend People Wrapper Container", () => {
   const children = <div>How is babby formed?</div>;
+  const store = build.store();
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: build.entity.user("1")
+    }
+  });
 
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={build.store()}>
+      <Provider store={store}>
         <UsersWrapperContainer children={children} route={{}} />
       </Provider>
     )

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend Text Wrapper Container renders correctly 1`] = `
-<div>
+Array [
   <section
     className="bg-neutral95"
   >
@@ -90,7 +90,7 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
         </div>
       </header>
     </div>
-  </section>
+  </section>,
   <section
     className="backend-panel"
   >
@@ -124,17 +124,6 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
                 style={undefined}
               >
                 People
-              </a>
-            </li>
-            <li>
-              <a
-                aria-current={false}
-                className={undefined}
-                href="/backend/text/1/metadata"
-                onClick={[Function]}
-                style={undefined}
-              >
-                Metadata
               </a>
             </li>
             <li>
@@ -199,17 +188,6 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
               <a
                 aria-current={false}
                 className={undefined}
-                href="/backend/text/1/metadata"
-                onClick={[Function]}
-                style={undefined}
-              >
-                Metadata
-              </a>
-            </li>
-            <li>
-              <a
-                aria-current={false}
-                className={undefined}
                 href="/backend/text/1/styles"
                 onClick={[Function]}
                 style={undefined}
@@ -235,6 +213,6 @@ exports[`Backend Text Wrapper Container renders correctly 1`] = `
         className="panel"
       />
     </div>
-  </section>
-</div>
+  </section>,
+]
 `;

@@ -94,9 +94,9 @@ export default class Header extends Component {
     const colors = this.props.appearance.colors;
 
     // Conditional header class to apply color scheme
-    const headerClass = classNames('header-reader', {
-      'scheme-light': colors.colorScheme === 'light',
-      'scheme-dark': colors.colorScheme === 'dark'
+    const headerClass = classNames("header-reader", {
+      "scheme-light": colors.colorScheme === "light",
+      "scheme-dark": colors.colorScheme === "dark"
     });
 
     const containerClass = classNames("container-banner", {
@@ -119,14 +119,14 @@ export default class Header extends Component {
           ) : null}
           <nav className="menu-buttons">
             <ul>
-              <HigherOrder.RequireKind requiredKind={"any"}>
+              <HigherOrder.Authorize kind={"any"}>
                 <li>
                   <ControlMenu.NotesButton
                     toggle={this.panelToggleHandler("notes")}
                     active={this.props.visibility.uiPanels.notes}
                   />
                 </li>
-              </HigherOrder.RequireKind>
+              </HigherOrder.Authorize>
               <li>
                 <ControlMenu.VisibilityMenuButton
                   toggle={this.panelToggleHandler("visibility")}

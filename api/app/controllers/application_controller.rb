@@ -9,9 +9,15 @@ class ApplicationController < ActionController::API
 
   serialization_scope :serial_scope
 
+  before_action :set_paper_trail_whodunnit
+
   rescue_from ApiExceptions::StandardError, with: :render_error_response
 
   protected
+
+  def user_for_paper_trail
+    current_user&.to_global_id.to_s if current_user
+  end
 
   def serial_scope
     @serial_scope ||=

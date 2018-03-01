@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend Collection Wrapper Container renders correctly 1`] = `
-<div>
+Array [
   <section
     className="bg-neutral95"
   >
@@ -96,7 +96,7 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
         </div>
       </header>
     </div>
-  </section>
+  </section>,
   <section
     className="backend-panel"
   >
@@ -175,6 +175,6 @@ exports[`Backend Collection Wrapper Container renders correctly 1`] = `
         className="panel"
       />
     </div>
-  </section>
-</div>
+  </section>,
+]
 `;

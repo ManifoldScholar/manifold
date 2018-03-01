@@ -6,6 +6,7 @@ class Statistics
   include ActiveModel::Validations
   include ActiveModel::Conversion
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
   include Redis::Objects
 
   lock :transaction, timeout: 1, expiration: 15

@@ -1,53 +1,34 @@
 require 'rails_helper'
 
-RSpec.describe AnnotationAuthorizer, :authorizer do
+RSpec.describe "Annotation Abilities", :authorizer do
   let(:user) { FactoryBot.create(:user) }
-  let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+  let(:creator) { FactoryBot.create(:user) }
+  let(:object) { FactoryBot.create(:annotation, creator: creator, private: false) }
 
-  describe 'instance authorization' do
-    let(:creator) { FactoryBot.create(:user) }
-    let(:annotation_resource) { FactoryBot.create(:annotation, creator: creator) }
-    let(:notation_resource) { FactoryBot.create(:resource_annotation, creator: creator) }
+  context 'when the subject is an admin' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
 
-    context 'when creating' do
-      context "when notation" do
-        it 'is true for admin' do
-          expect(notation_resource).to be_creatable_by(admin)
-        end
+    the_subject_behaves_like "instance abilities", Annotation, all: true
+  end
 
-        it 'is false for user' do
-          expect(notation_resource).to_not be_creatable_by(user)
-        end
-      end
-    end
+  context 'when the subject is an editor' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
 
-    context 'when updating' do
-      it 'is true for admin' do
-        expect(annotation_resource).to be_updatable_by(admin)
-      end
+    the_subject_behaves_like "instance abilities", Annotation, all: true
+  end
 
-      it 'is false for user' do
-        expect(annotation_resource).to_not be_updatable_by(user)
-      end
+  context 'when the subject is a reader' do
+    let(:subject) { user }
+    abilities = { create: true, read: true, update: false, delete: false }
 
-      it 'is true for creator' do
-        expect(annotation_resource).to be_updatable_by(creator)
-      end
-    end
+    the_subject_behaves_like "instance abilities", Annotation, abilities
+  end
 
-    context 'when deleting' do
-      it 'is true for admin' do
-        expect(annotation_resource).to be_deletable_by(admin)
-      end
+  context 'when the subject is the resource creator' do
+    let(:subject) { creator }
+    abilities = { all: true }
 
-      it 'is false for user' do
-        expect(annotation_resource).to_not be_deletable_by(user)
-      end
-
-      it 'is true for creator' do
-        expect(annotation_resource).to be_updatable_by(creator)
-      end
-    end
+    the_subject_behaves_like "instance abilities", Annotation, abilities
   end
 
 end

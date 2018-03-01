@@ -1,11 +1,17 @@
 # A stylesheet
 class Stylesheet < ApplicationRecord
 
-  include Authority::Abilities
+  # Concerns
   include TrackedCreator
+
+  # Authorization
+  include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
+  self.authorizer_name = "ProjectChildAuthorizer"
 
   # Associations
   belongs_to :text
+  has_one :project, through: :text
   belongs_to :ingestion_source, optional: true
 
   # Validations

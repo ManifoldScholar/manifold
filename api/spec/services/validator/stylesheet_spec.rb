@@ -1,9 +1,5 @@
 require "rails_helper"
 
-RSpec.configure do |c|
-  c.include Helpers
-end
-
 # rubocop:disable Metrics/LineLength
 # rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::Stylesheet do

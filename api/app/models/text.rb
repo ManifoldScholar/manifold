@@ -3,8 +3,10 @@ require "memoist"
 # A single Text
 class Text < ApplicationRecord
 
-  # Authority
+  # Authorization
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
+  self.authorizer_name = "ProjectChildAuthorizer"
 
   # Default Scope
   default_scope { order(position: :asc).includes(:titles, :text_subjects, :category) }

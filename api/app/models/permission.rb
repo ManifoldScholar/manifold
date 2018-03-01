@@ -2,6 +2,7 @@ class Permission < ApplicationRecord
   self.primary_key = :id
 
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
 
   belongs_to :user
   belongs_to :resource, polymorphic: true

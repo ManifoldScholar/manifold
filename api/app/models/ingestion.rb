@@ -5,10 +5,14 @@ require "stringio"
 class Ingestion < ApplicationRecord
 
   # Concerns
-  include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
   include Attachments
   include TrackedCreator
   include AASM
+
+  # Authorization
+  include Authority::Abilities
+  self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   attr_writer :log_buffer
 

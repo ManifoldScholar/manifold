@@ -41,10 +41,8 @@ exports[`Backend Permissions List Container renders correctly 1`] = `
             <span
               className="label"
             >
-              <span
-                className="specifier"
-              >
-                author
+              <span>
+                Author
               </span>
             </span>
           </a>

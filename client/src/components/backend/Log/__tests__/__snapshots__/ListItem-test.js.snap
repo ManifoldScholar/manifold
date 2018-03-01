@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Project Log Container renders correctly when project change 1`] = `
+<li
+  className="no-icon"
+>
+  <div
+    className="results-body"
+  >
+    <h4
+      className="results-header"
+    >
+      <div
+        className="subtitle"
+      >
+        <a
+          href="/backend/people/users/1"
+          onClick={[Function]}
+        >
+          Nas
+        </a>
+         updated this project 
+        <span>
+          on April 24, 2017
+        </span>
+      </div>
+    </h4>
+    <div
+      className="results-desc flush"
+    >
+      These fields were modified: 
+      <span
+        className="specifier"
+      >
+        title
+      </span>
+    </div>
+  </div>
+</li>
+`;
+
+exports[`Backend Project Log Container renders correctly when project child change 1`] = `
+<li
+  className="no-icon"
+>
+  <div
+    className="results-body"
+  >
+    <h4
+      className="results-header"
+    >
+      <div
+        className="subtitle"
+      >
+        <a
+          href="/backend/people/users/1"
+          onClick={[Function]}
+        >
+          Nas
+        </a>
+         updated the resource, “
+        <a
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "The World Is Yours",
+            }
+          }
+          href="/backend/resource/1"
+          onClick={[Function]}
+        />
+        ”, 
+        <span>
+          on April 24, 2017
+        </span>
+      </div>
+    </h4>
+    <div
+      className="results-desc flush"
+    >
+      These fields were modified: 
+      <span
+        className="specifier"
+      >
+        title
+      </span>
+    </div>
+  </div>
+</li>
+`;

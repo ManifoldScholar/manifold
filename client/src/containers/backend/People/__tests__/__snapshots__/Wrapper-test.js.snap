@@ -1,85 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend People Wrapper Container renders correctly 1`] = `
-<div>
-  <section
-    className="backend-panel"
+<section
+  className="backend-panel"
+>
+  <aside
+    className="scrollable"
+  >
+    <div
+      className="wrapper"
+    >
+      <nav
+        className="panel-nav"
+      >
+        <ul>
+          <li>
+            <a
+              aria-current={false}
+              className={undefined}
+              href="/backend/people/users"
+              onClick={[Function]}
+              style={undefined}
+            >
+              Users
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+  <div
+    className="container"
   >
     <aside
-      className="scrollable"
+      className="aside"
     >
-      <div
-        className="wrapper"
+      <nav
+        className="panel-nav"
       >
-        <nav
-          className="panel-nav"
-        >
-          <ul>
-            <li>
-              <a
-                aria-current={false}
-                className={undefined}
-                href="/backend/people"
-                onClick={[Function]}
-                style={undefined}
-              >
-                Users
-              </a>
-            </li>
-            <li>
-              <a
-                aria-current={false}
-                className={undefined}
-                href="/backend/people/makers"
-                onClick={[Function]}
-                style={undefined}
-              >
-                Makers
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+        <ul>
+          <li>
+            <a
+              aria-current={false}
+              className={undefined}
+              href="/backend/people/users"
+              onClick={[Function]}
+              style={undefined}
+            >
+              Users
+            </a>
+          </li>
+        </ul>
+      </nav>
     </aside>
     <div
-      className="container"
-    >
-      <aside
-        className="aside"
-      >
-        <nav
-          className="panel-nav"
-        >
-          <ul>
-            <li>
-              <a
-                aria-current={false}
-                className={undefined}
-                href="/backend/people"
-                onClick={[Function]}
-                style={undefined}
-              >
-                Users
-              </a>
-            </li>
-            <li>
-              <a
-                aria-current={false}
-                className={undefined}
-                href="/backend/people/makers"
-                onClick={[Function]}
-                style={undefined}
-              >
-                Makers
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-      <div
-        className="panel"
-      />
-    </div>
-  </section>
-</div>
+      className="panel"
+    />
+  </div>
+</section>
 `;

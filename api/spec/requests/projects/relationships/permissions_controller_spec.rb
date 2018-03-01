@@ -6,7 +6,7 @@ RSpec.describe "Project Permissions API", type: :request do
   include_context("param helpers")
   let(:project) { FactoryBot.create(:project) }
   let(:user) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
-  let(:params) { json_payload({ attributes: { role_names: %w(owner) }, relationships: { user: { data: { id: user.id, type: 'users' } } } }) }
+  let(:params) { json_payload({ attributes: { role_names: [Role::ROLE_PROJECT_EDITOR] }, relationships: { user: { data: { id: user.id, type: 'users' } } } }) }
 
   describe "sends a list of project permissions" do
     let(:path) { api_v1_project_relationships_permissions_path(project) }
@@ -34,7 +34,7 @@ RSpec.describe "Project Permissions API", type: :request do
 
   describe "sends a single project permission query" do
     before(:each) do
-      user.add_role :author, project
+      user.add_role Role::ROLE_PROJECT_AUTHOR, project
       permission = Permission.fetch(project, user)
       @path = api_v1_project_relationships_permission_path(project, permission)
     end
@@ -86,11 +86,11 @@ RSpec.describe "Project Permissions API", type: :request do
 
   describe "updates a project permission" do
     before(:each) do
-      user.add_role :author, project
+      user.add_role Role::ROLE_PROJECT_AUTHOR, project
       @permission = Permission.fetch(project, user)
       @path = api_v1_project_relationships_permission_path(project, @permission)
     end
-    let(:valid_params) { json_payload(attributes: { role_names: ["owner", "author"] }) }
+    let(:valid_params) { json_payload(attributes: { role_names: [Role::ROLE_PROJECT_EDITOR, Role::ROLE_PROJECT_AUTHOR] }) }
 
     context "when the user is an admin" do
       let(:headers) { admin_headers }
@@ -103,7 +103,7 @@ RSpec.describe "Project Permissions API", type: :request do
       it "updates a permission successfully" do
         put @path, headers: headers, params: valid_params
         @permission.reload
-        expect(@permission.role_names).to include "owner", "author"
+        expect(@permission.role_names).to include Role::ROLE_PROJECT_EDITOR, Role::ROLE_PROJECT_AUTHOR
       end
     end
 
@@ -118,7 +118,7 @@ RSpec.describe "Project Permissions API", type: :request do
 
   describe "destroys a project permission" do
     before(:each) do
-      user.add_role :author, project
+      user.add_role Role::ROLE_PROJECT_AUTHOR, project
       @permission = Permission.fetch(project, user)
       @path = api_v1_project_relationships_permission_path(project, @permission)
     end
