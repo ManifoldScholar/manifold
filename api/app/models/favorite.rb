@@ -3,12 +3,16 @@ class Favorite < ApplicationRecord
 
   # Authority
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
 
   # Associations
   belongs_to :user
   belongs_to :favoritable, polymorphic: true
   validates :favoritable_id, uniqueness: { scope: [:user_id, :favoritable_type] }
   validates :user, presence: true
+
+  # This makes the favorite authorizer a bit simpler.
+  alias_attribute :creator, :user
 
   # Scopes
   scope :only_projects, -> { where(favoritable_type: "Project") }

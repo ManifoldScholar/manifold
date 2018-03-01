@@ -1,18 +1,12 @@
 class MakerAuthorizer < ApplicationAuthorizer
 
-  def self.creatable_by?(user)
-    user.admin?
+  def self.default(_able, user, _options = {})
+    marketeer_permissions?(user) || project_creator_permissions?(user)
   end
 
-  def self.updatable_by?(user)
-    user.admin?
+  def default(_able, user, _options = {})
+    editor_permissions?(user) ||
+      resource_belongs_to_updatable_project?(user, resource)
   end
 
-  def self.readable_by?(_user)
-    true
-  end
-
-  def self.deletable_by?(user)
-    user.admin?
-  end
 end

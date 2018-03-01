@@ -1,33 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe SettingsAuthorizer, :authorizer do
-  let(:user) { FactoryBot.create(:user) }
-  let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+RSpec.describe "Settings Abilities", :authorizer do
+  context 'when the subject is an admin' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
 
-  describe 'class authorization' do
-    context 'when updating' do
-      it 'is true for admin' do
-        expect(SettingsAuthorizer).to be_updatable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(SettingsAuthorizer).to_not be_updatable_by(user)
-      end
-    end
+    abilities = { create: false, read: true, update: true, delete: false }
+    the_subject_behaves_like "class abilities", Settings, abilities
   end
 
-  describe 'instance authorization' do
-    # TODO: Use settings factory instead of instance
-    let(:settings_resource) { Settings.instance }
+  context 'when the subject is an editor' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
 
-    context 'when reading' do
-      it 'is true for admin' do
-        expect(settings_resource).to be_readable_by(admin)
-      end
+    the_subject_behaves_like "class abilities", Settings, read_only: true
+  end
 
-      it 'is false for user' do
-        expect(settings_resource).to_not be_readable_by(user)
-      end
-    end
+  context 'when the subject is a reader' do
+    let(:subject) { FactoryBot.create(:user) }
+
+    the_subject_behaves_like "class abilities", Settings, read_only: true
   end
 end

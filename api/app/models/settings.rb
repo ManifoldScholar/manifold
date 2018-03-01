@@ -2,6 +2,7 @@ class Settings < ApplicationRecord
 
   # Concerns
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
   include Attachments
 
   SECTIONS = [:general, :integrations, :secrets, :email, :theme].freeze

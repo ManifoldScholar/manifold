@@ -4,18 +4,24 @@ module Filterable
   # rubocop:disable Metrics/BlockLength
   # rubocop:disable Metrics/AbcSize
   class_methods do
-    def filter(params, scope: all)
-      results = scope.filter_with_query(params)
+    def filter(params, scope: all, user: nil)
+      results = scope.filter_with_query(params, user)
                      .filter_with_elasticsearch(params)
       validate_paginated_results(params, results)
     end
 
-    def filter_with_query(params)
+    def filter_with_query(params, user = nil)
       params.to_hash.inject all do |results, (key, value)|
-        scopes = %I[by_#{key} with_#{key}]
-        scopes.inject results do |query, scope|
-          next query unless query.respond_to? scope
-          query.send scope, value
+        key_s = key.to_s
+        if key_s.start_with?("with_") && key_s.end_with?("_ability")
+          next results unless results.respond_to? key
+          results.send key, user
+        else
+          scopes = %I[by_#{key_s} with_#{key_s}]
+          scopes.inject results do |query, scope|
+            next query unless query.respond_to? scope
+            query.send scope, value
+          end
         end
       end
     end

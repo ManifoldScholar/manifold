@@ -15,7 +15,7 @@ export default class NextSection extends PureComponent {
 
   static defaultProps = {
     colors: {
-      colorScheme: 'light'
+      colorScheme: "light"
     }
   };
 
@@ -54,10 +54,10 @@ export default class NextSection extends PureComponent {
     const { typography, colors } = this.props;
 
     // Apply a conditional wrapper class to maintain selected color scheme
-    const sectionClass = classNames('section-next-section', {
-      'scheme-light': colors.colorScheme === 'light',
-      'scheme-dark': colors.colorScheme === 'dark'
-    })
+    const sectionClass = classNames("section-next-section", {
+      "scheme-light": colors.colorScheme === "light",
+      "scheme-dark": colors.colorScheme === "dark"
+    });
 
     // Apply a conditional container class that maps to a size in CSS
     const containerClass = `container-focus container-width-${

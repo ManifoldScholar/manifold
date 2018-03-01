@@ -11,6 +11,13 @@ describe("Backend Text Wrapper Container", () => {
   text.relationships.creators = [build.entity.user("2")];
   text.relationships.contributors = [build.entity.user("3")];
   text.relationships.project = build.entity.project("4");
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: build.entity.user("1")
+    }
+  });
 
   const component = renderer.create(
     wrapWithRouter(

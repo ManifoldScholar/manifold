@@ -57,17 +57,6 @@ exports[`Backend.Layout.Header component renders correctly 1`] = `
           <a
             aria-current={false}
             className={undefined}
-            href="/backend/content"
-            onClick={[Function]}
-            style={undefined}
-          >
-            Content
-          </a>
-        </li>
-        <li>
-          <a
-            aria-current={false}
-            className={undefined}
             href="/backend/settings"
             onClick={[Function]}
             style={undefined}

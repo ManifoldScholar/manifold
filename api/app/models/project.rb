@@ -20,6 +20,7 @@ class Project < ApplicationRecord
 
   # Concerns
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
   include TrackedCreator
   include Collaborative
   include Citable
@@ -34,6 +35,7 @@ class Project < ApplicationRecord
   extend FriendlyId
 
   # Magic
+  has_formatted_attribute :description
   with_metadata %w(
     series_title container_title isbn issn doi original_publisher
     original_publisher_place original_title publisher publisher_place version
@@ -47,7 +49,6 @@ class Project < ApplicationRecord
     }
   end
   with_citable_children :texts
-  has_formatted_attribute :description
 
   # URLs
   friendly_id :title, use: :slugged
@@ -57,6 +58,9 @@ class Project < ApplicationRecord
 
   # Rolify
   resourcify
+
+  # PaperTrail
+  has_paper_trail on: [:update]
 
   # Associations
   belongs_to :published_text, class_name: "Text", optional: true
@@ -71,12 +75,17 @@ class Project < ApplicationRecord
   has_many :resources, dependent: :destroy
   has_many :collections, dependent: :destroy
   has_many :collection_resources, through: :collections
-  has_many :project_subjects
+  has_many :project_subjects, dependent: :destroy
   has_many :subjects, through: :project_subjects
-  has_many :ingestions
-  has_many :twitter_queries
-  has_many :permissions, as: :resource
-  has_many :resource_imports, inverse_of: :project
+  has_many :ingestions, dependent: :destroy
+  has_many :twitter_queries, dependent: :destroy
+  has_many :permissions, as: :resource, dependent: :destroy
+  has_many :resource_imports, inverse_of: :project, dependent: :destroy
+  has_many :tracked_dependent_versions,
+           -> { order(created_at: :desc) },
+           as: :parent_item,
+           class_name: "Version",
+           dependent: :nullify
 
   # rubocop:disable Style/Lambda
   has_many :uncollected_resources, ->(object) {
@@ -116,22 +125,35 @@ class Project < ApplicationRecord
   scope :search_import, -> { includes(:collaborators, :makers) }
 
   scope :by_featured, lambda { |featured|
-    return all if featured.nil?
+    next all if featured.nil?
     where(featured: to_boolean(featured))
   }
 
   scope :by_subject, lambda { |subject|
-    return all unless subject.present?
+    next all unless subject.present?
     joins(:project_subjects).where(project_subjects: { subject: subject })
   }
+
   scope :with_order, lambda { |by = nil|
-    return order(:sort_title, :title) unless by.present?
+    next order(:sort_title, :title) unless by.present?
     order(by)
   }
 
-  scope :excluding_drafts, -> { where(draft: false) }
+  scope :with_read_ability, lambda { |user = nil|
+    next all if user && Project.drafts_readable_by?(user)
+    next where(draft: false) unless user
+    updatable_projects = Project.authorizer.scope_updatable_projects(user).pluck(:id)
+    where(draft: false).or(where(id: updatable_projects))
+  }
 
-  # Why is this here? --ZD
+  scope :with_update_ability, lambda { |user = nil|
+    next none unless user && Project.updatable_by?(user)
+    Project.authorizer.scope_updatable_projects(user)
+  }
+
+  # I believe this is here to allow us to pass `Project` as a scope in our resourceful
+  # controllers. See the load_resources_for in the resourceful_methods controller concern.
+  # -ZD
   def self.call
     all
   end

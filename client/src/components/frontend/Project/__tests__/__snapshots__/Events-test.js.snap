@@ -139,12 +139,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
         >
           <ul>
             <li
-              className="pagination-previous"
-              style={
-                Object {
-                  "visibility": "hidden",
-                }
-              }
+              className="pagination-previous disabled"
             >
               <a
                 href="/project/slug-1/events/0"
@@ -179,8 +174,7 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
               </a>
             </li>
             <li
-              className="pagination-next"
-              style={Object {}}
+              className="pagination-next "
             >
               <a
                 href="/project/slug-1/events/2"

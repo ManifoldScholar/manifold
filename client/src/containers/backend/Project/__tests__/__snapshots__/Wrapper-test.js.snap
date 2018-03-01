@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend Project Wrapper Container renders correctly 1`] = `
-<div>
+Array [
   <section
     className="bg-neutral95"
   >
@@ -83,7 +83,7 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
         </div>
       </header>
     </div>
-  </section>
+  </section>,
   <section
     className="backend-panel"
   >
@@ -101,7 +101,7 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <a
                 aria-current={false}
                 className={undefined}
-                href="/backend/project/1"
+                href="/backend/project/1/general"
                 onClick={[Function]}
                 style={undefined}
               >
@@ -205,6 +205,17 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
                 style={undefined}
               >
                 Social
+              </a>
+            </li>
+            <li>
+              <a
+                aria-current={false}
+                className={undefined}
+                href="/backend/project/1/log"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Log
               </a>
             </li>
           </ul>
@@ -225,7 +236,7 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
               <a
                 aria-current={false}
                 className={undefined}
-                href="/backend/project/1"
+                href="/backend/project/1/general"
                 onClick={[Function]}
                 style={undefined}
               >
@@ -331,6 +342,17 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
                 Social
               </a>
             </li>
+            <li>
+              <a
+                aria-current={false}
+                className={undefined}
+                href="/backend/project/1/log"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Log
+              </a>
+            </li>
           </ul>
         </nav>
       </aside>
@@ -338,6 +360,6 @@ exports[`Backend Project Wrapper Container renders correctly 1`] = `
         className="panel"
       />
     </div>
-  </section>
-</div>
+  </section>,
+]
 `;

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend Resource Wrapper Container renders correctly 1`] = `
-<div>
+Array [
   <section
     className="bg-neutral95"
   >
@@ -96,7 +96,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
         </div>
       </header>
     </div>
-  </section>
+  </section>,
   <section
     className="backend-panel"
   >
@@ -114,7 +114,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
               <a
                 aria-current={false}
                 className={undefined}
-                href="/backend/resource/1"
+                href="/backend/resource/1/general"
                 onClick={[Function]}
                 style={undefined}
               >
@@ -161,7 +161,7 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
               <a
                 aria-current={false}
                 className={undefined}
-                href="/backend/resource/1"
+                href="/backend/resource/1/general"
                 onClick={[Function]}
                 style={undefined}
               >
@@ -197,6 +197,6 @@ exports[`Backend Resource Wrapper Container renders correctly 1`] = `
         className="panel"
       />
     </div>
-  </section>
-</div>
+  </section>,
+]
 `;

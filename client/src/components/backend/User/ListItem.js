@@ -58,7 +58,7 @@ export default class UserListItem extends PureComponent {
           </header>
           <span className="label">
             {this.isCurrentUser(user.id)}
-            {attr.role}
+            {attr.role.replace(/_/g, " ")}
           </span>
         </Link>
       </li>

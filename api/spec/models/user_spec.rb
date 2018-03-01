@@ -79,7 +79,7 @@ RSpec.describe User, type: :model do
   end
 
   it "sets a role correctly" do
-    user = FactoryBot.create(:user, role: "admin")
+    user = FactoryBot.create(:user, role: Role::ROLE_ADMIN)
     expect(user.has_role? :admin).to eq true
   end
 
@@ -87,31 +87,11 @@ RSpec.describe User, type: :model do
   it "preserves permissions when changing role" do
     user = FactoryBot.create(:user, role: Role::ROLE_EDITOR)
     project = FactoryBot.create(:project)
-    user.add_role :owner, project
+    user.add_role Role::ROLE_PROJECT_EDITOR, project
     permissions = Array.new user.permissions
     user.role = Role::ROLE_EDITOR
     user.save
     expect(user.reload.permissions).to eq permissions
-  end
-
-  context "its kind" do
-    let(:user) { FactoryBot.create(:user) }
-    let(:project) { FactoryBot.create(:project) }
-
-    it "is correct when reader" do
-      expect(user.kind).to eq "reader"
-    end
-
-    it "is correct when author" do
-      user.add_role :author, project
-      expect(user.kind).to eq "author"
-    end
-
-    it "is correct when admin" do
-      user.role = "admin"
-      user.save
-      expect(user.kind).to eq "admin"
-    end
   end
 
   context "can be searched", :elasticsearch do

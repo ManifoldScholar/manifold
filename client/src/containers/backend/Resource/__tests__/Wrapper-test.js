@@ -9,6 +9,14 @@ describe("Backend Resource Wrapper Container", () => {
   const store = build.store();
   const resource = build.entity.resource("1");
   resource.relationships.project = build.entity.project("1");
+  const currentUser = build.entity.user("1");
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: currentUser
+    }
+  });
 
   const component = renderer.create(
     wrapWithRouter(

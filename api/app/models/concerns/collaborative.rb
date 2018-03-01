@@ -7,7 +7,7 @@ module Collaborative
   included do
     has_many :collaborators,
              -> { order(:position) },
-             as: :collaboratable
+             as: :collaboratable, dependent: :destroy
 
     # "If you use a hash-style where option, then record creation via this association
     # will be automatically scoped using the hash." -- Love, Rails

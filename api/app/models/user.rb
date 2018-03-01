@@ -4,8 +4,10 @@ class User < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:email, :first_name, :last_name].freeze
 
   # Concerns
-  include Authority::UserAbilities
   include Authority::Abilities
+  include Authority::UserAbilities
+  include Concerns::SerializedAbilitiesOn
+  include Concerns::SerializedAbilitiesFor
   include Filterable
   include Recoverable
   include Attachments
@@ -58,17 +60,32 @@ class User < ApplicationRecord
 
   # Scopes
   scope :by_email, lambda { |email|
-    return all unless email.present?
-    where("email ILIKE ?", "#{email}%")
+    where("email ILIKE ?", "#{email}%") if email.present?
   }
   scope :with_order, lambda { |by|
     return order(:first_name, :last_name) unless by.present?
     order(by)
   }
   scope :by_role, lambda { |role|
-    return all unless role.present?
-    with_role role.to_sym
+    with_role role.to_sym if role.present?
   }
+
+  # Creates user.role_name? methods for all roles
+  Role::GLOBAL_ROLES.each do |role_name|
+    define_method "#{role_name}?" do
+      role == role_name
+    end
+  end
+
+  Role::SCOPED_ROLES.each do |role_name|
+    define_method "#{role_name}?" do
+      kind == role_name
+    end
+
+    define_method "#{role_name}_of?" do |resource|
+      has_role? role_name, resource
+    end
+  end
 
   def self.cli_user
     User.find_by(is_cli_user: true)
@@ -94,35 +111,35 @@ class User < ApplicationRecord
     AccountMailer.welcome(self, false).deliver
   end
 
+  def created?(resource)
+    return false unless resource.respond_to? :creator
+    resource.creator == self
+  end
+
   def role=(new_role)
     @pending_role = new_role.to_s
   end
 
-  def admin?
-    role == "admin"
-  end
-
-  def editor?
-    role == "editor"
-  end
-
-  def owner_of(resource)
-    has_role? :owner, resource
-  end
-
   # Global roles
   def role
-    return "admin" if has_cached_role? :admin
-    return "editor" if has_cached_role? :editor
-    "reader"
+    Role::GLOBAL_ROLES.each do |role_name|
+      return role_name if has_cached_role? role_name
+    end
+    Role::ROLE_READER
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/LineLength, Metrics/PerceivedComplexity
   def kind
-    return "admin" if has_cached_role? :admin
-    return "editor" if has_cached_role? :editor
-    return "author" if has_cached_role? :author, :any
-    "reader"
+    return Role::ROLE_ADMIN if has_cached_role? Role::ROLE_ADMIN
+    return Role::ROLE_EDITOR if has_cached_role? Role::ROLE_EDITOR
+    return Role::ROLE_PROJECT_CREATOR if has_cached_role? Role::ROLE_PROJECT_CREATOR
+    return Role::ROLE_MARKETEER if has_cached_role? Role::ROLE_MARKETEER
+    return Role::ROLE_PROJECT_EDITOR if has_cached_role? Role::ROLE_PROJECT_EDITOR, :any
+    return Role::ROLE_PROJECT_RESOURCE_EDITOR if has_cached_role? Role::ROLE_PROJECT_RESOURCE_EDITOR, :any
+    return Role::ROLE_PROJECT_AUTHOR if has_cached_role? Role::ROLE_PROJECT_AUTHOR, :any
+    Role::ROLE_READER
   end
+  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/LineLength, Metrics/PerceivedComplexity
 
   private
 

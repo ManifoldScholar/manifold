@@ -92,7 +92,7 @@ export default class AnnotationDetail extends PureComponent {
             <section className="body">
               <Helper.SimpleFormat text={annotation.attributes.body} />
             </section>
-            <HigherOrder.RequireKind requiredKind={"any"}>
+            <HigherOrder.Authorize kind={"any"}>
               <nav className="utility">
                 <ul>
                   {this.props.includeComments ? (
@@ -105,10 +105,7 @@ export default class AnnotationDetail extends PureComponent {
                       </button>
                     </li>
                   ) : null}
-                  <HigherOrder.RequireAbility
-                    entity={annotation}
-                    requiredAbility={"update"}
-                  >
+                  <HigherOrder.Authorize entity={annotation} ability={"update"}>
                     {this.props.saveHandler ? (
                       <li>
                         <button
@@ -119,11 +116,8 @@ export default class AnnotationDetail extends PureComponent {
                         </button>
                       </li>
                     ) : null}
-                  </HigherOrder.RequireAbility>
-                  <HigherOrder.RequireAbility
-                    entity={annotation}
-                    requiredAbility={"delete"}
-                  >
+                  </HigherOrder.Authorize>
+                  <HigherOrder.Authorize entity={annotation} ability={"delete"}>
                     {this.props.deleteHandler ? (
                       <li>
                         <Utility.ConfirmableButton
@@ -132,7 +126,7 @@ export default class AnnotationDetail extends PureComponent {
                         />
                       </li>
                     ) : null}
-                  </HigherOrder.RequireAbility>
+                  </HigherOrder.Authorize>
                 </ul>
                 {this.state.action === "replying" ? (
                   <CommentContainer.Editor
@@ -141,8 +135,8 @@ export default class AnnotationDetail extends PureComponent {
                   />
                 ) : null}
               </nav>
-            </HigherOrder.RequireKind>
-            <HigherOrder.RequireKind requiredKind="unauthenticated">
+            </HigherOrder.Authorize>
+            <HigherOrder.Authorize kind="unauthenticated">
               <nav className="utility">
                 <ul>
                   <li>
@@ -152,7 +146,7 @@ export default class AnnotationDetail extends PureComponent {
                   </li>
                 </ul>
               </nav>
-            </HigherOrder.RequireKind>
+            </HigherOrder.Authorize>
           </div>
         )}
         {this.props.includeComments ? (

@@ -8,6 +8,13 @@ import build from "test/fixtures/build";
 describe("Backend Project Collections Container", () => {
   const store = build.store();
   const project = build.entity.project("1");
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: build.entity.user("1")
+    }
+  });
 
   const component = renderer.create(
     wrapWithRouter(

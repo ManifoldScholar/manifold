@@ -64,7 +64,7 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
             <label
               className="above"
             >
-              Owner?
+              Can modify project?
             </label>
             <div
               className="toggle-indicator"
@@ -81,7 +81,24 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
             <label
               className="above"
             >
-              Author?
+              Can modify metadata?
+            </label>
+            <div
+              className="toggle-indicator"
+            >
+              <div
+                className="boolean-primary"
+                onClick={[Function]}
+              />
+            </div>
+          </div>
+          <div
+            className="form-input"
+          >
+            <label
+              className="above"
+            >
+              Is a project author?
             </label>
             <div
               className="toggle-indicator"

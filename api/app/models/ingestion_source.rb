@@ -2,8 +2,12 @@
 class IngestionSource < ApplicationRecord
 
   # Concerns
-  include Authority::Abilities
   include Attachments
+
+  # Authorization
+  include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
+  self.authorizer_name = "ProjectChildAuthorizer"
 
   # Constants
   KIND_COVER_IMAGE = "cover_image".freeze

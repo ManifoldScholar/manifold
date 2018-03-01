@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend Project Log Container renders correctly 1`] = `
+Array [
+  <nav
+    className="flush results-list"
+  >
+    <section>
+      <header
+        className="section-heading-secondary"
+      >
+        <h3>
+          Project Changes
+           
+          <i
+            className="manicon manicon-pulse-small"
+          />
+        </h3>
+      </header>
+      <ul>
+        <li
+          className="no-icon"
+        >
+          <div
+            className="results-body"
+          >
+            <h4
+              className="results-header"
+            >
+              <div
+                className="subtitle"
+              >
+                <a
+                  href="/backend/people/users/1"
+                  onClick={[Function]}
+                >
+                  Nas
+                </a>
+                 updated the resource, “
+                <a
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "The World Is Yours",
+                    }
+                  }
+                  href="/backend/resource/1"
+                  onClick={[Function]}
+                />
+                ”, 
+                <span>
+                  on April 24, 2017
+                </span>
+              </div>
+            </h4>
+            <div
+              className="results-desc flush"
+            >
+              These fields were modified: 
+              <span
+                className="specifier"
+              >
+                title
+              </span>
+            </div>
+          </div>
+        </li>
+        <li
+          className="no-icon"
+        >
+          <div
+            className="results-body"
+          >
+            <h4
+              className="results-header"
+            >
+              <div
+                className="subtitle"
+              >
+                <a
+                  href="/backend/people/users/1"
+                  onClick={[Function]}
+                >
+                  Nas
+                </a>
+                 updated this project 
+                <span>
+                  on April 24, 2017
+                </span>
+              </div>
+            </h4>
+            <div
+              className="results-desc flush"
+            >
+              These fields were modified: 
+              <span
+                className="specifier"
+              >
+                title
+              </span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </nav>,
+  <nav
+    className="list-pagination-primary"
+  >
+    <ul>
+      <li
+        className="pagination-previous disabled"
+      >
+        <a
+          data-id="page-prev"
+          href="#pagination-target"
+          onClick={[Function]}
+        >
+          <i
+            className="manicon manicon-arrow-long-left"
+          />
+          <span>
+            Prev
+          </span>
+        </a>
+      </li>
+      <li
+        className="active ordinal"
+      >
+        <a
+          href="#pagination-target"
+          onClick={[Function]}
+        >
+          1
+        </a>
+      </li>
+      <li
+        className="ordinal"
+      >
+        <a
+          href="#pagination-target"
+          onClick={[Function]}
+        >
+          2
+        </a>
+      </li>
+      <li
+        className="pagination-next "
+      >
+        <a
+          data-id="page-next"
+          href="#pagination-target"
+          onClick={[Function]}
+        >
+          <span>
+            Next
+          </span>
+          <i
+            className="manicon manicon-arrow-long-right"
+          />
+        </a>
+      </li>
+    </ul>
+  </nav>,
+]
+`;

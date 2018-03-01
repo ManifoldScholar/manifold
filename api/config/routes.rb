@@ -87,6 +87,7 @@ Rails.application.routes.draw do
             resources :collaborators
             resources :text_categories, only: [:index, :create, :show]
             resources :ingestions, only: [:create], controller: "/api/v1/ingestions"
+            resources :versions, only: [:index]
             concerns [:permissible]
           end
         end

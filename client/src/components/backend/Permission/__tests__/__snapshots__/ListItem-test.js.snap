@@ -35,10 +35,8 @@ exports[`Backend.Permission.ListItem component renders correctly 1`] = `
     <span
       className="label"
     >
-      <span
-        className="specifier"
-      >
-        author
+      <span>
+        Author
       </span>
     </span>
   </a>

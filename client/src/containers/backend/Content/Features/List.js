@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { Resource } from "components/frontend";
 import FormattedDate from "components/global/FormattedDate";
+import { HigherOrder } from "containers/global";
 import { featuresAPI, requests } from "api";
 import { notificationActions, entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";
@@ -165,57 +166,64 @@ class ContentFeaturesList extends PureComponent {
                           ) : null}
                         </div>
                       </Link>
-                      <div className="text-category-list-utility">
-                        <Link
-                          className="button"
-                          to={lh.link("backendContentFeature", feature.id)}
-                        >
-                          Edit
-                        </Link>
-                        {index !== 0 ? (
-                          <button
-                            onClick={event => {
-                              this.handleMoveUp(event, feature);
-                            }}
+                      <HigherOrder.Authorize entity={feature} ability="update">
+                        <div className="text-category-list-utility">
+                          <Link
+                            className="button"
+                            to={lh.link("backendContentFeature", feature.id)}
                           >
-                            <i className="manicon manicon-arrow-up" />
-                          </button>
-                        ) : (
-                          <button
-                            style={{ visibility: "hidden" }}
-                            onClick={event => {
-                              this.handleMoveUp(event, feature);
-                            }}
+                            Edit
+                          </Link>
+                          {index !== 0 ? (
+                            <button
+                              onClick={event => {
+                                this.handleMoveUp(event, feature);
+                              }}
+                            >
+                              <i className="manicon manicon-arrow-up" />
+                            </button>
+                          ) : (
+                            <button
+                              style={{ visibility: "hidden" }}
+                              onClick={event => {
+                                this.handleMoveUp(event, feature);
+                              }}
+                            >
+                              <i className="manicon manicon-arrow-up" />
+                            </button>
+                          )}
+                          {index + 1 < collection.length ? (
+                            <button
+                              onClick={event => {
+                                this.handleMoveDown(event, feature);
+                              }}
+                            >
+                              <i className="manicon manicon-arrow-down" />
+                            </button>
+                          ) : (
+                            <button
+                              onClick={event => {
+                                this.handleMoveDown(event, feature);
+                              }}
+                              style={{ visibility: "hidden" }}
+                            >
+                              <i className="manicon manicon-arrow-down" />
+                            </button>
+                          )}
+                          <HigherOrder.Authorize
+                            entity={feature}
+                            ability="delete"
                           >
-                            <i className="manicon manicon-arrow-up" />
-                          </button>
-                        )}
-                        {index + 1 < collection.length ? (
-                          <button
-                            onClick={event => {
-                              this.handleMoveDown(event, feature);
-                            }}
-                          >
-                            <i className="manicon manicon-arrow-down" />
-                          </button>
-                        ) : (
-                          <button
-                            onClick={event => {
-                              this.handleMoveDown(event, feature);
-                            }}
-                            style={{ visibility: "hidden" }}
-                          >
-                            <i className="manicon manicon-arrow-down" />
-                          </button>
-                        )}
-                        <button
-                          onClick={() => {
-                            this.handleDestroy(feature);
-                          }}
-                        >
-                          <i className="manicon manicon-x" />
-                        </button>
-                      </div>
+                            <button
+                              onClick={() => {
+                                this.handleDestroy(feature);
+                              }}
+                            >
+                              <i className="manicon manicon-x" />
+                            </button>
+                          </HigherOrder.Authorize>
+                        </div>
+                      </HigherOrder.Authorize>
                     </div>
                   </li>
                 );
@@ -224,15 +232,17 @@ class ContentFeaturesList extends PureComponent {
           </div>
         </section>
 
-        <div className="buttons-icon-horizontal">
-          <Link
-            className="button-icon-secondary"
-            to={lh.link("backendContentFeatureNew")}
-          >
-            <i className="manicon manicon-plus" />
-            Add a New Feature
-          </Link>
-        </div>
+        <HigherOrder.Authorize entity="feature" ability="create">
+          <div className="buttons-icon-horizontal">
+            <Link
+              className="button-icon-secondary"
+              to={lh.link("backendContentFeatureNew")}
+            >
+              <i className="manicon manicon-plus" />
+              Add a New Feature
+            </Link>
+          </div>
+        </HigherOrder.Authorize>
       </div>
     );
   }

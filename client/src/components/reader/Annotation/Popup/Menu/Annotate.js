@@ -57,7 +57,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
         key={"highlight"}
         className={className}
         onClick={onClick}
-        requiredKind="any"
+        kind="any"
         label="Highlight"
         iconClass="manicon-pencil-simple"
       />
@@ -69,7 +69,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
       <Button
         key={"annotate"}
         onClick={this.props.annotate}
-        requiredKind="any"
+        kind="any"
         label="Annotate"
         iconClass="manicon-word-bubble"
       />
@@ -81,7 +81,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
       <Button
         key={"notate"}
         onClick={this.props.attachNotation}
-        requiredKind="admin"
+        kind="admin"
         label="Resource"
         iconClass="manicon-cube-outline"
       />
@@ -93,7 +93,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
       <Button
         key={"share"}
         onClick={() => this.props.showSecondary("share")}
-        requiredKind="any"
+        kind="any"
         label="Share"
         iconClass="manicon-nodes"
       />
@@ -105,7 +105,7 @@ export default class AnnotationPopupAnnotate extends PureComponent {
       <Button
         key={"login"}
         onClick={this.props.showLogin}
-        requiredKind="unauthenticated"
+        kind="unauthenticated"
         label="Login to Annotate"
         iconClass="manicon-person-pencil"
       />

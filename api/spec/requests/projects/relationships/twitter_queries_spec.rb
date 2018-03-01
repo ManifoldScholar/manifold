@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Project Twitter Queriees API", type: :request do
+RSpec.describe "Project Twitter Queries API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 

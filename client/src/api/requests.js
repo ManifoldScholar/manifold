@@ -62,6 +62,7 @@ export default {
   bePermissionUpdate: "backend-permission-update",
   bePermissionDestroy: "backend-permission-destroy",
   beResourceImportFetch: "backend-resource-import-fetch",
+  beVersions: "backend-versions",
   feProject: "frontend-project",
   tmpProject: "project-detail",
   feProjectsFiltered: "frontend-projects-filtered",

@@ -1,91 +1,55 @@
 require 'rails_helper'
 
-RSpec.describe PermissionAuthorizer, :authorizer do
-  let(:user) { FactoryBot.create(:user) }
-  let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+RSpec.describe "User Abilities", :authorizer do
+  context 'when the subject is an admin' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+    let(:object) { FactoryBot.create(:user) }
 
-  describe 'class authorization' do
-    context 'when reading' do
-      it 'is true for admin' do
-        expect(PermissionAuthorizer).to be_readable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(PermissionAuthorizer).to_not be_readable_by(user)
-      end
-    end
-
-    context 'when updating' do
-      it 'is true for admin' do
-        expect(PermissionAuthorizer).to be_updatable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(PermissionAuthorizer).to_not be_updatable_by(user)
-      end
-    end
-
-    context 'when deleting' do
-      it 'is true for admin' do
-        expect(PermissionAuthorizer).to be_deletable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(PermissionAuthorizer).to_not be_deletable_by(user)
-      end
-    end
+    the_subject_behaves_like "instance abilities", User, all: true
+    the_subject_behaves_like "class abilities", User, all: true
   end
 
-  describe 'instance authorization' do
-    let(:user_resource) { FactoryBot.create(:user) }
+  context 'when the subject is an editor' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
+    let(:object) { FactoryBot.create(:user) }
 
-    context 'when reading' do
-      it 'is true for admin' do
-        expect(user_resource).to be_readable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(user_resource).to_not be_readable_by(user)
-      end
-
-      it 'is true for self' do
-        expect(user_resource).to be_readable_by(user_resource)
-      end
-    end
-
-    context 'when creating' do
-      it 'is true for admin' do
-        expect(user_resource).to be_creatable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(user_resource).to_not be_creatable_by(user)
-      end
-    end
-
-    context 'when updating' do
-      it 'is true for admin' do
-        expect(user_resource).to be_updatable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(user_resource).to_not be_updatable_by(user)
-      end
-
-      it 'is true for self' do
-        expect(user_resource).to be_updatable_by(user_resource)
-      end
-    end
-
-    context 'when deleting' do
-      it 'is true for admin' do
-        expect(user_resource).to be_deletable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(user_resource).to_not be_deletable_by(user)
-      end
-    end
+    the_subject_behaves_like "instance abilities", User, read_only: true
+    the_subject_behaves_like "class abilities", User, read_only: true
   end
 
+  context 'when the subject is a project_creator' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_PROJECT_CREATOR) }
+    let(:object) { FactoryBot.create(:user) }
+
+    the_subject_behaves_like "instance abilities", User, none: true
+    the_subject_behaves_like "class abilities", User, none: true
+  end
+
+  # Project editors can assign permissions, so they need to be able to read users. --ZD
+  context 'when the subject is a reader and an editor of at least once project' do
+    let(:subject) do
+      user = FactoryBot.create(:user, role: Role::ROLE_READER)
+      user.add_role Role::ROLE_PROJECT_EDITOR, FactoryBot.create(:project)
+      user
+    end
+    let(:object) { FactoryBot.create(:user) }
+    the_subject_behaves_like "instance abilities", User, read_only: true
+    the_subject_behaves_like "class abilities", User, read_only: true
+  end
+
+  context 'when the subject is a reader' do
+    let(:subject) { FactoryBot.create(:user) }
+    let(:object) { FactoryBot.create(:user) }
+
+    the_subject_behaves_like "instance abilities", User, none: true
+    the_subject_behaves_like "class abilities", User, none: true
+  end
+
+  context 'when the subject is the user' do
+    let(:subject) { FactoryBot.create(:user) }
+    let(:object) { subject }
+
+    abilities = { create: false, read: true, update: true, delete: false }
+    the_subject_behaves_like "instance abilities", User, abilities
+  end
 end

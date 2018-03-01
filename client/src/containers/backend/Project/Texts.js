@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Dialog } from "components/backend";
 import { Text } from "components/global";
+import { HigherOrder } from "containers/global";
 import { Link } from "react-router-dom";
 import get from "lodash/get";
 import { entityStoreActions } from "actions";
@@ -426,25 +427,27 @@ export class ProjectTextsContainer extends PureComponent {
 
         {this.childRoutes()}
 
-        <div className="buttons-icon-horizontal maintain">
-          <Link
-            to={lh.link("backendProjectTextsIngestionsNew", project.id)}
-            className="button-icon-secondary"
-          >
-            <i className="manicon manicon-plus" />
-            <span className="full">Add a new text</span>
-            <span className="abbreviated">Text</span>
-          </Link>
+        <HigherOrder.Authorize entity={project} ability="update">
+          <div className="buttons-icon-horizontal maintain">
+            <Link
+              to={lh.link("backendProjectTextsIngestionsNew", project.id)}
+              className="button-icon-secondary"
+            >
+              <i className="manicon manicon-plus" />
+              <span className="full">Add a new text</span>
+              <span className="abbreviated">Text</span>
+            </Link>
 
-          <Link
-            to={lh.link("backendProjectCategoriesNew", project.id)}
-            className="button-icon-secondary"
-          >
-            <i className="manicon manicon-plus" />
-            <span className="full">Create a new category</span>
-            <span className="abbreviated">Category</span>
-          </Link>
-        </div>
+            <Link
+              to={lh.link("backendProjectCategoriesNew", project.id)}
+              className="button-icon-secondary"
+            >
+              <i className="manicon manicon-plus" />
+              <span className="full">Create a new category</span>
+              <span className="abbreviated">Category</span>
+            </Link>
+          </div>
+        </HigherOrder.Authorize>
 
         <section className="text-category-list-secondary">
           <div className="text-category">

@@ -3,6 +3,7 @@ import Collaborators from "./Collaborators";
 import Collections from "./Collections";
 import Events from "./Events";
 import General from "./General";
+import Log from "./Log";
 import Metadata from "./Metadata";
 import New from "./New";
 import Permissions from "./Permissions";
@@ -20,6 +21,7 @@ export default {
   Collections,
   Events,
   General,
+  Log,
   Metadata,
   New,
   Permissions,

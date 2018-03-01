@@ -4,7 +4,11 @@ class ResourceImport < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
   include TrackedCreator
   include Attachments
+
+  # Authorization
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
+  self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   belongs_to :project, inverse_of: :resource_imports
   has_many :resource_import_rows, inverse_of: :resource_import, dependent: :destroy

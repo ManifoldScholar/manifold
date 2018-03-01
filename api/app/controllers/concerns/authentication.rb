@@ -69,6 +69,7 @@ module Authentication
       render json: user,
              serializer: CurrentUserSerializer,
              meta: { authToken: AuthToken.encode(user_id: user.id) },
+             override_current_user: user,
              include: %w(favorites)
     else
       render json: { errors: ["Invalid username or password"] }, status: :unauthorized

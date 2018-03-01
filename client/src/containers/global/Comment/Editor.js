@@ -173,12 +173,12 @@ export class CommentEditor extends PureComponent {
             {this.props.label}
           </h3>
         ) : null}
-        <HigherOrder.RequireKind requiredKind="unauthenticated">
+        <HigherOrder.Authorize kind="unauthenticated">
           <div className="placeholder">
             <button onClick={showLogin}>Login to post a comment</button>
           </div>
-        </HigherOrder.RequireKind>
-        <HigherOrder.RequireKind requiredKind="any">
+        </HigherOrder.Authorize>
+        <HigherOrder.Authorize kind="any">
           <form onSubmit={this.handleSubmit}>
             <GlobalForm.Errorable
               name="attributes[body]"
@@ -214,7 +214,7 @@ export class CommentEditor extends PureComponent {
               </div>
             </GlobalForm.Errorable>
           </form>
-        </HigherOrder.RequireKind>
+        </HigherOrder.Authorize>
       </div>
     );
   }

@@ -7,6 +7,7 @@ import { select } from "utils/entityUtils";
 import { makersAPI, requests } from "api";
 import { Form } from "components/backend";
 import { Form as FormContainer } from "containers/backend";
+import { HigherOrder } from "containers/global";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 
@@ -117,17 +118,19 @@ export class MakersEditContainer extends PureComponent {
         ) : null}
         <header className="drawer-header">
           <h2 className="heading-quaternary">{attr.fullName}</h2>
-          <div className="buttons-bare-vertical">
-            <button
-              className="button-bare-primary"
-              onClick={event => {
-                this.handleMakerDestroy(event, maker);
-              }}
-            >
-              {"Delete Maker"}
-              <i className="manicon manicon-trashcan" />
-            </button>
-          </div>
+          <HigherOrder.Authorize entity={maker} ability="delete">
+            <div className="buttons-bare-vertical">
+              <button
+                className="button-bare-primary"
+                onClick={event => {
+                  this.handleMakerDestroy(event, maker);
+                }}
+              >
+                {"Delete Maker"}
+                <i className="manicon manicon-trashcan" />
+              </button>
+            </div>
+          </HigherOrder.Authorize>
         </header>
         <section className="form-section">
           <FormContainer.Form

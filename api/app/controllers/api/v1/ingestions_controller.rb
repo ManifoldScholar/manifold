@@ -4,13 +4,14 @@ module Api
     class IngestionsController < ApplicationController
       before_action :set_project
 
-      resourceful! Ingestion do
+      resourceful! Ingestion, authorize_options: { except: [:show, :create, :update] } do
         @project.nil? ? Ingestion : @project.ingestions
       end
 
       # GET /ingestions/1
       def show
         @ingestion = load_ingestion
+        authorize_action_for @ingestion
         render_single_resource(
           @ingestion,
           includes: :text,

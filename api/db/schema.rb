@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219200744) do
+ActiveRecord::Schema.define(version: 20180312192903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -618,6 +618,21 @@ ActiveRecord::Schema.define(version: 20180219200744) do
     t.index ["role_id"], name: "index_users_roles_on_role_id", using: :btree
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_users_roles_on_user_id", using: :btree
+  end
+
+  create_table "versions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "item_type",        null: false
+    t.uuid     "item_id",          null: false
+    t.string   "parent_item_type"
+    t.uuid     "parent_item_id"
+    t.string   "event",            null: false
+    t.string   "whodunnit"
+    t.jsonb    "object"
+    t.jsonb    "object_changes"
+    t.datetime "created_at"
+    t.index ["created_at"], name: "index_versions_on_created_at", using: :brin
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+    t.index ["parent_item_type", "parent_item_id"], name: "index_versions_on_parent_item_type_and_parent_item_id", using: :btree
   end
 
   add_foreign_key "identities", "users", on_delete: :cascade

@@ -4,20 +4,25 @@ module Api
 
       INCLUDES = %w(user).freeze
 
-      resourceful! Permission
+      resourceful! Permission, authorize_options: {
+        except: [:index, :create, :show, :update, :destroy]
+      }
 
       def index
+        authorize_action_for Permission, for: parent_resource
         render json: permissions_scope.all
       end
 
       def show
-        permission = load_and_authorize_permission
+        permission = load_permission
+        authorize_action_for permission
         render json: permission
       end
 
       def create
         permission = ::Updaters::Default.new(permission_params)
                                         .update_without_save(permissions_scope.new)
+        authorize_action_for permission
         outcome = Permissions::Save.run permission: permission
         render_single_resource outcome.result,
                                location: location(outcome.result),
@@ -25,7 +30,8 @@ module Api
       end
 
       def update
-        permission = load_and_authorize_permission
+        permission = load_permission
+        authorize_action_for permission
         permission = ::Updaters::Default.new(permission_params)
                                         .update_without_save(permission)
         outcome = Permissions::Save.run permission: permission
@@ -35,7 +41,8 @@ module Api
       end
 
       def destroy
-        permission = load_and_authorize_permission
+        permission = load_permission
+        authorize_action_for permission
         Permissions::Destroy.run permission: permission
       end
 

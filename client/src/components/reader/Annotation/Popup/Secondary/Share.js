@@ -76,7 +76,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
         {this.canCite() ? (
           <Button
             onClick={this.props.cite}
-            requiredKind="any"
+            kind="any"
             label="Cite"
             iconClass="manicon-quotes-left"
           />
@@ -102,7 +102,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
         ) : null}
         <Button
           onClick={this.props.back}
-          requiredKind="any"
+          kind="any"
           label="Back"
           className="dark"
           iconClass="manicon-arrow-bold-left"

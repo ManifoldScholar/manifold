@@ -7,6 +7,13 @@ import build from "test/fixtures/build";
 
 describe("Backend Settings Wrapper Container", () => {
   const store = build.store();
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: build.entity.user("1")
+    }
+  });
 
   const component = renderer.create(
     wrapWithRouter(

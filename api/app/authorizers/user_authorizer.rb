@@ -1,35 +1,29 @@
 class UserAuthorizer < ApplicationAuthorizer
 
-  def self.creatable_by?(_user)
-    true
+  def self.default(_able, user, _options = {})
+    admin_permissions?(user)
   end
 
-  def self.updatable_by?(user)
-    user.admin?
+  def self.readable_by?(user, _options = {})
+    editor_permissions?(user) ||
+      editor_of_any_project?(user)
   end
 
-  def self.readable_by?(user)
-    user.admin?
+  def self.creatable_by?(user, _options = {})
+    return true unless user
+    admin_permissions?(user)
   end
 
-  def self.deletable_by?(user)
-    user.admin?
+  def updatable_by?(user, _options = {})
+    admin_permissions?(user) ||
+      resource == user
   end
 
-  def creatable_by?(user)
-    resource == user || user.admin?
-  end
-
-  def updatable_by?(user)
-    resource == user || user.admin?
-  end
-
-  def readable_by?(user)
-    resource == user || user.admin?
-  end
-
-  def deletable_by?(user)
-    user.admin?
+  # Editors on projects can set permissions, which means they need access to users.
+  def readable_by?(user, _options = {})
+    editor_permissions?(user) ||
+      editor_of_any_project?(user) ||
+      resource == user
   end
 
 end

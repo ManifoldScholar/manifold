@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Backend Dashboard Container renders correctly 1`] = `
+exports[`Backend Dashboards Admin Container renders correctly 1`] = `
 <div>
   <section>
     <div
@@ -81,18 +81,7 @@ exports[`Backend Dashboard Container renders correctly 1`] = `
                 </p>
                 <div
                   className="buttons-icon-horizontal"
-                >
-                  <a
-                    className="button-icon-secondary undefined"
-                    href="/backend/project/new"
-                    onClick={[Function]}
-                  >
-                    <i
-                      className="manicon manicon-plus"
-                    />
-                    Add a New Project
-                  </a>
-                </div>
+                />
                 <section>
                   <ul>
                     <li>
@@ -310,12 +299,7 @@ exports[`Backend Dashboard Container renders correctly 1`] = `
             >
               <ul>
                 <li
-                  className="pagination-previous"
-                  style={
-                    Object {
-                      "visibility": "hidden",
-                    }
-                  }
+                  className="pagination-previous disabled"
                 >
                   <a
                     data-id="page-prev"
@@ -351,8 +335,7 @@ exports[`Backend Dashboard Container renders correctly 1`] = `
                   </a>
                 </li>
                 <li
-                  className="pagination-next"
-                  style={Object {}}
+                  className="pagination-next "
                 >
                   <a
                     data-id="page-next"
@@ -599,19 +582,6 @@ exports[`Backend Dashboard Container renders correctly 1`] = `
               </ul>
             </section>
           </nav>
-          <section>
-            <header
-              className="section-heading-secondary"
-            >
-              <h3>
-                Activity
-                 
-                <i
-                  className="manicon manicon-pulse-small"
-                />
-              </h3>
-            </header>
-          </section>
         </div>
       </section>
     </div>

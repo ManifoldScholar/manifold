@@ -1,52 +1,32 @@
 require 'rails_helper'
 
-RSpec.describe CommentAuthorizer, :authorizer do
-  let(:user) { FactoryBot.create(:user) }
-  let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+RSpec.describe "Comment Abilities", :authorizer do
+  let(:creator) { FactoryBot.create(:user, role: Role::ROLE_READER) }
+  let(:object) { FactoryBot.create(:comment, creator: creator) }
 
-  describe 'instance authorization' do
-    let(:creator) { FactoryBot.create(:user) }
-    let(:comment_resource) { FactoryBot.create(:comment, creator: creator) }
+  context 'when the subject is an admin' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
 
-    context 'when updating' do
-      it 'is true for admin' do
-        expect(comment_resource).to be_updatable_by(admin)
-      end
+    the_subject_behaves_like "instance abilities", Comment, all: true
+  end
 
-      it 'is false for user' do
-        expect(comment_resource).to_not be_updatable_by(user)
-      end
+  context 'when the subject is an editor' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
 
-      it 'is true for creator' do
-        expect(comment_resource).to be_updatable_by(creator)
-      end
-    end
+    abilities = { create: true, read: true, update: false, delete: true }
+    the_subject_behaves_like "instance abilities", Comment, abilities
+  end
 
-    context 'when deleting' do
-      it 'is true for admin' do
-        expect(comment_resource).to be_deletable_by(admin)
-      end
+  context 'when the subject is a reader' do
+    let(:subject) { FactoryBot.create(:user) }
 
-      it 'is false for user' do
-        expect(comment_resource).to_not be_deletable_by(user)
-      end
+    abilities = { create: true, read: true, update: false, delete: false }
+    the_subject_behaves_like "instance abilities", Comment, abilities
+  end
 
-      it 'is true for creator' do
-        expect(comment_resource).to be_deletable_by(creator)
-      end
-    end
+  context 'when the subject is the resource creator' do
+    let(:subject) { creator }
 
-    context "when deleted" do
-      before(:each) do
-        comment_resource.update_attribute(:deleted, true)
-      end
-      it 'is readable by admin' do
-        expect(comment_resource).to be_readable_if_deleted_by(admin)
-      end
-
-      it 'is not readable by user' do
-        expect(comment_resource).to_not be_readable_if_deleted_by(user)
-      end
-    end
+    the_subject_behaves_like "instance abilities", Comment, all: true
   end
 end

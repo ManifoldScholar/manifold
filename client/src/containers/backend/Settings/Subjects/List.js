@@ -104,9 +104,10 @@ export class SettingsSubjectsListContainer extends PureComponent {
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {subjects ? (
           <List.Searchable
-            newButtonVisible
-            newButtonPath={lh.link("backendSettingsSubjectsNew")}
-            newButtonText="Add a New Subject"
+            newButton={{
+              path: lh.link("backendSettingsSubjectsNew"),
+              text: "Add a New Subject"
+            }}
             entities={subjects}
             singularUnit="subject"
             pluralUnit="subjects"

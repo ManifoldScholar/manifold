@@ -1,102 +1,36 @@
 require 'rails_helper'
 
-RSpec.describe PermissionAuthorizer, :authorizer do
-  let(:reader) { FactoryBot.create(:user) }
-  let(:editor) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
-  let(:admin) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
+RSpec.describe "Permission Abilities", :authorizer do
+  context 'when the subject is an admin' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_ADMIN) }
 
-  describe 'class authorization' do
-    context 'when reading' do
-      it 'is true for admin' do
-        expect(PermissionAuthorizer).to be_readable_by(admin)
-      end
-
-      it 'is true for editor' do
-        expect(PermissionAuthorizer).to be_readable_by(editor)
-      end
-
-      it 'is false for user' do
-        expect(PermissionAuthorizer).to_not be_readable_by(reader)
-      end
-    end
-
-    context 'when updating' do
-      it 'is true for admin' do
-        expect(PermissionAuthorizer).to be_updatable_by(admin)
-      end
-
-      it 'is true for editor' do
-        expect(PermissionAuthorizer).to be_updatable_by(editor)
-      end
-
-      it 'is false for user' do
-        expect(PermissionAuthorizer).to_not be_updatable_by(reader)
-      end
-    end
-
-    context 'when creating' do
-      it 'is true for admin' do
-        expect(PermissionAuthorizer).to be_creatable_by(admin)
-      end
-
-      it 'is true for editor' do
-        expect(PermissionAuthorizer).to be_creatable_by(editor)
-      end
-
-      it 'is false for user' do
-        expect(PermissionAuthorizer).to_not be_creatable_by(reader)
-      end
-    end
-
-    context 'when deleting' do
-      it 'is true for admin' do
-        expect(PermissionAuthorizer).to be_deletable_by(admin)
-      end
-
-      it 'is true for editor' do
-        expect(PermissionAuthorizer).to be_deletable_by(editor)
-      end
-
-      it 'is false for user' do
-        expect(PermissionAuthorizer).to_not be_deletable_by(reader)
-      end
-    end
+    the_subject_behaves_like "class abilities", Permission, all: true
   end
 
-  describe 'instance authorization' do
-    before(:all) do
-      project = FactoryBot.create(:project)
-      @owner = FactoryBot.create(:user, role: Role::ROLE_EDITOR)
-      @owner.add_role :owner, project
-      @permission = Permission.fetch(project, @owner)
-    end
+  context 'when the subject is a reader' do
+    let(:subject) { FactoryBot.create(:user) }
 
-    context 'when reading' do
-      it 'is true for admin' do
-        expect(@permission).to be_readable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(@permission).to_not be_readable_by(reader)
-      end
-
-      it 'is true for owner' do
-        expect(@permission).to be_readable_by(@owner)
-      end
-    end
-
-    context 'when updating' do
-      it 'is true for admin' do
-        expect(@permission).to be_updatable_by(admin)
-      end
-
-      it 'is false for user' do
-        expect(@permission).to_not be_updatable_by(reader)
-      end
-
-      it 'is true for owner' do
-        expect(@permission).to be_readable_by(@owner)
-      end
-    end
+    the_subject_behaves_like "class abilities", Permission, none: true
   end
+
+  context 'when the subject is an editor on the permission\'s project' do
+    let(:project) { FactoryBot.create(:project) }
+    let(:another_user) { FactoryBot.create(:user) }
+    let(:subject) do
+      user = FactoryBot.create(:user)
+      user.add_role Role::ROLE_PROJECT_EDITOR, project
+      user
+    end
+    let(:object) { Permission.new(resource: project, user: another_user, role_names: Role::ROLE_PROJECT_EDITOR) }
+    the_subject_behaves_like "instance abilities", Permission, all: true
+  end
+
+  context 'when the subject is a global editor' do
+    let(:subject) { FactoryBot.create(:user, role: Role::ROLE_EDITOR) }
+    let(:another_user) { FactoryBot.create(:user) }
+    let(:project) { FactoryBot.create(:project) }
+    let(:object) { Permission.new(resource: project, user: another_user, role_names: Role::ROLE_PROJECT_EDITOR) }
+    the_subject_behaves_like "instance abilities", Permission, all: true
+  end
+
 end

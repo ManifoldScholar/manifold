@@ -64,6 +64,16 @@ exports[`Backend Users New Container renders correctly 1`] = `
                 Editor
               </option>
               <option
+                value="project_creator"
+              >
+                Project Creator
+              </option>
+              <option
+                value="marketeer"
+              >
+                Marketeer
+              </option>
+              <option
                 value="reader"
               >
                 Reader

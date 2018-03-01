@@ -10,11 +10,19 @@ class Resource < ApplicationRecord
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
+  # PaperTrail
+  has_paper_trail on: [:update],
+                  meta: {
+                    parent_item_id: :project_id,
+                    parent_item_type: "Project"
+                  }
+
   # Tags
   acts_as_ordered_taggable
 
   # Concerns
   include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
   include TrackedCreator
   include Filterable
   include WithMarkdown
@@ -174,12 +182,9 @@ class Resource < ApplicationRecord
   # rubocop:enable Metrics/AbcSize, Metrics/PerceivedComplexity
   # rubocop:enable Metrics/CyclomaticComplexity
 
-  # def update_tags
-  #   return unless keywords
-  #   self.tag_list = keywords
-  # end
-
-  # Why is this here? --ZD
+  # I believe this is here to allow us to pass `Resource` as a scope in our resourceful
+  # controllers. See the load_resources_for in the resourceful_methods controller concern.
+  # -ZD
   def self.call
     all
   end
@@ -188,6 +193,7 @@ class Resource < ApplicationRecord
     {
       title: title,
       project_id: project_id,
+      body: description,
       kind: kind,
       caption: caption,
       attachment_file_name: attachment_file_name

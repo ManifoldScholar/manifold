@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Navigation } from "components/backend";
+import { HigherOrder } from "containers/global";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
@@ -18,18 +19,30 @@ export class PagesWrapperContainer extends PureComponent {
 
   secondaryNavigationLinks() {
     return [
-      { path: lh.link("backendContentPages"), label: "Pages", key: "pages" },
+      {
+        path: lh.link("backendContentPages"),
+        label: "Pages",
+        key: "pages",
+        entity: "page",
+        ability: "update"
+      },
       {
         path: lh.link("backendContentFeatures"),
         label: "Features",
-        key: "features"
+        key: "features",
+        entity: "feature",
+        ability: "update"
       }
     ];
   }
 
   render() {
     return (
-      <div>
+      <HigherOrder.Authorize
+        entity="page"
+        failureFatalError={{ detail: "You are not allowed to edit content." }}
+        ability="create"
+      >
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">
@@ -43,7 +56,7 @@ export class PagesWrapperContainer extends PureComponent {
             <div className="panel">{childRoutes(this.props.route)}</div>
           </div>
         </section>
-      </div>
+      </HigherOrder.Authorize>
     );
   }
 }

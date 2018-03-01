@@ -33,6 +33,7 @@
       @include respond($break60) {
         display: inline-block;
         margin-right: 40px;
+        margin-bottom: 20px;
 
         &:last-child {
           margin-right: 0;

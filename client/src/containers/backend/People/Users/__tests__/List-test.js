@@ -8,6 +8,13 @@ import build from "test/fixtures/build";
 describe("Backend People Users List Container", () => {
   const store = build.store();
   const user = build.entity.user("1");
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: build.entity.user("2")
+    }
+  });
 
   const component = renderer.create(
     wrapWithRouter(

@@ -37,6 +37,38 @@ export default class LayoutHeader extends PureComponent {
     });
   }
 
+  backendButtonLabel(kind) {
+    switch (kind) {
+      case "admin":
+      case "editor":
+      case "project_creator":
+      case "marketeer":
+        return "Admin Mode";
+      case "project_editor":
+      case "project_resource_editor":
+        return "Editor Mode";
+      case "project_author": // For now authors will not have access to the backend
+      default:
+        return null;
+    }
+  }
+
+  renderBackendButton(props) {
+    if (!props.authentication.currentUser) return null;
+    const label = this.backendButtonLabel(
+      props.authentication.currentUser.attributes.kind
+    );
+    if (!label) return null;
+
+    return (
+      <li>
+        <Link className="button-mode" to={lh.link("backend")}>
+          {label}
+        </Link>
+      </li>
+    );
+  }
+
   render() {
     const path = this.props.location.pathname;
     const projectsActive = path === "/" || startsWith(path, "/project");
@@ -60,11 +92,11 @@ export default class LayoutHeader extends PureComponent {
               <li className={projectsActive ? "active" : ""}>
                 <Link to={lh.link("frontend")}>{"Projects"}</Link>
               </li>
-              <HigherOrder.RequireKind requiredKind="any">
+              <HigherOrder.Authorize kind="any">
                 <li className={followingActive ? "active" : ""}>
                   <Link to={lh.link("frontendFollowing")}>{"Following"}</Link>
                 </li>
-              </HigherOrder.RequireKind>
+              </HigherOrder.Authorize>
               {this.visiblePages(this.props).map(page => {
                 const url = lh.link("frontendPage", page.attributes.slug);
                 return (
@@ -80,14 +112,9 @@ export default class LayoutHeader extends PureComponent {
 
           <nav className="menu-dropdowns">
             <ul>
-              <HigherOrder.RequireKind requiredKind={"admin"}>
-                <li>
-                  <Link className="button-mode" to={lh.link("backend")}>
-                    Admin Mode
-                  </Link>
-                </li>
-              </HigherOrder.RequireKind>
-
+              <HigherOrder.Authorize kind="any">
+                {this.renderBackendButton(this.props)}
+              </HigherOrder.Authorize>
               {/*
                 Hiding search markup until functionality is available
                 <li>

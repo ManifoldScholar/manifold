@@ -82,7 +82,7 @@ RSpec.describe Project, type: :model do
   end
 
   it "is created as a draft" do
-    project = FactoryBot.build(:project)
+    project = Project.new
     expect(project.draft).to be(true)
   end
 
@@ -237,5 +237,31 @@ RSpec.describe Project, type: :model do
     include_examples "a citable class with_citable_children"
   end
 
+  context "it correctly scopes the visible projects" do
+    before(:each) do
+      FactoryBot.create(:project, draft: false)
+      FactoryBot.create(:project, draft: true)
+      @project_b = FactoryBot.create(:project, draft: true)
+    end
+
+    it "for admin" do
+      admin = FactoryBot.create(:user, role: Role::ROLE_ADMIN)
+      expect(Project.with_read_ability(admin).count).to eq 3
+    end
+
+    it "for project_editor" do
+      project_editor = FactoryBot.create(:user)
+      project_editor.add_role Role::ROLE_PROJECT_EDITOR, @project_b
+      expect(Project.with_read_ability(project_editor).count).to eq 2
+    end
+
+    it "for reader" do
+      expect(Project.with_read_ability(nil).count).to eq 1
+    end
+
+    it "for no user" do
+      expect(Project.with_read_ability(nil).count).to eq 1
+    end
+  end
 
 end

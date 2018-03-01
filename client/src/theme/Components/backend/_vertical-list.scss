@@ -119,9 +119,14 @@
       justify-content: space-between;
       width: 100%;
       padding: 20px 0 17px;
+      flex-direction: column;
       color: $neutral30;
       text-decoration: none;
       transition: color $duration ease-out;
+
+      @include respond($break70) {
+        flex-direction: row;
+      }
 
       &:hover {
         figure img {
@@ -234,10 +239,19 @@
       display: table-cell;
       font-size: 14px;
       color: $neutral75;
+      padding-top: 15px;
       vertical-align: top;
-      padding-left: 19px;
       white-space: nowrap;
       transition: color $duration $timing;
+
+      @include respond($break70) {
+        padding-left: 19px;
+        padding-top: 0;
+      }
+
+      span + span {
+        padding-left: 19px;
+      }
     }
 
     .specifier {

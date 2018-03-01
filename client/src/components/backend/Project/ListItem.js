@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Project as GlobalProject } from "components/global";
+import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
 
 export default class ProjectListItem extends PureComponent {
@@ -10,6 +11,16 @@ export default class ProjectListItem extends PureComponent {
   static propTypes = {
     entity: PropTypes.object
   };
+
+  projectLink(project) {
+    if (
+      project.attributes.abilities.update === true ||
+      project.attributes.abilities.updateResources === true
+    ) {
+      return lh.link("backendProject", project.id);
+    }
+    return lh.link("frontendProject", project.id);
+  }
 
   renderProjectMakers(makers) {
     let output = null;
@@ -64,7 +75,7 @@ export default class ProjectListItem extends PureComponent {
     const attr = project.attributes;
     return (
       <li key={project.id}>
-        <Link to={lh.link("backendProject", project.id)}>
+        <Link to={this.projectLink(project)}>
           <header>
             <figure className="cover">
               {this.renderProjectImage(project)}
@@ -78,7 +89,20 @@ export default class ProjectListItem extends PureComponent {
               {this.renderProjectMakers(project.relationships.creators)}
             </div>
           </header>
-          <span className="label">Edit</span>
+          <HigherOrder.Authorize
+            successBehavior="show"
+            entity={project}
+            ability={["update", "updateResources"]}
+          >
+            <span className="label">Edit</span>
+          </HigherOrder.Authorize>
+          <HigherOrder.Authorize
+            successBehavior="hide"
+            entity={project}
+            ability={["update", "updateResources"]}
+          >
+            <span className="label">View</span>
+          </HigherOrder.Authorize>
         </Link>
       </li>
     );

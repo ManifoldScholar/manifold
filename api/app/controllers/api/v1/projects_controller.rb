@@ -10,9 +10,17 @@ module Api
       ].freeze
 
       resourceful! Project, authorize_options: { except: [:index, :show] } do
+        includes = [
+          { texts: [:titles, :text_subjects] },
+          { collections: [] },
+          { events: [] },
+          { resources: [:tags] }
+        ]
+
         Project.filter(
           with_pagination!(project_filter_params),
-          scope: project_scope.includes(:makers, :creators, :contributors)
+          scope: scope_visibility.includes(includes),
+          user: current_user
         )
       end
 
@@ -26,7 +34,12 @@ module Api
       end
 
       def show
-        @scope_for_projects = Project.friendly
+        @scope_for_projects = Project.friendly.includes(
+          { texts: [:titles, :text_subjects] },
+          { collections: { resources: :tags } },
+          :events,
+          resources: :tags
+        )
         @project = load_project
         render_single_resource(@project, include: INCLUDES)
       end
@@ -50,13 +63,21 @@ module Api
       protected
 
       def scope_for_projects
-        Project.includes(:creators, :contributors, { texts: :text_sections },
-                         :text_categories, :events, :collections,
-                         resources: :collection_resources).friendly
+        Project.friendly
       end
 
-      def project_scope
-        current_user&.can?(:view_drafts) ? Project.all : Project.excluding_drafts
+      def scope_visibility
+        # The default scope is to return all projects that can be read by the current
+        # user, which as of now includes all projects except for drafts. If
+        # the API is asked to return projects that can be updated by the current user
+        # (such as for a backend dashboard), we do not apply the read check. We could
+        # apply both the read and update scopes, but then we have to join roles on both
+        # which I suspect is less efficient. Note that the with_update_ability is applied
+        # automatically through the filterable concern. -ZD
+        unless project_filter_params&.dig(:with_update_ability)
+          return Project.with_read_ability current_user
+        end
+        Project.all
       end
 
     end

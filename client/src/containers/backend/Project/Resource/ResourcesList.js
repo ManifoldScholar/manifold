@@ -81,14 +81,20 @@ export class ProjectResourcesListContainer extends PureComponent {
           </h3>
         </header>
         <List.Searchable
-          newButtonVisible
-          newButtonPath={lh.link("backendProjectResourcesNew", project.id)}
-          newButtonText="Add a New Resource"
-          secondaryButtonVisible
-          secondaryButtonIcon="manicon-cube-multiple"
-          secondaryButtonType="narrow"
-          secondaryButtonPath={lh.link("backendResourceImport", project.id)}
-          secondaryButtonText="Bulk Add Resources"
+          newButton={{
+            path: lh.link("backendProjectResourcesNew", project.id),
+            text: "Add a New Resource",
+            authorizedFor: project,
+            authorizedTo: "update"
+          }}
+          secondaryButton={{
+            icon: "manicon-cube-multiple",
+            type: "narrow",
+            path: lh.link("backendResourceImport", project.id),
+            text: "Bulk Add Resources",
+            authorizedFor: project,
+            authorizedTo: "update"
+          }}
           entities={this.props.resources}
           singularUnit="resource"
           pluralUnit="resources"

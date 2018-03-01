@@ -8,10 +8,18 @@ import renderer from "react-test-renderer";
 import build from "test/fixtures/build";
 
 describe("Backend Project General Container", () => {
-  const store = build.store();
   const project = build.entity.project("1");
   const subject = build.entity.subject("2");
   project.relationships.subjects = [subject];
+  const currentUser = build.entity.user("1");
+  const store = build.store();
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: currentUser
+    }
+  });
 
   const component = wrapWithRouter(
     <Provider store={store}>

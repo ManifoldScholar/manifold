@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Navigation } from "components/backend";
+import { HigherOrder } from "containers/global";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
@@ -18,14 +19,32 @@ export class UsersWrapperContainer extends PureComponent {
 
   secondaryNavigationLinks() {
     return [
-      { path: lh.link("backendPeople"), label: "Users", key: "users" },
-      { path: lh.link("backendPeopleMakers"), label: "Makers", key: "makers" }
+      {
+        path: lh.link("backendPeople"),
+        label: "Makers",
+        key: "makers",
+        entity: "maker",
+        ability: "update"
+      },
+      {
+        path: lh.link("backendPeopleUsers"),
+        label: "Users",
+        key: "users",
+        entity: "user",
+        ability: "update"
+      }
     ];
   }
 
   render() {
     return (
-      <div>
+      <HigherOrder.Authorize
+        ability="update"
+        entity={["user", "maker"]}
+        failureFatalError={{
+          detail: "You are not allowed to manage users and makers."
+        }}
+      >
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">
@@ -39,7 +58,7 @@ export class UsersWrapperContainer extends PureComponent {
             <div className="panel">{childRoutes(this.props.route)}</div>
           </div>
         </section>
-      </div>
+      </HigherOrder.Authorize>
     );
   }
 }

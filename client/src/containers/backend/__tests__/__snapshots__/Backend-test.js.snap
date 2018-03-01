@@ -45,39 +45,15 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                 </Route>
                               </NavLink>
                             </li>
-                            <li>
-                              <NavLink activeClassName=\\"active\\" to=\\"/backend/people\\" ariaCurrent=\\"true\\">
-                                <Route path=\\"/backend/people\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
-                                  <Link to=\\"/backend/people\\" className={[undefined]} style={[undefined]} aria-current={false} replace={false}>
-                                    <a className={[undefined]} style={[undefined]} aria-current={false} onClick={[Function]} href=\\"/backend/people\\">
-                                      People
-                                    </a>
-                                  </Link>
-                                </Route>
-                              </NavLink>
-                            </li>
-                            <li>
-                              <NavLink activeClassName=\\"active\\" to=\\"/backend/content\\" ariaCurrent=\\"true\\">
-                                <Route path=\\"/backend/content\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
-                                  <Link to=\\"/backend/content\\" className={[undefined]} style={[undefined]} aria-current={false} replace={false}>
-                                    <a className={[undefined]} style={[undefined]} aria-current={false} onClick={[Function]} href=\\"/backend/content\\">
-                                      Content
-                                    </a>
-                                  </Link>
-                                </Route>
-                              </NavLink>
-                            </li>
-                            <li>
-                              <NavLink activeClassName=\\"active\\" to=\\"/backend/settings\\" ariaCurrent=\\"true\\">
-                                <Route path=\\"/backend/settings\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
-                                  <Link to=\\"/backend/settings\\" className={[undefined]} style={[undefined]} aria-current={false} replace={false}>
-                                    <a className={[undefined]} style={[undefined]} aria-current={false} onClick={[Function]} href=\\"/backend/settings\\">
-                                      Settings
-                                    </a>
-                                  </Link>
-                                </Route>
-                              </NavLink>
-                            </li>
+                            <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
+                              <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                            </Connect(AuthorizeComponent)>
+                            <Connect(AuthorizeComponent) entity={{...}} ability=\\"update\\">
+                              <AuthorizeComponent entity={{...}} ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                            </Connect(AuthorizeComponent)>
+                            <Connect(AuthorizeComponent) entity=\\"settings\\" ability=\\"update\\">
+                              <AuthorizeComponent entity=\\"settings\\" ability=\\"update\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}} />
+                            </Connect(AuthorizeComponent)>
                           </ul>
                         </nav>
                         <nav className=\\"menu-dropdowns\\">

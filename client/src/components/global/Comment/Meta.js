@@ -63,14 +63,14 @@ export default class CommentMeta extends PureComponent {
           {comment.attributes.deleted ? (
             <div className="marker secondary">Deleted</div>
           ) : null}
-          <HigherOrder.RequireKind requiredKind="admin">
+          <HigherOrder.Authorize kind="admin">
             {comment.attributes.flagsCount > 0 ? (
               <div className="marker secondary">
                 {comment.attributes.flagsCount}
                 {comment.attributes.flagsCount === 1 ? " flag" : " flags"}
               </div>
             ) : null}
-          </HigherOrder.RequireKind>
+          </HigherOrder.Authorize>
         </div>
       </section>
     );

@@ -11,9 +11,13 @@ class Collection < ApplicationRecord
 
   # Concerns
   include Filterable
-  include Authority::Abilities
   include Attachments
   extend FriendlyId
+
+  # Authorization
+  include Authority::Abilities
+  include Concerns::SerializedAbilitiesFor
+  self.authorizer_name = "ProjectChildAuthorizer"
 
   friendly_id :title, use: :slugged
 

@@ -32,14 +32,14 @@ export default class AnnotationPopupLink extends PureComponent {
         <Button
           key={"link"}
           onClick={this.handleViewLinkClick}
-          requiredKind="none"
+          kind="none"
           label="Follow Link"
           iconClass="manicon-arrow-right"
         />
         <Button
           key={"annotation"}
           onClick={this.handleShowAnnotationClick}
-          requiredKind="none"
+          kind="none"
           label={
             this.props.textAnnotations.length > 1
               ? "View Annotations"

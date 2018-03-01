@@ -2,5 +2,5 @@
 class CategorySerializer < ApplicationSerializer
   meta(partial: false)
 
-  attributes :id, :title, :position
+  attributes :id, :title, :position, :abilities
 end

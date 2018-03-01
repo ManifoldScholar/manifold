@@ -2,10 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Dialog, Navigation } from "components/backend";
+import { HigherOrder } from "containers/global";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
-import { childRoutes } from "helpers/router";
+import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
 import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;
@@ -24,7 +25,8 @@ export class ProjectWrapperContainer extends PureComponent {
     dispatch: PropTypes.func,
     match: PropTypes.object,
     history: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
+    location: PropTypes.object
   };
 
   constructor(props) {
@@ -32,13 +34,9 @@ export class ProjectWrapperContainer extends PureComponent {
     this.state = {
       confirmation: null
     };
-    this.fetchProject = this.fetchProject.bind(this);
-    this.doPreview = this.doPreview.bind(this);
-    this.doDestroy = this.doDestroy.bind(this);
-    this.handleProjectDestroy = this.handleProjectDestroy.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.fetchProject();
   }
 
@@ -46,11 +44,11 @@ export class ProjectWrapperContainer extends PureComponent {
     this.props.dispatch(flush(requests.feProject));
   }
 
-  fetchProject() {
+  fetchProject = () => {
     const call = projectsAPI.show(this.props.match.params.id);
     const projectRequest = request(call, requests.feProject);
     this.props.dispatch(projectRequest);
-  }
+  };
 
   closeDialog() {
     this.setState({ confirmation: null });
@@ -59,81 +57,108 @@ export class ProjectWrapperContainer extends PureComponent {
   secondaryNavigationLinks(project) {
     return [
       {
-        path: lh.link("backendProject", project.id),
+        path: lh.link("backendProjectGeneral", project.id),
         label: "General",
-        key: "general"
+        key: "general",
+        entity: project,
+        ability: "update"
       },
       {
         path: lh.link("backendProjectProjectPage", project.id),
         label: "Appearance",
-        key: "projectPage"
+        key: "projectPage",
+        entity: project,
+        ability: "update"
       },
       {
         path: lh.link("backendProjectPermissions", project.id),
         label: "Permissions",
-        key: "permissions"
+        key: "permissions",
+        entity: project,
+        ability: "updatePermissions"
       },
       {
         path: lh.link("backendProjectCollaborators", project.id),
         label: "People",
-        key: "collaborators"
+        key: "collaborators",
+        entity: project,
+        ability: "updateMakers"
       },
       {
         path: lh.link("backendProjectTexts", project.id),
         label: "Texts",
-        key: "texts"
+        key: "texts",
+        entity: project,
+        ability: "update"
       },
       {
         path: lh.link("backendProjectResources", project.id),
         label: "Resources",
-        key: "resources"
+        key: "resources",
+        entity: project,
+        ability: "updateResources"
       },
       {
         path: lh.link("backendProjectCollections", project.id),
         label: "Collections",
-        key: "collections"
+        key: "collections",
+        entity: project,
+        ability: "update"
       },
       {
         path: lh.link("backendProjectEvents", project.id),
         label: "Activity",
-        key: "events"
+        key: "events",
+        entity: project,
+        ability: "update"
       },
       {
         path: lh.link("backendProjectMetadata", project.id),
         label: "Metadata",
-        key: "metadata"
+        key: "metadata",
+        entity: project,
+        ability: "update"
       },
       {
         path: lh.link("backendProjectSocial", project.id),
         label: "Social",
-        key: "social"
+        key: "social",
+        entity: project,
+        ability: "update"
+      },
+      {
+        path: lh.link("backendProjectLog", project.id),
+        label: "Log",
+        key: "log",
+        entity: project,
+        ability: "readLog"
       }
     ];
   }
 
-  doPreview(event) {
+  doPreview = event => {
     event.preventDefault();
     const win = window.open(
       lh.link("frontendProject", this.props.project.attributes.slug),
       "_blank"
     );
     win.focus();
-  }
+  };
 
-  doDestroy() {
+  doDestroy = () => {
     const call = projectsAPI.destroy(this.props.project.id);
     const options = { removes: this.props.project };
     const projectRequest = request(call, requests.beProjectDestroy, options);
     this.props.dispatch(projectRequest).promise.then(() => {
       this.redirectToDashboard();
     });
-  }
+  };
 
   redirectToDashboard() {
     this.props.history.push(lh.link("backend"));
   }
 
-  handleProjectDestroy(event) {
+  handleProjectDestroy = event => {
     const heading = "Are you sure you want to delete this project?";
     const message = "This action cannot be undone.";
     new Promise((resolve, reject) => {
@@ -149,20 +174,22 @@ export class ProjectWrapperContainer extends PureComponent {
         this.closeDialog();
       }
     );
-  }
+  };
 
-  renderUtility() {
+  renderUtility(project) {
     return (
       <div>
         <button onClick={this.doPreview} className="button-bare-primary">
           Preview <i className="manicon manicon-eye-outline" />
         </button>
-        <button
-          onClick={this.handleProjectDestroy}
-          className="button-bare-primary"
-        >
-          Delete <i className="manicon manicon-trashcan" />
-        </button>
+        <HigherOrder.Authorize entity={project} ability={"delete"}>
+          <button
+            onClick={this.handleProjectDestroy}
+            className="button-bare-primary"
+          >
+            Delete <i className="manicon manicon-trashcan" />
+          </button>
+        </HigherOrder.Authorize>
       </div>
     );
   }
@@ -178,16 +205,37 @@ export class ProjectWrapperContainer extends PureComponent {
     const { project } = this.props;
 
     return (
-      <div>
+      <HigherOrder.Authorize
+        entity={project}
+        failureFatalError={{
+          detail: "You are not allowed to edit this project."
+        }}
+        ability={["update", "updateResources"]}
+      >
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}
+
+        <RedirectIfNoChildRouteMatches
+          entity={project}
+          ability={"update"}
+          route={this.props.route}
+          to={lh.link("backendProjectGeneral", project.id)}
+        />
+
+        <RedirectIfNoChildRouteMatches
+          entity={project}
+          ability={"updateLimitedToResourceMetadata"}
+          route={this.props.route}
+          to={lh.link("backendProjectResources", project.id)}
+        />
+
         <Navigation.DetailHeader
           type="project"
           breadcrumb={[{ path: lh.link("backend"), label: "ALL PROJECTS" }]}
           title={project.attributes.title}
           subtitle={project.attributes.subtitle}
-          utility={this.renderUtility()}
+          utility={this.renderUtility(project)}
         />
         <section className="backend-panel">
           <aside className="scrollable">
@@ -206,7 +254,7 @@ export class ProjectWrapperContainer extends PureComponent {
             <div className="panel">{this.renderRoutes()}</div>
           </div>
         </section>
-      </div>
+      </HigherOrder.Authorize>
     );
   }
 }

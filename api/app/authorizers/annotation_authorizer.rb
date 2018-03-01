@@ -1,30 +1,20 @@
 class AnnotationAuthorizer < ApplicationAuthorizer
 
-  def self.readable_by?(_user)
+  # There are cases where all users can CRUD annotations.
+  def self.default(_able, _user, _options = {})
     true
   end
 
-  def self.creatable_by?(_user)
-    true
+  def creatable_by?(user, _options = {})
+    return true unless Annotation::NOTATION_TYPES.include?(resource.format)
+    editor_permissions?(user)
   end
 
-  def self.deletable_by?(_user)
-    true
+  def deletable_by?(user, _options = {})
+    creator_or_has_editor_permissions?(user, resource)
   end
 
-  def self.updatable_by?(_user)
-    true
-  end
-
-  def creatable_by?(user)
-    Annotation::NOTATION_TYPES.include?(resource.format) ? user.admin? : true
-  end
-
-  def deletable_by?(user)
-    resource.creator == user || user.admin?
-  end
-
-  def updatable_by?(user)
-    resource.creator == user || user.admin?
+  def updatable_by?(user, _options = {})
+    creator_or_has_editor_permissions?(user, resource)
   end
 end
