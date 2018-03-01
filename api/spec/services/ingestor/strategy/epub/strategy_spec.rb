@@ -113,6 +113,14 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
     expect(@text).to_not be nil
   end
 
+  it "can ingest an epub when the section has an empty body" do
+    Ingestor.logger = NullLogger.new
+    @creator = FactoryBot.create(:user)
+    @epub = Rails.root.join("spec", "data", "ingestion", "epubs", "blank-section-body" )
+    @text = Ingestor.ingest(@epub, @creator, Ingestor::Strategy::EPUB::Strategy)
+    expect(@text).to_not be nil
+  end
+
   context "when ingesting a V3 EPUB", :integration do
     before(:all) {
       Ingestor.logger = NullLogger.new
