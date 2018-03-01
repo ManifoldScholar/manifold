@@ -108,7 +108,7 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
   it "can ingest an epub with an invalid ingestion source in the manifest" do
     Ingestor.logger = NullLogger.new
     @creator = FactoryBot.create(:user)
-    @epub = Rails.root.join("spec", "data", "ingestion", "epubs", "broken-v3" )
+    @epub = Rails.root.join("spec", "data", "ingestion", "epubs", "invalid-source" )
     @text = Ingestor.ingest(@epub, @creator, Ingestor::Strategy::EPUB::Strategy)
     expect(@text).to_not be nil
   end
