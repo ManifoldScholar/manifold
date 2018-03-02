@@ -3,6 +3,8 @@ module Search
 
     def initialize
       @filter = {}
+
+      yield self if block_given?
     end
 
     def typeahead(typeahead, fields)
@@ -18,8 +20,7 @@ module Search
       self
     end
 
-    def where(field, value, only_if_present = true)
-      return self if !value.present? && only_if_present == true
+    def where(field, value)
       @filter[:where] ||= {}
       @filter[:where][field] = value
       self
