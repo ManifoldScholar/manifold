@@ -2,76 +2,57 @@ module Filterable
   extend ActiveSupport::Concern
 
   # rubocop:disable Metrics/BlockLength
+  # rubocop:disable Metrics/AbcSize
   class_methods do
     def filter(params, scope: all)
-      use_elasticsearch = params.key?(:keyword)
-      page, per_page = params.values_at(:page, :per_page)
-      results = filter_with_query(params, scope: scope)
-      results = filter_with_elasticsearch(params, results) if use_elasticsearch
-      results = results.by_pagination(page, per_page) unless use_elasticsearch
-      results = validate_paginated_results(params, results, scope)
-      results
+      results = scope.filter_with_query(params)
+                     .filter_with_elasticsearch(params)
+      validate_paginated_results(params, results)
     end
 
-    private
-
-    # rubocop:disable Metrics/MethodLength
-    def filter_with_query(params, scope: all)
-      results = scope
-      params.each do |key, value|
-        by_method = "by_#{key}"
-        with_method = "with_#{key}"
-        containing_methods = %W(excluding_#{key} including_#{key})
-        results = results.send(by_method, value) if results.respond_to?(by_method)
-        results = results.send(with_method, value) if results.respond_to?(with_method)
-        containing_methods.each do |containing_method|
-          if results.respond_to?(containing_method)
-            results = results.send(containing_method)
-          end
+    def filter_with_query(params)
+      params.to_hash.inject all do |results, (key, value)|
+        scopes = %I[by_#{key} with_#{key}]
+        scopes.inject results do |query, scope|
+          next query unless query.respond_to? scope
+          query.send scope, value
         end
       end
-      results
-    end
-    # rubocop:enable Metrics/MethodLength
-
-    def filter_with_elasticsearch(params, query_scope = nil)
-      ids = query_scope.nil? ? nil : query_scope.pluck(:id)
-      search_query = params.dig(:keyword) || "*"
-      filter = Search::FilterScope
-               .new
-               .where(:id, ids)
-               .typeahead(params[:typeahead], self::TYPEAHEAD_ATTRIBUTES)
-               .paginate(params[:page], params[:per_page])
-      lookup(search_query, filter)
     end
 
-    def validate_paginated_results(params, results, scope)
-      return results unless exceeds_total_pages?(results)
-      filter(params.merge(page: results.total_pages), scope: scope)
+    def filter_with_elasticsearch(params)
+      return by_pagination params[:page], params[:per_page] unless params.key? :keyword
+      ids = pluck :id
+      return none if ids.blank?
+      search_query = params.dig :keyword || "*"
+      filter = Search::FilterScope.new do |f|
+        f.where :id, ids
+        f.typeahead params[:typeahead], self::TYPEAHEAD_ATTRIBUTES
+        f.paginate params[:page], params[:per_page]
+      end
+      lookup search_query, filter
     end
 
-    def paginated?(maybe_paginated)
-      maybe_paginated.respond_to?(:current_page)
+    def validate_paginated_results(params, results)
+      return results unless exceeds_total_pages? results
+      filter params.merge(page: results.total_pages), scope: results
     end
 
-    def exceeds_total_pages?(paginated)
-      return false unless paginated?(paginated)
-      return false if paginated.total_pages.zero?
-      paginated.current_page > paginated.total_pages
+    def paginated?(results)
+      results.respond_to?(:current_page) && results.total_pages.positive?
+    end
+
+    def exceeds_total_pages?(results)
+      return false unless paginated? results
+      results.current_page > results.total_pages
     end
   end
   # rubocop:enable Metrics/BlockLength
+  # rubocop:enable Metrics/AbcSize
 
   included do
-    private_class_method :exceeds_total_pages?
-    private_class_method :paginated?
-    private_class_method :validate_paginated_results
-    private_class_method :filter_with_elasticsearch
-    private_class_method :filter_with_query
-
-    scope :by_pagination, lambda { |page, per|
-      return all unless page.present?
-      page(page).per(per)
+    scope :by_pagination, lambda { |page_number, per_page|
+      page(page_number).per(per_page) if page_number.present?
     }
   end
 end
