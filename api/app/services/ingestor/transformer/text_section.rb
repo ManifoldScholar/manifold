@@ -57,6 +57,7 @@ module Ingestor
       # @return [String] the updated section body, with rewritten internal
       #   links.
       def convert_cont_doc_body(body, source_path)
+        return unless body
         source_path_map = @text.source_path_map
         source_map = @text.section_source_map
         body = Validator::Html.new.validate(body)
@@ -67,6 +68,7 @@ module Ingestor
       end
 
       def convert_cont_doc_body_to_json(body)
+        return unless body
         Serializer::Html.serialize_as_json(body) do |json|
           if json.blank?
             error_string(body)
