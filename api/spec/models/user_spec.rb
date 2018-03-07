@@ -109,7 +109,7 @@ RSpec.describe User, type: :model do
     expect(user.makers.count).to eq(2)
   end
 
-  context "can be searched", :slow, :elasticsearch do
+  context "can be searched", :elasticsearch do
 
     let(:first) { "189274891457612" }
     let(:last) { "HIOUFHAOASJDFIO" }
