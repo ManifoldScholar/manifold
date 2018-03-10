@@ -4,7 +4,7 @@ class TextSerializer < TextPartialSerializer
   meta(partial: false)
 
   attributes :toc, :metadata, :metadata_properties, :metadata_formatted,
-             :citations, :description
+             :citations, :description, :spine, :sections_map
 
   belongs_to :project
   has_many :stylesheets, serializer: StylesheetPartialSerializer
