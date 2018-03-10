@@ -17,7 +17,7 @@ class ProjectSerializer < ProjectPartialSerializer
   has_many :text_categories, serializer: CategorySerializer
   has_many :events
   has_many :collections
-  has_many :uncollected_resources
+  has_many :uncollected_resources, serializer: ResourcePartialSerializer
   has_many :subjects
   has_many :twitter_queries
   has_many :permitted_users

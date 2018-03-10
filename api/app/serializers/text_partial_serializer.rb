@@ -4,7 +4,7 @@ class TextPartialSerializer < ApplicationSerializer
 
   attributes :title, :creator_names, :created_at, :start_text_section_id,
              :published, :annotations_count, :highlights_count, :bookmarks_count,
-             :age, :position, :publication_date, :spine, :sections_map, :cover_styles,
+             :age, :position, :publication_date, :cover_styles,
              :slug, :section_kind
 
   belongs_to :project
