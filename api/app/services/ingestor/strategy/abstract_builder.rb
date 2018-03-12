@@ -12,6 +12,7 @@ module Ingestor
       def build(text)
         ActiveRecord::Base.transaction do
           update_text!(text)
+          remove_stale_sections(text)
           validate_text(text)
           attempt_save!(text)
         end
@@ -19,7 +20,6 @@ module Ingestor
         validate_text(text)
         transform_text_sections!(text)
         attempt_save!(text)
-        remove_stale_sections(text)
         destroy_tmp
       end
 
@@ -221,6 +221,7 @@ module Ingestor
           section.destroy
           info "services.ingestor.logging.remove_text_section", id: section.id
         end
+        text.text_sections.reload
       end
 
       def update_ingestion_sources!(text)

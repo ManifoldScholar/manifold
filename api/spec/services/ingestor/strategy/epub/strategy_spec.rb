@@ -121,6 +121,22 @@ RSpec.describe Ingestor::Strategy::EPUB::Strategy do
     expect(@text).to_not be nil
   end
 
+  context "when reingesting an EPUB", :integration do
+    before(:all) do
+      Ingestor.logger = NullLogger.new
+      @creator = FactoryBot.create(:user)
+      epub = Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3")
+      Ingestor.ingest(epub, @creator, Ingestor::Strategy::EPUB::Strategy)
+    end
+
+    it "can handle removed/rearranged sections" do
+      epub = Rails.root.join("spec", "data", "ingestion", "epubs", "rearranged")
+      expect do
+        Ingestor.ingest(epub, @creator, Ingestor::Strategy::EPUB::Strategy)
+      end.to_not raise_error
+    end
+  end
+
   context "when ingesting a V3 EPUB", :integration do
     before(:all) {
       Ingestor.logger = NullLogger.new
