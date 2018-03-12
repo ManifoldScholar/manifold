@@ -127,11 +127,6 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
                     Added April, 2017
                   </span>
                 </span>
-                <span
-                  className="asset-state"
-                >
-                  Hidden
-                </span>
               </div>
             </a>
             <div

@@ -362,7 +362,6 @@ export class ProjectTextsContainer extends PureComponent {
                       date={text.attributes.createdAt}
                     />
                   </span>
-                  <span className="asset-state">Hidden</span>
                 </div>
               </Link>
 
