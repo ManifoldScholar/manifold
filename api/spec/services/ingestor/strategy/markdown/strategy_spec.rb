@@ -35,7 +35,7 @@ RSpec.describe Ingestor::Strategy::Markdown::Strategy do
       end
 
       it "has the correct number of text sections" do
-        expect(@text.text_sections.length).to be 6
+        expect(@text.text_sections.length).to be 5
       end
 
       it "has an empty landmarks property" do

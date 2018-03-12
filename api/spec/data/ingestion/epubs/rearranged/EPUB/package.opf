@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="3.0" unique-identifier="pub-id" xmlns="http://www.idpf.org/2007/opf">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="pub-id">test-v3</dc:identifier>
+    <dc:title>Your title here</dc:title>
+    <dc:description>Your description here</dc:description>
+    <dc:language>en</dc:language>
+    <dc:rights>Your rights here</dc:rights>
+    <dc:creator opf:role="aut" opf:file-as="Culp, Andrew">Andrew Culp</dc:creator>
+    <meta property="dcterms:modified">2011-01-01T12:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="cover" href="images/cover.jpg" media-type="image/jpeg" properties="cover-image" />
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav" />
+    <item id="section0001.xhtml" href="xhtml/section0001.xhtml" media-type="application/xhtml+xml" />
+    <item id="section0002.xhtml" href="xhtml/section0002.xhtml" media-type="application/xhtml+xml" />
+    <item id="section0003.xhtml" href="xhtml/an%20item%20with%20spaces.xhtml" media-type="application/xhtml+xml" />
+    <item id="css" href="stylesheet.css" media-type="text/css" />
+  </manifest>
+  <spine>
+    <itemref idref="section0001.xhtml" />
+    <itemref idref="section0002.xhtml" />
+    <itemref idref="section0003.xhtml" />
+  </spine>
+</package>
