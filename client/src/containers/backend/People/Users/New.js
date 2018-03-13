@@ -21,7 +21,7 @@ export class UsersNewContainer extends PureComponent {
 
   redirectToUser(user) {
     const path = lh.link("backendPeopleUser", user.id);
-    this.props.history.push(path);
+    this.props.history.push(path, { keepNotifications: true });
   }
 
   createUser(user) {

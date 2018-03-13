@@ -49,7 +49,8 @@ const removeNotificationsByScope = (state, action) => {
   return Object.assign({}, state, { notifications: output });
 };
 
-const clearDrawerNotifications = state => {
+const clearDrawerNotifications = (state, action) => {
+  if (action.payload && action.payload.keepNotifications) return state;
   return removeNotificationsByScope(state, { payload: "drawer" });
 };
 

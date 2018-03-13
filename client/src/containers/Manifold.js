@@ -118,7 +118,7 @@ class ManifoldContainer extends PureComponent {
       if (nextProps.gaInitCallback) nextProps.gaInitCallback();
     }
     if (this.routeChanged(this.props.location, nextProps.location)) {
-      this.props.dispatch(routingActions.update());
+      this.props.dispatch(routingActions.update(nextProps.location.state));
     }
   }
 

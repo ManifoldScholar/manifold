@@ -94,7 +94,7 @@ export default class DrawerWrapper extends PureComponent {
 
   clearGlobalNotifications() {
     if (this.props.dispatch)
-      this.props.dispatch(notificationActions.removeAllNotifications());
+      this.props.dispatch(notificationActions.removeNotifications("global"));
   }
 
   handleLeaveKey(event) {
