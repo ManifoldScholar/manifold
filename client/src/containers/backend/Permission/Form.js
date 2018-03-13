@@ -22,7 +22,7 @@ export class PermissionForm extends PureComponent {
     if (this.props.permission) return null; // Skip if this permission already existed
     const base = lh.nameFromType("backend", "Permission", this.props.entity);
     const url = lh.link(base, this.props.entity.id, newPermission.id);
-    return this.props.history.push(url); // Redirect to edit drawer if new
+    return this.props.history.push(url, { keepNotifications: true });
   };
 
   composeCreateCall = permission => {
@@ -87,6 +87,7 @@ export class PermissionForm extends PureComponent {
       <section>
         <FormContainer.Form
           model={permission}
+          doNotWarn
           name={name}
           update={this.composeUpdateCall}
           create={this.composeCreateCall}
