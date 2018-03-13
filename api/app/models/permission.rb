@@ -10,7 +10,6 @@ class Permission < ApplicationRecord
   scope :by_user, ->(user) { where(user: user) }
 
   validates :user, :resource, presence: true
-  validate :user_is_editor!
   validate :role_names_present!
 
   def readonly?
@@ -28,11 +27,6 @@ class Permission < ApplicationRecord
       message = "must have at least one specified"
     end
     errors.add :role_names, message
-  end
-
-  def user_is_editor!
-    return true if user&.editor?
-    errors.add(:user, "must be an editor")
   end
 
   class << self
