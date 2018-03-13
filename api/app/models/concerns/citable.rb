@@ -39,7 +39,7 @@ module Citable
 
   def update_citable_children
     return unless citations != citations_was
-    citable_children.each { |child| send(child).each(&:save) }
+    UpdateCitatableChildren.perform_later(self)
   end
 
   # rubocop:disable Metrics/BlockLength

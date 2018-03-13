@@ -23,7 +23,7 @@ class TextSection < ApplicationRecord
   searchkick callbacks: :async, batch_size: 100
 
   # Associations
-  belongs_to :text
+  belongs_to :text, inverse_of: :text_sections
   belongs_to :ingestion_source
   has_many :annotations
   has_many :searchable_nodes, -> { order(position: :asc) }, dependent: :destroy

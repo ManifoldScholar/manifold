@@ -58,7 +58,10 @@ class Text < ApplicationRecord
   has_many :text_subjects
   has_many :subjects, through: :text_subjects
   has_many :ingestion_sources, dependent: :destroy
-  has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy
+  has_many :text_sections,
+           -> { order(position: :asc) },
+           dependent: :destroy,
+           inverse_of: :text
   has_many :stylesheets, -> { order(position: :asc) }, dependent: :destroy
   has_many :favorites, as: :favoritable, dependent: :destroy
   has_many :annotations, through: :text_sections
