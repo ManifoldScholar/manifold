@@ -99,7 +99,6 @@ export class PermissionForm extends PureComponent {
             readOnly={this.props.showUserInput}
             renderSelected={this.renderSelectedUser}
             fetch={usersAPI.index}
-            fetchOptions={{ role: "editor" }}
             placeholder="Select User"
             label={this.labelUser}
             relationName="user"

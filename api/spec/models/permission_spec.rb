@@ -19,15 +19,4 @@ RSpec.describe Permission, type: :model do
     expect(permission).to_not be_valid
   end
 
-  it "is invalid when user is not an editor" do
-    permission = Permission.new(user: user, resource: project, role_names: ["owner"])
-    expect(permission).to_not be_valid
-  end
-
-  it "is invalid when user is an editor" do
-    editor = FactoryBot.create(:user, role: Role::ROLE_EDITOR)
-    permission = Permission.new(user: editor, resource: project, role_names: ["owner"])
-    expect(permission).to be_valid
-  end
-
 end
