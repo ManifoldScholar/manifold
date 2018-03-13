@@ -19,20 +19,6 @@ exports[`Backend Ingest Container when the ingestion state is analyzed renders c
         <h1>
           some-file.epub
         </h1>
-        <div
-          className="utility"
-        >
-          <button
-            className="button-bare-primary loading"
-            disabled={true}
-            onClick={[Function]}
-          >
-            Reset
-            <i
-              className="manicon manicon-x-bold"
-            />
-          </button>
-        </div>
       </div>
     </header>
     <div
@@ -95,6 +81,20 @@ exports[`Backend Ingest Container when the ingestion state is analyzed renders c
         Connecting to Manifold websocket...
       </div>
     </div>
+    <div
+      className="utility"
+    >
+      <button
+        className="button-bare-primary loading"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Restart Ingestion
+        <i
+          className="manicon manicon-x-bold"
+        />
+      </button>
+    </div>
   </div>
   <div
     className="buttons-icon-horizontal"
@@ -136,20 +136,6 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
         <h1>
           some-file.epub
         </h1>
-        <div
-          className="utility"
-        >
-          <button
-            className="button-bare-primary loading"
-            disabled={true}
-            onClick={[Function]}
-          >
-            Reset
-            <i
-              className="manicon manicon-x-bold"
-            />
-          </button>
-        </div>
       </div>
     </header>
     <div
@@ -212,6 +198,20 @@ exports[`Backend Ingest Container when the ingestion state is finished renders c
         Connecting to Manifold websocket...
       </div>
     </div>
+    <div
+      className="utility"
+    >
+      <button
+        className="button-bare-primary loading"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Restart Ingestion
+        <i
+          className="manicon manicon-x-bold"
+        />
+      </button>
+    </div>
   </div>
   <div
     className="buttons-icon-horizontal"
@@ -253,20 +253,6 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
         <h1>
           some-file.epub
         </h1>
-        <div
-          className="utility"
-        >
-          <button
-            className="button-bare-primary loading"
-            disabled={true}
-            onClick={[Function]}
-          >
-            Reset
-            <i
-              className="manicon manicon-x-bold"
-            />
-          </button>
-        </div>
       </div>
     </header>
     <div
@@ -328,6 +314,20 @@ exports[`Backend Ingest Container when the ingestion state is sleeping renders c
       >
         Connecting to Manifold websocket...
       </div>
+    </div>
+    <div
+      className="utility"
+    >
+      <button
+        className="button-bare-primary loading"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Restart Ingestion
+        <i
+          className="manicon manicon-x-bold"
+        />
+      </button>
     </div>
   </div>
   <div

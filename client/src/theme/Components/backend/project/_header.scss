@@ -1,3 +1,103 @@
+%header-utility-button {
+  .button-bare-primary {
+    // Scoped colors/hovers
+    color: $neutral75;
+    transition: color $duration $timing;
+
+    &:hover {
+      color: $neutral20;
+
+      .manicon {
+        color: $neutral20;
+      }
+    }
+  }
+
+  button {
+    font-size: 0;
+
+    @include respond($break30) {
+      font-size: 14px;
+    }
+
+    @include respond($break65) {
+      font-size: 16px;
+    }
+
+    + button {
+      margin-left: 22px;
+
+      @include respond($break60) {
+        margin-left: 38px;
+      }
+    }
+
+    .manicon {
+      display: inline-block;
+      margin-left: 6px;
+      color: $accentPrimary;
+      vertical-align: middle;
+      transition: color $duration $timing;
+
+      @include respond($break60) {
+        margin-left: 11px;
+      }
+    }
+
+    // Relative sizes to make resizing simple,
+    // but fixed sizes at mobile since parents
+    // get size 0
+    .manicon-check-double {
+      font-size: 14px;
+
+      @include respond($break30) {
+        margin-top: -0.533em; // NP
+        font-size: 0.938em;
+      }
+    }
+
+    .manicon-eye-outline {
+      font-size: 15px;
+
+      @include respond($break30) {
+        margin-top: -0.429em;
+        font-size: 0.875em;
+      }
+    }
+
+    .manicon-x-bold {
+      font-size: 15px;
+      color: $sp40Tertiary;
+
+      @include respond($break30) {
+        margin-top: -0.20em;
+        font-size: 0.8em;
+      }
+    }
+
+    .manicon-magnify {
+      font-size: 15px;
+
+      @include respond($break30) {
+        margin-top: -0.14em;
+        font-size: 0.95em;
+      }
+    }
+
+
+    .manicon-trashcan {
+      font-size: 19px;
+      color: $sp40Tertiary;
+
+      @include respond($break30) {
+        margin-top: -0.471em;
+        font-size: 1.063em;
+      }
+    }
+
+  }
+}
+
 .entity-header-primary {
   padding-bottom: 30px;
 
@@ -83,110 +183,13 @@
   }
 
   .utility {
+    @extend %header-utility-button;
     clear: both;
 
     .notes {
       @include templateCopy;
       font-size: 1.071em;
       color: $neutral50;
-    }
-
-    .button-bare-primary {
-      // Scoped colors/hovers
-      color: $neutral75;
-      transition: color $duration $timing;
-
-      &:hover {
-        color: $neutral20;
-
-        .manicon {
-          color: $neutral20;
-        }
-      }
-    }
-
-    button {
-      font-size: 0;
-
-      @include respond($break30) {
-        font-size: 14px;
-      }
-
-      @include respond($break65) {
-        font-size: 16px;
-      }
-
-      + button {
-        margin-left: 22px;
-
-        @include respond($break60) {
-          margin-left: 38px;
-        }
-      }
-
-      .manicon {
-        display: inline-block;
-        margin-left: 6px;
-        color: $accentPrimary;
-        vertical-align: middle;
-        transition: color $duration $timing;
-
-        @include respond($break60) {
-          margin-left: 11px;
-        }
-      }
-
-      // Relative sizes to make resizing simple,
-      // but fixed sizes at mobile since parents
-      // get size 0
-      .manicon-check-double {
-        font-size: 14px;
-
-        @include respond($break30) {
-          margin-top: -0.533em; // NP
-          font-size: 0.938em;
-        }
-      }
-
-      .manicon-eye-outline {
-        font-size: 15px;
-
-        @include respond($break30) {
-          margin-top: -0.429em;
-          font-size: 0.875em;
-        }
-      }
-
-      .manicon-x-bold {
-        font-size: 15px;
-        color: $sp40Tertiary;
-
-        @include respond($break30) {
-          margin-top: -0.20em;
-          font-size: 0.8em;
-        }
-      }
-
-      .manicon-magnify {
-        font-size: 15px;
-
-        @include respond($break30) {
-          margin-top: -0.14em;
-          font-size: 0.95em;
-        }
-      }
-
-
-      .manicon-trashcan {
-        font-size: 19px;
-        color: $sp40Tertiary;
-
-        @include respond($break30) {
-          margin-top: -0.471em;
-          font-size: 1.063em;
-        }
-      }
-
     }
   }
 }

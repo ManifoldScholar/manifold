@@ -275,16 +275,6 @@ export class IngestionIngest extends Component {
             </figure>
             <div className="title">
               <h1>{this.title(attr)}</h1>
-              <div className="utility">
-                <button
-                  className={resetButtonClass}
-                  onClick={this.reset}
-                  disabled={this.state.loading || !this.canReset}
-                >
-                  Reset
-                  <i className="manicon manicon-x-bold" />
-                </button>
-              </div>
             </div>
           </header>
           <div className="properties">
@@ -315,6 +305,16 @@ export class IngestionIngest extends Component {
             >
               {this.state.textLog.trim()}
             </div>
+          </div>
+          <div className="utility">
+            <button
+              className={resetButtonClass}
+              onClick={this.reset}
+              disabled={this.state.loading || !this.canReset}
+            >
+              Restart Ingestion
+              <i className="manicon manicon-x-bold" />
+            </button>
           </div>
         </div>
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">

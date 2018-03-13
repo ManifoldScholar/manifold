@@ -56,14 +56,6 @@
 
     padding-bottom: 0;
 
-    .loading {
-      color: $neutral85;
-
-      .manicon {
-        color: $neutral85;
-      }
-    }
-
     .dialog-primary .dialog-box & {
       padding-bottom: 0;
     }
@@ -135,6 +127,23 @@
           color: $neutral50;
         }
       }
+    }
+  }
+
+  .utility {
+    @extend %header-utility-button;
+    margin-top: 10px;
+
+    .loading, .loading:hover {
+      color: $neutral85;
+
+      .manicon, .manicon:hover {
+        color: $neutral85;
+      }
+    }
+
+    button {
+      font-size: 14px;
     }
   }
 }
