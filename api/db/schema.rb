@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180214201011) do
+ActiveRecord::Schema.define(version: 20180219200744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+  enable_extension "pg_trgm"
 
   create_table "annotations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "start_node"
@@ -301,6 +302,65 @@ ActiveRecord::Schema.define(version: 20180214201011) do
     t.index ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   end
 
+  create_table "resource_import_row_transitions", force: :cascade do |t|
+    t.string   "to_state",                            null: false
+    t.jsonb    "metadata",               default: {}
+    t.integer  "sort_key",                            null: false
+    t.uuid     "resource_import_row_id",              null: false
+    t.boolean  "most_recent",                         null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["resource_import_row_id", "most_recent"], name: "index_resource_import_row_transitions_parent_most_recent", unique: true, where: "most_recent", using: :btree
+    t.index ["resource_import_row_id", "sort_key"], name: "index_resource_import_row_transitions_parent_sort", unique: true, using: :btree
+  end
+
+  create_table "resource_import_rows", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "resource_import_id"
+    t.uuid     "resource_id"
+    t.uuid     "collection_id"
+    t.string   "row_type",           default: "data"
+    t.integer  "line_number",                         null: false
+    t.text     "values",             default: [],                  array: true
+    t.text     "import_errors",      default: [],                  array: true
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["collection_id"], name: "index_resource_import_rows_on_collection_id", using: :btree
+    t.index ["resource_id"], name: "index_resource_import_rows_on_resource_id", using: :btree
+    t.index ["resource_import_id"], name: "index_resource_import_rows_on_resource_import_id", using: :btree
+  end
+
+  create_table "resource_import_transitions", force: :cascade do |t|
+    t.string   "to_state",                        null: false
+    t.jsonb    "metadata",           default: {}
+    t.integer  "sort_key",                        null: false
+    t.uuid     "resource_import_id",              null: false
+    t.boolean  "most_recent",                     null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["resource_import_id", "most_recent"], name: "index_resource_import_transitions_parent_most_recent", unique: true, where: "most_recent", using: :btree
+    t.index ["resource_import_id", "sort_key"], name: "index_resource_import_transitions_parent_sort", unique: true, using: :btree
+  end
+
+  create_table "resource_imports", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "creator_id"
+    t.uuid     "project_id"
+    t.string   "storage_type"
+    t.string   "storage_identifier"
+    t.string   "source",                          null: false
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
+    t.string   "url"
+    t.integer  "header_row",         default: 1
+    t.jsonb    "column_map",         default: {}, null: false
+    t.jsonb    "column_automap",     default: {}, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["creator_id"], name: "index_resource_imports_on_creator_id", using: :btree
+    t.index ["project_id"], name: "index_resource_imports_on_project_id", using: :btree
+  end
+
   create_table "resources", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "title"
     t.string   "kind"
@@ -560,6 +620,11 @@ ActiveRecord::Schema.define(version: 20180214201011) do
   end
 
   add_foreign_key "identities", "users", on_delete: :cascade
+  add_foreign_key "resource_import_row_transitions", "resource_import_rows"
+  add_foreign_key "resource_import_rows", "resource_imports", on_delete: :cascade
+  add_foreign_key "resource_import_transitions", "resource_imports"
+  add_foreign_key "resource_imports", "projects", on_delete: :cascade
+  add_foreign_key "resource_imports", "users", column: "creator_id"
   add_foreign_key "users_roles", "roles", on_delete: :cascade
   add_foreign_key "users_roles", "users", on_delete: :cascade
 
