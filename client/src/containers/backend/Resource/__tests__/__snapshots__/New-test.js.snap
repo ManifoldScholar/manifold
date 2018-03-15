@@ -570,7 +570,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                         >
                           Upload a file
                         </span>
-                         or
+                         or 
                         <br />
                         drag and drop here
                         <br />

@@ -40,7 +40,7 @@ exports[`Backend.Resource.Form.Audio component renders correctly 1`] = `
               >
                 Upload a file
               </span>
-               or
+               or 
               <br />
               drag and drop here
               <br />
