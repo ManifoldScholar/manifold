@@ -18,18 +18,19 @@ module Updaters
     @relationships = params.dig(:data, :relationships)&.to_h || {}
   end
 
-  def update_without_save(model)
+  def update_without_save(model, creator: nil)
     @model = model
     run_callbacks "update" do
+      assign_creator!(model, creator)
       assign_attributes!(model)
       update_relationships!(model)
     end
     model
   end
 
-  def update(model)
+  def update(model, creator: nil)
     @model = model
-    update_without_save(model)
+    update_without_save(model, creator: creator)
     save_model(model)
     model
   end
@@ -52,6 +53,11 @@ module Updaters
 
   def attachment_fields
     []
+  end
+
+  def assign_creator!(model, creator)
+    return unless creator && model.respond_to?("creator=")
+    model.creator = creator
   end
 
   def assign_attributes!(model)
