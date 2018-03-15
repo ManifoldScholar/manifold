@@ -98,6 +98,7 @@
     "query-string": "^5.x",
     "react": "16.2.x",
     "react-ace": "^5.9.0",
+    "react-beautiful-dnd": "^4.0.1",
     "react-dom": "16.2.x",
     "react-dropzone": "^4.x",
     "react-ga": "^2.x",
