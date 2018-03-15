@@ -84,4 +84,95 @@ describe("store/reducers/entityEditor", () => {
       }
     });
   });
+
+
+
+  describe("should mutate state properly", () => {
+    const anObject = {
+      foo: "bar"
+    };
+
+    const initialState = {
+      sessions: {
+        a: {
+          changed: false,
+          dirty: {
+            id: "1",
+            attributes: {
+              anAttribute: "test",
+              anObjectAttribute: anObject
+            }
+          },
+          source: {
+            id: "1"
+          }
+        }
+      }
+    };
+
+    const simpleAction = entityEditorActions.set(
+      "a",
+      "attributes.anAttribute.$set",
+      "updated"
+    );
+
+    const objectOverwriteAction = entityEditorActions.set(
+      "a",
+      "attributes.anObjectAttribute.$set",
+      { foo: "baz" }
+    );
+
+    const objectReplaceAction = entityEditorActions.set(
+      "a",
+      "attributes.anObjectAttribute.$set",
+      { bar: "foo" }
+    );
+
+    it("it should mutate the session model", () => {
+      const state = entityEditorReducer(initialState, simpleAction);
+      expect(Object.is(state.sessions.a, initialState.sessions.a))
+        .toBe(false)
+    });
+
+    it("it should mutate the dirty model", () => {
+      const state = entityEditorReducer(initialState, simpleAction);
+      expect(Object.is(state.sessions.a.dirty, initialState.sessions.a.dirty))
+        .toBe(false)
+    });
+
+    it("it should not mutate the source model", () => {
+      const state = entityEditorReducer(initialState, simpleAction);
+      expect(Object.is(state.sessions.a.source, initialState.sessions.a.source))
+        .toBe(true)
+    });
+
+    it("it should mutate the dirty model's attributes", () => {
+      const state = entityEditorReducer(initialState, simpleAction);
+      expect(Object.is(state.sessions.a.dirty.attributes, initialState.sessions.a.dirty.attributes))
+        .toBe(false)
+    });
+
+    it("should not unnecessarily mutate an object attribute", () => {
+      const state = entityEditorReducer(initialState, simpleAction);
+      expect(Object.is(state.sessions.a.dirty.attributes.anObjectAttribute, anObject))
+        .toBe(true)
+    });
+
+    it("should not mutate an object attribute when necessary", () => {
+      const state = entityEditorReducer(initialState, objectOverwriteAction);
+      expect(Object.is(state.sessions.a.dirty.attributes.anObjectAttribute, anObject))
+        .toBe(false)
+    });
+
+    it("should correctly overwrite an object attribute property", () => {
+      const state = entityEditorReducer(initialState, objectOverwriteAction);
+      expect(state.sessions.a.dirty.attributes.anObjectAttribute.foo).toBe("baz");
+    });
+
+    it("should replace, not merge an object attribute", () => {
+      const state = entityEditorReducer(initialState, objectReplaceAction);
+      expect(state.sessions.a.dirty.attributes.anObjectAttribute.foo).toBe(undefined);
+      expect(state.sessions.a.dirty.attributes.anObjectAttribute.bar).toBe("foo");
+    });
+  });
 });

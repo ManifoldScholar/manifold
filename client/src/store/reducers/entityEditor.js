@@ -1,6 +1,5 @@
 import { handleActions } from "redux-actions";
 import update from "immutability-helper";
-import cloneDeep from "lodash/cloneDeep";
 import lodashSet from "lodash/set";
 import lodashGet from "lodash/get";
 import lodashOmit from "lodash/omit";
@@ -60,7 +59,7 @@ const set = (state, action) => {
   if (value === undefined) return state; // undefined values are noops.
   const setPath = lodashSet({}, path, value);
   const sourceValue = getSourceValue(path, state.sessions[id].source);
-  const dirty = cloneDeep(state.sessions[id].dirty);
+  const dirty = Object.assign({}, state.sessions[id].dirty);
   let newDirty;
   if (value === sourceValue) {
     newDirty = lodashOmit(dirty, setPathToGetPath(path));
