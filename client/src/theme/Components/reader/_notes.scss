@@ -30,7 +30,7 @@
     padding-top: 47px;
     background-color: $neutral10;
 
-    @include respond($break100) {
+    @include respond($break120) {
       width: 50%;
     }
 

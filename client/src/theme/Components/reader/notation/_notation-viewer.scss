@@ -23,7 +23,7 @@
     right: 3vw;
     height: 100%;
 
-    @include respond($break100) {
+    @include respond($break120) {
       right: 45px;
     }
 
