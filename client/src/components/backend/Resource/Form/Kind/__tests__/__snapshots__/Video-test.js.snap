@@ -57,7 +57,7 @@ exports[`Backend.Resource.Form.Video component renders correctly 1`] = `
               >
                 Upload a file
               </span>
-               or
+               or 
               <br />
               drag and drop here
               <br />

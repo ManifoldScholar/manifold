@@ -47,7 +47,7 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
                     >
                       Upload a file
                     </span>
-                     or
+                     or 
                     <br />
                     drag and drop here
                     <br />
@@ -98,7 +98,7 @@ exports[`Backend Resource Variants Container renders correctly 1`] = `
                     >
                       Upload a file
                     </span>
-                     or
+                     or 
                     <br />
                     drag and drop here
                     <br />

@@ -83,7 +83,7 @@ exports[`Backend Dashboard Container renders correctly 1`] = `
                   className="buttons-icon-horizontal"
                 >
                   <a
-                    className="button-icon-secondary"
+                    className="button-icon-secondary undefined"
                     href="/backend/project/new"
                     onClick={[Function]}
                   >
