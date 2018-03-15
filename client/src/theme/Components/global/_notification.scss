@@ -13,7 +13,7 @@
       padding-bottom: 25px;
       background-color: $sp30Primary;
 
-      @include respond($break100) {
+      @include respond($break120) {
         max-width: $containerWidthFull - 50px;
         padding: 23px 26px 25px;
       }
@@ -54,7 +54,7 @@
         font-size: 28px;
       }
 
-      @include respond($break100) {
+      @include respond($break120) {
         right: 26px;
       }
     }

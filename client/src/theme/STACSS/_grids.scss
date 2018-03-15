@@ -11,7 +11,7 @@
   @include clearfix;
   margin-left: -30px;
 
-  @include respond($break100) {
+  @include respond($break120) {
     margin-left: -60px;
   }
 
@@ -23,7 +23,7 @@
     float: left;
     padding-left: 30px;
 
-    @include respond($break100) {
+    @include respond($break120) {
       padding-left: 60px;
     }
   }
