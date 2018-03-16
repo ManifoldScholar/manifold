@@ -146,9 +146,8 @@ module.exports = function(content) {
 
   var cb = this.async();
   var self = this;
-  var opts = this.options;
-  var outputPath = opts.output.path || "/";
-  var pub = opts.output.publicPath || "/";
+  var outputPath = "/";
+  var pub = "/";
 
   var embed = !!params.embed;
   if (fontconf.cssTemplate) {
@@ -169,7 +168,7 @@ module.exports = function(content) {
           .replace("[fontname]", fontconf.fontName)
           .replace("[ext]", "." + format);
         var url = loaderUtils.interpolateName(process, filename, {
-          context: self.options.context || process.context,
+          context: this.rootContext || process.context,
           content: res[format]
         });
 
