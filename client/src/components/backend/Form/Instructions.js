@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isString from "lodash/isString";
+import classnames from "classnames";
 
 export default class Instructions extends PureComponent {
   static propTypes = {
-    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    className: PropTypes.string
   };
 
   static defaultProps = {
@@ -13,8 +15,10 @@ export default class Instructions extends PureComponent {
 
   renderInstructions() {
     const { instructions } = this.props;
+    const classes = classnames("instructions", this.props.className);
+
     if (isString(instructions)) {
-      return <span className="instructions">{instructions}</span>;
+      return <span className={classes}>{instructions}</span>;
     }
     return instructions;
   }
