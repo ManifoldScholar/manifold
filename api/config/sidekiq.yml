@@ -1,3 +1,4 @@
 :queues:
   - default
+  - low_priority
   - searchkick
