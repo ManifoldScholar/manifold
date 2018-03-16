@@ -12,11 +12,11 @@ module Ingestor
         text.text_sections.each do |cd|
           verb = cd.new_record? ? "create" : "update"
           if cd.valid?
-            logger.debug "#{verb.titlecase} text section \"#{cd.name}\"".light_cyan
+            logger.debug "#{verb.titlecase} text section \"#{cd.name}\""
           else
-            logger.warn "Unable to #{verb} text section \"#{cd.name}\"".orange
+            logger.warn "Unable to #{verb} text section \"#{cd.name}\""
             cd.errors.full_messages.each do |msg|
-              logger.error "  #{msg}".red
+              logger.error "  #{msg}"
             end
             raise IngestionFailed, "Unable to #{verb} text section"
           end
@@ -28,8 +28,8 @@ module Ingestor
           next unless source.valid?
           verb = source.new_record? ? "created" : "updated"
           msg = "#{verb.titlecase} ingestion source \"#{source.source_identifier}\""
-          logger.debug msg.light_cyan
-          logger.debug "  local path: #{source.source_path}".light_cyan
+          logger.debug msg
+          logger.debug "  local path: #{source.source_path}"
         end
       end
     end
