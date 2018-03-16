@@ -6,6 +6,7 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 
 const isDev = process.env.NODE_ENV === "development";
+const mode = isDev ? "development" : "production";
 
 // No hashes in names when we're in development, to simplify finding assets.
 const nameTemplate = isDev ? "[name]" : "[name]-[hash]";
@@ -113,6 +114,7 @@ module.exports = (options = {}) => {
   // OUTPUT
   // #####################################################################################
   return {
+    mode: mode,
     context: paths.root,
     module: { rules },
     watchOptions: {
