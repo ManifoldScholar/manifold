@@ -30,7 +30,14 @@ namespace :manifold do
     desc "Ingest a project text"
     task :ingest, [:project_id, :path] => :environment do |_t, args|
       Manifold::Rake.logger.info "Ingesting #{args[:path]}"
-      Manifold::IngestTask.ingest(args[:path], "debug")
+      Ingestor.logger = Logger.new(STDOUT)
+      cli_user = User.find_by(is_cli_user: true)
+      text = Ingestor.ingest(args[:path], cli_user)
+      Ingestor.reset_logger
+      project = Project.find(args[:project_id])
+      text.project = project
+      text.save
+      Manifold::Rake.logger.info "Ingested text: #{text.id}"
     end
 
     desc "Reingest a project text"
