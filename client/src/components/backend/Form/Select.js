@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Form as GlobalForm } from "components/global";
 import setter from "./setter";
 import isNull from "lodash/isNull";
+import Instructions from "./Instructions";
 
 class FormSelect extends Component {
   static displayName = "Form.Select";
@@ -11,6 +12,7 @@ class FormSelect extends Component {
     value: PropTypes.any,
     errors: PropTypes.array,
     label: PropTypes.string,
+    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     name: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(
@@ -41,6 +43,7 @@ class FormSelect extends Component {
           label={this.props.label}
         >
           <label>{this.props.label}</label>
+          <Instructions instructions={this.props.instructions} />
           <div className="form-select">
             <i className="manicon manicon-caret-down" />
             <select onChange={this.props.onChange} value={value}>

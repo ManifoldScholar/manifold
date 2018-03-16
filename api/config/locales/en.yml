@@ -20,6 +20,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    errors:
+      models:
+        resource_import:
+          attributes:
+            url:
+              blank: "for the google sheet should not be blank. Please upload a valid CSV file or enter a public Google sheet URL"
+            source:
+              inclusion: "data is not valid. Please upload a valid CSV file or enter a public Google sheet URL"
   controllers:
     errors:
       auth_timeout:

@@ -75,6 +75,10 @@
       font-size: 17px;
     }
 
+    &.space-bottom {
+      margin-bottom: 2em;
+    }
+
     a:visited {
       color: inherit;
     }
@@ -374,6 +378,32 @@
         opacity: 0.9;
       }
     }
+
+    &.style-horizontal {
+      padding: 34px 0 37px 0;
+
+      .contents-empty .secondary {
+        display: none;
+      }
+
+      a, .fake-link {
+        text-decoration: none;
+      }
+
+      .contents-icon-preview {
+        .message {
+          padding: 0;
+        }
+
+        .manicon-document {
+          padding-bottom: 12px;
+        }
+      }
+    }
+  }
+
+  label + .form-dropzone {
+    margin-top: 13px;
   }
 
   .boolean-labeled {

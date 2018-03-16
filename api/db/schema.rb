@@ -346,17 +346,18 @@ ActiveRecord::Schema.define(version: 20180219200744) do
     t.uuid     "project_id"
     t.string   "storage_type"
     t.string   "storage_identifier"
-    t.string   "source",                          null: false
+    t.string   "source",                             null: false
     t.string   "data_file_name"
     t.string   "data_content_type"
     t.integer  "data_file_size"
     t.datetime "data_updated_at"
     t.string   "url"
     t.integer  "header_row",         default: 1
-    t.jsonb    "column_map",         default: {}, null: false
-    t.jsonb    "column_automap",     default: {}, null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.jsonb    "column_map",         default: {},    null: false
+    t.jsonb    "column_automap",     default: {},    null: false
+    t.boolean  "parse_error",        default: false, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["creator_id"], name: "index_resource_imports_on_creator_id", using: :btree
     t.index ["project_id"], name: "index_resource_imports_on_project_id", using: :btree
   end

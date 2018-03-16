@@ -83,6 +83,7 @@ Rails.application.routes.draw do
             resources :collections, only: [:index, :create]
             resources :events, only: [:index]
             resources :twitter_queries, only: [:index, :create]
+            resources :resource_imports, only: [:create, :update, :show]
             resources :collaborators
             resources :text_categories, only: [:index, :create, :show]
             resources :ingestions, only: [:create], controller: "/api/v1/ingestions"

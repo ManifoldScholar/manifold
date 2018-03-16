@@ -6,12 +6,14 @@ import Instructions from "./Instructions";
 
 export default class FieldGroup extends PureComponent {
   static propTypes = {
+    disabled: PropTypes.bool,
     horizontal: PropTypes.bool,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     label: PropTypes.string
   };
 
   static defaultProps = {
+    disabled: false,
     horizontal: false,
     instructions: null
   };
@@ -30,6 +32,7 @@ export default class FieldGroup extends PureComponent {
   render() {
     const classes = classNames({
       "form-section": true,
+      disabled: this.props.disabled,
       horizontal: this.props.horizontal
     });
 

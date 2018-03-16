@@ -35,22 +35,27 @@
     a:visited {
       color: inherit;
     }
+
+    &.space-bottom {
+      margin-bottom: 2em;
+    }
+
   }
 
-  input[type="text"], input[type="password"] {
+  input[type='text'], input[type='password'] {
     @include formInputPrimary;
     width: 100%;
     // Explicit height so that elements can line up
     height: 60px;
     // Declared in em as it should change with font size
     padding: 0.7em 1em;
+    color: $neutral80;
     background-color: $neutral05;
     border: 1px solid transparent;
     border-radius: 0;
     outline: 0;
     transition: border-color $duration $timing;
     appearance: none;
-    color: $neutral80;
 
     &::placeholder {
       color: $neutral50;
@@ -188,9 +193,13 @@
   display: block;
   padding-left: 33px;
   margin-bottom: 0; // OD
-  font-size: 16px;
+  font-size: 13px;
   color: $neutral70;
   cursor: pointer;
+
+  @include respond($break60) {
+    font-size: 16px;
+  }
 
   .bg-neutral90 & {
     color: $neutral50;
@@ -240,16 +249,16 @@
 
   &.checkbox {
     // To match indicator
-    line-height: 25px;
+    line-height: 1.563em;
 
     .toggle-indicator {
-      width: 25px;
-      height: 25px;
-      padding: 7px 6px;
+      width: 1.563em;
+      height: 1.563em;
+      padding: 0.438em 0.375em;
 
       // If check icon exists, hide it until selected
       .manicon-check {
-        font-size: 11px;
+        font-size: 0.688em;
         color: $neutralOffBlack;
         opacity: 0;
         transition: opacity $duration $timing;
@@ -258,19 +267,19 @@
   }
 
   &.radio {
-    line-height: 20px;
+    line-height: 1.25em;
 
     .toggle-indicator {
-      width: 20px;
-      height: 20px;
-      padding-top: 5px;
+      width: 1.25em;
+      height: 1.25em;
+      padding-top: 0.313em;
       text-align: center;
       border-radius: 100%;
 
       &::before {
         display: inline-block;
-        width: 10px;
-        height: 10px;
+        width: 0.625em;
+        height: 0.625em;
         vertical-align: top;
         content: '';
         background-color: $neutralOffBlack;
@@ -352,5 +361,304 @@
 
   + .form-input {
     margin-top: 40px;
+  }
+}
+
+// Form Column Mapping (used for mapping CSV, Spreadsheet assets)
+// --------------------------
+.form-column-map {
+  @include respond($break80) {
+    display: flex;
+    margin-left: -35px;
+  }
+
+  .column {
+    @include respond($break80) {
+      padding-left: 35px;
+    }
+
+    + .column {
+      margin-top: 30px;
+
+      @include respond($break80) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .column-mappable {
+    width: 100%;
+  }
+
+  // Group of draggable, available columns
+  .available {
+    max-height: 700px;
+    padding: 0.8em;
+    margin-top: 10px;
+    overflow-y: scroll;
+    font-size: 14px;
+    user-select: none;
+    background-color: $neutral85;
+
+    @include respond($break50) {
+      margin-top: 15px;
+    }
+
+    @include respond($break90) {
+      font-size: 16px;
+    }
+
+    .form-column-listing + .form-column-listing {
+      margin-top: 0.8em;
+    }
+  }
+
+  // <ul> of dragging wells with labels
+  .mappable {
+    @include listUnstyled;
+    max-height: 700px;
+    padding: 0.8em;
+    margin-top: 10px;
+    overflow-y: scroll;
+    font-size: 14px;
+    background-color: $neutral85;
+
+    @include respond($break50) {
+      margin-top: 15px;
+    }
+
+    @include respond($break90) {
+      font-size: 16px;
+    }
+
+    li + li {
+      margin-top: calc(0.8em - 2px);
+    }
+
+    .mapping {
+      @include clearfix;
+      @include templateHead;
+      position: relative;
+      width: 100%;
+
+      .column-label {
+        position: relative;
+        float: left;
+        width: 50%;
+        padding: 0.6em 0.8em;
+        font-weight: $light;
+        color: $neutral85;
+        background-color: $neutral50;
+
+        @include respond($break80) {
+          width: calc(100% - 21vw);
+        }
+
+        @include respond($break85) {
+          width: calc(100% - 23vw);
+        }
+
+        @include respond($break110) {
+          width: calc(100% - 300px);
+        }
+
+        .truncate {
+          display: block;
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        &::after {
+          position: absolute;
+          top: 0;
+          right: -1em;
+          z-index: 10; // Local z-index
+          width: 0;
+          height: 0;
+          content: '';
+          border-color: transparent transparent transparent $neutral50;
+          border-style: solid;
+          border-width: 1.2em 0 1.2em 1em;
+        }
+      }
+    }
+
+    .well {
+      float: left;
+      width: 50%;
+
+      @include respond($break80) {
+        width: 21vw;
+      }
+
+      @include respond($break85) {
+        width: 23vw;
+      }
+
+      @include respond($break110) {
+        width: 300px;
+      }
+
+      &::before {
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        pointer-events: none;
+        content: '';
+        background: transparent;
+        border: 2px solid $neutral85;
+      }
+
+      &.drag-over::before {
+        border-color: $accentPrimary;
+      }
+
+      &.matched {
+        .placeholder {
+          position: absolute;
+        }
+      }
+
+      @keyframes cancelAppear {
+        0% {
+          visibility: hidden;
+          opacity: 0;
+        }
+
+        1% {
+          visibility: visible;
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      // Show cancel buttons inside mappings
+      .cancel {
+        visibility: visible;
+        opacity: 1;
+        animation: cancelAppear $durationFast $timing 0s 1;
+      }
+    }
+
+    .placeholder {
+      top: 0;
+      z-index: -1;
+      display: block;
+      padding: 0.6em 0.8em 0.6em 1.6em;
+      color: $neutral80;
+    }
+  }
+}
+
+.form-column-listing {
+  position: relative;
+
+  .cancel {
+    @include buttonUnstyled;
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    width: 19px;
+    height: 19px;
+    padding-top: 2px; // NP
+    margin-top: -8px;
+    font-size: 8px;
+    color: $neutralWhite;
+    visibility: hidden;
+    background-color: $neutral70;
+    border-radius: 100%;
+    opacity: 0;
+    transition: opacity $duration $timing,
+      visibility $duration $timing;
+
+    & .manicon-x-bold {
+      position: relative;
+      left: 1px;
+    }
+
+    &:hover {
+      background-color: $sp40Tertiary;
+    }
+  }
+}
+
+// Declared globally so it can be used during drag
+.form-column-available {
+  position: relative;
+  width: 100%;
+  padding-left: calc(1em - 1px);
+  list-style: none;
+  outline: none;
+
+  @include respond($break80) {
+    width: 21vw;
+  }
+
+  @include respond($break85) {
+    width: 23vw;
+  }
+
+  @include respond($break110) {
+    width: 300px;
+  }
+
+  .text {
+    @include templateHead;
+    display: block;
+    padding: 0.6em 0.8em;
+    font-weight: $semibold;
+    color: $neutral90;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: $neutral20;
+    transition: background-color $duration $timing;
+  }
+
+  &:hover {
+    .text {
+      background-color: $neutral05;
+    }
+
+    &::before {
+      border-color: $neutral05 transparent transparent transparent;
+    }
+
+    &::after {
+      border-color: transparent transparent $neutral05 transparent;
+    }
+  }
+
+  // Flag edge
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    content: '';
+    border-color: $neutral20 transparent transparent transparent;
+    border-style: solid;
+    border-width: 1.2em 0 1.2em 1em;
+    transition: border-color $duration $timing;
+  }
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    content: '';
+    border-color: transparent transparent $neutral20 transparent;
+    border-style: solid;
+    border-width: 1.2em 0 1.2em 1em;
+    transition: border-color $duration $timing;
   }
 }

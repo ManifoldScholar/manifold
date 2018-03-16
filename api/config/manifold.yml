@@ -143,6 +143,12 @@ common: &1
 
   :attachments:
     :validations:
+      :csv:
+        :allowed_mime:
+          - "text/csv"
+          - "text/plain"
+        :allowed_ext:
+          - !ruby/regexp '/csv\Z/i'
       :ingestion:
         :allowed_mime:
           - "text/markdown"
@@ -194,6 +200,7 @@ common: &1
           - "application/x-xls"
           - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           - "application/zip"
+          - "text/csv"
         :allowed_ext:
           - !ruby/regexp '/xls\Z/i'
           - !ruby/regexp '/xlt\Z/i'
@@ -205,6 +212,7 @@ common: &1
           - !ruby/regexp '/xlsb\Z/i'
           - !ruby/regexp '/xla\Z/i'
           - !ruby/regexp '/xlw\Z/i'
+          - !ruby/regexp '/csv\Z/i'
       :text_document:
         :allowed_mime:
           - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -212,6 +220,7 @@ common: &1
           - "application/msword"
           - "application/vnd.ms-word.document.macroEnabled.12"
           - "application/vnd.ms-word.template.macroEnabled.12"
+          - "application/rtf"
           - !ruby/regexp '/text\/.*/'
         :allowed_ext:
           - !ruby/regexp '/doc\Z/i'
@@ -221,6 +230,7 @@ common: &1
           - !ruby/regexp '/dotm\Z/i'
           - !ruby/regexp '/docb\Z/i'
           - !ruby/regexp '/txt\Z/i'
+          - !ruby/regexp '/rtf\Z/i'
       :powerpoint:
         :allowed_mime:
           - "application/vnd.ms-powerpoint"
@@ -265,6 +275,8 @@ common: &1
           - "application/zip"
           - "application/markdown"
           - "application/epub+zip"
+          - "application/rtf"
+          - "text/csv"
           - !ruby/regexp '/text\/.*/'
           - !ruby/regexp '/audio\/.*/'
           - !ruby/regexp '/video\/.*/'
@@ -297,6 +309,8 @@ common: &1
           - !ruby/regexp '/dmg\Z/i'
           - !ruby/regexp '/txt\Z/i'
           - !ruby/regexp '/epub\Z/i'
+          - !ruby/regexp '/rtf\Z/i'
+          - !ruby/regexp '/csv\Z/i'
 production: *1
 development: *1
 test: *1

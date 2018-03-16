@@ -22,9 +22,15 @@ export default class ListSearchable extends PureComponent {
     newButtonText: PropTypes.string,
     newButtonVisible: PropTypes.bool,
     newButtonPath: PropTypes.string,
+    newButtonType: PropTypes.string,
     filterOptions: PropTypes.object,
     destroyHandler: PropTypes.func,
-    filterChangeHandler: PropTypes.func
+    filterChangeHandler: PropTypes.func,
+    secondaryButtonIcon: PropTypes.string,
+    secondaryButtonVisible: PropTypes.bool,
+    secondaryButtonPath: PropTypes.string,
+    secondaryButtonType: PropTypes.string,
+    secondaryButtonText: PropTypes.string
   };
 
   static defaultProps = {
@@ -169,6 +175,10 @@ export default class ListSearchable extends PureComponent {
     const entities = this.props.entities;
     if (!entities) return;
 
+    const secondaryButtonIcon = this.props.secondaryButtonIcon
+      ? this.props.secondaryButtonIcon
+      : "manicon-plus";
+
     let output = null;
 
     output = (
@@ -178,17 +188,28 @@ export default class ListSearchable extends PureComponent {
           singularUnit={this.props.singularUnit}
           pluralUnit={this.props.pluralUnit}
         />
-        {this.props.newButtonVisible ? (
-          <div className="buttons-icon-horizontal">
+        <div className="buttons-icon-horizontal">
+          {this.props.newButtonVisible ? (
             <Link
               to={this.props.newButtonPath}
-              className="button-icon-secondary"
+              className={`button-icon-secondary ${this.props.newButtonType}`}
             >
               <i className="manicon manicon-plus" />
               {this.props.newButtonText}
             </Link>
-          </div>
-        ) : null}
+          ) : null}
+          {this.props.secondaryButtonVisible ? (
+            <Link
+              to={this.props.secondaryButtonPath}
+              className={`button-icon-secondary ${
+                this.props.secondaryButtonType
+              }`}
+            >
+              <i className={`manicon ${secondaryButtonIcon}`} />
+              {this.props.secondaryButtonText}
+            </Link>
+          ) : null}
+        </div>
         {entities.length > 0 ? (
           <List.SimpleList
             entities={entities}

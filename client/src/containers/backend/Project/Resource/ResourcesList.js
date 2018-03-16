@@ -84,6 +84,11 @@ export class ProjectResourcesListContainer extends PureComponent {
           newButtonVisible
           newButtonPath={lh.link("backendProjectResourcesNew", project.id)}
           newButtonText="Add a New Resource"
+          secondaryButtonVisible
+          secondaryButtonIcon="manicon-cube-multiple"
+          secondaryButtonType="narrow"
+          secondaryButtonPath={lh.link("backendResourceImport", project.id)}
+          secondaryButtonText="Bulk Add Resources"
           entities={this.props.resources}
           singularUnit="resource"
           pluralUnit="resources"

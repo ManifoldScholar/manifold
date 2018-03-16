@@ -1,41 +1,45 @@
+import Checkboxes from "./Checkboxes";
+import CodeArea from "./CodeArea";
+import AttributeMap from "./AttributeMap";
+import Date from "./Date";
+import FieldGroup from "./FieldGroup";
+import GeneratedPasswordInput from "./GeneratedPasswordInput";
 import HasMany from "./HasMany";
-import Radios from "./Radios";
-import TextArea from "./TextArea";
-import TextInput from "./TextInput";
+import Hidden from "./Hidden";
+import HigherOrder from "./HigherOrder";
+import Instructions from "./Instructions";
 import MaskedTextInput from "./MaskedTextInput";
-import Upload from "./Upload";
-import Select from "./Select";
+import PredictiveBelongsTo from "./PredictiveBelongsTo";
+import Radios from "./Radios";
 import Save from "./Save";
+import Select from "./Select";
+import setter from "./setter";
 import Switch from "./Switch";
 import SwitchArray from "./SwitchArray";
-import Date from "./Date";
-import HigherOrder from "./HigherOrder";
-import Hidden from "./Hidden";
-import setter from "./setter";
-import FieldGroup from "./FieldGroup";
-import CodeArea from "./CodeArea";
-import PredictiveBelongsTo from "./PredictiveBelongsTo";
-import GeneratedPasswordInput from "./GeneratedPasswordInput";
-import Instructions from "./Instructions";
+import TextArea from "./TextArea";
+import TextInput from "./TextInput";
+import Upload from "./Upload";
 
 export default {
+  Checkboxes,
+  CodeArea,
+  AttributeMap,
+  Date,
+  FieldGroup,
+  GeneratedPasswordInput,
   HasMany,
-  PredictiveBelongsTo,
   Hidden,
-  Radios,
-  TextArea,
-  TextInput,
+  HigherOrder,
+  Instructions,
   MaskedTextInput,
-  Upload,
-  Select,
+  PredictiveBelongsTo,
+  Radios,
   Save,
+  Select,
+  setter,
   Switch,
   SwitchArray,
-  Date,
-  HigherOrder,
-  FieldGroup,
-  CodeArea,
-  GeneratedPasswordInput,
-  Instructions,
-  setter
+  TextArea,
+  TextInput,
+  Upload
 };
