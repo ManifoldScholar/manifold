@@ -10,6 +10,10 @@ export default class HeaderNotification extends Component {
     // If we're in the client, render it into a portal so we can keep it at the top of the
     // z-index stack.
     const domTarget = document.getElementById("global-notification-container");
-    return ReactDOM.createPortal(output, domTarget);
+    if (domTarget) {
+      return ReactDOM.createPortal(output, domTarget);
+    }
+
+    return output;
   }
 }
