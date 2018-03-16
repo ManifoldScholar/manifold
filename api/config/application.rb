@@ -83,7 +83,7 @@ module ManifoldApi
     ]
 
     config.active_job.queue_adapter = :sidekiq
-
+    config.action_controller.raise_on_unfiltered_parameters = true
     config.cache_store = :redis_store, ManifoldEnv.redis.namespaced_url("cache")
   end
 end

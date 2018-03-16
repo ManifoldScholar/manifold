@@ -1,4 +1,5 @@
 require "rails_helper"
+require 'base64'
 
 RSpec.shared_context "param helpers" do
 
@@ -34,6 +35,15 @@ RSpec.shared_context "param helpers" do
     expect(api_response["data"]["attributes"][expected_param]).to eq(expected_value)
   end
 
+  def file_param(path, content_type, file_name)
+    data = Base64.encode64(File.open(path, "rb").read)
+    {
+      content_type: content_type,
+      data: "data:#{content_type};base64,#{data}",
+      filename: file_name
+    }
+  end
+
   let(:image_params) {
     {
       content_type: "image/png",
@@ -49,7 +59,6 @@ RSpec.shared_context "param helpers" do
       filename: "something.md"
     }
   }
-
 
 end
 

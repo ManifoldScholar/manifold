@@ -102,6 +102,16 @@ module Validation
     params.permit(param_config)
   end
 
+  def resource_import_params
+    params.require(:data)
+    map_keys = (1..100).to_a.map(&:to_s)
+    attributes = [attachment(:data), :source, :url, :storage_type,
+                  :storage_identifier, :state, :header_row, column_map: map_keys]
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def ingestion_params
     params.require(:data)
     attributes = [attachment(:source), :external_source_url, :ingestion_type]

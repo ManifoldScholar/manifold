@@ -69,7 +69,7 @@ RSpec.configure do |config|
   # Truncate all test database tables before running tests.
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation, except: %w(settings))
+    DatabaseCleaner.clean_with(:deletion, except: %w(settings))
   end
 
   # Allow elastic search for tests tagged with elasticsearch
@@ -79,6 +79,7 @@ RSpec.configure do |config|
       example.run
     else
       stub_request(:any, /127\.0\.0\.1:2?9200/)
+      WebMock.disable_net_connect!(allow: /googleapis\.com/)
       example.run
     end
   end

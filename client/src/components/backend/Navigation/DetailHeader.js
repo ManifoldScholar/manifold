@@ -25,6 +25,7 @@ export default class DetailHeader extends PureComponent {
     if (type === "project") segment = "project-placeholder";
     if (type === "collection") segment = "file-box-border";
     if (type === "resource") segment = "cube-shine";
+    if (type === "resources") segment = "cube-multiple";
     if (type === "page") segment = "document";
     if (type === "feature") segment = "lamp";
     if (type === "subject") segment = "books-on-shelf";

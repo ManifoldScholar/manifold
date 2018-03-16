@@ -18,6 +18,7 @@ export default function setter(WrappedComponent) {
 
     static propTypes = {
       sessionKey: PropTypes.string,
+      afterChange: PropTypes.func,
       dirtyModel: PropTypes.object,
       sourceModel: PropTypes.object,
       readFrom: PropTypes.string,
@@ -28,7 +29,8 @@ export default function setter(WrappedComponent) {
       value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object,
-        PropTypes.bool
+        PropTypes.bool,
+        PropTypes.number
       ])
     };
 
@@ -50,6 +52,18 @@ export default function setter(WrappedComponent) {
         get(nextProps, "value") !== get(this.props, "value")
       ) {
         this.setValue(nextProps.value, nextProps);
+      }
+    }
+
+    componentDidUpdate(prevProps) {
+      if (this.props.afterChange) {
+        if (this.dirtyValue(this.props) !== this.dirtyValue(prevProps)) {
+          this.props.afterChange(
+            this.dirtyValue(this.props),
+            this.buildSetHandler(this.props),
+            this.buildSetOtherHandler(this.props)
+          );
+        }
       }
     }
 

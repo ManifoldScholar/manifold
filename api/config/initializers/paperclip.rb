@@ -9,6 +9,7 @@ Paperclip.options[:content_type_mappings] = {
 # We need to accept dataURIs.
 # See https://github.com/thoughtbot/paperclip/pull/2435 for background on this change.
 Paperclip::DataUriAdapter.register
+Paperclip::UriAdapter.register
 
 Paperclip.interpolates :uuid_partition do |attachment, _style|
   id = attachment.instance.id

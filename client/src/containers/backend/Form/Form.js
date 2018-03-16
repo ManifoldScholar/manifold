@@ -129,7 +129,7 @@ export class FormContainer extends PureComponent {
     if (res.hasOwnProperty("promise") && this.props.onSuccess) {
       res.promise.then(() => {
         this.setState({ preventDirtyWarning: true }, () => {
-          this.props.onSuccess();
+          this.props.onSuccess(this.props.response.entity);
         });
       });
     }

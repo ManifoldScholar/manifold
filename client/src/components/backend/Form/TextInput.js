@@ -15,6 +15,7 @@ class FormTextInput extends Component {
     label: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
+    afterChange: PropTypes.func,
     value: PropTypes.any,
     focusOnMount: PropTypes.bool,
     errors: PropTypes.array,

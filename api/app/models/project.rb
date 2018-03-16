@@ -76,6 +76,7 @@ class Project < ApplicationRecord
   has_many :ingestions
   has_many :twitter_queries
   has_many :permissions, as: :resource
+  has_many :resource_imports, inverse_of: :project
 
   # rubocop:disable Style/Lambda
   has_many :uncollected_resources, ->(object) {

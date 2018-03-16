@@ -42,6 +42,7 @@ class Resource < ApplicationRecord
           class_name: Event,
           as: :subject,
           dependent: :destroy
+  has_one :resource_import_row, inverse_of: :resource
   has_many :collection_resources, dependent: :destroy
   has_many :collections, through: :collection_resources
   has_many :comments, as: :subject

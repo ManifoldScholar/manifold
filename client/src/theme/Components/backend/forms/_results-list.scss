@@ -1,0 +1,107 @@
+.results-list {
+  margin-top: 1em;
+
+  > ul {
+    @include listUnstyled;
+
+    li {
+      display: table;
+      width: 100%;
+      padding: 10px 0;
+      color: $neutral40;
+
+      @include respond($break60) {
+        padding: 17px 0 9px;
+      }
+
+      + li {
+        border-top: 1px solid $neutral80;
+      }
+
+      &:last-child {
+        padding-bottom: 24px;
+      }
+
+      &.state-pending{
+        color: $sp30Primary;
+
+        & a {
+          color: $sp30Primary;
+        }
+      }
+
+      &.state-failed {
+        color: $sp40Tertiary;
+      }
+
+      &.state-queued, &.state-importing {
+        color: $sp30Secondary;
+
+        & a {
+          color: $sp30Secondary;
+        }
+      }
+
+      &.state-imported {
+        color: $accentPrimaryDull;
+
+        & a {
+          color: $accentPrimaryDull;
+        }
+      }
+
+    }
+
+    .results-header {
+      @include formInputPrimary;
+      display: table-cell;
+      width: 100%;
+      margin: 0;
+      font-size: 18px;
+      line-height: 29px;
+      vertical-align: middle;
+
+      @include respond($break60) {
+        font-size: 20px;
+      }
+
+      @include respond($break70) {
+        font-size: 22px;
+      }
+
+      .manicon {
+        position: relative;
+        top: 8px;
+        margin-right: 10px;
+        font-size: 14px;
+      }
+    }
+
+    .results-desc {
+      @include subtitlePrimary;
+      padding-left: 25px;
+      margin-top: 5px;
+      color: $neutral70;
+    }
+
+    .results-secondary {
+      @include utilityPrimary;
+      display: table-cell;
+      color: $neutral70;
+      text-align: right;
+      white-space: nowrap;
+      vertical-align: middle;
+
+      a {
+        color: $neutral50;
+        text-decoration: none;
+        transition: color $duration $timing;
+
+        &:hover {
+          color: $neutral20;
+        }
+      }
+
+    }
+  }
+}

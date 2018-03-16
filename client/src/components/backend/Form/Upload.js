@@ -19,7 +19,13 @@ export class FormUpload extends Component {
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     inlineStyle: PropTypes.object,
     name: PropTypes.string, // name of the model field: attributes[avatar]
-    layout: PropTypes.oneOf(["square", "portrait", "landscape", "embed"]),
+    layout: PropTypes.oneOf([
+      "square",
+      "portrait",
+      "landscape",
+      "horizontal",
+      "embed"
+    ]),
     placeholder: PropTypes.string, // Allows override of placeholder graphic
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
     accepts: PropTypes.string,
@@ -55,6 +61,10 @@ export class FormUpload extends Component {
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
         "application/msword,text/*",
       extensions: "doc docx txt"
+    },
+    csv: {
+      accepts: "text/plain, text/csv",
+      extensions: "txt csv"
     },
     spreadsheet: {
       accepts:
@@ -146,7 +156,11 @@ export class FormUpload extends Component {
   }
 
   showInitialValue(props, state) {
-    return !state.removed && isString(props.initialValue);
+    return (
+      !state.removed &&
+      isString(props.initialValue) &&
+      props.initialValue !== ""
+    );
   }
 
   previewFile(props, state) {
@@ -219,7 +233,7 @@ export class FormUpload extends Component {
         <div className="message">
           <p className="primary">
             <span className="fake-link">{"Upload a file"}</span>
-            {" or"}
+            {" or "}
             <br />
             {"drag and drop here"}
             <br />

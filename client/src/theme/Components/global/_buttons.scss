@@ -191,7 +191,17 @@
     font-size: 0.778em;
   }
 
-  .manicon-check.small, .manicon-x.small, .manicon-arrow-right.small {
+  .manicon-cube-multiple {
+    display: inline-block;
+    margin-right: 0.85em;
+    font-size: 1.2em;
+    vertical-align: middle;
+  }
+
+  .manicon-check.small,
+  .manicon-x.small,
+  .manicon-arrow-right.small,
+  .manicon-arrow-left.small {
     margin-right: 16px;
     font-size: 12px;
 
@@ -210,6 +220,10 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 35px;
+
+  &.right {
+    justify-content: flex-end;
+  }
 
   &.maintain {
     flex-wrap: nowrap;

@@ -28,3 +28,4 @@ export permissionsAPI from "./resources/permissions";
 export requests from "./requests";
 export ApiClient from "./client";
 export notifications from "./notifications";
+export resourceImportsAPI from "./resources/resourceImports";

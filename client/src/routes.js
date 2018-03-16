@@ -67,6 +67,45 @@ export default () => {
           helper: p => `/backend/project/${p}/resources/new`
         },
         {
+          name: "backendResourceImport",
+          exact: false,
+          component: Backend.ResourceImport.Wrapper,
+          path: "/backend/project/:projectId/resource-import/:id?",
+          helper: p => `/backend/project/${p}/resource-import`,
+          routes: [
+            {
+              name: "backendResourceImportNew",
+              exact: true,
+              component: Backend.ResourceImport.New,
+              path: "/backend/project/:projectId/resource-import",
+              helper: p => `/backend/project/${p}/resource-import`
+            },
+            {
+              name: "backendResourceImportEdit",
+              exact: true,
+              component: Backend.ResourceImport.New,
+              path: "/backend/project/:projectId/resource-import/:id",
+              helper: (p, id) => `/backend/project/${p}/resource-import/${id}`
+            },
+            {
+              name: "backendResourceImportMap",
+              exact: true,
+              component: Backend.ResourceImport.Map,
+              path: "/backend/project/:projectId/resource-import/:id/map",
+              helper: (p, id) =>
+                `/backend/project/${p}/resource-import/${id}/map`
+            },
+            {
+              name: "backendResourceImportResults",
+              exact: true,
+              component: Backend.ResourceImport.Results,
+              path: "/backend/project/:projectId/resource-import/:id/results",
+              helper: (p, id) =>
+                `/backend/project/${p}/resource-import/${id}/results`
+            }
+          ]
+        },
+        {
           name: "backendProjectCollectionsNew",
           exact: true,
           component: Backend.Collection.New,
