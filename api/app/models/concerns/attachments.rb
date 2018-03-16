@@ -191,6 +191,7 @@ module Attachments
         end
   
         def can_process_#{field}_styles?
+          return false if Rails.env.test?
           return false if #{field}.size > 200000000
           (#{field}_is_image? || #{field}_is_pdf?)
         end
