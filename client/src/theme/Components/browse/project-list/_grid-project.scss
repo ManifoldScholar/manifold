@@ -155,7 +155,7 @@
     }
 
     .block-label {
-      @include blockLabel;
+      @include blockLabelRound;
       margin-bottom: 5px;
     }
 

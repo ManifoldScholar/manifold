@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
-export default class SearchNoResults extends PureComponent {
-  static displayName = "Search.NoResults";
+export default class SearchResultsEmpty extends PureComponent {
+  static displayName = "Search.Results.Empty";
 
   static propTypes = {};
 

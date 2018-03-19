@@ -3,6 +3,8 @@ require "memoist"
 # A single Text
 class Text < ApplicationRecord
 
+  TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
+
   # Authorization
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
@@ -82,6 +84,42 @@ class Text < ApplicationRecord
 
   # Callbacks
   after_commit :trigger_text_added_event, on: [:create, :update]
+
+  # Search
+  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
+             callbacks: :async,
+             batch_size: 500,
+             highlight: [:title, :body])
+
+  scope :search_import, lambda {
+    includes(
+      :makers,
+      :project,
+      :category,
+      :titles
+    )
+  }
+
+  # During ingestion, texts can be created before they're added to a project.
+  # We don't want to index those orphaned texts.
+  def should_index?
+    project.present?
+  end
+
+  def search_data
+    {
+      title: title,
+      body: description,
+      project_id: project.id,
+      title_values: titles.map(&:value),
+      project_title: project.title,
+      makers: makers.map(&:name)
+    }.merge(search_hidden)
+  end
+
+  def search_hidden
+    project.present? ? project.search_hidden : { hidden: true }
+  end
 
   def title
     main_title = if association(:titles).loaded?

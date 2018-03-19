@@ -1,7 +1,7 @@
 # The User model
 class User < ApplicationRecord
   # Constants
-  TYPEAHEAD_ATTRIBUTES = [:email, :first_name, :last_name].freeze
+  TYPEAHEAD_ATTRIBUTES = [:title, :full_name, :first_name, :last_name].freeze
 
   # Concerns
   include Authority::Abilities
@@ -13,29 +13,24 @@ class User < ApplicationRecord
   include Attachments
   include WithParsedName
 
-  # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
-
   # Rolify
   rolify
   attr_reader :pending_role
 
   # Associations
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
-
-  has_many :annotations # TODO: refactor to use "creator_id"
-  has_many :favorites # Todo: refactor to use "creator_id"
+  has_many :annotations, foreign_key: "creator_id", dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_many :favorite_projects, through: :favorites, source: :favoritable,
                                source_type: "Project"
   has_many :favorite_texts, through: :favorites, source: :favoritable,
                             source_type: "Text"
-
   has_many :created_texts, class_name: "Text", foreign_key: "creator_id"
   has_many :created_projects, class_name: "Project", foreign_key: "creator_id"
   has_many :created_resources, class_name: "Resource", foreign_key: "creator_id"
   has_many :created_pages, class_name: "Page", foreign_key: "creator_id"
   has_many :created_flags, class_name: "Flag", foreign_key: "creator_id"
-  has_many :permissions
+  has_many :permissions, dependent: :destroy
 
   # Validation
   validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
@@ -69,6 +64,19 @@ class User < ApplicationRecord
   scope :by_role, lambda { |role|
     with_role role.to_sym if role.present?
   }
+
+  # Search
+  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
+
+  def search_data
+    {
+      title: email,
+      first_name: first_name,
+      last_name: last_name,
+      full_name: full_name,
+      hidden: true
+    }
+  end
 
   # Creates user.role_name? methods for all roles
   Role::GLOBAL_ROLES.each do |role_name|

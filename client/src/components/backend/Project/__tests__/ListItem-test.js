@@ -6,7 +6,6 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 import { Provider } from "react-redux";
 
 describe("Backend.Project.ListItem component", () => {
-
   const project = build.entity.project("1");
   const store = build.store();
   const currentUser = build.entity.user("1");

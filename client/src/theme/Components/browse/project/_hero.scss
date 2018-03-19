@@ -36,7 +36,7 @@
   // --------------------------------------------------------
   .project-title {
     .block-label {
-      @include blockLabel;
+      @include blockLabelRound;
       position: relative;
       top: -0.272em;
       display: inline;

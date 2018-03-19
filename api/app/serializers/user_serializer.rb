@@ -10,4 +10,5 @@ class UserSerializer < ApplicationSerializer
     object.id == current_user.id
   end
   alias is_current_user current_user?
+
 end

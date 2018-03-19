@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reader.Search.Menu component renders correctly when search is not visible 1`] = `
+<nav
+  className="search-menu"
+>
+  <span />
+</nav>
+`;
+
+exports[`Reader.Search.Menu component renders correctly when search is visible 1`] = `
+<nav
+  className="search-menu"
+>
+  <span>
+    <form
+      className="search-query"
+      onSubmit={[Function]}
+    >
+      <div
+        className="input-magnify"
+      >
+        <input
+          autoFocus={true}
+          onChange={[Function]}
+          placeholder="Search for..."
+          type="text"
+          value=""
+        />
+        <button
+          className="manicon manicon-magnify"
+          type="submit"
+        />
+      </div>
+    </form>
+  </span>
+</nav>
+`;

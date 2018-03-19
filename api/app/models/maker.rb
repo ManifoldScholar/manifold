@@ -11,9 +11,6 @@ class Maker < ApplicationRecord
   include Concerns::SerializedAbilitiesFor
   include WithParsedName
 
-  # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
-
   # Associations
   has_many :collaborators, dependent: :destroy
   has_many :projects,
@@ -26,6 +23,22 @@ class Maker < ApplicationRecord
 
   # Misc
   with_parsed_name :first_name, :middle_name, :last_name, :suffix
+
+  # Search
+  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
+             callbacks: :async,
+             batch_size: 500)
+
+  def search_data
+    {
+      title: full_name,
+      body: full_name,
+      first_name: first_name,
+      middle_name: middle_name,
+      last_name: last_name,
+      hidden: false
+    }
+  end
 
   def to_s
     full_name

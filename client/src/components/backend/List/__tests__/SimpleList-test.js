@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import { wrapWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Resource.Card component", () => {
-
   const projects = [build.entity.project("1"), build.entity.project("2")];
   const currentUser = build.entity.user("1");
   const store = build.store();

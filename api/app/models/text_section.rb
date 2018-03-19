@@ -24,12 +24,10 @@ class TextSection < ApplicationRecord
     )
   end
 
-  # Search
-  searchkick callbacks: :async, batch_size: 100
-
   # Associations
   belongs_to :text, inverse_of: :text_sections
   belongs_to :ingestion_source
+  # We intentionally do not destroy annotations because we want to handle the orphans.
   has_many :annotations
   has_many :searchable_nodes, -> { order(position: :asc) }, dependent: :destroy
   has_many :resources, through: :annotations
@@ -38,7 +36,7 @@ class TextSection < ApplicationRecord
   # Delegation
   delegate :citation_parts, to: :text, prefix: true, allow_nil: true
   delegate :source_path, to: :ingestion_source
-  delegate :project, to: :text
+  delegate :project, to: :text, allow_nil: true
   delegate :metadata, to: :text, allow_nil: true
   delegate :title, to: :text, prefix: true, allow_nil: true
   delegate :creator_names_array, to: :text, prefix: true, allow_nil: true
@@ -48,11 +46,19 @@ class TextSection < ApplicationRecord
   validates :position, numericality: { only_integer: true }
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 
-  # Scopes
-  scope :search_import, -> { includes(text: [:titles, :project]) }
-
   # Callbacks
   after_commit :update_text_index, if: :body_json_changed?
+
+  # Scopes
+  scope :in_texts, lambda { |texts|
+    where(text: texts)
+  }
+
+  # Search
+  searchkick(
+    callbacks: :async,
+    batch_size: 500
+  )
 
   def self.update_text_indexes(logger = Rails.logger)
     count = TextSection.count
@@ -65,11 +71,28 @@ class TextSection < ApplicationRecord
     end
   end
 
+  scope :search_import, lambda {
+    includes(
+      text: [:project, :makers]
+    )
+  }
+
+  def should_index?
+    text.present? && text.should_index?
+  end
+
   def search_data
     {
       title: name,
-      text_id: text_id
-    }
+      text_id: text.id,
+      project_id: text.project_id,
+      text_title: text.title,
+      creator_names: text&.makers&.map(&:full_name)
+    }.merge(search_hidden)
+  end
+
+  def search_hidden
+    text.present? ? text.search_hidden : { hidden: true }
   end
 
   def previous_section

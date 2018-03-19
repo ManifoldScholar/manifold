@@ -15,10 +15,7 @@ class Event < ApplicationRecord
     TEXT_ANNOTATED,
     TWEET
   ].freeze
-  TYPEAHEAD_ATTRIBUTES = [:subject_title].freeze
-
-  # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
+  TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
   # Authority
   include Authority::Abilities
@@ -46,6 +43,27 @@ class Event < ApplicationRecord
 
   # Validation
   validates :event_type, presence: true, inclusion: { in: self::EVENT_TYPES }
+
+  # Search
+  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
+             callbacks: :async,
+             batch_size: 500,
+             highlight: [:title])
+
+  scope :search_import, -> { includes(:project) }
+
+  def search_data
+    {
+      title: subject_title_formatted,
+      body: attribution_name,
+      project_id: project&.id,
+      project_title: project.title
+    }.merge(search_hidden)
+  end
+
+  def search_hidden
+    project.present? ? project.search_hidden : { hidden: true }
+  end
 
   def self.trigger(type, subject)
     CreateEventJob.perform_later(

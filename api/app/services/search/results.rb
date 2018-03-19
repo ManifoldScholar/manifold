@@ -1,5 +1,5 @@
 require "forwardable"
-
+include ActiveSupport::Inflector
 module Search
   # Search::Results wraps raw Searchkick::Results and injects parent record IDs and slugs
   # in an efficient manner. Except for places where it's injecting these values into the
@@ -10,6 +10,15 @@ module Search
   # model instances. If Searchkick is returning raw elastic search results, we can
   # execute a performant query and inject parent slugs needed for link creation.
   class Results
+
+    MODEL_INCLUDES = {
+      "text_section" => { text: { project: :makers } },
+      "project" => [:makers],
+      "resource" => [:project],
+      "collection" => [:project],
+      "annotation" => { text_section: { text: :project } },
+      "searchable_node" => { text_section: { text: :project } }
+    }.freeze
 
     include Enumerable
     extend Forwardable
@@ -45,52 +54,55 @@ module Search
     private
 
     def inject_associations(searchkick_results)
-      text_sections, creators, annotations =
-        fetch_associations(searchkick_results.results)
-      searchkick_results.each do |result|
-        result[:creator] = creators[result[:creator_id]]
-        result[:text_section] = text_sections[result[:text_section_id]]
-        result[:annotation] = annotations[result[:_id]] if result[:_type] == "annotation"
+      models = execute query_plan_for models_in searchkick_results
+      hydrate_results searchkick_results, models
+    end
+
+    def hydrate_results(results, models)
+      results.each do |result|
+        hydrate_model! result, models
+      end
+      results
+    end
+
+    def hydrate_model!(result, models)
+      type, id = result_model_reference(result)
+      result.model = models[type][id] if models.key? type
+    end
+
+    def class_for(type)
+      return User if type == "creator"
+      constantize classify pluralize type
+    end
+
+    def execute(query_plan)
+      query_plan.each_with_object({}) do |(type_of, ids), models|
+        klass = class_for type_of
+        next models unless klass
+        scope = klass.where(id: ids).includes(MODEL_INCLUDES[type_of])
+        models[type_of] = scope.each_with_object({}) do |ts, memo|
+          memo[ts.id] = ts
+          memo
+        end
       end
     end
 
-    def fetch_associations(results)
-      text_sections = fetch_text_sections(results)
-      creators = fetch_creators(results)
-      annotations = fetch_annotations(results)
-      [text_sections, creators, annotations]
-    end
-
-    def fetch_text_sections(results)
-      text_section_ids = collect_association_ids(results, "text_section_id")
-      scope = TextSection.where(id: text_section_ids).includes(text: :project)
-      scope.each_with_object({}) do |ts, memo|
-        memo[ts.id] = ts
-        memo
+    def query_plan_for(models)
+      models.each_with_object({}) do |type_id, plan|
+        type, id = type_id
+        plan[type] = [] unless plan.key? type
+        plan[type] << id unless plan[type].include? id
       end
     end
 
-    def fetch_creators(results)
-      creator_ids = collect_association_ids(results, "creator_id")
-      User.where(id: creator_ids).each_with_object({}) do |c, memo|
-        memo[c.id] = c
-        memo
-      end
+    def result_model_reference(result)
+      result.values_at("_type", "_id")
     end
 
-    def fetch_annotations(results)
-      annotation_ids = results.each_with_object([]) do |result, memo|
-        memo.push result[:_id] if result[:_type] == "annotation"
-        memo
+    def models_in(results)
+      results.hits.each_with_object([]) do |result, models|
+        models << result_model_reference(result)
       end
-      Annotation.where(id: annotation_ids).each_with_object({}) do |a, memo|
-        memo[a.id] = a
-        memo
-      end
-    end
-
-    def collect_association_ids(_results, id_field)
-      @searchkick_results.hits.map { |r| r["_source"][id_field] }.uniq
     end
 
   end

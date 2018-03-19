@@ -53,9 +53,6 @@ class Project < ApplicationRecord
   # URLs
   friendly_id :title, use: :slugged
 
-  # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
-
   # Rolify
   resourcify
 
@@ -94,8 +91,10 @@ class Project < ApplicationRecord
   # rubocop:end Style/Lambda
 
   # Callbacks
-  after_commit :trigger_creation_event, on: [:create]
+  before_save :prepare_to_reindex_children, on: [:update], if: :draft_changed?
   before_save :update_sort_title, if: :title_changed?
+  after_commit :trigger_creation_event, on: [:create]
+  after_commit :queue_reindex_children_job
 
   # Delegations
   delegate :count, to: :collections, prefix: true
@@ -122,8 +121,6 @@ class Project < ApplicationRecord
   manifold_has_attached_file :avatar, :image
 
   # Scopes
-  scope :search_import, -> { includes(:collaborators, :makers) }
-
   scope :by_featured, lambda { |featured|
     next all if featured.nil?
     where(featured: to_boolean(featured))
@@ -151,6 +148,41 @@ class Project < ApplicationRecord
     Project.authorizer.scope_updatable_projects(user)
   }
 
+  # Search
+  scope :search_import, -> {
+    includes(
+      :collaborators,
+      :subjects,
+      :makers,
+      texts: :titles
+    )
+  }
+
+  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
+             callbacks: :async,
+             batch_size: 500,
+             highlight: [:title, :body])
+
+  def search_data
+    {
+      title: title,
+      body: description_plaintext,
+      featured: featured,
+      maker_names: makers.map(&:full_name),
+      text_titles: texts.map(&:title),
+      subject_titles: subjects.map(&:title),
+      hashtag: hashtag,
+      publication_date: publication_date,
+      metadata: metadata
+    }.merge(search_hidden)
+  end
+
+  def search_hidden
+    {
+      hidden: draft?
+    }
+  end
+
   # I believe this is here to allow us to pass `Project` as a scope in our resourceful
   # controllers. See the load_resources_for in the resourceful_methods controller concern.
   # -ZD
@@ -161,15 +193,6 @@ class Project < ApplicationRecord
   def update_sort_title
     return if title.blank?
     self.sort_title = title[/^((a|the|an) )?(?<title>.*)$/i, :title]
-  end
-
-  def search_data
-    {
-      title: title,
-      body: description,
-      makers: makers.map(&:name),
-      project_slug: slug
-    }
   end
 
   def resource_kinds
@@ -201,7 +224,24 @@ class Project < ApplicationRecord
     updated? && updated_at >= Time.current - 1.week
   end
 
+  def reindex_children
+    resources.reindex(:search_hidden, mode: :async)
+    texts.reindex(:search_hidden, mode: :async)
+    TextSection.in_texts(texts).reindex(:search_hidden, mode: :async)
+    SearchableNode.in_texts(texts).reindex(:search_hidden, mode: :async)
+  end
+
   private
+
+  def prepare_to_reindex_children
+    @reindex_children = true
+  end
+
+  def queue_reindex_children_job
+    return unless @reindex_children
+    ProjectJobs::ReindexChildren.perform_later(id)
+    @reindex_children = false
+  end
 
   def trigger_creation_event
     Event.trigger(Event::PROJECT_CREATED, self)

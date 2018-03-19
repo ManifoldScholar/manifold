@@ -137,6 +137,30 @@
 
 @mixin blockLabel {
   @include utilityPrimary;
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 11px;
+  hyphens: none;
+  color: $accentPrimaryDark;
+  text-align: center;
+  background-color: $neutral10;
+
+  &.secondary {
+    color: $sp40Tertiary;
+  }
+
+  &.tertiary {
+    color: $neutral75;
+  }
+
+  + .marker {
+    margin-left: 8px;
+  }
+}
+
+@mixin blockLabelRound {
+  @include utilityPrimary;
   display: inline-block;
   padding: 0.333em 8px;
   font-size: 12px;

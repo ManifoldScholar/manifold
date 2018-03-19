@@ -1,0 +1,15 @@
+.search-results-frontend {
+  padding-bottom: 48px;
+
+  @include respond($break60) {
+    padding-bottom: 80px;
+  }
+
+  @include respond($break75) {
+    padding-bottom: 110px;
+  }
+
+  .search-results {
+    padding-top: 40px;
+  }
+}

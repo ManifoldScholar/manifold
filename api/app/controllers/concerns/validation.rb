@@ -304,7 +304,7 @@ module Validation
     params.permit(filter: [:keyword, :typeahead, :type])[:filter]
   end
 
-  def reader_search_params
+  def search_params
     params[:facets] = params[:facets].values if params.dig(:facets).respond_to? :values
     params.permit(
       :keyword,

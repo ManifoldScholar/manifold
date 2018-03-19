@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
-import { Search } from "components/reader";
-import { Overlay } from "components/global";
+import { Overlay, Search } from "components/global";
 import connectAndFetch from "utils/connectAndFetch";
-import { readerSearchResultsAPI, requests } from "api";
+import { searchResultsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import PropTypes from "prop-types";
@@ -103,7 +102,10 @@ class SearchContainer extends PureComponent {
       params.text = this.textId();
     if (this.state.scope === "section" && this.sectionId())
       params.textSection = this.sectionId();
-    const call = readerSearchResultsAPI.index(params);
+    if (params.facets.includes("All")) {
+      params.facets = this.availableFacetValues();
+    }
+    const call = searchResultsAPI.index(params);
     const { promise: one } = this.props.dispatch(
       request(call, requests.rSearchResults)
     );
@@ -134,6 +136,28 @@ class SearchContainer extends PureComponent {
     return null;
   }
 
+  availableFacetValues() {
+    return this.facets().map(facet => facet.value);
+  }
+
+  facets() {
+    return [
+      { label: "Full Text", value: "SearchableNode" },
+      { label: "Annotations", value: "Annotation" }
+    ];
+  }
+
+  scopes() {
+    const scopes = [
+      { label: "Text", value: "text" },
+      { label: "Project", value: "project" }
+    ];
+    if (this.isSectionSet()) {
+      scopes.unshift({ label: "Chapter", value: "section" });
+    }
+    return scopes;
+  }
+
   render() {
     return (
       <Overlay
@@ -144,18 +168,19 @@ class SearchContainer extends PureComponent {
         contentWidth={850}
       >
         <div>
-          <Search.Query
+          <Search.Query.Form
             initialState={this.searchQueryState()}
-            includeSection={this.isSectionSet()}
-            showFacetFilter
             doSearch={this.doSearch}
             setQueryState={this.setQueryState}
+            facets={this.facets()}
+            scopes={this.scopes()}
           />
           {this.props.results ? (
-            <Search.Results
+            <Search.Results.List
               pagination={this.props.resultsMeta.pagination}
               paginationClickHandler={this.setPage}
               results={this.props.results}
+              context="project"
             />
           ) : null}
         </div>

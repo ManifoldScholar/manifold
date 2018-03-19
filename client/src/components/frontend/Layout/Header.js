@@ -5,7 +5,8 @@ import {
   UserMenuBody,
   UserMenuButton,
   PressLogo,
-  HeaderNotifications
+  HeaderNotifications,
+  Search
 } from "components/global";
 import { Link } from "react-router-dom";
 import startsWith from "lodash/startsWith";
@@ -115,20 +116,24 @@ export default class LayoutHeader extends PureComponent {
               <HigherOrder.Authorize kind="any">
                 {this.renderBackendButton(this.props)}
               </HigherOrder.Authorize>
-              {/*
-                Hiding search markup until functionality is available
-                <li>
-                  <SearchMenuButton
-                    toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
-                    active={this.props.visibility.uiPanels.search}
-                  />
-                  <UIPanel
-                    id="search"
-                    visibility={this.props.visibility.uiPanels}
-                    bodyComponent={SearchMenuBody}
-                  />
-                </li>
-              */}
+              <li>
+                <Search.Menu.Button
+                  toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
+                  active={this.props.visibility.uiPanels.search}
+                />
+                <UIPanel
+                  id="search"
+                  toggleVisibility={this.props.commonActions.toggleSearchPanel}
+                  visibility={this.props.visibility.uiPanels}
+                  bodyComponent={Search.Menu.Body}
+                  searchType="frontend"
+                  initialState={{
+                    keyword: "",
+                    facets: ["Project", "Resource", "Text"]
+                  }}
+                  description="Search accross all content and projects"
+                />
+              </li>
               <li>
                 <UserMenuButton
                   authentication={this.props.authentication}

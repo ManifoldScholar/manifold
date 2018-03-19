@@ -301,7 +301,7 @@
       }
 
       .block-label {
-        @include blockLabel;
+        @include blockLabelRound;
         position: relative;
         display: inline;
         padding: 0.333em 5px;

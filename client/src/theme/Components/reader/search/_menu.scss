@@ -9,12 +9,28 @@
 
 .search-menu {
   width: 100vw;
-  padding: 28px 22px 22px;
   background-color: $neutral10;
 
-  @include respond($break40) {
-    padding: 32px 30px 19px;
+  .header-app & {
+    padding: 28px 22px 22px;
+
+    @include respond($break40) {
+      padding: 20px 24px 22px;
+    }
   }
+
+  .header-reader & {
+    padding: 23px 18px 12px;
+
+    @include respond($break40) {
+      padding: 28px 22px 16px;
+    }
+
+    @include respond($break60) {
+      padding: 32px 30px 19px;
+    }
+  }
+
 
   @include respond($break70) {
     width: auto;
