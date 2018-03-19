@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Button from "../Button";
+import Button from "../Menu/Button";
 
 describe("Reader.Search.Button component", () => {
   it("renders correctly when inactive", () => {

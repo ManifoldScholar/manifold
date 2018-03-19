@@ -6,9 +6,6 @@ class Collection < ApplicationRecord
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
-  # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
-
   # Concerns
   include Filterable
   include Attachments
@@ -35,6 +32,27 @@ class Collection < ApplicationRecord
 
   # Validations
   validates :title, presence: true
+
+  # Search
+  searchkick(callbacks: :async,
+             batch_size: 500,
+             word_start: TYPEAHEAD_ATTRIBUTES,
+             highlight: [:title, :body])
+
+  scope :search_import, -> { includes(:project) }
+
+  def search_data
+    {
+      title: title,
+      body: description,
+      project_id: project&.id,
+      project_title: project.title
+    }.merge(search_hidden)
+  end
+
+  def search_hidden
+    project.present? ? project.search_hidden : { hidden: true }
+  end
 
   def resource_kinds
     resources

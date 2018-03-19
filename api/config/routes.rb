@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       resources :ingestions, only: [:show, :update]
       resources :stylesheets, only: [:show, :update, :destroy]
       resources :events, only: [:destroy]
-      resources :reader_search_results, only: [:index]
+      resources :search_results, only: [:index]
       resource :statistics, only: [:show]
       resource :settings, except: [:destroy, :create]
 

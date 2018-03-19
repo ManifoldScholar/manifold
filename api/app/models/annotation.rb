@@ -74,23 +74,31 @@ class Annotation < ApplicationRecord
   validates :body, presence: true, if: :annotation?
 
   # Delegations
-  delegate :text, to: :text_section
-  delegate :project, to: :text
+  delegate :text, to: :text_section, allow_nil: true
+  delegate :project, to: :text, allow_nil: true
 
   # Search
-  searchkick callbacks: :async, batch_size: 500, highlight: [:body]
+  searchkick(callbacks: :async,
+             batch_size: 500,
+             highlight: [:title, :body])
+
+  scope :search_import, -> { includes(:creator, text_section: { text: :project }) }
 
   def search_data
     {
+      title: subject,
       body: body,
-      node_uuid: start_node,
-      creator_id: creator_id,
-      text_section_id: text_section_id
+      text_section_id: text_section&.id,
+      project_id: project&.id,
+      text_id: text&.id,
+      author_name: creator&.full_name,
+      text_title: text&.title,
+      hidden: false
     }
   end
 
   def should_index?
-    !private
+    !(private || project&.draft? || format != "annotation")
   end
 
   def to_s

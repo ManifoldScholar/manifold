@@ -4,9 +4,17 @@
   left: 0;
   width: 100%;
   height: 100%;
-  padding-bottom: 100px;
+  padding-bottom: 48px;
   overflow: auto;
   -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  @include respond($break60) {
+    padding-bottom: 80px;
+  }
+
+  @include respond($break75) {
+    padding-bottom: 110px;
+  }
 
   // Background default
   &:not([class*="bg-"]) {

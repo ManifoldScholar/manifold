@@ -71,26 +71,6 @@
   }
 
   .marker {
-    @include utilityPrimary;
-    display: flex;
-    align-items: center;
-    padding: 8px 14px;
-    font-size: 11px;
-    hyphens: none;
-    color: $accentPrimaryDark;
-    text-align: center;
-    background-color: $neutral10;
-
-    &.secondary {
-      color: $sp40Tertiary;
-    }
-
-    &.tertiary {
-      color: $neutral75;
-    }
-
-    + .marker {
-      margin-left: 8px;
-    }
+    @include blockLabel;
   }
 }

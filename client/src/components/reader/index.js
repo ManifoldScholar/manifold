@@ -11,4 +11,3 @@ export TextTitles from "./TextTitles";
 export Toc from "./Toc";
 export TextMeta from "./TextMeta";
 export ControlMenu from "./ControlMenu";
-export Search from "./Search";

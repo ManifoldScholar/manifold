@@ -2,15 +2,12 @@
 class Subject < ApplicationRecord
 
   # Constants
-  TYPEAHEAD_ATTRIBUTES = [:name].freeze
+  TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
   # Authority
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
   include Filterable
-
-  # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   # Associations
   has_many :text_subjects
@@ -30,6 +27,20 @@ class Subject < ApplicationRecord
 
   # Validations
   validates :name, presence: true, uniqueness: true
+
+  alias_attribute :title, :name
+
+  # Search
+  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
+             callbacks: :async,
+             batch_size: 500)
+
+  def search_data
+    {
+      title: title,
+      hidden: false
+    }
+  end
 
   def to_s
     title

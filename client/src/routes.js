@@ -645,6 +645,13 @@ export default () => {
           helper: () => "/featured"
         },
         {
+          name: "frontendSearch",
+          exact: true,
+          component: Frontend.Search,
+          path: "/search",
+          helper: () => `/search`
+        },
+        {
           exact: true,
           component: Frontend.PasswordReset,
           path: "/reset-password/:resetToken"

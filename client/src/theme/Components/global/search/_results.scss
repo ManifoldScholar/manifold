@@ -1,0 +1,220 @@
+.search-results {
+  @mixin resultSubtitle() {
+    @include templateCopy;
+    font-size: 16px;
+  }
+
+  @mixin resultTextTitle() {
+    font-size: 16px;
+    font-weight: $regular;
+
+    @include respond($break70) {
+      font-size: 18px;
+    }
+  }
+
+  @mixin resultTitleSmall() {
+    @include templateHead;
+    font-size: 15px;
+    font-weight: $semibold;
+  }
+
+  .search-query + & {
+    margin-top: 65px;
+  }
+
+  .label-count {
+    @include utilityPrimary;
+    display: block;
+    padding-bottom: 10px;
+    font-size: 13px;
+    font-weight: $semibold;
+    color: $neutral80;
+    text-transform: uppercase;
+    border-bottom: 1px solid $neutral40;
+
+    @include respond($break40) {
+      font-size: 14px;
+    }
+
+    .count {
+      font-size: 22px;
+      font-weight: $regular;
+
+      @include respond($break40) {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .results {
+    @include listUnstyled;
+
+    & + .list-pagination-primary {
+      margin-top: 65px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    // Shared result styles
+    // <a>
+    .result {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 28px 14px;
+      font-weight: $light;
+      color: $neutral80;
+      background-color: $neutralWhite;
+      border-bottom: 1px solid $neutral40;
+      transition: background-color $durationSlow $timing;
+
+      @include respond($break75) {
+        flex-wrap: nowrap;
+      }
+
+      @include respond($break70) {
+        padding: 28px 20px;
+      }
+
+      &:hover {
+        background-color: $neutral05;
+      }
+
+      .title {
+        @include templateHead;
+        margin: 0 0 8px;
+        color: $neutralOffBlack;
+        font-size: 15px;
+        font-weight: $semibold;
+
+        @include respond($break70) {
+          font-size: 18px;
+        }
+      }
+
+      .highlights {
+
+      }
+
+      .title-parent {
+        color: $neutral70;
+      }
+
+      .subtitle {
+        @include resultSubtitle;
+        margin: 0;
+
+        @include respond($break70) {
+          font-size: 16px;
+        }
+      }
+
+
+      .image {
+        margin-right: 12px;
+        min-width: 50px;
+        max-width: 50px;
+
+        @include respond($break65) {
+          margin-right: 20px;
+          width: 7.813vw;
+          max-width: 7.813vw;
+        }
+
+        @include respond($break90) {
+          min-width: 75px;
+          max-width: 75px;
+        }
+
+        img, svg {
+          max-width: 100%;
+          height: auto;
+        }
+
+        + .body {
+          width: calc(100% - 50px - 12px);
+
+
+          @include respond($break65) {
+            max-width: calc(100% - 7.813vw - 20px);
+          }
+        }
+      }
+
+      .body {
+        @include templateCopy;
+        flex-grow: 2;
+        width: 100%;
+
+        @include respond($break65) {
+          width: auto;
+        }
+      }
+
+      .date {
+        @include resultSubtitle();
+        font-style: italic;
+      }
+
+      .marker {
+        @include blockLabel;
+        white-space: nowrap;
+        margin-top: 16px;
+
+        @include respond($break75) {
+          margin-top: 0;
+          margin-left: 25px;
+        }
+      }
+
+      .excerpt {
+        margin-bottom: 8px;
+      }
+
+      .with-highlights {
+        .highlight {
+          background-color: $sp30Secondary;
+        }
+      }
+    }
+  }
+
+  .result-project {
+    .makers {
+      @include listUnstyled;
+      margin: 0 0 8px;
+
+      li {
+        @include templateCopy;
+        display: inline;
+
+        &::after {
+          content: ', ',
+        }
+
+        &:last-child::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .result-text {
+    .result {
+      display: flex;
+    }
+
+    .image svg {
+      fill: $neutral40;
+    }
+  }
+
+  .result-annotation {
+    .result {
+      display: block;
+    }
+  }
+}

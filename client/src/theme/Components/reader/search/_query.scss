@@ -1,11 +1,10 @@
 .search-query {
-
   // Input defaults
   input[type='text'] {
     @include templateHead;
     width: 100%;
-    padding: 13px 25px 14px;
-    font-size: $type50;
+    padding: 0.444em 0.889em 0.444em;
+    font-size: 16px;
     color: $neutralOffBlack;
     background-color: $neutral05;
     border: 3px solid transparent;
@@ -17,7 +16,7 @@
     }
 
     @include respond($break70) {
-      font-size: $type70;
+      font-size: 18px;
     }
   }
 
@@ -27,19 +26,20 @@
     width: 100%;
 
     @include respond($break40) {
-      min-width: 300px;
+      min-width: 380px;
     }
 
     input {
-      padding-left: 54px;
+      padding-left: 46px;
     }
 
     // Can be button or a simple icon
     .manicon-magnify {
       @include buttonUnstyled;
       position: absolute;
-      top: 25px;
-      left: 23px;
+      top: 50%;
+      left: 13px;
+      margin-top: -0.5em;
       font-size: 18px;
       color: $neutral50;
     }
@@ -51,10 +51,6 @@
 
   .filters {
     padding-top: 20px;
-
-    .filter + .filter {
-      margin-top: 40px;
-    }
 
     label {
       @include utilityPrimary;
@@ -79,41 +75,48 @@
           border-bottom: none;
         }
       }
-
-
     }
 
     .checkbox-group {
-      display: block;
-      white-space: normal;
+      display: flex;
+      flex-wrap: wrap;
 
       .search-menu & {
         padding-top: 8px;
+        padding-left: 0;
       }
 
       @include respond($break70) {
-        display: inline-block;
-        white-space: nowrap;
-
         .search-menu & {
-          padding-left: 32px;
+          padding-left: 0;
         }
       }
     }
 
-    .checkbox {
+    .group-label {
       position: relative;
       display: block;
-      margin-right: 20px;
+      margin-right: 36px;
+      padding-top: 2px;
+      margin-bottom: 10px;
+    }
+
+    .checkbox {
+      width: 100%;
+      position: relative;
+      display: block;
+      margin-right: 36px;
       margin-bottom: 10px;
       cursor: pointer;
 
-      @include respond($break20) {
-        display: inline-block;
+      @include respond($break50) {
+        width: auto;
+        margin-bottom: 14px;
       }
 
       @include respond($break70) {
-        margin-right: 32px;
+        margin-right: 62px;
+        margin-bottom: 14px;
       }
 
       .control-indicator {
@@ -149,7 +152,31 @@
           visibility: visible;
         }
       }
+
+      + .checkbox {
+        margin-left: 0;
+      }
+    }
+
+    + .filters {
+      padding-top: 40px;
     }
   }
 
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 11px;
+
+    .description {
+      @include templateCopy;
+      font-size: 14px;
+      font-style: italic;
+      color: $neutral80;
+    }
+
+    .button-primary {
+      font-size: 15px;
+    }
+  }
 }

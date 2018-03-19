@@ -1,7 +1,7 @@
 export default {
   index(params) {
     return {
-      endpoint: "/api/v1/reader_search_results",
+      endpoint: "/api/v1/search_results",
       method: "GET",
       options: { params }
     };

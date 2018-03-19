@@ -7,9 +7,6 @@ class Resource < ApplicationRecord
                      interactive).freeze
   ALLOWED_SUB_KINDS = %w(external_video).freeze
 
-  # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
-
   # PaperTrail
   has_paper_trail on: [:update],
                   meta: {
@@ -116,6 +113,35 @@ class Resource < ApplicationRecord
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_create :resource_to_event
 
+  # Search
+  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
+             callbacks: :async,
+             batch_size: 500,
+             highlight: [:title, :body])
+
+  scope :search_import, lambda {
+    includes(:collections, :project)
+  }
+
+  def search_data
+    {
+      title: title_plaintext,
+      body: description_plaintext,
+      collection_titles: collections.map(&:title),
+      project_id: project&.id,
+      project_titles: project.title,
+      kind: kind,
+      sub_kind: sub_kind,
+      metadata: metadata,
+      caption: caption,
+      attachment_file_name: attachment_file_name
+    }.merge(search_hidden)
+  end
+
+  def search_hidden
+    project.present? ? project.search_hidden : { hidden: true }
+  end
+
   # Create a new project event for the new resource
   def resource_to_event
     factory = Factory::Event.new
@@ -187,17 +213,6 @@ class Resource < ApplicationRecord
   # -ZD
   def self.call
     all
-  end
-
-  def search_data
-    {
-      title: title,
-      project_id: project_id,
-      body: description,
-      kind: kind,
-      caption: caption,
-      attachment_file_name: attachment_file_name
-    }
   end
 
   def to_s

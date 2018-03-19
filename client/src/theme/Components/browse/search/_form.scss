@@ -1,0 +1,42 @@
+// Can be abstracted for other wrappers
+.search-form-frontend {
+  padding: 47px 0 35px;
+  background-color: $neutral05;
+
+  header {
+    padding-bottom: 25px;
+
+    .title {
+      @include templateHead;
+      margin: 0;
+      font-size: 24px;
+      font-weight: $regular;
+      color: $neutral75;
+    }
+
+    .subtitle {
+      @include templateCopy;
+      font-size: 14px;
+      font-style: italic;
+      color: $neutral70;
+      margin-top: 0.429em;
+    }
+  }
+
+  .search-query {
+    .manicon-magnify {
+      @include respond($break70) {
+        font-size: 20px;
+      }
+    }
+
+    input[type='text'] {
+      max-width: 615px;
+      background-color: $neutralWhite;
+
+      @include respond($break60) {
+        padding: 0.722em 1.111em 0.889em 47px;
+      }
+    }
+  }
+}

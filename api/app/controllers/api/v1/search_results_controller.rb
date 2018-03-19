@@ -1,24 +1,27 @@
 module Api
   module V1
-    # ReaderSearchResultsController
-    class ReaderSearchResultsController < ApplicationController
+    # SearchResultsController
+    class SearchResultsController < ApplicationController
 
       def index
-        outcome = Search::Reader.run(search_options)
+        outcome = Search::Query.run(search_options)
         if outcome.valid?
-          serializer = reader_search_params[:raw] ? nil : ReaderSearchResultSerializer
+          serializer = search_params[:raw] ? nil : SearchResultSerializer
           render json: outcome.result,
                  each_serializer: serializer,
-                 include: [:creator, :text_section, :annotation],
-                 meta: { pagination: pagination_dict(outcome.result) }
+                 include: [model: [:creators, :creator]],
+                 meta: {
+                   keyword: search_options.dig(:keyword),
+                   pagination: pagination_dict(outcome.result)
+                 }
         else
-          render_error(outcome)
+          render_error outcome
         end
       end
 
       private
 
-      def render_error
+      def render_error(outcome)
         options = {
           status: 500,
           title: "Manifold encountered an error",
@@ -28,7 +31,7 @@ module Api
       end
 
       def search_options
-        valid_params = reader_search_params
+        valid_params = search_params
         {
           keyword: valid_params[:keyword],
           page_number: valid_params.dig(:page, :number),

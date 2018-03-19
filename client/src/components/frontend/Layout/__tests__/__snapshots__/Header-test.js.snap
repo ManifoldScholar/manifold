@@ -49,6 +49,31 @@ exports[`Frontend.Layout.Header component renders correctly 1`] = `
       <ul>
         <li>
           <button
+            className="button-search"
+            data-id="toggle-menu"
+            onClick={[Function]}
+          >
+            <i
+              className="manicon manicon-magnify"
+            />
+            <span
+              className="screen-reader-text"
+            >
+              Click to open search
+            </span>
+          </button>
+          <div
+            className="panel-hidden"
+          >
+            <nav
+              className="search-menu"
+            >
+              <span />
+            </nav>
+          </div>
+        </li>
+        <li>
+          <button
             className="button-avatar"
             onClick={[Function]}
           >

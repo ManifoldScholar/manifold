@@ -11,6 +11,7 @@ import ProjectResources from "./ProjectResources";
 import Page from "./Page";
 import ResourceDetail from "./ResourceDetail";
 import EventList from "./EventList";
+import Search from "./Search";
 
 export {
   CollectionDetail,
@@ -25,5 +26,6 @@ export {
   ProjectResources,
   Page,
   ResourceDetail,
-  EventList
+  EventList,
+  Search
 };
