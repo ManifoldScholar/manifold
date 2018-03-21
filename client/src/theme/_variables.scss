@@ -116,8 +116,7 @@ $containerWidthInner: $containerWidthFull - ($containerPaddingFull * 2);
 $containerWidthFocus: 680px; // Narrow container width for reading
 $containerPaddingMin: 15px; // Minimum gutter padding
 
-$readerHeaderHeightMin: 55px;
-$readerHeaderHeightMax: 63px;
+$readerHeaderHeight: 47px;
 
 // Font Weights
 // These are convenience variables to keep font weight declarations consistent

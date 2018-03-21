@@ -2,7 +2,7 @@
 
 exports[`NextSection component renders correctly 1`] = `
 <section
-  className="section-next-section"
+  className="section-next-section scheme-light"
 >
   <div
     className="container-focus container-width-undefined"

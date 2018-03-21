@@ -91,12 +91,20 @@ export default class Header extends Component {
   };
 
   render() {
+    const colors = this.props.appearance.colors;
+
+    // Conditional header class to apply color scheme
+    const headerClass = classNames('header-reader', {
+      'scheme-light': colors.colorScheme === 'light',
+      'scheme-dark': colors.colorScheme === 'dark'
+    });
+
     const containerClass = classNames("container-banner", {
       border: this.props.scrollAware && !this.props.scrollAware.top
     });
 
     return (
-      <header className="header-reader">
+      <header className={headerClass}>
         <nav className={containerClass}>
           <ReturnMenu.Button
             toggleReaderMenu={this.panelToggleHandler("readerReturn")}
