@@ -158,7 +158,7 @@ export class SectionContainer extends Component {
 
   render() {
     if (!this.props.section || !this.props.text) return null;
-    const { text, section, settings } = this.props;
+    const { text, section, settings, appearance } = this.props;
     const { project } = text.relationships;
     const projectImage = project ? project.attributes.heroStyles.medium : null;
     const textTitle = text.attributes.title;
@@ -195,6 +195,7 @@ export class SectionContainer extends Component {
             text={text}
             sectionId={this.props.section.id}
             typography={this.props.appearance.typography}
+            colors={appearance.colors}
           />
           <Section.Pagination
             text={text}

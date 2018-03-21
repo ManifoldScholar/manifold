@@ -1,4 +1,14 @@
 .section-next-section {
+  transition: background-color $duration $timing;
+
+  &.scheme-dark {
+    background-color: $neutral90;
+
+    h3 {
+      color: $neutral20;
+    }
+  }
+
   a {
     display: block;
     padding: 0 0 50px;

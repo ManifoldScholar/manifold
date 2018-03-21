@@ -3,11 +3,36 @@
   top: 0;
   width: 100%;
 
+  &.scheme-dark {
+    .container-banner {
+      background-color: $neutral100;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    .button-menu {
+      background-color: $neutral100;
+      color: $neutral40;
+    }
+
+    .button-index {
+      background-color: $neutral95;
+      color: $neutral20;
+    }
+
+    .menu-buttons ul li button.button-active {
+      background-color: $neutral90;
+    }
+  }
+
   .container-banner {
     @include clearfix;
     position: relative;
     height: 47px;
     background-color: $neutralWhite;
+    transition: background-color $duration $timing;
 
     &::after {
       display: block;
@@ -17,10 +42,6 @@
       background-color: $neutral50;
       opacity: 1; // Let's make the border permanently visible --ZD
       transition: opacity $duration $timing;
-    }
-
-    &.border::after {
-      opacity: 1;
     }
   }
 
@@ -57,7 +78,8 @@
     font-weight: $semibold;
     color: $neutral70;
     background-color: $neutral05;
-    transition: color $duration $timing background-color $duration $timing;
+    transition: color $duration $timing,
+      background-color $duration $timing;
 
     @include respond($break50) {
     }
@@ -257,9 +279,5 @@
 
 // Header bump
 .reader main {
-  padding-top: $readerHeaderHeightMin;
-
-  @include respond($break50) {
-    padding-top: $readerHeaderHeightMax;
-  }
+  padding-top: $readerHeaderHeight;
 }
