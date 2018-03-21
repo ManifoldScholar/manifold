@@ -5,36 +5,85 @@ import humps from "humps";
 export default class MetaList extends Component {
   static displayName = "MetaList";
 
+  constructor() {
+    super();
+
+    this.state = {
+      long: {},
+      short: {}
+    }
+  }
+
   static propTypes = {
-    metadata: PropTypes.object,
-    alphabetize: PropTypes.bool
+    metadata: PropTypes.object
   };
 
-  static defaultProps = {
-    alphabetize: true
-  };
+  componentDidMount() {
+    this.separateMetaByLength(this.props.metadata);
+  }
+
+  componentDidUpdate(prev) {
+    if (prev.metadata !== this.props.metadata) {
+      this.separateMetaByLength(this.props.metadata);
+    }
+  }
+
+  separateMetaByLength(metadata) {
+    const long = {};
+    const short = {};
+
+    Object.keys(metadata).forEach((key) => {
+      const value = metadata[key];
+      if (value.length > 280) {
+        long[key] = value;
+      } else {
+        short[key] = value;
+      }
+    });
+
+    this.setState({
+      long: Object.assign({}, long),
+      short: Object.assign({}, short)
+    });
+  }
 
   render() {
-    const keys = this.alphabetize
-      ? Object.keys(this.props.metadata).sort()
-      : Object.keys(this.props.metadata);
+    const { long, short } = this.state;
+    const shortKeys = Object.keys(short).sort();
 
     return (
-      <ul className="meta-list-primary">
-        {keys.sort().map(key => {
-          return (
-            <li key={key}>
-              <span className="meta-label">
-                {humps.decamelize(key, { separator: " " })}
-              </span>
-              <div
-                className="meta-value"
-                dangerouslySetInnerHTML={{ __html: this.props.metadata[key] }}
-              />
-            </li>
-          );
-        })}
-      </ul>
+      <div>
+        <ul className="meta-list-primary">
+          {Object.keys(long).map((key) => {
+            return(
+              <li key={key}>
+                <span className="meta-label">
+                  {humps.decamelize(key, { separator: " " })}
+                </span>
+                <div
+                  className="meta-value"
+                  dangerouslySetInnerHTML={{ __html: long[key] }}
+                  />
+              </li>
+            );
+          })}
+        </ul>
+        <ul className="meta-list-primary columnar">
+          {shortKeys.map(key => {
+            return (
+              <li key={key}>
+                <span className="meta-label">
+                  {humps.decamelize(key, { separator: " " })}
+                </span>
+                <div
+                  className="meta-value"
+                  dangerouslySetInnerHTML={{ __html: short[key] }}
+                  />
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     );
   }
 }
