@@ -278,9 +278,11 @@ export class ResourceImportResults extends PureComponent {
                             </div>
                           ) : null}
                         </div>
-                        <div className="results-secondary">
-                          <span>{r.resourceKind}</span>
-                        </div>
+                        {r.resourceKind ?
+                          <div className="results-secondary">
+                            <span>{r.resourceKind}</span>
+                          </div> : null
+                        }
                       </li>
                     );
                   })}

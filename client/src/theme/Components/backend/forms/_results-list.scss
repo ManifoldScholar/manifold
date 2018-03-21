@@ -5,13 +5,17 @@
     @include listUnstyled;
 
     li {
-      display: table;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: flext-start;
       width: 100%;
-      padding: 10px 0;
+      padding: 10px 0 14px;
       color: $neutral40;
 
       @include respond($break60) {
-        padding: 17px 0 9px;
+        flex-direction: row;
+        align-items: center;
       }
 
       + li {
@@ -49,17 +53,22 @@
           color: $accentPrimaryDull;
         }
       }
+    }
 
+    .results-body {
+      order: 1;
+
+      @include respond($break60) {
+        order: 0;
+      }
     }
 
     .results-header {
       @include formInputPrimary;
-      display: table-cell;
       width: 100%;
       margin: 0;
       font-size: 18px;
       line-height: 29px;
-      vertical-align: middle;
 
       @include respond($break60) {
         font-size: 20px;
@@ -86,11 +95,23 @@
 
     .results-secondary {
       @include utilityPrimary;
-      display: table-cell;
+      order: 0;
+      font-size: 14px;
       color: $neutral70;
-      text-align: right;
       white-space: nowrap;
       vertical-align: middle;
+      margin-bottom: 2px; // NP
+
+      @include respond($break60) {
+        order: 1;
+        margin-bottom: 0;
+        margin-left: 12px;
+        text-align: right;
+      }
+
+      @include respond($break65) {
+        font-size: 16px;
+      }
 
       a {
         color: $neutral50;
