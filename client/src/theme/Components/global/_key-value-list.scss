@@ -38,17 +38,25 @@
 .meta-list-primary {
   @include listUnstyled;
 
-  @include respond($break60) {
-    column-gap: 10.2vw;
-    columns: 2;
+  &.columnar {
+    @include respond($break60) {
+      column-gap: 10.2vw;
+      columns: 2;
+    }
+
+    @include respond($break75) {
+      column-gap: 30px;
+    }
+
+    @include respond($break85) {
+      columns: 3;
+    }
   }
 
-  @include respond($break75) {
-    column-gap: 30px;
-  }
-
-  @include respond($break85) {
-    columns: 3;
+  + .meta-list-primary {
+    @include respond($break60) {
+      margin-top: 30px;
+    }
   }
 
   li {
