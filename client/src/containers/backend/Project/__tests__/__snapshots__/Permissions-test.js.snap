@@ -2,7 +2,7 @@
 
 exports[`Backend Project Permissions Container renders correctly 1`] = `
 <section>
-  <withRouter(Connect(PermissionContainer))
+  <withRouter(Connect(HigherOrder.FetchData('PermissionContainer)))
     entity={
       Object {
         "attributes": Object {

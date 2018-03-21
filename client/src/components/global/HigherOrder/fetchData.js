@@ -68,7 +68,7 @@ export default function fetchData(WrappedComponent) {
       }
     }
 
-    fetchData(props) {
+    fetchData = props => {
       if (!this.canFetchData(props)) return;
       const result = WrappedComponent.fetchData(
         this.context.store.getState,
@@ -78,7 +78,7 @@ export default function fetchData(WrappedComponent) {
       );
       this.addFetchResultToStaticContext(result);
       this.log(props);
-    }
+    };
 
     canFetchData(propsIgnored) {
       if (!isFunction(WrappedComponent.fetchData)) return false;
@@ -86,7 +86,9 @@ export default function fetchData(WrappedComponent) {
     }
 
     render() {
-      const props = Object.assign({}, this.props);
+      const props = Object.assign({}, this.props, {
+        fetchData: this.fetchData
+      });
       return React.createElement(WrappedComponent, props);
     }
   }
