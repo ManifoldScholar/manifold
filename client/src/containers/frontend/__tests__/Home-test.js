@@ -31,6 +31,7 @@ describe("Frontend Home Container", () => {
           authentication={authentication}
           featuredProjects={featuredProjects}
           followedProjects={followedProjects}
+          fetchData={jest.fn()}
         />
       </Provider>
     )

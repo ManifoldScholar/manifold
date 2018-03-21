@@ -216,6 +216,17 @@ function handleFlush(state, action) {
   return Object.assign({}, state, { responses, entities });
 }
 
+function flushAll(state, actionIgnored) {
+  return Object.assign({}, initialState, {
+    responses: {
+      settings: state.responses.settings
+    },
+    entities: {
+      settings: state.entities.settings
+    }
+  });
+}
+
 function handleRemove(state, action) {
   const entity = action.payload.entity;
   const { type, id } = entity;
@@ -260,6 +271,7 @@ export default (state = initialState, action) => {
   if (type === "ENTITY_STORE_REMOVE") return handleRemove(newState, action);
   if (type === "ENTITY_STORE_ADD") return handleAdd(newState, action);
   if (type === "ENTITY_STORE_FLUSH") return handleFlush(newState, action);
+  if (type === "LOGOUT") return flushAll(newState, action);
   if (type.startsWith("API_REQUEST")) return handleRequest(newState, action);
   if (type.startsWith("API_RESPONSE"))
     newState = handleResponse(newState, action);

@@ -68,6 +68,7 @@ export class HomeContainer extends Component {
     location: PropTypes.object,
     history: PropTypes.object,
     dispatch: PropTypes.func,
+    fetchData: PropTypes.func.isRequired,
     subjects: PropTypes.array,
     meta: PropTypes.object
   };
@@ -82,6 +83,12 @@ export class HomeContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (
+      this.props.authentication.currentUser !==
+      nextProps.authentication.currentUser
+    ) {
+      this.props.fetchData(nextProps);
+    }
     if (nextProps.location !== this.props.location) {
       HomeContainer.fetchProjects(nextProps.dispatch, nextProps.location);
     }

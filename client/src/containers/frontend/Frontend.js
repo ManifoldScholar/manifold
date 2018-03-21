@@ -32,6 +32,7 @@ export class FrontendContainer extends Component {
   static propTypes = {
     location: PropTypes.object,
     dispatch: PropTypes.func,
+    fetchData: PropTypes.func,
     authentication: PropTypes.object,
     visibility: PropTypes.object,
     notifications: PropTypes.object,
@@ -53,6 +54,16 @@ export class FrontendContainer extends Component {
 
   componentWillMount() {
     this.commonActions = commonActions(this.props.dispatch);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // The store will be cleared if the user has changed. If this happens, reload content.
+    if (
+      this.props.authentication.currentUser !==
+      nextProps.authentication.currentUser
+    ) {
+      this.props.fetchData(nextProps);
+    }
   }
 
   render() {
