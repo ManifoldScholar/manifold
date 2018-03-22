@@ -18,7 +18,7 @@
       }
 
       &.active a {
-        color: $neutral75;
+        color: $accentPrimaryDull;
       }
     }
 
@@ -39,6 +39,10 @@
     display: inline-block;
     line-height: 14px;
 
+    &.disabled a {
+      pointer-events: none;
+      color: $neutral80;
+    }
 
     .manicon {
       font-size: 14px;
