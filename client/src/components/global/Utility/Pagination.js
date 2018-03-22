@@ -40,9 +40,9 @@ export default class UtilityPagination extends PureComponent {
 
   previous(pagination) {
     const handler = this.props.paginationClickHandler(pagination.prevPage);
-    const style = pagination.prevPage ? {} : { visibility: "hidden" };
+    const disabledClass = pagination.prevPage ? "" : "disabled";
     return (
-      <li style={style} className="pagination-previous" key="previous">
+      <li className={`pagination-previous ${disabledClass}`} key="previous">
         {isString(handler) ? (
           <Link to={handler}>
             <i className="manicon manicon-arrow-long-left" />
@@ -64,9 +64,9 @@ export default class UtilityPagination extends PureComponent {
 
   next(pagination) {
     const handler = this.props.paginationClickHandler(pagination.nextPage);
-    const style = pagination.nextPage ? {} : { visibility: "hidden" };
+    const disabledClass = pagination.nextPage ? "" : "disabled";
     return (
-      <li style={style} className="pagination-next" key="next">
+      <li className={`pagination-next ${disabledClass}`} key="next">
         {isString(handler) ? (
           <Link to={handler}>
             <span>Next</span>
@@ -119,7 +119,7 @@ export default class UtilityPagination extends PureComponent {
 
     const pages = this.visiblePageArray(this.props.pagination);
     const pagination = this.props.pagination;
-    if (pagination.totalPages === 1) return null;
+    if (pagination.totalPages === 1 || pagination.totalPages === 0) return null;
 
     return (
       <nav className="list-pagination-primary">
