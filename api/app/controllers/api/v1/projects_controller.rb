@@ -12,7 +12,7 @@ module Api
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project.filter(
           with_pagination!(project_filter_params),
-          scope: project_scope.with_order.includes(:makers, :creators, :contributors)
+          scope: project_scope.includes(:makers, :creators, :contributors)
         )
       end
 
