@@ -22,6 +22,7 @@ export class HomeContainer extends Component {
   static fetchProjects = (dispatch, location) => {
     const query = queryString.parse(location.search);
     const filters = {
+      order: "sort_title, title",
       featured: query.featured,
       subject: query.subject
     };
