@@ -80,6 +80,7 @@ export default class TextNode extends Component {
       const endNode = a.attributes.endNode;
       const resourceId = a.attributes.resourceId;
       const collectionId = a.attributes.collectionId;
+      const authorCreated = a.attributes.authorCreated;
       return {
         id,
         type,
@@ -89,7 +90,8 @@ export default class TextNode extends Component {
         startNode,
         endNode,
         resourceId,
-        collectionId
+        collectionId,
+        authorCreated
       };
     });
   }
@@ -156,6 +158,7 @@ export default class TextNode extends Component {
       const highlighted = map[index].find(a => a.type === "highlight");
       const underlined = map[index].find(a => a.type === "annotation");
       const isCreator = map[index].find(a => a.isCreator);
+      const authorCreated = map[index].find(a => a.authorCreated);
       const lockedSelection = map[index].find(a => a.type === "selection");
       const notations = map[index].filter(
         a => a.type === "resource" || a.type === "collection"
@@ -173,6 +176,7 @@ export default class TextNode extends Component {
       const classes = classNames({
         primary: isCreator,
         secondary: !isCreator,
+        tertiary: !isCreator && authorCreated,
         "annotation-locked-selected primary": lockedSelection,
         "annotation-underline": underlined,
         "annotation-highlight": highlighted,

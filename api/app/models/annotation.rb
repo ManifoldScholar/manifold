@@ -119,4 +119,8 @@ class Annotation < ApplicationRecord
     true
   end
 
+  def author_created
+    creator.project_author_of? project
+  end
+
 end
