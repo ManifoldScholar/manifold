@@ -260,5 +260,21 @@ export default {
       body: `The selected permissions have been updated.`,
       expiration: defaultExpiration
     };
+  },
+  [r.beStylesheetUpdate]: payload => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `${payload.data.attributes.name} has been updated.`,
+      expiration: defaultExpiration
+    };
+  },
+  [r.beStylesheetCreate]: payload => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `${payload.data.attributes.name} has been created.`,
+      expiration: defaultExpiration
+    };
   }
 };
