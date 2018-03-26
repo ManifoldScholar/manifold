@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
 
 export class SettingsWrapperContainer extends PureComponent {
   static propTypes = {
@@ -13,7 +13,11 @@ export class SettingsWrapperContainer extends PureComponent {
 
   secondaryNavigationLinks() {
     return [
-      { path: lh.link("backendSettings"), label: "General", key: "general" },
+      {
+        path: lh.link("backendSettingsGeneral"),
+        label: "General",
+        key: "general"
+      },
       { path: lh.link("backendSettingsTheme"), label: "Theme", key: "theme" },
       {
         path: lh.link("backendSettingsIntegrations"),
@@ -42,6 +46,11 @@ export class SettingsWrapperContainer extends PureComponent {
         }}
         ability="update"
       >
+        <RedirectIfNoChildRouteMatches
+          route={this.props.route}
+          to={lh.link("backendSettingsGeneral")}
+        />
+
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">

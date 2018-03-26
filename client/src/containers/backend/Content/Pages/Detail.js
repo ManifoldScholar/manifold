@@ -5,7 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import entityUtils from "utils/entityUtils";
 import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
 import { Dialog, Navigation } from "components/backend";
 
 const { select } = entityUtils;
@@ -204,9 +204,15 @@ class PageDetailContainer extends PureComponent {
   render() {
     const page = this.page(this.props);
     const isNew = this.isNew(this.props);
+    if (!page) return null;
 
     return (
       <div>
+        <RedirectIfNoChildRouteMatches
+          route={this.props.route}
+          to={lh.link("backendContentPageGeneral", page.id)}
+        />
+
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}

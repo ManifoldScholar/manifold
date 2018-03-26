@@ -19,7 +19,7 @@ describe("Backend People Wrapper Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <UsersWrapperContainer children={children} route={{}} />
+        <UsersWrapperContainer children={children} route={{ routes: [] }} />
       </Provider>
     )
   );
