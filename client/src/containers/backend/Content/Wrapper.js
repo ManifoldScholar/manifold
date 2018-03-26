@@ -4,7 +4,7 @@ import { Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
 
 export class PagesWrapperContainer extends PureComponent {
   static displayName = "Pages.Wrapper";
@@ -43,6 +43,11 @@ export class PagesWrapperContainer extends PureComponent {
         failureFatalError={{ detail: "You are not allowed to edit content." }}
         ability="create"
       >
+        <RedirectIfNoChildRouteMatches
+          route={this.props.route}
+          to={lh.link("backendContentPages")}
+        />
+
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">

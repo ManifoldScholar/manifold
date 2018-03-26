@@ -317,8 +317,8 @@ export default () => {
             {
               name: "backendContentPageGeneral",
               component: Backend.Content.Pages.General,
-              path: "/backend/content/pages/:id",
-              helper: p => `/backend/content/pages/${p}`
+              path: "/backend/content/pages/:id/general",
+              helper: p => `/backend/content/pages/${p}/general`
             }
           ]
         },
@@ -353,9 +353,9 @@ export default () => {
             {
               name: "backendContentPages",
               component: Backend.Content.Pages.List,
-              path: "/backend/content",
+              path: "/backend/content/pages",
               exact: true,
-              helper: () => `/backend/content`
+              helper: () => `/backend/content/pages`
             },
             {
               name: "backendContentFeatures",
@@ -410,7 +410,7 @@ export default () => {
             {
               name: "backendPeopleMakers",
               component: Backend.People.Makers.List,
-              path: "/backend/people/:makers(makers)?/:id?",
+              path: "/backend/people/makers/:id?",
               helper: () => `/backend/people/makers`,
               routes: [
                 {
@@ -425,9 +425,11 @@ export default () => {
           ]
         },
         {
+          name: "backendText",
           exact: false,
           component: Backend.Text.Wrapper,
           path: "/backend/text/:id",
+          helper: t => `/backend/text/${t}`,
           routes: [
             {
               name: "backendTextStyles",
@@ -498,11 +500,11 @@ export default () => {
               modal: false
             },
             {
-              name: "backendText",
+              name: "backendTextGeneral",
               exact: true,
               component: Backend.Text.General,
-              path: "/backend/text/:id",
-              helper: t => `/backend/text/${t}`
+              path: "/backend/text/:id/general",
+              helper: t => `/backend/text/${t}/general`
             }
           ]
         },
@@ -537,16 +539,18 @@ export default () => {
           ]
         },
         {
+          name: "backendCollection",
           exact: false,
           component: Backend.Collection.Wrapper,
           path: "/backend/collection/:id",
+          helper: r => `/backend/collection/${r}`,
           routes: [
             {
-              name: "backendCollection",
+              name: "backendCollectionGeneral",
               exact: true,
               component: Backend.Collection.General,
-              path: "/backend/collection/:id",
-              helper: r => `/backend/collection/${r}`
+              path: "/backend/collection/:id/general",
+              helper: r => `/backend/collection/${r}/general`
             },
             {
               name: "backendCollectionResources",
@@ -565,9 +569,11 @@ export default () => {
           helper: () => "/backend/settings/subjects/new"
         },
         {
+          name: "backendSettings",
           exact: false,
           component: Backend.Settings.Wrapper,
           path: "/backend/settings",
+          helper: () => "/backend/settings",
           routes: [
             {
               name: "backendSettingsTheme",
@@ -606,11 +612,11 @@ export default () => {
               helper: () => "/backend/settings/email"
             },
             {
-              name: "backendSettings",
+              name: "backendSettingsGeneral",
               exact: true,
               component: Backend.Settings.General,
-              path: "/backend/settings",
-              helper: () => "/backend/settings"
+              path: "/backend/settings/general",
+              helper: () => "/backend/settings/general"
             }
           ]
         },

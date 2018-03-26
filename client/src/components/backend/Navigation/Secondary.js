@@ -13,7 +13,7 @@ export default class NavigationSecondary extends Component {
   renderItem(link) {
     return (
       <li key={link.key}>
-        <NavLink exact to={link.path} activeClassName="active">
+        <NavLink to={link.path} activeClassName="active">
           {link.label}
         </NavLink>
       </li>

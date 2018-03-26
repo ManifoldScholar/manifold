@@ -18,7 +18,7 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
             <a
               aria-current={false}
               className={undefined}
-              href="/backend/settings"
+              href="/backend/settings/general"
               onClick={[Function]}
               style={undefined}
             >
@@ -87,7 +87,7 @@ exports[`Backend Settings Wrapper Container renders correctly 1`] = `
             <a
               aria-current={false}
               className={undefined}
-              href="/backend/settings"
+              href="/backend/settings/general"
               onClick={[Function]}
               style={undefined}
             >

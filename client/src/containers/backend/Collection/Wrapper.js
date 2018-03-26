@@ -7,7 +7,7 @@ import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { collectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
 
 const { request, flush } = entityStoreActions;
 
@@ -169,6 +169,11 @@ export class CollectionWrapperContainer extends PureComponent {
         }}
         ability="update"
       >
+        <RedirectIfNoChildRouteMatches
+          route={this.props.route}
+          to={lh.link("backendCollectionGeneral", collection.id)}
+        />
+
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}

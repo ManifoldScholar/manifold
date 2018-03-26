@@ -4,7 +4,7 @@ import { Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
 import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
 
 export class UsersWrapperContainer extends PureComponent {
   static displayName = "Users.Wrapper";
@@ -20,7 +20,7 @@ export class UsersWrapperContainer extends PureComponent {
   secondaryNavigationLinks() {
     return [
       {
-        path: lh.link("backendPeople"),
+        path: lh.link("backendPeopleMakers"),
         label: "Makers",
         key: "makers",
         entity: "maker",
@@ -45,6 +45,11 @@ export class UsersWrapperContainer extends PureComponent {
           detail: "You are not allowed to manage users and makers."
         }}
       >
+        <RedirectIfNoChildRouteMatches
+          route={this.props.route}
+          to={lh.link("backendPeopleMakers")}
+        />
+
         <section className="backend-panel">
           <aside className="scrollable">
             <div className="wrapper">
