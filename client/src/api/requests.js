@@ -13,6 +13,8 @@ export default {
   beCollectionCreate: "backend-collection-create",
   beResourceDestroy: "backend-resource-destroy",
   beStylesheetShow: "backend-stylesheet-show",
+  beStylesheetUpdate: "backend-stylesheet-update",
+  beStylesheetCreate: "backend-stylesheet-create",
   beStylesheetDestroy: "backend-stylesheet-destroy",
   beEvents: "backend-events",
   beEventDestroy: "backend-event-destroy",

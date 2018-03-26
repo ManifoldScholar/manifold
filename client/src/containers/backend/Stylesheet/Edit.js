@@ -23,12 +23,9 @@ export class StylesheetEditContainer extends PureComponent {
     return dispatch(stylesheet);
   };
 
-  static mapStateToProps = state => {
-    const out = {
-      stylesheet: select(requests.beStylesheetShow, state.entityStore)
-    };
-    return out;
-  };
+  static mapStateToProps = state => ({
+    stylesheet: select(requests.beStylesheetShow, state.entityStore)
+  });
 
   static propTypes = {
     match: PropTypes.object,
@@ -45,11 +42,7 @@ export class StylesheetEditContainer extends PureComponent {
   onSuccess = stylesheet => {
     const { params } = this.props.match;
     if (stylesheet) {
-      const redirect = lh.link(
-        "BackendTextStylesheetEdit",
-        params.id,
-        stylesheet.id
-      );
+      const redirect = lh.link("backendTextStyles", params.id);
       this.setState({ redirect });
     }
     this.props.refresh();
@@ -83,12 +76,15 @@ export class StylesheetEditContainer extends PureComponent {
 
   renderForm(stylesheet) {
     const { params } = this.props.match;
+    const name = stylesheet
+      ? requests.beStylesheetUpdate
+      : requests.beStylesheetCreate;
 
     return (
       <section className="form-section">
         <FormContainer.Form
           model={stylesheet}
-          name="backend-edit-stylesheet"
+          name={name}
           update={stylesheetsAPI.update}
           create={this.create}
           onSuccess={this.onSuccess}
