@@ -11,13 +11,23 @@ export class ProjectCollaboratorsContainer extends Component {
 
   static propTypes = {
     project: PropTypes.object,
-    history: PropTypes.object,
+    history: PropTypes.object.isRequired,
+    refresh: PropTypes.func.isRequired,
     route: PropTypes.object
+  };
+
+  closeUrl(props) {
+    return lh.link("backendProjectCollaborators", props.project.id);
+  }
+
+  close = () => {
+    this.props.refresh();
+    this.props.history.push(this.closeUrl(this.props));
   };
 
   render() {
     const project = this.props.project;
-    const closeUrl = lh.link("backendProjectCollaborators", project.id);
+    const closeUrl = this.closeUrl(this.props);
 
     return (
       <section>
@@ -29,7 +39,8 @@ export class ProjectCollaboratorsContainer extends Component {
         />
         {childRoutes(this.props.route, {
           drawer: true,
-          drawerProps: { closeUrl }
+          drawerProps: { closeUrl },
+          childProps: { afterDestroy: this.close }
         })}
       </section>
     );

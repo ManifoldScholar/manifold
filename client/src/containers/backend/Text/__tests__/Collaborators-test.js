@@ -18,7 +18,12 @@ describe("Backend Text Collaborators Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <TextCollaboratorsContainer text={text} route={route} />
+        <TextCollaboratorsContainer
+          text={text}
+          route={route}
+          history={{}}
+          refresh={jest.fn()}
+        />
       </Provider>
     )
   );

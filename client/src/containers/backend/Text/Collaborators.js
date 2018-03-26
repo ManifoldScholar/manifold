@@ -11,13 +11,23 @@ export class TextCollaboratorsContainer extends Component {
 
   static propTypes = {
     text: PropTypes.object,
-    history: PropTypes.object,
+    history: PropTypes.object.isRequired,
+    refresh: PropTypes.func.isRequired,
     route: PropTypes.object
+  };
+
+  closeUrl(props) {
+    return lh.link("backendTextCollaborators", props.text.id);
+  }
+
+  close = () => {
+    this.props.refresh();
+    this.props.history.push(this.closeUrl(this.props));
   };
 
   render() {
     const text = this.props.text;
-    const closeUrl = lh.link("backendTextCollaborators", text.id);
+    const closeUrl = this.closeUrl(this.props);
 
     return (
       <section>
@@ -29,7 +39,8 @@ export class TextCollaboratorsContainer extends Component {
         />
         {childRoutes(this.props.route, {
           drawer: true,
-          drawerProps: { closeUrl }
+          drawerProps: { closeUrl },
+          childProps: { afterDestroy: this.close }
         })}
       </section>
     );
