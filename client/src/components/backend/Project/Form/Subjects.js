@@ -5,7 +5,7 @@ import { projectsAPI, subjectsAPI } from "api";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
 import get from "lodash/get";
-import UserAbilities from "helpers/userAbilities";
+import Authorization from "helpers/authorization";
 
 const { request, flush } = entityStoreActions;
 
@@ -28,7 +28,7 @@ export class ProjectSubjects extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.userAbilities = new UserAbilities(props.authentication.currentUser);
+    this.authorization = new Authorization();
   }
 
   componentWillUnmount() {
@@ -66,7 +66,12 @@ export class ProjectSubjects extends PureComponent {
   };
 
   maybeHandleNew() {
-    if (!this.userAbilities.hasClassAbility("subject", "create")) return null;
+    const canCreate = this.authorization.authorizeAbility({
+      authentication: this.props.authentication,
+      entity: "subject",
+      ability: "create"
+    });
+    if (!canCreate) return null;
     return this.newSubject;
   }
 

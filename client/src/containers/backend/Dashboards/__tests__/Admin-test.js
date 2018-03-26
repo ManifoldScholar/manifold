@@ -21,11 +21,14 @@ describe("Backend Dashboards Admin Container", () => {
           projectsMeta={projectsMeta}
           recentProjects={recentProjects}
           dispatch={store.dispatch}
-          currentUser={build.entity.user("5", {
-            kind: "owner",
-            abilities: { viewDrafts: true },
-            classAbilities: { statistics: { read: true } }
-          })}
+          authentication={{
+            authenticated: true,
+            currentUser: build.entity.user("5", {
+              kind: "owner",
+              abilities: { viewDrafts: true },
+              classAbilities: { statistics: { read: true } }
+            })
+          }}
         />
       </Provider>
     )

@@ -12,8 +12,7 @@ import { select, meta } from "utils/entityUtils";
 import { projectsAPI, statisticsAPI, requests } from "api";
 import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
-import UserAbilities from "helpers/userAbilities";
-import get from "lodash/get";
+import Authorization from "helpers/authorization";
 
 const { request } = entityStoreActions;
 
@@ -26,7 +25,7 @@ export class DashboardsAdminContainer extends PureComponent {
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore),
       recentProjects: select(requests.beRecentProjects, state.entityStore),
-      currentUser: get(state, "authentication.currentUser")
+      authentication: state.authentication
     };
   };
 
@@ -36,13 +35,13 @@ export class DashboardsAdminContainer extends PureComponent {
     dispatch: PropTypes.func,
     projectsMeta: PropTypes.object,
     recentProjects: PropTypes.array,
-    currentUser: PropTypes.object
+    authentication: PropTypes.object
   };
 
   constructor(props) {
     super(props);
     this.state = { filter: { order: "sort_title ASC" } };
-    this.userAbilities = new UserAbilities(props.currentUser);
+    this.authorization = new Authorization();
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
     this.updateHandlerCreator = this.updateHandlerCreator.bind(this);
     this.updateResults = debounce(this.updateResults.bind(this), 250);
@@ -69,16 +68,22 @@ export class DashboardsAdminContainer extends PureComponent {
     const { promise: two } = this.props.dispatch(recentProjectsRequest);
     const promises = [one, two];
 
-    if (this.userAbilities.hasClassAbility("statistics", "read")) {
+    const readStats = this.authorization.authorizeAbility({
+      authentication: this.props.authentication,
+      entity: "statistics",
+      ability: "read"
+    });
+    if (readStats) {
       const { promise: three } = this.props.dispatch(statsRequest);
       promises.push(three);
     }
+
     return Promise.all(promises);
   }
 
   buildFetchFilter = (props, base) => {
     const out = Object.assign({}, base);
-    const currentUser = props.currentUser;
+    const currentUser = props.authentication.currentUser;
     if (!currentUser) return out;
     if (currentUser.attributes.abilities.viewDrafts) return out;
     out.withUpdateAbility = true;
