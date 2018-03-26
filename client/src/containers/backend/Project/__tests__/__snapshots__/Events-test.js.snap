@@ -76,9 +76,6 @@ exports[`Backend Project Events Container renders correctly 1`] = `
           </span>
            events: 
         </p>
-        <div
-          className="buttons-icon-horizontal"
-        />
         <section>
           <ul>
             <li

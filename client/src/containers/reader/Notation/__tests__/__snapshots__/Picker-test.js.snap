@@ -89,9 +89,6 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
             </span>
              resources: 
           </p>
-          <div
-            className="buttons-icon-horizontal"
-          />
           <section>
             <ul>
               <li>

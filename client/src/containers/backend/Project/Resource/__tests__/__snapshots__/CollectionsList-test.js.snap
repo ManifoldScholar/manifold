@@ -75,7 +75,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
           className="buttons-icon-horizontal"
         >
           <a
-            className="button-icon-secondary undefined"
+            className="button-icon-secondary "
             href="/backend/project/1/collections/new"
             onClick={[Function]}
           >
