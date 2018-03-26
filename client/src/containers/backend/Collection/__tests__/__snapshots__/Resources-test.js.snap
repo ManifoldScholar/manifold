@@ -81,9 +81,6 @@ exports[`Backend Collection Resources Container renders correctly 1`] = `
             </span>
              resources: 
           </p>
-          <div
-            className="buttons-icon-horizontal"
-          />
           <section>
             <ul>
               <li>

@@ -3,6 +3,7 @@ import Searchable from "../Searchable";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from "enzyme";
 import renderer from "react-test-renderer";
+import { Provider } from "react-redux";
 import ListItem from "components/backend/Resource/ListItem";
 import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
@@ -25,19 +26,22 @@ describe("Backend.List.Searchable component", () => {
     stopPropagation: () => undefined,
     preventDefault: () => undefined
   };
+
   const root = wrapWithRouter(
-    <Searchable
-      entities={entities}
-      singularUnit="resource"
-      pluralUnit="resources"
-      pagination={pagination}
-      paginationClickHandler={() => pageChangeMock}
-      entityComponent={ListItem}
-      filterChangeHandler={filterChangeMock}
-      filterOptions={{
-        type: ["TWEET", "PROJECT_CREATED"]
-      }}
-    />
+    <Provider store={build.store()}>
+      <Searchable
+        entities={entities}
+        singularUnit="resource"
+        pluralUnit="resources"
+        pagination={pagination}
+        paginationClickHandler={() => pageChangeMock}
+        entityComponent={ListItem}
+        filterChangeHandler={filterChangeMock}
+        filterOptions={{
+          type: ["TWEET", "PROJECT_CREATED"]
+        }}
+      />
+    </Provider>
   );
 
   function buildComponent(props) {
@@ -58,18 +62,20 @@ describe("Backend.List.Searchable component", () => {
   it("renders correctly when passed a component builder function", () => {
     const component = renderer.create(
       wrapWithRouter(
-        <Searchable
-          entities={entities}
-          singularUnit="resource"
-          pluralUnit="resources"
-          pagination={pagination}
-          paginationClickHandler={() => pageChangeMock}
-          entityComponent={buildComponent}
-          filterChangeHandler={filterChangeMock}
-          filterOptions={{
-            type: ["TWEET", "PROJECT_CREATED"]
-          }}
-        />
+        <Provider store={build.store()}>
+          <Searchable
+            entities={entities}
+            singularUnit="resource"
+            pluralUnit="resources"
+            pagination={pagination}
+            paginationClickHandler={() => pageChangeMock}
+            entityComponent={buildComponent}
+            filterChangeHandler={filterChangeMock}
+            filterOptions={{
+              type: ["TWEET", "PROJECT_CREATED"]
+            }}
+          />
+        </Provider>
       )
     );
     let tree = component.toJSON();

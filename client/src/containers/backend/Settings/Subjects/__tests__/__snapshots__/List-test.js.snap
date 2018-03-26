@@ -70,20 +70,6 @@ exports[`Backend Settings Subjects List Container renders correctly 1`] = `
           </span>
            subjects: 
         </p>
-        <div
-          className="buttons-icon-horizontal"
-        >
-          <a
-            className="button-icon-secondary undefined"
-            href="/backend/settings/subjects/new"
-            onClick={[Function]}
-          >
-            <i
-              className="manicon manicon-plus"
-            />
-            Add a New Subject
-          </a>
-        </div>
         <section>
           <ul>
             <li
