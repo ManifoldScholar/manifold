@@ -18,7 +18,12 @@ describe("Backend Project Collaborators Container", () => {
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={store}>
-        <ProjectCollaboratorsContainer project={project} route={route} />
+        <ProjectCollaboratorsContainer
+          project={project}
+          route={route}
+          history={{}}
+          refresh={jest.fn()}
+        />
       </Provider>
     )
   );

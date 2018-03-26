@@ -20,6 +20,7 @@ export class MakersEditContainer extends PureComponent {
     maker: PropTypes.object,
     match: PropTypes.object,
     history: PropTypes.object,
+    afterDestroy: PropTypes.func,
     dispatch: PropTypes.func
   };
 
@@ -35,7 +36,6 @@ export class MakersEditContainer extends PureComponent {
     this.state = {
       confirmation: null
     };
-    this.updateUsers = this.updateUsers.bind(this);
   }
 
   componentDidMount() {
@@ -81,25 +81,13 @@ export class MakersEditContainer extends PureComponent {
     const options = { removes: maker };
     const makerRequest = request(call, requests.beMakerDestroy, options);
     this.props.dispatch(makerRequest).promise.then(() => {
-      this.props.history.push(lh.link("backendPeopleMakers"));
+      this.doAfterDestroy(this.props);
     });
   }
 
-  updateUsers(users, changeTypeIgnored) {
-    const adjustedUsers = users.map(e => {
-      return {
-        id: e.id,
-        type: e.type
-      };
-    });
-    const maker = {
-      type: this.props.maker.type,
-      id: this.props.maker.id,
-      relationships: { users: { data: adjustedUsers } }
-    };
-    const call = makersAPI.update(maker.id, maker);
-    const userRequest = request(call, requests.beMakerUpdate);
-    this.props.dispatch(userRequest);
+  doAfterDestroy(props) {
+    if (props.afterDestroy) return props.afterDestroy();
+    return props.history.push(lh.link("backendPeopleMakers"));
   }
 
   closeDialog() {
