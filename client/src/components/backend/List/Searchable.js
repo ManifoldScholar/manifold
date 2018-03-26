@@ -2,12 +2,18 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Utility } from "components/global";
 import { HigherOrder } from "containers/global";
+import withCurrentUser from "containers/global/HigherOrder/withCurrentUser";
 import { List } from "components/backend";
 import { Link } from "react-router-dom";
+import Authorization from "helpers/authorization";
 import get from "lodash/get";
 import classnames from "classnames";
 
-export default class ListSearchable extends PureComponent {
+export class ListSearchable extends PureComponent {
+  static mapStateToProps = state => ({
+    authentication: state.authentication
+  });
+
   static displayName = "List.Searchable";
 
   static propTypes = {
@@ -35,9 +41,11 @@ export default class ListSearchable extends PureComponent {
       authorizedFor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
       authorizedTo: PropTypes.string
     }),
+    authentication: PropTypes.object,
     filterOptions: PropTypes.object,
     destroyHandler: PropTypes.func,
-    filterChangeHandler: PropTypes.func
+    filterChangeHandler: PropTypes.func,
+    currentUser: PropTypes.object
   };
 
   static defaultProps = {
@@ -50,12 +58,8 @@ export default class ListSearchable extends PureComponent {
 
   constructor(props) {
     super(props);
-
-    this.state = this.initialState();
-    this.setKeyword = this.setKeyword.bind(this);
-    this.resetSearch = this.resetSearch.bind(this);
-    this.toggleOptions = this.toggleOptions.bind(this);
-    this.renderEntityList = this.renderEntityList.bind(this);
+    this.state = this.initialState(props);
+    this.authorization = new Authorization();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -64,7 +68,7 @@ export default class ListSearchable extends PureComponent {
     }
   }
 
-  setKeyword(event) {
+  setKeyword = event => {
     const keyword = event.target.value;
     const filter = Object.assign({}, this.state.filter);
     if (keyword === "") {
@@ -75,9 +79,9 @@ export default class ListSearchable extends PureComponent {
       filter.typeahead = true;
     }
     this.setState({ inputs: { keyword }, filter });
-  }
+  };
 
-  setFilters(event, label) {
+  setFilters = (event, label) => {
     event.preventDefault();
     const value = event.target.value;
     const filter = Object.assign({}, this.state.filter);
@@ -95,12 +99,12 @@ export default class ListSearchable extends PureComponent {
       }
       this.setState({ inputs, filter });
     }
-  }
+  };
 
-  toggleOptions(event) {
+  toggleOptions = event => {
     event.preventDefault();
     this.setState({ showOptions: !this.state.showOptions });
-  }
+  };
 
   resetSearch(event) {
     event.preventDefault();
@@ -179,24 +183,26 @@ export default class ListSearchable extends PureComponent {
     return filter.labels[option];
   }
 
-  renderNewButton(props) {
-    if (!props.newButton) return null;
+  renderButton(buttonProps) {
+    if (!buttonProps) return null;
+
+    const buttonIcon = buttonProps.icon ? buttonProps.icon : "manicon-plus";
 
     const button = (
       <Link
-        to={props.newButton.path}
-        className={`button-icon-secondary ${props.newButtonType}`}
+        to={buttonProps.path}
+        className={`button-icon-secondary ${buttonProps.type || ""}`}
       >
-        <i className="manicon manicon-plus" />
-        {props.newButton.text}
+        <i className={`manicon ${buttonIcon}`} />
+        {buttonProps.text}
       </Link>
     );
 
-    if (props.newButton.authorizedFor)
+    if (buttonProps.authorizedFor)
       return (
         <HigherOrder.Authorize
-          entity={props.newButton.authorizedFor}
-          ability={props.newButton.authorizedTo || "create"}
+          entity={buttonProps.authorizedFor}
+          ability={buttonProps.authorizedTo || "create"}
         >
           {button}
         </HigherOrder.Authorize>
@@ -204,36 +210,36 @@ export default class ListSearchable extends PureComponent {
     return button;
   }
 
-  renderSecondaryButton(props) {
-    if (!props.secondaryButton) return null;
+  renderButtonRow(props) {
+    let newButtonAuthorized = null;
+    let secondaryButtonAuthorized = null;
 
-    const secondaryButtonIcon = props.secondaryButton.icon
-      ? props.secondaryButton.icon
-      : "manicon-plus";
+    if (props.newButton && props.newButton.authorizedFor) {
+      newButtonAuthorized = this.authorization.authorizeAbility({
+        currentUser: props.currentUser,
+        entity: props.newButton.authorizedFor,
+        ability: props.newButton.authorizedTo || "create"
+      });
+    }
 
-    const button = (
-      <Link
-        to={props.secondaryButton.path}
-        className={`button-icon-secondary ${props.secondaryButton.type}`}
-      >
-        <i className={`manicon ${secondaryButtonIcon}`} />
-        {props.secondaryButton.text}
-      </Link>
+    if (props.secondaryButton && props.secondaryButton.authorizedFor) {
+      secondaryButtonAuthorized = this.authorization.authorizeAbility({
+        currentUser: props.currentUser,
+        entity: props.secondaryButton.authorizedFor,
+        ability: props.secondaryButton.authorizedTo || "create"
+      });
+    }
+
+    if (!newButtonAuthorized && !secondaryButtonAuthorized) return null;
+    return (
+      <div className="buttons-icon-horizontal">
+        {this.renderButton(props.newButton)}
+        {this.renderButton(props.secondaryButton)}
+      </div>
     );
-
-    if (props.secondaryButton.authorizedFor)
-      return (
-        <HigherOrder.Authorize
-          entity={props.secondaryButton.authorizedFor}
-          ability={props.secondaryButton.authorizedTo || "create"}
-        >
-          {button}
-        </HigherOrder.Authorize>
-      );
-    return button;
   }
 
-  renderEntityList() {
+  renderEntityList = () => {
     const entities = this.props.entities;
     if (!entities) return;
 
@@ -244,10 +250,7 @@ export default class ListSearchable extends PureComponent {
           singularUnit={this.props.singularUnit}
           pluralUnit={this.props.pluralUnit}
         />
-        <div className="buttons-icon-horizontal">
-          {this.renderNewButton(this.props)}
-          {this.renderSecondaryButton(this.props)}
-        </div>
+        {this.renderButtonRow(this.props)}
         {entities.length > 0 ? (
           <List.SimpleList
             entities={entities}
@@ -260,7 +263,7 @@ export default class ListSearchable extends PureComponent {
         )}
       </div>
     );
-  }
+  };
 
   render() {
     const listClassName = classnames(
@@ -312,3 +315,5 @@ export default class ListSearchable extends PureComponent {
     );
   }
 }
+
+export default withCurrentUser(ListSearchable);
