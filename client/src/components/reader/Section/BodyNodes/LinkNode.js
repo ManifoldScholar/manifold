@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as URI from "uri-js";
+import URI from "urijs";
 import { Link } from "react-router-dom";
 import validatedNode from "./HigherOrder/ValidatedNode";
 
