@@ -3,7 +3,7 @@ module Tweet
   class Fetcher
     def fetch(project)
       return unless project.following_twitter_accounts?
-      project.twitter_queries.find_each do |query|
+      project.twitter_queries.active.find_each do |query|
         fetch_one(query)
       end
     end
