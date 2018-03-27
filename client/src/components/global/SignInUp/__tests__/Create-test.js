@@ -17,6 +17,7 @@ describe("Global.SignInUp.Create component", () => {
       <Create
         dispatch={store.dispatch}
         handleViewChange={handleViewChange}
+        settings={build.entity.settings("1")}
         user={user}
       />
     </Provider>
