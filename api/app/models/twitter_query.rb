@@ -16,6 +16,9 @@ class TwitterQuery < ApplicationRecord
            as: :subject,
            dependent: :destroy
 
+  # Scopes
+  scope :active, -> { where(active: true) }
+
   # Validation
   validates :query, presence: true
   validates :result_type, inclusion: { in: ALLOWED_RESULT_TYPES }
