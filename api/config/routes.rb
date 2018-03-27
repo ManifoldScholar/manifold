@@ -3,7 +3,9 @@ require "sidekiq/web"
 # rubocop:disable Metrics/BlockLength, Metrics/LineLength
 Rails.application.routes.draw do
   concern :permissible do
-    resources :permissions, only: [:create, :index, :show, :update, :destroy]
+    resources :permissions,
+              only: [:create, :index, :show, :update, :destroy],
+              controller: "/api/v1/permissions"
   end
 
   mount Sidekiq::Web => "/sidekiq" if Rails.env.development?
