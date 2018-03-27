@@ -22,6 +22,12 @@ module Metadata
     end
   end
 
+  def preformat_keywords
+    return unless metadata.key? "keywords"
+    keywords = metadata["keywords"].split(/[,;]/)
+    metadata["keywords"] = keywords&.reject(&:blank?)&.map(&:strip)&.join(", ")
+  end
+
   class_methods do
     def metadata_properties
       @metadata_properties
@@ -41,6 +47,7 @@ module Metadata
       end
 
       before_save do
+        preformat_keywords
         filter_metadata(properties)
       end
     end
