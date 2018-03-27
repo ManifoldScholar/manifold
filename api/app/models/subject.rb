@@ -10,8 +10,8 @@ class Subject < ApplicationRecord
   include Filterable
 
   # Associations
-  has_many :text_subjects
-  has_many :project_subjects
+  has_many :text_subjects, dependent: :destroy
+  has_many :project_subjects, dependent: :destroy
   has_many :texts, through: :text_subjects
   has_many :projects, through: :project_subjects
 

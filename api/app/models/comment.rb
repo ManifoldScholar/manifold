@@ -27,7 +27,7 @@ class Comment < ApplicationRecord
   belongs_to :parent, class_name: "Comment", optional: true, inverse_of: :children,
                       counter_cache: :children_count
   has_many :children, class_name: "Comment", foreign_key: :parent_id, dependent: :destroy
-  has_many :flags, as: :flaggable
+  has_many :flags, as: :flaggable, dependent: :destroy
 
   # Validations
   validates :body, :subject, presence: true

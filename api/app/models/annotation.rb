@@ -53,10 +53,11 @@ class Annotation < ApplicationRecord
   ].freeze
 
   # Associations
-  belongs_to :text_section
+  # Annotations can become orphaned when the text section is deleted.
+  belongs_to :text_section, optional: true
   belongs_to :resource, optional: true
   belongs_to :collection, optional: true
-  has_many :comments, as: :subject
+  has_many :comments, as: :subject, dependent: :destroy
 
   # Validations
   validates :text_section, presence: true

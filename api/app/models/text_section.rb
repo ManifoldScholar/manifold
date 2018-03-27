@@ -28,7 +28,7 @@ class TextSection < ApplicationRecord
   belongs_to :text, inverse_of: :text_sections
   belongs_to :ingestion_source
   # We intentionally do not destroy annotations because we want to handle the orphans.
-  has_many :annotations
+  has_many :annotations, dependent: :nullify
   has_many :searchable_nodes, -> { order(position: :asc) }, dependent: :destroy
   has_many :resources, through: :annotations
   has_many :collections, through: :annotations

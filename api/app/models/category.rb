@@ -12,7 +12,7 @@ class Category < ApplicationRecord
 
   # Associations
   belongs_to :project
-  has_many :texts
+  has_many :texts, dependent: :nullify
 
   # Scopes
   scope :for_text, -> { where(role: ROLE_TEXT) }
