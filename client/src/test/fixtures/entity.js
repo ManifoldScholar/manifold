@@ -79,7 +79,8 @@ const defaults = {
       general: {
         installationName: "Manifold",
         contactUrl: "http://www.dailyrowan.com",
-        copyright: "2015-2016 6 University of Minnesota Press"
+        copyright: "2015-2016 6 University of Minnesota Press",
+        termsUrl: "http://www.dailyrowan.com"
       },
       theme: {
         typekitId: "typekitId",

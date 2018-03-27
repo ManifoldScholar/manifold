@@ -59,20 +59,18 @@ exports[`Global.SignInUp.Login component renders correctly 1`] = `
   <p
     className="login-links"
   >
-    <a
+    <button
       data-id="show-forgot"
-      href="#"
       onClick={[Function]}
     >
       Forgot your password?
-    </a>
-    <a
+    </button>
+    <button
       data-id="show-create"
-      href="#"
       onClick={[Function]}
     >
       Need to sign up?
-    </a>
+    </button>
   </p>
   <section
     className="login-external"

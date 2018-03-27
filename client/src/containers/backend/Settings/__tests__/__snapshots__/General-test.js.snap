@@ -94,7 +94,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
         <span
           className="instructions"
         >
-          Enter the text you would like to appear when a page is shared
+          Enter the text you would like to appear when a page is shared.
         </span>
         <input
           onChange={[Function]}
@@ -115,6 +115,27 @@ exports[`Backend Settings General Container renders correctly 1`] = `
         <input
           onChange={[Function]}
           placeholder="Enter a URL"
+          type="text"
+          value="http://www.dailyrowan.com"
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Terms and Conditions Link URL
+        </label>
+        <span
+          className="instructions"
+        >
+          Enter a full absolute URL or a Manifold page slug.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Enter a URL or slug"
           type="text"
           value="http://www.dailyrowan.com"
         />
