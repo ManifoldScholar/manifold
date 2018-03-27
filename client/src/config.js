@@ -85,7 +85,7 @@ const applicationConfiguration = {
       metadata: {
         seriesTitle: {
           placeholder: "Title of the series holding the item",
-          instructions: "(e.g. the series title for a book)",
+          instructions: "e.g. the series title for a book",
           type: "TextInput"
         },
         containerTitle: {
@@ -191,6 +191,11 @@ const applicationConfiguration = {
         altText: {
           placeholder: "Enter alternative text as necessary",
           type: "TextInput"
+        },
+        keywords: {
+          placeholder: "Enter keywords",
+          type: "TextInput",
+          instructions: 'Separate keywords with "," or ";"'
         }
       }
     }
