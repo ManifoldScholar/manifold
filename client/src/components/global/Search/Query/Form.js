@@ -147,13 +147,13 @@ export default class SearchQuery extends PureComponent {
         </div>
         {this.props.scopes.length > 0 ? (
           <div className="filters">
-            { this.props.searchType !== "reader" ?
+            {this.props.searchType !== "reader" ? (
               <label className="group-label">{"Search within:"}</label>
-            : null}
+            ) : null}
             <div className="checkbox-group">
-              { this.props.searchType === "reader" ?
+              {this.props.searchType === "reader" ? (
                 <label className="group-label">{"Search within:"}</label>
-                : null}
+              ) : null}
               {this.props.scopes.map(scope => {
                 return (
                   <label key={scope.value} className="checkbox">
