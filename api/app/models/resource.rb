@@ -50,7 +50,7 @@ class Resource < ApplicationRecord
   has_one :resource_import_row, inverse_of: :resource
   has_many :collection_resources, dependent: :destroy
   has_many :collections, through: :collection_resources
-  has_many :comments, as: :subject
+  has_many :comments, as: :subject, dependent: :destroy
   has_many :annotations, dependent: :destroy
 
   delegate :slug, to: :project, prefix: true
