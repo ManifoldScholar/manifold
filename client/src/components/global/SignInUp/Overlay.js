@@ -11,6 +11,7 @@ export default class Overlay extends Component {
   static propTypes = {
     hideSignInUpOverlay: PropTypes.func,
     authentication: PropTypes.object,
+    settings: PropTypes.object,
     dispatch: PropTypes.func
   };
 
@@ -44,6 +45,7 @@ export default class Overlay extends Component {
   childProps() {
     return {
       handleViewChange: this.updateView,
+      settings: this.props.settings,
       dispatch: this.props.dispatch,
       hideSignInUpOverlay: this.props.hideSignInUpOverlay,
       authentication: this.props.authentication

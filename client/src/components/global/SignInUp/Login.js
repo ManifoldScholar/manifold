@@ -109,24 +109,22 @@ export default class Login extends Component {
           </div>
         </form>
         <p className="login-links">
-          <a
-            href="#"
+          <button
             onClick={event =>
               this.props.handleViewChange("account-password-forgot", event)
             }
             data-id="show-forgot"
           >
             {"Forgot your password?"}
-          </a>
-          <a
-            href="#"
+          </button>
+          <button
             onClick={event =>
               this.props.handleViewChange("account-create", event)
             }
             data-id="show-create"
           >
             {"Need to sign up?"}
-          </a>
+          </button>
         </p>
 
         <section className="login-external">

@@ -79,17 +79,26 @@
   .login-links {
     margin-top: 25px;
 
-    a {
+    button {
+      @include buttonUnstyled;
       display: block;
+      text-decoration: underline;
+      font-style: italic;
+
+      + button {
+        margin-top: 14px;
+        margin-left: 0;
+      }
+    }
+
+    a {
       font-style: italic;
 
       + a {
         margin-top: 14px;
         margin-left: 0;
       }
-
     }
-
   }
 
   .login-external {

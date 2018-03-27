@@ -61,12 +61,18 @@ export class SettingsGeneralContainer extends PureComponent {
           <Form.TextInput
             label="Social Sharing Message"
             name="attributes[general][socialShareMessage]"
-            instructions="Enter the text you would like to appear when a page is shared"
+            instructions="Enter the text you would like to appear when a page is shared."
           />
           <Form.TextInput
             label="Contact Link URL"
             name="attributes[general][contactUrl]"
             placeholder="Enter a URL"
+          />
+          <Form.TextInput
+            label="Terms and Conditions Link URL"
+            name="attributes[general][termsUrl]"
+            placeholder="Enter a URL or slug"
+            instructions="Enter a full absolute URL or a Manifold page slug."
           />
           <Form.Save text="Save Settings" />
         </FormContainer.Form>
