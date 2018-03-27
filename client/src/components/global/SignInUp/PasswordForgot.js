@@ -137,24 +137,22 @@ class PasswordForgotContainer extends Component {
           </div>
         </form>
         <p className="login-links">
-          <a
-            href="#"
+          <button
             onClick={event =>
               this.props.handleViewChange("account-login", event)
             }
             data-id="show-login"
           >
             {"Remember your password?"}
-          </a>
-          <a
-            href="#"
+          </button>
+          <button
             onClick={event =>
               this.props.handleViewChange("account-create", event)
             }
             data-id="show-create"
           >
             {"Need to sign up?"}
-          </a>
+          </button>
         </p>
       </div>
     );

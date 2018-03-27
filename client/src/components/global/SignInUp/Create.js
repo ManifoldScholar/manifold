@@ -4,6 +4,7 @@ import { usersAPI, requests } from "api";
 import { entityStoreActions, currentUserActions } from "actions";
 import { select } from "utils/entityUtils";
 import { Form, SignInUp } from "components/global";
+import { possessivize } from "utils/string";
 import connectAndFetch from "utils/connectAndFetch";
 import get from "lodash/get";
 
@@ -14,6 +15,7 @@ class CreateContainer extends Component {
     dispatch: PropTypes.func,
     response: PropTypes.object,
     user: PropTypes.object,
+    settings: PropTypes.object.isRequired,
     authentication: PropTypes.object,
     handleViewChange: PropTypes.func.isRequired
   };
@@ -82,6 +84,22 @@ class CreateContainer extends Component {
       [event.target.name]: event.target.value
     });
     this.setState({ user });
+  }
+
+  renderTermsAndConditions(props) {
+    const terms = props.settings.attributes.general.termsUrl;
+    if (!terms) return null;
+    const name = props.settings.attributes.general.installationName;
+    const absoluteUrl = /^https?:\/\//i;
+    const url = absoluteUrl.test(terms) ? terms : `/page/${terms}`;
+
+    return (
+      <p className="login-links">
+        {`By creating this account, you agree to ${possessivize(name)} `}
+        <a href={url}>terms and conditions</a>
+        {`.`}
+      </p>
+    );
   }
 
   render() {
@@ -194,21 +212,16 @@ class CreateContainer extends Component {
             <span>Log in with Twitter</span>
           </SignInUp.Oauth.Button>
         </section>
+        {this.renderTermsAndConditions(this.props)}
         <p className="login-links">
-          {
-            "By creating this account, you agree to Manifold's terms and conditions."
-          }
-        </p>
-        <p className="login-links">
-          <a
-            href="#"
+          <button
             onClick={event =>
               this.props.handleViewChange("account-login", event)
             }
             data-id="show-login"
           >
             {"Already have an account?"}
-          </a>
+          </button>
         </p>
       </div>
     );

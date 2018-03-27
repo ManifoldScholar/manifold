@@ -197,7 +197,8 @@ module Validation
           :default_place_of_publication,
           :social_share_message,
           :contact_url,
-          :copyright
+          :copyright,
+          :terms_url
         ]
       },
       {

@@ -188,6 +188,7 @@ class ManifoldContainer extends PureComponent {
               key="signInUpOverlay"
               hideSignInUpOverlay={hideSignInUpOverlay}
               authentication={this.props.authentication}
+              settings={this.props.settings}
               dispatch={this.props.dispatch}
               hash={get(this, "props.routing.locationBeforeTransitions.hash")}
             />
