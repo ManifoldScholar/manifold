@@ -22,9 +22,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      inBrowser: false
-    };
+    this.state = { inBrowser: false };
     this.twitterWindowOptions = ["", "", "width=600,height=300"];
   }
 
@@ -45,12 +43,22 @@ class AnnotationPopupSecondaryShare extends PureComponent {
 
   url() {
     if (!this.state.inBrowser) return null;
-    const url = lh.link(
+    const readerUrl = lh.link(
       "readerSection",
       this.props.text.attributes.slug,
       this.props.section.id
     );
-    return location.hostname + url;
+    const url = `${window.location.hostname}${readerUrl}`;
+    const node = this.startNodeUuid();
+
+    if (!node) return url;
+    return `${url}#node-${node}`;
+  }
+
+  startNodeUuid() {
+    const selection = this.props.selection;
+    if (!selection || !selection.startNode) return null;
+    return selection.startNode.dataset.nodeUuid;
   }
 
   message() {
