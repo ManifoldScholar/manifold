@@ -45,7 +45,7 @@ exports[`Backend.Form.Upload component when the upload input does not have a val
           <p
             className="secondary"
           >
-            jpeg, tiff, gif, png
+            gif, jpeg, jpg, png, svg
           </p>
         </div>
       </div>

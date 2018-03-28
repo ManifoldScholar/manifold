@@ -45,7 +45,7 @@ exports[`Backend.Resource.Form.Document component renders correctly 1`] = `
           <p
             className="secondary"
           >
-            doc docx txt
+            doc, docx, txt
           </p>
         </div>
       </div>

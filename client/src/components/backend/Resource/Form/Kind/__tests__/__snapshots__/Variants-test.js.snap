@@ -145,7 +145,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             <p
               className="secondary"
             >
-              jpeg, tiff, gif, png
+              gif, jpeg, jpg, png, svg
             </p>
           </div>
         </div>
@@ -196,7 +196,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             <p
               className="secondary"
             >
-              jpeg, tiff, gif, png
+              gif, jpeg, jpg, png, svg
             </p>
           </div>
         </div>
@@ -254,7 +254,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
             <p
               className="secondary"
             >
-              jpeg, tiff, gif, png
+              gif, jpeg, jpg, png, svg
             </p>
           </div>
         </div>

@@ -45,7 +45,7 @@ exports[`Backend.Resource.Form.Spreadsheet component renders correctly 1`] = `
           <p
             className="secondary"
           >
-            xls xlsx
+            xls, xlsx
           </p>
         </div>
       </div>

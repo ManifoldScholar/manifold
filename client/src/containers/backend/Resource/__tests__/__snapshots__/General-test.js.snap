@@ -225,7 +225,7 @@ exports[`Backend Resource General Container renders correctly 1`] = `
                 <p
                   className="secondary"
                 >
-                  jpeg, tiff, gif, png
+                  gif, jpeg, jpg, png, svg
                 </p>
               </div>
             </div>
