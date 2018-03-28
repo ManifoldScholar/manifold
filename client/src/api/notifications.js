@@ -41,9 +41,8 @@ export default {
     return {
       level: 0,
       heading: "New maker record created",
-      body: `${possessivize(
-        payload.data.attributes.fullName
-      )} can now be added to projects, texts, and users in the backend.`,
+      body: `${payload.data.attributes.fullName}
+       can now be added to projects, texts, and users in the backend.`,
       expiration: defaultExpiration
     };
   },

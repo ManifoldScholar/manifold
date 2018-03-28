@@ -5,8 +5,7 @@ import { Dialog } from "components/backend";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { makersAPI, requests } from "api";
-import { Form } from "components/backend";
-import { Form as FormContainer } from "containers/backend";
+import { People } from "containers/backend";
 import { HigherOrder } from "containers/global";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
@@ -120,46 +119,7 @@ export class MakersEditContainer extends PureComponent {
             </div>
           </HigherOrder.Authorize>
         </header>
-        <section className="form-section">
-          <FormContainer.Form
-            model={maker}
-            name="backend-maker-update"
-            update={makersAPI.update}
-            create={makersAPI.create}
-            className="form-secondary"
-            notificationScope="drawer"
-          >
-            <Form.TextInput
-              label="First Name"
-              name="attributes[firstName]"
-              placeholder="First Name"
-            />
-            <Form.TextInput
-              label="Middle Name"
-              name="attributes[middleName]"
-              placeholder="Middle Name"
-            />
-            <Form.TextInput
-              label="Last Name"
-              name="attributes[lastName]"
-              placeholder="Last Name"
-            />
-            <Form.TextInput
-              label="Suffix"
-              name="attributes[suffix]"
-              placeholder="Suffix"
-            />
-            <Form.Upload
-              layout="square"
-              accepts="images"
-              label="Avatar Image"
-              readFrom="attributes[avatarStyles][smallSquare]"
-              name="attributes[avatar]"
-              remove="attributes[removeAvatar]"
-            />
-            <Form.Save text="Save Maker" />
-          </FormContainer.Form>
-        </section>
+        <People.Makers.Form maker={maker} />
       </div>
     );
   }

@@ -414,6 +414,13 @@ export default () => {
               helper: () => `/backend/people/makers`,
               routes: [
                 {
+                  name: "backendPeopleMakersNew",
+                  exact: true,
+                  component: Backend.People.Makers.New,
+                  path: "/backend/people/makers/new",
+                  helper: () => "/backend/people/makers/new"
+                },
+                {
                   name: "backendPeopleMaker",
                   component: Backend.People.Makers.Edit,
                   exact: true,

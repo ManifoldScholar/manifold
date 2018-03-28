@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Backend People Makers New Container renders correctly 1`] = `
+<section>
+  <header
+    className="drawer-header"
+  >
+    <h2
+      className="heading-quaternary"
+    >
+      New Maker
+    </h2>
+  </header>
+  <section
+    className="form-section"
+  >
+    <div>
+      <form
+        className="form-secondary"
+        data-id="submit"
+        onSubmit={[Function]}
+      >
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            First Name
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="First Name"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Middle Name
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Middle Name"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Last Name
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Last Name"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Suffix
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Suffix"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+        >
+          <div
+            className="form-input"
+            style={Object {}}
+          >
+            <label
+              className=""
+            >
+              Avatar Image
+            </label>
+            <react-dropzone
+              accept="image/*"
+              className="form-dropzone style-square"
+              multiple={false}
+              onDrop={[Function]}
+              style={undefined}
+            >
+              <div
+                className="contents-empty"
+              >
+                <i
+                  className="manicon manicon-cloud-up"
+                />
+                <div
+                  className="message"
+                >
+                  <p
+                    className="primary"
+                  >
+                    <span
+                      className="fake-link"
+                    >
+                      Upload a file
+                    </span>
+                     or 
+                    <br />
+                    drag and drop here
+                    <br />
+                  </p>
+                  <p
+                    className="secondary"
+                  >
+                    gif, jpeg, jpg, png, svg
+                  </p>
+                </div>
+              </div>
+            </react-dropzone>
+          </div>
+        </div>
+        <div
+          className="form-input submit"
+        >
+          <input
+            className="button-secondary outlined"
+            type="submit"
+            value="Save Maker"
+          />
+        </div>
+      </form>
+    </div>
+  </section>
+</section>
+`;
