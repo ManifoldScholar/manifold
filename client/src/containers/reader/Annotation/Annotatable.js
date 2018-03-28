@@ -122,13 +122,15 @@ class Annotatable extends Component {
 
   // Maps the browser selection object to component state
   mapNativeSelectionToState(nativeSelection) {
+    const range = this.mapNativeSelectionToRange(nativeSelection);
     return {
       anchorNode: nativeSelection.anchorNode,
       anchorOffset: nativeSelection.anchorOffset,
       focusNode: nativeSelection.focusNode,
       focusOffset: nativeSelection.focusOffset,
       text: nativeSelection.toString(),
-      range: this.mapNativeSelectionToRange(nativeSelection)
+      range,
+      startNode: this.closestTextNode(range.startContainer)
     };
   }
 
