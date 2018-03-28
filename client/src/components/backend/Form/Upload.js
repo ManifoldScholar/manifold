@@ -42,7 +42,7 @@ export class FormUpload extends Component {
   static types = {
     images: {
       accepts: "image/*",
-      extensions: "jpeg, tiff, gif, png"
+      extensions: "gif, jpeg, jpg, png, svg"
     },
     audio: {
       accepts: "audio/*",
@@ -60,31 +60,31 @@ export class FormUpload extends Component {
       accepts:
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
         "application/msword,text/*",
-      extensions: "doc docx txt"
+      extensions: "doc, docx, txt"
     },
     csv: {
       accepts: "text/plain, text/csv",
-      extensions: "txt csv"
+      extensions: "txt, csv"
     },
     spreadsheet: {
       accepts:
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet," +
         "application/vnd.ms-excel",
-      extensions: "xls xlsx"
+      extensions: "xls, xlsx"
     },
     presentation: {
       accepts:
         "application/vnd.openxmlformats-officedocument.presentationml.presentation," +
         "application/vnd.ms-powerpoint",
-      extensions: "ppt pptx"
+      extensions: "ppt, pptx"
     },
     texts: {
       accepts: "application/epub+zip,application/zip,text/*",
-      extensions: ".epub, .zip, .md"
+      extensions: "epub, zip, md"
     },
     json: {
       accepts: "application/json",
-      extensions: ".json"
+      extensions: "json"
     },
     any: {
       accepts: null,

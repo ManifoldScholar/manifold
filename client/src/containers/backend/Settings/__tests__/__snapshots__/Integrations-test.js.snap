@@ -181,7 +181,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                 <p
                   className="secondary"
                 >
-                  .json
+                  json
                 </p>
               </div>
             </div>

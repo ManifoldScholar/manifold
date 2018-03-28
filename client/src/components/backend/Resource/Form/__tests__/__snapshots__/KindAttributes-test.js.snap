@@ -45,7 +45,7 @@ exports[`Backend.Resource.Form.KindAttributes component when kind is audio rende
           <p
             className="secondary"
           >
-            jpeg, tiff, gif, png
+            gif, jpeg, jpg, png, svg
           </p>
         </div>
       </div>
