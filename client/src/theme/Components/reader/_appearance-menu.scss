@@ -56,6 +56,7 @@
     margin-top: 2px;
     color: $neutral70;
     border-bottom: 2px solid transparent;
+    transition: color $durationFast $timing, border-color $durationFast $timing;
 
     &.button-active {
       color: $neutralOffBlack;
@@ -143,6 +144,7 @@
     width: calc(50% - 10px);
     height: 39px;
     border: 4px solid transparent;
+    transition: border-color $durationFast $timing;
 
     @include respond($break50) {
       width: 96px;
@@ -150,6 +152,7 @@
 
     .manicon {
       opacity: 0;
+      transition: opacity $durationFast $timing;
     }
 
     &.light {
