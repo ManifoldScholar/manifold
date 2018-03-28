@@ -99,8 +99,12 @@ export default class Overlay extends Component {
               </div>
             </div>
           </header>
-          <div className="container">
-            <div className="overlay-content-focus">{this.renderChild()}</div>
+          <div className="overlay-content focus">
+            <div className="container">
+              <div className="inner">
+                {this.renderChild()}
+              </div>
+            </div>
           </div>
         </div>
       </HigherOrder.BodyClass>
