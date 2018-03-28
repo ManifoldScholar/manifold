@@ -26,7 +26,6 @@
       top: 0;
       right: 0;
       font-size: 22px;
-      line-height: 45px;
     }
 
     .manicon-manifold-logo {
@@ -40,6 +39,25 @@
         font-size: 45px;
       }
     }
+
+    .text {
+      position: relative;
+      top: -5px;
+      display: inline-block;
+    }
+
+    .small {
+      position: relative;
+      display: block;
+      font-size: 13px;
+      font-weight: normal;
+      line-height: 1em;
+    }
+
+    .underline {
+      text-decoration: underline;
+    }
+
   }
 
   // <nav> wrapper around nested <ul>

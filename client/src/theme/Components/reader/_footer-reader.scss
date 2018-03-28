@@ -36,6 +36,17 @@
       }
     }
 
+    .powered-by {
+      font-size: 15px;
+
+      a, a:visited {
+        &:hover {
+          color: $accentPrimaryDark;
+        }
+        color: $accentPrimaryMedium;
+      }
+    }
+
     p {
       @include respond($break75) {
         padding-top: 2px;

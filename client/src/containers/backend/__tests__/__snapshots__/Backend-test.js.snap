@@ -128,68 +128,78 @@ exports[`Backend Backend Container renders correctly 1`] = `
               <main>
                 <Switch />
               </main>
-              <Layout.Footer pages={{...}} authentication={{...}} commonActions={{...}} settings={[undefined]}>
-                <footer className=\\"footer-browse\\">
-                  <div className=\\"container\\">
-                    <div className=\\"rel\\">
-                      <Link to=\\"/\\" className=\\"logo\\" replace={false}>
-                        <a className=\\"logo\\" onClick={[Function]} href=\\"/\\">
-                          <i className=\\"manicon manicon-manifold-logo\\" />
-                          Manifold
-                        </a>
-                      </Link>
-                    </div>
-                    <nav className=\\"text-nav\\">
-                      <ul>
-                        <li>
+              <withRouter(Layout.Footer) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={[undefined]}>
+                <Route render={[Function: render]}>
+                  <Layout.Footer pages={{...}} authentication={{...}} commonActions={{...}} settings={[undefined]} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
+                    <footer className=\\"footer-browse\\">
+                      <div className=\\"container\\">
+                        <div className=\\"rel\\">
+                          <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"logo\\">
+                            <i className=\\"manicon manicon-manifold-logo\\" />
+                            <span className=\\"text\\">
+                              Powered by Manifold
+                              <span className=\\"small\\">
+                                Learn more at
+                                 
+                                <span className=\\"underline\\">
+                                  manifoldapp.org
+                                </span>
+                              </span>
+                            </span>
+                          </a>
+                        </div>
+                        <nav className=\\"text-nav\\">
                           <ul>
                             <li>
-                              <a onClick={[Function: bound handleLogoutClick]} href=\\"#\\">
-                                Log Out
-                              </a>
+                              <ul>
+                                <li>
+                                  <a onClick={[Function]} href=\\"#\\">
+                                    Log Out
+                                  </a>
+                                </li>
+                                <li>
+                                  <Link to=\\"/\\" replace={false}>
+                                    <a onClick={[Function]} href=\\"/\\">
+                                      Projects
+                                    </a>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <a target=\\"_blank\\" rel=\\"noopener noreferrer\\" href=\\"http://twitter.com/manifoldscholar\\">
+                                    Twitter
+                                  </a>
+                                </li>
+                              </ul>
                             </li>
                             <li>
-                              <Link to=\\"/\\" replace={false}>
-                                <a onClick={[Function]} href=\\"/\\">
-                                  Projects
-                                </a>
-                              </Link>
+                              <ul>
+                                <li>
+                                  <a href=\\"mailto:webbook@umn.edu\\">
+                                    Email
+                                  </a>
+                                </li>
+                              </ul>
                             </li>
-                            <li />
                           </ul>
-                        </li>
-                        <li>
-                          <ul>
-                            <li>
-                              <a target=\\"_blank\\" rel=\\"noopener noreferrer\\" href=\\"http://twitter.com/manifoldscholar\\">
-                                Twitter
-                              </a>
-                            </li>
-                            <li>
-                              <a href=\\"mailto:webbook@umn.edu\\">
-                                Email
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </nav>
-                    <section className=\\"footer-secondary\\">
-                      <p className=\\"colophon\\">
-                        Manifold is released under the 
-                        <a href=\\"https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md\\">
-                          GNU General Public License v3
-                        </a>
-                        . Download and contribute to 
-                        <a href=\\"https://github.com/ManifoldScholar/manifold\\">
-                          Manifold
-                        </a>
-                         on github.
-                      </p>
-                    </section>
-                  </div>
-                </footer>
-              </Layout.Footer>
+                        </nav>
+                        <section className=\\"footer-secondary\\">
+                          <form onSubmit={[Function]}>
+                            <div className=\\"search-button-inline\\">
+                              <input type=\\"text\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
+                              <button className=\\"manicon manicon-magnify\\">
+                                <span className=\\"screen-reader-text\\">
+                                  Click to submit search query
+                                </span>
+                              </button>
+                            </div>
+                          </form>
+                          <div className=\\"colophon\\" />
+                        </section>
+                      </div>
+                    </footer>
+                  </Layout.Footer>
+                </Route>
+              </withRouter(Layout.Footer)>
             </div>
           </BodyClass>
         </SideEffect(BodyClass)>

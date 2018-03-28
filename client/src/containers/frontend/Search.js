@@ -76,7 +76,7 @@ class SearchContainer extends PureComponent {
   doSearch = (page = 1) => {
     const pagination = { number: page };
     const params = Object.assign({}, this.state, { page: pagination });
-    if (params.facets.includes("All")) {
+    if (!params.facets || params.facets.includes("All")) {
       params.facets = this.availableFacetValues();
     }
     const call = searchResultsAPI.index(params);

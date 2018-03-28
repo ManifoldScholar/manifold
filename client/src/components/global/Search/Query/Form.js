@@ -30,14 +30,17 @@ export default class SearchQuery extends PureComponent {
     super(props);
 
     this.handlers = {};
+
+    const defaultState = {
+      keyword: "",
+      scopes: [],
+      facets: ["All"]
+    };
+
     if (props.initialState) {
-      this.state = Object.assign({}, props.initialState);
+      this.state = Object.assign({}, defaultState, props.initialState);
     } else {
-      this.state = {
-        keyword: "",
-        scope: "text",
-        facets: ["All"]
-      };
+      this.state = Object.assign({}, defaultState);
     }
   }
 

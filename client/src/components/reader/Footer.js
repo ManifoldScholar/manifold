@@ -7,9 +7,13 @@ export default class Footer extends Component {
     text: PropTypes.object
   };
 
+  // getFooterText(text) {
+  //   if (!text.attributes.metadata.rights) return null;
+  //   return <Helper.SimpleFormat text={text.attributes.metadata.rights} />;
+  // }
+
   getFooterText(text) {
-    if (!text.attributes.metadata.rights) return null;
-    return <Helper.SimpleFormat text={text.attributes.metadata.rights} />;
+    return <Helper.SimpleFormat text="Copyright some year whatever" />;
   }
 
   render() {
@@ -20,7 +24,16 @@ export default class Footer extends Component {
             <section className="colophon">
               <i className="manicon manicon-manifold-logo" />
               {this.getFooterText(this.props.text)}
-              <br />
+              <p className="powered-by">
+                Powered by Manifold Scholarship. Learn more at&nbsp;
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="http://manifoldapp.org"
+                >
+                  manifoldapp.org
+                </a>
+              </p>
             </section>
           </div>
         </div>
