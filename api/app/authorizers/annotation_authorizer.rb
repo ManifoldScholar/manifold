@@ -11,6 +11,7 @@ class AnnotationAuthorizer < ApplicationAuthorizer
   end
 
   def deletable_by?(user, _options = {})
+    return user.created? resource if resource.highlight?
     creator_or_has_editor_permissions?(user, resource)
   end
 

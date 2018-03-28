@@ -32,16 +32,19 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     const selected = this.props.selectedAnnotation;
     if (!selected) return false;
     return (
-      selected.attributes.abilities.creator &&
+      selected.attributes.abilities.delete &&
       selected.attributes.format === "highlight"
     );
   }
 
   rowHighlighted() {
     if (!this.highlightSelected()) return null;
+    const isCreator = this.props.selectedAnnotation.attributes
+      .currentUserIsCreator;
+    const label = isCreator ? "You Highlighted" : "A Reader Highlighted";
     return (
       <div key="notice" className="note">
-        {"You Highlighted"}
+        {label}
       </div>
     );
   }
