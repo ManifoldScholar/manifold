@@ -104,6 +104,11 @@ export class MakersListContainer extends PureComponent {
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {makers ? (
           <List.Searchable
+            newButton={{
+              path: lh.link("backendPeopleMakersNew"),
+              text: "Add a New Maker",
+              authorizedFor: "maker"
+            }}
             entities={makers}
             singularUnit="maker"
             pluralUnit="makers"
