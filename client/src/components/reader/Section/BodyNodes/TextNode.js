@@ -67,7 +67,7 @@ export default class TextNode extends Component {
       const id = a.id;
       const type = a.attributes.format;
       const isCreator =
-        a.id === "selection" ? true : a.attributes.abilities.creator;
+        a.id === "selection" ? true : a.attributes.currentUserIsCreator;
       const start =
         a.attributes.startNode === this.props.nodeUuid
           ? a.attributes.startChar
@@ -81,6 +81,7 @@ export default class TextNode extends Component {
       const resourceId = a.attributes.resourceId;
       const collectionId = a.attributes.collectionId;
       const authorCreated = a.attributes.authorCreated;
+      const abilities = a.attributes.abilities;
       return {
         id,
         type,
@@ -91,7 +92,8 @@ export default class TextNode extends Component {
         endNode,
         resourceId,
         collectionId,
-        authorCreated
+        authorCreated,
+        abilities
       };
     });
   }
@@ -190,7 +192,7 @@ export default class TextNode extends Component {
         .map(a => a.id);
 
       const removableHighlight = map[index].filter(
-        a => a.type === "highlight" && a.isCreator
+        a => a.type === "highlight" && (a.isCreator || a.abilities.delete)
       )[0];
       const removableHighlightId = removableHighlight
         ? removableHighlight.id
