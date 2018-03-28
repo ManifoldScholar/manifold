@@ -440,7 +440,25 @@ exports[`Reader Reader Container renders correctly 1`] = `
           <i
             className="manicon manicon-manifold-logo"
           />
-          <br />
+          <div>
+            <p>
+              <span>
+                Copyright some year whatever
+              </span>
+            </p>
+          </div>
+          <p
+            className="powered-by"
+          >
+            Powered by Manifold Scholarship. Learn more at 
+            <a
+              href="http://manifoldapp.org"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              manifoldapp.org
+            </a>
+          </p>
         </section>
       </div>
     </div>

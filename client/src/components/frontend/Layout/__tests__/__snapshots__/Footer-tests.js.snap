@@ -12,13 +12,29 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
     >
       <a
         className="logo"
-        href="/"
-        onClick={[Function]}
+        href="http://manifoldapp.org"
+        rel="noopener noreferrer"
+        target="_blank"
       >
         <i
           className="manicon manicon-manifold-logo"
         />
-        Manifold
+        <span
+          className="text"
+        >
+          Powered by Manifold
+          <span
+            className="small"
+          >
+            Learn more at
+             
+            <span
+              className="underline"
+            >
+              manifoldapp.org
+            </span>
+          </span>
+        </span>
       </a>
     </div>
     <nav
@@ -46,6 +62,7 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
             <li>
               <a
                 href="http://www.dailyrowan.com"
+                rel="noopener noreferrer"
                 target="_blank"
               >
                 Contact
@@ -78,27 +95,37 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
     <section
       className="footer-secondary"
     >
-      <p
+      <form
+        onSubmit={[Function]}
+      >
+        <div
+          className="search-button-inline"
+        >
+          <input
+            onChange={[Function]}
+            placeholder="Search"
+            type="text"
+            value=""
+          />
+          <button
+            className="manicon manicon-magnify"
+          >
+            <span
+              className="screen-reader-text"
+            >
+              Click to submit search query
+            </span>
+          </button>
+        </div>
+      </form>
+      <div
         className="colophon"
       >
         <div>
           © 2015-2016 6 University of Minnesota Press.
           <br />
         </div>
-        Manifold is released under the 
-        <a
-          href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md"
-        >
-          GNU General Public License v3
-        </a>
-        . Download and contribute to 
-        <a
-          href="https://github.com/ManifoldScholar/manifold"
-        >
-          Manifold
-        </a>
-         on github.
-      </p>
+      </div>
     </section>
   </div>
 </footer>

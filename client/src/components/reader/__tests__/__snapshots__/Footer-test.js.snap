@@ -19,15 +19,22 @@ exports[`Reader.Footer component adds a line break between lines 1`] = `
         <div>
           <p>
             <span>
-              line one
-              <br />
-            </span>
-            <span>
-                      line two
+              Copyright some year whatever
             </span>
           </p>
         </div>
-        <br />
+        <p
+          className="powered-by"
+        >
+          Powered by Manifold Scholarship. Learn more at 
+          <a
+            href="http://manifoldapp.org"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            manifoldapp.org
+          </a>
+        </p>
       </section>
     </div>
   </div>
@@ -53,11 +60,22 @@ exports[`Reader.Footer component renders correctly 1`] = `
         <div>
           <p>
             <span>
-              All rights reserved
+              Copyright some year whatever
             </span>
           </p>
         </div>
-        <br />
+        <p
+          className="powered-by"
+        >
+          Powered by Manifold Scholarship. Learn more at 
+          <a
+            href="http://manifoldapp.org"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            manifoldapp.org
+          </a>
+        </p>
       </section>
     </div>
   </div>

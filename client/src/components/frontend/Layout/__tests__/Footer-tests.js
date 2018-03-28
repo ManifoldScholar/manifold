@@ -41,15 +41,4 @@ describe("Frontend.Layout.Footer component", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("shows page links based on show_in_footer attribute", () => {
-    const component = shallow(
-      <Layout.Footer
-        authentication={{ authenticated: false }}
-        pages={[showPage, hidePage]}
-        settings={settings}
-      />
-    );
-    expect(component.contains("Bomfunk MCs")).toBe(true);
-    expect(component.contains("Dub Pistols")).toBe(false);
-  });
 });

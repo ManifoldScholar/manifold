@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import chunk from "lodash/chunk";
 import lh from "helpers/linkHandler";
+import { withRouter } from "react-router-dom";
 
-export default class LayoutFooter extends Component {
+class LayoutFooter extends Component {
   static displayName = "Layout.Footer";
 
   static propTypes = {
     commonActions: PropTypes.object,
     authentication: PropTypes.object,
+    history: PropTypes.object,
     pages: PropTypes.array,
     settings: PropTypes.shape({
       attributes: PropTypes.shape({
@@ -21,28 +23,28 @@ export default class LayoutFooter extends Component {
   };
 
   static defaultProps = {
-    pages: []
+    pages: [],
+    history: {
+      push: () => {}
+    }
   };
 
-  constructor() {
-    super();
-    this.handleLoginClick = this.handleLoginClick.bind(this);
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.buildPagesArray = this.buildPagesArray.bind(this);
-    this.buildAuthLink = this.buildAuthLink.bind(this);
-    this.buildContentPages = this.buildContentPages.bind(this);
-    this.renderCopyright = this.renderCopyright.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      keyword: ""
+    };
   }
 
-  handleLogoutClick(event) {
+  handleLogoutClick = event => {
     event.preventDefault();
     this.props.commonActions.logout();
-  }
+  };
 
-  handleLoginClick(event) {
+  handleLoginClick = event => {
     event.preventDefault();
     this.props.commonActions.toggleSignInUpOverlay();
-  }
+  };
 
   visiblePages(props) {
     if (!props.pages) return [];
@@ -81,7 +83,7 @@ export default class LayoutFooter extends Component {
     if (!this.props.settings.attributes.general.contactUrl) return null;
     const url = this.props.settings.attributes.general.contactUrl;
     return (
-      <a target="_blank" href={url}>
+      <a target="_blank" href={url} rel="noopener noreferrer">
         {"Contact"}
       </a>
     );
@@ -103,8 +105,21 @@ export default class LayoutFooter extends Component {
       </a>
     );
     pages.push(<a href="mailto:webbook@umn.edu">{"Email"}</a>);
-    return pages;
+    return pages.filter(p => p !== null);
   }
+
+  updateSearchWord = event => {
+    this.setState({ keyword: event.target.value });
+  };
+
+  doSearch = event => {
+    event.preventDefault();
+    const path = lh.link("frontendSearch");
+    this.props.history.push(path, {
+      searchQueryState: { keyword: this.state.keyword }
+    });
+    this.setState({ keyword: "" });
+  };
 
   renderCopyright() {
     if (!this.props.settings) return null;
@@ -123,21 +138,34 @@ export default class LayoutFooter extends Component {
       <footer className="footer-browse">
         <div className="container">
           <div className="rel">
-            <Link to={lh.link("frontend")} className="logo">
+            <a
+              href="http://manifoldapp.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="logo"
+            >
               <i className="manicon manicon-manifold-logo" />
-              {"Manifold"}
-            </Link>
+              <span className="text">
+                {"Powered by Manifold"}
+                <span className="small">
+                  Learn more at{" "}
+                  <span className="underline">manifoldapp.org</span>
+                </span>
+              </span>
+            </a>
           </div>
           <nav className="text-nav">
             <ul>
               {/* eslint-disable react/no-array-index-key */}
               {chunkedPages.map((pageGroup, pageGroupIndex) => (
                 <li key={pageGroupIndex}>
-                  <ul>
-                    {pageGroup.map((page, pageIndex) => (
-                      <li key={pageIndex}>{page}</li>
-                    ))}
-                  </ul>
+                  {pageGroup.length > 0 ? (
+                    <ul>
+                      {pageGroup.map((page, pageIndex) => (
+                        <li key={pageIndex}>{page}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </li>
               ))}
               {/* eslint-enable react/no-array-index-key */}
@@ -145,30 +173,27 @@ export default class LayoutFooter extends Component {
           </nav>
 
           <section className="footer-secondary">
-            {/*
-              Hiding search markup until basic search functionality is implemented
-              <form>
-                <div className="search-button-inline">
-                  <input type="text" placeholder="Search"/>
-                  <button className="manicon manicon-magnify">
-                    <span className="screen-reader-text">Click to submit search query</span>
-                  </button>
-                </div>
-              </form>
-            */}
-            <p className="colophon">
-              {this.renderCopyright()}
-              {`Manifold is released under the `}
-              <a href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md">
-                GNU General Public License v3
-              </a>
-              {`. Download and contribute to `}
-              <a href="https://github.com/ManifoldScholar/manifold">Manifold</a>
-              {` on github.`}
-            </p>
+            <form onSubmit={this.doSearch}>
+              <div className="search-button-inline">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  value={this.state.keyword}
+                  onChange={this.updateSearchWord}
+                />
+                <button className="manicon manicon-magnify">
+                  <span className="screen-reader-text">
+                    Click to submit search query
+                  </span>
+                </button>
+              </div>
+            </form>
+            <div className="colophon">{this.renderCopyright()}</div>
           </section>
         </div>
       </footer>
     );
   }
 }
+
+export default withRouter(LayoutFooter);

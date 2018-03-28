@@ -160,13 +160,29 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
       >
         <a
           className="logo"
-          href="/"
-          onClick={[Function]}
+          href="http://manifoldapp.org"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           <i
             className="manicon manicon-manifold-logo"
           />
-          Manifold
+          <span
+            className="text"
+          >
+            Powered by Manifold
+            <span
+              className="small"
+            >
+              Learn more at
+               
+              <span
+                className="underline"
+              >
+                manifoldapp.org
+              </span>
+            </span>
+          </span>
         </a>
       </div>
       <nav
@@ -191,11 +207,6 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                   Projects
                 </a>
               </li>
-              <li />
-            </ul>
-          </li>
-          <li>
-            <ul>
               <li>
                 <a
                   href="http://twitter.com/manifoldscholar"
@@ -205,6 +216,10 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
                   Twitter
                 </a>
               </li>
+            </ul>
+          </li>
+          <li>
+            <ul>
               <li>
                 <a
                   href="mailto:webbook@umn.edu"
@@ -219,23 +234,32 @@ exports[`Frontend Frontend Container renders correctly 1`] = `
       <section
         className="footer-secondary"
       >
-        <p
-          className="colophon"
+        <form
+          onSubmit={[Function]}
         >
-          Manifold is released under the 
-          <a
-            href="https://raw.githubusercontent.com/ManifoldScholar/manifold/development/LICENSE.md"
+          <div
+            className="search-button-inline"
           >
-            GNU General Public License v3
-          </a>
-          . Download and contribute to 
-          <a
-            href="https://github.com/ManifoldScholar/manifold"
-          >
-            Manifold
-          </a>
-           on github.
-        </p>
+            <input
+              onChange={[Function]}
+              placeholder="Search"
+              type="text"
+              value=""
+            />
+            <button
+              className="manicon manicon-magnify"
+            >
+              <span
+                className="screen-reader-text"
+              >
+                Click to submit search query
+              </span>
+            </button>
+          </div>
+        </form>
+        <div
+          className="colophon"
+        />
       </section>
     </div>
   </footer>
