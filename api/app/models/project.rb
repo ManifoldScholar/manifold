@@ -104,7 +104,7 @@ class Project < ApplicationRecord
   money_attributes :purchase_price
 
   # Validation
-  validates :purchase_url, url: { allow_nil: true }
+  validates :purchase_url, url: { allow_blank: true }
   validates :title, presence: true
   validates :purchase_price_currency,
             inclusion: { in: Money::Currency.all.map(&:iso_code) },
