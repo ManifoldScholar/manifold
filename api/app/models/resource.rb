@@ -27,6 +27,7 @@ class Resource < ApplicationRecord
   include ResourceAttachmentValidation
   include ResourceAttributeResets
   include Concerns::HasFormattedAttributes
+  include Concerns::HasSortTitle
   include Metadata
   extend FriendlyId
 
@@ -37,6 +38,7 @@ class Resource < ApplicationRecord
     series_number edition issue volume rights rights_territory restrictions rights_holder
     creator alt_text credit copyright_status
   )
+  has_sort_title :title_plaintext
 
   friendly_id :title, use: :slugged
 
@@ -102,7 +104,7 @@ class Resource < ApplicationRecord
       .order("collection_resources.position ASC")
   }
   scope :with_order, lambda { |by|
-    return order(:created_at, :title) unless by.present?
+    return order(:created_at, :sort_title) unless by.present?
     order(by)
   }
 

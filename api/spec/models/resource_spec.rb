@@ -16,6 +16,13 @@ RSpec.describe Resource, type: :model do
     expect(resource).to_not be_valid
   end
 
+  it "updates the sort_title when saved" do
+    resource = FactoryBot.create(:resource, title: "A Hobbit's Journey")
+    resource.title = "The end of the world"
+    resource.save
+    expect(resource.sort_title).to eq "The end of the world"
+  end
+
   it "has a list of tags" do
     resource = FactoryBot.create(:resource)
     resource.tag_list = "one, two; three"
