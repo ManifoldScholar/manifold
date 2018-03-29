@@ -31,6 +31,7 @@ class Project < ApplicationRecord
   include Attachments
   include Metadata
   include Concerns::HasFormattedAttributes
+  include Concerns::HasSortTitle
   include WithPermittedUsers
   extend FriendlyId
 
@@ -49,6 +50,9 @@ class Project < ApplicationRecord
     }
   end
   with_citable_children :texts
+  has_sort_title do |project|
+    project.title[/^((a|the|an) )?(?<title>.*)$/i, :title]
+  end
 
   # URLs
   friendly_id :title, use: :slugged
@@ -92,7 +96,6 @@ class Project < ApplicationRecord
 
   # Callbacks
   before_save :prepare_to_reindex_children, on: [:update], if: :draft_changed?
-  before_save :update_sort_title, if: :title_changed?
   after_commit :trigger_creation_event, on: [:create]
   after_commit :queue_reindex_children_job
 
@@ -188,11 +191,6 @@ class Project < ApplicationRecord
   # -ZD
   def self.call
     all
-  end
-
-  def update_sort_title
-    return if title.blank?
-    self.sort_title = title[/^((a|the|an) )?(?<title>.*)$/i, :title]
   end
 
   def resource_kinds

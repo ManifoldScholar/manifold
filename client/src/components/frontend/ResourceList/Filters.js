@@ -105,9 +105,9 @@ export default class ResourceListFilters extends Component {
               onChange={event => this.setFilters(event, "order")}
               value={this.state.filters.order || ""}
             >
-              <option value="">Order By:</option>
-              <option value="title ASC">A-Z</option>
-              <option value="title DESC">Z-A</option>
+              <option value="default">Order By:</option>
+              <option value="sort_title ASC">A-Z</option>
+              <option value="sort_title DESC">Z-A</option>
             </select>
             <i className="manicon manicon-caret-down" />
           </div>

@@ -106,17 +106,17 @@ exports[`Frontend ProjectResources Container renders correctly 1`] = `
               value=""
             >
               <option
-                value=""
+                value="default"
               >
                 Order By:
               </option>
               <option
-                value="title ASC"
+                value="sort_title ASC"
               >
                 A-Z
               </option>
               <option
-                value="title DESC"
+                value="sort_title DESC"
               >
                 Z-A
               </option>
