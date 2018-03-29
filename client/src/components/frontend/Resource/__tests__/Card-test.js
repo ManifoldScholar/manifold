@@ -5,8 +5,8 @@ import build from "test/fixtures/build";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Resource.Card component", () => {
-  const resource = build.entity.resource("1", { projectId: "1" });
   const project = build.entity.project("2");
+  const resource = build.entity.resource("1", {}, { project });
 
   it("renders correctly", () => {
     const component = renderer.create(

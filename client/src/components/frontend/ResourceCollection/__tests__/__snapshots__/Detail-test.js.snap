@@ -274,10 +274,10 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
         >
           <select
             onChange={[Function]}
-            value="default"
+            value=""
           >
             <option
-              value="default"
+              value=""
             >
               Type:
             </option>
@@ -301,10 +301,10 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
         >
           <select
             onChange={[Function]}
-            value="default"
+            value=""
           >
             <option
-              value="default"
+              value=""
             >
               Tag:
             </option>
@@ -323,10 +323,10 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
         >
           <select
             onChange={[Function]}
-            value="default"
+            value=""
           >
             <option
-              value="default"
+              value=""
             >
               Order By:
             </option>
@@ -476,7 +476,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/1/resources?tag=dog"
+                      href="/project/slug-1/resources/?tag=dog"
                       onClick={[Function]}
                     >
                       dog
@@ -485,7 +485,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/1/resources?tag=puppy"
+                      href="/project/slug-1/resources/?tag=puppy"
                       onClick={[Function]}
                     >
                       puppy
@@ -494,7 +494,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
                   <li>
                     <a
                       className={null}
-                      href="/project/1/resources?tag=goat"
+                      href="/project/slug-1/resources/?tag=goat"
                       onClick={[Function]}
                     >
                       GOAT

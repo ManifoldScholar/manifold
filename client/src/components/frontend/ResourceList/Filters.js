@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
+import omitBy from "lodash/omitBy";
 
 export default class ResourceListFilters extends Component {
   static displayName = "ResourceList.Filters";
@@ -15,82 +16,50 @@ export default class ResourceListFilters extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState(props.initialFilterState);
-    this.setFilters = this.setFilters.bind(this);
-    this.resetFilters = this.resetFilters.bind(this);
   }
 
-  setFilters(event, label) {
-    event.preventDefault();
-    const value =
-      label === "keyword"
-        ? event.target.querySelector(".search-input input").value
-        : event.target.value;
-    const filter = Object.assign({}, this.state.filter);
-    const inputs = Object.assign({}, this.state.inputs);
-    if (value && label) {
-      switch (value) {
-        case "default":
-          delete filter[label];
-          inputs[label] = "default";
-          break;
-        default:
-          filter[label] = value;
-          inputs[label] = value;
-          break;
-      }
-      this.setState({ inputs, filter }, this.updateResults);
-    }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.initialFilterState === this.props.initialFilterState)
+      return null;
+    this.setState(this.initialState(nextProps.initialFilterState));
   }
 
-  setKeywordInput(event) {
+  setFilters = (event, label) => {
     event.preventDefault();
     const value = event.target.value;
-    const inputs = Object.assign({}, this.state.inputs);
-    const filter = Object.assign({}, this.state.filter);
-    if (value === "") {
-      inputs.keyword = "";
-      delete filter.keyword;
-    } else {
-      inputs.keyword = value;
-    }
-    this.setState({ inputs, filter });
-  }
+    const filters = Object.assign({}, this.state.filters);
+    filters[label] = value;
+    if (label === "keyword") return this.setState({ filters });
+    this.setState({ filters }, this.updateResults);
+  };
 
-  updateResults() {
-    this.props.filterChangeHandler(this.state.filter);
-  }
+  updateResults = event => {
+    if (event) event.preventDefault();
+    const filter = omitBy(this.state.filters, value => value === "");
+    this.props.filterChangeHandler(filter);
+  };
 
   initialState(init) {
-    return {
-      filter: init || {},
-      inputs: init || {
-        keyword: "",
-        kind: "default",
-        tag: "default",
-        order: "default"
-      }
-    };
+    const filters = Object.assign({}, init);
+    return { filters };
   }
 
-  resetFilters(event) {
+  resetFilters = event => {
     event.preventDefault();
     this.setState(this.initialState(), this.updateResults);
-  }
+  };
 
   render() {
     return (
-      <form
-        className="form-list-filter"
-        onSubmit={event => this.setFilters(event, "keyword")}
-      >
+      <form className="form-list-filter" onSubmit={this.updateResults}>
         <div className="search-input">
           <button className="search-button" type="submit">
             <i className="manicon manicon-magnify" />
           </button>
           <input
-            value={this.state.inputs.keyword}
+            value={this.state.filters.keyword || ""}
             type="text"
-            onChange={event => this.setKeywordInput(event)}
+            onChange={event => this.setFilters(event, "keyword")}
             placeholder="Search"
           />
         </div>
@@ -98,9 +67,9 @@ export default class ResourceListFilters extends Component {
           <div className="select">
             <select
               onChange={event => this.setFilters(event, "kind")}
-              value={this.state.inputs.kind}
+              value={this.state.filters.kind || ""}
             >
-              <option value="default">Type:</option>
+              <option value="">Type:</option>
               {this.props.kinds
                 ? this.props.kinds.map(kind => {
                     return (
@@ -116,9 +85,9 @@ export default class ResourceListFilters extends Component {
           <div className="select">
             <select
               onChange={event => this.setFilters(event, "tag")}
-              value={this.state.inputs.tag}
+              value={this.state.filters.tag || ""}
             >
-              <option value="default">Tag:</option>
+              <option value="">Tag:</option>
               {this.props.tags
                 ? this.props.tags.map(tag => {
                     return (
@@ -134,9 +103,9 @@ export default class ResourceListFilters extends Component {
           <div className="select">
             <select
               onChange={event => this.setFilters(event, "order")}
-              value={this.state.inputs.order}
+              value={this.state.filters.order || ""}
             >
-              <option value="default">Order By:</option>
+              <option value="">Order By:</option>
               <option value="title ASC">A-Z</option>
               <option value="title DESC">Z-A</option>
             </select>

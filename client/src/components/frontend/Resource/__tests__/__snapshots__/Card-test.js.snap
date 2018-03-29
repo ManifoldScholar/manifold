@@ -111,7 +111,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
         <li>
           <a
             className={null}
-            href="/project/1/resources?tag=dog"
+            href="/project/slug-2/resources/?tag=dog"
             onClick={[Function]}
           >
             dog
@@ -120,7 +120,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
         <li>
           <a
             className={null}
-            href="/project/1/resources?tag=puppy"
+            href="/project/slug-2/resources/?tag=puppy"
             onClick={[Function]}
           >
             puppy
@@ -129,7 +129,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
         <li>
           <a
             className={null}
-            href="/project/1/resources?tag=goat"
+            href="/project/slug-2/resources/?tag=goat"
             onClick={[Function]}
           >
             GOAT

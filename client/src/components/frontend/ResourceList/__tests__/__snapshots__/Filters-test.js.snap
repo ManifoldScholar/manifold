@@ -20,7 +20,7 @@ exports[`Frontend.ResourceList.Filters Component renders correctly 1`] = `
       onChange={[Function]}
       placeholder="Search"
       type="text"
-      value={undefined}
+      value=""
     />
   </div>
   <div
@@ -31,10 +31,10 @@ exports[`Frontend.ResourceList.Filters Component renders correctly 1`] = `
     >
       <select
         onChange={[Function]}
-        value={undefined}
+        value=""
       >
         <option
-          value="default"
+          value=""
         >
           Type:
         </option>
@@ -58,10 +58,10 @@ exports[`Frontend.ResourceList.Filters Component renders correctly 1`] = `
     >
       <select
         onChange={[Function]}
-        value={undefined}
+        value=""
       >
         <option
-          value="default"
+          value=""
         >
           Tag:
         </option>
@@ -85,10 +85,10 @@ exports[`Frontend.ResourceList.Filters Component renders correctly 1`] = `
     >
       <select
         onChange={[Function]}
-        value={undefined}
+        value=""
       >
         <option
-          value="default"
+          value=""
         >
           Order By:
         </option>

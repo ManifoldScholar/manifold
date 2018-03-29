@@ -7,8 +7,8 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 describe("Frontend.Project.Resources component", () => {
   const project = build.entity.project("1");
   const resources = [
-    build.entity.resource("2", { projectId: "1" }),
-    build.entity.resource("3", { projectId: "1" })
+    build.entity.resource("2", {}, { project }),
+    build.entity.resource("3", {}, { project })
   ];
   const filterChangeMock = jest.fn();
   const pagintationClickMock = jest.fn();

@@ -702,8 +702,12 @@ export default () => {
           exact: true,
           component: Frontend.ProjectResources,
           path: "/project/:id/resources/:page?",
-          helper: (p, pg = null) =>
-            `/project/${p}/resources${pg ? `/${pg}` : ""}`
+          helper: (p, params = {}, page = null) => {
+            const query = queryString.stringify(params);
+            if (!query)
+              return `/project/${p}/resources${page ? `/${page}` : ""}`;
+            return `/project/${p}/resources${page ? `/${page}` : ""}/?${query}`;
+          }
         },
         {
           name: "frontendProjectCollectionResource",

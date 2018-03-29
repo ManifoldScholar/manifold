@@ -45,7 +45,7 @@ class ProjectResourcesContainer extends Component {
     resources: PropTypes.array,
     meta: PropTypes.object,
     dispatch: PropTypes.func,
-    location: PropTypes.object,
+    location: PropTypes.object.isRequired,
     history: PropTypes.object
   };
 
@@ -60,13 +60,16 @@ class ProjectResourcesContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = this.initialState(
-      queryString.parse(this.props.location.search)
-    );
-    this.filterChange = this.filterChange.bind(this);
+    this.state = this.initialState(queryString.parse(props.location.search));
     this.updateResults = debounce(this.updateResults.bind(this), 250);
-    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
-    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.search === this.props.location.search) return null;
+    this.setState(
+      this.initialState(queryString.parse(nextProps.location.search)),
+      this.updateResults
+    );
   }
 
   componentWillUnmount() {
@@ -75,9 +78,8 @@ class ProjectResourcesContainer extends Component {
   }
 
   initialState(init) {
-    const filters = init || {};
     return {
-      filter: filters
+      filter: init || {}
     };
   }
 
@@ -94,12 +96,12 @@ class ProjectResourcesContainer extends Component {
     this.props.dispatch(action);
   }
 
-  filterChange(filter) {
+  filterChange = filter => {
     this.setState({ filter }, () => {
       this.updateResults();
       this.updateUrl(filter);
     });
-  }
+  };
 
   updateUrl(filter) {
     const pathname = this.props.location.pathname;
@@ -107,7 +109,7 @@ class ProjectResourcesContainer extends Component {
     this.props.history.push({ pathname, search });
   }
 
-  handlePageChange(event, pageParam) {
+  handlePageChange = (event, pageParam) => {
     const pagination = { number: pageParam, size: perPage };
     const project = this.props.project;
     const filter = this.state.filter;
@@ -116,13 +118,13 @@ class ProjectResourcesContainer extends Component {
       requests.feResources
     );
     this.props.dispatch(action);
-  }
+  };
 
-  pageChangeHandlerCreator(pageParam) {
+  pageChangeHandlerCreator = pageParam => {
     return event => {
       this.handlePageChange(event, pageParam);
     };
-  }
+  };
 
   render() {
     const { project, settings } = this.props;
