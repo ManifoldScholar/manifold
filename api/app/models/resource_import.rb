@@ -51,7 +51,7 @@ class ResourceImport < ApplicationRecord
     %w(
       title kind sub_kind created_at caption description fingerprint external_url
       external_id external_type allow_high_res allow_download embed_code slug
-      minimum_width minimum_height iframe_allow_fullscreen
+      minimum_width minimum_height iframe_allow_fullscreen tag_list
     )
   end
 

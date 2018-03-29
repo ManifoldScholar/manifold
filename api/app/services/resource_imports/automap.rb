@@ -9,7 +9,8 @@ module ResourceImports
       "external_type" => ["host name"].freeze,
       "external_id" => ["file id"].freeze,
       "credit" => ["credit line"].freeze,
-      "allow_high_res" => ["allow_high-res download", "allow high-res viewing"].freeze
+      "allow_high_res" => ["allow_high-res download", "allow high-res viewing"].freeze,
+      "tag_list" => ["keywords"].freeze
     }.freeze
 
     record :resource_import

@@ -79,7 +79,7 @@ RSpec.shared_examples "after parsing" do
       "Filename" => "attachment.attachment",
       "High Res" => "attachment.high_res",
       "Host Name" => "external_type",
-      "Keywords" => "metadata.keywords",
+      "Keywords" => "tag_list",
       "Restrictions" => "metadata.restrictions",
       "Sub Type" => "sub_kind",
       "Title" => "title",
