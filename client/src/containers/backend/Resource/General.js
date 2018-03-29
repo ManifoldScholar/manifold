@@ -56,7 +56,8 @@ export class ResourceGeneralContainer extends PureComponent {
             focusOnMount
             label="Tags"
             name="attributes[tagList]"
-            placeholder="Enter tags separated by ,"
+            placeholder="Enter tags"
+            instructions={`Separate tags with "," or ";"`}
           />
           <Form.TextArea
             label="Description"

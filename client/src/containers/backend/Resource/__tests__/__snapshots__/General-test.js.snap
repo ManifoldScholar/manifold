@@ -116,21 +116,20 @@ exports[`Backend Resource General Container renders correctly 1`] = `
         style={Object {}}
       >
         <label
-          className=""
+          className="has-instructions"
         >
           Tags
         </label>
+        <span
+          className="instructions"
+        >
+          Separate tags with "," or ";"
+        </span>
         <input
           onChange={[Function]}
-          placeholder="Enter tags separated by ,"
+          placeholder="Enter tags"
           type="text"
-          value={
-            Array [
-              "dog",
-              "puppy",
-              "GOAT",
-            ]
-          }
+          value="dog, puppy, GOAT"
         />
       </div>
       <div

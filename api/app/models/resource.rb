@@ -35,7 +35,7 @@ class Resource < ApplicationRecord
     series_title container_title isbn issn doi original_publisher
     original_publisher_place original_title publisher publisher_place version
     series_number edition issue volume rights rights_territory restrictions rights_holder
-    creator alt_text credit copyright_status keywords
+    creator alt_text credit copyright_status
   )
 
   friendly_id :title, use: :slugged
@@ -109,7 +109,6 @@ class Resource < ApplicationRecord
   # Callbacks
   before_validation :update_kind
   before_update :reset_stale_fields
-  # before_save :update_tags
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_create :resource_to_event
 

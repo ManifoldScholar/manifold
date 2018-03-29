@@ -191,11 +191,6 @@ const applicationConfiguration = {
         altText: {
           placeholder: "Enter alternative text as necessary",
           type: "TextInput"
-        },
-        keywords: {
-          placeholder: "Enter keywords",
-          type: "TextInput",
-          instructions: 'Separate keywords with "," or ";"'
         }
       }
     }

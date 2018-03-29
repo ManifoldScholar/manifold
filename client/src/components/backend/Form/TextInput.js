@@ -19,17 +19,25 @@ class FormTextInput extends Component {
     value: PropTypes.any,
     focusOnMount: PropTypes.bool,
     errors: PropTypes.array,
-    password: PropTypes.bool
+    password: PropTypes.bool,
+    join: PropTypes.func
   };
 
   static defaultProps = {
     focusOnMount: false,
-    password: false
+    password: false,
+    join: array => array.join(", ")
   };
 
   componentDidMount() {
     if (this.props.focusOnMount === true && this.inputElement)
       this.inputElement.focus();
+  }
+
+  renderValue(value) {
+    if (!value) return "";
+    if (isString(value)) return value;
+    return this.props.join(value);
   }
 
   render() {
@@ -54,7 +62,7 @@ class FormTextInput extends Component {
           type={inputType}
           placeholder={this.props.placeholder}
           onChange={this.props.onChange}
-          value={this.props.value || ""}
+          value={this.renderValue(this.props.value)}
         />
       </GlobalForm.Errorable>
     );
