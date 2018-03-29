@@ -10,7 +10,7 @@ describe("Frontend ProjectResources Container", () => {
   const store = build.store();
 
   const project = build.entity.project("1");
-  const resource = build.entity.resource("2", { projectId: "1" });
+  const resource = build.entity.resource("2", {}, { project });
 
   const pageChangeMock = jest.fn();
   const filterChangeMock = jest.fn();

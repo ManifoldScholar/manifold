@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import lh from "helpers/linkHandler";
 
 export default class ResourceTagList extends Component {
   static displayName = "Resource.TagList";
@@ -16,10 +17,10 @@ export default class ResourceTagList extends Component {
 
   mapTagsToLinks(resource) {
     const tags = resource.attributes.tagList;
-    const projectId = resource.attributes.projectId;
+    const project = resource.relationships.project;
     const out = [];
     tags.map((tag, index) => {
-      return out.push(this.createTagLink(tag, projectId, index));
+      return out.push(this.createTagLink(tag, project.attributes.slug, index));
     });
     return out;
   }
@@ -34,14 +35,17 @@ export default class ResourceTagList extends Component {
     event.stopPropagation();
   };
 
-  createTagLink(tag, projectId, index) {
-    if (!tag || !projectId) return null;
+  createTagLink(tag, projectSlug, index) {
+    if (!tag || !projectSlug) return null;
+    const url = lh.link("frontendProjectResources", projectSlug, {
+      tag: tag.toLowerCase()
+    });
     return (
       <li key={`${tag}-${index}`}>
         <Link
           onClick={this.stopPropagation}
           className={this.props.disabledLinks ? "disabled" : null}
-          to={`/project/${projectId}/resources?tag=${tag.toLowerCase()}`}
+          to={url}
         >
           {tag}
         </Link>
