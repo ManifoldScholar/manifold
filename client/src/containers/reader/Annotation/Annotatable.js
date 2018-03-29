@@ -563,6 +563,7 @@ class Annotatable extends Component {
             destroySelected={this.destroySelected}
             highlight={this.highlightSelection}
             annotate={this.startAnnotateSelection}
+            text={this.props.text}
           />
         );
       case "link":

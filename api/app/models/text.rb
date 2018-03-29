@@ -8,7 +8,6 @@ class Text < ApplicationRecord
   # Authorization
   include Authority::Abilities
   include Concerns::SerializedAbilitiesFor
-  self.authorizer_name = "ProjectChildAuthorizer"
 
   # Default Scope
   default_scope { order(position: :asc).includes(:titles, :text_subjects, :category) }

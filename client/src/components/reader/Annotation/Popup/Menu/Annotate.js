@@ -14,11 +14,11 @@ export default class AnnotationPopupAnnotate extends PureComponent {
     destroySelected: PropTypes.func.isRequired,
     highlight: PropTypes.func.isRequired,
     annotate: PropTypes.func.isRequired,
-    // bookmark: PropTypes.func.isRequired,
     showSecondary: PropTypes.func.isRequired,
     secondary: PropTypes.string,
     direction: PropTypes.string,
-    showLogin: PropTypes.func.isRequired
+    showLogin: PropTypes.func.isRequired,
+    text: PropTypes.object.isRequired
   };
 
   // https://github.com/facebook/react/issues/6653
@@ -84,7 +84,8 @@ export default class AnnotationPopupAnnotate extends PureComponent {
       <Button
         key={"notate"}
         onClick={this.props.attachNotation}
-        kind="admin"
+        entity={this.props.text}
+        ability="notate"
         label="Resource"
         iconClass="manicon-cube-outline"
       />

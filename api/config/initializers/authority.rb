@@ -50,7 +50,8 @@ Authority.configure do |config|
     update_permissions: "permissions_updatable",
     read_secrets: "secrets_readable",
     read_log: "log_readable",
-    update_limited_to_resource_metadata: "only_resource_metadata_updatable"
+    update_limited_to_resource_metadata: "only_resource_metadata_updatable",
+    notate: "notatable"
   }
 
   # LOGGER
