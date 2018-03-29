@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 
 describe("Reader.Annotation.Popup.Menu.Annotate Component", () => {
   const store = build.store();
+  const text = build.entity.text("1");
 
   it("renders correctly when not logged in", () => {
     const component = renderer.create(
@@ -18,6 +19,7 @@ describe("Reader.Annotation.Popup.Menu.Annotate Component", () => {
           bookmark={() => {}}
           showShare={() => {}}
           showLogin={() => {}}
+          text={text}
         />
       </Provider>
     );

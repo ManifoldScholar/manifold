@@ -7,7 +7,7 @@ class AnnotationAuthorizer < ApplicationAuthorizer
 
   def creatable_by?(user, _options = {})
     return true unless Annotation::NOTATION_TYPES.include?(resource.format)
-    editor_permissions?(user)
+    resource&.text&.notatable_by? user || false
   end
 
   def deletable_by?(user, _options = {})
