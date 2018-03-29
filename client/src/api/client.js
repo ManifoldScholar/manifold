@@ -142,7 +142,10 @@ export default class ApiClient {
       const payload = {
         status: response.status,
         statusText: response.statusText,
-        body: null
+        body: {
+          status: response.status,
+          error: response.statusText
+        }
       };
       response.json().then(
         json => {

@@ -76,6 +76,16 @@ export default function fetchData(WrappedComponent) {
         props.location,
         props.match
       );
+      if (isPromise(result)) {
+        result.catch(() => {
+          ch.error(
+            `Unable to fetch route data for ${getDisplayName(
+              WrappedComponent
+            )}`,
+            "rain_cloud"
+          );
+        });
+      }
       this.addFetchResultToStaticContext(result);
       this.log(props);
     };
