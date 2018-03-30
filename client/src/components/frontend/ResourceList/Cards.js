@@ -21,8 +21,11 @@ export default class ResourceListCards extends PureComponent {
       <div>
         <nav className="resource-list">
           <div className="resource-count">
-            <span>{this.props.resources.length.toLocaleString()}</span>
-            {" Resources Shown"}
+            <Utility.EntityCount
+              pagination={this.props.pagination}
+              singularUnit={"resource"}
+              pluralUnit={"resources"}
+            />
           </div>
           <ul>
             {this.props.resources.map(resource => {

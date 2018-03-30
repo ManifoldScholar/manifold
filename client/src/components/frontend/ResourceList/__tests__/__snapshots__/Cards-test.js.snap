@@ -8,10 +8,19 @@ exports[`Frontend.ResourceList.Cards Component renders correctly 1`] = `
     <div
       className="resource-count"
     >
-      <span>
-        2
-      </span>
-       Resources Shown
+      <p
+        className="list-total"
+      >
+        Showing 
+        <span>
+          1-5
+        </span>
+         of 
+        <span>
+          10
+        </span>
+         resources: 
+      </p>
     </div>
     <ul>
       <li

@@ -389,10 +389,19 @@ exports[`Frontend CollectionDetail Container renders correctly 1`] = `
           <div
             className="resource-count"
           >
-            <span>
-              1
-            </span>
-             Resources Shown
+            <p
+              className="list-total"
+            >
+              Showing 
+              <span>
+                1-1
+              </span>
+               of 
+              <span>
+                2
+              </span>
+               resources: 
+            </p>
           </div>
           <ul>
             <li
