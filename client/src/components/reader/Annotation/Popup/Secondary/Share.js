@@ -5,6 +5,7 @@ import { TwitterButton, FacebookButton } from "react-sociable";
 import Button from "../Button";
 import Panel from "../Panel";
 import lh from "helpers/linkHandler";
+import trim from "lodash/trim";
 
 class AnnotationPopupSecondaryShare extends PureComponent {
   static displayName = "Annotation.Popup.Secondary.Share";
@@ -63,6 +64,10 @@ class AnnotationPopupSecondaryShare extends PureComponent {
 
   message() {
     if (!this.props.selection) return null;
+    const text = trim(this.props.selection.text);
+    if (text.length === 0) {
+      return `Read "${this.props.text.attributes.title}" on Manifold:`;
+    }
     return `"${this.props.selection.text}" from Manifold:`;
   }
 
