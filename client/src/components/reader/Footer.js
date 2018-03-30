@@ -7,13 +7,9 @@ export default class Footer extends Component {
     text: PropTypes.object
   };
 
-  // getFooterText(text) {
-  //   if (!text.attributes.metadata.rights) return null;
-  //   return <Helper.SimpleFormat text={text.attributes.metadata.rights} />;
-  // }
-
   getFooterText(text) {
-    return <Helper.SimpleFormat text="Copyright some year whatever" />;
+    if (!text.attributes.metadata.rights) return null;
+    return <Helper.SimpleFormat text={text.attributes.metadata.rights} />;
   }
 
   render() {
