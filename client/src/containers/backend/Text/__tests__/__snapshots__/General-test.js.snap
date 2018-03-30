@@ -268,7 +268,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
         <span
           className="instructions"
         >
-          This field is used in reader next/previous links. For example, “chapter” for books or “article” for journals
+          For example, “chapter” for books or “article” for journals
         </span>
         <input
           onChange={[Function]}
