@@ -12,7 +12,6 @@ export default class TextGeneralContainer extends PureComponent {
   };
 
   render() {
-    // See https://github.com/ReactTraining/react-router/issues/3753
     return (
       <section>
         <FormContainer.Form
@@ -40,7 +39,7 @@ export default class TextGeneralContainer extends PureComponent {
             label="Section Label"
             name="attributes[sectionKind]"
             placeholder="Enter a label for sections in this text"
-            instructions="This field is used in reader next/previous links. For example, “chapter” for books or “article” for journals"
+            instructions="For example, “chapter” for books or “article” for journals"
           />
           <Form.Save text="Save Text" />
         </FormContainer.Form>
