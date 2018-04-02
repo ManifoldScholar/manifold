@@ -196,6 +196,59 @@ class PageDetailContainer extends PureComponent {
     );
   }
 
+  renderNew() {
+    return (
+      <div>
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
+
+        {this.renderNewHeader()}
+        <section className="backend-panel">
+          <div className="container">
+            <div className="panel">
+              <section>{this.renderRoutes()}</section>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  renderExisting(page) {
+    return (
+      <div>
+        <RedirectIfNoChildRouteMatches
+          route={this.props.route}
+          to={lh.link("backendContentPageGeneral", page.id)}
+        />
+        {this.state.confirmation ? (
+          <Dialog.Confirm {...this.state.confirmation} />
+        ) : null}
+        {this.renderExistingHeader(page)}
+        <section className="backend-panel">
+          <aside className="scrollable">
+            <div className="wrapper">
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks(this.props)}
+              />
+            </div>
+          </aside>
+          <div className="container">
+            <aside className="aside">
+              <Navigation.Secondary
+                links={this.secondaryNavigationLinks(this.props)}
+              />
+            </aside>
+            <div className="panel">
+              <section>{this.renderRoutes()}</section>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   renderRoutes() {
     const { page } = this.props;
     return childRoutes(this.props.route, { childProps: { page } });
@@ -204,46 +257,10 @@ class PageDetailContainer extends PureComponent {
   render() {
     const page = this.page(this.props);
     const isNew = this.isNew(this.props);
-    if (!page) return null;
 
-    return (
-      <div>
-        <RedirectIfNoChildRouteMatches
-          route={this.props.route}
-          to={lh.link("backendContentPageGeneral", page.id)}
-        />
-
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
-        {isNew ? this.renderNewHeader() : this.renderExistingHeader(page)}
-        <section className="backend-panel">
-          {isNew ? null : (
-            <aside className="scrollable">
-              <div className="wrapper">
-                <Navigation.Secondary
-                  links={this.secondaryNavigationLinks(this.props)}
-                />
-              </div>
-            </aside>
-          )}
-          <div className="container">
-            {isNew ? null : (
-              <aside className="aside">
-                <Navigation.Secondary
-                  links={this.secondaryNavigationLinks(this.props)}
-                />
-              </aside>
-            )}
-            {page || isNew ? (
-              <div className="panel">
-                <section>{this.renderRoutes()}</section>
-              </div>
-            ) : null}
-          </div>
-        </section>
-      </div>
-    );
+    if (isNew) return this.renderNew();
+    if (page) return this.renderExisting(page);
+    return null;
   }
 }
 
