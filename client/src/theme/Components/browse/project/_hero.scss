@@ -355,6 +355,14 @@
       p {
         margin-bottom: 0.682em;
       }
+
+      a {
+        color: $neutralWhite;
+
+        &:visited {
+          color: $neutralWhite;
+        }
+      }
     }
 
     .project-entry {

@@ -25,7 +25,9 @@ class Collection < ApplicationRecord
   has_many :resources, through: :collection_resources
   has_many :annotations, dependent: :destroy
 
-  has_formatted_attributes :title, include_wrap: false
+  has_formatted_attributes :title,
+                           include_wrap: false
+  has_formatted_attribute :description
 
   # Attachments
   manifold_has_attached_file :thumbnail, :image

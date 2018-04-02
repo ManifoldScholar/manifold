@@ -10,7 +10,7 @@ module FormattedAttributes
       @renderer_options = renderer_options || {
         filter_html: true,
         no_images: true,
-        no_links: true,
+        no_links: false,
         no_styles: true,
         hard_wrap: true
       }

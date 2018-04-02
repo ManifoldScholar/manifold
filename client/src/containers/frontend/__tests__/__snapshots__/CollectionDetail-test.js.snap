@@ -49,11 +49,6 @@ exports[`Frontend CollectionDetail Container renders correctly 1`] = `
             </div>
           </div>
         </header>
-        <div
-          className="collection-description"
-        >
-          <p />
-        </div>
         <nav
           className="share-nav-primary"
         >
