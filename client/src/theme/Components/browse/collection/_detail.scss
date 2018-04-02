@@ -1,44 +1,34 @@
 .collection-detail {
-  padding-top: 22px;
-  padding-bottom: 12px;
+  .collection-description {
+    @include templateCopy;
+    max-width: 840px;
+    font-size: 15px;
+    color: $neutral70;
+  }
 
-  header {
-    display: table;
-    width: 100%;
-    padding-bottom: 18px;
+  .utility {
+    padding: 26px 0 12px;
 
-    .manicon {
-      display: table-cell;
-      padding-right: 16px;
-      font-size: 36px;
-      color: $neutral75;
-      vertical-align: top;
+    @include respond($break60) {
+      display: flex;
+      justify-content: space-between;
     }
 
-    .collection-title {
-      display: table-cell;
-      width: 100%;
-      padding-top: 23px;
-      vertical-align: top;
+    .meta-value {
+      @include utilityPrimary;
+      font-size: 13px;
 
-      > div {
-        display: flex;
-        align-items: center;
-      }
+      a {
+        color: $neutral30;
+        transition: color $durationFast $timing;
 
-      h1 {
-        @include templateHead;
-        margin: 0;
-        font-size: 22px;
-        font-weight: $regular;
-        color: $neutral75;
-      }
+        &:visited {
+          color: $neutral30;
+        }
 
-      .collection-date {
-        @include subtitlePrimary;
-        margin-top: 4px;
-        font-size: 14px;
-        color: $neutral70;
+        &:hover {
+          color: $accentPrimary;
+        }
       }
     }
   }

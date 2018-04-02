@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { ResourceList, ResourceCollection } from "components/frontend";
+import { Meta } from "components/global";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 
@@ -48,6 +49,7 @@ export default class CollectionDetail extends PureComponent {
     const attr = collection.attributes;
     const collectionUrl =
       this.props.collectionUrl || this.buildRedirectUrl(collection);
+    const project = collection.relationships.project;
 
     return (
       <div>
@@ -59,6 +61,11 @@ export default class CollectionDetail extends PureComponent {
                 <p dangerouslySetInnerHTML={{ __html: attr.description }} />
               </div>
             ) : null}
+            <div className="utility">
+              <Meta.DOI
+                doi={project.attributes.metadataFormatted.resourcesDoi}
+              />
+            </div>
           </div>
         </div>
         <ResourceList.Slideshow

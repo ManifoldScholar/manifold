@@ -31,6 +31,19 @@
       .bg-neutral90 & {
         color: $neutral50;
       }
+
+      a {
+        color: $neutral80;
+        transition: color $durationFast $timing;
+
+        &:visited {
+          color: $neutral80;
+        }
+
+        &:hover {
+          color: $neutral90;
+        }
+      }
     }
   }
 }
@@ -86,8 +99,13 @@
     font-size: 18px;
     color: $neutral80;
 
+    .bg-neutral90 & {
+      color: $neutral40;
+    }
+
     a {
       color: $neutral80;
+      transition: color $durationFast $timing;
 
       &:visited {
         color: $neutral80;
@@ -96,10 +114,18 @@
       &:hover {
         color: $neutral90;
       }
-    }
 
-    .bg-neutral90 & {
-      color: $neutral40;
+      .bg-neutral90 & {
+        color: $neutral40;
+
+        &:visited {
+          color: $neutral40;
+        }
+
+        &:hover {
+          color: $neutral50;
+        }
+      }
     }
 
     @include respond($break40) {

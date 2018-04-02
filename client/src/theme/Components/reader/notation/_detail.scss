@@ -15,22 +15,28 @@
   }
 
   .collection-detail {
-    .collection-title {
-      padding-top: 7px;
-
-      i {
-        font-size: 46px;
-        color: $neutral50;
-      }
-
-      h1 {
-        font-size: 26px;
-        color: $neutral05;
-      }
-    }
-
     .collection-description {
       color: $neutral40;
+    }
+
+    .utility {
+      justify-content: flex-end;
+      padding: 26px 0 0;
+
+      .meta-value {
+        a {
+          color: $neutral75;
+          transition: color $durationFast $timing;
+
+          &:visited {
+            color: $neutral75;
+          }
+
+          &:hover {
+            color: $accentPrimary;
+          }
+        }
+      }
     }
   }
 

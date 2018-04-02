@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Resource } from "components/frontend";
-import { Utility } from "components/global";
+import { Utility, Meta } from "components/global";
 
 export default class ResourceListCards extends PureComponent {
   static displayName = "ResourceList.Cards";
@@ -16,6 +16,7 @@ export default class ResourceListCards extends PureComponent {
 
   render() {
     if (!this.props.resources) return null;
+    const project = this.props.project;
 
     return (
       <div>
@@ -26,6 +27,11 @@ export default class ResourceListCards extends PureComponent {
               singularUnit={"resource"}
               pluralUnit={"resources"}
             />
+            {project ? (
+              <Meta.DOI
+                doi={project.attributes.metadataFormatted.resourcesDoi}
+              />
+            ) : null}
           </div>
           <ul>
             {this.props.resources.map(resource => {

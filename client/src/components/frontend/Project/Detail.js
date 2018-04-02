@@ -13,7 +13,7 @@ import {
   Layout
 } from "components/frontend";
 
-import { MetaList } from "components/global";
+import { Meta } from "components/global";
 
 class Detail extends Component {
   static displayName = "Project.Detail";
@@ -60,13 +60,11 @@ class Detail extends Component {
             <div className="main">
               <i className="manicon manicon-tag" />
               <div className="body">
-                <h4 className="title">
-                  {"About"}
-                </h4>
+                <h4 className="title">{"About"}</h4>
               </div>
             </div>
           </header>
-          <MetaList metadata={project.attributes.metadataFormatted} />
+          <Meta.List metadata={project.attributes.metadataFormatted} />
         </div>
       </section>
     );
@@ -85,9 +83,7 @@ class Detail extends Component {
             <div className="main">
               <i className="manicon manicon-pulse" />
               <div className="body">
-                <h4 className="title">
-                  {"Recent Activity"}
-                </h4>
+                <h4 className="title">{"Recent Activity"}</h4>
               </div>
             </div>
             <div className="hide-60">
@@ -136,9 +132,7 @@ class Detail extends Component {
               <div className="main">
                 <i className="manicon manicon-books-stack" />
                 <div className="body">
-                  <h4 className="title">
-                    {"Texts"}
-                  </h4>
+                  <h4 className="title">{"Texts"}</h4>
                 </div>
               </div>
             </header>
@@ -174,9 +168,7 @@ class Detail extends Component {
             <div className="main">
               <i className="manicon manicon-cube-shine" />
               <div className="body">
-                <h4 className="title">
-                  {"Resources"}
-                </h4>
+                <h4 className="title">{"Resources"}</h4>
               </div>
             </div>
           </header>
@@ -205,9 +197,7 @@ class Detail extends Component {
             <div className="main">
               <i className="manicon manicon-cube-shine" />
               <div className="body">
-                <h4 className="title">
-                  {"Resources"}
-                </h4>
+                <h4 className="title">{"Resources"}</h4>
               </div>
             </div>
           </header>

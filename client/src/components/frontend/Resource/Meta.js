@@ -4,8 +4,7 @@ import { Resource } from "components/frontend";
 import filesize from "filesize";
 import pickBy from "lodash/pickBy";
 import isNull from "lodash/isNull";
-import FormattedDate from "components/global/FormattedDate";
-import humps from "humps";
+import { Meta } from "components/global";
 
 export default class ResourceMeta extends Component {
   static displayName = "Resource.Meta";
@@ -22,6 +21,30 @@ export default class ResourceMeta extends Component {
     showTags: true
   };
 
+  generateResourceMetadataMap(baseMeta, resource) {
+    const keys = Object.keys(baseMeta).sort();
+    const metadata = Object.assign({}, baseMeta);
+    const attr = resource.attributes;
+
+    if (attr.attachmentFileSize) {
+      metadata.fileSize = `${filesize(attr.attachmentFileSize, { round: 0 })}`;
+      keys.unshift("fileSize");
+    }
+
+    if (attr.attachmentExtension) {
+      metadata.fileFormat = attr.attachmentExtension;
+      keys.unshift("fileFormat");
+    }
+
+    metadata.createdOn = attr.createdAt;
+    keys.unshift("createdOn");
+
+    metadata.type = attr.kind.charAt(0).toUpperCase() + attr.kind.slice(1);
+    keys.unshift("type");
+
+    return { metadata, keys };
+  }
+
   render() {
     const attr = this.props.resource.attributes;
     const exclude = ["altText"];
@@ -29,7 +52,11 @@ export default class ResourceMeta extends Component {
       attr.metadataFormatted,
       (v, k) => !exclude.includes(k) && !isNull(v) && v.length > 0
     );
-    const keys = Object.keys(filteredMetadata).sort();
+
+    const { metadata, keys } = this.generateResourceMetadataMap(
+      filteredMetadata,
+      this.props.resource
+    );
 
     return (
       <section className="resource-meta">
@@ -38,49 +65,14 @@ export default class ResourceMeta extends Component {
             <i className={`manicon manicon-resource-${attr.kind}`} />
           </figure>
         ) : null}
-        <ul className={`meta-list-${this.props.layout}`}>
-          <li>
-            <span className="meta-label">{"Type"}</span>
-            <span className="meta-value">
-              {attr.kind.charAt(0).toUpperCase() + attr.kind.slice(1)}
-            </span>
-          </li>
-          {attr.attachmentFileSize ? (
-            <li>
-              <span className="meta-label">{"File Size"}</span>
-              <span className="meta-value">
-                {" " + filesize(attr.attachmentFileSize, { round: 0 })}
-              </span>
-            </li>
-          ) : null}
-          {attr.attachmentExtension ? (
-            <li>
-              <span className="meta-label">{"File Format"}</span>
-              <span className="meta-value">{attr.attachmentExtension}</span>
-            </li>
-          ) : null}
-          <li>
-            <span className="meta-label">{"Created On"}</span>
-            <span className="meta-value">
-              <FormattedDate format="MMMM DD, YYYY" date={attr.createdAt} />
-            </span>
-          </li>
-          {keys.sort().map(key => {
-            return (
-              <li key={key}>
-                <span className="meta-label">
-                  {humps.decamelize(key, { separator: " " })}
-                </span>
-                <span
-                  className="meta-value"
-                  dangerouslySetInnerHTML={{
-                    __html: attr.metadataFormatted[key]
-                  }}
-                />
-              </li>
-            );
-          })}
-        </ul>
+
+        <Meta.List
+          map={keys}
+          metadata={metadata}
+          level={this.props.layout}
+          sortByLength={false}
+        />
+
         {this.props.showTags ? (
           <Resource.TagList resource={this.props.resource} />
         ) : null}

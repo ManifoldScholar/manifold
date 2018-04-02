@@ -12,9 +12,14 @@
 
   a {
     color: $neutral50;
+    transition: color $durationFast $timing;
 
     &:visited {
       color: $neutral50;
+    }
+
+    &:hover {
+      color: $neutral70;
     }
   }
 

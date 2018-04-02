@@ -26,18 +26,22 @@
 
 // Headings
 // --------------------------------------------------------
-@mixin headingPrimary {
-  @include templateHead;
-  margin-top: 0;
-  // Default margin
-  margin-bottom: 1.2em;
+@mixin headingPrimaryFontSizing {
   font-size: 22px;
-  font-weight: $medium;
-  line-height: 1.32;
 
   @include respond($break60) {
     font-size: 26px;
   }
+}
+
+@mixin headingPrimary {
+  @include templateHead;
+  @include headingPrimaryFontSizing;
+  margin-top: 0;
+  // Default margin
+  margin-bottom: 1.2em;
+  font-weight: $medium;
+  line-height: 1.32;
 }
 
 .heading-primary {

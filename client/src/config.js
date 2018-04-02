@@ -180,6 +180,10 @@ const applicationConfiguration = {
           placeholder: "Enter a digital object identifier",
           type: "TextInput"
         },
+        resourcesDoi: {
+          placeholder: "Enter a digital object identifier",
+          type: "TextInput"
+        },
         creator: {
           placeholder: "Enter the creator name",
           type: "TextInput"

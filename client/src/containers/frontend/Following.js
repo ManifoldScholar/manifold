@@ -125,9 +125,7 @@ export class FollowingContainer extends Component {
             <div className="main">
               <i className="manicon manicon-lamp" />
               <div className="body">
-                <h4 className="title">
-                  {"Featured Projects"}
-                </h4>
+                <h4 className="title">{"Featured Projects"}</h4>
               </div>
             </div>
             {this.renderFeaturedButton(featuredLimit)}

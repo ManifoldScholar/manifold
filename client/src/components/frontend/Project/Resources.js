@@ -23,9 +23,7 @@ export default class ProjectResources extends Component {
             <div className="main">
               <i className="manicon manicon-cube-shine" />
               <div className="body">
-                <h2 className="title">
-                  All Project Resources
-                </h2>
+                <h2 className="title">All Project Resources</h2>
               </div>
             </div>
           </header>
@@ -34,6 +32,7 @@ export default class ProjectResources extends Component {
             tags={project.attributes.resourceTags}
             filterChangeHandler={this.props.filterChange}
             initialFilterState={this.props.initialFilterState}
+            project={project}
           />
           <ResourceList.Cards
             project={project}
