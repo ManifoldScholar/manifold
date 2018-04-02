@@ -440,13 +440,6 @@ exports[`Reader Reader Container renders correctly 1`] = `
           <i
             className="manicon manicon-manifold-logo"
           />
-          <div>
-            <p>
-              <span>
-                Copyright some year whatever
-              </span>
-            </p>
-          </div>
           <p
             className="powered-by"
           >
