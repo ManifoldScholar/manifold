@@ -28,7 +28,7 @@ module Filterable
 
     def filter_with_elasticsearch(params)
       return by_pagination params[:page], params[:per_page] unless params.key? :keyword
-      ids = pluck :id
+      ids = distinct.pluck :id
       return none if ids.blank?
       search_query = params.dig :keyword || "*"
       filter = Search::FilterScope.new do |f|
