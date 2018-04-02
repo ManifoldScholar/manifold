@@ -60,7 +60,6 @@ const removeAllNotifications = state => {
 
 const notificationReducer = (state = initialState, action) => {
   if (action.type === "ROUTE_UPDATE" && state.fatalError) {
-    console.log("clearing?");
     return clearFatalError(state, action);
   }
 

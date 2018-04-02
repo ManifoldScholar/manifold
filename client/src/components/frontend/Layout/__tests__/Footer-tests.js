@@ -40,5 +40,4 @@ describe("Frontend.Layout.Footer component", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });

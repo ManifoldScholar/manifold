@@ -6,7 +6,11 @@ import { Provider } from "react-redux";
 import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Frontend.Resource.Meta component", () => {
-  const resource = build.entity.resource("1", {}, { project: build.entity.project("1") });
+  const resource = build.entity.resource(
+    "1",
+    {},
+    { project: build.entity.project("1") }
+  );
   const store = build.store();
 
   it("renders correctly", () => {

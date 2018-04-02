@@ -120,7 +120,7 @@ plugins.push(manifest);
 // In production, make sure react knows to remove dead code, and uglify output.
 if (process.env.NODE_ENV === "production") {
   const envPlugin = new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('production')
+    "process.env.NODE_ENV": JSON.stringify("production")
   });
   plugins.push(envPlugin);
 }
