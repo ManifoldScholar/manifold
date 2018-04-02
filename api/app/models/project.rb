@@ -2,7 +2,7 @@
 class Project < ApplicationRecord
 
   # Constants
-  TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
+  TYPEAHEAD_ATTRIBUTES = [:title, :maker_names].freeze
   AVATAR_COLOR_PRIMARY = "primary".freeze
   AVATAR_COLOR_SECONDARY = "secondary".freeze
   AVATAR_COLOR_TERTIARY = "tertiary".freeze
