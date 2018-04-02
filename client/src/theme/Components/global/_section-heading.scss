@@ -1,5 +1,5 @@
 .section-heading {
-  @include headingPrimary;
+  @include headingPrimaryFontSizing;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -23,34 +23,25 @@
     }
 
     .body {
-      display: inline-block;
+      font-size: 16px;
 
-      .title{
+      .title {
         @include headingPrimary;
         color: $neutral80;
-        margin-bottom: 0;
+        margin-bottom: 2px;
 
         .bg-neutral90 & {
           color: $neutral30;
         }
       }
 
+      .date {
+        @include subtitlePrimary;
+        font-size: 14px;
+        color: $neutral70;
+      }
+
       .meta-value {
-        @include utilityPrimary;
-        font-size: 11px;
-        color: $neutral30;
-
-        @include respond($break60) {
-          font-size: 13px;
-        }
-
-        a {
-          color: $neutral30;
-
-          &:visited {
-            color: $neutral30;
-          }
-        }
       }
     }
   }
@@ -157,6 +148,11 @@
     &.manicon-tag {
       margin-top: -0.028em;
       font-size: 1.385em;
+    }
+
+    &.manicon-file-box {
+      margin-top: 0.2em;
+      font-size: 1.4em;
     }
   }
 }

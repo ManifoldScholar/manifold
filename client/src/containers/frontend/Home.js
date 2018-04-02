@@ -154,9 +154,7 @@ export class HomeContainer extends Component {
             <div className="main">
               <i className="manicon manicon-lamp" />
               <div className="body">
-                <h4 className="title">
-                  {"Featured Projects"}
-                </h4>
+                <h4 className="title">{"Featured Projects"}</h4>
               </div>
             </div>
           </header>
@@ -175,8 +173,8 @@ export class HomeContainer extends Component {
 
   render() {
     const utilityHeader = classNames({
-      "utility": true,
-      "right": this.renderFeaturedProjects()
+      utility: true,
+      right: this.renderFeaturedProjects()
     });
     const feature = isArray(this.props.features)
       ? this.props.features[0]
@@ -208,9 +206,7 @@ export class HomeContainer extends Component {
               <div className="main">
                 <i className="manicon manicon-books-on-shelf" />
                 <div className="body">
-                  <h4 className="title">
-                    {"Our Projects"}
-                  </h4>
+                  <h4 className="title">{"Our Projects"}</h4>
                 </div>
               </div>
               <div className={utilityHeader}>

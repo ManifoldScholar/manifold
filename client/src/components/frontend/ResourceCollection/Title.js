@@ -14,26 +14,29 @@ export default class ResourceCollectionTitle extends Component {
     showCreatedAt: true
   };
 
+  renderDate(attributes) {
+    if (!this.props.showCreatedAt) return null;
+    return (
+      <span className="date">
+        <FormattedDate
+          prefix="Collection created"
+          format="MMMM, YYYY"
+          date={attributes.createdAt}
+        />
+      </span>
+    );
+  }
+
   render() {
     const attr = this.props.collection.attributes;
 
     return (
-      <header>
-        <div className="collection-title">
-          <div>
-            <i className="manicon manicon-file-box" />
-            <div>
-              <h1>{attr.title}</h1>
-              {this.props.showCreatedAt ? (
-                <span className="collection-date">
-                  <FormattedDate
-                    prefix="Collection created"
-                    format="MMMM, YYYY"
-                    date={attr.createdAt}
-                  />
-                </span>
-              ) : null}
-            </div>
+      <header className="section-heading">
+        <div className="main">
+          <i className="manicon manicon-file-box" />
+          <div className="body">
+            <h2 className="title">{attr.title}</h2>
+            {this.renderDate(attr)}
           </div>
         </div>
       </header>

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { MetaList } from "components/global";
+import { Meta } from "components/global";
 
 export default class TextMeta extends PureComponent {
   static displayName = "Reader.TextMeta";
@@ -20,7 +20,7 @@ export default class TextMeta extends PureComponent {
             <p className="subtitle">{this.props.subtitle}</p>
           ) : null}
         </header>
-        <MetaList metadata={this.props.meta} />
+        <Meta.List metadata={this.props.meta} />
       </div>
     );
   }

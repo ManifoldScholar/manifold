@@ -41,9 +41,7 @@ export default class ProjectListFollowing extends Component {
             <div className="main">
               <i className="manicon manicon-books-with-glasses" />
               <div className="body">
-                <h4 className="title">
-                  {"Projects You're Following"}
-                </h4>
+                <h4 className="title">{"Projects You're Following"}</h4>
               </div>
             </div>
             <div className="utility right">

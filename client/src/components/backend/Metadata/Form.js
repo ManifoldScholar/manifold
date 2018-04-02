@@ -45,7 +45,7 @@ export default class FormMakers extends PureComponent {
       {
         label: "Identity",
         children: intersection(
-          ["isbn", "issn", "doi", "uniqueIdentifier"],
+          ["isbn", "issn", "doi", "resourcesDoi", "uniqueIdentifier"],
           keys
         )
       },

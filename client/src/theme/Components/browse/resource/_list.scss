@@ -7,6 +7,38 @@
     font-size: 13px;
     color: $neutral50;
 
+    @include respond($break60) {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .list-total + .meta-value {
+      padding-top: 5px;
+
+      @include respond($break60) {
+        padding-top: 0;
+      }
+    }
+
+    .meta-value {
+      @include utilityPrimary;
+      font-size: 12px;
+      color: $neutral30;
+
+      a {
+        color: $neutral30;
+        transition: color $durationFast $timing;
+
+        &:visited {
+          color: $neutral30;
+        }
+
+        &:hover {
+          color: $accentPrimary;
+        }
+      }
+    }
+
     span {
       color: $neutral75;
     }
