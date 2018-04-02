@@ -48,6 +48,14 @@
     max-width: 840px;
     font-size: 15px;
     color: $neutral70;
+
+    a {
+      color: $neutral70;
+
+      &:visited {
+        color: $neutral70;
+      }
+    }
   }
 
   .share-nav-primary {

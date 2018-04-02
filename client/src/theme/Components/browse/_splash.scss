@@ -116,5 +116,13 @@
 
   .feature-body {
     margin-top: 1.5em;
+
+    a {
+      color: $neutralBlack;
+
+      &:visited {
+        color: $neutralBlack;
+      }
+    }
   }
 }

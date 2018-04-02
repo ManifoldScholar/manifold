@@ -19,6 +19,16 @@ export default class ResourceCollectionDetail extends PureComponent {
     initialFilterState: PropTypes.object
   };
 
+  renderDescription(description) {
+    if (!description) return null;
+    return (
+      <div
+        className="collection-description"
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
+    );
+  }
+
   render() {
     const project = this.props.project;
     const collection = this.props.collection;
@@ -31,9 +41,7 @@ export default class ResourceCollectionDetail extends PureComponent {
         <div className="container flush-top flush-bottom">
           <div className="collection-detail">
             <ResourceCollection.Title collection={collection} showCreatedAt />
-            <div className="collection-description">
-              <p>{attr.description}</p>
-            </div>
+            {this.renderDescription(attr.descriptionFormatted)}
             <Utility.ShareBar url={this.props.collectionUrl} />
           </div>
         </div>

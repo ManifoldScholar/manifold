@@ -31,11 +31,6 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
           </div>
         </div>
       </header>
-      <div
-        className="collection-description"
-      >
-        <p />
-      </div>
       <nav
         className="share-nav-primary"
       >

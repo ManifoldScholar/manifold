@@ -169,6 +169,14 @@
     p + p {
       margin-top: 1em;
     }
+
+    a {
+      color: $neutral75;
+
+      &:visited {
+        color: $neutral75;
+      }
+    }
   }
 
   aside {
