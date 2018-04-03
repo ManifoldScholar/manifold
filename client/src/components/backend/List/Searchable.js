@@ -106,10 +106,10 @@ export class ListSearchable extends PureComponent {
     this.setState({ showOptions: !this.state.showOptions });
   };
 
-  resetSearch(event) {
+  resetSearch = event => {
     event.preventDefault();
     this.setState(this.initialState());
-  }
+  };
 
   initialInputs() {
     const out = { keyword: "" };
