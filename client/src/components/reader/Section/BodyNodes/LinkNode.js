@@ -19,15 +19,17 @@ class LinkNode extends Component {
     if (!this.hasUri()) {
       return false;
     }
-    return URI.parse(this.props.attributes.href).reference === "absolute";
+    return URI.parse(this.props.attributes.href).protocol;
   }
 
   adjustedAttributes() {
     const parsedURI = URI.parse(this.props.attributes.href);
     const pathname = parsedURI.path;
     const query = parsedURI.query;
-    const hash = `#${parsedURI.fragment}`;
-    const adjustedAttributes = { to: { pathname, query, hash } };
+    const adjustedAttributes = { to: { pathname, query } };
+    if (parsedURI.fragment) {
+      adjustedAttributes.to.hash = `#${parsedURI.fragment}`;
+    }
     delete Object.assign(adjustedAttributes, this.props.attributes).href;
     return adjustedAttributes;
   }
