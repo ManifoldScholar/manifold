@@ -57,10 +57,14 @@ class Detail extends Component {
       <section>
         <div className={containerClass}>
           <header className="section-heading">
-            <h4 className="title">
+            <div className="main">
               <i className="manicon manicon-tag" />
-              {"About"}
-            </h4>
+              <div className="body">
+                <h4 className="title">
+                  {"About"}
+                </h4>
+              </div>
+            </div>
           </header>
           <MetaList metadata={project.attributes.metadataFormatted} />
         </div>
@@ -78,10 +82,14 @@ class Detail extends Component {
       <section>
         <div className="container">
           <header className="section-heading">
-            <h4 className="title">
+            <div className="main">
               <i className="manicon manicon-pulse" />
-              {"Recent Activity"}
-            </h4>
+              <div className="body">
+                <h4 className="title">
+                  {"Recent Activity"}
+                </h4>
+              </div>
+            </div>
             <div className="hide-60">
               <Event.AllLink
                 count={attr.eventCount}
@@ -125,10 +133,14 @@ class Detail extends Component {
         <div className={containerClass}>
           <div className="text-category-list-primary">
             <header className="section-heading">
-              <h4 className="title">
+              <div className="main">
                 <i className="manicon manicon-books-stack" />
-                {"Texts"}
-              </h4>
+                <div className="body">
+                  <h4 className="title">
+                    {"Texts"}
+                  </h4>
+                </div>
+              </div>
             </header>
             {project.relationships.publishedText ? (
               <TextList.Published text={project.relationships.publishedText} />
@@ -159,10 +171,14 @@ class Detail extends Component {
       <section className="bg-neutral05">
         <div className="container">
           <header className="section-heading">
-            <h4 className="title">
+            <div className="main">
               <i className="manicon manicon-cube-shine" />
-              {"Resources"}
-            </h4>
+              <div className="body">
+                <h4 className="title">
+                  {"Resources"}
+                </h4>
+              </div>
+            </div>
           </header>
           <ResourceCollectionList.Grid project={project} />
           <ResourceList.Totals
@@ -186,10 +202,14 @@ class Detail extends Component {
       <section className="bg-neutral05">
         <div className="container">
           <header className="section-heading">
-            <h4 className="title">
+            <div className="main">
               <i className="manicon manicon-cube-shine" />
-              {"Resources"}
-            </h4>
+              <div className="body">
+                <h4 className="title">
+                  {"Resources"}
+                </h4>
+              </div>
+            </div>
           </header>
           <ResourceList.Thumbnails
             resources={project.relationships.uncollectedResources}

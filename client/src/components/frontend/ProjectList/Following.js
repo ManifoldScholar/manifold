@@ -37,12 +37,16 @@ export default class ProjectListFollowing extends Component {
     return (
       <section className="bg-neutral05">
         <div className="container">
-          <header className="section-heading utility-right">
-            <h4 className="title">
+          <header className="section-heading">
+            <div className="main">
               <i className="manicon manicon-books-with-glasses" />
-              {"Projects You're Following"}
-            </h4>
-            <div className="section-heading-utility-right">
+              <div className="body">
+                <h4 className="title">
+                  {"Projects You're Following"}
+                </h4>
+              </div>
+            </div>
+            <div className="utility right">
               <ProjectList.Filters
                 updateAction={this.props.handleUpdate}
                 subjects={this.mapFavoritesToSubjects()}

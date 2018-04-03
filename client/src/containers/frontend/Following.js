@@ -107,11 +107,9 @@ export class FollowingContainer extends Component {
     )
       return null;
     return (
-      <div className="section-heading-utility-right">
+      <div className="utility right">
         <Link to={lh.link("frontendFeatured")} className="button-primary">
-          <span>
-            <i className="manicon manicon-lamp" />See all featured
-          </span>
+          <span>See all featured</span>
         </Link>
       </div>
     );
@@ -123,11 +121,15 @@ export class FollowingContainer extends Component {
     return (
       <section>
         <div className="container">
-          <header className="section-heading utility-right">
-            <h4 className="title">
+          <header className="section-heading">
+            <div className="main">
               <i className="manicon manicon-lamp" />
-              {"Featured Projects"}
-            </h4>
+              <div className="body">
+                <h4 className="title">
+                  {"Featured Projects"}
+                </h4>
+              </div>
+            </div>
             {this.renderFeaturedButton(featuredLimit)}
           </header>
           {this.props.featuredProjects ? (
