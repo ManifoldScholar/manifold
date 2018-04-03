@@ -151,10 +151,14 @@ export class HomeContainer extends Component {
       <section>
         <div className="container">
           <header className="section-heading">
-            <h4 className="title">
+            <div className="main">
               <i className="manicon manicon-lamp" />
-              {"Featured Projects"}
-            </h4>
+              <div className="body">
+                <h4 className="title">
+                  {"Featured Projects"}
+                </h4>
+              </div>
+            </div>
           </header>
           <ProjectList.Grid
             authenticated={this.props.authentication.authenticated}
@@ -170,14 +174,9 @@ export class HomeContainer extends Component {
   }
 
   render() {
-    const headerClass = classNames({
-      "section-heading": true,
-      "utility-right": this.renderFeaturedProjects(),
-      "utility-under": !this.renderFeaturedProjects()
-    });
     const utilityHeader = classNames({
-      "section-heading-utility-right": this.renderFeaturedProjects(),
-      "section-heading-utility-under": !this.renderFeaturedProjects()
+      "utility": true,
+      "right": this.renderFeaturedProjects()
     });
     const feature = isArray(this.props.features)
       ? this.props.features[0]
@@ -205,11 +204,15 @@ export class HomeContainer extends Component {
         {this.renderFeaturedProjects()}
         <section className="bg-neutral05">
           <div className="container">
-            <header className={headerClass}>
-              <h4 className="title">
+            <header className="section-heading">
+              <div className="main">
                 <i className="manicon manicon-books-on-shelf" />
-                {"Our Projects"}
-              </h4>
+                <div className="body">
+                  <h4 className="title">
+                    {"Our Projects"}
+                  </h4>
+                </div>
+              </div>
               <div className={utilityHeader}>
                 {/*
                  Note that we're using a different dumb component to render this.

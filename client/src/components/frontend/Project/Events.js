@@ -35,10 +35,14 @@ export default class ProjectEvents extends Component {
         <section>
           <div className="container">
             <header className="section-heading">
-              <h4 className="title">
+              <div className="main">
                 <i className="manicon manicon-pulse" />
-                {"All Activity"}
-              </h4>
+                <div className="body">
+                  <h4 className="title">
+                    {"All Activity"}
+                  </h4>
+                </div>
+              </div>
             </header>
 
             <Event.List

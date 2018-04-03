@@ -20,10 +20,14 @@ export default class ProjectResources extends Component {
       <section>
         <div className="container">
           <header className="section-heading">
-            <h2 className="title">
+            <div className="main">
               <i className="manicon manicon-cube-shine" />
-              All Project Resources
-            </h2>
+              <div className="body">
+                <h2 className="title">
+                  All Project Resources
+                </h2>
+              </div>
+            </div>
           </header>
           <ResourceList.Filters
             kinds={project.attributes.resourceKinds}

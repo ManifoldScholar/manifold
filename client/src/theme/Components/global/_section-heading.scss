@@ -1,81 +1,57 @@
 .section-heading {
+  @include headingPrimary;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 30px;
 
-  &.utility-right {
-    margin-bottom: 37px;
-
-    @include respond($break95) {
-      padding-right: 350px;
-      margin-bottom: 0;
-    }
+  @include respond($break95) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
-  &.utility-under {
-    margin-bottom: 37px;
-  }
-
-  .title {
-    @include headingPrimary;
-    color: $neutral80;
-
-    .bg-neutral90 & {
-      color: $neutral30;
-    }
+  .main {
+    display: flex;
+    align-items: flex-start;
+    padding-right: 25px;
 
     .manicon {
+      margin-right: 14px;
+    }
+
+    .body {
       display: inline-block;
-      margin-right: 14px;
-      color: $neutral40;
-      vertical-align: middle;
-      // React generated wrapper
-      + span {
-        display: inline-block;
-        vertical-align: middle;
+
+      .title{
+        @include headingPrimary;
+        color: $neutral80;
+        margin-bottom: 0;
+
+        .bg-neutral90 & {
+          color: $neutral30;
+        }
       }
-    }
 
-    // Manicons are em sized to resize
-    // in tandem with headline
+      .meta-value {
+        @include utilityPrimary;
+        font-size: 11px;
+        color: $neutral30;
 
-    .manicon-books-on-shelf {
-      font-size: 1.385em;
-    }
+        @include respond($break60) {
+          font-size: 13px;
+        }
 
-    .manicon-books-stack {
-      font-size: 1.923em;
-    }
+        a {
+          color: $neutral30;
 
-    .manicon-books-with-glasses {
-      margin-top: -0.125em;
-      font-size: 1.231em;
-    }
-
-    .manicon-cube-shine {
-      margin-top: -0.294em;
-      margin-right: 14px;
-      font-size: 1.962em;
-    }
-
-    .manicon-lamp {
-      margin-top: -0.156em;
-      font-size: 1.731em;
-    }
-
-    .manicon-new-round {
-      margin-top: -0.061em;
-      margin-right: 13px;
-      font-size: 1.885em;
-      color: $accentPrimary;
-    }
-
-    .manicon-pulse {
-      margin-top: -0.261em;
-      font-size: 0.885em;
-    }
-
-    .manicon-tag {
-      margin-top: -0.028em;
-      font-size: 1.385em;
+          &:visited {
+            color: $neutral30;
+          }
+        }
+      }
     }
   }
 
@@ -96,29 +72,91 @@
     }
   }
 
-  .section-heading-utility-right {
+  .utility {
+    margin-top: 20px;
+
     @include respond($break95) {
-      position: absolute;
-      top: 0;
-      right: 0;
+      margin-top: 0;
     }
 
-    .button-primary {
-      margin-bottom: 20px;
-
+    .right {
       @include respond($break95) {
-        margin-bottom: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
       }
 
-      .manicon {
-        display: inline-block;
-        margin-right: 8px;
-        vertical-align: top;
+      .button-primary {
+        margin-bottom: 20px;
 
-        &.manicon-lamp {
-          font-size: 1.3em;
+        @include respond($break95) {
+          margin-bottom: 0;
+        }
+
+        .manicon {
+          display: inline-block;
+          margin-right: 8px;
+          vertical-align: top;
+
+          &.manicon-lamp {
+            font-size: 1.3em;
+          }
         }
       }
+    }
+  }
+
+  .manicon {
+    display: inline-block;
+    color: $neutral40;
+    vertical-align: middle;
+    // React generated wrapper
+    + span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    // Manicons are em sized to resize
+    // in tandem with headline
+
+    &.manicon-books-on-shelf {
+      font-size: 1.385em;
+    }
+
+    &.manicon-books-stack {
+      font-size: 1.923em;
+    }
+
+    &.manicon-books-with-glasses {
+      font-size: 1.231em;
+    }
+
+    &.manicon-cube-shine {
+      margin-top: -0.24em;
+      margin-right: 14px;
+      font-size: 1.962em;
+    }
+
+    &.manicon-lamp {
+      margin-top: -0.156em;
+      font-size: 1.731em;
+    }
+
+    &.manicon-new-round {
+      margin-top: -0.061em;
+      margin-right: 13px;
+      font-size: 1.885em;
+      color: $accentPrimary;
+    }
+
+    &.manicon-pulse {
+      margin-top: 0.261em;
+      font-size: 0.885em;
+    }
+
+    &.manicon-tag {
+      margin-top: -0.028em;
+      font-size: 1.385em;
     }
   }
 }
