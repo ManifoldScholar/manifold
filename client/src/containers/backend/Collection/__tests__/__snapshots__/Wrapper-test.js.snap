@@ -114,7 +114,7 @@ Array [
               <a
                 aria-current={false}
                 className={undefined}
-                href="/backend/collection/1"
+                href="/backend/collection/1/general"
                 onClick={[Function]}
                 style={undefined}
               >
@@ -150,7 +150,7 @@ Array [
               <a
                 aria-current={false}
                 className={undefined}
-                href="/backend/collection/1"
+                href="/backend/collection/1/general"
                 onClick={[Function]}
                 style={undefined}
               >

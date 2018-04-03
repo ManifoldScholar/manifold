@@ -122,7 +122,7 @@ export class CollectionWrapperContainer extends PureComponent {
   secondaryNavigationLinks(collection) {
     return [
       {
-        path: lh.link("backendCollection", collection.id),
+        path: lh.link("backendCollectionGeneral", collection.id),
         label: "General",
         key: "general"
       },
