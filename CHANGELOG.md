@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.0.1](https://github.com/ManifoldScholar/manifold/tree/v1.0.1) (04/02/2018)
+
+[Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v1.0.0...v1.0.1)
+
+**Bugs**
+
+- Fix incorrect guard on Pages.New container [\#913](https://github.com/ManifoldScholar/manifold/issues/913)
+
 ## [v1.0.0](https://github.com/ManifoldScholar/manifold/tree/v1.0.0) (03/30/2018)
 
 [Full Changelog](https://github.com/ManifoldScholar/manifold/compare/v0.4.0...v1.0.0)
