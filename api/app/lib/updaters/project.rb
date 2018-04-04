@@ -3,13 +3,7 @@ module Updaters
   class Project
 
     include ::Updaters
-
-    set_callback :save, :after, :sort_relationships
-
-    def sort_relationships
-      sort_collaborators(:contributor)
-      sort_collaborators(:creator)
-    end
+    include ::Updaters::Concerns::HasSortableCollaborators
 
     def attachment_fields
       [:avatar, :hero, :cover]
