@@ -25,6 +25,12 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
           "hashtag": "#cute_dog",
           "heroStyles": Object {},
           "hideActivity": false,
+          "metadata": Object {
+            "doi": "12345.6789",
+          },
+          "metadataFormatted": Object {
+            "doi": "12345.6789",
+          },
           "metadataProperties": Array [
             "abstract",
             "archive",

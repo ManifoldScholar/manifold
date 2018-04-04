@@ -84,19 +84,27 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
       <header
         className="section-heading"
       >
-        <h4
-          className="title"
+        <div
+          className="main"
         >
           <i
             className="manicon manicon-pulse"
           />
-          Recent Activity
-        </h4>
+          <div
+            className="body"
+          >
+            <h4
+              className="title"
+            >
+              Recent Activity
+            </h4>
+          </div>
+        </div>
         <div
           className="hide-60"
         >
           <div
-            className="section-heading-utility-right"
+            className="utility right"
           >
             <a
               className="button-primary"
@@ -111,7 +119,7 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
           className="show-60"
         >
           <div
-            className="section-heading-utility-right"
+            className="utility right"
           >
             <a
               className="button-primary"
@@ -224,6 +232,56 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
       </div>
     </div>
   </section>
+  <section>
+    <div
+      className="container flush-top"
+    >
+      <header
+        className="section-heading"
+      >
+        <div
+          className="main"
+        >
+          <i
+            className="manicon manicon-tag"
+          />
+          <div
+            className="body"
+          >
+            <h4
+              className="title"
+            >
+              About
+            </h4>
+          </div>
+        </div>
+      </header>
+      <ul
+        className="meta-list-primary"
+      />
+      <ul
+        className="meta-list-primary columnar"
+      >
+        <li>
+          <span
+            className="meta-label"
+          >
+            doi
+          </span>
+          <div
+            className="meta-value"
+          >
+            <a
+              href="https://doi.org/10.12345.6789"
+              target="_blank"
+            >
+              https://doi.org/10.12345.6789
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
   <section
     className="bg-neutral05"
   >
@@ -328,6 +386,56 @@ exports[`Frontend.Project.Detail component renders correctly when hideActivity i
       </div>
     </div>
   </div>
+  <section>
+    <div
+      className="container flush-top"
+    >
+      <header
+        className="section-heading"
+      >
+        <div
+          className="main"
+        >
+          <i
+            className="manicon manicon-tag"
+          />
+          <div
+            className="body"
+          >
+            <h4
+              className="title"
+            >
+              About
+            </h4>
+          </div>
+        </div>
+      </header>
+      <ul
+        className="meta-list-primary"
+      />
+      <ul
+        className="meta-list-primary columnar"
+      >
+        <li>
+          <span
+            className="meta-label"
+          >
+            doi
+          </span>
+          <div
+            className="meta-value"
+          >
+            <a
+              href="https://doi.org/10.12345.6789"
+              target="_blank"
+            >
+              https://doi.org/10.12345.6789
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
   <section
     className="bg-neutral05"
   >

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Meta.Item component renders correctly when passed child component 1`] = `
+Array [
+  <span
+    className="meta-label"
+  >
+    a metadata property
+  </span>,
+  <div
+    className="meta-value"
+  >
+    <div>
+      A Metadata Value
+    </div>
+  </div>,
+]
+`;
+
+exports[`Global.Meta.Item component renders correctly when passed string 1`] = `
+Array [
+  <span
+    className="meta-label"
+  >
+    a metadata property
+  </span>,
+  <div
+    className="meta-value"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "A Metadata Value",
+      }
+    }
+  />,
+]
+`;

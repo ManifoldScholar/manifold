@@ -34,6 +34,20 @@ exports[`Reader.Toc Component renders correctly 1`] = `
               />
             </li>
           </ul>
+          <div
+            className="toc-footer"
+          >
+            <button
+              onClick={[Function]}
+            >
+              <h4>
+                <i
+                  className="manicon manicon-i-round"
+                />
+                About This Text
+              </h4>
+            </button>
+          </div>
         </nav>
       </div>
     </div>

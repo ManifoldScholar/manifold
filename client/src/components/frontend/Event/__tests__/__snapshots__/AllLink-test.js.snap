@@ -2,7 +2,7 @@
 
 exports[`Frontend.Event.AllLink Component renders correctly 1`] = `
 <div
-  className="section-heading-utility-right"
+  className="utility right"
 >
   <a
     className="button-primary"

@@ -1,36 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
-<section>
+<section
+  className="collection-detail"
+>
   <div
-    className="container flush-top flush-bottom"
+    className="container flush-bottom"
   >
-    <div
-      className="collection-detail"
+    <header
+      className="section-heading"
     >
-      <header>
+      <div
+        className="main"
+      >
+        <i
+          className="manicon manicon-file-box"
+        />
         <div
-          className="collection-title"
+          className="body"
         >
-          <div>
-            <i
-              className="manicon manicon-file-box"
-            />
-            <div>
-              <h1>
-                Rowan
-              </h1>
-              <span
-                className="collection-date"
-              >
-                <span>
-                  Collection created April, 2017
-                </span>
-              </span>
-            </div>
-          </div>
+          <h2
+            className="title"
+          >
+            Rowan
+          </h2>
+          <span
+            className="date"
+          >
+            <span>
+              Collection created April, 2017
+            </span>
+          </span>
         </div>
-      </header>
+      </div>
+    </header>
+    <div
+      className="utility"
+    >
       <nav
         className="share-nav-primary"
       >
