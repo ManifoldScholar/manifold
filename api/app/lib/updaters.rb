@@ -151,18 +151,6 @@ module Updaters
     attributes.delete(:position)
   end
 
-  # This method is a utility method, used to sort creator and contributor
-  # collaborators after saving the model.
-  def sort_collaborators(type)
-    makers = relationships.to_h.dig "#{type}s", :data
-    return unless makers && !makers.empty?
-    @model.send("#{type}_collaborators").each do |collaborator|
-      index = makers.find_index { |c| c[:id] == collaborator.maker_id }
-      position = index + 1
-      collaborator.set_list_position(position)
-    end
-  end
-
   def update_position(model)
     position = @attributes[:position]
     case position
