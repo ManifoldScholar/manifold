@@ -76,8 +76,8 @@ export class TextWrapperContainer extends PureComponent {
         path: lh.link("backendTextMetadata", text.id),
         label: "Metadata",
         key: "metadata",
-        entity: text.relationships.project,
-        ability: "updateMetadata"
+        entity: text,
+        ability: "update"
       },
       {
         path: lh.link("backendTextStyles", text.id),
@@ -88,7 +88,7 @@ export class TextWrapperContainer extends PureComponent {
         path: lh.link("backendTextIngestionsNew", text.id),
         label: "Reingest",
         key: "reingest",
-        entity: "text",
+        entity: text,
         ability: "update"
       }
     ];

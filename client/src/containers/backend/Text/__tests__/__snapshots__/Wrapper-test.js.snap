@@ -130,6 +130,17 @@ Array [
               <a
                 aria-current={false}
                 className={undefined}
+                href="/backend/text/1/metadata"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Metadata
+              </a>
+            </li>
+            <li>
+              <a
+                aria-current={false}
+                className={undefined}
                 href="/backend/text/1/styles"
                 onClick={[Function]}
                 style={undefined}
@@ -182,6 +193,17 @@ Array [
                 style={undefined}
               >
                 People
+              </a>
+            </li>
+            <li>
+              <a
+                aria-current={false}
+                className={undefined}
+                href="/backend/text/1/metadata"
+                onClick={[Function]}
+                style={undefined}
+              >
+                Metadata
               </a>
             </li>
             <li>
