@@ -121,7 +121,7 @@ const applicationConfiguration = {
         },
         publisherPlace: {
           placeholder: "Geographic location of the publisher",
-          instructions: 'e.g "Minnesota, MN"',
+          instructions: 'e.g "Minneapolis, MN"',
           type: "TextInput"
         },
         status: {

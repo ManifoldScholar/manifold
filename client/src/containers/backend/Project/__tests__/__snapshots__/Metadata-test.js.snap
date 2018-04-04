@@ -89,7 +89,7 @@ exports[`Backend Project Metadata Container renders correctly 1`] = `
           <span
             className="instructions"
           >
-            e.g "Minnesota, MN"
+            e.g "Minneapolis, MN"
           </span>
           <input
             onChange={[Function]}

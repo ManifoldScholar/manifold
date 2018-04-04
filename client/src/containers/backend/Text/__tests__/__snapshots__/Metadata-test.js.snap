@@ -72,16 +72,16 @@ exports[`Backend Text Metadata Container renders correctly 1`] = `
                                   </Errorable>
                                 </Form.TextInput>
                               </Form.Setter('Form.TextInput)>
-                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions=\\"e.g \\"Minnesota, MN\\"\\" label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
-                                <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions=\\"e.g \\"Minnesota, MN\\"\\" label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]}>
+                              <Form.Setter('Form.TextInput) focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions=\\"e.g \\"Minneapolis, MN\\"\\" label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" actions={{...}} disabled={false} dirtyModel={{...}} sourceModel={{...}} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}}>
+                                <Form.TextInput focusOnMount={false} placeholder=\\"Geographic location of the publisher\\" instructions=\\"e.g \\"Minneapolis, MN\\"\\" label=\\"publisher place\\" name=\\"attributes[metadata][publisherPlace]\\" disabled={false} getModelValue={[Function: getModelValue]} sessionKey=\\"backend-project-general\\" submitKey={{...}} errors={{...}} onChange={[Function]} set={[Function]} setOther={[Function]} value={[undefined]} initialValue={[undefined]} password={false} join={[Function: join]}>
                                   <Errorable className=\\"form-input\\" name=\\"attributes[metadata][publisherPlace]\\" errors={{...}} label=\\"publisher place\\" containerStyle={{...}}>
                                     <div style={{...}} className=\\"form-input\\">
                                       <label className=\\"has-instructions\\">
                                         publisher place
                                       </label>
-                                      <Instructions instructions=\\"e.g \\"Minnesota, MN\\"\\">
+                                      <Instructions instructions=\\"e.g \\"Minneapolis, MN\\"\\">
                                         <span className=\\"instructions\\">
-                                          e.g &quot;Minnesota, MN&quot;
+                                          e.g &quot;Minneapolis, MN&quot;
                                         </span>
                                       </Instructions>
                                       <input type=\\"text\\" placeholder=\\"Geographic location of the publisher\\" onChange={[Function]} value=\\"\\" />
