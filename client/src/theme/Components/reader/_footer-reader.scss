@@ -38,19 +38,30 @@
 
     .powered-by {
       font-size: 15px;
+    }
 
-      a, a:visited {
-        &:hover {
-          color: $accentPrimaryDark;
-        }
+    a {
+      color: $accentPrimaryMedium;
+      transition: color $durationFast $timing;
+
+      &:visited {
         color: $accentPrimaryMedium;
+      }
+
+      &:hover {
+        color: $accentPrimaryDark;
       }
     }
 
-    p {
+    p, .rights {
       @include respond($break75) {
         padding-top: 2px;
         padding-left: 93px;
+
+        p {
+          padding-top: 0;
+          padding-left: 0;
+        }
       }
     }
   }

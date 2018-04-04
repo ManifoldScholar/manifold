@@ -276,6 +276,7 @@ const defaults = {
     attributes: {
       metadataProperties,
       metadata: {},
+      metadataFormatted: {},
       slug: "",
       title: "Ain't No Thang",
       creatorNames: "Andre3000, Big Boi",
