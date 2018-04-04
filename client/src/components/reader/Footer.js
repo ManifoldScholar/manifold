@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Helper } from "components/global";
 
 export default class Footer extends Component {
   static propTypes = {
@@ -8,8 +7,15 @@ export default class Footer extends Component {
   };
 
   getFooterText(text) {
-    if (!text.attributes.metadata.rights) return null;
-    return <Helper.SimpleFormat text={text.attributes.metadata.rights} />;
+    if (!text.attributes.metadataFormatted.rights) return null;
+    return (
+      <div
+        className="rights"
+        dangerouslySetInnerHTML={{
+          __html: text.attributes.metadataFormatted.rights
+        }}
+      />
+    );
   }
 
   render() {
