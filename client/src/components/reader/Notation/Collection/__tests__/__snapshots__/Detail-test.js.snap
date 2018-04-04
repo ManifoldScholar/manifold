@@ -8,29 +8,36 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
     <div
       className="container"
     >
-      <header>
+      <header
+        className="section-heading"
+      >
         <div
-          className="collection-title"
+          className="main"
         >
-          <div>
-            <i
-              className="manicon manicon-file-box"
-            />
-            <div>
-              <h1>
-                Rowan
-              </h1>
-              <span
-                className="collection-date"
-              >
-                <span>
-                  Collection created April, 2017
-                </span>
+          <i
+            className="manicon manicon-file-box"
+          />
+          <div
+            className="body"
+          >
+            <h2
+              className="title"
+            >
+              Rowan
+            </h2>
+            <span
+              className="date"
+            >
+              <span>
+                Collection created April, 2017
               </span>
-            </div>
+            </span>
           </div>
         </div>
       </header>
+      <div
+        className="utility"
+      />
     </div>
   </div>
   <div

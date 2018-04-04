@@ -121,27 +121,47 @@ exports[`Frontend.Resource.Detail component renders correctly 1`] = `
                 <span
                   className="meta-label"
                 >
-                  Type
+                  type
                 </span>
-                <span
+                <div
                   className="meta-value"
-                >
-                  Image
-                </span>
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "Image",
+                    }
+                  }
+                />
               </li>
               <li>
                 <span
                   className="meta-label"
                 >
-                  Created On
+                  created on
                 </span>
-                <span
+                <div
                   className="meta-value"
                 >
                   <span>
                     April 24, 2017
                   </span>
+                </div>
+              </li>
+              <li>
+                <span
+                  className="meta-label"
+                >
+                  doi
                 </span>
+                <div
+                  className="meta-value"
+                >
+                  <a
+                    href="https://doi.org/10.12345.6789"
+                    target="_blank"
+                  >
+                    https://doi.org/10.12345.6789
+                  </a>
+                </div>
               </li>
             </ul>
             <nav
@@ -201,27 +221,47 @@ exports[`Frontend.Resource.Detail component renders correctly 1`] = `
                 <span
                   className="meta-label"
                 >
-                  Type
+                  type
                 </span>
-                <span
+                <div
                   className="meta-value"
-                >
-                  Image
-                </span>
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "Image",
+                    }
+                  }
+                />
               </li>
               <li>
                 <span
                   className="meta-label"
                 >
-                  Created On
+                  created on
                 </span>
-                <span
+                <div
                   className="meta-value"
                 >
                   <span>
                     April 24, 2017
                   </span>
+                </div>
+              </li>
+              <li>
+                <span
+                  className="meta-label"
+                >
+                  doi
                 </span>
+                <div
+                  className="meta-value"
+                >
+                  <a
+                    href="https://doi.org/10.12345.6789"
+                    target="_blank"
+                  >
+                    https://doi.org/10.12345.6789
+                  </a>
+                </div>
               </li>
             </ul>
             <nav

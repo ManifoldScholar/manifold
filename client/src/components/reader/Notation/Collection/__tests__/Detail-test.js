@@ -10,14 +10,9 @@ describe("Reader.Notation.Collection.Detail component", () => {
   const store = build.store();
 
   const project = build.entity.project("1");
-  const collection = build.entity.collection("2", { projectId: "1" });
-  const resource = build.entity.resource("3", { projectId: "1" });
-  const collectionResource = build.entity.collectionResource("4", {
-    collectionId: "2",
-    resourceId: "3"
-  });
-  collection.relationships.resources.push(resource);
-  resource.relationships.collectionResources.push(collectionResource);
+  const collectionResource = build.entity.collectionResource("4", {});
+  const resource = build.entity.resource("3", {}, { project, collectionResources: [collectionResource] });
+  const collection = build.entity.collection("2", {}, { project, resources: [resource] });
   project.relationships.resources.push(resource);
   const resources = project.relationships.resources;
 

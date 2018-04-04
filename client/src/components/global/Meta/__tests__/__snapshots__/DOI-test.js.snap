@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global.Meta.DOI component renders correctly 1`] = `
+Array [
+  <span
+    className="meta-label"
+  >
+    doi
+  </span>,
+  <div
+    className="meta-value"
+  >
+    <a
+      href="https://doi.org/10.12345.6789"
+      target="_blank"
+    >
+      https://doi.org/10.12345.6789
+    </a>
+  </div>,
+]
+`;

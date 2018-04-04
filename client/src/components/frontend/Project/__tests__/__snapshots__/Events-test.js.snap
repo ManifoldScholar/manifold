@@ -30,14 +30,22 @@ exports[`Frontend.Project.Events component renders correctly 1`] = `
       <header
         className="section-heading"
       >
-        <h4
-          className="title"
+        <div
+          className="main"
         >
           <i
             className="manicon manicon-pulse"
           />
-          All Activity
-        </h4>
+          <div
+            className="body"
+          >
+            <h4
+              className="title"
+            >
+              All Activity
+            </h4>
+          </div>
+        </div>
       </header>
       <div>
         <ul

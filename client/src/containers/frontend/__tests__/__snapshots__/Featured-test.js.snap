@@ -15,18 +15,26 @@ exports[`Frontend Featured Container renders correctly 1`] = `
       className="container"
     >
       <header
-        className="section-heading utility-right"
+        className="section-heading"
       >
-        <h4
-          className="title"
+        <div
+          className="main"
         >
           <i
             className="manicon manicon-lamp"
           />
-          Featured Projects
-        </h4>
+          <div
+            className="body"
+          >
+            <h4
+              className="title"
+            >
+              Featured Projects
+            </h4>
+          </div>
+        </div>
         <div
-          className="section-heading-utility-right"
+          className="utility right"
         >
           <div
             className="select-browse"

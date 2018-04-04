@@ -71,6 +71,10 @@ const classAbilities = {
   version: { create: true, read: true }
 };
 
+const metadataValues = {
+  doi: "12345.6789"
+};
+
 const defaults = {
   settings: {
     type: "settings",
@@ -143,7 +147,9 @@ const defaults = {
       avatarStyles: {},
       hashtag: "#cute_dog",
       hideActivity: false,
-      abilities
+      abilities,
+      metadata: metadataValues,
+      metadataFormatted: metadataValues
     },
     relationships: {
       resources: []
@@ -196,7 +202,9 @@ const defaults = {
       captionFormatted: "World's Greatest Dog",
       downloadable: true,
       tagList: ["dog", "puppy", "GOAT"],
-      abilities
+      abilities,
+      metadata: metadataValues,
+      metadataFormatted: metadataValues
     },
     relationships: {
       collectionResources: []
@@ -286,7 +294,9 @@ const defaults = {
       rights: "All Rights Reserved",
       publicationDate: "2001-12-04",
       toc: ["Chapter 1", "Chapter 2"],
-      abilities
+      abilities,
+      metadata: metadataValues,
+      metadataFormatted: metadataValues
     },
     relationships: {
       project: null,
