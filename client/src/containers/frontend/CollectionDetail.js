@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Utility, ResourceCollection } from "components/frontend";
 import { entityStoreActions } from "actions";
-import { select, grab, meta, loaded, isEntityLoaded } from "utils/entityUtils";
+import { select, grab, meta, isEntityLoaded } from "utils/entityUtils";
 import { projectsAPI, collectionsAPI, requests } from "api";
 import { HeadContent } from "components/global";
 import HigherOrder from "containers/global/HigherOrder";
@@ -20,7 +20,6 @@ const perPage = 10;
 export class CollectionDetailContainer extends PureComponent {
   static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
-    const filter = queryString.parse(location.search);
     const promises = [];
 
     // Load project, unless it is already loaded
@@ -37,18 +36,20 @@ export class CollectionDetailContainer extends PureComponent {
       promises.push(promise);
     }
 
-    // Load the collection resources, unless they have already been loaded
-    if (!loaded(requests.feCollectionResources, state.entityStore)) {
-      const pp = match.params.page ? match.params.page : page;
-      const cr = collectionsAPI.collectionResources(
-        match.params.collectionId,
-        filter,
-        { number: pp, size: perPage }
-      );
-      const lookups = [requests.feSlideshow, requests.feCollectionResources];
-      const { promise } = dispatch(request(cr, lookups));
-      promises.push(promise);
-    }
+    const params = queryString.parse(location.search);
+    const pagination = {
+      number: params.page ? params.page : page,
+      size: perPage
+    };
+    const filter = omitBy(params, (v, k) => k === "page");
+    const cr = collectionsAPI.collectionResources(
+      match.params.collectionId,
+      filter,
+      pagination
+    );
+    const lookups = [requests.feSlideshow, requests.feCollectionResources];
+    const { promise } = dispatch(request(cr, lookups));
+    promises.push(promise);
 
     return Promise.all(promises);
   };
@@ -84,14 +85,16 @@ export class CollectionDetailContainer extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = this.initialState(
-      queryString.parse(this.props.location.search)
-    );
-    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
-    this.handlePageChange = this.handlePageChange.bind(this);
-    this.filterChange = this.filterChange.bind(this);
-    this.flushStoreRequests = this.flushStoreRequests.bind(this);
+    this.state = this.initialState(queryString.parse(props.location.search));
     this.updateResults = debounce(this.updateResults.bind(this), 250);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.search === this.props.location.search) return null;
+    this.setState(
+      this.initialState(queryString.parse(nextProps.location.search)),
+      this.updateResults
+    );
   }
 
   componentWillUnmount() {
@@ -99,60 +102,74 @@ export class CollectionDetailContainer extends PureComponent {
   }
 
   initialState(init) {
-    const filters = init || {};
+    const filter = omitBy(init, (vIgnored, k) => k === "page");
+
     return {
-      filter: filters
+      filter: Object.assign({}, filter),
+      pagination: {
+        number: init.page || page,
+        size: perPage
+      }
     };
   }
 
-  flushStoreRequests() {
+  flushStoreRequests = () => {
     this.props.dispatch(flush(requests.tmpProject));
     this.props.dispatch(flush(requests.feSlideshow));
     this.props.dispatch(flush(requests.feCollection));
     this.props.dispatch(flush(requests.feCollectionResources));
-  }
+  };
 
-  handlePageChange(event, pageParam) {
-    const cId = this.props.collection.id;
-    const pagination = { number: pageParam, size: perPage };
-    const filter = this.state.filter;
-    const action = request(
-      collectionsAPI.collectionResources(cId, filter, pagination),
-      requests.feCollectionResources
-    );
-    this.props.dispatch(action);
-  }
-
-  pageChangeHandlerCreator(pageParam) {
-    return event => {
-      this.handlePageChange(event, pageParam);
-    };
-  }
-
-  filterChange(filter) {
-    this.setState({ filter }, () => {
-      this.updateResults();
-      this.updateUrl(filter);
-    });
-  }
-
-  updateUrl(stateFilter) {
-    const filter = stateFilter;
-    if (filter.collection_order) delete filter.collection_order;
-    const pathname = this.props.location.pathname;
-    const search = queryString.stringify(filter);
-    this.props.history.push({ pathname, search });
+  doUpdate() {
+    this.updateResults();
+    this.updateUrl();
   }
 
   updateResults() {
     const cId = this.props.collection.id;
-    const pagination = { number: page, size: perPage };
     const action = request(
-      collectionsAPI.collectionResources(cId, this.state.filter, pagination),
+      collectionsAPI.collectionResources(
+        cId,
+        this.state.filter,
+        this.state.pagination
+      ),
       requests.feCollectionResources
     );
     this.props.dispatch(action);
   }
+
+  updateUrl() {
+    const pathname = this.props.location.pathname;
+    const filters = this.state.filter;
+    if (filters.collection_order) delete filters.collection_order;
+    const pageParam = this.state.pagination.number;
+    const params = Object.assign({}, filters);
+    if (pageParam !== 1) params.page = pageParam;
+
+    const search = queryString.stringify(params);
+    this.props.history.push({ pathname, search });
+  }
+
+  filterChange = filter => {
+    const pagination = Object.assign({}, this.state.pagination, {
+      number: page
+    });
+    this.setState({ filter, pagination }, this.doUpdate);
+  };
+
+  handlePageChange = pageParam => {
+    const pagination = Object.assign({}, this.state.pagination, {
+      number: pageParam
+    });
+    this.setState({ pagination }, this.doUpdate);
+  };
+
+  pageChangeHandlerCreator = pageParam => {
+    return event => {
+      event.preventDefault();
+      this.handlePageChange(pageParam);
+    };
+  };
 
   render() {
     const { project, collection, settings } = this.props;

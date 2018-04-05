@@ -20,18 +20,18 @@ const perPage = 10;
 
 class ProjectResourcesContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
-    const pageParam = match.params.page ? match.params.page : page;
     const projectRequest = request(
       projectsAPI.show(match.params.id),
       requests.feProject
     );
-    // This can be made more robust with other types if need be.
-    const filter = queryString.parse(location.search);
+    const params = queryString.parse(location.search);
+    const pagination = {
+      number: params.page ? params.page : page,
+      size: perPage
+    };
+    const filter = omitBy(params, (v, k) => k === "page");
     const resourcesRequest = request(
-      projectsAPI.resources(match.params.id, filter, {
-        number: pageParam,
-        size: perPage
-      }),
+      projectsAPI.resources(match.params.id, filter, pagination),
       requests.feResources
     );
     const { promise: one } = dispatch(projectRequest);
@@ -78,51 +78,63 @@ class ProjectResourcesContainer extends Component {
   }
 
   initialState(init) {
+    const filter = omitBy(init, (vIgnored, k) => k === "page");
+
     return {
-      filter: init || {}
+      filter: Object.assign({}, filter),
+      pagination: {
+        number: init.page || page,
+        size: perPage
+      }
     };
   }
 
+  doUpdate() {
+    this.updateResults();
+    this.updateUrl();
+  }
+
   updateResults() {
-    const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.resources(
         this.props.project.id,
         this.state.filter,
-        pagination
+        this.state.pagination
       ),
       requests.feResources
     );
     this.props.dispatch(action);
   }
 
-  filterChange = filter => {
-    this.setState({ filter }, () => {
-      this.updateResults();
-      this.updateUrl(filter);
-    });
-  };
-
-  updateUrl(filter) {
+  updateUrl() {
     const pathname = this.props.location.pathname;
-    const search = queryString.stringify(filter);
+    const filters = this.state.filter;
+    const pageParam = this.state.pagination.number;
+    const params = Object.assign({}, filters);
+    if (pageParam !== 1) params.page = pageParam;
+
+    const search = queryString.stringify(params);
     this.props.history.push({ pathname, search });
   }
 
-  handlePageChange = (event, pageParam) => {
-    const pagination = { number: pageParam, size: perPage };
-    const project = this.props.project;
-    const filter = this.state.filter;
-    const action = request(
-      projectsAPI.resources(project.id, filter, pagination),
-      requests.feResources
-    );
-    this.props.dispatch(action);
+  filterChange = filter => {
+    const pagination = Object.assign({}, this.state.pagination, {
+      number: page
+    });
+    this.setState({ filter, pagination }, this.doUpdate);
+  };
+
+  handlePageChange = pageParam => {
+    const pagination = Object.assign({}, this.state.pagination, {
+      number: pageParam
+    });
+    this.setState({ pagination }, this.doUpdate);
   };
 
   pageChangeHandlerCreator = pageParam => {
     return event => {
-      this.handlePageChange(event, pageParam);
+      event.preventDefault();
+      this.handlePageChange(pageParam);
     };
   };
 
