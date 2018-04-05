@@ -50,17 +50,12 @@
   .select-group {
     display: block;
     width: 100%;
-    margin-top: 12px;
-    margin-left: -11px;
-
-    @include respond($break40) {
-      margin-top: 14px;
-    }
+    margin-top: 10px;
 
     &.inline {
       @include respond($break75) {
         display: inline-block;
-        width: calc(60% + 11px);
+        width: 60%;
         padding-left: 12px;
         margin-top: 0;
       }
@@ -68,9 +63,21 @@
 
     .select {
       position: relative;
-      display: inline-block;
-      width: 33.333%;
-      padding-left: 11px;
+
+      + .select {
+        padding-top: 10px;
+      }
+
+      @include respond($break75) {
+        display: inline-block;
+        width: 33.333%;
+        padding-top: 0;
+
+        + .select {
+          padding-top: 0;
+          padding-left: 11px;
+        }
+      }
 
       select {
         @include unstyledSelect;
@@ -89,11 +96,15 @@
     .manicon-caret-down {
       position: absolute;
       top: 50%;
-      right: 9px;
-      margin-top: -4px;
+      right: 13px;
+      margin-top: 1px;
       font-size: 8px;
       color: $neutral50;
       pointer-events: none;
+
+      @include respond($break75) {
+        margin-top: -3px;
+      }
 
       // Use native dropdown arrow in IE9
       .ie9 & {
