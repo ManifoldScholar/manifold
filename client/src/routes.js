@@ -692,8 +692,11 @@ export default () => {
           component: Frontend.CollectionDetail,
           path: "/project/:id/collection/:collectionId",
           helpers: {
-            frontendProjectCollection: (p, c) =>
-              `/project/${p}/collection/${c}`,
+            frontendProjectCollection: (p, c, params = {}) => {
+              const query = queryString.stringify(params);
+              if (!query) return `/project/${p}/collection/${c}`;
+              return `/project/${p}/collection/${c}?${query}`;
+            },
             frontendProjectCollectionRelative: c => `collection/${c}`
           }
         },
@@ -701,12 +704,11 @@ export default () => {
           name: "frontendProjectResources",
           exact: true,
           component: Frontend.ProjectResources,
-          path: "/project/:id/resources/:page?",
-          helper: (p, params = {}, page = null) => {
+          path: "/project/:id/resources",
+          helper: (p, params = {}) => {
             const query = queryString.stringify(params);
-            if (!query)
-              return `/project/${p}/resources${page ? `/${page}` : ""}`;
-            return `/project/${p}/resources${page ? `/${page}` : ""}/?${query}`;
+            if (!query) return `/project/${p}/resources`;
+            return `/project/${p}/resources/?${query}`;
           }
         },
         {
