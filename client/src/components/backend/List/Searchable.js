@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Authorization from "helpers/authorization";
 import get from "lodash/get";
 import classnames from "classnames";
+import omitBy from "lodash/omitBy";
 
 export class ListSearchable extends PureComponent {
   static mapStateToProps = state => ({
@@ -58,47 +59,23 @@ export class ListSearchable extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = this.initialState(props);
+    this.state = { filter: {} };
     this.authorization = new Authorization();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (get(prevState, "filter") !== get(this.state, "filter")) {
-      this.props.filterChangeHandler(this.state.filter);
+      const filter = omitBy(this.state.filter, value => value === "");
+      if (filter.keyword) filter.typeahead = true;
+      this.props.filterChangeHandler(filter);
     }
   }
 
-  setKeyword = event => {
-    const keyword = event.target.value;
-    const filter = Object.assign({}, this.state.filter);
-    if (keyword === "") {
-      delete filter.keyword;
-      delete filter.typeahead;
-    } else {
-      filter.keyword = keyword;
-      filter.typeahead = true;
-    }
-    this.setState({ inputs: { keyword }, filter });
-  };
-
-  setFilters = (event, label) => {
-    event.preventDefault();
+  setFilter = (event, label) => {
     const value = event.target.value;
     const filter = Object.assign({}, this.state.filter);
-    const inputs = Object.assign({}, this.state.inputs);
-    if (value && label) {
-      switch (value) {
-        case "default":
-          delete filter[label];
-          inputs[label] = "default";
-          break;
-        default:
-          filter[label] = value;
-          inputs[label] = value;
-          break;
-      }
-      this.setState({ inputs, filter });
-    }
+    filter[label] = value;
+    this.setState({ filter });
   };
 
   toggleOptions = event => {
@@ -108,27 +85,8 @@ export class ListSearchable extends PureComponent {
 
   resetSearch = event => {
     event.preventDefault();
-    this.setState(this.initialState());
+    this.setState({ filter: {} });
   };
-
-  initialInputs() {
-    const out = { keyword: "" };
-    const keys = Object.keys(this.props.filterOptions);
-    keys.forEach(key => {
-      out[key] = false;
-    });
-    return out;
-  }
-
-  initialState() {
-    const inputs = this.props.filterOptions
-      ? this.initialInputs()
-      : { keyword: "" };
-    return {
-      inputs,
-      filter: {}
-    };
-  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -152,11 +110,11 @@ export class ListSearchable extends PureComponent {
     return (
       <div className="select" key={index}>
         <select
-          onChange={event => this.setFilters(event, filter)}
-          value={this.state.inputs[filter]}
+          onChange={event => this.setFilter(event, filter)}
+          value={this.state.filter[filter] || ""}
           data-id={"filter"}
         >
-          <option value="default">{`${filter}:`}</option>
+          <option value="">{`${filter}:`}</option>
           {this.renderFilterOptions(this.props.filterOptions[filter])}
         </select>
         <i className="manicon manicon-caret-down" />
@@ -280,10 +238,10 @@ export class ListSearchable extends PureComponent {
               <span className="screen-reader-text">Click to search</span>
             </button>
             <input
-              value={this.state.inputs.keyword}
+              value={this.state.filter.keyword || ""}
               type="text"
               placeholder="Search..."
-              onChange={this.setKeyword}
+              onChange={e => this.setFilters(e, "keyword")}
             />
           </div>
           <div className="form-list-filter">
