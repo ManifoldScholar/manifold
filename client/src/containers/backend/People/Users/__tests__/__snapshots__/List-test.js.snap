@@ -47,6 +47,13 @@ exports[`Backend People Users List Container renders correctly 1`] = `
         />
       </div>
       <button
+        className="button-bare-primary"
+        data-id="filter-toggle"
+        onClick={[Function]}
+      >
+        Show Search Options
+      </button>
+      <button
         className="button-bare-primary reset"
         onClick={[Function]}
       >

@@ -72,6 +72,13 @@ const applicationConfiguration = {
         RESOURCE_ADDED: "Resource Added",
         TWEET: "Tweet"
       },
+      roles: {
+        admin: "Admin",
+        editor: "Editor",
+        project_creator: "Project Creator",
+        marketeer: "Marketeer",
+        reader: "Reader"
+      },
       dialogs: {
         notation: {
           destroy: {
