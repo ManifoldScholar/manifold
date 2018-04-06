@@ -6,6 +6,17 @@
   $inputHeight: 2.857em;
   padding-bottom: 26px;
   font-size: 0;
+  display: block;
+
+  @include respond($break75) {
+  }
+
+  @include respond($break90) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
 
   .resource-totals + & {
     padding-top: 40px;
@@ -30,6 +41,10 @@
     width: 100%;
 
     @include respond($break75) {
+      width: 70%;
+    }
+
+    @include respond($break95) {
       width: 40%;
     }
 
@@ -49,34 +64,72 @@
 
   .select-group {
     display: block;
-    width: 100%;
-    margin-top: 10px;
+    position: relative;
+    margin-left: -10px;
+    padding-top: 15px;
+    max-width: 100%;
+
+    + .select-group {
+      margin-top: 25px;
+
+      @include respond($break90) {
+        margin-left: 0;
+        margin-top: 0;
+      }
+    }
+
+    @include respond($break90) {
+      display: flex;
+    }
+
+    label {
+      @include utilityPrimary;
+      position: absolute;
+      top: 0;
+      left: 10px;
+      font-size: 13px;
+      color: $neutral50;
+    }
 
     &.inline {
+      margin-bottom: 0;
+
       @include respond($break75) {
+        display: block;
+        width: 100%;
+      }
+
+      @include respond($break95) {
         display: inline-block;
         width: 60%;
-        padding-left: 12px;
         margin-top: 0;
+        padding-top: 0;
+        white-space: nowrap;
+      }
+
+
+      .select {
+        margin-top: 0;
+      }
+
+      .select + .select {
+        margin-top: 10px;
+
+        @include respond($break75) {
+          margin-top: 0;
+        }
       }
     }
 
     .select {
       position: relative;
-
-      + .select {
-        padding-top: 10px;
-      }
+      margin-top: 10px;
+      margin-left: 10px;
+      width: 100%;
 
       @include respond($break75) {
         display: inline-block;
-        width: 33.333%;
-        padding-top: 0;
-
-        + .select {
-          padding-top: 0;
-          padding-left: 11px;
-        }
+        width: 200px;
       }
 
       select {
@@ -99,7 +152,7 @@
       right: 13px;
       margin-top: 1px;
       font-size: 8px;
-      color: $neutral50;
+      color: $accentPrimary;
       pointer-events: none;
 
       @include respond($break75) {

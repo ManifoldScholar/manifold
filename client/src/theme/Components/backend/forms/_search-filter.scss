@@ -23,32 +23,35 @@
   }
 
   .button-bare-primary {
-    margin-top: 10px;
     margin-right: 20px;
-
-    + .button-bare-primary {
-      margin-top: 10px;
-    }
-  }
-
-  .reset {
-    color: $neutral80;
   }
 
   .form-list-filter {
-    padding-top: 10px;
-    padding-bottom: 0;
+    padding: 25px 0 0;
+
+    @include respond($break90) {
+      justify-content: flex-start;
+    }
 
     .select-group {
       padding-left: 0;
-      margin-top: 0;
+      margin: 0 0 25px 0;
 
-      .select select {
-        font-size: 13px;
-        border: 1px solid $neutral80;
+      label {
+        left: 0;
+      }
 
-        + select {
-          padding-left: 10px;
+      .select {
+        margin-left: 0;
+        margin-right: 10px;
+
+        select {
+          font-size: 13px;
+          border: 1px solid $neutral80;
+
+          + select {
+            padding-left: 10px;
+          }
         }
       }
     }
@@ -62,5 +65,13 @@
         margin-left: 20px;
       }
     }
+
+    + .button-row {
+      margin-top: 0;
+    }
+  }
+
+  .button-row {
+    margin-top: 10px;
   }
 }
