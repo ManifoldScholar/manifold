@@ -9,6 +9,7 @@ import get from "lodash/get";
 import { User, List } from "components/backend";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
+import config from "../../../../config";
 
 const { request } = entityStoreActions;
 const perPage = 10;
@@ -123,6 +124,12 @@ export class UsersListContainer extends PureComponent {
             entityComponent={User.ListItem}
             entityComponentProps={{ currentUserId, active }}
             filterChangeHandler={this.filterChangeHandler}
+            filterOptions={{
+              role: {
+                options: Object.keys(config.app.locale.roles),
+                labels: config.app.locale.roles
+              }
+            }}
           />
         ) : null}
       </div>
