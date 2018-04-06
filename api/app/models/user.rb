@@ -40,6 +40,7 @@ class User < ApplicationRecord
   validates :pending_role, inclusion: { in: Role::ALLOWED_ROLES }, allow_nil: true
 
   # Callbacks
+  before_create :assign_default_role!
   after_save :sync_pending_role!
 
   # Attachments
@@ -150,6 +151,11 @@ class User < ApplicationRecord
   # rubocop:enable Metrics/CyclomaticComplexity, Metrics/LineLength, Metrics/PerceivedComplexity
 
   private
+
+  def assign_default_role!
+    return unless pending_role.blank?
+    add_role Role::ROLE_READER
+  end
 
   def sync_pending_role!
     return if pending_role.blank?
