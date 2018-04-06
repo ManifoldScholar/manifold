@@ -2,6 +2,22 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Tile from "./Tile";
 import lh from "helpers/linkHandler";
+import Loadable from "react-loadable";
+
+/* eslint-disable react/prop-types */
+const autolinkTweet = props => {
+  const Loaded = Loadable({
+    loader: () => import(/* webpackChunkName: "autolinker" */ "autolinker"),
+    render(Autolinker) {
+      const excerpt = Autolinker.link(props.excerpt, props.options);
+      return <p dangerouslySetInnerHTML={{ __html: excerpt }} />;
+    },
+    loading: () => <p dangerouslySetInnerHTML={{ __html: props.excerpt }} />
+  });
+
+  return <Loaded {...props} />;
+};
+/* eslint-enable react/prop-types */
 
 export default class Event extends PureComponent {
   static displayName = "Event.Event";
@@ -12,30 +28,6 @@ export default class Event extends PureComponent {
     destroyCallback: PropTypes.func,
     hideLink: PropTypes.bool
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    import(/* webpackChunkName: "autolinker" */ "autolinker").then(
-      autolinker => {
-        this.setState({ autolinker });
-      }
-    );
-  }
-
-  autoLink(excerpt) {
-    if (!this.state.autolinker) return { __html: excerpt };
-    const options = {
-      mention: "twitter",
-      hashtag: "twitter"
-    };
-    return {
-      __html: this.state.autolinker.link(excerpt, options)
-    };
-  }
 
   eventProps() {
     const type = this.props.event.attributes.eventType;
@@ -58,6 +50,11 @@ export default class Event extends PureComponent {
 
   propsForTweet() {
     const attr = this.props.event.attributes;
+    const contentProps = {
+      excerpt: attr.excerpt,
+      options: { hashtag: "twitter", mention: "twitter" }
+    };
+
     return {
       tileClass: "tweet",
       iconClass: "manicon manicon-twitter",
@@ -70,7 +67,7 @@ export default class Event extends PureComponent {
           {"@" + attr.attributionIdentifier}
         </a>
       ),
-      content: <p dangerouslySetInnerHTML={this.autoLink(attr.excerpt)} />,
+      content: autolinkTweet(contentProps),
       date: attr.createdAt,
       dateFormat: "MMMM Do, YYYY",
       linkPrompt: "View Tweet",

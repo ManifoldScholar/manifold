@@ -6,6 +6,15 @@ import get from "lodash/get";
 import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
+import Loadable from "react-loadable";
+
+const Velocity = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "velocity-react" */ "velocity-react").then(
+      velocity => velocity.VelocityComponent
+    ),
+  loading: () => null
+});
 
 export default class ResourceListSlideCaption extends Component {
   static visibleCaptionHeight = 48;
@@ -35,12 +44,6 @@ export default class ResourceListSlideCaption extends Component {
   }
 
   componentDidMount() {
-    import(/* webpackChunkName: "velocity-react" */ "velocity-react").then(
-      Velocity => {
-        this.setState({ Velocity });
-      }
-    );
-
     this.checkExpandable();
 
     // Check expandable on resize
@@ -163,8 +166,8 @@ export default class ResourceListSlideCaption extends Component {
             dangerouslySetInnerHTML={{ __html: attr.titleFormatted }}
           />
         </header>
-        {this.state.Velocity && this.hasCaption(resource) ? (
-          <this.state.Velocity.VelocityComponent {...animation}>
+        {this.hasCaption(resource) ? (
+          <Velocity {...animation}>
             <div
               className="resource-description"
               ref={e => {
@@ -180,7 +183,7 @@ export default class ResourceListSlideCaption extends Component {
                 )}
               />
             </div>
-          </this.state.Velocity.VelocityComponent>
+          </Velocity>
         ) : null}
         <div
           className={utilityClass}

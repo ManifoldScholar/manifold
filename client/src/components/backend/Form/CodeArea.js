@@ -4,7 +4,39 @@ import setter from "./setter";
 import withDispatch from "containers/global/HigherOrder/withDispatch";
 import { Form as GlobalForm } from "components/global";
 import isString from "lodash/isString";
-import { loadingActions } from "actions";
+import Loadable from "react-loadable";
+
+/* eslint-disable react/prop-types */
+const loadEditor = props => {
+  const Loaded = Loadable({
+    loader: () =>
+      import(/* webpackChunkName: "ace-editor" */ "./CodeArea/Ace").then(
+        ace => ace.default
+      ),
+    render(Editor) {
+      return (
+        <div className="form-input">
+          <GlobalForm.Errorable
+            className="form-input"
+            name={props.name}
+            errors={props.errors}
+            label={props.label}
+          >
+            <label>{props.label}</label>
+            {isString(props.instructions) ? (
+              <span className="instructions">{props.instructions}</span>
+            ) : null}
+            <Editor {...props} />
+          </GlobalForm.Errorable>
+        </div>
+      );
+    },
+    loading: () => null
+  });
+
+  return <Loaded {...props} />;
+};
+/* eslint-enable react/prop-types */
 
 class FormCodeArea extends Component {
   static displayName = "Form.CodeArea";
@@ -27,23 +59,6 @@ class FormCodeArea extends Component {
     readOnly: false
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      Editor: null
-    };
-  }
-
-  componentDidMount() {
-    this.props.dispatch(loadingActions.start("code-area"));
-    import(/* webpackChunkName: "ace-editor" */ "./CodeArea/Ace").then(ace => {
-      const Editor = ace.default;
-      this.props.dispatch(loadingActions.stop("code-area"));
-      this.setState({ Editor });
-    });
-  }
-
   onChange = value => {
     this.props.set(value);
   };
@@ -53,35 +68,16 @@ class FormCodeArea extends Component {
   }
 
   render() {
-    const { Editor } = this.state;
-    if (!Editor) return null;
+    const props = {
+      theme: "idle_fingers",
+      editorProps: { $blockScrolling: true },
+      onChange: this.onChange,
+      value: this.value,
+      width: "100%",
+      ...this.props
+    };
 
-    return (
-      <div className="form-input">
-        <GlobalForm.Errorable
-          className="form-input"
-          name={this.props.name}
-          errors={this.props.errors}
-          label={this.props.label}
-        >
-          <label>{this.props.label}</label>
-          {isString(this.props.instructions) ? (
-            <span className="instructions">{this.props.instructions}</span>
-          ) : null}
-          <Editor
-            mode={this.props.mode}
-            theme="idle_fingers"
-            height={this.props.height}
-            name={this.props.name}
-            editorProps={{ $blockScrolling: true }}
-            readOnly={this.props.readOnly}
-            onChange={this.onChange}
-            value={this.value}
-            width="100%"
-          />
-        </GlobalForm.Errorable>
-      </div>
-    );
+    return loadEditor(props);
   }
 }
 

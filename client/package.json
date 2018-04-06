@@ -107,6 +107,7 @@
     "react-hot-loader": "4.x",
     "react-html5video": "^2.x",
     "react-json-tree": "^0.x",
+    "react-loadable": "^5.3.1",
     "react-redux": "^5.0.5",
     "react-router": "^4.x",
     "react-router-config": "^1.0.0-beta.4",

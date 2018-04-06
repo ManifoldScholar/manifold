@@ -3,6 +3,15 @@ import { Notes } from "components/reader";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import debounce from "lodash/debounce";
+import Loadable from "react-loadable";
+
+const Velocity = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "velocity-react" */ "velocity-react").then(
+      velocity => velocity.VelocityComponent
+    ),
+  loading: () => null
+});
 
 export default class Group extends Component {
   static displayName = "Notes.List.Group";
@@ -22,13 +31,7 @@ export default class Group extends Component {
     };
   }
   componentDidMount() {
-    import(/* webpackChunkName: "velocity-react" */ "velocity-react").then(
-      Velocity => {
-        this.setState({ Velocity, expanded: false }, () => {
-          this.preOpenItem();
-        });
-      }
-    );
+    this.preOpenItem();
   }
 
   getFullGroupHeight() {
@@ -78,9 +81,8 @@ export default class Group extends Component {
       open: this.state.expanded
     });
 
-    if (!this.state.Velocity) return null;
     return (
-      <this.state.Velocity.VelocityComponent {...animation}>
+      <Velocity {...animation}>
         <ul
           className={classes}
           ref={e => {
@@ -97,7 +99,7 @@ export default class Group extends Component {
             );
           })}
         </ul>
-      </this.state.Velocity.VelocityComponent>
+      </Velocity>
     );
   }
 
