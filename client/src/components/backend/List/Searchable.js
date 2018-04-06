@@ -45,6 +45,7 @@ export class ListSearchable extends PureComponent {
     }),
     authentication: PropTypes.object,
     filterOptions: PropTypes.object,
+    sortOptions: PropTypes.array,
     destroyHandler: PropTypes.func,
     filterChangeHandler: PropTypes.func,
     currentUser: PropTypes.object,
@@ -102,23 +103,72 @@ export class ListSearchable extends PureComponent {
     event.preventDefault();
   };
 
+  showOptionsButton(props) {
+    return !!props.filterOptions || !!props.sortOptions;
+  }
+
   renderOptionsText() {
     if (this.state.showOptions) return `Hide Search Options`;
     return `Show Search Options`;
   }
 
-  renderFilterList() {
-    if (!this.state.showOptions || !this.props.filterOptions) return null;
-    const out = [];
-    Object.keys(this.props.filterOptions).forEach((filter, index) => {
-      out.push(this.renderFilterSelect(filter, index));
+  // When custom dropdowns are implemented, the direction text can be refactored to be styleable
+  renderSortList() {
+    if (!this.state.showOptions || !this.props.sortOptions) return null;
+    const adjustedOptions = [];
+    this.props.sortOptions.forEach(option => {
+      const asc = (
+        <option key={`${option.value} ASC`} value={`${option.value} asc`}>
+          {option.label} A to Z
+        </option>
+      );
+      const desc = (
+        <option key={`${option.value} DESC`} value={`${option.value} desc`}>
+          {option.label} Z to A
+        </option>
+      );
+      adjustedOptions.push(asc, desc);
     });
-    return out;
+
+    return (
+      <div className="select-group">
+        <label>Sort By:</label>
+        {this.renderSortSelect(adjustedOptions)}
+      </div>
+    );
   }
 
-  renderFilterSelect(filter, index) {
+  renderFilterList() {
+    if (!this.state.showOptions || !this.props.filterOptions) return null;
     return (
-      <div className="select" key={index}>
+      <div className="select-group">
+        <label>Filter Results:</label>
+        {Object.keys(this.props.filterOptions).map(filter =>
+          this.renderFilterSelect(filter)
+        )}
+      </div>
+    );
+  }
+
+  renderSortSelect(options) {
+    return (
+      <div className="select" key="filter[order]">
+        <select
+          onChange={event => this.setFilter(event, "order")}
+          value={this.state.filter.order || ""}
+          data-id={"filter"}
+        >
+          <option value="">Default</option>
+          {options}
+        </select>
+        <i className="manicon manicon-caret-down" />
+      </div>
+    );
+  }
+
+  renderFilterSelect(filter) {
+    return (
+      <div className="select" key={filter}>
         <select
           onChange={event => this.setFilter(event, filter)}
           value={this.state.filter[filter] || ""}
@@ -149,6 +199,16 @@ export class ListSearchable extends PureComponent {
   renderOptionLabel(option, filter) {
     if (!filter.labels || !filter.labels[option]) return option;
     return filter.labels[option];
+  }
+
+  renderSearchOptions() {
+    if (!this.state.showOptions) return null;
+    return (
+      <div className="form-list-filter">
+        {this.renderFilterList()}
+        {this.renderSortList()}
+      </div>
+    );
   }
 
   renderButton(buttonProps) {
@@ -254,24 +314,24 @@ export class ListSearchable extends PureComponent {
               onChange={e => this.setFilter(e, "keyword")}
             />
           </div>
-          <div className="form-list-filter">
-            <div className="select-group">{this.renderFilterList()}</div>
-          </div>
-          {this.props.filterOptions ? (
+          {this.renderSearchOptions()}
+          <div className="button-row">
+            {this.showOptionsButton(this.props) ? (
+              <button
+                onClick={this.toggleOptions}
+                className="button-bare-primary"
+                data-id={"filter-toggle"}
+              >
+                {this.renderOptionsText()}
+              </button>
+            ) : null}
             <button
-              onClick={this.toggleOptions}
-              className="button-bare-primary"
-              data-id={"filter-toggle"}
+              onClick={this.resetSearch}
+              className="button-bare-primary reset"
             >
-              {this.renderOptionsText()}
+              {"Reset Search"}
             </button>
-          ) : null}
-          <button
-            onClick={this.resetSearch}
-            className="button-bare-primary reset"
-          >
-            {"Reset Search"}
-          </button>
+          </div>
         </form>
         <nav className={listClassName}>{this.renderEntityList()}</nav>
         <Utility.Pagination
