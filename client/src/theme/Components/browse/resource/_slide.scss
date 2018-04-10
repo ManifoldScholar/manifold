@@ -36,39 +36,39 @@
 
   // Transition classes
   .slide-left-enter figure {
-    left: 100%;
+    transform: translate3d(100%, 0, 0);
   }
 
   .slide-left-enter-active figure {
-    left: 0;
-    transition: left 0.4s $timing;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.4s $timing;
   }
 
   .slide-left-leave figure {
-    left: 0;
+    transform: translate3d(0, 0, 0);
   }
 
   .slide-left-leave-active figure {
-    left: -100%;
-    transition: left 0.4s $timing;
+    transform: translate3d(-100%, 0, 0);
+    transition: transform 0.4s $timing;
   }
 
   .slide-right-enter figure {
-    left: -100%;
+    transform: translate3d(-100%, 0, 0);
   }
 
   .slide-right-enter-active figure {
-    left: 0;
-    transition: left 0.4s $timing;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.4s $timing;
   }
 
   .slide-right-leave figure {
-    left: 0;
+    transform: translate3d(0, 0, 0);
   }
 
   .slide-right-leave-active figure {
-    left: 100%;
-    transition: left 0.4s $timing;
+    transform: translate3d(100%, 0, 0);
+    transition: transform 0.4s $timing;
   }
 
   //.figure-enter figure {
