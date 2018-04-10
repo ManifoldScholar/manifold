@@ -64,35 +64,41 @@ class Project < ApplicationRecord
   has_paper_trail on: [:update]
 
   # Associations
+  # rubocop:disable Rails/InverseOf
   belongs_to :published_text, class_name: "Text", optional: true
-  has_many :texts, dependent: :destroy
-  has_many :text_categories, -> { for_text }, class_name: "Category", dependent: :destroy
+  # rubocop:enable Rails/InverseOf
+  has_many :texts, dependent: :destroy, inverse_of: :project
+  has_many :text_categories, -> { for_text }, class_name: "Category", dependent: :destroy,
+                                              inverse_of: :project
   has_many :resource_categories,
            -> { for_resource },
            class_name: "Category",
-           dependent: :destroy
-  has_many :favorites, as: :favoritable, dependent: :destroy
-  has_many :events, -> { order "events.created_at DESC" }, dependent: :destroy
-  has_many :resources, dependent: :destroy
-  has_many :collections, dependent: :destroy
-  has_many :collection_resources, through: :collections
-  has_many :project_subjects, dependent: :destroy
+           dependent: :destroy,
+           inverse_of: :project
+  has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable
+  has_many :events, -> { order "events.created_at DESC" }, dependent: :destroy,
+                                                           inverse_of: :project
+  has_many :resources, dependent: :destroy, inverse_of: :project
+  has_many :collections, dependent: :destroy, inverse_of: :project
+  has_many :collection_resources, through: :collections, inverse_of: :project
+  has_many :project_subjects, dependent: :destroy, inverse_of: :project
   has_many :subjects, through: :project_subjects
-  has_many :ingestions, dependent: :destroy
-  has_many :twitter_queries, dependent: :destroy
-  has_many :permissions, as: :resource, dependent: :destroy
+  has_many :ingestions, dependent: :destroy, inverse_of: :project
+  has_many :twitter_queries, dependent: :destroy, inverse_of: :project
+  has_many :permissions, as: :resource, dependent: :destroy, inverse_of: :resource
   has_many :resource_imports, inverse_of: :project, dependent: :destroy
   has_many :tracked_dependent_versions,
            -> { order(created_at: :desc) },
            as: :parent_item,
            class_name: "Version",
-           dependent: :nullify
+           dependent: :nullify,
+           inverse_of: :parent_item
 
-  # rubocop:disable Style/Lambda
+  # rubocop:disable Style/Lambda, Rails/InverseOf
   has_many :uncollected_resources, ->(object) {
     where.not(id: object.collection_resources.select(:resource_id))
   }, class_name: "Resource"
-  # rubocop:end Style/Lambda
+  # rubocop:enable Style/Lambda, Rails/InverseOf
 
   # Callbacks
   before_save :prepare_to_reindex_children, on: [:update], if: :draft_changed?
@@ -152,6 +158,7 @@ class Project < ApplicationRecord
   }
 
   # Search
+  # rubocop:disable Style/Lambda
   scope :search_import, -> {
     includes(
       :collaborators,
@@ -160,6 +167,7 @@ class Project < ApplicationRecord
       texts: :titles
     )
   }
+  # rubocop:enable Style/Lambda
 
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,

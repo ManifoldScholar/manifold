@@ -23,9 +23,7 @@ module Ingestor
         uri = URI(target_uri)
         unless uri.scheme
           if uri.relative?
-            if relative_to
-              input_path = to_absolute_package_path(target_uri, relative_to)
-            end
+            input_path = to_absolute_package_path(target_uri, relative_to) if relative_to
           else input_path = target_uri
           end
 
@@ -39,5 +37,6 @@ module Ingestor
         uri.to_s
       end
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end

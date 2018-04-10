@@ -5,7 +5,7 @@ namespace :manifold do
   namespace :import do
     desc "Imports all projects in a directory into Manifold"
     task :projects, [:path, :include_texts, :log_level] => :environment do |_t, args|
-      include_texts = args[:include_texts] == "no" ? false : true
+      include_texts = args[:include_texts] != "no"
       children = Pathname.new(args[:path]).children.select(&:directory?)
       logger = Manifold::Rake.logger
       user = Manifold::Rake.cli_user

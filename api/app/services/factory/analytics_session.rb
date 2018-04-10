@@ -5,7 +5,6 @@ module Factory
   # Returns an analytics session object; used by the statistics model
   class AnalyticsSession
 
-    # rubocop:disable LineLength
     def create_analytics_session
       return nil unless settings_valid?
       client = Google::Apis::AnalyticsV3::AnalyticsService.new

@@ -101,5 +101,7 @@ module Validator
       end
       true
     end
+    # rubocop:enable Metrics/PerceivedComplexity, Metrics/MethodLength, Metrics/AbcSize
+    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

@@ -74,6 +74,7 @@ module Validator
         else
           out << line
         end
+        # rubocop:enable Style/DoubleNegation
       end
       out
     end

@@ -17,7 +17,7 @@ module Api
           title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
           detail: I18n.t("controllers.errors.forbidden.instance.detail", vars)
         }
-        render json: { errors: build_api_error(options) }, status: 403
+        render json: { errors: build_api_error(options) }, status: :forbidden
       end
 
     end

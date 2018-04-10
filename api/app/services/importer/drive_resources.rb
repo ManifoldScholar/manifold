@@ -312,9 +312,9 @@ module Importer
       raise ImportDriveResourcesError
     end
 
-    def raise_missing_column_error(ws)
+    def raise_missing_column_error(worksheet)
       # rubocop:disable LineLength
-      msg = "\"#{ws.title}\" sheet in \"#{ws.spreadsheet.title}\" is missing required column(s): #{(REQUIRED_RESOURCE_COLUMNS - Helpers::List.new(ws).keys).join(', ')}"
+      msg = "\"#{worksheet.title}\" sheet in \"#{worksheet.spreadsheet.title}\" is missing required column(s): #{(REQUIRED_RESOURCE_COLUMNS - Helpers::List.new(worksheet).keys).join(', ')}"
       # rubocop:enable LineLength
       @logger.error(Rainbow(msg).red)
       raise ImportDriveResourcesError
@@ -327,7 +327,7 @@ module Importer
     end
 
     def drive_folder
-      @collection ||= session.file_by_id(@drive_folder_id)
+      @drive_folder ||= session.file_by_id(@drive_folder_id)
     end
 
     def spreadsheet

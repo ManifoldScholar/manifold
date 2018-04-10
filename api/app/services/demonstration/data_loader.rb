@@ -103,3 +103,4 @@ module Demonstration
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

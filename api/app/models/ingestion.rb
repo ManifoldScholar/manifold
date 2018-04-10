@@ -129,7 +129,7 @@ class Ingestion < ApplicationRecord
     begin
       self.strategy = Ingestor.determine_strategy(ingestion_source, creator)
       analysis_success
-    rescue => e
+    rescue StandardError => e
       error("Analysis failed: #{e}")
       analysis_failure
       return
@@ -157,7 +157,7 @@ class Ingestion < ApplicationRecord
       text.project = project
       text.save
       processing_success
-    rescue => e
+    rescue StandardError => e
       handle_ingestion_exception(e)
     end
     Ingestor.reset_logger

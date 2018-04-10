@@ -32,3 +32,4 @@ end
 Rails.application.configure do
   config.middleware.insert_before ActionDispatch::RemoteIp, OmniauthStack
 end
+# rubocop:enable Style/SymbolProc

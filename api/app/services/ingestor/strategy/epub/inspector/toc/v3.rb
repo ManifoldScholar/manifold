@@ -82,6 +82,8 @@ module Ingestor
               end
               items
             end
+            # rubocop: enable Metrics/MethodLength
+            # rubocop: enable Metrics/AbcSize
 
             def toc_nodes_to_structure(nodes)
               nodes_to_structure(nodes)

@@ -35,7 +35,7 @@ class Role < ApplicationRecord
   belongs_to :resource,
              polymorphic: true,
              optional: true
-  has_many :users_roles, class_name: "UsersRoles"
+  has_many :users_roles, class_name: "UsersRoles", dependent: :destroy, inverse_of: :role
   has_many :users, through: :users_roles, source: :user
 
   validates :resource_type,

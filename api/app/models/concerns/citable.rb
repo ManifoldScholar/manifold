@@ -64,4 +64,5 @@ module Citable
       return @generate_citation.call(model) if @generate_citation.is_a? Proc
     end
   end
+  # rubocop:enable Metrics/BlockLength
 end

@@ -75,8 +75,8 @@ class Statistics
     Text.in_the_week_of(Date.current).count
   end
 
-  def read_attribute_for_serialization(n)
-    send(n)
+  def read_attribute_for_serialization(attr)
+    send(attr)
   end
 
   private

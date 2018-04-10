@@ -4,8 +4,8 @@ module Ingestor
   module Helper
     # Logging helpers for EPUB ingestion strategy
     class Log
-      def self.log_structure(s, preface, logger)
-        log_structure_recursive(s, preface, logger)
+      def self.log_structure(structure, preface, logger)
+        log_structure_recursive(structure, preface, logger)
       end
 
       def self.log_text_errors(text, logger)

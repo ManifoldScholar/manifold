@@ -13,7 +13,7 @@ module DynamicMailer
       return deliver_sendmail!(mail) if @config.use_sendmail?
       handle_send_failure(mail)
     # rubocop:disable Metrics/LineLength
-    rescue => e
+    rescue StandardError => e
       # rubocop:enable Metrics/LineLength
       handle_exception(e)
     end

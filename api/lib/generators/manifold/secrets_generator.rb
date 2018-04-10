@@ -6,7 +6,7 @@ module Manifold
     # that creates a config/secrets.yml file and populates secret_key_base
     # with a generated value.
     class SecretsGenerator < Rails::Generators::Base
-      source_root File.expand_path("../../templates", __FILE__)
+      source_root File.expand_path("../templates", __dir__)
 
       attr_reader :secret_key_base
 

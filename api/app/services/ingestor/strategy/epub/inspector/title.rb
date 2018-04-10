@@ -56,7 +56,7 @@ module Ingestor
               ::TextTitle::KIND_ALTERNATIVE
             end
           end
-          # rubocop:enableMetrics/MethodLength
+          # rubocop:enable Metrics/MethodLength
           # rubocop:enable Metrics/CyclomaticComplexity
 
           def id

@@ -110,7 +110,7 @@ module Ingestor
         end
         new_uri.to_s
       rescue URI::InvalidURIError
-        return input_uri
+        input_uri
       end
 
       def epub_uri_to_app_uri(epub_uri, source_path,

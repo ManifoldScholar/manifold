@@ -288,6 +288,7 @@ module Ingestor
           end
 
         end
+        # rubocop: enable Metrics/ClassLength
       end
     end
   end

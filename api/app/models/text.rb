@@ -55,23 +55,22 @@ class Text < ApplicationRecord
   # Associations
   belongs_to :project, optional: true, touch: true
   belongs_to :category, optional: true
-  has_one :publishing_project, class_name: "Project", foreign_key: "published_text_id"
-  belongs_to :start_text_section, optional: true, class_name: "TextSection"
-  has_many :titles, class_name: "TextTitle", dependent: :destroy
-  has_many :text_subjects
+  has_one :publishing_project, class_name: "Project", foreign_key: "published_text_id",
+          dependent: :nullify, inverse_of: :published_text
+  belongs_to :start_text_section, optional: true, class_name: "TextSection",
+             inverse_of: :text_started_by
+  has_many :titles, class_name: "TextTitle", dependent: :destroy, inverse_of: :text
+  has_many :text_subjects, dependent: :destroy
   has_many :subjects, through: :text_subjects
   has_many :ingestion_sources, dependent: :destroy
-  has_many :text_sections,
-           -> { order(position: :asc) },
-           dependent: :destroy,
+  has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text
-  has_many :stylesheets, -> { order(position: :asc) }, dependent: :destroy
-  has_many :favorites, as: :favoritable, dependent: :destroy
+  has_many :stylesheets, -> { order(position: :asc) }, dependent: :destroy,
+           inverse_of: :text
+  has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable
   has_many :annotations, through: :text_sections
   has_one :text_created_event, -> { where event_type: Event::TEXT_ADDED },
-          class_name: Event,
-          as: :subject,
-          dependent: :destroy
+          class_name: Event, as: :subject, dependent: :destroy, inverse_of: :subject
 
   # Delegations
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true

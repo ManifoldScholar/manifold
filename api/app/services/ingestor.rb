@@ -82,7 +82,7 @@ module Ingestor
     def do_ingestion(strategy, ingestion)
       strategy.ingest(ingestion)
       info "services.ingestor.logging.ingestion_end"
-      return ingestion.text
+      ingestion.text
     rescue Ingestor::IngestionFailed => e
       logger.error(e.message)
       nil

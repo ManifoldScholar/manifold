@@ -57,7 +57,8 @@ class Annotation < ApplicationRecord
   belongs_to :text_section, optional: true
   belongs_to :resource, optional: true
   belongs_to :collection, optional: true
-  has_many :comments, as: :subject, dependent: :destroy
+  has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject,
+                      counter_cache: :comments_count
 
   # Validations
   validates :text_section, presence: true

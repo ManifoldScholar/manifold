@@ -31,8 +31,7 @@ module Ingestor
           end
 
           # to go in abstract class
-          # rubocop: disable Metrics/MethodLength
-          # rubocop: disable Metrics/AbcSize
+          # rubocop: disable Metrics/MethodLength, Metrics/AbcSize
           # @todo: Reduce method length, reduce complexity
           def nodes_to_structure(nodes)
             items = []
@@ -55,6 +54,7 @@ module Ingestor
             end
             items
           end
+          # rubocop: enable Metrics/MethodLength, Metrics/AbcSize
 
           def make_structure_item(raw_label, raw_path = nil)
             label = raw_label.strip

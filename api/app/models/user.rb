@@ -19,17 +19,22 @@ class User < ApplicationRecord
 
   # Associations
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
-  has_many :annotations, foreign_key: "creator_id", dependent: :destroy
+  has_many :annotations, foreign_key: "creator_id", dependent: :destroy,
+           inverse_of: :creator
   has_many :favorites, dependent: :destroy
   has_many :favorite_projects, through: :favorites, source: :favoritable,
-                               source_type: "Project"
-  has_many :favorite_texts, through: :favorites, source: :favoritable,
-                            source_type: "Text"
-  has_many :created_texts, class_name: "Text", foreign_key: "creator_id"
-  has_many :created_projects, class_name: "Project", foreign_key: "creator_id"
-  has_many :created_resources, class_name: "Resource", foreign_key: "creator_id"
-  has_many :created_pages, class_name: "Page", foreign_key: "creator_id"
-  has_many :created_flags, class_name: "Flag", foreign_key: "creator_id"
+           source_type: "Project"
+  has_many :favorite_texts, through: :favorites, source: :favoritable, source_type: "Text"
+  has_many :created_texts, class_name: "Text", foreign_key: "creator_id",
+           dependent: :nullify, inverse_of: :creator
+  has_many :created_projects, class_name: "Project", foreign_key: "creator_id",
+           dependent: :nullify, inverse_of: :creator
+  has_many :created_resources, class_name: "Resource", foreign_key: "creator_id",
+           dependent: :nullify, inverse_of: :creator
+  has_many :created_pages, class_name: "Page", foreign_key: "creator_id",
+           dependent: :nullify, inverse_of: :creator
+  has_many :created_flags, class_name: "Flag", foreign_key: "creator_id",
+           dependent: :destroy, inverse_of: :creator
   has_many :permissions, dependent: :destroy
 
   # Validation

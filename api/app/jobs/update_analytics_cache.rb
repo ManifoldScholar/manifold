@@ -16,7 +16,7 @@ class UpdateAnalyticsCache < ApplicationJob
   rescue Faraday::ConnectionFailed
     Rails.logger.error("Connection Failed: unable to update Google Analytics cache.")
   end
-  # rubocop:enableMetrics/AbcSize
+  # rubocop:enable Metrics/AbcSize
 
   def count_readers_for(base_date)
     return 0 unless @client
