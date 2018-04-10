@@ -29,7 +29,7 @@ module ExternalAuth
           nil
         end
 
-        return user
+        user
       ensure
         @user = nil
       end

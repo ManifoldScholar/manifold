@@ -104,7 +104,7 @@ module Authentication
       title: I18n.t("controllers.errors.forbidden_generic.title").titlecase,
       detail: I18n.t("controllers.errors.forbidden_generic.detail")
     }
-    render json: { errors: build_api_error(options) }, status: 403
+    render json: { errors: build_api_error(options) }, status: :forbidden
   end
 
   def user_not_authenticated

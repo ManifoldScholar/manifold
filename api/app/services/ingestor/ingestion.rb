@@ -38,7 +38,10 @@ module Ingestor
     end
 
     def read(rel_path)
+      # rubocop:disable Security/Open
+      # We're not calling Kernel.open, but Rubocop thinks we are.
       open(rel_path).read
+      # rubocop:enable Security/Open
     end
 
     def delete(rel_path)
@@ -131,8 +134,6 @@ module Ingestor
     end
 
     protected
-
-    attr_reader :source_path
 
     def file_operation(msg, rel_path, args = [])
       path = abs(rel_path)

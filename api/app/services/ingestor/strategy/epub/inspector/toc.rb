@@ -29,7 +29,7 @@ module Ingestor
             return unless @nav_xml && @nav_path
             rel_path = @ingestion.relativize_ingestion_path(@nav_path, contdoc_path)
             link = @nav_xml.at_xpath(selector_toc_label % rel_path)
-            return link.text if link && link.element_children.empty?
+            return link.text if link&.element_children&.empty?
           end
           memoize :toc_label_for_cont_doc
 

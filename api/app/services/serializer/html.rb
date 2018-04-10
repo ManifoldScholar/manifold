@@ -80,6 +80,8 @@ module Serializer
         child[:delete] == true
       end
     end
+    # rubocop:enable Metrics/PerceivedComplexity, Metrics/MethodLength, Metrics/AbcSize
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     def traverse(node)
       children = nil

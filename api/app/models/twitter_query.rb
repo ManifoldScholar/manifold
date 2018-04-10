@@ -12,9 +12,7 @@ class TwitterQuery < ApplicationRecord
 
   # Association
   belongs_to :project
-  has_many :events,
-           as: :subject,
-           dependent: :destroy
+  has_many :events, as: :subject, dependent: :destroy, inverse_of: :subject
 
   # Scopes
   scope :active, -> { where(active: true) }

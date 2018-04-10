@@ -204,11 +204,11 @@ module ResourceImportRows
     end
 
     def drive_folder
-      @drive_folder_pointer ||= drive_session.file_by_id(row.storage_identifier)
+      @drive_folder ||= drive_session.file_by_id(row.storage_identifier)
     end
 
     def drive_session
-      @drive_session_pointer ||= ::Factory::DriveSession.create_service_account_session
+      @drive_session ||= ::Factory::DriveSession.create_service_account_session
     end
 
   end

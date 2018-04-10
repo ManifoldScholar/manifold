@@ -45,7 +45,7 @@ module Concerns
     # rubocop:enable Metrics/AbcSize
 
     class_methods do
-      # rubocop:disable Style/PredicateName
+      # rubocop:disable Naming/PredicateName
       def has_sort_title(updater = nil, &updater_block)
         if updater.blank? && updater_block.nil?
           raise ArgumentError, "Must specify some sort of updater"
@@ -53,7 +53,7 @@ module Concerns
 
         @sort_title_updater = block_given? ? updater_block : updater
       end
-      # rubocop:enable Style/PredicateName
+      # rubocop:enable Naming/PredicateName
 
       # @!attribute [r] sort_title_updater
       # @return [Symbol, #call]

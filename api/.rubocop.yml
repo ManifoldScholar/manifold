@@ -35,7 +35,10 @@ Layout/DotPosition:
 Rails:
   Enabled: true
 
-Lint/UnneededDisable:
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+Lint/UnneededCopDisableDirective:
   Enabled: false
 
 Layout/EmptyLinesAroundClassBody:
@@ -58,3 +61,13 @@ Rails/Present:
 
 Lint/ScriptPermission:
   Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    - 'ok'
+    - 'id'
+    - 'io'
+    - 'e'
+
+Layout/AlignHash:
+  EnforcedLastArgumentHashStyle: ignore_implicit

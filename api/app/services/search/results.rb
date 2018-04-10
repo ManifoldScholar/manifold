@@ -1,5 +1,4 @@
 require "forwardable"
-include ActiveSupport::Inflector
 module Search
   # Search::Results wraps raw Searchkick::Results and injects parent record IDs and slugs
   # in an efficient manner. Except for places where it's injecting these values into the
@@ -10,6 +9,8 @@ module Search
   # model instances. If Searchkick is returning raw elastic search results, we can
   # execute a performant query and inject parent slugs needed for link creation.
   class Results
+
+    include ActiveSupport::Inflector
 
     MODEL_INCLUDES = {
       "text_section" => { text: { project: :makers } },

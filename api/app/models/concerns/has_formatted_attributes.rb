@@ -13,7 +13,7 @@ module Concerns
     end
 
     class_methods do
-      # rubocop:disable Style/PredicateName
+      # rubocop:disable Naming/PredicateName
 
       # @param [<Symbol>] attributes
       # @param [Hash] shared_options
@@ -46,7 +46,7 @@ module Concerns
         include definition.methods_module
       end
 
-      # rubocop:enable Style/PredicateName
+      # rubocop:enable Naming/PredicateName
     end
   end
 end

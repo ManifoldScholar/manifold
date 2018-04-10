@@ -1,6 +1,6 @@
 module ManifoldEnv
   # rubocop:disable Style/AndOr, Style/ClassCheck, Metrics/BlockLength
-  # rubocop:disable Style/PredicateName
+  # rubocop:disable Naming/PredicateName
   class OauthProvider
     include Comparable
     include Equalizer.new(:name)
@@ -87,4 +87,6 @@ module ManifoldEnv
     end
     # rubocop:enable Style/CaseEquality
   end
+  # rubocop:enable Style/AndOr, Style/ClassCheck, Metrics/BlockLength
+  # rubocop:enable Naming/PredicateName
 end

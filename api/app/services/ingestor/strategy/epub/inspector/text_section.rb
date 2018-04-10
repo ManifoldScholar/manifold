@@ -82,9 +82,7 @@ module Ingestor
 
           def toc?
             toc_page = guess_toc_page_from_landmarks
-            if toc_page
-              return text_section_resource_path == toc_page[:source_path]
-            end
+            return text_section_resource_path == toc_page[:source_path] if toc_page
             false
           end
 

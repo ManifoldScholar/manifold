@@ -5,7 +5,7 @@ module Api
         # Responds with collaborators in a project
         class CollaboratorsController < ApplicationController
 
-          before_action :set_project, only: [:index, :create, :show]
+          before_action :set_project
 
           resourceful! Collaborator, authorize_options: { except: [:index, :show] } do
             @project.collaborators

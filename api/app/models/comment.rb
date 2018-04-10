@@ -26,8 +26,9 @@ class Comment < ApplicationRecord
   belongs_to :subject, polymorphic: true, counter_cache: :comments_count
   belongs_to :parent, class_name: "Comment", optional: true, inverse_of: :children,
                       counter_cache: :children_count
-  has_many :children, class_name: "Comment", foreign_key: :parent_id, dependent: :destroy
-  has_many :flags, as: :flaggable, dependent: :destroy
+  has_many :children, class_name: "Comment", foreign_key: :parent_id, dependent: :destroy,
+                      inverse_of: :parent, counter_cache: :children_count
+  has_many :flags, as: :flaggable, dependent: :destroy, inverse_of: :flaggable
 
   # Validations
   validates :body, :subject, presence: true

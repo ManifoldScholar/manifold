@@ -49,7 +49,7 @@ namespace :manifold do
     desc "Import a project form a JSON definition"
     task :import, [:path, :include_texts] => :environment do |_t, args|
       cli_user = Manifold::Rake.cli_user
-      include_texts = args[:include_texts] == "no" ? false : true
+      include_texts = args[:include_texts] != "no"
       Manifold::Rake.logger.info "Importing project from #{args[:path]}"
       Importer::Project.new(
         args[:path],

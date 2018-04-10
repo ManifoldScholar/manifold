@@ -65,7 +65,7 @@ class ApplicationController < ActionController::API
       title: I18n.t("controllers.errors.forbidden.class.title", vars).titlecase,
       detail: I18n.t("controllers.errors.forbidden.class.detail", vars)
     }
-    render json: { errors: build_api_error(options) }, status: 403
+    render json: { errors: build_api_error(options) }, status: :forbidden
   end
 
   def authority_forbidden_resource_instance(error)
@@ -75,7 +75,7 @@ class ApplicationController < ActionController::API
       title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
       detail: I18n.t("controllers.errors.forbidden.instance.detail", vars)
     }
-    render json: { errors: build_api_error(options) }, status: 403
+    render json: { errors: build_api_error(options) }, status: :forbidden
   end
 
   def resource_not_found
@@ -99,7 +99,7 @@ class ApplicationController < ActionController::API
       title: "Manifold encountered an error",
       detail: error.message
     }
-    render json: { errors: build_api_error(options) }, status: 500
+    render json: { errors: build_api_error(options) }, status: :internal_server_error
   end
 
   class << self

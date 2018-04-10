@@ -239,7 +239,6 @@ module Ingestor
         text.metadata["unique_identifier"] = unique_id_inspector.unique_id
       end
 
-      #
       def update_titles!(text)
         creator = ::Ingestor::Creator::TextTitles.new(@logger, text)
         titles = creator.create(title_inspectors, text.titles)
@@ -294,5 +293,6 @@ module Ingestor
       end
 
     end
+    # rubocop: enable Metrics/ClassLength
   end
 end

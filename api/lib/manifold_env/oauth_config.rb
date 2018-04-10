@@ -65,4 +65,5 @@ module ManifoldEnv
     class UnknownProvider < KeyError
     end
   end
+  # rubocop:enable Style/AndOr, Style/ClassCheck, Metrics/BlockLength, Metrics/LineLength
 end

@@ -48,12 +48,13 @@ class Resource < ApplicationRecord
   has_one :resource_created_event, -> { where event_type: Event::RESOURCE_ADDED },
           class_name: Event,
           as: :subject,
-          dependent: :destroy
-  has_one :resource_import_row, inverse_of: :resource
-  has_many :collection_resources, dependent: :destroy
+          dependent: :destroy,
+          inverse_of: :subject
+  has_one :resource_import_row, inverse_of: :resource, dependent: :nullify
+  has_many :collection_resources, dependent: :destroy, inverse_of: :resource
   has_many :collections, through: :collection_resources
-  has_many :comments, as: :subject, dependent: :destroy
-  has_many :annotations, dependent: :destroy
+  has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject
+  has_many :annotations, dependent: :destroy, inverse_of: :resource
 
   delegate :slug, to: :project, prefix: true
 
@@ -179,7 +180,7 @@ class Resource < ApplicationRecord
   end
 
   def update_kind
-    sub_kind.present? ? sub_kind : nil
+    sub_kind.presence
     return self.kind = determine_kind unless kind
     return self.kind = kind.downcase if ALLOWED_KINDS.include?(kind.downcase)
     self.kind = determine_kind # fallback

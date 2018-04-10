@@ -26,10 +26,13 @@ class TextSection < ApplicationRecord
 
   # Associations
   belongs_to :text, inverse_of: :text_sections
+  has_one :text_started_by, class_name: "Text", foreign_key: "start_text_section_id",
+          dependent: :nullify, inverse_of: :start_text_section
   belongs_to :ingestion_source
   # We intentionally do not destroy annotations because we want to handle the orphans.
   has_many :annotations, dependent: :nullify
-  has_many :searchable_nodes, -> { order(position: :asc) }, dependent: :destroy
+  has_many :searchable_nodes, -> { order(position: :asc) }, dependent: :destroy,
+           inverse_of: :text_section
   has_many :resources, through: :annotations
   has_many :collections, through: :annotations
 

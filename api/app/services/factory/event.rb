@@ -131,7 +131,7 @@ module Factory
     def i18n_set?(key)
       begin
         t = I18n.t key, raise: true
-      rescue
+      rescue StandardError
         false
       end
       !t.blank?

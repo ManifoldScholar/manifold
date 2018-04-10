@@ -9,6 +9,7 @@ class CollectionResource < ApplicationRecord
   # Associations
   belongs_to :collection, counter_cache: true
   belongs_to :resource
+  has_one :project, through: :collection
 
   # Concerns
   acts_as_list scope: :collection_id

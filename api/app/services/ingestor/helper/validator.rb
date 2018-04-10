@@ -33,5 +33,6 @@ module Ingestor
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize
   end
 end
