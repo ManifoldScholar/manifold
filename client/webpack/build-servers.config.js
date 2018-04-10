@@ -19,7 +19,7 @@ const entries = {
   server: "./src/server-client"
 };
 
-let includeModulesInBundle = false;
+let includeModulesInBundle = true;
 if (process.env.WEBPACK_DEV_SERVER) {
   entries["server-development"] = "./src/server-dev";
   includeModulesInBundle = true;
