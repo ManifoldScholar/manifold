@@ -19,10 +19,16 @@ const entries = {
   server: "./src/server-client"
 };
 
-let includeModulesInBundle = true;
+// By default, we will include all importedm modules from node_modules in the output
+// bundle. Doing so will make our node app slightly larger, but it will make startup time
+// much better, and it means that we don't have to distribute the (giant) node_modules dir
+// in our OS packages.
+let externals = [];
+// However, with webpack dev server, we don't want to recompile all the node modules every
+// time something changes, so it's faster to leave those as dynamic requires.
 if (process.env.WEBPACK_DEV_SERVER) {
+  externals = [nodeExternals({ modulesFromFile: true })];
   entries["server-development"] = "./src/server-dev";
-  includeModulesInBundle = true;
 }
 
 // Clean up build dir
@@ -37,7 +43,7 @@ const config = {
   },
   // If includeModulesInBundle is true, the following line will prevent webpack from
   // bundling the modules into the output.
-  externals: [nodeExternals({ modulesFromFile: includeModulesInBundle })],
+  externals,
   devtool: "none",
   output: {
     chunkFilename: `chunk-[name].js`,
@@ -76,6 +82,15 @@ const copyFiles = new CopyWebpackPlugin([
   }
 ]);
 
+// Isomorphic fetch requires iconv-loader which has a dynamic include that Webpack can't
+// really handle. We replace it with a noop javascript object, since we don't really need
+// it. See https://github.com/matthew-andrews/isomorphic-fetch/pull/58. I think mocking it
+// is a better solution than disabling all warnings, as suggested in that issue.
+const replaceModules = new webpack.NormalModuleReplacementPlugin(
+  /iconv-loader$/,
+  "node-noop"
+);
+
 const globals = new webpack.DefinePlugin({
   __CLIENT__: false,
   __SERVER__: true
@@ -85,6 +100,9 @@ const plugins = [];
 plugins.push(globals);
 plugins.push(copyFiles);
 plugins.push(banner);
+if (!process.env.WEBPACK_DEV_SERVER) {
+  plugins.push(replaceModules);
+}
 
 const finalConfig = Object.assign({}, base({ plugins }), config);
 module.exports = finalConfig;

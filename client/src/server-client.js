@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import "babel-polyfill";
 import config from "./config";
 import ch from "./helpers/consoleHelpers";
 import React from "react";
@@ -68,16 +69,16 @@ const render = (req, res, store) => {
       }
       if (isError) {
         res.status(500);
-        res.send(renderString);
+        res.end(renderString);
       } else {
-        res.send("<!doctype html>\n" + renderString);
+        res.end("<!doctype html>\n" + renderString);
       }
     }
   }
 };
 
 const fetchRouteData = (req, store) => {
-  const location = req.path;
+  const location = req.url;
   const routes = getRoutes();
   const branch = matchRoutes(routes, location);
   const promises = branch.reduce((allPromises, matchedRoute) => {

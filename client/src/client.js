@@ -2,9 +2,9 @@
 /**
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
-require("babel-polyfill");
 require("es6-promise").polyfill();
 
+import "babel-polyfill";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
