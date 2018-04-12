@@ -23,6 +23,11 @@ class FormMaskedTextInput extends Component {
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
+  constructor() {
+    super();
+    this.placeholderChar = "\u005F"; // react-text-mask default "_"
+  }
+
   currencyMask() {
     return createNumberMask({
       prefix: "$",
@@ -44,14 +49,33 @@ class FormMaskedTextInput extends Component {
     };
   }
 
+  doiMask() {
+    return raw => {
+      const base = "https://doi.org/10.".split("");
+      const wordChar = /^[A-Za-z0-9_.;()/]$/;
+      const adjusted = raw.replace(/\s/g, "");
+      const length = adjusted.length;
+      let mask =
+        length >= base.length ? Array(length - base.length) : Array(length);
+      mask.unshift(...base);
+      fill(mask, wordChar, base.length);
+      if (mask.length === base.length) mask = base;
+      return mask;
+    };
+  }
+
   mask() {
-    if (this.props.mask === "currency") {
-      return this.currencyMask();
+    switch (this.props.mask) {
+      case "currency":
+        return this.currencyMask();
+      case "hashtag":
+        return this.hashTagMask();
+      case "doi":
+        this.placeholderChar = "\u2000"; // white-space because we allow "_" in DOI
+        return this.doiMask();
+      default:
+        return this.props.mask;
     }
-    if (this.props.mask === "hashtag") {
-      return this.hashTagMask();
-    }
-    return this.props.mask;
   }
 
   render() {
@@ -70,6 +94,7 @@ class FormMaskedTextInput extends Component {
           type="text"
           mask={mask}
           placeholder={this.props.placeholder}
+          placeholderChar={this.placeholderChar}
         />
       </div>
     );

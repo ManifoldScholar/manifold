@@ -3,13 +3,9 @@ import renderer from "react-test-renderer";
 import Item from "../Item";
 
 describe("Global.Meta.Item component", () => {
-
   it("renders correctly when passed string", () => {
     const component = renderer.create(
-      <Item
-        label="aMetadataProperty"
-        value="A Metadata Value"
-      />
+      <Item label="aMetadataProperty" value="A Metadata Value" />
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

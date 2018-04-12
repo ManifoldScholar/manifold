@@ -26,10 +26,10 @@ exports[`Backend Project Permissions Container renders correctly 1`] = `
           "heroStyles": Object {},
           "hideActivity": false,
           "metadata": Object {
-            "doi": "12345.6789",
+            "doi": "https://doi.org/10.12345.6789",
           },
           "metadataFormatted": Object {
-            "doi": "12345.6789",
+            "doi": "https://doi.org/10.12345.6789",
           },
           "metadataProperties": Array [
             "abstract",

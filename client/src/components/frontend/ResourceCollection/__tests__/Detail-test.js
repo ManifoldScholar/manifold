@@ -11,8 +11,16 @@ describe("Frontend.ResourceCollection.Detail Component", () => {
 
   const project = build.entity.project("1");
   const collectionResource = build.entity.collectionResource("4", {});
-  const resource = build.entity.resource("3", {}, { project, collectionResources: [collectionResource] });
-  const collection = build.entity.collection("2", {}, { project, resources: [resource] });
+  const resource = build.entity.resource(
+    "3",
+    {},
+    { project, collectionResources: [collectionResource] }
+  );
+  const collection = build.entity.collection(
+    "2",
+    {},
+    { project, resources: [resource] }
+  );
   project.relationships.resources.push(resource);
   const resources = project.relationships.resources;
 
