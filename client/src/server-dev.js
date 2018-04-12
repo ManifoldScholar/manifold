@@ -15,6 +15,7 @@ const stats = readStats("Development");
 
 // Handle requests
 const requestHandler = (req, res) => {
+  res.setHeader("Content-Type", "text/html");
   res.end(
     "<!doctype html>\n" + ReactDOM.renderToString(<Html stats={stats} />)
   );

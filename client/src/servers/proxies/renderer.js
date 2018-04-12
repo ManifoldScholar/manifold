@@ -40,11 +40,13 @@ export default function makeRendererProxy(stats, requestHandler) {
               "Waiting for initial Webpack build to complete. Wait a few seconds " +
               "and reload.";
             ch.error(msg);
+            res.setHeader("Content-Type", "text/html");
             res.end(msg);
           } else {
             ch.error(
               `Rendering fallback failed to render in server-development.js`
             );
+            res.setHeader("Content-Type", "text/html");
             res.end(exceptionRenderer(error));
           }
         }

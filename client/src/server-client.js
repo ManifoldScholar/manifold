@@ -69,8 +69,10 @@ const render = (req, res, store) => {
       }
       if (isError) {
         res.status(500);
+        res.setHeader("Content-Type", "text/html");
         res.end(renderString);
       } else {
+        res.setHeader("Content-Type", "text/html");
         res.end("<!doctype html>\n" + renderString);
       }
     }
