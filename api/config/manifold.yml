@@ -233,6 +233,7 @@ common: &1
           - !ruby/regexp '/rtf\Z/i'
       :powerpoint:
         :allowed_mime:
+          - "application/zip" # https://github.com/ManifoldScholar/manifold/issues/936
           - "application/vnd.ms-powerpoint"
           - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
           - "application/vnd.openxmlformats-officedocument.presentationml.template"
