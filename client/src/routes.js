@@ -569,13 +569,6 @@ export default () => {
           ]
         },
         {
-          name: "backendSettingsSubjectsNew",
-          exact: true,
-          component: Backend.Settings.Subjects.New,
-          path: "/backend/settings/subjects/new",
-          helper: () => "/backend/settings/subjects/new"
-        },
-        {
           name: "backendSettings",
           exact: false,
           component: Backend.Settings.Wrapper,
@@ -603,6 +596,13 @@ export default () => {
               path: "/backend/settings/subjects/:id?",
               helper: () => "/backend/settings/subjects",
               routes: [
+                {
+                  name: "backendSettingsSubjectsNew",
+                  exact: true,
+                  component: Backend.Settings.Subjects.New,
+                  path: "/backend/settings/subjects/new",
+                  helper: () => "/backend/settings/subjects/new"
+                },
                 {
                   name: "backendSettingsSubject",
                   component: Backend.Settings.Subjects.Edit,

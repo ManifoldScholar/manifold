@@ -1,10 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
-import { Navigation } from "components/backend";
 import { Form } from "components/backend";
 import { Form as FormContainer } from "containers/backend";
-import { subjectsAPI } from "api";
+import { subjectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 
 export class SettingsSubjectsNewContainer extends PureComponent {
@@ -22,45 +21,32 @@ export class SettingsSubjectsNewContainer extends PureComponent {
 
   render() {
     return (
-      <div>
-        <Navigation.DetailHeader
-          type="subject"
-          breadcrumb={[
-            { path: lh.link("backendSettingsSubjects"), label: "ALL SUBJECTS" }
-          ]}
-          title={"New Subject"}
-          showUtility={false}
-          note={"Enter the name of your subject. Press save to continue."}
-        />
-        <section className="backend-panel">
-          <div className="container">
-            <div className="panel">
-              <section>
-                <FormContainer.Form
-                  model={this.props.subject}
-                  name="backend-create-subject"
-                  update={subjectsAPI.update}
-                  create={subjectsAPI.create}
-                  onSuccess={this.handleSuccess}
-                  className="form-secondary"
-                >
-                  <Form.TextInput
-                    validation={["required"]}
-                    focusOnMount
-                    label="Name"
-                    name="attributes[name]"
-                    placeholder="Enter Subject Name"
-                  />
-                  <Form.Save
-                    text="Save and Continue"
-                    cancelRoute={lh.link("backendSettingsSubjects")}
-                  />
-                </FormContainer.Form>
-              </section>
-            </div>
-          </div>
-        </section>
-      </div>
+      <section>
+        <header className="drawer-header">
+          <h2 className="heading-quaternary">New Subject</h2>
+        </header>
+        <FormContainer.Form
+          model={this.props.subject}
+          name="backend-create-subject"
+          update={subjectsAPI.update}
+          create={subjectsAPI.create}
+          options={{ adds: requests.beSubjects }}
+          onSuccess={this.handleSuccess}
+          className="form-secondary"
+        >
+          <Form.TextInput
+            validation={["required"]}
+            focusOnMount
+            label="Name"
+            name="attributes[name]"
+            placeholder="Enter Subject Name"
+          />
+          <Form.Save
+            text="Save and Continue"
+            cancelRoute={lh.link("backendSettingsSubjects")}
+          />
+        </FormContainer.Form>
+      </section>
     );
   }
 }
