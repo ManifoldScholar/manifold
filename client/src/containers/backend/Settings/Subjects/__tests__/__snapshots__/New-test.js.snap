@@ -1,125 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend Settings Subjects New Container renders correctly 1`] = `
-<div>
-  <section
-    className="bg-neutral95"
+<section>
+  <header
+    className="drawer-header"
   >
-    <nav
-      className="breadcrumb-primary"
+    <h2
+      className="heading-quaternary"
+    >
+      New Subject
+    </h2>
+  </header>
+  <div>
+    <form
+      className="form-secondary"
+      data-id="submit"
+      onSubmit={[Function]}
     >
       <div
-        className="container flush"
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Name
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter Subject Name"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input submit"
       >
         <a
-          className="initial"
+          className="button-secondary outlined dull"
           href="/backend/settings/subjects"
           onClick={[Function]}
         >
-          <i
-            className="manicon manicon-arrow-left"
-          />
-          Back to:
+          Cancel
         </a>
-        <ul>
-          <li>
-            <a
-              className="back-link-primary-segment"
-              href="/backend/settings/subjects"
-              onClick={[Function]}
-            >
-              ALL SUBJECTS
-            </a>
-          </li>
-        </ul>
+        <input
+          className="button-secondary outlined"
+          type="submit"
+          value="Save and Continue"
+        />
       </div>
-    </nav>
-    <div
-      className="container flush"
-    >
-      <header
-        className="entity-header-primary"
-      >
-        <figure>
-          <i
-            className="manicon manicon-books-on-shelf"
-          />
-        </figure>
-        <div
-          className="title"
-        >
-          <h1>
-            New Subject
-            <span
-              className="subtitle"
-            />
-          </h1>
-          <div
-            className="utility"
-          >
-            <span
-              className="notes"
-            >
-              Enter the name of your subject. Press save to continue.
-            </span>
-          </div>
-        </div>
-      </header>
-    </div>
-  </section>
-  <section
-    className="backend-panel"
-  >
-    <div
-      className="container"
-    >
-      <div
-        className="panel"
-      >
-        <section>
-          <div>
-            <form
-              className="form-secondary"
-              data-id="submit"
-              onSubmit={[Function]}
-            >
-              <div
-                className="form-input"
-                style={Object {}}
-              >
-                <label
-                  className=""
-                >
-                  Name
-                </label>
-                <input
-                  onChange={[Function]}
-                  placeholder="Enter Subject Name"
-                  type="text"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-input submit"
-              >
-                <a
-                  className="button-secondary outlined dull"
-                  href="/backend/settings/subjects"
-                  onClick={[Function]}
-                >
-                  Cancel
-                </a>
-                <input
-                  className="button-secondary outlined"
-                  type="submit"
-                  value="Save and Continue"
-                />
-              </div>
-            </form>
-          </div>
-        </section>
-      </div>
-    </div>
-  </section>
-</div>
+    </form>
+  </div>
+</section>
 `;

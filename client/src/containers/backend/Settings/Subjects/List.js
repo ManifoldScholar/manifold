@@ -106,7 +106,8 @@ export class SettingsSubjectsListContainer extends PureComponent {
           <List.Searchable
             newButton={{
               path: lh.link("backendSettingsSubjectsNew"),
-              text: "Add a New Subject"
+              text: "Add a New Subject",
+              authorizedFor: "subject"
             }}
             entities={subjects}
             singularUnit="subject"
