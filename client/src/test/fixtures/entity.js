@@ -72,7 +72,7 @@ const classAbilities = {
 };
 
 const metadataValues = {
-  doi: "12345.6789"
+  doi: "https://doi.org/10.12345.6789"
 };
 
 const defaults = {
@@ -283,8 +283,6 @@ const defaults = {
     type: "texts",
     attributes: {
       metadataProperties,
-      metadata: {},
-      metadataFormatted: {},
       slug: "",
       title: "Ain't No Thang",
       creatorNames: "Andre3000, Big Boi",

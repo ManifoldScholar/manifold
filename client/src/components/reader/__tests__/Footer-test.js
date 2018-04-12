@@ -7,7 +7,7 @@ describe("Reader.Footer component", () => {
     attributes: {
       metadataFormatted: {
         rights: "All rights <em>reserved</em>"
-      },
+      }
     }
   };
 

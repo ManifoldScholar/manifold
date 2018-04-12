@@ -212,6 +212,7 @@ exports[`Backend Project ProjectPage Container renders correctly 1`] = `
           mask={[Function]}
           onChange={[Function]}
           placeholder={undefined}
+          placeholderChar="_"
           type="text"
           value={undefined}
         />

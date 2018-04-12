@@ -178,11 +178,17 @@ const applicationConfiguration = {
         },
         doi: {
           placeholder: "Enter a digital object identifier",
-          type: "TextInput"
+          type: "MaskedTextInput",
+          inputProps: {
+            mask: "doi"
+          }
         },
         resourcesDoi: {
           placeholder: "Enter a digital object identifier",
-          type: "TextInput"
+          type: "MaskedTextInput",
+          inputProps: {
+            mask: "doi"
+          }
         },
         creator: {
           placeholder: "Enter the creator name",

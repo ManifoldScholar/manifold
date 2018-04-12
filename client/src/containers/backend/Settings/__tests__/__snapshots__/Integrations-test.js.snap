@@ -357,6 +357,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
           }
           onChange={[Function]}
           placeholder="ga:123456789"
+          placeholderChar="_"
           type="text"
           value={null}
         />

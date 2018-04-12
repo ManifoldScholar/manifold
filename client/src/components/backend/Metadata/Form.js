@@ -129,6 +129,10 @@ export default class FormMakers extends PureComponent {
     return this.configValueFor(prop, "placeholder");
   }
 
+  inputPropsFor(prop) {
+    return this.configValueFor(prop, "inputProps");
+  }
+
   componentFor(prop) {
     const key = this.configValueFor(prop, "type");
     const component = Form[key];
@@ -157,6 +161,7 @@ export default class FormMakers extends PureComponent {
                       instructions={this.instructionsFor(prop)}
                       label={this.labelize(prop)}
                       name={`attributes[metadata][${prop}]`}
+                      {...this.inputPropsFor(prop)}
                     />
                   );
                 })}

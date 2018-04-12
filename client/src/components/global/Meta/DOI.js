@@ -11,16 +11,13 @@ export default class DOI extends Component {
   };
 
   render() {
-    const doiBase = "https://doi.org/10.";
     const { label, doi } = this.props;
     if (!doi) return null;
 
-    const url = `${doiBase}${doi}`;
-
     return (
       <Meta.Item label={label}>
-        <a href={url} target="_blank">
-          {url}
+        <a href={doi} target="_blank">
+          {doi}
         </a>
       </Meta.Item>
     );
