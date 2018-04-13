@@ -65,10 +65,10 @@ const render = (req, res, store) => {
     } else {
       const state = store.getState();
       if (has(state, "notifications.fatalError.status")) {
-        res.status(state.notifications.fatalError.status);
+        res.statusCode = state.notifications.fatalError.status;
       }
       if (isError) {
-        res.status(500);
+        res.statusCode = 302;
         res.setHeader("Content-Type", "text/html");
         res.end(renderString);
       } else {
