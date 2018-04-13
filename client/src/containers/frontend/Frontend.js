@@ -23,9 +23,12 @@ export class FrontendContainer extends Component {
         requests.feSubjects,
         { oneTime: true }
       );
-      const { promise: one } = dispatch(pages);
-      const { promise: two } = dispatch(subjects);
-      return Promise.all([one, two]);
+      const promises = [];
+      const pagesRes = dispatch(pages);
+      const subjectsRes = dispatch(subjects);
+      if (pagesRes) promises.push(pagesRes.promise);
+      if (subjectsRes) promises.push(pagesRes.promise);
+      return Promise.all(promises);
     }
   };
 
