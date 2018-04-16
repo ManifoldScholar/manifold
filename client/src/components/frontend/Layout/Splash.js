@@ -20,11 +20,6 @@ export default class Splash extends Component {
     authenticated: true
   };
 
-  constructor() {
-    super();
-    this.handleSignUp = this.handleSignUp.bind(this);
-  }
-
   componentDidMount() {
     this.sizeForeground();
   }
@@ -55,10 +50,10 @@ export default class Splash extends Component {
     }
   };
 
-  handleSignUp(event) {
+  handleSignUp = event => {
     event.preventDefault();
     this.props.toggleSignInUpOverlay();
-  }
+  };
 
   feature(props) {
     return props.feature;

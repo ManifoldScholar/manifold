@@ -30,9 +30,6 @@ export class ProjectCollectionsListContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { filter: {} };
-    this.lastFetchedPage = null;
-    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
-    this.filterChangeHandler = this.filterChangeHandler.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +37,6 @@ export class ProjectCollectionsListContainer extends PureComponent {
   }
 
   fetchCollections(page) {
-    this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.collections(
@@ -53,21 +49,21 @@ export class ProjectCollectionsListContainer extends PureComponent {
     this.props.dispatch(action);
   }
 
-  filterChangeHandler(filter) {
+  filterChangeHandler = filter => {
     this.setState({ filter }, () => {
       this.fetchCollections(1);
     });
-  }
+  };
 
   handleCollectionsPageChange(event, page) {
     this.fetchCollections(page);
   }
 
-  pageChangeHandlerCreator(page) {
+  pageChangeHandlerCreator = page => {
     return event => {
       this.handleCollectionsPageChange(event, page);
     };
-  }
+  };
 
   render() {
     if (!this.props.collections) return null;

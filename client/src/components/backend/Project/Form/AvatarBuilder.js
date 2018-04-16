@@ -22,12 +22,9 @@ class AvatarBuilder extends Component {
     this.state = {
       confirmation: null
     };
-    this.onColorChange = this.onColorChange.bind(this);
-    this.onUploadChange = this.onUploadChange.bind(this);
-    this.handleColorChange = this.handleColorChange.bind(this);
   }
 
-  onColorChange(color) {
+  onColorChange = color => {
     if (
       this.props.getModelValue("attributes[avatar][data]") ||
       this.props.getModelValue("attributes[avatarStyles][smallSquare]")
@@ -35,12 +32,12 @@ class AvatarBuilder extends Component {
       return this.handleColorChange(color);
     }
     this.setAvatarColor(color);
-  }
+  };
 
-  onUploadChange(image) {
+  onUploadChange = image => {
     if (!image) return this.removeAvatar();
     this.setAvatarImage(image);
-  }
+  };
 
   setAvatarImage(image) {
     if (!image) return null;
@@ -53,7 +50,7 @@ class AvatarBuilder extends Component {
     this.props.setOther(color.value, "attributes[avatarColor]");
   }
 
-  handleColorChange(color) {
+  handleColorChange = color => {
     const heading =
       "Changing this will remove the project's current avatar image";
     const message = "Do you wish to proceed?";
@@ -71,7 +68,7 @@ class AvatarBuilder extends Component {
         this.closeDialog();
       }
     );
-  }
+  };
 
   removeAvatar() {
     this.props.setOther(true, "attributes[removeAvatar]");

@@ -39,13 +39,7 @@ export class CommentEditor extends PureComponent {
 
   constructor(props) {
     super(props);
-
-    this.handleBodyChange = this.handleBodyChange.bind(this);
-    this.submitOnReturnKey = this.submitOnReturnKey.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.state = this.initialState();
-    if (this.isEdit(props)) this.state.body = props.comment.attributes.body;
+    this.state = this.initialState(props);
   }
 
   componentDidMount() {
@@ -55,27 +49,28 @@ export class CommentEditor extends PureComponent {
     }
   }
 
-  initialState() {
+  initialState(props) {
+    const body = this.isEdit(props) ? props.comment.attributes.body : "";
     return {
-      body: "",
+      body,
       errors: []
     };
   }
 
-  submitOnReturnKey(event) {
+  submitOnReturnKey = event => {
     if (event.keyCode === 13 && !event.shiftKey) {
       event.preventDefault();
       event.stopPropagation();
       this.handleSubmit(event);
     }
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     if (this.isEdit(this.props))
       return this.updateComment(this.props, this.state);
     return this.createComment(this.props, this.state);
-  }
+  };
 
   createComment(props, state) {
     const comment = this.commentFromPropsAndState(props, state);
@@ -120,9 +115,9 @@ export class CommentEditor extends PureComponent {
     this.setState({ errors });
   }
 
-  handleBodyChange(event) {
+  handleBodyChange = event => {
     this.setState({ body: event.target.value });
-  }
+  };
 
   isEdit(props) {
     return this.mode(props) === "edit";

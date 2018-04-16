@@ -26,38 +26,29 @@ export default class CommentDetail extends PureComponent {
     this.state = {
       editor: null
     };
-
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleRestore = this.handleRestore.bind(this);
-    this.handleDestroy = this.handleDestroy.bind(this);
-    this.startEdit = this.startEdit.bind(this);
-    this.startReply = this.startReply.bind(this);
-    this.closeEditor = this.closeEditor.bind(this);
-    this.handleFlag = this.handleFlag.bind(this);
-    this.handleUnflag = this.handleUnflag.bind(this);
   }
 
-  handleFlag(event) {
+  handleFlag = event => {
     this.props.handleFlag(event, this.props.comment);
-  }
+  };
 
-  handleUnflag(event) {
+  handleUnflag = event => {
     this.props.handleUnflag(event, this.props.comment);
-  }
+  };
 
-  handleDelete(event) {
+  handleDelete = event => {
     this.props.handleDelete(event, this.props.comment);
-  }
+  };
 
-  handleRestore(event) {
+  handleRestore = event => {
     this.props.handleRestore(event, this.props.comment);
-  }
+  };
 
-  handleDestroy(event) {
+  handleDestroy = event => {
     this.props.handleDestroy(event, this.props.comment);
-  }
+  };
 
-  startEdit() {
+  startEdit = () => {
     this.setState(
       {
         editor: null
@@ -68,9 +59,9 @@ export default class CommentDetail extends PureComponent {
         });
       }
     );
-  }
+  };
 
-  startReply() {
+  startReply = () => {
     this.setState(
       {
         editor: null
@@ -81,13 +72,13 @@ export default class CommentDetail extends PureComponent {
         });
       }
     );
-  }
+  };
 
-  closeEditor() {
+  closeEditor = () => {
     this.setState({
       editor: null
     });
-  }
+  };
 
   renderEditor() {
     if (!this.state.editor) return null;

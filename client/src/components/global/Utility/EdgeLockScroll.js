@@ -14,8 +14,6 @@ export default class EdgeLockScroll extends PureComponent {
     this.state = {
       touchStart: null
     };
-
-    this.edgeLock = this.edgeLock.bind(this);
   }
 
   componentDidMount() {
@@ -61,7 +59,7 @@ export default class EdgeLockScroll extends PureComponent {
     });
   }
 
-  edgeLock(scroller, event, touchDelta) {
+  edgeLock = (scroller, event, touchDelta) => {
     const delta = touchDelta || event.deltaY;
     const offset = scroller.offsetTop;
     if (delta < 0 && scroller.scrollTop <= 0) {
@@ -74,7 +72,7 @@ export default class EdgeLockScroll extends PureComponent {
     ) {
       event.preventDefault();
     }
-  }
+  };
 
   render() {
     return (

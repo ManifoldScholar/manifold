@@ -10,14 +10,9 @@ export default class InputError extends Component {
     name: PropTypes.string
   };
 
-  constructor() {
-    super();
-    this.hasErrors = this.hasErrors.bind(this);
-  }
-
-  hasErrors() {
+  hasErrors = () => {
     return this.props.errors.length > 0;
-  }
+  };
 
   nameFromPointer(pointer) {
     return humps.decamelize(pointer.split("/").pop(), { separator: " " });

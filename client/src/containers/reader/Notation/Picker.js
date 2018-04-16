@@ -41,10 +41,6 @@ export class NotationPickerContainer extends PureComponent {
       context: "resources",
       filter: {}
     };
-    this.lastFetchedPage = null;
-    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
-    this.filterChangeHandler = this.filterChangeHandler.bind(this);
-    this.handleContextClick = this.handleContextClick.bind(this);
     this.debouncedFetch = debounce(this.fetchContext.bind(this), 250);
   }
 
@@ -54,7 +50,6 @@ export class NotationPickerContainer extends PureComponent {
   }
 
   fetchResources(page) {
-    this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.resources(
@@ -68,7 +63,6 @@ export class NotationPickerContainer extends PureComponent {
   }
 
   fetchCollections(page) {
-    this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.collections(
@@ -87,28 +81,28 @@ export class NotationPickerContainer extends PureComponent {
     return this.fetchResources(page);
   }
 
-  filterChangeHandler(filter) {
+  filterChangeHandler = filter => {
     this.setState({ filter }, () => {
       this.debouncedFetch(1);
     });
-  }
+  };
 
-  handleContextClick() {
+  handleContextClick = () => {
     if (this.state.context === "collections")
       return this.setState({ context: "resources" });
     return this.setState({ context: "collections" });
-  }
+  };
 
   handleUsersPageChange(event, page) {
     event.preventDefault();
     this.fetchContext(page);
   }
 
-  pageChangeHandlerCreator(page) {
+  pageChangeHandlerCreator = page => {
     return event => {
       this.handleUsersPageChange(event, page);
     };
-  }
+  };
 
   handleMouseDown(event) {
     event.stopPropagation();

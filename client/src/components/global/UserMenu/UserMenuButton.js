@@ -12,19 +12,14 @@ export default class UserMenuButton extends Component {
     showLoginOverlay: PropTypes.func
   };
 
-  constructor() {
-    super();
-    this.clickHandler = this.clickHandler.bind(this);
-  }
-
-  clickHandler(event) {
+  clickHandler = event => {
     event.stopPropagation();
     if (this.props.authentication.authenticated) {
       this.props.toggleUserMenu();
     } else {
       this.props.showLoginOverlay();
     }
-  }
+  };
 
   render() {
     const buttonClass = classNames({

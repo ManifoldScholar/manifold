@@ -32,16 +32,13 @@ class PasswordForgotContainer extends Component {
       email: "",
       errors: []
     };
-    this.clientErrorHandler = this.clientErrorHandler.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush([requests.gPasswordRequest]));
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault(event.target);
     const action = passwordsAPI.create(this.state.email);
     const resetRequest = request(action, requests.gPasswordRequest);
@@ -53,7 +50,7 @@ class PasswordForgotContainer extends Component {
       }
       this.setState({ submitted: false });
     });
-  }
+  };
 
   postSubmit() {
     this.createSuccessNotification();
@@ -80,15 +77,15 @@ class PasswordForgotContainer extends Component {
     this.props.hideSignInUpOverlay();
   }
 
-  handleInputChange(event) {
+  handleInputChange = event => {
     this.setState({ email: event.target.value });
-  }
+  };
 
   hasErrors() {
     return this.state.errors.length > 0;
   }
 
-  clientErrorHandler(fieldName, hasError) {
+  clientErrorHandler = (fieldName, hasError) => {
     const alreadyIncluded = this.state.errors.includes(fieldName);
     if (alreadyIncluded && hasError === false) {
       const errors = pull(this.state.errors.slice(0), fieldName);
@@ -99,7 +96,7 @@ class PasswordForgotContainer extends Component {
       errors.push(fieldName);
       this.setState({ errors });
     }
-  }
+  };
 
   render() {
     return (

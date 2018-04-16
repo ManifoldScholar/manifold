@@ -33,10 +33,6 @@ export class ResourceWrapperContainer extends PureComponent {
     this.state = {
       confirmation: null
     };
-    this.fetchResource = this.fetchResource.bind(this);
-    this.doPreview = this.doPreview.bind(this);
-    this.doDestroy = this.doDestroy.bind(this);
-    this.handleResourceDestroy = this.handleResourceDestroy.bind(this);
   }
 
   componentDidMount() {
@@ -47,17 +43,17 @@ export class ResourceWrapperContainer extends PureComponent {
     this.props.dispatch(flush(requests.beResource));
   }
 
-  fetchResource() {
+  fetchResource = () => {
     const call = resourcesAPI.show(this.props.match.params.id);
     const resourceRequest = request(call, requests.beResource);
     this.props.dispatch(resourceRequest);
-  }
+  };
 
   closeDialog() {
     this.setState({ confirmation: null });
   }
 
-  doPreview(event) {
+  doPreview = event => {
     event.preventDefault();
     const project = this.props.resource.relationships.project;
     const previewUrl = lh.link(
@@ -67,9 +63,9 @@ export class ResourceWrapperContainer extends PureComponent {
     );
     const win = window.open(previewUrl, "_blank");
     win.focus();
-  }
+  };
 
-  doDestroy() {
+  doDestroy = () => {
     const call = resourcesAPI.destroy(this.props.resource.id);
     const options = { removes: this.props.resource };
     const resourceRequest = request(call, requests.beResourceDestroy, options);
@@ -77,7 +73,7 @@ export class ResourceWrapperContainer extends PureComponent {
       this.notifyDestroy();
       this.redirectToProjectResources();
     });
-  }
+  };
 
   redirectToProjectResources() {
     const projectId = this.props.resource.relationships.project.id;
@@ -98,7 +94,7 @@ export class ResourceWrapperContainer extends PureComponent {
     this.props.dispatch(notificationActions.addNotification(notification));
   }
 
-  handleResourceDestroy(event) {
+  handleResourceDestroy = event => {
     const heading = "Are you sure you want to delete this resource?";
     const message = "This action cannot be undone.";
     new Promise((resolve, reject) => {
@@ -114,7 +110,7 @@ export class ResourceWrapperContainer extends PureComponent {
         this.closeDialog();
       }
     );
-  }
+  };
 
   secondaryNavigationLinks(resource, kind) {
     const externalVideo = resource.attributes.externalVideo;

@@ -21,11 +21,6 @@ export default class Errorable extends PureComponent {
     containerStyle: {}
   };
 
-  constructor() {
-    super();
-    this.fieldErrors = this.fieldErrors.bind(this);
-  }
-
   allErrors() {
     if (!this.props.errors) return [];
     return this.props.errors.filter(error => {
@@ -33,7 +28,7 @@ export default class Errorable extends PureComponent {
     });
   }
 
-  fieldErrors() {
+  fieldErrors = () => {
     if (!this.props.errors) return [];
     if (this.props.name === "*") return this.allErrors();
     let names = this.props.name;
@@ -50,7 +45,7 @@ export default class Errorable extends PureComponent {
       errors = [...errors, ...pointerErrors];
     });
     return errors;
-  }
+  };
 
   pointerFor(name) {
     const dotNotation = brackets2dots(name);

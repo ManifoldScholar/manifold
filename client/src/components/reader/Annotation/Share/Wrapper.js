@@ -31,22 +31,13 @@ export default class AnnotationShareWrapper extends PureComponent {
     this.state = {
       editorOpen: this.props.annotating
     };
-
-    this.handleOpenEditor = this.handleOpenEditor.bind(this);
-    this.handleCloseEditor = this.handleCloseEditor.bind(this);
   }
 
-  handleOpenEditor() {
-    this.setState({
-      editorOpen: true
-    });
-  }
-
-  handleCloseEditor() {
+  handleCloseEditor = () => {
     this.setState({
       editorOpen: false
     });
-  }
+  };
 
   maybeTruncateSelection() {
     if (

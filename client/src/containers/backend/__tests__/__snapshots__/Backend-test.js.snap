@@ -67,7 +67,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                             </li>
                             <li>
                               <UserMenuButton authentication={{...}} active={[undefined]} showLoginOverlay={[Function]} toggleUserMenu={[Function]}>
-                                <button onClick={[Function: bound clickHandler]} className=\\"button-avatar\\">
+                                <button onClick={[Function]} className=\\"button-avatar\\">
                                   <span className=\\"screen-reader-text\\">
                                     Click to login or open user settings
                                   </span>
@@ -85,13 +85,13 @@ exports[`Backend Backend Container renders correctly 1`] = `
                                       <i className=\\"tail\\" />
                                       <ul>
                                         <li>
-                                          <button onClick={[Function: bound handleProfileClick]}>
+                                          <button onClick={[Function]}>
                                             <i className=\\"manicon manicon-person-pencil-simple\\" />
                                             Edit Profile
                                           </button>
                                         </li>
                                         <li>
-                                          <button onClick={[Function: bound logout]}>
+                                          <button onClick={[Function]}>
                                             <i className=\\"manicon manicon-circle-arrow-out-right\\" />
                                             Logout
                                           </button>

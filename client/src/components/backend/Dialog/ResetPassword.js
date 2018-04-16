@@ -44,9 +44,6 @@ class ResetPasswordWrapper extends PureComponent {
       confirm: false,
       password: ""
     };
-    this.handleResolveClick = this.handleResolveClick.bind(this);
-    this.handleRejectClick = this.handleRejectClick.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -61,19 +58,19 @@ class ResetPasswordWrapper extends PureComponent {
     this.props.dispatch(flush([requests.beUserUpdate]));
   }
 
-  handleKeyPress(event) {
+  handleKeyPress = event => {
     event.preventDefault();
     if (event.keyCode === 27) return this.handleRejectClick(event);
-  }
+  };
 
-  handleResolveClick() {
+  handleResolveClick = () => {
     this.props.uiProps.resolve();
-  }
+  };
 
-  handleRejectClick(event) {
+  handleRejectClick = event => {
     event.preventDefault();
     this.props.uiProps.reject();
-  }
+  };
 
   handleStateChange(event, name, value) {
     event.preventDefault();

@@ -21,10 +21,6 @@ class ResourceCard extends Component {
     this.state = {
       infoHover: false
     };
-    this.handleInfoMouseOver = this.handleInfoMouseOver.bind(this);
-    this.handleInfoMouseOut = this.handleInfoMouseOut.bind(this);
-    this.handleInfoClick = this.handleInfoClick.bind(this);
-    this.handlePreviewClick = this.handlePreviewClick.bind(this);
   }
 
   getResourceType(type) {
@@ -88,7 +84,7 @@ class ResourceCard extends Component {
     window.open(resource.attributes.externalUrl);
   }
 
-  handlePreviewClick(event) {
+  handlePreviewClick = event => {
     event.preventDefault();
     const resource = this.props.resource;
     if (this.previewable(resource)) return;
@@ -96,23 +92,23 @@ class ResourceCard extends Component {
     if (this.linkable(resource)) return this.openLink(resource);
     // Open the resource detail view if all else fails.
     return this.handleInfoClick();
-  }
+  };
 
-  handleInfoMouseOver() {
+  handleInfoMouseOver = () => {
     this.setState({
       infoHover: true
     });
-  }
+  };
 
-  handleInfoMouseOut() {
+  handleInfoMouseOut = () => {
     this.setState({
       infoHover: false
     });
-  }
+  };
 
-  handleInfoClick() {
+  handleInfoClick = () => {
     this.props.history.push(this.detailUrl());
-  }
+  };
 
   renderDownloadablePreview(type) {
     if (!type) return null;

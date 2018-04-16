@@ -102,17 +102,13 @@ export class FormUpload extends Component {
       removed: false,
       attachment: null
     };
-
-    this.setValueFromCurrentState = this.setValueFromCurrentState.bind(this);
-    this.handleFileDrop = this.handleFileDrop.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) this.setValueFromCurrentState();
   }
 
-  setValueFromCurrentState() {
+  setValueFromCurrentState = () => {
     const { attachment, removed } = this.state;
     const { set, setOther, remove: removeName } = this.props;
     if (setOther && removeName) setOther(removed, removeName);
@@ -126,17 +122,17 @@ export class FormUpload extends Component {
     } else {
       set(null);
     }
-  }
+  };
 
-  handleFileDrop(file) {
+  handleFileDrop = file => {
     this.setState({ attachment: file[0], removed: false });
-  }
+  };
 
-  handleRemove(event) {
+  handleRemove = event => {
     event.preventDefault();
     event.stopPropagation();
     this.setState({ attachment: null, removed: true });
-  }
+  };
 
   isFile(object) {
     return isObject(object) && object.hasOwnProperty("data");

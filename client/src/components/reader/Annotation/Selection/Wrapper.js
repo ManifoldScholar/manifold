@@ -35,22 +35,19 @@ export default class AnnotationSelectionWrapper extends PureComponent {
     this.state = {
       editorOpen: this.props.annotating
     };
-
-    this.handleOpenEditor = this.handleOpenEditor.bind(this);
-    this.handleCloseEditor = this.handleCloseEditor.bind(this);
   }
 
-  handleOpenEditor() {
+  handleOpenEditor = () => {
     this.setState({
       editorOpen: true
     });
-  }
+  };
 
-  handleCloseEditor() {
+  handleCloseEditor = () => {
     this.setState({
       editorOpen: false
     });
-  }
+  };
 
   handleVisitAnnotation = event => {
     event.preventDefault();

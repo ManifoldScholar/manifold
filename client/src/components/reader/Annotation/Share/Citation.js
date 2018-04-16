@@ -12,7 +12,6 @@ export default class AnnotationShareEditor extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.handleCancel = this.handleCancel.bind(this);
     const citations = props.section.attributes.citations;
     const styles = Object.keys(citations);
 
@@ -20,8 +19,6 @@ export default class AnnotationShareEditor extends PureComponent {
       style: styles[0],
       copied: false
     };
-    this.handleCitationChange = this.handleCitationChange.bind(this);
-    this.handleCopyClick = this.handleCopyClick.bind(this);
   }
 
   componentDidMount() {
@@ -32,18 +29,18 @@ export default class AnnotationShareEditor extends PureComponent {
     this.setState({ style, copied: false });
   }
 
-  handleCancel(event) {
+  handleCancel = event => {
     event.preventDefault();
     if (this.props.cancel) {
       this.props.cancel(event);
     }
-  }
+  };
 
-  handleCitationChange(event) {
+  handleCitationChange = event => {
     this.setState({ citation: event.target.value, copied: false });
-  }
+  };
 
-  handleCopyClick(event) {
+  handleCopyClick = event => {
     event.preventDefault();
     const range = document.createRange();
     range.selectNode(this.ci);
@@ -51,7 +48,7 @@ export default class AnnotationShareEditor extends PureComponent {
     const copiedText = document.execCommand("copy");
     if (!copiedText) return null;
     this.setState({ copied: true });
-  }
+  };
 
   renderStyleButtons() {
     const citations = this.props.section.attributes.citations;

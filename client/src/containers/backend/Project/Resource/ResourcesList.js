@@ -31,8 +31,6 @@ export class ProjectResourcesListContainer extends PureComponent {
     super(props);
     this.state = { filter: {} };
     this.lastFetchedPage = null;
-    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
-    this.filterChangeHandler = this.filterChangeHandler.bind(this);
   }
 
   componentDidMount() {
@@ -53,21 +51,21 @@ export class ProjectResourcesListContainer extends PureComponent {
     this.props.dispatch(action);
   }
 
-  filterChangeHandler(filter) {
+  filterChangeHandler = filter => {
     this.setState({ filter }, () => {
       this.fetchResources(1);
     });
-  }
+  };
 
   handleResourcesPageChange(event, page) {
     this.fetchResources(page);
   }
 
-  pageChangeHandlerCreator(page) {
+  pageChangeHandlerCreator = page => {
     return event => {
       this.handleResourcesPageChange(event, page);
     };
-  }
+  };
 
   render() {
     if (!this.props.resources) return null;

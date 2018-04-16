@@ -12,15 +12,10 @@ export default class TextThumbnail extends Component {
     text: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-    this.renderSubtitle = this.renderSubtitle.bind(this);
-  }
-
-  renderSubtitle(text) {
+  renderSubtitle = text => {
     // if (!text.attributes.subtitle) return null;
     return <span className="subtitle">{text.attributes.subtitle}</span>;
-  }
+  };
 
   render() {
     const text = this.props.text;

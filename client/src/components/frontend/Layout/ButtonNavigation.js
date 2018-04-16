@@ -27,10 +27,6 @@ export default class LayoutButtonNavigation extends Component {
     super();
     this._browseButtonEl = null;
     this._followingButtonEl = null;
-    this.renderBrowseButton = this.renderBrowseButton.bind(this);
-    this.renderFollowingButton = this.renderFollowingButton.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.matchButtonWidths = this.matchButtonWidths.bind(this);
   }
 
   componentDidMount() {
@@ -48,15 +44,15 @@ export default class LayoutButtonNavigation extends Component {
     window.removeEventListener("resize", this.throttledWidth);
   }
 
-  matchButtonWidths() {
+  matchButtonWidths = () => {
     if (!this._browseButtonEl || !this._followingButtonEl) return;
     // This currently gets the wrong measurement most of the time
     // console.log(this._followingButtonEl.offsetWidth, 'offset width');
     const target = this._followingButtonEl.offsetWidth;
     this._browseButtonEl.style.width = `${target}px`;
-  }
+  };
 
-  renderBrowseButton() {
+  renderBrowseButton = () => {
     if (this.props.showBrowse !== true) return null;
     return (
       <Link to={lh.link("frontend")} className="button-icon-primary">
@@ -69,9 +65,9 @@ export default class LayoutButtonNavigation extends Component {
         </span>
       </Link>
     );
-  }
+  };
 
-  renderFollowingButton() {
+  renderFollowingButton = () => {
     if (this.props.authenticated !== true) return null;
     if (this.props.showFollowing !== true) return null;
     return (
@@ -86,7 +82,7 @@ export default class LayoutButtonNavigation extends Component {
         </span>
       </Link>
     );
-  }
+  };
 
   render() {
     const sectionClass = classNames({

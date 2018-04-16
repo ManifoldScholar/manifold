@@ -44,8 +44,6 @@ export class DashboardsAdminContainer extends PureComponent {
     super(props);
     this.state = this.initialState(props);
     this.authorization = new Authorization();
-    this.filterChangeHandler = this.filterChangeHandler.bind(this);
-    this.updateHandlerCreator = this.updateHandlerCreator.bind(this);
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
@@ -117,17 +115,17 @@ export class DashboardsAdminContainer extends PureComponent {
     this.props.dispatch(action);
   }
 
-  filterChangeHandler(filter) {
+  filterChangeHandler = filter => {
     this.setState({ filter }, () => {
       this.updateResults();
     });
-  }
+  };
 
-  updateHandlerCreator(page) {
+  updateHandlerCreator = page => {
     return event => {
       this.updateResults(event, page);
     };
-  }
+  };
 
   render() {
     return (

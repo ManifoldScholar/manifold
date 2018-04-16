@@ -100,7 +100,6 @@ class ManifoldContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.gaInitialized = false;
-    this.handleGlobalClick = this.handleGlobalClick.bind(this);
   }
 
   // TODO: Refactor to use new lifecycle methods for React 17
@@ -150,13 +149,13 @@ class ManifoldContainer extends PureComponent {
     );
   }
 
-  handleGlobalClick(event) {
+  handleGlobalClick = event => {
     if (!closest(event.target, ".panel-visible"))
       return this.props.dispatch(uiVisibilityActions.panelHideAll());
     if (event.target.classList.contains("drawer-overlay"))
       return this.props.dispatch(uiVisibilityActions.panelHideAll());
     return null;
-  }
+  };
 
   renderTypekit() {
     const tkId = get(this.props.settings, "attributes.theme.typekitId");

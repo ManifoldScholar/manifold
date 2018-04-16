@@ -35,9 +35,6 @@ export class TextWrapperContainer extends PureComponent {
     this.state = {
       confirmation: null
     };
-    this.doPreview = this.doPreview.bind(this);
-    this.doDestroy = this.doDestroy.bind(this);
-    this.handleTextDestroy = this.handleTextDestroy.bind(this);
   }
 
   componentDidMount() {
@@ -94,20 +91,20 @@ export class TextWrapperContainer extends PureComponent {
     ];
   }
 
-  doDestroy() {
+  doDestroy = () => {
     const call = textsAPI.destroy(this.props.text.id);
     const options = { removes: this.props.text };
     const textRequest = request(call, requests.beTextDestroy, options);
     this.props.dispatch(textRequest).promise.then(() => {
       this.redirectToDashboard();
     });
-  }
+  };
 
   redirectToDashboard() {
     this.props.history.push(lh.link("backend"));
   }
 
-  handleTextDestroy(event) {
+  handleTextDestroy = event => {
     const heading = "Are you sure you want to delete this text?";
     const message = "This action cannot be undone.";
     new Promise((resolve, reject) => {
@@ -123,16 +120,16 @@ export class TextWrapperContainer extends PureComponent {
         this.closeDialog();
       }
     );
-  }
+  };
 
-  doPreview(event) {
+  doPreview = event => {
     event.preventDefault();
     const win = window.open(
       lh.link("reader", this.props.text.attributes.slug),
       "_blank"
     );
     win.focus();
-  }
+  };
 
   renderUtility() {
     return (

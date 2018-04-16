@@ -32,10 +32,6 @@ class DialogWrapper extends PureComponent {
       leaving: false,
       additionaClassNames: ""
     };
-
-    this.handleOverlayClick = this.handleOverlayClick.bind(this);
-    this.handleCloseClick = this.handleCloseClick.bind(this);
-    this.handleEscape = this.handleEscape.bind(this);
   }
 
   componentDidMount() {
@@ -50,11 +46,11 @@ class DialogWrapper extends PureComponent {
     this.setState({ additionalClassNames });
   };
 
-  handleEscape(event) {
+  handleEscape = event => {
     if (event.keyCode === 27 && this.props.showCloseButton === true) {
       this.doClose();
     }
-  }
+  };
 
   leave(callback) {
     this.setState({ leaving: true });
@@ -81,13 +77,13 @@ class DialogWrapper extends PureComponent {
     return this.closeWithNoAction();
   }
 
-  handleOverlayClick(eventIgnored) {
+  handleOverlayClick = eventIgnored => {
     if (this.props.closeOnOverlayClick) this.doClose();
-  }
+  };
 
-  handleCloseClick(eventIgnored) {
+  handleCloseClick = eventIgnored => {
     this.doClose();
-  }
+  };
 
   style() {
     const style = {};

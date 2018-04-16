@@ -25,19 +25,14 @@ export class ProjectCategoryEditContainer extends Component {
     triggerClose: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-    this.onSuccess = this.onSuccess.bind(this);
-  }
-
   componentDidMount() {
     this.fetchCategory();
   }
 
-  onSuccess() {
+  onSuccess = () => {
     this.props.refresh();
     if (this.props.triggerClose) this.props.triggerClose();
-  }
+  };
 
   fetchCategory() {
     const call = textCategoriesAPI.show(this.props.match.params.catId);
