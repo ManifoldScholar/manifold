@@ -7,6 +7,7 @@ module Filterable
     def filter(params, scope: all, user: nil)
       results = scope.filter_with_query(params, user)
                      .filter_with_elasticsearch(params)
+
       validate_paginated_results(params, results)
     end
 
@@ -28,7 +29,7 @@ module Filterable
 
     def filter_with_elasticsearch(params)
       ids = distinct.reorder(nil).pluck :id
-      if !params.key(:keyword) || ids.blank?
+      if !params.key?(:keyword) || ids.blank?
         return by_pagination(params[:page], params[:per_page])
       end
       search_query = params.dig :keyword || "*"

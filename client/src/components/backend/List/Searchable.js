@@ -241,7 +241,7 @@ export class ListSearchable extends PureComponent {
               value={this.state.filter.keyword || ""}
               type="text"
               placeholder="Search..."
-              onChange={e => this.setFilters(e, "keyword")}
+              onChange={e => this.setFilter(e, "keyword")}
             />
           </div>
           <div className="form-list-filter">
