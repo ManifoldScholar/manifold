@@ -12,16 +12,11 @@ export default class ResourcePickerListItem extends PureComponent {
     projectId: PropTypes.string
   };
 
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
+  handleClick = event => {
     event.preventDefault();
     event.stopPropagation();
     this.props.selectionHandler(this.props.entity);
-  }
+  };
 
   render() {
     const resource = this.props.entity;

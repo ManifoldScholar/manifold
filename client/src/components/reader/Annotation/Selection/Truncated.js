@@ -16,8 +16,6 @@ export default class AnnotationSelectionTruncated extends PureComponent {
     this.state = {
       truncated: true
     };
-
-    this.handleShowFull = this.handleShowFull.bind(this);
   }
 
   componentDidMount() {
@@ -36,7 +34,7 @@ export default class AnnotationSelectionTruncated extends PureComponent {
     return this.props.selection.substring(0, this.props.truncate) + "...";
   }
 
-  handleShowFull() {
+  handleShowFull = () => {
     this.setState({
       truncated: false
     });
@@ -44,7 +42,7 @@ export default class AnnotationSelectionTruncated extends PureComponent {
     setTimeout(() => {
       this.wrapper.style.height = this.content.offsetHeight + "px";
     }, 50);
-  }
+  };
 
   render() {
     const truncatedWrapperClass = classNames({

@@ -30,30 +30,25 @@ export default class AnnotationDetail extends PureComponent {
     this.state = {
       action: null
     };
-
-    this.startReply = this.startReply.bind(this);
-    this.startEdit = this.startEdit.bind(this);
-    this.stopAction = this.stopAction.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
-  startReply() {
+  startReply = () => {
     this.setState({
       action: "replying"
     });
-  }
+  };
 
-  startEdit() {
+  startEdit = () => {
     this.setState({
       action: "editing"
     });
-  }
+  };
 
-  stopAction() {
+  stopAction = () => {
     this.setState({
       action: null
     });
-  }
+  };
 
   handleDelete = event => {
     if (event) event.preventDefault();

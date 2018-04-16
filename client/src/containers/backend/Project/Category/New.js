@@ -11,15 +11,10 @@ export default class ProjectCategoryNewContainer extends Component {
     triggerClose: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-    this.onSuccess = this.onSuccess.bind(this);
-  }
-
-  onSuccess() {
+  onSuccess = () => {
     this.props.refresh();
     if (this.props.triggerClose) this.props.triggerClose();
-  }
+  };
 
   render() {
     return (

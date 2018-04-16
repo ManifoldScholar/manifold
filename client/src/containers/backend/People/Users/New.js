@@ -15,7 +15,6 @@ export class UsersNewContainer extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.handleSuccess = this.handleSuccess.bind(this);
     this.defaultUser = { attributes: { role: "reader" } };
   }
 
@@ -29,9 +28,9 @@ export class UsersNewContainer extends PureComponent {
     return usersAPI.create(Object.assign({}, user, { meta }));
   }
 
-  handleSuccess(user) {
+  handleSuccess = user => {
     this.redirectToUser(user);
-  }
+  };
 
   render() {
     return (

@@ -20,18 +20,13 @@ export default class EventList extends Component {
     limit: 10
   };
 
-  constructor(props) {
-    super(props);
-    this.paginationClickHandler = this.paginationClickHandler.bind(this);
-  }
-
-  paginationClickHandler(page) {
+  paginationClickHandler = page => {
     return lh.link(
       "frontendProjectEventsPage",
       this.props.project.attributes.slug,
       page
     );
-  }
+  };
 
   render() {
     if (!this.props.events) return null;

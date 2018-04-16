@@ -22,13 +22,6 @@ export default class DialogConfirm extends PureComponent {
     unpauseKeyboardEvents: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-    this.handleResolveClick = this.handleResolveClick.bind(this);
-    this.handleRejectClick = this.handleRejectClick.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-
   componentDidMount() {
     if (this.context.pauseKeyboardEvents) this.context.pauseKeyboardEvents();
     window.addEventListener("keyup", this.handleKeyPress);
@@ -40,21 +33,21 @@ export default class DialogConfirm extends PureComponent {
     window.removeEventListener("keyup", this.handleKeyPress);
   }
 
-  handleKeyPress(event) {
+  handleKeyPress = event => {
     event.preventDefault();
     if (event.keyCode === 27) return this.handleRejectClick(event);
     if (event.keyCode === 13) return this.handleResolveClick(event);
-  }
+  };
 
-  handleResolveClick(event) {
+  handleResolveClick = event => {
     event.preventDefault();
     this.props.resolve(event);
-  }
+  };
 
-  handleRejectClick(event) {
+  handleRejectClick = event => {
     event.preventDefault();
     this.props.reject(event);
-  }
+  };
 
   render() {
     return (

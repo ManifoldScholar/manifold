@@ -10,15 +10,10 @@ export default class EventListItem extends PureComponent {
     destroyHandler: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-    this.triggerDestroy = this.triggerDestroy.bind(this);
-  }
-
-  triggerDestroy(event) {
+  triggerDestroy = event => {
     event.preventDefault();
     this.props.destroyHandler(this.props.entity);
-  }
+  };
 
   render() {
     const event = this.props.entity;

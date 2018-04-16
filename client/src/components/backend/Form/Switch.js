@@ -23,20 +23,15 @@ class FormSwitch extends Component {
     labelPos: "above"
   };
 
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
   truthy(value) {
     return value === true || value === "true";
   }
 
-  handleClick(event) {
+  handleClick = event => {
     event.preventDefault();
     if (this.props.customValues) return this.handleCustomValues();
     return this.handleBooleans();
-  }
+  };
 
   handleCustomValues() {
     const trueValue = this.props.customValues.true;

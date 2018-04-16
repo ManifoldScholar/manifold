@@ -37,10 +37,12 @@ export default class ScrollAware extends Component {
       direction: "down",
       log: null
     };
+
+    this.throttleScroll = throttle(this.handleScroll, 500).bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener("scroll", this.throttleScroll);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -51,7 +53,7 @@ export default class ScrollAware extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener("scroll", this.throttleScroll);
   }
 
   getScrollTop() {
@@ -98,7 +100,7 @@ export default class ScrollAware extends Component {
     return log;
   }
 
-  handleScroll = throttle(() => {
+  handleScroll() {
     const top = this.getScrollTop() < this.props.threshold;
     const direction = this.getScrollTop() > this.state.scroll ? "down" : "up";
     const log = this.maybeLog(direction);
@@ -111,7 +113,7 @@ export default class ScrollAware extends Component {
       log,
       scroll: this.getScrollTop()
     });
-  }, 500);
+  }
 
   renderChildren() {
     let firstChild = false;

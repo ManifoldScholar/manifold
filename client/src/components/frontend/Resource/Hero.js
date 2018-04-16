@@ -14,12 +14,7 @@ export default class ResourceHero extends Component {
     slideOptions: {}
   };
 
-  constructor() {
-    super();
-    this.getFigureByType = this.getFigureByType.bind(this);
-  }
-
-  getFigureByType(resource) {
+  getFigureByType = resource => {
     let output = null;
     switch (resource.attributes.kind) {
       case "image":
@@ -57,7 +52,7 @@ export default class ResourceHero extends Component {
     }
 
     return output;
-  }
+  };
 
   render() {
     return (

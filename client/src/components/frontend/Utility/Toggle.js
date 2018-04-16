@@ -18,15 +18,10 @@ export default class Toggle extends Component {
     selected: PropTypes.string
   };
 
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
+  handleClick = event => {
     event.preventDefault();
     this.props.handleToggle();
-  }
+  };
 
   renderOption(option) {
     const selected = this.props.selected === option.label;

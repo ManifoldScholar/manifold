@@ -15,19 +15,14 @@ export class ProjectNewContainer extends PureComponent {
     project: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-    this.handleSuccess = this.handleSuccess.bind(this);
-  }
-
   redirectToProject(project) {
     const path = lh.link("backendProject", project.id);
     this.props.history.push(path);
   }
 
-  handleSuccess(project) {
+  handleSuccess = project => {
     this.redirectToProject(project);
-  }
+  };
 
   render() {
     return (

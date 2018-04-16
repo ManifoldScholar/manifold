@@ -22,6 +22,8 @@ export default class ResourcePlayerIframe extends Component {
       containerWidth: 0,
       containerHeight: 0
     };
+
+    this.updateStateOnResize = throttle(this.updateContainerState, 100);
   }
 
   componentDidMount() {
@@ -52,10 +54,6 @@ export default class ResourcePlayerIframe extends Component {
     const containerHeight = h === null ? this.containerHeight() : h;
     this.setState({ containerWidth, containerHeight });
   };
-
-  updateStateOnResize = throttle(() => {
-    this.updateContainerState();
-  }, 100);
 
   containerWidth() {
     if (!this.containerRef) return 0;

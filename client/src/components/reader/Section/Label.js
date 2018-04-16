@@ -13,23 +13,23 @@ export default class Label extends PureComponent {
     this.state = {
       fixed: false
     };
+
+    this.throttleFixed = throttle(this.toggleFixed, 200).bind(this);
   }
 
   componentDidMount() {
     // Check if footer label is visible on scroll, and hide
     // fixed clone if it is
     this.toggleFixed();
-    this.throttledFixed = throttle(this.toggleFixed, 200).bind(this);
-    window.addEventListener("scroll", this.throttledFixed);
+    window.addEventListener("scroll", this.throttleFixed);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.throttledFixed);
+    window.removeEventListener("scroll", this.throttleFixed);
   }
 
   toggleFixed() {
     if (!this.staticLabel) return null;
-
     // Show or hide label depending on footer visibility
     const staticRect = this.staticLabel.getBoundingClientRect();
     this.setState({

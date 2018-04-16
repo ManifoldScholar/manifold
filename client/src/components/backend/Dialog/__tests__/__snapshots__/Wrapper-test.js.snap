@@ -11,9 +11,9 @@ exports[`Backend.Dialog.Wrapper Component renders correctly 1`] = `
               <span>
                 <CSSTransitionGroupChild name=\\"dialog\\" appear={true} enter={false} leave={true} appearTimeout={1} enterTimeout={[undefined]} leaveTimeout={200}>
                   <div className=\\"dialog-primary dialog-appear\\">
-                    <div className=\\"dialog-overlay\\" onClick={[Function: bound handleOverlayClick]} />
+                    <div className=\\"dialog-overlay\\" onClick={[Function]} />
                     <div className=\\"dialog-box dialog-confirm\\" style={{...}}>
-                      <div onClick={[Function: bound handleCloseClick]} className=\\"close-button-primary\\">
+                      <div onClick={[Function]} className=\\"close-button-primary\\">
                         <i className=\\"manicon manicon-x\\" />
                         <span className=\\"screen-reader-text\\">
                           Close Dialog

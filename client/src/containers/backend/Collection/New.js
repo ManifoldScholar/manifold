@@ -14,19 +14,14 @@ export class CollectionNewContainer extends PureComponent {
     collection: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-    this.handleSuccess = this.handleSuccess.bind(this);
-  }
-
   redirectToCollection(collection) {
     const path = lh.link("backendCollection", collection.id);
     this.props.history.push(path);
   }
 
-  handleSuccess(collection) {
+  handleSuccess = collection => {
     this.redirectToCollection(collection);
-  }
+  };
 
   render() {
     const { match } = this.props;

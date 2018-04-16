@@ -15,7 +15,6 @@ export class ResourceNewContainer extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.handleSuccess = this.handleSuccess.bind(this);
     this.defaultResource = { attributes: { kind: "image" } };
   }
 
@@ -24,9 +23,9 @@ export class ResourceNewContainer extends PureComponent {
     this.props.history.push(path);
   }
 
-  handleSuccess(resource) {
+  handleSuccess = resource => {
     this.redirectToResource(resource);
-  }
+  };
 
   render() {
     const { match } = this.props;

@@ -13,21 +13,15 @@ class IngestionFormUpload extends PureComponent {
     setOther: PropTypes.func
   };
 
-  constructor() {
-    super();
-    this.onSourceChange = this.onSourceChange.bind(this);
-    this.onUrlChange = this.onUrlChange.bind(this);
-  }
-
-  onSourceChange(source) {
+  onSourceChange = source => {
     this.props.setOther(source, "attributes[source]");
     this.props.setOther(null, "attributes[externalSourceUrl]");
-  }
+  };
 
-  onUrlChange(event) {
+  onUrlChange = event => {
     this.props.setOther(event.target.value, "attributes[externalSourceUrl]");
     this.props.setOther(null, "attributes[source]");
-  }
+  };
 
   get valid() {
     return (

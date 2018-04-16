@@ -33,10 +33,6 @@ export class CollectionWrapperContainer extends PureComponent {
     this.state = {
       confirmation: null
     };
-    this.fetchCollection = this.fetchCollection.bind(this);
-    this.doPreview = this.doPreview.bind(this);
-    this.doDestroy = this.doDestroy.bind(this);
-    this.handleCollectionDestroy = this.handleCollectionDestroy.bind(this);
   }
 
   componentDidMount() {
@@ -47,17 +43,17 @@ export class CollectionWrapperContainer extends PureComponent {
     this.props.dispatch(flush(requests.beCollection));
   }
 
-  fetchCollection() {
+  fetchCollection = () => {
     const call = collectionsAPI.show(this.props.match.params.id);
     const collectionRequest = request(call, requests.beCollection);
     this.props.dispatch(collectionRequest);
-  }
+  };
 
   closeDialog() {
     this.setState({ confirmation: null });
   }
 
-  doPreview(event) {
+  doPreview = event => {
     event.preventDefault();
     const previewUrl = lh.link(
       "frontendProjectCollection",
@@ -66,9 +62,9 @@ export class CollectionWrapperContainer extends PureComponent {
     );
     const win = window.open(previewUrl, "_blank");
     win.focus();
-  }
+  };
 
-  doDestroy() {
+  doDestroy = () => {
     const call = collectionsAPI.destroy(this.props.collection.id);
     const options = { removes: this.props.collection };
     const collectionRequest = request(
@@ -80,7 +76,7 @@ export class CollectionWrapperContainer extends PureComponent {
       this.notifyDestroy();
       this.redirectToProjectCollections();
     });
-  }
+  };
 
   redirectToProjectCollections() {
     const projectId = this.props.collection.relationships.project.id;
@@ -101,7 +97,7 @@ export class CollectionWrapperContainer extends PureComponent {
     this.props.dispatch(notificationActions.addNotification(notification));
   }
 
-  handleCollectionDestroy(event) {
+  handleCollectionDestroy = event => {
     const heading = "Are you sure you want to delete this collection?";
     const message = "This action cannot be undone.";
     new Promise((resolve, reject) => {
@@ -117,7 +113,7 @@ export class CollectionWrapperContainer extends PureComponent {
         this.closeDialog();
       }
     );
-  }
+  };
 
   secondaryNavigationLinks(collection) {
     return [

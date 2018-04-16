@@ -8,15 +8,10 @@ export default class ReturnMenuButton extends Component {
     toggleReaderMenu: PropTypes.func.isRequired
   };
 
-  constructor() {
-    super();
-    this.clickHandler = this.clickHandler.bind(this);
-  }
-
-  clickHandler(event) {
+  clickHandler = event => {
     event.stopPropagation();
     this.props.toggleReaderMenu();
-  }
+  };
 
   render() {
     // NB: An active prop is passed to the button by default and can be used

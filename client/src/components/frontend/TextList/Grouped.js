@@ -11,14 +11,7 @@ export default class TextListGrouped extends Component {
     excludeIds: PropTypes.array
   };
 
-  constructor() {
-    super();
-    this.textsForCategory = this.textsForCategory.bind(this);
-    this.addGroup = this.addGroup.bind(this);
-    this.buildGroupedCollection = this.buildGroupedCollection.bind(this);
-  }
-
-  textsForCategory(category) {
+  textsForCategory = category => {
     const texts = this.props.texts.filter(text => {
       if (
         this.props.excludeIds &&
@@ -33,16 +26,16 @@ export default class TextListGrouped extends Component {
       return text.relationships.category.id === category.id;
     });
     return texts;
-  }
+  };
 
-  addGroup(collection, category) {
+  addGroup = (collection, category) => {
     const texts = this.textsForCategory(category);
     if (texts.length > 0) {
       collection.push({ category, texts });
     }
-  }
+  };
 
-  buildGroupedCollection() {
+  buildGroupedCollection = () => {
     const collection = [];
     const uncategorized = { id: -1, attributes: { title: "Uncategorized" } };
     this.addGroup(collection, uncategorized);
@@ -50,7 +43,7 @@ export default class TextListGrouped extends Component {
       return this.addGroup(collection, category);
     });
     return collection;
-  }
+  };
 
   render() {
     const textsByCategory = this.buildGroupedCollection();

@@ -37,14 +37,6 @@ export class CollectionResourcesContainer extends Component {
     this.state = {
       filter: {}
     };
-    this.lastFetchedPage = null;
-
-    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
-    this.handleFilterChange = this.handleFilterChange.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
-    this.isInCollection = this.isInCollection.bind(this);
-    this.buildResourceItem = this.buildResourceItem.bind(this);
-    this.toggleCollectionOnly = this.toggleCollectionOnly.bind(this);
   }
 
   componentDidMount() {
@@ -56,7 +48,6 @@ export class CollectionResourcesContainer extends Component {
   }
 
   fetchResources(page) {
-    this.lastFetchedPage = page;
     const pagination = { number: page, size: perPage };
     const projectId = this.props.collection.relationships.project.id;
     const action = request(
@@ -83,24 +74,24 @@ export class CollectionResourcesContainer extends Component {
     this.props.dispatch(collectionRequest);
   }
 
-  handleFilterChange(filter) {
+  handleFilterChange = filter => {
     const newFilter = filter;
     if (this.state.filter.collection)
       newFilter.collection = this.state.filter.collection;
     this.setState({ filter: newFilter }, () => {
       this.fetchResources(1);
     });
-  }
+  };
 
   handleResourcesPageChange(event, page) {
     this.fetchResources(page);
   }
 
-  pageChangeHandlerCreator(page) {
+  pageChangeHandlerCreator = page => {
     return event => {
       this.handleResourcesPageChange(event, page);
     };
-  }
+  };
 
   addToCollection(entity, collectionResources) {
     const newEntities = collectionResources.slice(0);
@@ -115,7 +106,7 @@ export class CollectionResourcesContainer extends Component {
     this.updateResources(newEntities, "remove");
   }
 
-  handleSelect(event, resource) {
+  handleSelect = (event, resource) => {
     event.preventDefault();
     if (this.isInCollection(resource)) {
       this.removeFromCollection(
@@ -130,16 +121,16 @@ export class CollectionResourcesContainer extends Component {
     } else {
       return null;
     }
-  }
+  };
 
-  isInCollection(resource) {
+  isInCollection = resource => {
     if (!this.props.collection.relationships.resources) return false;
     return !!find(this.props.collection.relationships.resources, cResource => {
       return cResource.id === resource.id;
     });
-  }
+  };
 
-  toggleCollectionOnly(event) {
+  toggleCollectionOnly = event => {
     event.preventDefault();
     const filter = this.state.filter;
     if (this.state.filter.collection) {
@@ -148,9 +139,9 @@ export class CollectionResourcesContainer extends Component {
       filter.collection = this.props.collection.id;
     }
     this.handleFilterChange(filter);
-  }
+  };
 
-  buildResourceItem(props) {
+  buildResourceItem = props => {
     const resource = props.entity;
     if (!resource) return null;
 
@@ -200,7 +191,7 @@ export class CollectionResourcesContainer extends Component {
         </div>
       </li>
     );
-  }
+  };
 
   render() {
     if (!this.props.resources) return null;

@@ -14,8 +14,6 @@ export default class TextTitles extends Component {
     this.state = {
       showSection: true
     };
-
-    this.handleTitleClick = this.handleTitleClick.bind(this);
   }
 
   toggleTitles() {
@@ -33,10 +31,10 @@ export default class TextTitles extends Component {
     }
   }
 
-  handleTitleClick() {
+  handleTitleClick = () => {
     // Not using event, but handler stub will allow it if it becomes necessary
     this.toggleTitles();
-  }
+  };
 
   render() {
     const titleClass = classNames({

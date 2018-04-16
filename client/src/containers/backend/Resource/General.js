@@ -17,7 +17,6 @@ export class ResourceGeneralContainer extends PureComponent {
     super(props);
 
     this.state = this.initialState();
-    this.handleSuccess = this.handleSuccess.bind(this);
   }
 
   initialState() {
@@ -27,9 +26,9 @@ export class ResourceGeneralContainer extends PureComponent {
     };
   }
 
-  handleSuccess() {
+  handleSuccess = () => {
     this.setState(this.initialState);
-  }
+  };
 
   render() {
     const resource = this.props.resource.attributes;

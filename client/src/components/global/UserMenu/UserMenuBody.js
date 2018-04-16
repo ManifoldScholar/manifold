@@ -10,22 +10,16 @@ export default class UserMenuBody extends Component {
     visible: PropTypes.bool
   };
 
-  constructor() {
-    super();
-    this.logout = this.logout.bind(this);
-    this.handleProfileClick = this.handleProfileClick.bind(this);
-  }
-
-  logout() {
+  logout = () => {
     this.props.startLogout();
     this.props.hideUserMenu();
-  }
+  };
 
-  handleProfileClick(event) {
+  handleProfileClick = event => {
     event.preventDefault();
     this.props.hideUserMenu();
     this.props.showLoginOverlay();
-  }
+  };
 
   render() {
     const menuClass = classNames({

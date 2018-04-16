@@ -16,11 +16,6 @@ export default class CollectionDetail extends PureComponent {
     handleClose: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-    this.handleEscape = this.handleEscape.bind(this);
-  }
-
   componentDidMount() {
     window.addEventListener("keyup", this.handleEscape);
   }
@@ -29,11 +24,11 @@ export default class CollectionDetail extends PureComponent {
     window.removeEventListener("keyup", this.handleEscape);
   }
 
-  handleEscape(event) {
+  handleEscape = event => {
     if (event.keyCode === 27) {
       this.props.handleClose(event);
     }
-  }
+  };
 
   buildRedirectUrl(collection) {
     if (!collection) return null;

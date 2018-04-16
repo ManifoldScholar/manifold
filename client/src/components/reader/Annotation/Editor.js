@@ -24,20 +24,11 @@ export default class AnnotationSelectionEditor extends PureComponent {
 
   constructor(props) {
     super(props);
-
-    this.handleBodyChange = this.handleBodyChange.bind(this);
-    this.handlePrivacyChange = this.handlePrivacyChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-
     this.state = {
-      body: "",
-      isPrivate: false,
+      body: props.body || "",
+      isPrivate: props.private || false,
       errors: []
     };
-
-    if (props.body) this.state.body = props.body;
-    if (props.private) this.state.isPrivate = props.private;
   }
 
   componentDidMount() {
@@ -52,7 +43,7 @@ export default class AnnotationSelectionEditor extends PureComponent {
     clearTimeout(this.focusTimeout);
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     const { subject, startNode, startChar, endNode, endChar } = this.props;
     const { body, isPrivate } = this.state;
@@ -81,23 +72,23 @@ export default class AnnotationSelectionEditor extends PureComponent {
         }
       );
     }
-  }
+  };
 
-  handleBodyChange(event) {
+  handleBodyChange = event => {
     this.setState({ body: event.target.value });
-  }
+  };
 
-  handleCancel(event) {
+  handleCancel = event => {
     event.preventDefault();
     if (this.props.cancel) {
       this.props.cancel(event);
     }
-  }
+  };
 
-  handlePrivacyChange(eventIgnored) {
+  handlePrivacyChange = eventIgnored => {
     const value = !this.state.isPrivate;
     this.setState({ isPrivate: value });
-  }
+  };
 
   handleErrors(errors) {
     this.setState({ errors });

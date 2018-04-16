@@ -32,14 +32,6 @@ class PredictiveInput extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.clearHighlighted = this.clearHighlighted.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleNew = this.handleNew.bind(this);
-    this.updateOptions = this.updateOptions.bind(this);
     this.debouncedUpdateOptions = debounce(this.updateOptions, 500);
 
     this.state = {
@@ -85,16 +77,16 @@ class PredictiveInput extends PureComponent {
     this.setState(state);
   }
 
-  handleFocus(eventIgnored) {
+  handleFocus = eventIgnored => {
     this.open();
-  }
+  };
 
   hasOptions(options) {
     if (!options) return false;
     return options.length > 0;
   }
 
-  handleKeyPress(event) {
+  handleKeyPress = event => {
     if (event.key === "Enter") {
       event.preventDefault();
       // Otherwise, submit a new one
@@ -108,15 +100,15 @@ class PredictiveInput extends PureComponent {
         this.submit();
       }
     }
-  }
+  };
 
-  handleBlur(eventIgnored) {
+  handleBlur = eventIgnored => {
     setTimeout(() => {
       this.close();
     }, 250);
-  }
+  };
 
-  handleChange(event) {
+  handleChange = event => {
     const value = event.target.value;
     const set = {
       value: { $set: value },
@@ -125,9 +117,9 @@ class PredictiveInput extends PureComponent {
     if (value === "") set.open = { $set: false };
     const state = update(this.state, set);
     this.setState(state);
-  }
+  };
 
-  updateOptions(value, fetch) {
+  updateOptions = (value, fetch) => {
     if (value === "") {
       const state = update(this.state, {
         options: { $set: [] },
@@ -156,15 +148,15 @@ class PredictiveInput extends PureComponent {
       });
       this.setState(state);
     });
-  }
+  };
 
-  clearHighlighted(eventIgnored) {
+  clearHighlighted = eventIgnored => {
     this.setState({
       highlighted: false
     });
-  }
+  };
 
-  handleKeyDown(event) {
+  handleKeyDown = event => {
     const highlighted = this.state.highlighted;
     const options = this.state.options;
     // Only track keystate if there are options
@@ -203,12 +195,12 @@ class PredictiveInput extends PureComponent {
         }
       }
     }
-  }
+  };
 
-  handleNew(event) {
+  handleNew = event => {
     event.preventDefault();
     this.submit();
-  }
+  };
 
   submit() {
     this.props.onNew(this.state.value);

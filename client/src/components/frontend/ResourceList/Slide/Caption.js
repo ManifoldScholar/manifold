@@ -38,9 +38,6 @@ export default class ResourceListSlideCaption extends Component {
       expanded: false,
       targetHeight: "5em"
     };
-
-    this.handleReadMore = this.handleReadMore.bind(this);
-    this.checkExpandable = this.checkExpandable.bind(this);
   }
 
   componentDidMount() {
@@ -72,7 +69,7 @@ export default class ResourceListSlideCaption extends Component {
     return !isEmpty(get(resource, "attributes.captionFormatted"));
   }
 
-  handleReadMore() {
+  handleReadMore = () => {
     if (!this.canExpand()) return;
     if (!this.state.expanded) {
       this.setState({
@@ -83,7 +80,7 @@ export default class ResourceListSlideCaption extends Component {
     this.setState({
       expanded: !this.state.expanded
     });
-  }
+  };
 
   createDescription(description) {
     return {
@@ -100,11 +97,11 @@ export default class ResourceListSlideCaption extends Component {
     );
   }
 
-  checkExpandable() {
+  checkExpandable = () => {
     if (!this._utility) return;
     if (this.canExpand()) return this.showExpandable();
     this.hideExpandable();
-  }
+  };
 
   hideExpandable() {
     this._utility.classList.remove("expandable");

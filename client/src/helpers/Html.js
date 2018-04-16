@@ -25,12 +25,6 @@ export default class Html extends Component {
     store: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-    this.javascripts = this.javascripts.bind(this);
-    this.stylesheets = this.stylesheets.bind(this);
-  }
-
   reduceAssets(ext) {
     const test = asset => {
       return endsWith(asset, ext);
@@ -54,7 +48,7 @@ export default class Html extends Component {
     );
   }
 
-  stylesheets() {
+  stylesheets = () => {
     if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
     const stylesheets = this.reduceAssets(".css");
     return stylesheets.map(stylesheet => (
@@ -67,9 +61,9 @@ export default class Html extends Component {
         charSet="UTF-8"
       />
     ));
-  }
+  };
 
-  javascripts() {
+  javascripts = () => {
     if (!this.props.stats && !this.props.stats.assetsByChunkName) return null;
     const scripts = this.reduceAssets(".js");
     scripts.sort(a => {
@@ -79,7 +73,7 @@ export default class Html extends Component {
     return scripts.map(script => (
       <script src={`/${script}`} key={script} charSet="UTF-8" />
     ));
-  }
+  };
 
   render() {
     const { component, store } = this.props;

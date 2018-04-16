@@ -16,25 +16,19 @@ export class DeveloperContainer extends PureComponent {
     messages: PropTypes.array
   };
 
-  constructor(props) {
-    super(props);
-    this.connect = this.connect.bind(this);
-    this.disconnect = this.disconnect.bind(this);
-  }
-
-  connect(event) {
+  connect = event => {
     event.preventDefault();
     const channel = "IngestionChannel";
     const options = {};
     this.props.dispatch(websocketActions.subscribe(channel, options));
-  }
+  };
 
-  disconnect(event) {
+  disconnect = event => {
     event.preventDefault();
     const channel = "IngestionChannel";
     const options = {};
     this.props.dispatch(websocketActions.unsubscribe(channel, options));
-  }
+  };
 
   messages() {
     if (!this.props.messages) return null;

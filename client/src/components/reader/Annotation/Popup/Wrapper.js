@@ -40,9 +40,6 @@ export default class AnnotationPopup extends Component {
       direction: "up",
       secondary: null
     };
-
-    this.showSecondary = this.showSecondary.bind(this);
-    this.resetSecondary = this.resetSecondary.bind(this);
   }
 
   componentDidMount() {
@@ -193,11 +190,11 @@ export default class AnnotationPopup extends Component {
     this.setState({ secondary: page });
   };
 
-  resetSecondary() {
+  resetSecondary = () => {
     this.setState({
       secondary: null
     });
-  }
+  };
 
   stopPropagation(event) {
     event.nativeEvent.stopPropagation();
