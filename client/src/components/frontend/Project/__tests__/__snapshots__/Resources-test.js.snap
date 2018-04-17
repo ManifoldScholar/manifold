@@ -94,7 +94,7 @@ exports[`Frontend.Project.Resources component renders correctly 1`] = `
             <option
               value="default"
             >
-              Order By:
+              Sort By:
             </option>
             <option
               value="sort_title ASC"
