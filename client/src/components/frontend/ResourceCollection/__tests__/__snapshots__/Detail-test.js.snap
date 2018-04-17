@@ -329,7 +329,7 @@ exports[`Frontend.ResourceCollection.Detail Component renders correctly 1`] = `
             <option
               value="default"
             >
-              Order By:
+              Sort By:
             </option>
             <option
               value="sort_title ASC"

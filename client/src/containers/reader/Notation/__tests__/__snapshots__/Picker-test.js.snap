@@ -59,18 +59,15 @@ exports[`Reader Notation Resource Picker Container renders correctly 1`] = `
           />
         </div>
         <div
-          className="form-list-filter"
+          className="button-row"
         >
-          <div
-            className="select-group"
-          />
+          <button
+            className="button-bare-primary reset"
+            onClick={[Function]}
+          >
+            Reset Search
+          </button>
         </div>
-        <button
-          className="button-bare-primary reset"
-          onClick={[Function]}
-        >
-          Reset Search
-        </button>
       </form>
       <nav
         className="vertical-list-primary"

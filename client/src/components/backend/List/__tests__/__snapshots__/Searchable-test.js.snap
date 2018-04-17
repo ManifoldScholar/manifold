@@ -27,25 +27,22 @@ exports[`Backend.List.Searchable component renders correctly 1`] = `
       />
     </div>
     <div
-      className="form-list-filter"
+      className="button-row"
     >
-      <div
-        className="select-group"
-      />
+      <button
+        className="button-bare-primary"
+        data-id="filter-toggle"
+        onClick={[Function]}
+      >
+        Show Search Options
+      </button>
+      <button
+        className="button-bare-primary reset"
+        onClick={[Function]}
+      >
+        Reset Search
+      </button>
     </div>
-    <button
-      className="button-bare-primary"
-      data-id="filter-toggle"
-      onClick={[Function]}
-    >
-      Show Search Options
-    </button>
-    <button
-      className="button-bare-primary reset"
-      onClick={[Function]}
-    >
-      Reset Search
-    </button>
   </form>
   <nav
     className="vertical-list-primary"
@@ -316,25 +313,22 @@ exports[`Backend.List.Searchable component renders correctly when passed a compo
       />
     </div>
     <div
-      className="form-list-filter"
+      className="button-row"
     >
-      <div
-        className="select-group"
-      />
+      <button
+        className="button-bare-primary"
+        data-id="filter-toggle"
+        onClick={[Function]}
+      >
+        Show Search Options
+      </button>
+      <button
+        className="button-bare-primary reset"
+        onClick={[Function]}
+      >
+        Reset Search
+      </button>
     </div>
-    <button
-      className="button-bare-primary"
-      data-id="filter-toggle"
-      onClick={[Function]}
-    >
-      Show Search Options
-    </button>
-    <button
-      className="button-bare-primary reset"
-      onClick={[Function]}
-    >
-      Reset Search
-    </button>
   </form>
   <nav
     className="vertical-list-primary"
