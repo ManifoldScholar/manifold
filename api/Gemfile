@@ -13,6 +13,7 @@ gem "acts_as_list", "~>0.8.2"
 # Project is now unmaintained. Fixing to 3.3 for now.
 gem "authority", "~>3.3.0"
 gem "bcrypt", "~> 3.0"
+gem "charlock_holmes", "~> 0.7"
 gem "chroma", "~> 0.2"
 gem "citeproc-ruby", "~> 1.1.0"
 gem "clockwork", "~> 2.0.0"
