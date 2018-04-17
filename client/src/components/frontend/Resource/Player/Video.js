@@ -7,6 +7,19 @@ export default class ResourcePlayerVideo extends Component {
     resource: PropTypes.object
   };
 
+  constructor() {
+    super();
+    this.state = { inBrowser: false };
+  }
+
+  /* eslint-disable react/no-did-mount-set-state */
+  componentDidMount() {
+    if (!this.state.inBrowser) {
+      this.setState({ inBrowser: true });
+    }
+  }
+  /* eslint-enable react/no-did-mount-set-state */
+
   renderVideoByService(service, id) {
     let output = false;
     if (service === "vimeo") {
@@ -44,6 +57,8 @@ export default class ResourcePlayerVideo extends Component {
   }
 
   renderFileVideo(resource) {
+    if (!this.state.inBrowser) return null;
+
     return (
       <div className="figure-video">
         <Video controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}>
