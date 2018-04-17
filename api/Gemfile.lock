@@ -71,6 +71,7 @@ GEM
     builder (3.2.3)
     case_transform (0.2)
       activesupport
+    charlock_holmes (0.7.6)
     chroma (0.2.0)
     citeproc (1.0.8)
       namae (~> 1.0)
@@ -463,6 +464,7 @@ DEPENDENCIES
   acts_as_list (~> 0.8.2)
   authority (~> 3.3.0)
   bcrypt (~> 3.0)
+  charlock_holmes (~> 0.7)
   chroma (~> 0.2)
   citeproc-ruby (~> 1.1.0)
   clockwork (~> 2.0.0)
