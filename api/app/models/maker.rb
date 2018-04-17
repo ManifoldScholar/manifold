@@ -24,6 +24,12 @@ class Maker < ApplicationRecord
   # Misc
   with_parsed_name :first_name, :middle_name, :last_name, :suffix
 
+  # Scopes
+  scope :with_order, lambda { |by|
+    return order(:first_name, :last_name) unless by.present?
+    order(by)
+  }
+
   # Search
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,

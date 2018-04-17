@@ -127,6 +127,10 @@ export class UsersListContainer extends PureComponent {
                 labels: config.app.locale.roles
               }
             }}
+            sortOptions={[
+              { label: "first name", value: "first_name" },
+              { label: "last name", value: "last_name" }
+            ]}
           />
         ) : null}
       </div>

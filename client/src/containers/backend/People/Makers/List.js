@@ -116,6 +116,10 @@ export class MakersListContainer extends PureComponent {
             entityComponent={Maker.ListItem}
             entityComponentProps={{ active }}
             filterChangeHandler={this.filterChangeHandler}
+            sortOptions={[
+              { label: "first name", value: "first_name" },
+              { label: "last name", value: "last_name" }
+            ]}
           />
         ) : null}
       </div>
