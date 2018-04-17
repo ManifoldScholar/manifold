@@ -284,7 +284,7 @@ module Validation
   end
 
   def collection_filter_params
-    params.permit(filter: [:keyword])[:filter]
+    params.permit(filter: [:keyword, :order])[:filter]
   end
 
   def resource_filter_params
@@ -301,7 +301,7 @@ module Validation
   end
 
   def user_filter_params
-    params.permit(filter: [:keyword, :typeahead, :role])[:filter]
+    params.permit(filter: [:keyword, :typeahead, :role, :order])[:filter]
   end
 
   def event_filter_params
@@ -338,7 +338,7 @@ module Validation
   end
 
   def maker_filter_params
-    params.permit(filter: [:keyword, :typeahead])[:filter]
+    params.permit(filter: [:keyword, :typeahead, :order])[:filter]
   end
 
   def attributes_from(valid_params)

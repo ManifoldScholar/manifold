@@ -105,6 +105,7 @@ export class ProjectResourcesListContainer extends PureComponent {
             tag: this.props.project.attributes.resourceTags,
             kind: this.props.project.attributes.resourceKinds
           }}
+          sortOptions={[{ label: "title", value: "sort_title" }]}
         />
       </div>
     );

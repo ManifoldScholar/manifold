@@ -91,6 +91,7 @@ export class ProjectCollectionsListContainer extends PureComponent {
           paginationClass="secondary"
           entityComponent={ResourceCollection.ListItem}
           filterChangeHandler={this.filterChangeHandler}
+          sortOptions={[{ label: "title", value: "title" }]}
         />
       </div>
     );

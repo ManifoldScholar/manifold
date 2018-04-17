@@ -35,6 +35,12 @@ class Collection < ApplicationRecord
   # Validations
   validates :title, presence: true
 
+  # Scopes
+  scope :with_order, lambda { |by|
+    return order(:title) unless by.present?
+    order(by)
+  }
+
   # Search
   searchkick(callbacks: :async,
              batch_size: 500,

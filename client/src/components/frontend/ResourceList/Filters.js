@@ -107,7 +107,7 @@ export default class ResourceListFilters extends Component {
               onChange={event => this.setFilters(event, "order")}
               value={this.state.filters.order || ""}
             >
-              <option value="default">Order By:</option>
+              <option value="default">Sort By:</option>
               <option value="sort_title ASC">A-Z</option>
               <option value="sort_title DESC">Z-A</option>
             </select>
