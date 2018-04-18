@@ -177,6 +177,15 @@
       }
     }
   }
+
+  &.extra-top {
+    section > & {
+
+      @include respond($break90) {
+        padding-top: 125px;
+      }
+    }
+  }
 }
 
 $readerContainerWidths: (790px, 680px, 500px);

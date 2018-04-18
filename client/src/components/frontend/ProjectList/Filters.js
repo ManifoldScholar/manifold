@@ -31,7 +31,7 @@ export default class ProjectListFilters extends Component {
   };
 
   subjectOptions() {
-    if (!this.props.subjects) return null;
+    if (!this.props.subjects || this.props.subjects.length === 0) return null;
     return this.props.subjects.map(subject => {
       return (
         <option key={subject.id} value={subject.id}>
@@ -58,6 +58,8 @@ export default class ProjectListFilters extends Component {
   }
 
   render() {
+    if (!this.featuredOptions() && !this.subjectOptions()) return null;
+
     return (
       <div className="select-browse">
         <select defaultValue={this.defaultValue()} onChange={this.filterChange}>
