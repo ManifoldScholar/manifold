@@ -13,6 +13,8 @@ export default class ProjectListSummaryGrid extends Component {
   };
 
   render() {
+    if (!this.props.projects || this.props.projects.length === 0) return null;
+
     return (
       <nav className="grid-project-summary">
         <ul>

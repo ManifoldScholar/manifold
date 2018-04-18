@@ -24,6 +24,7 @@ export default class ProjectListGrid extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (!this.props.projects || !nextProps.projects) return null;
     const currentIds = this.props.projects.map(p => p.id);
     const nextIds = nextProps.projects.map(p => p.id);
     const diffA = difference(currentIds, nextIds).length;
@@ -43,7 +44,7 @@ export default class ProjectListGrid extends Component {
   }
 
   projectsList() {
-    if (!this.props.projects) return null;
+    if (!this.props.projects || this.props.projects.length === 0) return null;
     let out = null;
     if (this.props.limit) {
       out = this.props.projects.slice(0, this.props.limit);
@@ -55,6 +56,7 @@ export default class ProjectListGrid extends Component {
 
   render() {
     const projects = this.projectsList();
+    if (!projects) return null;
     const hideDesc = true;
 
     return (

@@ -119,13 +119,16 @@ export class HomeContainer extends Component {
     };
   };
 
-  fetchFeaturedProjects = () => {
-    const featuredRequest = request(
-      projectsAPI.featured(),
-      requests.feProjectsFeatured
-    );
-    this.props.dispatch(featuredRequest);
-  };
+  showPlaceholder() {
+    const { location, filteredProjects } = this.props;
+    if (location.search) return false; // There are search filters applied, skip the check
+    if (!filteredProjects || filteredProjects.length === 0) return true;
+  }
+
+  showFeatured() {
+    const { featuredProjects } = this.props;
+    return featuredProjects && featuredProjects.length > 0;
+  }
 
   renderFeaturedButton(limit) {
     if (
@@ -145,8 +148,8 @@ export class HomeContainer extends Component {
   }
 
   renderFeaturedProjects() {
-    if (!this.props.featuredProjects || !this.props.featuredProjects.length > 0)
-      return null;
+    if (!this.showFeatured()) return null;
+
     return (
       <section>
         <div className="container">
@@ -171,11 +174,58 @@ export class HomeContainer extends Component {
     );
   }
 
-  render() {
+  renderProjectLibrary() {
+    if (this.showPlaceholder()) return <ProjectList.Placeholder />;
+
     const utilityHeader = classNames({
       utility: true,
       right: this.renderFeaturedProjects()
     });
+
+    const containerClasses = classNames({
+      container: true,
+      "extra-top": !this.showFeatured()
+    });
+
+    return (
+      <section className="bg-neutral05">
+        <div className={containerClasses}>
+          <header className="section-heading">
+            <div className="main">
+              <i className="manicon manicon-books-on-shelf" />
+              <div className="body">
+                <h4 className="title">{"Our Projects"}</h4>
+              </div>
+            </div>
+            <div className={utilityHeader}>
+              {/*
+                 Note that we're using a different dumb component to render this.
+                 Note, too, that the parent component delivers all the data the child
+                 component needs to render (which is what keeps the child dumb)'
+                 */}
+              <ProjectList.Filters
+                params={this.currentQuery()}
+                updateAction={this.handleFilterChange}
+                hideFeatured={!this.showFeatured()}
+                subjects={this.props.subjects}
+              />
+            </div>
+          </header>
+          <ProjectList.Grid
+            authenticated={this.props.authentication.authenticated}
+            favorites={get(this.props.authentication, "currentUser.favorites")}
+            dispatch={this.props.dispatch}
+            projects={this.props.filteredProjects}
+            pagination={get(this.props.meta, "pagination")}
+            paginationClickHandler={this.pageChangeHandlerCreator}
+            limit={perPage}
+          />
+        </div>
+      </section>
+    );
+  }
+
+  render() {
     const feature = isArray(this.props.features)
       ? this.props.features[0]
       : null;
@@ -200,48 +250,12 @@ export class HomeContainer extends Component {
           showcase/debug the markup for this type of list.
         */}
         {this.renderFeaturedProjects()}
-        <section className="bg-neutral05">
-          <div className="container">
-            <header className="section-heading">
-              <div className="main">
-                <i className="manicon manicon-books-on-shelf" />
-                <div className="body">
-                  <h4 className="title">{"Our Projects"}</h4>
-                </div>
-              </div>
-              <div className={utilityHeader}>
-                {/*
-                 Note that we're using a different dumb component to render this.
-                 Note, too, that the parent component delivers all the data the child
-                 component needs to render (which is what keeps the child dumb)'
-                 */}
-                <ProjectList.Filters
-                  params={this.currentQuery()}
-                  updateAction={this.handleFilterChange}
-                  subjects={this.props.subjects}
-                />
-              </div>
-            </header>
-            {this.props.filteredProjects ? (
-              <ProjectList.Grid
-                authenticated={this.props.authentication.authenticated}
-                favorites={get(
-                  this.props.authentication,
-                  "currentUser.favorites"
-                )}
-                dispatch={this.props.dispatch}
-                projects={this.props.filteredProjects}
-                pagination={get(this.props.meta, "pagination")}
-                paginationClickHandler={this.pageChangeHandlerCreator}
-                limit={perPage}
-              />
-            ) : null}
-          </div>
-        </section>
+        {this.renderProjectLibrary()}
         <Layout.ButtonNavigation
           hideAtNarrow
           grayBg={false}
           showBrowse={false}
+          showFollowing={!this.showPlaceholder()}
           authenticated={this.props.authentication.authenticated}
         />
       </div>
