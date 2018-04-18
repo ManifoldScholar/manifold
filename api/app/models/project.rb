@@ -86,7 +86,9 @@ class Project < ApplicationRecord
   has_many :subjects, through: :project_subjects
   has_many :ingestions, dependent: :destroy, inverse_of: :project
   has_many :twitter_queries, dependent: :destroy, inverse_of: :project
-  has_many :permissions, as: :resource, dependent: :destroy, inverse_of: :resource
+  # rubocop:disable Rails/HasManyOrHasOneDependent
+  has_many :permissions, as: :resource, inverse_of: :resource
+  # rubocop:enable Rails/HasManyOrHasOneDependent
   has_many :resource_imports, inverse_of: :project, dependent: :destroy
   has_many :tracked_dependent_versions,
            -> { order(created_at: :desc) },
