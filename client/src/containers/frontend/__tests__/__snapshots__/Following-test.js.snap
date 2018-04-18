@@ -35,25 +35,7 @@ exports[`Frontend Following Container renders correctly 1`] = `
         </div>
         <div
           className="utility right"
-        >
-          <div
-            className="select-browse"
-          >
-            <select
-              defaultValue=""
-              onChange={[Function]}
-            >
-              <option
-                value=""
-              >
-                Show All
-              </option>
-            </select>
-            <i
-              className="manicon manicon-caret-down"
-            />
-          </div>
-        </div>
+        />
       </header>
       <nav
         className="grid-project"

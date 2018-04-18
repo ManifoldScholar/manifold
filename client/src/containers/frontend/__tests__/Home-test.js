@@ -23,6 +23,9 @@ describe("Frontend Home Container", () => {
     authenticated: true,
     currentUser: user
   };
+  const location = {
+    search: "?featured=true"
+  };
 
   const component = renderer.create(
     wrapWithRouter(
@@ -31,7 +34,9 @@ describe("Frontend Home Container", () => {
           authentication={authentication}
           featuredProjects={featuredProjects}
           followedProjects={followedProjects}
+          filteredProjects={[]}
           fetchData={jest.fn()}
+          location={location}
         />
       </Provider>
     )

@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Frontend.ProjectList.Placeholder component renders correctly 1`] = `
+<section
+  className="bg-neutral05"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="project-list-placeholder"
+    >
+      <header
+        className="section-heading"
+      >
+        <div
+          className="main"
+        >
+          <div
+            className="body"
+          >
+            <h4
+              className="title"
+            >
+              Uh-oh. This Manifold Library is empty.
+            </h4>
+          </div>
+        </div>
+      </header>
+      <div
+        className="centered-message"
+      >
+        But it’s easy to create and publish projects with Manifold. If you have project creation privileges, 
+        <a
+          href="/backend"
+          onClick={[Function]}
+        >
+          login to the backend
+        </a>
+         to get started. For more help, you can learn about creating and publishing Manifold Projects 
+        <a
+          href="https://manifoldapp.org/docs/"
+        >
+          here
+        </a>
+        .
+      </div>
+      <svg
+        id="Layer_1"
+        version="1.1"
+        viewBox="0 0 122.6 63.8"
+        x="0px"
+        xmlns="http://www.w3.org/2000/svg"
+        y="0px"
+      >
+        <rect
+          height="44.7"
+          style={
+            Object {
+              "fill": "#CBF7E6",
+            }
+          }
+          width="14.3"
+          x="28.5"
+          y="10.5"
+        />
+        <rect
+          height="5.1"
+          style={
+            Object {
+              "fill": "#CBF7E6",
+            }
+          }
+          width="14.3"
+          x="28.5"
+          y="56.9"
+        />
+        <rect
+          height="5.1"
+          style={
+            Object {
+              "fill": "#CBF7E6",
+            }
+          }
+          width="14.3"
+          x="28.5"
+          y="3.7"
+        />
+        <path
+          d="M92.9,59.6L83.9,1.9L69.8,4.1l8.9,57.7L92.9,59.6z M76.5,32.6c-0.4-2.7,1.4-5.2,4.1-5.6 c2.7-0.4,5.2,1.4,5.6,4.1c0.4,2.7-1.4,5.2-4.1,5.6c-0.3,0-0.5,0.1-0.8,0.1C78.9,36.7,76.8,35,76.5,32.6z"
+          style={
+            Object {
+              "fill": "#CBF7E6",
+            }
+          }
+        />
+        <rect
+          height="3"
+          style={
+            Object {
+              "fill": "#CBF7E6",
+            }
+          }
+          width="14.3"
+          x="50"
+          y="52.2"
+        />
+        <rect
+          height="5.1"
+          style={
+            Object {
+              "fill": "#CBF7E6",
+            }
+          }
+          width="14.3"
+          x="50"
+          y="56.9"
+        />
+        <rect
+          height="5.1"
+          style={
+            Object {
+              "fill": "#CBF7E6",
+            }
+          }
+          width="14.3"
+          x="50"
+          y="3.7"
+        />
+        <rect
+          height="3"
+          style={
+            Object {
+              "fill": "#CBF7E6",
+            }
+          }
+          width="14.3"
+          x="50"
+          y="10.5"
+        />
+        <rect
+          height="35.2"
+          style={
+            Object {
+              "fill": "#CBF7E6",
+            }
+          }
+          width="14.3"
+          x="50"
+          y="15.3"
+        />
+        <path
+          d="M81.8,34.9c1.7-0.3,2.9-1.9,2.6-3.6c-0.2-1.5-1.6-2.7-3.1-2.7c-0.2,0-0.3,0-0.5,0c-1.7,0.3-2.9,1.9-2.6,3.6 C78.5,34,80.1,35.2,81.8,34.9z"
+          style={
+            Object {
+              "fill": "#F7F7F7",
+            }
+          }
+        />
+        <path
+          d="M82.1,36.7c2.7-0.4,4.5-2.9,4.1-5.6c-0.4-2.7-2.9-4.5-5.6-4.1c-2.7,0.4-4.5,2.9-4.1,5.6 c0.4,2.4,2.5,4.1,4.8,4.1C81.6,36.7,81.8,36.7,82.1,36.7z M80.8,28.7c0.2,0,0.3,0,0.5,0c1.5,0,2.9,1.1,3.1,2.7 c0.3,1.7-0.9,3.3-2.6,3.6c-1.7,0.3-3.3-0.9-3.6-2.6C77.9,30.6,79.1,29,80.8,28.7z"
+          style={
+            Object {
+              "fill": "#C3C3C3",
+            }
+          }
+        />
+        <path
+          d="M121.7,62H88.5l5.5-0.9c0.2,0,0.4-0.2,0.6-0.3c0.1-0.2,0.2-0.4,0.2-0.7L85.5,0.7c0-0.2-0.2-0.4-0.3-0.6 C85,0,84.8,0,84.5,0L68.6,2.5c-0.5,0.1-0.8,0.5-0.7,1L77,62H66V2.8c0-0.5-0.4-0.9-0.9-0.9H49.1c-0.5,0-0.9,0.4-0.9,0.9V62h-3.6V2.8 c0-0.5-0.4-0.9-0.9-0.9H27.6c-0.5,0-0.9,0.4-0.9,0.9V62H0.9C0.4,62,0,62.4,0,62.9s0.4,0.9,0.9,0.9h26.8h16.1h5.4h16.1h56.6 c0.5,0,0.9-0.4,0.9-0.9S122.2,62,121.7,62z M83.9,1.9l8.9,57.7l-14.2,2.2L69.8,4.1L83.9,1.9z M64.3,50.4H50V15.3h14.3V50.4z M64.3,8.7H50V3.7h14.3V8.7z M64.3,10.5v3H50v-3H64.3z M50,52.2h14.3v3H50V52.2z M50,56.9h14.3V62H50V56.9z M42.8,55.2H28.5V10.5 h14.3V55.2z M42.8,3.7v5.1H28.5V3.7H42.8z M28.5,56.9h14.3V62H28.5V56.9z"
+          style={
+            Object {
+              "fill": "#C3C3C3",
+            }
+          }
+        />
+      </svg>
+      <div
+        className="button"
+      >
+        <a
+          className="button-icon-primary"
+          href="/backend"
+          onClick={[Function]}
+        >
+          <span>
+            Publish a Project Now
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+`;
