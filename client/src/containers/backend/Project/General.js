@@ -36,6 +36,11 @@ export default class ProjectGeneralContainer extends PureComponent {
               name="attributes[subtitle]"
               placeholder="Enter Project Subtitle"
             />
+            <Form.TextInput
+              label="Slug"
+              name="attributes[slug]"
+              placeholder="Enter Project Slug"
+            />
           </Form.FieldGroup>
           <Form.FieldGroup
             horizontal
