@@ -35,8 +35,9 @@ class Role < ApplicationRecord
   belongs_to :resource,
              polymorphic: true,
              optional: true
-  has_many :users_roles, class_name: "UsersRoles", dependent: :destroy, inverse_of: :role
-  has_many :users, through: :users_roles, source: :user
+  # rubocop:disable Rails/HasAndBelongsToMany
+  has_and_belongs_to_many :users, join_table: "users_roles"
+  # rubocop:enable Rails/HasAndBelongsToMany
 
   validates :resource_type,
             inclusion: { in: Rolify.resource_types },
