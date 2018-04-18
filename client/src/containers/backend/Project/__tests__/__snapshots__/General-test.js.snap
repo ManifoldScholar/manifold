@@ -50,6 +50,22 @@ exports[`Backend Project General Container renders correctly 1`] = `
             value="World's Greatest Dog"
           />
         </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Slug
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder="Enter Project Slug"
+            type="text"
+            value="slug-1"
+          />
+        </div>
       </div>
       <div
         className="form-section horizontal"
