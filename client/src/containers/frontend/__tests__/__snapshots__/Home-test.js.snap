@@ -178,7 +178,7 @@ exports[`Frontend Home Container renders correctly 1`] = `
             className="select-browse"
           >
             <select
-              defaultValue=""
+              defaultValue="featured"
               onChange={[Function]}
             >
               <option
