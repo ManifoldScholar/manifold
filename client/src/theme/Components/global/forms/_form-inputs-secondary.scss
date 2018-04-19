@@ -200,7 +200,6 @@
   .form-dropzone {
     position: relative;
     display: flex;
-    //padding: 36px 30px 38px;
     border: 1px solid $neutral80;
 
     .primary {
@@ -298,6 +297,7 @@
 
     .contents-empty {
       margin: auto;
+      padding: 15px;
     }
 
     .remove {
