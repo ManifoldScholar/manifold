@@ -6,6 +6,14 @@
     @include containerPrototype;
   }
 
+  .resource-slide-figure figure {
+    height: calc(100% - 39px); // Slide pagination footer height
+
+    @include respond($break60) {
+      height: 100%;
+    }
+  }
+
   .slide-footer {
     position: relative;
     padding: 10px $containerPaddingResp;
