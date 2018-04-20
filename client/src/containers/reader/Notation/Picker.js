@@ -7,6 +7,7 @@ import { projectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { connect } from "react-redux";
+import debounce from "lodash/debounce";
 
 const { request } = entityStoreActions;
 const perPage = 5;
@@ -44,6 +45,7 @@ export class NotationPickerContainer extends PureComponent {
     this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
     this.handleContextClick = this.handleContextClick.bind(this);
+    this.debouncedFetch = debounce(this.fetchContext.bind(this), 250);
   }
 
   componentDidMount() {
@@ -87,7 +89,7 @@ export class NotationPickerContainer extends PureComponent {
 
   filterChangeHandler(filter) {
     this.setState({ filter }, () => {
-      this.fetchContext(1);
+      this.debouncedFetch(1);
     });
   }
 
