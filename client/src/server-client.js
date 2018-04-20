@@ -32,7 +32,11 @@ if (process.env.WEBPACK_DEV_SERVER) {
 const stats = readStats("Client");
 
 const respondWithRedirect = (res, redirectLocation) => {
-  res.redirect(redirectLocation);
+  res.writeHead(302, {
+    Location: redirectLocation,
+    "Content-Length": "0"
+  });
+  res.end();
 };
 
 const render = (req, res, store) => {
