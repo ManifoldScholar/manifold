@@ -35,24 +35,26 @@ export class DashboardsAdminContainer extends PureComponent {
     dispatch: PropTypes.func,
     projectsMeta: PropTypes.object,
     recentProjects: PropTypes.array,
-    authentication: PropTypes.object
+    authentication: PropTypes.object,
+    projectListSnapshot: PropTypes.object.isRequired,
+    snapshotCreator: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
-    this.state = { filter: { order: "sort_title ASC" } };
+    this.state = this.initialState(props);
     this.authorization = new Authorization();
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
     this.updateHandlerCreator = this.updateHandlerCreator.bind(this);
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const projectsRequest = request(
-      projectsAPI.index(
-        this.buildFetchFilter(this.props, { order: "sort_title ASC" }),
-        { size: perPage }
-      ),
+      projectsAPI.index(this.buildFetchFilter(this.props, this.state.filter), {
+        number: this.props.projectListSnapshot.page,
+        size: perPage
+      }),
       requests.beProjects
     );
     const recentProjectsRequest = request(
@@ -81,6 +83,12 @@ export class DashboardsAdminContainer extends PureComponent {
     return Promise.all(promises);
   }
 
+  initialState(props) {
+    if (props.projectListSnapshot)
+      return Object.assign({}, { filter: props.projectListSnapshot.filter });
+    return { filter: { order: "sort_title ASC" } };
+  }
+
   buildFetchFilter = (props, base) => {
     const out = Object.assign({}, base);
     const currentUser = props.authentication.currentUser;
@@ -90,7 +98,14 @@ export class DashboardsAdminContainer extends PureComponent {
     return out;
   };
 
+  snapshotState(page) {
+    const snapshot = { filter: this.state.filter, page };
+    this.props.snapshotCreator(snapshot);
+  }
+
   updateResults(eventIgnored = null, page = 1) {
+    this.snapshotState(page);
+
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.index(
@@ -133,6 +148,8 @@ export class DashboardsAdminContainer extends PureComponent {
                       text: "Add a New Project",
                       authorizedFor: "project"
                     }}
+                    initialFilter={this.state.filter}
+                    defaultFilter={{ order: "sort_title ASC" }}
                     entities={this.props.projects}
                     singularUnit="project"
                     pluralUnit="projects"

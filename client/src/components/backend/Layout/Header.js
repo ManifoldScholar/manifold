@@ -20,19 +20,9 @@ export default class LayoutHeader extends Component {
     location: PropTypes.object,
     authentication: PropTypes.object,
     commonActions: PropTypes.object,
-    settings: PropTypes.object
+    settings: PropTypes.object,
+    isProjects: PropTypes.func
   };
-
-  isProjects(match, location) {
-    if (!match) {
-      return false;
-    }
-    const { pathname } = location;
-    if (pathname === "/backend") return true;
-    if (startsWith(pathname, "/backend/project")) return true;
-    if (startsWith(pathname, "/backend/resource")) return true;
-    return startsWith(pathname, "/backend/text");
-  }
 
   isSubjects(match, location) {
     if (!match) {
@@ -62,7 +52,7 @@ export default class LayoutHeader extends Component {
             <ul>
               <li>
                 <NavLink
-                  isActive={this.isProjects}
+                  isActive={this.props.isProjects}
                   activeClassName="active"
                   to={lh.link("backend")}
                 >

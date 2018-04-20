@@ -1,9 +1,15 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 import { HigherOrder } from "containers/global";
 import { Dashboards } from "containers/backend";
 import lh from "helpers/linkHandler";
 
 export default class DashboardContainer extends PureComponent {
+  static propTypes = {
+    projectListSnapshot: PropTypes.object,
+    snapshotCreator: PropTypes.func
+  };
+
   render() {
     // This will be the entry point to the author dashboard too, when built out more
     return (
@@ -19,7 +25,10 @@ export default class DashboardContainer extends PureComponent {
         failureRedirect={lh.link("frontend")}
         failureNotification
       >
-        <Dashboards.Admin />
+        <Dashboards.Admin
+          projectListSnapshot={this.props.projectListSnapshot}
+          snapshotCreator={this.props.snapshotCreator}
+        />
       </HigherOrder.Authorize>
     );
   }
