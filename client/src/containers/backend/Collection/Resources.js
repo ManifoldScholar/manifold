@@ -232,6 +232,7 @@ export class CollectionResourcesContainer extends Component {
             pluralUnit="resources"
             pagination={this.props.resourcesMeta.pagination}
             paginationClickHandler={this.pageChangeHandlerCreator}
+            paginationClass="secondary"
             entityComponent={this.buildResourceItem}
             filterChangeHandler={this.handleFilterChange}
             filterOptions={{

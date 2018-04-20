@@ -23,6 +23,7 @@ export class ListSearchable extends PureComponent {
     singularUnit: PropTypes.string,
     pluralUnit: PropTypes.string,
     pagination: PropTypes.object,
+    paginationClass: PropTypes.string,
     paginationClickHandler: PropTypes.func,
     entityComponentProps: PropTypes.object,
     entityComponent: PropTypes.func.isRequired,
@@ -268,6 +269,7 @@ export class ListSearchable extends PureComponent {
           pagination={this.props.pagination}
           padding={this.props.paginationPadding}
           paginationClickHandler={this.props.paginationClickHandler}
+          level={this.props.paginationClass}
         />
       </div>
     );

@@ -96,6 +96,7 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
         <Utility.Pagination
           pagination={twitterQueriesMeta.pagination}
           paginationClickHandler={this.pageChangeHandlerCreator}
+          paginationClass="secondary"
         />
       </Form.FieldGroup>
     );

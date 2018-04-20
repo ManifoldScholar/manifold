@@ -114,6 +114,7 @@ export class MakersListContainer extends PureComponent {
             pluralUnit="makers"
             pagination={makersMeta.pagination}
             paginationClickHandler={this.pageChangeHandlerCreator}
+            paginationClass="secondary"
             entityComponent={Maker.ListItem}
             entityComponentProps={{ active }}
             filterChangeHandler={this.filterChangeHandler}

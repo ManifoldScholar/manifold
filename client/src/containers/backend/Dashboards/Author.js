@@ -89,6 +89,7 @@ export class DashboardsAuthorContainer extends PureComponent {
                   pluralUnit="projects"
                   pagination={this.props.projectsMeta.pagination}
                   paginationClickHandler={this.updateHandlerCreator}
+                  paginationClass="secondary"
                   entityComponent={Project.ListItem}
                   filterChangeHandler={this.filterChangeHandler}
                 />

@@ -92,6 +92,7 @@ export class ProjectCollectionsListContainer extends PureComponent {
           pluralUnit="collections"
           pagination={this.props.collectionsMeta.pagination}
           paginationClickHandler={this.pageChangeHandlerCreator}
+          paginationClass="secondary"
           entityComponent={ResourceCollection.ListItem}
           filterChangeHandler={this.filterChangeHandler}
         />

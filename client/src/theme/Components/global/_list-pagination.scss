@@ -1,7 +1,7 @@
 // NB: This can be abstracted (I.E. As 'list-pagination-primary')
 // if there are more pagination styles
 // Element wrapping a <ul>
-.list-pagination-primary {
+%list-pagination {
   ul {
     @include listUnstyled;
     text-align: center;
@@ -16,33 +16,19 @@
       &.ordinal + .ordinal {
         margin-left: 25px;
       }
-
-      &.active a {
-        color: $accentPrimaryDull;
-      }
     }
 
     a {
       @include utilityPrimary;
       font-size: 14px;
-      color: $neutral50;
       text-decoration: none;
       transition: color $duration $timing;
-
-      &:hover {
-        color: $accentPrimary;
-      }
     }
   }
 
   .pagination-previous, .pagination-next {
     display: inline-block;
     line-height: 14px;
-
-    &.disabled a {
-      pointer-events: none;
-      color: $neutral80;
-    }
 
     .manicon {
       font-size: 14px;
@@ -71,6 +57,52 @@
 
     .manicon {
       margin-left: 12px;
+    }
+  }
+}
+
+.list-pagination-primary {
+  @extend %list-pagination;
+
+  li.active a {
+    color: $accentPrimary;
+  }
+
+  a {
+    color: $neutral70;
+  }
+
+  a:hover {
+    color: $accentPrimaryDull;
+  }
+
+  .pagination-previous, .pagination-next {
+    &.disabled a {
+      pointer-events: none;
+      color: $neutral30;
+    }
+  }
+}
+
+.list-pagination-secondary {
+  @extend %list-pagination;
+
+  li.active a {
+    color: $accentPrimaryDull;
+  }
+
+  a {
+    color: $neutral50;
+  }
+
+  a:hover {
+    color: $accentPrimary;
+  }
+
+  .pagination-previous, .pagination-next {
+    &.disabled a {
+      pointer-events: none;
+      color: $neutral80;
     }
   }
 }

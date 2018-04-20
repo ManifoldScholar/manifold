@@ -136,6 +136,7 @@ export class ProjectEventsContainer extends PureComponent {
           listClassName="tile-list"
           pagination={this.props.eventsMeta.pagination}
           paginationClickHandler={this.pageChangeHandlerCreator}
+          paginationClass="secondary"
           entityComponent={Event.ListItem}
           filterChangeHandler={this.filterChangeHandler}
           destroyHandler={this.handleEventDestroy}
