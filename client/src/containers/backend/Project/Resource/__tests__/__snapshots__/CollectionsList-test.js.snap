@@ -226,7 +226,7 @@ exports[`Backend Project Resource CollectionList Container renders correctly 1`]
       </div>
     </nav>
     <nav
-      className="list-pagination-primary"
+      className="list-pagination-secondary"
     >
       <ul>
         <li
