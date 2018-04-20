@@ -25,7 +25,7 @@
     float: right;
     width: 100%;
     padding-top: 4em;
-    padding-right: 4em;
+    padding-right: 2em;
     padding-bottom: 4em;
     hyphens: none;
 
@@ -33,6 +33,9 @@
       width: 50%;
     }
 
+    @include respond($break95) {
+      padding-right: 4em;
+    }
 
     p {
       @include templateCopy;
@@ -79,7 +82,15 @@
   }
 
   .heading-primary {
-    font-size: 1.5em;
+    font-size: 22px;
+
+    @include respond($break60) {
+      font-size: 24px;
+    }
+
+    @include respond($break90) {
+      font-size: 1.5em;
+    }
   }
 
   .heading-secondary {
