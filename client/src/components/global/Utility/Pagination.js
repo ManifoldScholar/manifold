@@ -11,12 +11,14 @@ export default class UtilityPagination extends PureComponent {
     pagination: PropTypes.object,
     paginationTarget: PropTypes.string,
     padding: PropTypes.number,
-    paginationClickHandler: PropTypes.func
+    paginationClickHandler: PropTypes.func,
+    level: PropTypes.string
   };
 
   static defaultProps = {
     padding: 3,
-    paginationTarget: "#pagination-target"
+    paginationTarget: "#pagination-target",
+    level: "primary"
   };
 
   visiblePageArray(pagination) {
@@ -122,7 +124,7 @@ export default class UtilityPagination extends PureComponent {
     if (pagination.totalPages === 1 || pagination.totalPages === 0) return null;
 
     return (
-      <nav className="list-pagination-primary">
+      <nav className={`list-pagination-${this.props.level}`}>
         <ul>
           {this.previous(pagination)}
           {pages.map(page => {

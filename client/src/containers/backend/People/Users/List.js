@@ -121,6 +121,7 @@ export class UsersListContainer extends PureComponent {
             pluralUnit="users"
             pagination={usersMeta.pagination}
             paginationClickHandler={this.usersPageChangeHandlerCreator}
+            paginationClass="secondary"
             entityComponent={User.ListItem}
             entityComponentProps={{ currentUserId, active }}
             filterChangeHandler={this.filterChangeHandler}

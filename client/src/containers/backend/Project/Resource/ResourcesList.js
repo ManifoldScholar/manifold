@@ -100,6 +100,7 @@ export class ProjectResourcesListContainer extends PureComponent {
           pluralUnit="resources"
           pagination={this.props.resourcesMeta.pagination}
           paginationClickHandler={this.pageChangeHandlerCreator}
+          paginationClass="secondary"
           entityComponent={Resource.ListItem}
           filterChangeHandler={this.filterChangeHandler}
           filterOptions={{

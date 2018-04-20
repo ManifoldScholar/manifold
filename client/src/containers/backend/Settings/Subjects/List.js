@@ -114,6 +114,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
             pluralUnit="subjects"
             pagination={subjectsMeta.pagination}
             paginationClickHandler={this.subjectsPageChangeHandlerCreator}
+            paginationClass="secondary"
             entityComponent={Subject.ListItem}
             entityComponentProps={{ active }}
             filterChangeHandler={this.filterChangeHandler}

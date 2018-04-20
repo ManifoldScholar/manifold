@@ -165,6 +165,7 @@ export class NotationPickerContainer extends PureComponent {
             pluralUnit={pluralUnit}
             pagination={pagination}
             paginationClickHandler={this.pageChangeHandlerCreator}
+            paginationClass="secondary"
             entityComponent={entityComponent}
             filterChangeHandler={this.filterChangeHandler}
             paginationPadding={2}

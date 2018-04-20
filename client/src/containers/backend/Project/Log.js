@@ -83,6 +83,7 @@ export class LogContainer extends PureComponent {
           pagination={this.props.versionsMeta.pagination}
           paginationPadding={3}
           paginationClickHandler={this.pageChangeHandlerCreator}
+          paginationClass="secondary"
         />
       </React.Fragment>
     );
