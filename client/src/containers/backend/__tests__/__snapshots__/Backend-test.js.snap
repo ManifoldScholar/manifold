@@ -15,7 +15,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
               </withRouter(ScrollToTop)>
               <ScrollAware threshold={200} topClass=\\"top\\" notTopClass=\\"not-top\\" startPinned={true} pinnedClass=\\"pinned\\" notPinnedClass=\\"not-pinned\\" pinThreshold={50}>
                 <div className=\\"scroll-aware top pinned\\">
-                  <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} commonActions={{...}} settings={[undefined]} scrollAware={{...}}>
+                  <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} commonActions={{...}} settings={[undefined]} isProjects={[Function]} scrollAware={{...}}>
                     <header className=\\"header-app dark\\">
                       <div className=\\"header-container\\">
                         <Link to=\\"/\\" className=\\"logo\\" replace={false}>
@@ -35,7 +35,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
                         <nav className=\\"text-nav\\">
                           <ul>
                             <li>
-                              <NavLink isActive={[Function: isProjects]} activeClassName=\\"active\\" to=\\"/backend\\" ariaCurrent=\\"true\\">
+                              <NavLink isActive={[Function]} activeClassName=\\"active\\" to=\\"/backend\\" ariaCurrent=\\"true\\">
                                 <Route path=\\"/backend\\" exact={[undefined]} strict={[undefined]} location={[undefined]}>
                                   <Link to=\\"/backend\\" className={[undefined]} style={[undefined]} aria-current={false} replace={false}>
                                     <a className={[undefined]} style={[undefined]} aria-current={false} onClick={[Function]} href=\\"/backend\\">
