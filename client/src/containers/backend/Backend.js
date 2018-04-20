@@ -9,8 +9,11 @@ import { pagesAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import entityUtils from "utils/entityUtils";
 import { childRoutes } from "helpers/router";
+import startsWith from "lodash/startsWith";
 
 const { request } = entityStoreActions;
+
+const pageNumber = 1;
 
 export class BackendContainer extends PureComponent {
   static fetchData = (getState, dispatch) => {
@@ -31,7 +34,8 @@ export class BackendContainer extends PureComponent {
     visibility: PropTypes.object,
     pages: PropTypes.array,
     settings: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
+    match: PropTypes.object
   };
 
   static mapStateToProps = state => {
@@ -46,12 +50,29 @@ export class BackendContainer extends PureComponent {
     };
   };
 
+  constructor() {
+    super();
+    this.projectListSnapshot = {
+      filter: { order: "sort_title ASC" },
+      page: pageNumber
+    };
+  }
+
   componentWillMount() {
     this.commonActions = commonActions(this.props.dispatch);
   }
 
   componentDidMount() {
     this.setMinHeight();
+  }
+
+  componentDidUpdate() {
+    if (!this.isProjects(this.props.match, this.props.location)) {
+      this.projectListSnapshot = {
+        filter: { order: "sort_title ASC" },
+        page: pageNumber
+      };
+    }
   }
 
   setMinHeight() {
@@ -62,12 +83,38 @@ export class BackendContainer extends PureComponent {
     this.mainContainer.style.minHeight = `calc(100vh - ${offsetHeight}px)`;
   }
 
+  snapshotProjectList = snapshot => {
+    this.projectListSnapshot = Object.assign(
+      {},
+      this.projectListSnapshot,
+      snapshot
+    );
+  };
+
+  isProjects = (match, location) => {
+    if (!match) {
+      return false;
+    }
+    const { pathname } = location;
+    if (pathname === "/backend") return true;
+    if (startsWith(pathname, "/backend/project")) return true;
+    if (startsWith(pathname, "/backend/resource")) return true;
+    return startsWith(pathname, "/backend/text");
+  };
+
   hasFatalError() {
     return !!this.props.notifications.fatalError;
   }
 
   hasAuthenticationError() {
     return !this.props.authentication.authenticated;
+  }
+
+  childProps() {
+    return {
+      projectListSnapshot: this.projectListSnapshot,
+      snapshotCreator: this.snapshotProjectList
+    };
   }
 
   renderError(error) {
@@ -105,6 +152,7 @@ export class BackendContainer extends PureComponent {
               authentication={this.props.authentication}
               commonActions={this.commonActions}
               settings={this.props.settings}
+              isProjects={this.isProjects}
             />
           </HigherOrder.ScrollAware>
           <main
@@ -112,7 +160,7 @@ export class BackendContainer extends PureComponent {
               this.mainContainer = mainContainer;
             }}
           >
-            {childRoutes(this.props.route)}
+            {childRoutes(this.props.route, { childProps: this.childProps() })}
           </main>
           <LayoutFrontend.Footer
             pages={this.props.pages}

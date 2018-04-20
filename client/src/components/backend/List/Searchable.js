@@ -47,7 +47,9 @@ export class ListSearchable extends PureComponent {
     filterOptions: PropTypes.object,
     destroyHandler: PropTypes.func,
     filterChangeHandler: PropTypes.func,
-    currentUser: PropTypes.object
+    currentUser: PropTypes.object,
+    initialFilter: PropTypes.object, // Initial filter is to set filter state from an existing state
+    defaultFilter: PropTypes.object // Default filter is what filter is set to when resetSearch() is called
   };
 
   static defaultProps = {
@@ -55,12 +57,13 @@ export class ListSearchable extends PureComponent {
     newButton: null,
     secondaryButton: null,
     paginationPadding: 3,
-    requireAbility: null
+    requireAbility: null,
+    initialFilter: null
   };
 
   constructor(props) {
     super(props);
-    this.state = { filter: {} };
+    this.state = this.initialState(props);
     this.authorization = new Authorization();
   }
 
@@ -79,6 +82,11 @@ export class ListSearchable extends PureComponent {
     this.setState({ filter });
   };
 
+  initialState(props) {
+    if (props.initialFilter) return { filter: props.initialFilter };
+    return { filter: {} };
+  }
+
   toggleOptions = event => {
     event.preventDefault();
     this.setState({ showOptions: !this.state.showOptions });
@@ -86,7 +94,8 @@ export class ListSearchable extends PureComponent {
 
   resetSearch = event => {
     event.preventDefault();
-    this.setState({ filter: {} });
+    const resetState = this.props.defaultFilter ? this.props.defaultFilter : {};
+    this.setState({ filter: resetState });
   };
 
   handleSubmit = event => {
