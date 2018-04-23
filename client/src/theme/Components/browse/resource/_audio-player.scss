@@ -1,0 +1,194 @@
+.audio-player {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    cursor: pointer;
+    background: transparentize($neutralBlack, 0.5);
+
+    button {
+      position: absolute;
+      top: calc(50% - 35px);
+      left: calc(50% - 35px);
+      width: 70px;
+      height: 70px;
+      border: 0;
+      border-radius: 50%;
+      background-color: $accentPrimary;
+      color: $neutralWhite;
+
+      .manicon {
+        font-size: 32px;
+        margin-left: 4px;
+      }
+    }
+  }
+
+  wave:hover {
+    cursor: pointer;
+  }
+
+  .waveform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+  }
+
+  .control-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px 10px;
+
+    @include respond($break60) {
+      padding: 0 25px 25px;
+    }
+
+    button {
+      outline: none;
+      background-color: transparent;
+      border: 0;
+      padding: 0;
+    }
+
+    .progress {
+      flex-grow: 1;
+      display: none;
+      padding: 0 20px;
+      justify-content: space-between;
+      align-items: center;
+
+      @include respond($break40) {
+        display: flex;
+      }
+
+      .slider {
+        flex-grow: 1;
+        margin: 0 15px;
+
+        input[type="range"] {
+          width: 100%;
+
+          &::-webkit-slider-thumb {
+            box-shadow: -1024px 0 0 1024px $neutralWhite;
+          }
+        }
+      }
+
+      .time {
+        @include utilityPrimary;
+        font-size: 14px;
+        color: $neutralWhite;
+
+        @include respond($break60) {
+          font-size: 19px;
+        }
+
+        &.duration {
+          color: $neutral80;
+        }
+      }
+    }
+
+    .volume {
+      text-align: left;
+
+      .mute {
+        display: inline-block;
+        text-align: left;
+        width: 35px;
+
+        @include respond($break60) {
+          margin-right: 7px;
+        }
+
+        .manicon {
+          font-size: 15px;
+
+          @include respond($break60) {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    .slider {
+      display: inline-block;
+      position: relative;
+
+      .input-thumb {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        left: 0;
+        border-radius: 50%;
+        border: 3px solid $neutralBlack;
+        background: $accentPrimary;
+        pointer-events: none;
+
+      }
+
+      input[type="range"] {
+        appearance: none;
+        outline: 0;
+        height: 5px;
+        width: 70px;
+        vertical-align: middle;
+        margin-top: 1px;
+        border-radius: 0;
+        background: $neutral80;
+        overflow: hidden;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &::-webkit-slider-runnable-track {
+          appearance: none;
+          height: 3px;
+        }
+
+        &::-webkit-slider-thumb {
+          appearance: none;
+          width: 1px;
+          height: 1px;
+          margin-top: -9px;
+          background: transparent;
+          box-shadow: -70px 0 0 70px $neutralWhite;
+        }
+
+        &::-ms-fill-lower,
+        &::-moz-range-progress {
+          color: $neutral80;
+        }
+      }
+    }
+
+    .manicon {
+      font-size: 16px;
+      color: $neutralWhite;
+      transition: color $durationFast $timing;
+
+      &:hover {
+        color: $accentPrimary;
+      }
+
+      @include respond($break60) {
+        font-size: 24px;
+      }
+
+      &:before {
+        vertical-align: middle;
+      }
+    }
+  }
+}

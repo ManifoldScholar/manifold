@@ -308,8 +308,7 @@
   position: absolute;
   top: 50%;
   right: 0;
-  left: 50%;
-  margin-left: -20px;
+  left: calc(50% - 40px);
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
