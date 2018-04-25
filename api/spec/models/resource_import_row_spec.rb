@@ -4,7 +4,8 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
 
   include_context "resource import"
 
-  def make_row(values, map)
+  def make_row(resource_values, map)
+    values = base.merge(resource_values).values
     row = FactoryBot.create(:resource_import_row, values: values)
     allow(row).to receive(:column_map).and_return(map)
     row
@@ -70,114 +71,96 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
   }
 
   let(:image_values) do
-    base.merge("kind" => "image",
-               "allow_high_res" => "yes",
-               "allow_download" => "yes",
-               "attachment.attachment" => "sample.png",
-               "attachment.high_res" => "sample.png",
-               "attachment.variant_thumbnail" => "sample.png").values
-  end
-
-  let(:image_row) do
-    make_row(image_values, column_map)
+    {
+      "kind" => "image",
+      "allow_high_res" => "yes",
+      "allow_download" => "yes",
+      "attachment.attachment" => "sample.png",
+      "attachment.high_res" => "sample.png",
+      "attachment.variant_thumbnail" => "sample.png"
+    }
   end
 
   let(:local_video_values) do
-    base.merge("kind" => "video",
-               "attachment.attachment" => "sample.mp4",
-               "attachment.variant_poster" => "sample.png").values
-  end
-
-  let(:local_video_row) do
-    make_row(local_video_values, column_map)
+    {
+      "kind" => "video",
+      "attachment.attachment" => "sample.mp4",
+      "attachment.variant_poster" => "sample.png"
+    }
   end
 
   let(:external_video_values) do
-    base.merge("kind" => "video",
-               "sub_kind" => "external_video",
-               "external_type" => "youtube",
-               "external_id" => "1234").values
-  end
-
-  let(:external_video_row) do
-    make_row(external_video_values, column_map)
+    {
+      "kind" => "video",
+      "sub_kind" => "external_video",
+      "external_type" => "youtube",
+      "external_id" => "1234"
+    }
   end
 
   let(:audio_values) do
-    base.merge("kind" => "audio",
-               "attachment.attachment" => "sample.mp3").values
-  end
-
-  let(:audio_row) do
-    make_row(audio_values, column_map)
+    {
+      "kind" => "audio",
+      "attachment.attachment" => "sample.mp3"
+    }
   end
 
   let(:link_values) do
-    base.merge("kind" => "link",
-               "external_url" => "http://google.com").values
-  end
-
-  let(:link_row) do
-    make_row(link_values, column_map)
+    {
+      "kind" => "link",
+      "external_url" => "http://google.com"
+    }
   end
 
   let(:pdf_values) do
-    base.merge("kind" => "pdf",
-               "attachment.attachment" => "sample.pdf").values
-  end
-
-  let(:pdf_row) do
-    make_row(pdf_values, column_map)
+    {
+      "kind" => "pdf",
+      "attachment.attachment" => "sample.pdf"
+    }
   end
 
   let(:document_values) do
-    base.merge("kind" => "document",
-               "attachment.attachment" => "sample.rtf").values
-  end
-
-  let(:document_row) do
-    make_row(document_values, column_map)
+    {
+      "kind" => "document",
+      "attachment.attachment" => "sample.rtf"
+    }
   end
 
   let(:file_values) do
-    base.merge("kind" => "file",
-               "attachment.attachment" => "sample.zip").values
-  end
-
-  let(:file_row) do
-    make_row(file_values, column_map)
+    {
+      "kind" => "file",
+      "attachment.attachment" => "sample.zip"
+    }
   end
 
   let(:spreadsheet_values) do
-    base.merge("kind" => "spreadsheet",
-               "attachment.attachment" => "sample.xlsx").values
-  end
-
-  let(:spreadsheet_row) do
-    make_row(spreadsheet_values, column_map)
+    {
+      "kind" => "spreadsheet",
+      "attachment.attachment" => "sample.xlsx"
+    }
   end
 
   let(:presentation_values) do
-    base.merge("kind" => "presentation",
-               "attachment.attachment" => "sample.pptx").values
-  end
-
-  let(:presentation_row) do
-    make_row(presentation_values, column_map)
+    {
+      "kind" => "presentation",
+      "attachment.attachment" => "sample.pptx"
+    }
   end
 
   let(:interactive_values) do
-    base.merge("kind" => "interactive",
-               "external_url" => "http://google.com").values
+    {
+      "kind" => "interactive",
+      "external_url" => "http://google.com"
+    }
   end
 
-  let(:interactive_row) do
-    make_row(interactive_values, column_map)
+  let(:skip_values) do
+    { "special_instructions" => "super special instructions.; skip;" }
   end
 
-  let(:skip_row) do
-    values = base.merge("special_instructions" => "super special instructions.; skip;").values
-    make_row values, column_map
+  let(:row_with_collections) do
+    values = link_values.merge("collections" => "collection 1; collection b")
+    make_row(values, column_map)
   end
 
   it "has a valid factory" do
@@ -190,7 +173,7 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
   end
 
   it "enqueues an Import job when its state transitions to queued" do
-    rir = image_row
+    rir = make_row(image_values, column_map)
     ActiveJob::Base.queue_adapter = :test
     expect {
       rir.state_machine.transition_to(:queued)
@@ -202,9 +185,7 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
     RSpec.shared_examples "Imported resource rows" do |type|
       context "a valid #{type} resource row" do
 
-        let(:row) {
-          eval(type)
-        }
+        let(:row) { make_row(eval("#{type}_values"), column_map) }
 
         it "the resource exists" do
           row.state_machine.transition_to(:importing)
@@ -228,17 +209,17 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
       end
     end
 
-    include_examples "Imported resource rows", "image_row"
-    include_examples "Imported resource rows", "local_video_row"
-    include_examples "Imported resource rows", "external_video_row"
-    include_examples "Imported resource rows", "audio_row"
-    include_examples "Imported resource rows", "link_row"
-    include_examples "Imported resource rows", "pdf_row"
-    include_examples "Imported resource rows", "document_row"
-    include_examples "Imported resource rows", "file_row"
-    include_examples "Imported resource rows", "spreadsheet_row"
-    include_examples "Imported resource rows", "presentation_row"
-    include_examples "Imported resource rows", "interactive_row"
+    include_examples "Imported resource rows", "image"
+    include_examples "Imported resource rows", "local_video"
+    include_examples "Imported resource rows", "external_video"
+    include_examples "Imported resource rows", "audio"
+    include_examples "Imported resource rows", "link"
+    include_examples "Imported resource rows", "pdf"
+    include_examples "Imported resource rows", "document"
+    include_examples "Imported resource rows", "file"
+    include_examples "Imported resource rows", "spreadsheet"
+    include_examples "Imported resource rows", "presentation"
+    include_examples "Imported resource rows", "interactive"
 
 
     # Generating styles in tests is too slow, but this test was useful during
@@ -270,9 +251,29 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
 
     context "when the resource row is marked skip" do
       it "its state changes to skipped after queue" do
-        row = skip_row
+        row = make_row(skip_values, column_map)
         row.state_machine.transition_to(:queued)
         expect(row.state_machine.in_state?(:skipped)).to be true
+      end
+    end
+
+    context "when the resource is part of a collection" do
+      context "when the collection doesn't exist" do
+        it "creates the collection(s)" do
+          row = row_with_collections
+          expect do
+            row.state_machine.transition_to(:importing)
+          end.to change { Collection.count }.from(0).to(2)
+        end
+      end
+
+      context "when the collection exists" do
+        it "associates the resource with the collection" do
+          row = row_with_collections
+          collection = FactoryBot.create(:collection, title: "collection 1", project: row.project)
+          row.state_machine.transition_to(:importing)
+          expect(collection.resources).to include(row.resource)
+        end
       end
     end
 

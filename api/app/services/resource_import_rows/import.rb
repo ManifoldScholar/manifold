@@ -117,6 +117,15 @@ module ResourceImportRows
       set_from_google_drive_storage(attribute, value) if row.google_drive_storage?
     end
 
+    def set_collections(attribute, value)
+      return set_default(attribute, []) if value.blank?
+      titles = value.split(/[,;]/).map(&:strip).reject(&:empty?)
+      collections = titles.map do |title|
+        resource.project.collections.find_or_initialize_by title: title
+      end
+      set_default(attribute, collections)
+    end
+
     def set_from_google_drive_storage(attribute, value)
       adjusted = attribute.split(".").last
       file = fetch_google_drive_file(value)
