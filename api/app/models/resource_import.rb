@@ -51,7 +51,7 @@ class ResourceImport < ApplicationRecord
     %w(
       title kind sub_kind created_at caption description fingerprint external_url
       external_id external_type allow_download slug
-      minimum_width minimum_height tag_list
+      minimum_width minimum_height tag_list collections
     )
   end
 
@@ -62,7 +62,11 @@ class ResourceImport < ApplicationRecord
   def self.available_columns
     metadata_columns = ResourceImport.metadata_columns.map { |m| "metadata.#{m}" }
     attachment_columns = ResourceImport.attachment_columns.map { |c| "attachment.#{c}" }
-    attribute_columns + metadata_columns + attachment_columns + non_model_attributes
+
+    attribute_columns +
+      metadata_columns +
+      attachment_columns +
+      non_model_attributes
   end
 
   def available_columns
