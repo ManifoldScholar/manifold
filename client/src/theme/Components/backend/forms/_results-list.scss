@@ -60,6 +60,10 @@
         }
       }
 
+      &.state-skipped {
+        color: $neutral70;
+      }
+
       &.state-imported {
         color: $accentPrimaryDull;
 

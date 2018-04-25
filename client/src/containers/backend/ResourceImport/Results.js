@@ -88,6 +88,9 @@ export class ResourceImportResults extends PureComponent {
     if (state === "queued" || state === "importing") {
       return <i className="manicon manicon-plus small" />;
     }
+    if (state === "skipped") {
+      return <i className="manicon manicon-arrow-right small" />;
+    }
     if (state === "failed") {
       return <i className="manicon manicon-x small" />;
     }
@@ -139,6 +142,9 @@ export class ResourceImportResults extends PureComponent {
       return (
         <span>{`Row #${row.lineNumber} will create a new resource.`}</span>
       );
+    }
+    if (row.state === "skipped") {
+      return <span>{`Row #${row.lineNumber} is marked as skip.`}</span>;
     }
     if (row.state === "importing") {
       return <span>{`Row #${row.lineNumber} is being imported.`}</span>;

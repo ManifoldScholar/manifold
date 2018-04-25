@@ -8,10 +8,11 @@ module ResourceImportRows
     state :importing
     state :imported
     state :failed
+    state :skipped
 
     transition from: :new, to: [:pending, :queued, :importing]
     transition from: :pending, to: [:queued, :importing]
-    transition from: :queued, to: [:pending, :importing]
+    transition from: :queued, to: [:pending, :importing, :skipped]
     transition from: :importing, to: [:imported, :failed]
     transition from: :imported, to: [:pending]
     transition from: :failed, to: [:pending]
@@ -31,6 +32,7 @@ module ResourceImportRows
     # Once the row is queued, kick off the import job (usually in the BG).
     # When the import job starts, it will transition the row to an importing state
     after_transition(to: :queued, after_commit: true) do |row, transition|
+      next row.state_machine.transition_to!(:skipped) if row.skip?
       if transition.metadata["perform_now"] == true
         ResourceImportRows::ImportJob.perform_now(row.id)
       else

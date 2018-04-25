@@ -3,6 +3,8 @@ module ResourceImports
   class StateMachine
     include Statesman::Machine
 
+    COMPLETE_STATES = %I{imported failed skipped}.freeze
+
     state :pending, initial: true
     state :parsing
     state :parsed
@@ -34,7 +36,7 @@ module ResourceImports
     guard_transition(to: :imported) do |resource_import|
       count = resource_import
               .data_rows
-              .not_in_state([:imported, :failed])
+              .not_in_state(COMPLETE_STATES)
               .count
       count.zero?
     end

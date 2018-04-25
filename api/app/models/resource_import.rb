@@ -55,10 +55,14 @@ class ResourceImport < ApplicationRecord
     )
   end
 
+  def self.non_model_attributes
+    %w(special_instructions)
+  end
+
   def self.available_columns
     metadata_columns = ResourceImport.metadata_columns.map { |m| "metadata.#{m}" }
     attachment_columns = ResourceImport.attachment_columns.map { |c| "attachment.#{c}" }
-    attribute_columns + metadata_columns + attachment_columns
+    attribute_columns + metadata_columns + attachment_columns + non_model_attributes
   end
 
   def available_columns

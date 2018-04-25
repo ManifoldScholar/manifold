@@ -58,7 +58,9 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
       "attachment.variant_thumbnail" => "",
       "attachment.variant_poster" => "",
       "attachment.variant_format_one" => "",
-      "attachment.variant_format_two" => ""
+      "attachment.variant_format_two" => "",
+      "collections" => "",
+      "special_instructions" => ""
     }
   }
 
@@ -173,6 +175,11 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
     make_row(interactive_values, column_map)
   end
 
+  let(:skip_row) do
+    values = base.merge("special_instructions" => "super special instructions.; skip;").values
+    make_row values, column_map
+  end
+
   it "has a valid factory" do
     expect(FactoryBot.create(:resource_import_row)).to be_valid
   end
@@ -259,7 +266,14 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
         expect(row.state_machine.in_state?(:failed)).to be true
       end
 
+    end
 
+    context "when the resource row is marked skip" do
+      it "its state changes to skipped after queue" do
+        row = skip_row
+        row.state_machine.transition_to(:queued)
+        expect(row.state_machine.in_state?(:skipped)).to be true
+      end
     end
 
   end

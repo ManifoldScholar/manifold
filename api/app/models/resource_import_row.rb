@@ -64,6 +64,12 @@ class ResourceImportRow < ApplicationRecord
     resource is_a? Resource
   end
 
+  def skip?
+    value = value_for("special_instructions")
+    return false if value.blank?
+    value.split(";").map(&:strip).include?("skip")
+  end
+
   def mapped_result
     {
       resource_id: resource_id,

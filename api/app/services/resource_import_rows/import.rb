@@ -50,6 +50,7 @@ module ResourceImportRows
 
     def update_resource
       row.column_map.each do |position, attribute|
+        next unless resource.respond_to? attribute
         set_attribute(attribute, row.value(position))
       end
     end
