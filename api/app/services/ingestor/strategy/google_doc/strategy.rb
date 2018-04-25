@@ -47,7 +47,7 @@ module Ingestor
           session.file_by_url(ingestion.source_url)
         rescue Google::Apis::ClientError
           raise IngestionFailed, "Unable to fetch google doc. Double check the share URL
-          and make sure the doc is publically available or available to the Manifold
+          and make sure the doc is publicly available or available to the Manifold
           google service user."
         end
 
