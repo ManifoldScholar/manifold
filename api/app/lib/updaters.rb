@@ -32,6 +32,7 @@ module Updaters
     @model = model
     update_without_save(model, creator: creator)
     save_model(model)
+    post_update(model) if model.persisted?
     model
   end
 

@@ -3,14 +3,5 @@ module Updaters
   class Text
     include ::Updaters
     include ::Updaters::Concerns::HasSortableCollaborators
-
-    def update(model)
-      @model = model
-      update_without_save(model)
-      save_model(model)
-      update_position(model)
-      model
-    end
-
   end
 end

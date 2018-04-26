@@ -18,7 +18,7 @@ module Api
       end
 
       def create
-        @stylesheet = ::Updaters::Stylesheet
+        @stylesheet = ::Updaters::Default
                       .new(stylesheet_params)
                       .update_without_save(@text.stylesheets.new)
         authorize_action_for @stylesheet
@@ -33,7 +33,7 @@ module Api
 
       def update
         @stylesheet = load_and_authorize_stylesheet
-        ::Updaters::Stylesheet.new(stylesheet_params).update(@stylesheet)
+        ::Updaters::Default.new(stylesheet_params).update(@stylesheet)
         render_single_resource(
           @stylesheet,
           serializer: set_serializer,
