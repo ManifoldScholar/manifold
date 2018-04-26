@@ -43,41 +43,22 @@ RSpec.describe "Stylesheets API", type: :request do
   end
 
   describe "updates a stylesheet" do
-
     let(:stylesheet) { FactoryBot.create(:stylesheet, text: text, creator: admin)}
-    let(:path) { api_v1_stylesheet_path(stylesheet.id) }
     let(:api_response) { JSON.parse(response.body) }
 
     it "updates the name attribute" do
       valid_params = json_payload(attributes: { name: "Rambo Stoolz"})
-      put path, headers: admin_headers, params: valid_params
+      put api_v1_stylesheet_path(stylesheet.id), headers: admin_headers, params: valid_params
       expect(api_response["data"]["attributes"]["name"]).to eq("Rambo Stoolz")
     end
 
-    context "when the position attribute is set to" do
+    describe "updates a text" do
 
-      let(:stylesheet_1) { FactoryBot.create(:stylesheet, text: text, creator: admin, position: 1) }
-      let(:stylesheet_2) { FactoryBot.create(:stylesheet, text: text, creator: admin, position: 2) }
-
-      before(:each) do
-        stylesheet_1
-        stylesheet_2
+      it_should_behave_like "orderable api requests" do
+        let(:path) { "api_v1_stylesheet_path" }
+        let!(:object_a) { FactoryBot.create(:stylesheet, position: 1) }
+        let!(:object_b) { FactoryBot.create(:stylesheet, position: 2, text: object_a.text) }
       end
-
-      it "\"up\", it returns the new position" do
-        valid_params = json_payload(attributes: { position: "up"})
-        path = api_v1_stylesheet_path(stylesheet_2.id)
-        put path, headers: admin_headers, params: valid_params
-        expect(api_response["data"]["attributes"]["position"]).to eq 1
-      end
-
-      it "\"down\", it returns the new position" do
-        valid_params = json_payload(attributes: { position: "down"})
-        path = api_v1_stylesheet_path(stylesheet_1.id)
-        put path, headers: admin_headers, params: valid_params
-        expect(api_response["data"]["attributes"]["position"]).to eq 2
-      end
-
     end
   end
 

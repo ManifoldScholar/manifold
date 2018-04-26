@@ -21,8 +21,8 @@ module Api
 
           def create
             @resource = ::Updaters::Resource.new(resource_params)
-                                            .update(@project.resources.new)
-            @resource.creator = @current_user
+                                            .update(@project.resources.new,
+                                                    creator: @current_user)
             @resource.save
             authorize_action_for @resource
             location = api_v1_project_relationships_resources_url(
