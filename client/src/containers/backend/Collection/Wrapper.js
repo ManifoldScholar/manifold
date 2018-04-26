@@ -78,13 +78,13 @@ export class CollectionWrapperContainer extends PureComponent {
     );
     this.props.dispatch(collectionRequest).promise.then(() => {
       this.notifyDestroy();
-      this.redirectToProjectResources();
+      this.redirectToProjectCollections();
     });
   }
 
-  redirectToProjectResources() {
+  redirectToProjectCollections() {
     const projectId = this.props.collection.relationships.project.id;
-    const redirectUrl = lh.link("backendProjectResources", projectId);
+    const redirectUrl = lh.link("backendProjectCollections", projectId);
     this.props.history.push(redirectUrl);
   }
 
