@@ -77,11 +77,11 @@ const applicationConfiguration = {
         }
       },
       event_types: {
-        PROJECT_CREATED: "Project Created",
-        TEXT_ADDED: "Text Added",
-        TEXT_ANNOTATED: "Text Annotated",
-        RESOURCE_ADDED: "Resource Added",
-        TWEET: "Tweet"
+        project_created: "Project Created",
+        text_added: "Text Added",
+        text_annotated: "Text Annotated",
+        resource_added: "Resource Added",
+        tweet: "Tweet"
       },
       roles: {
         admin: "Admin",

@@ -84,6 +84,12 @@ RSpec.describe Annotation, type: :model do
     expect(@annotation).to_not be_valid
   end
 
+  it "enqueues a TEXT_ANNOTATED event on creation" do
+    text_section = FactoryBot.create(:text_section)
+    expect(CreateEventJob).to receive(:perform_later).with(EventType[:text_annotated], any_args)
+    FactoryBot.create(:annotation, text_section: text_section)
+  end
+
   context "with notation" do
     it "is invalid without a resource if format is resource" do
       @annotation.format = "resource"
