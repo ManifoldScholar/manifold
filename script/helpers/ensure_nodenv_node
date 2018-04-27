@@ -1,0 +1,82 @@
+#!/bin/bash
+# Installs Node and NPM.
+set -e
+
+echo "==> Ensuring Node is present"
+
+if [ "$1" = "--debug" ]; then
+  shift
+  PRINT_DEBUG="1"
+  set -x
+fi
+
+warn() { echo "$@" >&2; }
+abort() { EXPECTED_EXIT="1"; warn "$@"; exit 1; }
+
+abort_for_sh() {
+  abort 'Error: add `eval "$(nodenv init -)"` to the end of your .bash_profile!'
+}
+
+abort_for_zsh() {
+  abort 'Error: add `eval "$(nodenv init -)"` to the end of your .zshrc!'
+}
+
+abort_for_fish() {
+  abort 'Error: add `status --is-interactive; and . (nodenv init -|psub)` to the end of your .config/fish/config.fish!'
+}
+
+abort_with_shell_setup_message() {
+  case $(basename ${SHELL:-bash}) in
+  sh|bash)
+    abort_for_sh
+    ;;
+  zsh)
+    abort_for_zsh
+    ;;
+  fish)
+    abort_for_fish
+    ;;
+  # tcsh users are on their own
+  *)
+    abort 'Error: you must finish setting up nodenv in your shell; check `nodenv init` for instructions!'
+  esac
+}
+
+cleanup() {
+  set +e
+  if [ -n "$EXPECTED_EXIT" ]; then
+    return
+  fi
+  warn "Error: $(basename $0) failed!"
+  if [ -z "$PRINT_DEBUG" ]; then
+    warn "For debugging output run:"
+    warn "  $0 --debug"
+    warn "If you're stuck: file an issue with debugging output at:"
+    warn "  https://github.com/castiron/homebrew-bootstrap/issues/new"
+  fi
+}
+trap "cleanup" EXIT
+
+BASE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+if ! which nodenv &>/dev/null; then
+  abort "Error: you need to 'brew install nodenv'!"
+fi
+
+if ! nodenv version-name &>/dev/null; then
+  NODE_REQUESTED="$(nodenv local)"
+  NODE_DEFINITION="$(node-build --definitions | grep "^$NODE_REQUESTED$" || true)"
+
+  if [ -z "$NODE_DEFINITION" ]; then
+    abort "Error: cannot find Node $NODE_DEFINITION definition!"
+  fi
+
+  nodenv install "$NODE_DEFINITION"
+fi
+
+if [ "$(nodenv exec node --version)" != "$(node --version)" ]; then
+  abort_with_shell_setup_message
+fi
+
+EXPECTED_EXIT="1"
+exit 0

@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+cd "$(dirname "$0")/.."
+
+if which boxen &>/dev/null; then
+  echo "Boxen is still installed. Scripts to rule them all is not compatible with Boxen."
+  exit 1;
+fi
+
+RACK_ROOT="$(cd "$(dirname "$0")"/../api && pwd)"
+CLIENT_ROOT="$(cd "$(dirname "$0")"/../client && pwd)"
+export RACK_ROOT
+
+if [ "$RAILS_ENV" = "test" ] || [ "$RACK_ENV" = "test" ]; then
+  # if executed and the environment is already set to `test`, then we want a
+  # clean from scratch application. This almost always means a ci environment,
+  # since we set the environment to `test` directly in `script/cibuild`.
+  script/setup
+else
+  # if the environment isn't set to `test`, set it to `test` and update the
+  # application to ensure all dependencies are met as well as any other things
+  # that need to be up to date, like db migrations. The environment not having
+  # already been set to `test` almost always means this is being called on its
+  # own from a `development` environment.
+  export RAILS_ENV="test" RACK_ENV="test"
+  script/update
+fi
+
+echo "==> Running tests…"
+m test

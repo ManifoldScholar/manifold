@@ -1,0 +1,38 @@
+#!/bin/bash
+set -e
+cd "$(dirname "$0")/.."
+
+if which boxen &>/dev/null; then
+  echo "Boxen is still installed. Scripts to rule them all is not compatible with Boxen."
+  exit 1;
+fi
+
+PROJ_DIR=$(pwd)
+PROJ_NAME="manifold"
+
+# Bootstrap first
+echo "==> Execute ./script/bootstrap"
+path="$(dirname "$0")/bootstrap"
+$path
+echo "==> Bootstrap complete"
+
+# Setup the database
+cd api &>/dev/null
+bin/rake db:create
+bin/rake db:reset
+cd .. &> /dev/null
+
+# Install or update Foreman
+if [ -z "$RAILS_ENV" ] && [ -z "$RACK_ENV" ]; then
+    echo "==> Installing or updating Foreman gem…"
+    gem install foreman
+    true
+fi
+
+# Ensure DNS and setup nginx
+./script/helpers/setup-ssl $PROJ_NAME "${PROJ_DIR}/config/dev/ssl"
+./script/helpers/setup-nginx-conf $PROJ_NAME $PROJ_DIR config/dev/nginx.conf.erb \
+    --extra-val=socket_dir=$PROJ_DIR/api/tmp/sockets \
+    --extra-val=log_dir=$PROJ_DIR/log
+exit
+
