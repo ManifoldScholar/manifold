@@ -2,6 +2,7 @@ module SystemUpgrades
   class AbstractVersion < ActiveInteraction::Base
     include SystemUpgrades::HasLogger
 
+    boolean :noop, default: false
     boolean :force, default: false
     boolean :stdout, default: false
 
@@ -22,7 +23,7 @@ module SystemUpgrades
       end
       # rubocop:enable Metrics/AbcSize
 
-      perform!
+      perform! unless noop
 
       upgrade_result.output += output.string
       upgrade_result.save!
