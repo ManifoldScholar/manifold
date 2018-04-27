@@ -1,18 +1,11 @@
 <%
 
   def boxen?; ENV['BOXEN_HOME']; end
-
-  url  = ENV["BOXEN_POSTGRESQL_URL"]
-  port = ENV["BOXEN_POSTGRESQL_PORT"]
+  user = ENV["RAILS_DB_USER"]
+  pass = ENV["RAILS_DB_PASS"]
   host = ENV["RAILS_DB_HOST"] || 'localhost'
-
-  if boxen?
-    db = 'manifold_development'
-  else
-    user = ENV["RAILS_DB_USER"]
-    pass = ENV["RAILS_DB_PASS"]
-    db   = ENV["RAILS_DB_NAME"]
-  end
+  port = boxen? ? ENV["BOXEN_POSTGRESQL_PORT"] : (ENV["RAILS_DB_PORT"] || 5432)
+  db   = ENV["RAILS_DB_NAME"] || 'manifold_development'
 
 %>
 

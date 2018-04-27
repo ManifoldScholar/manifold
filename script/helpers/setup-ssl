@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ $# -lt 2 ]]; then
+	echo "Usage: setup-ssl [PROJ_NAME] [SSL_STORAGE]" >&2
+	exit 1
+fi
+
+PROJ_NAME=$1
+DOMAIN="${PROJ_NAME}.lvh"
+BASE_SSL_CONF="/System/Library/OpenSSL/openssl.cnf"
+SSL_STORAGE=$2
+CNF_PATH="${SSL_STORAGE}/${DOMAIN}.cnf"
+KEY_PATH="${SSL_STORAGE}/${DOMAIN}.key"
+CRT_PATH="${SSL_STORAGE}/${DOMAIN}.crt"
+SUBJECT="/C=US/ST=OR/L=Portland/O=Cast Iron Coding/OU=Development/CN=${DOMAIN}"
+
+if [ -f $CRT_PATH ]; then
+	echo "Abort: SSL cert already exists at ${CRT_PATH}"
+	exit 0;
+fi
+
+mkdir -p $SSL_STORAGE
+
+cp $BASE_SSL_CONF $CNF_PATH
+echo '[SAN]' >> $CNF_PATH
+echo "subjectAltName=DNS:${DOMAIN}" >> ${CNF_PATH}
+
+openssl req -new \
+  -reqexts SAN \
+  -extensions SAN \
+  -config ${CNF_PATH} \
+  -reqexts SAN \
+  -extensions SAN \
+  -newkey rsa:2048 \
+  -x509 \
+  -days 365 \
+  -nodes \
+  -out ${CRT_PATH} \
+  -keyout ${KEY_PATH} \
+  -subj "${SUBJECT}"
+
+echo "Prompting for your password in order to add ${CRT_PATH} to your keychain as a trusted cert..."
+echo ''
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ${CRT_PATH}
+
+echo "All done nice work! Get outta here and get a soda pop."

@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e
+cd "$(dirname "$0")/.."
+
+if which boxen &>/dev/null; then
+  echo "Boxen is still installed. Scripts to rule them all is not compatible with Boxen."
+  exit 1;
+fi
+
+./script/helpers/brew_bundle
+./script/helpers/ensure_rbenv_ruby
+./script/helpers/ensure_nodenv_node
+
+if [ -f "Gemfile" ]; then
+  echo "==> Installing top-level gem dependencies…"
+  bundle install
+fi
+
+echo "==> Installing API gem dependencies…"
+cd api &>/dev/null
+if [ -f "Gemfile" ]; then
+  bundle install
+fi
+cd .. &>/dev/null
+
+echo "==> Installing Client node dependencies…"
+cd client &>/dev/null
+if [ -f "package.json" ]; then
+  yarn install
+fi
+cd .. &>/dev/null
+
+echo "==> Installing a local instance of ElasticSearch"
+m install elasticsearch

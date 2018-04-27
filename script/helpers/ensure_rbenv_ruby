@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+# Installs Ruby and Bundler.
+
+set -e
+
+echo "==> Ensuring Ruby is present"
+
+if [ "$1" = "--debug" ]; then
+  shift
+  PRINT_DEBUG="1"
+  set -x
+fi
+
+warn() { echo "$@" >&2; }
+abort() { EXPECTED_EXIT="1"; warn "$@"; exit 1; }
+
+abort_for_sh() {
+  abort 'Error: add `eval "$(rbenv init -)"` to the end of your .bash_profile!'
+}
+
+abort_for_zsh() {
+  abort 'Error: add `eval "$(rbenv init -)"` to the end of your .zshrc!'
+}
+
+abort_for_fish() {
+  abort 'Error: add `status --is-interactive; and . (rbenv init -|psub)` to the end of your .config/fish/config.fish!'
+}
+
+abort_with_shell_setup_message() {
+  case $(basename ${SHELL:-bash}) in
+  sh|bash)
+    abort_for_sh
+    ;;
+  zsh)
+    abort_for_zsh
+    ;;
+  fish)
+    abort_for_fish
+    ;;
+  # tcsh users are on their own
+  *)
+    abort 'Error: you must finish setting up rbenv in your shell; check `rbenv init` for instructions!'
+  esac
+}
+
+cleanup() {
+  set +e
+  if [ -n "$EXPECTED_EXIT" ]; then
+    return
+  fi
+  warn "Error: $(basename $0) failed!"
+  if [ -z "$PRINT_DEBUG" ]; then
+    warn "For debugging output run:"
+    warn "  $0 --debug"
+    warn "If you're stuck: file an issue with debugging output at:"
+    warn "  https://github.com/castiron/homebrew-bootstrap/issues/new"
+  fi
+}
+trap "cleanup" EXIT
+
+BASE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+if ! which rbenv &>/dev/null; then
+  abort "Error: you need to 'brew install rbenv'!"
+fi
+
+if ! rbenv version-name &>/dev/null; then
+  if ! [[ -z "$RBENV_VERSION" ]]; then
+    RUBY_REQUESTED="$RBENV_VERSION"
+  else
+    RUBY_REQUESTED="$(rbenv local)"
+  fi
+  RUBY_DEFINITION="$(ruby-build --definitions | grep "^$RUBY_REQUESTED$" || true)"
+
+  if [ -z "$RUBY_DEFINITION" ]; then
+    RUBY_DEFINITION="$BASE_PATH/ruby-definitions/$RUBY_REQUESTED"
+
+    if ! [ -f "$RUBY_DEFINITION" ]; then
+      warn  "Error: cannot find Ruby $RUBY_REQUESTED definition in ruby-build or at:"
+      abort "$RUBY_DEFINITION"
+    fi
+  fi
+
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$HOMEBREW_PREFIX/opt/openssl"
+
+  rbenv install --skip-existing "$RUBY_DEFINITION"
+fi
+
+if [ "$(rbenv exec ruby --version)" != "$(ruby --version)" ]; then
+  abort_with_shell_setup_message
+fi
+
+
+(rbenv which bundle &>/dev/null || bundle -v &>/dev/null) || {
+  echo "==> Installing Bundler"
+  gem install bundler
+  rbenv rehash
+}
+
+EXPECTED_EXIT="1"
+exit 0
