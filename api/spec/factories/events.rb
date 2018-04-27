@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :event do
-    event_type Event::PROJECT_CREATED
+    event_type EventType[:project_created]
     event_url "MyString"
     subject_title "MyString"
     subject_subtitle "MyString"

@@ -6,7 +6,7 @@ RSpec.describe CreateEventJob, type: :job do
 
     it "creates a new event" do
       project = FactoryBot.create(:project)
-      expect { described_class.new.perform(Event::PROJECT_CREATED, subject: project) }.to change{Event.count}.by(1)
+      expect { described_class.new.perform(EventType[:project_created], subject: project) }.to change{Event.count}.by(1)
     end
 
   end

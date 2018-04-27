@@ -35,15 +35,15 @@ RSpec.describe Event, type: :model do
   context "can be filtered" do
 
     before(:each) do
-      @event_a = FactoryBot.create(:event, subject_title: "Aquemini", event_type: "TWEET")
-      @event_b = FactoryBot.create(:event, subject_title: "Stankonia", event_type: "TWEET")
-      @event_c = FactoryBot.create(:event, subject_title: "ATLiens", event_type: "PROJECT_CREATED")
+      @event_a = FactoryBot.create(:event, subject_title: "Aquemini", event_type: EventType[:tweet])
+      @event_b = FactoryBot.create(:event, subject_title: "Stankonia", event_type: EventType[:tweet])
+      @event_c = FactoryBot.create(:event, subject_title: "ATLiens", event_type: EventType[:project_created])
     end
 
     it "by type" do
-      results = Event.filter({type: "TWEET"})
+      results = Event.filter({type: EventType[:tweet]})
       expect(results.length).to be 2
-      results = Event.filter({type: "PROJECT_CREATED"})
+      results = Event.filter({type: EventType[:project_created]})
       expect(results.length).to be 1
     end
   end

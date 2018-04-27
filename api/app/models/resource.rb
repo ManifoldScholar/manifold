@@ -47,7 +47,7 @@ class Resource < ApplicationRecord
   # Associations
   belongs_to :project
   has_one :thumbnail_fetch_attempt, dependent: :destroy
-  has_one :resource_created_event, -> { where event_type: Event::RESOURCE_ADDED },
+  has_one :resource_created_event, -> { where event_type: EventType[:resource_added] },
           class_name: Event,
           as: :subject,
           dependent: :destroy,
@@ -124,7 +124,7 @@ class Resource < ApplicationRecord
   before_validation :update_kind, :set_fingerprint!
   before_update :reset_stale_fields
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
-  after_create :resource_to_event
+  after_commit :trigger_event_creation, on: [:create]
 
   # Search
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
@@ -153,20 +153,6 @@ class Resource < ApplicationRecord
 
   def search_hidden
     project.present? ? project.search_hidden : { hidden: true }
-  end
-
-  # Create a new project event for the new resource
-  def resource_to_event
-    factory = Factory::Event.new
-    event = factory.create(
-      Event::RESOURCE_ADDED,
-      subject_id: id,
-      subject_type: self.class.name
-    )
-    return if event.valid?
-    Rails.logger.info(
-      "#resource_to_event created an invalid event: #{event.errors.full_messages}"
-    )
   end
 
   def fetch_thumbnail?
@@ -268,6 +254,10 @@ class Resource < ApplicationRecord
   end
 
   private
+
+  def trigger_event_creation
+    Event.trigger(EventType[:resource_added], self)
+  end
 
   def set_fingerprint!
     return if fingerprint.present?

@@ -12,11 +12,11 @@ export default class EventThumbnail extends Component {
 
   getEventIcon(type) {
     const eventIconMap = {
-      ANNOTATION_ADDED: "person-word-bubble",
-      PROJECT_CREATED: "egg",
-      RESOURCE_ADDED: "cube-shine",
-      TEXT_ADDED: "book-opening",
-      TWEET: "twitter"
+      annotation_created: "person-word-bubble",
+      project_created: "egg",
+      resource_added: "cube-shine",
+      text_added: "book-opening",
+      tweet: "twitter"
     };
 
     return eventIconMap[type];

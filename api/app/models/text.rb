@@ -71,7 +71,7 @@ class Text < ApplicationRecord
            inverse_of: :text
   has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable
   has_many :annotations, through: :text_sections
-  has_one :text_created_event, -> { where event_type: Event::TEXT_ADDED },
+  has_one :text_created_event, -> { where event_type: EventType[:text_added] },
           class_name: Event, as: :subject, dependent: :destroy, inverse_of: :subject
 
   # Delegations
@@ -203,7 +203,7 @@ class Text < ApplicationRecord
   end
 
   def trigger_text_added_event
-    Event.trigger(Event::TEXT_ADDED, self) if project
+    Event.trigger(EventType[:text_added], self) if project
   end
 
   def annotations_count

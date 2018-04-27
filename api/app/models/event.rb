@@ -2,20 +2,11 @@
 # activity feed.
 class Event < ApplicationRecord
 
-  # Constants
-  PROJECT_CREATED = "PROJECT_CREATED".freeze
-  RESOURCE_ADDED = "RESOURCE_ADDED".freeze
-  TEXT_ADDED = "TEXT_ADDED".freeze
-  TEXT_ANNOTATED = "TEXT_ANNOTATED".freeze
-  TWEET = "TWEET".freeze
-  EVENT_TYPES = [
-    PROJECT_CREATED,
-    RESOURCE_ADDED,
-    TEXT_ADDED,
-    TEXT_ANNOTATED,
-    TWEET
-  ].freeze
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
+
+  # ClassyEnum
+  include ClassyEnum::ActiveRecord
+  classy_enum_attr :event_type
 
   # Authority
   include Authority::Abilities
@@ -42,7 +33,7 @@ class Event < ApplicationRecord
   }
 
   # Validation
-  validates :event_type, presence: true, inclusion: { in: self::EVENT_TYPES }
+  validates :event_type, presence: true
 
   # Search
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
@@ -67,7 +58,7 @@ class Event < ApplicationRecord
 
   def self.trigger(type, subject)
     CreateEventJob.perform_later(
-      type,
+      type.to_s,
       subject_id: subject.id,
       subject_type: subject.class.name
     )
@@ -75,7 +66,7 @@ class Event < ApplicationRecord
 
   def self.trigger_now(type, subject)
     CreateEventJob.perform(
-      type,
+      type.to_s,
       subject_id: subject.id,
       subject_type: subject.class.name
     )
