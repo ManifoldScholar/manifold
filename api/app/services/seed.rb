@@ -4,7 +4,6 @@ class Seed
   # rubocop:disable Metrics/MethodLength
   def self.execute(logger = nil)
     logger ||= Logger.new(STDOUT)
-
     maybe_update_settings(logger)
     cli_user = make_cli_user(logger)
     make_feature(logger, cli_user)
@@ -54,7 +53,7 @@ class Seed
   end
 
   def self.upgrade_system(logger)
-    SystemUpgrades::Perform.run force: false, stdout: true
+    SystemUpgrades::Perform.run force: false, noop: true, stdout: true
     logger.info("Running system upgrades".green)
   end
 
