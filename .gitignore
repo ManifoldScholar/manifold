@@ -42,3 +42,5 @@ doc
 
 ## Development services ###
 /services/*
+
+.DS_Store
