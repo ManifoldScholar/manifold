@@ -44,7 +44,13 @@ module Ingestor
         end
 
         def self.pointer(ingestion)
-          session.file_by_url(ingestion.source_url)
+          if session.present?
+            session.file_by_url(ingestion.source_url)
+          else
+            raise IngestionFailed, "Unable to start google drive session.  Double check
+            that google integration has been configured and the drive API enabled.
+            See more at https://manifoldapp.org/docs/customizing/settings/external_services/google/index.html."
+          end
         rescue Google::Apis::ClientError
           raise IngestionFailed, "Unable to fetch google doc. Double check the share URL
           and make sure the doc is publicly available or available to the Manifold
