@@ -37,6 +37,18 @@ RSpec.describe Resource, type: :model do
     expect(event.event_type).to eq(Event::RESOURCE_ADDED)
   end
 
+  context "when creating" do
+    it "sets the fingerprint if none provided" do
+      resource = FactoryBot.create(:resource)
+      expect(resource.fingerprint).to_not be_nil
+    end
+
+    it "does not overwrite provided fingerprint" do
+      resource = FactoryBot.create(:resource, fingerprint: "abc123")
+      expect(resource.fingerprint).to eq "abc123"
+    end
+  end
+
   it "destroys associated annotations" do
     resource = FactoryBot.create(:resource)
     FactoryBot.create(:annotation, resource: resource)

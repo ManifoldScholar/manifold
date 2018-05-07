@@ -116,6 +116,38 @@ exports[`Backend Resource General Container renders correctly 1`] = `
         style={Object {}}
       >
         <label
+          className=""
+        >
+          Fingerprint
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter fingerprint"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className=""
+        >
+          Slug
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter slug"
+          type="text"
+          value="slug-1"
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
           className="has-instructions"
         >
           Tags

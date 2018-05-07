@@ -53,7 +53,17 @@ export class ResourceGeneralContainer extends PureComponent {
             {...this.props}
           />
           <Form.TextInput
-            focusOnMount
+            label="Fingerprint"
+            name="attributes[fingerprint]"
+            placeholder="Enter fingerprint"
+            disabled
+          />
+          <Form.TextInput
+            label="Slug"
+            name="attributes[slug]"
+            placeholder="Enter slug"
+          />
+          <Form.TextInput
             label="Tags"
             name="attributes[tagList]"
             placeholder="Enter tags"
