@@ -59,8 +59,9 @@ export class FormUpload extends Component {
     document: {
       accepts:
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
-        "application/msword,text/*",
-      extensions: "doc, docx, txt"
+        "application/msword,text/*," +
+        "application/vnd.oasis.opendocument.text",
+      extensions: "doc, docx, txt, odt"
     },
     csv: {
       accepts: "text/plain, text/csv",
@@ -69,14 +70,16 @@ export class FormUpload extends Component {
     spreadsheet: {
       accepts:
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet," +
-        "application/vnd.ms-excel",
-      extensions: "xls, xlsx"
+        "application/vnd.ms-excel," +
+        "application/vnd.oasis.opendocument.spreadsheet,",
+      extensions: "xls, xlsx, ods"
     },
     presentation: {
       accepts:
         "application/vnd.openxmlformats-officedocument.presentationml.presentation," +
-        "application/vnd.ms-powerpoint",
-      extensions: "ppt, pptx"
+        "application/vnd.ms-powerpoint," +
+        "application/vnd.oasis.opendocument.presentation",
+      extensions: "ppt, pptx, odp"
     },
     texts: {
       accepts: "application/epub+zip,application/zip,text/*",

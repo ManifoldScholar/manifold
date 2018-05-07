@@ -42,13 +42,13 @@ module ResourceAttachmentValidation
 
   def validate_spreadsheet_fields
     errors.add(:attachment, "spreadsheet is required") unless attachment.present?
-    errors.add(:attachment, "is invalid spreadsheet file") if attachment.present? && !attachment_is_excel?
+    errors.add(:attachment, "is invalid spreadsheet file") if attachment.present? && !attachment_is_spreadsheet?
     errors.empty?
   end
 
   def validate_presentation_fields
     errors.add(:attachment, "presentation is required") unless attachment.present?
-    errors.add(:attachment, "is invalid presentation file") if attachment.present? && !attachment_is_powerpoint?
+    errors.add(:attachment, "is invalid presentation file") if attachment.present? && !attachment_is_presentation?
     errors.empty?
   end
 

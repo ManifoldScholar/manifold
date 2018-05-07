@@ -14,7 +14,7 @@ exports[`Backend.Resource.Form.Spreadsheet component renders correctly 1`] = `
       Spreadsheet File
     </label>
     <react-dropzone
-      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.oasis.opendocument.spreadsheet,"
       className="form-dropzone style-square"
       multiple={false}
       onDrop={[Function]}
@@ -45,7 +45,7 @@ exports[`Backend.Resource.Form.Spreadsheet component renders correctly 1`] = `
           <p
             className="secondary"
           >
-            xls, xlsx
+            xls, xlsx, ods
           </p>
         </div>
       </div>

@@ -14,7 +14,7 @@ exports[`Backend.Resource.Form.Document component renders correctly 1`] = `
       Document File
     </label>
     <react-dropzone
-      accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,text/*"
+      accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,text/*,application/vnd.oasis.opendocument.text"
       className="form-dropzone style-square"
       multiple={false}
       onDrop={[Function]}
@@ -45,7 +45,7 @@ exports[`Backend.Resource.Form.Document component renders correctly 1`] = `
           <p
             className="secondary"
           >
-            doc, docx, txt
+            doc, docx, txt, odt
           </p>
         </div>
       </div>
