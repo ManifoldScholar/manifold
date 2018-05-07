@@ -166,10 +166,10 @@ module Attachments
           !#{field}_content_type.match(Regexp.union(config[:audio][:allowed_mime])).nil?  
         end
       
-        def #{field}_is_excel?
+        def #{field}_is_spreadsheet?
           return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
-          !#{field}_content_type.match(Regexp.union(config[:excel][:allowed_mime])).nil?  
+          !#{field}_content_type.match(Regexp.union(config[:spreadsheet][:allowed_mime])).nil?  
         end
       
         def #{field}_is_text_document?
@@ -178,10 +178,10 @@ module Attachments
           !#{field}_content_type.match(Regexp.union(config[:text_document][:allowed_mime])).nil?  
         end
       
-        def #{field}_is_powerpoint?
+        def #{field}_is_presentation?
           return false unless #{field}.present?
           config = Rails.configuration.manifold.attachments.validations
-          !#{field}_content_type.match(Regexp.union(config[:powerpoint][:allowed_mime])).nil?  
+          !#{field}_content_type.match(Regexp.union(config[:presentation][:allowed_mime])).nil?  
         end
       
         def #{field}_is_pdf?

@@ -188,7 +188,7 @@ common: &1
           - !ruby/regexp '/wav\Z/i'
           - !ruby/regexp '/mid\Z/i'
           - !ruby/regexp '/ogg\Z/i'
-      :excel:
+      :spreadsheet:
         :allowed_mime:
           - "application/vnd.ms-excel"
           - "application/msexcel"
@@ -199,6 +199,8 @@ common: &1
           - "application/xls"
           - "application/x-xls"
           - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          - "application/vnd.oasis.opendocument.spreadsheet"
+          - "application/vnd.oasis.opendocument.spreadsheet-template"
           - "application/zip"
           - "text/csv"
         :allowed_ext:
@@ -213,6 +215,8 @@ common: &1
           - !ruby/regexp '/xla\Z/i'
           - !ruby/regexp '/xlw\Z/i'
           - !ruby/regexp '/csv\Z/i'
+          - !ruby/regexp '/ods\Z/i'
+          - !ruby/regexp '/ots\Z/i'
       :text_document:
         :allowed_mime:
           - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -221,6 +225,8 @@ common: &1
           - "application/vnd.ms-word.document.macroEnabled.12"
           - "application/vnd.ms-word.template.macroEnabled.12"
           - "application/rtf"
+          - "application/vnd.oasis.opendocument.text"
+          - "application/vnd.oasis.opendocument.text-template"
           - !ruby/regexp '/text\/.*/'
         :allowed_ext:
           - !ruby/regexp '/doc\Z/i'
@@ -229,15 +235,19 @@ common: &1
           - !ruby/regexp '/dotx\Z/i'
           - !ruby/regexp '/dotm\Z/i'
           - !ruby/regexp '/docb\Z/i'
+          - !ruby/regexp '/odt\Z/i'
+          - !ruby/regexp '/ott\Z/i'
           - !ruby/regexp '/txt\Z/i'
           - !ruby/regexp '/rtf\Z/i'
-      :powerpoint:
+      :presentation:
         :allowed_mime:
           - "application/zip" # https://github.com/ManifoldScholar/manifold/issues/936
           - "application/vnd.ms-powerpoint"
           - "application/vnd.openxmlformats-officedocument.presentationml.presentation"
           - "application/vnd.openxmlformats-officedocument.presentationml.template"
           - "application/vnd.openxmlformats-officedocument.presentationml.slideshow"
+          - "application/vnd.oasis.opendocument.presentation"
+          - "application/vnd.oasis.opendocument.presentation-template"
         :allowed_ext:
           - !ruby/regexp '/ppt\Z/i'
           - !ruby/regexp '/pptx\Z/i'
@@ -249,6 +259,8 @@ common: &1
           - !ruby/regexp '/ppsm\Z/i'
           - !ruby/regexp '/sldx\Z/i'
           - !ruby/regexp '/sldm\Z/i'
+          - !ruby/regexp '/odp\Z/i'
+          - !ruby/regexp '/otp\Z/i'
       :pdf:
         :allowed_mime:
           - "application/pdf"
@@ -277,19 +289,21 @@ common: &1
           - "application/markdown"
           - "application/epub+zip"
           - "application/rtf"
+          - "application/vnd.oasis.opendocument.spreadsheet"
+          - "application/vnd.oasis.opendocument.text"
+          - "application/vnd.oasis.opendocument.presentation"
           - "text/csv"
           - !ruby/regexp '/text\/.*/'
           - !ruby/regexp '/audio\/.*/'
           - !ruby/regexp '/video\/.*/'
           - !ruby/regexp '/image\/.*/'
         :allowed_ext:
-          - !ruby/regexp '/md\Z/i'
-          - !ruby/regexp '/zip\Z/i'
-          - !ruby/regexp '/epub\Z/i'
+          # Image
           - !ruby/regexp '/gif\Z/i'
           - !ruby/regexp '/jpe?g\Z/i'
           - !ruby/regexp '/png\Z/i'
           - !ruby/regexp '/svg\Z/i'
+          # Video
           - !ruby/regexp '/mp4\Z/i'
           - !ruby/regexp '/webm\Z/i'
           - !ruby/regexp '/flv\Z/i'
@@ -302,12 +316,14 @@ common: &1
           - !ruby/regexp '/wmv\Z/i'
           - !ruby/regexp '/mov\Z/i'
           - !ruby/regexp '/avi\Z/i'
+          # Audio
           - !ruby/regexp '/flac\Z/i'
           - !ruby/regexp '/mp3\Z/i'
           - !ruby/regexp '/wma\Z/i'
           - !ruby/regexp '/wav\Z/i'
           - !ruby/regexp '/mid\Z/i'
           - !ruby/regexp '/ogg\Z/i'
+          # Spreadsheet
           - !ruby/regexp '/xls\Z/i'
           - !ruby/regexp '/xlt\Z/i'
           - !ruby/regexp '/xlm\Z/i'
@@ -319,14 +335,20 @@ common: &1
           - !ruby/regexp '/xla\Z/i'
           - !ruby/regexp '/xlw\Z/i'
           - !ruby/regexp '/csv\Z/i'
+          - !ruby/regexp '/ods\Z/i'
+          - !ruby/regexp '/ots\Z/i'
+          # Document
           - !ruby/regexp '/doc\Z/i'
           - !ruby/regexp '/docx\Z/i'
           - !ruby/regexp '/docm\Z/i'
           - !ruby/regexp '/dotx\Z/i'
           - !ruby/regexp '/dotm\Z/i'
           - !ruby/regexp '/docb\Z/i'
+          - !ruby/regexp '/odt\Z/i'
+          - !ruby/regexp '/ott\Z/i'
           - !ruby/regexp '/txt\Z/i'
           - !ruby/regexp '/rtf\Z/i'
+          # Presentation
           - !ruby/regexp '/ppt\Z/i'
           - !ruby/regexp '/pptx\Z/i'
           - !ruby/regexp '/pptm\Z/i'
@@ -337,18 +359,26 @@ common: &1
           - !ruby/regexp '/ppsm\Z/i'
           - !ruby/regexp '/sldx\Z/i'
           - !ruby/regexp '/sldm\Z/i'
-          - !ruby/regexp '/pdf\Z/'
+          - !ruby/regexp '/odp\Z/i'
+          - !ruby/regexp '/otp\Z/i'
+          # File
+          - !ruby/regexp '/zip\Z/i'
+          - !ruby/regexp '/md\Z/i'
+          - !ruby/regexp '/epub\Z/i'
           - !ruby/regexp '/pls\Z/i'
-          - !ruby/regexp '/smil\Z/i'
           - !ruby/regexp '/ncx\Z/i'
+          - !ruby/regexp '/dmg\Z/i'
+          # PDF
+          - !ruby/regexp '/pdf\Z/'
+          # Misc
           - !ruby/regexp '/js\Z/i'
           - !ruby/regexp '/x?html?\Z/i'
           - !ruby/regexp '/ttf\Z/i'
           - !ruby/regexp '/otf\Z/i'
           - !ruby/regexp '/woff\Z/i'
-          - !ruby/regexp '/xml\Z/i'
           - !ruby/regexp '/css\Z/i'
-          - !ruby/regexp '/dmg\Z/i'
+          - !ruby/regexp '/xml\Z/i'
+          - !ruby/regexp '/smil\Z/i'
 production: *1
 development: *1
 test: *1

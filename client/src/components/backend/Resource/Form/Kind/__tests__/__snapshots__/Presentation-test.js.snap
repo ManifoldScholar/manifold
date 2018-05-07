@@ -14,7 +14,7 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
       Presentation File
     </label>
     <react-dropzone
-      accept="application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint"
+      accept="application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint,application/vnd.oasis.opendocument.presentation"
       className="form-dropzone style-square"
       multiple={false}
       onDrop={[Function]}
@@ -45,7 +45,7 @@ exports[`Backend.Resource.Form.Presentation component renders correctly 1`] = `
           <p
             className="secondary"
           >
-            ppt, pptx
+            ppt, pptx, odp
           </p>
         </div>
       </div>
