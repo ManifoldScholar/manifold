@@ -6,6 +6,7 @@ class ResourceImportRow < ApplicationRecord
   ROW_TYPE_HEADER = "header".freeze
 
   include Statesman::Adapters::ActiveRecordQueries
+  include Concerns::Fingerprinted
 
   belongs_to :resource_import, inverse_of: :resource_import_rows
   belongs_to :resource, optional: true, inverse_of: :resource_import_row
@@ -84,12 +85,14 @@ class ResourceImportRow < ApplicationRecord
   end
 
   def fingerprint
-    candidates = %w(fingerprint external_url).map { |c| value_for(c) }
+    value_for("fingerprint") || generate_fingerprint(fingerprint_candidates)
+  end
+
+  def fingerprint_candidates
+    candidates = %w(external_url).map { |c| value_for(c) }
     candidates << %w(external_type external_id).map { |c| value_for(c) }.join
     candidates << %w(title attachment.attachment).map { |c| value_for(c) }.join
-    subject = candidates.detect(&:present?)
-    return nil if subject.blank?
-    Digest::MD5.hexdigest(subject)
+    candidates
   end
 
 end

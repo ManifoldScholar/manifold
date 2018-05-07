@@ -85,6 +85,7 @@ module Validation
     params.permit(param_config)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def resource_params
     params.require(:data)
     attributes = [attachment(:attachment), :remove_attachment,
@@ -97,11 +98,13 @@ module Validation
                   :alt_text, :copyright_status, :copyright_holder, :credit,
                   :allow_download, :external_type, :external_url, :external_id,
                   :embed_code, :subject, :minimum_width, :maximum_width, :minimum_height,
-                  :maximum_height, :iframe_allow_fullscreen, metadata(Resource)]
+                  :maximum_height, :iframe_allow_fullscreen, metadata(Resource),
+                  :fingerprint, :slug]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
+  # rubocop:enable Metrics/MethodLength
 
   def resource_metadata_params
     params.require(:data)

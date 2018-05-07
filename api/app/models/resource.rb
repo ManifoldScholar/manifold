@@ -28,6 +28,7 @@ class Resource < ApplicationRecord
   include ResourceAttributeResets
   include Concerns::HasFormattedAttributes
   include Concerns::HasSortTitle
+  include Concerns::Fingerprinted
   include Metadata
   extend FriendlyId
 
@@ -79,6 +80,7 @@ class Resource < ApplicationRecord
             inclusion: { in: ALLOWED_SUB_KINDS },
             allow_nil: true,
             allow_blank: true
+  validates :fingerprint, uniqueness: true
   validate :validate_kind_fields
 
   # Scopes
@@ -115,6 +117,7 @@ class Resource < ApplicationRecord
   before_update :reset_stale_fields
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_create :resource_to_event
+  before_save :set_fingerprint!
 
   # Search
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
@@ -255,6 +258,20 @@ class Resource < ApplicationRecord
   def variant_thumbnail_remote_url=(url_value)
     self.variant_thumbnail = URI.parse(url_value)
     @variant_thumbnail_remote_url = url_value
+  end
+
+  private
+
+  def set_fingerprint!
+    return if fingerprint.present?
+    self.fingerprint = generate_fingerprint fingerprint_candidates
+  end
+
+  def fingerprint_candidates
+    candidates = %w(external_url).map { |c| __send__ c }
+    candidates << %w(external_type external_id).map { |c| __send__ c }.join
+    candidates << %w(title attachment).map { |c| __send__ c }.join
+    candidates
   end
 
 end
