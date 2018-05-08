@@ -104,17 +104,13 @@ export class ReaderContainer extends Component {
     hideTocDrawer: PropTypes.func
   };
 
-  constructor() {
-    super();
-    this.counter = 0;
+  constructor(props) {
+    super(props);
     this.state = {
       showMeta: false
     };
-  }
-
-  componentWillMount() {
-    this.readerActions = this.makeReaderActions(this.props.dispatch);
-    this.commonActions = commonActions(this.props.dispatch);
+    this.readerActions = this.makeReaderActions(props.dispatch);
+    this.commonActions = commonActions(props.dispatch);
   }
 
   componentDidMount() {

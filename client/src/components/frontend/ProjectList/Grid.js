@@ -23,24 +23,22 @@ export default class ProjectListGrid extends Component {
     this.enableAnimation = false;
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.projects || !nextProps.projects) return null;
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.projects !== this.props.projects) return true;
+    if (nextProps.favorites !== this.props.favorites) return true;
+    return nextProps.authenticated !== this.props.authenticated;
+  }
+
+  componentDidUpdate(prevProps) {
     const currentIds = this.props.projects.map(p => p.id);
-    const nextIds = nextProps.projects.map(p => p.id);
-    const diffA = difference(currentIds, nextIds).length;
-    const diffB = difference(nextIds, currentIds).length;
+    const prevIds = prevProps.projects.map(p => p.id);
+    const diffA = difference(currentIds, prevIds).length;
+    const diffB = difference(prevIds, currentIds).length;
     if (diffA + diffB === 1) {
       this.enableAnimation = true;
     } else {
       this.enableAnimation = false;
     }
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.projects !== this.props.projects) return true;
-    if (nextProps.favorites !== this.props.favorites) return true;
-    if (nextProps.authenticated !== this.props.authenticated) return true;
-    return false;
   }
 
   projectsList() {

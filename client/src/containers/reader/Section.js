@@ -74,29 +74,29 @@ export class SectionContainer extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     // Fetch resources and annotations on section change.
     if (
-      nextProps.match.params.sectionId !== this.props.match.params.sectionId
+      prevProps.match.params.sectionId !== this.props.match.params.sectionId
     ) {
-      this.fetchAnnotations(nextProps);
-      this.fetchResources(nextProps);
-      this.fetchCollections(nextProps);
+      this.fetchAnnotations(this.props);
+      this.fetchResources(this.props);
+      this.fetchCollections(this.props);
     }
     // Check if we need to fetch more resources when annotations change
     // Needs to be deep comparison
-    if (!isEqual(nextProps.annotations, this.props.annotations)) {
+    if (!isEqual(prevProps.annotations, this.props.annotations)) {
       const missing = this.hasMissingResourcesOrCollections(
-        nextProps.annotations,
-        nextProps.resources,
-        nextProps.collections
+        this.props.annotations,
+        this.props.resources,
+        this.props.collections
       );
       if (missing) {
         if (some(missing, ["type", "resource"])) {
-          this.fetchResources(nextProps);
+          this.fetchResources(this.props);
         }
         if (some(missing, ["type", "collection"])) {
-          this.fetchCollections(nextProps);
+          this.fetchCollections(this.props);
         }
       }
     }

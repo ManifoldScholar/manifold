@@ -29,7 +29,7 @@ export class PermissionContainer extends PureComponent {
     match: PropTypes.object
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const entity = this.props.entity;
     const action = request(
       permissionsAPI.index(entity, {}, {}),

@@ -19,9 +19,9 @@ export class ResourceImportResults extends PureComponent {
     this.maybeStartMonitoring(this.props.resourceImport);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.maybeStartMonitoring(nextProps.resourceImport);
-    this.maybeStopMonitoring(nextProps.resourceImport);
+  componentDidUpdate() {
+    this.maybeStartMonitoring(this.props.resourceImport);
+    this.maybeStopMonitoring(this.props.resourceImport);
   }
 
   componentWillUnmount() {

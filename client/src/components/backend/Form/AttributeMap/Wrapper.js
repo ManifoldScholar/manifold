@@ -6,6 +6,21 @@ import Instructions from "../Instructions";
 import Attribute from "./Attribute";
 import setter from "../setter";
 import omitBy from "lodash/omitBy";
+import difference from "lodash/difference";
+
+const sortAttributes = props => {
+  const attributes = Object.values(props.getModelValue(props.attributes));
+  const unavailableAttributes = Object.values(props.value);
+  return attributes.filter(c => !unavailableAttributes.includes(c)).sort();
+};
+
+const sortHeaders = props => {
+  const headers = props.getModelValue(props.headers);
+  return Object.values(headers).map((header, index) => {
+    if (header) return header;
+    return `Column #${index + 1}`;
+  });
+};
 
 class FormColumnMap extends PureComponent {
   static displayName = "Form.ColumnMap";
@@ -16,19 +31,24 @@ class FormColumnMap extends PureComponent {
     value: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super();
-    this.state = {
-      sortedHeaders: this.sortHeaders(props),
-      sortedAttributes: this.sortAttributes(props)
-    };
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (!prevState) return null;
+    const nextAttributes = sortAttributes(nextProps);
+    if (difference(prevState.sortedAttributes, nextAttributes)) {
+      return {
+        sortedAttributes: nextAttributes
+      };
+    }
+
+    return null;
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      sortedHeaders: this.sortHeaders(nextProps),
-      sortedAttributes: this.sortAttributes(nextProps)
-    });
+  constructor(props) {
+    super(props);
+    this.state = {
+      sortedHeaders: sortHeaders(props),
+      sortedAttributes: sortAttributes(props)
+    };
   }
 
   onDragEnd = result => {
@@ -49,21 +69,6 @@ class FormColumnMap extends PureComponent {
   getCurrentMapping = position => {
     return this.props.value[position] || null;
   };
-
-  sortAttributes(props) {
-    const attributes = Object.values(props.getModelValue(props.attributes));
-    const unavailableAttributes = Object.values(props.value);
-    return attributes.filter(c => !unavailableAttributes.includes(c)).sort();
-  }
-
-  sortHeaders(props) {
-    const headers = props.getModelValue(props.headers);
-    const out = Object.values(headers).map((header, index) => {
-      if (header) return header;
-      return `Column #${index + 1}`;
-    });
-    return out;
-  }
 
   autoMap = event => {
     event.preventDefault();

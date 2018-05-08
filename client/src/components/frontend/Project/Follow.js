@@ -15,32 +15,21 @@ export default class ProjectFollow extends Component {
     project: PropTypes.object
   };
 
+  static getDerivedStateFromProps(nextProps) {
+    const followed = get(nextProps.favorites, nextProps.project.id);
+    if (followed) return { view: "unfollow" };
+    return { view: "follow" };
+  }
+
   constructor() {
     super();
-    this.changeView = this.changeView.bind(this);
-    this.handleFollow = this.handleFollow.bind(this);
-    this.handleUnfollow = this.handleUnfollow.bind(this);
-    this.handleUnfollowConfirmed = this.handleUnfollowConfirmed.bind(this);
-    this.isFollowed = this.isFollowed.bind(this);
-    this.deactivate = this.deactivate.bind(this);
-    this.activate = this.activate.bind(this);
-    this.isAuthenticated = this.isAuthenticated.bind(this);
-    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
     this.state = {
       view: "follow"
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.isFollowed(this.props)) {
-      this.setView("unfollow");
-    } else {
-      this.setView("follow");
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.isFollowed(nextProps)) {
       this.setView("unfollow");
     } else {
       this.setView("follow");
@@ -55,20 +44,20 @@ export default class ProjectFollow extends Component {
     this.setState(Object.assign({}, this.state, { view }));
   }
 
-  handleFollow(event) {
+  handleFollow = event => {
     event.preventDefault();
     event.stopPropagation();
     const { id, type } = this.props.project;
     this.props.dispatch(currentUserActions.follow({ id, type }));
-  }
+  };
 
-  handleUnfollow(event) {
+  handleUnfollow = event => {
     event.preventDefault();
     event.stopPropagation();
     this.setView("unfollow-confirm-active");
-  }
+  };
 
-  handleUnfollowConfirmed(event) {
+  handleUnfollowConfirmed = event => {
     event.preventDefault();
     event.stopPropagation();
     const followed = this.getFollowed(this.props);
@@ -77,17 +66,17 @@ export default class ProjectFollow extends Component {
         currentUserActions.unfollow(this.props.project.id, followed.id)
       );
     }
-  }
+  };
 
-  activate() {
+  activate = () => {
     if (this.state.view === "follow") {
       this.setView("follow-active");
     } else if (this.state.view === "unfollow") {
       this.setView("unfollow-active");
     }
-  }
+  };
 
-  deactivate() {
+  deactivate = () => {
     if (this.state.view === "follow-active") {
       this.setView("follow");
     } else if (this.state.view === "unfollow-confirm-active") {
@@ -95,7 +84,7 @@ export default class ProjectFollow extends Component {
     } else if (this.state.view === "unfollow-active") {
       this.setView("unfollow");
     }
-  }
+  };
 
   isAuthenticated() {
     return this.props.authenticated === true;
@@ -105,16 +94,6 @@ export default class ProjectFollow extends Component {
     const followed = this.getFollowed(props);
     if (followed) return true;
     return false;
-  }
-
-  changeView(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const views = ["follow", "follow-active", "unfollow", "unfollow-active"];
-    let index = views.indexOf(this.state.view) + 1;
-    if (index > 3) index = 0;
-    const nextView = views[index];
-    this.setState(Object.assign({}, this.state, { view: nextView }));
   }
 
   render() {

@@ -26,11 +26,10 @@ class App extends Component {
       routerConfirmCallback: null,
       routerConfirmMessage: null
     };
-    this.resolveRouterConfirm = this.resolveRouterConfirm.bind(this);
-    this.getConfirmation = this.getConfirmation.bind(this);
   }
 
-  componentWillMount() {
+  // TODO: Refactor to use new lifecycle methods for React 17
+  UNSAFE_componentWillMount() {
     if (__SERVER__) {
       this.store = this.props.store;
       const bootstrapped = true;
@@ -79,13 +78,13 @@ class App extends Component {
     );
   }
 
-  getConfirmation(message, callback) {
+  getConfirmation = (message, callback) => {
     this.setState({
       routerConfirm: true,
       routerConfirmMessage: message,
       routerConfirmCallback: callback
     });
-  }
+  };
 
   getRouter() {
     if (this.props.staticRequest) {
@@ -105,14 +104,14 @@ class App extends Component {
     };
   }
 
-  resolveRouterConfirm(answer) {
+  resolveRouterConfirm = answer => {
     this.state.routerConfirmCallback(answer);
     this.setState({
       routerConfirm: false,
       routerConfirmMessage: null,
       routerConfirmCallback: null
     });
-  }
+  };
 
   renderConfirm() {
     if (!this.state.routerConfirm) return null;

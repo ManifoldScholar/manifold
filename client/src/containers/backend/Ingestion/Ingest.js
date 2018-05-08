@@ -69,28 +69,28 @@ export class IngestionIngest extends Component {
     this.setDialogClassName();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.ingestion && nextProps.ingestion)
-      this.openSocket(nextProps.ingestion.id);
-    this.maybeProcessMessage(nextProps.channel, this.props.channel, nextProps);
+  // I don't think we will need these anymore.  If we do they need to be broadened a little bit to include webSocketConnected and channel
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.props.webSocketConnected !== nextProps.webSocketConnected) return true;
+  //   if (this.props.webSocketFailure !== nextProps.webSocketFailure) return true;
+  //   if (this.props.channel !== nextProps.channel) return true;
+  //   if (this.state.loading !== nextState.loading) return true;
+  //   if (this.props.ingestion !== nextProps.ingestion) return true;
+  //   if (this.state.textLog !== nextState.textLog) return true;
+  //   return false;
+  // }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.ingestion && !prevProps.ingestion)
+      this.openSocket(this.props.ingestion.id);
     if (
-      nextProps.webSocketConnected === true &&
-      this.props.webSocketConnected === false
+      prevProps.webSocketConnected === false &&
+      this.props.webSocketConnected
     ) {
       this.appendToLog(["INFO", "Successfully connected to websocket."]);
     }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.webSocketFailure !== nextProps.webSocketFailure) return true;
-    if (this.state.loading !== nextState.loading) return true;
-    if (this.props.ingestion !== nextProps.ingestion) return true;
-    if (this.state.textLog !== nextState.textLog) return true;
-    return false;
-  }
-
-  componentDidUpdate(prevPropsIgnored, prevState) {
     if (prevState.textLog !== this.state.textLog) this.scrollToLogBottom();
+    this.maybeProcessMessage(this.props.channel, prevProps.channel, prevProps);
     this.setDialogClassName();
   }
 

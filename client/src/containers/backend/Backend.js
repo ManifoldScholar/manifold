@@ -50,16 +50,14 @@ export class BackendContainer extends PureComponent {
     };
   };
 
-  constructor() {
+  constructor(props) {
     super();
     this.projectListSnapshot = {
       filter: { order: "sort_title ASC" },
       page: pageNumber
     };
-  }
 
-  componentWillMount() {
-    this.commonActions = commonActions(this.props.dispatch);
+    this.commonActions = commonActions(props.dispatch);
   }
 
   componentDidMount() {

@@ -31,13 +31,12 @@ export class ResourceDetailContainer extends PureComponent {
   };
 
   static mapStateToProps = state => {
-    const props = {
+    return {
       collection: select(requests.feCollection, state.entityStore),
       project: select(requests.feProject, state.entityStore),
       resource: select(requests.feResource, state.entityStore),
       visibility: state.ui.transitory.visibility
     };
-    return props;
   };
 
   static propTypes = {
@@ -49,20 +48,22 @@ export class ResourceDetailContainer extends PureComponent {
     visibility: PropTypes.object
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.resource && nextProps.collection) {
-      if (
-        !this.collectionIncludesResource(
-          nextProps.resource,
-          nextProps.collection
-        )
-      ) {
-        // TODO: Render the NotFound component.
-        // Let's upgrade to React 16 for error boundaries first.
-        // throw new Error("Page not found");
-      }
-    }
-  }
+  // Commented out while we're not using this check for anything
+  // componentDidUpdate() {
+  //   if (this.props.resource && this.props.collection) {
+  //     if (
+  //       !this.collectionIncludesResource(
+  //         this.props.resource,
+  //         this.props.collection
+  //       )
+  //     ) {
+  //          TODO: Render the NotFound component.
+  //          Let's upgrade to React 16 for error boundaries first.
+  //          throw new Error("Page not found");
+  //     }
+  //   }
+  // }
+
   componentWillUnmount() {
     this.props.dispatch(flush(requests.feProject));
     this.props.dispatch(flush(requests.feResource));

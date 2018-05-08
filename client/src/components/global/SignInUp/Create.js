@@ -30,9 +30,6 @@ class CreateContainer extends Component {
 
   constructor() {
     super();
-    this.createUser = this.createUser.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.authenticateUser = this.authenticateUser.bind(this);
     this.state = {
       authenticating: false,
       user: {
@@ -44,8 +41,8 @@ class CreateContainer extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.user && !this.props.user) {
+  componentDidUpdate(prevProps) {
+    if (!prevProps.user && this.props.user) {
       this.authenticateUser();
     }
   }
@@ -54,7 +51,7 @@ class CreateContainer extends Component {
     this.props.dispatch(flush(requests.gCreateUser));
   }
 
-  authenticateUser() {
+  authenticateUser = () => {
     this.setState({ authenticating: true });
     const { dispatch } = this.props;
     dispatch(
@@ -63,9 +60,9 @@ class CreateContainer extends Component {
         password: this.state.user.password
       })
     );
-  }
+  };
 
-  createUser(event) {
+  createUser = event => {
     event.preventDefault(event.target);
     this.props
       .dispatch(
@@ -77,14 +74,14 @@ class CreateContainer extends Component {
       .promise.then(() => {
         this.props.handleViewChange("account-create-update");
       });
-  }
+  };
 
-  handleInputChange(event) {
+  handleInputChange = event => {
     const user = Object.assign({}, this.state.user, {
       [event.target.name]: event.target.value
     });
     this.setState({ user });
-  }
+  };
 
   renderTermsAndConditions(props) {
     const terms = props.settings.attributes.general.termsUrl;

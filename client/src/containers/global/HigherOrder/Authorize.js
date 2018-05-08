@@ -49,10 +49,11 @@ export class AuthorizeComponent extends PureComponent {
   componentDidMount() {
     this.maybeError(this.props);
     this.maybeNotify(this.props);
+    if (this.maybeRedirect(this.props)) this.setState({ redirect: true });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.maybeRedirect(nextProps)) this.setState({ redirect: true });
+  componentDidUpdate() {
+    if (this.maybeRedirect(this.props)) this.setState({ redirect: true });
   }
 
   maybeRedirect(props) {

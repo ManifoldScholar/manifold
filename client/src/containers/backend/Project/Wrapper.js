@@ -36,7 +36,7 @@ export class ProjectWrapperContainer extends PureComponent {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.fetchProject();
   }
 

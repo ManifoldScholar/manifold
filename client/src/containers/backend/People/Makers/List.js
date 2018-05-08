@@ -35,27 +35,25 @@ export class MakersListContainer extends PureComponent {
     super();
     this.state = { filter: {} };
     this.lastFetchedPage = null;
-    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
     this.fetchMakers = debounce(this.fetchMakers.bind(this), 250, {
       leading: false,
       trailing: true
     });
-    this.filterChangeHandler = this.filterChangeHandler.bind(this);
   }
 
   componentDidMount() {
     this.fetchMakers(1);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.maybeReload(nextProps.makersMeta);
+  componentDidUpdate(prevProps) {
+    this.maybeReload(prevProps.makersMeta);
   }
 
-  maybeReload(nextMakersMeta) {
+  maybeReload(prevUsersMeta) {
     const currentModified = get(this.props, "makersMeta.modified");
-    const nextModified = get(nextMakersMeta, "modified");
-    if (!nextModified) return;
-    if (currentModified && nextModified) return;
+    const previousModified = get(prevUsersMeta, "modified");
+    if (!currentModified) return;
+    if (currentModified && previousModified) return;
     this.fetchMakers(this.lastFetchedPage);
   }
 
@@ -69,21 +67,21 @@ export class MakersListContainer extends PureComponent {
     this.props.dispatch(action);
   }
 
-  filterChangeHandler(filter) {
+  filterChangeHandler = filter => {
     this.setState({ filter }, () => {
       this.fetchMakers(1);
     });
-  }
+  };
 
   handlePageChange(event, page) {
     this.fetchMakers(page);
   }
 
-  pageChangeHandlerCreator(page) {
+  pageChangeHandlerCreator = page => {
     return event => {
       this.handlePageChange(event, page);
     };
-  }
+  };
 
   render() {
     const { makers, makersMeta, match } = this.props;

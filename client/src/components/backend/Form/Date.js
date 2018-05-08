@@ -43,26 +43,13 @@ class FormDate extends Component {
       input: parts,
       validated: this.validate(parts)
     };
-    this.setInputMonth = this.setInputMonth.bind(this);
-    this.setInputDay = this.setInputDay.bind(this);
-    this.setInputYear = this.setInputYear.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (
-      // the form was submitted
-      nextProps.submitKey !== this.props.submitKey ||
-      // the input value changed and it's not blank or null
-      (nextProps.value !== this.props.value &&
-        nextProps.value !== "" &&
-        nextProps.value !== null)
-    ) {
-      this.updateStateFromPropValue(nextProps.value);
-    }
   }
 
   /* eslint-disable react/no-did-update-set-state */
   componentDidUpdate(prevProps, prevState) {
+    if (this.validateFormSubmit(prevProps)) {
+      this.updateStateFromPropValue(this.props.value);
+    }
     if (prevState.validated !== this.state.validated) {
       this.broadcastValue();
     }
@@ -72,26 +59,35 @@ class FormDate extends Component {
   }
   /* eslint-enable react/no-did-update-set-state */
 
-  setInputDay(event) {
+  setInputDay = event => {
     const input = Object.assign({}, this.state.input);
     input.day = event.target.value;
     this.setState({ input });
-  }
+  };
 
-  setInputMonth(event) {
+  setInputMonth = event => {
     const input = Object.assign({}, this.state.input);
     input.month = event.target.value;
     const max = this.maxDayForMonthAndYear(input.month, input.year);
     input.day = input.day > max ? max : input.day;
     this.setState({ input });
-  }
+  };
 
-  setInputYear(event) {
+  setInputYear = event => {
     const input = Object.assign({}, this.state.input);
     input.year = event.target.value;
     const max = this.maxDayForMonthAndYear(input.month, input.year);
     input.day = input.day > max ? max : input.day;
     this.setState({ input });
+  };
+
+  validateFormSubmit(prevProps) {
+    if (prevProps.submitKey === this.props.submitKey) return false;
+    return (
+      prevProps.value !== this.props.value &&
+      prevProps.value !== "" &&
+      prevProps.value !== null
+    );
   }
 
   updateStateFromPropValue(value) {

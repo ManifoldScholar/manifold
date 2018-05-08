@@ -46,49 +46,19 @@ export class NotificationsComponent extends Component {
     }
   }
 
-  componentWillReceiveProps() {
-    if (this.notificationList) {
-      this.setState({
-        height: this.notificationList.offsetHeight,
-        updating: false
-      });
-    }
-  }
-
   shouldComponentUpdate(nextProps) {
     return nextProps.notifications !== this.props.notifications;
   }
 
   componentDidUpdate() {
     if (this.notificationList) {
-      const listHeight = this.notificationList.offsetHeight;
-
-      if (this.props.animate === true) {
-        this.timer = setTimeout(() => {
-          if (!this.state.updating) {
-            this.setState({
-              updating: true
-            });
-            this.timer = null;
-          }
-          if (this.notificationList) {
-            this.notificationList.setAttribute(
-              "style",
-              "transform: translate3d(0, 0px, 0); height: auto;"
-            );
-          }
-        }, 200);
-        this.notificationList.setAttribute(
-          "style",
-          "transform: " +
-            "translate3d(0, " +
-            (this.state.height - listHeight) +
-            "px, 0);" +
-            "height:" +
-            this.state.height +
-            "px;"
-        );
-      }
+      this.setState(
+        {
+          height: this.notificationList.offsetHeight,
+          updating: false
+        },
+        this.updateNotifications
+      );
     }
   }
 
@@ -97,6 +67,37 @@ export class NotificationsComponent extends Component {
     if (this.timer) clearTimeout(this.timer);
     if (process.env.NODE_ENV === "development") {
       window.removeEventListener("keyup", this.handleNotifications);
+    }
+  }
+
+  updateNotifications() {
+    const listHeight = this.notificationList.offsetHeight;
+
+    if (this.props.animate === true) {
+      this.timer = setTimeout(() => {
+        if (!this.state.updating) {
+          this.setState({
+            updating: true
+          });
+          this.timer = null;
+        }
+        if (this.notificationList) {
+          this.notificationList.setAttribute(
+            "style",
+            "transform: translate3d(0, 0px, 0); height: auto;"
+          );
+        }
+      }, 200);
+      this.notificationList.setAttribute(
+        "style",
+        "transform: " +
+          "translate3d(0, " +
+          (this.state.height - listHeight) +
+          "px, 0);" +
+          "height:" +
+          this.state.height +
+          "px;"
+      );
     }
   }
 

@@ -55,13 +55,9 @@ export default class DrawerWrapper extends PureComponent {
       leaving: false,
       keyboardEventsPaused: false
     };
-    if (props.open === true) {
+    if (props.open) {
       this.onOpen();
     }
-    this.handleLeaveEvent = this.handleLeaveEvent.bind(this);
-    this.handleLeaveKey = this.handleLeaveKey.bind(this);
-    this.pauseKeyboardEvents = this.pauseKeyboardEvents.bind(this);
-    this.unpauseKeyboardEvents = this.unpauseKeyboardEvents.bind(this);
   }
 
   getChildContext() {
@@ -75,8 +71,8 @@ export default class DrawerWrapper extends PureComponent {
     document.addEventListener("keyup", this.handleLeaveKey);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.open === false && nextProps.open === true) this.onOpen();
+  componentDidUpdate(prevProps) {
+    if (!prevProps.open && this.props.open) this.onOpen();
   }
 
   componentWillUnmount() {
@@ -97,22 +93,22 @@ export default class DrawerWrapper extends PureComponent {
       this.props.dispatch(notificationActions.removeNotifications("global"));
   }
 
-  handleLeaveKey(event) {
+  handleLeaveKey = event => {
     if (this.state.keyboardEventsPaused) return null;
     if (event.keyCode === 27) {
       this.handleLeaveEvent(event);
     }
-  }
+  };
 
-  pauseKeyboardEvents() {
+  pauseKeyboardEvents = () => {
     this.setState({ keyboardEventsPaused: true });
-  }
+  };
 
-  unpauseKeyboardEvents() {
+  unpauseKeyboardEvents = () => {
     this.setState({ keyboardEventsPaused: false });
-  }
+  };
 
-  handleLeaveEvent(event) {
+  handleLeaveEvent = event => {
     this.setState({
       leaving: true
     });
@@ -133,7 +129,7 @@ export default class DrawerWrapper extends PureComponent {
         this.props.history.push(this.props.closeUrl);
       }, 200);
     }
-  }
+  };
 
   renderDrawerFrontMatter(props) {
     const hasTitle = props.icon || props.title;

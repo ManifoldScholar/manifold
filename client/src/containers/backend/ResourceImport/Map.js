@@ -17,7 +17,7 @@ export class ResourceImportMap extends PureComponent {
     resourceImport: PropTypes.object.isRequired
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { resourceImport } = this.props;
     if (resourceImport.attributes.state === "pending") {
       const { projectId } = this.props.match.params;

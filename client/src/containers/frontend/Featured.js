@@ -44,14 +44,11 @@ export class FeaturedContainer extends Component {
     dispatch: PropTypes.func
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.authentication !== this.props.authentication) {
-      this.fetchProjects();
-    }
-  }
-
   componentDidUpdate(prevProps) {
-    if (prevProps.projectFilters !== this.props.projectFilters) {
+    if (
+      prevProps.projectFilters !== this.props.projectFilters ||
+      prevProps.authentication !== this.props.authentication
+    ) {
       this.fetchProjects();
     }
   }

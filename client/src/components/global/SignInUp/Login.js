@@ -19,33 +19,25 @@ export default class Login extends Component {
 
   constructor() {
     super();
-    this.updatePassword = this.updatePassword.bind(this);
-    this.updateEmail = this.updateEmail.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.authenticationError = this.authenticationError.bind(this);
     this.state = { email: "", password: "" };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     if (
-      nextProps.authentication.currentUser &&
-      !this.props.authentication.currentUser
+      !prevProps.authentication.currentUser &&
+      this.props.authentication.currentUser
     ) {
       this.props.hideSignInUpOverlay();
     }
   }
 
-  updatePassword(event) {
-    this.setState(
-      Object.assign({}, this.state, { password: event.target.value })
-    );
-  }
+  updateInput = event => {
+    const key = event.target.name;
+    const value = event.target.value;
+    this.setState(Object.assign({}, this.state, { [key]: value }));
+  };
 
-  updateEmail(event) {
-    this.setState(Object.assign({}, this.state, { email: event.target.value }));
-  }
-
-  handleLogin(event) {
+  handleLogin = event => {
     event.preventDefault();
     const { dispatch } = this.props;
     const action = currentUserActions.login({
@@ -53,12 +45,12 @@ export default class Login extends Component {
       password: this.state.password
     });
     dispatch(action);
-  }
+  };
 
-  authenticationError() {
+  authenticationError = () => {
     const error = get(this.props.authentication, "error.body");
     return error;
-  }
+  };
 
   render() {
     const submitClass = classNames({
@@ -74,8 +66,9 @@ export default class Login extends Component {
               <label>Email</label>
               <input
                 type="text"
+                name="email"
                 value={this.state.email}
-                onChange={this.updateEmail}
+                onChange={this.updateInput}
                 id="login-email"
                 placeholder="Email"
               />
@@ -86,8 +79,9 @@ export default class Login extends Component {
               <label>Password</label>
               <input
                 type="password"
+                name="password"
                 value={this.state.password}
-                onChange={this.updatePassword}
+                onChange={this.updateInput}
                 id="login-password"
                 placeholder="Password"
               />

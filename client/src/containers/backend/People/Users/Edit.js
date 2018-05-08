@@ -4,7 +4,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { Dialog } from "components/backend";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
-import { usersAPI, makersAPI, requests } from "api";
+import { usersAPI, requests } from "api";
 import { Form } from "components/backend";
 import { Form as FormContainer } from "containers/backend";
 import get from "lodash/get";
@@ -38,17 +38,15 @@ export class UsersEditContainer extends PureComponent {
       confirmation: null,
       resetPassword: null
     };
-    this.newMaker = this.newMaker.bind(this);
-    this.updateMakers = this.updateMakers.bind(this);
   }
 
   componentDidMount() {
     this.fetchUser(this.props.match.params.id);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      this.fetchUser(nextProps.match.params.id);
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.fetchUser(this.props.match.params.id);
     }
   }
 
@@ -62,7 +60,7 @@ export class UsersEditContainer extends PureComponent {
     this.props.dispatch(userRequest);
   }
 
-  handleUserDestroy(event, user) {
+  handleUserDestroy = () => {
     const heading = "Are you sure you want to delete this user?";
     const message = "This action cannot be undone.";
     new Promise((resolve, reject) => {
@@ -71,16 +69,17 @@ export class UsersEditContainer extends PureComponent {
       });
     }).then(
       () => {
-        this.destroyUser(user);
+        this.destroyUser();
         this.closeDialog();
       },
       () => {
         this.closeDialog();
       }
     );
-  }
+  };
 
-  destroyUser(user) {
+  destroyUser() {
+    const user = this.props.user;
     const call = usersAPI.destroy(user.id);
     const options = { removes: user };
     const userRequest = request(call, requests.beUserDestroy, options);
@@ -97,40 +96,7 @@ export class UsersEditContainer extends PureComponent {
     this.setState({ resetPassword: null });
   }
 
-  updateMakers(makers, changeTypeIgnored) {
-    const adjustedMakers = makers.map(e => {
-      return {
-        id: e.id,
-        type: e.type
-      };
-    });
-    const user = {
-      type: this.props.user.type,
-      id: this.props.user.id,
-      relationships: { makers: { data: adjustedMakers } }
-    };
-    const call = usersAPI.update(user.id, user);
-    const makerRequest = request(call, requests.beUserUpdate);
-    this.props.dispatch(makerRequest);
-  }
-
-  /* Makers only need names, so users can create a new one */
-  newMaker(value) {
-    const parts = value.split(" ");
-    const maker = {
-      type: "makers",
-      attributes: {
-        firstName: parts[0],
-        lastName: parts[1]
-      }
-    };
-    const call = makersAPI.create(maker);
-    const makerRequest = request(call, requests.beMakerCreate);
-    const { promise } = this.props.dispatch(makerRequest);
-    return promise;
-  }
-
-  handleResetPasswordClick(eventIgnored) {
+  handleResetPasswordClick = () => {
     const heading = "How would you like to reset the user's password?";
     const message =
       "Automatically send the user a new password or set one yourself.";
@@ -146,7 +112,7 @@ export class UsersEditContainer extends PureComponent {
         this.closeResetDialog();
       }
     );
-  }
+  };
 
   render() {
     if (!this.props.user) return null;
@@ -171,9 +137,7 @@ export class UsersEditContainer extends PureComponent {
           <div className="buttons-bare-vertical">
             <button
               className="button-bare-primary"
-              onClick={event =>
-                this.handleResetPasswordClick(event, this.props.user)
-              }
+              onClick={this.handleResetPasswordClick}
             >
               {"Reset Password"}
               <i className="manicon manicon-key" />
@@ -181,9 +145,7 @@ export class UsersEditContainer extends PureComponent {
             <br />
             <button
               className="button-bare-primary"
-              onClick={event => {
-                this.handleUserDestroy(event, this.props.user);
-              }}
+              onClick={this.handleUserDestroy}
             >
               {"Delete User"}
               <i className="manicon manicon-trashcan" />

@@ -65,15 +65,15 @@ class NotationViewerList extends PureComponent {
     }, 500);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     if (
-      nextProps.annotations !== this.props.annotations ||
-      nextProps.notations !== this.props.notations
+      prevProps.annotations !== this.props.annotations ||
+      prevProps.notations !== this.props.notations
     ) {
-      this.updateEntries(nextProps);
+      this.updateEntries(this.props);
     }
-    if (nextProps.activeAnnotation !== this.props.activeAnnotation) {
-      this.setPreviewEntry(nextProps);
+    if (prevProps.activeAnnotation !== this.props.activeAnnotation) {
+      this.setPreviewEntry(this.props);
     }
   }
 

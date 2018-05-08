@@ -36,9 +36,9 @@ export class PermissionEdit extends PureComponent {
     this.fetchPermission(this.props.match.params.id);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      this.fetchPermission(nextProps.match.params.id);
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.fetchPermission(this.props.match.params.id);
     }
   }
 

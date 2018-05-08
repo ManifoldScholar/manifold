@@ -50,9 +50,9 @@ class PredictiveInput extends PureComponent {
     };
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.value !== this.state.value) {
-      this.debouncedUpdateOptions(nextState.value, nextProps.fetch);
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.value !== this.state.value) {
+      this.debouncedUpdateOptions(this.state.value, this.props.fetch);
     }
   }
 

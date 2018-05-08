@@ -36,24 +36,21 @@ export class ProjectEventsContainer extends PureComponent {
       filter: {}
     };
     this.lastFetchedPage = null;
-    this.pageChangeHandlerCreator = this.pageChangeHandlerCreator.bind(this);
-    this.filterChangeHandler = this.filterChangeHandler.bind(this);
-    this.handleEventDestroy = this.handleEventDestroy.bind(this);
   }
 
   componentDidMount() {
     this.fetchEvents(1);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.maybeReload(nextProps.eventsMeta);
+  componentDidUpdate(prevProps) {
+    this.maybeReload(prevProps.eventsMeta);
   }
 
-  maybeReload(nextMakersMeta) {
+  maybeReload(prevEventMeta) {
     const currentModified = get(this.props, "eventsMeta.modified");
-    const nextModified = get(nextMakersMeta, "modified");
-    if (!nextModified) return;
-    if (currentModified && nextModified) return;
+    const previousModified = get(prevEventMeta, "modified");
+    if (!currentModified) return;
+    if (currentModified && previousModified) return;
     this.fetchEvents(this.lastFetchedPage);
   }
 
@@ -67,13 +64,13 @@ export class ProjectEventsContainer extends PureComponent {
     this.props.dispatch(action);
   }
 
-  filterChangeHandler(filter) {
+  filterChangeHandler = filter => {
     this.setState({ filter }, () => {
       this.fetchEvents(1);
     });
-  }
+  };
 
-  handleEventDestroy(event) {
+  handleEventDestroy = event => {
     const heading = "Are you sure you want to delete this event?";
     const message = "This action cannot be undone.";
     new Promise((resolve, reject) => {
@@ -89,7 +86,7 @@ export class ProjectEventsContainer extends PureComponent {
         this.closeDialog();
       }
     );
-  }
+  };
 
   destroyEvent(event) {
     const call = eventsAPI.destroy(event.id);
@@ -108,11 +105,11 @@ export class ProjectEventsContainer extends PureComponent {
     this.fetchEvents(page);
   }
 
-  pageChangeHandlerCreator(page) {
+  pageChangeHandlerCreator = page => {
     return event => {
       this.handleUsersPageChange(event, page);
     };
-  }
+  };
 
   render() {
     if (!this.props.events) return null;

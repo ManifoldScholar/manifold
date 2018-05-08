@@ -33,7 +33,7 @@ export class LogContainer extends PureComponent {
     this.state = { filter: {} };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.fetchVersions(1);
   }
 

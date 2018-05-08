@@ -27,13 +27,10 @@ export default class FormHigherOrderValidation extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.submitted === true && this.props.submitted === false) {
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevProps.submitted && this.props.submitted) {
       this.validateValue();
     }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
     if (prevState.errors !== this.state.errors) {
       this.reportErrorStateChange();
     }

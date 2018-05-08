@@ -33,13 +33,13 @@ export default function fetchData(WrappedComponent) {
       match: PropTypes.object
     };
 
-    componentWillMount() {
+    componentDidMount() {
       this.fetchData(this.props);
     }
 
-    componentWillReceiveProps(nextProps) {
-      if (this.props.match.url !== nextProps.match.url) {
-        this.fetchData(nextProps);
+    componentDidUpdate(prevProps) {
+      if (prevProps.match.url !== this.props.match.url) {
+        this.fetchData(this.props);
       }
     }
 

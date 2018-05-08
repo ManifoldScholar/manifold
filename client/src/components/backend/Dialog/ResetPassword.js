@@ -49,7 +49,7 @@ class ResetPasswordWrapper extends PureComponent {
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.context.pauseKeyboardEvents) this.context.pauseKeyboardEvents();
     window.addEventListener("keyup", this.handleKeyPress);
   }

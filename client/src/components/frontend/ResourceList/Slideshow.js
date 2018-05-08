@@ -28,6 +28,22 @@ export default class ResourceListSlideshow extends PureComponent {
     hideDownload: false
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextState = {};
+    if (nextProps.pagination.totalCount > 0) {
+      nextState.totalCount = nextProps.pagination.totalCount;
+    }
+
+    const loadedPages = prevState.loadedPages.slice(0);
+    const page = nextProps.pagination.currentPage;
+    if (!includes(loadedPages, page)) {
+      loadedPages.push(page);
+      nextState.loadedPages = loadedPages;
+    }
+
+    return nextState === {} ? null : nextState;
+  }
+
   constructor(props) {
     super();
 
@@ -45,26 +61,16 @@ export default class ResourceListSlideshow extends PureComponent {
       props.pagination
     );
     this.state.totalCount = props.pagination.totalCount || 0;
-
-    this.current = this.current.bind(this);
-    this.updateMap = this.updateMap.bind(this);
-    this.buildNewMap = this.buildNewMap.bind(this);
-    this.handleSlidePrev = this.handleSlidePrev.bind(this);
-    this.handleSlideNext = this.handleSlideNext.bind(this);
-    this.handleUnloadedSlide = this.handleUnloadedSlide.bind(this);
-    this.addLoadedPage = this.addLoadedPage.bind(this);
-    this.updateTotalCount = this.updateTotalCount.bind(this);
-    this.bindKeyboard = this.bindKeyboard.bind(this);
   }
 
   componentDidMount() {
     document.addEventListener("keyup", this.bindKeyboard, false);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.updateMap(nextProps.collectionResources, nextProps.pagination);
-    this.addLoadedPage(nextProps.pagination.currentPage);
-    this.updateTotalCount(nextProps.pagination.totalCount);
+  componentDidUpdate(prevProps) {
+    if (this.props.collectionResources !== prevProps.collectionResources) {
+      this.updateMap(this.props.collectionResources, this.props.pagination);
+    }
   }
 
   componentWillUnmount() {
@@ -82,15 +88,15 @@ export default class ResourceListSlideshow extends PureComponent {
     return <Slide resource={resource} {...this.props.slideOptions} />;
   }
 
-  bindKeyboard(event) {
+  bindKeyboard = event => {
     if (event.keyCode === 39) {
       this.handleSlideNext();
     } else if (event.keyCode === 37) {
       this.handleSlidePrev();
     }
-  }
+  };
 
-  handleUnloadedSlide(position) {
+  handleUnloadedSlide = position => {
     const page = this.positionToPage(position, this.props.pagination.perPage);
     if (!this.isPageLoaded(page)) {
       const fetch = collectionsAPI.collectionResources(
@@ -100,9 +106,9 @@ export default class ResourceListSlideshow extends PureComponent {
       );
       this.props.dispatch(request(fetch, requests.feSlideshow));
     }
-  }
+  };
 
-  handleSlidePrev() {
+  handleSlidePrev = () => {
     if (this.state.slideDirection !== "right") {
       this.setState({
         slideDirection: "right"
@@ -112,9 +118,9 @@ export default class ResourceListSlideshow extends PureComponent {
     let newPosition = this.state.position - 1;
     if (newPosition < 1) newPosition = 1;
     this.updatePosition(newPosition);
-  }
+  };
 
-  handleSlideNext() {
+  handleSlideNext = () => {
     if (this.state.slideDirection !== "left") {
       this.setState({
         slideDirection: "left"
@@ -125,7 +131,7 @@ export default class ResourceListSlideshow extends PureComponent {
     if (newPosition > this.state.totalCount)
       newPosition = this.state.totalCount;
     this.updatePosition(newPosition);
-  }
+  };
 
   isLoaded(position) {
     return this.state.map.hasOwnProperty(position);
@@ -140,8 +146,7 @@ export default class ResourceListSlideshow extends PureComponent {
   }
 
   current() {
-    const collectionResource = this.state.map[this.state.currentPosition];
-    return collectionResource;
+    return this.state.map[this.state.currentPosition];
   }
 
   updateMap(collectionResources, pagination) {
@@ -156,28 +161,13 @@ export default class ResourceListSlideshow extends PureComponent {
     this.setState({ position: newPosition });
   }
 
-  updateTotalCount(totalCount) {
-    if (totalCount > 0) {
-      this.setState({ totalCount });
-    }
-  }
-
   buildNewMap(collectionResources, pagination) {
     const updates = {};
     const start = pagination.perPage * (pagination.currentPage - 1) + 1;
     collectionResources.forEach((collectionResource, index) => {
       updates[start + index] = collectionResource;
     });
-    const map = Object.assign({}, this.state.map, updates);
-    return map;
-  }
-
-  addLoadedPage(page) {
-    const loadedPages = this.state.loadedPages.slice(0);
-    if (!includes(loadedPages, page)) {
-      loadedPages.push(page);
-      this.setState({ loadedPages });
-    }
+    return Object.assign({}, this.state.map, updates);
   }
 
   renderSlideShow() {

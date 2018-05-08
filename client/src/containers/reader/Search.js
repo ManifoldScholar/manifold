@@ -38,7 +38,7 @@ class SearchContainer extends PureComponent {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.searchQueryState()) {
       this.setState(this.props.location.state.searchQueryState, () => {
         this.doSearch();

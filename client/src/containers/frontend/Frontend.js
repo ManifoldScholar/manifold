@@ -55,17 +55,18 @@ export class FrontendContainer extends Component {
     };
   };
 
-  componentWillMount() {
-    this.commonActions = commonActions(this.props.dispatch);
+  constructor(props) {
+    super(props);
+    this.commonActions = commonActions(props.dispatch);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     // The store will be cleared if the user has changed. If this happens, reload content.
     if (
       this.props.authentication.currentUser !==
-      nextProps.authentication.currentUser
+      prevProps.authentication.currentUser
     ) {
-      this.props.fetchData(nextProps);
+      this.props.fetchData(this.props);
     }
   }
 
