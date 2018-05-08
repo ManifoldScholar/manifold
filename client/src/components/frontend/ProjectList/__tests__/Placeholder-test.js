@@ -11,9 +11,9 @@ describe("Frontend.ProjectList.Placeholder component", () => {
   it("renders correctly", () => {
     const component = renderer.create(
       wrapWithRouter(
-      <Provider store={store}>
-        <Placeholder />
-      </Provider>
+        <Provider store={store}>
+          <Placeholder />
+        </Provider>
       )
     );
     let tree = component.toJSON();

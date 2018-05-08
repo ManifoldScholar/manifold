@@ -41,9 +41,9 @@ export class MakersEditContainer extends PureComponent {
     this.fetchMaker(this.props.match.params.id);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      this.fetchMaker(nextProps.match.params.id);
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.fetchMaker(this.props.match.params.id);
     }
   }
 
@@ -57,7 +57,7 @@ export class MakersEditContainer extends PureComponent {
     this.props.dispatch(makerRequest);
   }
 
-  handleMakerDestroy(event, maker) {
+  handleMakerDestroy = () => {
     const heading = "Are you sure you want to delete this maker?";
     const message = "This action cannot be undone.";
     new Promise((resolve, reject) => {
@@ -66,16 +66,17 @@ export class MakersEditContainer extends PureComponent {
       });
     }).then(
       () => {
-        this.destroyMaker(maker);
+        this.destroyMaker();
         this.closeDialog();
       },
       () => {
         this.closeDialog();
       }
     );
-  }
+  };
 
-  destroyMaker(maker) {
+  destroyMaker() {
+    const maker = this.props.maker;
     const call = makersAPI.destroy(maker.id);
     const options = { removes: maker };
     const makerRequest = request(call, requests.beMakerDestroy, options);
@@ -109,9 +110,7 @@ export class MakersEditContainer extends PureComponent {
             <div className="buttons-bare-vertical">
               <button
                 className="button-bare-primary"
-                onClick={event => {
-                  this.handleMakerDestroy(event, maker);
-                }}
+                onClick={this.handleMakerDestroy}
               >
                 {"Delete Maker"}
                 <i className="manicon manicon-trashcan" />

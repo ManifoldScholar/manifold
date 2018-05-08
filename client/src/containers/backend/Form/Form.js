@@ -63,21 +63,14 @@ export class FormContainer extends PureComponent {
       submitKey: null
     };
     this.preventDirtyWarning = false;
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this.maybeOpenSession(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.model !== this.props.model) {
-      this.openSession(nextProps.name, nextProps.model);
-    }
-  }
-
-  componentDidUpdate(prevPropsIgnored, prevStateIgnored) {
-    this.maybeOpenSession(this.props);
+  componentDidUpdate(prevProps, prevStateIgnored) {
+    this.maybeOpenSession(this.props, prevProps);
   }
 
   componentWillUnmount() {
@@ -93,8 +86,11 @@ export class FormContainer extends PureComponent {
     props.dispatch(flush(props.name));
   }
 
-  maybeOpenSession(props) {
-    if (props.session) return;
+  maybeOpenSession(props, prevProps = {}) {
+    if (prevProps.model !== props.model) {
+      return this.openSession(props.name, props.model);
+    }
+    if (props.session) return null;
     const model = props.model || {};
     this.openSession(props.name, model);
   }
@@ -103,7 +99,7 @@ export class FormContainer extends PureComponent {
     this.props.dispatch(open(name, model));
   }
 
-  handleSubmit(event = null) {
+  handleSubmit = (event = null) => {
     if (event) event.preventDefault();
     this.setState({ submitKey: this.createKey() });
     if (this.props.session.source.id) {
@@ -111,7 +107,7 @@ export class FormContainer extends PureComponent {
     } else {
       this.create();
     }
-  }
+  };
 
   createKey() {
     const keyLength = 6;

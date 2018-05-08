@@ -24,10 +24,10 @@ class Analytics extends Component {
     this.initialize(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.initialize(nextProps);
-    if (nextProps.location.key !== this.props.location.key) {
-      this.trackRouteUpdate(nextProps);
+  componentDidUpdate(prevProps) {
+    this.initialize(this.props);
+    if (this.props.location.key !== prevProps.location.key) {
+      this.trackRouteUpdate(this.props);
     }
   }
 

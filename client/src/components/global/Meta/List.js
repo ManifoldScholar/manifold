@@ -24,12 +24,6 @@ export default class List extends Component {
     this.state = this.regenerateState(props.metadata);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.metadata !== nextProps.metadata) {
-      this.setState(this.regenerateState(nextProps.metadata));
-    }
-  }
-
   regenerateState(metadata) {
     const long = {};
     const short = {};

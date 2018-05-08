@@ -156,7 +156,7 @@ export class FollowingContainer extends Component {
     return (
       <HigherOrder.Authorize
         kind="any"
-        redirect={lh.link("frontend")}
+        failureRedirect={lh.link("frontend")}
         {...this.props}
       >
         <div>

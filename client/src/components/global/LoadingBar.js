@@ -12,18 +12,17 @@ export default class LoadingBar extends Component {
     this.state = { status: 0 };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.loader) {
-      if (nextProps.loading === true) {
-        if (this.props.loading === false) {
-          this.loader.className = "loading-bar loading";
-        }
-      } else if (this.props.loading === true) {
-        this.loader.className = "loading-bar complete";
-        this.timer = setTimeout(() => {
-          this.loader.className = "loading-bar default";
-        }, 800);
-      }
+  componentDidUpdate(prevProps) {
+    if (!this.loader) return null;
+    if (prevProps.loading) {
+      if (this.props.loading) return null;
+      this.loader.className = "loading-bar complete";
+      this.timer = setTimeout(() => {
+        this.loader.className = "loading-bar default";
+      }, 800);
+    } else {
+      if (!this.props.loading) return null;
+      this.loader.className = "loading-bar loading";
     }
   }
 

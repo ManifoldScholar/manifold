@@ -13,15 +13,17 @@ export default class ResourceListFilters extends Component {
     initialFilterState: PropTypes.object
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.initialFilterState !== prevState.filters) {
+      return Object.assign({}, nextProps.initialFilterState);
+    }
+
+    return null;
+  }
+
   constructor(props) {
     super(props);
     this.state = this.initialState(props.initialFilterState);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.initialFilterState === this.props.initialFilterState)
-      return null;
-    this.setState(this.initialState(nextProps.initialFilterState));
   }
 
   setFilters = (event, label) => {

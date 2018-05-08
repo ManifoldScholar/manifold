@@ -37,26 +37,21 @@ export default class Text extends Component {
         props.authentication.currentUser
       )
     };
-    this.lockSelection = this.lockSelection.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
+    this.checkRequestAnnotationHash();
     if (
-      nextProps.visibility.visibilityFilters !==
+      prevProps.visibility.visibilityFilters !==
         this.props.visibility.visibilityFilters ||
-      nextProps.annotations !== this.props.annotations
+      prevProps.annotations !== this.props.annotations
     ) {
       const filteredAnnotations = this.filterAnnotations(
-        nextProps.visibility.visibilityFilters,
-        nextProps.annotations,
-        this.props.authentication.currentUser
+        this.props.visibility.visibilityFilters,
+        this.props.annotations
       );
       this.setState({ filteredAnnotations });
     }
-  }
-
-  componentDidUpdate() {
-    this.checkRequestAnnotationHash();
   }
 
   // If the URL points to annotation that's not currently visible (not in
@@ -78,7 +73,7 @@ export default class Text extends Component {
   // Store the current locked selection in the section, which wraps the annotator and
   // the body. This locked selection is then passed down to the body, which needs to
   // render it in the text.
-  lockSelection(raw) {
+  lockSelection = raw => {
     if (!raw) return this.setState({ lockedSelection: null });
     const lockedSelection = {
       id: "selection",
@@ -86,9 +81,9 @@ export default class Text extends Component {
       type: "annotations"
     };
     this.setState({ lockedSelection });
-  }
+  };
 
-  filterAnnotations(visibilityFilters, annotations, currentUserIgnored) {
+  filterAnnotations(visibilityFilters, annotations) {
     if (!visibilityFilters) return annotations;
 
     const filterEntity = (list, format) => {

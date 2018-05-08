@@ -30,13 +30,13 @@ class UpdateFormContainer extends Component {
     this.state = this.initialState(props);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     // If user is newly created, set state after authentication is complete in store
     if (
-      this.props.authentication.authenticating &&
-      !nextProps.authentication.authenticating
+      !this.props.authentication.authenticating &&
+      prevProps.authentication.authenticating
     ) {
-      this.setState(this.initialState(nextProps));
+      this.setState(this.initialState(this.props));
     }
   }
 

@@ -82,15 +82,15 @@ export class HomeContainer extends Component {
     this.commonActions = commonActions(props.dispatch);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     if (
       this.props.authentication.currentUser !==
-      nextProps.authentication.currentUser
+      prevProps.authentication.currentUser
     ) {
-      this.props.fetchData(nextProps);
+      this.props.fetchData(this.props);
     }
-    if (nextProps.location !== this.props.location) {
-      HomeContainer.fetchProjects(nextProps.dispatch, nextProps.location);
+    if (prevProps.location !== this.props.location) {
+      HomeContainer.fetchProjects(this.props.dispatch, this.props.location);
     }
   }
 

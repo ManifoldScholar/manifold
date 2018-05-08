@@ -33,22 +33,16 @@ export class AnnotationList extends PureComponent {
     return Object.assign({}, newState, ownProps);
   };
 
-  constructor(props) {
-    super(props);
-    this.updateAnnotation = this.updateAnnotation.bind(this);
-    this.deleteAnnotation = this.deleteAnnotation.bind(this);
-  }
-
   componentDidMount() {
     this.fetchAnnotations(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     if (
-      nextProps.annotations.length === 0 &&
-      this.props.annotations.length > 0
+      this.props.annotations.length === 0 &&
+      prevProps.annotations.length > 0
     ) {
-      nextProps.closeDrawer();
+      this.props.closeDrawer();
     }
   }
 
@@ -84,20 +78,20 @@ export class AnnotationList extends PureComponent {
     props.dispatch(request(annotationsCall, requests.rDrawerAnnotations));
   }
 
-  updateAnnotation(annotation) {
+  updateAnnotation = annotation => {
     const call = annotationsAPI.update(annotation.id, annotation);
     const res = this.props.dispatch(request(call, requests.rAnnotationUpdate));
     return res.promise;
-  }
+  };
 
-  deleteAnnotation(annotation) {
+  deleteAnnotation = annotation => {
     const call = annotationsAPI.destroy(annotation.id);
     const options = { removes: { type: "annotations", id: annotation.id } };
     const res = this.props.dispatch(
       request(call, requests.rAnnotationDestroy, options)
     );
     return res.promise;
-  }
+  };
 
   render() {
     const grouped = this.annotationsGroupedBySubject();

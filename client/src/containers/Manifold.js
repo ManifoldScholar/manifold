@@ -103,7 +103,8 @@ class ManifoldContainer extends PureComponent {
     this.handleGlobalClick = this.handleGlobalClick.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  // TODO: Refactor to use new lifecycle methods for React 17
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.userJustLoggedOut(
         this.props.authentication,

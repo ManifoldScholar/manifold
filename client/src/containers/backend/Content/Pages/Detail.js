@@ -40,9 +40,9 @@ class PageDetailContainer extends PureComponent {
     if (id !== "new") this.fetchPage(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.id(this.props) !== this.id(nextProps)) {
-      this.fetchPage(nextProps);
+  componentDidUpdate(prevProps) {
+    if (this.id(this.props) !== this.id(prevProps)) {
+      this.fetchPage(this.props);
     }
   }
 
@@ -144,8 +144,7 @@ class PageDetailContainer extends PureComponent {
   }
 
   id(props) {
-    const id = props.match.params.id;
-    return id;
+    return props.match.params.id;
   }
 
   page(props) {

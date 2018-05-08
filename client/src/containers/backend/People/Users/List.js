@@ -38,29 +38,25 @@ export class UsersListContainer extends PureComponent {
     super();
     this.state = { filter: {} };
     this.lastFetchedPage = null;
-    this.usersPageChangeHandlerCreator = this.usersPageChangeHandlerCreator.bind(
-      this
-    );
     this.fetchUsers = debounce(this.fetchUsers.bind(this), 250, {
       leading: false,
       trailing: true
     });
-    this.filterChangeHandler = this.filterChangeHandler.bind(this);
   }
 
   componentDidMount() {
     this.fetchUsers(1);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.maybeReload(nextProps.usersMeta);
+  componentDidUpdate(prevProps) {
+    this.maybeReload(prevProps.usersMeta);
   }
 
-  maybeReload(nextUsersMeta) {
+  maybeReload(prevUsersMeta) {
     const currentModified = get(this.props, "usersMeta.modified");
-    const nextModified = get(nextUsersMeta, "modified");
-    if (!nextModified) return;
-    if (currentModified && nextModified) return;
+    const previousModified = get(prevUsersMeta, "modified");
+    if (!currentModified) return;
+    if (currentModified && previousModified) return;
     this.fetchUsers(this.lastFetchedPage);
   }
 
@@ -74,21 +70,21 @@ export class UsersListContainer extends PureComponent {
     this.props.dispatch(action);
   }
 
-  filterChangeHandler(filter) {
+  filterChangeHandler = filter => {
     this.setState({ filter }, () => {
       this.fetchUsers(1);
     });
-  }
+  };
 
   handleUsersPageChange(event, page) {
     this.fetchUsers(page);
   }
 
-  usersPageChangeHandlerCreator(page) {
+  usersPageChangeHandlerCreator = page => {
     return event => {
       this.handleUsersPageChange(event, page);
     };
-  }
+  };
 
   render() {
     const { match } = this.props;

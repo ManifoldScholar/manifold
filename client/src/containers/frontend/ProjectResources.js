@@ -64,10 +64,10 @@ class ProjectResourcesContainer extends Component {
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.location.search === this.props.location.search) return null;
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.search === this.props.location.search) return null;
     this.setState(
-      this.initialState(queryString.parse(nextProps.location.search)),
+      this.initialState(queryString.parse(this.props.location.search)),
       this.updateResults
     );
   }

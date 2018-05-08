@@ -23,9 +23,9 @@ export class IngestionNewContainer extends PureComponent {
     triggerClose: PropTypes.func
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.ingestion !== nextProps.ingestion) {
-      this.redirectToIngestion(nextProps.ingestion.id);
+  componentDidUpdate(prevProps) {
+    if (this.props.ingestion !== prevProps.ingestion) {
+      this.redirectToIngestion(this.props.ingestion.id);
     }
   }
 

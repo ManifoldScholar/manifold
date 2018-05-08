@@ -33,13 +33,13 @@ export default class NotationViewerGroup extends PureComponent {
     this.state = { defaultActive: null };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.maybeUpdateActiveAnnotation(nextProps);
+  componentDidUpdate(prevProps) {
+    this.maybeUpdateActiveAnnotation(prevProps);
   }
 
-  maybeUpdateActiveAnnotation(nextProps) {
-    if (nextProps.activeAnnotation === this.props.activeAnnotation) return;
-    const { group, activeAnnotation } = nextProps;
+  maybeUpdateActiveAnnotation(prevProps) {
+    if (prevProps.activeAnnotation === this.props.activeAnnotation) return;
+    const { group, activeAnnotation } = this.props;
     const { entries } = group;
     const activeEntry = entries.find(
       e => e.annotation && e.annotation.id === activeAnnotation

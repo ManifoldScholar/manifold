@@ -43,9 +43,9 @@ class FeatureDetailContainer extends PureComponent {
     if (id !== "new") this.fetchFeature(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.id(this.props) !== this.id(nextProps)) {
-      this.fetchFeature(nextProps);
+  componentDidUpdate(prevProps) {
+    if (this.id(this.props) !== this.id(prevProps)) {
+      this.fetchFeature(this.props);
     }
   }
 
@@ -140,8 +140,7 @@ class FeatureDetailContainer extends PureComponent {
   }
 
   id(props) {
-    const id = props.match.params.id;
-    return id;
+    return props.match.params.id;
   }
 
   feature(props) {

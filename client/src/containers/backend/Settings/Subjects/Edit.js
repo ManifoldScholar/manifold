@@ -37,9 +37,9 @@ export class SettingsSubjectsEditContainer extends PureComponent {
     this.fetchSubject(this.props.match.params.id);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      this.fetchSubject(nextProps.match.params.id);
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.fetchSubject(this.props.match.params.id);
     }
   }
 

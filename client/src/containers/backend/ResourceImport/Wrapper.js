@@ -51,7 +51,7 @@ export class ResourceImportWrapper extends PureComponent {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.fetchProject();
   }
 

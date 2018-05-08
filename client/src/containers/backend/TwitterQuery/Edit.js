@@ -36,9 +36,9 @@ export class TwitterQueryEditContainer extends PureComponent {
     this.fetchTwitterQuery(this.props.match.params.id);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      this.fetchTwitterQuery(nextProps.match.params.id);
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.fetchTwitterQuery(this.props.match.params.id);
     }
   }
 

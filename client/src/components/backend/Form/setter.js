@@ -40,22 +40,19 @@ export default function setter(WrappedComponent) {
       }
     };
 
-    componentWillMount() {
+    componentDidMount() {
       if (this.isConnected(this.props) && has(this.props, "value")) {
         this.setValue(this.props.value, this.props);
       }
     }
 
-    componentWillReceiveProps(nextProps) {
-      if (
-        has(nextProps, "value") &&
-        get(nextProps, "value") !== get(this.props, "value")
-      ) {
-        this.setValue(nextProps.value, nextProps);
-      }
-    }
-
     componentDidUpdate(prevProps) {
+      if (
+        has(this.props, "value") &&
+        get(this.props, "value") !== get(prevProps, "value")
+      ) {
+        this.setValue(this.props.value, this.props);
+      }
       if (this.props.afterChange) {
         if (this.dirtyValue(this.props) !== this.dirtyValue(prevProps)) {
           this.props.afterChange(

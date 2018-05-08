@@ -24,13 +24,9 @@ class FormGeneratedPasswordInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      password: "",
+      password: this.initializePassword(),
       showPassword: false
     };
-  }
-
-  componentWillMount() {
-    this.setState({ password: this.initializePassword() });
   }
 
   componentDidMount() {
