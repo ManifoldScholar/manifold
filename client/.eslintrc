@@ -65,6 +65,10 @@
     // Too many false positives from this rule.
     "react/no-unused-prop-types": 0,
 
+    // This appears to be generally accepted as OK
+    "react/no-did-mount-set-state": 0,
+    "react/no-did-update-set-state": 0,
+
     // Rules we may not want to fix
     "no-plusplus": 0,
     "no-bitwise": 0,
