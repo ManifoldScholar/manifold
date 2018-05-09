@@ -20,11 +20,10 @@ export default class ProjectEvents extends Component {
     return (
       <div>
         <HeadContent
-          title={`Manifold Scholarship | ${
-            this.props.project.attributes.title
-          } | Events`}
+          title={`${this.props.project.attributes.title} | Events`}
           description={this.props.project.attributes.description}
           image={this.props.project.attributes.avatarStyles.mediumSquare}
+          appendTitle
         />
         <section className="bg-neutral05">
           <Utility.BackLinkPrimary

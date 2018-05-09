@@ -34,6 +34,27 @@ exports[`Backend Settings General Container renders correctly 1`] = `
         style={Object {}}
       >
         <label
+          className="has-instructions"
+        >
+          Default Page Title
+        </label>
+        <span
+          className="instructions"
+        >
+          This field will be used as the page title on the home page, and will be appended to the page title on core Manifold pages. Defaults to 'Manifold Scholarship'.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Enter page title"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
           className=""
         >
           Default Publisher
