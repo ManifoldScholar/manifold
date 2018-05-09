@@ -7,6 +7,7 @@ import { wrapWithRouter, renderWithRouter } from "test/helpers/routing";
 
 describe("Reader.Toc Component", () => {
   const text = build.entity.text("1");
+  const textWithoutToc = build.entity.text("2", { toc: [] });
   const hideTocMock = jest.fn();
 
   const root = wrapWithRouter(
@@ -15,6 +16,16 @@ describe("Reader.Toc Component", () => {
 
   it("renders correctly", () => {
     const component = renderer.create(root);
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it("renders correctly with empty toc", () => {
+    const component = renderer.create(
+      wrapWithRouter(
+        <Toc text={textWithoutToc} tocDrawerVisible hideTocDrawer={hideTocMock} />
+      )
+    );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

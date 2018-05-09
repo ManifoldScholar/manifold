@@ -12,6 +12,7 @@ import {
 import { HigherOrder } from "containers/global";
 import memoize from "lodash/memoize";
 import classNames from "classnames";
+import isEmpty from "lodash/isEmpty";
 
 export default class Header extends Component {
   static propTypes = {
@@ -64,8 +65,8 @@ export default class Header extends Component {
     };
   });
 
-  renderContentsButton = contents => {
-    if (contents.length <= 0) {
+  renderContentsButton = textAttrs => {
+    if (textAttrs.toc.length <= 0 && isEmpty(textAttrs.metadata)) {
       return null;
     }
 
@@ -104,7 +105,7 @@ export default class Header extends Component {
           <ReturnMenu.Button
             toggleReaderMenu={this.panelToggleHandler("readerReturn")}
           />
-          {this.renderContentsButton(this.props.text.attributes.toc)}
+          {this.renderContentsButton(this.props.text.attributes)}
           {this.props.section ? (
             <TextTitles
               textTitle={this.props.text.attributes.title}

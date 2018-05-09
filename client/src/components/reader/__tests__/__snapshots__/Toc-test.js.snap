@@ -54,3 +54,44 @@ exports[`Reader.Toc Component renders correctly 1`] = `
   </div>
 </span>
 `;
+
+exports[`Reader.Toc Component renders correctly with empty toc 1`] = `
+<span>
+  <div
+    className="toc-drawer"
+  >
+    <div
+      className="edge-lock-scroll"
+    >
+      <div
+        className="drawer-reader left"
+      >
+        <nav
+          className="table-of-contents"
+        >
+          <div
+            className="toc-empty"
+          >
+            This text does not have a table of contents.
+          </div>
+          <hr />
+          <div
+            className="toc-footer"
+          >
+            <button
+              onClick={[Function]}
+            >
+              <h4>
+                <i
+                  className="manicon manicon-i-round"
+                />
+                About This Text
+              </h4>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</span>
+`;

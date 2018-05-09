@@ -100,6 +100,23 @@
     }
   }
 
+  .toc-empty {
+    @include headingSecondary;
+    padding: 50px 40px;
+    margin: 0;
+    color: $neutral50;
+    font-style: italic;
+
+    @include respond($break50) {
+      padding: 60px 85px;
+    }
+  }
+
+  hr {
+    margin: 0;
+    border-top: 1px solid $neutral40;
+  }
+
   .toc-footer {
     @include tocBasePadding();
     display: block;
