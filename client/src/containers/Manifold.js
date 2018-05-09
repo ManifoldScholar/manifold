@@ -157,6 +157,18 @@ class ManifoldContainer extends PureComponent {
     return null;
   }
 
+  headTitleProps(props) {
+    let title = config.app.head.defaultTitle;
+    if (get(props.settings, "attributes.general.headTitle")) {
+      title = get(props.settings, "attributes.general.headTitle");
+    }
+
+    return {
+      titleTemplate: `${title} | %s`,
+      defaultTitle: title
+    };
+  }
+
   renderTypekit() {
     const tkId = get(this.props.settings, "attributes.theme.typekitId");
     const tkEnabled = !!tkId;
@@ -176,7 +188,7 @@ class ManifoldContainer extends PureComponent {
         <div id="global-overlay-container" />
         {this.renderTypekit()}
         {this.props.confirm}
-        <Helmet {...config.app.head} />
+        <Helmet {...config.app.head} {...this.headTitleProps(this.props)} />
         <LoadingBar loading={this.props.loading} />
         <ReactCSSTransitionGroup
           transitionName={"overlay-login"}
