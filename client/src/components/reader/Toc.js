@@ -96,6 +96,24 @@ class Toc extends PureComponent {
     this.props.showMeta();
   };
 
+  renderContents(text) {
+    if (text.attributes.toc.length <= 0) return this.renderEmpty();
+    return (
+      <ul className="toc-list">{text.attributes.toc.map(this.visitNode)}</ul>
+    );
+  }
+
+  renderEmpty() {
+    return (
+      <React.Fragment>
+        <div className="toc-empty">
+          This text does not have a table of contents.
+        </div>
+        <hr />
+      </React.Fragment>
+    );
+  }
+
   render() {
     const text = this.props.text;
     const metadata = text.attributes.metadata;
@@ -115,9 +133,7 @@ class Toc extends PureComponent {
     return (
       <Drawer.Wrapper {...drawerProps}>
         <nav className={tocClass}>
-          <ul className="toc-list">
-            {text.attributes.toc.map(this.visitNode)}
-          </ul>
+          {this.renderContents(text)}
           {!isEmpty(metadata) ? (
             <div className="toc-footer">
               <button onClick={this.showMeta}>
