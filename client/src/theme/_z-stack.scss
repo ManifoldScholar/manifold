@@ -35,24 +35,12 @@
   z-index: 400;
 }
 
-.drawer-reader {
-  z-index: 150;
-}
-
 .dialog-primary {
   z-index: 600;
 }
 
-.notation-preview-footer {
-  z-index: 180;
-}
-
 .reader-footer-menu {
   z-index: 200;
-}
-
-.section-category-label.fixed {
-  z-index: 180;
 }
 
 .header-app {
@@ -73,6 +61,14 @@
 
 .footer-fixed {
   z-index: 200;
+}
+
+.drawer-reader {
+  z-index: 150;
+}
+
+.notation-preview-footer {
+  z-index: 140;
 }
 
 .predictive-list {

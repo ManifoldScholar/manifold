@@ -7,7 +7,7 @@
   border-top: 1px solid $neutral50;
   // This gets overwritten during a show/hide
   transition: margin $duration $timing;
-  
+
   @include respond($break50) {
     bottom: 0;
   }
@@ -69,7 +69,7 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding: 10px $containerPaddingResp;
+      padding: 17px $containerPaddingResp;
 
       .scheme-dark & {
         color: $neutralWhite;
