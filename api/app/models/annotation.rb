@@ -35,6 +35,10 @@ class Annotation < ApplicationRecord
     return all unless formats.present?
     where(format: formats)
   }
+  scope :with_orphaned, lambda { |orphaned|
+    next all if orphaned.blank?
+    where.not(text_section: nil).where(orphaned: orphaned)
+  }
 
   # Constants
   TYPE_ANNOTATION = "annotation".freeze
@@ -78,6 +82,8 @@ class Annotation < ApplicationRecord
   # Delegations
   delegate :text, to: :text_section, allow_nil: true
   delegate :project, to: :text, allow_nil: true
+  delegate :text_node_for, to: :text_section, prefix: true
+  delegate :text_nodes, to: :text_section, prefix: true
 
   # Search
   searchkick(callbacks: :async,
@@ -131,6 +137,14 @@ class Annotation < ApplicationRecord
 
   def author_created
     creator.project_author_of? project
+  end
+
+  def start_text_node
+    text_section_text_node_for start_node
+  end
+
+  def end_text_node
+    text_section_text_node_for end_node
   end
 
 end

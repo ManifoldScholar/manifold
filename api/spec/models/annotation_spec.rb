@@ -109,5 +109,4 @@ RSpec.describe Annotation, type: :model do
       expect(@annotation).to be_valid
     end
   end
-
 end

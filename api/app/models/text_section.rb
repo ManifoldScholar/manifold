@@ -50,6 +50,7 @@ class TextSection < ApplicationRecord
 
   # Callbacks
   after_commit :update_text_index, if: :should_update_text_index?
+  after_commit :adopt_or_orphan_annotations!
   before_destroy :destroy_searchable_nodes!
 
   # Scopes
@@ -160,6 +161,17 @@ class TextSection < ApplicationRecord
     nodes
   end
 
+  def text_node_for(node_uuid)
+    text_nodes.detect { |tn| tn[:node_uuid] == node_uuid }
+  end
+
+  def text_node_range(start_uuid, end_uuid)
+    start_node = text_node_for(start_uuid)
+    end_node = text_node_for(end_uuid)
+    return [] unless start_node.present? && end_node.present?
+    text_nodes[text_nodes.index(start_node)..text_nodes.index(end_node)]
+  end
+
   private
 
   # Checking if ID changed allows us to use this in an after_commit callback
@@ -173,4 +185,8 @@ class TextSection < ApplicationRecord
     TextSectionJobs::DestroySearchableNodes.perform_later ids
   end
 
+  def adopt_or_orphan_annotations!
+    return unless body_json_previously_changed?
+    TextSectionJobs::EnqueueAdoptAnnotationsJob.perform_later annotations.pluck(:id)
+  end
 end

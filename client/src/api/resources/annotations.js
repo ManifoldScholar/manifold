@@ -1,10 +1,13 @@
 export default {
   forSection(sectionId, filter = {}, page = {}) {
+    const filterParams = Object.assign({}, filter);
+    filterParams.orphaned = false;
+
     return {
       endpoint: `/api/v1/text_sections/${sectionId}/relationships/annotations`,
       method: "GET",
       options: {
-        params: { filter, page }
+        params: { filter: filterParams, page }
       }
     };
   },

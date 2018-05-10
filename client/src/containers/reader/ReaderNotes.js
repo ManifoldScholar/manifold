@@ -79,6 +79,7 @@ export class ReaderNotesContainer extends Component {
   setInitialState = props => {
     return {
       filter: {
+        orphaned: false,
         text: props.text.id,
         formats: [...INITIAL_FORMATS]
       }
