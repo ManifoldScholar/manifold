@@ -50,7 +50,7 @@ class TextSection < ApplicationRecord
   validates :kind, inclusion: { in: ALLOWED_KINDS }
 
   # Callbacks
-  after_commit :update_text_index, if: :body_json_changed?
+  after_commit :update_text_index, if: :should_update_text_index?
 
   # Scopes
   scope :in_texts, lambda { |texts|
@@ -119,10 +119,7 @@ class TextSection < ApplicationRecord
   end
 
   def update_text_index
-    SearchableNode.searchkick_index.bulk_delete(searchable_nodes)
-    searchable_nodes.clear
-    SearchableNode.import(properties_for_searchable_nodes)
-    searchable_nodes.reload.reindex
+    TextSectionJobs::ReindexSearchableNodes.perform_later self
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
@@ -161,6 +158,14 @@ class TextSection < ApplicationRecord
       node["children"].each { |child_node| text_nodes(child_node, nodes, node) }
     end
     nodes
+  end
+
+  private
+
+  # Checking if ID changed allows us to use this in an after_commit callback
+  # while still returning true on initial create.
+  def should_update_text_index?
+    id_previously_changed? || body_json_previously_changed?
   end
 
 end

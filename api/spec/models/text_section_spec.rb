@@ -25,6 +25,20 @@ RSpec.describe TextSection, type: :model do
     expect(text_section.ingestion_source).to be ingestion_source
   end
 
+  describe "enqueues a job to reindex searchable nodes" do
+    it "when creating" do
+      expect { FactoryBot.create(:text_section) }.to have_enqueued_job(TextSectionJobs::ReindexSearchableNodes)
+    end
+
+    it "when body_json changes" do
+      text_section = FactoryBot.create(:text_section)
+      expect do
+        text_section.body_json = {"node_uuid" => "A", "tag" => "section", "node_type" => "element" }
+        text_section.save
+      end.to have_enqueued_job(TextSectionJobs::ReindexSearchableNodes)
+    end
+  end
+
   context "collapses body_json into searchable text nodes" do
 
     let(:text_section) {
