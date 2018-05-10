@@ -35,7 +35,7 @@ class User < ApplicationRecord
   # Validation
   validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
   validate :password_not_blank!
-  validates :email, presence: true
+  validates :email, presence: true, case_sensitive: false
   validates :email, uniqueness: true, email_format: { message: "is not valid" }
   validates :pending_role, inclusion: { in: Role::ALLOWED_ROLES }, allow_nil: true
 

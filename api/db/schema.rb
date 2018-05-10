@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329220543) do
+ActiveRecord::Schema.define(version: 20180510161730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
   enable_extension "pg_trgm"
+  enable_extension "citext"
 
   create_table "annotations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "start_node"
@@ -594,7 +595,7 @@ ActiveRecord::Schema.define(version: 20180329220543) do
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "email"
+    t.citext   "email"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "password_digest"
