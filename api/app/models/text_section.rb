@@ -31,8 +31,7 @@ class TextSection < ApplicationRecord
   belongs_to :ingestion_source
   # We intentionally do not destroy annotations because we want to handle the orphans.
   has_many :annotations, dependent: :nullify
-  has_many :searchable_nodes, -> { order(position: :asc) }, dependent: :destroy,
-           inverse_of: :text_section
+  has_many :searchable_nodes, -> { order(position: :asc) }, inverse_of: :text_section
   has_many :resources, through: :annotations
   has_many :collections, through: :annotations
 
@@ -51,6 +50,7 @@ class TextSection < ApplicationRecord
 
   # Callbacks
   after_commit :update_text_index, if: :should_update_text_index?
+  before_destroy :destroy_searchable_nodes!
 
   # Scopes
   scope :in_texts, lambda { |texts|
@@ -166,6 +166,11 @@ class TextSection < ApplicationRecord
   # while still returning true on initial create.
   def should_update_text_index?
     id_previously_changed? || body_json_previously_changed?
+  end
+
+  def destroy_searchable_nodes!
+    ids = searchable_nodes.pluck :id
+    TextSectionJobs::DestroySearchableNodes.perform_later ids
   end
 
 end
