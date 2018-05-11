@@ -39,6 +39,13 @@ RSpec.describe TextSection, type: :model do
     end
   end
 
+  it "adds a job to destroy searchable_nodes on destroy" do
+    text_section = FactoryBot.create(:text_section)
+    expect {
+      text_section.destroy
+    }.to have_enqueued_job TextSectionJobs::DestroySearchableNodes
+  end
+
   context "collapses body_json into searchable text nodes" do
 
     let(:text_section) {
