@@ -21,9 +21,11 @@
         </tr>
         <tr>
           <td align="left">
-            <p>
-              Hi <%= @user.nickname %>,
-            </p>
+            <% if @user %>
+              <p>
+                Hi <%= @user.nickname %>,
+              </p>
+            <% end %>
             <%= yield %>
             <p>
               <%= simple_format @closing %>
