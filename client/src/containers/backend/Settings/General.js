@@ -70,9 +70,22 @@ export class SettingsGeneralContainer extends PureComponent {
             instructions="Enter the text you would like to appear when a page is shared."
           />
           <Form.TextInput
-            label="Contact Link URL"
-            name="attributes[general][contactUrl]"
-            placeholder="Enter a URL"
+            label="Twitter Account"
+            name="attributes[general][twitter]"
+            placeholder="Enter Twitter account"
+            instructions="Enter the twitter account associated with this installation."
+          />
+          <Form.TextInput
+            label="Facebook Page ID"
+            name="attributes[general][facebook]"
+            placeholder="Enter Facebook ID"
+            instructions="Enter an ID for this installation/organization's Facebook page."
+          />
+          <Form.TextInput
+            label="Contact Email"
+            name="attributes[general][contactEmail]"
+            placeholder="Enter an email address"
+            instructions="If present, the footer will contain a link to a contact form that will be delivered to this address."
           />
           <Form.TextInput
             label="Terms and Conditions Link URL"

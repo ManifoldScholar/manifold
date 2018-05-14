@@ -78,13 +78,45 @@ class LayoutFooter extends Component {
     );
   }
 
-  buildContactLink() {
+  buildEmailLink() {
     if (!this.props.settings) return null;
-    if (!this.props.settings.attributes.general.contactUrl) return null;
-    const url = this.props.settings.attributes.general.contactUrl;
+    if (!this.props.settings.attributes.general.contactEmail) return null;
     return (
-      <a target="_blank" href={url} rel="noopener noreferrer">
-        {"Contact"}
+      <Link to={lh.link("frontendContact")}>
+        <i className="manicon manicon-envelope-simple" />
+        {"Email"}
+      </Link>
+    );
+  }
+
+  buildTwitterLink() {
+    if (!this.props.settings) return null;
+    if (!this.props.settings.attributes.general.twitter) return null;
+    const name = this.props.settings.attributes.general.twitter;
+    return (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href={`https://twitter.com/${name}`}
+      >
+        <i className="manicon manicon-twitter" />
+        {"Twitter"}
+      </a>
+    );
+  }
+
+  buildFacebookLink() {
+    if (!this.props.settings) return null;
+    if (!this.props.settings.attributes.general.facebook) return null;
+    const page = this.props.settings.attributes.general.facebook;
+    return (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href={`https://www.facebook.com/${page}`}
+      >
+        <i className="manicon manicon-facebook" />
+        {"Facebook"}
       </a>
     );
   }
@@ -94,18 +126,16 @@ class LayoutFooter extends Component {
     pages.push(this.buildAuthLink());
     pages.push(<Link to={lh.link("frontend")}>{"Projects"}</Link>);
     pages.push(...this.buildContentPages());
-    pages.push(this.buildContactLink());
-    pages.push(
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="http://twitter.com/manifoldscholar"
-      >
-        {"Twitter"}
-      </a>
-    );
-    pages.push(<a href="mailto:webbook@umn.edu">{"Email"}</a>);
     return pages.filter(p => p !== null);
+  }
+
+  buildSocialsArray() {
+    const socials = [];
+    socials.push(this.buildTwitterLink());
+    socials.push(this.buildEmailLink());
+    socials.push(this.buildFacebookLink());
+
+    return socials;
   }
 
   updateSearchWord = event => {
@@ -132,8 +162,17 @@ class LayoutFooter extends Component {
     );
   }
 
+  /* eslint-disable react/no-array-index-key */
+  renderLinkColumn(links) {
+    if (links.length === 0) return null;
+    return <ul>{links.map((link, index) => <li key={index}>{link}</li>)}</ul>;
+  }
+  /* eslint-enable react/no-array-index-key */
+
   render() {
     const chunkedPages = chunk(this.buildPagesArray(), 3);
+    const socialLinks = this.buildSocialsArray();
+
     return (
       <footer className="footer-browse">
         <div className="container">
@@ -156,19 +195,12 @@ class LayoutFooter extends Component {
           </div>
           <nav className="text-nav">
             <ul>
-              {/* eslint-disable react/no-array-index-key */}
               {chunkedPages.map((pageGroup, pageGroupIndex) => (
-                <li key={pageGroupIndex}>
-                  {pageGroup.length > 0 ? (
-                    <ul>
-                      {pageGroup.map((page, pageIndex) => (
-                        <li key={pageIndex}>{page}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </li>
+                /* eslint-disable react/no-array-index-key */
+                <li key={pageGroupIndex}>{this.renderLinkColumn(pageGroup)}</li>
+                /* eslint-enable react/no-array-index-key */
               ))}
-              {/* eslint-enable react/no-array-index-key */}
+              <li>{this.renderLinkColumn(socialLinks)}</li>
             </ul>
           </nav>
 
