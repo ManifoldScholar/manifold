@@ -1,0 +1,27 @@
+module Api
+  module V1
+    class ContactsController < ApplicationController
+
+      def create
+        @outcome = Contacts::SendMessage.run params.dig(:data, :attributes) || {}
+
+        if @outcome.valid?
+          render status: :created
+        else
+          render json: { errors: errors }, status: :unprocessable_entity
+        end
+      end
+
+      private
+
+      def errors
+        errors = []
+        @outcome.errors.each do |attribute, detail|
+          error = { source: { pointer: "data/attributes/#{attribute}" }, detail: detail }
+          errors.push error
+        end
+        errors
+      end
+    end
+  end
+end

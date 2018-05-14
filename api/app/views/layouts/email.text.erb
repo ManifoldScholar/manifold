@@ -1,4 +1,6 @@
-Hi <%= @user.nickname %>,
+<% if @user %>
+  Hi <%= @user.nickname %>,
+<% end %>
 
 <%= yield %>
 
