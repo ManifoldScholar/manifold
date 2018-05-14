@@ -199,10 +199,12 @@ module Validation
           :default_publisher,
           :default_place_of_publication,
           :social_share_message,
-          :contact_url,
+          :contact_email,
           :copyright,
           :terms_url,
-          :head_title
+          :head_title,
+          :twitter,
+          :facebook
         ]
       },
       {
