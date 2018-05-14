@@ -22,9 +22,9 @@ RSpec.describe "Contacts API", type: :request do
   describe "sends the message to installation" do
     context "when params are valid" do
       describe "the response" do
-        it "has a 201 status code" do
+        it "has a 204 status code" do
           post api_v1_contacts_path, headers: headers, params: json_payload(valid_params)
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(204)
         end
 
         # it "enqueues the mailer" do
@@ -46,7 +46,7 @@ RSpec.describe "Contacts API", type: :request do
 
         it "has the field errors" do
           errors = JSON.parse(response.body)["errors"]
-          expect(errors).to eq [{"source"=>{"pointer"=>"data/attributes/message"}, "detail"=>"is required"}]
+          expect(errors).to eq [{"source"=>{"pointer"=>"/data/attributes/message"}, "detail"=>"is required"}]
         end
       end
     end

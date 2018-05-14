@@ -665,6 +665,13 @@ export default () => {
           helper: () => `/search`
         },
         {
+          name: "frontendContact",
+          exact: true,
+          component: Frontend.Contact,
+          path: "/contact",
+          helper: () => "/contact"
+        },
+        {
           exact: true,
           component: Frontend.PasswordReset,
           path: "/reset-password/:resetToken"

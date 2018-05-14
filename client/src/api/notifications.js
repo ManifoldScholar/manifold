@@ -275,5 +275,13 @@ export default {
       body: `${payload.data.attributes.name} has been created.`,
       expiration: defaultExpiration
     };
+  },
+  [r.gContactForm]: payloadIgnored => {
+    return {
+      level: 0,
+      heading: "Success!",
+      body: `Your message has been sent.`,
+      expiration: defaultExpiration
+    };
   }
 };

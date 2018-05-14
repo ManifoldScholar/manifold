@@ -88,6 +88,22 @@
     .bg-neutral05 & {
       background-color: $neutralWhite;
     }
+
+    &.dark-placeholder {
+      color: $neutral80;
+
+      &::placeholder {
+        color: $neutral50;
+      }
+    }
+
+    &.wide {
+      padding: 0.7em 1em;
+    }
+
+    &.large {
+      min-height: 250px;
+    }
   }
 
   // Default button appearance
