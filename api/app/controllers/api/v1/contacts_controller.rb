@@ -6,7 +6,7 @@ module Api
         @outcome = Contacts::SendMessage.run params.dig(:data, :attributes) || {}
 
         if @outcome.valid?
-          render status: :created
+          render status: :no_content
         else
           render json: { errors: errors }, status: :unprocessable_entity
         end
@@ -17,7 +17,8 @@ module Api
       def errors
         errors = []
         @outcome.errors.each do |attribute, detail|
-          error = { source: { pointer: "data/attributes/#{attribute}" }, detail: detail }
+          adjusted = attribute.to_s.camelize(:lower)
+          error = { source: { pointer: "/data/attributes/#{adjusted}" }, detail: detail }
           errors.push error
         end
         errors

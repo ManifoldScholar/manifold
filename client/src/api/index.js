@@ -29,3 +29,4 @@ export requests from "./requests";
 export ApiClient from "./client";
 export notifications from "./notifications";
 export resourceImportsAPI from "./resources/resourceImports";
+export contactsAPI from "./resources/contacts";

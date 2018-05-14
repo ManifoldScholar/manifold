@@ -1,4 +1,5 @@
 import CollectionDetail from "./CollectionDetail";
+import Contact from "./Contact";
 import NotFound from "./NotFound";
 import Featured from "./Featured";
 import Following from "./Following";
@@ -15,6 +16,7 @@ import Search from "./Search";
 
 export {
   CollectionDetail,
+  Contact,
   NotFound,
   Featured,
   Following,
