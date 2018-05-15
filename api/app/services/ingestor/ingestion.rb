@@ -84,6 +84,16 @@ module Ingestor
       File.join(root, rel_path)
     end
 
+    def ingestion_path_for_file(filename, exts)
+      Dir.glob("#{abs(filename)}.{#{exts.join(',')}}").first
+    end
+
+    def rel_path_for_file(filename, exts)
+      file = ingestion_path_for_file filename, exts
+      return nil unless file.present?
+      rel file
+    end
+
     def rel(abs_path)
       Pathname.new(abs_path).relative_path_from(Pathname.new(root)).to_s
     end

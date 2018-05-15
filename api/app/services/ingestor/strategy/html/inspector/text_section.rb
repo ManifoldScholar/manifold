@@ -10,9 +10,10 @@ module Ingestor
 
           DEFAULT_ATTRIBUTES = {}.freeze
 
-          def initialize(rel_path, ingestion)
+          def initialize(rel_path, ingestion, html_inspector)
             @rel_path = rel_path
             @ingestion = ingestion
+            @html_inspector = html_inspector
           end
 
           def source_identifier
@@ -20,7 +21,9 @@ module Ingestor
           end
 
           def name
-            basename.titleize
+            html_inspector.dublin_core_metadata("dc.title", rel_path) ||
+              html_inspector.first_tag_content("title") ||
+              basename.titleize
           end
 
           def basename
@@ -43,21 +46,20 @@ module Ingestor
           end
 
           def create(inspectors, current_sections = nil)
-            sections = inspectors.each_with_index.map do |inspector, index|
+            inspectors.each_with_index.map do |inspector, index|
               extant_section = find_in_set(current_sections, compare_attr(inspector))
               section = extant_section || ingestion.text.text_sections.new
               section.attributes = attributes_with_defaults(inspector, index: index)
               report(section)
               section
             end
-            sections
           end
 
           private
 
           attr_reader :ingestion
 
-          attr_reader :rel_path
+          attr_reader :rel_path, :html_inspector
 
           def report(sections)
             if sections.new_record?
