@@ -57,7 +57,7 @@ module Ingestor
         end
 
         def structure_inspector
-          @inspector
+          Inspector::Structure.new(@inspector)
         end
 
         def start_section_inspector

@@ -16,15 +16,7 @@ module Ingestor
           def nil(*_args)
             nil
           end
-          alias start_section_identifier nil
           alias cover nil
-
-          def empty_collection(*_args)
-            []
-          end
-          alias toc empty_collection
-          alias page_list empty_collection
-          alias landmarks empty_collection
 
           # returns md5 hash of file contents
           def unique_id
@@ -59,6 +51,21 @@ module Ingestor
             dublin_core_metadata("dc.description")
           end
 
+          def start_section_identifier
+            node = index_node_for "[data-start-section]"
+            return nil unless node.present?
+            path = node.attributes["href"]&.value
+            return nil unless path.present?
+            ::Ingestor::Strategy::Html::Inspector::TextSection.new(path,
+                                                                   ingestion,
+                                                                   self)
+                                                              .source_identifier
+          end
+
+          def index_node_for(identifier)
+            index_parsed.at_css(identifier)
+          end
+
           def ingestion_source_inspectors
             ingestion.sources.map do |source|
               ::Ingestor::Strategy::Html::Inspector::IngestionSource
@@ -73,8 +80,8 @@ module Ingestor
           end
 
           def text_section_inspectors
-            [index_path].map do |path|
-              ::Ingestor::Strategy::Html::Inspector::TextSection.new(path, ingestion)
+            ingestion.sources.select { |p| %w(.htm .html).include? File.extname(p) }.map do |path|
+              ::Ingestor::Strategy::Html::Inspector::TextSection.new(path, ingestion, self)
             end
           end
 
@@ -86,28 +93,39 @@ module Ingestor
             ingestion.read(index_path)
           end
 
+          # We look for a summary file, index, or take the first file.
           def index_path
-            html_file = Dir.glob("#{ingestion.root}/index.{htm,html}").first
-            return nil unless html_file
-            ingestion.rel(html_file)
+            ingestion_path_for_file("summary") ||
+              ingestion_path_for_file("index") ||
+              ingestion_path_for_file("*")
+          end
+
+          def index_parsed
+            file_parsed index_path
+          end
+
+          def first_tag_content(tag, path = index_path)
+            return unless index_path.present?
+            file_parsed(path).at("//#{tag}")&.content
+          end
+
+          def dublin_core_metadata(name, path = index_path)
+            return unless index_path.present?
+            file_parsed(path).at("//meta[@name=\"#{name}\"]")&.attribute("content")&.value
           end
 
           protected
 
-          def index_parsed
-            Nokogiri::HTML(ingestion.open(index_path), nil)
+          def ingestion_path_for_file(filename)
+            ingestion.rel_path_for_file filename, %w(htm html)
+          end
+
+          def file_parsed(file_path)
+            Nokogiri::HTML(ingestion.open(file_path), nil)
           end
 
           def first_tag_attribute_value(tag, attribute)
             index_parsed.at("//#{tag}")&.attribute(attribute)&.value
-          end
-
-          def first_tag_content(tag)
-            index_parsed.at("//#{tag}")&.content
-          end
-
-          def dublin_core_metadata(name)
-            index_parsed.at("//meta[@name=\"#{name}\"]")&.attribute("content")&.value
           end
 
           def node_to_style_chunk(node, index)

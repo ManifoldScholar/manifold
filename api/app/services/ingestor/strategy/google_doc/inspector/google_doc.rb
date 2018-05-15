@@ -11,6 +11,13 @@ module Ingestor
             @pointer = pointer
           end
 
+          def empty_collection(*_args)
+            []
+          end
+          alias toc empty_collection
+          alias page_list empty_collection
+          alias landmarks empty_collection
+
           def unique_id
             Digest::MD5.hexdigest(ingestion.source_url)
           end
@@ -23,10 +30,10 @@ module Ingestor
             @pointer.title
           end
 
+          # For google doc, we don't know what the HTML file
+          # will be called, so we just get the first (only) one.
           def index_path
-            html_file = Dir.glob("#{ingestion.root}/*.{htm,html}").first
-            return nil unless html_file
-            ingestion.rel(html_file)
+            ingestion.rel_path_for_file "*", %w(htm html)
           end
         end
       end
