@@ -12,7 +12,8 @@
     left: 10px;
     margin-top: -9px;
     font-size: 17px;
-    color: $accentPrimary;
+    color: $neutral50;
+    transition: color $duration $timing;
   }
 
   input {
@@ -20,6 +21,22 @@
     // Width can be controlled in wrapper
     width: 100%;
     padding-left: 40px;
+    color: $neutral50;
+    border-color: $neutral50;
+    transition: color $duration $timing, border-color $duration $timing;
+
+    &::placeholder {
+      color: $neutral40;
+    }
+
+    &:focus {
+      color: $neutralWhite;
+      border-color: $accentPrimary;
+
+      + .manicon-magnify  {
+        color: $accentPrimary;
+      }
+    }
   }
 }
 

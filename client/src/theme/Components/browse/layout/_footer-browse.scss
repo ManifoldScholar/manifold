@@ -1,63 +1,74 @@
 .footer-browse {
-  padding: 32px 0 57px;
-  background-color: $neutral80;
+  padding-top: 32px;
+  background-color: $neutral75;
 
   @include respond($break50) {
-    padding: 40px 0 65px;
+    padding-top: 40px;
   }
 
   @include respond($break65) {
-    padding: 67px 0 65px;
+    padding-top: 67px;
   }
 
-  // <a>
-  .logo {
-    @include templateHead;
-    display: block;
-    padding-bottom: 28px;
-    font-size: 20px;
-    font-weight: $semibold;
-    line-height: 33px;
-    color: $neutralWhite;
-    text-decoration: none;
-
+  .footer-primary {
+    @include clearfix;
     @include respond($break65) {
-      position: absolute;
-      top: 0;
-      right: 0;
-      font-size: 22px;
+      min-height: 105px;
     }
 
-    .manicon-manifold-logo {
-      display: inline-block;
-      margin-right: 22px;
-      font-size: 33px;
-      color: $accentPrimary;
-      vertical-align: top;
-
+    .flex-row {
       @include respond($break65) {
-        font-size: 45px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .right {
+        @include respond($break65) {
+          order: 2;
+        }
+
+        .search-form {
+          display: inline-block;
+          margin-bottom: 18px;
+
+          @include respond($break65) {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .left {
+        @include respond($break65) {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: space-between;
+        }
+
+        .search-form {
+          @include respond($break65) {
+            margin-top: 65px;
+          }
+        }
       }
     }
+  }
 
-    .text {
-      position: relative;
-      top: -5px;
-      display: inline-block;
+  .press-logo {
+    display: inline-block;
+    padding: 0;
+    margin-bottom: 28px;
+
+    @include respond($break65) {
+      float: right;
+      margin-bottom: 0;
     }
 
-    .small {
-      position: relative;
-      display: block;
-      font-size: 13px;
-      font-weight: normal;
-      line-height: 1em;
+    .logo-image {
+      max-width: 328px;
+      max-height: 202px;
     }
-
-    .underline {
-      text-decoration: underline;
-    }
-
   }
 
   // <nav> wrapper around nested <ul>
@@ -69,8 +80,16 @@
 
     a {
       @include templateHead;
+      display: inline-block;
+      font-size: 17px;
+      font-weight: $medium;
       color: $neutralWhite;
       text-decoration: none;
+      transition: color $duration $timing;
+
+      &:hover {
+        color: $accentPrimary;
+      }
     }
 
     > ul {
@@ -100,26 +119,18 @@
     }
   }
 
+  .search-form {
+    max-width: 250px;
+  }
+
   .footer-secondary {
-    padding-top: 30px;
-
-    @include respond($break50) {
-      padding-top: 60px;
-    }
-
-    @include respond($break65) {
-      padding-top: 90px;
-    }
-
-    .search-button-inline {
-      width: 306px;
-      max-width: 100%;
-    }
+    position: relative;
+    padding-top: 28px;
+    padding-bottom: 28px;
   }
 
   .colophon {
     @include templateCopy;
-    padding-top: 16px;
     font-size: 16px;
     color: $neutral40;
 
@@ -129,6 +140,67 @@
 
     a {
       color: inherit;
+    }
+  }
+
+  .footer-tertiary {
+    display: block;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: $neutral80;
+    transition: background-color $duration $timing;
+
+    &:hover {
+      background-color: $accentPrimary;
+
+      .logo, .logo.dull {
+        color: $neutral80;
+
+        .manicon-manifold-logo {
+          color: $neutralWhite;
+        }
+
+        .text .neutral-text {
+          color: $neutralWhite;
+        }
+      }
+    }
+
+    .logo {
+      @include templateHead;
+      display: block;
+      font-size: 20px;
+      font-weight: $semibold;
+      line-height: 33px;
+      color: $neutralWhite;
+      text-decoration: none;
+      transition: color $duration $timing;
+
+      &.dull {
+        color: $neutral30;
+
+        .manicon-manifold-logo {
+          color: $neutral70;
+        }
+      }
+
+      .manicon-manifold-logo {
+        display: inline-block;
+        margin-right: 22px;
+        font-size: 30px;
+        color: $accentPrimary;
+        vertical-align: top;
+        transition: color $duration $timing;
+      }
+
+      .text {
+        display: inline-block;
+
+        .neutral-text {
+          color: $neutral70;
+          transition: color $duration $timing;
+        }
+      }
     }
   }
 }

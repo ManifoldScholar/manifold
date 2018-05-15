@@ -201,6 +201,7 @@ module Validation
           :social_share_message,
           :contact_email,
           :copyright,
+          :press_site,
           :terms_url,
           :head_title,
           :twitter,
