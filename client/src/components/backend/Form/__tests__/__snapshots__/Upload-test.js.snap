@@ -87,7 +87,13 @@ exports[`Backend.Form.Upload component when the upload input doesn't have a remo
               "backgroundImage": "url(/some/image.jpg)",
             }
           }
-        />
+        >
+          <span
+            className="screen-reader-text"
+          >
+            Upload Preview
+          </span>
+        </div>
         <div
           className="message"
         >
@@ -150,7 +156,13 @@ exports[`Backend.Form.Upload component when the upload input doesn't have set an
               "backgroundImage": "url(/some/image.jpg)",
             }
           }
-        />
+        >
+          <span
+            className="screen-reader-text"
+          >
+            Upload Preview
+          </span>
+        </div>
         <div
           className="message"
         >
@@ -213,7 +225,13 @@ exports[`Backend.Form.Upload component when the upload input has a value renders
               "backgroundImage": "url(/some/image.jpg)",
             }
           }
-        />
+        >
+          <span
+            className="screen-reader-text"
+          >
+            Upload Preview
+          </span>
+        </div>
         <div
           className="message"
         >

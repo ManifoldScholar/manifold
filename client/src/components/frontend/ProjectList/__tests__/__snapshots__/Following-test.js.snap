@@ -130,7 +130,7 @@ exports[`Frontend.ProjectList.Following component renders correctly with no proj
           className="demo-animation"
         >
           <img
-            alt=""
+            alt="No follow demo animation"
             src="/static/images/browse_no-follow-animation.gif"
           />
         </figure>

@@ -156,7 +156,7 @@ export default class FormHasMany extends PureComponent {
                     {this.props.entityAvatarAttribute ? (
                       <figure>
                         {avatar ? (
-                          <img src={avatar} alt="user-avatar" />
+                          <img src={avatar} alt="User Avatar" />
                         ) : (
                           <div className="no-image">
                             <i

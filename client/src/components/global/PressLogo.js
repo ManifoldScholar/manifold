@@ -30,8 +30,14 @@ export default class PressLogo extends Component {
         /* eslint-enable no-console */
       }
     }
+
     return (
-      <img src={this.props.url} alt="Logo" className="image" style={style} />
+      <img
+        src={this.props.url}
+        alt="Publisher Logo: Click to return to the browse page"
+        className="image"
+        style={style}
+      />
     );
   }
 

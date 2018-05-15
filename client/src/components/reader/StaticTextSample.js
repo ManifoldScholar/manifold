@@ -93,7 +93,7 @@ export default class StaticTextSample extends Component {
           <p className="fig">
             <img
               src="/system/resources/attachments/000/000/411/original/fig10.jpg"
-              alt=""
+              alt="Sample"
               style={{ maxWidth: "400px" }}
             />
           </p>

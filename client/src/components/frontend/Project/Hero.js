@@ -131,7 +131,7 @@ export default class ProjectHero extends Component {
     const attr = this.props.project.attributes;
 
     if (attr.coverStyles.medium) {
-      output = <img src={attr.coverStyles.medium} alt="project-cover" />;
+      output = <img src={attr.coverStyles.medium} alt="Project Cover" />;
 
       if (wrapperClass) {
         output = <div className={wrapperClass}>{output}</div>;
