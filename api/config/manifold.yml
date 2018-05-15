@@ -152,14 +152,18 @@ common: &1
       :ingestion:
         :allowed_mime:
           - "text/markdown"
-          - "application/markdown"
           - "text/plain"
+          - "text/html"
+          - "application/markdown"
           - "application/zip"
           - "application/epub+zip"
+          - "application/xhtml+xml"
         :allowed_ext:
+          - !ruby/regexp '/\*/i'
           - !ruby/regexp '/md\Z/i'
           - !ruby/regexp '/zip\Z/i'
           - !ruby/regexp '/epub\Z/i'
+          - !ruby/regexp '/html?\Z/i'
       :image:
         :allowed_mime:
           - !ruby/regexp '/image\/.*/'

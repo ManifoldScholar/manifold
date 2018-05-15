@@ -32,7 +32,7 @@ module Ingestor
           end
 
           def html_doc?
-            !index_path.blank?
+            index_path.present?
           end
 
           def title
@@ -86,9 +86,8 @@ module Ingestor
             ingestion.read(index_path)
           end
 
-          # returns the first html file found in the root
           def index_path
-            html_file = Dir.glob("#{ingestion.root}/*.{htm,html}").first
+            html_file = Dir.glob("#{ingestion.root}/index.{htm,html}").first
             return nil unless html_file
             ingestion.rel(html_file)
           end

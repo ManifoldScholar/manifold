@@ -98,8 +98,8 @@ class IngestionFormUpload extends PureComponent {
                 "attributes[sourceFileName]"
               )}
               set={this.onSourceChange}
-              instructions="Create a zip archive with a .htm or .html file in the root."
-              label="Zip source file"
+              instructions="Upload a single index.htm/html file or create a zip archive with an index.htm/html file in the root."
+              label="HTML or .zip source file"
               accepts="zips"
             />
           </Form.FieldGroup>
