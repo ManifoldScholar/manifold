@@ -381,9 +381,9 @@ exports[`Backend Project General Container renders correctly 1`] = `
                     <span
                       className="screen-reader-text"
                     >
-                      Click to remove 
+                      Click to remove
                       Hip Hop
-                      from the 
+                      from the
                       Subjects
                        list.
                     </span>
@@ -439,6 +439,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
             className="grid"
           >
             <div
+              aria-hidden="true"
               className="section current"
             >
               <span
@@ -457,14 +458,15 @@ exports[`Backend Project General Container renders correctly 1`] = `
               className="section color active"
             >
               <span
+                aria-hidden="true"
                 className="label"
               >
                 Default
               </span>
               <span
-                className="label screen-reader-text"
+                className="screen-reader-text"
               >
-                Select a Project Thumbnail Background Color
+                Select a different background color for the default thumbnail
               </span>
               <div
                 className="color-picker"
@@ -621,9 +623,9 @@ exports[`Backend Project General Container renders correctly 1`] = `
                 Custom
               </span>
               <span
-                className="label screen-reader-text"
+                className="screen-reader-text"
               >
-                Custom Project Thumnail Image
+                Add a Custom Thumbnail Image
               </span>
               <div
                 className="form-input"
@@ -704,7 +706,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           >
                             Upload a file
                           </span>
-                           or 
+                           or
                           <br />
                           drag and drop here
                           <br />

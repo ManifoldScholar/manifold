@@ -99,9 +99,9 @@
     "jsx-a11y/tabindex-no-positive": 2,
 
     // Rules for WCAG related to images
-    "jsx-a11y/accessible-emoji": 0,
-    "jsx-a11y/alt-text": 0,
-    "jsx-a11y/img-redundant-alt": 0,
+    "jsx-a11y/accessible-emoji": 2,
+    "jsx-a11y/alt-text": 2,
+    "jsx-a11y/img-redundant-alt": 2,
 
     // Rules for WCAG we should eventually enable
     "jsx-a11y/href-no-hash": 0,

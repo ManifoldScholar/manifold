@@ -186,7 +186,9 @@ export class FormUpload extends Component {
           style={{
             backgroundImage: `url(${this.previewFile(this.props, this.state)})`
           }}
-        />
+        >
+          <span className="screen-reader-text">Upload Preview</span>
+        </div>
         <div className="message">
           <p className="secondary">
             <span

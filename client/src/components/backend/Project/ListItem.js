@@ -55,7 +55,7 @@ export default class ProjectListItem extends PureComponent {
       return (
         <img
           src={project.attributes.coverStyles.smallPortrait}
-          alt="project-cover"
+          alt="Project Cover"
         />
       );
     }
@@ -63,7 +63,7 @@ export default class ProjectListItem extends PureComponent {
       return (
         <img
           src={project.attributes.avatarStyles.smallSquare}
-          alt="project-cover"
+          alt="Project Cover"
         />
       );
     }

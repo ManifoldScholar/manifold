@@ -27,7 +27,7 @@ export default class NoFollow extends Component {
               <figure className="demo-animation">
                 <img
                   src="/static/images/browse_no-follow-animation.gif"
-                  alt=""
+                  alt="No follow demo animation"
                 />
               </figure>
             </section>

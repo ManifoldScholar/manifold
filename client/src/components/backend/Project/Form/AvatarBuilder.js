@@ -83,11 +83,7 @@ class AvatarBuilder extends Component {
   renderCoverImage(image) {
     if (!image) return null;
     return (
-      <div
-        className="preview"
-        style={{ backgroundImage: `url(${image})` }}
-        alt={`Click to view ${this.props.project.attributes.title}`}
-      />
+      <div className="preview" style={{ backgroundImage: `url(${image})` }} />
     );
   }
 
@@ -137,9 +133,11 @@ class AvatarBuilder extends Component {
               : this.renderPlaceholderImage()}
           </div>
           <div className={pickerClasses}>
-            <span className="label">Default</span>
-            <span className="label screen-reader-text">
-              Select a Project Thumbnail Background Color
+            <span className="label" aria-hidden="true">
+              Default
+            </span>
+            <span className="screen-reader-text">
+              Select a background color for the default thumbnail
             </span>
             <ColorPicker
               onChange={this.onColorChange}
@@ -151,8 +149,8 @@ class AvatarBuilder extends Component {
             <span className="label" aria-hidden="true">
               Custom
             </span>
-            <span className="label screen-reader-text">
-              Custom Project Thumnail Image
+            <span className="screen-reader-text">
+              Add a Custom Thumbnail Image
             </span>
             <Form.Upload
               set={this.onUploadChange}

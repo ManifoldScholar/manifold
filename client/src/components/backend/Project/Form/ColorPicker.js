@@ -63,9 +63,7 @@ export default class ColorPicker extends Component {
               className={inputClassNames}
               key={color.value}
             >
-              <span className="screen-reader-text">
-                {color.label}
-              </span>
+              <span className="screen-reader-text">{color.label}</span>
               <input
                 type="radio"
                 value={color.value}
@@ -86,9 +84,7 @@ export default class ColorPicker extends Component {
   render() {
     return (
       <div className="color-picker">
-        <div className="colors">
-          {this.renderColorPalette()}
-        </div>
+        <div className="colors">{this.renderColorPalette()}</div>
         <div className="default-description" aria-hidden="true">
           Select A Different Background Color
         </div>
