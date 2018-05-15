@@ -83,6 +83,11 @@ RSpec.describe User, type: :model do
     expect(user.has_role? :admin).to eq true
   end
 
+  it "has a case-insensitive email" do
+    user = FactoryBot.create(:user, email: "rowan@woof.dog")
+    expect(User.find_by(email: "ROWAN@WOOF.DOG")).to eq user
+  end
+
   # TODO: Improve this test
   it "preserves permissions when changing role" do
     user = FactoryBot.create(:user, role: Role::ROLE_EDITOR)
