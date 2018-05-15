@@ -7,7 +7,8 @@ export default class HeadContent extends Component {
   static propTypes = {
     title: PropTypes.string,
     image: PropTypes.string,
-    description: PropTypes.string
+    description: PropTypes.string,
+    appendTitle: PropTypes.bool
   };
 
   readPropValue(key) {
@@ -51,6 +52,12 @@ export default class HeadContent extends Component {
 
   render() {
     const meta = this.buildMetaContent();
-    return <Helmet meta={meta} title={this.props.title} />;
+    const props = {
+      meta,
+      title: this.props.title
+    };
+    if (!this.props.appendTitle) props.titleTemplate = null;
+
+    return <Helmet {...props} />;
   }
 }

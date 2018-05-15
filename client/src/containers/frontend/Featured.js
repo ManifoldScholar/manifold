@@ -78,7 +78,7 @@ export class FeaturedContainer extends Component {
           overflowX: "hidden"
         }}
       >
-        <HeadContent title="Manifold Scholarship | Featured" />
+        <HeadContent title="Featured" appendTitle />
         <section className="bg-neutral05">
           <div className="container">
             <header className="section-heading">

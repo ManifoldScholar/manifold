@@ -201,7 +201,8 @@ module Validation
           :social_share_message,
           :contact_url,
           :copyright,
-          :terms_url
+          :terms_url,
+          :head_title
         ]
       },
       {

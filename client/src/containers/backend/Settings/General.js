@@ -43,6 +43,12 @@ export class SettingsGeneralContainer extends PureComponent {
             }
           />
           <Form.TextInput
+            label="Default Page Title"
+            name="attributes[general][headTitle]"
+            placeholder="Enter page title"
+            instructions="This field will be used as the page title on the home page, and will be appended to the page title on core Manifold pages. Defaults to 'Manifold Scholarship'."
+          />
+          <Form.TextInput
             label="Default Publisher"
             name="attributes[general][defaultPublisher]"
             placeholder="Enter Default Publisher"

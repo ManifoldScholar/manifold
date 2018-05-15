@@ -160,7 +160,7 @@ export class FollowingContainer extends Component {
         {...this.props}
       >
         <div>
-          <HeadContent title="Manifold Scholarship | Following" />
+          <HeadContent title="Following" appendTitle />
           <ProjectList.Following
             followedProjects={this.props.followedProjects}
             authentication={this.props.authentication}
