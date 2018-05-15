@@ -40,6 +40,12 @@ export class SettingsThemeContainer extends PureComponent {
             instructions="Logos are constrained at 40px wide with flexible height. For retina displays, upload logos that are 80px wide."
           />
           <Form.TextInput
+            label="Press Website URL"
+            name="attributes[general][pressSite]"
+            placeholder="Enter URL"
+            instructions="If present, the press logo image will link to this URL."
+          />
+          <Form.TextInput
             label="Logo Styles"
             name="attributes[theme][logoStyles]"
             placeholder="Additional Logo CSS"

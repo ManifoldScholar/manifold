@@ -17,7 +17,8 @@ class LayoutFooter extends Component {
       attributes: PropTypes.shape({
         general: PropTypes.object,
         theme: PropTypes.object,
-        oauth: PropTypes.object
+        oauth: PropTypes.object,
+        pressLogoStyles: PropTypes.object
       })
     })
   };
@@ -131,9 +132,13 @@ class LayoutFooter extends Component {
 
   buildSocialsArray() {
     const socials = [];
-    socials.push(this.buildTwitterLink());
-    socials.push(this.buildEmailLink());
-    socials.push(this.buildFacebookLink());
+    const emailLink = this.buildEmailLink();
+    const facebookLink = this.buildFacebookLink();
+    const twitterLink = this.buildTwitterLink();
+
+    if (emailLink) socials.push(emailLink);
+    if (facebookLink) socials.push(facebookLink);
+    if (twitterLink) socials.push(twitterLink);
 
     return socials;
   }
@@ -151,6 +156,10 @@ class LayoutFooter extends Component {
     this.setState({ keyword: "" });
   };
 
+  checkPressLogo(pressLogo) {
+    return pressLogo.original !== null;
+  }
+
   renderCopyright() {
     if (!this.props.settings) return null;
     if (!this.props.settings.attributes.general.copyright) return null;
@@ -163,66 +172,113 @@ class LayoutFooter extends Component {
   }
 
   /* eslint-disable react/no-array-index-key */
-  renderLinkColumn(links) {
+  renderLinkColumn(links, wrapperClass) {
     if (links.length === 0) return null;
-    return <ul>{links.map((link, index) => <li key={index}>{link}</li>)}</ul>;
+    return (
+      <ul className={wrapperClass}>
+        {links.map((link, index) => <li key={index}>{link}</li>)}
+      </ul>
+    );
   }
   /* eslint-enable react/no-array-index-key */
+
+  renderSearchForm() {
+    return (
+      <form className="search-form" onSubmit={this.doSearch}>
+        <div className="search-button-inline">
+          <input
+            type="text"
+            placeholder="Search"
+            value={this.state.keyword}
+            onChange={this.updateSearchWord}
+          />
+          <button className="manicon manicon-magnify">
+            <span className="screen-reader-text">
+              Click to submit search query
+            </span>
+          </button>
+        </div>
+      </form>
+    );
+  }
+
+  renderPressLogo(pressLogo, pressSite) {
+    return (
+      <a
+        href={pressSite}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="press-logo"
+      >
+        <img className="logo-image" alt="Press Site" src={pressLogo.original} />
+      </a>
+    );
+  }
 
   render() {
     const chunkedPages = chunk(this.buildPagesArray(), 3);
     const socialLinks = this.buildSocialsArray();
+    const pressLogo = this.props.settings.attributes.pressLogoStyles;
+    const isPressLogo = this.checkPressLogo(pressLogo);
+    const pressSite = this.props.settings.attributes.general.pressSite;
 
     return (
       <footer className="footer-browse">
-        <div className="container">
-          <div className="rel">
-            <a
-              href="http://manifoldapp.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="logo"
-            >
-              <i className="manicon manicon-manifold-logo" aria-hidden="true" />
-              <span className="text">
-                {"Powered by Manifold"}
-                <span className="small">
-                  Learn more at{" "}
-                  <span className="underline">manifoldapp.org</span>
+        <section className="footer-primary">
+          <div className="container flush">
+            <div className="flex-row">
+              <div className="right">
+                {isPressLogo
+                  ? this.renderPressLogo(pressLogo, pressSite)
+                  : this.renderSearchForm()}
+              </div>
+              <div className="rel left">
+                <nav className="text-nav">
+                  <ul>
+                    {chunkedPages.map(
+                      (pageGroup, pageGroupIndex) => (
+                        /* eslint-disable react/no-array-index-key */
+                        <li key={pageGroupIndex}>
+                          {this.renderLinkColumn(pageGroup, "footer-nav")}
+                        </li>
+                      )
+                      /* eslint-enable react/no-array-index-key */
+                    )}
+                    <li>{this.renderLinkColumn(socialLinks, "social-nav")}</li>
+                  </ul>
+                </nav>
+                {isPressLogo ? this.renderSearchForm() : null}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="footer-secondary">
+          <div className="container flush">
+            <div className="colophon">{this.renderCopyright()}</div>
+          </div>
+        </section>
+        <a
+          href="http://manifoldapp.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-tertiary"
+        >
+          <section>
+            <div className="container flush">
+              <span className={isPressLogo ? "logo dull" : "logo"}>
+                <i
+                  className="manicon manicon-manifold-logo"
+                  aria-hidden="true"
+                />
+                <span className="text">
+                  <span className="neutral-text">Powered by</span>
+                  <span className="white-text"> Manifold</span>
                 </span>
               </span>
-            </a>
-          </div>
-          <nav className="text-nav">
-            <ul>
-              {chunkedPages.map((pageGroup, pageGroupIndex) => (
-                /* eslint-disable react/no-array-index-key */
-                <li key={pageGroupIndex}>{this.renderLinkColumn(pageGroup)}</li>
-                /* eslint-enable react/no-array-index-key */
-              ))}
-              <li>{this.renderLinkColumn(socialLinks)}</li>
-            </ul>
-          </nav>
-
-          <section className="footer-secondary">
-            <form onSubmit={this.doSearch}>
-              <div className="search-button-inline">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  value={this.state.keyword}
-                  onChange={this.updateSearchWord}
-                />
-                <button className="manicon manicon-magnify">
-                  <span className="screen-reader-text">
-                    Click to submit search query
-                  </span>
-                </button>
-              </div>
-            </form>
-            <div className="colophon">{this.renderCopyright()}</div>
+            </div>
           </section>
-        </div>
+        </a>
       </footer>
     );
   }

@@ -1,0 +1,37 @@
+.social-nav {
+  .footer-browse & a {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    &:hover {
+      .manicon {
+        color: $accentPrimary;
+      }
+    }
+  }
+
+  .manicon {
+    color: $neutral50;
+    transition: color $duration $timing;
+
+    &::before {
+      display: inline-block;
+      width: 22px;
+      margin-right: 16px;
+      text-align: center;
+    }
+  }
+
+  .manicon-twitter {
+    font-size: 19px;
+  }
+
+  .manicon-envelope-simple {
+    font-size: 14px;
+  }
+
+  .manicon-facebook {
+    font-size: 22px;
+  }
+}
