@@ -25,8 +25,7 @@ module Ingestor
 
     def update_working_dir(path)
       ensure_root
-      copy(path) if source_dir_exists?(path)
-      extract(path) if extractable?(path)
+      extractable?(path) ? extract(path) : copy(path)
     end
 
     def teardown
@@ -181,8 +180,8 @@ module Ingestor
       File.file?(path)
     end
 
-    def source_dir_exists?(source_dir = source_path)
-      File.directory?(source_dir)
+    def source_exists?(source = source_path)
+      File.exist?(source)
     end
 
     def extractable?(path = source_path)
@@ -190,7 +189,8 @@ module Ingestor
     end
 
     def copy(path = source_path)
-      FileUtils.cp_r(Dir[File.join(path, "*")], root)
+      copy_path = File.file?(path) ? path : File.join(path, "*")
+      FileUtils.cp_r(Dir[copy_path], root)
     end
 
   end

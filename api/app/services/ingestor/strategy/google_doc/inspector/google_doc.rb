@@ -23,6 +23,11 @@ module Ingestor
             @pointer.title
           end
 
+          def index_path
+            html_file = Dir.glob("#{ingestion.root}/*.{htm,html}").first
+            return nil unless html_file
+            ingestion.rel(html_file)
+          end
         end
       end
     end
