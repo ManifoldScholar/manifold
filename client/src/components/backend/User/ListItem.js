@@ -30,13 +30,16 @@ export default class UserListItem extends PureComponent {
         {/* Add .checked to .checkbox-primary to display checked state.
             Disabled until functionality is implemented. */}
         {/* <div className="checkbox-primary">
-          <div className="toggle-indicator">
+          <div className="toggle-indicator" aria-hidden="true">
             <i className="manicon manicon-check" />
           </div>
         </div> */}
         <Link to={lh.link("backendPeopleUser", user.id)}>
           <header>
             <figure className="avatar">
+              <figcaption className="screen-reader-text">
+                User Avatar
+              </figcaption>
               {attr.avatarStyles.smallSquare ? (
                 <div
                   className="image"
@@ -46,7 +49,7 @@ export default class UserListItem extends PureComponent {
                 />
               ) : (
                 <div className="no-image">
-                  <i className="manicon manicon-person" />
+                  <i className="manicon manicon-person" aria-label="hidden" />
                 </div>
               )}
             </figure>

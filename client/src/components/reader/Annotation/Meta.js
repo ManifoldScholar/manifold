@@ -74,12 +74,12 @@ export default class AnnotationDetail extends PureComponent {
                 }}
               >
                 <span className="screen-reader-text">
-                  Profile image for {creator.attributes.fullName}
+                  Avatar for {creator.attributes.fullName}
                 </span>
               </div>
             ) : (
               <div className="no-image">
-                <i className="manicon manicon-person" />
+                <i className="manicon manicon-person" aria-hidden="true" />
               </div>
             )}
           </figure>

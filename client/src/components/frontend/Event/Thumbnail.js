@@ -31,7 +31,7 @@ export default class EventThumbnail extends Component {
       <div className="event-thumbnail-primary">
         <div className="wrapper">
           <figure className="event-type">
-            <i className={iconClass} />
+            <i className={iconClass} aria-hidden="true" />
           </figure>
         </div>
       </div>

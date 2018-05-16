@@ -41,7 +41,7 @@ export default class VisibilityMenuBody extends PureComponent {
 
     return (
       <li key={`visibility-${format}`}>
-        <i className={this.iconClasses(format)} />
+        <i className={this.iconClasses(format)} aria-hidden="true" />
         <span>{label}</span>
         <div className="filters">
           {Object.keys(filterState).map(key => {
@@ -63,7 +63,7 @@ export default class VisibilityMenuBody extends PureComponent {
           checked={filterState[key]}
           onChange={() => this.handleFilterClick(format, key)}
         />
-        <div className="control-indicator">
+        <div className="control-indicator" aria-hidden="true">
           <i className="manicon manicon-check" />
         </div>
         {label}

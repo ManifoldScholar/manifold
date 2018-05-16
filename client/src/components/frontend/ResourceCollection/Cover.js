@@ -26,7 +26,7 @@ export default class ResourceCollectionCover extends Component {
           <div className="title-overlay">
             <h4 className="collection-title">{attr.title}</h4>
             <div className="icon">
-              <i className="manicon manicon-file-box" />
+              <i className="manicon manicon-file-box" aria-hidden="true" />
               <span>{"Collection"}</span>
             </div>
           </div>

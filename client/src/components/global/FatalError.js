@@ -25,7 +25,7 @@ export default class FatalError extends Component {
         <div className="error-wrapper">
           <div className="container">
             <header>
-              <div className="stop-sign">
+              <div className="stop-sign" aria-hidden="true">
                 <i className="manicon manicon-octagon" />
                 <i className="manicon manicon-bang" />
               </div>

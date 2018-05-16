@@ -42,7 +42,7 @@ class ResourceCard extends Component {
     ) : (
       <span>
         {"View"}
-        <i className="manicon manicon-arrow-right" />
+        <i className="manicon manicon-arrow-right" aria-hidden="true" />
       </span>
     );
     return text;
@@ -119,7 +119,7 @@ class ResourceCard extends Component {
         out = (
           <span>
             {"Preview"}
-            <i className="manicon manicon-eye-outline" />
+            <i className="manicon manicon-eye-outline" aria-hidden="true" />
           </span>
         );
         break;
@@ -127,7 +127,7 @@ class ResourceCard extends Component {
         out = (
           <span>
             {"Visit"}
-            <i className="manicon manicon-arrow-right" />
+            <i className="manicon manicon-arrow-right" aria-hidden="true" />
           </span>
         );
         break;
@@ -135,7 +135,7 @@ class ResourceCard extends Component {
         out = (
           <span>
             {"Play"}
-            <i className="manicon manicon-triangle-right" />
+            <i className="manicon manicon-triangle-right" aria-hidden="true" />
           </span>
         );
         break;
@@ -143,7 +143,7 @@ class ResourceCard extends Component {
         out = (
           <span>
             {"Download"}
-            <i className="manicon manicon-arrow-down" />
+            <i className="manicon manicon-arrow-down" aria-hidden="true" />
           </span>
         );
     }
@@ -182,7 +182,7 @@ class ResourceCard extends Component {
               <FormattedDate format="MMMM, YYYY" date={attr.createdAt} />
             </span>
             <div to={this.detailUrl()} className="arrow-link">
-              <i className="manicon manicon-arrow-right" />
+              <i className="manicon manicon-arrow-right" aria-hidden="true" />
             </div>
           </div>
           <Resource.TagList resource={resource} />

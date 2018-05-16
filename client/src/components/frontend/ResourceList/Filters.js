@@ -56,7 +56,8 @@ export default class ResourceListFilters extends Component {
       <form className="form-list-filter" onSubmit={this.updateResults}>
         <div className="search-input">
           <button className="search-button" type="submit">
-            <i className="manicon manicon-magnify" />
+            <span className="screen-reader-text">Search</span>
+            <i className="manicon manicon-magnify" aria-hidden="true" />
           </button>
           <input
             value={this.state.filters.keyword || ""}
@@ -82,7 +83,7 @@ export default class ResourceListFilters extends Component {
                   })
                 : null}
             </select>
-            <i className="manicon manicon-caret-down" />
+            <i className="manicon manicon-caret-down" aria-hidden="true" />
           </div>
           <div className="select">
             <select
@@ -100,7 +101,7 @@ export default class ResourceListFilters extends Component {
                   })
                 : null}
             </select>
-            <i className="manicon manicon-caret-down" />
+            <i className="manicon manicon-caret-down" aria-hidden="true" />
           </div>
           <div className="select">
             <select
@@ -111,7 +112,7 @@ export default class ResourceListFilters extends Component {
               <option value="sort_title ASC">A-Z</option>
               <option value="sort_title DESC">Z-A</option>
             </select>
-            <i className="manicon manicon-caret-down" />
+            <i className="manicon manicon-caret-down" aria-hidden="true" />
           </div>
         </div>
         <button className="reset-button" onClick={this.resetFilters}>

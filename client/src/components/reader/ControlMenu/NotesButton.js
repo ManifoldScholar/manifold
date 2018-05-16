@@ -26,7 +26,7 @@ export default class NotesButton extends PureComponent {
         onClick={this.clickHandler}
         data-id="toggle-notes"
       >
-        <i className="manicon manicon-notepad" />
+        <i className="manicon manicon-notepad" aria-hidden="true" />
         <span className="screen-reader-text">
           Click to hide or show user annotations overlay
         </span>

@@ -113,7 +113,7 @@ export default class AppearanceMenuBody extends Component {
                     this.decrementSizeHandler(event, serifDecreasable);
                   }}
                 >
-                  <i className="manicon manicon-dash" />
+                  <i className="manicon manicon-dash" aria-hidden="true" />
                   <span className="screen-reader-text">
                     {"Click to decrease font-size"}
                   </span>
@@ -124,7 +124,7 @@ export default class AppearanceMenuBody extends Component {
                     this.incrementSizeHandler(event, serifIncreasable);
                   }}
                 >
-                  <i className="manicon manicon-plus" />
+                  <i className="manicon manicon-plus" aria-hidden="true" />
                   <span className="screen-reader-text">
                     {"Click to increase font-size"}
                   </span>
@@ -146,7 +146,7 @@ export default class AppearanceMenuBody extends Component {
                     this.decrementSizeHandler(event, sansDecreasable);
                   }}
                 >
-                  <i className="manicon manicon-dash" />
+                  <i className="manicon manicon-dash" aria-hidden="true" />
                   <span className="screen-reader-text">
                     {"Click to decrease font-size"}
                   </span>
@@ -157,7 +157,7 @@ export default class AppearanceMenuBody extends Component {
                     this.incrementSizeHandler(event, sansIncreasable);
                   }}
                 >
-                  <i className="manicon manicon-plus" />
+                  <i className="manicon manicon-plus" aria-hidden="true" />
                   <span className="screen-reader-text">
                     {"Click to increase font-size"}
                   </span>
@@ -171,7 +171,7 @@ export default class AppearanceMenuBody extends Component {
                 className={lightSchemeButtonClass}
                 onClick={this.handleLightButtonClick}
               >
-                <i className="manicon manicon-check" />
+                <i className="manicon manicon-check" aria-hidden="true" />
                 <span className="screen-reader-text">
                   {"Click to use light color scheme in reader"}
                 </span>
@@ -180,7 +180,7 @@ export default class AppearanceMenuBody extends Component {
                 className={darkSchemeButtonClass}
                 onClick={this.handleDarkButtonClick}
               >
-                <i className="manicon manicon-check" />
+                <i className="manicon manicon-check" aria-hidden="true" />
                 <span className="screen-reader-text">
                   {"Click to use dark color scheme in reader"}
                 </span>
@@ -193,7 +193,7 @@ export default class AppearanceMenuBody extends Component {
                 className="margin-increase"
                 onClick={this.incrementMarginsHandler}
               >
-                <i className="compound-icon">
+                <i className="compound-icon" aria-hidden="true">
                   <i className="manicon manicon-margins-narrow-arrows" />
                   <i className="manicon manicon-margins-narrow-text" />
                 </i>
@@ -205,7 +205,7 @@ export default class AppearanceMenuBody extends Component {
                 className="margin-decrease"
                 onClick={this.decrementMarginsHandler}
               >
-                <i className="compound-icon">
+                <i className="compound-icon" aria-hidden="true">
                   <i className="manicon manicon-margins-wide-arrows" />
                   <i className="manicon manicon-margins-wide-text" />
                 </i>

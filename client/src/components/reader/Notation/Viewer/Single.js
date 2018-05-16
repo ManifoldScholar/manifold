@@ -45,7 +45,8 @@ export default class NotationViewerSingle extends PureComponent {
             onClick={() => actions.startDestroy(entry)}
             className="notation-delete"
           >
-            <i className="manicon manicon-x" />
+            <span className="screen-reader-text">Delete Notation</span>
+            <i className="manicon manicon-x" aria-hidden="true" />
           </button>
         </HigherOrder.Authorize>
         <Link notation={notation} params={params} className={linkClass}>

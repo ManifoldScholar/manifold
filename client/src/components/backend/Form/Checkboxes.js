@@ -55,7 +55,7 @@ class FormCheckboxes extends Component {
                   }
                 }}
               />
-              <span className="toggle-indicator">
+              <span className="toggle-indicator" aria-hidden="true">
                 {checked ? <i className={iconClassNames} /> : null}
               </span>
               <span className="toggle-label">{option.label}</span>

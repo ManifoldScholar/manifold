@@ -46,7 +46,7 @@ export default class Notification extends Component {
             onClick={this.handleClose}
             data-id="close"
           >
-            <i className="manicon manicon-x" />
+            <i className="manicon manicon-x" aria-hidden="true" />
             <span className="screen-reader-text">{"Dismiss"}</span>
           </button>
         </div>

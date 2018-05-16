@@ -38,7 +38,7 @@ export default class ResourceListTotals extends Component {
           )}
         >
           View All Project Resources{" "}
-          <i className="manicon manicon-arrow-right" />
+          <i className="manicon manicon-arrow-right" aria-hidden="true" />
         </Link>
       </div>
     );

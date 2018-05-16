@@ -19,7 +19,7 @@ export default class UtilityBackLinkPrimary extends Component {
     return (
       <Link to={this.props.link} className="back-link-primary full">
         <div className="container flush">
-          <i className="manicon manicon-arrow-left" />
+          <i className="manicon manicon-arrow-left" aria-hidden="true" />
           {this.props.backText}
           <span>{this.props.title}</span>
         </div>

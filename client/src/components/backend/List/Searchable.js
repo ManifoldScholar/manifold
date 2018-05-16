@@ -161,7 +161,7 @@ export class ListSearchable extends PureComponent {
           <option value="">Default</option>
           {options}
         </select>
-        <i className="manicon manicon-caret-down" />
+        <i className="manicon manicon-caret-down" aria-hidden="true" />
       </div>
     );
   }
@@ -177,7 +177,7 @@ export class ListSearchable extends PureComponent {
           <option value="">{`${filter}:`}</option>
           {this.renderFilterOptions(this.props.filterOptions[filter])}
         </select>
-        <i className="manicon manicon-caret-down" />
+        <i className="manicon manicon-caret-down" aria-hidden="true" />
       </div>
     );
   }
@@ -221,7 +221,7 @@ export class ListSearchable extends PureComponent {
         to={buttonProps.path}
         className={`button-icon-secondary ${buttonProps.type || ""}`}
       >
-        <i className={`manicon ${buttonIcon}`} />
+        <i className={`manicon ${buttonIcon}`} aria-hidden="true" />
         {buttonProps.text}
       </Link>
     );
@@ -304,7 +304,7 @@ export class ListSearchable extends PureComponent {
         <form className="form-search-filter" onSubmit={this.handleSubmit}>
           <div className="search">
             <button>
-              <i className="manicon manicon-magnify" />
+              <i className="manicon manicon-magnify" aria-hidden="true" />
               <span className="screen-reader-text">Click to search</span>
             </button>
             <input

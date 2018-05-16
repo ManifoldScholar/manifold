@@ -83,16 +83,18 @@ export class ResourceImportResults extends PureComponent {
 
   renderRowStateIcon(state) {
     if (state === "imported") {
-      return <i className="manicon manicon-check small" />;
+      return <i className="manicon manicon-check small" aria-hidden="true" />;
     }
     if (state === "queued" || state === "importing") {
-      return <i className="manicon manicon-plus small" />;
+      return <i className="manicon manicon-plus small" aria-hidden="true" />;
     }
     if (state === "skipped") {
-      return <i className="manicon manicon-arrow-right small" />;
+      return (
+        <i className="manicon manicon-arrow-right small" aria-hidden="true" />
+      );
     }
     if (state === "failed") {
-      return <i className="manicon manicon-x small" />;
+      return <i className="manicon manicon-x small" aria-hidden="true" />;
     }
   }
 
@@ -175,7 +177,8 @@ export class ResourceImportResults extends PureComponent {
             onClick={this.refreshResults}
             className="button-icon-secondary"
           >
-            <i className="manicon manicon-check small" />Refresh Results
+            <i className="manicon manicon-check small" aria-hidden="true" />
+            Refresh Results
           </button>
         </div>
       </React.Fragment>
@@ -201,10 +204,15 @@ export class ResourceImportResults extends PureComponent {
           }}
         >
           <button onClick={this.startImport} className="button-icon-secondary">
-            <i className="manicon manicon-check small" />Start Import
+            <i className="manicon manicon-check small" aria-hidden="true" />
+            Start Import
           </button>
           <Link to={this.backLinkUrl()} className="button-icon-secondary dull">
-            <i className="manicon manicon-arrow-left small" />Back
+            <i
+              className="manicon manicon-arrow-left small"
+              aria-hidden="true"
+            />
+            Back
           </Link>
         </div>
       </React.Fragment>
@@ -232,13 +240,18 @@ export class ResourceImportResults extends PureComponent {
           }}
         >
           <Link to={this.finishUrl()} className="button-icon-secondary">
-            <i className="manicon manicon-arrow-left small" />Back to Resources
+            <i
+              className="manicon manicon-arrow-left small"
+              aria-hidden="true"
+            />
+            Back to Resources
           </Link>
           <button
             onClick={this.resetImport}
             className="button-icon-secondary dull"
           >
-            <i className="manicon manicon-check small" />Reset Import
+            <i className="manicon manicon-check small" aria-hidden="true" />
+            Reset Import
           </button>
         </div>
       </React.Fragment>

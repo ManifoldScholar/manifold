@@ -98,7 +98,7 @@ export class SettingsSubjectsListContainer extends PureComponent {
       <div>
         <header className="section-heading-secondary">
           <h3>
-            {"Subjects"} <i className="manicon" />
+            {"Subjects"} <i className="manicon" aria-hidden="true" />
           </h3>
         </header>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}

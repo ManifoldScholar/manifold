@@ -22,7 +22,7 @@ export default class StaticForm extends Component {
                 <div className="form-input form-error">
                   <label>Text Entry Field</label>
                   <input type="text" placeholder="Text Entry Field" />
-                  <i className="manicon manicon-stop" />
+                  <i className="manicon manicon-stop" aria-hidden="true" />
                   <span className="form-error-message">something happened</span>
                 </div>
               </div>
@@ -38,7 +38,7 @@ export default class StaticForm extends Component {
                 <div className="form-input">
                   <label>&nbsp;</label>
                   <div className="form-select">
-                    <i className="manicon manicon-caret-down" />
+                    <i className="manicon manicon-caret-down" aria-hidden="true" />
                     <select>
                       <option>Select Dropdown</option>
                       <option>Select an option</option>
@@ -60,7 +60,7 @@ export default class StaticForm extends Component {
               <div className="col-33">
                 <div className="form-callout">
                   <header>
-                    <i className="manicon manicon-bugle" />
+                    <i className="manicon manicon-bugle" aria-hidden="true" />
                     Notifications
                   </header>
 
@@ -96,7 +96,7 @@ export default class StaticForm extends Component {
                   {/* Radio buttons and checkboxes get wrapped in a toggle class */}
                   <label className="form-toggle checkbox">
                     <input type="checkbox" />
-                    <span className="toggle-indicator">
+                    <span className="toggle-indicator" aria-hidden="true">
                       {/*
                         Checkboxes, and radio buttons require a .toggle-indicator in order
                         to display a checkbox or radio button. Additionally, checkboxes
@@ -109,14 +109,14 @@ export default class StaticForm extends Component {
                   </label>
                   <label className="form-toggle checkbox">
                     <input type="checkbox" />
-                    <span className="toggle-indicator">
+                    <span className="toggle-indicator" aria-hidden="true">
                       <i className="manicon manicon-check" />
                     </span>
                     <span className="toggle-label">Checkbox item</span>
                   </label>
                   <label className="form-toggle checkbox">
                     <input type="checkbox" />
-                    <span className="toggle-indicator">
+                    <span className="toggle-indicator" aria-hidden="true">
                       <i className="manicon manicon-check" />
                     </span>
                     <span className="toggle-label">Checkbox item</span>
@@ -127,7 +127,7 @@ export default class StaticForm extends Component {
                   <label>Radios Vertical</label>
                   <label className="form-toggle radio">
                     <input type="radio" name="test" />
-                    <span className="toggle-indicator">
+                    <span className="toggle-indicator" aria-hidden="true">
                       {/* Radio Buttons don't have/require a check icon */}
                     </span>
                     <span className="toggle-label">Radio item</span>
@@ -135,13 +135,13 @@ export default class StaticForm extends Component {
 
                   <label className="form-toggle radio">
                     <input type="radio" name="test" />
-                    <span className="toggle-indicator" />
+                    <span className="toggle-indicator" aria-hidden="true" />
                     <span className="toggle-label">Radio item</span>
                   </label>
 
                   <label className="form-toggle radio">
                     <input type="radio" name="test" />
-                    <span className="toggle-indicator" />
+                    <span className="toggle-indicator" aria-hidden="true" />
                     <span className="toggle-label">Radio item</span>
                   </label>
                 </div>
@@ -155,7 +155,7 @@ export default class StaticForm extends Component {
 
                   <label className="form-toggle checkbox horizontal">
                     <input type="checkbox" />
-                    <span className="toggle-indicator">
+                    <span className="toggle-indicator" aria-hidden="true">
                       <i className="manicon manicon-check" />
                     </span>
                     <span className="toggle-label">Checkbox item</span>
@@ -163,7 +163,7 @@ export default class StaticForm extends Component {
 
                   <label className="form-toggle checkbox horizontal">
                     <input type="checkbox" />
-                    <span className="toggle-indicator">
+                    <span className="toggle-indicator" aria-hidden="true">
                       <i className="manicon manicon-check" />
                     </span>
                     <span className="toggle-label">Checkbox item</span>
@@ -171,7 +171,7 @@ export default class StaticForm extends Component {
 
                   <label className="form-toggle checkbox horizontal">
                     <input type="checkbox" />
-                    <span className="toggle-indicator">
+                    <span className="toggle-indicator" aria-hidden="true">
                       <i className="manicon manicon-check" />
                     </span>
                     <span className="toggle-label">Checkbox item</span>
@@ -183,19 +183,19 @@ export default class StaticForm extends Component {
 
                   <label className="form-toggle radio horizontal">
                     <input type="radio" />
-                    <span className="toggle-indicator" />
+                    <span className="toggle-indicator" aria-hidden="true" />
                     <span className="toggle-label">Checkbox item</span>
                   </label>
 
                   <label className="form-toggle radio horizontal">
                     <input type="radio" />
-                    <span className="toggle-indicator" />
+                    <span className="toggle-indicator" aria-hidden="true" />
                     <span className="toggle-label">Checkbox item</span>
                   </label>
 
                   <label className="form-toggle radio horizontal">
                     <input type="radio" />
-                    <span className="toggle-indicator" />
+                    <span className="toggle-indicator" aria-hidden="true" />
                     <span className="toggle-label">Checkbox item</span>
                   </label>
                 </div>

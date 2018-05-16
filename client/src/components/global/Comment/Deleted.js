@@ -15,7 +15,8 @@ export default class CommentDeleted extends PureComponent {
         <section className="annotation-meta">
           <div>
             <figure className="author-avatar dull">
-              <div className="no-image">
+              <span className="screen-reader-text">Author Avatar</span>
+              <div className="no-image" aria-hidden="true">
                 <i className="manicon manicon-person" />
               </div>
             </figure>

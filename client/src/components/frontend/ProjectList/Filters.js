@@ -67,7 +67,7 @@ export default class ProjectListFilters extends Component {
           {this.featuredOptions()}
           {this.subjectOptions()}
         </select>
-        <i className="manicon manicon-caret-down" />
+        <i className="manicon manicon-caret-down" aria-hidden="true" />
       </div>
     );
   }

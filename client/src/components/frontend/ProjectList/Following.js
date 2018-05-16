@@ -39,7 +39,10 @@ export default class ProjectListFollowing extends Component {
         <div className="container">
           <header className="section-heading">
             <div className="main">
-              <i className="manicon manicon-books-with-glasses" />
+              <i
+                className="manicon manicon-books-with-glasses"
+                aria-hidden="true"
+              />
               <div className="body">
                 <h4 className="title">{"Projects You're Following"}</h4>
               </div>

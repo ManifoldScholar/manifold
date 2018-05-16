@@ -26,7 +26,7 @@ export default class AppearanceMenuButton extends Component {
         onClick={this.clickHandler}
         data-id="toggle-appearance"
       >
-        <i className="manicon manicon-aa" />
+        <i className="manicon manicon-aa" aria-hidden="true" />
         <span className="screen-reader-text">
           {"Click to open reader appearance menu"}
         </span>

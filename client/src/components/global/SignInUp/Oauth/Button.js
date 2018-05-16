@@ -51,7 +51,7 @@ class Button extends Component {
     }
 
     const icon = this.props.hasIcon ? (
-      <i className={`manicon ${this.iconClass}`} />
+      <i className={`manicon ${this.iconClass}`} aria-hidden="true" />
     ) : null;
 
     const label = this.props.children ? (

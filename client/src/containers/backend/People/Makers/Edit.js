@@ -113,7 +113,7 @@ export class MakersEditContainer extends PureComponent {
                 onClick={this.handleMakerDestroy}
               >
                 {"Delete Maker"}
-                <i className="manicon manicon-trashcan" />
+                <i className="manicon manicon-trashcan" aria-hidden="true" />
               </button>
             </div>
           </HigherOrder.Authorize>

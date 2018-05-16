@@ -73,7 +73,8 @@ export class ProjectCollectionsListContainer extends PureComponent {
       <div className="project-resource-list">
         <header className="section-heading-secondary">
           <h3>
-            {"Collections"} <i className="manicon manicon-file-box" />
+            {"Collections"}{" "}
+            <i className="manicon manicon-file-box" aria-hidden="true" />
           </h3>
         </header>
         <List.Searchable

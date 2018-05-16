@@ -139,15 +139,14 @@ export default class DrawerWrapper extends PureComponent {
       <div className="drawer-bar">
         <div className="drawer-title">
           {props.icon ? (
-            <i className={`manicon manicon-${props.icon}`} />
+            <i className={`manicon manicon-${props.icon}`} aria-hidden="true" />
           ) : null}
           {props.title ? props.title : null}
         </div>
         {hasClose ? (
           <div onClick={this.handleLeaveEvent} className="close-button-primary">
             <span className="close-text">Close</span>
-            <i className="manicon manicon-x" />
-            <span className="screen-reader-text">Close Drawer</span>
+            <i className="manicon manicon-x" aria-hidden="true" />
           </div>
         ) : null}
       </div>

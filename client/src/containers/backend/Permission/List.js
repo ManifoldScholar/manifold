@@ -63,7 +63,7 @@ export class PermissionContainer extends PureComponent {
                 to={lh.link(newUrl, entity.id)}
                 className="button-icon-secondary"
               >
-                <i className="manicon manicon-plus" />
+                <i className="manicon manicon-plus" aria-hidden="true" />
                 Add New Permissions
               </Link>
             </div>

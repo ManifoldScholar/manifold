@@ -51,7 +51,7 @@ class FormRadios extends Component {
                   this.props.set(option.value);
                 }}
               />
-              <span className="toggle-indicator">
+              <span className="toggle-indicator" aria-hidden="true">
                 {checked ? <i className={iconClassNames} /> : null}
               </span>
               <span className="toggle-label">{option.label}</span>

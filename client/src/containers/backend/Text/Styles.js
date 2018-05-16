@@ -175,7 +175,13 @@ export default class TextStylesContainer extends PureComponent {
                               this.handleMoveUp(event, stylesheet);
                             }}
                           >
-                            <i className="manicon manicon-arrow-up" />
+                            <span className="screen-reader-text">
+                              Move Stylesheet up
+                            </span>
+                            <i
+                              className="manicon manicon-arrow-up"
+                              aria-hidden="true"
+                            />
                           </button>
                         ) : (
                           <button
@@ -184,7 +190,13 @@ export default class TextStylesContainer extends PureComponent {
                               this.handleMoveUp(event, stylesheet);
                             }}
                           >
-                            <i className="manicon manicon-arrow-up" />
+                            <span className="screen-reader-text">
+                              Move Stylesheet up
+                            </span>
+                            <i
+                              className="manicon manicon-arrow-up"
+                              aria-hidden="true"
+                            />
                           </button>
                         )}
                         {index + 1 < collection.length ? (
@@ -193,7 +205,13 @@ export default class TextStylesContainer extends PureComponent {
                               this.handleMoveDown(event, stylesheet);
                             }}
                           >
-                            <i className="manicon manicon-arrow-down" />
+                            <span className="screen-reader-text">
+                              Move Stylesheet down
+                            </span>
+                            <i
+                              className="manicon manicon-arrow-down"
+                              aria-hidden="true"
+                            />
                           </button>
                         ) : (
                           <button
@@ -202,7 +220,13 @@ export default class TextStylesContainer extends PureComponent {
                             }}
                             style={{ visibility: "hidden" }}
                           >
-                            <i className="manicon manicon-arrow-down" />
+                            <span className="screen-reader-text">
+                              Move Stylesheet down
+                            </span>
+                            <i
+                              className="manicon manicon-arrow-down"
+                              aria-hidden="true"
+                            />
                           </button>
                         )}
                         <button
@@ -210,7 +234,10 @@ export default class TextStylesContainer extends PureComponent {
                             this.handleDestroy(stylesheet);
                           }}
                         >
-                          <i className="manicon manicon-x" />
+                          <span className="screen-reader-text">
+                            Delete Stylesheet
+                          </span>
+                          <i className="manicon manicon-x" aria-hidden="true" />
                         </button>
                       </div>
                     </div>
@@ -226,7 +253,7 @@ export default class TextStylesContainer extends PureComponent {
             className="button-icon-secondary"
             to={lh.link("BackendTextStylesheetNew", text.id)}
           >
-            <i className="manicon manicon-plus" />
+            <i className="manicon manicon-plus" aria-hidden="true" />
             Add a New Stylesheet
           </Link>
         </div>

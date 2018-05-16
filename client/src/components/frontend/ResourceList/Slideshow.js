@@ -242,9 +242,17 @@ export default class ResourceListSlideshow extends PureComponent {
                     onClick={this.handleSlidePrev}
                     disabled={position === 1}
                   >
-                    <i className="manicon manicon-arrow-left" />
-                    <i className="manicon manicon-arrow-round-left" />
-                    <span className="text">Prev</span>
+                    <i
+                      className="manicon manicon-arrow-left"
+                      aria-hidden="true"
+                    />
+                    <i
+                      className="manicon manicon-arrow-round-left"
+                      aria-hidden="true"
+                    />
+                    <span className="text" aria-hidden="true">
+                      Prev
+                    </span>
                     <span className="screen-reader-text">
                       {"Click to load previous slide"}
                     </span>
@@ -254,12 +262,20 @@ export default class ResourceListSlideshow extends PureComponent {
                     onClick={this.handleSlideNext}
                     disabled={position === totalCount}
                   >
-                    <span className="text">Next</span>
+                    <span className="text" aria-hidden="true">
+                      Next
+                    </span>
                     <span className="screen-reader-text">
                       {"Click to load next slide"}
                     </span>
-                    <i className="manicon manicon-arrow-round-right" />
-                    <i className="manicon manicon-arrow-right" />
+                    <i
+                      className="manicon manicon-arrow-round-right"
+                      aria-hidden="true"
+                    />
+                    <i
+                      className="manicon manicon-arrow-right"
+                      aria-hidden="true"
+                    />
                   </button>
                 </div>
               </div>

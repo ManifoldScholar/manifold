@@ -61,7 +61,7 @@ export default class ResourceMeta extends Component {
     return (
       <section className="resource-meta">
         {this.props.showIcon ? (
-          <figure className="resource-type">
+          <figure className="resource-type" aria-hidden="true">
             <i className={`manicon manicon-resource-${attr.kind}`} />
           </figure>
         ) : null}

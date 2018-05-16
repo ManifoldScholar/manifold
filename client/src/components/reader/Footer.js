@@ -24,7 +24,7 @@ export default class Footer extends Component {
         <div className="container">
           <div className="rel">
             <section className="colophon">
-              <i className="manicon manicon-manifold-logo" />
+              <i className="manicon manicon-manifold-logo" aria-hidden="true" />
               {this.getFooterText(this.props.text)}
               <p className="powered-by">
                 Powered by Manifold Scholarship. Learn more at&nbsp;

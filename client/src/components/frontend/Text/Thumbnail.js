@@ -28,14 +28,16 @@ export default class TextThumbnail extends Component {
     return (
       <div className="asset-thumb">
         <div className="asset-link">
-          <Link to={lh.link("reader", this.props.text.attributes.slug)}>
-            <figure className="asset-image">
-              {text.attributes.age <= 30 ? (
-                <i className="manicon manicon-new" />
-              ) : null}
-              <Cover text={this.props.text} />
-            </figure>
-          </Link>
+          <span aria-hidden="true">
+            <Link to={lh.link("reader", this.props.text.attributes.slug)}>
+              <figure className="asset-image">
+                {text.attributes.age <= 30 ? (
+                  <i className="manicon manicon-new" />
+                ) : null}
+                <Cover text={this.props.text} />
+              </figure>
+            </Link>
+          </span>
 
           <div className="asset-description">
             <Link to={lh.link("reader", this.props.text.attributes.slug)}>
@@ -55,25 +57,35 @@ export default class TextThumbnail extends Component {
             <div className="asset-status">
               <ul className="asset-interactions">
                 <li>
-                  <div>
+                  <div aria-hidden="true">
                     <i
                       className="manicon manicon-pencil-simple"
                       style={styles}
+                      aria-hidden="true"
                     />
                     {text.attributes.annotationsCount}
                   </div>
+                  <span className="screen-reader-text">
+                    This text has {text.attributes.annotationsCount} annotations
+                  </span>
                 </li>
                 <li>
-                  <div>
+                  <div aria-hidden="true">
                     <i className="manicon manicon-highlight" style={styles} />
                     {text.attributes.highlightsCount}
                   </div>
+                  <span className="screen-reader-text">
+                    This text has {text.attributes.highlightsCount} highlights
+                  </span>
                 </li>
                 {/* <li>
-                  <div>
+                  <div aria-hidden="true">
                     <i className="manicon manicon-bookmark-outline" style={styles}></i>
                     {text.attributes.bookmarksCount}
                   </div>
+                  <span className="screen-reader-text">
+                    This text has {text.attributes.bookmarksCount} bookmarks
+                  </span>
                 </li> */}
               </ul>
             </div>

@@ -79,7 +79,8 @@ export class DashboardsAuthorContainer extends PureComponent {
             <section>
               <header className="section-heading-secondary">
                 <h3>
-                  {"Projects"} <i className="manicon manicon-stack" />
+                  {"Projects"}{" "}
+                  <i className="manicon manicon-stack" aria-hidden="true" />
                 </h3>
               </header>
               {this.props.projects && this.props.projectsMeta ? (

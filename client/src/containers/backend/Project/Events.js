@@ -123,7 +123,8 @@ export class ProjectEventsContainer extends PureComponent {
         ) : null}
         <header className="section-heading-secondary">
           <h3>
-            {"Events"} <i className="manicon manicon-bugle" />
+            {"Events"}{" "}
+            <i className="manicon manicon-bugle" aria-hidden="true" />
           </h3>
         </header>
         <List.Searchable

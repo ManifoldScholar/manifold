@@ -19,7 +19,7 @@ export default class UtilityBackLinkSecondary extends Component {
     return (
       <div className="container flush">
         <Link to={this.props.link} className="back-link-secondary">
-          <i className="manicon manicon-arrow-round-left" />
+          <i className="manicon manicon-arrow-round-left" aria-hidden="true" />
           <div>
             <span className="back-text">{this.props.backText}</span>
             <span className="project-title">{this.props.title}</span>

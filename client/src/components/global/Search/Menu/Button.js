@@ -24,7 +24,7 @@ export default class SearchMenuButton extends PureComponent {
         onClick={this.clickHandler}
         data-id="toggle-menu"
       >
-        <i className="manicon manicon-magnify" />
+        <i className="manicon manicon-magnify" aria-hidden="true" />
         <span className="screen-reader-text">{"Click to open search"}</span>
       </button>
     );

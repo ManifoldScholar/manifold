@@ -97,8 +97,14 @@ class FormGeneratedPasswordInput extends Component {
         <span
           className="password-visibility-toggle"
           onClick={event => this.togglePassword(event)}
+          role="button"
         >
-          <i className={iconClass} />
+          <i className={iconClass} aria-hidden="true" />
+          {this.state.showPassword ? (
+            <span className="screen-reader-text">hide password</span>
+          ) : (
+            <span className="screen-reader-text">show password</span>
+          )}
         </span>
         {this.renderInput()}
       </GlobalForm.Errorable>

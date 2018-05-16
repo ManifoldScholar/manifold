@@ -69,7 +69,8 @@ class ShareBar extends Component {
               message={this.message()}
               windowOptions={twitterWindowOptions}
             >
-              <i className="manicon manicon-twitter" />
+              <i className="manicon manicon-twitter" aria-hidden="true" />
+              <span className="screen-reader-text">Share on Twitter</span>
             </TwitterButton>
           </li>
           {/* Facebook App Id is required for this component to load */}
@@ -81,7 +82,8 @@ class ShareBar extends Component {
                 message={this.message()}
                 windowOptions={twitterWindowOptions}
               >
-                <i className="manicon manicon-facebook" />
+                <i className="manicon manicon-facebook" aria-hidden="true" />
+                <span className="screen-reader-text">Share on Facebook</span>
               </FacebookButton>
             </li>
           ) : null}

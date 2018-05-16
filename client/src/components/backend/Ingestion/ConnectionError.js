@@ -36,7 +36,7 @@ export default class IngestionConnectionError extends PureComponent {
           onClick={this.props.close}
           className="button-icon-secondary dull"
         >
-          <i className="manicon manicon-x small" />
+          <i className="manicon manicon-x small" aria-hidden="true" />
           Close
         </button>
       </div>

@@ -189,11 +189,19 @@ export class FormUpload extends Component {
         />
         <div className="message">
           <p className="secondary">
-            <a data-id="remove" onClick={this.handleRemove} href="#">
+            <span
+              role="button"
+              data-id="remove"
+              className="fake-link"
+              onClick={this.handleRemove}
+            >
               Remove this image
-            </a>
+            </span>
             <br />
-            or <span className="fake-link">Upload an image</span>
+            or{" "}
+            <span className="fake-link" role="button">
+              Upload an image
+            </span>
           </p>
         </div>
       </div>
@@ -204,16 +212,24 @@ export class FormUpload extends Component {
     return (
       <div className="contents-icon-preview">
         <div className="message" data-id="preview">
-          <i className="manicon manicon-document" />
+          <i className="manicon manicon-document" aria-hidden="true" />
           <p className="primary">
             {this.previewFileName(this.props, this.state)}
           </p>
           <p className="secondary">
-            <a onClick={this.handleRemove} href="#">
+            <span
+              role="button"
+              className="fake-link"
+              onClick={this.handleRemove}
+              href="#"
+            >
               Remove this file
-            </a>
+            </span>
             <br />
-            or <span className="fake-link">Upload a new file</span>
+            or{" "}
+            <span className="fake-link" role="button">
+              Upload a new file
+            </span>
           </p>
         </div>
       </div>
@@ -227,11 +243,13 @@ export class FormUpload extends Component {
         {this.props.placeholder === "cover" ? (
           <GlobalForm.CoverUploadPlaceholder />
         ) : (
-          <i className="manicon manicon-cloud-up" />
+          <i className="manicon manicon-cloud-up" aria-hidden="true" />
         )}
         <div className="message">
           <p className="primary">
-            <span className="fake-link">{"Upload a file"}</span>
+            <span className="fake-link" role="button">
+              {"Upload a file"}
+            </span>
             {" or "}
             <br />
             {"drag and drop here"}

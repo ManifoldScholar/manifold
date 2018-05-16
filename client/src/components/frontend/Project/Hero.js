@@ -160,7 +160,10 @@ export default class ProjectHero extends Component {
                     href={this.socialUrl(service, attr[key])}
                     className={service}
                   >
-                    <i className={`manicon manicon-${service}`} />
+                    <i
+                      className={`manicon manicon-${service}`}
+                      aria-hidden="true"
+                    />
                     <span className="screen-reader-text">{`View this project on ${service}`}</span>
                   </a>
                 </li>
@@ -183,7 +186,7 @@ export default class ProjectHero extends Component {
           to={lh.link("reader", publishedText.attributes.slug)}
           className="button-secondary"
         >
-          <i className="manicon manicon-glasses" />
+          <i className="manicon manicon-glasses" aria-hidden="true" />
           {"Start Reading"}
         </Link>
         {publishedTextTocId ? (
@@ -195,7 +198,7 @@ export default class ProjectHero extends Component {
             )}
             className="button-secondary dull"
           >
-            <i className="manicon manicon-bullet-list" />
+            <i className="manicon manicon-bullet-list" aria-hidden="true" />
             {"View Contents"}
           </Link>
         ) : null}

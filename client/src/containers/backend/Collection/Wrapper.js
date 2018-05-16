@@ -134,13 +134,14 @@ export class CollectionWrapperContainer extends PureComponent {
     return (
       <div>
         <button onClick={this.doPreview} className="button-bare-primary">
-          Preview <i className="manicon manicon-eye-outline" />
+          Preview{" "}
+          <i className="manicon manicon-eye-outline" aria-hidden="true" />
         </button>
         <button
           onClick={this.handleCollectionDestroy}
           className="button-bare-primary"
         >
-          Delete <i className="manicon manicon-trashcan" />
+          Delete <i className="manicon manicon-trashcan" aria-hidden="true" />
         </button>
       </div>
     );

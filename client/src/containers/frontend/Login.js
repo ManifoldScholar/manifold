@@ -30,7 +30,7 @@ export class LoginContainer extends Component {
       <div className="container">
         <header className="rel">
           <h4 className="section-heading">
-            <i className="manicon manicon-lamp" />
+            <i className="manicon manicon-lamp" aria-hidden="true" />
             {"Log In"}
           </h4>
         </header>
@@ -48,7 +48,7 @@ export class LoginContainer extends Component {
       <div className="container">
         <header className="rel">
           <h4 className="section-heading">
-            <i className="manicon manicon-lamp" />
+            <i className="manicon manicon-lamp" aria-hidden="true" />
             {"Log Out"}
           </h4>
         </header>

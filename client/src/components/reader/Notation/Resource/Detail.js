@@ -81,7 +81,8 @@ export default class ResourceDetail extends PureComponent {
             />
             <br />
             <Link to={resourceUrl} className="button-secondary outlined">
-              Visit Resource Page<i className="manicon manicon-arrow-right" />
+              Visit Resource Page
+              <i className="manicon manicon-arrow-right" aria-hidden="true" />
             </Link>
             <br />
             <button
@@ -89,7 +90,8 @@ export default class ResourceDetail extends PureComponent {
               className="button-secondary outlined dull"
               data-id="close-overlay"
             >
-              <i className="manicon manicon-arrow-left" />Return to Reader
+              <i className="manicon manicon-arrow-left" aria-hidden="true" />
+              Return to Reader
             </button>
           </nav>
         </div>
