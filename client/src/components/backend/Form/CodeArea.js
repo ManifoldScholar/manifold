@@ -7,35 +7,31 @@ import isString from "lodash/isString";
 import Loadable from "react-loadable";
 
 /* eslint-disable react/prop-types */
-const loadEditor = props => {
-  const Loaded = Loadable({
-    loader: () =>
-      import(/* webpackChunkName: "ace-editor" */ "./CodeArea/Ace").then(
-        ace => ace.default
-      ),
-    render(Editor) {
-      return (
-        <div className="form-input">
-          <GlobalForm.Errorable
-            className="form-input"
-            name={props.name}
-            errors={props.errors}
-            label={props.label}
-          >
-            <label>{props.label}</label>
-            {isString(props.instructions) ? (
-              <span className="instructions">{props.instructions}</span>
-            ) : null}
-            <Editor {...props} />
-          </GlobalForm.Errorable>
-        </div>
-      );
-    },
-    loading: () => null
-  });
-
-  return <Loaded {...props} />;
-};
+const CodeAreaInput = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "ace-editor" */ "./CodeArea/Ace").then(
+      ace => ace.default
+    ),
+  render(Editor, props) {
+    return (
+      <div className="form-input">
+        <GlobalForm.Errorable
+          className="form-input"
+          name={props.name}
+          errors={props.errors}
+          label={props.label}
+        >
+          <label>{props.label}</label>
+          {isString(props.instructions) ? (
+            <span className="instructions">{props.instructions}</span>
+          ) : null}
+          <Editor {...props} />
+        </GlobalForm.Errorable>
+      </div>
+    );
+  },
+  loading: () => null
+});
 /* eslint-enable react/prop-types */
 
 class FormCodeArea extends Component {
@@ -69,15 +65,15 @@ class FormCodeArea extends Component {
 
   render() {
     const props = {
+      ...this.props,
       theme: "idle_fingers",
       editorProps: { $blockScrolling: true },
       onChange: this.onChange,
       value: this.value,
-      width: "100%",
-      ...this.props
+      width: "100%"
     };
 
-    return loadEditor(props);
+    return <CodeAreaInput {...props} />;
   }
 }
 
