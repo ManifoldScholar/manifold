@@ -433,18 +433,28 @@ export class ProjectTextsContainer extends PureComponent {
               to={lh.link("backendProjectTextsIngestionsNew", project.id)}
               className="button-icon-secondary"
             >
-              <i className="manicon manicon-plus" />
-              <span className="full">Add a new text</span>
-              <span className="abbreviated">Text</span>
+              <span className="screen-reader-text">Add a new text</span>
+              <i className="manicon manicon-plus" aria-hidden="true" />
+              <span className="full" aria-hidden="true">
+                Add a new text
+              </span>
+              <span className="abbreviated" aria-hidden="true">
+                Text
+              </span>
             </Link>
 
             <Link
               to={lh.link("backendProjectCategoriesNew", project.id)}
               className="button-icon-secondary"
             >
-              <i className="manicon manicon-plus" />
-              <span className="full">Create a new category</span>
-              <span className="abbreviated">Category</span>
+              <span className="screen-reader-text">Add a new category</span>
+              <i className="manicon manicon-plus" aria-hidden="true" />
+              <span className="full" aria-hidden="true">
+                Create a new category
+              </span>
+              <span className="abbreviated" aria-hidden="true">
+                Category
+              </span>
             </Link>
           </div>
         </HigherOrder.Authorize>
@@ -481,11 +491,17 @@ export class ProjectTextsContainer extends PureComponent {
                           this.handleCategoryUp(event, category);
                         }}
                       >
-                        <i className="manicon manicon-arrow-up" />
+                        <span className="screen-reader-text">
+                          Move category up
+                        </span>
+                        <i className="manicon manicon-arrow-up" aria-hidden="true"/>
                       </button>
                     ) : (
                       <button style={{ visibility: "hidden" }}>
-                        <i className="manicon manicon-arrow-up" />
+                        <span className="screen-reader-text">
+                          Move category up
+                        </span>
+                        <i className="manicon manicon-arrow-up" aria-hidden="true"/>
                       </button>
                     )}
                     {this.canShowCategoryDown(category) ? (
@@ -494,10 +510,16 @@ export class ProjectTextsContainer extends PureComponent {
                           this.handleCategoryDown(event, category);
                         }}
                       >
+                        <span className="screen-reader-text">
+                          Move category down
+                        </span>
                         <i className="manicon manicon-arrow-down" />
                       </button>
                     ) : (
                       <button style={{ visibility: "hidden" }}>
+                        <span className="screen-reader-text">
+                          Move category down
+                        </span>
                         <i className="manicon manicon-arrow-down" />
                       </button>
                     )}
@@ -506,7 +528,10 @@ export class ProjectTextsContainer extends PureComponent {
                         this.handleCategoryDestroy(event, category);
                       }}
                     >
-                      <i className="manicon manicon-x" />
+                      <i className="manicon manicon-x" aria-hidden="true" />
+                      <span className="screen-reader-text">
+                        Delete Category
+                      </span>
                     </button>
                   </div>
                 </header>

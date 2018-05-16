@@ -104,7 +104,8 @@ export default class Tile extends Component {
             data-id={"destroy"}
             onClick={this.props.destroyCallback}
           >
-            <i className="manicon manicon-trashcan" />
+            <i className="manicon manicon-trashcan" aria-hidden="true" />
+            <span className="screen-reader-text">Delete Event</span>
           </div>
         ) : null}
       </li>

@@ -13,12 +13,36 @@ export default class ColorPicker extends Component {
 
   renderColorPalette() {
     const avatarColors = [
-      { value: "primary", label: "", className: "primary" },
-      { value: "secondary", label: "", className: "secondary" },
-      { value: "tertiary", label: "", className: "tertiary" },
-      { value: "quaternary", label: "", className: "quaternary" },
-      { value: "quinary", label: "", className: "quinary" },
-      { value: "sentary", label: "", className: "sentary" }
+      {
+        value: "primary",
+        label: "Primary Background Color",
+        className: "primary"
+      },
+      {
+        value: "secondary",
+        label: "Secondary Background Color",
+        className: "secondary"
+      },
+      {
+        value: "tertiary",
+        label: "Tertiary Background Color",
+        className: "tertiary"
+      },
+      {
+        value: "quaternary",
+        label: "Quaternary Background Color",
+        className: "quaternary"
+      },
+      {
+        value: "quinary",
+        label: "Quinary Background Color",
+        className: "quinary"
+      },
+      {
+        value: "sentary",
+        label: "Sentary Background Color",
+        className: "sentary"
+      }
     ];
 
     return (
@@ -39,6 +63,9 @@ export default class ColorPicker extends Component {
               className={inputClassNames}
               key={color.value}
             >
+              <span className="screen-reader-text">
+                {color.label}
+              </span>
               <input
                 type="radio"
                 value={color.value}
@@ -46,10 +73,9 @@ export default class ColorPicker extends Component {
                 checked={checked}
                 onChange={() => this.props.onChange(color)}
               />
-              <span className="toggle-indicator">
+              <span className="toggle-indicator" aria-hidden="true">
                 {checked ? <i className="manicon manicon-check" /> : null}
               </span>
-              <span className="toggle-label">{color.label}</span>
             </label>
           );
         })}
@@ -60,8 +86,10 @@ export default class ColorPicker extends Component {
   render() {
     return (
       <div className="color-picker">
-        <div className="colors">{this.renderColorPalette()}</div>
-        <div className="default-description">
+        <div className="colors">
+          {this.renderColorPalette()}
+        </div>
+        <div className="default-description" aria-hidden="true">
           Select A Different Background Color
         </div>
       </div>

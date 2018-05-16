@@ -105,7 +105,9 @@ export class MakersEditContainer extends PureComponent {
           <Dialog.Confirm {...this.state.confirmation} />
         ) : null}
         <header className="drawer-header">
-          <h2 className="heading-quaternary">{attr.fullName}</h2>
+          <h2 className="heading-quaternary">
+            {attr.fullName}
+          </h2>
           <HigherOrder.Authorize entity={maker} ability="delete">
             <div className="buttons-bare-vertical">
               <button
@@ -113,7 +115,7 @@ export class MakersEditContainer extends PureComponent {
                 onClick={this.handleMakerDestroy}
               >
                 {"Delete Maker"}
-                <i className="manicon manicon-trashcan" />
+                <i className="manicon manicon-trashcan" aria-hidden="true"/>
               </button>
             </div>
           </HigherOrder.Authorize>
