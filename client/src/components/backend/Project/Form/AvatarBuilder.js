@@ -98,6 +98,7 @@ class AvatarBuilder extends Component {
         <Project.Placeholder
           color={this.props.getModelValue("attributes[avatarColor]")}
         />
+        <span className="screen-reader-text">Default Project Thumbnail</span>
       </div>
     );
   }
@@ -125,13 +126,21 @@ class AvatarBuilder extends Component {
         <label className="section-header">Project Thumbnail</label>
         <div className="grid">
           <div className="section current">
-            <span className="label">Current</span>
+            <span className="label" aria-hidden="true">
+              Current
+            </span>
+            <span className="label screen-reader-text">
+              Current Project Thumbnail
+            </span>
             {image
               ? this.renderCoverImage(image)
               : this.renderPlaceholderImage()}
           </div>
           <div className={pickerClasses}>
             <span className="label">Default</span>
+            <span className="label screen-reader-text">
+              Select a Project Thumbnail Background Color
+            </span>
             <ColorPicker
               onChange={this.onColorChange}
               value={this.props.getModelValue("attributes[avatarColor]")}
@@ -139,7 +148,12 @@ class AvatarBuilder extends Component {
             />
           </div>
           <div className={uploadClasses}>
-            <span className="label">Custom</span>
+            <span className="label" aria-hidden="true">
+              Custom
+            </span>
+            <span className="label screen-reader-text">
+              Custom Project Thumnail Image
+            </span>
             <Form.Upload
               set={this.onUploadChange}
               initialValue={this.props.getModelValue(

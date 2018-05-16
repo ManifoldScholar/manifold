@@ -164,7 +164,7 @@ export class CommentEditor extends PureComponent {
       <div className="comment-editor">
         {this.props.label ? (
           <h3 className="editor-label">
-            <i className="manicon manicon-pencil" />
+            <i className="manicon manicon-pencil" aria-hidden="true" />
             {this.props.label}
           </h3>
         ) : null}
@@ -202,7 +202,10 @@ export class CommentEditor extends PureComponent {
                     className="button-secondary"
                     disabled={!this.state.body}
                   >
-                    <i className="manicon manicon-word-bubble-lines" />
+                    <i
+                      className="manicon manicon-word-bubble-lines"
+                      aria-hidden="true"
+                    />
                     {this.buttonLabel(this.props)}
                   </button>
                 </div>

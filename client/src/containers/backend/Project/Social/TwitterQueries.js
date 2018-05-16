@@ -80,7 +80,7 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
                 )}
                 className="button-icon-secondary"
               >
-                <i className="manicon manicon-plus" />
+                <i className="manicon manicon-plus" aria-hidden="true" />
                 Add a New Twitter Query
               </Link>
             </div>

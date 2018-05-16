@@ -25,7 +25,7 @@ export default class ResourceListSlideFigureLoading extends Component {
           style={{ backgroundImage: "url(/static/images/resource-splash.png)" }}
         >
           <div className="resource-info">
-            <i className={`manicon manicon-resource-file`} />
+            <i className={`manicon manicon-resource-file`} aria-hidden="true" />
             <span className="resource-type">{"loading"}</span>
             <span className="resource-date">{"loading"}</span>
           </div>

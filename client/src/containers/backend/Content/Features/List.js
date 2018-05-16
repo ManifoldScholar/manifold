@@ -180,7 +180,13 @@ class ContentFeaturesList extends PureComponent {
                                 this.handleMoveUp(event, feature);
                               }}
                             >
-                              <i className="manicon manicon-arrow-up" />
+                              <span className="screen-reader-text">
+                                Click to move feature up
+                              </span>
+                              <i
+                                className="manicon manicon-arrow-up"
+                                aria-hidden="true"
+                              />
                             </button>
                           ) : (
                             <button
@@ -189,7 +195,13 @@ class ContentFeaturesList extends PureComponent {
                                 this.handleMoveUp(event, feature);
                               }}
                             >
-                              <i className="manicon manicon-arrow-up" />
+                              <span className="screen-reader-text">
+                                Click to move feature up
+                              </span>
+                              <i
+                                className="manicon manicon-arrow-up"
+                                aria-hidden="true"
+                              />
                             </button>
                           )}
                           {index + 1 < collection.length ? (
@@ -198,7 +210,13 @@ class ContentFeaturesList extends PureComponent {
                                 this.handleMoveDown(event, feature);
                               }}
                             >
-                              <i className="manicon manicon-arrow-down" />
+                              <span className="screen-reader-text">
+                                Click to move feature down
+                              </span>
+                              <i
+                                className="manicon manicon-arrow-down"
+                                aria-hidden="true"
+                              />
                             </button>
                           ) : (
                             <button
@@ -207,7 +225,13 @@ class ContentFeaturesList extends PureComponent {
                               }}
                               style={{ visibility: "hidden" }}
                             >
-                              <i className="manicon manicon-arrow-down" />
+                              <span className="screen-reader-text">
+                                Click to move feature down
+                              </span>
+                              <i
+                                className="manicon manicon-arrow-down"
+                                aria-hidden="true"
+                              />
                             </button>
                           )}
                           <HigherOrder.Authorize
@@ -219,7 +243,11 @@ class ContentFeaturesList extends PureComponent {
                                 this.handleDestroy(feature);
                               }}
                             >
-                              <i className="manicon manicon-x" />
+                              <span>Delete Feature</span>
+                              <i
+                                className="manicon manicon-x"
+                                aria-hidden="true"
+                              />
                             </button>
                           </HigherOrder.Authorize>
                         </div>

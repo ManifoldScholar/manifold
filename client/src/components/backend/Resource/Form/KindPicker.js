@@ -32,7 +32,16 @@ class KindPicker extends PureComponent {
                 className={buttonClass}
               >
                 <figure>
-                  <figcaption>{kind}</figcaption>
+                  <figcaption>
+                    <span>
+                      {kind}
+                      {safeKind === this.props.getModelValue("attributes[kind]")
+                        ? <span className="screen-reader-text">
+                            Selected Kind
+                          </span>
+                        : null}
+                    </span>
+                  </figcaption>
                   <div className={`resource-icon ${safeKind}`}>
                     <Resource.Icon.Composer kind={safeKind} />
                   </div>
@@ -70,7 +79,7 @@ class KindPicker extends PureComponent {
           <label>Kind</label>
           <div className={selectClass}>
             <div className="form-select">
-              <i className="manicon manicon-caret-down" />
+              <i className="manicon manicon-caret-down" aria-hidden="true" />
               <select
                 onChange={event => {
                   this.props.set(event.target.value);

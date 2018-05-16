@@ -99,10 +99,12 @@ export class ResourceImportMap extends PureComponent {
               to={this.backLinkUrl()}
               className="button-icon-secondary dull"
             >
-              <i className="manicon manicon-x small" />Back
+              <i className="manicon manicon-x small" aria-hidden="true" />
+              Back
             </Link>
             <button type="submit" className="button-icon-secondary">
-              <i className="manicon manicon-check small" />Continue
+              <i className="manicon manicon-check small" aria-hidden="true" />
+              Continue
             </button>
           </div>
         </FormContainer.Form>

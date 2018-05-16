@@ -49,6 +49,9 @@ export default class PermissionListItem extends PureComponent {
         <Link to={lh.link(this.props.linkName, resource.id, entity.id)}>
           <header>
             <figure className="avatar">
+              <figcaption className="screen-reader-text">
+                User Avatar
+              </figcaption>
               {user.attributes.avatarStyles.smallSquare ? (
                 <div
                   className="image"
@@ -60,7 +63,7 @@ export default class PermissionListItem extends PureComponent {
                 />
               ) : (
                 <div className="no-image">
-                  <i className="manicon manicon-person" />
+                  <i className="manicon manicon-person" aria-hidden="true" />
                 </div>
               )}
             </figure>

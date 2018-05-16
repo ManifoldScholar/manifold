@@ -34,13 +34,19 @@ export default class UserMenuBody extends Component {
         <ul>
           <li>
             <button onClick={this.handleProfileClick}>
-              <i className="manicon manicon-person-pencil-simple" />
+              <i
+                className="manicon manicon-person-pencil-simple"
+                aria-hidden="true"
+              />
               {"Edit Profile"}
             </button>
           </li>
           <li>
             <button onClick={this.logout}>
-              <i className="manicon manicon-circle-arrow-out-right" />
+              <i
+                className="manicon manicon-circle-arrow-out-right"
+                aria-hidden="true"
+              />
               {"Logout"}
             </button>
           </li>

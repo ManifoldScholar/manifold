@@ -5,7 +5,7 @@ export default class Notifications extends Component {
   static displayName = "Dashboard.Notifications";
 
   static propTypes = {};
-  /* eslint-disable jsx-a11y/href-no-hash */
+
   render() {
     return (
       <nav className="notification-list-block">
@@ -17,7 +17,9 @@ export default class Notifications extends Component {
                 {"work in progress!"}
               </a>
             </p>
-            <button className="manicon manicon-x" />
+            <button className="manicon manicon-x">
+              <span className="screen-reader-text">Close Notification</span>
+            </button>
           </li>
           <li>
             <p>
@@ -26,7 +28,9 @@ export default class Notifications extends Component {
                 {"placeholders"}
               </a>
             </p>
-            <button className="manicon manicon-x" />
+            <button className="manicon manicon-x">
+              <span className="screen-reader-text">Close Notification</span>
+            </button>
           </li>
         </ul>
         <a href="#" className="button-bare-primary">
@@ -35,5 +39,4 @@ export default class Notifications extends Component {
       </nav>
     );
   }
-  /* eslint-enable jsx-a11y/href-no-hash */
 }

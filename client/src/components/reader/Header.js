@@ -81,7 +81,7 @@ export default class Header extends Component {
         onClick={this.handleContentsButtonClick}
       >
         {"Contents"}
-        <i className="manicon manicon-caret-down" />
+        <i className="manicon manicon-caret-down" aria-hidden="true" />
       </button>
     );
   };

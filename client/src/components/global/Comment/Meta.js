@@ -33,12 +33,15 @@ export default class CommentMeta extends PureComponent {
                 }}
               >
                 <span className="screen-reader-text">
-                  Profile image for {creator.attributes.fullName}
+                  Avatar for {creator.attributes.fullName}
                 </span>
               </div>
             ) : (
               <div className="no-image">
-                <i className="manicon manicon-person" />
+                <span className="screen-reader-text">
+                  Avatar for {creator.attributes.fullName}
+                </span>
+                <i className="manicon manicon-person" aria-hidden="true" />
               </div>
             )}
           </figure>
@@ -46,7 +49,10 @@ export default class CommentMeta extends PureComponent {
             {creator.attributes.fullName}
             {isObject(parent) ? (
               <span className="reply-to">
-                <i className="manicon manicon-arrow-curved-right" />
+                <i
+                  className="manicon manicon-arrow-curved-right"
+                  aria-hidden="true"
+                />
                 Reply to {parent.relationships.creator.attributes.fullName}
               </span>
             ) : null}

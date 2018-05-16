@@ -21,7 +21,7 @@ export default class ProjectResources extends Component {
         <div className="container">
           <header className="section-heading">
             <div className="main">
-              <i className="manicon manicon-cube-shine" />
+              <i className="manicon manicon-cube-shine" aria-hidden="true" />
               <div className="body">
                 <h2 className="title">All Project Resources</h2>
               </div>

@@ -140,7 +140,8 @@ export class HomeContainer extends Component {
       <div className="button-nav" style={{ marginTop: "26px" }}>
         <Link to={lh.link("frontendFeatured")} className="button-icon-primary">
           <span>
-            <i className="manicon manicon-lamp" />See all featured
+            <i className="manicon manicon-lamp" aria-hidden="true" />
+            See all featured
           </span>
         </Link>
       </div>
@@ -155,7 +156,7 @@ export class HomeContainer extends Component {
         <div className="container">
           <header className="section-heading">
             <div className="main">
-              <i className="manicon manicon-lamp" />
+              <i className="manicon manicon-lamp" aria-hidden="true" />
               <div className="body">
                 <h4 className="title">{"Featured Projects"}</h4>
               </div>
@@ -192,7 +193,10 @@ export class HomeContainer extends Component {
         <div className={containerClasses}>
           <header className="section-heading">
             <div className="main">
-              <i className="manicon manicon-books-on-shelf" />
+              <i
+                className="manicon manicon-books-on-shelf"
+                aria-hidden="true"
+              />
               <div className="body">
                 <h4 className="title">{"Our Projects"}</h4>
               </div>

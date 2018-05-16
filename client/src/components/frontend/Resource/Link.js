@@ -23,7 +23,7 @@ export default class ResourceDetail extends Component {
             className={this.props.buttonClass}
             target="_blank"
           >
-            Visit Page <i className="manicon manicon-arrow-right" />
+            Visit Page <i className="manicon manicon-arrow-right" aria-hidden="true" />
           </a>
         );
         break;
@@ -34,7 +34,7 @@ export default class ResourceDetail extends Component {
             className={this.props.buttonClass}
             target="_blank"
           >
-            Download <i className="manicon manicon-arrow-down" />
+            Download <i className="manicon manicon-arrow-down" aria-hidden="true" />
           </a>
         ) : null;
         break;

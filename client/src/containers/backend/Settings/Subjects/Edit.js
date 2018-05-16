@@ -103,7 +103,7 @@ export class SettingsSubjectsEditContainer extends PureComponent {
               }}
             >
               {"Delete Subject"}
-              <i className="manicon manicon-trashcan" />
+              <i className="manicon manicon-trashcan" aria-hidden="true" />
             </button>
           </div>
         </header>

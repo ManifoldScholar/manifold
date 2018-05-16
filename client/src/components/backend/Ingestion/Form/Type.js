@@ -67,7 +67,7 @@ export default class IngestionFormType extends PureComponent {
         <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
           {this.props.triggerClose ? (
             <button onClick={this.close} className="button-icon-secondary dull">
-              <i className="manicon manicon-x small" />
+              <i className="manicon manicon-x small" aria-hidden="true" />
               Cancel
             </button>
           ) : null}
@@ -76,7 +76,7 @@ export default class IngestionFormType extends PureComponent {
             className="button-icon-secondary"
             disabled={!this.valid}
           >
-            <i className="manicon manicon-check small" />
+            <i className="manicon manicon-check small" aria-hidden="true" />
             Continue
           </button>
         </div>

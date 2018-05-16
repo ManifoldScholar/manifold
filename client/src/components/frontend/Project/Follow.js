@@ -123,9 +123,10 @@ export default class ProjectFollow extends Component {
         onMouseEnter={this.activate}
         onMouseLeave={this.deactivate}
         className={wrapperClasses}
+        role="button"
       >
         <div className="following-button">
-          <div className="icons">
+          <div className="icons" aria-hidden="true">
             <i key="minus" className="manicon manicon-minus-bold" />
             <i key="check" className="manicon manicon-check-bold" />
             <i key="plus" className="manicon manicon-plus-bold" />

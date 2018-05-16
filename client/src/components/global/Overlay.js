@@ -57,7 +57,7 @@ export default class Overlay extends Component {
     return (
       <div className="container">
         <h3 className="overlay-title">
-          <i className={`manicon manicon-${icon}`} />
+          <i className={`manicon manicon-${icon}`} aria-hidden="true" />
           {title}
         </h3>
       </div>
@@ -75,7 +75,7 @@ export default class Overlay extends Component {
           data-id="overlay-close"
         >
           Close
-          <i className="manicon manicon-x" />
+          <i className="manicon manicon-x" aria-hidden="true" />
         </button>
       </header>
     );
@@ -100,7 +100,7 @@ export default class Overlay extends Component {
                 data-id="overlay-close"
               >
                 Close
-                <i className="manicon manicon-x" />
+                <i className="manicon manicon-x" aria-hidden="true" />
               </button>
             ) : null}
             <div

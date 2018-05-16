@@ -101,7 +101,7 @@ export class UsersListContainer extends PureComponent {
       <div>
         <header className="section-heading-secondary">
           <h3>
-            {"Users"} <i className="manicon manicon-users" />
+            {"Users"} <i className="manicon manicon-users" aria-hidden="true" />
           </h3>
         </header>
         {childRoutes(this.props.route, { drawer: true, drawerProps })}

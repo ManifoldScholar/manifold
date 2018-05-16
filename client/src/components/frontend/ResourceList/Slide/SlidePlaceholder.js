@@ -25,7 +25,7 @@ export default class ResourceListSlidePlaceholder extends Component {
           }}
         >
           <div className="resource-info">
-            <i className={`manicon manicon-file-box`} />
+            <i className={`manicon manicon-file-box`} aria-hidden="true" />
             <span className="resource-type">
               {"This collection has no resources"}
             </span>

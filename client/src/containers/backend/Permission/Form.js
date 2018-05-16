@@ -66,7 +66,7 @@ export class PermissionForm extends PureComponent {
             />
           ) : (
             <div className="no-image">
-              <i className="manicon manicon-person" />
+              <i className="manicon manicon-person" aria-hidden="true" />
             </div>
           )}
         </figure>

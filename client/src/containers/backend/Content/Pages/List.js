@@ -151,7 +151,13 @@ class PagesDashboardContainer extends PureComponent {
                               this.handleDestroy(page);
                             }}
                           >
-                            <i className="manicon manicon-x" />
+                            <span className="screen-reader-text">
+                              Delete page
+                            </span>
+                            <i
+                              className="manicon manicon-x"
+                              aria-hidden="true"
+                            />
                           </button>
                         </HigherOrder.Authorize>
                       </div>

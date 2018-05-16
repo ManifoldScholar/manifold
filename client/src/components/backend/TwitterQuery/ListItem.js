@@ -31,7 +31,7 @@ export default class TwitterQueryListItem extends PureComponent {
           to={lh.link("backendProjectSocialTwitterQuery", project.id, query.id)}
         >
           <header>
-            <figure>
+            <figure aria-label="hidden">
               <i className="manicon manicon-twitter" />
             </figure>
             <h3 className="name large">{query.attributes.query}</h3>

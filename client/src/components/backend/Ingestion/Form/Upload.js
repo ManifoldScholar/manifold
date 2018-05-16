@@ -125,7 +125,7 @@ class IngestionFormUpload extends PureComponent {
             onClick={this.handleBackClick}
             className="button-icon-secondary dull"
           >
-            <i className="manicon manicon-x small" />
+            <i className="manicon manicon-x small" aria-hidden="true" />
             Back
           </button>
           <button
@@ -133,7 +133,7 @@ class IngestionFormUpload extends PureComponent {
             className="button-icon-secondary"
             disabled={!this.valid}
           >
-            <i className="manicon manicon-check small" />
+            <i className="manicon manicon-check small" aria-hidden="true" />
             Continue
           </button>
         </div>

@@ -103,7 +103,10 @@ export class CommentThread extends PureComponent {
         className="comment-more"
         onClick={() => this.handleNextClick(commentsPagination)}
       >
-        <i className="manicon manicon-word-bubble-multiple" />
+        <i
+          className="manicon manicon-word-bubble-multiple"
+          aria-hidden="true"
+        />
         {`See next ${nextCount} comments`}
       </button>
     );

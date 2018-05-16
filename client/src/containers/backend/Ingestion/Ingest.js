@@ -247,7 +247,7 @@ export class IngestionIngest extends Component {
     if (this.isModal) {
       return (
         <button onClick={this.complete} className="button-icon-secondary">
-          <i className="manicon manicon-check small" />
+          <i className="manicon manicon-check small" aria-hidden="true" />
           {"Complete"}
         </button>
       );
@@ -270,7 +270,7 @@ export class IngestionIngest extends Component {
       <div>
         <div className="ingestion-output">
           <header className="entity-header-primary">
-            <figure>
+            <figure aria-hidden="true">
               <i className="manicon manicon-text-placeholder" />
             </figure>
             <div className="title">
@@ -313,7 +313,7 @@ export class IngestionIngest extends Component {
               disabled={this.state.loading || !this.canReset}
             >
               Restart Ingestion
-              <i className="manicon manicon-x-bold" />
+              <i className="manicon manicon-x-bold" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -324,19 +324,25 @@ export class IngestionIngest extends Component {
               onClick={this.backToEdit}
               className="button-icon-secondary dull"
             >
-              <i className="manicon manicon-x small" />
+              <i className="manicon manicon-x small" aria-hidden="true" />
               Back
             </button>
           ) : null}
           {this.canProcess ? (
             <button onClick={this.ingest} className="button-icon-secondary">
-              <i className="manicon manicon-arrow-right small" />
+              <i
+                className="manicon manicon-arrow-right small"
+                aria-hidden="true"
+              />
               {"Ingest"}
             </button>
           ) : null}
           {this.canAnalyze ? (
             <button onClick={this.analyze} className="button-icon-secondary">
-              <i className="manicon manicon-arrow-right small" />
+              <i
+                className="manicon manicon-arrow-right small"
+                aria-hidden="true"
+              />
               {"Analyze"}
             </button>
           ) : null}

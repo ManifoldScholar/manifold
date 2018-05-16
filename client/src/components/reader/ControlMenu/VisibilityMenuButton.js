@@ -27,7 +27,7 @@ export default class VisibilityMenuButton extends PureComponent {
         onClick={this.clickHandler}
         data-id="toggle-visibility"
       >
-        <i className="manicon manicon-eye-outline" />
+        <i className="manicon manicon-eye-outline" aria-hidden="true" />
         <span className="screen-reader-text">
           Click to hide or show annotation/resources in the reader
         </span>

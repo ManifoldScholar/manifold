@@ -24,7 +24,7 @@ export default class NotationViewerPreview extends PureComponent {
         <Link notation={notation} params={params}>
           <div>
             <figure>
-              <i className="manicon manicon-cube-fill" />
+              <i className="manicon manicon-cube-fill" aria-hidden="true" />
               <Resourceish.Thumbnail
                 resourceish={notation}
                 showTitle={false}
@@ -38,7 +38,7 @@ export default class NotationViewerPreview extends PureComponent {
                 }}
               />
             </figure>
-            <i className="manicon manicon-caret-right" />
+            <i className="manicon manicon-caret-right" aria-hidden="true" />
           </div>
         </Link>
       </div>

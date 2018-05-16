@@ -35,7 +35,7 @@ export default class Filters extends Component {
           checked={checked}
           onChange={e => this.toggleFormat(e, format)}
         />
-        <div className="control-indicator">
+        <div className="control-indicator" aria-hidden="true">
           <i className="manicon manicon-check" />
         </div>
         {label}

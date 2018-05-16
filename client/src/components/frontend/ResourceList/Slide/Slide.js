@@ -38,7 +38,7 @@ export default class ResourceListSlideFigure extends Component {
           <Resource.Preview resource={this.props.resource}>
             <div className="zoom-indicator">
               {this.props.zoomLabel}
-              <i className="manicon manicon-magnify-plus" />
+              <i className="manicon manicon-magnify-plus" aria-hidden="true" />
             </div>
           </Resource.Preview>
         ) : null}
@@ -50,7 +50,10 @@ export default class ResourceListSlideFigure extends Component {
           style={{ backgroundImage: `url(${bgImage})` }}
         >
           <div className={infoClassNames}>
-            <i className={`manicon manicon-resource-${attr.kind}`} />
+            <i
+              className={`manicon manicon-resource-${attr.kind}`}
+              aria-hidden="true"
+            />
             <span className="resource-type">{attr.kind}</span>
             <span className="resource-date">
               <FormattedDate

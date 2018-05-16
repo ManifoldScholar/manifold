@@ -79,7 +79,7 @@ export default class AnnotationShareWrapper extends PureComponent {
       <div className="annotation-selection">
         <div className="selection-text">
           <div className="container">
-            <i className="manicon manicon-quote" />
+            <i className="manicon manicon-quote" aria-hidden="true" />
             {this.maybeTruncateSelection()}
           </div>
         </div>

@@ -40,7 +40,7 @@ export default class FormColumnMapAttribute extends PureComponent {
                   {"Click to cancel mapping of "}
                   {`${this.props.name} to ${this.props.mapping}`}
                 </span>
-                <i className="manicon manicon-x-bold" />
+                <i className="manicon manicon-x-bold" aria-hidden="true" />
               </button>
             </div>
           );

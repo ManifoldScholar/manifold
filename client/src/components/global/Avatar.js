@@ -20,13 +20,15 @@ export default class Avatar extends Component {
       };
       return (
         <figure style={this.props.style} className="avatar">
+          <span className="screen-reader-text">Avatar</span>
           <div style={style} />
         </figure>
       );
     }
     return (
       <figure style={this.props.style} className="avatar">
-        <i className="manicon manicon-person" />
+        <span className="screen-reader-text">Avatar</span>
+        <i className="manicon manicon-person" aria-hidden="true" />
       </figure>
     );
   }

@@ -42,7 +42,7 @@ export default class GroupItem extends Component {
     );
     return (
       <li className="item" onClick={this.handleVisitAnnotation}>
-        <i className={iconClasses} />
+        <i className={iconClasses} aria-hidden="true" />
         <span>
           {this.maybeTruncateText(this.props.annotation.attributes.subject)}
         </span>

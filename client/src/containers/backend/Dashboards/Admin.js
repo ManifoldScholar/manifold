@@ -136,7 +136,8 @@ export class DashboardsAdminContainer extends PureComponent {
               <div className="left">
                 <header className="section-heading-secondary">
                   <h3>
-                    {"Projects"} <i className="manicon manicon-stack" />
+                    {"Projects"}{" "}
+                    <i className="manicon manicon-stack" aria-hidden="true" />
                   </h3>
                 </header>
                 {this.props.projects && this.props.projectsMeta ? (
@@ -177,7 +178,10 @@ export class DashboardsAdminContainer extends PureComponent {
                     <header className="section-heading-secondary">
                       <h3>
                         {"Activity"}{" "}
-                        <i className="manicon manicon-pulse-small" />
+                        <i
+                          className="manicon manicon-pulse-small"
+                          aria-hidden="true"
+                        />
                       </h3>
                     </header>
                     <DashboardComponents.Activity

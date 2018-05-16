@@ -140,7 +140,7 @@ export class UsersEditContainer extends PureComponent {
               onClick={this.handleResetPasswordClick}
             >
               {"Reset Password"}
-              <i className="manicon manicon-key" />
+              <i className="manicon manicon-key" aria-hidden="true" />
             </button>
             <br />
             <button
@@ -148,7 +148,7 @@ export class UsersEditContainer extends PureComponent {
               onClick={this.handleUserDestroy}
             >
               {"Delete User"}
-              <i className="manicon manicon-trashcan" />
+              <i className="manicon manicon-trashcan" aria-hidden="true" />
             </button>
           </div>
         </header>

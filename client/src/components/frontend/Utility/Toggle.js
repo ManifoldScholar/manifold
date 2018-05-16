@@ -30,7 +30,7 @@ export default class Toggle extends Component {
     return (
       <div key={option.label} className={optionClasses}>
         {option.iconClass ? (
-          <i className={`manicon ${option.iconClass}`} />
+          <i className={`manicon ${option.iconClass}`} aria-hidden="true" />
         ) : null}
         {option.label}
       </div>

@@ -20,7 +20,7 @@ export default class ResourceListSlideFigureImage extends Component {
           <Resource.Preview resource={this.props.resource}>
             <div className="zoom-indicator">
               Zoom
-              <i className="manicon manicon-magnify-plus" />
+              <i className="manicon manicon-magnify-plus" aria-hidden="true" />
             </div>
           </Resource.Preview>
         ) : null}

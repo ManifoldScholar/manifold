@@ -129,7 +129,7 @@ class DialogWrapper extends PureComponent {
                   onClick={this.handleCloseClick}
                   className="close-button-primary"
                 >
-                  <i className="manicon manicon-x" />
+                  <i className="manicon manicon-x" aria-hidden="true" />
                   <span className="screen-reader-text">Close Dialog</span>
                 </div>
               ) : null}

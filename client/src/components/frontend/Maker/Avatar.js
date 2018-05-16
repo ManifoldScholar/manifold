@@ -16,7 +16,7 @@ export default class MakerAvatar extends Component {
           <img src={attr.avatarStyles.smallSquare} alt="user-avatar" />
         ) : (
           <div className="no-image">
-            <i className="manicon manicon-person" />
+            <i className="manicon manicon-person" aria-hidden="true" />
           </div>
         )}
         <figcaption>{attr.fullName}</figcaption>

@@ -47,8 +47,9 @@ export default class UtilityPagination extends PureComponent {
       <li className={`pagination-previous ${disabledClass}`} key="previous">
         {isString(handler) ? (
           <Link to={handler}>
-            <i className="manicon manicon-arrow-long-left" />
-            <span>Prev</span>
+            <i className="manicon manicon-arrow-long-left" aria-hidden="true" />
+            <span aria-hidden="true">Prev</span>
+            <span className="screen-reader-text">Previous Page</span>
           </Link>
         ) : (
           <a
@@ -56,8 +57,9 @@ export default class UtilityPagination extends PureComponent {
             onClick={handler}
             data-id={"page-prev"}
           >
-            <i className="manicon manicon-arrow-long-left" />
-            <span>Prev</span>
+            <i className="manicon manicon-arrow-long-left" aria-hidden="true" />
+            <span aria-hidden="true">Prev</span>
+            <span className="screen-reader-text">Previous Page</span>
           </a>
         )}
       </li>
@@ -71,8 +73,12 @@ export default class UtilityPagination extends PureComponent {
       <li className={`pagination-next ${disabledClass}`} key="next">
         {isString(handler) ? (
           <Link to={handler}>
-            <span>Next</span>
-            <i className="manicon manicon-arrow-long-right" />
+            <span className="screen-reader-text">Next Page</span>
+            <span aria-hidden="true">Next</span>
+            <i
+              className="manicon manicon-arrow-long-right"
+              aria-hidden="true"
+            />
           </Link>
         ) : (
           <a
@@ -80,8 +86,12 @@ export default class UtilityPagination extends PureComponent {
             onClick={handler}
             data-id={"page-next"}
           >
-            <span>Next</span>
-            <i className="manicon manicon-arrow-long-right" />
+            <span className="screen-reader-text">Next Page</span>
+            <span aria-hidden="true">Next</span>
+            <i
+              className="manicon manicon-arrow-long-right"
+              aria-hidden="true"
+            />
           </a>
         )}
       </li>
@@ -92,10 +102,18 @@ export default class UtilityPagination extends PureComponent {
     return (
       <li key={page.key} className="ordinal">
         {isString(handler) ? (
-          <Link to={handler}>{page.number}</Link>
+          <Link to={handler}>
+            <span aria-hidden="true">{page.number}</span>
+            <span className="screen-reader-text">
+              Go to page: {page.number}
+            </span>
+          </Link>
         ) : (
           <a href={this.props.paginationTarget} onClick={handler}>
-            {page.number}
+            <span aria-hidden="true">{page.number}</span>
+            <span className="screen-reader-text">
+              Go to page: {page.number}
+            </span>
           </a>
         )}
       </li>
@@ -106,10 +124,18 @@ export default class UtilityPagination extends PureComponent {
     return (
       <li className="active ordinal" key={page.key}>
         {isString(handler) ? (
-          <Link to={handler}>{page.number}</Link>
+          <Link to={handler}>
+            <span aria-hidden="true">{page.number}</span>
+            <span className="screen-reader-text">
+              Go to page: {page.number}
+            </span>
+          </Link>
         ) : (
           <a href={this.props.paginationTarget} onClick={handler}>
-            {page.number}
+            <span aria-hidden="true">{page.number}</span>
+            <span className="screen-reader-text">
+              Go to page: {page.number}
+            </span>
           </a>
         )}
       </li>

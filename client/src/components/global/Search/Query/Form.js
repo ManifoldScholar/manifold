@@ -146,7 +146,9 @@ export default class SearchQuery extends PureComponent {
             value={this.state.keyword}
             placeholder={"Search for..."}
           />
-          <button type="submit" className="manicon manicon-magnify" />
+          <button type="submit" className="manicon manicon-magnify">
+            <span className="screen-reader-text">Search</span>
+          </button>
         </div>
         {this.props.scopes.length > 0 ? (
           <div className="filters">
@@ -165,7 +167,7 @@ export default class SearchQuery extends PureComponent {
                       checked={this.state.scope === scope.value}
                       onChange={this.makeScopeHandler(scope.value)}
                     />
-                    <div className="control-indicator">
+                    <div className="control-indicator" aria-hidden="true">
                       <i className="manicon manicon-check" />
                     </div>
                     {scope.label}
@@ -187,7 +189,7 @@ export default class SearchQuery extends PureComponent {
                   onChange={this.makeFacetHandler("facets", "All")}
                 />
                 {/* Fake control to allow for custom checkbox styles */}
-                <div className="control-indicator">
+                <div className="control-indicator" aria-hidden="true">
                   <i className="manicon manicon-check" />
                 </div>
                 {"Everything"}
@@ -201,7 +203,7 @@ export default class SearchQuery extends PureComponent {
                       onChange={this.makeFacetHandler("facets", facet.value)}
                     />
                     {/* Fake control to allow for custom checkbox styles */}
-                    <div className="control-indicator">
+                    <div className="control-indicator" aria-hidden="true">
                       <i className="manicon manicon-check" />
                     </div>
                     {facet.label}

@@ -58,7 +58,7 @@ class Detail extends Component {
         <div className={containerClass}>
           <header className="section-heading">
             <div className="main">
-              <i className="manicon manicon-tag" />
+              <i className="manicon manicon-tag" aria-hidden="true" />
               <div className="body">
                 <h4 className="title">{"About"}</h4>
               </div>
@@ -81,7 +81,7 @@ class Detail extends Component {
         <div className="container">
           <header className="section-heading">
             <div className="main">
-              <i className="manicon manicon-pulse" />
+              <i className="manicon manicon-pulse" aria-hidden="true" />
               <div className="body">
                 <h4 className="title">{"Recent Activity"}</h4>
               </div>
@@ -130,7 +130,7 @@ class Detail extends Component {
           <div className="text-category-list-primary">
             <header className="section-heading">
               <div className="main">
-                <i className="manicon manicon-books-stack" />
+                <i className="manicon manicon-books-stack" aria-hidden="true" />
                 <div className="body">
                   <h4 className="title">{"Texts"}</h4>
                 </div>
@@ -166,7 +166,7 @@ class Detail extends Component {
         <div className="container">
           <header className="section-heading">
             <div className="main">
-              <i className="manicon manicon-cube-shine" />
+              <i className="manicon manicon-cube-shine" aria-hidden="true" />
               <div className="body">
                 <h4 className="title">{"Resources"}</h4>
               </div>
@@ -195,7 +195,7 @@ class Detail extends Component {
         <div className="container">
           <header className="section-heading">
             <div className="main">
-              <i className="manicon manicon-cube-shine" />
+              <i className="manicon manicon-cube-shine" aria-hidden="true" />
               <div className="body">
                 <h4 className="title">{"Resources"}</h4>
               </div>

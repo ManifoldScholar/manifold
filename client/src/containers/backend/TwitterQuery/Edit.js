@@ -119,7 +119,7 @@ export class TwitterQueryEditContainer extends PureComponent {
         ) : null}
         <header className="drawer-header">
           <h2 className="heading-quaternary">
-            <i className="manicon manicon-twitter" />
+            <i className="manicon manicon-twitter" aria-hidden="true" />
             <span>{twitterQuery.attributes.displayName}</span>
           </h2>
           <div className="buttons-bare-vertical">
@@ -128,7 +128,7 @@ export class TwitterQueryEditContainer extends PureComponent {
               onClick={() => this.handleQueryFetch(twitterQuery)}
             >
               {"Fetch Tweets"}
-              <i className="manicon manicon-check" />
+              <i className="manicon manicon-check" aria-hidden="true" />
             </button>
             <br />
             <button
@@ -138,7 +138,7 @@ export class TwitterQueryEditContainer extends PureComponent {
               }}
             >
               {"Delete Query"}
-              <i className="manicon manicon-trashcan" />
+              <i className="manicon manicon-trashcan" aria-hidden="true" />
             </button>
           </div>
         </header>

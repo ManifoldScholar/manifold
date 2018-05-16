@@ -99,7 +99,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
           message={this.message()}
           windowOptions={this.twitterWindowOptions}
         >
-          <i className="manicon manicon-twitter" />
+          <i className="manicon manicon-twitter" aria-hidden="true" />
           {"Twitter"}
         </TwitterButton>
         {this.facebookAppId() ? (
@@ -109,7 +109,7 @@ class AnnotationPopupSecondaryShare extends PureComponent {
             windowOptions={this.twitterWindowOptions}
             appId={this.facebookAppId()}
           >
-            <i className="manicon manicon-facebook" />
+            <i className="manicon manicon-facebook" aria-hidden="true" />
             {"Facebook"}
           </FacebookButton>
         ) : null}

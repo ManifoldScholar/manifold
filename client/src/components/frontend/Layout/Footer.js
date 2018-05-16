@@ -144,7 +144,7 @@ class LayoutFooter extends Component {
               rel="noopener noreferrer"
               className="logo"
             >
-              <i className="manicon manicon-manifold-logo" />
+              <i className="manicon manicon-manifold-logo" aria-hidden="true" />
               <span className="text">
                 {"Powered by Manifold"}
                 <span className="small">

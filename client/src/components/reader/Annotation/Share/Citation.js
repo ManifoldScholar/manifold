@@ -100,7 +100,7 @@ export default class AnnotationShareEditor extends PureComponent {
                 className="button-secondary button-icon-secondary"
                 onClick={this.handleCopyClick}
               >
-                <i className="manicon manicon-copy" />
+                <i className="manicon manicon-copy" aria-hidden="true" />
                 Copy
               </button>
             </div>

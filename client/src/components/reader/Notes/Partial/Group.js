@@ -111,7 +111,7 @@ export default class Group extends Component {
     return (
       <li>
         <div className={classes} onClick={this.handleClick}>
-          <i className={`manicon manicon-caret-down`} />
+          <i className={`manicon manicon-caret-down`} aria-hidden="true" />
           <label>{this.props.sectionName}</label>
         </div>
         {this.renderGroupItems(this.props.annotations)}

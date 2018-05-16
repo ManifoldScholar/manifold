@@ -111,7 +111,7 @@ export class PermissionEdit extends PureComponent {
               }}
             >
               {"Remove All Permissions"}
-              <i className="manicon manicon-trashcan" />
+              <i className="manicon manicon-trashcan" aria-hidden="true" />
             </button>
           </div>
         </header>

@@ -74,7 +74,8 @@ export default class CollectionDetail extends PureComponent {
           <nav className="button-nav">
             <br />
             <Link to={collectionUrl} className="button-secondary outlined">
-              Visit Collection Page<i className="manicon manicon-arrow-right" />
+              Visit Collection Page
+              <i className="manicon manicon-arrow-right" aria-hidden="true" />
             </Link>
             <br />
             <button
@@ -82,7 +83,8 @@ export default class CollectionDetail extends PureComponent {
               className="button-secondary outlined dull"
               data-id="close-overlay"
             >
-              <i className="manicon manicon-arrow-left" />Return to Reader
+              <i className="manicon manicon-arrow-left" aria-hidden="true" />
+              Return to Reader
             </button>
           </nav>
         </div>

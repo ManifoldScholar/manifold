@@ -159,7 +159,10 @@ export default class FormHasMany extends PureComponent {
                           <img src={avatar} alt="user-avatar" />
                         ) : (
                           <div className="no-image">
-                            <i className="manicon manicon-person" />
+                            <i
+                              className="manicon manicon-person"
+                              aria-hidden="true"
+                            />
                           </div>
                         )}
                       </figure>

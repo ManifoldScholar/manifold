@@ -33,7 +33,7 @@ export default class ResourceCollectionTitle extends Component {
     return (
       <header className="section-heading">
         <div className="main">
-          <i className="manicon manicon-file-box" />
+          <i className="manicon manicon-file-box" aria-hidden="true" />
           <div className="body">
             <h2 className="title">{attr.title}</h2>
             {this.renderDate(attr)}

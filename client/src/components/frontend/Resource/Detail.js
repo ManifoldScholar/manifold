@@ -47,7 +47,7 @@ export default class ResourceDetail extends Component {
                 <Resource.Link attributes={attr} />
                 {/*
                 <Link to="#" className="button-primary">
-                  View in Text <i className="manicon manicon-arrow-right"></i>
+                  View in Text <i className="manicon manicon-arrow-right" aria-hidden="true" ></i>
                 </Link>
                 */}
                 <Utility.ShareBar url={resourceUrl} />

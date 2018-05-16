@@ -123,7 +123,7 @@ export class FollowingContainer extends Component {
         <div className="container">
           <header className="section-heading">
             <div className="main">
-              <i className="manicon manicon-lamp" />
+              <i className="manicon manicon-lamp" aria-hidden="true" />
               <div className="body">
                 <h4 className="title">{"Featured Projects"}</h4>
               </div>

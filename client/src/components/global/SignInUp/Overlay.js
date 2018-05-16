@@ -83,7 +83,7 @@ export default class Overlay extends Component {
           <header className="overlay-header">
             <div className="container">
               <div className="rel">
-                <figure className="logo">
+                <figure className="logo" aria-hidden="true">
                   <i className="manicon manicon-manifold-logo" />
                 </figure>
                 <button
@@ -92,7 +92,7 @@ export default class Overlay extends Component {
                   data-id="overlay-close"
                 >
                   Cancel
-                  <i className="manicon manicon-x" />
+                  <i className="manicon manicon-x" aria-hidden="true" />
                 </button>
               </div>
             </div>

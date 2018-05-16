@@ -44,7 +44,9 @@ export default class DefaultButton extends PureComponent {
           this.renderChild()
         ) : (
           <button className={className} onClick={onClick}>
-            {iconClass ? <i className={iconClassName} /> : null}
+            {iconClass ? (
+              <i className={iconClassName} aria-hidden="true" />
+            ) : null}
             {label}
           </button>
         )}

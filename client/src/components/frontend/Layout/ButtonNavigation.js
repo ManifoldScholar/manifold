@@ -61,7 +61,8 @@ export default class LayoutButtonNavigation extends Component {
             this._browseButtonEl = node;
           }}
         >
-          <i className="manicon manicon-books-on-shelf" />See more projects
+          <i className="manicon manicon-books-on-shelf" aria-hidden="true" />
+          See more projects
         </span>
       </Link>
     );
@@ -77,7 +78,10 @@ export default class LayoutButtonNavigation extends Component {
             this._followingButtonEl = node;
           }}
         >
-          <i className="manicon manicon-books-with-glasses" />
+          <i
+            className="manicon manicon-books-with-glasses"
+            aria-hidden="true"
+          />
           {"Projects You're Following "}
         </span>
       </Link>

@@ -200,7 +200,7 @@ export default class ResourceListSlideCaption extends Component {
                 className="download-link"
               >
                 {"Download"}
-                <i className="manicon manicon-arrow-down" />
+                <i className="manicon manicon-arrow-down" aria-hidden="true" />
               </a>
             ) : null}
             {detailUrl && !this.props.hideDetailUrl ? (

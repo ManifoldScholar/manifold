@@ -138,7 +138,7 @@ class Toc extends PureComponent {
             <div className="toc-footer">
               <button onClick={this.showMeta}>
                 <h4>
-                  <i className="manicon manicon-i-round" />
+                  <i className="manicon manicon-i-round" aria-hidden="true" />
                   About This Text
                 </h4>
               </button>

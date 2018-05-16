@@ -140,7 +140,11 @@ export default class ResourcePlayerAudio extends Component {
     return (
       <div className="cover" onClick={this.startPlayback}>
         <button>
-          <i className="manicon manicon-triangle-right-fill" />
+          <span className="screen-reader-text">Start Playback</span>
+          <i
+            className="manicon manicon-triangle-right-fill"
+            aria-hidden="true"
+          />
         </button>
       </div>
     );
@@ -170,7 +174,12 @@ export default class ResourcePlayerAudio extends Component {
         />
         <div className="control-bar">
           <button className="play-pause" onClick={this.togglePlayback}>
-            <i className={playPauseClasses} />
+            {this.state.playing ? (
+              <span className="screen-reader-text">Pause Playback</span>
+            ) : (
+              <span className="screen-reader-text">Start Playback</span>
+            )}
+            <i className={playPauseClasses} aria-hidden="true" />
           </button>
           <div className="progress">
             <div className="time">{this.state.currentTime}</div>
@@ -192,8 +201,13 @@ export default class ResourcePlayerAudio extends Component {
             <div className="time duration">{this.state.durationFormatted}</div>
           </div>
           <div className="volume">
-            <button className="mute">
-              <i className={muteClasses} onClick={this.toggleMute} />
+            <button className="mute" onClick={this.toggleMute}>
+              {this.state.muted ? (
+                <span className="screen-reader-text">Unmute</span>
+              ) : (
+                <span className="screen-reader-text">Mute</span>
+              )}
+              <i className={muteClasses} aria-hidden="true" />
             </button>
             <div className="slider">
               <div
