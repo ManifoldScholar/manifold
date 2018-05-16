@@ -30,8 +30,13 @@ module Ingestor
           end
 
           def kind
+            return ::IngestionSource::KIND_NAVIGATION if toc_page?
             return ::IngestionSource::KIND_SECTION if ext == "html"
             ::IngestionSource::KIND_PUBLICATION_RESOURCE
+          end
+
+          def toc_page?
+            File.basename(rel_path, ".*").casecmp("summary").zero?
           end
 
           def attachment

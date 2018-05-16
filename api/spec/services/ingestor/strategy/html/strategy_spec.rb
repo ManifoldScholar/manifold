@@ -94,6 +94,12 @@ RSpec.describe Ingestor::Strategy::Html::Strategy do
       it "has the correct start section" do
         expect(@text.start_text_section.name).to eq "Section 1"
       end
+
+      it "has the correct number of stylesheets" do
+        # Every page uses the same stylesheet, there are two
+        # distinct inline blocks and one inline style
+        expect(@text.stylesheets.length).to eq 4
+      end
     end
   end
 
@@ -106,14 +112,15 @@ RSpec.describe Ingestor::Strategy::Html::Strategy do
       }
       include_examples "output single-page text assertions"
 
-      it "has two ingestion sources" do\
+      it "has two ingestion sources" do
         expect(@text.ingestion_sources.length).to eq 2
       end
 
-      it "has three stylesheets" do
+      it "has two stylesheets" do
         # The sample document has one external sheet, an inline block, and then all the
-        # inline styles make up a third block.
-        expect(@text.stylesheets.length).to eq 3
+        # inline styles make up a third block, but the inline block and inline styles are
+        # the same.
+        expect(@text.stylesheets.length).to eq 2
       end
     end
 
@@ -129,10 +136,11 @@ RSpec.describe Ingestor::Strategy::Html::Strategy do
         expect(@text.ingestion_sources.length).to eq 2
       end
 
-      it "has three stylesheets" do
+      it "has two stylesheets" do
         # The sample document has one external sheet, an inline block, and then all the
-        # inline styles make up a third block.
-        expect(@text.stylesheets.length).to eq 3
+        # inline styles make up a third block, but the inline block and inline styles are
+        # the same.
+        expect(@text.stylesheets.length).to eq 2
       end
     end
 
@@ -150,8 +158,9 @@ RSpec.describe Ingestor::Strategy::Html::Strategy do
 
       it "has two stylesheets" do
         # The sample document has an inline block and all the
-        # inline styles make up a second block.
-        expect(@text.stylesheets.length).to eq 2
+        # inline styles make up a second block, but the inline
+        # block and inline styles are the same.
+        expect(@text.stylesheets.length).to eq 1
       end
     end
   end
@@ -167,7 +176,6 @@ RSpec.describe Ingestor::Strategy::Html::Strategy do
     end
 
     context "when the source is a zip", :integration do
-
       before(:all) {
         @creator = FactoryBot.create(:user)
         @html_source = Rails.root.join("spec", "data", "ingestion", "html", "minimal-multi.zip").to_s
