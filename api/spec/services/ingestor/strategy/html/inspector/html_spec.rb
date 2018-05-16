@@ -61,7 +61,8 @@ RSpec.describe Ingestor::Strategy::Html::Inspector::Html do
     ingestion = Ingestor::Ingestion.new(path, FactoryBot.create(:user), NullLogger.new )
     inspector = Ingestor::Strategy::Html::Inspector::Html.new(ingestion)
     allow(inspector).to receive(:index_path).and_return("index.html")
-    allow(inspector).to receive(:index_parsed).and_return(Nokogiri::HTML(document_contents, nil, "utf-8"))
+    allow(inspector).to receive(:file_parsed).and_return(Nokogiri::HTML(document_contents, nil, "utf-8"))
+    allow(inspector).to receive(:html_ingestion_sources).and_return(["index.html"])
     allow(ingestion).to receive(:read).with("stylesheet_1.css").and_return(stylesheet_1_contents)
     allow(ingestion).to receive(:read).with("stylesheet_2.css").and_return(stylesheet_2_contents)
     return inspector

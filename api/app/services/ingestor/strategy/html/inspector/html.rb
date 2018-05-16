@@ -73,15 +73,23 @@ module Ingestor
             end
           end
 
+          def html_ingestion_sources
+            ingestion.sources.select do |source|
+              %w(.htm .html).include? File.extname(source)
+            end
+          end
+
           def stylesheet_inspectors
-            style_chunks.map do |chunk|
+            filtered_stylesheet_chunks.map do |chunk|
               ::Ingestor::Strategy::Html::Inspector::Stylesheet.new(chunk, ingestion)
             end
           end
 
           def text_section_inspectors
-            ingestion.sources.select { |p| %w(.htm .html).include? File.extname(p) }.map do |path|
-              ::Ingestor::Strategy::Html::Inspector::TextSection.new(path, ingestion, self)
+            html_ingestion_sources.map do |path|
+              ::Ingestor::Strategy::Html::Inspector::TextSection.new(path,
+                                                                     ingestion,
+                                                                     self)
             end
           end
 
@@ -128,38 +136,54 @@ module Ingestor
             index_parsed.at("//#{tag}")&.attribute(attribute)&.value
           end
 
-          def node_to_style_chunk(node, index)
-            return stylesheet_chunk(node, index) if node.name == "link"
-            return style_chunk(node, index) if node.name == "style"
+          def node_to_style_chunk(source_path, node)
+            return stylesheet_chunk(node) if node.name == "link"
+            return style_chunk(source_path, node) if node.name == "style"
             raise "Invalid style chunk"
           end
 
-          def style_chunk(node, index)
-            position = index + 1
+          def style_chunk(source_path, node)
             {
-              position: position,
-              name: "head-#{position}",
-              source_path: index_path,
+              name: "head",
+              source_path: source_path,
               styles: node.content
             }
           end
 
-          def stylesheet_chunk(node, index)
+          def stylesheet_chunk(node)
             path = node.attribute("href").value
-            position = index + 1
             {
-              position: position,
-              name: "stylesheet-#{position}",
+              name: "stylesheet",
               source_path: path,
               styles: ingestion.read(path)
             }
           end
 
+          # Removes chunks with blank styles or duplicates and assigns position
+          def filtered_stylesheet_chunks
+            style_chunks.reject { |c| c[:styles].squish.blank? }
+                        .uniq { |c| c[:styles].squish }
+                        .map.with_index do |chunk, index|
+                          chunk.tap do |c|
+                            c[:name] = "#{c[:name]}-#{index}"
+                            c[:position] = index
+                          end
+                        end
+          end
+
           def style_chunks
             xpath = "//*[@rel=\"stylesheet\" or @media=\"all\" or @media=\"screen\"] |
                     //style"
-            nodes = index_parsed.search(xpath)
-            nodes.map.with_index { |node, index| node_to_style_chunk(node, index) }
+            chunks = []
+
+            html_ingestion_sources.each do |source|
+              nodes = file_parsed(source).search(xpath)
+              chunks << nodes.map do |node|
+                node_to_style_chunk(source, node)
+              end
+            end
+
+            chunks.flatten
           end
 
         end
