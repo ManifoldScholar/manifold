@@ -80,7 +80,10 @@ class Resource < ApplicationRecord
             inclusion: { in: ALLOWED_SUB_KINDS },
             allow_nil: true,
             allow_blank: true
-  validates :fingerprint, uniqueness: true
+  validates :fingerprint,
+            uniqueness: { scope: :project,
+                          message: "has already been taken. " \
+                                   "Verify resource content is unique to project" }
   validate :validate_kind_fields
 
   # Scopes
@@ -113,11 +116,10 @@ class Resource < ApplicationRecord
   }
 
   # Callbacks
-  before_validation :update_kind
+  before_validation :update_kind, :set_fingerprint!
   before_update :reset_stale_fields
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_create :resource_to_event
-  before_save :set_fingerprint!
 
   # Search
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
@@ -270,7 +272,7 @@ class Resource < ApplicationRecord
   def fingerprint_candidates
     candidates = %w(external_url).map { |c| __send__ c }
     candidates << %w(external_type external_id).map { |c| __send__ c }.join
-    candidates << %w(title attachment).map { |c| __send__ c }.join
+    candidates << %w(title attachment_file_name).map { |c| __send__ c }.join
     candidates
   end
 
