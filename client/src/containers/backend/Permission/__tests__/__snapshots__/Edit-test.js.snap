@@ -60,8 +60,11 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                 className="toggle-indicator"
               >
                 <div
+                  aria-pressed="false"
                   className="boolean-primary"
                   onClick={[Function]}
+                  role="button"
+                  tabIndex="0"
                 />
               </div>
             </div>
@@ -77,8 +80,11 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                 className="toggle-indicator"
               >
                 <div
+                  aria-pressed="false"
                   className="boolean-primary"
                   onClick={[Function]}
+                  role="button"
+                  tabIndex="0"
                 />
               </div>
             </div>
@@ -94,8 +100,11 @@ exports[`Backend Permission Edit Container renders correctly 1`] = `
                 className="toggle-indicator"
               >
                 <div
+                  aria-pressed="false"
                   className="boolean-primary"
                   onClick={[Function]}
+                  role="button"
+                  tabIndex="0"
                 />
               </div>
             </div>
