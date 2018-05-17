@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Dialog, Navigation } from "components/backend";
 import { HigherOrder } from "containers/global";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { textsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
@@ -96,12 +96,28 @@ export class TextWrapperContainer extends PureComponent {
     const options = { removes: this.props.text };
     const textRequest = request(call, requests.beTextDestroy, options);
     this.props.dispatch(textRequest).promise.then(() => {
-      this.redirectToDashboard();
+      this.notifyDestroy();
+      this.redirectToProjectTexts();
     });
   };
 
-  redirectToDashboard() {
-    this.props.history.push(lh.link("backend"));
+  notifyDestroy() {
+    const notification = {
+      level: 0,
+      id: `TEXT_DESTROYED_${this.props.text.id}`,
+      heading: "The text has been destroyed.",
+      body: `${
+        this.props.text.attributes.title
+      } has passed into the endless night.`,
+      expiration: 5000
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+  }
+
+  redirectToProjectTexts() {
+    const projectId = this.props.text.relationships.project.id;
+    const redirectUrl = lh.link("backendProjectTexts", projectId);
+    this.props.history.push(redirectUrl);
   }
 
   handleTextDestroy = event => {
