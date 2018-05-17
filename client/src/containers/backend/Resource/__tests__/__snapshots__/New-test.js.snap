@@ -586,6 +586,10 @@ exports[`Backend Resource New Container renders correctly 1`] = `
               </div>
             </div>
             <div
+              className="form-input"
+              style={Object {}}
+            />
+            <div
               className="form-input submit"
             >
               <a

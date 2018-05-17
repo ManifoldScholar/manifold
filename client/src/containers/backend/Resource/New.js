@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Form as FormContainer } from "containers/backend";
 import { Resource, Navigation, Form } from "components/backend";
+import { Form as GlobalForm } from "components/global";
 import { resourcesAPI } from "api";
 import lh from "helpers/linkHandler";
 
@@ -75,6 +76,10 @@ export class ResourceNewContainer extends PureComponent {
                   placeholder="Enter a description"
                 />
                 <Resource.Form.KindAttributes />
+                <GlobalForm.Errorable
+                  className="form-input"
+                  name="attributes[fingerprint]"
+                />
                 <Form.Save
                   text="Save and continue"
                   cancelRoute={lh.link(
