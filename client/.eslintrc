@@ -1,4 +1,8 @@
-{ "extends": ["eslint-config-airbnb", "prettier"],
+{ "extends": [
+    "eslint-config-airbnb",
+    "prettier",
+    "plugin:jsx-a11y/recommended"
+  ],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -79,15 +83,15 @@
 
     // Rules we should eventually enable.
     "react/require-default-props": 0,
-    "jsx-a11y/no-noninteractive-element-interactions": 0,
-    "jsx-a11y/no-static-element-interactions": 0,
-    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 2,
+    "jsx-a11y/no-static-element-interactions": 2,
+    "jsx-a11y/label-has-for": 2,
     "jsx-a11y/href-no-hash": 0,
-    "jsx-a11y/no-autofocus": 0
+    "jsx-a11y/no-autofocus": 2
 
   },
   "plugins": [
-    "react", "import", "prettier"
+    "react", "import", "prettier", "jsx-a11y"
   ],
   "settings": {
     "import/parser": "babel-eslint",

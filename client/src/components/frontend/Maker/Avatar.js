@@ -13,7 +13,7 @@ export default class MakerAvatar extends Component {
     return (
       <figure className="maker-avatar" key={this.props.maker.id}>
         {attr.avatarStyles.smallSquare ? (
-          <img src={attr.avatarStyles.smallSquare} alt="user-avatar" />
+          <img src={attr.avatarStyles.smallSquare} alt="User Avatar" />
         ) : (
           <div className="no-image">
             <i className="manicon manicon-person" />

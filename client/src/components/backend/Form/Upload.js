@@ -189,11 +189,20 @@ export class FormUpload extends Component {
         />
         <div className="message">
           <p className="secondary">
-            <a data-id="remove" onClick={this.handleRemove} href="#">
+            <span
+              role="button"
+              data-id="remove"
+              className="fake-link"
+              onClick={this.handleRemove}
+              href="#"
+            >
               Remove this image
-            </a>
+            </span>
             <br />
-            or <span className="fake-link">Upload an image</span>
+            or{" "}
+            <span className="fake-link" role="button">
+              Upload an image
+            </span>
           </p>
         </div>
       </div>
@@ -209,11 +218,19 @@ export class FormUpload extends Component {
             {this.previewFileName(this.props, this.state)}
           </p>
           <p className="secondary">
-            <a onClick={this.handleRemove} href="#">
+            <span
+              role="button"
+              className="fake-link"
+              onClick={this.handleRemove}
+              href="#"
+            >
               Remove this file
-            </a>
+            </span>
             <br />
-            or <span className="fake-link">Upload a new file</span>
+            or{" "}
+            <span className="fake-link" role="button">
+              Upload a new file
+            </span>
           </p>
         </div>
       </div>
@@ -231,13 +248,19 @@ export class FormUpload extends Component {
         )}
         <div className="message">
           <p className="primary">
-            <span className="fake-link">{"Upload a file"}</span>
+            <span className="fake-link" role="button">
+              {"Upload a file"}
+            </span>
             {" or "}
             <br />
             {"drag and drop here"}
             <br />
           </p>
-          {extensions ? <p className="secondary">{extensions}</p> : null}
+          {extensions
+            ? <p className="secondary">
+                {extensions}
+              </p>
+            : null}
         </div>
       </div>
     );
