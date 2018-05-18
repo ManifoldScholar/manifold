@@ -162,5 +162,7 @@ export default function setter(WrappedComponent) {
     }
   }
 
-  return hoistStatics(Setter, WrappedComponent);
+  return hoistStatics(Setter, WrappedComponent, {
+    getDerivedStateFromProps: true
+  });
 }

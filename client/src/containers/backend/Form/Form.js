@@ -87,11 +87,12 @@ export class FormContainer extends PureComponent {
   }
 
   maybeOpenSession(props, prevProps = {}) {
+    const model = props.model || {};
+
     if (prevProps.model !== props.model) {
-      return this.openSession(props.name, props.model);
+      return this.openSession(props.name, model);
     }
     if (props.session) return null;
-    const model = props.model || {};
     this.openSession(props.name, model);
   }
 
