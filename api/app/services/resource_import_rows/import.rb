@@ -50,7 +50,6 @@ module ResourceImportRows
 
     def update_resource
       row.column_map.each do |position, attribute|
-        next unless resource.respond_to? attribute
         set_attribute(attribute, row.value(position))
       end
     end
@@ -219,6 +218,10 @@ module ResourceImportRows
 
     def drive_session
       @drive_session ||= ::Factory::DriveSession.create_service_account_session
+    end
+
+    def block_special_instructions(*_args)
+      true
     end
 
   end
