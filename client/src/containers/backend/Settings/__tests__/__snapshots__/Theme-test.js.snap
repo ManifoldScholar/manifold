@@ -73,6 +73,27 @@ exports[`Backend Settings Theme Container renders correctly 1`] = `
         <label
           className="has-instructions"
         >
+          Press Website URL
+        </label>
+        <span
+          className="instructions"
+        >
+          If present, the press logo image will link to this URL.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Enter URL"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
           Logo Styles
         </label>
         <span

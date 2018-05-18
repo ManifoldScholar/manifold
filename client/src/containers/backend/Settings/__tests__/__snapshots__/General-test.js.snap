@@ -129,15 +129,62 @@ exports[`Backend Settings General Container renders correctly 1`] = `
         style={Object {}}
       >
         <label
-          className=""
+          className="has-instructions"
         >
-          Contact Link URL
+          Twitter Account
         </label>
+        <span
+          className="instructions"
+        >
+          Enter the twitter account associated with this installation.
+        </span>
         <input
           onChange={[Function]}
-          placeholder="Enter a URL"
+          placeholder="Enter Twitter account"
           type="text"
-          value="http://www.dailyrowan.com"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Facebook Page ID
+        </label>
+        <span
+          className="instructions"
+        >
+          Enter an ID for this installation/organization's Facebook page.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Enter Facebook ID"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-input"
+        style={Object {}}
+      >
+        <label
+          className="has-instructions"
+        >
+          Contact Email
+        </label>
+        <span
+          className="instructions"
+        >
+          If present, the footer will contain a link to a contact form that will be delivered to this address.
+        </span>
+        <input
+          onChange={[Function]}
+          placeholder="Enter an email address"
+          type="text"
+          value=""
         />
       </div>
       <div
@@ -152,7 +199,7 @@ exports[`Backend Settings General Container renders correctly 1`] = `
         <span
           className="instructions"
         >
-          Enter a full absolute URL or a Manifold page slug.
+          Enter a full absolute URL or a Manifold page slug.  If present, the registration form will contain a link to the page.
         </span>
         <input
           onChange={[Function]}
