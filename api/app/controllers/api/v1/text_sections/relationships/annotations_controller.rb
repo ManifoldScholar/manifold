@@ -11,7 +11,7 @@ module Api
             scope = @text_section.nil? ? Annotation : @text_section.annotations
             scope = scope.excluding_private(current_user)
             Annotation.filter(
-              with_pagination!(annotation_filter_params),
+              annotation_filter_params || {},
               scope: scope
             )
           end
