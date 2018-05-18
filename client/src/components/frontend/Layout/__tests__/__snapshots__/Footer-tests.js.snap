@@ -4,121 +4,85 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
 <footer
   className="footer-browse"
 >
-  <div
-    className="container"
+  <section
+    className="footer-primary"
   >
     <div
-      className="rel"
+      className="container flush"
     >
-      <a
-        className="logo"
-        href="http://manifoldapp.org"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <i
-          aria-hidden="true"
-          className="manicon manicon-manifold-logo"
-        />
-        <span
-          className="text"
-        >
-          Powered by Manifold
-          <span
-            className="small"
-          >
-            Learn more at
-             
-            <span
-              className="underline"
-            >
-              manifoldapp.org
-            </span>
-          </span>
-        </span>
-      </a>
-    </div>
-    <nav
-      className="text-nav"
-    >
-      <ul>
-        <li>
-          <ul>
-            <li>
-              <a
-                href="#"
-                onClick={[Function]}
-              >
-                Log In
-              </a>
-            </li>
-            <li>
-              <a
-                href="/"
-                onClick={[Function]}
-              >
-                Projects
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://www.dailyrowan.com"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Contact
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <ul>
-            <li>
-              <a
-                href="http://twitter.com/manifoldscholar"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Twitter
-              </a>
-            </li>
-            <li>
-              <a
-                href="mailto:webbook@umn.edu"
-              >
-                Email
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-    <section
-      className="footer-secondary"
-    >
-      <form
-        onSubmit={[Function]}
+      <div
+        className="flex-row"
       >
         <div
-          className="search-button-inline"
+          className="right"
         >
-          <input
-            onChange={[Function]}
-            placeholder="Search"
-            type="text"
-            value=""
-          />
-          <button
-            className="manicon manicon-magnify"
+          <form
+            className="search-form"
+            onSubmit={[Function]}
           >
-            <span
-              className="screen-reader-text"
+            <div
+              className="search-button-inline"
             >
-              Click to submit search query
-            </span>
-          </button>
+              <input
+                onChange={[Function]}
+                placeholder="Search"
+                type="text"
+                value=""
+              />
+              <button
+                className="manicon manicon-magnify"
+              >
+                <span
+                  className="screen-reader-text"
+                >
+                  Click to submit search query
+                </span>
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+        <div
+          className="rel left"
+        >
+          <nav
+            className="text-nav"
+          >
+            <ul>
+              <li>
+                <ul
+                  className="footer-nav"
+                >
+                  <li>
+                    <a
+                      href="#"
+                      onClick={[Function]}
+                    >
+                      Log In
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      onClick={[Function]}
+                    >
+                      Projects
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li />
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section
+    className="footer-secondary"
+  >
+    <div
+      className="container flush"
+    >
       <div
         className="colophon"
       >
@@ -127,7 +91,42 @@ exports[`Frontend.Layout.Footer component renders correctly 1`] = `
           <br />
         </div>
       </div>
+    </div>
+  </section>
+  <a
+    className="footer-tertiary"
+    href="http://manifoldapp.org"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <section>
+      <div
+        className="container flush"
+      >
+        <span
+          className="logo"
+        >
+          <i
+            aria-hidden="true"
+            className="manicon manicon-manifold-logo"
+          />
+          <span
+            className="text"
+          >
+            <span
+              className="neutral-text"
+            >
+              Powered by
+            </span>
+            <span
+              className="white-text"
+            >
+               Manifold
+            </span>
+          </span>
+        </span>
+      </div>
     </section>
-  </div>
+  </a>
 </footer>
 `;

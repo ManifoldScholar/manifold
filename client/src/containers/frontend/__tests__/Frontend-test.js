@@ -22,7 +22,8 @@ describe("Frontend Frontend Container", () => {
     authentication: {
       authenticated: true,
       currentUser: build.entity.user("1")
-    }
+    },
+    settings: build.entity.settings("0")
   };
 
   const component = renderer.create(

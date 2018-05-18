@@ -20,6 +20,7 @@ describe("Backend Backend Container", () => {
   const visibility = {
     uiPanels: {}
   };
+  const settings = build.entity.settings("0");
 
   const component = mount(
     wrapWithRouter(
@@ -30,6 +31,7 @@ describe("Backend Backend Container", () => {
           authentication={authentication}
           route={route}
           visibility={visibility}
+          settings={settings}
         />
       </Provider>
     )

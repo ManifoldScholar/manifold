@@ -4,7 +4,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
 "<MemoryRouter>
   <Router history={{...}}>
     <Provider store={{...}}>
-      <BackendContainer history={{...}} notifications={{...}} authentication={{...}} route={{...}} visibility={{...}}>
+      <BackendContainer history={{...}} notifications={{...}} authentication={{...}} route={{...}} visibility={{...}} settings={{...}}>
         <SideEffect(BodyClass) className=\\"backend bg-neutral90\\">
           <BodyClass className=\\"backend bg-neutral90\\">
             <div>
@@ -15,7 +15,7 @@ exports[`Backend Backend Container renders correctly 1`] = `
               </withRouter(ScrollToTop)>
               <ScrollAware threshold={200} topClass=\\"top\\" notTopClass=\\"not-top\\" startPinned={true} pinnedClass=\\"pinned\\" notPinnedClass=\\"not-pinned\\" pinThreshold={50}>
                 <div className=\\"scroll-aware top pinned\\">
-                  <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} commonActions={{...}} settings={[undefined]} isProjects={[Function]} scrollAware={{...}}>
+                  <Layout.Header visibility={{...}} location={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}} isProjects={[Function]} scrollAware={{...}}>
                     <header className=\\"header-app dark\\">
                       <div className=\\"header-container\\">
                         <Link to=\\"/\\" className=\\"logo\\" replace={false}>
@@ -131,74 +131,78 @@ exports[`Backend Backend Container renders correctly 1`] = `
               <main>
                 <Switch />
               </main>
-              <withRouter(Layout.Footer) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={[undefined]}>
+              <withRouter(Layout.Footer) pages={[undefined]} authentication={{...}} commonActions={{...}} settings={{...}}>
                 <Route render={[Function: render]}>
-                  <Layout.Footer pages={{...}} authentication={{...}} commonActions={{...}} settings={[undefined]} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
+                  <Layout.Footer pages={{...}} authentication={{...}} commonActions={{...}} settings={{...}} match={{...}} location={{...}} history={{...}} staticContext={[undefined]}>
                     <footer className=\\"footer-browse\\">
-                      <div className=\\"container\\">
-                        <div className=\\"rel\\">
-                          <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"logo\\">
-                            <i className=\\"manicon manicon-manifold-logo\\" aria-hidden=\\"true\\" />
-                            <span className=\\"text\\">
-                              Powered by Manifold
-                              <span className=\\"small\\">
-                                Learn more at
-                                 
-                                <span className=\\"underline\\">
-                                  manifoldapp.org
+                      <section className=\\"footer-primary\\">
+                        <div className=\\"container flush\\">
+                          <div className=\\"flex-row\\">
+                            <div className=\\"right\\">
+                              <form className=\\"search-form\\" onSubmit={[Function]}>
+                                <div className=\\"search-button-inline\\">
+                                  <input type=\\"text\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
+                                  <button className=\\"manicon manicon-magnify\\">
+                                    <span className=\\"screen-reader-text\\">
+                                      Click to submit search query
+                                    </span>
+                                  </button>
+                                </div>
+                              </form>
+                            </div>
+                            <div className=\\"rel left\\">
+                              <nav className=\\"text-nav\\">
+                                <ul>
+                                  <li>
+                                    <ul className=\\"footer-nav\\">
+                                      <li>
+                                        <a onClick={[Function]} href=\\"#\\">
+                                          Log Out
+                                        </a>
+                                      </li>
+                                      <li>
+                                        <Link to=\\"/\\" replace={false}>
+                                          <a onClick={[Function]} href=\\"/\\">
+                                            Projects
+                                          </a>
+                                        </Link>
+                                      </li>
+                                    </ul>
+                                  </li>
+                                  <li />
+                                </ul>
+                              </nav>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                      <section className=\\"footer-secondary\\">
+                        <div className=\\"container flush\\">
+                          <div className=\\"colophon\\">
+                            <div>
+                              © 2015-2016 6 University of Minnesota Press.
+                              <br />
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                      <a href=\\"http://manifoldapp.org\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" className=\\"footer-tertiary\\">
+                        <section>
+                          <div className=\\"container flush\\">
+                            <span className=\\"logo\\">
+                              <i className=\\"manicon manicon-manifold-logo\\" aria-hidden=\\"true\\" />
+                              <span className=\\"text\\">
+                                <span className=\\"neutral-text\\">
+                                  Powered by
+                                </span>
+                                <span className=\\"white-text\\">
+                                   Manifold
                                 </span>
                               </span>
                             </span>
-                          </a>
-                        </div>
-                        <nav className=\\"text-nav\\">
-                          <ul>
-                            <li>
-                              <ul>
-                                <li>
-                                  <a onClick={[Function]} href=\\"#\\">
-                                    Log Out
-                                  </a>
-                                </li>
-                                <li>
-                                  <Link to=\\"/\\" replace={false}>
-                                    <a onClick={[Function]} href=\\"/\\">
-                                      Projects
-                                    </a>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <a target=\\"_blank\\" rel=\\"noopener noreferrer\\" href=\\"http://twitter.com/manifoldscholar\\">
-                                    Twitter
-                                  </a>
-                                </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <ul>
-                                <li>
-                                  <a href=\\"mailto:webbook@umn.edu\\">
-                                    Email
-                                  </a>
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </nav>
-                        <section className=\\"footer-secondary\\">
-                          <form onSubmit={[Function]}>
-                            <div className=\\"search-button-inline\\">
-                              <input type=\\"text\\" placeholder=\\"Search\\" value=\\"\\" onChange={[Function]} />
-                              <button className=\\"manicon manicon-magnify\\">
-                                <span className=\\"screen-reader-text\\">
-                                  Click to submit search query
-                                </span>
-                              </button>
-                            </div>
-                          </form>
-                          <div className=\\"colophon\\" />
+                          </div>
                         </section>
-                      </div>
+                      </a>
                     </footer>
                   </Layout.Footer>
                 </Route>
