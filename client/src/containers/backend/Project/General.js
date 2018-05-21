@@ -60,6 +60,19 @@ export default class ProjectGeneralContainer extends PureComponent {
               name="attributes[featured]"
             />
           </Form.FieldGroup>
+          <Form.FieldGroup label="Social">
+            <Form.MaskedTextInput
+              label="Hashtag"
+              name="attributes[hashtag]"
+              mask="hashtag"
+            />
+            <Form.TextInput label="Facebook ID" name="attributes[facebookId]" />
+            <Form.TextInput label="Twitter ID" name="attributes[twitterId]" />
+            <Form.TextInput
+              label="Instagram ID"
+              name="attributes[instagramId]"
+            />
+          </Form.FieldGroup>
           <Form.FieldGroup label="Other">
             <Form.TextInput
               label="Publisher"
@@ -68,11 +81,6 @@ export default class ProjectGeneralContainer extends PureComponent {
             <Form.Date
               label="Publication Date"
               name="attributes[publicationDate]"
-            />
-            <Form.MaskedTextInput
-              label="Hashtag"
-              name="attributes[hashtag]"
-              mask="hashtag"
             />
             <Project.Form.Subjects project={project} {...this.props} />
             <Project.Form.AvatarBuilder project={project} {...this.props} />

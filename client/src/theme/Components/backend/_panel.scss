@@ -50,7 +50,6 @@
 
     a {
       @include utilityPrimary;
-      padding-bottom: 3px;
       color: $neutral50;
       text-decoration: none;
       transition: color $duration $timing;

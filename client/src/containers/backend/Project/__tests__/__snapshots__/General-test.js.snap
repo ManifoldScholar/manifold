@@ -124,6 +124,75 @@ exports[`Backend Project General Container renders correctly 1`] = `
           className="form-section-label"
         >
           <span>
+            Social
+          </span>
+        </header>
+        <div
+          className="form-input"
+        >
+          <label
+            className=""
+          >
+            Hashtag
+          </label>
+          ReactTextMask
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Facebook ID
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Twitter ID
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-input"
+          style={Object {}}
+        >
+          <label
+            className=""
+          >
+            Instagram ID
+          </label>
+          <input
+            onChange={[Function]}
+            placeholder={undefined}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="form-section"
+      >
+        <header
+          className="form-section-label"
+        >
+          <span>
             Other
           </span>
         </header>
@@ -339,16 +408,6 @@ exports[`Backend Project General Container renders correctly 1`] = `
               ReactTextMask
             </div>
           </div>
-        </div>
-        <div
-          className="form-input"
-        >
-          <label
-            className=""
-          >
-            Hashtag
-          </label>
-          ReactTextMask
         </div>
         <div
           className="form-input"
