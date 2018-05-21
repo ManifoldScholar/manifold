@@ -204,7 +204,7 @@ Array [
                 onClick={[Function]}
                 style={undefined}
               >
-                Social
+                Social Integrations
               </a>
             </li>
             <li>
@@ -339,7 +339,7 @@ Array [
                 onClick={[Function]}
                 style={undefined}
               >
-                Social
+                Social Integrations
               </a>
             </li>
             <li>

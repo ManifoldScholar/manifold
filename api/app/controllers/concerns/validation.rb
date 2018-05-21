@@ -30,7 +30,7 @@ module Validation
   def project_params
     params.require(:data)
     attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,
-                  :purchase_price_money, :purchase_price_currency,
+                  :purchase_price_money, :purchase_price_currency, :facebook_id,
                   :purchase_call_to_action, :twitter_id, :hide_activity, :instagram_id,
                   :remove_avatar, attachment(:avatar), attachment(:hero),
                   attachment(:cover), :remove_hero, :draft, :remove_cover,
