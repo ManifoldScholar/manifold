@@ -64,7 +64,13 @@ class FormSwitch extends Component {
         {this.props.labelPos === "above" ? label : null}
         <div className="toggle-indicator">
           {/* Add .checked to .boolean-primary to change visual state */}
-          <div onClick={this.handleClick} className={classes} />
+          <div
+            onClick={this.handleClick}
+            role="button"
+            aria-pressed="false"
+            className={classes}
+            tabIndex="0"
+          />
         </div>
         {this.props.labelPos === "below" ? label : null}
       </div>
