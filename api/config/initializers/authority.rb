@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 Authority.configure do |config|
   # USER_METHOD
   # ===========
@@ -36,7 +37,7 @@ Authority.configure do |config|
   # me like that.
   #
   # Defaults are as follows:
-  #
+
   config.abilities = {
     create: "creatable",
     read: "readable",
@@ -45,9 +46,20 @@ Authority.configure do |config|
     destroy: "deleteable",
     read_deleted: "deleted_readable",
     read_drafts: "drafts_readable",
-    update_resources: "resources_updatable",
+    manage_resources: "resources_manageable",
+    create_resources: "resources_creatable",
+    manage_collections: "collections_manageable",
+    create_collections: "collections_creatable",
     update_makers: "makers_updatable",
-    update_permissions: "permissions_updatable",
+    manage_permissions: "permissions_manageable",
+    create_permissions: "permissions_creatable",
+    manage_texts: "texts_manageable",
+    create_texts: "texts_creatable",
+    manage_twitter_queries: "twitter_queries_manageable",
+    create_twitter_queries: "twitter_queries_creatable",
+    manage_events: "events_manageable",
+    create_events: "events_creatable",
+    manage_socials: "socials_manageable",
     read_secrets: "secrets_readable",
     read_log: "log_readable",
     update_limited_to_resource_metadata: "only_resource_metadata_updatable",
@@ -69,3 +81,4 @@ Authority.configure do |config|
   # config.logger = Logger.new('log/authority.log')  # Use this file
   # config.logger = Logger.new('/dev/null')          # Don't log at all (on a Unix system)
 end
+# rubocop:enable Metrics/BlockLength

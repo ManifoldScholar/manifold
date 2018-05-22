@@ -1,7 +1,10 @@
 class ProjectAuthorizer < ApplicationAuthorizer
 
-  expose_abilities [:read_drafts, :read_log, :update_resources, :update_makers,
-                    :update_permissions, :update_limited_to_resource_metadata]
+  expose_abilities [:read_drafts, :read_log, :manage_resources, :create_resources,
+                    :manage_collections, :create_collections, :manage_permissions,
+                    :create_permissions, :manage_texts, :create_texts,
+                    :manage_twitter_queries, :create_twitter_queries, :manage_events,
+                    :manage_socials, :update_makers, :update_limited_to_resource_metadata]
 
   # Any user who is a project_editor might be able to create, update, or delete it.
   def self.default(_able, _user, _options = {})
@@ -31,12 +34,25 @@ class ProjectAuthorizer < ApplicationAuthorizer
     marketeer_permissions?(user) ||
       user.project_editor_of?(resource)
   end
+  alias resources_creatable_by? updatable_by?
+  alias collections_manageable_by? updatable_by?
+  alias collections_creatable_by? updatable_by?
+  alias texts_manageable_by? updatable_by?
+  alias texts_creatable_by? updatable_by?
+  alias twitter_queries_creatable_by? updatable_by?
+  alias twitter_queries_manageable_by? updatable_by?
+  alias events_manageable_by? updatable_by?
+  alias events_creatable_by? updatable_by?
+  alias makers_updatable_by? updatable_by?
+  alias log_readable_by? updatable_by?
 
   # Admins, editors, and project-specific editors can delete those projects.
   def deletable_by?(user, _options = {})
     editor_permissions?(user) ||
       user.project_editor_of?(resource)
   end
+  alias permissions_manageable_by? deletable_by?
+  alias permissions_creatable_by? deletable_by?
 
   # Non-draft projects are readable. Otherwise, the user must have a role or relation to
   # the project to see it.
@@ -51,28 +67,24 @@ class ProjectAuthorizer < ApplicationAuthorizer
       user.project_resource_editor_of?(resource)
   end
 
-  def log_readable_by?(user, _options = {})
-    marketeer_permissions?(user) ||
-      user.project_editor_of?(resource)
-  end
-
-  def resources_updatable_by?(user, _options = {})
-    updatable_by?(user) ||
-      user.project_resource_editor_of?(resource)
-  end
-
   def only_resource_metadata_updatable_by?(user, _options = {})
     !updatable_by?(user) &&
       user.project_resource_editor_of?(resource)
   end
 
-  def makers_updatable_by?(user, _options = {})
-    updatable_by?(user)
+  def resources_manageable_by?(user, _options = {})
+    updatable_by?(user) ||
+      user.project_resource_editor_of?(resource)
   end
 
-  def permissions_updatable_by?(user, _options = {})
-    editor_permissions?(user) ||
-      user.project_editor_of?(resource)
+  # Can the user manage or create any of the entities
+  # on the project social integrations tab?
+  def socials_manageable_by?(user, _options = {})
+    socials = %w(twitter_queries)
+    socials.detect do |social|
+      __send__("#{social}_manageable_by?", user) ||
+        __send__("#{social}_creatable_by?", user)
+    end.present?
   end
 
 end
