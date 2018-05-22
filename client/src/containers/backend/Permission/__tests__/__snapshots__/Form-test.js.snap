@@ -82,7 +82,7 @@ exports[`Backend Permission Form Container renders correctly 1`] = `
             <label
               className="above"
             >
-              Can modify metadata?
+              Can modify resource metadata?
             </label>
             <div
               className="toggle-indicator"

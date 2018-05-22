@@ -1,86 +1,187 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Backend Project Permissions Container renders correctly 1`] = `
-<section>
-  <withRouter(Connect(HigherOrder.FetchData('PermissionContainer)))
-    entity={
-      Object {
-        "attributes": Object {
-          "abilities": Object {
-            "create": true,
-            "delete": true,
-            "read": true,
-            "readDeleted": true,
-            "readDrafts": true,
-            "readLog": true,
-            "readSecrets": true,
-            "update": true,
-            "updateLimitedToResourceMetadata": false,
-            "updateMakers": true,
-            "updatePermissions": true,
-            "updateResources": true,
-          },
-          "avatarStyles": Object {},
-          "coverStyles": Object {},
-          "hashtag": "#cute_dog",
-          "heroStyles": Object {},
-          "hideActivity": false,
-          "metadata": Object {
-            "doi": "https://doi.org/10.12345.6789",
-          },
-          "metadataFormatted": Object {
-            "doi": "https://doi.org/10.12345.6789",
-          },
-          "metadataProperties": Array [
-            "abstract",
-            "archive",
-            "archiveLocation",
-            "archivePlace",
-            "authority",
-            "callNumber",
-            "collectionTitle",
-            "containerTitle",
-            "dimensions",
-            "event",
-            "eventPlace",
-            "isbn",
-            "issn",
-            "jurisdiction",
-            "medium",
-            "originalPublisher",
-            "originalPublisherPlace",
-            "originalTitle",
-            "pmcid",
-            "pmid",
-            "publisher",
-            "publisherPlace",
-            "reviewedTitle",
-            "section",
-            "version",
-            "yearSuffix",
-            "chapterNumber",
-            "collectionNumber",
-            "edition",
-            "issue",
-            "number",
-            "numberOfPages",
-            "numberOfVolumes",
-            "volume",
-          ],
-          "slug": "slug-1",
-          "subtitle": "World's Greatest Dog",
-          "title": "Rowan Test",
+<Connect(AuthorizeComponent)
+  ability="managePermissions"
+  entity={
+    Object {
+      "attributes": Object {
+        "abilities": Object {
+          "create": true,
+          "createCollections": true,
+          "createPermissions": true,
+          "createResources": true,
+          "createTexts": true,
+          "createTwitterQueries": true,
+          "delete": true,
+          "manageCollections": true,
+          "manageEvents": true,
+          "managePermissions": true,
+          "manageResources": true,
+          "manageSocials": true,
+          "manageTexts": true,
+          "manageTwitterQueries": true,
+          "read": true,
+          "readDeleted": true,
+          "readDrafts": true,
+          "readLog": true,
+          "readSecrets": true,
+          "update": true,
+          "updateLimitedToResourceMetadata": false,
+          "updateMakers": true,
         },
-        "id": "1",
-        "relationships": Object {
-          "resources": Array [],
+        "avatarStyles": Object {},
+        "coverStyles": Object {},
+        "hashtag": "#cute_dog",
+        "heroStyles": Object {},
+        "hideActivity": false,
+        "metadata": Object {
+          "doi": "https://doi.org/10.12345.6789",
         },
-        "type": "projects",
-      }
+        "metadataFormatted": Object {
+          "doi": "https://doi.org/10.12345.6789",
+        },
+        "metadataProperties": Array [
+          "abstract",
+          "archive",
+          "archiveLocation",
+          "archivePlace",
+          "authority",
+          "callNumber",
+          "collectionTitle",
+          "containerTitle",
+          "dimensions",
+          "event",
+          "eventPlace",
+          "isbn",
+          "issn",
+          "jurisdiction",
+          "medium",
+          "originalPublisher",
+          "originalPublisherPlace",
+          "originalTitle",
+          "pmcid",
+          "pmid",
+          "publisher",
+          "publisherPlace",
+          "reviewedTitle",
+          "section",
+          "version",
+          "yearSuffix",
+          "chapterNumber",
+          "collectionNumber",
+          "edition",
+          "issue",
+          "number",
+          "numberOfPages",
+          "numberOfVolumes",
+          "volume",
+        ],
+        "slug": "slug-1",
+        "subtitle": "World's Greatest Dog",
+        "title": "Rowan Test",
+      },
+      "id": "1",
+      "relationships": Object {
+        "resources": Array [],
+      },
+      "type": "projects",
     }
-  />
-  <withRouter(Router.Switch('DrawerSwitch))
-    closeUrl="/backend/project/1/permissions"
-  />
-</section>
+  }
+  failureNotification={true}
+  failureRedirect="/backend/project/1"
+>
+  <section>
+    <withRouter(Connect(HigherOrder.FetchData('PermissionContainer)))
+      entity={
+        Object {
+          "attributes": Object {
+            "abilities": Object {
+              "create": true,
+              "createCollections": true,
+              "createPermissions": true,
+              "createResources": true,
+              "createTexts": true,
+              "createTwitterQueries": true,
+              "delete": true,
+              "manageCollections": true,
+              "manageEvents": true,
+              "managePermissions": true,
+              "manageResources": true,
+              "manageSocials": true,
+              "manageTexts": true,
+              "manageTwitterQueries": true,
+              "read": true,
+              "readDeleted": true,
+              "readDrafts": true,
+              "readLog": true,
+              "readSecrets": true,
+              "update": true,
+              "updateLimitedToResourceMetadata": false,
+              "updateMakers": true,
+            },
+            "avatarStyles": Object {},
+            "coverStyles": Object {},
+            "hashtag": "#cute_dog",
+            "heroStyles": Object {},
+            "hideActivity": false,
+            "metadata": Object {
+              "doi": "https://doi.org/10.12345.6789",
+            },
+            "metadataFormatted": Object {
+              "doi": "https://doi.org/10.12345.6789",
+            },
+            "metadataProperties": Array [
+              "abstract",
+              "archive",
+              "archiveLocation",
+              "archivePlace",
+              "authority",
+              "callNumber",
+              "collectionTitle",
+              "containerTitle",
+              "dimensions",
+              "event",
+              "eventPlace",
+              "isbn",
+              "issn",
+              "jurisdiction",
+              "medium",
+              "originalPublisher",
+              "originalPublisherPlace",
+              "originalTitle",
+              "pmcid",
+              "pmid",
+              "publisher",
+              "publisherPlace",
+              "reviewedTitle",
+              "section",
+              "version",
+              "yearSuffix",
+              "chapterNumber",
+              "collectionNumber",
+              "edition",
+              "issue",
+              "number",
+              "numberOfPages",
+              "numberOfVolumes",
+              "volume",
+            ],
+            "slug": "slug-1",
+            "subtitle": "World's Greatest Dog",
+            "title": "Rowan Test",
+          },
+          "id": "1",
+          "relationships": Object {
+            "resources": Array [],
+          },
+          "type": "projects",
+        }
+      }
+    />
+    <withRouter(Router.Switch('DrawerSwitch))
+      closeUrl="/backend/project/1/permissions"
+    />
+  </section>
+</Connect(AuthorizeComponent)>
 `;

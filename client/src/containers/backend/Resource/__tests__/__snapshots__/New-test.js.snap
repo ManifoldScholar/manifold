@@ -13,7 +13,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
       >
         <a
           className="initial"
-          href="/backend/project/undefined/resources"
+          href="/backend/project/1/resources"
           onClick={[Function]}
         >
           <i
@@ -26,7 +26,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
           <li>
             <a
               className="back-link-primary-segment"
-              href="/backend/project/undefined/resources"
+              href="/backend/project/1/resources"
               onClick={[Function]}
             >
               Resources
@@ -623,7 +623,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
             >
               <a
                 className="button-secondary outlined dull"
-                href="/backend/project/undefined/resources"
+                href="/backend/project/1/resources"
                 onClick={[Function]}
               >
                 Cancel
