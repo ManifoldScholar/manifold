@@ -6,7 +6,7 @@ class ProjectRestrictedChildAuthorizer < ProjectChildAuthorizer
   def self.readable_by?(user, options = {})
     return true if editor_permissions?(user)
     return false unless options[:for]
-    options[:for].resources_updatable_by? user
+    options[:for].resources_manageable_by? user
   end
 
   # A project's restricted children are not readable unless the user can update the
