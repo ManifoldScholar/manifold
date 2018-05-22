@@ -255,6 +255,7 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
               Move category down
             </span>
             <i
+              aria-hidden="true"
               className="manicon manicon-arrow-down"
             />
           </button>

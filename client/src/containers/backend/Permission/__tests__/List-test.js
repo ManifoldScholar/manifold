@@ -26,6 +26,7 @@ describe("Backend Permissions List Container", () => {
           entity={project}
           dispatch={store.dispatch}
           permissions={permissions}
+          project={project}
           match={match}
         />
       </Provider>

@@ -6,13 +6,12 @@ import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 
 describe("Backend Resource New Container", () => {
+  const project = build.entity.project("1");
   const component = renderer.create(
     wrapWithRouter(
       <Provider store={build.store()}>
         <ResourceNewContainer
-          match={{
-            params: {}
-          }}
+          project={project}
         />
       </Provider>
     )

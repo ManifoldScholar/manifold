@@ -6,9 +6,18 @@ import { Provider } from "react-redux";
 import build from "test/fixtures/build";
 
 describe("Backend Project New Container", () => {
+  const store = build.store();
+  store.dispatch({
+    type: "UPDATE_CURRENT_USER",
+    error: false,
+    payload: {
+      data: build.entity.user("1")
+    }
+  });
+
   const component = renderer.create(
     wrapWithRouter(
-      <Provider store={build.store()}>
+      <Provider store={store}>
         <ProjectNewContainer />
       </Provider>
     )
