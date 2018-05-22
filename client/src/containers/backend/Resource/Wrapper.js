@@ -128,7 +128,7 @@ export class ResourceWrapperContainer extends PureComponent {
         label: "Metadata",
         key: "metadata",
         entity: project,
-        ability: "updateResources"
+        ability: "manageResources"
       }
     ];
     if (

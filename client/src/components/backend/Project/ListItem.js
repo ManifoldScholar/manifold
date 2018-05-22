@@ -15,7 +15,7 @@ export default class ProjectListItem extends PureComponent {
   projectLink(project) {
     if (
       project.attributes.abilities.update === true ||
-      project.attributes.abilities.updateResources === true
+      project.attributes.abilities.manageResources === true
     ) {
       return lh.link("backendProject", project.id);
     }
@@ -92,14 +92,14 @@ export default class ProjectListItem extends PureComponent {
           <HigherOrder.Authorize
             successBehavior="show"
             entity={project}
-            ability={["update", "updateResources"]}
+            ability={["update", "manageResources"]}
           >
             <span className="label">Edit</span>
           </HigherOrder.Authorize>
           <HigherOrder.Authorize
             successBehavior="hide"
             entity={project}
-            ability={["update", "updateResources"]}
+            ability={["update", "manageResources"]}
           >
             <span className="label">View</span>
           </HigherOrder.Authorize>

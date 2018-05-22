@@ -4,6 +4,7 @@ import { projectsAPI } from "api";
 import { Form as FormContainer } from "containers/backend";
 import { connect } from "react-redux";
 import { childRoutes } from "helpers/router";
+import { HigherOrder } from "containers/global";
 import lh from "helpers/linkHandler";
 
 export class ProjectCollaboratorsContainer extends Component {
@@ -30,19 +31,26 @@ export class ProjectCollaboratorsContainer extends Component {
     const closeUrl = this.closeUrl(this.props);
 
     return (
-      <section>
-        <FormContainer.Collaborators
-          entity={project}
-          api={projectsAPI}
-          history={this.props.history}
-          route={this.props.route}
-        />
-        {childRoutes(this.props.route, {
-          drawer: true,
-          drawerProps: { closeUrl },
-          childProps: { afterDestroy: this.close }
-        })}
-      </section>
+      <HigherOrder.Authorize
+        entity={project}
+        ability="updateMakers"
+        failureNotification
+        failureRedirect={lh.link("backendProject", project.id)}
+      >
+        <section>
+          <FormContainer.Collaborators
+            entity={project}
+            api={projectsAPI}
+            history={this.props.history}
+            route={this.props.route}
+          />
+          {childRoutes(this.props.route, {
+            drawer: true,
+            drawerProps: { closeUrl },
+            childProps: { afterDestroy: this.close }
+          })}
+        </section>
+      </HigherOrder.Authorize>
     );
   }
 }

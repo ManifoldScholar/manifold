@@ -1,12 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Event, List, Dialog } from "components/backend";
+import { HigherOrder } from "containers/global";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, eventsAPI, requests } from "api";
 import { connect } from "react-redux";
 import get from "lodash/get";
-import config from "../../../config";
+import config from "/config";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 const perPage = 6;
@@ -117,35 +119,42 @@ export class ProjectEventsContainer extends PureComponent {
     if (!project) return null;
 
     return (
-      <section>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
-        <header className="section-heading-secondary">
-          <h3>
-            {"Events"}{" "}
-            <i className="manicon manicon-bugle" aria-hidden="true" />
-          </h3>
-        </header>
-        <List.Searchable
-          entities={this.props.events}
-          singularUnit="event"
-          pluralUnit="events"
-          listClassName="tile-list"
-          pagination={this.props.eventsMeta.pagination}
-          paginationClickHandler={this.pageChangeHandlerCreator}
-          paginationClass="secondary"
-          entityComponent={Event.ListItem}
-          filterChangeHandler={this.filterChangeHandler}
-          destroyHandler={this.handleEventDestroy}
-          filterOptions={{
-            type: {
-              options: project.attributes.eventTypes,
-              labels: config.app.locale.event_types
-            }
-          }}
-        />
-      </section>
+      <HigherOrder.Authorize
+        entity={project}
+        ability="manageEvents"
+        failureNotification
+        failureRedirect={lh.link("backendProject", project.id)}
+      >
+        <section>
+          {this.state.confirmation ? (
+            <Dialog.Confirm {...this.state.confirmation} />
+          ) : null}
+          <header className="section-heading-secondary">
+            <h3>
+              {"Events"}{" "}
+              <i className="manicon manicon-bugle" aria-hidden="true" />
+            </h3>
+          </header>
+          <List.Searchable
+            entities={this.props.events}
+            singularUnit="event"
+            pluralUnit="events"
+            listClassName="tile-list"
+            pagination={this.props.eventsMeta.pagination}
+            paginationClickHandler={this.pageChangeHandlerCreator}
+            paginationClass="secondary"
+            entityComponent={Event.ListItem}
+            filterChangeHandler={this.filterChangeHandler}
+            destroyHandler={this.handleEventDestroy}
+            filterOptions={{
+              type: {
+                options: project.attributes.eventTypes,
+                labels: config.app.locale.event_types
+              }
+            }}
+          />
+        </section>
+      </HigherOrder.Authorize>
     );
   }
 }

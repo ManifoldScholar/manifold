@@ -437,139 +437,152 @@ export class ProjectTextsContainer extends PureComponent {
     if (!project) return null;
 
     return (
-      <section>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
+      <HigherOrder.Authorize
+        entity={project}
+        ability="manageTexts"
+        failureNotification
+        failureRedirect={lh.link("backendProject", project.id)}
+      >
+        <section>
+          {this.state.confirmation ? (
+            <Dialog.Confirm {...this.state.confirmation} />
+          ) : null}
 
-        {this.childRoutes()}
+          {this.childRoutes()}
 
-        <HigherOrder.Authorize entity={project} ability="update">
-          <div className="buttons-icon-horizontal maintain">
-            <Link
-              to={lh.link("backendProjectTextsIngestionsNew", project.id)}
-              className="button-icon-secondary"
-            >
-              <span className="screen-reader-text">Add a new text</span>
-              <i className="manicon manicon-plus" aria-hidden="true" />
-              <span className="full" aria-hidden="true">
-                Add a new text
-              </span>
-              <span className="abbreviated" aria-hidden="true">
-                Text
-              </span>
-            </Link>
+          <HigherOrder.Authorize entity={project} ability="createTexts">
+            <div className="buttons-icon-horizontal maintain">
+              <Link
+                to={lh.link("backendProjectTextsIngestionsNew", project.id)}
+                className="button-icon-secondary"
+              >
+                <span className="screen-reader-text">Add a new text</span>
+                <i className="manicon manicon-plus" aria-hidden="true" />
+                <span className="full" aria-hidden="true">
+                  Add a new text
+                </span>
+                <span className="abbreviated" aria-hidden="true">
+                  Text
+                </span>
+              </Link>
 
-            <Link
-              to={lh.link("backendProjectCategoriesNew", project.id)}
-              className="button-icon-secondary"
-            >
-              <span className="screen-reader-text">Add a new category</span>
-              <i className="manicon manicon-plus" aria-hidden="true" />
-              <span className="full" aria-hidden="true">
-                Create a new category
-              </span>
-              <span className="abbreviated" aria-hidden="true">
-                Category
-              </span>
-            </Link>
-          </div>
-        </HigherOrder.Authorize>
+              <Link
+                to={lh.link("backendProjectCategoriesNew", project.id)}
+                className="button-icon-secondary"
+              >
+                <span className="screen-reader-text">Add a new category</span>
+                <i className="manicon manicon-plus" aria-hidden="true" />
+                <span className="full" aria-hidden="true">
+                  Create a new category
+                </span>
+                <span className="abbreviated" aria-hidden="true">
+                  Category
+                </span>
+              </Link>
+            </div>
+          </HigherOrder.Authorize>
 
-        <section className="text-category-list-secondary">
-          <div className="text-category">
-            <header>
-              <h4 className="category-title highlight">Published</h4>
-            </header>
-            {this.renderTexts(this.publishedTexts())}
-          </div>
-          {categories.map(category => {
-            return (
-              <div key={category.id} className="text-category">
-                <header>
-                  <h4 className="category-title">
-                    <span>Category: </span>
-                    {category.attributes.title}
-                  </h4>
-                  <div className="text-category-list-utility">
-                    <Link
-                      className="button"
-                      to={lh.link(
-                        "backendProjectCategory",
-                        project.id,
-                        category.id
+          <section className="text-category-list-secondary">
+            <div className="text-category">
+              <header>
+                <h4 className="category-title highlight">Published</h4>
+              </header>
+              {this.renderTexts(this.publishedTexts())}
+            </div>
+            {categories.map(category => {
+              return (
+                <div key={category.id} className="text-category">
+                  <header>
+                    <h4 className="category-title">
+                      <span>Category: </span>
+                      {category.attributes.title}
+                    </h4>
+                    <div className="text-category-list-utility">
+                      <Link
+                        className="button"
+                        to={lh.link(
+                          "backendProjectCategory",
+                          project.id,
+                          category.id
+                        )}
+                      >
+                        {"edit"}
+                      </Link>
+                      {this.canShowCategoryUp(category) ? (
+                        <button
+                          onClick={event => {
+                            this.handleCategoryUp(event, category);
+                          }}
+                        >
+                          <span className="screen-reader-text">
+                            Move category up
+                          </span>
+                          <i
+                            className="manicon manicon-arrow-up"
+                            aria-hidden="true"
+                          />
+                        </button>
+                      ) : (
+                        <button style={{ visibility: "hidden" }}>
+                          <span className="screen-reader-text">
+                            Move category up
+                          </span>
+                          <i
+                            className="manicon manicon-arrow-up"
+                            aria-hidden="true"
+                          />
+                        </button>
                       )}
-                    >
-                      {"edit"}
-                    </Link>
-                    {this.canShowCategoryUp(category) ? (
+                      {this.canShowCategoryDown(category) ? (
+                        <button
+                          onClick={event => {
+                            this.handleCategoryDown(event, category);
+                          }}
+                        >
+                          <span className="screen-reader-text">
+                            Move category down
+                          </span>
+                          <i
+                            className="manicon manicon-arrow-down"
+                            aria-hidden="true"
+                          />
+                        </button>
+                      ) : (
+                        <button style={{ visibility: "hidden" }}>
+                          <span className="screen-reader-text">
+                            Move category down
+                          </span>
+                          <i
+                            className="manicon manicon-arrow-down"
+                            aria-hidden="true"
+                          />
+                        </button>
+                      )}
                       <button
                         onClick={event => {
-                          this.handleCategoryUp(event, category);
+                          this.handleCategoryDestroy(event, category);
                         }}
                       >
+                        <i className="manicon manicon-x" aria-hidden="true" />
                         <span className="screen-reader-text">
-                          Move category up
+                          Delete Category
                         </span>
-                        <i
-                          className="manicon manicon-arrow-up"
-                          aria-hidden="true"
-                        />
                       </button>
-                    ) : (
-                      <button style={{ visibility: "hidden" }}>
-                        <span className="screen-reader-text">
-                          Move category up
-                        </span>
-                        <i
-                          className="manicon manicon-arrow-up"
-                          aria-hidden="true"
-                        />
-                      </button>
-                    )}
-                    {this.canShowCategoryDown(category) ? (
-                      <button
-                        onClick={event => {
-                          this.handleCategoryDown(event, category);
-                        }}
-                      >
-                        <span className="screen-reader-text">
-                          Move category down
-                        </span>
-                        <i className="manicon manicon-arrow-down" />
-                      </button>
-                    ) : (
-                      <button style={{ visibility: "hidden" }}>
-                        <span className="screen-reader-text">
-                          Move category down
-                        </span>
-                        <i className="manicon manicon-arrow-down" />
-                      </button>
-                    )}
-                    <button
-                      onClick={event => {
-                        this.handleCategoryDestroy(event, category);
-                      }}
-                    >
-                      <i className="manicon manicon-x" aria-hidden="true" />
-                      <span className="screen-reader-text">
-                        Delete Category
-                      </span>
-                    </button>
-                  </div>
-                </header>
-                {this.renderTexts(this.categoryTexts(category))}
-              </div>
-            );
-          })}
-          <div className="text-category">
-            <header>
-              <h4 className="category-title notice">Uncategorized</h4>
-            </header>
-            {this.renderTexts(this.uncategorizedTexts())}
-          </div>
+                    </div>
+                  </header>
+                  {this.renderTexts(this.categoryTexts(category))}
+                </div>
+              );
+            })}
+            <div className="text-category">
+              <header>
+                <h4 className="category-title notice">Uncategorized</h4>
+              </header>
+              {this.renderTexts(this.uncategorizedTexts())}
+            </div>
+          </section>
         </section>
-      </section>
+      </HigherOrder.Authorize>
     );
   }
 }

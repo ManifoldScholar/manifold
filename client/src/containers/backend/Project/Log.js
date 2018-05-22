@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import { entityStoreActions } from "actions";
 import { Log, List } from "components/backend";
 import { Utility } from "components/global";
+import { HigherOrder } from "containers/global";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import { connect } from "react-redux";
+import lh from "helpers/linkHandler";
 
 const perPage = 5;
 const { request } = entityStoreActions;
@@ -66,26 +68,35 @@ export class LogContainer extends PureComponent {
   };
 
   render() {
-    if (!this.props.versions) return null;
+    const project = this.props.project;
 
     return (
-      <React.Fragment>
-        <nav className="flush results-list">
-          <List.SimpleList
-            entities={this.props.versions}
-            entityComponent={Log.ListItem}
-            emptyListComponent={this.renderEmptyList}
-            title="Project Changes"
-            icon="manicon-pulse-small"
-          />
-        </nav>
-        <Utility.Pagination
-          pagination={this.props.versionsMeta.pagination}
-          paginationPadding={3}
-          paginationClickHandler={this.pageChangeHandlerCreator}
-          paginationClass="secondary"
-        />
-      </React.Fragment>
+      <HigherOrder.Authorize
+        entity={project}
+        ability="readLog"
+        failureNotification
+        failureRedirect={lh.link("backendProject", project.id)}
+      >
+        {this.props.versions && (
+          <React.Fragment>
+            <nav className="flush results-list">
+              <List.SimpleList
+                entities={this.props.versions}
+                entityComponent={Log.ListItem}
+                emptyListComponent={this.renderEmptyList}
+                title="Project Changes"
+                icon="manicon-pulse-small"
+              />
+            </nav>
+            <Utility.Pagination
+              pagination={this.props.versionsMeta.pagination}
+              paginationPadding={3}
+              paginationClickHandler={this.pageChangeHandlerCreator}
+              paginationClass="secondary"
+            />
+          </React.Fragment>
+        )}
+      </HigherOrder.Authorize>
     );
   }
 }

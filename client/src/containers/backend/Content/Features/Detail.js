@@ -8,6 +8,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { Dialog, Navigation } from "components/backend";
 import { Layout } from "components/frontend";
+import { HigherOrder } from "containers/global";
 import get from "lodash/get";
 
 const { select } = entityUtils;
@@ -200,38 +201,48 @@ class FeatureDetailContainer extends PureComponent {
   render() {
     const feature = this.feature(this.props);
     const isNew = this.isNew(this.props);
+    const authProps = isNew
+      ? { entity: "feature", ability: "create" }
+      : { entity: feature, ability: "update" };
     const previewFeature = this.previewableFeature(this.props);
     return (
-      <div>
-        {this.state.confirmation ? (
-          <Dialog.Confirm {...this.state.confirmation} />
-        ) : null}
-        {isNew ? this.newHeader() : this.featureHeader(feature)}
-        <section className="backend-panel">
-          <div className="container">
-            {feature || isNew ? (
-              <div className="panel">
-                <section>
-                  {previewFeature ? (
-                    <div className="form-secondary">
-                      <div className="form-input">
-                        <label>Feature Preview</label>
-                        <span className="instructions">
-                          This is an approximate preview of your feature.
-                          Foreground, background, and markdown will not be
-                          displayed until the feature is saved.
-                        </span>
-                        <Layout.Splash feature={previewFeature} preview />
+      <HigherOrder.Authorize
+        failureFatalError={{
+          detail: `You are not allowed to ${authProps.ability} features.`
+        }}
+        {...authProps}
+      >
+        <div>
+          {this.state.confirmation ? (
+            <Dialog.Confirm {...this.state.confirmation} />
+          ) : null}
+          {isNew ? this.newHeader() : this.featureHeader(feature)}
+          <section className="backend-panel">
+            <div className="container">
+              {feature || isNew ? (
+                <div className="panel">
+                  <section>
+                    {previewFeature ? (
+                      <div className="form-secondary">
+                        <div className="form-input">
+                          <label>Feature Preview</label>
+                          <span className="instructions">
+                            This is an approximate preview of your feature.
+                            Foreground, background, and markdown will not be
+                            displayed until the feature is saved.
+                          </span>
+                          <Layout.Splash feature={previewFeature} preview />
+                        </div>
                       </div>
-                    </div>
-                  ) : null}
-                  {this.renderRoutes()}
-                </section>
-              </div>
-            ) : null}
-          </div>
-        </section>
-      </div>
+                    ) : null}
+                    {this.renderRoutes()}
+                  </section>
+                </div>
+              ) : null}
+            </div>
+          </section>
+        </div>
+      </HigherOrder.Authorize>
     );
   }
 }

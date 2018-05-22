@@ -84,7 +84,7 @@ export class ProjectResourcesListContainer extends PureComponent {
             path: lh.link("backendProjectResourcesNew", project.id),
             text: "Add a New Resource",
             authorizedFor: project,
-            authorizedTo: "update"
+            authorizedTo: "createResources"
           }}
           secondaryButton={{
             icon: "manicon-cube-multiple",
@@ -92,7 +92,7 @@ export class ProjectResourcesListContainer extends PureComponent {
             path: lh.link("backendResourceImport", project.id),
             text: "Bulk Add Resources",
             authorizedFor: project,
-            authorizedTo: "update"
+            authorizedTo: "createResources"
           }}
           entities={this.props.resources}
           singularUnit="resource"

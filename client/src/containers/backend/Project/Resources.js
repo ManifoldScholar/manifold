@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Resource from "./Resource";
+import { HigherOrder } from "containers/global";
+import lh from "helpers/linkHandler";
 
 export default class ProjectResourcesContainer extends PureComponent {
   static displayName = "Project.ResourcesContainer";
@@ -14,9 +16,16 @@ export default class ProjectResourcesContainer extends PureComponent {
     if (!project) return null;
 
     return (
-      <section>
-        <Resource.ResourcesList project={project} />
-      </section>
+      <HigherOrder.Authorize
+        entity={project}
+        ability={"manageResources"}
+        failureNotification
+        failureRedirect={lh.link("backendProject", project.id)}
+      >
+        <section>
+          <Resource.ResourcesList project={project} />
+        </section>
+      </HigherOrder.Authorize>
     );
   }
 }

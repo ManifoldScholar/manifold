@@ -3,13 +3,35 @@ import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import { Form as FormContainer } from "containers/backend";
 import { Resource, Navigation, Form } from "components/backend";
+import { HigherOrder } from "containers/global";
 import { Form as GlobalForm } from "components/global";
-import { resourcesAPI } from "api";
+import { requests, projectsAPI, resourcesAPI } from "api";
+import { entityStoreActions } from "actions";
+import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 
+const { request } = entityStoreActions;
+
 export class ResourceNewContainer extends PureComponent {
+  static mapStateToProps = state => {
+    return {
+      project: select(requests.beProjects, state.entityStore)
+    };
+  };
+
+  static fetchData = (getState, dispatch, location, match) => {
+    const promises = [];
+    const projectCall = projectsAPI.show(match.params.projectId);
+    const { promise: one } = dispatch(
+      request(projectCall, requests.beProjects)
+    );
+    promises.push(one);
+    return Promise.all(promises);
+  };
+
   static displayName = "Resource.New";
   static propTypes = {
+    project: PropTypes.object,
     history: PropTypes.object,
     match: PropTypes.object
   };
@@ -29,69 +51,72 @@ export class ResourceNewContainer extends PureComponent {
   };
 
   render() {
-    const { match } = this.props;
+    const { project } = this.props;
+    if (!project) return null;
 
     return (
-      <div>
-        <Navigation.DetailHeader
-          type="resource"
-          breadcrumb={[
-            {
-              path: lh.link("backendProjectResources", match.params.projectId),
-              label: "Resources"
+      <HigherOrder.Authorize
+        entity={project}
+        ability={"createResources"}
+        failureNotification
+        failureRedirect={lh.link("backendProject", project.id)}
+      >
+        <div>
+          <Navigation.DetailHeader
+            type="resource"
+            breadcrumb={[
+              {
+                path: lh.link("backendProjectResources", project.id),
+                label: "Resources"
+              }
+            ]}
+            title={"New Resource"}
+            showUtility={false}
+            note={
+              "Select your resource type, then enter a name and a brief description." +
+              " Press save to continue."
             }
-          ]}
-          title={"New Resource"}
-          showUtility={false}
-          note={
-            "Select your resource type, then enter a name and a brief description." +
-            " Press save to continue."
-          }
-        />
-        <section className="backend-panel">
-          <div className="container">
-            <div className="panel">
-              <FormContainer.Form
-                model={this.defaultResource}
-                name="backend-resource-create"
-                update={resourcesAPI.update}
-                create={model =>
-                  resourcesAPI.create(match.params.projectId, model)
-                }
-                onSuccess={this.handleSuccess}
-                className="form-secondary"
-              >
-                <Resource.Form.KindPicker
-                  name="attributes[kind]"
-                  includeButtons
-                />
-                <Form.TextInput
-                  label="Title"
-                  name="attributes[title]"
-                  placeholder="Enter a resource title"
-                />
-                <Form.TextArea
-                  label="Description"
-                  name="attributes[description]"
-                  placeholder="Enter a description"
-                />
-                <Resource.Form.KindAttributes />
-                <GlobalForm.Errorable
-                  className="form-input"
-                  name="attributes[fingerprint]"
-                />
-                <Form.Save
-                  text="Save and continue"
-                  cancelRoute={lh.link(
-                    "backendProjectResources",
-                    match.params.projectId
-                  )}
-                />
-              </FormContainer.Form>
+          />
+          <section className="backend-panel">
+            <div className="container">
+              <div className="panel">
+                <FormContainer.Form
+                  model={this.defaultResource}
+                  name="backend-resource-create"
+                  update={resourcesAPI.update}
+                  create={model => resourcesAPI.create(project.id, model)}
+                  onSuccess={this.handleSuccess}
+                  className="form-secondary"
+                >
+                  <Resource.Form.KindPicker
+                    name="attributes[kind]"
+                    includeButtons
+                  />
+                  <Form.TextInput
+                    label="Title"
+                    name="attributes[title]"
+                    placeholder="Enter a resource title"
+                  />
+                  <Form.TextArea
+                    label="Description"
+                    name="attributes[description]"
+                    placeholder="Enter a description"
+                  />
+                  <Resource.Form.KindAttributes />
+                  <GlobalForm.Errorable
+                    className="form-input"
+                    name="attributes[fingerprint]"
+                  />
+                  <Form.Save
+                    text="Save and continue"
+                    cancelRoute={lh.link("backendProjectResources", project.id)}
+                  />
+                </FormContainer.Form>
+              </div>
             </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
+      </HigherOrder.Authorize>
     );
   }
 }
