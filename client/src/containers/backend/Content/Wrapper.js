@@ -39,7 +39,7 @@ export class PagesWrapperContainer extends PureComponent {
   render() {
     return (
       <HigherOrder.Authorize
-        entity="page"
+        entity={["page", "feature"]}
         failureFatalError={{ detail: "You are not allowed to edit content." }}
         ability="create"
       >

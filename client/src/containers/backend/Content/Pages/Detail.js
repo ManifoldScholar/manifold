@@ -6,6 +6,7 @@ import entityUtils from "utils/entityUtils";
 import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectIfNoChildRouteMatches } from "helpers/router";
+import { HigherOrder } from "containers/global";
 import { Dialog, Navigation } from "components/backend";
 
 const { select } = entityUtils;
@@ -216,6 +217,8 @@ class PageDetailContainer extends PureComponent {
   }
 
   renderExisting(page) {
+    if (!page) return null;
+
     return (
       <div>
         <RedirectIfNoChildRouteMatches
@@ -257,10 +260,20 @@ class PageDetailContainer extends PureComponent {
   render() {
     const page = this.page(this.props);
     const isNew = this.isNew(this.props);
+    const authProps = isNew
+      ? { entity: "page", ability: "create" }
+      : { entity: page, ability: "update" };
 
-    if (isNew) return this.renderNew();
-    if (page) return this.renderExisting(page);
-    return null;
+    return (
+      <HigherOrder.Authorize
+        failureFatalError={{
+          detail: `You are not allowed to ${authProps.ability} pages.`
+        }}
+        {...authProps}
+      >
+        {isNew ? this.renderNew() : this.renderExisting(page)}
+      </HigherOrder.Authorize>
+    );
   }
 }
 

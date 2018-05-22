@@ -57,7 +57,7 @@ export class PermissionContainer extends PureComponent {
               }}
             />
           ) : null}
-          <HigherOrder.Authorize entity={entity} ability="updatePermissions">
+          <HigherOrder.Authorize entity={entity} ability="createPermissions">
             <div className="buttons-icon-horizontal">
               <Link
                 to={lh.link(newUrl, entity.id)}

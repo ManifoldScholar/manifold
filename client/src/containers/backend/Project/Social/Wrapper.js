@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Project } from "containers/backend";
+import { HigherOrder } from "containers/global";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 
@@ -17,17 +18,25 @@ export default class ProjectSocialWrapperContainer extends Component {
   render() {
     const project = this.props.project;
     const closeUrl = lh.link("backendProjectSocial", project.id);
+
     return (
-      <section>
-        {childRoutes(this.props.route, {
-          drawer: true,
-          drawerProps: { closeUrl }
-        })}
-        <Project.Social.TwitterQueries
-          project={project}
-          match={this.props.match}
-        />
-      </section>
+      <HigherOrder.Authorize
+        entity={project}
+        ability="manageSocials"
+        failureNotification
+        failureRedirect={lh.link("backendProject", project.id)}
+      >
+        <section>
+          {childRoutes(this.props.route, {
+            drawer: true,
+            drawerProps: { closeUrl }
+          })}
+          <Project.Social.TwitterQueries
+            project={project}
+            match={this.props.match}
+          />
+        </section>
+      </HigherOrder.Authorize>
     );
   }
 }

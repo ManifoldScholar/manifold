@@ -75,7 +75,7 @@ export class ProjectWrapperContainer extends PureComponent {
         label: "Permissions",
         key: "permissions",
         entity: project,
-        ability: "updatePermissions"
+        ability: "managePermissions"
       },
       {
         path: lh.link("backendProjectCollaborators", project.id),
@@ -89,28 +89,28 @@ export class ProjectWrapperContainer extends PureComponent {
         label: "Texts",
         key: "texts",
         entity: project,
-        ability: "update"
+        ability: "manageTexts"
       },
       {
         path: lh.link("backendProjectResources", project.id),
         label: "Resources",
         key: "resources",
         entity: project,
-        ability: "updateResources"
+        ability: "manageResources"
       },
       {
         path: lh.link("backendProjectCollections", project.id),
         label: "Collections",
         key: "collections",
         entity: project,
-        ability: "update"
+        ability: "manageCollections"
       },
       {
         path: lh.link("backendProjectEvents", project.id),
         label: "Activity",
         key: "events",
         entity: project,
-        ability: "update"
+        ability: "manageEvents"
       },
       {
         path: lh.link("backendProjectMetadata", project.id),
@@ -124,7 +124,7 @@ export class ProjectWrapperContainer extends PureComponent {
         label: "Social Integrations",
         key: "social",
         entity: project,
-        ability: "update"
+        ability: "manageSocials"
       },
       {
         path: lh.link("backendProjectLog", project.id),
@@ -211,7 +211,7 @@ export class ProjectWrapperContainer extends PureComponent {
         failureFatalError={{
           detail: "You are not allowed to edit this project."
         }}
-        ability={["update", "updateResources"]}
+        ability={["update", "manageResources"]}
       >
         {this.state.confirmation ? (
           <Dialog.Confirm {...this.state.confirmation} />

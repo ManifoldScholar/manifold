@@ -82,7 +82,7 @@ export class ProjectCollectionsListContainer extends PureComponent {
             path: lh.link("backendProjectCollectionsNew", project.id),
             text: "Add a New Collection",
             authorizedFor: project,
-            authorizedTo: "update"
+            authorizedTo: "createCollections"
           }}
           entities={this.props.collections}
           singularUnit="collection"

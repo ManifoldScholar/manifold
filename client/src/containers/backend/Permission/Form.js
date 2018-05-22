@@ -110,7 +110,7 @@ export class PermissionForm extends PureComponent {
             options={[
               { label: "Can modify project?", value: "project_editor" },
               {
-                label: "Can modify metadata?",
+                label: "Can modify resource metadata?",
                 value: "project_resource_editor"
               },
               { label: "Is a project author?", value: "project_author" }
