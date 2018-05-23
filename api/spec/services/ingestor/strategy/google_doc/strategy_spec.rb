@@ -25,8 +25,12 @@ RSpec.describe Ingestor::Strategy::GoogleDoc::Strategy, :integration do
         expect(@text.text_sections.length).to be 1
       end
 
-      it "has an empty TOC" do
-        expect(@text.toc).to eq []
+      it "has a TOC" do
+        expect(@text.toc).to_not be_empty
+      end
+
+      it "has the correct TOC length" do
+        expect(@text.toc.length).to eq 9
       end
 
       it "has an empty landmarks property" do
