@@ -10,15 +10,23 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
       href="/backend/project/1/texts/ingestions/new"
       onClick={[Function]}
     >
+      <span
+        className="screen-reader-text"
+      >
+        Add a new text
+      </span>
       <i
+        aria-hidden="true"
         className="manicon manicon-plus"
       />
       <span
+        aria-hidden="true"
         className="full"
       >
         Add a new text
       </span>
       <span
+        aria-hidden="true"
         className="abbreviated"
       >
         Text
@@ -29,15 +37,23 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
       href="/backend/project/1/texts/category/new"
       onClick={[Function]}
     >
+      <span
+        className="screen-reader-text"
+      >
+        Add a new category
+      </span>
       <i
+        aria-hidden="true"
         className="manicon manicon-plus"
       />
       <span
+        aria-hidden="true"
         className="full"
       >
         Create a new category
       </span>
       <span
+        aria-hidden="true"
         className="abbreviated"
       >
         Category
@@ -146,21 +162,39 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
                   }
                 }
               >
+                <span
+                  className="screen-reader-text"
+                >
+                  Move Text up
+                </span>
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-arrow-up"
                 />
               </button>
               <button
                 onClick={[Function]}
               >
+                <span
+                  className="screen-reader-text"
+                >
+                  Move Text down
+                </span>
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-arrow-down"
                 />
               </button>
               <button
                 onClick={[Function]}
               >
+                <span
+                  className="screen-reader-text"
+                >
+                  Delete Text
+                </span>
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-x"
                 />
               </button>
@@ -198,7 +232,13 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
               }
             }
           >
+            <span
+              className="screen-reader-text"
+            >
+              Move category up
+            </span>
             <i
+              aria-hidden="true"
               className="manicon manicon-arrow-up"
             />
           </button>
@@ -209,6 +249,11 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
               }
             }
           >
+            <span
+              className="screen-reader-text"
+            >
+              Move category down
+            </span>
             <i
               className="manicon manicon-arrow-down"
             />
@@ -217,8 +262,14 @@ exports[`Backend Project Texts Container renders correctly 1`] = `
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-x"
             />
+            <span
+              className="screen-reader-text"
+            >
+              Delete Category
+            </span>
           </button>
         </div>
       </header>

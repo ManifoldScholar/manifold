@@ -12,6 +12,7 @@ exports[`Global.FatalError component renders correctly 1`] = `
     >
       <header>
         <div
+          aria-hidden="true"
           className="stop-sign"
         >
           <i

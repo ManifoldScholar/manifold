@@ -43,6 +43,7 @@ exports[`Frontend.ResourceList.Slide.Caption component renders correctly 1`] = `
       >
         Download
         <i
+          aria-hidden="true"
           className="manicon manicon-arrow-down"
         />
       </a>

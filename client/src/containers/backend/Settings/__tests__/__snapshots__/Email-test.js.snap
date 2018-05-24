@@ -151,6 +151,7 @@ The Manifold Team"
             className="form-select"
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-caret-down"
             />
             <select
@@ -387,6 +388,7 @@ The Manifold Team"
             className="form-select"
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-caret-down"
             />
             <select

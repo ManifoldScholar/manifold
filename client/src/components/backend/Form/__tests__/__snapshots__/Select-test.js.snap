@@ -15,6 +15,7 @@ exports[`Backend.Form.Select component renders correctly 1`] = `
       className="form-select"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-caret-down"
       />
       <select

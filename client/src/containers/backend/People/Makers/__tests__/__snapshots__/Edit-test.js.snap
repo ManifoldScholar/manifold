@@ -19,6 +19,7 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
       >
         Delete Maker
         <i
+          aria-hidden="true"
           className="manicon manicon-trashcan"
         />
       </button>
@@ -120,6 +121,7 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
                 className="contents-empty"
               >
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-cloud-up"
                 />
                 <div
@@ -130,6 +132,7 @@ exports[`Backend People Makers Edit Container renders correctly 1`] = `
                   >
                     <span
                       className="fake-link"
+                      role="button"
                     >
                       Upload a file
                     </span>

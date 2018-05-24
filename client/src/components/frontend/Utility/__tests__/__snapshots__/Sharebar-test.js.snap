@@ -14,8 +14,14 @@ exports[`Frontend.Utility.ShareBar component renders correctly 1`] = `
         target="_blank"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-twitter"
         />
+        <span
+          className="screen-reader-text"
+        >
+          Share on Twitter
+        </span>
       </button>
     </li>
   </ul>

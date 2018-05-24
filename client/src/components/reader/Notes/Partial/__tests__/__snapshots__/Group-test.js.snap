@@ -7,6 +7,7 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
     onClick={[Function]}
   >
     <i
+      aria-hidden="true"
       className="manicon manicon-caret-down"
     />
     <label>
@@ -21,6 +22,7 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
       onClick={[Function]}
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-null"
       />
       <span>
@@ -32,6 +34,7 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
       onClick={[Function]}
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-null"
       />
       <span>

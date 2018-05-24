@@ -14,6 +14,7 @@ exports[`Reader.Annotation.Popup.Menu.Link Component renders correctly 1`] = `
     onClick={[Function]}
   >
     <i
+      aria-hidden="true"
       className="manicon manicon-arrow-right"
     />
     Follow Link
@@ -23,6 +24,7 @@ exports[`Reader.Annotation.Popup.Menu.Link Component renders correctly 1`] = `
     onClick={[Function]}
   >
     <i
+      aria-hidden="true"
       className="manicon manicon-word-bubble"
     />
     View Annotation

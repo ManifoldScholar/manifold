@@ -14,6 +14,7 @@ exports[`Reader.Footer component renders correctly 1`] = `
         className="colophon"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-manifold-logo"
         />
         <div

@@ -37,6 +37,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
             className="form-select input-month"
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-caret-down"
             />
             <select
@@ -110,6 +111,7 @@ exports[`Backend Text General Container renders correctly 1`] = `
             className="form-select input-day"
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-caret-down"
             />
             <select

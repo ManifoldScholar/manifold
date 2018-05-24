@@ -25,6 +25,7 @@ exports[`Global.HeaderNotification component renders correctly 1`] = `
       onClick={[Function]}
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-x"
       />
       <span

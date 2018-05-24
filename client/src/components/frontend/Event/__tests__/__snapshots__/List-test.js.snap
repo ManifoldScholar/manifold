@@ -44,6 +44,7 @@ exports[`Frontend.Event.List Component renders correctly 1`] = `
           >
             Start Reading
             <i
+              aria-hidden="true"
               className="manicon manicon-arrow-long-right"
             />
           </a>
@@ -89,6 +90,7 @@ exports[`Frontend.Event.List Component renders correctly 1`] = `
           >
             Start Reading
             <i
+              aria-hidden="true"
               className="manicon manicon-arrow-long-right"
             />
           </a>

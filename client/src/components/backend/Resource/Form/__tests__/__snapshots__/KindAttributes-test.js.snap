@@ -24,6 +24,7 @@ exports[`Backend.Resource.Form.KindAttributes component when kind is audio rende
         className="contents-empty"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-cloud-up"
         />
         <div
@@ -34,6 +35,7 @@ exports[`Backend.Resource.Form.KindAttributes component when kind is audio rende
           >
             <span
               className="fake-link"
+              role="button"
             >
               Upload a file
             </span>

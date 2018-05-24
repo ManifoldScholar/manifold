@@ -6,6 +6,7 @@ exports[`Global.Oauth.Button component renders correctly 1`] = `
   onClick={[Function]}
 >
   <i
+    aria-hidden="true"
     className="manicon manicon-twitter"
   />
   <span>

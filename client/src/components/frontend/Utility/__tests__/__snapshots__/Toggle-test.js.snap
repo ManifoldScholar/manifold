@@ -12,6 +12,7 @@ exports[`Frontend.Utility.Toggle component renders correctly 1`] = `
       className="button selected"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-cube-outline"
       />
       resources
@@ -20,6 +21,7 @@ exports[`Frontend.Utility.Toggle component renders correctly 1`] = `
       className="button"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-file-box"
       />
       collection

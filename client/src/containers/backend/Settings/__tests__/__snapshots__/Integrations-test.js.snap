@@ -160,6 +160,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
               className="contents-empty"
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-cloud-up"
               />
               <div
@@ -170,6 +171,7 @@ exports[`Backend Settings Integrations Container renders correctly 1`] = `
                 >
                   <span
                     className="fake-link"
+                    role="button"
                   >
                     Upload a file
                   </span>

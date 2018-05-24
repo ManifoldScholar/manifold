@@ -19,6 +19,7 @@ exports[`Backend Settings Subjects Edit Container renders correctly 1`] = `
       >
         Delete Subject
         <i
+          aria-hidden="true"
           className="manicon manicon-trashcan"
         />
       </button>

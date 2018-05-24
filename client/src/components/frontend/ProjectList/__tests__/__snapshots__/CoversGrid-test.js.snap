@@ -19,11 +19,13 @@ exports[`Frontend.ProjectList.CoversGrid component renders correctly 1`] = `
               onClick={[Function]}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
+              role="button"
             >
               <div
                 className="following-button"
               >
                 <div
+                  aria-hidden="true"
                   className="icons"
                 >
                   <i
@@ -63,11 +65,13 @@ exports[`Frontend.ProjectList.CoversGrid component renders correctly 1`] = `
               onClick={[Function]}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
+              role="button"
             >
               <div
                 className="following-button"
               >
                 <div
+                  aria-hidden="true"
                   className="icons"
                 >
                   <i

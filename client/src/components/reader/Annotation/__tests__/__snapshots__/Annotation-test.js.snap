@@ -15,6 +15,7 @@ exports[`Reader.Annotation.Annotation component renders correctly 1`] = `
           className="no-image"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-person"
           />
         </div>

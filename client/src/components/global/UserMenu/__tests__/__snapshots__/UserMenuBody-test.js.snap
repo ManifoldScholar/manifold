@@ -13,6 +13,7 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
         onClick={[Function]}
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-person-pencil-simple"
         />
         Edit Profile
@@ -23,6 +24,7 @@ exports[`Global.UserMenu.UserMenuBody Component renders correctly 1`] = `
         onClick={[Function]}
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-circle-arrow-out-right"
         />
         Logout

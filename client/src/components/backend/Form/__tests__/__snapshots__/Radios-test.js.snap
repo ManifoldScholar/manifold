@@ -25,6 +25,7 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
       value="1"
     />
     <span
+      aria-hidden="true"
       className="toggle-indicator"
     />
     <span
@@ -45,6 +46,7 @@ exports[`Backend.Form.Radios component renders correctly 1`] = `
       value="2"
     />
     <span
+      aria-hidden="true"
       className="toggle-indicator"
     />
     <span

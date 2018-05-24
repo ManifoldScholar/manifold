@@ -14,6 +14,7 @@ exports[`Backend.Form.Date component renders correctly 1`] = `
       className="form-select input-month"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-caret-down"
       />
       <select
@@ -87,6 +88,7 @@ exports[`Backend.Form.Date component renders correctly 1`] = `
       className="form-select input-day"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-caret-down"
       />
       <select

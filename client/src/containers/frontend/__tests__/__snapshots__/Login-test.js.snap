@@ -14,6 +14,7 @@ exports[`Frontend Login Container renders correctly when logged in 1`] = `
         className="section-heading"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-lamp"
         />
         Log Out
@@ -52,6 +53,7 @@ exports[`Frontend Login Container renders correctly when logged out 1`] = `
         className="section-heading"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-lamp"
         />
         Log In

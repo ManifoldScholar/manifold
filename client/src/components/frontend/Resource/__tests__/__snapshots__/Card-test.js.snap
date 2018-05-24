@@ -59,6 +59,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
           <span>
             Preview
             <i
+              aria-hidden="true"
               className="manicon manicon-eye-outline"
             />
           </span>
@@ -98,6 +99,7 @@ exports[`Frontend.Resource.Card component renders correctly 1`] = `
         to="/project/slug-2/resource/slug-1"
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-arrow-right"
         />
       </div>

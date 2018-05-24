@@ -21,6 +21,7 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
         type="checkbox"
       />
       <div
+        aria-hidden="true"
         className="control-indicator"
       >
         <i
@@ -38,6 +39,7 @@ exports[`Reader.Notes.Partial.Group Component renders correctly 1`] = `
         type="checkbox"
       />
       <div
+        aria-hidden="true"
         className="control-indicator"
       >
         <i

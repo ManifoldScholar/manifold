@@ -15,6 +15,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
           className="main"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-file-box"
           />
           <div
@@ -127,6 +128,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
               >
                 Download
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-arrow-down"
                 />
               </a>
@@ -159,12 +161,15 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
               onClick={[Function]}
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-arrow-left"
               />
               <i
+                aria-hidden="true"
                 className="manicon manicon-arrow-round-left"
               />
               <span
+                aria-hidden="true"
                 className="text"
               >
                 Prev
@@ -181,6 +186,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
               onClick={[Function]}
             >
               <span
+                aria-hidden="true"
                 className="text"
               >
                 Next
@@ -191,9 +197,11 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
                 Click to load next slide
               </span>
               <i
+                aria-hidden="true"
                 className="manicon manicon-arrow-round-right"
               />
               <i
+                aria-hidden="true"
                 className="manicon manicon-arrow-right"
               />
             </button>
@@ -216,6 +224,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
       >
         Visit Collection Page
         <i
+          aria-hidden="true"
           className="manicon manicon-arrow-right"
         />
       </a>
@@ -226,6 +235,7 @@ exports[`Reader.Notation.Collection.Detail component renders correctly 1`] = `
         onClick={[MockFunction]}
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-arrow-left"
         />
         Return to Reader

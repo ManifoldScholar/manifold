@@ -11,7 +11,13 @@ exports[`Global.Comment.Deleted component renders correctly 1`] = `
       <figure
         className="author-avatar dull"
       >
+        <span
+          className="screen-reader-text"
+        >
+          Author Avatar
+        </span>
         <div
+          aria-hidden="true"
           className="no-image"
         >
           <i

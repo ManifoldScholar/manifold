@@ -10,6 +10,7 @@ exports[`Frontend.Utility.BackLinkPrimary component renders correctly 1`] = `
     className="container flush"
   >
     <i
+      aria-hidden="true"
       className="manicon manicon-arrow-left"
     />
     Back to Project

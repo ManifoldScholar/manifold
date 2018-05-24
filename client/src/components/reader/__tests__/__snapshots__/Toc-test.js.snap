@@ -42,6 +42,7 @@ exports[`Reader.Toc Component renders correctly 1`] = `
             >
               <h4>
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-i-round"
                 />
                 About This Text
@@ -83,6 +84,7 @@ exports[`Reader.Toc Component renders correctly with empty toc 1`] = `
             >
               <h4>
                 <i
+                  aria-hidden="true"
                   className="manicon manicon-i-round"
                 />
                 About This Text

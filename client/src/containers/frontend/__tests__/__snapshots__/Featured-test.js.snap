@@ -21,6 +21,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
           className="main"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-lamp"
           />
           <div
@@ -55,11 +56,13 @@ exports[`Frontend Featured Container renders correctly 1`] = `
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
+                    role="button"
                   >
                     <div
                       className="following-button"
                     >
                       <div
+                        aria-hidden="true"
                         className="icons"
                       >
                         <i
@@ -108,11 +111,13 @@ exports[`Frontend Featured Container renders correctly 1`] = `
                     onClick={[Function]}
                     onMouseEnter={[Function]}
                     onMouseLeave={[Function]}
+                    role="button"
                   >
                     <div
                       className="following-button"
                     >
                       <div
+                        aria-hidden="true"
                         className="icons"
                       >
                         <i
@@ -167,6 +172,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
         >
           <span>
             <i
+              aria-hidden="true"
               className="manicon manicon-books-on-shelf"
             />
             See more projects
@@ -179,6 +185,7 @@ exports[`Frontend Featured Container renders correctly 1`] = `
         >
           <span>
             <i
+              aria-hidden="true"
               className="manicon manicon-books-with-glasses"
             />
             Projects You're Following 

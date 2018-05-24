@@ -19,6 +19,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
       >
         Reset Password
         <i
+          aria-hidden="true"
           className="manicon manicon-key"
         />
       </button>
@@ -29,6 +30,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
       >
         Delete User
         <i
+          aria-hidden="true"
           className="manicon manicon-trashcan"
         />
       </button>
@@ -105,6 +107,7 @@ exports[`Backend People Users Edit Container renders correctly 1`] = `
               className="form-select"
             >
               <i
+                aria-hidden="true"
                 className="manicon manicon-caret-down"
               />
               <select

@@ -16,7 +16,10 @@ exports[`Reader.Notation.Viewer.Group component renders correctly 1`] = `
                         <Connect(AuthorizeComponent) entity={{...}} ability=\\"delete\\">
                           <AuthorizeComponent entity={{...}} ability=\\"delete\\" authentication={{...}} dispatch={[Function]} successBehavior=\\"show\\" failureRedirect={{...}} failureNotification={{...}} failureFatalError={{...}}>
                             <button onClick={[Function: onClick]} className=\\"notation-delete\\">
-                              <i className=\\"manicon manicon-x\\" />
+                              <span className=\\"screen-reader-text\\">
+                                Delete Notation
+                              </span>
+                              <i className=\\"manicon manicon-x\\" aria-hidden=\\"true\\" />
                             </button>
                           </AuthorizeComponent>
                         </Connect(AuthorizeComponent)>

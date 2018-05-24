@@ -26,6 +26,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
           className="contents-empty"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-cloud-up"
           />
           <div
@@ -36,6 +37,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
             >
               <span
                 className="fake-link"
+                role="button"
               >
                 Upload a file
               </span>
@@ -71,6 +73,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
           className="contents-empty"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-cloud-up"
           />
           <div
@@ -81,6 +84,7 @@ exports[`Backend.Resource.Form.Variants component renders correctly 1`] = `
             >
               <span
                 className="fake-link"
+                role="button"
               >
                 Upload a file
               </span>
@@ -124,6 +128,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
           className="contents-empty"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-cloud-up"
           />
           <div
@@ -134,6 +139,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             >
               <span
                 className="fake-link"
+                role="button"
               >
                 Upload a file
               </span>
@@ -175,6 +181,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
           className="contents-empty"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-cloud-up"
           />
           <div
@@ -185,6 +192,7 @@ exports[`Backend.Resource.Form.Variants component when kind is image renders cor
             >
               <span
                 className="fake-link"
+                role="button"
               >
                 Upload a file
               </span>
@@ -233,6 +241,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
           className="contents-empty"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-cloud-up"
           />
           <div
@@ -243,6 +252,7 @@ exports[`Backend.Resource.Form.Variants component when kind is pdf renders corre
             >
               <span
                 className="fake-link"
+                role="button"
               >
                 Upload a file
               </span>

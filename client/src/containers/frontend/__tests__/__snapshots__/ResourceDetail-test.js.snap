@@ -11,6 +11,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
       className="container flush"
     >
       <i
+        aria-hidden="true"
         className="manicon manicon-arrow-left"
       />
       Back to Project Resources
@@ -72,6 +73,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                     >
                       Zoom
                       <i
+                        aria-hidden="true"
                         className="manicon manicon-magnify-plus"
                       />
                     </div>
@@ -100,6 +102,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
             >
               Download 
               <i
+                aria-hidden="true"
                 className="manicon manicon-arrow-down"
               />
             </a>
@@ -116,8 +119,14 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                     target="_blank"
                   >
                     <i
+                      aria-hidden="true"
                       className="manicon manicon-twitter"
                     />
+                    <span
+                      className="screen-reader-text"
+                    >
+                      Share on Twitter
+                    </span>
                   </button>
                 </li>
               </ul>
@@ -126,6 +135,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
               className="resource-meta"
             >
               <figure
+                aria-hidden="true"
                 className="resource-type"
               >
                 <i
@@ -226,6 +236,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
               className="resource-meta"
             >
               <figure
+                aria-hidden="true"
                 className="resource-type"
               >
                 <i
@@ -351,6 +362,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
                   className="editor-label"
                 >
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-pencil"
                   />
                   Add Comment
@@ -383,6 +395,7 @@ exports[`Frontend ResourceDetail Container renders correctly 1`] = `
         onClick={[Function]}
       >
         <i
+          aria-hidden="true"
           className="manicon manicon-arrow-round-left"
         />
         <div>

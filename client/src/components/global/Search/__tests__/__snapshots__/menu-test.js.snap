@@ -30,7 +30,13 @@ exports[`Reader.Search.Menu component renders correctly when search is visible 1
         <button
           className="manicon manicon-magnify"
           type="submit"
-        />
+        >
+          <span
+            className="screen-reader-text"
+          >
+            Search
+          </span>
+        </button>
       </div>
     </form>
   </span>

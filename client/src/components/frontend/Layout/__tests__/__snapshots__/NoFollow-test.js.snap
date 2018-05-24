@@ -46,6 +46,7 @@ exports[`Frontend.Layout.NoFollow component renders correctly 1`] = `
         >
           <span>
             <i
+              aria-hidden="true"
               className="manicon manicon-books-on-shelf"
             />
             See more projects

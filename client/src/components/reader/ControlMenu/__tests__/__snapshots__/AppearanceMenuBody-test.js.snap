@@ -23,6 +23,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-dash"
             />
             <span
@@ -36,6 +37,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-plus"
             />
             <span
@@ -63,6 +65,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-dash"
             />
             <span
@@ -76,6 +79,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
             onClick={[Function]}
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-plus"
             />
             <span
@@ -96,6 +100,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           onClick={[Function]}
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-check"
           />
           <span
@@ -109,6 +114,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           onClick={[Function]}
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-check"
           />
           <span
@@ -128,6 +134,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           onClick={[Function]}
         >
           <i
+            aria-hidden="true"
             className="compound-icon"
           >
             <i
@@ -148,6 +155,7 @@ exports[`Reader.ControlMenu.AppearanceMenuBody Component renders correctly 1`] =
           onClick={[Function]}
         >
           <i
+            aria-hidden="true"
             className="compound-icon"
           >
             <i

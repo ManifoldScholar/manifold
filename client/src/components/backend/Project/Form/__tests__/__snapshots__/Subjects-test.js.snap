@@ -49,6 +49,7 @@ exports[`Backend Project Form Subjects Component renders correctly 1`] = `
         className="input"
       >
         <button
+          aria-hidden="true"
           className="manicon manicon-plus"
         />
         <input

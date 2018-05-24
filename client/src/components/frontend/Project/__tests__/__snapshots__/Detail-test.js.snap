@@ -88,6 +88,7 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
           className="main"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-pulse"
           />
           <div
@@ -174,6 +175,7 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
                 >
                   Start Reading
                   <i
+                    aria-hidden="true"
                     className="manicon manicon-arrow-long-right"
                   />
                 </a>
@@ -243,6 +245,7 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
           className="main"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-tag"
           />
           <div
@@ -298,6 +301,7 @@ exports[`Frontend.Project.Detail component renders correctly 1`] = `
         >
           <span>
             <i
+              aria-hidden="true"
               className="manicon manicon-books-on-shelf"
             />
             See more projects
@@ -397,6 +401,7 @@ exports[`Frontend.Project.Detail component renders correctly when hideActivity i
           className="main"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-tag"
           />
           <div
@@ -452,6 +457,7 @@ exports[`Frontend.Project.Detail component renders correctly when hideActivity i
         >
           <span>
             <i
+              aria-hidden="true"
               className="manicon manicon-books-on-shelf"
             />
             See more projects

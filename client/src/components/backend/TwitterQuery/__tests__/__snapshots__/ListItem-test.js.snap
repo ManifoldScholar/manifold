@@ -9,7 +9,9 @@ exports[`Backend.TwitterQuery.ListItem Component renders correctly 1`] = `
     onClick={[Function]}
   >
     <header>
-      <figure>
+      <figure
+        aria-label="hidden"
+      >
         <i
           className="manicon manicon-twitter"
         />

@@ -17,6 +17,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
           onClick={[Function]}
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-arrow-left"
           />
           Back to:
@@ -98,6 +99,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     className="form-select"
                   >
                     <i
+                      aria-hidden="true"
                       className="manicon manicon-caret-down"
                     />
                     <select
@@ -175,7 +177,14 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     >
                       <figure>
                         <figcaption>
-                          Image
+                          <span>
+                            Image
+                            <span
+                              className="screen-reader-text"
+                            >
+                              Selected Kind
+                            </span>
+                          </span>
                         </figcaption>
                         <div
                           className="resource-icon image"
@@ -204,7 +213,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     >
                       <figure>
                         <figcaption>
-                          Video
+                          <span>
+                            Video
+                          </span>
                         </figcaption>
                         <div
                           className="resource-icon video"
@@ -233,7 +244,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     >
                       <figure>
                         <figcaption>
-                          Audio
+                          <span>
+                            Audio
+                          </span>
                         </figcaption>
                         <div
                           className="resource-icon audio"
@@ -271,7 +284,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     >
                       <figure>
                         <figcaption>
-                          File
+                          <span>
+                            File
+                          </span>
                         </figcaption>
                         <div
                           className="resource-icon file"
@@ -297,7 +312,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     >
                       <figure>
                         <figcaption>
-                          Link
+                          <span>
+                            Link
+                          </span>
                         </figcaption>
                         <div
                           className="resource-icon link"
@@ -332,7 +349,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     >
                       <figure>
                         <figcaption>
-                          PDF
+                          <span>
+                            PDF
+                          </span>
                         </figcaption>
                         <div
                           className="resource-icon pdf"
@@ -361,7 +380,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     >
                       <figure>
                         <figcaption>
-                          Document
+                          <span>
+                            Document
+                          </span>
                         </figcaption>
                         <div
                           className="resource-icon document"
@@ -402,7 +423,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     >
                       <figure>
                         <figcaption>
-                          Spreadsheet
+                          <span>
+                            Spreadsheet
+                          </span>
                         </figcaption>
                         <div
                           className="resource-icon spreadsheet"
@@ -428,7 +451,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     >
                       <figure>
                         <figcaption>
-                          Presentation
+                          <span>
+                            Presentation
+                          </span>
                         </figcaption>
                         <div
                           className="resource-icon presentation"
@@ -457,7 +482,9 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     >
                       <figure>
                         <figcaption>
-                          Interactive
+                          <span>
+                            Interactive
+                          </span>
                         </figcaption>
                         <div
                           className="resource-icon interactive"
@@ -557,6 +584,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                     className="contents-empty"
                   >
                     <i
+                      aria-hidden="true"
                       className="manicon manicon-cloud-up"
                     />
                     <div
@@ -567,6 +595,7 @@ exports[`Backend Resource New Container renders correctly 1`] = `
                       >
                         <span
                           className="fake-link"
+                          role="button"
                         >
                           Upload a file
                         </span>

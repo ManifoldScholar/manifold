@@ -26,6 +26,7 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
                     className="no-image"
                   >
                     <i
+                      aria-hidden="true"
                       className="manicon manicon-person"
                     />
                   </div>
@@ -77,6 +78,7 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
               className="input"
             >
               <button
+                aria-hidden="true"
                 className="manicon manicon-plus"
               />
               <input
@@ -125,6 +127,7 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
                     className="no-image"
                   >
                     <i
+                      aria-hidden="true"
                       className="manicon manicon-person"
                     />
                   </div>
@@ -176,6 +179,7 @@ exports[`Backend Text Collaborators Container renders correctly 1`] = `
               className="input"
             >
               <button
+                aria-hidden="true"
                 className="manicon manicon-plus"
               />
               <input

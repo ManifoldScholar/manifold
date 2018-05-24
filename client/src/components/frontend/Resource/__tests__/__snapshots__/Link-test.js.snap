@@ -8,6 +8,7 @@ exports[`Frontend.Resource.Link component renders correctly 1`] = `
 >
   Visit Page 
   <i
+    aria-hidden="true"
     className="manicon manicon-arrow-right"
   />
 </a>

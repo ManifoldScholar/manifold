@@ -5,6 +5,7 @@ exports[`Frontend.Resource.Meta component renders correctly 1`] = `
   className="resource-meta"
 >
   <figure
+    aria-hidden="true"
     className="resource-type"
   >
     <i

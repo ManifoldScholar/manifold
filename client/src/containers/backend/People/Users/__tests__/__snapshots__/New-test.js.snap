@@ -47,6 +47,7 @@ exports[`Backend Users New Container renders correctly 1`] = `
             className="form-select"
           >
             <i
+              aria-hidden="true"
               className="manicon manicon-caret-down"
             />
             <select
@@ -124,10 +125,17 @@ exports[`Backend Users New Container renders correctly 1`] = `
         <span
           className="password-visibility-toggle"
           onClick={[Function]}
+          role="button"
         >
           <i
+            aria-hidden="true"
             className="manicon manicon-eye-outline"
           />
+          <span
+            className="screen-reader-text"
+          >
+            show password
+          </span>
         </span>
         <input
           onChange={[Function]}
