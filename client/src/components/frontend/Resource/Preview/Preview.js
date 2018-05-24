@@ -102,6 +102,7 @@ export default class ResourcePreview extends Component {
         <div
           className="resource-preview-wrapper"
           onClick={this.handleOpenPreviewClick}
+          role="button"
         >
           {this.renderChildren()}
         </div>

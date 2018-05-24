@@ -43,7 +43,7 @@ export default class Toggle extends Component {
 
     return (
       <div className="button-switch-primary">
-        <div className="wrapper" onClick={this.handleClick}>
+        <div className="wrapper" onClick={this.handleClick} role="button">
           {options.map(option => {
             return this.renderOption(option);
           })}

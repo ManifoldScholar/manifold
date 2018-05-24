@@ -41,12 +41,17 @@ export default class GroupItem extends Component {
       this.props.annotation.attributes.format
     );
     return (
+      /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
       <li className="item" onClick={this.handleVisitAnnotation}>
+        <span className="screen-reader-text">
+          {this.props.annotation.attributes.format}
+        </span>
         <i className={iconClasses} aria-hidden="true" />
         <span>
           {this.maybeTruncateText(this.props.annotation.attributes.subject)}
         </span>
       </li>
+      /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
     );
   }
 }

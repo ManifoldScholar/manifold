@@ -28,6 +28,7 @@
 // --------------------------------------------------------
 .fake-link {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .invisible {
@@ -79,6 +80,7 @@
 // --------------------------------------------------------
 @mixin buttonUnstyled {
   padding: 0;
+  cursor: pointer;
   background: transparent;
   border: 0;
   // iOS applies this by default,
@@ -89,6 +91,7 @@
 }
 
 @mixin buttonRounded {
+  cursor: pointer;
   border-radius: 7px;
 }
 

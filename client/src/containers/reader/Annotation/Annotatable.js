@@ -655,6 +655,7 @@ class Annotatable extends Component {
     // find a work-around, we're stuck with it. The following line disables the lint
     // warning around this tabindex.
     /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
         className="no-focus-outline"
@@ -706,6 +707,7 @@ class Annotatable extends Component {
         ) : null}
       </div>
     );
+    /* eslint-enable jsx-a11y/no-static-element-interactions */
     /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
   }
 }

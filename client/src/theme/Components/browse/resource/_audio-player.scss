@@ -8,26 +8,31 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 50;
     width: 100%;
     height: 100%;
-    z-index: 50;
     cursor: pointer;
     background: transparentize($neutralBlack, 0.5);
 
-    button {
+    .play-button-indicator {
       position: absolute;
       top: calc(50% - 35px);
       left: calc(50% - 35px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 70px;
       height: 70px;
+      padding: 1px 7px 2px;
+      color: $neutralWhite;
+      text-align: center;
+      background-color: $accentPrimary;
       border: 0;
       border-radius: 50%;
-      background-color: $accentPrimary;
-      color: $neutralWhite;
 
       .manicon {
-        font-size: 32px;
         margin-left: 4px;
+        font-size: 32px;
       }
     }
   }

@@ -144,7 +144,11 @@ export default class DrawerWrapper extends PureComponent {
           {props.title ? props.title : null}
         </div>
         {hasClose ? (
-          <div onClick={this.handleLeaveEvent} className="close-button-primary">
+          <div
+            onClick={this.handleLeaveEvent}
+            role="button"
+            className="close-button-primary"
+          >
             <span className="close-text">Close</span>
             <i className="manicon manicon-x" aria-hidden="true" />
           </div>
@@ -192,7 +196,11 @@ export default class DrawerWrapper extends PureComponent {
         <div>
           <Utility.LockBodyScroll>
             <div className={this.props.identifier}>
-              <div className="drawer-overlay" onClick={this.handleLeaveEvent} />
+              <div
+                className="drawer-overlay"
+                onClick={this.handleLeaveEvent}
+                role="button"
+              />
               {this.renderDrawer()}
             </div>
           </Utility.LockBodyScroll>

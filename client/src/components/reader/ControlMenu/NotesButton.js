@@ -27,9 +27,7 @@ export default class NotesButton extends PureComponent {
         data-id="toggle-notes"
       >
         <i className="manicon manicon-notepad" aria-hidden="true" />
-        <span className="screen-reader-text">
-          Click to hide or show user annotations overlay
-        </span>
+        <span className="screen-reader-text">Open the notes menu</span>
       </button>
     );
   }

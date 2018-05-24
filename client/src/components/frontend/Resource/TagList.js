@@ -61,7 +61,9 @@ export default class ResourceTagList extends Component {
         className="resource-tag-list"
         onMouseOver={this.stopPropagation}
         onClick={this.stopPropagation}
+        role="presentation"
       >
+        <span className="screen-reader-text">Tags list</span>
         <ul>{this.mapTagsToLinks(this.props.resource)}</ul>
       </nav>
     );

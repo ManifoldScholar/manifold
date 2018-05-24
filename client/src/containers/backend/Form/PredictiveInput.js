@@ -252,6 +252,7 @@ class PredictiveInput extends PureComponent {
                 highlighted: option.id === this.state.highlighted
               });
               return (
+                /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
                 <li
                   key={option.id}
                   className={listingClass}
@@ -264,6 +265,7 @@ class PredictiveInput extends PureComponent {
                 >
                   {this.props.label(option)}
                 </li>
+                /* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
               );
             })}
           </ul>

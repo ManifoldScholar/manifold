@@ -33,7 +33,10 @@ export default class Notifications extends Component {
             </button>
           </li>
         </ul>
-        <a href="#" className="button-bare-primary">
+        <a
+          href="https://en.wikipedia.org/wiki/Placeholder"
+          className="button-bare-primary"
+        >
           {"Notification History"}
         </a>
       </nav>

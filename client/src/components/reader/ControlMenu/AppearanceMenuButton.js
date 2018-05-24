@@ -28,7 +28,7 @@ export default class AppearanceMenuButton extends Component {
       >
         <i className="manicon manicon-aa" aria-hidden="true" />
         <span className="screen-reader-text">
-          {"Click to open reader appearance menu"}
+          {"Open reader appearance menu"}
         </span>
       </button>
     );

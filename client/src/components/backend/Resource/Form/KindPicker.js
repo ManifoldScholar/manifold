@@ -16,12 +16,14 @@ class KindPicker extends PureComponent {
   renderKindPickerButtons(kindList) {
     if (!kindList) return null;
     return (
-      <ul>
+      <ul role="radiogroup">
         {kindList.map(kind => {
           const safeKind = kind.toLowerCase();
+          const kindValue = this.props.getModelValue("attributes[kind]");
+          const isActive = safeKind === kindValue;
           const buttonClass = classNames({
             button: true,
-            active: safeKind === this.props.getModelValue("attributes[kind]")
+            active: isActive
           });
           return (
             <li key={safeKind}>
@@ -30,6 +32,8 @@ class KindPicker extends PureComponent {
                   this.props.set(safeKind);
                 }}
                 className={buttonClass}
+                role="radio"
+                aria-checked={isActive}
               >
                 <figure>
                   <figcaption>
