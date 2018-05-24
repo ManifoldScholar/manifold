@@ -154,8 +154,10 @@ common: &1
           - "text/markdown"
           - "text/plain"
           - "text/html"
+          - "text/yaml"
           - "application/markdown"
           - "application/zip"
+          - "application/x-yaml"
           - "application/epub+zip"
           - "application/xhtml+xml"
         :allowed_ext:
@@ -164,6 +166,7 @@ common: &1
           - !ruby/regexp '/zip\Z/i'
           - !ruby/regexp '/epub\Z/i'
           - !ruby/regexp '/html?\Z/i'
+          - !ruby/regexp '/ya?ml\Z/i'
       :image:
         :allowed_mime:
           - !ruby/regexp '/image\/.*/'

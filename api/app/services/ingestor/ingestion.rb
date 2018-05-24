@@ -59,8 +59,8 @@ module Ingestor
       file_operation(:write, rel_path, [contents])
     end
 
-    def write_tmp(name, ext, contents = nil, url: nil)
-      tmp = Tempfile.new([name, ".#{ext}"])
+    def write_tmp(name, ext, contents = nil, url: nil, root_dir: WORKING_DIR_BASE)
+      tmp = Tempfile.new([name, ".#{ext}"], root_dir)
       tmp.close
       if url.present?
         fetch_and_write(url, tmp.path)

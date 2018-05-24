@@ -45,10 +45,6 @@ RSpec.describe Ingestor::Strategy::GoogleDoc::Strategy, :integration do
         expect(@text.spine.length).to eq 1
       end
 
-      it "has one text_section" do
-        expect(@text.text_sections.length).to eq 1
-      end
-
       it "has one ingestion sources" do
         expect(@text.ingestion_sources.length).to eq 17
       end
@@ -76,5 +72,4 @@ RSpec.describe Ingestor::Strategy::GoogleDoc::Strategy, :integration do
     include_examples "output text assertions"
 
   end
-
 end
