@@ -1,0 +1,20 @@
+meta: 
+  title: A Collection of Google Docs
+  language: language
+  rights: rights
+  description: description
+  authors:
+    - name: Jenny Wilkerson
+    - name: Jimmy Wolkerson
+toc:
+  - title: Introduction
+    url: https://docs.google.com/document/d/1-PKafnXFwlmyRKjFUcUc5PU45hff9wlhBgvGZH5BjxU
+    start_section: true
+  - title: Title Set From TOC
+    url: https://docs.google.com/document/d/18IKBLArFrdiokMszDduACGxGnl9sF_e1MWWklguSs9E
+    children:
+      - title: Section 1.1
+        url: https://docs.google.com/document/d/15zu1wO4Brjcgw-OB8ow4kOoOYfkaChg435UWH23CXiw
+        children:
+          - title: Section 1.1a
+            url: https://docs.google.com/document/d/1o9dJnrjC_evM_aqmfZ9dkh083pqgTpou7RpyGnsq0k4

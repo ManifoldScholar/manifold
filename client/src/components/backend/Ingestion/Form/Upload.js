@@ -57,6 +57,19 @@ class IngestionFormUpload extends PureComponent {
       <div>
         {ingestionType === "googledoc" ? (
           <Form.FieldGroup {...this.props}>
+            <Form.Upload
+              inlineStyle={{ width: "100%" }}
+              layout="landscape"
+              instructions="Manifold can upload and link multiple google docs from a manifest file."
+              label="Upload a file ending in .yml"
+              value={this.props.getModelValue("attributes[source]")}
+              initialValue={this.props.getModelValue(
+                "attributes[sourceFileName]"
+              )}
+              set={this.onSourceChange}
+              accepts="yml"
+            />
+            <div className="form-divider">or</div>
             <Form.TextInput
               label="URL"
               instructions="Manifold can ingest any publicly available Google doc by entering its URL."
