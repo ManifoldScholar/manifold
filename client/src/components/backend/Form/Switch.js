@@ -50,21 +50,37 @@ class FormSwitch extends Component {
   }
 
   render() {
+    const checked = this.determineChecked(this.props.value);
     const classes = classnames({
       "boolean-primary": true,
-      checked: this.determineChecked(this.props.value)
+      checked
     });
 
-    const labelClasses = classnames(this.props.labelPos, this.props.labelClass);
+    const labelClasses = classnames(
+      "form-input-heading",
+      this.props.labelPos,
+      this.props.labelClass
+    );
     const wrapperClasses = classnames("form-input", this.props.className);
-    const label = <label className={labelClasses}>{this.props.label}</label>;
+    const label = (
+      <label aria-hidden="true" className={labelClasses}>
+        {this.props.label}
+      </label>
+    );
 
     return (
       <div className={wrapperClasses}>
         {this.props.labelPos === "above" ? label : null}
         <div className="toggle-indicator">
           {/* Add .checked to .boolean-primary to change visual state */}
-          <div onClick={this.handleClick} className={classes} />
+          <div
+            onClick={this.handleClick}
+            className={classes}
+            role="button"
+            aria-pressed={checked}
+          >
+            <span className="screen-reader-text">{this.props.label}</span>
+          </div>
         </div>
         {this.props.labelPos === "below" ? label : null}
       </div>

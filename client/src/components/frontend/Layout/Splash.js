@@ -195,14 +195,14 @@ export default class Splash extends Component {
                   {this.attribute("linkText")}
                 </a>
                 {!this.props.authenticated ? (
-                  <a
-                    href="#"
+                  <span
                     onClick={this.handleSignUp}
                     target="blank"
                     className="button-bare-primary"
+                    role="button"
                   >
                     {"Sign Up"}
-                  </a>
+                  </span>
                 ) : null}
               </nav>
             ) : null}

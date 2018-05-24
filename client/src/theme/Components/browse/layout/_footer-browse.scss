@@ -78,7 +78,7 @@
       @include listUnstyled;
     }
 
-    a {
+    a, .fake-link {
       @include templateHead;
       display: inline-block;
       font-size: 17px;

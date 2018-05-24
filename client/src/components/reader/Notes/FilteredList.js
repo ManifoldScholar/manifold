@@ -29,8 +29,10 @@ export default class FilteredList extends PureComponent {
   renderHeading() {
     return (
       <div className="drawer-bar">
-        <h2 className="drawer-title" onClick={this.props.handleSeeAllClick}>
-          Your Notes
+        <h2 className="drawer-title">
+          <div role="button" onClick={this.props.handleSeeAllClick}>
+            Your Notes
+          </div>
         </h2>
         {this.props.sortedAnnotations.length > 0 ? (
           <button

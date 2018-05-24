@@ -162,7 +162,11 @@ class ResourceCard extends Component {
     return (
       <li className="resource-card">
         <Resource.Preview resource={resource}>
-          <div className="resource-link" onClick={this.handlePreviewClick}>
+          <div
+            className="resource-link"
+            onClick={this.handlePreviewClick}
+            role="link"
+          >
             <Resourceish.Thumbnail resourceish={resource} />
             <div className="preview-text">{this.getPreviewText(attr)}</div>
           </div>
@@ -172,6 +176,7 @@ class ResourceCard extends Component {
           onMouseOver={this.handleInfoMouseOver}
           onMouseOut={this.handleInfoMouseOut}
           onClick={this.handleInfoClick}
+          role="link"
         >
           <div>
             <header className="resource-title">

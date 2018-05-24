@@ -236,6 +236,7 @@ export default class AnnotationPopup extends Component {
       <div
         onMouseDown={this.stopPropagation}
         onClick={this.stopPropagation}
+        role="presentation"
         className={popupClass}
         ref={a => {
           this.popupEl = a;

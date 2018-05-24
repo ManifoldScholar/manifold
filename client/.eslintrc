@@ -103,10 +103,16 @@
     "jsx-a11y/alt-text": 2,
     "jsx-a11y/img-redundant-alt": 2,
 
-    // Rules for WCAG we should eventually enable
+    // Rules for WCAG related to interactive/non-interactive/static element roles
+    "jsx-a11y/no-interactive-element-to-noninteractive-role": 2,
+    "jsx-a11y/no-noninteractive-element-interactions": 2,
+    "jsx-a11y/no-noninteractive-element-to-interactive-role": 2,
+    "jsx-a11y/no-static-element-interactions": 2,
     "jsx-a11y/href-no-hash": 0,
-    "jsx-a11y/anchor-has-content": 0,
-    "jsx-a11y/anchor-is-valid": 0,
+    "jsx-a11y/anchor-has-content": 2,
+    "jsx-a11y/anchor-is-valid": 2,
+
+    // Rules for WCAG we should eventually enable
     "jsx-a11y/aria-activedescendant-has-tabindex": 0,
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/heading-has-content": 0,
@@ -117,12 +123,8 @@
     "jsx-a11y/no-access-key": 0,
     "jsx-a11y/no-autofocus": 0,
     "jsx-a11y/no-distracting-elements": 0,
-    "jsx-a11y/no-interactive-element-to-noninteractive-role": 0,
-    "jsx-a11y/no-noninteractive-element-interactions": 0,
-    "jsx-a11y/no-noninteractive-element-to-interactive-role": 0,
     "jsx-a11y/no-noninteractive-tabindex": 0,
     "jsx-a11y/no-onchange": 0,
-    "jsx-a11y/no-static-element-interactions": 0,
     "jsx-a11y/scope": 0,
 
   },

@@ -72,6 +72,7 @@ class NotationMarker extends Component {
               key={annotation.id}
               title={id}
               data-annotation-notation={id}
+              role="presentation"
               className={markerClassNames}
               onClick={event => {
                 this.handleClick(event, annotation);

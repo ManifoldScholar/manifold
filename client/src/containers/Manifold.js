@@ -183,7 +183,11 @@ class ManifoldContainer extends PureComponent {
     );
 
     return (
-      <div onClick={this.handleGlobalClick} className="global-container">
+      <div
+        onClick={this.handleGlobalClick}
+        role="presentation"
+        className="global-container"
+      >
         <div id="global-notification-container" />
         <div id="global-overlay-container" />
         {this.renderTypekit()}

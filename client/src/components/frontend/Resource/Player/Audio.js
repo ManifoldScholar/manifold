@@ -138,14 +138,14 @@ export default class ResourcePlayerAudio extends Component {
   renderUnstarted() {
     if (this.state.started) return null;
     return (
-      <div className="cover" onClick={this.startPlayback}>
-        <button>
-          <span className="screen-reader-text">Start Playback</span>
+      <div className="cover" onClick={this.startPlayback} role="button">
+        <span className="screen-reader-text">Start Playback</span>
+        <div className="play-button-indicator">
           <i
             className="manicon manicon-triangle-right-fill"
             aria-hidden="true"
           />
-        </button>
+        </div>
       </div>
     );
   }
@@ -174,11 +174,9 @@ export default class ResourcePlayerAudio extends Component {
         />
         <div className="control-bar">
           <button className="play-pause" onClick={this.togglePlayback}>
-            {this.state.playing ? (
-              <span className="screen-reader-text">Pause Playback</span>
-            ) : (
-              <span className="screen-reader-text">Start Playback</span>
-            )}
+            <span className="screen-reader-text">
+              {this.state.playing ? "Pause Playback" : "Start Playback"}
+            </span>
             <i className={playPauseClasses} aria-hidden="true" />
           </button>
           <div className="progress">
@@ -202,11 +200,9 @@ export default class ResourcePlayerAudio extends Component {
           </div>
           <div className="volume">
             <button className="mute" onClick={this.toggleMute}>
-              {this.state.muted ? (
-                <span className="screen-reader-text">Unmute</span>
-              ) : (
-                <span className="screen-reader-text">Mute</span>
-              )}
+              <span className="screen-reader-text">
+                {this.state.muted ? "Unmute" : "Mute"}
+              </span>
               <i className={muteClasses} aria-hidden="true" />
             </button>
             <div className="slider">

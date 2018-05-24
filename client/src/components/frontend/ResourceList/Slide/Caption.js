@@ -156,7 +156,7 @@ export default class ResourceListSlideCaption extends Component {
     };
 
     return (
-      <div className="slide-caption" onClick={this.handleReadMore}>
+      <div className="slide-caption">
         <header>
           <h2
             className="resource-title"

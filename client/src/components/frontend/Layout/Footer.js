@@ -67,15 +67,19 @@ class LayoutFooter extends Component {
   buildAuthLink() {
     if (this.props.authentication.authenticated) {
       return (
-        <a onClick={this.handleLogoutClick} href="#">
+        <span
+          className="fake-link"
+          role="button"
+          onClick={this.handleLogoutClick}
+        >
           {"Log Out"}
-        </a>
+        </span>
       );
     }
     return (
-      <a onClick={this.handleLoginClick} href="#">
+      <span className="fake-link" role="button" onClick={this.handleLoginClick}>
         {"Log In"}
-      </a>
+      </span>
     );
   }
 

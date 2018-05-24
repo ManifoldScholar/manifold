@@ -233,6 +233,7 @@ class UpdateFormContainer extends Component {
                     {this.hasAvatar() ? (
                       <i
                         onClick={this.handleRemoveAvatar}
+                        role="button"
                         style={{
                           position: "absolute",
                           top: 0,

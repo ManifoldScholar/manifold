@@ -25,7 +25,7 @@ export default class CollectionPickerListItem extends PureComponent {
 
     return (
       <li>
-        <a href="#" onClick={this.handleClick}>
+        <span role="button" className="fake-link" onClick={this.handleClick}>
           <header>
             <figure className="cover">
               <Resourceish.Thumbnail
@@ -46,7 +46,7 @@ export default class CollectionPickerListItem extends PureComponent {
               </h3>
             </div>
           </header>
-        </a>
+        </span>
       </li>
     );
   }
