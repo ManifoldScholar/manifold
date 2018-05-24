@@ -198,7 +198,8 @@ exports[`Reader Notation Resource Detail Container renders correctly 1`] = `
                 href="original-image.mock"
                 target="_blank"
               >
-                Download 
+                Download
+                 
                 <i
                   aria-hidden="true"
                   className="manicon manicon-arrow-down"

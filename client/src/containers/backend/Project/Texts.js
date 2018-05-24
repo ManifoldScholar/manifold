@@ -511,14 +511,20 @@ export class ProjectTextsContainer extends PureComponent {
                         <span className="screen-reader-text">
                           Move category up
                         </span>
-                        <i className="manicon manicon-arrow-up" aria-hidden="true"/>
+                        <i
+                          className="manicon manicon-arrow-up"
+                          aria-hidden="true"
+                        />
                       </button>
                     ) : (
                       <button style={{ visibility: "hidden" }}>
                         <span className="screen-reader-text">
                           Move category up
                         </span>
-                        <i className="manicon manicon-arrow-up" aria-hidden="true"/>
+                        <i
+                          className="manicon manicon-arrow-up"
+                          aria-hidden="true"
+                        />
                       </button>
                     )}
                     {this.canShowCategoryDown(category) ? (

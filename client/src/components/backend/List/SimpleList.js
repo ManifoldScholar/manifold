@@ -50,7 +50,8 @@ export default class ListSimpleList extends PureComponent {
         {this.props.title ? (
           <header className="section-heading-secondary">
             <h3>
-              {this.props.title} <i className={`manicon ${this.props.icon}`} aria-hidden="true" />
+              {this.props.title}{" "}
+              <i className={`manicon ${this.props.icon}`} aria-hidden="true" />
             </h3>
           </header>
         ) : null}

@@ -38,7 +38,10 @@ export default class StaticForm extends Component {
                 <div className="form-input">
                   <label>&nbsp;</label>
                   <div className="form-select">
-                    <i className="manicon manicon-caret-down" aria-hidden="true" />
+                    <i
+                      className="manicon manicon-caret-down"
+                      aria-hidden="true"
+                    />
                     <select>
                       <option>Select Dropdown</option>
                       <option>Select an option</option>

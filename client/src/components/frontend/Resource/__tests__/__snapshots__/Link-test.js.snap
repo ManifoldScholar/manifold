@@ -6,7 +6,8 @@ exports[`Frontend.Resource.Link component renders correctly 1`] = `
   href="http://www.dailyrowan.com"
   target="_blank"
 >
-  Visit Page 
+  Visit Page
+   
   <i
     aria-hidden="true"
     className="manicon manicon-arrow-right"

@@ -35,11 +35,12 @@ class KindPicker extends PureComponent {
                   <figcaption>
                     <span>
                       {kind}
-                      {safeKind === this.props.getModelValue("attributes[kind]")
-                        ? <span className="screen-reader-text">
-                            Selected Kind
-                          </span>
-                        : null}
+                      {safeKind ===
+                      this.props.getModelValue("attributes[kind]") ? (
+                        <span className="screen-reader-text">
+                          Selected Kind
+                        </span>
+                      ) : null}
                     </span>
                   </figcaption>
                   <div className={`resource-icon ${safeKind}`}>
