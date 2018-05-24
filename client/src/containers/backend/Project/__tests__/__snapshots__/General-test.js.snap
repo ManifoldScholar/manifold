@@ -381,9 +381,9 @@ exports[`Backend Project General Container renders correctly 1`] = `
                     <span
                       className="screen-reader-text"
                     >
-                      Click to remove
+                      Click to remove 
                       Hip Hop
-                      from the
+                      from the 
                       Subjects
                        list.
                     </span>
@@ -439,7 +439,6 @@ exports[`Backend Project General Container renders correctly 1`] = `
             className="grid"
           >
             <div
-              aria-hidden="true"
               className="section current"
             >
               <span
@@ -466,7 +465,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
               <span
                 className="screen-reader-text"
               >
-                Select a different background color for the default thumbnail
+                Select a background color for the default thumbnail
               </span>
               <div
                 className="color-picker"
@@ -706,7 +705,7 @@ exports[`Backend Project General Container renders correctly 1`] = `
                           >
                             Upload a file
                           </span>
-                           or
+                           or 
                           <br />
                           drag and drop here
                           <br />
